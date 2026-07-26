@@ -254,6 +254,22 @@ nav a.on::after,nav a:hover::after{width:100%}
 .lens button{padding:11px 24px;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line);transition:all .25s var(--ease)}
 .lens button:last-child{border-right:none}
 .lens button.on{background:var(--accent-deep);color:var(--ivory)}
+/* линза, в которой нечего показать: видно до нажатия, но кликнуть можно */
+.lens button.thin{opacity:.55}
+.lens button.thin:after{content:"·";margin-left:6px;color:var(--bronze);font-weight:700}
+.lens button.thin.on{opacity:1}
+/* честное пустое состояние линзы */
+.lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
+.lens-empty .le-head{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:10px}
+.lens-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:640px}
+.lens-empty .le-foot{margin-top:16px;font-size:13px}
+.le-known{margin-top:20px;padding-top:16px;border-top:1px solid var(--line-soft)}
+.le-known>.label{display:block;margin-bottom:10px}
+.le-row{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.le-row:last-child{border-bottom:none}
+.le-k{flex:0 0 150px;color:var(--muted)}
+.le-v{flex:1;min-width:0;color:var(--ink);overflow-wrap:anywhere}
+@media(max-width:560px){.le-row{flex-direction:column;gap:2px}.le-k{flex:none}}
 .lens button:not(.on):hover{color:var(--ink);background:var(--paper)}
 .facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;animation:fadeUp .4s var(--ease)}
 @media(prefers-reduced-motion:reduce){.facts{animation:none}}
@@ -1619,6 +1635,43 @@ function relatedHtml(d){
   </div>`;
 }
 
+/* Линза «Юрист».
+   Юридические поля публично раскрываются редко: полностью пусты 1078 из 1333
+   карточек (80%). Раньше линза в этом случае показывала две строки —
+   «Согласования: публично не сообщалось» и «Юридические консультанты: публично
+   не раскрывались», — и выглядела сломанной. Теперь один раз честно говорим,
+   что раскрыто не было, и отдаём то, что юристу реально пригодится: стороны,
+   долю, сумму и ссылки на первоисточники, по которым он проверит сам. */
+const realAdv = d => (d.law && d.law.adv || []).filter(a =>
+  a[1] && !/не раскрыв|не привлекал/i.test(a[1]));
+const lawHasContent = d => {
+  const has = v => v && !/^(?:—|-)$/.test(String(v).trim()) &&
+    !/не раскрыт|публично не сообщал|не привлекал/i.test(String(v));
+  return has(d.law && d.law.struct) || has(d.law && d.law.appr) ||
+         has(d.law && d.law.terms) || realAdv(d).length > 0;
+};
+function lawEmptyHtml(d){
+  const known = [];
+  const cn = id => (id && co(id)) ? co(id).name : null;
+  const buyer = cn(d.buyer), seller = d.seller_id ? cn(d.seller_id) : (d.seller || null);
+  if(seller) known.push(["Продавец", seller]);
+  if(buyer) known.push(["Покупатель", buyer]);
+  const asset = cn(d.target) || d.asset;
+  if(asset) known.push(["Предмет сделки", asset + (d.asset_share?` · ${d.asset_share}`:"")]);
+  if(d.sum && !undisclosed(d.sum)) known.push(["Сумма", d.sum]);
+  if(d.status) known.push(["Статус", d.status]);
+  return `<div class="lens-empty">
+    <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
+    <p>Ни структура сделки, ни согласования, ни условия, ни консультанты не были
+       названы в открытых источниках. Мы не достраиваем такие поля догадками —
+       пустое здесь честнее правдоподобного текста.</p>
+    ${known.length?`<div class="le-known"><span class="label">Что известно о сделке</span>
+      ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
+    </div>`:""}
+    <p class="le-foot">Проверить детали можно по первоисточникам — они перечислены внизу карточки${d.src&&d.src.length?` (${d.src.length})`:""}.</p>
+  </div>`;
+}
+
 function renderDeal(id){
   const d = DEALS.find(x=>x.id===id); if(!d){renderDeals();return;}
   lens = "overview";
@@ -1648,7 +1701,7 @@ function renderDeal(id){
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
     <button data-l="overview" class="on">Обзор</button>
     <button data-l="eco">Экономист</button>
-    <button data-l="law">Юрист</button>
+    <button data-l="law"${lawHasContent(d)?"":' class="thin" title="Юридические детали по этой сделке публично не раскрывались"'}>Юрист</button>
   </div>
   <div id="facts" class="reveal"></div>
   ${d.extra?`<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`:""}
@@ -1781,21 +1834,18 @@ function renderDeal(id){
       ])}
       ${para("Цель сделки", d.eco.rationale)}
       ${para("Контекст", d.eco.context)}`;
-    else if(lens==="law") f.innerHTML = `
+    else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${para("Структура", d.law.struct)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
       ${ownership()}
-      ${d.law.adv.map(a=>{
-        // заглушка «консультанты не раскрывались» не должна читаться как
-        // «СТОРОНЫ сделки не раскрывались» — подписываем её правильно
-        const isPh = /не раскрыв/i.test(a[1]||"");
-        return `
-        <div class="adv-card${isPh?" muted":""}">
-          <span class="label">${isPh?"Юридические консультанты":a[0]}</span>
-          <div class="adv-name">${isPh?"Публично не раскрывались":a[1]}</div>
-          ${!isPh&&a[2]?`<p>${a[2]}</p>`:""}
-        </div>`;}).join("")}
-      ${para("Условия и особенности (из публичных данных)", d.law.terms)}`;
+      ${realAdv(d).map(a=>`
+        <div class="adv-card">
+          <span class="label">${a[0]}</span>
+          <div class="adv-name">${a[1]}</div>
+          ${a[2]?`<p>${a[2]}</p>`:""}
+        </div>`).join("")}
+      ${para("Условия и особенности (из публичных данных)", d.law.terms)}`
+      : lawEmptyHtml(d);
     else f.innerHTML = `
       ${hero("Сумма", d.sum)}
       ${dealPlate()}
