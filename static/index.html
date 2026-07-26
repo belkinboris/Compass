@@ -288,6 +288,48 @@ nav a.on::after,nav a:hover::after{width:100%}
 .dp-link .dp-join{font-size:22px;line-height:1;color:var(--accent);font-weight:400;margin:2px 0}
 .dp-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--muted)}
 .dp-link .dp-sum{font-size:12px;color:var(--muted);white-space:nowrap}
+
+/* ---- поток сделки: ПРОДАВЕЦ → предмет → ПОКУПАТЕЛЬ ----
+   Две стороны сделки — равноправные блоки по краям, предмет лежит на самой
+   линии перехода между ними. Линия рисуется псевдоэлементами .dp-mid, поэтому
+   актив визуально «сидит» на стрелке, а не выглядит третьим блоком в ряд. */
+.dp-flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,1.15fr) minmax(0,1fr);align-items:center}
+.dp-flow.no-asset{grid-template-columns:minmax(0,1fr) minmax(90px,.5fr) minmax(0,1fr)}
+.dp-flow .dp-party{min-width:0}
+.dp-party.is-empty{border-style:dashed;background:transparent}
+.dp-party.is-empty .dp-name{color:var(--muted);font-family:var(--f-sans,inherit);font-size:14px;font-style:italic}
+.dp-mid{position:relative;display:flex;align-items:center;justify-content:center;padding:0 14px;min-height:64px}
+/* горизонтальная линия перехода под активом */
+.dp-mid:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--accent);opacity:.28;
+  transform:scaleX(0);transform-origin:left;animation:wipe .55s var(--ease) .15s both}
+/* остриё стрелки у правого края — «актив уходит к покупателю» */
+.dp-mid:after{content:"";position:absolute;right:-1px;top:calc(50% - 5px);border-top:5px solid transparent;
+  border-bottom:5px solid transparent;border-left:7px solid var(--accent);opacity:0;animation:fin .3s ease .68s forwards}
+.dp-asset{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;
+  padding:11px 15px;border:1px solid var(--accent);border-radius:var(--radius);background:var(--card);max-width:100%;
+  box-shadow:0 2px 10px rgba(29,90,68,.10);animation:fadeUp .45s var(--ease) .3s both}
+.dp-asset.only-sum{border-style:dashed;padding:8px 13px}
+.dp-asset-role{font-weight:600;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);opacity:.85}
+.dp-asset-name{font-family:var(--f-display);font-size:15px;line-height:1.25;color:var(--ink);
+  overflow-wrap:anywhere;text-decoration:none}
+a.dp-asset-name:hover{color:var(--accent)}
+.dp-asset-meta{font-size:11.5px;color:var(--muted);line-height:1.35}
+@media(prefers-reduced-motion:reduce){
+  .dp-mid:before{animation:none;transform:scaleX(1)}
+  .dp-mid:after{animation:none;opacity:1}
+  .dp-asset{animation:none}
+}
+/* На узких экранах поток разворачивается сверху вниз: линия становится
+   вертикальной, стрелка смотрит вниз — порядок чтения «продавец → предмет → покупатель». */
+@media(max-width:680px){
+  .dp-flow,.dp-flow.no-asset{grid-template-columns:1fr;gap:0}
+  .dp-mid{min-height:78px;padding:12px 0}
+  .dp-mid:before{left:50%;right:auto;top:0;bottom:0;height:auto;width:2px;transform:scaleY(0);
+    transform-origin:top;animation-name:wipeY}
+  .dp-mid:after{right:auto;left:calc(50% - 5px);top:auto;bottom:-1px;border-left:5px solid transparent;
+    border-right:5px solid transparent;border-top:7px solid var(--accent);border-bottom:none}
+}
+@keyframes wipeY{to{transform:scaleY(1)}}
 @media(max-width:560px){.dp-row{flex-direction:column}.dp-link{padding:14px 0;min-width:0}.dp-link .dp-arrow{transform:rotate(90deg);min-width:44px;margin:16px 0}}
 
 /* ---------- команда сделки ---------- */
@@ -1582,12 +1624,12 @@ function renderDeal(id){
 
     /* --- плашка структуры сделки: раскладка зависит от ТИПА сделки --- */
     const dealPlate = ()=>{
-      if(!buyerName || !targetName) return "";
       const share = has(d.eco&&d.eco.share) && d.eco.share.length<40 ? d.eco.share : "";
-      const sum = has(d.sum) && !/не раскрыт/i.test(d.sum) ? d.sum : "";
+      const sum = has(d.sum) && !undisclosed(d.sum) ? d.sum : "";
       const party = (role,idKey,name)=>`<div class="dp-party"><span class="dp-role">${role}</span><a class="dp-name" href="#/companies/${idKey}">${name}</a></div>`;
 
       if(kindKey==="jv"){
+        if(!buyerName || !targetName) return "";
         // у СП нет покупателя и продавца — есть равноправные участники;
         // вместо стрелки — знак соединения, сумма подписывается как вклад.
         // Распределение долей — самое ценное в СП, показываем полнее (до 120 симв.)
@@ -1600,10 +1642,50 @@ function renderDeal(id){
           </div>${jvShare?`<div class="dp-foot num">${jvShare}</div>`:""}</div>`;
       }
       if(!kind.arrow) return "";
+
+      /* Покупка: у сделки три роли — кто продал, ЧТО продали и кто купил.
+         Раньше плашка показывала только «Покупатель → Цель», из-за чего продавец —
+         полноценная сторона сделки — вообще нигде не отображался. Теперь по краям
+         стоят две стороны (продавец и покупатель), а предмет сделки лежит на самой
+         линии перехода: актив буквально переходит слева направо. */
+      if(kindKey==="acquisition"){
+        const hasSeller = !!(d.seller || (d.seller_id && co(d.seller_id)));
+        // Плашка бессмысленна, только если не известна вообще ни одна роль
+        if(!buyerName && !hasSeller && !targetName) return "";
+        const sellerBox = d.seller_id && co(d.seller_id)
+          ? party("Продавец", d.seller_id, co(d.seller_id).name)
+          : d.seller
+            ? `<div class="dp-party"><span class="dp-role">Продавец</span><span class="dp-name">${d.seller}</span></div>`
+            : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
+        const buyerBox = buyerName
+          ? party("Покупатель", d.buyer, buyerName)
+          : `<div class="dp-party is-empty"><span class="dp-role">Покупатель</span><span class="dp-name">Не раскрыт</span></div>`;
+        // предмет сделки: карточка компании, иначе название, вытащенное из
+        // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
+        const assetName = targetName || d.asset || share || "";
+        const assetLink = targetName && d.target;
+        const assetMeta = [targetName&&share?share:(d.asset_share||""), sum].filter(Boolean).join(" · ");
+        const asset = assetName ? `
+          <div class="dp-asset">
+            <span class="dp-asset-role">Предмет сделки</span>
+            ${assetLink?`<a class="dp-asset-name" href="#/companies/${d.target}">${assetName}</a>`
+                       :`<span class="dp-asset-name">${assetName}</span>`}
+            ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
+          </div>` : (sum?`<div class="dp-asset only-sum"><span class="dp-asset-meta num">${sum}</span></div>`:"");
+        return `<div class="deal-plate"><span class="label">Структура сделки</span>
+          <div class="dp-flow${asset?"":" no-asset"}">
+            ${sellerBox}
+            <div class="dp-mid">${asset}</div>
+            ${buyerBox}
+          </div>
+          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Приобретаемый актив отдельной карточки компании не имеет — см. «Предмет / доля» в линзе «Экономист».</div>`:""}
+        </div>`;
+      }
+
+      if(!buyerName || !targetName) return "";
       const roles = kindKey==="credit" ? ["Кредитор","Заёмщик"]
                   : kindKey==="structured" ? ["Финансирующая сторона","Получатель финансирования"]
-                  : kindKey==="financing" ? ["Инвестор","Получатель инвестиций"]
-                  : ["Покупатель","Приобретаемая компания"];
+                  : ["Инвестор","Получатель инвестиций"];
       return `<div class="deal-plate"><span class="label">Структура сделки</span>
         <div class="dp-row">
           ${party(roles[0], d.buyer, buyerName)}
