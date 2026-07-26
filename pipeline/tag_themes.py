@@ -1,0 +1,130 @@
+# -*- coding: utf-8 -*-
+"""Разметка тематических тэгов по сделкам (static/data/deals_promoted.json).
+
+Принципы:
+- Тема считается только по полям, описывающим САМУ сделку (title / eco.share /
+  eco.rationale / law.struct, для согласований — law.appr). Поле `extra` намеренно
+  НЕ используется: там часто лежит исторический фон («актив в 2022 году был передан
+  местному менеджменту»), который даёт ложные срабатывания на текущую сделку.
+- Поле `type` тоже НЕ используется как текст: в базе встречались неверные значения
+  (напр. «Продажа с торгов» на сделке, купленной напрямую у владельца).
+- Где есть надёжное структурное поле — берём его, а не текст (СП определяется по kind).
+- Есть guard-паттерны против отрицаний («вне торгов», «без публичного аукциона»).
+
+Запуск:
+    python3 pipeline/tag_themes.py            # сухой прогон, только статистика
+    python3 pipeline/tag_themes.py --write    # записать поле themes в JSON
+"""
+import json
+import re
+import sys
+import collections
+
+PATH = 'static/data/deals_promoted.json'
+
+
+def core(d):
+    """Только то, что описывает саму сделку."""
+    e = d.get('eco') or {}
+    l = d.get('law') or {}
+    return ' '.join([
+        d.get('title') or '',
+        e.get('share') or '',
+        e.get('rationale') or '',
+        l.get('struct') or '',
+    ])
+
+
+def core_appr(d):
+    return core(d) + ' ' + ((d.get('law') or {}).get('appr') or '')
+
+
+FOREIGN = (
+    r'уход\w*\s+(?:из России|иностран)|ушл\w+\s+из России|покида\w+\s+российск|'
+    r'прода\w+\s+(?:100%\s+|свой\s+|свои\s+)?российск\w+\s+(?:бизнес|актив|подразделен|дочк|структур)|'
+    r'российск\w+\s+(?:бизнес|актив|подразделен|дочк)\w*\s+'
+    r'(?:немецк|британск|американск|французск|финск|японск|итальянск|шведск|австрийск|'
+    r'нидерландск|голландск|швейцарск|датск|норвежск|польск|турецк|корейск|испанск|бельгийск)|'
+    r'выход\w+\s+(?:иностранн|из российск)|деконсолидац|'
+    r'выкуп\w*\s+(?:у\s+)?иностранн\w+\s+(?:владел|акционер|собственник)|'
+    r'(?:выкупил\w*|приобрел\w*|купил\w*|прода\w+)\s+(?:100%\s+)?российск\w+\s+подразделен'
+)
+
+# (паттерн, извлекатель текста, антипаттерн, структурный признак).
+# Структурный признак — предикат по надёжным полям kind/type; срабатывает
+# независимо от текста. pat=None -> тема определяется ТОЛЬКО структурно.
+THEMES = {
+    'Уход иностранного владельца': (
+        FOREIGN, core, None,
+        lambda d: d.get('type') == 'Выкуп у иностранного владельца'),
+    'Правкомиссия / указ президента': (
+        r'правительственн\w+\s+комисси|правкомисси|указ\w*\s+президент|'
+        r'разрешени\w+\s+президент|временн\w+\s+управлени', core_appr, None, None),
+    'Национализация / иск Генпрокуратуры': (
+        r'Генпрокуратур|обращен\w+\s+в\s+доход\s+государства|национализ|'
+        r'признан\w+\s+экстремистск|изъят\w+\s+в\s+(?:пользу|доход)\s+государств', core, None, None),
+    'Продажа с торгов': (
+        r'аукцион|\bторгах\b|\bторгов\b|Российский аукционный дом|РТС-Тендер|'
+        r'публичн\w+\s+предложени', core,
+        r'вне\s+торгов|без\s+публичн\w+\s+аукцион|без\s+торгов|не\s+состоял\w+\s+аукцион',
+        lambda d: d.get('type') == 'Продажа с торгов'),
+    'Банкротство / долги': (
+        r'банкротств|финансов\w+\s+оздоровлен|конкурсн\w+\s+производств|'
+        r'выкуп\w*\s+долг|санаци|санирова', core, None, None),
+    'IPO / SPO': (
+        r'\bIPO\b|\bSPO\b|pre-?IPO|размещени\w+\s+акций|котировальн\w+\s+список', core, None,
+        lambda d: d.get('kind') == 'ipo'),
+    'Венчур / раунд': (
+        r'раунд\w*\s+[A-DA-Я]\b|pre-?seed|seed-?раунд|венчурн\w+\s+инвест|'
+        r'посевн\w+\s+раунд|Series\s+[A-D]\b', core, None,
+        lambda d: d.get('type') in ('Венчурная инвестиция', 'Инвестиционный раунд')),
+    'Консолидация доли': (
+        r'консолидир\w*\s+(?:контроль|долю|пакет|100|\d{1,3}%)|увеличил\w*\s+(?:свою\s+)?долю|'
+        r'выкуп\w*\s+оставш|довел\w*\s+(?:свою\s+)?долю|нарастил\w*\s+долю', core, None, None),
+    # СП определяем по структурному полю kind — точнее, чем по тексту
+    'Создание СП': (None, None, None, lambda d: d.get('kind') == 'jv'),
+}
+
+
+def themes_of(d):
+    tags = []
+    for name, (pat, getter, anti, struct) in THEMES.items():
+        hit = bool(struct(d)) if struct else False
+        if not hit and pat is not None:
+            text = getter(d)
+            hit = bool(re.search(pat, text, re.I))
+            if hit and anti and re.search(anti, text, re.I):
+                hit = False
+        if hit:
+            tags.append(name)
+    return tags
+
+
+def main(write=False):
+    with open(PATH, encoding='utf-8') as f:
+        data = json.load(f)
+    deals = data['deals']
+    stats = collections.Counter()
+    per = collections.Counter()
+    for d in deals:
+        tags = themes_of(d)
+        if tags:
+            d['themes'] = tags
+            per[len(tags)] += 1
+            for t in tags:
+                stats[t] += 1
+        else:
+            d.pop('themes', None)
+    for k, v in stats.most_common():
+        print(f'{v:5}  {k}')
+    tagged = sum(per.values())
+    print(f'\nразмечено сделок: {tagged} / {len(deals)}  ({tagged * 100 // len(deals)}%)')
+    print('тем на сделку:', sorted(per.items()))
+    if write:
+        with open(PATH, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=1, ensure_ascii=False)
+        print('\nЗАПИСАНО в', PATH)
+
+
+if __name__ == '__main__':
+    main(write='--write' in sys.argv)
