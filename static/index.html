@@ -1663,12 +1663,18 @@ function renderDeal(id){
         // предмет сделки: карточка компании, иначе название, вытащенное из
         // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
         const assetName = targetName || d.asset || share || "";
-        const assetLink = targetName && d.target;
+        // Предмет сделки ссылается на профиль компании: либо это target, либо
+        // текстовое название, которое удалось сопоставить с профилем (asset_id).
+        // Без второй ветки актив, вынесенный из target при разборе ролей, терял
+        // ссылку и оставался просто текстом.
+        const assetRef = (targetName && d.target) ? d.target
+                       : (d.asset && d.asset_id && co(d.asset_id)) ? d.asset_id : null;
+        const assetLink = assetRef;
         const assetMeta = [targetName&&share?share:(d.asset_share||""), sum].filter(Boolean).join(" · ");
         const asset = assetName ? `
           <div class="dp-asset">
             <span class="dp-asset-role">Предмет сделки</span>
-            ${assetLink?`<a class="dp-asset-name" href="#/companies/${d.target}">${assetName}</a>`
+            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${assetName}</a>`
                        :`<span class="dp-asset-name">${assetName}</span>`}
             ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
           </div>` : (sum?`<div class="dp-asset only-sum"><span class="dp-asset-meta num">${sum}</span></div>`:"");
