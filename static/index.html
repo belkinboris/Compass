@@ -1078,6 +1078,7 @@ let feedQuery = "";
 let onlyFull = false;
 let feedYear = "Все";
 let advOpen = false;
+let filterFirm = "Все";
 const PAGE_SIZE = 20;
 
 const KIND_BADGE_META = {
@@ -1128,7 +1129,18 @@ function unifiedFeed(){
   const q = feedQuery.trim().toLowerCase();
   const matchQ = it => !q || (it.rec.title||"").toLowerCase().includes(q) || (it.rec.role||it.rec.note||"").toLowerCase().includes(q);
   const matchY = it => feedYear==="Все" || (feedYear==="до 2023" ? (it.date!=="unknown"&&it.date.slice(0,4)<"2023") : it.date.slice(0,4)===feedYear);
-  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full"));
+  const matchFirm = it => {
+    if(filterFirm==="Все") return true;
+    if(it.kind==="full"){
+      const fobj = ALL_FIRM(filterFirm);
+      const rx = fobj ? firmRxOf(fobj) : FIRM_MATCH[filterFirm];
+      if(!rx) return false;
+      return it.rec.law.adv.some(a=>rx.test(a[1])) || rx.test(it.rec.eco.finadv||"");
+    }
+    if(it.kind==="mini") return it.rec.firm===filterFirm;
+    return false; // сделки из телеграм-каналов и bulk-базы не привязаны к конкретному консультанту
+  };
+  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it));
   filtered.sort((a,b)=>{
     if(a.date==="unknown") return 1;
     if(b.date==="unknown") return -1;
@@ -1232,6 +1244,9 @@ function renderDeals(){
     <label>Формат записей
       <select id="selfmt"><option ${!onlyFull?"selected":""}>Все записи</option><option ${onlyFull?"selected":""}>Только с подробной карточкой</option></select>
     </label>
+    <label>Консультант
+      <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
+    </label>
   </div>
   <div id="feedlist">${feedListHtml()}</div>
   <div class="cta reveal">
@@ -1264,6 +1279,7 @@ function renderDeals(){
   bindSel("selind", v=>filterInd=v);
   bindSel("selyear", v=>feedYear=v);
   bindSel("selfmt", v=>onlyFull=(v!=="Все записи"));
+  bindSel("selfirm", v=>filterFirm=v);
   const go=()=>{const v=document.getElementById("heroq").value.trim();if(v){sessionStorage.setItem("pendingQ",v);location.hash="#/assistant";}};
   document.getElementById("herogo").onclick=go;
   document.getElementById("heroq").addEventListener("keydown",e=>{if(e.key==="Enter")go();});
