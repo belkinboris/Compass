@@ -233,6 +233,13 @@ nav a.on::after,nav a:hover::after{width:100%}
 .theme-chip{display:inline-block;font-size:12px;line-height:1.3;padding:5px 11px;border-radius:99px;
   border:1px solid var(--line);background:var(--card);color:var(--steel);text-decoration:none;transition:all .2s var(--ease)}
 .theme-chip:hover{border-color:var(--accent);color:var(--accent)}
+/* Пустая выдача ленты */
+.feed-empty{padding:34px 30px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card);text-align:center}
+.feed-empty .fe-title{font-family:var(--f-display);font-size:19px;line-height:1.35;color:var(--ink);margin-bottom:10px}
+.feed-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:560px;margin:0 auto}
+.fe-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.fe-actions .chip{cursor:pointer;text-decoration:none}
+.fe-actions .chip:hover{border-color:var(--accent);color:var(--accent)}
 .theme-note{margin:0 0 16px;padding:11px 14px;border:1px solid var(--line);border-left:3px solid var(--bronze);
   border-radius:6px;background:var(--card);font-size:13px;color:var(--muted);line-height:1.5}
 .theme-note a{color:var(--accent);margin-left:4px}
@@ -1291,8 +1298,33 @@ function feedListHtml(){
   return `
   ${filterTheme!=="Все"?`<div class="reveal theme-note">Сюжет: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Сюжеты размечены автоматически по тексту карточки, поэтому в выдаче только подробные карточки. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
-  ${allRows.length?"":`<p class="reveal" style="color:var(--muted)">В этой отрасли сделок в базе пока нет — фильтр честный, ничего не прячем.</p>`}
+  ${allRows.length?"":emptyFeedHtml()}
   ${allRows.length>shown.length?`<div class="reveal" style="text-align:center;margin:18px 0"><button class="chip" id="loadmore" style="padding:10px 22px">Показать ещё (осталось ${allRows.length-shown.length})</button></div>`:""}`;
+}
+/* Пустая выдача: раньше при любом сочетании фильтров показывалось «В этой отрасли
+   сделок в базе пока нет», даже когда отрасль не выбиралась вовсе, а пусто было
+   из-за текстового запроса. Теперь называем настоящую причину и даём сбросить
+   именно её — иначе пользователь не понимает, что именно отсекло выдачу. */
+function emptyFeedHtml(){
+  const active = [];
+  if(feedQuery.trim()) active.push({k:"q", t:`запрос «${esc(feedQuery.trim())}»`});
+  if(filterInd!=="Все") active.push({k:"ind", t:`отрасль «${filterInd}»`});
+  if(feedYear!=="Все") active.push({k:"year", t:`год ${feedYear}`});
+  if(filterTheme!=="Все") active.push({k:"theme", t:`сюжет «${filterTheme}»`});
+  if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
+  if(onlyFull) active.push({k:"fmt", t:"только подробные карточки"});
+  const head = active.length
+    ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
+    : "В базе пока нет ни одной записи.";
+  return `<div class="feed-empty reveal">
+    <div class="fe-title">${head}</div>
+    <p>База неполная и мы этого не скрываем: в ней только сделки, попавшие в публичные источники.
+       Попробуйте снять часть условий — или спросите ассистента, он ищет ещё и по интернету.</p>
+    <div class="fe-actions">
+      ${active.length?`<button class="chip" id="feedreset">Сбросить все фильтры</button>`:""}
+      <a class="chip" href="#/assistant">Спросить ассистента</a>
+    </div>
+  </div>`;
 }
 function bindFeedListEvents(){
   const lm = document.getElementById("loadmore");
@@ -1302,6 +1334,15 @@ function bindFeedListEvents(){
     e.preventDefault();
     filterTheme="Все"; feedPage=1;
     const sel=document.getElementById("seltheme"); if(sel) sel.value="Все";
+    renderFeedList();
+  };
+  const fr = document.getElementById("feedreset");
+  if(fr) fr.onclick = ()=>{
+    feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все";
+    onlyFull=false; feedPage=1;
+    const q=document.getElementById("feedq"); if(q) q.value="";
+    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selfmt","Все записи"]]
+      .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
   };
 }
