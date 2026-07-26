@@ -91,8 +91,11 @@ def main(write=False):
             cid = d.get(field)
             if not cid or roles.get(cid) != 'seller':
                 continue
-            # покупатель, помеченный продавцом, — противоречие, не трогаем
-            if field == 'buyer' and not d.get('target'):
+            # Компания, стоящая в слоте ПОКУПАТЕЛЯ этой сделки, — покупатель именно
+            # здесь, что бы ни было написано в её профиле. Роль в профиле общая для
+            # всех сделок, а роль в сделке — своя; из-за этого «Газпром (продавец)»
+            # однажды стал продавцом в сделке, где он покупает Aurus.
+            if field == 'buyer':
                 continue
             if not d.get('seller_id') and not d.get('seller'):
                 nm = comps.get(cid, {}).get('name') or ''
