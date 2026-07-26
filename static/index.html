@@ -184,7 +184,7 @@ nav a.on::after,nav a:hover::after{width:100%}
   .adv-panel{flex-direction:column;gap:12px}
   .adv-panel select{min-width:100%}
 }
-.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px}
+.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px;align-items:start}
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
 .an-card>.label{display:block;margin-bottom:16px}
 .an-row{display:grid;grid-template-columns:minmax(70px,150px) 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:13.5px}
@@ -192,11 +192,12 @@ nav a.on::after,nav a:hover::after{width:100%}
 .an-bar{height:9px;background:var(--paper2,#F0EFEA);border-radius:5px;overflow:hidden}
 .an-bar div{height:100%;background:linear-gradient(90deg,var(--accent),#33556B);border-radius:5px;min-width:3px;transform-origin:left;animation:wipe .7s var(--ease) both}
 .an-val{text-align:right;color:var(--muted)}
-.an-deal{display:flex;gap:8px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);text-decoration:none}
+.an-deal{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);text-decoration:none}
 .an-deal:last-of-type{border-bottom:none}
 .an-deal:hover .an-deal-t{color:var(--accent)}
-.an-deal-t{flex:1;line-height:1.4}
-.an-deal-s{white-space:nowrap;color:var(--muted);font-size:13px}
+.an-deal-head{display:flex;gap:8px;align-items:baseline}
+.an-deal-t{flex:1;line-height:1.4;min-width:0}
+.an-deal-s{display:block;color:var(--muted);font-size:13px;padding-left:22px}
 .firm-inds{margin-top:6px;display:flex;gap:5px;flex-wrap:wrap}
 .related{margin:28px 0;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
 .related>.label{display:block;margin-bottom:8px}
@@ -333,6 +334,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 .co-card .desc{color:var(--muted);font-size:13.5px;min-height:44px}
 .co-nums{display:flex;gap:28px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft)}
 .co-nums .val{font-family:var(--f-display);font-weight:600;font-size:15px;margin-top:3px}
+.filters select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
 
 /* ---------- assistant ---------- */
 .chat{max-width:740px;margin:0 auto}
@@ -1537,21 +1539,64 @@ function renderDeal(id){
 }
 
 /* ================= КОМПАНИИ ================= */
-function renderCompanies(){
-  app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Каталог</span><h1>Компании</h1><p>Участники сделок: профиль, ключевые лица и показатели, история сделок из публичных источников.</p></div>
+let coQuery = "";
+let coInd = "Все";
+let coSort = "active"; // active | alpha
+let coShown = 60;
+const coWordEnd = n => (n%10===1&&n%100!==11) ? "я" : (n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)) ? "и" : "й";
+function companyRows(){
+  const q = coQuery.trim().toLowerCase();
+  return Object.entries(COMPANIES)
+    .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||c.name.toLowerCase().includes(q)))
+    .map(([id,c])=>({id,c,n:companyTotal(id)}))
+    .sort((a,b)=>coSort==="alpha" ? a.c.name.localeCompare(b.c.name,"ru") : (b.n-a.n)||a.c.name.localeCompare(b.c.name,"ru"));
+}
+function companyGridHtml(){
+  const rows = companyRows();
+  const shown = rows.slice(0, coShown);
+  return `
+  <p style="color:var(--muted);font-size:13px;margin:-10px 0 20px">${rows.length} компани${coWordEnd(rows.length)} в базе${rows.length>shown.length?` · показано ${shown.length}`:""}</p>
   <div class="co-grid">
-  ${Object.entries(COMPANIES).map(([id,c])=>`
-    <a class="co-card reveal" href="#/companies/${id}">
+  ${shown.map(({id,c,n})=>`
+    <a class="co-card" href="#/companies/${id}">
       <span class="tag">${c.ind}</span>
       <h3>${c.name}</h3>
       <div class="desc">${c.desc}</div>
       <div class="co-nums">
         <div><span class="label">${c.kpi[0]}</span><div class="val num">${c.kpi[1]}</div></div>
-        <div><span class="label">Сделок в базе</span><div class="val num">${companyTotal(id)}</div></div>
+        <div><span class="label">Сделок в базе</span><div class="val num">${n}</div></div>
       </div>
     </a>`).join("")}
-  </div>`;
+  </div>
+  ${rows.length>shown.length?`<div style="text-align:center;margin-top:30px"><button class="chip" id="coMore">Показать ещё ${Math.min(60,rows.length-shown.length)}</button></div>`:""}
+  ${rows.length===0?`<p style="color:var(--muted)">Ничего не найдено — попробуйте другой запрос или отрасль.</p>`:""}`;
+}
+function renderCompanyGrid(){
+  const el = document.getElementById("coGrid");
+  if(!el) return;
+  el.innerHTML = companyGridHtml();
+  const more = document.getElementById("coMore");
+  if(more) more.onclick=()=>{coShown+=60;renderCompanyGrid();};
+}
+function renderCompanies(){
+  app.innerHTML = `
+  <div class="sec-head reveal"><span class="label">Каталог</span><h1>Компании</h1><p>Участники сделок: профиль, ключевые лица и показатели, история сделок из публичных источников.</p></div>
+  <div class="feed-search reveal"><input id="coq" placeholder="Найти компанию по названию…" value="${esc(coQuery)}" aria-label="Поиск по компаниям"></div>
+  <div class="filters reveal">
+    <select id="coind"><option ${coInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===coInd?"selected":""}>${i}</option>`).join("")}</select>
+    <span style="flex:1"></span>
+    <button class="chip ${coSort==="active"?"on":""}" data-sort="active">По активности</button>
+    <button class="chip ${coSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+  </div>
+  <div id="coGrid" class="reveal">${companyGridHtml()}</div>`;
+  const cq = document.getElementById("coq");
+  if(cq){
+    let t=null;
+    cq.addEventListener("input", ()=>{clearTimeout(t); t=setTimeout(()=>{coQuery=cq.value;coShown=60;renderCompanyGrid();},250);});
+  }
+  const ci = document.getElementById("coind");
+  if(ci) ci.onchange=()=>{coInd=ci.value;coShown=60;renderCompanies();rerun();};
+  app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{coSort=b.dataset.sort;coShown=60;renderCompanies();rerun();});
 }
 
 function renderCompany(id){
@@ -1749,12 +1794,12 @@ function renderAnalytics(){
     </div>
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
-      ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span><span class="an-deal-s num">${d.sum}</span></a>`).join("")}
+      ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${d.sum}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только детальные карточки с раскрытой суммой; сравнение сумм в разных валютах и годах — условное.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Самые активные консультанты в базе</span>
-      ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
+      ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span></div><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">По публичным данным в базе «Компаса». Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
     </div>
     <div class="an-card reveal">
