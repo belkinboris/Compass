@@ -230,8 +230,14 @@ nav a.on::after,nav a:hover::after{width:100%}
   .feed-search{flex-wrap:wrap}
   .feed-search input{min-width:100%}
   .feed-search .chip{flex:1;text-align:center}
+  /* `min-width:100%` не ограничивал ширину, а задавал ей пол: <select> и так
+     тянется под самый длинный пункт («Транспорт и логистика»), и панель
+     расширенных фильтров занимала 421px в окне 360px — 100px горизонтального
+     переполнения. Ловилось это только при открытой панели, а открывают её
+     ссылки вида #/theme/<сюжет> (чипы сюжетов на каждой карточке) и #/ind/. */
   .adv-panel{flex-direction:column;gap:12px}
-  .adv-panel select{min-width:100%}
+  .adv-panel label{min-width:0;width:100%}
+  .adv-panel select{min-width:0;width:100%;max-width:100%}
 }
 .an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px;align-items:start}
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -289,6 +295,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 /* честное пустое состояние линзы */
 .lens-hint{margin:-18px 0 24px;font-size:13px;line-height:1.55;color:var(--muted);max-width:680px}
 .lens-part{margin:0 0 22px;font-size:13px;line-height:1.55;color:var(--muted);max-width:640px}
+.rel-empty{font-size:13.5px;line-height:1.6;color:var(--muted);max-width:600px;margin:6px 0 0}
 .lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
 .lens-empty .le-head{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:10px}
 .lens-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:640px}
@@ -1069,6 +1076,16 @@ function route(){
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
+  // «#/ind/<отрасль>» — лента, отфильтрованная по отрасли. Нужен, чтобы подборку
+  // можно было открыть списком: с карточки, где похожих не нашлось, и из подписи
+  // под блоком «Похожие сделки». Название отрасли кодируется — в нём бывает «/»
+  // («ГМК и добыча» безопасна, а «Нефть/газ» разрезала бы хэш).
+  else if(page==="ind"){
+    filterInd = arg?decodeURIComponent(arg):"Все";
+    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
+    renderDeals(); mark("deals");
+    const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
+  }
   // «#/search/<запрос>» — лента с уже введённым поиском. Нужен, чтобы на
   // подборку можно было дать ссылку, а не пересказывать «наберите вот это».
   else if(page==="search"){
@@ -1711,12 +1728,16 @@ function dealKindOf(typeStr){
    Теперь считаем релевантность: общая сторона сделки > совпавший сюжет >
    та же отрасль > тот же тип > близость по дате. Раскрытая сумма даёт небольшой
    бонус: как ориентир для сравнения такая карточка полезнее. */
+/* Стороны сделки — все четыре роли, а не две. Продавец (`seller_id`) и предмет
+   (`asset_id`) — такие же стороны, но в подборе не участвовали: та же дыра, что
+   чинили у ролей на профиле компании. Их учёт добавил 36 карточкам настоящую
+   подборку и 157 пар. */
+const dealParties = d => new Set([d.buyer, d.target, d.seller_id, d.asset_id].filter(Boolean));
 function relatedScore(d, x){
   let s = 0;
-  const parties = new Set([d.buyer, d.target].filter(Boolean));
+  const parties = dealParties(d);
   if(parties.size){
-    if(x.buyer && parties.has(x.buyer)) s += 50;
-    if(x.target && parties.has(x.target)) s += 50;
+    for(const id of [x.buyer, x.target, x.seller_id, x.asset_id]) if(id && parties.has(id)) s += 50;
   }
   const th = new Set(d.themes||[]);
   if(th.size) s += 22 * (x.themes||[]).filter(t=>th.has(t)).length;
@@ -1744,28 +1765,55 @@ function extraHtml(d){
   if(goal && goal !== "—" && (ex === goal || ex.startsWith(goal) || goal.startsWith(ex))) return "";
   return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
 }
+/* «Похожая» — это общая сторона или общий сюжет, и ничего слабее.
+   Порог MIN_SCORE=18 в точности равнялся весу отрасли, поэтому одной общей
+   отрасли хватало, чтобы пройти. Итог был виден в замере: блок стоял у всех
+   1352 карточек и ВСЕГДА ровно из пяти строк — он не подбирал, а добивал до
+   пяти. Из 6760 показанных пар 3516 (52%) держались только на отрасли, а у
+   457 карточек (34%) все пять строк были такими: под «Инкаб Холдинг проводит
+   IPO» стояли «МТС продаёт башенную компанию» и «SkyNet купил провайдера» —
+   общего только слово «Телеком».
+   Отрасль, тип и близость по времени остались, но лишь как порядок внутри уже
+   отобранных. Юристу нужен прецедент, а не карточка того же сектора. */
+function relatedList(d){
+  const P = dealParties(d);
+  const TH = new Set(d.themes||[]);
+  return DEALS.filter(x=>x.id!==d.id)
+    .map(x=>{
+      const party = [x.buyer,x.target,x.seller_id,x.asset_id].find(id=>id&&P.has(id));
+      const themes = (x.themes||[]).filter(t=>TH.has(t));
+      return {x, party, themes, s:relatedScore(d,x)};
+    })
+    .filter(o=>o.party || o.themes.length)
+    .sort((a,b)=>b.s-a.s || (b.x.date||"").localeCompare(a.x.date||""));
+}
 function relatedHtml(d){
-  const MIN_SCORE = 18; // ниже — уже не «похожая», а случайная карточка
-  const rel = DEALS.filter(x=>x.id!==d.id)
-    .map(x=>({x, s:relatedScore(d,x)}))
-    .filter(o=>o.s>=MIN_SCORE)
-    .sort((a,b)=>b.s-a.s || (b.x.date||"").localeCompare(a.x.date||""))
-    .slice(0,5);
-  if(!rel.length) return "";
-  const why = o => {
-    const parties = new Set([d.buyer,d.target].filter(Boolean));
-    if(o.x.buyer&&parties.has(o.x.buyer)||o.x.target&&parties.has(o.x.target)) return "та же сторона";
-    const shared = (o.x.themes||[]).filter(t=>(d.themes||[]).includes(t));
-    if(shared.length) return shared[0].toLowerCase();
-    if(o.x.ind===d.ind) return d.ind.toLowerCase();
-    return capType(o.x.type).toLowerCase();
-  };
+  const all = relatedList(d);
+  const rel = all.slice(0,5);
+  const indLink = d.ind ? `#/ind/${encodeURIComponent(d.ind)}` : "";
+  // Нечего показать — говорим это прямо и уводим туда, где список всё же есть.
+  // Пять случайных карточек той же отрасли выглядели как ответ, но им не были.
+  if(!rel.length) return `<div class="related reveal"><span class="label">Похожие сделки</span>
+    <p class="rel-empty">Сделок с теми же сторонами или тем же сюжетом в базе нет.
+      Подбирать по одной лишь отрасли мы не стали: это не прецедент, а просто
+      соседняя карточка сектора.</p>
+    ${indLink?`<div class="fe-actions" style="justify-content:flex-start"><a class="chip" href="${indLink}">Все сделки отрасли «${d.ind}»</a></div>`:""}
+  </div>`;
+  const why = o => o.party
+    ? `та же сторона: ${co(o.party)?co(o.party).name:"общая"}`
+    : o.themes[0].toLowerCase();
+  // Доля показывается рядом с суммой: юрист сравнивает не только цену, но и то,
+  // какой пакет за неё отдали. Только короткие значения — длинные это не «100%»,
+  // а пересказ структуры, ему место в карточке.
+  const share = x => { const v = x.asset_share || (x.eco&&x.eco.share); return hasFact(v)&&String(v).length<=14 ? String(v) : ""; };
   return `<div class="related reveal"><span class="label">Похожие сделки</span>
     ${rel.map(o=>`<a class="an-deal" href="#/deal/${o.x.id}">
       <div class="an-deal-head"><span class="an-deal-t">${o.x.title}</span></div>
-      <span class="an-deal-s num">${o.x.sum&&!undisclosed(o.x.sum)?o.x.sum:fmtDate(o.x.date)} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
+      <span class="an-deal-s num">${[
+        undisclosed(o.x.sum)?fmtDate(o.x.date):sumHtml(o.x.sum), share(o.x)
+      ].filter(Boolean).join(" · ")} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
     </a>`).join("")}
-    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Подбор автоматический: общие стороны сделки, сюжет, отрасль, тип и близость по времени.</p>
+    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общим сюжетом${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
   </div>`;
 }
 
