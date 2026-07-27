@@ -191,6 +191,10 @@ nav a.on::after,nav a:hover::after{width:100%}
    рынка, и пользователь должен понимать разницу без похода в документацию. */
 .fact-note{font-size:13px;line-height:1.55;color:var(--muted);margin:-6px 0 22px;max-width:560px}
 .tag{display:inline-block;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);background:none;border:1px solid var(--line);padding:3px 8px;border-radius:2px}
+/* Тег отрасли — ссылка только там, где он не лежит внутри карточки-ссылки:
+   в ленте и на странице фирмы строка сама <a>, вложенная ссылка недопустима. */
+a.tag{text-decoration:none;transition:border-color .2s,color .2s}
+a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .tag.steel{color:var(--steel);background:var(--steel-soft)}
 .tag.bronze{color:var(--bronze);background:var(--bronze-soft)}
 .status{display:inline-block;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:2px;color:var(--muted)}
@@ -1135,6 +1139,11 @@ function route(){
     else renderAdvisors();
     mark("advisors");
   }
+  else if(page==="industry"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Сводка по отрасли");
+    else renderIndustry(arg?decodeURIComponent(arg):"");
+    mark("analytics");
+  }
   else if(page==="analytics"){
     if(!bulkLoaded) app.innerHTML = loadingHtml("Графики");
     else renderAnalytics();
@@ -1928,7 +1937,7 @@ function renderDeal(id){
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <span class="label num">${fmtDate(d.date)}</span>
       <span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>
-      <span class="tag">${d.ind}</span>
+      <a class="tag" href="#/industry/${encodeURIComponent(d.ind)}" title="Сводка по отрасли">${d.ind}</a>
     </div>
     <div class="deal-parties-strong reveal">
       ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`:(targetName?"":`<span style="color:var(--muted)">${kind.empty}</span>`)}
@@ -2413,6 +2422,89 @@ function renderFirm(id){
   mountMiniAI(f.n);
 }
 
+/* ================= ОТРАСЛЬ ================= */
+/* До этого отрасль была только значением фильтра: чтобы понять, что творится в
+   секторе, приходилось листать ленту. Здесь собрано то, что реально есть в
+   данных, — и у каждого блока подписан свой знаменатель: они разные (динамика
+   по всем записям, покупатели и консультанты — только по подробным карточкам). */
+function renderIndustry(ind){
+  const all = [...DEALS, ...MINI_DEALS, ...CHANNEL_DEALS, ...BULK_DEALS].filter(x=>x.ind===ind);
+  if(!all.length){ location.hash = "#/analytics"; return; }
+  const cards = DEALS.filter(d=>d.ind===ind);
+  const parseB = s => {const m=(s||"").replace(",",".").match(/([\d.]+)\s*млрд/); return m?parseFloat(m[1]):0;};
+  // Экспертная оценка — не раскрытая сумма (то же правило, что в аналитике)
+  const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
+  const disclosed = cards.filter(d=>!undisclosed(d.sum) && !isEstimate(d.sum));
+  const rub = cards.map(d=>({d, b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(o=>o.b>0).sort((a,b)=>b.b-a.b);
+  const byYear = {};
+  all.forEach(x=>{const y=(x.date||"").slice(0,4); if(/^20\d\d$/.test(y)) byYear[y]=(byYear[y]||0)+1;});
+  const years = Object.entries(byYear).sort((a,b)=>a[0].localeCompare(b[0]));
+  const maxY = years.length?Math.max(...years.map(([,n])=>n)):1;
+  const noDate = all.length - years.reduce((s,[,n])=>s+n,0);
+  const buyerCnt = {};
+  cards.forEach(d=>{if(d.buyer&&co(d.buyer)) buyerCnt[d.buyer]=(buyerCnt[d.buyer]||0)+1;});
+  const topBuyers = Object.entries(buyerCnt).filter(([,n])=>n>=2).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const firmCnt = {};
+  cards.forEach(d=>realAdv(d).forEach(a=>{firmCnt[a[1]]=(firmCnt[a[1]]||0)+1;}));
+  const topFirms = Object.entries(firmCnt).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const themeCnt = {};
+  cards.forEach(d=>(d.themes||[]).forEach(t=>{themeCnt[t]=(themeCnt[t]||0)+1;}));
+  const topThemes = Object.entries(themeCnt).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
+  const note = t => `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${t}</p>`;
+  // Блок без данных не рисуется полупустым: он говорит, чего именно нет.
+  const emptyNote = t => `<p class="rel-empty">${t}</p>`;
+
+  app.innerHTML = `
+  <a class="back reveal" href="#/analytics">← Аналитика</a>
+  <div class="sec-head reveal"><span class="label">Отрасль</span><h1>${ind}</h1>
+    <p>${all.length} ${plural(all.length,"запись","записи","записей")} в базе: ${cards.length} ${plural(cards.length,"подробная карточка","подробные карточки","подробных карточек")}${all.length-cards.length?` и ${all.length-cards.length} ${plural(all.length-cards.length,"краткая запись","краткие записи","кратких записей")}`:""}. Сумму назвали стороны у ${disclosed.length} ${plural(disclosed.length,"карточки","карточек","карточек")} — ${Math.round(disclosed.length/(cards.length||1)*100)}% подробных. Это не статистика сектора, а то, что попало в публичные источники.</p>
+  </div>
+  <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
+    <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
+  </div>
+  <div class="an-grid">
+    <div class="an-card reveal">
+      <span class="label">Сделки по годам</span>
+      ${years.length
+        ? years.map(([y,n],ri)=>`<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")
+          + note(`Все записи отрасли по дате сделки, и подробные и краткие: ${all.length-noDate} из ${all.length}.${noDate?` У ${noDate} ${plural(noDate,"записи","записей","записей")} даты нет.`:""}`)
+        : emptyNote("Ни у одной записи отрасли нет даты сделки.")}
+    </div>
+    <div class="an-card reveal">
+      <span class="label">Крупнейшие сделки по раскрытой сумме</span>
+      ${rub.length
+        ? rub.slice(0,8).map((o,i)=>`<a class="an-deal" href="#/deal/${o.d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${o.d.title}</span></div><span class="an-deal-s num">${sumHtml(o.d.sum)}</span></a>`).join("")
+          + note(`${rub.length===1?"Единственная карточка":`Из ${rub.length} ${plural(rub.length,"карточки","карточек","карточек")}`} отрасли, где цену назвали стороны и она указана в рублях. Валютные и оценочные суммы не участвуют — сложить их корректно нельзя. Суммарно ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
+        : emptyNote("Рублёвых сумм, названных сторонами, в этой отрасли нет — сравнивать нечего.")}
+    </div>
+    <div class="an-card reveal">
+      <span class="label">Кто покупает в отрасли</span>
+      ${topBuyers.length
+        ? topBuyers.map(([id,n])=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")} в отрасли</span></a>`).join("")
+          + note(`Компании, у которых в подробных карточках отрасли не меньше двух покупок. Всего покупателей в отрасли — ${Object.keys(buyerCnt).length}.`)
+        : emptyNote(Object.keys(buyerCnt).length
+            ? `Ни одна компания не покупала в этой отрасли дважды: ${Object.keys(buyerCnt).length} ${plural(Object.keys(buyerCnt).length,"покупатель","покупателя","покупателей")}, у каждого по одной сделке.`
+            : `Покупатель не назван ни в одной подробной карточке отрасли.`)}
+    </div>
+    <div class="an-card reveal">
+      <span class="label">Кто ведёт сделки в отрасли</span>
+      ${topFirms.length
+        ? topFirms.map(([n,c])=>`<div class="an-row"><span class="an-key">${n}</span><div class="an-bar"><div style="width:${Math.round(c/topFirms[0][1]*100)}%"></div></div><span class="an-val num">${c}</span></div>`).join("")
+          + note(`Консультанты, названные в подробных карточках отрасли. Команда раскрыта у ${cards.filter(d=>realAdv(d).length).length} ${plural(cards.filter(d=>realAdv(d).length).length,"карточки","карточек","карточек")} из ${cards.length} — остальные сделки вели неизвестно кто, и это свойство рынка, а не пробел подсчёта.`)
+        : emptyNote(`Ни в одной из ${cards.length} ${plural(cards.length,"карточки","карточек","карточек")} отрасли консультанты не названы.`)}
+    </div>
+    ${topThemes.length?`
+    <div class="an-card reveal">
+      <span class="label">Сюжеты отрасли</span>
+      ${topThemes.map(([t,n])=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/topThemes[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
+      ${note(`Размечено автоматически по тексту подробных карточек отрасли; у карточки бывает несколько сюжетов.`)}
+    </div>`:""}
+  </div>
+  ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
+  mountMiniAI(ind);
+}
+
 /* ================= АССИСТЕНТ ================= */
 const SUGGESTS = ["Кто сопровождал сделки в базе?","Какая самая крупная сделка?","Кто выходил из российского рынка?","Какие сделки с опционом обратного выкупа?"];
 function renderAnalytics(){
@@ -2491,7 +2583,7 @@ function renderAnalytics(){
     </div>
     <div class="an-card reveal">
       <span class="label">Топ-10 отраслей</span>
-      ${topInd.map(([i,n],ri)=>`<div class="an-row"><span class="an-key">${i}</span><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
+      ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все записи базы, отрасль проставлена у каждой. Десять крупнейших отраслей из ${Object.keys(byInd).length} — это ${topIndSum} ${plural(topIndSum,"запись","записи","записей")} из ${all.length}, остальные ${all.length-topIndSum} — в прочих отраслях.</p>
     </div>
     <div class="an-card reveal">
@@ -2524,7 +2616,7 @@ function renderAnalytics(){
     ${topIndMoney.length?`
     <div class="an-card reveal">
       <span class="label">Отрасли по сумме сделок</span>
-      ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><span class="an-key">${i}</span><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
+      ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сложены рублёвые суммы ${moneyCards} ${plural(moneyCards,"подробной карточки","подробных карточек","подробных карточек")}, где цену назвали стороны (валютные и оценочные суммы не учитываются). Картина отличается от рейтинга по количеству: несколько мегасделок перевешивают десятки мелких.</p>
     </div>`:""}
     ${disclYears.length?`
