@@ -254,3 +254,42 @@ def test_law_values_start_with_a_capital(deals):
            if not is_placeholder((d.get("law") or {}).get(f))
            and LOWER_START.match(re.sub(r"\s+", " ", str((d.get("law") or {}).get(f))).strip())]
     assert not bad, f"юридическое поле начинается со строчной буквы: {bad[:5]}"
+
+
+APPROVING_BODY = re.compile(
+    r"ФАС\b|антимонопольн|правительственн[а-яё]*\s+(?:под)?комисси|правкомисси|подкомисси"
+    r"|Банк[а-яё]*\s+России|ЦБ\s+РФ|Центробанк|президент[а-яё]*|правительств[а-яё]*|премьер"
+    r"|российск[а-яё]*\s+власт|Минцифр|Минпромторг|Минсельхоз|Минфин|Минюст|Роскомнадзор"
+    r"|Росимуществ|Росжелдор|регулятор|UOKiK|Rekabet|Еврокомисси|CFIUS|OFAC|BIS|EMRA"
+    r"|совет[а-яё]*\s+директоров|собрани[а-яё]*\s+акционеров|акционер|суд\b|указ|распоряжени"
+    r"|предписани", re.I)
+
+
+def test_approval_names_a_body(deals):
+    """В «Согласованиях» должен быть назван орган, который согласовывал.
+
+    Ловит A13: под этим заголовком лежали состав команды юрфирмы, описание
+    компании и мотив сделки — там нет ни одного органа. Проверка намеренно
+    широкая: «премьер подписал распоряжение» — согласование, хотя слова
+    «одобрил» в нём нет.
+    """
+    bad = [(d["id"], str((d.get("law") or {}).get("appr"))[:60]) for d in deals
+           if not is_placeholder((d.get("law") or {}).get("appr"))
+           and not APPROVING_BODY.search(str((d.get("law") or {}).get("appr")))]
+    assert not bad, f"в «Согласованиях» не назван орган: {bad[:5]}"
+
+
+def test_law_value_does_not_repeat_the_title(deals):
+    """Значение поля не начинается с дословного повтора заголовка карточки.
+
+    Так было у 6 «Согласований»: заголовок склеился с фактом без точки, и на
+    экране карточка повторяла сама себя.
+    """
+    bad = []
+    for d in deals:
+        title = re.sub(r"\s+", " ", str(d.get("title") or "")).strip().lower()
+        for f in LAW_FIELDS:
+            value = re.sub(r"\s+", " ", str((d.get("law") or {}).get(f) or "")).strip()
+            if len(value) > 40 and title and value[:40].lower() in title:
+                bad.append((d["id"], f"law.{f}"))
+    assert not bad, f"поле начинается с повтора заголовка: {bad[:5]}"
