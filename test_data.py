@@ -168,3 +168,51 @@ def test_company_descriptions_have_no_internal_jargon(base):
     bad = [(cid, str(c.get("desc"))[:60]) for cid, c in base["companies"].items()
            if INTERNAL_JARGON.search(str(c.get("desc") or ""))]
     assert not bad, f"внутренняя кухня в описании профиля: {bad[:5]}"
+
+
+# Тот же предикат пустоты, что и на экране (`hasFact` в index.html): заглушкой
+# считается только строка, в которой кроме формулировки отсутствия ничего нет.
+LAW_PLACEHOLDER = re.compile(
+    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
+    r"|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*"
+    r"(?:\s+(?:официально|публично))?)[.\s]*$", re.I)
+
+
+def is_placeholder(value):
+    text = str(value or "").strip()
+    return not text or bool(LAW_PLACEHOLDER.match(text))
+
+
+APPROVAL_BODY = re.compile(
+    r"ФАС\b|антимонопольн|правительственн[а-яё]*\s+(?:под)?комисси|правкомисси|подкомисси"
+    r"|Банк[а-яё]*\s+России|ЦБ\s+РФ|Центробанк|президент[а-яё]*\s+Р(?:оссии|Ф)|правительств[а-яё]*"
+    r"|российск[а-яё]*\s+власт|Минцифр|Минпромторг|Минсельхоз|Роскомнадзор|Росимуществ|регулятор"
+    r"|UOKiK|Rekabet|Еврокомисси|CFIUS|OFAC|совет[а-яё]*\s+директоров|собрани[а-яё]*\s+акционеров", re.I)
+APPROVAL_ACT = re.compile(r"одобр|разреш|согласова|согласи[ея]|утверд", re.I)
+SENTENCE = re.compile(r"(?<=[.!?])\s+(?=(?-i:[А-ЯЁA-Z«\"]))")
+# Просмотрено глазами: согласование в тексте есть, но оно про другую сделку
+# (подробности — в docstring pipeline/extract_approvals.py).
+APPROVAL_EXCEPTIONS = {"g4b26b011", "g96e561ef", "g72fad24b", "g718e3d0e"}
+
+
+def test_approval_is_not_left_in_prose(deals):
+    """Линза «Юрист» не должна говорить «согласования не раскрыли», когда
+    согласование описано в той же карточке (прогон 29).
+
+    Ловит следующую партию данных: если в «Дополнительной информации» новой
+    сделки написано «ФАС одобрила», а поле «Согласования» пусто, пользователь
+    увидит на соседних вкладках факт и утверждение, что факта нет.
+    """
+    bad = []
+    for d in deals:
+        if d["id"] in APPROVAL_EXCEPTIONS:
+            continue
+        if not is_placeholder((d.get("law") or {}).get("appr")):
+            continue
+        for text in (d.get("extra"), (d.get("eco") or {}).get("rationale"),
+                     (d.get("eco") or {}).get("context"), (d.get("eco") or {}).get("share")):
+            for sent in SENTENCE.split(str(text or "")):
+                if APPROVAL_BODY.search(sent) and APPROVAL_ACT.search(sent):
+                    bad.append((d["id"], sent.strip()[:70]))
+                    break
+    assert not bad, f"согласование осталось в тексте, поле пусто: {bad[:5]}"
