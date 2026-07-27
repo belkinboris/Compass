@@ -10,9 +10,12 @@
 <meta property="og:description" content="1300+ сделок с первоисточниками, профили компаний, консультанты Право-300. Двойная линза: экономист и юрист.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=IBM+Plex+Sans:wght@400;500;600&subset=cyrillic&display=swap" rel="stylesheet">
+<!-- Шрифты подключались с fonts.googleapis.com — и это не работало: из России
+     домен недоступен, запрос обрывается (ERR_CONNECTION_RESET), страница молча
+     съезжала на запасные шрифты. Внешних CDN у нас быть не должно вовсе, поэтому
+     подключение убрано, а стек ниже собран из шрифтов, которые уже есть в
+     системе. Скачивать и класть шрифты в репозиторий не стали: это +200-400 КБ
+     к странице ради начертания, а первым делом важно, чтобы всё грузилось. -->
 <style>
 :root{
   --paper:#F5F5F1; --card:#FFFFFF; --ink:#15191D; --muted:#66707A;
@@ -21,8 +24,13 @@
   --steel:#33556B; --steel-soft:#E8EEF2;
   --bronze:#A3814E; --bronze-soft:#F2EDE2;
   --radius:4px;
-  --f-display:'Yeseva One',Georgia,serif;
-  --f-body:'IBM Plex Sans',system-ui,sans-serif;
+  /* Только системные шрифты: без загрузки с внешних доменов. Кириллические
+     засечки для заголовков есть в любой из перечисленных систем. */
+  --f-display:'PT Serif','Times New Roman',Georgia,'Liberation Serif',serif;
+  --f-body:system-ui,'Segoe UI','PT Sans',Roboto,'Helvetica Neue',Arial,sans-serif;
+  /* --f-sans использовался в трёх местах, но не был объявлен: поля поиска и
+     фильтров молча брали шрифт браузера, а не страницы. */
+  --f-sans:var(--f-body);
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -1648,6 +1656,19 @@ function relatedScore(d, x){
   if(x.sum && !undisclosed(x.sum)) s += 3;
   return s;
 }
+// «Дополнительная информация» долгое время была дословной копией «Цели сделки»
+// у 678 карточек из 1333: один и тот же абзац читался дважды — на «Обзоре» под
+// расплывчатым заголовком и на линзе «Экономист» под точным. Показываем блок,
+// только если он действительно добавляет что-то к «Цели сделки».
+function extraHtml(d){
+  const norm = t => String(t||"").replace(/\s+/g," ").trim().toLowerCase();
+  const ex = norm(d.extra), goal = norm(d.eco && d.eco.rationale);
+  if(!ex) return "";
+  // не только полное совпадение: после чистки одно поле могло стать началом
+  // другого, а видеть тот же текст с обрезанным хвостом ничем не лучше
+  if(goal && goal !== "—" && (ex === goal || ex.startsWith(goal) || goal.startsWith(ex))) return "";
+  return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
+}
 function relatedHtml(d){
   const MIN_SCORE = 18; // ниже — уже не «похожая», а случайная карточка
   const rel = DEALS.filter(x=>x.id!==d.id)
@@ -1742,7 +1763,7 @@ function renderDeal(id){
     <button data-l="law"${lawHasContent(d)?"":' class="thin" title="Юридические детали по этой сделке публично не раскрывались"'}>Юрист</button>
   </div>
   <div id="facts" class="reveal"></div>
-  ${d.extra?`<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`:""}
+  ${extraHtml(d)}
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
