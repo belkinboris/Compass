@@ -87,6 +87,23 @@ PLACEHOLDER = re.compile(
     r"^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$", re.I)
 
 
+ROLE_PAIRS = (("buyer", "target"), ("buyer", "seller_id"), ("target", "seller_id"),
+              ("buyer", "asset_id"), ("seller_id", "asset_id"), ("target", "asset_id"))
+
+
+def test_one_company_holds_one_role_in_a_deal(deals):
+    """Компания не может быть в одной сделке и продавцом, и предметом.
+
+    Прогон 32: у трёх карточек профиль продавца стоял в `target` — «Черкизово
+    приобрела пять компаний у банка „Траст"», а предметом сделки числился сам
+    «Траст». Проверка ловит этот класс целиком, а не только пару покупатель —
+    продавец, которая проверялась раньше.
+    """
+    bad = [(d["id"], a, b) for d in deals for a, b in ROLE_PAIRS
+           if d.get(a) and d.get(a) == d.get(b)]
+    assert not bad, f"одна компания в двух ролях: {bad[:5]}"
+
+
 def test_seller_is_not_a_placeholder(deals):
     """«Продавец: не раскрыт» — это пустое поле, а не имя стороны."""
     bad = [(d["id"], d["seller"]) for d in deals
