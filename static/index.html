@@ -181,7 +181,12 @@ nav a.on::after,nav a:hover::after{width:100%}
 .deal-sum.na{color:var(--muted);font-weight:400;font-size:13.5px;font-family:var(--f-body)}
 /* «(по оценке)» — не часть числа, а оговорка о его достоверности. Показываем
    тоньше и приглушённее, чтобы взгляд сначала брал саму сумму. */
-.sum-note{font-family:var(--f-body);font-weight:400;font-size:.72em;color:var(--muted);letter-spacing:0;white-space:nowrap}
+/* nowrap только у короткой пометки вроде «(по оценке)»: она должна держаться
+   одной строкой. Длинные пометки («(стартовая цена лота — 1,681 млрд ₽;
+   совокупные обязательства…)» — 132 символа) переносятся: с nowrap они уезжали
+   за экран, давая до 219px горизонтального переполнения на 360px у 74 карточек. */
+.sum-note{font-family:var(--f-body);font-weight:400;font-size:.72em;color:var(--muted);letter-spacing:0}
+.sum-note.nb{white-space:nowrap}
 /* Пояснение под фактом: «не раскрыта» — это не пробел в базе, а состояние
    рынка, и пользователь должен понимать разницу без похода в документацию. */
 .fact-note{font-size:13px;line-height:1.55;color:var(--muted);margin:-6px 0 22px;max-width:560px}
@@ -280,6 +285,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 .lens button.thin.on{opacity:1}
 /* честное пустое состояние линзы */
 .lens-hint{margin:-18px 0 24px;font-size:13px;line-height:1.55;color:var(--muted);max-width:680px}
+.lens-part{margin:0 0 22px;font-size:13px;line-height:1.55;color:var(--muted);max-width:640px}
 .lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
 .lens-empty .le-head{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:10px}
 .lens-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:640px}
@@ -310,7 +316,10 @@ nav a.on::after,nav a:hover::after{width:100%}
 .spec-list{border-top:1px solid var(--line);margin-bottom:26px;animation:fadeUp .45s var(--ease)}
 .spec-row{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}
 .spec-k{color:var(--muted);font-size:13.5px;flex-shrink:0}
-.spec-v{font-size:14px;text-align:right;color:var(--ink)}
+/* min-width:0 — иначе флекс-элемент не сжимается ниже своего min-content, и
+   длинное значение («Rothschild & Co — финансовый консультант и спонсор…»)
+   выталкивает строку за экран. */
+.spec-v{font-size:14px;text-align:right;color:var(--ink);min-width:0;overflow-wrap:anywhere}
 .narrative{margin-bottom:26px;max-width:660px;animation:fadeUp .5s var(--ease)}
 .narrative .label{margin-bottom:9px}
 .narrative p{font-size:15px;line-height:1.68;color:var(--ink);margin:0}
@@ -489,6 +498,11 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .hero{margin:0 -20px;padding:52px 20px 46px}
   .aisearch{flex-direction:column}
   .aisearch button{padding:14px}
+  /* На телефоне подпись и значение в столбик: в строку они не помещаются, а
+     длинные значения (описание работы консультанта) на узком экране всё равно
+     читаются лучше слева направо. */
+  .spec-row{flex-direction:column;gap:4px}
+  .spec-v{text-align:left}
 }
 </style>
 </head>
@@ -1273,7 +1287,8 @@ const themeCount = t => DEALS.filter(d=>(d.themes||[]).includes(t)).length;
 const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
 /* Хвостовая скобка у суммы — «(по оценке)» и подобные оговорки. Отделяем её
    стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
-const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/, ' <span class="sum-note">$1</span>');
+const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
+  (_, note) => ` <span class="sum-note${note.length<=16?" nb":""}">${note}</span>`);
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
 const plural = (n,one,few,many) => {
   const a = Math.abs(n)%100, b = a%10;
@@ -1780,6 +1795,20 @@ function lawEmptyHtml(d){
     ${srcFootHtml(d)}
   </div>`;
 }
+/* Линза не пуста, но раскрыта наполовину: у 128 карточек из 276 всё её
+   содержание — консультанты, а структуры, согласований и условий в источниках
+   нет. Без этой строки юрист листает лист фирм и не понимает, всё ли перед ним:
+   пустое состояние говорит «ничего нет», а полу-пустое молчало. */
+function lawPartialNote(d){
+  const missing = [
+    !hasFact(d.law && d.law.struct) && "структуру",
+    !hasFact(d.law && d.law.terms) && "условия",
+    !hasFact(d.law && d.law.appr) && "согласования",
+  ].filter(Boolean);
+  if(missing.length !== 3 || !realAdv(d).length) return "";
+  return `<p class="lens-part">Из юридических деталей раскрыты только консультанты:
+    ${missing.join(", ")} сделки в источниках не называли.</p>`;
+}
 function ecoEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Экономика сделки публично не раскрывалась</div>
@@ -1978,17 +2007,24 @@ function renderDeal(id){
       ${para("Цель сделки", d.eco.rationale)}
       ${para("Контекст", d.eco.context)}`
       : ecoEmptyHtml(d);
+    /* B4: порядок полей в линзе «Юрист» — по тому, что юристу нужно первым.
+       Было: структура → согласования → консультанты → УСЛОВИЯ. Самое ценное и
+       самое редкое поле (условия раскрыты у 45 карточек из 1352) оказывалось
+       последним, а у 20 из них — ещё и под списком фирм, до пяти блоков от
+       начала. Стало: как оформили (структура и цепочка владения) → что записали
+       (условия) → что пришлось получить (согласования) → кто вёл. */
     else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
+      ${lawPartialNote(d)}
       ${para("Структура", d.law.struct)}
-      ${specBlock([specRow("Согласования", d.law.appr)])}
       ${ownership()}
+      ${para("Условия и особенности (из публичных данных)", d.law.terms)}
+      ${specBlock([specRow("Согласования", d.law.appr)])}
       ${realAdv(d).map(a=>`
         <div class="adv-card">
           <span class="label">${a[0]}</span>
           <div class="adv-name">${a[1]}</div>
           ${a[2]?`<p>${a[2]}</p>`:""}
-        </div>`).join("")}
-      ${para("Условия и особенности (из публичных данных)", d.law.terms)}`
+        </div>`).join("")}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
       ${hero("Сумма", d.sum, true)}
@@ -1999,8 +2035,12 @@ function renderDeal(id){
       ${specBlock([
         specRow("Предмет", d.eco.share),
         specRow("Статус", d.status),
-        specRow("Согласования", d.law.appr),
       ])}`;
+      /* «Согласования» отсюда убраны: то же значение стояло и на «Обзоре», и в
+         линзе «Юрист» — у 77 карточек читатель видел одну строку дважды. Поле
+         живёт там, где его ищут, и подсказка под линзами прямо говорит, что
+         согласования — в «Юристе». Кнопка «Юрист» у таких карточек не
+         приглушена, так что путь виден. */
   };
   paint();
   app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{
