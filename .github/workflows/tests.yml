@@ -1,0 +1,51 @@
+name: Тесты
+
+# Гоняем на каждый push и pull request в main и в рабочую ветку.
+# Два джоба, а не один: инварианты базы должны отвечать за секунды и падать
+# первыми — из-за них чинить проще всего. Дымовые тесты интерфейса требуют
+# браузера и идут полторы минуты, поэтому вынесены отдельно и не задерживают
+# быстрый ответ.
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  data:
+    name: Данные и API (без браузера)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Установить зависимости
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Инварианты базы
+        run: python -m pytest test_data.py -q
+      - name: yandex_search и /api/ask
+        run: python -m pytest test_kompas.py -q
+
+  ui:
+    name: Интерфейс (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Установить зависимости
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest playwright
+      # Локально браузер предустановлен и ставить его запрещено; здесь чистая
+      # машина, поэтому Chromium ставится явно — с системными библиотеками.
+      - name: Поставить Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Дымовые тесты экранов
+        run: python -m pytest test_ui.py -q

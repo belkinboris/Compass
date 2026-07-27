@@ -17,6 +17,7 @@ yandex_search.py              обёртка над Яндекс XML-поиск�
 test_kompas.py                17 тестов: yandex_search + /api/ask
 test_data.py                  14 тестов: инварианты базы (без браузера)
 test_ui.py                    16 тестов: дымовые проверки экранов (Playwright)
+.github/workflows/tests.yml   CI: данные и API отдельно, интерфейс отдельно
 static/index.html             ВЕСЬ интерфейс: стили, данные-константы, рендер
 static/data/deals_promoted.json   основная база (1333 сделки, 1846 компаний)
 static/data/bulk_deals.json       компактные записи
@@ -52,7 +53,9 @@ br = await p.chromium.launch(executable_path="/opt/pw-browsers/chromium")
 ```
 
 Не запускать `playwright install` — браузер предустановлен
-(`PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`).
+(`PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`). Это правило про ЭТУ машину: в CI
+(`.github/workflows/tests.yml`) Chromium ставится явно, потому что там его нет.
+`test_ui.py` использует предустановленный путь, только если файл существует.
 
 ## Обязательная проверка перед коммитом
 
@@ -194,7 +197,6 @@ await pg.evaluate("document.documentElement.scrollWidth - document.documentEleme
 - Линза «Юрист» пуста у 80% карточек (структура 6%, согласования 5%, условия 2%).
 - 2 поля `law.appr` обрезаны, и восстановить их не из чего — обрывка нет в `extra`.
 - 155 профилей компаний не привязаны ни к одной сделке.
-- CI отсутствует: тесты гоняются вручную (`.github/workflows` нет).
 - Вся база (4,7 МБ) грузится на клиент одним файлом. Экраны, зависящие от неё,
   до загрузки показывают «Загружаем базу сделок», а не цифры по 19 карточкам.
 - Данных о цепочке владения нет: `ownership` пуст, `holding` — у 2 компаний.
