@@ -216,3 +216,41 @@ def test_approval_is_not_left_in_prose(deals):
                     bad.append((d["id"], sent.strip()[:70]))
                     break
     assert not bad, f"согласование осталось в тексте, поле пусто: {bad[:5]}"
+
+
+HANGING_TAIL = re.compile(r"[;,:—–-]$")
+LOWER_START = re.compile(r"^(?-i:[а-яё])")
+LAW_FIELDS = ("struct", "appr", "terms")
+
+
+def test_no_value_ends_with_a_hanging_separator(deals):
+    """Значение поля не может кончаться на «;» — это обрубок фразы (прогон 30).
+
+    Так было у 22 «Согласований» из 144: поле нарезали из сплошного текста по
+    точке с запятой, и в карточку попадала половина мысли.
+    """
+    bad = []
+    for d in deals:
+        for grp in ("eco", "law"):
+            for key, value in (d.get(grp) or {}).items():
+                if not isinstance(value, str):
+                    continue
+                text = re.sub(r"\s+", " ", value).strip()
+                if text and not is_placeholder(text) and HANGING_TAIL.search(text):
+                    bad.append((d["id"], f"{grp}.{key}", text[-40:]))
+    assert not bad, f"значение обрывается на разделителе: {bad[:5]}"
+
+
+def test_law_values_start_with_a_capital(deals):
+    """Юридические поля — законченные утверждения, а не куски фразы.
+
+    Строчная буква в начале означала, что подлежащее осталось в `extra`:
+    «подали в ФАС ходатайство…» — кто подал, на экране не видно. Проверка
+    намеренно ограничена линзой «Юрист»: в `eco.*` строчное начало встречается
+    и законно (продолжение перечисления показателей).
+    """
+    bad = [(d["id"], f"law.{f}", str((d.get("law") or {}).get(f))[:40])
+           for d in deals for f in LAW_FIELDS
+           if not is_placeholder((d.get("law") or {}).get(f))
+           and LOWER_START.match(re.sub(r"\s+", " ", str((d.get("law") or {}).get(f))).strip())]
+    assert not bad, f"юридическое поле начинается со строчной буквы: {bad[:5]}"
