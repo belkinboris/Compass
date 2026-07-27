@@ -986,9 +986,17 @@ function companyDeals(id){
 const companyTotal = id => companyDeals(id).structured.length;
 const companyMentions = id => companyDeals(id).mentions.length;
 
-function firmDeals(id){
+/* Регулярка имени фирмы — одна на все экраны. `FIRM_MATCH` заполнен не для
+   всех: у «Деловых Решений и Технологий», «Дякин, Горцунян и Партнеры» и
+   Maxima Legal его нет. Страница фирмы брала `FIRM_MATCH[id]` напрямую и падала
+   на `rx.test` — профиль этих трёх фирм из 64 просто не открывался, экран
+   оставался прежним. `firmDeals` при этом работал: там запасной вариант был. */
+const firmRx = id => {
   const fobj = FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
-  const rx = fobj ? firmRxOf(fobj) : FIRM_MATCH[id];
+  return (fobj ? firmRxOf(fobj) : null) || FIRM_MATCH[id] || null;
+};
+function firmDeals(id){
+  const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
   return {
     full: DEALS.filter(d=>d.law.adv.some(a=>rx.test(a[1]))||rx.test(d.eco.finadv||"")),
@@ -2364,6 +2372,71 @@ function firmEmptyHtml(f, isLegal){
     </div>
   </div>`;
 }
+/* Сторона, за которую работала фирма. Поле `law.adv[i][0]` — свободный текст:
+   от «Покупатель — «Ренессанс Капитал»» до «Kismet capital group: получение
+   регуляторных одобрений ФАС». Роль вытаскивается из 106 упоминаний из 154
+   (69%) у 32 фирм из 37; у остальных там просто «Юридический консультант», то
+   есть сторону не назвали. Окончания через [а-яё]*, а не через голый корень:
+   `продавц` не совпадает с «(продавец)» — на этом правило уже теряло записи. */
+const ADV_ROLE = [
+  ["покупателя", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
+  ["продавца",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
+  ["предмета сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
+];
+const advRoleOf = label => (ADV_ROLE.find(([,rx])=>rx.test(String(label||"")))||[null])[0];
+
+/* Профиль консультанта как рабочий инструмент: в каких отраслях работает
+   фирма, за кого выступает и с кем работает повторно. Раньше страница была
+   только списком сделок — чтобы ответить «кто ведёт сделки в фарме», список
+   приходилось читать глазами. */
+function firmSummaryHtml(id, full, mini, bulk){
+  const all = [...full, ...mini, ...bulk];
+  if(!all.length) return "";
+  const rx = firmRx(id);
+  const inds = {};
+  all.forEach(d=>{if(d.ind) inds[d.ind]=(inds[d.ind]||0)+1;});
+  const topInds = Object.entries(inds).sort((a,b)=>b[1]-a[1]);
+  const roles = {};
+  let noSide = 0;
+  full.forEach(d=>{
+    const mine = (d.law&&d.law.adv||[]).filter(a=>a[1]&&rx&&rx.test(a[1]));
+    const r = mine.map(a=>advRoleOf(a[0])).find(Boolean);
+    if(r) roles[r]=(roles[r]||0)+1; else noSide++;
+  });
+  const topRoles = Object.entries(roles).sort((a,b)=>b[1]-a[1]);
+  const clients = {};
+  full.forEach(d=>{
+    new Set([d.buyer,d.target,d.seller_id,d.asset_id].filter(x=>x&&co(x)))
+      .forEach(cid=>{clients[cid]=(clients[cid]||0)+1;});
+  });
+  const repeat = Object.entries(clients).filter(([,n])=>n>=2).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const note = t => `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${t}</p>`;
+  const bar = (rows, total) => rows.map(([k,n])=>`<div class="an-row"><span class="an-key">${k}</span><div class="an-bar"><div style="width:${Math.round(n/total*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("");
+  return `
+  <div class="an-grid" style="margin-top:0;margin-bottom:30px">
+    <div class="an-card reveal">
+      <span class="label">В каких отраслях</span>
+      ${bar(topInds.slice(0,7), topInds[0][1])}
+      ${note(topInds.length===1
+        ? `Все сделки фирмы в базе — в одной отрасли.`
+        : `${topInds.length} ${plural(topInds.length,"отрасль","отрасли","отраслей")} по сделкам, которые попали в базу. Это не весь профиль практики: фирмы раскрывают не все проекты.`)}
+    </div>
+    ${topRoles.length?`
+    <div class="an-card reveal">
+      <span class="label">За кого выступала</span>
+      ${bar(topRoles, topRoles[0][1])}
+      ${note(noSide
+        ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} сторона не названа — известно только, что фирма её вела.`
+        : `Сторона названа по каждой сделке фирмы.`)}
+    </div>`:""}
+    ${repeat.length?`
+    <div class="an-card reveal">
+      <span class="label">Возвращаются к фирме</span>
+      ${repeat.map(([cid,n])=>`<a class="an-deal" href="#/companies/${cid}"><div class="an-deal-head"><span class="an-deal-t">${co(cid).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"сделка","сделки","сделок")} с участием компании</span></a>`).join("")}
+      ${note(`Компании, которые встречаются в сделках фирмы не по одному разу — как покупатель, продавец или предмет сделки.`)}
+    </div>`:""}
+  </div>`;
+}
 function renderFirm(id){
   const f = ALL_FIRM(id); if(!f){renderAdvisors();return;}
   const isLegal = !!FIRMS.find(x=>x.id===id);
@@ -2390,8 +2463,9 @@ function renderFirm(id){
         : "Пока ни одной."}</span></div>
     <div class="fact wide" style="display:flex;align-items:center"><span style="color:var(--muted);font-size:13px">Считаются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты: список заведомо неполный и не отражает объём практики.</span></div>
   </div>
+  ${firmSummaryHtml(id, full, mini, bulk)}
   ${full.map(d=>{
-    const rx = FIRM_MATCH[id];
+    const rx = firmRx(id);
     const role = d.law.adv.find(a=>rx.test(a[1])) || (rx.test(d.eco.finadv||"")?["Финансовый консультант","",d.eco.finadv]:null);
     return `
   <a class="deal-row reveal" href="#/deal/${d.id}">
