@@ -1067,8 +1067,8 @@ function loadingHtml(what){
   return `<div class="loading reveal">
     <div class="spinner"></div>
     <div class="l-head">Загружаем базу сделок</div>
-    <p>${what} появятся, когда база догрузится: это 4,7 МБ одним файлом.
-       Показывать цифры по неполной базе мы не будем — они были бы неверными.</p>
+    <p>Секунду — ${what.toLowerCase()} появятся, как только загрузится база.
+       Пока она не пришла, цифры были бы неверными, поэтому мы их не показываем.</p>
   </div>`;
 }
 function route(){
@@ -1534,8 +1534,8 @@ function renderDeals(){
         <h1>Сделки российского рынка — <em>со ссылками на первоисточники</em></h1>
         <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
-        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length}">0</b> ${plural(FIRMS.length,"юрфирма","юрфирмы","юрфирм")} Право-300 · <b class="cnt" data-n="${TEAM_KNOWN()}">0</b> из ${DEALS.length} подробных карточек с раскрытой командой${bulkLoaded?"":" · догружаем базу…"}</div>
-        <p class="hero-fine">Из ${TOTAL_DEALS()} сделок ${DEALS.length} — подробные карточки со сторонами, суммой и консультантами, остальные ${TOTAL_DEALS()-DEALS.length} — краткие записи со ссылкой на источник. Источники — сообщения сторон, публикации консультантов и деловые СМИ. Это не исчерпывающая статистика рынка: в базе только то, что попало в публичное поле.</p>
+        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length}">0</b> ${plural(FIRMS.length,"юрфирма","юрфирмы","юрфирм")} Право-300 · у <b class="cnt" data-n="${TEAM_KNOWN()}">0</b> сделок известно, кто вёл${bulkLoaded?"":" · догружаем базу…"}</div>
+        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично.</p>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CITY}
@@ -2329,7 +2329,7 @@ function renderAdvisors(){
   </div>
   <div class="notice reveal">
     <div style="font-weight:600;color:var(--bronze)">ⓘ</div>
-    <div>Каталог не является рейтингом. В столбце «Сделки в базе» — записи, где фирма названа консультантом: и подробные карточки, и краткие записи со ссылкой на источник. Считаются только публичные источники — прежде всего публикации самих фирм, — поэтому картина заведомо неполная. Наполнение базы продолжается. Выводы — за вами.</div>
+    <div>Каталог не является рейтингом. В столбце «Сделки в базе» — сделки, где фирма названа консультантом в публичных источниках, прежде всего в её собственных публикациях. Фирмы раскрывают не все проекты, поэтому картина заведомо неполная. Наполнение базы продолжается. Выводы — за вами.</div>
   </div>
   ${body}`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
@@ -2380,11 +2380,14 @@ function renderFirm(id){
   </div>
   <div class="facts reveal" style="margin-bottom:30px">
     <div class="fact"><span class="label">Сделок в базе «Компаса»</span><div class="val big num">${full.length+mini.length+bulk.length}</div>
-      ${/* Число складывается из записей разной глубины — это надо назвать, иначе
-           «12 сделок» читается как 12 разобранных карточек. */""}
-      <span class="note">${[full.length?`${full.length} ${plural(full.length,"подробная карточка","подробные карточки","подробных карточек")}`:"",
-        (mini.length+bulk.length)?`${mini.length+bulk.length} ${plural(mini.length+bulk.length,"краткая запись","краткие записи","кратких записей")} со ссылкой на источник`:""]
-        .filter(Boolean).join(" и ")||"Ни одной записи"}.</span></div>
+      ${/* Часть сделок в списке ниже — без разбора, только заголовок и ссылка.
+           Говорим это словами, которые пользователь сверит со списком, а не
+           через наше внутреннее деление на «подробные» и «краткие». */""}
+      <span class="note">${(full.length+mini.length+bulk.length)
+        ? ((mini.length+bulk.length)
+            ? `У ${mini.length+bulk.length} из них известны только заголовок и источник.`
+            : "По каждой есть разбор: стороны, сумма, консультанты.")
+        : "Пока ни одной."}</span></div>
     <div class="fact wide" style="display:flex;align-items:center"><span style="color:var(--muted);font-size:13px">Считаются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты: список заведомо неполный и не отражает объём практики.</span></div>
   </div>
   ${full.map(d=>{
@@ -2458,7 +2461,10 @@ function renderIndustry(ind){
   app.innerHTML = `
   <a class="back reveal" href="#/analytics">← Аналитика</a>
   <div class="sec-head reveal"><span class="label">Отрасль</span><h1>${ind}</h1>
-    <p>${all.length} ${plural(all.length,"запись","записи","записей")} в базе: ${cards.length} ${plural(cards.length,"подробная карточка","подробные карточки","подробных карточек")}${all.length-cards.length?` и ${all.length-cards.length} ${plural(all.length-cards.length,"краткая запись","краткие записи","кратких записей")}`:""}. Сумму назвали стороны у ${disclosed.length} ${plural(disclosed.length,"карточки","карточек","карточек")} — ${Math.round(disclosed.length/(cards.length||1)*100)}% подробных. Это не статистика сектора, а то, что попало в публичные источники.</p>
+    <p>${all.length===1
+      ? (disclosed.length ? "Одна сделка в отрасли, сумма известна." : "Одна сделка в отрасли, сумму стороны не назвали.")
+      : `${all.length} ${plural(all.length,"сделка","сделки","сделок")} в отрасли, ${disclosed.length ? `сумма известна у ${disclosed.length}` : "ни по одной сумма не раскрыта"}.`
+    } Здесь только то, что стороны и их консультанты раскрыли публично, — не вся статистика сектора.</p>
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
@@ -2468,37 +2474,37 @@ function renderIndustry(ind){
       <span class="label">Сделки по годам</span>
       ${years.length
         ? years.map(([y,n],ri)=>`<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")
-          + note(`Все записи отрасли по дате сделки, и подробные и краткие: ${all.length-noDate} из ${all.length}.${noDate?` У ${noDate} ${plural(noDate,"записи","записей","записей")} даты нет.`:""}`)
-        : emptyNote("Ни у одной записи отрасли нет даты сделки.")}
+          + note(`Все сделки отрасли по дате.${noDate?` У ${noDate} ${plural(noDate,"сделки","сделок","сделок")} из ${all.length} даты нет.`:""}`)
+        : emptyNote("Ни у одной сделки отрасли не указана дата.")}
     </div>
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${rub.length
         ? rub.slice(0,8).map((o,i)=>`<a class="an-deal" href="#/deal/${o.d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${o.d.title}</span></div><span class="an-deal-s num">${sumHtml(o.d.sum)}</span></a>`).join("")
-          + note(`${rub.length===1?"Единственная карточка":`Из ${rub.length} ${plural(rub.length,"карточки","карточек","карточек")}`} отрасли, где цену назвали стороны и она указана в рублях. Валютные и оценочные суммы не участвуют — сложить их корректно нельзя. Суммарно ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
-        : emptyNote("Рублёвых сумм, названных сторонами, в этой отрасли нет — сравнивать нечего.")}
+          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где цену назвали стороны и она указана в рублях. Валютные суммы и оценки экспертов не в счёт — складывать их некорректно. Вместе — ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
+        : emptyNote("Ни по одной сделке отрасли стороны не назвали цену в рублях — сравнивать нечего.")}
     </div>
     <div class="an-card reveal">
       <span class="label">Кто покупает в отрасли</span>
       ${topBuyers.length
         ? topBuyers.map(([id,n])=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")} в отрасли</span></a>`).join("")
-          + note(`Компании, у которых в подробных карточках отрасли не меньше двух покупок. Всего покупателей в отрасли — ${Object.keys(buyerCnt).length}.`)
+          + note(`Компании, которые купили в отрасли не меньше двух раз. Всего покупателей — ${Object.keys(buyerCnt).length}.`)
         : emptyNote(Object.keys(buyerCnt).length
             ? `Ни одна компания не покупала в этой отрасли дважды: ${Object.keys(buyerCnt).length} ${plural(Object.keys(buyerCnt).length,"покупатель","покупателя","покупателей")}, у каждого по одной сделке.`
-            : `Покупатель не назван ни в одной подробной карточке отрасли.`)}
+            : `Ни по одной сделке отрасли покупатель не назван.`)}
     </div>
     <div class="an-card reveal">
       <span class="label">Кто ведёт сделки в отрасли</span>
       ${topFirms.length
         ? topFirms.map(([n,c])=>`<div class="an-row"><span class="an-key">${n}</span><div class="an-bar"><div style="width:${Math.round(c/topFirms[0][1]*100)}%"></div></div><span class="an-val num">${c}</span></div>`).join("")
-          + note(`Консультанты, названные в подробных карточках отрасли. Команда раскрыта у ${cards.filter(d=>realAdv(d).length).length} ${plural(cards.filter(d=>realAdv(d).length).length,"карточки","карточек","карточек")} из ${cards.length} — остальные сделки вели неизвестно кто, и это свойство рынка, а не пробел подсчёта.`)
-        : emptyNote(`Ни в одной из ${cards.length} ${plural(cards.length,"карточки","карточек","карточек")} отрасли консультанты не названы.`)}
+          + note(`Консультанты, названные публично. Известны у ${cards.filter(d=>realAdv(d).length).length} ${plural(cards.filter(d=>realAdv(d).length).length,"сделки","сделок","сделок")} отрасли — по остальным стороны не сказали, кто их вёл.`)
+        : emptyNote(`Ни по одной сделке отрасли стороны не назвали консультантов.`)}
     </div>
     ${topThemes.length?`
     <div class="an-card reveal">
       <span class="label">Сюжеты отрасли</span>
       ${topThemes.map(([t,n])=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/topThemes[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      ${note(`Размечено автоматически по тексту подробных карточек отрасли; у карточки бывает несколько сюжетов.`)}
+      ${note(`Размечено автоматически по тексту сделок; у одной сделки бывает несколько сюжетов.`)}
     </div>`:""}
   </div>
   ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
@@ -2520,7 +2526,7 @@ function renderAnalytics(){
   const yearsAll = Object.entries(byYear).filter(([y])=>y!=="н/д").sort((a,b)=>a[0].localeCompare(b[0]));
   const years = yearsAll.filter(([,n])=>n>=MIN_YEAR_N);
   const yearsThin = yearsAll.filter(([,n])=>n<MIN_YEAR_N);
-  const thinNote = yearsThin.length?`${yearsThin[0][0]}–${yearsThin[yearsThin.length-1][0]} в базе фрагментарно (${yearsThin.reduce((s,[,n])=>s+n,0)} записей) — в график не включены, чтобы не выдавать неполноту базы за динамику рынка.`:"";
+  const thinNote = yearsThin.length?`${yearsThin[0][0]}–${yearsThin[yearsThin.length-1][0]} в базе фрагментарно (${yearsThin.reduce((s,[,n])=>s+n,0)} сделок) — в график не включены, чтобы неполнота базы не выглядела динамикой рынка.`:"";
   const maxY = Math.max(...years.map(([,n])=>n));
   // Знаменатели считаем явно: на одном экране их три (все записи, записи в
   // столбцах графика, подробные карточки), и без подписи читатель берёт не тот.
@@ -2574,56 +2580,56 @@ function renderAnalytics(){
   const maxIM = topIndMoney.length?topIndMoney[0][1].sum:1;
   const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Структура базы «Компаса»: ${all.length} ${plural(all.length,"запись","записи","записей")} из публичных источников — ${DEALS.length} ${plural(DEALS.length,"подробная карточка","подробные карточки","подробных карточек")} и ${all.length-DEALS.length} ${plural(all.length-DEALS.length,"краткая запись","краткие записи","кратких записей")}. Знаменатель у графиков разный, поэтому под каждым написано, что именно посчитано. Не является исчерпывающей статистикой рынка — только то, что попало в базу.</p></div>
+  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${all.length} ${plural(all.length,"сделка","сделки","сделок")} из публичных источников. Графики ниже охватывают разное число сделок — под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
   <div class="an-grid">
     <div class="an-card reveal">
       <span class="label">Сделок по годам</span>
       ${years.map(([y,n],ri)=>`<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все записи базы по дате сделки, и подробные и краткие: в столбцах ${yearsShown} из ${all.length}. ${thinNote}${ndCount?` У ${ndCount} ${plural(ndCount,"записи","записей","записей")} даты нет.`:""}</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все сделки базы по дате: на графике ${yearsShown} из ${all.length}. ${thinNote}${ndCount?` У ${ndCount} ${plural(ndCount,"сделки","сделок","сделок")} даты нет.`:""}</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все записи базы, отрасль проставлена у каждой. Десять крупнейших отраслей из ${Object.keys(byInd).length} — это ${topIndSum} ${plural(topIndSum,"запись","записи","записей")} из ${all.length}, остальные ${all.length-topIndSum} — в прочих отраслях.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все сделки базы: отрасль указана у каждой. Десять крупнейших отраслей из ${Object.keys(byInd).length} — это ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")} из ${all.length}, остальные ${all.length-topIndSum} — в прочих отраслях.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Десять крупнейших из ${rubDisclosed} ${plural(rubDisclosed,"подробной карточки","подробных карточек","подробных карточек")}, где сумма названа сторонами и указана в рублях. Экспертные оценки и стартовые цены торгов не участвуют; сравнение сумм разных лет — условное.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Из ${rubDisclosed} ${plural(rubDisclosed,"сделки","сделок","сделок")}, где цену назвали стороны и она указана в рублях. Оценки экспертов и стартовые цены торгов не в счёт; сравнение сумм разных лет — условное.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Самые активные консультанты в базе</span>
       ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span></div><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Записи, где фирма названа консультантом, — и подробные карточки, и краткие. Из ${FIRMS.length+INV_FIRMS.length} фирм каталога хотя бы одна запись есть у ${firmsWithDeals}. Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сделки, где фирма названа консультантом. Хотя бы одна такая сделка есть у ${firmsWithDeals} фирм каталога из ${FIRMS.length+INV_FIRMS.length}. Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Статусы детальных карточек</span>
       ${Object.entries(statuses).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/DEALS.length*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только подробные карточки — все ${DEALS.length}. У ${all.length-DEALS.length} ${plural(all.length-DEALS.length,"краткой записи","кратких записей","кратких записей")} статуса нет: по короткому сообщению не видно, закрылась сделка или обсуждается.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Статус известен у ${DEALS.length} сделок. У остальных ${all.length-DEALS.length} мы знаем только заголовок и ссылку на источник — по короткому сообщению не видно, закрылась сделка или обсуждается.</p>
     </div>
     ${topBuyers.length?`
     <div class="an-card reveal">
       <span class="label">Серийные покупатели</span>
       ${topBuyers.map(([id,n],i)=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Компании, у которых в подробных карточках не меньше трёх покупок; таких ${serialBuyers.length} из ${Object.keys(buyerCnt).length} покупателей базы. Показаны десять самых частых.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Компании, которые покупали не меньше трёх раз; таких ${serialBuyers.length} из ${Object.keys(buyerCnt).length} покупателей в базе. Показаны десять самых частых.</p>
     </div>`:""}
     ${themeRank.length?`
     <div class="an-card reveal">
       <span class="label">Сюжеты сделок</span>
       ${themeRank.map(([t,n],ri)=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/maxT*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Размечено автоматически по тексту всех ${DEALS.length} подробных карточек; у карточки бывает несколько сюжетов, поэтому в сумме получается больше ${DEALS.length}. Нажмите на сюжет, чтобы открыть ленту с этим фильтром.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Размечено автоматически по тексту сделок; у одной сделки бывает несколько сюжетов, поэтому в сумме получается больше, чем самих сделок. Нажмите на сюжет, чтобы открыть ленту с этим фильтром.</p>
     </div>`:""}
     ${topIndMoney.length?`
     <div class="an-card reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сложены рублёвые суммы ${moneyCards} ${plural(moneyCards,"подробной карточки","подробных карточек","подробных карточек")}, где цену назвали стороны (валютные и оценочные суммы не учитываются). Картина отличается от рейтинга по количеству: несколько мегасделок перевешивают десятки мелких.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сложены рублёвые суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}, где цену назвали стороны (валютные и оценочные суммы не в счёт). Картина отличается от рейтинга по количеству: несколько мегасделок перевешивают десятки мелких.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card reveal">
       <span class="label">Доля сделок с раскрытой суммой</span>
       ${disclYears.map(([y,v],ri)=>{const pct=Math.round(v.d/v.t*100);return `<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${pct}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${pct}%</span></div>`;}).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля карточек года, где сумму назвали стороны: в графике ${disclCards} ${plural(disclCards,"подробная карточка","подробные карточки","подробных карточек")} за годы, в которых их не меньше 20. Экспертные оценки сюда не входят. Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля сделок года, где сумму назвали стороны: в графике ${disclCards} ${plural(disclCards,"сделка","сделки","сделок")} за годы, в которых их не меньше 20. Оценки экспертов сюда не входят. Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
     </div>`:""}
   </div>`;
 }
