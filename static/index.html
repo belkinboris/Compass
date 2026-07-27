@@ -10,9 +10,12 @@
 <meta property="og:description" content="1300+ сделок с первоисточниками, профили компаний, консультанты Право-300. Двойная линза: экономист и юрист.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=IBM+Plex+Sans:wght@400;500;600&subset=cyrillic&display=swap" rel="stylesheet">
+<!-- Шрифты подключались с fonts.googleapis.com — и это не работало: из России
+     домен недоступен, запрос обрывается (ERR_CONNECTION_RESET), страница молча
+     съезжала на запасные шрифты. Внешних CDN у нас быть не должно вовсе, поэтому
+     подключение убрано, а стек ниже собран из шрифтов, которые уже есть в
+     системе. Скачивать и класть шрифты в репозиторий не стали: это +200-400 КБ
+     к странице ради начертания, а первым делом важно, чтобы всё грузилось. -->
 <style>
 :root{
   --paper:#F5F5F1; --card:#FFFFFF; --ink:#15191D; --muted:#66707A;
@@ -21,8 +24,13 @@
   --steel:#33556B; --steel-soft:#E8EEF2;
   --bronze:#A3814E; --bronze-soft:#F2EDE2;
   --radius:4px;
-  --f-display:'Yeseva One',Georgia,serif;
-  --f-body:'IBM Plex Sans',system-ui,sans-serif;
+  /* Только системные шрифты: без загрузки с внешних доменов. Кириллические
+     засечки для заголовков есть в любой из перечисленных систем. */
+  --f-display:'PT Serif','Times New Roman',Georgia,'Liberation Serif',serif;
+  --f-body:system-ui,'Segoe UI','PT Sans',Roboto,'Helvetica Neue',Arial,sans-serif;
+  /* --f-sans использовался в трёх местах, но не был объявлен: поля поиска и
+     фильтров молча брали шрифт браузера, а не страницы. */
+  --f-sans:var(--f-body);
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -87,6 +95,33 @@ nav a:hover{color:var(--ink)}
 nav a.on{color:var(--ink)}
 nav a.on::after,nav a:hover::after{width:100%}
 .wrap{max-width:1120px;margin:0 auto;padding:74px 28px 80px}
+/* На узких экранах пять пунктов меню не помещались в строку и растягивали
+   страницу — появлялся горизонтальный скролл всего документа. Сжимаем шапку
+   и разрешаем самой навигации прокручиваться внутри себя (min-width:0 нужен,
+   чтобы flex-элемент вообще мог сжаться меньше своего содержимого). */
+@media(max-width:720px){
+  .top-in{gap:14px;padding:0 16px}
+  nav{gap:18px;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav::-webkit-scrollbar{display:none}
+  nav a{font-size:11px;letter-spacing:.06em;white-space:nowrap}
+}
+@media(max-width:430px){
+  .wordmark{font-size:18px}
+  nav{gap:14px}
+  nav a{font-size:10.5px;letter-spacing:.03em}
+}
+/* Прочие блоки, распиравшие страницу на мобильных: строка мини-ассистента
+   (кнопка не давала полю сжаться), переключатель типов консультантов и
+   широкая таблица фирм. Ширину ограничиваем, длинное — скроллим внутри блока. */
+@media(max-width:560px){
+  .ask{flex-wrap:wrap}
+  .ask input{flex:1 1 100%;min-width:0}
+  .ask button{flex:1 1 auto;padding:12px 18px}
+  .type-tabs,.lens{display:flex;max-width:100%;overflow-x:auto;scrollbar-width:none}
+  .type-tabs::-webkit-scrollbar,.lens::-webkit-scrollbar{display:none}
+  .type-tabs button,.lens button{flex:0 0 auto;padding:11px 15px;font-size:10.5px;letter-spacing:.05em}
+  .tbl-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
 
 /* ---------- hero ---------- */
 .hero{position:relative;background:#0A1210;color:var(--ivory);margin:0 -28px;padding:0 28px;overflow:hidden;min-height:calc(100vh - 74px);display:flex;align-items:center}
@@ -201,6 +236,24 @@ nav a.on::after,nav a:hover::after{width:100%}
 .firm-inds{margin-top:6px;display:flex;gap:5px;flex-wrap:wrap}
 .related{margin:28px 0;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
 .related>.label{display:block;margin-bottom:8px}
+/* Сюжеты (темы) сделки */
+.theme-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.theme-chip{display:inline-block;font-size:12px;line-height:1.3;padding:5px 11px;border-radius:99px;
+  border:1px solid var(--line);background:var(--card);color:var(--steel);text-decoration:none;transition:all .2s var(--ease)}
+.theme-chip:hover{border-color:var(--accent);color:var(--accent)}
+/* Роль компании в сделке на её странице */
+.role-badge{display:inline-block;font-weight:600;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent);opacity:.8;border-radius:2px;padding:2px 6px;margin-right:2px;vertical-align:1px}
+/* Пустая выдача ленты */
+.feed-empty{padding:34px 30px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card);text-align:center}
+.feed-empty .fe-title{font-family:var(--f-display);font-size:19px;line-height:1.35;color:var(--ink);margin-bottom:10px}
+.feed-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:560px;margin:0 auto}
+.fe-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.fe-actions .chip{cursor:pointer;text-decoration:none}
+.fe-actions .chip:hover{border-color:var(--accent);color:var(--accent)}
+.theme-note{margin:0 0 16px;padding:11px 14px;border:1px solid var(--line);border-left:3px solid var(--bronze);
+  border-radius:6px;background:var(--card);font-size:13px;color:var(--muted);line-height:1.5}
+.theme-note a{color:var(--accent);margin-left:4px}
 .spinner{width:26px;height:26px;border:2.5px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .kind-badge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-right:6px}
@@ -212,6 +265,22 @@ nav a.on::after,nav a:hover::after{width:100%}
 .lens button{padding:11px 24px;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line);transition:all .25s var(--ease)}
 .lens button:last-child{border-right:none}
 .lens button.on{background:var(--accent-deep);color:var(--ivory)}
+/* линза, в которой нечего показать: видно до нажатия, но кликнуть можно */
+.lens button.thin{opacity:.55}
+.lens button.thin:after{content:"·";margin-left:6px;color:var(--bronze);font-weight:700}
+.lens button.thin.on{opacity:1}
+/* честное пустое состояние линзы */
+.lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
+.lens-empty .le-head{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:10px}
+.lens-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:640px}
+.lens-empty .le-foot{margin-top:16px;font-size:13px}
+.le-known{margin-top:20px;padding-top:16px;border-top:1px solid var(--line-soft)}
+.le-known>.label{display:block;margin-bottom:10px}
+.le-row{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.le-row:last-child{border-bottom:none}
+.le-k{flex:0 0 150px;color:var(--muted)}
+.le-v{flex:1;min-width:0;color:var(--ink);overflow-wrap:anywhere}
+@media(max-width:560px){.le-row{flex-direction:column;gap:2px}.le-k{flex:none}}
 .lens button:not(.on):hover{color:var(--ink);background:var(--paper)}
 .facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;animation:fadeUp .4s var(--ease)}
 @media(prefers-reduced-motion:reduce){.facts{animation:none}}
@@ -253,6 +322,48 @@ nav a.on::after,nav a:hover::after{width:100%}
 .dp-link .dp-join{font-size:22px;line-height:1;color:var(--accent);font-weight:400;margin:2px 0}
 .dp-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--muted)}
 .dp-link .dp-sum{font-size:12px;color:var(--muted);white-space:nowrap}
+
+/* ---- поток сделки: ПРОДАВЕЦ → предмет → ПОКУПАТЕЛЬ ----
+   Две стороны сделки — равноправные блоки по краям, предмет лежит на самой
+   линии перехода между ними. Линия рисуется псевдоэлементами .dp-mid, поэтому
+   актив визуально «сидит» на стрелке, а не выглядит третьим блоком в ряд. */
+.dp-flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,1.15fr) minmax(0,1fr);align-items:center}
+.dp-flow.no-asset{grid-template-columns:minmax(0,1fr) minmax(90px,.5fr) minmax(0,1fr)}
+.dp-flow .dp-party{min-width:0}
+.dp-party.is-empty{border-style:dashed;background:transparent}
+.dp-party.is-empty .dp-name{color:var(--muted);font-family:var(--f-sans,inherit);font-size:14px;font-style:italic}
+.dp-mid{position:relative;display:flex;align-items:center;justify-content:center;padding:0 14px;min-height:64px}
+/* горизонтальная линия перехода под активом */
+.dp-mid:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--accent);opacity:.28;
+  transform:scaleX(0);transform-origin:left;animation:wipe .55s var(--ease) .15s both}
+/* остриё стрелки у правого края — «актив уходит к покупателю» */
+.dp-mid:after{content:"";position:absolute;right:-1px;top:calc(50% - 5px);border-top:5px solid transparent;
+  border-bottom:5px solid transparent;border-left:7px solid var(--accent);opacity:0;animation:fin .3s ease .68s forwards}
+.dp-asset{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;
+  padding:11px 15px;border:1px solid var(--accent);border-radius:var(--radius);background:var(--card);max-width:100%;
+  box-shadow:0 2px 10px rgba(29,90,68,.10);animation:fadeUp .45s var(--ease) .3s both}
+.dp-asset.only-sum{border-style:dashed;padding:8px 13px}
+.dp-asset-role{font-weight:600;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);opacity:.85}
+.dp-asset-name{font-family:var(--f-display);font-size:15px;line-height:1.25;color:var(--ink);
+  overflow-wrap:anywhere;text-decoration:none}
+a.dp-asset-name:hover{color:var(--accent)}
+.dp-asset-meta{font-size:11.5px;color:var(--muted);line-height:1.35}
+@media(prefers-reduced-motion:reduce){
+  .dp-mid:before{animation:none;transform:scaleX(1)}
+  .dp-mid:after{animation:none;opacity:1}
+  .dp-asset{animation:none}
+}
+/* На узких экранах поток разворачивается сверху вниз: линия становится
+   вертикальной, стрелка смотрит вниз — порядок чтения «продавец → предмет → покупатель». */
+@media(max-width:680px){
+  .dp-flow,.dp-flow.no-asset{grid-template-columns:1fr;gap:0}
+  .dp-mid{min-height:78px;padding:12px 0}
+  .dp-mid:before{left:50%;right:auto;top:0;bottom:0;height:auto;width:2px;transform:scaleY(0);
+    transform-origin:top;animation-name:wipeY}
+  .dp-mid:after{right:auto;left:calc(50% - 5px);top:auto;bottom:-1px;border-left:5px solid transparent;
+    border-right:5px solid transparent;border-top:7px solid var(--accent);border-bottom:none}
+}
+@keyframes wipeY{to{transform:scaleY(1)}}
 @media(max-width:560px){.dp-row{flex-direction:column}.dp-link{padding:14px 0;min-width:0}.dp-link .dp-arrow{transform:rotate(90deg);min-width:44px;margin:16px 0}}
 
 /* ---------- команда сделки ---------- */
@@ -793,8 +904,35 @@ function matchesCompany(text, id){
   const keys = MATCH_KEYS[id]; if(!keys) return false;
   return keys.some(k=>containsKey(text, k));
 }
+/* Роль компании в конкретной сделке. Раньше профиль искал сделки только по
+   buyer и target, поэтому сделки, где компания была ПРОДАВЦОМ или сама была
+   предметом сделки, на её странице не показывались вовсе: у Сбербанка так
+   пропадало 5 сделок, у АФК «Система» и ВТБ — по 4, всего 139 связей. */
+function companyRole(d, id){
+  if(d.buyer===id) return "Покупатель";
+  if(d.seller_id===id) return "Продавец";
+  if(d.target===id || d.asset_id===id) return "Предмет сделки";
+  return "";
+}
+/* Профиль без единой сделки. Такие профили появились из разбора сторон: в тексте
+   сделки была названа компания или человек, для них завели карточку, но
+   структурной привязки к сделке не возникло. Раньше страница показывала одну
+   строку «Сделок в базе пока нет» и выглядела ошибкой — хотя это не ошибка, а
+   честное состояние: сущность в базе есть, связей у неё пока нет. */
+function companyEmptyHtml(c){
+  return `<div class="lens-empty reveal">
+    <div class="le-head">Сделок, где эта сторона указана явно, в базе пока нет</div>
+    <p>Профиль появился из текста карточек: «${c.name}» упоминается как участник,
+       но ни в одной сделке не проставлен покупателем, продавцом или предметом.
+       Мы не приписываем связи задним числом — пустое здесь честнее.</p>
+    <div class="fe-actions">
+      <a class="chip" href="#/search/${encodeURIComponent(c.name)}">Поискать по названию в ленте</a>
+      <a class="chip" href="#/assistant">Спросить ассистента</a>
+    </div>
+  </div>`;
+}
 function companyDeals(id){
-  const structured = DEALS.filter(d=>d.buyer===id||d.target===id);
+  const structured = DEALS.filter(d=>d.buyer===id||d.target===id||d.seller_id===id||d.asset_id===id);
   const structuredIds = new Set(structured.map(d=>d.id));
   const mentions = [];
   DEALS.forEach(d=>{ if(!structuredIds.has(d.id) && matchesCompany(d.title, id)) mentions.push({date:d.date,title:d.title,url:"#/deal/"+d.id,source:"Карточка «Компаса»"}); });
@@ -883,6 +1021,22 @@ function route(){
   document.querySelectorAll("#nav a").forEach(a=>a.classList.remove("on"));
   const mark = r => {const el=document.querySelector(`[data-r="${r}"]`); if(el) el.classList.add("on");};
   if(page===""||page===undefined){renderDeals();mark("deals");}
+  // «#/theme/<сюжет>» — вход в ленту с уже выставленным фильтром по сюжету.
+  // Имя темы кодируется: в нём бывает «/» («IPO / SPO»), который иначе разрезал бы хэш.
+  else if(page==="theme"){
+    filterTheme = arg?decodeURIComponent(arg):"Все";
+    filterInd="Все"; feedYear="Все"; filterFirm="Все"; feedQuery=""; feedPage=1; advOpen=true;
+    renderDeals(); mark("deals");
+    const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
+  }
+  // «#/search/<запрос>» — лента с уже введённым поиском. Нужен, чтобы на
+  // подборку можно было дать ссылку, а не пересказывать «наберите вот это».
+  else if(page==="search"){
+    feedQuery = arg?decodeURIComponent(arg):"";
+    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; onlyFull=false; feedPage=1;
+    renderDeals(); mark("deals");
+    const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
+  }
   else if(page==="deal"){renderDeal(arg);mark("deals");}
   else if(page==="companies"&&arg){renderCompany(arg);mark("companies");}
   else if(page==="companies"){renderCompanies();mark("companies");}
@@ -1081,7 +1235,27 @@ let onlyFull = false;
 let feedYear = "Все";
 let advOpen = false;
 let filterFirm = "Все";
+let filterTheme = "Все";
 const PAGE_SIZE = 20;
+
+/* Темы сделок. Проставляются офлайн скриптом pipeline/tag_themes.py в поле
+   d.themes у подробных карточек — здесь только порядок вывода и подписи. */
+const THEME_LIST = ["Уход иностранного владельца","Правкомиссия / указ президента",
+  "Национализация / иск Генпрокуратуры","Продажа с торгов","Банкротство / долги",
+  "IPO / SPO","Венчур / раунд","Консолидация доли","Создание СП"];
+const themeCount = t => DEALS.filter(d=>(d.themes||[]).includes(t)).length;
+/* Сумма не раскрыта? В базе встречались варианты регистра («не раскрыта» /
+   «Не раскрыта»), из-за чего точное сравнение с одной строкой не приглушало
+   часть карточек. Проверяем без учёта регистра и ведущих пробелов. */
+const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
+/* русское склонение: 1 карточка / 2 карточки / 5 карточек */
+const plural = (n,one,few,many) => {
+  const a = Math.abs(n)%100, b = a%10;
+  if(a>10&&a<20) return many;
+  if(b>1&&b<5) return few;
+  if(b===1) return one;
+  return many;
+};
 
 const KIND_BADGE_META = {
   acquisition: null, // самый частый тип — не выделяем отдельно, чтобы не шуметь
@@ -1101,7 +1275,7 @@ function unifiedFeed(){
     <a class="deal-row reveal" href="#/deal/${d.id}">
       <div><span class="label num">${fmtDate(d.date)}</span><br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span></div>
       <div><div class="deal-title">${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
-      <div class="deal-meta"><div class="deal-sum num ${d.sum==="Не раскрыта"?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
+      <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
     </a>`,
     mini: m => `
     <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -1129,7 +1303,26 @@ function unifiedFeed(){
     ...BULK_DEALS.map(b=>({kind:"bulk",date:b.date,ind:b.ind,rec:b})),
   ];
   const q = feedQuery.trim().toLowerCase();
-  const matchQ = it => !q || (it.rec.title||"").toLowerCase().includes(q) || (it.rec.role||it.rec.note||"").toLowerCase().includes(q);
+  /* Поиск раньше смотрел только в заголовок, поэтому запрос вроде «Сбербанк» или
+     «АЛРУД» не находил сделки, где сторона/консультант названы не в заголовке,
+     а в структурных полях. Теперь у подробных карточек ищем ещё по названиям
+     сторон, консультантам, отрасли, типу и сюжетам. Индекс считается один раз
+     на карточку и кэшируется на самом объекте. */
+  const searchIndex = it => {
+    const r = it.rec;
+    if(r._sidx !== undefined) return r._sidx;
+    const parts = [r.title||"", r.role||"", r.note||"", it.ind||"", r.type||""];
+    if(it.kind==="full"){
+      const bn = r.buyer&&co(r.buyer)?co(r.buyer).name:"";
+      const tn = r.target&&co(r.target)?co(r.target).name:"";
+      parts.push(bn, tn, (r.themes||[]).join(" "), (r.eco&&r.eco.finadv)||"");
+      if(r.law&&r.law.adv) r.law.adv.forEach(a=>parts.push(a[1]||""));
+    }
+    const v = parts.join(" ").toLowerCase();
+    try{ Object.defineProperty(r,"_sidx",{value:v,enumerable:false}); }catch(e){}
+    return v;
+  };
+  const matchQ = it => !q || searchIndex(it).includes(q);
   const matchY = it => feedYear==="Все" || (feedYear==="до 2023" ? (it.date!=="unknown"&&it.date.slice(0,4)<"2023") : it.date.slice(0,4)===feedYear);
   const matchFirm = it => {
     if(filterFirm==="Все") return true;
@@ -1142,7 +1335,11 @@ function unifiedFeed(){
     if(it.kind==="mini") return it.rec.firm===filterFirm;
     return false; // сделки из телеграм-каналов и bulk-базы не привязаны к конкретному консультанту
   };
-  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it));
+  // Темы размечены только у подробных карточек (см. pipeline/tag_themes.py),
+  // поэтому фильтр по теме автоматически отсекает краткие записи — иначе
+  // выдача молча смешивала бы «нет темы» и «тема не размечалась».
+  const matchTheme = it => filterTheme==="Все" || (it.kind==="full" && (it.rec.themes||[]).includes(filterTheme));
+  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchTheme(it));
   filtered.sort((a,b)=>{
     if(a.date==="unknown") return 1;
     if(b.date==="unknown") return -1;
@@ -1161,13 +1358,55 @@ function feedListHtml(){
   const shown = allRows.slice(0, feedPage*PAGE_SIZE);
   if(!bulkLoaded) return `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
   return `
+  ${filterTheme!=="Все"?`<div class="reveal theme-note">Сюжет: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Сюжеты размечены автоматически по тексту карточки, поэтому в выдаче только подробные карточки. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
-  ${allRows.length?"":`<p class="reveal" style="color:var(--muted)">В этой отрасли сделок в базе пока нет — фильтр честный, ничего не прячем.</p>`}
+  ${allRows.length?"":emptyFeedHtml()}
   ${allRows.length>shown.length?`<div class="reveal" style="text-align:center;margin:18px 0"><button class="chip" id="loadmore" style="padding:10px 22px">Показать ещё (осталось ${allRows.length-shown.length})</button></div>`:""}`;
+}
+/* Пустая выдача: раньше при любом сочетании фильтров показывалось «В этой отрасли
+   сделок в базе пока нет», даже когда отрасль не выбиралась вовсе, а пусто было
+   из-за текстового запроса. Теперь называем настоящую причину и даём сбросить
+   именно её — иначе пользователь не понимает, что именно отсекло выдачу. */
+function emptyFeedHtml(){
+  const active = [];
+  if(feedQuery.trim()) active.push({k:"q", t:`запрос «${esc(feedQuery.trim())}»`});
+  if(filterInd!=="Все") active.push({k:"ind", t:`отрасль «${filterInd}»`});
+  if(feedYear!=="Все") active.push({k:"year", t:`год ${feedYear}`});
+  if(filterTheme!=="Все") active.push({k:"theme", t:`сюжет «${filterTheme}»`});
+  if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
+  if(onlyFull) active.push({k:"fmt", t:"только подробные карточки"});
+  const head = active.length
+    ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
+    : "В базе пока нет ни одной записи.";
+  return `<div class="feed-empty reveal">
+    <div class="fe-title">${head}</div>
+    <p>База неполная и мы этого не скрываем: в ней только сделки, попавшие в публичные источники.
+       Попробуйте снять часть условий — или спросите ассистента, он ищет ещё и по интернету.</p>
+    <div class="fe-actions">
+      ${active.length?`<button class="chip" id="feedreset">Сбросить все фильтры</button>`:""}
+      <a class="chip" href="#/assistant">Спросить ассистента</a>
+    </div>
+  </div>`;
 }
 function bindFeedListEvents(){
   const lm = document.getElementById("loadmore");
   if(lm) lm.onclick = ()=>{feedPage++;renderFeedList();};
+  const ct = document.getElementById("clrtheme");
+  if(ct) ct.onclick = e=>{
+    e.preventDefault();
+    filterTheme="Все"; feedPage=1;
+    const sel=document.getElementById("seltheme"); if(sel) sel.value="Все";
+    renderFeedList();
+  };
+  const fr = document.getElementById("feedreset");
+  if(fr) fr.onclick = ()=>{
+    feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все";
+    onlyFull=false; feedPage=1;
+    const q=document.getElementById("feedq"); if(q) q.value="";
+    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selfmt","Все записи"]]
+      .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
+    renderFeedList();
+  };
 }
 function renderFeedList(){
   const el = document.getElementById("feedlist");
@@ -1249,6 +1488,9 @@ function renderDeals(){
     <label>Консультант
       <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
     </label>
+    <label>Сюжет сделки
+      <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
+    </label>
   </div>
   <div id="feedlist">${feedListHtml()}</div>
   <div class="cta reveal">
@@ -1282,6 +1524,7 @@ function renderDeals(){
   bindSel("selyear", v=>feedYear=v);
   bindSel("selfmt", v=>onlyFull=(v!=="Все записи"));
   bindSel("selfirm", v=>filterFirm=v);
+  bindSel("seltheme", v=>filterTheme=v);
   const go=()=>{const v=document.getElementById("heroq").value.trim();if(v){sessionStorage.setItem("pendingQ",v);location.hash="#/assistant";}};
   document.getElementById("herogo").onclick=go;
   document.getElementById("heroq").addEventListener("keydown",e=>{if(e.key==="Enter")go();});
@@ -1387,6 +1630,107 @@ function dealKindOf(typeStr){
   if(/финансирован|венчурн|раунд|\bseed\b|допэмисси/.test(t)) return "financing";
   return "acquisition";
 }
+/* Подбор сопоставимых сделок.
+   Раньше блок показывал просто 3 самые свежие карточки той же отрасли — из-за
+   чего у всех сделок одной отрасли список был одинаковым и бесполезным.
+   Теперь считаем релевантность: общая сторона сделки > совпавший сюжет >
+   та же отрасль > тот же тип > близость по дате. Раскрытая сумма даёт небольшой
+   бонус: как ориентир для сравнения такая карточка полезнее. */
+function relatedScore(d, x){
+  let s = 0;
+  const parties = new Set([d.buyer, d.target].filter(Boolean));
+  if(parties.size){
+    if(x.buyer && parties.has(x.buyer)) s += 50;
+    if(x.target && parties.has(x.target)) s += 50;
+  }
+  const th = new Set(d.themes||[]);
+  if(th.size) s += 22 * (x.themes||[]).filter(t=>th.has(t)).length;
+  if(x.ind === d.ind) s += 18;
+  if(x.type === d.type) s += 8;
+  else if(dealKindOf(x.type) === dealKindOf(d.type)) s += 4;
+  const y1 = parseInt((d.date||"").slice(0,4),10), y2 = parseInt((x.date||"").slice(0,4),10);
+  if(!isNaN(y1) && !isNaN(y2)){
+    const gap = Math.abs(y1-y2);
+    s += gap===0 ? 10 : gap===1 ? 6 : gap===2 ? 3 : 0;
+  }
+  if(x.sum && !undisclosed(x.sum)) s += 3;
+  return s;
+}
+// «Дополнительная информация» долгое время была дословной копией «Цели сделки»
+// у 678 карточек из 1333: один и тот же абзац читался дважды — на «Обзоре» под
+// расплывчатым заголовком и на линзе «Экономист» под точным. Показываем блок,
+// только если он действительно добавляет что-то к «Цели сделки».
+function extraHtml(d){
+  const norm = t => String(t||"").replace(/\s+/g," ").trim().toLowerCase();
+  const ex = norm(d.extra), goal = norm(d.eco && d.eco.rationale);
+  if(!ex) return "";
+  // не только полное совпадение: после чистки одно поле могло стать началом
+  // другого, а видеть тот же текст с обрезанным хвостом ничем не лучше
+  if(goal && goal !== "—" && (ex === goal || ex.startsWith(goal) || goal.startsWith(ex))) return "";
+  return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
+}
+function relatedHtml(d){
+  const MIN_SCORE = 18; // ниже — уже не «похожая», а случайная карточка
+  const rel = DEALS.filter(x=>x.id!==d.id)
+    .map(x=>({x, s:relatedScore(d,x)}))
+    .filter(o=>o.s>=MIN_SCORE)
+    .sort((a,b)=>b.s-a.s || (b.x.date||"").localeCompare(a.x.date||""))
+    .slice(0,5);
+  if(!rel.length) return "";
+  const why = o => {
+    const parties = new Set([d.buyer,d.target].filter(Boolean));
+    if(o.x.buyer&&parties.has(o.x.buyer)||o.x.target&&parties.has(o.x.target)) return "та же сторона";
+    const shared = (o.x.themes||[]).filter(t=>(d.themes||[]).includes(t));
+    if(shared.length) return shared[0].toLowerCase();
+    if(o.x.ind===d.ind) return d.ind.toLowerCase();
+    return capType(o.x.type).toLowerCase();
+  };
+  return `<div class="related reveal"><span class="label">Похожие сделки</span>
+    ${rel.map(o=>`<a class="an-deal" href="#/deal/${o.x.id}">
+      <div class="an-deal-head"><span class="an-deal-t">${o.x.title}</span></div>
+      <span class="an-deal-s num">${o.x.sum&&!undisclosed(o.x.sum)?o.x.sum:fmtDate(o.x.date)} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
+    </a>`).join("")}
+    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Подбор автоматический: общие стороны сделки, сюжет, отрасль, тип и близость по времени.</p>
+  </div>`;
+}
+
+/* Линза «Юрист».
+   Юридические поля публично раскрываются редко: полностью пусты 1078 из 1333
+   карточек (80%). Раньше линза в этом случае показывала две строки —
+   «Согласования: публично не сообщалось» и «Юридические консультанты: публично
+   не раскрывались», — и выглядела сломанной. Теперь один раз честно говорим,
+   что раскрыто не было, и отдаём то, что юристу реально пригодится: стороны,
+   долю, сумму и ссылки на первоисточники, по которым он проверит сам. */
+const realAdv = d => (d.law && d.law.adv || []).filter(a =>
+  a[1] && !/не раскрыв|не привлекал/i.test(a[1]));
+const lawHasContent = d => {
+  const has = v => v && !/^(?:—|-)$/.test(String(v).trim()) &&
+    !/не раскрыт|публично не сообщал|не привлекал/i.test(String(v));
+  return has(d.law && d.law.struct) || has(d.law && d.law.appr) ||
+         has(d.law && d.law.terms) || realAdv(d).length > 0;
+};
+function lawEmptyHtml(d){
+  const known = [];
+  const cn = id => (id && co(id)) ? co(id).name : null;
+  const buyer = cn(d.buyer), seller = d.seller_id ? cn(d.seller_id) : (d.seller || null);
+  if(seller) known.push(["Продавец", seller]);
+  if(buyer) known.push(["Покупатель", buyer]);
+  const asset = cn(d.target) || d.asset;
+  if(asset) known.push(["Предмет сделки", asset + (d.asset_share?` · ${d.asset_share}`:"")]);
+  if(d.sum && !undisclosed(d.sum)) known.push(["Сумма", d.sum]);
+  if(d.status) known.push(["Статус", d.status]);
+  return `<div class="lens-empty">
+    <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
+    <p>Ни структура сделки, ни согласования, ни условия, ни консультанты не были
+       названы в открытых источниках. Мы не достраиваем такие поля догадками —
+       пустое здесь честнее правдоподобного текста.</p>
+    ${known.length?`<div class="le-known"><span class="label">Что известно о сделке</span>
+      ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
+    </div>`:""}
+    <p class="le-foot">Проверить детали можно по первоисточникам — они перечислены внизу карточки${d.src&&d.src.length?` (${d.src.length})`:""}.</p>
+  </div>`;
+}
+
 function renderDeal(id){
   const d = DEALS.find(x=>x.id===id); if(!d){renderDeals();return;}
   lens = "overview";
@@ -1411,16 +1755,16 @@ function renderDeal(id){
     </div>
     <h1>${d.title}</h1>
     <div class="d-parties"><span>Тип: <b>${capType(d.type)}</b></span></div>
+    ${(d.themes||[]).length?`<div class="theme-chips">${d.themes.map(t=>`<a class="theme-chip" href="#/theme/${encodeURIComponent(t)}" title="Показать все сделки с этим сюжетом">${t}</a>`).join("")}</div>`:""}
   </div>
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
     <button data-l="overview" class="on">Обзор</button>
     <button data-l="eco">Экономист</button>
-    <button data-l="law">Юрист</button>
+    <button data-l="law"${lawHasContent(d)?"":' class="thin" title="Юридические детали по этой сделке публично не раскрывались"'}>Юрист</button>
   </div>
   <div id="facts" class="reveal"></div>
-  ${d.extra?`<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`:""}
-  ${(()=>{const rel=DEALS.filter(x=>x.id!==d.id&&x.ind===d.ind).sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,3);
-    return rel.length?`<div class="related reveal"><span class="label">Похожие сделки · ${d.ind}</span>${rel.map(r=>`<a class="an-deal" href="#/deal/${r.id}"><span class="an-deal-t">${r.title}</span><span class="an-deal-s num">${fmtDate(r.date)}</span></a>`).join("")}</div>`:"";})()}
+  ${extraHtml(d)}
+  ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   const paint = ()=>{
@@ -1433,12 +1777,12 @@ function renderDeal(id){
 
     /* --- плашка структуры сделки: раскладка зависит от ТИПА сделки --- */
     const dealPlate = ()=>{
-      if(!buyerName || !targetName) return "";
       const share = has(d.eco&&d.eco.share) && d.eco.share.length<40 ? d.eco.share : "";
-      const sum = has(d.sum) && !/не раскрыт/i.test(d.sum) ? d.sum : "";
+      const sum = has(d.sum) && !undisclosed(d.sum) ? d.sum : "";
       const party = (role,idKey,name)=>`<div class="dp-party"><span class="dp-role">${role}</span><a class="dp-name" href="#/companies/${idKey}">${name}</a></div>`;
 
       if(kindKey==="jv"){
+        if(!buyerName || !targetName) return "";
         // у СП нет покупателя и продавца — есть равноправные участники;
         // вместо стрелки — знак соединения, сумма подписывается как вклад.
         // Распределение долей — самое ценное в СП, показываем полнее (до 120 симв.)
@@ -1451,10 +1795,56 @@ function renderDeal(id){
           </div>${jvShare?`<div class="dp-foot num">${jvShare}</div>`:""}</div>`;
       }
       if(!kind.arrow) return "";
+
+      /* Покупка: у сделки три роли — кто продал, ЧТО продали и кто купил.
+         Раньше плашка показывала только «Покупатель → Цель», из-за чего продавец —
+         полноценная сторона сделки — вообще нигде не отображался. Теперь по краям
+         стоят две стороны (продавец и покупатель), а предмет сделки лежит на самой
+         линии перехода: актив буквально переходит слева направо. */
+      if(kindKey==="acquisition"){
+        const hasSeller = !!(d.seller || (d.seller_id && co(d.seller_id)));
+        // Плашка бессмысленна, только если не известна вообще ни одна роль
+        if(!buyerName && !hasSeller && !targetName) return "";
+        const sellerBox = d.seller_id && co(d.seller_id)
+          ? party("Продавец", d.seller_id, co(d.seller_id).name)
+          : d.seller
+            ? `<div class="dp-party"><span class="dp-role">Продавец</span><span class="dp-name">${d.seller}</span></div>`
+            : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
+        const buyerBox = buyerName
+          ? party("Покупатель", d.buyer, buyerName)
+          : `<div class="dp-party is-empty"><span class="dp-role">Покупатель</span><span class="dp-name">Не раскрыт</span></div>`;
+        // предмет сделки: карточка компании, иначе название, вытащенное из
+        // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
+        const assetName = targetName || d.asset || share || "";
+        // Предмет сделки ссылается на профиль компании: либо это target, либо
+        // текстовое название, которое удалось сопоставить с профилем (asset_id).
+        // Без второй ветки актив, вынесенный из target при разборе ролей, терял
+        // ссылку и оставался просто текстом.
+        const assetRef = (targetName && d.target) ? d.target
+                       : (d.asset && d.asset_id && co(d.asset_id)) ? d.asset_id : null;
+        const assetLink = assetRef;
+        const assetMeta = [targetName&&share?share:(d.asset_share||""), sum].filter(Boolean).join(" · ");
+        const asset = assetName ? `
+          <div class="dp-asset">
+            <span class="dp-asset-role">Предмет сделки</span>
+            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${assetName}</a>`
+                       :`<span class="dp-asset-name">${assetName}</span>`}
+            ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
+          </div>` : (sum?`<div class="dp-asset only-sum"><span class="dp-asset-meta num">${sum}</span></div>`:"");
+        return `<div class="deal-plate"><span class="label">Структура сделки</span>
+          <div class="dp-flow${asset?"":" no-asset"}">
+            ${sellerBox}
+            <div class="dp-mid">${asset}</div>
+            ${buyerBox}
+          </div>
+          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Приобретаемый актив отдельной карточки компании не имеет — см. «Предмет / доля» в линзе «Экономист».</div>`:""}
+        </div>`;
+      }
+
+      if(!buyerName || !targetName) return "";
       const roles = kindKey==="credit" ? ["Кредитор","Заёмщик"]
                   : kindKey==="structured" ? ["Финансирующая сторона","Получатель финансирования"]
-                  : kindKey==="financing" ? ["Инвестор","Получатель инвестиций"]
-                  : ["Покупатель","Приобретаемая компания"];
+                  : ["Инвестор","Получатель инвестиций"];
       return `<div class="deal-plate"><span class="label">Структура сделки</span>
         <div class="dp-row">
           ${party(roles[0], d.buyer, buyerName)}
@@ -1503,21 +1893,18 @@ function renderDeal(id){
       ])}
       ${para("Цель сделки", d.eco.rationale)}
       ${para("Контекст", d.eco.context)}`;
-    else if(lens==="law") f.innerHTML = `
+    else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${para("Структура", d.law.struct)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
       ${ownership()}
-      ${d.law.adv.map(a=>{
-        // заглушка «консультанты не раскрывались» не должна читаться как
-        // «СТОРОНЫ сделки не раскрывались» — подписываем её правильно
-        const isPh = /не раскрыв/i.test(a[1]||"");
-        return `
-        <div class="adv-card${isPh?" muted":""}">
-          <span class="label">${isPh?"Юридические консультанты":a[0]}</span>
-          <div class="adv-name">${isPh?"Публично не раскрывались":a[1]}</div>
-          ${!isPh&&a[2]?`<p>${a[2]}</p>`:""}
-        </div>`;}).join("")}
-      ${para("Условия и особенности (из публичных данных)", d.law.terms)}`;
+      ${realAdv(d).map(a=>`
+        <div class="adv-card">
+          <span class="label">${a[0]}</span>
+          <div class="adv-name">${a[1]}</div>
+          ${a[2]?`<p>${a[2]}</p>`:""}
+        </div>`).join("")}
+      ${para("Условия и особенности (из публичных данных)", d.law.terms)}`
+      : lawEmptyHtml(d);
     else f.innerHTML = `
       ${hero("Сумма", d.sum)}
       ${dealPlate()}
@@ -1620,14 +2007,23 @@ function renderCompany(id){
   <div class="facts reveal" style="margin-bottom:36px">
     <div class="fact"><span class="label">${c.kpi[0]}</span><div class="val big num" style="font-size:17px">${c.kpi[1]}</div></div>
     <div class="fact"><span class="label">Сделок в базе</span><div class="val big num">${structured.length+mentions.length}</div></div>
+    ${(()=>{
+      const asBuyer = DEALS.filter(d=>d.buyer===id).length;
+      const asTarget = DEALS.filter(d=>d.target===id).length;
+      if(!asBuyer && !asTarget) return "";
+      return `<div class="fact"><span class="label">Роль в сделках</span><div class="val num" style="font-size:15px">${
+        [asBuyer?`покупатель — ${asBuyer}`:"", asTarget?`объект/продавец — ${asTarget}`:""].filter(Boolean).join("<br>")
+      }</div></div>`;
+    })()}
   </div>
   ${structured.length?`
   <div class="sec-head reveal" style="margin-top:0"><h1 style="font-size:23px">Подробные карточки</h1></div>
   ${structured.map(d=>`
   <a class="deal-row reveal" href="#/deal/${d.id}">
     <div><span class="label num">${fmtDate(d.date)}</span></div>
-    <div><div class="deal-title" style="font-size:17px">${d.title}</div><div class="deal-sub">${d.type}</div></div>
-    <div class="deal-meta"><div class="deal-sum num ${d.sum==="Не раскрыта"?"na":""}">${d.sum}</div></div>
+    <div><div class="deal-title" style="font-size:17px">${d.title}</div>
+      <div class="deal-sub">${(()=>{const r=companyRole(d,id);return r?`<span class="role-badge">${r}</span> `:"";})()}${d.type}</div></div>
+    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div></div>
   </a>`).join("")}`:""}
   ${mentions.length?`
   <div class="sec-head reveal" style="margin-top:${structured.length?'46px':'0'}"><h1 style="font-size:23px">Также упоминается</h1><p style="margin-top:6px">Найдено автоматическим поиском по названию компании во всей базе. Может быть неточным — сверяйтесь с первоисточником по ссылке.</p></div>
@@ -1636,7 +2032,7 @@ function renderCompany(id){
     <div><span class="label num">${fmtDate(m.date)}</span></div>
     <div><div class="deal-title" style="font-size:16px">${m.title}</div><div class="deal-sub">Источник: ${m.source}${m.url.startsWith('#')?'':' ↗'}</div></div>
   </a>`).join("")}`:""}
-  ${(structured.length+mentions.length)?"":"<p class='reveal' style='color:var(--muted)'>Сделок в базе пока нет.</p>"}
+  ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   mountMiniAI(c.name);
 }
@@ -1659,7 +2055,7 @@ function renderAdvisors(){
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
       <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
     </div>
-    <table class="tbl reveal">
+    <div class="tbl-wrap"><table class="tbl reveal">
       <thead><tr><th>Фирма</th><th>Группы Право-300 (Корп/M&A)</th><th>Сделки в базе</th></tr></thead>
       <tbody>
       ${rows.map(r=>`<tr>
@@ -1668,10 +2064,10 @@ function renderAdvisors(){
         <td style="width:22%">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${r.n===1?"сделка":r.n<5?"сделки":"сделок"} →</a>`:`<span class="count-btn empty">—</span>`}</td>
       </tr>`).join("")}
       </tbody>
-    </table>`;
+    </table></div>`;
   } else if(advType==="invest"){
     body = `
-    <table class="tbl reveal">
+    <div class="tbl-wrap"><table class="tbl reveal">
       <thead><tr><th>Консультант</th><th>Профиль</th><th>Сделки в базе</th></tr></thead>
       <tbody>
       ${INV_FIRMS.map(f=>{const n=firmCount(f.id);return `<tr>
@@ -1680,7 +2076,7 @@ function renderAdvisors(){
         <td style="width:22%">${n?`<a class="count-btn" href="#/advisors/${f.id}">${n} ${n===1?"сделка":n<5?"сделки":"сделок"} →</a>`:`<span class="count-btn empty">—</span>`}</td>
       </tr>`;}).join("")}
       </tbody>
-    </table>`;
+    </table></div>`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет — честно показываем пустоту, а не выдумываем.</p>`;
   }
@@ -1729,7 +2125,7 @@ function renderFirm(id){
       <div class="deal-title" style="font-size:17px">${d.title}</div>
       <div class="deal-sub">${role?role[0]:""}${role&&role[2]?` — ${role[2]}`:""}</div>
     </div>
-    <div class="deal-meta"><div class="deal-sum num ${d.sum==="Не раскрыта"?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
+    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
   </a>`;}).join("")}
   ${mini.map(m=>`
   <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -1776,10 +2172,40 @@ function renderAnalytics(){
   const topInd = Object.entries(byInd).sort((a,b)=>b[1]-a[1]).slice(0,10);
   const maxI = topInd.length?topInd[0][1]:1;
   const parseB = s => {const m=(s||"").replace(",",".").match(/([\d.]+)\s*млрд/); return m?parseFloat(m[1]):0;};
-  const topSum = DEALS.map(d=>({...d,_b:parseB(d.sum)})).filter(d=>d._b>0).sort((a,b)=>b._b-a._b).slice(0,10);
+  // В карточку «по раскрытой сумме» не должны попадать экспертные оценки и стартовые
+  // цены торгов: это не раскрытая сторонами цена, а чужая прикидка.
+  const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
+  const topSum = DEALS.map(d=>({...d,_b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(d=>d._b>0).sort((a,b)=>b._b-a._b).slice(0,10);
   const statuses = {};
   DEALS.forEach(d=>{statuses[d.status]=(statuses[d.status]||0)+1;});
   const firmRank = FIRMS.map(f=>({id:f.id,n:f.n,c:firmCount(f.id)})).filter(f=>f.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
+  // Серийные покупатели: кто чаще всех выступает покупателем в базе
+  const buyerCnt = {};
+  DEALS.forEach(d=>{if(d.buyer) buyerCnt[d.buyer]=(buyerCnt[d.buyer]||0)+1;});
+  const topBuyers = Object.entries(buyerCnt).filter(([id,n])=>n>=3&&co(id))
+    .sort((a,b)=>b[1]-a[1]).slice(0,10);
+  // Раскрытие сумм по годам — показатель прозрачности рынка, а заодно честности базы
+  const discl = {};
+  DEALS.forEach(d=>{
+    const y=(d.date||"").slice(0,4); if(!/^20\d\d$/.test(y)) return;
+    discl[y]=discl[y]||{t:0,d:0}; discl[y].t++;
+    if(!undisclosed(d.sum)) discl[y].d++;
+  });
+  const disclYears = Object.entries(discl).filter(([,v])=>v.t>=20).sort((a,b)=>a[0].localeCompare(b[0]));
+  // Сюжеты сделок
+  const themeRank = THEME_LIST.map(t=>[t,themeCount(t)]).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]);
+  const maxT = themeRank.length?themeRank[0][1]:1;
+  // Отрасли по деньгам — картина принципиально другая, чем по количеству сделок
+  const indMoney = {};
+  DEALS.forEach(d=>{
+    if(isEstimate(d.sum)) return;
+    const b = parseB(d.sum); if(!b || !d.ind) return;
+    indMoney[d.ind] = indMoney[d.ind] || {sum:0,n:0};
+    indMoney[d.ind].sum += b; indMoney[d.ind].n++;
+  });
+  const topIndMoney = Object.entries(indMoney).sort((a,b)=>b[1].sum-a[1].sum).slice(0,10);
+  const maxIM = topIndMoney.length?topIndMoney[0][1].sum:1;
+  const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
   <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Структура базы «Компаса»: ${TOTAL_DEALS()} сделок из публичных источников. Не является исчерпывающей статистикой рынка — только то, что попало в базу.</p></div>
   <div class="an-grid">
@@ -1806,6 +2232,30 @@ function renderAnalytics(){
       <span class="label">Статусы детальных карточек</span>
       ${Object.entries(statuses).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/DEALS.length*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
     </div>
+    ${topBuyers.length?`
+    <div class="an-card reveal">
+      <span class="label">Серийные покупатели</span>
+      ${topBuyers.map(([id,n],i)=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")}</span></a>`).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Компании, которые чаще всего выступают покупателем в подробных карточках базы (от 3 сделок).</p>
+    </div>`:""}
+    ${themeRank.length?`
+    <div class="an-card reveal">
+      <span class="label">Сюжеты сделок</span>
+      ${themeRank.map(([t,n],ri)=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/maxT*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Размечено автоматически по тексту подробных карточек. Нажмите на сюжет, чтобы открыть ленту с этим фильтром.</p>
+    </div>`:""}
+    ${topIndMoney.length?`
+    <div class="an-card reveal">
+      <span class="label">Отрасли по сумме сделок</span>
+      ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><span class="an-key">${i}</span><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сумма раскрытых цен сделок в рублях (валютные и оценочные суммы не учитываются). Картина отличается от рейтинга по количеству: несколько мегасделок перевешивают десятки мелких.</p>
+    </div>`:""}
+    ${disclYears.length?`
+    <div class="an-card reveal">
+      <span class="label">Доля сделок с раскрытой суммой</span>
+      ${disclYears.map(([y,v],ri)=>{const pct=Math.round(v.d/v.t*100);return `<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${pct}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${pct}%</span></div>`;}).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Считается по подробным карточкам (годы, где их не меньше 20). Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
+    </div>`:""}
   </div>`;
 }
 
