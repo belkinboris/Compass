@@ -2120,8 +2120,22 @@ function renderDeal(id){
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
 
     /* --- плашка структуры сделки: раскладка зависит от ТИПА сделки --- */
+    /* Короткое значение «Предмет / доля» плашка показывает как название актива,
+       длинное — нет, иначе в плашку уехал бы абзац. Отсюда же берётся ответ на
+       вопрос, называет ли плашка предмет: от этого зависит, нужна ли на «Обзоре»
+       отдельная строка «Предмет» (см. ниже). Считаем один раз, чтобы условие в
+       двух местах не разъехалось. */
+    const shortShare = has(d.eco&&d.eco.share) && d.eco.share.length<40 ? d.eco.share : "";
+    const hasSeller = !!(d.seller || (d.seller_id && co(d.seller_id)));
+    /* Плашка называет предмет ТОЛЬКО у покупки: у IPO, СП, кредита и раунда
+       финансирования по краям стоят стороны, а отдельной ячейки «Предмет
+       сделки» нет вовсе. Без этой оговорки строка пряталась бы у 44 карточек,
+       где предмет на «Обзоре» больше взять неоткуда. */
+    const assetNamed = kindKey==="acquisition"
+      && !!(targetName || d.asset || shortShare)
+      && !!(buyerName || hasSeller || targetName);
     const dealPlate = ()=>{
-      const share = has(d.eco&&d.eco.share) && d.eco.share.length<40 ? d.eco.share : "";
+      const share = shortShare;
       const sum = has(d.sum) && !undisclosed(d.sum) ? d.sum : "";
       const party = (role,idKey,name)=>`<div class="dp-party"><span class="dp-role">${role}</span><a class="dp-name" href="#/companies/${idKey}">${name}</a></div>`;
 
@@ -2146,7 +2160,6 @@ function renderDeal(id){
          стоят две стороны (продавец и покупатель), а предмет сделки лежит на самой
          линии перехода: актив буквально переходит слева направо. */
       if(kindKey==="acquisition"){
-        const hasSeller = !!(d.seller || (d.seller_id && co(d.seller_id)));
         // Плашка бессмысленна, только если не известна вообще ни одна роль
         if(!buyerName && !hasSeller && !targetName) return "";
         const sellerBox = d.seller_id && co(d.seller_id)
@@ -2254,7 +2267,17 @@ function renderDeal(id){
       ${dealPlate()}
       ${dealTeam()}
       ${specBlock([
-        specRow("Предмет", d.eco.share),
+        /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
+           Иначе одно и то же читается дважды: сначала плашка «Продавец →
+           Предмет сделки → Покупатель», через строку — тот же предмет абзацем.
+           Так было у 249 карточек из 307, у которых поле заполнено: медиана
+           значения 206 знаков, максимум 599 — и весь этот текст висел на
+           экране, который обещает «главное». Ровно этим же соображением раньше
+           убрали отсюда «Согласования».
+           У 58 карточек строка остаётся: где-то предмет структурно не разобран,
+           а у IPO, СП, кредитов и раундов плашка предмет и не показывает — там
+           это единственный ответ на вопрос «что купили». */
+        specRow("Предмет", assetNamed ? "" : d.eco.share),
         specRow("Статус", d.status),
       ])}`;
       /* «Согласования» отсюда убраны: то же значение стояло и на «Обзоре», и в
