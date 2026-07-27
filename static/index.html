@@ -269,6 +269,9 @@ nav a.on::after,nav a:hover::after{width:100%}
   border-radius:6px;background:var(--card);font-size:13px;color:var(--muted);line-height:1.5}
 .theme-note a{color:var(--accent);margin-left:4px}
 .spinner{width:26px;height:26px;border:2.5px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
+.loading{padding:64px 26px;text-align:center}
+.loading .l-head{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:10px}
+.loading p{color:var(--muted);font-size:14px;line-height:1.6;max-width:460px;margin:0 auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 .kind-badge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-right:6px}
 .badge-credit{background:#E4EBF2;color:#3A5A85}
@@ -400,20 +403,6 @@ a.dp-asset-name:hover{color:var(--accent)}
 .team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
 
 /* ---------- цепочка владения ---------- */
-.own{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-bottom:28px;animation:fadeUp .5s var(--ease)}
-.own>.label{display:block;margin-bottom:4px}
-.own-asof{font-size:11.5px;color:var(--muted);margin-bottom:16px}
-.own-chain{position:relative;padding-left:22px}
-.own-chain:before{content:"";position:absolute;left:7px;top:10px;bottom:12px;width:2px;background:var(--line)}
-.own-node{position:relative;padding:8px 0 8px 14px}
-.own-node:before{content:"";position:absolute;left:-19px;top:16px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--card)}
-.own-node.opaque:before{background:var(--card);border:2px solid var(--bronze)}
-.own-node .o-name{font-weight:600;font-size:14px}
-.own-node .o-meta{font-size:12px;color:var(--muted);margin-top:2px}
-.own-node .o-share{color:var(--accent);font-weight:600}
-.own-node.opaque .o-name{color:var(--bronze)}
-.own-conflict{margin-top:14px;padding:10px 14px;background:var(--bronze-soft);border-left:2.5px solid var(--bronze);font-size:12.5px;border-radius:0 var(--radius) var(--radius) 0}
-.own-src{font-size:11.5px;color:var(--muted);margin-top:12px}
 .adv-card .label{margin-bottom:6px}
 .adv-card .adv-name{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:6px}
 .adv-card p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;max-width:600px}
@@ -1047,6 +1036,20 @@ async function loadBulkDeals(){
 }
 loadBulkDeals();
 
+/* Пока не пришли deals_promoted.json и bulk_deals.json (4,7 МБ), в базе только
+   19 захардкоженных карточек и 36 компаний из 1352 и 1882. Раньше по ним молча
+   считались все экраны: «Аналитика» писала «54 записи — 19 подробных карточек»
+   и рисовала девять графиков с этими знаменателями, каталог — «36 компаний в
+   базе». Число, которое секунду врёт, хуже честного ожидания (принцип 2), а
+   индикатор был только в ленте. */
+function loadingHtml(what){
+  return `<div class="loading reveal">
+    <div class="spinner"></div>
+    <div class="l-head">Загружаем базу сделок</div>
+    <p>${what} появятся, когда база догрузится: это 4,7 МБ одним файлом.
+       Показывать цифры по неполной базе мы не будем — они были бы неверными.</p>
+  </div>`;
+}
 function route(){
   const h = location.hash.replace("#","") || "/";
   const [_,page,arg] = h.split("/");
@@ -1074,12 +1077,42 @@ function route(){
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
-  else if(page==="deal"){renderDeal(arg);mark("deals");}
-  else if(page==="companies"&&arg){renderCompany(arg);mark("companies");}
-  else if(page==="companies"){renderCompanies();mark("companies");}
-  else if(page==="advisors"&&arg){renderFirm(arg);mark("advisors");}
-  else if(page==="advisors"){renderAdvisors();mark("advisors");}
-  else if(page==="analytics"){renderAnalytics();mark("analytics");}
+  // Ссылка на карточку, открытая «на холодную», раньше молча уводила в ленту:
+  // сделки ещё нет в DEALS, и renderDeal падал в renderDeals(). Пришедшая от
+  // коллеги ссылка выглядела сломанной. Теперь ждём базу и дорисовываем.
+  // Ждём базу целиком, даже если сама сущность уже есть в захардкоженных данных:
+  // у карточки от базы зависят «Похожие сделки», у профиля — «Сделок в базе».
+  // Профиль «Яндекса» на неполной базе показывал 2 сделки вместо 24.
+  else if(page==="deal"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Карточка сделки");
+    else renderDeal(arg);
+    mark("deals");
+  }
+  else if(page==="companies"&&arg){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Профиль компании");
+    else renderCompany(arg);
+    mark("companies");
+  }
+  else if(page==="companies"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Каталог компаний");
+    else renderCompanies();
+    mark("companies");
+  }
+  else if(page==="advisors"&&arg){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Сделки консультанта");
+    else renderFirm(arg);
+    mark("advisors");
+  }
+  else if(page==="advisors"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Каталог консультантов");
+    else renderAdvisors();
+    mark("advisors");
+  }
+  else if(page==="analytics"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Графики");
+    else renderAnalytics();
+    mark("analytics");
+  }
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else {renderDeals();mark("deals");}
   window.scrollTo(0,0);
@@ -1980,21 +2013,13 @@ function renderDeal(id){
         <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
     };
 
-    /* --- цепочка владения до бенефициаров (когда собрана для этой сделки) --- */
-    const ownership = ()=>{
-      const o = d.ownership; if(!o || !o.chain || !o.chain.length) return "";
-      return `<div class="own"><span class="label">Цепочка владения${o.company?` · ${o.company}`:""}</span>
-        <div class="own-asof">По состоянию на ${o.as_of||"дату публикации"} · данные могли измениться</div>
-        <div class="own-chain">${o.chain.map(n=>`
-          <div class="own-node${n.opaque?" opaque":""}">
-            <div class="o-name">${n.name}${n.share?` — <span class="o-share num">${n.share}</span>`:""}</div>
-            ${n.inn||n.ogrn||n.note?`<div class="o-meta num">${[n.inn?`ИНН ${n.inn}`:"",n.ogrn?`ОГРН ${n.ogrn}`:"",n.note||""].filter(Boolean).join(" · ")}</div>`:""}
-          </div>`).join("")}</div>
-        ${o.conflict?`<div class="own-conflict">Источники расходятся: ${o.conflict}</div>`:""}
-        ${o.sources&&o.sources.length?`<div class="own-src">Источники: ${o.sources.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join(" · ")}</div>`:""}
-      </div>`;
-    };
-
+    /* Блок «Цепочка владения» удалён в прогоне 19 (A10). Он был написан
+       заранее, под будущий источник, и вызывался на двух линзах, но
+       d.ownership.chain не заполнен НИ У ОДНОЙ из 1352 карточек — на экране
+       его не видел никто. Вёрстка и стили лежат в истории git, коммит
+       c3667e9. Чтобы вернуть, нужен источник по бенефициарам (ЕГРЮЛ или
+       аналог) и шаг в pipeline/, который заполняет ownership.chain;
+       достраивать цепочки владения догадками нельзя (принцип 1). */
     if(lens==="eco") f.innerHTML = ecoHasContent(d) ? `
       ${hero("Сумма сделки", d.eco.sum)}
       ${specBlock([
@@ -2016,7 +2041,6 @@ function renderDeal(id){
     else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${lawPartialNote(d)}
       ${para("Структура", d.law.struct)}
-      ${ownership()}
       ${para("Условия и особенности (из публичных данных)", d.law.terms)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
       ${realAdv(d).map(a=>`
@@ -2031,7 +2055,6 @@ function renderDeal(id){
       ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если её оценивали в источниках, показываем оценку с пометкой «по оценке» — и никогда не выдаём оценку за раскрытую цену.</p>`:""}
       ${dealPlate()}
       ${dealTeam()}
-      ${ownership()}
       ${specBlock([
         specRow("Предмет", d.eco.share),
         specRow("Статус", d.status),
@@ -2244,6 +2267,33 @@ function renderAdvisors(){
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
 }
 
+/* Консультант без сделок — 27 фирм из 64. Раньше страница отвечала одной серой
+   строкой, причём та же мысль стояла уже двумя абзацами выше («Записей пока
+   нет» + методика подсчёта): пустота объяснялась трижды и всё равно не
+   говорила главного — почему фирма в каталоге и что делать дальше. Формат тот
+   же, что у компании без сделок и у пустой линзы «Юрист». */
+function firmEmptyHtml(f, isLegal){
+  const known = [];
+  if(isLegal && f.g && f.g.length) known.push(["Группы Право-300", f.g.map(g=>GROUP_LABEL[g]).join(" · ")]);
+  if(!isLegal && f.desc) known.push(["Профиль", f.desc]);
+  return `<div class="lens-empty reveal">
+    <div class="le-head">Публично подтверждённых сделок этой фирмы в базе пока нет</div>
+    <p>Фирма в каталоге потому, что ${isLegal
+      ? "входит в федеральный рейтинг Право-300 по корпоративному праву и M&amp;A"
+      : "работает инвестиционным консультантом на российском рынке"}. Сделок за ней мы
+       не числим: в публичных источниках — прежде всего в сообщениях самой фирмы — их
+       не нашлось. Это говорит о том, что фирма не раскрывает проекты, а не о том,
+       что она их не ведёт.</p>
+    ${known.length?`<div class="le-known"><span class="label">Что известно о фирме</span>
+      ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
+    </div>`:""}
+    <div class="fe-actions">
+      <a class="chip" href="#/search/${encodeURIComponent(f.n)}">Поискать по названию в ленте</a>
+      ${f.site?`<a class="chip" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a>`:""}
+      <a class="chip" href="#/assistant">Спросить ассистента</a>
+    </div>
+  </div>`;
+}
 function renderFirm(id){
   const f = ALL_FIRM(id); if(!f){renderAdvisors();return;}
   const isLegal = !!FIRMS.find(x=>x.id===id);
@@ -2264,7 +2314,7 @@ function renderFirm(id){
            «12 сделок» читается как 12 разобранных карточек. */""}
       <span class="note">${[full.length?`${full.length} ${plural(full.length,"подробная карточка","подробные карточки","подробных карточек")}`:"",
         (mini.length+bulk.length)?`${mini.length+bulk.length} ${plural(mini.length+bulk.length,"краткая запись","краткие записи","кратких записей")} со ссылкой на источник`:""]
-        .filter(Boolean).join(" и ")||"Записей пока нет"}.</span></div>
+        .filter(Boolean).join(" и ")||"Ни одной записи"}.</span></div>
     <div class="fact wide" style="display:flex;align-items:center"><span style="color:var(--muted);font-size:13px">Считаются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты: список заведомо неполный и не отражает объём практики.</span></div>
   </div>
   ${full.map(d=>{
@@ -2297,7 +2347,7 @@ function renderFirm(id){
     </div>
     <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
   </a>`).join("")}
-  ${(full.length+mini.length+bulk.length)?"":`<p class="reveal" style="color:var(--muted)">Публично подтверждённых сделок этой фирмы в базе пока нет. Наполнение продолжается.</p>`}
+  ${(full.length+mini.length+bulk.length)?"":firmEmptyHtml(f,isLegal)}
   ${miniAIHtml("Спросите о сделках этого консультанта…")}`;
   mountMiniAI(f.n);
 }
