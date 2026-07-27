@@ -1624,7 +1624,8 @@
    "extra": "Сумма сделки раскрыта в финансовой отчётности ГК Softline: 230 млн рублей за 49%; при этом оценка 100% компании составила ~469 млн рублей — близко к уровню первоначальной покупки Softline контрольной доли в 2022 году (51% за 239 млн рублей, вся компания — 488 млн рублей). В контур сделки вошло только ООО «Полиматика Рус» (направление BI/ML); 100% ООО «Полиматика Бизнес Решения» (направление EPM) осталось у FabricaONE.AI. По итогам сделки операционный контроль, включая право назначения генерального директора, перешёл к БФТ-Холдингу, тогда как FabricaONE.AI сохранила 51% доли; в 2026 году новым гендиректором «Полиматика Рус» стала Екатерина Занозина. По данным финансовой отчётности, по итогам 2025 года «Полиматика Рус» зафиксировала выручку 256 млн рублей, убыток от продаж — 294 млн рублей и чистый убыток — 311 млн рублей (против выручки 431 млн рублей в 2024 году).",
    "auto": true,
    "seller": "ГК «Софтлайн»",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "gda7d982b"
   },
   {
    "id": "g02eed099",
@@ -21625,7 +21626,8 @@
    "asset": "ГК «Дело»",
    "asset_share": "51%",
    "seller": "Сергей Шишкарев",
-   "seller_src": "manual_2026"
+   "seller_src": "manual_2026",
+   "seller_id": "g4f522aee"
   },
   {
    "id": "ge386fb20",
@@ -33356,7 +33358,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Сбер",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "g28ff15bb"
   },
   {
    "id": "g97d0d2a2",
@@ -40543,7 +40546,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "INGKA",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "g088c1281"
   },
   {
    "id": "g42e11ded",
@@ -54006,7 +54010,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Viterra",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "g1a6194cd"
   },
   {
    "id": "g00421dd1",
@@ -54358,7 +54363,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Ingka Centres",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "g088c1281"
   },
   {
    "id": "gd246f586",
@@ -57511,7 +57517,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "ALD Automotive",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "gb0cdbc40"
   },
   {
    "id": "g531446fe",
@@ -59228,7 +59235,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Tensar",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "gd98a342e"
   },
   {
    "id": "gc79e6178",
@@ -65193,7 +65201,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Heineken",
-   "seller_src": "title"
+   "seller_src": "title",
+   "seller_id": "ga1647be0"
   },
   {
    "id": "gdffd613c",

@@ -906,6 +906,23 @@ function companyRole(d, id){
   if(d.target===id || d.asset_id===id) return "Предмет сделки";
   return "";
 }
+/* Профиль без единой сделки. Такие профили появились из разбора сторон: в тексте
+   сделки была названа компания или человек, для них завели карточку, но
+   структурной привязки к сделке не возникло. Раньше страница показывала одну
+   строку «Сделок в базе пока нет» и выглядела ошибкой — хотя это не ошибка, а
+   честное состояние: сущность в базе есть, связей у неё пока нет. */
+function companyEmptyHtml(c){
+  return `<div class="lens-empty reveal">
+    <div class="le-head">Сделок, где эта сторона указана явно, в базе пока нет</div>
+    <p>Профиль появился из текста карточек: «${c.name}» упоминается как участник,
+       но ни в одной сделке не проставлен покупателем, продавцом или предметом.
+       Мы не приписываем связи задним числом — пустое здесь честнее.</p>
+    <div class="fe-actions">
+      <a class="chip" href="#/search/${encodeURIComponent(c.name)}">Поискать по названию в ленте</a>
+      <a class="chip" href="#/assistant">Спросить ассистента</a>
+    </div>
+  </div>`;
+}
 function companyDeals(id){
   const structured = DEALS.filter(d=>d.buyer===id||d.target===id||d.seller_id===id||d.asset_id===id);
   const structuredIds = new Set(structured.map(d=>d.id));
@@ -1001,6 +1018,14 @@ function route(){
   else if(page==="theme"){
     filterTheme = arg?decodeURIComponent(arg):"Все";
     filterInd="Все"; feedYear="Все"; filterFirm="Все"; feedQuery=""; feedPage=1; advOpen=true;
+    renderDeals(); mark("deals");
+    const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
+  }
+  // «#/search/<запрос>» — лента с уже введённым поиском. Нужен, чтобы на
+  // подборку можно было дать ссылку, а не пересказывать «наберите вот это».
+  else if(page==="search"){
+    feedQuery = arg?decodeURIComponent(arg):"";
+    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; onlyFull=false; feedPage=1;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -1986,7 +2011,7 @@ function renderCompany(id){
     <div><span class="label num">${fmtDate(m.date)}</span></div>
     <div><div class="deal-title" style="font-size:16px">${m.title}</div><div class="deal-sub">Источник: ${m.source}${m.url.startsWith('#')?'':' ↗'}</div></div>
   </a>`).join("")}`:""}
-  ${(structured.length+mentions.length)?"":"<p class='reveal' style='color:var(--muted)'>Сделок в базе пока нет.</p>"}
+  ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   mountMiniAI(c.name);
 }
