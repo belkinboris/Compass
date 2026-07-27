@@ -230,6 +230,9 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .adv-panel{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 26px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:10px}
 .adv-panel label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .adv-panel select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);min-width:180px}
+.adv-share{display:flex;align-items:flex-end;margin-left:auto}
+.adv-share .chip{cursor:pointer}
+@media(max-width:720px){.adv-share{margin-left:0;width:100%}.adv-share .chip{width:100%}}
 @media(max-width:640px){
   .feed-search{flex-wrap:wrap}
   .feed-search input{min-width:100%}
@@ -1079,8 +1082,100 @@ function loadingHtml(what){
        Пока она не пришла, цифры были бы неверными, поэтому мы их не показываем.</p>
   </div>`;
 }
+/* Подборка живёт в адресе. Раньше три выставленных фильтра («Банки», 2024,
+   только с разбором) оставляли адрес `#/`: коллега по такой ссылке открывал
+   чистую ленту — 20 сделок вместо 15. Параметры пишутся в хеш после «?», а
+   старые маршруты (`#/theme/`, `#/ind/`, `#/search/`) продолжают работать. */
+/* Копирование без внешних сервисов. `navigator.clipboard` есть не везде (нужен
+   защищённый контекст), поэтому оставлен запасной путь через скрытое поле —
+   иначе кнопка молча ничего не делала бы. Результат виден на самой кнопке:
+   без подтверждения непонятно, сработало ли. */
+function copyToClipboard(text, btn, okLabel, backLabel){
+  const done = ok => {
+    if(!btn) return;
+    btn.textContent = ok ? okLabel : "Не удалось скопировать";
+    setTimeout(()=>{btn.textContent = backLabel;}, 1800);
+  };
+  const fallback = () => {
+    try{
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly","");
+      ta.style.cssText = "position:fixed;left:-9999px;opacity:0";
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta); done(ok);
+    }catch(e){ done(false); }
+  };
+  if(navigator.clipboard && window.isSecureContext)
+    navigator.clipboard.writeText(text).then(()=>done(true), fallback);
+  else fallback();
+}
+/* Выжимка карточки для письма или меморандума: то, ради чего юрист открывал
+   сделку, — кто у кого что купил, за сколько, на каких условиях и кто вёл.
+   Заглушки не переносим: пустая строка честнее строки «не раскрыта». */
+function dealAsText(d){
+  const L = [];
+  const add = (k,v) => { if(hasFact(v)) L.push(`${k}: ${String(v).trim()}`); };
+  L.push(d.title);
+  L.push(`${fmtDate(d.date)} · ${d.ind} · ${d.status}`);
+  const cn = id => (id && co(id)) ? co(id).name : null;
+  add("Покупатель", cn(d.buyer));
+  add("Продавец", d.seller_id ? cn(d.seller_id) : d.seller);
+  add("Предмет сделки", cn(d.target) || d.asset);
+  add("Доля", d.asset_share || (d.eco && d.eco.share));
+  add("Сумма", d.sum);
+  add("Оценка", d.eco && d.eco.val);
+  add("Структура", d.law && d.law.struct);
+  add("Условия", d.law && d.law.terms);
+  add("Согласования", d.law && d.law.appr);
+  const adv = realAdv(d).map(a=>`${a[1]}${a[0]?` (${a[0]})`:""}`);
+  if(adv.length) L.push(`Юридические консультанты: ${adv.join("; ")}`);
+  add("Финансовый консультант", d.eco && d.eco.finadv);
+  if(d.src && d.src.length) L.push(`Источники: ${d.src.map(x=>`${x[0]} — ${x[1]}`).join("; ")}`);
+  L.push(`Карточка в «Компасе»: ${location.origin}${location.pathname}#/deal/${d.id}`);
+  return L.join("\n");
+}
+const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
+                     ["firm","filterFirm"],["q","feedQuery"],["full","onlyFull"]];
+function feedStateGet(){
+  return {filterInd, feedYear, filterTheme, filterFirm, feedQuery, onlyFull};
+}
+function feedHash(){
+  const st = feedStateGet();
+  const parts = FEED_PARAMS
+    .map(([key,name])=>{
+      const v = st[name];
+      if(name==="onlyFull") return v ? "full=1" : "";
+      return (v && v!=="Все") ? `${key}=${encodeURIComponent(v)}` : "";
+    })
+    .filter(Boolean);
+  return parts.length ? `#/deals?${parts.join("&")}` : "#/";
+}
+/* Адрес обновляется через replaceState: hashchange не срабатывает, значит
+   лента не перерисовывается заново и не теряет позицию прокрутки. */
+function syncFeedHash(){
+  const h = feedHash();
+  if(location.hash !== h && !/^#\/(theme|ind|search)\//.test(location.hash))
+    history.replaceState(null, "", h);
+}
+function applyFeedParams(qs){
+  const p = new URLSearchParams(qs||"");
+  filterInd = p.get("ind") || "Все";
+  feedYear = p.get("year") || "Все";
+  filterTheme = p.get("theme") || "Все";
+  filterFirm = p.get("firm") || "Все";
+  feedQuery = p.get("q") || "";
+  onlyFull = p.get("full") === "1";
+  feedPage = 1;
+  // Панель открывается сама, если фильтр не виден в свёрнутом виде: иначе
+  // пришедший по ссылке видит отфильтрованную ленту и не понимает почему.
+  advOpen = FEED_PARAMS.some(([key])=>key!=="q" && p.get(key));
+}
 function route(){
-  const h = location.hash.replace("#","") || "/";
+  const raw = location.hash.replace("#","") || "/";
+  const qi = raw.indexOf("?");
+  const h = qi >= 0 ? raw.slice(0, qi) : raw;
+  const qs = qi >= 0 ? raw.slice(qi + 1) : "";
   const [_,page,arg] = h.split("/");
   const onHome = (page===""||page===undefined);
   document.body.style.background = onHome ? "#0A1210" : "";
@@ -1090,6 +1185,9 @@ function route(){
   document.querySelectorAll("#nav a").forEach(a=>a.classList.remove("on"));
   const mark = r => {const el=document.querySelector(`[data-r="${r}"]`); if(el) el.classList.add("on");};
   if(page===""||page===undefined){renderDeals();mark("deals");}
+  // «#/deals?ind=…&year=…» — лента с сохранённой подборкой: адрес, который
+  // можно переслать коллеге.
+  else if(page==="deals"){applyFeedParams(qs);renderDeals();mark("deals");}
   // «#/theme/<сюжет>» — вход в ленту с уже выставленным фильтром по сюжету.
   // Имя темы кодируется: в нём бывает «/» («IPO / SPO»), который иначе разрезал бы хэш.
   else if(page==="theme"){
@@ -1492,7 +1590,7 @@ function emptyFeedHtml(){
   if(feedYear!=="Все") active.push({k:"year", t:`год ${feedYear}`});
   if(filterTheme!=="Все") active.push({k:"theme", t:`сюжет «${filterTheme}»`});
   if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
-  if(onlyFull) active.push({k:"fmt", t:"только подробные карточки"});
+  if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   const head = active.length
     ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
     : "В базе пока нет ни одной записи.";
@@ -1521,9 +1619,10 @@ function bindFeedListEvents(){
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все";
     onlyFull=false; feedPage=1;
     const q=document.getElementById("feedq"); if(q) q.value="";
-    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selfmt","Все записи"]]
+    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selfmt","Все сделки"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
+    syncFeedHash();
   };
 }
 function renderFeedList(){
@@ -1601,8 +1700,8 @@ function renderDeals(){
     <label>Год
       <select id="selyear">${["Все","2026","2025","2024","2023","до 2023"].map(y=>`<option ${y===feedYear?"selected":""}>${y}</option>`).join("")}</select>
     </label>
-    <label>Формат записей
-      <select id="selfmt"><option ${!onlyFull?"selected":""}>Все записи</option><option ${onlyFull?"selected":""}>Только с подробной карточкой</option></select>
+    <label>Что показывать
+      <select id="selfmt"><option ${!onlyFull?"selected":""}>Все сделки</option><option ${onlyFull?"selected":""}>Только с разбором</option></select>
     </label>
     <label>Консультант
       <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
@@ -1610,6 +1709,7 @@ function renderDeals(){
     <label>Сюжет сделки
       <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
     </label>
+    <div class="adv-share"><button class="chip" id="sharefeed">Скопировать ссылку на подборку</button></div>
   </div>
   <div id="feedlist">${feedListHtml()}</div>
   <div class="cta reveal">
@@ -1625,12 +1725,12 @@ function renderDeals(){
     let t=null;
     fq.addEventListener("input", ()=>{
       clearTimeout(t);
-      t=setTimeout(()=>{feedQuery=fq.value;feedPage=1;renderFeedList();},250);
+      t=setTimeout(()=>{feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();},250);
     });
-    fq.addEventListener("keydown",e=>{if(e.key==="Enter"){feedQuery=fq.value;feedPage=1;renderFeedList();}});
+    fq.addEventListener("keydown",e=>{if(e.key==="Enter"){feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();}});
   }
   const fg = document.getElementById("feedgo");
-  if(fg) fg.onclick = ()=>{const el=document.getElementById("feedq");feedQuery=el?el.value:"";feedPage=1;renderFeedList();};
+  if(fg) fg.onclick = ()=>{const el=document.getElementById("feedq");feedQuery=el?el.value:"";feedPage=1;renderFeedList();syncFeedHash();};
   const at = document.getElementById("advtoggle");
   if(at) at.onclick = ()=>{
     advOpen=!advOpen;
@@ -1638,12 +1738,18 @@ function renderDeals(){
     const panel = document.getElementById("advpanel");
     if(panel) panel.style.display = advOpen ? "" : "none";
   };
-  const bindSel = (id, fn) => {const el=document.getElementById(id); if(el) el.onchange=()=>{fn(el.value);feedPage=1;renderFeedList();};};
+  const bindSel = (id, fn) => {const el=document.getElementById(id); if(el) el.onchange=()=>{fn(el.value);feedPage=1;renderFeedList();syncFeedHash();};};
   bindSel("selind", v=>filterInd=v);
   bindSel("selyear", v=>feedYear=v);
-  bindSel("selfmt", v=>onlyFull=(v!=="Все записи"));
+  bindSel("selfmt", v=>onlyFull=(v!=="Все сделки"));
   bindSel("selfirm", v=>filterFirm=v);
   bindSel("seltheme", v=>filterTheme=v);
+  const sf = document.getElementById("sharefeed");
+  if(sf) sf.onclick = ()=>{
+    syncFeedHash();
+    copyToClipboard(location.origin + location.pathname + feedHash(), sf,
+      "Ссылка скопирована", "Скопировать ссылку на подборку");
+  };
   const go=()=>{const v=document.getElementById("heroq").value.trim();if(v){sessionStorage.setItem("pendingQ",v);location.hash="#/assistant";}};
   document.getElementById("herogo").onclick=go;
   document.getElementById("heroq").addEventListener("keydown",e=>{if(e.key==="Enter")go();});
@@ -1965,6 +2071,10 @@ function renderDeal(id){
   ${extraHtml(d)}
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
+  <div class="fe-actions reveal" style="justify-content:flex-start;margin:22px 0 6px">
+    <button class="chip" id="copydeal">Скопировать сделку текстом</button>
+    <button class="chip" id="copylink">Скопировать ссылку</button>
+  </div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
      кнопке, а приглушение «Юриста» объяснялось только атрибутом title — на
@@ -2149,6 +2259,10 @@ function renderDeal(id){
     app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x===b));
     paint();
   });
+  const cd = document.getElementById("copydeal");
+  if(cd) cd.onclick = ()=>copyToClipboard(dealAsText(d), cd, "Скопировано", "Скопировать сделку текстом");
+  const cl = document.getElementById("copylink");
+  if(cl) cl.onclick = ()=>copyToClipboard(`${location.origin}${location.pathname}#/deal/${d.id}`, cl, "Ссылка скопирована", "Скопировать ссылку");
   mountMiniAI(d.title);
 }
 
