@@ -279,6 +279,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 .lens button.thin:after{content:"·";margin-left:6px;color:var(--bronze);font-weight:700}
 .lens button.thin.on{opacity:1}
 /* честное пустое состояние линзы */
+.lens-hint{margin:-18px 0 24px;font-size:13px;line-height:1.55;color:var(--muted);max-width:680px}
 .lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
 .lens-empty .le-head{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:10px}
 .lens-empty p{color:var(--muted);font-size:14px;line-height:1.6;max-width:640px}
@@ -976,7 +977,7 @@ const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.lengt
 /* «Раскрытая команда» — это сделки, где назван хотя бы один консультант.
    Считаем отдельной функцией: в шаблоне такое выражение не читается, а цифру
    на первом экране пользователь должен уметь проверить. */
-const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>a[1]&&!/не раскрыв|не привлекал/i.test(a[1]))).length;
+const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>hasFact(a[1]))).length;
 
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
@@ -1727,33 +1728,67 @@ function relatedHtml(d){
    не раскрывались», — и выглядела сломанной. Теперь один раз честно говорим,
    что раскрыто не было, и отдаём то, что юристу реально пригодится: стороны,
    долю, сумму и ссылки на первоисточники, по которым он проверит сам. */
-const realAdv = d => (d.law && d.law.adv || []).filter(a =>
-  a[1] && !/не раскрыв|не привлекал/i.test(a[1]));
-const lawHasContent = d => {
-  const has = v => v && !/^(?:—|-)$/.test(String(v).trim()) &&
-    !/не раскрыт|публично не сообщал|не привлекал/i.test(String(v));
-  return has(d.law && d.law.struct) || has(d.law && d.law.appr) ||
-         has(d.law && d.law.terms) || realAdv(d).length > 0;
+const realAdv = d => (d.law && d.law.adv || []).filter(a => hasFact(a[1]));
+/* Заглушка — не факт. Один предикат на обе линзы: если у каждой свой, признак
+   «здесь пусто» в разных местах означает разное.
+   Заглушкой считается только строка, в которой КРОМЕ формулировки отсутствия
+   ничего нет. Проверка «содержит „не раскрыта“» прятала факты: у g5e0f6a47 в
+   сумме стоит «не раскрыта (EV оценена в 21 млрд ₽)» — под правилом «содержит»
+   оценка в 21 млрд ₽ пропадала вместе с заглушкой; всего таких мест 9.
+   Классы [а-яё], а не \w: в JS \w — это [A-Za-z0-9_], на кириллице правило
+   молча не срабатывает (тот же род граблей, что \b после приставки). */
+const PLACEHOLDER = /^(?:[—-]|н\/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*(?:\s+(?:официально|публично))?)[.\s]*$/i;
+const hasFact = v => { const s = String(v==null?"":v).trim(); return !!s && !PLACEHOLDER.test(s); };
+const lawHasContent = d => hasFact(d.law && d.law.struct) || hasFact(d.law && d.law.appr) ||
+  hasFact(d.law && d.law.terms) || realAdv(d).length > 0;
+/* Линза «Экономист» пуста у 37 карточек из 1352: всё её содержимое — заглушки
+   «Не раскрыта» и «Не привлекался», нарисованные как значения показателей.
+   Тот же дефект, что чинили в линзе «Юрист» (A2), только незамеченный: у
+   «Юриста» кнопка хотя бы приглушалась, а у «Экономиста» выглядела обычной. */
+const ecoHasContent = d => {
+  const e = d.eco || {};
+  return hasFact(e.sum) || hasFact(e.share) || hasFact(e.val) || hasFact(e.target_fin) ||
+         hasFact(e.fin) || hasFact(e.finadv) || hasFact(e.rationale) || hasFact(e.context);
 };
-function lawEmptyHtml(d){
+/* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
+   пуста, юристу всё равно нужны стороны, предмет и статус, а не пустой экран. */
+function knownRowsHtml(d, withSum){
   const known = [];
   const cn = id => (id && co(id)) ? co(id).name : null;
-  const buyer = cn(d.buyer), seller = d.seller_id ? cn(d.seller_id) : (d.seller || null);
+  const seller = d.seller_id ? cn(d.seller_id) : (d.seller || null);
+  const buyer = cn(d.buyer);
   if(seller) known.push(["Продавец", seller]);
   if(buyer) known.push(["Покупатель", buyer]);
   const asset = cn(d.target) || d.asset;
   if(asset) known.push(["Предмет сделки", asset + (d.asset_share?` · ${d.asset_share}`:"")]);
-  if(d.sum && !undisclosed(d.sum)) known.push(["Сумма", d.sum]);
+  if(withSum && d.sum && !undisclosed(d.sum)) known.push(["Сумма", d.sum]);
+  if(d.type) known.push(["Тип", capType(d.type)]);
   if(d.status) known.push(["Статус", d.status]);
+  if(!known.length) return "";
+  return `<div class="le-known"><span class="label">Что известно о сделке</span>
+    ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
+  </div>`;
+}
+const srcFootHtml = d => `<p class="le-foot">Проверить детали можно по первоисточникам — они перечислены внизу карточки${d.src&&d.src.length?` (${d.src.length})`:""}.</p>`;
+function lawEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
     <p>Ни структура сделки, ни согласования, ни условия, ни консультанты не были
        названы в открытых источниках. Мы не достраиваем такие поля догадками —
        пустое здесь честнее правдоподобного текста.</p>
-    ${known.length?`<div class="le-known"><span class="label">Что известно о сделке</span>
-      ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
-    </div>`:""}
-    <p class="le-foot">Проверить детали можно по первоисточникам — они перечислены внизу карточки${d.src&&d.src.length?` (${d.src.length})`:""}.</p>
+    ${knownRowsHtml(d, true)}
+    ${srcFootHtml(d)}
+  </div>`;
+}
+function ecoEmptyHtml(d){
+  return `<div class="lens-empty">
+    <div class="le-head">Экономика сделки публично не раскрывалась</div>
+    <p>Ни сумма, ни доля, ни оценка, ни показатели актива, ни финансовый
+       консультант не были названы в открытых источниках. Показывать вместо них
+       строку «не раскрыта» три раза подряд — не то же самое, что сказать это
+       один раз честно.</p>
+    ${knownRowsHtml(d, false)}
+    ${srcFootHtml(d)}
   </div>`;
 }
 
@@ -1785,20 +1820,43 @@ function renderDeal(id){
   </div>
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
     <button data-l="overview" class="on">Обзор</button>
-    <button data-l="eco">Экономист</button>
-    <button data-l="law"${lawHasContent(d)?"":' class="thin" title="Юридические детали по этой сделке публично не раскрывались"'}>Юрист</button>
+    <button data-l="eco"${ecoHasContent(d)?"":' class="thin"'}>Экономист</button>
+    <button data-l="law"${lawHasContent(d)?"":' class="thin"'}>Юрист</button>
   </div>
+  <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${extraHtml(d)}
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
+  /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
+     кнопке, а приглушение «Юриста» объяснялось только атрибутом title — на
+     телефоне его не существует. Строка под линзами говорит, что показывает
+     текущая, и что значит приглушённая кнопка. */
+  const LENS_HINT = {
+    overview: "Обзор: стороны, предмет сделки, сумма и команда — главное на одном экране.",
+    eco: "Экономист: сумма и доля, оценка и мультипликаторы, показатели актива, цель сделки.",
+    law: "Юрист: структура сделки, согласования, условия и юридические консультанты.",
+  };
+  const dim = [!ecoHasContent(d)&&"«Экономист»", !lawHasContent(d)&&"«Юрист»"].filter(Boolean);
+  const hintText = () => LENS_HINT[lens] + (dim.length
+    ? ` ${dim.join(" и ")} ${dim.length>1?"приглушены":"приглушён"}: этих данных в источниках нет.` : "");
   const paint = ()=>{
     const f = document.getElementById("facts");
+    const hint = document.getElementById("lenshint");
+    if(hint) hint.textContent = hintText();
     const has = v => v && v!=="—";
-    const hero = (label,val) => has(val) ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
-    const specRow = (label,val) => has(val) ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
-    const para = (label,val) => has(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
+    /* Заглушка не рисуется как значение показателя: «Согласования — Публично не
+       сообщалось» (1275 карточек), «Финансовый консультант — Не привлекался»
+       (1240) и «Сумма сделки — Не раскрыта» (469) выглядели как данные, хотя
+       данными не были, — 2985 строк на 1327 карточках из 1352.
+       Единственное исключение — «Сумма» на «Обзоре» (allowStub): там отсутствие
+       цены само по себе ответ на вопрос «за сколько», и под ним стоит пояснение.
+       Так «Не раскрыта» встречается на карточке ровно один раз, а не трижды. */
+    const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
+      ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
+    const specRow = (label,val) => hasFact(val) ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
+    const para = (label,val) => hasFact(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
 
     /* --- плашка структуры сделки: раскладка зависит от ТИПА сделки --- */
@@ -1881,8 +1939,8 @@ function renderDeal(id){
 
     /* --- команда сделки: юридические + финансовые консультанты одним блоком --- */
     const dealTeam = ()=>{
-      const legal = (d.law&&d.law.adv||[]).filter(a=>a[1] && !/не раскрыв/i.test(a[1]));
-      const fin = has(d.eco&&d.eco.finadv) && !/не привлека|не раскрыв/i.test(d.eco.finadv)
+      const legal = realAdv(d);
+      const fin = hasFact(d.eco&&d.eco.finadv)
         ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
       if(!legal.length && !fin.length) return "";
       const legalHtml = legal.length?`<div class="team-col"><span class="team-kind">Юридические консультанты</span>
@@ -1908,7 +1966,7 @@ function renderDeal(id){
       </div>`;
     };
 
-    if(lens==="eco") f.innerHTML = `
+    if(lens==="eco") f.innerHTML = ecoHasContent(d) ? `
       ${hero("Сумма сделки", d.eco.sum)}
       ${specBlock([
         specRow("Предмет / доля", d.eco.share),
@@ -1918,7 +1976,8 @@ function renderDeal(id){
         specRow("Финансовый консультант", d.eco.finadv),
       ])}
       ${para("Цель сделки", d.eco.rationale)}
-      ${para("Контекст", d.eco.context)}`;
+      ${para("Контекст", d.eco.context)}`
+      : ecoEmptyHtml(d);
     else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${para("Структура", d.law.struct)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
@@ -1932,7 +1991,7 @@ function renderDeal(id){
       ${para("Условия и особенности (из публичных данных)", d.law.terms)}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
-      ${hero("Сумма", d.sum)}
+      ${hero("Сумма", d.sum, true)}
       ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если её оценивали в источниках, показываем оценку с пометкой «по оценке» — и никогда не выдаём оценку за раскрытую цену.</p>`:""}
       ${dealPlate()}
       ${dealTeam()}
@@ -1940,7 +1999,7 @@ function renderDeal(id){
       ${specBlock([
         specRow("Предмет", d.eco.share),
         specRow("Статус", d.status),
-        specRow("Согласования", d.law.appr!=="Публично не сообщалось"?d.law.appr:""),
+        specRow("Согласования", d.law.appr),
       ])}`;
   };
   paint();
