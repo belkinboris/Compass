@@ -176,6 +176,9 @@ nav a.on::after,nav a:hover::after{width:100%}
 .deal-meta{text-align:right}
 .deal-sum{font-family:var(--f-display);font-weight:600;font-size:17.5px}
 .deal-sum.na{color:var(--muted);font-weight:400;font-size:13.5px;font-family:var(--f-body)}
+/* «(по оценке)» — не часть числа, а оговорка о его достоверности. Показываем
+   тоньше и приглушённее, чтобы взгляд сначала брал саму сумму. */
+.sum-note{font-family:var(--f-body);font-weight:400;font-size:.72em;color:var(--muted);letter-spacing:0;white-space:nowrap}
 .tag{display:inline-block;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);background:none;border:1px solid var(--line);padding:3px 8px;border-radius:2px}
 .tag.steel{color:var(--steel);background:var(--steel-soft)}
 .tag.bronze{color:var(--bronze);background:var(--bronze-soft)}
@@ -1248,6 +1251,9 @@ const themeCount = t => DEALS.filter(d=>(d.themes||[]).includes(t)).length;
    «Не раскрыта»), из-за чего точное сравнение с одной строкой не приглушало
    часть карточек. Проверяем без учёта регистра и ведущих пробелов. */
 const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
+/* Хвостовая скобка у суммы — «(по оценке)» и подобные оговорки. Отделяем её
+   стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
+const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/, ' <span class="sum-note">$1</span>');
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
 const plural = (n,one,few,many) => {
   const a = Math.abs(n)%100, b = a%10;
@@ -1275,7 +1281,7 @@ function unifiedFeed(){
     <a class="deal-row reveal" href="#/deal/${d.id}">
       <div><span class="label num">${fmtDate(d.date)}</span><br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span></div>
       <div><div class="deal-title">${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
-      <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
+      <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div><span class="tag">${d.ind}</span></div>
     </a>`,
     mini: m => `
     <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -1770,7 +1776,7 @@ function renderDeal(id){
   const paint = ()=>{
     const f = document.getElementById("facts");
     const has = v => v && v!=="—";
-    const hero = (label,val) => has(val) ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${val}</div></div>` : "";
+    const hero = (label,val) => has(val) ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
     const specRow = (label,val) => has(val) ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
     const para = (label,val) => has(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
@@ -2023,7 +2029,7 @@ function renderCompany(id){
     <div><span class="label num">${fmtDate(d.date)}</span></div>
     <div><div class="deal-title" style="font-size:17px">${d.title}</div>
       <div class="deal-sub">${(()=>{const r=companyRole(d,id);return r?`<span class="role-badge">${r}</span> `:"";})()}${d.type}</div></div>
-    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div></div>
+    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div></div>
   </a>`).join("")}`:""}
   ${mentions.length?`
   <div class="sec-head reveal" style="margin-top:${structured.length?'46px':'0'}"><h1 style="font-size:23px">Также упоминается</h1><p style="margin-top:6px">Найдено автоматическим поиском по названию компании во всей базе. Может быть неточным — сверяйтесь с первоисточником по ссылке.</p></div>
@@ -2125,7 +2131,7 @@ function renderFirm(id){
       <div class="deal-title" style="font-size:17px">${d.title}</div>
       <div class="deal-sub">${role?role[0]:""}${role&&role[2]?` — ${role[2]}`:""}</div>
     </div>
-    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${d.sum}</div><span class="tag">${d.ind}</span></div>
+    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div><span class="tag">${d.ind}</span></div>
   </a>`;}).join("")}
   ${mini.map(m=>`
   <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -2189,7 +2195,9 @@ function renderAnalytics(){
   DEALS.forEach(d=>{
     const y=(d.date||"").slice(0,4); if(!/^20\d\d$/.test(y)) return;
     discl[y]=discl[y]||{t:0,d:0}; discl[y].t++;
-    if(!undisclosed(d.sum)) discl[y].d++;
+    // Экспертная оценка — не раскрытая сумма: считать её раскрытием значило бы
+    // завышать прозрачность рынка и собственную базу.
+    if(!undisclosed(d.sum) && !isEstimate(d.sum)) discl[y].d++;
   });
   const disclYears = Object.entries(discl).filter(([,v])=>v.t>=20).sort((a,b)=>a[0].localeCompare(b[0]));
   // Сюжеты сделок
@@ -2220,7 +2228,7 @@ function renderAnalytics(){
     </div>
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
-      ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${d.sum}</span></a>`).join("")}
+      ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только детальные карточки с раскрытой суммой; сравнение сумм в разных валютах и годах — условное.</p>
     </div>
     <div class="an-card reveal">
@@ -2254,7 +2262,7 @@ function renderAnalytics(){
     <div class="an-card reveal">
       <span class="label">Доля сделок с раскрытой суммой</span>
       ${disclYears.map(([y,v],ri)=>{const pct=Math.round(v.d/v.t*100);return `<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${pct}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${pct}%</span></div>`;}).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Считается по подробным карточкам (годы, где их не меньше 20). Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Считается по подробным карточкам (годы, где их не меньше 20). Экспертные оценки сюда не входят — только суммы, названные сторонами. Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
     </div>`:""}
   </div>`;
 }
