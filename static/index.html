@@ -293,7 +293,11 @@ nav a.on::after,nav a:hover::after{width:100%}
 .lens button.thin:after{content:"·";margin-left:6px;color:var(--bronze);font-weight:700}
 .lens button.thin.on{opacity:1}
 /* честное пустое состояние линзы */
-.lens-hint{margin:-18px 0 24px;font-size:13px;line-height:1.55;color:var(--muted);max-width:680px}
+/* Мера мелкого текста — в знаках, а не в пикселях: 680px на 13px давали 82
+   знака в строке, а на широком экране подпись под «Похожими сделками» шла в
+   одну строку на 1018px (128 знаков). Глаз теряет начало следующей строки. */
+.lens-hint{margin:-18px 0 24px;font-size:13px;line-height:1.55;color:var(--muted);max-width:76ch;text-wrap:pretty}
+.related p{max-width:68ch;text-wrap:pretty}
 .lens-part{margin:0 0 22px;font-size:13px;line-height:1.55;color:var(--muted);max-width:640px}
 .rel-empty{font-size:13.5px;line-height:1.6;color:var(--muted);max-width:600px;margin:6px 0 0}
 .lens-empty{padding:26px 26px 22px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
@@ -324,15 +328,23 @@ nav a.on::after,nav a:hover::after{width:100%}
 .stat-hero .label{margin-bottom:10px}
 .stat-hero .stat-num{font-family:var(--f-display);font-size:clamp(30px,4.4vw,44px);line-height:1.1;color:var(--ink)}
 .spec-list{border-top:1px solid var(--line);margin-bottom:26px;animation:fadeUp .45s var(--ease)}
-.spec-row{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}
-.spec-k{color:var(--muted);font-size:13.5px;flex-shrink:0}
-/* min-width:0 — иначе флекс-элемент не сжимается ниже своего min-content, и
+/* Показатели — сетка с общей вертикалью, а не выключка вправо.
+   Выключка вправо оправдана для колонки однородных чисел (так сделана
+   аналитика). Здесь значения разнородные и разной длины: 741 из 1200 (62%)
+   длиннее 80 знаков, медиана 111, максимум 599. Прижатые вправо, они
+   начинались с разных вертикалей (941, 703, 511px в одной карточке) и рвались
+   на строки с рваным ЛЕВЫМ краем — глазу не за что зацепиться. Теперь все
+   значения стартуют от одной линии, а мера ограничена 72 знаками: длинная
+   строка перестала быть длинной, короткая — потерянной. */
+.spec-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:26px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.spec-k{color:var(--muted);font-size:13.5px}
+/* min-width:0 — иначе элемент сетки не сжимается ниже своего min-content, и
    длинное значение («Rothschild & Co — финансовый консультант и спонсор…»)
    выталкивает строку за экран. */
-.spec-v{font-size:14px;text-align:right;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.spec-v{font-size:14px;color:var(--ink);min-width:0;max-width:72ch;overflow-wrap:anywhere;text-wrap:pretty}
 .narrative{margin-bottom:26px;max-width:660px;animation:fadeUp .5s var(--ease)}
 .narrative .label{margin-bottom:9px}
-.narrative p{font-size:15px;line-height:1.68;color:var(--ink);margin:0}
+.narrative p{font-size:15px;line-height:1.68;color:var(--ink);margin:0;text-wrap:pretty}
 .adv-card{border-left:2.5px solid var(--bronze,#A3814E);padding:4px 0 4px 18px;margin-bottom:22px;animation:fadeUp .45s var(--ease)}
 .adv-card.muted{border-left-color:var(--line)}
 .adv-card.muted .adv-name{color:var(--muted);font-weight:400}
@@ -494,11 +506,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .hero{margin:0 -20px;padding:52px 20px 46px}
   .aisearch{flex-direction:column}
   .aisearch button{padding:14px}
-  /* На телефоне подпись и значение в столбик: в строку они не помещаются, а
-     длинные значения (описание работы консультанта) на узком экране всё равно
-     читаются лучше слева направо. */
-  .spec-row{flex-direction:column;gap:4px}
-  .spec-v{text-align:left}
+  /* На телефоне подпись и значение в столбик: колонка в 190px съела бы половину
+     экрана. */
+  .spec-row{grid-template-columns:1fr;gap:4px}
 }
 </style>
 </head>
@@ -1945,7 +1955,9 @@ function renderDeal(id){
      текущая, и что значит приглушённая кнопка. */
   const LENS_HINT = {
     overview: "Обзор: стороны, предмет сделки, сумма и команда — главное на одном экране.",
-    eco: "Экономист: сумма и доля, оценка и мультипликаторы, показатели актива, цель сделки.",
+    // без «мультипликаторов»: они есть у 14 карточек из 1352 (1%), обещать их
+    // в подписи к линзе — обещать то, чего почти нигде нет
+    eco: "Экономист: сумма и доля, оценка, показатели актива, цель сделки.",
     law: "Юрист: структура сделки, согласования, условия и юридические консультанты.",
   };
   const dim = [!ecoHasContent(d)&&"«Экономист»", !lawHasContent(d)&&"«Юрист»"].filter(Boolean);
@@ -1965,7 +1977,8 @@ function renderDeal(id){
        Так «Не раскрыта» встречается на карточке ровно один раз, а не трижды. */
     const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
       ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
-    const specRow = (label,val) => hasFact(val) ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
+    const specRow = (label,val) => hasFact(val)
+      ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
     const para = (label,val) => hasFact(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
 
