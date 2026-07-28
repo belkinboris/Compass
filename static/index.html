@@ -988,7 +988,19 @@ function companyEmptyHtml(c){
     </div>
   </div>`;
 }
+/* Каталог компаний считал это для КАЖДОЙ из 1834 карточек на каждую отрисовку
+   экрана: клик по вкладке, любая буква в поиске, смена отрасли. companyTotal
+   и companyMentions вызывали companyDeals(id) НЕЗАВИСИМО (двойная работа), а
+   сама функция сканирует все 1332 сделки плюс мини- и bulk-записи против
+   псевдонимов компании — 1834×2×1332 ≈ 6 млн сравнений синхронно на потоке
+   рендера, и это ощущалось как зависание при каждом открытии «Компаний».
+   Данные (DEALS/MATCH_KEYS/…) неизменны после загрузки базы, а сама эта
+   функция вызывается только когда база уже загружена (route() ждёт
+   bulkLoaded), поэтому результат по id можно посчитать один раз и переиспользовать. */
+const companyDealsCache = new Map();
 function companyDeals(id){
+  const cached = companyDealsCache.get(id);
+  if(cached) return cached;
   const structured = DEALS.filter(d=>d.buyer===id||d.target===id||d.seller_id===id||d.asset_id===id);
   const structuredIds = new Set(structured.map(d=>d.id));
   const mentions = [];
@@ -996,7 +1008,9 @@ function companyDeals(id){
   MINI_DEALS.forEach(m=>{ if(matchesCompany(m.title, id)) mentions.push({date:m.date,title:m.title,url:m.src[1],source:m.src[0]}); });
   CHANNEL_DEALS.forEach(c=>{ if(matchesCompany(c.title, id)) mentions.push({date:c.date,title:c.title,url:c.src[1],source:c.src[0]}); });
   BULK_DEALS.forEach(b=>{ if(matchesCompany(b.title, id)) mentions.push({date:b.date,title:b.title,url:(b.src&&b.src[1])||"#",source:(b.src&&b.src[0])||"?"}); });
-  return {structured, mentions};
+  const result = {structured, mentions};
+  companyDealsCache.set(id, result);
+  return result;
 }
 /* «Сделок в базе» — только те, где компания названа стороной. Раньше сюда же
    попадали упоминания по названию в заголовке (автопоиск), и число говорило не
