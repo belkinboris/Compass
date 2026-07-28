@@ -206,3 +206,41 @@ def test_draft_error_rate_stays_low(base):
             wrong["seller"] += not same(seller, truth_s)
     assert wrong["seller"] / max(said["seller"], 1) < 0.10, "продавец стал врать чаще"
     assert wrong["buyer"] / max(said["buyer"], 1) < 0.25, "покупатель стал врать чаще"
+
+
+# ---------- ворота в базу ----------
+
+def test_promote_refuses_a_duplicate(base):
+    """Сделка, которая уже есть в базе, второй карточкой не становится."""
+    import promote
+    deal = next(d for d in base["deals"]
+                if d.get("src") and len(d["src"][0]) > 1 and str(d["src"][0][1]).startswith("http")
+                and d.get("ind"))
+    draft = {"title": deal["title"], "date": deal["date"], "ind": deal["ind"],
+             "src": [["источник", deal["src"][0][1]]]}
+    bad, hold = promote.check(draft, base, matcher.index_base(base["deals"]), promote.industries())
+    assert any("уже есть в базе" in r for r in bad), bad
+
+
+def test_promote_refuses_word_currency_and_placeholder_seller(base):
+    """Сумма словом и «продавец не раскрыт» — нарушения соглашений базы."""
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": "Компания «Тест-Альфа» купила завод «Тест-Бета»",
+             "date": "2026-07-28", "ind": sorted(inds)[0],
+             "src": [["источник", "https://example.invalid/x"]],
+             "sum": "12 млрд рублей", "seller": "не раскрыт"}
+    bad, _ = promote.check(draft, base, idx, inds)
+    assert any("валюта словом" in r for r in bad)
+    assert any("заглушка" in r for r in bad)
+
+
+def test_promote_holds_instead_of_guessing_industry(base):
+    """Не хватает отрасли — карточка ждёт человека, а не выдумывает поле."""
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": "Компания «Тест-Гамма» купила завод «Тест-Дельта»",
+             "date": "2026-07-28", "ind": None,
+             "src": [["источник", "https://example.invalid/y"]]}
+    bad, hold = promote.check(draft, base, idx, inds)
+    assert not bad and hold and "отрасль" in hold[0]

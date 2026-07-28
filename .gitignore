@@ -10,3 +10,4 @@ pipeline/*review_candidates*.csv
 data/inbox/raw/
 data/inbox/triage/
 data/inbox/drafts/
+data/inbox/hold/
