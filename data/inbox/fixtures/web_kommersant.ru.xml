@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ФИКСТУРА, НЕ ЗАГРУЗКА ИЗ СЕТИ. Собрана вручную: шесть записей в формате RSS.
+     Две о новых сделках, две — соседние темы, на которых фильтр обязан
+     промолчать, и две (news/5, news/6) — о сделках, которые УЖЕ ЕСТЬ в базе:
+     они нужны, чтобы прогнать шаг обогащения (`enrich.py`) там, где сети нет.
+     Заголовки последних двух намеренно повторяют названия в кавычках из
+     карточек g489b4309 и gcf05509a — именно по ним `match.py` узнаёт сделку. -->
+<rss version="2.0">
+ <channel>
+  <title>Фикстура ленты</title>
+  <item>
+   <title>«Сбербанк» продал 100% сети клиник «Пример» группе «Образец» за 12 млрд рублей</title>
+   <link>https://example.invalid/news/1</link>
+   <description>Сделка закрыта, покупателем выступила группа «Образец».</description>
+   <pubDate>Tue, 28 Jul 2026 09:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Стартап «Пример-Тех» привлёк 300 млн рублей от фонда «Ромашка Капитал»</title>
+   <link>https://example.invalid/news/2</link>
+   <description>Раунд A, инвестор получил миноритарную долю.</description>
+   <pubDate>Tue, 28 Jul 2026 10:30:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Акции «Образца» подорожали на 4% после новости о покупке сети клиник</title>
+   <link>https://example.invalid/news/3</link>
+   <description>Реакция рынка на объявленную сделку.</description>
+   <pubDate>Tue, 28 Jul 2026 11:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Гендиректором «Примера» назначен Иван Иванов</title>
+   <link>https://example.invalid/news/4</link>
+   <description>Кадровое назначение.</description>
+   <pubDate>Tue, 28 Jul 2026 12:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>X5 Group раскрыла сумму покупки дистрибьютора продуктов питания ООО «Торговый дом ВКТ» — 3,5 млрд рублей</title>
+   <link>https://example.invalid/news/5</link>
+   <description>Ранее сумма сделки не называлась.</description>
+   <pubDate>Mon, 01 Jun 2026 10:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>АФК «Система» завершила IPO Cosmos Hotel Group</title>
+   <link>https://example.invalid/news/6</link>
+   <description>Размещение состоялось на Московской бирже.</description>
+   <pubDate>Fri, 10 Jul 2026 10:00:00 +0300</pubDate>
+  </item>
+ </channel>
+</rss>

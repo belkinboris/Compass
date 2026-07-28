@@ -19,6 +19,7 @@ import httpx
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
@@ -32,6 +33,13 @@ app = FastAPI(title="КОМПАС")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+# Сжатие ответов. База сделок — 4,6 МБ текста, и до этого она уезжала в браузер
+# как есть: 4695 КБ по сети на каждый первый заход. JSON сжимается в шесть раз,
+# так что это самая дешёвая правка из возможных — одна строка вместо дробления
+# файла на части и переписывания загрузчика.
+# minimum_size: мелочь сжимать дороже, чем отдать как есть.
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 

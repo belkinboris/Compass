@@ -4,3 +4,11 @@ __pycache__/
 nohup.out
 *.db
 pipeline/*review_candidates*.csv
+
+# Приток: сырьё и отчёты разбора — рабочие файлы, не данные продукта.
+# Фикстуры (data/inbox/fixtures) в репозитории нужны: на них гоняются тесты.
+data/inbox/raw/
+data/inbox/triage/
+data/inbox/drafts/
+data/inbox/hold/
+data/inbox/updates/

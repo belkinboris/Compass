@@ -22,7 +22,11 @@ pytest.importorskip("playwright.sync_api", reason="playwright не устано�
 from playwright.sync_api import sync_playwright  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
-CHROMIUM = "/opt/pw-browsers/chromium"
+# Локально браузер предустановлен по этому пути (PLAYWRIGHT_BROWSERS_PATH), и
+# `playwright install` запускать не нужно. В CI его нет — там Chromium ставится
+# отдельным шагом, и Playwright сам знает, где он лежит.
+_PRESET = Path("/opt/pw-browsers/chromium")
+LAUNCH = {"executable_path": str(_PRESET)} if _PRESET.exists() else {}
 WIDTHS = (360, 390, 1280)
 
 
@@ -57,7 +61,7 @@ def base_url():
 def browser():
     """Один браузер на сессию: запуск Chromium дороже всех тестов вместе."""
     with sync_playwright() as p:
-        br = p.chromium.launch(executable_path=CHROMIUM)
+        br = p.chromium.launch(**LAUNCH)
         yield br
         br.close()
 

@@ -10,6 +10,7 @@
 import json
 import re
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -85,6 +86,23 @@ def test_buyer_is_not_seller(deals):
 
 PLACEHOLDER = re.compile(
     r"^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$", re.I)
+
+
+ROLE_PAIRS = (("buyer", "target"), ("buyer", "seller_id"), ("target", "seller_id"),
+              ("buyer", "asset_id"), ("seller_id", "asset_id"), ("target", "asset_id"))
+
+
+def test_one_company_holds_one_role_in_a_deal(deals):
+    """Компания не может быть в одной сделке и продавцом, и предметом.
+
+    Прогон 32: у трёх карточек профиль продавца стоял в `target` — «Черкизово
+    приобрела пять компаний у банка „Траст"», а предметом сделки числился сам
+    «Траст». Проверка ловит этот класс целиком, а не только пару покупатель —
+    продавец, которая проверялась раньше.
+    """
+    bad = [(d["id"], a, b) for d in deals for a, b in ROLE_PAIRS
+           if d.get(a) and d.get(a) == d.get(b)]
+    assert not bad, f"одна компания в двух ролях: {bad[:5]}"
 
 
 def test_seller_is_not_a_placeholder(deals):
@@ -168,3 +186,320 @@ def test_company_descriptions_have_no_internal_jargon(base):
     bad = [(cid, str(c.get("desc"))[:60]) for cid, c in base["companies"].items()
            if INTERNAL_JARGON.search(str(c.get("desc") or ""))]
     assert not bad, f"внутренняя кухня в описании профиля: {bad[:5]}"
+
+
+# Тот же предикат пустоты, что и на экране (`hasFact` в index.html): заглушкой
+# считается только строка, в которой кроме формулировки отсутствия ничего нет.
+LAW_PLACEHOLDER = re.compile(
+    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
+    r"|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*"
+    r"(?:\s+(?:официально|публично))?)[.\s]*$", re.I)
+
+
+def is_placeholder(value):
+    text = str(value or "").strip()
+    return not text or bool(LAW_PLACEHOLDER.match(text))
+
+
+APPROVAL_BODY = re.compile(
+    r"ФАС\b|антимонопольн|правительственн[а-яё]*\s+(?:под)?комисси|правкомисси|подкомисси"
+    r"|Банк[а-яё]*\s+России|ЦБ\s+РФ|Центробанк|президент[а-яё]*\s+Р(?:оссии|Ф)|правительств[а-яё]*"
+    r"|российск[а-яё]*\s+власт|Минцифр|Минпромторг|Минсельхоз|Роскомнадзор|Росимуществ|регулятор"
+    r"|UOKiK|Rekabet|Еврокомисси|CFIUS|OFAC|совет[а-яё]*\s+директоров|собрани[а-яё]*\s+акционеров", re.I)
+APPROVAL_ACT = re.compile(r"одобр|разреш|согласова|согласи[ея]|утверд", re.I)
+SENTENCE = re.compile(r"(?<=[.!?])\s+(?=(?-i:[А-ЯЁA-Z«\"]))")
+# Просмотрено глазами: согласование в тексте есть, но оно про другую сделку
+# (подробности — в docstring pipeline/extract_approvals.py).
+APPROVAL_EXCEPTIONS = {"g4b26b011", "g96e561ef", "g72fad24b", "g718e3d0e"}
+
+
+def test_approval_is_not_left_in_prose(deals):
+    """Линза «Юрист» не должна говорить «согласования не раскрыли», когда
+    согласование описано в той же карточке (прогон 29).
+
+    Ловит следующую партию данных: если в «Дополнительной информации» новой
+    сделки написано «ФАС одобрила», а поле «Согласования» пусто, пользователь
+    увидит на соседних вкладках факт и утверждение, что факта нет.
+    """
+    bad = []
+    for d in deals:
+        if d["id"] in APPROVAL_EXCEPTIONS:
+            continue
+        if not is_placeholder((d.get("law") or {}).get("appr")):
+            continue
+        for text in (d.get("extra"), (d.get("eco") or {}).get("rationale"),
+                     (d.get("eco") or {}).get("context"), (d.get("eco") or {}).get("share")):
+            for sent in SENTENCE.split(str(text or "")):
+                if APPROVAL_BODY.search(sent) and APPROVAL_ACT.search(sent):
+                    bad.append((d["id"], sent.strip()[:70]))
+                    break
+    assert not bad, f"согласование осталось в тексте, поле пусто: {bad[:5]}"
+
+
+HANGING_TAIL = re.compile(r"[;,:—–-]$")
+LOWER_START = re.compile(r"^(?-i:[а-яё])")
+LAW_FIELDS = ("struct", "appr", "terms")
+
+
+def test_no_value_ends_with_a_hanging_separator(deals):
+    """Значение поля не может кончаться на «;» — это обрубок фразы (прогон 30).
+
+    Так было у 22 «Согласований» из 144: поле нарезали из сплошного текста по
+    точке с запятой, и в карточку попадала половина мысли.
+    """
+    bad = []
+    for d in deals:
+        for grp in ("eco", "law"):
+            for key, value in (d.get(grp) or {}).items():
+                if not isinstance(value, str):
+                    continue
+                text = re.sub(r"\s+", " ", value).strip()
+                if text and not is_placeholder(text) and HANGING_TAIL.search(text):
+                    bad.append((d["id"], f"{grp}.{key}", text[-40:]))
+    assert not bad, f"значение обрывается на разделителе: {bad[:5]}"
+
+
+def test_law_values_start_with_a_capital(deals):
+    """Юридические поля — законченные утверждения, а не куски фразы.
+
+    Строчная буква в начале означала, что подлежащее осталось в `extra`:
+    «подали в ФАС ходатайство…» — кто подал, на экране не видно. Проверка
+    намеренно ограничена линзой «Юрист»: в `eco.*` строчное начало встречается
+    и законно (продолжение перечисления показателей).
+    """
+    bad = [(d["id"], f"law.{f}", str((d.get("law") or {}).get(f))[:40])
+           for d in deals for f in LAW_FIELDS
+           if not is_placeholder((d.get("law") or {}).get(f))
+           and LOWER_START.match(re.sub(r"\s+", " ", str((d.get("law") or {}).get(f))).strip())]
+    assert not bad, f"юридическое поле начинается со строчной буквы: {bad[:5]}"
+
+
+APPROVING_BODY = re.compile(
+    r"ФАС\b|антимонопольн|правительственн[а-яё]*\s+(?:под)?комисси|правкомисси|подкомисси"
+    r"|Банк[а-яё]*\s+России|ЦБ\s+РФ|Центробанк|президент[а-яё]*|правительств[а-яё]*|премьер"
+    r"|российск[а-яё]*\s+власт|Минцифр|Минпромторг|Минсельхоз|Минфин|Минюст|Роскомнадзор"
+    r"|Росимуществ|Росжелдор|регулятор|UOKiK|Rekabet|Еврокомисси|CFIUS|OFAC|BIS|EMRA"
+    r"|совет[а-яё]*\s+директоров|собрани[а-яё]*\s+акционеров|акционер|суд\b|указ|распоряжени"
+    r"|предписани", re.I)
+
+
+def test_approval_names_a_body(deals):
+    """В «Согласованиях» должен быть назван орган, который согласовывал.
+
+    Ловит A13: под этим заголовком лежали состав команды юрфирмы, описание
+    компании и мотив сделки — там нет ни одного органа. Проверка намеренно
+    широкая: «премьер подписал распоряжение» — согласование, хотя слова
+    «одобрил» в нём нет.
+    """
+    bad = [(d["id"], str((d.get("law") or {}).get("appr"))[:60]) for d in deals
+           if not is_placeholder((d.get("law") or {}).get("appr"))
+           and not APPROVING_BODY.search(str((d.get("law") or {}).get("appr")))]
+    assert not bad, f"в «Согласованиях» не назван орган: {bad[:5]}"
+
+
+def test_law_value_does_not_repeat_the_title(deals):
+    """Значение поля не начинается с дословного повтора заголовка карточки.
+
+    Так было у 6 «Согласований»: заголовок склеился с фактом без точки, и на
+    экране карточка повторяла сама себя.
+    """
+    bad = []
+    for d in deals:
+        title = re.sub(r"\s+", " ", str(d.get("title") or "")).strip().lower()
+        for f in LAW_FIELDS:
+            value = re.sub(r"\s+", " ", str((d.get("law") or {}).get(f) or "")).strip()
+            if len(value) > 40 and title and value[:40].lower() in title:
+                bad.append((d["id"], f"law.{f}"))
+    assert not bad, f"поле начинается с повтора заголовка: {bad[:5]}"
+
+
+def test_buyer_is_named_once(deals):
+    """У покупателя либо профиль (`buyer`), либо имя текстом (`buyer_name`).
+
+    Два источника имени для одной роли расходятся при первой же правке: на
+    экране будет одно, в выжимке другое. Текстовый вариант появился в прогоне
+    38 для инвестиционных раундов, где профилей у фондов почти нет.
+    """
+    bad = [(d["id"], d.get("buyer"), d.get("buyer_name")) for d in deals
+           if d.get("buyer") and str(d.get("buyer_name") or "").strip()]
+    assert not bad, f"у покупателя одновременно профиль и имя текстом: {bad[:5]}"
+
+
+def test_asset_is_not_a_party(base):
+    """Предмет сделки — не её сторона, и наоборот.
+
+    Прогон 45: у «Wildberries & Russ приобрела сеть «Рив Гош»» продавцом стоял
+    сам «Рив Гош» — проданная компания; у «Инвестиции Softline Venture Partners
+    в Kickidler» предметом сделки числился инвестор. На экране это плашка
+    «Продавец → Предмет → Покупатель», где две ячейки называют одну компанию.
+    Проверка сравнивает названия, а не только ссылки: половина этих карточек хранит
+    сторону текстом (`seller`, `buyer_name`), а предмет — профилем.
+    """
+    def flat(s):
+        return re.sub(r"[«»\"'(),.\s]", "", str(s or "")).lower()
+
+    comps = base["companies"]
+    bad = []
+    for d in base["deals"]:
+        for field, ref in (("asset", "buyer"), ("asset", "seller_id")):
+            name = comps.get(d.get(ref), {}).get("name")
+            if d.get(field) and name and flat(name) == flat(d[field]):
+                bad.append((d["id"], field, ref))
+        if d.get("asset") and d.get("seller") and flat(d["seller"]) == flat(d["asset"]):
+            bad.append((d["id"], "asset", "seller"))
+        for text_field in ("buyer_name", "seller"):
+            for ref in ("target", "asset_id"):
+                name = comps.get(d.get(ref), {}).get("name")
+                if d.get(text_field) and name and flat(name) == flat(d[text_field]):
+                    bad.append((d["id"], text_field, ref))
+    assert not bad, f"предмет сделки записан её стороной: {bad[:5]}"
+
+
+def test_company_name_is_not_a_deal_composition(base):
+    """Имя компании — это имя, а не состав сделки с долями и предлогами.
+
+    У 48 профилей из 1846 в названии стояла доля из заголовка («ООО «Винтео» ,
+    51%», «долей в пяти юрлицах сети гипермаркетов OBI»), и это показывалось в
+    плашке сторон, в каталоге и в поиске. 37 вычищены в прогоне 37, оставшиеся
+    11 — в прогоне 39; тест держит границу.
+    """
+    dirt = re.compile(r"\d+[,.]?\d*\s*%|\bдолей\b|\bакций\b|оставшиеся", re.I)
+    bad = [(cid, c.get("name")) for cid, c in base["companies"].items()
+           if dirt.search(re.sub(r"\s+", " ", str(c.get("name") or "")))]
+    assert not bad, f"в названии профиля стоит доля из заголовка сделки: {bad[:5]}"
+
+
+def test_lot_profile_names_more_than_one_entity(base):
+    """Признак `lot` ставится записи, за которой несколько юрлиц.
+
+    Профиль-лот («ООО «Датана» и ООО «Датабриз»») — не компания, а состав
+    сделки, и интерфейс говорит об этом отдельной строкой. Если признак стоит
+    у записи с одним именем, строка врёт.
+    """
+    bad = []
+    for cid, c in base["companies"].items():
+        if not c.get("lot"):
+            continue
+        name = str(c.get("name") or "")
+        if not (re.search(r"\bи\b|,", name) or re.search(r"юрлиц|компании,", name, re.I)):
+            bad.append((cid, name))
+    assert not bad, f"признак лота у записи с одним именем: {bad[:5]}"
+
+
+def test_no_duplicate_deal_cards(deals):
+    """Одна сделка — одна карточка.
+
+    Признак дубля подобран замером на самой базе. Наивный «общее название в
+    кавычках + та же сумма + 45 дней» даёт 5 пар, из которых верна одна:
+    название в кавычках часто не предмет, а ПРОДАВЕЦ, и банк «Траст»,
+    продающий десятки активов, совпадает сам с собой. Признак дубля — ДВА
+    общих названия при одной сумме; на нём в базе была ровно одна пара (два
+    описания выхода Volkswagen из России), слитая в прогоне 50.
+    """
+    def quoted(text):
+        return {m.group(1).lower() for m in re.finditer(r"«([^»]{2,40})»", str(text or ""))}
+
+    def amount(text):
+        m = re.search(r"(\d[\d\s]*(?:[.,]\d+)?)\s*(млрд|млн)", str(text or ""), re.I)
+        if not m:
+            return None
+        num = float(m.group(1).replace(" ", "").replace(",", "."))
+        return num * (1000 if m.group(2).lower() == "млрд" else 1)
+
+    def day(text):
+        try:
+            y, m_, d = (int(x) for x in str(text)[:10].split("-"))
+            return date(y, m_, d)
+        except ValueError:
+            return None
+
+    rows = [(d["id"], day(d.get("date")), quoted(d.get("title")), amount(d.get("sum")))
+            for d in deals]
+    bad = []
+    for i, (id_a, date_a, q_a, sum_a) in enumerate(rows):
+        for id_b, date_b, q_b, sum_b in rows[i + 1:]:
+            if len(q_a & q_b) < 2 or not (sum_a and sum_b) or not (date_a and date_b):
+                continue
+            if abs((date_a - date_b).days) > 45:
+                continue
+            if abs(sum_a - sum_b) / max(sum_a, sum_b) < 0.05:
+                bad.append((id_a, id_b, sorted(q_a & q_b)))
+    assert not bad, f"две карточки об одной сделке: {bad[:3]}"
+
+
+def test_no_company_twins(base):
+    """Одна компания — один профиль.
+
+    «Альфа-Банк» и «Alfa-Bank» были двумя профилями, и сделки делились между
+    ними: «Сделок в базе» показывало половину, каталог показывал компанию
+    дважды. Ключ ниже — тот же, которым мерили класс в прогоне 51: имя без
+    организационной формы и пунктуации, транслитерированное в латиницу, с
+    сглаживанием c/k, ph/f, y/i, ё/е и удвоенных букв.
+
+    Исключения — не поблажка правилу, а разные компании с похожими именами:
+    иностранный владелец и его российское юрлицо. Слить их значило бы сделать
+    продавца предметом собственной сделки.
+    """
+    cyr = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e", "ж": "zh",
+           "з": "z", "и": "i", "й": "i", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o",
+           "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "h", "ц": "ts",
+           "ч": "ch", "ш": "sh", "щ": "sch", "ъ": "", "ы": "i", "ь": "", "э": "e",
+           "ю": "iu", "я": "ia"}
+    allowed = {frozenset(p) for p in (
+        ("Essity", "ООО «Эссити»"),                    # владелец и проданный российский бизнес
+        ("Fortum", "Фортум"),                          # финский владелец и ПАО «Фортум»
+        ("Polymetal", "Полиметалл"),                   # plc и АО «Полиметалл»
+    )}
+
+    def key(name):
+        s = re.sub(r"\b(ооо|оао|зао|пао|ао|нао|гк|пкф|тд)\b\.?", " ", str(name or "").lower())
+        s = "".join(cyr.get(ch, ch) for ch in s)
+        s = re.sub(r"[^a-z0-9]+", "", s)
+        for a, b in (("ph", "f"), ("sch", "sh"), ("ck", "k"), ("ts", "s"), ("x", "ks"),
+                     ("w", "v"), ("q", "k"), ("y", "i"), ("j", "i")):
+            s = s.replace(a, b)
+        s = s.replace("ch", "\x00").replace("c", "k").replace("\x00", "ch")
+        return re.sub(r"(.)\1+", r"\1", s)
+
+    groups = {}
+    for cid, c in base["companies"].items():
+        k = key(c.get("name"))
+        if len(k) >= 3:
+            groups.setdefault(k, []).append(str(c.get("name")))
+    twins = [names for names in groups.values()
+             if len(names) > 1 and frozenset(names) not in allowed]
+    assert not twins, f"одна компания записана несколькими профилями: {twins[:3]}"
+
+
+def test_match_key_alias_is_a_name(base):
+    """Псевдоним компании — имя, а не кусок заголовка.
+
+    По этим ключам страница компании собирает упоминания в заголовках сделок.
+    «долей русинжгидро» или «продавец 80% долей» не сработают никогда: они
+    требуют дословного повтора всей фразы. Дефектным считаем псевдоним, который
+    и содержит ролевое/долевое слово, и не пересекается с именем профиля
+    (полная форма «имя (продавец 80% долей)» под правило не попадает — она
+    начинается с имени).
+
+    Два исключения оставлены намеренно: короткая форма ловит чужие сделки —
+    «информ» находит «Башинформсвязь», «агроинвест» — «Бумеранг агроинвест».
+    """
+    phrase = re.compile(
+        r"\b(выкуп\w*|покупк\w*|продаж\w*|приобрет\w*|продавец|покупатель|инвестор|доли|долей"
+        r"|долю|акци\w+|пакет\w*|бизнес|актив\w*|до \d+|\d+\s?%|оставш\w+|структур\w+|владелец"
+        r"|наследник\w*|основател\w*|бывш\w+|сооснователь)\b", re.I)
+    allowed = {"оставшиеся 49 9% акций информ", "долей агроинвест"}
+
+    def flat(s):
+        return re.sub(r"[^a-zа-яё0-9]+", "", str(s or "").lower())
+
+    bad = []
+    for cid, aliases in base["match_keys"].items():
+        name = flat((base["companies"].get(cid) or {}).get("name"))
+        for alias in aliases:
+            key = flat(alias)
+            if not name or not key or key in name or name in key:
+                continue
+            if phrase.search(alias) and alias not in allowed:
+                bad.append((cid, alias))
+    assert not bad, f"псевдоним — кусок заголовка, а не имя: {bad[:5]}"
