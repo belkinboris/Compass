@@ -324,6 +324,36 @@ def test_buyer_is_named_once(deals):
     assert not bad, f"у покупателя одновременно профиль и имя текстом: {bad[:5]}"
 
 
+def test_asset_is_not_a_party(base):
+    """Предмет сделки — не её сторона, и наоборот.
+
+    Прогон 45: у «Wildberries & Russ приобрела сеть «Рив Гош»» продавцом стоял
+    сам «Рив Гош» — проданная компания; у «Инвестиции Softline Venture Partners
+    в Kickidler» предметом сделки числился инвестор. На экране это плашка
+    «Продавец → Предмет → Покупатель», где две ячейки называют одну компанию.
+    Проверка сравнивает названия, а не только ссылки: половина этих карточек хранит
+    сторону текстом (`seller`, `buyer_name`), а предмет — профилем.
+    """
+    def flat(s):
+        return re.sub(r"[«»\"'(),.\s]", "", str(s or "")).lower()
+
+    comps = base["companies"]
+    bad = []
+    for d in base["deals"]:
+        for field, ref in (("asset", "buyer"), ("asset", "seller_id")):
+            name = comps.get(d.get(ref), {}).get("name")
+            if d.get(field) and name and flat(name) == flat(d[field]):
+                bad.append((d["id"], field, ref))
+        if d.get("asset") and d.get("seller") and flat(d["seller"]) == flat(d["asset"]):
+            bad.append((d["id"], "asset", "seller"))
+        for text_field in ("buyer_name", "seller"):
+            for ref in ("target", "asset_id"):
+                name = comps.get(d.get(ref), {}).get("name")
+                if d.get(text_field) and name and flat(name) == flat(d[text_field]):
+                    bad.append((d["id"], text_field, ref))
+    assert not bad, f"предмет сделки записан её стороной: {bad[:5]}"
+
+
 def test_company_name_is_not_a_deal_composition(base):
     """Имя компании — это имя, а не состав сделки с долями и предлогами.
 
