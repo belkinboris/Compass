@@ -425,12 +425,14 @@ a.dp-asset-name:hover{color:var(--accent)}
 .team-item{padding:7px 0;border-bottom:1px dashed var(--line-soft)}
 .team-item:last-child{border-bottom:none}
 .team-item .t-firm{font-weight:600;font-size:14px;color:var(--ink)}
+.team-item .t-firm a:hover{color:var(--accent)}
 .team-item .t-side{font-size:12px;color:var(--muted);margin-top:1px}
 .team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
 
 /* ---------- цепочка владения ---------- */
 .adv-card .label{margin-bottom:6px}
 .adv-card .adv-name{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:6px}
+.adv-card .adv-name a:hover{color:var(--accent)}
 .adv-card p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;max-width:600px}
 .src{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
 .src a{color:var(--accent);font-size:13.5px;display:inline-block;margin:6px 20px 0 0;border-bottom:1px solid transparent;transition:border-color .2s}
@@ -898,6 +900,17 @@ const firmRxOf = f => {
   if(FIRM_MATCH[f.id]) return FIRM_MATCH[f.id];
   const escaped = f.n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/\s+/g,"\\s+");
   return new RegExp(escaped,"i");
+};
+/* Имя консультанта на карточке сделки было просто текстом: «ККМП» на линзе
+   «Юрист» нельзя было открыть как профиль фирмы, хотя то же самое имя тем же
+   правилом (firmRxOf/FIRM_MATCH) уже узнаётся в каталоге консультантов —
+   иначе там не считались бы её сделки. Раз правило узнаёт фирму для статистики,
+   оно же должно превращать имя в ссылку там, где юрист его читает. */
+const advFirmLink = name => {
+  const text = String(name || "").trim();
+  if(!text) return "";
+  const firm = [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text));
+  return firm ? `<a href="#/advisors/${firm.id}">${esc(text)}</a>` : esc(text);
 };
 
 /* ================= РОУТЕР ================= */
@@ -1924,16 +1937,28 @@ function relatedScore(d, x){
   return s;
 }
 // «Дополнительная информация» долгое время была дословной копией «Цели сделки»
-// у 678 карточек из 1333: один и тот же абзац читался дважды — на «Обзоре» под
-// расплывчатым заголовком и на линзе «Экономист» под точным. Показываем блок,
-// только если он действительно добавляет что-то к «Цели сделки».
+// у 678 карточек из 1333. Показываем блок, только если он действительно
+// добавляет что-то к «Цели сделки». Раньше сам вызов extraHtml(d) стоял вне
+// #facts и потому был виден одновременно на всех трёх линзах — «Обзор» и
+// «Юрист» показывали тот же текст, что и «Экономист», хотя «Цель сделки»,
+// с которой он сверяется, читается только там. Теперь блок — часть линзы
+// «Экономист» и рисуется рядом с полем, от которого зависит.
 function extraHtml(d){
   const norm = t => String(t||"").replace(/\s+/g," ").trim().toLowerCase();
+  const dup = (a,b) => a===b || a.startsWith(b) || b.startsWith(a);
   const ex = norm(d.extra), goal = norm(d.eco && d.eco.rationale);
   if(!ex) return "";
+  if(!goal || goal === "—") return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
   // не только полное совпадение: после чистки одно поле могло стать началом
   // другого, а видеть тот же текст с обрезанным хвостом ничем не лучше
-  if(goal && goal !== "—" && (ex === goal || ex.startsWith(goal) || goal.startsWith(ex))) return "";
+  if(dup(ex, goal)) return "";
+  // «Сделка. » (и похожие) — общий ярлык, приписанный к одному из полей поверх
+  // того же текста: без снятия этого ярлыка проверка выше не видела дубль на
+  // 3 карточках из 1332 («Сделка. »+X сравнивалось с X и не совпадало ни с чем).
+  // Проверено, что это не задевает содержательные различия: снятие ярлыка не
+  // трогает ничего, кроме него самого, — сравниваются те же самые слова.
+  const stripLabel = t => t.replace(/^сделка[.:—-]\s*/, "");
+  if(dup(stripLabel(ex), stripLabel(goal))) return "";
   return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
 }
 /* «Похожая» — это общая сторона или общая тема, и ничего слабее.
@@ -2125,7 +2150,6 @@ function renderDeal(id){
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
-  ${extraHtml(d)}
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin:22px 0 6px">
@@ -2275,9 +2299,9 @@ function renderDeal(id){
         ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
       if(!legal.length && !fin.length) return "";
       const legalHtml = legal.length?`<div class="team-col"><span class="team-kind">Юридические консультанты</span>
-        ${legal.map(a=>`<div class="team-item"><div class="t-firm">${a[1]}</div>${a[0]&&!/сторона не уточнена/i.test(a[0])?`<div class="t-side">${a[0]}</div>`:""}</div>`).join("")}</div>`:"";
+        ${legal.map(a=>`<div class="team-item"><div class="t-firm">${advFirmLink(a[1])}</div>${a[0]&&!/сторона не уточнена/i.test(a[0])?`<div class="t-side">${a[0]}</div>`:""}</div>`).join("")}</div>`:"";
       const finHtml = fin.length?`<div class="team-col"><span class="team-kind">Финансовые консультанты</span>
-        ${fin.map(x=>{const p=x.split("—");return `<div class="team-item"><div class="t-firm">${p[0].trim()}</div>${p[1]?`<div class="t-side">${p.slice(1).join("—").trim()}</div>`:""}</div>`}).join("")}</div>`:"";
+        ${fin.map(x=>{const p=x.split("—");return `<div class="team-item"><div class="t-firm">${advFirmLink(p[0].trim())}</div>${p[1]?`<div class="t-side">${p.slice(1).join("—").trim()}</div>`:""}</div>`}).join("")}</div>`:"";
       return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${legalHtml}${finHtml}</div>
         <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
     };
@@ -2299,7 +2323,8 @@ function renderDeal(id){
         specRow("Финансовый консультант", d.eco.finadv),
       ])}
       ${para("Цель сделки", d.eco.rationale)}
-      ${para("Контекст", d.eco.context)}`
+      ${para("Контекст", d.eco.context)}
+      ${extraHtml(d)}`
       : ecoEmptyHtml(d);
     /* B4: порядок полей в линзе «Юрист» — по тому, что юристу нужно первым.
        Было: структура → согласования → консультанты → УСЛОВИЯ. Самое ценное и
@@ -2315,7 +2340,7 @@ function renderDeal(id){
       ${realAdv(d).map(a=>`
         <div class="adv-card">
           <span class="label">${a[0]}</span>
-          <div class="adv-name">${a[1]}</div>
+          <div class="adv-name">${advFirmLink(a[1])}</div>
           ${a[2]?`<p>${a[2]}</p>`:""}
         </div>`).join("")}`
       : lawEmptyHtml(d);
@@ -2642,10 +2667,14 @@ function firmEmptyHtml(f, isLegal){
    (69%) у 32 фирм из 37; у остальных там просто «Юридический консультант», то
    есть сторону не назвали. Окончания через [а-яё]*, а не через голый корень:
    `продавц` не совпадает с «(продавец)» — на этом правило уже теряло записи. */
+/* Метки — именительный падеж: это подписи столбцов графика («За кого
+   выступала»), а не часть предложения. Раньше стояло «покупателя», «продавца»
+   (родительный, с маленькой буквы) — на графике рядом с процентом это читалось
+   как обрывок фразы. */
 const ADV_ROLE = [
-  ["покупателя", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
-  ["продавца",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
-  ["предмета сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
+  ["Покупатель", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
+  ["Продавец",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
+  ["Предмет сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
 ];
 const advRoleOf = label => (ADV_ROLE.find(([,rx])=>rx.test(String(label||"")))||[null])[0];
 
