@@ -322,3 +322,34 @@ def test_buyer_is_named_once(deals):
     bad = [(d["id"], d.get("buyer"), d.get("buyer_name")) for d in deals
            if d.get("buyer") and str(d.get("buyer_name") or "").strip()]
     assert not bad, f"у покупателя одновременно профиль и имя текстом: {bad[:5]}"
+
+
+def test_company_name_is_not_a_deal_composition(base):
+    """Имя компании — это имя, а не состав сделки с долями и предлогами.
+
+    У 48 профилей из 1846 в названии стояла доля из заголовка («ООО «Винтео» ,
+    51%», «долей в пяти юрлицах сети гипермаркетов OBI»), и это показывалось в
+    плашке сторон, в каталоге и в поиске. 37 вычищены в прогоне 37, оставшиеся
+    11 — в прогоне 39; тест держит границу.
+    """
+    dirt = re.compile(r"\d+[,.]?\d*\s*%|\bдолей\b|\bакций\b|оставшиеся", re.I)
+    bad = [(cid, c.get("name")) for cid, c in base["companies"].items()
+           if dirt.search(re.sub(r"\s+", " ", str(c.get("name") or "")))]
+    assert not bad, f"в названии профиля стоит доля из заголовка сделки: {bad[:5]}"
+
+
+def test_lot_profile_names_more_than_one_entity(base):
+    """Признак `lot` ставится записи, за которой несколько юрлиц.
+
+    Профиль-лот («ООО «Датана» и ООО «Датабриз»») — не компания, а состав
+    сделки, и интерфейс говорит об этом отдельной строкой. Если признак стоит
+    у записи с одним именем, строка врёт.
+    """
+    bad = []
+    for cid, c in base["companies"].items():
+        if not c.get("lot"):
+            continue
+        name = str(c.get("name") or "")
+        if not (re.search(r"\bи\b|,", name) or re.search(r"юрлиц|компании,", name, re.I)):
+            bad.append((cid, name))
+    assert not bad, f"признак лота у записи с одним именем: {bad[:5]}"

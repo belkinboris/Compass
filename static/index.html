@@ -1034,7 +1034,7 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728e");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728f");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
@@ -2443,6 +2443,10 @@ function renderCompany(id){
     <span class="tag">${c.ind}</span>
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
+    ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
+      <span class="tag steel">Несколько юрлиц</span>
+      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Это не одна компания: под этим именем в сделке шли несколько юридических лиц, проданных одним лотом. Что вошло в лот и какие доли — в карточке сделки.</span>
+    </div>`:""}
     ${(()=>{
       const got = controlGot(id), over = controlOver(id);
       if(!got && !over.length) return "";
