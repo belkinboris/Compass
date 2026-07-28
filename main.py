@@ -16,12 +16,16 @@ import os
 import re
 
 import httpx
-from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import Depends, FastAPI, Request, Response
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
+import auth
+from db.models import Base as DBBase
+from db.models import Comment, SavedFilter, User
+from db.session import engine, get_session
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
 _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
@@ -42,6 +46,29 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# Таблицы аккаунтов (db/models.py) — заготовка лежала не подключённой с 22
+# июля, main.py по-прежнему читает static/data/*.json напрямую для сделок и
+# компаний. create_all создаёт только НЕДОСТАЮЩИЕ таблицы и никогда не трогает
+# существующие данные — безопасно и на пустой sqlite для разработки, и на
+# уже заполненном Postgres на Timeweb.
+@app.on_event("startup")
+def _create_account_tables():
+    try:
+        DBBase.metadata.create_all(engine)
+    except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
+        logger.error("не удалось создать таблицы аккаунтов: %s", e)
+
+
+def get_db():
+    session = get_session()
+    try:
+        yield session
+    finally:
+        session.close()
+
+
+COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 LLM_TIMEOUT = 60.0
@@ -181,6 +208,138 @@ def ask(req: AskRequest):
     except RuntimeError as e:
         logger.error("ask() failed: %s", e)
         return JSONResponse({"fallback": True})
+
+
+# ==================== АККАУНТЫ: вход по ссылке, подписки, комментарии ====================
+# Вход по ссылке на почту (auth.py), решение владельца от 28 июля 2026 — см.
+# docstring auth.py. Отправка письма пока не подключена: SMTP не задан, ссылка
+# уходит в лог сервера строкой "[DEV]", а не в теле ответа (иначе введённая
+# чужая почта отдавала бы чужую ссылку для входа прямо в браузере).
+
+class LoginRequest(BaseModel):
+    email: str
+
+
+class SubscriptionIn(BaseModel):
+    industry: str | None = None
+    keyword: str | None = None
+    min_amount_mln_rub: float | None = None
+
+
+class CommentIn(BaseModel):
+    body: str
+
+
+def _current_user(request: Request, db=Depends(get_db)) -> User | None:
+    return auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
+
+
+@app.post("/api/auth/request-link")
+def request_link(req: LoginRequest, request: Request, db=Depends(get_db)):
+    if not auth.valid_email(req.email):
+        return JSONResponse({"error": "некорректная почта"}, status_code=400)
+    base_url = str(request.base_url).rstrip("/")
+    auth.request_login_link(db, req.email, base_url)
+    # Один и тот же ответ независимо от того, существовал пользователь раньше
+    # или нет: иначе по ответу можно узнавать, зарегистрирован ли чужой адрес.
+    return {"ok": True}
+
+
+@app.get("/api/auth/verify")
+def verify_link(token: str, db=Depends(get_db)):
+    user, err = auth.verify_login_token(db, token)
+    if not user:
+        return RedirectResponse(url="/#/account?error=" + err.replace(" ", "+"), status_code=302)
+    cookie = auth.create_session(db, user)
+    resp = RedirectResponse(url="/#/account", status_code=302)
+    resp.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
+                     httponly=True, samesite="lax", secure=COOKIE_SECURE)
+    return resp
+
+
+@app.post("/api/auth/logout")
+def logout(request: Request, response: Response, db=Depends(get_db)):
+    token = request.cookies.get(auth.SESSION_COOKIE)
+    if token:
+        auth.revoke_session(db, token)
+    response.delete_cookie(auth.SESSION_COOKIE)
+    return {"ok": True}
+
+
+@app.get("/api/me")
+def me(user: User | None = Depends(_current_user)):
+    # 200 всегда: анонимный визит — самое частое и совершенно нормальное
+    # состояние, а не ошибка. Раньше отвечали 401, и браузер писал «Failed to
+    # load resource: 401» в консоль при КАЖДОЙ загрузке страницы — что прямо
+    # нарушает правило «в консоли нет ошибок» (test_ui.py) для анонимного
+    # визитора, то есть почти всегда.
+    if not user:
+        return {"logged_in": False}
+    return {"logged_in": True, "email": user.email, "role": user.role.value,
+            "tier": user.tier.value, "is_verified": user.is_verified}
+
+
+@app.get("/api/subscriptions")
+def list_subscriptions(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    rows = db.query(SavedFilter).filter_by(user_id=user.id, active=True).order_by(SavedFilter.created_at.desc()).all()
+    return [{"id": r.id, "industry": r.industry, "keyword": r.keyword,
+             "min_amount_mln_rub": float(r.min_amount_mln_rub) if r.min_amount_mln_rub is not None else None}
+            for r in rows]
+
+
+@app.post("/api/subscriptions")
+def create_subscription(sub: SubscriptionIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    if not sub.industry and not sub.keyword:
+        return JSONResponse({"error": "укажите отрасль или ключевое слово"}, status_code=400)
+    row = SavedFilter(user_id=user.id, industry=sub.industry or None, keyword=sub.keyword or None,
+                       min_amount_mln_rub=sub.min_amount_mln_rub)
+    db.add(row)
+    db.commit()
+    return {"id": row.id}
+
+
+@app.delete("/api/subscriptions/{sub_id}")
+def delete_subscription(sub_id: int, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    row = db.get(SavedFilter, sub_id)
+    if not row or row.user_id != user.id:
+        return JSONResponse({"error": "не найдено"}, status_code=404)
+    row.active = False
+    db.commit()
+    return {"ok": True}
+
+
+# Комментарии видны сразу: писать может только вошедший по почте пользователь,
+# и это уже проверенный e-mail — планка выше, чем у анонимного интернета.
+# Модерация (жалоба/скрытие) — следующий шаг, не блокирующий первую версию;
+# поле status у Comment для неё уже есть.
+@app.get("/api/deals/{deal_id}/comments")
+def list_comments(deal_id: str, db=Depends(get_db)):
+    rows = (db.query(Comment)
+            .filter_by(deal_id=deal_id, status="approved")
+            .order_by(Comment.created_at.asc()).all())
+    return [{"id": c.id, "body": c.body, "created_at": c.created_at.isoformat(),
+             "author": c.user.email.split("@")[0]} for c in rows]
+
+
+@app.post("/api/deals/{deal_id}/comments")
+def post_comment(deal_id: str, comment: CommentIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "войдите по почте, чтобы комментировать"}, status_code=401)
+    body = comment.body.strip()
+    if not body:
+        return JSONResponse({"error": "пустой комментарий"}, status_code=400)
+    if len(body) > 4000:
+        return JSONResponse({"error": "слишком длинный комментарий"}, status_code=400)
+    row = Comment(deal_id=deal_id, user_id=user.id, body=body, status="approved")
+    db.add(row)
+    db.commit()
+    return {"id": row.id, "created_at": row.created_at.isoformat(), "author": user.email.split("@")[0]}
 
 
 @app.get("/{full_path:path}")

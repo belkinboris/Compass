@@ -1,5 +1,6 @@
 """Схема БД — компании/консультанты с алиасами для идентификации сущностей,
-сделки с нормализованными суммами, и заготовка под аккаунты/алерты.
+сделки с нормализованными суммами, и аккаунты: вход по ссылке на почту,
+подписки на алерты (SavedFilter) и комментарии под сделками.
 
 Зачем алиасы (CompanyAlias/AdvisorAlias), а не просто уникальное имя:
 в сырых данных одна и та же фирма встречается под разными строками
@@ -135,6 +136,57 @@ class SavedFilter(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     user: Mapped[User] = relationship(back_populates="saved_filters")
+
+
+# --------------------------------------------------------- вход по ссылке ---
+# Владелец выбрал вход по ссылке на почту вместо пароля (28 июля 2026): не
+# нужно хранить и защищать хэши паролей, а почта у профессиональной аудитории
+# и так есть. Ничего не привязывает схему к этому способу жёстко — сменить на
+# пароль или SSO позже можно, не трогая User.
+
+class LoginToken(Base):
+    """Одноразовая ссылка для входа. email — а не user_id: на момент запроса
+    пользователя может ещё не существовать (первый вход создаёт запись)."""
+    __tablename__ = "login_tokens"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(300))
+    token: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)
+    used_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class AuthSession(Base):
+    """Серверная сессия за обычной httponly-кукой — без стороннего сервиса
+    аутентификации и без подписи токена сторонней библиотекой: opaque-токен
+    проверяется прямым запросом к этой таблице, как и LoginToken."""
+    __tablename__ = "auth_sessions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    token: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class Comment(Base):
+    """Комментарий под сделкой. Виден сразу: писать может только вошедший по
+    почте пользователь, и это уже даёт проверенный e-mail — планка выше, чем
+    у анонимного интернета. Модерация (жалоба/скрытие) — следующий шаг, не
+    блокирующий первую версию; поле status оставлено под неё заранее."""
+    __tablename__ = "comments"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    deal_id: Mapped[str] = mapped_column(ForeignKey("deals.id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    body: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(20), default="approved")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    deal: Mapped["Deal"] = relationship()
+    user: Mapped[User] = relationship()
 
 
 # ------------------------------------------------------------------ сделки ---

@@ -223,6 +223,27 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .extra-info{margin:28px 0;padding:20px 22px;background:var(--paper2,#F0EFEA);border-radius:10px;border:1px solid var(--line)}
 .extra-info .label{display:block;margin-bottom:10px}
 .extra-info p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
+.acct-form{display:flex;gap:10px;max-width:440px;margin:20px 0}
+.acct-form input{flex:1;padding:13px 16px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}
+.acct-form input:focus{border-color:var(--accent)}
+.acct-note{font-size:13px;color:var(--muted);max-width:440px;line-height:1.6}
+.acct-note.err{color:#B3402A}
+.acct-card{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:20px 0;max-width:520px}
+.acct-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line-soft)}
+.acct-row:last-child{border-bottom:none}
+.acct-row .del{cursor:pointer;color:var(--muted);font-size:13px;border-bottom:1px dotted var(--muted)}
+.acct-row .del:hover{color:#B3402A}
+.acct-newsub{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.acct-newsub select,.acct-newsub input{padding:9px 10px;font-size:13.5px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
+.acct-newsub input[type=number]{width:120px}
+.comments{margin:30px 0;padding-top:22px;border-top:1px solid var(--line)}
+.comment-item{padding:12px 0;border-bottom:1px dashed var(--line-soft)}
+.comment-item:last-child{border-bottom:none}
+.comment-author{font-weight:600;font-size:13px;color:var(--ink)}
+.comment-date{font-size:11.5px;color:var(--muted);margin-left:8px}
+.comment-body{font-size:14px;line-height:1.6;color:var(--ink);margin-top:4px;white-space:pre-wrap}
+.comment-form{display:flex;gap:10px;margin-top:16px;align-items:flex-start}
+.comment-form textarea{flex:1;min-height:64px;padding:12px 14px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;resize:vertical}
 .feed-search{margin:40px 0 26px;display:flex;gap:10px;align-items:stretch}
 .feed-search input{flex:1;padding:13px 18px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:border-color .2s}
 .feed-search input:focus{border-color:var(--accent)}
@@ -533,6 +554,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
       <a href="#/advisors" data-r="advisors">Консультанты</a>
       <a href="#/analytics" data-r="analytics">Аналитика</a>
       <a href="#/assistant" data-r="assistant">Ассистент</a>
+      <a href="#/account" data-r="account" id="navAccount">Войти</a>
     </nav>
   </div>
 </header>
@@ -1302,6 +1324,7 @@ function route(){
     mark("analytics");
   }
   else if(page==="assistant"){renderAssistant();mark("assistant");}
+  else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
   window.scrollTo(0,0);
   if(typeof updTop==="function") updTop();
@@ -2160,6 +2183,7 @@ function renderDeal(id){
   <!-- Строка про правки стоит именно здесь, у источников: человек, который знает
        сделку изнутри, дочитывает до первоисточников и там же видит, куда писать. -->
   <p class="src-fix reveal">Мы собираем сделки из публичных источников и можем ошибаться. Если вы вели эту сделку или были её стороной — напишите, поправим и укажем источник.</p>
+  <div class="comments reveal" id="comments-mount"></div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
      кнопке, а приглушение «Юриста» объяснялось только атрибутом title — на
@@ -2391,6 +2415,7 @@ function renderDeal(id){
   const fx = document.getElementById("fixdeal");
   if(fx) fx.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Правка по сделке: "+d.title.slice(0,90))}&body=${encodeURIComponent(`Карточка: ${location.origin}${location.pathname}#/deal/${d.id}\n\nЧто уточнить:\n`)}`;
   mountMiniAI(d.title);
+  mountComments(d.id);
 }
 
 /* ================= КОМПАНИИ ================= */
@@ -3054,6 +3079,146 @@ function renderAssistant(){
   a.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Правка по сделке в «Компасе»")}`;
   a.textContent = CONTACT_EMAIL;
 })();
+
+/* ================= АККАУНТ: вход по ссылке, подписки, комментарии =================
+   Вход по ссылке на почту — решение владельца (28 июля 2026): аудитория —
+   юристы и консультанты, у каждого уже есть рабочая почта, не нужно хранить
+   пароли. Письмо пока не отправляется по-настоящему — нет SMTP; ссылка
+   уходит в лог сервера (см. auth.py). Пока это так, «прислать ссылку»
+   работает, но получить её может только тот, кто читает логи сервера, —
+   честно говорим об этом на самой странице, а не притворяемся, что письмо
+   уже ушло получателю. */
+let ME = null;
+async function refreshMe(){
+  // /api/me отвечает 200 всегда (и для анонимного визита тоже) — иначе
+  // браузер писал бы «Failed to load resource: 401» в консоль при каждой
+  // загрузке страницы, а это самое частое состояние, не ошибка.
+  try{
+    const r = await fetch("/api/me");
+    const data = r.ok ? await r.json() : {logged_in:false};
+    ME = data.logged_in ? data : null;
+  }catch(e){ ME = null; }
+  const a = document.getElementById("navAccount");
+  if(a) a.textContent = ME ? ME.email.split("@")[0] : "Войти";
+  return ME;
+}
+
+async function renderAccount(qs){
+  await refreshMe();
+  const params = new URLSearchParams(qs||"");
+  const error = params.get("error");
+  if(!ME){
+    app.innerHTML = `
+    <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
+      <p>Без пароля: пришлём одноразовую ссылку на почту. Юристам, экономистам
+         и консультантам — чтобы сохранять подписки на отрасли и оставлять
+         комментарии под сделками.</p></div>
+    ${error?`<p class="acct-note err reveal">Ссылка не сработала: ${esc(error)}. Запросите новую.</p>`:""}
+    <form class="acct-form reveal" id="loginForm">
+      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
+      <button class="chip" type="submit">Прислать ссылку</button>
+    </form>
+    <p class="acct-note reveal" id="loginMsg"></p>`;
+    document.getElementById("loginForm").onsubmit = async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const msg = document.getElementById("loginMsg");
+      msg.textContent = "Отправляем…";
+      try{
+        const r = await fetch("/api/auth/request-link", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email})});
+        if(r.ok) msg.textContent = "Если почта существует — ссылка на вход отправлена. Она действует 15 минут.";
+        else msg.textContent = "Проверьте адрес почты — он выглядит некорректно.";
+      }catch(err){ msg.textContent = "Не получилось отправить запрос, попробуйте ещё раз."; }
+    };
+    return;
+  }
+  app.innerHTML = `
+  <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>${esc(ME.email)}</h1>
+    <p>Роль: ${ME.role==="firm"?"фирма":ME.role==="corporate"?"корпоративный":"частный"} ·
+       Тариф: ${ME.tier==="paid"?"платный":"бесплатный"}${ME.is_verified?" · подтверждён":""}</p></div>
+  <div class="acct-card reveal">
+    <span class="label">Подписки на отрасли</span>
+    <div id="subList"><p class="acct-note">Загружаем…</p></div>
+    <div class="acct-newsub">
+      <select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select>
+      <input type="text" id="subKw" placeholder="ключевое слово (необязательно)">
+      <input type="number" id="subMin" placeholder="от суммы, млн ₽" min="0">
+      <button class="chip" id="subAdd">Добавить</button>
+    </div>
+  </div>
+  <div class="fe-actions reveal" style="justify-content:flex-start">
+    <button class="chip" id="logoutBtn">Выйти</button>
+  </div>`;
+  const drawSubs = async ()=>{
+    const list = document.getElementById("subList");
+    const r = await fetch("/api/subscriptions");
+    const rows = r.ok ? await r.json() : [];
+    list.innerHTML = rows.length ? rows.map(s=>`
+      <div class="acct-row" data-id="${s.id}">
+        <span>${esc(s.industry||"Любая отрасль")}${s.keyword?` · «${esc(s.keyword)}»`:""}${s.min_amount_mln_rub?` · от ${s.min_amount_mln_rub} млн ₽`:""}</span>
+        <span class="del" data-del="${s.id}">Удалить</span>
+      </div>`).join("") : `<p class="acct-note">Пока нет ни одной подписки.</p>`;
+    list.querySelectorAll("[data-del]").forEach(el=>el.onclick = async ()=>{
+      await fetch(`/api/subscriptions/${el.dataset.del}`, {method:"DELETE"});
+      drawSubs();
+    });
+  };
+  drawSubs();
+  document.getElementById("subAdd").onclick = async ()=>{
+    const industry = document.getElementById("subInd").value || null;
+    const keyword = document.getElementById("subKw").value.trim() || null;
+    const min = document.getElementById("subMin").value;
+    if(!industry && !keyword){ alert("Укажите отрасль или ключевое слово"); return; }
+    await fetch("/api/subscriptions", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({industry, keyword, min_amount_mln_rub: min?Number(min):null})});
+    document.getElementById("subKw").value=""; document.getElementById("subMin").value="";
+    drawSubs();
+  };
+  document.getElementById("logoutBtn").onclick = async ()=>{
+    await fetch("/api/auth/logout", {method:"POST"});
+    await refreshMe();
+    location.hash = "#/account";
+    route();
+  };
+}
+
+/* Комментарии — под сделкой, видны сразу (см. Comment в db/models.py: писать
+   может только вошедший по почте, это уже проверенный e-mail). Блок монтируется
+   отдельно от основного innerHTML сделки, потому что список комментариев
+   приходит асинхронно, а карточка сделки не должна ждать сеть, чтобы
+   отрисоваться. */
+async function mountComments(dealId){
+  const mount = document.getElementById("comments-mount");
+  if(!mount) return;
+  mount.innerHTML = `<span class="label">Обсуждение</span><p class="acct-note">Загружаем комментарии…</p>`;
+  const [me, r] = await Promise.all([refreshMe(), fetch(`/api/deals/${dealId}/comments`)]);
+  const rows = r.ok ? await r.json() : [];
+  const list = rows.length ? rows.map(c=>`
+    <div class="comment-item">
+      <span class="comment-author">${esc(c.author)}</span><span class="comment-date">${fmtDate(c.created_at.slice(0,10))}</span>
+      <div class="comment-body">${esc(c.body)}</div>
+    </div>`).join("") : `<p class="acct-note">Комментариев пока нет.</p>`;
+  const form = me
+    ? `<div class="comment-form">
+         <textarea id="commentBody" placeholder="Ваш комментарий по этой сделке…" maxlength="4000"></textarea>
+         <button class="chip" id="commentSend">Отправить</button>
+       </div>`
+    : `<p class="acct-note"><a href="#/account">Войдите по почте</a>, чтобы оставить комментарий.</p>`;
+  mount.innerHTML = `<span class="label">Обсуждение</span>${list}${form}`;
+  const send = document.getElementById("commentSend");
+  if(send) send.onclick = async ()=>{
+    const ta = document.getElementById("commentBody");
+    const body = ta.value.trim();
+    if(!body) return;
+    send.disabled = true;
+    try{
+      const resp = await fetch(`/api/deals/${dealId}/comments`, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({body})});
+      if(resp.ok) mountComments(dealId);
+      else { const j = await resp.json().catch(()=>({})); alert(j.error || "Не получилось отправить комментарий"); send.disabled=false; }
+    }catch(e){ alert("Не получилось отправить комментарий"); send.disabled=false; }
+  };
+}
+refreshMe();
 
 route();
 </script>
