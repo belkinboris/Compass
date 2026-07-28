@@ -469,3 +469,37 @@ def test_no_company_twins(base):
     twins = [names for names in groups.values()
              if len(names) > 1 and frozenset(names) not in allowed]
     assert not twins, f"одна компания записана несколькими профилями: {twins[:3]}"
+
+
+def test_match_key_alias_is_a_name(base):
+    """Псевдоним компании — имя, а не кусок заголовка.
+
+    По этим ключам страница компании собирает упоминания в заголовках сделок.
+    «долей русинжгидро» или «продавец 80% долей» не сработают никогда: они
+    требуют дословного повтора всей фразы. Дефектным считаем псевдоним, который
+    и содержит ролевое/долевое слово, и не пересекается с именем профиля
+    (полная форма «имя (продавец 80% долей)» под правило не попадает — она
+    начинается с имени).
+
+    Два исключения оставлены намеренно: короткая форма ловит чужие сделки —
+    «информ» находит «Башинформсвязь», «агроинвест» — «Бумеранг агроинвест».
+    """
+    phrase = re.compile(
+        r"\b(выкуп\w*|покупк\w*|продаж\w*|приобрет\w*|продавец|покупатель|инвестор|доли|долей"
+        r"|долю|акци\w+|пакет\w*|бизнес|актив\w*|до \d+|\d+\s?%|оставш\w+|структур\w+|владелец"
+        r"|наследник\w*|основател\w*|бывш\w+|сооснователь)\b", re.I)
+    allowed = {"оставшиеся 49 9% акций информ", "долей агроинвест"}
+
+    def flat(s):
+        return re.sub(r"[^a-zа-яё0-9]+", "", str(s or "").lower())
+
+    bad = []
+    for cid, aliases in base["match_keys"].items():
+        name = flat((base["companies"].get(cid) or {}).get("name"))
+        for alias in aliases:
+            key = flat(alias)
+            if not name or not key or key in name or name in key:
+                continue
+            if phrase.search(alias) and alias not in allowed:
+                bad.append((cid, alias))
+    assert not bad, f"псевдоним — кусок заголовка, а не имя: {bad[:5]}"
