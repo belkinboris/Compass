@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ФИКСТУРА, НЕ ЗАГРУЗКА ИЗ СЕТИ. Собрана вручную: четыре записи в формате RSS,
+     две из них о сделках, две — соседние темы, на которых фильтр обязан
+     промолчать. Нужна для того, чтобы приток можно было прогнать и проверить
+     там, где сети нет. -->
+<rss version="2.0">
+ <channel>
+  <title>Фикстура ленты</title>
+  <item>
+   <title>«Сбербанк» продал 100% сети клиник «Пример» группе «Образец» за 12 млрд рублей</title>
+   <link>https://example.invalid/news/1</link>
+   <description>Сделка закрыта, покупателем выступила группа «Образец».</description>
+   <pubDate>Tue, 28 Jul 2026 09:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Стартап «Пример-Тех» привлёк 300 млн рублей от фонда «Ромашка Капитал»</title>
+   <link>https://example.invalid/news/2</link>
+   <description>Раунд A, инвестор получил миноритарную долю.</description>
+   <pubDate>Tue, 28 Jul 2026 10:30:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Акции «Образца» подорожали на 4% после новости о покупке сети клиник</title>
+   <link>https://example.invalid/news/3</link>
+   <description>Реакция рынка на объявленную сделку.</description>
+   <pubDate>Tue, 28 Jul 2026 11:00:00 +0300</pubDate>
+  </item>
+  <item>
+   <title>Гендиректором «Примера» назначен Иван Иванов</title>
+   <link>https://example.invalid/news/4</link>
+   <description>Кадровое назначение.</description>
+   <pubDate>Tue, 28 Jul 2026 12:00:00 +0300</pubDate>
+  </item>
+ </channel>
+</rss>
