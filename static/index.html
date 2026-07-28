@@ -1034,7 +1034,7 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728i");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728j");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
@@ -2307,6 +2307,15 @@ function renderDeal(id){
            У 58 карточек строка остаётся: где-то предмет структурно не разобран,
            а у IPO, СП, кредитов и раундов плашка предмет и не показывает — там
            это единственный ответ на вопрос «что купили». */
+        /* «Продавец» — по тому же правилу: строка нужна там, где плашка о нём
+           молчит. Плашка называет продавца только у покупки; у IPO и раундов
+           её раскладка другая («Инвестор → Получатель инвестиций»), и продавец
+           с ней не показывался вовсе — а он бывает и там: в cash-out IPO акции
+           продают действующие акционеры, а «инвестицией» у нас записана и
+           покупка миноритарной доли у конкретного человека. Так было скрыто
+           6 карточек из 597 с известным продавцом. */
+        specRow("Продавец", (kindKey==="acquisition" && hasSeller) ? ""
+          : (d.seller_id && co(d.seller_id) ? co(d.seller_id).name : (d.seller || ""))),
         specRow("Предмет", assetNamed ? "" : d.eco.share),
         specRow("Статус", d.status),
       ])}`;
