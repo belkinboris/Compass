@@ -235,6 +235,75 @@ def test_promote_refuses_word_currency_and_placeholder_seller(base):
     assert any("заглушка" in r for r in bad)
 
 
+def test_enrich_never_overwrites_a_filled_field(base):
+    """Новость называет другую сумму — это расхождение, а не правка.
+
+    Замер на 1333 карточках: 933 подтверждения против 114 расхождений. Если бы
+    правило переписывало, каждое девятое выверенное значение заменилось бы
+    догадкой — ровно то, что двадцать прогонов исправляли.
+    """
+    import enrich
+    deal = next(d for d in base["deals"] if format_post.has(d.get("sum")))
+    item = {"title": "Стороны раскрыли сумму сделки — 999 млрд рублей",
+            "url": "https://example.invalid/enrich-1", "source_id": "web:kommersant.ru"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    kinds = {field: kind for field, _v, kind, _w in props}
+    assert kinds.get("sum") == "расхождение", props
+    assert deal["sum"] != "999 млрд ₽"
+
+
+def test_enrich_only_moves_status_forward(base):
+    """«Обсуждается» -> «Закрыта» можно, обратно — нет.
+
+    Замер: правило ни разу не назвало закрытой сделку, которая в базе не
+    закрыта (0 раз из 256), а все расхождения статуса — обратного вида.
+    """
+    import enrich
+    news_closed = {"title": "Стороны завершили сделку", "url": "https://example.invalid/e2"}
+    news_intent = {"title": "Компания планирует продать актив", "url": "https://example.invalid/e3"}
+
+    talking = next(d for d in base["deals"] if d.get("status") == "Обсуждается")
+    props = enrich.proposals(talking, news_closed, {}, base["companies"])
+    assert ("status", "Закрыта", "обновить") in [(f, v, k) for f, v, k, _ in props]
+
+    closed = next(d for d in base["deals"] if d.get("status") == "Закрыта")
+    props = enrich.proposals(closed, news_intent, {}, base["companies"])
+    assert not [p for p in props if p[0] == "status"], "статус поехал назад"
+
+
+def test_enrich_adds_a_new_source_but_not_a_known_one(base):
+    """Ссылка на источник — главный вклад обогащения, но дублей быть не должно."""
+    import enrich
+    deal = next(d for d in base["deals"]
+                if d.get("src") and len(d["src"][0]) > 1 and str(d["src"][0][1]).startswith("http"))
+    known = {"title": "Та же новость", "url": deal["src"][0][1]}
+    assert not [p for p in enrich.proposals(deal, known, {}, base["companies"]) if p[0] == "src"]
+
+    fresh = {"title": "Другое издание о той же сделке",
+             "url": "https://example.invalid/another", "source_id": "web:rbc.ru"}
+    assert [p for p in enrich.proposals(deal, fresh, {}, base["companies"]) if p[0] == "src"]
+
+
+def test_enrich_writes_only_on_a_strong_match():
+    """Слабое совпадение в базу не пишет: в корзине «общие слова заголовка»
+    33 совпадения из 541 ведут на ЧУЖУЮ карточку (6,1%), а в корзине с
+    названием в кавычках — 4 из 568 (0,7%)."""
+    import enrich
+    assert enrich.is_strong("тот же адрес источника")
+    assert enrich.is_strong("совпали название в кавычках и сумма")
+    assert enrich.is_strong("общее название в кавычках и два общих слова")
+    assert not enrich.is_strong("общие слова заголовка: 4")
+
+
+def test_post_notifies_when_the_deal_closes(base):
+    """Закрытие сделки — событие, а не переформулировка: о нём уведомляем."""
+    deal = next(d for d in base["deals"] if d.get("status") == "Закрыта")
+    before = json.loads(json.dumps(deal))
+    before["status"] = "Обсуждается"
+    ch = format_post.changes(before, deal)
+    assert "сделка закрыта" in ch and format_post.should_notify(ch)
+
+
 def test_promote_holds_instead_of_guessing_industry(base):
     """Не хватает отрасли — карточка ждёт человека, а не выдумывает поле."""
     import promote
