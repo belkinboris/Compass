@@ -1034,7 +1034,7 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728d");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728e");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
@@ -1129,7 +1129,7 @@ function dealAsText(d){
   L.push(d.title);
   L.push(`${fmtDate(d.date)} · ${d.ind} · ${d.status}`);
   const cn = id => (id && co(id)) ? co(id).name : null;
-  add("Покупатель", cn(d.buyer));
+  add(buyerRole(d), buyerOf(d));
   add("Продавец", d.seller_id ? cn(d.seller_id) : d.seller);
   add("Предмет сделки", cn(d.target) || d.asset);
   add("Доля", d.asset_share || (d.eco && d.eco.share));
@@ -1999,13 +1999,22 @@ const ecoHasContent = d => {
 };
 /* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
    пуста, юристу всё равно нужны стороны, предмет и статус, а не пустой экран. */
+/* Сторона-покупатель: профиль компании либо имя текстом. Текстовый вариант
+   нужен инвестиционным раундам: у фондов и бизнес-ангелов профилей в базе почти
+   нет (из 21 проверенного имени профиль нашёлся у трёх), а инвестор в карточке
+   назван. У продавца такая же пара полей — `seller_id` и `seller`. */
+const buyerOf = d => (d.buyer && co(d.buyer)) ? co(d.buyer).name : (d.buyer_name || null);
+/* У раунда стороны называются иначе: не «покупатель», а «инвестор». */
+const isRound = d => d.type === "Инвестиция";
+const buyerRole = d => isRound(d) ? "Инвестор" : "Покупатель";
+
 function knownRowsHtml(d, withSum){
   const known = [];
   const cn = id => (id && co(id)) ? co(id).name : null;
   const seller = d.seller_id ? cn(d.seller_id) : (d.seller || null);
-  const buyer = cn(d.buyer);
+  const buyer = buyerOf(d);
   if(seller) known.push(["Продавец", seller]);
-  if(buyer) known.push(["Покупатель", buyer]);
+  if(buyer) known.push([buyerRole(d), buyer]);
   const asset = cn(d.target) || d.asset;
   if(asset) known.push(["Предмет сделки", asset + (d.asset_share?` · ${d.asset_share}`:"")]);
   if(withSum && d.sum && !undisclosed(d.sum)) known.push(["Сумма", d.sum]);
@@ -2175,15 +2184,22 @@ function renderDeal(id){
          линии перехода: актив буквально переходит слева направо. */
       if(kindKey==="acquisition"){
         // Плашка бессмысленна, только если не известна вообще ни одна роль
-        if(!buyerName && !hasSeller && !targetName) return "";
+        if(!buyerName && !hasSeller && !targetName && !d.buyer_name) return "";
+        /* У инвестиционного раунда продавца нет вовсе: деньги идут в компанию,
+           а не бывшему владельцу. Пустая плашка «Продавец — не раскрыт» тут не
+           честное пустое состояние, а выдуманная роль, поэтому её не рисуем. */
         const sellerBox = d.seller_id && co(d.seller_id)
           ? party("Продавец", d.seller_id, co(d.seller_id).name)
           : d.seller
             ? `<div class="dp-party"><span class="dp-role">Продавец</span><span class="dp-name">${d.seller}</span></div>`
-            : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
+            : isRound(d)
+              ? ""
+              : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
         const buyerBox = buyerName
-          ? party("Покупатель", d.buyer, buyerName)
-          : `<div class="dp-party is-empty"><span class="dp-role">Покупатель</span><span class="dp-name">Не раскрыт</span></div>`;
+          ? party(buyerRole(d), d.buyer, buyerName)
+          : d.buyer_name
+            ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">${d.buyer_name}</span></div>`
+            : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
         // предмет сделки: карточка компании, иначе название, вытащенное из
         // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
         const assetName = targetName || d.asset || share || "";

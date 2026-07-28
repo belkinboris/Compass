@@ -310,3 +310,15 @@ def test_law_value_does_not_repeat_the_title(deals):
             if len(value) > 40 and title and value[:40].lower() in title:
                 bad.append((d["id"], f"law.{f}"))
     assert not bad, f"поле начинается с повтора заголовка: {bad[:5]}"
+
+
+def test_buyer_is_named_once(deals):
+    """У покупателя либо профиль (`buyer`), либо имя текстом (`buyer_name`).
+
+    Два источника имени для одной роли расходятся при первой же правке: на
+    экране будет одно, в выжимке другое. Текстовый вариант появился в прогоне
+    38 для инвестиционных раундов, где профилей у фондов почти нет.
+    """
+    bad = [(d["id"], d.get("buyer"), d.get("buyer_name")) for d in deals
+           if d.get("buyer") and str(d.get("buyer_name") or "").strip()]
+    assert not bad, f"у покупателя одновременно профиль и имя текстом: {bad[:5]}"
