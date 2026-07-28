@@ -1034,7 +1034,7 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728c");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728d");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
@@ -2387,6 +2387,34 @@ function renderCompanies(){
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{coSort=b.dataset.sort;coShown=60;renderCompanies();rerun();});
 }
 
+/* Группа компаний. Отдельных данных о владении в базе почти нет: поле
+   `holding` заполнено у 2 профилей из 1846 — курировали вручную. Зато о смене
+   контроля прямо говорят сами сделки: если закрытая сделка M&A передала
+   покупателю контрольный пакет, то с этой даты компания под его контролем.
+   Такое утверждение не выдумано — оно подписано сделкой, из которой сделано.
+   Настоящее время не используем: «сейчас» мы не знаем. Если компанию потом
+   перепродали, а сделки в базе нет, здесь этого не будет — так и написано в
+   пояснении под блоком. */
+const CTRL_WORDS = /контрольн[а-яё]*\s+(?:пакет|дол)|единственн[а-яё]*\s+(?:участник|акционер)|100%\s*(?:долей|акций|уставного)/i;
+const isControlDeal = d => {
+  if(d.status!=="Закрыта" || d.type!=="M&A" || !d.buyer || !co(d.buyer)) return false;
+  const src = `${d.asset_share||""} ${d.title||""}`;
+  if(CTRL_WORDS.test(src)) return true;
+  const m = src.match(/(\d{1,3})(?:[,.]\d+)?\s*%/);
+  return !!m && +m[1] >= 50 && +m[1] <= 100;
+};
+/* Физлицо в роли предмета сделки — не «компания группы»: «Владимир Селегень
+   входит в группу ЛСР» звучало бы дико. Имя человека отличаем по форме. */
+const looksLikePerson = n => /^[А-ЯЁ][а-яё]+\s+[А-ЯЁ][а-яё]+(?:\s+[А-ЯЁ][а-яё]+)?$/.test(String(n||"").trim());
+const assetOf = d => d.target || d.asset_id || null;
+const controlGot = id => DEALS
+  .filter(d => assetOf(d)===id && d.buyer!==id && isControlDeal(d) && !looksLikePerson(co(id)&&co(id).name))
+  .sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0] || null;
+const controlOver = id => DEALS
+  .filter(d => d.buyer===id && assetOf(d) && assetOf(d)!==id && co(assetOf(d))
+               && isControlDeal(d) && !looksLikePerson(co(assetOf(d)).name))
+  .sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+
 function renderCompany(id){
   const c = co(id); if(!c){renderCompanies();return;}
   const {structured, mentions} = companyDeals(id);
@@ -2399,6 +2427,17 @@ function renderCompany(id){
     <span class="tag">${c.ind}</span>
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
+    ${(()=>{
+      const got = controlGot(id), over = controlOver(id);
+      if(!got && !over.length) return "";
+      const line = [];
+      if(got) line.push(`<span class="tag steel">Контроль у <a href="#/companies/${got.buyer}">${co(got.buyer).name}</a></span> <span style="color:var(--muted)">с ${fmtDate(got.date)} — <a href="#/deal/${got.id}">по сделке</a></span>`);
+      if(over.length) line.push(`<span class="tag steel">Под контролем: ${over.length}</span> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и ещё ${over.length-6}`:""}</span>`);
+      return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
+        ${line.join("")}
+        <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Считаем по сделкам базы: закрытая сделка M&amp;A с контрольным пакетом. Если компанию потом перепродали, а этой сделки в базе нет, здесь она не отразится.</span>
+      </div>`;
+    })()}
     ${holding?`<div class="d-parties" style="margin-top:8px;font-size:14px">
       <span class="tag steel">${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"} ${holding.name}</span>
       ${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}
