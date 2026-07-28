@@ -8,6 +8,7 @@
 Запуск: python3 -m pytest test_ingest.py -q
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -148,3 +149,60 @@ def test_sources_registry_is_honest():
     assert any(s["kind"] == "telegram" for s in sources)
     assert all(not s["enabled"] or s.get("feed") for s in sources), \
         "включён источник без адреса ленты — забор молча ничего не даст"
+
+
+# ---------- черновик карточки ----------
+
+def test_draft_sum_is_written_our_way():
+    """Валюта — значком: «12 млрд рублей» -> «12 млрд ₽» (соглашение базы)."""
+    import draft
+    assert draft.guess_sum("Куплено за 12 млрд рублей") == "12 млрд ₽"
+    assert draft.guess_sum("Сделка на $230 млн") == "$230 млн"
+    assert draft.guess_sum("Компания подвела итоги года") is None
+
+
+def test_draft_never_invents_a_party():
+    """Имя стороны обязано стоять в заголовке дословно."""
+    import draft
+    title = "«Лента» купила сеть магазинов «Монетка» у структуры Сбербанка"
+    buyer, asset, seller = draft.guess_parties(title)
+    for value in (buyer, asset, seller):
+        if value:
+            core = value.strip('«»" ').split()[0]
+            assert core in title, f"{core!r} нет в заголовке"
+
+
+def test_draft_keeps_silent_when_there_is_no_seller():
+    """Нет продавца в заголовке — поле остаётся пустым, а не додумывается."""
+    import draft
+    _, _, seller = draft.guess_parties("«Лента» купила сеть магазинов «Монетка»")
+    assert seller is None
+
+
+def test_draft_error_rate_stays_low(base):
+    """Разбор ошибается реже, чем молчит: замер на 1333 выверенных карточках.
+
+    Пороги — сторож от ухудшения: на прогоне 47 ошибка составила 3% у продавца
+    и 10% у покупателя. Если правило станет смелее и начнёт врать, тест упадёт.
+    """
+    import draft
+    comps = base["companies"]
+    wrong = {"buyer": 0, "seller": 0}
+    said = {"buyer": 0, "seller": 0}
+
+    def same(a, b):
+        na, nb = (re.sub(r"[«»\"'(),.\s]", "", str(x or "").lower()) for x in (a, b))
+        return na == nb or na in nb or nb in na
+
+    for deal in base["deals"]:
+        buyer, _, seller = draft.guess_parties(str(deal.get("title") or ""))
+        truth_b = (comps.get(deal.get("buyer")) or {}).get("name") or deal.get("buyer_name")
+        truth_s = (comps.get(deal.get("seller_id")) or {}).get("name") or deal.get("seller")
+        if buyer and truth_b:
+            said["buyer"] += 1
+            wrong["buyer"] += not same(buyer, truth_b)
+        if seller and truth_s:
+            said["seller"] += 1
+            wrong["seller"] += not same(seller, truth_s)
+    assert wrong["seller"] / max(said["seller"], 1) < 0.10, "продавец стал врать чаще"
+    assert wrong["buyer"] / max(said["buyer"], 1) < 0.25, "покупатель стал врать чаще"
