@@ -930,6 +930,9 @@ const ALL_FIRM = id => FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
    дубль могла быть у кого-то в закладках или в чужом письме, и молча
    показывать вместо неё общую ленту нечестно — уводим на ту же сделку. */
 const MERGED = {};
+/* То же для профилей компаний: одна компания была записана двумя профилями
+   («Альфа-Банк» и «Alfa-Bank»), и адрес удалённого ведёт на оставшийся. */
+const MERGED_CO = {};
 const MATCH_KEYS = {
   rencap:["ренессанс капитал"], citibank:["ситибанк","ренкап банк"], carlsberg:["carlsberg"],
   baltika:["балтика"], vginvest:["вг инвест"], rosatom:["росатом","uranium one"], yandex:["яндекс"],
@@ -1038,13 +1041,14 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728m");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728n");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
       Object.assign(COMPANIES, j.companies||{});
       Object.assign(MATCH_KEYS, j.match_keys||{});
       Object.assign(MERGED, j.merged||{});
+      Object.assign(MERGED_CO, j.merged_companies||{});
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
   bulkLoaded = true;
@@ -2451,7 +2455,12 @@ const controlOver = id => DEALS
   .sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 
 function renderCompany(id){
-  const c = co(id); if(!c){renderCompanies();return;}
+  const c = co(id);
+  if(!c){
+    // Профиль слит с близнецом — открываем оставшийся, а не каталог.
+    if(MERGED_CO[id]){ location.hash = "#/companies/"+MERGED_CO[id]; return; }
+    renderCompanies(); return;
+  }
   const {structured, mentions} = companyDeals(id);
   mentions.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   const holding = c.holding && HOLDINGS[c.holding.id];

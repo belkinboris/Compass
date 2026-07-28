@@ -425,3 +425,47 @@ def test_no_duplicate_deal_cards(deals):
             if abs(sum_a - sum_b) / max(sum_a, sum_b) < 0.05:
                 bad.append((id_a, id_b, sorted(q_a & q_b)))
     assert not bad, f"две карточки об одной сделке: {bad[:3]}"
+
+
+def test_no_company_twins(base):
+    """Одна компания — один профиль.
+
+    «Альфа-Банк» и «Alfa-Bank» были двумя профилями, и сделки делились между
+    ними: «Сделок в базе» показывало половину, каталог показывал компанию
+    дважды. Ключ ниже — тот же, которым мерили класс в прогоне 51: имя без
+    организационной формы и пунктуации, транслитерированное в латиницу, с
+    сглаживанием c/k, ph/f, y/i, ё/е и удвоенных букв.
+
+    Исключения — не поблажка правилу, а разные компании с похожими именами:
+    иностранный владелец и его российское юрлицо. Слить их значило бы сделать
+    продавца предметом собственной сделки.
+    """
+    cyr = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e", "ж": "zh",
+           "з": "z", "и": "i", "й": "i", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o",
+           "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "h", "ц": "ts",
+           "ч": "ch", "ш": "sh", "щ": "sch", "ъ": "", "ы": "i", "ь": "", "э": "e",
+           "ю": "iu", "я": "ia"}
+    allowed = {frozenset(p) for p in (
+        ("Essity", "ООО «Эссити»"),                    # владелец и проданный российский бизнес
+        ("Fortum", "Фортум"),                          # финский владелец и ПАО «Фортум»
+        ("Polymetal", "Полиметалл"),                   # plc и АО «Полиметалл»
+    )}
+
+    def key(name):
+        s = re.sub(r"\b(ооо|оао|зао|пао|ао|нао|гк|пкф|тд)\b\.?", " ", str(name or "").lower())
+        s = "".join(cyr.get(ch, ch) for ch in s)
+        s = re.sub(r"[^a-z0-9]+", "", s)
+        for a, b in (("ph", "f"), ("sch", "sh"), ("ck", "k"), ("ts", "s"), ("x", "ks"),
+                     ("w", "v"), ("q", "k"), ("y", "i"), ("j", "i")):
+            s = s.replace(a, b)
+        s = s.replace("ch", "\x00").replace("c", "k").replace("\x00", "ch")
+        return re.sub(r"(.)\1+", r"\1", s)
+
+    groups = {}
+    for cid, c in base["companies"].items():
+        k = key(c.get("name"))
+        if len(k) >= 3:
+            groups.setdefault(k, []).append(str(c.get("name")))
+    twins = [names for names in groups.values()
+             if len(names) > 1 and frozenset(names) not in allowed]
+    assert not twins, f"одна компания записана несколькими профилями: {twins[:3]}"
