@@ -10,6 +10,7 @@
 import json
 import re
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -383,3 +384,44 @@ def test_lot_profile_names_more_than_one_entity(base):
         if not (re.search(r"\bи\b|,", name) or re.search(r"юрлиц|компании,", name, re.I)):
             bad.append((cid, name))
     assert not bad, f"признак лота у записи с одним именем: {bad[:5]}"
+
+
+def test_no_duplicate_deal_cards(deals):
+    """Одна сделка — одна карточка.
+
+    Признак дубля подобран замером на самой базе. Наивный «общее название в
+    кавычках + та же сумма + 45 дней» даёт 5 пар, из которых верна одна:
+    название в кавычках часто не предмет, а ПРОДАВЕЦ, и банк «Траст»,
+    продающий десятки активов, совпадает сам с собой. Признак дубля — ДВА
+    общих названия при одной сумме; на нём в базе была ровно одна пара (два
+    описания выхода Volkswagen из России), слитая в прогоне 50.
+    """
+    def quoted(text):
+        return {m.group(1).lower() for m in re.finditer(r"«([^»]{2,40})»", str(text or ""))}
+
+    def amount(text):
+        m = re.search(r"(\d[\d\s]*(?:[.,]\d+)?)\s*(млрд|млн)", str(text or ""), re.I)
+        if not m:
+            return None
+        num = float(m.group(1).replace(" ", "").replace(",", "."))
+        return num * (1000 if m.group(2).lower() == "млрд" else 1)
+
+    def day(text):
+        try:
+            y, m_, d = (int(x) for x in str(text)[:10].split("-"))
+            return date(y, m_, d)
+        except ValueError:
+            return None
+
+    rows = [(d["id"], day(d.get("date")), quoted(d.get("title")), amount(d.get("sum")))
+            for d in deals]
+    bad = []
+    for i, (id_a, date_a, q_a, sum_a) in enumerate(rows):
+        for id_b, date_b, q_b, sum_b in rows[i + 1:]:
+            if len(q_a & q_b) < 2 or not (sum_a and sum_b) or not (date_a and date_b):
+                continue
+            if abs((date_a - date_b).days) > 45:
+                continue
+            if abs(sum_a - sum_b) / max(sum_a, sum_b) < 0.05:
+                bad.append((id_a, id_b, sorted(q_a & q_b)))
+    assert not bad, f"две карточки об одной сделке: {bad[:3]}"

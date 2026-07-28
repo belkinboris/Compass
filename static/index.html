@@ -926,6 +926,10 @@ function animateCounts(root){
 const ALL_FIRM = id => FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
 
 /* ================= КЛЮЧИ ПОИСКА КОМПАНИЙ ПО ВСЕЙ БАЗЕ (не только по buyer/target) ================= */
+/* Слитые карточки: id удалённого дубля -> id оставшейся сделки. Ссылка на
+   дубль могла быть у кого-то в закладках или в чужом письме, и молча
+   показывать вместо неё общую ленту нечестно — уводим на ту же сделку. */
+const MERGED = {};
 const MATCH_KEYS = {
   rencap:["ренессанс капитал"], citibank:["ситибанк","ренкап банк"], carlsberg:["carlsberg"],
   baltika:["балтика"], vginvest:["вг инвест"], rosatom:["росатом","uranium one"], yandex:["яндекс"],
@@ -1034,12 +1038,13 @@ async function loadBulkDeals(){
     if(r.ok){ BULK_DEALS = await r.json(); }
   }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728l");
+    const r2 = await fetch("static/data/deals_promoted.json?v=20260728m");
     if(r2.ok){
       const j = await r2.json();
       DEALS.push(...(j.deals||[]));
       Object.assign(COMPANIES, j.companies||{});
       Object.assign(MATCH_KEYS, j.match_keys||{});
+      Object.assign(MERGED, j.merged||{});
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
   bulkLoaded = true;
@@ -2065,7 +2070,12 @@ function ecoEmptyHtml(d){
 }
 
 function renderDeal(id){
-  const d = DEALS.find(x=>x.id===id); if(!d){renderDeals();return;}
+  const d = DEALS.find(x=>x.id===id);
+  if(!d){
+    // Карточку слили с дублем — открываем ту, что осталась, а не общую ленту.
+    if(MERGED[id]){ location.hash = "#/deal/"+MERGED[id]; return; }
+    renderDeals(); return;
+  }
   lens = "overview";
   // тип из текстового поля type главнее сохранённого kind: текст писали люди,
   // kind проставлял генератор и мог ошибиться (дефолт acquisition)
