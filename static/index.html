@@ -223,6 +223,27 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .extra-info{margin:28px 0;padding:20px 22px;background:var(--paper2,#F0EFEA);border-radius:10px;border:1px solid var(--line)}
 .extra-info .label{display:block;margin-bottom:10px}
 .extra-info p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
+.acct-form{display:flex;gap:10px;max-width:440px;margin:20px 0}
+.acct-form input{flex:1;padding:13px 16px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}
+.acct-form input:focus{border-color:var(--accent)}
+.acct-note{font-size:13px;color:var(--muted);max-width:440px;line-height:1.6}
+.acct-note.err{color:#B3402A}
+.acct-card{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:20px 0;max-width:520px}
+.acct-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line-soft)}
+.acct-row:last-child{border-bottom:none}
+.acct-row .del{cursor:pointer;color:var(--muted);font-size:13px;border-bottom:1px dotted var(--muted)}
+.acct-row .del:hover{color:#B3402A}
+.acct-newsub{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.acct-newsub select,.acct-newsub input{padding:9px 10px;font-size:13.5px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
+.acct-newsub input[type=number]{width:120px}
+.comments{margin:30px 0;padding-top:22px;border-top:1px solid var(--line)}
+.comment-item{padding:12px 0;border-bottom:1px dashed var(--line-soft)}
+.comment-item:last-child{border-bottom:none}
+.comment-author{font-weight:600;font-size:13px;color:var(--ink)}
+.comment-date{font-size:11.5px;color:var(--muted);margin-left:8px}
+.comment-body{font-size:14px;line-height:1.6;color:var(--ink);margin-top:4px;white-space:pre-wrap}
+.comment-form{display:flex;gap:10px;margin-top:16px;align-items:flex-start}
+.comment-form textarea{flex:1;min-height:64px;padding:12px 14px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;resize:vertical}
 .feed-search{margin:40px 0 26px;display:flex;gap:10px;align-items:stretch}
 .feed-search input{flex:1;padding:13px 18px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:border-color .2s}
 .feed-search input:focus{border-color:var(--accent)}
@@ -425,12 +446,14 @@ a.dp-asset-name:hover{color:var(--accent)}
 .team-item{padding:7px 0;border-bottom:1px dashed var(--line-soft)}
 .team-item:last-child{border-bottom:none}
 .team-item .t-firm{font-weight:600;font-size:14px;color:var(--ink)}
+.team-item .t-firm a:hover{color:var(--accent)}
 .team-item .t-side{font-size:12px;color:var(--muted);margin-top:1px}
 .team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
 
 /* ---------- цепочка владения ---------- */
 .adv-card .label{margin-bottom:6px}
 .adv-card .adv-name{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:6px}
+.adv-card .adv-name a:hover{color:var(--accent)}
 .adv-card p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;max-width:600px}
 .src{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
 .src a{color:var(--accent);font-size:13.5px;display:inline-block;margin:6px 20px 0 0;border-bottom:1px solid transparent;transition:border-color .2s}
@@ -531,6 +554,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
       <a href="#/advisors" data-r="advisors">Консультанты</a>
       <a href="#/analytics" data-r="analytics">Аналитика</a>
       <a href="#/assistant" data-r="assistant">Ассистент</a>
+      <a href="#/account" data-r="account" id="navAccount">Войти</a>
     </nav>
   </div>
 </header>
@@ -899,6 +923,17 @@ const firmRxOf = f => {
   const escaped = f.n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/\s+/g,"\\s+");
   return new RegExp(escaped,"i");
 };
+/* Имя консультанта на карточке сделки было просто текстом: «ККМП» на линзе
+   «Юрист» нельзя было открыть как профиль фирмы, хотя то же самое имя тем же
+   правилом (firmRxOf/FIRM_MATCH) уже узнаётся в каталоге консультантов —
+   иначе там не считались бы её сделки. Раз правило узнаёт фирму для статистики,
+   оно же должно превращать имя в ссылку там, где юрист его читает. */
+const advFirmLink = name => {
+  const text = String(name || "").trim();
+  if(!text) return "";
+  const firm = [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text));
+  return firm ? `<a href="#/advisors/${firm.id}">${esc(text)}</a>` : esc(text);
+};
 
 /* ================= РОУТЕР ================= */
 const app = document.getElementById("app");
@@ -988,7 +1023,19 @@ function companyEmptyHtml(c){
     </div>
   </div>`;
 }
+/* Каталог компаний считал это для КАЖДОЙ из 1834 карточек на каждую отрисовку
+   экрана: клик по вкладке, любая буква в поиске, смена отрасли. companyTotal
+   и companyMentions вызывали companyDeals(id) НЕЗАВИСИМО (двойная работа), а
+   сама функция сканирует все 1332 сделки плюс мини- и bulk-записи против
+   псевдонимов компании — 1834×2×1332 ≈ 6 млн сравнений синхронно на потоке
+   рендера, и это ощущалось как зависание при каждом открытии «Компаний».
+   Данные (DEALS/MATCH_KEYS/…) неизменны после загрузки базы, а сама эта
+   функция вызывается только когда база уже загружена (route() ждёт
+   bulkLoaded), поэтому результат по id можно посчитать один раз и переиспользовать. */
+const companyDealsCache = new Map();
 function companyDeals(id){
+  const cached = companyDealsCache.get(id);
+  if(cached) return cached;
   const structured = DEALS.filter(d=>d.buyer===id||d.target===id||d.seller_id===id||d.asset_id===id);
   const structuredIds = new Set(structured.map(d=>d.id));
   const mentions = [];
@@ -996,7 +1043,9 @@ function companyDeals(id){
   MINI_DEALS.forEach(m=>{ if(matchesCompany(m.title, id)) mentions.push({date:m.date,title:m.title,url:m.src[1],source:m.src[0]}); });
   CHANNEL_DEALS.forEach(c=>{ if(matchesCompany(c.title, id)) mentions.push({date:c.date,title:c.title,url:c.src[1],source:c.src[0]}); });
   BULK_DEALS.forEach(b=>{ if(matchesCompany(b.title, id)) mentions.push({date:b.date,title:b.title,url:(b.src&&b.src[1])||"#",source:(b.src&&b.src[0])||"?"}); });
-  return {structured, mentions};
+  const result = {structured, mentions};
+  companyDealsCache.set(id, result);
+  return result;
 }
 /* «Сделок в базе» — только те, где компания названа стороной. Раньше сюда же
    попадали упоминания по названию в заголовке (автопоиск), и число говорило не
@@ -1275,6 +1324,7 @@ function route(){
     mark("analytics");
   }
   else if(page==="assistant"){renderAssistant();mark("assistant");}
+  else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
   window.scrollTo(0,0);
   if(typeof updTop==="function") updTop();
@@ -1910,16 +1960,28 @@ function relatedScore(d, x){
   return s;
 }
 // «Дополнительная информация» долгое время была дословной копией «Цели сделки»
-// у 678 карточек из 1333: один и тот же абзац читался дважды — на «Обзоре» под
-// расплывчатым заголовком и на линзе «Экономист» под точным. Показываем блок,
-// только если он действительно добавляет что-то к «Цели сделки».
+// у 678 карточек из 1333. Показываем блок, только если он действительно
+// добавляет что-то к «Цели сделки». Раньше сам вызов extraHtml(d) стоял вне
+// #facts и потому был виден одновременно на всех трёх линзах — «Обзор» и
+// «Юрист» показывали тот же текст, что и «Экономист», хотя «Цель сделки»,
+// с которой он сверяется, читается только там. Теперь блок — часть линзы
+// «Экономист» и рисуется рядом с полем, от которого зависит.
 function extraHtml(d){
   const norm = t => String(t||"").replace(/\s+/g," ").trim().toLowerCase();
+  const dup = (a,b) => a===b || a.startsWith(b) || b.startsWith(a);
   const ex = norm(d.extra), goal = norm(d.eco && d.eco.rationale);
   if(!ex) return "";
+  if(!goal || goal === "—") return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
   // не только полное совпадение: после чистки одно поле могло стать началом
   // другого, а видеть тот же текст с обрезанным хвостом ничем не лучше
-  if(goal && goal !== "—" && (ex === goal || ex.startsWith(goal) || goal.startsWith(ex))) return "";
+  if(dup(ex, goal)) return "";
+  // «Сделка. » (и похожие) — общий ярлык, приписанный к одному из полей поверх
+  // того же текста: без снятия этого ярлыка проверка выше не видела дубль на
+  // 3 карточках из 1332 («Сделка. »+X сравнивалось с X и не совпадало ни с чем).
+  // Проверено, что это не задевает содержательные различия: снятие ярлыка не
+  // трогает ничего, кроме него самого, — сравниваются те же самые слова.
+  const stripLabel = t => t.replace(/^сделка[.:—-]\s*/, "");
+  if(dup(stripLabel(ex), stripLabel(goal))) return "";
   return `<div class="extra-info reveal"><span class="label">Дополнительная информация</span><p>${d.extra}</p></div>`;
 }
 /* «Похожая» — это общая сторона или общая тема, и ничего слабее.
@@ -2111,7 +2173,6 @@ function renderDeal(id){
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
-  ${extraHtml(d)}
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin:22px 0 6px">
@@ -2122,6 +2183,7 @@ function renderDeal(id){
   <!-- Строка про правки стоит именно здесь, у источников: человек, который знает
        сделку изнутри, дочитывает до первоисточников и там же видит, куда писать. -->
   <p class="src-fix reveal">Мы собираем сделки из публичных источников и можем ошибаться. Если вы вели эту сделку или были её стороной — напишите, поправим и укажем источник.</p>
+  <div class="comments reveal" id="comments-mount"></div>
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
      кнопке, а приглушение «Юриста» объяснялось только атрибутом title — на
@@ -2261,9 +2323,9 @@ function renderDeal(id){
         ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
       if(!legal.length && !fin.length) return "";
       const legalHtml = legal.length?`<div class="team-col"><span class="team-kind">Юридические консультанты</span>
-        ${legal.map(a=>`<div class="team-item"><div class="t-firm">${a[1]}</div>${a[0]&&!/сторона не уточнена/i.test(a[0])?`<div class="t-side">${a[0]}</div>`:""}</div>`).join("")}</div>`:"";
+        ${legal.map(a=>`<div class="team-item"><div class="t-firm">${advFirmLink(a[1])}</div>${a[0]&&!/сторона не уточнена/i.test(a[0])?`<div class="t-side">${a[0]}</div>`:""}</div>`).join("")}</div>`:"";
       const finHtml = fin.length?`<div class="team-col"><span class="team-kind">Финансовые консультанты</span>
-        ${fin.map(x=>{const p=x.split("—");return `<div class="team-item"><div class="t-firm">${p[0].trim()}</div>${p[1]?`<div class="t-side">${p.slice(1).join("—").trim()}</div>`:""}</div>`}).join("")}</div>`:"";
+        ${fin.map(x=>{const p=x.split("—");return `<div class="team-item"><div class="t-firm">${advFirmLink(p[0].trim())}</div>${p[1]?`<div class="t-side">${p.slice(1).join("—").trim()}</div>`:""}</div>`}).join("")}</div>`:"";
       return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${legalHtml}${finHtml}</div>
         <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
     };
@@ -2285,7 +2347,8 @@ function renderDeal(id){
         specRow("Финансовый консультант", d.eco.finadv),
       ])}
       ${para("Цель сделки", d.eco.rationale)}
-      ${para("Контекст", d.eco.context)}`
+      ${para("Контекст", d.eco.context)}
+      ${extraHtml(d)}`
       : ecoEmptyHtml(d);
     /* B4: порядок полей в линзе «Юрист» — по тому, что юристу нужно первым.
        Было: структура → согласования → консультанты → УСЛОВИЯ. Самое ценное и
@@ -2301,7 +2364,7 @@ function renderDeal(id){
       ${realAdv(d).map(a=>`
         <div class="adv-card">
           <span class="label">${a[0]}</span>
-          <div class="adv-name">${a[1]}</div>
+          <div class="adv-name">${advFirmLink(a[1])}</div>
           ${a[2]?`<p>${a[2]}</p>`:""}
         </div>`).join("")}`
       : lawEmptyHtml(d);
@@ -2352,6 +2415,7 @@ function renderDeal(id){
   const fx = document.getElementById("fixdeal");
   if(fx) fx.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Правка по сделке: "+d.title.slice(0,90))}&body=${encodeURIComponent(`Карточка: ${location.origin}${location.pathname}#/deal/${d.id}\n\nЧто уточнить:\n`)}`;
   mountMiniAI(d.title);
+  mountComments(d.id);
 }
 
 /* ================= КОМПАНИИ ================= */
@@ -2628,10 +2692,14 @@ function firmEmptyHtml(f, isLegal){
    (69%) у 32 фирм из 37; у остальных там просто «Юридический консультант», то
    есть сторону не назвали. Окончания через [а-яё]*, а не через голый корень:
    `продавц` не совпадает с «(продавец)» — на этом правило уже теряло записи. */
+/* Метки — именительный падеж: это подписи столбцов графика («За кого
+   выступала»), а не часть предложения. Раньше стояло «покупателя», «продавца»
+   (родительный, с маленькой буквы) — на графике рядом с процентом это читалось
+   как обрывок фразы. */
 const ADV_ROLE = [
-  ["покупателя", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
-  ["продавца",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
-  ["предмета сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
+  ["Покупатель", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
+  ["Продавец",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
+  ["Предмет сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
 ];
 const advRoleOf = label => (ADV_ROLE.find(([,rx])=>rx.test(String(label||"")))||[null])[0];
 
@@ -3011,6 +3079,146 @@ function renderAssistant(){
   a.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Правка по сделке в «Компасе»")}`;
   a.textContent = CONTACT_EMAIL;
 })();
+
+/* ================= АККАУНТ: вход по ссылке, подписки, комментарии =================
+   Вход по ссылке на почту — решение владельца (28 июля 2026): аудитория —
+   юристы и консультанты, у каждого уже есть рабочая почта, не нужно хранить
+   пароли. Письмо пока не отправляется по-настоящему — нет SMTP; ссылка
+   уходит в лог сервера (см. auth.py). Пока это так, «прислать ссылку»
+   работает, но получить её может только тот, кто читает логи сервера, —
+   честно говорим об этом на самой странице, а не притворяемся, что письмо
+   уже ушло получателю. */
+let ME = null;
+async function refreshMe(){
+  // /api/me отвечает 200 всегда (и для анонимного визита тоже) — иначе
+  // браузер писал бы «Failed to load resource: 401» в консоль при каждой
+  // загрузке страницы, а это самое частое состояние, не ошибка.
+  try{
+    const r = await fetch("/api/me");
+    const data = r.ok ? await r.json() : {logged_in:false};
+    ME = data.logged_in ? data : null;
+  }catch(e){ ME = null; }
+  const a = document.getElementById("navAccount");
+  if(a) a.textContent = ME ? ME.email.split("@")[0] : "Войти";
+  return ME;
+}
+
+async function renderAccount(qs){
+  await refreshMe();
+  const params = new URLSearchParams(qs||"");
+  const error = params.get("error");
+  if(!ME){
+    app.innerHTML = `
+    <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
+      <p>Без пароля: пришлём одноразовую ссылку на почту. Юристам, экономистам
+         и консультантам — чтобы сохранять подписки на отрасли и оставлять
+         комментарии под сделками.</p></div>
+    ${error?`<p class="acct-note err reveal">Ссылка не сработала: ${esc(error)}. Запросите новую.</p>`:""}
+    <form class="acct-form reveal" id="loginForm">
+      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
+      <button class="chip" type="submit">Прислать ссылку</button>
+    </form>
+    <p class="acct-note reveal" id="loginMsg"></p>`;
+    document.getElementById("loginForm").onsubmit = async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const msg = document.getElementById("loginMsg");
+      msg.textContent = "Отправляем…";
+      try{
+        const r = await fetch("/api/auth/request-link", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email})});
+        if(r.ok) msg.textContent = "Если почта существует — ссылка на вход отправлена. Она действует 15 минут.";
+        else msg.textContent = "Проверьте адрес почты — он выглядит некорректно.";
+      }catch(err){ msg.textContent = "Не получилось отправить запрос, попробуйте ещё раз."; }
+    };
+    return;
+  }
+  app.innerHTML = `
+  <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>${esc(ME.email)}</h1>
+    <p>Роль: ${ME.role==="firm"?"фирма":ME.role==="corporate"?"корпоративный":"частный"} ·
+       Тариф: ${ME.tier==="paid"?"платный":"бесплатный"}${ME.is_verified?" · подтверждён":""}</p></div>
+  <div class="acct-card reveal">
+    <span class="label">Подписки на отрасли</span>
+    <div id="subList"><p class="acct-note">Загружаем…</p></div>
+    <div class="acct-newsub">
+      <select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select>
+      <input type="text" id="subKw" placeholder="ключевое слово (необязательно)">
+      <input type="number" id="subMin" placeholder="от суммы, млн ₽" min="0">
+      <button class="chip" id="subAdd">Добавить</button>
+    </div>
+  </div>
+  <div class="fe-actions reveal" style="justify-content:flex-start">
+    <button class="chip" id="logoutBtn">Выйти</button>
+  </div>`;
+  const drawSubs = async ()=>{
+    const list = document.getElementById("subList");
+    const r = await fetch("/api/subscriptions");
+    const rows = r.ok ? await r.json() : [];
+    list.innerHTML = rows.length ? rows.map(s=>`
+      <div class="acct-row" data-id="${s.id}">
+        <span>${esc(s.industry||"Любая отрасль")}${s.keyword?` · «${esc(s.keyword)}»`:""}${s.min_amount_mln_rub?` · от ${s.min_amount_mln_rub} млн ₽`:""}</span>
+        <span class="del" data-del="${s.id}">Удалить</span>
+      </div>`).join("") : `<p class="acct-note">Пока нет ни одной подписки.</p>`;
+    list.querySelectorAll("[data-del]").forEach(el=>el.onclick = async ()=>{
+      await fetch(`/api/subscriptions/${el.dataset.del}`, {method:"DELETE"});
+      drawSubs();
+    });
+  };
+  drawSubs();
+  document.getElementById("subAdd").onclick = async ()=>{
+    const industry = document.getElementById("subInd").value || null;
+    const keyword = document.getElementById("subKw").value.trim() || null;
+    const min = document.getElementById("subMin").value;
+    if(!industry && !keyword){ alert("Укажите отрасль или ключевое слово"); return; }
+    await fetch("/api/subscriptions", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({industry, keyword, min_amount_mln_rub: min?Number(min):null})});
+    document.getElementById("subKw").value=""; document.getElementById("subMin").value="";
+    drawSubs();
+  };
+  document.getElementById("logoutBtn").onclick = async ()=>{
+    await fetch("/api/auth/logout", {method:"POST"});
+    await refreshMe();
+    location.hash = "#/account";
+    route();
+  };
+}
+
+/* Комментарии — под сделкой, видны сразу (см. Comment в db/models.py: писать
+   может только вошедший по почте, это уже проверенный e-mail). Блок монтируется
+   отдельно от основного innerHTML сделки, потому что список комментариев
+   приходит асинхронно, а карточка сделки не должна ждать сеть, чтобы
+   отрисоваться. */
+async function mountComments(dealId){
+  const mount = document.getElementById("comments-mount");
+  if(!mount) return;
+  mount.innerHTML = `<span class="label">Обсуждение</span><p class="acct-note">Загружаем комментарии…</p>`;
+  const [me, r] = await Promise.all([refreshMe(), fetch(`/api/deals/${dealId}/comments`)]);
+  const rows = r.ok ? await r.json() : [];
+  const list = rows.length ? rows.map(c=>`
+    <div class="comment-item">
+      <span class="comment-author">${esc(c.author)}</span><span class="comment-date">${fmtDate(c.created_at.slice(0,10))}</span>
+      <div class="comment-body">${esc(c.body)}</div>
+    </div>`).join("") : `<p class="acct-note">Комментариев пока нет.</p>`;
+  const form = me
+    ? `<div class="comment-form">
+         <textarea id="commentBody" placeholder="Ваш комментарий по этой сделке…" maxlength="4000"></textarea>
+         <button class="chip" id="commentSend">Отправить</button>
+       </div>`
+    : `<p class="acct-note"><a href="#/account">Войдите по почте</a>, чтобы оставить комментарий.</p>`;
+  mount.innerHTML = `<span class="label">Обсуждение</span>${list}${form}`;
+  const send = document.getElementById("commentSend");
+  if(send) send.onclick = async ()=>{
+    const ta = document.getElementById("commentBody");
+    const body = ta.value.trim();
+    if(!body) return;
+    send.disabled = true;
+    try{
+      const resp = await fetch(`/api/deals/${dealId}/comments`, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({body})});
+      if(resp.ok) mountComments(dealId);
+      else { const j = await resp.json().catch(()=>({})); alert(j.error || "Не получилось отправить комментарий"); send.disabled=false; }
+    }catch(e){ alert("Не получилось отправить комментарий"); send.disabled=false; }
+  };
+}
+refreshMe();
 
 route();
 </script>

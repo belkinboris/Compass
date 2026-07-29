@@ -313,3 +313,25 @@ def test_promote_holds_instead_of_guessing_industry(base):
              "src": [["источник", "https://example.invalid/y"]]}
     bad, hold = promote.check(draft, base, idx, inds)
     assert not bad and hold and "отрасль" in hold[0]
+
+
+def test_promote_holds_even_a_clean_new_card_pending_filter_review(base):
+    """Временная страховка (E9): «это сделка» не проверено на живом потоке.
+
+    Первый прогон на реальной сети (28 июля 2026) показал: из 11 карточек,
+    которые классификатор пускал автоматически, сделкой была одна — «Внуково
+    станет совладельцем Домодедово». Остальные десять — рост акций Ozon, суд
+    по маскам с лицом Джигурды, футбольный «раунд» (совпал с «раунд»
+    инвестиций) и подобное. Замер на 18 ручных соседних темах этот класс
+    ошибок не увидел вовсе. Пока фильтр не переизмерен на реальном потоке,
+    ни одна новая карточка не пишется в базу без человека — даже если она
+    формально проходит все остальные проверки.
+    """
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": "Компания «Тест-Эпсилон» купила завод «Тест-Дзета»",
+             "date": "2026-07-28", "ind": sorted(inds)[0],
+             "src": [["источник", "https://example.invalid/z"]]}
+    bad, hold = promote.check(draft, base, idx, inds)
+    assert not bad, "чистый черновик не должен получать отказ"
+    assert any("живом потоке" in r for r in hold), hold
