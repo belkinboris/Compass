@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal, InvalidOperation
@@ -42,6 +43,8 @@ class ApiFnsClient:
         if not self.config.key:
             raise ApiFnsError("не задан API_FNS_KEY")
         self._owns_client = client is None
+        self._min_interval = max(0.0, float(os.environ.get("API_FNS_MIN_INTERVAL", "0.15")))
+        self._last_request_at = 0.0
         self.client = client or httpx.Client(
             timeout=self.config.timeout,
             transport=httpx.HTTPTransport(retries=2),
@@ -62,11 +65,32 @@ class ApiFnsClient:
         clean = {k: v for k, v in params.items() if v is not None and v != ""}
         clean["key"] = self.config.key
         url = f"{self.config.base_url}/{method}"
-        try:
-            response = self.client.get(url, params=clean)
-            response.raise_for_status()
-        except httpx.HTTPError as exc:
-            raise ApiFnsError(f"API-ФНС {method}: {exc}") from exc
+        response = None
+        for attempt in range(4):
+            wait = self._min_interval - (time.monotonic() - self._last_request_at)
+            if wait > 0:
+                time.sleep(wait)
+            try:
+                response = self.client.get(url, params=clean)
+                self._last_request_at = time.monotonic()
+                if response.status_code == 429 or response.status_code in {502, 503, 504}:
+                    if attempt < 3:
+                        retry_after = response.headers.get("retry-after")
+                        try:
+                            delay = float(retry_after) if retry_after else 0.8 * (2 ** attempt)
+                        except ValueError:
+                            delay = 0.8 * (2 ** attempt)
+                        time.sleep(min(max(delay, 0.2), 8.0))
+                        continue
+                response.raise_for_status()
+                break
+            except httpx.HTTPError as exc:
+                if attempt < 3 and isinstance(exc, (httpx.ConnectError, httpx.ReadTimeout)):
+                    time.sleep(0.8 * (2 ** attempt))
+                    continue
+                raise ApiFnsError(f"API-ФНС {method}: {exc}") from exc
+        if response is None:
+            raise ApiFnsError(f"API-ФНС {method}: пустой ответ")
         if not expect_json:
             return response
         try:
@@ -278,4 +302,201 @@ def normalize_changes(data: dict) -> list[dict[str, Any]]:
         if not text:
             text = json.dumps(item, ensure_ascii=False, sort_keys=True)
         rows.append({"event_date": event_date, "event_type": event_type, "text": str(text), "raw": item})
+    return rows
+
+# ---------------------------------------------------------------- ownership ---
+
+_OWNER_BLOCKS = (
+    ("УчрЮЛ", "Российское юридическое лицо"),
+    ("УчрФЛ", "Физическое лицо"),
+    ("УчрИН", "Иностранное юридическое лицо"),
+    ("УчрПИФ", "ПИФ"),
+    ("УчрРФ", "Российская Федерация"),
+    ("УчрСубРФ", "Субъект Российской Федерации"),
+    ("УчрМО", "Муниципальное образование"),
+)
+
+
+def _as_owner_wrappers(value: Any) -> list[dict[str, Any]]:
+    """Приводит разные формы блока участников API-ФНС к списку обёрток.
+
+    В методе ``egr`` участники могут лежать в общем поле ``Учредители`` или
+    отдельными массивами ``УчрЮЛ``/``УчрФЛ``. В ``changes`` тип участника и
+    его доля нередко находятся прямо в записи конкретной даты. Поддерживаем
+    все эти формы, чтобы после подключения ключа не зависеть от одного
+    частного примера ответа.
+    """
+    if isinstance(value, list):
+        rows: list[dict[str, Any]] = []
+        for item in value:
+            if not isinstance(item, dict):
+                continue
+            nested = _as_owner_wrappers(item)
+            rows.extend(nested or [item])
+        return rows
+    if not isinstance(value, dict):
+        return []
+
+    owner_keys = [key for key, _ in _OWNER_BLOCKS if key in value]
+    if owner_keys:
+        rows: list[dict[str, Any]] = []
+        meta_keys = (
+            "Процент", "ДоляПроцент", "СуммаУК", "НоминСтоим", "Доля",
+            "Дата", "ДатаНач", "ДатаОконч", "ДатаКон",
+        )
+        for key in owner_keys:
+            blocks = value.get(key)
+            blocks = blocks if isinstance(blocks, list) else [blocks]
+            for block in blocks:
+                if not isinstance(block, dict):
+                    continue
+                # Иногда элемент массива уже является полной обёрткой.
+                if any(owner_key in block for owner_key, _ in _OWNER_BLOCKS):
+                    rows.extend(_as_owner_wrappers(block))
+                    continue
+                wrapper: dict[str, Any] = {key: block}
+                for meta in meta_keys:
+                    if meta in value:
+                        wrapper[meta] = value[meta]
+                    if meta in block:
+                        wrapper[meta] = block[meta]
+                rows.append(wrapper)
+        return rows
+
+    rows: list[dict[str, Any]] = []
+    for nested in value.values():
+        if isinstance(nested, (dict, list)):
+            rows.extend(_as_owner_wrappers(nested))
+    return rows
+
+
+def _owner_name(block: dict[str, Any], owner_type: str) -> str | None:
+    if owner_type == "Физическое лицо":
+        return block.get("ФИОПолн") or block.get("ФИО")
+    if owner_type == "Российская Федерация":
+        return block.get("НаимПолн") or "Российская Федерация"
+    if owner_type == "Субъект Российской Федерации":
+        return block.get("НаимПолн") or block.get("НаимСубРФ")
+    if owner_type == "Муниципальное образование":
+        return block.get("НаимПолн") or block.get("НаимМО")
+    return (
+        block.get("НаимСокрЮЛ") or block.get("НаимПолнЮЛ") or
+        block.get("НаимПолн") or block.get("Наименование") or
+        block.get("НаимПИФ")
+    )
+
+
+def normalize_owners(value: Any) -> list[dict[str, Any]]:
+    """Нормализует текущих или исторических участников из блока API-ФНС."""
+    owners: list[dict[str, Any]] = []
+    for wrapper in _as_owner_wrappers(value):
+        owner_block = None
+        owner_type = None
+        for key, label in _OWNER_BLOCKS:
+            if isinstance(wrapper.get(key), dict):
+                owner_block = wrapper[key]
+                owner_type = label
+                break
+        if owner_block is None:
+            # Некоторые ответы отдают поля участника прямо в объекте.
+            owner_block = wrapper
+            owner_type = "Участник"
+        name = _owner_name(owner_block, owner_type) or _walk_find(
+            owner_block, ("ФИОПолн", "НаимСокрЮЛ", "НаимПолнЮЛ", "НаимПолн")
+        )
+        if not name:
+            continue
+        inn = owner_block.get("ИНН") or owner_block.get("ИННЮЛ") or owner_block.get("ИННФЛ")
+        ogrn = owner_block.get("ОГРН") or owner_block.get("ОГРНЮЛ")
+        share = _num(wrapper.get("Процент") or wrapper.get("ДоляПроцент") or _walk_find(wrapper.get("Доля"), ("Процент",)))
+        nominal = _num(wrapper.get("СуммаУК") or wrapper.get("НоминСтоим") or _walk_find(wrapper.get("Доля"), ("НоминСтоим", "СуммаУК")))
+        country = owner_block.get("ОКСМ") or owner_block.get("Страна")
+        key = str(inn or ogrn or str(name).strip().lower())[:520]
+        owners.append({
+            "owner_key": key,
+            "owner_name": str(name).strip(),
+            "owner_type": owner_type,
+            "inn": str(inn) if inn else None,
+            "ogrn": str(ogrn) if ogrn else None,
+            "country": str(country) if country else None,
+            "share_percent": share,
+            "nominal_value_rub": nominal,
+            "start_date": parse_date(wrapper.get("Дата") or wrapper.get("ДатаНач")),
+            "end_date": parse_date(wrapper.get("ДатаОконч") or wrapper.get("ДатаКон")),
+            "raw": wrapper,
+        })
+    # В одной записи иногда дублируется участник в сокращённом и полном виде.
+    dedup: dict[str, dict[str, Any]] = {}
+    for row in owners:
+        old = dedup.get(row["owner_key"])
+        if old is None or (old.get("share_percent") is None and row.get("share_percent") is not None):
+            dedup[row["owner_key"]] = row
+    return list(dedup.values())
+
+
+def normalize_ownership(data: dict, changes_data: dict | None = None) -> list[dict[str, Any]]:
+    """Возвращает исторические срезы состава участников.
+
+    Текущий состав из egr считается полным. Запись метода changes считается
+    полной только когда API явно вернул массив участников; одиночный объект
+    хранится как частичный исторический срез и в интерфейсе не выдаётся за
+    исчерпывающий состав общества.
+    """
+    entity = unwrap_legal_entity(data)
+    if not entity:
+        return []
+    current_raw = entity.get("Учредители")
+    if current_raw is None and any(key in entity for key, _ in _OWNER_BLOCKS):
+        current_raw = entity
+    current_all = normalize_owners(current_raw)
+    # В расширенных ответах рядом с действующими участниками могут приходить
+    # бывшие с заполненной ДатаОконч. Они нужны для истории, но не должны
+    # попадать в блок «Текущий состав».
+    current = [owner for owner in current_all if owner.get("end_date") is None]
+    current_date = parse_date(entity.get("СтатусДата") or _walk_find(entity, ("ДатаВып", "ДатаАкт")))
+    if current_date is None:
+        owner_dates = []
+        for wrapper in _as_owner_wrappers(current_raw):
+            dt = parse_date(wrapper.get("Дата"))
+            if dt:
+                owner_dates.append(dt)
+        current_date = max(owner_dates) if owner_dates else date.today()
+    rows: list[dict[str, Any]] = []
+    if current:
+        rows.append({
+            "snapshot_date": current_date,
+            "source_kind": "current",
+            "is_complete": True,
+            "source_text": "Текущий состав участников по ЕГРЮЛ",
+            "owners": current,
+            "raw": current_raw,
+        })
+
+    changes_entity = unwrap_legal_entity(changes_data or {}) if changes_data else None
+    changes = (changes_entity or {}).get("Изменения") if changes_entity else None
+    if isinstance(changes, dict):
+        for date_text, item in changes.items():
+            if not isinstance(item, dict):
+                continue
+            raw = item.get("Учредители")
+            direct_owner = any(key in item for key, _ in _OWNER_BLOCKS)
+            if raw is None and direct_owner:
+                raw = item
+            if raw is None:
+                continue
+            owners = normalize_owners(raw)
+            if not owners:
+                continue
+            rows.append({
+                "snapshot_date": parse_date(date_text) or parse_date(item.get("Дата")),
+                "source_kind": "changes",
+                # Запись конкретного изменения обычно содержит одного участника,
+                # а не весь состав общества. Полной считаем только явный массив
+                # в общем поле ``Учредители``.
+                "is_complete": isinstance(item.get("Учредители"), list),
+                "source_text": item.get("СПВЗ") or "Изменение сведений об участниках",
+                "owners": owners,
+                "raw": item,
+            })
+    rows.sort(key=lambda x: (x.get("snapshot_date") or date.min, x.get("source_kind") == "current"))
     return rows

@@ -29,12 +29,13 @@ from sqlalchemy import select
 from company_catalog import load_company_catalog
 from db.models import (
     Base, Company, CompanyAlias, FinancialReport, FnsSyncRun, LegalEntity,
-    LegalEntityCandidate, LegalEntityMatchStatus, RegistryEvent,
+    LegalEntityCandidate, LegalEntityMatchStatus, OwnershipSnapshot,
+    OwnershipStake, RegistryEvent,
 )
 from db.session import SessionLocal, engine
 from fns_client import (
     ApiFnsClient, ApiFnsError, normalize_bo, normalize_changes, normalize_egr,
-    normalize_search_results,
+    normalize_ownership, normalize_search_results,
 )
 
 _OPF = re.compile(
@@ -72,8 +73,10 @@ def _score(profile: dict[str, Any], candidate: dict[str, Any]) -> tuple[float, l
     return min(best, 1.0), reasons
 
 
-def seed_companies(db) -> int:
+def seed_companies(db, *, dry_run: bool = False) -> int:
     catalog = load_company_catalog()
+    if dry_run:
+        return len(catalog)
     changed = 0
     for company_id, item in catalog.items():
         row = db.get(Company, company_id)
@@ -230,6 +233,7 @@ def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
         changes_raw = client.changes(req)
         changes = normalize_changes(changes_raw)
     except ApiFnsError:
+        changes_raw = {}
         changes = []
     # История маленькая; полная замена исключает накопление дублей при каждом sync.
     db.query(RegistryEvent).filter_by(legal_entity_id=entity.id).delete()
@@ -241,6 +245,39 @@ def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
             text=event.get("text") or "Изменение в ЕГРЮЛ",
             raw_json=json.dumps(event.get("raw") or {}, ensure_ascii=False, default=str),
         ))
+
+    # Состав участников хранится отдельными датированными срезами. Полная
+    # замена при синхронизации нужна, чтобы повторный запуск не накапливал
+    # одинаковые доли и чтобы исправления нормализатора применялись сразу.
+    for old in list(db.scalars(select(OwnershipSnapshot).where(
+        OwnershipSnapshot.legal_entity_id == entity.id
+    )).all()):
+        db.delete(old)
+    db.flush()
+    for snapshot in normalize_ownership(raw_egr, changes_raw):
+        snap = OwnershipSnapshot(
+            legal_entity_id=entity.id,
+            snapshot_date=snapshot.get("snapshot_date"),
+            source_kind=snapshot.get("source_kind") or "changes",
+            is_complete=bool(snapshot.get("is_complete")),
+            source_text=snapshot.get("source_text"),
+            raw_json=json.dumps(snapshot.get("raw") or {}, ensure_ascii=False, default=str),
+        )
+        db.add(snap)
+        db.flush()
+        for owner in snapshot.get("owners") or []:
+            db.add(OwnershipStake(
+                snapshot_id=snap.id,
+                owner_key=owner.get("owner_key") or owner.get("owner_name", "")[:520],
+                owner_name=owner.get("owner_name") or "Участник не назван",
+                owner_type=owner.get("owner_type"),
+                inn=owner.get("inn"),
+                ogrn=owner.get("ogrn"),
+                country=owner.get("country"),
+                share_percent=owner.get("share_percent"),
+                nominal_value_rub=owner.get("nominal_value_rub"),
+                raw_json=json.dumps(owner.get("raw") or {}, ensure_ascii=False, default=str),
+            ))
     db.commit()
 
 
@@ -280,12 +317,13 @@ def main() -> int:
         parser.error("укажите --seed, --match, --sync, --all или --inn")
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
-        run = FnsSyncRun(mode="all" if args.all else "manual")
-        db.add(run); db.commit()
-        details: dict[str, Any] = {}
+        run = None if args.dry_run else FnsSyncRun(mode="all" if args.all else "manual")
+        if run is not None:
+            db.add(run); db.commit()
+        details: dict[str, Any] = {"dry_run": True} if args.dry_run else {}
         try:
             if args.seed or args.all:
-                details["seeded"] = seed_companies(db)
+                details["seeded"] = seed_companies(db, dry_run=args.dry_run)
             if args.inn:
                 if not args.company_id:
                     parser.error("для --inn нужен --company-id")
@@ -297,24 +335,38 @@ def main() -> int:
                         row = egr
                     if not row:
                         raise ApiFnsError(f"юрлицо {args.inn} не найдено")
-                    _confirm_entity(db, args.company_id, row, 1.0, manual=True)
-                    db.commit()
+                    if not args.dry_run:
+                        _confirm_entity(db, args.company_id, row, 1.0, manual=True)
+                        db.commit()
+                    details["manual_match"] = {"company_id": args.company_id, "inn": args.inn}
             if args.match or args.all:
                 with ApiFnsClient() as client:
                     m, c, e = match_companies(db, client, auto_confirm=args.auto_confirm,
                                               limit=args.limit, company_id=args.company_id,
                                               dry_run=args.dry_run)
-                run.matched += m; run.candidates += c; run.errors += e
+                if run is not None:
+                    run.matched += m; run.candidates += c; run.errors += e
                 details["match"] = {"confirmed": m, "candidates": c, "errors": e}
             if args.sync or args.all:
-                with ApiFnsClient() as client:
-                    ok, e = sync_confirmed(db, client, limit=args.limit, company_id=args.company_id)
-                run.matched += ok; run.errors += e
-                details["sync"] = {"synced": ok, "errors": e}
+                if args.dry_run:
+                    query = select(LegalEntity).where(LegalEntity.match_status == LegalEntityMatchStatus.confirmed)
+                    if args.company_id:
+                        query = query.where(LegalEntity.company_id == args.company_id)
+                    rows = list(db.scalars(query.order_by(LegalEntity.id)).all())
+                    ok, e = (min(len(rows), args.limit) if args.limit else len(rows)), 0
+                else:
+                    with ApiFnsClient() as client:
+                        ok, e = sync_confirmed(db, client, limit=args.limit, company_id=args.company_id)
+                if run is not None:
+                    run.matched += ok; run.errors += e
+                details["sync"] = {"synced" if not args.dry_run else "would_sync": ok, "errors": e}
         finally:
-            run.finished_at = datetime.utcnow()
-            run.details_json = json.dumps(details, ensure_ascii=False)
-            db.commit()
+            if run is not None:
+                run.finished_at = datetime.utcnow()
+                run.details_json = json.dumps(details, ensure_ascii=False)
+                db.commit()
+            else:
+                db.rollback()
         print(json.dumps(details, ensure_ascii=False, indent=2))
     return 0
 

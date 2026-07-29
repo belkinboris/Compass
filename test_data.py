@@ -536,7 +536,7 @@ def test_artem_feedback_ui_invariants():
     assert 'class="hero-brand"' in html, "на главной снова пропал логотип"
     assert 'window.hsTimer=null' in html and 'hsTimer=setInterval' not in html, \
         "автопереключение слайдера вернулось"
-    assert 'Сопоставимых сделок с теми же сторонами или темой пока не найдено' in html
+    assert 'Сделок с теми же сторонами или общей темой пока не найдено' in html
     assert 'Сделок с теми же сторонами или с той же темой в базе нет' not in html
     assert 'Показатели таргета' not in html
     assert 'mailto:' not in html

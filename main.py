@@ -34,7 +34,8 @@ from db.models import Base as DBBase
 from db.models import (
     AssistantMessage, AssistantThread, Comment, CorrectionRequest, DealWatch,
     FinancialReport, LegalEntity, LegalEntityMatchStatus, Notification,
-    NotificationPreference, RegistryEvent, SavedFilter, User, UserTier, Webinar,
+    NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
+    SavedFilter, User, UserTier, Webinar,
 )
 from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError
@@ -385,6 +386,122 @@ def _report_payload(row: FinancialReport) -> dict:
     return {field: _plain(getattr(row, field)) for field in fields}
 
 
+def _owner_payload(row: OwnershipStake) -> dict:
+    return {
+        "key": row.owner_key,
+        "name": row.owner_name,
+        "type": row.owner_type,
+        "inn": row.inn,
+        "ogrn": row.ogrn,
+        "country": row.country,
+        "share_percent": _plain(row.share_percent),
+        "nominal_value_rub": _plain(row.nominal_value_rub),
+    }
+
+
+def _ownership_payload(db, entity: LegalEntity, paid: bool) -> dict:
+    snapshots = list(db.scalars(select(OwnershipSnapshot).where(
+        OwnershipSnapshot.legal_entity_id == entity.id
+    ).order_by(OwnershipSnapshot.snapshot_date, OwnershipSnapshot.id)).all())
+    if not snapshots:
+        form = f"{entity.legal_form or ''} {entity.short_name or ''}".lower()
+        is_ao = bool(re.search(r"(?:^|\s)(?:пао|ао|оао|зао)(?:\s|$)|акционерн", form))
+        return {
+            "available": False,
+            "current": [],
+            "history": [],
+            "has_more_history": False,
+            "notice": ("ЕГРЮЛ не раскрывает состав акционеров акционерного общества. "
+                       "Если акционеры названы в сообщениях эмитента или источниках сделки, "
+                       "они показываются в карточках соответствующих сделок.") if is_ao else
+                      "Сведения об участниках в полученных данных ЕГРЮЛ не найдены.",
+        }
+
+    enriched = []
+    for snap in snapshots:
+        stakes = list(db.scalars(select(OwnershipStake).where(
+            OwnershipStake.snapshot_id == snap.id
+        ).order_by(OwnershipStake.share_percent.desc(), OwnershipStake.owner_name)).all())
+        enriched.append((snap, stakes))
+    current_pair = next(((snap, stakes) for snap, stakes in reversed(enriched)
+                         if snap.source_kind == "current"), enriched[-1])
+    current = [_owner_payload(x) for x in current_pair[1]]
+
+    def comparable(pair):
+        snap, stakes = pair
+        if snap.is_complete:
+            return True
+        return len(stakes) == 1 and float(stakes[0].share_percent or 0) == 100.0
+
+    history = []
+    previous = None
+    for pair in enriched:
+        snap, stakes = pair
+        if snap.id == current_pair[0].id and previous is None:
+            previous = pair
+            continue
+        if previous is None:
+            previous = pair
+            if snap.source_kind != "current":
+                for stake in stakes:
+                    history.append({
+                        "date": _plain(snap.snapshot_date), "kind": "recorded",
+                        "owner": _owner_payload(stake), "before_share": None,
+                        "after_share": _plain(stake.share_percent),
+                        "source_text": snap.source_text, "is_complete": snap.is_complete,
+                    })
+            continue
+        before_snap, before_stakes = previous
+        before = {x.owner_key: x for x in before_stakes}
+        after = {x.owner_key: x for x in stakes}
+        if comparable(previous) and comparable(pair):
+            for key, stake in after.items():
+                old = before.get(key)
+                if old is None:
+                    history.append({
+                        "date": _plain(snap.snapshot_date), "kind": "joined",
+                        "owner": _owner_payload(stake), "before_share": None,
+                        "after_share": _plain(stake.share_percent),
+                        "source_text": snap.source_text, "is_complete": snap.is_complete,
+                    })
+                elif _plain(old.share_percent) != _plain(stake.share_percent):
+                    history.append({
+                        "date": _plain(snap.snapshot_date), "kind": "share_changed",
+                        "owner": _owner_payload(stake), "before_share": _plain(old.share_percent),
+                        "after_share": _plain(stake.share_percent),
+                        "source_text": snap.source_text, "is_complete": snap.is_complete,
+                    })
+            for key, stake in before.items():
+                if key not in after:
+                    history.append({
+                        "date": _plain(snap.snapshot_date), "kind": "left",
+                        "owner": _owner_payload(stake), "before_share": _plain(stake.share_percent),
+                        "after_share": None, "source_text": snap.source_text,
+                        "is_complete": snap.is_complete,
+                    })
+        elif snap.source_kind != "current":
+            for stake in stakes:
+                history.append({
+                    "date": _plain(snap.snapshot_date), "kind": "recorded",
+                    "owner": _owner_payload(stake), "before_share": None,
+                    "after_share": _plain(stake.share_percent),
+                    "source_text": snap.source_text, "is_complete": snap.is_complete,
+                })
+        previous = pair
+
+    history.sort(key=lambda x: (x.get("date") or "", x.get("kind") or ""), reverse=True)
+    shown = history if paid else history[:3]
+    return {
+        "available": bool(current or history),
+        "current": current,
+        "as_of": _plain(current_pair[0].snapshot_date),
+        "history": shown,
+        "has_more_history": len(history) > len(shown),
+        "notice": ("Показываем изменения, которые зафиксированы в ЕГРЮЛ. "
+                   "Для неполных исторических записей не восстанавливаем состав участников догадками."),
+    }
+
+
 @app.get("/api/fns/status")
 def fns_status(db=Depends(get_db)):
     confirmed = db.query(LegalEntity).filter_by(match_status=LegalEntityMatchStatus.confirmed).count()
@@ -398,7 +515,7 @@ def fns_status(db=Depends(get_db)):
 
 
 @app.get("/api/companies/{company_id}/fns")
-def company_fns(company_id: str, user: User | None = Depends(_current_user), db=Depends(get_db)):
+def company_fns(company_id: str, as_of_year: int | None = None, user: User | None = Depends(_current_user), db=Depends(get_db)):
     profile = get_company_profile(company_id)
     entities = list(db.scalars(select(LegalEntity).where(
         LegalEntity.company_id == company_id,
@@ -418,6 +535,10 @@ def company_fns(company_id: str, user: User | None = Depends(_current_user), db=
         reports = list(db.scalars(select(FinancialReport).where(
             FinancialReport.legal_entity_id == entity.id
         ).order_by(FinancialReport.year.desc())).all())
+        # Для карточки сделки показываем последний отчётный год ДО года сделки,
+        # а не текущие показатели, появившиеся спустя несколько лет.
+        if as_of_year is not None:
+            reports = [row for row in reports if row.year < as_of_year]
         events = list(db.scalars(select(RegistryEvent).where(
             RegistryEvent.legal_entity_id == entity.id
         ).order_by(RegistryEvent.event_date.desc(), RegistryEvent.id.desc())).all())
@@ -433,6 +554,7 @@ def company_fns(company_id: str, user: User | None = Depends(_current_user), db=
                 "type": row.event_type,
                 "text": row.text,
             } for row in shown_events],
+            "ownership": _ownership_payload(db, entity, paid),
             "has_more_reports": len(reports) > len(shown_reports),
             "has_more_events": len(events) > len(shown_events),
         })
@@ -442,6 +564,7 @@ def company_fns(company_id: str, user: User | None = Depends(_current_user), db=
         "company_name": profile.get("name") if profile else None,
         "entities": result,
         "access": {"paid": paid, "full_history": paid, "downloads": paid},
+        "as_of_year": as_of_year,
         "disclaimer": "Показатели относятся к указанному юридическому лицу по РСБУ и могут не отражать консолидированные показатели всей группы.",
     }
 

@@ -127,6 +127,9 @@ class LegalEntity(Base):
     registry_events: Mapped[list["RegistryEvent"]] = relationship(
         back_populates="legal_entity", cascade="all, delete-orphan"
     )
+    ownership_snapshots: Mapped[list["OwnershipSnapshot"]] = relationship(
+        back_populates="legal_entity", cascade="all, delete-orphan"
+    )
 
 
 class LegalEntityCandidate(Base):
@@ -191,6 +194,54 @@ class RegistryEvent(Base):
     fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     legal_entity: Mapped[LegalEntity] = relationship(back_populates="registry_events")
+
+
+class OwnershipSnapshot(Base):
+    """Состав участников общества на конкретную дату.
+
+    API-ФНС возвращает действующих участников в методе egr и исторические
+    срезы в changes. Храним именно срезы, а не заранее придуманные события:
+    так интерфейс может честно показать состояние «до» и «после», а алгоритм
+    сравнения можно улучшать без повторной загрузки исходных данных.
+    """
+    __tablename__ = "ownership_snapshots"
+    __table_args__ = (
+        UniqueConstraint("legal_entity_id", "snapshot_date", "source_kind", name="uq_ownership_snapshot"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    legal_entity_id: Mapped[int] = mapped_column(ForeignKey("legal_entities.id"))
+    snapshot_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    source_kind: Mapped[str] = mapped_column(String(30), default="changes")  # current | changes
+    is_complete: Mapped[bool] = mapped_column(Boolean, default=False)
+    source_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    raw_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    legal_entity: Mapped[LegalEntity] = relationship(back_populates="ownership_snapshots")
+    stakes: Mapped[list["OwnershipStake"]] = relationship(
+        back_populates="snapshot", cascade="all, delete-orphan"
+    )
+
+
+class OwnershipStake(Base):
+    """Один участник в одном историческом срезе состава участников."""
+    __tablename__ = "ownership_stakes"
+    __table_args__ = (UniqueConstraint("snapshot_id", "owner_key", name="uq_snapshot_owner"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    snapshot_id: Mapped[int] = mapped_column(ForeignKey("ownership_snapshots.id"))
+    owner_key: Mapped[str] = mapped_column(String(520))
+    owner_name: Mapped[str] = mapped_column(String(500))
+    owner_type: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    inn: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    ogrn: Mapped[str | None] = mapped_column(String(15), nullable=True)
+    country: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    share_percent: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    nominal_value_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    raw_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    snapshot: Mapped[OwnershipSnapshot] = relationship(back_populates="stakes")
 
 
 class FnsSyncRun(Base):
@@ -319,13 +370,15 @@ class Comment(Base):
     __tablename__ = "comments"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    deal_id: Mapped[str] = mapped_column(ForeignKey("deals.id"))
+    deal_id: Mapped[str] = mapped_column(String(80))
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     body: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(20), default="approved")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
-    deal: Mapped["Deal"] = relationship()
+    # Карточки сделок пока канонически живут в JSON, поэтому внешний ключ на
+    # SQL-таблицу deals здесь недопустим: в PostgreSQL комментарий к JSON-карточке
+    # иначе отклоняется, даже если карточка существует в интерфейсе.
     user: Mapped[User] = relationship()
 
 
