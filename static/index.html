@@ -7,7 +7,7 @@
 <title>КОМПАС — сделки и компании российского рынка M&A</title>
 <meta name="description" content="База сделок M&A российского рынка: 1300+ сделок со ссылками на первоисточники, профили компаний, каталог юридических и инвестиционных консультантов. Каждая сделка — глазами экономиста и юриста.">
 <meta property="og:title" content="КОМПАС — сделки российского рынка M&A">
-<meta property="og:description" content="1300+ сделок с первоисточниками, профили компаний, консультанты Право-300. Двойная линза: экономист и юрист.">
+<meta property="og:description" content="1300+ сделок с первоисточниками, профили компаний, юридические и инвестиционные консультанты. Двойная линза: экономист и юрист.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <!-- Шрифты подключались с fonts.googleapis.com — и это не работало: из России
@@ -596,17 +596,99 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
      экрана. */
   .spec-row{grid-template-columns:1fr;gap:4px}
 }
+
+
+/* ---------- запуск: консультанты, ФНС, уведомления, экспорт ---------- */
+.advisor-list{display:grid;gap:10px;margin-top:18px}
+.advisor-card{display:grid;grid-template-columns:minmax(190px,1.05fr) minmax(280px,1.6fr) auto;gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);padding:22px 26px;border-radius:var(--radius)}
+.advisor-card-name{font-family:var(--f-display);font-size:20px;line-height:1.25}
+.advisor-card-name a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px}
+.advisor-card-groups{font-size:14px;line-height:1.55;color:var(--muted)}
+.advisor-card-count{justify-self:end;white-space:nowrap}
+.advisor-filters{align-items:center}
+
+.deal-tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
+.deal-tools .chip.primary{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+.deal-tools .chip[disabled]{opacity:.5;cursor:wait}
+.tool-note{width:100%;font-size:12.5px;color:var(--muted);min-height:1.2em}
+
+.fns-shell{margin:30px 0 38px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.fns-head{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;padding:24px 26px 18px;border-bottom:1px solid var(--line-soft)}
+.fns-head h2{font-family:var(--f-display);font-size:25px;font-weight:400;line-height:1.25;margin-top:5px}
+.fns-badge{flex:0 0 auto;border:1px solid #C5D4CC;color:var(--accent);padding:6px 10px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;border-radius:999px}
+.fns-tabs,.account-tabs{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.fns-tabs::-webkit-scrollbar,.account-tabs::-webkit-scrollbar{display:none}
+.fns-tabs button,.account-tabs a{padding:13px 20px;white-space:nowrap;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line)}
+.fns-tabs button.on,.account-tabs a.on{background:var(--accent-deep);color:#fff}
+.fns-body{padding:24px 26px 28px}
+.fns-entity-switch{display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:18px 22px 0}
+.fns-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);margin:14px 0 22px}
+.fns-metric{padding:18px;border-right:1px solid var(--line)}
+.fns-metric:last-child{border-right:none}
+.fns-metric .v{font-family:var(--f-display);font-size:23px;line-height:1.2;margin-top:7px}
+.fns-metric .delta{font-size:12px;margin-top:4px;color:var(--muted)}
+.fns-table{width:100%;border-collapse:collapse;font-size:13px}
+.fns-table th,.fns-table td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
+.fns-table th:first-child,.fns-table td:first-child{text-align:left;padding-left:0}
+.fns-registry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
+.fns-registry-row{padding:10px 0;border-bottom:1px solid var(--line-soft)}
+.fns-registry-row .k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.fns-event{padding:12px 0;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:120px 1fr;gap:18px}
+.fns-empty{padding:24px;color:var(--muted);background:var(--ivory)}
+.fns-disclaimer{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.55}
+.fns-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.fns-premium{padding:13px 16px;background:var(--bronze-soft);border-left:3px solid var(--bronze);font-size:13px;margin-top:18px}
+
+.account-tabs{margin:0 0 18px;gap:0;background:var(--card);border:1px solid var(--line)}
+.notif-list{display:grid;gap:8px}
+.notif-item{display:block;background:var(--card);border:1px solid var(--line);padding:17px 19px}
+.notif-item.unread{border-left:3px solid var(--accent)}
+.notif-item h3{font-size:14px;margin-bottom:4px}.notif-item p{font-size:13px;color:var(--muted)}
+.notif-item time{font-size:11px;color:var(--muted);display:block;margin-top:8px}
+.pref-grid{display:grid;gap:10px;margin-top:14px}
+.pref-row{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.switch{position:relative;width:42px;height:24px;display:inline-block;flex:0 0 auto}
+.switch input{opacity:0;width:0;height:0}.switch span{position:absolute;inset:0;background:#C9CEC8;border-radius:20px;transition:.2s}.switch span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+span{background:var(--accent)}.switch input:checked+span:before{transform:translateX(18px)}
+
+.chat-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px}
+.thread-panel{background:var(--card);border:1px solid var(--line);padding:14px;min-height:420px}
+.thread-new{width:100%;padding:10px;border:1px solid var(--accent);color:var(--accent);margin-bottom:12px}
+.thread-list{display:grid;gap:5px}.thread-item{padding:9px 10px;text-align:left;font-size:12.5px;color:var(--muted);border-radius:3px}.thread-item.on{background:var(--accent-soft);color:var(--accent-deep)}
+.thread-empty{font-size:12px;color:var(--muted);padding:8px}
+
+.webinar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.webinar-card{background:var(--card);border:1px solid var(--line);padding:24px}
+.webinar-card h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.25;margin:8px 0}
+.webinar-meta{font-size:12px;color:var(--muted)}
+
+@media(max-width:760px){
+  .advisor-card{grid-template-columns:1fr;gap:12px;padding:19px 18px}
+  .advisor-card-name{font-size:21px}.advisor-card-count{justify-self:start}
+  .advisor-card-groups{font-size:14px}
+  .advisor-filters{display:flex;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;margin-left:-20px;margin-right:-20px;padding:0 20px 8px}
+  .advisor-filters::-webkit-scrollbar{display:none}.advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
+  .fns-head{padding:20px}.fns-body{padding:20px}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .fns-registry{grid-template-columns:1fr}.fns-event{grid-template-columns:1fr;gap:2px}
+  .chat-layout{grid-template-columns:1fr}.thread-panel{min-height:0}.thread-list{display:flex;overflow-x:auto}.thread-item{min-width:180px}
+  .webinar-grid{grid-template-columns:1fr}
+}
+@media(max-width:430px){
+  .fns-metrics{grid-template-columns:1fr}.fns-metric{border-right:none!important;border-bottom:1px solid var(--line)}.fns-metric:last-child{border-bottom:none}
+  .deal-tools .chip{flex:1 1 calc(50% - 6px);text-align:center;justify-content:center}
+}
+
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="top-in">
-    <a href="#/" class="wordmark">КО<em>М</em>П<em>А</em>С<span>.</span></a>
+    <a href="#/" class="wordmark">КО<em>М</em>П<em>А</em>С</a>
     <nav id="nav">
       <a href="#/" data-r="deals">Сделки</a>
       <a href="#/companies" data-r="companies">Компании</a>
       <a href="#/advisors" data-r="advisors">Консультанты</a>
+      <a href="#/webinars" data-r="webinars">Вебинары</a>
       <a href="#/analytics" data-r="analytics">Аналитика</a>
       <a href="#/assistant" data-r="assistant">Ассистент</a>
       <a href="#/account" data-r="account" id="navAccount">Войти</a>
@@ -620,7 +702,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   <div class="foot-in">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">КО<em>М</em>П<em>А</em>С<span>.</span></div>
+        <div class="foot-brand">КО<em>М</em>П<em>А</em>С</div>
         <div class="foot-desc">Сделки, компании и консультанты российского рынка — структурированно, с двойной линзой «экономист / юрист» и ссылками на первоисточники. Демо-версия.</div>
       </div>
       <div class="foot-col">
@@ -628,6 +710,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
         <a href="#/">Сделки</a>
         <a href="#/companies">Компании</a>
         <a href="#/advisors">Консультанты</a>
+        <a href="#/webinars">Вебинары</a>
         <a href="#/assistant">Ассистент</a>
       </div>
       <div class="foot-col">
@@ -1301,9 +1384,9 @@ function dealAsText(d){
   return L.join("\n");
 }
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
-                     ["firm","filterFirm"],["q","feedQuery"],["full","onlyFull"]];
+                     ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"]];
 function feedStateGet(){
-  return {filterInd, feedYear, filterTheme, filterFirm, feedQuery, onlyFull};
+  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull};
 }
 function feedHash(){
   const st = feedStateGet();
@@ -1329,6 +1412,7 @@ function applyFeedParams(qs){
   feedYear = p.get("year") || "Все";
   filterTheme = p.get("theme") || "Все";
   filterFirm = p.get("firm") || "Все";
+  filterAdvisorGroup = p.get("agroup") || "Все";
   feedQuery = p.get("q") || "";
   onlyFull = p.get("full") === "1";
   feedPage = 1;
@@ -1357,7 +1441,7 @@ function route(){
   // Имя темы кодируется: в нём бывает «/» («IPO / SPO»), который иначе разрезал бы хэш.
   else if(page==="theme"){
     filterTheme = arg?decodeURIComponent(arg):"Все";
-    filterInd="Все"; feedYear="Все"; filterFirm="Все"; feedQuery=""; feedPage=1; advOpen=true;
+    filterInd="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; feedQuery=""; feedPage=1; advOpen=true;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -1367,7 +1451,7 @@ function route(){
   // («ГМК и добыча» безопасна, а «Нефть/газ» разрезала бы хэш).
   else if(page==="ind"){
     filterInd = arg?decodeURIComponent(arg):"Все";
-    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
+    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -1375,7 +1459,7 @@ function route(){
   // подборку можно было дать ссылку, а не пересказывать «наберите вот это».
   else if(page==="search"){
     feedQuery = arg?decodeURIComponent(arg):"";
-    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; onlyFull=false; feedPage=1;
+    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; onlyFull=false; feedPage=1;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -1421,6 +1505,7 @@ function route(){
     else renderAnalytics();
     mark("analytics");
   }
+  else if(page==="webinars"){renderWebinars();mark("webinars");}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
@@ -1440,6 +1525,7 @@ const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal")
 
 /* ================= ИИ ================= */
 let aiMode = "base";
+let activeThreadId = null;
 function buildContext(){
   return JSON.stringify({
   full_deals:DEALS.filter(d=>!d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src})),
@@ -1483,11 +1569,17 @@ function localAnswer(q){
   return `В демо-базе ${TOTAL_DEALS()} сделок — точного совпадения нет. Попробуйте: «самая крупная сделка», «кто сопровождал сделки», «выходы иностранцев». С ключами Yandex AI Studio доступен полноценный ИИ и режим «По всему интернету».`;
 }
 
-async function aiAnswer(q, mode){
+async function aiAnswer(q, mode, meta){
   mode = mode || aiMode;
+  meta = meta || {};
   try{
-    const r = await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q,context:AI_CONTEXT,mode})});
+    const payload={question:q,context:AI_CONTEXT,mode,
+      thread_id:meta.threadId===undefined?null:meta.threadId,
+      context_type:meta.contextType||"general",context_id:meta.contextId||null,
+      save_thread:meta.saveThread===true};
+    const r = await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
     const data = await r.json();
+    if(data.thread_id) activeThreadId=data.thread_id;
     if(data.answer) return data.answer
       .replace(/\[([^\]]+)\]\((#\/[^\)]+)\)/g,'<a href="$2">$1</a>')
       .replace(/\[([^\]]+)\]\((https?:[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
@@ -1496,7 +1588,6 @@ async function aiAnswer(q, mode){
   if(mode==="web") return "Поиск по интернету включится, когда в переменных приложения будут заданы YANDEX_API_KEY и YANDEX_FOLDER_ID. Пока отвечаю по базе:<br><br>"+localAnswer(q);
   return localAnswer(q);
 }
-
 const modeToggleHtml = light => `
   <div class="mode ${light?"light":""}" data-mode-toggle>
     <button data-m="base" class="${aiMode==="base"?"on":""}">По базе Компаса</button>
@@ -1619,6 +1710,7 @@ let onlyFull = false;
 let feedYear = "Все";
 let advOpen = false;
 let filterFirm = "Все";
+let filterAdvisorGroup = "Все";
 let filterTheme = "Все";
 const PAGE_SIZE = 20;
 
@@ -1723,11 +1815,19 @@ function unifiedFeed(){
     if(it.kind==="mini") return it.rec.firm===filterFirm;
     return false; // сделки из телеграм-каналов и bulk-базы не привязаны к конкретному консультанту
   };
+  const matchAdvisorGroup = it => {
+    if(filterAdvisorGroup==="Все") return true;
+    const allowed = FIRMS.filter(f=>(f.g||[]).includes(filterAdvisorGroup));
+    if(it.kind==="mini") return allowed.some(f=>f.id===it.rec.firm);
+    if(it.kind!=="full") return false;
+    const names = [...(it.rec.law&&it.rec.law.adv||[]).map(a=>a[1]||""), (it.rec.eco&&it.rec.eco.finadv)||""];
+    return allowed.some(f=>{const rx=firmRxOf(f); return names.some(n=>rx.test(n));});
+  };
   // Темы размечены только у подробных карточек (см. pipeline/tag_themes.py),
   // поэтому фильтр по теме автоматически отсекает краткие записи — иначе
   // выдача молча смешивала бы «нет темы» и «тема не размечалась».
   const matchTheme = it => filterTheme==="Все" || (it.kind==="full" && (it.rec.themes||[]).includes(filterTheme));
-  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchTheme(it));
+  const filtered = items.filter(it=>(filterInd==="Все"||it.ind===filterInd) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it));
   filtered.sort((a,b)=>{
     if(a.date==="unknown") return 1;
     if(b.date==="unknown") return -1;
@@ -1762,6 +1862,7 @@ function emptyFeedHtml(){
   if(feedYear!=="Все") active.push({k:"year", t:`год ${feedYear}`});
   if(filterTheme!=="Все") active.push({k:"theme", t:`тема «${filterTheme}»`});
   if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
+  if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   const head = active.length
     ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
@@ -1788,10 +1889,10 @@ function bindFeedListEvents(){
   };
   const fr = document.getElementById("feedreset");
   if(fr) fr.onclick = ()=>{
-    feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все";
+    feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     onlyFull=false; feedPage=1;
     const q=document.getElementById("feedq"); if(q) q.value="";
-    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selfmt","Все сделки"]]
+    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selagroup","Все"],["selfmt","Все сделки"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
     syncFeedHash();
@@ -1817,7 +1918,7 @@ function renderDeals(){
         <h1>Сделки российского рынка — <em>со ссылками на первоисточники</em></h1>
         <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
-        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length}">0</b> ${plural(FIRMS.length,"юрфирма","юрфирмы","юрфирм")} Право-300 · у <b class="cnt" data-n="${TEAM_KNOWN()}">0</b> сделок известно, кто вёл${bulkLoaded?"":" · догружаем базу…"}</div>
+        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}</div>
         <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично.</p>
       </div>
     </div>
@@ -1831,7 +1932,7 @@ function renderDeals(){
     </div>
     <div class="hs-slide">${SCENE_COLUMNS}
       <div class="hs-in">
-        <div class="kicker">Каталог Право-300</div>
+        <div class="kicker">Каталог консультантов</div>
         <h1>Консультанты — <em>кто ведёт сделки</em> на рынке</h1>
         <p>Юридические и инвестиционные консультанты с реальными сделками из публичных источников. Не рейтинг — факты.</p>
         <a class="hs-cta" href="#/advisors">Открыть консультантов</a>
@@ -1882,6 +1983,9 @@ function renderDeals(){
     <label>Консультант
       <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
     </label>
+    <label>Категория консультанта
+      <select id="selagroup"><option value="Все">Все категории</option>${Object.entries(GROUP_LABEL).map(([g,label])=>`<option value="${g}" ${g===filterAdvisorGroup?"selected":""}>${label}</option>`).join("")}</select>
+    </label>
     <label>Тема сделки
       <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
     </label>
@@ -1919,6 +2023,7 @@ function renderDeals(){
   bindSel("selyear", v=>feedYear=v);
   bindSel("selfmt", v=>onlyFull=(v!=="Все сделки"));
   bindSel("selfirm", v=>filterFirm=v);
+  bindSel("selagroup", v=>filterAdvisorGroup=v);
   bindSel("seltheme", v=>filterTheme=v);
   const sf = document.getElementById("sharefeed");
   if(sf) sf.onclick = ()=>{
@@ -1982,7 +2087,7 @@ function mountMiniAI(contextName){
     const v=input.value.trim();if(!v)return;
     push("user",esc(v));input.value="";
     const w=push("ai wait",aiMode==="web"?"Ищу по базе и в интернете…":"Ищу по базе…");
-    const a=await aiAnswer(`Контекст: пользователь смотрит «${contextName}». Вопрос: ${v}`);
+    const a=await aiAnswer(`Контекст: пользователь смотрит «${contextName}». Вопрос: ${v}`, aiMode, {saveThread:false});
     w.classList.remove("wait");w.innerHTML=a;
   };
   btn.onclick=send;
@@ -2249,7 +2354,7 @@ function openCorrectionDialog(d=null){
     <div class="dialog-head"><div><span class="label">Сообщение редакции</span><h2 id="correctionTitle">${cardMode?"Уточнить или дополнить карточку":"Написать редакции"}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
     <p>${cardMode?"Напишите, какой факт нужно исправить или добавить, и по возможности приложите ссылку на источник.":"Опишите вопрос, предложение или неточность и при необходимости приложите ссылку."} Сообщение попадёт напрямую в редакционную очередь и не будет опубликовано как комментарий.</p>
     <label for="correctionBody">${cardMode?"Что нужно изменить":"Сообщение"}</label>
-    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем выступил российский девелопер. Источник: …":"Напишите сообщение и, если уместно, добавьте ссылку на источник."}"></textarea>
+    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем выступил российский девелопер. Источник: …":"Напишите сообщение и, если возможно, добавьте ссылку на источник."}"></textarea>
     <label for="correctionContact">Контакт для уточняющих вопросов — необязательно</label>
     <input id="correctionContact" maxlength="300" placeholder="Почта или Telegram">
     <div class="dialog-actions"><span class="dialog-msg" id="correctionMsg"></span><button class="chip" id="correctionSend">Отправить</button></div>
@@ -2429,6 +2534,47 @@ function ecoEmptyHtml(d){
   </div>`;
 }
 
+
+async function mountDealTools(d){
+  const url=`${location.origin}${location.pathname}#/deal/${d.id}`;
+  const note=document.getElementById("dealtoolnote");
+  const show=t=>{if(note) note.textContent=t||"";};
+  const copyText=document.getElementById("copydeal");
+  if(copyText) copyText.onclick=()=>copyToClipboard(dealAsText(d),copyText,"Скопировано","Скопировать текст");
+  const copyLink=document.getElementById("copylink");
+  if(copyLink) copyLink.onclick=()=>copyToClipboard(url,copyLink,"Ссылка скопирована","Скопировать ссылку");
+  const share=document.getElementById("sharedeal");
+  if(share) share.onclick=async()=>{
+    if(navigator.share){try{await navigator.share({title:d.title,text:`${d.title} — КОМПАС`,url});show("Карточка передана в меню «Поделиться».");return;}catch(e){if(e.name==="AbortError")return;}}
+    await copyToClipboard(url,share,"Ссылка скопирована","Поделиться");
+  };
+  const download=document.getElementById("downloaddeal");
+  if(download) download.onclick=async()=>{
+    download.disabled=true;show("Готовим PDF…");
+    try{
+      const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/export`,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
+      if(r.status===401){location.hash="#/account";return;}
+      if(r.status===403){show("Скачивание полной карточки доступно по подписке.");return;}
+      if(!r.ok){const x=await r.json().catch(()=>({}));show(x.error||"Не удалось сформировать PDF.");return;}
+      const blob=await r.blob(), a=document.createElement("a");
+      a.href=URL.createObjectURL(blob);a.download=`kompas-${d.id}.pdf`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);show("PDF скачан.");
+    }catch(e){show("Не удалось скачать карточку.");}finally{download.disabled=false;}
+  };
+  const watch=document.getElementById("watchdeal");
+  if(!watch)return;
+  let watching=false;
+  const paint=()=>{watch.textContent=watching?"Вы подписаны":"Подписаться на обновления";watch.classList.toggle("primary",!watching);};
+  try{const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/watch`),x=await r.json();watching=!!x.watching;paint();}
+  catch(e){}
+  watch.onclick=async()=>{
+    const method=watching?"DELETE":"POST";
+    const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/watch`,{method});
+    if(r.status===401){location.hash="#/account";return;}
+    if(!r.ok){show("Не удалось изменить подписку.");return;}
+    watching=!watching;paint();show(watching?"Сообщим, когда в карточке появится новый подтверждённый этап или факт.":"Подписка отключена.");
+  };
+}
+
 function renderDeal(id){
   const d = DEALS.find(x=>x.id===id);
   if(!d){
@@ -2477,10 +2623,14 @@ function renderDeal(id){
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
-  <div class="fe-actions reveal" style="justify-content:flex-start;margin:22px 0 6px">
-    <button class="chip" id="copydeal">Скопировать сделку текстом</button>
+  <div class="deal-tools reveal">
+    <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
+    <button class="chip" id="downloaddeal">Скачать PDF</button>
     <button class="chip" id="copylink">Скопировать ссылку</button>
+    <button class="chip" id="sharedeal">Поделиться</button>
+    <button class="chip" id="copydeal">Скопировать текст</button>
     <button class="chip" id="fixdeal">Уточнить или дополнить</button>
+    <div class="tool-note" id="dealtoolnote"></div>
   </div>
   <!-- Строка про правки стоит именно здесь, у источников: человек, который знает
        сделку изнутри, дочитывает до первоисточников и там же видит, куда писать. -->
@@ -2650,7 +2800,8 @@ function renderDeal(id){
       ])}
       ${para("Цель сделки", d.eco.rationale)}
       ${para("Контекст", d.eco.context)}
-      ${extraHtml(d)}`
+      ${extraHtml(d)}
+      <div id="deal-fns"></div>`
       : ecoEmptyHtml(d);
     /* B4: порядок полей в линзе «Юрист» — по тому, что юристу нужно первым.
        Было: структура → согласования → консультанты → УСЛОВИЯ. Самое ценное и
@@ -2703,6 +2854,7 @@ function renderDeal(id){
          живёт там, где его ищут, и подсказка под линзами прямо говорит, что
          согласования — в «Юристе». Кнопка «Юрист» у таких карточек не
          приглушена, так что путь виден. */
+    if(lens==="eco") mountDealFns(d);
   };
   paint();
   bindTimeline();
@@ -2711,10 +2863,7 @@ function renderDeal(id){
     app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x===b));
     paint();
   });
-  const cd = document.getElementById("copydeal");
-  if(cd) cd.onclick = ()=>copyToClipboard(dealAsText(d), cd, "Скопировано", "Скопировать сделку текстом");
-  const cl = document.getElementById("copylink");
-  if(cl) cl.onclick = ()=>copyToClipboard(`${location.origin}${location.pathname}#/deal/${d.id}`, cl, "Ссылка скопирована", "Скопировать ссылку");
+  mountDealTools(d);
   const fx = document.getElementById("fixdeal");
   if(fx) fx.onclick = ()=>openCorrectionDialog(d);
   mountMiniAI(d.title);
@@ -2821,6 +2970,88 @@ const controlOver = id => DEALS
                && isControlDeal(d) && !looksLikePerson(co(assetOf(d)).name))
   .sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 
+
+const fnsMoney = v => {
+  if(v===null||v===undefined) return "—";
+  const n=Number(v), a=Math.abs(n);
+  const sign=n<0?"−":"";
+  if(a>=1e12) return `${sign}${(a/1e12).toLocaleString("ru-RU",{maximumFractionDigits:1})} трлн ₽`;
+  if(a>=1e9) return `${sign}${(a/1e9).toLocaleString("ru-RU",{maximumFractionDigits:1})} млрд ₽`;
+  if(a>=1e6) return `${sign}${(a/1e6).toLocaleString("ru-RU",{maximumFractionDigits:1})} млн ₽`;
+  return `${Math.round(n).toLocaleString("ru-RU")} ₽`;
+};
+const fnsDelta = (current,previous) => {
+  if(current===null||previous===null||current===undefined||previous===undefined||Number(previous)===0) return "";
+  const pct=(Number(current)-Number(previous))/Math.abs(Number(previous))*100;
+  return `${pct>=0?"↑":"↓"} ${Math.abs(pct).toLocaleString("ru-RU",{maximumFractionDigits:1})}% за год`;
+};
+
+async function mountCompanyFns(companyId){
+  const mount=document.getElementById("fns-company"); if(!mount) return;
+  let data;
+  try{const r=await fetch(`/api/companies/${encodeURIComponent(companyId)}/fns`); data=await r.json();}
+  catch(e){return;}
+  // Пока ключ не подключён и юрлицо не сопоставлено, не показываем посетителю
+  // техническую заглушку. После первого импорта блок появится автоматически.
+  if(!data.available){ if(data.configured) mount.innerHTML=`<div class="fns-empty reveal">Финансовые данные появятся после подтверждения соответствующего юридического лица в редакционной очереди.</div>`; return; }
+  let entityIndex=0, tab="overview";
+  const draw=()=>{
+    const entry=data.entities[entityIndex], e=entry.entity, reports=entry.reports||[];
+    const latest=reports[0]||{}, prev=reports[1]||{};
+    const registryRows=[
+      ["Полное наименование",e.legal_name],["ИНН",e.inn],["ОГРН",e.ogrn],["КПП",e.kpp],
+      ["Статус",e.status],["Дата регистрации",e.registration_date?fmtDate(e.registration_date):null],
+      ["Основной ОКВЭД",[e.okved_code,e.okved_name].filter(Boolean).join(" · ")],["Юридический адрес",e.address],
+      ["Руководитель",[e.director_name,e.director_title].filter(Boolean).join(" · ")],
+      ["Уставный капитал",e.charter_capital_rub?fnsMoney(e.charter_capital_rub):null],
+    ].filter(x=>x[1]);
+    const metric=(label,key)=>`<div class="fns-metric"><span class="label">${label}</span><div class="v num">${fnsMoney(latest[key])}</div><div class="delta">${fnsDelta(latest[key],prev[key])}</div></div>`;
+    const financialRows=[
+      ["Выручка","revenue_rub"],["Валовая прибыль","gross_profit_rub"],["Прибыль от продаж","operating_profit_rub"],
+      ["Чистая прибыль","net_profit_rub"],["Активы","assets_rub"],["Собственный капитал","equity_rub"],
+      ["Заёмные средства","borrowings_rub"],["Кредиторская задолженность","payables_rub"],
+    ];
+    let content="";
+    if(tab==="overview") content=`
+      <p style="color:var(--muted);margin-bottom:12px">${esc(e.legal_name)} · отчётность ${latest.year||"не найдена"}${latest.year?" года":""}</p>
+      ${reports.length?`<div class="fns-metrics">${metric("Выручка","revenue_rub")}${metric("Чистая прибыль","net_profit_rub")}${metric("Активы","assets_rub")}${metric("Капитал","equity_rub")}</div>`:`<div class="fns-empty">Бухгалтерская отчётность для этого юридического лица в источнике не найдена. Для банков и других финансовых организаций потребуется отдельный источник Банка России.</div>`}
+      <div class="fns-registry">${registryRows.slice(0,6).map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div>`;
+    if(tab==="finance") content=reports.length?`
+      <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
+      ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы и скачивание полной БФО доступны по подписке.</div>`:""}
+      <div class="fns-actions">${latest.year?`<a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/bo/${latest.year}?entity_id=${e.id}">Скачать полную отчётность</a>`:""}</div>`:`<div class="fns-empty">БФО в источнике не найдена.</div>`;
+    if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
+    if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
+    mount.innerHTML=`<section class="fns-shell reveal">
+      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы и ЕГРЮЛ</h2></div><span class="fns-badge">Источник: ФНС</span></div>
+      ${data.entities.length>1?`<div class="fns-entity-switch">${data.entities.map((x,i)=>`<button class="chip ${i===entityIndex?"on":""}" data-fnsentity="${i}">${esc(x.entity.short_name||x.entity.legal_name)}</button>`).join("")}</div>`:""}
+      <div class="fns-tabs"><button data-fnstab="overview" class="${tab==="overview"?"on":""}">Обзор</button><button data-fnstab="finance" class="${tab==="finance"?"on":""}">Финансы</button><button data-fnstab="registry" class="${tab==="registry"?"on":""}">ЕГРЮЛ</button><button data-fnstab="changes" class="${tab==="changes"?"on":""}">Изменения</button></div>
+      <div class="fns-body">${content}<p class="fns-disclaimer">${esc(data.disclaimer||"")} Данные обновлены ${e.fetched_at?new Date(e.fetched_at).toLocaleDateString("ru-RU"):"по последней синхронизации"}.</p></div>
+    </section>`;
+    mount.querySelectorAll("[data-fnstab]").forEach(b=>b.onclick=()=>{tab=b.dataset.fnstab;draw();});
+    mount.querySelectorAll("[data-fnsentity]").forEach(b=>b.onclick=()=>{entityIndex=Number(b.dataset.fnsentity);tab="overview";draw();});
+    rerun();
+  };
+  draw();
+}
+
+async function mountDealFns(d){
+  const mount=document.getElementById("deal-fns"); if(!mount) return;
+  const candidates=[d.target,d.asset_id,d.buyer].filter((x,i,a)=>x&&a.indexOf(x)===i);
+  for(const companyId of candidates){
+    try{
+      const r=await fetch(`/api/companies/${encodeURIComponent(companyId)}/fns`), data=await r.json();
+      if(!data.available) continue;
+      const entry=data.entities[0], latest=(entry.reports||[])[0];
+      if(!latest) continue;
+      const c=co(companyId);
+      mount.innerHTML=`<section class="fns-shell" style="margin-top:28px"><div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:data.company_name||entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${latest.year}</span></div><div class="fns-body"><div class="fns-metrics"><div class="fns-metric"><span class="label">Выручка</span><div class="v">${fnsMoney(latest.revenue_rub)}</div></div><div class="fns-metric"><span class="label">Чистая прибыль</span><div class="v">${fnsMoney(latest.net_profit_rub)}</div></div><div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(latest.assets_rub)}</div></div><div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(latest.equity_rub)}</div></div></div><p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${companyId}">Полное досье компании →</a></p></div></section>`;
+      return;
+    }catch(e){}
+  }
+}
+
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -2881,6 +3112,7 @@ function renderCompany(id){
       }</div><span class="note">В сумме — те же ${structured.length} ${plural(structured.length,"сделка","сделки","сделок")}.</span></div>`;
     })()}
   </div>
+  <div id="fns-company"></div>
   ${structured.length?`
   <div class="sec-head reveal" style="margin-top:0"><h1 style="font-size:23px">Подробные карточки</h1></div>
   ${structured.map(d=>`
@@ -2900,6 +3132,7 @@ function renderCompany(id){
   ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   mountMiniAI(c.name);
+  mountCompanyFns(id);
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
@@ -2915,38 +3148,35 @@ function renderAdvisors(){
       .map(f=>({f,n:firmCount(f.id)}))
       .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
     body = `
-    <div class="filters reveal">${groups.map(g=>`<button class="chip ${g===firmGroup?"on":""}" data-g="${g}">${g==="Все"?"Все группы":GROUP_LABEL[g]}</button>`).join("")}
+    <div class="filters advisor-filters reveal">${groups.map(g=>`<button class="chip ${g===firmGroup?"on":""}" data-g="${g}">${g==="Все"?"Все категории":GROUP_LABEL[g]}</button>`).join("")}
       <span style="flex:1"></span>
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
       <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
     </div>
-    <div class="tbl-wrap"><table class="tbl reveal">
-      <thead><tr><th>Фирма</th><th>Группы Право-300 (Корп/M&A)</th><th>Сделки в базе</th></tr></thead>
-      <tbody>
-      ${rows.map(r=>`<tr>
-        <td style="width:36%"><div class="firm-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div></td>
-        <td><div class="firm-groups">${r.f.g.map(g=>GROUP_LABEL[g]).join(" · ")}</div></td>
-        <td style="width:22%">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${r.n===1?"сделка":r.n<5?"сделки":"сделок"} →</a>`:`<span class="count-btn empty">—</span>`}</td>
-      </tr>`).join("")}
-      </tbody>
-    </table></div>`;
+    <div class="advisor-list reveal">
+      ${rows.map(r=>`<article class="advisor-card">
+        <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
+        <div class="advisor-card-groups"><span class="label">Категории практики</span><br>${r.f.g.map(g=>GROUP_LABEL[g]).join(" · ")}</div>
+        <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">Сделок пока нет</span>`}</div>
+      </article>`).join("")}
+    </div>`;
   } else if(advType==="invest"){
-    body = `
-    <div class="tbl-wrap"><table class="tbl reveal">
-      <thead><tr><th>Консультант</th><th>Профиль</th><th>Сделки в базе</th></tr></thead>
-      <tbody>
-      ${INV_FIRMS.map(f=>{const n=firmCount(f.id);return `<tr>
-        <td style="width:36%"><div class="firm-name"><a href="#/advisors/${f.id}">${f.n}</a></div></td>
-        <td><div class="firm-groups">${f.desc}</div></td>
-        <td style="width:22%">${n?`<a class="count-btn" href="#/advisors/${f.id}">${n} ${n===1?"сделка":n<5?"сделки":"сделок"} →</a>`:`<span class="count-btn empty">—</span>`}</td>
-      </tr>`;}).join("")}
-      </tbody>
-    </table></div>`;
+    const rows = INV_FIRMS.map(f=>({f,n:firmCount(f.id)}))
+      .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
+    body = `<div class="filters advisor-filters reveal">
+      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
+      <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+    </div>
+    <div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
+      <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
+      <div class="advisor-card-groups"><span class="label">Профиль</span><br>${r.f.desc||r.f.g.join(" · ")}</div>
+      <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">Сделок пока нет</span>`}</div>
+    </article>`).join("")}</div>`;
   } else {
-    body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет — честно показываем пустоту, а не выдумываем.</p>`;
+    body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические фирмы — по федеральному рейтингу Право-300 (Корпоративное право/M&A). Нажмите на фирму или кнопку со сделками — откроется её страница.</p></div>
+  <div class="sec-head reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Категории можно использовать и как фильтр в общей ленте сделок.</p></div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
@@ -2954,14 +3184,13 @@ function renderAdvisors(){
   </div>
   <div class="notice reveal">
     <div style="font-weight:600;color:var(--bronze)">ⓘ</div>
-    <div>Каталог не является рейтингом. В столбце «Сделки в базе» — сделки, где фирма названа консультантом в публичных источниках, прежде всего в её собственных публикациях. Фирмы раскрывают не все проекты, поэтому картина заведомо неполная. Наполнение базы продолжается. Выводы — за вами.</div>
+    <div>Это не рейтинг качества. Число сделок показывает только карточки, где консультант назван в доступном публичном источнике. Категории юридических фирм основаны на открытых данных отраслевого рейтинга; отсутствие сделки в базе не означает отсутствие опыта.</div>
   </div>
   ${body}`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
   app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{firmGroup=b.dataset.g;renderAdvisors();rerun();});
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
 }
-
 /* Консультант без сделок — 27 фирм из 64. Раньше страница отвечала одной серой
    строкой, причём та же мысль стояла уже двумя абзацами выше («Записей пока
    нет» + методика подсчёта): пустота объяснялась трижды и всё равно не
@@ -3344,36 +3573,68 @@ function renderAnalytics(){
   </div>`;
 }
 
-function renderAssistant(){
+
+async function renderWebinars(){
+  app.innerHTML = `<div class="sec-head reveal"><span class="label">Практические эфиры</span><h1>Вебинары</h1><p>Разборы сделок, регулирования и рыночных практик с юристами, финансистами и консультантами.</p></div><div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
+  rerun();
+  const mount=document.getElementById("webinarList");
+  try{
+    const r=await fetch("/api/webinars"); const rows=r.ok?await r.json():[];
+    if(!rows.length){
+      mount.innerHTML=`<div class="feed-empty reveal"><div class="fe-title">Первый вебинар готовится.</div><p>Здесь появятся анонсы, регистрация и записи прошедших встреч. Пустую вкладку не заполняем выдуманными мероприятиями.</p></div>`;
+    }else{
+      mount.innerHTML=`<div class="webinar-grid">${rows.map(w=>`<article class="webinar-card reveal"><span class="tag ${w.status==="recording"?"steel":""}">${w.status==="recording"?"Запись":"Предстоящий"}</span><h2>${esc(w.title)}</h2>${w.summary?`<p>${esc(w.summary)}</p>`:""}<div class="webinar-meta">${w.starts_at?new Date(w.starts_at).toLocaleString("ru-RU",{dateStyle:"long",timeStyle:"short"}):""}${w.speaker?` · ${esc(w.speaker)}`:""}</div>${w.registration_url?`<a class="chip on" href="${w.registration_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Зарегистрироваться</a>`:""}${w.recording_url?`<a class="chip" href="${w.recording_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Смотреть запись</a>`:""}</article>`).join("")}</div>`;
+    }
+  }catch(e){mount.innerHTML=`<p class="acct-note">Не удалось загрузить вебинары.</p>`;}
+  rerun();
+}
+
+async function renderAssistant(){
+  await refreshMe();
+  activeThreadId=null;
   app.innerHTML = `
-  <div class="chat">
-    <div class="sec-head reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Два режима: строго по базе «Компаса» — или по всему интернету (сайты юрфирм, консультантов, деловые СМИ) с обязательными ссылками на источники.</p></div>
-    <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
-    <div class="chat-box reveal" id="chatbox">
-      <div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах. Переключатель выше задаёт, где искать.</div>
-    </div>
-    <div class="suggests reveal">${SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${q}</button>`).join("")}</div>
-    <div class="ask reveal">
-      <input id="q" placeholder="Например: какие сделки сопровождала АЛРУД?" aria-label="Вопрос ассистенту">
-      <button id="send">Спросить</button>
+  <div class="sec-head reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Обсуждения сохраняются в аккаунте: можно вернуться к анализу сделки или продолжить вопрос позднее.</p></div>
+  <div class="chat-layout">
+    <aside class="thread-panel reveal" id="threadPanel">
+      <button class="thread-new" id="newThread">+ Новый диалог</button>
+      <div class="thread-list" id="threadList">${ME?`<span class="thread-empty">Загружаем историю…</span>`:`<span class="thread-empty">Войдите, чтобы сохранять диалоги.</span>`}</div>
+    </aside>
+    <div class="chat">
+      <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
+      <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
+      <div class="suggests reveal">${SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${q}</button>`).join("")}</div>
+      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала АЛРУД?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
     </div>
   </div>`;
-  const box=document.getElementById("chatbox");
+  rerun();
+  const box=document.getElementById("chatbox"), list=document.getElementById("threadList");
   const push=(cls,html)=>{const m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;box.appendChild(m);box.scrollTop=box.scrollHeight;return m;};
+  const renderThreadList=async()=>{
+    if(!ME)return;
+    try{const r=await fetch("/api/assistant/threads"), rows=r.ok?await r.json():[];
+      list.innerHTML=rows.length?rows.map(t=>`<button class="thread-item ${t.id===activeThreadId?"on":""}" data-thread="${t.id}">${esc(t.title)}</button>`).join(""):`<span class="thread-empty">Сохранённых диалогов пока нет.</span>`;
+      list.querySelectorAll("[data-thread]").forEach(b=>b.onclick=()=>loadThread(Number(b.dataset.thread)));
+    }catch(e){list.innerHTML=`<span class="thread-empty">История временно недоступна.</span>`;}
+  };
+  const loadThread=async id=>{
+    const r=await fetch(`/api/assistant/threads/${id}`); if(!r.ok)return;
+    const t=await r.json();activeThreadId=t.id;box.innerHTML="";
+    t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?m.body.replace(/\n/g,"<br>"):esc(m.body)));
+    renderThreadList();
+  };
   const answer=async q=>{
     push("user",esc(q));
     const w=push("ai wait",aiMode==="web"?"Ищу по базе и в интернете (до минуты)…":"Ищу по базе…");
-    const a=await aiAnswer(q);
-    w.classList.remove("wait");w.innerHTML=a;box.scrollTop=box.scrollHeight;
+    const a=await aiAnswer(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general"});
+    w.classList.remove("wait");w.innerHTML=a;box.scrollTop=box.scrollHeight;renderThreadList();
   };
-  document.getElementById("send").onclick=()=>{const v=document.getElementById("q").value.trim();if(v){answer(v);document.getElementById("q").value="";}};
+  document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
   app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
-  bindModeToggles(app);
-  const pending=sessionStorage.getItem("pendingQ");
-  if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
+  document.getElementById("newThread").onclick=()=>{activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();};
+  bindModeToggles(app);renderThreadList();
+  const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
 }
-
 /* Даже общее обращение не отправляем во внешний почтовый клиент: тот же
    короткий диалог кладёт сообщение в редакционную очередь внутри продукта. */
 (function bindContact(){
@@ -3412,80 +3673,47 @@ async function renderAccount(qs){
   if(!ME){
     app.innerHTML = `
     <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
-      <p>Без пароля: пришлём одноразовую ссылку на почту. Юристам, экономистам
-         и консультантам — чтобы сохранять подписки на отрасли и оставлять
-         комментарии под сделками.</p></div>
+      <p>Без пароля: пришлём одноразовую ссылку на почту. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
     ${error?`<p class="acct-note err reveal">Ссылка не сработала: ${esc(error)}. Запросите новую.</p>`:""}
-    <form class="acct-form reveal" id="loginForm">
-      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
-      <button class="chip" type="submit">Прислать ссылку</button>
-    </form>
+    <form class="acct-form reveal" id="loginForm"><input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email"><button class="chip" type="submit">Прислать ссылку</button></form>
     <p class="acct-note reveal" id="loginMsg"></p>`;
     rerun();
-    document.getElementById("loginForm").onsubmit = async (e)=>{
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const msg = document.getElementById("loginMsg");
-      msg.textContent = "Отправляем…";
-      try{
-        const r = await fetch("/api/auth/request-link", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email})});
-        if(r.ok) msg.textContent = "Если почта существует — ссылка на вход отправлена. Она действует 15 минут.";
-        else msg.textContent = "Проверьте адрес почты — он выглядит некорректно.";
-      }catch(err){ msg.textContent = "Не получилось отправить запрос, попробуйте ещё раз."; }
+    document.getElementById("loginForm").onsubmit = async e=>{
+      e.preventDefault();const email=document.getElementById("loginEmail").value.trim(),msg=document.getElementById("loginMsg");msg.textContent="Отправляем…";
+      try{const r=await fetch("/api/auth/request-link",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});msg.textContent=r.ok?"Ссылка отправлена. Она действует 15 минут.":"Проверьте адрес почты.";}catch(err){msg.textContent="Не получилось отправить запрос.";}
     };
     return;
   }
-  app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>${esc(ME.email)}</h1>
-    <p>Роль: ${ME.role==="firm"?"фирма":ME.role==="corporate"?"корпоративный":"частный"} ·
-       Тариф: ${ME.tier==="paid"?"платный":"бесплатный"}${ME.is_verified?" · подтверждён":""}</p></div>
-  <div class="acct-card reveal">
-    <span class="label">Подписки на отрасли</span>
-    <div id="subList"><p class="acct-note">Загружаем…</p></div>
-    <div class="acct-newsub">
-      <select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select>
-      <input type="text" id="subKw" placeholder="ключевое слово (необязательно)">
-      <input type="number" id="subMin" placeholder="от суммы, млн ₽" min="0">
-      <button class="chip" id="subAdd">Добавить</button>
-    </div>
-  </div>
-  <div class="fe-actions reveal" style="justify-content:flex-start">
-    <button class="chip" id="logoutBtn">Выйти</button>
-  </div>`;
+  const tab=params.get("tab")||"notifications";
+  app.innerHTML=`
+  <div class="sec-head reveal"><span class="label">Личный кабинет</span><h1>${esc(ME.email)}</h1><p>${ME.tier==="paid"?"Платная подписка":"Бесплатный тариф"} · ${ME.role==="firm"?"профиль консультанта":ME.role==="corporate"?"корпоративный аккаунт":"индивидуальный аккаунт"}</p></div>
+  <nav class="account-tabs reveal"><a href="#/account?tab=notifications" class="${tab==="notifications"?"on":""}">Уведомления</a><a href="#/account?tab=subscriptions" class="${tab==="subscriptions"?"on":""}">Подписки</a><a href="#/account?tab=profile" class="${tab==="profile"?"on":""}">Профиль</a></nav>
+  <div id="accountBody"></div>`;
   rerun();
-  const drawSubs = async ()=>{
-    const list = document.getElementById("subList");
-    const r = await fetch("/api/subscriptions");
-    const rows = r.ok ? await r.json() : [];
-    list.innerHTML = rows.length ? rows.map(s=>`
-      <div class="acct-row" data-id="${s.id}">
-        <span>${esc(s.industry||"Любая отрасль")}${s.keyword?` · «${esc(s.keyword)}»`:""}${s.min_amount_mln_rub?` · от ${s.min_amount_mln_rub} млн ₽`:""}</span>
-        <span class="del" data-del="${s.id}">Удалить</span>
-      </div>`).join("") : `<p class="acct-note">Пока нет ни одной подписки.</p>`;
-    list.querySelectorAll("[data-del]").forEach(el=>el.onclick = async ()=>{
-      await fetch(`/api/subscriptions/${el.dataset.del}`, {method:"DELETE"});
-      drawSubs();
-    });
-  };
-  drawSubs();
-  document.getElementById("subAdd").onclick = async ()=>{
-    const industry = document.getElementById("subInd").value || null;
-    const keyword = document.getElementById("subKw").value.trim() || null;
-    const min = document.getElementById("subMin").value;
-    if(!industry && !keyword){ alert("Укажите отрасль или ключевое слово"); return; }
-    await fetch("/api/subscriptions", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({industry, keyword, min_amount_mln_rub: min?Number(min):null})});
-    document.getElementById("subKw").value=""; document.getElementById("subMin").value="";
-    drawSubs();
-  };
-  document.getElementById("logoutBtn").onclick = async ()=>{
-    await fetch("/api/auth/logout", {method:"POST"});
-    await refreshMe();
-    location.hash = "#/account";
-    route();
-  };
+  const body=document.getElementById("accountBody");
+  if(tab==="notifications"){
+    body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
+    const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
+      const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте","Отправляем важные обновления и недельную сводку.","email_enabled",p.email_enabled)+row("Еженедельная сводка","Что нового появилось в базе за последние семь дней.","weekly_digest",p.weekly_digest)+row("В Telegram",p.telegram_connected?"Telegram подключён.":"Сначала подключите бота.","telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Бот свяжет этот аккаунт с вашим чатом.</div></div><button class="chip" id="connectTg" ${p.telegram_available?"":"disabled"}>${p.telegram_available?"Подключить":"Бот ещё не настроен"}</button></div>`:"");
+      document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
+      const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
+    };
+    const loadNotifications=async()=>{const r=await fetch("/api/notifications"),rows=r.ok?await r.json():[];const mount=document.getElementById("notifList");mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join(""):`<div class="fns-empty">Уведомлений пока нет. Подпишитесь на конкретную сделку или создайте отраслевую подписку.</div>`;};
+    document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
+    loadPrefs();loadNotifications();
+  }else if(tab==="subscriptions"){
+    body.innerHTML=`<div class="acct-card reveal"><span class="label">Сделки, за которыми вы следите</span><div id="watchList"><p class="acct-note">Загружаем…</p></div></div><div class="acct-card reveal" style="margin-top:18px"><span class="label">Подборки по рынку</span><div id="subList"><p class="acct-note">Загружаем…</p></div><div class="acct-newsub"><select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select><input type="text" id="subKw" placeholder="ключевое слово"><input type="number" id="subMin" placeholder="от суммы, млн ₽" min="0"><button class="chip" id="subAdd">Добавить</button></div></div>`;
+    const drawWatches=async()=>{const r=await fetch("/api/deal-watches"),rows=r.ok?await r.json():[];document.getElementById("watchList").innerHTML=rows.length?rows.map(w=>`<div class="acct-row"><a href="#/deal/${w.deal_id}">${esc(w.title)}</a><span class="del" data-unwatch="${w.deal_id}">Отключить</span></div>`).join(""):`<p class="acct-note">Вы пока не подписаны ни на одну конкретную сделку.</p>`;document.querySelectorAll("[data-unwatch]").forEach(el=>el.onclick=async()=>{await fetch(`/api/deals/${el.dataset.unwatch}/watch`,{method:"DELETE"});drawWatches();});};
+    const drawSubs=async()=>{const r=await fetch("/api/subscriptions"),rows=r.ok?await r.json():[];const list=document.getElementById("subList");list.innerHTML=rows.length?rows.map(x=>`<div class="acct-row"><span>${esc(x.industry||"Любая отрасль")}${x.keyword?` · «${esc(x.keyword)}»`:""}${x.min_amount_mln_rub?` · от ${x.min_amount_mln_rub} млн ₽`:""}</span><span class="del" data-del="${x.id}">Удалить</span></div>`).join(""):`<p class="acct-note">Подборок пока нет.</p>`;list.querySelectorAll("[data-del]").forEach(el=>el.onclick=async()=>{await fetch(`/api/subscriptions/${el.dataset.del}`,{method:"DELETE"});drawSubs();});};
+    document.getElementById("subAdd").onclick=async()=>{const industry=document.getElementById("subInd").value||null,keyword=document.getElementById("subKw").value.trim()||null,min=document.getElementById("subMin").value;if(!industry&&!keyword){alert("Укажите отрасль или ключевое слово");return;}await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword,min_amount_mln_rub:min?Number(min):null})});document.getElementById("subKw").value="";document.getElementById("subMin").value="";drawSubs();};
+    drawWatches();drawSubs();
+  }else{
+    body.innerHTML=`<div class="acct-card reveal"><span class="label">Профиль</span><div class="fns-registry"><div class="fns-registry-row"><span class="k">Почта</span>${esc(ME.email)}</div><div class="fns-registry-row"><span class="k">Тариф</span>${ME.tier==="paid"?"Платный":"Бесплатный"}</div><div class="fns-registry-row"><span class="k">Роль</span>${ME.role}</div><div class="fns-registry-row"><span class="k">Статус</span>${ME.is_verified?"Подтверждён":"Обычный аккаунт"}</div></div><div class="deal-tools"><button class="chip" id="logoutBtn">Выйти</button></div></div>`;
+    document.getElementById("logoutBtn").onclick=async()=>{await fetch("/api/auth/logout",{method:"POST"});await refreshMe();location.hash="#/account";route();};
+  }
+  rerun();
 }
-
 /* Комментарии — под сделкой, видны сразу (см. Comment в db/models.py: писать
    может только вошедший по почте, это уже проверенный e-mail). Блок монтируется
    отдельно от основного innerHTML сделки, потому что список комментариев

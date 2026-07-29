@@ -54,6 +54,7 @@ class Company(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     aliases: Mapped[list["CompanyAlias"]] = relationship(back_populates="company", cascade="all, delete-orphan")
+    legal_entities: Mapped[list["LegalEntity"]] = relationship(back_populates="company", cascade="all, delete-orphan")
 
 
 class CompanyAlias(Base):
@@ -65,6 +66,145 @@ class CompanyAlias(Base):
     alias: Mapped[str] = mapped_column(String(300))  # нормализованная (lower, без орг.-правовой формы)
 
     company: Mapped[Company] = relationship(back_populates="aliases")
+
+
+# ---------------------------------------------- юридические лица / ФНС ---
+
+class LegalEntityMatchStatus(str, enum.Enum):
+    confirmed = "confirmed"      # ИНН подтверждён источником или редактором
+    probable = "probable"        # найден вероятный кандидат, ещё не публикуем
+    unmapped = "unmapped"        # юридическое лицо не установлено
+
+
+class LegalEntity(Base):
+    """Конкретное российское юридическое лицо, связанное с публичным профилем.
+
+    Company — бренд/группа/участник сделки. LegalEntity — именно ООО/АО с ИНН.
+    Это разделение не позволяет случайно показать отчётность одного общества как
+    показатели всей группы компаний.
+    """
+    __tablename__ = "legal_entities"
+    __table_args__ = (
+        UniqueConstraint("inn", name="uq_legal_entity_inn"),
+        UniqueConstraint("ogrn", name="uq_legal_entity_ogrn"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    company_id: Mapped[str | None] = mapped_column(ForeignKey("companies.id"), nullable=True)
+    country: Mapped[str] = mapped_column(String(2), default="RU")
+    legal_name: Mapped[str] = mapped_column(String(500))
+    short_name: Mapped[str | None] = mapped_column(String(350), nullable=True)
+    inn: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    ogrn: Mapped[str | None] = mapped_column(String(15), nullable=True)
+    kpp: Mapped[str | None] = mapped_column(String(9), nullable=True)
+    legal_form: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    status: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    registration_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    termination_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    address: Mapped[str | None] = mapped_column(Text, nullable=True)
+    region_code: Mapped[str | None] = mapped_column(String(4), nullable=True)
+    okved_code: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    okved_name: Mapped[str | None] = mapped_column(Text, nullable=True)
+    charter_capital_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    director_name: Mapped[str | None] = mapped_column(String(350), nullable=True)
+    director_title: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    director_since: Mapped[date | None] = mapped_column(Date, nullable=True)
+    source_provider: Mapped[str] = mapped_column(String(40), default="api-fns")
+    source_updated_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    fetched_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    match_status: Mapped[LegalEntityMatchStatus] = mapped_column(
+        Enum(LegalEntityMatchStatus), default=LegalEntityMatchStatus.unmapped
+    )
+    match_confidence: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    manually_verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_primary: Mapped[bool] = mapped_column(Boolean, default=True)
+    raw_egr_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    company: Mapped[Company | None] = relationship(back_populates="legal_entities")
+    financial_reports: Mapped[list["FinancialReport"]] = relationship(
+        back_populates="legal_entity", cascade="all, delete-orphan"
+    )
+    registry_events: Mapped[list["RegistryEvent"]] = relationship(
+        back_populates="legal_entity", cascade="all, delete-orphan"
+    )
+
+
+class LegalEntityCandidate(Base):
+    """Очередь ручного сопоставления профиля «Компаса» с результатами поиска ФНС."""
+    __tablename__ = "legal_entity_candidates"
+    __table_args__ = (UniqueConstraint("company_id", "inn", name="uq_company_inn_candidate"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    company_id: Mapped[str] = mapped_column(ForeignKey("companies.id"))
+    inn: Mapped[str] = mapped_column(String(12))
+    ogrn: Mapped[str | None] = mapped_column(String(15), nullable=True)
+    legal_name: Mapped[str] = mapped_column(String(500))
+    address: Mapped[str | None] = mapped_column(Text, nullable=True)
+    status: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    score: Mapped[float] = mapped_column(Numeric, default=0)
+    reasons_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    review_status: Mapped[str] = mapped_column(String(20), default="new")
+    raw_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
+class FinancialReport(Base):
+    """Нормализованная БФО. Суммы хранятся в рублях, хотя API отдаёт тыс. руб."""
+    __tablename__ = "financial_reports"
+    __table_args__ = (UniqueConstraint("legal_entity_id", "year", name="uq_entity_report_year"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    legal_entity_id: Mapped[int] = mapped_column(ForeignKey("legal_entities.id"))
+    year: Mapped[int] = mapped_column()
+    reporting_standard: Mapped[str] = mapped_column(String(20), default="РСБУ")
+    revenue_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    gross_profit_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    operating_profit_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    profit_before_tax_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    net_profit_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    assets_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    non_current_assets_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    current_assets_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    cash_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    receivables_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    inventory_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    equity_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    long_term_liabilities_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    short_term_liabilities_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    borrowings_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    payables_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
+    raw_lines_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    legal_entity: Mapped[LegalEntity] = relationship(back_populates="financial_reports")
+
+
+class RegistryEvent(Base):
+    __tablename__ = "registry_events"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    legal_entity_id: Mapped[int] = mapped_column(ForeignKey("legal_entities.id"))
+    event_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    event_type: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    text: Mapped[str] = mapped_column(Text)
+    raw_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    legal_entity: Mapped[LegalEntity] = relationship(back_populates="registry_events")
+
+
+class FnsSyncRun(Base):
+    __tablename__ = "fns_sync_runs"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    mode: Mapped[str] = mapped_column(String(30), default="sync")
+    companies_total: Mapped[int] = mapped_column(default=0)
+    matched: Mapped[int] = mapped_column(default=0)
+    candidates: Mapped[int] = mapped_column(default=0)
+    errors: Mapped[int] = mapped_column(default=0)
+    details_json: Mapped[str | None] = mapped_column(Text, nullable=True)
 
 
 # ------------------------------------------------------------ консультанты ---
@@ -212,6 +352,94 @@ class CorrectionRequest(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     user: Mapped[User | None] = relationship()
+
+
+# --------------------------------------- уведомления / экспорт / ассистент ---
+
+class DealWatch(Base):
+    __tablename__ = "deal_watches"
+    __table_args__ = (UniqueConstraint("user_id", "deal_id", name="uq_user_deal_watch"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    deal_id: Mapped[str] = mapped_column(String(80))
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
+class NotificationPreference(Base):
+    __tablename__ = "notification_preferences"
+    __table_args__ = (UniqueConstraint("user_id", name="uq_notification_user"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    in_app_enabled: Mapped[bool] = mapped_column(Boolean, default=True)
+    email_enabled: Mapped[bool] = mapped_column(Boolean, default=True)
+    telegram_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
+    weekly_digest: Mapped[bool] = mapped_column(Boolean, default=True)
+    telegram_chat_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    telegram_connect_token: Mapped[str | None] = mapped_column(String(80), nullable=True, unique=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
+class Notification(Base):
+    __tablename__ = "notifications"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    kind: Mapped[str] = mapped_column(String(40), default="deal_update")
+    title: Mapped[str] = mapped_column(String(500))
+    body: Mapped[str | None] = mapped_column(Text, nullable=True)
+    link: Mapped[str | None] = mapped_column(String(600), nullable=True)
+    deal_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    is_read: Mapped[bool] = mapped_column(Boolean, default=False)
+    email_sent_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    telegram_sent_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
+class AssistantThread(Base):
+    __tablename__ = "assistant_threads"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    title: Mapped[str] = mapped_column(String(300))
+    context_type: Mapped[str] = mapped_column(String(30), default="general")
+    context_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    messages: Mapped[list["AssistantMessage"]] = relationship(
+        back_populates="thread", cascade="all, delete-orphan"
+    )
+
+
+class AssistantMessage(Base):
+    __tablename__ = "assistant_messages"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    thread_id: Mapped[int] = mapped_column(ForeignKey("assistant_threads.id"))
+    role: Mapped[str] = mapped_column(String(20))
+    body: Mapped[str] = mapped_column(Text)
+    mode: Mapped[str] = mapped_column(String(20), default="base")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    thread: Mapped[AssistantThread] = relationship(back_populates="messages")
+
+
+class Webinar(Base):
+    __tablename__ = "webinars"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(500))
+    summary: Mapped[str | None] = mapped_column(Text, nullable=True)
+    starts_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    speaker: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    registration_url: Mapped[str | None] = mapped_column(String(600), nullable=True)
+    recording_url: Mapped[str | None] = mapped_column(String(600), nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="upcoming")
+    published: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
 
 # ------------------------------------------------------------------ сделки ---

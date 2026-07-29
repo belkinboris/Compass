@@ -354,6 +354,30 @@ def main(argv):
     json.dump({'made': day, 'updates': updates},
               open(os.path.join(UPDATES, day + '.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)
+    # Подписка на конкретную сделку теперь работает не только внутри JSON-
+    # задания для будущего Telegram-поста. После успешной записи создаём
+    # уведомления в аккаунте и, если настроены каналы, отправляем их по почте
+    # и в Telegram. Сбой внешней доставки не должен откатывать базу сделок.
+    try:
+        if ROOT not in sys.path:
+            sys.path.insert(0, ROOT)
+        from db.session import SessionLocal
+        from notification_service import notify_deal_watchers
+        base_url = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+        with SessionLocal() as db:
+            for update in updates:
+                if not update.get('notify'):
+                    continue
+                deal = by_id.get(update['deal_id']) or {}
+                notify_deal_watchers(
+                    db,
+                    update['deal_id'],
+                    'Обновлена сделка: %s' % (deal.get('title') or update['deal_id']),
+                    ', '.join(update.get('changes') or []) or 'В карточке появились новые подтверждённые сведения.',
+                    '%s/#/deal/%s' % (base_url, update['deal_id']),
+                )
+    except Exception as exc:
+        print('Предупреждение: уведомления не отправлены: %s' % exc)
     print('\nДополнено карточек: %d. Задание на правку постов: data/inbox/updates/%s.json'
           % (len(applied), day))
 

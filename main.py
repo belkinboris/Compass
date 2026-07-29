@@ -11,21 +11,34 @@ LLM: DeepSeek 4 Flash через Yandex AI Studio Responses API.
 Требуются YANDEX_API_KEY и YANDEX_FOLDER_ID; без них фронтенд
 работает в демо-режиме (fallback=true).
 """
+import json
 import logging
 import os
 import re
+from datetime import datetime
+from decimal import Decimal
 
 import httpx
 from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
 import auth
+import notification_service
+from company_catalog import get_company_profile
+from deal_catalog import get_deal
+from deal_export import render_deal_pdf
 from db.models import Base as DBBase
-from db.models import Comment, CorrectionRequest, SavedFilter, User
+from db.models import (
+    AssistantMessage, AssistantThread, Comment, CorrectionRequest, DealWatch,
+    FinancialReport, LegalEntity, LegalEntityMatchStatus, Notification,
+    NotificationPreference, RegistryEvent, SavedFilter, User, UserTier, Webinar,
+)
 from db.session import engine, get_session
+from fns_client import ApiFnsClient, ApiFnsError
+from sqlalchemy import select
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
 _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
@@ -110,6 +123,10 @@ class AskRequest(BaseModel):
     question: str
     context: str
     mode: str = "base"  # base | web
+    thread_id: int | None = None
+    context_type: str = "general"
+    context_id: str | None = None
+    save_thread: bool = True
 
 
 def _yandex_ready() -> bool:
@@ -174,7 +191,7 @@ def _sources_footer(results: list[SearchResult]) -> str:
 
 
 @app.post("/api/ask")
-def ask(req: AskRequest):
+def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     if not _yandex_ready():
         return JSONResponse({"fallback": True})
 
@@ -204,7 +221,34 @@ def ask(req: AskRequest):
         if search_block and not _MD_LINK_RE.search(text):
             logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
             text += _sources_footer(results)
-        return {"answer": text}
+        user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
+        thread_id = None
+        if user and req.save_thread:
+            thread = None
+            if req.thread_id:
+                thread = db.scalar(select(AssistantThread).where(
+                    AssistantThread.id == req.thread_id,
+                    AssistantThread.user_id == user.id,
+                ))
+            if not thread:
+                title = " ".join(req.question.strip().split())[:120] or "Новый диалог"
+                thread = AssistantThread(
+                    user_id=user.id,
+                    title=title,
+                    context_type=(req.context_type or "general")[:30],
+                    context_id=(req.context_id or None),
+                )
+                db.add(thread)
+                db.flush()
+            db.add(AssistantMessage(thread_id=thread.id, role="user", body=req.question, mode=req.mode))
+            db.add(AssistantMessage(thread_id=thread.id, role="assistant", body=text, mode=req.mode))
+            thread.updated_at = datetime.utcnow()
+            db.commit()
+            thread_id = thread.id
+        payload = {"answer": text}
+        if thread_id is not None:
+            payload["thread_id"] = thread_id
+        return payload
     except RuntimeError as e:
         logger.error("ask() failed: %s", e)
         return JSONResponse({"fallback": True})
@@ -233,6 +277,29 @@ class CommentIn(BaseModel):
 class CorrectionIn(BaseModel):
     body: str
     contact: str | None = None
+
+
+class NotificationPreferencesIn(BaseModel):
+    in_app_enabled: bool | None = None
+    email_enabled: bool | None = None
+    telegram_enabled: bool | None = None
+    weekly_digest: bool | None = None
+
+
+class NotificationReadIn(BaseModel):
+    ids: list[int] | None = None
+    all: bool = False
+
+
+class TelegramWebhookIn(BaseModel):
+    update_id: int | None = None
+    message: dict | None = None
+
+
+class DealExportIn(BaseModel):
+    # Поле оставлено для обратной совместимости с будущим редактором, но сервер
+    # формирует PDF из своей базы и не доверяет присланному HTML/тексту.
+    title: str | None = None
 
 
 def _current_user(request: Request, db=Depends(get_db)) -> User | None:
@@ -282,6 +349,364 @@ def me(user: User | None = Depends(_current_user)):
         return {"logged_in": False}
     return {"logged_in": True, "email": user.email, "role": user.role.value,
             "tier": user.tier.value, "is_verified": user.is_verified}
+
+
+# ==================== ФНС: ЕГРЮЛ, БФО, история изменений ====================
+
+def _plain(value):
+    if isinstance(value, Decimal):
+        return float(value)
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return value
+
+
+def _entity_payload(entity: LegalEntity) -> dict:
+    fields = (
+        "id", "company_id", "legal_name", "short_name", "inn", "ogrn", "kpp",
+        "legal_form", "status", "registration_date", "termination_date", "address",
+        "region_code", "okved_code", "okved_name", "charter_capital_rub",
+        "director_name", "director_title", "director_since", "source_provider",
+        "source_updated_at", "fetched_at", "match_confidence", "manually_verified",
+        "is_primary",
+    )
+    return {field: _plain(getattr(entity, field)) for field in fields}
+
+
+def _report_payload(row: FinancialReport) -> dict:
+    fields = (
+        "year", "reporting_standard", "revenue_rub", "gross_profit_rub",
+        "operating_profit_rub", "profit_before_tax_rub", "net_profit_rub",
+        "assets_rub", "non_current_assets_rub", "current_assets_rub", "cash_rub",
+        "receivables_rub", "inventory_rub", "equity_rub",
+        "long_term_liabilities_rub", "short_term_liabilities_rub", "borrowings_rub",
+        "payables_rub", "fetched_at",
+    )
+    return {field: _plain(getattr(row, field)) for field in fields}
+
+
+@app.get("/api/fns/status")
+def fns_status(db=Depends(get_db)):
+    confirmed = db.query(LegalEntity).filter_by(match_status=LegalEntityMatchStatus.confirmed).count()
+    synced = db.query(LegalEntity).filter(LegalEntity.fetched_at.is_not(None)).count()
+    return {
+        "configured": bool(os.environ.get("API_FNS_KEY")),
+        "confirmed_entities": confirmed,
+        "synced_entities": synced,
+        "provider": "API-ФНС",
+    }
+
+
+@app.get("/api/companies/{company_id}/fns")
+def company_fns(company_id: str, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    profile = get_company_profile(company_id)
+    entities = list(db.scalars(select(LegalEntity).where(
+        LegalEntity.company_id == company_id,
+        LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+    ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id)).all())
+    if not entities:
+        return {
+            "available": False,
+            "company_id": company_id,
+            "company_name": profile.get("name") if profile else None,
+            "configured": bool(os.environ.get("API_FNS_KEY")),
+            "reason": "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ",
+        }
+    paid = bool(user and user.tier == UserTier.paid)
+    result = []
+    for entity in entities:
+        reports = list(db.scalars(select(FinancialReport).where(
+            FinancialReport.legal_entity_id == entity.id
+        ).order_by(FinancialReport.year.desc())).all())
+        events = list(db.scalars(select(RegistryEvent).where(
+            RegistryEvent.legal_entity_id == entity.id
+        ).order_by(RegistryEvent.event_date.desc(), RegistryEvent.id.desc())).all())
+        shown_reports = reports if paid else reports[:1]
+        shown_events = events if paid else events[:3]
+        result.append({
+            "entity": _entity_payload(entity),
+            "reports": [_report_payload(row) for row in shown_reports],
+            "report_years": [row.year for row in reports],
+            "events": [{
+                "id": row.id,
+                "date": _plain(row.event_date),
+                "type": row.event_type,
+                "text": row.text,
+            } for row in shown_events],
+            "has_more_reports": len(reports) > len(shown_reports),
+            "has_more_events": len(events) > len(shown_events),
+        })
+    return {
+        "available": True,
+        "company_id": company_id,
+        "company_name": profile.get("name") if profile else None,
+        "entities": result,
+        "access": {"paid": paid, "full_history": paid, "downloads": paid},
+        "disclaimer": "Показатели относятся к указанному юридическому лицу по РСБУ и могут не отражать консолидированные показатели всей группы.",
+    }
+
+
+def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:
+    query = select(LegalEntity).where(
+        LegalEntity.company_id == company_id,
+        LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+    )
+    if entity_id is not None:
+        query = query.where(LegalEntity.id == entity_id)
+    return db.scalar(query.order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
+
+
+@app.get("/api/companies/{company_id}/fns/extract")
+def company_fns_extract(company_id: str, entity_id: int | None = None,
+                        user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "войдите, чтобы скачать выписку"}, status_code=401)
+    entity = _confirmed_entity(db, company_id, entity_id)
+    if not entity or not (entity.inn or entity.ogrn):
+        return JSONResponse({"error": "юридическое лицо не сопоставлено"}, status_code=404)
+    try:
+        with ApiFnsClient() as client:
+            response = client.extract_pdf(entity.inn or entity.ogrn)
+    except ApiFnsError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
+    filename = f"egrul-{entity.inn or entity.ogrn}.pdf"
+    return StreamingResponse(iter([response.content]), media_type=response.headers.get("content-type", "application/pdf"),
+                             headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+@app.get("/api/companies/{company_id}/fns/bo/{year}")
+def company_fns_bo_file(company_id: str, year: int, entity_id: int | None = None, xls: bool = False,
+                        user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user or user.tier != UserTier.paid:
+        return JSONResponse({"error": "скачивание полной отчётности доступно по подписке"}, status_code=403)
+    entity = _confirmed_entity(db, company_id, entity_id)
+    if not entity or not (entity.inn or entity.ogrn):
+        return JSONResponse({"error": "юридическое лицо не сопоставлено"}, status_code=404)
+    try:
+        with ApiFnsClient() as client:
+            response = client.bo_file(entity.inn or entity.ogrn, year, xls=xls)
+    except ApiFnsError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
+    ext = "xlsx" if xls else "pdf"
+    filename = f"bfo-{entity.inn or entity.ogrn}-{year}.{ext}"
+    media = response.headers.get("content-type", "application/octet-stream")
+    return StreamingResponse(iter([response.content]), media_type=media,
+                             headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+# ==================== Уведомления и подписка на конкретную сделку ====================
+
+@app.get("/api/deals/{deal_id}/watch")
+def deal_watch_status(deal_id: str, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return {"logged_in": False, "watching": False}
+    row = db.scalar(select(DealWatch).where(DealWatch.user_id == user.id, DealWatch.deal_id == deal_id))
+    return {"logged_in": True, "watching": bool(row and row.active)}
+
+
+@app.post("/api/deals/{deal_id}/watch")
+def create_deal_watch(deal_id: str, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "войдите, чтобы подписаться на обновления"}, status_code=401)
+    row = db.scalar(select(DealWatch).where(DealWatch.user_id == user.id, DealWatch.deal_id == deal_id))
+    if not row:
+        row = DealWatch(user_id=user.id, deal_id=deal_id)
+        db.add(row)
+    row.active = True
+    notification_service.get_preferences(db, user.id)
+    db.commit()
+    return {"watching": True}
+
+
+@app.delete("/api/deals/{deal_id}/watch")
+def delete_deal_watch(deal_id: str, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    row = db.scalar(select(DealWatch).where(DealWatch.user_id == user.id, DealWatch.deal_id == deal_id))
+    if row:
+        row.active = False
+        db.commit()
+    return {"watching": False}
+
+
+@app.get("/api/deal-watches")
+def list_deal_watches(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    rows = list(db.scalars(select(DealWatch).where(
+        DealWatch.user_id == user.id, DealWatch.active.is_(True)
+    ).order_by(DealWatch.created_at.desc())).all())
+    result = []
+    for row in rows:
+        deal = get_deal(row.deal_id) or {}
+        result.append({"deal_id": row.deal_id, "title": deal.get("title") or row.deal_id,
+                       "created_at": row.created_at.isoformat()})
+    return result
+
+
+@app.get("/api/notifications")
+def list_notifications(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    prefs = notification_service.get_preferences(db, user.id)
+    if not prefs.in_app_enabled:
+        return []
+    rows = list(db.scalars(select(Notification).where(Notification.user_id == user.id)
+                           .order_by(Notification.created_at.desc()).limit(100)).all())
+    return [{
+        "id": row.id, "kind": row.kind, "title": row.title, "body": row.body,
+        "link": row.link, "deal_id": row.deal_id, "is_read": row.is_read,
+        "created_at": row.created_at.isoformat(),
+    } for row in rows]
+
+
+@app.post("/api/notifications/read")
+def read_notifications(payload: NotificationReadIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    query = db.query(Notification).filter(Notification.user_id == user.id)
+    if not payload.all:
+        ids = payload.ids or []
+        query = query.filter(Notification.id.in_(ids))
+    query.update({Notification.is_read: True}, synchronize_session=False)
+    db.commit()
+    return {"ok": True}
+
+
+@app.get("/api/notification-preferences")
+def get_notification_preferences(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    row = notification_service.get_preferences(db, user.id)
+    return {
+        "in_app_enabled": row.in_app_enabled,
+        "email_enabled": row.email_enabled,
+        "telegram_enabled": row.telegram_enabled,
+        "weekly_digest": row.weekly_digest,
+        "telegram_connected": bool(row.telegram_chat_id),
+        "telegram_available": bool(os.environ.get("TELEGRAM_BOT_USERNAME")),
+    }
+
+
+@app.patch("/api/notification-preferences")
+def update_notification_preferences(payload: NotificationPreferencesIn,
+                                    user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    row = notification_service.get_preferences(db, user.id)
+    for field in ("in_app_enabled", "email_enabled", "telegram_enabled", "weekly_digest"):
+        value = getattr(payload, field)
+        if value is not None:
+            if field == "telegram_enabled" and value and not row.telegram_chat_id:
+                return JSONResponse({"error": "сначала подключите Telegram"}, status_code=400)
+            setattr(row, field, value)
+    row.updated_at = datetime.utcnow()
+    db.commit()
+    return {"ok": True}
+
+
+@app.post("/api/notification-preferences/telegram-link")
+def notification_telegram_link(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    url = notification_service.telegram_connect_url(db, user.id)
+    if not url:
+        return JSONResponse({"error": "Telegram-бот ещё не настроен"}, status_code=503)
+    return {"url": url}
+
+
+@app.post("/api/telegram/webhook/{secret}")
+def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)):
+    expected = os.environ.get("TELEGRAM_WEBHOOK_SECRET", "")
+    if not expected or secret != expected:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    message = payload.message or {}
+    text = str(message.get("text") or "")
+    chat_id = (message.get("chat") or {}).get("id")
+    match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
+    if match and chat_id is not None:
+        notification_service.bind_telegram(db, match.group(1), str(chat_id))
+    return {"ok": True}
+
+
+# ==================== История диалогов ассистента ====================
+
+@app.get("/api/assistant/threads")
+def list_assistant_threads(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    rows = list(db.scalars(select(AssistantThread).where(AssistantThread.user_id == user.id)
+                           .order_by(AssistantThread.updated_at.desc()).limit(100)).all())
+    return [{"id": row.id, "title": row.title, "context_type": row.context_type,
+             "context_id": row.context_id, "updated_at": row.updated_at.isoformat()} for row in rows]
+
+
+@app.get("/api/assistant/threads/{thread_id}")
+def get_assistant_thread(thread_id: int, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    thread = db.scalar(select(AssistantThread).where(
+        AssistantThread.id == thread_id, AssistantThread.user_id == user.id
+    ))
+    if not thread:
+        return JSONResponse({"error": "диалог не найден"}, status_code=404)
+    messages = list(db.scalars(select(AssistantMessage).where(AssistantMessage.thread_id == thread.id)
+                               .order_by(AssistantMessage.created_at, AssistantMessage.id)).all())
+    return {"id": thread.id, "title": thread.title, "context_type": thread.context_type,
+            "context_id": thread.context_id,
+            "messages": [{"role": row.role, "body": row.body, "mode": row.mode,
+                           "created_at": row.created_at.isoformat()} for row in messages]}
+
+
+@app.delete("/api/assistant/threads/{thread_id}")
+def delete_assistant_thread(thread_id: int, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    thread = db.scalar(select(AssistantThread).where(
+        AssistantThread.id == thread_id, AssistantThread.user_id == user.id
+    ))
+    if not thread:
+        return JSONResponse({"error": "диалог не найден"}, status_code=404)
+    db.delete(thread); db.commit()
+    return {"ok": True}
+
+
+# ==================== Вебинары ====================
+
+@app.get("/api/webinars")
+def list_webinars(db=Depends(get_db)):
+    rows = list(db.scalars(select(Webinar).where(Webinar.published.is_(True))
+                           .order_by(Webinar.starts_at.desc(), Webinar.id.desc())).all())
+    return [{
+        "id": row.id, "title": row.title, "summary": row.summary,
+        "starts_at": row.starts_at.isoformat() if row.starts_at else None,
+        "speaker": row.speaker, "registration_url": row.registration_url,
+        "recording_url": row.recording_url, "status": row.status,
+    } for row in rows]
+
+
+# ==================== Экспорт сделки ====================
+
+@app.post("/api/deals/{deal_id}/export")
+def export_deal(deal_id: str, _payload: DealExportIn | None = None,
+                user: User | None = Depends(_current_user)):
+    if not user:
+        return JSONResponse({"error": "войдите, чтобы скачать карточку"}, status_code=401)
+    if user.tier != UserTier.paid:
+        return JSONResponse({"error": "скачивание карточек доступно по подписке"}, status_code=403)
+    deal = get_deal(deal_id)
+    if not deal:
+        return JSONResponse({"error": "сделка не найдена"}, status_code=404)
+    enriched = dict(deal)
+    for key, out in (("buyer", "buyer_name"), ("target", "target_name"), ("seller_id", "seller_name")):
+        company_id = deal.get(key)
+        profile = get_company_profile(company_id) if company_id else None
+        if profile and not enriched.get(out):
+            enriched[out] = profile.get("name")
+    pdf = render_deal_pdf(enriched)
+    filename = re.sub(r"[^a-zA-Z0-9_-]+", "-", deal_id)[:80] + ".pdf"
+    return StreamingResponse(iter([pdf]), media_type="application/pdf",
+                             headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
 @app.get("/api/subscriptions")
