@@ -100,6 +100,7 @@ SCREENS = [
     ("аналитика", "#/analytics"),
     ("отрасль", "#/industry/Банки"),
     ("подборка по ссылке", "#/deals?ind=Банки&year=2024&full=1"),
+    ("вход", "#/account"),
 ]
 
 
@@ -183,6 +184,36 @@ def test_deal_has_timeline_and_inline_correction_dialog(page, base_url):
     page.locator("#correctionSend").click()
     page.wait_for_selector(".dialog-msg.ok")
     assert "передано редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
+
+
+def test_citibank_is_one_deal_with_clickable_stage_history(page, base_url):
+    visit(page, base_url, "#/deal/citibank")
+    assert page.evaluate("() => DEALS.filter(d => d.id === 'citibank' || d.id === 'gf57ea8cb').length") == 1
+    assert page.locator(".progress-current .progress-title").inner_text() == "Сделка завершена"
+    assert page.locator(".progress-history").is_hidden()
+    assert page.locator(".progress-history .progress-row").count() == 2
+
+    page.locator("#historyToggle").click()
+    assert page.locator(".progress-history").is_visible()
+    page.locator(".progress-history .progress-row").last.click()
+    page.wait_for_timeout(250)
+    assert "/stage/negotiations-2024-01-01" in page.url
+    assert page.locator(".stage-card").is_visible()
+    assert "M&A Новости" in page.locator(".src").inner_text()
+
+
+def test_citibank_seller_is_rendered(page, base_url):
+    visit(page, base_url, "#/deal/citibank")
+    plate = page.locator(".deal-plate").inner_text()
+    assert "Citigroup" in plate
+    assert "Продавец\nНе раскрыт" not in plate
+
+
+def test_account_form_is_visible_after_async_auth_check(page, base_url):
+    visit(page, base_url, "#/account")
+    assert page.locator("#loginForm").is_visible()
+    assert page.locator("#loginEmail").is_visible()
+    assert "Войти" in page.locator("#app").inner_text()
 
 
 def test_shared_link_restores_the_selection(base_url, browser):

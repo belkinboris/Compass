@@ -542,3 +542,41 @@ def test_artem_feedback_ui_invariants():
     assert 'mailto:' not in html
     assert 'Ход сделки' in html and 'openCorrectionDialog' in html
     assert 'По этой сделке раскрыто немного деталей' in html
+
+
+def test_citibank_lifecycle_is_canonical(base, deals):
+    """Ранняя новость и закрытие — этапы одной сделки, а не две карточки."""
+    assert "gf57ea8cb" not in ids_of(deals)
+    assert base["merged"].get("gf57ea8cb") == "citibank"
+    assert base["merged_deal_stages"].get("gf57ea8cb") == "negotiations-2024-01-01"
+    assert "g32b8014f" not in base["companies"]
+    assert base["merged_companies"].get("g32b8014f") == "citibank"
+
+    html = INDEX.read_text(encoding="utf-8")
+    start = html.index('{id:"citibank"')
+    end = html.index('\n\n {id:"baltika"', start)
+    card = html[start:end]
+    assert 'seller_id:"gfd061adf"' in card
+    assert 'seller:"Citigroup Netherlands B.V."' in card
+    assert 'id:"negotiations-2024-01-01"' in card
+    assert 'id:"approval-2025-11-12"' in card
+    assert 'id:"closed-2026-02-18"' in card
+
+
+def test_stage_history_ui_and_route_are_kept():
+    html = INDEX.read_text(encoding="utf-8")
+    assert 'class="progress-current"' in html
+    assert 'class="progress-history"' in html
+    assert 'id="historyToggle"' in html
+    assert 'renderDealStage(arg, subarg)' in html
+    assert 'Object.assign(MERGED_STAGE, j.merged_deal_stages||{})' in html
+    assert 'bindTimeline();' in html
+    assert 'else if(sub==="stage" && subarg)' in html
+
+
+def test_account_async_render_is_revealed():
+    """route() анимирует DOM до завершения refreshMe(); renderAccount обязан
+    отдельно раскрыть вставленную после await форму, иначе экран пустой."""
+    html = INDEX.read_text(encoding="utf-8")
+    account = html[html.index("async function renderAccount"):html.index("/* Комментарии", html.index("async function renderAccount"))]
+    assert account.count("rerun();") >= 2

@@ -229,23 +229,36 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .deal-parties-strong a:hover{color:var(--accent)}
 .deal-parties-strong .arrow{color:var(--bronze,#A3814E);font-size:20px}
 .deal-progress{margin:0 0 28px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
-.deal-progress>.label{display:block;margin-bottom:15px}
-.progress-list{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin}
-.progress-step{position:relative;flex:1 0 180px;min-width:0;padding:0 20px 0 30px}
-.progress-step:before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--line);z-index:2}
-.progress-step.done:before{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px #fff}
-.progress-step.current:before{border-color:var(--bronze);box-shadow:0 0 0 4px var(--bronze-soft)}
-.progress-step:not(:last-child):after{content:"";position:absolute;left:14px;right:-2px;top:14px;height:1px;background:var(--line);z-index:1}
-.progress-step.done:not(:last-child):after{background:var(--accent)}
-.progress-date{display:block;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:3px}
-.progress-title{display:block;font-size:14px;font-weight:600;line-height:1.35;color:var(--ink)}
-.progress-note{display:block;margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--muted);max-width:31ch}.progress-source{color:var(--accent);text-decoration:none}.progress-source:hover{text-decoration:underline}
-.progress-foot{font-size:12.5px;color:var(--muted);line-height:1.5;margin:14px 0 0;max-width:72ch}
+.deal-progress>.label{display:block;margin-bottom:14px}
+.progress-current,.progress-history{display:grid;gap:10px}
+.progress-history{margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft)}
+.progress-history[hidden]{display:none}
+.progress-row{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:12px;align-items:start;padding:10px 8px;border-radius:8px;transition:background .2s}
+.progress-row:hover{background:var(--accent-soft)}
+.progress-dot{width:14px;height:14px;margin-top:4px;border-radius:50%;background:#fff;border:2px solid var(--line)}
+.progress-row.done .progress-dot{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px #fff}
+.progress-row.current .progress-dot{border-color:var(--bronze);box-shadow:0 0 0 4px var(--bronze-soft)}
+.progress-copy{min-width:0}
+.progress-date{display:block;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:2px}
+.progress-title{display:block;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink)}
+.progress-summary{display:block;margin-top:4px;font-size:12.5px;line-height:1.45;color:var(--muted);max-width:72ch}
+.progress-open{align-self:center;color:var(--accent);font-size:12px;font-weight:600;white-space:nowrap}
+.progress-toggle{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--accent);font-size:12.5px;font-weight:600}
+.progress-toggle .chev{font-size:17px;line-height:1;transition:transform .2s}
+.progress-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.progress-foot{font-size:12.5px;color:var(--muted);line-height:1.5;margin:12px 0 0;max-width:72ch}
+.stage-card{margin:0 0 28px;padding:22px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.stage-card h2{font-family:var(--f-display);font-size:clamp(25px,4vw,38px);line-height:1.2;font-weight:500;margin:10px 0 12px}
+.stage-card p{font-size:14.5px;line-height:1.65;color:var(--muted);max-width:78ch}
+.stage-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.stage-fact{padding:13px 14px;background:var(--paper);border:1px solid var(--line-soft);border-radius:8px}
+.stage-fact b{display:block;margin-top:4px;font-size:14px;font-weight:600;color:var(--ink)}
+.stage-nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
 .coverage-note{margin:0 0 26px;padding:17px 19px;border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:8px;background:var(--bronze-soft)}
 .coverage-note strong{display:block;font-family:var(--f-display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:5px}
 .coverage-note p{font-size:13.5px;line-height:1.58;color:var(--muted);max-width:74ch;margin:0}
 .coverage-note a{display:inline-block;margin-top:10px;color:var(--accent);font-size:13px;font-weight:600;border-bottom:1px solid rgba(29,90,68,.28)}
-@media(max-width:650px){.deal-progress{padding:18px 16px}.progress-step{flex-basis:155px;padding-right:14px}.coverage-note{padding:15px 16px}}
+@media(max-width:650px){.deal-progress{padding:18px 14px}.progress-row{grid-template-columns:18px minmax(0,1fr);padding:9px 4px}.progress-open{grid-column:2}.stage-facts{grid-template-columns:1fr}.coverage-note{padding:15px 16px}}
 .extra-info{margin:28px 0;padding:20px 22px;background:var(--paper2,#F0EFEA);border-radius:10px;border:1px solid var(--line)}
 .extra-info .label{display:block;margin-bottom:10px}
 .extra-info p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
@@ -695,12 +708,15 @@ const HOLDINGS = {
 
 /* ================= ПОЛНЫЕ КАРТОЧКИ СДЕЛОК ================= */
 let DEALS = [
- {id:"citibank",date:"2026-02-18",title:"«Ренессанс Капитал» приобрёл российский Ситибанк у Citigroup",buyer:"rencap",target:"citibank",ind:"Банки",type:"M&A",status:"Закрыта",sum:"Не раскрыта",
+ {id:"citibank",date:"2026-02-18",title:"«Ренессанс Капитал» приобрёл российский Ситибанк у Citigroup",buyer:"rencap",target:"citibank",seller_id:"gfd061adf",seller:"Citigroup Netherlands B.V.",ind:"Банки",type:"M&A",status:"Закрыта",sum:"Не раскрыта",
+  events:[
+   {id:"negotiations-2024-01-01",kind:"negotiations",date:"2024-01-01",title:"Появилась информация о переговорах",historicalTitle:"«Ренессанс Капитал» обсуждает приобретение 100% российского Ситибанка",note:"В публичном поле появилась информация о возможном приобретении российского Ситибанка. На этом этапе цена, условия и сроки закрытия не раскрывались.",facts:[["Статус","Переговоры"],["Потенциальный покупатель","«Ренессанс Капитал»"],["Предмет","100% российского Ситибанка"]],sources:[["M&A Новости (@dealsma)","https://t.me/dealsma/6524"]]},
+   {id:"approval-2025-11-12",kind:"approval",date:"2025-11-12",title:"Получено разрешение Президента",historicalTitle:"Президент разрешил «Ренессанс Капиталу» приобрести 100% акций российского Ситибанка",note:"Распоряжение № 443-рп разрешило ООО «Ренессанс Капитал — Финансовый Консультант» приобрести акции у Citigroup Netherlands B.V.",facts:[["Статус","Согласование получено"],["Предмет","100% акций АО КБ «Ситибанк»"],["Продавец","Citigroup Netherlands B.V."]],sources:[["Распоряжение Президента РФ № 443-рп","https://www.kremlin.ru/acts/bank/52587"],["Интерфакс","https://www.interfax.ru/business/1057596"]]},
+   {id:"closed-2026-02-18",kind:"closed",date:"2026-02-18",title:"Сделка завершена",historicalTitle:"«Ренессанс Капитал» завершил приобретение 100% акций АО КБ «Ситибанк»",note:"Право собственности и контроль над банком перешли к ООО «Ренессанс Капитал — Финансовый Консультант»; после сделки банк получил название «РенКап Банк».",facts:[["Статус","Закрыта"],["Покупатель","ООО «Ренессанс Капитал — Финансовый Консультант»"],["Продавец","Citigroup Netherlands B.V."],["Предмет","100% акций АО КБ «Ситибанк»"]],sources:[["Интерфакс","https://www.interfax.ru/business/1073475"],["Orion — о сопровождении сделки","https://orion-law.com/news/orion-team-advised-renaissance-capital-in-the-acquisition-of-100-of-shares-of-ao-citibank"]]}
+  ],
   eco:{sum:"Не раскрыта официально",share:"100% акций АО КБ «Ситибанк»",val:"Citi в отчёте 8-K оценивала поступления ≈ $0,2 млрд; «Известия» — не более 40 млрд ₽; убыток Citigroup от выхода ≈ $1,1 млрд",target_fin:"Активы ≈ 1,1 трлн ₽, капитал ≈ 133 млрд ₽ (топ-20 банков РФ)",fin:"Денежная сделка, покупатель — ООО «Ренессанс Капитал — Финансовый консультант»",rationale:"Крупнейший в России кастоди-бизнес, комплементарный инвестиционному профилю группы; сохранение обслуживания иностранных фондов и банков",context:"Citi пыталась выйти из России с 2021 года: розничный портфель продан «Уралсибу» ещё в 2022-м, три претендента отказались из-за невозможности получить ИТ-системы под санкциями США",finadv:"Не раскрывался"},
-  law:{struct:"Купля-продажа 100% акций у Citigroup Netherlands B.V.; после закрытия — переименование в АО «РенКап Банк»",appr:"Распоряжение Президента РФ от 12.11.2025 (банк в перечне, где сделки с «недружественными» иностранцами запрещены указом); одобрения в России и за рубежом",
-   adv:[["Покупатель — «Ренессанс Капитал»","Orion","Правовая проверка банка, транзакционная документация, переговоры, вопросы депозитарной деятельности, подписание и закрытие (по данным сайта фирмы)"],["Продавец — Citigroup","Не раскрывался",""]],
-   terms:"Цена конфиденциальна; отлагательные условия, по заявлению покупателя, отсутствовали; процесс занял более года, половина — согласования"},
-  src:[["Интерфакс","https://www.interfax.ru/business/1073475"],["РБК","https://www.rbc.ru/rbcfreenews/6995c0bf9a794752aabcd4b7"],["Коммерсантъ (интервью Орловского)","https://www.kommersant.ru/doc/8571874"],["Orion — о сделке","https://orion-law.com/news"]]},
+  law:{struct:"Купля-продажа 100% акций у Citigroup Netherlands B.V.; после закрытия — переименование в АО «РенКап Банк»",appr:"Распоряжение Президента РФ от 12.11.2025 № 443-рп; иные необходимые российские и зарубежные регуляторные согласования",adv:[["Покупатель — «Ренессанс Капитал»","Orion","Правовая проверка банка, транзакционная документация, переговоры, вопросы депозитарной деятельности, подписание и закрытие (по данным сайта фирмы)"],["Продавец — Citigroup","Не раскрывался",""]],terms:"Цена конфиденциальна; процесс включал получение регуляторных согласований"},
+  src:[["Интерфакс","https://www.interfax.ru/business/1073475"],["РБК","https://www.rbc.ru/rbcfreenews/6995c0bf9a794752aabcd4b7"],["Коммерсантъ (интервью Орловского)","https://www.kommersant.ru/doc/8571874"],["Orion — о сделке","https://orion-law.com/news/orion-team-advised-renaissance-capital-in-the-acquisition-of-100-of-shares-of-ao-citibank"],["Распоряжение Президента РФ № 443-рп","https://www.kremlin.ru/acts/bank/52587"]]},
 
  {id:"baltika",date:"2024-12-04",title:"Carlsberg продал «Балтику»: management buy-out через «ВГ Инвест»",buyer:"vginvest",target:"baltika",ind:"Пищепром и напитки",type:"M&A",status:"Закрыта",sum:"34 млрд ₽",
   eco:{sum:"34 млрд ₽ (по данным Reuters из протокола правкомиссии)",share:"98,65% долей напрямую + 1,35% через «Хоппи Юнион»",val:"Carlsberg отразила денежное вознаграждение ≈ 2,3 млрд датских крон (≈ $320 млн); значительный дисконт — в 2022-м «Арнест» оценивал актив в ~71 млрд ₽",target_fin:"Заводы в 8 городах России, крупнейший пивоваренный бизнес страны",fin:"Помимо денежной части «Балтика» передала Carlsberg свои пакеты в Carlsberg Azerbaijan и Carlsberg Kazakhstan",rationale:"Для Carlsberg — выход из «зависшего» актива и урегулирование всех споров, включая права на бренды; для менеджмента — контроль над бизнесом, которым уже управляли",context:"Продажа 2023 года сорвалась: активы передали в управление Росимуществу указом Президента; 2 декабря 2024-го актив вывели из-под управления — и сделку закрыли за два дня",finadv:"Не раскрывался"},
@@ -1005,6 +1021,10 @@ const ALL_FIRM = id => FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
    дубль могла быть у кого-то в закладках или в чужом письме, и молча
    показывать вместо неё общую ленту нечестно — уводим на ту же сделку. */
 const MERGED = {};
+/* Для старой ссылки на отдельную новость сохраняем не только каноническую
+   сделку, но и конкретный этап: закладка о переговорах не должна внезапно
+   открывать финальное состояние без контекста. */
+const MERGED_STAGE = {};
 /* То же для профилей компаний: одна компания была записана двумя профилями
    («Альфа-Банк» и «Alfa-Bank»), и адрес удалённого ведёт на оставшийся. */
 const MERGED_CO = {};
@@ -1123,6 +1143,34 @@ const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>has
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
+/* JSON-база и 19 кураторских карточек загружаются из разных мест. Раньше
+   запись из JSON могла оказаться предыдущим этапом уже существующей
+   кураторской карточки и показывалась второй сделкой. Карта `merged` теперь
+   применяется ДО добавления карточек: старый адрес остаётся жив, а его
+   источники и этап переносятся в единую историю. */
+function legacyStageKind(status){
+  const s=String(status||"").toLowerCase();
+  if(/не состоя|отмен|сорвал/.test(s)) return "cancelled";
+  if(/закры|заверш|реализован/.test(s)) return "closed";
+  if(/согласован|одобрен|разрешен|разрешён/.test(s)) return "approval";
+  if(/подписан/.test(s)) return "signed";
+  if(/обсуж|переговор|планир|намерен/.test(s)) return "negotiations";
+  return "";
+}
+function mergeLoadedDeal(canonical, legacy){
+  if(!canonical||!legacy) return;
+  const urls=new Set((canonical.src||[]).map(x=>x&&x[1]).filter(Boolean));
+  for(const src of (legacy.src||[])) if(src&&src[1]&&!urls.has(src[1])){canonical.src.push(src);urls.add(src[1]);}
+  const kind=legacyStageKind(legacy.status);
+  const sources=(legacy.src||[]).filter(x=>Array.isArray(x)&&x[1]);
+  if(kind){
+    canonical.events=Array.isArray(canonical.events)?canonical.events:[];
+    const exists=canonical.events.some(e=>e.kind===kind && (e.date||"")===(legacy.date||""));
+    if(!exists) canonical.events.push({id:`legacy-${legacy.id}`,kind,date:legacy.date||"unknown",
+      title:kind==="closed"?"Сделка завершена":kind==="approval"?"Согласование получено":kind==="signed"?"Документы подписаны":kind==="cancelled"?"Сделка не состоялась":"Переговоры",
+      historicalTitle:legacy.title,note:(legacy.extra||legacy.eco&&legacy.eco.rationale||"").slice(0,320),sources});
+  }
+}
 async function loadBulkDeals(){
   if(bulkLoaded) return;
   try{
@@ -1133,11 +1181,20 @@ async function loadBulkDeals(){
     const r2 = await fetch("static/data/deals_promoted.json?v=20260728o");
     if(r2.ok){
       const j = await r2.json();
-      DEALS.push(...(j.deals||[]));
+      Object.assign(MERGED, j.merged||{});
+      Object.assign(MERGED_STAGE, j.merged_deal_stages||{});
+      Object.assign(MERGED_CO, j.merged_companies||{});
       Object.assign(COMPANIES, j.companies||{});
       Object.assign(MATCH_KEYS, j.match_keys||{});
-      Object.assign(MERGED, j.merged||{});
-      Object.assign(MERGED_CO, j.merged_companies||{});
+      for(const incoming of (j.deals||[])){
+        const canonicalId=MERGED[incoming.id];
+        if(canonicalId){
+          mergeLoadedDeal(DEALS.find(d=>d.id===canonicalId), incoming);
+          continue;
+        }
+        const same=DEALS.find(d=>d.id===incoming.id);
+        if(same) mergeLoadedDeal(same,incoming); else DEALS.push(incoming);
+      }
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
   bulkLoaded = true;
@@ -1284,7 +1341,7 @@ function route(){
   const qi = raw.indexOf("?");
   const h = qi >= 0 ? raw.slice(0, qi) : raw;
   const qs = qi >= 0 ? raw.slice(qi + 1) : "";
-  const [_,page,arg] = h.split("/");
+  const [_,page,arg,sub,subarg] = h.split("/");
   const onHome = (page===""||page===undefined);
   document.body.style.background = onHome ? "#0A1210" : "";
   document.documentElement.style.background = onHome ? "#0A1210" : "";
@@ -1329,7 +1386,8 @@ function route(){
   // у карточки от базы зависят «Похожие сделки», у профиля — «Сделок в базе».
   // Профиль «Яндекса» на неполной базе показывал 2 сделки вместо 24.
   else if(page==="deal"){
-    if(!bulkLoaded) app.innerHTML = loadingHtml("Карточка сделки");
+    if(!bulkLoaded) app.innerHTML = loadingHtml(sub==="stage" ? "Этап сделки" : "Карточка сделки");
+    else if(sub==="stage" && subarg) renderDealStage(arg, subarg);
     else renderDeal(arg);
     mark("deals");
   }
@@ -2032,10 +2090,10 @@ function extraHtml(d){
   return `<div class="extra-info reveal"><span class="label">Дополнительный контекст</span><p>${novel.join(" ")}</p></div>`;
 }
 
-/* Этапы сделки — одна карточка на весь жизненный цикл. Новость о переговорах,
-   одобрении или закрытии не должна создавать соседний дубль: пайплайн добавляет
-   событие в `events`, а интерфейс показывает подтверждённые этапы как маршрут.
-   Для старых карточек без истории выводим один честный этап из текущего статуса. */
+/* Этапы сделки — одна карточка на весь жизненный цикл. На основной карточке
+   показываем только актуальный подтверждённый этап. Предыдущие раскрываются по
+   стрелке и ведут на самостоятельную страницу этапа: там остаётся формулировка
+   новости, известные на тот момент факты и именно её источники. */
 const stageLabel = status => {
   const s=String(status||"").toLowerCase();
   if(/не состоя|отмен|сорвал/.test(s)) return "Сделка не состоялась";
@@ -2045,51 +2103,102 @@ const stageLabel = status => {
   if(/обсуж|переговор|планир|намерен/.test(s)) return "Переговоры";
   return status || "Этап сделки";
 };
+const stageKind = status => {
+  const s=String(status||"").toLowerCase();
+  if(/не состоя|отмен|сорвал/.test(s)) return "cancelled";
+  if(/закры|заверш|реализован/.test(s)) return "closed";
+  if(/согласован|одобрен|разрешен|разрешён/.test(s)) return "approval";
+  if(/подписан/.test(s)) return "signed";
+  if(/обсуж|переговор|планир|намерен/.test(s)) return "negotiations";
+  return "";
+};
+const eventSources = e => {
+  const raw=Array.isArray(e&&e.sources) ? e.sources
+    : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
+  return raw.filter(x=>Array.isArray(x)&&x[1]);
+};
 function dealEvents(d){
   const raw=Array.isArray(d.events)?d.events:[];
-  const statusKind=status=>{
-    const s=String(status||"").toLowerCase();
-    if(/не состоя|отмен|сорвал/.test(s)) return "cancelled";
-    if(/закры|заверш|реализован/.test(s)) return "closed";
-    if(/согласован|одобрен|разрешен|разрешён/.test(s)) return "approval";
-    if(/подписан/.test(s)) return "signed";
-    if(/обсуж|переговор|планир|намерен/.test(s)) return "negotiations";
-    return "";
-  };
   const rows=raw.map((e,i)=>({
-    kind:e.kind||statusKind(e.status),
+    id:e.id||"",
+    kind:e.kind||stageKind(e.status),
     date:e.date||d.date||"unknown",
     title:e.title||e.label||stageLabel(e.status),
+    historicalTitle:e.historicalTitle||e.headline||e.newsTitle||"",
     note:e.note||e.description||"",
-    source:e.source||null,
+    facts:Array.isArray(e.facts)?e.facts:[],
+    sources:eventSources(e),
     order:i,
   })).filter(e=>e.title);
-  const currentKind=statusKind(d.status);
-  /* Исторические события могли появиться раньше общей шкалы статусов. Если
-     карточка уже дошла до следующей подтверждённой стадии, но этого этапа в
-     `events` ещё нет, показываем текущий статус как последний факт. */
+  const currentKind=stageKind(d.status);
   if(!rows.length || (currentKind&&!rows.some(e=>e.kind===currentKind))){
-    rows.push({kind:currentKind,date:d.date||"unknown",title:stageLabel(d.status),note:"",source:null,order:rows.length});
+    rows.push({id:"current",kind:currentKind,date:d.date||"unknown",title:stageLabel(d.status),
+      historicalTitle:d.title,note:"",facts:[],sources:(d.src||[]).filter(x=>Array.isArray(x)&&x[1]),order:rows.length});
   }
   rows.sort((a,b)=>{
     if(a.date==="unknown")return 1;if(b.date==="unknown")return -1;
     return a.date.localeCompare(b.date)||a.order-b.order;
   });
+  rows.forEach((e,i)=>{e.key=e.id||`${e.kind||"stage"}-${e.date}-${i}`;});
   return rows;
 }
+const stageHref = (d,e) => `#/deal/${d.id}/stage/${encodeURIComponent(e.key)}`;
+function progressRowHtml(d,e,current){
+  const summary=e.note ? `<span class="progress-summary">${esc(e.note)}</span>` : "";
+  return `<a class="progress-row ${current?"current":"done"}" href="${stageHref(d,e)}">
+    <span class="progress-dot" aria-hidden="true"></span>
+    <span class="progress-copy"><span class="progress-date">${fmtDate(e.date)}</span><span class="progress-title">${esc(e.title)}</span>${summary}</span>
+    <span class="progress-open">Открыть этап →</span>
+  </a>`;
+}
 function timelineHtml(d){
-  const rows=dealEvents(d);
-  const terminal=/закры|заверш|не состоя|отмен|сорвал/i.test(String(d.status||""));
+  const rows=dealEvents(d), latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
   return `<div class="deal-progress reveal"><span class="label">Ход сделки</span>
-    <div class="progress-list">${rows.map((e,i)=>{
-      const cls=(terminal||i<rows.length-1)?"done":"current";
-      const source=Array.isArray(e.source)&&e.source[1]
-        ? `<a class="progress-source" href="${e.source[1]}" target="_blank" rel="noopener">${e.source[0]||"Источник"} ↗</a>`:"";
-      const note=(e.note||source)?`<span class="progress-note">${e.note||""}${e.note&&source?" · ":""}${source}</span>`:"";
-      return `<div class="progress-step ${cls}"><span class="progress-date">${fmtDate(e.date)}</span><span class="progress-title">${e.title}</span>${note}</div>`;
-    }).join("")}</div>
-    <p class="progress-foot">Показываем только этапы, подтверждённые источниками. Новые сообщения об этой же сделке дополняют карточку, а не создают отдельную запись.</p>
+    <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
+    ${previous.length?`<button class="progress-toggle" id="historyToggle" type="button" aria-expanded="false" aria-controls="historyList"><span class="chev">⌄</span><span>Показать предыдущие этапы (${previous.length})</span></button>
+      <div class="progress-history" id="historyList" hidden>${previous.map(e=>progressRowHtml(d,e,false)).join("")}</div>`:""}
+    <p class="progress-foot">Одна карточка объединяет весь жизненный цикл сделки. Каждый этап открывается отдельно — с формулировкой новости и подтверждающими источниками.</p>
   </div>`;
+}
+function bindTimeline(){
+  const btn=document.getElementById("historyToggle"), list=document.getElementById("historyList");
+  if(!btn||!list)return;
+  btn.onclick=()=>{
+    const open=btn.getAttribute("aria-expanded")==="true";
+    btn.setAttribute("aria-expanded",String(!open));
+    list.hidden=open;
+    const text=btn.querySelector("span:last-child");
+    if(text) text.textContent=open?`Показать предыдущие этапы (${list.children.length})`:`Скрыть предыдущие этапы`;
+  };
+}
+function renderDealStage(id,key){
+  const d=DEALS.find(x=>x.id===id);
+  if(!d){
+    if(MERGED[id]){
+      const redirectedKey=key||MERGED_STAGE[id]||"";
+      location.hash=redirectedKey
+        ? `#/deal/${MERGED[id]}/stage/${encodeURIComponent(redirectedKey)}`
+        : `#/deal/${MERGED[id]}`;
+      return;
+    }
+    renderDeals();return;
+  }
+  const rows=dealEvents(d), decoded=decodeURIComponent(key||""), index=rows.findIndex(e=>e.key===decoded), e=index>=0?rows[index]:rows[rows.length-1];
+  const facts=(e.facts||[]).filter(x=>Array.isArray(x)&&x.length>1&&hasFact(x[1]));
+  const sources=(e.sources&&e.sources.length?e.sources:(e===rows[rows.length-1]?(d.src||[]):[])).filter(x=>Array.isArray(x)&&x[1]);
+  const prev=index>0?rows[index-1]:null, next=index>=0&&index<rows.length-1?rows[index+1]:null;
+  app.innerHTML=`
+    <a class="back reveal" href="#/deal/${d.id}">← К актуальной карточке сделки</a>
+    <div class="d-head reveal"><span class="label">Этап сделки · ${fmtDate(e.date)}</span><h1>${esc(e.title)}</h1>
+      <div class="d-parties"><span>Сделка: <b>${esc(d.title)}</b></span></div></div>
+    <div class="stage-card reveal">
+      <span class="status ${e.kind==="closed"?"closed":""}">${esc(e.title)}</span>
+      <h2>${esc(e.historicalTitle||e.title)}</h2>
+      ${e.note?`<p>${esc(e.note)}</p>`:`<p>Для этого этапа сохранены дата и источники. Дополнительные факты в публикациях не раскрывались.</p>`}
+      ${facts.length?`<div class="stage-facts">${facts.map(x=>`<div class="stage-fact"><span class="label">${esc(String(x[0]))}</span><b>${esc(String(x[1]))}</b></div>`).join("")}</div>`:""}
+      <div class="stage-nav">${prev?`<a class="chip" href="${stageHref(d,prev)}">← Предыдущий этап</a>`:""}${next?`<a class="chip" href="${stageHref(d,next)}">Следующий этап →</a>`:""}<a class="chip" href="#/deal/${d.id}">Актуальная карточка</a></div>
+    </div>
+    <div class="src reveal"><span class="label">Источники этого этапа</span><br>${sources.length?sources.map(src=>`<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0]||"Источник")}</a>`).join(""):`<span class="acct-note">Отдельная ссылка для этого этапа не сохранена; используйте источники общей карточки.</span>`}</div>`;
 }
 function detailScore(d){
   const values=[d.sum,d.asset,d.asset_share,d.seller,d.buyer_name,
@@ -2324,7 +2433,13 @@ function renderDeal(id){
   const d = DEALS.find(x=>x.id===id);
   if(!d){
     // Карточку слили с дублем — открываем ту, что осталась, а не общую ленту.
-    if(MERGED[id]){ location.hash = "#/deal/"+MERGED[id]; return; }
+    if(MERGED[id]){
+      const oldStage=MERGED_STAGE[id];
+      location.hash = oldStage
+        ? `#/deal/${MERGED[id]}/stage/${encodeURIComponent(oldStage)}`
+        : `#/deal/${MERGED[id]}`;
+      return;
+    }
     renderDeals(); return;
   }
   lens = "overview";
@@ -2590,6 +2705,7 @@ function renderDeal(id){
          приглушена, так что путь виден. */
   };
   paint();
+  bindTimeline();
   app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{
     lens=b.dataset.l;
     app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x===b));
@@ -3305,6 +3421,7 @@ async function renderAccount(qs){
       <button class="chip" type="submit">Прислать ссылку</button>
     </form>
     <p class="acct-note reveal" id="loginMsg"></p>`;
+    rerun();
     document.getElementById("loginForm").onsubmit = async (e)=>{
       e.preventDefault();
       const email = document.getElementById("loginEmail").value.trim();
@@ -3335,6 +3452,7 @@ async function renderAccount(qs){
   <div class="fe-actions reveal" style="justify-content:flex-start">
     <button class="chip" id="logoutBtn">Выйти</button>
   </div>`;
+  rerun();
   const drawSubs = async ()=>{
     const list = document.getElementById("subList");
     const r = await fetch("/api/subscriptions");
