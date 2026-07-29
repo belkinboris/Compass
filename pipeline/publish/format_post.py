@@ -36,7 +36,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 SITE = 'https://kompas.deals'          # адрес витрины; подставляется в ссылки
 
-SIGNIFICANT = ('sum', 'buyer', 'buyer_name', 'seller', 'target', 'asset', 'status', 'advisers')
+SIGNIFICANT = ('sum', 'buyer', 'buyer_name', 'seller', 'target', 'asset', 'status', 'advisers', 'events')
 
 PLACEHOLDER = re.compile(
     r'^\s*(?:[—-]|н/д|нет\s+данных|не\s+раскры[а-яё]*|не\s+привлекал[а-яё]*'
@@ -141,13 +141,18 @@ def changes(old, new):
     """Что изменилось между версиями карточки — человеческими словами."""
     label = {'sum': 'сумма', 'buyer': 'покупатель', 'buyer_name': 'покупатель',
              'seller': 'продавец', 'target': 'предмет сделки', 'asset': 'предмет сделки',
-             'status': 'статус', 'advisers': 'консультанты'}
+             'status': 'статус', 'advisers': 'консультанты', 'events': 'этап сделки'}
     out = []
     for field in SIGNIFICANT:
         was = old.get(field) if field != 'advisers' else advisers(old)
         now = new.get(field) if field != 'advisers' else advisers(new)
-        if field != 'advisers':
+        if field not in ('advisers', 'events'):
             was, now = (was if has(was) else None), (now if has(now) else None)
+        if field == 'events':
+            # Сравниваем только виды этапов: повторная публикация о том же
+            # закрытии добавит источник, но не должна считаться новым этапом.
+            kinds = lambda rows: tuple(e.get('kind') for e in (rows or []) if isinstance(e, dict))
+            was, now = kinds(was), kinds(now)
         if was == now:
             continue
         # Закрытие сделки — не переформулировка, а событие: сделка, о которой
@@ -156,6 +161,9 @@ def changes(old, new):
         # обновление было единственным, о котором читатель не узнавал.
         if field == 'status' and str(now) == 'Закрыта':
             out.append('сделка закрыта')
+            continue
+        if field == 'events' and len(now) > len(was):
+            out.append('добавлен этап сделки')
             continue
         text = label[field]
         out.append(('добавлен(а) ' + text) if not was else ('уточнён(а) ' + text))

@@ -189,6 +189,31 @@ class Comment(Base):
     user: Mapped[User] = relationship()
 
 
+class CorrectionRequest(Base):
+    """Сообщение редакции по карточке сделки или общее обращение.
+
+    Это не публичный комментарий: сообщение видит только команда продукта.
+    Вход не обязателен — иначе человек, который заметил ошибку, чаще закроет
+    форму, чем станет заводить аккаунт. Для вошедшего пользователя сохраняем
+    user_id и подставляем его почту; анонимный посетитель может оставить любой
+    удобный контакт или отправить сообщение без контакта.
+    """
+    __tablename__ = "correction_requests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    # Строковый id без внешнего ключа: карточки пока живут прежде всего в JSON,
+    # поэтому редакционная форма должна работать и до миграции конкретной
+    # карточки в SQL-таблицу deals. None означает общее сообщение из футера.
+    deal_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    contact: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    body: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(20), default="new")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    user: Mapped[User | None] = relationship()
+
+
 # ------------------------------------------------------------------ сделки ---
 
 class AmountConfidence(str, enum.Enum):

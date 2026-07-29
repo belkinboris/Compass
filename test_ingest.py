@@ -80,6 +80,46 @@ def test_match_does_not_glue_unrelated_news(base):
     assert found is None, f"постороннюю новость приняли за сделку {found}"
 
 
+def test_match_keeps_a_long_deal_in_one_card():
+    """Переговоры и закрытие через девять месяцев — этапы одной карточки."""
+    idx = matcher.index_base([{
+        "id": "long-stage", "date": "2026-01-10",
+        "title": "«Альфа» ведёт переговоры о покупке «Беты»",
+        "status": "Обсуждается", "src": [],
+    }])
+    found, why = matcher.match({
+        "title": "«Альфа» получила согласие на приобретение «Беты»",
+        "date": "2026-10-12", "url": None,
+    }, idx)
+    assert found == "long-stage" and "этап" in why
+
+
+def test_match_does_not_merge_a_changed_bidder():
+    """Тот же продавец и актив, но другой покупатель — другая сделка."""
+    idx = matcher.index_base([{
+        "id": "first-bidder", "date": "2026-01-10",
+        "title": "Банк «Траст» продаёт «Точку» банку «Тинькофф»",
+        "status": "Обсуждается", "src": [],
+    }])
+    found, _ = matcher.match({
+        "title": "Банк «Траст» продал «Точку» компании «Интеррос»",
+        "date": "2026-09-12", "url": None,
+    }, idx)
+    assert found is None
+
+
+def test_match_does_not_extend_one_name_forever():
+    idx = matcher.index_base([{
+        "id": "old-alpha", "date": "2024-01-10",
+        "title": "«Альфа» купила логистический актив",
+        "status": "Закрыта", "src": [],
+    }])
+    found, _ = matcher.match({
+        "title": "«Альфа» купила другой банк", "date": "2026-01-20", "url": None,
+    }, idx)
+    assert found is None
+
+
 def test_match_uses_the_source_url(base):
     """Тот же адрес источника — самый сильный признак повтора."""
     deal = next(d for d in base["deals"]
@@ -179,6 +219,17 @@ def test_draft_keeps_silent_when_there_is_no_seller():
     assert seller is None
 
 
+def test_draft_records_the_first_deal_stage():
+    """Первая новость создаёт не только статус, но и начало маршрута сделки."""
+    import draft
+    item = {"title": "Компания ведёт переговоры о покупке актива",
+            "summary": "Стороны обсуждают условия.", "date": "2026-07-29",
+            "url": "https://example.invalid/talks", "source_name": "Источник"}
+    card = draft.build(item, {})
+    assert card["status"] == "Обсуждается"
+    assert card["events"] and card["events"][0]["kind"] == "negotiations"
+
+
 def test_draft_error_rate_stays_low(base):
     """Разбор ошибается реже, чем молчит: замер на 1333 выверенных карточках.
 
@@ -271,6 +322,55 @@ def test_enrich_only_moves_status_forward(base):
     assert not [p for p in props if p[0] == "status"], "статус поехал назад"
 
 
+def test_enrich_adds_a_new_stage_to_the_same_card(base):
+    """Новость о закрытии дополняет маршрут, а повтор не создаёт второй этап."""
+    import enrich
+    deal = {"id": "stage-test", "title": "Тестовая сделка", "date": "2026-07-01",
+            "status": "Обсуждается", "src": [], "events": [
+                {"kind": "negotiations", "date": "2026-07-01", "title": "Переговоры"}
+            ]}
+    item = {"title": "Стороны завершили сделку", "summary": "Сделка закрыта.",
+            "date": "2026-07-29", "url": "https://example.invalid/closed"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    assert any(p[0] == "event" and p[1]["kind"] == "closed" for p in props)
+    enrich.apply_props(deal, props)
+    assert deal["status"] == "Закрыта" and len(deal["events"]) == 2
+    again = enrich.proposals(deal, item, {}, base["companies"])
+    assert not [p for p in again if p[0] == "event"], "этап закрытия задублировался"
+
+
+def test_enrich_updates_title_from_the_new_stage_source(base):
+    import enrich
+    deal = {"id": "title-stage", "title": "«Альфа» покупает «Бету»",
+            "date": "2026-01-01", "status": "Обсуждается", "src": [], "events": []}
+    item = {"title": "«Альфа» получила согласие на покупку «Беты»",
+            "summary": "Регулятор одобрил сделку.", "date": "2026-07-29",
+            "url": "https://example.invalid/approval"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    assert any(p[0] == "title" and p[1] == item["title"] for p in props)
+    enrich.apply_props(deal, props)
+    assert deal["status"] == "Согласование получено" and deal["title"] == item["title"]
+
+
+def test_enrich_accepts_extended_stage_headline():
+    """Префикс регулятора не должен мешать обновить старый заголовок."""
+    import enrich
+    old = "«Альфа» покупает «Бету»"
+    new = "ФАС одобрила сделку: «Альфа» покупает «Бету»"
+    assert enrich.informative_title_update(old, new)
+
+
+def test_promote_holds_closed_title_in_present_tense(base):
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": "«Тест-Альфа» покупает «Тест-Бету»",
+             "date": "2026-07-28", "ind": sorted(inds)[0], "status": "Закрыта",
+             "src": [["источник", "https://example.invalid/closed-present"]]}
+    bad, hold = promote.check(draft, base, idx, inds)
+    assert not any("заголовок" in reason for reason in bad)
+    assert any("настоящим временем" in reason for reason in hold)
+
+
 def test_enrich_adds_a_new_source_but_not_a_known_one(base):
     """Ссылка на источник — главный вклад обогащения, но дублей быть не должно."""
     import enrich
@@ -292,6 +392,7 @@ def test_enrich_writes_only_on_a_strong_match():
     assert enrich.is_strong("тот же адрес источника")
     assert enrich.is_strong("совпали название в кавычках и сумма")
     assert enrich.is_strong("общее название в кавычках и два общих слова")
+    assert enrich.is_strong("совпал набор названий в кавычках на разных этапах")
     assert not enrich.is_strong("общие слова заголовка: 4")
 
 
@@ -302,6 +403,13 @@ def test_post_notifies_when_the_deal_closes(base):
     before["status"] = "Обсуждается"
     ch = format_post.changes(before, deal)
     assert "сделка закрыта" in ch and format_post.should_notify(ch)
+
+
+def test_post_notifies_when_a_stage_is_added():
+    before = {"events": [{"kind": "negotiations"}]}
+    after = {"events": [{"kind": "negotiations"}, {"kind": "approval"}]}
+    ch = format_post.changes(before, after)
+    assert "добавлен этап сделки" in ch and format_post.should_notify(ch)
 
 
 def test_promote_holds_instead_of_guessing_industry(base):

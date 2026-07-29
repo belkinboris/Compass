@@ -24,7 +24,7 @@ from pydantic import BaseModel
 
 import auth
 from db.models import Base as DBBase
-from db.models import Comment, SavedFilter, User
+from db.models import Comment, CorrectionRequest, SavedFilter, User
 from db.session import engine, get_session
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
@@ -230,6 +230,11 @@ class CommentIn(BaseModel):
     body: str
 
 
+class CorrectionIn(BaseModel):
+    body: str
+    contact: str | None = None
+
+
 def _current_user(request: Request, db=Depends(get_db)) -> User | None:
     return auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
 
@@ -340,6 +345,39 @@ def post_comment(deal_id: str, comment: CommentIn, user: User | None = Depends(_
     db.add(row)
     db.commit()
     return {"id": row.id, "created_at": row.created_at.isoformat(), "author": user.email.split("@")[0]}
+
+
+# «Уточнить или дополнить» отправляет сообщение прямо в продукт, а не открывает
+# почтовый клиент. Вход намеренно не обязателен: для исправления ошибки в базе
+# нельзя ставить барьер выше, чем сама форма. Публично эти сообщения не
+# показываются — в отличие от Comment, это редакционная очередь.
+def _save_correction(deal_id: str | None, correction: CorrectionIn, user: User | None, db):
+    body = correction.body.strip()
+    contact = (correction.contact or "").strip() or (user.email if user else None)
+    if not body:
+        return JSONResponse({"error": "напишите, что нужно уточнить"}, status_code=400)
+    if len(body) > 4000:
+        return JSONResponse({"error": "сообщение слишком длинное"}, status_code=400)
+    if contact and len(contact) > 300:
+        return JSONResponse({"error": "контакт слишком длинный"}, status_code=400)
+    row = CorrectionRequest(deal_id=deal_id, user_id=user.id if user else None,
+                            contact=contact, body=body, status="new")
+    db.add(row)
+    db.commit()
+    return {"ok": True, "id": row.id}
+
+
+@app.post("/api/deals/{deal_id}/corrections")
+def post_correction(deal_id: str, correction: CorrectionIn,
+                    user: User | None = Depends(_current_user), db=Depends(get_db)):
+    return _save_correction(deal_id, correction, user, db)
+
+
+@app.post("/api/corrections")
+def post_general_correction(correction: CorrectionIn,
+                            user: User | None = Depends(_current_user), db=Depends(get_db)):
+    """Общее сообщение редакции из футера, без привязки к карточке."""
+    return _save_correction(None, correction, user, db)
 
 
 @app.get("/{full_path:path}")

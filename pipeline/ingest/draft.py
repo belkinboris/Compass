@@ -90,17 +90,63 @@ def guess_type(text):
 
 # --- статус ----------------------------------------------------------------
 FUTURE = r'план\w+|намерен|ведёт\s+переговоры|ведет\s+переговоры|может\s+(?:купить|продать|приобрести)' \
-         r'|рассматрива\w+|обсужда\w+|договорил\w+|подписал\w+\s+соглашени|намерева'
-DONE = r'закрыл\w*\s+сделку|сделка\s+закрыта|завершил\w*|купил|приобр(?:е|ё)л|продал|выкупил|получил'
+         r'|рассматрива\w+|обсужда\w+|договорил\w+|намерева'
+SIGNED = r'подписал\w*\s+(?:соглашени|договор)|заключил\w*\s+(?:соглашени|договор)'
+APPROVED = r'(?:получил|получила|получило|получили)\s+(?:согласие|одобрение|разрешение)' \
+           r'|(?:фас|регулятор|правкомисси\w*|правительственн\w+\s+комисси\w*)\s+(?:одобрил|одобрила|согласовал|разрешил)'
+DONE = r'закрыл\w*\s+сделку|сделка\s+закрыта|завершил\w*|купил|приобр(?:е|ё)л|продал|выкупил'
+CANCELLED = r'сделка\s+не\s+состоял|отказал\w*\s+от\s+сделк|переговоры\s+прекращен|сделк\w*\s+отмен'
 
 
 def guess_status(text):
     text = str(text or '')
-    if re.search(FUTURE, text, re.I):
-        return 'Обсуждается'
+    if re.search(CANCELLED, text, re.I):
+        return 'Не состоялась'
     if re.search(DONE, text, re.I):
         return 'Закрыта'
+    if re.search(APPROVED, text, re.I):
+        return 'Согласование получено'
+    if re.search(SIGNED, text, re.I):
+        return 'Подписана'
+    if re.search(FUTURE, text, re.I):
+        return 'Обсуждается'
     return None
+
+
+def guess_event(item):
+    """Один подтверждённый этап из одной новости, без пересказа от модели.
+
+    Заголовок этапа определяется закрытыми правилами, дата и ссылка берутся из
+    самой записи. Если новость не содержит маркера этапа, возвращаем None —
+    лишний этап хуже пропущенного.
+    """
+    text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
+    status = guess_status(text)
+    if not status:
+        return None
+    kind = {
+        'Обсуждается': 'negotiations',
+        'Подписана': 'signed',
+        'Согласование получено': 'approval',
+        'Закрыта': 'closed',
+        'Не состоялась': 'cancelled',
+    }[status]
+    title = {
+        'negotiations': 'Переговоры',
+        'signed': 'Документы подписаны',
+        'approval': 'Согласование получено',
+        'closed': 'Сделка завершена',
+        'cancelled': 'Сделка не состоялась',
+    }[kind]
+    summary = re.sub(r'\s+', ' ', str(item.get('summary') or '')).strip()
+    return {
+        'kind': kind,
+        'date': item.get('date') or 'unknown',
+        'title': title,
+        'note': summary[:260].rstrip(' ,;:-—') if summary else '',
+        'source': [item.get('source_name') or item.get('source_id') or 'источник',
+                   item.get('url')] if item.get('url') else None,
+    }
 
 
 # --- стороны ---------------------------------------------------------------
@@ -184,6 +230,7 @@ def build(item, companies):
     """Черновик карточки из записи разбора."""
     text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
     buyer, asset, seller = guess_parties(item.get('title'))
+    event = guess_event(item)
     return {
         'draft_id': 'd' + str(abs(hash(item.get('url'))))[:8],
         'title': item.get('title'),
@@ -192,6 +239,7 @@ def build(item, companies):
         'sum': guess_sum(text),
         'type': guess_type(text),
         'status': guess_status(text),
+        'events': [event] if event else [],
         'buyer_name': buyer,
         'asset': asset,
         'seller': seller,

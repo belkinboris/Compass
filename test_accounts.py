@@ -13,7 +13,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from db.models import Base, LoginToken
+from db.models import Base, CorrectionRequest, LoginToken
 from db.session import engine, get_session
 
 
@@ -169,3 +169,51 @@ def test_comments_are_scoped_to_their_own_deal(client):
     client.post("/api/deals/gtestBBBB/comments", json={"body": "про сделку B"})
     only_a = client.get("/api/deals/gtestAAAA/comments").json()
     assert all(c["body"] == "про сделку A" for c in only_a)
+
+
+def test_anonymous_correction_goes_to_editorial_queue(client):
+    r = client.post("/api/deals/gtest0001/corrections", json={
+        "body": "Покупателем был российский девелопер.",
+        "contact": "@source_person",
+    })
+    assert r.status_code == 200 and r.json()["ok"] is True
+    s = get_session()
+    try:
+        row = s.get(CorrectionRequest, r.json()["id"])
+        assert row.body == "Покупателем был российский девелопер."
+        assert row.contact == "@source_person" and row.user_id is None
+    finally:
+        s.close()
+
+
+def test_correction_uses_logged_in_email_when_contact_is_empty(client):
+    login(client, "источник@firm.ru")
+    r = client.post("/api/deals/gtest0002/corrections", json={"body": "Есть уточнение по дате."})
+    assert r.status_code == 200
+    s = get_session()
+    try:
+        row = s.get(CorrectionRequest, r.json()["id"])
+        assert row.contact == "источник@firm.ru" and row.user_id is not None
+    finally:
+        s.close()
+
+
+
+def test_general_editorial_message_is_stored_without_a_deal(client):
+    r = client.post("/api/corrections", json={
+        "body": "Предлагаю добавить новый источник.",
+        "contact": "@source_editor",
+    })
+    assert r.status_code == 200
+    s = get_session()
+    try:
+        row = s.get(CorrectionRequest, r.json()["id"])
+        assert row.deal_id is None
+        assert row.contact == "@source_editor"
+        assert row.status == "new"
+    finally:
+        s.close()
+
+def test_empty_correction_is_rejected(client):
+    r = client.post("/api/deals/gtest0001/corrections", json={"body": "   "})
+    assert r.status_code == 400

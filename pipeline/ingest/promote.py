@@ -72,6 +72,7 @@ NEW_CARDS_NEED_REVIEW = True
 WORD_CURRENCY = re.compile(r'\b(?:руб(?:лей|ля|\.)?|долл(?:аров|\.)?|евро|USD|EUR|RUB)\b', re.I)
 PLACEHOLDER = re.compile(r'^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$', re.I)
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+PRESENT_CLOSED = re.compile(r'\b(?:покупает|приобретает|прода[её]т|созда[её]т|получает|входит|проводит|привлекает|выкупает)\b', re.I)
 
 
 def industries():
@@ -102,6 +103,8 @@ def check(draft, base, idx, inds):
         bad.append('валюта словом, а не значком')
     if draft.get('seller') and PLACEHOLDER.match(str(draft['seller']).strip()):
         bad.append('в продавце заглушка, а не имя')
+    if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
+        hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершённому действию')
     parties = [flat(draft.get(f)) for f in ('buyer_name', 'seller', 'asset') if draft.get(f)]
     if len(parties) != len(set(parties)):
         bad.append('одна и та же сторона стоит в двух ролях')
@@ -140,6 +143,8 @@ def to_card(draft, deal_id):
     for field in ('sum', 'seller', 'buyer_name', 'asset'):
         if draft.get(field):
             card[field] = draft[field]
+    if draft.get('events'):
+        card['events'] = draft['events']
     if draft.get('seller'):
         card['seller_src'] = 'text'
     return card

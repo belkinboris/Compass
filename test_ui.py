@@ -61,7 +61,10 @@ def base_url():
 def browser():
     """Один браузер на сессию: запуск Chromium дороже всех тестов вместе."""
     with sync_playwright() as p:
-        br = p.chromium.launch(**LAUNCH)
+        try:
+            br = p.chromium.launch(**LAUNCH)
+        except Exception as exc:
+            pytest.skip(f"Chromium для Playwright недоступен: {exc}")
         yield br
         br.close()
 
@@ -169,6 +172,17 @@ def test_no_external_requests(page, base_url):
         page.wait_for_timeout(1200)
     page.remove_listener("request", handler)
     assert not external, f"внешние запросы: {external[:5]}"
+
+
+def test_deal_has_timeline_and_inline_correction_dialog(page, base_url):
+    visit(page, base_url, "#/deal/agrostroy-zemlya")
+    assert page.locator(".deal-progress").is_visible()
+    page.locator("#fixdeal").click()
+    assert page.locator(".dialog-backdrop").is_visible()
+    page.locator("#correctionBody").fill("Проверка редакционной формы")
+    page.locator("#correctionSend").click()
+    page.wait_for_selector(".dialog-msg.ok")
+    assert "передано редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
 
 
 def test_shared_link_restores_the_selection(base_url, browser):

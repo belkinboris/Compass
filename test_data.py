@@ -503,3 +503,42 @@ def test_match_key_alias_is_a_name(base):
             if phrase.search(alias) and alias not in allowed:
                 bad.append((cid, alias))
     assert not bad, f"псевдоним — кусок заголовка, а не имя: {bad[:5]}"
+
+
+def test_curated_closed_titles_use_completed_action():
+    """Первые 19 карточек видны до загрузки JSON и не должны говорить
+    «продаёт / покупает» рядом со статусом «Закрыта»."""
+    html = INDEX.read_text(encoding="utf-8")
+    chunk = html[html.index("let DEALS = ["):html.index("/* ================= КОМПАКТНЫЕ", html.index("let DEALS = ["))]
+    present = re.compile(r'\b(?:покупает|приобретает|прода[её]т|созда[её]т|получает|входит|проводит|привлекает|выкупает)\b', re.I)
+    bad = []
+    for card in re.findall(r'\{id:".*?\n\s*src:\[.*?\]\}', chunk, re.S):
+        if 'status:"Закрыта"' in card:
+            title = re.search(r'title:"([^"]+)"', card)
+            if title and present.search(title.group(1)):
+                bad.append(title.group(1))
+    assert not bad, f"закрытые кураторские карточки в настоящем времени: {bad}"
+
+
+def test_curated_feedback_fixes_are_kept():
+    html = INDEX.read_text(encoding="utf-8")
+    assert 'id:"selectel-itmo"' in html and 'type:"Создание СП"' in html
+    assert 'ООО «Эмерджентные мультиагентные системы» (ООО «ЭМС»)' in html
+    assert 'kind:"registered"' in html and 'kind:"announced"' in html
+    assert 'id:"agrostroy-zemlya"' in html and 'buyer_name:"Российский девелопер"' in html
+    assert 'kind:"closed",date:"2026-07-08"' in html
+    assert "сделка описана как сложная многосторонняя структура" not in html.lower()
+
+
+def test_artem_feedback_ui_invariants():
+    """Ключевые UX-правки из ревью не должны исчезнуть при следующем прогоне."""
+    html = INDEX.read_text(encoding="utf-8")
+    assert 'class="hero-brand"' in html, "на главной снова пропал логотип"
+    assert 'window.hsTimer=null' in html and 'hsTimer=setInterval' not in html, \
+        "автопереключение слайдера вернулось"
+    assert 'Сопоставимых сделок с теми же сторонами или темой пока не найдено' in html
+    assert 'Сделок с теми же сторонами или с той же темой в базе нет' not in html
+    assert 'Показатели таргета' not in html
+    assert 'mailto:' not in html
+    assert 'Ход сделки' in html and 'openCorrectionDialog' in html
+    assert 'По этой сделке раскрыто немного деталей' in html
