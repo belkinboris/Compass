@@ -237,7 +237,9 @@ def test_launch_ui_contains_requested_changes():
     assert "navigator.share" in html
     assert "fnsChart" in html and "as_of_year" in html
     assert 'data-fnstab="ownership"' in html and "ownershipHtml" in html
-    assert "Связи по сделкам" in html and "companyRelationshipHtml" in html
+    assert "Связи по сделкам" not in html and "companyRelationshipHtml" not in html
+    assert "Другие сделки с участием" in html and "openCompanyDealsDialog" in html
+    assert "Подробные карточки" not in html and "Также упомина" not in html
     assert "Сравнение компаний" in html and "Добавить к сравнению" in html
     assert "#/compare" in html and "compare-grid" in html and "data-co-compare" in html
     assert 'id="savefeed"' in html and "Подборка сохранена" in html
@@ -418,3 +420,15 @@ def test_fns_ownership_normalizer_accepts_direct_api_fns_shape():
         'ООО "Текущий участник"', "Иванов Иван Иванович",
     }
     assert sorted(owner["share_percent"] for owner in rows[1]["owners"]) == [25, 75]
+
+
+def test_company_page_uses_one_compact_deal_section():
+    """Карточка компании не возвращается к трём дублирующим огромным блокам."""
+    html = Path("static/index.html").read_text(encoding="utf-8")
+    assert "companyDealsCompactHtml" in html
+    assert "openCompanyDealsDialog" in html
+    assert "Другие сделки с участием ${esc(c?c.name" in html
+    assert "Упоминания в источниках" in html
+    assert "Связи по сделкам" not in html
+    assert "Подробные карточки" not in html
+    assert "Также упоминается" not in html

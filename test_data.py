@@ -580,3 +580,90 @@ def test_account_async_render_is_revealed():
     html = INDEX.read_text(encoding="utf-8")
     account = html[html.index("async function renderAccount"):html.index("/* Комментарии", html.index("async function renderAccount"))]
     assert account.count("rerun();") >= 2
+
+
+def test_flowwow_yandex_is_one_lifecycle(base, deals):
+    """Переговоры и срыв Flowwow/Яндекс живут в одной карточке."""
+    ids = set(ids_of(deals))
+    assert "g718e3d0e" in ids
+    assert "gea8ea954" not in ids
+    assert base["merged"].get("gea8ea954") == "g718e3d0e"
+    assert base["merged_deal_stages"].get("gea8ea954") == "negotiations-2026-02-09"
+    card = next(d for d in deals if d["id"] == "g718e3d0e")
+    assert card["status"] == "Не состоялась"
+    assert card.get("buyer") == "yandex"
+    assert card.get("target") == "g578c62cd"
+    assert [(e.get("kind"), e.get("date")) for e in card.get("events", [])] == [
+        ("negotiations", "2026-02-09"),
+        ("cancelled", "2026-05-28"),
+    ]
+
+
+def test_reviewed_duplicate_cards_are_reconciled(base, deals):
+    """Ручная ревизия дублей и ролей не должна откатываться."""
+    ids = set(ids_of(deals))
+    pairs = {
+        "gadce1d9c": "g676504a3",
+        "g68297df0": "g40477661",
+        "g8fe01e40": "g324faec6",
+        "g0ca2ebf0": "baltika",
+        "gb1f65e04": "hugoboss",
+        "gb1866587": "berizaryad",
+    }
+    for legacy, canonical in pairs.items():
+        assert legacy not in ids
+        assert base["merged"].get(legacy) == canonical
+
+    labquest = next(d for d in deals if d["id"] == "g40477661")
+    assert labquest.get("buyer") == "g67ef3e91"
+    assert labquest.get("target") == "g0b6a8c17"
+    assert labquest.get("seller") == "Александр и Рашида Марковы"
+    assert "g0b6a8c17" in base["companies"]
+
+
+def test_sequential_tranches_remain_separate(base, deals):
+    """Две покупки 3S Group — связанные, но самостоятельные транзакции."""
+    by_id = {d["id"]: d for d in deals}
+    first, second = by_id["geda130b6"], by_id["gdd85a5b9"]
+    assert first["date"] == "2023-12-28"
+    assert second["date"] == "2024-06-04"
+    assert first.get("related_deal_ids") == ["gdd85a5b9"]
+    assert second.get("related_deal_ids") == ["geda130b6"]
+    assert first.get("separate_transaction_reviewed") is True
+    assert second.get("separate_transaction_reviewed") is True
+    assert first.get("seller") == second.get("seller") == "Руслан Сеюков"
+
+
+def test_ing_sale_is_one_lifecycle(base, deals):
+    """Объявление и отмена продажи ИНГ Банка — одна карточка."""
+    ids = set(ids_of(deals))
+    assert "g2d90c4d5" in ids
+    assert "geb8eaeab" not in ids
+    assert base["merged"].get("geb8eaeab") == "g2d90c4d5"
+    assert base["merged_deal_stages"].get("geb8eaeab") == "announced-2025-01-28"
+    card = next(d for d in deals if d["id"] == "g2d90c4d5")
+    assert card.get("buyer") == "gc905c016"
+    assert card.get("target") == "gc0e9c501"
+    assert card.get("seller_id") == "g84ef6ac1"
+    assert card.get("status") == "Не состоялась"
+    assert [(e.get("kind"), e.get("date")) for e in card.get("events", [])] == [
+        ("signed", "2025-01-28"),
+        ("cancelled", "2026-04-07"),
+    ]
+
+
+def test_high_confidence_party_corrections_are_kept(deals):
+    """Ручная проверка источников не должна теряться при новых прогонах."""
+    by_id = {d["id"]: d for d in deals}
+    expected = {
+        "g02a89309": ("gf1f56e08", "g67b53b6a", "gee90a2b1"),
+        "g18569a1c": ("gc9913f2a", "g8cff91963", "ge00b1b13"),
+        "gbb7e25e1": ("g549ab474", "g2e85f5e5", "g7ffb3b7a"),
+        "g90363dc7": ("ged6b4e16", "g04181f17", "gda7d982b"),
+    }
+    for deal_id, (buyer, target, seller) in expected.items():
+        card = by_id[deal_id]
+        assert card.get("buyer") == buyer
+        assert card.get("target") == target
+        assert card.get("seller_id") == seller
+        assert card.get("party_evidence"), deal_id

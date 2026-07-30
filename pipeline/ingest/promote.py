@@ -54,6 +54,7 @@ import os
 import re
 import sys
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -73,6 +74,18 @@ WORD_CURRENCY = re.compile(r'\b(?:руб(?:лей|ля|\.)?|долл(?:аров|
 PLACEHOLDER = re.compile(r'^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$', re.I)
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 PRESENT_CLOSED = re.compile(r'\b(?:покупает|приобретает|прода[её]т|созда[её]т|получает|входит|проводит|привлекает|выкупает)\b', re.I)
+HOME_PATHS = {'', '/', '/ru', '/ru/', '/index.html'}
+
+
+def source_is_homepage(url):
+    try:
+        parsed = urlparse(str(url or ''))
+    except Exception:
+        return True
+    path = parsed.path or '/'
+    return (parsed.scheme not in {'http', 'https'} or not parsed.netloc
+            or path.lower() in HOME_PATHS
+            )
 
 
 def industries():
@@ -95,6 +108,8 @@ def check(draft, base, idx, inds):
     src = [s for s in (draft.get('src') or []) if len(s) > 1 and str(s[1]).startswith('http')]
     if not src:
         bad.append('нет ссылки на источник')
+    elif all(source_is_homepage(x[1]) for x in src):
+        bad.append('источник ведёт только на главную страницу')
     if not draft.get('ind'):
         hold.append('отрасль не определилась — у предмета сделки нет профиля в базе')
     elif draft.get('ind') not in inds:
@@ -105,12 +120,22 @@ def check(draft, base, idx, inds):
         bad.append('в продавце заглушка, а не имя')
     if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
         hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершённому действию')
+    if draft.get('type') in ('M&A', 'Продажа недвижимости', 'Выкуп доли'):
+        if not (draft.get('buyer') or draft.get('buyer_name')):
+            hold.append('для M&A не установлен покупатель')
+        if not (draft.get('target') or draft.get('asset_id') or draft.get('asset')):
+            hold.append('для M&A не установлен предмет сделки')
+        parsed = draft.get('parsed_parties') or {}
+        if parsed.get('seller') and not (draft.get('seller') or draft.get('seller_id')):
+            hold.append('в источнике назван продавец, но он не перенесён в карточку')
     parties = [flat(draft.get(f)) for f in ('buyer_name', 'seller', 'asset') if draft.get(f)]
     if len(parties) != len(set(parties)):
         bad.append('одна и та же сторона стоит в двух ролях')
     found, why = matcher.match(
         {'title': draft.get('title'), 'date': draft.get('date'),
-         'url': src[0][1] if src else None}, idx)
+         'url': src[0][1] if src else None, 'buyer': draft.get('buyer_name'),
+         'asset': draft.get('asset'), 'seller': draft.get('seller'),
+         'status': draft.get('status')}, idx)
     if found:
         bad.append('такая сделка уже есть в базе: %s (%s)' % (found, why))
     if not bad and NEW_CARDS_NEED_REVIEW:
@@ -147,12 +172,21 @@ def to_card(draft, deal_id):
         card['events'] = draft['events']
     if draft.get('seller'):
         card['seller_src'] = 'text'
+    source_url = next((s[1] for s in card.get('src', []) if len(s) > 1 and str(s[1]).startswith('http')), None)
+    if source_url:
+        evidence = {}
+        for role, field in (('buyer', 'buyer_name'), ('target', 'asset'), ('seller', 'seller')):
+            if card.get(field):
+                evidence[role] = [{'value': card[field], 'field': field,
+                                   'method': 'explicit_news_title', 'url': source_url}]
+        if evidence:
+            card['party_evidence'] = evidence
     return card
 
 
 def main(write):
     data = json.load(open(DATA, encoding='utf-8'))
-    idx = matcher.index_base(data['deals'])
+    idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
     inds = industries()
     existing = {d['id'] for d in data['deals']}
 

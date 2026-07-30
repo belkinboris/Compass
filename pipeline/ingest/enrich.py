@@ -73,7 +73,7 @@ UPDATES = os.path.join(ROOT, 'data', 'inbox', 'updates')
 
 # Сильное совпадение — то, в котором название сделки совпало дословно (в
 # кавычках) или совпал адрес источника. Слабое — только общие слова заголовка.
-STRONG = ('тот же адрес источника', 'название в кавычках', 'названия в кавычках', 'названий в кавычках')
+STRONG = ('тот же адрес источника', 'название в кавычках', 'названия в кавычках', 'названий в кавычках', 'совпали покупатель и предмет')
 
 STATUS_RANK = {
     'Обсуждается': 10,
@@ -99,6 +99,29 @@ def agree(a, b):
     if not na or not nb:
         return False
     return na == nb or na in nb or nb in na
+
+
+def exact_company_id(value, comps, match_keys=None):
+    """Однозначное точное совпадение имени с профилем; эвристики запрещены."""
+    key = norm(value)
+    if not key:
+        return None
+    found = []
+    for cid, row in (comps or {}).items():
+        values = [row.get('name'), row.get('legal_name'), *((match_keys or {}).get(cid) or [])]
+        if any(norm(x) == key for x in values if x):
+            found.append(cid)
+    return found[0] if len(found) == 1 else None
+
+
+def evidence_prop(role, value, item, field):
+    url = str(item.get('url') or '')
+    if not value or not url.startswith('http'):
+        return None
+    return ('party_evidence', {
+        'role': role, 'value': value, 'field': field,
+        'method': 'explicit_news_title', 'url': url,
+    }, 'добавить', 'роль подтверждена заголовком источника')
 
 
 def informative_title_update(old, new):
@@ -137,17 +160,20 @@ def current_value(deal, field, comps):
     if field == 'buyer_name':
         ref = (comps.get(deal.get('buyer')) or {}).get('name')
         return ref or (deal.get('buyer_name') if has(deal.get('buyer_name')) else None)
+    if field == 'asset':
+        ref = (comps.get(deal.get('target') or deal.get('asset_id')) or {}).get('name')
+        return ref or (deal.get('asset') if has(deal.get('asset')) else None)
     return deal.get(field) if has(deal.get(field)) else None
 
 
-def proposals(deal, item, names, comps):
+def proposals(deal, item, names, comps, match_keys=None):
     """Что новость может дать карточке: список (поле, значение, вид, пояснение).
 
     Вид: «добавить» — поле пусто; «обновить» — статус вперёд; «расхождение» —
     новость называет другое значение заполненного поля (в базу не идёт).
     """
     text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
-    buyer, _asset, seller = draft.guess_parties(item.get('title'))
+    buyer, asset, seller = draft.guess_parties(item.get('title'))
     out = []
 
     url = str(item.get('url') or '')
@@ -156,15 +182,38 @@ def proposals(deal, item, names, comps):
         label = names.get(item.get('source_id')) or item.get('source_id') or 'источник'
         out.append(('src', [label, url], 'добавить', 'ещё один источник'))
 
-    for field, guess in (('sum', draft.guess_sum(text)), ('seller', seller),
-                         ('buyer_name', buyer)):
+    sum_guess = draft.guess_sum(text)
+    if sum_guess:
+        current = current_value(deal, 'sum', comps)
+        if not current:
+            out.append(('sum', sum_guess, 'добавить', 'в карточке поле пусто'))
+        elif not agree(sum_guess, current):
+            out.append(('sum', sum_guess, 'расхождение', 'в карточке «%s»' % str(current)[:60]))
+
+    # Стороны и предмет не теряются: при однозначном совпадении сохраняем ссылку
+    # на профиль, иначе — дословное имя из заголовка. Заполненное поле не трогаем.
+    role_specs = [
+        ('buyer_name', 'buyer', buyer, 'buyer'),
+        ('asset', 'target', asset, 'target'),
+        ('seller', 'seller_id', seller, 'seller'),
+    ]
+    for text_field, ref_field, guess, role in role_specs:
         if not guess:
             continue
-        current = current_value(deal, field, comps)
-        if not current:
-            out.append((field, guess, 'добавить', 'в карточке поле пусто'))
-        elif not agree(guess, current):
-            out.append((field, guess, 'расхождение', 'в карточке «%s»' % str(current)[:60]))
+        current = current_value(deal, text_field, comps)
+        if current:
+            if not agree(guess, current):
+                out.append((text_field, guess, 'расхождение', 'в карточке «%s»' % str(current)[:60]))
+            continue
+        cid = exact_company_id(guess, comps, match_keys)
+        if cid:
+            out.append((ref_field, cid, 'добавить', 'однозначно найден профиль компании'))
+            ev = evidence_prop(role, guess, item, ref_field)
+        else:
+            out.append((text_field, guess, 'добавить', 'в карточке поле пусто'))
+            ev = evidence_prop(role, guess, item, text_field)
+        if ev:
+            out.append(ev)
 
     status = draft.guess_status(text)
     current_status = deal.get('status')
@@ -185,10 +234,12 @@ def proposals(deal, item, names, comps):
 
     event = draft.guess_event(item)
     if event:
-        known_kinds = {str(e.get('kind') or '') for e in (deal.get('events') or []) if isinstance(e, dict)}
-        # Один этап одного вида достаточно: пять публикаций о закрытии — не
-        # пять закрытий. Дополнительные ссылки всё равно сохраняются в src.
-        if event.get('kind') not in known_kinds:
+        known_events = {(str(e.get('kind') or ''), str(e.get('date') or ''))
+                        for e in (deal.get('events') or []) if isinstance(e, dict)}
+        event_key = (str(event.get('kind') or ''), str(event.get('date') or ''))
+        # Несколько публикаций об одном этапе в один день не создают дубли.
+        # Этапы одного вида в разные даты допустимы, например два согласования.
+        if event_key not in known_events:
             out.append(('event', event, 'добавить', 'новый подтверждённый этап сделки'))
     return out
 
@@ -202,6 +253,13 @@ def apply_props(deal, props):
             deal.setdefault('src', []).append(value)
         elif field == 'event':
             deal.setdefault('events', []).append(value)
+            deal['events'].sort(key=lambda e: (str(e.get('date') or ''), str(e.get('kind') or '')))
+        elif field == 'party_evidence':
+            role = value.get('role')
+            row = {k: v for k, v in value.items() if k != 'role'}
+            bucket = deal.setdefault('party_evidence', {}).setdefault(role, [])
+            if not any(x.get('url') == row.get('url') and x.get('value') == row.get('value') for x in bucket):
+                bucket.append(row)
         else:
             deal[field] = value
             if field == 'seller':
@@ -298,7 +356,7 @@ def main(argv):
             held.append((item, deal, [('—', '', 'расхождение',
                                        'слабое совпадение: %s' % item.get('why'))]))
             continue
-        props = proposals(deal, item, names, data['companies'])
+        props = proposals(deal, item, names, data['companies'], data.get('match_keys'))
         clash = [p for p in props if p[2] == 'расхождение']
         good = [p for p in props if p[2] != 'расхождение']
         if clash:

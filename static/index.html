@@ -565,26 +565,46 @@ a.dp-asset-name:hover{color:var(--accent)}
 .co-nums .val{font-family:var(--f-display);font-weight:600;font-size:15px;margin-top:3px}
 .filters select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
 
-/* Связи компании по сделкам. Это не предполагаемая аффилированность: каждая
-   связь возникает только из структурированной роли в конкретной карточке. */
-.relationship-shell{margin:0 0 36px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.relationship-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:22px 24px 16px;border-bottom:1px solid var(--line-soft)}
-.relationship-head h2{font-family:var(--f-display);font-size:25px;font-weight:400;line-height:1.2;margin-top:5px}
-.relationship-body{padding:22px 24px 24px}
-.relationship-intro{max-width:76ch;margin:0 0 18px;color:var(--muted);font-size:13.5px;line-height:1.6}
-.relationship-map{display:grid;grid-template-columns:minmax(170px,.72fr) minmax(0,2.4fr);gap:18px;align-items:stretch}
-.relationship-center{display:flex;flex-direction:column;justify-content:center;min-height:150px;padding:22px;border:1px solid var(--accent);background:var(--accent-deep);color:var(--ivory);position:relative}
-.relationship-center:after{content:"";position:absolute;right:-19px;top:50%;width:19px;height:1px;background:var(--line)}
-.relationship-center .name{font-family:var(--f-display);font-size:22px;line-height:1.25;margin-top:7px}
-.relationship-center .label{color:#BFD0C6}
-.relationship-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.relationship-card{display:block;border:1px solid var(--line);background:var(--paper);padding:15px 16px;transition:border-color .2s,transform .2s,background .2s;min-width:0}
-.relationship-card:hover{border-color:var(--accent);background:var(--card);transform:translateY(-1px)}
-.relationship-card .name{display:inline-block;font-family:var(--f-display);font-size:17px;line-height:1.28;margin:5px 0 7px;border-bottom:1px solid transparent}.relationship-card .name:hover{color:var(--accent);border-color:var(--accent-soft)}
-.relationship-card .meta{display:flex;gap:7px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:11.5px;line-height:1.45}
-.relationship-role{display:inline-flex;align-items:center;min-height:24px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-deep)}
-.relationship-latest{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.relationship-latest:hover{color:var(--accent)}
-.relationship-more{margin-top:13px;font-size:12px;color:var(--muted)}
+/* Компактный список сделок компании. На странице остаётся короткая
+   выжимка; полный список открывается поверх страницы и не дублирует отдельные
+   блоки «связей», «подробных карточек» и «упоминаний». */
+.company-profile-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:13px 0;margin:0 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.company-profile-meta b{color:var(--ink);font-weight:600}
+.company-profile-meta .dot::before{content:"·";margin-right:16px;color:var(--line)}
+.company-deals-compact{margin:0 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent}
+.company-deals-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0}
+.company-deals-head h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.2;margin-top:4px}
+.company-deals-preview{border-top:1px solid var(--line-soft)}
+.company-deal-preview{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-soft);transition:color .2s}
+.company-deal-preview:last-child{border-bottom:none}
+.company-deal-preview:hover{color:var(--accent)}
+.company-deal-preview .date{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.company-deal-preview .title{font-family:var(--f-display);font-size:16px;line-height:1.35}
+.company-deal-preview .meta{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.company-deal-preview .sum{font-size:12px;white-space:nowrap;text-align:right}
+.company-deals-empty{padding:16px 20px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;line-height:1.55}
+.deal-list-dialog{width:min(860px,100%);max-height:min(86vh,860px);display:flex;flex-direction:column;padding:0;overflow:hidden}
+.deal-list-dialog .dialog-head{padding:22px 24px 17px;margin:0;border-bottom:1px solid var(--line-soft)}
+.deal-list-tabs{display:flex;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line-soft);overflow:auto}
+.deal-list-tabs button{white-space:nowrap;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}
+.deal-list-tabs button.on{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--ivory)}
+.deal-list-note{padding:11px 24px;color:var(--muted);font-size:12px;line-height:1.5;background:var(--paper);border-bottom:1px solid var(--line-soft)}
+.deal-list-scroll{overflow:auto;overscroll-behavior:contain;padding:0 24px 20px}
+.deal-list-item{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.deal-list-item:last-child{border-bottom:none}
+.deal-list-item .date{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.deal-list-item .title{font-family:var(--f-display);font-size:17px;line-height:1.35;border-bottom:1px solid transparent}
+.deal-list-item .title:hover{color:var(--accent);border-color:var(--accent-soft)}
+.deal-list-item .meta{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:5px}
+.deal-list-item .sum{font-size:12px;white-space:nowrap;text-align:right;padding-top:3px}
+.deal-list-empty{padding:30px 0;color:var(--muted);font-size:13px}
+.deal-mentions-toggle{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:14px}.deal-mentions-toggle summary{cursor:pointer;color:var(--accent);font-size:12.5px}.deal-mentions-toggle .deal-list-note{margin:12px 0 0;padding:11px 14px;border:1px solid var(--line-soft)}
+@media(max-width:720px){
+  .company-profile-meta{gap:7px 12px}.company-profile-meta .dot::before{margin-right:12px}
+  .company-deals-head{align-items:flex-start;padding:15px 0}.company-deals-head .chip{flex:0 0 auto}
+  .company-deal-preview{grid-template-columns:1fr auto;gap:6px 12px;padding:13px 0}.company-deal-preview .date{grid-column:1/-1}.company-deal-preview .sum{grid-row:2/4;grid-column:2}
+  .deal-list-dialog{height:min(88vh,820px);align-self:end;border-radius:14px 14px 0 0}.dialog-backdrop{align-items:end;padding:0}.deal-list-dialog .dialog-head{padding:19px 18px 15px}.deal-list-tabs{padding:10px 18px}.deal-list-note{padding:10px 18px}.deal-list-scroll{padding:0 18px 20px}.deal-list-item{grid-template-columns:1fr auto;gap:6px 12px}.deal-list-item .date{grid-column:1/-1}.deal-list-item .sum{grid-row:2/4;grid-column:2}
+}
 
 /* Сравнение компаний: выбор хранится в браузере, поэтому работает и до входа.
    Финансовые показатели подтягиваются из уже синхронизированной локальной БД. */
@@ -1335,11 +1355,8 @@ function companyDeals(id){
   companyDealsCache.set(id, result);
   return result;
 }
-/* «Сделок в базе» — только те, где компания названа стороной. Раньше сюда же
-   попадали упоминания по названию в заголовке (автопоиск), и число говорило не
-   то, что обещала подпись: у 82 профилей из 1809 оно было целиком собрано из
-   упоминаний, а сделок со стороной не было ни одной. Упоминания считаем
-   отдельно — они показываются в разделе «Также упоминается». */
+/* Основной счётчик включает только сделки, где компания указана стороной.
+   Простые текстовые совпадения хранятся отдельно и доступны в полном списке. */
 const companyTotal = id => companyDeals(id).structured.length;
 const companyMentions = id => companyDeals(id).mentions.length;
 
@@ -3162,51 +3179,50 @@ const controlOver = id => DEALS
   .sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 
 
-/* Карта контрагентов по сделкам. Она намеренно не называет эти связи
-   корпоративными или аффилированными: это только роли, подтверждённые
-   карточками сделок. По каждой связи можно перейти к компании или к последней
-   общей сделке. */
-function companyRelationshipHtml(id, structured, companyName){
-  if(!structured || !structured.length) return "";
-  const relations=new Map();
-  const perspectiveRole=(d,otherId)=>{
-    const currentRole=companyRole(d,id), otherRole=companyRole(d,otherId);
-    if(currentRole==="Покупатель" && otherRole==="Предмет сделки") return "Объект покупки";
-    if(currentRole==="Покупатель" && otherRole==="Продавец") return "Продавец";
-    if(currentRole==="Продавец" && otherRole==="Покупатель") return "Покупатель";
-    if(currentRole==="Продавец" && otherRole==="Предмет сделки") return "Проданный актив";
-    if(currentRole==="Предмет сделки" && otherRole==="Покупатель") return "Покупатель";
-    if(currentRole==="Предмет сделки" && otherRole==="Продавец") return "Продавец";
-    return otherRole||"Участник сделки";
-  };
-  structured.forEach(d=>{
-    const ids=[d.buyer,d.seller_id,d.target,d.asset_id].filter((x,i,a)=>x&&x!==id&&a.indexOf(x)===i&&co(x));
-    ids.forEach(otherId=>{
-      const row=relations.get(otherId)||{id:otherId,count:0,roles:new Set(),latest:null};
-      row.count+=1;
-      row.roles.add(perspectiveRole(d,otherId));
-      if(!row.latest || String(d.date||"")>String(row.latest.date||"")) row.latest=d;
-      relations.set(otherId,row);
-    });
-  });
-  const all=[...relations.values()].sort((a,b)=>(b.count-a.count)||String(b.latest&&b.latest.date||"").localeCompare(String(a.latest&&a.latest.date||""))||co(a.id).name.localeCompare(co(b.id).name,"ru"));
-  if(!all.length) return "";
-  const shown=all.slice(0,8);
-  return `<section class="relationship-shell reveal">
-    <div class="relationship-head"><div><span class="label">По данным карточек</span><h2>Связи по сделкам</h2></div><span class="label num">${all.length} ${plural(all.length,"связь","связи","связей")}</span></div>
-    <div class="relationship-body">
-      <p class="relationship-intro">Показываем компании, которые участвовали в тех же сделках как покупатели, продавцы или объекты покупки. Это не схема группы и не вывод об аффилированности.</p>
-      <div class="relationship-map">
-        <div class="relationship-center"><span class="label">Компания</span><div class="name">${esc(companyName)}</div><span class="relationship-more">${structured.length} ${plural(structured.length,"сделка в базе","сделки в базе","сделок в базе")}</span></div>
-        <div class="relationship-grid">${shown.map(r=>{
-          const other=co(r.id), roles=[...r.roles].filter(Boolean).slice(0,3);
-          return `<article class="relationship-card"><span class="label">${r.count} ${plural(r.count,"общая сделка","общие сделки","общих сделок")}</span><br><a class="name" href="#/companies/${r.id}">${esc(other.name)}</a><div class="meta">${roles.map(x=>`<span class="relationship-role">${esc(x)}</span>`).join("")}</div>${r.latest?`<a class="relationship-latest" href="#/deal/${r.latest.id}">Последняя: ${fmtDate(r.latest.date)} · ${esc(r.latest.title)} →</a>`:""}</article>`;
-        }).join("")}</div>
-      </div>
-      ${all.length>shown.length?`<div class="relationship-more">Показаны 8 наиболее частых связей из ${all.length}. Полный список — в сделках компании ниже.</div>`:""}
-    </div>
+/* На странице компании показываем один компактный раздел сделок. Полный
+   список открывается в диалоге: подтверждённые роли и простые упоминания не
+   смешиваются, но и не дублируются тремя похожими блоками. */
+function companyDealRows(id, structured, mentions){
+  const confirmed=(structured||[]).slice().sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).map(d=>({
+    kind:"confirmed",date:d.date,title:d.title,href:`#/deal/${d.id}`,role:companyRole(d,id),type:d.type||"",sum:d.sum||""
+  }));
+  const seen=new Set(confirmed.map(x=>x.href));
+  const mentioned=[];
+  for(const m of (mentions||[]).slice().sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")))){
+    const key=`${m.url}|${m.title}`;
+    if(seen.has(m.url)||seen.has(key)) continue;
+    seen.add(key);
+    mentioned.push({kind:"mention",date:m.date,title:m.title,href:m.url,source:m.source||"Источник"});
+  }
+  return {confirmed,mentioned};
+}
+function companyDealsCompactHtml(id, structured, mentions){
+  const c=co(id), rows=companyDealRows(id,structured,mentions), preview=rows.confirmed.slice(0,2);
+  const confirmed=rows.confirmed.length, mentioned=rows.mentioned.length;
+  if(!confirmed&&!mentioned) return "";
+  return `<section class="company-deals-compact reveal">
+    <div class="company-deals-head"><div><span class="label">Сделки</span><h2>Другие сделки с участием ${esc(c?c.name:"компании")}</h2></div><button class="chip" id="openCompanyDeals">${confirmed?`Все сделки (${confirmed})`:`Упоминания (${mentioned})`}</button></div>
+    ${preview.length?`<div class="company-deals-preview">${preview.map(x=>`<a class="company-deal-preview" href="${x.href}">
+      <span class="date">${fmtDate(x.date)}</span><span><span class="title">${esc(x.title)}</span><span class="meta">${[x.role,x.type].filter(Boolean).join(" · ")}</span></span><span class="sum">${sumHtml(x.sum)}</span>
+    </a>`).join("")}</div>`:`<div class="company-deals-empty">В карточках сделок роль компании пока не указана. Найдено ${mentioned} ${plural(mentioned,"упоминание","упоминания","упоминаний")} в источниках.</div>`}
   </section>`;
 }
+function openCompanyDealsDialog(id){
+  const c=co(id); if(!c) return;
+  const {structured,mentions}=companyDeals(id), rows=companyDealRows(id,structured,mentions);
+  const old=document.querySelector(".dialog-backdrop"); if(old) old.remove();
+  const wrap=document.createElement("div"); wrap.className="dialog-backdrop";
+  const confirmedHtml=rows.confirmed.length?rows.confirmed.map(x=>`<div class="deal-list-item"><span class="date">${fmtDate(x.date)}</span><span><a class="title" href="${x.href}">${esc(x.title)}</a><div class="meta">${[x.role,x.type].filter(Boolean).join(" · ")}</div></span><span class="sum">${sumHtml(x.sum)}</span></div>`).join(""):`<div class="deal-list-empty">Сделок с подтверждённой ролью компании пока нет.</div>`;
+  const mentionsHtml=rows.mentioned.length?`<details class="deal-mentions-toggle"><summary>Упоминания в источниках (${rows.mentioned.length})</summary><div class="deal-list-note">Здесь собраны публикации, где компания названа, но её роль — покупатель, продавец или предмет сделки — ещё не подтверждена.</div>${rows.mentioned.map(x=>`<div class="deal-list-item"><span class="date">${fmtDate(x.date)}</span><span><a class="title" href="${x.href}" ${!String(x.href).startsWith("#")?'target="_blank" rel="noopener"':""}>${esc(x.title)}</a><div class="meta">Источник: ${esc(x.source)}${String(x.href).startsWith("#")?"":" ↗"}</div></span></div>`).join("")}</details>`:"";
+  wrap.innerHTML=`<div class="dialog deal-list-dialog" role="dialog" aria-modal="true" aria-labelledby="companyDealsTitle">
+    <div class="dialog-head"><div><span class="label">${esc(c.name)}</span><h2 id="companyDealsTitle">Другие сделки с участием ${esc(c.name)}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
+    <div class="deal-list-scroll">${confirmedHtml}${mentionsHtml}</div>
+  </div>`;
+  document.body.appendChild(wrap);
+  const close=()=>wrap.remove(); wrap.querySelector(".dialog-close").onclick=close;
+  wrap.onclick=e=>{if(e.target===wrap)close();};
+}
+
 
 
 const fnsMoney = v => {
@@ -3353,7 +3369,7 @@ function renderCompany(id){
       if(over.length) line.push(`<span class="tag steel">Под контролем: ${over.length}</span> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и ещё ${over.length-6}`:""}</span>`);
       return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
         ${line.join("")}
-        <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Считаем по сделкам базы: закрытая сделка M&amp;A с контрольным пакетом. Если компанию потом перепродали, а этой сделки в базе нет, здесь она не отразится.</span>
+        <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Контроль показан по закрытым сделкам в базе. Более поздние изменения могут ещё не быть учтены.</span>
       </div>`;
     })()}
     ${holding?`<div class="d-parties" style="margin-top:8px;font-size:14px">
@@ -3363,46 +3379,12 @@ function renderCompany(id){
     </div>`:""}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
-  <div class="facts reveal" style="margin-bottom:36px">
-    <div class="fact"><span class="label">${c.kpi[0]}</span><div class="val big num" style="font-size:17px">${c.kpi[1]}</div></div>
-    <div class="fact"><span class="label">Сделок в базе</span><div class="val big num">${structured.length}</div>
-      <span class="note">${structured.length
-        ? "Сделки, где компания названа стороной."
-        : "Стороной сделки компания не названа ни разу."}${mentions.length
-        ? ` Ещё ${mentions.length} ${plural(mentions.length,"упоминание","упоминания","упоминаний")} по названию — ниже.`
-        : ""}</span></div>
-    ${(()=>{
-      // Роли считаются по тем же четырём полям, что и «Сделок в базе», иначе
-      // числа на соседних плашках не сходятся: раньше продавец (seller_id) и
-      // объект (asset_id) не учитывались — у 123 компаний роли не давали в
-      // сумме показанного рядом количества сделок.
-      const asBuyer = DEALS.filter(d=>d.buyer===id).length;
-      const asSeller = DEALS.filter(d=>d.seller_id===id).length;
-      const asTarget = DEALS.filter(d=>d.target===id||d.asset_id===id).length;
-      if(!asBuyer && !asSeller && !asTarget) return "";
-      return `<div class="fact"><span class="label">Роль в сделках</span><div class="val num" style="font-size:15px">${
-        [asBuyer?`покупатель — ${asBuyer}`:"", asSeller?`продавец — ${asSeller}`:"", asTarget?`объект сделки — ${asTarget}`:""].filter(Boolean).join("<br>")
-      }</div><span class="note">В сумме — те же ${structured.length} ${plural(structured.length,"сделка","сделки","сделок")}.</span></div>`;
-    })()}
+  <div class="company-profile-meta reveal">
+    <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
+    ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
-  ${companyRelationshipHtml(id,structured,c.name)}
   <div id="fns-company"></div>
-  ${structured.length?`
-  <div class="sec-head reveal" style="margin-top:0"><h1 style="font-size:23px">Подробные карточки</h1></div>
-  ${structured.map(d=>`
-  <a class="deal-row reveal" href="#/deal/${d.id}">
-    <div><span class="label num">${fmtDate(d.date)}</span></div>
-    <div><div class="deal-title" style="font-size:17px">${d.title}</div>
-      <div class="deal-sub">${(()=>{const r=companyRole(d,id);return r?`<span class="role-badge">${r}</span> `:"";})()}${d.type}</div></div>
-    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div></div>
-  </a>`).join("")}`:""}
-  ${mentions.length?`
-  <div class="sec-head reveal" style="margin-top:${structured.length?'46px':'0'}"><h1 style="font-size:23px">Также упоминается</h1><p style="margin-top:6px">Найдено по названию компании в тексте карточек. Совпадение может быть неточным — проверьте первоисточник.</p></div>
-  ${mentions.map(m=>`
-  <a class="deal-row mini reveal" href="${m.url}" ${m.url.startsWith('#')?'':'target="_blank" rel="noopener"'}>
-    <div><span class="label num">${fmtDate(m.date)}</span></div>
-    <div><div class="deal-title" style="font-size:16px">${m.title}</div><div class="deal-sub">Источник: ${m.source}${m.url.startsWith('#')?'':' ↗'}</div></div>
-  </a>`).join("")}`:""}
+  ${companyDealsCompactHtml(id,structured,mentions)}
   ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   const compareButton=document.getElementById("compareCompany");
@@ -3413,6 +3395,8 @@ function renderCompany(id){
     if(note)note.textContent=result.selected?"Компания добавлена. Выберите ещё одну или две.":"Компания убрана из сравнения.";
     renderCompareTray();
   };
+  const openCompanyDeals=document.getElementById("openCompanyDeals");
+  if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
   mountMiniAI(c.name,"company",id);
   mountCompanyFns(id);
 }

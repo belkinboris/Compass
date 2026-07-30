@@ -443,3 +443,45 @@ def test_promote_holds_even_a_clean_new_card_pending_filter_review(base):
     bad, hold = promote.check(draft, base, idx, inds)
     assert not bad, "чистый черновик не должен получать отказ"
     assert any("живом потоке" in r for r in hold), hold
+
+
+def test_match_links_stage_by_explicit_buyer_and_asset():
+    """Разные формулировки новости не разрывают один жизненный цикл сделки."""
+    companies = {
+        "buyer-1": {"name": "Альфа Холдинг"},
+        "target-1": {"name": "Бета Сервис"},
+    }
+    idx = matcher.index_base([{
+        "id": "explicit-stage", "date": "2024-01-10",
+        "title": "Владелец рассматривает продажу сервиса",
+        "status": "Обсуждается", "src": [],
+        "buyer": "buyer-1", "target": "target-1",
+    }], companies)
+    found, why = matcher.match({
+        "title": "Регулятор согласовал приобретение актива",
+        "date": "2026-02-20", "url": None,
+        "buyer": "Альфа Холдинг", "asset": "Бета Сервис",
+    }, idx)
+    assert found == "explicit-stage"
+    assert "покупатель и предмет" in why
+
+
+def test_match_respects_reviewed_separate_transaction():
+    """Редакторская отметка запрещает склейку отдельного транша с этапом."""
+    companies = {
+        "buyer-1": {"name": "Альфа Холдинг"},
+        "target-1": {"name": "Бета Сервис"},
+    }
+    idx = matcher.index_base([{
+        "id": "separate-tranche", "date": "2025-01-10",
+        "title": "Первый отдельный транш",
+        "status": "Обсуждается", "src": [],
+        "buyer": "buyer-1", "target": "target-1",
+        "separate_transaction_reviewed": True,
+    }], companies)
+    found, _ = matcher.match({
+        "title": "Регулятор согласовал отдельную транзакцию",
+        "date": "2025-02-20", "url": None,
+        "buyer": "Альфа Холдинг", "asset": "Бета Сервис",
+    }, idx)
+    assert found is None

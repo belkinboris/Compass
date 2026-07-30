@@ -155,6 +155,13 @@ BUY_VERB = re.compile(
     r'|консолидировал[аи]?|получил[аио]?)\b', re.I)
 SELL_VERB = re.compile(r'\b(?:прода(?:л[аио]?|ёт|ет|ст)|реализовал[аи]?)\b', re.I)
 FROM_WHOM = re.compile(r'\bу\s+((?:[а-яё]+\s+){0,3}[«"А-ЯЁA-Z][^.;,]{2,60})')
+SALE_BUYER_MARKER = re.compile(
+    r'\b(?:компании|группе|банку|фонду|структуре|холдингу|инвестору|'
+    r'консорциуму|менеджменту|сотрудникам|покупателю|ритейлеру|девелоперу|'
+    r'оператору|предпринимателю|владельцу)\s+', re.I)
+GENERIC_ASSET_END = re.compile(
+    r'(?:^|\s)(?:дол[яиюей]|акци[яиюй]|пакет|бизнес|активы?|контроль|общество|'
+    r'предприятие|компания|100%)\s*(?:в)?$', re.I)
 
 
 def clean_name(text):
@@ -165,12 +172,43 @@ def clean_name(text):
     return text.strip()
 
 
-def guess_parties(title):
-    """(покупатель, предмет, продавец) — только то, что стоит в заголовке.
+def _split_sale_tail(tail):
+    """Разделить «актив компании/банку покупателю» без догадки по падежу.
 
-    Правила намеренно узкие: подлежащее до глагола покупки — покупатель, то,
-    что после «у …», — продавец. «Магазины у дома» отсекаются тем, что после
-    предлога должно стоять имя, а не строчное слово-обычность.
+    Берём только явный служебный маркер покупателя. Конструкция «доля в
+    компании X» намеренно не разбирается: в ней X обычно является предметом,
+    а не покупателем.
+    """
+    matches = list(SALE_BUYER_MARKER.finditer(tail))
+    if len(matches) > 1:
+        # Заголовок может описывать две параллельные продажи. Такой текст
+        # нельзя сводить к одному покупателю автоматически.
+        return clean_name(tail), None
+    for marker in reversed(matches):
+        prefix = tail[:marker.start()].strip(' ,;:-—')
+        suffix = tail[marker.end():].strip(' ,;:-—')
+        before = tail[max(0, marker.start()-3):marker.start()].lower().strip()
+        if not prefix or not suffix or before == 'в':
+            continue
+        marker_word = marker.group(0).strip().lower()
+        if marker_word == 'компании' and not re.search(r'[«"А-ЯЁA-Z0-9]', prefix):
+            # «Продала дочерние компании (X и Y)» — здесь слово «компании»
+            # описывает предмет, а не вводит покупателя.
+            continue
+        if GENERIC_ASSET_END.search(prefix):
+            continue
+        if len(suffix) > 100 or not re.search(r'[«"А-ЯЁA-Z0-9]', suffix):
+            continue
+        return clean_name(prefix), clean_name(suffix)
+    return clean_name(tail), None
+
+
+def guess_parties(title):
+    """(покупатель, предмет, продавец) — только явно названные стороны.
+
+    Подлежащее до глагола покупки — покупатель; сторона после «у» — продавец.
+    Для заголовков о продаже покупатель извлекается только после явного
+    маркера («компании», «банку», «фонду», «структуре» и т. п.).
     """
     title = re.sub(r'\s+', ' ', str(title or '')).strip()
     buyer = asset = seller = None
@@ -192,8 +230,8 @@ def guess_parties(title):
             head = title[:m.start()].strip()
             if head and len(head) < 70:
                 seller = clean_name(head)
-            asset = clean_name(title[m.end():])
-    cut = lambda s: (s[:80].rstrip(' ,;:-—') if s else None)
+            asset, buyer = _split_sale_tail(title[m.end():].strip())
+    cut = lambda s: (s[:100].rstrip(' ,;:-—') if s else None)
     return cut(buyer), cut(asset), cut(seller)
 
 
@@ -243,6 +281,7 @@ def build(item, companies):
         'buyer_name': buyer,
         'asset': asset,
         'seller': seller,
+        'parsed_parties': {'buyer': buyer, 'asset': asset, 'seller': seller},
         'ind': industry_for(item.get('title') or text, companies),
         'needs_review': True,
     }

@@ -35,6 +35,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 
 import classify                                     # noqa: E402
+import draft                                        # noqa: E402
 import match as matcher                             # noqa: E402
 
 RAW = os.path.join(ROOT, 'data', 'inbox', 'raw')
@@ -71,7 +72,7 @@ def to_date(published, fallback):
 def main(argv):
     rows = read_raw('--all' in argv)
     data = json.load(open(DATA, encoding='utf-8'))
-    idx = matcher.index_base(data['deals'])
+    idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
 
     result, counts, seen = [], {'not_a_deal': 0, 'enrich': 0, 'new': 0, 'duplicate': 0}, set()
     for row in rows:
@@ -79,8 +80,10 @@ def main(argv):
             counts['duplicate'] += 1
             continue
         seen.add(row['url'])
-        item = {'title': row.get('title'), 'url': row.get('url'),
-                'date': to_date(row.get('published'), row.get('fetched'))}
+        buyer, asset, seller = draft.guess_parties(row.get('title'))
+        item = {'title': row.get('title'), 'summary': row.get('summary'), 'url': row.get('url'),
+                'date': to_date(row.get('published'), row.get('fetched')),
+                'buyer': buyer, 'asset': asset, 'seller': seller}
         if not classify.looks_like_deal(item['title'], row.get('summary', '')):
             counts['not_a_deal'] += 1
             result.append(dict(item, source_id=row.get('source_id'), verdict='not_a_deal'))
