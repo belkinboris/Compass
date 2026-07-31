@@ -26,6 +26,7 @@ vedomosti.ru — проверено). Поэтому:
     python3 pipeline/ingest/fetch.py --verify         # проверить адреса лент
     python3 pipeline/ingest/fetch.py                  # обычный забор (нужна сеть)
 """
+import html
 import json
 import os
 import re
@@ -34,6 +35,8 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from xml.etree import ElementTree
+
+_unescape = html.unescape
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -85,6 +88,33 @@ def parse_rss(body, source_id):
     return out
 
 
+MERGERS_RU_BASE = 'https://mergers.ru'
+MERGERS_RU_BLOCK = re.compile(
+    r'<div class="news_box">\s*<p class="marb_10"><a class="underline" href="([^"]+)">([^<]+)</a></p>\s*'
+    r'<p>(.*?)</p>\s*<p class="small cb-mt-5 grey">(\d{2})\.(\d{2})\.(\d{4})<', re.S)
+
+
+def parse_mergers_ru_news(body, source_id):
+    """`/news/` — готовая лента, уже отфильтрованная площадкой под M&A: заметно
+    выше сигнал, чем у общих новостных RSS (Коммерсантъ и т. п. отдают всё
+    подряд, включая спорт и котировки — см. E9). Разбор регуляркой, а не HTML-
+    парсером: структура блока `news_box` простая и стабильная, тянуть парсер
+    ради одной страницы незачем."""
+    text = body.decode('utf-8', 'ignore') if isinstance(body, bytes) else body
+    out = []
+    for url, title, summary, dd, mm, yyyy in MERGERS_RU_BLOCK.findall(text):
+        clean_summary = re.sub(r'<[^>]+>', ' ', summary)
+        clean_summary = _unescape(re.sub(r'\s+', ' ', clean_summary)).strip()[:600]
+        out.append({
+            'source_id': source_id,
+            'url': url if url.startswith('http') else MERGERS_RU_BASE + url,
+            'title': _unescape(title).strip(),
+            'summary': clean_summary,
+            'published': '%s-%s-%s' % (yyyy, mm, dd),
+        })
+    return out
+
+
 def parse_telegram(body, source_id):
     """Веб-зеркало канала t.me/s/<канал>: посты лежат в div-ах с классом
     tgme_widget_message_text. Разбираем регулярками, а не HTML-парсером, чтобы
@@ -123,8 +153,12 @@ def fetch_source(src, offline=False):
             return [], 'HTTP %s' % e.code
         except Exception as e:                                  # noqa: BLE001
             return [], '%s: %s' % (type(e).__name__, str(e)[:80])
-    items = parse_telegram(body, src['id']) if src['kind'] == 'telegram' \
-        else parse_rss(body, src['id'])
+    if src['kind'] == 'telegram':
+        items = parse_telegram(body, src['id'])
+    elif src['kind'] == 'html_mergers':
+        items = parse_mergers_ru_news(body, src['id'])
+    else:
+        items = parse_rss(body, src['id'])
     return items, None
 
 

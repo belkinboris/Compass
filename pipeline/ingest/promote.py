@@ -154,7 +154,13 @@ def new_id(existing):
 
 
 def to_card(draft, deal_id):
-    """Черновик -> карточка базы. Пустые поля не выдумываются."""
+    """Черновик -> карточка базы. Пустые поля не выдумываются.
+
+    `eco`/`law` заполняются заглушками («—», как у всей базы), а не
+    опускаются: интерфейс много где читает `d.law.adv`/`d.eco.rationale`
+    без проверки на существование объекта — до первой настоящей записи
+    (E9 держал промоут на паузе год) это не давало о себе знать, но карточка
+    без `eco`/`law` вообще рушит и «Консультантов», и «Аналитику»."""
     card = {
         'id': deal_id,
         'date': draft['date'],
@@ -164,6 +170,9 @@ def to_card(draft, deal_id):
         'status': draft.get('status') or 'Обсуждается',
         'src': draft['src'],
         'from_ingest': True,
+        'eco': {'sum': '—', 'share': '—', 'val': '—', 'target_fin': '—',
+                'fin': '—', 'rationale': '—', 'context': '—', 'finadv': '—'},
+        'law': {'struct': '—', 'appr': '—', 'adv': [], 'terms': '—'},
     }
     for field in ('sum', 'seller', 'buyer_name', 'asset'):
         if draft.get(field):

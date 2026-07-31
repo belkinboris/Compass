@@ -105,6 +105,8 @@ nav a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;b
 nav a:hover{color:var(--ink)}
 nav a.on{color:var(--ink)}
 nav a.on::after,nav a:hover::after{width:100%}
+.nav-unread{position:absolute;top:-6px;right:-14px;background:var(--accent);color:var(--ivory);
+  font-size:9.5px;font-weight:700;line-height:1;padding:3px 4.5px;border-radius:999px;letter-spacing:0}
 .wrap{max-width:1120px;margin:0 auto;padding:74px 28px 80px}
 /* На узких экранах пять пунктов меню не помещались в строку и растягивали
    страницу — появлялся горизонтальный скролл всего документа. Сжимаем шапку
@@ -755,6 +757,12 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .thread-list{display:grid;gap:5px}.thread-item{padding:9px 10px;text-align:left;font-size:12.5px;color:var(--muted);border-radius:3px}.thread-item.on{background:var(--accent-soft);color:var(--accent-deep)}
 .thread-empty{font-size:12px;color:var(--muted);padding:8px}
 
+.materials-pitch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+.mp-item{background:var(--card);border:1px solid var(--line);padding:20px;min-width:0}
+.mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
+.mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
+@media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
+
 .webinar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .webinar-card{background:var(--card);border:1px solid var(--line);padding:24px}
 .webinar-card h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.25;margin:8px 0}
@@ -793,7 +801,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
       <a href="#/" data-r="deals">Сделки</a>
       <a href="#/companies" data-r="companies">Компании</a>
       <a href="#/advisors" data-r="advisors">Консультанты</a>
-      <a href="#/webinars" data-r="webinars">Вебинары</a>
+      <a href="#/materials" data-r="materials">Материалы</a>
       <a href="#/analytics" data-r="analytics">Аналитика</a>
       <a href="#/assistant" data-r="assistant">Ассистент</a>
       <a href="#/account" data-r="account" id="navAccount">Войти</a>
@@ -815,7 +823,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
         <a href="#/">Сделки</a>
         <a href="#/companies">Компании</a>
         <a href="#/advisors">Консультанты</a>
-        <a href="#/webinars">Вебинары</a>
+        <a href="#/materials">Материалы</a>
         <a href="#/assistant">Ассистент</a>
       </div>
       <div class="foot-col">
@@ -1373,7 +1381,7 @@ function firmDeals(id){
   const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
   return {
-    full: DEALS.filter(d=>d.law.adv.some(a=>rx.test(a[1]))||rx.test(d.eco.finadv||"")),
+    full: DEALS.filter(d=>(d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||"")),
     mini: MINI_DEALS.filter(m=>m.firm===id),
     bulk: BULK_DEALS.filter(b=>b.firm===id)
   };
@@ -1653,7 +1661,7 @@ function route(){
   else if(page==="deal"){
     if(!bulkLoaded) app.innerHTML = loadingHtml(sub==="stage" ? "Этап сделки" : "Карточка сделки");
     else if(sub==="stage" && subarg) renderDealStage(arg, subarg);
-    else renderDeal(arg);
+    else renderDeal(arg, qs);
     mark("deals");
   }
   else if(page==="compare"){
@@ -1691,7 +1699,7 @@ function route(){
     else renderAnalytics();
     mark("analytics");
   }
-  else if(page==="webinars"){renderWebinars();mark("webinars");}
+  else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
@@ -1716,7 +1724,7 @@ let activeThreadId = null;
 function buildContext(){
   return JSON.stringify({
   full_deals:DEALS.filter(d=>!d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src})),
-  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:(d.law.adv[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:(d.eco.rationale||"").slice(0,220)})),
+  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)})),
   compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
   channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
   firms_catalog:FIRMS.map(f=>f.n),
@@ -1754,6 +1762,26 @@ function localAnswer(q){
   const hit = DEALS.find(d=>(d.title+" "+d.ind+" "+d.type).toLowerCase().split(/[^а-яa-zё0-9]+/).some(w=>w.length>3&&s.includes(w)));
   if(hit) return `Похоже, вы про ${link(hit)} (${hit.ind}, ${fmtDate(hit.date)}).`;
   return `В демо-базе ${TOTAL_DEALS()} сделок — точного совпадения нет. Попробуйте: «самая крупная сделка», «кто сопровождал сделки», «выходы иностранцев». С ключами Yandex AI Studio доступен полноценный ИИ и режим «По всему интернету».`;
+}
+
+/* ИИ отвечает не мгновенно: DeepSeek думает перед каждым ответом (до 8000
+   токенов рассуждения, отключить нельзя — main.py, THINKING_BUDGET), а на
+   таймауте сервер повторяет попытку до трёх раз по 60 секунд. Без обратной
+   связи статичная строка «Ищу по базе…» после 20–30 секунд выглядит зависшей.
+   Таймер тикает раз в секунду и после порогов честно объясняет, что происходит,
+   вместо того чтобы молчать. */
+function aiWaitTimer(el, mode){
+  const base = mode==="web" ? "Ищу по базе и в интернете" : "Ищу по базе";
+  let s = 0;
+  const tick = () => {
+    el.textContent = s < 8 ? base + "…"
+      : s < 25 ? base + `… ИИ формирует ответ (${s} с)`
+      : base + `… дольше обычного, но ещё считаем — до минуты бывает нормой (${s} с)`;
+    s++;
+  };
+  tick();
+  const t = setInterval(tick, 1000);
+  return () => clearInterval(t);
 }
 
 async function aiAnswer(q, mode, meta){
@@ -2299,9 +2327,10 @@ function mountMiniAI(contextName, contextType="general", contextId=null){
   const send=async()=>{
     const v=input.value.trim();if(!v)return;
     push("user",esc(v));input.value="";
-    const w=push("ai wait",aiMode==="web"?"Ищу по базе и в интернете…":"Ищу по базе…");
+    const w=push("ai wait","");
+    const stopWait=aiWaitTimer(w,aiMode);
     const a=await aiAnswer(`Контекст: пользователь смотрит «${contextName}». Вопрос: ${v}`, aiMode, {saveThread:true,contextType,contextId});
-    w.classList.remove("wait");w.innerHTML=a;
+    stopWait();w.classList.remove("wait");w.innerHTML=a;
   };
   btn.onclick=send;
   input.addEventListener("keydown",e=>{if(e.key==="Enter")send();});
@@ -2781,7 +2810,7 @@ async function mountDealTools(d){
   };
 }
 
-function renderDeal(id){
+function renderDeal(id, qs){
   const d = DEALS.find(x=>x.id===id);
   if(!d){
     // Карточку слили с дублем — открываем ту, что осталась, а не общую ленту.
@@ -2794,7 +2823,11 @@ function renderDeal(id){
     }
     renderDeals(); return;
   }
-  lens = "overview";
+  // ?lens=eco / ?lens=law — прямая ссылка сразу на линзу, а не на «Обзор».
+  // Нужно для постов в телеграме: «Показатели» и «Согласования» ведут читателя
+  // сразу в нужный раздел карточки, а не заставляют искать вкладку самому.
+  const wantLens = new URLSearchParams(qs||"").get("lens");
+  lens = (wantLens==="eco"||wantLens==="law") ? wantLens : "overview";
   // тип из текстового поля type главнее сохранённого kind: текст писали люди,
   // kind проставлял генератор и мог ошибиться (дефолт acquisition)
   const kindFromType = dealKindOf(d.type);
@@ -2821,9 +2854,9 @@ function renderDeal(id){
   ${timelineHtml(d)}
   ${sparseNoticeHtml(d)}
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
-    <button data-l="overview" class="on">Обзор</button>
-    <button data-l="eco"${ecoHasContent(d)?"":' class="thin"'}>Экономист</button>
-    <button data-l="law"${lawHasContent(d)?"":' class="thin"'}>Юрист</button>
+    <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
+    <button data-l="eco" class="${[lens==="eco"&&"on",!ecoHasContent(d)&&"thin"].filter(Boolean).join(" ")}">Экономист</button>
+    <button data-l="law" class="${[lens==="law"&&"on",!lawHasContent(d)&&"thin"].filter(Boolean).join(" ")}">Юрист</button>
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
@@ -3848,9 +3881,18 @@ function renderAnalytics(){
 }
 
 
-async function renderWebinars(){
-  app.innerHTML = `<div class="sec-head reveal"><span class="label">Практические эфиры</span><h1>Вебинары</h1><p>Разборы сделок, регулирования и рыночных практик с юристами, финансистами и консультантами.</p></div><div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
+async function renderMaterials(){
+  app.innerHTML = `<div class="sec-head reveal"><span class="label">Экспертный контур</span><h1>Материалы</h1><p>Колонки, разборы и вебинары от юристов, экономистов и консультантов рынка — под именем автора, рядом со сделками, которые он вёл.</p></div>
+  <div class="materials-pitch reveal">
+    <div class="mp-item"><h2>Ведите колонку</h2><p>Разбор сделки, комментарий к регулированию, отраслевой обзор — материал публикуется под именем автора и его фирмы и виден тем же читателям, что открывают карточки сделок.</p></div>
+    <div class="mp-item"><h2>Анонсируйте вебинары</h2><p>Дата, тема и ссылка на подключение — событие появляется здесь, а читатель добавляет его в свой календарь одним нажатием, чтобы не забыть о встрече.</p></div>
+    <div class="mp-item"><h2>Профиль автора</h2><p>Колонки и эфиры собираются на странице фирмы или консультанта в каталоге — рядом с реальными сделками, которые она вела.</p></div>
+  </div>
+  <p class="acct-note reveal">Раздел только открывается: ниже — уже объявленные эфиры, календарь и колонки появятся следующими. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
+  <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
+  const pitchLink=document.getElementById("materialsPitchLink");
+  if(pitchLink) pitchLink.onclick=e=>{e.preventDefault();openCorrectionDialog();};
   const mount=document.getElementById("webinarList");
   try{
     const r=await fetch("/api/webinars"); const rows=r.ok?await r.json():[];
@@ -3898,9 +3940,10 @@ async function renderAssistant(){
   };
   const answer=async q=>{
     push("user",esc(q));
-    const w=push("ai wait",aiMode==="web"?"Ищу по базе и в интернете (до минуты)…":"Ищу по базе…");
+    const w=push("ai wait","");
+    const stopWait=aiWaitTimer(w,aiMode);
     const a=await aiAnswer(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general"});
-    w.classList.remove("wait");w.innerHTML=a;box.scrollTop=box.scrollHeight;renderThreadList();
+    stopWait();w.classList.remove("wait");w.innerHTML=a;box.scrollTop=box.scrollHeight;renderThreadList();
   };
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
@@ -3937,6 +3980,18 @@ async function refreshMe(){
   }catch(e){ ME = null; }
   const a = document.getElementById("navAccount");
   if(a) a.textContent = ME ? ME.email.split("@")[0] : "Войти";
+  if(a){
+    const old=a.querySelector(".nav-unread"); if(old) old.remove();
+    if(ME){
+      try{
+        const rn=await fetch("/api/notifications");
+        const notifs=rn.ok?await rn.json():[];
+        const unread=notifs.filter(n=>!n.is_read).length;
+        if(unread) a.insertAdjacentHTML("beforeend",
+          `<span class="nav-unread" title="Непрочитанных уведомлений: ${unread}">${unread>9?"9+":unread}</span>`);
+      }catch(e){/* без сети значок просто не покажем */}
+    }
+  }
   return ME;
 }
 

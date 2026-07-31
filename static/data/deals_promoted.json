@@ -196,7 +196,7 @@
    "date": "2026-05-08",
    "title": "Группа ЛСР приобрела гостиничный комплекс Domina Пулково",
    "buyer": "gb396abf4",
-   "target": "g309e931d",
+   "target": "g7bbe19c2-target",
    "ind": "Недвижимость",
    "type": "M&A",
    "kind": "acquisition",
@@ -448,7 +448,19 @@
     ]
    ],
    "extra": "ГК «Свеза» приобрела 100% уставного капитала ООО «Центр фармацевтической упаковки» (ЦФУ) — предприятия, работающего с 2017 года в Обнинске (Калужская область) и специализирующегося на складной картонной упаковке для лекарственных средств и листках-вкладышах; на площадке занято около 100 сотрудников, среди клиентов — крупные российские фармпроизводители. Сумма и структура сделки сторонами не раскрываются; по данным Rusprofile (со ссылкой на Telegram-канал «Без рецепта»), по итогам 2025 года ЦФУ зафиксировал чистый убыток в 46 млн рублей. Это частью стратегии диверсификации «Свезы» в упаковочный сегмент: ранее холдинг приобрёл КБК «КАМА» в Пермском крае, а также «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр» в Ленинградской области; покупка ЦФУ усиливает и расширяет кластер «ММПОФ» в сегменте фармацевтической упаковки. Дополнительным стратегическим мотивом названа географическая близость производства в Обнинске к ключевым клиентам в Центральном федеральном округе и синергия производственных и R&D-компетенций группы. Примечательно, что в 2024 году ООО «ЦФУ» стало правопреемником ООО «Палладио» в РФ.",
-   "auto": true
+   "auto": true,
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-06-29",
+     "title": "Сделка завершена",
+     "note": "Сумма сделки и ее структура не раскрываются. Открытое в 2017 году в Обнинске Калужской области производство упаковки для фармацевтической отрасли сегодня входит в число лидеров своего сегмента и сотрудничает с крупнейшими российскими фармпроизводителями. Компа",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/GK-Sveza-kupila-Centr-farmacevticheskoj-upakovki-87117"
+     ]
+    }
+   ]
   },
   {
    "id": "g718e3d0e",
@@ -2142,6 +2154,10 @@
     [
      "UkrAgroConsult",
      "https://ukragroconsult.com/en/news/louis-dreyfus-moves-closer-to-selling-its-russian-assets/"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Rossijskie-aktivy-mezhdunarodnogo-zernotrejdera-Louis-Dreyfus-rasschityvaet-vykupit-AO-Gorizont-Indastriz-87159"
     ]
    ],
    "extra": "АО «Горизонт Индастриз» действовало через казахстанскую «дочку» ТОО «Темиртек»; в периметр сделки вошли ООО «Волгоградский элеватор», «Луис Дрейфус Восток» и «РусЭлКо» — 12 элеваторов и зерновой терминал в порту Азов общей мощностью хранения ~2 млн тонн. Предварительные договоры подписаны под условием получения разрешения правкомиссии по контролю за иностранными инвестициями; заявления планируется подать к августу 2026 года с последующим одобрением президента. Сделка заключается с существенным дисконтом ввиду накопленных долгов: «Горизонт Индастриз» уже погасила налоговую задолженность «РусЭлКо» в мае 2026 года. Аналитики допускают, что конечной целью является перепродажа активов крупному игроку; на рынке в качестве возможного бенефициара называют структуры, связанные с Искандаром Махмудовым, хотя учредители «Горизонт Индастриз» официально не раскрываются.",
@@ -2536,6 +2552,10 @@
     [
      "Abireg.ru (несостоявшиеся торги)",
      "https://abireg.ru/newsitem/115022/"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Rosimuschestvo-obyavilo-povtornye-torgi-po-prodazhe-akcij-nacionalizirovannogo-AO-Amber-Talvis-za-39-mlrd-rublej-87185"
     ]
    ],
    "extra": "Повторные торги проводятся в форме публичного предложения в электронной форме — в отличие от первого аукциона (18 июня 2026 г.), признанного несостоявшимся из-за полного отсутствия заявок; цена отсечения установлена на уровне 1,9 млрд руб., шаг понижения — 388,8 млн руб., задаток — 777,5 млн руб., приём заявок — до 5 августа, подведение итогов — 10 августа 2026 г. Лот — 62 486 обыкновенных именных акций (72,9% уставного капитала в 51,5 млн руб.); ещё 25,5% принадлежат «Росспиртпрому», 1,6% — 81 физлицу. Актив национализирован в июле 2024 г. по решению Тамбовского районного суда по иску Генпрокуратуры: структуры бывшего владельца Юрия Шефлера (деятельность признана экстремистской) в 2022–2023 гг. направили €38 млн в поддержку ВСУ; сам Шефлер внесён в список террористов и экстремистов Росфинмониторинга. По итогам 2025 г. выручка завода составила ~2,5 млрд руб. (+23% г/г), чистая прибыль — 869,5 млн руб.; пакет включён в план приватизации на 2026–2028 гг. Amber Beverage Group Holding оценила убытки от национализации в €10,1 млн и безуспешно пыталась оспорить решение суда.",
@@ -2549,7 +2569,19 @@
    "seller_src": "manual_2026",
    "target_was_seller": true,
    "asset": "акции АО «Амбер Талвис»",
-   "asset_share": "72,9%"
+   "asset_share": "72,9%",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-07-10",
+     "title": "Переговоры",
+     "note": "Шаг повышения цены составляет 194,5 млн руб., понижения — 388,8 млн руб. Размер задатка равняется 777,5 млн руб. Заявки на участие в торгах принимаются до 5 августа, итоги планируют подвести 10 августа. Лот включает 62 486 обыкновенных именных акций, составляю",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Rosimuschestvo-obyavilo-povtornye-torgi-po-prodazhe-akcij-nacionalizirovannogo-AO-Amber-Talvis-za-39-mlrd-rublej-87185"
+     ]
+    }
+   ]
   },
   {
    "id": "g373c03ad",
@@ -2668,6 +2700,10 @@
     [
      "Retailer.ru",
      "https://retailer.ru/set-kofeen-one-double-pereshla-pod-kontrol-fonda-bumerang-kapital/"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Set-kofeen-One-Double-pereshla-pod-kontrol-fonda-Bumerang-Kapital-87101"
     ]
    ],
    "extra": "Покупателем выступило ООО «Бумеранг кофе» — дочерняя структура фонда «Бумеранг Капитал» Вагана Гаспаряна (экс-руководитель «Сбербанк Капитала» в 2020–2023 гг.); факт смены владельца зафиксирован в СПАРК в июне 2026 г. Сделка охватывает 102 кофейни One & Double (преимущественно на транспортных узлах Москвы и Подмосковья), 7 точек бабл-ти Drink Point и 11 точек хот-догов Grillz Hot Dog; сеть работает с 2017 года, часть точек — по франшизе, большинство — собственные. По оценке основателя One Group Сергея Румянцева, подобные сети оцениваются в 4–5 EBITDA; стратегия «Бумеранг Капитала», по мнению Михаила Бурмистрова («Infoline-Аналитика»), направлена на построение вертикальной компании, объединяющей производство, дистрибуцию и розницу, при этом купленные сети необязательно будут переведены под единый бренд. Сделка закрыта на фоне активной консолидации портфеля фонда: в апреле 2026 г. «Бумеранг Капитал» приобрёл «Даблби» и 50% «Цех 85», ведёт переговоры о покупке Cofix; продавцы — основатели сети Михаил Норкин и Андрей Сафронюк — от официальных комментариев отказались.",
@@ -9090,7 +9126,19 @@
    ],
    "extra": "Раунд разделён между двумя инвесторами: Synergy Ventures вложила 7,5 млн рублей за 7,5% компании, brainbox_I — 5 млн рублей за 5%; post-money оценка составила 100 млн рублей. ООО «Блоксели» зарегистрировано в 2023 году, выручка за 2025 год — 15 млн рублей, чистая прибыль — 1,5 млн рублей. Платформа включена в реестр Минцифры РФ и является резидентом Сколково; работает в браузере на любых устройствах и внедрена в 80+ школах. Synergy Ventures — корпоративный венчурный фонд Корпорации «Синергия», специализирующийся на EdTech и HR-Tech; brainbox_I — венчурный фонд экосистемы brainbox.vc.",
    "auto": true,
-   "buyer_name": "Synergy Ventures и brainbox_I"
+   "buyer_name": "Synergy Ventures и brainbox_I",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-07-02",
+     "title": "Переговоры",
+     "note": "Российская образовательная платформа для создания 3D-игр “Блоксели” привлекла 12,5 млн рублей от корпорации Synergy Ventures и венчурного фонда brainbox_I. Synergy Ventures вложила 7,5 млн рублей в обмен на 7,5% компании. Инвестиции brainbox_I - 5 млн рублей з",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Obrazovatelnaya-platforma-Blokseli-privlekla-125-mln-rublej-ot-Synergy-Ventures-i-brainbox_I-87139"
+     ]
+    }
+   ]
   },
   {
    "id": "gecce5162",
@@ -11365,6 +11413,18 @@
    "auto": true,
    "themes": [
     "Продажа с торгов"
+   ],
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-01",
+     "title": "Сделка завершена",
+     "note": "Это следует из протокола аукциона, опубликованного на портале «ГИС Торги» 30 июня. Помимо «Белой скалы» в конкурсе участвовало АО «Дунай», говорится в лотовой документации. Но ее ценовое предложение оказалось ниже. В рамках аукциона были реализованы доли в 17",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Upravlyayuschaya-kompaniya-Belaya-skala-vykupila-portfel-Raven-Russia-za-472-mlrd-rub-87131"
+     ]
+    }
    ]
   },
   {
@@ -13727,7 +13787,39 @@
     "Продажа с торгов"
    ],
    "seller": "государственного пакета",
-   "seller_src": "title"
+   "seller_src": "title",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-06-11",
+     "title": "Объявлен голландский аукцион",
+     "note": "Росимущество объявило голландский аукцион по продаже ЮГК со стартовой ценой 81,01 млрд ₽, итоги — 19 июня.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Rosimuschestvo-provedet-gollandskij-aukcion-po-prodazhe-YuGK-i-obyavit-itogi-19-iyunya-87063"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-07-06",
+     "title": "Оплачен контрольный пакет",
+     "note": "АО «БТС-Мост Холдинг» оплатило Росимуществу стоимость 67,2% акций ЮГК (93,16 млрд ₽ по данным mergers.ru) и долей связанных структур.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/BTS-Most-Holding-oplatil-kontrolnyj-paket-akcij-YuGK-87151"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-07-17",
+     "title": "Оформлено владение 67,2489% акций",
+     "note": "АО «БТС-Мост Холдинг» стало собственником 67,2489% акций ПАО «Южуралзолото Группа Компаний».",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/BTS-Most-Holding-stal-vladelcem-672-YuGK-87227"
+     ]
+    }
+   ]
   },
   {
    "id": "g676504a3",
@@ -36713,13 +36805,29 @@
     [
      "@dealsma (Telegram)",
      "https://www.kommersant.ru/doc/8799919"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Rosspirtprom-mozhet-priobresti-Bashspirt-za-45-mlrd-rublej-87183"
     ]
    ],
    "extra": "Сделка на стадии переговоров. «Росспиртпром» рассматривает приобретение 100% акций АО «Башспирт» — государственного алкогольного холдинга Республики Башкортостан. Продавец — Правительство Республики Башкортостан. Сумма: 4–5 млрд рублей.",
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Правительство Республики Башкортостан",
-   "seller_src": "text"
+   "seller_src": "text",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-07-10",
+     "title": "Переговоры",
+     "note": "Крупнейший производитель спирта в России «Росспиртпром» рассматривает покупку принадлежащего правительству Башкирии АО «Башспирт», рассказали источники на рынке алкоголя. По словам одного из них, представители «Росспиртпрома» на минувшей неделе посещали заводы",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Rosspirtprom-mozhet-priobresti-Bashspirt-za-45-mlrd-rublej-87183"
+     ]
+    }
+   ]
   },
   {
    "id": "gc88ca79d",
@@ -40012,7 +40120,19 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Сергей Лебедев",
-   "seller_src": "text"
+   "seller_src": "text",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-06-03",
+     "title": "Выкуплены оставшиеся 50,1% — доля доведена до 100%",
+     "note": "АО «Эко Холдинг» (структура «Р-Фарма») выкупила оставшиеся 50,1% акций группы «Центр ЭКО» у Сергея Лебедева; сделка закрыта 29 мая 2026 года.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Struktura-R-Farm-vykupila-set-klinik-Centr-JeKO-87027"
+     ]
+    }
+   ]
   },
   {
    "id": "g14443784",
@@ -48241,7 +48361,19 @@
    "promoted_from_bulk": true,
    "seller": "ВТБ",
    "seller_src": "title",
-   "seller_id": "gcafc31dc"
+   "seller_id": "gcafc31dc",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-28",
+     "title": "Уточнён периметр сделки",
+     "note": "Гостиница «Holiday Inn Сокольники» вошла в периметр сделки по продаже активов «Галс-Девелопмента» — банк реализовал все свои гостиничные объекты. Стоимость самой гостиницы оценивается отдельно в 8–10 млрд ₽ (по оценке рынка).",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     ]
+    }
+   ]
   },
   {
    "id": "gca369d72",
@@ -48598,6 +48730,18 @@
    "promoted_from_bulk": true,
    "themes": [
     "Продажа с торгов"
+   ],
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-21",
+     "title": "Перспектива выкупила Домодедово, Внуково покупает долю в ней",
+     "note": "«Перспектива» выкупила у Росимущества группу «Домодедово» за 66 млрд ₽. Аэропорт Внуково намерен выкупить 25,01% долей «Перспективы» за 16,5 млрд ₽ и стать совладельцем «Домодедово».",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Ajeroport-Vnukovo-stanet-sovladelcem-Domodedovo-87247"
+     ]
+    }
    ]
   },
   {
@@ -66608,6 +66752,18 @@
    "promoted_from_bulk": true,
    "themes": [
     "Консолидация доли"
+   ],
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-06-03",
+     "title": "Доля снижена с 50% до 45% перед IPO",
+     "note": "«Росатом» снизил долю участия в «Медскане» с 50% до 45% в презентации для инвесторов перед плановым IPO в сентябре 2026 года.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/U-Medskana-poyavilsya-novyj-investor-87023"
+     ]
+    }
    ]
   },
   {
@@ -68300,6 +68456,1185 @@
    "promoted_from_bulk": true,
    "seller": "Global Fashion Group",
    "seller_src": "title"
+  },
+  {
+   "id": "gmru-psb-tpk-chelyabinsk",
+   "date": "2026-07-30",
+   "title": "ПСБ выставил на продажу компании, владеющие двумя ТРК в Челябинске",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/PSB-prodast-kompanii-vladeyuschie-dvumya-TRK-v-Chelyabinske-87293"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "ПСБ",
+   "asset": "ООО «Родник» и ООО «Управляющая компания «Содействие»» (два торгово-развлекательных комплекса в Челябинске)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-geotek-bashneftegeofizika",
+   "date": "2026-07-28",
+   "title": "«Геотек» и «Башнефтегеофизика» объединяют нефтесервисные активы",
+   "ind": "Нефть и газ",
+   "type": "СП",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Nachalos-obedinenie-nefteservisnyh-holdingov-Geotek-i-Bashneftegeofizika-87277"
+    ]
+   ],
+   "from_ingest": true,
+   "asset": "АО «Башнефтегеофизика» и АО «ГЕОТЕК» (объединение в единого нефтесервисного оператора)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-prodo-star-nafta-broiler",
+   "date": "2026-07-28",
+   "title": "Группа «Продо» выкупила бизнес «Башкирского бройлера» у группы «Стар Нафта»",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Gruppa-Prodo-vykupila-biznes-Bashkirskogo-brojlera-u-gruppy-Star-Nafta-87275"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "1,4–2 млрд ₽ (по оценке)",
+   "seller": "«Стар Нафта»",
+   "buyer_name": "«Продо»",
+   "asset": "бизнес «Башкирского бройлера»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-prime-pervy-poliplastik",
+   "date": "2026-07-27",
+   "title": "ЗПИФ «Прайм Первый» приобрёл 14% в группе «Полипластик»",
+   "ind": "Химия и удобрения",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Paevoj-investfond-priobrel-14-v-gruppe-Poliplastik-87271"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "ЗПИФ «Прайм Первый» (УК «Диалог Инвестиции»)",
+   "asset": "14% в группе «Полипластик»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-svoj-kredit-evropa-strah",
+   "date": "2026-07-27",
+   "title": "Группа «Свой» купила страховщика «Кредит Европа лайф» у «Кредит Европа банка»",
+   "ind": "Страхование",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Gruppa-Svoj-kupila-strahovschika-u-Kredit-Evropa-banka-87269"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "400–600 млн ₽ (по оценке)",
+   "seller": "«Кредит Европа банк»",
+   "buyer_name": "«Свой»",
+   "asset": "«Кредит Европа лайф» (страховая компания)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-kolomenskoe-peko",
+   "date": "2026-07-27",
+   "title": "ГК «Коломенский» приобрела хлебокомбинат «Пеко»",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/GK-Kolomenskoe-vykupit-hlebokombinat-Peko-87197"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "900 млн ₽ (оценка на стадии согласования ФАС)",
+   "buyer_name": "ГК «Коломенский»",
+   "asset": "100% долей ООО «Хлебокомбинат «Пеко»» (через ООО «Хлебинвест»)",
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-07-14",
+     "title": "Согласование получено",
+     "note": "ФАС согласовала сделку по покупке подконтрольным ГК «Коломенское» ООО «Хлебинвест» 100% долей в ООО «Хлебокомбинат «Пеко»».",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/GK-Kolomenskoe-vykupit-hlebokombinat-Peko-87197"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-07-27",
+     "title": "Сделка закрыта",
+     "note": "«Коломенский» стал владельцем производственного комплекса на Полярной улице мощностью до 200 т продукции в сутки.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267"
+     ]
+    }
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-arnest-reckitt",
+   "date": "2026-07-27",
+   "title": "«Арнест» выкупает часть российского бизнеса Reckitt Benckiser",
+   "ind": "Потребительские товары",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Arnest-vykupaet-chast-biznesa-Reckitt-Benckiser-87265"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "18 млрд ₽",
+   "seller": "Reckitt Benckiser (Великобритания)",
+   "buyer_name": "«Арнест»",
+   "asset": "завод по выпуску бытовой химии в Клину (бренды Vanish, Air Wick, Cilit Bang, Tiret, Calgon)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-mariholodmash-borsky",
+   "date": "2026-07-24",
+   "title": "«Марихолодмаш» выкупил Борский завод торгового оборудования",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Mariholodmash-vykupil-Borskij-zavod-torgovogo-oborudovaniya-87263"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "более 10 млрд ₽ (по оценке источника)",
+   "buyer_name": "«Марихолодмаш»",
+   "asset": "Борский завод торгового оборудования",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-nordline-totalenergies-arctic",
+   "date": "2026-07-23",
+   "title": "«Нордлайн» получил разрешение выкупить у TotalEnergies 10% в «Арктик СПГ 2»",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "status": "Согласование получено",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/TotalEnergies-ozhidaet-skorogo-zaversheniya-processa-prodazhi-10-Arktik-SPG-kompanii-Nordlajn-87257"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Putin-razreshil-NordLajn-kupit-u-TotalEnergies-10-v-Arktik-SPG-2-87029"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "$4,1 млрд",
+   "seller": "TotalEnergies",
+   "buyer_name": "«Нордлайн»",
+   "asset": "10% в проекте «Арктик СПГ 2»",
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-06-03",
+     "title": "Согласование получено",
+     "note": "Президент разрешил «НордЛайн» купить у TotalEnergies 10% в «Арктик СПГ 2».",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Putin-razreshil-NordLajn-kupit-u-TotalEnergies-10-v-Arktik-SPG-2-87029"
+     ]
+    },
+    {
+     "kind": "approval",
+     "date": "2026-07-23",
+     "title": "Ожидается скорое закрытие",
+     "note": "TotalEnergies ожидает скорого завершения процесса продажи 10% «Арктик СПГ 2» компании «Нордлайн».",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/TotalEnergies-ozhidaet-skorogo-zaversheniya-processa-prodazhi-10-Arktik-SPG-kompanii-Nordlajn-87257"
+     ]
+    }
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-mtsbank-kdpay",
+   "date": "2026-07-22",
+   "title": "МТС Банк купил платёжный сервис KD Pay",
+   "ind": "Финтех",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/MTS-Bank-kupil-platezhnyj-servis-KD-Pay-87251"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "Олег Пономарёв и Леонид Дубов (основатели)",
+   "buyer_name": "МТС Банк",
+   "asset": "51% ООО «Ритейл-Процессинг» (владелец платёжного сервиса KD Pay)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-roshim-vnt",
+   "date": "2026-07-21",
+   "title": "«Росхим» может приобрести Восточный нефтехимический терминал в Приморье",
+   "ind": "Химия и удобрения",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Roshim-mozhet-priobresti-Vostochnyj-neftehimicheskij-terminal-v-Primore-87241"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "«Росхим»",
+   "asset": "Восточный нефтехимический терминал (ВНТ) в Приморье",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-geopromining-zabaikalie",
+   "date": "2026-07-20",
+   "title": "ГеоПроМайнинг купил активы по добыче золота в Забайкалье",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/GeoProMajning-kupil-aktivy-po-dobyche-zolota-v-Zabajkale-87237"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "«ГеоПроМайнинг» (через ООО «Кряж Инвест»)",
+   "asset": "25% ООО «Золотоноша» (лицензии на добычу золота, Забайкалье)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-rostech-avia-holding",
+   "date": "2026-07-20",
+   "title": "«Ростех» консолидирует авиатранспортные активы в новом холдинге",
+   "ind": "Транспорт и логистика",
+   "type": "СП",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Rosteh-konsolidiruet-aviatransportnye-aktivy-v-novom-holdinge-87239"
+    ]
+   ],
+   "from_ingest": true,
+   "asset": "НССА, авиакомпания Red Wings и SkyGates, лизинговая компания «Авиакапитал-Сервис»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-vysochaishy-komi-oil",
+   "date": "2026-07-17",
+   "title": "Сооснователь «Высочайшего» продаёт нефтяной проект в Коми",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Soosnovatel-Vysochajshego-prodaet-neftyanoj-proekt-v-Komi-87229"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "$30 млн",
+   "seller": "сооснователь «Высочайшего»",
+   "asset": "нефтяной проект в Коми",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-sucden-poetti",
+   "date": "2026-07-15",
+   "title": "Французская Sucden может получить контроль над бизнесом производителя кофе Poetti",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Francuzskaya-Sucden-mogla-poluchit-kontrol-nad-biznesom-proizvoditelya-kofe-Poetti-87215"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "Sucden (через ООО «СДС»)",
+   "asset": "партнёрство с «Милфудс» (бренд Poetti)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-nordgold-chukotka",
+   "date": "2026-07-15",
+   "title": "Nordgold стал владельцем «Новой сырьевой компании» на Чукотке",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Nordgold-mozhet-vlozhitsya-v-dobychu-zolota-na-Chukotke-87213"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "«Нордголд Развитие»",
+   "asset": "ООО «Новая сырьевая компания» (золотодобыча, Чукотка)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-voshod-voronezh-rocket",
+   "date": "2026-07-15",
+   "title": "Фонд «Восход» инвестировал ещё 100 млн руб. в проект ракеты-носителя «Воронеж»",
+   "ind": "Машиностроение",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Fond-Voshod-investiroval-eschjo-100-mln-rub-v-proekt-sverhlegkoj-rakety-nositelya-Voronezh-87211"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "100 млн ₽",
+   "buyer_name": "Фонд «Восход»",
+   "asset": "проект сверхлёгкой ракеты-носителя «Воронеж»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-mirgorodsky-nattys",
+   "date": "2026-07-14",
+   "title": "Геннадий Миргородский приобрёл контроль в производителе Nattys",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Gennadij-Mirgorodskij-priobrel-kontrrol-v-proizvoditele-arahisovoj-pasty-i-proteinovyh-batonchikov-Nattys-87199"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "Юлиана Николаева (сохранила 30%)",
+   "buyer_name": "Геннадий Миргородский",
+   "asset": "70% ООО «Нуттис» (бренд Nattys — арахисовая паста и протеиновые батончики)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-rodnye-polya",
+   "date": "2026-07-13",
+   "title": "Бизнес «Родных полей» продан за 11,7 млрд рублей",
+   "ind": "Агро",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Biznes-Rodnyh-polej-prodan-za-117-mlrd-rublej-87195"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "11,7 млрд ₽",
+   "asset": "бизнес «Родных полей»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-dobroflot-ikorny",
+   "date": "2026-07-13",
+   "title": "«Доброфлот» купил долю в сети рыбных магазинов «Икорный»",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Dobroflot-kupil-dolyu-v-rybnyh-magazinah-Ikornyj-87193"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "«Доброфлот»",
+   "asset": "доля в сети рыбных магазинов «Икорный»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-razvitie-stroy-aktivov-akzo",
+   "date": "2026-07-13",
+   "title": "РФ передала локальные активы Akzo Nobel в управление АО «Развитие строительных активов»",
+   "ind": "Химия и удобрения",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/RF-peredala-lokalnye-aktivy-Akzo-Nobel-v-upravlenie-AO-Razvitie-stroitelnyh-aktivov-87189"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "АО «Развитие строительных активов»",
+   "asset": "локальные активы Akzo Nobel в России",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-vostok-sever-pevek",
+   "date": "2026-07-10",
+   "title": "Фонд «Восток-Север» стал владельцем 100% «Морпорта Певек»",
+   "ind": "Порты и инфраструктура",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Fond-Vostok-Sever-stal-vladelcem-100-Morporta-Pevek-87177"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "Фонд «Восток-Север»",
+   "asset": "100% «Морпорта Певек»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-vim-poklonka",
+   "date": "2026-07-07",
+   "title": "Фонд под управлением «ВИМ Сбережения» выкупает деловой квартал «Поклонка плейс»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Fond-pod-upravleniem-VIM-sberezhenij-vykupaet-delovoj-kvartal-Poklonka-plejs-na-Poklonnoj-gore-87155"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "фонд под управлением «ВИМ Сбережения»",
+   "asset": "деловой квартал «Поклонка плейс» на Поклонной горе",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-absolut-strahovanie-owner",
+   "date": "2026-07-02",
+   "title": "«Абсолют Страхование» сменила владельца",
+   "ind": "Страхование",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Kompaniya-Absolyut-Strahovanie-smenila-vladelca-87135"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "Инвестиционная группа «Абсолют» (Александр Светаков)",
+   "asset": "«Абсолют Страхование»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-rwb-eapteka",
+   "date": "2026-07-01",
+   "title": "RWB купила мажоритарную долю в сервисе «Еаптека»",
+   "ind": "E-commerce",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/RWB-kupila-mazhoritarnuyu-dolyu-v-servise-Eapteka-87129"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/RWB-blizok-k-pokupke-Eapteki-87095"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "7–12 млрд ₽ (по оценке)",
+   "buyer_name": "RWB (Wildberries и Russ)",
+   "asset": "мажоритарная доля в «Еаптеке»",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-06-24",
+     "title": "Переговоры на продвинутой стадии",
+     "note": "Источник на инвестрынке оценивает текущую стоимость «Еаптеки» минимум в 8 млрд руб.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/RWB-blizok-k-pokupke-Eapteki-87095"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-07-01",
+     "title": "Сделка закрыта",
+     "note": "Стороны не раскрывают сумму сделки и долю, но «Еаптека» вошла в состав группы RWB.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/RWB-kupila-mazhoritarnuyu-dolyu-v-servise-Eapteka-87129"
+     ]
+    }
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-vtb-otkrytie-office-rwb",
+   "date": "2026-06-30",
+   "title": "RWB покупает бывший офис банка «Открытие» у ВТБ",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/VTB-k-koncu-iyunya-prodast-byvshij-ofis-banka-Otkrytie-87123"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "ВТБ",
+   "buyer_name": "объединённая компания Wildberries и Russ (RWB)",
+   "asset": "бывший офис банка «Открытие»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-sutochno-onetwotrip",
+   "date": "2026-06-17",
+   "title": "«Суточно.ру» может купить сервис путешествий OneTwoTrip",
+   "ind": "Гостиницы и туризм",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Sutochnoru-mozhet-kupit-servis-OneTwoTrip-87075"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "«Суточно.ру»",
+   "asset": "сервис путешествий OneTwoTrip",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-darkin-vladmorribport",
+   "date": "2026-06-23",
+   "title": "Сергей Дарькин закрыл сделку по выкупу доли «Владморрыбпорта»",
+   "ind": "Порты и инфраструктура",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Sergej-Darkin-zakryl-sdelku-po-vykupu-doli-Vladmorrybporta-87161"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "18,7 млрд ₽",
+   "seller": "Александр Евдокимов",
+   "buyer_name": "ООО «ГЕОТЭКС» (Сергей Дарькин)",
+   "asset": "47% «Владивостокского морского рыбного порта»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-strana-development-sreda",
+   "date": "2026-06-04",
+   "title": "«Страна Девелопмент» продала торговый комплекс «Среда. Царицыно»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Strana-Development-prodala-torgovyj-kompleks-Sreda-Caricyno-na-yuge-Moskvy-87035"
+    ]
+   ],
+   "from_ingest": true,
+   "sum": "1,7 млрд ₽",
+   "seller": "«Страна Девелопмент»",
+   "buyer_name": "ООО «Приморская строительная корпорация» (Дмитрий Сулеев)",
+   "asset": "торговый комплекс «Среда. Царицыно» на юге Москвы",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-sollers-jf-mould",
+   "date": "2026-06-02",
+   "title": "«Соллерс» продал китайской JF Mould 20% в производстве кузовных деталей",
+   "ind": "Автопром",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Sollers-prodal-kitajskoj-JF-Mould-20-v-proizvodstve-kuzovnyh-detalej-87015"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "«Соллерс»",
+   "buyer_name": "JF Mould (Hefei Hualong Mould, Китай)",
+   "asset": "20% ООО «Штамповые технологии»",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-veb-gtlk",
+   "date": "2026-06-02",
+   "title": "ВЭБ.РФ объявила о приобретении ГТЛК",
+   "ind": "Транспорт и логистика",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/VJeBRF-obyavila-o-priobretenii-GTLK-87019"
+    ]
+   ],
+   "from_ingest": true,
+   "buyer_name": "ВЭБ.РФ",
+   "asset": "ГТЛК (Государственная транспортная лизинговая компания)",
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
+  },
+  {
+   "id": "gmru-nspk-privatization",
+   "date": "2026-07-03",
+   "title": "Банк России готовит частичную приватизацию НСПК",
+   "ind": "Финтех",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Bank-Rossii-provedet-ocenku-NSPK-pered-vozmozhnoj-prodazhej-doli-87145"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/V-Rosselhozbanke-raskryli-detali-vozmozhnoj-prodazhi-doli-v-NSPK-v-rynok-87137"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "Банк России",
+   "asset": "доля в НСПК (оператор карт «Мир»)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-07-02",
+     "title": "Раскрыты детали обсуждения",
+     "note": "Банк России обсуждает с кредитными организациями параметры продажи доли в НСПК: регулятор предлагает участникам рынка купить миноритарный пакет акций.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/V-Rosselhozbanke-raskryli-detali-vozmozhnoj-prodazhi-doli-v-NSPK-v-rynok-87137"
+     ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-07-03",
+     "title": "Готовится рыночная оценка",
+     "note": "Глава Банка России Эльвира Набиуллина заявила об обсуждении с банками частичной приватизации НСПК; планируется рыночная оценка компании.",
+     "source": [
+      "mergers.ru",
+      "https://mergers.ru/news/Bank-Rossii-provedet-ocenku-NSPK-pered-vozmozhnoj-prodazhej-doli-87145"
+     ]
+    }
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   }
   }
  ],
  "companies": {
@@ -68370,15 +69705,6 @@
   },
   "gb396abf4": {
    "name": "Группа ЛСР",
-   "ind": "Недвижимость",
-   "desc": "Описание компании пока не добавлено.",
-   "kpi": [
-    "Профиль",
-    "Автоматический"
-   ]
-  },
-  "g309e931d": {
-   "name": "Владимир Селегень",
    "ind": "Недвижимость",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
@@ -84878,6 +86204,16 @@
     "Профиль",
     "Редакционно подтверждён"
    ]
+  },
+  "g7bbe19c2-target": {
+   "name": "ООО «Пулково Скай» и ООО «УК Статус»",
+   "ind": "Недвижимость",
+   "desc": "Описание компании пока не добавлено.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ],
+   "lot": true
   }
  },
  "match_keys": {
@@ -84911,9 +86247,6 @@
   ],
   "gb396abf4": [
    "группа лср"
-  ],
-  "g309e931d": [
-   "владимир селегень"
   ],
   "g3bd654be": [
    "сергей ногай"

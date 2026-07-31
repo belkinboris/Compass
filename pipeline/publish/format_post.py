@@ -117,6 +117,13 @@ def render(deal, companies, updates=()):
     src = [s for s in (deal.get('src') or []) if len(s) > 1 and str(s[1]).startswith('http')]
     lines.append('')
     lines.append('<a href="%s/#/deal/%s">Карточка сделки</a>' % (SITE, deal['id']))
+    # Прямые ссылки на линзу — только когда там правда что-то есть: иначе
+    # читатель кликает «Юрист» и попадает на приглушённую пустую вкладку.
+    eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
+    if facts or has(eco.get('share')) or has(eco.get('rationale')):
+        lines.append('<a href="%s/#/deal/%s?lens=eco">→ Экономист</a>' % (SITE, deal['id']))
+    if adv or has(law.get('struct')) or has(law.get('appr')) or has(law.get('terms')):
+        lines.append('<a href="%s/#/deal/%s?lens=law">→ Юрист</a>' % (SITE, deal['id']))
     if src:
         lines.append('Источник: <a href="%s">%s</a>' % (esc(src[0][1]), esc(src[0][0])))
         if len(src) > 1:
