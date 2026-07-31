@@ -177,7 +177,9 @@ def test_no_external_requests(page, base_url):
 
 def test_deal_has_timeline_and_inline_correction_dialog(page, base_url):
     visit(page, base_url, "#/deal/agrostroy-zemlya")
-    assert page.locator(".deal-progress").is_visible()
+    # У сделки одна новость (продажа сразу закрыта) — «Ход сделки» не показываем:
+    # единственный этап не добавил бы ничего к тому, что уже написано на карточке.
+    assert page.locator(".deal-progress").count() == 0
     page.locator("#fixdeal").click()
     assert page.locator(".dialog-backdrop").is_visible()
     page.locator("#correctionBody").fill("Проверка редакционной формы")
@@ -200,6 +202,28 @@ def test_citibank_is_one_deal_with_clickable_stage_history(page, base_url):
     assert "/stage/negotiations-2024-01-01" in page.url
     assert page.locator(".stage-card").is_visible()
     assert "M&A Новости" in page.locator(".src").inner_text()
+
+
+def test_sparse_notice_has_no_unrelated_deal_link(page, base_url):
+    # На «Агрострой» блок «раскрыто немного деталей» раньше предлагал
+    # «Посмотреть более подробную карточку» — рекомендация подбиралась по
+    # отрасли и обычно оказывалась совсем другой сделкой. Ссылку убрали
+    # целиком: пустое состояние честнее случайного перехода.
+    visit(page, base_url, "#/deal/agrostroy-zemlya")
+    note = page.locator(".coverage-note")
+    assert note.is_visible()
+    assert note.locator("a").count() == 0
+
+
+def test_pre_2022_deals_hidden_from_site(page, base_url):
+    # Сделки до 2022 года остаются в deals_promoted.json, но не показываются на
+    # сайте: прямой переход по адресу карточки должен молча показать ленту
+    # сделок (как для любого другого несуществующего id), а не пустую карточку.
+    visit(page, base_url, "#/")
+    assert page.evaluate("() => DEALS.some(d => d.id === 'g19d36a35')") is False
+    visit(page, base_url, "#/deal/g19d36a35")
+    assert page.locator(".heroslider").is_visible()
+    assert page.locator(".deal-plate").count() == 0
 
 
 def test_citibank_seller_is_rendered(page, base_url):

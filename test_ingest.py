@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
 sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
 
 import classify              # noqa: E402
+import discover_feeds         # noqa: E402
 import format_post           # noqa: E402
 import match as matcher      # noqa: E402
 
@@ -558,3 +559,57 @@ def test_main_without_token_never_touches_network_or_writes(monkeypatch, tmp_pat
     mtime_before = Path(before).stat().st_mtime
     send_telegram.main(write=True)  # write=True тоже не должен ничего слать без токена
     assert Path(before).stat().st_mtime == mtime_before
+
+
+# ---------- обнаружение RSS-ленты у сайтов без известного адреса ----------
+
+def test_discover_finds_feed_link_regardless_of_attribute_order(monkeypatch):
+    """Реальные сайты пишут атрибуты `<link>` в разном порядке (rel до type и
+    наоборот) — правило обязано ловить оба варианта, а не только один."""
+    html_rel_first = '<head><link rel="alternate" type="application/rss+xml" href="/feed.xml"></head>'
+    html_type_first = '<head><link type="application/rss+xml" rel="alternate" href="/feed.xml"></head>'
+    for html in (html_rel_first, html_type_first):
+        monkeypatch.setattr(discover_feeds, "http_get", lambda url, html=html: html.encode())
+        feed_url, err = discover_feeds.discover("https://example.ru/")
+        assert err is None and feed_url == "https://example.ru/feed.xml"
+
+
+def test_discover_ignores_unrelated_link_tags(monkeypatch):
+    html = '<head><link rel="stylesheet" href="/style.css"><link rel="icon" href="/favicon.ico"></head>'
+    monkeypatch.setattr(discover_feeds, "http_get", lambda url: html.encode())
+    feed_url, err = discover_feeds.discover("https://example.ru/")
+    assert feed_url is None and err == "ленты в <head> нет"
+
+
+def test_discover_resolves_relative_feed_url(monkeypatch):
+    monkeypatch.setattr(discover_feeds, "http_get",
+                         lambda url: b'<head><link rel="alternate" type="application/atom+xml" href="/feed/"></head>')
+    feed_url, err = discover_feeds.discover("https://example.ru/about/")
+    assert err is None
+    assert feed_url == "https://example.ru/feed/"
+
+
+def test_discover_reports_http_error_without_raising(monkeypatch):
+    import urllib.error
+
+    def boom(url):
+        raise urllib.error.HTTPError(url, 403, "Forbidden", {}, None)
+    monkeypatch.setattr(discover_feeds, "http_get", boom)
+    feed_url, err = discover_feeds.discover("https://blocked.example/")
+    assert feed_url is None and "403" in err
+
+
+def test_discover_main_dry_run_does_not_write(monkeypatch, tmp_path):
+    """Без --write реестр не меняется, даже если все ленты нашлись бы."""
+    sources = [{"id": "firm:test", "name": "Test", "kind": "html", "url": "https://test.example/",
+                "feed": None, "feed_checked": False, "tier": 3, "enabled": False}]
+    tmp_sources = tmp_path / "sources.json"
+    tmp_sources.write_text(json.dumps({"sources": sources}, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(discover_feeds, "SOURCES", str(tmp_sources))
+    monkeypatch.setattr(discover_feeds, "load_sources",
+                         lambda: json.loads(tmp_sources.read_text(encoding="utf-8"))["sources"])
+    monkeypatch.setattr(discover_feeds, "http_get",
+                         lambda url: b'<head><link rel="alternate" type="application/rss+xml" href="/f.xml"></head>'
+                         if "f.xml" not in url else b'<rss><channel><item><title>T</title><link>u</link></item></channel></rss>')
+    discover_feeds.main([])
+    assert json.loads(tmp_sources.read_text(encoding="utf-8"))["sources"][0]["enabled"] is False
