@@ -1583,6 +1583,12 @@ function applyFeedParams(qs){
   advOpen = FEED_PARAMS.some(([key])=>key!=="q" && p.get(key));
 }
 function route(){
+  // Диалог лежит в body, а не в #app, и перерисовка экрана его не убирала:
+  // полупрозрачная подложка оставалась поверх новой страницы и перехватывала
+  // клики — экран выглядел живым, но не отзывался. Закрываем штатно, кнопкой,
+  // чтобы вместе с окном снялся и обработчик Escape.
+  document.querySelectorAll(".dialog-backdrop").forEach(w =>
+    (w.querySelector(".dialog-close") || w).click());
   const raw = location.hash.replace("#","") || "/";
   const qi = raw.indexOf("?");
   const h = qi >= 0 ? raw.slice(0, qi) : raw;
