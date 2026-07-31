@@ -485,3 +485,76 @@ def test_match_respects_reviewed_separate_transaction():
         "buyer": "Альфа Холдинг", "asset": "Бета Сервис",
     }, idx)
     assert found is None
+
+
+# ---------- отправка в Telegram ----------
+
+import send_telegram  # noqa: E402
+
+
+class _FakeResponse:
+    def __init__(self, payload):
+        self._payload = payload
+
+    def json(self):
+        return self._payload
+
+
+class _FakeClient:
+    """Подставной httpx-клиент: запоминает вызовы, ничего не шлёт по сети."""
+    def __init__(self, replies):
+        self.replies = list(replies)
+        self.calls = []
+
+    def post(self, url, json):
+        self.calls.append((url, json))
+        return _FakeResponse(self.replies.pop(0))
+
+
+def test_sendable_requires_at_least_one_real_fact():
+    assert send_telegram.sendable({"sum": "12 млрд ₽"})
+    assert send_telegram.sendable({"seller": "«Продавец»"})
+    assert send_telegram.sendable({"target": "«Актив»"})
+    assert not send_telegram.sendable({"sum": "Не раскрыта", "title": "Пустая карточка"})
+
+
+def test_post_message_returns_new_message_id():
+    client = _FakeClient([{"ok": True, "result": {"message_id": 555}}])
+    mid = send_telegram.post_message(client, "TOKEN", "@channel", "текст поста")
+    assert mid == 555
+    url, payload = client.calls[0]
+    assert url.endswith("/bottoken/sendMessage".replace("token", "TOKEN")) or "sendMessage" in url
+    assert payload["chat_id"] == "@channel" and payload["text"] == "текст поста"
+    assert payload["parse_mode"] == "HTML"
+
+
+def test_post_message_raises_on_api_error():
+    client = _FakeClient([{"ok": False, "description": "chat not found"}])
+    with pytest.raises(send_telegram.TelegramError):
+        send_telegram.post_message(client, "TOKEN", "@channel", "текст")
+
+
+def test_edit_message_tolerates_not_modified():
+    """Telegram считает правкой даже пробел — повторная отправка того же текста
+    не должна валить весь прогон рутины притока."""
+    client = _FakeClient([{"ok": False, "description": "Bad Request: message is not modified"}])
+    send_telegram.edit_message(client, "TOKEN", "@channel", 555, "тот же текст")  # не бросает
+
+
+def test_edit_message_raises_on_real_error():
+    client = _FakeClient([{"ok": False, "description": "message to edit not found"}])
+    with pytest.raises(send_telegram.TelegramError):
+        send_telegram.edit_message(client, "TOKEN", "@channel", 555, "текст")
+
+
+def test_main_without_token_never_touches_network_or_writes(monkeypatch, tmp_path, base):
+    """Без токена/канала — план на экран, ни одного сетевого вызова, файл базы не тронут."""
+    def boom():
+        raise AssertionError("_client() не должен вызываться без токена")
+    monkeypatch.setattr(send_telegram, "_client", boom)
+    monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_CHANNEL_ID", raising=False)
+    before = send_telegram.DATA
+    mtime_before = Path(before).stat().st_mtime
+    send_telegram.main(write=True)  # write=True тоже не должен ничего слать без токена
+    assert Path(before).stat().st_mtime == mtime_before

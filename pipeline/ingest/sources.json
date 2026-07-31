@@ -6,10 +6,12 @@
    "kind": "rss",
    "url": "https://kommersant.ru/",
    "feed": "https://www.kommersant.ru/RSS/news.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 490,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:vedomosti.ru",
@@ -17,10 +19,12 @@
    "kind": "rss",
    "url": "https://vedomosti.ru/",
    "feed": "https://www.vedomosti.ru/rss/news",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 306,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:rbc.ru",
@@ -28,10 +32,12 @@
    "kind": "rss",
    "url": "https://rbc.ru/",
    "feed": "https://rssexport.rbc.ru/rbcnews/news/30/full.rss",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 232,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:interfax.ru",
@@ -39,10 +45,12 @@
    "kind": "rss",
    "url": "https://interfax.ru/",
    "feed": "https://www.interfax.ru/rss.asp",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 203,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:forbes.ru",
@@ -50,10 +58,12 @@
    "kind": "rss",
    "url": "https://forbes.ru/",
    "feed": "https://www.forbes.ru/newrss.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 185,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:mergers.ru",
@@ -72,10 +82,12 @@
    "kind": "rss",
    "url": "https://tadviser.ru/",
    "feed": "https://www.tadviser.ru/xml/tadviser.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 91,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:cnews.ru",
@@ -83,10 +95,12 @@
    "kind": "rss",
    "url": "https://cnews.ru/",
    "feed": "https://www.cnews.ru/inc/rss/news.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 74,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:vc.ru",
@@ -94,10 +108,12 @@
    "kind": "rss",
    "url": "https://vc.ru/",
    "feed": "https://vc.ru/rss/all",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 69,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:tass.ru",
@@ -105,10 +121,12 @@
    "kind": "rss",
    "url": "https://tass.ru/",
    "feed": "https://tass.ru/rss/v2.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 46,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:akm.ru",
@@ -119,7 +137,9 @@
    "feed_checked": false,
    "tier": 1,
    "deals_seen": 42,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 401"
   },
   {
    "id": "web:dp.ru",
@@ -127,10 +147,12 @@
    "kind": "rss",
    "url": "https://dp.ru/",
    "feed": "https://www.dp.ru/exportnews.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 34,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:incrussia.ru",
@@ -138,10 +160,12 @@
    "kind": "rss",
    "url": "https://incrussia.ru/",
    "feed": "https://incrussia.ru/feed/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 29,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:comnews.ru",
@@ -149,10 +173,12 @@
    "kind": "rss",
    "url": "https://comnews.ru/",
    "feed": "https://www.comnews.ru/rss.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 28,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:interfax.com",
@@ -171,10 +197,12 @@
    "kind": "rss",
    "url": "https://vademec.ru/",
    "feed": "https://vademec.ru/rss/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 24,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:sostav.ru",
@@ -185,7 +213,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 22,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:fontanka.ru",
@@ -196,7 +226,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 22,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:sec.gov",
@@ -215,10 +247,12 @@
    "kind": "rss",
    "url": "https://iz.ru/",
    "feed": "https://iz.ru/xml/rss/all.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 20,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:1prime.ru",
@@ -226,10 +260,12 @@
    "kind": "rss",
    "url": "https://1prime.ru/",
    "feed": "https://1prime.ru/export/rss2/archive/index.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 20,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:realty.ria.ru",
@@ -237,10 +273,12 @@
    "kind": "rss",
    "url": "https://realty.ria.ru/",
    "feed": "https://realty.ria.ru/export/rss2/archive/index.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 20,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:abireg.ru",
@@ -251,7 +289,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 18,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:retail.ru",
@@ -259,10 +299,12 @@
    "kind": "rss",
    "url": "https://retail.ru/",
    "feed": "https://www.retail.ru/rss/news/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 18,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:abn.agency",
@@ -281,10 +323,12 @@
    "kind": "rss",
    "url": "https://rb.ru/",
    "feed": "https://rb.ru/feeds/all/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 15,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:ria.ru",
@@ -292,10 +336,12 @@
    "kind": "rss",
    "url": "https://ria.ru/",
    "feed": "https://ria.ru/export/rss2/archive/index.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 14,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:new-retail.ru",
@@ -303,10 +349,12 @@
    "kind": "rss",
    "url": "https://new-retail.ru/",
    "feed": "https://new-retail.ru/rss/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 13,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:quote.rbc.ru",
@@ -317,7 +365,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 13,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 401"
   },
   {
    "id": "web:marketscreener.com",
@@ -339,7 +389,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 12,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
   },
   {
    "id": "web:frankrg.com",
@@ -369,10 +421,12 @@
    "kind": "rss",
    "url": "https://frankmedia.ru/",
    "feed": "https://frankmedia.ru/feed",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 10,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:ru.wikipedia.org",
@@ -402,10 +456,12 @@
    "kind": "rss",
    "url": "https://secretmag.ru/",
    "feed": "https://secretmag.ru/rss/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 9,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:ewdn.com",
@@ -427,7 +483,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 8,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:habr.com",
@@ -446,10 +504,12 @@
    "kind": "rss",
    "url": "https://agroinvestor.ru/",
    "feed": "https://www.agroinvestor.ru/rss/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 8,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:finversia.ru",
@@ -589,10 +649,12 @@
    "kind": "rss",
    "url": "https://pravo.ru/",
    "feed": "https://pravo.ru/rss/",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 6,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:business-gazeta.ru",
@@ -603,7 +665,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 6,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:finam.ru",
@@ -636,7 +700,9 @@
    "feed_checked": false,
    "tier": 2,
    "deals_seen": 6,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": "HTTP 404"
   },
   {
    "id": "web:shoppers.media",
@@ -1359,10 +1425,12 @@
    "kind": "telegram",
    "url": "https://t.me/dealsma",
    "feed": "https://t.me/s/dealsma",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 1,
    "deals_seen": 68,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:rusven",
@@ -1370,10 +1438,12 @@
    "kind": "telegram",
    "url": "https://t.me/rusven",
    "feed": "https://t.me/s/rusven",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 2,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:alumnimna",
@@ -1381,10 +1451,12 @@
    "kind": "telegram",
    "url": "https://t.me/alumnimna",
    "feed": "https://t.me/s/alumnimna",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 1,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:BIRCHLEGAL",
@@ -1392,10 +1464,12 @@
    "kind": "telegram",
    "url": "https://t.me/BIRCHLEGAL",
    "feed": "https://t.me/s/BIRCHLEGAL",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 3,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:LevelLegalServices",
@@ -1403,10 +1477,12 @@
    "kind": "telegram",
    "url": "https://t.me/LevelLegalServices",
    "feed": "https://t.me/s/LevelLegalServices",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 2,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:LKPconsult",
@@ -1414,10 +1490,12 @@
    "kind": "telegram",
    "url": "https://t.me/LKPconsult",
    "feed": "https://t.me/s/LKPconsult",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 1,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:kkmpconnect",
@@ -1425,10 +1503,12 @@
    "kind": "telegram",
    "url": "https://t.me/kkmpconnect",
    "feed": "https://t.me/s/kkmpconnect",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 1,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "tg:bezrec",
@@ -1436,10 +1516,12 @@
    "kind": "telegram",
    "url": "https://t.me/bezrec",
    "feed": "https://t.me/s/bezrec",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 1,
-   "enabled": true
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "firm:alumni",

@@ -229,7 +229,8 @@ def test_launch_ui_contains_requested_changes():
     assert "если возможно" in html.lower()
     assert "если уместно" not in html.lower()
     assert "у 180 сделок известно" not in html
-    assert "#/webinars" in html and "Вебинары" in html
+    assert "#/materials" in html and "Материалы" in html
+    assert 'page==="materials"||page==="webinars"' in html  # старая ссылка #/webinars не должна биться
     assert 'id="selagroup"' in html and "категория консультанта" in html
     assert "advisor-card" in html and "@media(max-width:760px)" in html
     assert "Подписаться на обновления" in html
