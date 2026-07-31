@@ -100,7 +100,8 @@ def load_today_updates():
     names = sorted(os.listdir(UPDATES_DIR))
     if not names:
         return {}
-    rows = json.load(open(os.path.join(UPDATES_DIR, names[-1]), encoding='utf-8'))
+    doc = json.load(open(os.path.join(UPDATES_DIR, names[-1]), encoding='utf-8'))
+    rows = doc.get('updates', [])
     return {row['deal_id']: row.get('changes', []) for row in rows if row.get('changes')}
 
 

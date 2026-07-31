@@ -183,7 +183,7 @@ def test_sources_registry_is_honest():
     sources = reg["sources"]
     assert len(sources) >= 100, "реестр подозрительно мал"
     for s in sources:
-        assert s["id"] and s["name"] and s["kind"] in ("rss", "html", "telegram")
+        assert s["id"] and s["name"] and s["kind"] in ("rss", "html", "html_mergers", "telegram")
         if s.get("feed_checked"):
             assert s.get("last_check"), f"{s['id']}: помечен проверенным без даты проверки"
     assert any(s["kind"] == "telegram" for s in sources)

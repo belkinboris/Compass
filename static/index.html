@@ -1381,7 +1381,7 @@ function firmDeals(id){
   const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
   return {
-    full: DEALS.filter(d=>d.law.adv.some(a=>rx.test(a[1]))||rx.test(d.eco.finadv||"")),
+    full: DEALS.filter(d=>(d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||"")),
     mini: MINI_DEALS.filter(m=>m.firm===id),
     bulk: BULK_DEALS.filter(b=>b.firm===id)
   };
@@ -1724,7 +1724,7 @@ let activeThreadId = null;
 function buildContext(){
   return JSON.stringify({
   full_deals:DEALS.filter(d=>!d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src})),
-  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:(d.law.adv[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:(d.eco.rationale||"").slice(0,220)})),
+  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)})),
   compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
   channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
   firms_catalog:FIRMS.map(f=>f.n),

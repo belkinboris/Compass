@@ -68,13 +68,15 @@
   {
    "id": "web:mergers.ru",
    "name": "mergers.ru",
-   "kind": "html",
+   "kind": "html_mergers",
    "url": "https://mergers.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://mergers.ru/news/",
+   "feed_checked": true,
    "tier": 1,
    "deals_seen": 97,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:tadviser.ru",
