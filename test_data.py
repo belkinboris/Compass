@@ -154,6 +154,19 @@ def test_cover_sum_uses_currency_symbol(deals):
     assert not bad, f"валюта словом в обложке: {bad[:5]}"
 
 
+GLUED_CURRENCY = re.compile(r"[\$€][а-яёА-ЯЁ]")
+
+
+def test_currency_symbol_not_glued_to_next_word(deals):
+    """«191,5 млн $по данным Financial Times» — пропущенный пробел склеивает
+    значок валюты со следующим словом, и на экране это читается одним
+    слипшимся куском. Значок перед ЦИФРОЙ («$191,5 млн») — верный порядок и
+    не задет; проверяем только значок перед русской буквой."""
+    bad = [(d["id"], d["sum"]) for d in deals
+           if d.get("sum") and GLUED_CURRENCY.search(str(d["sum"]))]
+    assert not bad, f"значок валюты слился со словом в обложке: {bad[:5]}"
+
+
 NAMED_ESTIMATOR = re.compile(r"\((?:по\s+)?оценк[а-яё]*\s+(?-i:[А-ЯЁA-Z])", re.I)
 
 
@@ -164,6 +177,49 @@ def test_estimate_note_does_not_name_the_estimator(deals):
     bad = [(d["id"], d["sum"]) for d in deals
            if d.get("sum") and NAMED_ESTIMATOR.search(str(d["sum"]))]
     assert not bad, f"имя оценщика в пометке суммы: {bad[:5]}"
+
+
+ESTIMATE_NOTE_START = re.compile(
+    r"^(?:по\s+)?(?:оценк|оценочн|экспертн|предположительн|расчётн|расчетн|эксперт)", re.I)
+
+
+def _is_verbose_estimate_note(paren_text):
+    """Скобка похожа на пометку недостоверности («начинается с "оценка"/
+    "экспертная"/…»), но это не короткая каноничная форма «по оценке» и не
+    содержит цифры — а если цифра есть, скобка объясняет САМО число
+    («имплицитная оценка 469 млн ₽»), и это не задеваем.
+
+    Регулярка с `(?!...)` внутри одного выражения однажды уже подвела: жадный
+    `[а-яё]*` откатывался и обходил отрицательный просмотр вперёд, из-за чего
+    сама каноничная «(по оценке)» ложно считалась нарушением. Проверка на
+    равенство строк такой ловушки не боится."""
+    inner = paren_text.strip().lower()
+    if not ESTIMATE_NOTE_START.match(inner):
+        return False
+    if any(ch.isdigit() for ch in inner):
+        return False
+    return inner != "по оценке"
+
+
+def test_estimate_note_is_short(deals):
+    """«900 млн ₽ (оценка на стадии согласования ФАС)» на карточке выглядит
+    длинным и неровным рядом с короткими пометками других сделок. Пометка
+    недостоверности пишется одним способом — «(по оценке)», без уточнений
+    (кто оценил, на какой стадии); содержательные оговорки С ЦИФРОЙ внутри
+    («по $59 за акцию», «имплицитная оценка 469 млн ₽») это не задевает —
+    они объясняют число, а не помечают его недостоверность."""
+    bad = []
+    for d in deals:
+        s = str(d.get("sum") or "")
+        m = re.search(r"\(([^()]*)\)\s*$", s)
+        if m and _is_verbose_estimate_note(m.group(1)):
+            bad.append((d["id"], s))
+    assert not bad, f"длинная пометка об оценке вместо «(по оценке)»: {bad[:5]}"
+    # Проверка на себе: каноничная форма и содержательная оговорка с цифрой
+    # правилом не задеты, а формулировка из бага — задета.
+    assert not _is_verbose_estimate_note("по оценке")
+    assert not _is_verbose_estimate_note("имплицитная оценка 469 млн ₽")
+    assert _is_verbose_estimate_note("оценка на стадии согласования ФАС")
 
 
 META_OPENER = re.compile(

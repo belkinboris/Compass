@@ -226,6 +226,45 @@ def test_pre_2022_deals_hidden_from_site(page, base_url):
     assert page.locator(".deal-plate").count() == 0
 
 
+def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
+    # На телефоне «.deal-meta» — flex с gap:14px (сумма и отраслевая метка в
+    # ряд). Пустой блок суммы у сделки без суммы всё равно создавал зазор, и
+    # метка отрасли съезжала на 14px правее заголовка и статуса — владелец
+    # заметил это на карточке «ЗПИФ Прайм Первый» (химия и удобрения, суммы
+    # нет). Блок суммы теперь не рисуется вовсе, если суммы нет. Ищем сделку
+    # без суммы в живых данных, а не жёстко зашитый id — обогащение может
+    # когда-нибудь заполнить сумму именно у примера из бага.
+    # Смена хеша — переход внутри уже загруженной страницы (SPA), а не
+    # перезагрузка: `visit()` не сбрасывает JS-переменные фильтров ленты
+    # (feedYear/filterInd/filterTheme/…), а `page` общий на весь файл теста.
+    # Прогон после теста, оставившего фильтр открытым, видел бы урезанную
+    # ленту без искомой сделки (прогон одного теста — не проверка изоляции,
+    # см. CLAUDE.md) — сбрасываем фильтры явно, а не полагаемся на переход.
+    visit(page, base_url, "#/")
+    did = page.evaluate("""() => {
+        const d = DEALS.find(x => !x.sum);
+        return d ? d.id : null;
+    }""")
+    assert did, "в базе не нашлось сделки без суммы — пример для теста нужно обновить"
+    page.set_viewport_size({"width": 390, "height": 900})
+    # Карточка без суммы может оказаться за первой страницей ленты — вместо
+    # догадок о сортировке и кликов «показать ещё» просто просим ленту
+    # отрисовать всё сразу, сбросив попутно все фильтры.
+    page.evaluate("""() => {
+        feedQuery = ""; filterInd = "Все"; feedYear = "Все"; filterTheme = "Все";
+        filterFirm = "Все"; filterAdvisorGroup = "Все"; onlyFull = false; feedPage = 999;
+        renderFeedList();
+    }""")
+    page.wait_for_timeout(300)
+    row = page.locator(f'a.deal-row[href="#/deal/{did}"]')
+    assert row.count() == 1
+    assert row.locator(".deal-sum").count() == 0
+    title_x = row.locator(".deal-title").bounding_box()["x"]
+    tags_x = row.locator(".deal-tags").bounding_box()["x"]
+    assert title_x == tags_x, f"метка отрасли не на одной вертикали с заголовком: {title_x} vs {tags_x}"
+    page.set_viewport_size({"width": 1280, "height": 1000})
+
+
 def test_citibank_seller_is_rendered(page, base_url):
     visit(page, base_url, "#/deal/citibank")
     plate = page.locator(".deal-plate").inner_text()
