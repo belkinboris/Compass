@@ -295,3 +295,38 @@ def test_shared_link_restores_the_selection(base_url, browser):
         ctx.close()
     assert state["ind"] == "Банки" and state["year"] == "2024" and state["full"] is True, state
     assert state["rows"] > 0, "подборка по ссылке пуста"
+
+
+def test_failed_base_load_shows_retry_instead_of_fake_small_numbers(browser, base_url):
+    """Баг с телефона владельца: на нестабильной мобильной сети запрос
+    deals_promoted.json иногда срывается, а `bulkLoaded=true` выставлялся
+    безусловно после обеих попыток fetch — сайт тихо объявлял себя
+    загруженным с 36 захардкоженными компаниями и ~161 сделкой вместо
+    настоящих ~1300, без единого признака, что это не полная база. Теперь
+    неудача повторяется несколько раз, а если так и не удалось — честно
+    показывает «Не удалось загрузить» вместо вымышленных маленьких чисел.
+    Отдельный чистый контекст: тест рвёт сеть и не должен задеть общий `page`,
+    которым пользуются остальные тесты файла."""
+    ctx = browser.new_context()
+    try:
+        ctx.route("**/*", lambda route: route.abort()
+                  if "deals_promoted.json" in route.request.url else route.continue_())
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/", wait_until="networkidle")
+        # 4 попытки с паузами 1.5/3/4.5/6с — с запасом до отказа
+        pg.wait_for_timeout(17000)
+        assert pg.evaluate("() => bulkLoaded") is False
+        assert pg.evaluate("() => bulkLoadFailed") is True
+        hero = pg.locator(".hero-note").inner_text()
+        assert "Не удалось загрузить" in hero
+        assert "161" not in hero and "36" not in hero, "вымышленные числа не должны показываться как настоящие"
+        retry = pg.locator("#reloadBase")
+        assert retry.count() >= 1
+
+        ctx.unroute("**/*")
+        retry.first.click()
+        pg.wait_for_timeout(2500)
+        assert pg.evaluate("() => bulkLoaded") is True
+        assert pg.evaluate("() => TOTAL_DEALS()") > 1000
+    finally:
+        ctx.close()

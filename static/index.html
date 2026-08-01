@@ -1396,6 +1396,7 @@ const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>has
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
+let bulkLoadFailed = false;
 // Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
 // история, которую можно будет включить позже), но на сайте не показываются:
 // это не то окно рынка, которое сейчас имеет смысл листать. Год не считаем,
@@ -1434,12 +1435,16 @@ function mergeLoadedDeal(canonical, legacy){
       historicalTitle:legacy.title,note:(legacy.extra||legacy.eco&&legacy.eco.rationale||"").slice(0,320),sources});
   }
 }
-async function loadBulkDeals(){
+async function loadBulkDeals(attempt=0){
   if(bulkLoaded) return;
-  try{
-    const r = await fetch("static/data/bulk_deals.json?v=20260716");
-    if(r.ok){ BULK_DEALS = await r.json(); }
-  }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
+  bulkLoadFailed = false;
+  if(attempt===0){
+    try{
+      const r = await fetch("static/data/bulk_deals.json?v=20260716");
+      if(r.ok){ BULK_DEALS = await r.json(); }
+    }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
+  }
+  let promotedOk = false;
   try{
     const r2 = await fetch("static/data/deals_promoted.json?v=20260728o");
     if(r2.ok){
@@ -1459,8 +1464,26 @@ async function loadBulkDeals(){
         if(same) mergeLoadedDeal(same,incoming);
         else if(isDealShownOnSite(incoming)) DEALS.push(incoming);
       }
+      promotedOk = true;
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
+  if(!promotedOk){
+    // Этот файл несёт компании, match_keys и почти всю базу: без него сайт
+    // раньше молча объявлял себя загруженным с 36 захардкоженными компаниями
+    // вместо ~1800 — "161 сделка · 36 компаний" вместо настоящих чисел, без
+    // единого признака, что что-то не так (число, которое врёт, хуже
+    // честного ожидания). Мобильная сеть иногда роняет один запрос из двух —
+    // пробуем ещё несколько раз с растущей паузой, прежде чем признать
+    // неудачу и показать это явно, а не притвориться, что база полная.
+    const RETRY_LIMIT = 4;
+    if(attempt < RETRY_LIMIT){
+      setTimeout(()=>loadBulkDeals(attempt+1), 1500*(attempt+1));
+    }else{
+      bulkLoadFailed = true;
+      route();
+    }
+    return;
+  }
   bulkLoaded = true;
   // Страховка от дублей: компактная запись скрывается, если полная карточка
   // того же года пересекается с ней по >=3 значимым словам заголовка
@@ -1496,6 +1519,12 @@ async function loadBulkDeals(){
   route(); // перерисовать текущую страницу с уже загруженными данными
 }
 loadBulkDeals();
+// Кнопка «Повторить» появляется в разных местах разметки (лента, карточка,
+// главная) в зависимости от того, где пользователя застал сбой загрузки —
+// делегирование на document один раз вместо привязки после каждой отрисовки.
+document.addEventListener("click", e => {
+  if(e.target.closest && e.target.closest("#reloadBase")) loadBulkDeals();
+});
 
 /* Пока не пришли deals_promoted.json и bulk_deals.json (4,7 МБ), в базе только
    19 захардкоженных карточек и 36 компаний из 1352 и 1882. Раньше по ним молча
@@ -1503,7 +1532,22 @@ loadBulkDeals();
    и рисовала девять графиков с этими знаменателями, каталог — «36 компаний в
    базе». Число, которое секунду врёт, хуже честного ожидания (принцип 2), а
    индикатор был только в ленте. */
+/* Отдельное честное состояние на случай, когда база так и не загрузилась
+   после всех попыток (см. loadBulkDeals): раньше такого состояния не было
+   вовсе — сайт либо ждал вечно (спиннер), либо (баг) тихо считал себя
+   загруженным с горсткой захардкоженных записей. Кнопка вызывает тот же
+   loadBulkDeals() заново — обработчик навешан один раз на #app ниже,
+   а не при каждой отрисовке, потому что этот блок может оказаться где
+   угодно внутри app.innerHTML. */
+function loadFailedHtml(){
+  return `<div class="loading reveal">
+    <div class="l-head">Не удалось загрузить базу сделок</div>
+    <p>Проверьте соединение с интернетом и попробуйте ещё раз.</p>
+    <button class="chip" id="reloadBase" type="button">Повторить</button>
+  </div>`;
+}
 function loadingHtml(what){
+  if(bulkLoadFailed) return loadFailedHtml();
   return `<div class="loading reveal">
     <div class="spinner"></div>
     <div class="l-head">Загружаем базу сделок</div>
@@ -2090,7 +2134,9 @@ function unifiedFeed(){
 function feedListHtml(){
   const allRows = unifiedFeed();
   const shown = allRows.slice(0, feedPage*PAGE_SIZE);
-  if(!bulkLoaded) return `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
+  if(!bulkLoaded) return bulkLoadFailed
+    ? loadFailedHtml()
+    : `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
   return `
   ${filterTheme!=="Все"?`<div class="reveal theme-note">Тема: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Тема определяется по содержанию карточки; в этой подборке показываются сделки с подробным разбором. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
@@ -2163,7 +2209,10 @@ function renderDeals(){
         <h1>Сделки российского рынка — <em>со ссылками на первоисточники</em></h1>
         <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
-        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}</div>
+        <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
+          ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
+          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
+        }</div>
         <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
