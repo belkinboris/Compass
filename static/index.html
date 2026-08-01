@@ -841,7 +841,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
       </div>
     </div>
     <div class="foot-bottom">
-      <div>Данные собраны из публичных источников и могут быть неполными. Не является рейтингом или рекомендацией.</div>
+      <div>Данные собраны из публичных источников и могут быть неполными. Не является рейтингом или рекомендацией. На сайте показаны сделки с 2022 года, база продолжает пополняться.</div>
       <div class="num">MVP 0.5</div>
     </div>
   </div>
@@ -1396,6 +1396,16 @@ const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>has
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
+// Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
+// история, которую можно будет включить позже), но на сайте не показываются:
+// это не то окно рынка, которое сейчас имеет смысл листать. Год не считаем,
+// если дата не разобралась («unknown») — прятать по формальному признаку
+// нечестно, когда мы сами не знаем дату.
+const SITE_MIN_YEAR = 2022;
+const isDealShownOnSite = rec => {
+  const y = parseInt(String(rec.date||"").slice(0,4), 10);
+  return isNaN(y) || y >= SITE_MIN_YEAR;
+};
 /* JSON-база и 19 кураторских карточек загружаются из разных мест. Раньше
    запись из JSON могла оказаться предыдущим этапом уже существующей
    кураторской карточки и показывалась второй сделкой. Карта `merged` теперь
@@ -1446,7 +1456,8 @@ async function loadBulkDeals(){
           continue;
         }
         const same=DEALS.find(d=>d.id===incoming.id);
-        if(same) mergeLoadedDeal(same,incoming); else DEALS.push(incoming);
+        if(same) mergeLoadedDeal(same,incoming);
+        else if(isDealShownOnSite(incoming)) DEALS.push(incoming);
       }
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
@@ -1943,6 +1954,15 @@ const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
    стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
 const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
   (_, note) => ` <span class="sum-note${note.length<=16?" nb":""}">${note}</span>`);
+/* На телефоне `.deal-meta` — flex с gap:14px (сумма + отраслевая метка в ряд).
+   Когда суммы нет вовсе (`d.sum` пуст, а не текст «Не раскрыта»), пустой блок
+   суммы всё равно создаёт зазор — метка отрасли съезжает на 14px вправо и
+   перестаёт быть на одной вертикали с заголовком и статусом. Рисуем блок
+   суммы, только если есть что показать. */
+function dealMetaHtml(d){
+  const sum = d.sum ? `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div>` : "";
+  return `<div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>`;
+}
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
 const plural = (n,one,few,many) => {
   const a = Math.abs(n)%100, b = a%10;
@@ -1981,7 +2001,7 @@ function unifiedFeed(){
     <a class="deal-row reveal" href="#/deal/${d.id}">
       <div><span class="label num">${fmtDate(d.date)}</span><br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span></div>
       <div><div class="deal-title">${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
-      <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div><div class="deal-tags">${industryTagsHtml(d)}</div></div>
+      ${dealMetaHtml(d)}
     </a>`,
     mini: m => `
     <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -2144,7 +2164,7 @@ function renderDeals(){
         <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}</div>
-        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично.</p>
+        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CITY}
@@ -2499,7 +2519,14 @@ function progressRowHtml(d,e,current){
   </a>`;
 }
 function timelineHtml(d){
-  const rows=dealEvents(d), latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
+  // Одна новость — не история: dealEvents() всегда возвращает хотя бы одну
+  // строку (текущий статус), но показывать «Ход сделки» с единственным
+  // кликабельным этапом, который ведёт на страницу без единого нового факта,
+  // хуже, чем не показывать вовсе. Блок нужен только когда этапов правда
+  // несколько — переговоры, согласование, закрытие как отдельные новости.
+  const rows=dealEvents(d);
+  if(rows.length<2) return "";
+  const latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
   return `<div class="deal-progress reveal"><span class="label">Ход сделки</span>
     <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
     ${previous.length?`<button class="progress-toggle" id="historyToggle" type="button" aria-expanded="false" aria-controls="historyList"><svg class="chev" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Показать предыдущие этапы (${previous.length})</span></button>
@@ -2566,20 +2593,16 @@ function sparseNoticeHtml(d){
   if(!buyerOf(d)) missing.push("покупатель");
   if(undisclosed(d.sum)) missing.push("цена");
   if(!hasFact(d.law&&d.law.terms)) missing.push("условия");
-  const candidates=DEALS.filter(x=>x.id!==d.id);
-  const sameIndustry=candidates.filter(x=>x.ind===d.ind).sort((a,b)=>detailScore(b)-detailScore(a));
-  const globalRich=candidates.slice().sort((a,b)=>detailScore(b)-detailScore(a))[0];
-  /* Отраслевая близость полезна только вместе с содержанием. Не отправляем
-     читателя из одной пустой карточки в другую лишь потому, что у них совпал
-     сектор: берём отраслевой пример, только если он заметно богаче текущего. */
-  const richer=(sameIndustry[0]&&detailScore(sameIndustry[0])>=Math.max(10,facts+3))
-    ? sameIndustry[0] : globalRich;
+  // Ссылка «Посмотреть более подробную карточку» убрана: подбор шёл по
+  // отрасли и общей насыщенности, и предложенная сделка обычно не имела
+  // никакого отношения к этой — выглядело как случайная, ничем не
+  // объяснённая рекомендация. Честное пустое состояние не нуждается в
+  // переходе куда-то ещё, только в объяснении, чего не хватает и почему.
   const missingText=missing.length===1
     ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
     : missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
   return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
     <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Неизвестные сведения не восстанавливаем по косвенным признакам. Карточка обновится, когда появятся новые источники.</p>
-    ${richer?`<a href="#/deal/${richer.id}">Посмотреть более подробную карточку: ${richer.title}</a>`:""}
   </div>`;
 }
 const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
@@ -3629,7 +3652,7 @@ function renderFirm(id){
       <div class="deal-title" style="font-size:17px">${d.title}</div>
       <div class="deal-sub">${role?role[0]:""}${role&&role[2]?` — ${role[2]}`:""}</div>
     </div>
-    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div><div class="deal-tags">${industryTagsHtml(d)}</div></div>
+    ${dealMetaHtml(d)}
   </a>`;}).join("")}
   ${mini.map(m=>`
   <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
@@ -3826,7 +3849,7 @@ function renderAnalytics(){
   const maxIM = topIndMoney.length?topIndMoney[0][1].sum:1;
   const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${all.length} ${plural(all.length,"сделка","сделки","сделок")} из публичных источников. Графики ниже охватывают разное число сделок — под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
+  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${all.length} ${plural(all.length,"сделка","сделки","сделок")} из публичных источников за 2022 год и позже — база продолжает пополняться. Графики ниже охватывают разное число сделок — под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
   <div class="an-grid">
     <div class="an-card reveal">
       <span class="label">Сделок по годам</span>

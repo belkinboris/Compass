@@ -409,13 +409,15 @@
   {
    "id": "web:smart-lab.ru",
    "name": "Smart-Lab",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://smart-lab.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://smart-lab.ru/rss/index/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 11,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:frankmedia.ru",
@@ -571,13 +573,15 @@
   {
    "id": "web:techcrunch.com",
    "name": "TechCrunch",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://techcrunch.com/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://techcrunch.com/feed/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 7,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:prnewswire.com",
@@ -720,13 +724,15 @@
   {
    "id": "web:retailer.ru",
    "name": "Retailer.ru",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://retailer.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://retailer.ru/feed/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 5,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:orion-law.com",
@@ -907,24 +913,28 @@
   {
    "id": "web:lenta.ru",
    "name": "Lenta.ru",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://lenta.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://lenta.ru/rss/google-newsstand/main/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 4,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:ura.news",
    "name": "URA.RU",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://ura.news/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://ura.news/rss",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 4,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:ko.ru",
@@ -1160,13 +1170,15 @@
   {
    "id": "web:abnews.ru",
    "name": "АБН",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://abnews.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://abnews.ru/rss/type/feed/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 3,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:kkmp.legal",
@@ -1226,13 +1238,15 @@
   {
    "id": "web:74.ru",
    "name": "74.ru",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://74.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://74.ru/rss-feeds/rss.xml",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 3,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "web:company.rt.ru",
@@ -1660,13 +1674,15 @@
   {
    "id": "firm:o2",
    "name": "O2 Consulting",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://o2consult.com/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://o2consult.com/rss/news/",
+   "feed_checked": true,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": false
+   "enabled": true,
+   "last_check": "2026-07-31",
+   "last_error": null
   },
   {
    "id": "firm:orion",
