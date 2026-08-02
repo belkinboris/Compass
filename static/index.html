@@ -4124,14 +4124,11 @@ async function renderAssistant(){
   a.onclick = e=>{e.preventDefault();openCorrectionDialog();};
 })();
 
-/* ================= АККАУНТ: вход по ссылке, подписки, комментарии =================
-   Вход по ссылке на почту — решение владельца (28 июля 2026): аудитория —
-   юристы и консультанты, у каждого уже есть рабочая почта, не нужно хранить
-   пароли. Письмо пока не отправляется по-настоящему — нет SMTP; ссылка
-   уходит в лог сервера (см. auth.py). Пока это так, «прислать ссылку»
-   работает, но получить её может только тот, кто читает логи сервера, —
-   честно говорим об этом на самой странице, а не притворяемся, что письмо
-   уже ушло получателю. */
+/* ================= АККАУНТ: email + пароль, подписки, комментарии =================
+   Было — вход по ссылке на почту без пароля (28 июля 2026), но он требовал
+   SMTP (которого не было) и рисковал письмом в спам на каждый визит.
+   Решение владельца (2 августа 2026): обычные email + пароль, как в
+   Telegram-боте — без переписки на каждый вход (см. docstring auth.py). */
 let ME = null;
 async function refreshMe(){
   // /api/me отвечает 200 всегда (и для анонимного визита тоже) — иначе
@@ -4162,18 +4159,39 @@ async function refreshMe(){
 async function renderAccount(qs){
   await refreshMe();
   const params = new URLSearchParams(qs||"");
-  const error = params.get("error");
   if(!ME){
     app.innerHTML = `
     <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
-      <p>Без пароля: пришлём одноразовую ссылку на почту. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
-    ${error?`<p class="acct-note err reveal">Ссылка не сработала: ${esc(error)}. Запросите новую.</p>`:""}
-    <form class="acct-form reveal" id="loginForm"><input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email"><button class="chip" type="submit">Прислать ссылку</button></form>
+      <p>Почта и пароль. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
+    <form class="acct-form reveal" id="loginForm" style="flex-direction:column">
+      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
+      <input type="password" id="loginPassword" placeholder="Пароль (от 8 символов)" required autocomplete="current-password" minlength="8">
+      <input type="password" id="loginPasswordConfirm" placeholder="Повторите пароль — только для регистрации" autocomplete="new-password" minlength="8">
+      <div style="display:flex;gap:10px">
+        <button class="chip" type="submit" style="flex:1">Войти</button>
+        <button class="chip" type="button" id="registerBtn" style="flex:1">Зарегистрироваться</button>
+      </div>
+    </form>
     <p class="acct-note reveal" id="loginMsg"></p>`;
     rerun();
-    document.getElementById("loginForm").onsubmit = async e=>{
-      e.preventDefault();const email=document.getElementById("loginEmail").value.trim(),msg=document.getElementById("loginMsg");msg.textContent="Отправляем…";
-      try{const r=await fetch("/api/auth/request-link",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});msg.textContent=r.ok?"Ссылка отправлена. Она действует 15 минут.":"Проверьте адрес почты.";}catch(err){msg.textContent="Не получилось отправить запрос.";}
+    const email=()=>document.getElementById("loginEmail").value.trim();
+    const password=()=>document.getElementById("loginPassword").value;
+    const msg=document.getElementById("loginMsg");
+    const submit=async(endpoint, label)=>{
+      msg.className="acct-note reveal";msg.textContent=label+"…";
+      try{
+        const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({email:email(),password:password()})});
+        const x=await r.json().catch(()=>({}));
+        if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return;}
+        location.hash="#/account";route();
+      }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");}
+    };
+    document.getElementById("loginForm").onsubmit=e=>{e.preventDefault();submit("/api/auth/login","Входим");};
+    document.getElementById("registerBtn").onclick=()=>{
+      const p1=password(), p2=document.getElementById("loginPasswordConfirm").value;
+      if(p1!==p2){msg.className="acct-note reveal err";msg.textContent="Пароли не совпадают.";return;}
+      submit("/api/auth/register","Регистрируем");
     };
     return;
   }

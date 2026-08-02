@@ -20,7 +20,7 @@ from decimal import Decimal
 
 import httpx
 from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
@@ -39,7 +39,7 @@ from db.models import (
 )
 from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError
-from sqlalchemy import select
+from sqlalchemy import inspect, select, text
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
 _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
@@ -70,6 +70,21 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 def _create_account_tables():
     try:
         DBBase.metadata.create_all(engine)
+        # password_hash добавлен в User 2 августа — create_all его на уже
+        # СУЩЕСТВОВАВШЕЙ (до этой даты) таблице users не создаст: он создаёт
+        # только недостающие ТАБЛИЦЫ целиком, а не недостающие колонки в уже
+        # существующих. `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` — синтаксис
+        # только Postgres, на SQLite это просто синтаксическая ошибка (проверено
+        # здесь же: колонка молча не добавлялась). Проверяем через инспектор
+        # SQLAlchemy — он одинаково работает на обоих диалектах — и добавляем
+        # обычным ADD COLUMN без IF NOT EXISTS, который тоже понимают оба.
+        try:
+            with engine.begin() as conn:
+                cols = {c["name"] for c in inspect(conn).get_columns("users")}
+                if "password_hash" not in cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(200)"))
+        except Exception as e:
+            logger.error("не удалось добавить password_hash в users: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
 
@@ -255,14 +270,19 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         return JSONResponse({"fallback": True})
 
 
-# ==================== АККАУНТЫ: вход по ссылке, подписки, комментарии ====================
-# Вход по ссылке на почту (auth.py), решение владельца от 28 июля 2026 — см.
-# docstring auth.py. Отправка письма пока не подключена: SMTP не задан, ссылка
-# уходит в лог сервера строкой "[DEV]", а не в теле ответа (иначе введённая
-# чужая почта отдавала бы чужую ссылку для входа прямо в браузере).
+# ==================== АККАУНТЫ: email + пароль, подписки, комментарии ====================
+# Вход по email и паролю (auth.py), решение владельца от 2 августа 2026 —
+# см. docstring auth.py. Раньше был вход по ссылке на почту без пароля, но он
+# требовал SMTP (которого не было) и рисковал попасть в спам на каждый визит.
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+
 
 class LoginRequest(BaseModel):
     email: str
+    password: str
 
 
 class SubscriptionIn(BaseModel):
@@ -307,27 +327,26 @@ def _current_user(request: Request, db=Depends(get_db)) -> User | None:
     return auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
 
 
-@app.post("/api/auth/request-link")
-def request_link(req: LoginRequest, request: Request, db=Depends(get_db)):
-    if not auth.valid_email(req.email):
-        return JSONResponse({"error": "некорректная почта"}, status_code=400)
-    base_url = str(request.base_url).rstrip("/")
-    auth.request_login_link(db, req.email, base_url)
-    # Один и тот же ответ независимо от того, существовал пользователь раньше
-    # или нет: иначе по ответу можно узнавать, зарегистрирован ли чужой адрес.
+@app.post("/api/auth/register")
+def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
+    user, err = auth.register_user(db, req.email, req.password)
+    if not user:
+        return JSONResponse({"error": err}, status_code=400)
+    cookie = auth.create_session(db, user)
+    response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
+                         httponly=True, samesite="lax", secure=COOKIE_SECURE)
     return {"ok": True}
 
 
-@app.get("/api/auth/verify")
-def verify_link(token: str, db=Depends(get_db)):
-    user, err = auth.verify_login_token(db, token)
+@app.post("/api/auth/login")
+def login(req: LoginRequest, response: Response, db=Depends(get_db)):
+    user, err = auth.authenticate(db, req.email, req.password)
     if not user:
-        return RedirectResponse(url="/#/account?error=" + err.replace(" ", "+"), status_code=302)
+        return JSONResponse({"error": err}, status_code=400)
     cookie = auth.create_session(db, user)
-    resp = RedirectResponse(url="/#/account", status_code=302)
-    resp.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
-                     httponly=True, samesite="lax", secure=COOKIE_SECURE)
-    return resp
+    response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
+                         httponly=True, samesite="lax", secure=COOKIE_SECURE)
+    return {"ok": True}
 
 
 @app.post("/api/auth/logout")

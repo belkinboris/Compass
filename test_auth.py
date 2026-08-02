@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Вход по ссылке на почту: весь цикл на sqlite in-memory, без сети и без SMTP.
+"""Вход по email и паролю: весь цикл на sqlite in-memory, без сети.
 
 Запуск: python3 -m pytest test_auth.py -q
 """
@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import auth
-from db.models import AuthSession, Base, LoginToken, User
+from db.models import AuthSession, Base, User
 
 
 @pytest.fixture
@@ -23,54 +23,74 @@ def session():
     s.close()
 
 
-def test_request_link_never_sends_without_smtp(session, monkeypatch, caplog):
-    """Без SMTP письмо не уходит никуда — ссылка только в лог сервера."""
-    monkeypatch.delenv("SMTP_HOST", raising=False)
-    with caplog.at_level("INFO"):
-        link = auth.request_login_link(session, "Юрист@Фирма.ру", "http://localhost:8000")
-    assert "/api/auth/verify?token=" in link
-    assert any("[DEV]" in r.message for r in caplog.records)
-    row = session.query(LoginToken).one()
-    assert row.email == "юрист@фирма.ру"  # почта приведена к нижнему регистру
+def test_password_hash_round_trip():
+    h = auth.hash_password("верный-конь-скрепка")
+    assert auth.verify_password("верный-конь-скрепка", h)
+    assert not auth.verify_password("другой-пароль", h)
 
 
-def test_token_is_one_time(session):
-    """Один и тот же токен нельзя предъявить дважды — это защита от перехвата."""
-    link = auth.request_login_link(session, "a@b.ru", "http://localhost")
-    token = link.split("token=")[1]
-    user, err = auth.verify_login_token(session, token)
-    assert user is not None and err is None
-    user2, err2 = auth.verify_login_token(session, token)
-    assert user2 is None and "уже использована" in err2
+def test_password_hash_is_salted():
+    """Один и тот же пароль дважды — разные хэши: соль своя на каждый вызов."""
+    assert auth.hash_password("одинаковый") != auth.hash_password("одинаковый")
 
 
-def test_expired_token_is_refused(session):
-    session.add(LoginToken(email="x@y.ru", token="expired-token",
-                            expires_at=datetime.utcnow() - timedelta(minutes=1)))
-    session.commit()
-    user, err = auth.verify_login_token(session, "expired-token")
-    assert user is None and "истекла" in err
+def test_verify_password_rejects_malformed_hash():
+    assert not auth.verify_password("что угодно", "не-похоже-на-хэш")
+    assert not auth.verify_password("что угодно", None)
 
 
-def test_unknown_token_is_refused(session):
-    user, err = auth.verify_login_token(session, "совершенно-случайная-строка")
-    assert user is None and "не найдена" in err
-
-
-def test_first_login_creates_the_user(session):
-    """Пользователя ещё нет на момент запроса ссылки — он появляется при переходе по ней."""
-    assert session.query(User).count() == 0
-    link = auth.request_login_link(session, "new@user.ru", "http://localhost")
-    token = link.split("token=")[1]
-    user, err = auth.verify_login_token(session, token)
-    assert err is None and user.email == "new@user.ru"
+def test_register_creates_user_with_lowercase_email(session):
+    user, err = auth.register_user(session, "Юрист@Фирма.ру", "надёжный-пароль")
+    assert err is None and user is not None
+    assert user.email == "юрист@фирма.ру"
     assert session.query(User).count() == 1
 
 
+def test_register_rejects_bad_email(session):
+    user, err = auth.register_user(session, "not-an-email", "надёжный-пароль")
+    assert user is None and "почта" in err
+
+
+def test_register_rejects_short_password(session):
+    user, err = auth.register_user(session, "a@b.ru", "коротк")
+    assert user is None and "пароль" in err
+
+
+def test_register_rejects_duplicate_email(session):
+    auth.register_user(session, "a@b.ru", "первый-пароль-123")
+    user, err = auth.register_user(session, "a@b.ru", "второй-пароль-456")
+    assert user is None and "уже зарегистрирована" in err
+
+
+def test_authenticate_accepts_correct_password(session):
+    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, err = auth.authenticate(session, "a@b.ru", "правильный-пароль")
+    assert err is None and user is not None and user.email == "a@b.ru"
+
+
+def test_authenticate_is_case_insensitive_on_email(session):
+    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, err = auth.authenticate(session, "A@B.RU", "правильный-пароль")
+    assert err is None and user is not None
+
+
+def test_authenticate_rejects_wrong_password(session):
+    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, err = auth.authenticate(session, "a@b.ru", "неверный-пароль")
+    assert user is None and err is not None
+
+
+def test_authenticate_unknown_email_gives_same_error_as_wrong_password(session):
+    """Один и тот же отказ на обе причины — иначе по разнице ответов можно
+    перечислять зарегистрированные адреса."""
+    auth.register_user(session, "known@firm.ru", "правильный-пароль")
+    _, err_unknown = auth.authenticate(session, "unknown@firm.ru", "что-угодно")
+    _, err_wrong = auth.authenticate(session, "known@firm.ru", "неверный-пароль")
+    assert err_unknown == err_wrong
+
+
 def test_session_cookie_round_trip(session):
-    _, err = (None, None)
-    link = auth.request_login_link(session, "a@b.ru", "http://localhost")
-    user, err = auth.verify_login_token(session, link.split("token=")[1])
+    user, err = auth.register_user(session, "a@b.ru", "правильный-пароль")
     assert err is None
     cookie = auth.create_session(session, user)
     assert auth.current_user(session, cookie).id == user.id
@@ -79,8 +99,7 @@ def test_session_cookie_round_trip(session):
 
 
 def test_revoked_session_stops_working(session):
-    link = auth.request_login_link(session, "a@b.ru", "http://localhost")
-    user, _ = auth.verify_login_token(session, link.split("token=")[1])
+    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль")
     cookie = auth.create_session(session, user)
     assert auth.current_user(session, cookie) is not None
     auth.revoke_session(session, cookie)
@@ -88,8 +107,7 @@ def test_revoked_session_stops_working(session):
 
 
 def test_expired_session_stops_working(session):
-    link = auth.request_login_link(session, "a@b.ru", "http://localhost")
-    user, _ = auth.verify_login_token(session, link.split("token=")[1])
+    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль")
     session.add(AuthSession(user_id=user.id, token="stale-session",
                              expires_at=datetime.utcnow() - timedelta(days=1)))
     session.commit()
@@ -104,3 +122,12 @@ def test_invalid_emails_are_rejected(bad):
 @pytest.mark.parametrize("ok", ["a@b.ru", "Юрист.Консультант@firma.legal"])
 def test_valid_emails_pass(ok):
     assert auth.valid_email(ok)
+
+
+@pytest.mark.parametrize("bad", ["", "коротк", "1234567"])
+def test_invalid_passwords_are_rejected(bad):
+    assert not auth.valid_password(bad)
+
+
+def test_valid_password_passes():
+    assert auth.valid_password("восемь-символов-и-больше")
