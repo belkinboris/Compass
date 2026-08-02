@@ -86,7 +86,14 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hero-brand-name{font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:.03em}
 .hero-brand-name em{font-style:normal;color:#C9AE7C}
 @media(max-width:720px){
-  .hs-in{padding:0 26px}
+  /* justify-content:center душит контент симметрично сверху и снизу, когда
+     высота текста (кикер+заголовок+подпись+кнопка) превышает 100svh на
+     невысоких телефонах — с центрированием обрезаются И заголовок сверху,
+     И кнопка снизу разом, а с телефона это выглядит как «панель обрезана».
+     Прижимаем к верху: если высоты всё равно не хватит, потеряется менее
+     важное (кнопка/точки внизу), а не заголовок. padding-top даёт отступ
+     от логотипа (hero-brand, position:absolute top:18px + 31px высотой). */
+  .hs-in{padding:0 26px;justify-content:flex-start;padding-top:96px}
   .hs-in h1{font-size:30px}
   .hs-cue{display:none}
   .hs-arrow{display:none}
@@ -123,13 +130,15 @@ nav a.on::after,nav a:hover::after{width:100%}
   nav{gap:14px}
   nav a{font-size:10.5px;letter-spacing:.03em}
 }
-/* Прочие блоки, распиравшие страницу на мобильных: строка мини-ассистента
-   (кнопка не давала полю сжаться), переключатель типов консультантов и
-   широкая таблица фирм. Ширину ограничиваем, длинное — скроллим внутри блока. */
+/* Прочие блоки, распиравшие страницу на мобильных: переключатель типов
+   консультантов и широкая таблица фирм. Ширину ограничиваем, длинное —
+   скроллим внутри блока. Мобильную правку строки мини-ассистента см. ниже,
+   сразу после базового правила `.ask input` — здесь она молча перекрывалась
+   более поздним в каскаде безусловным `.ask input{flex:1}` (той же
+   специфичности, но объявленным позже), несмотря на истинное условие
+   `max-width`: подпись обрезалась на полуслове («Уточните д…»), а не
+   переносилась на вторую строку. */
 @media(max-width:560px){
-  .ask{flex-wrap:wrap}
-  .ask input{flex:1 1 100%;min-width:0}
-  .ask button{flex:1 1 auto;padding:12px 18px}
   .type-tabs,.lens{display:flex;max-width:100%;overflow-x:auto;scrollbar-width:none}
   .type-tabs::-webkit-scrollbar,.lens::-webkit-scrollbar{display:none}
   .type-tabs button,.lens button{flex:0 0 auto;padding:11px 15px;font-size:10.5px;letter-spacing:.05em}
@@ -531,6 +540,11 @@ a.dp-asset-name:hover{color:var(--accent)}
 .ask input:focus{outline:none;border-color:var(--accent);background:var(--card)}
 .ask button{background:var(--accent-deep);color:var(--ivory);padding:0 22px;border-radius:var(--radius);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s}
 .ask button:hover{background:var(--accent)}
+@media(max-width:560px){
+  .ask{flex-wrap:wrap}
+  .ask input{flex:1 1 100%;min-width:0}
+  .ask button{flex:1 1 auto;padding:12px 18px}
+}
 
 /* ---------- advisors ---------- */
 .notice{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:var(--radius);padding:17px 20px;margin-bottom:26px;color:var(--muted);font-size:13.5px;line-height:1.65}
@@ -582,7 +596,10 @@ a.dp-asset-name:hover{color:var(--accent)}
 .company-deal-preview:hover{color:var(--accent)}
 .company-deal-preview .date{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 .company-deal-preview .title{font-family:var(--f-display);font-size:16px;line-height:1.35}
-.company-deal-preview .meta{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+/* .title и .meta — оба <span> (строчные), а margin-top на строчном элементе
+   браузер тихо игнорирует: подпись роли клеилась встык к концу заголовка
+   («…у CitigroupПокупатель · M&A») вместо переноса на свою строку. */
+.company-deal-preview .meta{display:block;font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
 .company-deal-preview .sum{font-size:12px;white-space:nowrap;text-align:right}
 .company-deals-empty{padding:16px 20px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;line-height:1.55}
 .deal-list-dialog{width:min(860px,100%);max-height:min(86vh,860px);display:flex;flex-direction:column;padding:0;overflow:hidden}
@@ -2486,12 +2503,21 @@ function extraHtml(d){
     .replace(/[^a-zа-я0-9%$€₽]+/g," ").replace(/\s+/g," ").trim();
   const stop = new Set(["сделка","сделки","стороны","сторон","группа","группе","компания","компании","который","которая","которые","было","была","были","также","данным","публичным"]);
   const words = t => new Set(norm(t).split(" ").filter(w=>w.length>3&&!stop.has(w)));
+  // Короткое поле-ссылка (например, eco.val «41 500 млн ₽ (41,5 млрд ₽)») после
+  // фильтра стоп-слов и длины схлопывается до одного общего слова вроде
+  // «млрд» — а порог считался от МЕНЬШЕГО множества, поэтому единственное
+  // случайно совпавшее слово давало 100% «совпадения» и вырезало из «extra»
+  // целые предложения, где этого слова просто не могло не быть (любая сумма
+  // денег). Из-за этого пропадало самое важное — «кто на самом деле стоял за
+  // покупкой» — а вместо него оставался обрывок с повисшей скобкой. Требуем
+  // не только долю, но и абсолютное число общих слов — единственное общее
+  // слово долю не решает, реальный пересказ поля делит с ним несколько.
   const repeats = (a,b) => {
     const na=norm(a), nb=norm(b); if(!na||!nb) return false;
     if(na===nb || (Math.min(na.length,nb.length)>55 && (na.includes(nb)||nb.includes(na)))) return true;
     const A=words(a), B=words(b); if(!A.size||!B.size) return false;
     let common=0; A.forEach(w=>{if(B.has(w))common++;});
-    return common/Math.min(A.size,B.size)>=.72;
+    return common>=3 && common/Math.min(A.size,B.size)>=.72;
   };
   const refs = [d.sum,d.asset,d.asset_share,d.seller,d.buyer_name,
     ...Object.values(d.eco||{}).filter(v=>typeof v==="string"),
@@ -2500,7 +2526,12 @@ function extraHtml(d){
   ].filter(hasFact);
   const raw=String(d.extra||"").replace(/\s+/g," ").trim();
   if(!raw) return "";
-  const parts=(raw.match(/[^.!?]+[.!?]?/g)||[raw]).map(x=>x.trim()).filter(x=>x.length>20);
+  // Резать на предложения только по «точка/!/? + пробел + заглавная/кавычка»
+  // (правило уже принято в проекте для этого класса дефекта — см. CLAUDE.md,
+  // «точка не значит конец предложения»), а не по любой точке: «22,7 млрд
+  // руб.», «10 июля 2023 г.» рвались посреди фразы, оставляя после дедупа
+  // обрывки с повисшей закрывающей скобкой.
+  const parts=raw.split(/(?<=[.!?])\s+(?=[А-ЯЁ«"“])/).map(x=>x.trim()).filter(x=>x.length>20);
   const novel=parts.filter(part=>!refs.some(ref=>repeats(part,ref)));
   if(!novel.length) return "";
   return `<div class="extra-info reveal"><span class="label">Дополнительный контекст</span><p>${novel.join(" ")}</p></div>`;
@@ -2647,9 +2678,16 @@ function sparseNoticeHtml(d){
   // никакого отношения к этой — выглядело как случайная, ничем не
   // объяснённая рекомендация. Честное пустое состояние не нуждается в
   // переходе куда-то ещё, только в объяснении, чего не хватает и почему.
+  // При двух и более пропусках список слов из missing склеивается в предложение
+  // после уже законченной фразы («…предмет сделки. ») — первое слово нужно
+  // капитализировать вручную, иначе оно строчное сразу после точки: «…предмет
+  // сделки. цена и условия не раскрыты.» (нашлось у 6 из 10 карточек при
+  // выборочной проверке — однопунктовая ветка выше написана верно, страдает
+  // только эта).
+  const missingSentence=missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
   const missingText=missing.length===1
     ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
-    : missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
+    : missingSentence ? missingSentence.charAt(0).toUpperCase()+missingSentence.slice(1) : "";
   return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
     <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Неизвестные сведения не восстанавливаем по косвенным признакам. Карточка обновится, когда появятся новые источники.</p>
   </div>`;
@@ -2916,8 +2954,10 @@ function renderDeal(id, qs){
       ${industryLinksHtml(d)}
     </div>
     <div class="deal-parties-strong reveal">
-      ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`:(targetName?"":`<span style="color:var(--muted)">${kind.empty}</span>`)}
-      ${targetName?`${buyerName&&kind.arrow?`<span class="arrow">→</span>`:(buyerName?`<span style="color:var(--muted);font-weight:400;font-size:16px">и</span>`:"")}<a href="#/companies/${d.target}">${targetName}</a>`:""}
+      ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`
+        :(d.buyer_name?`<span>${d.buyer_name}</span>`
+        :(targetName?"":`<span style="color:var(--muted)">${kind.empty}</span>`))}
+      ${targetName?`${(buyerName||d.buyer_name)&&kind.arrow?`<span class="arrow">→</span>`:((buyerName||d.buyer_name)?`<span style="color:var(--muted);font-weight:400;font-size:16px">и</span>`:"")}<a href="#/companies/${d.target}">${targetName}</a>`:""}
     </div>
     <h1>${d.title}</h1>
     <div class="d-parties"><span>Тип: <b>${capType(d.type)}</b></span></div>
@@ -4020,7 +4060,17 @@ async function renderAssistant(){
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
   app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
-  document.getElementById("newThread").onclick=()=>{activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();};
+  document.getElementById("newThread").onclick=()=>{
+    activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();
+    // Кнопка стоит в боковой панели над историей диалогов, а сама лента —
+    // на телефоне ниже переключателя режима, за пределами первого экрана
+    // (замерено: ~150–250px между кнопкой и лентой при 390×844). Клик менял
+    // текст в ленте, но пользователь этого не видел и решал, что кнопка не
+    // сработала. Прокручиваем к ленте и ставим курсор в поле — то же самое,
+    // что подтверждает «новый диалог начат» в мессенджерах.
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+    document.getElementById("q").focus();
+  };
   bindModeToggles(app);renderThreadList();
   const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
 }
