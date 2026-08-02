@@ -1532,7 +1532,6 @@ async function loadBulkDeals(attempt=0){
   BULK_DEALS = BULK_DEALS.filter(b=>!isDup(b));
   const dropped = beforeCnt-(MINI_DEALS.length+CHANNEL_DEALS.length+BULK_DEALS.length);
   if(dropped) console.info("Скрыто компактных дублей полных карточек:", dropped);
-  AI_CONTEXT = buildContext();
   route(); // перерисовать текущую страницу с уже загруженными данными
 }
 loadBulkDeals();
@@ -1793,17 +1792,60 @@ const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal")
 /* ================= ИИ ================= */
 let aiMode = "base";
 let activeThreadId = null;
-function buildContext(){
+/* Раньше контекст на КАЖДЫЙ вопрос был один и тот же — вся база (1300+ сделок,
+   ~500 КБ JSON), даже если вопрос задан на странице одной конкретной сделки.
+   Это была главная причина медленных ответов (см. отчёт от 1 августа): модель
+   получала на вход весь массив независимо от того, о чём на самом деле спросили.
+   Теперь набор сделок в контексте зависит от того, ГДЕ задан вопрос: мини-ИИ на
+   странице сделки/компании/консультанта/отрасли передаёт только связанные с ней
+   записи (используем те же функции, что уже строят эти списки на самих
+   страницах — companyDeals/firmDeals/relatedList, а не отдельную логику); общий
+   ассистент — top-40 по совпадению слов вопроса с заголовком/отраслью/типом. */
+function relevantDeals(question, limit){
+  const words = new Set(String(question||"").toLowerCase().split(/[^а-яa-zё0-9]+/).filter(w=>w.length>3));
+  const recent = () => DEALS.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0, limit);
+  if(!words.size) return recent();
+  const scored = [];
+  DEALS.forEach(d=>{
+    const hay = `${d.title} ${d.ind} ${d.type}`.toLowerCase();
+    let score = 0;
+    words.forEach(w=>{ if(hay.includes(w)) score++; });
+    if(score) scored.push({d, score});
+  });
+  // Ни одно слово вопроса не встретилось ни в одном заголовке — вопрос общий
+  // («какая сделка крупнейшая», «кто консультировал больше всех»), а не про
+  // конкретную сделку. Отдаём самые свежие, а не пытаемся угадать релевантность.
+  if(!scored.length) return recent();
+  scored.sort((a,b)=>b.score-a.score || (b.d.date||"").localeCompare(a.d.date||""));
+  return scored.slice(0, limit).map(x=>x.d);
+}
+function buildContext(question, contextType, contextId){
+  const fullOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src});
+  const autoOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)});
+  const mapDeal = d => d.auto ? autoOf(d) : fullOf(d);
+  const byDateDesc = list => list.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+
+  let scoped = null;
+  if(contextType==="deal" && contextId){
+    const d = DEALS.find(x=>x.id===contextId);
+    if(d) scoped = [d, ...relatedList(d).slice(0,6).map(o=>o.x)];
+  } else if((contextType==="company"||contextType==="advisor") && contextId){
+    const list = contextType==="company" ? companyDeals(contextId).structured : firmDeals(contextId).full;
+    if(list.length) scoped = byDateDesc(list).slice(0,40);
+  } else if(contextType==="industry" && contextId){
+    const list = DEALS.filter(d=>d.ind===contextId);
+    if(list.length) scoped = byDateDesc(list).slice(0,50);
+  }
+  const deals = scoped || relevantDeals(question, 40);
+
   return JSON.stringify({
-  full_deals:DEALS.filter(d=>!d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src})),
-  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)})),
-  compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
-  channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
-  firms_catalog:FIRMS.map(f=>f.n),
-  investment_advisors:INV_FIRMS.map(f=>f.n)
+    deals:deals.map(mapDeal),
+    compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
+    channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
+    firms_catalog:FIRMS.map(f=>f.n),
+    investment_advisors:INV_FIRMS.map(f=>f.n)
   });
 }
-let AI_CONTEXT = buildContext();
 
 function localAnswer(q){
   const s = q.toLowerCase();
@@ -1860,7 +1902,7 @@ async function aiAnswer(q, mode, meta){
   mode = mode || aiMode;
   meta = meta || {};
   try{
-    const payload={question:q,context:AI_CONTEXT,mode,
+    const payload={question:q,context:buildContext(q,meta.contextType,meta.contextId),mode,
       thread_id:meta.threadId===undefined?null:meta.threadId,
       context_type:meta.contextType||"general",context_id:meta.contextId||null,
       save_thread:meta.saveThread===true};

@@ -561,6 +561,33 @@ def test_main_without_token_never_touches_network_or_writes(monkeypatch, tmp_pat
     assert Path(before).stat().st_mtime == mtime_before
 
 
+def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
+    """Без ограничения первый прогон с настоящим токеном разослал бы весь бэклог
+    (у нас — больше тысячи карточек) одним залпом без пауз и упёрся бы в лимит
+    Telegram (~1 сообщение/сек на канал) — см. docstring send_telegram.py,
+    «защита от первого запуска». За один прогон должно уходить не больше
+    MAX_SENDS_PER_RUN сообщений, и между ними — пауза."""
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(Path(send_telegram.DATA).read_text(encoding="utf-8"), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    sleeps = []
+    monkeypatch.setattr(send_telegram.time, "sleep", lambda s: sleeps.append(s))
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 1000 + i}} for i in range(3)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True)
+
+    assert len(fake.calls) == 3, "за один прогон ушло больше сообщений, чем разрешает лимит"
+    assert len(sleeps) == 2, "между тремя отправками должно быть ровно две паузы"
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert len(written["telegram_posts"]) == 3
+
+
 # ---------- обнаружение RSS-ленты у сайтов без известного адреса ----------
 
 def test_discover_finds_feed_link_regardless_of_attribute_order(monkeypatch):
