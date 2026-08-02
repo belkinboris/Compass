@@ -491,6 +491,7 @@ def test_match_respects_reviewed_separate_transaction():
 # ---------- отправка в Telegram ----------
 
 import send_telegram  # noqa: E402
+import seed_telegram_posts_backlog  # noqa: E402
 
 
 class _FakeResponse:
@@ -567,8 +568,14 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     Telegram (~1 сообщение/сек на канал) — см. docstring send_telegram.py,
     «защита от первого запуска». За один прогон должно уходить не больше
     MAX_SENDS_PER_RUN сообщений, и между ними — пауза."""
+    # Свой telegram_posts = {}, а не унаследованный от боевого файла: после
+    # seed_telegram_posts_backlog.py в реальной базе почти всё уже засеяно
+    # как бэклог (см. ниже), и тест не должен зависеть от того, сколько
+    # карточек сейчас реально «новые» — это отдельная, самостоятельная проверка.
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["telegram_posts"] = {}
     tmp_data = tmp_path / "deals_promoted.json"
-    tmp_data.write_text(Path(send_telegram.DATA).read_text(encoding="utf-8"), encoding="utf-8")
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
     monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
     monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
@@ -586,6 +593,49 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
 
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert len(written["telegram_posts"]) == 3
+
+
+def test_main_skips_seeded_backlog_entries_entirely(monkeypatch, tmp_path):
+    """`telegram_posts[id] = null` — метка «это бэклог, не публиковать и не
+    редактировать», а не забытая запись. Даже если у такой сделки появится
+    факт в data/inbox/updates/, правку слать нельзя: настоящего message_id
+    для неё не существует."""
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    seeded_deal = real_data["deals"][0]
+    real_data["deals"] = [seeded_deal]  # только эта карточка — никаких других кандидатов на отправку
+    real_data["telegram_posts"] = {seeded_deal["id"]: None}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    boom = _FakeClient([])  # ни один вызов не ожидается вообще
+
+    def no_client():
+        return boom
+    monkeypatch.setattr(send_telegram, "_client", no_client)
+
+    send_telegram.main(write=True)
+
+    assert boom.calls == [], "засеянную бэклог-карточку нельзя ни публиковать, ни редактировать"
+
+
+def test_seed_backlog_marks_every_existing_deal_and_nothing_else(tmp_path, monkeypatch):
+    """Каждая существующая на момент запуска сделка получает telegram_posts[id]
+    = null; уже присутствовавшие записи (например, реально опубликованные)
+    не перезаписываются."""
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps({
+        "deals": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
+        "telegram_posts": {"a": 555},  # уже реально опубликована — не трогаем
+    }), encoding="utf-8")
+    monkeypatch.setattr(seed_telegram_posts_backlog, "PATH", str(tmp_data))
+
+    seed_telegram_posts_backlog.main(write=True)
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"] == {"a": 555, "b": None, "c": None}
 
 
 # ---------- обнаружение RSS-ленты у сайтов без известного адреса ----------
