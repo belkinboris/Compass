@@ -671,7 +671,10 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .foot-h{font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#C9AE7C;margin-bottom:16px}
 .foot-col a{display:block;font-size:14px;color:#C4D2CA;padding:5px 0;transition:color .2s,transform .25s var(--ease)}
 .foot-col a:hover{color:var(--ivory);transform:translateX(4px)}
-.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:22px 0 26px;font-size:12px;color:#7E948A}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;padding:22px 0 26px;font-size:12px;color:#7E948A}
+.foot-legal-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-legal-links a{color:#7E948A;text-decoration:underline;text-underline-offset:2px}
+.foot-legal-links a:hover{color:var(--ivory)}
 @media(max-width:820px){.foot-grid{grid-template-columns:1fr;gap:30px}}
 
 @media(max-width:720px){
@@ -780,6 +783,12 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
 
+.legal-page{max-width:720px}
+.legal-page .legal-draft{background:var(--card);border:1px solid var(--line);padding:16px 20px;margin:0 0 32px;font-size:13px;color:var(--muted);line-height:1.6}
+.legal-page h2{font-family:var(--f-display);font-size:19px;font-weight:400;margin:34px 0 10px}
+.legal-page p{font-size:14px;line-height:1.7;color:var(--ink);margin:0 0 12px}
+.legal-page .ph{color:var(--muted);font-style:italic}
+
 .webinar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .webinar-card{background:var(--card);border:1px solid var(--line);padding:24px}
 .webinar-card h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.25;margin:8px 0}
@@ -859,6 +868,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
     </div>
     <div class="foot-bottom">
       <div>Данные собраны из публичных источников и могут быть неполными. Не является рейтингом или рекомендацией. На сайте показаны сделки с 2022 года, база продолжает пополняться.</div>
+      <div class="foot-legal-links"><a href="#/legal/terms">Пользовательское соглашение</a><a href="#/legal/privacy">Обработка персональных данных</a></div>
       <div class="num">MVP 0.5</div>
     </div>
   </div>
@@ -1771,6 +1781,7 @@ function route(){
     mark("analytics");
   }
   else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
+  else if(page==="legal"){renderLegal(arg);}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
@@ -4035,6 +4046,58 @@ function renderAnalytics(){
 }
 
 
+/* Черновики правовых документов — ждут утверждения владельцем и заполнения
+   реквизитов оператора (юрлицо/ИП, ОГРН/ИНН, адрес), поэтому в тексте
+   намеренно оставлены плейсхолдеры вместо выдуманных данных. */
+const LEGAL_DOCS = {
+  terms: {
+    title: "Пользовательское соглашение",
+    sections: [
+      ["Статус документа", `Черновик, готовится к утверждению. Документ определяет условия использования платформы «Компас» (далее — «Сервис»). Начиная пользоваться Сервисом, пользователь подтверждает согласие с этими условиями.`],
+      ["Оператор Сервиса", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес]</span>.`],
+      ["Что такое Сервис", `«Компас» — информационная платформа о сделках слияний и поглощений (M&A) российского рынка: карточки сделок, профили компаний и консультантов, отраслевая аналитика и ИИ-ассистент по базе данных. Сервис работает в режиме демонстрационной версии (MVP) и продолжает наполняться.`],
+      ["Характер публикуемых данных", `Сведения собираются из открытых источников и сопровождаются ссылками на них. Данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
+      ["ИИ-ассистент", `Ответы ассистента формируются автоматически, в том числе с привлечением сторонних моделей и поиска по сети Интернет (см. «Обработка персональных данных»), и могут содержать ошибки. Ассистент не заменяет консультацию профильного специалиста.`],
+      ["Учётная запись", `Регистрация выполняется по адресу электронной почты и паролю. Пользователь несёт ответственность за сохранность пароля и за действия, совершённые под его учётной записью, и обязуется не передавать доступ третьим лицам.`],
+      ["Правила использования", `Не допускается автоматизированный сбор данных Сервиса (парсинг, скрейпинг) сверх обычного личного использования через интерфейс, а также использование Сервиса в противоправных целях или в целях, нарушающих права третьих лиц.`],
+      ["Обращения и правки", `Если пользователь — сторона сделки, консультант или иное заинтересованное лицо и обнаружил неточность, форма «Написать нам» в подвале сайта передаёт обращение редакции; правки вносятся с сохранением ссылки на источник.`],
+      ["Платные тарифы", `На момент составления документа порядок оплаты платных тарифов отдельно не описан и будет опубликован при вводе оплаты в эксплуатацию.`],
+      ["Ограничение ответственности", `Сервис предоставляется «как есть». Оператор не гарантирует бесперебойную работу, полноту и абсолютную точность данных и не несёт ответственности за решения, принятые на основании материалов Сервиса.`],
+      ["Изменение условий", `Оператор вправе изменять текст соглашения; действующая редакция всегда доступна по этому адресу. Существенные изменения анонсируются на сайте.`],
+      ["Применимое право", `Отношения сторон регулируются законодательством Российской Федерации.`],
+      ["Контакты", `Форма «Написать нам» в подвале сайта.`],
+    ],
+  },
+  privacy: {
+    title: "Политика обработки персональных данных",
+    sections: [
+      ["Статус документа", `Черновик, готовится к утверждению. Документ описывает, какие персональные данные собирает платформа «Компас» (далее — «Сервис») и как их использует, в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».`],
+      ["Оператор персональных данных", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес, ответственный за обработку персональных данных]</span>.`],
+      ["Какие данные обрабатываются", `Адрес электронной почты и пароль (хранится не в открытом виде, а в виде необратимого хеша с индивидуальной солью — см. ниже); настройки уведомлений; список сделок и подборок, на которые оформлена подписка; сохранённые диалоги с ИИ-ассистентом; текст обращений через форму «Написать нам» и указанный в них контакт (по желанию пользователя); идентификатор чата Telegram — только если пользователь сам подключил бота; стандартные технические данные веб-сервера (IP-адрес, user-agent) в логах.`],
+      ["Цели обработки", `Регистрация и вход в личный кабинет; работа функций личного кабинета (подписки, отслеживаемые сделки, история диалогов с ассистентом); доставка уведомлений — внутри платформы всегда, по электронной почте и в Telegram только если пользователь включил соответствующий канал и он технически подключён; обработка обращений редакцией; техническая работа и безопасность Сервиса.`],
+      ["Основание обработки", `Согласие пользователя, выражаемое действием — регистрацией учётной записи или отправкой формы обращения.`],
+      ["Передача третьим лицам", `Текст вопроса, заданного ИИ-ассистенту, может направляться внешнему поставщику модели и поиска (Yandex Cloud) для формирования ответа — без прочих персональных данных учётной записи. Данные не продаются и не передаются третьим лицам в рекламных целях. Иным лицам данные передаются только по законному основанию (например, по запросу уполномоченного государственного органа).`],
+      ["Хранение", `Данные учётной записи хранятся в базе данных Сервиса до тех пор, пока пользователь не запросит их удаление через форму «Написать нам», либо в течение срока, установленного применимым законодательством.`],
+      ["Пароль", `Хранится исключительно в виде хеша (PBKDF2-HMAC-SHA256 с индивидуальной солью на каждого пользователя); Сервис не имеет технической возможности узнать пароль пользователя в открытом виде.`],
+      ["Файлы cookie", `Используется один технический cookie сессии, необходимый для входа в личный кабинет; он не используется для рекламного отслеживания и не передаётся третьим лицам.`],
+      ["Права пользователя", `Запросить копию своих данных, их исправление или полное удаление учётной записи — через форму «Написать нам» в подвале сайта.`],
+      ["Меры защиты", `Соединение с сайтом защищено HTTPS; пароли хешируются; доступ к базе данных ограничен технической инфраструктурой Сервиса.`],
+      ["Изменение политики", `Оператор вправе обновлять этот документ; действующая редакция всегда доступна по этому адресу.`],
+      ["Контакты", `Форма «Написать нам» в подвале сайта.`],
+    ],
+  },
+};
+
+function renderLegal(kind){
+  const doc = LEGAL_DOCS[kind] || LEGAL_DOCS.terms;
+  app.innerHTML = `<div class="sec-head reveal"><span class="label">Правовая информация</span><h1>${doc.title}</h1></div>
+  <div class="legal-page reveal">
+    <div class="legal-draft">Черновик документа, подготовлен для утверждения владельцем платформы — не является финальной юридически проверенной редакцией.</div>
+    ${doc.sections.map(([h,body])=>`<h2>${esc(h)}</h2><p>${body}</p>`).join("")}
+  </div>`;
+  rerun();
+}
+
 async function renderMaterials(){
   app.innerHTML = `<div class="sec-head reveal"><span class="label">Экспертный контур</span><h1>Материалы</h1><p>Колонки, разборы и вебинары от юристов, экономистов и консультантов рынка — под именем автора, рядом со сделками, которые он вёл.</p></div>
   <div class="materials-pitch reveal">
@@ -4206,7 +4269,7 @@ async function renderAccount(qs){
     body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
     const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
       const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
-      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте","Отправляем важные обновления и недельную сводку.","email_enabled",p.email_enabled)+row("Еженедельная сводка","Что нового появилось в базе за последние семь дней.","weekly_digest",p.weekly_digest)+row("В Telegram",p.telegram_connected?"Telegram подключён.":"Сначала подключите бота.","telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Бот свяжет этот аккаунт с вашим чатом.</div></div><button class="chip" id="connectTg" ${p.telegram_available?"":"disabled"}>${p.telegram_available?"Подключить":"Бот ещё не настроен"}</button></div>`:"");
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",p.telegram_connected?"Telegram подключён.":"Сначала подключите бота.","telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Бот свяжет этот аккаунт с вашим чатом.</div></div><button class="chip" id="connectTg" ${p.telegram_available?"":"disabled"}>${p.telegram_available?"Подключить":"Бот ещё не настроен"}</button></div>`:"");
       document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
       const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
     };

@@ -727,6 +727,7 @@ def get_notification_preferences(user: User | None = Depends(_current_user), db=
         "weekly_digest": row.weekly_digest,
         "telegram_connected": bool(row.telegram_chat_id),
         "telegram_available": bool(os.environ.get("TELEGRAM_BOT_USERNAME")),
+        "email_available": notification_service.email_configured(),
     }
 
 
@@ -741,6 +742,8 @@ def update_notification_preferences(payload: NotificationPreferencesIn,
         if value is not None:
             if field == "telegram_enabled" and value and not row.telegram_chat_id:
                 return JSONResponse({"error": "сначала подключите Telegram"}, status_code=400)
+            if field in ("email_enabled", "weekly_digest") and value and not notification_service.email_configured():
+                return JSONResponse({"error": "почтовая рассылка ещё не подключена"}, status_code=400)
             setattr(row, field, value)
     row.updated_at = datetime.utcnow()
     db.commit()

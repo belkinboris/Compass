@@ -165,6 +165,21 @@ def test_notification_preference_hides_in_app_feed(client):
     assert client.get("/api/notifications").json() == []
 
 
+def test_email_notifications_unavailable_without_smtp(client, monkeypatch):
+    """Без SMTP_HOST на сервере переключатели «почта»/«недельная сводка» не
+    должны выглядеть включаемыми — иначе пользователь ставит галочку, а
+    письмо никогда не уйдёт, и никто об этом не узнает (см. CLAUDE.md про
+    честную деградацию вместо тихой имитации успеха)."""
+    monkeypatch.delenv("SMTP_HOST", raising=False)
+    _login(client, "no-smtp-launch@firm.ru")
+    prefs = client.get("/api/notification-preferences").json()
+    assert prefs["email_available"] is False
+    r = client.patch("/api/notification-preferences", json={"email_enabled": True})
+    assert r.status_code == 400
+    r = client.patch("/api/notification-preferences", json={"weekly_digest": True})
+    assert r.status_code == 400
+
+
 def test_saved_assistant_thread(client, monkeypatch):
     _login(client, "assistant-launch@firm.ru")
     monkeypatch.setenv("YANDEX_API_KEY", "key")

@@ -30,12 +30,12 @@ def get_preferences(db, user_id: int) -> NotificationPreference:
     return row
 
 
-def _email_configured() -> bool:
+def email_configured() -> bool:
     return bool(os.environ.get("SMTP_HOST"))
 
 
 def _send_email(to_addr: str, subject: str, body: str) -> bool:
-    if not _email_configured():
+    if not email_configured():
         return False
     msg = EmailMessage()
     msg["Subject"] = subject
