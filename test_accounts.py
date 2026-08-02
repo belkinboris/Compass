@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Аккаунты через HTTP: вход по ссылке, подписки, комментарии.
+"""Аккаунты через HTTP: email + пароль, подписки, комментарии.
 
 Своя БД (см. conftest.py — DATABASE_URL выставлен там до импорта main).
-Ссылка для входа намеренно не возвращается в теле HTTP-ответа (см. auth.py),
-поэтому тесты достают токен прямым запросом к БД — так же, как это в проде
-делал бы человек, читающий письмо или лог сервера, а не подглядыванием в
-ответ, которого там нет.
 
 Запуск: python3 -m pytest test_accounts.py -q
 """
@@ -13,8 +9,10 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from db.models import Base, CorrectionRequest, LoginToken
+from db.models import Base, CorrectionRequest
 from db.session import engine, get_session
+
+TEST_PASSWORD = "надёжный-тестовый-пароль"
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -29,37 +27,56 @@ def client():
         yield c
 
 
-def latest_token(email):
-    s = get_session()
-    try:
-        row = (s.query(LoginToken).filter_by(email=email.lower())
-               .order_by(LoginToken.id.desc()).first())
-        return row.token if row else None
-    finally:
-        s.close()
-
-
 def login(client, email):
-    r = client.post("/api/auth/request-link", json={"email": email})
-    assert r.status_code == 200 and r.json() == {"ok": True}
-    token = latest_token(email)
-    assert token
-    r2 = client.get("/api/auth/verify", params={"token": token}, follow_redirects=False)
-    assert r2.status_code == 302 and "kompas_session" in r2.cookies
+    """Регистрирует и сразу логинит — куки ставятся уже на /register, но
+    некоторые тесты хотят явно проверить и повторный /login тем же паролем."""
+    r = client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    assert r.status_code == 200 and r.json() == {"ok": True} and "kompas_session" in r.cookies
     return client
 
 
-def test_request_link_rejects_bad_email(client):
-    r = client.post("/api/auth/request-link", json={"email": "not-an-email"})
+def test_register_rejects_bad_email(client):
+    r = client.post("/api/auth/register", json={"email": "not-an-email", "password": TEST_PASSWORD})
     assert r.status_code == 400
 
 
-def test_request_link_answers_the_same_for_unknown_email(client):
-    """Ответ одинаков для существующей и несуществующей почты — иначе по
-    ответу можно узнать, зарегистрирован ли чужой адрес (перечисление аккаунтов)."""
-    r1 = client.post("/api/auth/request-link", json={"email": "совсем-новый@firm.ru"})
-    r2 = client.post("/api/auth/request-link", json={"email": "тоже-новый@firm.ru"})
-    assert r1.json() == r2.json() == {"ok": True}
+def test_register_rejects_short_password(client):
+    r = client.post("/api/auth/register", json={"email": "короткий@firm.ru", "password": "1234567"})
+    assert r.status_code == 400
+
+
+def test_register_rejects_duplicate_email(client):
+    email = "дубль@firm.ru"
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    r2 = client.post("/api/auth/register", json={"email": email, "password": "другой-пароль-123"})
+    assert r2.status_code == 400
+
+
+def test_login_accepts_correct_password(client):
+    email = "повторный-вход@firm.ru"
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    other = TestClient(main.app)
+    r = other.post("/api/auth/login", json={"email": email, "password": TEST_PASSWORD})
+    assert r.status_code == 200 and "kompas_session" in r.cookies
+
+
+def test_login_rejects_wrong_password(client):
+    email = "неверный-пароль@firm.ru"
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    other = TestClient(main.app)
+    r = other.post("/api/auth/login", json={"email": email, "password": "не-тот-пароль"})
+    assert r.status_code == 400 and "kompas_session" not in r.cookies
+
+
+def test_login_unknown_email_and_wrong_password_give_the_same_error(client):
+    """Одинаковый отказ на обе причины — иначе по разнице ответов можно
+    перечислять зарегистрированные адреса."""
+    email = "известная-почта@firm.ru"
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    other = TestClient(main.app)
+    r1 = other.post("/api/auth/login", json={"email": "неизвестная-почта@firm.ru", "password": "что-угодно"})
+    r2 = other.post("/api/auth/login", json={"email": email, "password": "не-тот-пароль"})
+    assert r1.json() == r2.json()
 
 
 def test_me_without_cookie_is_200_and_anonymous(client):
@@ -79,20 +96,6 @@ def test_full_login_flow(client):
     assert body["logged_in"] is True
     assert body["email"] == "юрист@firma.ru"
     assert body["role"] == "individual" and body["tier"] == "free"
-
-
-def test_verify_rejects_unknown_token(client):
-    r = client.get("/api/auth/verify", params={"token": "нет-такого"}, follow_redirects=False)
-    assert r.status_code == 302 and "kompas_session" not in r.cookies
-
-
-def test_token_cannot_be_reused(client):
-    email = "once@firm.ru"
-    client.post("/api/auth/request-link", json={"email": email})
-    token = latest_token(email)
-    client.get("/api/auth/verify", params={"token": token})
-    r2 = client.get("/api/auth/verify", params={"token": token}, follow_redirects=False)
-    assert "kompas_session" not in r2.cookies
 
 
 def test_logout_clears_the_session(client):

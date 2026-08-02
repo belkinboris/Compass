@@ -305,6 +305,11 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(300), unique=True)
+    # Пусто у аккаунтов старой схемы (вход по ссылке, до 2 августа 2026) —
+    # таких в базе не было ни одного на момент перехода, но поле nullable
+    # на случай, если где-то в проде такая запись всё же появилась: у неё
+    # просто не будет пароля, и войти можно только новой регистрацией.
+    password_hash: Mapped[str | None] = mapped_column(String(200), nullable=True)
     role: Mapped[UserRole] = mapped_column(Enum(UserRole), default=UserRole.individual)
     tier: Mapped[UserTier] = mapped_column(Enum(UserTier), default=UserTier.free)
     firm_id: Mapped[int | None] = mapped_column(ForeignKey("advisors.id"), nullable=True)
@@ -329,29 +334,10 @@ class SavedFilter(Base):
     user: Mapped[User] = relationship(back_populates="saved_filters")
 
 
-# --------------------------------------------------------- вход по ссылке ---
-# Владелец выбрал вход по ссылке на почту вместо пароля (28 июля 2026): не
-# нужно хранить и защищать хэши паролей, а почта у профессиональной аудитории
-# и так есть. Ничего не привязывает схему к этому способу жёстко — сменить на
-# пароль или SSO позже можно, не трогая User.
-
-class LoginToken(Base):
-    """Одноразовая ссылка для входа. email — а не user_id: на момент запроса
-    пользователя может ещё не существовать (первый вход создаёт запись)."""
-    __tablename__ = "login_tokens"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(String(300))
-    token: Mapped[str] = mapped_column(String(64), unique=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
-    expires_at: Mapped[datetime] = mapped_column(DateTime)
-    used_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-
-
 class AuthSession(Base):
     """Серверная сессия за обычной httponly-кукой — без стороннего сервиса
     аутентификации и без подписи токена сторонней библиотекой: opaque-токен
-    проверяется прямым запросом к этой таблице, как и LoginToken."""
+    проверяется прямым запросом к этой таблице."""
     __tablename__ = "auth_sessions"
 
     id: Mapped[int] = mapped_column(primary_key=True)

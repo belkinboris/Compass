@@ -1,43 +1,53 @@
 # -*- coding: utf-8 -*-
-"""Вход по ссылке на почту — без пароля и без стороннего сервиса аутентификации.
+"""Вход по почте и паролю — без магической ссылки и без стороннего сервиса.
 
-ПОЧЕМУ ССЫЛКА, А НЕ ПАРОЛЬ. Решение владельца (28 июля 2026): аудитория —
-юристы, экономисты и консультанты, а не массовый B2C, и у каждого уже есть
-рабочая почта. Не нужно хранить и защищать хэши паролей вовсе. Схема БД
-(`db/models.py`) ничего не привязывает к этому способу жёстко — заменить на
-пароль или SSO позже можно, не трогая `User`.
+ПОЧЕМУ НЕ ССЫЛКА НА ПОЧТУ. Первая версия (28 июля 2026) сознательно избегала
+паролей: аудитория — юристы и консультанты, доверенная почта уже есть,
+хранить хэши не хотелось. Но ссылка требует реальной отправки писем (SMTP),
+а это добавляет отдельную точку отказа, которой не было у автопостинга в
+Telegram: письмо может попасть в спам, SMTP может быть не настроен (как и
+было все эти дни) — и тогда войти нельзя вообще, каким бы ни был пароль.
+Решение владельца (2 августа 2026): просто email + пароль, как в
+Telegram-боте (там тоже логин через токен, а не переписка). Без SMTP —
+можно совсем не заводить его для входа (понадобится только на будущее,
+если появится восстановление пароля, а не как сейчас — на каждый визит).
 
-ЧТО ЕСТЬ И ЧЕГО ПОКА НЕТ. Есть: одноразовый токен на 15 минут (`LoginToken`),
-серверная сессия на 30 дней поверх обычной httponly-куки (`AuthSession`,
-opaque-токен — без стороннего подписывающего пакета, проверяется прямым
-запросом к таблице, как и `LoginToken`). Нет: отправки письма по-настоящему —
-нужен SMTP, а его пока не задали (`SMTP_HOST` пуст). Пока его нет, ссылка не
-теряется — она пишется в лог сервера строкой `[DEV] ссылка для входа` — и
-NIKOGDA не возвращается в теле HTTP-ответа: иначе введя чужую почту в форму,
-можно было бы получить чужую ссылку для входа прямо в браузере. Тот же
-принцип, что уже применён к токену телеграм-бота: механизм готов и
-тестируется, включается одной переменной окружения, без промежуточных
-полумер.
+ХЭШИРОВАНИЕ БЕЗ НОВОЙ ЗАВИСИМОСТИ. PBKDF2-HMAC-SHA256 из стандартного
+`hashlib` — то же семейство алгоритма, что Django берёт по умолчанию;
+260 000 итераций (актуальный ориентир OWASP на 2026 год), соль на каждого
+пользователя своя (`secrets.token_hex`), сравнение хэшей — временем,
+независимым от совпадения (`secrets.compare_digest`), чтобы не утечь через
+тайминг-атаку. Отдельный pip-пакет (bcrypt/passlib) не нужен.
 
-Запуск теста от начала до конца — без сети и без SMTP:
+ЧТО ЕСТЬ. Хэш пароля в `User.password_hash`; серверная сессия на 30 дней
+поверх обычной httponly-куки (`AuthSession`, opaque-токен — без стороннего
+подписывающего пакета, проверяется прямым запросом к таблице).
+
+ЧЕГО ПОКА НЕТ (честно, а не полумерой). Восстановления забытого пароля —
+для него всё равно нужен канал связи (почта или Telegram), которого
+сегодня нет. Пока это так, ответ на «забыл пароль» — новый аккаунт с той же
+почтой невозможен (email уникален), но и починить старый нечем; когда
+появится SMTP или бот с привязкой аккаунта, это первое, что стоит достроить.
+
+Запуск теста от начала до конца — без сети:
     python3 -m pytest test_auth.py -q
 """
+import hashlib
 import logging
-import os
 import secrets
-import smtplib
 from datetime import datetime, timedelta
-from email.message import EmailMessage
 
 from sqlalchemy import select
 
-from db.models import AuthSession, LoginToken, User, UserRole, UserTier
+from db.models import AuthSession, User, UserRole, UserTier
 
 logger = logging.getLogger("kompas.auth")
 
-LOGIN_TOKEN_TTL = timedelta(minutes=15)
 SESSION_TTL = timedelta(days=30)
 SESSION_COOKIE = "kompas_session"
+
+PBKDF2_ITERATIONS = 260_000
+MIN_PASSWORD_LEN = 8
 
 
 def valid_email(email):
@@ -45,59 +55,54 @@ def valid_email(email):
     return 5 <= len(e) <= 300 and "@" in e and "." in e.split("@")[-1] and " " not in e
 
 
-def smtp_configured():
-    return bool(os.environ.get("SMTP_HOST"))
+def valid_password(password):
+    return isinstance(password, str) and MIN_PASSWORD_LEN <= len(password) <= 200
 
 
-def _send_email(to_addr, link):
-    msg = EmailMessage()
-    msg["Subject"] = "Вход в «Компас»"
-    msg["From"] = os.environ.get("SMTP_FROM", "noreply@kompas.deals")
-    msg["To"] = to_addr
-    msg.set_content("Ссылка для входа (действует 15 минут): %s\n\nЕсли вы не запрашивали вход — просто игнорируйте это письмо." % link)
-    host, port = os.environ["SMTP_HOST"], int(os.environ.get("SMTP_PORT", "587"))
-    with smtplib.SMTP(host, port, timeout=10) as smtp:
-        smtp.starttls()
-        user = os.environ.get("SMTP_USER")
-        if user:
-            smtp.login(user, os.environ.get("SMTP_PASSWORD", ""))
-        smtp.send_message(msg)
+def hash_password(password):
+    salt = secrets.token_hex(16)
+    dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt.encode("utf-8"), PBKDF2_ITERATIONS)
+    return "pbkdf2_sha256$%s$%s" % (salt, dk.hex())
 
 
-def request_login_link(session, email, base_url):
-    """Создаёт одноразовый токен; отправляет письмо, если задан SMTP, иначе
-    пишет ссылку в лог. Возвращает саму ссылку — вызывающий код (main.py)
-    обязан НЕ класть её в тело HTTP-ответа, только использовать для теста/лога."""
+def verify_password(password, stored):
+    """Сравнение временем, не зависящим от того, где хэши разошлись — иначе
+    ранний выход на первом несовпавшем байте выдаёт длину общей части."""
+    try:
+        algo, salt, hex_digest = str(stored or "").split("$")
+    except ValueError:
+        return False
+    if algo != "pbkdf2_sha256":
+        return False
+    dk = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt.encode("utf-8"), PBKDF2_ITERATIONS)
+    return secrets.compare_digest(dk.hex(), hex_digest)
+
+
+def register_user(session, email, password):
+    """(User, None) при успехе, (None, причина отказа) иначе. Email уникален —
+    вторая регистрация тем же адресом отклоняется явно, а не тихо перезаписывает
+    чужой пароль."""
+    if not valid_email(email):
+        return None, "некорректная почта"
+    if not valid_password(password):
+        return None, "пароль — от %d символов" % MIN_PASSWORD_LEN
     email = str(email).strip().lower()
-    token = secrets.token_urlsafe(32)
-    session.add(LoginToken(email=email, token=token,
-                            expires_at=datetime.utcnow() + LOGIN_TOKEN_TTL))
+    if session.scalar(select(User).where(User.email == email)):
+        return None, "эта почта уже зарегистрирована — войдите"
+    user = User(email=email, role=UserRole.individual, tier=UserTier.free,
+                password_hash=hash_password(password))
+    session.add(user)
     session.commit()
-    link = "%s/api/auth/verify?token=%s" % (base_url.rstrip("/"), token)
-    if smtp_configured():
-        _send_email(email, link)
-    else:
-        logger.info("[DEV] ссылка для входа (%s): %s", email, link)
-    return link
+    return user, None
 
 
-def verify_login_token(session, token):
-    """Токен -> (User, причина отказа). Одноразовый: used_at ставится сразу,
-    повторное предъявление того же токена больше не проходит."""
-    row = session.scalar(select(LoginToken).where(LoginToken.token == token))
-    if not row:
-        return None, "ссылка не найдена"
-    if row.used_at is not None:
-        return None, "ссылка уже использована"
-    if row.expires_at < datetime.utcnow():
-        return None, "ссылка истекла — запросите новую"
-    row.used_at = datetime.utcnow()
-    user = session.scalar(select(User).where(User.email == row.email))
-    if not user:
-        user = User(email=row.email, role=UserRole.individual, tier=UserTier.free)
-        session.add(user)
-        session.flush()
-    session.commit()
+def authenticate(session, email, password):
+    """Один и тот же отказ и на неизвестную почту, и на неверный пароль —
+    иначе по разнице ответов можно перечислять зарегистрированные адреса."""
+    email = str(email or "").strip().lower()
+    user = session.scalar(select(User).where(User.email == email))
+    if not user or not user.password_hash or not verify_password(password, user.password_hash):
+        return None, "неверная почта или пароль"
     return user, None
 
 

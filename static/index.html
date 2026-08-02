@@ -86,7 +86,14 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hero-brand-name{font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:.03em}
 .hero-brand-name em{font-style:normal;color:#C9AE7C}
 @media(max-width:720px){
-  .hs-in{padding:0 26px}
+  /* justify-content:center душит контент симметрично сверху и снизу, когда
+     высота текста (кикер+заголовок+подпись+кнопка) превышает 100svh на
+     невысоких телефонах — с центрированием обрезаются И заголовок сверху,
+     И кнопка снизу разом, а с телефона это выглядит как «панель обрезана».
+     Прижимаем к верху: если высоты всё равно не хватит, потеряется менее
+     важное (кнопка/точки внизу), а не заголовок. padding-top даёт отступ
+     от логотипа (hero-brand, position:absolute top:18px + 31px высотой). */
+  .hs-in{padding:0 26px;justify-content:flex-start;padding-top:96px}
   .hs-in h1{font-size:30px}
   .hs-cue{display:none}
   .hs-arrow{display:none}
@@ -123,13 +130,15 @@ nav a.on::after,nav a:hover::after{width:100%}
   nav{gap:14px}
   nav a{font-size:10.5px;letter-spacing:.03em}
 }
-/* Прочие блоки, распиравшие страницу на мобильных: строка мини-ассистента
-   (кнопка не давала полю сжаться), переключатель типов консультантов и
-   широкая таблица фирм. Ширину ограничиваем, длинное — скроллим внутри блока. */
+/* Прочие блоки, распиравшие страницу на мобильных: переключатель типов
+   консультантов и широкая таблица фирм. Ширину ограничиваем, длинное —
+   скроллим внутри блока. Мобильную правку строки мини-ассистента см. ниже,
+   сразу после базового правила `.ask input` — здесь она молча перекрывалась
+   более поздним в каскаде безусловным `.ask input{flex:1}` (той же
+   специфичности, но объявленным позже), несмотря на истинное условие
+   `max-width`: подпись обрезалась на полуслове («Уточните д…»), а не
+   переносилась на вторую строку. */
 @media(max-width:560px){
-  .ask{flex-wrap:wrap}
-  .ask input{flex:1 1 100%;min-width:0}
-  .ask button{flex:1 1 auto;padding:12px 18px}
   .type-tabs,.lens{display:flex;max-width:100%;overflow-x:auto;scrollbar-width:none}
   .type-tabs::-webkit-scrollbar,.lens::-webkit-scrollbar{display:none}
   .type-tabs button,.lens button{flex:0 0 auto;padding:11px 15px;font-size:10.5px;letter-spacing:.05em}
@@ -531,6 +540,11 @@ a.dp-asset-name:hover{color:var(--accent)}
 .ask input:focus{outline:none;border-color:var(--accent);background:var(--card)}
 .ask button{background:var(--accent-deep);color:var(--ivory);padding:0 22px;border-radius:var(--radius);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s}
 .ask button:hover{background:var(--accent)}
+@media(max-width:560px){
+  .ask{flex-wrap:wrap}
+  .ask input{flex:1 1 100%;min-width:0}
+  .ask button{flex:1 1 auto;padding:12px 18px}
+}
 
 /* ---------- advisors ---------- */
 .notice{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:var(--radius);padding:17px 20px;margin-bottom:26px;color:var(--muted);font-size:13.5px;line-height:1.65}
@@ -582,7 +596,10 @@ a.dp-asset-name:hover{color:var(--accent)}
 .company-deal-preview:hover{color:var(--accent)}
 .company-deal-preview .date{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 .company-deal-preview .title{font-family:var(--f-display);font-size:16px;line-height:1.35}
-.company-deal-preview .meta{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+/* .title и .meta — оба <span> (строчные), а margin-top на строчном элементе
+   браузер тихо игнорирует: подпись роли клеилась встык к концу заголовка
+   («…у CitigroupПокупатель · M&A») вместо переноса на свою строку. */
+.company-deal-preview .meta{display:block;font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
 .company-deal-preview .sum{font-size:12px;white-space:nowrap;text-align:right}
 .company-deals-empty{padding:16px 20px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;line-height:1.55}
 .deal-list-dialog{width:min(860px,100%);max-height:min(86vh,860px);display:flex;flex-direction:column;padding:0;overflow:hidden}
@@ -1396,6 +1413,7 @@ const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>has
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
+let bulkLoadFailed = false;
 // Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
 // история, которую можно будет включить позже), но на сайте не показываются:
 // это не то окно рынка, которое сейчас имеет смысл листать. Год не считаем,
@@ -1434,12 +1452,16 @@ function mergeLoadedDeal(canonical, legacy){
       historicalTitle:legacy.title,note:(legacy.extra||legacy.eco&&legacy.eco.rationale||"").slice(0,320),sources});
   }
 }
-async function loadBulkDeals(){
+async function loadBulkDeals(attempt=0){
   if(bulkLoaded) return;
-  try{
-    const r = await fetch("static/data/bulk_deals.json?v=20260716");
-    if(r.ok){ BULK_DEALS = await r.json(); }
-  }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
+  bulkLoadFailed = false;
+  if(attempt===0){
+    try{
+      const r = await fetch("static/data/bulk_deals.json?v=20260716");
+      if(r.ok){ BULK_DEALS = await r.json(); }
+    }catch(e){ console.warn("bulk_deals.json недоступен:", e); }
+  }
+  let promotedOk = false;
   try{
     const r2 = await fetch("static/data/deals_promoted.json?v=20260728o");
     if(r2.ok){
@@ -1459,8 +1481,26 @@ async function loadBulkDeals(){
         if(same) mergeLoadedDeal(same,incoming);
         else if(isDealShownOnSite(incoming)) DEALS.push(incoming);
       }
+      promotedOk = true;
     }
   }catch(e){ console.warn("deals_promoted.json недоступен:", e); }
+  if(!promotedOk){
+    // Этот файл несёт компании, match_keys и почти всю базу: без него сайт
+    // раньше молча объявлял себя загруженным с 36 захардкоженными компаниями
+    // вместо ~1800 — "161 сделка · 36 компаний" вместо настоящих чисел, без
+    // единого признака, что что-то не так (число, которое врёт, хуже
+    // честного ожидания). Мобильная сеть иногда роняет один запрос из двух —
+    // пробуем ещё несколько раз с растущей паузой, прежде чем признать
+    // неудачу и показать это явно, а не притвориться, что база полная.
+    const RETRY_LIMIT = 4;
+    if(attempt < RETRY_LIMIT){
+      setTimeout(()=>loadBulkDeals(attempt+1), 1500*(attempt+1));
+    }else{
+      bulkLoadFailed = true;
+      route();
+    }
+    return;
+  }
   bulkLoaded = true;
   // Страховка от дублей: компактная запись скрывается, если полная карточка
   // того же года пересекается с ней по >=3 значимым словам заголовка
@@ -1492,10 +1532,15 @@ async function loadBulkDeals(){
   BULK_DEALS = BULK_DEALS.filter(b=>!isDup(b));
   const dropped = beforeCnt-(MINI_DEALS.length+CHANNEL_DEALS.length+BULK_DEALS.length);
   if(dropped) console.info("Скрыто компактных дублей полных карточек:", dropped);
-  AI_CONTEXT = buildContext();
   route(); // перерисовать текущую страницу с уже загруженными данными
 }
 loadBulkDeals();
+// Кнопка «Повторить» появляется в разных местах разметки (лента, карточка,
+// главная) в зависимости от того, где пользователя застал сбой загрузки —
+// делегирование на document один раз вместо привязки после каждой отрисовки.
+document.addEventListener("click", e => {
+  if(e.target.closest && e.target.closest("#reloadBase")) loadBulkDeals();
+});
 
 /* Пока не пришли deals_promoted.json и bulk_deals.json (4,7 МБ), в базе только
    19 захардкоженных карточек и 36 компаний из 1352 и 1882. Раньше по ним молча
@@ -1503,7 +1548,22 @@ loadBulkDeals();
    и рисовала девять графиков с этими знаменателями, каталог — «36 компаний в
    базе». Число, которое секунду врёт, хуже честного ожидания (принцип 2), а
    индикатор был только в ленте. */
+/* Отдельное честное состояние на случай, когда база так и не загрузилась
+   после всех попыток (см. loadBulkDeals): раньше такого состояния не было
+   вовсе — сайт либо ждал вечно (спиннер), либо (баг) тихо считал себя
+   загруженным с горсткой захардкоженных записей. Кнопка вызывает тот же
+   loadBulkDeals() заново — обработчик навешан один раз на #app ниже,
+   а не при каждой отрисовке, потому что этот блок может оказаться где
+   угодно внутри app.innerHTML. */
+function loadFailedHtml(){
+  return `<div class="loading reveal">
+    <div class="l-head">Не удалось загрузить базу сделок</div>
+    <p>Проверьте соединение с интернетом и попробуйте ещё раз.</p>
+    <button class="chip" id="reloadBase" type="button">Повторить</button>
+  </div>`;
+}
 function loadingHtml(what){
+  if(bulkLoadFailed) return loadFailedHtml();
   return `<div class="loading reveal">
     <div class="spinner"></div>
     <div class="l-head">Загружаем базу сделок</div>
@@ -1732,17 +1792,60 @@ const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal")
 /* ================= ИИ ================= */
 let aiMode = "base";
 let activeThreadId = null;
-function buildContext(){
+/* Раньше контекст на КАЖДЫЙ вопрос был один и тот же — вся база (1300+ сделок,
+   ~500 КБ JSON), даже если вопрос задан на странице одной конкретной сделки.
+   Это была главная причина медленных ответов (см. отчёт от 1 августа): модель
+   получала на вход весь массив независимо от того, о чём на самом деле спросили.
+   Теперь набор сделок в контексте зависит от того, ГДЕ задан вопрос: мини-ИИ на
+   странице сделки/компании/консультанта/отрасли передаёт только связанные с ней
+   записи (используем те же функции, что уже строят эти списки на самих
+   страницах — companyDeals/firmDeals/relatedList, а не отдельную логику); общий
+   ассистент — top-40 по совпадению слов вопроса с заголовком/отраслью/типом. */
+function relevantDeals(question, limit){
+  const words = new Set(String(question||"").toLowerCase().split(/[^а-яa-zё0-9]+/).filter(w=>w.length>3));
+  const recent = () => DEALS.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0, limit);
+  if(!words.size) return recent();
+  const scored = [];
+  DEALS.forEach(d=>{
+    const hay = `${d.title} ${d.ind} ${d.type}`.toLowerCase();
+    let score = 0;
+    words.forEach(w=>{ if(hay.includes(w)) score++; });
+    if(score) scored.push({d, score});
+  });
+  // Ни одно слово вопроса не встретилось ни в одном заголовке — вопрос общий
+  // («какая сделка крупнейшая», «кто консультировал больше всех»), а не про
+  // конкретную сделку. Отдаём самые свежие, а не пытаемся угадать релевантность.
+  if(!scored.length) return recent();
+  scored.sort((a,b)=>b.score-a.score || (b.d.date||"").localeCompare(a.d.date||""));
+  return scored.slice(0, limit).map(x=>x.d);
+}
+function buildContext(question, contextType, contextId){
+  const fullOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src});
+  const autoOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)});
+  const mapDeal = d => d.auto ? autoOf(d) : fullOf(d);
+  const byDateDesc = list => list.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+
+  let scoped = null;
+  if(contextType==="deal" && contextId){
+    const d = DEALS.find(x=>x.id===contextId);
+    if(d) scoped = [d, ...relatedList(d).slice(0,6).map(o=>o.x)];
+  } else if((contextType==="company"||contextType==="advisor") && contextId){
+    const list = contextType==="company" ? companyDeals(contextId).structured : firmDeals(contextId).full;
+    if(list.length) scoped = byDateDesc(list).slice(0,40);
+  } else if(contextType==="industry" && contextId){
+    const list = DEALS.filter(d=>d.ind===contextId);
+    if(list.length) scoped = byDateDesc(list).slice(0,50);
+  }
+  const deals = scoped || relevantDeals(question, 40);
+
   return JSON.stringify({
-  full_deals:DEALS.filter(d=>!d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src})),
-  auto_deals_2026:DEALS.filter(d=>d.auto).map(d=>({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)})),
-  compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
-  channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
-  firms_catalog:FIRMS.map(f=>f.n),
-  investment_advisors:INV_FIRMS.map(f=>f.n)
+    deals:deals.map(mapDeal),
+    compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
+    channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
+    firms_catalog:FIRMS.map(f=>f.n),
+    investment_advisors:INV_FIRMS.map(f=>f.n)
   });
 }
-let AI_CONTEXT = buildContext();
 
 function localAnswer(q){
   const s = q.toLowerCase();
@@ -1799,7 +1902,7 @@ async function aiAnswer(q, mode, meta){
   mode = mode || aiMode;
   meta = meta || {};
   try{
-    const payload={question:q,context:AI_CONTEXT,mode,
+    const payload={question:q,context:buildContext(q,meta.contextType,meta.contextId),mode,
       thread_id:meta.threadId===undefined?null:meta.threadId,
       context_type:meta.contextType||"general",context_id:meta.contextId||null,
       save_thread:meta.saveThread===true};
@@ -2090,7 +2193,9 @@ function unifiedFeed(){
 function feedListHtml(){
   const allRows = unifiedFeed();
   const shown = allRows.slice(0, feedPage*PAGE_SIZE);
-  if(!bulkLoaded) return `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
+  if(!bulkLoaded) return bulkLoadFailed
+    ? loadFailedHtml()
+    : `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
   return `
   ${filterTheme!=="Все"?`<div class="reveal theme-note">Тема: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Тема определяется по содержанию карточки; в этой подборке показываются сделки с подробным разбором. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
@@ -2163,7 +2268,10 @@ function renderDeals(){
         <h1>Сделки российского рынка — <em>со ссылками на первоисточники</em></h1>
         <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
-        <div class="hero-note num" style="margin-top:34px"><b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}</div>
+        <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
+          ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
+          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
+        }</div>
         <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
@@ -2437,12 +2545,21 @@ function extraHtml(d){
     .replace(/[^a-zа-я0-9%$€₽]+/g," ").replace(/\s+/g," ").trim();
   const stop = new Set(["сделка","сделки","стороны","сторон","группа","группе","компания","компании","который","которая","которые","было","была","были","также","данным","публичным"]);
   const words = t => new Set(norm(t).split(" ").filter(w=>w.length>3&&!stop.has(w)));
+  // Короткое поле-ссылка (например, eco.val «41 500 млн ₽ (41,5 млрд ₽)») после
+  // фильтра стоп-слов и длины схлопывается до одного общего слова вроде
+  // «млрд» — а порог считался от МЕНЬШЕГО множества, поэтому единственное
+  // случайно совпавшее слово давало 100% «совпадения» и вырезало из «extra»
+  // целые предложения, где этого слова просто не могло не быть (любая сумма
+  // денег). Из-за этого пропадало самое важное — «кто на самом деле стоял за
+  // покупкой» — а вместо него оставался обрывок с повисшей скобкой. Требуем
+  // не только долю, но и абсолютное число общих слов — единственное общее
+  // слово долю не решает, реальный пересказ поля делит с ним несколько.
   const repeats = (a,b) => {
     const na=norm(a), nb=norm(b); if(!na||!nb) return false;
     if(na===nb || (Math.min(na.length,nb.length)>55 && (na.includes(nb)||nb.includes(na)))) return true;
     const A=words(a), B=words(b); if(!A.size||!B.size) return false;
     let common=0; A.forEach(w=>{if(B.has(w))common++;});
-    return common/Math.min(A.size,B.size)>=.72;
+    return common>=3 && common/Math.min(A.size,B.size)>=.72;
   };
   const refs = [d.sum,d.asset,d.asset_share,d.seller,d.buyer_name,
     ...Object.values(d.eco||{}).filter(v=>typeof v==="string"),
@@ -2451,7 +2568,12 @@ function extraHtml(d){
   ].filter(hasFact);
   const raw=String(d.extra||"").replace(/\s+/g," ").trim();
   if(!raw) return "";
-  const parts=(raw.match(/[^.!?]+[.!?]?/g)||[raw]).map(x=>x.trim()).filter(x=>x.length>20);
+  // Резать на предложения только по «точка/!/? + пробел + заглавная/кавычка»
+  // (правило уже принято в проекте для этого класса дефекта — см. CLAUDE.md,
+  // «точка не значит конец предложения»), а не по любой точке: «22,7 млрд
+  // руб.», «10 июля 2023 г.» рвались посреди фразы, оставляя после дедупа
+  // обрывки с повисшей закрывающей скобкой.
+  const parts=raw.split(/(?<=[.!?])\s+(?=[А-ЯЁ«"“])/).map(x=>x.trim()).filter(x=>x.length>20);
   const novel=parts.filter(part=>!refs.some(ref=>repeats(part,ref)));
   if(!novel.length) return "";
   return `<div class="extra-info reveal"><span class="label">Дополнительный контекст</span><p>${novel.join(" ")}</p></div>`;
@@ -2598,9 +2720,16 @@ function sparseNoticeHtml(d){
   // никакого отношения к этой — выглядело как случайная, ничем не
   // объяснённая рекомендация. Честное пустое состояние не нуждается в
   // переходе куда-то ещё, только в объяснении, чего не хватает и почему.
+  // При двух и более пропусках список слов из missing склеивается в предложение
+  // после уже законченной фразы («…предмет сделки. ») — первое слово нужно
+  // капитализировать вручную, иначе оно строчное сразу после точки: «…предмет
+  // сделки. цена и условия не раскрыты.» (нашлось у 6 из 10 карточек при
+  // выборочной проверке — однопунктовая ветка выше написана верно, страдает
+  // только эта).
+  const missingSentence=missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
   const missingText=missing.length===1
     ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
-    : missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
+    : missingSentence ? missingSentence.charAt(0).toUpperCase()+missingSentence.slice(1) : "";
   return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
     <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Неизвестные сведения не восстанавливаем по косвенным признакам. Карточка обновится, когда появятся новые источники.</p>
   </div>`;
@@ -2867,8 +2996,10 @@ function renderDeal(id, qs){
       ${industryLinksHtml(d)}
     </div>
     <div class="deal-parties-strong reveal">
-      ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`:(targetName?"":`<span style="color:var(--muted)">${kind.empty}</span>`)}
-      ${targetName?`${buyerName&&kind.arrow?`<span class="arrow">→</span>`:(buyerName?`<span style="color:var(--muted);font-weight:400;font-size:16px">и</span>`:"")}<a href="#/companies/${d.target}">${targetName}</a>`:""}
+      ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`
+        :(d.buyer_name?`<span>${d.buyer_name}</span>`
+        :(targetName?"":`<span style="color:var(--muted)">${kind.empty}</span>`))}
+      ${targetName?`${(buyerName||d.buyer_name)&&kind.arrow?`<span class="arrow">→</span>`:((buyerName||d.buyer_name)?`<span style="color:var(--muted);font-weight:400;font-size:16px">и</span>`:"")}<a href="#/companies/${d.target}">${targetName}</a>`:""}
     </div>
     <h1>${d.title}</h1>
     <div class="d-parties"><span>Тип: <b>${capType(d.type)}</b></span></div>
@@ -3971,7 +4102,17 @@ async function renderAssistant(){
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
   app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
-  document.getElementById("newThread").onclick=()=>{activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();};
+  document.getElementById("newThread").onclick=()=>{
+    activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();
+    // Кнопка стоит в боковой панели над историей диалогов, а сама лента —
+    // на телефоне ниже переключателя режима, за пределами первого экрана
+    // (замерено: ~150–250px между кнопкой и лентой при 390×844). Клик менял
+    // текст в ленте, но пользователь этого не видел и решал, что кнопка не
+    // сработала. Прокручиваем к ленте и ставим курсор в поле — то же самое,
+    // что подтверждает «новый диалог начат» в мессенджерах.
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+    document.getElementById("q").focus();
+  };
   bindModeToggles(app);renderThreadList();
   const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
 }
@@ -3983,14 +4124,11 @@ async function renderAssistant(){
   a.onclick = e=>{e.preventDefault();openCorrectionDialog();};
 })();
 
-/* ================= АККАУНТ: вход по ссылке, подписки, комментарии =================
-   Вход по ссылке на почту — решение владельца (28 июля 2026): аудитория —
-   юристы и консультанты, у каждого уже есть рабочая почта, не нужно хранить
-   пароли. Письмо пока не отправляется по-настоящему — нет SMTP; ссылка
-   уходит в лог сервера (см. auth.py). Пока это так, «прислать ссылку»
-   работает, но получить её может только тот, кто читает логи сервера, —
-   честно говорим об этом на самой странице, а не притворяемся, что письмо
-   уже ушло получателю. */
+/* ================= АККАУНТ: email + пароль, подписки, комментарии =================
+   Было — вход по ссылке на почту без пароля (28 июля 2026), но он требовал
+   SMTP (которого не было) и рисковал письмом в спам на каждый визит.
+   Решение владельца (2 августа 2026): обычные email + пароль, как в
+   Telegram-боте — без переписки на каждый вход (см. docstring auth.py). */
 let ME = null;
 async function refreshMe(){
   // /api/me отвечает 200 всегда (и для анонимного визита тоже) — иначе
@@ -4021,18 +4159,39 @@ async function refreshMe(){
 async function renderAccount(qs){
   await refreshMe();
   const params = new URLSearchParams(qs||"");
-  const error = params.get("error");
   if(!ME){
     app.innerHTML = `
     <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
-      <p>Без пароля: пришлём одноразовую ссылку на почту. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
-    ${error?`<p class="acct-note err reveal">Ссылка не сработала: ${esc(error)}. Запросите новую.</p>`:""}
-    <form class="acct-form reveal" id="loginForm"><input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email"><button class="chip" type="submit">Прислать ссылку</button></form>
+      <p>Почта и пароль. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
+    <form class="acct-form reveal" id="loginForm" style="flex-direction:column">
+      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
+      <input type="password" id="loginPassword" placeholder="Пароль (от 8 символов)" required autocomplete="current-password" minlength="8">
+      <input type="password" id="loginPasswordConfirm" placeholder="Повторите пароль — только для регистрации" autocomplete="new-password" minlength="8">
+      <div style="display:flex;gap:10px">
+        <button class="chip" type="submit" style="flex:1">Войти</button>
+        <button class="chip" type="button" id="registerBtn" style="flex:1">Зарегистрироваться</button>
+      </div>
+    </form>
     <p class="acct-note reveal" id="loginMsg"></p>`;
     rerun();
-    document.getElementById("loginForm").onsubmit = async e=>{
-      e.preventDefault();const email=document.getElementById("loginEmail").value.trim(),msg=document.getElementById("loginMsg");msg.textContent="Отправляем…";
-      try{const r=await fetch("/api/auth/request-link",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});msg.textContent=r.ok?"Ссылка отправлена. Она действует 15 минут.":"Проверьте адрес почты.";}catch(err){msg.textContent="Не получилось отправить запрос.";}
+    const email=()=>document.getElementById("loginEmail").value.trim();
+    const password=()=>document.getElementById("loginPassword").value;
+    const msg=document.getElementById("loginMsg");
+    const submit=async(endpoint, label)=>{
+      msg.className="acct-note reveal";msg.textContent=label+"…";
+      try{
+        const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({email:email(),password:password()})});
+        const x=await r.json().catch(()=>({}));
+        if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return;}
+        location.hash="#/account";route();
+      }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");}
+    };
+    document.getElementById("loginForm").onsubmit=e=>{e.preventDefault();submit("/api/auth/login","Входим");};
+    document.getElementById("registerBtn").onclick=()=>{
+      const p1=password(), p2=document.getElementById("loginPasswordConfirm").value;
+      if(p1!==p2){msg.className="acct-note reveal err";msg.textContent="Пароли не совпадают.";return;}
+      submit("/api/auth/register","Регистрируем");
     };
     return;
   }

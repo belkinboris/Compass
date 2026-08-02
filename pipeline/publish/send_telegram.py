@@ -25,18 +25,45 @@
 
 ЧТО СЧИТАЕТСЯ «НОВЫМ ДЛЯ ОТПРАВКИ». Сделка, отсутствующая в `telegram_posts`,
 у которой есть хотя бы предмет ИЛИ сумма (пустой заголовок без единого факта
-отправлять незачем). Черновики (`data/inbox/drafts/`) сюда не попадают —
-только то, что уже прошло `promote.py` и реально в базе.
+отправлять незачем); либо бэклог-карточка (`posts[did]` — `null`), у которой
+появился новый факт (см. ниже) — для неё это тоже первая настоящая отправка.
+Черновики (`data/inbox/drafts/`) сюда не попадают — только то, что уже
+прошло `promote.py` и реально в базе.
 
-ЧТО СЧИТАЕТСЯ «ОБНОВЛЕНИЕМ». Сделка, которая уже есть в `telegram_posts` И
-попала в `data/inbox/updates/<дата>.json` от `enrich.py` с непустым списком
+ЧТО СЧИТАЕТСЯ «ОБНОВЛЕНИЕМ». Сделка, у которой уже есть настоящий
+message_id в `telegram_posts` (не `null`) И которая попала в
+`data/inbox/updates/<дата>.json` от `enrich.py` с непустым списком
 изменений. Правится тот же пост; строка «⟳ Обновлено: …» видна прямо в тексте
 (`format_post.render(..., updates=...)`), отдельного уведомления в канал не
 шлём — `format_post.should_notify()` решает это для будущего личного
-уведомления пользователю, не для канала.
+уведомления пользователю, не для канала. Тот же новый факт у бэклог-карточки
+(`posts[did]` — `null`) — это не правка, а первая отправка (см. выше).
 
 ГРАНИЦА. Скрипт не решает, ЧТО писать, — это `format_post.py`. Он только
 довозит готовый текст до Telegram Bot API и запоминает id сообщения.
+
+ЗАЩИТА ОТ ПЕРВОГО ЗАПУСКА (найдено аудитом 1 августа, не дожидаясь, пока
+это случится по-настоящему). `telegram_posts` пока пуст, а `to_send` берёт
+ЛЮБУЮ ещё не отправленную сделку — без ограничения это были бы все карточки
+базы разом. Решение владельца (2 августа): текущий бэклог НЕ публикуется
+разом при включении канала — канал начинает жизнь с сегодняшнего дня, а не
+с трёхлетней историей рынка постами один за другим. Механика —
+`seed_telegram_posts_backlog.py` заполняет `telegram_posts` значением `null`
+для всех сделок, существующих на момент включения канала; такая запись
+значит «пока не публиковалась», а не «никогда не будет». Уточнение
+владельца (тот же день): если у бэклог-карточки позже появится настоящий
+НОВЫЙ факт (`data/inbox/updates/` от `enrich.py`, непустой `changes`) — это
+не «трогать старую карточку нельзя», а именно решение не вываливать в канал
+то, что на сайте уже лежит СЕЙЧАС; новый факт публикуется как обычный
+первый пост (без «⟳ Обновлено» — сравнивать не с чем, читатель видит
+карточку впервые), и `posts[did]` перестаёт быть `null`. За один прогон
+дополнительно уходит не больше `TELEGRAM_MAX_SENDS_PER_RUN` постов (по
+умолчанию 20, с паузой `TELEGRAM_SEND_DELAY_S` между ними, по умолчанию
+1,2 с) — двойная защита: бэклог без нового факта не отправится в принципе,
+а если счёт «новых» карточек всё равно однажды окажется большим (например,
+ретроспективно исправили дату у пачки старых карточек и они перестали быть
+бэклогом), скорость всё равно ограничена. Правки уже опубликованных постов
+делят тот же общий лимит.
 
 Запуск:
     python3 pipeline/publish/send_telegram.py              # сухой прогон
@@ -45,6 +72,7 @@
 import json
 import os
 import sys
+import time
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -58,6 +86,8 @@ import format_post  # noqa: E402
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 UPDATES_DIR = os.path.join(ROOT, 'data', 'inbox', 'updates')
 API_BASE = 'https://api.telegram.org/bot%s/%s'
+MAX_SENDS_PER_RUN = int(os.environ.get('TELEGRAM_MAX_SENDS_PER_RUN', '20'))
+SEND_DELAY_S = float(os.environ.get('TELEGRAM_SEND_DELAY_S', '1.2'))
 
 
 class TelegramError(Exception):
@@ -122,6 +152,19 @@ def main(write):
     for deal in data['deals']:
         did = deal['id']
         if did in posts:
+            if not posts[did]:
+                # `null` — сделка засеяна как бэклог (см. seed_telegram_posts_backlog.py):
+                # владелец решил не публиковать историю разом, начали с
+                # сегодняшнего дня. Это НЕ значит «никогда»: если у бэклог-карточки
+                # позже появится настоящий новый факт (enrich.py напишет его в
+                # data/inbox/updates/), для читателя это первый пост про эту
+                # сделку — отправляем его как новый (без «⟳ Обновлено», сравнивать
+                # не с чем), а не молчим вечно и не правим несуществующее сообщение.
+                changes = updates_by_id.get(did)
+                if changes and sendable(deal):
+                    text = format_post.render(deal, comps)
+                    to_send.append((did, text))
+                continue
             changes = updates_by_id.get(did)
             if changes:
                 text = format_post.render(deal, comps, updates=changes)
@@ -143,19 +186,30 @@ def main(write):
         print('Сухой прогон с настоящим токеном: не отправляю. Запись — с ключом --write.')
         return
 
+    # Лимит и пауза — см. docstring («защита от первого запуска»). Правки
+    # делят лимит с новыми постами: считаем оба списка одной очередью, а не
+    # отдельными лимитами каждый, иначе включённая одновременно куча правок
+    # обойдёт защиту с другой стороны.
+    queue = [('send', did, text) for did, text in to_send] + \
+            [('edit', did, (mid, text)) for did, mid, text in to_edit]
+    batch, rest = queue[:MAX_SENDS_PER_RUN], queue[MAX_SENDS_PER_RUN:]
+    if rest:
+        print('Лимит за прогон: %d. В очереди ещё %d — доберём в следующих прогонах.'
+              % (MAX_SENDS_PER_RUN, len(rest)))
+
     client = _client()
     sent, edited, failed = 0, 0, []
-    for did, text in to_send:
+    for i, (kind, did, payload) in enumerate(batch):
+        if i:
+            time.sleep(SEND_DELAY_S)
         try:
-            mid = post_message(client, token, chat_id, text)
-            posts[did] = mid
-            sent += 1
-        except TelegramError as e:
-            failed.append((did, str(e)))
-    for did, mid, text in to_edit:
-        try:
-            edit_message(client, token, chat_id, mid, text)
-            edited += 1
+            if kind == 'send':
+                posts[did] = post_message(client, token, chat_id, payload)
+                sent += 1
+            else:
+                mid, text = payload
+                edit_message(client, token, chat_id, mid, text)
+                edited += 1
         except TelegramError as e:
             failed.append((did, str(e)))
 

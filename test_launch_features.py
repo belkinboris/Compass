@@ -8,11 +8,13 @@ from fastapi.testclient import TestClient
 
 import main
 from db.models import (
-    Company, FinancialReport, LegalEntity, LegalEntityMatchStatus, LoginToken,
+    Company, FinancialReport, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
 )
 from db.session import get_session
 from notification_service import create_notification
+
+_TEST_PASSWORD = "надёжный-тестовый-пароль"
 
 
 @pytest.fixture
@@ -21,21 +23,9 @@ def client():
         yield c
 
 
-def _latest_token(email: str) -> str:
-    db = get_session()
-    try:
-        row = (db.query(LoginToken).filter_by(email=email.lower())
-               .order_by(LoginToken.id.desc()).first())
-        assert row
-        return row.token
-    finally:
-        db.close()
-
-
 def _login(client: TestClient, email: str) -> User:
-    assert client.post("/api/auth/request-link", json={"email": email}).status_code == 200
-    response = client.get("/api/auth/verify", params={"token": _latest_token(email)}, follow_redirects=False)
-    assert response.status_code == 302
+    response = client.post("/api/auth/register", json={"email": email, "password": _TEST_PASSWORD})
+    assert response.status_code == 200
     db = get_session()
     try:
         user = db.query(User).filter_by(email=email.lower()).one()
