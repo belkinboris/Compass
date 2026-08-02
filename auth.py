@@ -78,19 +78,35 @@ def verify_password(password, stored):
     return secrets.compare_digest(dk.hex(), hex_digest)
 
 
-def register_user(session, email, password):
+def valid_role(role):
+    try:
+        UserRole(role)
+        return True
+    except ValueError:
+        return False
+
+
+def register_user(session, email, password, full_name, company=None, position=None, role="individual"):
     """(User, None) при успехе, (None, причина отказа) иначе. Email уникален —
     вторая регистрация тем же адресом отклоняется явно, а не тихо перезаписывает
-    чужой пароль."""
+    чужой пароль. ФИО и тип аккаунта обязательны — это то, что раньше молча
+    записывалось как role=individual всем подряд без выбора при регистрации."""
     if not valid_email(email):
         return None, "некорректная почта"
     if not valid_password(password):
         return None, "пароль — от %d символов" % MIN_PASSWORD_LEN
+    full_name = str(full_name or "").strip()
+    if not (2 <= len(full_name) <= 200):
+        return None, "укажите имя и фамилию"
+    if not valid_role(role):
+        return None, "неизвестный тип аккаунта"
     email = str(email).strip().lower()
     if session.scalar(select(User).where(User.email == email)):
         return None, "эта почта уже зарегистрирована — войдите"
-    user = User(email=email, role=UserRole.individual, tier=UserTier.free,
-                password_hash=hash_password(password))
+    user = User(email=email, role=UserRole(role), tier=UserTier.free,
+                password_hash=hash_password(password), full_name=full_name,
+                company=(str(company).strip() or None) if company else None,
+                position=(str(position).strip() or None) if position else None)
     session.add(user)
     session.commit()
     return user, None

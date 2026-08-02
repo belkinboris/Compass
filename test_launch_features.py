@@ -24,7 +24,8 @@ def client():
 
 
 def _login(client: TestClient, email: str) -> User:
-    response = client.post("/api/auth/register", json={"email": email, "password": _TEST_PASSWORD})
+    response = client.post("/api/auth/register",
+                            json={"email": email, "password": _TEST_PASSWORD, "full_name": "Тест Тестов"})
     assert response.status_code == 200
     db = get_session()
     try:

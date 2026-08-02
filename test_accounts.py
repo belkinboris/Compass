@@ -30,31 +30,41 @@ def client():
 def login(client, email):
     """Регистрирует и сразу логинит — куки ставятся уже на /register, но
     некоторые тесты хотят явно проверить и повторный /login тем же паролем."""
-    r = client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    r = client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
     assert r.status_code == 200 and r.json() == {"ok": True} and "kompas_session" in r.cookies
     return client
 
 
 def test_register_rejects_bad_email(client):
-    r = client.post("/api/auth/register", json={"email": "not-an-email", "password": TEST_PASSWORD})
+    r = client.post("/api/auth/register",
+                     json={"email": "not-an-email", "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
     assert r.status_code == 400
 
 
 def test_register_rejects_short_password(client):
-    r = client.post("/api/auth/register", json={"email": "короткий@firm.ru", "password": "1234567"})
+    r = client.post("/api/auth/register",
+                     json={"email": "короткий@firm.ru", "password": "1234567", "full_name": "Тест Тестов"})
     assert r.status_code == 400
+
+
+def test_register_rejects_missing_full_name(client):
+    """До 2 августа регистрация вообще не спрашивала ФИО и тип аккаунта —
+    поле role молча писалось individual всем подряд. Теперь ФИО обязательно."""
+    r = client.post("/api/auth/register", json={"email": "без-имени@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 422  # Pydantic: full_name — обязательное поле
 
 
 def test_register_rejects_duplicate_email(client):
     email = "дубль@firm.ru"
-    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
-    r2 = client.post("/api/auth/register", json={"email": email, "password": "другой-пароль-123"})
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
+    r2 = client.post("/api/auth/register",
+                      json={"email": email, "password": "другой-пароль-123", "full_name": "Тест Тестов"})
     assert r2.status_code == 400
 
 
 def test_login_accepts_correct_password(client):
     email = "повторный-вход@firm.ru"
-    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
     other = TestClient(main.app)
     r = other.post("/api/auth/login", json={"email": email, "password": TEST_PASSWORD})
     assert r.status_code == 200 and "kompas_session" in r.cookies
@@ -62,7 +72,7 @@ def test_login_accepts_correct_password(client):
 
 def test_login_rejects_wrong_password(client):
     email = "неверный-пароль@firm.ru"
-    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
     other = TestClient(main.app)
     r = other.post("/api/auth/login", json={"email": email, "password": "не-тот-пароль"})
     assert r.status_code == 400 and "kompas_session" not in r.cookies
@@ -72,7 +82,7 @@ def test_login_unknown_email_and_wrong_password_give_the_same_error(client):
     """Одинаковый отказ на обе причины — иначе по разнице ответов можно
     перечислять зарегистрированные адреса."""
     email = "известная-почта@firm.ru"
-    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD})
+    client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
     other = TestClient(main.app)
     r1 = other.post("/api/auth/login", json={"email": "неизвестная-почта@firm.ru", "password": "что-угодно"})
     r2 = other.post("/api/auth/login", json={"email": email, "password": "не-тот-пароль"})
@@ -96,6 +106,7 @@ def test_full_login_flow(client):
     assert body["logged_in"] is True
     assert body["email"] == "юрист@firma.ru"
     assert body["role"] == "individual" and body["tier"] == "free"
+    assert body["full_name"] == "Тест Тестов"
 
 
 def test_logout_clears_the_session(client):
@@ -103,6 +114,57 @@ def test_logout_clears_the_session(client):
     assert client.get("/api/me").json()["logged_in"] is True
     client.post("/api/auth/logout")
     assert client.get("/api/me").json() == {"logged_in": False}
+
+
+def test_profile_update_round_trip(client):
+    """Профиль раньше нельзя было поправить после регистрации — role навсегда
+    оставался individual. PATCH /api/me — способ уже зарегистрированного
+    аккаунта сменить тип, не создавая новый."""
+    login(client, "профиль@firm.ru")
+    r = client.patch("/api/me", json={"company": "ООО Ромашка", "position": "Партнёр", "role": "firm"})
+    assert r.status_code == 200
+    me = client.get("/api/me").json()
+    assert me["company"] == "ООО Ромашка" and me["position"] == "Партнёр" and me["role"] == "firm"
+
+
+def test_profile_update_rejects_unknown_role(client):
+    login(client, "плохая-роль@firm.ru")
+    r = client.patch("/api/me", json={"role": "начальник"})
+    assert r.status_code == 400
+
+
+def test_profile_update_rejects_empty_full_name(client):
+    login(client, "пустое-имя@firm.ru")
+    r = client.patch("/api/me", json={"full_name": " "})
+    assert r.status_code == 400
+
+
+def test_profile_update_requires_login(client):
+    assert client.patch("/api/me", json={"company": "X"}).status_code == 401
+
+
+def test_delete_account_requires_correct_password(client):
+    login(client, "удаление-пароль@firm.ru")
+    r = client.request("DELETE", "/api/account", json={"password": "не-тот-пароль"})
+    assert r.status_code == 400
+    assert client.get("/api/me").json()["logged_in"] is True
+
+
+def test_delete_account_round_trip(client):
+    """Удаление стирает аккаунт и всё, что на него ссылалось (подписка,
+    отслеживаемая сделка) — и снова можно зарегистрироваться той же почтой."""
+    email = "удаление@firm.ru"
+    login(client, email)
+    client.post("/api/subscriptions", json={"industry": "Банки"})
+    client.post("/api/deals/gtest0001/watch")
+
+    r = client.request("DELETE", "/api/account", json={"password": TEST_PASSWORD})
+    assert r.status_code == 200
+    assert client.get("/api/me").json() == {"logged_in": False}
+
+    again = client.post("/api/auth/register",
+                         json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
+    assert again.status_code == 200
 
 
 def test_subscriptions_require_login(client):

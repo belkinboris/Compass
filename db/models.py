@@ -314,6 +314,12 @@ class User(Base):
     tier: Mapped[UserTier] = mapped_column(Enum(UserTier), default=UserTier.free)
     firm_id: Mapped[int | None] = mapped_column(ForeignKey("advisors.id"), nullable=True)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)  # бейдж «подтверждено фирмой»
+    # Добавлены 2 августа вместе с выбором типа аккаунта при регистрации —
+    # до этого регистрация жёстко писала role=individual всем подряд, и
+    # профиль показывал сырое значение поля без перевода на русский.
+    full_name: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    company: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    position: Mapped[str | None] = mapped_column(String(200), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     saved_filters: Mapped[list["SavedFilter"]] = relationship(back_populates="user", cascade="all, delete-orphan")

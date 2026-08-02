@@ -274,10 +274,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .extra-info .label{display:block;margin-bottom:10px}
 .extra-info p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
 .acct-form{display:flex;gap:10px;max-width:440px;margin:20px 0}
-.acct-form input{flex:1;padding:13px 16px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}
-.acct-form input:focus{border-color:var(--accent)}
+.acct-form input,.acct-form select{flex:1;padding:13px 16px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}
+.acct-form input:focus,.acct-form select:focus{border-color:var(--accent)}
 .acct-note{font-size:13px;color:var(--muted);max-width:440px;line-height:1.6}
 .acct-note.err{color:#B3402A}
+.acct-note a{color:var(--accent);font-weight:600}
 .acct-card{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:20px 0;max-width:520px}
 .acct-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line-soft)}
 .acct-row:last-child{border-bottom:none}
@@ -4219,48 +4220,82 @@ async function refreshMe(){
   return ME;
 }
 
+const ACCOUNT_ROLES = [["individual","Частное лицо"],["corporate","Корпоративный аккаунт"],["firm","Юридическая фирма / консультант"]];
+function roleLabel(role){ return (ACCOUNT_ROLES.find(([v])=>v===role)||[])[1] || "Частное лицо"; }
+
 async function renderAccount(qs){
   await refreshMe();
   const params = new URLSearchParams(qs||"");
   if(!ME){
-    app.innerHTML = `
-    <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
-      <p>Почта и пароль. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
-    <form class="acct-form reveal" id="loginForm" style="flex-direction:column">
-      <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
-      <input type="password" id="loginPassword" placeholder="Пароль (от 8 символов)" required autocomplete="current-password" minlength="8">
-      <input type="password" id="loginPasswordConfirm" placeholder="Повторите пароль — только для регистрации" autocomplete="new-password" minlength="8">
-      <div style="display:flex;gap:10px">
-        <button class="chip" type="submit" style="flex:1">Войти</button>
-        <button class="chip" type="button" id="registerBtn" style="flex:1">Зарегистрироваться</button>
-      </div>
-    </form>
-    <p class="acct-note reveal" id="loginMsg"></p>`;
-    rerun();
-    const email=()=>document.getElementById("loginEmail").value.trim();
-    const password=()=>document.getElementById("loginPassword").value;
-    const msg=document.getElementById("loginMsg");
-    const submit=async(endpoint, label)=>{
-      msg.className="acct-note reveal";msg.textContent=label+"…";
-      try{
-        const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({email:email(),password:password()})});
-        const x=await r.json().catch(()=>({}));
-        if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return;}
-        location.hash="#/account";route();
-      }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");}
+    let mode = "login";
+    const paint=()=>{
+      app.innerHTML = mode==="login" ? `
+      <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
+        <p>Почта и пароль. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
+      <form class="acct-form reveal" id="loginForm" style="flex-direction:column">
+        <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
+        <input type="password" id="loginPassword" placeholder="Пароль" required autocomplete="current-password" minlength="8">
+        <button class="chip on" type="submit" style="width:100%">Войти</button>
+      </form>
+      <p class="acct-note reveal" id="authMsg"></p>
+      <p class="acct-note reveal">Нет аккаунта? <a href="#" id="toRegister">Зарегистрироваться</a></p>
+      ` : `
+      <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Регистрация</h1>
+        <p>Понадобится, чтобы подписаться на сделки, получать уведомления и сохранять диалоги с ассистентом.</p></div>
+      <form class="acct-form reveal" id="registerForm" style="flex-direction:column">
+        <input type="email" id="regEmail" placeholder="you@firma.ru" required autocomplete="email">
+        <input type="text" id="regFullName" placeholder="Имя и фамилия" required autocomplete="name" minlength="2">
+        <input type="password" id="regPassword" placeholder="Пароль (от 8 символов)" required autocomplete="new-password" minlength="8">
+        <input type="password" id="regPasswordConfirm" placeholder="Повторите пароль" required autocomplete="new-password" minlength="8">
+        <input type="text" id="regCompany" placeholder="Компания (необязательно)" autocomplete="organization">
+        <input type="text" id="regPosition" placeholder="Должность (необязательно)" autocomplete="organization-title">
+        <select id="regRole">${ACCOUNT_ROLES.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select>
+        <button class="chip on" type="submit" style="width:100%">Зарегистрироваться</button>
+      </form>
+      <p class="acct-note reveal" id="authMsg"></p>
+      <p class="acct-note reveal">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></p>
+      `;
+      rerun();
+      const msg=document.getElementById("authMsg");
+      const toReg=document.getElementById("toRegister"); if(toReg) toReg.onclick=e=>{e.preventDefault();mode="register";paint();};
+      const toLog=document.getElementById("toLogin"); if(toLog) toLog.onclick=e=>{e.preventDefault();mode="login";paint();};
+      const submit=async(endpoint, label, payload)=>{
+        msg.className="acct-note reveal";msg.textContent=label+"…";
+        try{
+          const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+          const x=await r.json().catch(()=>({}));
+          if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return;}
+          location.hash="#/account";route();
+        }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");}
+      };
+      if(mode==="login"){
+        document.getElementById("loginForm").onsubmit=e=>{e.preventDefault();
+          submit("/api/auth/login","Входим",{
+            email:document.getElementById("loginEmail").value.trim(),
+            password:document.getElementById("loginPassword").value,
+          });
+        };
+      }else{
+        document.getElementById("registerForm").onsubmit=e=>{e.preventDefault();
+          const p1=document.getElementById("regPassword").value, p2=document.getElementById("regPasswordConfirm").value;
+          if(p1!==p2){msg.className="acct-note reveal err";msg.textContent="Пароли не совпадают.";return;}
+          submit("/api/auth/register","Регистрируем",{
+            email:document.getElementById("regEmail").value.trim(),
+            password:p1,
+            full_name:document.getElementById("regFullName").value.trim(),
+            company:document.getElementById("regCompany").value.trim()||null,
+            position:document.getElementById("regPosition").value.trim()||null,
+            role:document.getElementById("regRole").value,
+          });
+        };
+      }
     };
-    document.getElementById("loginForm").onsubmit=e=>{e.preventDefault();submit("/api/auth/login","Входим");};
-    document.getElementById("registerBtn").onclick=()=>{
-      const p1=password(), p2=document.getElementById("loginPasswordConfirm").value;
-      if(p1!==p2){msg.className="acct-note reveal err";msg.textContent="Пароли не совпадают.";return;}
-      submit("/api/auth/register","Регистрируем");
-    };
+    paint();
     return;
   }
   const tab=params.get("tab")||"notifications";
   app.innerHTML=`
-  <div class="sec-head reveal"><span class="label">Личный кабинет</span><h1>${esc(ME.email)}</h1><p>${ME.tier==="paid"?"Платная подписка":"Бесплатный тариф"} · ${ME.role==="firm"?"профиль консультанта":ME.role==="corporate"?"корпоративный аккаунт":"индивидуальный аккаунт"}</p></div>
+  <div class="sec-head reveal"><span class="label">Личный кабинет</span><h1>${esc(ME.full_name||ME.email)}</h1><p>${ME.tier==="paid"?"Платная подписка":"Бесплатный тариф"} · ${esc(roleLabel(ME.role))}${ME.company?` · ${esc(ME.company)}`:""}</p></div>
   <nav class="account-tabs reveal"><a href="#/account?tab=notifications" class="${tab==="notifications"?"on":""}">Уведомления</a><a href="#/account?tab=subscriptions" class="${tab==="subscriptions"?"on":""}">Подписки</a><a href="#/account?tab=profile" class="${tab==="profile"?"on":""}">Профиль</a></nav>
   <div id="accountBody"></div>`;
   rerun();
@@ -4269,7 +4304,10 @@ async function renderAccount(qs){
     body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
     const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
       const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
-      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",p.telegram_connected?"Telegram подключён.":"Сначала подключите бота.","telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Бот свяжет этот аккаунт с вашим чатом.</div></div><button class="chip" id="connectTg" ${p.telegram_available?"":"disabled"}>${p.telegram_available?"Подключить":"Бот ещё не настроен"}</button></div>`:"");
+      const tgDesc = !p.telegram_available ? "Скоро доступно — бот ещё не настроен."
+        : p.telegram_connected ? "Подключён — сюда же придёт и еженедельная сводка, если она включена."
+        : "Нажмите «Подключить» ниже: откроется чат с ботом в Telegram, останется один раз нажать Start — вводить ничего не нужно.";
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Один клик — откроет чат с ботом, там нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
       document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
       const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
     };
@@ -4283,8 +4321,84 @@ async function renderAccount(qs){
     document.getElementById("subAdd").onclick=async()=>{const industry=document.getElementById("subInd").value||null,keyword=document.getElementById("subKw").value.trim()||null,min=document.getElementById("subMin").value;if(!industry&&!keyword){alert("Укажите отрасль или ключевое слово");return;}await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword,min_amount_mln_rub:min?Number(min):null})});document.getElementById("subKw").value="";document.getElementById("subMin").value="";drawSubs();};
     drawWatches();drawSubs();
   }else{
-    body.innerHTML=`<div class="acct-card reveal"><span class="label">Профиль</span><div class="fns-registry"><div class="fns-registry-row"><span class="k">Почта</span>${esc(ME.email)}</div><div class="fns-registry-row"><span class="k">Тариф</span>${ME.tier==="paid"?"Платный":"Бесплатный"}</div><div class="fns-registry-row"><span class="k">Роль</span>${ME.role}</div><div class="fns-registry-row"><span class="k">Статус</span>${ME.is_verified?"Подтверждён":"Обычный аккаунт"}</div></div><div class="deal-tools"><button class="chip" id="logoutBtn">Выйти</button></div></div>`;
-    document.getElementById("logoutBtn").onclick=async()=>{await fetch("/api/auth/logout",{method:"POST"});await refreshMe();location.hash="#/account";route();};
+    let editing=false;
+    const paintProfile=()=>{
+      body.innerHTML = editing ? `
+      <div class="acct-card reveal"><span class="label">Профиль</span>
+        <form class="acct-form reveal" id="profileForm" style="flex-direction:column;max-width:400px">
+          <input type="text" id="pfFullName" placeholder="Имя и фамилия" value="${esc(ME.full_name||"")}" required minlength="2">
+          <input type="text" id="pfCompany" placeholder="Компания (необязательно)" value="${esc(ME.company||"")}">
+          <input type="text" id="pfPosition" placeholder="Должность (необязательно)" value="${esc(ME.position||"")}">
+          <select id="pfRole">${ACCOUNT_ROLES.map(([v,l])=>`<option value="${v}" ${v===ME.role?"selected":""}>${l}</option>`).join("")}</select>
+          <div style="display:flex;gap:10px">
+            <button class="chip on" type="submit" style="flex:1">Сохранить</button>
+            <button class="chip" type="button" id="cancelEditBtn" style="flex:1">Отмена</button>
+          </div>
+        </form>
+        <p class="acct-note reveal" id="profileMsg"></p>
+      </div>` : `
+      <div class="acct-card reveal"><span class="label">Профиль</span><div class="fns-registry">
+        <div class="fns-registry-row"><span class="k">Почта</span>${esc(ME.email)}</div>
+        <div class="fns-registry-row"><span class="k">Имя и фамилия</span>${esc(ME.full_name||"—")}</div>
+        <div class="fns-registry-row"><span class="k">Компания</span>${esc(ME.company||"—")}</div>
+        <div class="fns-registry-row"><span class="k">Должность</span>${esc(ME.position||"—")}</div>
+        <div class="fns-registry-row"><span class="k">Тип аккаунта</span>${esc(roleLabel(ME.role))}</div>
+        <div class="fns-registry-row"><span class="k">Тариф</span>${ME.tier==="paid"?"Платный":"Бесплатный"}</div>
+        <div class="fns-registry-row"><span class="k">Статус</span>${ME.is_verified?"Подтверждён":"Обычный аккаунт"}</div>
+      </div><div class="deal-tools"><button class="chip" id="editProfileBtn">Редактировать</button><button class="chip" id="logoutBtn">Выйти</button></div></div>
+      <div class="acct-card reveal" style="margin-top:18px;border-color:#E3B6A8">
+        <span class="label">Удаление аккаунта</span>
+        <p class="acct-note" style="margin:10px 0 14px">Аккаунт удаляется без возможности восстановления вместе с подписками, отслеживаемыми сделками, уведомлениями, диалогами с ассистентом и комментариями.</p>
+        <button class="chip" id="deleteAccountBtn" style="border-color:#B3402A;color:#B3402A">Удалить аккаунт</button>
+        <div id="deleteAccountBox" style="display:none;margin-top:14px">
+          <form class="acct-form reveal" id="deleteAccountForm" style="flex-direction:column;max-width:360px">
+            <input type="password" id="delPassword" placeholder="Подтвердите паролем" required autocomplete="current-password">
+            <div style="display:flex;gap:10px">
+              <button class="chip" type="submit" style="flex:1;border-color:#B3402A;color:#B3402A">Удалить безвозвратно</button>
+              <button class="chip" type="button" id="cancelDeleteBtn" style="flex:1">Отмена</button>
+            </div>
+          </form>
+          <p class="acct-note reveal err" id="deleteMsg"></p>
+        </div>
+      </div>`;
+      rerun();
+      if(editing){
+        document.getElementById("cancelEditBtn").onclick=()=>{editing=false;paintProfile();};
+        document.getElementById("profileForm").onsubmit=async e=>{
+          e.preventDefault();
+          const msg=document.getElementById("profileMsg");
+          msg.className="acct-note reveal";msg.textContent="Сохраняем…";
+          const payload={
+            full_name:document.getElementById("pfFullName").value.trim(),
+            company:document.getElementById("pfCompany").value.trim(),
+            position:document.getElementById("pfPosition").value.trim(),
+            role:document.getElementById("pfRole").value,
+          };
+          const r=await fetch("/api/me",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+          const x=await r.json().catch(()=>({}));
+          if(!r.ok){msg.textContent=x.error||"Не удалось сохранить.";msg.classList.add("err");return;}
+          await refreshMe();
+          editing=false;paintProfile();
+        };
+      }else{
+        document.getElementById("editProfileBtn").onclick=()=>{editing=true;paintProfile();};
+        document.getElementById("logoutBtn").onclick=async()=>{await fetch("/api/auth/logout",{method:"POST"});await refreshMe();location.hash="#/account";route();};
+        const delBtn=document.getElementById("deleteAccountBtn"), delBox=document.getElementById("deleteAccountBox");
+        delBtn.onclick=()=>{delBox.style.display="block";delBtn.style.display="none";};
+        document.getElementById("cancelDeleteBtn").onclick=()=>{delBox.style.display="none";delBtn.style.display="inline-block";};
+        document.getElementById("deleteAccountForm").onsubmit=async e=>{
+          e.preventDefault();
+          const msg=document.getElementById("deleteMsg");
+          msg.textContent="Удаляем…";
+          const r=await fetch("/api/account",{method:"DELETE",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({password:document.getElementById("delPassword").value})});
+          const x=await r.json().catch(()=>({}));
+          if(!r.ok){msg.textContent=x.error||"Не удалось удалить аккаунт.";return;}
+          await refreshMe();location.hash="#/";route();
+        };
+      }
+    };
+    paintProfile();
   }
   rerun();
 }

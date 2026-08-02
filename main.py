@@ -32,10 +32,10 @@ from deal_catalog import get_deal
 from deal_export import render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
-    AssistantMessage, AssistantThread, Comment, CorrectionRequest, DealWatch,
-    FinancialReport, LegalEntity, LegalEntityMatchStatus, Notification,
+    AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
+    DealWatch, FinancialReport, LegalEntity, LegalEntityMatchStatus, Notification,
     NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
-    SavedFilter, User, UserTier, Webinar,
+    SavedFilter, User, UserRole, UserTier, Webinar,
 )
 from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError
@@ -83,6 +83,11 @@ def _create_account_tables():
                 cols = {c["name"] for c in inspect(conn).get_columns("users")}
                 if "password_hash" not in cols:
                     conn.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(200)"))
+                # full_name/company/position добавлены 2 августа тем же способом —
+                # см. комментарий выше про password_hash, тот же диалект-независимый приём.
+                for col in ("full_name", "company", "position"):
+                    if col not in cols:
+                        conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} VARCHAR(200)"))
         except Exception as e:
             logger.error("не удалось добавить password_hash в users: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
@@ -278,10 +283,25 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
 class RegisterRequest(BaseModel):
     email: str
     password: str
+    full_name: str
+    company: str | None = None
+    position: str | None = None
+    role: str = "individual"
 
 
 class LoginRequest(BaseModel):
     email: str
+    password: str
+
+
+class ProfileUpdateIn(BaseModel):
+    full_name: str | None = None
+    company: str | None = None
+    position: str | None = None
+    role: str | None = None
+
+
+class AccountDeleteIn(BaseModel):
     password: str
 
 
@@ -329,7 +349,8 @@ def _current_user(request: Request, db=Depends(get_db)) -> User | None:
 
 @app.post("/api/auth/register")
 def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
-    user, err = auth.register_user(db, req.email, req.password)
+    user, err = auth.register_user(db, req.email, req.password, req.full_name,
+                                    company=req.company, position=req.position, role=req.role)
     if not user:
         return JSONResponse({"error": err}, status_code=400)
     cookie = auth.create_session(db, user)
@@ -368,7 +389,55 @@ def me(user: User | None = Depends(_current_user)):
     if not user:
         return {"logged_in": False}
     return {"logged_in": True, "email": user.email, "role": user.role.value,
-            "tier": user.tier.value, "is_verified": user.is_verified}
+            "tier": user.tier.value, "is_verified": user.is_verified,
+            "full_name": user.full_name, "company": user.company, "position": user.position}
+
+
+@app.patch("/api/me")
+def update_profile(payload: ProfileUpdateIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    if payload.full_name is not None:
+        full_name = payload.full_name.strip()
+        if not (2 <= len(full_name) <= 200):
+            return JSONResponse({"error": "укажите имя и фамилию"}, status_code=400)
+        user.full_name = full_name
+    if payload.company is not None:
+        user.company = payload.company.strip() or None
+    if payload.position is not None:
+        user.position = payload.position.strip() or None
+    if payload.role is not None:
+        if not auth.valid_role(payload.role):
+            return JSONResponse({"error": "неизвестный тип аккаунта"}, status_code=400)
+        user.role = UserRole(payload.role)
+    db.commit()
+    return {"ok": True}
+
+
+@app.delete("/api/account")
+def delete_account(payload: AccountDeleteIn, request: Request, response: Response,
+                    user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    if not user.password_hash or not auth.verify_password(payload.password, user.password_hash):
+        return JSONResponse({"error": "неверный пароль"}, status_code=400)
+    thread_ids = [t.id for t in db.query(AssistantThread).filter(AssistantThread.user_id == user.id).all()]
+    if thread_ids:
+        db.query(AssistantMessage).filter(AssistantMessage.thread_id.in_(thread_ids)) \
+            .delete(synchronize_session=False)
+    db.query(AssistantThread).filter(AssistantThread.user_id == user.id).delete(synchronize_session=False)
+    db.query(Notification).filter(Notification.user_id == user.id).delete(synchronize_session=False)
+    db.query(NotificationPreference).filter(NotificationPreference.user_id == user.id) \
+        .delete(synchronize_session=False)
+    db.query(DealWatch).filter(DealWatch.user_id == user.id).delete(synchronize_session=False)
+    db.query(SavedFilter).filter(SavedFilter.user_id == user.id).delete(synchronize_session=False)
+    db.query(Comment).filter(Comment.user_id == user.id).delete(synchronize_session=False)
+    db.query(CorrectionRequest).filter(CorrectionRequest.user_id == user.id).delete(synchronize_session=False)
+    db.query(AuthSession).filter(AuthSession.user_id == user.id).delete(synchronize_session=False)
+    db.delete(user)
+    db.commit()
+    response.delete_cookie(auth.SESSION_COOKIE)
+    return {"ok": True}
 
 
 # ==================== ФНС: ЕГРЮЛ, БФО, история изменений ====================
