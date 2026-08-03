@@ -13,11 +13,19 @@
 `law.adv`, если её там ещё нет. Чужие поля не трогает.
 
 ПОЧЕМУ ЭТО БЕЗОПАСНО — замер прогона 3 августа. Из 5005 постов 2022+ правило
-дало 76 объявлений о сделках; 11 из них сопоставились с карточками базы, и у
-9 названная фирма УЖЕ была записана — то есть правило независимо переоткрыло
-факты, которые человек подтверждал вручную в прошлых волнах. Новых оказалось
-две, и обе — тот же дефект, что у сделки Т-Технологии/Авто.ру: одна сторона
-записана, другая нет.
+дало 91 объявление о сделках; сопоставились с карточками базы 18, и у
+большинства названная фирма УЖЕ была записана — то есть правило независимо
+переоткрыло факты, которые человек подтверждал вручную в прошлых волнах.
+Дописано трое: White Square (Balchug Capital / «Радуга», там стояло «Не
+раскрывались»), Nextons (сторона продавца Ingka в сделке Газпромбанк /
+«Мега») и VERBA LEGAL (IPO GloraX) — все три того же вида, что дефект на
+сделке Т-Технологии/Авто.ру: одна сторона записана, другая нет.
+
+ПЛАНКА СОВПАДЕНИЯ — только сильные сигналы `enrich.py`. Это не формальность:
+на слабом сигнале «общие слова заголовка: 3» объявление BIRCH о продаже
+золотодобывающих компаний «Западная Голд Майнинг» связалось с карточкой про
+девелоперские проекты «Жилкапинвест». Слабые совпадения печатаются человеку
+и в базу не идут.
 
 ЧЕГО НЕ ДЕЛАЕТ. Не создаёт карточки: 65 объявлений не нашли карточки в базе,
 и это отдельная работа через обычную цепочку притока (draft.py + promote.py с
@@ -38,6 +46,7 @@ sys.path.insert(0, os.path.join(HERE, 'ingest'))
 
 import advisors                       # noqa: E402
 import classify                       # noqa: E402
+import enrich                         # noqa: E402
 import match as matcher               # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -55,10 +64,14 @@ def already_listed(deal, firm):
     return False
 
 
+def firms_preview(found):
+    return ' + '.join(found[0]) if found else ''
+
+
 def proposals(data, rows):
     by_id = {d['id']: d for d in data['deals']}
     idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
-    out = []
+    out, weak = [], []
     for row in rows:
         text = row.get('text') or ''
         if (row.get('date') or '') < SINCE:
@@ -68,17 +81,30 @@ def proposals(data, rows):
             continue
         if not classify.looks_like_deal(text[:200], text[:600]):
             continue
-        item = {'title': text[:200], 'summary': text[:600],
+        # Сопоставляем по тексту БЕЗ вводной «<Фирма> сопровождала»: в начале
+        # пресс-релиза стоит имя фирмы, а не предмет сделки, и `match.py` из-за
+        # этого не узнавал свои же карточки. Замер: 12 совпадений против 18.
+        deal_body = advisors.deal_text(text)
+        item = {'title': deal_body[:200], 'summary': deal_body[:600],
                 'url': row['url'], 'date': row['date']}
         deal_id, why = matcher.match(item, idx)
         if not deal_id:
+            continue
+        # ТОЛЬКО сильные сигналы — та же планка, что у `enrich.py`. Проверено
+        # на живом примере: слабый сигнал «общие слова заголовка: 3» связал
+        # объявление BIRCH о продаже золотодобывающих компаний «Западная Голд
+        # Майнинг» с карточкой про девелоперские проекты «Жилкапинвест» —
+        # общие слова нашлись, сделки разные. Дописать консультанта в ЧУЖУЮ
+        # сделку хуже, чем не дописать вовсе.
+        if not enrich.is_strong(why):
+            weak.append((deal_id, firms_preview(found), why, row['url']))
             continue
         firms, role, sentence = found
         deal = by_id[deal_id]
         for firm in firms:
             if not already_listed(deal, firm):
                 out.append((deal_id, firm, role, sentence, row['url'], why))
-    return out
+    return out, weak
 
 
 def main(write=False):
@@ -86,7 +112,7 @@ def main(write=False):
     rows = [json.loads(l) for l in open(ARCHIVE, encoding='utf-8') if l.strip()]
     by_id = {d['id']: d for d in data['deals']}
 
-    props = proposals(data, rows)
+    props, weak = proposals(data, rows)
     print('объявлений, дающих НОВОГО консультанта существующей карточке: %d' % len(props))
     for deal_id, firm, role, sentence, url, why in props:
         deal = by_id[deal_id]
@@ -94,6 +120,11 @@ def main(write=False):
         print('    было: %s' % ([a[1] for a in ((deal.get('law') or {}).get('adv') or []) if len(a) > 1] or 'пусто'))
         print('    ставим: %s — %s   [совпадение: %s]' % (role, firm, why))
         print('    источник: %s' % url)
+
+    if weak:
+        print('\nслабое совпадение — человеку, в базу НЕ идёт: %d' % len(weak))
+        for deal_id, firms, why, url in weak:
+            print('  %s <- %s  [%s]  %s' % (deal_id, firms, why, url))
 
     if write:
         for deal_id, firm, role, sentence, url, why in props:
