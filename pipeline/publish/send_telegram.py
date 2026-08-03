@@ -82,10 +82,10 @@ if ROOT not in sys.path:
 sys.path.insert(0, HERE)
 
 import format_post  # noqa: E402
+import telegram_endpoint  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 UPDATES_DIR = os.path.join(ROOT, 'data', 'inbox', 'updates')
-API_BASE = 'https://api.telegram.org/bot%s/%s'
 MAX_SENDS_PER_RUN = int(os.environ.get('TELEGRAM_MAX_SENDS_PER_RUN', '20'))
 SEND_DELAY_S = float(os.environ.get('TELEGRAM_SEND_DELAY_S', '1.2'))
 
@@ -100,7 +100,7 @@ def _client():
 
 
 def post_message(client, token, chat_id, text):
-    r = client.post(API_BASE % (token, 'sendMessage'), json={
+    r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
         'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML', 'disable_web_page_preview': True,
     })
     body = r.json()
@@ -110,7 +110,7 @@ def post_message(client, token, chat_id, text):
 
 
 def edit_message(client, token, chat_id, message_id, text):
-    r = client.post(API_BASE % (token, 'editMessageText'), json={
+    r = client.post(telegram_endpoint.method_url(token, 'editMessageText'), json={
         'chat_id': chat_id, 'message_id': message_id, 'text': text,
         'parse_mode': 'HTML', 'disable_web_page_preview': True,
     })

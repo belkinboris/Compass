@@ -492,6 +492,7 @@ def test_match_respects_reviewed_separate_transaction():
 
 import send_telegram  # noqa: E402
 import seed_telegram_posts_backlog  # noqa: E402
+import telegram_endpoint  # noqa: E402
 
 
 class _FakeResponse:
@@ -511,6 +512,50 @@ class _FakeClient:
     def post(self, url, json):
         self.calls.append((url, json))
         return _FakeResponse(self.replies.pop(0))
+
+
+def test_api_root_is_telegram_directly_when_relay_is_not_configured(monkeypatch):
+    monkeypatch.delenv("TELEGRAM_API_BASE", raising=False)
+    assert telegram_endpoint.api_root() == "https://api.telegram.org"
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://api.telegram.org/botTOKEN/sendMessage"
+
+
+def test_api_root_uses_relay_when_configured(monkeypatch):
+    """Прямая связь Timeweb (РФ) -> api.telegram.org даёт ~32% отказов
+    (замер соседнего проекта «Автопост», 19 июля 2026) — релей на Cloudflare
+    Workers убирает причину на уровне сети. Путь /bot<токен>/<метод> воркер
+    пробрасывает как есть, поэтому один воркер обслуживает любого бота."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_api_root_survives_relay_address_without_scheme(monkeypatch):
+    """Значение без «https://» даёт UnsupportedProtocol мгновенно, без единой
+    попытки сети, — такую ошибку легко принять за сетевую и искать причину не
+    там (ровно это и произошло в «Автопосте» 19 июля 2026). Схему дописываем
+    сами, а не надеемся, что её не забудут в панели хостинга."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "relay.workers.dev")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_api_root_ignores_trailing_slash(monkeypatch):
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev/")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_send_telegram_actually_calls_the_relay(monkeypatch):
+    """Мало иметь верный адрес — отправка обязана им пользоваться. Раньше
+    адрес был захардкожен в константе модуля, и подмена переменной окружения
+    на него бы не повлияла."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev")
+    client = _FakeClient([{"ok": True, "result": {"message_id": 1}}])
+    send_telegram.post_message(client, "TOKEN", "@channel", "текст")
+    url, _payload = client.calls[0]
+    assert url.startswith("https://relay.workers.dev/"), url
 
 
 def test_sendable_requires_at_least_one_real_fact():

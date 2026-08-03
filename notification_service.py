@@ -16,6 +16,7 @@ from email.message import EmailMessage
 import httpx
 from sqlalchemy import select
 
+import telegram_endpoint
 from db.models import DealWatch, Notification, NotificationPreference, User
 
 logger = logging.getLogger("kompas.notifications")
@@ -61,7 +62,7 @@ def _send_telegram(chat_id: str, text: str) -> bool:
         return False
     try:
         response = httpx.post(
-            f"https://api.telegram.org/bot{token}/sendMessage",
+            telegram_endpoint.method_url(token, "sendMessage"),
             json={"chat_id": chat_id, "text": text, "disable_web_page_preview": True},
             timeout=12,
         )
