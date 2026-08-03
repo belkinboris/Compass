@@ -35,6 +35,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 
 import classify                                     # noqa: E402
+import curated                                      # noqa: E402
 import draft                                        # noqa: E402
 import match as matcher                             # noqa: E402
 
@@ -72,7 +73,12 @@ def to_date(published, fallback):
 def main(argv):
     rows = read_raw('--all' in argv)
     data = json.load(open(DATA, encoding='utf-8'))
-    idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
+    # Индекс по ОБЕИМ частям базы. 19 кураторских карточек живут в
+    # static/index.html, а не в deals_promoted.json, и приток был к ним
+    # структурно слеп: новость о Hugo Boss/«Стокманне» или Яндекс/«Заряде»
+    # считалась новой сделкой. Нашлось не проверкой кода, а тем, что владелец
+    # вбил две сделки, которые точно помнит, и обе оказались на сайте.
+    idx = curated.index_all(data, matcher)
 
     result, counts, seen = [], {'not_a_deal': 0, 'enrich': 0, 'new': 0, 'duplicate': 0}, set()
     for row in rows:
