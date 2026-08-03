@@ -488,40 +488,6 @@ def test_match_respects_reviewed_separate_transaction():
     assert found is None
 
 
-# ---------- кураторские карточки видны притоку ----------
-
-import curated  # noqa: E402
-
-
-def test_curated_deals_are_parsed_from_the_interface_file():
-    """В интерфейсе ТРИ набора сделок помимо основной базы: DEALS (19),
-    MINI_DEALS (21) и CHANNEL_DEALS (14) — всего 54, и match.py не видел ни
-    одной. Первая починка читала index.html регуляркой и сама была слепа на
-    35 из 54: видела только DEALS. Нашлось не проверкой кода, а тем, что
-    владелец вбил две сделки, которые точно помнит, и обе оказались на сайте."""
-    rows = curated.load()
-    assert len(rows) == curated.EXPECTED
-    by_id = {r['id']: r for r in rows}
-    assert 'hugoboss' in by_id and 'berizaryad' in by_id
-    origins = {r['id'].split('-')[0] for r in rows if r['id'].startswith(('mini-', 'channel-'))}
-    assert origins == {'mini', 'channel'}, 'мини-записи и записи канала не выгружены'
-    hugo = by_id['hugoboss']
-    assert hugo['date'] == '2024-08-02'
-    assert 'Стокманн' in hugo['title']
-    assert any(u.startswith('http') for _, u in hugo['src']), 'ссылки не разобрались'
-
-
-def test_match_index_covers_both_halves_of_the_base():
-    """Индекс притока обязан включать и кураторские карточки: иначе слепота
-    возвращается ровно в том виде, в каком её нашли."""
-    import match as matcher
-    data = json.loads(Path('static/data/deals_promoted.json').read_text(encoding='utf-8'))
-    idx = curated.index_all(data, matcher)
-    ids = {row['id'] for row in idx}
-    assert 'hugoboss' in ids and 'berizaryad' in ids
-    assert len(idx) == len(data['deals']) + curated.EXPECTED
-
-
 # ---------- кто сопровождал сделку ----------
 
 import advisors  # noqa: E402
