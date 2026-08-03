@@ -189,7 +189,8 @@
    "seller_src": "title",
    "target_was_seller": true,
    "asset": "Директ Стар",
-   "asset_share": "80%"
+   "asset_share": "80%",
+   "seller_id": "g3c770eda"
   },
   {
    "id": "g7bbe19c2",
@@ -16708,7 +16709,7 @@
    "id": "g938e85ca",
    "date": "2021-07-22",
    "title": "TMT Investments возглавил раунд на $1,5 млн в эстонский SaaS-стартап Postoplan",
-   "buyer": null,
+   "buyer": "g5f515899",
    "target": null,
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
@@ -16765,7 +16766,6 @@
    ],
    "extra": "Раунд возглавил фонд TMT Investments (сооснователи Артём Инютин и Герман Каплун), соинвесторами выступили фонды YellowRockets.vc и Bergtop.vc. Инвестиция оформлена в виде конвертируемого займа сроком на один год; после конвертации инвесторы получат до 10% акций стартапа, при этом основатели сохраняют контроль над компанией. Оценка Postoplan в ходе раунда составила €20 млн — рост в 12 раз за год на фоне увеличения выручки: €100 тыс. в 2020 г., ~€500 тыс. за первое полугодие 2021 г., прогноз на весь 2021 г. — €1,5 млн. Средства планировалось направить на укрепление позиций на рынке США и развитие алгоритмов платформы; с учётом данного раунда совокупные привлечённые инвестиции Postoplan составили $2,2 млн.",
    "auto": true,
-   "buyer_name": "TMT Investments",
    "asset": "Postoplan"
   },
   {
@@ -22766,7 +22766,8 @@
    "extra": "Договор купли-продажи подписан 25 февраля 2025 года, переход права собственности на акции — 26 февраля; сумма сделки раскрыта в отчётности операционной компании покупателя ООО «Авторитэйл М» лишь в апреле 2025 года. Цена сделки (18,1 млрд руб.) составляет около 0,96x капитала банка на конец 2024 года (18,86 млрд руб.). На момент закрытия «Ингосстрах Банк» занимал 52–53-е место по активам в банковской системе РФ и имел клиентскую базу свыше 250 тыс. розничных и корпоративных клиентов. Стратегическая цель покупателя — развитие собственных финансовых продуктов (автокредитование, факторинг, банковские гарантии) для наращивания продаж коммерческого и легкового транспорта; банк переименован в «Инго Банк» в конце июля 2025 года. Незадолго до закрытия сделки структура собственности ГК «Авторитэйл» была реструктурирована: к концу января 2025 года 100% долей головной компании перешли к сейшельской Барнада Продашкн Лтд.",
    "auto": true,
    "seller": "«Ингосстрах»",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "g4a281a8e"
   },
   {
    "id": "ga80371a8",
@@ -32412,7 +32413,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Норникель",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "g72e3b46f"
   },
   {
    "id": "gd5741cbd",
@@ -52179,7 +52181,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "СДС-Холдинг",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "gadb8cae6"
   },
   {
    "id": "g4762fc3d",
@@ -52987,7 +52990,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "PPF Real Estate",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "g7b8bd1f5"
   },
   {
    "id": "gcbcd9b28",
@@ -53741,7 +53745,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Royal Greenland",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "ge6e44c7d"
   },
   {
    "id": "gdc4ff4ab",
@@ -57800,7 +57805,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Mall Management Group",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "gee230aeb"
   },
   {
    "id": "gb84f2b2f",
@@ -59231,7 +59237,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Lindström",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "g40eb61ad"
   },
   {
    "id": "ga3ca0cde",
@@ -59854,7 +59861,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Russia Partners",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "gd4d9df41"
   },
   {
    "id": "g2f572b66",
@@ -61545,7 +61553,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Группа «Уралсиб»",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "ge1773adc"
   },
   {
    "id": "gb7363fed",
@@ -65624,7 +65633,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "Kiilto",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "gb7459d53"
   },
   {
    "id": "g0e8b9617",
@@ -67220,7 +67230,8 @@
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "«Абрау-Дюрсо»",
-   "seller_src": "text"
+   "seller_src": "text",
+   "seller_id": "g53308e89"
   },
   {
    "id": "gb6b5625e",
