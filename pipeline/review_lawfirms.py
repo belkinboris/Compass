@@ -51,12 +51,47 @@ def has(value):
     return not text.startswith(('не раскры', 'не привлекал', 'публично не', 'не сообщал'))
 
 
+# Все подписанные поля карточки, кроме заголовка и даты. Список полный
+# намеренно: разбор сначала проверял шесть полей, и «дополнять нечем» у
+# найденной карточки означало лишь «нечем из этих шести». Замечание владельца
+# — «не факт же, что в дубле есть вся информация, которая есть в посте» —
+# верно ровно потому, что проверка была уже, чем карточка.
+FIELDS = [
+    ('sum', 'сумма'),
+    ('eco.share', 'предмет / доля'),
+    ('eco.val', 'оценка и дисконт'),
+    ('eco.target_fin', 'финансы предмета'),
+    ('eco.fin', 'финансирование'),
+    ('eco.rationale', 'цель сделки'),
+    ('eco.context', 'контекст'),
+    ('eco.finadv', 'финансовый консультант'),
+    ('law.struct', 'структура сделки'),
+    ('law.appr', 'согласования'),
+    ('law.terms', 'условия'),
+    ('extra', 'дополнительная информация'),
+]
+
+
+def field(deal, path):
+    node = deal
+    for part in path.split('.'):
+        node = (node or {}).get(part)
+    return node
+
+
 def gaps(deal, post_text, found_adv):
     """Что пост может дать карточке: поля, которые у неё пусты, а в посте есть.
 
     Ничего не записывает — только показывает. Решение за человеком: пост
     может называть сумму ДРУГОЙ сделки (известный класс ошибки, см. CLAUDE.md
     про «ВТБ продал Holiday Inn»), и такое ловится только чтением.
+
+    Возвращает две части. Первая — то, что разбор сумел ВЫТАЩИТЬ из поста
+    (сумма, стороны, статус, консультант): здесь есть что показать рядом с
+    названием поля. Вторая — просто перечень пустых полей карточки: правило
+    их не заполняет, но человек, читающий пост, видит, куда смотреть. Вторая
+    часть не менее важна первой: правил у нас мало, а глаз есть на каждый
+    разбираемый пост.
     """
     out = []
     eco, law = deal.get('eco') or {}, deal.get('law') or {}
@@ -75,11 +110,27 @@ def gaps(deal, post_text, found_adv):
         out.append(('продавец', seller))
     if buyer and not (deal.get('buyer') or deal.get('buyer_name')):
         out.append(('покупатель', buyer))
-    if not has(law.get('struct')):
-        out.append(('структура', 'в посте есть описание — прочитать'))
     status = draft.guess_status(post_text)
     if status and enrich.STATUS_RANK.get(status, -1) > enrich.STATUS_RANK.get(deal.get('status'), -1):
         out.append(('статус', '%s -> %s' % (deal.get('status'), status)))
+    return out
+
+
+def empty_fields(deal):
+    """Пустые поля карточки — куда смотреть в посте глазами."""
+    out = []
+    for path, label in FIELDS:
+        # Сумма живёт в двух местах: заполненного `eco.sum` достаточно.
+        if path == 'sum' and has((deal.get('eco') or {}).get('sum')):
+            continue
+        if not has(field(deal, path)):
+            out.append(label)
+    adv = (deal.get('law') or {}).get('adv') or []
+    # Строка «Не раскрывались» — не консультант, а заглушка: у карточки
+    # «Лента»/«РБФ ритейл» она стояла ровно там, где объявление NEXTONS
+    # называет фирму по имени.
+    if not [a for a in adv if len(a) > 1 and has(a[1])]:
+        out.append('консультанты')
     return out
 
 
@@ -178,11 +229,19 @@ def main(argv):
             print('      %s  (%s)' % ((deal.get('title') or '')[:66], deal_id))
             missing = gaps(deal, row['text'], found)
             if missing:
-                print('      ЧЕМ ДОПОЛНИТЬ:')
-                for field, value in missing:
-                    print('        · %-12s %s' % (field, str(value)[:74]))
-            else:
-                print('      дополнять нечем — все поля заполнены')
+                print('      ЧЕМ ДОПОЛНИТЬ (вытащено правилом):')
+                for name, value in missing:
+                    print('        · %-12s %s' % (name, str(value)[:74]))
+            blank = empty_fields(deal)
+            if blank:
+                # Пустые поля печатаются ВСЕГДА, даже когда правило ничего не
+                # вытащило: «дополнять нечем» раньше значило «нечем из шести
+                # полей», и пост с описанием структуры проходил мимо карточки,
+                # у которой это поле пусто.
+                print('      ПУСТО В КАРТОЧКЕ — искать в посте глазами:')
+                print('        %s' % ', '.join(blank))
+            elif not missing:
+                print('      дополнять нечем — все поля карточки заполнены')
         else:
             new_cnt += 1
             print('   -> порог сопоставления не сработал. Отрасль: %s | тип: %s | сумма: %s'
