@@ -395,3 +395,21 @@ def test_cards_without_eco_or_law_render_without_pageerror(page, base_url):
         page.wait_for_timeout(220)
         assert page.inner_text("#app").strip(), f"{deal_id}: экран пуст"
     assert not page.crashes, f"падения на карточках без eco/law: {page.crashes[:3]}"
+
+
+def test_no_undefined_on_screen_for_cards_without_status(page, base_url):
+    """У 136 карточек нет поля `status`, а лента и шапка печатали его напрямую.
+
+    На экране это выглядело так: «28 июл. 2022 · UNDEFINED · ГМК и добыча» —
+    и в строке ленты, и в шапке карточки, и в тексте кнопки «поделиться», и
+    отдельным столбцом «undefined» в аналитике. Дефект видно только глазами
+    или такой проверкой: экран не пуст, ошибок в консоли нет, разметка
+    валидна — всё молчит.
+    """
+    visit(page, base_url, "#/")
+    ids = page.evaluate("() => DEALS.filter(d => !d.status).slice(0, 6).map(d => d.id)")
+    assert ids, "в базе не осталось карточек без статуса — проверка потеряла смысл"
+    for hash_ in ["#/", "#/analytics"] + ["#/deal/" + i for i in ids]:
+        visit(page, base_url, hash_)
+        text = page.inner_text("#app")
+        assert "undefined" not in text.lower(), f"{hash_}: на экране слово undefined"

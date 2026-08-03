@@ -1422,7 +1422,7 @@ function dealAsText(d){
   const L = [];
   const add = (k,v) => { if(hasFact(v)) L.push(`${k}: ${String(v).trim()}`); };
   L.push(d.title);
-  L.push(`${fmtDate(d.date)} · ${dealIndustries(d).join(" · ")} · ${d.status}`);
+  L.push([fmtDate(d.date), dealIndustries(d).join(" · "), d.status].filter(Boolean).join(" · "));
   const cn = id => (id && co(id)) ? co(id).name : null;
   add(buyerRole(d), buyerOf(d));
   add("Продавец", d.seller_id ? cn(d.seller_id) : d.seller);
@@ -1919,7 +1919,7 @@ function unifiedFeed(){
   const rowHtml = {
     full: d => `
     <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(d.date)}</span><br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span></div>
+      <div><span class="label num">${fmtDate(d.date)}</span>${d.status?`<br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>`:""}</div>
       <div><div class="deal-title">${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
       ${dealMetaHtml(d)}
     </a>`,
@@ -2819,7 +2819,7 @@ function renderDeal(id, qs){
   <div class="d-head reveal">
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <span class="label num">${fmtDate(d.date)}</span>
-      <span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>
+      ${d.status?`<span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>`:""}
       ${industryLinksHtml(d)}
     </div>
     <div class="deal-parties-strong reveal">
@@ -3774,7 +3774,7 @@ function renderAnalytics(){
   const rubDisclosed = rubSum.length;
   const topSum = rubSum.slice().sort((a,b)=>b._b-a._b).slice(0,10);
   const statuses = {};
-  DEALS.forEach(d=>{statuses[d.status]=(statuses[d.status]||0)+1;});
+  DEALS.forEach(d=>{if(d.status) statuses[d.status]=(statuses[d.status]||0)+1;});
   const firmsWithDeals = FIRMS.concat(INV_FIRMS).filter(f=>firmCount(f.id)>0).length;
   const firmRank = FIRMS.map(f=>({id:f.id,n:f.n,c:firmCount(f.id)})).filter(f=>f.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
   // Серийные покупатели: кто чаще всех выступает покупателем в базе
