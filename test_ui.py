@@ -368,3 +368,30 @@ def test_failed_base_load_shows_retry_instead_of_fake_small_numbers(browser, bas
         assert pg.evaluate("() => TOTAL_DEALS()") > 1000
     finally:
         ctx.close()
+
+
+def test_cards_without_eco_or_law_render_without_pageerror(page, base_url):
+    """У 136 карточек нет объекта `eco`, у 112 — `law`, и интерфейс их читал
+    без проверки.
+
+    `d.eco.share` на «Обзоре» вычислялся ВСЕГДА, когда предмет не разобран
+    структурно: карточка «Возврат отеля «Имеретинский»» роняла `renderDeal`
+    с `Cannot read properties of undefined (reading 'share')`. Страница при
+    этом что-то показывала, поэтому проверка «экран не пуст» дефекта не
+    видела — его поймал только слушатель `pageerror`. Тот же класс, что
+    урок E9 в CLAUDE.md: тормоз `NEW_CARDS_NEED_REVIEW` год не пускал в базу
+    новых карточек, и десятки мест, читающих `d.law.adv` без проверки, не
+    проявлялись.
+
+    Два других таких же места: фильтр ленты по фирме (`it.rec.law.adv`) и
+    страница фирмы (`d.law.adv.find`, `d.eco.finadv`).
+    """
+    visit(page, base_url, "#/")
+    thin = page.evaluate(
+        "() => DEALS.filter(d => !d.eco || !d.law).slice(0, 12).map(d => d.id)")
+    assert thin, "в базе не осталось карточек без eco/law — проверка потеряла смысл"
+    for deal_id in thin:
+        page.evaluate("id => location.hash = '#/deal/' + id", deal_id)
+        page.wait_for_timeout(220)
+        assert page.inner_text("#app").strip(), f"{deal_id}: экран пуст"
+    assert not page.crashes, f"падения на карточках без eco/law: {page.crashes[:3]}"

@@ -1986,7 +1986,7 @@ function unifiedFeed(){
       const fobj = ALL_FIRM(filterFirm);
       const rx = fobj ? firmRxOf(fobj) : FIRM_MATCH[filterFirm];
       if(!rx) return false;
-      return it.rec.law.adv.some(a=>rx.test(a[1])) || rx.test(it.rec.eco.finadv||"");
+      return (it.rec.law&&it.rec.law.adv||[]).some(a=>rx.test(a[1])) || rx.test((it.rec.eco&&it.rec.eco.finadv)||"");
     }
     if(it.kind==="mini") return it.rec.firm===filterFirm;
     return false; // сделки из телеграм-каналов и bulk-базы не привязаны к конкретному консультанту
@@ -3066,7 +3066,7 @@ function renderDeal(id, qs){
            6 карточек из 597 с известным продавцом. */
         specRow("Продавец", (kindKey==="acquisition" && hasSeller) ? ""
           : (d.seller_id && co(d.seller_id) ? co(d.seller_id).name : (d.seller || ""))),
-        specRow("Предмет", assetNamed ? "" : d.eco.share),
+        specRow("Предмет", assetNamed ? "" : (d.eco && d.eco.share)),
         specRow("Статус", d.status),
       ])}`;
       /* «Согласования» отсюда убраны: то же значение стояло и на «Обзоре», и в
@@ -3605,7 +3605,8 @@ function renderFirm(id){
   ${firmSummaryHtml(id, full, mini, bulk)}
   ${full.map(d=>{
     const rx = firmRx(id);
-    const role = d.law.adv.find(a=>rx.test(a[1])) || (rx.test(d.eco.finadv||"")?["Финансовый консультант","",d.eco.finadv]:null);
+    const finadv = (d.eco&&d.eco.finadv)||"";
+    const role = (d.law&&d.law.adv||[]).find(a=>rx.test(a[1])) || (rx.test(finadv)?["Финансовый консультант","",finadv]:null);
     return `
   <a class="deal-row reveal" href="#/deal/${d.id}">
     <div><span class="label num">${fmtDate(d.date)}</span></div>
