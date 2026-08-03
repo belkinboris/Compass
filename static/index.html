@@ -1280,6 +1280,15 @@ const app = document.getElementById("app");
 const co = id => COMPANIES[id];
 const fmtDate = d => d==="unknown" ? "Дата уточняется" : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"short",year:"numeric"}).replace(" г.","");
 const esc = s => s.replace(/</g,"&lt;");
+/* Написание с разделителем и без должно искаться одинаково: «авто ру» и
+   «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии» — в заголовках
+   367 карточек название содержит точку или дефис внутри. Выбрасываем ВСЕ
+   разделители, включая пробел, и сравниваем запрос с индексом в том же виде.
+   Убирать одну пунктуацию, оставляя пробелы, недостаточно: «авто ру» так и
+   не совпало бы с «авто.ру». Плата — редкие совпадения через границу слов
+   («руяндекс» найдёт «…Авто.ру у Яндекса»); осознанный размен, потому что
+   этот индекс дополняет обычное вхождение, а не заменяет его. */
+const squashQ = s => s.toLowerCase().replace(/ё/g,"е").replace(/[^0-9a-zа-я]+/g,"");
 const capType = s => s ? s.split("·").map(p=>{const t=p.trim();return t?t.charAt(0).toUpperCase()+t.slice(1):t;}).join(" · ") : s;
 /* счётчики статистики: число набегает от 0 до значения за ~0.9с (ease-out).
    При prefers-reduced-motion просто ставим итоговое число без анимации. */
@@ -2156,14 +2165,24 @@ function unifiedFeed(){
     if(it.kind==="full"){
       const bn = r.buyer&&co(r.buyer)?co(r.buyer).name:"";
       const tn = r.target&&co(r.target)?co(r.target).name:"";
-      parts.push(bn, tn, (r.themes||[]).join(" "), (r.eco&&r.eco.finadv)||"");
+      /* seller/asset/buyer_name — стороны, записанные текстом, а не ссылкой на
+         профиль. Без них поиск не знал о продавце у 254 карточек из 653 и о
+         предмете у 49 из 118: на экране поле есть, а найти по нему нельзя. */
+      parts.push(bn, tn, r.seller||"", r.asset||"", r.buyer_name||"",
+                 (r.themes||[]).join(" "), (r.eco&&r.eco.finadv)||"");
       if(r.law&&r.law.adv) r.law.adv.forEach(a=>parts.push(a[1]||""));
     }
-    const v = parts.join(" ").toLowerCase();
+    const plain = parts.join(" ").toLowerCase();
+    const v = {plain: plain, squashed: squashQ(plain)};
     try{ Object.defineProperty(r,"_sidx",{value:v,enumerable:false}); }catch(e){}
     return v;
   };
-  const matchQ = it => !q || searchIndex(it).includes(q);
+  const qsq = squashQ(q);
+  const matchQ = it => {
+    if(!q) return true;
+    const ix = searchIndex(it);
+    return ix.plain.includes(q) || (!!qsq && ix.squashed.includes(qsq));
+  };
   const matchY = it => feedYear==="Все" || (feedYear==="до 2023" ? (it.date!=="unknown"&&it.date.slice(0,4)<"2023") : it.date.slice(0,4)===feedYear);
   const matchFirm = it => {
     if(filterFirm==="Все") return true;
@@ -3283,8 +3302,11 @@ let coShown = 60;
 const coWordEnd = n => (n%10===1&&n%100!==11) ? "я" : (n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)) ? "и" : "й";
 function companyRows(){
   const q = coQuery.trim().toLowerCase();
+  // Тот же размен, что в поиске по сделкам: «авто ру» обязано находить «Авто.ру».
+  const qsq = squashQ(q);
+  const hit = name => name.toLowerCase().includes(q) || (!!qsq && squashQ(name).includes(qsq));
   return Object.entries(COMPANIES)
-    .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||c.name.toLowerCase().includes(q)))
+    .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||hit(c.name)))
     .map(([id,c])=>({id,c,n:companyTotal(id),m:companyMentions(id)}))
     // При равном числе сделок вперёд идут те, у кого больше упоминаний: иначе
     // 155 профилей без единой сделки перемешались бы в произвольном порядке.

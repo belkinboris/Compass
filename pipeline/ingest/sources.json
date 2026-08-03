@@ -1540,6 +1540,19 @@
    "last_error": null
   },
   {
+   "id": "tg:LawFirms",
+   "name": "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
+   "kind": "telegram",
+   "url": "https://t.me/LawFirms",
+   "feed": "https://t.me/s/LawFirms",
+   "feed_checked": true,
+   "tier": 1,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-08-03",
+   "last_error": null
+  },
+  {
    "id": "firm:alumni",
    "name": "ALUMNI Partners",
    "kind": "html",

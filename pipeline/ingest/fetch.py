@@ -181,9 +181,18 @@ def main(argv):
     offline, verify = '--offline' in argv, '--verify' in argv
     sources = load_sources()
     if verify:
+        # `--only <id>` — проверить один источник, не трогая last_check у
+        # остальных 160: добавляя ленту, незачем перезаписывать дату проверки
+        # всему реестру и раздувать diff.
+        only = None
+        if '--only' in argv:
+            i = argv.index('--only')
+            only = argv[i + 1] if i + 1 < len(argv) else None
         ok = 0
         for src in sources:
             if not src.get('feed'):
+                continue
+            if only and src.get('id') != only:
                 continue
             items, err = fetch_source(src, offline=False)
             src['feed_checked'] = err is None

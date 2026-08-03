@@ -279,6 +279,44 @@ def test_account_form_is_visible_after_async_auth_check(page, base_url):
     assert "Войти" in page.locator("#app").inner_text()
 
 
+def test_search_ignores_dots_and_hyphens_inside_names(base_url, browser):
+    """«авто ру» и «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии».
+    Замер до правки: у 367 карточек название в заголовке содержит точку или
+    дефис внутри, а индекс сравнивался дословно — «авто ру», «авто-ру» и
+    «ттехнологии» давали ПУСТО, а «т технологии» находило чужую сделку.
+    Проверяем и обратное: поиск не должен начать находить всё подряд.
+    Чистый контекст: фильтры ленты живут в глобальных переменных и переживают
+    смену хеша, поэтому в общем прогоне состояние пришло бы от прошлого теста."""
+    ctx = browser.new_context()
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/deals", wait_until="networkidle")
+        pg.wait_for_function("typeof bulkLoaded !== 'undefined' && bulkLoaded", timeout=30000)
+
+        def search(q):
+            pg.fill("#feedq", q)
+            pg.press("#feedq", "Enter")
+            pg.wait_for_timeout(400)
+            return pg.evaluate("document.getElementById('feedlist').innerText")
+
+        for q in ("авто.ру", "авто ру", "авто-ру", "т-технологии", "ттехнологии", "т технологии"):
+            text = search(q)
+            assert "Авто.ру" in text and "Т-Технологии" in text, \
+                f"запрос «{q}» не нашёл сделку Т-Технологии/Авто.ру"
+
+        # Продавец и предмет записаны текстом, а не ссылкой на профиль: без них
+        # в индексе по продавцу не находились 254 карточки из 653.
+        assert "Flowwow" in search("Владельцы Flowwow"), "по продавцу текстом сделка не находится"
+
+        # Обратная проверка: нормализация не должна стирать различия между
+        # разными компаниями — иначе «находит всё» неотличимо от «ищет хорошо».
+        other = search("сбербанк")
+        assert "Авто.ру" not in other, "поиск стал находить нерелевантные сделки"
+        assert len(other.strip()) > 0, "запрос «сбербанк» не нашёл вообще ничего — сломан сам поиск"
+    finally:
+        ctx.close()
+
+
 def test_shared_link_restores_the_selection(base_url, browser):
     """Подборка должна открываться у коллеги так же, как у отправителя:
     раньше три фильтра оставляли адрес #/ и ссылка не несла ничего.
