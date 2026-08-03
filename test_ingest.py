@@ -488,6 +488,65 @@ def test_match_respects_reviewed_separate_transaction():
     assert found is None
 
 
+# ---------- кто сопровождал сделку ----------
+
+import advisors  # noqa: E402
+
+
+def test_advisor_is_taken_from_the_start_of_the_announcement():
+    """Объявление о сопровождении — пресс-релиз: имя фирмы стоит первым, за ним
+    глагол действия по сделке. Замер на 2544 постах @LawFirms: 65 срабатываний,
+    ложных среди проверенных нет."""
+    firms, role, _ = advisors.lead_advisor(
+        'White Square консультировала Nordgold в связи с приобретением актива на Чукотке.')
+    assert firms == ['White Square'] and role.startswith('Юридический консультант')
+
+
+def test_advisor_rule_ignores_job_titles_and_rankings():
+    """Первая версия правила искала «консультант»/«советник» где угодно в тексте
+    и дала 11 срабатываний на 133 живых постах, из которых верных НОЛЬ: в
+    юридических каналах «советник» — должность сотрудника, а «консультант» —
+    слово из рейтинга. Эти три строки — те самые ложные срабатывания."""
+    assert advisors.lead_advisor('советник LEVEL Legal Services провела мастер-класс по арбитражу') is None
+    assert advisors.lead_advisor('ALUMNI Partners вошла в топ-5 юридических консультантов рейтинга') is None
+    assert advisors.lead_advisor('Присутствовать на этом событии удалось советнику ККМП Алексею Чернышеву') is None
+
+
+def test_advisor_rule_needs_a_role_next_to_vystupil():
+    """«Прокуратура выступила ПРОТИВ выселения певицы» — не объявление о
+    сопровождении. Глагол «выступил» засчитывается только с ролью рядом."""
+    assert advisors.lead_advisor('Прокуратура выступила против принудительного выселения певицы.') is None
+    assert advisors.lead_advisor('NSP выступила юридическим консультантом покупателя.') is not None
+
+
+def test_advisor_name_keeps_commas_inside_a_quoted_firm():
+    """«Меллинг, Войтишкин и Партнеры» — одна фирма, а Freshfields, Latham &
+    Watkins и Hengeler Mueller — три. Различает их кавычка, а не запятая."""
+    one, _, _ = advisors.lead_advisor(
+        '«Меллинг, Войтишкин и Партнеры» сообщает: её команда представляла интересы группы.')
+    assert one == ['Меллинг, Войтишкин и Партнеры']
+    many, _, _ = advisors.lead_advisor(
+        'Freshfields, Latham & Watkins и Hengeler Mueller сопровождали IPO.')
+    assert many == ['Freshfields', 'Latham & Watkins', 'Hengeler Mueller']
+    # Родовое слово снаружи собственных кавычек имени — тоже одна фирма.
+    nested, _, _ = advisors.lead_advisor(
+        'АБ «Андрей Городисский и Партнеры» выступили юридическим консультантом сделки.')
+    assert nested == ['Андрей Городисский и Партнеры']
+
+
+def test_advisor_rule_survives_the_latin_homoglyph():
+    """В самом канале встречается ЛАТИНСКАЯ «c» вместо кириллической
+    («Nextons cообщает…»): шаблон с одной кириллицей молча не сработал бы."""
+    firms, _, _ = advisors.lead_advisor('Nextons cообщает о сопровождении сделки.')
+    assert firms == ['Nextons']
+
+
+def test_advisor_side_is_set_only_when_one_party_is_named():
+    """Сторона — факт из текста, а не догадка: названы обе — роль остаётся общей."""
+    assert advisors.lead_advisor('NSP сопровождало продавца в сделке.')[1] == 'Юридический консультант продавца'
+    assert advisors.lead_advisor('NSP сопровождало покупателя и продавца в сделке.')[1] == 'Юридический консультант'
+
+
 # ---------- отправка в Telegram ----------
 
 import send_telegram  # noqa: E402
