@@ -17,66 +17,52 @@ Hugo Boss/«Стокманн», Яндекс/«Заряд!», «Мерседес
 заголовок, сумма, стороны и ссылки. Полные карточки (eco/law) остаются в
 интерфейсе — приток их не читает и не правит.
 
-ПОЧЕМУ РАЗБОР РЕГУЛЯРКОЙ, А НЕ JSON. Массив лежит внутри JavaScript и не
-является валидным JSON (ключи без кавычек). Полноценный разбор JS здесь не
-нужен: у карточек регулярная шапка `{id:"…",date:"…",title:"…"…}`, и берутся
-только поля из неё. Если формат изменится, `assert` в `load()` упадёт, а не
-молча вернёт пустой список — это важнее гибкости.
+ПОЧЕМУ НЕ РАЗБОР РЕГУЛЯРКОЙ. Первая версия читала `index.html` регуляркой и
+видела только `DEALS` — а наборов ТРИ: `DEALS` (19), `MINI_DEALS` (21) и
+`CHANNEL_DEALS` (14). То есть починка слепоты сама была слепой на 35 сделок
+из 54. Теперь источник — `static/data/curated_deals.json`, который снимает с
+интерфейса `pipeline/export_curated_from_interface.py` настоящим браузером:
+он исполняет файл так же, как посетитель, и своего парсера JS не требует.
+Файл обновляется скриптом, а не руками.
 """
+import json
 import os
-import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 INDEX = os.path.join(ROOT, 'static', 'index.html')
 
-HEAD = re.compile(r'\{id:"([a-zA-Z0-9_-]+)",date:"([0-9-]+)",title:"((?:[^"\\]|\\.)*)"')
-FIELD = re.compile(r'\b%s:"((?:[^"\\]|\\.)*)"')
-SRC_BLOCK = re.compile(r'src:\s*\[(.*?)\]\s*\}', re.S)
-SRC_URL = re.compile(r'"(https?://[^"]+)"')
+CURATED = os.path.join(ROOT, 'static', 'data', 'curated_deals.json')
 
-# Сколько карточек ожидается. Если формат разъедется, счёт не сойдётся и
-# скрипт упадёт — вместо того чтобы тихо отдать половину и снова ослепить
-# приток. Число меняется вместе с массивом в index.html, осознанно.
-EXPECTED = 19
-
-
-def _field(chunk, name):
-    m = re.search(r'\b%s:"((?:[^"\\]|\\.)*)"' % name, chunk)
-    return m.group(1) if m else None
+# Сколько карточек ожидается: 19 кураторских + 21 мини + 14 из канала. Если
+# счёт разъедется, `load()` упадёт — вместо того чтобы тихо отдать половину и
+# снова ослепить приток на остальное.
+EXPECTED = 54
 
 
 def load(path=None):
     """[{id, date, title, sum, buyer, target, seller, src}] — вид, который
     понимает `match.index_base`."""
-    text = open(path or INDEX, encoding='utf-8').read()
-    starts = [m.start() for m in HEAD.finditer(text)]
-    assert starts, 'кураторские карточки не найдены в %s — изменился формат?' % (path or INDEX)
-
+    rows = json.load(open(path or CURATED, encoding='utf-8'))
+    assert len(rows) == EXPECTED, (
+        'ожидали %d карточек интерфейса, в файле %d — перевыгрузите '
+        'pipeline/export_curated_from_interface.py и поправьте EXPECTED' % (EXPECTED, len(rows)))
     out = []
-    for i, start in enumerate(starts):
-        end = starts[i + 1] if i + 1 < len(starts) else min(start + 12000, len(text))
-        chunk = text[start:end]
-        head = HEAD.match(text, start)
-        urls = []
-        block = SRC_BLOCK.search(chunk)
-        if block:
-            urls = SRC_URL.findall(block.group(1))
+    for row in rows:
+        src = row.get('src') or []
         out.append({
-            'id': head.group(1),
-            'date': head.group(2),
-            'title': head.group(3),
-            'sum': _field(chunk, 'sum'),
-            'status': _field(chunk, 'status'),
-            'buyer': _field(chunk, 'buyer'),
-            'target': _field(chunk, 'target'),
-            'seller': _field(chunk, 'seller'),
-            'src': [['', u] for u in urls],
+            'id': row['id'],
+            'date': row.get('date'),
+            'title': row.get('title'),
+            'sum': row.get('sum'),
+            'status': row.get('status'),
+            'buyer': row.get('buyer'),
+            'target': row.get('target'),
+            'seller': row.get('seller'),
+            'asset': row.get('asset'),
+            'src': [s if isinstance(s, list) else ['', s] for s in src],
             'curated': True,
         })
-    assert len(out) == EXPECTED, (
-        'ожидали %d кураторских карточек, разобрали %d — формат массива в '
-        'index.html изменился, поправьте EXPECTED осознанно' % (EXPECTED, len(out)))
     return out
 
 

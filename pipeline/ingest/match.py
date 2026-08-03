@@ -74,8 +74,48 @@ def stems(text):
     return {w[:6] for w in words if len(w) > 4 and w[:6] not in STOP_STEMS}
 
 
+# Названия в кавычках сравнивались ДОСЛОВНО, и «Стокманн» не совпадало со
+# «Стокманну»: падеж делал два упоминания одной компании разными строками, и
+# объявление «Orion Partners консультировала АО «Стокманн» в сделке по покупке
+# … Hugo Boss» не находило карточку «Hugo Boss продал российский бизнес
+# «Стокманну»». Срезаем окончание по ЗАКРЫТОМУ списку, а не обрезаем до N
+# знаков: для коротких имён обрезка слепила бы «Веру» и «Вету».
+ENDINGS = sorted(('ами', 'ями', 'ов', 'ев', 'ой', 'ей', 'ом', 'ем', 'ах', 'ях', 'ам', 'ям',
+                  'а', 'я', 'у', 'ю', 'е', 'и', 'ы'), key=len, reverse=True)
+
+
+def quoted_key(name):
+    """Название в кавычках без падежного окончания последнего слова."""
+    text = str(name or '').lower().replace('ё', 'е')
+    text = re.sub(r'[^0-9a-zа-я ]+', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    if not text:
+        return ''
+    head, sep, tail = text.rpartition(' ')
+    for end in ENDINGS:
+        # Основа короче трёх знаков — не основа: «Мга» не должна стать «Мг».
+        if tail.endswith(end) and len(tail) - len(end) >= 3:
+            tail = tail[:-len(end)]
+            break
+    return (head + sep + tail).strip()
+
+
 def quoted(text):
-    return {m.group(1).lower() for m in re.finditer(r'«([^»]{2,40})»', str(text or ''))}
+    return {quoted_key(m.group(1)) for m in re.finditer(r'«([^»]{2,40})»', str(text or ''))
+            if quoted_key(m.group(1))}
+
+
+def quoted_overlap(a, b):
+    """Есть ли общее название в двух наборах. Не только дословное равенство:
+    «Заряд» и «Бери Заряд» — одна компания, и объявление о продаже «АО «Заряд!»»
+    обязано находить карточку ««Яндекс» приобрёл 100% сервиса «Бери заряд!»».
+    Планка вхождения в 5 знаков — та же, что у `entity_agree`: короткие куски
+    («лент», «мег») совпадают только целиком, иначе слиплось бы пол-базы."""
+    for x in a:
+        for y in b:
+            if x == y or (len(x) >= 5 and x in y) or (len(y) >= 5 and y in x):
+                return True
+    return False
 
 
 def amount(text):
@@ -180,7 +220,7 @@ def match(item, idx):
 
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
-        if t_quoted & row['quoted'] and t_amount and row['amount'] and gap <= 45:
+        if quoted_overlap(t_quoted, row['quoted']) and t_amount and row['amount'] and gap <= 45:
             if abs(t_amount - row['amount']) / max(t_amount, row['amount']) < 0.05:
                 return row['id'], 'совпали название в кавычках и сумма'
     for row in idx:
@@ -193,13 +233,19 @@ def match(item, idx):
     if STAGE_NEWS.search(title):
         for row in idx:
             gap = days_between(item.get('date'), row['date'])
-            if (row.get('status') in OPEN_STATUSES and t_quoted & row['quoted']
+            if (row.get('status') in OPEN_STATUSES and quoted_overlap(t_quoted, row['quoted'])
                     and len(t_stems & row['stems']) >= 2 and gap <= 730):
                 return row['id'], 'открытая сделка: название в кавычках и новая стадия'
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
-        if t_quoted & row['quoted'] and gap <= 45 and len(t_stems & row['stems']) >= 2:
-            return row['id'], 'общее название в кавычках и два общих слова'
+        # Порог «два общих слова» невыполним для короткого заголовка: у
+        # кураторской карточки «Hugo Boss продал российский бизнес «Стокманну»»
+        # значащих основ всего две, а у ««Яндекс» приобрёл 100% сервиса «Бери
+        # заряд!»» — одна, и объявления фирм к ним не привязывались никогда.
+        # Требуем столько общих слов, сколько заголовок вообще может дать.
+        need = min(2, len(row['stems'])) or 1
+        if quoted_overlap(t_quoted, row['quoted']) and gap <= 45 and len(t_stems & row['stems']) >= need:
+            return row['id'], 'общее название в кавычках и общие слова: %d' % len(t_stems & row['stems'])
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
         common = len(t_stems & row['stems'])

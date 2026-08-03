@@ -494,15 +494,17 @@ import curated  # noqa: E402
 
 
 def test_curated_deals_are_parsed_from_the_interface_file():
-    """19 карточек живут не в deals_promoted.json, а в static/index.html, и
-    match.py строил индекс только по первому — приток был структурно слеп к
-    ним: новость о Hugo Boss/«Стокманне» или Яндекс/«Заряде» считалась новой
-    сделкой и завела бы дубль. Нашлось не проверкой кода, а тем, что владелец
-    вбил две сделки, которые точно помнит, и обе оказались на сайте."""
+    """В интерфейсе ТРИ набора сделок помимо основной базы: DEALS (19),
+    MINI_DEALS (21) и CHANNEL_DEALS (14) — всего 54, и match.py не видел ни
+    одной. Первая починка читала index.html регуляркой и сама была слепа на
+    35 из 54: видела только DEALS. Нашлось не проверкой кода, а тем, что
+    владелец вбил две сделки, которые точно помнит, и обе оказались на сайте."""
     rows = curated.load()
     assert len(rows) == curated.EXPECTED
     by_id = {r['id']: r for r in rows}
     assert 'hugoboss' in by_id and 'berizaryad' in by_id
+    origins = {r['id'].split('-')[0] for r in rows if r['id'].startswith(('mini-', 'channel-'))}
+    assert origins == {'mini', 'channel'}, 'мини-записи и записи канала не выгружены'
     hugo = by_id['hugoboss']
     assert hugo['date'] == '2024-08-02'
     assert 'Стокманн' in hugo['title']
