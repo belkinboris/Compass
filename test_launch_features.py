@@ -381,7 +381,9 @@ def test_taxonomy_is_consistent_in_generation_pipeline():
         Path("pipeline/promote_2026.py"),
         Path("pipeline/promote_all.py"),
         Path("pipeline/to_minideals.py"),
-        Path("static/data/curated_companies.json"),
+        # curated_companies.json удалён 3 августа 2026: профили переехали в
+        # deals_promoted.json — единый источник данных. Проверяем теперь его.
+        Path("static/data/deals_promoted.json"),
     ]
     for path in sources:
         text = path.read_text(encoding="utf-8")
