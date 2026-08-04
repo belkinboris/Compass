@@ -23,6 +23,10 @@
   --accent:#1D5A44; --accent-deep:#0F2B21; --accent-mid:#17402F; --accent-soft:#E9F0EC; --ivory:#F3F1E9;
   --steel:#33556B; --steel-soft:#E8EEF2;
   --bronze:#A3814E; --bronze-soft:#F2EDE2;
+  /* Бронза на тёмном фоне. Была вписана числом в трёх местах — в стрелке
+     компаса, в буквах М·А героя и в подвале, — и стрелка легко разъезжалась
+     с буквами рядом. Один токен на все три. */
+  --bronze-light:#C9AE7C;
   --radius:4px;
   /* Только системные шрифты: без загрузки с внешних доменов. Кириллические
      засечки для заголовков есть в любой из перечисленных систем. */
@@ -52,6 +56,14 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 /* ---------- shell ---------- */
 .top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease)}
 .top.hide{transform:translateY(-100%)}
+/* Пока строка стоит поверх тёмно-зелёного героя, светлая подложка выглядит
+   заплаткой: делаем её тёмной и полупрозрачной, чтобы вкладки читались на
+   зелёном и не спорили с ним. */
+.top.on-hero{background:rgba(10,18,16,.55);border-bottom-color:rgba(243,241,233,.14)}
+.top.on-hero .wordmark{color:var(--ivory)}
+.top.on-hero .wordmark em{color:var(--bronze-light)}
+.top.on-hero nav a{color:rgba(243,241,233,.78)}
+.top.on-hero nav a:hover,.top.on-hero nav a.on{color:var(--ivory)}
 .heroslider{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;height:100svh;min-height:600px;overflow:hidden;background:#0A1210;color:var(--ivory)}
 .hs-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s;pointer-events:none}
 .hs-slide.on{opacity:1;visibility:visible;transition:opacity .35s ease;pointer-events:auto}
@@ -60,6 +72,11 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    особенно при догрузке базы и повторном renderDeals(). */
 .hs-slide .hs-in{opacity:1;transform:none}
 .hs-slide svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+/* Низ героя упирался в тёмный фон страницы стыком в один пиксель — видно как
+   линия. Растушёвка на 220px убирает границу и не трогает содержимое: слой
+   лежит поверх фона, но под текстом и не ловит клики. */
+.heroslider:after{content:"";position:absolute;left:0;right:0;bottom:0;height:220px;pointer-events:none;z-index:1;background:linear-gradient(180deg,rgba(10,18,16,0) 0%,rgba(10,18,16,.55) 55%,#0A1210 100%)}
+.heroslider .hs-in,.heroslider .hero-brand{z-index:6}
 .hs-in{position:relative;max-width:1120px;margin:0 auto;padding:0 60px;height:100%;display:flex;flex-direction:column;justify-content:center}
 .hs-in .kicker{font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C9AE7C;margin-bottom:22px}
 .hs-in h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.12;max-width:800px}
@@ -84,7 +101,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hero-brand-mark{width:34px;height:34px;border:1px solid rgba(243,241,233,.45);border-radius:50%;display:grid;place-items:center;background:rgba(10,18,16,.28);backdrop-filter:blur(4px)}
 .hero-brand-mark svg{position:static;width:20px;height:20px}
 .hero-brand-name{font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:.03em}
-.hero-brand-name em{font-style:normal;color:#C9AE7C}
+.hero-brand-name em{font-style:normal;color:var(--bronze-light)}
 @media(max-width:720px){
   /* justify-content:center душит контент симметрично сверху и снизу, когда
      высота текста (кикер+заголовок+подпись+кнопка) превышает 100svh на
@@ -105,7 +122,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .wordmark span{color:var(--accent)}
 /* М и А — бронзой: в имени КОМПАС спрятано M&A */
 .wordmark em,.foot-brand em{font-style:normal;color:var(--bronze)}
-.foot-brand em{color:#C9AE7C}
+.foot-brand em{color:var(--bronze-light)}
 nav{display:flex;gap:30px;margin-left:auto}
 nav a{position:relative;padding:6px 0;font-weight:500;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);transition:color .25s}
 nav a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--accent);transition:width .3s var(--ease)}
@@ -568,6 +585,9 @@ a.dp-asset-name:hover{color:var(--accent)}
 
 /* ---------- companies ---------- */
 .co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.co-tag{transition:background .2s,color .2s,border-color .2s;cursor:pointer;position:relative;z-index:2}
+.co-card:hover .co-tag{background:var(--accent-soft);color:var(--accent)}
+.co-tag:hover{background:var(--accent);color:var(--ivory)}
 .co-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .25s,box-shadow .25s;overflow:hidden}
 .co-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
 .co-card:hover{border-color:var(--accent);box-shadow:0 8px 28px -16px rgba(15,43,33,.32)}
@@ -575,8 +595,10 @@ a.dp-asset-name:hover{color:var(--accent)}
 .co-card h3{font-family:var(--f-display);font-weight:500;font-size:19px;margin:10px 0 6px;transition:color .2s}
 .co-card:hover h3{color:var(--accent)}
 .co-card-main{display:block;color:inherit;padding-right:54px}
-.co-compare{position:absolute;right:15px;top:15px;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--card);font-size:18px;line-height:1;transition:border-color .2s,color .2s,background .2s}
+.co-actions{position:absolute;right:15px;top:15px;display:flex;flex-direction:column;gap:8px;z-index:2}
+.co-compare{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--card);font-size:18px;line-height:1;transition:border-color .2s,color .2s,background .2s}
 .co-compare:hover,.co-compare.on{border-color:var(--accent);color:var(--accent);background:var(--paper)}
+.co-follow:hover,.co-follow.on{border-color:var(--bronze);color:var(--bronze);background:var(--bronze-soft)}
 .co-card .desc{color:var(--muted);font-size:13.5px;min-height:44px}
 .co-nums{display:flex;gap:28px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft)}
 .co-nums .val{font-family:var(--f-display);font-weight:600;font-size:15px;margin-top:3px}
@@ -865,6 +887,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
         <a href="https://www.rbc.ru/" target="_blank" rel="noopener">РБК</a>
         <a href="https://www.vedomosti.ru/" target="_blank" rel="noopener">Ведомости</a>
         <a href="https://www.forbes.ru/" target="_blank" rel="noopener">Forbes</a>
+        <span class="foot-more">и другие деловые и отраслевые издания, сообщения самих компаний и юридических фирм — источник каждой сделки указан в её карточке</span>
       </div>
     </div>
     <div class="foot-bottom">
@@ -880,6 +903,24 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 const INDUSTRIES = ["Все","Нефть и газ","Уголь","ГМК и добыча","Энергетика","Химия и удобрения","Агро","Пищепром и напитки","Ритейл","E-commerce","Потребительские товары","ИТ и интернет","Искусственный интеллект","Телеком","Банки","Страхование","Финтех","Финансовые услуги","Рынок ценных бумаг","Управление активами","Холдинги","Транспорт и логистика","Порты и инфраструктура","Автопром","Недвижимость","Строительство","Гостиницы и туризм","Здравоохранение","Фармацевтика","Образование","Развлечения","Профессиональные услуги","Медиа","Машиностроение","Лесопром","ЖКХ и обращение с отходами","Не определена"];
 
 /* ================= СРАВНЕНИЕ КОМПАНИЙ ================= */
+/* Избранные компании. Хранятся рядом со сравнением и тем же способом: это
+   пометка читателя, а не данные продукта, и она должна пережить перезагрузку
+   до того, как появятся аккаунты с серверной подпиской. Когда пользователь
+   войдёт, этот список — готовая основа для уведомлений по компании. */
+const FOLLOW_KEY="kompas_followed_companies_v1";
+function followedCompanies(){
+  try{
+    const rows=JSON.parse(localStorage.getItem(FOLLOW_KEY)||"[]");
+    return Array.isArray(rows)?rows.filter((id,i,a)=>typeof id==="string"&&co(id)&&a.indexOf(id)===i):[];
+  }catch(e){return [];}
+}
+function isFollowed(id){return followedCompanies().includes(id);}
+function toggleFollowedCompany(id){
+  const ids=followedCompanies(), at=ids.indexOf(id);
+  if(at>=0) ids.splice(at,1); else ids.push(id);
+  localStorage.setItem(FOLLOW_KEY,JSON.stringify(ids));
+  return ids.includes(id);
+}
 const COMPARE_KEY="kompas_compare_companies_v1";
 const COMPARE_MAX=3;
 function compareIds(){
@@ -1597,11 +1638,20 @@ function route(){
   requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"),i*55)));
 }
 window.addEventListener("hashchange",route);
+let navRevealed=false;
 function updTop(){
   const top = document.querySelector(".top"); if(!top) return;
   const h = location.hash.replace("#","");
   const onHome = h==="" || h==="/";
-  top.classList.toggle("hide", onHome && window.scrollY < window.innerHeight*0.55);
+  /* Раньше строка пряталась КАЖДЫЙ раз, когда пользователь возвращался к
+     началу главной, — вкладки то появлялись, то исчезали. Прячем только до
+     первого показа: сначала видно чистый экран с героем, а как только он
+     проскроллен, навигация остаётся на месте. Флаг сбрасывается при уходе с
+     главной, чтобы возврат на неё снова начинался с чистого экрана. */
+  if(!onHome){ navRevealed=false; top.classList.remove("hide","on-hero"); return; }
+  if(window.scrollY >= window.innerHeight*0.55) navRevealed=true;
+  top.classList.toggle("hide", !navRevealed);
+  top.classList.toggle("on-hero", navRevealed && window.scrollY < window.innerHeight*0.9);
 }
 window.addEventListener("scroll", updTop, {passive:true});
 const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")));
@@ -2086,7 +2136,7 @@ function renderDeals(){
   app.innerHTML = `
   <div class="heroslider">
     <a class="hero-brand" href="#/" aria-label="КОМПАС — главная">
-      <span class="hero-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.8 7.8 13.5 13.5 7.8 15.8 10.1 10.1Z" fill="#C9AE7C"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+      <span class="hero-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M15.8 7.8 13.5 13.5 7.8 15.8 10.1 10.1Z" fill="var(--bronze-light)"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
       <span class="hero-brand-name">КО<em>М</em>П<em>А</em>С</span>
     </a>
     <div class="hs-slide on">${HERO_SVG}
@@ -3108,6 +3158,38 @@ function companyRows(){
     // 155 профилей без единой сделки перемешались бы в произвольном порядке.
     .sort((a,b)=>coSort==="alpha" ? a.c.name.localeCompare(b.c.name,"ru") : (b.n-a.n)||(b.m-a.m)||a.c.name.localeCompare(b.c.name,"ru"));
 }
+/* «Профиль → Автоматический» — служебная разметка, а не факт о компании:
+   она стояла у 1819 профилей из 1872 и на экране не значила ничего. Вместо
+   неё показываем то, что у нас есть про ЛЮБУЮ компанию и что читатель
+   спрашивает первым: в какой роли она чаще всего в наших сделках. Настоящий
+   факт (выручка, штаб-квартира, руководитель) есть у 34 профилей — он и
+   остаётся, потому что содержательнее вычисленного. */
+const SERVICE_KPI = /^(?:профиль|данные)$/i;
+function coFact(id,c){
+  const kpi = c.kpi||[];
+  if(kpi.length>1 && !SERVICE_KPI.test(String(kpi[0]).trim())) return [kpi[0],kpi[1]];
+  const deals = companyDeals(id).structured;
+  const roles = [
+    ["покупатель", deals.filter(d=>d.buyer===id).length],
+    ["продавец",   deals.filter(d=>d.seller_id===id).length],
+    ["предмет",    deals.filter(d=>d.target===id||d.asset_id===id).length],
+  ].filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);
+  if(!roles.length) return ["Роль в сделках","роль не разобрана"];
+  return ["Чаще всего", roles[0][0]];
+}
+/* «Описание компании пока не добавлено» стояло у 1754 профилей из 1872.
+   Это признание, а не описание: вместо него — годы, за которые у нас есть
+   сделки с этой компанией. Такой ответ верен для любого профиля и ничего не
+   выдумывает. */
+function coDescHtml(id,c){
+  const text = String(c.desc||"").trim();
+  if(text && !/^описание компании пока не добавлено/i.test(text)) return text;
+  const years = companyDeals(id).structured
+    .map(d=>String(d.date||"").slice(0,4)).filter(y=>/^\d{4}$/.test(y)).sort();
+  if(!years.length) return "Профиль есть, сделок в базе пока нет.";
+  const span = years[0]===years[years.length-1] ? years[0] : years[0]+"–"+years[years.length-1];
+  return "Сделки в базе: "+span+". Описание компании пока не добавлено.";
+}
 function companyGridHtml(){
   const rows = companyRows();
   const shown = rows.slice(0, coShown);
@@ -3123,18 +3205,21 @@ function companyGridHtml(){
   ${shown.map(({id,c,n,m})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
-        <span class="tag">${c.ind}</span>
+        <span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span>
         <h3>${c.name}</h3>
-        <div class="desc">${c.desc}</div>
+        <div class="desc">${coDescHtml(id,c)}</div>
         <div class="co-nums">
-          <div><span class="label">${c.kpi[0]}</span><div class="val num">${c.kpi[1]}</div></div>
+          <div><span class="label">${coFact(id,c)[0]}</span><div class="val num">${coFact(id,c)[1]}</div></div>
           ${/* Если сделок со стороной нет, показываем не «0 сделок», а честное имя
                того числа, которое у профиля действительно есть, — упоминания. */
             (!n && m) ? `<div><span class="label">Упоминаний</span><div class="val num">${m}</div></div>`
                       : `<div><span class="label">Сделок в базе</span><div class="val num">${n}</div></div>`}
         </div>
       </a>
-      <button class="co-compare ${isCompared(id)?"on":""}" data-co-compare="${id}" title="${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}" aria-label="${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}">${isCompared(id)?"✓":"＋"}</button>
+      <div class="co-actions">
+        <button class="co-compare ${isCompared(id)?"on":""}" data-co-compare="${id}" title="${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}" aria-label="${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}">${isCompared(id)?"✓":"＋"}</button>
+        <button class="co-compare co-follow ${isFollowed(id)?"on":""}" data-co-follow="${id}" title="${isFollowed(id)?"Убрать из избранного":"В избранное — следить за сделками компании"}" aria-label="${isFollowed(id)?"Убрать из избранного":"Добавить в избранное"}">${isFollowed(id)?"♥":"♡"}</button>
+      </div>
     </article>`).join("")}
   </div>
   ${rows.length>shown.length?`<div style="text-align:center;margin-top:30px"><button class="chip" id="coMore">Показать ещё ${Math.min(60,rows.length-shown.length)}</button></div>`:""}
@@ -3144,12 +3229,33 @@ function renderCompanyGrid(){
   const el = document.getElementById("coGrid");
   if(!el) return;
   el.innerHTML = companyGridHtml();
+  bindCompanyGridActions(el);
   const more = document.getElementById("coMore");
   if(more) more.onclick=()=>{coShown+=60;renderCompanyGrid();};
-  el.querySelectorAll("[data-co-compare]").forEach(button=>button.onclick=()=>{
-    const result=toggleCompared(button.dataset.coCompare);
-    if(result.error){button.title=result.error;return;}
-    renderCompanyGrid();
+  bindCompanyGridActions(el);
+}
+/* Делегирование, а не onclick на каждую кнопку: сетка перерисовывается при
+   поиске и при «Показать ещё», и прямые обработчики надо было бы вешать
+   заново. Раньше их вешала только `renderCompanyGrid()`, а первый рендер
+   каталога идёт мимо неё — кнопки «+» на первом экране не работали вовсе. */
+function bindCompanyGridActions(el){
+  if(!el || el.dataset.bound) return;
+  el.dataset.bound = "1";
+  el.addEventListener("click", ev=>{
+    const cmp = ev.target.closest("[data-co-compare]");
+    if(cmp){
+      ev.preventDefault();
+      const result=toggleCompared(cmp.dataset.coCompare);
+      if(result.error){cmp.title=result.error;return;}
+      renderCompanyGrid();
+      return;
+    }
+    const fav = ev.target.closest("[data-co-follow]");
+    if(fav){
+      ev.preventDefault();
+      toggleFollowedCompany(fav.dataset.coFollow);
+      renderCompanyGrid();
+    }
   });
 }
 function renderCompanies(){
@@ -3163,6 +3269,7 @@ function renderCompanies(){
     <button class="chip ${coSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
   </div>
   <div id="coGrid" class="reveal">${companyGridHtml()}</div>`;
+  bindCompanyGridActions(document.getElementById("coGrid"));
   const cq = document.getElementById("coq");
   if(cq){
     let t=null;
@@ -3473,7 +3580,7 @@ function renderAdvisors(){
   </div>
   <div class="notice reveal">
     <div style="font-weight:600;color:var(--bronze)">ⓘ</div>
-    <div>Это не рейтинг качества. Число сделок показывает только карточки, где консультант назван в доступном публичном источнике. Категории юридических фирм основаны на открытых отраслевых данных; отсутствие сделки в базе не означает отсутствие опыта.</div>
+    <div>Здесь показано, в скольких карточках базы фирма названа консультантом со ссылкой на публичный источник. Это не рейтинг: фирмы раскрывают не все проекты, и ноль сделок в базе не означает, что их не было.</div>
   </div>
   ${body}`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
@@ -3774,7 +3881,31 @@ function renderAnalytics(){
   const rubDisclosed = rubSum.length;
   const topSum = rubSum.slice().sort((a,b)=>b._b-a._b).slice(0,10);
   const statuses = {};
-  DEALS.forEach(d=>{if(d.status) statuses[d.status]=(statuses[d.status]||0)+1;});
+  /* Статус в базе — это ФОРМУЛИРОВКА ИЗ ИСТОЧНИКА, а не значение из
+     справочника: рядом оказывались «Обсуждается» (227), «Подписана» (2) и
+     «Реализуется» (1), и читатель честно спрашивал, чем они отличаются.
+     Сводим к тем же пяти стадиям, которыми подписана шкала на карточке
+     сделки, — один словарь на весь сайт. Редкие формулировки, не попавшие
+     ни в одну стадию, собираются в «Другие формулировки»: строка с единицей
+     выглядит как категория, хотя это разовая фраза журналиста. */
+  DEALS.forEach(d=>{
+    if(!d.status) return;
+    const label = stageLabel(d.status);
+    statuses[label]=(statuses[label]||0)+1;
+  });
+  const withStatus = DEALS.filter(d=>d.status).length;
+  /* Строка с единицей выглядит как категория, хотя это разовая формулировка
+     журналиста: «Согласование получено — 1» читалось как «одобрение получила
+     одна сделка из всей базы», а согласования у нас названы у сотни карточек.
+     Всё, что меньше десяти, сводим в одну строку и прямо перечисляем, что в
+     неё вошло, — иначе это была бы уже не сводка, а сокрытие. */
+  const RARE = 10;
+  const rare = Object.entries(statuses).filter(([,n])=>n<RARE);
+  if(rare.length>1){
+    rare.forEach(([k])=>{delete statuses[k];});
+    statuses["Другие стадии: "+rare.map(([k])=>k.toLowerCase()).join(", ")] =
+      rare.reduce((sum,[,n])=>sum+n,0);
+  }
   const firmsWithDeals = FIRMS.concat(INV_FIRMS).filter(f=>firmCount(f.id)>0).length;
   const firmRank = FIRMS.map(f=>({id:f.id,n:f.n,c:firmCount(f.id)})).filter(f=>f.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
   // Серийные покупатели: кто чаще всех выступает покупателем в базе
@@ -3834,9 +3965,9 @@ function renderAnalytics(){
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сделки, где фирма названа консультантом. Хотя бы одна такая сделка есть у ${firmsWithDeals} фирм каталога из ${FIRMS.length+INV_FIRMS.length}. Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
     </div>
     <div class="an-card reveal">
-      <span class="label">Статусы детальных карточек</span>
-      ${Object.entries(statuses).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/DEALS.length*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Статус известен у ${DEALS.length} сделок. У остальных ${all.length-DEALS.length} мы знаем только заголовок и ссылку на источник — по короткому сообщению не видно, закрылась сделка или обсуждается.</p>
+      <span class="label">На какой стадии мы застали сделку</span>
+      ${Object.entries(statuses).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/withStatus*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Стадия известна у ${withStatus} сделок из ${DEALS.length}: это последняя стадия, о которой писал источник, а не сегодняшнее состояние сделки. «Согласование получено» здесь — стадия, на которой закончились сообщения, а не число сделок, получивших одобрение регулятора: согласования — отдельное поле в линзе «Юрист», и они названы у ${DEALS.filter(d=>hasFact(d.law&&d.law.appr)).length} карточек.</p>
     </div>
     ${topBuyers.length?`
     <div class="an-card reveal">
@@ -3925,7 +4056,7 @@ async function renderMaterials(){
     <div class="mp-item"><h2>Анонсируйте вебинары</h2><p>Дата, тема и ссылка на подключение — событие появляется здесь, а читатель добавляет его в свой календарь одним нажатием, чтобы не забыть о встрече.</p></div>
     <div class="mp-item"><h2>Профиль автора</h2><p>Колонки и эфиры собираются на странице фирмы или консультанта в каталоге — рядом с реальными сделками, которые она вела.</p></div>
   </div>
-  <p class="acct-note reveal">Раздел только открывается: ниже — уже объявленные эфиры, календарь и колонки появятся следующими. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
+  <p class="acct-note reveal">Раздел только начинается. Ниже — эфиры, о которых уже объявлено; календарь и авторские колонки добавим следом. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
   <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
   const pitchLink=document.getElementById("materialsPitchLink");
@@ -3956,7 +4087,7 @@ async function renderAssistant(){
       <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
       <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
       <div class="suggests reveal">${SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${q}</button>`).join("")}</div>
-      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала АЛРУД?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала [название юридической фирмы]?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
     </div>
   </div>`;
   rerun();
