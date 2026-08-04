@@ -16,6 +16,7 @@ from email.message import EmailMessage
 import httpx
 from sqlalchemy import select
 
+import telegram_endpoint
 from db.models import DealWatch, Notification, NotificationPreference, User
 
 logger = logging.getLogger("kompas.notifications")
@@ -30,12 +31,12 @@ def get_preferences(db, user_id: int) -> NotificationPreference:
     return row
 
 
-def _email_configured() -> bool:
+def email_configured() -> bool:
     return bool(os.environ.get("SMTP_HOST"))
 
 
 def _send_email(to_addr: str, subject: str, body: str) -> bool:
-    if not _email_configured():
+    if not email_configured():
         return False
     msg = EmailMessage()
     msg["Subject"] = subject
@@ -61,7 +62,7 @@ def _send_telegram(chat_id: str, text: str) -> bool:
         return False
     try:
         response = httpx.post(
-            f"https://api.telegram.org/bot{token}/sendMessage",
+            telegram_endpoint.method_url(token, "sendMessage"),
             json={"chat_id": chat_id, "text": text, "disable_web_page_preview": True},
             timeout=12,
         )

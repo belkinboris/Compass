@@ -40,42 +40,71 @@ def test_verify_password_rejects_malformed_hash():
 
 
 def test_register_creates_user_with_lowercase_email(session):
-    user, err = auth.register_user(session, "Юрист@Фирма.ру", "надёжный-пароль")
+    user, err = auth.register_user(session, "Юрист@Фирма.ру", "надёжный-пароль", "Юрист Юристов")
     assert err is None and user is not None
     assert user.email == "юрист@фирма.ру"
     assert session.query(User).count() == 1
 
 
 def test_register_rejects_bad_email(session):
-    user, err = auth.register_user(session, "not-an-email", "надёжный-пароль")
+    user, err = auth.register_user(session, "not-an-email", "надёжный-пароль", "Тест Тестов")
     assert user is None and "почта" in err
 
 
 def test_register_rejects_short_password(session):
-    user, err = auth.register_user(session, "a@b.ru", "коротк")
+    user, err = auth.register_user(session, "a@b.ru", "коротк", "Тест Тестов")
     assert user is None and "пароль" in err
 
 
 def test_register_rejects_duplicate_email(session):
-    auth.register_user(session, "a@b.ru", "первый-пароль-123")
-    user, err = auth.register_user(session, "a@b.ru", "второй-пароль-456")
+    auth.register_user(session, "a@b.ru", "первый-пароль-123", "Тест Тестов")
+    user, err = auth.register_user(session, "a@b.ru", "второй-пароль-456", "Тест Тестов")
     assert user is None and "уже зарегистрирована" in err
 
 
+def test_register_rejects_missing_full_name(session):
+    """До 2 августа роль записывалась всем подряд как individual без выбора —
+    теперь ФИО и тип аккаунта обязательны, а не тихая заглушка."""
+    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "")
+    assert user is None and "имя" in err
+
+
+def test_register_rejects_unknown_role(session):
+    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Тест Тестов", role="начальник")
+    assert user is None and "тип аккаунта" in err
+
+
+def test_register_stores_full_name_company_position_and_role(session):
+    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Иван Иванов",
+                                    company="ООО Ромашка", position="Партнёр", role="firm")
+    assert err is None
+    assert user.full_name == "Иван Иванов"
+    assert user.company == "ООО Ромашка"
+    assert user.position == "Партнёр"
+    assert user.role.value == "firm"
+
+
+def test_register_defaults_role_to_individual_and_allows_empty_company(session):
+    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Иван Иванов")
+    assert err is None
+    assert user.role.value == "individual"
+    assert user.company is None and user.position is None
+
+
 def test_authenticate_accepts_correct_password(session):
-    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     user, err = auth.authenticate(session, "a@b.ru", "правильный-пароль")
     assert err is None and user is not None and user.email == "a@b.ru"
 
 
 def test_authenticate_is_case_insensitive_on_email(session):
-    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     user, err = auth.authenticate(session, "A@B.RU", "правильный-пароль")
     assert err is None and user is not None
 
 
 def test_authenticate_rejects_wrong_password(session):
-    auth.register_user(session, "a@b.ru", "правильный-пароль")
+    auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     user, err = auth.authenticate(session, "a@b.ru", "неверный-пароль")
     assert user is None and err is not None
 
@@ -83,14 +112,14 @@ def test_authenticate_rejects_wrong_password(session):
 def test_authenticate_unknown_email_gives_same_error_as_wrong_password(session):
     """Один и тот же отказ на обе причины — иначе по разнице ответов можно
     перечислять зарегистрированные адреса."""
-    auth.register_user(session, "known@firm.ru", "правильный-пароль")
+    auth.register_user(session, "known@firm.ru", "правильный-пароль", "Тест Тестов")
     _, err_unknown = auth.authenticate(session, "unknown@firm.ru", "что-угодно")
     _, err_wrong = auth.authenticate(session, "known@firm.ru", "неверный-пароль")
     assert err_unknown == err_wrong
 
 
 def test_session_cookie_round_trip(session):
-    user, err = auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, err = auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     assert err is None
     cookie = auth.create_session(session, user)
     assert auth.current_user(session, cookie).id == user.id
@@ -99,7 +128,7 @@ def test_session_cookie_round_trip(session):
 
 
 def test_revoked_session_stops_working(session):
-    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     cookie = auth.create_session(session, user)
     assert auth.current_user(session, cookie) is not None
     auth.revoke_session(session, cookie)
@@ -107,7 +136,7 @@ def test_revoked_session_stops_working(session):
 
 
 def test_expired_session_stops_working(session):
-    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль")
+    user, _ = auth.register_user(session, "a@b.ru", "правильный-пароль", "Тест Тестов")
     session.add(AuthSession(user_id=user.id, token="stale-session",
                              expires_at=datetime.utcnow() - timedelta(days=1)))
     session.commit()

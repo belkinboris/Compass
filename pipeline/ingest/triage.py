@@ -72,6 +72,11 @@ def to_date(published, fallback):
 def main(argv):
     rows = read_raw('--all' in argv)
     data = json.load(open(DATA, encoding='utf-8'))
+    # Один индекс по одному файлу — потому что база теперь одна. До 3 августа
+    # 2026 сделки лежали в пяти местах (три массива в index.html, bulk_deals.json
+    # и этот файл), приток строил индекс только по последнему и был слеп к 54
+    # карточкам: новость о Hugo Boss/«Стокманне» считалась новой сделкой.
+    # Слияние убрало не симптом, а саму возможность такой ошибки.
     idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
 
     result, counts, seen = [], {'not_a_deal': 0, 'enrich': 0, 'new': 0, 'duplicate': 0}, set()

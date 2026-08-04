@@ -65,15 +65,24 @@ message_id в `telegram_posts` (не `null`) И которая попала в
 бэклогом), скорость всё равно ограничена. Правки уже опубликованных постов
 делят тот же общий лимит.
 
+РАВНОМЕРНАЯ ВЫДАЧА (решение владельца 4 августа). Найденное за прогон не
+уходит в канал одной пачкой: посты раскладываются на дневное окно
+`TELEGRAM_WINDOW` (по умолчанию 10:00–19:00 МСК). Ночью новые посты не
+отправляются вовсе — никого не будим; правки уже опубликованных постов идут
+всегда, `editMessageText` уведомления не даёт. Подробности расчёта — у
+`pace_allowance()`.
+
 Запуск:
     python3 pipeline/publish/send_telegram.py              # сухой прогон
-    python3 pipeline/publish/send_telegram.py --write      # отправить и записать id
+    python3 pipeline/publish/send_telegram.py --write      # отправить свою долю
+    python3 pipeline/publish/send_telegram.py --write --now  # отправить всё сразу
 """
 import json
+import math
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -82,12 +91,66 @@ if ROOT not in sys.path:
 sys.path.insert(0, HERE)
 
 import format_post  # noqa: E402
+import telegram_endpoint  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 UPDATES_DIR = os.path.join(ROOT, 'data', 'inbox', 'updates')
-API_BASE = 'https://api.telegram.org/bot%s/%s'
 MAX_SENDS_PER_RUN = int(os.environ.get('TELEGRAM_MAX_SENDS_PER_RUN', '20'))
 SEND_DELAY_S = float(os.environ.get('TELEGRAM_SEND_DELAY_S', '1.2'))
+# Пауза между НОВЫМИ постами внутри одного прогона. Она нужна отдельно от
+# `SEND_DELAY_S` (та защищает от лимитов Bot API и меряется секундами): в
+# последнем слоте окна уходит весь остаток очереди, и без разведения читатель
+# получил бы три уведомления подряд в одну минуту — ровно то, чего мы избегаем
+# равномерной выдачей. Правок это не касается: `editMessageText` не уведомляет.
+SPREAD_S = float(os.environ.get('TELEGRAM_SPREAD_S', '90'))
+
+# ---------- РАВНОМЕРНАЯ ВЫДАЧА ----------
+# Пять постов подряд в одну минуту — это не лента, а спам: читатель получает
+# пять уведомлений за десять секунд и отключает канал. Раскладываем найденное
+# за прогон на окно дневных часов.
+#
+# ПОЧЕМУ БЕЗ СОБСТВЕННОГО РАСПИСАНИЯ И БЕЗ ОЖИДАНИЯ ВНУТРИ ПРОЦЕССА. Растянуть
+# отправку на девять часов внутри одного запуска нельзя: публикация — последний
+# шаг притока, а приток живёт короткой сессией и завершается. Хранить «когда
+# опубликовать» отдельным полем тоже не хочется: это второе состояние рядом с
+# `telegram_posts`, которое обязано с ним не разъезжаться.
+#
+# Поэтому расчёт БЕЗ СОСТОЯНИЯ: на каждом прогоне смотрим, сколько прогонов
+# ещё осталось до конца окна, и берём ровно свою долю очереди. Пять постов в
+# 10:00 при часовом прогоне и окне до 19:00 — это 10 оставшихся прогонов и по
+# одному посту за раз; если часть постов не ушла, следующий прогон честно
+# пересчитает долю от того, что осталось. Самовосстанавливается: пропущенный
+# прогон не копит долг, он просто делится на меньшее число слотов.
+MSK = timezone(timedelta(hours=3))          # Москва, перевода часов нет
+PUBLISH_WINDOW = os.environ.get('TELEGRAM_WINDOW', '10-19')   # часы по Москве
+RUN_EVERY_H = float(os.environ.get('TELEGRAM_RUN_EVERY_H', '1'))
+
+
+def window_bounds():
+    start, end = (int(x) for x in PUBLISH_WINDOW.split('-'))
+    assert 0 <= start < end <= 24, 'окно публикации задано неверно: %r' % PUBLISH_WINDOW
+    return start, end
+
+
+def pace_allowance(pending, now=None):
+    """Сколько новых постов можно отправить прямо сейчас.
+
+    Возвращает (сколько, пояснение). Ноль — значит «не сейчас»: либо ночь,
+    либо очередь пуста. Правок это не касается — `editMessageText` не будит
+    читателя, и придерживать исправление факта до утра незачем.
+    """
+    start, end = window_bounds()
+    now = now or datetime.now(MSK)
+    hour = now.hour + now.minute / 60.0
+    if hour < start or hour >= end:
+        return 0, 'вне окна публикации %02d:00–%02d:00 МСК (сейчас %02d:%02d) — держим до утра' % (
+            start, end, now.hour, now.minute)
+    if not pending:
+        return 0, 'очередь пуста'
+    slots = int((end - hour) / RUN_EVERY_H) + 1
+    per = max(1, int(math.ceil(pending / float(slots))))
+    return per, 'окно %02d:00–%02d:00 МСК, впереди прогонов: %d, берём %d из %d' % (
+        start, end, slots, min(per, pending), pending)
 
 
 class TelegramError(Exception):
@@ -100,7 +163,7 @@ def _client():
 
 
 def post_message(client, token, chat_id, text):
-    r = client.post(API_BASE % (token, 'sendMessage'), json={
+    r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
         'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML', 'disable_web_page_preview': True,
     })
     body = r.json()
@@ -110,7 +173,7 @@ def post_message(client, token, chat_id, text):
 
 
 def edit_message(client, token, chat_id, message_id, text):
-    r = client.post(API_BASE % (token, 'editMessageText'), json={
+    r = client.post(telegram_endpoint.method_url(token, 'editMessageText'), json={
         'chat_id': chat_id, 'message_id': message_id, 'text': text,
         'parse_mode': 'HTML', 'disable_web_page_preview': True,
     })
@@ -190,6 +253,21 @@ def main(write):
     # делят лимит с новыми постами: считаем оба списка одной очередью, а не
     # отдельными лимитами каждый, иначе включённая одновременно куча правок
     # обойдёт защиту с другой стороны.
+    # Равномерная выдача. Ключ `--now` её отключает: он для ручного запуска,
+    # когда владелец сам решил опубликовать всё немедленно.
+    if '--now' in sys.argv:
+        allow, why = len(to_send), 'ключ --now: равномерная выдача отключена'
+    else:
+        allow, why = pace_allowance(len(to_send))
+    print('Темп: %s' % why)
+    held = to_send[allow:]
+    to_send = to_send[:allow]
+    if held:
+        print('Придержано новых постов: %d — уйдут следующими прогонами.' % len(held))
+    if not to_send and not to_edit:
+        print('Отправлять сейчас нечего.')
+        return
+
     queue = [('send', did, text) for did, text in to_send] + \
             [('edit', did, (mid, text)) for did, mid, text in to_edit]
     batch, rest = queue[:MAX_SENDS_PER_RUN], queue[MAX_SENDS_PER_RUN:]
@@ -199,9 +277,13 @@ def main(write):
 
     client = _client()
     sent, edited, failed = 0, 0, []
+    prev_kind = None
     for i, (kind, did, payload) in enumerate(batch):
         if i:
-            time.sleep(SEND_DELAY_S)
+            # Два новых поста подряд разводим по времени, всё остальное —
+            # обычной технической паузой.
+            time.sleep(SPREAD_S if (kind == 'send' and prev_kind == 'send') else SEND_DELAY_S)
+        prev_kind = kind
         try:
             if kind == 'send':
                 posts[did] = post_message(client, token, chat_id, payload)

@@ -279,6 +279,44 @@ def test_account_form_is_visible_after_async_auth_check(page, base_url):
     assert "Войти" in page.locator("#app").inner_text()
 
 
+def test_search_ignores_dots_and_hyphens_inside_names(base_url, browser):
+    """«авто ру» и «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии».
+    Замер до правки: у 367 карточек название в заголовке содержит точку или
+    дефис внутри, а индекс сравнивался дословно — «авто ру», «авто-ру» и
+    «ттехнологии» давали ПУСТО, а «т технологии» находило чужую сделку.
+    Проверяем и обратное: поиск не должен начать находить всё подряд.
+    Чистый контекст: фильтры ленты живут в глобальных переменных и переживают
+    смену хеша, поэтому в общем прогоне состояние пришло бы от прошлого теста."""
+    ctx = browser.new_context()
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/deals", wait_until="networkidle")
+        pg.wait_for_function("typeof bulkLoaded !== 'undefined' && bulkLoaded", timeout=30000)
+
+        def search(q):
+            pg.fill("#feedq", q)
+            pg.press("#feedq", "Enter")
+            pg.wait_for_timeout(400)
+            return pg.evaluate("document.getElementById('feedlist').innerText")
+
+        for q in ("авто.ру", "авто ру", "авто-ру", "т-технологии", "ттехнологии", "т технологии"):
+            text = search(q)
+            assert "Авто.ру" in text and "Т-Технологии" in text, \
+                f"запрос «{q}» не нашёл сделку Т-Технологии/Авто.ру"
+
+        # Продавец и предмет записаны текстом, а не ссылкой на профиль: без них
+        # в индексе по продавцу не находились 254 карточки из 653.
+        assert "Flowwow" in search("Владельцы Flowwow"), "по продавцу текстом сделка не находится"
+
+        # Обратная проверка: нормализация не должна стирать различия между
+        # разными компаниями — иначе «находит всё» неотличимо от «ищет хорошо».
+        other = search("сбербанк")
+        assert "Авто.ру" not in other, "поиск стал находить нерелевантные сделки"
+        assert len(other.strip()) > 0, "запрос «сбербанк» не нашёл вообще ничего — сломан сам поиск"
+    finally:
+        ctx.close()
+
+
 def test_shared_link_restores_the_selection(base_url, browser):
     """Подборка должна открываться у коллеги так же, как у отправителя:
     раньше три фильтра оставляли адрес #/ и ссылка не несла ничего.
@@ -330,3 +368,87 @@ def test_failed_base_load_shows_retry_instead_of_fake_small_numbers(browser, bas
         assert pg.evaluate("() => TOTAL_DEALS()") > 1000
     finally:
         ctx.close()
+
+
+def test_cards_without_eco_or_law_render_without_pageerror(page, base_url):
+    """У 136 карточек нет объекта `eco`, у 112 — `law`, и интерфейс их читал
+    без проверки.
+
+    `d.eco.share` на «Обзоре» вычислялся ВСЕГДА, когда предмет не разобран
+    структурно: карточка «Возврат отеля «Имеретинский»» роняла `renderDeal`
+    с `Cannot read properties of undefined (reading 'share')`. Страница при
+    этом что-то показывала, поэтому проверка «экран не пуст» дефекта не
+    видела — его поймал только слушатель `pageerror`. Тот же класс, что
+    урок E9 в CLAUDE.md: тормоз `NEW_CARDS_NEED_REVIEW` год не пускал в базу
+    новых карточек, и десятки мест, читающих `d.law.adv` без проверки, не
+    проявлялись.
+
+    Два других таких же места: фильтр ленты по фирме (`it.rec.law.adv`) и
+    страница фирмы (`d.law.adv.find`, `d.eco.finadv`).
+    """
+    visit(page, base_url, "#/")
+    thin = page.evaluate(
+        "() => DEALS.filter(d => !d.eco || !d.law).slice(0, 12).map(d => d.id)")
+    assert thin, "в базе не осталось карточек без eco/law — проверка потеряла смысл"
+    for deal_id in thin:
+        page.evaluate("id => location.hash = '#/deal/' + id", deal_id)
+        page.wait_for_timeout(220)
+        assert page.inner_text("#app").strip(), f"{deal_id}: экран пуст"
+    assert not page.crashes, f"падения на карточках без eco/law: {page.crashes[:3]}"
+
+
+def test_no_undefined_on_screen_for_cards_without_status(page, base_url):
+    """У 136 карточек нет поля `status`, а лента и шапка печатали его напрямую.
+
+    На экране это выглядело так: «28 июл. 2022 · UNDEFINED · ГМК и добыча» —
+    и в строке ленты, и в шапке карточки, и в тексте кнопки «поделиться», и
+    отдельным столбцом «undefined» в аналитике. Дефект видно только глазами
+    или такой проверкой: экран не пуст, ошибок в консоли нет, разметка
+    валидна — всё молчит.
+    """
+    visit(page, base_url, "#/")
+    ids = page.evaluate("() => DEALS.filter(d => !d.status).slice(0, 6).map(d => d.id)")
+    assert ids, "в базе не осталось карточек без статуса — проверка потеряла смысл"
+    for hash_ in ["#/", "#/analytics"] + ["#/deal/" + i for i in ids]:
+        visit(page, base_url, hash_)
+        text = page.inner_text("#app")
+        assert "undefined" not in text.lower(), f"{hash_}: на экране слово undefined"
+
+
+def test_regulatory_analyzer_defers_to_a_known_approval(page, base_url):
+    """Анализатор не спорит с фактом и не предлагает считать то, что известно.
+
+    Замечание владельца: если у сделки ФАС уже получен, а анализатор напишет
+    «согласование не требуется», это читается как «сервис плохой» — хотя
+    объяснений у расхождения два и оба нормальные (сторона могла подать
+    ходатайство из осторожности; основание могло быть не видно из карточки).
+    Поэтому там, где согласование НАЗВАНО в карточке, панель начинается с
+    этого факта и прямо пишет, что факт сильнее расчёта, а кнопки «проверить»
+    на «Обзоре» нет вовсе — нажимать её там значит тратить время читателя.
+    """
+    visit(page, base_url, "#/")
+    with_appr, without = page.evaluate("""() => {
+      const has = v => { const t = String(v||'').trim().toLowerCase();
+        return !!t && t !== '—' && !/^(не раскры|публично не|не сообщал)/.test(t); };
+      const a = DEALS.find(d => has(d.law && d.law.appr));
+      const b = DEALS.find(d => !has(d.law && d.law.appr) && d.eco);
+      return [a && a.id, b && b.id];
+    }""")
+    assert with_appr and without, "в базе нет пары карточек для проверки"
+
+    visit(page, base_url, "#/deal/" + without)
+    assert page.locator("[data-reg-open]").count() == 1, "нет кнопки там, где про согласования молчат"
+    page.locator("[data-reg-open]").first.click()
+    page.wait_for_timeout(500)
+    panel = page.locator("#reg-panel")
+    assert panel.count() == 1, "кнопка не открыла панель — эффект вне экрана"
+
+    visit(page, base_url, "#/deal/" + with_appr)
+    assert page.locator("[data-reg-open]").count() == 0, \
+        "кнопка предлагает считать то, что уже известно"
+    page.evaluate("document.querySelector('[data-l=\"law\"]').click()")
+    page.wait_for_timeout(400)
+    text = page.locator("#reg-panel").inner_text()
+    assert "согласование уже названо в источниках" in text.lower(), \
+        "панель не начинается с известного факта"
+    assert not page.crashes, f"падения на анализаторе: {page.crashes[:3]}"

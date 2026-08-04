@@ -132,6 +132,40 @@ def test_match_uses_the_source_url(base):
     assert found == deal["id"] and "адрес" in why
 
 
+def test_match_sees_short_names():
+    """Порог «слово длиннее четырёх знаков» делал короткие имена невидимыми.
+
+    «Hugo Boss», «VK», «МТС», «X5» — это названия, а не служебные слова, и
+    объявление о такой сделке не находило свою карточку ни разу. Исключение
+    сделано ровно для имён: латиница и аббревиатуры заглавными. Правовые формы
+    и слова из имён фирм («ГК», «АО», «Group», «Capital») по-прежнему
+    выбрасываются — иначе по ним слипнется пол-базы.
+    """
+    assert {"hugo", "boss"} <= matcher.stems("«Стокманн» купил российский бизнес Hugo Boss")
+    for name in ("VK", "МТС", "X5"):
+        assert matcher.stems("%s выкупила долю" % name), "%s не виден сопоставлению" % name
+    assert matcher.stems("ООО ГК АО ЗАО Group Holding Capital Partners Ltd LLC") == set()
+
+
+def test_quoted_common_counts_every_shared_name():
+    """Ранжирование кандидатов и развилка «сильное совпадение» считают одинаково.
+
+    `quoted_overlap` отвечает да/нет, но человеку в списке кандидатов важно,
+    СКОЛЬКО названий общих: одно случайное («Лента» есть у десятка карточек)
+    и три подряд («Лента» + «О'Кей» + «РБФ ритейл») — разной силы признак.
+    Обе функции обязаны опираться на одно правило вхождения, иначе показанный
+    список разойдётся с тем, что пускается в базу.
+    """
+    post = {"лент", "о кей", "рбф ритейл"}
+    card = {"лент", "земун", "рбф ритейл", "о кей"}
+    assert matcher.quoted_common(post, card) == {"лент", "о кей", "рбф ритейл"}
+    assert matcher.quoted_common(post, {"северсталь"}) == set()
+    # Вхождение, а не только равенство: «Заряд» и «Бери заряд» — одна компания.
+    assert matcher.quoted_common({"заряд"}, {"бери заряд"}) == {"заряд"}
+    for a, b in (({"лент"}, {"лент"}), ({"заряд"}, {"бери заряд"}), ({"лент"}, {"мегафон"})):
+        assert matcher.quoted_overlap(a, b) is bool(matcher.quoted_common(a, b))
+
+
 # ---------- формат телеграм-поста ----------
 
 def test_post_has_no_placeholder_lines(base):
@@ -488,10 +522,113 @@ def test_match_respects_reviewed_separate_transaction():
     assert found is None
 
 
+# ---------- кто сопровождал сделку ----------
+
+import advisors  # noqa: E402
+
+
+def test_advisor_is_taken_from_the_start_of_the_announcement():
+    """Объявление о сопровождении — пресс-релиз: имя фирмы стоит первым, за ним
+    глагол действия по сделке. Замер на 2544 постах @LawFirms: 65 срабатываний,
+    ложных среди проверенных нет."""
+    firms, role, _ = advisors.lead_advisor(
+        'White Square консультировала Nordgold в связи с приобретением актива на Чукотке.')
+    assert firms == ['White Square'] and role.startswith('Юридический консультант')
+
+
+def test_advisor_rule_ignores_job_titles_and_rankings():
+    """Первая версия правила искала «консультант»/«советник» где угодно в тексте
+    и дала 11 срабатываний на 133 живых постах, из которых верных НОЛЬ: в
+    юридических каналах «советник» — должность сотрудника, а «консультант» —
+    слово из рейтинга. Эти три строки — те самые ложные срабатывания."""
+    assert advisors.lead_advisor('советник LEVEL Legal Services провела мастер-класс по арбитражу') is None
+    assert advisors.lead_advisor('ALUMNI Partners вошла в топ-5 юридических консультантов рейтинга') is None
+    assert advisors.lead_advisor('Присутствовать на этом событии удалось советнику ККМП Алексею Чернышеву') is None
+
+
+def test_advisor_rule_needs_a_role_next_to_vystupil():
+    """«Прокуратура выступила ПРОТИВ выселения певицы» — не объявление о
+    сопровождении. Глагол «выступил» засчитывается только с ролью рядом."""
+    assert advisors.lead_advisor('Прокуратура выступила против принудительного выселения певицы.') is None
+    assert advisors.lead_advisor('NSP выступила юридическим консультантом покупателя.') is not None
+
+
+def test_advisor_name_keeps_commas_inside_a_quoted_firm():
+    """«Меллинг, Войтишкин и Партнеры» — одна фирма, а Freshfields, Latham &
+    Watkins и Hengeler Mueller — три. Различает их кавычка, а не запятая."""
+    one, _, _ = advisors.lead_advisor(
+        '«Меллинг, Войтишкин и Партнеры» сообщает: её команда представляла интересы группы.')
+    assert one == ['Меллинг, Войтишкин и Партнеры']
+    many, _, _ = advisors.lead_advisor(
+        'Freshfields, Latham & Watkins и Hengeler Mueller сопровождали IPO.')
+    assert many == ['Freshfields', 'Latham & Watkins', 'Hengeler Mueller']
+    # Родовое слово снаружи собственных кавычек имени — тоже одна фирма.
+    nested, _, _ = advisors.lead_advisor(
+        'АБ «Андрей Городисский и Партнеры» выступили юридическим консультантом сделки.')
+    assert nested == ['Андрей Городисский и Партнеры']
+
+
+def test_advisor_rule_survives_the_latin_homoglyph():
+    """В самом канале встречается ЛАТИНСКАЯ «c» вместо кириллической
+    («Nextons cообщает…»): шаблон с одной кириллицей молча не сработал бы."""
+    firms, _, _ = advisors.lead_advisor('Nextons cообщает о сопровождении сделки.')
+    assert firms == ['Nextons']
+
+
+def test_advisor_rule_knows_more_than_one_way_to_say_the_same_thing():
+    """Список формулировок был собран по одной партии постов — и оказался
+    списком ТЕХ формулировок, а не всех.
+
+    «Обеспечила сопровождение», «осуществила сопровождение» и «сообщает о
+    консультировании» значат ровно то же, что «сопровождала», но правило их не
+    знало и молча пропускало объявления. Замер по архиву канала: срабатываний
+    было 115, стало 128, и все 13 добавившихся — настоящие объявления фирм
+    (Orion/ВТБ, Better Chance/«Инкаб Холдинг», VERBA LEGAL/RWB, АЛРУД/«Пункт Е»,
+    Nextons/SPO «Эталон», BIRCH/«ВИМ Инвестиции», White Square/Softline и др.),
+    ни одного ложного и ни одного потерянного.
+    """
+    for text in (
+        'Команда Orion сообщает о консультировании банка ВТБ в связи со сделкой.',
+        'Better Chance обеспечила полное юридическое сопровождение размещения акций.',
+        'Nextons осуществила комплексное юридическое сопровождение SPO «Эталон Груп».',
+    ):
+        assert advisors.lead_advisor(text), 'правило не увидело объявление: %s' % text[:48]
+    # Границу не размываем: те же глаголы без сделки и без роли не проходят.
+    assert advisors.lead_advisor('White Square приглашает вас на вебинар про IPO.') is None
+    assert advisors.lead_advisor('BIRCH сообщает о присоединении Ивана Фрышкина партнером.') is None
+
+
+def test_advisor_name_drops_every_generic_prefix_not_just_one():
+    """Родовых слов бывает два подряд, а `sub` с якорем `^` снимает одно.
+
+    «Команда практики рынков капитала White Square» превращалась в «практики
+    рынков капитала White Square» — и такой «консультант» попадал бы на экран.
+    Заодно проверяется ленивый квантификатор: жадный съедал «рынков капитала
+    Better» целиком (за ним тоже заглавная) и оставлял имя «Chance».
+    """
+    assert advisors.lead_advisor(
+        'Команда практики рынков капитала White Square выступила юридическим консультантом SPO.'
+    )[0] == ['White Square']
+    assert advisors.lead_advisor(
+        'Практика рынков капитала Better Chance обеспечила сопровождение размещения акций.'
+    )[0] == ['Better Chance']
+    # Имя фирмы, начинающееся с родового слова в кавычках, резать нельзя.
+    assert advisors.lead_advisor(
+        'АБ «Андрей Городисский и Партнеры» выступили юридическим консультантом сделки.'
+    )[0] == ['Андрей Городисский и Партнеры']
+
+
+def test_advisor_side_is_set_only_when_one_party_is_named():
+    """Сторона — факт из текста, а не догадка: названы обе — роль остаётся общей."""
+    assert advisors.lead_advisor('NSP сопровождало продавца в сделке.')[1] == 'Юридический консультант продавца'
+    assert advisors.lead_advisor('NSP сопровождало покупателя и продавца в сделке.')[1] == 'Юридический консультант'
+
+
 # ---------- отправка в Telegram ----------
 
 import send_telegram  # noqa: E402
 import seed_telegram_posts_backlog  # noqa: E402
+import telegram_endpoint  # noqa: E402
 
 
 class _FakeResponse:
@@ -511,6 +648,50 @@ class _FakeClient:
     def post(self, url, json):
         self.calls.append((url, json))
         return _FakeResponse(self.replies.pop(0))
+
+
+def test_api_root_is_telegram_directly_when_relay_is_not_configured(monkeypatch):
+    monkeypatch.delenv("TELEGRAM_API_BASE", raising=False)
+    assert telegram_endpoint.api_root() == "https://api.telegram.org"
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://api.telegram.org/botTOKEN/sendMessage"
+
+
+def test_api_root_uses_relay_when_configured(monkeypatch):
+    """Прямая связь Timeweb (РФ) -> api.telegram.org даёт ~32% отказов
+    (замер соседнего проекта «Автопост», 19 июля 2026) — релей на Cloudflare
+    Workers убирает причину на уровне сети. Путь /bot<токен>/<метод> воркер
+    пробрасывает как есть, поэтому один воркер обслуживает любого бота."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_api_root_survives_relay_address_without_scheme(monkeypatch):
+    """Значение без «https://» даёт UnsupportedProtocol мгновенно, без единой
+    попытки сети, — такую ошибку легко принять за сетевую и искать причину не
+    там (ровно это и произошло в «Автопосте» 19 июля 2026). Схему дописываем
+    сами, а не надеемся, что её не забудут в панели хостинга."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "relay.workers.dev")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_api_root_ignores_trailing_slash(monkeypatch):
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev/")
+    assert telegram_endpoint.method_url("TOKEN", "sendMessage") == \
+        "https://relay.workers.dev/botTOKEN/sendMessage"
+
+
+def test_send_telegram_actually_calls_the_relay(monkeypatch):
+    """Мало иметь верный адрес — отправка обязана им пользоваться. Раньше
+    адрес был захардкожен в константе модуля, и подмена переменной окружения
+    на него бы не повлияла."""
+    monkeypatch.setenv("TELEGRAM_API_BASE", "https://relay.workers.dev")
+    client = _FakeClient([{"ok": True, "result": {"message_id": 1}}])
+    send_telegram.post_message(client, "TOKEN", "@channel", "текст")
+    url, _payload = client.calls[0]
+    assert url.startswith("https://relay.workers.dev/"), url
 
 
 def test_sendable_requires_at_least_one_real_fact():
@@ -724,3 +905,128 @@ def test_discover_main_dry_run_does_not_write(monkeypatch, tmp_path):
                          if "f.xml" not in url else b'<rss><channel><item><title>T</title><link>u</link></item></channel></rss>')
     discover_feeds.main([])
     assert json.loads(tmp_sources.read_text(encoding="utf-8"))["sources"][0]["enabled"] is False
+
+
+# ---------- равномерная выдача постов в канал ----------
+
+def test_publisher_holds_everything_at_night():
+    """Ночью новых постов не отправляем — никого не будим.
+
+    Это прямое требование владельца, и оно важнее скорости: сделка, найденная
+    в три часа ночи, подождёт до утра.
+    """
+    from datetime import datetime
+    import importlib, sys as _sys
+    _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    sender = importlib.import_module("send_telegram")
+    for hour in (0, 3, 7, 9, 19, 22, 23):
+        allowed, why = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
+        assert allowed == 0, f"в {hour}:00 отправили бы {allowed} — окно нарушено ({why})"
+    for hour in (10, 13, 18):
+        allowed, _ = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
+        assert allowed >= 1, f"в {hour}:00 внутри окна не отправили ничего"
+
+
+def test_publisher_spreads_the_queue_over_the_window():
+    """Очередь делится на оставшиеся прогоны, а не уходит пачкой.
+
+    Пять постов в 10:00 при часовом прогоне — это по одному за раз, а не пять
+    уведомлений за десять секунд. Расчёт без состояния: доля считается от
+    того, что осталось в очереди СЕЙЧАС, поэтому пропущенный прогон не копит
+    долг, а просто делится на меньшее число слотов.
+    """
+    from datetime import datetime
+    import importlib, sys as _sys
+    _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    sender = importlib.import_module("send_telegram")
+    at10, _ = sender.pace_allowance(5, datetime(2026, 8, 4, 10, 0, tzinfo=sender.MSK))
+    assert at10 == 1, f"в начале окна взяли {at10} из 5 — это не равномерно"
+    # Ближе к концу окна остаток уходит целиком: иначе он завис бы до завтра.
+    at1830, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 18, 30, tzinfo=sender.MSK))
+    assert at1830 == 3, "остаток очереди не ушёл в последнем слоте"
+    # Но не в одну минуту: между новыми постами внутри прогона есть пауза.
+    assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
+    # Пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert sender.pace_allowance(0, datetime(2026, 8, 4, 12, 0, tzinfo=sender.MSK))[0] == 0
+
+
+# ---------- личные уведомления по подпискам ----------
+
+class _Sub:
+    """Подписка как её видит правило: те же три поля, что у SavedFilter."""
+
+    def __init__(self, industry=None, keyword=None, min_amount_mln_rub=None):
+        self.industry = industry
+        self.keyword = keyword
+        self.min_amount_mln_rub = min_amount_mln_rub
+
+
+def _subs():
+    import importlib
+    return importlib.import_module("notify_subscribers")
+
+
+def test_subscription_amount_is_silent_when_the_sum_is_unreadable():
+    """Порог суммы не срабатывает на том, чего мы не сумели прочитать.
+
+    Сумма в карточке — свободный текст, и валюту мы не конвертируем: курса в
+    базе нет. Прислать письмо «сделка от 500 млн ₽» по карточке «$1,2 млрд»
+    значило бы выдать догадку за факт — то же правило «ошибка дороже
+    молчания», что у разбора новостей.
+    """
+    ns = _subs()
+    big = _Sub(min_amount_mln_rub=500)
+    for unreadable in ("Не раскрыта", "$1,2 млрд", "€800 млн",
+                       "несколько млрд ₽ (точно не указана)"):
+        assert ns.match_reason(big, {"sum": unreadable, "ind": "ИТ и интернет"}, {}) is None, \
+            f"по сумме «{unreadable}» подписка сработала, хотя разобрать её нельзя"
+    assert ns.match_reason(big, {"sum": "8,7 млрд ₽", "ind": "ИТ и интернет"}, {}), \
+        "по разобранной сумме подписка не сработала"
+
+
+def test_subscription_takes_the_lower_bound_of_a_range():
+    """Из диапазона берётся нижняя граница, а «300+ млн» — тоже нижняя.
+
+    Подписка «от 500 млн» не должна срабатывать на сделке, которая может
+    стоить 200: верхняя граница — это чужая оценка сверху, а не цена.
+    """
+    ns = _subs()
+    assert ns.amount_mln_rub("200–550 млн ₽ (по оценке)") == 200.0
+    assert ns.match_reason(_Sub(min_amount_mln_rub=500),
+                           {"sum": "200–550 млн ₽ (по оценке)"}, {}) is None
+    assert ns.match_reason(_Sub(min_amount_mln_rub=100),
+                           {"sum": "200–550 млн ₽ (по оценке)"}, {})
+    # Значок без единицы — это рубли, а не миллионы: символическая цена в
+    # 1 ₽ не должна проходить порог «от 500 млн».
+    assert ns.amount_mln_rub("1 ₽") == 1e-6
+    assert ns.match_reason(_Sub(min_amount_mln_rub=500), {"sum": "1 ₽"}, {}) is None
+
+
+def test_subscription_conditions_are_combined_with_and():
+    """«Отрасль X и от Y» — это про сделки в X дороже Y, а не две ленты сразу."""
+    ns = _subs()
+    both = _Sub(industry="ИТ и интернет", min_amount_mln_rub=1000)
+    assert ns.match_reason(both, {"ind": "ИТ и интернет", "sum": "8,7 млрд ₽"}, {})
+    assert ns.match_reason(both, {"ind": "ИТ и интернет", "sum": "200 млн ₽"}, {}) is None
+    assert ns.match_reason(both, {"ind": "Финансы", "sum": "8,7 млрд ₽"}, {}) is None
+    # Пустая подписка не подходит ничему: «сообщать обо всём» — не подписка.
+    assert ns.match_reason(_Sub(), {"ind": "Финансы", "sum": "8,7 млрд ₽"}, {}) is None
+
+
+def test_subscription_keyword_looks_at_names_not_at_the_whole_card():
+    """Подписка на компанию — про её сделки, а не про упоминания в пояснении.
+
+    «Сбер» стоит кредитором в десятках чужих карточек. Если искать слово по
+    всему тексту, подписчик получит ленту рынка вместо ленты компании.
+    """
+    ns = _subs()
+    sub = _Sub(keyword="Сбер")
+    party = {"title": "Сбербанк увеличил долю в Rambler Group", "extra": ""}
+    mention = {"title": "«Магнит» купил сеть «Дикси»",
+               "extra": "Сделка профинансирована кредитом Сбербанка."}
+    assert ns.match_reason(sub, party, {})
+    assert ns.match_reason(sub, mention, {}) is None
+    # Профиль стороны сделки — тоже имя: половина карточек хранит сторону
+    # ссылкой, и поиск только по заголовку их бы не увидел.
+    by_profile = {"title": "Покупка 100% оператора связи", "buyer": "sber"}
+    assert ns.match_reason(sub, by_profile, {"sber": {"name": "Сбербанк"}})

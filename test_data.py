@@ -154,6 +154,26 @@ def test_cover_sum_uses_currency_symbol(deals):
     assert not bad, f"валюта словом в обложке: {bad[:5]}"
 
 
+RUB_BEFORE_NUMBER = re.compile(r"₽\s*\d")
+
+
+def test_ruble_sign_stands_after_the_number(deals):
+    """Значок рубля — ПОСЛЕ числа, и это не косметика.
+
+    «₽25 млрд» — англоязычная запись, просочившаяся из источника. Читателю она
+    и так режет глаз рядом с «25 млрд ₽» у соседней карточки, но хуже другое:
+    любое правило, читающее сумму (порог подписки, сортировка по величине),
+    ищет число ПЕРЕД значком и такую запись молча не видит — сделка просто
+    выпадает из выдачи, не вызвав ошибки. Правится `pipeline/normalize_sum.py`.
+    """
+    bad = [(d["id"], d[field]) for d in deals for field in ("sum",)
+           if d.get(field) and RUB_BEFORE_NUMBER.search(str(d[field]))]
+    bad += [(d["id"], d["eco"]["sum"]) for d in deals
+            if isinstance(d.get("eco"), dict) and d["eco"].get("sum")
+            and RUB_BEFORE_NUMBER.search(str(d["eco"]["sum"]))]
+    assert not bad, f"значок рубля перед числом: {bad[:5]}"
+
+
 GLUED_CURRENCY = re.compile(r"[\$€][а-яёА-ЯЁ]")
 
 
@@ -246,8 +266,12 @@ def test_company_descriptions_have_no_internal_jargon(base):
 
 # Тот же предикат пустоты, что и на экране (`hasFact` в index.html): заглушкой
 # считается только строка, в которой кроме формулировки отсутствия ничего нет.
+# «(?:о|об)\s+\S+\s+» — не украшение: в базе есть «Публично О СОГЛАСОВАНИЯХ не
+# сообщалось», где между «публично» и «не» стоит дополнение. Шаблон без этого
+# молча не считал такую строку заглушкой — тот же класс беззвучного отказа,
+# что `\b` после приставки (см. CLAUDE.md).
 LAW_PLACEHOLDER = re.compile(
-    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
+    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+(?:об?\s+\S+\s+)?не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
     r"|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*"
     r"(?:\s+(?:официально|публично))?)[.\s]*$", re.I)
 
@@ -335,6 +359,9 @@ APPROVING_BODY = re.compile(
     r"|Банк[а-яё]*\s+России|ЦБ\s+РФ|Центробанк|президент[а-яё]*|правительств[а-яё]*|премьер"
     r"|российск[а-яё]*\s+власт|Минцифр|Минпромторг|Минсельхоз|Минфин|Минюст|Роскомнадзор"
     r"|Росимуществ|Росжелдор|регулятор|UOKiK|Rekabet|Еврокомисси|CFIUS|OFAC|BIS|EMRA"
+    # Министерство — тоже согласующий орган; список был только российским, а
+    # у «Росатом/Мали» согласование давало министерство другой страны.
+    r"|министерств[а-яё]*|Minist"
     r"|совет[а-яё]*\s+директоров|собрани[а-яё]*\s+акционеров|акционер|суд\b|указ|распоряжени"
     r"|предписани", re.I)
 
@@ -561,29 +588,46 @@ def test_match_key_alias_is_a_name(base):
     assert not bad, f"псевдоним — кусок заголовка, а не имя: {bad[:5]}"
 
 
+CURATED_IDS = (
+    "citibank", "baltika", "rosatom-mali", "berizaryad", "hugoboss", "ksk", "mercedes",
+    "technored", "ektos", "tokk-metarus", "adv-erlan", "selectel-itmo", "domodedovo-aukcion",
+    "inkab-ipo", "mts-bik", "absolut-strah", "mid-ilyinskaya", "adamas-slh", "agrostroy-zemlya",
+)
+
+
+def CURATED_IDS_DEALS():
+    base = json.loads(DATA.read_text(encoding="utf-8"))
+    by_id = {d["id"]: d for d in base["deals"]}
+    return [by_id[i] for i in CURATED_IDS if i in by_id]
+
+
 def test_curated_closed_titles_use_completed_action():
-    """Первые 19 карточек видны до загрузки JSON и не должны говорить
-    «продаёт / покупает» рядом со статусом «Закрыта»."""
-    html = INDEX.read_text(encoding="utf-8")
-    chunk = html[html.index("let DEALS = ["):html.index("/* ================= КОМПАКТНЫЕ", html.index("let DEALS = ["))]
+    """19 кураторских карточек не должны говорить «продаёт / покупает» рядом
+    со статусом «Закрыта». Раньше проверялось по разметке — теперь по базе:
+    карточки переехали в deals_promoted.json (единый источник правды)."""
     present = re.compile(r'\b(?:покупает|приобретает|прода[её]т|созда[её]т|получает|входит|проводит|привлекает|выкупает)\b', re.I)
-    bad = []
-    for card in re.findall(r'\{id:".*?\n\s*src:\[.*?\]\}', chunk, re.S):
-        if 'status:"Закрыта"' in card:
-            title = re.search(r'title:"([^"]+)"', card)
-            if title and present.search(title.group(1)):
-                bad.append(title.group(1))
+    bad = [d["title"] for d in CURATED_IDS_DEALS()
+           if d.get("status") == "Закрыта" and present.search(str(d.get("title") or ""))]
     assert not bad, f"закрытые кураторские карточки в настоящем времени: {bad}"
 
 
-def test_curated_feedback_fixes_are_kept():
-    html = INDEX.read_text(encoding="utf-8")
-    assert 'id:"selectel-itmo"' in html and 'type:"Создание СП"' in html
-    assert 'ООО «Эмерджентные мультиагентные системы» (ООО «ЭМС»)' in html
-    assert 'kind:"registered"' in html and 'kind:"announced"' in html
-    assert 'id:"agrostroy-zemlya"' in html and 'buyer_name:"Российский девелопер"' in html
-    assert 'kind:"closed",date:"2026-07-08"' in html
-    assert "сделка описана как сложная многосторонняя структура" not in html.lower()
+def test_curated_feedback_fixes_are_kept(deals):
+    """Правки из ревью не должны исчезнуть. Проверяем БАЗУ, а не index.html:
+    3 августа 2026 кураторские карточки переехали из захардкоженного массива в
+    deals_promoted.json — единый источник правды. Пока они жили в разметке,
+    инварианты базы их вообще не проверяли, и семь из них нарушались молча."""
+    by_id = {d["id"]: d for d in deals}
+    sp = by_id["selectel-itmo"]
+    assert sp["type"] == "Создание СП"
+    assert "ООО «Эмерджентные мультиагентные системы» (ООО «ЭМС»)" in json.dumps(sp, ensure_ascii=False)
+    kinds = {e.get("kind") for e in sp.get("events", [])}
+    assert "registered" in kinds and "announced" in kinds
+    ag = by_id["agrostroy-zemlya"]
+    assert ag.get("buyer_name") == "Российский девелопер"
+    assert any(e.get("kind") == "closed" and e.get("date") == "2026-07-08"
+               for e in ag.get("events", []))
+    assert "сделка описана как сложная многосторонняя структура" not in \
+        json.dumps(deals, ensure_ascii=False).lower()
 
 
 def test_artem_feedback_ui_invariants():
@@ -608,15 +652,11 @@ def test_citibank_lifecycle_is_canonical(base, deals):
     assert "g32b8014f" not in base["companies"]
     assert base["merged_companies"].get("g32b8014f") == "citibank"
 
-    html = INDEX.read_text(encoding="utf-8")
-    start = html.index('{id:"citibank"')
-    end = html.index('\n\n {id:"baltika"', start)
-    card = html[start:end]
-    assert 'seller_id:"gfd061adf"' in card
-    assert 'seller:"Citigroup Netherlands B.V."' in card
-    assert 'id:"negotiations-2024-01-01"' in card
-    assert 'id:"approval-2025-11-12"' in card
-    assert 'id:"closed-2026-02-18"' in card
+    citibank = next(d for d in deals if d["id"] == "citibank")
+    assert citibank.get("seller_id") == "gfd061adf"
+    assert citibank.get("seller") == "Citigroup Netherlands B.V."
+    stages = {e.get("id") for e in citibank.get("events", [])}
+    assert {"negotiations-2024-01-01", "approval-2025-11-12", "closed-2026-02-18"} <= stages
 
 
 def test_stage_history_ui_and_route_are_kept():

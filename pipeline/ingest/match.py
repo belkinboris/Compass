@@ -59,6 +59,11 @@ STOP = {
     'предприят', 'создают', 'создала', 'создаёт', 'организац', 'инвесторов', 'залог',
     'закрыт', 'провел', 'получил', 'заключил', 'заключила', 'консолидировал', 'привлек',
     'привлекла', 'выкупил', 'выкупила', 'стороны', 'участием', 'рамках', 'процентов',
+    # Родовые слова, ставшие значимыми после того, как короткие токены перестали
+    # выбрасываться: без них «X5 Group» и «Baring Capital» совпадали бы по
+    # «group»/«capital» с половиной базы.
+    'гк', 'ук', 'ао', 'зао', 'оао', 'мкао', 'group', 'holding', 'capital', 'partners',
+    'invest', 'ltd', 'llc', 'inc', 'plc', 'the', 'and', 'for',
 }
 STOP_STEMS = {w[:6] for w in STOP}
 
@@ -68,14 +73,82 @@ STAGE_NEWS = re.compile(
     r'закры|заверш|не\s+состоя|отказал.{0,30}сделк|отмен|расторг', re.I)
 
 
+# Латиница и заглавная аббревиатура — самые отличительные части заголовка, а
+# порог «длиннее четырёх знаков» выбрасывал их целиком. Замер до правки:
+# «Стокманн купил российский бизнес Hugo Boss» давало ОДНО слово «россий»,
+# «МТС приобретает TicketsCloud» — «ticket», «VK выкупила «Учи.ру»» — ничего.
+# Сопоставлять по такому набору нечем: объявление фирмы не находило свою же
+# карточку. Порог для них — два знака, потому что «VK» и «X5» это имена, а не
+# шум; зато родовые латинские слова (group, capital, partners) уходят в STOP,
+# иначе они склеили бы всё подряд.
+LATIN_NAME = re.compile(r'^[a-z0-9&.]{2,}$')
+
+
 def stems(text):
-    words = re.sub(r'«[^»]{2,40}»', ' ', str(text or '')).lower()
-    words = re.sub(r'[«»"\'().,:;–—-]', ' ', words).split()
-    return {w[:6] for w in words if len(w) > 4 and w[:6] not in STOP_STEMS}
+    raw = re.sub(r'«[^»]{2,40}»', ' ', str(text or ''))
+    words = re.sub(r'[«»"\'().,:;–—-]', ' ', raw).split()
+    out = set()
+    for word in words:
+        low = word.lower().replace('ё', 'е')
+        short_name = bool(LATIN_NAME.match(low)) or (word.isupper() and len(word) >= 2)
+        if len(low) > 4 or short_name:
+            stem = low[:6]
+            if stem not in STOP_STEMS:
+                out.add(stem)
+    return out
+
+
+# Названия в кавычках сравнивались ДОСЛОВНО, и «Стокманн» не совпадало со
+# «Стокманну»: падеж делал два упоминания одной компании разными строками, и
+# объявление «Orion Partners консультировала АО «Стокманн» в сделке по покупке
+# … Hugo Boss» не находило карточку «Hugo Boss продал российский бизнес
+# «Стокманну»». Срезаем окончание по ЗАКРЫТОМУ списку, а не обрезаем до N
+# знаков: для коротких имён обрезка слепила бы «Веру» и «Вету».
+ENDINGS = sorted(('ами', 'ями', 'ов', 'ев', 'ой', 'ей', 'ом', 'ем', 'ах', 'ях', 'ам', 'ям',
+                  'а', 'я', 'у', 'ю', 'е', 'и', 'ы'), key=len, reverse=True)
+
+
+def quoted_key(name):
+    """Название в кавычках без падежного окончания последнего слова."""
+    text = str(name or '').lower().replace('ё', 'е')
+    text = re.sub(r'[^0-9a-zа-я ]+', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    if not text:
+        return ''
+    head, sep, tail = text.rpartition(' ')
+    for end in ENDINGS:
+        # Основа короче трёх знаков — не основа: «Мга» не должна стать «Мг».
+        if tail.endswith(end) and len(tail) - len(end) >= 3:
+            tail = tail[:-len(end)]
+            break
+    return (head + sep + tail).strip()
 
 
 def quoted(text):
-    return {m.group(1).lower() for m in re.finditer(r'«([^»]{2,40})»', str(text or ''))}
+    return {quoted_key(m.group(1)) for m in re.finditer(r'«([^»]{2,40})»', str(text or ''))
+            if quoted_key(m.group(1))}
+
+
+def quoted_common(a, b):
+    """Общие названия двух наборов. Не только дословное равенство:
+    «Заряд» и «Бери Заряд» — одна компания, и объявление о продаже «АО «Заряд!»»
+    обязано находить карточку ««Яндекс» приобрёл 100% сервиса «Бери заряд!»».
+    Планка вхождения в 5 знаков — та же, что у `entity_agree`: короткие куски
+    («лент», «мег») совпадают только целиком, иначе слиплось бы пол-базы."""
+    out = set()
+    for x in a:
+        for y in b:
+            if x == y or (len(x) >= 5 and x in y) or (len(y) >= 5 and y in x):
+                out.add(x)
+    return out
+
+
+def quoted_overlap(a, b):
+    """Есть ли хоть одно общее название. Правило одно на обе функции: развилка
+    «сильное совпадение или нет» и ранжирование кандидатов обязаны считать
+    названия одинаково, иначе показанный человеку список расходится с тем, что
+    пускается в базу."""
+    return bool(quoted_common(a, b))
 
 
 def amount(text):
@@ -180,7 +253,7 @@ def match(item, idx):
 
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
-        if t_quoted & row['quoted'] and t_amount and row['amount'] and gap <= 45:
+        if quoted_overlap(t_quoted, row['quoted']) and t_amount and row['amount'] and gap <= 45:
             if abs(t_amount - row['amount']) / max(t_amount, row['amount']) < 0.05:
                 return row['id'], 'совпали название в кавычках и сумма'
     for row in idx:
@@ -193,13 +266,19 @@ def match(item, idx):
     if STAGE_NEWS.search(title):
         for row in idx:
             gap = days_between(item.get('date'), row['date'])
-            if (row.get('status') in OPEN_STATUSES and t_quoted & row['quoted']
+            if (row.get('status') in OPEN_STATUSES and quoted_overlap(t_quoted, row['quoted'])
                     and len(t_stems & row['stems']) >= 2 and gap <= 730):
                 return row['id'], 'открытая сделка: название в кавычках и новая стадия'
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
-        if t_quoted & row['quoted'] and gap <= 45 and len(t_stems & row['stems']) >= 2:
-            return row['id'], 'общее название в кавычках и два общих слова'
+        # Порог «два общих слова» невыполним для короткого заголовка: у
+        # кураторской карточки «Hugo Boss продал российский бизнес «Стокманну»»
+        # значащих основ всего две, а у ««Яндекс» приобрёл 100% сервиса «Бери
+        # заряд!»» — одна, и объявления фирм к ним не привязывались никогда.
+        # Требуем столько общих слов, сколько заголовок вообще может дать.
+        need = min(2, len(row['stems'])) or 1
+        if quoted_overlap(t_quoted, row['quoted']) and gap <= 45 and len(t_stems & row['stems']) >= need:
+            return row['id'], 'общее название в кавычках и общие слова: %d' % len(t_stems & row['stems'])
     for row in idx:
         gap = days_between(item.get('date'), row['date'])
         common = len(t_stems & row['stems'])

@@ -314,6 +314,12 @@ class User(Base):
     tier: Mapped[UserTier] = mapped_column(Enum(UserTier), default=UserTier.free)
     firm_id: Mapped[int | None] = mapped_column(ForeignKey("advisors.id"), nullable=True)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)  # бейдж «подтверждено фирмой»
+    # Добавлены 2 августа вместе с выбором типа аккаунта при регистрации —
+    # до этого регистрация жёстко писала role=individual всем подряд, и
+    # профиль показывал сырое значение поля без перевода на русский.
+    full_name: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    company: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    position: Mapped[str | None] = mapped_column(String(200), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     saved_filters: Mapped[list["SavedFilter"]] = relationship(back_populates="user", cascade="all, delete-orphan")
@@ -394,6 +400,26 @@ class CorrectionRequest(Base):
 
 
 # --------------------------------------- уведомления / экспорт / ассистент ---
+
+class DealSeen(Base):
+    """Когда карточка впервые появилась НА САЙТЕ.
+
+    Это не дата сделки и не дата статьи: карточка, добавленная сегодня, может
+    описывать сделку 2022 года. Для рассылки по подпискам важно именно «когда
+    она у нас появилась» — иначе подписавшийся сегодня получил бы всю историю
+    рынка одним залпом.
+
+    Запись живёт в базе, а не в файле рядом с кодом: файл на Timeweb
+    переписывается при каждом деплое, и состояние «о чём уже сообщали»
+    обнулялось бы — читатель получал бы одни и те же уведомления снова.
+    """
+
+    __tablename__ = "deals_seen"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    deal_id: Mapped[str] = mapped_column(String(80), unique=True)
+    first_seen_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
 
 class DealWatch(Base):
     __tablename__ = "deal_watches"

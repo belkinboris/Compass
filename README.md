@@ -45,10 +45,20 @@ python3 -m pytest -q
 - `COOKIE_SECURE=true` — secure-cookie на HTTPS;
 - `APP_BASE_URL` — публичный адрес для ссылок из писем и Telegram;
 - `API_FNS_KEY`, опционально `API_FNS_BASE_URL`, `API_FNS_TIMEOUT`, `API_FNS_MIN_INTERVAL` — ЕГРЮЛ и БФО;
-- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_BOT_USERNAME`, `TELEGRAM_WEBHOOK_SECRET` — Telegram-уведомления (личные, боту в личку);
-- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHANNEL_ID` — автопостинг сделок в канал (`pipeline/publish/send_telegram.py`); токен один и тот же, `TELEGRAM_CHANNEL_ID` — отдельная переменная (`@username` канала или числовой id).
+- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_BOT_USERNAME`, `TELEGRAM_WEBHOOK_SECRET` — Telegram-уведомления (личные, боту в личку). Трёх переменных мало: пока не выполнен `python3 pipeline/publish/setup_telegram_webhook.py --write`, Telegram не знает, куда слать `/start`, и привязка бота к аккаунту не завершается — молча, без ошибки на экране;
+- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHANNEL_ID` — автопостинг сделок в канал (`pipeline/publish/send_telegram.py`); токен один и тот же, `TELEGRAM_CHANNEL_ID` — отдельная переменная (`@username` канала или числовой id);
+- `TELEGRAM_API_BASE` — релей до Bot API (Cloudflare Worker). На российском хостинге практически обязателен: прямая связь Timeweb → `api.telegram.org` даёт около трети отказов на соединение. Пусто = прямой `api.telegram.org`.
 
 Полный шаблон: `.env.example`.
+
+Личные уведомления по подпискам («сообщи о сделках в отрасли X от суммы Y»)
+рассылает САМ САЙТ на старте после деплоя (`subscription_feed.scan_on_startup`),
+а не приток: приток работает в одноразовом контейнере в другом облаке, а база
+пользователей стоит во внутренней сети хостинга и оттуда недостижима.
+Отдельного расписания у сверки нет и не нужно — новые карточки попадают на
+сайт ровно одним способом, деплоем нового `deals_promoted.json`. Первый прогон
+на пустой таблице `deals_seen` никого не уведомляет, а только запоминает состав
+базы: иначе подписчик получил бы залп по всей истории рынка.
 
 Для ИИ-ассистента и веб-поиска:
 
@@ -105,9 +115,9 @@ python3 pipeline/sync_fns.py --match --auto-confirm --limit 100 --dry-run
 
 ## Где лежат данные
 
-- `static/index.html` — интерфейс и небольшая группа кураторских карточек;
-- `static/data/deals_promoted.json` — основная браузерная база сделок и компаний;
-- `static/data/bulk_deals.json` — компактные записи;
+- `static/data/deals_promoted.json` — единственный источник данных о сделках и
+  компаниях: интерфейс читает только его, приток пишет только в него;
+- `static/index.html` — интерфейс: стили и рендер, данных о сделках в нём нет;
 - `db/models.py` — нормализованная SQL-схема, аккаунты, подписки, комментарии и редакционные обращения;
 - `pipeline/ingest/` — регулярный приток новых публикаций и обновлений существующих сделок.
 
@@ -139,7 +149,7 @@ python3 pipeline/merge_deal_histories.py --write
 1. подключить постоянный PostgreSQL и SMTP;
 2. применить миграцию данных в SQL либо зафиксировать резервное копирование JSON и БД;
 3. настроить мониторинг ошибок, логирование и резервные копии;
-4. настроить SMTP, Telegram webhook и еженедельный cron `python3 pipeline/send_weekly_digest.py`;
+4. настроить SMTP, зарегистрировать вебхук бота (`python3 pipeline/publish/setup_telegram_webhook.py --write` — один раз с боевого хоста, иначе привязка Telegram к аккаунту не завершается) и еженедельный cron `python3 pipeline/send_weekly_digest.py`;
 5. подготовить административную очередь комментариев и обращений;
 6. добавить правовые документы и политику обработки данных.
 

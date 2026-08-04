@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 
 import main
 from db.models import (
-    Company, FinancialReport, LegalEntity, LegalEntityMatchStatus,
+    Company, DealSeen, FinancialReport, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
 )
 from db.session import get_session
@@ -24,7 +24,8 @@ def client():
 
 
 def _login(client: TestClient, email: str) -> User:
-    response = client.post("/api/auth/register", json={"email": email, "password": _TEST_PASSWORD})
+    response = client.post("/api/auth/register",
+                            json={"email": email, "password": _TEST_PASSWORD, "full_name": "Тест Тестов"})
     assert response.status_code == 200
     db = get_session()
     try:
@@ -163,6 +164,21 @@ def test_notification_preference_hides_in_app_feed(client):
     assert any(x["title"] == "Сделка обновлена" for x in client.get("/api/notifications").json())
     assert client.patch("/api/notification-preferences", json={"in_app_enabled": False}).status_code == 200
     assert client.get("/api/notifications").json() == []
+
+
+def test_email_notifications_unavailable_without_smtp(client, monkeypatch):
+    """Без SMTP_HOST на сервере переключатели «почта»/«недельная сводка» не
+    должны выглядеть включаемыми — иначе пользователь ставит галочку, а
+    письмо никогда не уйдёт, и никто об этом не узнает (см. CLAUDE.md про
+    честную деградацию вместо тихой имитации успеха)."""
+    monkeypatch.delenv("SMTP_HOST", raising=False)
+    _login(client, "no-smtp-launch@firm.ru")
+    prefs = client.get("/api/notification-preferences").json()
+    assert prefs["email_available"] is False
+    r = client.patch("/api/notification-preferences", json={"email_enabled": True})
+    assert r.status_code == 400
+    r = client.patch("/api/notification-preferences", json={"weekly_digest": True})
+    assert r.status_code == 400
 
 
 def test_saved_assistant_thread(client, monkeypatch):
@@ -365,7 +381,9 @@ def test_taxonomy_is_consistent_in_generation_pipeline():
         Path("pipeline/promote_2026.py"),
         Path("pipeline/promote_all.py"),
         Path("pipeline/to_minideals.py"),
-        Path("static/data/curated_companies.json"),
+        # curated_companies.json удалён 3 августа 2026: профили переехали в
+        # deals_promoted.json — единый источник данных. Проверяем теперь его.
+        Path("static/data/deals_promoted.json"),
     ]
     for path in sources:
         text = path.read_text(encoding="utf-8")
@@ -423,3 +441,98 @@ def test_company_page_uses_one_compact_deal_section():
     assert "Связи по сделкам" not in html
     assert "Подробные карточки" not in html
     assert "Также упоминается" not in html
+
+
+def test_subscription_actually_reaches_the_subscriber(client):
+    """Сквозной путь подписки: оформил — появилась сделка — пришло уведомление.
+
+    Проверяется именно то, что было сломано: подписки сохранялись и
+    показывались, но никто никогда не сверял их с новыми сделками, и
+    обещание интерфейса «Новые совпадения появятся в уведомлениях» не
+    выполнялось ни разу. Тест написан так, чтобы падать на коде до правки:
+    без шага рассылки уведомление не появится.
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "publish"))
+    import notify_subscribers
+
+    user = _login(client, "subscriber@example.com")
+    assert client.post("/api/subscriptions",
+                       json={"industry": "ИТ и интернет",
+                             "min_amount_mln_rub": 1000}).status_code == 200
+
+    fresh = {"id": "test-subscription-deal", "title": "Крупная сделка в ИТ",
+             "ind": "ИТ и интернет", "sum": "8,7 млрд ₽"}
+    quiet = {"id": "test-subscription-small", "title": "Мелкая сделка в ИТ",
+             "ind": "ИТ и интернет", "sum": "200 млн ₽"}
+    other = {"id": "test-subscription-other", "title": "Крупная сделка в финансах",
+             "ind": "Финансы", "sum": "8,7 млрд ₽"}
+
+    db = get_session()
+    try:
+        stats = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
+        assert stats["created"] == 1, f"ушло {stats['created']} уведомлений вместо одного: {stats}"
+        rows = db.query(Notification).filter_by(user_id=user.id).all()
+        assert [r.deal_id for r in rows] == ["test-subscription-deal"], \
+            "уведомление пришло не о той сделке"
+        assert "отрасль" in (rows[0].body or ""), "в уведомлении не сказано, почему оно пришло"
+        # Второй прогон по тем же карточкам не должен слать то же самое ещё раз:
+        # «уже сообщали» — это существующая строка Notification, а не отдельный
+        # файл состояния, который на боевом хосте потерялся бы при деплое.
+        again = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
+        assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечён: {again}"
+    finally:
+        db.close()
+
+
+def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
+    """Сверка подписок на старте сайта: первый прогон молчит, второй сообщает.
+
+    Приток работает в другом облаке и до базы пользователей не достаёт (она во
+    внутренней сети хостинга), поэтому сверять подписки может только сам сайт.
+    Единственный момент, когда на сайте появляются новые карточки, — деплой
+    нового deals_promoted.json, то есть старт процесса.
+
+    Первый прогон обязан МОЛЧАТЬ: пока таблица `deals_seen` пуста, «новыми»
+    формально являются все полторы тысячи карточек, и честный ответ «всё»
+    означал бы залп уведомлений по всей истории рынка.
+    """
+    import subscription_feed
+
+    user = _login(client, "deploy-subscriber@example.com")
+    # Ключевое слово нарочно уникальное: база тестов общая на весь файл, и
+    # подписка «отрасль ИТ» ловила бы заодно подписчика из соседнего теста —
+    # счётчик стал бы зависеть от порядка запуска.
+    assert client.post("/api/subscriptions",
+                       json={"keyword": "Компасдеплойтест"}).status_code == 200
+
+    # Отрасль и сумма подобраны так, чтобы под подписку соседнего теста
+    # («ИТ и интернет» от 1000 млн ₽) эти карточки НЕ попадали.
+    old = {"id": "test-deploy-old", "title": "Старая сделка Компасдеплойтест",
+           "ind": "Логистика", "sum": "Не раскрыта"}
+    new = {"id": "test-deploy-new", "title": "Новая сделка Компасдеплойтест",
+           "ind": "Логистика", "sum": "Не раскрыта"}
+
+    db = get_session()
+    try:
+        db.query(DealSeen).delete()
+        db.commit()
+
+        first = subscription_feed.scan_new_deals(db, [old], {})
+        assert first["seeded"] == 1 and first["created"] == 0, \
+            f"первый прогон разбудил подписчика: {first}"
+
+        second = subscription_feed.scan_new_deals(db, [old, new], {})
+        assert second["fresh"] == 1, f"новой карточки не заметили: {second}"
+        rows = db.query(Notification).filter_by(user_id=user.id).all()
+        assert [r.deal_id for r in rows] == ["test-deploy-new"], \
+            "уведомление пришло не о той карточке"
+
+        # Перезапуск процесса без новых карточек не шлёт ничего повторно:
+        # состояние живёт в базе, а не в файле рядом с кодом, который на
+        # хостинге переписывается при каждом деплое.
+        third = subscription_feed.scan_new_deals(db, [old, new], {})
+        assert third["fresh"] == 0 and third["created"] == 0, \
+            f"перезапуск повторил уведомления: {third}"
+    finally:
+        db.close()
