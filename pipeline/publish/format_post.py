@@ -34,7 +34,12 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
-SITE = 'https://kompas.deals'          # адрес витрины; подставляется в ссылки
+# Адрес витрины, который уходит в ссылки телеграм-поста. Домен был вписан
+# в код числом — и не тот: сайт живёт на projectcompass.ru, а посты вели бы
+# читателя на kompas.deals. Берём из переменной окружения `APP_BASE_URL` (той
+# же, что уже используется для ссылок из писем), а вписанное значение — лишь
+# запасное на случай, если переменная не задана.
+SITE = (os.environ.get('APP_BASE_URL') or 'https://projectcompass.ru').rstrip('/')
 
 SIGNIFICANT = ('sum', 'buyer', 'buyer_name', 'seller', 'target', 'asset', 'status', 'advisers', 'events')
 

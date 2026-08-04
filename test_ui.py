@@ -413,3 +413,42 @@ def test_no_undefined_on_screen_for_cards_without_status(page, base_url):
         visit(page, base_url, hash_)
         text = page.inner_text("#app")
         assert "undefined" not in text.lower(), f"{hash_}: на экране слово undefined"
+
+
+def test_regulatory_analyzer_defers_to_a_known_approval(page, base_url):
+    """Анализатор не спорит с фактом и не предлагает считать то, что известно.
+
+    Замечание владельца: если у сделки ФАС уже получен, а анализатор напишет
+    «согласование не требуется», это читается как «сервис плохой» — хотя
+    объяснений у расхождения два и оба нормальные (сторона могла подать
+    ходатайство из осторожности; основание могло быть не видно из карточки).
+    Поэтому там, где согласование НАЗВАНО в карточке, панель начинается с
+    этого факта и прямо пишет, что факт сильнее расчёта, а кнопки «проверить»
+    на «Обзоре» нет вовсе — нажимать её там значит тратить время читателя.
+    """
+    visit(page, base_url, "#/")
+    with_appr, without = page.evaluate("""() => {
+      const has = v => { const t = String(v||'').trim().toLowerCase();
+        return !!t && t !== '—' && !/^(не раскры|публично не|не сообщал)/.test(t); };
+      const a = DEALS.find(d => has(d.law && d.law.appr));
+      const b = DEALS.find(d => !has(d.law && d.law.appr) && d.eco);
+      return [a && a.id, b && b.id];
+    }""")
+    assert with_appr and without, "в базе нет пары карточек для проверки"
+
+    visit(page, base_url, "#/deal/" + without)
+    assert page.locator("[data-reg-open]").count() == 1, "нет кнопки там, где про согласования молчат"
+    page.locator("[data-reg-open]").first.click()
+    page.wait_for_timeout(500)
+    panel = page.locator("#reg-panel")
+    assert panel.count() == 1, "кнопка не открыла панель — эффект вне экрана"
+
+    visit(page, base_url, "#/deal/" + with_appr)
+    assert page.locator("[data-reg-open]").count() == 0, \
+        "кнопка предлагает считать то, что уже известно"
+    page.evaluate("document.querySelector('[data-l=\"law\"]').click()")
+    page.wait_for_timeout(400)
+    text = page.locator("#reg-panel").inner_text()
+    assert "согласование уже названо в источниках" in text.lower(), \
+        "панель не начинается с известного факта"
+    assert not page.crashes, f"падения на анализаторе: {page.crashes[:3]}"

@@ -651,6 +651,22 @@ a.dp-asset-name:hover{color:var(--accent)}
 /* Сравнение компаний: выбор хранится в браузере, поэтому работает и до входа.
    Финансовые показатели подтягиваются из уже синхронизированной локальной БД. */
 .company-tools{margin-top:-12px;margin-bottom:28px}
+/* ---------- анализатор регуляторики ---------- */
+.reg{margin-top:26px;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:var(--paper)}
+.reg .label{display:block;margin-bottom:12px;color:var(--bronze)}
+.reg-known{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 14px;font-size:13.5px;line-height:1.6;margin-bottom:14px}
+.reg-conc{font-family:var(--f-display);font-size:18px;line-height:1.4;margin-bottom:16px}
+.reg-row{border-top:1px solid var(--line-soft);padding:13px 0}
+.reg-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:5px}
+.reg-t{font-weight:600;font-size:13.5px;min-width:0}
+.reg-mark{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.reg-yes{background:var(--accent-soft);color:var(--accent)}
+.reg-no{background:#EFEFEA;color:var(--muted)}
+.reg-unknown{background:var(--bronze-soft);color:var(--bronze)}
+.reg-row p{font-size:13px;line-height:1.62;color:var(--muted);margin:0}
+.reg-note{margin-top:16px;padding-top:13px;border-top:1px solid var(--line-soft);font-size:12px;line-height:1.6;color:var(--muted)}
+.reg-cta{display:inline-flex;align-items:center;gap:8px;margin-top:18px}
+@media(max-width:560px){.reg{padding:16px}.reg-conc{font-size:16px}}
 .compare-tray{position:fixed;z-index:48;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);width:min(900px,calc(100% - 32px));background:var(--accent-deep);color:var(--ivory);box-shadow:0 18px 52px rgba(10,27,21,.28);border:1px solid rgba(243,241,233,.16);padding:12px 14px;display:flex;align-items:center;gap:12px;border-radius:8px}
 .compare-tray-text{min-width:0;flex:1;font-size:12.5px;line-height:1.4;color:#C4D2CA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .compare-tray-text b{color:var(--ivory);font-weight:600}
@@ -2765,6 +2781,139 @@ function knownRowsHtml(d, withSum){
   </div>`;
 }
 const srcFootHtml = d => `<p class="le-foot">Проверить детали можно по первоисточникам — они перечислены внизу карточки${d.src&&d.src.length?` (${d.src.length})`:""}.</p>`;
+/* ================= АНАЛИЗАТОР РЕГУЛЯТОРИКИ =================
+   Отвечает на два вопроса, которые юрист задаёт по любой сделке первыми:
+   нужно ли ходатайство в ФАС и нужно ли разрешение правительственной
+   комиссии (контрсанкционный контур).
+
+   ГЛАВНОЕ РЕШЕНИЕ: анализатор НЕ выносит вердикт «нужно / не нужно». У нас
+   нет и не может быть данных о балансах групп — а именно по ним считаются
+   пороги статьи 28 закона 135-ФЗ. Поэтому он разбирает сделку по критериям и
+   честно делит их на три состояния: выполнен, не выполнен, НЕ ПРОВЕРЕН
+   (данных в карточке нет). Вывод формулируется как «ходатайство вероятно
+   требуется — проверьте пороги по балансам», а не как заключение.
+
+   ПОЧЕМУ ИМЕННО ТАК, А НЕ «ДА/НЕТ». Если бы анализатор писал «согласование
+   ФАС не требуется» у сделки, где по карточке ФАС уже одобрила сделку, это
+   читалось бы как «сервис не работает» — хотя объяснений у расхождения два и
+   оба нормальные: стороны могли подать ходатайство из осторожности, а могли
+   иметь основание, которого в карточке не видно. Поэтому там, где
+   согласование в карточке НАЗВАНО, анализатор начинает с этого факта и прямо
+   пишет, что факт сильнее расчёта, — а разбор идёт ниже как справка. Дешёвого
+   упрёка «у вас же написано, что ФАС получен» тут не возникает.
+
+   ГДЕ ОН ЖИВЁТ. Всегда — в линзе «Юрист». Дополнительно на «Обзоре» — только
+   у сделок, где про согласования не сказано вообще ничего: там он отвечает на
+   открытый вопрос. У сделок с уже названным согласованием кнопки на «Обзоре»
+   нет: нажимать «проанализировать ФАС» там, где ФАС уже получен, — трата
+   времени читателя. */
+
+/* Пороговые доли статьи 28 135-ФЗ. Для АО — голосующие акции, для ООО — доли
+   уставного капитала; формулировки разные, пороги по смыслу те же. */
+const REG_SHARE_STEPS = [25, 50, 75];
+const REG_LLC_STEPS = [
+  {p:33.34, t:"более 1/3 долей"},
+  {p:50,    t:"более 1/2 долей"},
+  {p:66.67, t:"более 2/3 долей"},
+];
+/* Признаки участия лица из недружественного государства. Список намеренно
+   короткий и по названиям, которые реально встречаются в карточках: это
+   ПОВОД ПРОВЕРИТЬ, а не установленный факт. Гражданство и место регистрации
+   в базе не хранятся, и выводить их из названия было бы догадкой. */
+const REG_FOREIGN = /\b(?:GmbH|AG|S\.?A\.?|SE|Ltd|LLC|Inc|plc|B\.?V\.?|N\.?V\.?|S\.?à\.?r\.?l|Oyj|A\/S|Holding\b)|Кипр|Нидерланд|Германи|Финлянди|Австри|Франц|Итали|Швейцар|Швеци|Дани|Норвег|Япони|Корея|США|Великобритан|Люксембург/i;
+const REG_EXIT = /уход[а-яё]*\s+из\s+Росси|уходит\s+из\s+Росси|российск\w+\s+бизнес\w*\s+(?:продан|продаёт|продает|продал)|выход\w*\s+иностранн|иностранн\w+\s+(?:акционер|владел|собственник)|санкц/i;
+
+function regShare(d){
+  /* Долю ищем там, где она записана как факт, а не в любом числе с
+     процентом: в заголовке легко встретить «рост на 20%». */
+  const src = [d.asset_share, d.eco&&d.eco.share, d.law&&d.law.struct, d.title]
+    .map(x=>String(x||"")).filter(Boolean);
+  for(const text of src){
+    const m = text.match(/(\d{1,3}(?:[,.]\d+)?)\s*%/);
+    if(m){
+      const v = parseFloat(m[1].replace(",","."));
+      if(v>0 && v<=100) return v;
+    }
+  }
+  if(/\b(?:100%|весь|целиком|полностью)\b/i.test(src.join(" "))) return 100;
+  return null;
+}
+function regForeignSide(d){
+  const parties = [d.seller, d.buyer_name, d.asset,
+                   d.buyer&&co(d.buyer)&&co(d.buyer).name,
+                   d.seller_id&&co(d.seller_id)&&co(d.seller_id).name,
+                   d.target&&co(d.target)&&co(d.target).name]
+    .map(x=>String(x||"")).filter(Boolean);
+  const named = parties.find(p=>REG_FOREIGN.test(p));
+  if(named) return {why:"в названии стороны есть признак иностранного лица", what:named};
+  const text = `${d.title||""} ${(d.eco&&d.eco.rationale)||""} ${(d.eco&&d.eco.context)||""} ${d.extra||""}`;
+  if(REG_EXIT.test(text)) return {why:"в тексте карточки речь об иностранном участнике или выходе из России", what:null};
+  return null;
+}
+function regAnalysis(d){
+  const share = regShare(d);
+  const foreign = regForeignSide(d);
+  const known = hasFact(d.law && d.law.appr) ? String(d.law.appr) : null;
+  const kind = String(d.type||"");
+  const criteria = [];
+
+  /* --- Критерий 1: экономическая концентрация по доле --- */
+  if(share===null){
+    criteria.push({state:"unknown", title:"Приобретаемая доля",
+      text:"В карточке доля не названа. Пороги статьи 28 135-ФЗ считаются от неё, поэтому этот критерий не проверен."});
+  }else{
+    const ao = REG_SHARE_STEPS.filter(p=>share>p);
+    const ooo = REG_LLC_STEPS.filter(x=>share>x.p);
+    if(ao.length||ooo.length){
+      criteria.push({state:"yes", title:"Приобретаемая доля",
+        text:`Приобретается ${String(share).replace(".",",")}%. Для акционерного общества это выше порога в ${ao[ao.length-1]||25}% голосующих акций, для ООО — ${(ooo[ooo.length-1]||REG_LLC_STEPS[0]).t}. Сделка попадает в перечень сделок экономической концентрации (ст. 28 135-ФЗ).`});
+    }else{
+      criteria.push({state:"no", title:"Приобретаемая доля",
+        text:`Приобретается ${String(share).replace(".",",")}% — ниже минимального порога (25% голосующих акций АО, более 1/3 долей ООО). По этому критерию ходатайство не требуется, но пороги считаются и по другим основаниям — например, по приобретению основных производственных средств или прав, определяющих условия деятельности.`});
+    }
+  }
+
+  /* --- Критерий 2: пороги по активам и выручке. Их мы не знаем никогда. --- */
+  criteria.push({state:"unknown", title:"Пороги по активам и выручке групп",
+    text:"Ходатайство требуется, если суммарная стоимость активов групп превышает 7 млрд ₽ при активах объекта свыше 800 млн ₽, либо суммарная выручка групп за прошлый год превышает 10 млрд ₽ при тех же активах объекта. Балансов групп в базе нет — этот критерий нужно проверить по отчётности сторон."});
+
+  /* --- Критерий 3: контрсанкционный контур --- */
+  if(foreign){
+    criteria.push({state:"yes", title:"Правительственная комиссия (контрсанкционный контур)",
+      text:`Есть признак участия лица из недружественного государства: ${foreign.why}${foreign.what?` — «${esc(foreign.what)}»`:""}. Сделки с такими лицами по указам № 81 и № 618 совершаются с разрешения правительственной комиссии. Признак не доказывает юрисдикцию: место регистрации и контроль надо проверить по реестрам.`});
+  }else{
+    criteria.push({state:"unknown", title:"Правительственная комиссия (контрсанкционный контур)",
+      text:"Признаков участия лица из недружественного государства в карточке нет. Это не значит, что их нет в сделке: гражданство и место регистрации сторон мы не храним, а контроль может быть опосредованным."});
+  }
+
+  const conc = criteria[0].state==="yes"
+    ? "Сделка подпадает под признаки экономической концентрации. Ходатайство в ФАС вероятно требуется — решает проверка порогов по активам и выручке групп."
+    : criteria[0].state==="no"
+      ? "По размеру доли сделка под основной порог не подпадает. Это не заключение: у экономической концентрации есть и другие основания, а пороги по активам мы не проверяли."
+      : "Данных карточки не хватает, чтобы отнести сделку к экономической концентрации: неизвестна приобретаемая доля.";
+  return {criteria, conclusion:conc, known, kind, share};
+}
+function regBadge(state){
+  return state==="yes" ? `<span class="reg-mark reg-yes">критерий выполнен</span>`
+       : state==="no"  ? `<span class="reg-mark reg-no">критерий не выполнен</span>`
+                       : `<span class="reg-mark reg-unknown">не проверен: нет данных</span>`;
+}
+function regPanelHtml(d){
+  const a = regAnalysis(d);
+  return `<div class="reg" id="reg-panel">
+    <span class="label">Анализатор регуляторики</span>
+    ${a.known?`<div class="reg-known"><b>По этой сделке согласование уже названо в источниках.</b> «${esc(a.known)}»<br>
+      Факт из источника сильнее любого расчёта: разбор ниже — справка о том, по каким основаниям согласование обычно требуется, а не проверка того, правы ли были стороны. Ходатайство подают и там, где основание спорное.</div>`:""}
+    <div class="reg-conc">${a.conclusion}</div>
+    ${a.criteria.map(c=>`<div class="reg-row">
+      <div class="reg-head"><span class="reg-t">${c.title}</span>${regBadge(c.state)}</div>
+      <p>${c.text}</p>
+    </div>`).join("")}
+    <div class="reg-note">Это не юридическое заключение и не расчёт: анализатор разбирает сделку по формальным критериям
+      закона «О защите конкуренции» (135-ФЗ, ст. 27–29) и указов № 81 и № 618 и прямо называет то, чего в карточке нет.
+      Решение принимает юрист по документам сделки и отчётности сторон.</div>
+  </div>`;
+}
 function lawEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
@@ -3089,13 +3238,21 @@ function renderDeal(id, qs){
           <span class="label">${a[0]}</span>
           <div class="adv-name">${advFirmLink(a[1])}</div>
           ${a[2]?`<p>${a[2]}</p>`:""}
-        </div>`).join("")}`
-      : lawEmptyHtml(d);
+        </div>`).join("")}
+      ${regPanelHtml(d)}`
+      : lawEmptyHtml(d) + regPanelHtml(d);
     else f.innerHTML = `
       ${hero("Сумма", d.sum, true)}
       ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`:""}
       ${dealPlate()}
       ${dealTeam()}
+      ${/* Кнопка только у сделок, где про согласования не сказано ничего: там
+           вопрос «нужен ли ФАС» открыт. Где согласование уже названо, кнопки
+           нет — нажимать «проанализировать» на том, что уже известно, значит
+           тратить время читателя. Сам разбор при этом никуда не девается: он
+           всегда есть в линзе «Юрист». */
+        hasFact(d.law&&d.law.appr) ? "" :
+        `<button class="chip reg-cta" type="button" data-reg-open>Проверить, нужны ли согласования →</button>`}
       ${specBlock([
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
            Иначе одно и то же читается дважды: сначала плашка «Продавец →
@@ -3133,6 +3290,20 @@ function renderDeal(id, qs){
     app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x===b));
     paint();
   });
+  /* Кнопка «Проверить, нужны ли согласования» стоит на «Обзоре», а сам разбор
+     живёт в линзе «Юрист» — то есть результат нажатия оказывается вне экрана.
+     Урок из CLAUDE.md: рабочая кнопка, чей эффект не виден, неотличима от
+     сломанной. Поэтому переключаем линзу И прокручиваем к панели. */
+  const goReg = ()=>{
+    lens="law";
+    app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x.dataset.l==="law"));
+    paint();
+    requestAnimationFrame(()=>{
+      const panel=document.getElementById("reg-panel");
+      if(panel) panel.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+  };
+  app.querySelectorAll("[data-reg-open]").forEach(b=>b.onclick=goReg);
   mountDealTools(d);
   const fx = document.getElementById("fixdeal");
   if(fx) fx.onclick = ()=>openCorrectionDialog(d);
