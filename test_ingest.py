@@ -905,3 +905,46 @@ def test_discover_main_dry_run_does_not_write(monkeypatch, tmp_path):
                          if "f.xml" not in url else b'<rss><channel><item><title>T</title><link>u</link></item></channel></rss>')
     discover_feeds.main([])
     assert json.loads(tmp_sources.read_text(encoding="utf-8"))["sources"][0]["enabled"] is False
+
+
+# ---------- равномерная выдача постов в канал ----------
+
+def test_publisher_holds_everything_at_night():
+    """Ночью новых постов не отправляем — никого не будим.
+
+    Это прямое требование владельца, и оно важнее скорости: сделка, найденная
+    в три часа ночи, подождёт до утра.
+    """
+    from datetime import datetime
+    import importlib, sys as _sys
+    _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    sender = importlib.import_module("send_telegram")
+    for hour in (0, 3, 7, 9, 19, 22, 23):
+        allowed, why = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
+        assert allowed == 0, f"в {hour}:00 отправили бы {allowed} — окно нарушено ({why})"
+    for hour in (10, 13, 18):
+        allowed, _ = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
+        assert allowed >= 1, f"в {hour}:00 внутри окна не отправили ничего"
+
+
+def test_publisher_spreads_the_queue_over_the_window():
+    """Очередь делится на оставшиеся прогоны, а не уходит пачкой.
+
+    Пять постов в 10:00 при часовом прогоне — это по одному за раз, а не пять
+    уведомлений за десять секунд. Расчёт без состояния: доля считается от
+    того, что осталось в очереди СЕЙЧАС, поэтому пропущенный прогон не копит
+    долг, а просто делится на меньшее число слотов.
+    """
+    from datetime import datetime
+    import importlib, sys as _sys
+    _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    sender = importlib.import_module("send_telegram")
+    at10, _ = sender.pace_allowance(5, datetime(2026, 8, 4, 10, 0, tzinfo=sender.MSK))
+    assert at10 == 1, f"в начале окна взяли {at10} из 5 — это не равномерно"
+    # Ближе к концу окна остаток уходит целиком: иначе он завис бы до завтра.
+    at1830, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 18, 30, tzinfo=sender.MSK))
+    assert at1830 == 3, "остаток очереди не ушёл в последнем слоте"
+    # Но не в одну минуту: между новыми постами внутри прогона есть пауза.
+    assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
+    # Пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert sender.pace_allowance(0, datetime(2026, 8, 4, 12, 0, tzinfo=sender.MSK))[0] == 0
