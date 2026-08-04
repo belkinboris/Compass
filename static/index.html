@@ -54,7 +54,13 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1}.reveal.in,.hero svg g,.an-bar div,.dp-arrow,.dp-arrow:after{animation:none!important}.dp-arrow:after{opacity:1}}
 
 /* ---------- shell ---------- */
-.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease)}
+/* Переход между светлой и тёмной подложкой идёт медленнее, чем появление самой
+   строки: смена цвета на скорости .45s читалась как рывок — состояние
+   переключается ровно в тот момент, когда герой уходит из-под шапки, и глаз
+   ловит именно этот скачок. Цвет текста внутри тоже ведём переходом, иначе
+   подложка растворяется плавно, а буквы меняются мгновенно. */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease),background-color .8s var(--ease),border-bottom-color .8s var(--ease)}
+.top .wordmark,.top .wordmark em,.top nav a{transition:color .8s var(--ease)}
 .top.hide{transform:translateY(-100%)}
 /* Пока строка стоит поверх тёмно-зелёного героя, светлая подложка выглядит
    заплаткой: делаем её тёмной и полупрозрачной, чтобы вкладки читались на
@@ -350,6 +356,27 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   .adv-panel{flex-direction:column;gap:12px}
   .adv-panel label{min-width:0;width:100%}
   .adv-panel select{min-width:0;width:100%;max-width:100%}
+}
+/* Фильтры аналитики. Липкие: карточек много, и уехав к нижнему графику,
+   пользователь не должен возвращаться наверх, чтобы сменить год. `top` равен
+   высоте шапки — иначе панель уезжает под неё. */
+/* top на пиксель меньше высоты шапки (65px): панель уходит под неё своим
+   верхним краем, и между ними не остаётся щели, сквозь которую видно
+   проезжающий текст. */
+.an-filters{position:sticky;top:64px;z-index:20;display:flex;flex-wrap:wrap;gap:12px;align-items:end;
+  margin-top:22px;padding:14px 16px;background:rgba(245,245,241,.96);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:12px}
+.an-filters label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)}
+.an-filters select{font:inherit;font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);
+  border-radius:8px;padding:7px 10px;max-width:min(260px,60vw)}
+.an-filters-note{margin-left:auto;font-size:12.5px;color:var(--muted);padding-bottom:8px}
+@media(max-width:560px){
+  /* Два селекта в один ряд, а не столбиком: панель липкая, и в две строки
+     она забирала 186px постоянной высоты — четверть экрана телефона. */
+  .an-filters{gap:8px 10px;padding:11px 12px}
+  .an-filters label{flex:1 1 calc(50% - 5px);min-width:0}
+  .an-filters select{max-width:100%;width:100%;padding:6px 8px}
+  .an-filters-note{flex:1 1 100%;margin-left:0;padding-bottom:0}
 }
 .an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px;align-items:start}
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -734,7 +761,13 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 
 /* ---------- запуск: консультанты, ФНС, уведомления, экспорт ---------- */
 .advisor-list{display:grid;gap:10px;margin-top:18px}
-.advisor-card{display:grid;grid-template-columns:minmax(190px,1.05fr) minmax(280px,1.6fr) auto;gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);padding:22px 26px;border-radius:var(--radius)}
+/* Две колонки, а не три: средняя («Категории практики») снята вместе с
+   категориями, и на её месте оставалась пустота во всю ширину карточки —
+   имя жалось влево, счётчик вправо, между ними полтора экрана воздуха.
+   Инвестиционным консультантам колонка с профилем нужна, поэтому она
+   описана отдельным правилом ниже. */
+.advisor-card{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);padding:22px 26px;border-radius:var(--radius)}
+.advisor-card:has(.advisor-card-groups){grid-template-columns:minmax(190px,1.05fr) minmax(280px,1.6fr) auto}
 .advisor-card-name{font-family:var(--f-display);font-size:20px;line-height:1.25}
 .advisor-card-name a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px}
 .advisor-card-groups{font-size:14px;line-height:1.55;color:var(--muted)}
@@ -1526,6 +1559,10 @@ function applyFeedParams(qs){
   feedYear = p.get("year") || "Все";
   filterTheme = p.get("theme") || "Все";
   filterFirm = p.get("firm") || "Все";
+  /* Селект «Категория консультанта» снят с экрана вместе с категориями в
+     каталоге: фильтровать по разметке, которой нигде не видно, нельзя. Разбор
+     параметра оставлен, чтобы старые сохранённые ссылки продолжали работать;
+     снять такой фильтр можно плашкой активных фильтров. */
   filterAdvisorGroup = p.get("agroup") || "Все";
   feedQuery = p.get("q") || "";
   onlyFull = p.get("full") === "1";
@@ -1670,6 +1707,16 @@ function updTop(){
   top.classList.toggle("on-hero", navRevealed && window.scrollY < window.innerHeight*0.9);
 }
 window.addEventListener("scroll", updTop, {passive:true});
+/* Клик по логотипу возвращает наверх. Со страницы это делает сам `route()`
+   (`scrollTo(0,0)`), но на главной адрес не меняется — `hashchange` не
+   срабатывает, ничего не перерисовывается, и клик выглядел мёртвым: человек
+   уехал вниз по ленте, нажал «КОМПАС» и остался на том же месте. Отложенный
+   вызов нужен, чтобы не спорить с мгновенной прокруткой `route()` при переходе
+   с другой страницы. */
+const wordmarkLink = document.querySelector(".top .wordmark");
+if(wordmarkLink) wordmarkLink.addEventListener("click", ()=>{
+  setTimeout(()=>window.scrollTo({top:0,behavior:"smooth"}),0);
+});
 const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")));
 
 /* ================= ИИ ================= */
@@ -2229,9 +2276,6 @@ function renderDeals(){
     <label>Консультант
       <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
     </label>
-    <label>Категория консультанта
-      <select id="selagroup"><option value="Все">Все категории</option>${Object.entries(GROUP_LABEL).map(([g,label])=>`<option value="${g}" ${g===filterAdvisorGroup?"selected":""}>${label}</option>`).join("")}</select>
-    </label>
     <label>Тема сделки
       <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
     </label>
@@ -2269,7 +2313,6 @@ function renderDeals(){
   bindSel("selyear", v=>feedYear=v);
   bindSel("selfmt", v=>onlyFull=(v!=="Все сделки"));
   bindSel("selfirm", v=>filterFirm=v);
-  bindSel("selagroup", v=>filterAdvisorGroup=v);
   bindSel("seltheme", v=>filterTheme=v);
   const sf = document.getElementById("sharefeed");
   if(sf) sf.onclick = ()=>{
@@ -3426,6 +3469,16 @@ function bindCompanyGridActions(el){
       ev.preventDefault();
       toggleFollowedCompany(fav.dataset.coFollow);
       renderCompanyGrid();
+      return;
+    }
+    /* Отрасль ведёт на свою страницу. Ссылку внутрь карточки поставить нельзя:
+       вся карточка — уже <a> на профиль компании, а вложенная ссылка в HTML
+       недопустима и в браузере разъезжается. Поэтому переход делает
+       делегированный обработчик, который перехватывает клик раньше карточки. */
+    const ind = ev.target.closest("[data-co-ind]");
+    if(ind){
+      ev.preventDefault();
+      location.hash = "#/industry/"+encodeURIComponent(ind.dataset.coInd);
     }
   });
 }
@@ -3655,7 +3708,7 @@ function renderCompany(id){
   app.innerHTML = `
   <a class="back reveal" href="#/companies">← Все компании</a>
   <div class="d-head reveal">
-    <span class="tag">${c.ind}</span>
+    <a class="tag" href="#/industry/${encodeURIComponent(c.ind)}" title="Сводка по отрасли «${esc(c.ind)}»">${c.ind}</a>
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
     ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
@@ -3704,26 +3757,30 @@ function renderCompany(id){
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
 let advType = "legal"; // legal | invest | other
-let firmGroup = "Все";
-let firmSort = "active";
+let firmSort = "alpha";  // каталог открывается алфавитным списком, а не рейтингом
+/* КАТЕГОРИИ ПРАКТИКИ СНЯТЫ С ЭКРАНА (решение владельца 4 августа). «С-hi»,
+   «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме: она нигде не
+   подтверждена источником, читателю ничего не объясняет и делит каталог по
+   признаку, которого он не выбирал. Пока нет разметки, которую можно
+   показать и защитить, каталог — просто перечень фирм по алфавиту.
+   Поле `g` в данных остаётся — удалять разметку ради экрана незачем, а
+   `GROUP_LABEL` нужен ровно в одном месте: расшифровать старую ссылку с
+   параметром `agroup` в плашке активных фильтров, чтобы её можно было снять. */
 function renderAdvisors(){
-  const groups = ["Все","С-hi","К-hi","mid"];
   let body = "";
   if(advType==="legal"){
     const rows = FIRMS
-      .filter(f=>firmGroup==="Все"||f.g.includes(firmGroup))
       .map(f=>({f,n:firmCount(f.id)}))
       .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
     body = `
-    <div class="filters advisor-filters reveal">${groups.map(g=>`<button class="chip ${g===firmGroup?"on":""}" data-g="${g}">${g==="Все"?"Все категории":GROUP_LABEL[g]}</button>`).join("")}
+    <div class="filters advisor-filters reveal">
       <span style="flex:1"></span>
-      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
       <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
     </div>
     <div class="advisor-list reveal">
       ${rows.map(r=>`<article class="advisor-card">
         <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
-        <div class="advisor-card-groups"><span class="label">Категории практики</span><br>${r.f.g.map(g=>GROUP_LABEL[g]).join(" · ")}</div>
         <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">Сделок пока нет</span>`}</div>
       </article>`).join("")}
     </div>`;
@@ -3731,8 +3788,9 @@ function renderAdvisors(){
     const rows = INV_FIRMS.map(f=>({f,n:firmCount(f.id)}))
       .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
     body = `<div class="filters advisor-filters reveal">
-      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
+      <span style="flex:1"></span>
       <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
     </div>
     <div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
       <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
@@ -3743,7 +3801,7 @@ function renderAdvisors(){
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Категории можно использовать и как фильтр в общей ленте сделок.</p></div>
+  <div class="sec-head reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
@@ -3755,7 +3813,6 @@ function renderAdvisors(){
   </div>
   ${body}`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
-  app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{firmGroup=b.dataset.g;renderAdvisors();rerun();});
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
 }
 /* Консультант без сделок — 27 фирм из 64. Раньше страница отвечала одной серой
@@ -3765,7 +3822,6 @@ function renderAdvisors(){
    же, что у компании без сделок и у пустой линзы «Юрист». */
 function firmEmptyHtml(f, isLegal){
   const known = [];
-  if(isLegal && f.g && f.g.length) known.push(["Категории практики", f.g.map(g=>GROUP_LABEL[g]).join(" · ")]);
   if(!isLegal && f.desc) known.push(["Профиль", f.desc]);
   return `<div class="lens-empty reveal">
     <div class="le-head">Публично подтверждённых сделок этой фирмы в базе пока нет</div>
@@ -3864,7 +3920,7 @@ function renderFirm(id){
     <span class="tag ${isLegal?"":"steel"}">${isLegal?"Юридический консультант":"Инвестиционный консультант"}</span>
     <h1>${f.n}</h1>
     <div class="d-parties">
-      <span>${isLegal?`Группы: <b>${f.g.map(g=>GROUP_LABEL[g]).join(" · ")}</b>`:`<b>${f.desc||""}</b>`}</span>
+      ${isLegal?"":`<span><b>${f.desc||""}</b></span>`}
       ${f.site?`<a href="${f.site}" target="_blank" rel="noopener"><b>Сайт фирмы ↗</b></a>`:""}
     </div>
   </div>
@@ -4020,13 +4076,66 @@ function renderIndustry(ind){
 
 /* ================= АССИСТЕНТ ================= */
 const SUGGESTS = ["Кто сопровождал сделки в базе?","Какая самая крупная сделка?","Кто выходил из российского рынка?","Какие сделки с опционом обратного выкупа?"];
+/* Состояние фильтров аналитики живёт снаружи функции: `renderAnalytics()`
+   вызывается заново на каждый выбор, и локальная переменная обнулялась бы. */
+let anYear = "Все";
+let anInd = "Все";
+function analyticsFiltersHtml(yearsAvail, shown, total){
+  const off = anYear==="Все" && anInd==="Все";
+  return `
+  <div class="an-filters reveal">
+    <label>Период
+      <select id="anYearSel"><option value="Все">Все годы</option>${yearsAvail.map(y=>`<option value="${y}" ${y===anYear?"selected":""}>${y}</option>`).join("")}</select>
+    </label>
+    <label>Отрасль
+      <select id="anIndSel"><option value="Все">Все отрасли</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option value="${esc(i)}" ${i===anInd?"selected":""}>${esc(i)}</option>`).join("")}</select>
+    </label>
+    <span class="an-filters-note">${off?`Без фильтров: ${total} ${plural(total,"сделка","сделки","сделок")}`:`Показано ${shown} из ${total}`}</span>
+    ${off?"":`<button class="chip" id="anReset">Сбросить</button>`}
+  </div>`;
+}
+function bindAnalyticsFilters(){
+  const y = document.getElementById("anYearSel");
+  if(y) y.onchange = ()=>{anYear=y.value; renderAnalytics(); rerun();};
+  const i = document.getElementById("anIndSel");
+  if(i) i.onchange = ()=>{anInd=i.value; renderAnalytics(); rerun();};
+  const r = document.getElementById("anReset");
+  if(r) r.onclick = ()=>{anYear="Все"; anInd="Все"; renderAnalytics(); rerun();};
+}
 function renderAnalytics(){
-  const all = [
-    ...DEALS.map(d=>({date:d.date,ind:d.ind,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
-    ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,title:m.title,kind:"mini"})),
-    ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,title:c.title,kind:"chan"})),
-    ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,title:b.title,kind:"bulk"})),
+  /* Страница для работы, а не для чтения сверху вниз: фильтры стоят ПЕРВЫМИ и
+     сужают ВСЕ карточки разом. Раньше здесь была одна длинная простыня цифр по
+     всей базе — посмотреть «что было в ИТ в 2025-м» было нечем. */
+  const raw = [
+    ...DEALS.map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
+    ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,industries:[m.ind],title:m.title,kind:"mini"})),
+    ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,industries:[c.ind],title:c.title,kind:"chan"})),
+    ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,industries:[b.ind],title:b.title,kind:"bulk"})),
   ];
+  /* `industries` кладём прямо в запись. Прежний код спрашивал
+     `DEALS.includes(d)`, но `d` здесь — уже КОПИЯ, созданная map: проверка
+     всегда была ложной, и сделка с двумя отраслями считалась только по
+     первой. */
+  const yearOf = x => String(x.date||"").slice(0,4);
+  const yearsAvail = [...new Set(raw.map(yearOf).filter(y=>/^20\d\d$/.test(y)))].sort().reverse();
+  if(anYear!=="Все" && !yearsAvail.includes(anYear)) anYear="Все";
+  const okYear = x => anYear==="Все" || yearOf(x)===anYear;
+  const okInd = x => anInd==="Все" || (x.industries||[x.ind]).includes(anInd);
+  const all = raw.filter(x=>okYear(x)&&okInd(x));
+  const deals = DEALS.filter(d=>(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)&&hasIndustry(d,anInd));
+  const dealIds = new Set(deals.map(d=>d.id));
+  const filtersOff = anYear==="Все" && anInd==="Все";
+  // Подпись под каждым графиком должна называть ТУ выборку, по которой он
+  // построен, иначе «все сделки базы» останется стоять над отфильтрованным.
+  const scope = filtersOff ? "Все сделки сайта"
+    : "Выборка: " + [anInd!=="Все"?`отрасль «${anInd}»`:"", anYear!=="Все"?`${anYear} год`:""].filter(Boolean).join(", ");
+  if(!all.length){
+    app.innerHTML = `
+    <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1></div>
+    ${analyticsFiltersHtml(yearsAvail, 0, raw.length)}
+    <p class="reveal" style="color:var(--muted);max-width:640px">По этой выборке в базе нет ни одной сделки. Снимите один из фильтров.</p>`;
+    bindAnalyticsFilters(); rerun(); return;
+  }
   const byYear = {};
   all.forEach(x=>{const y=x.date==="unknown"?"н/д":x.date.slice(0,4); byYear[y]=(byYear[y]||0)+1;});
   const MIN_YEAR_N = 100; // год попадает в график, только если записей достаточно для честной динамики
@@ -4034,13 +4143,22 @@ function renderAnalytics(){
   const years = yearsAll.filter(([,n])=>n>=MIN_YEAR_N);
   const yearsThin = yearsAll.filter(([,n])=>n<MIN_YEAR_N);
   const thinNote = yearsThin.length?`${yearsThin[0][0]}–${yearsThin[yearsThin.length-1][0]} в базе фрагментарно (${yearsThin.reduce((s,[,n])=>s+n,0)} сделок) — в график не включены, чтобы неполнота базы не выглядела динамикой рынка.`:"";
-  const maxY = Math.max(...years.map(([,n])=>n));
+  /* Выбран год — показываем месяцы этого года: столбец в одну колонку
+     («2025 — 100%») не график, а строка, и работать с ним нечем. */
+  const MONTHS = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+  const byMonth = {};
+  if(anYear!=="Все"){
+    all.forEach(x=>{const m=String(x.date||"").slice(5,7); if(/^\d\d$/.test(m)) byMonth[m]=(byMonth[m]||0)+1;});
+  }
+  const byPeriod = anYear==="Все" ? years
+    : Object.entries(byMonth).sort((a,b)=>a[0].localeCompare(b[0])).map(([m,n])=>[MONTHS[+m-1]||m,n]);
+  const maxY = Math.max(1, ...byPeriod.map(([,n])=>n));
   // Знаменатели считаем явно: на одном экране их три (все записи, записи в
   // столбцах графика, подробные карточки), и без подписи читатель берёт не тот.
   const yearsShown = years.reduce((s,[,n])=>s+n,0);
   const ndCount = byYear["н/д"]||0;
   const byInd = {};
-  all.forEach(d=>{const inds=DEALS.includes(d)?dealIndustries(d):[d.ind];inds.filter(Boolean).forEach(i=>{byInd[i]=(byInd[i]||0)+1;});});
+  all.forEach(d=>{(d.industries||[d.ind]).filter(Boolean).forEach(i=>{byInd[i]=(byInd[i]||0)+1;});});
   const topInd = Object.entries(byInd).sort((a,b)=>b[1]-a[1]).slice(0,10);
   const topIndSum = topInd.reduce((s,[,n])=>s+n,0);
   const maxI = topInd.length?topInd[0][1]:1;
@@ -4048,7 +4166,7 @@ function renderAnalytics(){
   // В карточку «по раскрытой сумме» не должны попадать экспертные оценки и стартовые
   // цены торгов: это не раскрытая сторонами цена, а чужая прикидка.
   const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
-  const rubSum = DEALS.map(d=>({...d,_b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(d=>d._b>0);
+  const rubSum = deals.map(d=>({...d,_b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(d=>d._b>0);
   const rubDisclosed = rubSum.length;
   const topSum = rubSum.slice().sort((a,b)=>b._b-a._b).slice(0,10);
   const statuses = {};
@@ -4059,34 +4177,38 @@ function renderAnalytics(){
      сделки, — один словарь на весь сайт. Редкие формулировки, не попавшие
      ни в одну стадию, собираются в «Другие формулировки»: строка с единицей
      выглядит как категория, хотя это разовая фраза журналиста. */
-  DEALS.forEach(d=>{
+  deals.forEach(d=>{
     if(!d.status) return;
     const label = stageLabel(d.status);
     statuses[label]=(statuses[label]||0)+1;
   });
-  const withStatus = DEALS.filter(d=>d.status).length;
-  /* Строка с единицей выглядит как категория, хотя это разовая формулировка
-     журналиста: «Согласование получено — 1» читалось как «одобрение получила
-     одна сделка из всей базы», а согласования у нас названы у сотни карточек.
-     Всё, что меньше десяти, сводим в одну строку и прямо перечисляем, что в
-     неё вошло, — иначе это была бы уже не сводка, а сокрытие. */
+  const withStatus = deals.filter(d=>d.status).length;
+  /* Редкие формулировки не рисуем отдельной строкой. Сначала они сводились в
+     строку «Другие стадии: документы подписаны, согласование получено, …» — и
+     это оказалось хуже, чем ничего: подпись длиннее ширины колонки, на экране
+     обрывается, а сама категория ничего не значит (за ней 6 и 1 карточка).
+     Их число называется словами в подписи под графиком — так честно и без
+     мусорной строки. */
   const RARE = 10;
   const rare = Object.entries(statuses).filter(([,n])=>n<RARE);
-  if(rare.length>1){
-    rare.forEach(([k])=>{delete statuses[k];});
-    statuses["Другие стадии: "+rare.map(([k])=>k.toLowerCase()).join(", ")] =
-      rare.reduce((sum,[,n])=>sum+n,0);
-  }
-  const firmsWithDeals = FIRMS.concat(INV_FIRMS).filter(f=>firmCount(f.id)>0).length;
-  const firmRank = FIRMS.map(f=>({id:f.id,n:f.n,c:firmCount(f.id)})).filter(f=>f.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
+  const rareTotal = rare.reduce((sum,[,n])=>sum+n,0);
+  if(rare.length>1) rare.forEach(([k])=>{delete statuses[k];});
+  /* Консультанты тоже считаются по выборке: иначе при фильтре «ИТ, 2025»
+     рейтинг остался бы общим по базе и противоречил соседним карточкам. */
+  const scopedFirmCount = id => {
+    const x = firmDeals(id);
+    return x.full.filter(d=>dealIds.has(d.id)).length + (filtersOff ? x.mini.length+x.bulk.length : 0);
+  };
+  const firmsWithDeals = FIRMS.concat(INV_FIRMS).filter(f=>scopedFirmCount(f.id)>0).length;
+  const firmRank = FIRMS.map(f=>({id:f.id,n:f.n,c:scopedFirmCount(f.id)})).filter(f=>f.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
   // Серийные покупатели: кто чаще всех выступает покупателем в базе
   const buyerCnt = {};
-  DEALS.forEach(d=>{if(d.buyer) buyerCnt[d.buyer]=(buyerCnt[d.buyer]||0)+1;});
+  deals.forEach(d=>{if(d.buyer) buyerCnt[d.buyer]=(buyerCnt[d.buyer]||0)+1;});
   const serialBuyers = Object.entries(buyerCnt).filter(([id,n])=>n>=3&&co(id));
   const topBuyers = serialBuyers.slice().sort((a,b)=>b[1]-a[1]).slice(0,10);
   // Раскрытие сумм по годам — показатель прозрачности рынка, а заодно честности базы
   const discl = {};
-  DEALS.forEach(d=>{
+  deals.forEach(d=>{
     const y=(d.date||"").slice(0,4); if(!/^20\d\d$/.test(y)) return;
     discl[y]=discl[y]||{t:0,d:0}; discl[y].t++;
     // Экспертная оценка — не раскрытая сумма: считать её раскрытием значило бы
@@ -4096,11 +4218,11 @@ function renderAnalytics(){
   const disclYears = Object.entries(discl).filter(([,v])=>v.t>=20).sort((a,b)=>a[0].localeCompare(b[0]));
   const disclCards = disclYears.reduce((s,[,v])=>s+v.t,0);
   // Темы сделок
-  const themeRank = THEME_LIST.map(t=>[t,themeCount(t)]).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]);
+  const themeRank = THEME_LIST.map(t=>[t,deals.filter(d=>(d.themes||[]).includes(t)).length]).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]);
   const maxT = themeRank.length?themeRank[0][1]:1;
   // Отрасли по деньгам — картина принципиально другая, чем по количеству сделок
   const indMoney = {};
-  DEALS.forEach(d=>{
+  deals.forEach(d=>{
     if(isEstimate(d.sum)) return;
     const b = parseB(d.sum); if(!b) return;
     dealIndustries(d).forEach(ind=>{
@@ -4113,17 +4235,20 @@ function renderAnalytics(){
   const maxIM = topIndMoney.length?topIndMoney[0][1].sum:1;
   const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${all.length} ${plural(all.length,"сделка","сделки","сделок")} из публичных источников за 2022 год и позже — база продолжает пополняться. Графики ниже охватывают разное число сделок — под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
+  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Считаем по сделкам, которые показаны на сайте, — это ${raw.length} ${plural(raw.length,"карточка","карточки","карточек")} с 2022 года. Графики ниже охватывают разное число сделок: под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
+  ${analyticsFiltersHtml(yearsAvail, all.length, raw.length)}
   <div class="an-grid">
     <div class="an-card reveal">
-      <span class="label">Сделок по годам</span>
-      ${years.map(([y,n],ri)=>`<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все сделки базы по дате: на графике ${yearsShown} из ${all.length}. ${thinNote}${ndCount?` У ${ndCount} ${plural(ndCount,"сделки","сделок","сделок")} даты нет.`:""}</p>
+      <span class="label">${anYear==="Все"?"Сделок по годам":`Сделок по месяцам, ${anYear}`}</span>
+      ${byPeriod.map(([k,n],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${anYear==="Все"
+        ? `${scope} по дате: на графике ${yearsShown} из ${all.length}. ${thinNote}${ndCount?` У ${ndCount} ${plural(ndCount,"сделки","сделок","сделок")} даты нет.`:""}`
+        : `${scope}: ${all.length} ${plural(all.length,"сделка","сделки","сделок")} с датой внутри года. Месяц берётся из даты карточки — у части сделок это дата публикации источника, а не подписания.`}</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Все сделки базы: отрасль указана у каждой. Десять крупнейших отраслей из ${Object.keys(byInd).length} — это ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")} из ${all.length}, остальные ${all.length-topIndSum} — в прочих отраслях.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${scope}: отрасль указана у каждой сделки. Десять крупнейших отраслей из ${Object.keys(byInd).length} — это ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")} из ${all.length}, остальные ${all.length-topIndSum} — в прочих отраслях.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
@@ -4133,18 +4258,18 @@ function renderAnalytics(){
     <div class="an-card reveal">
       <span class="label">Самые активные консультанты в базе</span>
       ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span></div><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сделки, где фирма названа консультантом. Хотя бы одна такая сделка есть у ${firmsWithDeals} фирм каталога из ${FIRMS.length+INV_FIRMS.length}. Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Сделки, где фирма названа консультантом. В этой выборке хотя бы одна такая сделка есть у ${firmsWithDeals} фирм каталога из ${FIRMS.length+INV_FIRMS.length}. Фирмы раскрывают не все проекты — это не рейтинг и не полная картина практик.</p>
     </div>
     <div class="an-card reveal">
-      <span class="label">На какой стадии мы застали сделку</span>
+      <span class="label">Статус сделок</span>
       ${Object.entries(statuses).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/withStatus*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Стадия известна у ${withStatus} сделок из ${DEALS.length}: это последняя стадия, о которой писал источник, а не сегодняшнее состояние сделки. «Согласование получено» здесь — стадия, на которой закончились сообщения, а не число сделок, получивших одобрение регулятора: согласования — отдельное поле в линзе «Юрист», и они названы у ${DEALS.filter(d=>hasFact(d.law&&d.law.appr)).length} карточек.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${scope}: статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")} из ${deals.length}. Это последнее состояние, о котором писал источник, а не сегодняшнее положение дел.${rareTotal?` Ещё у ${rareTotal} ${plural(rareTotal,"сделки","сделок","сделок")} формулировка источника встречается один-два раза — на графике их нет.`:""}</p>
     </div>
     ${topBuyers.length?`
     <div class="an-card reveal">
       <span class="label">Серийные покупатели</span>
       ${topBuyers.map(([id,n],i)=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Компании, которые покупали не меньше трёх раз; таких ${serialBuyers.length} из ${Object.keys(buyerCnt).length} покупателей в базе. Показаны десять самых частых.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Компании, которые покупали не меньше трёх раз; таких ${serialBuyers.length} из ${Object.keys(buyerCnt).length} покупателей в этой выборке. Показаны десять самых частых.</p>
     </div>`:""}
     ${themeRank.length?`
     <div class="an-card reveal">
@@ -4165,6 +4290,7 @@ function renderAnalytics(){
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля сделок года, где сумму назвали стороны: в графике ${disclCards} ${plural(disclCards,"сделка","сделки","сделок")} за годы, в которых их не меньше 20. Оценки экспертов сюда не входят. Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
     </div>`:""}
   </div>`;
+  bindAnalyticsFilters();
 }
 
 
@@ -4258,7 +4384,7 @@ async function renderAssistant(){
       <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
       <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
       <div class="suggests reveal">${SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${q}</button>`).join("")}</div>
-      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала [название юридической фирмы]?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала юридическая фирма [•]?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
     </div>
   </div>`;
   rerun();

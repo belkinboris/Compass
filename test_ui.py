@@ -10,6 +10,7 @@
 Запуск: python3 -m pytest test_ui.py -q
 Пропускается, если не установлен Playwright (тогда гоняются только остальные).
 """
+import re
 import socket
 import subprocess
 import sys
@@ -452,3 +453,102 @@ def test_regulatory_analyzer_defers_to_a_known_approval(page, base_url):
     assert "согласование уже названо в источниках" in text.lower(), \
         "панель не начинается с известного факта"
     assert not page.crashes, f"падения на анализаторе: {page.crashes[:3]}"
+
+
+def test_analytics_period_filter_narrows_every_card(page, base_url):
+    """Аналитика — рабочая страница, а не простыня цифр.
+
+    Фильтры стоят первыми и сужают ВСЕ карточки разом; выбранный год
+    разворачивается в месяцы, потому что одна колонка на весь график («2025 —
+    100%») — это не график, а строка.
+    """
+    visit(page, base_url, "#/analytics")
+    assert page.locator("#anYearSel").count() == 1, "нет фильтра периода"
+    assert page.locator("#anIndSel").count() == 1, "нет фильтра отрасли"
+    whole = page.inner_text(".an-filters-note")
+
+    page.select_option("#anYearSel", "2025")
+    page.wait_for_timeout(600)
+    assert not page.crashes, page.crashes[:3]
+    head = page.locator(".an-card .label").first.inner_text()
+    assert "2025" in head, f"график не развернулся в месяцы: {head!r}"
+    narrowed = page.inner_text(".an-filters-note")
+    assert narrowed != whole, "подпись выборки не изменилась"
+    # Сужение обязано затронуть не только первый график: если карточка «Статус
+    # сделок» считает по всей базе, соседние числа на одном экране начинают
+    # противоречить друг другу.
+    shown = int(re.search(r"Показано (\d+)", narrowed).group(1))
+    status_card = page.evaluate(
+        "() => [...document.querySelectorAll('.an-card')]"
+        ".find(c => /статус сделок/i.test(c.innerText)).innerText")
+    assert re.search(r"из %d\b" % shown, status_card), \
+        f"карточка статусов считает не по выборке: {status_card[:160]!r}"
+
+    page.click("#anReset")
+    page.wait_for_timeout(600)
+    assert page.inner_text(".an-filters-note") == whole, "сброс не вернул полную выборку"
+
+
+def test_analytics_names_the_set_it_counts(page, base_url):
+    """У числа на экране два свойства: величина и множество.
+
+    В файле 1538 карточек, а на сайте показаны только сделки с 2022 года —
+    191 запись скрыта. Подпись «вся база» над отфильтрованным числом была бы
+    арифметически верной и всё равно врала.
+    """
+    visit(page, base_url, "#/analytics")
+    shown = page.evaluate("() => DEALS.length")
+    head = page.inner_text(".sec-head")
+    assert str(shown) in head, f"шапка не называет своё число: {head[:160]!r}"
+    assert "с 2022" in head, "не сказано, какое множество посчитано"
+    assert "вся база" not in head.lower(), "показанное названо всей базой"
+
+
+def test_company_sector_opens_the_industry_page(page, base_url):
+    """Отрасль на карточке компании — вход в отрасль, а не украшение.
+
+    Ссылку внутрь карточки поставить нельзя (вся карточка уже <a> на профиль),
+    поэтому переход делает делегированный обработчик — и проверять его надо
+    именно кликом, а не наличием href.
+    """
+    visit(page, base_url, "#/companies")
+    page.locator("[data-co-ind]").first.click()
+    page.wait_for_timeout(900)
+    assert "#/industry/" in page.url, f"клик по отрасли никуда не увёл: {page.url}"
+    assert not page.crashes, page.crashes[:3]
+    assert len(page.inner_text("#app").strip()) > 120, "страница отрасли пуста"
+
+    visit(page, base_url, "#/companies/yandex")
+    tag = page.locator(".d-head a.tag").first
+    assert tag.count() == 1, "на странице компании отрасль не ссылка"
+    assert (tag.get_attribute("href") or "").startswith("#/industry/")
+
+
+def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
+    """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
+
+    Она нигде не подтверждена источником и делит каталог по признаку, которого
+    читатель не выбирал. Раз её сняли с экрана, её не должно остаться ни в
+    карточках, ни в фильтрах, ни на странице фирмы.
+    """
+    visit(page, base_url, "#/advisors")
+    body = page.inner_text("#app").lower()
+    for slug in ("категории практики", "все категории", "сопровождение сделок — крупный"):
+        assert slug not in body, f"категории остались на экране: {slug}"
+    visit(page, base_url, "#/advisors/alrud")
+    assert "групп" not in page.inner_text(".d-head").lower(), "категории остались на странице фирмы"
+    visit(page, base_url, "#/")
+    assert page.locator("#selagroup").count() == 0, "фильтр категорий остался в ленте"
+
+
+def test_wordmark_returns_to_the_top(page, base_url):
+    """На главной адрес от клика по логотипу не меняется — `hashchange` не
+    срабатывает, `route()` не вызывается, и без отдельного обработчика кнопка
+    выглядела мёртвой: человек уехал вниз по ленте и остался на месте."""
+    visit(page, base_url, "#/")
+    page.evaluate("window.scrollTo(0, 3000)")
+    page.wait_for_timeout(300)
+    assert page.evaluate("window.scrollY") > 500, "не удалось прокрутить главную"
+    page.click(".top .wordmark")
+    page.wait_for_timeout(1200)
+    assert page.evaluate("window.scrollY") < 60, "логотип не вернул наверх"

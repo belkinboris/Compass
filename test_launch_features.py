@@ -237,7 +237,12 @@ def test_launch_ui_contains_requested_changes():
     assert "у 180 сделок известно" not in html
     assert "#/materials" in html and "Материалы" in html
     assert 'page==="materials"||page==="webinars"' in html  # старая ссылка #/webinars не должна биться
-    assert 'id="selagroup"' in html and "категория консультанта" in html
+    # Фильтр по категории консультанта СНЯТ 4 августа вместе с самими
+    # категориями: «С-hi», «К-hi», «mid» — внутренняя разметка, ничем не
+    # подтверждённая, и фильтровать по признаку, которого нигде не видно,
+    # нельзя. Проверяем обратное тому, что проверялось раньше, — иначе тест
+    # держал бы вернувшийся селект.
+    assert 'id="selagroup"' not in html, "селект категорий вернулся в разметку"
     assert "advisor-card" in html and "@media(max-width:760px)" in html
     assert "Подписаться на обновления" in html
     assert "Скачать PDF" in html and "Скопировать ссылку" in html
