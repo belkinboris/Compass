@@ -10,5 +10,7 @@ pipeline/*review_candidates*.csv
 data/inbox/raw/
 data/inbox/triage/
 data/inbox/drafts/
-data/inbox/hold/
+# hold НЕ игнорируется: это очередь карточек, ждущих решения человека.
+# Она жила в одноразовом контейнере рутины и исчезала вместе с ним — каждый
+# день приток находил сделки, складывал их в ящик и выбрасывал ящик.
 data/inbox/updates/

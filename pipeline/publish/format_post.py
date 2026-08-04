@@ -31,6 +31,7 @@ import json
 import os
 import re
 import sys
+from datetime import date, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -87,10 +88,68 @@ def advisers(deal):
     return uniq
 
 
-def render(deal, companies, updates=()):
+MONTHS_OF = ('январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+             'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь')
+
+
+def fmt_month(raw):
+    """«2026-06-26» -> «июнь 2026», «2024» -> «2024 год». Пусто — если неясно."""
+    raw = str(raw or '')
+    if re.fullmatch(r'\d{4}', raw):
+        return '%s год' % raw
+    m = re.fullmatch(r'(\d{4})-(\d{2})-\d{2}', raw)
+    if not m:
+        return ''
+    month = int(m.group(2))
+    return '%s %s' % (MONTHS_OF[month - 1], m.group(1)) if 1 <= month <= 12 else m.group(1)
+
+
+# Сколько дней сделка считается свежей новостью. Дальше пост читается не как
+# объявление о сделке, а как сообщение о новых сведениях по известной сделке.
+FRESH_DAYS = 30
+
+
+def deal_age_days(deal, today=None):
+    """Сколько дней сделке. None — если дату разобрать нельзя (год без дня)."""
+    raw = str(deal.get('date') or '')
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', raw):
+        return None
+    try:
+        made = datetime.strptime(raw, '%Y-%m-%d').date()
+    except ValueError:
+        return None
+    return ((today or date.today()) - made).days
+
+
+def is_fresh(deal, today=None):
+    """Свежая сделка — обычный пост. Старая — «новое о сделке».
+
+    ЗАЧЕМ. Правило публикации смотрело, видел ли карточку КАНАЛ, а не что
+    нового узнали МЫ. Из-за этого 4 августа в канал ушли посты о сделках 26
+    июня, 15 июня и 1 марта 2025 года — каждый читался как объявление о свежей
+    сделке, хотя поводом было дописанное обогащением поле. Читателю канала
+    нужны новости, а не выдача архива за новость.
+
+    Дата, у которой известен только год, свежей не считается: если мы не знаем
+    даже месяца, объявлять сделку сегодняшней нельзя.
+    """
+    age = deal_age_days(deal, today)
+    return age is not None and age <= FRESH_DAYS
+
+
+def render(deal, companies, updates=(), today=None):
     """Текст поста (HTML для Telegram). Пустых строк-заглушек в посте нет."""
     seller, asset, buyer = party_names(deal, companies)
-    lines = ['<b>%s</b>' % esc(deal.get('title'))]
+    lines = []
+    if not is_fresh(deal, today):
+        # Старая сделка: сначала честно говорим, что это не свежая новость, и
+        # называем ЕЁ дату — иначе читатель примет архив за сегодняшний рынок.
+        when = fmt_month(deal.get('date'))
+        lines.append('🗂 <b>Новое о сделке</b>%s' % (' · %s' % esc(when) if when else ''))
+        if updates:
+            lines.append('Что стало известно: %s' % esc(', '.join(updates)))
+        lines.append('')
+    lines.append('<b>%s</b>' % esc(deal.get('title')))
 
     parties = []
     if seller:
@@ -134,7 +193,9 @@ def render(deal, companies, updates=()):
         if len(src) > 1:
             lines.append('Ещё источников: %d' % (len(src) - 1))
 
-    if updates:
+    # «⟳ Обновлено» — для ПРАВКИ уже опубликованного поста. У старой сделки то
+    # же самое уже сказано шапкой «Новое о сделке», и повторять незачем.
+    if updates and is_fresh(deal, today):
         lines.append('')
         lines.append('⟳ Обновлено: %s' % esc(', '.join(updates)))
 

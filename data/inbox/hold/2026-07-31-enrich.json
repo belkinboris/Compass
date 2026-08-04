@@ -1,0 +1,50 @@
+{
+ "made": "2026-07-31",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Rosimuschestvo-obyavilo-povtornye-torgi-po-prodazhe-akcij-nacionalizirovannogo-AO-Amber-Talvis-za-39-mlrd-rublej-87185",
+   "title": "Росимущество объявило повторные торги по продаже акций национализированного АО «Амбер Талвис» за 3,9 млрд. рублей",
+   "verdict": "enrich:g96ef3005",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «3,89 млрд ₽ (начальная цена аукциона)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Upravlyayuschaya-kompaniya-Belaya-skala-vykupila-portfel-Raven-Russia-za-472-mlrd-rub-87131",
+   "title": "Управляющая компания «Белая скала» выкупила портфель Raven Russia за 47,2 млрд руб.",
+   "verdict": "enrich:g323cf076",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «УК «Белая скала»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Bashkiriya-prodala-chast-paketa-Bashnefti-za-148-mlrd-rublej-87107",
+   "title": "Башкирия продала часть пакета \"Башнефти\" за 14,8 млрд рублей",
+   "verdict": "enrich:gf6232eec",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Bashkiriya-prodala-Rosnefti-chast-svoego-paketa-Bashnefti-87057",
+   "title": "Башкирия продала \"Роснефти\" часть своего пакета \"Башнефти\"",
+   "verdict": "enrich:gf6232eec",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Rosimuschestvo-vystavilo-na-torgi-aktivy-alkogolnoj-kompanii-Global-Spirits-87055",
+   "title": "Росимущество выставило на торги активы алкогольной компании Global Spirits",
+   "verdict": "enrich:g96ef3005",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  }
+ ]
+}

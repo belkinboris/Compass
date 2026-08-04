@@ -1,0 +1,43 @@
+{
+ "made": "2026-07-28",
+ "drafts": [
+  {
+   "draft_id": "d91348269",
+   "title": "«Сбербанк» продал 100% сети клиник «Пример» группе «Образец» за 12 млрд рублей",
+   "date": "2026-07-28",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://example.invalid/news/1"
+    ]
+   ],
+   "sum": "12 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "buyer_name": null,
+   "asset": "100% сети клиник «Пример» группе «Образец»",
+   "seller": "«Сбербанк»",
+   "ind": null,
+   "needs_review": true
+  },
+  {
+   "draft_id": "d48759919",
+   "title": "Стартап «Пример-Тех» привлёк 300 млн рублей от фонда «Ромашка Капитал»",
+   "date": "2026-07-28",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://example.invalid/news/2"
+    ]
+   ],
+   "sum": "300 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "ind": null,
+   "needs_review": true
+  }
+ ]
+}

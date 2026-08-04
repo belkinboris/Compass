@@ -75809,6 +75809,195 @@
    "duplicate_reviewed": true,
    "buyer_name": "Дмитрий Панкрушев",
    "seller": "VK"
+  },
+  {
+   "id": "gdfce7e3d",
+   "date": "2026-08-03",
+   "title": "«Дом.РФ» приобрел бизнес-центр «Обсидиан» на Ходынском поле",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Дом.РФ»",
+   "asset": "бизнес-центр «Обсидиан» на Ходынском поле",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "ЗПИФ недвижимости Дом.РФ, находящийся под управлением ООО «Дом.РФ управление активами», стал владельцем бизнес-центра «Обсидиан» (10 734 кв. м) на ул. Авиаконструктора Микояна на Ходынском поле. Как следует из выписки Росреестра, сделка была закрыта 4 мая. Про",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
+     }
+    ],
+    "target": [
+     {
+      "value": "бизнес-центр «Обсидиан» на Ходынском поле",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gc5951fac",
+   "date": "2026-08-04",
+   "title": "Владельцы логистической платформы ATI.SU купили разработчика системы для управления автомобильными грузоперевозками CARGO.RUN",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/716777"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Владельцы логистической платформы ATI.SU",
+   "asset": "разработчика системы для управления автомобильными грузоперевозками CARGO.RUN",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "История 2026: Владельцы логистической платформы ATI.SU купили CARGO.RUN В августе 2026 года стало известно о том, что совладельцы цифровой логистической площадки Компания:ATI.SU, АТИ.СУ (ранее АвтоТрансИнфо), Персона:Вильде Святослав Вольдемарович и Олег Кругл",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/716777"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Владельцы логистической платформы ATI.SU",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/716777"
+     }
+    ],
+    "target": [
+     {
+      "value": "разработчика системы для управления автомобильными грузоперевозками CARGO.RUN",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/716777"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gfa114edc",
+   "date": "2026-08-04",
+   "title": "«Тантор Лабс» купил права на СУБД «Персей»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/876278"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Тантор Лабс»",
+   "asset": "права на СУБД «Персей»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "Основная статья: Система управления базами данных (СУБД) 2026: «Тантор Лабс» купил права на СУБД «Персей» В начале августа 2026 года компания Тантор Лабс (Tantor Labs) закрыла сделку по выкупу исключительных прав на отечественную СУБД «Персей» у компании МТ-Ин",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/876278"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Тантор Лабс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/876278"
+     }
+    ],
+    "target": [
+     {
+      "value": "права на СУБД «Персей»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/876278"
+     }
+    ]
+   }
   }
  ],
  "companies": {
