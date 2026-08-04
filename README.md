@@ -45,7 +45,7 @@ python3 -m pytest -q
 - `COOKIE_SECURE=true` — secure-cookie на HTTPS;
 - `APP_BASE_URL` — публичный адрес для ссылок из писем и Telegram;
 - `API_FNS_KEY`, опционально `API_FNS_BASE_URL`, `API_FNS_TIMEOUT`, `API_FNS_MIN_INTERVAL` — ЕГРЮЛ и БФО;
-- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_BOT_USERNAME`, `TELEGRAM_WEBHOOK_SECRET` — Telegram-уведомления (личные, боту в личку);
+- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_BOT_USERNAME`, `TELEGRAM_WEBHOOK_SECRET` — Telegram-уведомления (личные, боту в личку). Трёх переменных мало: пока не выполнен `python3 pipeline/publish/setup_telegram_webhook.py --write`, Telegram не знает, куда слать `/start`, и привязка бота к аккаунту не завершается — молча, без ошибки на экране;
 - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHANNEL_ID` — автопостинг сделок в канал (`pipeline/publish/send_telegram.py`); токен один и тот же, `TELEGRAM_CHANNEL_ID` — отдельная переменная (`@username` канала или числовой id);
 - `TELEGRAM_API_BASE` — релей до Bot API (Cloudflare Worker). На российском хостинге практически обязателен: прямая связь Timeweb → `api.telegram.org` даёт около трети отказов на соединение. Пусто = прямой `api.telegram.org`.
 

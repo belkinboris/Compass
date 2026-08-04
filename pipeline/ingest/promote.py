@@ -243,13 +243,42 @@ def main(write):
     if not passed:
         print('\nЗаписывать нечего.')
         return
+    fresh = []
     for draft, _ in passed:
         deal_id = new_id(existing)
         existing.add(deal_id)
-        data['deals'].append(to_card(draft, deal_id))
+        card = to_card(draft, deal_id)
+        data['deals'].append(card)
+        fresh.append(card)
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
     print('\nЗаписано карточек: %d. Всего в базе: %d.' % (len(passed), len(data['deals'])))
+    notify(fresh, data['companies'])
+
+
+def notify(fresh, companies):
+    """Разослать личные уведомления по подпискам о только что записанных карточках.
+
+    Момент выбран не случайно: подписка означает «сообщи о будущем», и
+    единственная точка, где у сделки есть «будущее», — её появление в базе.
+    Сканировать базу задним числом нельзя, не заведя ещё одно состояние «о чём
+    уже сообщали»; здесь оно не нужно (см. docstring notify_subscribers.py).
+
+    Сбой доставки не откатывает базу: карточка записана и без письма остаётся
+    записанной — так же устроено уведомление наблюдателей в `enrich.py`.
+    """
+    try:
+        if ROOT not in sys.path:
+            sys.path.insert(0, ROOT)
+        sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
+        import notify_subscribers
+
+        from db.session import SessionLocal
+        with SessionLocal() as db:
+            print(notify_subscribers.report(
+                notify_subscribers.notify_new_deals(db, fresh, companies)))
+    except Exception as exc:
+        print('Предупреждение: уведомления по подпискам не отправлены: %s' % exc)
 
 
 if __name__ == '__main__':

@@ -154,6 +154,26 @@ def test_cover_sum_uses_currency_symbol(deals):
     assert not bad, f"валюта словом в обложке: {bad[:5]}"
 
 
+RUB_BEFORE_NUMBER = re.compile(r"₽\s*\d")
+
+
+def test_ruble_sign_stands_after_the_number(deals):
+    """Значок рубля — ПОСЛЕ числа, и это не косметика.
+
+    «₽25 млрд» — англоязычная запись, просочившаяся из источника. Читателю она
+    и так режет глаз рядом с «25 млрд ₽» у соседней карточки, но хуже другое:
+    любое правило, читающее сумму (порог подписки, сортировка по величине),
+    ищет число ПЕРЕД значком и такую запись молча не видит — сделка просто
+    выпадает из выдачи, не вызвав ошибки. Правится `pipeline/normalize_sum.py`.
+    """
+    bad = [(d["id"], d[field]) for d in deals for field in ("sum",)
+           if d.get(field) and RUB_BEFORE_NUMBER.search(str(d[field]))]
+    bad += [(d["id"], d["eco"]["sum"]) for d in deals
+            if isinstance(d.get("eco"), dict) and d["eco"].get("sum")
+            and RUB_BEFORE_NUMBER.search(str(d["eco"]["sum"]))]
+    assert not bad, f"значок рубля перед числом: {bad[:5]}"
+
+
 GLUED_CURRENCY = re.compile(r"[\$€][а-яёА-ЯЁ]")
 
 

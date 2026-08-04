@@ -948,3 +948,85 @@ def test_publisher_spreads_the_queue_over_the_window():
     assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
     # Пустая очередь не заставляет отправлять «хоть что-нибудь».
     assert sender.pace_allowance(0, datetime(2026, 8, 4, 12, 0, tzinfo=sender.MSK))[0] == 0
+
+
+# ---------- личные уведомления по подпискам ----------
+
+class _Sub:
+    """Подписка как её видит правило: те же три поля, что у SavedFilter."""
+
+    def __init__(self, industry=None, keyword=None, min_amount_mln_rub=None):
+        self.industry = industry
+        self.keyword = keyword
+        self.min_amount_mln_rub = min_amount_mln_rub
+
+
+def _subs():
+    import importlib
+    return importlib.import_module("notify_subscribers")
+
+
+def test_subscription_amount_is_silent_when_the_sum_is_unreadable():
+    """Порог суммы не срабатывает на том, чего мы не сумели прочитать.
+
+    Сумма в карточке — свободный текст, и валюту мы не конвертируем: курса в
+    базе нет. Прислать письмо «сделка от 500 млн ₽» по карточке «$1,2 млрд»
+    значило бы выдать догадку за факт — то же правило «ошибка дороже
+    молчания», что у разбора новостей.
+    """
+    ns = _subs()
+    big = _Sub(min_amount_mln_rub=500)
+    for unreadable in ("Не раскрыта", "$1,2 млрд", "€800 млн",
+                       "несколько млрд ₽ (точно не указана)"):
+        assert ns.match_reason(big, {"sum": unreadable, "ind": "ИТ и интернет"}, {}) is None, \
+            f"по сумме «{unreadable}» подписка сработала, хотя разобрать её нельзя"
+    assert ns.match_reason(big, {"sum": "8,7 млрд ₽", "ind": "ИТ и интернет"}, {}), \
+        "по разобранной сумме подписка не сработала"
+
+
+def test_subscription_takes_the_lower_bound_of_a_range():
+    """Из диапазона берётся нижняя граница, а «300+ млн» — тоже нижняя.
+
+    Подписка «от 500 млн» не должна срабатывать на сделке, которая может
+    стоить 200: верхняя граница — это чужая оценка сверху, а не цена.
+    """
+    ns = _subs()
+    assert ns.amount_mln_rub("200–550 млн ₽ (по оценке)") == 200.0
+    assert ns.match_reason(_Sub(min_amount_mln_rub=500),
+                           {"sum": "200–550 млн ₽ (по оценке)"}, {}) is None
+    assert ns.match_reason(_Sub(min_amount_mln_rub=100),
+                           {"sum": "200–550 млн ₽ (по оценке)"}, {})
+    # Значок без единицы — это рубли, а не миллионы: символическая цена в
+    # 1 ₽ не должна проходить порог «от 500 млн».
+    assert ns.amount_mln_rub("1 ₽") == 1e-6
+    assert ns.match_reason(_Sub(min_amount_mln_rub=500), {"sum": "1 ₽"}, {}) is None
+
+
+def test_subscription_conditions_are_combined_with_and():
+    """«Отрасль X и от Y» — это про сделки в X дороже Y, а не две ленты сразу."""
+    ns = _subs()
+    both = _Sub(industry="ИТ и интернет", min_amount_mln_rub=1000)
+    assert ns.match_reason(both, {"ind": "ИТ и интернет", "sum": "8,7 млрд ₽"}, {})
+    assert ns.match_reason(both, {"ind": "ИТ и интернет", "sum": "200 млн ₽"}, {}) is None
+    assert ns.match_reason(both, {"ind": "Финансы", "sum": "8,7 млрд ₽"}, {}) is None
+    # Пустая подписка не подходит ничему: «сообщать обо всём» — не подписка.
+    assert ns.match_reason(_Sub(), {"ind": "Финансы", "sum": "8,7 млрд ₽"}, {}) is None
+
+
+def test_subscription_keyword_looks_at_names_not_at_the_whole_card():
+    """Подписка на компанию — про её сделки, а не про упоминания в пояснении.
+
+    «Сбер» стоит кредитором в десятках чужих карточек. Если искать слово по
+    всему тексту, подписчик получит ленту рынка вместо ленты компании.
+    """
+    ns = _subs()
+    sub = _Sub(keyword="Сбер")
+    party = {"title": "Сбербанк увеличил долю в Rambler Group", "extra": ""}
+    mention = {"title": "«Магнит» купил сеть «Дикси»",
+               "extra": "Сделка профинансирована кредитом Сбербанка."}
+    assert ns.match_reason(sub, party, {})
+    assert ns.match_reason(sub, mention, {}) is None
+    # Профиль стороны сделки — тоже имя: половина карточек хранит сторону
+    # ссылкой, и поиск только по заголовку их бы не увидел.
+    by_profile = {"title": "Покупка 100% оператора связи", "buyer": "sber"}
+    assert ns.match_reason(sub, by_profile, {"sber": {"name": "Сбербанк"}})

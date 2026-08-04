@@ -441,3 +441,45 @@ def test_company_page_uses_one_compact_deal_section():
     assert "Связи по сделкам" not in html
     assert "Подробные карточки" not in html
     assert "Также упоминается" not in html
+
+
+def test_subscription_actually_reaches_the_subscriber(client):
+    """Сквозной путь подписки: оформил — появилась сделка — пришло уведомление.
+
+    Проверяется именно то, что было сломано: подписки сохранялись и
+    показывались, но никто никогда не сверял их с новыми сделками, и
+    обещание интерфейса «Новые совпадения появятся в уведомлениях» не
+    выполнялось ни разу. Тест написан так, чтобы падать на коде до правки:
+    без шага рассылки уведомление не появится.
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "publish"))
+    import notify_subscribers
+
+    user = _login(client, "subscriber@example.com")
+    assert client.post("/api/subscriptions",
+                       json={"industry": "ИТ и интернет",
+                             "min_amount_mln_rub": 1000}).status_code == 200
+
+    fresh = {"id": "test-subscription-deal", "title": "Крупная сделка в ИТ",
+             "ind": "ИТ и интернет", "sum": "8,7 млрд ₽"}
+    quiet = {"id": "test-subscription-small", "title": "Мелкая сделка в ИТ",
+             "ind": "ИТ и интернет", "sum": "200 млн ₽"}
+    other = {"id": "test-subscription-other", "title": "Крупная сделка в финансах",
+             "ind": "Финансы", "sum": "8,7 млрд ₽"}
+
+    db = get_session()
+    try:
+        stats = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
+        assert stats["created"] == 1, f"ушло {stats['created']} уведомлений вместо одного: {stats}"
+        rows = db.query(Notification).filter_by(user_id=user.id).all()
+        assert [r.deal_id for r in rows] == ["test-subscription-deal"], \
+            "уведомление пришло не о той сделке"
+        assert "отрасль" in (rows[0].body or ""), "в уведомлении не сказано, почему оно пришло"
+        # Второй прогон по тем же карточкам не должен слать то же самое ещё раз:
+        # «уже сообщали» — это существующая строка Notification, а не отдельный
+        # файл состояния, который на боевом хосте потерялся бы при деплое.
+        again = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
+        assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечён: {again}"
+    finally:
+        db.close()

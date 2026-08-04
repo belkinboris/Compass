@@ -422,18 +422,30 @@ def main(argv):
         from db.session import SessionLocal
         from notification_service import notify_deal_watchers
         base_url = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+        sent, worth = 0, 0
         with SessionLocal() as db:
             for update in updates:
                 if not update.get('notify'):
                     continue
+                worth += 1
                 deal = by_id.get(update['deal_id']) or {}
-                notify_deal_watchers(
+                sent += notify_deal_watchers(
                     db,
                     update['deal_id'],
                     'Обновлена сделка: %s' % (deal.get('title') or update['deal_id']),
                     ', '.join(update.get('changes') or []) or 'В карточке появились новые подтверждённые сведения.',
                     '%s/#/deal/%s' % (base_url, update['deal_id']),
                 )
+        # Ноль уведомлений на непустой список новостей значит одно из двух:
+        # на эти сделки никто не подписан ЛИБО мы смотрели не в ту базу.
+        # Второе — обычное состояние одноразового контейнера рутины, и
+        # молчаливый ноль там неотличим от честного «подписчиков нет».
+        print('Уведомлений наблюдателям: %d (карточек с новым фактом: %d)' % (sent, worth))
+        if worth and not sent and not (os.environ.get('DATABASE_URL') or '').strip():
+            print('ВНИМАНИЕ: DATABASE_URL не задан — работали с локальным файлом '
+                  'kompas.db, а не с базой сайта. Ноль здесь не доказывает, что '
+                  'подписчиков нет. Для прогона в одноразовом контейнере это '
+                  'ожидаемо — чинить здесь нечего.')
     except Exception as exc:
         print('Предупреждение: уведомления не отправлены: %s' % exc)
     print('\nДополнено карточек: %d. Задание на правку постов: data/inbox/updates/%s.json'
