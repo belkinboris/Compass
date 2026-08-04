@@ -376,7 +376,9 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   .an-filters{gap:8px 10px;padding:11px 12px}
   .an-filters label{flex:1 1 calc(50% - 5px);min-width:0}
   .an-filters select{max-width:100%;width:100%;padding:6px 8px}
-  .an-filters-note{flex:1 1 100%;margin-left:0;padding-bottom:0}
+  /* Подпись встаёт рядом с третьим селектом, а не отдельной строкой: панель
+     липкая, и каждая лишняя строка — это минус строка графика на телефоне. */
+  .an-filters-note{flex:1 1 calc(50% - 5px);min-width:0;margin-left:0;padding-bottom:7px;align-self:flex-end}
 }
 .an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px;align-items:start}
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -1165,7 +1167,16 @@ const advFirmLink = name => {
 /* ================= РОУТЕР ================= */
 const app = document.getElementById("app");
 const co = id => COMPANIES[id];
-const fmtDate = d => d==="unknown" ? "Дата уточняется" : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"short",year:"numeric"}).replace(" г.","");
+/* Дата бывает трёх видов, и все три надо назвать своим именем.
+   «2024-03-14» — знаем день; «2024» — знаем ТОЛЬКО год (у 238 карточек день
+   не восстановился ни по статье-источнику, ни по тексту, и раньше там стояла
+   заглушка «1 января» — сайт утверждал день, которого не знал, а помесячный
+   график рисовал январский всплеск, которого на рынке не было); «unknown» —
+   не знаем и года. `new Date("2024")` молча даёт первое января, поэтому
+   год-только надо ловить ДО разбора, а не после. */
+const fmtDate = d => d==="unknown" ? "Дата уточняется"
+  : /^\d{4}$/.test(String(d)) ? String(d)+" год"
+  : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"short",year:"numeric"}).replace(" г.","");
 const esc = s => s.replace(/</g,"&lt;");
 /* Написание с разделителем и без должно искаться одинаково: «авто ру» и
    «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии» — в заголовках
@@ -4080,8 +4091,9 @@ const SUGGESTS = ["Кто сопровождал сделки в базе?","К�
    вызывается заново на каждый выбор, и локальная переменная обнулялась бы. */
 let anYear = "Все";
 let anInd = "Все";
-function analyticsFiltersHtml(yearsAvail, shown, total){
-  const off = anYear==="Все" && anInd==="Все";
+let anType = "Все";
+function analyticsFiltersHtml(yearsAvail, typesAvail, shown, total){
+  const off = anYear==="Все" && anInd==="Все" && anType==="Все";
   return `
   <div class="an-filters reveal">
     <label>Период
@@ -4089,6 +4101,9 @@ function analyticsFiltersHtml(yearsAvail, shown, total){
     </label>
     <label>Отрасль
       <select id="anIndSel"><option value="Все">Все отрасли</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option value="${esc(i)}" ${i===anInd?"selected":""}>${esc(i)}</option>`).join("")}</select>
+    </label>
+    <label>Тип сделки
+      <select id="anTypeSel"><option value="Все">Все типы</option>${typesAvail.map(([t,n])=>`<option value="${esc(t)}" ${t===anType?"selected":""}>${esc(t)} (${n})</option>`).join("")}</select>
     </label>
     <span class="an-filters-note">${off?`Без фильтров: ${total} ${plural(total,"сделка","сделки","сделок")}`:`Показано ${shown} из ${total}`}</span>
     ${off?"":`<button class="chip" id="anReset">Сбросить</button>`}
@@ -4099,18 +4114,20 @@ function bindAnalyticsFilters(){
   if(y) y.onchange = ()=>{anYear=y.value; renderAnalytics(); rerun();};
   const i = document.getElementById("anIndSel");
   if(i) i.onchange = ()=>{anInd=i.value; renderAnalytics(); rerun();};
+  const t = document.getElementById("anTypeSel");
+  if(t) t.onchange = ()=>{anType=t.value; renderAnalytics(); rerun();};
   const r = document.getElementById("anReset");
-  if(r) r.onclick = ()=>{anYear="Все"; anInd="Все"; renderAnalytics(); rerun();};
+  if(r) r.onclick = ()=>{anYear="Все"; anInd="Все"; anType="Все"; renderAnalytics(); rerun();};
 }
 function renderAnalytics(){
   /* Страница для работы, а не для чтения сверху вниз: фильтры стоят ПЕРВЫМИ и
      сужают ВСЕ карточки разом. Раньше здесь была одна длинная простыня цифр по
      всей базе — посмотреть «что было в ИТ в 2025-м» было нечем. */
   const raw = [
-    ...DEALS.map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
-    ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,industries:[m.ind],title:m.title,kind:"mini"})),
-    ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,industries:[c.ind],title:c.title,kind:"chan"})),
-    ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,industries:[b.ind],title:b.title,kind:"bulk"})),
+    ...DEALS.map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),type:d.type,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
+    ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,industries:[m.ind],type:m.type,title:m.title,kind:"mini"})),
+    ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,industries:[c.ind],type:c.type,title:c.title,kind:"chan"})),
+    ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,industries:[b.ind],type:b.type,title:b.title,kind:"bulk"})),
   ];
   /* `industries` кладём прямо в запись. Прежний код спрашивал
      `DEALS.includes(d)`, но `d` здесь — уже КОПИЯ, созданная map: проверка
@@ -4121,18 +4138,28 @@ function renderAnalytics(){
   if(anYear!=="Все" && !yearsAvail.includes(anYear)) anYear="Все";
   const okYear = x => anYear==="Все" || yearOf(x)===anYear;
   const okInd = x => anInd==="Все" || (x.industries||[x.ind]).includes(anInd);
-  const all = raw.filter(x=>okYear(x)&&okInd(x));
-  const deals = DEALS.filter(d=>(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)&&hasIndustry(d,anInd));
+  /* Тип сделки — не отрасль: база шире M&A (128 инвестиций, 44 IPO, 43 продажи
+     с торгов), и смотреть их отдельно осмысленно. Список типов строим по самой
+     базе, а не по константе: справочник и данные разъезжались уже дважды. */
+  const typeCount = {};
+  raw.forEach(x=>{if(x.type) typeCount[x.type]=(typeCount[x.type]||0)+1;});
+  const typesAvail = Object.entries(typeCount).sort((a,b)=>b[1]-a[1]);
+  if(anType!=="Все" && !typeCount[anType]) anType="Все";
+  const okType = x => anType==="Все" || x.type===anType;
+  const all = raw.filter(x=>okYear(x)&&okInd(x)&&okType(x));
+  const deals = DEALS.filter(d=>(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)
+    &&hasIndustry(d,anInd)&&(anType==="Все"||d.type===anType));
   const dealIds = new Set(deals.map(d=>d.id));
-  const filtersOff = anYear==="Все" && anInd==="Все";
+  const filtersOff = anYear==="Все" && anInd==="Все" && anType==="Все";
   // Подпись под каждым графиком должна называть ТУ выборку, по которой он
   // построен, иначе «все сделки базы» останется стоять над отфильтрованным.
   const scope = filtersOff ? "Все сделки сайта"
-    : "Выборка: " + [anInd!=="Все"?`отрасль «${anInd}»`:"", anYear!=="Все"?`${anYear} год`:""].filter(Boolean).join(", ");
+    : "Выборка: " + [anInd!=="Все"?`отрасль «${anInd}»`:"", anType!=="Все"?`тип «${anType}»`:"",
+                     anYear!=="Все"?`${anYear} год`:""].filter(Boolean).join(", ");
   if(!all.length){
     app.innerHTML = `
     <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1></div>
-    ${analyticsFiltersHtml(yearsAvail, 0, raw.length)}
+    ${analyticsFiltersHtml(yearsAvail, typesAvail, 0, raw.length)}
     <p class="reveal" style="color:var(--muted);max-width:640px">По этой выборке в базе нет ни одной сделки. Снимите один из фильтров.</p>`;
     bindAnalyticsFilters(); rerun(); return;
   }
@@ -4147,8 +4174,13 @@ function renderAnalytics(){
      («2025 — 100%») не график, а строка, и работать с ним нечем. */
   const MONTHS = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
   const byMonth = {};
+  let yearOnly = 0;
   if(anYear!=="Все"){
-    all.forEach(x=>{const m=String(x.date||"").slice(5,7); if(/^\d\d$/.test(m)) byMonth[m]=(byMonth[m]||0)+1;});
+    all.forEach(x=>{
+      const m=String(x.date||"").slice(5,7);
+      if(/^\d\d$/.test(m)) byMonth[m]=(byMonth[m]||0)+1;
+      else yearOnly++;   // у карточки известен только год — в месяц её класть нечего
+    });
   }
   const byPeriod = anYear==="Все" ? years
     : Object.entries(byMonth).sort((a,b)=>a[0].localeCompare(b[0])).map(([m,n])=>[MONTHS[+m-1]||m,n]);
@@ -4236,14 +4268,14 @@ function renderAnalytics(){
   const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
   <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Считаем по сделкам, которые показаны на сайте, — это ${raw.length} ${plural(raw.length,"карточка","карточки","карточек")} с 2022 года. Графики ниже охватывают разное число сделок: под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
-  ${analyticsFiltersHtml(yearsAvail, all.length, raw.length)}
+  ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid">
     <div class="an-card reveal">
       <span class="label">${anYear==="Все"?"Сделок по годам":`Сделок по месяцам, ${anYear}`}</span>
       ${byPeriod.map(([k,n],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${anYear==="Все"
         ? `${scope} по дате: на графике ${yearsShown} из ${all.length}. ${thinNote}${ndCount?` У ${ndCount} ${plural(ndCount,"сделки","сделок","сделок")} даты нет.`:""}`
-        : `${scope}: ${all.length} ${plural(all.length,"сделка","сделки","сделок")} с датой внутри года. Месяц берётся из даты карточки — у части сделок это дата публикации источника, а не подписания.`}</p>
+        : `${scope}: ${all.length-yearOnly} ${plural(all.length-yearOnly,"сделка","сделки","сделок")} с известным месяцем${yearOnly?`; ещё у ${yearOnly} известен только год — в график они не попали`:""}. Месяц берётся из даты карточки — у части сделок это дата публикации источника, а не подписания.`}</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Топ-10 отраслей</span>

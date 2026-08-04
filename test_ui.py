@@ -552,3 +552,60 @@ def test_wordmark_returns_to_the_top(page, base_url):
     page.click(".top .wordmark")
     page.wait_for_timeout(1200)
     assert page.evaluate("window.scrollY") < 60, "логотип не вернул наверх"
+
+
+def test_analytics_deal_type_filter(page, base_url):
+    """База шире M&A: 128 инвестиций, 44 IPO, 43 продажи с торгов.
+
+    Смотреть их отдельно осмысленно, поэтому тип — такой же фильтр, как период
+    и отрасль, и он складывается с ними по И.
+    """
+    visit(page, base_url, "#/analytics")
+    assert page.locator("#anTypeSel").count() == 1, "нет фильтра по типу сделки"
+    whole = page.inner_text(".an-filters-note")
+
+    page.select_option("#anTypeSel", "IPO")
+    page.wait_for_timeout(600)
+    assert not page.crashes, page.crashes[:3]
+    only_ipo = page.inner_text(".an-filters-note")
+    assert only_ipo != whole, "фильтр типа ничего не сузил"
+
+    page.select_option("#anYearSel", "2025")
+    page.wait_for_timeout(600)
+    both = int(re.search(r"Показано (\d+)", page.inner_text(".an-filters-note")).group(1))
+    ipo_all = int(re.search(r"Показано (\d+)", only_ipo).group(1))
+    assert both < ipo_all, "тип и период не складываются по И"
+    assert "тип «IPO»" in page.inner_text(".an-card p"), "подпись не называет тип выборки"
+
+    page.click("#anReset")
+    page.wait_for_timeout(600)
+    assert page.inner_text(".an-filters-note") == whole, "сброс не снял фильтр типа"
+
+
+def test_year_only_date_is_never_shown_as_the_first_of_january(page, base_url):
+    """У 238 карточек день неизвестен, и врать о нём нельзя.
+
+    Раньше там стояла заглушка «1 января»: сайт показывал день, которого не
+    знал, лента ставила сделку первым числом, а помесячный график рисовал
+    январский всплеск. Теперь в базе лежит «2023», и это надо ПОКАЗАТЬ как
+    «2023 год» — `new Date("2023")` молча даёт первое января, поэтому дефект
+    вернётся беззвучно, если формат перестанут ловить до разбора.
+    """
+    visit(page, base_url, "#/")
+    ids = page.evaluate("() => DEALS.filter(d => /^\\d{4}$/.test(d.date)).map(d => d.id)")
+    assert ids, "в базе не осталось карточек с годом без дня — проверять нечего"
+    assert page.evaluate('() => fmtDate("2023")') == "2023 год"
+
+    for deal_id in ids[:4]:
+        visit(page, base_url, f"#/deal/{deal_id}")
+        head = page.inner_text(".d-head").lower()
+        assert "янв" not in head, f"{deal_id}: показан выдуманный день"
+        assert "год" in head, f"{deal_id}: год не назван"
+
+    # Помесячный график обязан их исключить и сказать об этом, а не молча
+    # приписать январю: в этом и была вся беда.
+    visit(page, base_url, "#/analytics")
+    page.select_option("#anYearSel", "2025")
+    page.wait_for_timeout(600)
+    caption = page.inner_text(".an-card p")
+    assert "известен только год" in caption, f"график молчит про них: {caption[:160]!r}"

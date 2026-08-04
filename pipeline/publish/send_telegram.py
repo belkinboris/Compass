@@ -203,7 +203,12 @@ def sendable(deal):
         or (deal.get('target') or deal.get('asset') or deal.get('asset_id'))
 
 
-def main(write):
+def main(write, ignore_pace=False):
+    """`ignore_pace` — то же, что ключ `--now`, но параметром.
+
+    Нужен тестам: они проверяют лимит сообщений за прогон и правило бэклога, а
+    не дневное окно, и без явного обхода темпа проходили бы только с 10 до 19
+    по Москве — то есть падали бы по вечерам, ничего при этом не сломавшись."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     chat_id = os.environ.get('TELEGRAM_CHANNEL_ID', '')
     data = json.load(open(DATA, encoding='utf-8'))
@@ -255,7 +260,7 @@ def main(write):
     # обойдёт защиту с другой стороны.
     # Равномерная выдача. Ключ `--now` её отключает: он для ручного запуска,
     # когда владелец сам решил опубликовать всё немедленно.
-    if '--now' in sys.argv:
+    if ignore_pace or '--now' in sys.argv:
         allow, why = len(to_send), 'ключ --now: равномерная выдача отключена'
     else:
         allow, why = pace_allowance(len(to_send))

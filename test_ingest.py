@@ -767,7 +767,9 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     fake = _FakeClient([{"ok": True, "result": {"message_id": 1000 + i}} for i in range(3)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
 
-    send_telegram.main(write=True)
+    # ignore_pace: тест про ЛИМИТ за прогон, а не про дневное окно. Без него
+    # он проходил бы только с 10 до 19 по Москве и падал бы по вечерам.
+    send_telegram.main(write=True, ignore_pace=True)
 
     assert len(fake.calls) == 3, "за один прогон ушло больше сообщений, чем разрешает лимит"
     assert len(sleeps) == 2, "между тремя отправками должно быть ровно две паузы"
@@ -798,7 +800,10 @@ def test_main_skips_seeded_backlog_entries_without_new_facts(monkeypatch, tmp_pa
         return boom
     monkeypatch.setattr(send_telegram, "_client", no_client)
 
-    send_telegram.main(write=True)
+    # ignore_pace обязателен и здесь, хотя тест ждёт ПУСТОТЫ: вне дневного
+    # окна не уходит ничего в принципе, и тест проходил бы по ложной причине —
+    # не потому, что правило бэклога работает, а потому, что сейчас вечер.
+    send_telegram.main(write=True, ignore_pace=True)
 
     assert boom.calls == [], "бэклог-карточку без нового факта нельзя ни публиковать, ни редактировать"
 
@@ -825,7 +830,8 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
     fake = _FakeClient([{"ok": True, "result": {"message_id": 777}}])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
 
-    send_telegram.main(write=True)
+    # ignore_pace: тест про правило бэклога, а не про дневное окно (см. выше).
+    send_telegram.main(write=True, ignore_pace=True)
 
     assert len(fake.calls) == 1, "у бэклог-карточки с новым фактом должна уйти ровно одна отправка"
     url, payload = fake.calls[0]
