@@ -27,6 +27,7 @@ from pydantic import BaseModel
 
 import auth
 import notification_service
+import subscription_feed
 from company_catalog import get_company_profile
 from deal_catalog import get_deal
 from deal_export import render_deal_pdf
@@ -92,6 +93,17 @@ def _create_account_tables():
             logger.error("не удалось добавить password_hash в users: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
+
+
+# Подписки сверяются здесь, а не в притоке: приток работает в другом облаке, а
+# база пользователей стоит во внутренней сети хостинга и оттуда недостижима.
+# Отдельного расписания у сверки нет и не нужно — новые карточки попадают на
+# сайт ровно одним способом, деплоем нового deals_promoted.json, и старт
+# процесса после деплоя и есть единственный момент, когда есть что сверять.
+# Первый прогон никого не будит: он только запоминает состав базы.
+@app.on_event("startup")
+def _match_subscriptions_against_new_deals():
+    subscription_feed.scan_on_startup()
 
 
 def get_db():

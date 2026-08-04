@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 """Приток, шаг 5: личное уведомление подписчику о подходящей ему сделке.
 
+ГДЕ ЖИВЁТ САМО ПРАВИЛО. В `subscription_feed.py` рядом с приложением: сверку
+подписок делает САЙТ на старте после деплоя, потому что база пользователей
+стоит во внутренней сети хостинга и из контейнера притока недостижима. Этот
+файл — командная строка к тем же правилам: посмотреть, кому что ушло бы,
+и замерить правило на своей базе, не поднимая сайт.
+
 ЧТО БЫЛО СЛОМАНО. Подписка («сообщи о сделках в отрасли X от суммы Y»)
 сохранялась (`SavedFilter`), показывалась в кабинете и удалялась — но НИКТО
 никогда не сверял её с новыми сделками. Интерфейс при сохранении подборки
@@ -50,136 +56,22 @@
 """
 import json
 import os
-import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
-KIND = 'subscription_match'
+import subscription_feed  # noqa: E402
 
-# Заглушки суммы. Анкерим с обеих сторон: «не раскрыта (EV оценена в 21 млрд ₽)»
-# — это данные, а не пустота (урок из CLAUDE.md).
-PLACEHOLDER = re.compile(
-    r'^\s*(?:не\s+раскрыт[а-яё]*|публично\s+не\s+сообщал[а-яё]*|'
-    r'не\s+привлекал[а-яё]*|нет\s+данных|[—–-])\s*$', re.I)
-
-UNITS = {'тыс': 0.001, 'млн': 1.0, 'млрд': 1000.0, 'трлн': 1000000.0}
-
-# Пробел внутри числа — разделитель разрядов («41 500 млн ₽»), а запятая —
-# десятичная часть («12,5 млрд»). Значок ₽ обязателен: он и есть признак того,
-# что число рублёвое, — у долларов и евро значок стоит ПЕРЕД числом и сюда не
-# попадёт.
-NUM = r'\d[\d\s\u00a0]*(?:[.,]\d+)?'
-AMOUNT = re.compile(
-    r'(' + NUM + r')\s*\+?'                  # число; «300+ млн» — это тоже нижняя граница
-    r'(?:\s*[\u2013\u2014-]\s*' + NUM + r')?'  # верхняя граница диапазона — её не берём
-    r'\s*(?:(тыс|млн|млрд|трлн)[а-яё.]*\s*)?'  # единицы может и не быть
-    r'\u20bd')                           # и обязательный значок рубля
-
-# Сумма без единицы — это рубли («450 090 ₽», «1 ₽» у символических сделок).
-UNIT_NONE = 1e-6
-
-
-def amount_mln_rub(text):
-    """Сумма карточки в млн ₽ или None, если разобрать нельзя."""
-    if not text or PLACEHOLDER.match(text):
-        return None
-    found = AMOUNT.search(text)
-    if not found:
-        return None
-    raw = re.sub(r'[\s\u00a0]', '', found.group(1)).replace(',', '.')
-    try:
-        value = float(raw)
-    except ValueError:
-        return None
-    return value * (UNITS[found.group(2)] if found.group(2) else UNIT_NONE)
-
-
-def _self_check():
-    """Правило проверяется на себе, а не на глаз (соглашение репозитория)."""
-    assert amount_mln_rub('12,5 млрд ₽') == 12500.0
-    assert amount_mln_rub('41 500 млн ₽') == 41500.0
-    # Из диапазона — нижняя граница, тильда и «(по оценке)» не мешают.
-    assert amount_mln_rub('200–550 млн ₽ (по оценке)') == 200.0
-    assert amount_mln_rub('~4,5–5 млрд ₽ (по оценке)') == 4500.0
-    # Валюта не конвертируется, заглушка — не число.
-    assert amount_mln_rub('$1,2 млрд') is None
-    assert amount_mln_rub('€800 млн') is None
-    assert amount_mln_rub('Не раскрыта') is None
-    assert amount_mln_rub('не раскрыта') is None
-    # А вот это не заглушка: сумма названа в скобках и должна читаться.
-    assert amount_mln_rub('Не раскрыта (EV оценена в 21 млрд ₽)') == 21000.0
-    # Рублёвая часть берётся, даже когда рядом стоит пересчёт в валюте.
-    assert amount_mln_rub('17,7 млрд ₽ (191,5 млн $)') == 17700.0
-    # Без единицы значок ₽ значит рубли, а не миллионы: «1 ₽» — символическая
-    # цена, и подписка «от 500 млн» на неё сработать не должна.
-    assert amount_mln_rub('450 090 ₽') == 0.45009
-    assert amount_mln_rub('2 800 000 000 ₽') == 2800.0
-    assert amount_mln_rub('1 ₽') == 1e-6
-    # «300+ млн» — тоже нижняя граница, а не незнакомая запись.
-    assert amount_mln_rub('300+ млн ₽') == 300.0
-    assert amount_mln_rub('1+ млрд ₽') == 1000.0
-    # А вот тут числа нет вовсе — молчим, а не угадываем «несколько».
-    assert amount_mln_rub('несколько сотен млн ₽ (по оценке)') is None
-    assert amount_mln_rub('несколько млрд ₽ (точно не указана)') is None
-
-
-def company_names(deal, companies):
-    """Имена профилей, на которые ссылается карточка."""
-    names = []
-    for field in ('buyer', 'target', 'seller_id', 'asset_id'):
-        profile = companies.get(deal.get(field) or '')
-        if profile and profile.get('name'):
-            names.append(profile['name'])
-    return names
-
-
-def haystack(deal, companies):
-    """Текст, по которому ищется ключевое слово подписки.
-
-    Только НАЗВАНИЯ и заголовок — не всё содержимое карточки: подписка на
-    «Сбер» не должна срабатывать оттого, что банк упомянут в пояснении как
-    кредитор чужой сделки.
-    """
-    parts = [deal.get('title') or '', deal.get('seller') or '',
-             deal.get('buyer_name') or '', deal.get('asset') or '']
-    parts.extend(company_names(deal, companies))
-    return ' | '.join(parts).lower()
-
-
-def match_reason(flt, deal, companies):
-    """Почему эта сделка подходит подписке. None — не подходит.
-
-    Условия складываются по И: подписка «отрасль X + от Y» — это про сделки в
-    X дороже Y, а не про объединение двух лент.
-    """
-    reasons = []
-    industry = (getattr(flt, 'industry', None) or '').strip()
-    keyword = (getattr(flt, 'keyword', None) or '').strip()
-    floor = getattr(flt, 'min_amount_mln_rub', None)
-
-    if not industry and not keyword and floor is None:
-        return None  # подписки «на всё» не бывает, её не даёт создать и API
-
-    if industry:
-        if (deal.get('ind') or '') != industry:
-            return None
-        reasons.append('отрасль «%s»' % industry)
-    if keyword:
-        if keyword.lower() not in haystack(deal, companies):
-            return None
-        reasons.append('упоминание «%s»' % keyword)
-    if floor is not None:
-        value = amount_mln_rub(deal.get('sum'))
-        if value is None or value < float(floor):
-            return None
-        reasons.append('сумма от %s млн ₽' % _num(float(floor)))
-    return ', '.join(reasons)
-
-
-def _num(value):
-    return ('%.0f' % value) if abs(value - round(value)) < 1e-9 else ('%.1f' % value)
+KIND = subscription_feed.KIND
+PLACEHOLDER = subscription_feed.PLACEHOLDER
+amount_mln_rub = subscription_feed.amount_mln_rub
+haystack = subscription_feed.haystack
+match_reason = subscription_feed.match_reason
+notify_new_deals = subscription_feed.notify_new_deals
+_self_check = subscription_feed.self_check
 
 
 def database_is_local_file():

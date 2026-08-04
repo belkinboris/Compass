@@ -401,6 +401,26 @@ class CorrectionRequest(Base):
 
 # --------------------------------------- уведомления / экспорт / ассистент ---
 
+class DealSeen(Base):
+    """Когда карточка впервые появилась НА САЙТЕ.
+
+    Это не дата сделки и не дата статьи: карточка, добавленная сегодня, может
+    описывать сделку 2022 года. Для рассылки по подпискам важно именно «когда
+    она у нас появилась» — иначе подписавшийся сегодня получил бы всю историю
+    рынка одним залпом.
+
+    Запись живёт в базе, а не в файле рядом с кодом: файл на Timeweb
+    переписывается при каждом деплое, и состояние «о чём уже сообщали»
+    обнулялось бы — читатель получал бы одни и те же уведомления снова.
+    """
+
+    __tablename__ = "deals_seen"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    deal_id: Mapped[str] = mapped_column(String(80), unique=True)
+    first_seen_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
 class DealWatch(Base):
     __tablename__ = "deal_watches"
     __table_args__ = (UniqueConstraint("user_id", "deal_id", name="uq_user_deal_watch"),)

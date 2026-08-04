@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 
 import main
 from db.models import (
-    Company, FinancialReport, LegalEntity, LegalEntityMatchStatus,
+    Company, DealSeen, FinancialReport, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
 )
 from db.session import get_session
@@ -481,5 +481,58 @@ def test_subscription_actually_reaches_the_subscriber(client):
         # файл состояния, который на боевом хосте потерялся бы при деплое.
         again = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
         assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечён: {again}"
+    finally:
+        db.close()
+
+
+def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
+    """Сверка подписок на старте сайта: первый прогон молчит, второй сообщает.
+
+    Приток работает в другом облаке и до базы пользователей не достаёт (она во
+    внутренней сети хостинга), поэтому сверять подписки может только сам сайт.
+    Единственный момент, когда на сайте появляются новые карточки, — деплой
+    нового deals_promoted.json, то есть старт процесса.
+
+    Первый прогон обязан МОЛЧАТЬ: пока таблица `deals_seen` пуста, «новыми»
+    формально являются все полторы тысячи карточек, и честный ответ «всё»
+    означал бы залп уведомлений по всей истории рынка.
+    """
+    import subscription_feed
+
+    user = _login(client, "deploy-subscriber@example.com")
+    # Ключевое слово нарочно уникальное: база тестов общая на весь файл, и
+    # подписка «отрасль ИТ» ловила бы заодно подписчика из соседнего теста —
+    # счётчик стал бы зависеть от порядка запуска.
+    assert client.post("/api/subscriptions",
+                       json={"keyword": "Компасдеплойтест"}).status_code == 200
+
+    # Отрасль и сумма подобраны так, чтобы под подписку соседнего теста
+    # («ИТ и интернет» от 1000 млн ₽) эти карточки НЕ попадали.
+    old = {"id": "test-deploy-old", "title": "Старая сделка Компасдеплойтест",
+           "ind": "Логистика", "sum": "Не раскрыта"}
+    new = {"id": "test-deploy-new", "title": "Новая сделка Компасдеплойтест",
+           "ind": "Логистика", "sum": "Не раскрыта"}
+
+    db = get_session()
+    try:
+        db.query(DealSeen).delete()
+        db.commit()
+
+        first = subscription_feed.scan_new_deals(db, [old], {})
+        assert first["seeded"] == 1 and first["created"] == 0, \
+            f"первый прогон разбудил подписчика: {first}"
+
+        second = subscription_feed.scan_new_deals(db, [old, new], {})
+        assert second["fresh"] == 1, f"новой карточки не заметили: {second}"
+        rows = db.query(Notification).filter_by(user_id=user.id).all()
+        assert [r.deal_id for r in rows] == ["test-deploy-new"], \
+            "уведомление пришло не о той карточке"
+
+        # Перезапуск процесса без новых карточек не шлёт ничего повторно:
+        # состояние живёт в базе, а не в файле рядом с кодом, который на
+        # хостинге переписывается при каждом деплое.
+        third = subscription_feed.scan_new_deals(db, [old, new], {})
+        assert third["fresh"] == 0 and third["created"] == 0, \
+            f"перезапуск повторил уведомления: {third}"
     finally:
         db.close()
