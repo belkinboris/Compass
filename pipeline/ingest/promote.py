@@ -143,6 +143,30 @@ def check(draft, base, idx, inds):
     return bad, hold
 
 
+def confidence(draft):
+    """Насколько мы уверены, что это сделка и что карточка полна.
+
+    Заменяет глухой тормоз E9 осмысленной развилкой. Уверенность — не
+    вероятность, а перечень того, что удалось установить: названа сторона,
+    назван предмет, названа сумма, известна отрасль. Карточка, у которой всё
+    это есть, спорной не бывает — «Ригла приобрела аптечную сеть „Здоровый
+    город"» не требует человека. Карточка без сторон («Кто и почему продаёт
+    ПВЗ Wildberries») требует всегда.
+    """
+    have = []
+    if draft.get('buyer') or draft.get('buyer_name'):
+        have.append('покупатель')
+    if draft.get('seller') or draft.get('seller_id'):
+        have.append('продавец')
+    if draft.get('target') or draft.get('asset_id') or draft.get('asset'):
+        have.append('предмет')
+    if draft.get('ind'):
+        have.append('отрасль')
+    if draft.get('sum'):
+        have.append('сумма')
+    return have
+
+
 def new_id(existing):
     """id того же вида, что у остальных карточек: буква g и 8 знаков."""
     n = 0
