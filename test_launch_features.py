@@ -636,3 +636,17 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
     assert next(o for c, o, _ in publish if c["id"] == "a1") == "текст владельца"
     assert {c["id"] for c, _w in hold} == {"a2"}
     assert {c["id"] for c, _w in wait} == {"a4", "a5", "a6"}
+
+
+def test_webhook_subscribes_to_button_clicks_not_only_messages():
+    """Забыть callback_query в ALLOWED_UPDATES — значит зарегистрировать вебхук,
+    на который кнопки молча не доходят: Telegram их просто не шлёт, если тип
+    не в списке, а «зарегистрировано» при этом печатается как успех. Ровно
+    так и было до 5 августа: модерация написана целиком, а её кнопки были бы
+    невидимы боту, потому что регистрация вебхука просила только 'message'.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/publish")))
+    import setup_telegram_webhook as w
+    assert "callback_query" in w.ALLOWED_UPDATES
+    assert "message" in w.ALLOWED_UPDATES
