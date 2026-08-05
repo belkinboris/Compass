@@ -14,6 +14,17 @@
 /api/moderation/decisions и применяет approve.py. Напрямую из этого контейнера
 решения не прочитать: база сайта в приватной сети хостинга.
 
+ГРУППА ИЛИ ЛИЧНЫЕ СООБЩЕНИЯ — ДВЕ РАЗНЫЕ ВЕЩИ. `TELEGRAM_REVIEW_CHAT_IDS`
+(личные id владельца и партнёра) — это ПРАВО решать: вебхук проверяет по нему
+того, кто нажал кнопку или ответил, и только его решение засчитывается.
+`TELEGRAM_REVIEW_GROUP_ID` (один id общего чата, необязательный) — это АДРЕС
+отправки: если задан, черновик уходит туда одной копией, оба видят один и тот
+же пост и решение друг друга. Не задан — черновик уходит личным сообщением
+каждому из TELEGRAM_REVIEW_CHAT_IDS отдельно, у каждого своя копия кнопок.
+Право решать всегда проверяется по личному id (`from.id` в апдейте), а не по
+чату, куда упало сообщение, — иначе в группе, где `chat.id` один на всех,
+проверка либо пускала бы кого угодно, либо не пускала бы никого.
+
 МОЛЧАНИЕ — СОГЛАСИЕ. Если за сутки никто не ответил, approve.py публикует
 карточку как есть: платформа только что починила приток, и снова остановить
 его немым шагом было бы повторением тормоза E9. Это написано в самом сообщении.
@@ -40,7 +51,30 @@ SITE = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
 
 
 def reviewers():
+    """Личные id владельца и партнёра — ПРАВО решать, а не адрес отправки.
+
+    Проверяется на стороне вебхука (main.py: `_is_reviewer`) по отправителю
+    сообщения или кнопки (`from.id`), а не по чату, в который упало сообщение
+    (`chat.id`). Это важно для группы: у всех участников общий `chat.id`, а
+    `from.id` у каждого свой.
+    """
     return [x.strip() for x in os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '').split(',') if x.strip()]
+
+
+def send_targets():
+    """Куда СЛАТЬ черновик — не то же самое, что «кто вправе решать».
+
+    Если задана общая группа (`TELEGRAM_REVIEW_GROUP_ID` — один id, у групп
+    Telegram он отрицательный), пост уходит туда ОДИН раз: владелец и партнёр
+    видят один и тот же черновик, видят решение друг друга и могут ответить в
+    одной ветке. Без группы — прежнее поведение: личное сообщение КАЖДОМУ из
+    `TELEGRAM_REVIEW_CHAT_IDS» отдельно; тогда у каждого своя копия кнопок, и
+    если один нажмёт «Опубликовать», у другого кнопки останутся нетронутыми
+    (актуальное решение всё равно применится — `approve.py` берёт последнее по
+    времени, — но со стороны это выглядит нескоординированно).
+    """
+    group = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
+    return [group] if group else reviewers()
 
 
 def draft_message(card, companies):
@@ -68,8 +102,10 @@ def main(write=False):
     pending = json.load(open(PENDING, encoding='utf-8'))
     comps = json.load(open(DATA, encoding='utf-8'))['companies']
     todo = [c for c in pending['cards'] if not c.get('draft_sent')]
-    chats = reviewers()
-    print('Черновиков без рассылки: %d | проверяющих: %d' % (len(todo), len(chats)))
+    chats = send_targets()
+    print('Черновиков без рассылки: %d | адресов отправки: %d%s'
+          % (len(todo), len(chats),
+             ' (общая группа)' if os.environ.get('TELEGRAM_REVIEW_GROUP_ID') else ''))
     if not todo:
         return 0
     for card in todo[:3]:
@@ -77,7 +113,7 @@ def main(write=False):
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     if not (write and token and chats):
         if not chats:
-            print('\nTELEGRAM_REVIEW_CHAT_IDS не задан — отправлять некому.')
+            print('\nНи TELEGRAM_REVIEW_GROUP_ID, ни TELEGRAM_REVIEW_CHAT_IDS не заданы — отправлять некому.')
         if not token:
             print('TELEGRAM_BOT_TOKEN не задан — показываю план, не отправляю.')
         if not write:

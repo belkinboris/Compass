@@ -866,13 +866,20 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     message = payload.message or {}
     text = str(message.get("text") or "")
     chat_id = (message.get("chat") or {}).get("id")
+    # Право решать проверяется по ОТПРАВИТЕЛЮ (message.from.id), а не по чату,
+    # в который упало сообщение (message.chat.id). В личном чате с ботом это
+    # одно и то же число, и разница была не видна; в ГРУППЕ (владелец и
+    # партнёр обсуждают черновики вместе) chat.id — это id самой группы, один
+    # для всех участников, а не того, кто именно ответил. Проверка по chat_id
+    # авторизовала бы либо всех членов группы разом, либо никого.
+    sender_id = (message.get("from") or {}).get("id")
     # Ответ на сообщение-черновик с исправленным текстом поста: маркер
     # «[черновик <id>]» стоит в первой строке отправленного ботом черновика.
     reply = message.get("reply_to_message") or {}
     marker = re.search(r"\[черновик ([\w-]{1,40})\]", str(reply.get("text") or ""))
-    if marker and text.strip() and _is_reviewer(chat_id):
+    if marker and text.strip() and _is_reviewer(sender_id):
         db.add(ModerationDecision(deal_id=marker.group(1), verdict="approve",
-                                  edited_text=text.strip(), decided_by=str(chat_id)))
+                                  edited_text=text.strip(), decided_by=str(sender_id)))
         db.commit()
         return {"ok": True}
     match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())

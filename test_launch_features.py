@@ -573,16 +573,57 @@ def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
 
 
 def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
-    """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом»."""
+    """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом».
+
+    Личный чат с ботом: chat.id и from.id у Telegram совпадают, но проверка
+    обязана идти по from.id (отправитель), а не по chat.id (куда упало
+    сообщение) — иначе следующий тест на группе не смог бы отличить
+    «разрешить всем» от «не разрешить никому».
+    """
     _mod_env(monkeypatch)
     client.post("/api/telegram/webhook/тайна", json={
-        "message": {"chat": {"id": 222}, "text": "Наш вариант поста",
+        "message": {"chat": {"id": 222}, "from": {"id": 222}, "text": "Наш вариант поста",
                      "reply_to_message": {"text": "[черновик gtest456]\nПроект поста…"}}})
     r = client.get("/api/moderation/decisions", params={"token": "тайна"})
     rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gtest456"]
     assert rows and rows[0]["edited_text"] == "Наш вариант поста"
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_moderation_reply_in_a_shared_group_checks_the_sender_not_the_group(client, monkeypatch):
+    """Владелец и партнёр обсуждают черновики в общей группе — а не в личке.
+
+    В группе `chat.id` один на всех участников (сама группа), а `from.id` —
+    личный id того, кто написал. Проверка по chat.id в группе либо пустила бы
+    ЛЮБОГО участника группы (chat.id совпал бы с «разрешённым» случайно), либо
+    не пустила бы НИКОГО (chat.id группы никогда не совпадает с личными id из
+    TELEGRAM_REVIEW_CHAT_IDS) — оба исхода одинаково сломаны. Правильная
+    проверка идёт по from.id и не зависит от того, где физически идёт разговор.
+    """
+    _mod_env(monkeypatch)
+    GROUP_CHAT_ID = -1001234567890  # id группы — Telegram делает их отрицательными
+    # Партнёр (id 222, входит в TELEGRAM_REVIEW_CHAT_IDS) пишет в общей группе.
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": GROUP_CHAT_ID}, "from": {"id": 222},
+                     "text": "Публикуем с моей правкой",
+                     "reply_to_message": {"text": "[черновик gtest-group]\nПроект поста…"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gtest-group"]
+    assert rows, "решение участника группы, у которого есть право, потеряно"
+    assert rows[0]["edited_text"] == "Публикуем с моей правкой"
+    assert rows[0]["decided_by"] == "222", "записан не тот, кто фактически ответил"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+    # Посторонний участник той же группы (не входит в TELEGRAM_REVIEW_CHAT_IDS)
+    # решений оставлять не может, хотя chat.id у него тот же самый.
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": GROUP_CHAT_ID}, "from": {"id": 999},
+                     "text": "А давайте я тоже решу",
+                     "reply_to_message": {"text": "[черновик gtest-group-2]\nПроект поста…"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    assert not [d for d in r.json()["decisions"] if d["deal_id"] == "gtest-group-2"]
 
 
 def test_moderation_rejects_strangers_and_bad_tokens(client, monkeypatch):
@@ -650,3 +691,24 @@ def test_webhook_subscribes_to_button_clicks_not_only_messages():
     import setup_telegram_webhook as w
     assert "callback_query" in w.ALLOWED_UPDATES
     assert "message" in w.ALLOWED_UPDATES
+
+
+def test_send_targets_prefers_the_shared_group_over_personal_dms(monkeypatch):
+    """TELEGRAM_REVIEW_GROUP_ID — куда слать; TELEGRAM_REVIEW_CHAT_IDS — кто решает.
+
+    Это разные переменные с разным смыслом, и перепутать их легко: если бы
+    отправка шла по группе, а авторизация проверялась бы тоже по группе,
+    ответ любого её участника засчитывался бы за решение — ровно тот баг,
+    который поймал предыдущий тест на уровне вебхука. Здесь проверяется
+    только выбор адреса отправки.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import send_drafts
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
+    monkeypatch.delenv("TELEGRAM_REVIEW_GROUP_ID", raising=False)
+    assert send_drafts.send_targets() == ["111", "222"]
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1001234567890")
+    assert send_drafts.send_targets() == ["-1001234567890"]
+    # Список авторизованных решать при этом не меняется — это отдельная величина.
+    assert send_drafts.reviewers() == ["111", "222"]
