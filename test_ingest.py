@@ -1355,3 +1355,64 @@ def test_party_rules_are_measured_on_the_base(base):
         miss += not same(guess, truth)
     assert hit >= 700, f"полнота разбора покупателя упала до {hit}"
     assert hit / (hit + miss) >= 0.85, f"точность разбора покупателя {hit/(hit+miss):.0%}"
+
+
+# ---------- проверка карточки чтением (review.py) ----------
+
+def test_review_refuses_to_write_what_is_not_in_the_source():
+    """Читающий переносит факт, а не формулирует его.
+
+    Шаг проверки чтением опасен ровно тем, чем ценен: он позволяет записать в
+    базу то, чего правило не увидело. Граница проверяемая — каждая правка несёт
+    дословную цитату источника, и значение обязано быть из неё выводимо. Тест
+    проверяет ЗАЩИТУ, а не таблицу: шесть заведомо неверных правок обязаны
+    получить отказ, иначе шаг превращается в канал для выдумки.
+    """
+    import review
+    base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    cards = {d["id"]: d for d in base["deals"]}
+    inds, texts = review.industries(), review.source_texts()
+    card = next(iter(cards.values()))
+    quote = "Продавцом актива выступала сеть сервисных офисов Business Club."
+
+    bad_fixes = [
+        ("имя не из цитаты", dict(field="seller", old=card.get("seller"),
+                                  new="Сбербанк", quote=quote)),
+        ("год перенесён", dict(field="date", old="2026-08-03", new="2025-05-04",
+                               quote="сделка была закрыта 4 мая")),
+        ("дня нет в цитате", dict(field="date", old="2026-08-03", new="2026-05-07",
+                                  quote="сделка была закрыта 4 мая")),
+        ("отрасль без обоснования", dict(field="ind", old=card.get("ind"), new="Медиа",
+                                         quote="JPMorgan продал акции «Роснефти»")),
+        ("статус без подтверждения", dict(field="status", old=card.get("status"),
+                                          new="Не состоялась",
+                                          quote="Visa объявила о приобретении BioCatch.")),
+    ]
+    for name, fix in bad_fixes:
+        fix = dict(fix, id=card["id"])
+        reasons = review.check(fix, card, texts, base["companies"], inds)
+        assert reasons, f"защита пропустила выдумку: {name}"
+
+    # Выдуманная цитата ловится отдельно — но только пока сырьё лежит на диске.
+    if texts:
+        made_up = dict(id=card["id"], field="seller", old=card.get("seller"),
+                       new="Business Club",
+                       quote="Продавцом выступил Business Club, сумма 900 млн рублей.")
+        assert review.check(made_up, card, texts, base["companies"], inds)
+
+
+def test_review_table_is_applied_and_not_pending(base):
+    """Таблица правок применена: сухой прогон обязан быть пустым.
+
+    Если правка осталась неприменённой, `old` в таблице совпадёт с тем, что в
+    базе, и следующий прогон запишет её повторно — либо, что хуже, таблица
+    начнёт расходиться с базой и молча копить отказы.
+    """
+    import review
+    cards = {d["id"]: d for d in base["deals"]}
+    for fix in review.FIXES:
+        card = cards.get(fix["id"])
+        assert card, f"карточки {fix['id']} нет в базе"
+        got = card.get(fix["field"])
+        assert got == fix["new"], (
+            f"{fix['id']}.{fix['field']}: в базе {got!r}, а таблица правок обещает {fix['new']!r}")

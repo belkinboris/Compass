@@ -75812,7 +75812,7 @@
   },
   {
    "id": "gdfce7e3d",
-   "date": "2026-08-03",
+   "date": "2026-05-04",
    "title": "«Дом.РФ» приобрел бизнес-центр «Обсидиан» на Ходынском поле",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -75870,8 +75870,17 @@
       "method": "explicit_news_title",
       "url": "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
      }
+    ],
+    "seller": [
+     {
+      "value": "Business Club",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
+     }
     ]
-   }
+   },
+   "seller": "Business Club"
   },
   {
    "id": "gc5951fac",
@@ -75996,8 +76005,17 @@
       "method": "explicit_news_title",
       "url": "https://www.tadviser.ru/a/876278"
      }
+    ],
+    "seller": [
+     {
+      "value": "МТ-Интеграция",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.tadviser.ru/a/876278"
+     }
     ]
-   }
+   },
+   "seller": "МТ-Интеграция"
   },
   {
    "id": "gd057d2c1",
@@ -76005,7 +76023,7 @@
    "title": "Visa купила BioCatch за $2,4 млрд для защиты от кибермошенничества",
    "ind": "ИТ и интернет",
    "type": "M&A",
-   "status": "Закрыта",
+   "status": "Подписана",
    "src": [
     [
      "web:kommersant.ru",
@@ -76094,7 +76112,7 @@
     "terms": "—"
    },
    "seller": "«Вертекс»",
-   "asset": "Dr. Reddy’s права на три гинекологических препарата",
+   "asset": "права на три гинекологических препарата",
    "events": [
     {
      "kind": "closed",
@@ -76111,9 +76129,9 @@
    "party_evidence": {
     "target": [
      {
-      "value": "Dr. Reddy’s права на три гинекологических препарата",
+      "value": "права на три гинекологических препарата",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8861146"
      }
     ],
@@ -76124,8 +76142,17 @@
       "method": "explicit_news_title",
       "url": "https://www.kommersant.ru/doc/8861146"
      }
+    ],
+    "buyer": [
+     {
+      "value": "Dr. Reddy’s",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8861146"
+     }
     ]
-   }
+   },
+   "buyer_name": "Dr. Reddy’s"
   },
   {
    "id": "gbf6f6432",
@@ -76158,8 +76185,8 @@
     "terms": "—"
    },
    "sum": "2 млрд ₽",
-   "seller": "Экс-акционер Башкирской содовой компании",
-   "asset": "производство упаковки",
+   "seller": "Сергей Черников",
+   "asset": "«Полекс»",
    "events": [
     {
      "kind": "closed",
@@ -76176,17 +76203,17 @@
    "party_evidence": {
     "target": [
      {
-      "value": "производство упаковки",
+      "value": "«Полекс»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8860899"
      }
     ],
     "seller": [
      {
-      "value": "Экс-акционер Башкирской содовой компании",
+      "value": "Сергей Черников",
       "field": "seller",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8860899"
      }
     ]
@@ -76194,9 +76221,9 @@
   },
   {
    "id": "g97e1f483",
-   "date": "2026-08-03",
+   "date": "2026-07-30",
    "title": "Группа «Ригла-Здравсити» закрыла сделку по покупке сети «Здоровый город» в Воронежской области",
-   "ind": "Не определена",
+   "ind": "Фармацевтика",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
@@ -76389,7 +76416,7 @@
    "title": "Инвесторы вложили $13 млн в голосовой ИИ, который умеет перебивать собеседника",
    "ind": "Искусственный интеллект",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "web:incrussia.ru",
@@ -76414,22 +76441,13 @@
     "terms": "—"
    },
    "sum": "$13 млн",
-   "buyer_name": "Инвесторы",
-   "asset": "голосовой ИИ, который умеет перебивать собеседника",
+   "asset": "Smallest.ai",
    "party_evidence": {
-    "buyer": [
-     {
-      "value": "Инвесторы",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
-     }
-    ],
     "target": [
      {
-      "value": "голосовой ИИ, который умеет перебивать собеседника",
+      "value": "Smallest.ai",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
      }
     ]
@@ -76502,7 +76520,7 @@
    "id": "g70e51ff1",
    "date": "2026-07-31",
    "title": "JPMorgan продал акции «Роснефти»",
-   "ind": "Не определена",
+   "ind": "Нефть и газ",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
@@ -76566,7 +76584,7 @@
    "id": "g94617d17",
    "date": "2026-08-04",
    "title": "Мэрия Екатеринбурга продаст подвалы и участки на окраинах",
-   "ind": "Не определена",
+   "ind": "Недвижимость",
    "type": "M&A",
    "status": "Обсуждается",
    "src": [
