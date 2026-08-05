@@ -620,8 +620,12 @@ def test_unknown_industry_is_labelled_as_an_industry(page, base_url):
     слова «отрасль» непонятно, что именно не определено.
     """
     visit(page, base_url, "#/")
+    # Подпись проверяется всегда, даже когда карточек без отрасли в базе нет:
+    # значение легально и появится снова, а тест, зависящий от наличия данных,
+    # молча перестал бы что-либо проверять.
+    assert page.evaluate("() => indLabel('Не определена')") == "Отрасль не определена"
+    assert page.evaluate("() => indLabel('Банки')") == "Банки"
     ids = page.evaluate("() => DEALS.filter(d => d.ind === 'Не определена').map(d => d.id)")
-    assert ids, "в базе нет карточек без отрасли — проверять нечего"
     for deal_id in ids[:3]:
         visit(page, base_url, f"#/deal/{deal_id}")
         head = page.inner_text(".d-head").lower()

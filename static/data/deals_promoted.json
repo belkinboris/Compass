@@ -76018,70 +76018,6 @@
    "seller": "МТ-Интеграция"
   },
   {
-   "id": "gd057d2c1",
-   "date": "2026-08-03",
-   "title": "Visa купила BioCatch за $2,4 млрд для защиты от кибермошенничества",
-   "ind": "ИТ и интернет",
-   "type": "M&A",
-   "status": "Подписана",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8861778"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$2,4 млрд",
-   "buyer_name": "Visa",
-   "asset": "BioCatch",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-03",
-     "title": "Сделка завершена",
-     "note": "Visa объявила о приобретении израильского стартапа BioCatch, специализирующегося в сфере кибербезопасности. Сумма сделки составит $2,4 млрд наличными.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8861778"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Visa",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/8861778"
-     }
-    ],
-    "target": [
-     {
-      "value": "BioCatch",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/8861778"
-     }
-    ]
-   }
-  },
-  {
    "id": "gf70a43e6",
    "date": "2026-08-03",
    "title": "«Вертекс» продала Dr. Reddy’s права на три гинекологических препарата",
@@ -76158,13 +76094,17 @@
    "id": "gbf6f6432",
    "date": "2026-08-02",
    "title": "Экс-акционер Башкирской содовой компании продал производство упаковки",
-   "ind": "Не определена",
+   "ind": "Химия и удобрения",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
      "web:kommersant.ru",
      "https://www.kommersant.ru/doc/8860899"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-Stroma-priobrela-proizvoditelya-upakovki-Poleks-87305"
     ]
    ],
    "from_ingest": true,
@@ -76216,8 +76156,17 @@
       "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8860899"
      }
+    ],
+    "buyer": [
+     {
+      "value": "«Строма»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8860899"
+     }
     ]
-   }
+   },
+   "buyer_name": "«Строма»"
   },
   {
    "id": "g97e1f483",
@@ -76406,49 +76355,6 @@
       "field": "seller",
       "method": "explicit_news_title",
       "url": "https://www.dp.ru/a/2026/08/03/gruppa-lsr-prodala-vtoruju"
-     }
-    ]
-   }
-  },
-  {
-   "id": "g4a10e7a2",
-   "date": "2026-08-03",
-   "title": "Инвесторы вложили $13 млн в голосовой ИИ, который умеет перебивать собеседника",
-   "ind": "Искусственный интеллект",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$13 млн",
-   "asset": "Smallest.ai",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "Smallest.ai",
-      "field": "asset",
-      "method": "human_review",
-      "url": "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
      }
     ]
    }

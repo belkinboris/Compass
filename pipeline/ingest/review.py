@@ -73,6 +73,11 @@ STATUS_WORDS = {
 }
 
 # ---------------------------------------------------------------------------
+# Правки к gd057d2c1 (Visa/BioCatch) и g4a10e7a2 (Smallest.ai) сняты вместе с
+# самими карточками: 5 августа владелец решил не держать в базе сделки без
+# российской стороны, и обе удалены `pipeline/remove_out_of_scope_deals.py`.
+# Правка к карточке, которой нет, — это отказ на каждом прогоне.
+#
 # ТАБЛИЦА ПРАВОК. Прогон 5 августа 2026: 13 карточек, которые приток добавил
 # сам, прочитаны против текста источника. `quote` — дословный кусок источника,
 # `why` — что именно правило не увидело и почему.
@@ -88,13 +93,6 @@ FIXES = [
          quote='закрыла сделку по выкупу исключительных прав на отечественную '
                'СУБД «Персей» у компании МТ-Интеграция (ранее Максима)',
          why='продавец назван в аннотации, а разбор читает только заголовок'),
-
-    dict(id='gd057d2c1', field='status', old='Закрыта', new='Подписана',
-         quote='Visa объявила о приобретении израильского стартапа BioCatch, '
-               'специализирующегося в сфере кибербезопасности. Сумма сделки '
-               'составит $2,4 млрд наличными.',
-         why='«объявила о приобретении» и «сумма составит» — сделка не закрыта; '
-             'статус пришёл из слова «купила» в заголовке издания'),
 
     dict(id='gf70a43e6', field='buyer_name', old=None, new='Dr. Reddy’s',
          quote='Российская «дочка» индийской фармкомпании Dr. Reddy’s получила '
@@ -124,20 +122,27 @@ FIXES = [
          quote='были приобретены три юридических лица, включающих 55 аптек в Воронеже',
          why='отрасль видна по слову «аптек», но оно стоит в аннотации, а не в заголовке'),
 
-    dict(id='g4a10e7a2', field='buyer_name', old='Инвесторы', new=None,
-         quote='Американский стартап Smallest.ai привлек $13 млн инвестиций',
-         why='«Инвесторы» — не имя, а слово из заголовка: инвесторы не названы'),
-    dict(id='g4a10e7a2', field='asset', old='голосовой ИИ, который умеет перебивать собеседника',
-         new='Smallest.ai',
-         quote='Американский стартап Smallest.ai привлек $13 млн инвестиций',
-         why='предметом стояло описание продукта из заголовка вместо названия компании'),
-    dict(id='g4a10e7a2', field='status', old='Обсуждается', new='Закрыта',
-         quote='Американский стартап Smallest.ai привлек $13 млн инвестиций',
-         why='раунд привлечён, а не обсуждается'),
-
     dict(id='g70e51ff1', field='ind', old='Не определена', new='Нефть и газ',
          quote='JPMorgan продал акции «Роснефти»',
          why='отрасль предмета известна из профиля «Роснефть» в нашей же базе'),
+
+    # Прогон 5 августа, вторая партия: «Полекс». Материал упаковки и покупатель
+    # названы во ВТОРОМ источнике — «Коммерсантъ» пишет «производителя пищевой
+    # упаковки», и по этим словам отрасль читается как «Пищепром», хотя упаковка
+    # для еды это не производство еды. mergers.ru называет материал прямо.
+    dict(id='gbf6f6432', field='src', old=None,
+         new=['mergers.ru', 'https://mergers.ru/news/Investicionnaya-kompaniya-Stroma-'
+                            'priobrela-proizvoditelya-upakovki-Poleks-87305'],
+         quote='«Полекс Урал» создан в 2002 году, выпускает в Уфе пластиковую упаковку, '
+               'в первую очередь для молочной продукции.',
+         why='вторая статья о той же сделке называет и покупателя, и материал упаковки'),
+    dict(id='gbf6f6432', field='buyer_name', old=None, new='«Строма»',
+         quote='Инвестиционная компания «Строма» приобрела производителя упаковки «Полекс»',
+         why='покупатель назван в заголовке второго источника'),
+    dict(id='gbf6f6432', field='ind', old='Не определена', new='Химия и удобрения',
+         quote='«Полекс Урал» создан в 2002 году, выпускает в Уфе пластиковую упаковку',
+         why='по пластику в базе два прецедента и оба «Химия и удобрения»: переработка '
+             'пластика у «Технониколь» и БОПП-плёнка Manucor'),
 
     dict(id='g94617d17', field='ind', old='Не определена', new='Недвижимость',
          quote='внесла в прогнозный план приватизации муниципального имущества на '
@@ -221,10 +226,47 @@ def industry_is_supported(new, quote, companies, inds):
     return 'ни слово словаря, ни профиль компании из цитаты не дают «%s»' % new
 
 
-def check(fix, card, texts, companies, inds):
+def source_urls():
+    """Адреса, которые приток действительно забирал: приложить можно только их."""
+    urls = set()
+    if os.path.isdir(RAW):
+        for name in sorted(os.listdir(RAW)):
+            if not name.endswith('.jsonl'):
+                continue
+            for line in open(os.path.join(RAW, name), encoding='utf-8'):
+                try:
+                    url = json.loads(line).get('url')
+                except ValueError:
+                    continue
+                if url:
+                    urls.add(str(url))
+    return urls
+
+
+def already_applied(fix, card):
+    """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
+    if fix['field'] == 'src':
+        return any(len(s) > 1 and s[1] == fix['new'][1] for s in card.get('src') or [])
+    return card.get(fix['field']) == fix['new']
+
+
+def check(fix, card, texts, companies, inds, urls=frozenset()):
     """Список причин, по которым правку принимать НЕЛЬЗЯ."""
     bad = []
     field, new, quote = fix['field'], fix['new'], fix['quote']
+    if field == 'src':
+        # ВТОРОЙ ИСТОЧНИК — НЕ УКРАШЕНИЕ. Об одной сделке пишут несколько
+        # изданий, и факт нередко есть только у одного: материал упаковки
+        # «Полекса» назван у mergers.ru и не назван у «Коммерсанта». Приложить
+        # можно только адрес, который приток РЕАЛЬНО забирал, — иначе ссылка
+        # берётся из головы, а это ровно то, чего мы избегаем.
+        if not (isinstance(new, list) and len(new) == 2 and str(new[1]).startswith('http')):
+            bad.append('источник должен быть парой [имя, http-адрес]')
+        elif urls and new[1] not in urls:
+            bad.append('такого адреса нет среди забранных источником записей')
+        if texts and not quote_is_real(quote, texts):
+            bad.append('цитаты нет в тексте источника')
+        return bad
     if card.get(field) != fix['old']:
         bad.append('поле уже другое: в базе %r, ожидали %r' % (card.get(field), fix['old']))
     if texts and not quote_is_real(quote, texts):
@@ -275,15 +317,21 @@ def main(write=False):
         print('ВНИМАНИЕ: сырья на диске нет — цитаты сверить не с чем, проверяется')
         print('только состояние полей. Это ослабленная проверка, а не полная.')
 
-    ok, refused = [], []
+    urls = source_urls()
+    ok, refused, done = [], [], 0
     for fix in FIXES:
         card = cards.get(fix['id'])
         if not card:
             refused.append((fix, ['карточки %s нет в базе' % fix['id']]))
             continue
-        bad = check(fix, card, texts, data['companies'], inds)
+        if already_applied(fix, card):
+            done += 1
+            continue
+        bad = check(fix, card, texts, data['companies'], inds, urls)
         (refused if bad else ok).append((fix, bad))
 
+    if done:
+        print('  уже применено раньше: %d' % done)
     for fix, _ in ok:
         print('  ПРАВИМ   %s %-11s %r -> %r' % (fix['id'], fix['field'],
                                                 str(fix['old'])[:34], str(fix['new'])[:40]))
@@ -301,6 +349,9 @@ def main(write=False):
 
     for fix, _ in ok:
         card = cards[fix['id']]
+        if fix['field'] == 'src':
+            card.setdefault('src', []).append(list(fix['new']))
+            continue
         assert card.get(fix['field']) == fix['old'], 'состояние поля изменилось'
         if fix['new'] is None:
             card.pop(fix['field'], None)
