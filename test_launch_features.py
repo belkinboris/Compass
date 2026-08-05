@@ -541,3 +541,98 @@ def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
             f"перезапуск повторил уведомления: {third}"
     finally:
         db.close()
+
+
+# ==================== Модерация черновиков через Telegram ====================
+
+def _mod_env(monkeypatch):
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
+
+
+def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
+    """Кнопка под черновиком -> таблица -> API для рутины публикации.
+
+    Решение принимает человек в Telegram, вебхук приходит на сайт, а применяет
+    решение рутина в одноразовом контейнере, которой база сайта недоступна
+    (приватная сеть хостинга). Таблица + API — единственный мост между ними.
+    """
+    _mod_env(monkeypatch)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"data": "mod:gtest123:ok", "from": {"id": 111}}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gtest123"]
+    assert rows and rows[0]["verdict"] == "approve" and rows[0]["decided_by"] == "111"
+    # Применённое решение выдаваться больше не должно.
+    r = client.post("/api/moderation/decisions/consume",
+                    json={"token": "тайна", "ids": [rows[0]["id"]]})
+    assert r.json()["consumed"] == 1
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    assert not [d for d in r.json()["decisions"] if d["deal_id"] == "gtest123"]
+
+
+def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
+    """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом»."""
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 222}, "text": "Наш вариант поста",
+                     "reply_to_message": {"text": "[черновик gtest456]\nПроект поста…"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gtest456"]
+    assert rows and rows[0]["edited_text"] == "Наш вариант поста"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_moderation_rejects_strangers_and_bad_tokens(client, monkeypatch):
+    """Право решать — только у владельца и партнёра; API — только с токеном.
+
+    Бота может найти кто угодно: нажатая чужим человеком кнопка не должна
+    публиковать карточки.
+    """
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"data": "mod:gstranger:ok", "from": {"id": 999}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    assert not [d for d in r.json()["decisions"] if d["deal_id"] == "gstranger"]
+    assert client.get("/api/moderation/decisions", params={"token": "чужой"}).status_code == 404
+    # Без настроенного секрета мост закрыт совсем, а не открыт всем.
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET")
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    assert client.get("/api/moderation/decisions", params={"token": ""}).status_code == 404
+
+
+def test_approve_publishes_on_decision_or_silence_and_respects_hold():
+    """Три исхода модерации: решение, молчание сутки, «придержать».
+
+    Молчание — согласие: немой шаг, который держит весь поток, у нас уже был
+    (тормоз E9), второй раз те же грабли не берём.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    fresh = (now - timedelta(hours=2)).isoformat(timespec="seconds")
+    stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    cards = [
+        {"id": "a1", "title": "решили опубликовать", "draft_sent": True, "pending_since": fresh},
+        {"id": "a2", "title": "решили придержать",   "draft_sent": True, "pending_since": fresh},
+        {"id": "a3", "title": "молчание сутки",      "draft_sent": True, "pending_since": stale},
+        {"id": "a4", "title": "ещё ждём",            "draft_sent": True, "pending_since": fresh},
+        {"id": "a5", "title": "придержана раньше",   "draft_sent": True, "pending_since": stale,
+         "held": True},
+        # Черновик, который никому не разослали, по таймауту НЕ публикуется:
+        # молчание — согласие только того, кто сообщение получил.
+        {"id": "a6", "title": "не рассылался",       "pending_since": stale},
+    ]
+    decisions = [
+        {"deal_id": "a1", "verdict": "approve", "edited_text": "текст владельца"},
+        {"deal_id": "a2", "verdict": "hold"},
+    ]
+    publish, hold, wait = approve.plan_actions(cards, decisions, now)
+    assert {c["id"] for c, _o, _w in publish} == {"a1", "a3"}
+    assert next(o for c, o, _ in publish if c["id"] == "a1") == "текст владельца"
+    assert {c["id"] for c, _w in hold} == {"a2"}
+    assert {c["id"] for c, _w in wait} == {"a4", "a5", "a6"}

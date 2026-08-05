@@ -55,6 +55,7 @@ DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
 RAW = os.path.join(ROOT, 'data', 'inbox', 'raw')
 TRIAGE = os.path.join(ROOT, 'data', 'inbox', 'triage')
+PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 
 MONTHS = {'января': 1, 'февраля': 2, 'марта': 3, 'апреля': 4, 'мая': 5, 'июня': 6,
           'июля': 7, 'августа': 8, 'сентября': 9, 'октября': 10, 'ноября': 11,
@@ -310,7 +311,12 @@ def _self_check():
 def main(write=False):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
+    # Черновики предпросмотра проверяются тем же механизмом, что и карточки
+    # базы: читающий правит их ДО того, как владелец увидит проект поста, —
+    # чтобы на модерацию приходил уже вычитанный черновик.
+    pending = json.load(open(PENDING, encoding='utf-8')) if os.path.exists(PENDING) else {'cards': []}
     cards = {d['id']: d for d in data['deals']}
+    cards.update({c['id']: c for c in pending['cards']})
     inds, texts = industries(), source_texts()
     print('Правок в таблице: %d | текстов источников на диске: %d'
           % (len(FIXES), len(texts)))
@@ -372,6 +378,8 @@ def main(write=False):
             if not card['party_evidence']:
                 card.pop('party_evidence')
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+    if pending['cards']:
+        json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     print('ЗАПИСАНО: %d правок в %s' % (len(ok), os.path.relpath(DATA, ROOT)))
     return 0
 

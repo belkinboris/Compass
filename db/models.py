@@ -21,7 +21,7 @@
 from __future__ import annotations
 
 import enum
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 
 from sqlalchemy import (
     Boolean, Date, DateTime, Enum, ForeignKey, Numeric, String, Text,
@@ -580,3 +580,23 @@ class DealSource(Base):
     url: Mapped[str] = mapped_column(String(600))
 
     deal: Mapped[Deal] = relationship(back_populates="sources")
+
+
+class ModerationDecision(Base):
+    """Решение владельца/партнёра по черновику карточки, пришедшее из Telegram.
+
+    Зачем таблица, а не файл: решение принимает человек в Telegram, вебхук
+    приходит на САЙТ, а применяет решение рутина публикации в одноразовом
+    контейнере, у которого нет доступа к базе сайта напрямую (она в приватной
+    сети хостинга). Таблица + API `/api/moderation/decisions` — единственный
+    мост между ними: сайт пишет сюда, рутина читает по публичному адресу.
+    """
+    __tablename__ = "moderation_decisions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    deal_id: Mapped[str] = mapped_column(String(40), index=True)
+    verdict: Mapped[str] = mapped_column(String(16))          # approve | hold
+    edited_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    decided_by: Mapped[str] = mapped_column(String(80))       # chat_id решившего
+    consumed: Mapped[bool] = mapped_column(default=False)
+    created_at: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc))

@@ -238,7 +238,10 @@ def main(write, ignore_pace=False):
                 text = format_post.render(deal, comps, updates=changes)
                 to_edit.append((did, posts[did], text))
         elif sendable(deal):
-            text = format_post.render(deal, comps)
+            # Текст, который владелец продиктовал в Telegram при модерации
+            # черновика, важнее автоформата — но только для ПЕРВОГО поста:
+            # дальнейшие обновления снова собирает format_post.
+            text = deal.get('post_override') or format_post.render(deal, comps)
             to_send.append((did, text))
 
     print('Новых постов: %d, правок существующих: %d' % (len(to_send), len(to_edit)))

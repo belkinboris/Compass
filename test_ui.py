@@ -633,3 +633,57 @@ def test_unknown_industry_is_labelled_as_an_industry(page, base_url):
         # …и ссылки «Все сделки отрасли «Не определена»» быть не должно.
         body = page.inner_text("#app")
         assert "отрасли «Не определена»" not in body, f"{deal_id}: ссылка в никуда"
+
+
+def test_preview_route_renders_a_pending_card(page, base_url):
+    """Черновик виден по прямой ссылке и НЕ виден в ленте.
+
+    Модерация держится на том, что карточка из pending.json не существует для
+    сайта нигде, кроме #/preview/<id>: попади она в ленту или поиск до решения
+    владельца, предпросмотр перестал бы быть предпросмотром.
+    """
+    import json as _json
+    pending_path = Path("static/data/pending.json")
+    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
+    card = {"id": "gtest-preview", "date": "2026-08-05",
+            "title": "Тестовая компания «Альфа-Превью» купила завод «Бета-Превью»",
+            "ind": "ИТ и интернет", "type": "M&A", "status": "Закрыта",
+            "src": [["источник", "https://example.invalid/preview"]],
+            "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—",
+                     "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "—", "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-08-05T00:00:00+00:00"}
+    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    try:
+        visit(page, base_url, "#/preview/gtest-preview")
+        page.wait_for_timeout(900)
+        text = page.inner_text("#app")
+        assert "Альфа-Превью" in text, "черновик не отрисовался"
+        assert "Черновик" in text, "нет плашки о том, что это черновик"
+        # В ленте и поиске черновика нет.
+        assert page.evaluate("() => DEALS.some(d => d.id === 'gtest-preview')") is False
+        # Несуществующий черновик — честное сообщение, а не пустой экран.
+        visit(page, base_url, "#/preview/gtest-net-takogo")
+        page.wait_for_timeout(700)
+        assert "не найден" in page.inner_text("#app").lower()
+    finally:
+        if backup is None:
+            pending_path.unlink(missing_ok=True)
+        else:
+            pending_path.write_text(backup, encoding="utf-8")
+
+
+def test_slow_load_hint_mentions_vpn(page, base_url):
+    """Долгая загрузка объясняется, а не просто крутится.
+
+    Определить VPN из браузера нельзя, и плашка этого не утверждает: она
+    напоминает, что сервер в России, и РЕКОМЕНДУЕТ выключить VPN. Появляется
+    только после 8 секунд ожидания — при обычной загрузке её никто не видит.
+    """
+    visit(page, base_url, "#/")
+    html = page.evaluate("() => { slowLoad = true; return loadingHtml('карточка'); }")
+    assert "VPN" in html and "display:block" in html
+    assert "Росси" in html
+    # До восьми секунд подсказка есть в разметке, но скрыта.
+    html_fast = page.evaluate("() => { slowLoad = false; return loadingHtml('карточка'); }")
+    assert "display:none" in html_fast

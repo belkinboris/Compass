@@ -461,17 +461,40 @@ def main(write):
     if not passed:
         print('\nЗаписывать нечего.')
         return
-    fresh = []
+    # НЕ В БАЗУ, А В ПРЕДПРОСМОТР (решение владельца 5 августа). Прошедшая
+    # ворота карточка попадает в static/data/pending.json: сайт показывает её
+    # только по прямой ссылке #/preview/<id> с плашкой «черновик», бот шлёт
+    # владельцу и партнёру проект телеграм-поста с этой ссылкой, и лишь после
+    # их решения (или молчания сутки — молчание согласие) approve.py переносит
+    # карточку в базу и открывает пост каналу. Uже занятые id остаются занятыми:
+    # new_id смотрит и в базу, и в предпросмотр.
+    pending = load_pending()
+    taken = existing | {c['id'] for c in pending['cards']}
+    added = 0
     for draft, _ in passed:
-        deal_id = new_id(existing)
-        existing.add(deal_id)
+        deal_id = new_id(taken)
+        taken.add(deal_id)
         card = to_card(draft, deal_id)
-        data['deals'].append(card)
-        fresh.append(card)
-    with open(DATA, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=1, ensure_ascii=False)
-    print('\nЗаписано карточек: %d. Всего в базе: %d.' % (len(passed), len(data['deals'])))
-    notify(fresh, data['companies'])
+        card['pending_since'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
+        pending['cards'].append(card)
+        added += 1
+    save_pending(pending)
+    print('\nВ предпросмотр: %d. Ждут решения владельца: %d. База не менялась (%d).'
+          % (added, len(pending['cards']), len(data['deals'])))
+    print('Следующий шаг: pipeline/ingest/send_drafts.py отправит черновики в Telegram.')
+
+
+PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
+
+
+def load_pending():
+    if os.path.exists(PENDING):
+        return json.load(open(PENDING, encoding='utf-8'))
+    return {'cards': []}
+
+
+def save_pending(pending):
+    json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
 
 
 def notify(fresh, companies):

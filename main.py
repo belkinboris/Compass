@@ -34,7 +34,8 @@ from deal_export import render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
     AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
-    DealWatch, FinancialReport, LegalEntity, LegalEntityMatchStatus, Notification,
+    DealWatch, FinancialReport, LegalEntity, LegalEntityMatchStatus, ModerationDecision,
+    Notification,
     NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
@@ -347,6 +348,7 @@ class NotificationReadIn(BaseModel):
 class TelegramWebhookIn(BaseModel):
     update_id: int | None = None
     message: dict | None = None
+    callback_query: dict | None = None
 
 
 class DealExportIn(BaseModel):
@@ -846,13 +848,79 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     expected = os.environ.get("TELEGRAM_WEBHOOK_SECRET", "")
     if not expected or secret != expected:
         return JSONResponse({"error": "not found"}, status_code=404)
+    # Кнопка под черновиком карточки: callback_data вида "mod:<id>:ok|hold".
+    # Решение пишется в таблицу, а применяет его рутина публикации — у неё нет
+    # доступа к этой базе напрямую, поэтому она заберёт решение по
+    # /api/moderation/decisions (см. модель ModerationDecision).
+    callback = payload.callback_query or {}
+    if callback:
+        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold)$", str(callback.get("data") or ""))
+        from_id = (callback.get("from") or {}).get("id")
+        if match and _is_reviewer(from_id):
+            db.add(ModerationDecision(deal_id=match.group(1),
+                                      verdict="approve" if match.group(2) == "ok" else "hold",
+                                      decided_by=str(from_id)))
+            db.commit()
+        return {"ok": True}
+
     message = payload.message or {}
     text = str(message.get("text") or "")
     chat_id = (message.get("chat") or {}).get("id")
+    # Ответ на сообщение-черновик с исправленным текстом поста: маркер
+    # «[черновик <id>]» стоит в первой строке отправленного ботом черновика.
+    reply = message.get("reply_to_message") or {}
+    marker = re.search(r"\[черновик ([\w-]{1,40})\]", str(reply.get("text") or ""))
+    if marker and text.strip() and _is_reviewer(chat_id):
+        db.add(ModerationDecision(deal_id=marker.group(1), verdict="approve",
+                                  edited_text=text.strip(), decided_by=str(chat_id)))
+        db.commit()
+        return {"ok": True}
     match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
     if match and chat_id is not None:
         notification_service.bind_telegram(db, match.group(1), str(chat_id))
     return {"ok": True}
+
+
+def _is_reviewer(chat_id) -> bool:
+    """Право решать есть только у чатов из TELEGRAM_REVIEW_CHAT_IDS (владелец и
+    партнёр). Любой другой человек, нашедший бота, решений не оставит."""
+    allowed = {x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()}
+    return chat_id is not None and str(chat_id) in allowed
+
+
+def _moderation_token_ok(token: str) -> bool:
+    expected = os.environ.get("MODERATION_TOKEN") or os.environ.get("TELEGRAM_WEBHOOK_SECRET") or ""
+    return bool(expected) and token == expected
+
+
+@app.get("/api/moderation/decisions")
+def moderation_decisions(token: str = "", db=Depends(get_db)):
+    """Мост к рутине публикации: она в другом облаке и до базы не достаёт."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    rows = list(db.scalars(select(ModerationDecision)
+                           .where(ModerationDecision.consumed.is_(False))
+                           .order_by(ModerationDecision.created_at)).all())
+    return {"decisions": [{"id": r.id, "deal_id": r.deal_id, "verdict": r.verdict,
+                           "edited_text": r.edited_text, "decided_by": r.decided_by,
+                           "created_at": r.created_at.isoformat()} for r in rows]}
+
+
+class ModerationConsumeIn(BaseModel):
+    token: str = ""
+    ids: list[int] = []
+
+
+@app.post("/api/moderation/decisions/consume")
+def moderation_consume(req: ModerationConsumeIn, db=Depends(get_db)):
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    n = 0
+    for row in db.scalars(select(ModerationDecision).where(ModerationDecision.id.in_(req.ids or []))).all():
+        row.consumed = True
+        n += 1
+    db.commit()
+    return {"consumed": n}
 
 
 # ==================== История диалогов ассистента ====================

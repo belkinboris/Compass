@@ -1331,6 +1331,17 @@ const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>has
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
+let slowLoad = false;
+// Через 8 секунд ожидания подсказываем возможную причину. Определить VPN из
+// браузера нельзя — и мы не утверждаем, что он включён: только напоминаем, что
+// сервер в России и зарубежный маршрут (VPN) может тормозить загрузку.
+setTimeout(()=>{
+  if(bulkLoaded || bulkLoadFailed) return;
+  slowLoad = true;
+  const hint = document.getElementById("slowhint");
+  if(hint) hint.style.display = "block";
+  else if(document.querySelector(".loading")) route();
+}, 8000);
 let bulkLoadFailed = false;
 // Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
 // история, которую можно будет включить позже), но на сайте не показываются:
@@ -1486,6 +1497,11 @@ function loadingHtml(what){
     <div class="l-head">Загружаем базу сделок</div>
     <p>Секунду — ${what.toLowerCase()} появятся, как только загрузится база.
        Показатели появятся после полной загрузки базы.</p>
+    <p id="slowhint" style="display:${slowLoad?"block":"none"};max-width:44ch;margin:10px auto 0;
+       font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:10px 14px">
+      Загрузка идёт дольше обычного. Сервер «Компаса» находится в России:
+      если у вас включён VPN, попробуйте отключить его — обычно это ускоряет
+      загрузку в несколько раз. Мы тем временем продолжаем попытки.</p>
   </div>`;
 }
 /* Подборка живёт в адресе. Раньше три выставленных фильтра («Банки», 2024,
@@ -1654,6 +1670,14 @@ function route(){
     if(!bulkLoaded) app.innerHTML = loadingHtml(sub==="stage" ? "Этап сделки" : "Карточка сделки");
     else if(sub==="stage" && subarg) renderDealStage(arg, subarg);
     else renderDeal(arg, qs);
+    mark("deals");
+  }
+  // «#/preview/<id>» — черновик карточки ДО публикации: владелец и партнёр
+  // получают эту ссылку в Telegram вместе с проектом поста и решают, выпускать
+  // ли. Карточка лежит в pending.json, в базе её нет, в ленте не показывается.
+  else if(page==="preview"){
+    if(!bulkLoaded) app.innerHTML = loadingHtml("Черновик карточки");
+    else renderPreview(arg);
     mark("deals");
   }
   else if(page==="compare"){
@@ -3049,8 +3073,29 @@ async function mountDealTools(d){
   };
 }
 
-function renderDeal(id, qs){
-  const d = DEALS.find(x=>x.id===id);
+async function renderPreview(id){
+  let card = null;
+  try{
+    const r = await fetch("static/data/pending.json?nocache="+Date.now());
+    if(r.ok) card = ((await r.json()).cards||[]).find(c=>c.id===id) || null;
+  }catch(e){ console.warn("pending.json недоступен:", e); }
+  if(!card){
+    // Черновика нет — вероятно, карточка уже одобрена и живёт в базе.
+    if(DEALS.find(x=>x.id===id)){ location.hash = "#/deal/"+id; return; }
+    app.innerHTML = `<section class="sec"><div class="sec-head"><h1>Черновик не найден</h1>
+      <p>Возможно, карточка уже опубликована или отклонена. <a href="#/">К ленте сделок</a></p></div></section>`;
+    return;
+  }
+  renderDeal(id, "", card);
+  app.insertAdjacentHTML("afterbegin",
+    `<div style="background:#8A6D1F;color:#fff;padding:10px 16px;border-radius:8px;margin:12px 0;font-size:14px">
+      Черновик — этой карточки ещё нет на сайте. Опубликовать или придержать её можно кнопками под сообщением бота в Telegram; ответ на то же сообщение заменит текст поста.
+    </div>`);
+}
+function renderDeal(id, qs, previewCard){
+  // previewCard — карточка из static/data/pending.json: её ещё НЕТ в базе,
+  // сайт показывает её только по прямой ссылке #/preview/<id> (модерация).
+  const d = previewCard || DEALS.find(x=>x.id===id);
   if(!d){
     // Карточку слили с дублем — открываем ту, что осталась, а не общую ленту.
     if(MERGED[id]){
