@@ -2022,10 +2022,15 @@ const dealIndustries = d => {
   return [...new Set(raw.filter(Boolean))];
 };
 const hasIndustry = (d,industry) => industry==="Все" || dealIndustries(d).includes(industry);
+/* «Не определена» стоит в плашке рядом со статусом («ЗАКРЫТА · НЕ ОПРЕДЕЛЕНА»)
+   и без слова «отрасль» читается как второй статус сделки. Значение появилось
+   в базе только 5 августа — до этого им не была помечена ни одна карточка из
+   1541, поэтому дефекта и не было видно. */
+const indLabel = i => i==="Не определена" ? "Отрасль не определена" : i;
 const industryTagsHtml = (d, cls="") => dealIndustries(d).slice(0,2)
-  .map(i=>`<span class="tag ${cls}">${esc(i)}</span>`).join("");
+  .map(i=>`<span class="tag ${cls}">${esc(indLabel(i))}</span>`).join("");
 const industryLinksHtml = d => dealIndustries(d).slice(0,3)
-  .map(i=>`<a class="tag" href="#/industry/${encodeURIComponent(i)}" title="Сводка по отрасли">${esc(i)}</a>`).join(" ");
+  .map(i=>`<a class="tag" href="#/industry/${encodeURIComponent(i)}" title="Сводка по отрасли">${esc(indLabel(i))}</a>`).join(" ");
 
 const KIND_BADGE_META = {
   acquisition: null, // самый частый тип — не выделяем отдельно, чтобы не шуметь
@@ -2749,7 +2754,9 @@ function relatedList(d){
 function relatedHtml(d){
   const all = relatedList(d);
   const rel = all.slice(0,5);
-  const indLink = d.ind ? `#/ind/${encodeURIComponent(d.ind)}` : "";
+  // Отрасль «Не определена» — не отрасль, а признание, что мы её не знаем:
+  // уводить читателя в «Все сделки отрасли «Не определена»» бессмысленно.
+  const indLink = (d.ind && d.ind!=="Не определена") ? `#/ind/${encodeURIComponent(d.ind)}` : "";
   // Нечего показать — говорим это прямо и уводим туда, где список всё же есть.
   // Пять случайных карточек той же отрасли выглядели как ответ, но им не были.
   if(!rel.length) return `<div class="related reveal"><span class="label">Похожие сделки</span>

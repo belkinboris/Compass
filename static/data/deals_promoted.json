@@ -75998,6 +75998,633 @@
      }
     ]
    }
+  },
+  {
+   "id": "gd057d2c1",
+   "date": "2026-08-03",
+   "title": "Visa купила BioCatch за $2,4 млрд для защиты от кибермошенничества",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861778"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$2,4 млрд",
+   "buyer_name": "Visa",
+   "asset": "BioCatch",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Visa объявила о приобретении израильского стартапа BioCatch, специализирующегося в сфере кибербезопасности. Сумма сделки составит $2,4 млрд наличными.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8861778"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Visa",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861778"
+     }
+    ],
+    "target": [
+     {
+      "value": "BioCatch",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861778"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gf70a43e6",
+   "date": "2026-08-03",
+   "title": "«Вертекс» продала Dr. Reddy’s права на три гинекологических препарата",
+   "ind": "Фармацевтика",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861146"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Вертекс»",
+   "asset": "Dr. Reddy’s права на три гинекологических препарата",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Российская «дочка» индийской фармкомпании Dr. Reddy’s получила от «Вертекса» права на три гинекологических препарата.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8861146"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "Dr. Reddy’s права на три гинекологических препарата",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861146"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Вертекс»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861146"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gbf6f6432",
+   "date": "2026-08-02",
+   "title": "Экс-акционер Башкирской содовой компании продал производство упаковки",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8860899"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2 млрд ₽",
+   "seller": "Экс-акционер Башкирской содовой компании",
+   "asset": "производство упаковки",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-02",
+     "title": "Сделка завершена",
+     "note": "Инвестиционная компания бывшего менеджера А1 Михаила Беккера и выходца из Goldman Sachs и USM Вагана Храняна приобрела производителя пищевой упаковки «Полекс», где долей владел экс-акционер Башкирской содовой компании Сергей Черников. Объем сделки оценивается",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8860899"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "производство упаковки",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8860899"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Экс-акционер Башкирской содовой компании",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8860899"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g97e1f483",
+   "date": "2026-08-03",
+   "title": "Группа «Ригла-Здравсити» закрыла сделку по покупке сети «Здоровый город» в Воронежской области",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Ригла-Здравсити»",
+   "asset": "сети «Здоровый город» в Воронежской области",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "В результате сделки, зарегистрированной 30 июля, были приобретены три юридических лица, включающих 55 аптек в Воронеже, 12 из которых имеют отделы оптики. Стоимость покупки не раскрывается. Ранее сеть «Здоровый город» входила в состав маркетингового партнерств",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Ригла-Здравсити»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
+     }
+    ],
+    "target": [
+     {
+      "value": "сети «Здоровый город» в Воронежской области",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g21795ec9",
+   "date": "2026-08-04",
+   "title": "Совладелец «Депо Три Вокзала» продал долю в компании-владельце разработчика «АльтерОфис»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/489134"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Совладелец «Депо Три Вокзала»",
+   "asset": "долю в компании-владельце разработчика «АльтерОфис»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "пания ALMI Partner (Группа компаний «АЛМИ») работает на ИТ-рынок России более 23 лет и оказывает полный спектр услуг в ИТ-секторе (по состоянию на 2024 г.). В рамках осуществления стратегии импортозамещения ALMI Partner разрабатывает и внедряет собственное оте",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/489134"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "долю в компании-владельце разработчика «АльтерОфис»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/489134"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Совладелец «Депо Три Вокзала»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/489134"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g6fe74673",
+   "date": "2026-08-03",
+   "title": "Группа ЛСР продала вторую очередь элитного ЖК на Петровском острове",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/03/gruppa-lsr-prodala-vtoruju"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ЛСР",
+   "asset": "вторую очередь элитного ЖК на Петровском острове",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/08/03/gruppa-lsr-prodala-vtoruju"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "вторую очередь элитного ЖК на Петровском острове",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/08/03/gruppa-lsr-prodala-vtoruju"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ЛСР",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/08/03/gruppa-lsr-prodala-vtoruju"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g4a10e7a2",
+   "date": "2026-08-03",
+   "title": "Инвесторы вложили $13 млн в голосовой ИИ, который умеет перебивать собеседника",
+   "ind": "Искусственный интеллект",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$13 млн",
+   "buyer_name": "Инвесторы",
+   "asset": "голосовой ИИ, который умеет перебивать собеседника",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Инвесторы",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
+     }
+    ],
+    "target": [
+     {
+      "value": "голосовой ИИ, который умеет перебивать собеседника",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g6d73538c",
+   "date": "2026-08-04",
+   "title": "\"Основа\" приобрела 5 гектаров земли в бывшей промзоне \"Свиблово\" в Москве",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260804/gruppa-2108915293.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "\"Основа\"",
+   "asset": "5 гектаров земли в бывшей промзоне \"Свиблово\" в Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260804/gruppa-2108915293.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "\"Основа\"",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260804/gruppa-2108915293.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "5 гектаров земли в бывшей промзоне \"Свиблово\" в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260804/gruppa-2108915293.html"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g70e51ff1",
+   "date": "2026-07-31",
+   "title": "JPMorgan продал акции «Роснефти»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/296482"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "JPMorgan",
+   "asset": "акции «Роснефти»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-31",
+     "title": "Сделка завершена",
+     "note": "Инвестбанк продает уже второй крупный пакет акций российских компаний. Ранее он также вышел из бумаг Сбербанка, согласовав сделку с властями Сообщение JPMorgan продал акции «Роснефти» появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/296482"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "акции «Роснефти»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/296482"
+     }
+    ],
+    "seller": [
+     {
+      "value": "JPMorgan",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/296482"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g94617d17",
+   "date": "2026-08-04",
+   "title": "Мэрия Екатеринбурга продаст подвалы и участки на окраинах",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115351"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Мэрия Екатеринбурга",
+   "asset": "подвалы и участки на окраинах",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-04",
+     "title": "Переговоры",
+     "note": "Мэрия Екатеринбурга внесла в прогнозный план приватизации муниципального имущества на 2026 год и плановый период 2027 и 2028 годов шесть помещений и три земельных участка.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053115351"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "подвалы и участки на окраинах",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115351"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Мэрия Екатеринбурга",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115351"
+     }
+    ]
+   }
   }
  ],
  "companies": {

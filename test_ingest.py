@@ -447,15 +447,91 @@ def test_post_notifies_when_a_stage_is_added():
     assert "добавлен этап сделки" in ch and format_post.should_notify(ch)
 
 
-def test_promote_holds_instead_of_guessing_industry(base):
-    """Не хватает отрасли — карточка ждёт человека, а не выдумывает поле."""
+def test_unknown_industry_does_not_hold_the_card(base):
+    """Неизвестная отрасль — не повод не пускать сделку на сайт.
+
+    Проверка перевёрнута сознательно, и вот почему. Неделю «отрасль не
+    определилась» было причиной задержки номер один (21 черновик из 41), и
+    держалась она на ложной посылке: будто карточка без отрасли базе не
+    годится. В `INDUSTRIES` есть значение «Не определена», интерфейс его
+    показывает — просто до 5 августа им не была помечена ни одна карточка из
+    1541. Отрасль дописывается позже (профилем компании, обогащением,
+    человеком), а сделка, которой на сайте нет вовсе, не дописывается ничем.
+    """
     import promote
     idx, inds = matcher.index_base(base["deals"]), promote.industries()
     draft = {"title": "Компания «Тест-Гамма» купила завод «Тест-Дельта»",
              "date": "2026-07-28", "ind": None,
+             "buyer_name": "«Тест-Гамма»", "asset": "завод «Тест-Дельта»",
              "src": [["источник", "https://example.invalid/y"]]}
     bad, hold = promote.check(draft, base, idx, inds)
-    assert not bad and hold and "отрасль" in hold[0]
+    assert not bad and not hold, (bad, hold)
+    # …и в карточке отрасль подписана честно, а не выдумана.
+    assert promote.to_card(draft, "gtest0001")["ind"] == "Не определена"
+    assert "Не определена" in inds
+
+
+def test_promote_holds_a_card_without_a_subject_or_a_party(base):
+    """Предмет и хотя бы одна сторона обязательны — для ЛЮБОГО типа сделки.
+
+    Требовать именно ПОКУПАТЕЛЯ нельзя: 431 карточка базы из 1541 (28%) его не
+    называет вовсе, потому что его не назвал источник. А вот заголовок, из
+    которого не видно ни что продают, ни кто участвует, — это не сделка.
+    Проверка распространена на все типы: раньше её обходило всё, что разбор
+    счёл размещением, и «Shein выплатит инвесторам не менее $1,1 млрд перед
+    IPO» проходило ворота насквозь.
+    """
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    common = {"date": "2026-07-28", "ind": "ИТ и интернет",
+              "src": [["источник", "https://example.invalid/z"]]}
+    no_subject = dict(common, title="Тест-Эпсилон выплатит инвесторам перед IPO",
+                      type="IPO", buyer_name="Тест-Эпсилон")
+    bad, hold = promote.check(no_subject, base, idx, inds)
+    assert not bad and any("предмет" in r for r in hold), (bad, hold)
+
+    no_party = dict(common, title="Продаётся завод «Тест-Дзета»", type="M&A",
+                    asset="завод «Тест-Дзета»")
+    bad, hold = promote.check(no_party, base, idx, inds)
+    assert not bad and any("сторона" in r for r in hold), (bad, hold)
+
+
+def test_promote_holds_a_paraphrase_of_a_fresh_card(base):
+    """Одна новость в двух изданиях не должна стать двумя карточками.
+
+    `match.py` объявляет дубль по трём общим словам заголовка — порог выбран
+    замером (два слова уводили на чужую карточку в 6,1% случаев) и снижать его
+    там нельзя. Но «отказать» и «показать человеку» стоят разного: ««Тантор
+    Лабс» купил права на СУБД «Персей»» и «Создатель российского Linux купил
+    полсотни разработчиков суверенной СУБД «Персей»» — это одна сделка, и
+    общего названия в кавычках за одну неделю тут достаточно.
+    """
+    import promote
+    existing = {"id": "gtest-persei", "date": "2026-08-04",
+                "title": "«Тантор Лабс» купил права на СУБД «Персей»",
+                "ind": "ИТ и интернет", "type": "M&A", "status": "Закрыта",
+                "src": [["источник", "https://example.invalid/persei"]]}
+    idx = matcher.index_base(base["deals"] + [existing])
+    df = promote.stem_frequency(idx)
+    twin = {"title": "Создатель российского Linux купил полсотни разработчиков "
+                     "суверенной СУБД «Персей»", "date": "2026-08-04"}
+    found = promote.near_duplicate(twin, idx, df)
+    assert found, "перефразировка свежей карточки прошла как новая сделка"
+    # В базе уже есть настоящая карточка про «Персей» — правило находит ту или
+    # другую, обе верны; важно, что найденная говорит о том же предмете.
+    titles = {d["id"]: str(d.get("title") or "")
+              for d in base["deals"] + [existing]}
+    assert "Персей" in titles[found[0]]
+    # Общие слова без единого РЕДКОГО дублем не считаются. Без этого условия
+    # «Совладелец „Депо Три Вокзала" продал долю в разработчике» слипался с
+    # «Владельцы ATI.SU купили разработчика» по словам «владел» и «разраб»,
+    # которые стоят в 25 и 34 заголовках базы и не значат ничего. Проверяем сам
+    # механизм: если ни одно слово не редкое, правило обязано промолчать.
+    other = {"title": "Владельцы платформы купили разработчика системы",
+             "date": "2026-08-04"}
+    all_frequent = {stem: 99 for row in idx for stem in row["stems"]}
+    all_frequent.update({s: 99 for s in matcher.stems(other["title"])})
+    assert promote.near_duplicate(other, idx, all_frequent) is None
 
 
 def test_promote_lets_a_confident_card_through_and_holds_a_thin_one(base):
@@ -1172,3 +1248,110 @@ def test_industry_rule_is_measured_on_the_base():
     coverage, precision = fired / len(deals), hit / max(fired, 1)
     assert coverage >= 0.65, f"покрытие правила отрасли упало до {coverage:.0%}"
     assert precision >= 0.78, f"точность правила отрасли упала до {precision:.0%}"
+
+
+def test_industry_stem_is_not_found_inside_another_word():
+    """Ствол словаря отраслей обязан быть отдельным словом.
+
+    Без границы слова `рудник` совпадал внутри слова «сотрудники», `сельхоз` —
+    внутри «Россельхознадзор», `телеком` — внутри «Ростелеком», `edtech` —
+    внутри «MedTech». На живом потоке 4 августа (2167 записей) таких
+    срабатываний внутри чужого слова было 65, и почти все — «сотрудники» ->
+    «ГМК и добыча»: любая новость со словом «сотрудники» получала отрасль
+    горнодобычи. На вычищенной базе дефект не виден вовсе, поэтому проверка
+    написана по сырым фразам, а не по заголовкам карточек.
+    """
+    import draft
+    for noise in ("сотрудники компании", "Россельхознадзор запретил ввоз",
+                  "«Ростелеком» и «Сбер» обсуждают", "ветроэнергетических установок",
+                  "MedTech-стартап Checkme", "союз автостраховщиков"):
+        assert draft.industry_by_words(noise) is None, noise
+    # Составные слова, где ствол стоит вторым, выписаны в словаре явно.
+    for phrase, ind in (("завод железобетонных панелей", "Строительство"),
+                        ("Окская судоверфь", "Машиностроение"),
+                        ("рудник «Пионер»", "ГМК и добыча"),
+                        ("телеком-оператор", "Телеком")):
+        assert draft.industry_by_words(phrase) == ind, phrase
+
+
+def test_buyer_is_found_when_the_verb_carries_a_prefix():
+    """«Покупает» четыре прогона было невидимым для разбора сторон.
+
+    `\\bкуп…` требует границы слова перед «куп», а в слове «покупает» перед ним
+    стоит приставка — границы там нет. Тот же класс, что `^не\\s+раскры\\b` и
+    `продавц\\w*`, не совпадающий со словом «Продавец»: правило молчит, а замер
+    выглядит законченным. На базе это 40 заголовков с известным покупателем.
+    """
+    import draft
+    assert draft.guess_parties("Selectel покупает облачного провайдера servers.ru")[0] == "Selectel"
+    assert draft.guess_parties("VK покупает сеть школ английского языка Ufirst")[0] == "VK"
+    # Существительное «покупку» глаголом не считается: «рассматривает покупку»
+    # — это слух, а не сделка.
+    assert draft.BUY_VERB.search("рассматривает покупку актива") is None
+
+
+def test_buyer_is_found_when_the_action_is_a_noun():
+    """«Закрыла сделку по покупке» — та же покупка, только существительным.
+
+    Ровно так написан заголовок mergers.ru про «Риглу» и «Здоровый город»,
+    из-за которого сделка неделю пролежала в очереди «на решение». Служебные
+    глаголы берутся ТОЛЬКО завершающие: «изучает возможность покупки» —
+    по-прежнему молчание.
+    """
+    import draft
+    buyer, asset, _ = draft.guess_parties(
+        "Группа «Ригла-Здравсити» закрыла сделку по покупке сети «Здоровый город» "
+        "в Воронежской области")
+    assert buyer == "«Ригла-Здравсити»" and asset.startswith("сети «Здоровый город»")
+    assert draft.guess_parties("Freedom Holding закрыл сделку по покупке TurkishBank") \
+        == ("Freedom Holding", "TurkishBank", None)
+    for rumour in ("Bloomberg: AstraZeneca изучает возможность покупки Bristol Myers Squibb",
+                   "ГК Merlion рассматривает покупку производителя техники Kuppersberg"):
+        assert draft.guess_parties(rumour)[0] is None, rumour
+
+
+def test_a_party_is_a_name_not_a_sentence():
+    """Кусок обзорной статьи стороной сделки не становится.
+
+    «Пошли в „отказ". Кто и почему продаёт пункты выдачи Wildberries» — это
+    обзор, и «продаёт» стоит в нём после КОНЦА первого предложения. Если такой
+    кусок записать продавцом, в базе появится карточка, у которой сторона
+    сделки — заголовок статьи. Границу предложения ищем правилом «точка,
+    пробел, заглавная»: список сокращений ненадёжен («18,8 млрд руб.»,
+    «Fortum B.V.»), а это правило ошибается в безопасную сторону.
+    """
+    import draft
+    assert draft.guess_parties(
+        "Пошли в «отказ». Кто и почему продает пункты выдачи заказов "
+        "Wildberries в Челябинске")[2] is None
+    assert draft._named("новому собственнику") is None
+    # …но точка внутри имени концом предложения не считается.
+    assert draft._named("Fortum Russia B.V.") == "Fortum Russia B.V."
+    assert draft._named("ООО «Дом.РФ»") == "ООО «Дом.РФ»"
+
+
+def test_party_rules_are_measured_on_the_base(base):
+    """Правила сторон меряются на выверенных карточках, а не на глаз.
+
+    Замер 5 августа: покупатель 733 попал / 79 ошибся, продавец 306 / 11.
+    Большая часть «ошибок» — наша же линейка: «Selectel» против «ООО
+    «Селектел»», «Агрохолдинг „Таврос"» против «ГК „Таврос"». Порог держит
+    ошибку дешевле молчания: если точность падает, правило стало выдумывать.
+    """
+    import draft
+    comps = base["companies"]
+
+    def same(a, b):
+        norm = lambda s: re.sub(r"[«»\"'(),.\s]", "", str(s or "")).lower()
+        return norm(a) == norm(b) or norm(a) in norm(b) or norm(b) in norm(a)
+
+    hit = miss = 0
+    for d in base["deals"]:
+        guess = draft.guess_parties(str(d.get("title") or ""))[0]
+        truth = (comps.get(d.get("buyer")) or {}).get("name") or d.get("buyer_name")
+        if not (guess and truth):
+            continue
+        hit += same(guess, truth)
+        miss += not same(guess, truth)
+    assert hit >= 700, f"полнота разбора покупателя упала до {hit}"
+    assert hit / (hit + miss) >= 0.85, f"точность разбора покупателя {hit/(hit+miss):.0%}"

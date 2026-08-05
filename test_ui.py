@@ -609,3 +609,23 @@ def test_year_only_date_is_never_shown_as_the_first_of_january(page, base_url):
     page.wait_for_timeout(600)
     caption = page.inner_text(".an-card p")
     assert "известен только год" in caption, f"график молчит про них: {caption[:160]!r}"
+
+
+def test_unknown_industry_is_labelled_as_an_industry(page, base_url):
+    """«Не определена» в плашке рядом со статусом читается как второй статус.
+
+    Значение легально с самого начала (оно есть в `INDUSTRIES`), но до 5 августа
+    им не была помечена ни одна карточка из 1541 — поэтому дефект и не был
+    виден. В шапке сделки плашки идут подряд: «ЗАКРЫТА · НЕ ОПРЕДЕЛЕНА», и без
+    слова «отрасль» непонятно, что именно не определено.
+    """
+    visit(page, base_url, "#/")
+    ids = page.evaluate("() => DEALS.filter(d => d.ind === 'Не определена').map(d => d.id)")
+    assert ids, "в базе нет карточек без отрасли — проверять нечего"
+    for deal_id in ids[:3]:
+        visit(page, base_url, f"#/deal/{deal_id}")
+        head = page.inner_text(".d-head").lower()
+        assert "отрасль не определена" in head, f"{deal_id}: плашка не называет отрасль"
+        # …и ссылки «Все сделки отрасли «Не определена»» быть не должно.
+        body = page.inner_text("#app")
+        assert "отрасли «Не определена»" not in body, f"{deal_id}: ссылка в никуда"
