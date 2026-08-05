@@ -854,13 +854,20 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     # /api/moderation/decisions (см. модель ModerationDecision).
     callback = payload.callback_query or {}
     if callback:
-        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold)$", str(callback.get("data") or ""))
+        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|post_ok|post_no|take|drop)$",
+                         str(callback.get("data") or ""))
         from_id = (callback.get("from") or {}).get("id")
         if match and _is_reviewer(from_id):
-            db.add(ModerationDecision(deal_id=match.group(1),
-                                      verdict="approve" if match.group(2) == "ok" else "hold",
+            verdict = {"ok": "approve", "hold": "hold", "post_ok": "post_yes",
+                       "post_no": "post_no", "take": "take", "drop": "drop"}[match.group(2)]
+            db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
                                       decided_by=str(from_id)))
             db.commit()
+            _mark_decided(callback, verdict)
+        elif callback.get("id"):
+            notification_service.tg_api("answerCallbackQuery",
+                                        callback_query_id=callback["id"],
+                                        text="Решать могут только владелец и партнёр.")
         return {"ok": True}
 
     message = payload.message or {}
@@ -873,14 +880,26 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     # для всех участников, а не того, кто именно ответил. Проверка по chat_id
     # авторизовала бы либо всех членов группы разом, либо никого.
     sender_id = (message.get("from") or {}).get("id")
-    # Ответ на сообщение-черновик с исправленным текстом поста: маркер
-    # «[черновик <id>]» стоит в первой строке отправленного ботом черновика.
+    # Ответ на сообщение бота. Что означает ответ — решает маркер в первой
+    # строке того сообщения, НА КОТОРОЕ ответили:
+    #   [пост <id>] / [черновик <id>] — ваш текст заменяет текст поста и
+    #       одновременно одобряет карточку (вы поправили пост — вы его ждёте);
+    #   [карточка <id>] / [сырьё <id>] — ваш текст ложится ЗАМЕТКОЙ: её
+    #       читает суточная рутина притока и применяет через review.py с его
+    #       проверками цитат — заметка не пишет в базу напрямую.
     reply = message.get("reply_to_message") or {}
-    marker = re.search(r"\[черновик ([\w-]{1,40})\]", str(reply.get("text") or ""))
+    marker = re.search(r"\[(пост|черновик|карточка|сырьё) ([\w-]{1,40})\]",
+                       str(reply.get("text") or ""))
     if marker and text.strip() and _is_reviewer(sender_id):
-        db.add(ModerationDecision(deal_id=marker.group(1), verdict="approve",
+        kind, deal_id = marker.group(1), marker.group(2)
+        verdict = "approve" if kind in ("пост", "черновик") else "note"
+        db.add(ModerationDecision(deal_id=deal_id, verdict=verdict,
                                   edited_text=text.strip(), decided_by=str(sender_id)))
         db.commit()
+        confirm = ("Принято: пост уйдёт с вашим текстом." if verdict == "approve"
+                   else "Заметка записана — рутина притока применит её при следующем "
+                        "прогоне через проверки review.py.")
+        notification_service._send_telegram(str(chat_id), confirm)
         return {"ok": True}
     match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
     if match and chat_id is not None:
@@ -916,33 +935,45 @@ def _read_json(path, default):
 
 
 def _queue_report() -> str:
-    """Две очереди, и путать их нельзя.
+    """Сводка по трём типам сообщений консоли — теми же значками, что и они.
 
-    `pending.json` — карточки, ПРОШЕДШИЕ ворота и ждущие вашей кнопки.
-    `data/inbox/hold/` — черновики, которые ворота НЕ пропустили: им не хватает
-    предмета, стороны или они похожи на дубль. Кнопкой они не решаются, их
-    разбирает приток на следующем прогоне или человек правкой правил.
+    🗂/📣 — карточки предпросмотра (pending.json): ждут кнопки, по молчанию
+    сутки уходят как есть. ⚠️ — сырьё, которое ворота не пропустили: решается
+    только кнопкой под своим сообщением, по молчанию не публикуется никогда.
     """
     pending = _read_json("static/data/pending.json", {}).get("cards") or []
-    lines = ["Ждут вашего решения: %d" % len(pending)]
-    for card in pending[:10]:
-        mark = " (придержана)" if card.get("held") else ""
-        lines.append("• %s%s" % (str(card.get("title") or "")[:90], mark))
-    if len(pending) > 10:
-        lines.append("… и ещё %d" % (len(pending) - 10))
+    held = [c for c in pending if c.get("held")]
+    active = [c for c in pending if not c.get("held")]
+    lines = ["🗂📣 Карточки и посты на проверке: %d" % len(active)]
+    for card in active[:8]:
+        lines.append("• %s" % str(card.get("title") or "")[:90])
+    if len(active) > 8:
+        lines.append("… и ещё %d" % (len(active) - 8))
+    if held:
+        lines.append("✋ Придержано вами: %d" % len(held))
+        for card in held[:5]:
+            lines.append("• %s" % str(card.get("title") or "")[:90])
 
+    state = _read_json("data/inbox/moderation_state.json", {})
+    decided = set((state.get("decided_raw") or {}))
     hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
-    names = sorted(n for n in os.listdir(hold_dir)) if os.path.isdir(hold_dir) else []
-    drafts = _read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts") if names else None
+    names = sorted(n for n in os.listdir(hold_dir) if n.endswith(".json")) \
+        if os.path.isdir(hold_dir) else []
+    drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts")
+              if names else None) or []
+    drafts = [d for d in drafts if str(d.get("draft_id")) not in decided]
     if drafts:
         reasons = {}
         for draft in drafts:
             for why in (draft.get("hold_reasons") or ["причина не записана"]):
                 reasons[why] = reasons.get(why, 0) + 1
-        lines.append("\nНе прошли ворота (кнопкой не решаются): %d" % len(drafts))
+        lines.append("\n⚠️ Сомнительные, ждут вашего слова: %d" % len(drafts))
         for why, count in sorted(reasons.items(), key=lambda kv: -kv[1])[:5]:
             lines.append("• %d — %s" % (count, why[:80]))
-        lines.append("Полный список: data/inbox/hold/%s в репозитории." % names[-1])
+        lines.append("Каждая приходит отдельным сообщением с кнопками "
+                     "«это сделка» / «не сделка».")
+    if not active and not held and not drafts:
+        lines = ["Очередь пуста — всё решено. Новое приедет с утренним прогоном притока."]
     return "\n".join(lines)
 
 
@@ -955,6 +986,33 @@ def _bot_command(name: str, sender_id) -> str | None:
             return "Эта команда доступна только владельцу и партнёру."
         return _queue_report()
     return None
+
+
+_VERDICT_LABEL = {
+    "approve": "✅ Карточка одобрена", "hold": "✋ Придержана",
+    "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
+    "take": "✅ Признана сделкой — уйдёт в работу", "drop": "🗑 Отброшена как не-сделка",
+}
+
+
+def _mark_decided(callback: dict, verdict: str) -> None:
+    """Показать решение В САМОМ сообщении — иначе в общей группе второй
+    человек не видит, что первый уже нажал, и жмёт ещё раз. Кнопки снимаются,
+    под текстом появляется строка «решил такой-то». Оба вызова best-effort:
+    решение уже в таблице, и сбой отрисовки его не отменяет."""
+    if callback.get("id"):
+        notification_service.tg_api("answerCallbackQuery",
+                                    callback_query_id=callback["id"], text="Принято")
+    message = callback.get("message") or {}
+    chat = (message.get("chat") or {}).get("id")
+    if chat is None or not message.get("message_id"):
+        return
+    who = (callback.get("from") or {}).get("first_name") or "участник"
+    stamped = "%s\n\n— %s (%s)" % (str(message.get("text") or ""),
+                                   _VERDICT_LABEL.get(verdict, verdict), who)
+    notification_service.tg_api("editMessageText", chat_id=chat,
+                                message_id=message["message_id"], text=stamped,
+                                disable_web_page_preview=True)
 
 
 def _is_reviewer(chat_id) -> bool:

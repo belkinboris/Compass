@@ -77,11 +77,32 @@ def hours_pending(card, now):
     return (now - since).total_seconds() / 3600.0
 
 
+# Вердикты и их роли. КАРТОЧНЫЕ решают судьбу карточки (approve/hold);
+# ПОСТОВЫЕ — модификатор канала (post_yes/post_no: выйдет ли пост, когда
+# карточка выйдет); СЫРЬЕВЫЕ (take/drop) относятся к черновикам, которые
+# ворота не пропустили; 'note' — заметка для рутины притока, approve её НЕ
+# потребляет и НЕ трактует. Смешение ролей уже стреляло: старый код считал
+# «любой не-approve вердикт» придержанием, и post_no придержал бы карточку.
+CARD_VERDICTS = {'approve', 'hold'}
+POST_VERDICTS = {'post_yes', 'post_no'}
+RAW_VERDICTS = {'take', 'drop'}
+
+
+def last_by_deal(decisions, verdicts):
+    """Последнее по времени решение нужного класса на каждый id."""
+    result = {}
+    for d in decisions:                      # список уже упорядочен по created_at
+        if d['verdict'] in verdicts:
+            result[d['deal_id']] = d
+    return result
+
+
 def plan_actions(cards, decisions, now):
-    """(публикуем, придерживаем, ждём) — чистая функция, её держат тесты."""
-    by_deal = {}
-    for d in decisions:                      # позднее решение перекрывает раннее
-        by_deal[d['deal_id']] = d
+    """(публикуем, придерживаем, ждём) — чистая функция, её держат тесты.
+
+    Ответ с текстом на сообщение [пост <id>] приходит вердиктом 'approve' с
+    edited_text — правя пост, человек одновременно одобряет карточку."""
+    by_deal = last_by_deal(decisions, CARD_VERDICTS)
     publish, hold, wait = [], [], []
     for card in cards:
         decision = by_deal.get(card['id'])
@@ -96,6 +117,20 @@ def plan_actions(cards, decisions, now):
         else:
             wait.append((card, 'ждём решения (%.0f ч из %d)' % (hours_pending(card, now), SILENCE_HOURS)))
     return publish, hold, wait
+
+
+def plan_raw(drafts, decisions):
+    """(в работу, отброшено) для сырья. По молчанию сырьё НЕ публикуется:
+    ворота его не пропустили, и молчание не делает его сделкой."""
+    by_draft = last_by_deal(decisions, RAW_VERDICTS)
+    take, drop = [], []
+    for draft in drafts:
+        decision = by_draft.get(str(draft.get('draft_id')))
+        if decision and decision['verdict'] == 'take':
+            take.append(draft)
+        elif decision:
+            drop.append(draft)
+    return take, drop
 
 
 def main(write=False):
@@ -122,6 +157,7 @@ def main(write=False):
 
     data = json.load(open(DATA, encoding='utf-8'))
     existing = {d['id'] for d in data['deals']}
+    post_mod = last_by_deal(decisions, POST_VERDICTS)
     fresh = []
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
@@ -129,6 +165,11 @@ def main(write=False):
                  if k not in ('pending_since', 'draft_sent', 'held')}
         if override:
             clean['post_override'] = override
+        # «Без поста»: карточка выходит на сайт, а канал молчит. send_telegram
+        # увидит признак и засеет telegram_posts как бэклог, не отправляя.
+        post = post_mod.get(card['id'])
+        if post and post['verdict'] == 'post_no':
+            clean['no_post'] = True
         data['deals'].append(clean)
         fresh.append(clean)
     for card, _why in hold:
@@ -136,12 +177,50 @@ def main(write=False):
     published_ids = {c['id'] for c, _o, _w in publish}
     pending['cards'] = [c for c in pending['cards'] if c['id'] not in published_ids]
 
+    # СЫРЬЁ: «это сделка — в работу» превращает черновик в карточку
+    # предпросмотра (дальше он придёт в группу сообщениями «пост» и
+    # «карточка»); «не сделка» запоминается навсегда — promote больше не
+    # покажет этот draft_id.
+    import promote
+    state = promote.load_state()
+    raw_all = []
+    if os.path.isdir(os.path.join(ROOT, 'data', 'inbox', 'hold')):
+        hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
+        for name in sorted(os.listdir(hold_dir)):
+            if name.endswith('.json'):
+                raw_all += json.load(open(os.path.join(hold_dir, name),
+                                          encoding='utf-8')).get('drafts', [])
+    taken, dropped = plan_raw(raw_all, decisions)
+    pending_ids = {c['id'] for c in pending['cards']} | existing
+    for draft in taken:
+        card = promote.to_card(draft, promote.new_id(pending_ids))
+        pending_ids.add(card['id'])
+        card['pending_since'] = now.isoformat(timespec='seconds')
+        pending['cards'].append(card)
+        state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
+        print('  В РАБОТУ    %s -> предпросмотр %s' % (draft['draft_id'], card['id']))
+    for draft in dropped:
+        state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'drop'
+        print('  ОТБРОШЕНА   %s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+
     if fresh:
         json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    consume(handle, [d['id'] for d in decisions])
-    print('Опубликовано: %d. В базе: %d. Осталось в предпросмотре: %d.'
-          % (len(fresh), len(data['deals']), len(pending['cards'])))
+    promote.save_state(state)
+    # Заметки ('note') НЕ потребляем: их читает суточная рутина притока и
+    # применяет через review.py; потребив их здесь, мы бы их спрятали.
+    consume(handle, [d['id'] for d in decisions if d['verdict'] != 'note'])
+    print('Опубликовано: %d. В базе: %d. В предпросмотре: %d (из сырья взято %d, отброшено %d).'
+          % (len(fresh), len(data['deals']), len(pending['cards']), len(taken), len(dropped)))
+    if taken:
+        # Черновики, взятые в работу, сразу уходят в группу сообщениями
+        # «пост» и «карточка» — иначе они ждали бы утренней рутины сутки.
+        try:
+            import send_drafts
+            send_drafts.main(write=True)
+        except Exception as e:
+            print('Рассылка новых черновиков не удалась (%s) — их отправит '
+                  'следующий прогон.' % e)
     if fresh:
         # Личные уведомления по подпискам — как раньше делал promote.notify.
         import promote

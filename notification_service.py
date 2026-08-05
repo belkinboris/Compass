@@ -56,6 +56,27 @@ def _send_email(to_addr: str, subject: str, body: str) -> bool:
         return False
 
 
+def tg_api(method: str, **payload) -> dict | None:
+    """Любой метод Bot API с боевого хоста — через релей (telegram_endpoint).
+
+    Нужен модерации: ответить на нажатие кнопки (answerCallbackQuery) и
+    дописать решение в само сообщение (editMessageText), чтобы владелец и
+    партнёр видели в группе, что уже решено и кем. Сбой не критичен ни для
+    одного вызова — решение уже в таблице; поэтому None, а не исключение.
+    """
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    if not token:
+        return None
+    try:
+        response = httpx.post(telegram_endpoint.method_url(token, method),
+                              json=payload, timeout=12)
+        response.raise_for_status()
+        return response.json()
+    except httpx.HTTPError as exc:
+        logger.warning("telegram %s failed: %s", method, exc)
+        return None
+
+
 def _send_telegram(chat_id: str, text: str) -> bool:
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not token or not chat_id:

@@ -402,6 +402,13 @@ def main(write):
     # было в базе, а друг с другом их никто не сверял. Пустив их, мы завели бы
     # три карточки на одну сделку в первый же рабочий день. Поэтому прошедшая
     # карточка сразу попадает в индекс, и следующая сверяется уже с ней.
+    # Черновик, по которому основатели УЖЕ нажали «в работу» или «не сделка»,
+    # не должен возвращаться в очередь на каждом прогоне: promote пересобирает
+    # hold-файл заново, и без этого фильтра отброшенная вчера не-сделка
+    # приходила бы в группу каждый день как новая.
+    decided = load_state().get('decided_raw', {})
+    drafts = [d for d in drafts if str(d.get('draft_id')) not in decided]
+
     passed, refused, held = [], [], []
     admitted, batch_names = [], []
     for draft in drafts:
@@ -485,6 +492,21 @@ def main(write):
 
 
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
+# Решения по СЫРЫМ черновикам (кнопки «в работу»/«не сделка» под сообщением
+# типа «сомнительная сделка») и отметки «уже разослано». Файл в git: рутина
+# живёт в одноразовом контейнере, и незакоммиченное состояние — потерянное.
+STATE = os.path.join(ROOT, 'data', 'inbox', 'moderation_state.json')
+
+
+def load_state():
+    if os.path.exists(STATE):
+        return json.load(open(STATE, encoding='utf-8'))
+    return {'decided_raw': {}, 'sent_raw': []}
+
+
+def save_state(state):
+    os.makedirs(os.path.dirname(STATE), exist_ok=True)
+    json.dump(state, open(STATE, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
 
 
 def load_pending():

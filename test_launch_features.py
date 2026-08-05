@@ -743,7 +743,7 @@ def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
         "message": {"chat": {"id": -1001234567890}, "from": {"id": 222},
                      "text": "/queue@compass_bot"}})
     assert sent, "команда с суффиксом бота осталась без ответа"
-    assert "ждут вашего решения" in sent[0][1].lower()
+    assert "на проверке" in sent[0][1].lower() or "очередь пуста" in sent[0][1].lower()
 
     # Посторонний в той же группе состав очереди не получает.
     sent.clear()
@@ -752,13 +752,95 @@ def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
     assert sent and "только владельцу и партнёру" in sent[0][1]
 
 
-def test_queue_report_separates_two_different_queues():
-    """«Ждут решения» и «не прошли ворота» — разные очереди, и путать их нельзя.
+def test_queue_report_shows_three_console_blocks():
+    """/queue говорит на языке трёх типов сообщений консоли.
 
-    Первая решается кнопкой в Telegram, вторая — нет: там нет предмета или
-    стороны, и кнопка ничего не исправит. Показать их одним числом значило бы
-    обещать владельцу, что 29 карточек решаются нажатием.
+    До 5 августа сырьё показывалось строкой «кнопкой не решаются» и жило только
+    файлом в git. По решению владельца оно теперь решается кнопками под своим
+    сообщением (⚠️), поэтому сводка обязана считать его ЖДУЩИМ решения, а не
+    справочным, — и отдельно от карточек предпросмотра (🗂📣): у них разные
+    правила молчания (карточки по молчанию выходят, сырьё — никогда).
     """
     report = main._queue_report()
-    assert "Ждут вашего решения:" in report
-    assert "кнопкой не решаются" in report or "Не прошли ворота" not in report
+    assert "🗂📣" in report or "Очередь пуста" in report
+    if "⚠️" in report:
+        assert "ждут вашего слова" in report.lower()
+        assert "кнопками" in report.lower()
+
+
+def test_post_no_is_a_modifier_and_does_not_hold_the_card():
+    """«Без поста» — модификатор канала, а не вердикт по карточке.
+
+    Старый план считал «любой не-approve вердикт» придержанием: post_no
+    остановил бы публикацию карточки на сайт, хотя человек сказал ровно
+    обратное — «карточку выпускай, канал промолчи».
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    cards = [{"id": "p1", "title": "карточка без поста", "draft_sent": True,
+              "pending_since": stale}]
+    decisions = [{"deal_id": "p1", "verdict": "post_no", "created_at": "x"}]
+    publish, hold, wait = approve.plan_actions(cards, decisions, now)
+    assert not hold, "post_no придержал карточку — это модификатор, а не вердикт"
+    assert {c["id"] for c, _o, _w in publish} == {"p1"}, "таймаут молчания должен сработать"
+    # …а сам модификатор читается отдельной выборкой.
+    assert approve.last_by_deal(decisions, approve.POST_VERDICTS)["p1"]["verdict"] == "post_no"
+
+
+def test_raw_drafts_need_a_button_and_never_publish_on_silence():
+    """Сырьё решается только кнопкой: молчание не делает его сделкой.
+
+    Ворота эти черновики уже не пропустили; таймаут «молчание — согласие»
+    существует только для карточек, ПРОШЕДШИХ ворота.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    drafts = [{"draft_id": "d1", "title": "взять"},
+              {"draft_id": "d2", "title": "бросить"},
+              {"draft_id": "d3", "title": "молчание — ничего не происходит"}]
+    decisions = [{"deal_id": "d1", "verdict": "take"},
+                 {"deal_id": "d2", "verdict": "drop"}]
+    take, drop = approve.plan_raw(drafts, decisions)
+    assert [d["draft_id"] for d in take] == ["d1"]
+    assert [d["draft_id"] for d in drop] == ["d2"]
+
+
+def test_webhook_routes_raw_and_post_buttons(client, monkeypatch):
+    """Кнопки трёх типов сообщений дают три разных класса вердиктов."""
+    _mod_env(monkeypatch)
+    for data, verdict in (("mod:d9тест:take", "take"), ("mod:d9тест2:drop", "drop"),
+                          ("mod:g9тест:post_no", "post_no")):
+        client.post("/api/telegram/webhook/тайна", json={
+            "callback_query": {"data": data.replace("тест", "test"),
+                                "from": {"id": 111}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    got = {d["deal_id"]: d["verdict"] for d in r.json()["decisions"]}
+    assert got.get("d9test") == "take" and got.get("d9test2") == "drop"
+    assert got.get("g9test") == "post_no"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна",
+                      "ids": [d["id"] for d in r.json()["decisions"]]})
+
+
+def test_reply_to_card_message_becomes_a_note_not_a_publication(client, monkeypatch):
+    """Ответ на [карточка <id>] — заметка для рутины, а не команда публиковать.
+
+    Заметка применяется через review.py с его проверками цитат; будь она
+    вердиктом approve, любой комментарий («дата какая-то странная») публиковал
+    бы карточку немедленно.
+    """
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111}, "from": {"id": 111},
+                     "text": "дата не та — в источнике сказано 4 мая",
+                     "reply_to_message": {"text": "🗂 [карточка gnote1] — НА САЙТ"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gnote1"]
+    assert rows and rows[0]["verdict"] == "note"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})

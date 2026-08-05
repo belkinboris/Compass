@@ -216,7 +216,7 @@ def main(write, ignore_pace=False):
     comps = data['companies']
     updates_by_id = load_today_updates()
 
-    to_send, to_edit = [], []
+    to_send, to_edit, to_seed = [], [], []
     for deal in data['deals']:
         did = deal['id']
         if did in posts:
@@ -237,6 +237,12 @@ def main(write, ignore_pace=False):
             if changes:
                 text = format_post.render(deal, comps, updates=changes)
                 to_edit.append((did, posts[did], text))
+        elif deal.get('no_post'):
+            # Решение модерации «карточка без поста»: сайт получает карточку,
+            # канал молчит. Засеваем состояние как бэклог (None) — если позже
+            # у сделки появится настоящий новый факт, канал узнает о нём как
+            # о новости, а не получит запоздалый первый пост.
+            to_seed.append(did)
         elif sendable(deal):
             # Текст, который владелец продиктовал в Telegram при модерации
             # черновика, важнее автоформата — но только для ПЕРВОГО поста:
@@ -244,7 +250,8 @@ def main(write, ignore_pace=False):
             text = deal.get('post_override') or format_post.render(deal, comps)
             to_send.append((did, text))
 
-    print('Новых постов: %d, правок существующих: %d' % (len(to_send), len(to_edit)))
+    print('Новых постов: %d, правок существующих: %d, без поста по решению: %d'
+          % (len(to_send), len(to_edit), len(to_seed)))
     if not token or not chat_id:
         print('TELEGRAM_BOT_TOKEN / TELEGRAM_CHANNEL_ID не заданы — не отправляю, только показываю план.')
         for did, text in to_send[:3]:
@@ -273,7 +280,16 @@ def main(write, ignore_pace=False):
     if held:
         print('Придержано новых постов: %d — уйдут следующими прогонами.' % len(held))
     if not to_send and not to_edit:
-        print('Отправлять сейчас нечего.')
+        # Засев «без поста» — тоже изменение состояния: не записать его —
+        # значит показывать эти карточки в плане каждый прогон заново.
+        if to_seed:
+            for did in to_seed:
+                posts[did] = None
+            with open(DATA, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=1, ensure_ascii=False)
+            print('Постов нет; засеяно без поста: %d.' % len(to_seed))
+        else:
+            print('Отправлять сейчас нечего.')
         return
 
     queue = [('send', did, text) for did, text in to_send] + \
@@ -303,9 +319,12 @@ def main(write, ignore_pace=False):
         except TelegramError as e:
             failed.append((did, str(e)))
 
+    for did in to_seed:
+        posts[did] = None
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
-    print('Отправлено новых: %d, отредактировано: %d, ошибок: %d' % (sent, edited, len(failed)))
+    print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, ошибок: %d'
+          % (sent, edited, len(to_seed), len(failed)))
     for did, err in failed:
         print('  %s: %s' % (did, err))
 
