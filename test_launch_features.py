@@ -712,3 +712,53 @@ def test_send_targets_prefers_the_shared_group_over_personal_dms(monkeypatch):
     assert send_drafts.send_targets() == ["-1001234567890"]
     # Список авторизованных решать при этом не меняется — это отдельная величина.
     assert send_drafts.reviewers() == ["111", "222"]
+
+
+def test_bot_answers_bare_start_and_help(client, monkeypatch):
+    """Голый «/start» раньше не делал НИЧЕГО и молчал.
+
+    Человек писал боту и получал тишину, неотличимую от поломки: ни ответа, ни
+    ошибки. Тот же класс, что E9 — отсутствие ошибки читается как успех.
+    """
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "_send_telegram",
+                        lambda chat_id, text: sent.append((chat_id, text)) or True)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111}, "from": {"id": 111}, "text": "/start"}})
+    assert sent and "модерация" in sent[0][1].lower()
+
+
+def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
+    """В группе Telegram шлёт «/queue@compass_bot», а не «/queue».
+
+    Правило, написанное под личный чат, в группе молча не срабатывает: команда
+    отправлена, бот молчит, причина невидима. Суффикс обязателен к отрезанию.
+    """
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "_send_telegram",
+                        lambda chat_id, text: sent.append((chat_id, text)) or True)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": -1001234567890}, "from": {"id": 222},
+                     "text": "/queue@compass_bot"}})
+    assert sent, "команда с суффиксом бота осталась без ответа"
+    assert "ждут вашего решения" in sent[0][1].lower()
+
+    # Посторонний в той же группе состав очереди не получает.
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": -1001234567890}, "from": {"id": 999}, "text": "/queue"}})
+    assert sent and "только владельцу и партнёру" in sent[0][1]
+
+
+def test_queue_report_separates_two_different_queues():
+    """«Ждут решения» и «не прошли ворота» — разные очереди, и путать их нельзя.
+
+    Первая решается кнопкой в Telegram, вторая — нет: там нет предмета или
+    стороны, и кнопка ничего не исправит. Показать их одним числом значило бы
+    обещать владельцу, что 29 карточек решаются нажатием.
+    """
+    report = main._queue_report()
+    assert "Ждут вашего решения:" in report
+    assert "кнопкой не решаются" in report or "Не прошли ворота" not in report

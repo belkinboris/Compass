@@ -885,7 +885,76 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
     if match and chat_id is not None:
         notification_service.bind_telegram(db, match.group(1), str(chat_id))
+        return {"ok": True}
+    # Команды бота. Голый «/start» раньше не делал НИЧЕГО и молчал — человек
+    # писал боту и получал тишину, неотличимую от поломки. В группе команда
+    # приходит с суффиксом («/queue@compass_bot»), его надо отрезать.
+    command = re.match(r"^/([a-z_]+)(?:@\S+)?\s*$", text.strip(), re.I)
+    if command and chat_id is not None:
+        reply = _bot_command(command.group(1).lower(), sender_id)
+        if reply:
+            notification_service._send_telegram(str(chat_id), reply)
     return {"ok": True}
+
+
+BOT_HELP = (
+    "Бот «Компаса» — модерация новых карточек.\n\n"
+    "/queue — что сейчас ждёт решения\n"
+    "/help — эта справка\n\n"
+    "Когда приток находит сделку, бот присылает сюда проект поста, ссылку на "
+    "карточку (её ещё нет на сайте) и две кнопки. Ответ на сообщение с вашим "
+    "текстом заменит текст поста. Молчание сутки — публикуем как есть."
+)
+
+
+def _read_json(path, default):
+    try:
+        with open(os.path.join(BASE_DIR, path), encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return default
+
+
+def _queue_report() -> str:
+    """Две очереди, и путать их нельзя.
+
+    `pending.json` — карточки, ПРОШЕДШИЕ ворота и ждущие вашей кнопки.
+    `data/inbox/hold/` — черновики, которые ворота НЕ пропустили: им не хватает
+    предмета, стороны или они похожи на дубль. Кнопкой они не решаются, их
+    разбирает приток на следующем прогоне или человек правкой правил.
+    """
+    pending = _read_json("static/data/pending.json", {}).get("cards") or []
+    lines = ["Ждут вашего решения: %d" % len(pending)]
+    for card in pending[:10]:
+        mark = " (придержана)" if card.get("held") else ""
+        lines.append("• %s%s" % (str(card.get("title") or "")[:90], mark))
+    if len(pending) > 10:
+        lines.append("… и ещё %d" % (len(pending) - 10))
+
+    hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
+    names = sorted(n for n in os.listdir(hold_dir)) if os.path.isdir(hold_dir) else []
+    drafts = _read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts") if names else None
+    if drafts:
+        reasons = {}
+        for draft in drafts:
+            for why in (draft.get("hold_reasons") or ["причина не записана"]):
+                reasons[why] = reasons.get(why, 0) + 1
+        lines.append("\nНе прошли ворота (кнопкой не решаются): %d" % len(drafts))
+        for why, count in sorted(reasons.items(), key=lambda kv: -kv[1])[:5]:
+            lines.append("• %d — %s" % (count, why[:80]))
+        lines.append("Полный список: data/inbox/hold/%s в репозитории." % names[-1])
+    return "\n".join(lines)
+
+
+def _bot_command(name: str, sender_id) -> str | None:
+    if name in ("start", "help"):
+        return BOT_HELP
+    if name in ("queue", "ochered"):
+        # Состав очереди — внутренняя кухня платформы, отвечаем только своим.
+        if not _is_reviewer(sender_id):
+            return "Эта команда доступна только владельцу и партнёру."
+        return _queue_report()
+    return None
 
 
 def _is_reviewer(chat_id) -> bool:
