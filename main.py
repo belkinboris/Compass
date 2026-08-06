@@ -854,11 +854,22 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     # /api/moderation/decisions (см. модель ModerationDecision).
     callback = payload.callback_query or {}
     if callback:
-        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|post_ok|post_no|take|drop)$",
+        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
                          str(callback.get("data") or ""))
         from_id = (callback.get("from") or {}).get("id")
+        if match and match.group(2) == "edit" and _is_reviewer(from_id):
+            # «Изменить» — не вердикт, а подсказка, как продиктовать правку:
+            # окна ввода у кнопок Telegram нет, ввод делается ответом.
+            notification_service.tg_api(
+                "answerCallbackQuery", callback_query_id=callback.get("id"),
+                show_alert=True,
+                text="Ответьте на это сообщение своим текстом. Для поста ответ "
+                     "заменит текст поста целиком; для карточки и сырья — станет "
+                     "заметкой, которую применит рутина через проверки источника.")
+            return {"ok": True}
         if match and _is_reviewer(from_id):
-            verdict = {"ok": "approve", "hold": "hold", "post_ok": "post_yes",
+            verdict = {"ok": "approve", "hold": "hold", "discard": "discard",
+                       "post_ok": "post_yes",
                        "post_no": "post_no", "take": "take", "drop": "drop"}[match.group(2)]
             db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
                                       decided_by=str(from_id)))
@@ -990,6 +1001,7 @@ def _bot_command(name: str, sender_id) -> str | None:
 
 _VERDICT_LABEL = {
     "approve": "✅ Карточка одобрена", "hold": "✋ Придержана",
+    "discard": "🗑 Выкинута — не выйдет ни на сайт, ни в канал",
     "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
     "take": "✅ Признана сделкой — уйдёт в работу", "drop": "🗑 Отброшена как не-сделка",
 }

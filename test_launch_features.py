@@ -672,7 +672,7 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
         {"deal_id": "a1", "verdict": "approve", "edited_text": "текст владельца"},
         {"deal_id": "a2", "verdict": "hold"},
     ]
-    publish, hold, wait = approve.plan_actions(cards, decisions, now)
+    publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
     assert {c["id"] for c, _o, _w in publish} == {"a1", "a3"}
     assert next(o for c, o, _ in publish if c["id"] == "a1") == "текст владельца"
     assert {c["id"] for c, _w in hold} == {"a2"}
@@ -784,7 +784,7 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
     cards = [{"id": "p1", "title": "карточка без поста", "draft_sent": True,
               "pending_since": stale}]
     decisions = [{"deal_id": "p1", "verdict": "post_no", "created_at": "x"}]
-    publish, hold, wait = approve.plan_actions(cards, decisions, now)
+    publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
     assert not hold, "post_no придержал карточку — это модификатор, а не вердикт"
     assert {c["id"] for c, _o, _w in publish} == {"p1"}, "таймаут молчания должен сработать"
     # …а сам модификатор читается отдельной выборкой.
@@ -844,3 +844,40 @@ def test_reply_to_card_message_becomes_a_note_not_a_publication(client, monkeypa
     assert rows and rows[0]["verdict"] == "note"
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_discard_kills_the_card_and_beats_the_silence_timeout():
+    """«Выкинуть» сильнее и «придержать», и таймаута молчания.
+
+    Просьба владельца 6 августа: нероссийский контур и не-M&A не «придержать
+    навечно», а убрать совсем. Критично, чтобы discard побеждал таймаут: без
+    этого выкинутая карточка с истёкшими сутками всё равно ушла бы на сайт.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    stale = (now - timedelta(hours=48)).isoformat(timespec="seconds")
+    cards = [{"id": "x1", "title": "выкинутая, сутки прошли",
+              "draft_sent": True, "pending_since": stale}]
+    decisions = [{"deal_id": "x1", "verdict": "discard"}]
+    publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
+    assert not publish and not hold
+    assert {c["id"] for c, _w in discard} == {"x1"}
+
+
+def test_webhook_discard_button_and_edit_hint(client, monkeypatch):
+    """🗑 пишет вердикт discard; ✏️ — только подсказка, НЕ решение."""
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"data": "mod:gdel1:discard", "from": {"id": 111}}})
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"data": "mod:gdel2:edit", "from": {"id": 111}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    got = {d["deal_id"]: d["verdict"] for d in r.json()["decisions"]}
+    assert got.get("gdel1") == "discard"
+    assert "gdel2" not in got, "кнопка «изменить» не должна оставлять вердикт"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна",
+                      "ids": [d["id"] for d in r.json()["decisions"]]})

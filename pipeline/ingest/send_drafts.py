@@ -129,6 +129,9 @@ def card_keyboard(card):
     return {'inline_keyboard': [[
         {'text': '✅ Опубликовать', 'callback_data': 'mod:%s:ok' % card['id']},
         {'text': '✋ Придержать', 'callback_data': 'mod:%s:hold' % card['id']},
+    ], [
+        {'text': '✏️ Изменить', 'callback_data': 'mod:%s:edit' % card['id']},
+        {'text': '🗑 Выкинуть', 'callback_data': 'mod:%s:discard' % card['id']},
     ]]}
 
 
@@ -136,6 +139,7 @@ def post_keyboard(card):
     return {'inline_keyboard': [[
         {'text': '📣 Пост в канал', 'callback_data': 'mod:%s:post_ok' % card['id']},
         {'text': '🔕 Без поста', 'callback_data': 'mod:%s:post_no' % card['id']},
+        {'text': '✏️', 'callback_data': 'mod:%s:edit' % card['id']},
     ]]}
 
 
@@ -144,6 +148,28 @@ def raw_keyboard(draft):
         {'text': '✅ Это сделка — в работу', 'callback_data': 'mod:%s:take' % draft['draft_id']},
         {'text': '🗑 Не сделка', 'callback_data': 'mod:%s:drop' % draft['draft_id']},
     ]]}
+
+
+def site_pending_ids():
+    """Какие черновики уже ВИДНЫ на сайте. None — проверить не удалось.
+
+    6 августа ссылки на предпросмотр ушли в группу ДО того, как pending.json
+    доехал до сайта деплоем: первые ~20 минут владелец видел пустой черновик и
+    решил, что предпросмотр бесполезен. Сообщение со ссылкой, которая пока
+    никуда не ведёт, хуже сообщения, отложенного на час, — поэтому карточные
+    сообщения не отправляются, пока сайт не отдаёт этот черновик. Сырьё
+    ссылок не несёт и уходит сразу. Если проверить не удалось (сеть), шлём с
+    предупреждением: недоставленная консоль хуже риска ранней ссылки.
+    """
+    try:
+        import httpx
+        r = httpx.get('%s/static/data/pending.json' % SITE,
+                      params={'nocache': os.getpid()}, timeout=15)
+        if r.status_code != 200:
+            return None
+        return {c.get('id') for c in r.json().get('cards', [])}
+    except Exception:
+        return None
 
 
 def latest_hold_drafts():
@@ -206,7 +232,13 @@ def build_plan():
     plan = []
     pending = promote.load_pending() if os.path.exists(PENDING) else {'cards': []}
     comps = json.load(open(DATA, encoding='utf-8'))['companies']
+    live = site_pending_ids()
+    postponed = 0
     for card in pending['cards']:
+        if live is not None and card['id'] not in live \
+                and not (card.get('draft_sent') and card.get('post_draft_sent')):
+            postponed += 1
+            continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
         # считалась разосланной целиком, и проект поста не уходил уже никогда
@@ -221,14 +253,18 @@ def build_plan():
                          ('card', card, 'post_draft_sent')))
     state = promote.load_state()
     seen = set(state.get('sent_raw', [])) | set(state.get('decided_raw', {}))
-    fresh_raw = [d for d in latest_hold_drafts() if str(d['draft_id']) not in seen]
+    fresh_raw = [d for d in latest_hold_drafts()
+                 if str(d['draft_id']) not in seen and not d.get('dup_in_batch')]
     for draft in fresh_raw[:RAW_PER_RUN]:
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
-    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN)
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed
 
 
 def main(write=False):
-    plan, pending, state, deferred = build_plan()
+    plan, pending, state, deferred, postponed = build_plan()
+    if postponed:
+        print('Отложено карточек: %d — сайт ещё не отдаёт их в pending.json.' % postponed)
+        print('Сначала закоммитьте и запушьте pending.json, дождитесь деплоя, потом отправка.')
     chats = send_targets()
     group = bool(os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip())
     print('Сообщений к отправке: %d | адресов: %d%s'

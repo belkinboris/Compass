@@ -1579,3 +1579,27 @@ def test_packaging_is_its_own_industry(base):
     assert '"Производство тары"' in html
     used = [d for d in base["deals"] if d.get("ind") == "Производство тары"]
     assert len(used) >= 10, f"отраслью помечено всего {len(used)} карточек"
+
+
+def test_same_story_from_two_outlets_is_one_console_message(base):
+    """Одна новость в двух изданиях — одно сообщение в группу, не два.
+
+    6 августа «аукцион по Рижскому вокзалу не состоялся» пришёл из «Ведомостей»
+    и «Коммерсанта» двумя одинаковыми сообщениями — владельцу пришлось решать
+    дважды. Второй черновик с тем же названием в кавычках помечается
+    `dup_in_batch` и в группу не идёт, но в hold-файле остаётся.
+    """
+    import promote
+    hold_files = sorted(Path("data/inbox/hold").glob("2026-08-*.json"))
+    assert hold_files, "нет hold-файла для проверки"
+    drafts = json.loads(hold_files[-1].read_text(encoding="utf-8"))["drafts"]
+    dups = [d for d in drafts if d.get("dup_in_batch")]
+    # Свойство машинное, а не про конкретную сделку: у каждого помеченного
+    # дубля обязан существовать «оригинал» с общим названием в кавычках,
+    # который в группу ушёл (не помечен).
+    import match as matcher
+    for dup in dups:
+        names = matcher.quoted(str(dup.get("title")))
+        twin = [d for d in drafts if not d.get("dup_in_batch")
+                and matcher.quoted_common(matcher.quoted(str(d.get("title"))), names)]
+        assert twin, f"{dup.get('draft_id')}: помечен дублем, а оригинала нет"

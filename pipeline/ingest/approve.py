@@ -83,7 +83,7 @@ def hours_pending(card, now):
 # ворота не пропустили; 'note' — заметка для рутины притока, approve её НЕ
 # потребляет и НЕ трактует. Смешение ролей уже стреляло: старый код считал
 # «любой не-approve вердикт» придержанием, и post_no придержал бы карточку.
-CARD_VERDICTS = {'approve', 'hold'}
+CARD_VERDICTS = {'approve', 'hold', 'discard'}
 POST_VERDICTS = {'post_yes', 'post_no'}
 RAW_VERDICTS = {'take', 'drop'}
 
@@ -103,11 +103,17 @@ def plan_actions(cards, decisions, now):
     Ответ с текстом на сообщение [пост <id>] приходит вердиктом 'approve' с
     edited_text — правя пост, человек одновременно одобряет карточку."""
     by_deal = last_by_deal(decisions, CARD_VERDICTS)
-    publish, hold, wait = [], [], []
+    publish, hold, wait, discard = [], [], [], []
     for card in cards:
         decision = by_deal.get(card['id'])
         if decision and decision['verdict'] == 'approve':
             publish.append((card, decision.get('edited_text'), 'решение: опубликовать'))
+        elif decision and decision['verdict'] == 'discard':
+            # «Выкинуть» сильнее «придержать»: карточка не выйдет никуда и
+            # исчезает из очереди насовсем. Просьба владельца 6 августа: у
+            # нероссийского контура и не-M&A «придержать» оставляло бы мусор
+            # висеть в очереди вечно.
+            discard.append((card, 'решение: выкинуть'))
         elif decision:
             hold.append((card, 'решение: придержать'))
         elif card.get('held'):
@@ -116,7 +122,7 @@ def plan_actions(cards, decisions, now):
             publish.append((card, None, 'молчание %d ч — публикуем как есть' % SILENCE_HOURS))
         else:
             wait.append((card, 'ждём решения (%.0f ч из %d)' % (hours_pending(card, now), SILENCE_HOURS)))
-    return publish, hold, wait
+    return publish, hold, wait, discard
 
 
 def plan_raw(drafts, decisions):
@@ -140,7 +146,7 @@ def main(write=False):
     pending = json.load(open(PENDING, encoding='utf-8'))
     decisions, handle = fetch_decisions()
     now = datetime.now(timezone.utc)
-    publish, hold, wait = plan_actions(pending['cards'], decisions, now)
+    publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now)
 
     for card, override, why in publish:
         print('  ПУБЛИКУЕМ   %-11s %s%s' % (card['id'], str(card.get('title'))[:56],
@@ -148,6 +154,8 @@ def main(write=False):
         print('              %s' % why)
     for card, why in hold:
         print('  ПРИДЕРЖАНА  %-11s %s' % (card['id'], why))
+    for card, why in discard:
+        print('  ВЫКИНУТА    %-11s %s' % (card['id'], str(card.get('title'))[:56]))
     for card, why in wait:
         print('  ЖДЁТ        %-11s %s' % (card['id'], why))
 
@@ -174,8 +182,8 @@ def main(write=False):
         fresh.append(clean)
     for card, _why in hold:
         card['held'] = True
-    published_ids = {c['id'] for c, _o, _w in publish}
-    pending['cards'] = [c for c in pending['cards'] if c['id'] not in published_ids]
+    gone_ids = {c['id'] for c, _o, _w in publish} | {c['id'] for c, _w in discard}
+    pending['cards'] = [c for c in pending['cards'] if c['id'] not in gone_ids]
 
     # СЫРЬЁ: «это сделка — в работу» превращает черновик в карточку
     # предпросмотра (дальше он придёт в группу сообщениями «пост» и

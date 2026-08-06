@@ -419,12 +419,27 @@ def main(write):
     drafts = [d for d in drafts if str(d.get('draft_id')) not in decided]
 
     passed, refused, held = [], [], []
-    admitted, batch_names = [], []
+    admitted, batch_names, held_names = [], [], []
     for draft in drafts:
         bad, hold = check(draft, data, idx, inds, stem_frequency(idx))
         if bad:
             refused.append((draft, bad))
         elif hold:
+            # ОДНА НОВОСТЬ В ДВУХ ИЗДАНИЯХ — ОДНО СООБЩЕНИЕ В ГРУППУ, не два.
+            # 6 августа «аукцион по Рижскому вокзалу не состоялся» пришёл из
+            # «Ведомостей» и «Коммерсанта» двумя одинаковыми сообщениями —
+            # владельцу пришлось решать дважды. Второй черновик с тем же
+            # названием в кавычках помечается дублем и в группу не идёт, но в
+            # файле остаётся: если первый отбросят по ошибке, второй можно
+            # поднять руками.
+            twin = next((t for t, names in held_names
+                         if matcher.quoted_common(matcher.quoted(draft.get('title')), names)), None)
+            if twin:
+                hold = hold + ['та же новость, что «%s» — второе издание, в группу не шлём'
+                               % str(twin)[:60]]
+                draft = dict(draft, dup_in_batch=True)
+            else:
+                held_names.append((draft.get('title'), matcher.quoted(draft.get('title'))))
             held.append((draft, hold))
         else:
             # Внутри одной партии общего названия в кавычках ДОСТАТОЧНО, чтобы
