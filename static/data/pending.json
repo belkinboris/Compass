@@ -274,7 +274,9 @@
     "adv": [],
     "terms": "—"
    },
-   "pending_since": "2026-08-06T16:25:43+00:00"
+   "pending_since": "2026-08-06T16:25:43+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g01e3fd26",
@@ -307,7 +309,9 @@
     "terms": "—"
    },
    "sum": "7,8 млрд ₽",
-   "pending_since": "2026-08-06T16:25:43+00:00"
+   "pending_since": "2026-08-06T16:25:43+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
