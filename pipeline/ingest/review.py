@@ -240,6 +240,43 @@ FIXES = [
          quote='сооснователь российского разработчика ИБ-продуктов R-Vision '
                'Игорь Сметанев приобрел долю',
          why='обе стороны — разработчики ПО для информационной безопасности'),
+
+    # JPMorgan / «Роснефть»: владелец открыл статью Frank Media и увидел, что
+    # экономики в ней много, а карточка пуста. Поля eco/law — вложенные, для
+    # них review научился путям с точкой; правило прежнее: значение — дословный
+    # НЕПРЕРЫВНЫЙ кусок цитаты, сочинять и склеивать из разных мест нельзя.
+    dict(id='g70e51ff1', field='eco.val', old='—',
+         new='Цена составила $1,869545 за акцию — 30% от ее стоимости на '
+             'закрытии торгов на Мосбирже 13 марта, пересчитанной по '
+             'официальному курсу ЦБ на ту же дату. Таким образом, '
+             'предусмотренный условиями сделки обязательный дисконт составил 70%',
+         quote='Цена составила $1,869545 за акцию — 30% от ее стоимости на '
+               'закрытии торгов на Мосбирже 13 марта, пересчитанной по '
+               'официальному курсу ЦБ на ту же дату. Таким образом, '
+               'предусмотренный условиями сделки обязательный дисконт составил '
+               '70%, следует из уведомления депозитария от 21 июля.',
+         why='цена и дисконт — главная экономика сделки, лежала в статье целиком'),
+    dict(id='g70e51ff1', field='law.appr', old='—',
+         new='Сделка получила разрешение российских властей и специальную '
+             'лицензию Управления по контролю за иностранными активами '
+             'Минфина США (OFAC)',
+         quote='Сделка получила разрешение российских властей и специальную '
+               'лицензию Управления по контролю за иностранными активами '
+               'Минфина США (OFAC), подчеркивается в уведомлении.',
+         why='двойное согласование — РФ и OFAC — прямо названо в статье'),
+    dict(id='g70e51ff1', field='law.terms', old='—',
+         new='Ни российский «налог на выход», ни комиссии Национальному '
+             'расчетному депозитарию в рамках сделки не выплачивались',
+         quote='Ни российский «налог на выход», ни комиссии Национальному '
+               'расчетному депозитарию в рамках сделки не выплачивались.',
+         why='условия сделки названы в статье прямо'),
+    dict(id='g70e51ff1', field='eco.sum', old='—',
+         new='JPMorgan не раскрыл количество проданных бумаг, общую сумму '
+             'сделки и имя покупателя',
+         quote='JPMorgan не раскрыл количество проданных бумаг, общую сумму '
+               'сделки и имя покупателя.',
+         why='честное «не раскрыто» из статьи содержательнее заглушки «—»: '
+             'известна цена за акцию, но не размер пакета'),
 ]
 
 
@@ -365,11 +402,36 @@ def source_urls():
     return urls
 
 
+def get_field(card, field):
+    """Поле карточки, включая вложенные ('eco.val', 'law.appr').
+
+    Экономика и право лежат объектами eco/law, а факты из статей чаще всего
+    относятся именно к ним: дисконт — в «Оценку», лицензию OFAC — в
+    «Согласования». Точка в имени поля — путь внутрь объекта."""
+    obj = card
+    for part in str(field).split('.'):
+        if not isinstance(obj, dict):
+            return None
+        obj = obj.get(part)
+    return obj
+
+
+def set_field(card, field, value):
+    parts = str(field).split('.')
+    obj = card
+    for part in parts[:-1]:
+        obj = obj.setdefault(part, {})
+    if value is None:
+        obj.pop(parts[-1], None)
+    else:
+        obj[parts[-1]] = value
+
+
 def already_applied(fix, card):
     """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
     if fix['field'] == 'src':
         return any(len(s) > 1 and s[1] == fix['new'][1] for s in card.get('src') or [])
-    return card.get(fix['field']) == fix['new']
+    return get_field(card, fix['field']) == fix['new']
 
 
 def check(fix, card, texts, companies, inds, urls=frozenset()):
@@ -389,8 +451,8 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         if texts and not quote_is_real(quote, texts):
             bad.append('цитаты нет в тексте источника')
         return bad
-    if card.get(field) != fix['old']:
-        bad.append('поле уже другое: в базе %r, ожидали %r' % (card.get(field), fix['old']))
+    if get_field(card, field) != fix['old']:
+        bad.append('поле уже другое: в базе %r, ожидали %r' % (get_field(card, field), fix['old']))
     if texts and not quote_is_real(quote, texts):
         bad.append('цитаты нет в тексте источника')
     if field == 'date':
@@ -494,11 +556,8 @@ def main(write=False):
         if fix['field'] == 'src':
             card.setdefault('src', []).append(list(fix['new']))
             continue
-        assert card.get(fix['field']) == fix['old'], 'состояние поля изменилось'
-        if fix['new'] is None:
-            card.pop(fix['field'], None)
-        else:
-            card[fix['field']] = fix['new']
+        assert get_field(card, fix['field']) == fix['old'], 'состояние поля изменилось'
+        set_field(card, fix['field'], fix['new'])
         # Свидетельство о стороне обязано указывать на то, что теперь в поле,
         # иначе на карточке останется ссылка на снятое значение.
         role = {'buyer_name': 'buyer', 'asset': 'target', 'seller': 'seller'}.get(fix['field'])

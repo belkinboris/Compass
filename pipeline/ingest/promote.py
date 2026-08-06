@@ -373,7 +373,15 @@ def to_card(draft, deal_id):
         if draft.get(field):
             card[field] = draft[field]
     if draft.get('events'):
-        card['events'] = draft['events']
+        # У этапа свой источник, и его подпись тоже печатается на экране —
+        # первый заход починил только card['src'] и оставил «web:frankmedia.ru»
+        # в блоке этапа карточки JPMorgan.
+        card['events'] = [
+            dict(ev, source=[source_names.edition_label(ev['source'][1]), ev['source'][1]])
+            if isinstance(ev.get('source'), list) and len(ev['source']) > 1
+            and str(ev['source'][0]).startswith('web:') and str(ev['source'][1]).startswith('http')
+            else ev
+            for ev in draft['events']]
     if draft.get('seller'):
         card['seller_src'] = 'text'
     source_url = next((s[1] for s in card.get('src', []) if len(s) > 1 and str(s[1]).startswith('http')), None)

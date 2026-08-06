@@ -35,7 +35,15 @@ WEB_LABEL = re.compile(r'^web:[\w.\-]+$')
 def fix_cards(cards, where):
     changed = 0
     for card in cards:
-        for s in card.get('src') or []:
+        pairs = list(card.get('src') or [])
+        # Метка живёт не только в src: у этапов сделки (events) свой источник,
+        # и «Источники этого этапа» на экране печатают его подпись. Первый
+        # прогон это место пропустил — «web:frankmedia.ru» остался на карточке
+        # JPMorgan в блоке этапа.
+        for ev in card.get('events') or []:
+            if isinstance(ev.get('source'), list):
+                pairs.append(ev['source'])
+        for s in pairs:
             if len(s) > 1 and WEB_LABEL.match(str(s[0])) and str(s[1]).startswith('http'):
                 new = edition_label(s[1])
                 assert new and not new.startswith('web:'), (card.get('id'), s)
