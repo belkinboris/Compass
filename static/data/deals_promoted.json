@@ -76497,6 +76497,436 @@
      }
     ]
    }
+  },
+  {
+   "id": "g5647e100",
+   "date": "2026-08-05",
+   "title": "«Нейропоток» выкупил производство хлебобулочной продукции под брендом Frozella",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8862728"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Нейропоток»",
+   "asset": "производство хлебобулочной продукции под брендом Frozella",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-05",
+     "title": "Сделка завершена",
+     "note": "Как обнаружил “Ъ” в СПАРК, АО «Нейропоток» 31 июля 2026 года стало собственником крупного производителя выпечки ООО «Фрозен Бек». Прежний собственник — Патвакан Мкртчян.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8862728"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Нейропоток»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8862728"
+     }
+    ],
+    "target": [
+     {
+      "value": "производство хлебобулочной продукции под брендом Frozella",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8862728"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g35357328",
+   "date": "2026-07-28",
+   "title": "ВТБ продал московский отель Holiday Inn в Сокольниках",
+   "ind": "Гостиницы и туризм",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ВТБ",
+   "asset": "московский отель Holiday Inn в Сокольниках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-28",
+     "title": "Сделка завершена",
+     "note": "«Holiday Inn Сокольники» вошел в периметр сделки по продаже активов «Галс-девелопмента», сообщили в пресс-службе ВТБ. Так банк реализовал все гостиничные объекты, уточнили в банке. Другие детали там раскрывать не стали. Гостиница в Сокольниках, как и активы «Г",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "московский отель Holiday Inn в Сокольниках",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g0431fc51",
+   "date": "2026-08-05",
+   "title": "NexTouch объявила о покупке обанкротившегося производителя телевизоров «Квант»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/589723"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "NexTouch",
+   "asset": "обанкротившегося производителя телевизоров «Квант»",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "NexTouch",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/589723"
+     }
+    ],
+    "target": [
+     {
+      "value": "обанкротившегося производителя телевизоров «Квант»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/589723"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gac1a0c11",
+   "date": "2026-08-05",
+   "title": "Совладелец R-Vision купил долю в ИБ-компании Sentra",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/960196"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Совладелец R-Vision",
+   "asset": "ИБ-компании Sentra",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-05",
+     "title": "Сделка завершена",
+     "note": "История 2026: Совладелец R-Vision купил долю в Sentra В начале августа 2026 года стало известно о том, что сооснователь российского разработчика ИБ-продуктов Компания:R-Vision (Р-Вижн) Персона:Сметанев Игорь Михайлович приобрел долю в российском стартапе Sentr",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/960196"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Совладелец R-Vision",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960196"
+     }
+    ],
+    "target": [
+     {
+      "value": "ИБ-компании Sentra",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960196"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g80f18d3d",
+   "date": "2026-07-28",
+   "title": "Знаменитый российский производитель электроники купил склад на границе с Китаем",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Знаменитый российский производитель электроники",
+   "asset": "склад на границе с Китаем",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-28",
+     "title": "Сделка завершена",
+     "note": "Владелец крупнейшего российскеого производителя серверов Yadro приобрел складское помещение на границе с Китаем. Компания может разместить там производственные или логистические мощности.",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Знаменитый российский производитель электроники",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     }
+    ],
+    "target": [
+     {
+      "value": "склад на границе с Китаем",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g9254527a",
+   "date": "2026-07-31",
+   "title": "Компания ресторатора Флеганова приобрела усадьбу в Екатеринбурге",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260731/usadba-2108275943.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "ресторатора Флеганова",
+   "asset": "усадьбу в Екатеринбурге",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-31",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ресторатора Флеганова",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "усадьбу в Екатеринбурге",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     }
+    ]
+   }
+  },
+  {
+   "id": "g8827d795",
+   "date": "2026-07-31",
+   "title": "Бывший топ-менеджер \"Лукойла\" приобрел старинную усадьбу в Москве",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260731/usadba-2108266479.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Бывший топ-менеджер \"Лукойла\"",
+   "asset": "старинную усадьбу в Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-31",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Бывший топ-менеджер \"Лукойла\"",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "старинную усадьбу в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     }
+    ]
+   }
   }
  ],
  "companies": {
