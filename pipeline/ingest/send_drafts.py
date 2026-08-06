@@ -42,6 +42,7 @@ approve.py публикует как есть (немой шаг, держащи
 import json
 import os
 import sys
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -154,30 +155,88 @@ def latest_hold_drafts():
     return [d for d in doc.get('drafts', []) if d.get('draft_id')]
 
 
+# СКОЛЬКО СЫРЬЯ ПОКАЗЫВАТЬ ЗА ПРОГОН. Ворота отправляют на решение куда
+# больше, чем проходит: 6 августа это 11 карточек против 75 черновиков, и без
+# предела в группу ушло бы 97 сообщений разом. Консоль, где нужные 22 тонут в
+# 75 сомнительных, человек перестаёт читать вообще — а сырьё по молчанию не
+# публикуется никогда, значит показать его позже ничего не стоит. Карточки и
+# посты предела НЕ имеют: это то, ради чего консоль заведена, и по молчанию
+# они через сутки уходят на сайт — не показать их значит опубликовать молча.
+RAW_PER_RUN = 10
+
+# ТЕМП ОТПРАВКИ. Telegram пускает в группу около 20 сообщений в минуту, а
+# 21-е возвращает 429 с полем `retry_after`. Прогон 6 августа отправил ровно
+# 20 сообщений из 32 и упёрся: одиннадцатая карточка и всё сырьё остались
+# недоставленными, причём вслух об этом сказала только строка в логе прогона,
+# которого никто не читает. Пауза между сообщениями убирает причину; повтор
+# по `retry_after` оставлен на случай, когда в группу пишет кто-то ещё.
+PAUSE = 3.5
+RETRIES = 3
+
+
+def send_one(client, token, chat, text, keyboard):
+    """Отправить одно сообщение, дождавшись, если Telegram просит подождать."""
+    for attempt in range(RETRIES):
+        r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
+            'chat_id': chat, 'text': text, 'reply_markup': keyboard,
+            'disable_web_page_preview': True,
+        })
+        if r.status_code == 200 and r.json().get('ok'):
+            return True
+        wait = 0
+        try:
+            wait = int(r.json().get('parameters', {}).get('retry_after') or 0)
+        except ValueError:
+            wait = 0
+        if wait and attempt < RETRIES - 1:
+            print('  Telegram просит подождать %d с — жду' % wait)
+            time.sleep(wait + 1)
+            continue
+        print('  не дошло до %s: %s' % (chat, r.text[:120]))
+        return False
+    return False
+
+
 def build_plan():
-    """(текст, клавиатура, как отметить отправленным) для всего неразосланного."""
+    """(текст, клавиатура, как отметить отправленным) для всего неразосланного.
+
+    Возвращает ещё и число сомнительных черновиков, отложенных до следующего
+    прогона: предел, о котором не сказано вслух, читается как «это всё».
+    """
     plan = []
     pending = promote.load_pending() if os.path.exists(PENDING) else {'cards': []}
     comps = json.load(open(DATA, encoding='utf-8'))['companies']
     for card in pending['cards']:
-        if card.get('draft_sent'):
-            continue
-        plan.append((card_message(card), card_keyboard(card), ('card', card)))
-        plan.append((post_message_text(card, comps), post_keyboard(card), ('card', card)))
+        # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
+        # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
+        # считалась разосланной целиком, и проект поста не уходил уже никогда
+        # — канал молча терял текст, который никто не одобрял. Старые записи
+        # знают только `draft_sent`, поэтому его значение и служит ответом за
+        # пост, пока не появился отдельный флаг.
+        if not card.get('draft_sent'):
+            plan.append((card_message(card), card_keyboard(card),
+                         ('card', card, 'draft_sent')))
+        if not card.get('post_draft_sent', card.get('draft_sent')):
+            plan.append((post_message_text(card, comps), post_keyboard(card),
+                         ('card', card, 'post_draft_sent')))
     state = promote.load_state()
     seen = set(state.get('sent_raw', [])) | set(state.get('decided_raw', {}))
-    for draft in latest_hold_drafts():
-        if str(draft['draft_id']) not in seen:
-            plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft)))
-    return plan, pending, state
+    fresh_raw = [d for d in latest_hold_drafts() if str(d['draft_id']) not in seen]
+    for draft in fresh_raw[:RAW_PER_RUN]:
+        plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN)
 
 
 def main(write=False):
-    plan, pending, state = build_plan()
+    plan, pending, state, deferred = build_plan()
     chats = send_targets()
     group = bool(os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip())
     print('Сообщений к отправке: %d | адресов: %d%s'
           % (len(plan), len(chats), ' (общая группа)' if group else ''))
+    if deferred:
+        print('Сомнительных черновиков отложено до следующего прогона: %d '
+              '(за раз показываем %d, чтобы карточки не тонули в сырье).'
+              % (deferred, RAW_PER_RUN))
     for text, _kb, _mark in plan[:4]:
         print('\n%s\n%s' % ('-' * 40, text[:400]))
     if not plan:
@@ -195,20 +254,17 @@ def main(write=False):
     import httpx
     sent = 0
     with httpx.Client(timeout=20) as client:
-        for text, keyboard, (kind, item) in plan:
+        for i, (text, keyboard, (kind, item, mark)) in enumerate(plan):
+            if i:
+                time.sleep(PAUSE)
             ok_all = True
             for chat in chats:
-                r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
-                    'chat_id': chat, 'text': text, 'reply_markup': keyboard,
-                    'disable_web_page_preview': True,
-                })
-                if not (r.status_code == 200 and r.json().get('ok')):
+                if not send_one(client, token, chat, text, keyboard):
                     ok_all = False
-                    print('  не дошло до %s: %s' % (chat, r.text[:120]))
             if ok_all:
                 sent += 1
                 if kind == 'card':
-                    item['draft_sent'] = True
+                    item[mark] = True
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)

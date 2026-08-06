@@ -1,0 +1,688 @@
+{
+ "cards": [
+  {
+   "id": "g5647e100",
+   "date": "2026-08-05",
+   "title": "«Нейропоток» выкупил производство хлебобулочной продукции под брендом Frozella",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8862728"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Нейропоток»",
+   "asset": "производство хлебобулочной продукции под брендом Frozella",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-05",
+     "title": "Сделка завершена",
+     "note": "Как обнаружил “Ъ” в СПАРК, АО «Нейропоток» 31 июля 2026 года стало собственником крупного производителя выпечки ООО «Фрозен Бек». Прежний собственник — Патвакан Мкртчян.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8862728"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Нейропоток»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8862728"
+     }
+    ],
+    "target": [
+     {
+      "value": "производство хлебобулочной продукции под брендом Frozella",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8862728"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g35357328",
+   "date": "2026-07-28",
+   "title": "ВТБ продал московский отель Holiday Inn в Сокольниках",
+   "ind": "Гостиницы и туризм",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ВТБ",
+   "asset": "московский отель Holiday Inn в Сокольниках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-28",
+     "title": "Сделка завершена",
+     "note": "«Holiday Inn Сокольники» вошел в периметр сделки по продаже активов «Галс-девелопмента», сообщили в пресс-службе ВТБ. Так банк реализовал все гостиничные объекты, уточнили в банке. Другие детали там раскрывать не стали. Гостиница в Сокольниках, как и активы «Г",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "московский отель Holiday Inn в Сокольниках",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g0431fc51",
+   "date": "2026-08-05",
+   "title": "NexTouch объявила о покупке обанкротившегося производителя телевизоров «Квант»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/589723"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "NexTouch",
+   "asset": "обанкротившегося производителя телевизоров «Квант»",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "NexTouch",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/589723"
+     }
+    ],
+    "target": [
+     {
+      "value": "обанкротившегося производителя телевизоров «Квант»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/589723"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "gac1a0c11",
+   "date": "2026-08-05",
+   "title": "Совладелец R-Vision купил долю в ИБ-компании Sentra",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/960196"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Совладелец R-Vision",
+   "asset": "ИБ-компании Sentra",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-05",
+     "title": "Сделка завершена",
+     "note": "История 2026: Совладелец R-Vision купил долю в Sentra В начале августа 2026 года стало известно о том, что сооснователь российского разработчика ИБ-продуктов Компания:R-Vision (Р-Вижн) Персона:Сметанев Игорь Михайлович приобрел долю в российском стартапе Sentr",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/960196"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Совладелец R-Vision",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960196"
+     }
+    ],
+    "target": [
+     {
+      "value": "ИБ-компании Sentra",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960196"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g80f18d3d",
+   "date": "2026-07-28",
+   "title": "Знаменитый российский производитель электроники купил склад на границе с Китаем",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Знаменитый российский производитель электроники",
+   "asset": "склад на границе с Китаем",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-28",
+     "title": "Сделка завершена",
+     "note": "Владелец крупнейшего российскеого производителя серверов Yadro приобрел складское помещение на границе с Китаем. Компания может разместить там производственные или логистические мощности.",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Знаменитый российский производитель электроники",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     }
+    ],
+    "target": [
+     {
+      "value": "склад на границе с Китаем",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "ge2c53041",
+   "date": "2026-07-23",
+   "title": "Робототехническая компания основателя Uber привлекла $1,7 млрд — в том числе от самого Uber",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/robototehnicheskaya-kompaniya-osnovatelya-uber-privlekla-1-7-mlrd-v-tom-chisle-ot-samogo-uber/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$1,7 млрд",
+   "buyer_name": "самого Uber",
+   "asset": "Робототехническая компания основателя Uber",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "самого Uber",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/robototehnicheskaya-kompaniya-osnovatelya-uber-privlekla-1-7-mlrd-v-tom-chisle-ot-samogo-uber/"
+     }
+    ],
+    "target": [
+     {
+      "value": "Робототехническая компания основателя Uber",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/robototehnicheskaya-kompaniya-osnovatelya-uber-privlekla-1-7-mlrd-v-tom-chisle-ot-samogo-uber/"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g9254527a",
+   "date": "2026-07-31",
+   "title": "Компания ресторатора Флеганова приобрела усадьбу в Екатеринбурге",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260731/usadba-2108275943.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "ресторатора Флеганова",
+   "asset": "усадьбу в Екатеринбурге",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-31",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ресторатора Флеганова",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "усадьбу в Екатеринбурге",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g8827d795",
+   "date": "2026-07-31",
+   "title": "Бывший топ-менеджер \"Лукойла\" приобрел старинную усадьбу в Москве",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260731/usadba-2108266479.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Бывший топ-менеджер \"Лукойла\"",
+   "asset": "старинную усадьбу в Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-31",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Бывший топ-менеджер \"Лукойла\"",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "старинную усадьбу в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "gd24f94d3",
+   "date": "2026-07-29",
+   "title": "В Москве продали самый большой лот за всю историю рынка элитных новостроек",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260729/moskva-2107779128.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "В Москве",
+   "asset": "самый большой лот за всю историю рынка элитных новостроек",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-07-29",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260729/moskva-2107779128.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "самый большой лот за всю историю рынка элитных новостроек",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260729/moskva-2107779128.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "В Москве",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260729/moskva-2107779128.html"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "g699f00f5",
+   "date": "2026-08-06",
+   "title": "В Челябинске продали баню авторитетов-экстремистов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115954"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "В Челябинске",
+   "asset": "баню авторитетов-экстремистов",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "Спа-комплекс «Атлантида-SPA» в Челябинске, который ранее принадлежал ОПГ «Махонинские»*, полностью перешел под контроль нового владельца.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053115954"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "баню авторитетов-экстремистов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115954"
+     }
+    ],
+    "seller": [
+     {
+      "value": "В Челябинске",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115954"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true
+  },
+  {
+   "id": "gd36f1178",
+   "date": "2026-07-30",
+   "title": "RTP Global вновь инвестировал в швейцарский стартап Ahead Health . Фонд Леонида Богуславского и 3VC возглавили раунд на &#036;10 млн. Ahead Health был создан в 2024 году. Стартап разработал платформу ",
+   "ind": "ИТ и интернет",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7640"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "RTP Global вновь",
+   "asset": "швейцарский стартап Ahead Health . Фонд Леонида Богуславского и 3VC возглавили раунд на &#036;10 млн",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "RTP Global вновь",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7640"
+     }
+    ],
+    "target": [
+     {
+      "value": "швейцарский стартап Ahead Health . Фонд Леонида Богуславского и 3VC возглавили раунд на &#036;10 млн",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7640"
+     }
+    ]
+   },
+   "pending_since": "2026-08-06T06:41:47+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
+  }
+ ]
+}

@@ -10,6 +10,7 @@
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -1409,14 +1410,91 @@ def test_review_table_is_applied_and_not_pending(base):
     начнёт расходиться с базой и молча копить отказы.
     """
     import review
+    # СМОТРЕТЬ НАДО ТУДА ЖЕ, КУДА ПИШЕТ САМ СКРИПТ. С 5 августа promote кладёт
+    # прошедшую ворота карточку не в базу, а в static/data/pending.json, и
+    # review.py правит оба множества (он их так и читает). Тест же знал только
+    # базу — и первая же правка к карточке, ждущей решения основателей, роняла
+    # его с «карточки нет в базе», хотя её там и не должно быть. Тот же класс,
+    # что «проверка „чем дополнить" не должна быть уже, чем карточка».
     cards = {d["id"]: d for d in base["deals"]}
+    pending_file = ROOT / "static" / "data" / "pending.json"
+    if pending_file.exists():
+        cards.update({c["id"]: c for c in
+                      json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
     for fix in review.FIXES:
         card = cards.get(fix["id"])
-        assert card, f"карточки {fix['id']} нет в базе — правку надо снять вместе с карточкой"
+        assert card, (f"карточки {fix['id']} нет ни в базе, ни в очереди "
+                      f"предпросмотра — правку надо снять вместе с карточкой")
         # `src` дописывается в список, а не присваивается, поэтому «применено ли»
         # знает сам скрипт: сравнивать поле со значением правки тут нельзя.
         assert review.already_applied(fix, card), (
             f"{fix['id']}.{fix['field']}: правка из таблицы не применена к базе")
+
+
+def test_gate_sees_cards_waiting_in_the_preview_queue(base):
+    """Очередь модерации — это тоже уже описанные сделки.
+
+    С 5 августа прошедшая ворота карточка ложится не в базу, а в pending.json и
+    ждёт решения основателей. Индекс дублей при этом строился по одной базе —
+    и второй прогон в те же сутки (перезапуск рутины, ручная проверка) снова
+    пропускал те же черновики: 6 августа так задвоились бы 10 карточек из 11, а
+    в группу ушли бы те же карточка и пост под новыми id. Тест держит границу с
+    двух сторон: без очереди в индексе черновик проходит, с очередью — отвергнут
+    как дубль. Односторонняя проверка пропустила бы правило, которое отвергает
+    вообще всё.
+    """
+    import promote
+    import match as matcher
+    inds = promote.industries()
+    draft = {
+        "title": "«Нейропоток» выкупил производство хлебобулочной продукции "
+                 "под брендом Frozella",
+        "date": "2026-08-05", "status": "Закрыта", "type": "M&A",
+        "ind": "Пищепром и напитки", "buyer_name": "«Нейропоток»",
+        "asset": "производство хлебобулочной продукции под брендом Frozella",
+        "src": [["web:kommersant.ru", "https://www.kommersant.ru/doc/8862728"]],
+    }
+    dup = "уже есть"
+
+    idx = matcher.index_base(base["deals"], base.get("companies"),
+                             base.get("match_keys"))
+    bad, _ = promote.check(draft, base, idx, inds)
+    assert not any(dup in r for r in bad), (
+        "в базе такой сделки нет — отвергать как дубль нечему: %s" % bad)
+
+    queued = [dict(draft, id="pending-1")]
+    idx_with_queue = matcher.index_base(base["deals"] + queued,
+                                        base.get("companies"),
+                                        base.get("match_keys"))
+    bad_again, _ = promote.check(draft, base, idx_with_queue, inds)
+    assert any(dup in r for r in bad_again), (
+        "черновик, уже лежащий в очереди предпросмотра, прошёл ворота второй раз")
+
+    # А ЭТО — ПРОВОДКА, А НЕ МЕХАНИЗМ. Проверка выше собирает индекс руками и
+    # потому переживёт откат правки в promote.main: она доказывает, что дубль
+    # ЛОВИТСЯ, но не то, что очередь вообще доходит до индекса. Смотрим, из чего
+    # main строит индекс на самом деле.
+    seen = []
+    real_index_base = matcher.index_base
+    with tempfile.TemporaryDirectory() as tmp:
+        drafts_dir = Path(tmp) / "drafts"
+        drafts_dir.mkdir()
+        (drafts_dir / "2026-08-06.json").write_text(
+            json.dumps({"drafts": [draft]}, ensure_ascii=False), encoding="utf-8")
+        pending_file = Path(tmp) / "pending.json"
+        pending_file.write_text(json.dumps({"cards": queued}, ensure_ascii=False),
+                                encoding="utf-8")
+        old = (promote.DRAFTS, promote.PENDING, matcher.index_base)
+        try:
+            promote.DRAFTS, promote.PENDING = str(drafts_dir), str(pending_file)
+            matcher.index_base = lambda deals, *a, **k: (
+                seen.append([d.get("id") for d in deals]) or real_index_base(deals, *a, **k))
+            promote.main(write=False)
+        finally:
+            promote.DRAFTS, promote.PENDING, matcher.index_base = old
+    assert seen and "pending-1" in seen[0], (
+        "promote.main строит индекс дублей без очереди предпросмотра — "
+        "повторный прогон заведёт те же карточки заново")
 
 
 def test_gate_holds_a_deal_with_no_russian_connection(base):

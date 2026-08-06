@@ -381,9 +381,18 @@ def to_card(draft, deal_id):
 
 def main(write):
     data = json.load(open(DATA, encoding='utf-8'))
-    idx = matcher.index_base(data['deals'], data.get('companies'), data.get('match_keys'))
+    # ОЧЕРЕДЬ МОДЕРАЦИИ — ЭТО ТОЖЕ УЖЕ ОПИСАННЫЕ СДЕЛКИ. Прошедшая ворота
+    # карточка лежит в pending.json до решения основателей, и в базе её ещё
+    # нет. Индекс, построенный по одной базе, её не видит — а значит, второй
+    # прогон в те же сутки (перезапуск рутины, ручная проверка) пропускает те
+    # же черновики заново: очередь задваивается, и в группу уходят те же
+    # карточка и пост под новыми id. Сверяться надо с обоими множествами
+    # сразу — с опубликованным и с тем, что ждёт решения.
+    queued = load_pending()['cards']
+    idx = matcher.index_base(data['deals'] + queued,
+                             data.get('companies'), data.get('match_keys'))
     inds = industries()
-    existing = {d['id'] for d in data['deals']}
+    existing = {d['id'] for d in data['deals']} | {c['id'] for c in queued}
 
     files = sorted(os.listdir(DRAFTS)) if os.path.isdir(DRAFTS) else []
     drafts = []
@@ -434,7 +443,7 @@ def main(write):
             passed.append((draft, []))
             batch_names.append((draft.get('title'), matcher.quoted(draft.get('title'))))
             admitted.append(dict(draft, id='pending-%d' % len(passed)))
-            idx = matcher.index_base(data['deals'] + admitted,
+            idx = matcher.index_base(data['deals'] + queued + admitted,
                                      data.get('companies'), data.get('match_keys'))
 
     print('Черновиков: %d | пустить: %d | на решение: %d | отказ: %d'

@@ -1,0 +1,77 @@
+{
+ "made": "2026-08-06",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/PSB-prodast-kompanii-vladeyuschie-dvumya-TRK-v-Chelyabinske-87293",
+   "title": "ПСБ продаст компании, владеющие двумя ТРК в Челябинске",
+   "verdict": "enrich:gmru-psb-tpk-chelyabinsk",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Родник» и ООО «Управляющая компания «Содействие»» (два »"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Paevoj-investfond-priobrel-14-v-gruppe-Poliplastik-87271",
+   "title": "Паевой инвестфонд приобрел 14% в группе «Полипластик»",
+   "verdict": "enrich:gmru-prime-pervy-poliplastik",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ЗПИФ «Прайм Первый» (УК «Диалог Инвестиции»)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Gruppa-Svoj-kupila-strahovschika-u-Kredit-Evropa-banka-87269",
+   "title": "Группа «Свой» купила страховщика у «Кредит Европа банка»",
+   "verdict": "enrich:gmru-svoj-kredit-evropa-strah",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке ««Кредит Европа лайф» (страховая компания)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267",
+   "title": "Холдинг «Коломенский» приобрел комбинат «Пеко»",
+   "verdict": "enrich:gmru-kolomenskoe-peko",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «900 млн ₽ (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Arnest-vykupaet-chast-biznesa-Reckitt-Benckiser-87265",
+   "title": "«Арнест» выкупает часть бизнеса Reckitt Benckiser",
+   "verdict": "enrich:gmru-arnest-reckitt",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «завод по выпуску бытовой химии в Клину (бренды Vanish, Air W»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/MTS-Bank-kupil-platezhnyj-servis-KD-Pay-87251",
+   "title": "МТС Банк купил платежный сервис KD Pay",
+   "verdict": "enrich:gmru-mtsbank-kdpay",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «51% ООО «Ритейл-Процессинг» (владелец платёжного сервиса KD »"
+   ]
+  },
+  {
+   "news": "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/",
+   "title": "«Арнест» приобретет российский бизнес Reckitt по производству бытовой химии",
+   "verdict": "enrich:gmru-arnest-reckitt",
+   "why": "общее название в кавычках и общие слова: 2",
+   "reasons": [
+    "в карточке «завод по выпуску бытовой химии в Клину (бренды Vanish, Air W»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260804/moskva-2108898202.html",
+   "title": "В Москве выставили на торги 13 гектаров земли в Печатниках",
+   "verdict": "enrich:g6d73538c",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  }
+ ]
+}
