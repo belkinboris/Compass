@@ -26,7 +26,7 @@ test_auth.py                  29 тестов: регистрация, вход,
 .github/workflows/tests.yml   CI: данные и API отдельно, интерфейс отдельно
 .claude/hooks/session-start.sh    ставит зависимости: контейнер рутины пуст (нет httpx и pytest)
 static/index.html             ВЕСЬ интерфейс: стили и рендер (данных в нём НЕТ)
-static/data/deals_promoted.json   ЕДИНСТВЕННЫЙ источник данных: 1549 сделок,
+static/data/deals_promoted.json   ЕДИНСТВЕННЫЙ источник данных: 1547 сделок,
                               1872 компании, match_keys, merged, telegram_posts
 pipeline/                     скрипты разбора и чистки данных
 pipeline/ingest/              приток: реестр, забор, фильтр, сопоставление, черновик,

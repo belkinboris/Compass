@@ -72,7 +72,9 @@ def tg_api(method: str, **payload) -> dict | None:
                               json=payload, timeout=12)
         response.raise_for_status()
         return response.json()
-    except httpx.HTTPError as exc:
+    except (httpx.HTTPError, ValueError) as exc:
+        # ValueError — не-JSON в ответе (например, страница ошибки релея):
+        # без него исключение пролетало бы сквозь вебхук и роняло его в 500.
         logger.warning("telegram %s failed: %s", method, exc)
         return None
 
