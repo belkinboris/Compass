@@ -253,18 +253,37 @@ def build_plan():
                          ('card', card, 'post_draft_sent')))
     state = promote.load_state()
     seen = set(state.get('sent_raw', [])) | set(state.get('decided_raw', {}))
-    fresh_raw = [d for d in latest_hold_drafts()
-                 if str(d['draft_id']) not in seen and not d.get('dup_in_batch')]
+    # Память и по ЗАГОЛОВКУ, не только по draft_id: одна и та же новость на
+    # следующий день приходит новым id, и Рижский вокзал партнёр выкидывал
+    # трижды. Показанное или решённое однажды больше не показывается.
+    seen_titles = set(state.get('raw_titles', {}))
+    fresh_raw, foreign = [], 0
+    for d in latest_hold_drafts():
+        if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
+           or d.get('dup_in_batch'):
+            continue
+        # Иностранный контур без российского элемента не публикуем (решение
+        # владельца 5–6 августа) — и в консоль не носим: сырьё по молчанию не
+        # выходит никогда, так что скрыть его безопасно, а черновик остаётся
+        # в hold-файле, если захочется поднять руками.
+        if any(str(r).startswith('не видно связи с российским рынком')
+               for r in d.get('hold_reasons') or []):
+            foreign += 1
+            continue
+        fresh_raw.append(d)
     for draft in fresh_raw[:RAW_PER_RUN]:
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
-    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign
 
 
 def main(write=False):
-    plan, pending, state, deferred, postponed = build_plan()
+    plan, pending, state, deferred, postponed, foreign = build_plan()
     if postponed:
         print('Отложено карточек: %d — сайт ещё не отдаёт их в pending.json.' % postponed)
         print('Сначала закоммитьте и запушьте pending.json, дождитесь деплоя, потом отправка.')
+    if foreign:
+        print('Скрыто как иностранный контур без российского элемента: %d '
+              '(решение владельца — не публикуем; лежат в hold-файле).' % foreign)
     chats = send_targets()
     group = bool(os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip())
     print('Сообщений к отправке: %d | адресов: %d%s'
@@ -303,6 +322,7 @@ def main(write=False):
                     item[mark] = True
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
+                    state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
     print('Отправлено сообщений: %d' % sent)

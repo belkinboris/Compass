@@ -498,7 +498,9 @@ def test_analytics_names_the_set_it_counts(page, base_url):
     """
     visit(page, base_url, "#/analytics")
     shown = page.evaluate("() => DEALS.length")
-    head = page.inner_text(".sec-head")
+    # Шапка «Аналитики» с 6 августа — тёмная hero-полоса (.page-hero),
+    # а не .sec-head: чередование тёмных и светлых страниц.
+    head = page.inner_text(".page-hero")
     assert str(shown) in head, f"шапка не называет своё число: {head[:160]!r}"
     assert "с 2022" in head, "не сказано, какое множество посчитано"
     assert "вся база" not in head.lower(), "показанное названо всей базой"

@@ -206,9 +206,13 @@ def main(write=False):
         card['pending_since'] = now.isoformat(timespec='seconds')
         pending['cards'].append(card)
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
+        state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'take'
         print('  В РАБОТУ    %s -> предпросмотр %s' % (draft['draft_id'], card['id']))
     for draft in dropped:
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'drop'
+        # Память и по заголовку: та же новость назавтра приходит с НОВЫМ
+        # draft_id, и партнёр жал «не сделка» по Рижскому вокзалу трижды.
+        state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'drop'
         print('  ОТБРОШЕНА   %s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
 
     if fresh:

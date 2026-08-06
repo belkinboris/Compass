@@ -75895,7 +75895,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:mergers.ru",
+     "Mergers.ru",
      "https://mergers.ru/news/DomRF-priobrel-biznes-centr-Obsidian-na-Hodynskom-pole-87309"
     ]
    ],
@@ -75967,7 +75967,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:tadviser.ru",
+     "TAdviser",
      "https://www.tadviser.ru/a/716777"
     ]
    ],
@@ -76030,7 +76030,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:tadviser.ru",
+     "TAdviser",
      "https://www.tadviser.ru/a/876278"
     ]
    ],
@@ -76102,7 +76102,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:kommersant.ru",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8861146"
     ]
    ],
@@ -76175,7 +76175,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:kommersant.ru",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8860899"
     ],
     [
@@ -76253,7 +76253,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:mergers.ru",
+     "Mergers.ru",
      "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
     ]
    ],
@@ -76305,7 +76305,9 @@
       "url": "https://mergers.ru/news/Gruppa-Rigla-Zdravsiti-zakryla-sdelku-po-pokupke-seti-Zdorovyj-gorod-v-Voronezhskoj-oblasti-87311"
      }
     ]
-   }
+   },
+   "sum": "370–430 млн ₽ (по оценке)",
+   "extra": "Один из источников «Коммерсанта» на инвестрынке оценивает сделку в 100–250 млн руб."
   },
   {
    "id": "g21795ec9",
@@ -76316,7 +76318,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:tadviser.ru",
+     "TAdviser",
      "https://www.tadviser.ru/a/489134"
     ]
    ],
@@ -76380,7 +76382,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:realty.ria.ru",
+     "РИА Недвижимость",
      "https://realty.ria.ru/20260804/gruppa-2108915293.html"
     ]
    ],
@@ -76443,7 +76445,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:frankmedia.ru",
+     "Frank Media",
      "https://frankmedia.ru/296482"
     ]
    ],
@@ -76500,14 +76502,14 @@
   },
   {
    "id": "g5647e100",
-   "date": "2026-08-05",
+   "date": "2026-07-31",
    "title": "«Нейропоток» выкупил производство хлебобулочной продукции под брендом Frozella",
-   "ind": "Не определена",
+   "ind": "Пищепром и напитки",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
-     "web:kommersant.ru",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8862728"
     ]
    ],
@@ -76558,8 +76560,18 @@
       "method": "explicit_news_title",
       "url": "https://www.kommersant.ru/doc/8862728"
      }
+    ],
+    "seller": [
+     {
+      "value": "Патвакан Мкртчян",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8862728"
+     }
     ]
-   }
+   },
+   "seller": "Патвакан Мкртчян",
+   "sum": "7–8 млрд ₽ (по оценке)"
   },
   {
    "id": "g35357328",
@@ -76570,7 +76582,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:mergers.ru",
+     "Mergers.ru",
      "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279"
     ]
    ],
@@ -76629,12 +76641,12 @@
    "id": "g0431fc51",
    "date": "2026-08-05",
    "title": "NexTouch объявила о покупке обанкротившегося производителя телевизоров «Квант»",
-   "ind": "Не определена",
+   "ind": "Машиностроение",
    "type": "M&A",
    "status": "Обсуждается",
    "src": [
     [
-     "web:tadviser.ru",
+     "TAdviser",
      "https://www.tadviser.ru/a/589723"
     ]
    ],
@@ -76680,12 +76692,12 @@
    "id": "gac1a0c11",
    "date": "2026-08-05",
    "title": "Совладелец R-Vision купил долю в ИБ-компании Sentra",
-   "ind": "Не определена",
+   "ind": "ИТ и интернет",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
-     "web:tadviser.ru",
+     "TAdviser",
      "https://www.tadviser.ru/a/960196"
     ]
    ],
@@ -76748,7 +76760,7 @@
    "status": "Закрыта",
    "src": [
     [
-     "web:cnews.ru",
+     "CNews",
      "https://www.cnews.ru/news/top/2026-07-28_samyj_krupnyj_proizvoditel"
     ]
    ],
@@ -76806,12 +76818,12 @@
    "id": "g9254527a",
    "date": "2026-07-31",
    "title": "Компания ресторатора Флеганова приобрела усадьбу в Екатеринбурге",
-   "ind": "Не определена",
+   "ind": "Недвижимость",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
-     "web:realty.ria.ru",
+     "РИА Недвижимость",
      "https://realty.ria.ru/20260731/usadba-2108275943.html"
     ]
    ],
@@ -76832,7 +76844,7 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "ресторатора Флеганова",
+   "buyer_name": "СтройИнвест",
    "asset": "усадьбу в Екатеринбурге",
    "events": [
     {
@@ -76849,9 +76861,9 @@
    "party_evidence": {
     "buyer": [
      {
-      "value": "ресторатора Флеганова",
+      "value": "СтройИнвест",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
      }
     ],
@@ -76862,19 +76874,29 @@
       "method": "explicit_news_title",
       "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
      }
+    ],
+    "seller": [
+     {
+      "value": "Дом.РФ",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260731/usadba-2108275943.html"
+     }
     ]
-   }
+   },
+   "seller": "Дом.РФ",
+   "sum": "135,79 млн ₽"
   },
   {
    "id": "g8827d795",
    "date": "2026-07-31",
    "title": "Бывший топ-менеджер \"Лукойла\" приобрел старинную усадьбу в Москве",
-   "ind": "Не определена",
+   "ind": "Недвижимость",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
-     "web:realty.ria.ru",
+     "РИА Недвижимость",
      "https://realty.ria.ru/20260731/usadba-2108266479.html"
     ]
    ],
@@ -76895,7 +76917,7 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Бывший топ-менеджер \"Лукойла\"",
+   "buyer_name": "Рид Ойл",
    "asset": "старинную усадьбу в Москве",
    "events": [
     {
@@ -76912,9 +76934,9 @@
    "party_evidence": {
     "buyer": [
      {
-      "value": "Бывший топ-менеджер \"Лукойла\"",
+      "value": "Рид Ойл",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
      }
     ],
@@ -76925,8 +76947,18 @@
       "method": "explicit_news_title",
       "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
      }
+    ],
+    "seller": [
+     {
+      "value": "Дом.РФ",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260731/usadba-2108266479.html"
+     }
     ]
-   }
+   },
+   "sum": "552,6 млн ₽",
+   "seller": "Дом.РФ"
   }
  ],
  "companies": {
@@ -77024,7 +77056,7 @@
   },
   "gb7e1e33a": {
    "name": "ПАО «Совкомбанк»",
-   "ind": "Страхование",
+   "ind": "Банки",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -77881,7 +77913,7 @@
   },
   "g4e694234": {
    "name": "VK",
-   "ind": "Банки",
+   "ind": "ИТ и интернет",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -78468,7 +78500,7 @@
   },
   "gc2792a44": {
    "name": "АФК «Система»",
-   "ind": "Недвижимость",
+   "ind": "Холдинги",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -78693,7 +78725,7 @@
   },
   "gd5d02d09": {
    "name": "КИВИ",
-   "ind": "ИТ и интернет",
+   "ind": "Финтех",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -78711,7 +78743,7 @@
   },
   "g90031892": {
    "name": "ТилТех",
-   "ind": "Потребительские товары",
+   "ind": "Управление активами",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -79026,7 +79058,7 @@
   },
   "g00f14033": {
    "name": "Ростелеком",
-   "ind": "ИТ и интернет",
+   "ind": "Телеком",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -80178,7 +80210,7 @@
   },
   "g28ff15bb": {
    "name": "Сбербанк",
-   "ind": "Медиа",
+   "ind": "Банки",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -81375,7 +81407,7 @@
   },
   "gf7340794": {
    "name": "Balchug Capital",
-   "ind": "Машиностроение",
+   "ind": "Управление активами",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -83589,7 +83621,7 @@
   },
   "gffdff138": {
    "name": "S8 Capital",
-   "ind": "Автопром",
+   "ind": "Холдинги",
    "desc": "Описание компании пока не добавлено.",
    "kpi": [
     "Профиль",
@@ -93554,7 +93586,7 @@
   },
   "rosatom": {
    "name": "Росатом",
-   "ind": "ГМК и добыча",
+   "ind": "Энергетика",
    "desc": "Горнорудный контур госкорпорации. Литиевые проекты за рубежом ведёт международная компания Uranium One Group (Мали, Боливия); Колмозерское месторождение в Мурманской области разрабатывает совместное предприятие «Полярный литий» с «Норникелем».",
    "kpi": [
     "Литиевые проекты",

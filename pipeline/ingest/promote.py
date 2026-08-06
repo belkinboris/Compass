@@ -72,8 +72,10 @@ from urllib.parse import urlparse
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.dirname(HERE))
 
 import match as matcher                                  # noqa: E402
+import source_names                                      # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -354,7 +356,14 @@ def to_card(draft, deal_id):
         'ind': draft.get('ind') or 'Не определена',
         'type': draft.get('type') or 'M&A',
         'status': draft.get('status') or 'Обсуждается',
-        'src': draft['src'],
+        # Подпись источника — имя издания по домену ссылки, а не служебный id
+        # ленты: «web:kommersant.ru» доезжал до экрана карточки (замечание
+        # владельца 6 августа, тот же класс, что подпись «@dealsma (Telegram)»
+        # у 913 старых карточек).
+        'src': [[source_names.edition_label(s[1]), s[1]]
+                if len(s) > 1 and str(s[0]).startswith('web:') and str(s[1]).startswith('http')
+                else s
+                for s in draft['src']],
         'from_ingest': True,
         'eco': {'sum': '—', 'share': '—', 'val': '—', 'target_fin': '—',
                 'fin': '—', 'rationale': '—', 'context': '—', 'finadv': '—'},
@@ -520,6 +529,16 @@ PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 # типа «сомнительная сделка») и отметки «уже разослано». Файл в git: рутина
 # живёт в одноразовом контейнере, и незакоммиченное состояние — потерянное.
 STATE = os.path.join(ROOT, 'data', 'inbox', 'moderation_state.json')
+
+
+def raw_key(title):
+    """Ключ памяти о сырье — нормализованный ЗАГОЛОВОК, а не draft_id.
+
+    draft_id у одной и той же новости меняется от прогона к прогону: Рижский
+    вокзал приходил тремя разными id за два дня, и партнёр трижды жал по нему
+    «не сделка»; «издание Гоголя» показалось повторно назавтра под новым id.
+    Память по id помнит прогон, память по заголовку — новость."""
+    return re.sub(r'[^\wа-яё]+', '', str(title or ''), flags=re.I).lower()
 
 
 def load_state():

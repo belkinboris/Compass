@@ -220,6 +220,24 @@ nav a.on::after,nav a:hover::after{width:100%}
 .hero-rule{height:1px;background:rgba(243,241,233,.22);margin:40px 0 0;max-width:680px;transform-origin:left;animation:wipe 1.2s var(--ease) .3s both}
 .hero-note{margin-top:14px;font-size:12.5px;color:#7E948A}
 
+/* ---------- тёмная hero-полоса раздела ---------- */
+/* Чередование тёмных и светлых страниц (просьба владельца): Сделки тёмные,
+   Компании светлые, Консультанты тёмные, Материалы светлые, Аналитика тёмная.
+   Полоса уезжает под фиксированную шапку (margin-top:-74px — ровно высота
+   паддинга .wrap), поэтому шапке над ней включается тот же режим on-hero,
+   что и над героем главной, — иначе светлая подложка выглядит заплаткой. */
+.page-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;
+  padding:128px 28px 54px;background:#0A1210;color:var(--ivory);overflow:hidden;margin-bottom:42px}
+.page-hero .ph-in{position:relative;z-index:2;max-width:1064px;margin:0 auto}
+.page-hero .label{color:var(--bronze-light)}
+.page-hero h1{font-family:var(--f-display);font-weight:400;font-size:34px;margin-top:10px}
+.page-hero p{color:#A9BDB2;margin-top:10px;max-width:680px}
+.page-hero .ph-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+@media(max-width:720px){
+  .page-hero{padding:106px 20px 38px;margin-bottom:30px}
+  .page-hero h1{font-size:27px}
+}
+
 /* ---------- section / filters ---------- */
 .sec-head{margin:56px 0 26px}
 .sec-head .label{display:block;margin-bottom:10px;color:var(--bronze)}
@@ -923,7 +941,11 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 
 <header class="top">
   <div class="top-in">
-    <a href="#/" class="wordmark"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="23" height="23" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2.6"/><g transform="rotate(-38 24 24)"><polygon class="bm-accent" points="24,5 28.5,24 19.5,24"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g><circle class="bm-dot" cx="24" cy="24" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg></span>КО<em>М</em>П<em>А</em>С</a>
+    <!-- Текст обязан лежать ОДНИМ дочерним элементом: .wordmark — flex с gap,
+         и голые куски текста вперемешку с <em> становились отдельными
+         анонимными flex-элементами — gap вставал между КАЖДОЙ буквой
+         («КО М П А С»). -->
+    <a href="#/" class="wordmark"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="23" height="23" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2.6"/><g transform="rotate(-38 24 24)"><polygon class="bm-accent" points="24,5 28.5,24 19.5,24"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g><circle class="bm-dot" cx="24" cy="24" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="brand-name">КО<em>М</em>П<em>А</em>С</span></a>
     <nav id="nav">
       <a href="#/" data-r="deals">Сделки</a>
       <a href="#/companies" data-r="companies">Компании</a>
@@ -942,7 +964,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   <div class="foot-in">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="27" height="27" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="1.8"/><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g><circle cx="24" cy="24" r="2.6" fill="var(--accent-deep)" stroke="currentColor" stroke-width="1.2"/></svg></span>КО<em>М</em>П<em>А</em>С</div>
+        <div class="foot-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="27" height="27" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="1.8"/><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g><circle cx="24" cy="24" r="2.6" fill="var(--accent-deep)" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="brand-name">КО<em>М</em>П<em>А</em>С</span></div>
         <div class="foot-desc">Сделки на российском рынке: стороны, условия, консультанты, финансовые показатели и ссылки на первоисточники. Демо-версия.</div>
       </div>
       <div class="foot-col">
@@ -1763,7 +1785,14 @@ function updTop(){
      первого показа: сначала видно чистый экран с героем, а как только он
      проскроллен, навигация остаётся на месте. Флаг сбрасывается при уходе с
      главной, чтобы возврат на неё снова начинался с чистого экрана. */
-  if(!onHome){ navRevealed=false; top.classList.remove("hide","on-hero"); return; }
+  if(!onHome){
+    navRevealed=false; top.classList.remove("hide");
+    /* Тёмная hero-полоса раздела (Консультанты, Аналитика): пока она под
+       шапкой, шапке нужен тот же тёмный режим, что над героем главной. */
+    const ph = document.querySelector(".page-hero");
+    top.classList.toggle("on-hero", !!ph && window.scrollY < ph.offsetHeight - 58);
+    return;
+  }
   if(window.scrollY >= window.innerHeight*0.55) navRevealed=true;
   top.classList.toggle("hide", !navRevealed);
   top.classList.toggle("on-hero", navRevealed && window.scrollY < window.innerHeight*0.9);
@@ -3462,24 +3491,16 @@ function companyRows(){
     // 155 профилей без единой сделки перемешались бы в произвольном порядке.
     .sort((a,b)=>coSort==="alpha" ? a.c.name.localeCompare(b.c.name,"ru") : (b.n-a.n)||(b.m-a.m)||a.c.name.localeCompare(b.c.name,"ru"));
 }
-/* «Профиль → Автоматический» — служебная разметка, а не факт о компании:
-   она стояла у 1819 профилей из 1872 и на экране не значила ничего. Вместо
-   неё показываем то, что у нас есть про ЛЮБУЮ компанию и что читатель
-   спрашивает первым: в какой роли она чаще всего в наших сделках. Настоящий
-   факт (выручка, штаб-квартира, руководитель) есть у 34 профилей — он и
-   остаётся, потому что содержательнее вычисленного. */
-const SERVICE_KPI = /^(?:профиль|данные)$/i;
+/* Левый показатель карточки был разнобойным: у 34 профилей — кураторский kpi
+   («литиевые проекты | Мурманская область»), у остальных — вычисленная роль
+   («Чаще всего | покупатель»). Владелец 6 августа попросил единообразить:
+   у каждой карточки одна и та же подпись «M&A активность» — сколько сделок
+   с участием компании датировано последними 12 месяцами. Ноль — честный
+   ответ, а не повод менять подпись обратно на разнобой. */
 function coFact(id,c){
-  const kpi = c.kpi||[];
-  if(kpi.length>1 && !SERVICE_KPI.test(String(kpi[0]).trim())) return [kpi[0],kpi[1]];
-  const deals = companyDeals(id).structured;
-  const roles = [
-    ["покупатель", deals.filter(d=>d.buyer===id).length],
-    ["продавец",   deals.filter(d=>d.seller_id===id).length],
-    ["предмет",    deals.filter(d=>d.target===id||d.asset_id===id).length],
-  ].filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);
-  if(!roles.length) return ["Роль в сделках","роль не разобрана"];
-  return ["Чаще всего", roles[0][0]];
+  const yearAgo = new Date(Date.now() - 365*24*3600*1000).toISOString().slice(0,10);
+  const recent = companyDeals(id).structured.filter(d=>String(d.date||"")>=yearAgo).length;
+  return ["M&A активность", recent + " за год"];
 }
 /* «Описание компании пока не добавлено» стояло у 1754 профилей из 1872.
    Это признание, а не описание: вместо него — годы, за которые у нас есть
@@ -3856,12 +3877,19 @@ let firmSort = "alpha";  // каталог открывается алфавит
    Поле `g` в данных остаётся — удалять разметку ради экрана незачем, а
    `GROUP_LABEL` нужен ровно в одном месте: расшифровать старую ссылку с
    параметром `agroup` в плашке активных фильтров, чтобы её можно было снять. */
+/* «По алфавиту» — сначала латиница, потом кириллица (просьба владельца).
+   localeCompare("ru") делает ровно наоборот: в ICU-коллации русской локали
+   кириллица идёт ПЕРЕД латиницей, и ALUMNI Partners оказывался после АЛРУД. */
+const firmAlpha = (a,b)=>{
+  const rank = s => /^[A-Za-z]/.test(String(s).trim()) ? 0 : 1;
+  return rank(a)-rank(b) || a.localeCompare(b,"ru",{sensitivity:"base"});
+};
 function renderAdvisors(){
   let body = "";
   if(advType==="legal"){
     const rows = FIRMS
       .map(f=>({f,n:firmCount(f.id)}))
-      .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
+      .sort((a,b)=>firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
     body = `
     <div class="filters advisor-filters reveal">
       <span style="flex:1"></span>
@@ -3876,7 +3904,7 @@ function renderAdvisors(){
     </div>`;
   } else if(advType==="invest"){
     const rows = INV_FIRMS.map(f=>({f,n:firmCount(f.id)}))
-      .sort((a,b)=>firmSort==="alpha" ? a.f.n.localeCompare(b.f.n,"ru") : (b.n-a.n)||a.f.n.localeCompare(b.f.n,"ru"));
+      .sort((a,b)=>firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
     body = `<div class="filters advisor-filters reveal">
       <span style="flex:1"></span>
       <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
@@ -3891,7 +3919,18 @@ function renderAdvisors(){
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
+  <div class="page-hero">
+    <svg class="ph-bg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="1010" cy="150" r="210" fill="none" stroke="rgba(243,241,233,.05)" stroke-width="1.4"/>
+      <circle cx="1010" cy="150" r="140" fill="none" stroke="rgba(243,241,233,.07)" stroke-width="1.2"/>
+      <circle cx="1010" cy="150" r="74" fill="none" stroke="rgba(201,174,124,.16)" stroke-width="1.2"/>
+      <g transform="rotate(-38 1010 150)">
+        <polygon points="1010,42 1030,150 990,150" fill="rgba(201,174,124,.14)"/>
+        <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
+      </g>
+    </svg>
+    <div class="ph-in reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
+  </div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
@@ -4237,7 +4276,17 @@ function renderAnalytics(){
                      anYear!=="Все"?`${anYear} год`:""].filter(Boolean).join(", ");
   if(!all.length){
     app.innerHTML = `
-    <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1></div>
+    <div class="page-hero">
+    <svg class="ph-bg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="rgba(243,241,233,.05)">
+        <rect x="880" y="180" width="34" height="120"/><rect x="928" y="140" width="34" height="160"/>
+        <rect x="976" y="200" width="34" height="100"/><rect x="1024" y="96" width="34" height="204"/>
+        <rect x="1072" y="160" width="34" height="140"/>
+      </g>
+      <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
+      <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
+    </svg>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1></div></div>
     ${analyticsFiltersHtml(yearsAvail, typesAvail, 0, raw.length)}
     <p class="reveal" style="color:var(--muted);max-width:640px">По этой выборке в базе нет ни одной сделки. Снимите один из фильтров.</p>`;
     bindAnalyticsFilters(); rerun(); return;
@@ -4346,7 +4395,17 @@ function renderAnalytics(){
   const maxIM = topIndMoney.length?topIndMoney[0][1].sum:1;
   const fmtB = v => v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace(".",",")+" трлн" : Math.round(v)+" млрд";
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Считаем по сделкам, которые показаны на сайте, — это ${raw.length} ${plural(raw.length,"карточка","карточки","карточек")} с 2022 года. Графики ниже охватывают разное число сделок: под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div>
+  <div class="page-hero">
+    <svg class="ph-bg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="rgba(243,241,233,.05)">
+        <rect x="880" y="180" width="34" height="120"/><rect x="928" y="140" width="34" height="160"/>
+        <rect x="976" y="200" width="34" height="100"/><rect x="1024" y="96" width="34" height="204"/>
+        <rect x="1072" y="160" width="34" height="140"/>
+      </g>
+      <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
+      <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
+    </svg>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>Считаем по сделкам, которые показаны на сайте, — это ${raw.length} ${plural(raw.length,"карточка","карточки","карточек")} с 2022 года. Графики ниже охватывают разное число сделок: под каждым написано, что посчитано. Это не вся статистика рынка, а то, что попало в базу.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid">
     <div class="an-card reveal">

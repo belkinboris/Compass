@@ -1609,3 +1609,86 @@ def test_same_story_from_two_outlets_is_one_console_message(base):
         twin = [d for d in drafts if not d.get("dup_in_batch")
                 and matcher.quoted_common(matcher.quoted(str(d.get("title"))), names)]
         assert twin, f"{dup.get('draft_id')}: помечен дублем, а оригинала нет"
+
+
+def test_raw_console_remembers_the_news_not_the_draft_id(monkeypatch):
+    """«Не сделка» и «уже показывали» помнятся по ЗАГОЛОВКУ, не по draft_id.
+
+    Одна и та же новость назавтра приходит с новым draft_id: Рижский вокзал
+    партнёр выкидывал трижды за два дня, «издание Гоголя» и Atomic dohaeris
+    показались в консоли повторно. Память по id помнит прогон, память по
+    заголовку — новость.
+    """
+    import promote
+    import send_drafts
+    drafts = [
+        {"draft_id": "d-new-1", "title": "РЖД снова выставила Рижский вокзал на торги",
+         "hold_reasons": ["не установлен предмет сделки"]},
+        {"draft_id": "d-new-2", "title": "Совершенно новая сделка про завод",
+         "hold_reasons": ["не установлен предмет сделки"]},
+    ]
+    state = {"decided_raw": {}, "sent_raw": [],
+             "raw_titles": {promote.raw_key(drafts[0]["title"]): "drop"}}
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
+    plan, _p, _s, _deferred, _postponed, _foreign = send_drafts.build_plan()
+    raw_titles = [item.get("title") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
+    assert drafts[1]["title"] in raw_titles
+    assert drafts[0]["title"] not in raw_titles, \
+        "новость, выкинутая по заголовку, показана снова под новым draft_id"
+
+
+def test_raw_console_hides_foreign_only_deals(monkeypatch):
+    """Иностранный контур без российского элемента в консоль не носим.
+
+    Решение владельца 5–6 августа: такие сделки не публикуем. Сырьё по
+    молчанию не публикуется никогда, так что скрыть его безопасно; черновик
+    остаётся в hold-файле, а вывод прогона называет число скрытых — молчащий
+    предел читался бы как «это всё».
+    """
+    import send_drafts
+    drafts = [
+        {"draft_id": "d-f-1",
+         "title": "Atomic dohaeris: стартап привлек $1 млрд на компактные реакторы",
+         "hold_reasons": ["не названа ни одна сторона — ни покупатель, ни продавец",
+                          "не видно связи с российским рынком — стороны и предмет "
+                          "названы латиницей, российских признаков нет"]},
+    ]
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_state",
+                        lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, _p, _s, _deferred, _postponed, foreign = send_drafts.build_plan()
+    assert foreign == 1
+    assert not [1 for _t, _kb, (kind, _i, _m) in plan if kind == "raw"], \
+        "иностранный черновик всё равно попал в план рассылки"
+
+
+def test_classifier_rejects_live_console_junk():
+    """Госзакупки, советы, антиквариат и операции Минфина — не кандидаты.
+
+    Все четыре примера — живой поток 5–6 августа, дошедший до консоли
+    основателей («как это вообще сюда попадает»). Обратная сторона проверена
+    тем же тестом: тендерное предложение о выкупе акций (buyout offer) и
+    раунд стартапа, АВТОМАТИЗИРУЮЩЕГО закупки, — настоящие сделки, и первая
+    версия правила их зарубила.
+    """
+    import classify
+    junk = [
+        "В Петербурге ещё раз попытаются закупить автобусы особо большого класса",
+        "Названы главные юридические риски при покупке жилья за границей",
+        "Прижизненное издание Гоголя из типографии в Петербурге продают за 3,5 млн",
+        "Минфин увеличит ежедневные покупки валюты на 20%",
+    ]
+    for t in junk:
+        assert not classify.looks_like_deal(t), "мусор прошёл фильтр: %s" % t
+    real = [
+        "VEON: обязательное тендерное предложение о выкупе 42,31% акций "
+        "Global Telecom Holding (GTH) за $600 млн",
+        "Привлечение инвестиций раунда А российским сервисом автоматизации "
+        "B2B-закупок Bidzaar ($2 млн)",
+        "Роснефть выкупила Саянскхимпласт на торгах",
+    ]
+    for t in real:
+        assert classify.looks_like_deal(t), "настоящая сделка отвергнута: %s" % t
