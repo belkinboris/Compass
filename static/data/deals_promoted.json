@@ -76032,24 +76032,32 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/876278"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/digital-economy/content/246725/2026-08-04/2026-w32/1012/tantor-labs-zakryla-sdelku-mt-integraciey-subd-persey-i-usilila-pozicii-rynke-subd"
+    ],
+    [
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-08-04_sozdatel_samogo_izvestnogo"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "Сумму сделки держат в тайне, но обещают раскрыть в середине осени 2026 г.",
     "share": "—",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "Со стороны «Группы Астра» в сделке участвовала компания ООО «Тантор Лабс»",
     "finadv": "—"
    },
    "law": {
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "Команда разработки продукта в полном составе, насчитывающая порядка 50 специалистов, присоединится к «Тантор Лабс» и продолжит развитие решения уже в составе компании"
    },
    "buyer_name": "«Тантор Лабс»",
    "asset": "права на СУБД «Персей»",

@@ -522,6 +522,136 @@
    "pending_since": "2026-08-07T05:55:05+00:00",
    "draft_sent": true,
    "post_draft_sent": true
+  },
+  {
+   "id": "g998e5eb5",
+   "date": "2026-08-03",
+   "title": "МКБ завершил присоединение Дальневосточного банка",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8861070"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Сделка проводилась путем конвертации акций ДВБ в акции Московского кредитного банка. Для этих целей МКБ объявил допэмиссию, которая увеличила его капитал на 4,4%",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "МКБ",
+   "asset": "Дальневосточного банка",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Московский кредитный банк (МКБ) завершил присоединение Дальневосточного банка (ДВБ). Об этом сообщила пресс-служба МКБ.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8861070"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "МКБ",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861070"
+     }
+    ],
+    "target": [
+     {
+      "value": "Дальневосточного банка",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8861070"
+     }
+    ]
+   },
+   "pending_since": "2026-08-07T06:24:03+00:00"
+  },
+  {
+   "id": "g8f7479bd",
+   "date": "2026-08-04",
+   "title": "Сургутский застройщик выставил на продажу актив за 400 млн рублей",
+   "ind": "Строительство",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ura.news",
+     "https://ura.news/news/1053115470"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "404 млн ₽",
+   "seller": "«Еврострой»",
+   "asset": "производственную базу",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-04",
+     "title": "Переговоры",
+     "note": "В Сургуте выставили на продажу производственную базу строительной компании «Еврострой». Стоимость объекта составляет 404 миллиона рублей, следует из объявления на сайте бесплатных объявлений.",
+     "source": [
+      "ura.news",
+      "https://ura.news/news/1053115470"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "производственную базу",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115470"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Еврострой»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053115470"
+     }
+    ]
+   },
+   "pending_since": "2026-08-07T06:30:00+00:00"
   }
  ]
 }
