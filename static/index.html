@@ -4200,7 +4200,7 @@ function renderAdvisors(){
         <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
       </g>
     </svg>
-    <div class="ph-in reveal"><span class="label">Каталог консультантов</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
+    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
   </div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
@@ -4833,7 +4833,7 @@ async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
   app.innerHTML = `
-  <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Обсуждения сохраняются в аккаунте: можно вернуться к анализу сделки или продолжить вопрос позднее.</p></div></div>
+  <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Отвечает по базе «Компаса» или, в режиме «По всему интернету», по открытым источникам — со ссылками на то, откуда взят факт. Обсуждения сохраняются в аккаунте.</p></div></div>
   <div class="chat-layout">
     <aside class="thread-panel reveal" id="threadPanel">
       <button class="thread-new" id="newThread">+ Новый диалог</button>
