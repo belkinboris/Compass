@@ -170,7 +170,13 @@ def main(write=False):
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
         clean = {k: v for k, v in card.items()
-                 if k not in ('pending_since', 'draft_sent', 'held')}
+                 if k not in ('pending_since', 'draft_sent', 'held', 'post_draft_sent')}
+        # КОГДА КАРТОЧКА ПОЯВИЛАСЬ НА САЙТЕ — это не то же самое, что дата
+        # сделки. Лента сортируется по дате СДЕЛКИ, и одобренная сегодня
+        # карточка о сделке 28 июля встаёт в середину списка: владелец 7 августа
+        # сказал «не вижу новых карточек», хотя они были на месте. Без этого
+        # поля отличить свежее пополнение от старожила нечем.
+        clean['added'] = now.date().isoformat()
         if override:
             clean['post_override'] = override
         # «Без поста»: карточка выходит на сайт, а канал молчит. send_telegram

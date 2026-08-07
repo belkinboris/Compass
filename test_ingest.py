@@ -1205,12 +1205,28 @@ def test_old_deal_is_posted_as_news_about_a_known_deal():
     assert "Что стало известно: добавлен источник" in text, "не сказано, что именно добавилось"
 
     fresh = dict(old, date="2026-08-01")
-    assert "Новое о сделке" not in format_post.render(fresh, {}, today=today), \
+    fresh_text = format_post.render(fresh, {}, today=today)
+    assert "Новое о сделке" not in fresh_text and "Сделка из базы" not in fresh_text, \
         "свежая сделка не должна получать шапку про архив"
 
     # Год без месяца свежим не считается: не зная месяца, объявлять сделку
     # сегодняшней нельзя.
-    assert "Новое о сделке" in format_post.render(dict(old, date="2026"), {}, today=today)
+    assert "Сделка из базы" in format_post.render(dict(old, date="2026"), {}, today=today)
+
+    # НОВИЗНУ ОБЕЩАЕМ, ТОЛЬКО ЕСЛИ ЕСТЬ ЧТО СКАЗАТЬ. 7 августа в канал ушёл пост
+    # «Новое о сделке · май 2026» про бизнес-центр «Обсидиан», в котором про
+    # новое не было ни слова, — владелец справедливо спросил, что же в нём
+    # нового. Ответ: ничего, просто карточка впервые дошла до канала. Обещание
+    # новизны без единого нового факта — это обман читателя, пусть и мелкий.
+    silent = format_post.render(old, {}, today=today)          # старая, без updates
+    assert "Новое о сделке" not in silent, "обещали новое, не сказав ни слова о нём"
+    assert "Сделка из базы" in silent and "июнь 2026" in silent
+    assert "Публикуем впервые" in silent, "не объяснили, почему сделка июня всплыла сегодня"
+
+    # А дату появления карточки в базе называем, если она известна: это и есть
+    # ответ на «почему я вижу это сегодня».
+    dated = format_post.render(dict(old, added="2026-08-04"), {}, today=today)
+    assert "карточка появилась в «Компасе» 4 августа 2026" in dated
 
 
 def test_industry_is_read_from_the_deal_itself():

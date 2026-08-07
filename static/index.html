@@ -132,9 +132,11 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hero-brand{left:20px;top:18px}.hero-brand-name{font-size:18px}.hero-brand-mark{width:31px;height:31px}
 }
 .top-in{max-width:1120px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:40px}
-/* Имя бренда в шапке — тёмно-зелёное (просьба владельца: чёрное «не очень
-   хорошо выглядит»); над тёмным героем его перекрывает .top.on-hero. */
-.wordmark{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-display);font-weight:600;font-size:22px;color:var(--accent-deep)}
+/* Имя бренда в шапке — чёрное (--ink). Зелёное пробовали 6 августа и владелец
+   отверг: на светлой бумаге зелёный спорит с акцентом навигации. Бронзовые
+   М и А остаются — они и есть скрытое «M&A». Над тёмным героем цвет
+   перекрывает .top.on-hero. */
+.wordmark{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-display);font-weight:600;font-size:22px;color:var(--ink)}
 .avatar-dot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:12.5px;font-weight:600;vertical-align:middle}
 .top.on-hero .avatar-dot{background:var(--bronze-light);color:#0A1210}
 .wordmark span{color:var(--accent)}
@@ -147,6 +149,34 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    .wordmark, .hero-brand, .foot-brand задают color независимо). Бронзовая
    половина стрелки и центральная точка (дырка в стрелке, цвета подложки) под
    currentColor не ходят — им нужны свои правила на каждом фоне. */
+/* Короткое подтверждение действия. Нажатие «сердечка» на карточке компании
+   не показывало НИЧЕГО: состояние менялось, но человек не понимал, произошло
+   ли что-нибудь (жалоба владельца 7 августа). pointer-events:none — намеренно:
+   всё, что кладётся поверх страницы, обязано не перехватывать клики, этот урок
+   уже оплачен модальным окном правки, которое молча съедало нажатия. */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);z-index:120;
+  max-width:min(92vw,460px);padding:12px 18px;border-radius:8px;background:var(--accent-deep);
+  color:var(--ivory);font-size:13.5px;line-height:1.45;box-shadow:0 10px 34px -12px rgba(15,43,33,.55);
+  opacity:0;pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast a{color:var(--bronze-light);text-decoration:underline}
+.toast a{pointer-events:auto}
+/* Обращение к фирмам внизу каталога консультантов. Тёмная плашка — чтобы
+   отделялась от белых строк списка и читалась как отдельный разговор, а не
+   как ещё одна фирма в перечне. */
+.firm-cta{margin:34px 0 0;padding:30px 34px;border-radius:6px;
+  background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:var(--ivory);
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.firm-cta h2{font-family:var(--f-display);font-weight:400;font-size:23px}
+.firm-cta p{color:#A9BDB2;margin-top:8px;max-width:620px;font-size:14px;line-height:1.6}
+.firm-cta .hs-cta{margin-top:0;flex-shrink:0}
+@media(max-width:720px){.firm-cta{padding:24px 20px;gap:18px}.firm-cta h2{font-size:20px}}
+
+/* Метка свежего пополнения. Бронза, а не красный: это не тревога и не
+   «горячее», а спокойная пометка «этого вчера ещё не было». */
+.fresh-dot{display:inline-block;margin-right:8px;padding:2px 7px;border-radius:3px;
+  background:var(--bronze-soft);color:#6B5432;font-size:10px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;vertical-align:2px}
 .brand-mark{display:inline-flex;flex-shrink:0}
 .brand-mark svg{display:block}
 .wordmark .bm-accent{fill:var(--bronze)}
@@ -243,7 +273,10 @@ nav a.on::after,nav a:hover::after{width:100%}
    чередования, но их шапке тоже нужна заливка, чтобы заголовок раздела не
    висел в пустоте. Мягкий зелёный градиент из палитры, шапка сайта над ним
    остаётся дневной (updTop смотрит только на тёмные полосы, :not(.light)). */
-.page-hero.light{background:linear-gradient(160deg,var(--accent-soft) 0%,#EFF2EA 55%,var(--paper) 100%);color:var(--ink);border-bottom:1px solid var(--line-soft)}
+/* Бежевая, а не зелёная: светло-зелёный владелец отверг («мне не очень
+   нравится»). Бежевый уже есть в палитре — это --bronze-soft, фон бронзовых
+   акцентов, поэтому полоса не вводит новый цвет, а переиспользует свой. */
+.page-hero.light{background:linear-gradient(160deg,var(--bronze-soft) 0%,#F7F3EA 55%,var(--paper) 100%);color:var(--ink);border-bottom:1px solid var(--line-soft)}
 .page-hero.light .label{color:var(--accent)}
 .page-hero.light p{color:var(--muted)}
 @media(max-width:720px){
@@ -1345,25 +1378,53 @@ function companyEmptyHtml(c){
    Данные (DEALS/MATCH_KEYS/…) неизменны после загрузки базы, а сама эта
    функция вызывается только когда база уже загружена (route() ждёт
    bulkLoaded), поэтому результат по id можно посчитать один раз и переиспользовать. */
-const companyDealsCache = new Map();
-function companyDeals(id){
-  const cached = companyDealsCache.get(id);
+/* Кеш спас повторные отрисовки, но не ПЕРВОЕ открытие: 60 карточек первой
+   страницы всё равно тянули по полному проходу каждая, и вкладка «Компании»
+   открывалась заметно долго, а потом «уже ок» (жалоба владельца 7 августа).
+   Дальше — два отдельных приёма, потому что у двух половин функции разная цена.
+
+   СТОРОНЫ СДЕЛОК считаются ОДНИМ проходом по базе на всех: раскладываем сделки
+   по id компаний в индекс, и дальше это просто взятие по ключу. Было
+   O(компаний × сделок), стало O(сделок) на весь каталог.
+
+   УПОМИНАНИЯ (сверка названия с ЗАГОЛОВКОМ каждой сделки регуляркой) индексом
+   не берутся — там не равенство id, а поиск по тексту. Зато они нужны на
+   карточке каталога только тем компаниям, у кого нет ни одной сделки стороной,
+   а такие в сортировке «по активности» стоят в самом хвосте. Поэтому они
+   считаются лениво, по требованию, и тоже кешируются. */
+let structuredIndex = null;
+function buildStructuredIndex(){
+  const idx = new Map();
+  const put = (key, d) => { if(!key) return; const a = idx.get(key); if(a){ if(a[a.length-1]!==d) a.push(d); } else idx.set(key, [d]); };
+  DEALS.forEach(d=>{ put(d.buyer,d); put(d.target,d); put(d.seller_id,d); put(d.asset_id,d); });
+  return idx;
+}
+function companyStructured(id){
+  if(!structuredIndex) structuredIndex = buildStructuredIndex();
+  return structuredIndex.get(id) || [];
+}
+const companyMentionsCache = new Map();
+function companyMentionList(id){
+  const cached = companyMentionsCache.get(id);
   if(cached) return cached;
-  const structured = DEALS.filter(d=>d.buyer===id||d.target===id||d.seller_id===id||d.asset_id===id);
-  const structuredIds = new Set(structured.map(d=>d.id));
+  const structuredIds = new Set(companyStructured(id).map(d=>d.id));
   const mentions = [];
   DEALS.forEach(d=>{ if(!structuredIds.has(d.id) && matchesCompany(d.title, id)) mentions.push({date:d.date,title:d.title,url:"#/deal/"+d.id,source:"Карточка «Компаса»"}); });
   MINI_DEALS.forEach(m=>{ if(matchesCompany(m.title, id)) mentions.push({date:m.date,title:m.title,url:m.src[1],source:m.src[0]}); });
   CHANNEL_DEALS.forEach(c=>{ if(matchesCompany(c.title, id)) mentions.push({date:c.date,title:c.title,url:c.src[1],source:c.src[0]}); });
   BULK_DEALS.forEach(b=>{ if(matchesCompany(b.title, id)) mentions.push({date:b.date,title:b.title,url:(b.src&&b.src[1])||"#",source:(b.src&&b.src[0])||"?"}); });
-  const result = {structured, mentions};
-  companyDealsCache.set(id, result);
-  return result;
+  companyMentionsCache.set(id, mentions);
+  return mentions;
+}
+/* Совместимость: страницы компании и ассистент ждут объект {structured, mentions}.
+   Здесь упоминания считаются сразу — на ОДНУ открытую компанию это дёшево. */
+function companyDeals(id){
+  return {structured: companyStructured(id), mentions: companyMentionList(id)};
 }
 /* Основной счётчик включает только сделки, где компания указана стороной.
    Простые текстовые совпадения хранятся отдельно и доступны в полном списке. */
-const companyTotal = id => companyDeals(id).structured.length;
-const companyMentions = id => companyDeals(id).mentions.length;
+const companyTotal = id => companyStructured(id).length;
+const companyMentions = id => companyMentionList(id).length;
 
 /* Регулярка имени фирмы — одна на все экраны. `FIRM_MATCH` заполнен не для
    всех: у «Деловых Решений и Технологий», «Дякин, Горцунян и Партнеры» и
@@ -1824,6 +1885,55 @@ if(wordmarkLink) wordmarkLink.addEventListener("click", ()=>{
 });
 const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")));
 
+/* ПОПОЛНЕНИЕ БАЗЫ НЕ ВИДНО, ПОКА ЛЕНТА ОТСОРТИРОВАНА ПО ДАТЕ СДЕЛКИ. И это
+   правильная сортировка — читателю нужен рынок, а не наш график работы. Но
+   одобренная сегодня карточка о сделке 28 июля встаёт в середину списка, и
+   владелец 7 августа честно сказал: «не вижу новых карточек», хотя их семь.
+   Поле `added` (дата появления в базе, см. pipeline/backfill_added_dates.py)
+   позволяет пометить свежее, не ломая порядок. Неделя — потому что приток
+   идёт раз в сутки: за неделю читатель, заходящий по выходным, ничего не
+   пропустит. У старых карточек поля нет — они просто не помечаются. */
+const FRESH_DAYS = 7;
+/* ДЕНЬ, В КОТОРЫЙ ПРИЕХАЛИ СОТНИ КАРТОЧЕК, — ЭТО ПЕРЕНОС АРХИВА, А НЕ НОВОСТИ
+   РЫНКА. Без этой оговорки метка встала бы у 204 карточек разом (3 августа в
+   базу одним коммитом приехало 188 записей), и «Новое» перестало бы что-либо
+   значить — ровно та же болезнь, что у блока «Похожие сделки», который стоял
+   у всех карточек и потому ничего не подбирал. Порог берём с запасом: приток
+   даёт единицы карточек в сутки, а разовые импорты — сотни, между ними нет
+   ничего похожего на границу. */
+const BULK_DAY = 30;
+let freshDaysCache = null;
+function smallAddDays(){
+  if(freshDaysCache) return freshDaysCache;
+  const byDay = new Map();
+  DEALS.forEach(d=>{ const a=String(d.added||""); if(a) byDay.set(a,(byDay.get(a)||0)+1); });
+  freshDaysCache = new Set([...byDay].filter(([,n])=>n<=BULK_DAY).map(([day])=>day));
+  return freshDaysCache;
+}
+function isFresh(d){
+  const a = String(d && d.added || "");
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(a)) return false;
+  if(Date.now() - Date.parse(a + "T00:00:00") >= FRESH_DAYS*24*3600*1000) return false;
+  return smallAddDays().has(a);
+}
+
+/* Подтверждение действия одной строкой. Аргумент `html` — уже готовая
+   разметка (нужна ссылка «Войти»), поэтому вызывать только со своим текстом,
+   не с пользовательским вводом. */
+let toastTimer = null;
+function toast(html){
+  let el = document.getElementById("toast");
+  if(!el){ el = document.createElement("div"); el.id = "toast"; el.className = "toast";
+           el.setAttribute("role","status"); document.body.appendChild(el); }
+  el.innerHTML = html;
+  requestAnimationFrame(()=>el.classList.add("on"));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove("on"), 3200);
+}
+/* Действие требует аккаунта — говорим об этом прямо и даём ссылку, а не
+   молчим и не делаем вид, что сработало (просьба владельца 7 августа). */
+const needLogin = what => toast(`Чтобы ${what}, нужно войти. <a href="#/account">Войти или создать аккаунт</a>`);
+
 /* ================= ИИ ================= */
 let aiMode = "base";
 let activeThreadId = null;
@@ -1862,7 +1972,29 @@ function relevantDeals(question, limit){
   return scored.slice(0, limit).map(x=>x.d);
 }
 function buildContext(question, contextType, contextId){
-  const fullOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,economist:d.eco,lawyer:d.law,sources:d.src});
+  /* ЗАГЛУШКИ В КОНТЕКСТ НЕ КЛАДЁМ. Объекты eco/law у каждой карточки имеют
+     фиксированный набор полей, и у большинства сделок они заполнены прочерком
+     «—». Отправляя их модели, мы платим временем ответа за строки, которые не
+     несут ни одного факта: на 40 карточках это 30,1 КБ против 22,3 КБ — четверть
+     запроса. Скорость ответа — жалоба владельца №1 по ассистенту, и это самая
+     дешёвая её часть. Пустое поле и так значит «не раскрыто»; модель не должна
+     узнавать об этом из явного прочерка. */
+  const filled = obj => {
+    if(!obj) return undefined;
+    const out = {};
+    Object.keys(obj).forEach(k=>{
+      const v = obj[k];
+      if(v===null||v===undefined) return;
+      if(Array.isArray(v)){ if(v.length) out[k]=v; return; }
+      const s = String(v).trim();
+      if(s && s!=="—" && !/^не\s+раскры/i.test(s)) out[k]=v;
+    });
+    return Object.keys(out).length ? out : undefined;
+  };
+  const fullOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,
+                        sum:d.sum||undefined,buyer:d.buyer_name||undefined,seller:d.seller||undefined,
+                        asset:d.asset||undefined,
+                        economist:filled(d.eco),lawyer:filled(d.law),sources:d.src});
   const autoOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)});
   const mapDeal = d => d.auto ? autoOf(d) : fullOf(d);
   const byDateDesc = list => list.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
@@ -2150,7 +2282,7 @@ function unifiedFeed(){
     full: d => `
     <a class="deal-row reveal" href="#/deal/${d.id}">
       <div><span class="label num">${fmtDate(d.date)}</span>${d.status?`<br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>`:""}</div>
-      <div><div class="deal-title">${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
+      <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
       ${dealMetaHtml(d)}
     </a>`,
     mini: m => `
@@ -2445,7 +2577,7 @@ function renderDeals(){
     savef.disabled=true;
     try{
       const r=await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword})});
-      if(r.status===401){location.hash="#/account";return;}
+      if(r.status===401){needLogin("сохранить подборку и получать по ней уведомления");return;}
       const body=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(body.error||"Не удалось сохранить подборку");
       if(note) note.textContent="Подборка сохранена. Новые совпадения появятся в уведомлениях.";
@@ -3128,7 +3260,7 @@ async function mountDealTools(d){
     download.disabled=true;show("Готовим PDF…");
     try{
       const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/export`,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
-      if(r.status===401){location.hash="#/account";return;}
+      if(r.status===401){needLogin("скачать карточку в PDF");return;}
       if(r.status===403){show("Скачивание полной карточки доступно по подписке.");return;}
       if(!r.ok){const x=await r.json().catch(()=>({}));show(x.error||"Не удалось сформировать PDF.");return;}
       const blob=await r.blob(), a=document.createElement("a");
@@ -3144,7 +3276,10 @@ async function mountDealTools(d){
   watch.onclick=async()=>{
     const method=watching?"DELETE":"POST";
     const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/watch`,{method});
-    if(r.status===401){location.hash="#/account";return;}
+    // Раньше здесь молча происходил переход на экран входа: человек нажимал
+    // «Подписаться» и оказывался в форме регистрации без единого слова о том,
+    // почему. Сначала объясняем, потом уводим.
+    if(r.status===401){needLogin("подписаться на обновления сделки");return;}
     if(!r.ok){show("Не удалось изменить подписку.");return;}
     watching=!watching;paint();show(watching?"Сообщим, когда в карточке появится новый подтверждённый этап или факт.":"Подписка отключена.");
   };
@@ -3507,10 +3642,17 @@ function companyRows(){
   const hit = name => name.toLowerCase().includes(q) || (!!qsq && squashQ(name).includes(qsq));
   return Object.entries(COMPANIES)
     .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||hit(c.name)))
-    .map(([id,c])=>({id,c,n:companyTotal(id),m:companyMentions(id)}))
-    // При равном числе сделок вперёд идут те, у кого больше упоминаний: иначе
-    // 155 профилей без единой сделки перемешались бы в произвольном порядке.
-    .sort((a,b)=>coSort==="alpha" ? a.c.name.localeCompare(b.c.name,"ru") : (b.n-a.n)||(b.m-a.m)||a.c.name.localeCompare(b.c.name,"ru"));
+    // УПОМИНАНИЯ ЗДЕСЬ НЕ СЧИТАЮТСЯ ВОВСЕ. Раньше они были частью ключа
+    // сортировки — и ради порядка внутри хвоста списка платили полным проходом
+    // по базе регуляркой на КАЖДЫЙ из 1872 профилей (замер: 437 мс синхронно
+    // на потоке рендера, то самое «первый раз открывается долго»). Профилей
+    // без единой сделки больше половины, и именно они это и оплачивали.
+    // Внутри равного числа сделок сортируем по алфавиту: это тоже
+    // предсказуемый порядок, а не «произвольный», от которого уходили.
+    // Само число упоминаний по-прежнему показывается — но считается лениво,
+    // только для карточек, попавших на экран (см. companyGridHtml).
+    .map(([id,c])=>({id,c,n:companyTotal(id)}))
+    .sort((a,b)=>coSort==="alpha" ? a.c.name.localeCompare(b.c.name,"ru") : (b.n-a.n)||a.c.name.localeCompare(b.c.name,"ru"));
 }
 /* Левый показатель карточки был разнобойным: у 34 профилей — кураторский kpi
    («литиевые проекты | Мурманская область»), у остальных — вычисленная роль
@@ -3520,21 +3662,25 @@ function companyRows(){
    ответ, а не повод менять подпись обратно на разнобой. */
 function coFact(id,c){
   const yearAgo = new Date(Date.now() - 365*24*3600*1000).toISOString().slice(0,10);
-  const recent = companyDeals(id).structured.filter(d=>String(d.date||"")>=yearAgo).length;
+  const recent = companyStructured(id).filter(d=>String(d.date||"")>=yearAgo).length;
   return ["M&A активность", recent + " за год"];
 }
-/* «Описание компании пока не добавлено» стояло у 1754 профилей из 1872.
-   Это признание, а не описание: вместо него — годы, за которые у нас есть
-   сделки с этой компанией. Такой ответ верен для любого профиля и ничего не
-   выдумывает. */
+/* Заглушка «Описание компании пока не добавлено» стояла у 1754 профилей из
+   1872 — владелец справедливо назвал это ужасным: на экране извинение вместо
+   содержания. Компаниям, которые действительно открывают (участники трёх и
+   более сделок), описания написаны — см. pipeline/write_company_descriptions.py.
+   Остальным честнее показать факт, а не извинение: годы, за которые у нас есть
+   их сделки. Слово «пока не добавлено» с экрана убрано совсем — оно ничего не
+   сообщает читателю, только оправдывается перед ним. */
+const DESC_PLACEHOLDER = /^\s*(описание компании пока не добавлено|профиль сформирован по итогам чтения)/i;
 function coDescHtml(id,c){
   const text = String(c.desc||"").trim();
-  if(text && !/^описание компании пока не добавлено/i.test(text)) return text;
-  const years = companyDeals(id).structured
+  if(text && !DESC_PLACEHOLDER.test(text)) return text;
+  const years = companyStructured(id)
     .map(d=>String(d.date||"").slice(0,4)).filter(y=>/^\d{4}$/.test(y)).sort();
-  if(!years.length) return "Профиль есть, сделок в базе пока нет.";
+  if(!years.length) return "Участник рынка из базы «Компаса»; сделок с его участием пока нет.";
   const span = years[0]===years[years.length-1] ? years[0] : years[0]+"–"+years[years.length-1];
-  return "Сделки в базе: "+span+". Описание компании пока не добавлено.";
+  return "Участник сделок в базе «Компаса», "+span+".";
 }
 function companyGridHtml(){
   const rows = companyRows();
@@ -3548,7 +3694,7 @@ function companyGridHtml(){
       : `${rows.length} компани${coWordEnd(rows.length)} в базе`
   }${rows.length>shown.length?` · показано ${shown.length}`:""}</p>
   <div class="co-grid">
-  ${shown.map(({id,c,n,m})=>`
+  ${shown.map(({id,c,n})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
         <span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span>
@@ -3557,9 +3703,13 @@ function companyGridHtml(){
         <div class="co-nums">
           <div><span class="label">${coFact(id,c)[0]}</span><div class="val num">${coFact(id,c)[1]}</div></div>
           ${/* Если сделок со стороной нет, показываем не «0 сделок», а честное имя
-               того числа, которое у профиля действительно есть, — упоминания. */
-            (!n && m) ? `<div><span class="label">Упоминаний</span><div class="val num">${m}</div></div>`
-                      : `<div><span class="label">Сделок в базе</span><div class="val num">${n}</div></div>`}
+               того числа, которое у профиля действительно есть, — упоминания.
+               Считаются они ЗДЕСЬ, на 60 видимых карточках, а не на всех 1872
+               при сортировке: цена та же за штуку, но платим только за то,
+               что человек действительно видит. */
+            !n ? (m=>m ? `<div><span class="label">Упоминаний</span><div class="val num">${m}</div></div>`
+                       : `<div><span class="label">Сделок в базе</span><div class="val num">0</div></div>`)(companyMentions(id))
+               : `<div><span class="label">Сделок в базе</span><div class="val num">${n}</div></div>`}
         </div>
       </a>
       <div class="co-actions">
@@ -3591,15 +3741,23 @@ function bindCompanyGridActions(el){
     const cmp = ev.target.closest("[data-co-compare]");
     if(cmp){
       ev.preventDefault();
-      const result=toggleCompared(cmp.dataset.coCompare);
-      if(result.error){cmp.title=result.error;return;}
+      const id=cmp.dataset.coCompare, name=esc((co(id)||{}).name||"компания");
+      const result=toggleCompared(id);
+      // Раньше отказ («уже три компании») уходил в title кнопки — то есть был
+      // виден только тому, кто задержит на ней курсор, и никому на телефоне.
+      if(result.error){toast(esc(result.error));return;}
+      toast(result.selected ? `«${name}» добавлена к сравнению`
+                            : `«${name}» убрана из сравнения`);
       renderCompanyGrid();
       return;
     }
     const fav = ev.target.closest("[data-co-follow]");
     if(fav){
       ev.preventDefault();
-      toggleFollowedCompany(fav.dataset.coFollow);
+      const id=fav.dataset.coFollow, name=esc((co(id)||{}).name||"компания");
+      const on=toggleFollowedCompany(id);
+      toast(on ? `«${name}» в избранном. Список — в <a href="#/account">кабинете</a>.`
+               : `«${name}» убрана из избранного`);
       renderCompanyGrid();
       return;
     }
@@ -3961,9 +4119,27 @@ function renderAdvisors(){
     <div style="font-weight:600;color:var(--bronze)">ⓘ</div>
     <div>Здесь показано, в скольких карточках базы фирма названа консультантом со ссылкой на публичный источник. Это не рейтинг: фирмы раскрывают не все проекты, и ноль сделок в базе не означает, что их не было.</div>
   </div>
-  ${body}`;
+  ${body}
+  <!-- Обращение к самим фирмам. Стоит ПОСЛЕ списка, а не перед ним: сначала
+       человек видит, что каталог настоящий и его фирма в нём есть (или её
+       в нём нет — что мотивирует сильнее любого призыва), и только потом
+       предложение. Обещание сознательно скромное: заполнить профиль и
+       прислать сделки, а не «поднять фирму в рейтинге» — рейтингов у нас нет. -->
+  <div class="firm-cta reveal">
+    <div>
+      <h2>Вы юридическая фирма или инвестбанк?</h2>
+      <p>Заполните профиль фирмы и пришлите сделки, которые вы вели, — мы укажем вашу
+         команду в карточках со ссылкой на источник. Публикация бесплатна: каталог
+         существует для того, чтобы сделку можно было проверить, а не для рейтингов.</p>
+    </div>
+    <button class="hs-cta" id="firmCta" type="button">Заполнить профиль</button>
+  </div>`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
+  // Тот же диалог, что «Написать нам» в подвале: отдельной формы для фирм
+  // заводить незачем, а почтовая ссылка на телефоне открывает пустой клиент.
+  const firmCta=document.getElementById("firmCta");
+  if(firmCta) firmCta.onclick=()=>openCorrectionDialog();
 }
 /* Консультант без сделок — 27 фирм из 64. Раньше страница отвечала одной серой
    строкой, причём та же мысль стояла уже двумя абзацами выше («Записей пока
@@ -4565,7 +4741,7 @@ async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
   app.innerHTML = `
-  <div class="sec-head reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Обсуждения сохраняются в аккаунте: можно вернуться к анализу сделки или продолжить вопрос позднее.</p></div>
+  <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Обсуждения сохраняются в аккаунте: можно вернуться к анализу сделки или продолжить вопрос позднее.</p></div></div>
   <div class="chat-layout">
     <aside class="thread-panel reveal" id="threadPanel">
       <button class="thread-new" id="newThread">+ Новый диалог</button>
