@@ -689,3 +689,81 @@ def test_slow_load_hint_mentions_vpn(page, base_url):
     # До восьми секунд подсказка есть в разметке, но скрыта.
     html_fast = page.evaluate("() => { slowLoad = false; return loadingHtml('карточка'); }")
     assert "display:none" in html_fast
+
+
+def test_feed_is_ordered_by_publication_date_not_deal_date(page, base_url):
+    """В ленте — дата публикации, в карточке — дата сделки (просьба владельца).
+
+    До правки лента и сортировалась, и подписывалась датой САМОЙ СДЕЛКИ: карточка,
+    одобренная 6 августа, но описывающая сделку мая, вставала сотой строкой. Владелец
+    искал новое, видел наверху 5 августа и решал, что приток встал.
+    """
+    visit(page, base_url, "#/")
+    page.wait_for_timeout(2500)
+    rows = page.evaluate("""() => {
+      const items = DEALS.map(d => ({added: d.added || '', date: d.date || ''}));
+      return {
+        добавлено: items.map(x => x.added).sort().reverse()[0],
+        первая_в_ленте: (() => {
+          const html = unifiedFeed()[0] || '';
+          const m = html.match(/class="label num">([^<]+)</);
+          return m ? m[1] : '';
+        })(),
+      };
+    }""")
+    # Верх ленты подписан датой САМОГО СВЕЖЕГО ПОПОЛНЕНИЯ, а не самой свежей сделки.
+    assert rows["первая_в_ленте"], "в ленте нет даты"
+    newest_added = page.evaluate(
+        "() => DEALS.map(d=>d.added||'').filter(Boolean).sort().reverse()[0]")
+    expected = page.evaluate("d => fmtDate(d)", newest_added)
+    assert rows["первая_в_ленте"] == expected, (
+        "лента начинается не с последнего пополнения: %r вместо %r"
+        % (rows["первая_в_ленте"], expected))
+
+    # А в самой карточке стоит дата сделки — её подменять датой публикации нельзя.
+    probe = page.evaluate("""() => {
+      const d = DEALS.find(x => x.added && x.date && x.added.slice(0,7) !== x.date.slice(0,7));
+      return d ? {id: d.id, date: d.date, added: d.added} : null;
+    }""")
+    assert probe, "не нашлось карточки, у которой месяц сделки и месяц публикации различаются"
+    visit(page, base_url, "#/deal/" + probe["id"])
+    page.wait_for_timeout(700)
+    # Шапка карточки набрана капителью (text-transform), поэтому сравниваем без регистра.
+    head = page.inner_text(".d-head").lower()
+    assert page.evaluate("d => fmtDate(d)", probe["date"]).lower() in head, (
+        "в карточке нет даты сделки: %r" % head[:200])
+    assert page.evaluate("d => fmtDate(d)", probe["added"]).lower() not in head, (
+        "в карточке стоит дата публикации вместо даты сделки")
+
+
+def test_company_cards_align_their_divider(page, base_url):
+    """Линия над цифрами — на одной высоте у всех карточек каталога.
+
+    Раньше её место определяли длина имени и длина описания, и ряд выглядел
+    рваным: у «Сбербанка» описание в пять строк, у «Яндекса» — в три.
+    """
+    visit(page, base_url, "#/companies")
+    page.wait_for_timeout(2500)
+    tops = page.evaluate("""() => [...document.querySelectorAll('.co-card')].slice(0,24).map(c => {
+      const n = c.querySelector('.co-nums');
+      return Math.round(n.getBoundingClientRect().top - c.getBoundingClientRect().top);
+    })""")
+    assert len(tops) >= 12, "карточек компаний слишком мало для проверки"
+    assert len(set(tops)) == 1, "линия стоит на разной высоте: %r" % sorted(set(tops))
+
+
+def test_company_activity_names_what_it_counts(page, base_url):
+    """«1 за год» не называло, чего именно один. Единица измерения склоняется."""
+    visit(page, base_url, "#/companies")
+    page.wait_for_timeout(2500)
+    vals = page.evaluate("""() => [...document.querySelectorAll('.co-nums')].slice(0,40)
+      .map(n => n.querySelector('.val').textContent.trim())""")
+    assert vals, "не нашлось ни одной карточки компании"
+    for v in vals:
+        assert "за год" in v, "подпись активности потеряла период: %r" % v
+        assert re.match(r"^\d+ (сделка|сделки|сделок) за год$", v), "неверное склонение: %r" % v
+    # Правило склонения проверено на числах, которых может не быть на экране.
+    for n, word in ((0, "сделок"), (1, "сделка"), (2, "сделки"), (5, "сделок"),
+                    (11, "сделок"), (21, "сделка"), (22, "сделки"), (25, "сделок")):
+        got = page.evaluate("n => plural(n,'сделка','сделки','сделок')", n)
+        assert got == word, "plural(%d) = %r, ожидалось %r" % (n, got, word)
