@@ -386,7 +386,9 @@
     ]
    },
    "pending_since": "2026-08-07T05:55:05+00:00",
-   "sum": "7,7–13,5 млрд ₽ (по оценке)"
+   "sum": "7,7–13,5 млрд ₽ (по оценке)",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "ge482f106",
@@ -451,7 +453,9 @@
     ]
    },
    "pending_since": "2026-08-07T05:55:05+00:00",
-   "sum": "450–800 млн ₽ (по оценке)"
+   "sum": "450–800 млн ₽ (по оценке)",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g692dcc6b",
@@ -515,7 +519,9 @@
      }
     ]
    },
-   "pending_since": "2026-08-07T05:55:05+00:00"
+   "pending_since": "2026-08-07T05:55:05+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
