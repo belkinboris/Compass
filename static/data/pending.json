@@ -255,17 +255,21 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8863560"
+    ],
+    [
+     "Inc. Russia",
+     "https://incrussia.ru/news/knizhnaya-set-respublika-pereshla-pod-kontrol-novogo-sobstvennika/"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "новым владельцем «Интел-руал», контролирующей операционную компанию сети ООО «Пролайф», стало ООО «Индекс»",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "По итогам 2025 года выручка операционной компании «Пролайф» сократилась примерно на пятую часть, до 711,7 млн руб. Чистый убыток при этом вырос почти вдвое, до 94,3 млн руб.",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "«Индекс» входит в структуру АО «Концерн производительных сил»",
     "finadv": "—"
    },
    "law": {
@@ -276,7 +280,10 @@
    },
    "pending_since": "2026-08-06T16:25:43+00:00",
    "draft_sent": true,
-   "post_draft_sent": true
+   "post_draft_sent": true,
+   "buyer_name": "ООО «Индекс»",
+   "seller": "Александра Лютикова и Айбек Баймахан",
+   "asset": "«Интел-руал»"
   },
   {
    "id": "g01e3fd26",
