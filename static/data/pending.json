@@ -312,6 +312,210 @@
    "pending_since": "2026-08-06T16:25:43+00:00",
    "draft_sent": true,
    "post_draft_sent": true
+  },
+  {
+   "id": "gd126ba45",
+   "date": "2026-08-07",
+   "title": "Wildberries выкупил офисный комплекс у ВТБ",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8864446"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ВТБ",
+   "buyer_name": "Wildberries",
+   "asset": "офисный комплекс",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "В ВТБ сообщили “Ъ”, что дочерний БМ-банк завершил сделку по продаже бывшего офиса ФК «Открытие». Объект сделки — бизнес-центр площадью 24,4 тыс. кв. м на Летниковской улице возле Павелецкого вокзала в центре Москвы.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8864446"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Wildberries",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864446"
+     }
+    ],
+    "target": [
+     {
+      "value": "офисный комплекс",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864446"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864446"
+     }
+    ]
+   },
+   "pending_since": "2026-08-07T05:55:05+00:00",
+   "sum": "7,7–13,5 млрд ₽ (по оценке)"
+  },
+  {
+   "id": "ge482f106",
+   "date": "2026-08-06",
+   "title": "«Аптечная сеть 36,6» купила московского фармритейлера «Диалог»",
+   "ind": "Фармацевтика",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8864001"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Аптечная сеть 36,6»",
+   "asset": "московского фармритейлера «Диалог»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "ПАО «Аптечная сеть 36,6» (бренды «36,6» и «Горздрав») купило московскую сеть «Диалог», сообщили «Ъ» в «36,6». По условиям сделки ПАО получит шесть юрлиц и 83 торговые точки «Диалога» из 89.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8864001"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Аптечная сеть 36,6»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864001"
+     }
+    ],
+    "target": [
+     {
+      "value": "московского фармритейлера «Диалог»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864001"
+     }
+    ]
+   },
+   "pending_since": "2026-08-07T05:55:05+00:00",
+   "sum": "450–800 млн ₽ (по оценке)"
+  },
+  {
+   "id": "g692dcc6b",
+   "date": "2026-08-06",
+   "title": "Создатели «Ситилинка» купили долю в производителе картошки для чипсов Lay’s",
+   "ind": "Агро",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Sozdateli-Sitilinka-kupili-dolyu-v-proizvoditele-kartoshki-dlya-chipsov-Lays-87331"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Создатели «Ситилинка»",
+   "asset": "производителе картошки для чипсов Lay’s",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "Алексей Абрамов, Владислав Мангутов и Олег Карчев получили по 33,33% долей в компании «Ремтехно», которой принадлежит 49% в производителях картофеля «Экоагрофарминг» и 100% в фирме «Экоагрофарминг Берново», а также 100% долей в «Грин фьюлз» (она специализирует",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Sozdateli-Sitilinka-kupili-dolyu-v-proizvoditele-kartoshki-dlya-chipsov-Lays-87331"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Создатели «Ситилинка»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Sozdateli-Sitilinka-kupili-dolyu-v-proizvoditele-kartoshki-dlya-chipsov-Lays-87331"
+     }
+    ],
+    "target": [
+     {
+      "value": "производителе картошки для чипсов Lay’s",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Sozdateli-Sitilinka-kupili-dolyu-v-proizvoditele-kartoshki-dlya-chipsov-Lays-87331"
+     }
+    ]
+   },
+   "pending_since": "2026-08-07T05:55:05+00:00"
   }
  ]
 }

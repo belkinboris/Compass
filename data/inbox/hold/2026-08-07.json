@@ -1,0 +1,2192 @@
+{
+ "made": "2026-08-07",
+ "drafts": [
+  {
+   "draft_id": "d88870208",
+   "title": "Развожаев пообещал не продавать АИ-92 в Крыму дороже 100 руб. за литр",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861841"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47104251",
+   "title": "Visa купила BioCatch за $2,4 млрд для защиты от кибермошенничества",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861778"
+    ]
+   ],
+   "sum": "$2,4 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Visa объявила о приобретении израильского стартапа BioCatch, специализирующегося в сфере кибербезопасности. Сумма сделки составит $2,4 млрд наличными.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8861778"
+     ]
+    }
+   ],
+   "buyer_name": "Visa",
+   "asset": "BioCatch",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Visa",
+    "asset": "BioCatch",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d68583980",
+   "title": "TotalEnergies купит у Shell европейские активы возобновляемой энергии в Европе",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861563"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "TotalEnergies",
+   "asset": null,
+   "seller": "Shell европейские активы возобновляемой энергии в Европе",
+   "parsed_parties": {
+    "buyer": "TotalEnergies",
+    "asset": null,
+    "seller": "Shell европейские активы возобновляемой энергии в Европе"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d15911628",
+   "title": "UEFA пригрозил Инфантино судебным иском из-за планов продать права на ЧМ",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861354"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-03",
+     "title": "Переговоры",
+     "note": "Союз европейских футбольных ассоциаций (UEFA) направил письмо президенту Международной федерации футбола (FIFA) Джанни Инфантино, в котором заявил о готовности подать в суд из-за предложения о продаже доли прав на проведение чемпионатов мира. Об этом сообщает",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8861354"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90106810",
+   "title": "МКБ завершил присоединение Дальневосточного банка",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861070"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Московский кредитный банк (МКБ) завершил присоединение Дальневосточного банка (ДВБ). Об этом сообщила пресс-служба МКБ.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8861070"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26930412",
+   "title": "Bloomberg: AstraZeneca изучает возможность покупки Bristol Myers Squibb",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8861064"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d57520276",
+   "title": "Visa договорилась о покупке компании BioCatch за $2,4 млрд",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/08/03/1218503-o-pokupke-biocatch"
+    ]
+   ],
+   "sum": "$2,4 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-03",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/technology/news/2026/08/03/1218503-o-pokupke-biocatch"
+     ]
+    }
+   ],
+   "buyer_name": "Visa",
+   "asset": "BioCatch",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Visa",
+    "asset": "BioCatch",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d69878544",
+   "title": "Банк МКБ завершил присоединение Дальневосточного банка и расширил свое присутствие на Дальнем Востоке и в Сибири",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Bank-MKB-zavershil-prisoedinenie-Dalnevostochnogo-banka-i-rasshiril-svoe-prisutstvie-na-Dalnem-Vostoke-i-v-Sibiri-87313"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "В результате интеграции клиентская база и IT-инфраструктура двух финансовых организаций консолидированы в единую сеть. Сеть объединенного Банка насчитывает более 100 офисов и 800 банкоматов, которые расположены в 66 городах и населенных пунктах, 19 субъектах Р",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Bank-MKB-zavershil-prisoedinenie-Dalnevostochnogo-banka-i-rasshiril-svoe-prisutstvie-na-Dalnem-Vostoke-i-v-Sibiri-87313"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54408230",
+   "title": "RWB, Ozon, МТС и «Яндекс» интересуются покупкой доли в операторе национальной платежной системы «Мир»",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/RWB-Ozon-MTS-i-Yandeks-interesuyutsya-pokupkoj-doli-v-operatore-nacionalnoj-platezhnoj-sistemy-Mir-87307"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-03",
+     "title": "Переговоры",
+     "note": "Об этом рассказал источник \"Эксперта\", близкий к ЦБ. Информацию подтвердили три собеседника, знакомые с позициями компаний. По их данным, окончательное решение будет зависеть от оценки НСПК, условий сделки и набора корпоративных прав новых акционеров. Близкий",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/RWB-Ozon-MTS-i-Yandeks-interesuyutsya-pokupkoj-doli-v-operatore-nacionalnoj-platezhnoj-sistemy-Mir-87307"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gmru-mtsbank-kdpay (общие редкие слова: мтс, платеж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d42210435",
+   "title": "В Армении национализирован Ереванский коньячный завод — его отобрали у оппозиционера Гагика Царукяна",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/735223"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37606733",
+   "title": "Создатель знаменитого российского Linux купил полсотни разработчиков суверенной СУБД «Персей»",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-08-04_sozdatel_samogo_izvestnogo"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "«Группа Астра» купила команду инженеров СУБД «Персей» на основе PostgreSQL – в ее штат перешли около 50 человек. Также в распоряжении группы теперь есть исключительные права на результаты интеллектуальной деятельности интегратора «МТ-Интеграция», связанные с С",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-08-04_sozdatel_samogo_izvestnogo"
+     ]
+    }
+   ],
+   "buyer_name": "Создатель знаменитого российского Linux",
+   "asset": "полсотни разработчиков суверенной СУБД «Персей»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Создатель знаменитого российского Linux",
+    "asset": "полсотни разработчиков суверенной СУБД «Персей»",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gfa114edc (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d59591324",
+   "title": "«Тантор Лабс» закрыла сделку с «МТ-Интеграцией» (СУБД «Персей») и усилила позиции на рынке СУБД",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-04_tantor_labs_zakryla_sdelku"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "ООО «Тантор Лабс» объявляет о завершении сделки с ООО «МТ-Интеграция». В рамках сделки компания приобрела исключительные...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-08-04_tantor_labs_zakryla_sdelku"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gfa114edc (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Создатель знаменитого российского Linux купил полсотни разра» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d62871022",
+   "title": "Прижизненное издание Гоголя из типографии в Петербурге продают за 3,5 млн",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/04/prizhiznennoe-izdanie-gogolja"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43371488",
+   "title": "Бутик-отель продюсера Розенбаума в Петербурге перешёл к новому собственнику",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/03/butik-otel-prodjusera-rozenbauma"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75153456",
+   "title": "Atomic dohaeris: стартап привлек $1 млрд на компактные реакторы для дата-центов",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/atomic-dohaeris-startap-privlek-1-mlrd-na-kompaktnye-reaktory-dlya-data-tsentov/"
+    ]
+   ],
+   "sum": "$1 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Atomic dohaeris: стартап",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Atomic dohaeris: стартап",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d68266171",
+   "title": "Разработчик препаратов для долголетия приобрел права на экспериментальную психоделическую терапию для здоровья мозга",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/razrabotchik-preparatov-dlya-dolgoletiya-priobrel-prava-na-eksperimentalnuyu-psihodelicheskuyu-terapiyu-dlya-zdorovya-mozga/"
+    ]
+   ],
+   "sum": "$100 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "Разработчик препаратов для долголетия Jupiter Neurosciences получил права в США на экспериментальную терапию на основе MDMA стоимостью до $100 млн.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/razrabotchik-preparatov-dlya-dolgoletiya-priobrel-prava-na-eksperimentalnuyu-psihodelicheskuyu-terapiyu-dlya-zdorovya-mozga/"
+     ]
+    }
+   ],
+   "buyer_name": "Разработчик препаратов для долголетия",
+   "asset": "права на экспериментальную психоделическую терапию для здоровья мозга",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Разработчик препаратов для долголетия",
+    "asset": "права на экспериментальную психоделическую терапию для здоровья мозга",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gf70a43e6 (общие редкие слова: права, препар) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d51861255",
+   "title": "Shein выплатит инвесторам не менее $1,1 млрд перед IPO",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/shein-vyplatit-investoram-ne-menee-1-1-mlrd-pered-ipo/"
+    ]
+   ],
+   "sum": "$1,1 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d45296718",
+   "title": "Инвесторы вложили $13 млн в голосовой ИИ, который умеет перебивать собеседника",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/investory-vlozhili-13-mln-v-golosovoj-ii-kotoryj-umeet-perebivat-sobesednika/"
+    ]
+   ],
+   "sum": "$13 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Инвесторы",
+   "asset": "голосовой ИИ, который умеет перебивать собеседника",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Инвесторы",
+    "asset": "голосовой ИИ, который умеет перебивать собеседника",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d54824765",
+   "title": "\"Тантор Лабс\" закрыла сделку с \"МТ-Интеграцией\" (СУБД \"Персей\") и усилила позиции на рынке СУБД",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:comnews.ru",
+     "https://www.comnews.ru/digital-economy/content/246725/2026-08-04/2026-w32/1012/tantor-labs-zakryla-sdelku-mt-integraciey-subd-persey-i-usilila-pozicii-rynke-subd"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "ООО \"Тантор Лабс\", российский технологический лидер в области решений для управления и обработки данных, объяввила о завершении сделки с ООО \"МТ-Интеграция\". В рамках сделки компания приобрела исключительные права на результаты интеллектуальной деятельности, .",
+     "source": [
+      "web:comnews.ru",
+      "https://www.comnews.ru/digital-economy/content/246725/2026-08-04/2026-w32/1012/tantor-labs-zakryla-sdelku-mt-integraciey-subd-persey-i-usilila-pozicii-rynke-subd"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g97e1f483 (общие редкие слова: закрыл, сделку) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33944446",
+   "title": "В Сочи продают отель \"Звездный\"",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260803/otel-2108696828.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32572202",
+   "title": "«Группа Астра» купила права на систему управления базами данных «Персей»",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/296815"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-04",
+     "title": "Сделка завершена",
+     "note": "В штат ее дочерней компании — &#171;Тантор лабс&#187; — перейдут порядка 50 разработчиков &#171;Персея&#187; Сообщение &#171;Группа Астра&#187; купила права на систему управления базами данных &#171;Персей&#187; появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/296815"
+     ]
+    }
+   ],
+   "buyer_name": "«Группа Астра»",
+   "asset": "права на систему управления базами данных «Персей»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«Группа Астра»",
+    "asset": "права на систему управления базами данных «Персей»",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gfa114edc (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Создатель знаменитого российского Linux купил полсотни разра» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d43077467",
+   "title": "МКБ завершил присоединение Дальневосточного банка",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/296487"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "Теперь у объединенного банка более сотни офисов по России Сообщение МКБ завершил присоединение Дальневосточного банка появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/296487"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66668653",
+   "title": "Индия отказалась от покупки российского истребителя пятого поколения",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/04/indiya-otkazalas-ot-pokupki-rossiyskogo-istrebitelya-pyatogo-pokoleniya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67729457",
+   "title": "Сургутский застройщик выставил на продажу актив за 400 млн рублей",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115470"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16521154",
+   "title": "Здание скандального вуза в центре Екатеринбурга пытаются продать с новой попытки — «скинули» 100 млн",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115449"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48466495",
+   "title": "В пермской деревне за десятки миллионов рублей продают новый кемпинг",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115365"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71645419",
+   "title": "Пошли в «отказ». Кто и почему продает пункты выдачи заказов Wildberries в Челябинске",
+   "date": "2026-08-04",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/business/2026/08/04/76568124/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "пункты выдачи заказов Wildberries в Челябинске",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "пункты выдачи заказов Wildberries в Челябинске",
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d47332681",
+   "title": "Wildberries, Ozon, МТС, «Яндекс» , РСХБ, Совкомбанк&nbsp;—&nbsp;интересуются приобретением миноритарной доли в Национальной системе платёжных карт (НСПК), операторе платёжной системы «Мир». Окончатель",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7271"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gmru-mtsbank-kdpay (общие редкие слова: мтс, платеж) — проверьте, не дубль ли",
+    "та же новость, что «RWB, Ozon, МТС и «Яндекс» интересуются покупкой доли в опера» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d69903282",
+   "title": "⚡️ Госкомпания «Дoм.PФ» закрыла сделку по приобретению у сети Business Club бизнес-центра «Обсидиан» (10&nbsp;734 кв. м) на ул. Авиаконструктора Микояна на Ходынском поле. С 4 мая, согласно выписки Ро",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7273"
+    ]
+   ],
+   "sum": "6,5 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-03",
+     "title": "Сделка завершена",
+     "note": "⚡️ Госкомпания «Дoм.PФ» закрыла сделку по приобретению у сети Business Club бизнес-центра «Обсидиан» (10&nbsp;734 кв. м) на ул. Авиаконструктора Микояна на Ходынском поле. С 4 мая, согласно выписки Росреестра, новым владельцем этого комплекса числится Закрытый",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7273"
+     ]
+    }
+   ],
+   "buyer_name": "⚡️ Госкомпания «Дoм.PФ»",
+   "asset": null,
+   "seller": "сети Business Club бизнес-центра «Обсидиан» (10&nbsp",
+   "parsed_parties": {
+    "buyer": "⚡️ Госкомпания «Дoм.PФ»",
+    "asset": null,
+    "seller": "сети Business Club бизнес-центра «Обсидиан» (10&nbsp"
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g97e1f483 (общие редкие слова: закрыл, сделку) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d25512567",
+   "title": "Платформа для рекламодателей и авторов видеоконтента VibeVO , основанная Вадимом Стерлином, привлекла “несколько сотен тысяч долларов от фонда Go Ahead”. Точная сумма и условия сделки не раскрываются.",
+   "date": "2026-08-01",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7643"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Go Ahead”",
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Go Ahead”",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63813010",
+   "title": "AstraZeneca замахнулась на покупку Bristol Myers Squibb. &nbsp; Врываемся в рабочую неделю с новостью о мегасделке, которая может «породить» нового фармгиганта совокупной стоимостью до &#036;400 млрд.",
+   "date": "2026-08-03",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/7823"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59452149",
+   "title": "EasyJet согласилась на поглощение инвестфондом Apollo за $7,7 млрд",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8864267"
+    ]
+   ],
+   "sum": "$7,7 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d85019948",
+   "title": "Минфин: власти вернулись к обсуждению онлайн-продажи алкоголя",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/08/06/1219394-onlain-prodazhi-alkogolya"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79783286",
+   "title": "Безос продал акции Amazon более чем на $350 млн",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/08/06/1219372-bezos-prodal-aktsii"
+    ]
+   ],
+   "sum": "$350 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/08/06/1219372-bezos-prodal-aktsii"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "акции Amazon более чем на $350 млн",
+   "seller": "Безос",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "акции Amazon более чем на $350 млн",
+    "seller": "Безос"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d46433407",
+   "title": "«Диасофт» не будет проводить обратный выкуп акций в предстоящем квартале",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/08/06/1219361-diasoft-ne-budet-provodit"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83256185",
+   "title": "Каждые два рубля инвестиций в Москву приносят рубль в регионы",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/08/05/1218968-kazhdie-dva-rublya"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82189211",
+   "title": "«БФТ-Холдинг» и «Циан» договорились продвигать объекты государственного и муниципального имущества, выставленные на торги",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-06_bft-holding_i_tsian_dogovorilis"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-06",
+     "title": "Переговоры",
+     "note": "«БФТ-Холдинг», российский вендор, разработчик программных продуктов и заказных решений, и цифровая платформа...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-08-06_bft-holding_i_tsian_dogovorilis"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54181276",
+   "title": "85% россиян делают покупки на маркетплейсах в первый же день после зачисления зарплаты",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-06_85_rossiyan_delayut_pokupki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18728218",
+   "title": "Российская суверенная система бронирования авиабилетов будет выставлена на торги",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-08-06_operatora_sozdannoj_na_zamenu"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-06",
+     "title": "Переговоры",
+     "note": "Власти планирую в будущем году провести приватизацию «Сирены-Трэвел», оператора отечественной системы бронирования авиабилетов «Леонардо», заменившей в России после 2022 г. западные Sabre и Amadeus. Уже есть список потенциальных покупателей. Четверть акций стр",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-08-06_operatora_sozdannoj_na_zamenu"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50477336",
+   "title": "В даркнете продают исходный код цепочки уязвимостей для захвата учетных записей Google и Gmail",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-06_v_darknete_prodayut_ishodnyj"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d83393314",
+   "title": "Создатель «Яндекса» привлек $775 млн под залог GPU и контрактов",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-08-06_sozdatel_yandeksa_privlek"
+    ]
+   ],
+   "sum": "$775 млн",
+   "type": "Финансирование · структурная сделка",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Создатель «Яндекса»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Создатель «Яндекса»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «RWB, Ozon, МТС и «Яндекс» интересуются покупкой доли в опера» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d73988079",
+   "title": "Путин разрешил продавать государственные акции аэропорта Шереметьево",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/06/putin-razreshil-prodavat-gosudarstvennie"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Порты и инфраструктура",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97614304",
+   "title": "В Апраксином дворе аукционы с дисконтом по аренде проведут сразу по 24 лотам",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/06/v-apraksinom-dvore-aukcioni"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50297404",
+   "title": "Петербург увеличил лимит льготных займов на покупку авто до 30 млн рублей",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/06/peterburg-uvelichil-limit-lgotnih"
+    ]
+   ],
+   "sum": "30 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61538809",
+   "title": "Рижский вокзал в Москве планируют в четвёртый раз выставить на торги",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/05/rizhskij-vokzal-v-moskve-planirujut"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-05",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/08/05/rizhskij-vokzal-v-moskve-planirujut"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34004925",
+   "title": "На рынке сервисных апартов в Петербурге выросли цены и упали продажи",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/05/na-rinke-servisnih-apartov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63302805",
+   "title": "Книжная сеть «Республика» перешла под контроль нового собственника",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/knizhnaya-set-respublika-pereshla-pod-kontrol-novogo-sobstvennika/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-06",
+     "title": "Переговоры",
+     "note": "Книжная сеть «Республика» сменила владельца. Эксперты связывают сделку с кризисом книжной розницы и рассматривают несколько сценариев развития бизнеса.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/knizhnaya-set-respublika-pereshla-pod-kontrol-novogo-sobstvennika/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g677f3309 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d43588025",
+   "title": "Минфин предложил вдвое сократить срок продажи изъятого имущества, пишут СМИ",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260807/minfin-872107317.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37642421",
+   "title": "\"Дом.РФ\" выставил на торги старинные палаты в центре Москвы",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260806/moskva-2109355500.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50838539",
+   "title": "\"Дом.РФ\" выставит на торги корпус старинной усадьбы в Подмосковье",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260805/podmoskove-2109194241.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8827d795 (общие редкие слова: старин, усадьб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d72831288",
+   "title": "В Москве выставили на торги земельный участок рядом с ипподромом",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260805/torgi-2109176100.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19212038",
+   "title": "BAIC возобновил в России продажи внедорожника BJ40: рекомендованная цена — 3,8 млн ₽",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/baic-vozobnovil-v-rossii-prodazhi-vnedorozhnika-bj40-rekomendovannaya-cena-38-mln/"
+    ]
+   ],
+   "sum": "3,8 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86137192",
+   "title": "В России резко выросли продажи холодных криптокошельков",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260807/kriptovalyuta-2109486999.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57755328",
+   "title": "RWB выкупил у ВТБ офис на Летниковской улице",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/297803"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "Весной в RWB настаивали, что планируют арендовать указанный офис, но не приобретать в собственность Сообщение RWB выкупил у ВТБ офис на Летниковской улице появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/297803"
+     ]
+    }
+   ],
+   "buyer_name": "RWB",
+   "asset": null,
+   "seller": "ВТБ офис на Летниковской улице",
+   "parsed_parties": {
+    "buyer": "RWB",
+    "asset": null,
+    "seller": "ВТБ офис на Летниковской улице"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34761131",
+   "title": "Национализация обеспечила 40% рынка M&A в I полугодии 2026 года",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/297281"
+    ]
+   ],
+   "sum": "$10,2 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77016147",
+   "title": "ЦБ: восстановление НПЗ поддержит инвестиционную активность в экономике",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/297434"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67493866",
+   "title": "РБК узнал, кто заинтересован в покупке национализированной системы бронирования «Леонардо»",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/297217"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83907791",
+   "title": "Аптечная сеть «36,6» выкупила 83 аптеки «Диалога»",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265173/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "Сеть усилила свое присутствие в московском регионе, продолжив скупать малые розничные сети. За июль и август «36,6» приобрела 128 аптек.",
+     "source": [
+      "web:pravo.ru",
+      "https://pravo.ru/news/265173/"
+     ]
+    }
+   ],
+   "buyer_name": "Аптечная сеть «36,6»",
+   "asset": "83 аптеки «Диалога»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Аптечная сеть «36,6»",
+    "asset": "83 аптеки «Диалога»",
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку pending-2 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d98771523",
+   "title": "Третий аукцион по приватизации активов экс-владельца «Макфы» провалился",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265169/"
+    ]
+   ],
+   "sum": "12,2 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18961157",
+   "title": "Росимущество проведет новый аукцион по продаже активов Global Spirits",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265157/"
+    ]
+   ],
+   "sum": "7,8 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45464140",
+   "title": "Россиянам назвали важные правила по выбору свежих грибов при покупке",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/07/rossiyanam-nazvali-vazhnye-pravila-po-vyboru-svezhih-gribov-pri-pokupke/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52945500",
+   "title": "Как правильно выбирать грибы при покупке",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053116305"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76258940",
+   "title": "Инвестиции в коммерческую недвижимость в России окупаются быстрее, чем в жилье",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053116260"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41589402",
+   "title": "В Курганской области продают действующий мини-вокзал с автопарком. Фото",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053115698"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47886009",
+   "title": "Россия хочет продать за рубеж один важный объект",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053116249"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17868255",
+   "title": "В России перестали продавать китайские грузовики",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/8/6/v-rossii-perestali-prodavat-kitajskie-gruzoviki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-06",
+     "title": "Переговоры",
+     "note": "По итогам внеплановых проверок Росстандарт заблокировал реализацию шести модификаций китайских грузовиков, выявив серьезные отклонения от норм безопасности.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/8/6/v-rossii-perestali-prodavat-kitajskie-gruzoviki"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52162515",
+   "title": "Купить нельзя вернуть. В России изменили правила торговли — что ждет простых покупателей",
+   "date": "2026-08-07",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/economics/2026/08/07/76573637/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72327794",
+   "title": "Как долго будут продавать бензин «Евро-3» и ниже — правительство поставило срок",
+   "date": "2026-08-05",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/economics/2026/08/06/76572637/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80603343",
+   "title": "«36,6» вышла на «Диалог». &nbsp; ПАО продолжает скупать столичный ритейл. Новое приобретение — московская сеть «Диалог» Ольги Давыдовой . По условиям сделки, «36,6» получает 83 аптеки из 89 и шесть юр",
+   "date": "2026-08-06",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/7838"
+    ]
+   ],
+   "sum": "800 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-2 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Аптечная сеть «36,6» выкупила 83 аптеки «Диалога»» — второе издание, в группу не шлём"
+   ]
+  }
+ ]
+}
