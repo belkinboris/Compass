@@ -1,6 +1,7 @@
 """Тесты «КОМПАС»: yandex_search + /api/ask. Запуск: pytest test_kompas.py -v"""
 import base64
 import json
+import time
 from datetime import datetime, timezone
 
 import httpx
@@ -120,7 +121,7 @@ def test_ask_no_keys_fallback(monkeypatch):
 def test_ask_base_mode(client, monkeypatch):
     captured = {}
 
-    def fake_llm(system, user, max_tokens):
+    def fake_llm(system, user, max_tokens, deadline=None):
         captured.update(system=system, user=user, max_tokens=max_tokens)
         return "Ответ ассистента"
 
@@ -139,7 +140,7 @@ def test_ask_web_mode_with_results(client, monkeypatch):
     results = ys.parse_search_xml(XML_OK.encode())
     monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: results)
 
-    def fake_llm(system, user, max_tokens):
+    def fake_llm(system, user, max_tokens, deadline=None):
         captured.update(system=system, user=user, max_tokens=max_tokens)
         return "Ответ с фактами"
 
@@ -158,7 +159,7 @@ def test_ask_web_mode_model_already_cited_no_footer(client, monkeypatch):
         lambda q, config=None, client=None: ys.parse_search_xml(XML_OK.encode()),
     )
     cited = "Ответ с фактами и [ссылкой на источник](https://fresh.example.ru/b)."
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens: cited)
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: cited)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json() == {"answer": cited}
 
@@ -170,7 +171,7 @@ def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
         raise ys.SearchError("403")
 
     monkeypatch.setattr(main, "yandex_search", broken_search)
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens: captured.update(system=s) or "Ответ по базе")
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json() == {"answer": "Ответ по базе"}  # пользователь не видит ошибку
     assert captured["system"] == main.SYSTEM_BASE
@@ -179,14 +180,14 @@ def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
 def test_ask_web_mode_empty_results_degrades_to_base(client, monkeypatch):
     captured = {}
     monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: [])
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens: captured.update(system=s) or "Ответ по базе")
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json() == {"answer": "Ответ по базе"}
     assert captured["system"] == main.SYSTEM_BASE
 
 
 def test_ask_llm_dead_returns_fallback(client, monkeypatch):
-    def dead(s, u, max_tokens):
+    def dead(s, u, max_tokens, deadline=None):
         raise RuntimeError("LLM недоступен")
     monkeypatch.setattr(main, "call_llm", dead)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "base"})
@@ -219,3 +220,46 @@ def test_call_llm_thinking_budget_and_retry(monkeypatch):
     assert p["model"] == "gpt://f/deepseek-v4-flash/latest"
     assert p["max_output_tokens"] == 700 + main.THINKING_BUDGET
     assert p["instructions"] == "sys"
+
+
+def test_call_llm_stops_when_the_deadline_has_passed(monkeypatch):
+    """Три попытки по 30 с складывались в 180 с ожидания и ПУСТОЙ ответ (замер
+    на бою 7 августа поймал ровно такой запрос). Дедлайн обязан обрывать
+    повторы: пользователю обещано время ответа, а не число попыток."""
+    monkeypatch.setenv("YANDEX_API_KEY", "k")
+    monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
+    calls = {"n": 0}
+
+    def handler(request):
+        calls["n"] += 1
+        return httpx.Response(500, text="boom")
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    # Дедлайн уже в прошлом — ни одной попытки быть не должно.
+    with pytest.raises(RuntimeError):
+        main.call_llm("sys", "user", max_tokens=700, deadline=time.monotonic() - 1)
+    assert calls["n"] == 0
+    # Запаса меньше восьми секунд не хватит и на одну попытку — тоже не начинаем.
+    with pytest.raises(RuntimeError):
+        main.call_llm("sys", "user", max_tokens=700, deadline=time.monotonic() + 3)
+    assert calls["n"] == 0
+    # Запаса достаточно — попытки идут, но их число ограничено LLM_RETRIES.
+    with pytest.raises(RuntimeError):
+        main.call_llm("sys", "user", max_tokens=700, deadline=time.monotonic() + 60)
+    assert calls["n"] == 1 + main.LLM_RETRIES
+
+
+def test_web_mode_returns_found_sources_when_the_model_is_silent(client, monkeypatch):
+    """Поиск отработал, модель — нет. Пустой экран после минуты ожидания читается
+    как «ассистент сломан»; найденные ссылки по делу и их надо отдать."""
+    results = ys.parse_search_xml(XML_OK.encode())
+    monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: results)
+
+    def dead(s, u, max_tokens, deadline=None):
+        raise RuntimeError("LLM недоступен")
+
+    monkeypatch.setattr(main, "call_llm", dead)
+    r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
+    body = r.json()
+    assert "fallback" not in body
+    assert results[0].url in body["answer"]

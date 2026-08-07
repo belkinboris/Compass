@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import re
+import time
 from datetime import datetime
 from decimal import Decimal
 
@@ -118,7 +119,14 @@ def get_db():
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
-LLM_TIMEOUT = 60.0
+# СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки
+# 60 с» и «повторов 2» — и это молча означало худший случай 180 с ожидания с
+# ПУСТЫМ ответом в конце: замер 7 августа на бою поймал ровно такой запрос
+# (вопрос про сделки в фарме, 180,0 с, ноль знаков ответа). Три независимых
+# таймаута не складывались ни в какое обещание пользователю. Теперь обещание
+# одно — общий дедлайн; попытки укладываются в него, а не наоборот.
+LLM_TIMEOUT = 30.0  # одна попытка
+LLM_DEADLINE = float(os.environ.get("LLM_DEADLINE", "70"))  # весь ответ, включая повторы
 LLM_RETRIES = 2  # повторов сверх первой попытки
 # СКОЛЬКО МОДЕЛИ ПОЗВОЛЕНО «ДУМАТЬ» ДО ОТВЕТА. DeepSeek через Yandex рассуждает
 # всегда, и эти токены генерируются ПОСЛЕДОВАТЕЛЬНО перед первым словом ответа —
@@ -207,8 +215,13 @@ def _extract_text(data: dict) -> str:
     return "".join(parts).strip()
 
 
-def call_llm(system: str, user: str, max_tokens: int) -> str:
-    """Вызов Yandex AI Studio Responses API с ретраями. Пустой ответ/сбой -> RuntimeError."""
+def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = None) -> str:
+    """Вызов Yandex AI Studio Responses API с ретраями. Пустой ответ/сбой -> RuntimeError.
+
+    `deadline` — момент (time.monotonic), после которого попыток больше не будет.
+    Повтор запускается, только если до дедлайна осталось хотя бы 8 секунд: иначе
+    он гарантированно не успеет, а пользователь всё это время ждёт.
+    """
     api_key = os.environ.get("YANDEX_API_KEY", "")
     folder_id = os.environ.get("YANDEX_FOLDER_ID", "")
     model = os.environ.get("YANDEX_MODEL", "deepseek-v4-flash/latest")
@@ -223,8 +236,13 @@ def call_llm(system: str, user: str, max_tokens: int) -> str:
 
     last_err: Exception | None = None
     for attempt in range(1 + LLM_RETRIES):
+        left = None if deadline is None else deadline - time.monotonic()
+        if left is not None and left < 8:
+            logger.warning("LLM: до дедлайна осталось %.1f с, попытку %d не начинаю", left, attempt + 1)
+            break
         try:
-            resp = _http.post(RESPONSES_URL, json=payload, headers=headers)
+            timeout = LLM_TIMEOUT if left is None else min(LLM_TIMEOUT, left)
+            resp = _http.post(RESPONSES_URL, json=payload, headers=headers, timeout=timeout)
             if resp.status_code != 200:
                 raise RuntimeError(f"Responses API HTTP {resp.status_code}: {resp.text[:300]}")
             text = _extract_text(resp.json())
@@ -249,6 +267,7 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     if not _yandex_ready():
         return JSONResponse({"fallback": True})
 
+    deadline = time.monotonic() + LLM_DEADLINE
     web = req.mode == "web"
     system = SYSTEM_BASE
     search_block = ""
@@ -271,7 +290,7 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     user_msg += f"Вопрос пользователя: {req.question}"
 
     try:
-        text = call_llm(system, user_msg, max_tokens=1400 if search_block else 700)
+        text = call_llm(system, user_msg, max_tokens=1400 if search_block else 700, deadline=deadline)
         if search_block and not _MD_LINK_RE.search(text):
             logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
             text += _sources_footer(results)
@@ -305,6 +324,12 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         return payload
     except RuntimeError as e:
         logger.error("ask() failed: %s", e)
+        # Поиск уже отработал, а модель не ответила — отдать найденное честнее,
+        # чем общий отказ: ссылки на источники добыты и они по делу. Пустой
+        # экран после минуты ожидания читается как «ассистент не работает».
+        if results:
+            return {"answer": "Не удалось собрать ответ — модель не ответила вовремя. "
+                              "Вот что нашлось по вопросу в сети:" + _sources_footer(results)}
         return JSONResponse({"fallback": True})
 
 

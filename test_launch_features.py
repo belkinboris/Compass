@@ -185,7 +185,7 @@ def test_saved_assistant_thread(client, monkeypatch):
     _login(client, "assistant-launch@firm.ru")
     monkeypatch.setenv("YANDEX_API_KEY", "key")
     monkeypatch.setenv("YANDEX_FOLDER_ID", "folder")
-    monkeypatch.setattr(main, "call_llm", lambda system, user, max_tokens: "Ответ по карточке")
+    monkeypatch.setattr(main, "call_llm", lambda system, user, max_tokens, deadline=None: "Ответ по карточке")
     response = client.post("/api/ask", json={
         "question": "Что важно в этой сделке?", "context": "{}", "mode": "base",
         "context_type": "deal", "context_id": "g1d36d186", "save_thread": True,
