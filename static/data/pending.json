@@ -585,7 +585,9 @@
      }
     ]
    },
-   "pending_since": "2026-08-07T06:24:03+00:00"
+   "pending_since": "2026-08-07T06:24:03+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g8f7479bd",
@@ -651,7 +653,9 @@
      }
     ]
    },
-   "pending_since": "2026-08-07T06:30:00+00:00"
+   "pending_since": "2026-08-07T06:30:00+00:00",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
