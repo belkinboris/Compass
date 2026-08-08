@@ -355,7 +355,14 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .deal-parties-strong{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;font-family:var(--f-display);font-size:clamp(19px,2.4vw,25px)}
 .deal-parties-strong a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px}
 .deal-parties-strong a:hover{color:var(--accent)}
-.deal-parties-strong .arrow{color:var(--bronze,#A3814E);font-size:20px}
+/* Стрелка сидела выше линии текста: align-items:center в flex-строке
+   центрирует боксы по высоте, а не глаза читателя — у соседних `<a>` есть
+   border-bottom под подчёркивание (уводит текст выше центра своего бокса), у
+   стрелки его нет, да и шрифт стрелки (не PT Serif) имеет другие метрики.
+   Сдвиг подобран глазами по скриншоту, а не расчётом — для одного
+   Unicode-символа это надёжнее, чем гнаться за точным совпадением
+   line-height двух разных шрифтов. */
+.deal-parties-strong .arrow{color:var(--bronze,#A3814E);font-size:20px;position:relative;top:6px}
 .deal-progress{margin:0 0 28px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
 .deal-progress>.label{display:block;margin-bottom:14px}
 .progress-current,.progress-history{display:grid;gap:10px}
@@ -836,8 +843,11 @@ html{background:var(--paper)}
 footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:#A9BDB2}
 .foot-in{max-width:1120px;margin:0 auto;padding:56px 28px 0}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px;border-bottom:1px solid rgba(243,241,233,.12)}
+/* ЗДЕСЬ СТОЯЛО `.foot-brand span{color:#C9AE7C}` — тот же класс бага, что был
+   утром в шапке (.wordmark span): в разметке футера ДВА span (значок и текст),
+   и оба красились бронзой. Буквы М/А давно переехали на <em> и красятся
+   отдельным правилом ниже (.foot-brand em) — этому span красить уже нечего. */
 .foot-brand{font-family:var(--f-display);font-weight:600;font-size:26px;color:var(--ivory)}
-.foot-brand span{color:#C9AE7C}
 .foot-desc{margin-top:14px;font-size:13.5px;line-height:1.7;max-width:340px}
 /* Хвост списка источников — пояснение, а не ссылка: тем же мелким кеглем,
    что и «Вы юридическая фирма…», иначе он спорит по весу с самими ссылками. */
