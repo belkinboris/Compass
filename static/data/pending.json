@@ -72,7 +72,9 @@
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
    "seller": "«Автодома»",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g94268c8d",
@@ -147,7 +149,9 @@
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
    "seller": "\"Шереметьево\"",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g7f6d55a9",
@@ -221,7 +225,9 @@
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
    "seller": "Виктору Маршеву",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g18a6d375",
@@ -286,7 +292,9 @@
     ]
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g8e2e28d5",
@@ -362,7 +370,9 @@
     ]
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gdfa13cf0",
@@ -427,7 +437,9 @@
     ]
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
