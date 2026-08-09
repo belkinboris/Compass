@@ -48,6 +48,46 @@ def article_text(raw_html):
     return re.sub(r'\s+', ' ', text).strip()
 
 
+TG_POST_RE = re.compile(r'^https://t\.me/([^/s][^/]*)/(\d+)/?$')
+
+
+def telegram_preview_url(url):
+    """t.me/<канал>/<id> отдаёт только виджет на JS (страница пуста без
+    браузера) — превью-версия t.me/s/<канал>/<id> отдаёт готовый HTML с
+    текстом поста, её и просят у сайта роботы. None, если url не похож на
+    прямую ссылку на пост канала (обсуждения, /s/ уже стоит и т. п.).
+    Возвращает (адрес превью, канал, id) — канал и id нужны потом, чтобы
+    найти СВОЙ пост среди окна соседних на превью-странице."""
+    m = TG_POST_RE.match(url.split('?', 1)[0])
+    if not m:
+        return None
+    channel, post_id = m.groups()
+    return 'https://t.me/s/%s/%s' % (channel, post_id), channel, post_id
+
+
+def telegram_post_text(raw_html, channel, post_id):
+    """Текст ИМЕННО поста <channel>/<post_id>, а не всей ленты канала вокруг
+    него: превью-страница отдаёт окно из ~20 соседних сообщений разом, у
+    каждого свой `data-post="<канал>/<id>"` на обёртке. Первый попавшийся
+    `tgme_widget_message_text` в файле — почти всегда ЧУЖОЙ пост (сосед по
+    ленте, не запрошенный) — соответствие ищем по этому атрибуту, а не по
+    порядку в файле."""
+    anchor = re.search(r'data-post="%s/%s"' % (re.escape(channel), post_id), raw_html)
+    if not anchor:
+        return None
+    # следующий тег .tgme_widget_message_text ПОСЛЕ найденной обёртки —
+    # он и до следующего data-post (соседнего сообщения) включительно
+    tail = raw_html[anchor.end():]
+    next_post = re.search(r'data-post="', tail)
+    window = tail[:next_post.start()] if next_post else tail
+    m = re.search(r'class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>',
+                  window, re.S)
+    if not m:
+        return None
+    text = html_lib.unescape(re.sub(r'<br\s*/?>', '\n', m.group(1)))
+    return re.sub(r'[ \t]+', ' ', re.sub(r'<[^>]+>', ' ', text)).strip()
+
+
 def already_fetched():
     """Адреса, чей полный текст уже лежит на диске: второй раз не качаем.
 
@@ -84,10 +124,17 @@ def fetch_and_store(targets, write=True):
             print('  УЖЕ ЕСТЬ  %s %s' % (label, url))
             continue
         skip.add(url)
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        tg = telegram_preview_url(url)
+        fetch_url = tg[0] if tg else url
+        req = urllib.request.Request(fetch_url, headers={
+            'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                           'AppleWebKit/537.36 (KHTML, like Gecko) '
+                           'Chrome/124.0.0.0 Safari/537.36'),
+            'Accept-Language': 'ru-RU,ru;q=0.9,en;q=0.8',
+        })
         try:
             body = urllib.request.urlopen(req, timeout=25).read().decode('utf-8', 'ignore')
-            text = article_text(body)
+            text = (telegram_post_text(body, tg[1], tg[2]) if tg else None) or article_text(body)
             if len(text) <= 200:
                 raise ValueError('подозрительно короткий текст (%d знаков)' % len(text))
         except Exception as e:
