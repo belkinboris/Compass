@@ -542,18 +542,42 @@ def main(write):
     # new_id смотрит и в базу, и в предпросмотр.
     pending = load_pending()
     taken = existing | {c['id'] for c in pending['cards']}
-    added = 0
+    added, new_cards = 0, []
     for draft, _ in passed:
         deal_id = new_id(taken)
         taken.add(deal_id)
         card = to_card(draft, deal_id)
         card['pending_since'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
         pending['cards'].append(card)
+        new_cards.append(card)
         added += 1
     save_pending(pending)
     print('\nВ предпросмотр: %d. Ждут решения владельца: %d. База не менялась (%d).'
           % (added, len(pending['cards']), len(data['deals'])))
-    print('Следующий шаг: pipeline/ingest/send_drafts.py отправит черновики в Telegram.')
+
+    # ПОЛНЫЙ ТЕКСТ СТАТЬИ КАЧАЕТСЯ СРАЗУ, А НЕ КОГДА-НИБУДЬ. Лента отдаёт
+    # ~130 знаков аннотации, статья — ~6400: пока текст не на диске, шаг
+    # «сборка карточки чтением» (review.py) физически не может подтвердить
+    # цитатой ни оценку стоимости, ни согласования, ни условия. Раньше дозабор
+    # был отдельной командой, которую надо было не забыть, — и из 84 карточек
+    # притока полный текст оказался скачан у 13; карточка NexTouch/«Квант»
+    # два дня стояла с пустыми линзами при 326 КБ текста в кэше (нашёл
+    # владелец, а не пайплайн). Сетевые ошибки ворот не валят: недоступная
+    # статья помечается в отчёте, чтение возьмёт её позже сам (WebFetch).
+    if new_cards:
+        try:
+            import fetch_article_texts as articles
+            targets = [(c['id'], str(s[1]), str(c.get('title') or ''))
+                       for c in new_cards for s in (c.get('src') or [])
+                       if len(s) > 1 and str(s[1]).startswith('http')]
+            got, lost = articles.fetch_and_store(targets, write=True)
+            print('Полные тексты источников: скачано %d, недоступно %d (из %d адресов).'
+                  % (got, lost, len(targets)))
+        except Exception as e:                                    # noqa: BLE001
+            print('Полные тексты источников не скачаны (%s) — шаг чтения '
+                  'дозаберёт их сам.' % e)
+    print('Следующий шаг: pipeline/ingest/review.py читает каждую карточку против '
+          'полного текста, потом send_drafts.py шлёт черновики в Telegram.')
 
 
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')

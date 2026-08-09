@@ -1708,3 +1708,62 @@ def test_classifier_rejects_live_console_junk():
     ]
     for t in real:
         assert classify.looks_like_deal(t), "настоящая сделка отвергнута: %s" % t
+
+
+# ---------- сборка карточки чтением: полный текст и отметка прочтения ----------
+
+def test_reviewed_stamp_is_idempotent():
+    """Отметка «читали» ставится один раз и не переписывается повторным прогоном.
+
+    Иначе каждый прогон review.py выдавал бы старое чтение за свежее, и по
+    дате отметки нельзя было бы искать карточки, не читанные давно.
+    """
+    import review
+    card = {"id": "x"}
+    assert review.stamp_reviewed(card, day="2026-08-08") is True
+    assert card["reviewed"] == "2026-08-08"
+    assert review.stamp_reviewed(card, day="2026-09-01") is False
+    assert card["reviewed"] == "2026-08-08", "повторный прогон переписал дату чтения"
+
+
+def test_every_fixed_card_carries_a_reviewed_mark():
+    """Карточка, к которой применялась правка чтением, помечена прочитанной.
+
+    Отметка — единственное, что отличает «не читали» от «читали, добавить
+    нечего»: без неё пропуск шага чтения незаметен, пока источник не откроет
+    человек (так владелец 8 августа нашёл пустую карточку NexTouch/«Квант»
+    при 326 КБ текста статьи в кэше притока).
+    """
+    import review
+    base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    cards = {d["id"]: d for d in base["deals"]}
+    pending_file = ROOT / "static" / "data" / "pending.json"
+    if pending_file.exists():
+        cards.update({c["id"]: c for c in
+                      json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
+    unmarked = [f["id"] for f in review.FIXES
+                if f["id"] in cards and not cards[f["id"]].get("reviewed")]
+    assert not unmarked, ("карточки с правками чтения не помечены прочитанными "
+                          "(запустите review.py --write): %s" % sorted(set(unmarked))[:5])
+    # Формат отметки — дата, а не булево: по ней ищут давно не читанные.
+    for d in cards.values():
+        if d.get("reviewed"):
+            assert re.match(r"^\d{4}-\d{2}-\d{2}$", str(d["reviewed"])), \
+                "reviewed должен быть датой ГГГГ-ММ-ДД: %r" % d["reviewed"]
+
+
+def test_full_text_fetch_skips_already_cached_urls():
+    """Дозабор не качает статью второй раз: повторный прогон promote не должен
+    ходить по тем же адресам (лимиты чужих сайтов, время прогона).
+
+    Проверяется без сети: адрес статьи TAdviser уже лежит в кэше
+    data/inbox/raw/*-articles.jsonl, и fetch_and_store обязан пропустить его
+    до любого сетевого запроса.
+    """
+    import fetch_article_texts as articles
+    cached = articles.already_fetched()
+    assert "https://www.tadviser.ru/a/589723" in cached, \
+        "кэш полных текстов не читается (метод already_fetched)"
+    got, lost = articles.fetch_and_store(
+        [("test", "https://www.tadviser.ru/a/589723", "проверка кэша")], write=False)
+    assert (got, lost) == (0, 0), "закэшированный адрес ушёл в сеть повторно"

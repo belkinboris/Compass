@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Дозабор ПОЛНЫХ текстов статей-источников для проверки чтением.
+"""Дозабор ПОЛНЫХ текстов статей-источников для сборки карточки чтением.
 
-ЗАЧЕМ. Лента отдаёт заголовок и короткую аннотацию, а факты живут в теле
-статьи: «Прежний собственник — Патвакан Мкртчян» и «стоимость актива могла
-составить от 370 млн до 430 млн руб.» в аннотациях не было вовсе — владелец
-нашёл оба факта глазами в самих статьях. review.py принимает правку только
-с цитатой, дословно лежащей в сыром тексте на диске (data/inbox/raw), —
-значит, тело статьи надо забрать и положить туда же, как обычную запись
-притока: {'url', 'title', 'summary': <текст статьи без разметки>}.
+ЗАЧЕМ. Лента отдаёт заголовок и короткую аннотацию — замер по сырью за август:
+медиана 130 знаков, 87% записей короче 300, у четверти аннотации нет вовсе.
+А факты живут в теле статьи: «Прежний собственник — Патвакан Мкртчян»,
+«стоимость актива могла составить от 370 млн до 430 млн руб.», оценка завода
+«Квант» в 1–1,5 млрд ₽ — ничего из этого в аннотациях не было. Полный текст —
+медиана 6383 знака, в ~49 раз больше того, что видит разбор. review.py
+принимает правку только с цитатой, дословно лежащей в сыром тексте на диске
+(data/inbox/raw), — значит, тело статьи надо забрать и положить туда же, как
+обычную запись притока: {'url', 'title', 'summary': <текст без разметки>}.
+
+КТО ЗОВЁТ. С 8 августа — САМ promote.py, сразу после того как карточка прошла
+ворота: до этого дозабор был отдельной командой, которую надо было не забыть
+запустить, и из 84 карточек притока полный текст был скачан для 13 — карточка
+NexTouch/«Квант» два дня простояла с пустыми линзами при 326 КБ текста в
+кэше. Ручной запуск по id карточки остался для дочитывания старых карточек
+(приоритет G7).
 
 Забираются ТОЛЬКО адреса, уже стоящие в карточках базы или предпросмотра, —
 скрипт не источник новых ссылок, а дозагрузка уже известных.
@@ -39,6 +48,62 @@ def article_text(raw_html):
     return re.sub(r'\s+', ' ', text).strip()
 
 
+def already_fetched():
+    """Адреса, чей полный текст уже лежит на диске: второй раз не качаем.
+
+    Без этого повторный прогон promote (перезапуск рутины, ручная проверка)
+    скачивал бы те же статьи заново — а поверх лимитов чужих сайтов лучше
+    не ходить дважды за тем же."""
+    urls = set()
+    if not os.path.isdir(RAW):
+        return urls
+    for name in os.listdir(RAW):
+        if not name.endswith('-articles.jsonl'):
+            continue
+        for line in open(os.path.join(RAW, name), encoding='utf-8'):
+            try:
+                urls.add(str(json.loads(line).get('url')))
+            except ValueError:
+                continue
+    return urls
+
+
+def fetch_and_store(targets, write=True):
+    """Скачать полные тексты и дописать в data/inbox/raw/<дата>-articles.jsonl.
+
+    `targets` — список (метка, url, заголовок); метка нужна только для отчёта.
+    Сетевые ошибки НЕ валят вызывающего: недоступная статья — обычное дело
+    (пейволл, защита от роботов), и провал одного адреса не должен останавливать
+    ворота. Возвращает (сколько скачано, сколько не вышло)."""
+    import urllib.request
+    skip = already_fetched()
+    out = os.path.join(RAW, '%s-articles.jsonl' % date.today().isoformat())
+    records, failed = [], 0
+    for label, url, title in targets:
+        if url in skip:
+            print('  УЖЕ ЕСТЬ  %s %s' % (label, url))
+            continue
+        skip.add(url)
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        try:
+            body = urllib.request.urlopen(req, timeout=25).read().decode('utf-8', 'ignore')
+            text = article_text(body)
+            if len(text) <= 200:
+                raise ValueError('подозрительно короткий текст (%d знаков)' % len(text))
+        except Exception as e:
+            print('  НЕ ЗАБРАН %s %s (%s)' % (label, url, e))
+            failed += 1
+            continue
+        records.append({'url': url, 'title': title, 'summary': text})
+        print('  ЗАБРАН    %s %s (%d знаков)' % (label, url, len(text)))
+    if write and records:
+        os.makedirs(RAW, exist_ok=True)
+        with open(out, 'a', encoding='utf-8') as f:
+            for rec in records:
+                f.write(json.dumps(rec, ensure_ascii=False) + '\n')
+    return len(records), failed
+
+
 def card_urls(ids):
     cards = {d['id']: d for d in json.load(open(BASE, encoding='utf-8'))['deals']}
     if os.path.exists(PENDING):
@@ -55,28 +120,12 @@ def card_urls(ids):
 
 
 def main(ids, write=False):
-    import urllib.request
-    out = os.path.join(RAW, '%s-articles.jsonl' % date.today().isoformat())
-    records = []
-    for cid, url, title in card_urls(ids):
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        try:
-            body = urllib.request.urlopen(req, timeout=25).read().decode('utf-8', 'ignore')
-        except Exception as e:
-            print('  НЕ ЗАБРАН %s %s (%s)' % (cid, url, e))
-            continue
-        text = article_text(body)
-        assert len(text) > 200, 'подозрительно короткий текст: %s' % url
-        records.append({'url': url, 'title': title, 'summary': text})
-        print('  ЗАБРАН    %s %s (%d знаков)' % (cid, url, len(text)))
+    fetched, failed = fetch_and_store(card_urls(ids), write=write)
     if not write:
-        print('Сухой прогон: %d статей. Запись — с ключом --write.' % len(records))
-        return 0
-    os.makedirs(RAW, exist_ok=True)
-    with open(out, 'a', encoding='utf-8') as f:
-        for rec in records:
-            f.write(json.dumps(rec, ensure_ascii=False) + '\n')
-    print('Дописано в %s: %d записей.' % (out, len(records)))
+        print('Сухой прогон: %d статей скачано, %d недоступно. Запись — с ключом --write.'
+              % (fetched, failed))
+    else:
+        print('Дописано: %d записей, недоступно: %d.' % (fetched, failed))
     return 0
 
 

@@ -44,6 +44,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -1462,7 +1463,23 @@ def _self_check():
                             'стоимость сделки оценивает в 7–8 млрд руб.') is None
 
 
-def main(write=False):
+def stamp_reviewed(card, day=None):
+    """Отметка «карточку читали против источника» — даже если правок не нашлось.
+
+    Без неё «не читали» и «читали, добавить нечего» выглядят на карточке
+    одинаково (оба — прочерки в eco/law), и пропуск шага чтения незаметен,
+    пока источник не откроет человек: ровно так владелец 8 августа нашёл
+    карточку NexTouch/«Квант» с пустыми линзами при 326 КБ текста в кэше.
+    С отметкой очередь «что ещё не прочитано» — это запрос по базе, а не
+    ручная проверка. Идемпотентна: уже стоящую дату не переписывает, чтобы
+    повторный прогон не выдавал старое чтение за свежее."""
+    if not card.get('reviewed'):
+        card['reviewed'] = day or datetime.now(timezone.utc).date().isoformat()
+        return True
+    return False
+
+
+def main(write=False, mark_read=()):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
@@ -1500,6 +1517,17 @@ def main(write=False):
     for fix, bad in refused:
         print('  ОТКАЗ    %s %-11s %s' % (fix['id'], fix['field'], '; '.join(bad)))
 
+    # Карточки, прочитанные БЕЗ правок (--mark-read): честный случай «читал,
+    # добавить нечего» — источник беден, а не шаг пропущен. Требует, чтобы
+    # карточка существовала: опечатка в id не должна молча съесть отметку.
+    to_mark = []
+    for cid in mark_read:
+        if cid not in cards:
+            refused.append((dict(id=cid, field='reviewed'),
+                            ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
+        else:
+            to_mark.append(cid)
+
     print('\nпринято %d, отклонено %d' % (len(ok), len(refused)))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
@@ -1528,12 +1556,25 @@ def main(write=False):
                                                  'method': 'human_review', 'url': url}]
             if not card['party_evidence']:
                 card.pop('party_evidence')
+
+    # Отметка прочтения: и на карточки с правками (включая применённые в
+    # прошлых прогонах — их читали, просто штампа тогда ещё не было), и на
+    # прочитанные без правок (--mark-read).
+    stamped = 0
+    for cid in {f['id'] for f in FIXES if f['id'] in cards} | set(to_mark):
+        if stamp_reviewed(cards[cid]):
+            stamped += 1
+
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('ЗАПИСАНО: %d правок в %s' % (len(ok), os.path.relpath(DATA, ROOT)))
+    print('ЗАПИСАНО: %d правок, %d отметок прочтения в %s'
+          % (len(ok), stamped, os.path.relpath(DATA, ROOT)))
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main(write='--write' in sys.argv))
+    _args = sys.argv[1:]
+    _ids = [a for a in _args if a not in ('--write', '--mark-read')]
+    sys.exit(main(write='--write' in _args,
+                  mark_read=_ids if '--mark-read' in _args else ()))
