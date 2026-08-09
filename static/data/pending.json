@@ -243,6 +243,435 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "held": true
+  },
+  {
+   "id": "gab0f3dde",
+   "date": "2026-08-07",
+   "title": "«Флит Лизинг» купил бывшую лизинговую «дочку» Mercedes-Benz",
+   "ind": "Финансовые услуги",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8864724"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "«Флит Лизинг последовательно реализует стратегию роста, сочетая органическое развитие с точечными сделками по приобретению лизинговых активов. Это позволяет ускорить масштабирование бизнеса. Для клиентов МБ РУС Финанс мы обеспечим преемственность обслуживания и доступ ко всей линейке продуктов и сервисов компании», — отмечает гендиректор «Флит Лизинга» Сергей Савинов.",
+    "context": "Сумму сделки в компании не раскрывают, однако уточняют, что после ее завершения чистые инвестиции в лизинг (ЧИЛ) «Флит Лизинга» превысят 32 млрд руб.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Флит Лизинг»",
+   "asset": "бывшую лизинговую «дочку» Mercedes-Benz",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "ООО «Флит Лизинг» (часть группы Инсайт Лизинг) приобрел у «Автодома» 100% долей ООО «МБ РУС Финанс», ранее входившего в дочерние структуры концерна Mercedes-Benz в России, рассказали «Ъ» во «Флит Лизинге». Сумму сделки в компании не раскрывают, однако уточняют",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8864724"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Флит Лизинг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864724"
+     }
+    ],
+    "target": [
+     {
+      "value": "бывшую лизинговую «дочку» Mercedes-Benz",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8864724"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Автодома»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8864724"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "seller": "«Автодома»",
+   "reviewed": "2026-08-09"
+  },
+  {
+   "id": "g94268c8d",
+   "date": "2026-08-07",
+   "title": "\"Внуково\" приобрело 25,01% в контролирующей \"Домодедово\" компании",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "О планах \"Внуково\" приобрести 25% в \"Перспективе\" в июле объявил глава совета директоров аэропорта Виталий Ванцев. Сумма сделки, по его словам, составит 16,5 млрд рублей, что равно четверти от цены, по которой \"Шереметьево\" через учрежденную им \"Перспективу\" приобрело \"Домодедово\" у Росимущества (более 66,1 млрд рублей). До июня 2025 года \"Домодедово\" контролировал предприниматель Дмитрий Каменщик. В июне Арбитраж Московской области по иску Генпрокуратуры взыскал аэропорт в доход государства. В январе приватизационные торги по продаже \"Домодедово\" выиграла \"Перспектива\".",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "16,5 млрд ₽",
+   "buyer_name": "\"Внуково\"",
+   "asset": "контролирующей \"Домодедово\" компании",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "Доля АО \"Международный аэропорт \"Шереметьево\" в \"Перспективе\", таким образом, снизилась до 74,99%. О планах \"Внуково\" приобрести 25% в \"Перспективе\" в июле объявил глава совета директоров аэропорта Виталий Ванцев. Сумма сделки, по его словам, составит 16,5 млр",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "\"Внуково\"",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
+     }
+    ],
+    "target": [
+     {
+      "value": "контролирующей \"Домодедово\" компании",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
+     }
+    ],
+    "seller": [
+     {
+      "value": "\"Шереметьево\"",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "seller": "\"Шереметьево\"",
+   "reviewed": "2026-08-09"
+  },
+  {
+   "id": "g7f6d55a9",
+   "date": "2026-08-07",
+   "title": "Семья бизнесмена Говора приобрела частную сеть АЗС Elke Auto в Томске",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Semya-biznesmena-Govora-priobrela-chastnuyu-set-AZS-Elke-Auto-v-Tomske-87343"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Компания отмечает, что в новом для нее регионе работает шесть АЗС. В перечень входят две заправки в окрестностях деревни Петрово (Томский район), а также четыре АЗС в самом Томске. Сеть АЗС \"Elke Auto\" включала в себя 12 АЗС в Томске, Северске, а также в Томском и Колпашевском районах региона. О судьбе остальных шести заправок не сообщается",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Как говорилось в отчетности \"Инрусинвеста\" за 2024 год, бенефициаром компании является Светлана Говор (согласно открытым данным, жена Александра Говора). Александр Говор владеет сетью ресторанов \"Вкусно и точка\" (бывшая сеть McDonald's Corp. в России), является совладельцем Яйского НПЗ в Кемеровской области.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "По данным ЕГРЮЛ, единственным владельцем ООО \"Кузбасский деловой союз\" является АО \"Инрусинвест\".",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Семья бизнесмена Говора",
+   "asset": "частную сеть АЗС Elke Auto в Томске",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "ООО \"Кузбасский деловой союз\" стало владельцем частной сети АЗС \"Elke Auto\", сообщает сайт КДС. \"У нашей компании расширяется география присутствия - теперь в числе регионов работы Томская область\", - говорится в сообщении. Компания отмечает, что в новом для н",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Semya-biznesmena-Govora-priobrela-chastnuyu-set-AZS-Elke-Auto-v-Tomske-87343"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Семья бизнесмена Говора",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Semya-biznesmena-Govora-priobrela-chastnuyu-set-AZS-Elke-Auto-v-Tomske-87343"
+     }
+    ],
+    "target": [
+     {
+      "value": "частную сеть АЗС Elke Auto в Томске",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Semya-biznesmena-Govora-priobrela-chastnuyu-set-AZS-Elke-Auto-v-Tomske-87343"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Виктору Маршеву",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Semya-biznesmena-Govora-priobrela-chastnuyu-set-AZS-Elke-Auto-v-Tomske-87343"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "seller": "Виктору Маршеву",
+   "reviewed": "2026-08-09"
+  },
+  {
+   "id": "g18a6d375",
+   "date": "2026-08-07",
+   "title": "Freedom Тимура Турлова купил казахстанскую ИТ-компанию Bilim Group",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/960822"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Приобретение доли в Bilim Group — стратегический шаг для развития EdTech-сферы в Казахстане и Центральной Азии с использованием передовых технологий. По его словам, синергия финансов и образования создаст новые возможности для миллионов пользователей и позволит бесплатно предоставлять социально значимые сервисы.",
+    "context": "Основатель Bilim Group Рауан Кенжеханулы назвал сделку продолжением многолетнего сотрудничества. Он напомнил, что совместно с Freedom Bank уже реализован проект поощрения школьников за высокие результаты в учебе, что повышает мотивацию и развивает финансовую грамотность.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "Сделка получила одобрение Агентства по защите и развитию конкуренции Республики Казахстан",
+    "adv": [],
+    "terms": "Стороны заявили, что после одобрения антимонопольного ведомства приступят к совместным EdTech-проектам."
+   },
+   "buyer_name": "Freedom Тимура Турлова",
+   "asset": "казахстанскую ИТ-компанию Bilim Group",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "История 2026: Freedom Тимура Турлова купил Bilim Group 6 августа 2026 года Freedom Holding Corp. Персона:Турлов Тимур Русланович объявила о приобретении доли в казахстанской EdTech-компании Bilim Group и стала основным участником одного из крупнейших образоват",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/960822"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Freedom Тимура Турлова",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960822"
+     }
+    ],
+    "target": [
+     {
+      "value": "казахстанскую ИТ-компанию Bilim Group",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/960822"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "reviewed": "2026-08-09"
+  },
+  {
+   "id": "g8e2e28d5",
+   "date": "2026-08-07",
+   "title": "Wildberries выкупил офис «Открытия» у ВТБ. Сделку оценили в 13 млрд рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/57663"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "13 млрд ₽",
+   "seller": "ВТБ",
+   "buyer_name": "Wildberries",
+   "asset": "офис «Открытия»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "Банк ВТБ - Внешторгбанк и его дочерние банки – международная финансовая группа (группа ВТБ), которая по всем основным показателям на российском рынке занимает второе место. ВТБ Банк является вторым по величине активов банком Россия и СНГ. Год основания - 1990.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/57663"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Wildberries",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/57663"
+     }
+    ],
+    "target": [
+     {
+      "value": "офис «Открытия»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/57663"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/57663"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "reviewed": "2026-08-09"
+  },
+  {
+   "id": "gdfa13cf0",
+   "date": "2026-08-07",
+   "title": "\"Галс Девелопмент\" купил площадку с БЦ на улице Наметкина в Москве",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260807/moskva-2109521754.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Здание бизнес-центра по адресу: улица Наметкина, 10А, было построено в 1980-е годы, его площадь на \"Циане\" оценивается примерно в 8 тысяч квадратных метров.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В июне ВТБ объявил о закрытии сделки по продаже \"Галс-Девелопмента\" более чем за 100 миллиардов рублей. Новым собственником названа группа профессиональных инвесторов в высокотехнологичные активы.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "\"Концепция развития площадки в настоящее время готовится\", - уточнил представитель девелопера."
+   },
+   "buyer_name": "\"Галс Девелопмент\"",
+   "asset": "площадку с БЦ на улице Наметкина в Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260807/moskva-2109521754.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "\"Галс Девелопмент\"",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260807/moskva-2109521754.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "площадку с БЦ на улице Наметкина в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260807/moskva-2109521754.html"
+     }
+    ]
+   },
+   "pending_since": "2026-08-09T09:00:10+00:00",
+   "reviewed": "2026-08-09"
   }
  ]
 }

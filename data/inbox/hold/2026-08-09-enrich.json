@@ -1,0 +1,23 @@
+{
+ "made": "2026-08-09",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Aptechnaya-set-366-kupila-moskovskogo-farmritejlera-Dialog-87337",
+   "title": "«Аптечная сеть 36,6» купила московского фармритейлера «Диалог»",
+   "verdict": "enrich:ge482f106",
+   "why": "общее название в кавычках и общие слова: 2",
+   "reasons": [
+    "в карточке «450–800 млн ₽ (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://retailer.ru/wildberries-vykupil-ofisnyj-kompleks-u-vtb-v-centre-moskvy-za-11-13-5-mlrd-rublej/",
+   "title": "Wildberries выкупил офисный комплекс у ВТБ в центре Москвы за 11–13,5 млрд рублей",
+   "verdict": "enrich:gd126ba45",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  }
+ ]
+}

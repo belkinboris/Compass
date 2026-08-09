@@ -78562,6 +78562,10 @@
     [
      "Inc. Russia",
      "https://incrussia.ru/news/knizhnaya-set-respublika-pereshla-pod-kontrol-novogo-sobstvennika/"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Knizhnaya-set-Respublika-smenila-vladelcev-87339"
     ]
    ],
    "from_ingest": true,
@@ -78708,6 +78712,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8864001"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Aptechnaya-set-366-kupila-moskovskogo-farmritejlera-Dialog-87337"
     ]
    ],
    "from_ingest": true,
@@ -78738,6 +78746,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8864001"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-07",
+     "title": "Сделка завершена",
+     "note": "Эта компания, работающая в Москве и Подмосковье, создана в 2003 году Ольгой Давыдовой, до этого развивавшей фармдистрибутора «Витта компани». Сеть занимает 41-е место в рейтинге DSM Group с рыночной долей 0,16%, ее оборот в первом квартале 2026 года составил 1",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Aptechnaya-set-366-kupila-moskovskogo-farmritejlera-Dialog-87337"
      ]
     }
    ],
