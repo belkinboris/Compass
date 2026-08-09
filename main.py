@@ -1048,6 +1048,7 @@ BOT_HELP = (
 )
 
 
+SITE_URL = os.environ.get("APP_BASE_URL", "https://projectcompass.ru").rstrip("/")
 BATCH_LIMIT = 6          # Telegram пускает ~20 сообщений в минуту — не частим.
 
 
@@ -1072,6 +1073,13 @@ def _card_line(card: dict) -> str:
     src = [s for s in (card.get("src") or []) if len(s) > 1]
     if src:
         parts.append("Источник: %s" % html_escape(str(src[0][0])))
+    # Ссылка на ПОЛНУЮ карточку до публикации. Без неё видно только выжимку из
+    # четырёх строк: владелец 10 августа не смог посмотреть карточку «Флит
+    # Лизинг» именно потому, что ссылка до него не дошла — сообщение с ней
+    # вообще не отправлялось.
+    if card.get("id"):
+        parts.append('<a href="%s/#/preview/%s">Открыть карточку целиком</a>'
+                     % (SITE_URL, html_escape(str(card["id"]))))
     return "\n\n".join(parts)
 
 
@@ -1323,6 +1331,11 @@ def _ops_numbers() -> dict:
         "published": published,
         "thin_examples": [str(d.get("title") or "")[:70] for d in thin_2026[:6]],
         "queue_titles": [str(c.get("title") or "")[:70] for c in pending[:6]],
+        # ВСЯ очередь с id — чтобы каждую неопубликованную карточку можно было
+        # открыть целиком, а не только увидеть заголовок в списке.
+        "queue_cards": [{"id": str(c.get("id") or ""),
+                         "title": str(c.get("title") or "без заголовка"),
+                         "held": bool(c.get("held"))} for c in pending],
     }
 
 
@@ -1343,6 +1356,11 @@ font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;padding:24px 16px 64px
 h2{font:600 17px/1.3 Georgia,serif;margin:28px 0 10px}
 ul{margin:0;padding-left:20px}li{font-size:14px;margin:4px 0}
 .empty{color:var(--dim);font-size:14px}
+.hint{color:var(--dim);font-size:13.5px;margin:-4px 0 12px;max-width:640px}
+ol.prev{margin:0;padding-left:22px}ol.prev li{font-size:14.5px;margin:7px 0}
+ol.prev a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--acc)}
+ol.prev a:hover{color:var(--acc)}
+ol.prev .tag{font-size:12px;color:var(--acc);margin-left:6px;white-space:nowrap}
 </style></head><body><div class="w">
 <h1>Компас — панель основателей</h1>
 <p class="sub">Обновляется при каждом открытии. Все цифры считаются из тех же файлов, что отдаёт сайт.</p>
@@ -1358,6 +1376,10 @@ ul{margin:0;padding-left:20px}li{font-size:14px;margin:4px 0}
 <div class="c"><div class="n">%(queue_held)d</div><div class="l">вы придержали</div></div>
 </div>
 %(queue_list)s
+<h2>Все карточки, которые ещё не опубликованы</h2>
+<p class="hint">Их видно только здесь и в боте: на сайте они появятся после публикации.
+Нажмите заголовок, чтобы открыть карточку целиком — ровно в том виде, в каком она выйдет.</p>
+%(preview_list)s
 <h2>Что ещё не доделано</h2>
 <div class="grid">
 <div class="c warn"><div class="n">%(unread)d</div><div class="l">из %(from_ingest)d карточек притока не дополнены по источнику</div></div>
@@ -1382,11 +1404,22 @@ def ops_dashboard(token: str = ""):
         return "<ul>%s</ul>" % "".join(
             "<li>%s</li>" % html_escape(t) for t in items)
 
+    def preview_items(cards):
+        if not cards:
+            return '<p class="empty">Сейчас в очереди пусто — всё опубликовано или выкинуто.</p>'
+        rows = []
+        for c in cards:
+            tag = ' <span class="tag">придержана</span>' if c["held"] else ""
+            rows.append('<li><a href="/#/preview/%s">%s</a>%s</li>'
+                        % (html_escape(c["id"]), html_escape(c["title"]), tag))
+        return '<ol class="prev">%s</ol>' % "".join(rows)
+
     page = OPS_PAGE % {
         **{k: v for k, v in n.items() if isinstance(v, int)},
         "queue_list": as_list(n["queue_titles"], "Очередь пуста — всё решено."),
         "thin_list": as_list(n["thin_examples"],
                              "Тонких карточек 2026 года не осталось."),
+        "preview_list": preview_items(n["queue_cards"]),
     }
     return HTMLResponse(page)
 

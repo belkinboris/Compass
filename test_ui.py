@@ -637,7 +637,7 @@ def test_unknown_industry_is_labelled_as_an_industry(page, base_url):
         assert "отрасли «Не определена»" not in body, f"{deal_id}: ссылка в никуда"
 
 
-def test_preview_route_renders_a_pending_card(page, base_url):
+def test_preview_route_renders_a_pending_card(page, base_url, browser):
     """Черновик виден по прямой ссылке и НЕ виден в ленте.
 
     Модерация держится на том, что карточка из pending.json не существует для
@@ -662,6 +662,28 @@ def test_preview_route_renders_a_pending_card(page, base_url):
         text = page.inner_text("#app")
         assert "Альфа-Превью" in text, "черновик не отрисовался"
         assert "Черновик" in text, "нет плашки о том, что это черновик"
+        # НАЛИЧИЕ В DOM — НЕ ВИДИМОСТЬ, И ЭТО ВИДНО ТОЛЬКО НА ХОЛОДНОЙ
+        # ЗАГРУЗКЕ. `renderPreview` — единственный асинхронный рендер: он ждёт
+        # fetch(pending.json), а проявление (`.reveal` -> `.reveal.in`)
+        # запускается в конце `route()`, то есть по разметке состояния
+        # загрузки. На тёплой странице (общий `page` уже открыт) pending.json
+        # успевает вернуться раньше кадра, и дефекта не видно; при переходе по
+        # ссылке из телеграма страница грузится с нуля, параллельно тянется
+        # база на 774 КБ — pending.json приходит позже, и карточка остаётся с
+        # `opacity:0` НАВСЕГДА: `inner_text` её видит, человек нет.
+        # Проверено на себе: без `rerun()` в конце `renderPreview` здесь 12.
+        cold = browser.new_context()
+        try:
+            cpg = cold.new_page()
+            cpg.goto(base_url + "/#/preview/gtest-preview", wait_until="networkidle")
+            cpg.wait_for_timeout(1500)
+            hidden = cpg.evaluate(
+                "() => [...document.querySelectorAll('#app .reveal')]"
+                ".filter(el => getComputedStyle(el).opacity === '0').length")
+            assert "Альфа-Превью" in cpg.inner_text("#app")
+            assert hidden == 0, f"черновик отрисован, но невидим: {hidden} блоков с opacity:0"
+        finally:
+            cold.close()
         # В ленте и поиске черновика нет.
         assert page.evaluate("() => DEALS.some(d => d.id === 'gtest-preview')") is False
         # Несуществующий черновик — честное сообщение, а не пустой экран.
