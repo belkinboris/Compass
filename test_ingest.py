@@ -1778,3 +1778,44 @@ def test_full_text_fetch_skips_already_cached_urls(monkeypatch, tmp_path):
     got, lost = articles.fetch_and_store(
         [("test", "https://www.tadviser.ru/a/589723", "проверка кэша")], write=False)
     assert (got, lost) == (0, 0), "закэшированный адрес ушёл в сеть повторно"
+
+
+# ---------- статус прогона в консоль основателей (ops_status.py) ----------
+
+sys.path.insert(0, str(ROOT / "pipeline"))
+import ops_status  # noqa: E402
+
+
+def test_ops_status_reports_success_to_the_console():
+    """«Прогон был, ничего не нашлось» и «прогона не было вовсе» до 9 августа
+    выглядели снаружи одинаково — молчанием (см. урок в CLAUDE.md про
+    пропавший из расписания триггер притока). Статус обязан реально уйти
+    подставному клиенту, а не только напечататься в лог, который никто не
+    читает."""
+    client = _FakeClient([{"ok": True, "result": {"message_id": 1}}])
+    ok, why = ops_status.post_status(client, "TOKEN", "-1001", "приток: 32 кандидата, 0 новых")
+    assert ok and why is None
+    url, payload = client.calls[0]
+    assert url == "https://api.telegram.org/botTOKEN/sendMessage"
+    assert payload["chat_id"] == "-1001"
+    assert "0 новых" in payload["text"]
+
+
+def test_ops_status_honestly_reports_telegram_error():
+    client = _FakeClient([{"ok": False, "description": "chat not found"}])
+    ok, why = ops_status.post_status(client, "TOKEN", "-1001", "качество: нечего доработать")
+    assert not ok
+    assert "chat not found" in why
+
+
+def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, capsys):
+    """Без токена/чата — честная строка в лог прогона, а не тихая имитация
+    успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""
+    monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_REVIEW_GROUP_ID", raising=False)
+    assert ops_status.main(["публикация:", "нечего", "публиковать"]) == 1
+    assert "не заданы" in capsys.readouterr().out
+
+
+def test_ops_status_main_requires_text():
+    assert ops_status.main([]) == 1
