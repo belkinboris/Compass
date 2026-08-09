@@ -5,7 +5,7 @@
    "date": "2026-08-07",
    "title": "«Флит Лизинг» купил бывшую лизинговую «дочку» Mercedes-Benz",
    "ind": "Финансовые услуги",
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
@@ -31,7 +31,7 @@
     "terms": "—"
    },
    "buyer_name": "«Флит Лизинг»",
-   "asset": "бывшая лизинговая «дочка» Mercedes-Benz",
+   "asset": "ООО «МБ РУС Финанс»",
    "events": [
     {
      "kind": "closed",
@@ -55,9 +55,9 @@
     ],
     "target": [
      {
-      "value": "бывшую лизинговую «дочку» Mercedes-Benz",
+      "value": "ООО «МБ РУС Финанс»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8864724"
      }
     ],
@@ -80,7 +80,7 @@
    "id": "g94268c8d",
    "date": "2026-08-07",
    "title": "\"Внуково\" приобрело 25,01% в контролирующей \"Домодедово\" компании",
-   "ind": "Не определена",
+   "ind": "Порты и инфраструктура",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
@@ -92,8 +92,8 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
-    "val": "—",
+    "share": "АО \"Международный аэропорт \"Внуково\" стало владельцем 25,01% в ООО \"Перспектива\" - компании, которая с начала этого года контролирует аэропорт \"Домодедово\", сообщает Интерфакс со ссылкой на данные ЕГРЮЛ. Доля АО \"Международный аэропорт \"Шереметьево\" в \"Перспективе\", таким образом, снизилась до 74,99%.",
+    "val": "Сумма сделки, по его словам, составит 16,5 млрд рублей, что равно четверти от цены, по которой \"Шереметьево\" через учрежденную им \"Перспективу\" приобрело \"Домодедово\" у Росимущества (более 66,1 млрд рублей).",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
@@ -107,8 +107,8 @@
     "terms": "—"
    },
    "sum": "16,5 млрд ₽",
-   "buyer_name": "\"Внуково\"",
-   "asset": "контролирующая \"Домодедово\" компания",
+   "buyer_name": "АО «Международный аэропорт «Внуково»",
+   "asset": "ООО «Перспектива»",
    "events": [
     {
      "kind": "closed",
@@ -124,23 +124,23 @@
    "party_evidence": {
     "buyer": [
      {
-      "value": "\"Внуково\"",
+      "value": "АО «Международный аэропорт «Внуково»",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
      }
     ],
     "target": [
      {
-      "value": "контролирующей \"Домодедово\" компании",
+      "value": "ООО «Перспектива»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
      }
     ],
     "seller": [
      {
-      "value": "\"Шереметьево\"",
+      "value": "АО «Международный аэропорт «Шереметьево»",
       "field": "seller",
       "method": "human_review",
       "url": "https://mergers.ru/news/Vnukovo-priobrelo-2501-v-kontroliruyuschej-Domodedovo-kompanii-87345"
@@ -148,7 +148,7 @@
     ]
    },
    "pending_since": "2026-08-09T09:00:10+00:00",
-   "seller": "\"Шереметьево\"",
+   "seller": "АО «Международный аэропорт «Шереметьево»",
    "reviewed": "2026-08-09",
    "draft_sent": true,
    "post_draft_sent": true

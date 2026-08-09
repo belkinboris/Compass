@@ -657,16 +657,28 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
     now = datetime.now(timezone.utc)
     fresh = (now - timedelta(hours=2)).isoformat(timespec="seconds")
     stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    # `reviewed` стоит у всех, кроме a7: с 9 августа НЕПРОЧИТАННАЯ карточка не
+    # выходит по молчанию — черновик собран из заголовка, и публиковать его
+    # «как есть» значит выпускать каркасные дефекты (см. approve.plan_actions).
     cards = [
-        {"id": "a1", "title": "решили опубликовать", "draft_sent": True, "pending_since": fresh},
-        {"id": "a2", "title": "решили придержать",   "draft_sent": True, "pending_since": fresh},
-        {"id": "a3", "title": "молчание сутки",      "draft_sent": True, "pending_since": stale},
-        {"id": "a4", "title": "ещё ждём",            "draft_sent": True, "pending_since": fresh},
+        {"id": "a1", "title": "решили опубликовать", "draft_sent": True, "pending_since": fresh,
+         "reviewed": "2026-08-09"},
+        {"id": "a2", "title": "решили придержать",   "draft_sent": True, "pending_since": fresh,
+         "reviewed": "2026-08-09"},
+        {"id": "a3", "title": "молчание сутки",      "draft_sent": True, "pending_since": stale,
+         "reviewed": "2026-08-09"},
+        {"id": "a4", "title": "ещё ждём",            "draft_sent": True, "pending_since": fresh,
+         "reviewed": "2026-08-09"},
         {"id": "a5", "title": "придержана раньше",   "draft_sent": True, "pending_since": stale,
-         "held": True},
+         "held": True, "reviewed": "2026-08-09"},
         # Черновик, который никому не разослали, по таймауту НЕ публикуется:
         # молчание — согласие только того, кто сообщение получил.
-        {"id": "a6", "title": "не рассылался",       "pending_since": stale},
+        {"id": "a6", "title": "не рассылался",       "pending_since": stale,
+         "reviewed": "2026-08-09"},
+        # А этот разослан и отмолчался сутки, но НЕ ПРОЧИТАН против источника —
+        # и потому тоже ждёт. Владелец 9 августа: «косячные карточки не должны
+        # появляться, пока не изучена статья».
+        {"id": "a7", "title": "не прочитана",        "draft_sent": True, "pending_since": stale},
     ]
     decisions = [
         {"deal_id": "a1", "verdict": "approve", "edited_text": "текст владельца"},
@@ -676,7 +688,9 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
     assert {c["id"] for c, _o, _w in publish} == {"a1", "a3"}
     assert next(o for c, o, _ in publish if c["id"] == "a1") == "текст владельца"
     assert {c["id"] for c, _w in hold} == {"a2"}
-    assert {c["id"] for c, _w in wait} == {"a4", "a5", "a6"}
+    assert {c["id"] for c, _w in wait} == {"a4", "a5", "a6", "a7"}
+    # Решение человека сильнее: прочитанность требуется только для молчания.
+    assert "не прочитана" in next(w for c, w in wait if c["id"] == "a7")
 
 
 def test_webhook_subscribes_to_button_clicks_not_only_messages():
@@ -789,7 +803,7 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
     now = datetime.now(timezone.utc)
     stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
     cards = [{"id": "p1", "title": "карточка без поста", "draft_sent": True,
-              "pending_since": stale}]
+              "pending_since": stale, "reviewed": "2026-08-09"}]
     decisions = [{"deal_id": "p1", "verdict": "post_no", "created_at": "x"}]
     publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
     assert not hold, "post_no придержал карточку — это модификатор, а не вердикт"
