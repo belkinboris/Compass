@@ -924,34 +924,25 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                                         callback_query_id=callback.get("id"))
             return {"ok": True}
 
-        show = re.match(r"^show:(soon|held)$", str(callback.get("data") or ""))
+        # «Показать придержанные / что скоро выйдет» — НЕ список, а рабочие
+        # карточки. Первая версия присылала простое перечисление заголовков, и
+        # владелец сразу уперся: «я так и не понял, как проверять те, которые
+        # придержаны». Список без кнопок — тупик: увидел и ничего не можешь
+        # сделать. Теперь каждая карточка приходит своим сообщением с теми же
+        # кнопками, что и при первом показе, — решение принимается там же, где
+        # увидел.
+        show = re.match(r"^show:(soon|held|raw)$", str(callback.get("data") or ""))
         if show:
             if not _is_reviewer(from_id):
                 notification_service.tg_api(
                     "answerCallbackQuery", callback_query_id=callback.get("id"),
                     text="Очередь видят только владелец и партнёр.")
                 return {"ok": True}
-            pending = _read_json("static/data/pending.json", {}).get("cards") or []
-            want_held = show.group(1) == "held"
-            cards = [c for c in pending if bool(c.get("held")) == want_held]
-            if want_held:
-                head = "✋ <b>Вы придержали: %d</b>\nВыйдут только после вашего «опубликовать»." % len(cards)
-            else:
-                head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать, "
-                        "опубликуются в течение суток." % len(cards))
-            lines = [head, ""] if cards else [head]
-            for card in cards[:10]:
-                title = str(card.get("title") or "без заголовка")[:90]
-                lines.append("• %s" % title)
-            if len(cards) > 10:
-                lines.append("… и ещё %d" % (len(cards) - 10))
-            if not cards:
-                lines.append("Сейчас пусто.")
-            notification_service.tg_api(
-                "sendMessage", chat_id=(callback.get("message") or {}).get("chat", {}).get("id"),
-                text="\n".join(lines), parse_mode="HTML", disable_web_page_preview=True)
+            chat = (callback.get("message") or {}).get("chat", {}).get("id")
+            kind = show.group(1)
             notification_service.tg_api("answerCallbackQuery",
                                         callback_query_id=callback.get("id"))
+            _send_queue_batch(chat, kind)
             return {"ok": True}
 
         match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
@@ -1045,18 +1036,119 @@ BOT_HELP = (
     "• Просто <b>ответьте своим текстом</b> — им заменится текст поста\n\n"
     "Если промолчать сутки — сделка выйдет как есть. Сомнительные новости "
     "(⚠️) без вашего слова не публикуются никогда.\n\n"
-    "Кнопки ниже — самое частое."
+    "<b>Как поправить текст</b>\n"
+    "Ответьте на нужное сообщение своим текстом:\n"
+    "• ответ на 📣 <b>проект поста</b> — ваш текст станет текстом поста в канале;\n"
+    "• ответ на 🗂 <b>карточку</b> — станет замечанием, платформа проверит его "
+    "по источнику и внесёт в карточку сама.\n\n"
+    "<b>Как вернуться к отложенному</b>\n"
+    "Нажмите кнопку ниже — карточки придут заново, каждая со своими кнопками. "
+    "Решать можно прямо там, искать ничего не нужно.\n\n"
+    "/queue — то же самое одним списком."
 )
+
+
+BATCH_LIMIT = 6          # Telegram пускает ~20 сообщений в минуту — не частим.
+
+
+def _card_line(card: dict) -> str:
+    """Одна карточка очереди словами: заголовок, стороны, сумма, источник."""
+    parts = ["<b>%s</b>" % html_escape(str(card.get("title") or "без заголовка"))]
+    who = []
+    for label, key in (("Продавец", "seller"), ("Покупатель", "buyer_name"),
+                       ("Предмет", "asset")):
+        value = card.get(key)
+        if value and str(value) not in ("—", "Не раскрыта"):
+            who.append("%s: %s" % (label, html_escape(str(value))))
+    if who:
+        parts.append("\n".join(who))
+    facts = []
+    if card.get("sum"):
+        facts.append("Сумма: %s" % html_escape(str(card["sum"])))
+    if card.get("ind"):
+        facts.append("Отрасль: %s" % html_escape(str(card["ind"])))
+    if facts:
+        parts.append(" · ".join(facts))
+    src = [s for s in (card.get("src") or []) if len(s) > 1]
+    if src:
+        parts.append("Источник: %s" % html_escape(str(src[0][0])))
+    return "\n\n".join(parts)
+
+
+def _send_queue_batch(chat_id, kind: str) -> int:
+    """Прислать карточки очереди — каждую своим сообщением с кнопками.
+
+    `kind`: held — придержанные (можно опубликовать или выкинуть);
+            soon — те, что выйдут по молчанию (можно придержать или выкинуть);
+            raw  — сомнительные новости, которые ворота не пропустили.
+    """
+    if kind == "raw":
+        state = _read_json("data/inbox/moderation_state.json", {})
+        decided = set(state.get("decided_raw") or {})
+        hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
+        names = sorted(n for n in os.listdir(hold_dir)
+                       if n.endswith(".json")) if os.path.isdir(hold_dir) else []
+        drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
+                  .get("drafts") if names else None) or []
+        items = [d for d in drafts if str(d.get("draft_id")) not in decided]
+        head = ("⚠️ <b>Сомнительные новости: %d</b>\n"
+                "Ворота их не пропустили. Без вашего слова не публикуются никогда."
+                % len(items))
+    else:
+        pending = _read_json("static/data/pending.json", {}).get("cards") or []
+        want_held = kind == "held"
+        items = [c for c in pending if bool(c.get("held")) == want_held]
+        head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
+                % len(items) if want_held else
+                "⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
+                "в течение суток." % len(items))
+
+    notification_service.tg_api("sendMessage", chat_id=chat_id, text=head,
+                                parse_mode="HTML", disable_web_page_preview=True)
+    if not items:
+        notification_service.tg_api("sendMessage", chat_id=chat_id,
+                                    text="Сейчас пусто — решать нечего.")
+        return 0
+
+    shown = items[:BATCH_LIMIT]
+    for item in shown:
+        ident = str(item.get("draft_id") if kind == "raw" else item.get("id"))
+        if kind == "raw":
+            text = "⚠️ [сырьё %s]\n\n%s" % (ident, _card_line(item))
+            why = item.get("hold_reasons") or []
+            if why:
+                text += "\n\nПочему не пропустили: %s" % html_escape("; ".join(why)[:200])
+            keys = [[{"text": "✅ Это сделка", "callback_data": "mod:%s:take" % ident},
+                     {"text": "🗑 Не сделка", "callback_data": "mod:%s:drop" % ident}]]
+        elif kind == "held":
+            text = "🗂 [карточка %s]\n\n%s" % (ident, _card_line(item))
+            keys = [[{"text": "✅ Опубликовать", "callback_data": "mod:%s:ok" % ident},
+                     {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+        else:
+            text = "🗂 [карточка %s]\n\n%s" % (ident, _card_line(item))
+            keys = [[{"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident},
+                     {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+        notification_service.tg_api(
+            "sendMessage", chat_id=chat_id, text=text, parse_mode="HTML",
+            disable_web_page_preview=True, reply_markup={"inline_keyboard": keys})
+
+    if len(items) > len(shown):
+        # Умолчавший предел читается как «это всё» — называем его вслух.
+        notification_service.tg_api(
+            "sendMessage", chat_id=chat_id,
+            text="Показаны первые %d из %d — нажмите кнопку ещё раз после решений."
+                 % (len(shown), len(items)))
+    return len(shown)
 
 
 def _bot_menu() -> dict:
     """Меню под /start. Раньше команда отвечала стеной текста, и было
     непонятно, что вообще можно сделать, — кнопки показывают это сразу."""
     return {"inline_keyboard": [
-        [{"text": "📋 Что ждёт решения", "callback_data": "menu:queue"}],
-        [{"text": "📊 Как дела у платформы", "callback_data": "menu:stats"}],
         [{"text": "⏳ Что скоро выйдет", "callback_data": "show:soon"},
          {"text": "✋ Что придержано", "callback_data": "show:held"}],
+        [{"text": "⚠️ Сомнительные новости", "callback_data": "show:raw"}],
+        [{"text": "📊 Как дела у платформы", "callback_data": "menu:stats"}],
     ]}
 
 

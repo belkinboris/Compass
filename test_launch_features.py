@@ -945,8 +945,10 @@ def test_bot_start_offers_buttons_instead_of_a_wall_of_text():
     помнить наизусть."""
     menu = main._bot_menu()["inline_keyboard"]
     data = [b["callback_data"] for row in menu for b in row]
-    assert "menu:queue" in data and "menu:stats" in data
-    assert "show:soon" in data and "show:held" in data
+    # Кнопки ведут туда, где можно РЕШАТЬ, а не только смотреть: очередь,
+    # придержанное и сомнительные приходят карточками со своими кнопками.
+    assert "show:soon" in data and "show:held" in data and "show:raw" in data
+    assert "menu:stats" in data
     for row in menu:
         for button in row:
             assert button["text"].strip(), "кнопка без подписи"
@@ -966,3 +968,69 @@ def test_stats_report_is_readable_russian():
     assert "Сделок на сайте" in text and "Вы придержали" in text
     for jargon in ("G7", "pending", "from_ingest", "thin_2026"):
         assert jargon not in text
+
+
+def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_path):
+    """Список без кнопок — тупик: увидел и ничего не можешь сделать.
+
+    Владелец 9 августа: «я так и не понял, как проверять те, которые
+    придержаны». Первая версия присылала перечисление заголовков; теперь
+    каждая карточка приходит своим сообщением с рабочими кнопками.
+    """
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+        "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
+                   "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
+                  {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»"}],
+    } if "pending" in path else default)
+
+    main._send_queue_batch(-100, "held")
+    buttons = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")]
+    assert buttons, "придержанные пришли без единой кнопки"
+    data = [b["callback_data"] for row in buttons[0]["inline_keyboard"] for b in row]
+    assert data == ["mod:gh1:ok", "mod:gh1:discard"], data
+    # Заголовок и факты видны прямо в сообщении — решать можно не открывая сайт.
+    card_text = [kw["text"] for _m, kw in sent if "gh1" in kw.get("text", "")][0]
+    assert "Придержанная сделка" in card_text and "1 млрд ₽" in card_text
+
+    sent.clear()
+    main._send_queue_batch(-100, "soon")
+    kb = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")][0]
+    data = [b["callback_data"] for row in kb["inline_keyboard"] for b in row]
+    assert data == ["mod:gs1:hold", "mod:gs1:discard"], data
+
+
+def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
+    """Умолчавший предел читается как «это всё» — урок CLAUDE.md про консоль."""
+    import inspect
+    src = inspect.getsource(main._send_queue_batch)
+    assert "Показаны первые" in src
+    assert main.BATCH_LIMIT <= 10, "Telegram пускает ~20 сообщений в минуту"
+
+
+def test_empty_queue_answers_instead_of_silence(monkeypatch):
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append(kw) or {"ok": True})
+    monkeypatch.setattr(main, "_read_json",
+                        lambda path, default: {"cards": []} if "pending" in path else default)
+    assert main._send_queue_batch(-100, "held") == 0
+    assert any("пусто" in kw.get("text", "") for kw in sent)
+
+
+def test_bot_help_explains_how_to_edit_a_card_and_a_post():
+    """Владелец: «нужно, чтобы было понятно, как изменять карту, как изменять
+    пост». Справка обязана объяснять оба пути ответом на сообщение."""
+    text = main.BOT_HELP
+    assert "станет текстом поста" in text
+    assert "замечанием" in text and "по источнику" in text
+    assert "callback" not in text.lower()
+
+
+def test_bot_menu_offers_the_doubtful_queue_too():
+    """Сомнительные (⚠️) до этого нельзя было вызвать заново — они приходили
+    один раз и терялись в переписке."""
+    data = [b["callback_data"] for row in main._bot_menu()["inline_keyboard"] for b in row]
+    assert "show:raw" in data
