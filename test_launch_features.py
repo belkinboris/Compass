@@ -722,11 +722,17 @@ def test_bot_answers_bare_start_and_help(client, monkeypatch):
     """
     _mod_env(monkeypatch)
     sent = []
-    monkeypatch.setattr(main.notification_service, "_send_telegram",
-                        lambda chat_id, text: sent.append((chat_id, text)) or True)
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": 111}, "from": {"id": 111}, "text": "/start"}})
-    assert sent and "модерация" in sent[0][1].lower()
+    assert sent, "«/start» остался без ответа"
+    method, body = sent[0]
+    assert method == "sendMessage"
+    # Ответ объясняет, ЧТО человек может сделать, а не просто здоровается.
+    assert "опубликовать" in body["text"].lower()
+    # И показывает это кнопками: текстом непонятно, что вообще можно нажать.
+    assert body.get("reply_markup", {}).get("inline_keyboard")
 
 
 def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
@@ -737,19 +743,20 @@ def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
     """
     _mod_env(monkeypatch)
     sent = []
-    monkeypatch.setattr(main.notification_service, "_send_telegram",
-                        lambda chat_id, text: sent.append((chat_id, text)) or True)
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": -1001234567890}, "from": {"id": 222},
                      "text": "/queue@compass_bot"}})
     assert sent, "команда с суффиксом бота осталась без ответа"
-    assert "на проверке" in sent[0][1].lower() or "очередь пуста" in sent[0][1].lower()
+    text = sent[0][1]["text"].lower()
+    assert "на проверке" in text or "очередь пуста" in text
 
     # Посторонний в той же группе состав очереди не получает.
     sent.clear()
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": -1001234567890}, "from": {"id": 999}, "text": "/queue"}})
-    assert sent and "только владельцу и партнёру" in sent[0][1]
+    assert sent and "только владельцу и партнёру" in sent[0][1]["text"]
 
 
 def test_queue_report_shows_three_console_blocks():
@@ -881,3 +888,81 @@ def test_webhook_discard_button_and_edit_hint(client, monkeypatch):
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна",
                       "ids": [d["id"] for d in r.json()["decisions"]]})
+
+
+# ---------- панель основателей и меню бота (9 августа 2026) ----------
+
+def test_ops_dashboard_is_closed_without_the_token(client):
+    """Состав очереди и незаконченная работа — не для публичного показа."""
+    assert client.get("/ops").status_code == 404
+    assert client.get("/ops?token=неверный").status_code == 404
+    assert client.get("/api/ops/summary").status_code == 404
+
+
+def test_ops_dashboard_opens_with_the_token(client, monkeypatch):
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
+    r = client.get("/ops?token=тайна")
+    assert r.status_code == 200
+    assert "панель основателей" in r.text
+    # Подписи называют МНОЖЕСТВО, а не только величину (урок CLAUDE.md).
+    assert "сделок на сайте" in r.text
+    assert "выйдут сами в течение суток" in r.text
+
+
+def test_ops_summary_counts_the_same_numbers_as_the_page(client, monkeypatch):
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
+    n = client.get("/api/ops/summary?token=тайна").json()
+    for key in ("deals", "companies", "added_week", "queue_soon", "queue_held",
+                "unread", "from_ingest", "thin_2026", "published"):
+        assert isinstance(n[key], int), key
+    assert n["deals"] > 1000, "база должна быть непустой"
+    assert n["unread"] <= n["from_ingest"]
+
+
+def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
+    """«Добавлено за неделю» обязано считать приток, а не разовый импорт: в
+    день переноса архива приезжают сотни карточек, и счётчик показывал бы
+    бурный рост рынка вместо нашей же заливки (урок CLAUDE.md про метку
+    «новое»). День с более чем 30 карточками — импорт, а не новости."""
+    from datetime import datetime, timedelta, timezone
+    today = datetime.now(timezone.utc).date()
+    bulk_day = (today - timedelta(days=2)).isoformat()
+    drip_day = (today - timedelta(days=1)).isoformat()
+    fake = {"deals": [{"id": "b%d" % i, "added": bulk_day} for i in range(50)]
+                     + [{"id": "d%d" % i, "added": drip_day} for i in range(3)],
+            "companies": {}, "telegram_posts": {}}
+
+    def fake_read(path, default):
+        return fake if "deals_promoted" in path else {"cards": []}
+
+    monkeypatch.setattr(main, "_read_json", fake_read)
+    n = main._ops_numbers()
+    assert n["added_week"] == 3, "день с 50 карточками — импорт, его считать нельзя"
+
+
+def test_bot_start_offers_buttons_instead_of_a_wall_of_text():
+    """Голый текст не показывает, что вообще можно нажать: команду приходилось
+    помнить наизусть."""
+    menu = main._bot_menu()["inline_keyboard"]
+    data = [b["callback_data"] for row in menu for b in row]
+    assert "menu:queue" in data and "menu:stats" in data
+    assert "show:soon" in data and "show:held" in data
+    for row in menu:
+        for button in row:
+            assert button["text"].strip(), "кнопка без подписи"
+
+
+def test_bot_help_speaks_to_a_partner_not_to_a_developer():
+    """Справку читает партнёр: никаких наших терминов и кодов бэклога."""
+    text = main.BOT_HELP.lower()
+    for jargon in ("g7", "pending", "from_ingest", "промоут", "драфт", "eco", "bulk"):
+        assert jargon not in text, jargon
+    assert "опубликовать" in text and "придержать" in text
+
+
+def test_stats_report_is_readable_russian():
+    """Сводка в боте — те же цифры, что на панели, но словами."""
+    text = main._stats_report()
+    assert "Сделок на сайте" in text and "Вы придержали" in text
+    for jargon in ("G7", "pending", "from_ingest", "thin_2026"):
+        assert jargon not in text

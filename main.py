@@ -16,12 +16,13 @@ import logging
 import os
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
+from html import escape as html_escape
 
 import httpx
 from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
@@ -906,6 +907,23 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
         # человеческим 9 августа (см. pipeline/ops_status.py), и кнопки —
         # его часть: цифра «6 карточек выйдут сами» бесполезна, если нельзя
         # тут же посмотреть, какие именно.
+        # Кнопки меню под /start: очередь и сводка о платформе.
+        menu = re.match(r"^menu:(queue|stats)$", str(callback.get("data") or ""))
+        if menu:
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Это видят только владелец и партнёр.")
+                return {"ok": True}
+            body = _queue_report() if menu.group(1) == "queue" else _stats_report()
+            notification_service.tg_api(
+                "sendMessage",
+                chat_id=(callback.get("message") or {}).get("chat", {}).get("id"),
+                text=body, parse_mode="HTML", disable_web_page_preview=True)
+            notification_service.tg_api("answerCallbackQuery",
+                                        callback_query_id=callback.get("id"))
+            return {"ok": True}
+
         show = re.match(r"^show:(soon|held)$", str(callback.get("data") or ""))
         if show:
             if not _is_reviewer(from_id):
@@ -1002,20 +1020,61 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     # приходит с суффиксом («/queue@compass_bot»), его надо отрезать.
     command = re.match(r"^/([a-z_]+)(?:@\S+)?\s*$", text.strip(), re.I)
     if command and chat_id is not None:
-        reply = _bot_command(command.group(1).lower(), sender_id)
+        name = command.group(1).lower()
+        reply = _bot_command(name, sender_id)
         if reply:
-            notification_service._send_telegram(str(chat_id), reply)
+            # У /start и /help — меню кнопками: текстом человек не понимает,
+            # что вообще можно нажать, и команду приходится помнить наизусть.
+            body = {"chat_id": str(chat_id), "text": reply, "parse_mode": "HTML",
+                    "disable_web_page_preview": True}
+            if name in ("start", "help") and _is_reviewer(sender_id):
+                body["reply_markup"] = _bot_menu()
+            notification_service.tg_api("sendMessage", **body)
     return {"ok": True}
 
 
 BOT_HELP = (
-    "Бот «Компаса» — модерация новых карточек.\n\n"
-    "/queue — что сейчас ждёт решения\n"
-    "/help — эта справка\n\n"
-    "Когда приток находит сделку, бот присылает сюда проект поста, ссылку на "
-    "карточку (её ещё нет на сайте) и две кнопки. Ответ на сообщение с вашим "
-    "текстом заменит текст поста. Молчание сутки — публикуем как есть."
+    "👋 <b>Это бот «Компаса»</b>\n"
+    "Через него вы решаете, какие сделки попадут на сайт и в канал.\n\n"
+    "<b>Как это работает</b>\n"
+    "Каждое утро платформа просматривает новости и присылает сюда найденные "
+    "сделки — проект поста, черновик карточки и кнопки под ними.\n\n"
+    "• <b>✅ Опубликовать</b> — сделка выйдет на сайт и в канал\n"
+    "• <b>✋ Придержать</b> — останется ждать, пока вы не решите\n"
+    "• <b>🗑 Выкинуть</b> — не наша тема, больше не покажем\n"
+    "• Просто <b>ответьте своим текстом</b> — им заменится текст поста\n\n"
+    "Если промолчать сутки — сделка выйдет как есть. Сомнительные новости "
+    "(⚠️) без вашего слова не публикуются никогда.\n\n"
+    "Кнопки ниже — самое частое."
 )
+
+
+def _bot_menu() -> dict:
+    """Меню под /start. Раньше команда отвечала стеной текста, и было
+    непонятно, что вообще можно сделать, — кнопки показывают это сразу."""
+    return {"inline_keyboard": [
+        [{"text": "📋 Что ждёт решения", "callback_data": "menu:queue"}],
+        [{"text": "📊 Как дела у платформы", "callback_data": "menu:stats"}],
+        [{"text": "⏳ Что скоро выйдет", "callback_data": "show:soon"},
+         {"text": "✋ Что придержано", "callback_data": "show:held"}],
+    ]}
+
+
+def _stats_report() -> str:
+    """Короткая сводка о платформе — человеческим языком, без наших терминов."""
+    n = _ops_numbers()
+    return (
+        "📊 <b>Как дела у платформы</b>\n\n"
+        "🗂 Сделок на сайте: <b>%(deals)d</b>\n"
+        "🏢 Профилей компаний: <b>%(companies)d</b>\n"
+        "🆕 Добавлено за неделю: <b>%(added_week)d</b>\n"
+        "📣 Опубликовано в канале: <b>%(published)d</b>\n\n"
+        "⏳ Выйдут сами в течение суток: <b>%(queue_soon)d</b>\n"
+        "✋ Вы придержали: <b>%(queue_held)d</b>\n\n"
+        "🔧 <b>В работе</b>\n"
+        "Не дополнены по источнику: <b>%(unread)d</b> из %(from_ingest)d\n"
+        "Карточек 2026 года с бедным разбором: <b>%(thin_2026)d</b>"
+    ) % n
 
 
 def _read_json(path, default):
@@ -1118,6 +1177,135 @@ def _is_reviewer(chat_id) -> bool:
 def _moderation_token_ok(token: str) -> bool:
     expected = os.environ.get("MODERATION_TOKEN") or os.environ.get("TELEGRAM_WEBHOOK_SECRET") or ""
     return bool(expected) and token == expected
+
+
+def _ops_numbers() -> dict:
+    """Цифры для дашборда основателей — считаются из тех же файлов, что и сайт.
+
+    Ни одной величины «на глаз»: каждая берётся из данных, и рядом с ней в
+    интерфейсе стоит подпись, ИЗ КАКОГО множества она получена (урок CLAUDE.md
+    про то, что у числа на экране два свойства — величина и множество).
+    """
+    base = _read_json("static/data/deals_promoted.json", {})
+    deals = base.get("deals") or []
+    pending = (_read_json("static/data/pending.json", {}).get("cards") or [])
+
+    def lens_len(card) -> int:
+        eco, law = card.get("eco") or {}, card.get("law") or {}
+        n = sum(len(str(v)) for v in list(eco.values())
+                + [v for k, v in law.items() if k != "adv"] if v and str(v) != "—")
+        n += sum(len(str(a)) for a in (law.get("adv") or []))
+        return n + len(str(card.get("extra") or ""))
+
+    # «Добавлено за неделю» обязано считать ПРИТОК, а не разовые импорты: в
+    # день переноса архива приезжают сотни карточек, и число «211 за 7 дней»
+    # выглядит бурным ростом рынка, хотя это мы сами залили старое. Правило
+    # уже записано в CLAUDE.md по поводу метки «новое»: день, в который
+    # добавлено больше 30 карточек, — это импорт, а не новости.
+    today = datetime.now(timezone.utc).date()
+    since = (today - timedelta(days=7)).isoformat()
+    per_day: dict[str, int] = {}
+    for d in deals:
+        day = str(d.get("added") or "")
+        if day:
+            per_day[day] = per_day.get(day, 0) + 1
+    week = [d for d in deals
+            if str(d.get("added") or "") >= since
+            and per_day.get(str(d.get("added") or ""), 0) <= 30]
+    from_ingest = [d for d in deals if d.get("from_ingest")]
+    unread = [d for d in from_ingest if not d.get("reviewed")]
+    thin_2026 = [d for d in deals
+                 if str(d.get("date") or "").startswith("2026") and lens_len(d) < 400]
+    posts = base.get("telegram_posts") or {}
+    published = sum(1 for v in posts.values() if v)
+
+    return {
+        "deals": len(deals),
+        "companies": len(base.get("companies") or {}),
+        "added_week": len(week),
+        "queue_soon": sum(1 for c in pending if not c.get("held")),
+        "queue_held": sum(1 for c in pending if c.get("held")),
+        "unread": len(unread),
+        "from_ingest": len(from_ingest),
+        "thin_2026": len(thin_2026),
+        "published": published,
+        "thin_examples": [str(d.get("title") or "")[:70] for d in thin_2026[:6]],
+        "queue_titles": [str(c.get("title") or "")[:70] for c in pending[:6]],
+    }
+
+
+OPS_PAGE = """<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Компас — панель основателей</title><style>
+:root{--bg:#f7f3e9;--card:#fff;--ink:#201c14;--dim:#6b6353;--line:rgba(32,28,20,.14);--acc:#a9824c}
+@media(prefers-color-scheme:dark){:root{--bg:#16181c;--card:#1d2025;--ink:#ece7d9;--dim:#a39c8b;--line:rgba(236,231,217,.12);--acc:#d3b17e}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;padding:24px 16px 64px}
+.w{max-width:900px;margin:0 auto}h1{font:600 24px/1.2 Georgia,serif;margin:0 0 4px}
+.sub{color:var(--dim);font-size:14px;margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.n{font:700 26px/1.1 Georgia,serif;font-variant-numeric:tabular-nums}
+.l{font-size:12.5px;color:var(--dim);margin-top:4px}
+.c.warn .n{color:var(--acc)}
+h2{font:600 17px/1.3 Georgia,serif;margin:28px 0 10px}
+ul{margin:0;padding-left:20px}li{font-size:14px;margin:4px 0}
+.empty{color:var(--dim);font-size:14px}
+</style></head><body><div class="w">
+<h1>Компас — панель основателей</h1>
+<p class="sub">Обновляется при каждом открытии. Все цифры считаются из тех же файлов, что отдаёт сайт.</p>
+<div class="grid">
+<div class="c"><div class="n">%(deals)d</div><div class="l">сделок на сайте</div></div>
+<div class="c"><div class="n">%(companies)d</div><div class="l">профилей компаний</div></div>
+<div class="c"><div class="n">%(added_week)d</div><div class="l">добавлено за 7 дней</div></div>
+<div class="c"><div class="n">%(published)d</div><div class="l">постов в канале</div></div>
+</div>
+<h2>Ждёт вашего решения</h2>
+<div class="grid">
+<div class="c"><div class="n">%(queue_soon)d</div><div class="l">выйдут сами в течение суток</div></div>
+<div class="c"><div class="n">%(queue_held)d</div><div class="l">вы придержали</div></div>
+</div>
+%(queue_list)s
+<h2>Что ещё не доделано</h2>
+<div class="grid">
+<div class="c warn"><div class="n">%(unread)d</div><div class="l">из %(from_ingest)d карточек притока не дополнены по источнику</div></div>
+<div class="c warn"><div class="n">%(thin_2026)d</div><div class="l">карточек 2026 года с почти пустыми разборами</div></div>
+</div>
+%(thin_list)s
+</div></body></html>"""
+
+
+@app.get("/ops")
+def ops_dashboard(token: str = ""):
+    """Панель основателей: то же, что рутина шлёт в Telegram, но целиком и
+    сразу. Закрыта тем же токеном, что и мост решений, — состав очереди и
+    незаконченная работа не для публичного показа."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    n = _ops_numbers()
+
+    def as_list(items, empty_text):
+        if not items:
+            return '<p class="empty">%s</p>' % empty_text
+        return "<ul>%s</ul>" % "".join(
+            "<li>%s</li>" % html_escape(t) for t in items)
+
+    page = OPS_PAGE % {
+        **{k: v for k, v in n.items() if isinstance(v, int)},
+        "queue_list": as_list(n["queue_titles"], "Очередь пуста — всё решено."),
+        "thin_list": as_list(n["thin_examples"],
+                             "Тонких карточек 2026 года не осталось."),
+    }
+    return HTMLResponse(page)
+
+
+@app.get("/api/ops/summary")
+def ops_summary(token: str = ""):
+    """Те же цифры машиночитаемо — чтобы рутина могла отчитаться, не считая
+    их заново каждая по-своему."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return _ops_numbers()
 
 
 @app.get("/api/moderation/decisions")
