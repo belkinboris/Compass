@@ -1814,12 +1814,73 @@ def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, cap
     успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""
     monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
     monkeypatch.delenv("TELEGRAM_REVIEW_GROUP_ID", raising=False)
-    assert ops_status.main(["публикация:", "нечего", "публиковать"]) == 1
+    assert ops_status.main(["публикация", "--nothing"]) == 1
     assert "не заданы" in capsys.readouterr().out
 
 
 def test_ops_status_main_requires_text():
     assert ops_status.main([]) == 1
+
+
+def test_ops_status_refuses_internal_jargon_reaching_the_console():
+    """Ровно те две фразы, которые владелец прислал 9 августа как непонятные
+    партнёру. Тот же класс ошибки, что «знаменатель» и «bulk» на экране сайта
+    (CLAUDE.md), только вылез в отчётах рутин."""
+    assert ops_status.find_jargon('G7 — дочитана карточка, 6 полей заполнено')
+    assert ops_status.find_jargon('очередь решений пуста, 6 внутри 24ч тишины')
+    assert ops_status.find_jargon('карточка ушла в предпросмотр, from_ingest')
+    # Человеческая формулировка того же самого проходит.
+    assert not ops_status.find_jargon(
+        'Дополнили карточку «Родные поля» — перенесли 6 фактов из статьи.')
+
+
+def test_ops_status_does_not_send_when_jargon_slipped_in(monkeypatch, capsys):
+    """Мало найти жаргон — надо не отправить. Иначе проверка декоративная."""
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1001")
+    monkeypatch.setattr(ops_status, "post_status",
+                        lambda *a, **k: pytest.fail("жаргон ушёл в консоль"))
+    assert ops_status.main(["качество", "--did", "G7: дочитана карточка"]) == 1
+    assert "жаргон" in capsys.readouterr().out
+
+
+def test_ops_status_writes_human_russian_with_correct_plurals():
+    """Партнёр читает «6 карточек», а не «6 карточка»: склонение — часть
+    понятности, а не украшение."""
+    assert "1 карточка выйдут" not in ops_status.render_publish(nothing=True, soon=1)
+    assert "карточка" in ops_status.render_publish(nothing=True, soon=1)
+    assert "карточки" in ops_status.render_publish(nothing=True, soon=3)
+    assert "карточек" in ops_status.render_publish(nothing=True, soon=6)
+    # 1633 -> «новости» (оканчивается на 3), 1635 -> «новостей», 11 -> «новостей»
+    # (11–14 — исключение, несмотря на последнюю цифру).
+    assert "1633 новости" in ops_status.render_intake(looked=1633)
+    assert "1635 новостей" in ops_status.render_intake(looked=1635)
+    assert "11 новостей" in ops_status.render_intake(looked=11)
+    assert "1 новость" in ops_status.render_intake(looked=1)
+
+
+def test_ops_status_empty_run_says_so_plainly():
+    """Пустой прогон обязан быть внятным, а не молчаливым — иначе возвращаемся
+    к тому, из-за чего приток простоял несколько дней незамеченным."""
+    text = ops_status.render_publish(nothing=True)
+    assert "публиковать нечего" in text.lower()
+    assert "тихие дни" in ops_status.render_intake(looked=1633)
+    assert "чинить нечего" in ops_status.render_quality()
+
+
+def test_ops_status_offers_buttons_only_when_there_is_something_to_show():
+    assert ops_status.queue_keyboard(0, 0) is None
+    kb = ops_status.queue_keyboard(6, 4)["inline_keyboard"][0]
+    assert [b["callback_data"] for b in kb] == ["show:soon", "show:held"]
+    assert ops_status.queue_keyboard(6, 0)["inline_keyboard"][0][0]["callback_data"] == "show:soon"
+
+
+def test_site_answers_the_queue_buttons():
+    """Кнопка, на которую никто не отвечает, выглядит рабочей и молчит — тот
+    же класс, что забытый callback_query в подписке вебхука (CLAUDE.md)."""
+    src = (ROOT / "main.py").read_text(encoding="utf-8")
+    assert 'show:(soon|held)' in src, "сайт не разбирает callback_data кнопок отчёта"
+    assert "Очередь видят только владелец и партнёр" in src, "нет проверки права"
 
 
 # ---------- предмет сделки в именительном падеже (casing.py) ----------

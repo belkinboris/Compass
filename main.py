@@ -899,9 +899,45 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     # /api/moderation/decisions (см. модель ModerationDecision).
     callback = payload.callback_query or {}
     if callback:
+        from_id = (callback.get("from") or {}).get("id")
+        # Кнопки-вопросы под отчётом рутины («что скоро выйдет», «что
+        # придержано»). Это НЕ вердикт: ничего не решают, только показывают
+        # состав очереди, чтобы не идти искать его руками. Отчёт рутины стал
+        # человеческим 9 августа (см. pipeline/ops_status.py), и кнопки —
+        # его часть: цифра «6 карточек выйдут сами» бесполезна, если нельзя
+        # тут же посмотреть, какие именно.
+        show = re.match(r"^show:(soon|held)$", str(callback.get("data") or ""))
+        if show:
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Очередь видят только владелец и партнёр.")
+                return {"ok": True}
+            pending = _read_json("static/data/pending.json", {}).get("cards") or []
+            want_held = show.group(1) == "held"
+            cards = [c for c in pending if bool(c.get("held")) == want_held]
+            if want_held:
+                head = "✋ <b>Вы придержали: %d</b>\nВыйдут только после вашего «опубликовать»." % len(cards)
+            else:
+                head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать, "
+                        "опубликуются в течение суток." % len(cards))
+            lines = [head, ""] if cards else [head]
+            for card in cards[:10]:
+                title = str(card.get("title") or "без заголовка")[:90]
+                lines.append("• %s" % title)
+            if len(cards) > 10:
+                lines.append("… и ещё %d" % (len(cards) - 10))
+            if not cards:
+                lines.append("Сейчас пусто.")
+            notification_service.tg_api(
+                "sendMessage", chat_id=(callback.get("message") or {}).get("chat", {}).get("id"),
+                text="\n".join(lines), parse_mode="HTML", disable_web_page_preview=True)
+            notification_service.tg_api("answerCallbackQuery",
+                                        callback_query_id=callback.get("id"))
+            return {"ok": True}
+
         match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
                          str(callback.get("data") or ""))
-        from_id = (callback.get("from") or {}).get("id")
         if match and match.group(2) == "edit" and _is_reviewer(from_id):
             # «Изменить» — не вердикт, а подсказка, как продиктовать правку:
             # окна ввода у кнопок Telegram нет, ввод делается ответом.
