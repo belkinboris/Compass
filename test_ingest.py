@@ -1916,13 +1916,22 @@ def test_asset_case_leaves_percent_and_number_phrases_alone():
 
 
 def test_asset_case_never_touches_quoted_names():
-    """Кавычки — граница: имя/бренд внутри «» не переформатируем, даже если
-    голова словосочетания стоит перед ними. 'бывшую лизинговую «дочку»
-    Mercedes-Benz' терял кавычки в первой версии правила."""
-    for phrase in ('бывшую лизинговую «дочку» Mercedes-Benz',
-                   'сети «Здоровый город» в Воронежской области'):
+    """Имя/бренд в кавычках не склоняем — но узнаём его по ЗАГЛАВНОЙ БУКВЕ
+    ядра, а не по самому факту кавычек.
+
+    Первая версия правила отказывалась работать, если кавычки встречались
+    где угодно во фразе, — и молчала на 244 предметах из 1027 (замер по
+    точке производства, см. docstring casing.py): у предмета почти всегда
+    есть хвост с названием, и запрет, написанный для головы, глушил всю
+    фразу. Теперь запрет проверяется там, где он и задуман."""
+    for phrase in ('сети «Здоровый город» в Воронежской области',
+                   '«Моторику» (производителя бионических протезов)',
+                   '«Уфабурмаша»'):
         got, changed = casing.to_nominative_asset(phrase)
         assert not changed and got == phrase
+    # А нарицательное в кавычках — склоняем, кавычки остаются на месте.
+    got, changed = casing.to_nominative_asset('бывшую лизинговую «дочку» Mercedes-Benz')
+    assert changed and got == 'бывшая лизинговая «дочка» Mercedes-Benz'
 
 
 def test_asset_case_skips_ambiguous_word_forms():
@@ -1959,6 +1968,76 @@ def test_asset_case_is_a_noop_on_already_nominative_phrases():
                    'торговый комплекс «Среда. Царицыно» на юге Москвы'):
         got, changed = casing.to_nominative_asset(phrase)
         assert not changed and got == phrase
+
+
+def test_asset_case_keeps_the_prefix_of_a_compound_word():
+    """Регистр берём посимвольно у исходного слова: pymorphy отдаёт лемму
+    строчными, и «ИТ-компанию» превращалось в «Ит-компания». Заодно проверка,
+    что аббревиатура в начале слова не считается именем бренда — имя узнаём
+    по ПОСЛЕДНЕЙ части составного слова («Рив-Гош» — имя, «ИТ-компанию» —
+    нарицательное)."""
+    got, changed = casing.to_nominative_asset("казахстанскую ИТ-компанию Bilim Group")
+    assert changed and got == "казахстанская ИТ-компания Bilim Group"
+
+
+def test_asset_case_refuses_when_the_word_form_may_be_nominative_already():
+    """«телеком провайдера «Уфанета»» превращалось в «телек провайдера»:
+    лучший разбор «телеком» — творительный от «телек» (score 0,333), а два
+    других дают именительный от «телеком» с ТОЙ ЖЕ вероятностью. Сравнивать
+    надо словоформу, а не лемму. При этом шумный именительный терять нельзя:
+    у «банка» он есть («банка» как ёмкость), но со score 0,045 против 0,955 —
+    и именно на нём держится правка, с которой всё началось."""
+    got, changed = casing.to_nominative_asset("телеком провайдера «Уфанета»")
+    assert not changed and got == "телеком провайдера «Уфанета»"
+    got, changed = casing.to_nominative_asset("Дальневосточного банка")
+    assert changed and got == "Дальневосточный банк"
+
+
+def test_asset_case_uses_the_adjective_as_a_witness_of_the_case():
+    """У женского 3-го склонения винительный совпадает с именительным
+    («сеть»), и правило считало фразу уже нормальной — «частную сеть АЗС
+    Elke Auto» уезжало в канал как есть. Падеж выдаёт прилагательное: если ни
+    один его разбор не даёт именительный, согласуем прилагательные, голову не
+    трогая. Неоднозначное прилагательное («российская» — и им., и род.) такой
+    уверенности не даёт и правило молчит."""
+    got, changed = casing.to_nominative_asset("частную сеть АЗС Elke Auto в Томске")
+    assert changed and got == "частная сеть АЗС Elke Auto в Томске"
+    for phrase in ("розничная сеть «Пятёрочка»", "торговая сеть в Сибири"):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_rule_measured_on_the_whole_base():
+    """ЗАМЕР ВАЖНЕЕ ВПЕЧАТЛЕНИЯ, и мерить надо в точке ПРОИЗВОДСТВА.
+
+    Первый замер правила («19 срабатываний на 183 сохранённых полях `asset`»)
+    выглядел законченным — а по заголовкам, из которых предмет РОЖДАЕТСЯ,
+    правило чинило 0 из 26 найденных косвенных. Здесь замер закреплён: гоняем
+    `guess_parties()` с выключенной нормализацией по всем заголовкам базы и
+    считаем, скольким предметам правило меняет падеж. Порог снизу — чтобы
+    правка, снова заглушившая правило целиком (как запрет на кавычки во всей
+    фразе), упала тестом, а не через месяц в канале.
+    """
+    import json
+    import draft as drafter
+    base = json.loads((ROOT / "static/data/deals_promoted.json").read_text(encoding="utf-8"))
+    cards = base.get("deals") or base.get("cards") or []
+    real = casing.to_nominative_asset
+    drafter.to_nominative_asset = lambda s: (s, False)
+    try:
+        assets = []
+        for c in cards:
+            try:
+                _, asset, _ = drafter.guess_parties(str(c.get("title") or ""))
+            except Exception:
+                continue
+            if asset:
+                assets.append(asset)
+    finally:
+        drafter.to_nominative_asset = real
+    assert len(assets) > 900, f"предмет разбирается лишь у {len(assets)} заголовков"
+    fixed = sum(1 for a in assets if real(a)[1])
+    assert fixed >= 200, f"правило падежа чинит всего {fixed} предметов из {len(assets)}"
 
 
 def test_draft_extraction_normalizes_asset_case():

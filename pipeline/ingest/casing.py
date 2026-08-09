@@ -40,6 +40,39 @@ X в предложном («производителе картошки для 
 ЗАМЕР (9 августа, deals_promoted.json + pending.json, 183 карточки с
 `asset`): 19 срабатываний, ни одного ложного — каждое проверено вручную и
 описано в `pipeline/fix_asset_case.py`.
+
+ВТОРОЙ ЗАМЕР (9 августа, вечер) — И ОН ПОКАЗАЛ, ЧТО ПРАВИЛО МОЛЧИТ ТАМ, ГДЕ
+ДЕФЕКТ ЖИВЁТ. Мерили не по сохранённому полю `asset`, а по ТОЧКЕ
+ПРОИЗВОДСТВА: прогнали `guess_parties()` по всем 1027 заголовкам базы, из
+которых он вообще достаёт предмет. Предмет вышел в косвенном падеже у 26 — и
+правило чинило из них НОЛЬ. Причина ровно та, о которой предупреждает
+CLAUDE.md («правило, написанное для начала строки, не увидит того же дефекта
+в конце»), только зеркально: запреты, написанные ДЛЯ ГОЛОВЫ (кавычки,
+латиница, заглавная буква), проверялись на ВСЕЙ фразе — а хвост у предмета
+почти всегда содержит название латиницей или в кавычках («онлайн-школу
+ProductStar», «российскую «дочку» Goldman Sachs»). Три правки:
+
+  * ЛУЧШИЙ РАЗБОР, А НЕ ПЕРВЫЙ. `_morph.parse(...)[0]` для составных слов
+    отдаёт не самый вероятный вариант: у «онлайн-школу» первым идёт мужской
+    род со score 0,093, женский со score 0,907 — вторым. Порог «score < 0,1»
+    из-за этого зарубал верный случай. Берём максимум по score.
+  * КАВЫЧКИ ВОКРУГ СЛОВА — НЕ ПОВОД МОЛЧАТЬ. Проверяем и склоняем ядро
+    слова без кавычек, а сами кавычки возвращаем на место. Защита от брендов
+    осталась прежней и стала точнее: имя узнаём по ЗАГЛАВНОЙ БУКВЕ ядра, и
+    её же проверяем у последней части составного слова — «ИТ-компанию» это
+    нарицательное («компанию»), а «Рив-Гош» — имя («Гош»).
+  * ПРИЛАГАТЕЛЬНОЕ — СВИДЕТЕЛЬ ПАДЕЖА ГОЛОВЫ. У существительных женского
+    рода 3-го склонения винительный совпадает с именительным («сеть»), и
+    правило считало фразу уже нормальной: «частную сеть АЗС Elke Auto»
+    оставалось как есть. Если голова выглядит именительной, но прямо перед
+    ней стоит прилагательное, у которого НИ ОДИН разбор не даёт именительный
+    («частную»), — падеж выдаёт прилагательное, и согласуем именно его,
+    голову не трогая.
+
+Замер после правок: из тех же 26 чинится 8, ложных ноль (список — в тесте
+`test_asset_case_rule_measured_on_the_whole_base`). Остальные 18 — склонение
+имён собственных («Татспиртпрома», «Нетологию», «Сибантрацита»), и это
+сознательный отказ: имя мы не склоняем никогда.
 """
 import re
 
@@ -48,6 +81,64 @@ import pymorphy3
 _morph = pymorphy3.MorphAnalyzer()
 
 QUOTE_CHARS = '«»"“”„'
+
+
+def _best(word):
+    """Разбор с максимальным score. `parse()[0]` для составных слов врёт:
+    у «онлайн-школу» он отдаёт мужской род со score 0,093 вместо женского с
+    0,907, и порог достоверности зарубал верное слово."""
+    return max(_morph.parse(word), key=lambda p: p.score)
+
+
+def _core(word):
+    """Слово без обрамляющих кавычек: склоняем ядро, кавычки возвращаем."""
+    return word.strip(QUOTE_CHARS)
+
+
+def _wrap(word, new_core):
+    """Вернуть кавычки на место — ровно те, что были."""
+    core = _core(word)
+    at = word.find(core)
+    return word[:at] + new_core + word[at + len(core):]
+
+
+def _looks_like_a_name(core):
+    """Заглавная буква — признак имени/бренда. У составного слова смотрим
+    последнюю часть: «ИТ-компанию» — нарицательное, «Рив-Гош» — имя."""
+    tail = core.split('-')[-1]
+    return tail[:1].isupper()
+
+
+def _cased(new, orig):
+    """Регистр берём у ИСХОДНОГО слова посимвольно, а не «первая заглавная».
+    Меняется только окончание, поэтому общий начальный кусок оставляем как
+    было: «ИТ-компанию» -> «ИТ-компания», а не «Ит-компания» (pymorphy
+    возвращает лемму строчными и заглавную приставку затирал)."""
+    k = 0
+    while k < min(len(new), len(orig)) and new[k].lower() == orig[k].lower():
+        k += 1
+    return orig[:k] + new[k:]
+
+
+def _nominative_rival(parses, best):
+    """Есть ли у той же СЛОВОФОРМЫ разбор в именительном падеже, сравнимый по
+    вероятности с лучшим? Сравнивать надо словоформу, а не лемму: у «телеком»
+    лучший разбор — творительный от «телек» (0,333), а два других дают
+    именительный от «телеком» с той же вероятностью — и правило превращало
+    «телеком провайдера» в «телек провайдера». У «банка» именительный тоже
+    есть («банка» как ёмкость), но со score 0,045 против 0,955 — это шум, и
+    из-за него нельзя терять «Дальневосточного банка» -> «Дальневосточный
+    банк», с которого весь разбор и начался.
+
+    Проверка по ЛЕММЕ стоит рядом и порогом не заменяется: у «права» обе
+    трактовки — одна лемма «право» (родительный ед. ч. и именительный мн. ч.),
+    смена числа меняет смысл, а score там сравнимым не бывает."""
+    for p in parses:
+        if p is best or p.tag.case != 'nomn':
+            continue
+        if p.normal_form == best.normal_form or p.score >= best.score * 0.3:
+            return True
+    return False
 
 
 def to_nominative_asset(phrase):
@@ -61,13 +152,15 @@ def to_nominative_asset(phrase):
     if re.match(r'^\d', words[0]):
         return phrase, False
 
+    # Голову ищем среди первых слов; всё, что ПОСЛЕ неё, — зависимый оборот
+    # («производитель [чего?] картошки для чипсов»), он уже верен и не
+    # проверяется вовсе. Поэтому запреты ниже действуют только до головы.
     head_idx = None
     for i, w in enumerate(words):
-        if any(c in w for c in QUOTE_CHARS):
+        core = _core(w)
+        if not core or not re.match(r'^[А-Яа-яЁё-]+$', core):
             return phrase, False
-        if not w or not re.match(r'^[А-Яа-яЁё-]+$', w):
-            return phrase, False
-        p = _morph.parse(w)[0]
+        p = _best(core)
         if 'NOUN' in p.tag:
             head_idx = i
             break
@@ -77,43 +170,57 @@ def to_nominative_asset(phrase):
         return phrase, False
 
     head_word = words[head_idx]
-    if head_word[:1].isupper():
+    head_core = _core(head_word)
+    if _looks_like_a_name(head_core):
         return phrase, False                   # похоже на имя/бренд
-    parses = _morph.parse(head_word)
-    head = parses[0]
-    if head.tag.case == 'nomn':
-        return phrase, False
+    parses = _morph.parse(head_core)
+    head = _best(head_core)
     if any(g in head.tag for g in ('Name', 'Surn', 'Patr', 'Geox')):
         return phrase, False
     if head.score < 0.1:
         return phrase, False
-    if any(p.normal_form == head.normal_form and p.tag.case == 'nomn'
-           for p in parses[1:]):
-        return phrase, False                   # та же лемма даёт им. падеж — неоднозначно
-
-    number = head.tag.number
-    gender = head.tag.gender
-    targets = {'nomn'}
-    if number:
-        targets.add(number)
-    if gender and number != 'plur':
-        targets.add(gender)
-    head_infl = head.inflect(targets)
-    if not head_infl or head_infl.word == head_word:
-        return phrase, False
-
-    def cased(new, orig):
-        return new[:1].upper() + new[1:] if orig[:1].isupper() else new
 
     out = list(words)
-    out[head_idx] = cased(head_infl.word, head_word)
-    changed = out[head_idx].lower() != head_word.lower()
+
+    if head.tag.case == 'nomn':
+        # Голова выглядит именительной — но у женского 3-го склонения
+        # винительный совпадает с именительным («сеть»). Падеж выдаёт
+        # прилагательное перед головой: если НИ ОДИН его разбор не даёт
+        # именительный, фраза косвенная, и согласовать надо прилагательные.
+        if head_idx == 0:
+            return phrase, False
+        prev = _core(words[head_idx - 1])
+        prev_parses = _morph.parse(prev)
+        if not any(('ADJF' in p.tag or 'PRTF' in p.tag) for p in prev_parses):
+            return phrase, False
+        if any(p.tag.case == 'nomn' for p in prev_parses):
+            return phrase, False               # неоднозначно — не трогаем
+        targets = {'nomn'}
+        if head.tag.number:
+            targets.add(head.tag.number)
+        if head.tag.gender and head.tag.number != 'plur':
+            targets.add(head.tag.gender)
+    else:
+        if _nominative_rival(parses, head):
+            return phrase, False               # словоформа может быть уже именительной
+        targets = {'nomn'}
+        if head.tag.number:
+            targets.add(head.tag.number)
+        if head.tag.gender and head.tag.number != 'plur':
+            targets.add(head.tag.gender)
+        head_infl = head.inflect(targets)
+        if not head_infl or head_infl.word == head_core:
+            return phrase, False
+        out[head_idx] = _wrap(head_word, _cased(head_infl.word, head_core))
+
+    changed = out[head_idx] != words[head_idx]
 
     for i in range(head_idx - 1, -1, -1):
         w = words[i]
-        infl = _morph.parse(w)[0].inflect(targets)
-        if infl and infl.word != w.lower():
-            out[i] = cased(infl.word, w)
+        core = _core(w)
+        infl = _best(core).inflect(targets)
+        if infl and infl.word != core.lower():
+            out[i] = _wrap(w, _cased(infl.word, core))
             changed = True
 
     return ' '.join(out), changed
