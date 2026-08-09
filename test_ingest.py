@@ -1906,3 +1906,120 @@ def test_draft_extraction_normalizes_asset_case():
     import draft as drafter
     _, asset, _ = drafter.guess_parties("МКБ завершил присоединение Дальневосточного банка")
     assert asset == "Дальневосточный банк"
+
+
+# ---------- механика учится на правках чтением (learn.py) ----------
+
+def test_sum_is_refused_when_the_sentence_is_about_another_figure():
+    """Самый дорогой класс вранья механики: число есть, оно верное, но это НЕ
+    цена сделки. Три пойманных чтением случая — чистые инвестиции в лизинг,
+    бухгалтерский убыток продавца, выручка предмета."""
+    import draft as drafter
+    cases = [
+        'Сумму сделки в компании не раскрывают, однако уточняют, что после ее '
+        'завершения чистые инвестиции в лизинг (ЧИЛ) «Флит Лизинга» превысят 32 млрд руб.',
+        'Сумма сделки не раскрывается. Но по ее итогу Reckitt ожидает убыток '
+        'на £175 млн (около 18 млрд руб.)',
+        'По итогам 2025 года выручка операционной компании «Пролайф» сократилась '
+        'примерно на пятую часть, до 711,7 млн руб.',
+    ]
+    for text in cases:
+        assert drafter.guess_sum(text), 'предпосылка теста: число тут вообще есть'
+        assert drafter.sum_from_text(text) is None, text[:60]
+
+
+def test_real_deal_sum_still_survives_the_guard():
+    """Защита обязана быть узкой: обычная цена сделки проходит как раньше."""
+    import draft as drafter
+    assert drafter.sum_from_text('Сделка оценивается в 2 млрд руб.') == '2 млрд ₽'
+    assert drafter.sum_from_text('«Флит Лизинг» купил актив за 404 млн рублей') == '404 млн ₽'
+
+
+def test_generic_role_description_is_not_accepted_as_a_party_name():
+    """«Владелец Yadro» — это не имя покупателя, а описание роли; настоящее имя
+    в статье обычно есть, просто ниже заголовка. Молчание честнее."""
+    import draft as drafter
+    for name in ('Владелец Yadro', 'Бывший топ-менеджер «Лукойла»', 'ресторатора Флеганова',
+                 'Экс-акционер Башкирской содовой компании', 'Группа инвесторов',
+                 'Совладелец R-Vision', 'фонд под управлением «ВИМ Сбережения»'):
+        assert drafter.is_generic_description(name), name
+        assert drafter._named(name) is None, name
+
+
+def test_real_party_names_pass_the_generic_description_guard():
+    """Проверено на себе с обеих сторон: у роли-ОРГАНИЗАЦИИ имя своё
+    («Группа «Астра»», «Группа Циан»), у роли-ЧЕЛОВЕКА — чужое."""
+    import draft as drafter
+    for name in ('«Аптечная сеть 36,6»', 'МКБ', 'Wildberries', 'ООО «Икс Холдинг»',
+                 'Freedom Тимура Турлова', 'Семья бизнесмена Говора',
+                 'Создатели «Ситилинка»', 'Группа «Астра»', 'Группа Циан', 'Холдинг Т1'):
+        assert not drafter.is_generic_description(name), name
+
+
+def test_learning_log_records_every_rejected_hypothesis_with_numbers():
+    """Отвергнутая гипотеза с цифрами ценнее ненаписанного правила: без записи
+    следующий прогон переоткрывает её за токены. Каждая запись обязана нести
+    замер и причину, а не только формулировку."""
+    import learn
+    assert learn.REJECTED and learn.LEARNED
+    for entry in learn.REJECTED + learn.LEARNED:
+        for key in ('date', 'field', 'rule', 'measured', 'result'):
+            assert entry.get(key), (entry.get('rule'), key)
+        assert re.match(r'^\d{4}-\d{2}-\d{2}$', entry['date'])
+    for entry in learn.REJECTED:
+        assert entry.get('why'), entry['rule']
+
+
+def test_post_proofreading_catches_the_case_that_reached_readers():
+    """Вычитка обязана ловить ровно то, что 9 августа ушло в канал четырьмя
+    постами подряд. Проверено на себе: на исправленном тексте — молчит."""
+    import check_post
+    bad = ('<b>МКБ завершил присоединение</b>\n\n'
+           'Предмет: Дальневосточного банка\nПокупатель: МКБ\n\nСтатус: Закрыта')
+    assert any('косвенный падеж' in p for p in check_post.check(bad))
+    good = bad.replace('Дальневосточного банка', 'Дальневосточный банк')
+    assert not check_post.check(good)
+
+
+def test_post_proofreading_does_not_flag_legitimate_subjects():
+    """Правило узкое: множественное число, прилагательное в именительном и
+    доля с процентом — законные значения, их трогать нельзя."""
+    import check_post
+    for value in ('права на СУБД «Персей»', 'производственная база',
+                  'московский фармритейлер «Диалог»', '96% акций Челябинского завода',
+                  'Дальневосточный банк'):
+        post = '<b>Заголовок</b>\n\nПредмет: %s\nПокупатель: МКБ' % value
+        assert not check_post.check(post), (value, check_post.check(post))
+
+
+def test_post_proofreading_catches_placeholders_and_empty_posts():
+    import check_post
+    assert any('undefined' in p for p in
+               check_post.check('<b>X</b>\n\nСтатус: undefined\nСумма: 1 млрд ₽'))
+    assert any('заглушкой' in p for p in
+               check_post.check('<b>X</b>\n\nПредмет: —\nСумма: 1 млрд ₽'))
+    assert any('нечего узнать' in p for p in
+               check_post.check('<b>Просто заголовок</b>\n\nОтрасль: Банки'))
+
+
+def test_send_telegram_proofreads_before_the_dry_run_report():
+    """Задержанный пост должен быть виден В ПЛАНЕ: план читает человек, и
+    первая версия проверки стояла ПОСЛЕ выхода из сухого прогона — то есть в
+    плане её не было видно вовсе."""
+    import inspect
+    import send_telegram
+    src = inspect.getsource(send_telegram.main)
+    proof = src.index('check_post.check')
+    dry_exit = src.index('Сухой прогон с настоящим токеном')
+    assert proof < dry_exit, 'вычитка стоит после выхода из сухого прогона'
+
+
+def test_learning_log_separates_lies_from_silence():
+    """Механика, которая соврала, и механика, которая промолчала, — разные
+    классы: первое уезжает в базу и в канал как факт, второе дочитывается."""
+    import learn, review
+    classes = learn.failure_classes(review.FIXES)
+    assert any(k[1] == 'СОВРАЛА' for k in classes)
+    assert any(k[1] == 'промолчала' for k in classes)
+    lied = sum(v for k, v in classes.items() if k[1] == 'СОВРАЛА')
+    assert lied == sum(1 for f in review.FIXES if f['old'] not in (None, '—', ''))

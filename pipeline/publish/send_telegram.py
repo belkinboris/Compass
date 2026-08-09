@@ -91,6 +91,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 
+import check_post  # noqa: E402
 import format_post  # noqa: E402
 import telegram_endpoint  # noqa: E402
 
@@ -261,8 +262,32 @@ def main(write, ignore_pace=False):
             text = deal.get('post_override') or format_post.render(deal, comps)
             to_send.append((did, text))
 
+    # ВЫЧИТКА ПЕРЕД ОТПРАВКОЙ — ДО отчёта и до выхода из сухого прогона: план
+    # читает человек, и задержанные посты он должен видеть именно в плане.
+    # Пост наследует дефекты карточки и показывает их публично: 9 августа
+    # четыре поста подряд ушли с падежом вместо именительного («Предмет:
+    # Дальневосточного банка»), и заметил это читатель, а не пайплайн.
+    # Проверка механическая (без сети и токенов) и НЕ молчаливая: подозрительный
+    # пост не уходит в канал, а называется в отчёте прогона — дальше его судьбу
+    # решает человек в консоли.
+    flagged = []
+    for did, text in list(to_send):
+        problems = check_post.check(text)
+        if problems:
+            flagged.append((did, problems))
+            to_send = [(d, t) for d, t in to_send if d != did]
+    for did, mid, text in list(to_edit):
+        problems = check_post.check(text)
+        if problems:
+            flagged.append((did, problems))
+            to_edit = [(d, m, t) for d, m, t in to_edit if d != did]
+
     print('Новых постов: %d, правок существующих: %d, без поста по решению: %d'
           % (len(to_send), len(to_edit), len(to_seed)))
+    if flagged:
+        print('Вычитка задержала постов: %d (в канал не уйдут, нужен человек).' % len(flagged))
+        for did, problems in flagged:
+            print('   %s: %s' % (did, '; '.join(problems)))
     if not token or not chat_id:
         print('TELEGRAM_BOT_TOKEN / TELEGRAM_CHANNEL_ID не заданы — не отправляю, только показываю план.')
         for did, text in to_send[:3]:
