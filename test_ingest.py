@@ -1752,15 +1752,26 @@ def test_every_fixed_card_carries_a_reviewed_mark():
                 "reviewed должен быть датой ГГГГ-ММ-ДД: %r" % d["reviewed"]
 
 
-def test_full_text_fetch_skips_already_cached_urls():
+def test_full_text_fetch_skips_already_cached_urls(monkeypatch, tmp_path):
     """Дозабор не качает статью второй раз: повторный прогон promote не должен
     ходить по тем же адресам (лимиты чужих сайтов, время прогона).
 
-    Проверяется без сети: адрес статьи TAdviser уже лежит в кэше
-    data/inbox/raw/*-articles.jsonl, и fetch_and_store обязан пропустить его
-    до любого сетевого запроса.
+    Проверяется без сети и без реального data/inbox/raw — эта папка в git не
+    хранится (.gitignore), значит в свежем контейнере её нет вовсе: тест,
+    полагавшийся на файл в НАСТОЯЩЕМ data/inbox/raw, зелен только в той
+    сессии, где он уже был создан вручную, и красен в любой другой (см. урок
+    CLAUDE.md про сетевую политику одной сессии — родня того же класса
+    ошибки). Кэш строится тут же, во временной директории.
     """
     import fetch_article_texts as articles
+    monkeypatch.setattr(articles, "RAW", str(tmp_path))
+    cache_file = tmp_path / "2026-08-01-articles.jsonl"
+    cache_file.write_text(json.dumps({
+        "url": "https://www.tadviser.ru/a/589723",
+        "title": "проверка кэша",
+        "summary": "текст статьи для проверки кэша" * 10,
+    }, ensure_ascii=False) + "\n", encoding="utf-8")
+
     cached = articles.already_fetched()
     assert "https://www.tadviser.ru/a/589723" in cached, \
         "кэш полных текстов не читается (метод already_fetched)"
