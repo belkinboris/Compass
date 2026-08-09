@@ -789,3 +789,120 @@ def test_company_activity_names_what_it_counts(page, base_url):
                     (11, "сделок"), (21, "сделка"), (22, "сделки"), (25, "сделок")):
         got = page.evaluate("n => plural(n,'сделка','сделки','сделок')", n)
         assert got == word, "plural(%d) = %r, ожидалось %r" % (n, got, word)
+
+
+# ---------- замечания владельца с телефона (9 августа) ----------
+
+def test_header_does_not_jump_while_scrolling(page, base_url):
+    """Строка разделов зафиксирована, а не прячется при прокрутке.
+
+    Раньше на главной шапка уезжала вверх, пока не проскроллено 55% экрана.
+    С телефона это читается как дёрганье: разделы то есть, то нет, и попасть
+    по ним пальцем во время прокрутки нельзя. Владелец: «блоки сверху не
+    должны дёргаться вниз и вверх, они должны быть зафиксированы».
+    """
+    visit(page, base_url, "#/")
+    tops = []
+    for y in (0, 700, 1400, 300, 0):
+        page.evaluate(f"window.scrollTo(0,{y})")
+        page.wait_for_timeout(320)
+        tops.append(page.evaluate(
+            "() => Math.round(document.querySelector('.top').getBoundingClientRect().top)"))
+    assert set(tops) == {0}, f"шапка ездит по вертикали при прокрутке: {tops}"
+
+
+def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
+    """Точки слайдера не ложатся на текст на невысоком экране.
+
+    Точки стоят `position:absolute; bottom:34px` и в поток не входят. В
+    браузере телеграма высота окна около 640px — текст доходил до них, и
+    подпись «сделки с 2022 года, база продолжает пополняться» читалась
+    сквозь кружки (скриншот владельца 9 августа). Проверять надо именно
+    низкий экран: на 844px перекрытия нет, и обычный прогон дефект не видит.
+    """
+    ctx = browser.new_context(viewport={"width": 393, "height": 640})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/", wait_until="networkidle")
+        pg.wait_for_timeout(2200)
+        gap = pg.evaluate("""() => {
+          const inr = document.querySelector('.hs-slide.on .hs-in').getBoundingClientRect();
+          const d = document.querySelector('.hs-dots').getBoundingClientRect();
+          return Math.round(d.top - inr.bottom);
+        }""")
+        assert gap >= 0, f"содержимое героя заходит на точки слайдера ({gap}px)"
+        # И ничего не обрезано на полуслове: приписка на низком экране скрыта целиком.
+        clipped = pg.evaluate("""() => {
+          const s = document.querySelector('.hs-slide.on');
+          const inr = s.querySelector('.hs-in').getBoundingClientRect();
+          return [...s.querySelectorAll('h1,p,.hs-cta')]
+            .filter(n => { const r = n.getBoundingClientRect();
+                           return r.width > 0 && r.bottom > inr.bottom + 1; })
+            .map(n => n.className || n.tagName);
+        }""")
+        assert not clipped, f"обрезано по нижней границе: {clipped}"
+    finally:
+        ctx.close()
+
+
+def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
+    """«Все сделки» на странице компании раскрываются списком, а не окном.
+
+    Модальное окно на компьютере превращалось в узкую коробку посреди
+    широкого экрана («на компьютере выглядит ужасно» — владелец). Заодно
+    уходит риск из CLAUDE.md: диалог живёт вне `#app`, переживает смену
+    экрана и молча перехватывает клики.
+    """
+    visit(page, base_url, "#/companies/yandex")
+    page.wait_for_timeout(600)
+    assert page.evaluate("() => document.getElementById('companyDealsAll').innerHTML.length") == 0
+    page.click("#openCompanyDeals")
+    page.wait_for_timeout(500)
+    state = page.evaluate("""() => ({
+      rows: document.querySelectorAll('#companyDealsAll .deal-list-item').length,
+      modal: !!document.querySelector('.dialog-backdrop'),
+      label: document.getElementById('openCompanyDeals').textContent.trim(),
+    })""")
+    assert not state["modal"], "список всё ещё открывается модальным окном"
+    assert state["rows"] >= 3, f"в раскрытом списке всего {state['rows']} строк"
+    assert "Свернуть" in state["label"]
+    page.click("#openCompanyDeals")
+    page.wait_for_timeout(350)
+    assert page.evaluate("() => document.getElementById('companyDealsAll').innerHTML.length") == 0
+
+
+def test_section_row_starts_from_the_first_item(page, base_url):
+    """Строка разделов не уезжает вбок, пряча начало списка.
+
+    `mark()` центрировал активный пункт — шесть разделов занимают 561px при
+    238px видимых, и на «Консультантах» центрирование прокручивало строку на
+    216px: «Сделки» и «Компании» уходили под логотип. Владелец прислал ровно
+    эти экраны. Теперь прокрутка минимальная — только если пункт не виден.
+    """
+    page.set_viewport_size({"width": 393, "height": 852})
+    try:
+        for hash_ in ("#/", "#/companies"):
+            visit(page, base_url, hash_)
+            page.wait_for_timeout(500)
+            left = page.evaluate("() => Math.round(document.querySelector('.top nav').scrollLeft)")
+            assert left == 0, f"{hash_}: строка разделов прокручена на {left}px"
+        # На дальнем разделе прокрутка допустима, но минимальная — не в конец.
+        visit(page, base_url, "#/advisors")
+        page.wait_for_timeout(500)
+        left = page.evaluate("() => Math.round(document.querySelector('.top nav').scrollLeft)")
+        assert left < 120, f"строка уехала на {left}px ради активного пункта"
+    finally:
+        page.set_viewport_size({"width": 1280, "height": 1000})
+
+
+def test_web_search_failure_does_not_blame_missing_variables(page, base_url):
+    """Сообщение о сбое не называет причину, которой не проверяло.
+
+    Стояло «поиск включится, когда будут заданы YANDEX_API_KEY и
+    YANDEX_FOLDER_ID» — и владелец увидел это при ЗАДАННЫХ переменных
+    (живой /api/ask в тот же день отвечал за 26,7 с). Человек пошёл чинить
+    то, что не сломано. Теперь фронтенд спрашивает /health и говорит правду.
+    """
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    assert "включится, когда в переменных приложения" not in html
+    assert "не ответил вовремя" in html and '"/health"' in html
