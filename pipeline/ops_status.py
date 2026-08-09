@@ -29,6 +29,7 @@
     python3 pipeline/ops_status.py приток --broken "Источники не отвечают"
 """
 import argparse
+import json
 import os
 import re
 import sys
@@ -51,7 +52,49 @@ JARGON = [
     (r'тишин\w+', '«выйдут сами, если не трогать»'),
     (r'\bдрафт\w*|\bпромоут\w*|\bмёрдж\w*|\bbulk\b', 'разработческий жаргон'),
     (r'дочитан\w+\s+карточк', '«дополнили карточку»'),
+    # 9 августа владелец прочитал в консоли «восемь заводских и биржевых
+    # сделок» и «показатели компаний и терминалов» и спросил, что это значит.
+    # Ответа не было: таких категорий у нас нет. Партия из двенадцати
+    # РАЗНОРОДНЫХ карточек (завод, приватизация, фонд, торговый комплекс)
+    # не сводится к одному ярлыку, и попытка свести рождает выдумку.
+    (r'заводск\w+\s+(и\s+\w+\s+)?сделк', 'такого типа сделок у нас нет — назовите компании по именам'),
+    (r'биржев\w+\s+сделк', 'у нас есть «Продажа с торгов», а «биржевых сделок» нет'),
 ]
+
+# ТИПЫ СДЕЛОК, КОТОРЫЕ У НАС ЕСТЬ. Всё остальное перед словом «сделка» —
+# выдуманная категория: см. историю выше.
+DEAL_TYPES = ('m&a', 'инвестиционн', 'инвестиц', 'ipo', 'торг', 'структурн',
+              'финансирован')
+# Слова, которые характеризуют сделку по величине или новизне, а не по типу, —
+# они законны и категории не выдумывают.
+SIZE_WORDS = ('крупн', 'нов', 'стар', 'свеж', 'мелк', 'небольш', 'закрыт',
+              'объявленн', 'несостоявш', 'прошлогодн', 'недавн')
+COUNTED_DEALS = re.compile(
+    r'(?:\d+|дв[ае]|три|четыре|пять|шесть|семь|восемь|девять|десять|'
+    r'одиннадцать|двенадцать)\s+((?:[а-яё]+(?:ых|их|ые|ие)\s+(?:и\s+)?){1,3})'
+    r'(?:сделок|сделки|карточек|карточки)', re.I)
+
+
+def find_invented_category(text):
+    """«Восемь заводских и биржевых сделок» — категория, которой у нас нет.
+
+    Признак узкий НАРОЧНО: ловим только попытку обобщить ПАРТИЮ одним
+    прилагательным («N <каких-то> сделок»), потому что именно она и рождает
+    выдумку — двенадцать разнородных карточек не сводятся к ярлыку. Обычные
+    характеристики величины и новизны («восемь крупных сделок») проходят: они
+    ничего не выдумывают.
+    """
+    m = COUNTED_DEALS.search(str(text or ''))
+    if not m:
+        return None
+    words = [w for w in re.split(r'\s+|\bи\b', m.group(1)) if w.strip()]
+    unknown = [w for w in words
+               if not any(w.lower().startswith(t) for t in DEAL_TYPES + SIZE_WORDS)]
+    if not unknown:
+        return None
+    return ('«%s» — такой категории сделок у нас нет. Партия из разных сделок '
+            'не сводится к одному ярлыку: назовите две-три компании по именам, '
+            'а про остальные скажите «и ещё N».' % m.group(0).strip())
 
 
 def find_jargon(text):
@@ -120,10 +163,63 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, nothing=False)
     return '\n'.join(lines)
 
 
-def render_quality(did='', left=0):
-    """Качество: одна понятная фраза о сделанном плюс сколько осталось."""
+def short_name(title):
+    """Из заголовка сделки — короткое узнаваемое имя для отчёта.
+
+    Берём первое название в кавычках, иначе первые два слова с заглавной,
+    иначе первые три слова. Ничего не сочиняем: имя приходит из базы.
+    """
+    t = re.sub(r'\s+', ' ', str(title or '')).strip()
+    quoted = re.findall(r'[«"]([^»"]{2,40})[»"]', t)
+    if quoted:
+        return '«%s»' % quoted[0]
+    caps = re.findall(r'(?-i:[А-ЯЁA-Z][\w.&-]+)', t)
+    if caps:
+        return ' '.join(caps[:2]) if len(caps) > 1 and len(caps[0]) < 5 else caps[0]
+    return ' '.join(t.split()[:3])
+
+
+def deal_names(ids, base=None):
+    """Заголовки карточек по их id — из базы, а не из головы."""
+    if base is None:
+        path = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+        base = json.load(open(path, encoding='utf-8'))
+    by_id = {d['id']: d for d in base.get('deals', [])}
+    return [short_name(by_id[i].get('title')) for i in ids if i in by_id]
+
+
+def render_quality(did='', left=0, ids=(), facts=0):
+    """Качество: что именно дополнили — ИМЕНАМИ, а не ярлыком партии.
+
+    ПОЧЕМУ ИМЕНАМИ. Пока рутина читала одну карточку за прогон, обобщать было
+    нечего — её называли по имени. С переходом на партии из двенадцати
+    РАЗНОРОДНЫХ сделок фраза «что сделал» стала требовать ярлыка на всех, и
+    ярлык получался выдуманным: «восемь заводских и биржевых сделок»,
+    «показатели компаний и терминалов». Владелец 9 августа спросил, что это
+    значит, — и правильного ответа не было. Теперь скрипт строит первую фразу
+    сам из заголовков карточек, а `did` описывает НАХОДКИ, где обобщение
+    уместно и ничего не выдумывает («независимые оценки экспертов», «кто
+    владел активом до сделки»).
+    """
     lines = ['🔧 <b>Компас · качество</b>', '']
-    lines.append(did.strip() if did and did.strip() else 'Проверили платформу — всё в порядке, чинить нечего.')
+    names = deal_names(ids) if ids else []
+    if names:
+        head = 'Дополнили %d %s: %s' % (
+            len(ids), _plural(len(ids), 'карточку', 'карточки', 'карточек'),
+            ', '.join(names[:3]))
+        if len(names) > 3:
+            head += ' и ещё %d' % (len(names) - 3)
+        if facts:
+            head += '. Перенесли из статей %d %s, %s на сайте не было' % (
+                facts, _plural(facts, 'факт', 'факта', 'фактов'),
+                _plural(facts, 'которого', 'которых', 'которых'))
+        lines.append(head + '.')
+        if did and did.strip():
+            lines.append('')
+            lines.append(did.strip())
+    else:
+        lines.append(did.strip() if did and did.strip()
+                     else 'Проверили платформу — всё в порядке, чинить нечего.')
     if left:
         lines.append('')
         lines.append('📚 Ещё не дополнены по источникам: %d %s'
@@ -174,7 +270,8 @@ def build(args):
         text = render_publish(args.posted, args.edited, args.applied,
                               args.soon, args.held, args.nothing)
         return text, queue_keyboard(args.soon, args.held)
-    return render_quality(args.did, args.left), None
+    ids = [i.strip() for i in args.ids.split(',') if i.strip()]
+    return render_quality(args.did, args.left, ids, args.facts), None
 
 
 def main(argv):
@@ -191,6 +288,10 @@ def main(argv):
     p.add_argument('--nothing', action='store_true')
     p.add_argument('--did', default='')
     p.add_argument('--left', type=int, default=0)
+    p.add_argument('--ids', default='',
+                   help='id карточек партии через запятую — имена скрипт возьмёт из базы')
+    p.add_argument('--facts', type=int, default=0,
+                   help='сколько фактов перенесено из статей')
     p.add_argument('--broken', default='')
     try:
         args = p.parse_args(argv)
@@ -203,6 +304,10 @@ def main(argv):
         print('НЕ ОТПРАВЛЕНО: в тексте внутренний жаргон, партнёр его не поймёт.')
         for word, hint in bad:
             print('   «%s» -> %s' % (word, hint))
+        return 1
+    invented = find_invented_category(args.did) or find_invented_category(args.broken)
+    if invented:
+        print('НЕ ОТПРАВЛЕНО: %s' % invented)
         return 1
 
     text, keyboard = build(args)
@@ -229,6 +334,21 @@ def _self_check():
     assert find_jargon('очередь решений пуста, 6 внутри 24ч тишины')
     # Человеческий текст проходит.
     assert not find_jargon('Дополнили карточку «Родные поля» — перенесли 6 фактов из статьи.')
+    # ВЫДУМАННАЯ КАТЕГОРИЯ ПАРТИИ. Владелец 9 августа прислал два вопроса:
+    # «что значит „восемь заводских и биржевых сделок"» и «что значит
+    # „показатели компаний и терминалов"». Ответа не было — таких категорий у
+    # нас нет; их породила попытка свести двенадцать разнородных карточек к
+    # одному ярлыку.
+    assert find_jargon('Дополнили восемь заводских и биржевых сделок')
+    assert find_invented_category('Дополнили восемь заводских и биржевых сделок')
+    assert find_invented_category('шесть портовых и складских сделок')
+    # А величина и наши настоящие типы сделок — проходят: они ничего не выдумывают.
+    assert not find_invented_category('восемь крупных сделок')
+    assert not find_invented_category('12 инвестиционных сделок')
+    assert not find_invented_category('Дополнили двенадцать карточек')
+    # Имена берутся из базы, а не из головы: короткое имя — из заголовка.
+    assert short_name('«Росхим» может приобрести Восточный нефтехимический терминал') == '«Росхим»'
+    assert short_name('ВЭБ.РФ объявила о приобретении ГТЛК') == 'ВЭБ.РФ'
     # Склонения, ради которых всё и затевалось.
     assert 'карточка' in render_publish(nothing=True, soon=1)
     assert 'карточки' in render_publish(nothing=True, soon=3)
