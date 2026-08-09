@@ -32,6 +32,8 @@ import re
 import sys
 from datetime import datetime, timezone
 
+from casing import to_nominative_asset
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -326,7 +328,15 @@ def guess_parties(title):
             asset, buyer = _split_sale_tail(title[m.end():].strip())
             buyer = _named(buyer)
     cut = lambda s: (s[:100].rstrip(' ,;:-—') if s else None)
-    return cut(buyer), cut(asset), cut(seller)
+    asset = cut(asset)
+    if asset:
+        # Управление глагола ставит предмет не в именительном («купил X» —
+        # винительный, «присоединение X» — родительный): то же согласование,
+        # что уже применяется к именам сторон (name_is_supported в review.py),
+        # только здесь механически, а не как допуск проверки. Правило нарочно
+        # консервативное — см. docstring casing.py, что и почему пропускает.
+        asset, _ = to_nominative_asset(asset)
+    return cut(buyer), asset, cut(seller)
 
 
 def raw_subject(title):

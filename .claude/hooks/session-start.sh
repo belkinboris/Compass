@@ -23,6 +23,9 @@ fi
 cd "${CLAUDE_PROJECT_DIR:-.}"
 python3 -m pip install --quiet --disable-pip-version-check -r requirements.txt
 python3 -m pip install --quiet --disable-pip-version-check pytest playwright
+# pymorphy3 — нормализация падежа предмета сделки (pipeline/ingest/casing.py):
+# нужна только конвейеру притока, на боевом хосте её никто не импортирует.
+python3 -m pip install --quiet --disable-pip-version-check pymorphy3 pymorphy3-dicts-ru
 
 # Браузер предустановлен (PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers), и ставить
 # его правилами репозитория запрещено — здесь только питоновский пакет.

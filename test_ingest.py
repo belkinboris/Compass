@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
 sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
 
+import casing                 # noqa: E402
 import classify              # noqa: E402
 import discover_feeds         # noqa: E402
 import format_post           # noqa: E402
@@ -1819,3 +1820,89 @@ def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, cap
 
 def test_ops_status_main_requires_text():
     assert ops_status.main([]) == 1
+
+
+# ---------- предмет сделки в именительном падеже (casing.py) ----------
+
+def test_asset_case_matches_the_four_examples_owner_reported():
+    """9 августа владелец нашёл падеж в постах канала — ровно эти четыре
+    карточки на скриншотах ('МКБ/Дальневосточный банк', 'Еврострой',
+    'Ситилинк/Lay's', 'Аптечная сеть 36,6/Диалог')."""
+    cases = [
+        ("Дальневосточного банка", "Дальневосточный банк"),
+        ("производственную базу", "производственная база"),
+        ("производителе картошки для чипсов Lay’s",
+         "производитель картошки для чипсов Lay’s"),
+        ("московского фармритейлера «Диалог»",
+         "московский фармритейлер «Диалог»"),
+    ]
+    for old, new in cases:
+        got, changed = casing.to_nominative_asset(old)
+        assert changed and got == new, (old, got)
+
+
+def test_asset_case_leaves_percent_and_number_phrases_alone():
+    """После «%» или числительного дальше идёт управляемый родительный
+    («96% акций», «45% сети», «5 гектаров земли») — это НЕ сказуемое,
+    трогать нельзя. Первая версия правила именно тут дала ложные срабатывания
+    ('45% сети X' -> '45% сеть X')."""
+    for phrase in ("96% акций Челябинского завода металлоконструкций",
+                   "45% сети «Глобус Гурмэ»",
+                   "5 гектаров земли в бывшей промзоне «Свиблово»",
+                   "14% в группе «Полипластик»"):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_never_touches_quoted_names():
+    """Кавычки — граница: имя/бренд внутри «» не переформатируем, даже если
+    голова словосочетания стоит перед ними. 'бывшую лизинговую «дочку»
+    Mercedes-Benz' терял кавычки в первой версии правила."""
+    for phrase in ('бывшую лизинговую «дочку» Mercedes-Benz',
+                   'сети «Здоровый город» в Воронежской области'):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_skips_ambiguous_word_forms():
+    """«права» — одна и та же словоформа для родительного ед. числа («права»
+    закона) и именительного/винительного мн. числа («права» = rights); без
+    контекста предложения смена числа исказила бы смысл ('право' вместо
+    'права'). Тот же класс защиты, что для plural/singular неоднозначности."""
+    for phrase in ('права на СУБД «Персей»', 'права на три гинекологических препарата'):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_skips_capitalized_bare_words():
+    """Слово с заглавной буквы похоже на имя/бренд — pymorphy угадывает
+    падеж бренда наугад ('Рив Гош' -> 'Рив Гоши', 'Квант' -> 'Кванты',
+    'Оней Банк' -> 'Они Банк' были реальными ложными срабатываниями)."""
+    for phrase in ('Рив Гош', 'Квант', 'Оней Банк', 'Синтезе'):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_leaves_dependent_genitive_after_the_head_alone():
+    """Голова словосочетания — ПЕРВОЕ существительное; всё, что после неё
+    (зависимый родительный/предложный оборот), не трогаем. 'Группа компаний
+    X' и 'Магазин приложений X' уже согласованы — голова 'Группа'/'Магазин'
+    стоит в именительном, а 'компаний'/'приложений' — верный родительный."""
+    for phrase in ('Группа компаний «Зельгрос Россия»', 'Магазин приложений RuStore'):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_asset_case_is_a_noop_on_already_nominative_phrases():
+    for phrase in ('здание Рижского вокзала', 'мажоритарная доля в «Еаптеке»',
+                   'торговый комплекс «Среда. Царицыно» на юге Москвы'):
+        got, changed = casing.to_nominative_asset(phrase)
+        assert not changed and got == phrase
+
+
+def test_draft_extraction_normalizes_asset_case():
+    """Правило подключено в draft.py — тот же путь, каким собираются черновики
+    притока, а не только отдельно проверенная функция."""
+    import draft as drafter
+    _, asset, _ = drafter.guess_parties("МКБ завершил присоединение Дальневосточного банка")
+    assert asset == "Дальневосточный банк"
