@@ -67,7 +67,17 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    переключается ровно в тот момент, когда герой уходит из-под шапки, и глаз
    ловит именно этот скачок. Цвет текста внутри тоже ведём переходом, иначе
    подложка растворяется плавно, а буквы меняются мгновенно. */
-.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease),background-color .8s var(--ease),border-bottom-color .8s var(--ease)}
+/* position:fixed + backdrop-filter — известный баг мобильного Safari: во
+   время анимации адресной строки (сворачивается/разворачивается при скролле)
+   WebKit пересчитывает блюр и элемент визуально «прыгает», хотя ни JS, ни
+   CSS его не двигают — сама шапка в коде НИКОГДА не скрывается и не меняет
+   размер (`.hide` больше нигде не выставляется). `will-change` заранее
+   выносит элемент на свой композитный слой, это стандартное обходное
+   решение именно этого артефакта. Проверить на реальном iPhone здесь
+   нечем — headless Chromium не воспроизводит поведение адресной строки
+   Safari, поэтому это по замеру не подтверждено, только по известному
+   классу бага. */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease),background-color .8s var(--ease),border-bottom-color .8s var(--ease);will-change:transform}
 .top .wordmark,.top .wordmark em,.top nav a{transition:color .8s var(--ease)}
 .top.hide{transform:translateY(-100%)}
 /* Пока строка стоит поверх тёмно-зелёного героя, светлая подложка выглядит
@@ -117,6 +127,16 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hero-brand-name{font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:.03em}
 .hero-brand-name em{font-style:normal;color:var(--bronze-light)}
 @media(max-width:720px){
+  /* Стрелки прошлой/следующей карточки — `position:absolute;top:50%`, то есть
+     ровно посередине героя независимо от высоты экрана. На телефоне это
+     садится на кнопку «Смотреть сделки»: владелец 10 августа прислал скриншот,
+     где левая стрелка перекрывает букву «С». Раньше стрелки прятались только
+     при `max-height:700px` (см. ниже) — расчёт был на низкий экран телеграма,
+     а перекрытие с кнопкой не зависит от высоты, оно есть и на обычных
+     852–932px айфонах. На телефоне для смены слайда есть свайп (см.
+     `touchstart`/`touchend` на `.heroslider`) и точки — отдельная кнопка не
+     нужна вовсе, не только на низких экранах. */
+  .hs-arrow{display:none}
   /* justify-content:center душит контент симметрично сверху и снизу, когда
      высота текста (кикер+заголовок+подпись+кнопка) превышает 100svh на
      невысоких телефонах — с центрированием обрезаются И заголовок сверху,
@@ -143,7 +163,6 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 @media(max-width:720px) and (max-height:700px){
   .hs-in p.hero-fine{display:none}
   .hs-cue{display:none}
-  .hs-arrow{display:none}
   .hs-dots{bottom:calc(env(safe-area-inset-bottom,0px) + 34px)}
   .hero-brand{left:20px;top:18px}.hero-brand-name{font-size:18px}.hero-brand-mark{width:31px;height:31px}
 }
@@ -503,7 +522,9 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
      липкая, и каждая лишняя строка — это минус строка графика на телефоне. */
   .an-filters-note{flex:1 1 calc(50% - 5px);min-width:0;margin-left:0;padding-bottom:7px;align-self:flex-end}
 }
-.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:26px;align-items:start}
+/* Тот же минимум-шире-контента, что чинили у .co-grid: 340px не помещается
+   на узких телефонах и уводит графики аналитики вбок. */
+.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:18px;margin-top:26px;align-items:start}
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
 .an-card>.label{display:block;margin-bottom:16px}
 .an-row{display:grid;grid-template-columns:minmax(70px,150px) 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:13.5px}
@@ -736,7 +757,14 @@ a.dp-asset-name:hover{color:var(--accent)}
 .type-tabs button.on{background:var(--accent-deep);color:var(--ivory)}
 
 /* ---------- companies ---------- */
-.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+/* Жёсткий минимум 320px у колонки шире, чем содержимое на узких телефонах:
+   при ширине экрана ≤360px (iPhone SE, а также обычный iPhone с включённым
+   «Крупным текстом» — accessibility-режим уменьшает CSS-viewport) колонка не
+   помещается, и сетка вместе со всей страницей уезжает вбок — карточки
+   компаний становится можно тащить пальцем вправо-влево, хотя выглядит это
+   как один столбец. `min(320px,100%)` держит тот же минимум на широких
+   экранах, но не даёт колонке стать шире, чем есть места. */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
 .co-tag{transition:background .2s,color .2s,border-color .2s;cursor:pointer;position:relative;z-index:2}
 .co-card:hover .co-tag{background:var(--accent-soft);color:var(--accent)}
 .co-tag:hover{background:var(--accent);color:var(--ivory)}
