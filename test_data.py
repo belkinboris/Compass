@@ -32,6 +32,11 @@ def deals(base):
 
 
 @pytest.fixture(scope="module")
+def companies(base):
+    return base["companies"]
+
+
+@pytest.fixture(scope="module")
 def all_company_ids(base):
     """Профили лежат в двух местах: JSON и захардкоженный блок в index.html.
 
@@ -166,6 +171,22 @@ def test_industries_are_from_the_known_list(deals):
     listed = {x.strip() for x in listed if x.strip()}
     unknown = sorted({d["ind"] for d in deals if d.get("ind")} - listed)
     assert not unknown, f"отрасль вне списка INDUSTRIES: {unknown}"
+
+
+def test_company_industries_are_from_the_known_list(companies):
+    """Тот же список INDUSTRIES ещё раз строит фильтр каталога компаний
+    (`<select id="coind">`, `companyRows()` фильтрует строго `c.ind===coInd`)
+    — отрасль вне списка делает профиль ненаходимым НИ ПО ОДНОМУ пункту
+    фильтра отрасли, хотя он остаётся виден без фильтра. До 10 августа этот
+    инвариант проверялся только у сделок; у компаний нашлось четыре профиля
+    вне списка («Металлургия», «Нефтесервис», «Промышленность») — починено
+    `pipeline/fix_company_industries_off_list.py`."""
+    html = INDEX.read_text(encoding="utf-8")
+    listed = set(re.search(r'const INDUSTRIES\s*=\s*\[(.*?)\]', html, re.S).group(1)
+                 .replace('"', '').split(","))
+    listed = {x.strip() for x in listed if x.strip()}
+    unknown = sorted({c["ind"] for c in companies.values() if c.get("ind")} - listed)
+    assert not unknown, f"отрасль профиля вне списка INDUSTRIES: {unknown}"
 
 
 # ---------- соглашения о записи (CLAUDE.md) ----------
