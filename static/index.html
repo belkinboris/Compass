@@ -4585,7 +4585,7 @@ function renderIndustry(ind){
     <div class="an-card reveal">
       <span class="label">Что это за сделки</span>
       ${byType.map(([t,n])=>`<div class="an-row"><span class="an-key">${t}</span><div class="an-bar"><div style="width:${Math.round(n/byType[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      ${note(`Тип известен у ${cards.length} ${plural(cards.length,"сделки","сделок","сделок")} с разбором в отрасли.${notMA?` Из них ${notMA} — не M&amp;A: инвестиционные раунды, IPO и продажи с торгов тоже в базе, потому что это тот же рынок.`:""}`)}
+      ${note(`Тип известен у ${cards.length} ${plural(cards.length,"сделки","сделок","сделок")} отрасли.${notMA?` Из них ${notMA} — не M&amp;A: инвестиционные раунды, IPO и продажи с торгов тоже в базе, потому что это тот же рынок.`:""}`)}
     </div>`:""}
     ${topThemes.length?`
     <div class="an-card reveal">
