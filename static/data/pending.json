@@ -493,7 +493,9 @@
    },
    "pending_since": "2026-08-10T04:01:48+00:00",
    "sum": "$10 млн",
-   "reviewed": "2026-08-10"
+   "reviewed": "2026-08-10",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
