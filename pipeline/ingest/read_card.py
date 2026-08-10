@@ -72,7 +72,14 @@ def cards():
         if not os.path.exists(path):
             continue
         data = json.load(open(path, encoding='utf-8'))
-        for card in (data.get('deals') if isinstance(data, dict) else data) or []:
+        # deals_promoted.json хранит список под ключом 'deals', pending.json —
+        # под 'cards'; разница в схеме молча обнуляла очередь предпросмотра
+        # (data.get('deals') на pending.json всегда возвращал None) — read_card.py
+        # не видел ни одной карточки на модерации, хотя review.py её видит
+        # (там читает pending['cards'] правильно). Найдено 10 августа на
+        # карточке g15386e04: --queue и прямой lookup по id её не показывали.
+        rows = data.get('deals') or data.get('cards') if isinstance(data, dict) else data
+        for card in rows or []:
             if isinstance(card, dict) and card.get('id'):
                 out[card['id']] = (card, where)
     return out

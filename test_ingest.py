@@ -1673,7 +1673,7 @@ def test_raw_console_remembers_the_news_not_the_draft_id(monkeypatch):
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
-    plan, _p, _s, _deferred, _postponed, _foreign = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, _foreign, _unread = send_drafts.build_plan()
     raw_titles = [item.get("title") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
     assert drafts[1]["title"] in raw_titles
     assert drafts[0]["title"] not in raw_titles, \
@@ -1700,10 +1700,42 @@ def test_raw_console_hides_foreign_only_deals(monkeypatch):
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, foreign = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, foreign, _unread = send_drafts.build_plan()
     assert foreign == 1
     assert not [1 for _t, _kb, (kind, _i, _m) in plan if kind == "raw"], \
         "иностранный черновик всё равно попал в план рассылки"
+
+
+def test_console_withholds_unreviewed_cards(monkeypatch):
+    """Непрочитанная карточка не уходит в консоль — ни постом, ни карточкой.
+
+    10 августа `g15386e04` дошла до Telegram без единой правки чтением:
+    заголовок называл «340 миллионов», поле «Сумма» несло механически
+    вырезанные частичные «113 млн ₽» — владелец увидел противоречие раньше
+    любого чтения. Документированный порядок притока («promote → сборка
+    чтением → консоль») зависел от того, что рутина не забудет прочитать
+    карточку перед отправкой, — а это не проверялось нигде в коде. Отметку
+    `reviewed` ставит только `review.py`; гейт здесь делает шаг обязательным
+    механически, а не по памяти рутины.
+    """
+    import promote
+    import send_drafts
+    cards = [
+        {"id": "g-unread", "title": "Непрочитанная карточка",
+         "src": [["Т", "https://t.example/1"]]},
+        {"id": "g-read", "title": "Прочитанная карточка", "reviewed": "2026-08-10",
+         "src": [["Т", "https://t.example/2"]]},
+    ]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts.promote, "load_state",
+                        lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, _p, _s, _deferred, _postponed, _foreign, unread = send_drafts.build_plan()
+    ids_in_plan = {item["id"] for _t, _kb, (kind, item, _m) in plan if kind == "card"}
+    assert "g-unread" not in ids_in_plan, "непрочитанная карточка попала в план консоли"
+    assert "g-read" in ids_in_plan
+    assert unread == 1
 
 
 def test_classifier_rejects_live_console_junk():

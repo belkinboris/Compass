@@ -233,11 +233,25 @@ def build_plan():
     pending = promote.load_pending() if os.path.exists(PENDING) else {'cards': []}
     comps = json.load(open(DATA, encoding='utf-8'))['companies']
     live = site_pending_ids()
-    postponed = 0
+    postponed, unread = 0, 0
     for card in pending['cards']:
         if live is not None and card['id'] not in live \
                 and not (card.get('draft_sent') and card.get('post_draft_sent')):
             postponed += 1
+            continue
+        # НЕПРОЧИТАННАЯ КАРТОЧКА НЕ ПОКАЗЫВАЕТСЯ В КОНСОЛИ ВООБЩЕ — не только
+        # не публикуется молчанием (та защита — в approve.py, `plan_actions`).
+        # 10 августа `g15386e04` дошла до Telegram меньше чем через час после
+        # promote.py, БЕЗ отметки `reviewed`: заголовок нёс «340 миллионов»,
+        # поле «Сумма» — механически вырезанные, частичные «113 млн ₽», и
+        # владелец увидел противоречие раньше любого чтения. Документированный
+        # порядок притока («promote → сборка чтением → консоль») зависит от
+        # того, что рутина реально прочитает карточку ПЕРЕД этим шагом, — а
+        # это прошло незамеченным. Гейт делает шаг обязательным механически:
+        # ни 🗂, ни 📣 не уходят, пока `review.py` не поставил `reviewed`
+        # (правкой или `--mark-read`, если источник и правда беден).
+        if not card.get('reviewed') and not (card.get('draft_sent') or card.get('post_draft_sent')):
+            unread += 1
             continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
@@ -273,14 +287,17 @@ def build_plan():
         fresh_raw.append(d)
     for draft in fresh_raw[:RAW_PER_RUN]:
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
-    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread
 
 
 def main(write=False):
-    plan, pending, state, deferred, postponed, foreign = build_plan()
+    plan, pending, state, deferred, postponed, foreign, unread = build_plan()
     if postponed:
         print('Отложено карточек: %d — сайт ещё не отдаёт их в pending.json.' % postponed)
         print('Сначала закоммитьте и запушьте pending.json, дождитесь деплоя, потом отправка.')
+    if unread:
+        print('Не показано непрочитанных карточек: %d — сначала review.py '
+              '(правкой или --mark-read), потом консоль.' % unread)
     if foreign:
         print('Скрыто как иностранный контур без российского элемента: %d '
               '(решение владельца — не публикуем; лежат в hold-файле).' % foreign)
