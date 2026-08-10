@@ -433,7 +433,13 @@ APPROVING_BODY = re.compile(
     # антимонопольный орган другой страны (Freedom/Bilim Group), тот же
     # класс, что уже принятые UOKiK/Rekabet/CFIUS: список согласующих
     # органов не должен быть только российским.
-    r"|Агентств[а-яё]*\s+по\s+защите\s+и\s+развитию\s+конкуренции", re.I)
+    r"|Агентств[а-яё]*\s+по\s+защите\s+и\s+развитию\s+конкуренции"
+    # Antimonopoly — английский перевод ФАС/«антимонопольн»: у Balchug
+    # Capital/«Радуги» единственный источник, называющий одобрение,—
+    # армянское СМИ по-английски («Approved by the Federal Antimonopoly
+    # Service of the Russian Federation»). Родня уже принятых Minist/OFAC/
+    # CFIUS: список согласующих органов не должен быть только русскоязычным.
+    r"|Antimonopoly", re.I)
 
 
 def test_approval_names_a_body(deals):
