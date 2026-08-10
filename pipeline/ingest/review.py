@@ -501,7 +501,22 @@ def stamp_reviewed(card, day=None):
     return False
 
 
-def main(write=False, mark_read=()):
+def stamp_deep_researched(card, day=None):
+    """Отметка «карточку довели до стандарта января-июня 2026», отдельная от
+    `reviewed`. Владелец 10 августа: не гнаться за числом источников, а
+    исследовать по карточке всё, что вообще есть в интернете, пока не
+    исчерпано честно. Это НЕ синоним `reviewed` — та ставится на ЛЮБУЮ
+    правку, эта только по явному заявлению читающего (`--mark-deep`), потому
+    что «прочитал источник» и «обыскал вопрос со всех сторон» — разная
+    планка, и первое не должно тихо сходить за второе. Идемпотентна, как и
+    `stamp_reviewed`."""
+    if not card.get('deep_researched'):
+        card['deep_researched'] = day or datetime.now(timezone.utc).date().isoformat()
+        return True
+    return False
+
+
+def main(write=False, mark_read=(), mark_deep=()):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
@@ -550,6 +565,17 @@ def main(write=False, mark_read=()):
         else:
             to_mark.append(cid)
 
+    # --mark-deep: явное заявление «эту карточку исследовал по стандарту
+    # 2026 года целиком, а не только сверил одно поле» — отдельная планка от
+    # mark_read, см. stamp_deep_researched.
+    to_mark_deep = []
+    for cid in mark_deep:
+        if cid not in cards:
+            refused.append((dict(id=cid, field='deep_researched'),
+                            ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
+        else:
+            to_mark_deep.append(cid)
+
     print('\nпринято %d, отклонено %d' % (len(ok), len(refused)))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
@@ -587,16 +613,24 @@ def main(write=False, mark_read=()):
         if stamp_reviewed(cards[cid]):
             stamped += 1
 
+    stamped_deep = 0
+    for cid in to_mark_deep:
+        if stamp_deep_researched(cards[cid]):
+            stamped_deep += 1
+
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('ЗАПИСАНО: %d правок, %d отметок прочтения в %s'
-          % (len(ok), stamped, os.path.relpath(DATA, ROOT)))
+    print('ЗАПИСАНО: %d правок, %d отметок прочтения, %d отметок глубокого '
+          'исследования в %s'
+          % (len(ok), stamped, stamped_deep, os.path.relpath(DATA, ROOT)))
     return 0
 
 
 if __name__ == '__main__':
     _args = sys.argv[1:]
-    _ids = [a for a in _args if a not in ('--write', '--mark-read')]
+    _flags = ('--write', '--mark-read', '--mark-deep')
+    _ids = [a for a in _args if a not in _flags]
     sys.exit(main(write='--write' in _args,
-                  mark_read=_ids if '--mark-read' in _args else ()))
+                  mark_read=_ids if '--mark-read' in _args else (),
+                  mark_deep=_ids if '--mark-deep' in _args else ()))

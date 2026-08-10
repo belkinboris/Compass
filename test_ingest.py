@@ -1751,6 +1751,23 @@ def test_reviewed_stamp_is_idempotent():
     assert card["reviewed"] == "2026-08-08", "повторный прогон переписал дату чтения"
 
 
+def test_deep_researched_stamp_is_idempotent_and_separate_from_reviewed():
+    """`deep_researched` — отдельная, более сильная планка, чем `reviewed`.
+
+    Владелец 10 августа: обычного чтения одного источника мало, карточку
+    надо обыскать по стандарту 2026 года. Отметка идемпотентна, как и
+    `reviewed`, и не появляется сама по себе — только по `--mark-deep`.
+    """
+    import review
+    card = {"id": "y"}
+    assert review.stamp_reviewed(card, day="2026-08-10") is True
+    assert "deep_researched" not in card, "reviewed не должен подразумевать deep_researched"
+    assert review.stamp_deep_researched(card, day="2026-08-10") is True
+    assert card["deep_researched"] == "2026-08-10"
+    assert review.stamp_deep_researched(card, day="2026-09-01") is False
+    assert card["deep_researched"] == "2026-08-10", "повторный прогон переписал дату"
+
+
 def test_every_fixed_card_carries_a_reviewed_mark():
     """Карточка, к которой применялась правка чтением, помечена прочитанной.
 
