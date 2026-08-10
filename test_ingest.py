@@ -1384,7 +1384,7 @@ def test_party_rules_are_measured_on_the_base(base):
     comps = base["companies"]
 
     def same(a, b):
-        norm = lambda s: re.sub(r"[«»\"'(),.\s]", "", str(s or "")).lower()
+        norm = lambda s: re.sub(r"[«»\"'’(),.\s]", "", str(s or "")).lower()
         return norm(a) == norm(b) or norm(a) in norm(b) or norm(b) in norm(a)
 
     hit = miss = 0
