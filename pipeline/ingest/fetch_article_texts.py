@@ -137,7 +137,18 @@ def fetch_and_store(targets, write=True):
             'Accept-Language': 'ru-RU,ru;q=0.9,en;q=0.8',
         })
         try:
-            body = urllib.request.urlopen(req, timeout=25).read().decode('utf-8', 'ignore')
+            resp = urllib.request.urlopen(req, timeout=25)
+            raw = resp.read()
+            # Сервер (или его CDN) иногда сжимает ответ gzip'ом, даже когда
+            # запрос не просил Accept-Encoding — так было с printindustry.ru:
+            # `read().decode('utf-8', 'ignore')` без распаковки превращал
+            # тело в мусорные байты, которые проходили проверку длины
+            # (>200 знаков) и оседали в кэше нечитаемыми — цитата из НАСТОЯЩЕЙ
+            # статьи потом не находилась вообще, хотя страница была скачана.
+            if resp.headers.get('Content-Encoding', '').lower() == 'gzip':
+                import gzip as gzip_lib
+                raw = gzip_lib.decompress(raw)
+            body = raw.decode('utf-8', 'ignore')
             text = (telegram_post_text(body, tg[1], tg[2]) if tg else None) or article_text(body)
             if len(text) <= 200:
                 raise ValueError('подозрительно короткий текст (%d знаков)' % len(text))
