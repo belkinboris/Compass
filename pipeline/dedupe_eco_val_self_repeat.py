@@ -44,23 +44,39 @@ FIXES = {
         'приводимая «Ведомостями»; vc.ru указывает диапазон 80–100 млн ₽ со '
         'ссылкой на экспертов; официально сумма не раскрывается)',
     ),
+    'g489b4309-2': (
+        'Оценка рыночной стоимости пакета на момент объявления: 65 млрд руб. '
+        'по данным @dealsma; ~72 млрд руб. по оценке аналитиков Smart-Lab на '
+        'ноябрь 2025 г; ~65–72 млрд ₽ (оценка рыночной стоимости пакета на '
+        'момент объявления: 65 млрд ₽ по данным @dealsma; ~72 млрд ₽ по '
+        'оценке аналитиков Smart-Lab на ноябрь 2025 г.)',
+        '~65–72 млрд ₽ (оценка рыночной стоимости пакета на момент '
+        'объявления: 65 млрд ₽ по данным @dealsma; ~72 млрд ₽ по оценке '
+        'аналитиков Smart-Lab на ноябрь 2025 г.)',
+    ),
 }
 
 
 def main(write=False):
     data = json.load(open(BASE, encoding='utf-8'))
     cards = {d['id']: d for d in data['deals']}
+    todo = {}
     for cid, (old, new) in FIXES.items():
-        card = cards[cid]
-        assert card['eco']['val'] == old, '%s: значение уже другое' % cid
+        current = cards[cid]['eco']['val']
+        if current == new:
+            print('УЖЕ ПРИМЕНЕНО %s' % cid)
+            continue
+        assert current == old, '%s: значение уже другое' % cid
         assert new in old, '%s: новое значение — не часть старого' % cid
+        todo[cid] = new
         print('ПРАВИМ  %s eco.val: снят самоповтор' % cid)
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return
-    for cid, (_old, new) in FIXES.items():
+    for cid, new in todo.items():
         cards[cid]['eco']['val'] = new
-    json.dump(data, open(BASE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    if todo:
+        json.dump(data, open(BASE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print('Записано.')
 
 
