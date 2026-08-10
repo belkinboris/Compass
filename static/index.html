@@ -46,7 +46,17 @@
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+/* Не поймали ни на одной ширине экрана (280–430px) верстку, которая бы сама
+   уезжала вбок, — значит, «карточки можно тащить вправо-влево, а если
+   зумить обратно — перестаёт» это не наша сетка, это родное поведение
+   мобильного Safari: после зума (двойной тап или щипок) увеличенная
+   страница шире экрана, и её можно панорамировать в обе стороны, — так
+   ведёт себя ЛЮБОЙ сайт. Пинч-зум трогать нельзя: это единственный способ
+   увеличить текст для слабовидящих (viewport специально без max-scale/
+   user-scalable=no). Но `touch-action:manipulation` убирает именно ДВОЙНОЙ
+   ТАП как жест зума — самый вероятный случайный триггер при быстрой
+   прокрутке ленты карточек, — не трогая щипок двумя пальцами. */
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
