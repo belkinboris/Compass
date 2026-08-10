@@ -39,6 +39,7 @@ DOMAIN_NAMES = {
     'forbes-ru.turbopages.org': 'Forbes',
     'forbes.kz': 'Forbes Kazakhstan',
     'tass.ru': 'ТАСС',
+    'thebell.io': 'The Bell',
     'iz.ru': 'Известия',
     'rb.ru': 'RB.ru',
     'akm.ru': 'АК&М',
