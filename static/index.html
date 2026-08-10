@@ -3727,14 +3727,19 @@ function renderDeal(id, qs, previewCard){
             ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${assetName}</a>`
                        :`<span class="dp-asset-name">${assetName}</span>`}
             ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
-          </div>` : (sum?`<div class="dp-asset only-sum"><span class="dp-asset-meta num">${sum}</span></div>`:"");
+          </div>` : "";
+        // Раньше сюда, при пустом предмете, подставлялась СУММА сделки —
+        // цена выглядела так, будто это то, что купили («$600 млн» вместо
+        // «золотодобывающие активы»). Владелец нашёл это 10 августа на
+        // карточке Petropavlovsk/УГМК: сумма и так видна в шапке карточки,
+        // здесь честнее показать пустое место, чем подменять предмет ценой.
         return `<div class="deal-plate"><span class="label">Структура сделки</span>
           <div class="dp-flow${asset?"":" no-asset"}">
             ${sellerBox}
             <div class="dp-mid">${asset}</div>
             ${buyerBox}
           </div>
-          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Приобретаемый актив отдельной карточки компании не имеет — см. «Предмет / доля» в линзе «Экономист».</div>`:""}
+          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Подробности о предмете сделки — во вкладке «Экономист», поле «Предмет / доля».</div>`:""}
         </div>`;
       }
 
