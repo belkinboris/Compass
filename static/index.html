@@ -722,6 +722,8 @@ a.dp-asset-name:hover{color:var(--accent)}
 .adv-card .adv-name{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:6px}
 .adv-card .adv-name a:hover{color:var(--accent)}
 .adv-card p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;max-width:600px}
+.adv-src{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12.5px;color:var(--accent)}
+.adv-src:hover{text-decoration:underline}
 .src{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
 .src a{color:var(--accent);font-size:13.5px;display:inline-block;margin:6px 20px 0 0;border-bottom:1px solid transparent;transition:border-color .2s}
 .src a:hover{border-color:var(--accent)}
@@ -1345,6 +1347,29 @@ const advFirmLink = name => {
   if(!text) return "";
   const firm = [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text));
   return firm ? `<a href="#/advisors/${firm.id}">${esc(text)}</a>` : esc(text);
+};
+/* Заметка о консультанте (`law.adv[i][2]`) собиралась притоком с «Источник: …»
+   прямо внутри текста — то как голым URL в конце абзаца, то как служебной
+   меткой метода («Источник: обогащение/веб-поиск»), которая читателю ничего
+   не говорит. Владелец нашёл это на карточке IPO GloraX: под Nextons —
+   голая служебная метка, под VERBA LEGAL — абзац цитаты и следом URL текстом.
+   Здесь метка отделяется от содержания: настоящий адрес источника становится
+   отдельной аккуратной ссылкой, служебная метка без адреса — исчезает
+   («вообще не писать, если сложно найти» — сам источник владелец и просил),
+   а сама заметка не разрастается длиннее пары строк. */
+const ADV_NOTE_LIMIT = 220;
+const advNoteHtml = note => {
+  const raw = String(note || "").trim();
+  if(!raw) return "";
+  const m = raw.match(/^(.*?)\s*Источник:\s*(\S+)\s*$/is);
+  const body = (m ? m[1] : raw).trim();
+  const src = m ? m[2] : "";
+  const srcIsUrl = /^https?:\/\//i.test(src);
+  if(!body && !srcIsUrl) return "";              // голая служебная метка — не факт
+  const shown = body.length > ADV_NOTE_LIMIT
+    ? body.slice(0, ADV_NOTE_LIMIT).replace(/\s+\S*$/, "") + "…" : body;
+  return (shown ? `<p>${esc(shown)}</p>` : "")
+       + (srcIsUrl ? `<a class="adv-src" href="${esc(src)}" target="_blank" rel="noopener">Источник →</a>` : "");
 };
 
 /* ================= РОУТЕР ================= */
@@ -3775,22 +3800,14 @@ function renderDeal(id, qs, previewCard){
         <div class="adv-card">
           <span class="label">${a[0]}</span>
           <div class="adv-name">${advFirmLink(a[1])}</div>
-          ${a[2]?`<p>${a[2]}</p>`:""}
-        </div>`).join("")}
-      ${regPanelHtml(d)}`
-      : lawEmptyHtml(d) + regPanelHtml(d);
+          ${advNoteHtml(a[2])}
+        </div>`).join("")}`
+      : lawEmptyHtml(d);
     else f.innerHTML = `
       ${hero("Сумма", d.sum, true)}
       ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`:""}
       ${dealPlate()}
       ${dealTeam()}
-      ${/* Кнопка только у сделок, где про согласования не сказано ничего: там
-           вопрос «нужен ли ФАС» открыт. Где согласование уже названо, кнопки
-           нет — нажимать «проанализировать» на том, что уже известно, значит
-           тратить время читателя. Сам разбор при этом никуда не девается: он
-           всегда есть в линзе «Юрист». */
-        hasFact(d.law&&d.law.appr) ? "" :
-        `<button class="chip reg-cta" type="button" data-reg-open>Проверить, нужны ли согласования →</button>`}
       ${specBlock([
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
            Иначе одно и то же читается дважды: сначала плашка «Продавец →
@@ -3828,20 +3845,6 @@ function renderDeal(id, qs, previewCard){
     app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x===b));
     paint();
   });
-  /* Кнопка «Проверить, нужны ли согласования» стоит на «Обзоре», а сам разбор
-     живёт в линзе «Юрист» — то есть результат нажатия оказывается вне экрана.
-     Урок из CLAUDE.md: рабочая кнопка, чей эффект не виден, неотличима от
-     сломанной. Поэтому переключаем линзу И прокручиваем к панели. */
-  const goReg = ()=>{
-    lens="law";
-    app.querySelectorAll("[data-l]").forEach(x=>x.classList.toggle("on",x.dataset.l==="law"));
-    paint();
-    requestAnimationFrame(()=>{
-      const panel=document.getElementById("reg-panel");
-      if(panel) panel.scrollIntoView({behavior:"smooth",block:"start"});
-    });
-  };
-  app.querySelectorAll("[data-reg-open]").forEach(b=>b.onclick=goReg);
   mountDealTools(d);
   const fx = document.getElementById("fixdeal");
   if(fx) fx.onclick = ()=>openCorrectionDialog(d);
