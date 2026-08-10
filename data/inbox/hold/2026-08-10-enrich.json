@@ -1,0 +1,106 @@
+{
+ "made": "2026-08-10",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Aptechnaya-set-366-kupila-moskovskogo-farmritejlera-Dialog-87337",
+   "title": "«Аптечная сеть 36,6» купила московского фармритейлера «Диалог»",
+   "verdict": "enrich:ge482f106",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «450–800 млн ₽ (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Bank-MKB-zavershil-prisoedinenie-Dalnevostochnogo-banka-i-rasshiril-svoe-prisutstvie-na-Dalnem-Vostoke-i-v-Sibiri-87313",
+   "title": "Банк МКБ завершил присоединение Дальневосточного банка и расширил свое присутствие на Дальнем Востоке и в Сибири",
+   "verdict": "enrich:g998e5eb5",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/PSB-prodast-kompanii-vladeyuschie-dvumya-TRK-v-Chelyabinske-87293",
+   "title": "ПСБ продаст компании, владеющие двумя ТРК в Челябинске",
+   "verdict": "enrich:gmru-psb-tpk-chelyabinsk",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Родник» и ООО «Управляющая компания «Содействие»» (два »"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/VTB-prodal-moskovskij-otel-Holiday-Inn-v-Sokolnikah-87279",
+   "title": "ВТБ продал московский отель Holiday Inn в Сокольниках",
+   "verdict": "enrich:g35357328",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «8–10 млрд ₽ (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Paevoj-investfond-priobrel-14-v-gruppe-Poliplastik-87271",
+   "title": "Паевой инвестфонд приобрел 14% в группе «Полипластик»",
+   "verdict": "enrich:gmru-prime-pervy-poliplastik",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ЗПИФ «Прайм Первый» (УК «Диалог Инвестиции»)»",
+    "в карточке «14% в группе «Полипластик»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Gruppa-Svoj-kupila-strahovschika-u-Kredit-Evropa-banka-87269",
+   "title": "Группа «Свой» купила страховщика у «Кредит Европа банка»",
+   "verdict": "enrich:gmru-svoj-kredit-evropa-strah",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке ««Кредит Европа лайф» (страховая компания)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267",
+   "title": "Холдинг «Коломенский» приобрел комбинат «Пеко»",
+   "verdict": "enrich:gmru-kolomenskoe-peko",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «800–900 млн ₽ (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/top/2026-08-04_sozdatel_samogo_izvestnogo",
+   "title": "Создатель знаменитого российского Linux купил полсотни разработчиков суверенной СУБД «Персей»",
+   "verdict": "enrich:gfa114edc",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке ««Тантор Лабс»»",
+    "в карточке «права на СУБД «Персей»»"
+   ]
+  },
+  {
+   "news": "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/",
+   "title": "«Арнест» приобретет российский бизнес Reckitt по производству бытовой химии",
+   "verdict": "enrich:gmru-arnest-reckitt",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «завод по выпуску бытовой химии в Клину (бренды Vanish, Air W»"
+   ]
+  },
+  {
+   "news": "https://ura.news/news/1053116488",
+   "title": "На Ямале выставили на продажу дата-центр за 250 млн рублей",
+   "verdict": "enrich:g8f7479bd",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://t.me/dealsma/7276",
+   "title": "«Нейропоток» приобрел производителя замороженной хлебобулочной продукции продукции Frozella Объект сделки 100% долей ООО «Фрозен Бек»— один из крупнейших российских производителей замороженной хлебобу",
+   "verdict": "enrich:g5647e100",
+   "why": "общее название в кавычках и общие слова: 4",
+   "reasons": [
+    "в карточке «производство хлебобулочной продукции под брендом Frozella»"
+   ]
+  }
+ ]
+}

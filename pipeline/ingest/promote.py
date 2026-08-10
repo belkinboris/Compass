@@ -185,7 +185,21 @@ def russian_evidence(draft, names):
         return 'российский маркер в тексте'
     if '₽' in blob:
         return 'сумма в рублях'
-    for name in QUOTED_NAME.findall(title) + CAP_NAME.findall(title):
+    candidates = [(m.group(1), False) for m in QUOTED_NAME.finditer(title)]
+    candidates += [(m.group(1), m.start() == 0) for m in CAP_NAME.finditer(title)]
+    for name, sentence_initial in candidates:
+        # ПЕРВОЕ СЛОВО ЗАГЛАВНОЕ ВСЕГДА — ЭТО КОНВЕНЦИЯ НАЧАЛА ПРЕДЛОЖЕНИЯ, А
+        # НЕ ПРИЗНАК ИМЕНИ. «Новый CEO Berkshire вложил $10 млрд в акции
+        # материнской компании Google», «Хедж-фонд Situational Awareness
+        # после огромных убытков…», «Робототехническая компания основателя
+        # Uber…» — три чисто американские сделки живого потока 10 августа
+        # прошли бы воротами именно по этому признаку: единственная кириллица
+        # там — первое слово заголовка («Новый», «Хедж», «Робототехническая»),
+        # обычное слово, а не имя. Аббревиатуру (ВСЕ ЗАГЛАВНЫЕ, например
+        # «ВТБ») это не касается — она заглавная не по позиции в предложении,
+        # а сама по себе, и остаётся доказательством в начале заголовка тоже.
+        if sentence_initial and not name.isupper():
+            continue
         low = name.lower()
         if (CYRILLIC.search(name) and low not in NOT_RUSSIAN_PLACE
                 and low not in GENERIC_HEAD and low not in NOT_RUSSIAN_PERSON):

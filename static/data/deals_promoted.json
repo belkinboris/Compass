@@ -79506,6 +79506,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8862728"
+    ],
+    [
+     "Сделки M&A (@dealsma)",
+     "https://t.me/dealsma/7276"
     ]
    ],
    "from_ingest": true,
@@ -79536,6 +79540,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8862728"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-06",
+     "title": "Сделка завершена",
+     "note": "«Нейропоток» приобрел производителя замороженной хлебобулочной продукции продукции Frozella Объект сделки 100% долей ООО «Фрозен Бек»— один из крупнейших российских производителей замороженной хлебобулочной продукции под брендом&nbsp;Frozella. Производственная",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7276"
      ]
     }
    ],
@@ -79648,6 +79662,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/589723"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Proizvoditel-displeev-NexTouch-nameren-vykupit-aktivy-bankrotyaschegosya-zavoda-po-proizvodstvu-televizorov-Kvant-87329"
     ]
    ],
    "from_ingest": true,
@@ -79690,7 +79708,19 @@
    "added": "2026-08-06",
    "sum": "1–1,5 млрд ₽ (по оценке)",
    "extra": "Одна из производственных площадок «Кванта» (предприятие имеет мощности в Воронеже и Зеленограде) уже возобновила работу при содействии специалистов NexTouch",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-05",
+     "title": "Переговоры",
+     "note": "«Процедура банкротства не меняет стратегию компании по приобретению производственных мощностей и сохранению профессиональной команды. Работа в этом направлении продолжается»,— сказал представитель NexTouch. В компании добавили, что с учетом значительного колич",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Proizvoditel-displeev-NexTouch-nameren-vykupit-aktivy-bankrotyaschegosya-zavoda-po-proizvodstvu-televizorov-Kvant-87329"
+     ]
+    }
+   ]
   },
   {
    "id": "gac1a0c11",
@@ -80016,7 +80046,19 @@
    "seller": "Александра Лютикова и Айбек Баймахан",
    "asset": "«Интел-руал»",
    "added": "2026-08-08",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-06",
+     "title": "Переговоры",
+     "note": "Книжная сеть «Республика» сменила владельца. Эксперты связывают сделку с кризисом книжной розницы и рассматривают несколько сценариев развития бизнеса.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/knizhnaya-set-respublika-pereshla-pod-kontrol-novogo-sobstvennika/"
+     ]
+    }
+   ]
   },
   {
    "id": "g01e3fd26",

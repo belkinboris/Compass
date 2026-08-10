@@ -129,7 +129,7 @@ def parse_telegram(body, source_id):
     bodies = re.findall(r'<div class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>', text, re.S)
     for i, raw in enumerate(bodies):
         plain = re.sub(r'<[^>]+>', ' ', raw)
-        plain = re.sub(r'\s+', ' ', plain).strip()
+        plain = _unescape(re.sub(r'\s+', ' ', plain)).strip()
         if i < len(out):
             out[i]['title'] = plain[:200]
             out[i]['summary'] = plain[:600]
