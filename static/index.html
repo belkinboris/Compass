@@ -1772,6 +1772,11 @@ function applyFeedParams(qs){
      снять такой фильтр можно плашкой активных фильтров. */
   filterAdvisorGroup = p.get("agroup") || "Все";
   feedQuery = p.get("q") || "";
+  /* Селект «Что показывать» снят с экрана: MINI_DEALS/CHANNEL_DEALS/BULK_DEALS
+     всегда пусты после слияния источников данных (см. CLAUDE.md), а значит в
+     ленте нет ни одной сделки с kind, отличным от "full" — переключатель
+     «Только с разбором» против «Все сделки» показывал бы один и тот же список
+     и был мёртвым выбором. Разбор параметра оставлен для старых ссылок. */
   onlyFull = p.get("full") === "1";
   feedPage = 1;
   // Панель открывается сама, если фильтр не виден в свёрнутом виде: иначе
@@ -2692,9 +2697,6 @@ function renderDeals(){
     <label>Год
       <select id="selyear">${["Все","2026","2025","2024","2023","до 2023"].map(y=>`<option ${y===feedYear?"selected":""}>${y}</option>`).join("")}</select>
     </label>
-    <label>Что показывать
-      <select id="selfmt"><option ${!onlyFull?"selected":""}>Все сделки</option><option ${onlyFull?"selected":""}>Только с разбором</option></select>
-    </label>
     <label>Консультант
       <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
     </label>
@@ -2733,7 +2735,6 @@ function renderDeals(){
   const bindSel = (id, fn) => {const el=document.getElementById(id); if(el) el.onchange=()=>{fn(el.value);feedPage=1;renderFeedList();syncFeedHash();};};
   bindSel("selind", v=>filterInd=v);
   bindSel("selyear", v=>feedYear=v);
-  bindSel("selfmt", v=>onlyFull=(v!=="Все сделки"));
   bindSel("selfirm", v=>filterFirm=v);
   bindSel("seltheme", v=>filterTheme=v);
   const sf = document.getElementById("sharefeed");
