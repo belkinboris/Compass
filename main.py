@@ -1128,13 +1128,21 @@ def _send_queue_batch(chat_id, kind: str) -> int:
                 text += "\n\nПочему не пропустили: %s" % html_escape("; ".join(why)[:200])
             keys = [[{"text": "✅ Это сделка", "callback_data": "mod:%s:take" % ident},
                      {"text": "🗑 Не сделка", "callback_data": "mod:%s:drop" % ident}]]
-        elif kind == "held":
+        else:
+            # У /queue были СВОИ, урезанные до двух кнопки — набор отличался
+            # от исходного сообщения при первом черновике (там всегда четыре:
+            # Опубликовать/Придержать/Изменить/Выкинуть). Логика урезания
+            # («держим только то, что нужно В ЭТОМ состоянии») выглядела
+            # обоснованной для «soon» (зачем публиковать то, что и так выйдет
+            # само?), но реально отнимала действие: владелец 10 августа искал
+            # кнопку «Опубликовать сейчас» в очереди и не нашёл. Теперь везде
+            # одинаковый полный набор, как в исходном сообщении, — карточка
+            # выглядит и работает одинаково независимо от того, пришла она
+            # только что или показана повторно через /queue.
             text = "🗂 [карточка %s]\n\n%s" % (ident, _card_line(item))
             keys = [[{"text": "✅ Опубликовать", "callback_data": "mod:%s:ok" % ident},
-                     {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
-        else:
-            text = "🗂 [карточка %s]\n\n%s" % (ident, _card_line(item))
-            keys = [[{"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident},
+                     {"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident}],
+                    [{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
                      {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
         notification_service.tg_api(
             "sendMessage", chat_id=chat_id, text=text, parse_mode="HTML",

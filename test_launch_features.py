@@ -1004,7 +1004,11 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     buttons = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")]
     assert buttons, "придержанные пришли без единой кнопки"
     data = [b["callback_data"] for row in buttons[0]["inline_keyboard"] for b in row]
-    assert data == ["mod:gh1:ok", "mod:gh1:discard"], data
+    # Полный набор из четырёх — тот же, что в исходном сообщении при первом
+    # черновике (send_drafts.card_keyboard). Раньше /queue урезал до двух
+    # (ok/discard для held, hold/discard для soon) — владелец 10 августа не
+    # нашёл кнопку «Опубликовать» у карточки, которая скоро выйдет сама.
+    assert data == ["mod:gh1:ok", "mod:gh1:hold", "mod:gh1:edit", "mod:gh1:discard"], data
     # Заголовок и факты видны прямо в сообщении — решать можно не открывая сайт.
     card_text = [kw["text"] for _m, kw in sent if "gh1" in kw.get("text", "")][0]
     assert "Придержанная сделка" in card_text and "1 млрд ₽" in card_text
@@ -1013,7 +1017,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     main._send_queue_batch(-100, "soon")
     kb = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")][0]
     data = [b["callback_data"] for row in kb["inline_keyboard"] for b in row]
-    assert data == ["mod:gs1:hold", "mod:gs1:discard"], data
+    assert data == ["mod:gs1:ok", "mod:gs1:hold", "mod:gs1:edit", "mod:gs1:discard"], data
 
 
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
