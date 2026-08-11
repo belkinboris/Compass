@@ -17891,7 +17891,7 @@
    "id": "g3cc2009d",
    "date": "2022-09-07",
    "title": "Продажа российских золотодобывающих активов Petropavlovsk PLC компании УГМК-Инвест в рамках процедуры банкротного администрирования",
-   "buyer": "vginvest",
+   "buyer": "ugmkinvest",
    "target": null,
    "ind": "ГМК и добыча",
    "type": "Продажа с торгов",
@@ -17987,7 +17987,7 @@
    "target_was_seller": true,
    "added": "2026-07-15",
    "reviewed": "2026-08-10",
-   "asset": "золотодобывающие активы Petropavlovsk PLC"
+   "asset": "Золотодобывающие активы Petropavlovsk PLC"
   },
   {
    "id": "gf174262b",
@@ -99666,6 +99666,19 @@
     "Профиль",
     "Автоматический"
    ]
+  },
+  "ugmkinvest": {
+   "name": "УГМК-Инвест",
+   "ind": "ГМК и добыча",
+   "desc": "Структура УГМК, выступившая покупателем в сделке по приобретению золотодобывающих активов Petropavlovsk PLC в 2022 году.",
+   "holding": {
+    "id": "g3a8fb04f",
+    "confidence": "disclosed",
+    "source": [
+     "Интерфакс",
+     "https://www.interfax-russia.ru/far-east/news/ugmk-zakryla-sdelku-po-pokupke-aktivov-petropavlovsk"
+    ]
+   }
   }
  },
  "match_keys": {
