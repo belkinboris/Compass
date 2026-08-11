@@ -41,7 +41,9 @@
    "buyer": "gda7d982b",
    "asset": "51% ИТ-консалтинговой компании BeringPro",
    "seller": "Константин Попов, Александр Зюзюкин, Сергей Ткаченко",
-   "reviewed": "2026-08-10"
+   "reviewed": "2026-08-10",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g57b2c1aa",
@@ -85,7 +87,9 @@
     ]
    },
    "pending_since": "2026-08-10T07:23:18+00:00",
-   "reviewed": "2026-08-11"
+   "reviewed": "2026-08-11",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g0551fc60",
@@ -161,7 +165,9 @@
    "seller": "Фонд «Горизонт»",
    "sum": "4,2 млрд ₽ (по оценке)",
    "reviewed": "2026-08-11",
-   "deep_researched": "2026-08-11"
+   "deep_researched": "2026-08-11",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gda6baa02",
@@ -227,7 +233,9 @@
    },
    "pending_since": "2026-08-11T03:54:12+00:00",
    "reviewed": "2026-08-11",
-   "deep_researched": "2026-08-11"
+   "deep_researched": "2026-08-11",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "ga8597aae",
@@ -285,7 +293,9 @@
    },
    "pending_since": "2026-08-11T03:54:12+00:00",
    "reviewed": "2026-08-11",
-   "deep_researched": "2026-08-11"
+   "deep_researched": "2026-08-11",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g381a95f5",
@@ -362,7 +372,9 @@
    "buyer_name": "Вадим Шамрай",
    "sum": "68 млн ₽",
    "reviewed": "2026-08-11",
-   "deep_researched": "2026-08-11"
+   "deep_researched": "2026-08-11",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
