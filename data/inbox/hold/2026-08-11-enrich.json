@@ -1,0 +1,42 @@
+{
+ "made": "2026-08-11",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Struktura-Insajt-Lizinga-kupila-u-Avtodoma-byvshuyu-dochku-Mercedes-Benz-87347",
+   "title": "Структура «Инсайт Лизинга» купила у «Автодома» бывшую «дочку» Mercedes-Benz",
+   "verdict": "enrich:gab0f3dde",
+   "why": "общее название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке ««Флит Лизинг»»"
+   ]
+  },
+  {
+   "news": "https://www.tadviser.ru/a/961024",
+   "title": "«Нейропоток» купил производителя хлебобулочных изделий и замороженной выпечки Frozella. Сделку оценили в 8 млрд рублей",
+   "verdict": "enrich:g5647e100",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «производство хлебобулочной продукции под брендом Frozella»"
+   ]
+  },
+  {
+   "news": "https://retailer.ru/wildberries-vykupil-ofisnyj-kompleks-u-vtb-v-centre-moskvy-za-11-13-5-mlrd-rublej/",
+   "title": "Wildberries выкупил офисный комплекс у ВТБ в центре Москвы за 11–13,5 млрд рублей",
+   "verdict": "enrich:gd126ba45",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://t.me/dealsma/7282",
+   "title": "«Флит Лизинг» купил бывшую лизинговую «дочку» Mercedes-Benz у «Автодома» Об объекте сделки 100% ООО «МБ РУС Финанс» — лизинговой компании, ранее входившей в российские структуры Mercedes-Benz. Компани",
+   "verdict": "enrich:gab0f3dde",
+   "why": "общее название в кавычках и общие слова: 4",
+   "reasons": [
+    "в карточке «32 млрд ₽»",
+    "в карточке «ООО «МБ РУС Финанс»»"
+   ]
+  }
+ ]
+}

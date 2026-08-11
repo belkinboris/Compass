@@ -1544,6 +1544,57 @@ def test_gate_sees_cards_waiting_in_the_preview_queue(base):
         "повторный прогон заведёт те же карточки заново")
 
 
+def test_gate_remembers_a_card_discarded_by_source_url(capsys):
+    """Выкинутая карточка не должна возвращаться под новым id.
+
+    11 августа draft-файл с прошлого дня (промоут перечитывает ВСЕ файлы
+    партии на каждом прогоне, а старые никто не чистит) принёс тот же
+    черновик, что владелец накануне выкинул («RTP Global/Ahead Health»,
+    тот же адрес t.me/rusven/7641) — карточка получила новый id и снова
+    ушла на решение владельца, хотя решение уже было. Причина: `discard`
+    снимал карточку из pending.json, но не оставлял памяти нигде — та же
+    болезнь, что raw_titles/decided_raw для сырья решают на уровне
+    черновика, а не уже прошедшей ворота карточки. `approve.py` теперь
+    пишет `discarded_urls` при вердикте `discard`, `promote.py` фильтрует
+    по нему ДО проверки на дубль (см. `test_gate_sees_cards_waiting_in_the_preview_queue`
+    для дублей внутри одного прогона — это соседний, но другой случай:
+    там очередь ещё жива, здесь она уже опустела)."""
+    import promote
+    marker_title = "«Ромашка-Тест» снова инвестировала в стартап Виджет"
+    draft = {
+        "title": marker_title,
+        "date": "2026-08-05", "type": "Инвестиция", "ind": "ИТ и интернет",
+        "buyer_name": "«Ромашка-Тест»", "asset": "стартап Виджет",
+        "src": [["tg:test", "https://t.me/test-channel/999"]],
+    }
+    with tempfile.TemporaryDirectory() as tmp:
+        drafts_dir = Path(tmp) / "drafts"
+        drafts_dir.mkdir()
+        (drafts_dir / "2026-08-05.json").write_text(
+            json.dumps({"drafts": [draft]}, ensure_ascii=False), encoding="utf-8")
+        pending_file = Path(tmp) / "pending.json"
+        pending_file.write_text(json.dumps({"cards": []}, ensure_ascii=False),
+                                encoding="utf-8")
+        state_file = Path(tmp) / "moderation_state.json"
+        state_file.write_text(json.dumps({
+            "decided_raw": {}, "sent_raw": [], "raw_titles": {},
+            "discarded_urls": {"https://t.me/test-channel/999":
+                                {"id": "gold1", "title": "старое решение"}},
+        }, ensure_ascii=False), encoding="utf-8")
+        old = (promote.DRAFTS, promote.PENDING, promote.STATE)
+        try:
+            promote.DRAFTS, promote.PENDING, promote.STATE = (
+                str(drafts_dir), str(pending_file), str(state_file))
+            promote.main(write=False)
+        finally:
+            promote.DRAFTS, promote.PENDING, promote.STATE = old
+    out = capsys.readouterr().out
+    assert "Черновиков: 0" in out, (
+        "черновик с адресом уже выкинутой карточки не отфильтрован до счёта: %s" % out)
+    assert marker_title not in out, (
+        "черновик с адресом уже выкинутой карточки прошёл ворота повторно: %s" % out)
+
+
 def test_gate_holds_a_deal_with_no_russian_connection(base):
     """Платформа — про российский рынок, и поток приносит чужие сделки.
 

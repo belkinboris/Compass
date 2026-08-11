@@ -73321,14 +73321,18 @@
   {
    "id": "gmru-vtb-otkrytie-office-rwb",
    "date": "2026-06-30",
-   "title": "RWB покупает бывший офис банка «Открытие» у ВТБ",
+   "title": "RWB купила бывший офис банка «Открытие» у ВТБ Об объекте сделки Офисный комплекс площадью 24,4 тыс. кв. м в составе БЦ класса А Vivaldi Plaza (Летниковская ул., 2, Москва), рядом с Павелецким вокзалом",
    "ind": "Недвижимость",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "mergers.ru",
      "https://mergers.ru/news/VTB-k-koncu-iyunya-prodast-byvshij-ofis-banka-Otkrytie-87123"
+    ],
+    [
+     "Сделки M&A (@dealsma)",
+     "https://t.me/dealsma/7290"
     ]
    ],
    "from_ingest": true,
@@ -73352,7 +73356,20 @@
     "terms": "—"
    },
    "added": "2026-07-31",
-   "reviewed": "2026-08-09"
+   "reviewed": "2026-08-09",
+   "sum": "13,5 млрд ₽",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-10",
+     "title": "Сделка завершена",
+     "note": "RWB купила бывший офис банка «Открытие» у ВТБ Об объекте сделки Офисный комплекс площадью 24,4 тыс. кв. м в составе БЦ класса А Vivaldi Plaza (Летниковская ул., 2, Москва), рядом с Павелецким вокзалом. Построен в 2011 году. До интеграции банка «Открытие» в ВТБ",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7290"
+     ]
+    }
+   ]
   },
   {
    "id": "gmru-sutochno-onetwotrip",
@@ -81189,6 +81206,10 @@
     [
      "Сделки M&A (@dealsma)",
      "https://t.me/dealsma/7276"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/961024"
     ]
    ],
    "from_ingest": true,
@@ -81229,6 +81250,16 @@
      "source": [
       "tg:dealsma",
       "https://t.me/dealsma/7276"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-10",
+     "title": "Сделка завершена",
+     "note": "История 2026: «Нейропоток» купил Frozella. Сделку оценили в 8 млрд рублей 31 июля 2026 года компания «Компания:Нейропоток», связанная с Новой инвестиционной группой, приобрела производителя хлебобулочных изделий и замороженной выпечки, работающего под брендом",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/961024"
      ]
     }
    ],
@@ -81702,6 +81733,10 @@
     [
      "mergers.ru",
      "https://mergers.ru/news/Knizhnaya-set-Respublika-smenila-vladelcev-87339"
+    ],
+    [
+     "Сделки M&A (@dealsma)",
+     "https://t.me/dealsma/7283"
     ]
    ],
    "from_ingest": true,
@@ -82155,6 +82190,14 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8864724"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Struktura-Insajt-Lizinga-kupila-u-Avtodoma-byvshuyu-dochku-Mercedes-Benz-87347"
+    ],
+    [
+     "Сделки M&A (@dealsma)",
+     "https://t.me/dealsma/7282"
     ]
    ],
    "from_ingest": true,
@@ -82185,6 +82228,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8864724"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-10",
+     "title": "Сделка завершена",
+     "note": "«Флит Лизинг» (часть группы «Инсайт Лизинг») приобрел у автомобильного холдинга «Автодом» 100% долей «МБ РУС Финанс», ранее входившего в дочерние структуры концерна Mercedes-Benz в России. Сумму сделки в компании не раскрывают, однако уточняют, что после ее за",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Struktura-Insajt-Lizinga-kupila-u-Avtodoma-byvshuyu-dochku-Mercedes-Benz-87347"
      ]
     }
    ],

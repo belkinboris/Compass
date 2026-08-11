@@ -213,6 +213,20 @@ def main(write=False):
     # покажет этот draft_id.
     import promote
     state = promote.load_state()
+    # «ВЫКИНУТЬ» — ТОЖЕ РЕШЕНИЕ, КОТОРОЕ НЕЛЬЗЯ ЗАБЫВАТЬ. Черновик, из
+    # которого выросла выкинутая карточка, остаётся лежать в старом файле
+    # data/inbox/drafts/<дата>.json (его никто не чистит), и promote.py
+    # перечитывает ВСЕ файлы партии на каждом прогоне — без этой записи
+    # тот же адрес источника завтра снова пройдёт ворота под новым id и
+    # приедет владельцу тем же вопросом, который он уже закрыл. Тот же
+    # класс памяти, что raw_titles/decided_raw для сырья, только для
+    # решения на уровне уже прошедшей ворота карточки.
+    for card, _why in discard:
+        for s in card.get('src') or []:
+            if len(s) > 1 and str(s[1]).startswith('http'):
+                state.setdefault('discarded_urls', {})[str(s[1])] = {
+                    'id': card['id'], 'title': card.get('title'),
+                    'at': now.isoformat(timespec='seconds')}
     raw_all = []
     if os.path.isdir(os.path.join(ROOT, 'data', 'inbox', 'hold')):
         hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')

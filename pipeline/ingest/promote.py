@@ -470,8 +470,17 @@ def main(write):
     # уже было. raw_titles — общая память с send_drafts.py, только verdict
     # 'drop' здесь и означает «не пускать», остальные (take/sent) — не повод.
     rejected_titles = {k for k, v in state.get('raw_titles', {}).items() if v == 'drop'}
+    # ТА ЖЕ БОЛЕЗНЬ, НО НА УРОВНЕ УЖЕ ПРОШЕДШЕЙ ВОРОТА КАРТОЧКИ. Решение
+    # «Выкинуть» в консоли снимает карточку из pending.json — но не оставляет
+    # следа, что решение уже было: 11 августа draft-файл с прошлого дня (его
+    # никто не чистит) принёс тот же черновик (RTP Global/Ahead Health, тот
+    # же адрес t.me/rusven/7641) заново, и он получил бы НОВЫЙ id и снова
+    # пошёл на решение владельца — тот же вопрос, который он уже закрыл
+    # сутками раньше. discarded_urls пишет approve.py при вердикте discard.
+    discarded_urls = set(state.get('discarded_urls', {}))
     drafts = [d for d in drafts if str(d.get('draft_id')) not in decided
-             and raw_key(d.get('title')) not in rejected_titles]
+             and raw_key(d.get('title')) not in rejected_titles
+             and not any(str(s[1]) in discarded_urls for s in (d.get('src') or []) if len(s) > 1)]
 
     passed, refused, held = [], [], []
     admitted, batch_names, held_names = [], [], []
