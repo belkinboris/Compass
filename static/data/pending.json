@@ -1,16 +1,16 @@
 {
  "cards": [
   {
-   "id": "g8e30b9a8",
-   "date": "2026-08-12",
-   "title": "Башкирия продаст «Роснефти» оставшуюся часть своего пакета акций «Башнефти»",
+   "id": "g8422d5c1",
+   "date": "2026-08-10",
+   "title": "Структура Fonte Capital из Казахстана приобрела 18% акций \"Самолета\" у наследников Михаила Кенина",
    "ind": "Не определена",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
-     "Ведомости",
-     "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
+     "Mergers.ru",
+     "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
     ]
    ],
    "from_ingest": true,
@@ -20,143 +20,8 @@
     "val": "—",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "«Первый пакет акций мы же продали «Роснефти», вот сейчас мы продолжаем и планируем оставшуюся часть ей продать», – заявил он (цитата по ТАСС). Хабиров пояснил, что после продажи первого пакета республика утратила контроль над предприятием, поэтому оставшиеся акции потеряли смысл. Вырученные средства позволят региону закрыть текущие обязательства и запустить новые проекты.",
-    "context": "В начале июня премьер-министр республики Андрей Назаров сообщил \"Интерфаксу\", что Башкирия продала часть принадлежащего ей пакета \"Башнефти\" при условии обратного выкупа, \"когда у республики появится такая возможность\". Покупателем выступила \"Роснефть\". Стоимость проданного пакета НК составила 14,8 млрд рублей, уточняла и.о. министра финансов республики Светлана Малинская.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "До середины 2026 года Башкирия владела блокирующим пакетом в 25%+1 акция (44,4 млн акций \"Башнефти\": 38,1 млн обыкновенных и 6,3 млн привилегированных). Контрольный пакет акций \"Башнефти\" (57,66% уставного капитала) принадлежал ПАО \"НК \"Роснефть\". Еще 4,41% было у ООО \"Башнефть-Инвест\".",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Башкирия",
-   "asset": "«Башнефть»",
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "«Башнефть»",
-      "field": "asset",
-      "method": "human_review",
-      "url": "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Башкирия",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
-     }
-    ],
-    "buyer": [
-     {
-      "value": "Роснефть",
-      "field": "buyer_name",
-      "method": "human_review",
-      "url": "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
-     }
-    ]
-   },
-   "pending_since": "2026-08-14T04:02:06+00:00",
-   "buyer_name": "Роснефть",
-   "reviewed": "2026-08-14",
-   "deep_researched": "2026-08-14",
-   "draft_sent": true,
-   "post_draft_sent": true
-  },
-  {
-   "id": "g63c7d1bb",
-   "date": "2026-08-12",
-   "title": "«Росспиртпром» купил производителя спирта «Амбер Талвис» за 1,94 млрд рублей",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "TAdviser",
-     "https://www.tadviser.ru/a/813709"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "В 2025 г. выручка предприятия выросла на 22,8% до 2,5 млрд руб., прибыль от продаж – на 44,8% до 835,5 млн руб., а чистая прибыль – почти в 5 раз до 869,5 млн руб., по данным «СПАРК-Интерфакса».",
-    "fin": "—",
-    "rationale": "По его мнению, рассматривать покупку «Амбер Талвиса» как отдельную сделку уже не совсем корректно: компания формирует вертикально интегрированную алкогольную группу, объединяющую производство спирта, готового алкоголя и бренды. До консолидации «Амбер Талвиса» «Росспиртпром» уже занимал лидирующие позиции на российском рынке пищевого спирта, добавляет Аникин. После включения в состав компании «Татспиртпрома» доля группы, по мнению эксперта, составила 40–45%. «Амбер Талвис» принесет ей еще 5 п. п.",
-    "context": "По данным Rusprofile, АО «Росспиртпром» было учреждено в январе 2009 года и зарегистрировано в Республике Татарстан. Уставный капитал предприятия составляет 6,9 млрд руб. Генеральным директором выступает Андрей Дронов. Единственным учредителем компании является московское ООО «Бизнес-Альянс».",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "На этот раз продажа проходит посредством публичного предложения в электронной форме. Первые торги, которые не состоялись из-за отсутствия участников, предполагалось провести в форме электронного аукциона. Производственная площадка акционерного общества располагается в рабочем посёлке Новая Ляда под Тамбовом. На торги выставлено 62 486 акций предприятия или 72,87% от их общего количества. Начальная цена доли в акционерном обществе – 3,9 миллиарда рублей, цена отсечения в два раза меньше – 1,9 миллиарда рублей. Размер задатка – 777,5 миллиона, шаг понижения – 388,8 миллиона рублей. Заявки на участие в аукционе принимаются с 10 июля по 5 августа. Электронные торги пройдут на площадке Росэлторг 10 августа.",
-    "appr": "План приватизации утвердил кабмин, передают ТАСС и «РИА Новости». В план приватизации на 2026-2028 годы включены 72,9% «Амбер Талвис» и 69,4% «СПИ-РВВК».",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "1,94 млрд ₽",
-   "buyer_name": "«Росспиртпром»",
-   "asset": "производитель спирта «Амбер Талвис»",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-12",
-     "title": "Сделка завершена",
-     "note": "История 2026: «Росспиртпром» купил «Амбер Талвис» за 1,94 млрд рублей В середине августа 2026 года стало известно о том, что крупнейший производитель спирта в России «Компания:Росспиртпром ФГУП» приобрел мажоритарную долю в тамбовском предприятии «Амбер Талвис",
-     "source": [
-      "TAdviser",
-      "https://www.tadviser.ru/a/813709"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Росспиртпром»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.tadviser.ru/a/813709"
-     }
-    ],
-    "target": [
-     {
-      "value": "производитель спирта «Амбер Талвис»",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.tadviser.ru/a/813709"
-     }
-    ]
-   },
-   "pending_since": "2026-08-14T04:02:06+00:00",
-   "reviewed": "2026-08-14",
-   "deep_researched": "2026-08-14",
-   "draft_sent": true,
-   "post_draft_sent": true
-  },
-  {
-   "id": "gcaa03820",
-   "date": "2026-08-12",
-   "title": "ПСБ купил 16,9% акций российского производителя электромобилей «Атом»",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7661"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "«Атом» только запускает продажи, поэтому на начальном этапе поступление денежных средств от реализации автомобилей может оказаться ограниченным, отмечает аналитик «Эйлер Аналитические технологии» Владимир Беспалов. Продажа пакета акций, считает эксперт, позволит финансировать деятельность за счет акционерного капитала без увеличения долговой нагрузки, что должно способствовать снижению кредитных рисков. Кроме того, привлечение системно значимого банка в качестве партнера должно положительно сказаться и на реализации проекта в дальнейшем, добавляет он.",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "«Вход ПСБ в капитал «Атома», с одной стороны, — стратегическая инвестиция, цель которой стимулировать и развивать электромобильность на всех этапах производственной цепочки. С другой стороны, мы делаем ставку на проект и на его ключевых стратегов — КамАЗ и \"Росатом\", опыт и компетенция которых, наряду с менеджментом компании, по нашему мнению, обеспечат достижение планируемого финансового результата проекта с целью вывода его на IPO и дальнейшее развитие проекта уже в публичном статусе», — говорит он.",
-    "context": "О том, что «Кама» активно ищет инвесторов в свой проект, для чего выпустила новые акции, стало известно в 2024 году: подробности об этом \"Ъ\" обнаружил в решении Арбитражного суда Татарстана по иску миноритарного акционера «Камы» Сергея Васина, который оспаривал дополнительную эмиссию. Речь шла о размещении 547,9 тыс. акций по 36,5 тыс. руб. за штуку. В числе потенциальных покупателей бумаг назывались КамАЗ, структуры «Росатома», «Ренова», «Татнефть», РФПИ, Газпромбанк и т. д. Источник \"Ъ\" рассказывал, что из «Камы» приходили с предложением о покупке акций к разным участникам рынка. Вероятно, покупка ПСБ акций компании совершалась в рамках именно этого размещения: по информации на сайте ЦБ, последний на сегодня дополнительный выпуск акций «Кама» зарегистрирован в конце 2023 года. Но параметры сделки неизвестны.",
+    "rationale": "—",
+    "context": "—",
     "finadv": "—"
    },
    "law": {
@@ -165,56 +30,51 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "9,9 млрд ₽",
-   "buyer_name": "ПСБ",
-   "asset": "российский производитель электромобилей “Атом” [АО “Кама”]",
+   "buyer_name": "Fonte Capital из Казахстана",
+   "asset": "\"Самолета\"",
    "events": [
     {
      "kind": "closed",
-     "date": "2026-08-12",
+     "date": "2026-08-10",
      "title": "Сделка завершена",
-     "note": "#газеты ПСБ купил 16,9% акций российского производителя электромобилей “Атом” [АО “Кама”] за 9,9 млрд рублей. Директор департамента инвестиционных и сложных финансовых сделок ПСБ Никита Душкин рассказал, что пакет выкуплен в рамках дополнительной эмиссии за де",
+     "note": "30 июля 2026 года Фонд «Горизонт», представляющий интересы наследников сооснователя ГК \"Самолет\" Михаила Кенина, совершил сделку по продаже пакета порядка 18% обыкновенных голосующих акций. Покупателем выступила Fonte Inceptia Alpha Fund OEIC Limited – частная",
      "source": [
-      "tg:rusven",
-      "https://t.me/rusven/7661"
+      "Mergers.ru",
+      "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      ]
     }
    ],
    "party_evidence": {
     "buyer": [
      {
-      "value": "ПСБ",
+      "value": "Fonte Capital из Казахстана",
       "field": "buyer_name",
-      "method": "human_review",
-      "url": "https://t.me/rusven/7661"
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      }
     ],
     "target": [
      {
-      "value": "российский производитель электромобилей “Атом” [АО “Кама”]",
+      "value": "\"Самолета\"",
       "field": "asset",
       "method": "explicit_news_title",
-      "url": "https://t.me/rusven/7661"
+      "url": "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      }
     ]
    },
-   "pending_since": "2026-08-14T04:02:06+00:00",
-   "reviewed": "2026-08-14",
-   "deep_researched": "2026-08-14",
-   "draft_sent": true,
-   "post_draft_sent": true
+   "pending_since": "2026-08-14T07:51:35+00:00"
   },
   {
-   "id": "gca4bf7d8",
-   "date": "2026-08-12",
-   "title": "Американский логистический стартап Fura, основанный россиянами, приобрел американскую компанию High Rise Logistics",
+   "id": "gb987ae9e",
+   "date": "2026-08-10",
+   "title": "Структура Fonte Capital из Казахстана приобрела 18% акций \"Самолета\" у наследников Михаила Кенина",
    "ind": "Не определена",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7663"
+     "Mergers.ru",
+     "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
     ]
    ],
    "from_ingest": true,
@@ -224,53 +84,49 @@
     "val": "—",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "\"Fura is rolling up freight brokers and layering tech and automation into their operations to magnify scale. “What we’re doing has never been done in logistics — we’re buying great businesses and transforming them at a speed this industry has never seen,” said Jeff Dangelo, co-founder and CEO of Fura. “High Rise is a perfect fit for our roll-up: great customers, a great team, and exactly the kind of business that gets supercharged the moment you put our technology behind it.”\"",
-    "context": "Vancouver, Washington–based High Rise provides flatbed, expedited, truckload and less-than-truckload transportation. It has a large presence in the Pacific Northwest and also offers intermodal, drayage and warehousing services.",
+    "rationale": "—",
+    "context": "—",
     "finadv": "—"
    },
    "law": {
-    "struct": "High Rise’s leadership team will continue to manage daily operations, but will now have access to Fura’s tech platform, which provides AI-powered bidding, carrier-sales functions and shipment visibility.",
+    "struct": "—",
     "appr": "—",
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Fura",
-   "asset": "High Rise Logistics",
+   "buyer_name": "Fonte Capital из Казахстана",
+   "asset": "\"Самолета\"",
    "events": [
     {
      "kind": "closed",
-     "date": "2026-08-12",
+     "date": "2026-08-10",
      "title": "Сделка завершена",
-     "note": "Американский логистический стартап Fura , основанный россиянами, приобрел американскую компанию High Rise Logistics, которая специализируется на грузовых перевозках. Сумма сделки не сообщается. Fura была основана в 2017 году Филиппом Муравьевым [ранее Газманов",
+     "note": "30 июля 2026 года Фонд «Горизонт», представляющий интересы наследников сооснователя ГК \"Самолет\" Михаила Кенина, совершил сделку по продаже пакета порядка 18% обыкновенных голосующих акций. Покупателем выступила Fonte Inceptia Alpha Fund OEIC Limited – частная",
      "source": [
-      "tg:rusven",
-      "https://t.me/rusven/7663"
+      "Mergers.ru",
+      "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      ]
     }
    ],
    "party_evidence": {
     "buyer": [
      {
-      "value": "Fura",
+      "value": "Fonte Capital из Казахстана",
       "field": "buyer_name",
-      "method": "human_review",
-      "url": "https://t.me/rusven/7663"
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      }
     ],
     "target": [
      {
-      "value": "High Rise Logistics",
+      "value": "\"Самолета\"",
       "field": "asset",
-      "method": "human_review",
-      "url": "https://t.me/rusven/7663"
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Struktura-Fonte-Capital-iz-Kazahstana-priobrela-18-akcij-Samoleta-u-naslednikov-Mihaila-Kenina-87349"
      }
     ]
    },
-   "pending_since": "2026-08-14T04:02:06+00:00",
-   "reviewed": "2026-08-14",
-   "deep_researched": "2026-08-14",
-   "draft_sent": true,
-   "post_draft_sent": true
+   "pending_since": "2026-08-14T07:51:35+00:00"
   }
  ]
 }

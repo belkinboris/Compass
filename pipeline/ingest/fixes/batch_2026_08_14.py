@@ -39,11 +39,12 @@
     слова о связи этой сделки (или самой High Rise Logistics) с российским
     рынком — устаревший профиль CB Insights, до сих пор указывающий Москву
     штаб-квартирой Fura, единственное, что упоминает Россию, и это не факт
-    из статьи о сделке. Карточка оставлена как есть (гейт признал юридическое
-    основание — упоминание российского происхождения основателей, — и это тот
-    же класс, что уже пропущенные «Freedom Тимура Турлова» кейсы), но решение
-    о её судьбе — за владельцем: связи с российским рынком у самой сделки при
-    честном поиске не нашлось.
+    из статьи о сделке. Карточка прочитана и дополнена здесь, но 14 августа
+    выкинута решением владельца в консоли — ровно по той причине, которую
+    предвидел поиск (связи с российским рынком у самой сделки не нашлось).
+    Записи `FIXES` по ней сняты вместе с карточкой
+    (`test_review_table_is_applied_and_not_pending` не даёт держать правку
+    без карточки, которую она правит).
 """
 
 FIXES = [
@@ -317,94 +318,4 @@ FIXES = [
          why='предыстория допэмиссии, ради которой продавались акции, и '
              'честное признание источника, что точные параметры сделки '
              'неизвестны — линза «Контекст» стояла пустой заглушкой.'),
-
-    # ---------------------------------------------------------------
-    # gca4bf7d8 — Fura приобрела High Rise Logistics
-    # ---------------------------------------------------------------
-    dict(id='gca4bf7d8', field='title',
-         old='Американский логистический стартап Fura , основанный '
-             'россиянами, приобрел американскую компанию High Rise '
-             'Logistics, которая специализируется на грузовых '
-             'перевозках. Сумма сделки не сообщается. Fura б',
-         new='Американский логистический стартап Fura, основанный '
-             'россиянами, приобрел американскую компанию High Rise '
-             'Logistics',
-         quote='Американский логистический стартап Fura , основанный '
-               'россиянами, приобрел американскую компанию High Rise '
-               'Logistics, которая специализируется на грузовых '
-               'перевозках.',
-         why='заголовок оборвался на середине следующего предложения '
-             '(«Fura б[ыла основана в 2017 году...]») — тот же класс '
-             'дефекта, что и у карточки ПСБ/«Кама» этой же партии: '
-             'посты канала rusven режутся по знакам без учёта границы '
-             'предложения.'),
-    dict(id='gca4bf7d8', field='buyer_name',
-         old='Американский логистический стартап Fura , основанный '
-             'россиянами', new='Fura',
-         quote='Американский логистический стартап Fura , основанный '
-               'россиянами, приобрел американскую компанию High Rise '
-               'Logistics',
-         why='в поле стояло описание роли и происхождения, а не имя — '
-             'источник называет компанию прямо.'),
-    dict(id='gca4bf7d8', field='asset',
-         old='американская компания High Rise Logistics, которая '
-             'специализируется на грузовых перевозках. Сумма сд',
-         new='High Rise Logistics',
-         quote='приобрел американскую компанию High Rise Logistics, '
-               'которая специализируется на грузовых перевозках',
-         why='поле обрывалось на середине следующего предложения '
-             '(«Сумма сд[елки не сообщается]») — источник называет '
-             'предмет сделки прямо, без обрыва.'),
-    dict(id='gca4bf7d8', field='eco.rationale', old='—',
-         new='"Fura is rolling up freight brokers and layering tech and '
-             'automation into their operations to magnify scale. '
-             '“What we’re doing has never been done in '
-             'logistics — we’re buying great businesses and '
-             'transforming them at a speed this industry has never '
-             'seen,” said Jeff Dangelo, co-founder and CEO of '
-             'Fura. “High Rise is a perfect fit for our roll-up: '
-             'great customers, a great team, and exactly the kind of '
-             'business that gets supercharged the moment you put our '
-             'technology behind it.”"',
-         quote='Fura is rolling up freight brokers and layering tech and '
-               'automation into their operations to magnify scale. '
-               '“What we’re doing has never been done in '
-               'logistics — we’re buying great businesses and '
-               'transforming them at a speed this industry has never '
-               'seen,” said Jeff Dangelo, co-founder and CEO of '
-               'Fura. “High Rise is a perfect fit for our roll-up: '
-               'great customers, a great team, and exactly the kind of '
-               'business that gets supercharged the moment you put our '
-               'technology behind it.”',
-         why='цель сделки прямой цитатой сооснователя и CEO Fura Джеффа '
-             'Данджело (источник англоязычный — цитата дословная, без '
-             'перевода, чтобы не потерять точность; перевод был бы уже '
-             'пересказом, а не переносом). Линза «Экономист» стояла '
-             'пустой заглушкой.'),
-    dict(id='gca4bf7d8', field='eco.context', old='—',
-         new='Vancouver, Washington–based High Rise provides '
-             'flatbed, expedited, truckload and less-than-truckload '
-             'transportation. It has a large presence in the Pacific '
-             'Northwest and also offers intermodal, drayage and '
-             'warehousing services.',
-         quote='Vancouver, Washington–based High Rise provides '
-               'flatbed, expedited, truckload and less-than-truckload '
-               'transportation. It has a large presence in the Pacific '
-               'Northwest and also offers intermodal , drayage and '
-               'warehousing services.',
-         why='описание предмета сделки (чем занимается High Rise '
-             'Logistics) — линза «Контекст» стояла пустой заглушкой.'),
-    dict(id='gca4bf7d8', field='law.struct', old='—',
-         new='High Rise’s leadership team will continue to manage '
-             'daily operations, but will now have access to Fura’s '
-             'tech platform, which provides AI-powered bidding, '
-             'carrier-sales functions and shipment visibility.',
-         quote='High Rise’s leadership team will continue to '
-               'manage daily operations, but will now have access to '
-               'Fura’s tech platform, which provides AI-powered '
-               'bidding, carrier-sales functions and shipment '
-               'visibility.',
-         why='структура сделки — руководство цели сохраняется, '
-             'интеграция идёт через доступ к технологической платформе '
-             'покупателя. Линза «Структура» стояла пустой заглушкой.'),
 ]
