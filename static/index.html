@@ -819,7 +819,8 @@ a.dp-asset-name:hover{color:var(--accent)}
 .company-profile-meta .dot::before{content:"·";margin-right:16px;color:var(--line)}
 .company-deals-compact{margin:0 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent}
 .company-deals-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0}
-.company-deals-head h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.2;margin-top:4px}
+.company-deals-head>div{min-width:0}
+.company-deals-head h2{font-family:var(--f-display);font-size:23px;font-weight:400;line-height:1.2;margin-top:4px;overflow-wrap:break-word}
 .company-deals-preview{border-top:1px solid var(--line-soft)}
 .company-deal-preview{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-soft);transition:color .2s}
 .company-deal-preview:last-child{border-bottom:none}
