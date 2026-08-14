@@ -185,9 +185,9 @@ def russian_evidence(draft, names):
         return 'российский маркер в тексте'
     if '₽' in blob:
         return 'сумма в рублях'
-    candidates = [(m.group(1), False) for m in QUOTED_NAME.finditer(title)]
-    candidates += [(m.group(1), m.start() == 0) for m in CAP_NAME.finditer(title)]
-    for name, sentence_initial in candidates:
+    candidates = [(m.group(1), False, m.end()) for m in QUOTED_NAME.finditer(title)]
+    candidates += [(m.group(1), m.start() == 0, m.end()) for m in CAP_NAME.finditer(title)]
+    for name, sentence_initial, end in candidates:
         # ПЕРВОЕ СЛОВО ЗАГЛАВНОЕ ВСЕГДА — ЭТО КОНВЕНЦИЯ НАЧАЛА ПРЕДЛОЖЕНИЯ, А
         # НЕ ПРИЗНАК ИМЕНИ. «Новый CEO Berkshire вложил $10 млрд в акции
         # материнской компании Google», «Хедж-фонд Situational Awareness
@@ -201,9 +201,22 @@ def russian_evidence(draft, names):
         if sentence_initial and not name.isupper():
             continue
         low = name.lower()
-        if (CYRILLIC.search(name) and low not in NOT_RUSSIAN_PLACE
-                and low not in GENERIC_HEAD and low not in NOT_RUSSIAN_PERSON):
-            return 'имя собственное кириллицей: %s' % name
+        if (low in NOT_RUSSIAN_PLACE or low in GENERIC_HEAD
+                or low in NOT_RUSSIAN_PERSON or not CYRILLIC.search(name)):
+            continue
+        # ГОЛОВА ЧУЖОГО ИНСТИТУТА: «ЦБ Кореи впервые за 13 лет купил активы,
+        # связанные с золотом» — «ЦБ» само по себе законная аббревиатура
+        # («ЦБ одобрил…» уже принято как доказательство без «РФ»/«России»,
+        # см. урок про Freedom Holding/Повалишина), но здесь сразу после неё
+        # родительный падеж чужой страны — это центробанк Кореи, не наш
+        # регулятор. 14 августа карточка прошла ворота именно по «ЦБ» без
+        # единого другого русского признака. Если слово сразу после кандидата
+        # — известное чужое место (тот же список NOT_RUSSIAN_PLACE), это
+        # голова иностранного учреждения, а не наш маркер.
+        tail = re.match(r'\s+([а-яё]+)', title[end:], re.I)
+        if tail and tail.group(1).lower() in NOT_RUSSIAN_PLACE:
+            continue
+        return 'имя собственное кириллицей: %s' % name
     low = blob.lower()
     for name in names:
         if re.search(r'(?<![\wа-яё])%s(?![\wа-яё])' % re.escape(name), low):
