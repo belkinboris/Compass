@@ -868,6 +868,7 @@ PARTY_CASE_EXCEPTIONS = {
     "gdf93c62d", "gf8dfe9c4", "g14443784",                            # фамилия впереди имени
     "g8cb1eb00", "gff6e08fe",                                         # личные имена вне словаря
     "gmru-svoj-kredit-evropa-strah", "gmru-roshim-vnt",               # бренды
+    "c3c15a888",                                                      # «Финам»: бренд на -м, pymorphy3 считает дательным
 }
 
 
