@@ -378,11 +378,38 @@ def set_field(card, field, value):
         obj[parts[-1]] = value
 
 
+def typo_flat(s):
+    """Значение с точностью до ТИПОГРАФИКИ: кавычки, тире, десятичный знак.
+
+    Нужна ровно одна вещь: отличить «правка не применена» от «правка
+    применена, а потом текст причесал сплошной типографский прогон».
+    15 августа 2026 такой прогон (`fix_typography_across_base.py`) поменял
+    прямые кавычки на ёлочки, дефис в диапазоне на тире и точку в числе на
+    запятую — и 503 записи таблицы `FIXES` перестали совпадать с базой
+    посимвольно, хотя ФАКТ в базе стоит ровно тот, который правка внесла.
+    Сравнение по буквам объявило бы их неприменёнными и уронило бы
+    `test_review_table_is_applied_and_not_pending`.
+
+    Складываются ТОЛЬКО знаки, а не слова: `«`/`»`/`"` в один символ, все
+    виды тире в один, десятичная запятая и точка в одну. Ни одна буква,
+    цифра или пробел между словами не теряется — подмена значения этой
+    проверкой по-прежнему не проходит."""
+    s = re.sub(r'[«»""„“”]', '"', str(s or ''))
+    s = re.sub(r'[–—]', '-', s)
+    s = re.sub(r'(?<=\d)[.,](?=\d)', '.', s)
+    return re.sub(r'\s+', ' ', s).strip()
+
+
 def already_applied(fix, card):
     """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
     if fix['field'] == 'src':
         return any(len(s) > 1 and s[1] == fix['new'][1] for s in card.get('src') or [])
-    return get_field(card, fix['field']) == fix['new']
+    current = get_field(card, fix['field'])
+    if current == fix['new']:
+        return True
+    if current is None or fix['new'] is None:
+        return False
+    return typo_flat(current) == typo_flat(fix['new'])
 
 
 def check(fix, card, texts, companies, inds, urls=frozenset()):

@@ -178,10 +178,7 @@ FIXES = [
          why='партия 5 агентов, раунд 2, 14.08.2026, источник konkurent.ru: перенесено '
                   'дословно'),
     dict(id='g1b5e8ab8', field='eco.val', old='—',
-         new='Raiffeisen\'s special status and its size – far larger than the other '
-                  'European banks in Russia, Italy\'s UniCredit, and the smaller Hungarian '
-                  'group OTP Bank – have allowed RBI to build up roughly 7 billion euros '
-                  '($8.22 billion) in profits now stranded there.',
+         new='Особый статус Raiffeisen и его размер — гораздо больший, чем у других европейских банков в России, итальянского UniCredit и меньшей венгерской группы OTP Bank, — позволили RBI накопить там около 7 млрд евро ($8,22 млрд) прибыли, которая теперь заблокирована.',
          quote='Raiffeisen\'s special status and its size – far larger than the other '
                   'European banks in Russia, Italy\'s UniCredit, and the smaller Hungarian '
                   'group OTP Bank – have allowed RBI to build up roughly 7 billion euros '
@@ -189,13 +186,7 @@ FIXES = [
          why='партия 5 агентов, раунд 2, 14.08.2026, источник dailysabah.com: перенесено '
                   'дословно'),
     dict(id='g1b5e8ab8', field='eco.context', old='—',
-         new='Raiffeisen processes payments for the TurkStream pipeline, Russia\'s only '
-                  'remaining route for sending gas into Europe after others were cut, the '
-                  'people said. TurkStream delivered roughly 11.5 billion cubic meters (bcm) '
-                  'of gas in the first eight months of this year via Türkiye to European '
-                  'countries, including Bulgaria and Hungary. At average market prices, that '
-                  'gas was worth roughly $3.8 billion, making it an essential part of '
-                  'Russia\'s gas exports.',
+         new='Raiffeisen проводит платежи по газопроводу «Турецкий поток» — единственному оставшемуся у России маршруту поставок газа в Европу после того, как остальные были перекрыты, рассказали собеседники. За первые восемь месяцев этого года по «Турецкому потоку» через Турцию в европейские страны, включая Болгарию и Венгрию, было поставлено около 11,5 млрд куб. м газа. По средним рыночным ценам этот газ стоил примерно $3,8 млрд, что делает его существенной частью российского газового экспорта.',
          quote='Raiffeisen processes payments for the TurkStream pipeline, Russia\'s only '
                   'remaining route for sending gas into Europe after others were cut, the '
                   'people said. TurkStream delivered roughly 11.5 billion cubic meters (bcm) '
@@ -355,8 +346,7 @@ FIXES = [
     dict(id='g003e4867', field='law.terms',
          old='при этом строительством социальной инфраструктуры компания будет '
              'заниматься вместе с «Самолетом',
-         new='При этом строительством социальной инфраструктуры компания будет '
-                  'заниматься вместе с «Самолетом',
+         new='При этом строительством социальной инфраструктуры компания будет заниматься вместе с «Самолетом»',
          quote='при этом строительством социальной инфраструктуры компания будет '
                   'заниматься вместе с «Самолетом',
          why='партия 5 агентов, раунд 2, 14.08.2026, источник kommersant.ru: перенесено '

@@ -196,8 +196,7 @@ FIXES = [
          why='партия 5 агентов, раунд 4, 15.08.2026, источник shoppers.media: перенесено '
                   'дословно'),
     dict(id='g766a4daf', field='eco.context', old='—',
-         new='после совершения сделки, стоимость которой на момент осуществления не '
-                  'раскрывается, ООО «Ипакэм» сменило название на ООО «Агрохим Решения',
+         new='после совершения сделки, стоимость которой на момент осуществления не раскрывается, ООО «Ипакэм» сменило название на ООО «Агрохим Решения»',
          quote='после совершения сделки, стоимость которой на момент осуществления не '
                   'раскрывается, ООО «Ипакэм» сменило название на ООО «Агрохим Решения',
          why='партия 5 агентов, раунд 4, 15.08.2026, источник kommersant.ru: перенесено '
@@ -235,10 +234,7 @@ FIXES = [
          why='партия 5 агентов, раунд 4, 15.08.2026, источник kommersant.ru: перенесено '
                   'дословно'),
     dict(id='g2ab512d7', field='law.terms', old='—',
-         new='The deal with Mangazeya includes provisions for the continued use of the '
-                  'Amursk POX processing facility, a subsidiary of JSC Polymetal, to treat '
-                  'Kyzyl refractory concentrate under a tolling agreement until the Ertis POX '
-                  'in Kazakhstan is online.',
+         new='Сделка с «Мангазеей» предусматривает продолжение использования Амурского гидрометаллургического комбината (Amursk POX), дочернего предприятия АО «Полиметалл», для переработки упорного концентрата месторождения Кызыл на условиях толлинга — до тех пор, пока не будет запущено производство Ertis POX в Казахстане.',
          quote='The deal with Mangazeya includes provisions for the continued use of the '
                   'Amursk POX processing facility, a subsidiary of JSC Polymetal, to treat '
                   'Kyzyl refractory concentrate under a tolling agreement until the Ertis POX '
@@ -265,19 +261,14 @@ FIXES = [
          why='партия 5 агентов, раунд 4, 15.08.2026, источник v-tagile.ru: перенесено '
                   'дословно'),
     dict(id='g246f4b6b', field='law.struct', old='—',
-         new='Of this amount, 7.7 billion rubles will go toward servicing the debt of '
-                  'the Russian business and the rest will go toward paying for Danone\'s stake '
-                  'in the company.',
+         new='Из этой суммы 7,7 млрд руб. пойдут на обслуживание долга российского бизнеса, а остальное — на оплату доли Danone в компании.',
          quote='Of this amount, 7.7 billion rubles will go toward servicing the debt of '
                   'the Russian business and the rest will go toward paying for Danone\'s stake '
                   'in the company.',
          why='партия 5 агентов, раунд 4, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
     dict(id='g246f4b6b', field='law.terms', old='—',
-         new='Danone has agreed to provide support until the end of July 2025, since H&N '
-                  'is continuing to localize production of certain ingredients in order to '
-                  'maintain the \'high quality of products that Russian consumers are used '
-                  'to.\'',
+         new='Danone согласилась оказывать поддержку до конца июля 2025 года, поскольку H&N продолжает локализацию производства ряда ингредиентов, чтобы сохранить «высокое качество продукции, к которому привыкли российские потребители».',
          quote='Danone has agreed to provide support until the end of July 2025, since H&N '
                   'is continuing to localize production of certain ingredients in order to '
                   'maintain the \'high quality of products that Russian consumers are used '
@@ -285,16 +276,13 @@ FIXES = [
          why='партия 5 агентов, раунд 4, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
     dict(id='g246f4b6b', field='law.appr', old='Публично не сообщалось',
-         new='The deal is subject to approval by Russia\'s Agriculture Ministry, followed '
-                  'by a government commission tasked with reviewing Western companies\' exits.',
+         new='Сделка подлежит одобрению Министерства сельского хозяйства России, а затем — правительственной комиссии, которая рассматривает выход западных компаний.',
          quote='The deal is subject to approval by Russia\'s Agriculture Ministry, followed '
                   'by a government commission tasked with reviewing Western companies\' exits.',
          why='партия 5 агентов, раунд 4, 15.08.2026, источник themoscowtimes.com: '
                   'перенесено дословно'),
     dict(id='g246f4b6b', field='eco.context', old='—',
-         new='Since December 2022, Russia has forced foreign companies to sell their '
-                  'assets to Russian buyers at a 50% discount and charged them an exit fee of '
-                  'at least 10% of the transaction value.',
+         new='С декабря 2022 года Россия обязывает иностранные компании продавать свои активы российским покупателям с дисконтом в 50% и взимает с них выходную пошлину в размере не менее 10% от суммы сделки.',
          quote='Since December 2022, Russia has forced foreign companies to sell their '
                   'assets to Russian buyers at a 50% discount and charged them an exit fee of '
                   'at least 10% of the transaction value.',
@@ -1023,9 +1011,7 @@ FIXES = [
          why='партия 5 агентов, раунд 4, 15.08.2026, источник vedomosti.ru: перенесено '
                   'дословно'),
     dict(id='geb236ba2', field='eco.context', old='—',
-         new='Polymetal International is seeking to sell its Russian assets, which were '
-                  'sanctioned by the US in 2023 in response to Moscow sending troops into '
-                  'Ukraine in February 2022.',
+         new='Polymetal International стремится продать свои российские активы, против которых США ввели санкции в 2023 году в ответ на ввод Москвой войск на Украину в феврале 2022 года.',
          quote='Polymetal International is seeking to sell its Russian assets, which were '
                   'sanctioned by the US in 2023 in response to Moscow sending troops into '
                   'Ukraine in February 2022.',

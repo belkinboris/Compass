@@ -11,18 +11,14 @@
 
 FIXES = [
     dict(id='g1059432d', field='law.struct', old='—',
-         new='Turkey\'s Arcelik has signed an agreement with Whirlpool EMEA S.p.A. on the '
-                  'purchase of its Russian assets, JSC Indesit International and Whirlpool '
-                  'Rus LLC.',
+         new='Турецкая Arçelik подписала с Whirlpool EMEA S.p.A. соглашение о покупке её российских активов — АО «Индезит Интернэшнл» и ООО «Вирлпул Рус».',
          quote='Turkey\'s Arcelik has signed an agreement with Whirlpool EMEA S.p.A. on the '
                   'purchase of its Russian assets, JSC Indesit International and Whirlpool '
                   'Rus LLC.',
          why='партия 5 агентов, раунд 7, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
     dict(id='g1059432d', field='eco.target_fin', old='—',
-         new='the revenue of Whirlpool Rus to RAS in 2021 was 40.8 billion rubles, and '
-                  'net profit was 1.9 billion rubles, while for Indesit International, these '
-                  'figures were 29.1 billion rubles and 220 million rubles, respectively.',
+         new='Выручка «Вирлпул Рус» по РСБУ в 2021 году составила 40,8 млрд руб., чистая прибыль — 1,9 млрд руб.; у «Индезит Интернэшнл» эти показатели составили 29,1 млрд руб. и 220 млн руб. соответственно.',
          quote='the revenue of Whirlpool Rus to RAS in 2021 was 40.8 billion rubles, and '
                   'net profit was 1.9 billion rubles, while for Indesit International, these '
                   'figures were 29.1 billion rubles and 220 million rubles, respectively.',

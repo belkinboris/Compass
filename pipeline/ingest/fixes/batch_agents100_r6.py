@@ -7,29 +7,21 @@
 
 FIXES = [
     dict(id='g5c3eeb06', field='eco.context', old='—',
-         new='Der Rest lag in Form von rund 350 Millionen Euro in Cash auf einem Konto '
-                  'der aus der Bank hervorgegangenen Sber Vermögensverwaltungs AG (SVAG) bei '
-                  'der Raiffeisen Bank International (RBI).',
+         new='Остальное — около 350 млн евро — находилось в виде денежных средств на счёте выделенной из банка компании Sber Vermögensverwaltungs AG (SVAG) в Raiffeisen Bank International (RBI).',
          quote='Der Rest lag in Form von rund 350 Millionen Euro in Cash auf einem Konto '
                   'der aus der Bank hervorgegangenen Sber Vermögensverwaltungs AG (SVAG) bei '
                   'der Raiffeisen Bank International (RBI).',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник derstandard.at: перенесено '
                   'дословно'),
     dict(id='g5c3eeb06', field='law.struct', old='—',
-         new='profil und ORF liegt – aus den eingesehenen Firmenbuch-Urkunden – auch der '
-                  'unterzeichnete Kaufvertrag zwischen der russischen Sberbank und der '
-                  'Zöchling-Firma Bepoda Beteiligungsgesellschaft mbH vor.',
+         new='В распоряжении profil и ORF — по документам торгового реестра, с которыми удалось ознакомиться, — есть и подписанный договор купли-продажи между российским Сбербанком и принадлежащей Цёхлингу компанией Bepoda Beteiligungsgesellschaft mbH.',
          quote='profil und ORF liegt – aus den eingesehenen Firmenbuch-Urkunden – auch der '
                   'unterzeichnete Kaufvertrag zwischen der russischen Sberbank und der '
                   'Zöchling-Firma Bepoda Beteiligungsgesellschaft mbH vor.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник profil.at: перенесено '
                   'дословно'),
     dict(id='g5c3eeb06', field='law.terms', old='—',
-         new='Im Kaufvertrag festgehalten wurde wiederum, dass die Raiffeisenbank '
-                  'Russland für die Bepoda gegenüber der Sberbank ein sogenanntes Akkreditiv '
-                  '(„Letter of Credit") – eine Art Bankbürgschaft – abgeben sollte. Genehmigt '
-                  'wurde die Transaktion laut Bericht von der Direktion Staatsschutz und '
-                  'Nachrichtendienst (DSN), die für Sanktionsangelegenheiten zuständig ist.',
+         new='В договоре купли-продажи, в свою очередь, было закреплено, что Райффайзенбанк Россия должен выдать за Bepoda в пользу Сбербанка так называемый аккредитив (Letter of Credit) — своего рода банковскую гарантию. Согласно сообщению, сделку одобрила Дирекция государственной защиты и разведки (DSN), которая отвечает за вопросы санкций.',
          quote='Im Kaufvertrag festgehalten wurde wiederum, dass die Raiffeisenbank '
                   'Russland für die Bepoda gegenüber der Sberbank ein sogenanntes Akkreditiv '
                   '(„Letter of Credit") – eine Art Bankbürgschaft – abgeben sollte. Genehmigt '
@@ -40,7 +32,7 @@ FIXES = [
                   'по-немецки, APPROVING_BODY его не узнаёт — факт перенесён из law.appr '
                   'в law.terms как условие закрытия, см. pipeline/fix_r6_test_failures.py'),
     dict(id='g5c3eeb06', field='eco.val', old='—',
-         new='Im Kaufvertrag ist ein Nettokaufpreis von 226.800.860,17 Euro festgelegt.',
+         new='В договоре купли-продажи зафиксирована чистая цена покупки в 226 800 860,17 евро.',
          quote='Im Kaufvertrag ist ein Nettokaufpreis von 226.800.860,17 Euro festgelegt.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник profil.at: перенесено '
                   'дословно'),
@@ -202,9 +194,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник kommersant.ru: перенесено '
                   'дословно'),
     dict(id='g1d73eef1', field='eco.share', old='—',
-         new='Прежний владелец ЕПК Александр Москаленко подтвердил "Ъ", что продал 100% '
-                  'акций компании, сохранив не вошедший в контур сделки казахстанский актив — '
-                  'Степногорский подшипниковый завод — и долю в «ЕПК-Бренко',
+         new='Прежний владелец ЕПК Александр Москаленко подтвердил «Ъ», что продал 100% акций компании, сохранив не вошедший в контур сделки казахстанский актив — Степногорский подшипниковый завод — и долю в «ЕПК-Бренко»',
          quote='Прежний владелец ЕПК Александр Москаленко подтвердил "Ъ", что продал 100% '
                   'акций компании, сохранив не вошедший в контур сделки казахстанский актив — '
                   'Степногорский подшипниковый завод — и долю в «ЕПК-Бренко',
@@ -691,9 +681,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник realnoevremya.ru: '
                   'перенесено дословно'),
     dict(id='gfa14411d', field='law.terms', old='—',
-         new='The new buyer also has the option of selling the company back to LPP by '
-                  'the end of 2026, giving LPP a chance to retake ownership of its Russia '
-                  'business after the war ends.',
+         new='У нового покупателя также есть опцион на обратную продажу компании LPP до конца 2026 года, что даёт LPP возможность вернуть себе российский бизнес после окончания войны.',
          quote='The new buyer also has the option of selling the company back to LPP by '
                   'the end of 2026, giving LPP a chance to retake ownership of its Russia '
                   'business after the war ends.',
@@ -1252,17 +1240,13 @@ FIXES = [
                   'и списала её стоимость.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник dp.ru: перенесено дословно'),
     dict(id='gccd50095', field='eco.val', old='—',
-         new='Analyst\'s had previously valued Veon\'s stake in Djezzy at $370 '
-                  'million-$380 million.',
+         new='Ранее аналитики оценивали долю Veon в Djezzy в $370–380 млн.',
          quote='Analyst\'s had previously valued Veon\'s stake in Djezzy at $370 '
                   'million-$380 million.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
     dict(id='gccd50095', field='eco.context', old='—',
-         new='Veon\'s largest shareholder, with 47.9%, is LetterOne, a division of the '
-                  'Alfa Group of Russian tycoon Mikhail Fridman and his partners. The '
-                  'company\'s free float on Nasdaq is 43.8%, and an 8.3% stake in the group is '
-                  'managed by a Dutch trust, or stichting.',
+         new='Крупнейший акционер Veon с долей 47,9% — LetterOne, подразделение «Альфа-Групп» российского предпринимателя Михаила Фридмана и его партнёров. Free float компании на Nasdaq составляет 43,8%, ещё 8,3% акций группы находятся в управлении нидерландского траста (stichting).',
          quote='Veon\'s largest shareholder, with 47.9%, is LetterOne, a division of the '
                   'Alfa Group of Russian tycoon Mikhail Fridman and his partners. The '
                   'company\'s free float on Nasdaq is 43.8%, and an 8.3% stake in the group is '
@@ -1270,9 +1254,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
     dict(id='gccd50095', field='law.struct', old='—',
-         new='Veon deconsolidated the financial results of the Algerian business in the '
-                  'middle of 2021, when the option for its stake was first exercised, and it '
-                  'is accounted for as an "asset held for sale.',
+         new='Veon перестала консолидировать финансовые результаты алжирского бизнеса в середине 2021 года, когда опцион на её долю был исполнен впервые, и учитывает его как «актив, предназначенный для продажи».',
          quote='Veon deconsolidated the financial results of the Algerian business in the '
                   'middle of 2021, when the option for its stake was first exercised, and it '
                   'is accounted for as an "asset held for sale.',
@@ -1423,12 +1405,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник kommersant.ru: перенесено '
                   'дословно'),
     dict(id='c65f082d8', field='eco.context', old=None,
-         new='Evraz North America has around a 44% share of the North American rail '
-                  'product market and accounts for about a third of large-diameter pipe '
-                  'production. The company\'s U.S. production sites are in Portland and Pueblo '
-                  'and its Canadian production sites in Regina, Calgary and Red Deer. Evraz '
-                  'NA also has scrap metal processing assets in Western Canada, North Dakota '
-                  'and Colorado.',
+         new='На Evraz North America приходится около 44% североамериканского рынка рельсовой продукции и примерно треть выпуска труб большого диаметра. Производственные площадки компании в США расположены в Портленде и Пуэбло, в Канаде — в Реджайне, Калгари и Ред-Дире. Evraz NA также владеет активами по переработке металлолома в Западной Канаде, Северной Дакоте и Колорадо.',
          quote='Evraz North America has around a 44% share of the North American rail '
                   'product market and accounts for about a third of large-diameter pipe '
                   'production. The company\'s U.S. production sites are in Portland and Pueblo '
@@ -1561,9 +1538,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник realty.ria.ru: перенесено '
                   'дословно'),
     dict(id='g0e8b9617', field='eco.target_fin', old='—',
-         new='JSC Sephora Rus, which is headed by Yevgeny Drozdov, closed 2021 with '
-                  'revenue down 2.8% to 15.28 billion rubles. The company\'s net loss nearly '
-                  'tripled to 3.17 billion rubles from 1.11 billion rubles in 2020.',
+         new='АО «Сефора Рус», которое возглавляет Евгений Дроздов, завершило 2021 год со снижением выручки на 2,8%, до 15,28 млрд руб. Чистый убыток компании вырос почти втрое — до 3,17 млрд руб. против 1,11 млрд руб. в 2020 году.',
          quote='JSC Sephora Rus, which is headed by Yevgeny Drozdov, closed 2021 with '
                   'revenue down 2.8% to 15.28 billion rubles. The company\'s net loss nearly '
                   'tripled to 3.17 billion rubles from 1.11 billion rubles in 2020.',
@@ -1585,8 +1560,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник vedomosti.ru: перенесено '
                   'дословно'),
     dict(id='g0e8b9617', field='law.terms', old='—',
-         new='The deal, the price of which was not disclosed, is subject to approval by '
-                  'the competition regulator, Reuters reported, citing the company.',
+         new='Сделка, цена которой не раскрывается, подлежит одобрению антимонопольного регулятора, сообщил Reuters со ссылкой на компанию.',
          quote='The deal, the price of which was not disclosed, is subject to approval by '
                   'the competition regulator, Reuters reported, citing the company.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник interfax.com: перенесено '
@@ -1670,13 +1644,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник vademec.ru: перенесено '
                   'дословно'),
     dict(id='g420cae8d', field='law.struct', old='—',
-         new='Prosus (which is majority-owned by Naspers) has entered into an agreement '
-                  'through its affiliates OLX Global B.V., OLX B.V., KEH Holdings B.V. and '
-                  'MIH Technology Holdings B.V. (together, the Sellers, all of which are '
-                  'indirect subsidiaries of Prosus) with Radio Reklama Vologda LLC and '
-                  'Infrastructure Holding-2 LLC (together the Purchasers, both of which are '
-                  'subsidiaries of Kismet Capital Group LLC and are beneficially owned by Mr '
-                  'Ivan Tavrin).',
+         new='Prosus (контрольный пакет которой принадлежит Naspers) заключила соглашение через свои аффилированные структуры OLX Global B.V., OLX B.V., KEH Holdings B.V. и MIH Technology Holdings B.V. (совместно — продавцы, все они являются косвенными дочерними компаниями Prosus) с ООО «Радио Реклама Вологда» и ООО «Инфраструктура Холдинг-2» (совместно — покупатели, обе являются дочерними компаниями Kismet Capital Group LLC и бенефициарно принадлежат Ивану Таврину).',
          quote='Prosus (which is majority-owned by Naspers) has entered into an agreement '
                   'through its affiliates OLX Global B.V., OLX B.V., KEH Holdings B.V. and '
                   'MIH Technology Holdings B.V. (together, the Sellers, all of which are '
@@ -1687,19 +1655,14 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник naspers.com: перенесено '
                   'дословно'),
     dict(id='g420cae8d', field='law.terms', old='—',
-         new='The aggregate consideration for the acquisition of the Avito Group by the '
-                  'Purchasers will be satisfied by the Purchasers through a mixture of '
-                  'available cash resources and debt financing procured by the Purchasers.',
+         new='Совокупная цена приобретения Avito Group будет оплачена покупателями за счёт сочетания собственных денежных средств и привлечённого ими долгового финансирования.',
          quote='The aggregate consideration for the acquisition of the Avito Group by the '
                   'Purchasers will be satisfied by the Purchasers through a mixture of '
                   'available cash resources and debt financing procured by the Purchasers.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник naspers.com: перенесено '
                   'дословно'),
     dict(id='g420cae8d', field='eco.target_fin', old='—',
-         new='Prosus holds an effective interest of 99% in the Avito Group. As at 31 '
-                  'March 2022, being the latest financial year end for Naspers and Prosus, '
-                  'the net asset value of the Avito Group was US$1,379.9m and profits '
-                  'attributable to the Avito Group was US$160.3m.',
+         new='Prosus владеет эффективной долей в 99% в Avito Group. По состоянию на 31 марта 2022 года — конец последнего финансового года Naspers и Prosus — стоимость чистых активов Avito Group составляла $1379,9 млн, а прибыль, приходящаяся на Avito Group, — $160,3 млн.',
          quote='Prosus holds an effective interest of 99% in the Avito Group. As at 31 '
                   'March 2022, being the latest financial year end for Naspers and Prosus, '
                   'the net asset value of the Avito Group was US$1,379.9m and profits '
@@ -1716,12 +1679,7 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник vedomosti.ru: перенесено '
                   'дословно'),
     dict(id='g2d525daa', field='eco.target_fin', old='—',
-         new='Nokian Tyres\' assets in Russia and Belarus excluding tax and financial '
-                  'items amounted to EUR 574.5 million after the impairments and the '
-                  'write-down at the end of the second quarter and to EUR 590.4 million at '
-                  'the end of the third quarter of 2022. Net assets in Russia and Belarus '
-                  'excluding net debt amounted to EUR 480.3 million at the end of the third '
-                  'quarter of 2022.',
+         new='Активы Nokian Tyres в России и Белоруссии без учёта налоговых и финансовых статей составляли 574,5 млн евро на конец второго квартала 2022 года — после обесценения и списаний — и 590,4 млн евро на конец третьего квартала 2022 года. Чистые активы в России и Белоруссии без учёта чистого долга на конец третьего квартала 2022 года составляли 480,3 млн евро.',
          quote='Nokian Tyres\' assets in Russia and Belarus excluding tax and financial '
                   'items amounted to EUR 574.5 million after the impairments and the '
                   'write-down at the end of the second quarter and to EUR 590.4 million at '
@@ -1731,19 +1689,14 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник nokiantyres.com: '
                   'перенесено дословно'),
     dict(id='g2d525daa', field='eco.context', old='—',
-         new='In 2021, approximately 80% of the company\'s passenger car tires were '
-                  'produced in Russia and the business area Russia and Asia represented '
-                  'approximately 20% of Nokian Tyres\' net sales.',
+         new='В 2021 году около 80% легковых шин компании производилось в России, а на бизнес-направление «Россия и Азия» приходилось примерно 20% чистой выручки Nokian Tyres.',
          quote='In 2021, approximately 80% of the company\'s passenger car tires were '
                   'produced in Russia and the business area Russia and Asia represented '
                   'approximately 20% of Nokian Tyres\' net sales.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник nokiantyres.com: '
                   'перенесено дословно'),
     dict(id='g383b170f', field='law.struct', old='—',
-         new='In July 2022, Kiilto and Bergauf Group reached an agreement on the '
-                  'acquisition of several construction and industrial adhesive subsidiaries. '
-                  'With the recently concluded transaction, AO Kiilto-Klei, OOO Kiilto Family '
-                  'and OOO Kiilto-Klei Ramenskoe were transferred to Bergauf Group.',
+         new='В июле 2022 года Kiilto и Bergauf Group договорились о продаже нескольких дочерних компаний, производящих строительные и промышленные клеи. В результате недавно закрытой сделки к Bergauf Group перешли АО «Киилто-Клей», ООО «Киилто Фэмили» и ООО «Киилто-Клей Раменское».',
          quote='In July 2022, Kiilto and Bergauf Group reached an agreement on the '
                   'acquisition of several construction and industrial adhesive subsidiaries. '
                   'With the recently concluded transaction, AO Kiilto-Klei, OOO Kiilto Family '
@@ -1751,26 +1704,21 @@ FIXES = [
          why='партия 5 агентов, раунд 6, 15.08.2026, источник kiilto.com: перенесено '
                   'дословно'),
     dict(id='g383b170f', field='law.terms', old='—',
-         new='With the approval of the Russian authorities, Kiilto has now been able to '
-                  'sell all its Russian subsidiaries.',
+         new='С одобрения российских властей Kiilto смогла продать все свои российские дочерние компании.',
          quote='With the approval of the Russian authorities, Kiilto has now been able to '
                   'sell all its Russian subsidiaries.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник kiilto.com: перенесено '
                   'дословно; орган не назван по имени — не согласование, а условие '
                   'закрытия, см. pipeline/fix_r6_test_failures.py'),
     dict(id='g383b170f', field='eco.target_fin', old='—',
-         new='Kiilto\'s entire Russian operations, which encompassed three production '
-                  'plants and approximately 200 employees, have now been transferred to new '
-                  'owners.',
+         new='Весь российский бизнес Kiilto, включавший три производственных завода и около 200 сотрудников, перешёл к новым владельцам.',
          quote='Kiilto\'s entire Russian operations, which encompassed three production '
                   'plants and approximately 200 employees, have now been transferred to new '
                   'owners.',
          why='партия 5 агентов, раунд 6, 15.08.2026, источник kiilto.com: перенесено '
                   'дословно'),
     dict(id='g383b170f', field='eco.rationale', old='—',
-         new='The goal of selling the Russian subsidiaries was not financial gain, but '
-                  'rather finding a legal way to exit the Russian market. In 2021, Kiilto\'s '
-                  'Russian operations accounted for about 10% of the company\'s turnover.',
+         new='Целью продажи российских «дочек» была не финансовая выгода, а поиск законного способа уйти с российского рынка. В 2021 году на российские операции Kiilto приходилось около 10% оборота компании.',
          quote='The goal of selling the Russian subsidiaries was not financial gain, but '
                   'rather finding a legal way to exit the Russian market. In 2021, Kiilto\'s '
                   'Russian operations accounted for about 10% of the company\'s turnover.',
