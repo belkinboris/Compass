@@ -81,19 +81,24 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    время анимации адресной строки (сворачивается/разворачивается при скролле)
    WebKit пересчитывает блюр и элемент визуально «прыгает», хотя ни JS, ни
    CSS его не двигают — сама шапка в коде НИКОГДА не скрывается и не меняет
-   размер (`.hide` больше нигде не выставляется). `will-change` заранее
-   выносит элемент на свой композитный слой, это стандартное обходное
-   решение именно этого артефакта. Проверить на реальном iPhone здесь
-   нечем — headless Chromium не воспроизводит поведение адресной строки
-   Safari, поэтому это по замеру не подтверждено, только по известному
-   классу бага. */
-.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .45s var(--ease),background-color .8s var(--ease),border-bottom-color .8s var(--ease);will-change:transform}
+   размер (`.hide` больше нигде не выставляется). Первая попытка чинить
+   (`will-change:transform`, оставляющая blur) была отмечена как непроверенная
+   на реальном устройстве — и владелец 15 августа подтвердил с айфона, что
+   прыжок остался. `backdrop-filter` снят совсем, а не оставлен с обходом:
+   именно блюр запускает пересчёт композитного слоя при сворачивании
+   адресной строки, самого триггера без него нет. Плотность фона поднята,
+   чтобы читаемость не пострадала без размытия фона под шапкой. Родственный
+   класс на `.an-filters` (строка ниже) не трогаем — там `position:sticky`,
+   не `fixed`, тот же баг ей не свойственен. */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,245,241,.97);border-bottom:1px solid var(--line);transition:transform .45s var(--ease),background-color .8s var(--ease),border-bottom-color .8s var(--ease);will-change:transform}
 .top .wordmark,.top .wordmark em,.top nav a{transition:color .8s var(--ease)}
 .top.hide{transform:translateY(-100%)}
 /* Пока строка стоит поверх тёмно-зелёного героя, светлая подложка выглядит
    заплаткой: делаем её тёмной и полупрозрачной, чтобы вкладки читались на
-   зелёном и не спорили с ним. */
-.top.on-hero{background:rgba(10,18,16,.55);border-bottom-color:rgba(243,241,233,.14)}
+   зелёном и не спорили с ним. Плотность выше, чем была при blur (.55 -> .82):
+   без размытия фона под шапкой прозрачная подложка показывала бы хаос героя
+   как есть, а не смягчённое пятно цвета. */
+.top.on-hero{background:rgba(10,18,16,.82);border-bottom-color:rgba(243,241,233,.14)}
 .top.on-hero .wordmark{color:var(--ivory)}
 .top.on-hero .wordmark em{color:var(--bronze-light)}
 .top.on-hero nav a{color:rgba(243,241,233,.78)}

@@ -86,6 +86,7 @@ LATIN_NAME = re.compile(r'^[a-z0-9&.]{2,}$')
 
 def stems(text):
     raw = re.sub(r'«[^»]{2,40}»', ' ', str(text or ''))
+    raw = re.sub(r'"[^"]{2,40}"', ' ', raw)
     words = re.sub(r'[«»"\'().,:;–—-]', ' ', raw).split()
     out = set()
     for word in words:
@@ -124,9 +125,28 @@ def quoted_key(name):
     return (head + sep + tail).strip()
 
 
+# Не только ёлочки. mergers.ru и другие агрегаторы пишут названия в прямых
+# кавычках («Fonte Capital... приобрела 18% акций "Самолета"» вместо
+# «Самолета») — и `quoted()` на такой заголовок возвращала пустое множество:
+# сигнал «общее название» отключался целиком, а слово при этом ОСТАВАЛОСЬ в
+# stems() (guillemet-фраза вырезается перед разбором на слова, прямая — нет),
+# создавая асимметрию с уже описанной в базе карточкой того же названия в
+# ёлочках. Итог — дубль карточки Fonte Capital/«Самолета» (14 августа, ссылка
+# mergers.ru) не нашёл ни уже опубликованную карточку от 11 августа, ни
+# ВТОРОЙ такой же черновик внутри той же партии (оба черновика — с одного и
+# того же URL). Оба шаблона извлекаются и объединяются одним ключом.
+QUOTE_PATTERNS = (re.compile(r'«([^»]{2,40})»'), re.compile(r'"([^"]{2,40})"'))
+
+
 def quoted(text):
-    return {quoted_key(m.group(1)) for m in re.finditer(r'«([^»]{2,40})»', str(text or ''))
-            if quoted_key(m.group(1))}
+    text = str(text or '')
+    out = set()
+    for pat in QUOTE_PATTERNS:
+        for m in pat.finditer(text):
+            key = quoted_key(m.group(1))
+            if key:
+                out.add(key)
+    return out
 
 
 def quoted_common(a, b):
