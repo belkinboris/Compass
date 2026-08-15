@@ -37,9 +37,6 @@ FIXES = [
 
     # === cc2929a95: Западная Голд — ФАС-одобрение ===
     # buyer=False (профиля нет). Покупатель — группа «ОКТО» (см. zolteh.ru и rbc.ru).
-    dict(id='cc2929a95', field='buyer_name', old=None, new='Группа «ОКТО»',
-         quote='100% акций перешли к группе ОКТО.',
-         why='ФАС-карточка стояла без имени покупателя; подтверждено RBC и Zolteh'),
 
     dict(id='cc2929a95', field='src', old=None,
          new=['BIRCH Legal',

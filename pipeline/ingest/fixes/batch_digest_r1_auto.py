@@ -466,7 +466,7 @@ FIXES = [
          new='Ее совокупная выручка в 2024 году составила 2,1 млрд рублей',
          quote='ее совокупная выручка в 2024 году составила 2,1 млрд рублей',
          why='из digest ChatGPT round1, сверено с https://www.tbank.ru/invest/social/profile/T-Investments/505cb584-3ec6-4bed-aaef-82cc1fea0e40/'),
-dict(id='g506ea8c4', field='eco.context', old='—',
+    dict(id='g506ea8c4', field='eco.context', old='—',
          new='До середины июня ее основным собственником был совладелец ТД «Балтийский берег» Михаил Бобров.',
          quote='До середины июня ее основным собственником был совладелец ТД «Балтийский берег» Михаил Бобров.',
          why='из digest ChatGPT round1, сверено с https://www.kommersant.ru/doc/7808131'),

@@ -137,7 +137,14 @@ def main(argv):
                 tail = e
                 while tail < len(src) and src[tail:tail + 1] == b',':
                     tail += 1
-                while tail < len(src) and src[tail:tail + 1] in (b' ', b'\n'):
+                # До конца ЭТОЙ строки включая перевод — не дальше: иначе
+                # съедаем отступ следующей записи, если она идёт сразу следом
+                # (нашлось по факту — 29 строк `dict(...)` в fixes/*.py
+                # потеряли отступ ровно там, где перед ними стояла снятая
+                # запись).
+                while tail < len(src) and src[tail:tail + 1] == b' ':
+                    tail += 1
+                if tail < len(src) and src[tail:tail + 1] == b'\n':
                     tail += 1
                 edits.append((line_start, tail, b''))
                 dropped += 1

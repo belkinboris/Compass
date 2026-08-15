@@ -41,9 +41,6 @@ FIXES = [
     # === c3c15a888: Финам / Новые чемпионы ===
     # buyer=None — профиля нет; buyer_name не конфликтует.
     # ComNews подтверждает: «Финам» запускает фонд.
-    dict(id='c3c15a888', field='buyer_name', old=None, new='«Финам»',
-         quote='"Финам" запустит фонд для готовящихся к IPO IT-компаний',
-         why='покупатель стоял прочерком; ComNews называет «Финам» дословно'),
 
     dict(id='c3c15a888', field='src', old=None,
          new=['ComNews',
