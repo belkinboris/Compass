@@ -525,6 +525,21 @@ def test_party_name_is_not_initials_only(deals):
     assert not bad, f"сторона записана инициалами вместо имени: {bad[:5]}"
 
 
+def test_party_text_field_is_not_a_bare_profile_id(deals):
+    """Текстовое поле стороны — имя, а не служебный id профиля.
+
+    Каталог вычитки (E3, 18 августа 2026): у трёх карточек в `seller` или
+    `buyer_name` лежал не текст, а id профиля («g6663f201», «c9bad29b7») —
+    на экране показывался бы этот id вместо имени компании. Регулярка
+    держит класс закрытым для новых карточек притока.
+    """
+    pat = re.compile(r"^[gc][0-9a-f]{8}$")
+    bad = [(d["id"], field, d[field]) for d in deals
+           for field in ("seller", "buyer_name")
+           if isinstance(d.get(field), str) and pat.match(d[field].strip())]
+    assert not bad, f"сторона записана голым id профиля: {bad[:5]}"
+
+
 def test_asset_is_not_a_party(base):
     """Предмет сделки — не её сторона, и наоборот.
 
