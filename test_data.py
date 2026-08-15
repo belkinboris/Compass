@@ -510,6 +510,21 @@ def test_buyer_is_named_once(deals):
     assert not bad, f"у покупателя одновременно профиль и имя текстом: {bad[:5]}"
 
 
+def test_party_name_is_not_initials_only(deals):
+    """Сторона сделки — «Фамилия Имя», а не «Фамилия И.О.».
+
+    Каталог вычитки (A7, 15 августа 2026): разбор источника иногда сохранял
+    сторону в газетном сокращении («Иванов И.И.») вместо полного имени из
+    того же текста. Один такой случай нашёлся и починен чтением; регулярка
+    держит класс закрытым для новых карточек притока.
+    """
+    pat = re.compile(r"^[А-ЯЁ][а-яё]+ [А-ЯЁ]\.[А-ЯЁ]\.$")
+    bad = [(d["id"], field, d[field]) for d in deals
+           for field in ("seller", "buyer_name")
+           if isinstance(d.get(field), str) and pat.match(d[field].strip())]
+    assert not bad, f"сторона записана инициалами вместо имени: {bad[:5]}"
+
+
 def test_asset_is_not_a_party(base):
     """Предмет сделки — не её сторона, и наоборот.
 
