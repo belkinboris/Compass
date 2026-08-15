@@ -35,6 +35,7 @@ import os
 import re
 import sys
 from datetime import date
+from urllib.parse import quote, urlsplit, urlunsplit
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -92,6 +93,22 @@ def telegram_post_text(raw_html, channel, post_id):
     return re.sub(r'[ \t]+', ' ', re.sub(r'<[^>]+>', ' ', text)).strip()
 
 
+def encode_url(url):
+    """Процент-кодирует путь/запрос, оставляя домен и схему как есть.
+
+    tadviser.ru и подобные держат кириллицу прямо в пути статьи
+    (.../index.php/Компания:АЛД_Автомотив). `urllib.request` пытается
+    закодировать строку запроса как ASCII и падает с
+    `'ascii' codec can't encode characters` — не сетевая ошибка, а то, что
+    адрес ни разу не был процент-кодирован. `quote(safe=...)` не трогает
+    уже закодированные адреса (в них нет кириллицы, save остаётся тем же)."""
+    parts = urlsplit(url)
+    return urlunsplit((parts.scheme, parts.netloc,
+                        quote(parts.path, safe="/%"),
+                        quote(parts.query, safe="=&%"),
+                        parts.fragment))
+
+
 def already_fetched():
     """Адреса, чей полный текст уже лежит на диске: второй раз не качаем.
 
@@ -129,7 +146,7 @@ def fetch_and_store(targets, write=True):
             continue
         skip.add(url)
         tg = telegram_preview_url(url)
-        fetch_url = tg[0] if tg else url
+        fetch_url = encode_url(tg[0] if tg else url)
         req = urllib.request.Request(fetch_url, headers={
             'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                            'AppleWebKit/537.36 (KHTML, like Gecko) '
