@@ -63,7 +63,7 @@ FIXES = [
          quote='по итогам 2024 года выручка составила 626,5 млн рублей, чистая прибыль — 7 млн рублей.',
          why='из digest ChatGPT round1 (B_100), сверено с https://agrovesti.net/news/corp/plodorodie-priobrelo-agroaktivy-kontserna-detskoselskij-v-voronezhskoj-oblasti.html'),
     dict(id='gf9932079', field='eco.target_fin', old='—',
-         new='Выручка АО «Издательство «Просвещение» по РСБУ в 2024 году составила 51,1 млрд руб.',
+         new='Выручка АО «Издательство «Просвещение»» по РСБУ в 2024 году составила 51,1 млрд руб.',
          quote='Выручка АО «Издательство «Просвещение» по РСБУ в 2024 году составила 51,1 млрд руб.',
          why='из digest ChatGPT round1 (B_100), сверено с https://www.interfax.ru/business/1045712'),
     dict(id='g381ff192', field='eco.target_fin', old='—',
