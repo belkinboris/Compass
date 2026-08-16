@@ -1937,6 +1937,28 @@ def test_deep_researched_stamp_is_idempotent_and_separate_from_reviewed():
     assert card["deep_researched"] == "2026-08-10", "повторный прогон переписал дату"
 
 
+def test_followup_researched_stamp_requires_deep_researched_first():
+    """`followup_researched` — второй, более поздний уровень (месяц после
+    появления карточки), дельта ПОВЕРХ `deep_researched`, а не независимая
+    отметка. Владелец 16 августа: приток видит только 51 источник реестра, а
+    то, что публикуется позже — поздние объявления консультантов, смена
+    статуса, — сейчас не ловится ничем; нужен второй проход, но он не имеет
+    смысла без первого. Отметка идемпотентна тем же способом, что `reviewed`
+    и `deep_researched`.
+    """
+    import review
+    card = {"id": "z"}
+    assert review.stamp_followup_researched(card, day="2026-09-15") is False, \
+        "без deep_researched второй уровень не должен ставиться"
+    assert "followup_researched" not in card
+
+    assert review.stamp_deep_researched(card, day="2026-08-10") is True
+    assert review.stamp_followup_researched(card, day="2026-09-15") is True
+    assert card["followup_researched"] == "2026-09-15"
+    assert review.stamp_followup_researched(card, day="2026-10-01") is False
+    assert card["followup_researched"] == "2026-09-15", "повторный прогон переписал дату"
+
+
 def test_every_fixed_card_carries_a_reviewed_mark():
     """Карточка, к которой применялась правка чтением, помечена прочитанной.
 

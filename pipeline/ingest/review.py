@@ -543,7 +543,26 @@ def stamp_deep_researched(card, day=None):
     return False
 
 
-def main(write=False, mark_read=(), mark_deep=()):
+def stamp_followup_researched(card, day=None):
+    """Отметка «карточку проверили на события ПОСЛЕ deep_researched» —
+    второй, более поздний уровень дочитывания (владелец, 16 августа: приток
+    видит только 51 источник из реестра, и то, что публикуется позже —
+    поздние объявления консультантов, аналитика, смена статуса — не ловится
+    ничем; нужен ещё один, более узкий проход через месяц после появления
+    карточки). Ставится ТОЛЬКО если уже стоит `deep_researched` — второй
+    уровень не имеет смысла без первого, это дельта поверх него, а не
+    замена. Идемпотентна, как `reviewed` и `deep_researched` — тем же
+    способом и по той же причине (повторный прогон не должен выдавать
+    старую проверку за свежую)."""
+    if not card.get('deep_researched'):
+        return False
+    if not card.get('followup_researched'):
+        card['followup_researched'] = day or datetime.now(timezone.utc).date().isoformat()
+        return True
+    return False
+
+
+def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
@@ -603,6 +622,24 @@ def main(write=False, mark_read=(), mark_deep=()):
         else:
             to_mark_deep.append(cid)
 
+    # --mark-followup: второй, более поздний уровень дочитывания — дельта
+    # ПОВЕРХ уже сделанного deep_researched, а не замена ему. Карточка без
+    # deep_researched (в том числе только что помеченная в этом же прогоне
+    # через --mark-deep) в очередь месячного прохода попасть не может —
+    # отклоняем явно, а не молча пропускаем: опечатка в id или преждевременный
+    # вызов должны быть видны, а не тихо ничего не сделать.
+    to_mark_followup = []
+    for cid in mark_followup:
+        if cid not in cards:
+            refused.append((dict(id=cid, field='followup_researched'),
+                            ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
+        elif not cards[cid].get('deep_researched') and cid not in to_mark_deep:
+            refused.append((dict(id=cid, field='followup_researched'),
+                            ['у карточки %s нет deep_researched — второй уровень '
+                             'без первого не ставится' % cid]))
+        else:
+            to_mark_followup.append(cid)
+
     print('\nпринято %d, отклонено %d' % (len(ok), len(refused)))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
@@ -645,19 +682,30 @@ def main(write=False, mark_read=(), mark_deep=()):
         if stamp_deep_researched(cards[cid]):
             stamped_deep += 1
 
+    # После --mark-deep, не до: карточка, помеченная И --mark-deep, И
+    # --mark-followup в одном вызове (редкий, но легальный случай — второй
+    # уровень пройден сразу вслед за первым), обязана видеть уже
+    # проставленный deep_researched.
+    stamped_followup = 0
+    for cid in to_mark_followup:
+        if stamp_followup_researched(cards[cid]):
+            stamped_followup += 1
+
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     print('ЗАПИСАНО: %d правок, %d отметок прочтения, %d отметок глубокого '
-          'исследования в %s'
-          % (len(ok), stamped, stamped_deep, os.path.relpath(DATA, ROOT)))
+          'исследования, %d отметок второго уровня в %s'
+          % (len(ok), stamped, stamped_deep, stamped_followup,
+             os.path.relpath(DATA, ROOT)))
     return 0
 
 
 if __name__ == '__main__':
     _args = sys.argv[1:]
-    _flags = ('--write', '--mark-read', '--mark-deep')
+    _flags = ('--write', '--mark-read', '--mark-deep', '--mark-followup')
     _ids = [a for a in _args if a not in _flags]
     sys.exit(main(write='--write' in _args,
                   mark_read=_ids if '--mark-read' in _args else (),
-                  mark_deep=_ids if '--mark-deep' in _args else ()))
+                  mark_deep=_ids if '--mark-deep' in _args else (),
+                  mark_followup=_ids if '--mark-followup' in _args else ()))

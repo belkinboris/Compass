@@ -955,3 +955,18 @@ def test_party_name_is_in_the_nominative_case(deals):
             if problem:
                 bad.append((deal["id"], field, deal.get(field), problem))
     assert not bad, "имя стороны в косвенном падеже: %r" % (bad[:6],)
+
+
+def test_followup_researched_never_appears_without_deep_researched(deals):
+    """Второй уровень дочитывания (`followup_researched`, месяц после
+    появления) — дельта ПОВЕРХ первого (`deep_researched`, неделя), а не его
+    замена: карточку, которую ни разу не обыскали по стандарту 2026 года,
+    бессмысленно перепроверять на «что нового вышло с тех пор». `review.py`
+    это уже не даёт сделать (`stamp_followup_researched` отказывает без
+    `deep_researched`, `--mark-followup` в CLI отклоняет такую карточку явно)
+    — здесь та же граница закреплена как инвариант базы, а не только как
+    поведение одной функции.
+    """
+    bad = [d["id"] for d in deals
+           if d.get("followup_researched") and not d.get("deep_researched")]
+    assert not bad, "followup_researched без deep_researched: %r" % bad
