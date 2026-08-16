@@ -3049,6 +3049,23 @@ const eventSources = e => {
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
   return raw.filter(x=>Array.isArray(x)&&x[1]);
 };
+/* У 130 сделок из 1573 один и тот же источник (например, «Коммерсантъ»)
+   упомянут дважды — это две РАЗНЫЕ статьи (обновление факта), а не дубль
+   ссылки. Показанные рядом, две ссылки с одинаковым текстом неразличимы:
+   какая из двух вела к новому факту, а какая повторяет уже прочитанное —
+   решить нельзя, не открыв обе. Здесь второе и последующие упоминания
+   одного и того же названия внутри ОДНОГО списка нумеруются, первое
+   остаётся как есть — ничего не выдумываем, просто различаем то, что уже
+   в данных. */
+const labelSources = list => {
+  const seen = new Map();
+  return list.map(src => {
+    const name = String(src[0] || "Источник");
+    const n = (seen.get(name) || 0) + 1;
+    seen.set(name, n);
+    return [n > 1 ? `${name} (${n})` : name, src[1]];
+  });
+};
 function dealEvents(d){
   const raw=Array.isArray(d.events)?d.events:[];
   const rows=raw.map((e,i)=>({
@@ -3137,7 +3154,7 @@ function renderDealStage(id,key){
       ${facts.length?`<div class="stage-facts">${facts.map(x=>`<div class="stage-fact"><span class="label">${esc(String(x[0]))}</span><b>${esc(String(x[1]))}</b></div>`).join("")}</div>`:""}
       <div class="stage-nav">${prev?`<a class="chip" href="${stageHref(d,prev)}">← Предыдущий этап</a>`:""}${next?`<a class="chip" href="${stageHref(d,next)}">Следующий этап →</a>`:""}<a class="chip" href="#/deal/${d.id}">Актуальная карточка</a></div>
     </div>
-    <div class="src reveal"><span class="label">Источники этого этапа</span><br>${sources.length?sources.map(src=>`<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0]||"Источник")}</a>`).join(""):`<span class="acct-note">Отдельная ссылка для этого этапа не сохранена; используйте источники общей карточки.</span>`}</div>`;
+    <div class="src reveal"><span class="label">Источники этого этапа</span><br>${sources.length?labelSources(sources).map(src=>`<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0])}</a>`).join(""):`<span class="acct-note">Отдельная ссылка для этого этапа не сохранена; используйте источники общей карточки.</span>`}</div>`;
 }
 function detailScore(d){
   const values=[d.sum,d.asset,d.asset_share,d.seller,d.buyer_name,
@@ -3625,7 +3642,7 @@ function renderDeal(id, qs, previewCard){
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
-  <div class="src reveal"><span class="label">Источники</span><br>${d.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
+  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
   <div class="deal-tools reveal">
     <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
     <button class="chip" id="downloaddeal">Скачать PDF</button>
