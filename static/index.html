@@ -406,6 +406,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .tag.bronze{color:var(--bronze);background:var(--bronze-soft)}
 .status{display:inline-block;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:2px;color:var(--muted)}
 .status.closed{border-color:var(--accent);color:var(--accent)}
+.status.cancelled{border-color:#B3402A;color:#B3402A}
 
 /* ---------- CTA ---------- */
 .cta{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--accent-deep),#1B3B45);color:var(--ivory);border-radius:var(--radius);padding:36px 34px;margin-top:34px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
@@ -2536,7 +2537,7 @@ function unifiedFeed(){
        отличается по месяцу от даты публикации. */
     full: d => `
     <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(d.added||d.date)}</span>${d.status?`<br><span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>`:""}</div>
+      <div><span class="label num">${fmtDate(d.added||d.date)}</span>${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
       <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}${dealDateNote(d)}</div></div>
       ${dealMetaHtml(d)}
     </a>`,
@@ -3044,6 +3045,15 @@ const stageKind = status => {
   if(/обсуж|переговор|планир|намерен/.test(s)) return "negotiations";
   return "";
 };
+/* Плашка статуса раньше знала только «Закрыта» — 36 сделок «Не состоялась»
+   (сорвались, отменены) выглядели тем же нейтральным серым, что и 214
+   «Обсуждается» (просто ещё идут): в ленте сделок и в шапке карточки нельзя
+   было на глаз отличить мёртвую сделку от текущих переговоров. Переиспользуем
+   уже проверенный `stageKind()`, а не заводим второй классификатор статуса. */
+const statusClass = status => {
+  const kind = stageKind(status);
+  return kind==="closed" ? "closed" : kind==="cancelled" ? "cancelled" : "";
+};
 const eventSources = e => {
   const raw=Array.isArray(e&&e.sources) ? e.sources
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
@@ -3148,7 +3158,7 @@ function renderDealStage(id,key){
     <div class="d-head reveal"><span class="label">Этап сделки · ${fmtDate(e.date)}</span><h1>${esc(e.title)}</h1>
       <div class="d-parties"><span>Сделка: <b>${esc(d.title)}</b></span></div></div>
     <div class="stage-card reveal">
-      <span class="status ${e.kind==="closed"?"closed":""}">${esc(e.title)}</span>
+      <span class="status ${e.kind==="closed"?"closed":e.kind==="cancelled"?"cancelled":""}">${esc(e.title)}</span>
       <h2>${esc(e.historicalTitle||e.title)}</h2>
       ${e.note?`<p>${esc(e.note)}</p>`:`<p>Для этого этапа сохранены дата и источники. Дополнительные факты в публикациях не раскрывались.</p>`}
       ${facts.length?`<div class="stage-facts">${facts.map(x=>`<div class="stage-fact"><span class="label">${esc(String(x[0]))}</span><b>${esc(String(x[1]))}</b></div>`).join("")}</div>`:""}
@@ -3619,7 +3629,7 @@ function renderDeal(id, qs, previewCard){
   <div class="d-head reveal">
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <span class="label num">${fmtDate(d.date)}</span>
-      ${d.status?`<span class="status ${d.status==="Закрыта"?"closed":""}">${d.status}</span>`:""}
+      ${d.status?`<span class="status ${statusClass(d.status)}">${d.status}</span>`:""}
       ${industryLinksHtml(d)}
     </div>
     <div class="deal-parties-strong reveal">
