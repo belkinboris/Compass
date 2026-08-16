@@ -1959,6 +1959,41 @@ def test_followup_researched_stamp_requires_deep_researched_first():
     assert card["followup_researched"] == "2026-09-15", "повторный прогон переписал дату"
 
 
+def test_mark_deep_auto_backfills_followup_when_window_already_passed():
+    """Владелец 16 августа: «нам же нет смысла эти же которые сейчас
+    просматриваем месячно делать?» — и был прав. Почти весь бэклог
+    REVISION_BRIEF несёт `added=2026-07-15`; к моменту, когда до карточки
+    доходят руки, с добавления в базу прошло больше месяца, и `--mark-deep`
+    в этот день значит, что `deep_researched` УЖЕ случился на 30+ день
+    после `added`. Без этой правки такая карточка немедленно попадала бы
+    в месячную очередь с нулевым отступом от только что законченного
+    первого прохода — 40 карточек партий 2 и 3 обнаружились в этом
+    состоянии прямо в базе. `stamp_deep_researched` теперь закрывает
+    и второй уровень сам, тем же днём, что и первый.
+    """
+    import review
+    old_card = {"id": "old", "added": "2026-07-15"}
+    assert review.stamp_deep_researched(old_card, day="2026-08-16") is True
+    assert old_card["followup_researched"] == "2026-08-16", \
+        "32 дня между added и deep_researched — окно уже пройдено, второй уровень обязан закрыться сам"
+
+    # Свежая карточка — месячное окно ещё не пройдено, автозакрытия быть не должно.
+    fresh_card = {"id": "fresh", "added": "2026-08-10"}
+    assert review.stamp_deep_researched(fresh_card, day="2026-08-16") is True
+    assert "followup_researched" not in fresh_card, \
+        "6 дней между added и deep_researched — рано закрывать второй уровень"
+
+    # Ровно на границе (30 дней) — считается пройденным.
+    boundary_card = {"id": "boundary", "added": "2026-07-17"}
+    assert review.stamp_deep_researched(boundary_card, day="2026-08-16") is True
+    assert boundary_card["followup_researched"] == "2026-08-16"
+
+    # Без added (кураторская запись без даты) — не падает, просто не бэкфиллит.
+    no_added_card = {"id": "no-added"}
+    assert review.stamp_deep_researched(no_added_card, day="2026-08-16") is True
+    assert "followup_researched" not in no_added_card
+
+
 def test_every_fixed_card_carries_a_reviewed_mark():
     """Карточка, к которой применялась правка чтением, помечена прочитанной.
 

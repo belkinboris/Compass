@@ -44,7 +44,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -528,6 +528,18 @@ def stamp_reviewed(card, day=None):
     return False
 
 
+def _parse_date(s):
+    """ГГГГ-ММ-ДД (или ГГГГ) -> date, или None — тем же способом, что
+    `pipeline/backfill_followup_researched.py`, чтобы не разойтись в
+    трактовке частичных дат."""
+    try:
+        parts = [int(x) for x in str(s).split('-')]
+        y, m, d = (parts + [1, 1])[:3]
+        return date(y, m, d)
+    except (ValueError, TypeError, IndexError):
+        return None
+
+
 def stamp_deep_researched(card, day=None):
     """Отметка «карточку довели до стандарта января-июня 2026», отдельная от
     `reviewed`. Владелец 10 августа: не гнаться за числом источников, а
@@ -536,9 +548,27 @@ def stamp_deep_researched(card, day=None):
     правку, эта только по явному заявлению читающего (`--mark-deep`), потому
     что «прочитал источник» и «обыскал вопрос со всех сторон» — разная
     планка, и первое не должно тихо сходить за второе. Идемпотентна, как и
-    `stamp_reviewed`."""
+    `stamp_reviewed`.
+
+    ЗАОДНО ЗАКРЫВАЕТ ВТОРОЙ УРОВЕНЬ, ЕСЛИ ОН УЖЕ ОРГАНИЧЕСКИ ПОКРЫТ. Партия
+    16 августа обнажила разрыв: почти весь бэклог REVISION_BRIEF несёт
+    `added=2026-07-15` — к моменту, когда до карточки вообще доходят руки,
+    с добавления в базу уже прошло больше месячного окна. `--mark-deep` в
+    тот же день, что и добавление карточки в очередь, значит, что
+    `deep_researched` УЖЕ случился на 30+ день после `added` — и месячная
+    очередь тут же требовала бы второго прохода С НУЛЕВЫМ ОТСТУПОМ от
+    только что законченного первого, что бессмысленно (тот же расчёт,
+    что у разового бэкфилла `pipeline/backfill_followup_researched.py`
+    16 августа, — но 20 карточек партии 2 и 20 карточек партии 3 были
+    помечены deep_researched УЖЕ ПОСЛЕ того прогона и проскочили мимо
+    него; правило нужно как ПОСТОЯННОЕ поведение самой отметки, а не
+    только как разовая уборка старого хвоста)."""
     if not card.get('deep_researched'):
-        card['deep_researched'] = day or datetime.now(timezone.utc).date().isoformat()
+        stamp = day or datetime.now(timezone.utc).date().isoformat()
+        card['deep_researched'] = stamp
+        added, dr = _parse_date(card.get('added')), _parse_date(stamp)
+        if added and dr and (dr - added).days >= 30 and not card.get('followup_researched'):
+            card['followup_researched'] = stamp
         return True
     return False
 
