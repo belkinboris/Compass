@@ -442,6 +442,15 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         bad.append('поле уже другое: в базе %r, ожидали %r' % (get_field(card, field), fix['old']))
     if texts and not quote_is_real(quote, texts):
         bad.append('цитаты нет в тексте источника')
+    # СТРУКТУРНЫЕ ПОЛЯ (заголовок, имена сторон) — не цитата, а название по
+    # стилю базы: « », не " ". Источник почти всегда набран прямыми
+    # кавычками, и три раунда ручных чисток (fix_straight_quotes.py,
+    # fix_new_card_titles_batch3.py, fix_straight_quotes_batch1.py) чинили
+    # один и тот же дефект заново, потому что ничто не мешало ПРАВКЕ снова
+    # принести его через review.py — draft.py.normalize_quotes чинит вход
+    # с притока, эта проверка чинит вход через ручное/агентское наполнение.
+    if field in ('title', 'seller', 'buyer_name', 'asset') and isinstance(new, str) and '"' in new:
+        bad.append('прямые кавычки вместо «» — запишите %r' % drafter.normalize_quotes(new))
     if field == 'date':
         problem = date_is_supported(fix['old'], new, quote)
         if problem:
@@ -457,7 +466,7 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
             bad.append('в цитате нет слова, подтверждающего статус «%s»' % new)
     elif field == 'type':
         if new not in TYPE_WORDS:
-            bad.append('неизвестный тип сделки %r — их ровно пять' % new)
+            bad.append('неизвестный тип сделки %r — из %s' % (new, sorted(TYPE_WORDS)))
         elif not any(w in quote.lower() for w in TYPE_WORDS[new]):
             bad.append('в цитате нет слова, подтверждающего тип «%s»' % new)
     elif field == 'sum' and new is not None:
@@ -519,6 +528,19 @@ def _self_check():
     assert sum_is_supported('552,6 млн ₽ (по оценке)', q_fact)   # факт как оценка
     assert sum_is_supported('7–8 млрд ₽ (по оценке)',
                             'стоимость сделки оценивает в 7–8 млрд руб.') is None
+    # Прямые кавычки в структурных полях: одна пара и несколько пар подряд
+    # красятся в « » независимо друг от друга (нечётная встреча — открывающая).
+    assert drafter.normalize_quotes('"Внуково" и "Домодедово"') == '«Внуково» и «Домодедово»'
+    assert drafter.normalize_quotes('ООО "Антресоль"') == 'ООО «Антресоль»'
+    assert drafter.normalize_quotes('«Автодом»') == '«Автодом»'  # уже ёлочки — не трогаем
+    assert drafter.normalize_quotes('оборванная "кавычка') == 'оборванная "кавычка'  # нечётное — не трогаем
+    # check() отклоняет прямые кавычки в title/seller/buyer_name/asset, даже
+    # если сама подстрока лежит в цитате дословно (иначе правка внесла бы
+    # ровно тот дефект, который эта же проверка призвана не пускать).
+    bad = check(dict(id='x', field='buyer_name', old=None, new='ООО "Антресоль"',
+                      quote='ООО "Антресоль" стало владельцем актива.'),
+                {}, [], {}, set())
+    assert any('прямые кавычки' in b for b in bad)
 
 
 def stamp_reviewed(card, day=None):

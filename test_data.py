@@ -235,6 +235,35 @@ def test_currency_symbol_not_glued_to_next_word(deals):
     assert not bad, f"значок валюты слился со словом в обложке: {bad[:5]}"
 
 
+def test_no_straight_quotes_in_structural_fields(deals):
+    """Прямые кавычки " " вместо ёлочек « » в title/buyer_name/seller/asset.
+
+    ТРИ раунда ручных чисток одного и того же дефекта — fix_straight_quotes.py
+    (2 августа), fix_new_card_titles_batch3.py (8 августа, приток принёс его
+    снова), fix_straight_quotes_batch1.py (16 августа) — не оставили следа в
+    тестах, поэтому регресс каждый раз обнаруживался только глазами владельца.
+    Корень починен 16 августа: `draft.py`'s `normalize_quotes()` приводит
+    title/buyer_name/asset/seller к « » при сборке черновика, а `review.py`'s
+    `check()` отказывает в правке этих полей, если в `new` остались прямые
+    кавычки. Этот тест — забор с третьей стороны: ловит регресс независимо от
+    ТОГО, каким путём он придёт (ручная правка JSON, будущий скрипт, о
+    котором мы ещё не думали).
+
+    ЧЕГО НЕ ЛОВИТ НАРОЧНО. Вложенные кавычки второго уровня (имя внутри
+    имени — «Торговый дом "Меридиан"») — это конвенция базы, не дефект:
+    внешние « », внутренние " ". Проверка смотрит только на СТАНДАЛОН прямую
+    кавычку — там, где снаружи никаких « » вовсе нет (тот же критерий, что
+    в fix_straight_quotes.py)."""
+    standalone_straight_quote = re.compile(r'(?<![«»])"[^"«»]*"(?![«»])')
+    bad = []
+    for d in deals:
+        for field in ("title", "buyer_name", "seller", "asset"):
+            v = d.get(field)
+            if isinstance(v, str) and standalone_straight_quote.search(v):
+                bad.append((d["id"], field, v))
+    assert not bad, f"прямые кавычки вместо « » в структурном поле: {bad[:5]}"
+
+
 NAMED_ESTIMATOR = re.compile(r"\((?:по\s+)?оценк[а-яё]*\s+(?-i:[А-ЯЁA-Z])", re.I)
 
 
