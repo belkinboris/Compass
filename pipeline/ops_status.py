@@ -163,29 +163,71 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, nothing=False)
     return '\n'.join(lines)
 
 
-def short_name(title):
-    """Из заголовка сделки — короткое узнаваемое имя для отчёта.
+def _trim(s, limit=45):
+    """Обрезать по границе слова, не разрубая слово и не оставляя повисшую
+    открывающую скобку — профили компаний нередко несут пояснение в скобках
+    («CanPack Group, Inc. (владелец активов, американская компания)»), и
+    обрезка ровно посередине такого пояснения выглядит сломанной."""
+    s = str(s or '').strip()
+    if len(s) <= limit:
+        return s
+    cut = s[:limit].rsplit(' ', 1)[0]
+    if '(' in cut and ')' not in cut:
+        cut = cut[:cut.rindex('(')].rstrip()
+    return cut
 
-    Берём первое название в кавычках, иначе первые два слова с заглавной,
-    иначе первые три слова. Ничего не сочиняем: имя приходит из базы.
+
+def short_name(deal, companies=None):
+    """Короткое узнаваемое имя сделки для отчёта — по СТРУКТУРНЫМ полям, а
+    не по первому попавшемуся капитализированному слову заголовка.
+
+    ПОЧЕМУ ПЕРЕПИСАНО. В русском предложении с заглавной буквы начинается
+    ЛЮБОЕ первое слово, а не только имя собственное. Прежняя версия брала
+    первое слово заголовка с заглавной буквы как «имя» — и получала
+    «Продажа», «Слияние», «Российские», «Государственный» у трёх десятков
+    заголовков, начинающихся с описания типа сделки, а не со стороны или
+    предмета («Продажа Veeam Software фонду Insight Partners…», «Слияние
+    Whoosh и МТС Юрент…»). Владелец 16 августа прислал два таких отчёта и
+    назвал это «безумными косяками».
+
+    Порядок источников — от самого надёжного к самому слабому:
+    1. название в кавычках из заголовка (почти всегда точное и короткое);
+    2. профиль предмета сделки (`target`) или его текст (`asset`);
+    3. профиль покупателя (`buyer`) или его текст (`buyer_name`);
+    4. продавец текстом (`seller`);
+    5. первые три слова заголовка — честно урезанный заголовок, а не
+       выдуманное «имя», для редких карточек без единого структурного поля
+       (кураторские записи).
+    Ничего не сочиняем: каждый источник — то, что уже стоит в базе фактом.
     """
-    t = re.sub(r'\s+', ' ', str(title or '')).strip()
-    quoted = re.findall(r'[«"]([^»"]{2,40})[»"]', t)
+    companies = companies or {}
+    title = re.sub(r'\s+', ' ', str(deal.get('title') or '')).strip()
+    quoted = re.findall(r'[«"]([^»"]{2,40})[»"]', title)
     if quoted:
         return '«%s»' % quoted[0]
-    caps = re.findall(r'(?-i:[А-ЯЁA-Z][\w.&-]+)', t)
-    if caps:
-        return ' '.join(caps[:2]) if len(caps) > 1 and len(caps[0]) < 5 else caps[0]
-    return ' '.join(t.split()[:3])
+    target = companies.get(deal.get('target') or '', {}).get('name')
+    if target:
+        return _trim(target)
+    if deal.get('asset'):
+        return _trim(deal['asset'])
+    buyer = companies.get(deal.get('buyer') or '', {}).get('name')
+    if buyer:
+        return _trim(buyer)
+    if deal.get('buyer_name'):
+        return _trim(deal['buyer_name'])
+    if deal.get('seller'):
+        return _trim(deal['seller'])
+    return ' '.join(title.split()[:3]) if title else '(без названия)'
 
 
 def deal_names(ids, base=None):
-    """Заголовки карточек по их id — из базы, а не из головы."""
+    """Короткие имена карточек по их id — из базы, а не из головы."""
     if base is None:
         path = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
         base = json.load(open(path, encoding='utf-8'))
     by_id = {d['id']: d for d in base.get('deals', [])}
-    return [short_name(by_id[i].get('title')) for i in ids if i in by_id]
+    companies = base.get('companies', {})
+    return [short_name(by_id[i], companies) for i in ids if i in by_id]
 
 
 def render_quality(did='', left=0, ids=(), facts=0):
@@ -346,9 +388,23 @@ def _self_check():
     assert not find_invented_category('восемь крупных сделок')
     assert not find_invented_category('12 инвестиционных сделок')
     assert not find_invented_category('Дополнили двенадцать карточек')
-    # Имена берутся из базы, а не из головы: короткое имя — из заголовка.
-    assert short_name('«Росхим» может приобрести Восточный нефтехимический терминал') == '«Росхим»'
-    assert short_name('ВЭБ.РФ объявила о приобретении ГТЛК') == 'ВЭБ.РФ'
+    # Имена берутся из базы, а не из головы. Название в кавычках — точнее
+    # всего, берётся первым, даже когда структурных полей тоже хватает.
+    assert short_name({'title': '«Росхим» может приобрести Восточный нефтехимический терминал',
+                       'target': 'x'}, {'x': {'name': 'АО «Росхим»'}}) == '«Росхим»'
+    # ГЛАВНАЯ ЗАЩИТА ЭТОЙ ПРАВКИ: заголовок начинается с описания ТИПА
+    # сделки («Продажа», «Слияние»), а не со стороны — старая версия взяла
+    # бы именно это слово с заглавной. Профиль предмета сделки перебивает
+    # такое заглавное слово и даёт настоящее имя.
+    assert short_name({'title': 'Продажа Veeam Software фонду Insight Partners за $5 млрд',
+                       'target': 'v'}, {'v': {'name': 'Veeam Software'}}) == 'Veeam Software'
+    assert short_name({'title': 'Слияние Whoosh и МТС Юрент (ЮрентБайк.ру)'}) \
+        != 'Слияние'
+    assert short_name({'title': 'Российские активы CanPack переданы во временное управление'}) \
+        != 'Российские'
+    # Ни кавычек, ни структурных полей — честно урезанный заголовок, а не
+    # выдуманное «имя» по первой заглавной букве.
+    assert short_name({'title': 'ВЭБ.РФ объявила о приобретении ГТЛК'}) == 'ВЭБ.РФ объявила о'
     # Склонения, ради которых всё и затевалось.
     assert 'карточка' in render_publish(nothing=True, soon=1)
     assert 'карточки' in render_publish(nothing=True, soon=3)

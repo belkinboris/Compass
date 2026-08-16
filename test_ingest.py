@@ -2471,9 +2471,46 @@ def test_report_names_deals_from_the_base_not_from_the_head():
     text = ops_status.render_quality(did="", left=1297, ids=ids, facts=42)
     assert "Дополнили 5 карточек:" in text
     assert "42 факта" in text
-    # Имена — настоящие: каждое встречается в заголовке своей карточки.
+    # Имена — настоящие: каждое лежит в самой карточке (заголовок дословно
+    # ИЛИ структурное поле стороны/предмета), а не выдумано.
     by_id = {d["id"]: d for d in base["deals"]}
+    companies = base["companies"]
     for cid in ids[:3]:
-        name = ops_status.short_name(by_id[cid]["title"]).strip("«»")
-        assert name and name in by_id[cid]["title"]
+        card = by_id[cid]
+        name = ops_status.short_name(card, companies).strip("«»")
+        assert name
+        grounded = (
+            name in card["title"]
+            or name == companies.get(card.get("target") or "", {}).get("name")
+            or name == card.get("asset")
+            or name == companies.get(card.get("buyer") or "", {}).get("name")
+            or name == card.get("buyer_name")
+            or name == card.get("seller")
+        )
+        assert grounded, "%r не выводится ни из одного поля карточки %s" % (name, cid)
     assert "1297" in text
+
+
+def test_report_deal_name_is_not_the_first_capitalized_word():
+    """Владелец 16 августа прислал два отчёта подряд, назвавшие сделки
+    «Российские», «Продажа», «Яндексу», «Слияние», «Государственный» — и
+    справедливо спросил, что это за карточки. Причина: в русском заголовке
+    с заглавной буквы начинается ЛЮБОЕ первое слово, а не только имя
+    собственное, а старая `short_name` брала именно первое слово с
+    заглавной. `short_name` теперь смотрит на структурные поля (предмет,
+    покупатель, продавец) раньше текста заголовка — тест держит РЕАЛЬНЫЕ
+    карточки, на которых нашёлся баг, а не синтетический пример.
+    """
+    base = json.loads((ROOT / "static/data/deals_promoted.json").read_text(encoding="utf-8"))
+    by_id = {d["id"]: d for d in base["deals"]}
+    companies = base["companies"]
+    cases = {
+        "g6f83d85e": "Продажа",           # Продажа Veeam Software фонду Insight Partners...
+        "gdde6bef5": "Слияние",           # Слияние Whoosh и МТС Юрент...
+        "g9c4b80a7": "Российские",        # Российские активы CanPack...
+        "g3074f98b": "Государственный",   # Государственный пенсионный фонд Норвегии...
+        "ga5336065": "Продажа",           # Продажа золоторудного месторождения Ямалзолото
+    }
+    for cid, banned in cases.items():
+        name = ops_status.short_name(by_id[cid], companies)
+        assert name != banned, "%s: имя снова свелось к слову «%s»" % (cid, banned)
