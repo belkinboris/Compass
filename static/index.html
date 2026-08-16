@@ -251,7 +251,16 @@ nav{display:flex;gap:30px;margin-left:auto}
    ровно (замерено), но капитель системного шрифта 12px сидит в своей строке
    выше, чем капитель PT Serif 22px в своей, — подписи разделов выглядели
    приподнятыми относительно «КОМПАС». */
-nav a{position:relative;top:1.5px;padding:6px 0;font-weight:500;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+/* margin-top, а не top: `top` на позиционированном элементе внутри
+   `nav{overflow-x:auto;-webkit-overflow-scrolling:touch}` — известный триггер
+   бага мобильного Safari (родня уже пойманного `.top{backdrop-filter}` выше):
+   WebKit пересчитывает смещение `top` на каждом кадре инерционной прокрутки,
+   и САМИ СЛОВА пунктов меню дрожат по вертикали во время горизонтального
+   свайпа строки разделов — при том что `nav` в целом стоит на месте.
+   `position:relative` на `nav a` не убираем — на нём держится `::after`
+   (подчёркивание), но смещение переносим в margin: он не пересчитывается
+   заново при скролле, только один раз при layout. */
+nav a{position:relative;margin-top:1.5px;padding:6px 0;font-weight:500;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);transition:color .25s}
 nav a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--accent);transition:width .3s var(--ease)}
 nav a:hover{color:var(--ink)}
 nav a.on{color:var(--ink)}
