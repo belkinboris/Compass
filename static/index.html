@@ -1500,9 +1500,10 @@ function matchesCompany(text, id){
    пропадало 5 сделок, у АФК «Система» и ВТБ — по 4, всего 139 связей. */
 function companyRole(d, id){
   const reorg = dealKindOf(d.type) === "reorg";
-  if(d.buyer===id) return reorg ? "Правопреемник" : "Покупатель";
+  const roles = reorg ? reorgRoles(d) : null;
+  if(d.buyer===id) return reorg ? roles.a : "Покупатель";
   if(d.seller_id===id) return "Продавец";
-  if(d.target===id || d.asset_id===id) return reorg ? "Присоединяемое общество" : "Предмет сделки";
+  if(d.target===id || d.asset_id===id) return reorg ? roles.b : "Предмет сделки";
   return "";
 }
 /* Профиль без единой сделки. Такие профили появились из разбора сторон: в тексте
@@ -3358,8 +3359,27 @@ const isRound = d => d.type === "Инвестиция";
 /* Реорганизация (присоединение и т.п.) — своя пара ролей: нет покупателя и
    продавца, есть правопреемник и общество, прекращающее существование. */
 const isReorg = d => dealKindOf(d.type) === "reorg";
-const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? "Правопреемник" : "Покупатель";
-const targetRole = d => isReorg(d) ? "Присоединяемое общество" : "Предмет сделки";
+/* Роли зависят от ФОРМЫ реорганизации, а не только от факта, что это
+   реорганизация: при присоединении (и слиянии) сторона прекращает
+   существование в пользу другой — «правопреемник»/«присоединяемое общество».
+   При ВЫДЕЛЕНИИ наоборот: исходное общество СОХРАНЯЕТСЯ (д. МКД/ГК РФ ст. 19
+   «без прекращения последнего»), а новым, отдельным юрлицом становится
+   выделяемая часть — паре «правопреемник/присоединяемое» здесь неоткуда
+   взяться, у выделения нет прекращающейся стороны. Термины сверены с ФЗ
+   «Об АО»: «присоединяемое общество» — ст. 17, «выделяемое общество» — ст. 19
+   (это формулировка самого закона, не наша). «Сливающееся общество» в
+   законе НЕТ — там «общество, участвующее в слиянии» — поэтому для слияния
+   компактного термина не вводим, используем ту же пару, что для
+   присоединения (сторона всё равно прекращает существование в пользу
+   правопреемника).
+   d.reorg_form хранит конкретную форму, когда она известна и отличается
+   от присоединения; без него — старое поведение (присоединение). */
+const REORG_ROLES = {
+  "выделение": {a:"Реорганизуемое общество", b:"Выделяемое общество"},
+};
+const reorgRoles = d => REORG_ROLES[d.reorg_form] || {a:"Правопреемник", b:"Присоединяемое общество"};
+const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : "Покупатель";
+const targetRole = d => isReorg(d) ? reorgRoles(d).b : "Предмет сделки";
 
 function knownRowsHtml(d, withSum){
   const known = [];
@@ -3759,17 +3779,18 @@ function renderDeal(id, qs, previewCard){
          компании, — своя пара боксов, без «Продавца» и без строки «Предмет». */
       if(kindKey==="reorg"){
         if(!buyerName && !d.buyer_name && !targetName && !d.asset) return "";
+        const rr = reorgRoles(d);
         const survivorBox = buyerName
-          ? party("Правопреемник", d.buyer, buyerName)
+          ? party(rr.a, d.buyer, buyerName)
           : d.buyer_name
-            ? `<div class="dp-party"><span class="dp-role">Правопреемник</span><span class="dp-name">${d.buyer_name}</span></div>`
-            : `<div class="dp-party is-empty"><span class="dp-role">Правопреемник</span><span class="dp-name">Не раскрыт</span></div>`;
+            ? `<div class="dp-party"><span class="dp-role">${rr.a}</span><span class="dp-name">${d.buyer_name}</span></div>`
+            : `<div class="dp-party is-empty"><span class="dp-role">${rr.a}</span><span class="dp-name">Не раскрыт</span></div>`;
         const absorbedName = targetName || d.asset || "";
         const absorbedBox = absorbedName
           ? (targetName
-              ? party("Присоединяемое общество", d.target, targetName)
-              : `<div class="dp-party"><span class="dp-role">Присоединяемое общество</span><span class="dp-name">${absorbedName}</span></div>`)
-          : `<div class="dp-party is-empty"><span class="dp-role">Присоединяемое общество</span><span class="dp-name">Не раскрыто</span></div>`;
+              ? party(rr.b, d.target, targetName)
+              : `<div class="dp-party"><span class="dp-role">${rr.b}</span><span class="dp-name">${absorbedName}</span></div>`)
+          : `<div class="dp-party is-empty"><span class="dp-role">${rr.b}</span><span class="dp-name">Не раскрыто</span></div>`;
         return `<div class="deal-plate"><span class="label">Структура сделки</span>
           <div class="dp-row">
             ${survivorBox}
