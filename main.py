@@ -1590,13 +1590,24 @@ def delete_subscription(sub_id: int, user: User | None = Depends(_current_user),
 # и это уже проверенный e-mail — планка выше, чем у анонимного интернета.
 # Модерация (жалоба/скрытие) — следующий шаг, не блокирующий первую версию;
 # поле status у Comment для неё уже есть.
+def _comment_author(user: User) -> str:
+    # Регистрация с 2 августа 2026 требует «Имя и фамилию» (RegisterRequest.full_name
+    # обязательное поле) — но подпись под комментарием строилась не из него, а из
+    # локальной части e-mail (`email.split("@")[0]`): анонимный посетитель видел
+    # кусок чужого адреса почты на каждом комментарии, а введённое при регистрации
+    # имя нигде не показывалось. У аккаунтов старой схемы (до 2 августа) full_name
+    # может быть пуст — для них оставлен прежний вид, единственный, что у них есть.
+    name = (user.full_name or "").strip()
+    return name if name else user.email.split("@")[0]
+
+
 @app.get("/api/deals/{deal_id}/comments")
 def list_comments(deal_id: str, db=Depends(get_db)):
     rows = (db.query(Comment)
             .filter_by(deal_id=deal_id, status="approved")
             .order_by(Comment.created_at.asc()).all())
     return [{"id": c.id, "body": c.body, "created_at": c.created_at.isoformat(),
-             "author": c.user.email.split("@")[0]} for c in rows]
+             "author": _comment_author(c.user)} for c in rows]
 
 
 @app.post("/api/deals/{deal_id}/comments")
@@ -1611,7 +1622,7 @@ def post_comment(deal_id: str, comment: CommentIn, user: User | None = Depends(_
     row = Comment(deal_id=deal_id, user_id=user.id, body=body, status="approved")
     db.add(row)
     db.commit()
-    return {"id": row.id, "created_at": row.created_at.isoformat(), "author": user.email.split("@")[0]}
+    return {"id": row.id, "created_at": row.created_at.isoformat(), "author": _comment_author(user)}
 
 
 # «Уточнить или дополнить» отправляет сообщение прямо в продукт, а не открывает

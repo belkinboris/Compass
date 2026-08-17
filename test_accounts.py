@@ -9,7 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from db.models import Base, CorrectionRequest
+from db.models import Base, CorrectionRequest, User
 from db.session import engine, get_session
 
 TEST_PASSWORD = "надёжный-тестовый-пароль"
@@ -210,10 +210,22 @@ def test_comment_round_trip(client):
     login(client, "коммент@firm.ru")
     r = client.post("/api/deals/gtest0001/comments", json={"body": "Кто консультировал продавца?"})
     assert r.status_code == 200
-    assert r.json()["author"] == "коммент"  # часть почты до @, а не сама почта
+    # Регистрация просит «Имя и фамилию» — под комментарием показываем их, а
+    # не часть e-mail до @ (прежнее поведение молча раскрывало кусок чужого
+    # адреса почты каждому посетителю, хотя имя для показа уже было введено).
+    assert r.json()["author"] == "Тест Тестов"
 
     listed = client.get("/api/deals/gtest0001/comments").json()
     assert any(c["body"] == "Кто консультировал продавца?" for c in listed)
+
+
+def test_comment_author_falls_back_to_email_prefix_without_full_name(client):
+    # Аккаунты до 2 августа 2026 (`full_name` добавлено этой датой) могут не
+    # нести имени — для них подпись остаётся прежней, единственной, что есть.
+    user = User(email="легаси@firm.ru", password_hash="x", full_name=None)
+    assert main._comment_author(user) == "легаси"
+    user_blank = User(email="пусто@firm.ru", password_hash="x", full_name="   ")
+    assert main._comment_author(user_blank) == "пусто"
 
 
 def test_comment_empty_body_rejected(client):
