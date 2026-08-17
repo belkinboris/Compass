@@ -345,6 +345,38 @@ def test_fns_match_priority_skips_lots_and_orders_by_deal_count(monkeypatch):
         "громкая (deal_count выше) идёт первой, тихий лот вообще не запрашивается")
 
 
+def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
+    """Ручной посев по уже проверенному ИНН (fns_seed_top_companies.py) не
+    должен тратить `search` вовсе — только `egr`, иначе экономия смысла не
+    имеет: узнавать компанию, которую мы и так знаем по номеру, поиском по
+    имени — тот же лишний запрос, которого этот путь и призван избежать."""
+    from pipeline.sync_fns import confirm_by_inn
+
+    calls = {"search": 0, "egr": 0}
+
+    class FakeClient:
+        def search(self, *a, **kw):
+            calls["search"] += 1
+            return {"items": []}
+
+        def egr(self, inn):
+            calls["egr"] += 1
+            return {"items": [{"ЮЛ": {
+                "ИНН": inn, "ОГРН": "1027700000001",
+                "НаимСокрЮЛ": 'ООО "Тест"', "Статус": "Действующая",
+            }}]}
+
+    db = get_session()
+    try:
+        if not db.get(Company, "confirm-by-inn-test"):
+            db.add(Company(id="confirm-by-inn-test", name="Компания для теста ИНН"))
+            db.flush(); db.commit()
+        confirm_by_inn(db, FakeClient(), "confirm-by-inn-test", "7700000001", dry_run=True)
+    finally:
+        db.close()
+    assert calls == {"search": 0, "egr": 1}
+
+
 def test_fns_candidate_csv_review_round_trip(tmp_path):
     import csv
     from db.models import LegalEntityCandidate

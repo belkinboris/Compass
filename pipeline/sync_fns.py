@@ -213,6 +213,24 @@ def match_companies(db, client: ApiFnsClient, *, auto_confirm: bool, limit: int 
     return matched, candidates, errors
 
 
+def confirm_by_inn(db, client: ApiFnsClient, company_id: str, inn: str, *, dry_run: bool = False) -> None:
+    """Подтверждает юрлицо по уже проверенному ИНН — без единого `search`.
+
+    Для `--inn`/ручного посева заранее известных компаний `search` не нужен
+    вовсе: `egr` сам возвращает полную карточку по ИНН/ОГРН. Раньше здесь
+    сначала шёл `search`, и только если он не находил точное совпадение —
+    `egr`; для уже проверенного номера это лишний платный запрос на
+    практически каждую компанию. Экономит ровно тот метод, который тратится
+    в `--match` быстрее всего.
+    """
+    egr = normalize_egr(client.egr(inn))
+    if not egr:
+        raise ApiFnsError(f"юрлицо {inn} не найдено")
+    if not dry_run:
+        _confirm_entity(db, company_id, egr, 1.0, manual=True)
+        db.commit()
+
+
 def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
     req = entity.inn or entity.ogrn
     if not req:
@@ -351,16 +369,7 @@ def main() -> int:
                 if not args.company_id:
                     parser.error("для --inn нужен --company-id")
                 with ApiFnsClient() as client:
-                    rows = normalize_search_results(client.search(args.inn, active_only=False))
-                    row = next((x for x in rows if str(x.get("inn")) == args.inn), None)
-                    if not row:
-                        egr = normalize_egr(client.egr(args.inn))
-                        row = egr
-                    if not row:
-                        raise ApiFnsError(f"юрлицо {args.inn} не найдено")
-                    if not args.dry_run:
-                        _confirm_entity(db, args.company_id, row, 1.0, manual=True)
-                        db.commit()
+                    confirm_by_inn(db, client, args.company_id, args.inn, dry_run=args.dry_run)
                     details["manual_match"] = {"company_id": args.company_id, "inn": args.inn}
             if args.match or args.all:
                 with ApiFnsClient() as client:

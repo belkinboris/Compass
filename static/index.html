@@ -4407,20 +4407,47 @@ async function mountCompanyFns(companyId){
 
 async function mountDealFns(d){
   const mount=document.getElementById("deal-fns"); if(!mount) return;
-  const candidates=[d.target,d.asset_id,d.buyer].filter((x,i,a)=>x&&a.indexOf(x)===i);
-  for(const companyId of candidates){
+  // Порядок кандидатов — предмет сделки первым: читатель «Экономиста» смотрит
+  // сначала на цель сделки, а не на того, кто её купил. Раньше здесь пробовали
+  // только target/asset_id/buyer и останавливались на первом же найденном —
+  // продавец не показывался вовсе, а показать было можно только ОДНУ сторону
+  // за раз, хотя у сделки их обычно три.
+  const candidates=[d.target,d.asset_id,d.buyer,d.seller_id]
+    .filter((x,i,a)=>x&&a.indexOf(x)===i)
+    .map(id=>({id, role: companyRole(d,id)}))
+    .filter(x=>x.role);
+  if(!candidates.length) return;
+  const dealYear=Number(String(d.date||"").slice(0,4));
+  const suffix=Number.isFinite(dealYear)?`?as_of_year=${dealYear}`:"";
+  const fetched=await Promise.all(candidates.map(async x=>{
     try{
-      const dealYear=Number(String(d.date||"").slice(0,4));
-      const suffix=Number.isFinite(dealYear)?`?as_of_year=${dealYear}`:"";
-      const r=await fetch(`/api/companies/${encodeURIComponent(companyId)}/fns${suffix}`), data=await r.json();
-      if(!data.available) continue;
-      const entry=data.entities[0], latest=(entry.reports||[])[0];
-      if(!latest) continue;
-      const c=co(companyId);
-      mount.innerHTML=`<section class="fns-shell" style="margin-top:28px"><div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:data.company_name||entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${latest.year}</span></div><div class="fns-body"><p style="color:var(--muted);margin-bottom:14px">Последний отчётный год до появления этой сделки в базе.</p><div class="fns-metrics"><div class="fns-metric"><span class="label">Выручка</span><div class="v">${fnsMoney(latest.revenue_rub)}</div></div><div class="fns-metric"><span class="label">Чистая прибыль</span><div class="v">${fnsMoney(latest.net_profit_rub)}</div></div><div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(latest.assets_rub)}</div></div><div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(latest.equity_rub)}</div></div></div><p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${companyId}">Полное досье компании →</a></p></div></section>`;
-      return;
-    }catch(e){}
-  }
+      const r=await fetch(`/api/companies/${encodeURIComponent(x.id)}/fns${suffix}`), data=await r.json();
+      const entry=data.available?data.entities[0]:null, latest=entry?(entry.reports||[])[0]:null;
+      return latest?{...x, data, entry, latest}:null;
+    }catch(e){return null;}
+  }));
+  const parties=fetched.filter(Boolean);
+  if(!parties.length) return;
+  let active=parties[0].id; // предмет сделки идёт первым в candidates — он и выбран по умолчанию
+  const draw=()=>{
+    const p=parties.find(x=>x.id===active)||parties[0];
+    const c=co(p.id);
+    mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
+      <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
+      ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
+      <div class="fns-body">
+        <p style="color:var(--muted);margin-bottom:14px">Последний отчётный год до появления этой сделки в базе.</p>
+        <div class="fns-metrics">
+          <div class="fns-metric"><span class="label">Выручка</span><div class="v">${fnsMoney(p.latest.revenue_rub)}</div></div>
+          <div class="fns-metric"><span class="label">Чистая прибыль</span><div class="v">${fnsMoney(p.latest.net_profit_rub)}</div></div>
+          <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
+          <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
+        </div>
+        <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
+      </div></section>`;
+    mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
+  };
+  draw();
 }
 
 function renderCompany(id){
