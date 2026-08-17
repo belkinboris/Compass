@@ -216,6 +216,22 @@ def test_sparse_notice_has_no_unrelated_deal_link(page, base_url):
     assert note.locator("a").count() == 0
 
 
+def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
+    # У карточки есть отметки, когда её сверяли с источником (кампания
+    # дочитывания) — читатель раньше не видел ни одной из них. Показываем
+    # самую позднюю, человеческими словами, без жаргона полей.
+    visit(page, base_url, "#/deal/g1d36d186")
+    note = page.locator(".src .acct-note")
+    assert note.is_visible()
+    assert "Сверено с источником" in note.inner_text()
+    assert "16 авг" in note.inner_text()
+
+    # У карточки без единой отметки о сверке строка честно не рисуется —
+    # не выдумываем дату, которой нет.
+    visit(page, base_url, "#/deal/g91281c36")
+    assert page.locator(".src .acct-note").count() == 0
+
+
 def test_pre_2022_deals_hidden_from_site(page, base_url):
     # Сделки до 2022 года остаются в deals_promoted.json, но не показываются на
     # сайте: прямой переход по адресу карточки должен молча показать ленту

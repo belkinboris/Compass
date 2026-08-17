@@ -1424,6 +1424,15 @@ const fmtDate = d => d==="unknown" ? "Дата уточняется"
 const fmtMonthYear = d => d==="unknown" ? ""
   : /^\d{4}$/.test(String(d)) ? String(d)
   : new Date(d).toLocaleDateString("ru-RU",{month:"long",year:"numeric"}).replace(" г.","");
+/* Читатель нигде не видел, когда карточку в последний раз сверяли с
+   источником, — эти четыре поля (`reviewed`/`deep_researched`/
+   `weekly_researched`/`followup_researched`) писались только для очереди
+   кампании дочитывания. Берём САМУЮ ПОЗДНЮЮ из них: более поздняя проверка
+   надёжнее более ранней, а не наоборот. Названия полей — внутренний жаргон
+   (см. CLAUDE.md, «пояснение объясняет смысл числа, а не устройство базы»),
+   на экране не показываем ни одно из них. */
+const lastVerifiedDate = d => [d.followup_researched, d.weekly_researched, d.deep_researched, d.reviewed]
+  .filter(Boolean).sort().pop();
 const esc = s => s.replace(/</g,"&lt;");
 /* Написание с разделителем и без должно искаться одинаково: «авто ру» и
    «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии» — в заголовках
@@ -3771,7 +3780,7 @@ function renderDeal(id, qs, previewCard){
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
-  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}</div>
+  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Сверено с источником: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
   <div class="deal-tools reveal">
     <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
     <button class="chip" id="downloaddeal">Скачать PDF</button>
