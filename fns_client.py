@@ -49,6 +49,16 @@ class ApiFnsClient:
             timeout=self.config.timeout,
             transport=httpx.HTTPTransport(retries=2),
             limits=httpx.Limits(max_keepalive_connections=4, max_connections=8),
+            # httpx.Client без заголовков шлёт User-Agent вида "python-httpx/0.2x" —
+            # некоторые защитные прокси (Qrator/DDoS-Guard и подобные, обычные
+            # для российского хостинга) блокируют явно нечеловеческий UA ещё до
+            # того, как запрос вообще дойдёт до самого API-ФНС: с ключевого
+            # прогона 18 августа 2026 все восемь запросов egr вернули 403
+            # Forbidden сразу, без тела ошибки от самого api-fns.ru — похоже
+            # именно на такую блокировку на уровне прокси/CDN, а не на отказ
+            # тарифа (тариф на 3000 запросов в панели значился активным).
+            headers={"User-Agent": "Mozilla/5.0 (compatible; KompasDeals/1.0; "
+                                    "+https://projectcompass.ru)"},
         )
 
     def close(self) -> None:

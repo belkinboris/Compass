@@ -377,6 +377,89 @@ def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
     assert calls == {"search": 0, "egr": 1}
 
 
+def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
+    """18 августа 2026 первый боевой прогон fns_seed_top_companies.py упал
+    на PostgreSQL: `ForeignKeyViolation` — company_id ещё не было строки в
+    companies, когда скрипт уже пробовал вставить legal_entities. На
+    локальном SQLite это не ловится: там внешние ключи по умолчанию не
+    проверяются вовсе, тот же класс дефекта, что уже описан в CLAUDE.md про
+    `ALTER TABLE ... IF NOT EXISTS`. Здесь — отдельная SQLite-база с явно
+    включёнными внешними ключами (`PRAGMA foreign_keys=ON`), чтобы тест
+    воспроизводил именно то ограничение, которое реально сломало прогон."""
+    from sqlalchemy import create_engine, event
+    from sqlalchemy.orm import sessionmaker
+    from db.models import Base
+    import pipeline.fns_seed_top_companies as seed_mod
+
+    db_path = tmp_path / "fk_check.db"
+    engine = create_engine(f"sqlite:///{db_path}", connect_args={"check_same_thread": False})
+
+    @event.listens_for(engine, "connect")
+    def _enable_fk(dbapi_conn, _rec):
+        cur = dbapi_conn.cursor()
+        cur.execute("PRAGMA foreign_keys=ON")
+        cur.close()
+
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def egr(self, inn):
+            return {"items": [{"ЮЛ": {
+                "ИНН": inn, "ОГРН": "1027700000001",
+                "НаимСокрЮЛ": 'ООО "Тест"', "Статус": "Действующая",
+            }}]}
+
+    monkeypatch = __import__("pytest").MonkeyPatch()
+    try:
+        monkeypatch.setattr(seed_mod, "SessionLocal", Session)
+        monkeypatch.setattr(seed_mod, "engine", engine)
+        monkeypatch.setattr(seed_mod, "ApiFnsClient", FakeClient)
+        monkeypatch.setattr(seed_mod, "SEED", {"yandex": ("7736207543", "тест")})
+        code = seed_mod.main(["--write"])
+    finally:
+        monkeypatch.undo()
+    assert code == 0, "внешний ключ не должен упасть — company-строка обязана появиться первой"
+
+    from db.models import Company, LegalEntity
+    with Session() as db:
+        assert db.get(Company, "yandex") is not None
+        assert db.query(LegalEntity).filter_by(company_id="yandex").count() == 1
+
+
+def test_fns_seed_script_never_claims_success_when_every_request_fails(monkeypatch, capsys):
+    """18 августа 2026 сам провайдер (api-fns.ru) вернул 403 на все 7 запросов
+    первого посевного прогона, а скрипт всё равно напечатал «Записано» —
+    выглядело так, будто что-то записалось, хотя не записалось ничего.
+    Итоговая строка обязана отличать «0 из N успешно» от настоящей записи,
+    и возвращать код завершения, по которому видно, что прогон не удался."""
+    import pipeline.fns_seed_top_companies as seed_mod
+    from fns_client import ApiFnsError
+
+    class AlwaysFailsClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def egr(self, inn):
+            raise ApiFnsError("403 Forbidden (тест)")
+
+    monkeypatch.setattr(seed_mod, "ApiFnsClient", AlwaysFailsClient)
+    code = seed_mod.main(["--write"])
+    out = capsys.readouterr().out
+    assert code != 0
+    assert "Успешно: 0 из" in out
+    assert "Записано." not in out
+
+
 def test_fns_candidate_csv_review_round_trip(tmp_path):
     import csv
     from db.models import LegalEntityCandidate

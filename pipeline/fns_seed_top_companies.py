@@ -47,7 +47,7 @@ if str(ROOT) not in sys.path:
 from db.session import SessionLocal, engine  # noqa: E402
 from db.models import Base  # noqa: E402
 from fns_client import ApiFnsClient, ApiFnsError  # noqa: E402
-from pipeline.sync_fns import confirm_by_inn  # noqa: E402
+from pipeline.sync_fns import confirm_by_inn, seed_companies  # noqa: E402
 
 # company_id -> (ИНН, источник проверки)
 SEED = {
@@ -64,24 +64,42 @@ SEED = {
 def main(argv: list[str]) -> int:
     write = "--write" in argv
     Base.metadata.create_all(engine)
+    ok, failed = 0, []
     with SessionLocal() as db:
+        # Строка в таблице companies обязана существовать РАНЬШЕ строки в
+        # legal_entities — на нашем PostgreSQL это внешний ключ, и вставка
+        # юрлица для компании, которой ещё нет в companies, падает с
+        # ForeignKeyViolation. На локальном SQLite при разработке этого не
+        # видно вовсе: там внешние ключи по умолчанию не проверяются, и
+        # ровно тот же класс дефекта, что уже был записан про
+        # ALTER TABLE ... IF NOT EXISTS (работает на одном диалекте, молчит
+        # на другом) — проверять миграции и такие цепочки записи нужно на
+        # обеих базах, а не только на той, что под рукой при разработке.
+        seed_companies(db, dry_run=not write)
         with ApiFnsClient() as client:
             for company_id, (inn, source) in SEED.items():
                 print(f"{company_id}: ИНН {inn} ({source})")
                 try:
                     confirm_by_inn(db, client, company_id, inn, dry_run=not write)
+                    ok += 1
                 except ApiFnsError as exc:
                     print(f"  ОШИБКА: {exc}", file=sys.stderr)
+                    failed.append(company_id)
+    print(f"\nУспешно: {ok} из {len(SEED)}. Ошибок: {len(failed)}"
+          f"{' (' + ', '.join(failed) + ')' if failed else ''}.")
+    if failed:
+        print("Ничего не считать записанным, пока ошибки не устранены — "
+              "«успешно» относится ТОЛЬКО к перечисленным выше id.")
     if not write:
-        print("\nСухой прогон: egr всё равно запрошен по каждому ИНН (иначе "
-              "нечем проверить, что номер верный) — это те же 7 запросов, "
+        print("Сухой прогон: egr всё равно запрошен по каждому ИНН (иначе "
+              "нечем проверить, что номер верный) — это те же запросы, "
               "просто без записи в базу. Добавьте --write, когда результат "
               "выше выглядит правильно.")
-    else:
-        print("\nЗаписано. Следующий шаг — pipeline/sync_fns.py --sync "
-              "--company-id <id> по каждой (или --sync --limit N без "
-              "--company-id заберёт все подтверждённые разом).")
-    return 0
+    elif ok:
+        print("Следующий шаг — pipeline/sync_fns.py --sync --company-id <id> "
+              "по каждой успешной (или --sync --limit N без --company-id "
+              "заберёт все подтверждённые разом).")
+    return 0 if not failed else 1
 
 
 if __name__ == "__main__":
