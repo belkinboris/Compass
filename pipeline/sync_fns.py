@@ -15,7 +15,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
@@ -37,6 +37,12 @@ from fns_client import (
     ApiFnsClient, ApiFnsError, normalize_bo, normalize_changes, normalize_egr,
     normalize_ownership, normalize_search_results,
 )
+
+def _now() -> datetime:
+    """datetime.utcnow() устарел; колонки здесь — наивный DateTime, поэтому
+    отрезаем tzinfo, а не переводим хранение на timezone-aware значения."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
 
 _OPF = re.compile(
     r"\b(ооо|ао|пао|оао|зао|нко|банк|акционерное общество|общество с ограниченной ответственностью|"
@@ -248,7 +254,7 @@ def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
         source_date = egr.get("source_updated_at")
         entity.source_updated_at = datetime.combine(source_date, datetime.min.time()) if source_date else None
         entity.raw_egr_json = json.dumps(raw_egr, ensure_ascii=False, default=str)
-    entity.fetched_at = datetime.utcnow()
+    entity.fetched_at = _now()
 
     try:
         bo_raw = client.bo(req)
@@ -268,7 +274,7 @@ def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
                 continue
             setattr(row, field, value)
         row.raw_lines_json = json.dumps(report.get("raw_lines") or {}, ensure_ascii=False, default=str)
-        row.fetched_at = datetime.utcnow()
+        row.fetched_at = _now()
 
     try:
         changes_raw = client.changes(req)
@@ -394,7 +400,7 @@ def main() -> int:
                 details["sync"] = {"synced" if not args.dry_run else "would_sync": ok, "errors": e}
         finally:
             if run is not None:
-                run.finished_at = datetime.utcnow()
+                run.finished_at = _now()
                 run.details_json = json.dumps(details, ensure_ascii=False)
                 db.commit()
             else:

@@ -35,7 +35,10 @@ class Base(DeclarativeBase):
 
 
 def _now() -> datetime:
-    return datetime.utcnow()
+    # datetime.utcnow() устарел, но колонки здесь — наивный DateTime (без
+    # часового пояса): .replace(tzinfo=None) даёт то же самое значение, что
+    # и раньше, без предупреждения и без смены формата хранения.
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 # ---------------------------------------------------------------- компании ---
