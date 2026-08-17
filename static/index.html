@@ -1434,6 +1434,55 @@ const esc = s => s.replace(/</g,"&lt;");
    («руяндекс» найдёт «…Авто.ру у Яндекса»); осознанный размен, потому что
    этот индекс дополняет обычное вхождение, а не заменяет его. */
 const squashQ = s => s.toLowerCase().replace(/ё/g,"е").replace(/[^0-9a-zа-я]+/g,"");
+/* Опечатки и падежи в поиске. squashQ уже снимает пунктуацию/пробелы/дефисы
+   («Сбер-банк» = «Сбербанк»), но не помогает, если у запроса другое
+   окончание («Сбербанка» ищут, а в тексте «Сбербанк») или одна опечатка
+   («Сберабнк»). Это ДОПОЛНИТЕЛЬНЫЙ, самый дорогой проход — включается,
+   только когда обычное вхождение ничего не нашло: и точное совпадение,
+   и его отсутствие после опечатки не должны стоить одинаково.
+   Порог совпадения слова — тот же, что уже проверен в review.py/_same_word
+   (CLAUDE.md: «общее начало ≥ 3 знаков и ≥ 60% длины короткого слова»),
+   плюс расстояние Левенштейна ≤ 1 для слов от 4 знаков — короче не проверяем
+   опечатку, иначе «дом» и «том» считались бы одним словом. */
+const wordsOf = s => (s||"").toLowerCase().replace(/ё/g,"е").split(/[^0-9a-zа-я]+/).filter(w=>w.length>=2);
+function levenshtein1(a, b){
+  // Дамерау-Левенштейн, расстояние ≤ 1: одна вставка, одно удаление, одна
+  // замена буквы — ИЛИ перестановка двух соседних букв («Сберабнк» вместо
+  // «Сбербанк» — самая частая опечатка на клавиатуре, обычный Левенштейн
+  // считает её за 2 правки и не ловит вовсе).
+  if(a===b) return true;
+  if(a.length===b.length){
+    const diff=[];
+    for(let i=0;i<a.length;i++) if(a[i]!==b[i]) diff.push(i);
+    if(diff.length===1) return true;                                    // замена
+    if(diff.length===2 && diff[1]===diff[0]+1
+       && a[diff[0]]===b[diff[1]] && a[diff[1]]===b[diff[0]]) return true; // перестановка
+    return false;
+  }
+  if(Math.abs(a.length-b.length)!==1) return false;
+  const [s,l] = a.length<b.length ? [a,b] : [b,a];                       // короче, длиннее
+  let i=0, j=0, skipped=false;
+  while(i<s.length && j<l.length){
+    if(s[i]===l[j]){ i++; j++; continue; }
+    if(skipped) return false;
+    skipped = true; j++;                                                 // пропуск лишней буквы в l
+  }
+  return true;
+}
+function sameWordFuzzy(a, b){
+  if(a===b) return true;
+  const short = a.length<=b.length ? a : b, long = a.length<=b.length ? b : a;
+  if(short.length<3) return false;
+  let common=0; while(common<short.length && short[common]===long[common]) common++;
+  if(common>=3 && common/short.length>=0.6) return true;
+  return short.length>=4 && levenshtein1(a,b);
+}
+const fuzzyIncludes = (query, text) => {
+  const qwords = wordsOf(query);
+  if(!qwords.length) return true;
+  const twords = wordsOf(text);
+  return qwords.every(qw => twords.some(tw => sameWordFuzzy(qw, tw)));
+};
 const capType = s => s ? s.split("·").map(p=>{const t=p.trim();return t?t.charAt(0).toUpperCase()+t.slice(1):t;}).join(" · ") : s;
 /* счётчики статистики: число набегает от 0 до значения за ~0.9с (ease-out).
    При prefers-reduced-motion просто ставим итоговое число без анимации. */
@@ -2612,7 +2661,10 @@ function unifiedFeed(){
   const matchQ = it => {
     if(!q) return true;
     const ix = searchIndex(it);
-    return ix.plain.includes(q) || (!!qsq && ix.squashed.includes(qsq));
+    if(ix.plain.includes(q) || (!!qsq && ix.squashed.includes(qsq))) return true;
+    // опечатка или другой падеж — дорогой проход, только когда обычное
+    // вхождение ничего не нашло
+    return fuzzyIncludes(q, ix.plain);
   };
   const matchY = it => feedYear==="Все" || (feedYear==="до 2023" ? (it.date!=="unknown"&&it.date.slice(0,4)<"2023") : it.date.slice(0,4)===feedYear);
   const matchFirm = it => {
@@ -3980,7 +4032,8 @@ function companyRows(){
   const q = coQuery.trim().toLowerCase();
   // Тот же размен, что в поиске по сделкам: «авто ру» обязано находить «Авто.ру».
   const qsq = squashQ(q);
-  const hit = name => name.toLowerCase().includes(q) || (!!qsq && squashQ(name).includes(qsq));
+  const hit = name => name.toLowerCase().includes(q) || (!!qsq && squashQ(name).includes(qsq))
+    || fuzzyIncludes(q, name);
   return Object.entries(COMPANIES)
     .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||hit(c.name)))
     // УПОМИНАНИЯ ЗДЕСЬ НЕ СЧИТАЮТСЯ ВОВСЕ. Раньше они были частью ключа
