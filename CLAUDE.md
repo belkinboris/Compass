@@ -46,7 +46,7 @@ data/inbox/                   сырьё притока и отчёты разб
 
 ```bash
 uvicorn main:app --reload            # http://127.0.0.1:8000
-python3 -m pytest -q                 # 282 passed (≈3 мин: интерфейс и аккаунты — самое долгое)
+python3 -m pytest -q                 # 364 passed (≈4 мин: интерфейс и аккаунты — самое долгое)
 python3 -m pytest test_data.py -q    # только инварианты базы, без браузера (0,1 с)
 ```
 
