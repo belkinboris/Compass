@@ -27,22 +27,10 @@ FIXES = [
     # Цитата подтверждена: level-legal.com → "Команда LEVEL Legal Services
     # представляла интересы акционеров группы «Жилкапинвест»".
 
-    dict(id='c299076c8', field='src', old=None,
-         new=['Interfax', 'https://www.interfax.ru/business/1029088'],
-         quote='Девелопер Glorax приобрел одного из крупнейших застройщиков '
-               'Приморского края - ГК "Жилкапинвест"',
-         why='независимое подтверждение закрытия сделки от Интерфакса; '
-             'скачан и сверен дословно'),
-
-    dict(id='c299076c8', field='src', old=None,
-         new=['LEVEL Legal Services',
-              'https://www.level-legal.com/news/level-legal-services-soprovodila-'
-              'sdelku-po-prodazhe-developerskih-proektov-gruppy-zhilkapinvest-'
-              'v-polzu-gruppy-glorax'],
-         quote='Команда LEVEL Legal Services представляла интересы акционеров '
-               'группы «Жилкапинвест»',
-         why='источник раскрывает консультанта продавца, которого не было '
-             'в других источниках'),
+    # СНЯТО (17-18 августа 2026): c299076c8 слита в g076a2f4e как дубль —
+    # pipeline/merge_glorax_zhilkapinvest_dup.py. Interfax перенесён туда же
+    # тем скриптом; LEVEL Legal Services у g076a2f4e уже стоял и источником,
+    # и полноценной записью в law.adv.
 
     # === g549ddd5a: ЭФКО / Масленица ===
     # buyer_name не ставим: карточка уже содержит профиль buyer='g5db3de73';

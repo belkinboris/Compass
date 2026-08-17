@@ -34,10 +34,9 @@ FIXES = [
          new='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб.',
          quote='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб.',
          why='из digest ChatGPT round1 (B_100), сверено с https://glorax.com/press-center/news/glorax-obyavlyaet-onbsppriobretenii-developerskoj'),
-    dict(id='c299076c8', field='eco.target_fin', old=None,
-         new='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб. в денежном выражении.',
-         quote='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб. в денежном выражении.',
-         why='из digest ChatGPT round1 (B_100), сверено с https://glorax.com/press-center/news/glorax-obyavlyaet-onbsppriobretenii-developerskoj'),
+    # СНЯТО (17-18 августа 2026): c299076c8 слита в g076a2f4e как дубль —
+    # pipeline/merge_glorax_zhilkapinvest_dup.py. Этот же факт уже стоял
+    # у g076a2f4e отдельной записью (см. выше в этом же файле).
     dict(id='g549ddd5a', field='law.struct', old='—',
          new='Доля ГК «Эфко» в «Масленице», вырастет с текущих 31,4% до 100%.',
          quote='Доля ГК «Эфко» в «Масленице», вырастет с текущих 31,4% до 100%.',
@@ -188,10 +187,8 @@ FIXES = [
          new=['Glorax', 'https://glorax.com/press-center/news/glorax-obyavlyaet-onbsppriobretenii-developerskoj'],
          quote='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб.',
          why='источник из digest ChatGPT round1 (B_100)'),
-    dict(id='c299076c8', field='src', old=None,
-         new=['Glorax', 'https://glorax.com/press-center/news/glorax-obyavlyaet-onbsppriobretenii-developerskoj'],
-         quote='Объем продаж ГК «Жилкапинвест» с начала 2025 года составил 7,9 тыс. кв. м или 1,2 млрд руб. в денежном выражении.',
-         why='источник из digest ChatGPT round1 (B_100)'),
+    # СНЯТО (17-18 августа 2026): c299076c8 слита в g076a2f4e — тот же
+    # источник Glorax уже стоит у g076a2f4e (запись прямо выше).
     dict(id='g549ddd5a', field='src', old=None,
          new=['Sostav.ru', 'https://www.sostav.ru/publication/gk-efko-pokupaet-proizvoditelya-olejny-76286.html'],
          quote='Доля ГК «Эфко» в «Масленице», вырастет с текущих 31,4% до 100%.',
