@@ -4387,12 +4387,20 @@ async function mountCompanyFns(companyId){
       ["Чистая прибыль","net_profit_rub"],["Активы","assets_rub"],["Собственный капитал","equity_rub"],
       ["Заёмные средства","borrowings_rub"],["Кредиторская задолженность","payables_rub"],
     ];
+    // У банков и страховых организаций строка отчёта в источнике есть (год,
+    // юрлицо), но ВСЕ коммерческие коды строк (2110/2400/1600/1300…) пустые —
+    // они отчитываются перед Банком России по другой форме, не по этой.
+    // Раньше здесь проверялось reports.length — оно истинно и в этом случае
+    // тоже, и вместо честного объяснения посетитель видел сетку из одних
+    // прочерков («Выручка —, Прибыль —, Активы —, Капитал —»), которая
+    // выглядит как поломка, а не как «этих данных здесь нет и не будет».
+    const hasAnyFinancialData = reports.some(r => financialRows.some(([,key]) => r[key]!=null));
     let content="";
     if(tab==="overview") content=`
       <p style="color:var(--muted);margin-bottom:12px">${esc(e.legal_name)} · отчётность ${latest.year||"не найдена"}${latest.year?" года":""}</p>
-      ${reports.length?`<div class="fns-metrics">${metric("Выручка","revenue_rub")}${metric("Чистая прибыль","net_profit_rub")}${metric("Активы","assets_rub")}${metric("Капитал","equity_rub")}</div>`:`<div class="fns-empty">Бухгалтерская отчётность для этого юридического лица в источнике не найдена. Для банков и других финансовых организаций потребуется отдельный источник Банка России.</div>`}
+      ${hasAnyFinancialData?`<div class="fns-metrics">${metric("Выручка","revenue_rub")}${metric("Чистая прибыль","net_profit_rub")}${metric("Активы","assets_rub")}${metric("Капитал","equity_rub")}</div>`:`<div class="fns-empty">Бухгалтерская отчётность для этого юридического лица в источнике не найдена. Для банков и других финансовых организаций потребуется отдельный источник Банка России.</div>`}
       <div class="fns-registry">${registryRows.slice(0,6).map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div>`;
-    if(tab==="finance") content=reports.length?`
+    if(tab==="finance") content=hasAnyFinancialData?`
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
@@ -4428,11 +4436,15 @@ async function mountDealFns(d){
   if(!candidates.length) return;
   const dealYear=Number(String(d.date||"").slice(0,4));
   const suffix=Number.isFinite(dealYear)?`?as_of_year=${dealYear}`:"";
+  // У банков в источнике есть строка отчёта (год, юрлицо), но все
+  // коммерческие показатели в ней пустые — сторона сделки такого рода
+  // молча пропускается, а не показывается блоком из одних прочерков.
+  const hasFinancialData = r => r && ["revenue_rub","net_profit_rub","assets_rub","equity_rub"].some(k => r[k]!=null);
   const fetched=await Promise.all(candidates.map(async x=>{
     try{
       const r=await fetch(`/api/companies/${encodeURIComponent(x.id)}/fns${suffix}`), data=await r.json();
       const entry=data.available?data.entities[0]:null, latest=entry?(entry.reports||[])[0]:null;
-      return latest?{...x, data, entry, latest}:null;
+      return hasFinancialData(latest)?{...x, data, entry, latest}:null;
     }catch(e){return null;}
   }));
   const parties=fetched.filter(Boolean);
