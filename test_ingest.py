@@ -1956,60 +1956,102 @@ def test_deep_researched_stamp_is_idempotent_and_separate_from_reviewed():
     assert card["deep_researched"] == "2026-08-10", "повторный прогон переписал дату"
 
 
-def test_followup_researched_stamp_requires_deep_researched_first():
-    """`followup_researched` — второй, более поздний уровень (месяц после
-    появления карточки), дельта ПОВЕРХ `deep_researched`, а не независимая
-    отметка. Владелец 16 августа: приток видит только 51 источник реестра, а
-    то, что публикуется позже — поздние объявления консультантов, смена
-    статуса, — сейчас не ловится ничем; нужен второй проход, но он не имеет
-    смысла без первого. Отметка идемпотентна тем же способом, что `reviewed`
-    и `deep_researched`.
+def test_weekly_researched_stamp_requires_deep_researched_first():
+    """`weekly_researched` — второй из трёх уровней (неделя после появления
+    карточки), дельта ПОВЕРХ `deep_researched`, а не независимая отметка.
+    Отметка идемпотентна тем же способом, что `reviewed` и `deep_researched`.
+    """
+    import review
+    card = {"id": "w"}
+    assert review.stamp_weekly_researched(card, day="2026-08-17") is False, \
+        "без deep_researched второй уровень не должен ставиться"
+    assert "weekly_researched" not in card
+
+    assert review.stamp_deep_researched(card, day="2026-08-10") is True
+    assert review.stamp_weekly_researched(card, day="2026-08-17") is True
+    assert card["weekly_researched"] == "2026-08-17"
+    assert review.stamp_weekly_researched(card, day="2026-08-20") is False
+    assert card["weekly_researched"] == "2026-08-17", "повторный прогон переписал дату"
+
+
+def test_followup_researched_stamp_requires_weekly_researched_first():
+    """`followup_researched` — третий, самый поздний уровень (месяц после
+    появления карточки), дельта ПОВЕРХ `weekly_researched` (а через него —
+    и поверх `deep_researched`), а не независимая отметка. Владелец
+    16 августа: приток видит только 51 источник реестра, а то, что
+    публикуется позже — поздние объявления консультантов, смена статуса, —
+    сейчас не ловится ничем; нужен третий проход, но он не имеет смысла без
+    второго. Отметка идемпотентна тем же способом, что `reviewed` и
+    `deep_researched`.
     """
     import review
     card = {"id": "z"}
     assert review.stamp_followup_researched(card, day="2026-09-15") is False, \
-        "без deep_researched второй уровень не должен ставиться"
+        "без weekly_researched третий уровень не должен ставиться"
     assert "followup_researched" not in card
 
     assert review.stamp_deep_researched(card, day="2026-08-10") is True
+    assert review.stamp_followup_researched(card, day="2026-09-15") is False, \
+        "deep_researched без weekly_researched — третий уровень всё ещё рано"
+    assert review.stamp_weekly_researched(card, day="2026-08-17") is True
     assert review.stamp_followup_researched(card, day="2026-09-15") is True
     assert card["followup_researched"] == "2026-09-15"
     assert review.stamp_followup_researched(card, day="2026-10-01") is False
     assert card["followup_researched"] == "2026-09-15", "повторный прогон переписал дату"
 
 
-def test_mark_deep_auto_backfills_followup_when_window_already_passed():
+def test_mark_deep_auto_backfills_weekly_and_followup_when_window_already_passed():
     """Владелец 16 августа: «нам же нет смысла эти же которые сейчас
     просматриваем месячно делать?» — и был прав. Почти весь бэклог
     REVISION_BRIEF несёт `added=2026-07-15`; к моменту, когда до карточки
     доходят руки, с добавления в базу прошло больше месяца, и `--mark-deep`
     в этот день значит, что `deep_researched` УЖЕ случился на 30+ день
     после `added`. Без этой правки такая карточка немедленно попадала бы
-    в месячную очередь с нулевым отступом от только что законченного
-    первого прохода — 40 карточек партий 2 и 3 обнаружились в этом
-    состоянии прямо в базе. `stamp_deep_researched` теперь закрывает
-    и второй уровень сам, тем же днём, что и первый.
+    в очереди второго и третьего уровня с нулевым отступом от только что
+    законченного первого прохода — 40 карточек партий 2 и 3 обнаружились в
+    этом состоянии прямо в базе. `stamp_deep_researched` теперь закрывает
+    оба следующих уровня сам, тем же днём, что и первый — второй при
+    разрыве от 7 дней, третий при разрыве от 30, независимо друг от друга.
     """
     import review
     old_card = {"id": "old", "added": "2026-07-15"}
     assert review.stamp_deep_researched(old_card, day="2026-08-16") is True
+    assert old_card["weekly_researched"] == "2026-08-16", \
+        "32 дня между added и deep_researched — недельное окно тоже пройдено"
     assert old_card["followup_researched"] == "2026-08-16", \
-        "32 дня между added и deep_researched — окно уже пройдено, второй уровень обязан закрыться сам"
+        "32 дня между added и deep_researched — месячное окно тоже пройдено"
 
-    # Свежая карточка — месячное окно ещё не пройдено, автозакрытия быть не должно.
+    # Свежая карточка — ни одно окно ещё не пройдено, автозакрытия быть не должно.
     fresh_card = {"id": "fresh", "added": "2026-08-10"}
     assert review.stamp_deep_researched(fresh_card, day="2026-08-16") is True
-    assert "followup_researched" not in fresh_card, \
-        "6 дней между added и deep_researched — рано закрывать второй уровень"
+    assert "weekly_researched" not in fresh_card, \
+        "6 дней между added и deep_researched — рано закрывать даже второй уровень"
+    assert "followup_researched" not in fresh_card
 
-    # Ровно на границе (30 дней) — считается пройденным.
+    # Между неделей и месяцем — только второй уровень закрыт, третий ещё впереди.
+    mid_card = {"id": "mid", "added": "2026-08-06"}
+    assert review.stamp_deep_researched(mid_card, day="2026-08-16") is True
+    assert mid_card["weekly_researched"] == "2026-08-16", \
+        "10 дней между added и deep_researched — недельное окно пройдено"
+    assert "followup_researched" not in mid_card, \
+        "10 дней — месячное окно ещё не пройдено"
+
+    # Ровно на границе недели (7 дней).
+    week_boundary_card = {"id": "week-boundary", "added": "2026-08-09"}
+    assert review.stamp_deep_researched(week_boundary_card, day="2026-08-16") is True
+    assert week_boundary_card["weekly_researched"] == "2026-08-16"
+    assert "followup_researched" not in week_boundary_card
+
+    # Ровно на границе месяца (30 дней).
     boundary_card = {"id": "boundary", "added": "2026-07-17"}
     assert review.stamp_deep_researched(boundary_card, day="2026-08-16") is True
+    assert boundary_card["weekly_researched"] == "2026-08-16"
     assert boundary_card["followup_researched"] == "2026-08-16"
 
     # Без added (кураторская запись без даты) — не падает, просто не бэкфиллит.
     no_added_card = {"id": "no-added"}
     assert review.stamp_deep_researched(no_added_card, day="2026-08-16") is True
+    assert "weekly_researched" not in no_added_card
     assert "followup_researched" not in no_added_card
 
 

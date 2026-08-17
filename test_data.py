@@ -1003,15 +1003,41 @@ def test_party_name_is_in_the_nominative_case(deals):
 
 
 def test_followup_researched_never_appears_without_deep_researched(deals):
-    """Второй уровень дочитывания (`followup_researched`, месяц после
-    появления) — дельта ПОВЕРХ первого (`deep_researched`, неделя), а не его
-    замена: карточку, которую ни разу не обыскали по стандарту 2026 года,
-    бессмысленно перепроверять на «что нового вышло с тех пор». `review.py`
-    это уже не даёт сделать (`stamp_followup_researched` отказывает без
-    `deep_researched`, `--mark-followup` в CLI отклоняет такую карточку явно)
-    — здесь та же граница закреплена как инвариант базы, а не только как
-    поведение одной функции.
+    """Третий уровень дочитывания (`followup_researched`, месяц после
+    появления) — дельта поверх цепочки, а не её замена: карточку, которую
+    ни разу не обыскали по стандарту 2026 года, бессмысленно перепроверять
+    на «что нового вышло с тех пор». `review.py` это уже не даёт сделать
+    (`stamp_followup_researched` отказывает без `weekly_researched`,
+    `--mark-followup` в CLI отклоняет такую карточку явно) — здесь та же
+    граница закреплена как инвариант базы, а не только как поведение одной
+    функции.
     """
     bad = [d["id"] for d in deals
            if d.get("followup_researched") and not d.get("deep_researched")]
     assert not bad, "followup_researched без deep_researched: %r" % bad
+
+
+def test_weekly_researched_never_appears_without_deep_researched(deals):
+    """Второй из трёх уровней дочитывания (`weekly_researched`, неделя после
+    появления) — дельта ПОВЕРХ первого (`deep_researched`, день), а не
+    независимая отметка. `stamp_weekly_researched` отказывает без
+    `deep_researched`; здесь та же граница закреплена как инвариант базы.
+    """
+    bad = [d["id"] for d in deals
+           if d.get("weekly_researched") and not d.get("deep_researched")]
+    assert not bad, "weekly_researched без deep_researched: %r" % bad
+
+
+def test_followup_researched_never_appears_without_weekly_researched(deals):
+    """Третий уровень (`followup_researched`, месяц) — дельта ПОВЕРХ второго
+    (`weekly_researched`, неделя), а не поверх первого напрямую: карточку,
+    которую не проверили в течение недели, бессмысленно проверять «что
+    нового вышло с тех пор» ещё раз через месяц — это тот же непройденный
+    шаг, а не два разных. `stamp_followup_researched` отказывает без
+    `weekly_researched` — 183 карточки с историческим `followup_researched`
+    (до появления среднего уровня 18 августа 2026) обратно проставлены
+    `pipeline/backfill_weekly_researched.py`.
+    """
+    bad = [d["id"] for d in deals
+           if d.get("followup_researched") and not d.get("weekly_researched")]
+    assert not bad, "followup_researched без weekly_researched: %r" % bad

@@ -591,41 +591,71 @@ def stamp_deep_researched(card, day=None):
     планка, и первое не должно тихо сходить за второе. Идемпотентна, как и
     `stamp_reviewed`.
 
-    ЗАОДНО ЗАКРЫВАЕТ ВТОРОЙ УРОВЕНЬ, ЕСЛИ ОН УЖЕ ОРГАНИЧЕСКИ ПОКРЫТ. Партия
-    16 августа обнажила разрыв: почти весь бэклог REVISION_BRIEF несёт
-    `added=2026-07-15` — к моменту, когда до карточки вообще доходят руки,
-    с добавления в базу уже прошло больше месячного окна. `--mark-deep` в
-    тот же день, что и добавление карточки в очередь, значит, что
-    `deep_researched` УЖЕ случился на 30+ день после `added` — и месячная
-    очередь тут же требовала бы второго прохода С НУЛЕВЫМ ОТСТУПОМ от
-    только что законченного первого, что бессмысленно (тот же расчёт,
-    что у разового бэкфилла `pipeline/backfill_followup_researched.py`
-    16 августа, — но 20 карточек партии 2 и 20 карточек партии 3 были
-    помечены deep_researched УЖЕ ПОСЛЕ того прогона и проскочили мимо
-    него; правило нужно как ПОСТОЯННОЕ поведение самой отметки, а не
-    только как разовая уборка старого хвоста)."""
+    С 18 августа 2026 это ПЕРВЫЙ из ТРЁХ уровней (день → неделя → месяц, см.
+    `pipeline/ingest/REVISION_BRIEF.md`), и очередь для него сдвинута с
+    недели на день — полный обыск сразу, чтобы карточка была настолько
+    полной, насколько это вообще возможно, уже в день появления, а не
+    только через неделю. `weekly_researched`/`followup_researched` — узкие
+    ДЕЛЬТЫ поверх него, а не повтор того же поиска.
+
+    ЗАОДНО ЗАКРЫВАЕТ СЛЕДУЮЩИЕ УРОВНИ, ЕСЛИ ОНИ УЖЕ ОРГАНИЧЕСКИ ПОКРЫТЫ.
+    Партия 16 августа обнажила разрыв: почти весь бэклог REVISION_BRIEF
+    несёт `added=2026-07-15` — к моменту, когда до карточки вообще доходят
+    руки, с добавления в базу уже прошло больше месячного окна. `--mark-deep`
+    в тот день, значит, что `deep_researched` УЖЕ случился на 30+ день после
+    `added` — и очереди второго/третьего уровня тут же требовали бы прохода
+    С НУЛЕВЫМ ОТСТУПОМ от только что законченного первого, что бессмысленно
+    (тот же расчёт, что у разового бэкфилла
+    `pipeline/backfill_followup_researched.py` 16 августа, — но 20 карточек
+    партии 2 и 20 карточек партии 3 были помечены deep_researched УЖЕ ПОСЛЕ
+    того прогона и проскочили мимо него; правило нужно как ПОСТОЯННОЕ
+    поведение самой отметки, а не только как разовая уборка старого
+    хвоста). Порог для `weekly_researched` — 7 дней, для `followup_researched`
+    — 30, независимо друг от друга (карточка, дошедшая до `--mark-deep` на
+    10-й день после `added`, закрывает только недельный уровень, месячный
+    ещё впереди)."""
     if not card.get('deep_researched'):
         stamp = day or datetime.now(timezone.utc).date().isoformat()
         card['deep_researched'] = stamp
         added, dr = _parse_date(card.get('added')), _parse_date(stamp)
-        if added and dr and (dr - added).days >= 30 and not card.get('followup_researched'):
-            card['followup_researched'] = stamp
+        if added and dr:
+            gap = (dr - added).days
+            if gap >= 7 and not card.get('weekly_researched'):
+                card['weekly_researched'] = stamp
+            if gap >= 30 and not card.get('followup_researched'):
+                card['followup_researched'] = stamp
+        return True
+    return False
+
+
+def stamp_weekly_researched(card, day=None):
+    """Отметка «карточку проверили на события ПОСЛЕ deep_researched, в
+    течение первой недели» — второй из трёх уровней дочитывания, между
+    `deep_researched` (день) и `followup_researched` (месяц). Узкая дельта:
+    что успело появиться за первую неделю после полного обыска, а не повтор
+    самого обыска. Ставится ТОЛЬКО если уже стоит `deep_researched` — без
+    первого уровня второй смысла не имеет. Идемпотентна тем же способом, что
+    остальные отметки."""
+    if not card.get('deep_researched'):
+        return False
+    if not card.get('weekly_researched'):
+        card['weekly_researched'] = day or datetime.now(timezone.utc).date().isoformat()
         return True
     return False
 
 
 def stamp_followup_researched(card, day=None):
-    """Отметка «карточку проверили на события ПОСЛЕ deep_researched» —
-    второй, более поздний уровень дочитывания (владелец, 16 августа: приток
+    """Отметка «карточку проверили на события ПОСЛЕ weekly_researched» —
+    третий, самый поздний уровень дочитывания (владелец, 16 августа: приток
     видит только 51 источник из реестра, и то, что публикуется позже —
     поздние объявления консультантов, аналитика, смена статуса — не ловится
     ничем; нужен ещё один, более узкий проход через месяц после появления
-    карточки). Ставится ТОЛЬКО если уже стоит `deep_researched` — второй
-    уровень не имеет смысла без первого, это дельта поверх него, а не
-    замена. Идемпотентна, как `reviewed` и `deep_researched` — тем же
-    способом и по той же причине (повторный прогон не должен выдавать
-    старую проверку за свежую)."""
-    if not card.get('deep_researched'):
+    карточки). Ставится ТОЛЬКО если уже стоит `weekly_researched` — третий
+    уровень не имеет смысла без второго, это дельта поверх НЕГО (а через
+    него — и поверх первого), а не независимая отметка. Идемпотентна, как
+    `reviewed` и `deep_researched` — тем же способом и по той же причине
+    (повторный прогон не должен выдавать старую проверку за свежую)."""
+    if not card.get('weekly_researched'):
         return False
     if not card.get('followup_researched'):
         card['followup_researched'] = day or datetime.now(timezone.utc).date().isoformat()
@@ -633,7 +663,7 @@ def stamp_followup_researched(card, day=None):
     return False
 
 
-def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
+def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=()):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
@@ -693,10 +723,27 @@ def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
         else:
             to_mark_deep.append(cid)
 
-    # --mark-followup: второй, более поздний уровень дочитывания — дельта
-    # ПОВЕРХ уже сделанного deep_researched, а не замена ему. Карточка без
+    # --mark-weekly: второй из трёх уровней дочитывания — дельта ПОВЕРХ уже
+    # сделанного deep_researched, а не замена ему. Карточка без
     # deep_researched (в том числе только что помеченная в этом же прогоне
-    # через --mark-deep) в очередь месячного прохода попасть не может —
+    # через --mark-deep) в недельную очередь попасть не может — отклоняем
+    # явно, а не молча пропускаем.
+    to_mark_weekly = []
+    for cid in mark_weekly:
+        if cid not in cards:
+            refused.append((dict(id=cid, field='weekly_researched'),
+                            ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
+        elif not cards[cid].get('deep_researched') and cid not in to_mark_deep:
+            refused.append((dict(id=cid, field='weekly_researched'),
+                            ['у карточки %s нет deep_researched — второй уровень '
+                             'без первого не ставится' % cid]))
+        else:
+            to_mark_weekly.append(cid)
+
+    # --mark-followup: третий, самый поздний уровень дочитывания — дельта
+    # ПОВЕРХ уже сделанного weekly_researched, а не замена ему. Карточка без
+    # weekly_researched (в том числе только что помеченная в этом же прогоне
+    # через --mark-weekly) в очередь месячного прохода попасть не может —
     # отклоняем явно, а не молча пропускаем: опечатка в id или преждевременный
     # вызов должны быть видны, а не тихо ничего не сделать.
     to_mark_followup = []
@@ -704,10 +751,10 @@ def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
         if cid not in cards:
             refused.append((dict(id=cid, field='followup_researched'),
                             ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
-        elif not cards[cid].get('deep_researched') and cid not in to_mark_deep:
+        elif not cards[cid].get('weekly_researched') and cid not in to_mark_weekly:
             refused.append((dict(id=cid, field='followup_researched'),
-                            ['у карточки %s нет deep_researched — второй уровень '
-                             'без первого не ставится' % cid]))
+                            ['у карточки %s нет weekly_researched — третий уровень '
+                             'без второго не ставится' % cid]))
         else:
             to_mark_followup.append(cid)
 
@@ -754,9 +801,15 @@ def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
             stamped_deep += 1
 
     # После --mark-deep, не до: карточка, помеченная И --mark-deep, И
-    # --mark-followup в одном вызове (редкий, но легальный случай — второй
+    # --mark-weekly в одном вызове (редкий, но легальный случай — второй
     # уровень пройден сразу вслед за первым), обязана видеть уже
     # проставленный deep_researched.
+    stamped_weekly = 0
+    for cid in to_mark_weekly:
+        if stamp_weekly_researched(cards[cid]):
+            stamped_weekly += 1
+
+    # Аналогично — после --mark-weekly, не до.
     stamped_followup = 0
     for cid in to_mark_followup:
         if stamp_followup_researched(cards[cid]):
@@ -766,17 +819,19 @@ def main(write=False, mark_read=(), mark_deep=(), mark_followup=()):
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     print('ЗАПИСАНО: %d правок, %d отметок прочтения, %d отметок глубокого '
-          'исследования, %d отметок второго уровня в %s'
-          % (len(ok), stamped, stamped_deep, stamped_followup,
+          'исследования, %d отметок недельного уровня, %d отметок '
+          'месячного уровня в %s'
+          % (len(ok), stamped, stamped_deep, stamped_weekly, stamped_followup,
              os.path.relpath(DATA, ROOT)))
     return 0
 
 
 if __name__ == '__main__':
     _args = sys.argv[1:]
-    _flags = ('--write', '--mark-read', '--mark-deep', '--mark-followup')
+    _flags = ('--write', '--mark-read', '--mark-deep', '--mark-weekly', '--mark-followup')
     _ids = [a for a in _args if a not in _flags]
     sys.exit(main(write='--write' in _args,
                   mark_read=_ids if '--mark-read' in _args else (),
                   mark_deep=_ids if '--mark-deep' in _args else (),
+                  mark_weekly=_ids if '--mark-weekly' in _args else (),
                   mark_followup=_ids if '--mark-followup' in _args else ()))
