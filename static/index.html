@@ -3178,14 +3178,42 @@ function progressRowHtml(d,e,current){
     <span class="progress-open">Открыть этап →</span>
   </a>`;
 }
+/* Единственный этап с note бывает двух видов: либо это чистый пересказ уже
+   показанных полей (agrostroy-zemlya: note слово в слово повторяет title),
+   либо содержательный текст, которого больше нигде на карточке нет
+   (g21795ec9: events[0].note — восстановленный из обрубленного абзац про
+   ALMI Partner, ни слова из него не встречается ни в title, ни в eco/law).
+   Порог 0.9 подобран замером по всем 46 карточкам с одним событием и note
+   (17-18 августа 2026): между «явно повтор» (agrostroy-zemlya 1.00,
+   g94268c8d 1.00, g692dcc6b 0.95) и «явно новое» (следующее по возрастанию
+   значение — 0.82) есть зазор, порог стоит внутри него. */
+function noteIsNovel(d,note){
+  const stop=new Set(["сделка","сделки","стороны","сторон","группа","группе","компания","компании","который","которая","которые","было","была","были","также","данным","публичным"]);
+  const norm=t=>String(t||"").toLowerCase().replace(/ё/g,"е").replace(/[^a-zа-я0-9%$€₽]+/g," ").replace(/\s+/g," ").trim();
+  const toWords=t=>norm(t).split(" ").filter(w=>w.length>3&&!stop.has(w));
+  const noteWords=toWords(note);
+  if(!noteWords.length) return false;
+  const eco=d.eco||{}, law=d.law||{};
+  const otherText=[d.title,d.extra,...Object.values(eco).filter(v=>typeof v==="string"),
+    ...Object.entries(law).filter(([k,v])=>k!=="adv"&&typeof v==="string").map(([,v])=>v)].join(" ");
+  const otherWords=new Set(toWords(otherText));
+  const common=noteWords.filter(w=>otherWords.has(w)).length;
+  return common/noteWords.length<0.9;
+}
 function timelineHtml(d){
   // Одна новость — не история: dealEvents() всегда возвращает хотя бы одну
   // строку (текущий статус), но показывать «Ход сделки» с единственным
   // кликабельным этапом, который ведёт на страницу без единого нового факта,
   // хуже, чем не показывать вовсе. Блок нужен только когда этапов правда
   // несколько — переговоры, согласование, закрытие как отдельные новости.
+  // Исключение — когда у единственного этапа есть note С НОВЫМ фактом
+  // (см. noteIsNovel выше): это уже не «этап без фактов», а содержательный
+  // текст, который иначе не появился бы на экране НИГДЕ (46 карточек,
+  // найдено вычиткой 17-18 августа 2026 на примере g21795ec9). Тогда
+  // показываем текущую строку без переключателя «предыдущие этапы» —
+  // предыдущих и правда нет.
   const rows=dealEvents(d);
-  if(rows.length<2) return "";
+  if(rows.length<2 && !(rows[0]&&rows[0].note&&noteIsNovel(d,rows[0].note))) return "";
   const latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
   return `<div class="deal-progress reveal"><span class="label">Ход сделки</span>
     <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
