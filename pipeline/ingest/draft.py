@@ -147,6 +147,28 @@ def guess_status(text):
     return None
 
 
+def truncate_note(text, limit=260):
+    """Обрезать `events[].note` по границе слова, а не посередине.
+
+    Жёсткий `text[:260]` резал ровно на 260-м знаке независимо от того, где
+    внутри слова это приходится, — 31 из 79 `note` по базе обрывались в
+    диапазоне 255–260 знаков буквально на полуслове (пример: карточка
+    ALMI Partner, «…«Башк»), и обрезанный кусок ничем не был помечен как
+    обрезанный — читатель видел не оборванный, а как будто просто короткий
+    текст. Здесь обрезаем до последнего целого слова и ставим «…», чтобы
+    обрыв был виден честно. Уже накопленные обрывы это не чинит — для них
+    нужен текст источника (см. CLAUDE.md, «жёсткий лимит длины…»); эта
+    функция только не даёт им появляться дальше.
+    """
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    cut = re.sub(r'\s+\S*$', '', text[:limit])
+    if not cut:
+        cut = text[:limit]  # одно слово длиннее limit — резать больше нечем
+    return cut.rstrip(' ,;:-—') + '…'
+
+
 def guess_event(item):
     """Один подтверждённый этап из одной новости, без пересказа от модели.
 
@@ -177,7 +199,7 @@ def guess_event(item):
         'kind': kind,
         'date': item.get('date') or 'unknown',
         'title': title,
-        'note': summary[:260].rstrip(' ,;:-—') if summary else '',
+        'note': truncate_note(summary) if summary else '',
         'source': [item.get('source_name') or item.get('source_id') or 'источник',
                    item.get('url')] if item.get('url') else None,
     }

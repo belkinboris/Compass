@@ -285,6 +285,25 @@ def test_draft_records_the_first_deal_stage():
     assert card["events"] and card["events"][0]["kind"] == "negotiations"
 
 
+def test_draft_event_note_does_not_cut_a_word_in_half():
+    """`events[].note` резался ровно на 260-м знаке — 31 из 79 note по базе
+
+    обрывались в этом диапазоне буквально на полуслове (пример: карточка
+    ALMI Partner, «…«Башк»), и обрыв ничем не был помечен. `truncate_note()`
+    режет по границе слова и ставит «…», чтобы читатель видел обрыв, а не
+    принимал его за короткий, но полный текст.
+    """
+    import draft
+    prefix = "A" * 255
+    text = prefix + " Башкортостана далее ещё текст сверх лимита длиной"
+    assert text[:260].rstrip(" ,;:-—").endswith("Башк"), "тест сам не бьёт по границе слова"
+    result = draft.truncate_note(text)
+    assert result.endswith("…")
+    assert not result.rstrip("…").endswith("Башк"), "слово всё ещё режется пополам"
+    short = "Короткий текст без обрыва."
+    assert draft.truncate_note(short) == short
+
+
 def test_draft_error_rate_stays_low(base):
     """Разбор ошибается реже, чем молчит: замер на 1333 выверенных карточках.
 
