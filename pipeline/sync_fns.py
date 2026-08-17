@@ -149,14 +149,37 @@ def _confirm_entity(db, company_id: str, candidate: dict[str, Any], score: float
 
 def match_companies(db, client: ApiFnsClient, *, auto_confirm: bool, limit: int | None = None,
                     company_id: str | None = None, dry_run: bool = False) -> tuple[int, int, int]:
+    """Подбирает юрлица ЕГРЮЛ по имени профиля через метод ``search``.
+
+    ГОДОВАЯ КВОТА — ЖЁСТКИЙ РЕСУРС, НЕ ФОРМАЛЬНОСТЬ. Тариф даёт по 3000
+    запросов в год на метод, а профилей в базе — под 1900: прогон без
+    ограничения потратил бы больше половины годового `search` за один
+    вызов, и ничего похожего на «обновим летом ещё раз» уже бы не осталось.
+    Поэтому при `--limit` компании берутся НЕ в порядке файла, а по числу
+    сделок (`deal_count`) по убыванию — тот же признак важности, что уже
+    используется для профильных описаний («пишем тем, кого действительно
+    открывают»): первыми синхронизируются компании, чьи страницы
+    действительно смотрят, а не первые по алфавиту/порядку JSON.
+    `lot`-профили (несколько юрлиц под одним именем сделки, например «ООО
+    «Датана» и ООО «Датабриз»») пропускаются всегда — искать их по имени в
+    ЕГРЮЛ одним юрлицом бессмысленно, а платный запрос спишется в любом
+    случае.
+    """
     catalog = load_company_catalog()
-    ids = [company_id] if company_id else list(catalog)
+    if company_id:
+        ids = [company_id]
+    else:
+        ids = sorted(
+            (cid for cid, item in catalog.items() if not item.get("lot")),
+            key=lambda cid: catalog[cid].get("deal_count", 0),
+            reverse=True,
+        )
     if limit:
         ids = ids[:limit]
     matched = candidates = errors = 0
     for cid in ids:
         profile = catalog.get(cid)
-        if not profile or not profile.get("name"):
+        if not profile or not profile.get("name") or profile.get("lot"):
             continue
         # Подтверждённое сопоставление не перетираем поиском.
         if db.scalar(select(LegalEntity.id).where(

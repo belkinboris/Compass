@@ -306,6 +306,45 @@ def test_fns_seed_dry_run_does_not_write():
         db.close()
 
 
+def test_fns_catalog_exposes_lot_flag_and_deal_count_for_quota_priority():
+    """Годовая квота ФНС — 3000 запросов на метод, профилей — почти 1900:
+    `--limit` при первом прогоне обязан брать самые важные компании, а не
+    первые по порядку файла, и не тратить запрос на `lot` (несколько юрлиц
+    под одним именем сделки, ЕГРЮЛ по нему не найти)."""
+    from company_catalog import load_company_catalog
+    catalog = load_company_catalog()
+    assert sum(1 for c in catalog.values() if c.get("lot")) > 10
+    by_deals = sorted(catalog.values(), key=lambda c: c.get("deal_count", 0), reverse=True)
+    assert by_deals[0]["deal_count"] >= by_deals[-1]["deal_count"]
+    assert by_deals[0]["deal_count"] > 5, "самая частая сторона базы обязана иметь много сделок"
+
+
+def test_fns_match_priority_skips_lots_and_orders_by_deal_count(monkeypatch):
+    from pipeline import sync_fns
+
+    fake_catalog = {
+        "quiet": {"id": "quiet", "name": "Тихая компания", "lot": False, "deal_count": 1},
+        "loud": {"id": "loud", "name": "Громкая компания", "lot": False, "deal_count": 9},
+        "bundle": {"id": "bundle", "name": "Компания А и Компания Б", "lot": True, "deal_count": 4},
+    }
+    monkeypatch.setattr(sync_fns, "load_company_catalog", lambda: fake_catalog)
+
+    seen_order = []
+
+    class FakeClient:
+        def search(self, name, **kw):
+            seen_order.append(name)
+            return {"items": []}
+
+    db = get_session()
+    try:
+        sync_fns.match_companies(db, FakeClient(), auto_confirm=False, dry_run=True)
+    finally:
+        db.close()
+    assert seen_order == ["Громкая компания", "Тихая компания"], (
+        "громкая (deal_count выше) идёт первой, тихий лот вообще не запрашивается")
+
+
 def test_fns_candidate_csv_review_round_trip(tmp_path):
     import csv
     from db.models import LegalEntityCandidate

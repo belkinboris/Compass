@@ -25,8 +25,32 @@ def _load(path: Path) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
+_ROLE_FIELDS = ("buyer", "seller_id", "target", "asset_id")
+
+
+def _deal_counts(promoted: dict[str, Any]) -> dict[str, int]:
+    """Сколько сделок базы называют компанию стороной — сигнал важности.
+
+    Тот же признак, что уже используется для профильных описаний («пишем
+    тем, кого действительно открывают — участники трёх и более сделок»):
+    переиспользуем его как порядок приоритета для ФНС-синхронизации, а не
+    изобретаем новый — за него никто не платил токенами дважды."""
+    counts: dict[str, int] = {}
+    for deal in promoted.get("deals") or []:
+        if not isinstance(deal, dict):
+            continue
+        seen = set()
+        for field in _ROLE_FIELDS:
+            cid = deal.get(field)
+            if cid and cid not in seen:
+                seen.add(cid)
+                counts[cid] = counts.get(cid, 0) + 1
+    return counts
+
+
 def load_company_catalog() -> dict[str, dict[str, Any]]:
     promoted = _load(PROMOTED_PATH)
+    deal_counts = _deal_counts(promoted)
     rows: dict[str, dict[str, Any]] = {}
     for company_id, item in (promoted.get("companies") or {}).items():
         if not isinstance(item, dict):
@@ -42,6 +66,11 @@ def load_company_catalog() -> dict[str, dict[str, Any]]:
             "kpi_value": kpi[1] if len(kpi) > 1 else None,
             "auto_generated": True,
             "aliases": list((promoted.get("match_keys") or {}).get(company_id) or []),
+            # `lot` — не одно юрлицо, а несколько, проданных одним лотом
+            # («ООО «Датана» и ООО «Датабриз»»): у ФНС такое не найти по
+            # имени, поиск по api-fns.ru тратил бы платный запрос впустую.
+            "lot": bool(item.get("lot")),
+            "deal_count": deal_counts.get(str(company_id), 0),
         }
     # Кураторские профили при совпадении id имеют приоритет над автоматическими.
     for company_id, item in _load(CURATED_PATH).items():
