@@ -118,7 +118,7 @@ def main(argv):
     deal['eco']['rationale'] = NEW_RATIONALE
 
     with open(DATA, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False, indent=1)
         f.write('\n')
 
     print('Записано.')
