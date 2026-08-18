@@ -663,9 +663,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    длинное значение («Rothschild & Co — финансовый консультант и спонсор…»)
    выталкивает строку за экран. */
 .spec-v{font-size:14px;color:var(--ink);min-width:0;max-width:72ch;overflow-wrap:anywhere;text-wrap:pretty}
-.narrative{margin-bottom:26px;max-width:660px;animation:fadeUp .5s var(--ease)}
-.narrative .label{margin-bottom:9px}
-.narrative p{font-size:15px;line-height:1.68;color:var(--ink);margin:0;text-wrap:pretty}
+/* Абзацы «Цель сделки»/«Контекст»/«Структура»/«Условия» (para()) — та же
+   строка, что у specRow, с выключкой по ширине: пробовали (просьба
+   владельца 18 августа) — на мере в 72 знака заметно ровнее, чем рваный
+   правый край обычного текста, и не потребовало отдельной подписи. */
+.spec-v-text{line-height:1.6;text-align:justify;text-justify:inter-word}
 .adv-card{border-left:2.5px solid var(--bronze,#A3814E);padding:4px 0 4px 18px;margin-bottom:22px;animation:fadeUp .45s var(--ease)}
 .adv-card.muted{border-left-color:var(--line)}
 .adv-card.muted .adv-name{color:var(--muted);font-weight:400}
@@ -694,6 +696,22 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    актив визуально «сидит» на стрелке, а не выглядит третьим блоком в ряд. */
 .dp-flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,1.15fr) minmax(0,1fr);align-items:center}
 .dp-flow.no-asset{grid-template-columns:minmax(0,1fr) minmax(90px,.5fr) minmax(0,1fr)}
+/* Инвестиционный раунд: продавца нет вовсе (см. isRound), первой колонки
+   в разметке тоже нет — без этого правила пустая колонка оставалась бы в
+   сетке, а линия-коннектор внутри .dp-mid всё равно тянулась бы от её
+   левого края, как стрелка из ниоткуда. */
+.dp-flow.no-seller{grid-template-columns:minmax(150px,1.15fr) minmax(0,1fr)}
+.dp-flow.no-asset.no-seller{grid-template-columns:minmax(90px,.5fr) minmax(0,1fr)}
+/* .dp-mid центрирует актив по умолчанию — так линия-коннектор (она растянута
+   на всю ширину .dp-mid) читается как «идёт от продавца через актив». Без
+   продавца слева центрирование оставляло кусок линии ДО левого края самого
+   актива — ровно ту же стрелку «из ниоткуда», только короче. Прижимаем актив
+   к левому краю колонки, чтобы линия начиналась ровно на границе его блока. */
+.dp-flow.no-seller .dp-mid{justify-content:flex-start}
+/* .dp-mid:before начинается от left:0 — то есть от края padding-box, а не от
+   реального левого края актива (после padding:0 14px). Без этой поправки
+   огрызок линии в 14px всё равно торчал слева от рамки актива. */
+.dp-flow.no-seller .dp-mid:before{left:14px}
 .dp-flow .dp-party{min-width:0}
 .dp-party.is-empty{border-style:dashed;background:transparent}
 .dp-party.is-empty .dp-name{color:var(--muted);font-family:var(--f-sans,inherit);font-size:14px;font-style:italic}
@@ -721,12 +739,19 @@ a.dp-asset-name:hover{color:var(--accent)}
 /* На узких экранах поток разворачивается сверху вниз: линия становится
    вертикальной, стрелка смотрит вниз — порядок чтения «продавец → предмет → покупатель». */
 @media(max-width:680px){
-  .dp-flow,.dp-flow.no-asset{grid-template-columns:1fr;gap:0}
+  .dp-flow,.dp-flow.no-asset,.dp-flow.no-seller,.dp-flow.no-asset.no-seller{grid-template-columns:1fr;gap:0}
   .dp-mid{min-height:78px;padding:12px 0}
   .dp-mid:before{left:50%;right:auto;top:0;bottom:0;height:auto;width:2px;transform:scaleY(0);
     transform-origin:top;animation-name:wipeY}
   .dp-mid:after{right:auto;left:calc(50% - 5px);top:auto;bottom:-1px;border-left:5px solid transparent;
     border-right:5px solid transparent;border-top:7px solid var(--accent);border-bottom:none}
+  /* Тот же дефект «линии из ниоткуда», что и на десктопе (см. выше), только
+     на узких экранах поток вертикальный: без продавца .dp-mid — первая
+     строка сетки, и вертикальная линия торчала бы ВЫШЕ актива, в пустоту
+     над всем блоком. Прижимаем актив к верху и сдвигаем начало линии на
+     высоту padding, как на десктопе для left. */
+  .dp-flow.no-seller .dp-mid{justify-content:center;align-items:flex-start}
+  .dp-flow.no-seller .dp-mid:before{top:12px}
 }
 @keyframes wipeY{to{transform:scaleY(1)}}
 @media(max-width:560px){.dp-row{flex-direction:column}.dp-link{padding:14px 0;min-width:0}.dp-link .dp-arrow{transform:rotate(90deg);min-width:44px;margin:16px 0}}
@@ -3237,18 +3262,21 @@ function noteIsNovel(d,note){
 }
 function timelineHtml(d){
   // Одна новость — не история: dealEvents() всегда возвращает хотя бы одну
-  // строку (текущий статус), но показывать «Ход сделки» с единственным
-  // кликабельным этапом, который ведёт на страницу без единого нового факта,
-  // хуже, чем не показывать вовсе. Блок нужен только когда этапов правда
-  // несколько — переговоры, согласование, закрытие как отдельные новости.
-  // Исключение — когда у единственного этапа есть note С НОВЫМ фактом
-  // (см. noteIsNovel выше): это уже не «этап без фактов», а содержательный
-  // текст, который иначе не появился бы на экране НИГДЕ (46 карточек,
-  // найдено вычиткой 17-18 августа 2026 на примере g21795ec9). Тогда
-  // показываем текущую строку без переключателя «предыдущие этапы» —
-  // предыдущих и правда нет.
+  // строку (текущий статус), но «Ход сделки» с единственным этапом не
+  // добавляет ничего к тому, что и так на карточке, — блок нужен только
+  // когда этапов правда несколько (переговоры, согласование, закрытие как
+  // отдельные новости). БЕЗ ИСКЛЮЧЕНИЙ: было исключение на случай, когда у
+  // единственного этапа есть note с фактом, которого больше нигде нет
+  // (noteIsNovel, найдено на g21795ec9/ALMI Partner) — владелец 18 августа
+  // прямо отклонил его на карточке ПСБ/«Атом»: noteIsNovel посчитал новым
+  // упоминание должности банковского представителя (текст не совпадает
+  // дословно с другими полями), а открыв этап, читатель не видел ничего,
+  // что стоило бы отдельного клика. Факт, ради которого исключение
+  // вводилось, должен лежать в поле карточки, а не жить только в note за
+  // кликом «Открыть этап» — если такой факт находится, его дописывают через
+  // review.py в eco/law, как и любой другой.
   const rows=dealEvents(d);
-  if(rows.length<2 && !(rows[0]&&rows[0].note&&noteIsNovel(d,rows[0].note))) return "";
+  if(rows.length<2) return "";
   const latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
   return `<div class="deal-progress reveal"><span class="label">Ход сделки</span>
     <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
@@ -3859,7 +3887,16 @@ function renderDeal(id, qs, previewCard){
     // справа) остаётся — меняется только начертание подписи.
     const specRow = (label,val) => hasFact(val)
       ? `<div class="spec-row"><span class="label">${label}</span><span class="spec-v num">${val}</span></div>` : "";
-    const para = (label,val) => hasFact(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
+    // Просьба владельца 18 августа: «Цель сделки»/«Контекст» рядом с «Оценка
+    // и дисконт» на том же экране выглядели чужеродно — не только шрифт
+    // подписи (уже починен), но и сама раскладка (подпись сверху, абзац
+    // снизу, крупнее) и расположение (значение слева от подписи, а не
+    // справа). Переиспользуем сетку specRow целиком: та же подпись слева,
+    // тот же размер и цвет текста справа, только с выключкой по ширине —
+    // абзацы длиннее, чем факты specRow, и им это идёт лучше, чем короткому
+    // значению.
+    const para = (label,val) => hasFact(val)
+      ? `<div class="spec-row"><span class="label">${label}</span><span class="spec-v spec-v-text">${val}</span></div>` : "";
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
 
     /* --- плашка структуры сделки: раскладка зависит от ТИПА сделки --- */
@@ -3969,8 +4006,16 @@ function renderDeal(id, qs, previewCard){
         // «золотодобывающие активы»). Владелец нашёл это 10 августа на
         // карточке Petropavlovsk/УГМК: сумма и так видна в шапке карточки,
         // здесь честнее показать пустое место, чем подменять предмет ценой.
+        // У инвестиционного раунда sellerBox пуст (см. isRound выше) — сетка
+        // из трёх колонок оставляла первую пустой, а линия-коннектор внутри
+        // .dp-mid всё равно тянулась от её левого края: получалась стрелка
+        // «из ниоткуда» в предмет сделки. Найдено владельцем 18 августа на
+        // карточке ПСБ/«Атом» — дефект оказался старым и общим для всех 51
+        // карточки этого класса (продавца нет, предмет и инвестор известны),
+        // просто ни разу не замечался раньше. `.no-seller` убирает пустую
+        // колонку из сетки совсем, а не прячет её визуально.
         return `<div class="deal-plate"><span class="label">Структура сделки</span>
-          <div class="dp-flow${asset?"":" no-asset"}">
+          <div class="dp-flow${asset?"":" no-asset"}${sellerBox?"":" no-seller"}">
             ${sellerBox}
             <div class="dp-mid">${asset}</div>
             ${buyerBox}
