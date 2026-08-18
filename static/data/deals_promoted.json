@@ -85056,6 +85056,14 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8890090"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Soyuz-Marins-Grupp-vykupila-gostinicu-Ambassador-v-Sankt-Peterburge-87395"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/86019"
     ]
    ],
    "from_ingest": true,
@@ -85087,6 +85095,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8890765"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-17",
+     "title": "Сделка завершена",
+     "note": "АО «Интеринвест М» под руководством управляющего гостиничной сетью Marins Hotels Павла Князева 11 августа получило 100% в ООО «РК 5–7». На балансе последней, по данным реестра средств размещения, гостиница «Амбассадор» на 251 номер (17,2 тыс. кв. м) на улице…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Soyuz-Marins-Grupp-vykupila-gostinicu-Ambassador-v-Sankt-Peterburge-87395"
      ]
     }
    ],
