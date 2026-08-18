@@ -1553,6 +1553,32 @@ def test_review_refuses_to_write_what_is_not_in_the_source():
         assert review.check(made_up, card, texts, base["companies"], inds)
 
 
+def test_review_flags_cash_in_and_unlinked_party_without_blocking():
+    """Подсказки review.py (18 августа, урок ПСБ/«Атом») — не блокируют запись,
+
+    но обязаны сработать на тех же трёх сигналах, что нашли на живой
+    карточке: type=M&A с допэмиссией в тексте вместо продавца, и сторона
+    текстом, для которой уже есть профиль с точно таким именем. Проверено и
+    на честном случае: карточка без этих признаков не получает подсказок —
+    иначе консоль, куда валят всё, быстро перестанут читать.
+    """
+    import review
+    companies = {"gdc4235da": {"name": "Банк «Траст»"}}
+
+    cash_in_card = dict(type="M&A", seller=None, seller_id=None,
+                         extra="Пакет выкуплен в рамках дополнительной эмиссии за денежные средства.")
+    hints = review.advisories(cash_in_card, companies)
+    assert any("cash-in" in h or "Инвестиция" in h for h in hints), "не поймали допэмиссию под видом M&A"
+
+    unlinked_card = dict(type="M&A", seller="Банк «Траст»", seller_id=None)
+    hints = review.advisories(unlinked_card, companies)
+    assert any("gdc4235da" in h for h in hints), "не поймали продавца текстом при готовом профиле"
+
+    clean_card = dict(type="M&A", seller="Частное лицо, имя не раскрыто", seller_id=None,
+                       extra="Сделка закрыта, сумма не раскрывается.")
+    assert review.advisories(clean_card, companies) == [], "честная карточка не должна получать подсказок"
+
+
 def test_review_table_is_applied_and_not_pending(base):
     """Таблица правок применена: сухой прогон обязан быть пустым.
 

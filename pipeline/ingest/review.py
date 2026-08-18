@@ -49,8 +49,10 @@ from datetime import date, datetime, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
 
 import draft as drafter                                   # noqa: E402
+import link_named_parties_to_existing_profiles as linker  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -663,6 +665,45 @@ def stamp_followup_researched(card, day=None):
     return False
 
 
+# Сигнал допэмиссии/закрытой подписки за деньги — cash-in, а не продажа
+# существующего пакета; см. TYPE_WORDS['Инвестиция'] и урок ПСБ/«Атом».
+_CASH_IN_SIGNAL = re.compile(r'допэмисси|дополнительн\w* эмисси|закрыт\w* подписк', re.I)
+
+
+def advisories(card, companies):
+    """Предупреждения ПОСЛЕ записи — не блокируют её, только печатаются, чтобы
+    читающий не закрыл карточку с тем же классом дефекта, что ПСБ/«Атом»
+    (18 августа 2026): там review.py признал карточку прочитанной, ни разу не
+    заметив ни неверный тип, ни непровязанный профиль компании. Дословность
+    ДОБАВЛЯЕМОГО факта review.py проверяет; согласованность УЖЕ добавленного —
+    нет, и это ровно то, что здесь компенсируется.
+
+    Третий класс того же разбора (издание названо в тексте, но не в `src`)
+    сюда намеренно НЕ включён: замер по всей базе (18 августа, см. CLAUDE.md)
+    показал 76 кандидатов с реальной неоднозначностью — часть таких упоминаний
+    это атрибуция ВНУТРИ уже процитированного источника («Коммерсантъ» пишет
+    «по данным Reuters»), а не пропущенная ссылка; отличить одно от другого
+    может только чтение конкретной карточки, не регэксп по имени издания.
+    """
+    hints = []
+    if card.get('type') == 'M&A' and not card.get('seller') and not card.get('seller_id'):
+        blob = (' '.join(str(card.get(k) or '') for k in ('extra', 'asset')) + ' ' +
+                ' '.join(str(e.get('note') or '') for e in card.get('events') or [])).lower()
+        if _CASH_IN_SIGNAL.search(blob):
+            hints.append('type=M&A, продавца нет, а в тексте — допэмиссия/закрытая подписка: '
+                          'возможно, это Инвестиция (cash-in), а не M&A')
+    for text_field, id_field in (('seller', 'seller_id'), ('buyer_name', 'buyer')):
+        name = card.get(text_field)
+        if name and not card.get(id_field):
+            key = linker.norm(name)
+            match = next((cid for cid, co in companies.items()
+                          if linker.norm(co.get('name', '')) == key), None)
+            if match:
+                hints.append('%s=%r текстом, а профиль %s (%r) уже есть в базе — свяжите %s'
+                              % (text_field, name, match, companies[match]['name'], id_field))
+    return hints
+
+
 def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=()):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
@@ -711,6 +752,15 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
                             ['карточки %s нет ни в базе, ни в предпросмотре' % cid]))
         else:
             to_mark.append(cid)
+
+    # Подсказки печатаются и в сухом прогоне, и при записи — это не запрет,
+    # а напоминание тому, кто закрывает чтение карточки прямо сейчас.
+    touched = {fix['id'] for fix, _ in ok} | set(to_mark)
+    hint_lines = ['  %s: %s' % (cid, h)
+                  for cid in sorted(touched) for h in advisories(cards[cid], data['companies'])]
+    if hint_lines:
+        print('\nПОДСКАЗКИ (не блокируют запись, но стоит прочитать перед тем, как закрыть карточку):')
+        print('\n'.join(hint_lines))
 
     # --mark-deep: явное заявление «эту карточку исследовал по стандарту
     # 2026 года целиком, а не только сверил одно поле» — отдельная планка от
