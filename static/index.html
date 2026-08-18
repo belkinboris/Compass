@@ -659,7 +659,6 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    значения стартуют от одной линии, а мера ограничена 72 знаками: длинная
    строка перестала быть длинной, короткая — потерянной. */
 .spec-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:26px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.spec-k{color:var(--muted);font-size:13.5px}
 /* min-width:0 — иначе элемент сетки не сжимается ниже своего min-content, и
    длинное значение («Rothschild & Co — финансовый консультант и спонсор…»)
    выталкивает строку за экран. */
@@ -3851,8 +3850,15 @@ function renderDeal(id, qs, previewCard){
        Так «Не раскрыта» встречается на карточке ровно один раз, а не трижды. */
     const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
       ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
+    // Ярлык той же строки, что и в остальных блоках карточки (жирный, капс,
+    // приглушённый — класс .label, тот же, что у «Цель сделки»/«Контекст»
+    // рядом): раньше spec-row нёс собственный класс .spec-k (обычным
+    // начертанием, 13.5px), и на «Экономисте» «Оценка и дисконт» выглядела
+    // визуально другим шрифтом рядом с «Цель сделки» — владелец заметил это
+    // на карточке ПСБ/«Атом» 18 августа. Сетка (подпись слева, значение
+    // справа) остаётся — меняется только начертание подписи.
     const specRow = (label,val) => hasFact(val)
-      ? `<div class="spec-row"><span class="spec-k">${label}</span><span class="spec-v num">${val}</span></div>` : "";
+      ? `<div class="spec-row"><span class="label">${label}</span><span class="spec-v num">${val}</span></div>` : "";
     const para = (label,val) => hasFact(val) ? `<div class="narrative"><span class="label">${label}</span><p>${val}</p></div>` : "";
     const specBlock = rows => rows.filter(Boolean).length ? `<div class="spec-list">${rows.join("")}</div>` : "";
 
