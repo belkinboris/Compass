@@ -3770,7 +3770,8 @@
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-16",
    "followup_researched": "2026-08-16",
-   "weekly_researched": "2026-08-16"
+   "weekly_researched": "2026-08-16",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "gcc232775",
@@ -19673,7 +19674,8 @@
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-15",
    "followup_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15"
+   "weekly_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g0591604d",
@@ -20314,7 +20316,8 @@
    "auto": true,
    "seller": "Банк «Траст»",
    "seller_src": "text",
-   "added": "2026-07-15"
+   "added": "2026-07-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g2030328e",
@@ -21593,7 +21596,8 @@
    "seller": "Банк «ФК Открытие»",
    "seller_src": "text",
    "asset": "пакет акций ВТБ (9,08%)",
-   "added": "2026-07-15"
+   "added": "2026-07-15",
+   "seller_id": "g7ac0b3cc"
   },
   {
    "id": "gb944ce5d",
@@ -21924,7 +21928,7 @@
    "id": "g37619a9e",
    "date": "2020-12-23",
    "title": "Инвестиция Игоря Рыбакова $200 тыс. в AMMA Pregnancy Tracker (раунд pre-A)",
-   "buyer": null,
+   "buyer": "g601bcc88",
    "target": "g06755227",
    "ind": "Здравоохранение",
    "type": "Инвестиция",
@@ -21981,7 +21985,6 @@
    ],
    "extra": "Сделка закрыта в рамках раунда pre-A при pre-money оценке компании $24,5 млн — рост в 4 раза с $6 млн с момента seed-раунда 2019 года ($1,6 млн от ангелов из России, Гонконга, Кореи и группы Prytek). Привлечённые средства направлены на создание семейных аккаунтов в экосистеме AMMA Family — платформе информационных, образовательных и финансовых сервисов для семей на период беременности и раннего детства. В рамках того же раунда pre-A компания планировала суммарно привлечь до $3 млн к концу 2020 года. Рыбаков вошёл как стратегический партнёр через экосистему Prytek / «Рыбаков Фонд»; в сентябре 2021 года компания закрыла следующий раунд на $2 млн (post-money оценка $28 млн), а общий объём привлечённых инвестиций превысил $4 млн.",
    "auto": true,
-   "buyer_name": "Игорь Рыбаков",
    "added": "2026-07-15"
   },
   {
@@ -31198,7 +31201,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "g6261c82c"
   },
   {
    "id": "gd21bbce8",
@@ -33556,7 +33560,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g694126dd",
@@ -37763,7 +37768,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "g09bfb452"
   },
   {
    "id": "gee450f17",
@@ -40902,7 +40908,8 @@
    "added": "2026-07-23",
    "seller": "Александр Рязанов",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "ga09351d2"
   },
   {
    "id": "gd2696c44",
@@ -41908,7 +41915,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "g66c1d4b8"
   },
   {
    "id": "g7ce0250d",
@@ -47207,7 +47215,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "g14d905f4"
   },
   {
    "id": "g8b02811a",
@@ -51533,7 +51542,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14"
+   "deep_researched": "2026-08-14",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g90317ad0",
@@ -53260,7 +53270,8 @@
    "added": "2026-07-23",
    "seller": "Александр Клячин",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gb9c8945c"
   },
   {
    "id": "g499c5c6c",
@@ -56701,7 +56712,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "gd133363d",
@@ -62994,7 +63006,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "gfda775ad",
@@ -67031,7 +67044,8 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g50c555a0",
@@ -72274,7 +72288,8 @@
    "seller_src": "title",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g404d96eb",
@@ -73649,7 +73664,8 @@
    "added": "2026-07-23",
    "seller": "Банк «Траст»",
    "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g4cb8fc20",
@@ -74331,7 +74347,6 @@
    ],
    "from_ingest": true,
    "seller": "Reckitt Benckiser (Великобритания)",
-   "buyer_name": "«Арнест»",
    "asset": "завод по выпуску бытовой химии в Клину (бренды Vanish, Air Wick, Cilit Bang, Tiret, Calgon)",
    "eco": {
     "sum": "—",
@@ -74363,7 +74378,8 @@
    ],
    "added": "2026-07-31",
    "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-16"
+   "deep_researched": "2026-08-16",
+   "buyer": "arnest"
   },
   {
    "id": "gmru-mariholodmash-borsky",
@@ -78711,8 +78727,8 @@
    },
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
-   "buyer_name": "АО «Управление активами»",
-   "deep_researched": "2026-08-10"
+   "deep_researched": "2026-08-10",
+   "buyer": "gf0a760bf"
   },
   {
    "id": "c197ac551",
@@ -80367,7 +80383,8 @@
    "seller": "Банк «Траст»",
    "reviewed": "2026-08-10",
    "buyer_name": "ООО «Управление известково-цементными активами» брянского бизнесмена Алексея Филина",
-   "deep_researched": "2026-08-15"
+   "deep_researched": "2026-08-15",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "c15d1a169",
