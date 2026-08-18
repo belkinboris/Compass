@@ -109,9 +109,34 @@ def display_name(domain):
     return domain[:1].upper() + domain[1:] if domain else domain
 
 
+# Телеграм-каналы — тот же дефект, что уже чинили для «web:kommersant.ru»
+# (докстрока выше), повторился 18 августа для «tg:»: домен t.me не несёт
+# имени канала (в адресе только @username), поэтому карточка ПСБ/«Атом»
+# несла подписью «tg:rusven» — внутренний id ленты (build_sources.py), а
+# не имя. Известные каналы подписаны по имени, неизвестные — честно как
+# «Телеграм-канал @username», не выдумывая название.
+TELEGRAM_CHANNEL_NAMES = {
+    'rusven': 'Русский Венчур',
+    # Имя уже стояло верно в верхнеуровневом `src` тех же карточек
+    # («Сделки M&A (@dealsma)») — здесь просто та же информация, без
+    # повторного «(@dealsma)»: его добавляет сам telegram_channel_label().
+    'dealsma': 'Сделки M&A',
+}
+
+
+def telegram_channel_label(username):
+    name = TELEGRAM_CHANNEL_NAMES.get(str(username or '').lower())
+    return 'Телеграм-канал: %s' % name if name else 'Телеграм-канал @%s' % username
+
+
 def edition_label(url):
     """Имя издания по адресу статьи; www. отрезается до поиска в таблице."""
-    host = (urlparse(str(url)).hostname or '').lower()
+    parsed = urlparse(str(url))
+    host = (parsed.hostname or '').lower()
     if host.startswith('www.'):
         host = host[4:]
+    if host == 't.me':
+        username = parsed.path.strip('/').split('/')[0]
+        if username:
+            return telegram_channel_label(username)
     return display_name(host)

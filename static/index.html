@@ -444,7 +444,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .progress-history{margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft)}
 .progress-history[hidden]{display:none}
 .progress-row{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:12px;align-items:start;padding:10px 8px;border-radius:8px;transition:background .2s}
-.progress-row:hover{background:var(--accent-soft)}
+.progress-row:not(.no-link):hover{background:var(--accent-soft)}
 .progress-dot{width:14px;height:14px;margin-top:4px;border-radius:50%;background:#fff;border:2px solid var(--line)}
 .progress-row.done .progress-dot{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px #fff}
 .progress-row.current .progress-dot{border-color:var(--bronze);box-shadow:0 0 0 4px var(--bronze-soft)}
@@ -458,7 +458,6 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .progress-copy{min-width:0}
 .progress-date{display:block;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:2px}
 .progress-title{display:block;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink)}
-.progress-summary{display:block;margin-top:4px;font-size:12.5px;line-height:1.45;color:var(--muted);max-width:72ch}
 .progress-open{align-self:center;color:var(--accent);font-size:12px;font-weight:600;white-space:nowrap}
 .progress-toggle{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--accent);font-size:12.5px;font-weight:600;text-align:left}
 .progress-toggle .chev{width:18px;height:18px;flex:0 0 18px;display:block;transition:transform .2s var(--ease);transform-origin:50% 50%}
@@ -615,10 +614,6 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .lens button{padding:11px 24px;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line);transition:all .25s var(--ease)}
 .lens button:last-child{border-right:none}
 .lens button.on{background:var(--accent-deep);color:var(--ivory)}
-/* линза, в которой нечего показать: видно до нажатия, но кликнуть можно */
-.lens button.thin{opacity:.55}
-.lens button.thin:after{content:"·";margin-left:6px;color:var(--bronze);font-weight:700}
-.lens button.thin.on{opacity:1}
 /* честное пустое состояние линзы */
 /* Мера мелкого текста — в знаках, а не в пикселях: 680px на 13px давали 82
    знака в строке, а на широком экране подпись под «Похожими сделками» шла в
@@ -1691,6 +1686,11 @@ let bulkLoadFailed = false;
 // если дата не разобралась («unknown») — прятать по формальному признаку
 // нечестно, когда мы сами не знаем дату.
 const SITE_MIN_YEAR = 2022;
+// Просьба владельца 18 августа: пока не набрана аудитория, обсуждение под
+// сделкой выглядит не тихим, а пустым — витрина без единого комментария
+// хуже, чем её отсутствие. Выключатель клиентский и обратимый: бэкенд и
+// данные (db/models.py Comment) не трогаем, включить обратно — одна правка.
+const COMMENTS_ENABLED = false;
 const isDealShownOnSite = rec => {
   const y = parseInt(String(rec.date||"").slice(0,4), 10);
   return isNaN(y) || y >= SITE_MIN_YEAR;
@@ -3198,12 +3198,21 @@ function dealEvents(d){
 }
 const stageHref = (d,e) => `#/deal/${d.id}/stage/${encodeURIComponent(e.key)}`;
 function progressRowHtml(d,e,current){
-  const summary=e.note ? `<span class="progress-summary">${esc(e.note)}</span>` : "";
-  return `<a class="progress-row ${current?"current":"done"}${e.kind==="cancelled"?" cancelled":""}" href="${stageHref(d,e)}">
-    <span class="progress-dot" aria-hidden="true"></span>
-    <span class="progress-copy"><span class="progress-date">${fmtDate(e.date)}</span><span class="progress-title">${esc(e.title)}</span>${summary}</span>
-    <span class="progress-open">Открыть этап →</span>
-  </a>`;
+  // Просьба владельца 18 августа: текст этапа в компактной строке почти
+  // всегда дублирует то, что и так написано на карточке (сумма, статус,
+  // предмет) — оставляем только этап и дату. Ссылка «Открыть этап» ведёт на
+  // страницу с полным текстом ТОЛЬКО если у него есть факт, которого больше
+  // нигде на карточке нет (noteIsNovel — тот же признак, которым выше решают,
+  // показывать ли весь блок «Ход сделки» на карточке с одним этапом): иначе
+  // переход никуда не ведёт — на странице этапа стоял бы тот же текст.
+  const novel = noteIsNovel(d, e.note);
+  const cls = `progress-row ${current?"current":"done"}${e.kind==="cancelled"?" cancelled":""}`;
+  const copy = `<span class="progress-dot" aria-hidden="true"></span>
+    <span class="progress-copy"><span class="progress-date">${fmtDate(e.date)}</span><span class="progress-title">${esc(e.title)}</span></span>
+    ${novel?`<span class="progress-open">Открыть этап →</span>`:""}`;
+  return novel
+    ? `<a class="${cls}" href="${stageHref(d,e)}">${copy}</a>`
+    : `<div class="${cls} no-link">${copy}</div>`;
 }
 /* Единственный этап с note бывает двух видов: либо это чистый пересказ уже
    показанных полей (agrostroy-zemlya: note слово в слово повторяет title),
@@ -3398,12 +3407,12 @@ function relatedHtml(d){
   // Отрасль «Не определена» — не отрасль, а признание, что мы её не знаем:
   // уводить читателя в «Все сделки отрасли «Не определена»» бессмысленно.
   const indLink = (d.ind && d.ind!=="Не определена") ? `#/ind/${encodeURIComponent(d.ind)}` : "";
-  // Нечего показать — говорим это прямо и уводим туда, где список всё же есть.
-  // Пять случайных карточек той же отрасли выглядели как ответ, но им не были.
-  if(!rel.length) return `<div class="related reveal"><span class="label">Похожие сделки</span>
-    <p class="rel-empty">Сделок с теми же сторонами или общей темой пока не найдено. Совпадение отрасли само по себе недостаточно, чтобы считать сделки сопоставимыми.</p>
-    ${indLink?`<div class="fe-actions" style="justify-content:flex-start"><a class="chip" href="${indLink}">Все сделки отрасли «${d.ind}»</a></div>`:""}
-  </div>`;
+  // Нечего показать — просьба владельца 18 августа: карточка и так короткая,
+  // раздел с честным «ничего не найдено» всё равно читается как обещанный,
+  // но пустой блок. Раньше здесь стоял текст-объяснение (сменивший пять
+  // случайных карточек той же отрасли, выглядевших как подбор) — теперь блок
+  // просто не рендерится, если подбирать нечего.
+  if(!rel.length) return "";
   const why = o => o.party
     ? `та же сторона: ${co(o.party)?co(o.party).name:"общая"}`
     : o.themes[0].toLowerCase();
@@ -3792,8 +3801,8 @@ function renderDeal(id, qs, previewCard){
   ${sparseNoticeHtml(d)}
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
     <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
-    <button data-l="eco" class="${[lens==="eco"&&"on",!ecoHasContent(d)&&"thin"].filter(Boolean).join(" ")}">Экономист</button>
-    <button data-l="law" class="${[lens==="law"&&"on",!lawHasContent(d)&&"thin"].filter(Boolean).join(" ")}">Юрист</button>
+    ${ecoHasContent(d)?`<button data-l="eco" class="${lens==="eco"?"on":""}">Экономист</button>`:""}
+    ${lawHasContent(d)?`<button data-l="law" class="${lens==="law"?"on":""}">Юрист</button>`:""}
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
@@ -3811,7 +3820,7 @@ function renderDeal(id, qs, previewCard){
   <!-- Строка про правки стоит именно здесь, у источников: человек, который знает
        сделку изнутри, дочитывает до первоисточников и там же видит, куда писать. -->
   <p class="src-fix reveal">Мы собираем сделки из публичных источников и можем ошибаться. Если вы вели эту сделку или были её стороной — напишите, поправим и укажем источник.</p>
-  <div class="comments reveal" id="comments-mount"></div>
+  ${COMMENTS_ENABLED?`<div class="comments reveal" id="comments-mount"></div>`:""}
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
      кнопке, а приглушение «Юриста» объяснялось только атрибутом title — на
@@ -3824,9 +3833,10 @@ function renderDeal(id, qs, previewCard){
     eco: "Экономист: сумма и доля, оценка, показатели актива, цель сделки.",
     law: "Юрист: структура сделки, согласования, условия и юридические консультанты.",
   };
-  const dim = [!ecoHasContent(d)&&"«Экономист»", !lawHasContent(d)&&"«Юрист»"].filter(Boolean);
-  const hintText = () => LENS_HINT[lens] + (dim.length
-    ? ` ${dim.join(" и ")} ${dim.length>1?"приглушены":"приглушён"}: этих данных в источниках нет.` : "");
+  // Раньше пустая вкладка оставалась видна, приглушённой, и подпись объясняла
+  // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
+  // и объяснять нечего: отсутствующую кнопку не нужно подписывать отдельно.
+  const hintText = () => LENS_HINT[lens];
   const paint = ()=>{
     const f = document.getElementById("facts");
     const hint = document.getElementById("lenshint");
@@ -4074,7 +4084,7 @@ function renderDeal(id, qs, previewCard){
   const fx = document.getElementById("fixdeal");
   if(fx) fx.onclick = ()=>openCorrectionDialog(d);
   mountMiniAI(d.title,"deal",d.id);
-  mountComments(d.id);
+  if(COMMENTS_ENABLED) mountComments(d.id);
 }
 
 /* ================= КОМПАНИИ ================= */

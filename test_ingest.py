@@ -2198,6 +2198,7 @@ def test_full_text_fetch_skips_already_cached_urls(monkeypatch, tmp_path):
 
 sys.path.insert(0, str(ROOT / "pipeline"))
 import ops_status  # noqa: E402
+import source_names  # noqa: E402
 
 
 def test_ops_status_reports_success_to_the_console():
@@ -2699,3 +2700,19 @@ def test_report_deal_name_is_not_the_first_capitalized_word():
     for cid, banned in cases.items():
         name = ops_status.short_name(by_id[cid], companies)
         assert name != banned, "%s: имя снова свелось к слову «%s»" % (cid, banned)
+
+
+# ---------- имя издания по адресу (source_names.py) ----------
+
+def test_telegram_channel_gets_a_name_not_a_raw_feed_id():
+    """Карточка ПСБ/«Атом» несла источником «tg:rusven» — внутренний id ленты
+    (build_sources.py: `'id': 'tg:' + name`), а не имя канала. Тот же класс
+    дефекта, что уже чинили для «web:kommersant.ru» (докстрока файла), только
+    для t.me: домен в адресе не несёт имени канала, только @username.
+    """
+    assert source_names.edition_label("https://t.me/rusven/7661") == "Телеграм-канал: Русский Венчур"
+    # Незнакомый канал — честно по @username, а не выдуманное название и не
+    # голый домен «T.me».
+    assert source_names.edition_label("https://t.me/unknownchannel/1") == "Телеграм-канал @unknownchannel"
+    # Обычные http(s)-адреса эта правка не трогает.
+    assert source_names.edition_label("https://www.kommersant.ru/doc/1") == "Коммерсантъ"
