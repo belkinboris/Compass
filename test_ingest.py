@@ -1553,6 +1553,20 @@ def test_review_refuses_to_write_what_is_not_in_the_source():
         assert review.check(made_up, card, texts, base["companies"], inds)
 
 
+def test_site_visible_matches_the_frontend_rule():
+    """`review.site_visible()` обязана совпадать с `isDealShownOnSite()` из
+    static/index.html — иначе замер очереди чтения снова примет архивные
+    карточки 2017-2021 (191 из 197 «непрочитанных» 18 августа) за настоящую
+    очередь, как уже однажды случилось."""
+    import review
+    assert review.site_min_year() == 2022
+    assert review.site_visible({"date": "2022-01-01"}) is True
+    assert review.site_visible({"date": "2021-12-31"}) is False
+    assert review.site_visible({"date": "2017-05-03"}) is False
+    assert review.site_visible({"date": "unknown"}) is True
+    assert review.site_visible({}) is True
+
+
 def test_review_flags_cash_in_and_unlinked_party_without_blocking():
     """Подсказки review.py (18 августа, урок ПСБ/«Атом») — не блокируют запись,
 

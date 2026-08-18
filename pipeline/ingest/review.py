@@ -165,6 +165,34 @@ def industries():
     return {x.strip().strip('"') for x in raw.split(',') if x.strip()}
 
 
+def site_min_year():
+    """`SITE_MIN_YEAR` из static/index.html — тем же способом, что выше
+    `industries()` читает `INDUSTRIES`: значение живёт в JS, дублировать его
+    отдельной константой в Python нельзя (см. урок про DOMAIN_NAMES —
+    дубль расходится молча)."""
+    html = open(INDEX, encoding='utf-8').read()
+    return int(re.search(r'const SITE_MIN_YEAR\s*=\s*(\d+)', html).group(1))
+
+
+def site_visible(card):
+    """Карточка видна на сайте — то же правило, что `isDealShownOnSite()` в
+    static/index.html: неизвестная дата считается видимой (честно — раз год
+    сам не знаем, прятать по формальному признаку нечестно), год ниже
+    `site_min_year()` — скрыт.
+
+    Нужна ЛЮБОМУ замеру очереди чтения: 18 августа так однажды посчитали
+    197 «непрочитанных» карточек, из которых 191 — архив 2017-2021 года,
+    заведённый бэкфиллом 15 июля и никогда не показываемый сайтом (см.
+    CLAUDE.md, «`deals_promoted.json` шире, чем то, что видит посетитель») —
+    та же путаница, что уже случалась с числом «X сделок» на главной, только
+    в другой метрике."""
+    y_str = str(card.get('date') or '')[:4]
+    try:
+        return int(y_str) >= site_min_year()
+    except ValueError:
+        return True
+
+
 def source_texts():
     """Настоящие тексты источников за все дни, что ещё лежат на диске."""
     texts = []
