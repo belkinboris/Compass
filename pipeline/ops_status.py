@@ -132,8 +132,18 @@ def render_intake(looked=0, found=0, cards=0):
     return '\n'.join(lines)
 
 
-def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, nothing=False):
-    """Публикация: что вышло в канал и что ещё ждёт."""
+def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False):
+    """Публикация: что вышло в канал и что ещё ждёт.
+
+    `soon` и `unread` — РАЗНЫЕ причины ждать, и путать их нельзя: `soon` —
+    карточка уже прочитана против источника, тишина через сутки её опубликует
+    сама; `unread` — карточку ещё никто не сверил со статьёй, и по молчанию
+    она не выйдет НИКОГДА, сколько бы часов ни прошло (защита от каркасных
+    дефектов черновика, approve.py/`plan_actions`). До 18 августа обе группы
+    считались одним числом «soon» — и владелец час за часом получал «карточка
+    выйдет сама», хотя она была не прочитана и не могла выйти: «Ленобласть»/
+    «М.видео» простояли так больше суток без единого изменения в отчёте.
+    """
     lines = []
     if nothing or not (posted or edited or applied):
         lines += ['😴 <b>Компас · публикация</b>', '', 'Сейчас публиковать нечего.']
@@ -147,7 +157,7 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, nothing=False)
         if applied:
             done.append('применили %d %s' % (applied, _plural(applied, 'ваше решение', 'ваших решения', 'ваших решений')))
         lines.append('Готово: %s.' % ', '.join(done))
-    if soon or held:
+    if soon or held or unread:
         lines.append('')
         if soon:
             # Согласуется и существительное, и ГЛАГОЛ: «1 карточка выйдет»,
@@ -156,6 +166,9 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, nothing=False)
             lines.append('⏳ %d %s %s сами в ближайшие сутки, если не трогать'
                          % (soon, _plural(soon, 'карточка', 'карточки', 'карточек'),
                             _plural(soon, 'выйдет', 'выйдут', 'выйдут')))
+        if unread:
+            lines.append('📖 %d %s ждут прочтения — сами не выйдут, пока их не сверят со статьёй'
+                         % (unread, _plural(unread, 'карточка', 'карточки', 'карточек')))
         if held:
             lines.append('✋ %d %s вы придержали — %s вашего слова'
                          % (held, _plural(held, 'карточку', 'карточки', 'карточек'),
@@ -275,11 +288,13 @@ def render_broken(routine, why):
             % (routine, why))
 
 
-def queue_keyboard(soon=0, held=0):
+def queue_keyboard(soon=0, held=0, unread=0):
     """Кнопки «показать, что там» — чтобы не идти искать руками."""
     row = []
     if soon:
         row.append({'text': '👀 Что скоро выйдет', 'callback_data': 'show:soon'})
+    if unread:
+        row.append({'text': '📖 Что ждёт прочтения', 'callback_data': 'show:unread'})
     if held:
         row.append({'text': '✋ Что придержано', 'callback_data': 'show:held'})
     return {'inline_keyboard': [row]} if row else None
@@ -310,8 +325,8 @@ def build(args):
         return render_intake(args.looked, args.found, args.cards), None
     if args.routine == 'публикация':
         text = render_publish(args.posted, args.edited, args.applied,
-                              args.soon, args.held, args.nothing)
-        return text, queue_keyboard(args.soon, args.held)
+                              args.soon, args.held, args.unread, args.nothing)
+        return text, queue_keyboard(args.soon, args.held, args.unread)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
     return render_quality(args.did, args.left, ids, args.facts), None
 
@@ -327,6 +342,8 @@ def main(argv):
     p.add_argument('--applied', type=int, default=0)
     p.add_argument('--soon', type=int, default=0)
     p.add_argument('--held', type=int, default=0)
+    p.add_argument('--unread', type=int, default=0,
+                   help='ждут прочтения против источника — не выйдут по молчанию')
     p.add_argument('--nothing', action='store_true')
     p.add_argument('--did', default='')
     p.add_argument('--left', type=int, default=0)
@@ -415,6 +432,12 @@ def _self_check():
     # Кнопки появляются только там, где есть что показать.
     assert queue_keyboard(0, 0) is None
     assert queue_keyboard(6, 4)['inline_keyboard'][0][0]['callback_data'] == 'show:soon'
+    # «Скоро выйдет» и «ждёт прочтения» — РАЗНЫЕ утверждения, путать их
+    # нельзя (18 августа так и застряли «Ленобласть»/«М.видео»): у карточки,
+    # которую ещё не прочитали, текст не должен обещать, что она выйдет сама.
+    unread_text = render_publish(nothing=True, unread=2)
+    assert 'выйдут сами' not in unread_text and 'ждут прочтения' in unread_text
+    assert queue_keyboard(0, 0, 3)['inline_keyboard'][0][0]['callback_data'] == 'show:unread'
     print('Самопроверка отчётов пройдена.')
 
 

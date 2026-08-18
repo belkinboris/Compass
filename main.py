@@ -952,7 +952,7 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
         # сделать. Теперь каждая карточка приходит своим сообщением с теми же
         # кнопками, что и при первом показе, — решение принимается там же, где
         # увидел.
-        show = re.match(r"^show:(soon|held|raw)$", str(callback.get("data") or ""))
+        show = re.match(r"^show:(soon|held|raw|unread)$", str(callback.get("data") or ""))
         if show:
             if not _is_reviewer(from_id):
                 notification_service.tg_api(
@@ -1107,9 +1107,19 @@ def _card_line(card: dict) -> str:
 def _send_queue_batch(chat_id, kind: str) -> int:
     """Прислать карточки очереди — каждую своим сообщением с кнопками.
 
-    `kind`: held — придержанные (можно опубликовать или выкинуть);
-            soon — те, что выйдут по молчанию (можно придержать или выкинуть);
-            raw  — сомнительные новости, которые ворота не пропустили.
+    `kind`: held   — придержанные (можно опубликовать или выкинуть);
+            soon   — прочитанные, выйдут по молчанию (можно придержать/выкинуть);
+            unread — НЕ прочитанные против источника — по молчанию не выйдут
+                     никогда, сколько бы часов ни прошло (см. approve.py,
+                     `plan_actions`: непрочитанная карточка не публикуется
+                     тишиной — это защита от каркасных дефектов черновика,
+                     а не забытый таймер). Раньше "soon" считался как «всё,
+                     что не придержано» — и такая карточка час за часом
+                     отчитывалась как «выйдет сама», хотя не могла выйти,
+                     пока её кто-то не прочитает: владелец 18 августа поймал
+                     это на «Ленобласти»/«М.видео», зависших без единого
+                     движения больше суток при одинаковом каждый час отчёте;
+            raw    — сомнительные новости, которые ворота не пропустили.
     """
     if kind == "raw":
         state = _read_json("data/inbox/moderation_state.json", {})
@@ -1125,12 +1135,20 @@ def _send_queue_batch(chat_id, kind: str) -> int:
                 % len(items))
     else:
         pending = _read_json("static/data/pending.json", {}).get("cards") or []
-        want_held = kind == "held"
-        items = [c for c in pending if bool(c.get("held")) == want_held]
-        head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
-                % len(items) if want_held else
-                "⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
-                "в течение суток." % len(items))
+        not_held = [c for c in pending if not c.get("held")]
+        if kind == "held":
+            items = [c for c in pending if c.get("held")]
+            head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
+                    % len(items))
+        elif kind == "unread":
+            items = [c for c in not_held if not c.get("reviewed")]
+            head = ("📖 <b>Ждут прочтения: %d</b>\nПока карточку не сверят с "
+                    "источником — молчание её не публикует, сама не выйдет."
+                    % len(items))
+        else:  # soon
+            items = [c for c in not_held if c.get("reviewed")]
+            head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
+                    "в течение суток." % len(items))
 
     notification_service.tg_api("sendMessage", chat_id=chat_id, text=head,
                                 parse_mode="HTML", disable_web_page_preview=True)
@@ -1184,7 +1202,8 @@ def _bot_menu() -> dict:
     return {"inline_keyboard": [
         [{"text": "⏳ Что скоро выйдет", "callback_data": "show:soon"},
          {"text": "✋ Что придержано", "callback_data": "show:held"}],
-        [{"text": "⚠️ Сомнительные новости", "callback_data": "show:raw"}],
+        [{"text": "📖 Что ждёт прочтения", "callback_data": "show:unread"},
+         {"text": "⚠️ Сомнительные новости", "callback_data": "show:raw"}],
         [{"text": "📊 Как дела у платформы", "callback_data": "menu:stats"}],
     ]}
 
@@ -1199,6 +1218,7 @@ def _stats_report() -> str:
         "🆕 Добавлено за неделю: <b>%(added_week)d</b>\n"
         "📣 Опубликовано в канале: <b>%(published)d</b>\n\n"
         "⏳ Выйдут сами в течение суток: <b>%(queue_soon)d</b>\n"
+        "📖 Ждут прочтения (сами не выйдут): <b>%(queue_unread)d</b>\n"
         "✋ Вы придержали: <b>%(queue_held)d</b>\n\n"
         "🔧 <b>В работе</b>\n"
         "Не дополнены по источнику: <b>%(unread)d</b> из %(from_ingest)d\n"
@@ -1352,7 +1372,12 @@ def _ops_numbers() -> dict:
         "deals": len(deals),
         "companies": len(base.get("companies") or {}),
         "added_week": len(week),
-        "queue_soon": sum(1 for c in pending if not c.get("held")),
+        # «Скоро выйдет» — ТОЛЬКО прочитанные против источника: непрочитанная
+        # карточка не публикуется по молчанию никогда (approve.py,
+        # `plan_actions`), и раньше это число молча включало её тоже —
+        # владелец 18 августа поймал два таких «зависших» примера.
+        "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed")),
+        "queue_unread": sum(1 for c in pending if not c.get("held") and not c.get("reviewed")),
         "queue_held": sum(1 for c in pending if c.get("held")),
         "unread": len(unread),
         "from_ingest": len(from_ingest),
@@ -1402,6 +1427,7 @@ ol.prev .tag{font-size:12px;color:var(--acc);margin-left:6px;white-space:nowrap}
 <h2>Ждёт вашего решения</h2>
 <div class="grid">
 <div class="c"><div class="n">%(queue_soon)d</div><div class="l">выйдут сами в течение суток</div></div>
+<div class="c"><div class="n">%(queue_unread)d</div><div class="l">ждут прочтения — сами не выйдут</div></div>
 <div class="c"><div class="n">%(queue_held)d</div><div class="l">вы придержали</div></div>
 </div>
 %(queue_list)s

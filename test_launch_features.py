@@ -1132,7 +1132,7 @@ def test_ops_dashboard_opens_with_the_token(client, monkeypatch):
 def test_ops_summary_counts_the_same_numbers_as_the_page(client, monkeypatch):
     monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
     n = client.get("/api/ops/summary?token=тайна").json()
-    for key in ("deals", "companies", "added_week", "queue_soon", "queue_held",
+    for key in ("deals", "companies", "added_week", "queue_soon", "queue_unread", "queue_held",
                 "unread", "from_ingest", "thin_2026", "published"):
         assert isinstance(n[key], int), key
     assert n["deals"] > 1000, "база должна быть непустой"
@@ -1168,6 +1168,7 @@ def test_bot_start_offers_buttons_instead_of_a_wall_of_text():
     # Кнопки ведут туда, где можно РЕШАТЬ, а не только смотреть: очередь,
     # придержанное и сомнительные приходят карточками со своими кнопками.
     assert "show:soon" in data and "show:held" in data and "show:raw" in data
+    assert "show:unread" in data
     assert "menu:stats" in data
     for row in menu:
         for button in row:
@@ -1203,7 +1204,8 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     monkeypatch.setattr(main, "_read_json", lambda path, default: {
         "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
                    "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
-                  {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»"}],
+                  {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»",
+                   "reviewed": "2026-08-01"}],
     } if "pending" in path else default)
 
     main._send_queue_batch(-100, "held")
@@ -1224,6 +1226,36 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     kb = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")][0]
     data = [b["callback_data"] for row in kb["inline_keyboard"] for b in row]
     assert data == ["mod:gs1:ok", "mod:gs1:hold", "mod:gs1:edit", "mod:gs1:discard"], data
+
+
+def test_unread_card_is_not_counted_as_soon(monkeypatch):
+    """«Скоро выйдет» и «ждёт прочтения» — разные утверждения о карточке.
+
+    До 18 августа «soon» значило просто «не придержана» — и непрочитанная
+    карточка час за часом отчитывалась как «выйдет сама», хотя молчание её
+    никогда не публикует (approve.py, `plan_actions`): «Крупный комплекс в
+    Ленобласти» и допэмиссия «М.видео» простояли так больше суток без
+    единого изменения в отчёте, и владелец не понимал, что вообще происходит.
+    """
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+        "cards": [{"id": "gu1", "title": "Ещё не прочитана", "buyer_name": "«Компания»"},
+                  {"id": "gs1", "title": "Прочитана, ждёт таймаута",
+                   "buyer_name": "«Другая»", "reviewed": "2026-08-01"}],
+    } if "pending" in path else default)
+
+    assert main._send_queue_batch(-100, "soon") == 1
+    only_sent = [kw["text"] for _m, kw in sent if "gs1" in kw.get("text", "")]
+    assert only_sent and "gu1" not in "".join(kw["text"] for _m, kw in sent)
+
+    sent.clear()
+    assert main._send_queue_batch(-100, "unread") == 1
+    head = [kw["text"] for _m, kw in sent if "Ждут прочтения" in kw.get("text", "")]
+    assert head, "заголовок непрочитанной очереди не отправлен"
+    unread_card = [kw["text"] for _m, kw in sent if "gu1" in kw.get("text", "")]
+    assert unread_card and "gs1" not in "".join(kw["text"] for _m, kw in sent)
 
 
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():

@@ -2286,13 +2286,17 @@ def test_ops_status_offers_buttons_only_when_there_is_something_to_show():
     kb = ops_status.queue_keyboard(6, 4)["inline_keyboard"][0]
     assert [b["callback_data"] for b in kb] == ["show:soon", "show:held"]
     assert ops_status.queue_keyboard(6, 0)["inline_keyboard"][0][0]["callback_data"] == "show:soon"
+    # «Ждёт прочтения» — третья, отдельная причина ждать (не «скоро выйдет»,
+    # не «придержано человеком») — своя кнопка между ними.
+    kb3 = ops_status.queue_keyboard(6, 4, 2)["inline_keyboard"][0]
+    assert [b["callback_data"] for b in kb3] == ["show:soon", "show:unread", "show:held"]
 
 
 def test_site_answers_the_queue_buttons():
     """Кнопка, на которую никто не отвечает, выглядит рабочей и молчит — тот
     же класс, что забытый callback_query в подписке вебхука (CLAUDE.md)."""
     src = (ROOT / "main.py").read_text(encoding="utf-8")
-    assert "show:(soon|held|raw)" in src, "сайт не разбирает callback_data кнопок отчёта"
+    assert "show:(soon|held|raw|unread)" in src, "сайт не разбирает callback_data кнопок отчёта"
     assert "Очередь видят только владелец и партнёр" in src, "нет проверки права"
 
 
