@@ -73,18 +73,48 @@ def summarize(rows: list[dict]) -> dict:
     return {"totals": totals, "counts": counts, "unknown_rows": unknown_rows, "n": len(rows)}
 
 
+def latest_available_date(client: CbrCreditOrgClient, credorg: int) -> date | None:
+    """Банки отчитываются на конкретные даты (обычно 1-е число месяца), не
+    каждый день — по умолчанию `date.today()` почти всегда пустой ответ
+    (ровно это и случилось при первом живом прогоне 18 августа: сегодня —
+    не отчётная дата). `GetDatesForF101` уже написан для ровно этого случая
+    — берём из него последнюю доступную дату вместо угадывания."""
+    try:
+        raw_dates = client.dates_for_f101(credorg)
+    except Exception:                                                  # noqa: BLE001
+        return None
+    parsed = []
+    for raw in raw_dates:
+        try:
+            parsed.append(date.fromisoformat(raw[:10]))
+        except ValueError:
+            continue
+    return max(parsed) if parsed else None
+
+
 def main(argv):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--date", default=date.today().isoformat(), help="дата ISO, например 2026-07-01")
+    parser.add_argument("--date", default=None,
+                         help="дата ISO, например 2026-07-01; без неё скрипт сам берёт "
+                              "последнюю доступную дату для КАЖДОГО банка через GetDatesForF101")
     parser.add_argument("--bank", action="append", type=parse_bank_arg,
                          help="НОМЕР:Имя[:сверка_трлн], можно несколько раз; по умолчанию — три банка ниже")
     args = parser.parse_args(argv)
 
-    on_date = date.fromisoformat(args.date)
+    fixed_date = date.fromisoformat(args.date) if args.date else None
     banks = args.bank or DEFAULT_BANKS
 
     with CbrCreditOrgClient() as client:
         for credorg, name, reference in banks:
+            on_date = fixed_date
+            if on_date is None:
+                on_date = latest_available_date(client, credorg)
+                if on_date is None:
+                    print(f"\n{'='*70}\n{name} (рег. номер {credorg})")
+                    print("  ОШИБКА: не удалось определить отчётную дату через GetDatesForF101 — "
+                          "укажите --date явно")
+                    continue
+
             print(f"\n{'='*70}\n{name} (рег. номер {credorg}), на {on_date.isoformat()}")
             try:
                 rows = client.data101fnew_xml(credorg, on_date)
@@ -96,7 +126,8 @@ def main(argv):
                 continue
 
             if not rows:
-                print("  Пустой ответ — проверьте дату (GetDatesForF101 отдаёт доступные даты)")
+                print(f"  Пустой ответ на дату {on_date.isoformat()}, хотя она числится в "
+                      "GetDatesForF101 — сама форма 101 недоступна на эту дату для этого банка")
                 continue
 
             summary = summarize(rows)
