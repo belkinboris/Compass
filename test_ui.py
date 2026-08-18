@@ -306,6 +306,52 @@ def test_account_form_is_visible_after_async_auth_check(page, base_url):
     assert "Войти" in page.locator("#app").inner_text()
 
 
+def test_account_form_survives_late_base_load(browser, base_url):
+    """`loadBulkDeals()` безусловно звала `route()` вторым проходом, когда
+    deals_promoted.json наконец догружался, — и на «Подписках» аккаунта это
+    стирало то, что человек уже успел ввести. Внутри SPA переход на «Подписки»
+    — смена хеша, а не перезагрузка страницы: `loadBulkDeals()`, запущенный
+    ПЕРВЫМ заходом на сайт, продолжает висеть в фоне, и его отложенный
+    `route()` перерисовывал форму, пока человек её заполнял. Страница подписок
+    не читает DEALS/COMPANIES вообще — перерисовывать её после прихода базы
+    не было смысла, только риск. Держим domain-файл искусственно долго и
+    переходим на «Подписки» сменой хеша (`location.hash=`, как в реальном
+    интерфейсе), а не повторным `goto` — иначе тест перезапускает
+    `loadBulkDeals()` заново и не попадает в то же окно, что и живой баг."""
+    ctx = browser.new_context()
+    try:
+        def delay(route):
+            time.sleep(2)
+            route.continue_()
+        ctx.route("**/static/data/deals_promoted.json*", delay)
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+        email = f"race{int(time.time()*1000)}@example.com"
+        reg = pg.evaluate("""async (email) => {
+            const r = await fetch("/api/auth/register", {method:"POST", headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({email, password:"testpass123", full_name:"Тест Гонщиков",
+                    company:null, position:null, role:"individual"})});
+            return r.status;
+        }""", email)
+        assert reg == 200, "регистрация не удалась"
+
+        pg.evaluate("location.hash = '#/account?tab=subscriptions'")
+        pg.wait_for_selector("#subInd", timeout=10000)
+        pg.select_option("#subInd", label="ИТ и интернет")
+        pg.fill("#subKw", "гонка")
+        pg.click("#subAdd")
+        pg.wait_for_timeout(3000)               # дать отложенной базе догрузиться и route() сработать
+
+        rows = pg.evaluate("""async () => {
+            const r = await fetch("/api/subscriptions");
+            return r.ok ? await r.json() : null;
+        }""")
+        assert rows and any(x.get("keyword") == "гонка" for x in rows), \
+            f"подписка не сохранилась — форму стёрло перерисовкой после прихода базы: {rows}"
+    finally:
+        ctx.close()
+
+
 def test_search_ignores_dots_and_hyphens_inside_names(base_url, browser):
     """«авто ру» и «ттехнологии» обязаны находить «Авто.ру» и «Т-Технологии».
     Замер до правки: у 367 карточек название в заголовке содержит точку или
