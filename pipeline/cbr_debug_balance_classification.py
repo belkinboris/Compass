@@ -95,7 +95,8 @@ def main():
         rub_trillion = totals[kind] / 1_000_000_000
         print(f"{label}: {rub_trillion:,.2f} трлн ₽ ({len(rows_by_type[kind])} счетов)")
         for numsc, value, name, confidence in rows_by_type[kind]:
-            print(f"    {numsc:8s} [{confidence:6s}] {value/1_000_000:>14,.1f} млн ₽  {name}")
+            # value — в тысячах ₽ (см. докстроку), /1e6 даёт МИЛЛИАРДЫ, не миллионы.
+            print(f"    {numsc:8s} [{confidence:6s}] {value/1_000_000:>14,.1f} млрд ₽  {name}")
         print()
 
     asset_trillion = totals[ASSET] / 1_000_000_000
