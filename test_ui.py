@@ -578,6 +578,28 @@ def test_company_sector_opens_the_industry_page(page, base_url):
     assert (tag.get_attribute("href") or "").startswith("#/industry/")
 
 
+def test_company_group_membership_is_shown_both_ways(page, base_url):
+    """`holding.id` резолвится через `co()`, а не через отдельный справочник.
+
+    До 18 августа 2026 группа резолвилась через захардкоженный `HOLDINGS{}`:
+    у «УГМК-Инвест» `holding.id` верно указывал на настоящий профиль «УГМК»
+    (`g3a8fb04f`), но резолвер знал только про `HOLDINGS`, и бейдж молча не
+    рендерился ни на одной из двух карточек — связь была в данных и не была
+    видна на экране (тот же класс дефекта, что «текстовое поле стороны может
+    быть невидимым» — BM-банк/RWB). Проверяем оба направления текстом на
+    экране, а не структурой DOM: именно так дефект и находился раньше.
+    """
+    visit(page, base_url, "#/companies/ugmkinvest")
+    body = page.inner_text("#app").lower()
+    assert "входит в группу" in body, "бейдж группы не показан у дочерней карточки"
+    assert "угмк" in body
+
+    visit(page, base_url, "#/companies/g3a8fb04f")
+    body = page.inner_text("#app").lower()
+    assert "в группу входит" in body, "обратная ссылка на дочерние компании не показана"
+    assert "угмк-инвест" in body
+
+
 def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 

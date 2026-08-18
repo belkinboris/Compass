@@ -1260,14 +1260,21 @@ async function renderCompare(){
 const COMPANIES = {};
 
 /* ================= ГРУППЫ КОМПАНИЙ (холдинги) =================
-   Не путать с категориями практики консультантов — это другая сущность.
-   confidence на company.holding: "disclosed" (подтверждено источником) или
-   "rumored" (по слухам/неподтверждённым данным) — тот же принцип, что и у
-   amount_confidence для сумм сделок: не гарантируем то, что не подтверждено. */
-const HOLDINGS = {
-  arnest:{name:"«Арнест»",desc:"Российский производитель товаров личной гигиены и бытовой химии (аэрозоли, косметика); контролируется Алексеем Сагалом."},
-  vamin_tatarstan:{name:"Группа «Вамин Татарстан»",desc:"Татарстанский агропромышленный холдинг; через SPV «Вамин Р» (99% долей) выкупил российский бизнес Danone в 2023-2024 гг."},
-};
+   Не путать с категориями практики консультантов — это другая сущность, и не
+   путать с `lot` (несколько юрлиц одного лота в ОДНОЙ сделке) — здесь речь о
+   постоянной корпоративной структуре, а не о предмете сделки.
+   `company.holding = {id, confidence, source}`: `id` — ссылка на профиль
+   МАТЕРИНСКОЙ компании В ТОЙ ЖЕ `COMPANIES` (не отдельный справочник — до 18
+   августа 2026 был захардкоженный `HOLDINGS{}` с двумя записями, и ссылка на
+   него не резолвилась почти нигде: «УГМК-Инвест» указывала на настоящий
+   профиль «УГМК», а резолвер знал только про `HOLDINGS`, поэтому связь была
+   в данных и не была видна на экране — см. `pipeline/migrate_holdings_to_
+   company_profiles.py`). Если у группы ещё нет своего профиля — заводится
+   обычный профиль `COMPANIES` (как у любой другой компании), а не запись во
+   вспомогательном объекте: один способ хранения компании, не два.
+   confidence: "disclosed" (подтверждено источником) или "rumored" (по
+   слухам/неподтверждённым данным) — тот же принцип, что и у amount_confidence
+   для сумм сделок: не гарантируем то, что не подтверждено. */
 
 /* ================= ПОЛНЫЕ КАРТОЧКИ СДЕЛОК ================= */
 /* Наполняется из deals_promoted.json — см. комментарий у COMPANIES. */
@@ -4499,8 +4506,13 @@ function renderCompany(id){
   }
   const {structured, mentions} = companyDeals(id);
   mentions.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  const holding = c.holding && HOLDINGS[c.holding.id];
+  const holding = c.holding && co(c.holding.id);
   const siblings = holding ? Object.entries(COMPANIES).filter(([sid,s])=>sid!==id && s.holding && s.holding.id===c.holding.id) : [];
+  // Обратное направление: эта карточка сама выступает материнской компанией
+  // для других — считается по ссылке `holding.id`, а не по отдельному полю
+  // «это группа»: любой профиль, на который кто-то ссылается, тем самым уже
+  // группа, и заводить для этого второй признак незачем.
+  const groupMembers = Object.entries(COMPANIES).filter(([mid,m])=>mid!==id && m.holding && m.holding.id===id);
   app.innerHTML = `
   <a class="back reveal" href="#/companies">← Все компании</a>
   <div class="d-head reveal">
@@ -4526,6 +4538,10 @@ function renderCompany(id){
       <span class="tag steel">${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"} ${holding.name}</span>
       ${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}
       ${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}
+    </div>`:""}
+    ${groupMembers.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
+      <span class="tag steel">В группу входит: ${groupMembers.length}</span>
+      <span style="color:var(--muted);font-size:13px">${groupMembers.map(([mid,m])=>`<a href="#/companies/${mid}">${m.name}</a>`).join(", ")}</span>
     </div>`:""}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>

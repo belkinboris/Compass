@@ -38,16 +38,16 @@ def companies(base):
 
 @pytest.fixture(scope="module")
 def all_company_ids(base):
-    """Профили лежат в двух местах: JSON и захардкоженный блок в index.html.
+    """Профили — только в JSON: `const COMPANIES = {}` в index.html пуст и
 
-    Без второго 68 ссылок из сделок выглядят битыми, хотя они рабочие.
+    наполняется загрузчиком (см. комментарий там же). Раньше здесь ещё
+    парсился хвост index.html до первого `\\n};`, чтобы поймать захардкоженный
+    блок профилей — но с 18 августа 2026, когда убрали параллельный `HOLDINGS`
+    (см. pipeline/migrate_holdings_to_company_profiles.py), парсер стал ловить
+    СЛЕДУЮЩИЙ по тексту объект (уже не про компании) и падать с «не удалось
+    прочитать» — сама предпосылка (хардкод существует) больше не верна.
     """
-    html = INDEX.read_text(encoding="utf-8")
-    tail = html[html.index("const COMPANIES = {"):]
-    block = tail[:tail.index("\n};")]
-    hardcoded = set(re.findall(r"^\s{2}([A-Za-z0-9_-]+)\s*:\s*\{", block, re.M))
-    assert hardcoded, "не удалось прочитать захардкоженные профили из index.html"
-    return set(base["companies"]) | hardcoded
+    return set(base["companies"])
 
 
 def ids_of(rows):
