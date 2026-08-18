@@ -3673,7 +3673,7 @@ async function mountDealTools(d){
     download.disabled=true;show("Готовим PDF…");
     try{
       const r=await fetch(`/api/deals/${encodeURIComponent(d.id)}/export`,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
-      if(r.status===401){needLogin("скачать карточку в PDF");return;}
+      if(r.status===401){show("");needLogin("скачать карточку в PDF");return;}
       if(r.status===403){show("Скачивание полной карточки доступно по подписке.");return;}
       if(!r.ok){const x=await r.json().catch(()=>({}));show(x.error||"Не удалось сформировать PDF.");return;}
       const blob=await r.blob(), a=document.createElement("a");

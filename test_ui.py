@@ -232,6 +232,16 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     assert page.locator(".src .acct-note").count() == 0
 
 
+def test_pdf_button_note_does_not_get_stuck_on_login_prompt(page, base_url):
+    # Кнопка ставила "Готовим PDF…" ДО запроса, а на 401 (гость не вошёл)
+    # уводила во всплывающий тост и никогда не убирала эту строку — рядом с
+    # кнопками навсегда оставалось "Готовим PDF…", хотя ничего не готовилось.
+    visit(page, base_url, "#/deal/g1d36d186")
+    page.locator("#downloaddeal").click()
+    page.wait_for_selector(".toast")
+    assert page.locator("#dealtoolnote").inner_text() == ""
+
+
 def test_pre_2022_deals_hidden_from_site(page, base_url):
     # Сделки до 2022 года остаются в deals_promoted.json, но не показываются на
     # сайте: прямой переход по адресу карточки должен молча показать ленту
