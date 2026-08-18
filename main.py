@@ -119,6 +119,11 @@ def get_db():
 
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
 
+# «Компания сегодня» не показывает отчётность старше этого числа лет от
+# текущего года — правило владельца от 18 августа 2026 после жалобы на
+# видимые на сайте показатели банков за 2020-2021 год.
+FNS_REPORT_MAX_AGE_YEARS = 2
+
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки
 # 60 с» и «повторов 2» — и это молча означало худший случай 180 с ожидания с
@@ -680,13 +685,28 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
     paid = bool(user and user.tier == UserTier.paid)
     result = []
     for entity in entities:
-        reports = list(db.scalars(select(FinancialReport).where(
+        all_reports = list(db.scalars(select(FinancialReport).where(
             FinancialReport.legal_entity_id == entity.id
         ).order_by(FinancialReport.year.desc())).all())
         # Для карточки сделки показываем последний отчётный год ДО года сделки,
         # а не текущие показатели, появившиеся спустя несколько лет.
+        stale_latest_year = None
         if as_of_year is not None:
-            reports = [row for row in reports if row.year < as_of_year]
+            reports = [row for row in all_reports if row.year < as_of_year]
+        else:
+            # «Компания сегодня» не должна выглядеть моложе своей последней
+            # отчётности на много лет: старше двух лет от текущего года —
+            # честнее не показывать вовсе, чем выдавать за актуальное (владелец,
+            # 18 августа — устаревшие 2020-2021 годы у банков/АФК «Система»
+            # читались как обман). На историю сделки (as_of_year задан) это
+            # правило не распространяется — там старый год того же периода,
+            # что и сама сделка, и есть ровно то, что нужно показать.
+            cutoff_year = datetime.now(timezone.utc).year - FNS_REPORT_MAX_AGE_YEARS
+            reports = [row for row in all_reports if row.year >= cutoff_year]
+            # Отличаем «отчётности нет вовсе» от «есть, но старше порога» —
+            # это разные честные состояния и разный текст на экране.
+            if not reports and all_reports:
+                stale_latest_year = all_reports[0].year
         events = list(db.scalars(select(RegistryEvent).where(
             RegistryEvent.legal_entity_id == entity.id
         ).order_by(RegistryEvent.event_date.desc(), RegistryEvent.id.desc())).all())
@@ -696,6 +716,7 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
             "entity": _entity_payload(entity),
             "reports": [_report_payload(row) for row in shown_reports],
             "report_years": [row.year for row in reports],
+            "stale_latest_year": stale_latest_year,
             "events": [{
                 "id": row.id,
                 "date": _plain(row.event_date),

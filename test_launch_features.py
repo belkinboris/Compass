@@ -139,6 +139,58 @@ def test_fns_company_dossier_free_and_paid_access(client):
     assert len(paid["entities"][0]["events"]) >= 4
 
 
+def test_fns_hides_reports_older_than_two_years_on_company_page(client):
+    """«Компания сегодня» не должна выглядеть моложе своей отчётности на много
+    лет — правило владельца от 18 августа 2026 после жалобы на устаревшие
+    2020-2021 годы у банков/АФК «Система». as_of_year (карточка сделки) от
+    этого правила не зависит: там нужен именно старый год того периода."""
+    company_id = "launch-fns-stale-company"
+    this_year = datetime.utcnow().year
+    stale_year = this_year - 3  # заведомо старше порога в 2 года
+    db = get_session()
+    try:
+        company = Company(id=company_id, name="Старая отчётность", legal_name='ООО "Старая отчётность"')
+        db.add(company); db.flush()
+        entity = LegalEntity(
+            company_id=company_id, legal_name='ООО "Старая отчётность"', short_name='ООО "Старая отчётность"',
+            inn="7700000098", ogrn="1027700000098", status="Действующая",
+            match_status=LegalEntityMatchStatus.confirmed, manually_verified=True, is_primary=True,
+            fetched_at=datetime.utcnow(), source_updated_at=datetime.utcnow(),
+        )
+        db.add(entity); db.flush()
+        db.add(FinancialReport(legal_entity_id=entity.id, year=stale_year,
+                                revenue_rub=500_000_000, net_profit_rub=40_000_000))
+        db.commit()
+        entity_id = entity.id
+    finally:
+        db.close()
+
+    body = client.get(f"/api/companies/{company_id}/fns").json()
+    entry = body["entities"][0]
+    assert entry["reports"] == []
+    assert entry["report_years"] == []
+    assert entry["stale_latest_year"] == stale_year
+
+    # as_of_year — контекст карточки сделки того же периода: старый год обязан
+    # быть виден, правило свежести на историю не распространяется.
+    historical = client.get(f"/api/companies/{company_id}/fns?as_of_year={stale_year + 1}").json()
+    assert historical["entities"][0]["report_years"] == [stale_year]
+    assert historical["entities"][0]["stale_latest_year"] is None
+
+    # Смешанный случай: старый год скрыт, свежий остаётся и не помечен stale.
+    db = get_session()
+    try:
+        db.add(FinancialReport(legal_entity_id=entity_id, year=this_year - 1,
+                                revenue_rub=700_000_000, net_profit_rub=60_000_000))
+        db.commit()
+    finally:
+        db.close()
+    mixed = client.get(f"/api/companies/{company_id}/fns").json()
+    mixed_entry = mixed["entities"][0]
+    assert mixed_entry["report_years"] == [this_year - 1]
+    assert mixed_entry["stale_latest_year"] is None
+
+
 def test_deal_watch_round_trip_and_default_preferences(client):
     assert client.post("/api/deals/g1d36d186/watch").status_code == 401
     _login(client, "watch-launch@firm.ru")

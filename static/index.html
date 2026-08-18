@@ -4406,17 +4406,25 @@ async function mountCompanyFns(companyId){
     // прочерков («Выручка —, Прибыль —, Активы —, Капитал —»), которая
     // выглядит как поломка, а не как «этих данных здесь нет и не будет».
     const hasAnyFinancialData = reports.some(r => financialRows.some(([,key]) => r[key]!=null));
+    // «Данных нет вовсе» и «данные есть, но старше 2 лет и потому скрыты» —
+    // разные честные состояния: у банков (форма ЦБ вместо ГИР БО) факт первый,
+    // у обычной компании со старой последней отчётностью — второй, и текст
+    // обязан называть год, а не притворяться, что источник пуст.
+    const staleYear = entry.stale_latest_year;
+    const emptyReason = staleYear
+      ? `Последняя доступная отчётность — за ${staleYear} год, это старше двух лет, и мы не показываем её как актуальную.`
+      : `Бухгалтерская отчётность для этого юридического лица в источнике не найдена. Для банков и других финансовых организаций потребуется отдельный источник Банка России.`;
     let content="";
     if(tab==="overview") content=`
-      <p style="color:var(--muted);margin-bottom:12px">${esc(e.legal_name)} · отчётность ${latest.year||"не найдена"}${latest.year?" года":""}</p>
-      ${hasAnyFinancialData?`<div class="fns-metrics">${metric("Выручка","revenue_rub")}${metric("Чистая прибыль","net_profit_rub")}${metric("Активы","assets_rub")}${metric("Капитал","equity_rub")}</div>`:`<div class="fns-empty">Бухгалтерская отчётность для этого юридического лица в источнике не найдена. Для банков и других финансовых организаций потребуется отдельный источник Банка России.</div>`}
+      <p style="color:var(--muted);margin-bottom:12px">${esc(e.legal_name)} · отчётность ${latest.year||staleYear||"не найдена"}${(latest.year||staleYear)?" года":""}</p>
+      ${hasAnyFinancialData?`<div class="fns-metrics">${metric("Выручка","revenue_rub")}${metric("Чистая прибыль","net_profit_rub")}${metric("Активы","assets_rub")}${metric("Капитал","equity_rub")}</div>`:`<div class="fns-empty">${emptyReason}</div>`}
       <div class="fns-registry">${registryRows.slice(0,6).map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div>`;
     if(tab==="finance") content=hasAnyFinancialData?`
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
       ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы и скачивание полной БФО доступны по подписке.</div>`:""}
-      <div class="fns-actions">${latest.year?`<a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/bo/${latest.year}?entity_id=${e.id}">Скачать полную отчётность</a>`:""}</div>`:`<div class="fns-empty">БФО в источнике не найдена.</div>`;
+      <div class="fns-actions">${latest.year?`<a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/bo/${latest.year}?entity_id=${e.id}">Скачать полную отчётность</a>`:""}</div>`:`<div class="fns-empty">${emptyReason}</div>`;
     if(tab==="ownership") content=ownershipHtml(entry.ownership);
     if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
     if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
