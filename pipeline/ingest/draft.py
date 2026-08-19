@@ -412,7 +412,15 @@ NOT_A_PARTY = re.compile(r'[.!?]\s+(?-i:[А-ЯЁA-Z])|(?-i:\b[Кк]то\b|\b[П�
                          # нигде дальше не закрывается — это отличает случай
                          # от вложенных названий («ООО «ТД «Нефтетехснаб»» и
                          # подобные), которые НЕ начинаются с самой кавычки.
-                         r'(?-i:^[«"][^«»"]*$)', re.I)
+                         r'(?-i:^[«"][^«»"]*$)|'
+                         # ЖИТЕЛИ — ДЕМОГРАФИЧЕСКАЯ ГРУППА, НЕ СТОРОНА. «Жители
+                         # Подмосковья за месяц купили почти 22 млн кг мяса»
+                         # (19 августа) — сводка розничных продаж, а не сделка;
+                         # «Жительница Хабаровского края получила 10 лет…» из
+                         # того же потока — вообще не про рынок. Родня уже
+                         # исключённой «N% демографической группы»: 0 из 1571
+                         # настоящих buyer_name/seller начинаются с «Жител…».
+                         r'(?-i:^Жител[а-яё]*)', re.I)
 
 # РОДОВОЕ ОПИСАНИЕ ВМЕСТО ИМЕНИ. Журнал правок чтением (learn.py) показал три
 # случая, где механика уверенно записала стороной не имя, а описание роли:
@@ -467,6 +475,24 @@ def _named(text):
     return text
 
 
+NEGATED_VERB = re.compile(r'\bне\s*$', re.I)
+
+
+def _first_affirmative(pattern, title):
+    """Первое совпадение глагола, которому не предшествует «не».
+
+    «Пашинян не продал абрикосы европейцам» (19 августа) — SELL_VERB
+    находил «продал», а отрицание перед ним никто не проверял: разбор читал
+    заголовок как сделку, хотя источник сообщает об ОТСУТСТВИИ продажи.
+    Замер по базе и всему кэшу притока (14613 заголовков): 3 заголовка с
+    «не» перед глаголом покупки/продажи/инвестиции, и ни один не был бы
+    настоящей сделкой — молчание тут ничего не стоит."""
+    for m in pattern.finditer(title):
+        if not NEGATED_VERB.search(title[:m.start()]):
+            return m
+    return None
+
+
 def guess_parties(title):
     """(покупатель, предмет, продавец) — только явно названные стороны.
 
@@ -488,7 +514,7 @@ def guess_parties(title):
     title = re.sub(r'\s+', ' ', str(title or '')).strip()
     buyer = asset = seller = None
 
-    m = BUY_VERB.search(title) or BUY_NOUN.search(title)
+    m = _first_affirmative(BUY_VERB, title) or _first_affirmative(BUY_NOUN, title)
     if m:
         head = title[:m.start()].strip()
         if head and len(head) < 70:
@@ -499,8 +525,8 @@ def guess_parties(title):
             seller = _named(clean_name(u.group(1)))
             tail = tail[:u.start()]
         asset = clean_name(LEADING_SHARE.sub('', tail.strip()))
-    elif INVEST_VERB.search(title):
-        m = INVEST_VERB.search(title)
+    elif _first_affirmative(INVEST_VERB, title):
+        m = _first_affirmative(INVEST_VERB, title)
         head = title[:m.start()].strip()
         if head and len(head) < 70:
             buyer = _named(clean_name(head))
@@ -508,8 +534,8 @@ def guess_parties(title):
         # за глаголом: между ними сумма.
         into = re.search(r'\bв\s+(.+)$', title[m.end():].strip())
         asset = clean_name(into.group(1)) if into else None
-    elif RAISED.search(title):
-        m = RAISED.search(title)
+    elif _first_affirmative(RAISED, title):
+        m = _first_affirmative(RAISED, title)
         head = title[:m.start()].strip()
         if head and len(head) < 70:
             asset = clean_name(head)
@@ -517,7 +543,7 @@ def guess_parties(title):
         if investor:
             buyer = _named(clean_name(investor.group(1)))
     else:
-        m = SELL_VERB.search(title)
+        m = _first_affirmative(SELL_VERB, title)
         if m:
             head = title[:m.start()].strip()
             if head and len(head) < 70:
