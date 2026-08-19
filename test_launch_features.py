@@ -1266,6 +1266,26 @@ def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
     assert main.BATCH_LIMIT <= 10, "Telegram пускает ~20 сообщений в минуту"
 
 
+def test_card_line_shows_every_source_not_just_the_first():
+    """Урезанная строка «Источник: X» пряталa остальные источники карточки —
+
+    владелец 19 августа принял карточку «HeadHunter»/Happy Job с четырьмя
+    источниками и 1800+ знаками обогащённого текста за почти пустую именно
+    по этой строке в консоли (там был виден только первый источник).
+    """
+    one_source = {"title": "Т", "src": [["Mergers.ru", "https://mergers.ru/x"]]}
+    assert "Источник: Mergers.ru" in main._card_line(one_source)
+
+    four_sources = {"title": "Т", "src": [
+        ["Mergers.ru", "https://mergers.ru/x"], ["TAdviser", "https://tadviser.ru/x"],
+        ["РБК Компании", "https://companies.rbc.ru/x"], ["Абирег", "https://abireg.ru/x"],
+    ]}
+    line = main._card_line(four_sources)
+    assert "Источники (4)" in line
+    for name in ("Mergers.ru", "TAdviser", "РБК Компании", "Абирег"):
+        assert name in line, f"источник {name} пропал из строки"
+
+
 def test_empty_queue_answers_instead_of_silence(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
