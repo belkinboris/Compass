@@ -712,14 +712,31 @@ def advisories(card, companies):
     это атрибуция ВНУТРИ уже процитированного источника («Коммерсантъ» пишет
     «по данным Reuters»), а не пропущенная ссылка; отличить одно от другого
     может только чтение конкретной карточки, не регэксп по имени издания.
+
+    19 августа нашлась карточка («М.видео», допэмиссия по закрытой подписке)
+    с тем же классом дефекта, что ПСБ/«Атом», но НЕ поймана первой версией
+    проверки: `type` стоял не «M&A», а «Финансирование · структурная сделка»
+    (тоже неверно — эта категория для обеспеченного финансирования под залог,
+    а не для допэмиссии), и `seller` был НЕ пуст, а заполнен именем самого
+    эмитента («ПАО «М.видео»» — компания не может продавать саму себя).
+    Проверка на допэмиссию расширена с «type==M&A и продавца нет» до «type
+    не «Инвестиция»», независимо от seller; добавлена отдельная, более прямая
+    проверка — продавец текстом совпадает с предметом сделки.
     """
     hints = []
-    if card.get('type') == 'M&A' and not card.get('seller') and not card.get('seller_id'):
+    if card.get('type') != 'Инвестиция':
         blob = (' '.join(str(card.get(k) or '') for k in ('extra', 'asset')) + ' ' +
                 ' '.join(str(e.get('note') or '') for e in card.get('events') or [])).lower()
         if _CASH_IN_SIGNAL.search(blob):
-            hints.append('type=M&A, продавца нет, а в тексте — допэмиссия/закрытая подписка: '
-                          'возможно, это Инвестиция (cash-in), а не M&A')
+            hints.append('type=%r, а в тексте — допэмиссия/закрытая подписка: возможно, '
+                          'это Инвестиция (cash-in), а не текущий тип' % card.get('type'))
+    seller_name = card.get('seller')
+    if seller_name:
+        target_name = (companies.get(card.get('target')) or {}).get('name') or card.get('asset')
+        if target_name and linker.norm(seller_name) == linker.norm(target_name):
+            hints.append('seller=%r совпадает с предметом сделки — компания не может быть '
+                          'продавцом самой себя; проверьте, не допэмиссия ли это (cash-in)'
+                          % seller_name)
     for text_field, id_field in (('seller', 'seller_id'), ('buyer_name', 'buyer')):
         name = card.get(text_field)
         if name and not card.get(id_field):
