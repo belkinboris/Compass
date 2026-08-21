@@ -17,13 +17,11 @@ FIXES = [
                   'Rus LLC.',
          why='партия 5 агентов, раунд 7, 15.08.2026, источник interfax.com: перенесено '
                   'дословно'),
-    dict(id='g1059432d', field='eco.target_fin', old='—',
-         new='Выручка «Вирлпул Рус» по РСБУ в 2021 году составила 40,8 млрд руб., чистая прибыль — 1,9 млрд руб.; у «Индезит Интернэшнл» эти показатели составили 29,1 млрд руб. и 220 млн руб. соответственно.',
-         quote='the revenue of Whirlpool Rus to RAS in 2021 was 40.8 billion rubles, and '
-                  'net profit was 1.9 billion rubles, while for Indesit International, these '
-                  'figures were 29.1 billion rubles and 220 million rubles, respectively.',
-         why='партия 5 агентов, раунд 7, 15.08.2026, источник interfax.com: перенесено '
-                  'дословно'),
+    # Запись `eco.target_fin` снята 21 августа: месячный дообыск нашёл
+    # финансы завода за 2025 год из ДРУГОГО источника — дословно
+    # объединить с этой цитатой `review.py` не может. Оба факта слиты
+    # разовым скриптом — `pipeline/
+    # fix_whirlpool_settlement_and_2025_financials.py`.
     dict(id='gabc53206', field='law.struct', old='—',
          new='Руководитель направления «Инновационный портфель» ИнноХаба Росатома '
                   'Алексей Аброськин и владельцы ООО «КонтролХак» Максим Пятаков и Сергей '

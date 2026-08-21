@@ -1360,14 +1360,12 @@ FIXES = [
          why='в «Цели сделки» лежала дословная копия «Дополнительной информации»'),
 
     # --- g1059432d Whirlpool / Arçelik ---
-    dict(id='g1059432d', field='law.terms', old='—',
-         new='Arçelik, купившая российский бизнес Whirlpool ещё в 2022 году, согласилась на единовременный платёж в 40 млн евро. После этого Whirlpool откажется от любых текущих и будущих претензий по сделке.',
-         quote='Arçelik, which acquired Whirlpool\'s Russian business back in 2022, '
-               'has agreed to make a one-time payment of 40 million euros. After '
-               'that, Whirlpool will waive any current or future claims under the '
-               'deal.',
-         why='условие сделки: разовый платёж 40 млн € и отказ продавца от текущих '
-             'и будущих требований — расчёт по сделке 2022 года закрывался годами'),
+    # Запись `law.terms` снята 21 августа: месячный дообыск нашёл
+    # предысторию урегулирования 2026 года (исходный earn-out механизм
+    # на 10 лет, накопленные обязательства ~117 млн €) из ДРУГОГО
+    # источника — дословно объединить с этой цитатой `review.py` не
+    # может. Оба факта слиты разовым скриптом — `pipeline/
+    # fix_whirlpool_settlement_and_2025_financials.py`.
     dict(id='g1059432d', field='eco.context', old='—',
          new='Липецкое АО «Индезит Интернэшнл» было переименовано в АО '
              '«Ай эйч пи апплаенсес» (IHP Appliances). Зарегистрированное '
