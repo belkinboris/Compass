@@ -2383,6 +2383,53 @@ def test_ops_status_honestly_reports_telegram_error():
     assert "chat not found" in why
 
 
+def test_quality_report_links_cards_and_counts_the_whole_queue():
+    """Просьба владельца 21 августа, две части сразу.
+
+    1. Имена дополненных карточек — ссылки на сами карточки, а не голый
+       текст: из отчёта «дополнили X» должно быть видно, что именно
+       дополнили, в один клик.
+    2. Остаток считает САМ скрипт по всем трём уровням очереди и печатает
+       всегда: рутина передавала `--left` только по уровню, по которому
+       работала, — закрыла дневной в ноль, и строка исчезала, хотя
+       недельная и месячная очереди не пусты («как узнать, сколько ещё
+       переносить?»)."""
+    base = {
+        "deals": [
+            # дополненная карточка — имя должно стать ссылкой
+            {"id": "gaaa11111", "title": "Сделка «Альфа-Тест»",
+             "added": "2026-08-01", "reviewed": "2026-08-01",
+             "deep_researched": "2026-08-01", "weekly_researched": "2026-08-10",
+             "followup_researched": "2026-08-10"},
+            # дневная очередь: прочитана, полного обыска нет, старше суток
+            {"id": "gbbb22222", "title": "Сделка «Бета-Тест»",
+             "added": "2026-08-01", "reviewed": "2026-08-01"},
+            # недельная: обыск был, недельной сверки нет, старше 7 дней
+            {"id": "gccc33333", "title": "Сделка «Гамма-Тест»",
+             "added": "2026-08-01", "reviewed": "2026-08-01",
+             "deep_researched": "2026-08-02"},
+            # слишком свежая для любой очереди — не должна считаться
+            {"id": "gddd44444", "title": "Сделка «Дельта-Тест»",
+             "added": "2099-01-01", "reviewed": "2099-01-01"},
+        ],
+        "companies": {},
+    }
+    from datetime import date
+    day, week, month = ops_status.reading_queues(base, today=date(2026, 8, 21))
+    assert (day, week, month) == (1, 1, 0)
+
+    text = ops_status.render_quality(did="", ids=["gaaa11111"], facts=2, base=base)
+    assert '/#/deal/gaaa11111"' in text, text
+    assert "«Альфа-Тест»" in text
+    assert "Ещё в очереди на проверку" in text
+    assert "1 — первое полное чтение" in text
+    assert "1 — недельная сверка" in text
+    # пустая очередь называется пустой, а не пропадает из отчёта
+    empty = {"deals": [], "companies": {}}
+    text2 = ops_status.render_quality(did="Проверили платформу.", base=empty)
+    assert "очередь пуста" in text2
+
+
 def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, capsys):
     """Без токена/чата — честная строка в лог прогона, а не тихая имитация
     успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""
@@ -2834,7 +2881,13 @@ def test_report_names_deals_from_the_base_not_from_the_head():
             or name == card.get("seller")
         )
         assert grounded, "%r не выводится ни из одного поля карточки %s" % (name, cid)
-    assert "1297" in text
+    # Остаток очереди скрипт с 21 августа считает САМ по базе и печатает
+    # всегда; переданное рукой `--left` при живой базе игнорируется —
+    # замер важнее записанной цифры (владелец: «как узнать, сколько ещё
+    # переносить?» — ответ не должен зависеть от того, что рутина не
+    # забыла передать).
+    assert "1297" not in text
+    assert "Ещё в очереди на проверку" in text or "очередь пуста" in text
 
 
 def test_report_deal_name_is_not_the_first_capitalized_word():

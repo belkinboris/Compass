@@ -233,17 +233,78 @@ def short_name(deal, companies=None):
     return ' '.join(title.split()[:3]) if title else '(без названия)'
 
 
+def load_base():
+    path = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+    return json.load(open(path, encoding='utf-8'))
+
+
 def deal_names(ids, base=None):
     """Короткие имена карточек по их id — из базы, а не из головы."""
     if base is None:
-        path = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
-        base = json.load(open(path, encoding='utf-8'))
+        base = load_base()
     by_id = {d['id']: d for d in base.get('deals', [])}
     companies = base.get('companies', {})
     return [short_name(by_id[i], companies) for i in ids if i in by_id]
 
 
-def render_quality(did='', left=0, ids=(), facts=0):
+def _esc(text):
+    return (str(text).replace('&', '&amp;').replace('<', '&lt;')
+            .replace('>', '&gt;'))
+
+
+def deal_links(ids, base=None):
+    """Имена карточек как ссылки на сами карточки — просьба владельца
+    21 августа: из отчёта «дополнили X» должно быть видно, ЧТО именно
+    дополнили, в один клик, а не поиском по сайту."""
+    if base is None:
+        base = load_base()
+    by_id = {d['id']: d for d in base.get('deals', [])}
+    companies = base.get('companies', {})
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    return ['<a href="%s/#/deal/%s">%s</a>'
+            % (site, i, _esc(short_name(by_id[i], companies)))
+            for i in ids if i in by_id]
+
+
+def reading_queues(base=None, today=None):
+    """(первый проход, недельная, месячная) — размеры трёх очередей
+    дочитывания, посчитанные ЗДЕСЬ, а не переданные рутиной.
+
+    Просьба владельца 21 августа: отчёт «дополнили 3 карточки» не
+    отвечал на вопрос «а сколько ещё осталось». Рутина передавала
+    `--left` только по уровню, по которому работала, — закрыла дневной в
+    ноль, и строка исчезала, хотя недельная и месячная очереди не пусты.
+    Число, которое печатается каждый раз, надёжнее числа, которое надо
+    не забыть передать (тот же принцип, что имена карточек из базы, а не
+    из головы). Формулы — дословно из REVISION_BRIEF.md («Три уровня
+    очереди»)."""
+    from datetime import date
+    if base is None:
+        base = load_base()
+    if today is None:
+        today = date.today()
+
+    def age_days(c):
+        try:
+            y, m, d = map(int, str(c.get('added', '')).split('-'))
+            return (today - date(y, m, d)).days
+        except Exception:
+            return None
+
+    deals = base.get('deals', [])
+    day = sum(1 for c in deals
+              if c.get('reviewed') and not c.get('deep_researched')
+              and (age_days(c) or 0) >= 1)
+    week = sum(1 for c in deals
+               if c.get('deep_researched') and not c.get('weekly_researched')
+               and (age_days(c) or 0) >= 7)
+    month = sum(1 for c in deals
+                if c.get('weekly_researched') and not c.get('followup_researched')
+                and (age_days(c) or 0) >= 30)
+    return day, week, month
+
+
+def render_quality(did='', left=0, ids=(), facts=0, base=None):
     """Качество: что именно дополнили — ИМЕНАМИ, а не ярлыком партии.
 
     ПОЧЕМУ ИМЕНАМИ. Пока рутина читала одну карточку за прогон, обобщать было
@@ -257,7 +318,12 @@ def render_quality(did='', left=0, ids=(), facts=0):
     владел активом до сделки»).
     """
     lines = ['🔧 <b>Компас · качество</b>', '']
-    names = deal_names(ids) if ids else []
+    if base is None:
+        try:
+            base = load_base()
+        except Exception:
+            base = None
+    names = deal_links(ids, base) if ids and base else (deal_names(ids) if ids else [])
     if names:
         head = 'Дополнили %d %s: %s' % (
             len(ids), _plural(len(ids), 'карточку', 'карточки', 'карточек'),
@@ -275,7 +341,24 @@ def render_quality(did='', left=0, ids=(), facts=0):
     else:
         lines.append(did.strip() if did and did.strip()
                      else 'Проверили платформу — всё в порядке, чинить нечего.')
-    if left:
+    # Остаток очередей считает сам скрипт и печатает ВСЕГДА — «закрыли
+    # уровень» без общей картины читалось как «всё готово», хотя две
+    # другие очереди не пусты (замечание владельца 21 августа).
+    if base:
+        day, week, month = reading_queues(base)
+        lines.append('')
+        if day or week or month:
+            parts = []
+            if day:
+                parts.append('%d — первое полное чтение источников' % day)
+            if week:
+                parts.append('%d — недельная сверка, что вышло нового' % week)
+            if month:
+                parts.append('%d — месячная' % month)
+            lines.append('📚 Ещё в очереди на проверку: %s.' % '; '.join(parts))
+        else:
+            lines.append('📚 Все карточки проверены по своим срокам — очередь пуста.')
+    elif left:
         lines.append('')
         lines.append('📚 Ещё не дополнены по источникам: %d %s'
                      % (left, _plural(left, 'карточка', 'карточки', 'карточек')))
