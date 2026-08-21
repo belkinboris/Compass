@@ -1584,7 +1584,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку gb57df995 (общие редкие слова: вложил, сша) — проверьте, не дубль ли"
    ]
   },
   {
@@ -2019,34 +2020,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d44072805",
-   "title": "Российский ИИ-стартап WEGOSTY привлек 23 млн рублей от четырех бизнес-ангелов на платформе венчурных инвестиций SberUnity в обмен на 20,57% компании, сообщил “Русскому Венчуру” представитель компании.",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7666"
-    ]
-   ],
-   "sum": "23 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российский ИИ-стартап WEGOSTY",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российский ИИ-стартап WEGOSTY",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -3098,34 +3071,6 @@
    ]
   },
   {
-   "draft_id": "d11089803",
-   "title": "Вакансия Менеджер проектов M&A в Т-банк https://hh.ru/vacancy/134986577",
-   "date": "2026-08-16",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7298"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d77156798",
    "title": "Paramount потребовала от властей США залог в $1,9 млрд из-за задержки слияния с Warner Bros. // Paramount потребовала залог в $1,88 млрд после иска 12 штатов",
    "date": "2026-08-18",
@@ -3152,45 +3097,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d74559840",
-   "title": "FT: акционеры клуба «Челси» намерены продать Clearlake свои доли",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8891606"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-17",
-     "title": "Переговоры",
-     "note": "Американские инвесторы Тодд Боэли и Марк Уолтер ведут переговоры о продаже своих долей в футбольном клубе «Челси» его мажоритарному владельцу -- компании Clearlake Capital. Об этом сообщает Financial Times со ссылкой на источников, знакомых с ситуацией.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8891606"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -3263,45 +3169,6 @@
    ]
   },
   {
-   "draft_id": "d71961182",
-   "title": "«Барселона» купит у «Манчестер Сити» Родри",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8891420"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-17",
-     "title": "Переговоры",
-     "note": "«Барселона», которая два года подряд завоевывала испанское золото, но уже очень долго не может хотя бы приблизиться вплотную к победе в Лиге чемпионов, усилит свой молодой состав лучшим игроком завершившегося месяц назад мирового первенства. Она договорилась…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8891420"
-     ]
-    }
-   ],
-   "buyer_name": "«Барселона»",
-   "asset": null,
-   "seller": "«Манчестер Сити» Родри",
-   "parsed_parties": {
-    "buyer": "«Барселона»",
-    "asset": null,
-    "seller": "«Манчестер Сити» Родри"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d62647005",
    "title": "Alibaba продала игровое подразделение за $1,5 млрд",
    "date": "2026-08-17",
@@ -3341,118 +3208,6 @@
    ]
   },
   {
-   "draft_id": "d68283413",
-   "title": "Топливо в Севастополе во вторник будут продавать по QR-кодам и свободно",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1109809"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72100127",
-   "title": "CorpSoft24 вложилась в нишевого российского разработчика межсетевых экранов",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/CorpSoft24-vlozhilas-v-nishevogo-rossijskogo-razrabotchika-mezhsetevyh-jekranov-87391"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16564420",
-   "title": "Крупнейшие M&A-сделки в российском АПК за год",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/581017"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59961733",
-   "title": "Российская платформа для отелей и ресторанов Wegosty привлекла 23 млн рублей инвестиций",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/961816"
-    ]
-   ],
-   "sum": "23 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российская платформа для отелей и ресторанов Wegosty",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российская платформа для отелей и ресторанов Wegosty",
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d63484690",
    "title": "Фонд «юного ИИ-гения» потерял состояние на инвестициях в создателя «Яндекс»",
    "date": "2026-08-17",
@@ -3483,34 +3238,6 @@
    ]
   },
   {
-   "draft_id": "d50771075",
-   "title": "Инвестиции резидентов ОЭЗ «Технополис Москва» в разработки превысили 29 млрд рублей",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-17_investitsii_rezidentov_oez"
-    ]
-   ],
-   "sum": "29 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d52294297",
    "title": "FT: сотрудники OpenAI недовольны реорганизациями на фоне подготовки к IPO — некоторые задумывались о возможности уйти из компании после обратного выкупа акций",
    "date": "2026-08-17",
@@ -3537,34 +3264,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d91954263",
-   "title": "Здание Офицерской школы в Петербурге выставили на торги по программе «Рубль за метр»",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/17/zdanie-oficerskoj-shkoli-v"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -3672,34 +3371,6 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d51358592",
-   "title": "С 2020 г. под блокировки попал 531 сайт с незаконной продажей выписок из ЕГРН",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:comnews.ru",
-     "https://www.comnews.ru/content/246929/2026-08-18/2026-w34/1008/2020-g-pod-blokirovki-popal-531-sayt-nezakonnoy-prodazhey-vypisok-egrn"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -5434,7 +5105,7 @@
    ]
   },
   {
-   "draft_id": "d36661786",
+   "draft_id": "d63863280",
    "title": "Минфин США продлил до 19 сентября срок продажи зарубежных активов ЛУКОЙЛа",
    "date": "2026-08-20",
    "src": [
@@ -5463,7 +5134,7 @@
    ]
   },
   {
-   "draft_id": "d26217302",
+   "draft_id": "d40188752",
    "title": "Минфин США продлил до 19 сентября срок продажи зарубежных активов ЛУКОЙЛа",
    "date": "2026-08-20",
    "src": [
@@ -5492,7 +5163,7 @@
    ]
   },
   {
-   "draft_id": "d53579510",
+   "draft_id": "d70856054",
    "title": "The Irish Times: Цукерберг приобрел в Ирландии готический замок",
    "date": "2026-08-20",
    "src": [
@@ -5532,7 +5203,7 @@
    ]
   },
   {
-   "draft_id": "d17913049",
+   "draft_id": "d67906052",
    "title": "Суд в Москве признал запрещенной информацию об аренде и продаже банковских карт",
    "date": "2026-08-20",
    "src": [
@@ -5560,7 +5231,7 @@
    ]
   },
   {
-   "draft_id": "d62393560",
+   "draft_id": "d53796024",
    "title": "CNBC: OpenAI планирует провести IPO в 2027 году",
    "date": "2026-08-19",
    "src": [
@@ -5600,7 +5271,7 @@
    ]
   },
   {
-   "draft_id": "d59313900",
+   "draft_id": "d62574812",
    "title": "Петербургская биржа провела первые продажи импортного бензина",
    "date": "2026-08-19",
    "src": [
@@ -5640,7 +5311,7 @@
    ]
   },
   {
-   "draft_id": "d48428729",
+   "draft_id": "d12289285",
    "title": "Доля пяти крупнейших госкомпаний в инвестициях в России достигла 15%",
    "date": "2026-08-19",
    "src": [
@@ -5668,7 +5339,7 @@
    ]
   },
   {
-   "draft_id": "d81099352",
+   "draft_id": "d12897102",
    "title": "ФАС возбудила дело о продаже дженерика до истечения срока патента на оригинал",
    "date": "2026-08-19",
    "src": [
@@ -5696,7 +5367,7 @@
    ]
   },
   {
-   "draft_id": "d91153426",
+   "draft_id": "d42738375",
    "title": "Объем иностранных инвестиций в РФ вырос в 2025 году почти в 12 раз",
    "date": "2026-08-19",
    "src": [
@@ -5724,7 +5395,7 @@
    ]
   },
   {
-   "draft_id": "d67122689",
+   "draft_id": "d74877241",
    "title": "Минфину Украины поручили продать «Сенс банк» на фоне коррупционного скандала",
    "date": "2026-08-20",
    "src": [
@@ -5752,7 +5423,7 @@
    ]
   },
   {
-   "draft_id": "d16967111",
+   "draft_id": "d81247694",
    "title": "OFAC продлило лицензию для продажи зарубежных активов «Лукойла»",
    "date": "2026-08-20",
    "src": [
@@ -5780,46 +5451,7 @@
    ]
   },
   {
-   "draft_id": "d85051751",
-   "title": "Марк Цукерберг приобрел старинный замок Странкалли в Ирландии",
-   "date": "2026-08-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/society/news/2026/08/20/1222654-tsukerberg-zamok"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-20",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/society/news/2026/08/20/1222654-tsukerberg-zamok"
-     ]
-    }
-   ],
-   "buyer_name": "Марк Цукерберг",
-   "asset": "старинный замок Странкалли в Ирландии",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Марк Цукерберг",
-    "asset": "старинный замок Странкалли в Ирландии",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19728594",
+   "draft_id": "d16371806",
    "title": "OpenAI еще планирует провести IPO в 2027 году",
    "date": "2026-08-20",
    "src": [
@@ -5859,7 +5491,7 @@
    ]
   },
   {
-   "draft_id": "d58850752",
+   "draft_id": "d34272757",
    "title": "Путин: дефицит консолидированного бюджета РФ составляет 160 млрд рублей",
    "date": "2026-08-19",
    "src": [
@@ -5887,7 +5519,7 @@
    ]
   },
   {
-   "draft_id": "d39809765",
+   "draft_id": "d59829477",
    "title": "«Сбер» станет основным претендентом на приобретение национализированной лизинговой компании «Вектор Рейл»",
    "date": "2026-08-20",
    "src": [
@@ -5928,7 +5560,7 @@
    ]
   },
   {
-   "draft_id": "d73636076",
+   "draft_id": "d28564951",
    "title": "В приложении «БКС Мир инвестиций» появилась возможность подавать заявки на выкуп облигаций по оферте",
    "date": "2026-08-20",
    "src": [
@@ -5952,11 +5584,12 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g0e2f181f (общие редкие слова: облига, оферте) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d11528096",
+   "draft_id": "d40801864",
    "title": "Дореволюционное училище в посёлке Беседа выставили на торги за 1 рубль",
    "date": "2026-08-20",
    "src": [
@@ -5984,7 +5617,7 @@
    ]
   },
   {
-   "draft_id": "d77694184",
+   "draft_id": "d56892455",
    "title": "В Петербурге растут продажи лекарств в больших упаковках",
    "date": "2026-08-20",
    "src": [
@@ -6012,7 +5645,7 @@
    ]
   },
   {
-   "draft_id": "d10681940",
+   "draft_id": "d74107372",
    "title": "В Петербурге стартуют продажи новых кроссоверов бренда Tenet Plus",
    "date": "2026-08-19",
    "src": [
@@ -6040,7 +5673,7 @@
    ]
   },
   {
-   "draft_id": "d50592649",
+   "draft_id": "d58612660",
    "title": "«Россияне хотят играть только в Европе». Профессиональный футбольный агент — о том, как конкурировать за таланты и кто покупает наших игроков",
    "date": "2026-08-19",
    "src": [
@@ -6079,7 +5712,7 @@
    ]
   },
   {
-   "draft_id": "d11061892",
+   "draft_id": "d16737175",
    "title": "«Лента» может купить крупнейшего ритейлера Сибири «Мария-Ра»",
    "date": "2026-08-21",
    "src": [
@@ -6118,7 +5751,7 @@
    ]
   },
   {
-   "draft_id": "d20414747",
+   "draft_id": "d28542261",
    "title": "Российские авиакомпании откроют возможность покупки авиабилетов за рубли",
    "date": "2026-08-20",
    "src": [
@@ -6146,7 +5779,7 @@
    ]
   },
   {
-   "draft_id": "d60127355",
+   "draft_id": "d74471359",
    "title": "Каждый пятый торговый центр в России увеличил долю общепита на 20%",
    "date": "2026-08-19",
    "src": [
@@ -6174,7 +5807,7 @@
    ]
   },
   {
-   "draft_id": "d30810140",
+   "draft_id": "d75926103",
    "title": "В России могут принять закон о покупке новостроек в рассрочку",
    "date": "2026-08-19",
    "src": [
@@ -6202,46 +5835,7 @@
    ]
   },
   {
-   "draft_id": "d50261202",
-   "title": "Россияне купили в июле рекордные 549 тыс. подержанных авто: в топе продаж — машины Lada, Kia и Toyota",
-   "date": "2026-08-20",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/rossiyane-kupili-v-iyule-rekordnye-549-tys-poderzhannyh-avto-v-tope-prodazh-mashiny-lada-kia-i-toyota/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-20",
-     "title": "Сделка завершена",
-     "note": "В июле россияне купили 548,7 тыс. легковых автомобилей с пробегом — это рекорд с начала 2026 года, сообщает «Автостат». При этом продажи оказались на 3,3% ниже, чем годом ранее, когда было реализовано 567,2 тыс. машин — рынок вторичных автомобилей сократился…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/rossiyane-kupili-v-iyule-rekordnye-549-tys-poderzhannyh-avto-v-tope-prodazh-mashiny-lada-kia-i-toyota/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "в июле рекордные 549 тыс. подержанных авто: в топе продаж — машины Lada, Kia и Toyota",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "в июле рекордные 549 тыс. подержанных авто: в топе продаж — машины Lada, Kia и Toyota",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d36072802",
+   "draft_id": "d87646989",
    "title": "Боевики ВСУ делают и продают урны для мусора из тубусов от снарядов НАТО",
    "date": "2026-08-21",
    "src": [
@@ -6269,35 +5863,7 @@
    ]
   },
   {
-   "draft_id": "d88354802",
-   "title": "«Динамо» покупает форварда у «Индепендьенте», пишут СМИ",
-   "date": "2026-08-21",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260821/dinamo-2112169082.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48610791",
+   "draft_id": "d40450472",
    "title": "Российские авиакомпании планируют продавать билеты за цифровые рубли",
    "date": "2026-08-20",
    "src": [
@@ -6336,7 +5902,7 @@
    ]
   },
   {
-   "draft_id": "d75106554",
+   "draft_id": "d11799278",
    "title": "Иностранцы распродали японские облигации на рекордную за 20 лет сумму",
    "date": "2026-08-20",
    "src": [
@@ -6376,7 +5942,7 @@
    ]
   },
   {
-   "draft_id": "d44197412",
+   "draft_id": "d82087912",
    "title": "Суд признал запрещенной информацию об аренде и продаже банковских карт",
    "date": "2026-08-20",
    "src": [
@@ -6405,7 +5971,7 @@
    ]
   },
   {
-   "draft_id": "d62883907",
+   "draft_id": "d32162822",
    "title": "Ozon будет расторгать договоры с селлерами за попытку продать запрещенный товар",
    "date": "2026-08-20",
    "src": [
@@ -6433,7 +5999,7 @@
    ]
   },
   {
-   "draft_id": "d12231414",
+   "draft_id": "d71541761",
    "title": "Пугачева распродает земли в Подмосковье за копейки",
    "date": "2026-08-21",
    "src": [
@@ -6461,7 +6027,7 @@
    ]
   },
   {
-   "draft_id": "d50922424",
+   "draft_id": "d40847355",
    "title": "Авиакомпании РФ готовятся продавать билеты за цифровые рубли",
    "date": "2026-08-21",
    "src": [
@@ -6500,7 +6066,7 @@
    ]
   },
   {
-   "draft_id": "d48413264",
+   "draft_id": "d56629291",
    "title": "В Пермском крае предлагают купить и достроить базу отдыха с озером для рыбалки",
    "date": "2026-08-20",
    "src": [
@@ -6528,7 +6094,7 @@
    ]
   },
   {
-   "draft_id": "d13689131",
+   "draft_id": "d48339696",
    "title": "В Новом Уренгое продают кофейню за 2,9 млн рублей. Фото",
    "date": "2026-08-20",
    "src": [
@@ -6556,7 +6122,7 @@
    ]
   },
   {
-   "draft_id": "d65767035",
+   "draft_id": "d87870629",
    "title": "Тюменские рестораны сети фастфуда Tesla burger выставили на продажу",
    "date": "2026-08-20",
    "src": [
@@ -6585,7 +6151,7 @@
    ]
   },
   {
-   "draft_id": "d52711138",
+   "draft_id": "d33233076",
    "title": "Экс-хозяйка национализированного «Арианта» пожаловалась на финуправляющего",
    "date": "2026-08-20",
    "src": [
@@ -6613,7 +6179,7 @@
    ]
   },
   {
-   "draft_id": "d72092708",
+   "draft_id": "d85051019",
    "title": "Сколько бензина можно купить на заправках в Свердловской области: лимиты в августе 2026 года",
    "date": "2026-08-20",
    "src": [
@@ -6641,7 +6207,7 @@
    ]
   },
   {
-   "draft_id": "d69434583",
+   "draft_id": "d36100822",
    "title": "«Хоть 10 тысяч поставь, всё равно купят, выбора нет»: родители — о реальных расходах к 1 сентября",
    "date": "2026-08-19",
    "src": [
@@ -6669,7 +6235,7 @@
    ]
   },
   {
-   "draft_id": "d41731569",
+   "draft_id": "d46315533",
    "title": "Венчурный фонд QuantumLight сооснователя Revolut Николая Сторонского привлек €432 млн [$500 млн]. Сумма инвестиций в Fund II оказалась в 2 раза больше размера первого фонда - в мае 2025 года QuantumLi",
    "date": "2026-08-19",
    "src": [
@@ -6694,6 +6260,497 @@
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d59167972",
+   "title": "Издательства сокращают продажи из-за атак БПЛА на склады",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/society/news/2026/08/21/1222734-izdatelstva-sokraschayut"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58444199",
+   "title": "Самые дорогие продажи российских футболистов",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/21/08/2026/6a82f37e9a7947a7ab373123"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54432809",
+   "title": "Банк «Эко-инвест» национализирован",
+   "date": "2026-08-20",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/627928"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Банк «Эко-инвест» перешел в собственность государства» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d71253022",
+   "title": "«Лента» ведёт переговоры о покупке крупнейшего ретейлера Сибири за 60 млрд",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/21/lenta-vedjot-peregovori-o"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-21",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/08/21/lenta-vedjot-peregovori-o"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Лента» может купить крупнейшего ритейлера Сибири «Мария-Ра»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d90997887",
+   "title": "Более 18 тысяч билетов на поезда из Москвы в Петербург есть в продаже",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260821/moskva-872575296.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23080659",
+   "title": "Объем покупки юаней ЦБ с расчетами 20 августа составил 5,9 млрд рублей",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260821/obem-872573218.html"
+    ]
+   ],
+   "sum": "5,9 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54014397",
+   "title": "СМИ: «Лента» ведет переговоры о покупке крупнейшего сибирского ритейлера",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260821/riteyl-2112213285.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-21",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260821/riteyl-2112213285.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Лента» может купить крупнейшего ритейлера Сибири «Мария-Ра»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d88644808",
+   "title": "🥇 Кто покупает переработанное золото",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/mgkl/blog/1342449.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "переработанное золото",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "переработанное золото",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d65368898",
+   "title": "Компании, которые дают РЕАЛЬНЫЕ плюшки за покупку своих акций. Актуальный список на 2026 год",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1342438.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81802833",
+   "title": "«Лента» ведет переговоры о покупке сибирской сети «Мария-Ра»",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/lenta-vedet-peregovory-o-pokupke-sibirskoj-seti-marija-ra/"
+    ]
+   ],
+   "sum": "60 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-21",
+     "title": "Переговоры",
+     "note": "Стоимость бизнеса «Мария-Ра» оценивается в 40–60 млрд руб. Сообщение «Лента» ведет переговоры о покупке сибирской сети «Мария-Ра» появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/lenta-vedet-peregovory-o-pokupke-sibirskoj-seti-marija-ra/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Лента» может купить крупнейшего ритейлера Сибири «Мария-Ра»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d27968609",
+   "title": "Крупный фитнес-клуб выставили на продажу в Нижневартовске",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053120166"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Развлечения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28084134",
+   "title": "Экс-глава УМВД Челябинска Меньшенин проиграл новый раунд спора с главком. Скрин",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053120214"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49455030",
+   "title": "Мошенники предлагают педагогам купить звание «Лучший учитель» в преддверии 1 сентября",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053120145"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16161892",
+   "title": "Водителей предупредили о рисках покупки дешевого топлива в интернете",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053120126"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d12923961",
+   "title": "Москва выставила на торги два помещения в Щербинке",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/8/21/moskva-vystavila-na-torgi-dva-pomeshheniya-v-shherbinke"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51860322",
+   "title": "Россияне направили более 80% доходов на покупку товаров в первом квартале года",
+   "date": "2026-08-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2152497/rossiiane-napravili-bolee-80-dokhodov-na-pokupku-tovarov-v-pervom-kvartale-goda-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
