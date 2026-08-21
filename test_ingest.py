@@ -534,6 +534,29 @@ def test_unknown_industry_does_not_hold_the_card(base):
     assert "Не определена" in inds
 
 
+def test_to_card_resolves_telegram_source_label_not_the_feed_id():
+    """`tg:rusven` не должен доехать до экрана — как раньше не доезжал `web:`.
+
+    Замечание владельца 6 августа починило `web:kommersant.ru` в `src`, но
+    условие в `to_card()` было завязано на префикс `web:` — сырьё «на решение»
+    (кнопка «это сделка — в работу») приходит с префиксом `tg:` (внутренний
+    тег ленты Telegram-канала), и то же условие его пропускало: карточка
+    Wegosty/rusven 21 августа несла бы «tg:rusven» вместо «Телеграм-канал:
+    Русский Венчур». Резолвить обязан сам факт, что ссылка http(s), а не то,
+    каким тегом её пометила лента.
+    """
+    import promote
+    draft = {"title": "Компания «Тест-Ню» привлекла инвестиции",
+             "date": "2026-08-13", "ind": "Искусственный интеллект",
+             "asset": "«Тест-Ню»",
+             "src": [["tg:rusven", "https://t.me/rusven/7666"]],
+             "events": [{"kind": "closed", "date": "2026-08-13", "title": "…",
+                         "note": "…", "source": ["tg:rusven", "https://t.me/rusven/7666"]}]}
+    card = promote.to_card(draft, "gtest0002")
+    assert card["src"][0][0] == "Телеграм-канал: Русский Венчур", card["src"]
+    assert card["events"][0]["source"][0] == "Телеграм-канал: Русский Венчур"
+
+
 def test_promote_holds_a_card_without_a_subject_or_a_party(base):
     """Предмет и хотя бы одна сторона обязательны — для ЛЮБОГО типа сделки.
 

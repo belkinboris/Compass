@@ -472,9 +472,12 @@ def to_card(draft, deal_id):
         # Подпись источника — имя издания по домену ссылки, а не служебный id
         # ленты: «web:kommersant.ru» доезжал до экрана карточки (замечание
         # владельца 6 августа, тот же класс, что подпись «@dealsma (Telegram)»
-        # у 913 старых карточек).
+        # у 913 старых карточек). Гейт был по `web:`-префиксу и пропускал
+        # `tg:`-сырьё (Wegosty, 21 августа) — «tg:rusven» дошёл бы до экрана,
+        # хотя edition_label() умеет резолвить t.me по имени канала не хуже.
+        # Условие теперь по самой ссылке, а не по внутреннему тегу ленты.
         'src': [[source_names.edition_label(s[1]), s[1]]
-                if len(s) > 1 and str(s[0]).startswith('web:') and str(s[1]).startswith('http')
+                if len(s) > 1 and str(s[1]).startswith('http')
                 else s
                 for s in draft['src']],
         'from_ingest': True,
@@ -492,7 +495,7 @@ def to_card(draft, deal_id):
         card['events'] = [
             dict(ev, source=[source_names.edition_label(ev['source'][1]), ev['source'][1]])
             if isinstance(ev.get('source'), list) and len(ev['source']) > 1
-            and str(ev['source'][0]).startswith('web:') and str(ev['source'][1]).startswith('http')
+            and str(ev['source'][1]).startswith('http')
             else ev
             for ev in draft['events']]
     if draft.get('seller'):
