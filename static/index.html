@@ -4632,6 +4632,16 @@ function renderCompany(id){
       <span class="tag steel">В группу входит: ${groupMembers.length}</span>
       <span style="color:var(--muted);font-size:13px">${groupMembers.map(([mid,m])=>`<a href="#/companies/${mid}">${m.name}</a>`).join(", ")}</span>
     </div>`:""}
+    ${(c.ownership&&c.ownership.length)?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
+      <span class="tag steel">Собственники</span>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        ${c.ownership.map(o=>`<div style="font-size:13px;color:var(--muted)">
+          ${o.id&&co(o.id)?`<a href="#/companies/${o.id}">${esc(o.name)}</a>`:esc(o.name)}${o.share?` — ${esc(o.share)}`:""}
+          <span style="font-size:12px">(по данным на ${esc(fmtMonthYear(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
+        </div>`).join("")}
+      </div>
+      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Владение меняется со временем — показана структура на дату источника, а не текущее состояние.</span>
+    </div>`:""}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">

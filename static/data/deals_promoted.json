@@ -98134,6 +98134,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Деметра-Холдинг",
+     "id": "g519f8484",
+     "share": "100%",
+     "as_of": "2024-10",
+     "source": [
+      "Поле.рф",
+      "https://xn--e1alid.xn--p1ai/journal/publication/demetra-treiyding-priobrel-elevator-nash-souz-v-orlovskoiy-oblasti"
+     ]
+    }
    ]
   },
   "g62cb00d5": {
@@ -101094,7 +101106,29 @@
     "Профиль",
     "Автоматический"
    ],
-   "lot": true
+   "lot": true,
+   "ownership": [
+    {
+     "name": "Группа «Русские фонды»",
+     "id": "gc4c70e0f",
+     "share": "86,38%",
+     "as_of": "2023-08",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6236835"
+     ]
+    },
+    {
+     "name": "Марина Улаханова",
+     "id": null,
+     "share": "13,62%",
+     "as_of": "2023-08",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6236835"
+     ]
+    }
+   ]
   },
   "g51e08119": {
    "name": "«Димитровградский элеватор» и «Чернышковский элеватор»",

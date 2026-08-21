@@ -600,6 +600,27 @@ def test_company_group_membership_is_shown_both_ways(page, base_url):
     assert "угмк-инвест" in body
 
 
+def test_company_ownership_block_shown_only_when_known(page, base_url):
+    """G8 (PRODUCT_ROADMAP.md): «Собственники» — новый блок на странице
+    компании, пилот на двух профилях (владелец сравнивал нас с TAdviser,
+    у которого видны собственники, а у нас поле `ownership` было пустым
+    у всех профилей). Проверяем оба состояния: у карточки с фактом блок
+    показывает имя, долю и дату источника; у карточки без факта блок не
+    рисуется вовсе — честная пустота, а не всегда пустой блок (родня уже
+    записанного урока «Блок, который всегда полон, ничего не подбирает» —
+    здесь зеркально: блок обязан уметь не существовать).
+    """
+    visit(page, base_url, "#/companies/gfd143c7d")
+    body = page.inner_text("#app").lower()
+    assert "собственники" in body
+    assert "деметра-холдинг" in body
+    assert "100%" in body
+    assert "октябрь 2024" in body
+
+    visit(page, base_url, "#/companies/yandex")
+    assert "собственники" not in page.inner_text("#app").lower()
+
+
 def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 
