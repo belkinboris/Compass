@@ -469,6 +469,8 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .stage-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
 .stage-fact{padding:13px 14px;background:var(--paper);border:1px solid var(--line-soft);border-radius:8px}
 .stage-fact b{display:block;margin-top:4px;font-size:14px;font-weight:600;color:var(--ink)}
+.stage-snapshot{margin-top:18px}
+.stage-snapshot>.label{display:block;margin-bottom:6px}
 .stage-nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
 .coverage-note{margin:0 0 26px;padding:17px 19px;border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:8px;background:var(--bronze-soft)}
 .coverage-note strong{display:block;font-family:var(--f-display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:5px}
@@ -3206,6 +3208,8 @@ function dealEvents(d){
     note:e.note||e.description||"",
     facts:Array.isArray(e.facts)?e.facts:[],
     sources:eventSources(e),
+    newsworthy:!!e.newsworthy,
+    snapshot:e.snapshot&&typeof e.snapshot==="object"?e.snapshot:null,
     order:i,
   })).filter(e=>e.title);
   const currentKind=stageKind(d.status);
@@ -3321,9 +3325,33 @@ function renderDealStage(id,key){
       <h2>${esc(e.historicalTitle||e.title)}</h2>
       ${e.note?`<p>${esc(e.note)}</p>`:`<p>Для этого этапа сохранены дата и источники. Дополнительные факты в публикациях не раскрывались.</p>`}
       ${facts.length?`<div class="stage-facts">${facts.map(x=>`<div class="stage-fact"><span class="label">${esc(String(x[0]))}</span><b>${esc(String(x[1]))}</b></div>`).join("")}</div>`:""}
+      ${snapshotHtml(e.snapshot,facts)}
       <div class="stage-nav">${prev?`<a class="chip" href="${stageHref(d,prev)}">← Предыдущий этап</a>`:""}${next?`<a class="chip" href="${stageHref(d,next)}">Следующий этап →</a>`:""}<a class="chip" href="#/deal/${d.id}">Актуальная карточка</a></div>
     </div>
     <div class="src reveal"><span class="label">Источники этого этапа</span><br>${sources.length?labelSources(sources).map(src=>`<a href="${src[1]}" target="_blank" rel="noopener">${esc(src[0])}</a>`).join(""):`<span class="acct-note">Отдельная ссылка для этого этапа не сохранена; используйте источники общей карточки.</span>`}</div>`;
+}
+function snapshotHtml(snap,shownFacts){
+  // Карточка КАК ОНА ВЫГЛЯДЕЛА на момент этого этапа — снимок, который
+  // review.py кладёт в событие через --milestone (see build_snapshot).
+  // Не путать с фактами этапа (`facts`, выше): те — про сам этап, снимок —
+  // про сделку целиком на тот момент, ради навигации «переговоры -> что мы
+  // тогда знали» без похода на актуальную карточку. НА ЗАКРЫВАЮЩЕМ этапе
+  // снимок почти всегда совпадает с фактами этапа слово в слово (сделка уже
+  // не менялась с тех пор) — показывать одно и то же дважды хуже, чем не
+  // показывать вовсе (см. урок «Одно поле — одна линза»): строки снимка,
+  // совпадающие по значению с уже показанным фактом этапа, вырезаются.
+  if(!snap||typeof snap!=="object") return "";
+  const norm=v=>String(v||"").toLowerCase().replace(/[«»"']/g,"").replace(/\s+/g," ").trim();
+  const shown=new Set((shownFacts||[]).map(x=>norm(x[1])));
+  const row=(label,val)=>(hasFact(val)&&!shown.has(norm(val)))
+    ?`<div class="spec-row"><span class="label">${label}</span><span class="spec-v">${esc(String(val))}</span></div>`:"";
+  const partyLabel=isRound(snap)?"Инвестор":"Покупатель";
+  const rows=[row("Тип сделки",snap.type),row("Статус на тот момент",snap.status),
+    row("Сумма",snap.sum),row(partyLabel,snap.buyer),row("Продавец",snap.seller),
+    row("Предмет",snap.asset)].filter(Boolean);
+  if(!rows.length) return "";
+  return `<div class="stage-snapshot"><span class="label">Карточка на момент этого этапа</span>
+    <div class="spec-list">${rows.join("")}</div></div>`;
 }
 function detailScore(d){
   const values=[d.sum,d.asset,d.asset_share,d.seller,d.buyer_name,

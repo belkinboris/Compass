@@ -2428,7 +2428,18 @@
        "Фармацевтический вестник",
        "https://pharmvestnik.ru/content/news/Na-rynke-obsujdaut-potencialnuu-sdelku-o-pokupke-Wildberries-seti-Eapteka.html"
       ]
-     ]
+     ],
+     "newsworthy": true,
+     "snapshot": {
+      "title": "Wildberries и Russ приобрели контрольную долю в «Еаптеке»",
+      "type": "M&A",
+      "status": "Закрыта",
+      "sum": "8–10 млрд ₽ (по оценке)",
+      "buyer": "ООО «РВБ» (Wildberries & Russ)",
+      "seller": "Структуры Алексея Репика (ГК «Р-Фарм»)",
+      "asset": "Еаптека",
+      "ind": "Фармацевтика"
+     }
     },
     {
      "id": "closed-2026-07-01",

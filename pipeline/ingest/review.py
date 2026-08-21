@@ -693,6 +693,58 @@ def stamp_followup_researched(card, day=None):
     return False
 
 
+def build_snapshot(card, companies):
+    """Компактный снимок карточки — «что было известно на этот момент».
+
+    Не полная карточка (`eco`/`law` целиком раздули бы каждую веху) — только
+    то, что показывается плашкой сторон и заголовком: тип, статус, сумма,
+    стороны, предмет. Стороны резолвятся до имени компании там, где есть
+    ссылка (`buyer`/`target`/`seller_id`), иначе остаётся текст."""
+    def party(id_field, text_field):
+        cid = card.get(id_field)
+        if cid and cid in companies:
+            return companies[cid].get('name') or card.get(text_field)
+        return card.get(text_field)
+
+    return {
+        'title': card.get('title'),
+        'type': card.get('type'),
+        'status': card.get('status'),
+        'sum': card.get('sum'),
+        'buyer': party('buyer', 'buyer_name'),
+        'seller': party('seller_id', 'seller'),
+        'asset': party('target', 'asset'),
+        'ind': card.get('ind'),
+    }
+
+
+def mark_milestone(card, kind):
+    """Помечает этап `kind` (`negotiations`/`approval`/`signed`/`closed`/
+    `cancelled`) вехой: `newsworthy=True` + `snapshot` — карточка КАК ОНА
+    ВЫГЛЯДИТ ПРЯМО СЕЙЧАС, на момент вызова.
+
+    ЧЕСТНАЯ ГРАНИЦА, А НЕ БАГ. «Снимок на момент этапа» — это снимок на
+    момент, когда ЭТОТ ВЫЗОВ произошёл, а не машина времени: если карточку
+    сперва обогатили более поздними фактами (например, ценой закрытия) и
+    только потом вызвали `--milestone` на более раннем этапе («Переговоры»),
+    снимок унесёт с собой и эти более поздние факты — он не восстанавливает
+    прошлое состояние задним числом. Правильный порядок: вызывать
+    `--milestone <id> <kind>` СРАЗУ, как только этап `kind` найден и записан
+    в `events[]`, ДО следующих правок карточки, а не потом. Как и остальные
+    отметки (`reviewed`, `deep_researched`), только для найденного факта, а
+    не для домысла.
+
+    Возвращает найденное событие (для дальнейшей записи) или `None`, если
+    события такого `kind` в `events[]` нет — снимать веху не с чего."""
+    events = card.get('events') or []
+    event = next((e for e in events if e.get('kind') == kind), None)
+    if event is None:
+        return None
+    if not event.get('id'):
+        event['id'] = '%s-%s' % (card['id'], kind)
+    return event
+
+
 # Сигнал допэмиссии/закрытой подписки за деньги — cash-in, а не продажа
 # существующего пакета; см. TYPE_WORDS['Инвестиция'] и урок ПСБ/«Атом».
 _CASH_IN_SIGNAL = re.compile(r'допэмисси|дополнительн\w* эмисси|закрыт\w* подписк', re.I)
@@ -749,7 +801,8 @@ def advisories(card, companies):
     return hints
 
 
-def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=()):
+def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=(),
+         milestone=None):
     _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
@@ -853,6 +906,28 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         else:
             to_mark_followup.append(cid)
 
+    # --milestone <id> <kind>: этап становится вехой — снимок карточки на
+    # экране в момент этапа, отдельная видимость на сайте/в канале (см.
+    # build_snapshot/mark_milestone выше).
+    milestone_card = milestone_event = None
+    if milestone:
+        mid, mkind = milestone
+        if mid not in cards:
+            refused.append((dict(id=mid, field='milestone'),
+                            ['карточки %s нет ни в базе, ни в предпросмотре' % mid]))
+        else:
+            event = mark_milestone(cards[mid], mkind)
+            if event is None:
+                refused.append((dict(id=mid, field='milestone'),
+                                ['у карточки %s нет этапа %r в events[]' % (mid, mkind)]))
+            elif event.get('newsworthy'):
+                refused.append((dict(id=mid, field='milestone'),
+                                ['этап %r карточки %s уже помечен вехой' % (mkind, mid)]))
+            else:
+                milestone_card, milestone_event = cards[mid], event
+                print('  ВЕХА     %s этап %r -> снимок карточки как есть сейчас'
+                      % (mid, mkind))
+
     print('\nпринято %d, отклонено %d' % (len(ok), len(refused)))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
@@ -910,23 +985,37 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         if stamp_followup_researched(cards[cid]):
             stamped_followup += 1
 
+    if milestone_event is not None:
+        milestone_event['newsworthy'] = True
+        milestone_event['snapshot'] = build_snapshot(milestone_card, data['companies'])
+
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     print('ЗАПИСАНО: %d правок, %d отметок прочтения, %d отметок глубокого '
           'исследования, %d отметок недельного уровня, %d отметок '
-          'месячного уровня в %s'
+          'месячного уровня, %d веха в %s'
           % (len(ok), stamped, stamped_deep, stamped_weekly, stamped_followup,
-             os.path.relpath(DATA, ROOT)))
+             1 if milestone_event is not None else 0, os.path.relpath(DATA, ROOT)))
     return 0
 
 
 if __name__ == '__main__':
     _args = sys.argv[1:]
-    _flags = ('--write', '--mark-read', '--mark-deep', '--mark-weekly', '--mark-followup')
+    _flags = ('--write', '--mark-read', '--mark-deep', '--mark-weekly', '--mark-followup',
+              '--milestone')
     _ids = [a for a in _args if a not in _flags]
+    _milestone = None
+    if '--milestone' in _args:
+        _mi = _args.index('--milestone')
+        _rest = _args[_mi + 1:]
+        assert len(_rest) >= 2 and not _rest[0].startswith('--') and not _rest[1].startswith('--'), \
+            '--milestone требует два аргумента: <id> <kind>'
+        _milestone = (_rest[0], _rest[1])
+        _ids = [a for a in _ids if a not in _milestone]
     sys.exit(main(write='--write' in _args,
                   mark_read=_ids if '--mark-read' in _args else (),
                   mark_deep=_ids if '--mark-deep' in _args else (),
                   mark_weekly=_ids if '--mark-weekly' in _args else (),
-                  mark_followup=_ids if '--mark-followup' in _args else ()))
+                  mark_followup=_ids if '--mark-followup' in _args else (),
+                  milestone=_milestone))

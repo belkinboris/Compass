@@ -2201,6 +2201,80 @@ def test_deep_researched_stamp_is_idempotent_and_separate_from_reviewed():
     assert card["deep_researched"] == "2026-08-10", "повторный прогон переписал дату"
 
 
+def test_milestone_snapshot_captures_resolved_party_names():
+    """`build_snapshot` резолвит стороны до имени компании там, где есть
+    ссылка (`buyer`/`target`/`seller_id`), а не оставляет id или голый текст,
+    если профиль найден. Без ссылки — честный текст, как он есть в карточке."""
+    import review
+    companies = {"cbuy": {"name": "ООО «Покупатель»"},
+                 "ctarget": {"name": "ООО «Предмет»"}}
+    card = {"id": "d1", "title": "Тестовая сделка", "type": "M&A",
+            "status": "Обсуждается", "sum": "100 млн ₽",
+            "buyer": "cbuy", "buyer_name": "текст на случай отсутствия ссылки",
+            "target": "ctarget", "asset": "текст предмета",
+            "seller": "Иван Иванов", "ind": "ИТ и интернет"}
+    snap = review.build_snapshot(card, companies)
+    assert snap["buyer"] == "ООО «Покупатель»"
+    assert snap["asset"] == "ООО «Предмет»"
+    assert snap["seller"] == "Иван Иванов", "без seller_id остаётся текст"
+    assert snap["title"] == "Тестовая сделка" and snap["sum"] == "100 млн ₽"
+
+
+def test_mark_milestone_finds_event_by_kind_and_assigns_a_stable_id():
+    """`mark_milestone` ищет этап по `kind` в `events[]` и, если у него ещё
+    нет своего `id`, присваивает стабильный — иначе ссылка на этап
+    (`#/deal/<id>/stage/<key>`) в старых постах и закладках поплыла бы при
+    любой перестановке массива `events`."""
+    import review
+    card = {"id": "d2", "events": [{"kind": "negotiations", "date": "2026-08-01"},
+                                    {"kind": "closed", "date": "2026-08-10"}]}
+    event = review.mark_milestone(card, "closed")
+    assert event is not None and event["kind"] == "closed"
+    assert event["id"] == "d2-closed"
+    # этапа такого kind нет — честный None, а не выдуманное совпадение
+    assert review.mark_milestone(card, "approval") is None
+
+
+def test_review_cli_milestone_writes_newsworthy_flag_and_snapshot(tmp_path, monkeypatch):
+    """Сквозной прогон: `--milestone <id> <kind> --write` ставит `newsworthy`
+    и снимок ОДИН раз; повторный вызов на уже помеченном этапе — честный
+    отказ, а не тихая перезапись снимка (тот же принцип, что и остальные
+    отметки review.py — идемпотентность против случайного повторного
+    прогона)."""
+    import json as _json
+    import review
+    base = {"deals": [{"id": "d3", "title": "Сделка X", "type": "M&A",
+                        "status": "Согласование получено", "sum": "—",
+                        "ind": "Не определена",
+                        "events": [{"kind": "negotiations", "date": "2026-08-01"},
+                                   {"kind": "approval", "date": "2026-08-15"}]}],
+            "companies": {}}
+    data_path = tmp_path / "milestone_base.json"
+    pending_path = tmp_path / "milestone_pending.json"
+    data_path.write_text(_json.dumps(base), encoding="utf-8")
+    pending_path.write_text(_json.dumps({"cards": []}), encoding="utf-8")
+    monkeypatch.setattr(review, "DATA", str(data_path))
+    monkeypatch.setattr(review, "PENDING", str(pending_path))
+    monkeypatch.setattr(review, "FIXES", [])
+
+    rc = review.main(write=True, milestone=("d3", "approval"))
+    assert rc == 0
+    written = _json.loads(data_path.read_text(encoding="utf-8"))
+    card = written["deals"][0]
+    event = next(e for e in card["events"] if e["kind"] == "approval")
+    assert event["newsworthy"] is True
+    assert event["snapshot"]["title"] == "Сделка X"
+    assert event["snapshot"]["status"] == "Согласование получено"
+
+    # тот же вызов повторно — отклонён, снимок не переписан
+    written["deals"][0]["events"][1]["snapshot"]["title"] = "не трогать"
+    data_path.write_text(_json.dumps(written), encoding="utf-8")
+    rc2 = review.main(write=True, milestone=("d3", "approval"))
+    assert rc2 == 1
+    unchanged = _json.loads(data_path.read_text(encoding="utf-8"))
+    assert unchanged["deals"][0]["events"][1]["snapshot"]["title"] == "не трогать"
+
+
 def test_weekly_researched_stamp_requires_deep_researched_first():
     """`weekly_researched` — второй из трёх уровней (неделя после появления
     карточки), дельта ПОВЕРХ `deep_researched`, а не независимая отметка.
