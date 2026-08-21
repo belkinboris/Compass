@@ -23,13 +23,14 @@
 """
 
 FIXES = [
-    dict(id='g57b3b93c', field='law.struct', old='—',
-         new='CMS hat MM Packaging in der gesamten Transaktion in allen '
-             'rechtlichen Belangen beraten.',
-         quote='CMS hat MM Packaging in der gesamten Transaktion in allen '
-               'rechtlichen Belangen beraten.',
-         why='юридический консультант продавца (CMS, Вена) не был назван '
-             'вовсе — линза «Юрист» пустовала'),
+    # Запись `law.struct` снята 21 августа: `review.py` проверяет
+    # дословность, а не ЯЗЫК — эта запись дословно перенесла НЕМЕЦКИЙ
+    # текст пресс-релиза CMS на русскоязычный сайт (нарушение самого
+    # продукта, не формальности). Переведено и переписано разовым
+    # скриптом — `pipeline/fix_mm_packaging_german_text.py`. Родня
+    # класса ошибок «дословность не значит уместность» (HeadHunter/
+    # М.видео/«Атом» в этом же прогоне), только здесь дословность не
+    # значит ещё и «на русском».
     dict(id='g57b3b93c', field='src', old=None,
          new=['CMS Law', 'https://cms.law/de/aut/news-information/'
               'mayr-melnhof-packaging-verkauft-russische-standorte-mit-'
