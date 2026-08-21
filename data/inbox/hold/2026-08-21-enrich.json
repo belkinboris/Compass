@@ -11,6 +11,15 @@
    ]
   },
   {
+   "news": "https://retailer.ru/russkaja-rybnaja-kompanija-kupila-pererabatyvajushhij-ceh-v-podmoskove/",
+   "title": "Русская рыбная компания купила перерабатывающий цех в Подмосковье",
+   "verdict": "enrich:g9076dfc3",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
    "news": "https://abnews.ru/ug/news/volgograd/2026/8/21/sgorevshij-rynok-na-tulake-vystavili-na-prodazhu-za-75-mln-rublej",
    "title": "Сгоревший рынок на Тулаке выставили на продажу за 75 млн рублей",
    "verdict": "enrich:g8f7479bd",
