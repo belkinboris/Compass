@@ -30359,7 +30359,7 @@
    "date": "2024-12-24",
    "title": "Сбербанк инвестиции приобрел 20% в девелопере проекта «Южный» в Санкт-Петербурге",
    "buyer": "g28ff15bb",
-   "target": "gf881a88f",
+   "target": "g52b8df38-target",
    "ind": "Недвижимость",
    "type": "M&A",
    "kind": "acquisition",
@@ -34963,7 +34963,7 @@
    "date": "2025-12-01",
    "title": "МТС-банк приобрел страховую компанию АО «РНКБ Страхование»",
    "buyer": "g37d577dc",
-   "target": "g37bf4386",
+   "target": "ge848daa0-target",
    "ind": "Страхование",
    "type": "M&A",
    "kind": "acquisition",
@@ -91247,6 +91247,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Альфа-Банк",
+     "id": "ga2cfae5b",
+     "share": "87,5%",
+     "as_of": "2025-12",
+     "source": [
+      "Alfabank.ru",
+      "https://alfabank.ru/news/t/release/alfa-bank-zakril-sdelku-po-pokupke-krupneishego-nezavisimogo-avtolizingovogo-operatora-yevroplan"
+     ]
+    }
    ]
   },
   "gd128a544": {
@@ -91439,6 +91451,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Структуры Сергея Сударикова",
+     "id": "g470a51f2",
+     "share": "62%",
+     "as_of": "2024",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7267872"
+     ]
+    }
    ]
   },
   "gdc41f40b": {
@@ -91658,6 +91682,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ГАП «Ресурс»",
+     "id": "g308a4b2a",
+     "share": "100%",
+     "as_of": "2025-12",
+     "source": [
+      "Shoppers",
+      "https://shoppers.media/news/26121_krupneisii-proizvoditel-miasa-pticy-resurs-kupil-makaronnyi-biznes-granmulino"
+     ]
+    }
    ]
   },
   "g72e3b46f": {
@@ -92045,6 +92081,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "K2 Group",
+     "id": "gaf65e2d9",
+     "share": "100%",
+     "as_of": "2025-08",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7959262"
+     ]
+    }
    ]
   },
   "gaf65e2d9": {
@@ -93050,6 +93098,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Цифровой вектор",
+     "id": "g1a359ad9",
+     "share": "30%",
+     "as_of": "2024-12",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%A0%D0%B5%D0%B4_%D0%A1%D0%BE%D1%84%D1%82_(Red_Soft)"
+     ]
+    }
    ]
   },
   "gce43e9d9": {
@@ -93077,6 +93137,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Мастерфуд",
+     "id": "gcb0304f5",
+     "share": "100%",
+     "as_of": "2024-12",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7446674"
+     ]
+    }
    ]
   },
   "g523665d3": {
@@ -93194,6 +93266,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ПромАвтоКонсалт",
+     "id": "g527da4e8",
+     "share": "100%",
+     "as_of": "2024-10",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/989592"
+     ]
+    }
    ]
   },
   "gf969a0c9": {
@@ -96636,6 +96720,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Т2 Мобайл",
+     "id": "gf9c226e4",
+     "share": "100%",
+     "as_of": "2025-12",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/technology/news/2025/12/29/1167239-t2-priobrel-platformu"
+     ]
+    }
    ]
   },
   "gd395e578": {
@@ -96646,7 +96742,19 @@
     "Профиль",
     "Автоматический"
    ],
-   "lot": true
+   "lot": true,
+   "ownership": [
+    {
+     "name": "MGC Group",
+     "id": "ge8616484",
+     "share": "100%",
+     "as_of": "2025-12",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1064841"
+     ]
+    }
+   ]
   },
   "g68dceb64": {
    "name": "платформа DIKIDI",
@@ -96683,7 +96791,19 @@
     "Профиль",
     "Автоматический"
    ],
-   "lot": true
+   "lot": true,
+   "ownership": [
+    {
+     "name": "Фонд «Бумеранг капитал»",
+     "id": "g81045bed",
+     "share": "100%",
+     "as_of": "2025-12",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8295554"
+     ]
+    }
+   ]
   },
   "ga0716421": {
    "name": "проект добычи золота Быстринско-Ширинское",
@@ -96729,6 +96849,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Земун»",
+     "id": "ga64461ca",
+     "share": "99%",
+     "as_of": "2025-11",
+     "source": [
+      "Retailer.ru",
+      "https://retailer.ru/svjazannaja-s-lentoj-struktura-poluchila-kosvennyj-kontrol-nad-setju-o-kej/"
+     ]
+    }
    ]
   },
   "g199de75d": {
@@ -104535,6 +104667,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Альфа-Банк",
+     "id": "ga2cfae5b",
+     "share": "100%",
+     "as_of": "2026-04",
+     "source": [
+      "Interfax (англоязычная лента)",
+      "https://interfax.com/newsroom/top-stories/117223/"
+     ]
+    }
    ]
   },
   "g8af20254-target": {
@@ -104546,6 +104690,48 @@
     "Автоматический"
    ],
    "lot": true
+  },
+  "g52b8df38-target": {
+   "name": "ООО «\"ЗаСтрой\" Спецзастройщик» (проект «Город-спутник Южный»)",
+   "ind": "Недвижимость",
+   "desc": "Специальный застройщик первого этапа проекта «Город-спутник Южный» под Санкт-Петербургом (девелопер Start Development); 20% акций в 2024 году приобрёл Сбербанк.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Сбербанк",
+     "id": "g28ff15bb",
+     "share": "20%",
+     "as_of": "2024-12",
+     "source": [
+      "@dealsma (Telegram)",
+      "https://t.me/dealsma/5685"
+     ]
+    }
+   ]
+  },
+  "ge848daa0-target": {
+   "name": "АО «РНКБ Страхование»",
+   "ind": "Страхование",
+   "desc": "Небольшая страховая компания с лицензиями на добровольное личное и имущественное страхование; в 2025 году её купил МТС Банк ради лицензий и ИТ-инфраструктуры.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "МТС Банк",
+     "id": "g37d577dc",
+     "share": "100%",
+     "as_of": "2025-12",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8339880"
+     ]
+    }
+   ]
   }
  },
  "match_keys": {
