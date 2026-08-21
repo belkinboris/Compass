@@ -120,7 +120,9 @@
    "seller": "Николай Власкин",
    "sum": "9,5 млн ₽ (по оценке)",
    "reviewed": "2026-08-21",
-   "deep_researched": "2026-08-21"
+   "deep_researched": "2026-08-21",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g0e2f181f",
@@ -188,7 +190,9 @@
    },
    "pending_since": "2026-08-21T08:24:16+00:00",
    "buyer": "g72e3b46f",
-   "reviewed": "2026-08-21"
+   "reviewed": "2026-08-21",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gb57df995",
@@ -241,7 +245,9 @@
     ]
    },
    "pending_since": "2026-08-21T08:24:16+00:00",
-   "reviewed": "2026-08-21"
+   "reviewed": "2026-08-21",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
