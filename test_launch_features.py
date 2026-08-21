@@ -1037,6 +1037,79 @@ def test_raw_drafts_need_a_button_and_never_publish_on_silence():
     assert [d["draft_id"] for d in drop] == ["d2"]
 
 
+def test_plan_raw_skips_a_draft_already_recorded_as_decided():
+    """Решение, уже применённое и записанное в `decided_raw`, не применяется
+    повторно — даже если сайт всё ещё считает его «живым».
+
+    Это и есть предохранитель от Wegosty 21 августа: `--consume` теперь
+    отдельный шаг ПОСЛЕ git push, а значит между `--write` и подтверждением
+    сайту есть окно, где решение локально уже применено, а сайт ещё не
+    знает об этом. Без проверки `decided_raw` следующий прогон увидел бы то
+    же «живое» решение и создал бы ВТОРУЮ карточку того же черновика —
+    `to_card()` каждый раз генерирует новый случайный id, второй раз не
+    заметит, что первый уже был."""
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    drafts = [{"draft_id": "d1", "title": "уже применено"}]
+    decisions = [{"deal_id": "d1", "verdict": "take"}]
+    take, drop = approve.plan_raw(drafts, decisions, decided_raw={"d1": "take"})
+    assert not take and not drop, "решение уже в decided_raw — применять снова нельзя"
+    # без decided_raw (как раньше) оно бы прошло — проверяем, что тест не
+    # проходит просто потому, что данные сломаны
+    take2, _ = approve.plan_raw(drafts, decisions, decided_raw={})
+    assert [d["draft_id"] for d in take2] == ["d1"]
+
+
+def test_approve_main_deduplicates_the_same_raw_draft_across_hold_files(tmp_path, monkeypatch):
+    """Один и тот же черновик, перенесённый в НЕСКОЛЬКО дневных hold-файлов
+    (он там лежит, пока по нему нет решения), не должен породить несколько
+    карточек на одно решение «в работу».
+
+    Ровно так родились три карточки-близнеца 21 августа
+    (g855e50b1/gf544dd13/g5cba276f) из одного и того же draft_id d59961733,
+    лежавшего в трёх дневных файлах сразу — `plan_raw` видел его три раза
+    в объединённом списке `raw_all`."""
+    import json
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    import promote
+    import send_drafts
+    # Взятый черновик рассылается в консоль сразу — не тот путь, который
+    # проверяет этот тест; подменяем на заглушку, чтобы не задеть реальные
+    # static/data/*.json (send_drafts.py считает свои ROOT/DATA/PENDING
+    # независимо от approve.py, монкипатч ROOT/DATA/PENDING его не коснётся).
+    monkeypatch.setattr(send_drafts, "main", lambda write=False: 0)
+
+    hold_dir = tmp_path / "data" / "inbox" / "hold"
+    hold_dir.mkdir(parents=True)
+    draft = {"draft_id": "dup1", "title": "Один и тот же черновик",
+             "date": "2026-08-01", "src": [["Источник", "https://example.invalid/x"]],
+             "sum": None, "type": "Инвестиция", "status": None, "events": [],
+             "buyer_name": None, "asset": "Тест", "seller": None, "ind": "ИТ и интернет"}
+    for day in ("2026-08-18", "2026-08-19", "2026-08-21"):
+        (hold_dir / ("%s.json" % day)).write_text(
+            json.dumps({"drafts": [draft]}, ensure_ascii=False), encoding="utf-8")
+
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(tmp_path / "pending.json"))
+    monkeypatch.setattr(approve, "DATA", str(tmp_path / "deals.json"))
+    monkeypatch.setattr(promote, "STATE", str(tmp_path / "moderation_state.json"))
+    (tmp_path / "pending.json").write_text(json.dumps({"cards": []}), encoding="utf-8")
+    (tmp_path / "deals.json").write_text(
+        json.dumps({"deals": [], "companies": {}}), encoding="utf-8")
+    monkeypatch.setattr(approve, "fetch_decisions",
+                        lambda: ([{"deal_id": "dup1", "verdict": "take", "id": 1}], None))
+
+    approve.main(write=True)
+
+    pending = json.loads((tmp_path / "pending.json").read_text(encoding="utf-8"))
+    assert len(pending["cards"]) == 1, (
+        "один draft_id в трёх hold-файлах породил %d карточек вместо одной"
+        % len(pending["cards"]))
+
+
 def test_webhook_routes_raw_and_post_buttons(client, monkeypatch):
     """Кнопки трёх типов сообщений дают три разных класса вердиктов."""
     _mod_env(monkeypatch)

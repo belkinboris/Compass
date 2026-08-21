@@ -16,9 +16,19 @@
     у нас уже был (тормоз E9), второй раз те же грабли не берём. Про правило
     молчания написано в самом сообщении-черновике.
 
+ДВА ШАГА, НЕ ОДИН. `--write` только применяет решения ЛОКАЛЬНО (пишет
+`pending.json`/`deals_promoted.json`/состояние) — сайту, что решение
+применено, говорит НЕ он, а отдельный `--consume`, который рутина обязана
+вызвать ПОСЛЕДНИМ, после успешного `git push`. Раньше `--write` подтверждал
+сайту сразу — и решение по Wegosty (17 августа) потерялось: контейнер умер
+между локальной записью и push, сайт уже необратимо считал решение
+применённым, а результат исчез вместе с контейнером. Подробности — docstring
+`consume_pending`.
+
 Запуск:
-    python3 pipeline/ingest/approve.py            # сухой прогон
-    python3 pipeline/ingest/approve.py --write    # применить
+    python3 pipeline/ingest/approve.py             # сухой прогон
+    python3 pipeline/ingest/approve.py --write     # применить локально
+    python3 pipeline/ingest/approve.py --consume   # подтвердить сайту — ПОСЛЕ push
 """
 import json
 import os
@@ -65,6 +75,43 @@ def consume(handle, ids):
     except Exception as e:
         print('Не удалось пометить решения применёнными (%s) — не страшно: '
               'повторное применение идемпотентно.' % e)
+
+
+PENDING_CONSUME = os.path.join(ROOT, 'data', 'inbox', 'consume_pending.json')
+
+
+def consume_pending():
+    """Второй, ОТДЕЛЬНЫЙ шаг: сказать сайту «решения применены» — только
+    ПОСЛЕ того, как результат `--write` пережил git push.
+
+    ПОЧЕМУ ОТДЕЛЬНЫЙ ШАГ. `--write` раньше вызывал `consume()` сам, сразу
+    после локальной записи, — а git commit/push идёт дальше по рутине,
+    отдельными шагами. Умер контейнер в этом окне (как и было с
+    решением по Wegosty 17 августа) — сайт уже необратимо считает решение
+    применённым, а локальный результат исчез вместе с контейнером: следующий
+    прогон его не увидит и не повторит. Инвариант: необратимая отметка
+    ставится только после того, как результат УЖЕ пережил смерть контейнера.
+    `--write` теперь кладёт id применённых решений в файл рядом (не в git —
+    он нужен только внутри одного прогона, между `--write` и этим шагом);
+    рутина вызывает `approve.py --consume` ПОСЛЕДНИМ, после `git push`.
+
+    ЕСЛИ ЭТОТ ШАГ НЕ ВЫЗВАН ВООБЩЕ (контейнер умер до него) — не страшно и
+    не теряется: `plan_raw`/`plan_actions` следующего прогона видят решение
+    снова живым на сайте, но `decided_raw`/состав базы уже подтверждают, что
+    оно применено (закоммичено), — карточка не создастся дважды (см.
+    docstring `plan_raw`), и следующий прогон просто консьюмит его заново."""
+    if not os.path.exists(PENDING_CONSUME):
+        print('Нечего подтверждать — файла %s нет.' % PENDING_CONSUME)
+        return 0
+    saved = json.load(open(PENDING_CONSUME, encoding='utf-8'))
+    site, token, ids = saved.get('site'), saved.get('token'), saved.get('ids') or []
+    if not (site and token and ids):
+        os.remove(PENDING_CONSUME)
+        return 0
+    consume((site, token), ids)
+    os.remove(PENDING_CONSUME)
+    print('Подтверждено применённых решений: %d.' % len(ids))
+    return 0
 
 
 def hours_pending(card, now):
@@ -141,13 +188,29 @@ def plan_actions(cards, decisions, now):
     return publish, hold, wait, discard
 
 
-def plan_raw(drafts, decisions):
+def plan_raw(drafts, decisions, decided_raw=None):
     """(в работу, отброшено) для сырья. По молчанию сырьё НЕ публикуется:
-    ворота его не пропустили, и молчание не делает его сделкой."""
+    ворота его не пропустили, и молчание не делает его сделкой.
+
+    `decided_raw` — уже применённые решения (`moderation_state.json`).
+    Решение с сайта считается ЖИВЫМ, пока сайт не подтвердит, что оно
+    применено (`consume`, теперь отдельный шаг ПОСЛЕ git push — см. `main`
+    и docstring `consume_pending`). Если контейнер умер до этого шага,
+    следующий прогон увидит то же «живое» решение ещё раз — а draft
+    `to_card()` каждый раз рождает НОВЫЙ случайный id, значит повторное
+    применение создало бы ВТОРУЮ карточку того же черновика. Эта проверка
+    — не про сеть и не про сырьё-задвоение (для того — дедуп по draft_id в
+    `main`), а про то, что РЕШЕНИЕ уже необратимо записано локально и в
+    git: раз оно есть в `decided_raw`, повторно его применять нельзя,
+    какой бы ответ ни пришёл с сайта."""
     by_draft = last_by_deal(decisions, RAW_VERDICTS)
+    decided_raw = decided_raw or {}
     take, drop = [], []
     for draft in drafts:
-        decision = by_draft.get(str(draft.get('draft_id')))
+        did = str(draft.get('draft_id'))
+        if did in decided_raw:
+            continue
+        decision = by_draft.get(did)
         if decision and decision['verdict'] == 'take':
             take.append(draft)
         elif decision:
@@ -213,6 +276,7 @@ def main(write=False):
     # покажет этот draft_id.
     import promote
     state = promote.load_state()
+    decided_raw = state.get('decided_raw', {})
     # «ВЫКИНУТЬ» — ТОЖЕ РЕШЕНИЕ, КОТОРОЕ НЕЛЬЗЯ ЗАБЫВАТЬ. Черновик, из
     # которого выросла выкинутая карточка, остаётся лежать в старом файле
     # data/inbox/drafts/<дата>.json (его никто не чистит), и promote.py
@@ -227,14 +291,27 @@ def main(write=False):
                 state.setdefault('discarded_urls', {})[str(s[1])] = {
                     'id': card['id'], 'title': card.get('title'),
                     'at': now.isoformat(timespec='seconds')}
+    # Одно и то же недорешённое сырьё переносится вперёд КАЖДЫЙ день, пока
+    # по нему нет решения (иначе оно бы пропадало из консоли, не дождавшись
+    # ответа) — draft_id d59961733 (Wegosty/tadviser) лежал сразу в трёх
+    # дневных файлах (18, 19, 21 августа). Без дедупликации по draft_id
+    # `plan_raw` находил его в списке трижды, и единственное решение «в
+    # работу» превращалось в ТРИ карточки-близнеца с тремя разными id (найдено
+    # 21 августа: g855e50b1/gf544dd13/g5cba276f — один и тот же черновик).
+    # Держим первое найденное вхождение — содержание одинаковое, id решает.
     raw_all = []
+    seen_draft_ids = set()
     if os.path.isdir(os.path.join(ROOT, 'data', 'inbox', 'hold')):
         hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
         for name in sorted(os.listdir(hold_dir)):
             if name.endswith('.json'):
-                raw_all += json.load(open(os.path.join(hold_dir, name),
-                                          encoding='utf-8')).get('drafts', [])
-    taken, dropped = plan_raw(raw_all, decisions)
+                for draft in json.load(open(os.path.join(hold_dir, name),
+                                            encoding='utf-8')).get('drafts', []):
+                    did = str(draft.get('draft_id'))
+                    if did not in seen_draft_ids:
+                        seen_draft_ids.add(did)
+                        raw_all.append(draft)
+    taken, dropped = plan_raw(raw_all, decisions, decided_raw)
     pending_ids = {c['id'] for c in pending['cards']} | existing
     for draft in taken:
         card = promote.to_card(draft, promote.new_id(pending_ids))
@@ -257,7 +334,17 @@ def main(write=False):
     promote.save_state(state)
     # Заметки ('note') НЕ потребляем: их читает суточная рутина притока и
     # применяет через review.py; потребив их здесь, мы бы их спрятали.
-    consume(handle, [d['id'] for d in decisions if d['verdict'] != 'note'])
+    # НЕ подтверждаем сайту прямо сейчас — только откладываем: подтверждение
+    # необратимо, а то, что мы только что записали, ещё не пережило git push
+    # (см. docstring `consume_pending`). Рутина вызывает
+    # `approve.py --consume` последним шагом, после успешного push.
+    ids_to_consume = [d['id'] for d in decisions if d['verdict'] != 'note']
+    if handle and ids_to_consume:
+        site, token = handle
+        json.dump({'site': site, 'token': token, 'ids': ids_to_consume},
+                  open(PENDING_CONSUME, 'w', encoding='utf-8'))
+        print('Решений отложено на подтверждение после push: %d (approve.py --consume).'
+              % len(ids_to_consume))
     print('Опубликовано: %d. В базе: %d. В предпросмотре: %d (из сырья взято %d, отброшено %d).'
           % (len(fresh), len(data['deals']), len(pending['cards']), len(taken), len(dropped)))
     if taken:
@@ -277,4 +364,6 @@ def main(write=False):
 
 
 if __name__ == '__main__':
+    if '--consume' in sys.argv:
+        sys.exit(consume_pending())
     sys.exit(main(write='--write' in sys.argv))
