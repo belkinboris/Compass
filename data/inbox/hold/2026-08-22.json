@@ -6172,7 +6172,7 @@
    ]
   },
   {
-   "draft_id": "d63228163",
+   "draft_id": "d56380221",
    "title": "В Севастополе в субботу топливо будут продавать по QR-кодам и свободно",
    "date": "2026-08-21",
    "src": [
@@ -6200,7 +6200,7 @@
    ]
   },
   {
-   "draft_id": "d85631847",
+   "draft_id": "d44996129",
    "title": "В Омске выставили на продажу 17 пунктов выдачи Wildberries",
    "date": "2026-08-21",
    "src": [
@@ -6228,7 +6228,7 @@
    ]
   },
   {
-   "draft_id": "d36952737",
+   "draft_id": "d10239344",
    "title": "Суд в Москве заблокировал сайты по продаже экзотических диких животных",
    "date": "2026-08-22",
    "src": [
@@ -6256,7 +6256,7 @@
    ]
   },
   {
-   "draft_id": "d16649710",
+   "draft_id": "d84199350",
    "title": "Иран перешел к наступательной военной доктрине",
    "date": "2026-08-22",
    "src": [
@@ -6285,13 +6285,13 @@
    ]
   },
   {
-   "draft_id": "d55476457",
-   "title": "Лавров: Россия избавилась от тех, кто считает СВО «чужой войной»",
+   "draft_id": "d21364974",
+   "title": "Мошенники создали сайты продажи билетов на Канье Уэста за криптовалюту",
    "date": "2026-08-22",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8906237"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6a89795a9a7947d8ec3eaed7"
     ]
    ],
    "sum": null,
@@ -6313,31 +6313,32 @@
    ]
   },
   {
-   "draft_id": "d82390025",
-   "title": "В России хотят ввести самозапрет на покупки на маркетплейсах",
+   "draft_id": "d78757681",
+   "title": "Бухгалтерский ИИ-стартап Rillet привлек $100 млн и стал единорогом за 48 часов",
    "date": "2026-08-22",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/22/v-rossii-hotyat-vvesti-samozapret-na-pokupki-na-marketplejsah"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/buhgalterskij-ii-startap-rillet-privlek-100-mln-i-stal-edinorogom-za-48-chasov/"
     ]
    ],
-   "sum": null,
+   "sum": "$100 млн",
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Бухгалтерский ИИ-стартап Rillet",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Бухгалтерский ИИ-стартап Rillet",
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
