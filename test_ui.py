@@ -147,8 +147,11 @@ def test_every_industry_page_opens(page, base_url):
 def test_no_horizontal_overflow(page, base_url, width):
     """Переполнение ищем и в открытом состоянии панели фильтров: закрытая
     ничего не показывает, а открывают её ссылки #/theme/ и #/ind/."""
-    checks = ["#/", "#/deal/citibank", "#/analytics", "#/industry/Банки",
-              "#/ind/Банки", "#/advisors/orion"]
+    # gcf05509a: статус «Согласование получено» — самая длинная из новых
+    # цветных плашек (раздел B, 22 августа); citibank один короче не ловит
+    # переполнение на самом длинном значении, как уже требует урок CLAUDE.md.
+    checks = ["#/", "#/deal/citibank", "#/deal/g8ce554c5", "#/analytics",
+              "#/industry/Банки", "#/ind/Банки", "#/advisors/orion"]
     bad = []
     for h in checks:
         page.goto(base_url + "/" + h, wait_until="networkidle")
@@ -730,6 +733,50 @@ def test_unknown_industry_is_labelled_as_an_industry(page, base_url):
         # …и ссылки «Все сделки отрасли «Не определена»» быть не должно.
         body = page.inner_text("#app")
         assert "отрасли «Не определена»" not in body, f"{deal_id}: ссылка в никуда"
+
+
+def test_status_plaque_is_colour_coded_by_stage(page, base_url):
+    """Раздел B, 22 августа: «Обсуждается»/«Подписана»/«Согласование
+    получено» раньше были тем же нейтральным серым, что и «Закрыта» —
+    нельзя было на глаз отличить идущую сделку от закрытой. Новый статус в
+    данные не заводили (решение владельца), только цвет плашки по уже
+    существующему значению `status`. Проверяем чистую функцию (все
+    словоформы статуса) и реальный DOM хотя бы по одной карточке каждого
+    класса — цвет плашки в шапке сделки должен совпасть с классом,
+    который знает сама функция, а не просто «что-то отрисовалось».
+    """
+    visit(page, base_url, "#/")
+    classes = page.evaluate("""() => ({
+        negotiations: statusClass('Обсуждается'),
+        signed: statusClass('Подписана'),
+        approval: statusClass('Согласование получено'),
+        closed: statusClass('Закрыта'),
+        cancelled: statusClass('Не состоялась'),
+    })""")
+    assert classes["negotiations"] == "negotiations"
+    assert classes["signed"] == "pending"
+    assert classes["approval"] == "pending"
+    assert classes["closed"] == "closed"
+    assert classes["cancelled"] == "cancelled"
+
+    # Ожидаемый цвет обвода — те же переменные палитры, что и в CSS
+    # (--steel/--accent и захардкоженный #B3402A у «cancelled», он был и до
+    # этой правки). Три разных цвета обязаны быть РАЗНЫМИ друг от друга —
+    # иначе на глаз статусы снова неотличимы, даже если классы расставлены
+    # верно.
+    expect_colour = {"negotiations": "rgb(51, 85, 107)",   # --steel
+                     "closed": "rgb(29, 90, 68)",          # --accent
+                     "cancelled": "rgb(179, 64, 42)"}       # #B3402A
+    for want_class, colour_hex in expect_colour.items():
+        deal_id = page.evaluate(
+            "(c) => (DEALS.find(d => statusClass(d.status) === c) || {}).id", want_class)
+        assert deal_id, f"нет карточки со статусом класса {want_class!r} — проверять не на чем"
+        visit(page, base_url, f"#/deal/{deal_id}")
+        cls = page.evaluate("() => document.querySelector('.d-head .status')?.className")
+        assert cls and want_class in cls.split(), f"{deal_id}: плашка не несёт класс {want_class!r} ({cls!r})"
+        colour = page.evaluate(
+            "() => getComputedStyle(document.querySelector('.d-head .status')).borderColor")
+        assert colour == colour_hex, f"{deal_id}: плашка {want_class!r} цвета {colour}, а не {colour_hex}"
 
 
 def test_preview_route_renders_a_pending_card(page, base_url, browser):

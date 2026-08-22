@@ -410,6 +410,8 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .status{display:inline-block;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:2px;color:var(--muted)}
 .status.closed{border-color:var(--accent);color:var(--accent)}
 .status.cancelled{border-color:#B3402A;color:#B3402A}
+.status.negotiations{border-color:var(--steel);color:var(--steel)}
+.status.pending{border-color:var(--bronze);color:var(--bronze)}
 
 /* ---------- CTA ---------- */
 .cta{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--accent-deep),#1B3B45);color:var(--ivory);border-radius:var(--radius);padding:36px 34px;margin-top:34px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
@@ -455,6 +457,15 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    бронзой, даже когда этап был «Переговоры прекращены»/«Сделка не
    состоялась»: сорвавшаяся сделка выглядела как идущая. */
 .progress-row.cancelled .progress-dot{background:#fff;border-color:#B3402A;box-shadow:inset 0 0 0 3px #fff}
+/* Раздел B, 22 августа: та же граница специфичности, но три класса
+   (.progress-row.current.<kind>) сильнее двух (.current) при любом порядке
+   в файле — можно не следить, что стоит раньше. Красим ТОЛЬКО «текущий»
+   этап тем же правилом, что и плашку статуса (kindClass): «Переговоры» —
+   синим (steel), тот же этап, доведённый до закрытия, — зелёным (accent).
+   «Согласование получено»/«Подписана» не нуждаются в отдельном правиле —
+   для них итак действует бронза по умолчанию (.current без уточнения). */
+.progress-row.current.negotiations .progress-dot{border-color:var(--steel);box-shadow:0 0 0 4px var(--steel-soft)}
+.progress-row.current.closed .progress-dot{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
 .progress-copy{min-width:0}
 .progress-date{display:block;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:2px}
 .progress-title{display:block;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink)}
@@ -3166,15 +3177,21 @@ const stageKind = status => {
   if(/обсуж|переговор|планир|намерен/.test(s)) return "negotiations";
   return "";
 };
-/* Плашка статуса раньше знала только «Закрыта» — 36 сделок «Не состоялась»
-   (сорвались, отменены) выглядели тем же нейтральным серым, что и 214
-   «Обсуждается» (просто ещё идут): в ленте сделок и в шапке карточки нельзя
-   было на глаз отличить мёртвую сделку от текущих переговоров. Переиспользуем
-   уже проверенный `stageKind()`, а не заводим второй классификатор статуса. */
-const statusClass = status => {
-  const kind = stageKind(status);
-  return kind==="closed" ? "closed" : kind==="cancelled" ? "cancelled" : "";
-};
+/* Плашка статуса раньше знала только «Закрыта»/«Не состоялась» — «Обсуждается»
+   (227 сделок, ещё идут переговоры или только планируются) и «Подписана»/
+   «Согласование получено» (промежуточные шаги) выглядели тем же нейтральным
+   серым: нельзя было на глаз отличить обсуждаемую сделку от закрытой, не
+   читая текст. Новый статус в данные заводить не стали (см. CLAUDE.md,
+   21 августа): различие — только цветом плашки, по уже существующему
+   значению `status`. Переиспользуем уже проверенный `stageKind()`, а не
+   заводим второй классификатор статуса; `kindClass()` — общее место для
+   цвета что по статусу сделки, что по виду отдельного этапа (страница
+   этапа красит `e.kind` напрямую, тем же правилом). */
+const kindClass = kind =>
+  kind==="closed" ? "closed" : kind==="cancelled" ? "cancelled"
+  : kind==="negotiations" ? "negotiations"
+  : (kind==="approval"||kind==="signed") ? "pending" : "";
+const statusClass = status => kindClass(stageKind(status));
 const eventSources = e => {
   const raw=Array.isArray(e&&e.sources) ? e.sources
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
@@ -3234,7 +3251,14 @@ function progressRowHtml(d,e,current){
   // показывать ли весь блок «Ход сделки» на карточке с одним этапом): иначе
   // переход никуда не ведёт — на странице этапа стоял бы тот же текст.
   const novel = noteIsNovel(d, e.note);
-  const cls = `progress-row ${current?"current":"done"}${e.kind==="cancelled"?" cancelled":""}`;
+  // Раздел B (22 августа): точка текущего этапа красится тем же правилом,
+  // что и плашка статуса вверху карточки (kindClass) — иначе шапка сделки
+  // говорит «Обсуждается» синим, а точка того же самого этапа в «Ходе
+  // сделки» ниже оставалась бы бронзовой по умолчанию: тот же факт, два
+  // разных цвета на одном экране. Класс добавляется только текущему этапу —
+  // у завершённых («done») цвет остаётся зелёным независимо от их вида: это
+  // не статус СДЕЛКИ, а отметка «этот шаг уже позади».
+  const cls = `progress-row ${current?"current":"done"}${e.kind==="cancelled"?" cancelled":""}${current&&kindClass(e.kind)?" "+kindClass(e.kind):""}`;
   const copy = `<span class="progress-dot" aria-hidden="true"></span>
     <span class="progress-copy"><span class="progress-date">${fmtDate(e.date)}</span><span class="progress-title">${esc(e.title)}</span></span>
     ${novel?`<span class="progress-open">Открыть этап →</span>`:""}`;
@@ -3321,7 +3345,7 @@ function renderDealStage(id,key){
     <div class="d-head reveal"><span class="label">Этап сделки · ${fmtDate(e.date)}</span><h1>${esc(e.title)}</h1>
       <div class="d-parties"><span>Сделка: <b>${esc(d.title)}</b></span></div></div>
     <div class="stage-card reveal">
-      <span class="status ${e.kind==="closed"?"closed":e.kind==="cancelled"?"cancelled":""}">${esc(e.title)}</span>
+      <span class="status ${kindClass(e.kind)}">${esc(e.title)}</span>
       <h2>${esc(e.historicalTitle||e.title)}</h2>
       ${e.note?`<p>${esc(e.note)}</p>`:`<p>Для этого этапа сохранены дата и источники. Дополнительные факты в публикациях не раскрывались.</p>`}
       ${facts.length?`<div class="stage-facts">${facts.map(x=>`<div class="stage-fact"><span class="label">${esc(String(x[0]))}</span><b>${esc(String(x[1]))}</b></div>`).join("")}</div>`:""}
