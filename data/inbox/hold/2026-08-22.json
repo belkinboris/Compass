@@ -2,35 +2,6 @@
  "made": "2026-08-22",
  "drafts": [
   {
-   "draft_id": "d49963630",
-   "title": "Петербуржцы стали чаще отдыхать в Турции без покупки туров",
-   "date": "2026-08-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/07/samostojatelnimi-stali-peterburzhci"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d50925471",
    "title": "Хедж-фонд Situational Awareness после огромных убытков вложил $400 млн в стартап по производству чипов",
    "date": "2026-08-09",
@@ -544,142 +515,6 @@
    ]
   },
   {
-   "draft_id": "d38085051",
-   "title": "Национализация обеспечила 40% рынка M&A в I полугодии 2026 года",
-   "date": "2026-08-06",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/297281"
-    ]
-   ],
-   "sum": "$10,2 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d37212175",
-   "title": "Аптечная сеть «36,6» выкупила 83 аптеки «Диалога»",
-   "date": "2026-08-06",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265173/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-06",
-     "title": "Сделка завершена",
-     "note": "Сеть усилила свое присутствие в московском регионе, продолжив скупать малые розничные сети. За июль и август «36,6» приобрела 128 аптек.",
-     "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/265173/"
-     ]
-    }
-   ],
-   "buyer_name": "Аптечная сеть «36,6»",
-   "asset": "83 аптеки «Диалога»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Аптечная сеть «36,6»",
-    "asset": "83 аптеки «Диалога»",
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку ge482f106 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d54709764",
-   "title": "Юрист предупредил о рисках покупки квартиры с родственниками",
-   "date": "2026-08-09",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/9/yurist-predupredil-o-riskah-pokupki-kvartiry-s-rodstvennikami"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d37693612",
-   "title": "«Продо» приобрела производителя инкубационного яйца «Башкирский бройлер» Об объекте сделки 100% долей ООО «Башкирский бройлер» — производителя инкубационного яйца для бройлерного птицеводства в Альшее",
-   "date": "2026-07-28",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7259"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-07-28",
-     "title": "Сделка завершена",
-     "note": "«Продо» приобрела производителя инкубационного яйца «Башкирский бройлер» Об объекте сделки 100% долей ООО «Башкирский бройлер» — производителя инкубационного яйца для бройлерного птицеводства в Альшеевском районе Республики Башкортостан. Компания специализируе",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7259"
-     ]
-    }
-   ],
-   "buyer_name": "«Продо»",
-   "asset": "производителя инкубационного яйца «Башкирский бройлер» Об объекте сделки 100% долей ООО «Башкирский",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Продо»",
-    "asset": "производителя инкубационного яйца «Башкирский бройлер» Об объекте сделки 100% долей ООО «Башкирский",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку gmru-prodo-star-nafta-broiler (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d25980276",
    "title": "🧱 🧱 🧱 🧱 Управляющий партнер Aspring Capital Сергей Айрапетов эксклюзивно для РБК рассказал , как теперь продается и покупается бизнес в России Подписывайтесь на Aspring Capital в MAX",
    "date": "2026-07-30",
@@ -996,40 +831,9 @@
    },
    "ind": "Фармацевтика",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ge482f106 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Аптечная сеть «36,6» выкупила 83 аптеки «Диалога»» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d24398652",
-   "title": "Опубликована вторая часть исследования Tech M&A картинка",
-   "date": "2026-07-08",
-   "src": [
-    [
-     "firm:o2",
-     "https://o2consult.com/publications/opublikovana-vtoraya-chast-issledovaniya-tech-m-a-kartinka/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку ge482f106 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -1157,35 +961,6 @@
    ]
   },
   {
-   "draft_id": "d86332540",
-   "title": "Банки стали активнее спрашивать клиентов-юрлиц о причинах покупки USDT",
-   "date": "2026-08-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6a79eac29a79476eb3a86d64"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d43174929",
    "title": "Пользователи «Авито» смогут оплачивать покупки в «Яндекс Сплит»",
    "date": "2026-08-10",
@@ -1213,46 +988,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Wildberries, Ozon, МТС, «Яндекс» , РСХБ, Совкомбанк&nbsp;—&n» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d49504745",
-   "title": "Аналитик назвал зимние месяцы самыми выгодными для покупки нового авто",
-   "date": "2026-08-11",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2147048/2026-08-11/analitik-nazval-zimnie-mesiatcy-samymi-vygodnymi-dlia-pokupki-novogo-avto"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-11",
-     "title": "Переговоры",
-     "note": "Наиболее выгодными месяцами для приобретения нового автомобиля в России считаются декабрь, январь и февраль. Об этом 11 августа рассказал исполнительный директор управления по работе с партнерами «СберЛизинга» Ашот Ерицян. «Традиционно наиболее выгодными месяц",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2147048/2026-08-11/analitik-nazval-zimnie-mesiatcy-samymi-vygodnymi-dlia-pokupki-novogo-avto"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -1336,64 +1071,6 @@
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d60377896",
-   "title": "Школьный ажиотаж на полках магазинов: можно ли не переплатить за покупки к 1 сентября",
-   "date": "2026-08-10",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/10/shkolnyj-azhiotazh-na-polkah-magazinov-mozhno-li-ne-pereplatit-za-pokupki-k-1-sentyabrya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d36660384",
-   "title": "Мировой рынок венчурных инвестиций по итогам полугодия вырос в 2,2 раза",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8879045"
-    ]
-   ],
-   "sum": "$560,4 млрд",
-   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1589,34 +1266,6 @@
    ]
   },
   {
-   "draft_id": "d23534571",
-   "title": "Кузбасские предприятия инвестировали в цифровые системы безопасности на четверть больше, чем годом ранее",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-13_kuzbasskie_predpriyatiya_investirovali"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": "Кузбасские предприятия",
-   "asset": "цифровые системы безопасности на четверть больше, чем годом ранее",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Кузбасские предприятия",
-    "asset": "цифровые системы безопасности на четверть больше, чем годом ранее",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d44625556",
    "title": "Россияне смогут на «Госуслугах» выбрать и купить себе место на кладбище",
    "date": "2026-08-13",
@@ -1783,45 +1432,6 @@
    ]
   },
   {
-   "draft_id": "d10344939",
-   "title": "ЦБ Кореи впервые за 13 лет купил активы, связанные с золотом",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/299127"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-13",
-     "title": "Сделка завершена",
-     "note": "Он вложился в один из крупнейших золотых ETF Сообщение ЦБ Кореи впервые за 13 лет купил активы, связанные с золотом появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/299127"
-     ]
-    }
-   ],
-   "buyer_name": "ЦБ Кореи впервые",
-   "asset": "активы, связанные с золотом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "ЦБ Кореи впервые",
-    "asset": "активы, связанные с золотом",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d13894372",
    "title": "IPO Anthropic может превзойти размещение SpaceX",
    "date": "2026-08-13",
@@ -1876,150 +1486,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59527488",
-   "title": "Маск показал видео о «покупке» Британии",
-   "date": "2026-08-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/13/mask-pokazal-video-o-pokupke-britanii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d18782254",
-   "title": "Женщины все чаще покупают сами себе бриллианты",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053118120"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Женщины все чаще",
-   "asset": "сами себе бриллианты",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Женщины все чаще",
-    "asset": "сами себе бриллианты",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d18733030",
-   "title": "От маркетплейсов к своим витринам: почему бизнес уходит в независимые онлайн‑продажи",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/13/ot-marketplejsov-k-svoim-vitrinam-pochemu-biznes-uhodit-v-nezavisimye-onlajnprodazhi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19770172",
-   "title": "Краснодарский край вошел в лидеры по продажам загородных домов",
-   "date": "2026-08-13",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/8/13/krasnodarskij-kraj-voshel-v-lidery-po-prodazham-zagorodnyh-domov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d37969544",
-   "title": "Водителям начали продавать топливные карты с большими скидками — что с ними не так",
-   "date": "2026-08-12",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/auto/2026/08/12/76585122/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -3100,75 +2566,6 @@
    ]
   },
   {
-   "draft_id": "d86882642",
-   "title": "Крупнейшие банки наращивают объем ссуд на покупку машин",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8891595"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d75960650",
-   "title": "Турция не может продать С-400 ради получения американских истребителей F-35",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8891445"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-17",
-     "title": "Переговоры",
-     "note": "Турция по-прежнему рассчитывает на то, что США продадут ей истребители F-35, несмотря на существующие препятствия. Госдеп не готов дать зеленый свет на передачу турецкой стороне американских истребителей, пока та не избавится от российских систем ПВО С-400.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8891445"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d62647005",
    "title": "Alibaba продала игровое подразделение за $1,5 млрд",
    "date": "2026-08-17",
@@ -3374,45 +2771,6 @@
    ]
   },
   {
-   "draft_id": "d17479553",
-   "title": "Volga продала 435 автомобилей за месяц: самая востребованная модель бренда — флагманский кроссовер K50",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/volga-prodala-435-avtomobilej-za-mesyac-samaya-vostrebovannaya-model-brenda-flagmanskij-krossover-k50/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-17",
-     "title": "Сделка завершена",
-     "note": "Volga в первый полный месяц продаж реализовала в России 435 автомобилей, сообщает портал «Китайские автомобили» со ссылкой на данные компании «Автостат Инфо». Почти 90% регистраций пришлось на кроссоверы K50 и K40 — 198 и 192 машины соответственно. Седан C50…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/volga-prodala-435-avtomobilej-za-mesyac-samaya-vostrebovannaya-model-brenda-flagmanskij-krossover-k50/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "435 автомобилей за месяц: самая востребованная модель бренда — флагманский кроссовер K50",
-   "seller": "Volga",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "435 автомобилей за месяц: самая востребованная модель бренда — флагманский кроссовер K50",
-    "seller": "Volga"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d17975021",
    "title": "Первый серийный электромобиль Ferrari Luce продали на аукционе за $40 млн — в 63 раза дороже стартовой цены модели",
    "date": "2026-08-17",
@@ -3448,35 +2806,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d59760970",
-   "title": "Стало известно, в каких регионах быстрее снижают цену при продаже машины",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260818/avto-2111472823.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
@@ -3607,35 +2936,6 @@
    ]
   },
   {
-   "draft_id": "d27543141",
-   "title": "Протектор как новый, а шина уже старая: где искать подвох перед покупкой",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/17/protektor-kak-novyj-a-shina-uzhe-staraya-gde-iskat-podvoh-pered-pokupkoj"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d56006702",
    "title": "Национализированные ТРК Михаила Юревича ушли с молотка за шесть миллиардов",
    "date": "2026-08-17",
@@ -3744,46 +3044,6 @@
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87069987",
-   "title": "Взломавшие налоговую службу Франции хакеры заявили о продаже данных",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8891710"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-18",
-     "title": "Сделка завершена",
-     "note": "Группировка ZeroBytes, стоящая за кражей данных у французской налоговой службы, заявила, что продала похищенную информацию. Речь идет о данных не менее 678 тыс. физических и юридических лиц.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8891710"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -3973,34 +3233,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «РТК-ЦОД увеличивает инвестиции в масштабирование инфраструкт» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d48966160",
-   "title": "Владелец ГК CorpSoft24 Константин Рензяев инвестировал в российского производителя решений в области кибербезопасности «Кодмастер»",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-18_vladelets_gk_corpsoft24_konstantin"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "российский производитель решений в области кибербезопасности «Кодмастер»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "российский производитель решений в области кибербезопасности «Кодмастер»",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -4281,46 +3513,6 @@
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d71085593",
-   "title": "Импульсивные покупки: как перестать тратиться на всякую ерунду",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053119296"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-18",
-     "title": "Сделка завершена",
-     "note": "Купил какую-то вещь, потому что загорелись глаза, а спустя время понял, что зря потратил деньги на ерунду.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/articles/1053119296"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4867,75 +4059,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53182583",
-   "title": "Иностранцы распродали японские облигации на рекордную за 20 лет сумму",
-   "date": "2026-08-20",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/300490"
-    ]
-   ],
-   "sum": "$8,1 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-20",
-     "title": "Сделка завершена",
-     "note": "Чистый объем продаж составил $8,1 млрд Сообщение Иностранцы распродали японские облигации на рекордную за 20 лет сумму появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/300490"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d28508903",
-   "title": "Суд признал запрещенной информацию об аренде и продаже банковских карт",
-   "date": "2026-08-20",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265405/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -5637,35 +4760,6 @@
    ]
   },
   {
-   "draft_id": "d69650914",
-   "title": "Водителей предупредили о рисках покупки дешевого топлива в интернете",
-   "date": "2026-08-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053120126"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d94277541",
    "title": "Москва выставила на торги два помещения в Щербинке",
    "date": "2026-08-21",
@@ -5719,35 +4813,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52115587",
-   "title": "Доставка помогает женщинам с детьми экономить почти три часа в неделю на покупках",
-   "date": "2026-08-21",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-21_dostavka_pomogaet_zhenshchinam"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -6172,7 +5237,7 @@
    ]
   },
   {
-   "draft_id": "d56380221",
+   "draft_id": "d57382232",
    "title": "В Севастополе в субботу топливо будут продавать по QR-кодам и свободно",
    "date": "2026-08-21",
    "src": [
@@ -6200,7 +5265,7 @@
    ]
   },
   {
-   "draft_id": "d44996129",
+   "draft_id": "d66943680",
    "title": "В Омске выставили на продажу 17 пунктов выдачи Wildberries",
    "date": "2026-08-21",
    "src": [
@@ -6228,7 +5293,7 @@
    ]
   },
   {
-   "draft_id": "d10239344",
+   "draft_id": "d13561914",
    "title": "Суд в Москве заблокировал сайты по продаже экзотических диких животных",
    "date": "2026-08-22",
    "src": [
@@ -6256,64 +5321,7 @@
    ]
   },
   {
-   "draft_id": "d84199350",
-   "title": "Иран перешел к наступательной военной доктрине",
-   "date": "2026-08-22",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053120520"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d21364974",
-   "title": "Мошенники создали сайты продажи билетов на Канье Уэста за криптовалюту",
-   "date": "2026-08-22",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6a89795a9a7947d8ec3eaed7"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78757681",
+   "draft_id": "d82654906",
    "title": "Бухгалтерский ИИ-стартап Rillet привлек $100 млн и стал единорогом за 48 часов",
    "date": "2026-08-22",
    "src": [
@@ -6339,6 +5347,62 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d39143367",
+   "title": "Аукционы Минфина — министерство ожидает стабилизации долгового рынка, но этого не происходит, доходность ОФЗ, наоборот, показывает рост.",
+   "date": "2026-08-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1342868.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86335379",
+   "title": "Картины продают за миллион и больше: бывший священник из Румынии в Сибири стал известным художником",
+   "date": "2026-08-22",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/culture/2026/08/22/76601301/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
