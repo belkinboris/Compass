@@ -1545,12 +1545,12 @@ FIXES = [
                   'при участии «Ростеха». В госкорпорации заявили РБК, что оператор '
                   '«сохраняет устойчивые позиции» в сфере обращения с отходами.',
          why='партия 5 агентов 14.08.2026, источник vedomosti.ru: перенесено дословно'),
-    dict(id='g6a453b19', field='eco.context', old='—',
-         new='Холдинг Ultimate Education объединяет тематические онлайн-школы '
-                  'Psyhomedia, XYZ School, Bang Bang Education и Moscow Digital School.',
-         quote='Холдинг Ultimate Education объединяет тематические онлайн-школы '
-                  'Psyhomedia, XYZ School, Bang Bang Education и Moscow Digital School.',
-         why='партия 5 агентов 14.08.2026, источник skillbox.ru: перенесено дословно'),
+    # eco.context g6a453b19 (Ultimate Education) исходно заполнено этой
+    # записью (состав холдинга) — 22 августа 2026 (месячная дельта,
+    # партия 22) поле ДОПОЛНЕНО сменой гендиректора (май 2025) отдельным
+    # скриптом `pipeline/fix_ipo_monthly_delta_batch4.py`, поэтому
+    # текущее значение больше не равно ни старому '—', ни исходному
+    # `new` записи.
     dict(id='g6a453b19', field='eco.target_fin', old='—',
          new='В рейтинге крупнейших российских EdTech-компаний, который ежеквартально '
                   'составляет агентство Smart Ranking, Ultimate Education занимает 13-е место '
