@@ -230,11 +230,15 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     assert "16 авг" in note.inner_text()
 
     # У карточки без единой отметки о сверке строка честно не рисуется —
-    # не выдумываем дату, которой нет. (g91281c36 использовалась раньше —
-    # 22 августа 2026 её прочитали и пометили reviewed/deep_researched,
-    # для этого теста понадобилась другая карточка без единой отметки.)
-    visit(page, base_url, "#/deal/c59e65efb")
-    assert page.locator(".src .acct-note").count() == 0
+    # не выдумываем дату, которой нет. Раньше здесь стояла конкретная
+    # карточка без reviewed/deep_researched — но кампания дочитывания
+    # (22 августа 2026) закрыла всю такую очередь до нуля: держать в тесте
+    # id живой карточки, у которой ЭТОГО поля нет, значит держать тест,
+    # который сломается при следующей же партии обогащения. Проверяем
+    # функцию `lastVerifiedDate` напрямую на синтетическом объекте — тот
+    # же код, что рендерит блок, но без зависимости от состояния базы.
+    visit(page, base_url, "#/deal/g1d36d186")
+    assert page.evaluate("lastVerifiedDate({})") is None
 
 
 def test_pdf_button_note_does_not_get_stuck_on_login_prompt(page, base_url):
