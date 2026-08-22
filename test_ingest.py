@@ -1106,10 +1106,10 @@ def test_publisher_holds_everything_at_night():
     import importlib, sys as _sys
     _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
     sender = importlib.import_module("send_telegram")
-    for hour in (0, 3, 7, 9, 19, 22, 23):
+    for hour in (0, 3, 7, 9, 21, 22, 23):
         allowed, why = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
         assert allowed == 0, f"в {hour}:00 отправили бы {allowed} — окно нарушено ({why})"
-    for hour in (10, 13, 18):
+    for hour in (10, 13, 18, 20):
         allowed, _ = sender.pace_allowance(5, datetime(2026, 8, 4, hour, 0, tzinfo=sender.MSK))
         assert allowed >= 1, f"в {hour}:00 внутри окна не отправили ничего"
 
@@ -1129,8 +1129,8 @@ def test_publisher_spreads_the_queue_over_the_window():
     at10, _ = sender.pace_allowance(5, datetime(2026, 8, 4, 10, 0, tzinfo=sender.MSK))
     assert at10 == 1, f"в начале окна взяли {at10} из 5 — это не равномерно"
     # Ближе к концу окна остаток уходит целиком: иначе он завис бы до завтра.
-    at1830, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 18, 30, tzinfo=sender.MSK))
-    assert at1830 == 3, "остаток очереди не ушёл в последнем слоте"
+    at2030, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 20, 30, tzinfo=sender.MSK))
+    assert at2030 == 3, "остаток очереди не ушёл в последнем слоте"
     # Но не в одну минуту: между новыми постами внутри прогона есть пауза.
     assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
     # Пустая очередь не заставляет отправлять «хоть что-нибудь».
