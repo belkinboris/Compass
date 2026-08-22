@@ -19,12 +19,16 @@
 решает читающий (человек или модель в рутине), потом пишет строку в
 `pipeline/ingest/review.py` (для существующей карточки) или строит новую
 карточку тем же путём, что `approve.py` строит её для кнопки «в работу»
-(для сырья). Применив, ОБЯЗАТЕЛЬНО вызвать `--consume <id...>` — иначе та
-же заметка будет напоминать о себе каждый день.
+(для сырья). Применив, ОБЯЗАТЕЛЬНО ответить владельцу РЕПЛАЕМ на то же сообщение
+(`--reply <id> "текст"` — раздел C MILESTONES_BRIEF.md, 22 августа: до этого
+заметка получала мгновенное «принята» и тишину навсегда, второй человек в
+группе не видел, что рутина вообще что-то сделала) и вызвать
+`--consume <id...>` — иначе та же заметка будет напоминать о себе каждый день.
 
 Запуск:
-    python3 pipeline/ingest/read_notes.py                # показать нерешённые
-    python3 pipeline/ingest/read_notes.py --consume 56 69 # пометить применёнными
+    python3 pipeline/ingest/read_notes.py                    # показать нерешённые
+    python3 pipeline/ingest/read_notes.py --reply 56 "Текст ответа партнёру"
+    python3 pipeline/ingest/read_notes.py --consume 56 69     # пометить применёнными
 """
 import json
 import os
@@ -33,6 +37,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
+sys.path.insert(0, ROOT)                                  # telegram_endpoint в корне
+
+import telegram_endpoint                                  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -67,6 +74,36 @@ def consume(ids):
               json={'token': token, 'ids': ids}, timeout=20)
 
 
+def send_reply(note_id, text):
+    """Ответить РЕПЛАЕМ на то же сообщение, где оставлена заметка —
+    `chat_id`/`reply_message_id` записаны вебхуком (`main.py`) при получении
+    заметки. Заметка уже `--consume`д (её нет среди непрочитанных) — это не
+    сбой: значит, ответ на неё уже отправлялся раньше, вызывать второй раз
+    незачем."""
+    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    if not bot_token:
+        print('TELEGRAM_BOT_TOKEN не задан — ответ не отправлен.')
+        return False
+    note = next((n for n in fetch_notes() if n['id'] == note_id), None)
+    if not note:
+        print('Заметка %d не среди непрочитанных — уже отвечена и применена (--consume)?' % note_id)
+        return False
+    if not (note.get('chat_id') and note.get('reply_message_id')):
+        print('У заметки %d нет chat_id/reply_message_id — отправить ответ некуда.' % note_id)
+        return False
+    import httpx
+    r = httpx.post(telegram_endpoint.method_url(bot_token, 'sendMessage'), json={
+        'chat_id': note['chat_id'], 'text': text,
+        'reply_to_message_id': note['reply_message_id'],
+        'disable_web_page_preview': True,
+    }, timeout=20)
+    if r.status_code == 200 and r.json().get('ok'):
+        print('Ответ на заметку %d отправлен.' % note_id)
+        return True
+    print('Не удалось отправить ответ на заметку %d: %s' % (note_id, r.text[:200]))
+    return False
+
+
 def latest_draft(draft_id):
     """Последний известный черновик с этим draft_id среди hold-файлов, если
     ещё не был переупакован (draft_id меняется при пересборке — см. urок про
@@ -83,6 +120,15 @@ def latest_draft(draft_id):
 
 
 def main():
+    if '--reply' in sys.argv:
+        i = sys.argv.index('--reply')
+        rest = sys.argv[i + 1:]
+        assert rest, '--reply требует id и текст ответа: --reply 56 "текст"'
+        note_id = int(rest[0])
+        text = ' '.join(rest[1:]).strip()
+        assert text, '--reply требует текст ответа: --reply %d "текст"' % note_id
+        ok = send_reply(note_id, text)
+        return 0 if ok else 1
     if '--consume' in sys.argv:
         ids = [int(x) for x in sys.argv[sys.argv.index('--consume') + 1:]]
         consume(ids)
@@ -104,6 +150,8 @@ def main():
         print('=' * 60)
         print('id решения: %d | оставил: %s | %s' % (n['id'], n['decided_by'], n['created_at']))
         print('текст: %s' % n.get('edited_text'))
+        if not (n.get('chat_id') and n.get('reply_message_id')):
+            print('  (нет chat_id/reply_message_id — заметка старая, ответить реплаем на неё нельзя)')
         target = n['deal_id']
         if target in cards:
             card = cards[target]
@@ -122,7 +170,10 @@ def main():
                       'нашлось (id сырья мог смениться при пересборке)' % target)
         print()
     print('После того как правки внесены (review.py FIXES для карточки, новая '
-          'карточка для сырья) — обязательно:')
+          'карточка для сырья) — ОБЯЗАТЕЛЬНО ответить по каждой заметке реплаем '
+          '(что сделали, что нашли, с чем не согласны — честно и коротко), потом --consume:')
+    for n in notes:
+        print('  python3 pipeline/ingest/read_notes.py --reply %d "..."' % n['id'])
     print('  python3 pipeline/ingest/read_notes.py --consume %s'
           % ' '.join(str(n['id']) for n in notes))
     return 0

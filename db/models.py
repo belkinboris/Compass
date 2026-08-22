@@ -603,3 +603,11 @@ class ModerationDecision(Base):
     decided_by: Mapped[str] = mapped_column(String(80))       # chat_id решившего
     consumed: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc))
+    # Добавлены 22 августа для заметок (verdict='note'): рутина обязана
+    # ОТВЕТИТЬ реплаем на то же сообщение, где владелец оставил заметку —
+    # для этого нужны chat_id группы/чата и id самого сообщения-заметки
+    # (Telegram API: sendMessage(..., reply_to_message_id=reply_message_id)).
+    # Для остальных вердиктов (approve/hold/…) оба поля остаются NULL — их
+    # решения уже подтверждаются прямо в сообщении с кнопками (_mark_decided).
+    chat_id: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    reply_message_id: Mapped[int | None] = mapped_column(nullable=True)

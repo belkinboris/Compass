@@ -57,8 +57,12 @@ JARGON = [
     # Ответа не было: таких категорий у нас нет. Партия из двенадцати
     # РАЗНОРОДНЫХ карточек (завод, приватизация, фонд, торговый комплекс)
     # не сводится к одному ярлыку, и попытка свести рождает выдумку.
-    (r'заводск\w+\s+(и\s+\w+\s+)?сделк', 'такого типа сделок у нас нет — назовите компании по именам'),
-    (r'биржев\w+\s+сделк', 'у нас есть «Продажа с торгов», а «биржевых сделок» нет'),
+    # «сделк\w*» не совпадает с «сделок» — там «о» перед «к» (сдел-О-к, не
+    # сдел-к), а не суффикс после общего «сделк»; тот же класс дефекта, что
+    # уже записан в CLAUDE.md про стемы без учёта конкретной словоформы.
+    # Оба варианта — явно, а не понадеявшись на общий стем.
+    (r'заводск\w+\s+(и\s+\w+\s+)?(?:сделок|сделк\w*)', 'такого типа сделок у нас нет — назовите компании по именам'),
+    (r'биржев\w+\s+(?:сделок|сделк\w*)', 'у нас есть «Продажа с торгов», а «биржевых сделок» нет'),
 ]
 
 # ТИПЫ СДЕЛОК, КОТОРЫЕ У НАС ЕСТЬ. Всё остальное перед словом «сделка» —
@@ -116,11 +120,18 @@ def _plural(n, one, few, many):
     return many
 
 
-def render_intake(looked=0, found=0, cards=0):
-    """Приток: что просмотрели за сутки и что из этого вышло."""
+def render_intake(looked=0, found=0, cards=0, screened=0):
+    """Приток: что просмотрели за сутки и что из этого вышло.
+
+    `screened` — сколько сомнительного сырья отсеяно автоматически ДО
+    консоли (шаг D, `raw_screen.py --drop`/`--enrich`): владелец 21 августа
+    жаловался на поток мусора вроде свадебных заметок в «сомнительных» —
+    печатается ВСЕГДА, включая ноль, чтобы «отсеивали и просто нечего было»
+    и «шаг не сработал» не выглядели одинаково молчанием."""
     lines = ['🌅 <b>Компас · утренний обзор рынка</b>', '']
     if looked:
         lines.append('Просмотрели %d %s.' % (looked, _plural(looked, 'новость', 'новости', 'новостей')))
+    lines.append('Отсеяли как явный мусор ещё до консоли — %d.' % screened)
     if not cards:
         lines.append('Новых сделок сегодня нет — бывают тихие дни, это нормально.')
         return '\n'.join(lines)
@@ -405,7 +416,7 @@ def build(args):
     if args.broken:
         return render_broken(args.routine, args.broken), None
     if args.routine == 'приток':
-        return render_intake(args.looked, args.found, args.cards), None
+        return render_intake(args.looked, args.found, args.cards, args.screened), None
     if args.routine == 'публикация':
         text = render_publish(args.posted, args.edited, args.applied,
                               args.soon, args.held, args.unread, args.nothing)
@@ -420,6 +431,8 @@ def main(argv):
     p.add_argument('--looked', type=int, default=0)
     p.add_argument('--found', type=int, default=0)
     p.add_argument('--cards', type=int, default=0)
+    p.add_argument('--screened', type=int, default=0,
+                   help='сомнительного сырья отсеяно автоматически (raw_screen.py) до консоли')
     p.add_argument('--posted', type=int, default=0)
     p.add_argument('--edited', type=int, default=0)
     p.add_argument('--applied', type=int, default=0)
@@ -512,6 +525,10 @@ def _self_check():
     # Пустой прогон обязан быть внятным, а не молчаливым.
     assert 'публиковать нечего' in render_publish(nothing=True).lower()
     assert 'тихие дни' in render_intake(looked=1633)
+    # Отсев сырья (раздел D) печатается даже нулём — иначе «отсеивать
+    # нечего» и «шаг отсева не запускался» снова неотличимы в отчёте.
+    assert 'Отсеяли' in render_intake(looked=100, screened=0)
+    assert '7' in render_intake(looked=100, screened=7)
     # Кнопки появляются только там, где есть что показать.
     assert queue_keyboard(0, 0) is None
     assert queue_keyboard(6, 4)['inline_keyboard'][0][0]['callback_data'] == 'show:soon'

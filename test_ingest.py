@@ -2450,6 +2450,51 @@ def test_raw_screen_refuses_dropping_an_unknown_draft_id(tmp_path, monkeypatch):
     assert rc == 1
 
 
+def test_read_notes_reply_sends_to_the_stored_chat_and_message(monkeypatch):
+    """`--reply <id> "текст"` бьёт в Telegram с `reply_to_message_id` из
+    заметки — раздел C MILESTONES_BRIEF.md (22 августа): без этого рутина
+    подтверждала заметку мгновенно, но содержательного ответа не давала
+    никогда, и второй человек в группе не видел, что рутина вообще прочитала."""
+    import read_notes
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "test-token")
+    monkeypatch.setattr(read_notes, "fetch_notes",
+                        lambda: [{"id": 56, "deal_id": "gnote1", "chat_id": "111",
+                                  "reply_message_id": 777, "verdict": "note"}])
+    calls = []
+
+    class _Resp:
+        status_code = 200
+        def json(self):
+            return {"ok": True}
+
+    def _fake_post(url, json=None, timeout=None):
+        calls.append((url, json))
+        return _Resp()
+
+    import httpx as _httpx
+    monkeypatch.setattr(_httpx, "post", _fake_post)
+
+    ok = read_notes.send_reply(56, "Это отдельная веха, а не новая сделка.")
+    assert ok is True
+    assert calls, "запрос к Telegram не ушёл"
+    url, body = calls[0]
+    assert "bot" in url and "sendMessage" in url
+    assert body["chat_id"] == "111" and body["reply_to_message_id"] == 777
+    assert body["text"] == "Это отдельная веха, а не новая сделка."
+
+
+def test_read_notes_reply_refuses_without_a_reply_target(monkeypatch):
+    """Заметка без chat_id/reply_message_id (старая, до 22 августа) — честный
+    отказ, а не тихая попытка отправить в никуда."""
+    import read_notes
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "test-token")
+    monkeypatch.setattr(read_notes, "fetch_notes",
+                        lambda: [{"id": 1, "deal_id": "gx", "chat_id": None,
+                                  "reply_message_id": None, "verdict": "note"}])
+    ok = read_notes.send_reply(1, "текст")
+    assert ok is False
+
+
 def test_weekly_researched_stamp_requires_deep_researched_first():
     """`weekly_researched` — второй из трёх уровней (неделя после появления
     карточки), дельта ПОВЕРХ `deep_researched`, а не независимая отметка.

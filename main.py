@@ -94,6 +94,18 @@ def _create_account_tables():
                         conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} VARCHAR(200)"))
         except Exception as e:
             logger.error("не удалось добавить password_hash в users: %s", e)
+        # chat_id/reply_message_id добавлены в moderation_decisions 22 августа
+        # для ответа рутины реплаем на заметку (раздел C MILESTONES_BRIEF.md) —
+        # тот же диалект-независимый приём инспектора, что и выше для users.
+        try:
+            with engine.begin() as conn:
+                cols = {c["name"] for c in inspect(conn).get_columns("moderation_decisions")}
+                if "chat_id" not in cols:
+                    conn.execute(text("ALTER TABLE moderation_decisions ADD COLUMN chat_id VARCHAR(40)"))
+                if "reply_message_id" not in cols:
+                    conn.execute(text("ALTER TABLE moderation_decisions ADD COLUMN reply_message_id INTEGER"))
+        except Exception as e:
+            logger.error("не удалось добавить chat_id/reply_message_id в moderation_decisions: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
 
@@ -1015,13 +1027,32 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     if marker and text.strip() and _is_reviewer(sender_id):
         kind, deal_id = marker.group(1), marker.group(2)
         verdict = "approve" if kind in ("пост", "черновик") else "note"
-        db.add(ModerationDecision(deal_id=deal_id, verdict=verdict,
-                                  edited_text=text.strip(), decided_by=str(sender_id)))
+        # chat_id/reply_message_id — только у заметок: только их читает и на
+        # них отвечает рутина (read_notes.py), решению approve отвечать
+        # реплаем не нужно, оно и так подтверждается штампом в сообщении.
+        db.add(ModerationDecision(
+            deal_id=deal_id, verdict=verdict, edited_text=text.strip(),
+            decided_by=str(sender_id),
+            chat_id=str(chat_id) if verdict == "note" and chat_id is not None else None,
+            reply_message_id=reply.get("message_id") if verdict == "note" else None))
         db.commit()
-        confirm = ("Принято: пост уйдёт с вашим текстом." if verdict == "approve"
-                   else "Заметка записана — рутина притока применит её при следующем "
-                        "прогоне через проверки review.py.")
-        notification_service._send_telegram(str(chat_id), confirm)
+        if verdict == "approve":
+            notification_service._send_telegram(str(chat_id), "Принято: пост уйдёт с вашим текстом.")
+        else:
+            # МГНОВЕННОЕ ПОДТВЕРЖДЕНИЕ — раздел C MILESTONES_BRIEF.md. Раньше
+            # заметка уходила в отдельное сообщение и терялась среди прочих;
+            # штамп прямо в исходном [сырьё …]/[карточка …] — тот же приём,
+            # что «— ✅ Одобрено» у _mark_decided, второй человек в группе
+            # сразу видит, что заметка не повисла без ответа. Содержательный
+            # ответ («что сделала, что нашла») придёт позже РЕПЛАЕМ от самой
+            # рутины (read_notes.py читает chat_id/reply_message_id).
+            who = (message.get("from") or {}).get("first_name") or "участник"
+            original = str(reply.get("text") or "")
+            stamped = "%s\n\n— 💬 Заметка принята (%s), рутина ответит после чтения" % (original, who)
+            if chat_id is not None and reply.get("message_id"):
+                notification_service.tg_api(
+                    "editMessageText", chat_id=chat_id, message_id=reply["message_id"],
+                    text=stamped, disable_web_page_preview=True)
         return {"ok": True}
     match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
     if match and chat_id is not None:
@@ -1505,6 +1536,7 @@ def moderation_decisions(token: str = "", db=Depends(get_db)):
                            .order_by(ModerationDecision.created_at)).all())
     return {"decisions": [{"id": r.id, "deal_id": r.deal_id, "verdict": r.verdict,
                            "edited_text": r.edited_text, "decided_by": r.decided_by,
+                           "chat_id": r.chat_id, "reply_message_id": r.reply_message_id,
                            "created_at": r.created_at.isoformat()} for r in rows]}
 
 

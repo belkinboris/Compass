@@ -1146,6 +1146,58 @@ def test_reply_to_card_message_becomes_a_note_not_a_publication(client, monkeypa
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
 
+def test_note_reply_is_acked_instantly_and_carries_a_reply_target(client, monkeypatch):
+    """Раздел C MILESTONES_BRIEF.md (22 августа): заметка получает мгновенное
+    подтверждение прямо в исходном сообщении («— 💬 Заметка принята»), а
+    решение несёт chat_id/reply_message_id — иначе рутине нечем ответить
+    реплаем позже (read_notes.py --reply). До этого заметка тонула молча:
+    второй человек в группе не видел, принята ли она вообще.
+    """
+    _mod_env(monkeypatch)
+    calls = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: calls.append((method, kw)) or {"ok": True})
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111}, "from": {"id": 111, "first_name": "Борис"},
+                     "text": "это отдельная веха, а не новая сделка",
+                     "reply_to_message": {"message_id": 777,
+                                          "text": "📌 [карточка gnote2] — НА САЙТ"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gnote2"]
+    assert rows and rows[0]["verdict"] == "note"
+    # Мост для рутины: без этих двух полей read_notes.py --reply ответить не сможет.
+    assert rows[0]["chat_id"] == "111"
+    assert rows[0]["reply_message_id"] == 777
+    # Мгновенное подтверждение — штамп в ТО ЖЕ сообщение, editMessageText,
+    # не отдельное новое сообщение (которое легко потерять среди прочих).
+    edits = [kw for method, kw in calls if method == "editMessageText"]
+    assert edits, "заметка не получила мгновенного подтверждения"
+    assert edits[0]["message_id"] == 777
+    assert "Заметка принята" in edits[0]["text"] and "Борис" in edits[0]["text"]
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_approve_reply_does_not_carry_a_note_reply_target(client, monkeypatch):
+    """Только заметки (verdict='note') несут chat_id/reply_message_id —
+    решению approve отвечать реплаем не нужно, оно уже подтверждается штампом
+    у кнопок (_mark_decided). Смешивать нельзя: иначе рутина попытается
+    ответить реплаем и на публикацию поста тоже, что не входит в контракт."""
+    _mod_env(monkeypatch)
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda *a, **kw: {"ok": True})
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 222}, "from": {"id": 222},
+                     "text": "Наш вариант поста",
+                     "reply_to_message": {"message_id": 888,
+                                          "text": "[черновик gnote3]\nПроект поста…"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gnote3"]
+    assert rows and rows[0]["verdict"] == "approve"
+    assert rows[0]["chat_id"] is None and rows[0]["reply_message_id"] is None
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
 def test_discard_kills_the_card_and_beats_the_silence_timeout():
     """«Выкинуть» сильнее и «придержать», и таймаута молчания.
 
