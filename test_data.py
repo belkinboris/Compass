@@ -1086,3 +1086,78 @@ def test_newsworthy_milestones_are_well_formed(deals):
                     and not e.get("id")):
                 bad.append((d["id"], e.get("kind"), "у показанной в ленте вехи нет стабильного id"))
     assert not bad, "плохо сформированные вехи: %r" % bad[:10]
+
+
+# ==================== Реестр решений ФНС (pipeline/fns_registry.py) ====================
+# pipeline/COMPANY_FINANCE_BRIEF.md, раздел «Суждение — в git-реестре».
+
+
+@pytest.fixture(scope="module")
+def fns_registry():
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent / "pipeline"))
+    import fns_registry as module
+    return module
+
+
+def test_fns_registry_inn_checksums_are_valid(fns_registry):
+    """Опечатка при переносе ИНН из результата поиска в реестр вручную не
+    должна молча уйти в базу — проверяем контрольное число по официальному
+    алгоритму ФНС для каждой записи, у которой ИНН указан."""
+    bad = [(row["company_id"], row["inn"]) for row in fns_registry.REGISTRY
+           if row.get("inn") and not fns_registry.inn_is_valid(row["inn"])]
+    assert not bad, "неверная контрольная сумма ИНН: %r" % bad
+
+
+def test_fns_registry_inn_checksum_rejects_known_bad_values(fns_registry):
+    """Проверка проверяется на себе: заведомо неверные ИНН (искажённая
+    последняя цифра, случайный набор цифр, ИП-номер, поставленный где не
+    ждали) обязаны быть отклонены — иначе `inn_is_valid` могла бы молча
+    пропускать всё подряд."""
+    assert fns_registry.inn_is_valid("7736207543")  # Яндекс — известно верный
+    assert not fns_registry.inn_is_valid("7736207544")  # искажена последняя цифра
+    assert not fns_registry.inn_is_valid("1234567890")
+    assert not fns_registry.inn_is_valid("773620754")  # 9 знаков — не бывает
+    assert not fns_registry.inn_is_valid("")
+    assert not fns_registry.inn_is_valid(None)
+
+
+def test_fns_registry_company_ids_exist_in_base(fns_registry, all_company_ids):
+    missing = [row["company_id"] for row in fns_registry.REGISTRY
+               if row["company_id"] not in all_company_ids]
+    assert not missing, "профили реестра, которых нет в базе: %r" % missing
+
+
+def test_fns_registry_company_id_is_not_duplicated(fns_registry):
+    ids = [row["company_id"] for row in fns_registry.REGISTRY]
+    dupes = {cid for cid in ids if ids.count(cid) > 1}
+    assert not dupes, "у профиля не может быть двух текущих записей: %r" % dupes
+
+
+def test_fns_registry_one_inn_is_not_confirmed_to_two_profiles(fns_registry):
+    inns = [row["inn"] for row in fns_registry.REGISTRY if row.get("inn")]
+    dupes = {inn for inn in inns if inns.count(inn) > 1}
+    assert not dupes, "один ИНН подтверждён нескольким профилям: %r" % dupes
+
+
+def test_fns_registry_decision_is_from_the_closed_list(fns_registry):
+    bad = [(row["company_id"], row["decision"]) for row in fns_registry.REGISTRY
+           if row["decision"] not in fns_registry.DECISIONS]
+    assert not bad, "решение вне закрытого списка: %r" % bad
+
+
+def test_fns_registry_every_entry_has_a_reason_and_a_date(fns_registry):
+    bad = [row["company_id"] for row in fns_registry.REGISTRY
+           if not str(row.get("reason") or "").strip() or not str(row.get("date") or "").strip()]
+    assert not bad, "запись без причины или даты: %r" % bad
+
+
+def test_fns_registry_confirmed_and_bank_entries_carry_lot_check(fns_registry, companies):
+    """Профиль-лот (несколько юрлиц под одним предметом) не может быть
+    сопоставлен ровно с одним ИНН — родня урока CLAUDE.md «Лоту вместо
+    разбиения ставится признак lot»."""
+    bad = [row["company_id"] for row in fns_registry.REGISTRY
+           if row["decision"] in ("confirmed", "bank")
+           and companies.get(row["company_id"], {}).get("lot")]
+    assert not bad, "лот сопоставлен с одним юрлицом напрямую: %r" % bad
