@@ -151,6 +151,18 @@ COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
 # видимые на сайте показатели банков за 2020-2021 год.
 FNS_REPORT_MAX_AGE_YEARS = 2
 
+# ВРЕМЕННО, по прямой просьбе владельца 22 августа 2026: «давай сначала всё
+# сделаем бесплатно, чтобы я видел как работает». Финансовый блок компании
+# показывает полную историю (все отчётные годы, все события ЕГРЮЛ, полный
+# состав участников) всем посетителям, не только платным. Когда владелец
+# увидит витрину целиком и решит границу бесплатного (см.
+# pipeline/COMPANY_FINANCE_BRIEF.md, раздел П6) — выключить флагом здесь,
+# без другой правки кода. Скачивание живой БФО (bo_file) остаётся только для
+# вошедших: это не про платность, а про то, что каждый клик — платный запрос
+# к API-ФНС (бюджет 3000/год), и открывать его анонимно нельзя ни в каком
+# режиме бесплатности.
+FNS_ALL_FREE = True
+
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки
 # 60 с» и «повторов 2» — и это молча означало худший случай 180 с ожидания с
@@ -709,7 +721,7 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
             "configured": bool(os.environ.get("API_FNS_KEY")),
             "reason": "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ",
         }
-    paid = bool(user and user.tier == UserTier.paid)
+    paid = FNS_ALL_FREE or bool(user and user.tier == UserTier.paid)
     result = []
     for entity in entities:
         all_reports = list(db.scalars(select(FinancialReport).where(
@@ -796,7 +808,9 @@ def company_fns_extract(company_id: str, entity_id: int | None = None,
 @app.get("/api/companies/{company_id}/fns/bo/{year}")
 def company_fns_bo_file(company_id: str, year: int, entity_id: int | None = None, xls: bool = False,
                         user: User | None = Depends(_current_user), db=Depends(get_db)):
-    if not user or user.tier != UserTier.paid:
+    if not user:
+        return JSONResponse({"error": "войдите, чтобы скачать отчётность"}, status_code=401)
+    if not FNS_ALL_FREE and user.tier != UserTier.paid:
         return JSONResponse({"error": "скачивание полной отчётности доступно по подписке"}, status_code=403)
     entity = _confirmed_entity(db, company_id, entity_id)
     if not entity or not (entity.inn or entity.ogrn):

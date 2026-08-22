@@ -108,7 +108,13 @@ def _seed_fns_company(company_id: str = "launch-fns-company") -> int:
         db.close()
 
 
-def test_fns_company_dossier_free_and_paid_access(client):
+def test_fns_company_dossier_free_and_paid_access(client, monkeypatch):
+    """Проверяет РЕАЛЬНУЮ границу платности — с выключенным FNS_ALL_FREE,
+    как она устроена в коде на случай, когда владелец включит её обратно
+    (pipeline/COMPANY_FINANCE_BRIEF.md, раздел П6). Сейчас флаг стоит True
+    (см. test_fns_all_free_shows_full_history_to_anonymous_visitors ниже) —
+    это не отменяет саму границу, она просто временно не применяется."""
+    monkeypatch.setattr(main, "FNS_ALL_FREE", False)
     _seed_fns_company()
     anonymous = client.get("/api/companies/launch-fns-company/fns")
     assert anonymous.status_code == 200
@@ -137,6 +143,21 @@ def test_fns_company_dossier_free_and_paid_access(client):
     assert paid["access"]["full_history"] is True
     assert len(paid["entities"][0]["reports"]) >= 2
     assert len(paid["entities"][0]["events"]) >= 4
+
+
+def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
+    """Текущее временное состояние (FNS_ALL_FREE=True, по просьбе владельца
+    22 августа 2026: «давай сначала всё сделаем бесплатно, чтобы я видел как
+    работает»). Анонимный посетитель видит ровно то же, что платный —
+    полную историю отчётов и событий, без урезания."""
+    assert main.FNS_ALL_FREE is True
+    _seed_fns_company()
+    anonymous = client.get("/api/companies/launch-fns-company/fns").json()
+    assert anonymous["access"]["paid"] is True
+    assert anonymous["access"]["full_history"] is True
+    assert len(anonymous["entities"][0]["reports"]) >= 2
+    assert anonymous["entities"][0]["has_more_reports"] is False
+    assert len(anonymous["entities"][0]["events"]) >= 4
 
 
 def test_fns_hides_reports_older_than_two_years_on_company_page(client):
