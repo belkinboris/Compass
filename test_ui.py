@@ -230,8 +230,10 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     assert "16 авг" in note.inner_text()
 
     # У карточки без единой отметки о сверке строка честно не рисуется —
-    # не выдумываем дату, которой нет.
-    visit(page, base_url, "#/deal/g91281c36")
+    # не выдумываем дату, которой нет. (g91281c36 использовалась раньше —
+    # 22 августа 2026 её прочитали и пометили reviewed/deep_researched,
+    # для этого теста понадобилась другая карточка без единой отметки.)
+    visit(page, base_url, "#/deal/c59e65efb")
     assert page.locator(".src .acct-note").count() == 0
 
 
