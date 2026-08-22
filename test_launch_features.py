@@ -160,6 +160,54 @@ def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
     assert len(anonymous["entities"][0]["events"]) >= 4
 
 
+def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(client, monkeypatch):
+    """П5 (COMPANY_FINANCE_BRIEF.md): «нашли/не нашли» — не одно состояние.
+    Профиль без сопоставленного юрлица, но с решением bank/foreign/state_org
+    в реестре, получает СВОЮ причину, а не «ещё не сопоставлено» — та фраза
+    подразумевает, что сопоставление ещё случится, а для банка/иностранца
+    оно не случится никогда."""
+    import main as main_module
+
+    for decision, expected_snippet in (
+        ("bank", "Кредитная организация"),
+        ("foreign", "Иностранное юридическое лицо"),
+        ("state_org", "Государственный орган"),
+    ):
+        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+                            lambda d=decision: {"launch-fns-category-test": {"decision": d}})
+        body = client.get("/api/companies/launch-fns-category-test/fns").json()
+        assert body["available"] is False
+        assert body["hidden"] is False
+        assert body["category"] == decision
+        assert expected_snippet in body["reason"], (decision, body["reason"])
+
+
+def test_fns_person_and_lot_categories_are_hidden_not_empty(client, monkeypatch):
+    """person/lot не бывают финансового блока вовсе — hidden=True, а не
+    честное пустое состояние с текстом (родня правилу «вкладка без данных
+    не рендерится», не «рендерится приглушённой»)."""
+    import main as main_module
+
+    for decision in ("person", "lot"):
+        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+                            lambda d=decision: {"launch-fns-hidden-test": {"decision": d}})
+        body = client.get("/api/companies/launch-fns-hidden-test/fns").json()
+        assert body["available"] is False
+        assert body["hidden"] is True
+        assert body["category"] == decision
+
+
+def test_fns_profile_without_registry_entry_keeps_the_old_generic_reason(client):
+    """Профиль, которого вообще нет в pipeline/fns_registry.py (подавляющее
+    большинство базы), не должен внезапно получить category/hidden-эффект —
+    старое честное «ещё не сопоставлено» остаётся как было."""
+    body = client.get("/api/companies/launch-fns-no-registry-entry-at-all/fns").json()
+    assert body["available"] is False
+    assert body["hidden"] is False
+    assert body["category"] is None
+    assert body["reason"] == "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ"
+
+
 def test_fns_hides_reports_older_than_two_years_on_company_page(client):
     """«Компания сегодня» не должна выглядеть моложе своей отчётности на много
     лет — правило владельца от 18 августа 2026 после жалобы на устаревшие

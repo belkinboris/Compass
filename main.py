@@ -44,6 +44,7 @@ from db.models import (
 )
 from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError
+from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
 from sqlalchemy import inspect, select, text
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
@@ -762,12 +763,35 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
         LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
     ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id)).all())
     if not entities:
+        # П5 (COMPANY_FINANCE_BRIEF.md): «нашли/не нашли» — не одно честное
+        # состояние, а минимум шесть разных судеб (реестр pipeline/
+        # fns_registry.py). Профиль без записи в реестре — тот же старый
+        # «ещё не сопоставлено», ничего не меняется для большинства базы.
+        entry = fns_registry_by_company_id().get(company_id)
+        decision = entry["decision"] if entry else None
+        category_reasons = {
+            "bank": "Кредитная организация — бухгалтерскую отчётность в общем "
+                    "порядке банки не сдают, только по отдельной форме перед "
+                    "Банком России.",
+            "foreign": "Иностранное юридическое лицо — российской отчётности "
+                       "ЕГРЮЛ/ФНС для него не существует.",
+            "state_org": "Государственный орган или государственная корпорация — "
+                         "бухгалтерскую отчётность в общем порядке не сдаёт.",
+            "person": "Сторона сделки — физическое лицо, а не юридическое.",
+            "lot": "Сторона сделки — несколько юридических лиц под одним "
+                   "названием, а не одна компания.",
+        }
+        # person/lot — блок не рендерится вовсе (родня правилу «вкладка без
+        # данных не показывается», CLAUDE.md), не пустое состояние с текстом.
+        hidden = decision in ("person", "lot")
         return {
             "available": False,
+            "hidden": hidden,
             "company_id": company_id,
             "company_name": profile.get("name") if profile else None,
             "configured": bool(os.environ.get("API_FNS_KEY")),
-            "reason": "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ",
+            "category": decision,
+            "reason": category_reasons.get(decision, "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ"),
         }
     paid = FNS_ALL_FREE or bool(user and user.tier == UserTier.paid)
     result = []

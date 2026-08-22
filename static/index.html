@@ -4537,7 +4537,15 @@ async function mountCompanyFns(companyId){
   catch(e){return;}
   // Пока ключ не подключён и юрлицо не сопоставлено, не показываем посетителю
   // техническую заглушку. После первого импорта блок появится автоматически.
-  if(!data.available){ if(data.configured) mount.innerHTML=`<div class="fns-empty reveal">Финансовые данные появятся после проверки соответствующего юридического лица.</div>`; return; }
+  if(!data.available){
+    // person/lot — блок не рендерится вовсе (это не пустое состояние, а
+    // категория, которой финансовый блок не бывает — родня правилу «вкладка
+    // без данных не показывается»). Ключ не настроен — тоже молчим, не
+    // показываем техническую заглушку до первого импорта.
+    if(data.hidden || !data.configured) return;
+    mount.innerHTML=`<div class="fns-empty reveal">${esc(data.reason||"Финансовые данные появятся после проверки соответствующего юридического лица.")}</div>`;
+    return;
+  }
   let entityIndex=0, tab="overview";
   const draw=()=>{
     const entry=data.entities[entityIndex], e=entry.entity, reports=entry.reports||[];
