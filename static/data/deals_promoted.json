@@ -31584,7 +31584,7 @@
   },
   {
    "id": "g5c3eeb06",
-   "date": "2022",
+   "date": "2023-06-16",
    "title": "Сбербанк продал австрийскую дочку Sberbank Europe AG Штефану Зочлингу",
    "buyer": "g847db8e9",
    "target": null,
@@ -31600,7 +31600,8 @@
     "target_fin": "—",
     "fin": "—",
     "context": "Остальное — около 350 млн евро — находилось в виде денежных средств на счёте выделенной из банка компании Sber Vermögensverwaltungs AG (SVAG) в Raiffeisen Bank International (RBI).",
-    "finadv": "Публично не сообщалось"
+    "finadv": "Публично не сообщалось",
+    "rationale": "“The sale of our European subsidiary, Sberbank Europe AG, to a foreign investor is driven by the current global situation,” Alexander Vedyakhin, the first deputy chairman of the board of Sberbank, said in the statement. He added that Sberbank is “satisfied with the terms of the deal” and that it is “focusing on the development of financial services in Russia, where we have 106 million loyal customers, as well as in countries that are friendly and strategically important to us.”"
    },
    "law": {
     "struct": "В распоряжении profil и ORF — по документам торгового реестра, с которыми удалось ознакомиться, — есть и подписанный договор купли-продажи между российским Сбербанком и принадлежащей Цёхлингу компанией Bepoda Beteiligungsgesellschaft mbH.",
@@ -31622,6 +31623,10 @@
     [
      "extrajournal.net",
      "https://extrajournal.net/2023/06/22/sberbank-europe-geht-an-stephan-zoechling-mit-dla-piper/"
+    ],
+    [
+     "The Moscow Times",
+     "https://www.themoscowtimes.com/2023/06/16/sberbank-sells-austrian-subsidiary-completing-exit-from-european-market-a81539"
     ]
    ],
    "extra": "Сбербанк продал 100% акций Sber Vermögensverwaltungs AG in Abwicklung (ранее Sberbank Europe AG) австрийскому предпринимателю Штефану Зочлингу. Зочлинг — владелец компании Remus, бывший инвест-банкир, работавший в группе «Базовый элемент» Дерипаски и знакомый Германа Грефа. Сделка была разрешена в соответствии с исключением ЕС для сделок, инициированных до введения санкций.",
@@ -31634,11 +31639,12 @@
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15"
+   "weekly_researched": "2026-08-15",
+   "followup_researched": "2026-08-22"
   },
   {
    "id": "g8f638d63",
-   "date": "2023",
+   "date": "2023-03-31",
    "title": "Новосталь-М приобрела металлотрейдера «Ариэль Металл»",
    "buyer": "g07db5e63",
    "target": "gc49e9dd0",
@@ -31653,8 +31659,9 @@
     "val": "—",
     "target_fin": "—",
     "fin": "—",
-    "context": "—",
-    "finadv": "Публично не сообщалось"
+    "context": "К 4 филиалам компании Ариэль Металл добавятся склады «Новосталь-М» в Краснодаре и Саратове. В общей сложности под операционным контролем Ариэль металл будут находиться 6 филиалов. Несмотря на приобретение, компания Ариэль Металл продолжит работать, используя собственную бизнес-модель, и предлагать полную линейку металлопродукции ведущих поставщиков.",
+    "finadv": "Публично не сообщалось",
+    "rationale": "Это был обоснованный стратегический шаг для обеих компаний, который преследует цель быть ближе к клиенту и обеспечивать его потребности в широком ассортименте."
    },
    "law": {
     "struct": "—",
@@ -31672,6 +31679,10 @@
     [
      "АК&М",
      "https://www.akm.ru/news/novostal_m_mozhet_kupit_ariel_metall/"
+    ],
+    [
+     "Novostal-market.ru",
+     "https://novostal-market.ru/news/14907_novostal-m/"
     ]
    ],
    "extra": "ФАС удовлетворила ходатайство о покупке.",
@@ -31680,7 +31691,8 @@
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15"
+   "weekly_researched": "2026-08-15",
+   "followup_researched": "2026-08-22"
   },
   {
    "id": "g96da922c",
@@ -31697,13 +31709,13 @@
     "sum": "17,7 млрд ₽",
     "share": "—",
     "val": "17,7 млрд руб. (по данным Financial Times: $191,5 млн), из которых 7,7 млрд руб. пошли на обслуживание долга, остальное — на оплату доли Danone.",
-    "target_fin": "—",
+    "target_fin": "Производитель молочных и растительных продуктов Health & Nutrition (H&N, бывшая «Данон Россия») нарастил выручку на 21,6% по итогам 2024 г. Об этом сообщили «Ведомостям» в компании. Объемы производства в прошлом году выросли на 20,6%.",
     "fin": "—",
-    "context": "—",
+    "context": "Компании «Эйч энд Эн» (Health & Nutrition, ранее «Данон Россия») удалось вернуть свою долю рынка, а все бренды, товарными знаками которых компания не могла продолжать пользоваться после смены собственника, успешно локализовали.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "—",
+    "struct": "7,7 миллиарда рублей из них предназначались на обслуживание долга компании, и его погасила сама компания. Покупателю, которым выступил «Вамин», оставалось заплатить 9,9 миллиарда рублей.",
     "appr": "Публично не сообщалось",
     "adv": [
      [
@@ -31718,6 +31730,18 @@
     [
      "Danone.com",
      "https://www.danone.com/content/dam/corp/global/danonecom/medias/medias-en/2024/corporatepressreleases/danone-completion-of-the-sale-edp-business-in-russia.pdf"
+    ],
+    [
+     "Meduza",
+     "https://meduza.io/news/2025/06/03/sistema-pokupateli-aktivov-natsionalizirovannoy-danone-poluchili-ih-fakticheski-besplatno-rasplativshis-dengami-samoy-kompanii"
+    ],
+    [
+     "Business-gazeta",
+     "https://m.business-gazeta.ru/news/653868"
+    ],
+    [
+     "Ведомости (2025)",
+     "https://www.vedomosti.ru/business/news/2025/03/27/1100562-viruchka-hn-virosla"
     ]
    ],
    "extra": "Сделка по продаже российского подразделения Danone (17 заводов, бренды Danissimo, Простоквашино, Растишка, Тёма и др.) компании ООО «Вамин Р» (владельцы: ООО «Вамин Татарстан» 99%, Руслан Алисултанов 1%). Бенефициар покупателя — Минтимер Мингазов. Сделка закрыта в мае 2024 года после получения Danone разрешения российских регулирующих органов 23 марта 2024 г.",
@@ -31731,7 +31755,8 @@
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-14",
-   "weekly_researched": "2026-08-14"
+   "weekly_researched": "2026-08-14",
+   "followup_researched": "2026-08-22"
   },
   {
    "id": "g7d64b437",
