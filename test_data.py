@@ -1047,3 +1047,42 @@ def test_followup_researched_never_appears_without_weekly_researched(deals):
     bad = [d["id"] for d in deals
            if d.get("followup_researched") and not d.get("weekly_researched")]
     assert not bad, "followup_researched без weekly_researched: %r" % bad
+
+
+def test_newsworthy_milestones_are_well_formed(deals):
+    """Раздел A (MILESTONES_BRIEF.md, 22 августа): веха — не вторая карточка,
+    а запись ленты, указывающая на существующее событие существующей
+    карточки, и обязана нести человеческий заголовок. `static/index.html`
+    строит строку ленты по трём полям (`newsworthy`, `headline`, `kind`) без
+    доступа к дословной цитате — если хотя бы одно из них окажется пустым
+    или `kind` не входящим в список видов, которым вообще положена отдельная
+    строка, лента либо промолчит о реальной вехе, либо покажет пустой
+    заголовок. Список видов держится в одном месте
+    (`pipeline/ingest/review.py`'s `POSTWORTHY_MILESTONE_KINDS`) и здесь не
+    дублируется — импортируется напрямую, чтобы два места не разошлись.
+    """
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent / "pipeline" / "ingest"))
+    import review
+    known_kinds = {"negotiations", "signed", "approval", "closed", "cancelled"}
+    bad = []
+    for d in deals:
+        for e in d.get("events") or []:
+            if not isinstance(e, dict) or not e.get("newsworthy"):
+                continue
+            if e.get("kind") not in known_kinds:
+                bad.append((d["id"], e.get("kind"), "неизвестный вид этапа"))
+            # Заголовка может не быть у переходных записей (часть 1, до 22
+            # августа) — это не дефект: такие вехи просто не попадают в ленту
+            # (see unifiedFeed(), фильтр по e.headline). Дефект — только если
+            # заголовок ЕСТЬ, но пустой после обрезки пробелов, или это вид,
+            # достойный ленты, а сам показ пуст.
+            headline = e.get("headline")
+            if headline is not None and not str(headline).strip():
+                bad.append((d["id"], e.get("kind"), "заголовок вехи — пустая строка"))
+            if (headline and str(headline).strip()
+                    and e.get("kind") in review.POSTWORTHY_MILESTONE_KINDS
+                    and not e.get("id")):
+                bad.append((d["id"], e.get("kind"), "у показанной в ленте вехи нет стабильного id"))
+    assert not bad, "плохо сформированные вехи: %r" % bad[:10]

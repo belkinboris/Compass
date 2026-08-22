@@ -64,6 +64,15 @@ MONTHS = {'января': 1, 'февраля': 2, 'марта': 3, 'апреля
           'июля': 7, 'августа': 8, 'сентября': 9, 'октября': 10, 'ноября': 11,
           'декабря': 12}
 
+# Раздел A (MILESTONES_BRIEF.md, 22 августа): не каждая веха достойна
+# отдельной строки в ленте и отдельного поста в канал — только эти три вида.
+# `signed` сознательно не в списке v1 (обсудить с владельцем отдельно),
+# `negotiations` никогда не был кандидатом: это состояние сделки, а не
+# новость о ней. Список закрытый и используется и в ленте (static/index.html
+# читает то же самое множество через ту же логику kind), и при сборке поста
+# в канал — единое место, а не два рассинхронизирующихся списка.
+POSTWORTHY_MILESTONE_KINDS = frozenset({'approval', 'closed', 'cancelled'})
+
 # Слово, которым подтверждается статус. Список закрытый: статус — единственное
 # поле, которое не цитируется дословно, поэтому обоснование должно быть
 # перечислимым, а не «на усмотрение».
@@ -906,27 +915,43 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         else:
             to_mark_followup.append(cid)
 
-    # --milestone <id> <kind>: этап становится вехой — снимок карточки на
-    # экране в момент этапа, отдельная видимость на сайте/в канале (см.
-    # build_snapshot/mark_milestone выше).
+    # --milestone <id> <kind> <headline>: этап становится вехой — снимок
+    # карточки на экране в момент этапа (build_snapshot/mark_milestone
+    # выше), плюс человеческий заголовок для ленты и поста в канал (раздел
+    # A, 22 августа). Заголовок пишется рутиной свободно, не дословной
+    # цитатой — это заголовок НОВОСТИ О ФАКТЕ, а не сам факт; факт уже
+    # проверен, когда событие попало в events[] (enrich.py/review.py FIXES).
     milestone_card = milestone_event = None
     if milestone:
-        mid, mkind = milestone
+        mid, mkind, mheadline = milestone
         if mid not in cards:
             refused.append((dict(id=mid, field='milestone'),
                             ['карточки %s нет ни в базе, ни в предпросмотре' % mid]))
+        elif not str(mheadline or '').strip():
+            refused.append((dict(id=mid, field='milestone'),
+                            ['заголовок вехи пуст']))
         else:
             event = mark_milestone(cards[mid], mkind)
             if event is None:
                 refused.append((dict(id=mid, field='milestone'),
                                 ['у карточки %s нет этапа %r в events[]' % (mid, mkind)]))
-            elif event.get('newsworthy'):
+            # Уже вехой, и заголовок УЖЕ есть, — вот это повторный прогон, его
+            # и отклоняем (снимок не переписываем, см. write-шаг ниже). Уже
+            # вехой, но БЕЗ заголовка — переходное состояние: часть 1 (снимок
+            # + панель этапа) ставилась до того, как заголовок вообще
+            # появился в схеме, и такой этап иначе никогда бы не получил
+            # заголовок. Разрешаем ДОПИСАТЬ заголовок задним числом, не
+            # трогая уже снятый снимок.
+            elif event.get('newsworthy') and str(event.get('headline') or '').strip():
                 refused.append((dict(id=mid, field='milestone'),
                                 ['этап %r карточки %s уже помечен вехой' % (mkind, mid)]))
             else:
                 milestone_card, milestone_event = cards[mid], event
-                print('  ВЕХА     %s этап %r -> снимок карточки как есть сейчас'
-                      % (mid, mkind))
+                print('  ВЕХА     %s этап %r -> %s, заголовок %r'
+                      % (mid, mkind,
+                         'снимок карточки как есть сейчас' if not event.get('newsworthy')
+                         else 'заголовок дописан задним числом, снимок не трогаем',
+                         mheadline.strip()))
 
     print('\nпринято %d, отклонено %d' % (len(ok), len(refused)))
     if not write:
@@ -986,8 +1011,10 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
             stamped_followup += 1
 
     if milestone_event is not None:
-        milestone_event['newsworthy'] = True
-        milestone_event['snapshot'] = build_snapshot(milestone_card, data['companies'])
+        if not milestone_event.get('newsworthy'):
+            milestone_event['newsworthy'] = True
+            milestone_event['snapshot'] = build_snapshot(milestone_card, data['companies'])
+        milestone_event['headline'] = mheadline.strip()
 
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
@@ -1009,9 +1036,10 @@ if __name__ == '__main__':
     if '--milestone' in _args:
         _mi = _args.index('--milestone')
         _rest = _args[_mi + 1:]
-        assert len(_rest) >= 2 and not _rest[0].startswith('--') and not _rest[1].startswith('--'), \
-            '--milestone требует два аргумента: <id> <kind>'
-        _milestone = (_rest[0], _rest[1])
+        assert (len(_rest) >= 3 and not _rest[0].startswith('--')
+                and not _rest[1].startswith('--')), \
+            '--milestone требует три аргумента: <id> <kind> "заголовок вехи"'
+        _milestone = (_rest[0], _rest[1], _rest[2])
         _ids = [a for a in _ids if a not in _milestone]
     sys.exit(main(write='--write' in _args,
                   mark_read=_ids if '--mark-read' in _args else (),

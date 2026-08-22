@@ -779,6 +779,60 @@ def test_status_plaque_is_colour_coded_by_stage(page, base_url):
         assert colour == colour_hex, f"{deal_id}: плашка {want_class!r} цвета {colour}, а не {colour_hex}"
 
 
+def test_milestone_appears_in_feed_without_moving_the_deal_count(page, base_url):
+    """Раздел A, 22 августа: веха — не вторая карточка, а строка ленты,
+    указывающая на ту же сделку. `TOTAL_DEALS()`/аналитика обязаны считать
+    ТОЛЬКО карточки — иначе одна сделка с двумя вехами задвоила бы себя в
+    счётчике на главной. Строка вехи находится по чипу «Веха · …» и ведёт на
+    актуальную карточку сделки (`#/deal/<id>`), а не на отдельную страницу
+    этапа — читатель кликает по НОВОСТИ и должен увидеть сделку целиком.
+    """
+    visit(page, base_url, "#/")
+    before = page.evaluate("() => TOTAL_DEALS()")
+    marker = "УНИКАЛЬНЫЙ-ТЕКСТ-ВЕХИ-ДЛЯ-ТЕСТА"
+    injected = page.evaluate("""(marker) => {
+        const d = DEALS[0];
+        d.events = Array.isArray(d.events) ? d.events : [];
+        d.events.push({kind: "approval", date: "2026-01-15", id: d.id + "-approval-test",
+                       newsworthy: true, headline: marker,
+                       snapshot: {title: d.title, sum: d.sum || null}});
+        return d.id;
+    }""", marker)
+    after = page.evaluate("() => TOTAL_DEALS()")
+    assert after == before, f"веха изменила счётчик сделок: {before} -> {after}"
+
+    # Поиск (а не постраничный список) — иначе строка вехи с датой в прошлом
+    # может просто не попасть на первую страницу ленты среди сотен карточек.
+    page.crashes.clear()
+    page.evaluate("(marker) => { feedQuery = marker; feedPage = 1; renderFeedList(); }", marker)
+    page.wait_for_timeout(300)
+    body = page.inner_text("#feedlist")
+    # `.status` рисуется CSS'ом заглавными (text-transform:uppercase) —
+    # inner_text отдаёт визуальный регистр, а не исходный текст DOM.
+    assert "ВЕХА · СОГЛАСОВАНИЕ" in body.upper(), f"чип вехи не найден в ленте: {body[:300]!r}"
+    assert marker in body
+
+    page.click(f"text={marker}")
+    page.wait_for_timeout(500)
+    ok = f"#/deal/{injected}" in page.url
+    crashes = list(page.crashes)
+
+    # `page` — общий на всю сессию (session-scoped), а хеш-переход не
+    # перезагружает JS-состояние: инъекция в DEALS[0] иначе осталась бы
+    # навсегда и задела бы ДРУГИЕ тесты этого файла (тот самый урок из
+    # CLAUDE.md — «прогон одного теста не проверка изоляции», только с
+    # мутацией глобального массива вместо DOM/модалки). Откатываем ДО assert,
+    # чтобы откат сработал даже при падении проверок выше.
+    page.evaluate("""() => {
+        const d = DEALS.find(x => Array.isArray(x.events) && x.events.some(e => e.id && e.id.endsWith("-approval-test")));
+        if(d) d.events = d.events.filter(e => !(e.id && e.id.endsWith("-approval-test")));
+        feedQuery = ""; feedPage = 1; renderFeedList();
+    }""")
+
+    assert ok, f"клик по вехе увёл не на карточку сделки: {page.url}"
+    assert not crashes, crashes[:3]
+
+
 def test_preview_route_renders_a_pending_card(page, base_url, browser):
     """Черновик виден по прямой ссылке и НЕ виден в ленте.
 

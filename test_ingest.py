@@ -2314,11 +2314,11 @@ def test_mark_milestone_finds_event_by_kind_and_assigns_a_stable_id():
 
 
 def test_review_cli_milestone_writes_newsworthy_flag_and_snapshot(tmp_path, monkeypatch):
-    """Сквозной прогон: `--milestone <id> <kind> --write` ставит `newsworthy`
-    и снимок ОДИН раз; повторный вызов на уже помеченном этапе — честный
-    отказ, а не тихая перезапись снимка (тот же принцип, что и остальные
-    отметки review.py — идемпотентность против случайного повторного
-    прогона)."""
+    """Сквозной прогон: `--milestone <id> <kind> <headline> --write` ставит
+    `newsworthy`, снимок и заголовок ОДИН раз; повторный вызов на уже
+    помеченном этапе — честный отказ, а не тихая перезапись снимка (тот же
+    принцип, что и остальные отметки review.py — идемпотентность против
+    случайного повторного прогона)."""
     import json as _json
     import review
     base = {"deals": [{"id": "d3", "title": "Сделка X", "type": "M&A",
@@ -2335,7 +2335,7 @@ def test_review_cli_milestone_writes_newsworthy_flag_and_snapshot(tmp_path, monk
     monkeypatch.setattr(review, "PENDING", str(pending_path))
     monkeypatch.setattr(review, "FIXES", [])
 
-    rc = review.main(write=True, milestone=("d3", "approval"))
+    rc = review.main(write=True, milestone=("d3", "approval", "Согласование получено по сделке X"))
     assert rc == 0
     written = _json.loads(data_path.read_text(encoding="utf-8"))
     card = written["deals"][0]
@@ -2343,14 +2343,113 @@ def test_review_cli_milestone_writes_newsworthy_flag_and_snapshot(tmp_path, monk
     assert event["newsworthy"] is True
     assert event["snapshot"]["title"] == "Сделка X"
     assert event["snapshot"]["status"] == "Согласование получено"
+    assert event["headline"] == "Согласование получено по сделке X"
 
     # тот же вызов повторно — отклонён, снимок не переписан
     written["deals"][0]["events"][1]["snapshot"]["title"] = "не трогать"
     data_path.write_text(_json.dumps(written), encoding="utf-8")
-    rc2 = review.main(write=True, milestone=("d3", "approval"))
+    rc2 = review.main(write=True, milestone=("d3", "approval", "Другой заголовок"))
     assert rc2 == 1
     unchanged = _json.loads(data_path.read_text(encoding="utf-8"))
     assert unchanged["deals"][0]["events"][1]["snapshot"]["title"] == "не трогать"
+
+
+def test_review_cli_milestone_refuses_an_empty_headline(tmp_path, monkeypatch):
+    """Заголовок вехи обязателен — пустая строка не должна тихо создать
+    веху без человеческого текста для ленты и поста."""
+    import json as _json
+    import review
+    base = {"deals": [{"id": "d4", "title": "Сделка Y", "type": "M&A",
+                        "status": "Закрыта", "sum": "—", "ind": "Не определена",
+                        "events": [{"kind": "closed", "date": "2026-08-20"}]}],
+            "companies": {}}
+    data_path = tmp_path / "milestone_base2.json"
+    pending_path = tmp_path / "milestone_pending2.json"
+    data_path.write_text(_json.dumps(base), encoding="utf-8")
+    pending_path.write_text(_json.dumps({"cards": []}), encoding="utf-8")
+    monkeypatch.setattr(review, "DATA", str(data_path))
+    monkeypatch.setattr(review, "PENDING", str(pending_path))
+    monkeypatch.setattr(review, "FIXES", [])
+
+    rc = review.main(write=True, milestone=("d4", "closed", "   "))
+    assert rc == 1
+    unchanged = _json.loads(data_path.read_text(encoding="utf-8"))
+    assert "newsworthy" not in unchanged["deals"][0]["events"][0]
+
+
+def test_review_cli_milestone_backfills_headline_without_retaking_snapshot(tmp_path, monkeypatch):
+    """До 22 августа `--milestone` ставил `newsworthy`/`snapshot`, но заголовка
+    в схеме ещё не было — часть 1 уже так пометила два события в живой базе.
+    Если бы «уже newsworthy» отклоняло ВСЕГДА, эти события не смогли бы
+    получить заголовок никогда. Дописать заголовок задним числом можно, но
+    снимок при этом переснимать нельзя — он обязан остаться снимком МОМЕНТА
+    первой отметки, а не сегодняшнего дня."""
+    import json as _json
+    import review
+    base = {"deals": [{"id": "d5", "title": "Сделка Z", "type": "M&A",
+                        "status": "Закрыта", "sum": "старая сумма", "ind": "Не определена",
+                        "events": [{"kind": "closed", "date": "2026-08-01",
+                                    "id": "d5-closed", "newsworthy": True,
+                                    "snapshot": {"title": "Сделка Z", "sum": "старая сумма"}}]}],
+            "companies": {}}
+    data_path = tmp_path / "milestone_base3.json"
+    pending_path = tmp_path / "milestone_pending3.json"
+    data_path.write_text(_json.dumps(base), encoding="utf-8")
+    pending_path.write_text(_json.dumps({"cards": []}), encoding="utf-8")
+    monkeypatch.setattr(review, "DATA", str(data_path))
+    monkeypatch.setattr(review, "PENDING", str(pending_path))
+    monkeypatch.setattr(review, "FIXES", [])
+
+    # карточку тем временем обновили — сумма сегодня другая
+    base["deals"][0]["sum"] = "новая сумма"
+    data_path.write_text(_json.dumps(base), encoding="utf-8")
+
+    rc = review.main(write=True, milestone=("d5", "closed", "Сделка Z закрыта"))
+    assert rc == 0
+    written = _json.loads(data_path.read_text(encoding="utf-8"))
+    event = written["deals"][0]["events"][0]
+    assert event["headline"] == "Сделка Z закрыта"
+    assert event["snapshot"]["sum"] == "старая сумма", "снимок задним числом переснят — потеряна честность момента"
+
+
+def test_postworthy_milestone_kinds_is_the_closed_v1_list():
+    """Раздел A: список видов, достойных отдельной строки в ленте и поста в
+    канал, закрытый и узкий — `signed` сознательно не в v1, `negotiations`
+    никогда не был кандидатом (это состояние сделки, а не новость о ней)."""
+    import review
+    assert review.POSTWORTHY_MILESTONE_KINDS == {"approval", "closed", "cancelled"}
+
+
+def test_enrich_does_not_duplicate_an_event_of_the_same_kind_and_date():
+    """Раздел A требует проверить, есть ли у enrich.py защита от дубля
+    события того же вида (два издания об одном одобрении ФАС = одно
+    событие), — она уже есть, ключ дедупа `(kind, date)`: та же новость в
+    тот же день не добавляет вторую строку в `events[]`."""
+    import enrich
+    deal = {"id": "d6", "title": "Сделка", "type": "M&A",
+            "events": [{"kind": "approval", "date": "2026-08-10"}]}
+    item = {"title": "Сделка получила одобрение ФАС", "url": "https://x.example/a",
+            "date": "2026-08-10", "source_id": "x"}
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), \
+        "то же (kind, date) породило вторую запись события"
+
+
+def test_enrich_allows_a_second_event_of_the_same_kind_on_a_different_date():
+    """Дедуп по (kind, date) намеренно НЕ мешает двум РАЗНЫМ одобрениям одной
+    сделки в разные даты (например, ФАС и отдельно правкомиссия) — это
+    сознательное, уже задокументированное решение (комментарий в
+    enrich.proposals), а не пропуск в защите. Раздел A просил ПРОВЕРИТЬ, что
+    защита есть и что она не ломает этот легитимный случай, — фиксируем
+    поведение тестом, а не меняем его."""
+    import enrich
+    deal = {"id": "d7", "title": "Сделка", "type": "M&A",
+            "events": [{"kind": "approval", "date": "2026-08-10"}]}
+    item = {"title": "Сделка получила одобрение регулятора", "url": "https://x.example/b",
+            "date": "2026-08-20", "source_id": "x"}
+    props = enrich.proposals(deal, item, {}, {})
+    assert any(p[0] == "event" for p in props), \
+        "второе одобрение в другую дату обязано остаться отдельным событием"
 
 
 def _write_hold_file(tmp_path, name, drafts):
