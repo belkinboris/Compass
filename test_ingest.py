@@ -63,6 +63,19 @@ def test_filter_is_not_a_keyword_match():
         "Акции «Ленты» подорожали на 5% после покупки сети «Монетка»")
 
 
+def test_filter_rejects_a_company_buying_back_its_own_bonds():
+    """Выкуп компанией СОБСТВЕННЫХ облигаций по оферте — казначейская
+    операция с долгом, не сделка со сменой контроля: эмитент не может
+    купить сам себя. Найдено 21 августа — карточка «Норникель выкупил по
+    оферте... облигаций» дошла до pending.json с buyer=эмитент,
+    asset=сами облигации (бессмыслица). Выкуп ДОЛИ/АКЦИЙ (buyback) —
+    профильная сделка и должен по-прежнему проходить фильтр."""
+    assert not classify.looks_like_deal(
+        '«Норникель» выкупил по оферте 95,5% выпуска облигаций '
+        'с погашением в мае 2030 г. на $477,65 млн')
+    assert classify.looks_like_deal('«Норникель» выкупил 10% собственных акций')
+
+
 # ---------- сопоставление «новое или уже есть» ----------
 
 def test_match_finds_the_same_deal(base):
@@ -2338,6 +2351,103 @@ def test_review_cli_milestone_writes_newsworthy_flag_and_snapshot(tmp_path, monk
     assert rc2 == 1
     unchanged = _json.loads(data_path.read_text(encoding="utf-8"))
     assert unchanged["deals"][0]["events"][1]["snapshot"]["title"] == "не трогать"
+
+
+def _write_hold_file(tmp_path, name, drafts):
+    import json as _json
+    hold_dir = tmp_path / "data" / "inbox" / "hold"
+    hold_dir.mkdir(parents=True, exist_ok=True)
+    (hold_dir / name).write_text(_json.dumps({"drafts": drafts}), encoding="utf-8")
+    return hold_dir
+
+
+def test_raw_screen_deduplicates_the_same_draft_across_hold_files(tmp_path, monkeypatch):
+    """Тот же дефект, что чинили в approve.py: недорешённый черновик
+    переносится в КАЖДЫЙ следующий дневной hold-файл, пока по нему нет
+    решения — `all_raw_drafts()` обязан вернуть его один раз, а не по разу
+    за файл, иначе список на отсев дублируется вместе с решениями."""
+    import raw_screen
+    draft = {"draft_id": "dX", "title": "Один и тот же черновик", "date": "2026-08-01"}
+    _write_hold_file(tmp_path, "2026-08-18.json", [draft])
+    _write_hold_file(tmp_path, "2026-08-19.json", [draft])
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    out = raw_screen.all_raw_drafts()
+    assert len(out) == 1
+
+
+def test_raw_screen_undecided_skips_id_title_and_batch_duplicates(tmp_path, monkeypatch):
+    """`undecided()` обязан фильтровать теми же тремя признаками, что
+    `send_drafts.build_plan()` — решено по draft_id, решено по заголовку
+    (id меняется от прогона к прогону), дубль внутри партии."""
+    import promote
+    import raw_screen
+    drafts = [
+        {"draft_id": "d1", "title": "Решено по id"},
+        {"draft_id": "d2", "title": "Решено по заголовку — новый id"},
+        {"draft_id": "d3", "title": "Дубль внутри партии", "dup_in_batch": True},
+        {"draft_id": "d4", "title": "Свежее, никем не тронуто"},
+    ]
+    _write_hold_file(tmp_path, "2026-08-21.json", drafts)
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    state = {"decided_raw": {"d1": "drop"},
+             "raw_titles": {promote.raw_key("Решено по заголовку — новый id"): "auto-drop"}}
+    left = raw_screen.undecided(state)
+    assert [d["draft_id"] for d in left] == ["d4"]
+
+
+def test_raw_screen_drop_writes_auto_drop_and_blocks_regate(tmp_path, monkeypatch):
+    """`--drop --write` метит решённым ОТДЕЛЬНЫМ от ручного 'drop' значением
+    ('auto-drop' — аудит различает, кто решил), и то же самое сырьё,
+    передрафченное завтра под новым draft_id с тем же заголовком, не должно
+    заново пройти ворота `promote.py` (rejected_titles)."""
+    import promote
+    import raw_screen
+    draft = {"draft_id": "dW", "title": "Выкуп, каравай и икона в банкетном зале"}
+    _write_hold_file(tmp_path, "2026-08-21.json", [draft])
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    state_path = tmp_path / "moderation_state.json"
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+
+    rc = raw_screen.apply_drop(["dW"], "свадебный гайд, не сделка", write=True)
+    assert rc == 0
+    state = promote.load_state()
+    assert state["decided_raw"]["dW"] == "auto-drop"
+    title_key = promote.raw_key(draft["title"])
+    assert state["raw_titles"][title_key] == "auto-drop"
+
+    # то же сырьё под новым draft_id, тем же заголовком, назавтра —
+    # rejected_titles (promote.py) обязан его знать
+    rejected = {k for k, v in state.get("raw_titles", {}).items()
+               if v == "drop" or v == "auto-drop" or str(v).startswith("enrich:")}
+    assert title_key in rejected
+
+
+def test_raw_screen_enrich_marks_decided_without_dropping_the_story(tmp_path, monkeypatch):
+    """`--enrich draft_id=deal_id` метит черновик решённым (не спросит
+    повторно), но НЕ вердиктом 'drop' — это дополнение к уже известной
+    сделке (случай Alumni Partners/«Полекс»: объявление консультанта),
+    аудит обязан отличать этот случай от мусора."""
+    import promote
+    import raw_screen
+    draft = {"draft_id": "dE", "title": "Юрфирма сопровождала сделку по «Полексу»"}
+    _write_hold_file(tmp_path, "2026-08-21.json", [draft])
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    state_path = tmp_path / "moderation_state.json"
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+
+    rc = raw_screen.apply_enrich([("dE", "gpoleks123")], write=True)
+    assert rc == 0
+    state = promote.load_state()
+    assert state["decided_raw"]["dE"] == "enrich:gpoleks123"
+
+
+def test_raw_screen_refuses_dropping_an_unknown_draft_id(tmp_path, monkeypatch):
+    """Опечатка в id не должна молча ничего не сделать — честный отказ,
+    как и у остальных отметок review.py/approve.py."""
+    import raw_screen
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    rc = raw_screen.apply_drop(["не-существует"], "проверка", write=True)
+    assert rc == 1
 
 
 def test_weekly_researched_stamp_requires_deep_researched_first():
