@@ -3703,34 +3703,6 @@
    ]
   },
   {
-   "draft_id": "d81407969",
-   "title": "Выкуп, каравай и икона в банкетном зале. Какие свадьбы сейчас в моде и сколько они стоят",
-   "date": "2026-08-16",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/relations/2026/08/16/76589657/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d33946020",
    "title": "ALUMNI Partners сопровождала сделку по продаже производителя упаковки «Полекс Урал»   🤝 ALUMNI Partners консультировала продавца в связи с продажей группы компаний «Полекс Урал» , работающей в сфере п",
    "date": "2026-08-17",
@@ -3753,45 +3725,6 @@
     "seller": null
    },
    "ind": "Производство тары",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45109819",
-   "title": "CNN: Белый дом перешел к стратегии «постепенного удушения» Ирана",
-   "date": "2026-08-19",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8892478"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-19",
-     "title": "Переговоры",
-     "note": "Президент США Дональд Трамп приказал высшим посланникам прекратить все контакты с Ираном, сообщает CNN со ссылкой на источник. По данным телеканала, Вашингтон сменил стратегию: вместо плана «разгромить Иран как можно скорее» Соединенные Штаты переходят к…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8892478"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -3974,73 +3907,6 @@
    ]
   },
   {
-   "draft_id": "d14208578",
-   "title": "РТК-ЦОД нарастит инвестиции в развитие «Облака КИИ» до 1 млрд рублей на фоне всплеска спроса",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/837809"
-    ]
-   ],
-   "sum": "1 млрд ₽",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-18",
-     "title": "Переговоры",
-     "note": "Основные статьи: Что такое IaaS Критическая информационная инфраструктура России 2026 РТК-ЦОД нарастит инвестиции в развитие «Облака КИИ» до 1 млрд рублей на фоне всплеска спроса РТК-ЦОД (Центр Хранения Данных, ЦХД) ранее Ростелеком-ЦОД дополнительно…",
-     "source": [
-      "web:tadviser.ru",
-      "https://www.tadviser.ru/a/837809"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30859795",
-   "title": "Фонд основателей РБК потратит $2 млн на выкуп собственных акций",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-08-18_fond_osnovatelej_rbk_potratit"
-    ]
-   ],
-   "sum": "$2 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d78736297",
    "title": "РТК-ЦОД увеличивает инвестиции в масштабирование инфраструктуры «Облака КИИ»",
    "date": "2026-08-18",
@@ -4075,10 +3941,8 @@
    },
    "ind": "ИТ и интернет",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «РТК-ЦОД нарастит инвестиции в развитие «Облака КИИ» до 1 млр» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -4108,7 +3972,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «РТК-ЦОД нарастит инвестиции в развитие «Облака КИИ» до 1 млр» — второе издание, в группу не шлём"
+    "та же новость, что «РТК-ЦОД увеличивает инвестиции в масштабирование инфраструкт» — второе издание, в группу не шлём"
    ]
   },
   {
@@ -4166,118 +4030,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d20213443",
-   "title": "Продажи новых электромобилей Tesla в России рухнули на 80% в июле",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/18/prodazhi-novih-jelektromobilej"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61738831",
-   "title": "Мошенники начали продавать фейковые билеты на концерт Канье Уэста в Петербурге",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/18/moshenniki-nachali-prodavat"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46908246",
-   "title": "В Петербурге будут выкупать работы студентов из-за «сценарного голода» в кино",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/18/v-peterburge-budut-vikupat"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36613986",
-   "title": "Перекупщики продают билеты на шоу Канье Уэста в Петербурге за 385 тысяч рублей",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/18/kruche-shhelkunchika-kto-zarabotaet"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -4368,34 +4120,6 @@
    ]
   },
   {
-   "draft_id": "d71370798",
-   "title": "«Биологический возраст» может поставить под угрозу инвестиционный бум в сфере долголетия",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/biologicheskij-vozrast-mozhet-postavit-pod-ugrozu-investitsionnyj-bum-v-sfere-dolgoletiya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d45004215",
    "title": "Groq привлек $350 млн на фоне перехода от разработки чипов к неоклауд-бизнесу",
    "date": "2026-08-18",
@@ -4461,62 +4185,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d60232105",
-   "title": "Эксперт предупредил о краже данных карт под видом продажи формы и гаджетов",
-   "date": "2026-08-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2151308/2026-08-19/ekspert-predupredil-o-krazhe-dannykh-kart-pod-vidom-prodazhi-formy-i-gadzhetov-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52574433",
-   "title": "Nestle грозит смена собственника в России — ранее по такому пути прошли Danone и «Балтика»",
-   "date": "2026-08-18",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/nestle-grozit-smena-sobstvennika-v-rossii-ranee-po-takomu-puti-proshli-danone-i-baltika/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -6504,7 +6172,7 @@
    ]
   },
   {
-   "draft_id": "d55006029",
+   "draft_id": "d64326819",
    "title": "В Севастополе в субботу топливо будут продавать по QR-кодам и свободно",
    "date": "2026-08-21",
    "src": [
@@ -6532,7 +6200,7 @@
    ]
   },
   {
-   "draft_id": "d41269632",
+   "draft_id": "d87321541",
    "title": "В Омске выставили на продажу 17 пунктов выдачи Wildberries",
    "date": "2026-08-21",
    "src": [
