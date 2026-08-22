@@ -597,7 +597,9 @@ class ModerationDecision(Base):
     __tablename__ = "moderation_decisions"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    deal_id: Mapped[str] = mapped_column(String(40), index=True)
+    # 80, не 40: у вехи deal_id несёт "<id сделки>~<вид этапа>" (раздел A,
+    # 22 августа), длиннее одного голого id сделки.
+    deal_id: Mapped[str] = mapped_column(String(80), index=True)
     verdict: Mapped[str] = mapped_column(String(16))          # approve | hold
     edited_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     decided_by: Mapped[str] = mapped_column(String(80))       # chat_id решившего

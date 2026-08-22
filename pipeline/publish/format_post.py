@@ -236,6 +236,49 @@ def render(deal, companies, updates=(), today=None):
     return '\n'.join(lines)
 
 
+def render_milestone(deal, event):
+    """Текст ОТДЕЛЬНОГО поста-вехи (раздел A, 22 августа) — не правка живого
+    поста, а новое сообщение об одном подтверждённом этапе сделки
+    (`review.POSTWORTHY_MILESTONE_KINDS`: согласование, закрытие, срыв).
+
+    ЧЕСТНОСТЬ МОМЕНТА. Поля берутся из СНИМКА события (`event['snapshot']`,
+    записан `review.build_snapshot()` в момент `--milestone`), а не из
+    текущих полей сделки: к моменту публикации карточка могла обогатиться
+    более поздними фактами (например, уточнённой ценой закрытия), а веха
+    обязана честно показывать то, что было известно НА МОМЕНТ ЭТОГО ЭТАПА,
+    а не задним числом — тот же принцип, что и у панели «Карточка на
+    момент этого этапа» на странице этапа.
+    """
+    snap = event.get('snapshot') or {}
+    lines = ['📌 <b>%s</b>' % esc(event.get('headline') or '')]
+    lines.append('')
+    lines.append('Сделка: %s' % esc(snap.get('title') or deal.get('title')))
+
+    parties = []
+    if has(snap.get('seller')):
+        parties.append('Продавец: %s' % esc(snap['seller']))
+    if has(snap.get('asset')):
+        parties.append('Предмет: %s' % esc(snap['asset']))
+    if has(snap.get('buyer')):
+        parties.append('Покупатель: %s' % esc(snap['buyer']))
+    if parties:
+        lines.append('')
+        lines += parties
+
+    facts = []
+    if has(snap.get('sum')):
+        facts.append('Сумма: %s' % esc(snap['sum']))
+    if has(snap.get('status')):
+        facts.append('Статус: %s' % esc(snap['status']))
+    if facts:
+        lines.append('')
+        lines += facts
+
+    lines.append('')
+    lines.append('<a href="%s/#/deal/%s">Карточка сделки</a>' % (SITE, deal['id']))
+    return '\n'.join(lines)
+
+
 def changes(old, new):
     """Что изменилось между версиями карточки — человеческими словами."""
     label = {'sum': 'сумма', 'buyer': 'покупатель', 'buyer_name': 'покупатель',

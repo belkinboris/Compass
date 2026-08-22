@@ -106,6 +106,21 @@ def _create_account_tables():
                     conn.execute(text("ALTER TABLE moderation_decisions ADD COLUMN reply_message_id INTEGER"))
         except Exception as e:
             logger.error("не удалось добавить chat_id/reply_message_id в moderation_decisions: %s", e)
+        # deal_id расширен с 40 до 80 знаков 22 августа: у вехи это
+        # "<id сделки>~<вид этапа>", длиннее одного голого id. SQLite VARCHAR
+        # не проверяется движком вообще (хранится как TEXT) — расширять там
+        # нечего; Postgres проверяет строго, и без ALTER запись веха-решения
+        # там упала бы с ошибкой длины, которую на SQLite никто бы не увидел.
+        # ALTER COLUMN TYPE — тоже синтаксис только Postgres, SQLite его не
+        # поддерживает вовсе — тот же диалект-независимый приём: действие
+        # только там, где оно применимо и нужно.
+        try:
+            with engine.begin() as conn:
+                if conn.dialect.name == "postgresql":
+                    conn.execute(text(
+                        "ALTER TABLE moderation_decisions ALTER COLUMN deal_id TYPE VARCHAR(80)"))
+        except Exception as e:
+            logger.error("не удалось расширить deal_id в moderation_decisions: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
 
@@ -978,7 +993,13 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             _send_queue_batch(chat, kind)
             return {"ok": True}
 
-        match = re.match(r"^mod:([\w-]{1,40}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
+        # [\w~-]: `~` — разделитель id сделки и вида этапа у вехи
+        # («<id>~<kind>», раздел A, 22 августа) — id сделок сами бывают с
+        # дефисами, поэтому обычный `-` для разделителя не годится, а `:`
+        # уже занят разбором `mod:<id>:<вердикт>` целиком. Длина увеличена
+        # с 40 до 60 — комбинация «id сделки + ~ + вид этапа» бывает длиннее
+        # одного голого id.
+        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
                          str(callback.get("data") or ""))
         if match and match.group(2) == "edit" and _is_reviewer(from_id):
             # «Изменить» — не вердикт, а подсказка, как продиктовать правку:

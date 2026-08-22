@@ -1023,6 +1023,152 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
     assert written["telegram_posts"][seeded_deal["id"]] == 777, "null должен смениться на настоящий message_id"
 
 
+# ---------- вехи в канале (раздел A, 22 августа) ----------
+
+def test_render_milestone_uses_the_snapshot_not_live_fields():
+    """Пост-веха обязан показывать то, что было известно НА МОМЕНТ ЭТОГО
+    ЭТАПА (снимок события), а не текущие поля сделки — иначе, если карточку
+    обогатили позже более точной суммой, старая веха молча «переписалась бы
+    задним числом» при каждом повторном рендере."""
+    deal = {"id": "d1", "title": "СЕГОДНЯШНИЙ заголовок сделки", "sum": "999 млрд ₽ (сегодня)"}
+    event = {"kind": "closed", "headline": "Сделка закрыта",
+             "snapshot": {"title": "Заголовок на момент этапа", "sum": "100 млн ₽ (на момент)",
+                         "status": "Закрыта", "buyer": "ООО «Покупатель»"}}
+    text = format_post.render_milestone(deal, event)
+    assert "Заголовок на момент этапа" in text
+    assert "100 млн ₽ (на момент)" in text
+    assert "СЕГОДНЯШНИЙ" not in text and "999 млрд" not in text
+    assert "ООО «Покупатель»" in text
+    assert "/#/deal/d1" in text
+
+
+def test_milestone_candidates_requires_headline_and_postworthy_kind():
+    """Веха без заголовка (переходное состояние — снимок части 1 без headline,
+    см. review.py) или неизвестного/не-постворси вида (negotiations/signed) —
+    не кандидат: без заголовка нечего писать в посте, а «Переговоры» вообще
+    не входят в список видов, достойных отдельного поста."""
+    deals = [{"id": "d2", "events": [
+        {"kind": "approval", "newsworthy": True, "headline": None, "id": "d2-approval"},
+        {"kind": "negotiations", "newsworthy": True, "headline": "Заголовок", "id": "d2-negotiations"},
+        {"kind": "closed", "newsworthy": True, "headline": "Сделка закрыта", "id": "d2-closed"},
+    ]}]
+    out = send_telegram.milestone_candidates(deals, {})
+    assert [e["id"] for _d, e in out] == ["d2-closed"]
+
+
+def test_milestone_candidates_dedups_by_stage_posts():
+    """Веха, у которой `event['id']` уже есть в `stage_posts`, — больше не
+    кандидат никогда, независимо от решений в консоли: тот же приём, что
+    `posts[did]` для обычных постов, только на уровне одного события."""
+    deals = [{"id": "d3", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Х", "id": "d3-closed"},
+    ]}]
+    assert send_telegram.milestone_candidates(deals, {}) != []
+    assert send_telegram.milestone_candidates(deals, {"d3-closed": {"message_id": 1}}) == []
+
+
+def test_milestone_decisions_parses_the_tilde_separated_id():
+    """Разделитель `~` в `deal_id` решения — не двоеточие (занято разбором
+    `mod:<id>:<вердикт>`) и не дефис (сами id сделок бывают с дефисами:
+    `gmru-nspk-privatization` резался бы неоднозначно). `event_id`
+    восстанавливается конкатенацией через дефис — тот же формат, что уже
+    присваивает `mark_milestone()` в review.py."""
+    decisions = [
+        {"id": 1, "deal_id": "gmru-nspk-privatization~approval", "verdict": "post_yes"},
+        {"id": 2, "deal_id": "plain-card-id", "verdict": "post_yes"},   # обычный пост — не веха
+        {"id": 3, "deal_id": "d4~closed", "verdict": "post_no"},
+    ]
+    by_event = send_telegram.milestone_decisions(decisions)
+    assert by_event == {
+        "gmru-nspk-privatization-approval": ("post_yes", 1),
+        "d4-closed": ("post_no", 3),
+    }
+
+
+def test_plan_milestones_sends_on_silence_holds_before_it_and_respects_post_no():
+    """Три ветки одной функции: явное «пост в канал» — отправить сразу;
+    молчание меньше суток — придержать; молчание МЕНЬШЕ суток, но БЕЗ
+    решения, — тоже придержать; явное «без поста» — не отправлять никогда,
+    но decision id всё равно идёт на consume (иначе кнопка будет спрашивать
+    о себе на каждом прогоне)."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime(2026, 8, 22, 12, 0, tzinfo=timezone.utc)
+    old = (now - timedelta(hours=30)).isoformat()
+    fresh = (now - timedelta(hours=2)).isoformat()
+    deals = [{"id": "d5", "events": [
+        {"kind": "approval", "newsworthy": True, "headline": "Одобрено", "id": "d5-approval",
+         "milestone_drafted_at": old},
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыто", "id": "d5-closed",
+         "milestone_drafted_at": fresh},
+    ]}, {"id": "d6", "events": [
+        {"kind": "cancelled", "newsworthy": True, "headline": "Сорвалось", "id": "d6-cancelled",
+         "milestone_drafted_at": old},
+    ]}]
+    decisions = [{"id": 9, "deal_id": "d6~cancelled", "verdict": "post_no"}]
+    send, hold, discard_ids, sent_ids = send_telegram.plan_milestones(deals, {}, decisions, now)
+    assert [e["id"] for _d, e in send] == ["d5-approval"], "истёкшее молчание без решения — отправить"
+    hold_ids = {e["id"] for _d, e, *_ in hold}
+    assert "d5-closed" in hold_ids, "молчание ещё не истекло — придержать"
+    assert discard_ids == [9]
+    assert sent_ids == []
+
+
+def test_main_sends_an_approved_milestone_and_records_dedup(monkeypatch, tmp_path):
+    """Сквозной прогон: явное решение «пост в канал» из консоли шлёт веху
+    ОТДЕЛЬНЫМ сообщением (не правкой живого поста), записывает id в
+    `telegram_milestones` и консуммирует решение — повторный прогон с теми
+    же данными больше не считает эту веху кандидатом. Сама сделка НАРОЧНО
+    без суммы/сторон (`sendable()` вернёт False) — иначе в этом же прогоне
+    ушёл бы ещё и её обычный первый пост, и тест проверял бы два сообщения
+    сразу вместо одной вехи."""
+    deal = {"id": "dmilestone1", "title": "Сделка Х", "type": "M&A", "ind": "Не определена",
+            "events": [{"kind": "closed", "newsworthy": True, "headline": "Сделка Х закрыта",
+                       "id": "dmilestone1-closed",
+                       "snapshot": {"title": "Сделка Х", "status": "Закрыта",
+                                    "sum": "500 млн ₽", "buyer": "ООО «Покупатель Х»"},
+                       "milestone_drafted_at": "2020-01-01T00:00:00+00:00"}]}
+    real_data = {"deals": [deal], "companies": {}, "telegram_posts": {}, "telegram_milestones": {}}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+
+    consumed = []
+    monkeypatch.setattr(send_telegram.approve, "fetch_decisions",
+                        lambda: ([{"id": 5, "deal_id": "%s~closed" % deal["id"], "verdict": "post_yes"}],
+                                 ("https://site", "тайна")))
+    monkeypatch.setattr(send_telegram.approve, "consume",
+                        lambda handle, ids: consumed.extend(ids))
+
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 4242}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert len(fake.calls) == 1
+    url, payload = fake.calls[0]
+    assert "sendMessage" in url
+    assert "Сделка Х закрыта" in payload["text"]
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_milestones"]["%s-closed" % deal["id"]]["message_id"] == 4242
+    assert consumed == [5]
+    # ...и в живом посте сделки НИЧЕГО не менялось — это отдельное сообщение.
+    assert not written["telegram_posts"]
+
+
+def test_send_milestone_drafts_uses_a_tilde_separated_callback():
+    """Кнопки черновика вехи несут `deal_id~kind` — тот же вид id, который
+    main.py режет по `~`, а не по `:` (занят) и не по `-` (id сделок сами
+    бывают с дефисами)."""
+    import send_milestone_drafts
+    kb = send_milestone_drafts.milestone_keyboard("gmru-nspk-privatization", "approval")
+    buttons = kb["inline_keyboard"][0]
+    assert buttons[0]["callback_data"] == "mod:gmru-nspk-privatization~approval:post_ok"
+    assert buttons[1]["callback_data"] == "mod:gmru-nspk-privatization~approval:post_no"
+
+
 def test_seed_backlog_marks_every_existing_deal_and_nothing_else(tmp_path, monkeypatch):
     """Каждая существующая на момент запуска сделка получает telegram_posts[id]
     = null; уже присутствовавшие записи (например, реально опубликованные)

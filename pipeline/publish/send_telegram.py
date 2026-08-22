@@ -90,9 +90,12 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
+import approve  # noqa: E402  (fetch_decisions/consume — тот же мост, что у карточек)
 import check_post  # noqa: E402
 import format_post  # noqa: E402
+import review  # noqa: E402  (POSTWORTHY_MILESTONE_KINDS — один список на пайплайн и сайт)
 import telegram_endpoint  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -220,6 +223,102 @@ def sendable(deal):
         or (deal.get('target') or deal.get('asset') or deal.get('asset_id'))
 
 
+# ---------- ВЕХИ: отдельные посты по закрытому списку видов (раздел A) ------
+# Молчание сутки = веха выходит, тот же принцип, что у карточек предпросмотра
+# (approve.py's SILENCE_HOURS). Отсчёт — от `event['milestone_drafted_at']`,
+# который ставит pipeline/ingest/send_milestone_drafts.py в момент отправки
+# черновика в консоль, а не от даты самого этапа (`event['date']`) — молчание
+# считается с момента, когда человек МОГ увидеть черновик, а не с момента
+# самого события.
+MILESTONE_SILENCE_HOURS = 24
+
+
+def milestone_candidates(deals, stage_posts):
+    """Вехи (`newsworthy` + `headline` + вид из закрытого списка), которым ещё
+    не отправлен отдельный пост.
+
+    Дедуп — по `event['id']` в `stage_posts` (`data['telegram_milestones']`,
+    отдельный от `telegram_posts` словарь верхнего уровня: `telegram_posts[id]`
+    — либо `None`, либо голое число (message_id) без вложенности, это уже
+    закреплено тестами и читается `main.py`'s `_ops_numbers()`, менять форму
+    существующего поля ради вех рискованно и не нужно — у события уже есть
+    свой стабильный `id`, отдельный словарь по нему ничего не ломает и
+    ничего не мигрирует)."""
+    out = []
+    for deal in deals:
+        for event in deal.get('events') or []:
+            if not (isinstance(event, dict) and event.get('newsworthy') and event.get('headline')
+                    and event.get('id') and event.get('kind') in review.POSTWORTHY_MILESTONE_KINDS):
+                continue
+            if event['id'] in stage_posts:
+                continue
+            out.append((deal, event))
+    return out
+
+
+def milestone_decisions(decisions):
+    """{event_id: (verdict, decision_id)} — последнее решение по каждой вехе.
+
+    Кнопки вехи используют ТЕ ЖЕ вердикты, что «пост в канал»/«без поста» у
+    обычной карточки (`post_ok`/`post_no` -> `post_yes`/`post_no` в main.py),
+    а не собственное имя: это тот же модификатор канала, только для события,
+    а не для сделки целиком. Отличает веху от карточки форма `deal_id` в
+    решении — `<id сделки>~<kind>` (разделитель `~`, а не `:` — двоеточие уже
+    занято разбором `mod:<id>:<вердикт>`, и не `-`, потому что сами id сделок
+    бывают с дефисами: `event['id']` тогда было бы неоднозначно резать
+    обратно). `event['id']` собирается конкатенацией: `<id сделки>-<kind>`
+    (тот же формат, что `mark_milestone()` в review.py уже присваивает)."""
+    out = {}
+    for d in decisions:
+        did = str(d.get('deal_id') or '')
+        if '~' not in did or d.get('verdict') not in ('post_yes', 'post_no'):
+            continue
+        deal_id, _, kind = did.partition('~')
+        event_id = '%s-%s' % (deal_id, kind)
+        out[event_id] = (d['verdict'], d['id'])
+    return out
+
+
+def milestone_age_hours(event, now):
+    raw = str(event.get('milestone_drafted_at') or '')
+    try:
+        drafted = datetime.fromisoformat(raw)
+    except ValueError:
+        return 0.0
+    if drafted.tzinfo is None:
+        drafted = drafted.replace(tzinfo=timezone.utc)
+    return (now - drafted).total_seconds() / 3600.0
+
+
+def plan_milestones(deals, stage_posts, decisions, now):
+    """(отправить, придержать, отклонённые id решений-заглушек) — чистая
+    функция аналогично `approve.plan_actions`, чтобы логика проверялась без
+    сети. `discard_ids` — decision id вехам с `post_no`: их надо
+    consume'нуть, даже если сама веха никогда не отправится."""
+    by_event = milestone_decisions(decisions)
+    send, hold, discard_ids, sent_decision_ids = [], [], [], []
+    for deal, event in milestone_candidates(deals, stage_posts):
+        decision = by_event.get(event['id'])
+        if decision and decision[0] == 'post_no':
+            discard_ids.append(decision[1])
+            continue
+        if decision and decision[0] == 'post_yes':
+            send.append((deal, event))
+            sent_decision_ids.append(decision[1])
+            continue
+        # Черновик ещё не отправлялся (нет milestone_drafted_at) — не
+        # кандидат на молчание, его отправит send_milestone_drafts.py.
+        if not event.get('milestone_drafted_at'):
+            hold.append((deal, event, 'черновик ещё не отправлен в консоль'))
+            continue
+        age = milestone_age_hours(event, now)
+        if age >= MILESTONE_SILENCE_HOURS:
+            send.append((deal, event))
+        else:
+            hold.append((deal, event, 'ждёт решения (%.0f ч из %d)' % (age, MILESTONE_SILENCE_HOURS)))
+    return send, hold, discard_ids, sent_decision_ids
+
+
 def main(write, ignore_pace=False):
     """`ignore_pace` — то же, что ключ `--now`, но параметром.
 
@@ -230,8 +329,26 @@ def main(write, ignore_pace=False):
     chat_id = os.environ.get('TELEGRAM_CHANNEL_ID', '') or DEFAULT_CHANNEL
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
+    milestones = data.setdefault('telegram_milestones', {})
     comps = data['companies']
     updates_by_id = load_today_updates()
+
+    # ВЕХИ (раздел A). Решения приходят с сайта тем же мостом, что и у
+    # карточек (approve.fetch_decisions) — консуммируются здесь же, сразу:
+    # в отличие от approve.py, дедуп вехи не зависит от того, подтвердил ли
+    # сайт «применено» — он держится на `milestones[event_id]` (git-нативно,
+    # см. docstring `milestone_candidates`), поэтому двухфазный `--consume`
+    # не нужен: повторная выборка того же решения безопасна в любом порядке.
+    m_decisions, m_handle = approve.fetch_decisions()
+    m_send, m_hold, m_discard_ids, m_sent_decision_ids = plan_milestones(
+        data['deals'], milestones, m_decisions, datetime.now(timezone.utc))
+    to_send_m = [(deal, event, format_post.render_milestone(deal, event)) for deal, event in m_send]
+    m_flagged = []
+    for deal, event, text in list(to_send_m):
+        problems = check_post.check(text)
+        if problems:
+            m_flagged.append((event['id'], problems))
+            to_send_m = [(d, e, t) for d, e, t in to_send_m if e['id'] != event['id']]
 
     to_send, to_edit, to_seed = [], [], []
     for deal in data['deals']:
@@ -287,18 +404,26 @@ def main(write, ignore_pace=False):
             flagged.append((did, problems))
             to_edit = [(d, m, t) for d, m, t in to_edit if d != did]
 
-    print('Новых постов: %d, правок существующих: %d, без поста по решению: %d'
-          % (len(to_send), len(to_edit), len(to_seed)))
+    print('Новых постов: %d, правок существующих: %d, без поста по решению: %d, новых вех: %d'
+          % (len(to_send), len(to_edit), len(to_seed), len(to_send_m)))
     if flagged:
         print('Вычитка задержала постов: %d (в канал не уйдут, нужен человек).' % len(flagged))
         for did, problems in flagged:
             print('   %s: %s' % (did, '; '.join(problems)))
+    if m_flagged:
+        print('Вычитка задержала вех: %d.' % len(m_flagged))
+        for eid, problems in m_flagged:
+            print('   %s: %s' % (eid, '; '.join(problems)))
+    if m_hold:
+        print('Вех ждут решения/тишины: %d.' % len(m_hold))
     if not token or not chat_id:
         print('TELEGRAM_BOT_TOKEN / TELEGRAM_CHANNEL_ID не заданы — не отправляю, только показываю план.')
         for did, text in to_send[:3]:
             print('\n--- новый пост: %s ---\n%s' % (did, text[:400]))
         for did, _mid, text in to_edit[:3]:
             print('\n--- правка поста: %s ---\n%s' % (did, text[:400]))
+        for _deal, event, text in to_send_m[:3]:
+            print('\n--- веха: %s ---\n%s' % (event['id'], text[:400]))
         return
 
     if not write:
@@ -308,7 +433,12 @@ def main(write, ignore_pace=False):
     # Лимит и пауза — см. docstring («защита от первого запуска»). Правки
     # делят лимит с новыми постами: считаем оба списка одной очередью, а не
     # отдельными лимитами каждый, иначе включённая одновременно куча правок
-    # обойдёт защиту с другой стороны.
+    # обойдёт защиту с другой стороны. Вехи в дневное окно намеренно НЕ
+    # уложены (упрощение v1, раздел A): они редки — по замеру на живой базе
+    # 22 августа 2026 их пока 0 отправленных вообще, — и добавлять
+    # распределение по часам для события, которое может не случиться неделями,
+    # значило бы усложнять код ради ещё не наступившей проблемы; если частота
+    # вырастет, вернуться и измерить, а не гадать порог заранее.
     # Равномерная выдача. Ключ `--now` её отключает: он для ручного запуска,
     # когда владелец сам решил опубликовать всё немедленно.
     if ignore_pace or '--now' in sys.argv:
@@ -320,7 +450,7 @@ def main(write, ignore_pace=False):
     to_send = to_send[:allow]
     if held:
         print('Придержано новых постов: %d — уйдут следующими прогонами.' % len(held))
-    if not to_send and not to_edit:
+    if not to_send and not to_edit and not to_send_m and not m_discard_ids:
         # Засев «без поста» — тоже изменение состояния: не записать его —
         # значит показывать эти карточки в плане каждый прогон заново.
         if to_seed:
@@ -334,25 +464,35 @@ def main(write, ignore_pace=False):
         return
 
     queue = [('send', did, text) for did, text in to_send] + \
-            [('edit', did, (mid, text)) for did, mid, text in to_edit]
+            [('edit', did, (mid, text)) for did, mid, text in to_edit] + \
+            [('milestone', deal['id'], (event, text)) for deal, event, text in to_send_m]
     batch, rest = queue[:MAX_SENDS_PER_RUN], queue[MAX_SENDS_PER_RUN:]
     if rest:
         print('Лимит за прогон: %d. В очереди ещё %d — доберём в следующих прогонах.'
               % (MAX_SENDS_PER_RUN, len(rest)))
 
     client = _client()
-    sent, edited, failed = 0, 0, []
+    sent, edited, milestoned, failed = 0, 0, 0, []
     prev_kind = None
     for i, (kind, did, payload) in enumerate(batch):
         if i:
             # Два новых поста подряд разводим по времени, всё остальное —
-            # обычной технической паузой.
-            time.sleep(SPREAD_S if (kind == 'send' and prev_kind == 'send') else SEND_DELAY_S)
+            # обычной технической паузой. Веха — тоже НОВОЕ сообщение
+            # (sendMessage, не editMessageText), поэтому та же логика, что у
+            # 'send': подряд с любым другим новым постом — разводим по времени.
+            time.sleep(SPREAD_S if (kind in ('send', 'milestone') and prev_kind in ('send', 'milestone'))
+                      else SEND_DELAY_S)
         prev_kind = kind
         try:
             if kind == 'send':
                 posts[did] = post_message(client, token, chat_id, payload)
                 sent += 1
+            elif kind == 'milestone':
+                event, text = payload
+                mid = post_message(client, token, chat_id, text)
+                milestones[event['id']] = {'message_id': mid,
+                                           'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+                milestoned += 1
             else:
                 mid, text = payload
                 edit_message(client, token, chat_id, mid, text)
@@ -364,8 +504,14 @@ def main(write, ignore_pace=False):
         posts[did] = None
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
-    print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, ошибок: %d'
-          % (sent, edited, len(to_seed), len(failed)))
+    # Решения по вехам консуммируются ПОСЛЕ того, как их эффект (сообщение
+    # ушло, id записан) уже лёг на диск в том же json.dump выше — дедуп на
+    # повторной выборке того же решения держит `milestones[event_id]`, а не
+    # факт консумации (см. комментарий в начале main()), поэтому здесь можно
+    # без второго прохода `--consume` после git push, в отличие от approve.py.
+    approve.consume(m_handle, m_discard_ids + m_sent_decision_ids)
+    print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, вех отправлено: %d, ошибок: %d'
+          % (sent, edited, len(to_seed), milestoned, len(failed)))
     for did, err in failed:
         print('  %s: %s' % (did, err))
 

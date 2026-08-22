@@ -778,6 +778,24 @@ def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
     assert not [d for d in r.json()["decisions"] if d["deal_id"] == "gtest123"]
 
 
+def test_milestone_button_decision_carries_the_tilde_separated_id(client, monkeypatch):
+    """Раздел A (22 августа): кнопка «пост в канал»/«без поста» под вехой
+    несёт `deal_id~kind` в callback_data — регэксп в main.py обязан принять
+    `~` (расширен вместе с `[\\w-]`), а решение в таблице обязано сохранить
+    ИМЕННО эту составную строку — send_telegram.py режет её сам, main.py её
+    не разбирает."""
+    _mod_env(monkeypatch)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"data": "mod:gmru-nspk-privatization~approval:post_ok",
+                            "from": {"id": 111}}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gmru-nspk-privatization~approval"]
+    assert rows and rows[0]["verdict"] == "post_yes"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
 def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
     """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом».
 
