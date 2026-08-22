@@ -2984,6 +2984,30 @@ def test_quality_report_links_cards_and_counts_the_whole_queue():
     assert "очередь пуста" in text2
 
 
+def test_quality_report_month_line_does_not_read_as_posts_this_month():
+    """22 августа владелец прочитал «837 — месячная» как «837 постов вышло
+    за месяц» и спросил, не бесполезна ли такая проверка для месячного
+    поста. Строка на самом деле про СТАРЫЕ карточки (обычно давно в базе, а
+    не опубликованные недавно), которым положена лёгкая сверка на новые
+    факты, — и число просто растёт разом, когда опустевает недельная
+    очередь. Голое «N — месячная» это не объясняло; текст обязан называть,
+    что именно проверяется."""
+    from datetime import date
+    base = {
+        "deals": [
+            {"id": "geee55555", "title": "Сделка «Эпсилон-Тест»",
+             "added": "2026-01-01", "reviewed": "2026-01-01",
+             "deep_researched": "2026-01-02", "weekly_researched": "2026-01-10"},
+        ],
+        "companies": {},
+    }
+    day, week, month = ops_status.reading_queues(base, today=date(2026, 8, 21))
+    assert (day, week, month) == (0, 0, 1)
+    text = ops_status.render_quality(did="Проверили платформу.", base=base)
+    assert "1 — месячная" not in text
+    assert "старых карточек" in text and "новые факты" in text
+
+
 def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, capsys):
     """Без токена/чата — честная строка в лог прогона, а не тихая имитация
     успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""
