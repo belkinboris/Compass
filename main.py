@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import re
+import threading
 import time
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -136,6 +137,42 @@ def _match_subscriptions_against_new_deals():
     subscription_feed.scan_on_startup()
 
 
+# Докачка ФНС по git-реестру (pipeline/fns_registry.py) — механика,
+# COMPANY_FINANCE_BRIEF.md, раздел «Суждение — в git-реестре, механика — на
+# боевом хосте»: суждение «какой ИНН чей» уже принято чтением и лежит в
+# реестре, здесь только подтверждается и докачивается отчётность. В отдельном
+# потоке — это живые запросы к api-fns.ru (до 25 с таймаута на каждый по
+# fns_client.py), и сайт не должен ждать их, чтобы начать отвечать на
+# обычные запросы. Ключа нет — тихо пропускаем: это НЕ сбой (ключ на боевом
+# хосте может быть ещё не добавлен, локальная разработка — тем более).
+@app.on_event("startup")
+def _sync_fns_from_registry():
+    if not os.environ.get("API_FNS_KEY"):
+        return
+    # PYTEST_CURRENT_TEST — переменная, которую сам pytest выставляет на
+    # время каждого теста: без этой защиты КАЖДЫЙ TestClient(main.app) в
+    # тестах бил бы по живому api-fns.ru и тратил платную квоту прогоном
+    # тестов — а этот ключ в среде разработки реально задан (см. П0).
+    if os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+
+    def _run():
+        try:
+            from pipeline.sync_fns import sync_from_registry
+            from fns_client import ApiFnsClient
+            db = get_session()
+            try:
+                with ApiFnsClient() as client:
+                    stats = sync_from_registry(db, client, limit=FNS_STARTUP_SYNC_LIMIT)
+                logger.info("ФНС из реестра при старте: %s", stats)
+            finally:
+                db.close()
+        except Exception as e:  # сеть/квота/что угодно — сайт не должен упасть из-за этого
+            logger.error("не удалось докачать ФНС из реестра при старте: %s", e)
+
+    threading.Thread(target=_run, daemon=True).start()
+
+
 def get_db():
     session = get_session()
     try:
@@ -162,6 +199,17 @@ FNS_REPORT_MAX_AGE_YEARS = 2
 # к API-ФНС (бюджет 3000/год), и открывать его анонимно нельзя ни в каком
 # режиме бесплатности.
 FNS_ALL_FREE = True
+
+# Сколько подтверждённых профилей (pipeline/fns_registry.py) докачивать за
+# ОДИН старт процесса. COMPANY_FINANCE_BRIEF.md, раздел П2: расписания нет —
+# новые решения реестра появляются деплоем, и старт после деплоя уже и есть
+# то самое естественное событие (тот же приём, что и у сверки подписок ниже).
+# Потолок нужен, чтобы частые рестарты процесса (несколько деплоев в день)
+# не тратили годовую квоту в 3000 запросов быстрее, чем реестр растёт:
+# каждый профиль — до 3 запросов (egr дважды + bo), 30 профилей — до 90 за
+# старт, и большинство запусков ничего не найдут (данные ещё свежие) и не
+# потратят ни одного благодаря REGISTRY_SYNC_STALE_DAYS в sync_fns.py.
+FNS_STARTUP_SYNC_LIMIT = 30
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки

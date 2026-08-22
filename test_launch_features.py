@@ -450,6 +450,94 @@ def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
     assert calls == {"search": 0, "egr": 1}
 
 
+def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch):
+    """pipeline/COMPANY_FINANCE_BRIEF.md, П2: --from-registry применяет
+    суждение из pipeline/fns_registry.py (кто есть кто) без единого search —
+    только egr/bo/changes по уже известному ИНН, и не тратит их повторно,
+    пока данные не устарели (REGISTRY_SYNC_STALE_DAYS)."""
+    from pipeline import sync_fns
+
+    fake_registry = [
+        {"company_id": "registry-sync-test", "decision": "confirmed", "inn": "7700000055",
+         "reason": "тест", "date": "2026-08-22"},
+        {"company_id": "registry-sync-bank-test", "decision": "bank", "inn": None,
+         "reason": "тест — банк, из ФНС не берём", "date": "2026-08-22"},
+    ]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
+
+    calls = {"egr": 0, "bo": 0, "changes": 0}
+
+    class FakeClient:
+        def egr(self, inn):
+            calls["egr"] += 1
+            return {"items": [{"ЮЛ": {
+                "ИНН": inn, "ОГРН": "1027700000055",
+                "НаимСокрЮЛ": 'ООО "Реестр-Тест"', "Статус": "Действующая",
+            }}]}
+
+        def bo(self, inn):
+            calls["bo"] += 1
+            return {inn: {"2025": {"2110": "1000000"}}}
+
+        def changes(self, inn):
+            calls["changes"] += 1
+            return {"items": []}
+
+    db = get_session()
+    try:
+        if not db.get(Company, "registry-sync-test"):
+            db.add(Company(id="registry-sync-test", name="Реестр-Тест"))
+            db.flush(); db.commit()
+
+        stats = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+        assert stats == {"confirmed_now": 1, "synced": 1, "skipped_fresh": 0, "errors": 0, "requests": 3}
+        assert calls == {"egr": 2, "bo": 1, "changes": 1}  # confirm_by_inn + sync_entity оба читают egr
+
+        entity = db.query(LegalEntity).filter_by(company_id="registry-sync-test").one()
+        assert entity.inn == "7700000055"
+        assert entity.match_status == LegalEntityMatchStatus.confirmed
+        report = db.query(FinancialReport).filter_by(legal_entity_id=entity.id).one()
+        assert report.revenue_rub == 1_000_000_000
+
+        # Второй прогон — данные свежие, ни одного запроса.
+        calls_before = dict(calls)
+        stats2 = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+        assert stats2 == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 1, "errors": 0, "requests": 0}
+        assert calls == calls_before
+
+        # --force игнорирует свежесть.
+        stats3 = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False, force=True)
+        assert stats3["synced"] == 1
+        assert calls["bo"] == 2
+    finally:
+        db.close()
+
+
+def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
+    """bank/foreign/state_org/person/lot/no_match/brand_needs_inn не несут
+    подтверждённого ИНН для ФНС — --from-registry обязан их пропускать, а не
+    падать на отсутствующем inn."""
+    from pipeline import sync_fns
+
+    fake_registry = [
+        {"company_id": "x", "decision": "bank", "inn": None, "reason": "т", "date": "2026-08-22"},
+        {"company_id": "y", "decision": "foreign", "inn": None, "reason": "т", "date": "2026-08-22"},
+        {"company_id": "z", "decision": "no_match", "inn": None, "reason": "т", "date": "2026-08-22"},
+    ]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
+
+    class FakeClient:
+        def egr(self, inn):
+            raise AssertionError("не должно вызываться для не-confirmed решений")
+
+    db = get_session()
+    try:
+        stats = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+    finally:
+        db.close()
+    assert stats == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
+
+
 def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
     """18 августа 2026 первый боевой прогон fns_seed_top_companies.py упал
     на PostgreSQL: `ForeignKeyViolation` — company_id ещё не было строки в

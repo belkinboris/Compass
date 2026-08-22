@@ -15,7 +15,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
@@ -37,6 +37,14 @@ from fns_client import (
     ApiFnsClient, ApiFnsError, normalize_bo, normalize_changes, normalize_egr,
     normalize_ownership, normalize_search_results,
 )
+from pipeline.fns_registry import REGISTRY as FNS_REGISTRY
+
+# Суждение (какой ИНН чей) не перепроверяется чаще этого срока — отчётность
+# ЕГРЮЛ/БФО обновляется самим источником примерно раз в год (весной), а не
+# каждый час. Без порога --from-registry на каждом старте боевого процесса
+# заново тратил бы `egr`+`bo` на уже свежие записи — см.
+# COMPANY_FINANCE_BRIEF.md, раздел П2.
+REGISTRY_SYNC_STALE_DAYS = 80
 
 def _now() -> datetime:
     """datetime.utcnow() устарел; колонки здесь — наивный DateTime, поэтому
@@ -348,11 +356,60 @@ def sync_confirmed(db, client: ApiFnsClient, *, limit: int | None = None,
     return ok, errors
 
 
+def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
+                       force: bool = False, dry_run: bool = False) -> dict[str, int]:
+    """Применяет `pipeline/fns_registry.py` к базе: суждение («какой ИНН
+    чей») читается из git-реестра, а не ищется заново — эта функция только
+    подтверждает уже принятое решение (`egr` по известному ИНН, без единого
+    `search`) и докачивает отчётность, если её ещё нет или она устарела.
+
+    Это МЕХАНИКА, а не суждение (см. докстроку самого реестра) — вызывается
+    и вручную, и стартовым сканом боевого процесса (COMPANY_FINANCE_BRIEF.md,
+    П2). `decision` не в {"confirmed"} пропускается: banку/foreign/state_org/
+    person/lot/no_match/brand_needs_inn взять из ФНС нечего — либо данных
+    там нет по природе (банки — ЦБ, П3), либо ИНН ещё не подтверждён.
+    """
+    confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
+    if limit:
+        confirmed = confirmed[:limit]
+    stats = {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
+    cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
+    for row in confirmed:
+        company_id, inn = row["company_id"], row["inn"]
+        entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
+        needs_confirm = not entity or entity.inn != inn or entity.match_status != LegalEntityMatchStatus.confirmed
+        needs_sync = force or not entity or not entity.fetched_at or entity.fetched_at < cutoff
+        if not needs_confirm and not needs_sync:
+            stats["skipped_fresh"] += 1
+            continue
+        try:
+            if needs_confirm:
+                if not dry_run:
+                    confirm_by_inn(db, client, company_id, inn, dry_run=False)
+                    entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
+                stats["confirmed_now"] += 1
+                stats["requests"] += 1
+            if needs_sync and entity is not None:
+                if not dry_run:
+                    sync_entity(db, client, entity)
+                    db.commit()
+                stats["synced"] += 1
+                stats["requests"] += 2  # egr + bo, changes уже внутри sync_entity
+        except ApiFnsError as exc:
+            print(f"[FNS] {company_id}/{inn}: {exc}", file=sys.stderr)
+            db.rollback()
+            stats["errors"] += 1
+    return stats
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", action="store_true", help="перенести справочник компаний из JSON в SQL")
     parser.add_argument("--match", action="store_true", help="найти кандидатов в ЕГРЮЛ")
     parser.add_argument("--sync", action="store_true", help="загрузить ЕГРЮЛ, БФО и изменения подтверждённых юрлиц")
+    parser.add_argument("--from-registry", action="store_true",
+                        help="применить суждения pipeline/fns_registry.py: подтвердить и докачать confirmed-записи")
+    parser.add_argument("--force", action="store_true", help="с --from-registry: докачать, даже если данные ещё свежие")
     parser.add_argument("--all", action="store_true", help="seed + match + sync")
     parser.add_argument("--auto-confirm", action="store_true", help="подтверждать только строгие уникальные совпадения")
     parser.add_argument("--company-id")
@@ -360,8 +417,8 @@ def main() -> int:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    if not any((args.seed, args.match, args.sync, args.all, args.inn)):
-        parser.error("укажите --seed, --match, --sync, --all или --inn")
+    if not any((args.seed, args.match, args.sync, args.all, args.inn, args.from_registry)):
+        parser.error("укажите --seed, --match, --sync, --all, --inn или --from-registry")
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
         run = None if args.dry_run else FnsSyncRun(mode="all" if args.all else "manual")
@@ -398,6 +455,13 @@ def main() -> int:
                 if run is not None:
                     run.matched += ok; run.errors += e
                 details["sync"] = {"synced" if not args.dry_run else "would_sync": ok, "errors": e}
+            if args.from_registry:
+                with ApiFnsClient() as client:
+                    stats = sync_from_registry(db, client, limit=args.limit, force=args.force, dry_run=args.dry_run)
+                if run is not None:
+                    run.matched += stats["confirmed_now"] + stats["synced"]
+                    run.errors += stats["errors"]
+                details["from_registry"] = stats
         finally:
             if run is not None:
                 run.finished_at = _now()
