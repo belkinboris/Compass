@@ -312,6 +312,35 @@ def test_fns_profile_without_registry_entry_keeps_the_old_generic_reason(client)
     assert body["reason"] == "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ"
 
 
+def test_fns_category_is_carried_even_when_a_legal_entity_is_already_matched(client, monkeypatch):
+    """Этап 6: несколько банков были сопоставлены с ИНН ЕЩЁ ДО того, как для
+    них завели решение "bank" в реестре — у них есть LegalEntity(confirmed),
+    и ответ идёт через ветку `available: True`, которая раньше `category`
+    не несла вовсе (только ветка «юрлицо не сопоставлено» её отдавала).
+    Фронтенд не мог отличить банк с пустой отчётностью от обычной компании
+    с пустой отчётностью и не мог решить, показывать ли вместо сетки ФНС
+    блок Банка России."""
+    import main as main_module
+
+    company_id = _seed_fns_company("launch-fns-bank-with-matched-entity")
+    monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+                        lambda: {"launch-fns-bank-with-matched-entity": {"decision": "bank", "cbr_regnum": 1481}})
+    body = client.get("/api/companies/launch-fns-bank-with-matched-entity/fns").json()
+    assert body["available"] is True
+    assert body["category"] == "bank"
+    del company_id  # используется только для сида, id профиля не нужен
+
+
+def test_fns_category_is_none_for_ordinary_company_with_a_matched_entity(client):
+    """Санити-проверка на себе: обычная (не банк) компания с сопоставленным
+    юрлицом не должна внезапно получить category — иначе тест выше ловил бы
+    ложное срабатывание на любом профиле."""
+    _seed_fns_company("launch-fns-ordinary-with-matched-entity")
+    body = client.get("/api/companies/launch-fns-ordinary-with-matched-entity/fns").json()
+    assert body["available"] is True
+    assert body.get("category") is None
+
+
 def test_fns_hides_reports_older_than_two_years_on_company_page(client):
     """«Компания сегодня» не должна выглядеть моложе своей отчётности на много
     лет — правило владельца от 18 августа 2026 после жалобы на устаревшие

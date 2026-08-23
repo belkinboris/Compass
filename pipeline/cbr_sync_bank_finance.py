@@ -99,7 +99,9 @@ def collect(today: date) -> dict[str, dict]:
                 entry["legal_name"] = balance.legal_name
                 entry["as_of_balance"] = balance.as_of.isoformat()
                 entry["assets_rub"] = balance.assets_rub
+                entry["assets_rub_prior_year"] = balance.assets_rub_prior_year
                 entry["equity_rub"] = balance.equity_rub
+                entry["equity_rub_prior_year"] = balance.equity_rub_prior_year
             if profit is not None:
                 entry["as_of_profit"] = profit[0].isoformat()
                 entry["net_profit_rub"] = profit[1]

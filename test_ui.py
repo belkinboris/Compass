@@ -909,6 +909,87 @@ def test_participants_without_any_known_share_get_one_note_not_n_chips(browser, 
         ctx.close()
 
 
+def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
+    """Этап 6, П4-6: банк не сдаёт коммерческую БФО в общем порядке — вместо
+    пустой сетки ФНС на его странице показывается то, что банк САМ публикует
+    перед ЦБ (форма 806/102). Живой Сбербанк (g28ff15bb) уже проверен вручную
+    (скриншот 390px) — здесь сеть подменена, чтобы тест не зависел от того,
+    опубликовал ли ЦБ новый квартал именно сегодня, и проверял оба ответа
+    /fns сразу (сопоставлено юрлицо и нет — оба несут category:"bank")."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": False, "hidden": False, "company_id": "g28ff15bb",
+                "company_name": "Сбербанк", "configured": True, "category": "bank",
+                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                          "банки не сдают, только по отдельной форме перед Банком России.",
+            }))
+
+        def fake_finance(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "g28ff15bb": {
+                    "regnum": 1481, "legal_name": "Публичное акционерное общество «Сбербанк России»",
+                    "as_of_balance": "2026-04-01", "assets_rub": 65137327668000,
+                    "assets_rub_prior_year": 65210686723000, "equity_rub": 8627750211000,
+                    "equity_rub_prior_year": 8115080880000,
+                    "as_of_profit": "2026-07-01", "net_profit_rub": 995264348000,
+                },
+            }))
+        ctx.route("**/api/companies/g28ff15bb/fns*", fake_fns)
+        ctx.route("**/static/data/bank_finance.json*", fake_finance)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.set_viewport_size({"width": 360, "height": 900})
+        pg.goto(base_url + "/#/companies/g28ff15bb", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        body = pg.inner_text("#fns-company").lower()
+        assert "банк россии" in body
+        assert "65,1 трлн" in body or "65.1 трлн" in body
+        assert "8,6 трлн" in body or "8.6 трлн" in body
+        assert "995,3 млрд" in body or "995.3 млрд" in body
+        assert "источник: фнс" not in body, "у банка не должно остаться сетки ФНС"
+        assert "не отслеживает акционеров" not in body
+        assert not errors, "pageerror при рендере блока ЦБ: %s" % errors
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "блок ЦБ переполняет экран на 360px: %d" % over
+    finally:
+        ctx.close()
+
+
+def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
+    """Этап 6, П4-6: банк известен (`category:"bank"`), но данных ЦБ пока
+    нет (`bank_finance.json` не несёт этого company_id — например, свежая
+    запись в реестре, синхронизация ещё не прогонялась) — честная короткая
+    строка вместо пустой сетки метрик с прочерками."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": False, "hidden": False, "company_id": "g28ff15bb",
+                "company_name": "Сбербанк", "configured": True, "category": "bank",
+                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                          "банки не сдают, только по отдельной форме перед Банком России.",
+            }))
+
+        def fake_finance(route):
+            route.fulfill(status=200, content_type="application/json", body="{}")
+        ctx.route("**/api/companies/g28ff15bb/fns*", fake_fns)
+        ctx.route("**/static/data/bank_finance.json*", fake_finance)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/companies/g28ff15bb", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        assert pg.locator("#fns-company .fns-shell").count() == 0, "без данных ЦБ сетка метрик не должна рисоваться"
+        body = pg.inner_text("#fns-company").lower()
+        assert "кредитная организация" in body
+        assert not errors, "pageerror при рендере честного состояния банка без данных ЦБ: %s" % errors
+    finally:
+        ctx.close()
+
+
 def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 

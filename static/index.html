@@ -4552,11 +4552,52 @@ function ownershipHtml(ownership){
     ${ownership.notice?`<div class="ownership-notice">${esc(ownership.notice)}</div>`:""}`;
 }
 
+// Этап 6: банки не сдают коммерческую БФО в общем порядке (ФНС-грид у них
+// либо не показывается вовсе, либо честно пуст) — вместо неё, для профилей
+// из pipeline/fns_registry.py с decision:"bank", показываем то, что банк
+// САМ публикует перед Банком России: баланс (форма 806, чистые активы/
+// капитал, не гросс — см. урок в CLAUDE.md про gross/net) и прибыль (форма
+// 102). Файл маленький (13 банков) и нужен только на их страницах —
+// загружается лениво, один раз, а не вместе с deals_promoted.json.
+let BANK_FINANCE = null, bankFinancePromise = null;
+async function loadBankFinance(){
+  if(BANK_FINANCE) return BANK_FINANCE;
+  if(!bankFinancePromise) bankFinancePromise = fetch("static/data/bank_finance.json")
+    .then(r=>r.ok?r.json():{}).catch(()=>({}));
+  BANK_FINANCE = await bankFinancePromise;
+  return BANK_FINANCE;
+}
+function bankFinanceHtml(entry){
+  const rows=[];
+  if(entry.assets_rub!=null) rows.push(["Активы",entry.assets_rub,entry.assets_rub_prior_year]);
+  if(entry.equity_rub!=null) rows.push(["Собственные средства",entry.equity_rub,entry.equity_rub_prior_year]);
+  if(entry.net_profit_rub!=null) rows.push(["Чистая прибыль",entry.net_profit_rub,null]);
+  if(!rows.length) return null;
+  const dateBits=[
+    entry.as_of_balance?`баланс на ${fmtDate(entry.as_of_balance)}`:"",
+    entry.as_of_profit?`прибыль нарастающим итогом на ${fmtDate(entry.as_of_profit)}`:"",
+  ].filter(Boolean).join(", ");
+  return `<section class="fns-shell reveal">
+    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы</h2></div><span class="fns-badge">Источник: Банк России</span></div>
+    <div class="fns-body">
+      <div class="fns-metrics">${rows.map(([label,val,prev])=>`<div class="fns-metric"><span class="label">${label}</span><div class="v num">${fnsMoney(val)}</div>${prev!=null?`<div class="delta">${fnsDelta(val,prev)}</div>`:""}</div>`).join("")}</div>
+      <p class="fns-disclaimer">Официальный баланс (форма 0409806) и отчёт о прибыли (форма 0409102), которые банк публикует перед Банком России, — не то же самое, что бухгалтерская отчётность через ФНС. Показатели относятся к юридическому лицу, не к консолидированной группе${dateBits?`; ${dateBits}`:""}.</p>
+    </div>
+  </section>`;
+}
+
 async function mountCompanyFns(companyId){
   const mount=document.getElementById("fns-company"); if(!mount) return;
   let data;
   try{const r=await fetch(`/api/companies/${encodeURIComponent(companyId)}/fns`); data=await r.json();}
   catch(e){return;}
+  if(data.category==="bank"){
+    const finance=await loadBankFinance();
+    const html=bankFinanceHtml(finance[companyId]||{});
+    mount.innerHTML = html || `<div class="fns-empty reveal">${esc(data.reason||"Кредитная организация — бухгалтерскую отчётность в общем порядке банки не сдают, только по отдельной форме перед Банком России.")}</div>`;
+    rerun();
+    return;
+  }
   // Пока ключ не подключён и юрлицо не сопоставлено, не показываем посетителю
   // техническую заглушку. После первого импорта блок появится автоматически.
   if(!data.available){

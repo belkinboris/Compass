@@ -867,13 +867,21 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
         LegalEntity.company_id == company_id,
         LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
     ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id)).all())
+    # Этап 6: `category` нужна фронтенду в ОБОИХ исходах — не только когда
+    # юрлицо не сопоставлено вовсе (ветка ниже), но и когда LegalEntity УЖЕ
+    # есть (часть банков когда-то была сопоставлена с ИНН до того, как для
+    # них завели решение "bank" — коммерческие поля БФО у них пустые, а
+    # категория раньше терялась). Без неё фронтенд не мог отличить банк от
+    # обычной компании с пустой отчётностью и не мог решить, показывать ли
+    # вместо ФНС-грида блок Банка России.
+    registry_entry = fns_registry_by_company_id().get(company_id)
+    registry_category = registry_entry["decision"] if registry_entry else None
     if not entities:
         # П5 (COMPANY_FINANCE_BRIEF.md): «нашли/не нашли» — не одно честное
         # состояние, а минимум шесть разных судеб (реестр pipeline/
         # fns_registry.py). Профиль без записи в реестре — тот же старый
         # «ещё не сопоставлено», ничего не меняется для большинства базы.
-        entry = fns_registry_by_company_id().get(company_id)
-        decision = entry["decision"] if entry else None
+        decision = registry_category
         category_reasons = {
             "bank": "Кредитная организация — бухгалтерскую отчётность в общем "
                     "порядке банки не сдают, только по отдельной форме перед "
@@ -947,6 +955,7 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
         "available": True,
         "company_id": company_id,
         "company_name": profile.get("name") if profile else None,
+        "category": registry_category,
         "entities": result,
         "access": {"paid": paid, "full_history": paid, "downloads": paid},
         "as_of_year": as_of_year,
