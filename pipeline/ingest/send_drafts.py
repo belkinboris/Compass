@@ -201,12 +201,16 @@ RETRIES = 3
 
 
 def send_one(client, token, chat, text, keyboard):
-    """Отправить одно сообщение, дождавшись, если Telegram просит подождать."""
+    """Отправить одно сообщение, дождавшись, если Telegram просит подождать.
+    keyboard=None — сообщение без кнопок (решение приходит только ответом
+    текстом, как у очереди «нужен ИНН»): `reply_markup` тогда не кладём в
+    тело запроса вовсе, а не шлём null — так же, как notification_service.
+    _send_telegram уже делает для обычных уведомлений без клавиатуры."""
+    payload = {'chat_id': chat, 'text': text, 'disable_web_page_preview': True}
+    if keyboard is not None:
+        payload['reply_markup'] = keyboard
     for attempt in range(RETRIES):
-        r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
-            'chat_id': chat, 'text': text, 'reply_markup': keyboard,
-            'disable_web_page_preview': True,
-        })
+        r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
         if r.status_code == 200 and r.json().get('ok'):
             return True
         wait = 0

@@ -810,6 +810,228 @@ def test_fns_queue_append_registry_writes_valid_python_without_touching_existing
     assert idx["newco"]["inn"] == "7700000099"
 
 
+def test_fns_queue_console_message_carries_marker_name_and_link():
+    """Маркер `[инн <id>]` в первой строке — за него держится разбор
+    ответа в main.py::telegram_webhook (см. докстринг модуля)."""
+    from pipeline.fns_unresolved_queue import console_message
+
+    text = console_message("gc2792a44", "АФК «Система»", "2026-06-01")
+    assert text.startswith("⚠️ [инн gc2792a44]")
+    assert "АФК «Система»" in text
+    assert "/#/companies/gc2792a44" in text
+    assert "2026-06-01" in text
+
+
+def test_fns_queue_send_to_console_dry_run_sends_nothing(monkeypatch):
+    """Без --write — план печатается, ни один HTTP-запрос не уходит."""
+    from pipeline.fns_unresolved_queue import send_queue_to_console
+    import sys as _sys
+    _sys.path.insert(0, "pipeline/ingest")
+    import send_drafts
+
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["123"])
+    sent = send_queue_to_console([("gtest", "Тест", "2026-08-20")], write=False)
+    assert sent == []
+
+
+def test_fns_queue_send_to_console_without_targets_sends_nothing(monkeypatch):
+    """Ни TELEGRAM_REVIEW_GROUP_ID, ни TELEGRAM_REVIEW_CHAT_IDS — консоли
+    нет, и это честный отказ, а не попытка отправить в никуда."""
+    from pipeline.fns_unresolved_queue import send_queue_to_console
+    import sys as _sys
+    _sys.path.insert(0, "pipeline/ingest")
+    import send_drafts
+
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: [])
+    sent = send_queue_to_console([("gtest", "Тест", "2026-08-20")], write=True)
+    assert sent == []
+
+
+def test_fns_queue_stamp_asked_writes_date_on_the_profile(tmp_path, monkeypatch):
+    """Штамп `fns_asked` — тот же приём, что `reviewed` на карточке сделки:
+    переживает контейнер, потому что пишется прямо в git-файл базы."""
+    from pipeline.fns_unresolved_queue import stamp_asked
+    import json as _json
+
+    monkeypatch.setenv("FNS_QUEUE_DATE", "2026-08-23")
+    fixture = tmp_path / "deals_promoted.json"
+    base = {"companies": {"cid-a": {"name": "А"}, "cid-b": {"name": "Б"}}}
+    stamp_asked(base, ["cid-a"], path=str(fixture))
+
+    written = _json.loads(fixture.read_text(encoding="utf-8"))
+    assert written["companies"]["cid-a"]["fns_asked"] == "2026-08-23"
+    assert "fns_asked" not in written["companies"]["cid-b"]
+
+
+def test_fns_queue_unresolved_companies_skips_already_asked_profiles():
+    """Этап 3, П3''': компания со штампом `fns_asked` уже была спрошена в
+    консоли — не повторять молчащий вопрос каждый день."""
+    from pipeline.fns_unresolved_queue import unresolved_companies
+
+    base = {
+        "companies": {
+            "cid-new": {"name": "Новая компания"},
+            "cid-asked": {"name": "Уже спрошенная", "fns_asked": "2026-08-20"},
+        },
+        "deals": [
+            {"target": "cid-new", "date": "2026-08-20"},
+            {"buyer": "cid-asked", "date": "2026-08-21"},
+        ],
+    }
+    ids = [r[0] for r in unresolved_companies(base, registry_idx={}, exclude=set())]
+    assert ids == ["cid-new"]
+
+
+def test_fns_queue_send_one_omits_reply_markup_when_no_keyboard():
+    """Сообщение очереди «нужен ИНН» не несёт кнопок (решение — ответ
+    текстом, не нажатие) — `reply_markup` не должен уйти в теле запроса
+    вовсе (null), как и у обычных уведомлений notification_service."""
+    import sys as _sys
+    _sys.path.insert(0, "pipeline/ingest")
+    import send_drafts
+
+    calls = []
+
+    class _Resp:
+        status_code = 200
+        def json(self):
+            return {"ok": True}
+
+    class _FakeClient:
+        def post(self, url, json=None):
+            calls.append(json)
+            return _Resp()
+
+    ok = send_drafts.send_one(_FakeClient(), "tok", "111", "текст", None)
+    assert ok is True
+    assert "reply_markup" not in calls[0]
+
+    calls.clear()
+    ok = send_drafts.send_one(_FakeClient(), "tok", "111", "текст", {"inline_keyboard": [[]]})
+    assert ok is True
+    assert calls[0]["reply_markup"] == {"inline_keyboard": [[]]}
+
+
+def test_fns_notes_parse_inn_requires_exactly_one_bare_number():
+    from pipeline.fns_notes_to_registry import parse_inn
+
+    assert parse_inn("ИНН 7736207543") == "7736207543"
+    assert parse_inn("7736207543") == "7736207543"
+    assert parse_inn("770708389012") == "770708389012"       # 12 знаков — ИП/физлицо
+    assert parse_inn("два номера: 7736207543 и 7700000010") is None
+    assert parse_inn("телефон +7 999 773 62 07") is None      # не 10-12 цифр подряд
+    assert parse_inn("не знаю") is None
+    assert parse_inn("") is None
+
+
+def test_fns_notes_collect_confirms_valid_inn_and_rejects_the_rest():
+    """Четыре класса отказа проверены отдельно: профиля нет, уже в реестре,
+    в ответе не одно число, контрольная сумма не сходится. Пятый случай —
+    честное подтверждение, когда ИНН реальный (Яндекс, известно верный)."""
+    from pipeline.fns_notes_to_registry import collect
+
+    companies = {"yandex": {"name": "Яндекс"}, "gknown": {"name": "Уже решено"}}
+    registry_idx = {"gknown": {"decision": "no_match"}}
+    notes = [
+        {"id": 1, "deal_id": "инн~yandex", "edited_text": "7736207543"},
+        {"id": 2, "deal_id": "инн~ghost", "edited_text": "7736207543"},
+        {"id": 3, "deal_id": "инн~gknown", "edited_text": "7736207543"},
+        {"id": 4, "deal_id": "инн~yandex", "edited_text": "не нашёл, не отвечает телефон"},
+        {"id": 5, "deal_id": "инн~yandex", "edited_text": "7736207544"},   # искажена цифра
+        {"id": 6, "deal_id": "gnote-unrelated", "edited_text": "правка карточки, не ИНН"},
+    ]
+    ready, rejected = collect(notes, registry_idx, companies)
+    assert [(n["id"], cid, inn) for n, cid, inn in ready] == [(1, "yandex", "7736207543")]
+    rejected_ids = [n["id"] for n, _cid, _why in rejected]
+    assert rejected_ids == [2, 3, 4, 5]           # заметка 6 — не наш префикс, не участвует вовсе
+
+
+def test_fns_notes_append_registry_writes_valid_python(tmp_path):
+    from pipeline.fns_notes_to_registry import append_registry
+
+    fixture = tmp_path / "fake_registry.py"
+    fixture.write_text(
+        'REGISTRY = [\n'
+        '    {"company_id": "existing", "decision": "confirmed", "inn": "1234567890",\n'
+        '     "reason": "уже было", "date": "2026-08-01"},\n'
+        ']\n\n\n'
+        'def by_company_id() -> dict[str, dict]:\n'
+        '    return {row["company_id"]: row for row in REGISTRY}\n',
+        encoding="utf-8",
+    )
+    note = {"id": 42, "deal_id": "инн~newco", "edited_text": "7700000099"}
+    append_registry([(note, "newco", "7700000099")], path=str(fixture))
+
+    src = fixture.read_text(encoding="utf-8")
+    namespace = {}
+    exec(compile(src, str(fixture), "exec"), namespace)
+    idx = namespace["by_company_id"]()
+    assert idx["existing"]["inn"] == "1234567890"
+    assert idx["newco"]["decision"] == "confirmed" and idx["newco"]["inn"] == "7700000099"
+    assert "42" in idx["newco"]["reason"]
+
+
+def test_fns_notes_main_write_applies_replies_and_consumes(tmp_path, monkeypatch):
+    """Сквозной прогон --write: main() пишет реестр, отвечает реплаем на
+    исходное сообщение и помечает заметку применённой — та же цепочка,
+    которую read_notes.py уже требует от обычных заметок. `append_registry`
+    подменена шпионом, чтобы не трогать боевой pipeline/fns_registry.py —
+    её собственная запись уже проверена отдельным тестом на файловом
+    фикстуре (test_fns_notes_append_registry_writes_valid_python)."""
+    import json as _json
+    import sys as _sys
+    import pipeline.fns_notes_to_registry as fns_notes
+    import read_notes
+
+    data_file = tmp_path / "deals_promoted.json"
+    data_file.write_text(_json.dumps({"companies": {"yandex": {"name": "Яндекс"}}}), encoding="utf-8")
+    monkeypatch.setattr(fns_notes, "DATA", str(data_file))
+    monkeypatch.setattr(fns_notes, "by_company_id", lambda: {})
+
+    monkeypatch.setattr(read_notes, "fetch_notes", lambda: [
+        {"id": 9, "deal_id": "инн~yandex", "edited_text": "7736207543",
+         "chat_id": "111", "reply_message_id": 777},
+    ])
+    appended, replied, consumed = [], [], []
+    monkeypatch.setattr(fns_notes, "append_registry", lambda ready, path=None: appended.append(ready))
+    monkeypatch.setattr(read_notes, "send_reply", lambda nid, text: replied.append((nid, text)) or True)
+    monkeypatch.setattr(read_notes, "consume", lambda ids: consumed.extend(ids))
+    monkeypatch.setattr(_sys, "argv", ["fns_notes_to_registry.py", "--write"])
+
+    fns_notes.main()
+
+    assert appended and [(cid, inn) for _n, cid, inn in appended[0]] == [("yandex", "7736207543")]
+    assert replied and replied[0][0] == 9 and "7736207543" in replied[0][1]
+    assert consumed == [9]
+
+
+def test_fns_notes_main_dry_run_writes_nothing(tmp_path, monkeypatch):
+    """Без --write — план виден, ни реестр, ни ответ, ни consume не трогаются
+    (тот же принцип «сухой прогон без аргументов», что у остальных скриптов
+    pipeline/)."""
+    import json as _json
+    import sys as _sys
+    import pipeline.fns_notes_to_registry as fns_notes
+    import read_notes
+
+    data_file = tmp_path / "deals_promoted.json"
+    data_file.write_text(_json.dumps({"companies": {"yandex": {"name": "Яндекс"}}}), encoding="utf-8")
+    monkeypatch.setattr(fns_notes, "DATA", str(data_file))
+    monkeypatch.setattr(fns_notes, "by_company_id", lambda: {})
+    monkeypatch.setattr(read_notes, "fetch_notes", lambda: [
+        {"id": 9, "deal_id": "инн~yandex", "edited_text": "7736207543",
+         "chat_id": "111", "reply_message_id": 777},
+    ])
+    touched = []
+    monkeypatch.setattr(fns_notes, "append_registry", lambda *a, **kw: touched.append("append"))
+    monkeypatch.setattr(read_notes, "send_reply", lambda *a, **kw: touched.append("reply"))
+    monkeypatch.setattr(read_notes, "consume", lambda *a, **kw: touched.append("consume"))
+    monkeypatch.setattr(_sys, "argv", ["fns_notes_to_registry.py"])
+
+    fns_notes.main()
+    assert not touched
+
+
 def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
     """18 августа 2026 первый боевой прогон fns_seed_top_companies.py упал
     на PostgreSQL: `ForeignKeyViolation` — company_id ещё не было строки в
@@ -1573,6 +1795,25 @@ def test_note_reply_is_acked_instantly_and_carries_a_reply_target(client, monkey
     assert edits, "заметка не получила мгновенного подтверждения"
     assert edits[0]["message_id"] == 777
     assert "Заметка принята" in edits[0]["text"] and "Борис" in edits[0]["text"]
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_reply_to_inn_queue_message_becomes_a_namespaced_note(client, monkeypatch):
+    """Этап 3, П3''': ответ на [инн <id компании>] — заметка, а deal_id несёт
+    префикс «инн~», а не голый id компании. Семь id в базе уже совпадают
+    между сделками и компаниями (citibank и другие кураторские слаги) — без
+    префикса заметка о номере ИНН могла бы быть прочитана как заметка о
+    карточке сделки с тем же id."""
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111}, "from": {"id": 111},
+                     "text": "7740000076",
+                     "reply_to_message": {"text": "⚠️ [инн citibank] — НУЖЕН ИНН"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "инн~citibank"]
+    assert rows and rows[0]["verdict"] == "note"
+    assert rows[0]["edited_text"] == "7740000076"
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
