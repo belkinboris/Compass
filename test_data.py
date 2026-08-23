@@ -1163,6 +1163,28 @@ def test_fns_registry_confirmed_and_bank_entries_carry_lot_check(fns_registry, c
     assert not bad, "лот сопоставлен с одним юрлицом напрямую: %r" % bad
 
 
+def test_fns_registry_cbr_regnum_is_a_plausible_integer_when_present(fns_registry):
+    """Этап 6: `cbr_regnum` — регистрационный номер у ЦБ, не ИНН. Опечатка
+    (строка вместо числа, отрицательное значение, ноль) не должна молча
+    уйти в `cbr_f806.py` — там regnum идёт прямо в URL запроса."""
+    bad = [(row["company_id"], row.get("cbr_regnum")) for row in fns_registry.REGISTRY
+           if row.get("cbr_regnum") is not None
+           and not (isinstance(row["cbr_regnum"], int) and 0 < row["cbr_regnum"] < 10000)]
+    assert not bad, "неправдоподобный cbr_regnum: %r" % bad
+
+
+def test_fns_registry_cbr_regnum_is_not_shared_between_two_profiles(fns_registry):
+    regnums = [row["cbr_regnum"] for row in fns_registry.REGISTRY if row.get("cbr_regnum")]
+    dupes = {r for r in regnums if regnums.count(r) > 1}
+    assert not dupes, "один regnum ЦБ подтверждён нескольким профилям: %r" % dupes
+
+
+def test_fns_registry_cbr_regnum_only_on_bank_entries(fns_registry):
+    bad = [row["company_id"] for row in fns_registry.REGISTRY
+           if row.get("cbr_regnum") and row["decision"] != "bank"]
+    assert not bad, "cbr_regnum указан не у банковской записи: %r" % bad
+
+
 def test_holding_target_is_always_flagged_as_group(companies):
     """Любой профиль, на который ссылается `holding.id` хотя бы одного
     другого профиля, обязан нести `group: true` — иначе на его карточке
