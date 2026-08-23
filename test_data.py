@@ -1161,3 +1161,17 @@ def test_fns_registry_confirmed_and_bank_entries_carry_lot_check(fns_registry, c
            if row["decision"] in ("confirmed", "bank")
            and companies.get(row["company_id"], {}).get("lot")]
     assert not bad, "лот сопоставлен с одним юрлицом напрямую: %r" % bad
+
+
+def test_holding_target_is_always_flagged_as_group(companies):
+    """Любой профиль, на который ссылается `holding.id` хотя бы одного
+    другого профиля, обязан нести `group: true` — иначе на его карточке
+    рисуется список «В группу входит: N», а бейджа «Группа компаний» рядом с
+    названием нет: та же путаница, которой владелец просил избежать 23
+    августа 2026 (запись в CLAUDE.md «группа vs фонд/инвестор»). Обратное не
+    требуется: у группы может не быть НИ ОДНОГО текущего участника в базе
+    (Яндекс) и всё равно быть общеизвестной группой."""
+    targets = {c["holding"]["id"] for c in companies.values()
+               if c.get("holding") and c["holding"].get("id")}
+    unflagged = [cid for cid in targets if not companies.get(cid, {}).get("group")]
+    assert not unflagged, "цель holding без group:true: %r" % unflagged
