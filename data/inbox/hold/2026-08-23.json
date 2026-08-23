@@ -3474,62 +3474,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d77811664",
-   "title": "Глобальные инвесторы вложили в золотые фонды с начала августа $11 млрд",
-   "date": "2026-08-23",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8906577"
-    ]
-   ],
-   "sum": "$11 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Глобальные инвесторы",
-   "asset": "золотые фонды с начала августа $11 млрд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Глобальные инвесторы",
-    "asset": "золотые фонды с начала августа $11 млрд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87280067",
-   "title": "Алиев рассказал о роли Мирзиеева в привлечении инвестиций в Карабах",
-   "date": "2026-08-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260823/politika-2112678700.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
