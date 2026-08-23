@@ -624,6 +624,113 @@ def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
     assert stats == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
 
 
+def test_fns_queue_clean_query_name_strips_only_our_own_trailing_disambiguator():
+    """23 августа 2026: профиль «Кама» (Атом) заведён под этим именем именно
+    чтобы не совпасть по транслитерационному ключу с профилем ЦБК «Кама»
+    (см. CLAUDE.md) — но «(Атом)» это НАША пометка, не часть юрлица, и с ней
+    поиск ФНС не найдёт ничего. Скобки внутри самого названия (редкость, но
+    бывает) не должны обрезаться — паттерн якорен строго на конец строки."""
+    from pipeline.fns_unresolved_queue import clean_query_name
+
+    assert clean_query_name("«Кама» (Атом)") == "«Кама»"
+    assert clean_query_name("Ильинская больница") == "Ильинская больница"
+    assert clean_query_name("ООО «Ромашка (Юг)» (актив)") == 'ООО «Ромашка (Юг)»'
+
+
+def test_fns_queue_unresolved_companies_sorted_by_freshest_deal_and_skips_covered():
+    """П2''/П3'' брифа: очередь — свежие сделки первыми, не по числу сделок.
+    Профиль уже в реестре, профиль-лот и подозреваемый профиль-близнец в
+    очередь не попадают — им нечего делать среди кандидатов на поиск."""
+    from pipeline.fns_unresolved_queue import unresolved_companies
+
+    base = {
+        "companies": {
+            "cid-old": {"name": "Старая компания"},
+            "cid-new": {"name": "Новая компания"},
+            "cid-covered": {"name": "Уже в реестре"},
+            "cid-lot": {"name": "Лот из двух юрлиц", "lot": True},
+            "cid-twin": {"name": "Подозреваемый близнец"},
+        },
+        "deals": [
+            {"buyer": "cid-old", "date": "2020-01-01"},
+            {"target": "cid-new", "date": "2026-08-01"},
+            {"seller_id": "cid-covered", "date": "2026-08-10"},
+            {"buyer": "cid-lot", "date": "2026-08-10"},
+            {"target": "cid-twin", "date": "2026-08-10"},
+        ],
+    }
+    registry_idx = {"cid-covered": {"decision": "confirmed"}}
+    rows = unresolved_companies(base, registry_idx, exclude={"cid-twin"})
+    ids = [r[0] for r in rows]
+    assert ids == ["cid-new", "cid-old"]  # свежая сделка (2026) раньше старой (2020)
+    assert "cid-covered" not in ids and "cid-lot" not in ids and "cid-twin" not in ids
+
+
+def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_status():
+    """Механика этого шага НАРОЧНО у́же, чем match_companies(auto_confirm=True)
+    (0.965 похожести имени без ОКВЭД/региона — на «Арнест» вернул 10
+    кандидатов без сигнала, какой из них главный, см. докстринг скрипта):
+    подтверждает только когда после поиска остаётся РОВНО один действующий
+    результат с точным (не похожим) именем. Два действующих тёзки или один
+    ликвидированный результат — не подтверждение."""
+    from pipeline.fns_unresolved_queue import attempt_single_exact_match
+
+    class OneExactMatch:
+        def search(self, q):
+            return {"items": [{"ЮЛ": {
+                "ИНН": "7700000010", "НаимСокрЮЛ": 'ООО "Тестовая Компания"',
+                "Статус": "Действующее",
+            }}]}
+
+    hit = attempt_single_exact_match(OneExactMatch(), "Тестовая компания")
+    assert hit == ("7700000010", 'ООО "Тестовая Компания"')
+
+    class TwoHomonyms:
+        def search(self, q):
+            return {"items": [
+                {"ЮЛ": {"ИНН": "7700000011", "НаимСокрЮЛ": 'ООО "Тестовая Компания"', "Статус": "Действующее"}},
+                {"ЮЛ": {"ИНН": "7700000012", "НаимСокрЮЛ": 'ООО "Тестовая Компания"', "Статус": "Действующее"}},
+            ]}
+
+    assert attempt_single_exact_match(TwoHomonyms(), "Тестовая компания") is None
+
+    class OnlyLiquidated:
+        def search(self, q):
+            return {"items": [{"ЮЛ": {
+                "ИНН": "7700000013", "НаимСокрЮЛ": 'ООО "Тестовая Компания"',
+                "Статус": "Находится в стадии ликвидации",
+            }}]}
+
+    assert attempt_single_exact_match(OnlyLiquidated(), "Тестовая компания") is None
+
+
+def test_fns_queue_append_registry_writes_valid_python_without_touching_existing_records(tmp_path):
+    """Дописанный блок обязан остаться синтаксически верным Python (файл —
+    рабочий код, не только данные) и не задеть уже существующие записи."""
+    from pipeline.fns_unresolved_queue import _append_registry
+
+    fixture = tmp_path / "fake_registry.py"
+    fixture.write_text(
+        'REGISTRY = [\n'
+        '    {"company_id": "existing", "decision": "confirmed", "inn": "1234567890",\n'
+        '     "reason": "уже было", "date": "2026-08-01"},\n'
+        ']\n\n\n'
+        'def by_company_id() -> dict[str, dict]:\n'
+        '    return {row["company_id"]: row for row in REGISTRY}\n',
+        encoding="utf-8",
+    )
+    _append_registry([("newco", 'ООО «Новая» (тест)', "7700000099", 'ООО "Новая"')], path=str(fixture))
+
+    src = fixture.read_text(encoding="utf-8")
+    compile(src, str(fixture), "exec")  # синтаксическая проверка без выполнения
+    namespace = {}
+    exec(compile(src, str(fixture), "exec"), namespace)
+    idx = namespace["by_company_id"]()
+    assert idx["existing"]["inn"] == "1234567890"          # старая запись не тронута
+    assert idx["newco"]["decision"] == "confirmed"
+    assert idx["newco"]["inn"] == "7700000099"
+
+
 def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
     """18 августа 2026 первый боевой прогон fns_seed_top_companies.py упал
     на PostgreSQL: `ForeignKeyViolation` — company_id ещё не было строки в
