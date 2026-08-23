@@ -30,12 +30,35 @@ link_named_parties_to_existing_profiles.py), заново попадает в т
 цель не «покрыть максимум профилей», а «у новой карточки быстро появились
 финансы», а старый профиль с одной сделкой пятилетней давности подождёт.
 
+ДОСТАВКА В КОНСОЛЬ (этап 3, П3'''). Раньше остаток печатался в stdout
+одноразового контейнера — никто не видел («очередь, которая падает в
+одноразовый контейнер, — не очередь», урок CLAUDE.md). `--to-console --write`
+шлёт остаток (после `--attempt`, если он был; без него — весь список) в
+ту же Telegram-консоль, что и черновики (`send_targets()`/`send_one()` из
+`pipeline/ingest/send_drafts.py`), по одному сообщению на компанию, с
+маркером `[инн <id>]` в первой строке. Ответ владельца текстом (номер ИНН)
+приходит вебхуком как ЗАМЕТКА с `deal_id = "инн~<id>"` (main.py,
+`telegram_webhook`) — префикс защищает от совпадения с id сделки (7 таких
+совпадений уже есть в базе, кураторские слаги вроде `citibank`). Заметку
+разбирает `pipeline/fns_notes_to_registry.py`.
+
+ПОЧЕМУ КОМПАНИЯ НЕ СПРАШИВАЕТСЯ ДВАЖДЫ. Отправка ставит `company["fns_asked"]
+= <дата>` прямо на профиль в `deals_promoted.json` (тот же приём, что
+`reviewed`/`deep_researched` на карточках сделок, — штамп пережил бы
+контейнер, потому что он в git). `unresolved_companies()` пропускает
+профили со штампом — иначе владелец видел бы одну и ту же компанию каждый
+день, пока не ответит. Обратная сторона: если ответ так и не пришёл, компания
+не вернётся в очередь сама — перепрос по расписанию не сделан, это заведомый
+компромисс, не забытая часть.
+
 Запуск:
     python3 pipeline/fns_unresolved_queue.py            # список, без сети
     python3 pipeline/fns_unresolved_queue.py --limit 20 --attempt --write
         # первые 20 по свежести: попытка автоподтверждения (живой поиск),
         # подтверждённое пишется в pipeline/fns_registry.py, остальное —
         # готовый текст для консоли
+    python3 pipeline/fns_unresolved_queue.py --limit 20 --attempt --to-console --write
+        # то же самое, плюс отправка неразрешённого остатка в консоль
 """
 import argparse
 import json
@@ -96,6 +119,8 @@ def unresolved_companies(base, registry_idx=None, exclude=None):
         profile = companies.get(cid) or {}
         if profile.get("lot"):
             continue  # лот из нескольких юрлиц — искать по имени одним юрлицом бессмысленно
+        if profile.get("fns_asked"):
+            continue  # уже спросили в консоли (штамп даты) — не повторять молчащий вопрос
         rows.append((cid, profile.get("name") or cid, date, counts.get(cid, 0)))
     rows.sort(key=lambda r: (r[2], r[3]), reverse=True)
     return rows
@@ -132,13 +157,92 @@ def format_queue_line(cid, name, date):
     return "• %s — #/companies/%s (сделка от %s)" % (name, cid, date or "?")
 
 
+# Сколько компаний слать в консоль за прогон. «10-15 строк» из брифа — то же
+# по духу ограничение, что RAW_PER_RUN в send_drafts.py: без предела очередь
+# из полусотни компаний легла бы одним разом и стала бы шумом, который
+# перестают читать (тот же урок CLAUDE.md, «консоль, куда валят всё»).
+CONSOLE_PER_RUN = 15
+
+SITE = os.environ.get("APP_BASE_URL", "https://projectcompass.ru").rstrip("/")
+
+
+def console_message(cid, name, date):
+    """⚠️ [инн <id>] — маркер, который main.py::telegram_webhook разбирает
+    как ответ-заметку с deal_id="инн~<id>" (см. докстринг модуля)."""
+    return ("⚠️ [инн %s] — НУЖЕН ИНН\n"
+            "%s\n"
+            "Карточка: %s/#/companies/%s\n"
+            "Сделка от %s\n\n"
+            "Ответьте номером ИНН (10 или 12 цифр) — впишем в реестр "
+            "pipeline/fns_registry.py после проверки контрольной суммы."
+            % (cid, name, SITE, cid, date or "?"))
+
+
+def send_queue_to_console(queue, write):
+    """Отправить остаток очереди в Telegram-консоль, по одному сообщению на
+    компанию (без клавиатуры — решение здесь не кнопка, а текстовый ответ).
+    write=False — только план, ничего не уходит и штамп не ставится."""
+    HERE = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, os.path.join(HERE, "ingest"))
+    import send_drafts
+    import telegram_endpoint
+
+    batch = queue[:CONSOLE_PER_RUN]
+    targets = send_drafts.send_targets()
+    if not targets:
+        print("Ни TELEGRAM_REVIEW_GROUP_ID, ни TELEGRAM_REVIEW_CHAT_IDS не заданы — "
+              "консоли нет, остаток не отправлен.")
+        return []
+    if not write:
+        print("\nВ консоль ушло бы %d сообщений (сухой прогон — не отправлено):" % len(batch))
+        for cid, name, date in batch:
+            print(format_queue_line(cid, name, date))
+        return []
+
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    if not token:
+        print("TELEGRAM_BOT_TOKEN не задан — консоли нет, остаток не отправлен.")
+        return []
+
+    import httpx
+    sent = []
+    with httpx.Client(timeout=20) as client:
+        for cid, name, date in batch:
+            text = console_message(cid, name, date)
+            ok = all(send_drafts.send_one(client, token, chat, text, None) for chat in targets)
+            if ok:
+                sent.append(cid)
+            time.sleep(send_drafts.PAUSE)
+    print("В консоль отправлено: %d" % len(sent))
+    return sent
+
+
+def stamp_asked(base, cids, path=None):
+    """Штамп `fns_asked` прямо на профиль — тот же приём, что `reviewed` на
+    карточке сделки: переживает контейнер, потому что в git, и не даёт
+    unresolved_companies() спросить о той же компании завтра снова."""
+    from datetime import date as _date
+
+    path = path or DATA
+    today = os.environ.get("FNS_QUEUE_DATE") or _date.today().isoformat()
+    comps = base["companies"]
+    for cid in cids:
+        if cid in comps:
+            comps[cid]["fns_asked"] = today
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(base, f, indent=1, ensure_ascii=False)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=30)
     parser.add_argument("--attempt", action="store_true",
                         help="живой поиск ФНС для каждой компании очереди")
+    parser.add_argument("--to-console", action="store_true",
+                        help="отправить неразрешённый остаток в Telegram-консоль")
     parser.add_argument("--write", action="store_true",
-                        help="с --attempt: дописать однозначные находки в fns_registry.py")
+                        help="с --attempt: дописать находки в fns_registry.py; "
+                             "с --to-console: реально отправить и проставить fns_asked")
     args = parser.parse_args()
 
     base = json.load(open(DATA, encoding="utf-8"))
@@ -150,34 +254,38 @@ def main():
         return
 
     if not args.attempt:
-        for cid, name, date, count in rows:
-            print(format_queue_line(cid, name, date))
-        return
+        queue = [(cid, name, date) for cid, name, date, count in rows]
+    else:
+        from fns_client import ApiFnsClient
 
-    from fns_client import ApiFnsClient
+        confirmed, queue = [], []
+        with ApiFnsClient() as client:
+            for cid, name, date, count in rows:
+                hit = attempt_single_exact_match(client, name)
+                if hit:
+                    confirmed.append((cid, name, hit[0], hit[1]))
+                else:
+                    queue.append((cid, name, date))
+                time.sleep(0.15)
 
-    confirmed, queue = [], []
-    with ApiFnsClient() as client:
-        for cid, name, date, count in rows:
-            hit = attempt_single_exact_match(client, name)
-            if hit:
-                confirmed.append((cid, name, hit[0], hit[1]))
-            else:
-                queue.append((cid, name, date))
-            time.sleep(0.15)
-
-    if confirmed:
-        print("Автоподтверждено (единственное точное совпадение): %d" % len(confirmed))
-        for cid, name, inn, legal_name in confirmed:
-            print("  %s (%s) -> ИНН %s, %s" % (name, cid, inn, legal_name))
-        if args.write:
-            _append_registry(confirmed)
-            print("Записано в pipeline/fns_registry.py.")
+        if confirmed:
+            print("Автоподтверждено (единственное точное совпадение): %d" % len(confirmed))
+            for cid, name, inn, legal_name in confirmed:
+                print("  %s (%s) -> ИНН %s, %s" % (name, cid, inn, legal_name))
+            if args.write:
+                _append_registry(confirmed)
+                print("Записано в pipeline/fns_registry.py.")
 
     if queue:
         print("\n⚠️ Нужен ИНН вручную (%d):" % len(queue))
         for cid, name, date in queue:
             print(format_queue_line(cid, name, date))
+
+    if args.to_console and queue:
+        sent = send_queue_to_console(queue, args.write)
+        if sent:
+            stamp_asked(base, sent)
+            print("Проставлен fns_asked профилям: %d" % len(sent))
 
 
 def _append_registry(confirmed, path=None):

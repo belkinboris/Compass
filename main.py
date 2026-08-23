@@ -1132,12 +1132,22 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     #   [карточка <id>] / [сырьё <id>] — ваш текст ложится ЗАМЕТКОЙ: её
     #       читает суточная рутина притока и применяет через review.py с его
     #       проверками цитат — заметка не пишет в базу напрямую.
+    #   [инн <id компании>] — очередь «нужен ИНН» (pipeline/
+    #       fns_unresolved_queue.py, этап 3 П3'''): ваш текст с номером ИНН
+    #       ложится ЗАМЕТКОЙ, которую читает pipeline/fns_notes_to_registry.py
+    #       и, если контрольная сумма сходится, пишет в git-реестр
+    #       pipeline/fns_registry.py. deal_id хранится с префиксом "инн~" —
+    #       голый id компании МОГ БЫ совпасть с id сделки (7 таких совпадений
+    #       уже есть в базе, слаги куратора вроде "citibank"), и без префикса
+    #       заметка ушла бы неправильному потребителю. Тот же разделитель
+    #       `~`, что уже используют вехи в mod:<id>~<kind> (раздел A).
     reply = message.get("reply_to_message") or {}
-    marker = re.search(r"\[(пост|черновик|карточка|сырьё) ([\w-]{1,40})\]",
+    marker = re.search(r"\[(пост|черновик|карточка|сырьё|инн) ([\w-]{1,40})\]",
                        str(reply.get("text") or ""))
     if marker and text.strip() and _is_reviewer(sender_id):
-        kind, deal_id = marker.group(1), marker.group(2)
+        kind, raw_id = marker.group(1), marker.group(2)
         verdict = "approve" if kind in ("пост", "черновик") else "note"
+        deal_id = ("инн~" + raw_id) if kind == "инн" else raw_id
         # chat_id/reply_message_id — только у заметок: только их читает и на
         # них отвечает рутина (read_notes.py), решению approve отвечать
         # реплаем не нужно, оно и так подтверждается штампом в сообщении.
