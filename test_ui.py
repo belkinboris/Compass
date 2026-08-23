@@ -781,6 +781,110 @@ def test_company_ownership_block_shown_only_when_known(page, base_url):
     assert "собственники" not in page.inner_text("#app").lower()
 
 
+def test_ao_participants_show_founders_heading_without_overlap(browser, base_url):
+    """Этап 5, П1'''''/П2''''': для АО вкладка «Участники» обязана сказать
+    прямо, что это учредители при регистрации, а не текущий состав (ЕГРЮЛ
+    не отслеживает акционеров АО) — и длинное ФИО не должно перекрываться
+    чипом доли. Сеть подменена, потому что живые данные АФК в базе сейчас
+    без известных долей — нужен и «доля есть» (для проверки наложения), и
+    «доли нет ни у кого» (для проверки единой строки-пояснения) кейс сразу."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": True, "company_id": "gc2792a44", "company_name": "АФК «Система»",
+                "entities": [{
+                    "entity": {"id": 1, "legal_name": 'ПАО АФК "Система"', "inn": "7708004767",
+                              "legal_form": "Публичное акционерное общество"},
+                    "reports": [], "report_years": [], "has_more_reports": False,
+                    "has_more_events": False, "events": [],
+                    "ownership": {
+                        "available": True, "is_ao": True, "heading": "Учредители при регистрации",
+                        "as_of": "2002-11-11",
+                        "current": [
+                            {"name": "Гончарук Александр Юрьевич", "type": "Физическое лицо",
+                             "inn": "770500000002", "nominal_value_rub": 23625, "share_percent": 8.3333},
+                            {"name": "Евтушенков Владимир Петрович", "type": "Физическое лицо",
+                             "inn": "770500000001", "nominal_value_rub": 615312, "share_percent": 12.5},
+                        ],
+                        "history": [], "has_more_history": False,
+                        "notice": ("ЕГРЮЛ не отслеживает акционеров акционерного общества — здесь список "
+                                  "учредителей на момент регистрации, а не текущие владельцы. Актуальные "
+                                  "собственники, если раскрыты, — в блоке «Собственники» на странице компании."),
+                    },
+                }],
+                "access": {"paid": True, "full_history": True, "downloads": True},
+            }))
+        ctx.route("**/api/companies/gc2792a44/fns*", fake_fns)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.set_viewport_size({"width": 360, "height": 900})
+        pg.goto(base_url + "/#/companies/gc2792a44", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        pg.click("[data-fnstab='ownership']")
+        pg.wait_for_timeout(300)
+        body = pg.inner_text("#app").lower()
+        assert "учредители при регистрации" in body
+        assert "не отслеживает акционеров" in body
+        assert not errors, "pageerror при рендере вкладки участников: %s" % errors
+
+        goncharuk_card = pg.locator(".owner-card", has_text="Гончарук")
+        name_box = goncharuk_card.locator(".owner-name").bounding_box()
+        share_box = goncharuk_card.locator(".owner-share").bounding_box()
+        assert name_box and share_box, "у карточки с известной долей должны быть и имя, и чип"
+        # Пересечение по X: правая граница имени должна быть левее (или на
+        # чипе только там, где сам чип начинается) — конкретно проверяем,
+        # что бокс имени не заходит за левый край чипа доли того же ряда
+        # (оба — в первой owner-card, где известна доля).
+        overlap = not (name_box["x"] + name_box["width"] <= share_box["x"]
+                      or share_box["x"] + share_box["width"] <= name_box["x"]
+                      or name_box["y"] + name_box["height"] <= share_box["y"]
+                      or share_box["y"] + share_box["height"] <= name_box["y"])
+        assert not overlap, "чип доли перекрывает имя участника"
+    finally:
+        ctx.close()
+
+
+def test_participants_without_any_known_share_get_one_note_not_n_chips(browser, base_url):
+    """Этап 5, П2''''': «Доля не указана» на КАЖДОЙ строке — не пометка, а
+    шум. Когда доля не известна ни у одного участника, страница показывает
+    ОДНУ строку-пояснение над списком, а не чип на каждой карточке."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": True, "company_id": "gc2792a44", "company_name": "АФК «Система»",
+                "entities": [{
+                    "entity": {"id": 1, "legal_name": 'ПАО АФК "Система"', "inn": "7708004767"},
+                    "reports": [], "report_years": [], "has_more_reports": False,
+                    "has_more_events": False, "events": [],
+                    "ownership": {
+                        "available": True, "is_ao": True, "heading": "Учредители при регистрации",
+                        "as_of": "2002-11-11",
+                        "current": [
+                            {"name": "Гончарук Александр Юрьевич", "type": "Физическое лицо",
+                             "inn": None, "nominal_value_rub": 23625, "share_percent": None},
+                            {"name": "Евтушенков Владимир Петрович", "type": "Физическое лицо",
+                             "inn": None, "nominal_value_rub": 615312, "share_percent": None},
+                        ],
+                        "history": [], "has_more_history": False, "notice": "тест",
+                    },
+                }],
+                "access": {"paid": True, "full_history": True, "downloads": True},
+            }))
+        ctx.route("**/api/companies/gc2792a44/fns*", fake_fns)
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/companies/gc2792a44", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        pg.click("[data-fnstab='ownership']")
+        pg.wait_for_timeout(300)
+        assert pg.locator(".owner-share").count() == 0, "без известных долей чипов быть не должно"
+        assert "доли в этой выписке не раскрыты" in pg.inner_text("#app").lower()
+    finally:
+        ctx.close()
+
+
 def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 

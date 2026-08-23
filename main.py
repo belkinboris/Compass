@@ -704,18 +704,47 @@ def _owner_payload(row: OwnershipStake) -> dict:
     }
 
 
+def _is_ao_entity(entity: LegalEntity) -> bool:
+    """ЕГРЮЛ хранит для акционерных обществ не текущих владельцев, а список
+    УЧРЕДИТЕЛЕЙ на момент регистрации (реестр акционеров ведёт не ФНС, а
+    сам регистратор/депозитарий) — в отличие от ООО, где участники в ЕГРЮЛ
+    действительно актуальны. Определяем форму по `legal_form`/`short_name`:
+    один и тот же regex для обеих веток `_ownership_payload` (раньше
+    работал только когда снапшотов не было вовсе — П1''''', этап 5)."""
+    form = f"{entity.legal_form or ''} {entity.short_name or ''}".lower()
+    return bool(re.search(r"(?:^|\s)(?:пао|ао|оао|зао)(?:\s|$)|акционерн", form))
+
+
+def _dedupe_owners(owners: list[dict]) -> list[dict]:
+    """Одно лицо в ЕГРЮЛ иногда встречается в снапшоте дважды — записью с
+    ИНН и записью без (два разных блока исходной выписки слиты в один
+    снапшот при разборе). Схлопываем по нормализованному имени, предпочитая
+    запись с ИНН — иначе на экране одно и то же лицо дублируется (П1''''',
+    этап 5: «Горбатовский Александр Иванович» ×2, «Зубов Дмитрий Львович» ×2)."""
+    by_key: dict[str, dict] = {}
+    order: list[str] = []
+    for owner in owners:
+        key = re.sub(r"\s+", " ", str(owner.get("name") or "").strip().lower())
+        if key not in by_key:
+            by_key[key] = owner
+            order.append(key)
+        elif owner.get("inn") and not by_key[key].get("inn"):
+            by_key[key] = owner
+    return [by_key[k] for k in order]
+
+
 def _ownership_payload(db, entity: LegalEntity, paid: bool) -> dict:
+    is_ao = _is_ao_entity(entity)
     snapshots = list(db.scalars(select(OwnershipSnapshot).where(
         OwnershipSnapshot.legal_entity_id == entity.id
     ).order_by(OwnershipSnapshot.snapshot_date, OwnershipSnapshot.id)).all())
     if not snapshots:
-        form = f"{entity.legal_form or ''} {entity.short_name or ''}".lower()
-        is_ao = bool(re.search(r"(?:^|\s)(?:пао|ао|оао|зао)(?:\s|$)|акционерн", form))
         return {
             "available": False,
             "current": [],
             "history": [],
             "has_more_history": False,
+            "is_ao": is_ao,
             "notice": ("ЕГРЮЛ не раскрывает состав акционеров акционерного общества. "
                        "Если акционеры названы в сообщениях эмитента или источниках сделки, "
                        "они показываются в карточках соответствующих сделок.") if is_ao else
@@ -730,7 +759,7 @@ def _ownership_payload(db, entity: LegalEntity, paid: bool) -> dict:
         enriched.append((snap, stakes))
     current_pair = next(((snap, stakes) for snap, stakes in reversed(enriched)
                          if snap.source_kind == "current"), enriched[-1])
-    current = [_owner_payload(x) for x in current_pair[1]]
+    current = _dedupe_owners([_owner_payload(x) for x in current_pair[1]])
 
     def comparable(pair):
         snap, stakes = pair
@@ -796,14 +825,26 @@ def _ownership_payload(db, entity: LegalEntity, paid: bool) -> dict:
 
     history.sort(key=lambda x: (x.get("date") or "", x.get("kind") or ""), reverse=True)
     shown = history if paid else history[:3]
+    # П1''''', этап 5: для АО/ПАО этот снапшот — не «текущий состав», а
+    # УЧРЕДИТЕЛИ на момент регистрации (см. _is_ao_entity) — ЕГРЮЛ реестр
+    # акционеров вообще не ведёт, и показывать список 2002 года под
+    # заголовком «Текущий» — не старость данных, а неверная подпись.
+    heading = "Учредители при регистрации" if is_ao else "Текущий состав"
+    notice = ("Показываем изменения, которые зафиксированы в ЕГРЮЛ. "
+              "Для неполных исторических записей не восстанавливаем состав участников догадками.")
+    if is_ao:
+        notice = ("ЕГРЮЛ не отслеживает акционеров акционерного общества — здесь список "
+                  "учредителей на момент регистрации, а не текущие владельцы. Актуальные "
+                  "собственники, если раскрыты, — в блоке «Собственники» на странице компании.")
     return {
         "available": bool(current or history),
         "current": current,
         "as_of": _plain(current_pair[0].snapshot_date),
+        "heading": heading,
+        "is_ao": is_ao,
         "history": shown,
         "has_more_history": len(history) > len(shown),
-        "notice": ("Показываем изменения, которые зафиксированы в ЕГРЮЛ. "
-                   "Для неполных исторических записей не восстанавливаем состав участников догадками."),
+        "notice": notice,
     }
 
 

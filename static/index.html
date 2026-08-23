@@ -1065,10 +1065,11 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fns-chart .axis{stroke:var(--line);stroke-width:1}.fns-chart .series{fill:none;stroke:var(--accent);stroke-width:2.4}.fns-chart .point{fill:var(--card);stroke:var(--accent);stroke-width:2}.fns-chart .negative{stroke:#8B4B43}.fns-chart text{font-family:var(--f-body);font-size:9px;fill:var(--muted)}
 .ownership-intro{font-size:13.5px;line-height:1.58;color:var(--muted);max-width:76ch;margin:0 0 18px}
 .owner-current{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:24px}
-.owner-card{position:relative;border:1px solid var(--line);border-radius:9px;padding:16px 72px 15px 16px;background:var(--paper);min-height:82px}
+.owner-card{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:9px;padding:16px;background:var(--paper);min-height:82px}
+.owner-card .owner-body{flex:1 1 auto;min-width:0}
 .owner-card .owner-name{font-family:var(--f-display);font-size:18px;line-height:1.3;color:var(--ink)}
 .owner-card .owner-meta{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.45}
-.owner-share{position:absolute;right:14px;top:14px;min-width:48px;text-align:center;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:5px 8px;font-size:12px;font-weight:650;font-variant-numeric:tabular-nums}
+.owner-share{flex:0 0 auto;text-align:center;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:5px 8px;font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
 .ownership-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:20px 0 8px}
 .ownership-heading h3{font-family:var(--f-display);font-size:21px;font-weight:400}
 .ownership-timeline{position:relative;margin:6px 0 0;padding-left:22px}
@@ -4521,7 +4522,17 @@ const ownerShareLabel = value => value===null||value===undefined ? "Доля н�
 const ownerMetaHtml = owner => [owner.inn?`ИНН ${esc(owner.inn)}`:"",owner.country?esc(owner.country):"",owner.nominal_value_rub?`Номинал ${fnsMoney(owner.nominal_value_rub)}`:""].filter(Boolean).join(" · ");
 function ownershipHtml(ownership){
   if(!ownership||!ownership.available) return `<div class="fns-empty">${esc(ownership&&ownership.notice||"Сведения об участниках в полученных данных не найдены.")}</div>`;
-  const current=(ownership.current||[]).map(owner=>`<div class="owner-card"><div class="owner-name">${esc(owner.name)}</div><div class="owner-meta">${ownerMetaHtml(owner)||esc(owner.type||"Участник")}</div><span class="owner-share">${ownerShareLabel(owner.share_percent)}</span></div>`).join("");
+  // Чип с долей — только когда доля ИЗВЕСТНА (П2''''', этап 5): «Доля не
+  // указана» на КАЖДОЙ карточке — не пометка, а шум («пометка, которая
+  // стоит везде, перестаёт быть пометкой»), и вдобавок этот текст шире
+  // отведённых 72px и наезжал на длинные ФИО. Если долей нет ни у кого —
+  // одна строка над списком, а не N одинаковых чипов.
+  const ownersList=ownership.current||[];
+  const anyShareKnown=ownersList.some(o=>o.share_percent!==null&&o.share_percent!==undefined);
+  const current=ownersList.map(owner=>{
+    const known=owner.share_percent!==null&&owner.share_percent!==undefined;
+    return `<div class="owner-card"><div class="owner-body"><div class="owner-name">${esc(owner.name)}</div><div class="owner-meta">${ownerMetaHtml(owner)||esc(owner.type||"Участник")}</div></div>${known?`<span class="owner-share">${ownerShareLabel(owner.share_percent)}</span>`:""}</div>`;
+  }).join("");
   const labels={joined:"Вошёл в состав участников",left:"Вышел из состава участников",share_changed:"Доля изменилась",recorded:"Сведения об участнике обновлены"};
   const rows=(ownership.history||[]).map(ev=>{
     const before=ev.kind==="joined"?"Не участвовал":(ev.before_share===null||ev.before_share===undefined?"Доля не указана":ownerShareLabel(ev.before_share));
@@ -4529,9 +4540,13 @@ function ownershipHtml(ownership){
     const change=ev.kind==="share_changed"||ev.kind==="joined"||ev.kind==="left"?`<div class="ownership-change"><span class="ownership-value">${before}</span><svg class="ownership-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ownership-value">${after}</span></div>`:"";
     return `<div class="ownership-event ${esc(ev.kind||"")}"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div class="event-title">${labels[ev.kind]||"Изменение состава участников"}</div><div class="event-name">${esc(ev.owner&&ev.owner.name||"Участник")}</div>${change}${ev.source_text?`<div class="ownership-source">${esc(ev.source_text)}</div>`:""}</div>`;
   }).join("");
-  return `<p class="ownership-intro">Текущий состав и изменения по данным ЕГРЮЛ. Показываем долю до и после изменения, когда обе величины есть в источнике.</p>
-    <div class="ownership-heading"><h3>Текущий состав</h3>${ownership.as_of?`<span class="label num">на ${fmtDate(ownership.as_of)}</span>`:""}</div>
-    ${current?`<div class="owner-current">${current}</div>`:`<div class="fns-empty">Текущий состав участников в полученных данных не указан.</div>`}
+  const heading=ownership.heading||"Текущий состав";
+  const introText=ownership.is_ao
+    ?"Учредители при регистрации и изменения по данным ЕГРЮЛ. ЕГРЮЛ не отслеживает акционеров акционерных обществ — это не текущие владельцы."
+    :"Текущий состав и изменения по данным ЕГРЮЛ. Показываем долю до и после изменения, когда обе величины есть в источнике.";
+  return `<p class="ownership-intro">${introText}</p>
+    <div class="ownership-heading"><h3>${esc(heading)}</h3>${ownership.as_of?`<span class="label num">на ${fmtDate(ownership.as_of)}</span>`:""}</div>
+    ${current?`${(ownersList.length&&!anyShareKnown)?`<p class="ownership-notice" style="margin:0 0 10px">Доли в этой выписке не раскрыты.</p>`:""}<div class="owner-current">${current}</div>`:`<div class="fns-empty">${esc(heading)} участников в полученных данных не указан.</div>`}
     ${rows?`<div class="ownership-heading"><h3>История изменений</h3></div><div class="ownership-timeline">${rows}</div>`:`<div class="fns-empty">Изменений состава участников в полученных данных пока нет.</div>`}
     ${ownership.has_more_history?`<div class="fns-premium">Полная история изменений доступна по подписке.</div>`:""}
     ${ownership.notice?`<div class="ownership-notice">${esc(ownership.notice)}</div>`:""}`;
