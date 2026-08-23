@@ -157,17 +157,9 @@ FIXES = [
                   '($8.22 billion) in profits now stranded there.',
          why='партия 5 агентов, раунд 2, 14.08.2026, источник dailysabah.com: перенесено '
                   'дословно'),
-    dict(id='g1b5e8ab8', field='eco.context', old='—',
-         new='Raiffeisen проводит платежи по газопроводу «Турецкий поток» — единственному оставшемуся у России маршруту поставок газа в Европу после того, как остальные были перекрыты, рассказали собеседники. За первые восемь месяцев этого года по «Турецкому потоку» через Турцию в европейские страны, включая Болгарию и Венгрию, было поставлено около 11,5 млрд куб. м газа. По средним рыночным ценам этот газ стоил примерно $3,8 млрд, что делает его существенной частью российского газового экспорта.',
-         quote='Raiffeisen processes payments for the TurkStream pipeline, Russia\'s only '
-                  'remaining route for sending gas into Europe after others were cut, the '
-                  'people said. TurkStream delivered roughly 11.5 billion cubic meters (bcm) '
-                  'of gas in the first eight months of this year via Türkiye to European '
-                  'countries, including Bulgaria and Hungary. At average market prices, that '
-                  'gas was worth roughly $3.8 billion, making it an essential part of '
-                  'Russia\'s gas exports.',
-         why='партия 5 агентов, раунд 2, 14.08.2026, источник dailysabah.com: перенесено '
-                  'дословно'),
+    # g1b5e8ab8/eco.context: запись снята — 23.08.2026 месячная очередь
+    # дописала смену CEO и иск к Rasperia поверх старого значения. См.
+    # fix_raiffeisen_ceo_and_rasperia_lawsuit.py.
     dict(id='gcfae418d', field='law.terms', old='—',
          new='Бренды EMC и «Скандинавии» сохранятся в результате объединения, отмечают в '
                   'EMC.',
@@ -191,15 +183,9 @@ FIXES = [
                   '13,5 млрд рублей, полученный одной из структур ЕМЦ накануне.',
          why='партия 5 агентов, раунд 2, 14.08.2026, источник logistics.ru: перенесено '
                   'дословно'),
-    dict(id='g5da91c40', field='eco.context', old='—',
-         new='ЕМЦ долгое время работал на премиальный сегмент и ориентировался на '
-                  'экспатов. После их массового отъезда в 2022 году органический рост '
-                  'остановился, а в реальном выражении началось снижение.',
-         quote='ЕМЦ долгое время работал на премиальный сегмент и ориентировался на '
-                  'экспатов. После их массового отъезда в 2022 году органический рост '
-                  'остановился, а в реальном выражении началось снижение.',
-         why='партия 5 агентов, раунд 2, 14.08.2026, источник logistics.ru: перенесено '
-                  'дословно'),
+    # g5da91c40/eco.context: запись снята — 23.08.2026 месячная очередь
+    # дописала развитие сети после сделки (новый центр, выручка) поверх
+    # старого значения. См. fix_emc_semeyniy_doktor_development.py.
     dict(id='cb30dbbc8', field='eco.val', old='—',
          new='Сумма сделки не разглашается. По оценке экспертов, опрошенных РБК, она '
                   'может составлять от 3 до 4 млрд рублей.',
