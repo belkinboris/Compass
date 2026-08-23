@@ -52,6 +52,7 @@ BASE_URL = "https://www.cbr.ru/banking_sector/credit/coinfo/f806/"
 QUARTER_START_MONTHS = (1, 4, 7, 10)
 
 _TITLE_RE = re.compile(r"публикуемая форма\)\s*на\s*(\d{1,2})\.(\d{1,2})\.(\d{4})")
+_LEGAL_NAME_RE = re.compile(r'coinfo_item_text[^>]*>([^<]*)</div>')
 _ROW_RE = re.compile(
     r'<td>[\d.]+</td>\s*<td>(?P<name>[^<]*)</td>\s*<td>(?P<note>[^<]*)</td>\s*'
     r'<td class="right"><nobr>(?P<v1>[\d\xa0 ]*)</nobr></td>\s*'
@@ -75,6 +76,7 @@ class F806Balance:
     assets_rub_prior_year: int | None
     equity_rub: int
     equity_rub_prior_year: int | None
+    legal_name: str | None          # полное юридическое имя со страницы ЦБ, для подписи
 
 
 def _parse_number(raw: str) -> int | None:
@@ -123,6 +125,9 @@ def parse_balance(html: str, regnum: int) -> F806Balance | None:
     if not assets or assets[0] is None or not equity or equity[0] is None:
         return None
 
+    name_m = _LEGAL_NAME_RE.search(html)
+    legal_name = name_m.group(1).strip() if name_m else None
+
     return F806Balance(
         regnum=regnum,
         as_of=as_of,
@@ -130,6 +135,7 @@ def parse_balance(html: str, regnum: int) -> F806Balance | None:
         assets_rub_prior_year=assets[1] * 1000 if assets[1] is not None else None,
         equity_rub=equity[0] * 1000,
         equity_rub_prior_year=equity[1] * 1000 if equity[1] is not None else None,
+        legal_name=legal_name,
     )
 
 

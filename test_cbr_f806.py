@@ -26,6 +26,7 @@ def test_parse_balance_reads_assets_and_equity_from_real_page():
     assert balance.assets_rub_prior_year == 65_210_686_723_000
     assert balance.equity_rub == 8_627_750_211_000
     assert balance.equity_rub_prior_year == 8_115_080_880_000
+    assert balance.legal_name == "Публичное акционерное общество «Сбербанк России»"
 
 
 def test_parse_balance_returns_none_for_unpublished_quarter():
@@ -69,5 +70,5 @@ def test_gross_from_form_101_exceeds_net_from_form_806_by_a_plausible_margin():
 
 def test_f806balance_is_a_frozen_dataclass_with_expected_fields():
     b = F806Balance(regnum=1481, as_of=date(2026, 4, 1), assets_rub=1, assets_rub_prior_year=2,
-                     equity_rub=3, equity_rub_prior_year=4)
+                     equity_rub=3, equity_rub_prior_year=4, legal_name="Тест")
     assert b.regnum == 1481 and b.assets_rub == 1 and b.equity_rub == 3
