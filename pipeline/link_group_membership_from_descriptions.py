@@ -62,6 +62,19 @@ LINKS = [
     ('gbc5149c2', 'gc0f11fd7', 'Газпром'),          # Группа Газпромбанка
     ('g9492707f', 'gf1f56e08', 'Газпромбанк'),      # ААА Управление Капиталом
     ('gf0ac5fc7', 'gf1f56e08', 'Газпромбанк'),      # Газпромбанк-инвест
+    # --- партия 2, 23 августа 2026 (этап 2 брифа, П4''-2) ---
+    # Тем же способом перепрочитан весь `desc` на предмет упоминания группы:
+    # 16 новых кандидатов, из них ТОЛЬКО эти два — родитель называется своим
+    # именем, у имени уже есть профиль в базе, и связь описана в НАСТОЯЩЕМ
+    # времени (не «до 2025 года входила», не «купила ЗАО... в 2024» — те
+    # случаи уже не текущая структура, а история одной сделки, holding про
+    # это не заводится, см. границу выборки выше). Третий похожий кандидат,
+    # «Лента» (g10f70324) -> «Севергрупп», НЕ добавлен: это один из
+    # подозреваемых профилей-близнецов (см. pipeline/fns_registry.py,
+    # партии 3/4/6) — решать связь группы для него до слияния профилей
+    # преждевременно.
+    ('g437b0a3b', 'ga2cfae5b', 'Альфа-Банк'),       # Альфа-Банк Украина
+    ('g127cf704', 'sheremetyevo', 'Шереметьево'),   # ООО «Перспектива»
 ]
 
 
@@ -69,23 +82,38 @@ def main(write=False):
     data = json.load(open(BASE, encoding='utf-8'))
     companies = data['companies']
 
+    # ИДЕМПОТЕНТНОСТЬ ПО ПАРТИЯМ. Скрипт растёт партиями (партия 2 добавлена
+    # 23 августа поверх уже применённой партии 1) — повторный прогон обязан
+    # пропускать записи, которые уже стоят ровно такими же, а не падать на
+    # каждой из них: `assert not existing` версии от 18 августа этого не
+    # умела и валила прогон на первой же уже применённой связи. Падать
+    # нужно только когда состояние РАСХОДИТСЯ с тем, что мы сейчас писали
+    # бы, — это и есть «изменилось, проверьте вручную».
+    pending = []
     for member_id, group_id, _label in LINKS:
         assert member_id in companies, 'нет профиля %r' % member_id
         assert group_id in companies, 'нет профиля %r' % group_id
         existing = companies[member_id].get('holding')
+        if existing and existing.get('id') == group_id:
+            continue  # уже применено этой же связью — пропускаем молча
         assert not existing, (
-            '%s уже несёт holding=%r — состояние изменилось, проверьте вручную'
-            % (member_id, existing))
+            '%s уже несёт holding=%r, отличный от новой записи (%r) — '
+            'состояние изменилось, проверьте вручную' % (member_id, existing, group_id))
+        pending.append((member_id, group_id, _label))
 
-    print('ПРАВИМ (%d профилей):' % len(LINKS))
-    for member_id, group_id, label in LINKS:
+    if not pending:
+        print('Все связи уже применены — писать нечего.')
+        return
+
+    print('ПРАВИМ (%d профилей):' % len(pending))
+    for member_id, group_id, label in pending:
         print('  %s (%s) -> holding %s (%s)'
               % (member_id, companies[member_id]['name'], group_id, label))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return
 
-    for member_id, group_id, _label in LINKS:
+    for member_id, group_id, _label in pending:
         companies[member_id]['holding'] = {'id': group_id, 'confidence': 'disclosed'}
 
     json.dump(data, open(BASE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

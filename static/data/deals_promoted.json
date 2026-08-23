@@ -97048,7 +97048,11 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "holding": {
+    "id": "ga2cfae5b",
+    "confidence": "disclosed"
+   }
   },
   "ge908c1ab": {
    "name": "Bunge (российский бизнес, бренд «Олейна»)",
@@ -100983,7 +100987,11 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "holding": {
+    "id": "sheremetyevo",
+    "confidence": "disclosed"
+   }
   },
   "gfa66a7fc": {
    "name": "АО «Крибрум»",
