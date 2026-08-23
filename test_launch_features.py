@@ -160,6 +160,110 @@ def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
     assert len(anonymous["entities"][0]["events"]) >= 4
 
 
+def test_is_ao_entity_matches_joint_stock_forms_not_ooo():
+    """Этап 5, П1''''': критерий, от которого зависит вся честность подписи —
+    должен ловить ПАО/АО/ОАО/ЗАО и НЕ ловить ООО/АНО и подобные."""
+    from db.models import LegalEntity
+
+    def make(legal_form="", short_name=""):
+        return LegalEntity(legal_name="х", legal_form=legal_form, short_name=short_name)
+
+    assert main._is_ao_entity(make(legal_form="Публичное акционерное общество")) is True
+    assert main._is_ao_entity(make(short_name='ПАО "Система"')) is True
+    assert main._is_ao_entity(make(short_name='АО "Ромашка"')) is True
+    assert main._is_ao_entity(make(short_name='ЗАО "Старое"')) is True
+    assert main._is_ao_entity(make(legal_form="Общество с ограниченной ответственностью")) is False
+    assert main._is_ao_entity(make(short_name='ООО "Тест"')) is False
+    assert main._is_ao_entity(make(short_name='АНО "Развитие"')) is False
+
+
+def test_dedupe_owners_prefers_the_entry_with_inn():
+    """Этап 5, П1''''': одно лицо, встреченное дважды в снапшоте (запись с
+    ИНН и без — разные блоки исходной выписки ЕГРЮЛ), схлопывается в одну,
+    предпочитая запись с ИНН. Порядок первого появления сохраняется."""
+    owners = [
+        {"name": "Горбатовский Александр Иванович", "inn": None, "share_percent": None},
+        {"name": "Евтушенков Владимир Петрович", "inn": None, "share_percent": None},
+        {"name": "Горбатовский Александр Иванович", "inn": "772106433971", "share_percent": None},
+    ]
+    result = main._dedupe_owners(owners)
+    assert [o["name"] for o in result] == ["Горбатовский Александр Иванович", "Евтушенков Владимир Петрович"]
+    assert result[0]["inn"] == "772106433971"
+
+
+def _seed_ao_company(company_id: str = "launch-fns-ao"):
+    """АО с ОДНИМ снапшотом «current» — учредители при регистрации, ровно
+    та форма данных, что реально приходит из ЕГРЮЛ для акционерных обществ
+    (реестр акционеров ведёт не ФНС — см. _is_ao_entity). Дубль в списке
+    (одно лицо, две записи) — воспроизводит находку владельца 23 августа."""
+    db = get_session()
+    try:
+        company = db.get(Company, company_id)
+        if not company:
+            company = Company(id=company_id, name="Тестовое ПАО", legal_name='ПАО "Тестовое"')
+            db.add(company)
+            db.flush()
+        entity = db.query(LegalEntity).filter_by(inn="7700000199").first()
+        if not entity:
+            entity = LegalEntity(
+                company_id=company_id, legal_name='Публичное акционерное общество "Тестовое"',
+                short_name='ПАО "Тестовое"', legal_form="Публичное акционерное общество",
+                inn="7700000199", ogrn="1027700000199", status="Действующая",
+                match_status=LegalEntityMatchStatus.confirmed, manually_verified=True, is_primary=True,
+                fetched_at=datetime.utcnow(), source_updated_at=datetime.utcnow(),
+            )
+            db.add(entity)
+            db.flush()
+        else:
+            entity.company_id = company_id
+            entity.match_status = LegalEntityMatchStatus.confirmed
+        if not db.query(OwnershipSnapshot).filter_by(legal_entity_id=entity.id).first():
+            snap = OwnershipSnapshot(
+                legal_entity_id=entity.id, snapshot_date=date(2002, 11, 11),
+                source_kind="current", is_complete=True,
+                source_text="Сведения об учредителях",
+            )
+            db.add(snap); db.flush()
+            db.add(OwnershipStake(
+                snapshot_id=snap.id, owner_key="founder-no-inn",
+                owner_name="Горбатовский Александр Иванович", owner_type="Физическое лицо",
+                inn=None, nominal_value_rub=27562,
+            ))
+            db.add(OwnershipStake(
+                snapshot_id=snap.id, owner_key="772106433971",
+                owner_name="Горбатовский Александр Иванович", owner_type="Физическое лицо",
+                inn="772106433971", nominal_value_rub=27562,
+            ))
+        db.commit()
+        return entity.id
+    finally:
+        db.close()
+
+
+def test_ao_ownership_gets_founders_heading_not_current_composition(client):
+    """Этап 5, П1''''': для АО снапшот — это не «текущий состав», а
+    учредители на момент регистрации. Заголовок и notice обязаны сказать
+    это прямо, а дубль (Горбатовский ×2) — схлопнуться в одну запись."""
+    _seed_ao_company()
+    body = client.get("/api/companies/launch-fns-ao/fns").json()
+    ownership = body["entities"][0]["ownership"]
+    assert ownership["is_ao"] is True
+    assert ownership["heading"] == "Учредители при регистрации"
+    assert "не отслеживает акционеров" in ownership["notice"]
+    assert len(ownership["current"]) == 1
+    assert ownership["current"][0]["inn"] == "772106433971"
+
+
+def test_ooo_ownership_keeps_current_composition_heading(client):
+    """Контрольная проверка того же изменения: ООО не задевается — у него
+    ЕГРЮЛ действительно отражает текущий состав, заголовок прежний."""
+    _seed_fns_company()
+    body = client.get("/api/companies/launch-fns-company/fns").json()
+    ownership = body["entities"][0]["ownership"]
+    assert ownership.get("is_ao") is False
+    assert ownership["heading"] == "Текущий состав"
+
+
 def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(client, monkeypatch):
     """П5 (COMPANY_FINANCE_BRIEF.md): «нашли/не нашли» — не одно состояние.
     Профиль без сопоставленного юрлица, но с решением bank/foreign/state_org
