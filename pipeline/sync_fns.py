@@ -368,13 +368,23 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
     П2). `decision` не в {"confirmed"} пропускается: banку/foreign/state_org/
     person/lot/no_match/brand_needs_inn взять из ФНС нечего — либо данных
     там нет по природе (банки — ЦБ, П3), либо ИНН ещё не подтверждён.
+
+    `limit` — ПОТОЛОК РЕАЛЬНОЙ РАБОТЫ (живых запросов), а не потолок того,
+    сколько строк реестра просматривается. До 23 августа 2026 срез стоял
+    ДО проверки свежести (`confirmed[:limit]`) — и стартовый скан прода с
+    limit=30 навсегда перерабатывал первые 30 строк реестра: они почти
+    всегда уже свежие (skipped_fresh), лимит расходовался ими же, а партии
+    2 и дальше не доезжали до прода НИ ОДНИМ следующим деплоем. Тот же
+    класс, что уже записанный «тормоз, который держит дверь закрытой» —
+    только здесь дверь держал не запрет, а порядок операций.
     """
     confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
-    if limit:
-        confirmed = confirmed[:limit]
     stats = {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
     cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
+    work_done = 0
     for row in confirmed:
+        if limit and work_done >= limit:
+            break
         company_id, inn = row["company_id"], row["inn"]
         entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
         needs_confirm = not entity or entity.inn != inn or entity.match_status != LegalEntityMatchStatus.confirmed
@@ -382,6 +392,7 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
         if not needs_confirm and not needs_sync:
             stats["skipped_fresh"] += 1
             continue
+        work_done += 1
         try:
             if needs_confirm:
                 if not dry_run:

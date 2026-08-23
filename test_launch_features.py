@@ -599,6 +599,85 @@ def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch)
         db.close()
 
 
+def test_fns_sync_from_registry_limit_counts_real_work_not_list_position(monkeypatch):
+    """23 августа 2026: `limit` считался срезом списка ДО проверки
+    свежести (`confirmed[:limit]`) — стартовый скан прода с limit=30
+    навсегда перерабатывал первые 30 строк реестра, которые почти всегда
+    уже свежие (skipped_fresh), а партии 2 и дальше не доезжали до прода
+    НИ ОДНИМ следующим деплоем. `limit` обязан быть потолком РЕАЛЬНОЙ
+    работы: уже свежие записи впереди списка не должны отбирать бюджет у
+    новых записей позади него."""
+    from pipeline import sync_fns
+
+    fake_registry = [
+        {"company_id": "already-fresh-1", "decision": "confirmed", "inn": "7700000101",
+         "reason": "т", "date": "2026-08-22"},
+        {"company_id": "already-fresh-2", "decision": "confirmed", "inn": "7700000102",
+         "reason": "т", "date": "2026-08-22"},
+        {"company_id": "already-fresh-3", "decision": "confirmed", "inn": "7700000103",
+         "reason": "т", "date": "2026-08-22"},
+        {"company_id": "needs-work-1", "decision": "confirmed", "inn": "7700000201",
+         "reason": "т", "date": "2026-08-23"},
+        {"company_id": "needs-work-2", "decision": "confirmed", "inn": "7700000202",
+         "reason": "т", "date": "2026-08-23"},
+    ]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
+
+    class FakeClient:
+        def egr(self, inn):
+            return {"items": [{"ЮЛ": {
+                "ИНН": inn, "ОГРН": "10277" + inn[-8:],
+                "НаимСокрЮЛ": 'ООО "Тест"', "Статус": "Действующая",
+            }}]}
+
+        def bo(self, inn):
+            return {inn: {"2025": {"2110": "1000000"}}}
+
+        def changes(self, inn):
+            return {"items": []}
+
+    db = get_session()
+    try:
+        # Идемпотентная подготовка (тесты этого файла делят одну dev-базу
+        # между прогонами — тот же приём, что уже используется соседним
+        # тестом sync_from_registry чуть выше).
+        for row in fake_registry[:3]:
+            cid, inn = row["company_id"], row["inn"]
+            if not db.get(Company, cid):
+                db.add(Company(id=cid, name=cid))
+                db.flush()
+            entity = db.query(LegalEntity).filter_by(company_id=cid).one_or_none()
+            if entity is None:
+                db.add(LegalEntity(company_id=cid, inn=inn, legal_name="Тест",
+                                   match_status=LegalEntityMatchStatus.confirmed,
+                                   fetched_at=datetime.utcnow()))
+            else:
+                entity.inn = inn
+                entity.match_status = LegalEntityMatchStatus.confirmed
+                entity.fetched_at = datetime.utcnow()
+        db.commit()
+        for row in fake_registry[3:]:
+            if not db.get(Company, row["company_id"]):
+                db.add(Company(id=row["company_id"], name=row["company_id"]))
+        db.commit()
+        # Записи «нужна работа» должны реально нуждаться в ней — снять
+        # подтверждение, если тест уже когда-то прошёл на этой же базе.
+        for row in fake_registry[3:]:
+            leftover = db.query(LegalEntity).filter_by(company_id=row["company_id"]).one_or_none()
+            if leftover is not None:
+                db.delete(leftover)
+        db.commit()
+
+        stats = sync_fns.sync_from_registry(db, FakeClient(), limit=2, dry_run=False)
+        assert stats["skipped_fresh"] == 3, "три уже свежие записи впереди списка должны быть пропущены"
+        assert stats["confirmed_now"] == 2, "limit=2 обязан достаться НОВЫМ записям, а не быть исчерпан свежими"
+        for cid in ("needs-work-1", "needs-work-2"):
+            entity = db.query(LegalEntity).filter_by(company_id=cid).one()
+            assert entity.match_status == LegalEntityMatchStatus.confirmed
+    finally:
+        db.close()
+
+
 def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
     """bank/foreign/state_org/person/lot/no_match/brand_needs_inn не несут
     подтверждённого ИНН для ФНС — --from-registry обязан их пропускать, а не
