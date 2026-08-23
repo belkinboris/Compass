@@ -37,8 +37,8 @@ from deal_export import render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
     AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
-    DealWatch, FinancialReport, LegalEntity, LegalEntityMatchStatus, ModerationDecision,
-    Notification,
+    DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
+    ModerationDecision, Notification,
     NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
@@ -158,20 +158,68 @@ def _sync_fns_from_registry():
         return
 
     def _run():
+        db = get_session()
         try:
-            from pipeline.sync_fns import sync_from_registry
-            from fns_client import ApiFnsClient
-            db = get_session()
-            try:
-                with ApiFnsClient() as client:
-                    stats = sync_from_registry(db, client, limit=FNS_STARTUP_SYNC_LIMIT)
-                logger.info("ФНС из реестра при старте: %s", stats)
-            finally:
-                db.close()
+            _fns_sync_once(db)
         except Exception as e:  # сеть/квота/что угодно — сайт не должен упасть из-за этого
             logger.error("не удалось докачать ФНС из реестра при старте: %s", e)
+        finally:
+            db.close()
 
     threading.Thread(target=_run, daemon=True).start()
+
+
+def _fns_sync_once(db) -> dict | None:
+    """Одна попытка докачки ФНС по реестру — вынесена из `_run()` отдельной
+    функцией, чтобы её можно было проверить тестом напрямую, без потока и
+    без обхода env-гварда `_sync_fns_from_registry()`. Возвращает `stats`
+    при реальной попытке синка, `None` при пропуске (потолок достигнут)."""
+    from pipeline.sync_fns import sync_from_registry
+    from fns_client import ApiFnsClient
+
+    used_today = _fns_requests_today(db)
+    if used_today >= FNS_DAILY_REQUEST_CAP:
+        logger.warning(
+            "ФНС: дневной потолок запросов достигнут (%d/%d) — старт "
+            "пропускает докачку, до завтра", used_today, FNS_DAILY_REQUEST_CAP)
+        return None
+    with ApiFnsClient() as client:
+        stats = sync_from_registry(db, client, limit=FNS_STARTUP_SYNC_LIMIT)
+    logger.info("ФНС из реестра при старте: %s", stats)
+    db.add(FnsSyncRun(
+        mode="startup",
+        companies_total=stats.get("confirmed_now", 0) + stats.get("synced", 0)
+        + stats.get("skipped_fresh", 0),
+        matched=stats.get("confirmed_now", 0) + stats.get("synced", 0),
+        errors=stats.get("errors", 0),
+        details_json=json.dumps(stats),
+    ))
+    db.commit()
+    return stats
+
+
+def _fns_requests_today(db) -> int:
+    """Сумма `requests` из FnsSyncRun за текущие календарные сутки (UTC).
+
+    П5''' (COMPANY_FINANCE_BRIEF.md, этап 3): защита не от нехватки квоты
+    (её достаточно — см. «Открытие, которое меняет бюджет» в CLAUDE.md), а
+    от петли или бага, который перезапускал бы процесс много раз подряд и
+    каждый раз бил по api-fns.ru заново. Счётчик обязан пережить сам
+    перезапуск, из-за которого его завели, — поэтому он не переменная
+    процесса (умирает вместе с ним), а строка в БД, которая переживает
+    рестарт (тот же принцип, что уже применён к `fns_asked` на профиле
+    компании — штамп в постоянном хранилище, а не в памяти одного запуска).
+    """
+    today_start = datetime.now(timezone.utc).replace(
+        hour=0, minute=0, second=0, microsecond=0, tzinfo=None)
+    rows = db.scalars(select(FnsSyncRun).where(FnsSyncRun.started_at >= today_start)).all()
+    total = 0
+    for row in rows:
+        try:
+            total += json.loads(row.details_json or "{}").get("requests", 0)
+        except (ValueError, TypeError):
+            continue
+    return total
 
 
 def get_db():
@@ -215,6 +263,18 @@ FNS_ALL_FREE = True
 # (растёт партиями по 50-60) догонял прод за один-два деплоя, а не тянулся
 # неделями за счёт частоты рестартов процесса.
 FNS_STARTUP_SYNC_LIMIT = 60
+
+# Дневной потолок живых запросов к api-fns.ru (П5''', этап 3). НЕ от нехватки
+# квоты — её достаточно (см. «Открытие, которое меняет бюджет» в CLAUDE.md),
+# а от петли или бага: если что-то заставит процесс перезапускаться много раз
+# подряд (сбойный деплой, крэш-луп), каждый старт без этой защиты бил бы по
+# api-fns.ru заново. _fns_requests_today() считает по FnsSyncRun за текущие
+# сутки UTC — строка в БД переживает сам рестарт, из-за которого счётчик
+# понадобился. 200 — с большим запасом над одним нормальным стартом
+# (FNS_STARTUP_SYNC_LIMIT=60 работ ~ до 180 запросов в худшем случае), но
+# далеко от годовой квоты (3000/год на метод) — цель поймать петлю, а не
+# экономить бюджет по запросу.
+FNS_DAILY_REQUEST_CAP = 200
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки

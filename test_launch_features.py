@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 
 import main
 from db.models import (
-    Company, DealSeen, FinancialReport, LegalEntity, LegalEntityMatchStatus,
+    Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
 )
 from db.session import get_session
@@ -674,6 +674,75 @@ def test_fns_sync_from_registry_limit_counts_real_work_not_list_position(monkeyp
         for cid in ("needs-work-1", "needs-work-2"):
             entity = db.query(LegalEntity).filter_by(company_id=cid).one()
             assert entity.match_status == LegalEntityMatchStatus.confirmed
+    finally:
+        db.close()
+
+
+def test_fns_requests_today_sums_only_todays_runs():
+    """Этап 3, П5''': `_fns_requests_today()` — сумма `requests` из
+    FnsSyncRun за текущие сутки UTC. Вчерашний прогон не должен считаться —
+    иначе потолок никогда бы не сбрасывался. Тестовая dev-база общая между
+    прогонами этого файла (тот же приём, что у соседних тестов), поэтому
+    сравниваем ДО/ПОСЛЕ вставки, а не абсолютное число."""
+    import json as _json
+    from datetime import timedelta as _timedelta
+    db = get_session()
+    try:
+        before = main._fns_requests_today(db)
+        today = datetime.utcnow()
+        yesterday = today - _timedelta(days=1)
+        db.add(FnsSyncRun(started_at=today, mode="startup",
+                          details_json=_json.dumps({"requests": 40})))
+        db.add(FnsSyncRun(started_at=yesterday, mode="startup",
+                          details_json=_json.dumps({"requests": 999})))
+        db.commit()
+        after = main._fns_requests_today(db)
+        assert after == before + 40, "только сегодняшняя запись (40) обязана войти в сумму, не вчерашняя (999)"
+    finally:
+        db.close()
+
+
+def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
+    """Не от нехватки квоты, а от петли/бага (докстрока FNS_DAILY_REQUEST_CAP
+    в main.py): достигнутый дневной потолок останавливает докачку целиком —
+    ни один живой запрос к api-fns.ru в этом старте не уходит."""
+    import json as _json
+    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
+    db = get_session()
+    try:
+        db.add(FnsSyncRun(started_at=datetime.utcnow(), mode="startup",
+                          details_json=_json.dumps({"requests": 50})))
+        db.commit()
+
+        def _boom(*a, **kw):
+            raise AssertionError("sync_from_registry не должен вызываться при достигнутом потолке")
+        from pipeline import sync_fns
+        monkeypatch.setattr(sync_fns, "sync_from_registry", _boom)
+
+        result = main._fns_sync_once(db)
+        assert result is None, "при достигнутом потолке функция обязана вернуть None, не пытаться синковать"
+    finally:
+        db.close()
+
+
+def test_fns_sync_once_records_a_run_that_counts_toward_the_cap(monkeypatch):
+    """Успешная попытка обязана оставить след в FnsSyncRun — иначе следующий
+    рестарт того же дня не увидит уже потраченные запросы и потолок не
+    сработает вовсе."""
+    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 200)
+    fake_stats = {"confirmed_now": 1, "synced": 2, "skipped_fresh": 3, "errors": 0, "requests": 7}
+    from pipeline import sync_fns
+    monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)
+
+    db = get_session()
+    try:
+        before = main._fns_requests_today(db)
+        result = main._fns_sync_once(db)
+        assert result == fake_stats
+        after = main._fns_requests_today(db)
+        assert after == before + 7, "новый прогон обязан прибавиться к дневной сумме"
+        run = db.query(FnsSyncRun).filter_by(mode="startup").order_by(FnsSyncRun.id.desc()).first()
+        assert run is not None and run.matched == 3 and run.errors == 0
     finally:
         db.close()
 
