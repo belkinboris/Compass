@@ -3033,6 +3033,22 @@ def test_ops_status_refuses_internal_jargon_reaching_the_console():
         'Дополнили карточку «Родные поля» — перенесли 6 фактов из статьи.')
 
 
+def test_ops_status_jargon_pattern_does_not_catch_deal_names():
+    """23 августа 2026 отчёт про карточку Capital Group/ТВК «Тишинка»
+    отклонило собственное правило ops_status.py: `тишин\\w+` без границы
+    слова совпадало внутри имени сделки. Тот же класс дефекта, что уже
+    записан в CLAUDE.md («ствол словаря без границы слова ловится внутри
+    чужого слова»), только здесь — в JARGON, а не в словаре отраслей."""
+    assert not ops_status.find_jargon(
+        'Нашли суд по несостоявшейся сделке Capital Group/ТВК «Тишинка».')
+    assert not ops_status.find_jargon(
+        'Иск подан по объекту на Тишинской площади.')
+    # Настоящий жаргон по-прежнему ловится во всех словоформах.
+    assert ops_status.find_jargon('карточки выйдут сами в тишине')
+    assert ops_status.find_jargon('6 внутри 24ч тишины')
+    assert ops_status.find_jargon('решение примут в тишину')
+
+
 def test_ops_status_does_not_send_when_jargon_slipped_in(monkeypatch, capsys):
     """Мало найти жаргон — надо не отправить. Иначе проверка декоративная."""
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
