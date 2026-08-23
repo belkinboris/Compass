@@ -34,8 +34,8 @@ from db.models import (
 )
 from db.session import SessionLocal, engine
 from fns_client import (
-    ApiFnsClient, ApiFnsError, normalize_bo, normalize_changes, normalize_egr,
-    normalize_ownership, normalize_search_results,
+    ApiFnsClient, ApiFnsError, format_stat_summary, normalize_bo, normalize_changes,
+    normalize_egr, normalize_ownership, normalize_search_results,
 )
 from pipeline.fns_registry import REGISTRY as FNS_REGISTRY
 
@@ -462,6 +462,17 @@ def main() -> int:
                     run.matched += stats["confirmed_now"] + stats["synced"]
                     run.errors += stats["errors"]
                 details["from_registry"] = stats
+            # Остаток квоты — после всех живых запросов этого прогона, а не до:
+            # число должно отражать реальное состояние на момент печати отчёта.
+            # Не дёргаем stat() на пустом прогоне (только --seed/--dry-run) —
+            # там живых запросов не было и смотреть не на что.
+            live_call_made = (args.match or args.all or args.sync or args.from_registry or args.inn) and not args.dry_run
+            if live_call_made:
+                try:
+                    with ApiFnsClient() as client:
+                        details["budget"] = format_stat_summary(client.stat())
+                except ApiFnsError:
+                    pass  # гигиена отчёта не должна ронять сам синк
         finally:
             if run is not None:
                 run.finished_at = _now()

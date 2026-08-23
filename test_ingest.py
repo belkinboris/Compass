@@ -3008,6 +3008,20 @@ def test_quality_report_month_line_does_not_read_as_posts_this_month():
     assert "старых карточек" in text and "новые факты" in text
 
 
+def test_quality_report_shows_fns_budget_line_only_when_routine_provides_it():
+    """23 августа: строку остатка квоты ФНС печатаем, только если рутина в
+    этот прогон реально ходила в API-ФНС и передала готовую строку —
+    ops_status.py сам сети не касается, чтобы отчёт не стал источником
+    побочных трат."""
+    text_with = ops_status.render_quality(
+        did="Проверили платформу.",
+        fns_budget="Квота ФНС: search 482/3000, bo 164/3000 (до 2027-08-17)")
+    assert "💳" in text_with and "Квота ФНС" in text_with
+
+    text_without = ops_status.render_quality(did="Проверили платформу.")
+    assert "💳" not in text_without and "Квота ФНС" not in text_without
+
+
 def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, capsys):
     """Без токена/чата — честная строка в лог прогона, а не тихая имитация
     успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""

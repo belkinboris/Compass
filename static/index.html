@@ -4588,8 +4588,13 @@ async function mountCompanyFns(companyId){
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
-      ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы и скачивание полной БФО доступны по подписке.</div>`:""}
-      <div class="fns-actions">${latest.year?`<a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/bo/${latest.year}?entity_id=${e.id}">Скачать полную отчётность</a>`:""}</div>`:`<div class="fns-empty">${emptyReason}</div>`;
+      ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы доступна по подписке.</div>`:""}`:`<div class="fns-empty">${emptyReason}</div>`;
+    /* Кнопка «Скачать полную отчётность» (bo_file) снята 23 августа 2026:
+       метод не куплен в тарифе API-ФНС (лимит 0 по /api/stat), любой клик
+       получал живой 403 и сырой JSON с текстом ошибки вместо файла — рабочая
+       на вид кнопка была сломана на всех 150 подтверждённых профилях.
+       «Скачать выписку ЕГРЮЛ» (метод vyp, вкладка «ЕГРЮЛ») куплен и
+       проверен живым запросом — её не трогаем. */
     if(tab==="ownership") content=ownershipHtml(entry.ownership);
     if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
     if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;

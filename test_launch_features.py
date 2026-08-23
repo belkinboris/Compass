@@ -414,6 +414,44 @@ def test_fns_normalizers_convert_source_units_and_fields():
     assert reports[0]["borrowings_rub"] == 150_000_000
 
 
+def test_fns_stat_summary_shows_only_purchased_methods_with_remaining_and_period():
+    """23 августа 2026: /api/stat открыл, что лимиты тарифа ПО-МЕТОДНЫЕ, не
+    общие «3000 на всё» — и что для bo/egr/changes/vyp тип лимита «по
+    организациям» (повторный запрос той же организации в течение года
+    бесплатен). Сводка должна называть каждый реально используемый метод
+    (не весь список из ответа — там есть неиспользуемые check/fl_status и
+    т.п.) и не показывать метод, которого нет в тарифе (Лимит=0, как
+    bo_file — он и стал причиной сломанной кнопки на карточке компании)."""
+    from fns_client import format_stat_summary
+
+    stat = {
+        "ДатаНач": "2026-08-17 00:00:00", "ДатаОконч": "2027-08-17 00:00:00",
+        "Методы": {
+            "search": {"Лимит": "3000", "ТипЛимита": "по запросам", "Истрачено": "482"},
+            "bo": {"Лимит": "3000", "ТипЛимита": "по организациям", "Истрачено": "164"},
+            "bo_file": {"Лимит": "0", "ТипЛимита": "по запросам", "Истрачено": "0"},
+            "fl_status": {"Лимит": "0", "ТипЛимита": "по запросам", "Истрачено": "0"},
+        },
+    }
+    line = format_stat_summary(stat)
+    assert "search 482/3000" in line
+    assert "bo 164/3000" in line
+    assert "bo_file" not in line          # не куплен в тарифе — не показываем как остаток
+    assert "fl_status" not in line        # не используется проектом — не шумим им
+    assert "2027-08-17" in line
+
+
+def test_company_finance_tab_never_links_to_the_unpurchased_bo_file_download():
+    """23 августа 2026: кнопка «Скачать полную отчётность» вела на метод
+    bo_file, которого нет в тарифе (Лимит=0 по /api/stat) — живой клик на
+    любом из 150 подтверждённых профилей получал 403 и сырой JSON вместо
+    файла. Кнопку сняли; выписка ЕГРЮЛ (метод vyp, он куплен и проверен
+    живым запросом) остаётся."""
+    src = Path("static/index.html").read_text(encoding="utf-8")
+    assert "fns/bo/${" not in src, "ссылка на bo_file-скачивание не должна вернуться на карточку"
+    assert "fns/extract?" in src, "рабочая выписка ЕГРЮЛ должна остаться"
+
+
 def test_fns_seed_dry_run_does_not_write():
     from pipeline.sync_fns import seed_companies
     db = get_session()

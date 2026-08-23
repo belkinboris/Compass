@@ -126,6 +126,10 @@ class ApiFnsClient:
     def changes(self, inn_or_ogrn: str, since: str | None = None) -> dict:
         return self._request("changes", {"req": inn_or_ogrn, "dat": since})
 
+    def stat(self) -> dict:
+        """Остаток квоты по методам тарифа (истрачено/лимит), период действия ключа."""
+        return self._request("stat", {})
+
     def extract_pdf(self, inn_or_ogrn: str) -> httpx.Response:
         return self._request("vyp", {"req": inn_or_ogrn}, expect_json=False)
 
@@ -265,6 +269,38 @@ BO_LINES = {
     "short_term_liabilities_rub": "1500",
     "payables_rub": "1520",
 }
+
+
+# Методы, которые реально расходуют квоту в этом проекте — остальные из
+# ответа /api/stat (fl_status, fias_search, check и т.п.) не используются и
+# в сводку не попадают, чтобы не разбавлять её шумом.
+STAT_METHODS_SHOWN = ("search", "bo", "egr", "changes", "vyp", "bo_file")
+
+
+def format_stat_summary(stat_data: dict) -> str:
+    """Короткая строка остатка квоты для отчётов синка и ops-статуса.
+
+    23 августа 2026: обнаружено, что лимиты тарифа ПО-МЕТОДНЫЕ (3000/год на
+    каждый метод отдельно), а не общие «3000 запросов на всё» — и что для
+    bo/egr/changes/vyp тип лимита «по организациям» (повторный запрос уже
+    учтённой организации в течение года бесплатен). Строка печатает остаток
+    по каждому реально используемому методу, чтобы это не пришлось каждый
+    раз выяснять заново через прямой вызов stat().
+    """
+    methods = stat_data.get("Методы") or {}
+    parts = []
+    for name in STAT_METHODS_SHOWN:
+        m = methods.get(name)
+        if not m:
+            continue
+        limit = int(m.get("Лимит") or 0)
+        if limit == 0:
+            continue  # метод не куплен в тарифе — нечего показывать как остаток
+        spent = int(m.get("Истрачено") or 0)
+        parts.append(f"{name} {spent}/{limit}")
+    end = (stat_data.get("ДатаОконч") or "").split(" ")[0]
+    suffix = f" (до {end})" if end else ""
+    return "Квота ФНС: " + (", ".join(parts) if parts else "нет данных") + suffix
 
 
 def normalize_bo(data: dict, inn_or_ogrn: str | None = None) -> list[dict[str, Any]]:

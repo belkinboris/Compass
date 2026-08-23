@@ -322,7 +322,7 @@ def reading_queues(base=None, today=None):
     return day, week, month
 
 
-def render_quality(did='', left=0, ids=(), facts=0, base=None):
+def render_quality(did='', left=0, ids=(), facts=0, base=None, fns_budget=''):
     """Качество: что именно дополнили — ИМЕНАМИ, а не ярлыком партии.
 
     ПОЧЕМУ ИМЕНАМИ. Пока рутина читала одну карточку за прогон, обобщать было
@@ -387,6 +387,13 @@ def render_quality(did='', left=0, ids=(), facts=0, base=None):
         lines.append('')
         lines.append('📚 Ещё не дополнены по источникам: %d %s'
                      % (left, _plural(left, 'карточка', 'карточки', 'карточек')))
+    # Строку остатка квоты ФНС печатаем, только если рутина сегодня реально
+    # ходила в API-ФНС и передала готовую строку (format_stat_summary из
+    # fns_client.py) — ops_status.py сам живых запросов не делает, чтобы
+    # отчёт не превращался в источник побочных трат.
+    if fns_budget:
+        lines.append('')
+        lines.append('💳 %s' % fns_budget)
     return '\n'.join(lines)
 
 
@@ -436,7 +443,7 @@ def build(args):
                               args.soon, args.held, args.unread, args.nothing)
         return text, queue_keyboard(args.soon, args.held, args.unread)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
-    return render_quality(args.did, args.left, ids, args.facts), None
+    return render_quality(args.did, args.left, ids, args.facts, fns_budget=args.fns_budget), None
 
 
 def main(argv):
@@ -461,6 +468,9 @@ def main(argv):
                    help='id карточек партии через запятую — имена скрипт возьмёт из базы')
     p.add_argument('--facts', type=int, default=0,
                    help='сколько фактов перенесено из статей')
+    p.add_argument('--fns-budget', default='',
+                   help='готовая строка format_stat_summary() из fns_client.py — только если '
+                        'рутина сегодня реально ходила в API-ФНС; сам ops_status.py в API не ходит')
     p.add_argument('--broken', default='')
     try:
         args = p.parse_args(argv)
