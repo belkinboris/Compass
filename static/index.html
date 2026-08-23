@@ -4667,6 +4667,53 @@ async function mountDealFns(d){
   draw();
 }
 
+// Этап 3, П4''': схема группы — инлайн SVG, без внешних библиотек. Центр —
+// текущий профиль; ветви сплошной линией к holding-детям (groupMembers),
+// ветви пунктиром к ownership-портфелю (portfolio) — разный стиль линии
+// отражает разный факт (интеграция в группу против доли без интеграции,
+// та же граница, что уже проведена текстом в подписях блоков выше). Профиль
+// сегодня не бывает одновременно группой и инвестором в наших данных, но
+// функция рисует оба вида веток на одной схеме, если они вдруг совпадут —
+// не искусственное ограничение на будущее.
+function groupSchemaSvg(centerName, holdingNames, ownershipNames){
+  const boxW = 250, boxH = 34, rowGap = 14, trunkX = 20, gapAfterTrunk = 36;
+  const trim = s => { s = String(s); return s.length > 30 ? s.slice(0, 29) + "…" : s; };
+  const rows = holdingNames.map(n => ({name: n, kind: "holding"}))
+    .concat(ownershipNames.map(n => ({name: n, kind: "ownership"})));
+  const centerW = boxW + 40, centerH = 44, centerY = 10;
+  const trunkCenterX = trunkX + centerW / 2;
+  const branchX = trunkX + gapAfterTrunk;
+  const firstRowY = centerY + centerH + 30;
+  const rowY = rows.map((_, i) => firstRowY + i * (boxH + rowGap));
+  const lastMidY = rows.length ? rowY[rows.length - 1] + boxH / 2 : centerY + centerH;
+  const width = branchX + boxW + 20;
+  const height = (rows.length ? rowY[rows.length - 1] + boxH : centerY + centerH) + 10;
+  let svg = `<svg viewBox="0 0 ${width} ${height}" width="100%" role="img" `
+    + `aria-label="Схема: ${esc(trim(centerName))} и связанные компании">`;
+  svg += `<rect x="${trunkX}" y="${centerY}" width="${centerW}" height="${centerH}" rx="8" `
+    + `fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>`;
+  svg += `<text x="${trunkCenterX}" y="${centerY + centerH / 2 + 5}" text-anchor="middle" `
+    + `font-size="14" font-weight="600" fill="var(--accent-deep)">${esc(trim(centerName))}</text>`;
+  if(rows.length){
+    svg += `<line x1="${trunkCenterX}" y1="${centerY + centerH}" x2="${trunkCenterX}" y2="${lastMidY}" `
+      + `stroke="var(--line)" stroke-width="1.5"/>`;
+  }
+  rows.forEach((r, i) => {
+    const midY = rowY[i] + boxH / 2;
+    const isHolding = r.kind === "holding";
+    const stroke = isHolding ? "var(--accent)" : "var(--steel)";
+    const dash = isHolding ? "" : ` stroke-dasharray="5,4"`;
+    svg += `<line x1="${trunkCenterX}" y1="${midY}" x2="${branchX}" y2="${midY}" `
+      + `stroke="${stroke}" stroke-width="1.5"${dash}/>`;
+    svg += `<rect x="${branchX}" y="${rowY[i]}" width="${boxW}" height="${boxH}" rx="6" `
+      + `fill="var(--card)" stroke="${stroke}" stroke-width="1.5"/>`;
+    svg += `<text x="${branchX + boxW / 2}" y="${midY + 4}" text-anchor="middle" `
+      + `font-size="12" fill="var(--ink)">${esc(trim(r.name))}</text>`;
+  });
+  svg += `</svg>`;
+  return svg;
+}
+
 // Список компаний с финчипом «Выручка <год>: X» — не таблица показателей
 // (это не консолидация, каждое юрлицо само по себе), а быстрая ориентировка,
 // куда идти за цифрами. Молчаливо пропускает компании без данных — пустая
@@ -4769,6 +4816,10 @@ function renderCompany(id){
       <div id="portfolio-members" style="width:100%"></div>
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Компании, где ${c.name} раскрыт как один из собственников, — не операционная группа: каждая работает под своим брендом и управлением, доля не означает интеграцию.</span>
     </div>`:""}
+    ${(groupMembers.length||portfolio.length)?`<div class="d-parties" style="margin-top:8px">
+      <button class="chip" id="toggleGroupSchema">${groupMembers.length?"Показать схему группы":"Показать схему портфеля"}</button>
+      <div id="group-schema" style="display:none;width:100%;margin-top:10px;overflow-x:auto"></div>
+    </div>`:""}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">
@@ -4793,6 +4844,20 @@ function renderCompany(id){
   mountCompanyFns(id);
   if(groupMembers.length) mountGroupMembers(groupMembers, "group-members");
   if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members");
+  const schemaBtn=document.getElementById("toggleGroupSchema");
+  if(schemaBtn) schemaBtn.onclick=()=>{
+    const box=document.getElementById("group-schema");
+    if(!box) return;
+    const opening = box.style.display==="none";
+    if(opening && !box.dataset.drawn){
+      box.innerHTML = groupSchemaSvg(c.name, groupMembers.map(([,m])=>m.name), portfolio.map(([,p])=>p.name));
+      box.dataset.drawn = "1";
+    }
+    box.style.display = opening ? "" : "none";
+    schemaBtn.textContent = opening
+      ? "Скрыть схему"
+      : (groupMembers.length?"Показать схему группы":"Показать схему портфеля");
+  };
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
