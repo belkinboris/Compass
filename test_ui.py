@@ -10,6 +10,7 @@
 Запуск: python3 -m pytest test_ui.py -q
 Пропускается, если не установлен Playwright (тогда гоняются только остальные).
 """
+import json
 import re
 import socket
 import subprocess
@@ -607,6 +608,45 @@ def test_company_group_membership_is_shown_both_ways(page, base_url):
     body = page.inner_text("#app").lower()
     assert "в группу входит" in body, "обратная ссылка на дочерние компании не показана"
     assert "угмк-инвест" in body
+
+
+def test_group_members_show_finance_chip_and_honest_disclaimer(browser, base_url):
+    """23 августа 2026, этап 2 брифа: карточка-хаб группы («Роснефть»,
+    `g300b9ead`) должна не просто перечислять компании группы («Башнефть»,
+    `gf9a640d2` — уже настоящая связь `holding.id` в базе), а показывать
+    рядом чип с последней выручкой, если данные ФНС подтверждены и не
+    устарели, и честную строку про то, что это НЕ консолидированная
+    отчётность. Живые данные Башнефти сейчас устарели (штамп 2020 года,
+    /api/companies/.../fns их сам не отдаёт — см. `stale_latest_year`),
+    поэтому сеть подменяется на свежий ответ: тест должен проверять код
+    рендера чипа, а не то, успела ли ФНС обновить конкретное юрлицо."""
+    ctx = browser.new_context()
+    try:
+        def fresh_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": True, "company_id": "gf9a640d2", "company_name": "Башнефть",
+                "entities": [{
+                    "entity": {"id": 1, "legal_name": 'ПАО АНК "БАШНЕФТЬ"', "inn": "0274051582"},
+                    "reports": [{"year": 2025, "revenue_rub": 700_000_000_000,
+                                "net_profit_rub": 1, "assets_rub": 1, "equity_rub": 1}],
+                    "report_years": [2025], "has_more_reports": False, "has_more_events": False,
+                    "events": [], "ownership": {"available": False},
+                }],
+                "access": {"paid": True, "full_history": True, "downloads": True},
+            }))
+        ctx.route("**/api/companies/gf9a640d2/fns*", fresh_fns)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/companies/g300b9ead", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        body = pg.inner_text("#app")
+        assert "консолидированная отчётность группы обычно не раскрывается" in body.lower()
+        assert "700" in body and ("млрд" in body.lower())
+        assert not errors, "pageerror при рендере чипов группы: %s" % errors
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+    finally:
+        ctx.close()
 
 
 def test_company_ownership_block_shown_only_when_known(page, base_url):

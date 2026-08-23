@@ -4660,6 +4660,34 @@ async function mountDealFns(d){
   draw();
 }
 
+// «Компании группы» на карточке-хабе группы: каждая с описанием и, если
+// есть подтверждённые данные ФНС, чипом «Выручка <год>: X» — не таблица
+// показателей (это не консолидация, каждое юрлицо само по себе), а
+// быстрая ориентировка, куда идти за цифрами. Молчаливо пропускает
+// компании без данных — пустая вкладка хуже отсутствующего чипа.
+async function mountGroupMembers(groupMembers){
+  const mount=document.getElementById("group-members"); if(!mount) return;
+  mount.innerHTML = groupMembers.map(([mid,m])=>`
+    <div class="d-parties" style="padding:10px 0;border-top:1px solid var(--line-soft);align-items:flex-start;gap:10px">
+      <div style="flex:1 1 auto;min-width:0">
+        <a href="#/companies/${mid}" style="font-family:var(--f-display);font-size:15px">${esc(m.name)}</a>
+        ${m.desc?`<div style="color:var(--muted);font-size:12.5px;margin-top:2px">${esc(String(m.desc).split(/(?<=[.!?])\s/)[0])}</div>`:""}
+      </div>
+      <span class="tag steel" data-group-fin="${mid}" style="display:none;flex:0 0 auto"></span>
+    </div>`).join("");
+  const fetched=await Promise.all(groupMembers.map(async ([mid])=>{
+    try{
+      const r=await fetch(`/api/companies/${encodeURIComponent(mid)}/fns`), data=await r.json();
+      const entry=data.available?data.entities[0]:null, latest=entry?(entry.reports||[])[0]:null;
+      return latest && latest.revenue_rub!=null ? {mid, year:latest.year, revenue:latest.revenue_rub} : null;
+    }catch(e){return null;}
+  }));
+  fetched.filter(Boolean).forEach(({mid,year,revenue})=>{
+    const chip=mount.querySelector(`[data-group-fin="${mid}"]`);
+    if(chip){ chip.textContent=`Выручка ${year}: ${fnsMoney(revenue)}`; chip.style.display=""; }
+  });
+}
+
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -4702,9 +4730,10 @@ function renderCompany(id){
       ${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}
       ${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}
     </div>`:""}
-    ${groupMembers.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
+    ${groupMembers.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
       <span class="tag steel">В группу входит: ${groupMembers.length}</span>
-      <span style="color:var(--muted);font-size:13px">${groupMembers.map(([mid,m])=>`<a href="#/companies/${mid}">${m.name}</a>`).join(", ")}</span>
+      <div id="group-members" style="width:100%"></div>
+      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно, не к группе в целом.</span>
     </div>`:""}
     ${(c.ownership&&c.ownership.length)?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
       <span class="tag steel">Собственники</span>
@@ -4738,6 +4767,7 @@ function renderCompany(id){
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
   mountMiniAI(c.name,"company",id);
   mountCompanyFns(id);
+  if(groupMembers.length) mountGroupMembers(groupMembers);
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
