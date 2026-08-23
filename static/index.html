@@ -4682,49 +4682,78 @@ async function mountDealFns(d){
   draw();
 }
 
-// Этап 3, П4''': схема группы — инлайн SVG, без внешних библиотек. Центр —
-// текущий профиль; ветви сплошной линией к holding-детям (groupMembers),
-// ветви пунктиром к ownership-портфелю (portfolio) — разный стиль линии
-// отражает разный факт (интеграция в группу против доли без интеграции,
-// та же граница, что уже проведена текстом в подписях блоков выше). Профиль
-// сегодня не бывает одновременно группой и инвестором в наших данных, но
-// функция рисует оба вида веток на одной схеме, если они вдруг совпадут —
-// не искусственное ограничение на будущее.
-function groupSchemaSvg(centerName, holdingNames, ownershipNames){
-  const boxW = 250, boxH = 34, rowGap = 14, trunkX = 20, gapAfterTrunk = 36;
-  const trim = s => { s = String(s); return s.length > 30 ? s.slice(0, 29) + "…" : s; };
-  const rows = holdingNames.map(n => ({name: n, kind: "holding"}))
-    .concat(ownershipNames.map(n => ({name: n, kind: "ownership"})));
-  const centerW = boxW + 40, centerH = 44, centerY = 10;
-  const trunkCenterX = trunkX + centerW / 2;
-  const branchX = trunkX + gapAfterTrunk;
-  const firstRowY = centerY + centerH + 30;
-  const rowY = rows.map((_, i) => firstRowY + i * (boxH + rowGap));
-  const lastMidY = rows.length ? rowY[rows.length - 1] + boxH / 2 : centerY + centerH;
-  const width = branchX + boxW + 20;
-  const height = (rows.length ? rowY[rows.length - 1] + boxH : centerY + centerH) + 10;
+// Этап 5, П4''''': схема группы — центрированное дерево, а не боковой список.
+// Владелец («палочка кривая, непонятно ничего») жаловался ровно на прежнюю
+// геометрию: единственный ребёнок стоял смещённым вбок от центра, а линия к
+// нему шла Г-образно. Теперь один ребёнок — строго под родителем, прямая
+// вертикаль; несколько детей — классическое дерево (вертикаль-шина-отводы),
+// равномерно распределены. Ветви сплошной линией — holding (интеграция в
+// группу), пунктиром — ownership-портфель (доля без интеграции), та же
+// граница, что уже проведена текстом в подписях блока «Структура и связи».
+// Доля печатается на линии, если известна (только у ownership-ветвей —
+// у holding её в данных нет). Каждый узел — кликабельная ссылка на карточку
+// компании (нативный <a href> внутри инлайн SVG).
+function groupSchemaSvg(centerId, centerName, holdingChildren, ownershipChildren){
+  const boxW = 172, boxH = 40, gapX = 18, stemLen = 24, dropLen = 26;
+  const centerW = 210, centerH = 46, centerY = 10, margin = 16;
+  const trim = s => { s = String(s); return s.length > 24 ? s.slice(0, 23) + "…" : s; };
+  const children = holdingChildren.map(x => ({...x, kind: "holding"}))
+    .concat(ownershipChildren.map(x => ({...x, kind: "ownership"})));
+  const n = children.length;
+  const rowWidth = n ? n * boxW + (n - 1) * gapX : 0;
+  const width = Math.max(centerW, rowWidth) + margin * 2;
+  const centerCx = width / 2;
+  const centerX = centerCx - centerW / 2;
+  const parentBottom = centerY + centerH;
+  const busY = parentBottom + stemLen;
+  const childTopY = busY + dropLen;
+  const height = (n ? childTopY + boxH : parentBottom) + margin;
+  const rowStartX = centerCx - rowWidth / 2;
+
+  const node = (cx, y, w, h, id, name, stroke, fill, fontSize, fontWeight) => {
+    const label = `<rect x="${cx - w / 2}" y="${y}" width="${w}" height="${h}" rx="8" `
+      + `fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`
+      + `<text x="${cx}" y="${y + h / 2 + fontSize * 0.35}" text-anchor="middle" `
+      + `font-size="${fontSize}" font-weight="${fontWeight}" fill="var(--ink)">${esc(trim(name))}</text>`;
+    return id && co(id)
+      ? `<a href="#/companies/${encodeURIComponent(id)}">${label}</a>`
+      : label;
+  };
+  const shareLabel = (cx, y, text) => {
+    const w = Math.min(90, 14 + text.length * 6.4);
+    return `<rect x="${cx - w / 2}" y="${y - 9}" width="${w}" height="16" rx="4" fill="var(--card)"/>`
+      + `<text x="${cx}" y="${y + 3}" text-anchor="middle" font-size="11" fill="var(--muted)">${esc(text)}</text>`;
+  };
+
   let svg = `<svg viewBox="0 0 ${width} ${height}" width="100%" role="img" `
     + `aria-label="Схема: ${esc(trim(centerName))} и связанные компании">`;
-  svg += `<rect x="${trunkX}" y="${centerY}" width="${centerW}" height="${centerH}" rx="8" `
-    + `fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>`;
-  svg += `<text x="${trunkCenterX}" y="${centerY + centerH / 2 + 5}" text-anchor="middle" `
-    + `font-size="14" font-weight="600" fill="var(--accent-deep)">${esc(trim(centerName))}</text>`;
-  if(rows.length){
-    svg += `<line x1="${trunkCenterX}" y1="${centerY + centerH}" x2="${trunkCenterX}" y2="${lastMidY}" `
-      + `stroke="var(--line)" stroke-width="1.5"/>`;
-  }
-  rows.forEach((r, i) => {
-    const midY = rowY[i] + boxH / 2;
-    const isHolding = r.kind === "holding";
-    const stroke = isHolding ? "var(--accent)" : "var(--steel)";
-    const dash = isHolding ? "" : ` stroke-dasharray="5,4"`;
-    svg += `<line x1="${trunkCenterX}" y1="${midY}" x2="${branchX}" y2="${midY}" `
+  svg += node(centerCx, centerY, centerW, centerH, centerId, centerName,
+    "var(--accent)", "var(--accent-soft)", 14, 600);
+
+  if(n === 1){
+    const r = children[0];
+    const stroke = r.kind === "holding" ? "var(--accent)" : "var(--steel)";
+    const dash = r.kind === "holding" ? "" : ` stroke-dasharray="5,4"`;
+    svg += `<line x1="${centerCx}" y1="${parentBottom}" x2="${centerCx}" y2="${childTopY}" `
       + `stroke="${stroke}" stroke-width="1.5"${dash}/>`;
-    svg += `<rect x="${branchX}" y="${rowY[i]}" width="${boxW}" height="${boxH}" rx="6" `
-      + `fill="var(--card)" stroke="${stroke}" stroke-width="1.5"/>`;
-    svg += `<text x="${branchX + boxW / 2}" y="${midY + 4}" text-anchor="middle" `
-      + `font-size="12" fill="var(--ink)">${esc(trim(r.name))}</text>`;
-  });
+    if(r.share) svg += shareLabel(centerCx, (parentBottom + childTopY) / 2, r.share);
+    svg += node(centerCx, childTopY, boxW, boxH, r.id, r.name, stroke, "var(--card)", 12, 500);
+  } else if(n > 1){
+    const centersX = children.map((_, i) => rowStartX + i * (boxW + gapX) + boxW / 2);
+    svg += `<line x1="${centerCx}" y1="${parentBottom}" x2="${centerCx}" y2="${busY}" `
+      + `stroke="var(--line)" stroke-width="1.5"/>`;
+    svg += `<line x1="${centersX[0]}" y1="${busY}" x2="${centersX[n - 1]}" y2="${busY}" `
+      + `stroke="var(--line)" stroke-width="1.5"/>`;
+    children.forEach((r, i) => {
+      const cx = centersX[i];
+      const stroke = r.kind === "holding" ? "var(--accent)" : "var(--steel)";
+      const dash = r.kind === "holding" ? "" : ` stroke-dasharray="5,4"`;
+      svg += `<line x1="${cx}" y1="${busY}" x2="${cx}" y2="${childTopY}" `
+        + `stroke="${stroke}" stroke-width="1.5"${dash}/>`;
+      if(r.share) svg += shareLabel(cx, (busY + childTopY) / 2, r.share);
+      svg += node(cx, childTopY, boxW, boxH, r.id, r.name, stroke, "var(--card)", 12, 500);
+    });
+  }
   svg += `</svg>`;
   return svg;
 }
@@ -4737,16 +4766,20 @@ function groupSchemaSvg(centerName, holdingNames, ownershipNames){
 // группа) и «Портфель» (обратный ownership.id -> сюда, доля без интеграции
 // бренда/управления) — оба показывают чужие юрлица рядом с финансами, разница
 // только в подписи блока и в том, какое поле её породило.
-async function mountGroupMembers(groupMembers, mountId){
+async function mountGroupMembers(groupMembers, mountId, getShare){
   const mount=document.getElementById(mountId||"group-members"); if(!mount) return;
-  mount.innerHTML = groupMembers.map(([mid,m])=>`
+  mount.innerHTML = groupMembers.map(([mid,m])=>{
+    const share = getShare ? getShare(mid) : null;
+    return `
     <div class="d-parties" style="padding:10px 0;border-top:1px solid var(--line-soft);align-items:flex-start;gap:10px">
       <div style="flex:1 1 auto;min-width:0">
         <a href="#/companies/${mid}" style="font-family:var(--f-display);font-size:15px">${esc(m.name)}</a>
+        ${share?` <span style="color:var(--muted);font-size:13px">— ${esc(share)}</span>`:""}
         ${m.desc?`<div style="color:var(--muted);font-size:12.5px;margin-top:2px">${esc(String(m.desc).split(/(?<=[.!?])\s/)[0])}</div>`:""}
       </div>
       <span class="tag steel" data-group-fin="${mid}" style="display:none;flex:0 0 auto"></span>
-    </div>`).join("");
+    </div>`;
+  }).join("");
   const fetched=await Promise.all(groupMembers.map(async ([mid])=>{
     try{
       const r=await fetch(`/api/companies/${encodeURIComponent(mid)}/fns`), data=await r.json();
@@ -4796,45 +4829,43 @@ function renderCompany(id){
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Это не одна компания: под этим именем в сделке шли несколько юридических лиц, проданных одним лотом. Что вошло в лот и какие доли — в карточке сделки.</span>
     </div>`:""}
     ${(()=>{
+      // Этап 5, П3''''': раньше здесь стояло до трёх визуально одинаковых
+      // блоков подряд (чип + список + собственный дисклеймер каждый) —
+      // владелец: «слишком одинаковые, слишком много текста». Один блок
+      // «Структура и связи», строки с чёткими текстовыми подписями вместо
+      // чипов-близнецов, один общий дисклеймер вместо трёх. Семантика строк
+      // (что показывается и когда) не изменилась — изменилась только рамка.
       const got = controlGot(id), over = controlOver(id);
-      if(!got && !over.length) return "";
-      const line = [];
-      if(got) line.push(`<span class="tag steel">Контроль у <a href="#/companies/${got.buyer}">${co(got.buyer).name}</a></span> <span style="color:var(--muted)">с ${fmtDate(got.date)} — <a href="#/deal/${got.id}">по сделке</a></span>`);
-      if(over.length) line.push(`<span class="tag steel">Под контролем: ${over.length}</span> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и ещё ${over.length-6}`:""}</span>`);
-      return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
-        ${line.join("")}
-        <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Контроль показан по закрытым сделкам в базе. Более поздние изменения могут ещё не быть учтены.</span>
-      </div>`;
-    })()}
-    ${holding?`<div class="d-parties" style="margin-top:8px;font-size:14px">
-      <span class="tag steel">${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"} ${holding.name}</span>
-      ${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}
-      ${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}
-    </div>`:""}
-    ${groupMembers.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
-      <span class="tag steel">В группу входит: ${groupMembers.length}</span>
-      <div id="group-members" style="width:100%"></div>
-      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно, не к группе в целом.</span>
-    </div>`:""}
-    ${(c.ownership&&c.ownership.length)?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
-      <span class="tag steel">Собственники</span>
-      <div style="display:flex;flex-direction:column;gap:4px">
+      const rows = [];
+      if(got) rows.push(`<div><b>Контроль у:</b> <a href="#/companies/${got.buyer}">${co(got.buyer).name}</a> <span style="color:var(--muted)">с ${fmtDate(got.date)} — <a href="#/deal/${got.id}">по сделке</a></span></div>`);
+      if(over.length) rows.push(`<div><b>Под контролем (${over.length}):</b> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и ещё ${over.length-6}`:""}</span></div>`);
+      if(holding) rows.push(`<div><b>${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"}:</b> <a href="#/companies/${c.holding.id}">${holding.name}</a>${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}</div>`);
+      if(groupMembers.length) rows.push(`<div><b>В группу входит (${groupMembers.length}):</b><div id="group-members" style="width:100%;margin-top:4px"></div></div>`);
+      if(c.ownership&&c.ownership.length) rows.push(`<div><b>Собственники:</b><div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
         ${c.ownership.map(o=>`<div style="font-size:13px;color:var(--muted)">
           ${o.id&&co(o.id)?`<a href="#/companies/${o.id}">${esc(o.name)}</a>`:esc(o.name)}${o.share?` — ${esc(o.share)}`:""}
-          <span style="font-size:12px">(по данным на ${esc(fmtMonthYear(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
+          <span style="font-size:12px">(на ${esc(fmtMonthYear(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
         </div>`).join("")}
-      </div>
-      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Владение меняется со временем — показана структура на дату источника, а не текущее состояние.</span>
-    </div>`:""}
-    ${portfolio.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
-      <span class="tag steel">Портфель: ${portfolio.length}</span>
-      <div id="portfolio-members" style="width:100%"></div>
-      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Компании, где ${c.name} раскрыт как один из собственников, — не операционная группа: каждая работает под своим брендом и управлением, доля не означает интеграцию.</span>
-    </div>`:""}
-    ${(groupMembers.length||portfolio.length)?`<div class="d-parties" style="margin-top:8px">
-      <button class="chip" id="toggleGroupSchema">${groupMembers.length?"Показать схему группы":"Показать схему портфеля"}</button>
-      <div id="group-schema" style="display:none;width:100%;margin-top:10px;overflow-x:auto"></div>
-    </div>`:""}
+      </div></div>`);
+      if(portfolio.length) rows.push(`<div><b>Портфель (${portfolio.length}):</b><div id="portfolio-members" style="width:100%;margin-top:4px"></div></div>`);
+      if(!rows.length) return "";
+      const schemaEligible = groupMembers.length>=2 || portfolio.length>=2;
+      const notes = [];
+      if(got||over.length) notes.push("контроль показан по закрытым сделкам в базе — более поздние изменения могут быть ещё не учтены");
+      if(groupMembers.length||portfolio.length||(c.ownership&&c.ownership.length)){
+        let n = "доли и состав показаны на дату источника, не текущее состояние";
+        if(groupMembers.length) n += "; консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно";
+        if(portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
+        notes.push(n);
+      }
+      return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
+        <span class="tag steel">Структура и связи</span>
+        <div style="display:flex;flex-direction:column;gap:10px;width:100%">${rows.join("")}</div>
+        ${schemaEligible?`<button class="chip" id="toggleGroupSchema">${groupMembers.length>=2?"Показать схему группы":"Показать схему портфеля"}</button>
+        <div id="group-schema" style="display:none;width:100%;overflow-x:auto"></div>`:""}
+        ${notes.length?`<span style="color:var(--muted);font-size:12.5px;max-width:72ch">${notes.map(t=>t[0].toUpperCase()+t.slice(1)).join(". ")}.</span>`:""}
+      </div>`;
+    })()}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">
@@ -4858,20 +4889,31 @@ function renderCompany(id){
   mountMiniAI(c.name,"company",id);
   mountCompanyFns(id);
   if(groupMembers.length) mountGroupMembers(groupMembers, "group-members");
-  if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members");
+  // Портфель показывает долю в той же строке, что и имя (просьба владельца
+  // 23 августа) — доля берётся из ownership-записи ПОРТФЕЛЬНОЙ компании,
+  // которая ссылается обратно на текущий профиль (обратное направление той
+  // же связи, что уже подписана в блоке «Собственники» у самой портфельной
+  // компании).
+  if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members",
+    pid => { const stake=(co(pid).ownership||[]).find(o=>o.id===id); return stake&&stake.share?stake.share:null; });
   const schemaBtn=document.getElementById("toggleGroupSchema");
   if(schemaBtn) schemaBtn.onclick=()=>{
     const box=document.getElementById("group-schema");
     if(!box) return;
     const opening = box.style.display==="none";
     if(opening && !box.dataset.drawn){
-      box.innerHTML = groupSchemaSvg(c.name, groupMembers.map(([,m])=>m.name), portfolio.map(([,p])=>p.name));
+      const groupChildren = groupMembers.map(([mid,m])=>({id:mid,name:m.name}));
+      const portfolioChildren = portfolio.map(([pid,p])=>{
+        const stake=(p.ownership||[]).find(o=>o.id===id);
+        return {id:pid, name:p.name, share: stake&&stake.share?stake.share:null};
+      });
+      box.innerHTML = groupSchemaSvg(id, c.name, groupChildren, portfolioChildren);
       box.dataset.drawn = "1";
     }
     box.style.display = opening ? "" : "none";
     schemaBtn.textContent = opening
       ? "Скрыть схему"
-      : (groupMembers.length?"Показать схему группы":"Показать схему портфеля");
+      : (groupMembers.length>=2?"Показать схему группы":"Показать схему портфеля");
   };
 }
 

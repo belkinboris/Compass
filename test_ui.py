@@ -711,19 +711,25 @@ def test_group_badge_shown_even_without_current_dependent_profiles(page, base_ur
 
 
 def test_group_schema_button_reveals_svg_with_member_and_no_overflow(page, base_url):
-    """Этап 3, П4''': кнопка «Показать схему группы» на карточке группы
-    (Роснефть, g300b9ead, holding-ребёнок — Башнефть) рисует инлайн SVG по
-    клику, без сети и внешних библиотек. Проверяем и раскрытое состояние
-    (родня урока CLAUDE.md «скрытые состояния проверяются отдельно» — до
-    клика схема не в DOM вовсе), и что на 360px она не толкает страницу
-    вбок (урок «переполнение ищут на самом длинном значении»)."""
-    visit(page, base_url, "#/companies/g300b9ead")
+    """Этап 5, П4''''': кнопка «Показать схему группы» на карточке группы с
+    ≥2 участниками (Ростелеком, g00f14033, holding-дети — Tele2 и
+    Центральный телеграф) рисует инлайн SVG по клику, без сети и внешних
+    библиотек. Роснефть/Башнефть (был 1 участник) для этого теста больше не
+    годится — с 23 августа кнопка при ОДНОМ участнике не показывается вовсе
+    (см. test_group_schema_button_hidden_for_single_participant). Проверяем
+    и раскрытое состояние (родня урока CLAUDE.md «скрытые состояния
+    проверяются отдельно» — до клика схема не в DOM вовсе), и что на 360px
+    она не толкает страницу вбок (урок «переполнение ищут на самом длинном
+    значении»)."""
+    visit(page, base_url, "#/companies/g00f14033")
     assert page.locator("#group-schema svg").count() == 0, "схема не должна рисоваться до клика"
     page.click("#toggleGroupSchema")
     page.wait_for_timeout(200)
     svg = page.locator("#group-schema svg")
     assert svg.count() == 1, "клик не нарисовал схему"
-    assert "башнефть" in page.inner_text("#group-schema").lower()
+    schema_text = page.inner_text("#group-schema").lower()
+    assert "tele2" in schema_text or "tele" in schema_text
+    assert "телеграф" in schema_text
     page.set_viewport_size({"width": 360, "height": 900})
     page.wait_for_timeout(200)
     over = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
@@ -731,19 +737,36 @@ def test_group_schema_button_reveals_svg_with_member_and_no_overflow(page, base_
     page.set_viewport_size({"width": 1280, "height": 1000})
 
 
-def test_group_schema_button_labels_portfolio_differently_from_group(page, base_url):
-    """АФК «Система» — инвестор, не операционная группа (просьба владельца
-    23 августа: не путать «В группу входит» с долей без интеграции), и
-    кнопка обязана называть схему «портфелем», а не «группой» — тот же
-    литмус, что уже держит текст блока «Портфель» самого."""
+def test_group_schema_button_hidden_for_single_participant(page, base_url):
+    """Этап 5, П4''''': при ОДНОМ участнике схема из двух боксов не
+    добавляет ничего к строке текста над ней — владелец сам показал такой
+    случай (АФК «Система» → МТС, «палочка кривая, непонятно ничего»).
+    Кнопка теперь скрыта при <2 участниках (родня «блок, который всегда
+    полон, ничего не подбирает» — здесь зеркально: кнопка обязана уметь не
+    существовать при недостаточном числе элементов). Строка «Портфель»
+    самого блока при этом остаётся — это не то же самое, что схема."""
     visit(page, base_url, "#/companies/gc2792a44")
+    assert page.locator("#toggleGroupSchema").count() == 0, "кнопка схемы не должна показываться при 1 участнике"
+    body = page.inner_text("#app").lower()
+    assert "портфель" in body and "мтс" in body, "строка «Портфель» обязана остаться и без кнопки схемы"
+
+
+def test_group_schema_button_labels_portfolio_differently_from_group(page, base_url):
+    """Альфа-Банк (ga2cfae5b) держит портфель из трёх компаний (Европлан,
+    MarketGuru, Флоктори) — инвестор, не операционная группа (просьба
+    владельца 23 августа: не путать «В группу входит» с долей без
+    интеграции), и кнопка обязана называть схему «портфелем», а не
+    «группой» — тот же литмус, что уже держит текст блока «Портфель»
+    самого. АФК «Система» для этого теста больше не годится: её портфель —
+    один участник (МТС), и кнопки схемы у неё теперь нет вовсе."""
+    visit(page, base_url, "#/companies/ga2cfae5b")
     btn = page.locator("#toggleGroupSchema")
     assert btn.count() == 1
     assert "схему портфеля" in btn.inner_text().lower()
     assert "схему группы" not in btn.inner_text().lower()
     btn.click()
     page.wait_for_timeout(200)
-    assert "мтс" in page.inner_text("#group-schema").lower()
+    assert "европлан" in page.inner_text("#group-schema").lower()
 
 
 def test_group_schema_svg_truncates_long_names_without_error(page, base_url):
@@ -753,8 +776,9 @@ def test_group_schema_svg_truncates_long_names_without_error(page, base_url):
     многоточием, а не переполняет узел."""
     visit(page, base_url, "#/")
     svg = page.evaluate(
-        "() => groupSchemaSvg('Тест', "
-        "['Международный аэропорт Шереметьево (МАШ)'], ['Ещё один очень длинный портфельный актив'])"
+        "() => groupSchemaSvg('test-center', 'Тест', "
+        "[{id:null,name:'Международный аэропорт Шереметьево (МАШ)'}], "
+        "[{id:null,name:'Ещё один очень длинный портфельный актив',share:null}])"
     )
     assert svg.count("…") == 2, "оба длинных имени должны быть обрезаны многоточием"
     assert "<svg" in svg and "</svg>" in svg
