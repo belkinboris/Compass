@@ -867,6 +867,12 @@ a.dp-asset-name:hover{color:var(--accent)}
   display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .co-nums{display:flex;gap:28px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft)}
 .co-nums .val{font-family:var(--f-display);font-weight:600;font-size:15px;margin-top:3px}
+/* Бейдж «Группа компаний» — ВНЕ потока (position:absolute), а не строкой
+   рядом с отраслевым тегом: тег над `.co-nums` уже намеренно держит
+   постоянную высоту (комментарий выше), и обычная inline-строка сдвинула бы
+   вниз имя/описание ровно у профилей с group:true — линия разъехалась бы
+   заново, тем же дефектом, который уже один раз чинили. */
+.co-group-badge{position:absolute;top:-9px;left:20px;z-index:2}
 .filters select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
 
 /* Компактный список сделок компании. На странице остаётся короткая
@@ -4300,6 +4306,7 @@ function companyGridHtml(){
   ${shown.map(({id,c,n})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
+        ${c.group?`<span class="tag steel co-group-badge">Группа компаний</span>`:""}
         <span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span>
         <h3 title="${esc(c.name)}">${c.name}</h3>
         <div class="desc">${coDescHtml(id,c)}</div>
@@ -4660,13 +4667,16 @@ async function mountDealFns(d){
   draw();
 }
 
-// «Компании группы» на карточке-хабе группы: каждая с описанием и, если
-// есть подтверждённые данные ФНС, чипом «Выручка <год>: X» — не таблица
-// показателей (это не консолидация, каждое юрлицо само по себе), а
-// быстрая ориентировка, куда идти за цифрами. Молчаливо пропускает
-// компании без данных — пустая вкладка хуже отсутствующего чипа.
-async function mountGroupMembers(groupMembers){
-  const mount=document.getElementById("group-members"); if(!mount) return;
+// Список компаний с финчипом «Выручка <год>: X» — не таблица показателей
+// (это не консолидация, каждое юрлицо само по себе), а быстрая ориентировка,
+// куда идти за цифрами. Молчаливо пропускает компании без данных — пустая
+// вкладка хуже отсутствующего чипа. Одна функция для двух разных списков на
+// карточке компании: «В группу входит» (holding.id -> сюда, операционная
+// группа) и «Портфель» (обратный ownership.id -> сюда, доля без интеграции
+// бренда/управления) — оба показывают чужие юрлица рядом с финансами, разница
+// только в подписи блока и в том, какое поле её породило.
+async function mountGroupMembers(groupMembers, mountId){
+  const mount=document.getElementById(mountId||"group-members"); if(!mount) return;
   mount.innerHTML = groupMembers.map(([mid,m])=>`
     <div class="d-parties" style="padding:10px 0;border-top:1px solid var(--line-soft);align-items:flex-start;gap:10px">
       <div style="flex:1 1 auto;min-width:0">
@@ -4704,10 +4714,19 @@ function renderCompany(id){
   // «это группа»: любой профиль, на который кто-то ссылается, тем самым уже
   // группа, и заводить для этого второй признак незачем.
   const groupMembers = Object.entries(COMPANIES).filter(([mid,m])=>mid!==id && m.holding && m.holding.id===id);
+  // «Портфель» — зеркало groupMembers, но по другому полю и в другую сторону:
+  // не «кто ссылается на меня как на группу» (holding.id), а «кто указал меня
+  // среди своих собственников» (ownership[].id). Держится отдельно от
+  // groupMembers сознательно (просьба владельца 23 августа): АФК «Система»
+  // держит долю в МТС, но МТС не «входит в группу АФК Система» — это другой
+  // факт (доля без интеграции бренда/управления), и подпись блока обязана
+  // это отражать, а не использовать слово «группа».
+  const portfolio = Object.entries(COMPANIES).filter(([pid,p])=>pid!==id && (p.ownership||[]).some(o=>o.id===id));
   app.innerHTML = `
   <a class="back reveal" href="#/companies">← Все компании</a>
   <div class="d-head reveal">
     <a class="tag" href="#/industry/${encodeURIComponent(c.ind)}" title="Сводка по отрасли «${esc(c.ind)}»">${c.ind}</a>
+    ${c.group?`<span class="tag steel" style="margin-left:6px">Группа компаний</span>`:""}
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
     ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
@@ -4745,6 +4764,11 @@ function renderCompany(id){
       </div>
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Владение меняется со временем — показана структура на дату источника, а не текущее состояние.</span>
     </div>`:""}
+    ${portfolio.length?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
+      <span class="tag steel">Портфель: ${portfolio.length}</span>
+      <div id="portfolio-members" style="width:100%"></div>
+      <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Компании, где ${c.name} раскрыт как один из собственников, — не операционная группа: каждая работает под своим брендом и управлением, доля не означает интеграцию.</span>
+    </div>`:""}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">
@@ -4767,7 +4791,8 @@ function renderCompany(id){
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
   mountMiniAI(c.name,"company",id);
   mountCompanyFns(id);
-  if(groupMembers.length) mountGroupMembers(groupMembers);
+  if(groupMembers.length) mountGroupMembers(groupMembers, "group-members");
+  if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members");
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */

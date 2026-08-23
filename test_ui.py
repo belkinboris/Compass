@@ -649,6 +649,67 @@ def test_group_members_show_finance_chip_and_honest_disclaimer(browser, base_url
         ctx.close()
 
 
+def test_group_badge_appears_in_catalog_for_operating_groups(page, base_url):
+    """23 августа 2026, этап 3 брифа: `group:true` — первая партия из 21
+    профиля (16 целей `holding.id` + 5 общеизвестных групп вроде Яндекса).
+    Бейдж «Группа компаний» обязан быть виден уже в каталоге, до перехода на
+    карточку, — иначе владельцу пришлось бы открывать каждый профиль, чтобы
+    понять, кто группа, а кто нет."""
+    visit(page, base_url, "#/companies")
+    try:
+        page.fill("#coq", "МТС")
+        page.wait_for_timeout(600)
+        cards = page.locator(".co-card")
+        assert cards.count() >= 1, "поиск «МТС» не нашёл карточку в каталоге"
+        assert "группа компаний" in cards.first.inner_text().lower(), \
+            "бейдж группы не показан в каталоге у профиля с group:true"
+    finally:
+        # `coQuery` — глобальная JS-переменная, не сбрасывается переходом по
+        # хешу (см. CLAUDE.md, «переход по хешу — не перезагрузка страницы
+        # для теста»): не очистив её, следующий тест каталога в том же `page`
+        # унаследует фильтр «МТС» и увидит не всю базу компаний.
+        page.fill("#coq", "")
+        page.wait_for_timeout(600)
+
+
+def test_investor_portfolio_never_says_group_membership(page, base_url):
+    """АФК «Система» держит долю в МТС, но МТС НЕ «входит в группу АФК
+    Система» — владелец прямо просил не путать эти два факта (запись в
+    CLAUDE.md, 23 августа 2026). Карточка инвестора показывает «Портфель», а
+    не бейдж «Группа компаний» и не блок «В группу входит»."""
+    visit(page, base_url, "#/companies/gc2792a44")
+    body = page.inner_text("#app").lower()
+    assert "портфель" in body, "блок «Портфель» не показан на карточке инвестора"
+    assert "мтс" in body, "МТС не видна в портфеле АФК «Система»"
+    assert "группа компаний" not in body, "инвестор не должен нести бейдж «Группа компаний»"
+    assert "в группу входит" not in body, "инвестор не должен показывать блок «В группу входит»"
+
+
+def test_owned_company_shows_investor_in_ownership_block(page, base_url):
+    """Обратное направление того же факта: на карточке МТС в «Собственники»
+    видна АФК «Система» с долей и источником (страница МТС для инвесторов),
+    а не выдуманная цифра."""
+    visit(page, base_url, "#/companies/g69c88bc7")
+    body = page.inner_text("#app").lower()
+    assert "собственники" in body
+    assert "афк" in body and "система" in body
+    assert "42,085%" in page.inner_text("#app")
+
+
+def test_group_badge_shown_even_without_current_dependent_profiles(page, base_url):
+    """Яндекс — общеизвестная операционная группа, но сегодня в базе нет ни
+    одного профиля, чей `holding.id` указывал бы на неё, — обратное правило
+    целостности не требуется (см. docstring pipeline/mark_operating_groups.py
+    и test_data.py::test_holding_target_is_always_flagged_as_group). Бейдж
+    обязан быть виден, а пустой блок «В группу входит: 0» — нет: родня уже
+    записанного урока «блок, который всегда полон, ничего не подбирает»,
+    только здесь про блок, обязанный уметь не существовать при нуле."""
+    visit(page, base_url, "#/companies/yandex")
+    body = page.inner_text("#app").lower()
+    assert "группа компаний" in body, "бейдж группы не показан у Яндекса"
+    assert "в группу входит" not in body, "пустой блок состава не должен рисоваться"
+
+
 def test_company_ownership_block_shown_only_when_known(page, base_url):
     """G8 (PRODUCT_ROADMAP.md): «Собственники» — новый блок на странице
     компании, пилот на двух профилях (владелец сравнивал нас с TAdviser,
