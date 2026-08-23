@@ -5348,63 +5348,6 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
-  },
-  {
-   "draft_id": "d22507092",
-   "title": "Роспотребнадзор рассказал о правах потребителя при покупке школьной одежды",
-   "date": "2026-08-23",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2153460/rospotrebnadzor-rasskazal-o-pravakh-potrebitelia-pri-pokupke-shkolnoi-odezhdy-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d90898958",
-   "title": "«Унизительная цена»: российские аграрии радуются хорошему урожаю, но ломают голову, кому его продать",
-   "date": "2026-08-23",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/economics/2026/08/23/76600875/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
