@@ -27,9 +27,24 @@
 триггер не нужно, дешёвая проверка «есть ли новые данные» не жалко
 хоть каждый час.
 
+ПОЛНЫЙ БАЛАНС — ОТДЕЛЬНЫЙ ФАЙЛ (Этап 8, П2-8). Просьба владельца и партнёра
+живьём после показа сводных плиток: «Нужен бухгалтерский баланс… Активы и
+пассивы, 1-2 странички» — все строки разделов I-III формы 806, не только
+два итога. Пишем `bank_full_balance.json` ОТДЕЛЬНО от `bank_finance.json`
+(который грузится для плиток на каждой из ~13 банковских страниц) — полная
+таблица нужна только на самой странице банка по клику/прокрутке, грузить
+её вместе со сводкой было бы лишним весом для случая, когда посетитель
+хочет только плитки. Обе идемпотентности проверяются НЕЗАВИСИМО: смена
+чистой прибыли (форма 102, помесячно) не должна перезаписывать полную
+таблицу баланса (форма 806, поквартально), и наоборот.
+
+`find_latest_page()` (см. `cbr_f806.py`) выполняет ОДИН сетевой запрос на
+банк за квартал-попытку и отдаёт сырой HTML — `parse_balance()` и
+`parse_full_table()` разбирают его дважды, без второго похода в сеть.
+
 ЗАПУСК:
     python3 pipeline/cbr_sync_bank_finance.py           # сухой прогон, только печать
-    python3 pipeline/cbr_sync_bank_finance.py --write    # запись static/data/bank_finance.json (только если есть изменения)
+    python3 pipeline/cbr_sync_bank_finance.py --write    # запись static/data/bank_finance.json и bank_full_balance.json (только если есть изменения)
 """
 from __future__ import annotations
 
@@ -47,9 +62,10 @@ import httpx  # noqa: E402
 
 from cbr_client import CbrCreditOrgClient  # noqa: E402
 from pipeline import fns_registry  # noqa: E402
-from pipeline.cbr_f806 import latest_available  # noqa: E402
+from pipeline.cbr_f806 import find_latest_page, parse_balance, parse_full_table  # noqa: E402
 
 OUTPUT_PATH = ROOT / "static" / "data" / "bank_finance.json"
+FULL_BALANCE_OUTPUT_PATH = ROOT / "static" / "data" / "bank_full_balance.json"
 NET_PROFIT_SYMBOL = "61101"  # «Прибыль после налогообложения», форма 102
 
 
@@ -85,12 +101,18 @@ def latest_net_profit(regnum: int, client: CbrCreditOrgClient) -> tuple[date, in
     return None
 
 
-def collect(today: date) -> dict[str, dict]:
-    result: dict[str, dict] = {}
+def collect(today: date) -> tuple[dict[str, dict], dict[str, dict]]:
+    """(сводка для плиток, полный баланс разделов I-III) — оба словаря
+    ключом company_id. Один HTTP-запрос на банк на форму 806 (см. докстроку
+    модуля), не два."""
+    finance: dict[str, dict] = {}
+    full_balance: dict[str, dict] = {}
     with httpx.Client() as f806_client, CbrCreditOrgClient() as f102_client:
         for row in bank_entries():
             regnum = row["cbr_regnum"]
-            balance = latest_available(regnum, f806_client, today=today)
+            html = find_latest_page(regnum, f806_client, today=today)
+            balance = parse_balance(html, regnum) if html is not None else None
+            full = parse_full_table(html) if html is not None else None
             profit = latest_net_profit(regnum, f102_client)
             if balance is None and profit is None:
                 continue
@@ -105,17 +127,37 @@ def collect(today: date) -> dict[str, dict]:
             if profit is not None:
                 entry["as_of_profit"] = profit[0].isoformat()
                 entry["net_profit_rub"] = profit[1]
-            result[row["company_id"]] = entry
-    return result
+            finance[row["company_id"]] = entry
+            if full is not None:
+                full_balance[row["company_id"]] = {
+                    "regnum": regnum,
+                    "legal_name": full["legal_name"],
+                    "as_of": full["as_of"].isoformat(),
+                    "sections": full["sections"],
+                }
+    return finance, full_balance
+
+
+def _write_if_changed(path: Path, data: dict, write: bool, label: str) -> None:
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    if data == existing:
+        print(f"{label}: без изменений — квартал/месяц те же, что уже записаны, ничего не пишем.")
+        return
+    if write:
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(f"{label}: записано {path} ({len(data)} банков, изменения есть)")
+    else:
+        print(f"{label}: есть изменения — для записи добавьте --write")
 
 
 def main(argv: list[str]) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write", action="store_true", help="записать static/data/bank_finance.json")
+    parser.add_argument("--write", action="store_true",
+                         help="записать static/data/bank_finance.json и bank_full_balance.json")
     args = parser.parse_args(argv)
 
     today = date.today()
-    data = collect(today)
+    data, full_balance_data = collect(today)
 
     for company_id in sorted(data):
         entry = data[company_id]
@@ -131,17 +173,8 @@ def main(argv: list[str]) -> None:
     if skipped:
         print(f"Без каких-либо данных (обе формы пусты): {skipped}")
 
-    existing = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")) if OUTPUT_PATH.exists() else {}
-    if data == existing:
-        print("Без изменений — квартал/месяц те же, что уже записаны, ничего не пишем.")
-        return
-
-    if args.write:
-        OUTPUT_PATH.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        print(f"Записано: {OUTPUT_PATH} ({len(data)} банков, изменения есть)")
-    else:
-        print("Есть изменения — для записи добавьте --write")
+    _write_if_changed(OUTPUT_PATH, data, args.write, "Сводка (плитки)")
+    _write_if_changed(FULL_BALANCE_OUTPUT_PATH, full_balance_data, args.write, "Полный баланс")
 
 
 if __name__ == "__main__":

@@ -886,6 +886,12 @@ def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
             }))
         ctx.route("**/api/companies/g28ff15bb/fns*", fake_fns)
         ctx.route("**/static/data/bank_finance.json*", fake_finance)
+        # Этап 8, П2-8: mountCompanyFns грузит оба файла параллельно —
+        # без явного мока полная таблица тянула бы реальный
+        # bank_full_balance.json с диска и делала бы этот тест зависимым
+        # от того, что в нём лежит сегодня; здесь проверяется только сводка.
+        ctx.route("**/static/data/bank_full_balance.json*",
+                   lambda route: route.fulfill(status=200, content_type="application/json", body="{}"))
         pg = ctx.new_page()
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
@@ -925,6 +931,8 @@ def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
             route.fulfill(status=200, content_type="application/json", body="{}")
         ctx.route("**/api/companies/g28ff15bb/fns*", fake_fns)
         ctx.route("**/static/data/bank_finance.json*", fake_finance)
+        ctx.route("**/static/data/bank_full_balance.json*",
+                   lambda route: route.fulfill(status=200, content_type="application/json", body="{}"))
         pg = ctx.new_page()
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
@@ -934,6 +942,83 @@ def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
         body = pg.inner_text("#fns-company").lower()
         assert "кредитная организация" in body
         assert not errors, "pageerror при рендере честного состояния банка без данных ЦБ: %s" % errors
+    finally:
+        ctx.close()
+
+
+def test_bank_profile_shows_full_balance_sheet_below_summary_tiles(browser, base_url):
+    """Этап 8, П2-8: партнёр вживую попросил не только сводные плитки, а
+    полный баланс («Активы и пассивы, 1-2 странички… ОСВ, отчёт о финансовых
+    результатах не надо»). Проверяем все три раздела на экране, отрицательное
+    значение со знаком минус (учит регэксп с `-`), пустую строку без данных
+    (не показана вовсе — «Инвестиции в дочерние…» у Сбербанка) и отсутствие
+    переполнения на 360px с самым длинным названием статьи (193 знака)."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": False, "hidden": False, "company_id": "g28ff15bb",
+                "company_name": "Сбербанк", "configured": True, "category": "bank",
+                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                          "банки не сдают, только по отдельной форме перед Банком России.",
+            }))
+
+        def fake_finance(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "g28ff15bb": {"regnum": 1481, "legal_name": "ПАО Сбербанк", "as_of_balance": "2026-04-01",
+                              "assets_rub": 65137327668000, "assets_rub_prior_year": 65210686723000,
+                              "equity_rub": 8627750211000, "equity_rub_prior_year": 8115080880000},
+            }))
+
+        def fake_full_balance(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "g28ff15bb": {
+                    "regnum": 1481, "legal_name": "ПАО Сбербанк", "as_of": "2026-04-01",
+                    "sections": [
+                        {"title": "I. Активы", "rows": [
+                            {"num": "1", "name": "Денежные средства", "note": "",
+                             "period_rub": 702499267000, "prior_year_rub": 701792637000},
+                            {"num": "8", "name": "Инвестиции в дочерние и зависимые организации",
+                             "note": "", "period_rub": None, "prior_year_rub": None},
+                            {"num": "14", "name": "Всего активов", "note": "",
+                             "period_rub": 65137327668000, "prior_year_rub": 65210686723000},
+                        ]},
+                        {"title": "II. Пассивы", "rows": [
+                            {"num": "24", "name": "Всего обязательств", "note": "",
+                             "period_rub": 56509577457000, "prior_year_rub": 57095605843000},
+                        ]},
+                        {"title": "III. Источники собственных средств", "rows": [
+                            {"num": "29", "name": "Переоценка финансовых активов, оцениваемых по справедливой "
+                                                   "стоимости через прочий совокупный доход, уменьшенная на "
+                                                   "отложенное налоговое обязательство (увеличенная на "
+                                                   "отложенный налоговый актив)",
+                             "note": "", "period_rub": -311872957000, "prior_year_rub": -333059648000},
+                            {"num": "38", "name": "Всего источников собственных средств", "note": "",
+                             "period_rub": 8627750211000, "prior_year_rub": 8115080880000},
+                        ]},
+                    ],
+                },
+            }))
+        ctx.route("**/api/companies/g28ff15bb/fns*", fake_fns)
+        ctx.route("**/static/data/bank_finance.json*", fake_finance)
+        ctx.route("**/static/data/bank_full_balance.json*", fake_full_balance)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.set_viewport_size({"width": 360, "height": 900})
+        pg.goto(base_url + "/#/companies/g28ff15bb", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        body = pg.inner_text("#fns-company")
+        body_l = body.lower()
+        assert "бухгалтерский баланс" in body_l
+        assert "i. активы" in body_l and "ii. пассивы" in body_l
+        assert "iii. источники собственных средств" in body_l
+        assert "денежные средства" in body_l
+        assert "инвестиции в дочерние" not in body_l, "строка без данных не должна рисоваться"
+        assert "−311,9 млрд" in body or "-311,9 млрд" in body, "отрицательное значение должно нести знак минус"
+        assert not errors, "pageerror при рендере полного баланса: %s" % errors
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "полный баланс переполняет экран на 360px: %d" % over
     finally:
         ctx.close()
 

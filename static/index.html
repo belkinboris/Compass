@@ -1051,6 +1051,15 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fns-table{width:100%;border-collapse:collapse;font-size:13px}
 .fns-table th,.fns-table td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
 .fns-table th:first-child,.fns-table td:first-child{text-align:left;padding-left:0}
+/* Полный баланс банка (этап 8, П2-8) — строки формы 806 разделами; первая
+   колонка держит русские названия статей до 193 знаков («Переоценка
+   финансовых активов…»), поэтому НЕ nowrap — переносится сама, только
+   числовые колонки держат tabular-nums и не переносятся. */
+.fb-section{margin-top:22px}
+.fb-section:first-of-type{margin-top:0}
+.fb-section h4{font-family:var(--f-display);font-size:16px;font-weight:400;margin-bottom:8px}
+.fb-section .fns-table td:first-child{white-space:normal;max-width:44ch}
+.fb-section .fns-table td:not(:first-child),.fb-section .fns-table th:not(:first-child){white-space:nowrap}
 .fns-registry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
 .fns-registry-row{padding:10px 0;border-bottom:1px solid var(--line-soft)}
 .fns-registry-row .k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
@@ -4586,14 +4595,58 @@ function bankFinanceHtml(entry){
   </section>`;
 }
 
+// Полный баланс (разделы I-III формы 806) — отдельный файл от bank_finance.json
+// (просьба владельца и партнёра 24 августа: «Активы и пассивы, 1-2
+// странички», не только два итога), грузится лениво и только на странице
+// банка — на плитки каталога/сравнения он не влияет.
+let BANK_FULL_BALANCE = null, bankFullBalancePromise = null;
+async function loadBankFullBalance(){
+  if(BANK_FULL_BALANCE) return BANK_FULL_BALANCE;
+  if(!bankFullBalancePromise) bankFullBalancePromise = fetch("static/data/bank_full_balance.json")
+    .then(r=>r.ok?r.json():{}).catch(()=>({}));
+  BANK_FULL_BALANCE = await bankFullBalancePromise;
+  return BANK_FULL_BALANCE;
+}
+function bankFullBalanceHtml(entry){
+  if(!entry||!entry.sections||!entry.sections.length) return "";
+  const sectionsHtml = entry.sections.map(sec=>{
+    const rows = (sec.rows||[]).filter(r=>r.period_rub!=null);
+    if(!rows.length) return "";
+    // Третья колонка с процентом изменения («↑ 22,5% за год») пробовалась
+    // и снята: на 360-390px три колонки с длинной русской подписью статьи
+    // не помещались, текст изменения обрубался у правого края («↑ 5»,
+    // «↑ 2,» вместо целого текста) — переполнение НЕ документа (таблица в
+    // overflow-x:auto прятала лишнее), а самой читаемости, тот же класс,
+    // что и «переполнение ищут на самом длинном значении». Тренд по итогу
+    // уже виден в плитках выше (fnsDelta для Активов/Капитала); на уровне
+    // отдельных строк баланса — просто значение, как на самой странице ЦБ.
+    return `<div class="fb-section">
+      <h4>${esc(sec.title)}</h4>
+      <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Статья</th><th>Значение</th></tr></thead><tbody>
+        ${rows.map(r=>`<tr><td>${esc(r.name)}</td><td class="num">${fnsMoney(r.period_rub)}</td></tr>`).join("")}
+      </tbody></table></div>
+    </div>`;
+  }).join("");
+  if(!sectionsHtml) return "";
+  return `<section class="fns-shell reveal">
+    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Бухгалтерский баланс</h2></div><span class="fns-badge">Форма 0409806</span></div>
+    <div class="fns-body">
+      ${sectionsHtml}
+      <p class="fns-disclaimer">Публикуемая форма баланса на ${fmtDate(entry.as_of)}, целиком — разделы «Активы» и «Пассивы». Строки без данных за отчётный период не показаны; внебалансовые обязательства (гарантии, условные обязательства) в таблицу не входят.</p>
+    </div>
+  </section>`;
+}
+
 async function mountCompanyFns(companyId){
   const mount=document.getElementById("fns-company"); if(!mount) return;
   let data;
   try{const r=await fetch(`/api/companies/${encodeURIComponent(companyId)}/fns`); data=await r.json();}
   catch(e){return;}
   if(data.category==="bank"){
-    const finance=await loadBankFinance();
-    const html=bankFinanceHtml(finance[companyId]||{});
+    const [finance,fullBalance]=await Promise.all([loadBankFinance(),loadBankFullBalance()]);
+    const summaryHtml=bankFinanceHtml(finance[companyId]||{});
+    const tableHtml=bankFullBalanceHtml(fullBalance[companyId]||{});
+    const html=(summaryHtml||"")+tableHtml;
     mount.innerHTML = html || `<div class="fns-empty reveal">${esc(data.reason||"Кредитная организация — бухгалтерскую отчётность в общем порядке банки не сдают, только по отдельной форме перед Банком России.")}</div>`;
     rerun();
     return;

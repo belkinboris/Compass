@@ -8,10 +8,12 @@ from datetime import date
 from pathlib import Path
 
 from pipeline.cbr_f806 import (
+    BALANCE_SECTIONS,
     F806Balance,
     _quarter_start_on_or_before,
     _step_back_one_quarter,
     parse_balance,
+    parse_full_table,
 )
 
 FIXTURES = Path(__file__).resolve().parent / "pipeline" / "fixtures"
@@ -72,3 +74,72 @@ def test_f806balance_is_a_frozen_dataclass_with_expected_fields():
     b = F806Balance(regnum=1481, as_of=date(2026, 4, 1), assets_rub=1, assets_rub_prior_year=2,
                      equity_rub=3, equity_rub_prior_year=4, legal_name="Тест")
     assert b.regnum == 1481 and b.assets_rub == 1 and b.equity_rub == 3
+
+
+def test_parse_full_table_covers_all_three_balance_sections():
+    """Этап 8, П2-8: владелец и партнёр попросили полный баланс («Активы и
+    пассивы, 1-2 странички»), не только два итога. Разделы I-III — реальные
+    цифры Сбербанка на 1.04.2026 (сверено вручную по той же странице)."""
+    html = (FIXTURES / "f806_sberbank_202604.html").read_text(encoding="utf-8")
+    table = parse_full_table(html)
+    assert table is not None
+    assert table["as_of"] == date(2026, 4, 1)
+    assert table["legal_name"] == "Публичное акционерное общество «Сбербанк России»"
+    titles = [s["title"] for s in table["sections"]]
+    assert titles == list(BALANCE_SECTIONS), "разделы обязаны идти в порядке страницы, ровно I-III"
+
+    by_title = {s["title"]: s for s in table["sections"]}
+    assert len(by_title["I. Активы"]["rows"]) == 16
+    assert len(by_title["II. Пассивы"]["rows"]) == 17
+    assert len(by_title["III. Источники собственных средств"]["rows"]) == 14
+
+    total_row = by_title["I. Активы"]["rows"][-1]
+    assert total_row["name"] == "Всего активов"
+    assert total_row["period_rub"] == 65_137_327_668_000
+    assert total_row["prior_year_rub"] == 65_210_686_723_000
+
+    first_row = by_title["I. Активы"]["rows"][0]
+    assert first_row["num"] == "1"
+    assert first_row["name"] == "Денежные средства"
+    assert first_row["period_rub"] == 702_499_267_000
+
+
+def test_parse_full_table_keeps_negative_values_and_empty_rows():
+    """«Переоценка финансовых активов» у Сбербанка отрицательна (убыток по
+    справедливой стоимости), а часть строк (например «Инвестиции в дочерние
+    и зависимые организации») не заполнена вовсе — обе особенности должны
+    пережить разбор, а не сломать его или тихо занулиться."""
+    html = (FIXTURES / "f806_sberbank_202604.html").read_text(encoding="utf-8")
+    table = parse_full_table(html)
+    by_title = {s["title"]: s for s in table["sections"]}
+    rows_by_name = {r["name"]: r for r in by_title["III. Источники собственных средств"]["rows"]}
+    revaluation = rows_by_name["Переоценка финансовых активов, оцениваемых по справедливой стоимости через прочий совокупный доход, "
+                                "уменьшенная на отложенное налоговое обязательство (увеличенная на отложенный налоговый актив)"]
+    assert revaluation["period_rub"] == -311_872_957_000
+    assert revaluation["prior_year_rub"] == -333_059_648_000
+
+    assets_rows = {r["name"]: r for r in by_title["I. Активы"]["rows"]}
+    empty_row = assets_rows["Прочие активы"]
+    assert empty_row["period_rub"] is None
+    assert empty_row["prior_year_rub"] is None
+
+
+def test_parse_full_table_excludes_off_balance_section():
+    """Раздел IV «Внебалансовые обязательства» на той же странице — уже не
+    баланс в бухгалтерском смысле (гарантии, условные обязательства), и не
+    входит в «1-2 странички», о которых просили; сознательно не разбирается."""
+    html = (FIXTURES / "f806_sberbank_202604.html").read_text(encoding="utf-8")
+    table = parse_full_table(html)
+    titles = [s["title"] for s in table["sections"]]
+    assert "IV. Внебалансовые обязательства" not in titles
+    all_names = [r["name"] for s in table["sections"] for r in s["rows"]]
+    assert "Безотзывные обязательства кредитной организации" not in all_names
+
+
+def test_parse_full_table_returns_none_for_unpublished_quarter():
+    html = (FIXTURES / "f806_sberbank_202607_empty.html").read_text(encoding="utf-8")
+    assert parse_full_table(html) is None
+
+
+def test_parse_full_table_returns_none_for_page_without_the_data_table():
+    assert parse_full_table("<html><body>не форма 806</body></html>") is None

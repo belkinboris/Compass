@@ -39,6 +39,18 @@ https://www.cbr.ru/banking_sector/credit/coinfo/f806/?dt=YYYYMM&regnum=NNNN
 уже переведены в рубли (`× 1000`), тот же формат, что `assets_rub`/
 `equity_rub` у `fns_client.py` (JS `fnsMoney()` ждёт именно рубли, не
 тысячи).
+
+ПОЛНАЯ ТАБЛИЦА (Этап 8, П2-8) — просьба обоих партнёров живьём после
+показа сводных плиток: «Нужен бухгалтерский баланс. ОСВ, отчёт о
+финансовых результатах и тд не надо… Баланс это небольшой документ.
+Активы и пассивы, 1-2 странички». `parse_full_table()` разбирает ВСЕ
+строки разделов I–III (Активы / Пассивы / Источники собственных средств)
+— именно то, что бухгалтерски и называется балансом (Актив = Пассив +
+Капитал). Раздел IV «Внебалансовые обязательства» на той же странице —
+уже не баланс в этом смысле (гарантии, условные обязательства), и явно
+не входит в «1-2 странички» — сознательно не разбирается. `_ROW_RE`
+(сводка) и парсер полной таблицы читают одну и ту же разметку, просто
+полная таблица не фильтрует по названию строки.
 """
 from __future__ import annotations
 
@@ -62,6 +74,17 @@ _ROW_RE = re.compile(
 
 ASSETS_ROW = "Всего активов"
 EQUITY_ROW = "Всего источников собственных средств"
+
+BALANCE_SECTIONS = ("I. Активы", "II. Пассивы", "III. Источники собственных средств")
+
+_ROW_BLOCK_RE = re.compile(r'<tr[^>]*>(?P<body>.*?)</tr>', re.S)
+_SECTION_CELL_RE = re.compile(r'<td colspan="5">\s*<strong>(?P<title>[^<]*)</strong>\s*</td>', re.S)
+_DETAIL_CELL_RE = re.compile(
+    r'<td>(?P<num>[^<]*)</td>\s*<td>(?P<name>[^<]*)</td>\s*<td>(?P<note>[^<]*)</td>\s*'
+    r'<td class="right"><nobr>(?P<v1>[-\d\xa0 ]*)</nobr></td>\s*'
+    r'<td class="right"><nobr>(?P<v2>[-\d\xa0 ]*)</nobr></td>',
+    re.S,
+)
 
 
 class F806Error(RuntimeError):
@@ -139,15 +162,84 @@ def parse_balance(html: str, regnum: int) -> F806Balance | None:
     )
 
 
+def parse_full_table(html: str) -> dict | None:
+    """Полный бухгалтерский баланс (разделы I-III) — строки «подпись |
+    значение», не только два итога. `None` — тот же честный исход, что и
+    у `parse_balance()`: квартал не опубликован или страница не форма 806.
+
+    Возвращает {"as_of": date, "legal_name": str|None, "sections": [
+    {"title": str, "rows": [{"num": str, "name": str, "note": str,
+    "period_rub": int|None, "prior_year_rub": int|None}, ...]}, ...]}
+    — только для секций из BALANCE_SECTIONS, в порядке появления на
+    странице; раздел IV (внебалансовые обязательства) не включён (см.
+    докстроку модуля)."""
+    title_m = _TITLE_RE.search(html)
+    if not title_m:
+        return None
+    day, month, year = (int(x) for x in title_m.groups())
+    as_of = date(year, month, day)
+
+    sections: list[dict] = []
+    current: dict | None = None
+    any_value = False
+    for block in _ROW_BLOCK_RE.finditer(html):
+        body = block.group("body")
+        section_m = _SECTION_CELL_RE.search(body)
+        if section_m:
+            title = section_m.group("title").strip()
+            current = {"title": title, "rows": []} if title in BALANCE_SECTIONS else None
+            if current is not None:
+                sections.append(current)
+            continue
+        if current is None:
+            continue
+        detail_m = _DETAIL_CELL_RE.search(body)
+        if not detail_m:
+            continue
+        period = _parse_number(detail_m.group("v1"))
+        prior = _parse_number(detail_m.group("v2"))
+        if period is not None or prior is not None:
+            any_value = True
+        current["rows"].append({
+            "num": detail_m.group("num").strip(),
+            "name": detail_m.group("name").strip(),
+            "note": detail_m.group("note").strip(),
+            "period_rub": period * 1000 if period is not None else None,
+            "prior_year_rub": prior * 1000 if prior is not None else None,
+        })
+
+    if not any_value:
+        return None
+
+    name_m = _LEGAL_NAME_RE.search(html)
+    legal_name = name_m.group(1).strip() if name_m else None
+    return {"as_of": as_of, "legal_name": legal_name, "sections": sections}
+
+
+def find_latest_page(regnum: int, client: httpx.Client, *, today: date, max_quarters_back: int = 6) -> str | None:
+    """Сырой HTML последнего ОПУБЛИКОВАННОГО квартала (та же логика отката,
+    что раньше жила только внутри `latest_available()`) — вынесена отдельно,
+    чтобы `latest_available()` и `latest_full_table()` разбирали ОДНУ и ту же
+    страницу вместо двух отдельных сетевых запросов на банк."""
+    on_date = _quarter_start_on_or_before(today)
+    for _ in range(max_quarters_back):
+        html = fetch_page(regnum, on_date, client)
+        if parse_balance(html, regnum) is not None:
+            return html
+        on_date = _step_back_one_quarter(on_date)
+    return None
+
+
 def latest_available(regnum: int, client: httpx.Client, *, today: date, max_quarters_back: int = 6) -> F806Balance | None:
     """Идёт от последнего НАЧАВШЕГОСЯ квартала назад, пока не найдёт
     опубликованные данные (первый квартал почти всегда ещё не опубликован
     — банкам даётся время на отчётность) или не исчерпает попытки."""
-    on_date = _quarter_start_on_or_before(today)
-    for _ in range(max_quarters_back):
-        html = fetch_page(regnum, on_date, client)
-        balance = parse_balance(html, regnum)
-        if balance is not None:
-            return balance
-        on_date = _step_back_one_quarter(on_date)
-    return None
+    html = find_latest_page(regnum, client, today=today, max_quarters_back=max_quarters_back)
+    return parse_balance(html, regnum) if html is not None else None
+
+
+def latest_full_table(regnum: int, client: httpx.Client, *, today: date, max_quarters_back: int = 6) -> dict | None:
+    """Полная таблица (см. `parse_full_table()`) для того же последнего
+    опубликованного квартала, что вернул бы `latest_available()`."""
+    html = find_latest_page(regnum, client, today=today, max_quarters_back=max_quarters_back)
+    return parse_full_table(html) if html is not None else None
