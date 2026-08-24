@@ -178,6 +178,41 @@ def party_names(deal, companies):
     return seller, asset, buyer
 
 
+def needs_review_before_post(deal):
+    """П2-9: карточка идёт на дочитывание ПЕРЕД первым постом, если на момент
+    отправки у неё нет ни одного смыслового поля сверх заголовка — ВСЕ поля
+    `eco`/`law` пусты или заглушки, `extra` пуст, консультантов нет — и её ещё
+    не читали (`reviewed` не стоит). Так вышла карточка «Алор брокер» 24
+    августа: источник (Frank Media) был живой, но карточка ушла постом со
+    всеми пустыми линзами, потому что шаг чтения её просто не коснулся.
+
+    НЕ новый тормоз E9: пустая, но УЖЕ прочитанная карточка (источник честно
+    пуст — `reviewed` стоит) публикуется как есть. Различие «не читали» и
+    «читали, добавить нечего» уже записано уроком CLAUDE.md; это же правило
+    здесь, только гейт стоит перед ПОСТОМ, а не перед оценкой заполненности.
+
+    Сама читка — не дело этой функции: она сетевая и требует модели (тот же
+    `review.py`-путь, что дневной обыск G7), а `format_post`/`send_telegram`
+    обязаны оставаться чистыми и проверяемыми без сети. Функция только решает,
+    ПОРА ли читать, — вызывающий (рутина публикации) решает, ЧТО с этим
+    делать."""
+    if deal.get('reviewed'):
+        return False
+    if has(deal.get('extra')):
+        return False
+    eco = deal.get('eco') or {}
+    law = deal.get('law') or {}
+    fields = (eco.get('sum'), eco.get('share'), eco.get('val'), eco.get('target_fin'),
+              eco.get('fin'), eco.get('finadv'), eco.get('rationale'), eco.get('context'),
+              law.get('struct'), law.get('appr'), law.get('terms'))
+    if any(has(v) for v in fields):
+        return False
+    adv = law.get('adv') or []
+    if any(has(a[1]) for a in adv if isinstance(a, (list, tuple)) and len(a) > 1):
+        return False
+    return True
+
+
 def advisers(deal):
     out = []
     for row in ((deal.get('law') or {}).get('adv') or []):

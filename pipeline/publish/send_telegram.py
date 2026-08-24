@@ -391,7 +391,7 @@ def main(write, ignore_pace=False):
             m_flagged.append((event['id'], problems))
             to_send_m = [(d, e, t) for d, e, t in to_send_m if e['id'] != event['id']]
 
-    to_send, to_edit, to_seed = [], [], []
+    to_send, to_edit, to_seed, needs_review = [], [], [], []
     for deal in data['deals']:
         did = deal['id']
         if did in posts:
@@ -405,8 +405,13 @@ def main(write, ignore_pace=False):
                 # не с чем), а не молчим вечно и не правим несуществующее сообщение.
                 changes = updates_by_id.get(did)
                 if changes and sendable(deal):
-                    text = format_post.render(deal, comps)
-                    to_send.append((did, text))
+                    # П2-9: пустая, ещё не прочитанная карточка ждёт дочитывания,
+                    # а не уходит первым постом со всеми пустыми линзами.
+                    if not deal.get('post_override') and format_post.needs_review_before_post(deal):
+                        needs_review.append(did)
+                    else:
+                        text = format_post.render(deal, comps)
+                        to_send.append((did, text))
                 continue
             changes = updates_by_id.get(did)
             if changes:
@@ -419,11 +424,17 @@ def main(write, ignore_pace=False):
             # о новости, а не получит запоздалый первый пост.
             to_seed.append(did)
         elif sendable(deal):
-            # Текст, который владелец продиктовал в Telegram при модерации
-            # черновика, важнее автоформата — но только для ПЕРВОГО поста:
-            # дальнейшие обновления снова собирает format_post.
-            text = deal.get('post_override') or format_post.render(deal, comps)
-            to_send.append((did, text))
+            # П2-9: та же дочитка — но для самого обычного, первого-в-жизни
+            # поста. `post_override` пропускает гейт: там уже есть текст,
+            # который владелец продиктовал сам, — читать за него нечего.
+            if not deal.get('post_override') and format_post.needs_review_before_post(deal):
+                needs_review.append(did)
+            else:
+                # Текст, который владелец продиктовал в Telegram при модерации
+                # черновика, важнее автоформата — но только для ПЕРВОГО поста:
+                # дальнейшие обновления снова собирает format_post.
+                text = deal.get('post_override') or format_post.render(deal, comps)
+                to_send.append((did, text))
 
     # ВЫЧИТКА ПЕРЕД ОТПРАВКОЙ — ДО отчёта и до выхода из сухого прогона: план
     # читает человек, и задержанные посты он должен видеть именно в плане.
@@ -447,6 +458,12 @@ def main(write, ignore_pace=False):
 
     print('Новых постов: %d, правок существующих: %d, без поста по решению: %d, новых вех: %d'
           % (len(to_send), len(to_edit), len(to_seed), len(to_send_m)))
+    if needs_review:
+        # П2-9: не тормоз — окно. Карточка не потеряна, просто первый пост
+        # ждёт того же чтения источника, что и дневной обыск G7: тот же
+        # review.py-путь, сеть и модель есть у рутины, не у этого скрипта.
+        print('Ждут дочитывания перед первым постом (пусты сверх заголовка, П2-9): %d — %s'
+              % (len(needs_review), ', '.join(needs_review)))
     if flagged:
         print('Вычитка задержала постов: %d (в канал не уйдут, нужен человек).' % len(flagged))
         for did, problems in flagged:

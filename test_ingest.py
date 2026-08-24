@@ -337,6 +337,87 @@ def test_fin_summary_omits_yoy_without_a_prior_year():
     assert year == 2025 and "г/г" not in text
 
 
+def test_needs_review_before_post_catches_the_alor_case():
+    """Этап 9, П2-9: карточка «Алор брокер» (24 августа) — все поля eco/law
+    заглушки «—», extra пуст, reviewed не стоит. Ровно такую карточку гейт
+    обязан отложить, а не пропустить постом со всеми пустыми линзами."""
+    alor = {
+        "id": "g6bf41023", "title": "«Алор брокер» купил неназванную брокерскую компанию",
+        "buyer_name": "«Алор брокер»", "asset": "неназванная брокерская компания",
+        "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
+                "rationale": "—", "context": "—", "finadv": "—"},
+        "law": {"struct": "—", "appr": "—", "terms": "—"},
+        "extra": "",
+    }
+    assert format_post.needs_review_before_post(alor)
+
+
+def test_needs_review_before_post_lets_a_reviewed_empty_card_through():
+    """Пустая карточка, которую уже читали (reviewed стоит), — не тормоз:
+    «читали, добавить нечего» публикуется как есть, а не ждёт вечно."""
+    reviewed_empty = {
+        "id": "x1", "title": "Т", "sum": "Не раскрыта",
+        "eco": {"sum": "—"}, "law": {}, "extra": "",
+        "reviewed": "2026-08-24",
+    }
+    assert not format_post.needs_review_before_post(reviewed_empty)
+
+
+def test_needs_review_before_post_lets_a_substantive_card_through():
+    """Хоть одно настоящее поле сверх заголовка (extra, любое eco/law,
+    консультант) — гейт не держит карточку, читать уже нечего."""
+    with_extra = {"id": "x2", "title": "Т", "extra": "Компания основана в 2010 году."}
+    assert not format_post.needs_review_before_post(with_extra)
+
+    with_eco = {"id": "x3", "title": "Т", "eco": {"rationale": "Цель — консолидация рынка."}}
+    assert not format_post.needs_review_before_post(with_eco)
+
+    with_adv = {"id": "x4", "title": "Т",
+                "law": {"adv": [["Продавец", "Ivanov & Partners", ""]]}}
+    assert not format_post.needs_review_before_post(with_adv)
+
+    # Отсутствие eco/law целиком (не заглушка, а просто нет ключа) — тоже
+    # «нечего показать сверх заголовка», гейт срабатывает.
+    bare = {"id": "x5", "title": "Т"}
+    assert format_post.needs_review_before_post(bare)
+
+
+def test_main_holds_back_an_empty_unreviewed_card_instead_of_posting_it(monkeypatch, tmp_path, capsys):
+    """Интеграционно: main() не отправляет пустую непрочитанную карточку —
+    она остаётся в отчёте прогона как «ждёт дочитывания», а не улетает в
+    канал с одним заголовком и без единого факта."""
+    deal = {
+        "id": "gX2", "title": "«Алор брокер» купил неназванную брокерскую компанию",
+        "buyer_name": "«Алор брокер»", "asset": "неназванная брокерская компания",
+        "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
+                "rationale": "—", "context": "—", "finadv": "—"},
+        "law": {"struct": "—", "appr": "—", "terms": "—"},
+    }
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {}
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+
+    boom = _FakeClient([])  # ни один вызов не ожидается
+    monkeypatch.setattr(send_telegram, "_client", lambda: boom)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert boom.calls == [], "пустая непрочитанная карточка не должна уходить постом"
+    out = capsys.readouterr().out
+    assert "gX2" in out and "дочитывания" in out
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert deal["id"] not in written["telegram_posts"], "карточка не помечена отправленной — она не отправлена"
+
+
 def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
     """render() остаётся чистой функцией — финстрока появляется, только
     если её явно передали (`fin=…`), а не потому что render() сходил в
@@ -1185,7 +1266,11 @@ def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tm
     отправку (иначе прогон делал бы сотни/тысячи сетевых вызовов ради
     ≤MAX_SENDS_PER_RUN писем, которые реально уйдут)."""
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
-            "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ"}
+            "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ",
+            # reviewed: карточку УЖЕ читали — иначе П2-9 отложит её до
+            # дочитывания, и этот тест (он про финстроку, не про П2-9) не
+            # увидит ни одной реальной отправки.
+            "reviewed": "2026-08-01"}
     companies = {"b1": {"name": "«Ромашка»"}}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
@@ -1224,7 +1309,8 @@ def test_main_never_queries_fns_for_the_backlog_that_will_not_be_sent(monkeypatc
     """Тот же сценарий, но лимит за прогон — 0: батч пуст, и живой ФНС-клиент
     не должен получить ни одного вызова `bo()`, даже если кандидатов на
     отправку много."""
-    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1"}
+    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
+            "reviewed": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
     real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
