@@ -341,6 +341,81 @@ def test_fns_category_is_none_for_ordinary_company_with_a_matched_entity(client)
     assert body.get("category") is None
 
 
+def test_fns_report_exposes_full_lines_from_raw_lines_json(client):
+    """Этап 8, П3-8: `raw_lines_json` УЖЕ хранит полный набор строк с самого
+    начала (sync_fns.py сохраняет его как есть) — на экран шла только
+    выжимка из 15 полей `BO_LINES`. `_report_payload()` обязан отдавать
+    секции `full_lines`, построенные из `raw_lines_json`, а не только их."""
+    import json as json_module
+
+    db = get_session()
+    try:
+        company = db.get(Company, "launch-fns-full-lines")
+        if not company:
+            company = Company(id="launch-fns-full-lines", name="Компания с полной БФО",
+                               legal_name='ООО "Компания с полной БФО"')
+            db.add(company)
+            db.flush()
+        entity = db.query(LegalEntity).filter_by(inn="7700000299").first()
+        if not entity:
+            entity = LegalEntity(
+                company_id="launch-fns-full-lines",
+                legal_name='Общество с ограниченной ответственностью "Компания с полной БФО"',
+                short_name='ООО "Компания с полной БФО"',
+                inn="7700000299", ogrn="1027700000299", kpp="770001299",
+                status="Действующая", registration_date=date(2018, 3, 12),
+                match_status=LegalEntityMatchStatus.confirmed,
+                manually_verified=True, is_primary=True,
+                fetched_at=datetime.utcnow(), source_updated_at=datetime.utcnow(),
+            )
+            db.add(entity)
+            db.flush()
+        else:
+            entity.company_id = "launch-fns-full-lines"
+        raw_lines = {"1110": "5000", "1150": "70000", "1100": "75000",
+                     "2110": "544580000", "2400": "-11680000"}
+        if not db.query(FinancialReport).filter_by(legal_entity_id=entity.id, year=2024).first():
+            db.add(FinancialReport(
+                legal_entity_id=entity.id, year=2024,
+                revenue_rub=544_580_000_000, net_profit_rub=-11_680_000_000,
+                raw_lines_json=json_module.dumps(raw_lines, ensure_ascii=False),
+            ))
+        db.commit()
+    finally:
+        db.close()
+
+    body = client.get("/api/companies/launch-fns-full-lines/fns").json()
+    report = body["entities"][0]["reports"][0]
+    assert report["year"] == 2024
+    full_lines = report["full_lines"]
+    titles = [s["title"] for s in full_lines]
+    assert "I. Внеоборотные активы" in titles
+    assert "Отчёт о финансовых результатах" in titles
+
+    assets = next(s for s in full_lines if s["title"] == "I. Внеоборотные активы")
+    rows = {r["code"]: r["value_rub"] for r in assets["rows"]}
+    assert rows["1110"] == 5_000_000
+    assert rows["1150"] == 70_000_000
+
+    pnl = next(s for s in full_lines if s["title"] == "Отчёт о финансовых результатах")
+    pnl_rows = {r["code"]: r["value_rub"] for r in pnl["rows"]}
+    assert pnl_rows["2110"] == 544_580_000_000
+    assert pnl_rows["2400"] == -11_680_000_000, "отрицательная чистая прибыль (убыток) не должна теряться"
+
+    # Коды денежных потоков не задавались вовсе — секции ОДДС отсутствуют,
+    # а не рисуются пустыми (родня правилу у банковского баланса).
+    assert not any("Денежные потоки" in t for t in titles)
+
+
+def test_fns_report_full_lines_is_empty_list_without_raw_lines_json(client):
+    """Старые записи FinancialReport без raw_lines_json (или пустой JSON) —
+    честный пустой список, а не падение эндпоинта."""
+    _seed_fns_company("launch-fns-no-raw-lines")
+    body = client.get("/api/companies/launch-fns-no-raw-lines/fns").json()
+    report = body["entities"][0]["reports"][0]
+    assert report["full_lines"] == []
+
+
 def test_fns_hides_reports_older_than_two_years_on_company_page(client):
     """«Компания сегодня» не должна выглядеть моложе своей отчётности на много
     лет — правило владельца от 18 августа 2026 после жалобы на устаревшие

@@ -43,7 +43,7 @@ from db.models import (
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
 from db.session import engine, get_session
-from fns_client import ApiFnsClient, ApiFnsError
+from fns_client import ApiFnsClient, ApiFnsError, full_lines_payload
 from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
 from sqlalchemy import inspect, select, text
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
@@ -688,7 +688,16 @@ def _report_payload(row: FinancialReport) -> dict:
         "long_term_liabilities_rub", "short_term_liabilities_rub", "borrowings_rub",
         "payables_rub", "fetched_at",
     )
-    return {field: _plain(getattr(row, field)) for field in fields}
+    payload = {field: _plain(getattr(row, field)) for field in fields}
+    # Этап 8, П3-8: «не только эти показатели, а все из БФО» — raw_lines_json
+    # уже несёт полный набор строк с самого начала (sync_fns.py сохраняет
+    # его как есть), просто на экран шла только выжимка из 15 полей выше.
+    try:
+        raw_lines = json.loads(row.raw_lines_json) if row.raw_lines_json else {}
+    except (TypeError, ValueError):
+        raw_lines = {}
+    payload["full_lines"] = full_lines_payload(raw_lines)
+    return payload
 
 
 def _owner_payload(row: OwnershipStake) -> dict:

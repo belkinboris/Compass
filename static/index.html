@@ -4637,6 +4637,24 @@ function bankFullBalanceHtml(entry){
   </section>`;
 }
 
+// Полная БФО обычной компании (этап 8, П3-8) — raw_lines_json уже нёс
+// весь набор строк, просто на экран шла выжимка из 15 полей; owner: «не
+// только эти показатели, а все из БФО… посмотри как в БФО это выглядит,
+// там очень красивая табличка». Секции строит бэкенд (fns_client.
+// FULL_LINE_SECTIONS), фронтенд только рисует — тот же паттерн, что
+// bankFullBalanceHtml() у банков (двухколоночная таблица «Статья |
+// Значение», без процента изменения — та же находка про переполнение
+// узкого экрана на длинных строках).
+function fullLinesHtml(sections){
+  if(!sections||!sections.length) return "";
+  return sections.map(sec=>`<div class="fb-section">
+    <h4>${esc(sec.title)}</h4>
+    <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Статья</th><th>Значение</th></tr></thead><tbody>
+      ${sec.rows.map(r=>`<tr><td>${esc(r.name)}</td><td class="num">${fnsMoney(r.value_rub)}</td></tr>`).join("")}
+    </tbody></table></div>
+  </div>`).join("");
+}
+
 async function mountCompanyFns(companyId){
   const mount=document.getElementById("fns-company"); if(!mount) return;
   let data;
@@ -4704,7 +4722,8 @@ async function mountCompanyFns(companyId){
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
-      ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы доступна по подписке.</div>`:""}`:`<div class="fns-empty">${emptyReason}</div>`;
+      ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы доступна по подписке.</div>`:""}
+      ${(latest.full_lines&&latest.full_lines.length)?`<button class="chip" id="toggleFullLines" style="margin-top:18px">Показать полную БФО за ${latest.year} год</button><div id="full-lines" style="display:none;margin-top:14px"></div>`:""}`:`<div class="fns-empty">${emptyReason}</div>`;
     /* Кнопка «Скачать полную отчётность» (bo_file) снята 23 августа 2026:
        метод не куплен в тарифе API-ФНС (лимит 0 по /api/stat), любой клик
        получал живой 403 и сырой JSON с текстом ошибки вместо файла — рабочая
@@ -4722,6 +4741,16 @@ async function mountCompanyFns(companyId){
     </section>`;
     mount.querySelectorAll("[data-fnstab]").forEach(b=>b.onclick=()=>{tab=b.dataset.fnstab;draw();});
     mount.querySelectorAll("[data-fnsentity]").forEach(b=>b.onclick=()=>{entityIndex=Number(b.dataset.fnsentity);tab="overview";draw();});
+    const fullLinesBtn=document.getElementById("toggleFullLines");
+    if(fullLinesBtn) fullLinesBtn.onclick=()=>{
+      const box=document.getElementById("full-lines");
+      if(!box) return;
+      const opening=box.style.display==="none";
+      if(opening&&!box.dataset.drawn){ box.innerHTML=fullLinesHtml(latest.full_lines); box.dataset.drawn="1"; }
+      box.style.display=opening?"":"none";
+      fullLinesBtn.textContent=opening?"Скрыть полную БФО":`Показать полную БФО за ${latest.year} год`;
+      if(opening) rerun();
+    };
     rerun();
   };
   draw();

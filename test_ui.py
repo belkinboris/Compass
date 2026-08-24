@@ -1023,6 +1023,76 @@ def test_bank_profile_shows_full_balance_sheet_below_summary_tiles(browser, base
         ctx.close()
 
 
+def test_company_profile_full_bfo_toggle_shows_and_hides_full_statement(browser, base_url):
+    """Этап 8, П3-8: та же просьба, что у банков, только для обычных
+    компаний — «не только эти показатели, а все из БФО». Кнопка «Показать
+    полную БФО» скрыта по умолчанию (родня уже применённому правилу
+    «скрытые состояния проверяются отдельно»), по клику рисует секции;
+    длинное название статьи и отрицательное значение (реальные из формы
+    ОДДС/финрезультатов) не должны переполнять экран на 360px."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": True, "company_id": "yandex", "company_name": "Яндекс",
+                "entities": [{
+                    "entity": {"id": 1, "legal_name": 'ООО "ЯНДЕКС"', "inn": "7736207543"},
+                    "reports": [{
+                        "year": 2024, "revenue_rub": 544_580_000_000, "net_profit_rub": -11_680_000_000,
+                        "assets_rub": 565_500_000_000, "equity_rub": 129_300_000_000,
+                        "full_lines": [
+                            {"title": "I. Внеоборотные активы", "rows": [
+                                {"code": "1110", "name": "Нематериальные активы", "value_rub": 7_666_406_000},
+                                {"code": "1100", "name": "Итого по разделу I", "value_rub": 197_597_977_000},
+                            ]},
+                            {"title": "Отчёт о финансовых результатах", "rows": [
+                                {"code": "2110", "name": "Выручка", "value_rub": 544_580_000_000},
+                                {"code": "2400", "name": "Чистая прибыль (убыток)", "value_rub": -11_680_000_000},
+                            ]},
+                            {"title": "Денежные потоки от инвестиционных операций", "rows": [
+                                {"code": "4213", "name": "от возврата предоставленных займов, от продажи "
+                                                          "долговых ценных бумаг (прав требования денежных "
+                                                          "средств к другим лицам)", "value_rub": 1_200_000_000},
+                            ]},
+                        ],
+                    }],
+                    "report_years": [2024], "has_more_reports": False, "has_more_events": False,
+                    "events": [], "ownership": {"available": False},
+                }],
+                "access": {"paid": True, "full_history": True, "downloads": True},
+                "disclaimer": "Показатели относятся к указанному юридическому лицу по РСБУ.",
+            }))
+        ctx.route("**/api/companies/yandex/fns*", fake_fns)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.set_viewport_size({"width": 360, "height": 900})
+        pg.goto(base_url + "/#/companies/yandex", wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        pg.click('[data-fnstab="finance"]')
+        pg.wait_for_timeout(300)
+        assert pg.locator("#toggleFullLines").count() == 1
+        assert pg.locator("#full-lines table").count() == 0, "полная БФО не должна рисоваться до клика"
+        pg.click("#toggleFullLines")
+        pg.wait_for_timeout(300)
+        body = pg.inner_text("#full-lines")
+        body_l = body.lower()
+        assert "нематериальные активы" in body_l
+        assert "выручка" in body_l
+        assert "от возврата предоставленных займов" in body_l, "длинная строка ОДДС должна попасть на экран"
+        assert "−11,7 млрд" in body or "-11,7 млрд" in body, "отрицательная чистая прибыль должна нести знак минус"
+        assert not errors, "pageerror при рендере полной БФО: %s" % errors
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "полная БФО переполняет экран на 360px: %d" % over
+        # Повторный клик скрывает блок обратно, не убирая его из DOM (та же
+        # ленивая перерисовка, что и у банковской схемы/группы).
+        pg.click("#toggleFullLines")
+        pg.wait_for_timeout(200)
+        assert not pg.locator("#full-lines").is_visible()
+    finally:
+        ctx.close()
+
+
 def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 
