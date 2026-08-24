@@ -217,17 +217,137 @@ def test_quoted_common_counts_every_shared_name():
 # ---------- формат телеграм-поста ----------
 
 def test_post_has_no_placeholder_lines(base):
-    """В посте не должно быть строк «не раскрыта» и «Не привлекался».
+    """Ни одно поле не показывает заглушку («Не раскрыта», «Не привлекался»)
+    так, будто это факт, — с Этапа 9 единственное намеренное исключение
+    «Сумма: не раскрывается», которое печатается, когда карточка САМА это
+    утверждает (партнёры хвалили именно такую строку у поста-образца, а
+    `sum=None` — то есть «мы не нашли» — по-прежнему молчит).
 
-    То же правило, что на экране: пустое поле честнее строки-заглушки, а в
-    телеграме она ещё и занимает место, за которое читатель платит вниманием.
+    Проверка анкерит значение поля целиком (`^…$`, как и сам
+    `format_post.PLACEHOLDER`), а не ищет подстроку где угодно в строке:
+    «Предмет» с Этапа 9 может нести целое предложение, честно упоминающее
+    частичную нераскрытость («…точный размер пакета публично не
+    раскрывался») внутри более широкого факта, — это данные, а не пустое
+    поле (CLAUDE.md: «заглушка — это когда ВСЯ строка заглушка»).
     """
     comps = base["companies"]
     for deal in base["deals"][:200]:
         text = format_post.render(deal, comps)
-        low = text.lower()
-        for stub in ("не раскры", "не привлекал", "публично не сообщал", "н/д"):
-            assert stub not in low, f"{deal['id']}: заглушка в посте — {stub}"
+        for line in text.split("\n"):
+            m = re.match(r"^(Продавец|Покупатель|Статус|Отрасль): (.+)$", line)
+            if m and format_post.PLACEHOLDER.match(m.group(2)):
+                pytest.fail(f"{deal['id']}: заглушка как факт — {line!r}")
+            if line.startswith("Сумма: "):
+                value = line[len("Сумма: "):]
+                assert value == "не раскрывается" or not format_post.PLACEHOLDER.match(value), \
+                    f"{deal['id']}: сумма-заглушка не в честной форме — {line!r}"
+
+
+def test_post_drops_lines_that_only_echo_the_headline():
+    """Реакция партнёров (Этап 9, скриншот про «Алор брокер»): «он пишет в
+    предмет кусок фразы из заголовка… смысла писать стороны и предмет тогда
+    нет вообще». Обе строки — Предмет и Покупатель — дословные куски
+    заголовка, и обе не печатаются; от карточки остаётся заголовок, статус
+    (с месяцем закрытия) и отрасль."""
+    deal = {"id": "g6bf41023",
+            "title": "«Алор брокер» купил неназванную брокерскую компанию",
+            "asset": "неназванная брокерская компания", "buyer_name": "«Алор брокер»",
+            "status": "Закрыта", "date": "2026-08-01", "ind": "Рынок ценных бумаг"}
+    text = format_post.render(deal, {})
+    assert "Предмет:" not in text, text
+    assert "Покупатель:" not in text, text
+    assert "Статус: Закрыта · август 2026" in text
+    assert "Отрасль: Рынок ценных бумаг" in text
+
+
+def test_post_keeps_a_party_name_not_covered_by_the_headline():
+    """Продавец, которого в заголовке нет вовсе, — остаётся."""
+    deal = {"id": "x1", "title": "«Алор брокер» купил неназванную брокерскую компанию",
+            "seller": "Иван Петров"}
+    text = format_post.render(deal, {})
+    assert "Продавец: Иван Петров" in text
+
+
+def test_post_headline_echo_survives_case_and_declension():
+    """Пословный компаратор ловит падеж — строгая substring-проверка нет:
+    «неназванную» (заголовок) и «неназванная» (предмет) — одно слово."""
+    assert not format_post.has_novelty("неназванная брокерская компания",
+                                        "купил неназванную брокерскую компанию")
+    assert format_post.has_novelty("Иван Петров",
+                                    "«Алор брокер» купил неназванную брокерскую компанию")
+
+
+def test_post_subject_gets_substance_not_a_bare_repeated_name():
+    """Образец владельца — конкурентский пост про HeadHunter/Happy Job
+    (Этап 9, дополнение брифа): «Предмет» несёт точное юрлицо и род занятий
+    из карточки (`eco.target_fin`/`eco.share`), а не голое «Happy Job»,
+    которое и так уже названо в заголовке."""
+    deal = {"id": "gebead2e8", "title": "HeadHunter приобрел 51% компании Happy Job",
+            "asset": "Happy Job", "status": "Закрыта", "date": "2026-08-18",
+            "eco": {"target_fin": 'Учредители компании — Клочков Алексей Константинович. '
+                                   'В соответствии с данными ЕГРЮЛ, основной вид деятельности '
+                                   'компании ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ '
+                                   '«СЧАСТЛИВАЯ РАБОТА» по ОКВЭД: 62.01 Разработка '
+                                   'компьютерного программного обеспечения.'}}
+    text = format_post.render(deal, {})
+    assert "Предмет: Happy Job" not in text, "голое имя — тот же кусок заголовка"
+    assert "«СЧАСТЛИВАЯ РАБОТА»" in text, "точное юрлицо не попало в пост"
+
+
+def test_post_sum_placeholder_is_shown_honestly_only_when_the_card_states_it():
+    """«Сумма: не раскрывается» — когда карточка САМА это утверждает
+    (текст-заглушка «Не раскрыта»), а не когда `sum=None` (мы просто не
+    нашли — молчание честнее)."""
+    stated = {"id": "x1", "title": "Т", "sum": "Не раскрыта"}
+    assert "Сумма: не раскрывается" in format_post.render(stated, {})
+
+    unknown = {"id": "x2", "title": "Т"}
+    assert "Сумма:" not in format_post.render(unknown, {})
+
+
+def test_post_status_gets_the_closing_month_only_when_closed():
+    from datetime import date as _date
+    today = _date(2026, 7, 20)
+    closed = {"id": "x1", "title": "Т", "status": "Закрыта", "date": "2026-07-15"}
+    assert "Статус: Закрыта · июль 2026" in format_post.render(closed, {}, today=today)
+
+    discussed = {"id": "x2", "title": "Т", "status": "Обсуждается", "date": "2026-07-15"}
+    text = format_post.render(discussed, {}, today=today)
+    assert "Статус: Обсуждается" in text and "июль 2026" not in text
+
+
+def test_fin_summary_matches_the_owner_sample_post():
+    """Числа сверены с реальным постом конкурента про Happy Job/HeadHunter —
+    та же выручка/прибыль/динамика г/г, которые владелец прислал как образец."""
+    happy_job = [
+        {"year": 2024, "revenue_rub": 371_441_000, "net_profit_rub": 2_104_000},
+        {"year": 2025, "revenue_rub": 440_564_000, "net_profit_rub": 2_127_000},
+    ]
+    year, text = format_post.fin_summary(happy_job)
+    assert year == 2025
+    assert "440,6 млн ₽ (+18,6% г/г)" in text
+    assert "2,1 млн ₽ (+1,1% г/г)" in text
+    assert format_post.fin_summary([]) is None
+    assert format_post.fin_summary([{"year": 2025, "revenue_rub": None, "net_profit_rub": None}]) is None
+
+
+def test_fin_summary_omits_yoy_without_a_prior_year():
+    only_year = [{"year": 2025, "revenue_rub": 1_000_000, "net_profit_rub": None}]
+    year, text = format_post.fin_summary(only_year)
+    assert year == 2025 and "г/г" not in text
+
+
+def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
+    """render() остаётся чистой функцией — финстрока появляется, только
+    если её явно передали (`fin=…`), а не потому что render() сходил в
+    сеть сама (П7-9: живой запрос делает send_telegram.main(), не render())."""
+    deal = {"id": "x1", "title": "А купил Б", "asset": "Б", "target": "b"}
+    companies = {"b": {"name": "Б", "desc": ""}}
+    fin = {"target": (2025, "Выручка 1,0 млрд ₽")}
+    with_fin = format_post.render(deal, companies, fin=fin)
+    without_fin = format_post.render(deal, companies)
+    assert "Финансы цели, 2025 год: Выручка 1,0 млрд ₽" in with_fin
+    assert "Финансы цели" not in without_fin
 
 
 def test_post_links_to_the_card_and_the_source(base):
@@ -962,6 +1082,10 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     monkeypatch.setattr(send_telegram.time, "sleep", lambda s: sleeps.append(s))
     fake = _FakeClient([{"ok": True, "result": {"message_id": 1000 + i}} for i in range(3)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    # Финстрока (П7-9) — отдельная сеть (ФНС, не Telegram); тест про темп
+    # отправки, а не про неё, поэтому отключаем явно, а не полагаемся на
+    # отсутствие API_FNS_KEY в окружении, где запущен тест.
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
 
     # ignore_pace: тест про ЛИМИТ за прогон, а не про дневное окно. Без него
     # он проходил бы только с 10 до 19 по Москве и падал бы по вечерам.
@@ -1025,6 +1149,7 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
 
     fake = _FakeClient([{"ok": True, "result": {"message_id": 777}}])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
 
     # ignore_pace: тест про правило бэклога, а не про дневное окно (см. выше).
     send_telegram.main(write=True, ignore_pace=True)
@@ -1036,6 +1161,95 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
 
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_posts"][seeded_deal["id"]] == 777, "null должен смениться на настоящий message_id"
+
+
+class _FakeFnsClient:
+    """Подставной ФНС-клиент (Этап 9, П7-9): проверяет, что `main()`
+    реально дорисовывает финстроку в УЖЕ ОТОБРАННЫЙ батч, а не тянет
+    финансы для всего непубликованного бэклога — без реальной сети."""
+    def __init__(self, bo_by_inn):
+        self.bo_by_inn = bo_by_inn
+        self.calls = []
+
+    def bo(self, inn):
+        self.calls.append(inn)
+        return self.bo_by_inn.get(inn, {})
+
+    def close(self):
+        pass
+
+
+def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tmp_path):
+    """Этап 9, П7-9: живой запрос к ФНС дорисовывает финстроку покупателя в
+    ПОСТ, который реально уходит, — а не в весь список кандидатов на
+    отправку (иначе прогон делал бы сотни/тысячи сетевых вызовов ради
+    ≤MAX_SENDS_PER_RUN писем, которые реально уйдут)."""
+    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
+            "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ"}
+    companies = {"b1": {"name": "«Ромашка»"}}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = companies
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    fake_tg = _FakeClient([{"ok": True, "result": {"message_id": 1}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake_tg)
+
+    # Два года — не один: `normalize_bo()` иначе может принять единственный
+    # год за обёртку-ИНН вокруг кодов строк (её эвристика различает обёртку
+    # по `len(data) == 1`, и с одним годом в ответе они неотличимы).
+    fake_fns = _FakeFnsClient({"1234567890": {
+        "2024": {"2110": "900000", "2400": "40000"},
+        "2025": {"2110": "1000000", "2400": "50000"},
+    }})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: fake_fns)
+    from pipeline import fns_registry
+    monkeypatch.setattr(fns_registry, "confirmed_inns", lambda: {"b1": "1234567890"})
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert fake_fns.calls == ["1234567890"], "финансы искали ровно по подтверждённому ИНН покупателя"
+    assert len(fake_tg.calls) == 1
+    text = fake_tg.calls[0][1]["text"]
+    assert "Финансы покупателя, 2025 год: Выручка 1,0 млрд ₽" in text
+
+
+def test_main_never_queries_fns_for_the_backlog_that_will_not_be_sent(monkeypatch, tmp_path):
+    """Тот же сценарий, но лимит за прогон — 0: батч пуст, и живой ФНС-клиент
+    не должен получить ни одного вызова `bo()`, даже если кандидатов на
+    отправку много."""
+    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 0)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    # `_client()` вызывается независимо от того, пуст ли батч (это уже
+    # так было до Этапа 9) — подставляем клиент с пустым списком ответов,
+    # чтобы попытка реально отправить сообщение сама себя выдала IndexError.
+    monkeypatch.setattr(send_telegram, "_client", lambda: _FakeClient([]))
+
+    fake_fns = _FakeFnsClient({"1234567890": {"2025": {"2110": "1000000"}}})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: fake_fns)
+    from pipeline import fns_registry
+    monkeypatch.setattr(fns_registry, "confirmed_inns", lambda: {"b1": "1234567890"})
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert fake_fns.calls == []
 
 
 # ---------- вехи в канале (раздел A, 22 августа) ----------
@@ -1159,6 +1373,7 @@ def test_main_sends_an_approved_milestone_and_records_dedup(monkeypatch, tmp_pat
 
     fake = _FakeClient([{"ok": True, "result": {"message_id": 4242}}])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
 
     send_telegram.main(write=True, ignore_pace=True)
 
@@ -1756,6 +1971,33 @@ def test_player_transfer_is_not_ma():
     # Настоящая M&A с похожим глаголом по-прежнему разбирается.
     b, a, s = draft.guess_parties('Selectel покупает облачного провайдера servers.ru')
     assert b == 'Selectel' and a == 'облачный провайдер servers.ru'
+
+
+def test_asset_declaring_no_name_is_not_written_as_a_fact():
+    """Этап 9, П4-9: «неназванная брокерская компания» — заявление
+    источника, что имени НЕТ, а не имя предмета. Живёт заголовком карточки
+    «Алор брокер» (g6bf41023) — пост честно печатал «Предмет: неназванная
+    брокерская компания» дословным куском заголовка, и партнёры отдельно
+    указали именно на это. Стороны, где реальное имя ЕСТЬ рядом с
+    «неизвестному покупателю» (это про ПОКУПАТЕЛЯ, не предмет), asset не
+    теряют — стирается только когда во всей строке нет ни одного имени."""
+    import draft
+    buyer, asset, seller = draft.guess_parties(
+        '«Алор брокер» купил неназванную брокерскую компанию')
+    assert buyer == '«Алор брокер»'
+    assert asset is None, asset
+
+    buyer, asset, seller = draft.guess_parties(
+        'Auchan продаёт российский бизнес неизвестному покупателю')
+    assert asset is None, asset
+
+    # Настоящее имя в предмете — не стирается, даже если рядом «неизвестному
+    # покупателю» описывает ДРУГУЮ сторону (буквальный кусок реальной базы,
+    # g01b8b8f6): это отдельный, более старый дефект разбора (хвост про
+    # покупателя не отрезался от предмета), а не предмет П4-9.
+    buyer, asset, seller = draft.guess_parties(
+        'Восток Инвестиции продаёт 27,4% акций Ozon неизвестному покупателю')
+    assert asset and 'Ozon' in asset, asset
 
 
 def test_farm_club_is_not_ma():

@@ -218,6 +218,47 @@ def load_today_updates():
     return {row['deal_id']: row.get('changes', []) for row in rows if row.get('changes')}
 
 
+def fns_client_or_none():
+    """Живой клиент ФНС — или `None`, если `API_FNS_KEY` не задан в этом
+    окружении. Тихо, не падая: финстрока (П7-9) — украшение поста, а не его
+    обязательная часть, и её отсутствие не должно ронять весь прогон."""
+    try:
+        from fns_client import ApiFnsClient
+        return ApiFnsClient()
+    except Exception:                                                     # noqa: BLE001
+        return None
+
+
+def build_fin(deal, confirmed_inns, client):
+    """{'target': fin_summary()|None, 'buyer': ...} — по confirmed ИНН сторон
+    сделки, живым `bo()` (Этап 9, П7-9). `confirmed_inns` — только
+    `decision == "confirmed"` (см. `fns_registry.confirmed_inns()`), поэтому
+    банки сюда не попадают сами по себе: ФНС для них не даёт коммерческую
+    отчётность (форма для банков другая — блок «По данным Банка России» на
+    сайте берёт её из ЦБ, не отсюда). Каждая роль — отдельный, независимый
+    запрос: сбой по одной стороне не должен стоить финстроки другой стороне
+    того же поста. Повторный запрос уже известной организации бесплатен
+    (`bo` — лимит «по организациям», см. CLAUDE.md) — считать сторон сделок,
+    которые мы и так синхронизируем, можно на каждый прогон."""
+    if client is None:
+        return {}
+    from fns_client import normalize_bo
+    fin = {}
+    for role in ('target', 'buyer'):
+        company_id = deal.get(role)
+        inn = confirmed_inns.get(company_id) if company_id else None
+        if not inn:
+            continue
+        try:
+            rows = normalize_bo(client.bo(inn), inn)
+        except Exception:                                                 # noqa: BLE001
+            continue
+        summary = format_post.fin_summary(rows)
+        if summary:
+            fin[role] = summary
+    return fin
+
+
 def sendable(deal):
     return format_post.has(deal.get('sum')) or (deal.get('seller') or deal.get('seller_id')) \
         or (deal.get('target') or deal.get('asset') or deal.get('asset_id'))
@@ -470,6 +511,34 @@ def main(write, ignore_pace=False):
     if rest:
         print('Лимит за прогон: %d. В очереди ещё %d — доберём в следующих прогонах.'
               % (MAX_SENDS_PER_RUN, len(rest)))
+
+    # Финстрока сторон из ФНС (Этап 9, П7-9) — ЗДЕСЬ, а не при сборке
+    # to_send/to_edit: тот список — весь непубликованный бэклог (в реальной
+    # базе — тысячи карточек), и живой запрос `bo()` на каждую сторону
+    # каждой из них означал бы тысячи сетевых вызовов за прогон ради
+    # ≤MAX_SENDS_PER_RUN штук, которые реально уйдут. Дорисовываем только
+    # УЖЕ ОТОБРАННЫЙ батч. `fns_client_or_none()` тихо отдаёт `None` без
+    # сети/без ключа — тогда `build_fin()` для каждой сделки честно
+    # возвращает {}, посты уходят без финстроки, а не падают.
+    fns_client = fns_client_or_none()
+    if fns_client is not None:
+        from pipeline import fns_registry
+        confirmed_inns = fns_registry.confirmed_inns()
+        by_id = {d['id']: d for d in data['deals']}
+        augmented = []
+        for kind, did, payload in batch:
+            deal = by_id.get(did)
+            if kind in ('send', 'edit') and deal and not deal.get('post_override'):
+                fin = build_fin(deal, confirmed_inns, fns_client)
+                if fin:
+                    if kind == 'send':
+                        payload = format_post.render(deal, comps, fin=fin)
+                    else:
+                        mid, _old_text = payload
+                        payload = (mid, format_post.render(deal, comps, updates=updates_by_id.get(did), fin=fin))
+            augmented.append((kind, did, payload))
+        batch = augmented
+        fns_client.close()
 
     client = _client()
     sent, edited, milestoned, failed = 0, 0, 0, []

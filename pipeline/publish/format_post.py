@@ -35,6 +35,18 @@ from datetime import date, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+
+# `_same_word` (падежный компаратор — общее начало ≥3 знаков и ≥60% короткого
+# слова) уже написан и проверен на себе в review.py — не дублируем его здесь.
+# format_post.py остаётся импортируемым и напрямую (`python3 …/format_post.py
+# --sample`), и как модуль изнутри send_telegram.py — поэтому сам добавляет
+# путь до pipeline/ingest, а не полагается на то, что это уже сделал вызывающий.
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+_INGEST = os.path.join(ROOT, 'pipeline', 'ingest')
+if _INGEST not in sys.path:
+    sys.path.insert(0, _INGEST)
+from review import _same_word  # noqa: E402
 # Адрес витрины, который уходит в ссылки телеграм-поста. Домен был вписан
 # в код числом — и не тот: сайт живёт на projectcompass.ru, а посты вели бы
 # читателя на kompas.deals. Берём из переменной окружения `APP_BASE_URL` (той
@@ -56,6 +68,100 @@ def has(value):
 
 def esc(text):
     return (str(text or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+
+
+# ЭТАП 9 (реакция партнёров на пост «Алор брокер»): «Он пишет в предмет кусок
+# фразы из заголовка… смысла писать стороны и предмет тогда нет вообще».
+# Строка стороны/предмета печатается, только если несёт хотя бы одно значащее
+# слово, которого в заголовке (и в уже напечатанной части поста) нет ДАЖЕ С
+# ТОЧНОСТЬЮ ДО ОКОНЧАНИЯ — иначе она дословный или падежный повтор заголовка,
+# и такая строка честнее не показывать вовсе, чем показать как факт.
+#
+# Строгая substring-проверка здесь не годится: «неназванную» (заголовок) и
+# «неназванная» (предмет) — разные строки по символам, но одно и то же слово.
+# Замер по базе (24 августа 2026, substring-приближение) — 91 карточка из 207
+# с `asset` и 461 сторона из 968 текстом дословно повторяют заголовок; после
+# перехода на пословный компаратор с падежным допуском число НЕ падает — оно
+# растёт (см. `pipeline/publish/measure_headline_echo.py`), потому что
+# substring недосчитывал падежные пары.
+_WORD_RE = re.compile(r'[a-zA-Zа-яёА-ЯЁ0-9]+', re.I)
+
+# Служебные слова НЕ считаются «новизной» сами по себе (частый предлог/союз,
+# совпавший с заголовком случайно, не делает строку содержательной) — но их
+# отсутствие в заголовке тоже не подтверждает новизну. Список — стандартный
+# для русского языка, не наш собственный домен.
+_STOPWORDS_RU = frozenset("""
+и в во не что он на я с со как а то все она так его но да ты к у же вы за бы по
+только ее мне было вот от меня еще нет о из ему теперь когда даже ну вдруг ли
+если уже или ни быть был него до вас нибудь опять уж вам ведь там потом себя
+ничего ей может они тут где есть надо ней для мы тебя их чем была сам чтоб без
+будто чего раз тоже себе под будет ж тогда кто этот того потому этого какой
+совсем ним здесь этом один почти мой тем чтобы нее сейчас были куда зачем всех
+никогда можно при наконец два об другой хоть после над больше тот через эти
+нас про всего них какая много разве три эту моя впрочем хорошо свою этой перед
+иногда лучше чуть том нельзя такой им более всегда конечно всю между
+""".split())
+
+
+def _significant_words(text):
+    """Слова длиннее одной буквы, кроме стоп-слов, в нижнем регистре."""
+    return [w.lower() for w in _WORD_RE.findall(str(text or ''))
+            if len(w) > 1 and w.lower() not in _STOPWORDS_RU]
+
+
+def has_novelty(candidate, reference):
+    """Есть ли в `candidate` хотя бы одно значащее слово, которого нет в
+    `reference` даже с точностью до окончания (`_same_word`)? Пустой
+    `candidate` — не новизна."""
+    cand_words = _significant_words(candidate)
+    if not cand_words:
+        return False
+    ref_words = _significant_words(reference)
+    return any(not any(_same_word(cw, rw) for rw in ref_words) for cw in cand_words)
+
+
+def _sentences(text):
+    """Разбить на предложения тем же признаком, что и везде в проекте:
+    «точка/!/? + пробел + заглавная» — надёжнее списка сокращений (CLAUDE.md:
+    «18,8 млрд руб.», «Fortum Russia B.V.» ошибаются в безопасную сторону,
+    список сокращений — нет)."""
+    text = re.sub(r'\s+', ' ', str(text or '')).strip()
+    if not text:
+        return []
+    parts = re.split(r'(?<=[.!?])\s+(?=[А-ЯЁA-Z])', text)
+    return [p.strip() for p in parts if has(p)]
+
+
+def _pick_novel_sentences(text, reference, limit=2, max_chars=280):
+    """Дословные предложения из `text`, каждое — с новизной к постоянно
+    расширяющемуся `reference` (уже выбранные предложения тоже входят в
+    референс — второе предложение не должно повторять первое). Не сочиняем
+    ничего нового, только выбираем ГОТОВЫЕ предложения карточки.
+
+    Предложение с именем в кавычках («ООО «Счастливая работа»») идёт
+    первым кандидатом — оно почти всегда точнее называет предмет/сторону,
+    чем соседнее предложение без имени (пример находки на карточке-образце
+    HeadHunter/Happy Job, `gebead2e8`: первое по порядку предложение
+    `eco.target_fin` — список учредителей, второе — точное юрлицо; без
+    этого приоритета в пост уходил бы список фамилий вместо имени
+    компании). Порядок остальных предложений не трогаем — это выбор МЕЖДУ
+    готовыми предложениями, а не переписывание текста."""
+    sentences = _sentences(text)
+    ordered = sorted(sentences, key=lambda s: 0 if '«' in s else 1)
+    picked, total, ref = [], 0, reference
+    for s in ordered:
+        if len(picked) >= limit:
+            break
+        if total + len(s) > max_chars:
+            continue          # это предложение не влезло — пробуем следующее, не сдаёмся
+        if has_novelty(s, ref):
+            picked.append(s)
+            total += len(s) + 1
+            ref = ref + ' ' + s
+    # Сохранить порядок исходного текста среди отобранных — сортировка выше
+    # была только для ВЫБОРА, не для итоговой последовательности.
+    picked_set = set(picked)
+    return [s for s in sentences if s in picked_set]
 
 
 def party_names(deal, companies):
@@ -134,6 +240,117 @@ def deal_age_days(deal, today=None):
     return ((today or date.today()) - made).days
 
 
+def _ru1(x):
+    """0.5 -> «0,5» — русская десятичная запятая, не точка."""
+    return ('%.1f' % x).replace('.', ',')
+
+
+def _fmt_rub(value):
+    v = float(value)
+    sign = '−' if v < 0 else ''
+    v = abs(v)
+    if v >= 1e9:
+        return '%s%s млрд ₽' % (sign, _ru1(v / 1e9))
+    if v >= 1e6:
+        return '%s%s млн ₽' % (sign, _ru1(v / 1e6))
+    if v >= 1e3:
+        return '%s%d тыс. ₽' % (sign, round(v / 1e3))
+    return '%s%d ₽' % (sign, round(v))
+
+
+def _yoy(new, old):
+    """«(+18,6% г/г)» — только если известен и новый, и прошлогодний год:
+    без прошлого года «относительно чего» не с чем сравнивать, а не сравнивать
+    честнее, чем придумывать базу."""
+    if new is None or old is None or float(old) == 0:
+        return ''
+    pct = (float(new) - float(old)) / abs(float(old)) * 100
+    sign = '+' if pct >= 0 else '−'
+    return ' (%s%s%% г/г)' % (sign, _ru1(abs(pct)))
+
+
+def fin_summary(bo_rows):
+    """(год, «Выручка N ₽ (+X% г/г) · Чистая прибыль M ₽») по ПОСЛЕДНЕМУ году
+    из `bo_rows` (результат `fns_client.normalize_bo()`), где известна выручка
+    или чистая прибыль — `None`, если данных нет вовсе. Чистая, без сети:
+    сам факт живого запроса к ФНС — забота вызывающего (П7-9), а не этой
+    функции, иначе render() перестал бы быть тестируемым без сети."""
+    rows = [r for r in (bo_rows or [])
+            if r.get('revenue_rub') is not None or r.get('net_profit_rub') is not None]
+    if not rows:
+        return None
+    rows = sorted(rows, key=lambda r: r['year'])
+    latest = rows[-1]
+    prior = next((r for r in rows[:-1] if r['year'] == latest['year'] - 1), None)
+    parts = []
+    if latest.get('revenue_rub') is not None:
+        parts.append('Выручка %s%s' % (_fmt_rub(latest['revenue_rub']),
+                                        _yoy(latest.get('revenue_rub'), prior.get('revenue_rub') if prior else None)))
+    if latest.get('net_profit_rub') is not None:
+        parts.append('Чистая прибыль %s%s' % (_fmt_rub(latest['net_profit_rub']),
+                                               _yoy(latest.get('net_profit_rub'), prior.get('net_profit_rub') if prior else None)))
+    if not parts:
+        return None
+    return latest['year'], ' · '.join(parts)
+
+
+def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
+    """Дословные предложения о ПРЕДМЕТЕ сделки — точное юрлицо/доля и род
+    занятий — с новизной к `reference` (заголовок + уже показанное имя).
+
+    ИСТОЧНИКИ, В ПОРЯДКЕ ПРИОРИТЕТА: `eco.share` («Предмет / доля» —
+    CLAUDE.md уже фиксирует это назначение поля), иначе `extra` (тот же
+    факт часто дублируется туда, когда `eco` не разобран); `eco.target_fin`
+    («Финансы предмета») — добавлен НЕ по букве брифа, а по факту разбора
+    карточки-образца (HeadHunter/Happy Job, `gebead2e8`): там `eco.share`
+    пуст, а точное юрлицо («ООО «Счастливая работа»») и учредители лежат
+    именно в `target_fin`, первым предложением; профиль цели (`desc`) —
+    когда предмет связан со своим профилем компании."""
+    eco = deal.get('eco') or {}
+    sources = []
+    if has(eco.get('share')):
+        sources.append(eco['share'])
+    elif has(deal.get('extra')):
+        sources.append(deal['extra'])
+    if has(eco.get('target_fin')):
+        sources.append(eco['target_fin'])
+    target_id = deal.get('target')
+    if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
+        sources.append(companies[target_id]['desc'])
+
+    picked, ref = [], reference
+    for src in sources:
+        if len(picked) >= limit:
+            break
+        budget = max_chars - sum(len(s) for s in picked)
+        if budget <= 0:
+            break
+        new = _pick_novel_sentences(src, ref, limit=limit - len(picked), max_chars=budget)
+        if new:
+            picked += new
+            ref = ref + ' ' + ' '.join(new)
+    return picked
+
+
+def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, max_chars=200):
+    """Одно дословное предложение о СТОРОНЕ (обычно — покупателе): профиль
+    компании (`desc`), иначе поле `eco`, названное в `eco_field` (для
+    покупателя это `context` — по образцу той же карточки: `eco.context`
+    описывает hh.ru, не цель)."""
+    eco = deal.get('eco') or {}
+    sources = []
+    company_id = deal.get(ref_field_id)
+    if company_id and companies.get(company_id) and has(companies[company_id].get('desc')):
+        sources.append(companies[company_id]['desc'])
+    if eco_field and has(eco.get(eco_field)):
+        sources.append(eco[eco_field])
+    for src in sources:
+        picked = _pick_novel_sentences(src, reference, limit=limit, max_chars=max_chars)
+        if picked:
+            return ' '.join(picked)
+    return None
+
+
 def is_fresh(deal, today=None):
     """Свежая сделка — обычный пост. Старая — «новое о сделке».
 
@@ -150,9 +367,25 @@ def is_fresh(deal, today=None):
     return age is not None and age <= FRESH_DAYS
 
 
-def render(deal, companies, updates=(), today=None):
-    """Текст поста (HTML для Telegram). Пустых строк-заглушек в посте нет."""
+def render(deal, companies, updates=(), today=None, fin=None):
+    """Текст поста (HTML для Telegram). Пустых строк-заглушек в посте нет.
+
+    ЭТАП 9 — реакция партнёров на пост «Алор брокер»: «он пишет в предмет
+    кусок фразы из заголовка… смысла писать стороны и предмет тогда нет
+    вообще». Формула переписана по образцу их же примера («M&A новости»,
+    HeadHunter/Happy Job) — предмет и покупатель получают суть (юрлицо,
+    доля, чем занимается, финпоказатели), а не голое имя, но КАЖДАЯ строка
+    печатается только с новизной к заголовку и к уже показанному тексту —
+    иначе она дословный или падежный повтор, который партнёры и назвали
+    бесполезным.
+
+    `fin` — предвычисленные финансовые строки сторон ({'target': (год,
+    текст), 'buyer': (год, текст)} из `fin_summary()`) — ЖИВОЙ запрос к ФНС
+    делает вызывающий (`send_telegram.main()`, П7-9), не эта функция:
+    render() остаётся чистой и проверяется тестами без сети, как и раньше.
+    """
     seller, asset, buyer = party_names(deal, companies)
+    fin = fin or {}
     lines = []
     if not is_fresh(deal, today):
         # Старая сделка: сначала честно говорим, что это не свежая новость, и
@@ -175,29 +408,95 @@ def render(deal, companies, updates=(), today=None):
             lines.append('Публикуем впервые%s.'
                          % (' — карточка появилась в «Компасе» %s' % esc(added) if added else ''))
         lines.append('')
-    lines.append('<b>%s</b>' % esc(deal.get('title')))
+    title = str(deal.get('title') or '')
+    lines.append('<b>%s</b>' % esc(title))
 
-    parties = []
-    if seller:
-        parties.append('Продавец: %s' % esc(seller))
-    if asset:
-        parties.append('Предмет: %s' % esc(asset))
-    if buyer:
-        parties.append('Покупатель: %s' % esc(buyer))
-    if parties:
+    # Новизна считается против ЗАГОЛОВКА и против уже напечатанной части
+    # поста — вторая строка не должна повторять то, что сказала первая,
+    # даже если само по себе слово в заголовке не встречалось.
+    reference = title
+
+    def emit(text):
+        nonlocal reference
+        lines.append(text)
+        reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
+
+    # ПРЕДМЕТ — с сутью (юрлицо/доля, чем занимается), не голое имя-повтор
+    # заголовка. Финстрока цели — сразу под ним, отдельной строкой (П7-9).
+    asset_novel = bool(asset) and has_novelty(asset, reference)
+    detail = ' '.join(_subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
+    if asset_novel and detail:
+        subject = 'Предмет: %s — %s' % (esc(asset), esc(detail))
+    elif asset_novel:
+        subject = 'Предмет: %s' % esc(asset)
+    elif detail:
+        subject = 'Предмет: %s' % esc(detail)
+    else:
+        subject = None
+    target_fin = fin.get('target')
+    if subject or target_fin:
         lines.append('')
-        lines += parties
+        if subject:
+            emit(subject)
+        if target_fin:
+            emit('Финансы цели, %s год: %s' % (target_fin[0], esc(target_fin[1])))
 
     facts = []
     if has(deal.get('sum')):
         facts.append('Сумма: %s' % esc(deal['sum']))
+    elif PLACEHOLDER.match(str(deal.get('sum') or '')):
+        # Карточка ПРЯМО утверждает, что сумма не раскрыта, — честный факт,
+        # не пустота (партнёры сами хвалили именно такую строку у конкурента).
+        # `sum=None`, наоборот, значит «мы не нашли», а не «стороны скрыли» —
+        # молчание там честнее любой формулировки.
+        facts.append('Сумма: не раскрывается')
     if has(deal.get('status')):
-        facts.append('Статус: %s' % esc(deal['status']))
+        status_line = 'Статус: %s' % esc(deal['status'])
+        if deal['status'] == 'Закрыта':
+            when = fmt_month(deal.get('date'))
+            if when:
+                status_line += ' · %s' % esc(when)
+        facts.append(status_line)
     if has(deal.get('ind')):
         facts.append('Отрасль: %s' % esc(deal['ind']))
     if facts:
         lines.append('')
-        lines += facts
+        for f in facts:
+            emit(f)
+
+    # ПОКУПАТЕЛЬ — тоже с сутью (профиль компании либо `eco.context`, где эта
+    # сторона обычно и описывается), плюс его собственная финстрока (П7-9).
+    buyer_novel = bool(buyer) and has_novelty(buyer, reference)
+    buyer_detail = _party_detail(deal, companies, 'buyer', 'context',
+                                  reference + (' ' + buyer if buyer else ''))
+    if buyer_novel and buyer_detail:
+        buyer_line = 'Покупатель: %s — %s' % (esc(buyer), esc(buyer_detail))
+    elif buyer_novel:
+        buyer_line = 'Покупатель: %s' % esc(buyer)
+    elif buyer_detail:
+        buyer_line = 'Покупатель: %s' % esc(buyer_detail)
+    else:
+        buyer_line = None
+    buyer_fin = fin.get('buyer')
+    if buyer_line or buyer_fin:
+        lines.append('')
+        if buyer_line:
+            emit(buyer_line)
+        if buyer_fin:
+            emit('Финансы покупателя, %s год: %s' % (buyer_fin[0], esc(buyer_fin[1])))
+
+    # ПРОДАВЕЦ — только имя, только с новизной (брифом не обещана суть, чтобы
+    # не раздувать пост: покупатель и предмет для читателя важнее).
+    if seller and has_novelty(seller, reference):
+        lines.append('')
+        emit('Продавец: %s' % esc(seller))
+
+    # ЗАЧЕМ — одно предложение из `eco.rationale`, если оно ещё не сказано.
+    rationale = (deal.get('eco') or {}).get('rationale')
+    why = _pick_novel_sentences(rationale, reference, limit=1, max_chars=200) if has(rationale) else []
+    if why:
+        lines.append('')
+        emit('Зачем: %s' % esc(' '.join(why)))
 
     adv = advisers(deal)
     if adv:
@@ -210,7 +509,7 @@ def render(deal, companies, updates=(), today=None):
     # Прямые ссылки на линзу — только когда там правда что-то есть: иначе
     # читатель кликает «Юрист» и попадает на приглушённую пустую вкладку.
     eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
-    if facts or has(eco.get('share')) or has(eco.get('rationale')):
+    if facts or subject or has(eco.get('rationale')):
         lines.append('<a href="%s/#/deal/%s?lens=eco">→ Экономист</a>' % (SITE, deal['id']))
     if adv or has(law.get('struct')) or has(law.get('appr')) or has(law.get('terms')):
         lines.append('<a href="%s/#/deal/%s?lens=law">→ Юрист</a>' % (SITE, deal['id']))
