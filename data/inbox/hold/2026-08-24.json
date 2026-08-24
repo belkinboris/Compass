@@ -3476,7 +3476,7 @@
    ]
   },
   {
-   "draft_id": "d66456188",
+   "draft_id": "d44383097",
    "title": "Росимущество не нашло покупателя на 83 национализированных актива челябинского экс-губернатора",
    "date": "2026-08-24",
    "src": [
@@ -3504,7 +3504,7 @@
    ]
   },
   {
-   "draft_id": "d52678413",
+   "draft_id": "d60911419",
    "title": "В Пермском крае продают гостиницу на территории популярного курорта",
    "date": "2026-08-24",
    "src": [
@@ -3532,7 +3532,7 @@
    ]
   },
   {
-   "draft_id": "d37704141",
+   "draft_id": "d83622359",
    "title": "Пашинян просит Россию продать концессию на железные дороги Армении",
    "date": "2026-08-24",
    "src": [
@@ -3560,7 +3560,7 @@
    ]
   },
   {
-   "draft_id": "d47625164",
+   "draft_id": "d17121785",
    "title": "Ереван просит Москву продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3588,7 +3588,7 @@
    ]
   },
   {
-   "draft_id": "d87672548",
+   "draft_id": "d91927841",
    "title": "Пашинян просит Россию продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3616,7 +3616,7 @@
    ]
   },
   {
-   "draft_id": "d44632258",
+   "draft_id": "d71048165",
    "title": "Пашинян снова попросил Россию продать Армении концессию на железные дороги",
    "date": "2026-08-24",
    "src": [
@@ -3644,7 +3644,7 @@
    ]
   },
   {
-   "draft_id": "d80972428",
+   "draft_id": "d71384347",
    "title": "Пашинян предложил России продать третьей стороне участок ЮКЖД",
    "date": "2026-08-24",
    "src": [
@@ -3672,7 +3672,7 @@
    ]
   },
   {
-   "draft_id": "d36119089",
+   "draft_id": "d64288919",
    "title": "Пашинян попросил Россию продать концессию на управление ж/д третьей стране",
    "date": "2026-08-24",
    "src": [
@@ -3700,7 +3700,7 @@
    ]
   },
   {
-   "draft_id": "d47154943",
+   "draft_id": "d42040069",
    "title": "Пашинян попросил Москву продать концессию на управление железной дорогой",
    "date": "2026-08-24",
    "src": [
@@ -3728,7 +3728,7 @@
    ]
   },
   {
-   "draft_id": "d38679832",
+   "draft_id": "d34496440",
    "title": "Пашинян вновь предложил России продать концессию на железные дороги Армении",
    "date": "2026-08-24",
    "src": [
@@ -3756,7 +3756,7 @@
    ]
   },
   {
-   "draft_id": "d28436728",
+   "draft_id": "d73584196",
    "title": "«Дом.РФ» выставил на торги 30 гектаров земли под КРТ в Самарской области",
    "date": "2026-08-24",
    "src": [
@@ -3784,7 +3784,7 @@
    ]
   },
   {
-   "draft_id": "d54383879",
+   "draft_id": "d49806241",
    "title": "Российская «дочка» Microsoft выставила на торги долги и технику",
    "date": "2026-08-24",
    "src": [
@@ -3812,75 +3812,7 @@
    ]
   },
   {
-   "draft_id": "d90048638",
-   "title": "FT: США в несколько раз обогнали Европу по инвестициям в ИИ",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8907023"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d22502312",
-   "title": "Мяч, которым Марадона забил гол «Рука Бога», продан на аукционе за $3,3 млн",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8907017"
-    ]
-   ],
-   "sum": "$3,3 млн",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-24",
-     "title": "Сделка завершена",
-     "note": "Мяч Adidas Azteca, которым забит гол, вошедший в историю как «Рука Бога», продали на аукционе в США за $3,3 млн. Как сообщает «Би-би-си», изначально ожидалось, что мяч уйдет примерно за $10 млн.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8907017"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31359537",
+   "draft_id": "d61446170",
    "title": "РФ и Индия прорабатывают создание СП в гражданском авиастроении",
    "date": "2026-08-24",
    "src": [
@@ -3908,63 +3840,7 @@
    ]
   },
   {
-   "draft_id": "d12062496",
-   "title": "МТС и «Авито»: почти половина кировчан старше 45 лет регулярно совершает покупки в интернете",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-24_mts_i_avito_pochti_polovina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28676121",
-   "title": "Чем лучше отчеты, тем хуже продажи: фармкомпании столкнулись с парадоксом «эффективной» рекламы",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-24_chem_luchshe_otchetytem_huzhe"
-    ]
-   ],
-   "sum": "46 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38660317",
+   "draft_id": "d87494274",
    "title": "«Яндекс» тестирует покупки товаров через умные ТВ",
    "date": "2026-08-24",
    "src": [
@@ -4005,132 +3881,7 @@
    ]
   },
   {
-   "draft_id": "d76198046",
-   "title": "FT указала на отставание Европы от США в сфере инвестиций в ИИ",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2154057/2026-08-24/ft-ukazala-na-otstavanie-evropy-ot-ssha-v-sfere-investitcii-v-ii"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d55349706",
-   "title": "Росстандарт запретил продажи ряда китайских грузовиков в России",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2154021/rosstandart-zapretil-prodazhi-riada-kitaiskikh-gruzovikov-v-rossii"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69908441",
-   "title": "Shein проведет IPO в Гонконге с дисконтом в 70% к пиковой оценке",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/300903"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92788646",
-   "title": "Shein проведет IPO 1 сентября с оценкой $27 млрд",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/shein-provedet-ipo-1-sentjabrja-s-ocenkoj-27-mlrd/"
-    ]
-   ],
-   "sum": "$27 млрд",
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-24",
-     "title": "Переговоры",
-     "note": "Онлайн-ритейлер Shein уведомил Гонконгскую фондовую биржу о планах провести IPO 1 сентября 2026 года и привлечь до $1,77 млрд. Сообщение Shein проведет IPO 1 сентября с оценкой $27 млрд появились сначала на RETAILER.ru .",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/shein-provedet-ipo-1-sentjabrja-s-ocenkoj-27-mlrd/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d78820197",
+   "draft_id": "d76564341",
    "title": "«Победа» не продается. Челябинский кинотеатр стал собственностью региона",
    "date": "2026-08-24",
    "src": [
@@ -4155,6 +3906,130 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66848857",
+   "title": "Чемпионы мира купили футбольный клуб, подорожавший за шесть лет в 60 раз",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/24/08/2026/6a8c1f479a794771cdf300c2"
+    ]
+   ],
+   "sum": "€40 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "Томас Мюллер и Матс Хуммельс, а также швейцарец Янн Зоммер приобрели 90% акций клуба «Эштрела да Амадора» за €40 млн. Предыдущий владелец команды покупал ее за €72 тыс.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/sport/24/08/2026/6a8c1f479a794771cdf300c2"
+     ]
+    }
+   ],
+   "buyer_name": "Чемпионы мира",
+   "asset": "футбольный клуб, подорожавший за шесть лет в 60 раз",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Чемпионы мира",
+    "asset": "футбольный клуб, подорожавший за шесть лет в 60 раз",
+    "seller": null
+   },
+   "ind": "Развлечения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d62417442",
+   "title": "Пашинян заявил о возможности продажи Россией концессии на железные дороги Армении за $400 млн",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1110966"
+    ]
+   ],
+   "sum": "$400 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51361481",
+   "title": "Alibaba провела крупнейшее SPO в истории Гонконга",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/300934"
+    ]
+   ],
+   "sum": "$10 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13070585",
+   "title": "Выгоду от покупки и аренды автомобиля сравнили",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/24/vygodu-ot-pokupki-i-arendy-avtomobilya-sravnili/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
