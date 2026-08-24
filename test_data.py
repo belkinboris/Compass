@@ -941,7 +941,7 @@ def test_high_confidence_party_corrections_are_kept(deals):
     """Ручная проверка источников не должна теряться при новых прогонах."""
     by_id = {d["id"]: d for d in deals}
     expected = {
-        "g02a89309": ("gf1f56e08", "g67b53b6a", "gee90a2b1"),
+        "g02a89309": ("gf1f56e08", "g67b53b6a", "g5d22aa06"),
         "g18569a1c": ("gc9913f2a", "g8cff91963", "ge00b1b13"),
         "gbb7e25e1": ("g549ab474", "g2e85f5e5", "g7ffb3b7a"),
         "g90363dc7": ("ged6b4e16", "g04181f17", "gda7d982b"),
