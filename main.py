@@ -1260,13 +1260,20 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     #       уже есть в базе, слаги куратора вроде "citibank"), и без префикса
     #       заметка ушла бы неправильному потребителю. Тот же разделитель
     #       `~`, что уже используют вехи в mod:<id>~<kind> (раздел A).
+    #   [инн-омоним <id компании>] — этап 9, П8-9: повторный вопрос по
+    #       компании, которая УЖЕ в реестре как no_match (pipeline/
+    #       fns_homonym_queue.py). Отдельный от "инн" маркер и префикс
+    #       "инн-омоним~", потому что ответ должен ПРАВИТЬ существующую
+    #       запись на месте, а не дописывать дубль company_id (запрещён
+    #       тестом) — pipeline/fns_notes_to_registry.py различает два
+    #       сценария по префиксу заметки.
     reply = message.get("reply_to_message") or {}
-    marker = re.search(r"\[(пост|черновик|карточка|сырьё|инн) ([\w-]{1,40})\]",
+    marker = re.search(r"\[(пост|черновик|карточка|сырьё|инн-омоним|инн) ([\w-]{1,40})\]",
                        str(reply.get("text") or ""))
     if marker and text.strip() and _is_reviewer(sender_id):
         kind, raw_id = marker.group(1), marker.group(2)
         verdict = "approve" if kind in ("пост", "черновик") else "note"
-        deal_id = ("инн~" + raw_id) if kind == "инн" else raw_id
+        deal_id = (kind + "~" + raw_id) if kind in ("инн", "инн-омоним") else raw_id
         # chat_id/reply_message_id — только у заметок: только их читает и на
         # них отвечает рутина (read_notes.py), решению approve отвечать
         # реплаем не нужно, оно и так подтверждается штампом в сообщении.

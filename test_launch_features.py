@@ -1159,6 +1159,41 @@ def test_fns_queue_unresolved_companies_skips_already_asked_profiles():
     assert ids == ["cid-new"]
 
 
+def test_fns_homonym_queue_eligible_requires_no_match_and_skips_asked():
+    """Этап 9, П8-9: кандидат из курированного списка учитывается, только
+    пока запись в реестре реально no_match (кто-то мог решить её другим
+    путём) и её ещё не спрашивали (`fns_asked`) — тот же приём, что у
+    основной очереди «нужен ИНН», только своя проверка, потому что
+    condition на реестр здесь ПРОТИВОПОЛОЖНАЯ (запись обязана уже быть)."""
+    from pipeline.fns_homonym_queue import eligible, CANDIDATES
+
+    cid_a, cid_b, cid_c = CANDIDATES[0][0], CANDIDATES[1][0], CANDIDATES[2][0]
+    registry_idx = {
+        cid_a: {"decision": "no_match"},
+        cid_b: {"decision": "confirmed"},   # решили другим путём — больше не спрашиваем
+    }
+    companies = {
+        cid_a: {"name": "А"},
+        cid_b: {"name": "Б"},
+        cid_c: {"name": "В", "fns_asked": "2026-08-24"},  # уже спросили
+    }
+    rows = eligible(registry_idx, companies)
+    ids = [cid for cid, _name, _note in rows]
+    assert cid_a in ids
+    assert cid_b not in ids and cid_c not in ids
+
+
+def test_fns_homonym_queue_console_message_uses_its_own_marker():
+    """Маркер `[инн-омоним <id>]` — отдельный от `[инн <id>]`, за него
+    держится разбор в main.py::telegram_webhook (deal_id="инн-омоним~<id>")."""
+    from pipeline.fns_homonym_queue import console_message
+
+    text = console_message("g354705fa", "Аскона", "27 омонимов по стране")
+    assert text.startswith("🔁 [инн-омоним g354705fa]")
+    assert "Аскона" in text and "27 омонимов" in text
+    assert "/#/companies/g354705fa" in text
+
+
 def test_fns_queue_send_one_omits_reply_markup_when_no_keyboard():
     """Сообщение очереди «нужен ИНН» не несёт кнопок (решение — ответ
     текстом, не нажатие) — `reply_markup` не должен уйти в теле запроса
@@ -1307,6 +1342,116 @@ def test_fns_notes_main_dry_run_writes_nothing(tmp_path, monkeypatch):
 
     fns_notes.main()
     assert not touched
+
+
+def test_fns_notes_collect_homonym_requires_an_existing_no_match_row():
+    """Этап 9, П8-9: сценарий «инн-омоним» — зеркало collect(), но с
+    противоположным условием на реестр: запись ОБЯЗАНА уже быть no_match,
+    иначе это не наш сценарий (решена другим путём — не трогаем)."""
+    from pipeline.fns_notes_to_registry import collect_homonym
+
+    companies = {"askona": {"name": "Аскона"}, "already_confirmed": {"name": "Уже подтверждено"}}
+    registry_idx = {
+        "askona": {"decision": "no_match", "reason": "27 омонимов", "date": "2026-08-23"},
+        "already_confirmed": {"decision": "confirmed", "inn": "1"},
+    }
+    notes = [
+        {"id": 1, "deal_id": "инн-омоним~askona", "edited_text": "7736207543"},
+        {"id": 2, "deal_id": "инн-омоним~ghost", "edited_text": "7736207543"},           # нет профиля
+        {"id": 3, "deal_id": "инн-омоним~unlisted", "edited_text": "7736207543"},        # нет в реестре вовсе
+        {"id": 4, "deal_id": "инн-омоним~already_confirmed", "edited_text": "7736207543"},  # уже не no_match
+        {"id": 5, "deal_id": "инн-омоним~askona", "edited_text": "не знаю"},
+        {"id": 6, "deal_id": "инн~askona", "edited_text": "7736207543"},                 # чужой префикс
+    ]
+    companies["unlisted"] = {"name": "Без записи в реестре"}
+    ready, rejected = collect_homonym(notes, registry_idx, companies)
+    assert [(n["id"], cid, inn) for n, cid, inn, _row in ready] == [(1, "askona", "7736207543")]
+    assert [n["id"] for n, _cid, _why in rejected] == [2, 3, 4, 5]  # заметка 6 — чужой префикс, не участвует вовсе
+
+
+def test_fns_notes_edit_registry_entry_rewrites_only_the_named_row(tmp_path):
+    """AST-адресация, а не регэксп по фигурным скобкам: `reason` — свободный
+    текст, и правило должно найти РОВНО словарь с нужным company_id, не
+    задев соседние записи (в т.ч. с многострочными reason)."""
+    from pipeline.fns_notes_to_registry import edit_registry_entry
+
+    fixture = tmp_path / "fake_registry.py"
+    fixture.write_text(
+        'REGISTRY = [\n'
+        '    {"company_id": "keep_me", "decision": "no_match", "inn": None,\n'
+        '     "reason": "текст с фигурной скобкой } внутри — не должен сбить разбор",\n'
+        '     "date": "2026-08-01"},\n'
+        '    {"company_id": "askona", "decision": "no_match", "inn": None,\n'
+        '     "reason": "27 омонимов по стране",\n'
+        '     "date": "2026-08-23"},\n'
+        ']\n\n\n'
+        'def by_company_id() -> dict[str, dict]:\n'
+        '    return {row["company_id"]: row for row in REGISTRY}\n',
+        encoding="utf-8",
+    )
+    ok = edit_registry_entry("askona", {
+        "company_id": "askona", "decision": "confirmed", "inn": "7736207543",
+        "reason": "ИНН от владельца. Было (no_match, 2026-08-23): 27 омонимов по стране",
+        "date": "2026-08-25",
+    }, path=str(fixture))
+    assert ok
+
+    src = fixture.read_text(encoding="utf-8")
+    namespace = {}
+    exec(compile(src, str(fixture), "exec"), namespace)
+    idx = namespace["by_company_id"]()
+    assert len(namespace["REGISTRY"]) == 2, "правка не должна ни добавлять, ни удалять записи"
+    assert idx["keep_me"]["decision"] == "no_match", "соседняя запись не должна быть тронута"
+    assert idx["askona"]["decision"] == "confirmed"
+    assert idx["askona"]["inn"] == "7736207543"
+    assert "27 омонимов" in idx["askona"]["reason"], "старая причина остаётся историей внутри новой"
+
+    missing = edit_registry_entry("no-such-id", {
+        "company_id": "no-such-id", "decision": "confirmed", "inn": "1",
+        "reason": "x", "date": "2026-08-25",
+    }, path=str(fixture))
+    assert missing is False
+
+
+def test_fns_notes_main_write_applies_the_homonym_edit_too(tmp_path, monkeypatch):
+    """Сквозной прогон --write с обеими очередями сразу: обычная запись
+    ДОПИСЫВАЕТСЯ (append_registry), запись-омоним ПРАВИТСЯ на месте
+    (edit_registry_entry) — main() обязан гнать оба потока в одном
+    прогоне, не выбирая один вместо другого."""
+    import json as _json
+    import sys as _sys
+    import pipeline.fns_notes_to_registry as fns_notes
+    import read_notes
+
+    data_file = tmp_path / "deals_promoted.json"
+    data_file.write_text(_json.dumps({"companies": {
+        "yandex": {"name": "Яндекс"}, "askona": {"name": "Аскона"},
+    }}), encoding="utf-8")
+    monkeypatch.setattr(fns_notes, "DATA", str(data_file))
+    monkeypatch.setattr(fns_notes, "by_company_id", lambda: {
+        "askona": {"decision": "no_match", "reason": "27 омонимов", "date": "2026-08-23"},
+    })
+    monkeypatch.setattr(read_notes, "fetch_notes", lambda: [
+        {"id": 9, "deal_id": "инн~yandex", "edited_text": "7736207543"},
+        {"id": 10, "deal_id": "инн-омоним~askona", "edited_text": "7740000076"},
+    ])
+    appended, edited, replied, consumed = [], [], [], []
+    monkeypatch.setattr(fns_notes, "append_registry", lambda ready, path=None: appended.append(ready))
+    monkeypatch.setattr(fns_notes, "edit_registry_entry",
+                        lambda cid, fields, path=None: edited.append((cid, fields)) or True)
+    monkeypatch.setattr(read_notes, "send_reply", lambda nid, text: replied.append((nid, text)) or True)
+    monkeypatch.setattr(read_notes, "consume", lambda ids: consumed.extend(ids))
+    monkeypatch.setattr(_sys, "argv", ["fns_notes_to_registry.py", "--write"])
+
+    fns_notes.main()
+
+    assert appended and [(cid, inn) for _n, cid, inn in appended[0]] == [("yandex", "7736207543")]
+    assert len(edited) == 1
+    cid, fields = edited[0]
+    assert cid == "askona" and fields["decision"] == "confirmed" and fields["inn"] == "7740000076"
+    assert "27 омонимов" in fields["reason"], "старый reason no_match остаётся историей внутри нового"
+    assert {nid for nid, _text in replied} == {9, 10}
+    assert set(consumed) == {9, 10}
 
 
 def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
@@ -2091,6 +2236,29 @@ def test_reply_to_inn_queue_message_becomes_a_namespaced_note(client, monkeypatc
     rows = [d for d in r.json()["decisions"] if d["deal_id"] == "инн~citibank"]
     assert rows and rows[0]["verdict"] == "note"
     assert rows[0]["edited_text"] == "7740000076"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_reply_to_homonym_queue_message_uses_a_different_namespace(client, monkeypatch):
+    """Этап 9, П8-9: ответ на [инн-омоним <id>] — заметка со своим префиксом
+    «инн-омоним~», отдельным от «инн~». Компания уже есть в реестре как
+    no_match, и запись нужно ПРАВИТЬ на месте — смешение с обычной
+    очередью «нужен ИНН» (которая ДОПИСЫВАЕТ новую запись) дало бы дубль
+    company_id, запрещённый тестом реестра."""
+    _mod_env(monkeypatch)
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111}, "from": {"id": 111},
+                     "text": "7736207543",
+                     "reply_to_message": {
+                         "text": "🔁 [инн-омоним g354705fa] — ПОВТОРНЫЙ ВОПРОС"}}})
+    r = client.get("/api/moderation/decisions", params={"token": "тайна"})
+    rows = [d for d in r.json()["decisions"] if d["deal_id"] == "инн-омоним~g354705fa"]
+    assert rows and rows[0]["verdict"] == "note"
+    assert rows[0]["edited_text"] == "7736207543"
+    # Не тот же namespace, что у обычной очереди — старый тест того же id
+    # не должен был бы её увидеть.
+    assert not [d for d in r.json()["decisions"] if d["deal_id"] == "инн~g354705fa"]
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
