@@ -3476,7 +3476,7 @@
    ]
   },
   {
-   "draft_id": "d24430835",
+   "draft_id": "d40158131",
    "title": "Росимущество не нашло покупателя на 83 национализированных актива челябинского экс-губернатора",
    "date": "2026-08-24",
    "src": [
@@ -3504,7 +3504,7 @@
    ]
   },
   {
-   "draft_id": "d65205055",
+   "draft_id": "d76165470",
    "title": "В Пермском крае продают гостиницу на территории популярного курорта",
    "date": "2026-08-24",
    "src": [
@@ -3532,19 +3532,30 @@
    ]
   },
   {
-   "draft_id": "d61208378",
-   "title": "Воронежский бизнес нарастил инвестиции в умное видеонаблюдение в 10 раз",
+   "draft_id": "d18973460",
+   "title": "Акции Alibaba упали на 10% из-за планов продажи акций на $10 млрд",
    "date": "2026-08-24",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-24_voronezhskij_biznes_narastil"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8906853"
     ]
    ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
+   "sum": "$10 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "Сегодня утром на торгах в Гонконге акции Alibaba Group Holding Ltd упали на 10%. Накануне китайская компания анонсировала вторичное размещение акций здесь на 80 млрд гонконгских долларов ($10,2 млрд) с последующим вложением вырученных средств в развитие ИИ.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8906853"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -3561,13 +3572,122 @@
    ]
   },
   {
-   "draft_id": "d25396977",
-   "title": "Гигантский российский ритейлер техники и электроники месяцами не платит продавцам на своем маркетплейсе. Продажи идут, а денег нет",
+   "draft_id": "d11760866",
+   "title": "Интернет-ритейлер Shein рассчитывает на оценку в $27 млрд в ходе IPO",
    "date": "2026-08-24",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-08-24_gigantskij_rossijskij_ritejler"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8906848"
+    ]
+   ],
+   "sum": "$27 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "Китайский интернет-ритейлер Shein уведомил Гонконгскую фондовую биржу, что в ходе первичного размещения акций на этой площадке он планирует привлечь до 13,86 млрд гонконгских долларов ($1,77 млрд). Будет продано около 280 млн акций по цене от 47,60 до 49,50…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8906848"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d59157922",
+   "title": "Alibaba проведет допэмиссию на $10,2 млрд для развития ИИ",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/08/24/1223183-alibaba-provedet-dopemissiyu"
+    ]
+   ],
+   "sum": "$10,2 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d57714873",
+   "title": "Узбекистан хочет привлечь $1 млрд иностранных инвестиций в финтех-сектор к 2030 году",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1110913"
+    ]
+   ],
+   "sum": "$1 млрд",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "Узбекистан намерен привлечь в финтех-сектор к 2030 году $1 млрд от иностранных инвесторов, заявил председатель ЦБ республики Тимур Ишметов на открытии Silk Road Finance &amp; Technology Forum в Ташкенте, сообщает Gazeta.uz.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1110913"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d91530429",
+   "title": "Пашинян просит Россию продать концессию на железные дороги Армении",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1110907"
     ]
    ],
    "sum": null,
@@ -3589,30 +3709,243 @@
    ]
   },
   {
-   "draft_id": "d91396851",
-   "title": "Мой портфель облигаций на 24 августа 2026. Что изменилось за месяц? Покупки и планы на сентябрь",
+   "draft_id": "d17851715",
+   "title": "Суд в Москве заблокировал сайты по продаже фальшивых справок для ГИБДД",
    "date": "2026-08-24",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1343101.php"
+     "web:iz.ru",
+     "https://iz.ru/2153894/2026-08-24/sud-v-moskve-zablokiroval-saity-po-prodazhe-falshivykh-spravok-dlia-gibdd"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-24",
-     "title": "Переговоры",
-     "note": "Раз в месяц смотрю и анализирую облигационную часть своего портфеля, какие изменения произошли за месяц, пишу о покупках и продажах, показываю состав портфеля: все выпуски с указанием даты погашения, величины купона, ISIN, наличия оферты, текущей доходности и…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1343101.php"
-     ]
-    }
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67081491",
+   "title": "Ереван просит Москву продать концессию на управление железными дорогами",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260824/erevan-872613144.html"
+    ]
    ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73879173",
+   "title": "Объем покупки юаней ЦБ РФ с расчетами 21 августа составил 5,8 млрд рублей",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260824/obem-872612804.html"
+    ]
+   ],
+   "sum": "5,8 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58318464",
+   "title": "Московская биржа проводит дискретный аукцион по акциям «Озона»",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260824/birzha-872612636.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Рынок ценных бумаг",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64266865",
+   "title": "Мосбиржа проводит аукцион по акциям Озона",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260824/mosbirzha-2112762215.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28942070",
+   "title": "Пашинян просит Россию продать концессию на управление железными дорогами",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260824/erevan-2112758476.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58766067",
+   "title": "Суд в Москве запретил продавать справки для ГИБДД без медосмотра",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260824/sud-2112750824.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57736840",
+   "title": "Пашинян снова попросил Россию продать Армении концессию на железные дороги",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053120899"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72721795",
+   "title": "ВЕБИНАР BIRCH НА ТЕМУ «ТАМОЖЕННЫЙ КОНТРОЛЬ 2026: ОСНОВНЫЕ ТРЕНДЫ И РИСКИ» 27 августа 11:00 – 13:00 💬 Для участия в вебинаре зарегистрируйтесь по ссылке . Дефицит консолидированного бюджета в январе-ию",
+   "date": "2026-08-20",
+   "src": [
+    [
+     "tg:BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/2247"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,

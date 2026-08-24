@@ -1,3 +1,69 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "g6bf41023",
+   "date": "2026-08-24",
+   "title": "«Алор брокер» купил неназванную брокерскую компанию",
+   "ind": "Рынок ценных бумаг",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/300861"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Алор брокер»",
+   "asset": "неназванная брокерская компания",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "На рынке считают, что покупка новой фирмы может позволить финансовой группе восстановить депозитарную деятельность Сообщение «Алор брокер» купил неназванную брокерскую компанию появилось сначала на Frank Media .",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/300861"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Алор брокер»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/300861"
+     }
+    ],
+    "target": [
+     {
+      "value": "неназванная брокерская компания",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/300861"
+     }
+    ]
+   },
+   "pending_since": "2026-08-24T08:23:25+00:00",
+   "reviewed": "2026-08-24"
+  }
+ ]
 }
