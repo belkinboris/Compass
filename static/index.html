@@ -4890,7 +4890,6 @@ function renderCompany(id){
       </div></div>`);
       if(portfolio.length) rows.push(`<div><b>Портфель (${portfolio.length}):</b><div id="portfolio-members" style="width:100%;margin-top:4px"></div></div>`);
       if(!rows.length) return "";
-      const schemaEligible = groupMembers.length>=2 || portfolio.length>=2;
       const notes = [];
       if(got||over.length) notes.push("контроль показан по закрытым сделкам в базе — более поздние изменения могут быть ещё не учтены");
       if(groupMembers.length||portfolio.length||(c.ownership&&c.ownership.length)){
@@ -4899,11 +4898,15 @@ function renderCompany(id){
         if(portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
         notes.push(n);
       }
+      // Этап 8: кнопка «Показать схему» снята решением обоих партнёров —
+      // схема, собранная только по нашей базе сделок, «бесполезна», нужен
+      // либо состав из всех источников (ЕГРЮЛ и т. п.), либо ничего.
+      // groupSchemaSvg() не удалена — вернуть кнопку, когда состав групп
+      // будет собираться из настоящих источников (см. COMPANY_FINANCE_BRIEF.md,
+      // этап 8, П4-8), а не из id-ссылок holding/ownership внутри своей базы.
       return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
         <span class="tag steel">Структура и связи</span>
         <div style="display:flex;flex-direction:column;gap:10px;width:100%">${rows.join("")}</div>
-        ${schemaEligible?`<button class="chip" id="toggleGroupSchema">${groupMembers.length>=2?"Показать схему группы":"Показать схему портфеля"}</button>
-        <div id="group-schema" style="display:none;width:100%;overflow-x:auto"></div>`:""}
         ${notes.length?`<span style="color:var(--muted);font-size:12.5px;max-width:72ch">${notes.map(t=>t[0].toUpperCase()+t.slice(1)).join(". ")}.</span>`:""}
       </div>`;
     })()}
@@ -4937,25 +4940,6 @@ function renderCompany(id){
   // компании).
   if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members",
     pid => { const stake=(co(pid).ownership||[]).find(o=>o.id===id); return stake&&stake.share?stake.share:null; });
-  const schemaBtn=document.getElementById("toggleGroupSchema");
-  if(schemaBtn) schemaBtn.onclick=()=>{
-    const box=document.getElementById("group-schema");
-    if(!box) return;
-    const opening = box.style.display==="none";
-    if(opening && !box.dataset.drawn){
-      const groupChildren = groupMembers.map(([mid,m])=>({id:mid,name:m.name}));
-      const portfolioChildren = portfolio.map(([pid,p])=>{
-        const stake=(p.ownership||[]).find(o=>o.id===id);
-        return {id:pid, name:p.name, share: stake&&stake.share?stake.share:null};
-      });
-      box.innerHTML = groupSchemaSvg(id, c.name, groupChildren, portfolioChildren);
-      box.dataset.drawn = "1";
-    }
-    box.style.display = opening ? "" : "none";
-    schemaBtn.textContent = opening
-      ? "Скрыть схему"
-      : (groupMembers.length>=2?"Показать схему группы":"Показать схему портфеля");
-  };
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
