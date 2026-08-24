@@ -3476,147 +3476,7 @@
    ]
   },
   {
-   "draft_id": "d51864631",
-   "title": "Число сделок по покупке жилья в новостройках Дубая упало на 12%",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/realty/24/08/2026/6a8af07e9a79471ee7dcbe37"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52094964",
-   "title": "Ye-мошенничество: мошенники продают билеты на концерты Канье Уэста в России за криптовалюту",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-24_ye-moshennichestvo_moshenniki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14395414",
-   "title": "Мошенники стали заманивать россиян на фальшивые распродажи к 1 сентября",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2153819/moshenniki-stali-zamanivat-rossiian-na-falshivye-rasprodazhi-k-1-sentiabria-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86506220",
-   "title": "В России растут продажи велосипедов",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260824/velosiped-2112720434.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39847134",
-   "title": "В России выросли продажи велосипедов",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/24/v-rossii-vyrosli-prodazhi-velosipedov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40340596",
+   "draft_id": "d30578218",
    "title": "Росимущество не нашло покупателя на 83 национализированных актива челябинского экс-губернатора",
    "date": "2026-08-24",
    "src": [
@@ -3644,7 +3504,7 @@
    ]
   },
   {
-   "draft_id": "d71874857",
+   "draft_id": "d76080168",
    "title": "В Пермском крае продают гостиницу на территории популярного курорта",
    "date": "2026-08-24",
    "src": [
@@ -3669,6 +3529,143 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47816940",
+   "title": "Минэк подготовил проект о порядке обратного выкупа активов иностранцами",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/24/08/2026/6a8bcb3e9a7947451e431802"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d65067775",
+   "title": "СМИ: Цекало продал дом в Голливуде и подарил квартиру жене-модели",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260824/tsekalo-2112733348.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260824/tsekalo-2112733348.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "дом в Голливуде и подарил квартиру жене-модели",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "дом в Голливуде и подарил квартиру жене-модели",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d55451473",
+   "title": "Биткоин и золото выросли на фоне планов Минфина США по выкупу трежерис",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/300828"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "ETF iShares Bitcoin Trust прибавил 22,6% за неделю после объявления Минфина Сообщение Биткоин и золото выросли на фоне планов Минфина США по выкупу трежерис появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/300828"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d42251031",
+   "title": "Zotman начнет продавать замороженную пиццу кафе и ресторанам",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/zotman-nachnet-prodavat-zamorozhennuju-piccu-kafe-i-restoranam/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
