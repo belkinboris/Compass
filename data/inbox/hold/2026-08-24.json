@@ -3476,7 +3476,7 @@
    ]
   },
   {
-   "draft_id": "d51985576",
+   "draft_id": "d66456188",
    "title": "Росимущество не нашло покупателя на 83 национализированных актива челябинского экс-губернатора",
    "date": "2026-08-24",
    "src": [
@@ -3504,7 +3504,7 @@
    ]
   },
   {
-   "draft_id": "d38737110",
+   "draft_id": "d52678413",
    "title": "В Пермском крае продают гостиницу на территории популярного курорта",
    "date": "2026-08-24",
    "src": [
@@ -3532,7 +3532,7 @@
    ]
   },
   {
-   "draft_id": "d44673878",
+   "draft_id": "d37704141",
    "title": "Пашинян просит Россию продать концессию на железные дороги Армении",
    "date": "2026-08-24",
    "src": [
@@ -3560,7 +3560,7 @@
    ]
   },
   {
-   "draft_id": "d15972384",
+   "draft_id": "d47625164",
    "title": "Ереван просит Москву продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3588,7 +3588,7 @@
    ]
   },
   {
-   "draft_id": "d18287120",
+   "draft_id": "d87672548",
    "title": "Пашинян просит Россию продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3616,7 +3616,7 @@
    ]
   },
   {
-   "draft_id": "d89700480",
+   "draft_id": "d44632258",
    "title": "Пашинян снова попросил Россию продать Армении концессию на железные дороги",
    "date": "2026-08-24",
    "src": [
@@ -3644,7 +3644,7 @@
    ]
   },
   {
-   "draft_id": "d89333341",
+   "draft_id": "d80972428",
    "title": "Пашинян предложил России продать третьей стороне участок ЮКЖД",
    "date": "2026-08-24",
    "src": [
@@ -3672,7 +3672,7 @@
    ]
   },
   {
-   "draft_id": "d77428152",
+   "draft_id": "d36119089",
    "title": "Пашинян попросил Россию продать концессию на управление ж/д третьей стране",
    "date": "2026-08-24",
    "src": [
@@ -3700,7 +3700,7 @@
    ]
   },
   {
-   "draft_id": "d87791174",
+   "draft_id": "d47154943",
    "title": "Пашинян попросил Москву продать концессию на управление железной дорогой",
    "date": "2026-08-24",
    "src": [
@@ -3728,7 +3728,7 @@
    ]
   },
   {
-   "draft_id": "d52842493",
+   "draft_id": "d38679832",
    "title": "Пашинян вновь предложил России продать концессию на железные дороги Армении",
    "date": "2026-08-24",
    "src": [
@@ -3756,64 +3756,7 @@
    ]
   },
   {
-   "draft_id": "d78445812",
-   "title": "Акции Ozon замедлили падение после введения дискретного аукциона на Мосбирже",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/08/24/akcii-ozon-zamedlili-padenie"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79716934",
-   "title": "FT: США опережают Европу по росту инвестиций в ИИ для бизнеса",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260824/ssha-872616227.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d49388083",
+   "draft_id": "d28436728",
    "title": "«Дом.РФ» выставил на торги 30 гектаров земли под КРТ в Самарской области",
    "date": "2026-08-24",
    "src": [
@@ -3841,92 +3784,7 @@
    ]
   },
   {
-   "draft_id": "d18348947",
-   "title": "Shein подала заявку на IPO — компания рассчитывает привлечь $1,8 млрд при оценке в $27 млрд",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/shein-podala-zayavku-na-ipo-kompaniya-rasschityvaet-privlech-18-mlrd-pri-ocenke-v-27-mlrd/"
-    ]
-   ],
-   "sum": "$1,8 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d12808209",
-   "title": "Мосбиржа объявила дискретный аукцион по акциям Ozon из-за их обвала на 29%",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/mosbirzha-objavila-diskretnyj-aukcion-po-akcijam-ozon-iz-za-ih-obvala-na-29/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79773882",
-   "title": "Покупку справок без посещения поликлиник запретили в России",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/24/spravki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15708803",
+   "draft_id": "d54383879",
    "title": "Российская «дочка» Microsoft выставила на торги долги и технику",
    "date": "2026-08-24",
    "src": [
@@ -3948,6 +3806,352 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90048638",
+   "title": "FT: США в несколько раз обогнали Европу по инвестициям в ИИ",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8907023"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d22502312",
+   "title": "Мяч, которым Марадона забил гол «Рука Бога», продан на аукционе за $3,3 млн",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8907017"
+    ]
+   ],
+   "sum": "$3,3 млн",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "Мяч Adidas Azteca, которым забит гол, вошедший в историю как «Рука Бога», продали на аукционе в США за $3,3 млн. Как сообщает «Би-би-си», изначально ожидалось, что мяч уйдет примерно за $10 млн.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8907017"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31359537",
+   "title": "РФ и Индия прорабатывают создание СП в гражданском авиастроении",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1110951"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12062496",
+   "title": "МТС и «Авито»: почти половина кировчан старше 45 лет регулярно совершает покупки в интернете",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-24_mts_i_avito_pochti_polovina"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28676121",
+   "title": "Чем лучше отчеты, тем хуже продажи: фармкомпании столкнулись с парадоксом «эффективной» рекламы",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-24_chem_luchshe_otchetytem_huzhe"
+    ]
+   ],
+   "sum": "46 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38660317",
+   "title": "«Яндекс» тестирует покупки товаров через умные ТВ",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-08-24_yandeks_testiruet_novyj"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "«Яндекс» тестирует новый рекламный формат Shoppable-рекламу, который позволит зрителям взаимодействовать с предложениями брендов непосредственно во время просмотра телевизора. В августе 2026 г. российская компания уже проверяет механику с QR-кодами, а в…",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-08-24_yandeks_testiruet_novyj"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Wildberries, Ozon, МТС, «Яндекс» , РСХБ, Совкомбанк&nbsp;—&n» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d76198046",
+   "title": "FT указала на отставание Европы от США в сфере инвестиций в ИИ",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2154057/2026-08-24/ft-ukazala-na-otstavanie-evropy-ot-ssha-v-sfere-investitcii-v-ii"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d55349706",
+   "title": "Росстандарт запретил продажи ряда китайских грузовиков в России",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2154021/rosstandart-zapretil-prodazhi-riada-kitaiskikh-gruzovikov-v-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69908441",
+   "title": "Shein проведет IPO в Гонконге с дисконтом в 70% к пиковой оценке",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/300903"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92788646",
+   "title": "Shein проведет IPO 1 сентября с оценкой $27 млрд",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/shein-provedet-ipo-1-sentjabrja-s-ocenkoj-27-mlrd/"
+    ]
+   ],
+   "sum": "$27 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-24",
+     "title": "Переговоры",
+     "note": "Онлайн-ритейлер Shein уведомил Гонконгскую фондовую биржу о планах провести IPO 1 сентября 2026 года и привлечь до $1,77 млрд. Сообщение Shein проведет IPO 1 сентября с оценкой $27 млрд появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/shein-provedet-ipo-1-sentjabrja-s-ocenkoj-27-mlrd/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d78820197",
+   "title": "«Победа» не продается. Челябинский кинотеатр стал собственностью региона",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/gorod/2026/08/24/76599453/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Развлечения",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
