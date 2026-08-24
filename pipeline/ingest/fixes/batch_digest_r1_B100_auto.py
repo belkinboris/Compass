@@ -155,14 +155,15 @@ FIXES = [
          new='Чистая прибыль выросла на 174% до 1.34 млрд руб.',
          quote='Чистая прибыль выросла на 174% до 1.34 млрд руб.',
          why='из digest ChatGPT round1 (B_100), сверено с https://cbonds.ru/news/3347993/'),
-    dict(id='g5880d206', field='eco.context', old='—',
-         new='Ранее Фольксваген Банк Гмбх владел 1%, Фольксваген Файненшл Сервисез Оверсиз Акциенгезелльшафт — 99%.',
-         quote='Ранее Фольксваген Банк Гмбх владел 1%, Фольксваген Файненшл Сервисез Оверсиз Акциенгезелльшафт — 99%.',
-         why='из digest ChatGPT round1 (B_100), сверено с https://www.akm.ru/news/folksvagen_bank_rus_smenil_vladeltsa/'),
-    dict(id='g5880d206', field='eco.val', old='—',
-         new='Оценивает «Метрополис» в 60–65 млрд руб.',
-         quote='оценивает «Метрополис» в 60–65 млрд руб.',
-         why='из digest ChatGPT round1 (B_100), сверено с https://www.kommersant.ru/doc/8400478'),
+    # g5880d206/eco.context: запись снята — 24.08.2026 месячная
+    # очередь дописала к этому полю переименование в «Пихта Банк»
+    # после сделки, см.
+    # fix_kim_volkswagen_bank_structure_and_rename.py. Старое
+    # значение — только первая половина текущего поля.
+    # g5880d206/eco.val: запись снята — 24.08.2026 месячная очередь
+    # нашла, что это факт СОВСЕМ ДРУГОЙ сделки (продажа ТЦ
+    # «Метрополис» в Москве, doc/8400478 не про Volkswagen Bank/Кима
+    # вовсе), см. fix_kim_volkswagen_bank_metropolis_misattribution.py.
 
     # источники
     dict(id='gd88cbe9a', field='src', old=None,
@@ -295,8 +296,8 @@ FIXES = [
          new=['АКМ', 'https://www.akm.ru/news/folksvagen_bank_rus_smenil_vladeltsa/'],
          quote='Ранее Фольксваген Банк Гмбх владел 1%, Фольксваген Файненшл Сервисез Оверсиз Акциенгезелльшафт — 99%.',
          why='источник из digest ChatGPT round1 (B_100)'),
-    dict(id='g5880d206', field='src', old=None,
-         new=['Коммерсантъ', 'https://www.kommersant.ru/doc/8400478'],
-         quote='оценивает «Метрополис» в 60–65 млрд руб.',
-         why='источник из digest ChatGPT round1 (B_100)'),
+    # g5880d206/src (doc/8400478): запись снята — 24.08.2026 источник
+    # не подтверждает ни одного факта карточки (статья про ТЦ
+    # «Метрополис», не про Volkswagen Bank/Кима), см.
+    # fix_kim_volkswagen_bank_metropolis_misattribution.py.
 ]
