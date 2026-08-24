@@ -3476,7 +3476,7 @@
    ]
   },
   {
-   "draft_id": "d89229733",
+   "draft_id": "d51985576",
    "title": "Росимущество не нашло покупателя на 83 национализированных актива челябинского экс-губернатора",
    "date": "2026-08-24",
    "src": [
@@ -3504,7 +3504,7 @@
    ]
   },
   {
-   "draft_id": "d22278854",
+   "draft_id": "d38737110",
    "title": "В Пермском крае продают гостиницу на территории популярного курорта",
    "date": "2026-08-24",
    "src": [
@@ -3532,7 +3532,7 @@
    ]
   },
   {
-   "draft_id": "d12840682",
+   "draft_id": "d44673878",
    "title": "Пашинян просит Россию продать концессию на железные дороги Армении",
    "date": "2026-08-24",
    "src": [
@@ -3560,7 +3560,7 @@
    ]
   },
   {
-   "draft_id": "d89448847",
+   "draft_id": "d15972384",
    "title": "Ереван просит Москву продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3588,7 +3588,7 @@
    ]
   },
   {
-   "draft_id": "d90109089",
+   "draft_id": "d18287120",
    "title": "Пашинян просит Россию продать концессию на управление железными дорогами",
    "date": "2026-08-24",
    "src": [
@@ -3616,7 +3616,7 @@
    ]
   },
   {
-   "draft_id": "d82781979",
+   "draft_id": "d89700480",
    "title": "Пашинян снова попросил Россию продать Армении концессию на железные дороги",
    "date": "2026-08-24",
    "src": [
@@ -3644,35 +3644,7 @@
    ]
   },
   {
-   "draft_id": "d89870397",
-   "title": "Мосбиржа провела по акциям Ozon дискретный аукцион",
-   "date": "2026-08-24",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/08/24/1223195-mosbirzha-provela"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d83633088",
+   "draft_id": "d89333341",
    "title": "Пашинян предложил России продать третьей стороне участок ЮКЖД",
    "date": "2026-08-24",
    "src": [
@@ -3700,7 +3672,7 @@
    ]
   },
   {
-   "draft_id": "d72563729",
+   "draft_id": "d77428152",
    "title": "Пашинян попросил Россию продать концессию на управление ж/д третьей стране",
    "date": "2026-08-24",
    "src": [
@@ -3728,7 +3700,7 @@
    ]
   },
   {
-   "draft_id": "d57633682",
+   "draft_id": "d87791174",
    "title": "Пашинян попросил Москву продать концессию на управление железной дорогой",
    "date": "2026-08-24",
    "src": [
@@ -3739,6 +3711,232 @@
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52842493",
+   "title": "Пашинян вновь предложил России продать концессию на железные дороги Армении",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8906987"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78445812",
+   "title": "Акции Ozon замедлили падение после введения дискретного аукциона на Мосбирже",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/24/akcii-ozon-zamedlili-padenie"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79716934",
+   "title": "FT: США опережают Европу по росту инвестиций в ИИ для бизнеса",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260824/ssha-872616227.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d49388083",
+   "title": "«Дом.РФ» выставил на торги 30 гектаров земли под КРТ в Самарской области",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260824/uchastok-2112790617.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18348947",
+   "title": "Shein подала заявку на IPO — компания рассчитывает привлечь $1,8 млрд при оценке в $27 млрд",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/shein-podala-zayavku-na-ipo-kompaniya-rasschityvaet-privlech-18-mlrd-pri-ocenke-v-27-mlrd/"
+    ]
+   ],
+   "sum": "$1,8 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d12808209",
+   "title": "Мосбиржа объявила дискретный аукцион по акциям Ozon из-за их обвала на 29%",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/mosbirzha-objavila-diskretnyj-aukcion-po-akcijam-ozon-iz-za-ih-obvala-na-29/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79773882",
+   "title": "Покупку справок без посещения поликлиник запретили в России",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/24/spravki/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15708803",
+   "title": "Российская «дочка» Microsoft выставила на торги долги и технику",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/24/rossiyskaya-dochka-microsoft-vystavila-na-torgi-dolgi-i-tehniku/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
