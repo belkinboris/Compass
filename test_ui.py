@@ -309,6 +309,28 @@ def test_citibank_seller_is_rendered(page, base_url):
     assert "Продавец\nНе раскрыт" not in plate
 
 
+def test_deal_plate_hides_asset_text_that_only_echoes_the_headline(page, base_url):
+    # Этап 9, П6-9: «Алор брокер» купил «неназванную брокерскую компанию» —
+    # предмет текстом дословно повторяет заголовок над плашкой, читателю
+    # нечего узнать во второй раз. Плашка при этом не пустая целиком (есть
+    # покупатель) — пропадает только блок «Предмет сделки».
+    visit(page, base_url, "#/deal/g6bf41023")
+    plate = page.locator(".deal-plate")
+    assert plate.is_visible(), "плашка должна остаться — покупатель известен"
+    assert plate.locator(".dp-asset").count() == 0, \
+        "предмет — чистый повтор заголовка, не должен показываться текстом"
+    assert "«Алор брокер»" in plate.inner_text()
+
+
+def test_deal_plate_shows_asset_text_with_real_novelty(page, base_url):
+    # Тот же механизм на карточке, где предмет называет то, чего в заголовке
+    # нет (адрес, а не пересказ заголовка), — строка обязана остаться.
+    visit(page, base_url, "#/deal/g304f9065")
+    plate = page.locator(".deal-plate")
+    assert plate.locator(".dp-asset").count() == 1
+    assert "элеватор" in plate.locator(".dp-asset").inner_text().lower()
+
+
 def test_account_form_is_visible_after_async_auth_check(page, base_url):
     visit(page, base_url, "#/account")
     assert page.locator("#loginForm").is_visible()

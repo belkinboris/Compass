@@ -3597,6 +3597,39 @@ const ecoHasContent = d => {
 };
 /* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
    пуста, юристу всё равно нужны стороны, предмет и статус, а не пустой экран. */
+/* Компаратор новизны — JS-порт `review._same_word`/`format_post.has_novelty`
+   (Этап 9, П6-9): текстовый предмет сделки, дословно (с точностью до падежа)
+   повторяющий заголовок над ним, не показывается плашкой второй раз. Портируя
+   с оглядкой на уже записанные грабли: `\w` в JS не знает кириллицы — класс
+   символов задан явно; регистр не участвует вовсе (сравнение по
+   .toLowerCase()), так что ловушка `[А-ЯЁ]` под /i тут не может повториться. */
+const sameWord = (a, b) => {
+  a = String(a).toLowerCase(); b = String(b).toLowerCase();
+  if(a === b) return true;
+  let n = 0;
+  while(n < Math.min(a.length, b.length) && a[n] === b[n]) n++;
+  return n >= 3 && n >= 0.6 * Math.min(a.length, b.length);
+};
+const NOVELTY_WORD_RE = /[a-zA-Zа-яёА-ЯЁ0-9]+/g;
+const NOVELTY_STOPWORDS = new Set(("и в во не что он на я с со как а то все она так его но да ты к у же вы за бы по "+
+  "только ее мне было вот от меня еще нет о из ему теперь когда даже ну вдруг ли "+
+  "если уже или ни быть был него до вас нибудь опять уж вам ведь там потом себя "+
+  "ничего ей может они тут где есть надо ней для мы тебя их чем была сам чтоб без "+
+  "будто чего раз тоже себе под будет ж тогда кто этот того потому этого какой "+
+  "совсем ним здесь этом один почти мой тем чтобы нее сейчас были куда зачем всех "+
+  "никогда можно при наконец два об другой хоть после над больше тот через эти "+
+  "нас про всего них какая много разве три эту моя впрочем хорошо свою этой перед "+
+  "иногда лучше чуть том нельзя такой им более всегда конечно всю между").split(/\s+/));
+const significantWords = text => (String(text||"").match(NOVELTY_WORD_RE) || [])
+  .map(w=>w.toLowerCase()).filter(w=>w.length>1 && !NOVELTY_STOPWORDS.has(w));
+/* Есть ли в candidate хотя бы одно значащее слово, которого нет в reference
+   даже с точностью до окончания? Пустой candidate — не новизна. */
+const hasNovelty = (candidate, reference) => {
+  const cand = significantWords(candidate);
+  if(!cand.length) return false;
+  const ref = significantWords(reference);
+  return cand.some(cw => !ref.some(rw => sameWord(cw, rw)));
+};
 /* Сторона-покупатель: профиль компании либо имя текстом. Текстовый вариант
    нужен инвестиционным раундам: у фондов и бизнес-ангелов профилей в базе почти
    нет (из 21 проверенного имени профиль нашёлся у трёх), а инвестор в карточке
@@ -4012,12 +4045,21 @@ function renderDeal(id, qs, previewCard){
        двух местах не разъехалось. */
     const shortShare = has(d.eco&&d.eco.share) && d.eco.share.length<40 ? d.eco.share : "";
     const hasSeller = !!(d.seller || (d.seller_id && co(d.seller_id)));
+    /* Предмет, который плашка реально покажет (П6-9): ссылка на профиль
+       (target или asset_id, найденный в co()) — всегда, это навигация, не
+       текст; текст (asset/короткое eco.share) — только если в нём есть хоть
+       одно слово, которого нет в заголовке над плашкой, иначе плашка
+       повторяла бы заголовок вторым абзацем. Считаем один раз, чтобы плашка
+       и запасная строка «Предмет» на «Обзоре» (см. ниже) не разошлись. */
+    const assetTextRaw = d.asset || shortShare || "";
+    const assetIsLinked = !!targetName || !!(d.asset && d.asset_id && co(d.asset_id));
+    const assetWillShow = assetIsLinked || hasNovelty(assetTextRaw, d.title);
     /* Плашка называет предмет ТОЛЬКО у покупки: у IPO, СП, кредита и раунда
        финансирования по краям стоят стороны, а отдельной ячейки «Предмет
        сделки» нет вовсе. Без этой оговорки строка пряталась бы у 44 карточек,
        где предмет на «Обзоре» больше взять неоткуда. */
     const assetNamed = kindKey==="acquisition"
-      && !!(targetName || d.asset || shortShare)
+      && assetWillShow
       && !!(buyerName || hasSeller || targetName);
     const dealPlate = ()=>{
       const share = shortShare;
@@ -4090,7 +4132,6 @@ function renderDeal(id, qs, previewCard){
             : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
         // предмет сделки: карточка компании, иначе название, вытащенное из
         // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
-        const assetName = targetName || d.asset || share || "";
         // Предмет сделки ссылается на профиль компании: либо это target, либо
         // текстовое название, которое удалось сопоставить с профилем (asset_id).
         // Без второй ветки актив, вынесенный из target при разборе ролей, терял
@@ -4098,6 +4139,10 @@ function renderDeal(id, qs, previewCard){
         const assetRef = (targetName && d.target) ? d.target
                        : (d.asset && d.asset_id && co(d.asset_id)) ? d.asset_id : null;
         const assetLink = assetRef;
+        // П6-9: текст без ссылки на профиль показывается, только если несёт
+        // новизну к заголовку (assetWillShow — посчитан один раз выше, чтобы
+        // плашка и запасная строка «Предмет» на «Обзоре» не разошлись).
+        const assetName = targetName || (assetWillShow ? assetTextRaw : "");
         const assetMeta = [targetName&&share?share:(d.asset_share||""), sum].filter(Boolean).join(" · ");
         const asset = assetName ? `
           <div class="dp-asset">
