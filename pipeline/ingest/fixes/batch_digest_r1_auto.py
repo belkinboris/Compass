@@ -445,10 +445,9 @@ FIXES = [
          new='Текущую рыночную стоимость «Инвитро» инвестиционный директор BGP Capital Юрий Левицкий оценил в сумму более 40 млрд рублей',
          quote='Текущую рыночную стоимость «Инвитро» инвестиционный директор BGP Capital Юрий Левицкий оценил в сумму более 40 млрд рублей',
          why='из digest ChatGPT round1, сверено с https://mergers.ru/companies/GK-Invitro'),
-    dict(id='g4165ba00', field='eco.context', old='—',
-         new='В 2023 году основатель и владелец «Инвитро» Александр Островский продал сеть предпринимателю Роману Мирончику.',
-         quote='В 2023 году основатель и владелец «Инвитро» Александр Островский продал сеть предпринимателю Роману Мирончику.',
-         why='из digest ChatGPT round1, сверено с https://medvestnik.ru/content/news/Mat-i-ditya-rassmatrivaet-priobretenie-Invitro.html'),
+    # g4165ba00/eco.context продолжен публичным опровержением переговоров
+    # (Курцер, 29.08.2025) — см.
+    # pipeline/fix_mat_i_ditya_invitro_denial_context.py.
     dict(id='c0ea790b6', field='law.struct', old=None,
          new='Размер пакета акций/долей: 100% (51% + 49%) ООО «ТрансЛес», 100% Грузовой компании',
          quote='Размер пакета акций/долей: 100% (51% + 49%) ООО «ТрансЛес», 100% Грузовой компании',
@@ -457,10 +456,9 @@ FIXES = [
          new='Сделка получила одобрение Федеральной антимонопольной службы.',
          quote='Сделка получила одобрение Федеральной антимонопольной службы.',
          why='из digest ChatGPT round1, сверено с https://www.kommersant.ru/doc/7834211'),
-    dict(id='g755cbf86', field='law.struct', old='—',
-         new='Корпорации через ряд юридических лиц принадлежит 50% в операционной структуре сети ООО «ОК Ниармедик – Доктор рядом».',
-         quote='корпорации через ряд юридических лиц принадлежит 50% в операционной структуре сети ООО «ОК Ниармедик – Доктор рядом».',
-         why='из digest ChatGPT round1, сверено с https://www.vedomosti.ru/business/articles/2025/06/24/1119502-afk-sistema-mozhet-prodat-svoyu-dolyu-v-seti-klinik-niarmedik'),
+    # g755cbf86/law.struct продолжен структурой покупателя после
+    # закрытия сделки — см.
+    # pipeline/fix_afk_sistema_niarmedik_closed.py.
     dict(id='g755cbf86', field='law.terms', old='—',
          new='Речь идет о продаже всего пакета',
          quote='Речь идет о продаже всего пакета',
