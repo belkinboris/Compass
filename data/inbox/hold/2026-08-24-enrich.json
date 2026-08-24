@@ -2,21 +2,12 @@
  "made": "2026-08-24",
  "items": [
   {
-   "news": "https://mergers.ru/news/IBS-priobrela-razrabotchika-IT-reshenij-na-baze-iskusstvennogo-intellekta-Rubbles-87419",
-   "title": "IBS приобрела разработчика ИТ-решений на базе искусственного интеллекта Rubbles",
-   "verdict": "enrich:gda6baa02",
-   "why": "общие слова заголовка: 7",
+   "news": "https://t.me/dealsma/7309",
+   "title": "⚡️ Pridex продал сеть гибких офисов Multispace. В сделку вошли четыре площадки на 18 200 кв. м (Multispace Dinamo, Multispace Tverskaya, Multispace Pravda и Multispace Dubinin’Sky). Покупатель и сумма",
+   "verdict": "enrich:ge283bafc",
+   "why": "общие слова заголовка: 4",
    "reasons": [
-    "слабое совпадение: общие слова заголовка: 7"
-   ]
-  },
-  {
-   "news": "https://realty.ria.ru/20260824/torgi-2112767244.html",
-   "title": "Производитель водки продает офисно-складской комплекс в Петербурге",
-   "verdict": "enrich:gd1771616",
-   "why": "общие слова заголовка: 3",
-   "reasons": [
-    "слабое совпадение: общие слова заголовка: 3"
+    "слабое совпадение: общие слова заголовка: 4"
    ]
   }
  ]
