@@ -48,10 +48,9 @@ FIXES = [
          new='Оценка инвестбанкира Ильи Шумова - 18-20 млрд рублей.',
          quote='Оценка инвестбанкира Ильи Шумова - 18-20 млрд рублей.',
          why='из digest ChatGPT round1 (B_100), сверено с https://www.interfax.ru/russia/1033832'),
-    dict(id='ge2e2c71c', field='eco.context', old='—',
-         new='ЕАГ не раскрывает владельцев, но прежде основным собственником был Отар Балинов.',
-         quote='ЕАГ не раскрывает владельцев, но прежде основным собственником был Отар Балинов.',
-         why='из digest ChatGPT round1 (B_100), сверено с https://shoppers.media/news/26587_vladelec-brenda-santo-stefano-gotovitsia-vypustit-krepkie-kokteili'),
+    # ge2e2c71c/eco.context продолжен дальше (опцион не реализован,
+    # полная структура владения на конец 2025) — см.
+    # pipeline/fix_renessans_eag_option_not_exercised.py.
     dict(id='gca9cd4b7', field='eco.target_fin', old='—',
          new='За 2024 год прибыль компании составляет — -5 079 000 ₽, выручка за 2024 год — 679 510 000 ₽.',
          quote='За 2024 год прибыль компании составляет — -5 079 000 ₽, выручка за 2024 год — 679 510 000 ₽.',
