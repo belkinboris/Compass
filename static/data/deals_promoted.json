@@ -89677,7 +89677,19 @@
     "Профиль",
     "Автоматический"
    ],
-   "role_hint": "buyer"
+   "role_hint": "buyer",
+   "ownership": [
+    {
+     "name": "ООО «Полиматика Рус»",
+     "id": "g04181f17",
+     "share": "49%",
+     "as_of": "2026-01-14",
+     "source": [
+      "ЕГРЮЛ (данные ФНС)",
+      "https://projectcompass.ru/api/companies/g04181f17/fns"
+     ]
+    }
+   ]
   },
   "ga312afdb": {
    "name": "FabricaONE.AI / ГК Softline",
@@ -90340,7 +90352,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "group": true
   },
   "gee79811a": {
    "name": "RBE Group",
@@ -99505,7 +99518,15 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "holding": {
+    "id": "g417388ed",
+    "confidence": "disclosed",
+    "source": [
+     "ЕГРЮЛ (данные ФНС), доля 100% на 2026-02-25",
+     "https://projectcompass.ru/api/companies/ge788d903/fns"
+    ]
+   }
   },
   "gd873b039": {
    "name": "ООО Агроинвест",
@@ -103269,6 +103290,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Кассир.ру»",
+     "id": "g030deb34",
+     "share": "22%",
+     "as_of": "2022-08-30",
+     "source": [
+      "ЕГРЮЛ (данные ФНС)",
+      "https://projectcompass.ru/api/companies/g030deb34/fns"
+     ]
+    }
    ]
   },
   "g6e0818c0": {
@@ -106396,7 +106429,15 @@
    "kpi": [
     "Место на рынке",
     "№3 среди башенных операторов РФ"
-   ]
+   ],
+   "holding": {
+    "id": "g69c88bc7",
+    "confidence": "disclosed",
+    "source": [
+     "ЕГРЮЛ (данные ФНС), доля 50,1% на 2026-07-03",
+     "https://projectcompass.ru/api/companies/bik/fns"
+    ]
+   }
   },
   "invest18": {
    "name": "ЗПИФ «Инвестиции 18» (УК «Доверительная»)",
@@ -106414,7 +106455,8 @@
    "kpi": [
     "Уставный капитал",
     "~138 тыс. ₽"
-   ]
+   ],
+   "group": true
   },
   "absolutstrah": {
    "name": "Абсолют Страхование",
@@ -106423,7 +106465,15 @@
    "kpi": [
     "Рейтинг «Эксперт РА»",
     "А+ (март 2026)"
-   ]
+   ],
+   "holding": {
+    "id": "canc",
+    "confidence": "disclosed",
+    "source": [
+     "ЕГРЮЛ (данные ФНС), доля 100% на 2026-07-06",
+     "https://projectcompass.ru/api/companies/absolutstrah/fns"
+    ]
+   }
   },
   "mid": {
    "name": "«Мать и дитя» (МД Медикал Груп)",
