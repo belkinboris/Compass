@@ -82,3 +82,18 @@ def test_full_lines_payload_keeps_negative_and_zero_values():
 def test_full_lines_payload_handles_empty_input():
     assert full_lines_payload({}) == []
     assert full_lines_payload(None) == []
+
+
+def test_per_share_codes_are_not_multiplied_by_a_thousand():
+    """Прибыль на акцию (2900/2910) — В РУБЛЯХ на акцию, не в тыс. руб:
+    у Роснефти 2019 строка 2900 = «37» — это 37 ₽/акцию (живой замер,
+    ревью 24 августа 2026); умножение на 1000 показало бы «37 000 ₽» —
+    число верное, величина не та. Соседняя строка той же секции (2400,
+    тыс. руб) при этом обязана умножаться как раньше — иначе фикс
+    «починил» бы одно поле, сломав остальные."""
+    payload = full_lines_payload({"2900": "37", "2910": "36", "2400": "396526209"})
+    pnl = next(s for s in payload if s["title"] == "Отчёт о финансовых результатах")
+    rows = {r["code"]: r["value_rub"] for r in pnl["rows"]}
+    assert rows["2900"] == 37
+    assert rows["2910"] == 36
+    assert rows["2400"] == 396_526_209_000

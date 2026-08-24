@@ -509,6 +509,16 @@ def normalize_bo(data: dict, inn_or_ogrn: str | None = None) -> list[dict[str, A
     return sorted(reports, key=lambda x: x["year"])
 
 
+# Единственное исключение из «вся форма — в тыс. руб»: прибыль на акцию
+# (базовая 2900, разводнённая 2910) по порядку заполнения 66н указывается
+# В РУБЛЯХ на одну акцию. Проверено живым замером (ревью Fable, 24 августа
+# 2026): у Роснефти 2019 строка 2900 = «37» — это 37 ₽/акцию (396,5 млрд ₽
+# чистой прибыли / ~10,6 млрд акций), а не «37 тыс. руб»; умножение на 1000
+# показало бы «37 000 ₽» — число верное, величина не та (класс уроков
+# CLAUDE.md про убыток Reckitt вместо цены сделки).
+PER_SHARE_CODES = {"2900", "2910"}
+
+
 def full_lines_payload(raw_lines: dict) -> list[dict[str, Any]]:
     """Секции полной БФО (см. `FULL_LINE_SECTIONS`) со значениями ИМЕННО
     этого года: код без значения в `raw_lines` не попадает в ответ — «не
@@ -520,7 +530,8 @@ def full_lines_payload(raw_lines: dict) -> list[dict[str, Any]]:
     for title, lines in FULL_LINE_SECTIONS:
         rows = []
         for code, name in lines:
-            value = _rub_from_thousands(raw_lines.get(code))
+            raw_value = raw_lines.get(code)
+            value = _num(raw_value) if code in PER_SHARE_CODES else _rub_from_thousands(raw_value)
             if value is None:
                 continue
             rows.append({"code": code, "name": name, "value_rub": int(value)})
