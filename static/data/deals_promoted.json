@@ -88883,6 +88883,72 @@
    "reviewed": "2026-08-24",
    "added": "2026-08-24",
    "events": []
+  },
+  {
+   "id": "ge283bafc",
+   "date": "2026-08-24",
+   "title": "Pridex продал сеть сервисных офисов Multispace группе частных инвесторов",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260824/pridex-2112799482.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Pridex закрыл сделку по продаже сети сервисных офисов Multispace. Транзакция реализована в рамках долгосрочной стратегии развития компании. Новым владельцем Multispace стала группа профессиональных частных инвесторов. Сеть продолжит функционировать в нормальном режиме и выполнять свои обязательства перед резидентами и партнерами",
+    "context": "В периметр сделки вошли четыре объекта общей площадью 18,2 тысячи квадратных метров в Москве и Санкт-Петербурге.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Pridex",
+   "asset": "сеть сервисных офисов Multispace группе частных инвесторов",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260824/pridex-2112799482.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "сеть сервисных офисов Multispace группе частных инвесторов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260824/pridex-2112799482.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Pridex",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260824/pridex-2112799482.html"
+     }
+    ]
+   },
+   "reviewed": "2026-08-24",
+   "added": "2026-08-24"
   }
  ],
  "companies": {
@@ -114482,7 +114548,8 @@
   "g9076dfc3": 57,
   "gb57df995": 58,
   "g3f0400db": 59,
-  "g6bf41023": 60
+  "g6bf41023": 60,
+  "gb9a22f5f": 61
  },
  "telegram_milestones": {}
 }
