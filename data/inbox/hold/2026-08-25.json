@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d63589614",
+   "draft_id": "d10034504",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d60757678",
+   "draft_id": "d60085253",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,63 +4017,7 @@
    ]
   },
   {
-   "draft_id": "d79627473",
-   "title": "В США и Британии стали продавать меньше одежды больших размеров из-за «Оземпика»",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/08/25/1223591-ssha-i-britanii-stali"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25146010",
-   "title": "ЕК не дал согласия Украине на покупку у США ракет для Patriot",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/08/25/1223579-ek-ne-dal-soglasie"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20453051",
+   "draft_id": "d53453906",
    "title": "«Росатом» завершит процедуру выкупа 51% в ГК «Дело» 28 августа",
    "date": "2026-08-25",
    "src": [
@@ -4100,6 +4044,190 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Правительство одобрило создание СП «Росатома» и DP World» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d59652261",
+   "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8908024"
+    ]
+   ],
+   "sum": "77 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-25",
+     "title": "Переговоры",
+     "note": "Предусмотренная корпоративным соглашением участников ГК «Дело» процедура выкупа «Росатомом» 51% доли Сергея Шишкарева юридически завершается 28 августа, сообщил представитель «Росатома». «Необходимые документы подготовлены и переданы нотариусу для совершения…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8908024"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Правительство одобрило создание СП «Росатома» и DP World» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d49428483",
+   "title": "«Деловая Россия» попросила ЦБ смягчить новые требования к IPO",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/08/25/1223607-delovaya-rossiya-poprosila"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76630119",
+   "title": "Как мошенники обманывают с покупкой цветов к 1 сентября",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2154826/video/kak-moshenniki-obmanyvaiut-s-pokupkoi-tcvetov-k-1-sentiabria"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d82377755",
+   "title": "Какой смартфон на Android купить в 2026 году: 15 флагманских и бюджетных моделей",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/articles/2026/08/25/kakoy-smartfon-na-android-vybrat-v-2026-godu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d46746310",
+   "title": "Какие здания с историей продадут тюменские власти",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053121347"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d17339317",
+   "title": "Российский проект “Робатур” привлек инвестиции от университетской стартап-студии “Южная фабрика стартапов”, созданной в рамках ФП “Технологии”. Об этом “Русскому Венчуру” сообщил представитель компани",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7684"
+    ]
+   ],
+   "sum": "8 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский проект “Робатур”",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский проект “Робатур”",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
