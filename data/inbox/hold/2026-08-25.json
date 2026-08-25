@@ -3948,63 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d50095467",
-   "title": "Россиянки резко нарастили покупки меда перед Медовым Спасом",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260825/rossijanki-872642788.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29435906",
-   "title": "Свердловские магазины впервые не будут продавать алкоголь в День знаний",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053121166"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88291094",
+   "draft_id": "d26905136",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -4042,6 +3986,119 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что ««Сбер» планирует выкупить на торгах лизинговую компанию «Век» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d89060469",
+   "title": "Эксперимент по продаже лекарств в передвижных аптеках в отдаленных селах начнется 1 сентября",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1111098"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d81391803",
+   "title": "Фермеры из Таджикистана начали продавать свою продукцию через Agromarket",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260825/agromarket-872644442.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58309764",
+   "title": "В Измайлове выставили на торги крупное помещение для бизнеса",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/8/25/v-izmajlove-vystavili-na-torgi-krupnoe-pomeshhenie"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81141661",
+   "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
+   "date": "2026-08-24",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7682"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
