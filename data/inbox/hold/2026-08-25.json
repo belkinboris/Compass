@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d79506787",
+   "draft_id": "d67454018",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d64712852",
+   "draft_id": "d37582483",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,7 +4017,7 @@
    ]
   },
   {
-   "draft_id": "d79113476",
+   "draft_id": "d49996614",
    "title": "«Росатом» завершит процедуру выкупа 51% в ГК «Дело» 28 августа",
    "date": "2026-08-25",
    "src": [
@@ -4047,7 +4047,7 @@
    ]
   },
   {
-   "draft_id": "d22263497",
+   "draft_id": "d37367394",
    "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
    "date": "2026-08-25",
    "src": [
@@ -4088,58 +4088,19 @@
    ]
   },
   {
-   "draft_id": "d76835237",
-   "title": "В каких регионах не будут продавать алкоголь 1 сентября. Карта",
+   "draft_id": "d38648721",
+   "title": "Часть молодежи с доходом в 100 тысяч рублей сочли способной купить жилье самостоятельно",
    "date": "2026-08-25",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/25/08/2026/6a8daca79a794716e6d118e4"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/25/chast-molodezhi-s-dohodom-v-100-tysyach-rubley-sochli-sposobnoy-kupit-zhilie-samostoyatelno/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30107374",
-   "title": "«Манчестер Юнайтед» приобрел полузащитника «Брайтона»",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260825/futbol-2113145180.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-25",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260825/futbol-2113145180.html"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
