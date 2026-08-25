@@ -64,7 +64,9 @@
    },
    "pending_since": "2026-08-25T10:23:45+00:00",
    "reviewed": "2026-08-25",
-   "buyer": "g9c1a072e"
+   "buyer": "g9c1a072e",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
