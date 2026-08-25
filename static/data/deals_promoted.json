@@ -89677,6 +89677,144 @@
    "reviewed": "2026-08-25",
    "deep_researched": "2026-08-25",
    "added": "2026-08-25"
+  },
+  {
+   "id": "gc7e35605",
+   "date": "2026-08-25",
+   "title": "«Южная фабрика стартапов» инвестировала в робототехнический стартап «Робатур»",
+   "ind": "Искусственный интеллект",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал: Русский Венчур",
+     "https://t.me/rusven/7684"
+    ],
+    [
+     "Телеграм-канал: Южная фабрика стартапов",
+     "https://t.me/s/southernstartupstudio"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "«Робатур» в 2024 году основал победитель конкурса «Студенческий стартап» от Фонда содействия инновациям Александр Абатуров. Проект основан на сенсорных технологиях и призван расширить возможности промышленных роботов. Компания разрабатывает и внедряет роботов, которые заменяют ручной труд на производстве.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Особого внимания заслуживает участие резидента «Южной фабрики стартапов» Александра Абатурова с презентацией компании ООО «Робатур». На площадке выставки Александр представляет уникальную разработку — робота-манипулятора для укладки мягкой пищевой продукции. Компания «Робатур» сфокусирована на внедрении передовых решений в области робототехники и искусственного интеллекта.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "5–8 млн ₽ (по оценке)",
+   "asset": "ООО «Робатур»",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "ООО «Робатур»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://t.me/rusven/7684"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Южная фабрика стартапов",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://t.me/rusven/7684"
+     }
+    ]
+   },
+   "buyer_name": "Южная фабрика стартапов",
+   "reviewed": "2026-08-25",
+   "deep_researched": "2026-08-25",
+   "added": "2026-08-25"
+  },
+  {
+   "id": "gad66fcec",
+   "date": "2026-08-25",
+   "title": "ЗПИФ «Вим недвижимость» купил складской комплекс в Новой Москве",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/ZPIF-Vim-nedvizhimost-kupil-skladskoj-kompleks-v-Novoj-Moskve-87429"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2026/08/25/1223402-vim-sberezheniya-vikupili-u-pik-sklad"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В «Вим сбережениях» факт приобретения данного актива подтвердили, уточнив, что объект соответствует стратегии фонда. Запрос в Parametr остался без ответа.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "ЗПИФ «Вим недвижимость»",
+   "asset": "складской комплекс в Новой Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-25",
+     "title": "Сделка завершена",
+     "note": "Закрытый паевой инвестиционный фонд «Вим недвижимость» под управлением «Вим сбережений» выкупил у входящего в ГК ПИК девелопера Parametr складской комплекс площадью 75 700 кв. м на территории промышленного парка «Кувекино» в д. Евсеево в новой Москве. По…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/ZPIF-Vim-nedvizhimost-kupil-skladskoj-kompleks-v-Novoj-Moskve-87429"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ЗПИФ «Вим недвижимость»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/ZPIF-Vim-nedvizhimost-kupil-skladskoj-kompleks-v-Novoj-Moskve-87429"
+     }
+    ],
+    "target": [
+     {
+      "value": "складской комплекс в Новой Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/ZPIF-Vim-nedvizhimost-kupil-skladskoj-kompleks-v-Novoj-Moskve-87429"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Parametr",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.vedomosti.ru/realty/articles/2026/08/25/1223402-vim-sberezheniya-vikupili-u-pik-sklad"
+     }
+    ]
+   },
+   "seller": "Parametr",
+   "reviewed": "2026-08-25",
+   "deep_researched": "2026-08-25",
+   "added": "2026-08-25"
   }
  ],
  "companies": {
