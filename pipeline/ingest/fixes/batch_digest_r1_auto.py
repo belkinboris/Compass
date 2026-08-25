@@ -330,22 +330,15 @@ FIXES = [
          new='За 2024 год прибыль компании составляет — 432 255 000 ₽, выручка за 2024 год — 1 362 719 000 ₽.',
          quote='За 2024 год прибыль компании составляет — 432 255 000 ₽, выручка за 2024 год — 1 362 719 000 ₽.',
          why='из digest ChatGPT round1, сверено с https://companies.rbc.ru/id/1053703017862-ao-ptitsefabrika-kineshemskaya/'),
-    dict(id='ga58eb450', field='law.struct', old='—',
-         new='По результатам сделки Вертикаль Инвестиции получил более 12,5% акций ПАО «Софтлайн».',
-         quote='По результатам сделки Вертикаль Инвестиции получил более 12,5% акций ПАО «Софтлайн».',
-         why='из digest ChatGPT round1, сверено с https://alumnipartners.ru/projects/8947/'),
-    dict(id='ga58eb450', field='law.terms', old='—',
-         new='Lock up по продаже акций - 2 года после закрытия сделки.',
-         quote='Lock up по продаже акций - 2 года после закрытия сделки.',
-         why='из digest ChatGPT round1, сверено с https://www.interfax.ru/business/1041787'),
-    dict(id='ga58eb450', field='eco.val', old='—',
-         new='Инвестиционный директор BGP Capital Юрий Левицкий оценивает стоимость предприятия до 1,8-2 млрд руб. без учета долгов.',
-         quote='Инвестиционный директор BGP Capital Юрий Левицкий оценивает стоимость предприятия до 1,8-2 млрд руб. без учета долгов.',
-         why='из digest ChatGPT round1, сверено с https://www.vedomosti.ru/business/articles/2025/08/08/1130442-rosspirtprom-priobrel-vodki'),
-    dict(id='ga58eb450', field='eco.target_fin', old='—',
-         new='В 2024 г. его выручка увеличилась на 37,9% до 8,1 млрд рублей, а чистая прибыль упала на 160% (121,6 млн рублей).',
-         quote='В 2024 г. его выручка увеличилась на 37,9% до 8,1 млрд рублей, а чистая прибыль упала на 160% (121,6 млн рублей).',
-         why='из digest ChatGPT round1, сверено с https://www.retail.ru/news/rosspirtprom-priobrel-kontrolnyy-paket-aktsiy-tulskogo-vinokurennogo-zavoda-1911-9-avgusta-2025-267711/'),
+    # ga58eb450/law.struct, law.terms, eco.val, eco.target_fin: ВСЕ
+    # ЧЕТЫРЕ записи сняты 25 августа 2026 — они несли факты трёх чужих
+    # сделок (Sk Capital/«Вертикаль Инвестиции»/Softline — карточка
+    # ge9937266; «Росспиртпром»/Тульский винокуренный завод 1911 —
+    # карточка g3ece5143, где эти же факты уже верно записаны), а не
+    # Русал/Pioneer Aluminium. Ни один из указанных в `why` источников
+    # не упоминает Русал, Pioneer, глинозём или Индию — проверено
+    # прямым чтением каждого (WebFetch). См.
+    # pipeline/fix_rusal_pioneer_alumina_misattribution.py.
     dict(id='g68975b9d', field='law.appr', old='Публично не сообщалось',
          new='Сделка полностью закрыта и прошла все регуляторные одобрения, ее условия не раскрываются.',
          quote='Сделка полностью закрыта и прошла все регуляторные одобрения, ее условия не раскрываются.',
@@ -859,38 +852,11 @@ FIXES = [
          new=['РБК Компании', 'https://companies.rbc.ru/id/1053703017862-ao-ptitsefabrika-kineshemskaya/'],
          quote='За 2024 год прибыль компании составляет — 432 255 000 ₽, выручка за 2024 год — 1 362 719 000 ₽.',
          why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['alumnipartners.ru', 'https://alumnipartners.ru/projects/8947/'],
-         quote='По результатам сделки Вертикаль Инвестиции получил более 12,5% акций ПАО «Софтлайн».',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['Интерфакс', 'https://www.interfax.ru/business/1041787'],
-         quote='Lock up по продаже акций - 2 года после закрытия сделки.',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['softline.ru', 'https://softline.ru/about/news/pao-softlayn-obyavlyaet-o-roste-po-vsem-klyuchevym-pokazatelyam-po-itogam-2025-goda'],
-         quote='Sk Capital приобрела 10% обыкновенных акций ПАО «Софтлайн» из квазиказначейского пакета на сумму 5 млрд рублей.',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['Коммерсантъ', 'https://www.kommersant.ru/doc/7992454'],
-         quote='ВТБ завершил конкурс по продаже сочинского отеля «Камелия» за 10 млрд руб. и оформляет договоры с покупателем — компанией «Правильные решения».',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['Ведомости', 'https://www.vedomosti.ru/business/articles/2025/08/08/1130442-rosspirtprom-priobrel-vodki'],
-         quote='Инвестиционный директор BGP Capital Юрий Левицкий оценивает стоимость предприятия до 1,8-2 млрд руб. без учета долгов.',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['pravda.ru', 'https://www.pravda.ru/news/economics/2259094-ross-spirt-prom-acquires-tula-distillery/'],
-         quote='Изменения в составе собственников зарегистрированы 7 августа 2025 года.',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['Retail.ru', 'https://www.retail.ru/news/rosspirtprom-priobrel-kontrolnyy-paket-aktsiy-tulskogo-vinokurennogo-zavoda-1911-9-avgusta-2025-267711/'],
-         quote='В 2024 г. его выручка увеличилась на 37,9% до 8,1 млрд рублей, а чистая прибыль упала на 160% (121,6 млн рублей).',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ga58eb450', field='src', old=None,
-         new=['tulapressa.ru', 'https://tulapressa.ru/2026/03/tulskoe-pravitelstvo-vyshlo-iz-sostava-uchreditelej-vinokurennogo-zavoda/'],
-         quote='Эксперты отмечают, что выкуп доли, вероятно, прошел по действительной стоимости — около 200 млн рублей.',
-         why='источник из digest ChatGPT round1'),
+    # ga58eb450/src: восемь записей сняты 25 августа 2026 вместе с
+    # полями выше — все восемь адресов о чужих сделках (Softline/
+    # «Вертикаль Инвестиции», ВТБ/«Камелия», «Росспиртпром»/Тульский
+    # винокуренный завод), ни один не о Русал/Pioneer Aluminium. См.
+    # pipeline/fix_rusal_pioneer_alumina_misattribution.py.
     dict(id='g68975b9d', field='src', old=None,
          new=['Т-Банк', 'https://www.tbank.ru/invest/social/profile/SOKOLOV/59adca64-bb09-4e72-926d-ed02e63dbda3/'],
          quote='Сделка полностью закрыта и прошла все регуляторные одобрения, ее условия не раскрываются.',
