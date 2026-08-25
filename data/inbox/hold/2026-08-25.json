@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d70477153",
+   "draft_id": "d63589614",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d48419360",
+   "draft_id": "d60757678",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,42 +4017,89 @@
    ]
   },
   {
-   "draft_id": "d15530878",
-   "title": "Nebius Group Аркадия Воложа привлекла $5,75 млрд, выпустив конвертируемые облигации. Компания разместила два выпуска конвертируемых облигаций: с купоном 0,5% и погашением в 2030 году на $3,45 млрд, а ",
-   "date": "2026-08-24",
+   "draft_id": "d79627473",
+   "title": "В США и Британии стали продавать меньше одежды больших размеров из-за «Оземпика»",
+   "date": "2026-08-25",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7683"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/08/25/1223591-ssha-i-britanii-stali"
     ]
    ],
-   "sum": "$5,75 млрд",
+   "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-24",
-     "title": "Переговоры",
-     "note": "Nebius Group Аркадия Воложа привлекла $5,75 млрд, выпустив конвертируемые облигации. Компания разместила два выпуска конвертируемых облигаций: с купоном 0,5% и погашением в 2030 году на $3,45 млрд, а также с купоном 4,5% и погашением в 2034 году на $2,3 млрд.…",
-     "source": [
-      "tg:rusven",
-      "https://t.me/rusven/7683"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "Nebius Group Аркадия Воложа",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Nebius Group Аркадия Воложа",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25146010",
+   "title": "ЕК не дал согласия Украине на покупку у США ракет для Patriot",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/08/25/1223579-ek-ne-dal-soglasie"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20453051",
+   "title": "«Росатом» завершит процедуру выкупа 51% в ГК «Дело» 28 августа",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260825/rosatom-872663699.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Правительство одобрило создание СП «Росатома» и DP World» — второе издание, в группу не шлём"
    ]
   }
  ]
