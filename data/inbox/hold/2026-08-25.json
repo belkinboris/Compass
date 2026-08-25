@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d10034504",
+   "draft_id": "d79837931",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d60085253",
+   "draft_id": "d74410705",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,7 +4017,7 @@
    ]
   },
   {
-   "draft_id": "d53453906",
+   "draft_id": "d66302958",
    "title": "«Росатом» завершит процедуру выкупа 51% в ГК «Дело» 28 августа",
    "date": "2026-08-25",
    "src": [
@@ -4047,7 +4047,7 @@
    ]
   },
   {
-   "draft_id": "d59652261",
+   "draft_id": "d26914662",
    "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
    "date": "2026-08-25",
    "src": [
@@ -4088,17 +4088,56 @@
    ]
   },
   {
-   "draft_id": "d49428483",
-   "title": "«Деловая Россия» попросила ЦБ смягчить новые требования к IPO",
+   "draft_id": "d78296547",
+   "title": "Продажи б/у электромобилей в России установили новый рекорд",
    "date": "2026-08-25",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/08/25/1223607-delovaya-rossiya-poprosila"
+     "web:iz.ru",
+     "https://iz.ru/2154893/2026-08-25/prodazhi-bu-elektromobilei-v-rossii-ustanovili-novyi-rekord"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-25",
+     "title": "Переговоры",
+     "note": "В июле 2026 года в России было приобретено 3646 электромобилей с пробегом, что в 2,9 раза превышает показатель аналогичного периода прошлого года. Вторичный рынок электрокаров впервые в истории наблюдений преодолел планку в 3 тыс. проданных машин за месяц…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2154893/2026-08-25/prodazhi-bu-elektromobilei-v-rossii-ustanovili-novyi-rekord"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49318964",
+   "title": "Киев вывозит и перепродает мощи православных святых, заявили в МИД",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260825/kiev-2113137262.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4116,13 +4155,13 @@
    ]
   },
   {
-   "draft_id": "d76630119",
-   "title": "Как мошенники обманывают с покупкой цветов к 1 сентября",
+   "draft_id": "d22725889",
+   "title": "RENI отчиталась за I п. 2026 г. — результат от страховых услуг уполовинился, инвестиционная часть в минусе, но портфель растёт, а buyback работает",
    "date": "2026-08-25",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2154826/video/kak-moshenniki-obmanyvaiut-s-pokupkoi-tcvetov-k-1-sentiabria"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1343822.php"
     ]
    ],
    "sum": null,
@@ -4137,7 +4176,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Страхование",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
@@ -4145,89 +4184,98 @@
    ]
   },
   {
-   "draft_id": "d82377755",
-   "title": "Какой смартфон на Android купить в 2026 году: 15 флагманских и бюджетных моделей",
+   "draft_id": "d21196929",
+   "title": "Россияне купили рекордное количество автомобилей одного вида",
    "date": "2026-08-25",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/articles/2026/08/25/kakoy-smartfon-na-android-vybrat-v-2026-godu/"
+     "https://lenta.ru/news/2026/08/25/rossiyane-kupili-rekordnoe-kolichestvo-odnogo-vida-avtomobiley/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d46746310",
-   "title": "Какие здания с историей продадут тюменские власти",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053121347"
-    ]
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-25",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/08/25/rossiyane-kupili-rekordnoe-kolichestvo-odnogo-vida-avtomobiley/"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "рекордное количество автомобилей одного вида",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d17339317",
-   "title": "Российский проект “Робатур” привлек инвестиции от университетской стартап-студии “Южная фабрика стартапов”, созданной в рамках ФП “Технологии”. Об этом “Русскому Венчуру” сообщил представитель компани",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7684"
-    ]
-   ],
-   "sum": "8 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российский проект “Робатур”",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российский проект “Робатур”",
+    "asset": "рекордное количество автомобилей одного вида",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d22950541",
+   "title": "В Европарламенте заявили о сложностях с покупкой Patriot для Украины",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/25/v-evroparlamente-zayavili-o-slozhnostyah-s-pokupkoy-patriot-dlya-ukrainy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85024977",
+   "title": "Михаил Мишустин подписал постановление о запуске эксперимента по продаже лекарств в передвижных аптечных пунктах (ПАП). Премьер-министр дал старт новому важнейшему механизму доставки лекарств в сёла и",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/7922"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
