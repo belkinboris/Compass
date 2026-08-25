@@ -2047,35 +2047,6 @@
    ]
   },
   {
-   "draft_id": "d71501184",
-   "title": "Минфин США продлил до 19 сентября срок продажи зарубежных активов ЛУКОЙЛа",
-   "date": "2026-08-20",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8894076"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d66380536",
    "title": "Суд в Москве признал запрещенной информацию об аренде и продаже банковских карт",
    "date": "2026-08-20",
@@ -3948,7 +3919,7 @@
    ]
   },
   {
-   "draft_id": "d67454018",
+   "draft_id": "d27341447",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3960,7 @@
    ]
   },
   {
-   "draft_id": "d37582483",
+   "draft_id": "d60260309",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,7 +3988,7 @@
    ]
   },
   {
-   "draft_id": "d49996614",
+   "draft_id": "d60475861",
    "title": "«Росатом» завершит процедуру выкупа 51% в ГК «Дело» 28 августа",
    "date": "2026-08-25",
    "src": [
@@ -4047,7 +4018,7 @@
    ]
   },
   {
-   "draft_id": "d37367394",
+   "draft_id": "d45012510",
    "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
    "date": "2026-08-25",
    "src": [
@@ -4088,13 +4059,137 @@
    ]
   },
   {
-   "draft_id": "d38648721",
-   "title": "Часть молодежи с доходом в 100 тысяч рублей сочли способной купить жилье самостоятельно",
+   "draft_id": "d88236888",
+   "title": "Аналитики выяснили, какие смартфоны чаще всего покупают школьникам",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6a8db2b2e8b1fdafd616230c"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Аналитики выяснили, какие смартфоны чаще всего",
+   "asset": "школьники",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Аналитики выяснили, какие смартфоны чаще всего",
+    "asset": "школьники",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d58974392",
+   "title": "50% крупных российских компаний планируют нарастить инвестиции в ИИ",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/838253"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-25",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/838253"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54220969",
+   "title": "Производитель умных колец Oura хочет привлечь до $3 млрд на IPO: компания может выйти на биржу уже в сентябре",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/proizvoditel-umnyh-kolec-oura-hochet-privlech-do-3-mlrd-na-ipo-kompaniya-mozhet-vyjti-na-birzhu-uzhe-v-sentyabre/"
+    ]
+   ],
+   "sum": "$3 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d61896715",
+   "title": "«Аэроэкспресс» запустит опцию покупки билетов за цифровые рубли",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260825/aeroekspress-2113166086.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33324695",
+   "title": "Дочь Бони попросила купить ей седло почти за миллион рублей",
    "date": "2026-08-25",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/25/chast-molodezhi-s-dohodom-v-100-tysyach-rubley-sochli-sposobnoy-kupit-zhilie-samostoyatelno/"
+     "https://lenta.ru/news/2026/08/25/doch-boni-poprosila-kupit-ey-sedlo-pochti-za-million-rubley/"
     ]
    ],
    "sum": null,
