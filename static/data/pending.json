@@ -67,6 +67,85 @@
    "buyer": "g9c1a072e",
    "draft_sent": true,
    "post_draft_sent": true
+  },
+  {
+   "id": "g8d7794d0",
+   "date": "2026-08-21",
+   "title": "«Прииск Соловьевский» купил золотодобывающую компанию «Кодар» в Забайкалье у структуры с китайским капиталом",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Золото и технологии",
+     "https://zolteh.ru/news/priisk_solovevskiy_stal_vladeltsem_kompanii_s_dvumya_poiskovymi_litsenziyami_v_zabaykale/"
+    ],
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7316"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "ООО «Кодар» зарегистрировано в Чите в июне 2020 года. Компания располагает двумя действующими лицензиями на геологическое изучение недр, включающее поиски и оценку месторождений полезных ископаемых. Лицензия ЧИТ 04252 БП действует до 28 февраля 2028 года. Вторая лицензия — ЧИТ 030208 БП — выдана 28 декабря 2024 года и действует до 28 декабря 2029 года.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Таким образом, вместе с ООО «Кодар» «Прииск Соловьевский» получил контроль над двумя геологоразведочными активами в Забайкальском крае.",
+    "context": "«Прииск Соловьевский» уже ведет золотодобычу в Забайкальском крае: компания работает в Карымском, Читинском и Шилкинском районах и эксплуатирует рудник Арчикой. В Амурской области предприятие ведет работы в Сковородинском и Тындинском районах, включая Соловьевский рудник. По итогам 2025 года «Прииск Соловьевский» добыл 5 080,3 кг золота, увеличив производство на 3% по сравнению с предыдущим годом. Условия перехода 100% доли, в том числе стоимость сделки, в открытых источниках не раскрываются.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Прииск Соловьевский»",
+   "asset": "100% ООО «Кодар»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-21",
+     "title": "Сделка завершена",
+     "note": "Изменение в составе собственников ООО «Кодар» зарегистрировано 21 августа 2026 года.",
+     "source": [
+      "Золото и технологии",
+      "https://zolteh.ru/news/priisk_solovevskiy_stal_vladeltsem_kompanii_s_dvumya_poiskovymi_litsenziyami_v_zabaykale/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Прииск Соловьевский»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://zolteh.ru/news/priisk_solovevskiy_stal_vladeltsem_kompanii_s_dvumya_poiskovymi_litsenziyami_v_zabaykale/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ООО «Горнопромышленная инвестиционная компания Лункунь»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://zolteh.ru/news/priisk_solovevskiy_stal_vladeltsem_kompanii_s_dvumya_poiskovymi_litsenziyami_v_zabaykale/"
+     }
+    ],
+    "target": [
+     {
+      "value": "100% ООО «Кодар»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://zolteh.ru/news/priisk_solovevskiy_stal_vladeltsem_kompanii_s_dvumya_poiskovymi_litsenziyami_v_zabaykale/"
+     }
+    ]
+   },
+   "pending_since": "2026-08-25T12:24:31+00:00",
+   "seller": "ООО «Горнопромышленная инвестиционная компания Лункунь»",
+   "reviewed": "2026-08-25",
+   "deep_researched": "2026-08-25"
   }
  ]
 }

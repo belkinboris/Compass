@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d75560616",
+   "draft_id": "d70477153",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d44229065",
+   "draft_id": "d48419360",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,200 +4017,36 @@
    ]
   },
   {
-   "draft_id": "d10668201",
-   "title": "«Будет продаваться»: Lada Azimut может войти в топ-10 самых продаваемых авто в РФ — но всё решит цена",
-   "date": "2026-08-25",
+   "draft_id": "d15530878",
+   "title": "Nebius Group Аркадия Воложа привлекла $5,75 млрд, выпустив конвертируемые облигации. Компания разместила два выпуска конвертируемых облигаций: с купоном 0,5% и погашением в 2030 году на $3,45 млрд, а ",
+   "date": "2026-08-24",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/budet-prodavatsya-lada-azimut-mozhet-vojti-v-top-10-samyh-prodavaemyh-avto-v-rf-no-vsyo-reshit-cena/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61361073",
-   "title": "СБЕРБАНК. Как Лосепас Инвестицию Инвестировал, или на Пенсию - в 135!",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1343693.php"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "135!",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "135!",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d35246045",
-   "title": "Производитель умных колец Oura планирует привлечь до $3 млрд в ходе IPO",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/301200"
-    ]
-   ],
-   "sum": "$3 млрд",
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-25",
-     "title": "Переговоры",
-     "note": "Компания подала заявку на IPO в мае Сообщение Производитель умных колец Oura планирует привлечь до $3 млрд в ходе IPO появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/301200"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d62753301",
-   "title": "Nebius привлекла $5,75 млрд через размещение конвертируемых облигаций",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/301167"
+     "tg:rusven",
+     "https://t.me/rusven/7683"
     ]
    ],
    "sum": "$5,75 млрд",
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Nebius",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Nebius",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d70238601",
-   "title": "Росимущество нарастило поступления в бюджет от продажи госактивов",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265471/"
-    ]
-   ],
-   "sum": "307 млрд ₽",
-   "type": "M&A",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
-     "date": "2026-08-25",
+     "date": "2026-08-24",
      "title": "Переговоры",
-     "note": "Ведомство уже перечислило 307 млрд руб. доходов от управления имуществом, на ближайшее время запланированы сделки на еще на 70 млрд руб.",
+     "note": "Nebius Group Аркадия Воложа привлекла $5,75 млрд, выпустив конвертируемые облигации. Компания разместила два выпуска конвертируемых облигаций: с купоном 0,5% и погашением в 2030 году на $3,45 млрд, а также с купоном 4,5% и погашением в 2034 году на $2,3 млрд.…",
      "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/265471/"
+      "tg:rusven",
+      "https://t.me/rusven/7683"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Nebius Group Аркадия Воложа",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Профессиональные услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90203050",
-   "title": "Россиянка продала человека за колбасу",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/25/rossiyanka-prodala-cheloveka-za-kolbasu/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-25",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/08/25/rossiyanka-prodala-cheloveka-za-kolbasu/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "человек за колбасу",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "человек за колбасу",
+    "asset": "Nebius Group Аркадия Воложа",
     "seller": null
    },
    "ind": null,
