@@ -501,15 +501,19 @@ def render(deal, companies, updates=(), today=None, fin=None):
 
     # ПОКУПАТЕЛЬ — тоже с сутью (профиль компании либо `eco.context`, где эта
     # сторона обычно и описывается), плюс его собственная финстрока (П7-9).
+    # НАЙДЕНО ВЛАДЕЛЬЦЕМ 25 августа (Pridex/Multispace, ge283bafc): без
+    # проверки на пустой `buyer` строка «Покупатель: …» печаталась из ОДНОЙ
+    # детали (eco.context), когда имени стороны не было вовсе, — читатель
+    # видел «Покупатель: В периметр сделки вошли четыре объекта…», хотя это
+    # предложение вообще не о покупателе. Деталь без имени не идентифицирует
+    # сторону — строка обязана нести хотя бы имя.
     buyer_novel = bool(buyer) and has_novelty(buyer, reference)
     buyer_detail = _party_detail(deal, companies, 'buyer', 'context',
-                                  reference + (' ' + buyer if buyer else ''))
-    if buyer_novel and buyer_detail:
-        buyer_line = 'Покупатель: %s — %s' % (esc(buyer), esc(buyer_detail))
-    elif buyer_novel:
+                                  reference + ' ' + buyer) if buyer else None
+    if buyer and (buyer_novel or buyer_detail):
         buyer_line = 'Покупатель: %s' % esc(buyer)
-    elif buyer_detail:
-        buyer_line = 'Покупатель: %s' % esc(buyer_detail)
+        if buyer_detail:
+            buyer_line += ' — %s' % esc(buyer_detail)
     else:
         buyer_line = None
     buyer_fin = fin.get('buyer')
