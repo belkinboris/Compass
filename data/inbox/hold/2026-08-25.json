@@ -3948,7 +3948,7 @@
    ]
   },
   {
-   "draft_id": "d64351748",
+   "draft_id": "d75560616",
    "title": "«Сбер» может купить национализированный «Вектор Рейл» Об объекте сделки 100% акций группы «Вектор Рейл» — крупного железнодорожного холдинга, специализирующегося на лизинге и эксплуатации грузового ва",
    "date": "2026-08-25",
    "src": [
@@ -3989,7 +3989,7 @@
    ]
   },
   {
-   "draft_id": "d31009565",
+   "draft_id": "d44229065",
    "title": "The Games Fund, основанный россиянами, вновь вложился во турецкую игровую студию Spektra Games . Раунд возглавил APY Ventures при участии Ludus.  Spektra Games была создана в 2020 году. Студия разраба",
    "date": "2026-08-24",
    "src": [
@@ -4017,133 +4017,13 @@
    ]
   },
   {
-   "draft_id": "d67901199",
-   "title": "Bloomberg: производитель смарт-колец Oura запланировал IPO на сентябрь 2026 года",
+   "draft_id": "d10668201",
+   "title": "«Будет продаваться»: Lada Azimut может войти в топ-10 самых продаваемых авто в РФ — но всё решит цена",
    "date": "2026-08-25",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8907816"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-25",
-     "title": "Переговоры",
-     "note": "Американо-финская компания Oura Health, производящая умные кольца Oura Ring, собирается провести IPO уже в сентябре 2026 года. Об этом написало агентство Bloomberg со ссылкой на неназванные источники.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8907816"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d23936775",
-   "title": "WSJ: владелец Baskin Robbins и Dunkin` запланировал IPO до конца 2026 года",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8907790"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-25",
-     "title": "Переговоры",
-     "note": "Американская компания Inspire Brands — владелец сетей кафе с мороженым Baskin Robbins и пончиковых Dunkin` — собирается провести IPO до конца текущего года. Об этом написала The Wall Street Journal (WSJ) со ссылкой на источники.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8907790"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27000167",
-   "title": "Криптовалютная финтех-платформа Fasset привлекла $68 млн и достигла оценки в $1 млрд",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/kriptovalyutnaya-finteh-platforma-fasset-privlekla-68-mln-i-dostigla-otsenki-v-1-mlrd/"
-    ]
-   ],
-   "sum": "$68 млн",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-25",
-     "title": "Переговоры",
-     "note": "Финтех-стартап Fasset привлек $68 млн от SBI Group при оценке $1 млрд и получил статус единорога. Подробности о развитии платформы стейблкоин-необанкинга, инфраструктуре Own Network и планах на международную экспансию.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/kriptovalyutnaya-finteh-platforma-fasset-privlekla-68-mln-i-dostigla-otsenki-v-1-mlrd/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Криптовалютная финтех-платформа Fasset",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Криптовалютная финтех-платформа Fasset",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d12661842",
-   "title": "Курганским семьям расширили поддержку для приобретения жилья: что изменится",
-   "date": "2026-08-25",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053121255"
+     "web:rb.ru",
+     "https://rb.ru/news/budet-prodavatsya-lada-azimut-mozhet-vojti-v-top-10-samyh-prodavaemyh-avto-v-rf-no-vsyo-reshit-cena/"
     ]
    ],
    "sum": null,
@@ -4161,8 +4041,182 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61361073",
+   "title": "СБЕРБАНК. Как Лосепас Инвестицию Инвестировал, или на Пенсию - в 135!",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1343693.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "135!",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "135!",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d35246045",
+   "title": "Производитель умных колец Oura планирует привлечь до $3 млрд в ходе IPO",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/301200"
+    ]
+   ],
+   "sum": "$3 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-25",
+     "title": "Переговоры",
+     "note": "Компания подала заявку на IPO в мае Сообщение Производитель умных колец Oura планирует привлечь до $3 млрд в ходе IPO появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/301200"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d62753301",
+   "title": "Nebius привлекла $5,75 млрд через размещение конвертируемых облигаций",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/301167"
+    ]
+   ],
+   "sum": "$5,75 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Nebius",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Nebius",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d70238601",
+   "title": "Росимущество нарастило поступления в бюджет от продажи госактивов",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265471/"
+    ]
+   ],
+   "sum": "307 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-25",
+     "title": "Переговоры",
+     "note": "Ведомство уже перечислило 307 млрд руб. доходов от управления имуществом, на ближайшее время запланированы сделки на еще на 70 млрд руб.",
+     "source": [
+      "web:pravo.ru",
+      "https://pravo.ru/news/265471/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90203050",
+   "title": "Россиянка продала человека за колбасу",
+   "date": "2026-08-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/08/25/rossiyanka-prodala-cheloveka-za-kolbasu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-25",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/08/25/rossiyanka-prodala-cheloveka-za-kolbasu/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "человек за колбасу",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "человек за колбасу",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
