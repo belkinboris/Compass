@@ -4059,198 +4059,7 @@
    ]
   },
   {
-   "draft_id": "d34398665",
-   "title": "Вучич допустил завершение сделки «Газпром нефти» по продаже доли NIS в сентябре",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8909879"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27318837",
-   "title": "МИД Швейцарии допустил новый раунд переговоров по Украине в Женеве",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8909648"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88775087",
-   "title": "The Information: Nvidia покупает платформу Hugging Face за $12,9 млрд",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8909581"
-    ]
-   ],
-   "sum": "$12,9 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-27",
-     "title": "Переговоры",
-     "note": "Компания Nvidia договорилась о покупке платформы Hugging Face. По данным издания The Information, которое ссылается на осведомленный источник, Nvidia может заплатить за этот популярный репозиторий для открытых языковых моделей $12,9 млрд.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8909581"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "платформа Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "платформа Hugging Face",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d16363430",
-   "title": "«Т-Технологии» установили максимальный объем допэмиссии для консолидации «Точки»",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8909418"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66111755",
-   "title": "Axios: США близки к сделке по приобретению части нефтяных ресурсов Венесуэлы",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/08/27/1224300-ssha-blizki-k-sdelke"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59433473",
-   "title": "TotalEnergies завершила выход из проекта «Арктик СПГ – 2»",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/08/27/1224105-totalenergies-zavershila"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-27",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/08/27/1224105-totalenergies-zavershila"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45877164",
+   "draft_id": "d70764158",
    "title": "«Т-технологии» предложили объем допэмиссии для консолидации банка «Точка»",
    "date": "2026-08-27",
    "src": [
@@ -4273,42 +4082,12 @@
    },
    "ind": "Банки",
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Т-Технологии» установили максимальный объем допэмиссии для » — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d15149673",
-   "title": "Сергей Шишкарев не согласился с продажей 51% в ГК «Дело» без соблюдения условий",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Sergej-Shishkarev-ne-soglasilsya-s-prodazhej-51-v-GK-Delo-bez-soblyudeniya-uslovij-87441"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d65807567",
+   "draft_id": "d84930481",
    "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
    "date": "2026-08-26",
    "src": [
@@ -4349,337 +4128,7 @@
    ]
   },
   {
-   "draft_id": "d79205297",
-   "title": "Каждый четвертый житель крупных городов уже покупает одежду на ресейле",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-27_kazhdyj_chetvertyj_zhitel"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Каждый четвертый житель крупных городов уже",
-   "asset": "одежда на ресейле",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Каждый четвертый житель крупных городов уже",
-    "asset": "одежда на ресейле",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24195299",
-   "title": "SoftBank ведёт переговоры о покупке контроля в производителе человекоподобных роботов 1X с инвестициями от OpenAI — The Information",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/tech/3100287-softbank-peregovory-pokupka-1x-robotov?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-27",
-     "title": "Переговоры",
-     "note": "Компания уже несколько лет покупает производителей роботов и инвестирует в них.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/tech/3100287-softbank-peregovory-pokupka-1x-robotov?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64004383",
-   "title": "Стартап 23-летнего предпринимателя привлек $250 млн на персонального ИИ-агента",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/startap-23-letnego-predprinimatelya-privlek-250-mln-na-personalnogo-ii-agenta/"
-    ]
-   ],
-   "sum": "$250 млн",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-27",
-     "title": "Переговоры",
-     "note": "ИИ-стартап Instinct, чей помощник помогает планировать свадьбы, поездки и другие повседневные дела, привлек $250 млн при оценке компании в $2,5 млрд.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/startap-23-letnego-predprinimatelya-privlek-250-mln-na-personalnogo-ii-agenta/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Стартап 23-летнего предпринимателя",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Стартап 23-летнего предпринимателя",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g8b03762d (общие редкие слова: 23, ии) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d31804313",
-   "title": "«Забытый» стартап Stability AI привлекл $76 млн от компаний из индустрии развлечений",
-   "date": "2026-08-26",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/zabytyj-startap-stability-ai-privlekl-76-mln-ot-kompanij-iz-industrii-razvlechenij/"
-    ]
-   ],
-   "sum": "$76 млн",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-26",
-     "title": "Переговоры",
-     "note": "Stability AI привлекла $76 млн от Universal Music, Sony Music, Warner Music и EA — подробности Series B, судебные споры с Getty Images и планы компании по развитию генеративного ИИ.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/zabytyj-startap-stability-ai-privlekl-76-mln-ot-kompanij-iz-industrii-razvlechenij/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "«Забытый» стартап Stability AI",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "«Забытый» стартап Stability AI",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d22288330",
-   "title": "Хуснуллин: закон о рассрочке поможет простимулировать продажи новостроек",
-   "date": "2026-08-26",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260826/khusnullin-2113250266.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d11825733",
-   "title": "Продажа элитных новостроек Москвы может занять восемь лет",
-   "date": "2026-08-26",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260826/prodazha-2112325355.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51558652",
-   "title": "Риелторы рассчитали минимальный доход для покупки однушки в Москве",
-   "date": "2026-08-26",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260826/dokhod-2112309498.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31028337",
-   "title": "Каждый четвёртый житель крупных городов покупает одежду на ресейле: чаще всего — ради экономии",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/kazhdyj-chetvyortyj-zhitel-krupnyh-gorodov-pokupaet-odezhdu-na-resejle-chashe-vsego-radi-ekonomii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Каждый четвёртый житель крупных городов",
-   "asset": "одежда на ресейле: чаще всего — ради экономии",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Каждый четвёртый житель крупных городов",
-    "asset": "одежда на ресейле: чаще всего — ради экономии",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d31253001",
-   "title": "Продажи — на маркетплейсе, покупатель — у бренда: как устроен независимый ретейл",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/reviews/prodazhi-na-marketplejse-pokupatel-u-brenda-kak-ustroen-nezavisimyj-retejl/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d54666329",
-   "title": "DeepSeek привлечёт $7,4 млрд в новом раунде финансирования — оценка ИИ-стартапа может вырасти до $74 млрд",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/deepseek-privlechyot-74-mlrd-v-novom-raunde-finansirovaniya-ocenka-ii-startapa-mozhet-vyrasti-do-74-mlrd/"
-    ]
-   ],
-   "sum": "$7,4 млрд",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-27",
-     "title": "Переговоры",
-     "note": "Китайский ИИ-стартап DeepSeek вскоре закроет новый раунд финансирования при оценке около $74 млрд, сообщает The Wall Street Journal. Компания планирует привлечь около $7,4 млрд. Средства направят на исследования и разработку, а также расширение вычислительной…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/deepseek-privlechyot-74-mlrd-v-novom-raunde-finansirovaniya-ocenka-ii-startapa-mozhet-vyrasti-do-74-mlrd/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d39084534",
+   "draft_id": "d88143359",
    "title": "Лавров прокомментировал просьбу Пашиняна продать Армении концессию на ж/д",
    "date": "2026-08-28",
    "src": [
@@ -4707,46 +4156,7 @@
    ]
   },
   {
-   "draft_id": "d52406812",
-   "title": "Nvidia договорилась о покупке Hugging Face за $12,9 млрд",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/301691"
-    ]
-   ],
-   "sum": "$12,9 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-27",
-     "title": "Переговоры",
-     "note": "При этом переговоры между компаниями могут сорваться, заявил источник Business Insider Сообщение Nvidia договорилась о покупке Hugging Face за $12,9 млрд появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/301691"
-     ]
-    }
-   ],
-   "buyer_name": "Nvidia",
-   "asset": "Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "Hugging Face",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d66881240",
+   "draft_id": "d25477406",
    "title": "Топ-менеджмент «Т-технологий» определил параметры допэмиссии для консолидации «Точки»",
    "date": "2026-08-27",
    "src": [
@@ -4783,11 +4193,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Т-Технологии» установили максимальный объем допэмиссии для » — второе издание, в группу не шлём"
+    "та же новость, что ««Т-технологии» предложили объем допэмиссии для консолидации » — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d31906144",
+   "draft_id": "d28566532",
    "title": "FT: экс-сотрудники «дочки» ГПБ в Люксембурге заработали на покупке евробондов «Газпрома»",
    "date": "2026-08-26",
    "src": [
@@ -4817,121 +4227,7 @@
    ]
   },
   {
-   "draft_id": "d44241181",
-   "title": "ВТБ вводит кешбэк до 5% за покупки на Wildberries",
-   "date": "2026-08-26",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/301387"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86553253",
-   "title": "Участника СВО обманули на 3 миллиона рублей при покупке авто",
-   "date": "2026-08-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/28/uchastnika-svo-obmanuli-na-3-milliona-rubley-pri-pokupke-avto/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15386e04 (общие редкие слова: миллио, покупк) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d34274864",
-   "title": "Россиянам рассказали о возможностях цифрового рубля при зарубежных покупках",
-   "date": "2026-08-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/28/rossiyanam-rasskazali-o-vozmozhnostyah-tsifrovogo-rublya-pri-zarubezhnyh-pokupkah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81891235",
-   "title": "Сон назвали лучшей инвестицией в здоровье мозга",
-   "date": "2026-08-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/28/son-i-pamyat/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d11398228",
+   "draft_id": "d89274616",
    "title": "«Два отеля под одним управлением»: в Соликамске продают прибыльный гостиничный комплекс",
    "date": "2026-08-28",
    "src": [
@@ -4959,7 +4255,7 @@
    ]
   },
   {
-   "draft_id": "d33931632",
+   "draft_id": "d45357154",
    "title": "В центре Перми продают торговый центр, занятый ювелирным бутиком",
    "date": "2026-08-27",
    "src": [
@@ -4987,176 +4283,7 @@
    ]
   },
   {
-   "draft_id": "d65717398",
-   "title": "Акушерок Петербурга обвиняют в продаже младенцев за границу",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053121990"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33847278",
-   "title": "Купить и не разориться: где в Тюмени выбрать школьную одежду",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053121849"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80243168",
-   "title": "Аромат продает: как запах влияет на решения покупателей",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/27/aromat-prodaet-kak-zapah-vliyaet-na-resheniya-pokupatelej"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "как запах влияет на решения покупателей",
-   "seller": "Аромат",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "как запах влияет на решения покупателей",
-    "seller": "Аромат"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52641336",
-   "title": "Московские предприниматели посетили семинар по покупке помещений",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/8/27/moskovskij-biznes-nauchili-vybirat-pomeshheniya-dlya-torgov-pered-aukczionom"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d40094680",
-   "title": "Билеты на концерты будут продавать по-новому? Что предложили после скандала с шоу Канье Уэста",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/entertainment/2026/08/28/76611579/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89816218",
-   "title": "Вакансия: Инвестиционный менеджер на buy-side в Arctic Invest https://hh.ru/vacancy/131928967",
-   "date": "2026-08-27",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7324"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46117754",
+   "draft_id": "d84675205",
    "title": "Российский проект “Робатур” привлек инвестиции от университетской стартап-студии “Южная фабрика стартапов”, созданной в рамках ФП “Технологии”. Об этом “Русскому Венчуру” сообщил представитель компани",
    "date": "2026-08-25",
    "src": [
@@ -5184,7 +4311,7 @@
    ]
   },
   {
-   "draft_id": "d52468928",
+   "draft_id": "d39586218",
    "title": "Ruvento Ventures, который основали Вячеслав Солоницын и Алекс Тох, вложился в индийский стартап Wippi . Раунд на $1,2 млн возглавил 12 Flags при участии Warmup Ventures и Ventana Ventures. Wippi был о",
    "date": "2026-08-26",
    "src": [
@@ -5212,7 +4339,7 @@
    ]
   },
   {
-   "draft_id": "d57389746",
+   "draft_id": "d88214007",
    "title": "Пример WEGOSTY: как стартап привлек более 20 млн рублей и получил фидбэк от экспертов для масштабирования? WEGOSTY - платформа на основе искусственного интеллекта для ресторанов, отелей и игроков тури",
    "date": "2026-08-27",
    "src": [
@@ -5241,30 +4368,48 @@
    ]
   },
   {
-   "draft_id": "d14413265",
-   "title": "VERBA LEGAL сообщает, что ее команда завершила сопровождение сделки по приобретению акций одного из крупнейших морских портов Дальнего Востока Команда VERBA LEGAL завершила сопровождение сделки по при",
-   "date": "2026-08-26",
+   "draft_id": "d88398922",
+   "title": "Маркетинговые тренды фитнес-индустрии: почему сервис продаёт лучше рекламы",
+   "date": "2026-08-28",
    "src": [
     [
-     "tg:LawFirms",
-     "https://t.me/LawFirms/11307"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/28/marketingovie-trendi-fitnes"
     ]
    ],
-   "sum": "45 млрд ₽",
+   "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-26",
-     "title": "Сделка завершена",
-     "note": "VERBA LEGAL сообщает, что ее команда завершила сопровождение сделки по приобретению акций одного из крупнейших морских портов Дальнего Востока Команда VERBA LEGAL завершила сопровождение сделки по приобретению ОАО «Владморрыбпорт», а также ряда связанных с…",
-     "source": [
-      "tg:LawFirms",
-      "https://t.me/LawFirms/11307"
-     ]
-    }
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "лучше рекламы",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "лучше рекламы",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d30911259",
+   "title": "Робот робота не продаст: потребитель хочет эмпатии и «живого» сервиса",
+   "date": "2026-08-28",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/28/robot-robota-neprodast-potrebitel"
+    ]
    ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -5273,11 +4418,38 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Порты и инфраструктура",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g998e5eb5 (общие редкие слова: дальне, заверш) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69540666",
+   "title": "В РФ предложили изменить правила продажи билетов из-за скандала с Канье Уэстом",
+   "date": "2026-08-28",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/08/28/v-rf-predlozhili-izmenit-pravila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
