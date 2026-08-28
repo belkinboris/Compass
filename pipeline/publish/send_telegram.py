@@ -77,6 +77,11 @@ message_id в `telegram_posts` (не `null`) И которая попала в
     python3 pipeline/publish/send_telegram.py              # сухой прогон
     python3 pipeline/publish/send_telegram.py --write      # отправить свою долю
     python3 pipeline/publish/send_telegram.py --write --now  # отправить всё сразу
+    python3 pipeline/publish/send_telegram.py --write --skip gX1 gX2
+        # П3-10: отправить всё, КРОМЕ перечисленных сделок — решение читающего
+        # ПОСЛЕ того, как он прочёл полные тексты в сухом прогоне (см. ниже),
+        # не механическая находка check_post.py. Пропущенные не помечаются
+        # отправленными: следующий прогон покажет их снова.
 """
 import json
 import math
@@ -190,6 +195,17 @@ def post_message(client, token, chat_id, text):
     if not body.get('ok'):
         raise TelegramError('sendMessage: %s' % (body.get('description') or r.text[:200]))
     return body['result']['message_id']
+
+
+def is_message_gone(error_text):
+    """Telegram отвечает так, когда сообщение удалено из канала (человеком —
+    ни один наш скрипт message_id не трогает) или сам канал/чат недоступен
+    боту, — а не когда есть проблема с СЕТЬЮ или ТОКЕНОМ. Отличать нужно:
+    остальные ошибки правки — повод остановиться и разобраться, эта —
+    повод спросить человека, что делать с конкретной карточкой, и продолжить
+    прогон дальше (П4-10)."""
+    t = str(error_text or '').lower()
+    return 'message to edit not found' in t or 'chat not found' in t
 
 
 def edit_message(client, token, chat_id, message_id, text):
@@ -360,12 +376,18 @@ def plan_milestones(deals, stage_posts, decisions, now):
     return send, hold, discard_ids, sent_decision_ids
 
 
-def main(write, ignore_pace=False):
+def main(write, ignore_pace=False, skip_ids=frozenset()):
     """`ignore_pace` — то же, что ключ `--now`, но параметром.
 
     Нужен тестам: они проверяют лимит сообщений за прогон и правило бэклога, а
     не дневное окно, и без явного обхода темпа проходили бы только с 10 до 21
-    по Москве — то есть падали бы по вечерам, ничего при этом не сломавшись."""
+    по Москве — то есть падали бы по вечерам, ничего при этом не сломавшись.
+
+    `skip_ids` — П3-10: id сделок, которые НЕ уходят в этот прогон, даже если
+    прошли механическую вычитку (`check_post.py`) — решение читающего (рутина
+    публикации ПОСЛЕ того, как прочла полные тексты в сухом прогоне), не
+    ошибка формата. Не помечаются отправленными: следующий прогон увидит их
+    заново, если владелец не решит иначе."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     chat_id = os.environ.get('TELEGRAM_CHANNEL_ID', '') or DEFAULT_CHANNEL
     data = json.load(open(DATA, encoding='utf-8'))
@@ -456,6 +478,16 @@ def main(write, ignore_pace=False):
             flagged.append((did, problems))
             to_edit = [(d, m, t) for d, m, t in to_edit if d != did]
 
+    # П3-10: решение читающего — «эта карточка сейчас не идёт», даже если
+    # механическая вычитка её пропустила. Не помечается отправленной —
+    # следующий прогон увидит её заново, если её не отредактируют иначе.
+    skipped = [did for did, _t in to_send if did in skip_ids] + \
+              [did for did, _m, _t in to_edit if did in skip_ids]
+    if skip_ids:
+        to_send = [(d, t) for d, t in to_send if d not in skip_ids]
+        to_edit = [(d, m, t) for d, m, t in to_edit if d not in skip_ids]
+        to_send_m = [(deal, event, t) for deal, event, t in to_send_m if deal['id'] not in skip_ids]
+
     print('Новых постов: %d, правок существующих: %d, без поста по решению: %d, новых вех: %d'
           % (len(to_send), len(to_edit), len(to_seed), len(to_send_m)))
     if needs_review:
@@ -468,20 +500,36 @@ def main(write, ignore_pace=False):
         print('Вычитка задержала постов: %d (в канал не уйдут, нужен человек).' % len(flagged))
         for did, problems in flagged:
             print('   %s: %s' % (did, '; '.join(problems)))
+    if skipped:
+        print('Пропущено по --skip (%d): %s' % (len(skipped), ', '.join(skipped)))
     if m_flagged:
         print('Вычитка задержала вех: %d.' % len(m_flagged))
         for eid, problems in m_flagged:
             print('   %s: %s' % (eid, '; '.join(problems)))
     if m_hold:
         print('Вех ждут решения/тишины: %d.' % len(m_hold))
+
+    # П3-10: пока пост не отправлен — печатаем его ПОЛНЫЙ текст, а не три
+    # штуки по 400 знаков. Рутина публикации САМА модель: до этой правки
+    # сухой прогон с настоящим токеном печатал только счётчики, и читать
+    # перед отправкой было physически нечего (просьба владельца 25 августа,
+    # «давай читать пост перед публикацией», бриф Этап 10 П3-10).
+    show_full_texts = not write or not token or not chat_id
+    if show_full_texts and (to_send or to_edit or to_send_m):
+        print('\nТЕКСТЫ ДЛЯ ПРОВЕРКИ ПЕРЕД ОТПРАВКОЙ:')
+        for did, text in to_send:
+            print('\n--- новый пост: %s ---\n%s' % (did, text))
+        for did, _mid, text in to_edit:
+            print('\n--- правка поста: %s ---\n%s' % (did, text))
+        for deal, event, text in to_send_m:
+            print('\n--- веха: %s ---\n%s' % (event['id'], text))
+        print('\nПрочитайте тексты выше. Пост со смысловой чушью (сторона не похожа на '
+             'сторону, предложение обрывается на полуслове, число явно не к месту, факт из '
+             'чужого абзаца) не отправляйте: перечислите такие id в `--skip <id> [<id>…]` и '
+             'назовите причину в отчёте.')
+
     if not token or not chat_id:
         print('TELEGRAM_BOT_TOKEN / TELEGRAM_CHANNEL_ID не заданы — не отправляю, только показываю план.')
-        for did, text in to_send[:3]:
-            print('\n--- новый пост: %s ---\n%s' % (did, text[:400]))
-        for did, _mid, text in to_edit[:3]:
-            print('\n--- правка поста: %s ---\n%s' % (did, text[:400]))
-        for _deal, event, text in to_send_m[:3]:
-            print('\n--- веха: %s ---\n%s' % (event['id'], text[:400]))
         return
 
     if not write:
@@ -557,8 +605,9 @@ def main(write, ignore_pace=False):
         batch = augmented
         fns_client.close()
 
+    deals_by_id = {d['id']: d for d in data['deals']}
     client = _client()
-    sent, edited, milestoned, failed = 0, 0, 0, []
+    sent, edited, milestoned, failed, deleted = 0, 0, 0, [], []
     prev_kind = None
     for i, (kind, did, payload) in enumerate(batch):
         if i:
@@ -584,7 +633,17 @@ def main(write, ignore_pace=False):
                 edit_message(client, token, chat_id, mid, text)
                 edited += 1
         except TelegramError as e:
-            failed.append((did, str(e)))
+            # П4-10: удалённый из канала пост (человек убрал его руками — ни
+            # один наш скрипт message_id не трогает) — не такая же ошибка, как
+            # сбой сети или неверный токен. Раньше ЛЮБАЯ TelegramError на
+            # правке просто копилась в общий список и терялась в потоке
+            # отчёта; отдельный список и явная формулировка нужны, чтобы
+            # рутина не пропустила вопрос, требующий решения человека
+            # (перепостить или пометить «без поста»), среди обычных ошибок.
+            if kind == 'edit' and is_message_gone(str(e)):
+                deleted.append((did, payload[0]))
+            else:
+                failed.append((did, str(e)))
 
     for did in to_seed:
         posts[did] = None
@@ -600,7 +659,27 @@ def main(write, ignore_pace=False):
           % (sent, edited, len(to_seed), milestoned, len(failed)))
     for did, err in failed:
         print('  %s: %s' % (did, err))
+    if deleted:
+        print('УДАЛЁННЫЕ ПОСТЫ (%d) — нужно решение человека, не сбой:' % len(deleted))
+        for did, mid in deleted:
+            title = (deals_by_id.get(did) or {}).get('title', did)
+            print('  пост сделки «%s» (%s, message_id %s) удалён из канала — '
+                 'перепостить (снять message_id из telegram_posts и запустить снова) '
+                 'или пометить «без поста»' % (title, did, mid))
+
+
+def parse_skip_ids(argv):
+    """id'ы после `--skip`, до следующего `--`-флага или конца строки —
+    тот же лёгкий разбор без argparse, что уже используется для `--now`."""
+    if '--skip' not in argv:
+        return frozenset()
+    i = argv.index('--skip') + 1
+    ids = []
+    while i < len(argv) and not argv[i].startswith('--'):
+        ids.append(argv[i])
+        i += 1
+    return frozenset(ids)
 
 
 if __name__ == '__main__':
-    main('--write' in sys.argv)
+    main('--write' in sys.argv, skip_ids=parse_skip_ids(sys.argv))
