@@ -1,3 +1,79 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "gabdbe320",
+   "date": "2026-08-28",
+   "title": "Петербургский логистический холдинг «ЮСТА» приобрел кондитерскую фабрику в Кронштадте",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "100% долей в капитале ООО «КФ \"Кронштадтская\"»",
+    "val": "Совокупно стоимость сделки можно оценить в диапазоне от 400–500 млн рублей (300–400 млн — ТД «Аврора» и 100–120 млн — фабрика «Кронштадтская»), считает гендиректор «Infoline-Аналитики» Михаил Бурмистров.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Станислав Бартош отметил, что активы заинтересовали холдинг с точки зрения долгосрочного развития, поэтому быстрой перепродажи или смены профиля приобретенных структур не планируется. ГК нацелена на их интеграцию и сохранение практик.",
+    "context": "Предприятие занимается выпуском зефира, пастилы, суфле, конфет и десертов. Продукция распространяется через крупные торговые сети, маркетплейсы, а также фирменные магазины в ТЦ «Гостиный двор» (Кронштадт) и здании Московского вокзала (Петербург). У компании есть свое представительство в Бишкеке (Кыргызстан). Согласно финотчетности ООО «КФ \"Кронштадтская\"», по итогам 2025 года фирма заработала 446 млн рублей против 374 млн в 2024-м. Чистая прибыль составила 15,3 млн рублей против 6,1 млн рублей.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Петербургский логистический холдинг «ЮСТА»",
+   "asset": "КФ «Кронштадтская»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-28",
+     "title": "Сделка завершена",
+     "note": "Владелец ГК «ЮСТА» Станислав Бартош приобрел у предпринимателя Владислава Теплоухова 100% долей в капитале ООО «КФ \"Кронштадтская\"», на балансе которого числится одноименная кондитерская фабрика. Предприятие занимается выпуском зефира, пастилы, суфле, конфет…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Петербургский логистический холдинг «ЮСТА»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443"
+     }
+    ],
+    "target": [
+     {
+      "value": "КФ «Кронштадтская»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Владислав Теплоухов",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443"
+     }
+    ]
+   },
+   "pending_since": "2026-08-28T08:30:20+00:00",
+   "seller": "Владислав Теплоухов",
+   "sum": "100–120 млн ₽ (по оценке)",
+   "reviewed": "2026-08-28"
+  }
+ ]
 }
