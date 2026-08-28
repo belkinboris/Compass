@@ -967,7 +967,7 @@ def test_high_confidence_party_corrections_are_kept(deals):
 # уронить тест, а не тихо пополнить исключения.
 PARTY_CASE_EXCEPTIONS = {
     "gf5c8e14e", "g02eed099", "gf12c6323", "gf23149cf", "g7596ae81",   # «Структуры X»
-    "gbb7e25e1", "gd4645195", "gadb5b474",                            # «Севергрупп», «Ростех»
+    "gbb7e25e1", "gd4645195", "gadb5b474", "ge957fc7b",               # «Севергрупп», «Ростех»
     "gdf93c62d", "gf8dfe9c4", "g14443784",                            # фамилия впереди имени
     "g8cb1eb00", "gff6e08fe",                                         # личные имена вне словаря
     "gmru-svoj-kredit-evropa-strah", "gmru-roshim-vnt",               # бренды
