@@ -112,7 +112,7 @@ def migrate(payload: dict) -> tuple[dict, list[tuple[str, str, str, str]]]:
     index = aliases(payload)
     changes: list[tuple[str, str, str, str]] = []
     for deal in payload.get("deals", []):
-        buyer, asset, seller = draft.guess_parties(deal.get("title"))
+        buyer, asset, seller, _ = draft.guess_parties(deal.get("title"))
 
         # Автоматически связываем только однозначное точное совпадение с уже
         # существующим профилем. Свободный текст вроде «российские активы ...»

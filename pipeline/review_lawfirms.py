@@ -105,7 +105,7 @@ def gaps(deal, post_text, found_adv):
         new = [f for f in found_adv[0] if f.lower() not in known]
         if new:
             out.append(('консультант', ', '.join(new)))
-    buyer, asset, seller = draft.guess_parties(post_text[:200])
+    buyer, asset, seller, _ = draft.guess_parties(post_text[:200])
     if seller and not (deal.get('seller') or deal.get('seller_id')):
         out.append(('продавец', seller))
     if buyer and not (deal.get('buyer') or deal.get('buyer_name')):

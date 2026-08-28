@@ -488,6 +488,12 @@ def to_card(draft, deal_id):
     for field in ('sum', 'seller', 'buyer_name', 'asset'):
         if draft.get(field):
             card[field] = draft[field]
+    if draft.get('buyer_hint'):
+        # П1-10: остаток хвоста стороны в косвенном падеже («структурам
+        # Алексея Репика») — не факт, подсказка для чтения (см. docstring
+        # draft._split_sale_tail). Переносится на карточку тем же путём,
+        # что и остальные поля черновика, но НЕ становится buyer_name.
+        card['buyer_hint'] = draft['buyer_hint']
     if draft.get('events'):
         # У этапа свой источник, и его подпись тоже печатается на экране —
         # первый заход починил только card['src'] и оставил «web:frankmedia.ru»
@@ -623,6 +629,12 @@ def main(write):
           % (len(drafts), len(passed), len(held), len(refused)))
     for draft, _ in passed:
         print('  ПУСТИТЬ      %s' % str(draft.get('title'))[:84])
+        if draft.get('buyer_hint'):
+            # П1-10: не значение поля — подсказка читающему шагу (review.py),
+            # чем закончился хвост предмета в косвенном падеже.
+            print('               подсказка: возможный покупатель из хвоста '
+                  'предмета — «%s» (падеж, проверить по источнику)'
+                  % draft['buyer_hint'])
     for draft, reasons in held:
         print('  НА РЕШЕНИЕ   %s\n               %s'
               % (str(draft.get('title'))[:76], '; '.join(reasons)))

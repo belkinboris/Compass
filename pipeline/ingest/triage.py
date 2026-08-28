@@ -85,7 +85,7 @@ def main(argv):
             counts['duplicate'] += 1
             continue
         seen.add(row['url'])
-        buyer, asset, seller = draft.guess_parties(row.get('title'))
+        buyer, asset, seller, _ = draft.guess_parties(row.get('title'))
         item = {'title': row.get('title'), 'summary': row.get('summary'), 'url': row.get('url'),
                 'date': to_date(row.get('published'), row.get('fetched')),
                 'buyer': buyer, 'asset': asset, 'seller': seller}

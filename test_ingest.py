@@ -520,7 +520,7 @@ def test_draft_never_invents_a_party():
     """Имя стороны обязано стоять в заголовке дословно."""
     import draft
     title = "«Лента» купила сеть магазинов «Монетка» у структуры Сбербанка"
-    buyer, asset, seller = draft.guess_parties(title)
+    buyer, asset, seller, _ = draft.guess_parties(title)
     for value in (buyer, asset, seller):
         if value:
             core = value.strip('«»" ').split()[0]
@@ -530,7 +530,7 @@ def test_draft_never_invents_a_party():
 def test_draft_keeps_silent_when_there_is_no_seller():
     """Нет продавца в заголовке — поле остаётся пустым, а не додумывается."""
     import draft
-    _, _, seller = draft.guess_parties("«Лента» купила сеть магазинов «Монетка»")
+    _, _, seller, _ = draft.guess_parties("«Лента» купила сеть магазинов «Монетка»")
     assert seller is None
 
 
@@ -543,6 +543,31 @@ def test_draft_records_the_first_deal_stage():
     card = draft.build(item, {})
     assert card["status"] == "Обсуждается"
     assert card["events"] and card["events"][0]["kind"] == "negotiations"
+
+
+def test_draft_build_surfaces_buyer_hint_without_writing_buyer_name():
+    """П1-10 (25 августа): датив-хвост стороны («структурам Алексея Репика»)
+    режется от предмета, но НЕ пишется в buyer_name — падеж дательный, писать
+    его фактом нельзя. Черновик несёт его отдельным полем `buyer_hint`,
+    только когда buyer_name не заполнен: подсказка для чтения, не значение."""
+    import draft
+    item = {"title": "Сбер продал 45% доли в Еаптеке структурам Алексея Репика",
+            "date": "2026-08-25", "url": "https://example.invalid/eapteka",
+            "source_name": "Источник"}
+    card = draft.build(item, {})
+    assert card["buyer_name"] is None
+    assert card["asset"] == "45% доли в Еаптеке"
+    assert card["buyer_hint"] == "Алексея Репика"
+
+    # Квотированное имя (не склоняется на письме) идёт прямо в buyer_name —
+    # никакой подсказки не остаётся, писать нечего.
+    item2 = {"title": "Highland Gold продала 24,9% доли в месторождении «Клен» "
+                      "фондам «Восхождения»",
+             "date": "2026-08-25", "url": "https://example.invalid/klen",
+             "source_name": "Источник"}
+    card2 = draft.build(item2, {})
+    assert card2["buyer_name"] == "«Восхождения»"
+    assert "buyer_hint" not in card2
 
 
 def test_draft_event_note_does_not_cut_a_word_in_half():
@@ -604,7 +629,7 @@ def test_draft_error_rate_stays_low(base):
         return all(any(review._same_word(sw, lw) for lw in long_) for sw in short)
 
     for deal in base["deals"]:
-        buyer, _, seller = draft.guess_parties(str(deal.get("title") or ""))
+        buyer, _, seller, _ = draft.guess_parties(str(deal.get("title") or ""))
         truth_b = (comps.get(deal.get("buyer")) or {}).get("name") or deal.get("buyer_name")
         truth_s = (comps.get(deal.get("seller_id")) or {}).get("name") or deal.get("seller")
         if buyer and truth_b:
@@ -2043,12 +2068,12 @@ def test_buyer_is_found_when_the_action_is_a_noun():
     по-прежнему молчание.
     """
     import draft
-    buyer, asset, _ = draft.guess_parties(
+    buyer, asset, _, _ = draft.guess_parties(
         "Группа «Ригла-Здравсити» закрыла сделку по покупке сети «Здоровый город» "
         "в Воронежской области")
     assert buyer == "«Ригла-Здравсити»" and asset.startswith("сети «Здоровый город»")
     assert draft.guess_parties("Freedom Holding закрыл сделку по покупке TurkishBank") \
-        == ("Freedom Holding", "TurkishBank", None)
+        == ("Freedom Holding", "TurkishBank", None, None)
     for rumour in ("Bloomberg: AstraZeneca изучает возможность покупки Bristol Myers Squibb",
                    "ГК Merlion рассматривает покупку производителя техники Kuppersberg"):
         assert draft.guess_parties(rumour)[0] is None, rumour
@@ -2096,10 +2121,10 @@ def test_survey_and_trading_digest_headlines_are_not_a_party():
     # это не подлежащее, и `_named` его вообще не видит в такой роли.
     assert draft._named("ПСБ") == "ПСБ"
     assert draft._named("Все ставки против ЦБ") == "Все ставки против ЦБ"
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "59% россиян покупают книги на маркетплейсах — исследование")
     assert buyer is None, buyer
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "На Петербургской бирже в первом полугодии продали 505 кг серебра")
     assert seller is None, seller
 
@@ -2120,7 +2145,7 @@ def test_headline_label_before_colon_is_not_a_party():
     assert draft._named("Акции, облигации, паи: как") is None
     assert draft._named("Nikkei: Sony и TSMC") is None
     assert draft._named("МИД РФ: Европа") is None
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "Акции, облигации, паи: как инвестировали кандидаты в Госдуму. Инфографика")
     assert buyer is None, buyer
 
@@ -2142,7 +2167,7 @@ def test_quote_cut_open_by_a_verb_is_not_a_party():
     assert draft._named("«Не") is None
     assert draft._named("«Компания") is None  # тоже незакрытая — не имя
     assert draft._named('ООО «ТД «Нефтетехснаб»') == 'ООО «ТД «Нефтетехснаб»'
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "«Не купят — буду деактивировать». Что происходит с рынком ПВЗ маркетплейсов")
     assert buyer is None, buyer
 
@@ -2162,9 +2187,9 @@ def test_negated_verb_is_not_a_completed_transaction():
     import draft
     assert draft.guess_parties(
         "Пашинян не продал абрикосы европейцам: как его курс на ЕС "
-        "замучил фермеров Армении") == (None, None, None)
+        "замучил фермеров Армении") == (None, None, None, None)
     # Утвердительная форма по-прежнему разбирается.
-    b, a, s = draft.guess_parties("Пашинян продал абрикосы европейцам")
+    b, a, s, _ = draft.guess_parties("Пашинян продал абрикосы европейцам")
     assert b is None and a == "абрикосы европейцам" and s == "Пашинян"
 
 
@@ -2180,7 +2205,7 @@ def test_residents_of_a_place_are_not_a_party():
     import draft
     assert draft._named("Жители Подмосковья за месяц") is None
     assert draft._named("Жительница Хабаровского края") is None
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "Жители Подмосковья за месяц купили почти 22 млн кг мяса")
     assert buyer is None, buyer
 
@@ -2198,7 +2223,7 @@ def test_russians_as_a_group_are_not_a_party():
     assert draft._named("Россияне") is None
     assert draft._named("Россиян") is None
     assert draft._named("Российская Федерация") == "Российская Федерация"
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         "Россияне купили в июле рекордные 549 тыс. подержанных авто: "
         "в топе продаж — машины Lada, Kia и Toyota")
     assert buyer is None, buyer
@@ -2217,12 +2242,12 @@ def test_player_transfer_is_not_ma():
     import draft
     assert draft.guess_parties(
         '«Динамо» покупает форварда у «Индепендьенте», пишут СМИ'
-    ) == (None, None, None)
+    ) == (None, None, None, None)
     assert draft.guess_parties(
         'Итальянский клуб продал вратаря российскому «Спартаку»'
-    ) == (None, None, None)
+    ) == (None, None, None, None)
     # Настоящая M&A с похожим глаголом по-прежнему разбирается.
-    b, a, s = draft.guess_parties('Selectel покупает облачного провайдера servers.ru')
+    b, a, s, _ = draft.guess_parties('Selectel покупает облачного провайдера servers.ru')
     assert b == 'Selectel' and a == 'облачный провайдер servers.ru'
 
 
@@ -2235,22 +2260,33 @@ def test_asset_declaring_no_name_is_not_written_as_a_fact():
     «неизвестному покупателю» (это про ПОКУПАТЕЛЯ, не предмет), asset не
     теряют — стирается только когда во всей строке нет ни одного имени."""
     import draft
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         '«Алор брокер» купил неназванную брокерскую компанию')
     assert buyer == '«Алор брокер»'
     assert asset is None, asset
 
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, hint = draft.guess_parties(
         'Auchan продаёт российский бизнес неизвестному покупателю')
-    assert asset is None, asset
+    # До 25 августа «неизвестному покупателю» оставалось приклеенным к
+    # предмету, и УЖЕ ПОЭТОМУ вся строка целиком считалась «заявлением об
+    # отсутствии имени» (П4-9) и стиралась в None. П1-10 сначала отрезает
+    # датив-хвост о ПОКУПАТЕЛЕ («неизвестному покупателю» — buyer=None,
+    # hint=None, имени там и правда нет) — а предмет остаётся тем, чем и
+    # был: «российский бизнес», такое же законное значение, как у структурно
+    # идентичных карточек Knauf/Heineken (буквальные примеры реальной базы).
+    assert asset == 'российский бизнес', asset
+    assert buyer is None and hint is None
 
-    # Настоящее имя в предмете — не стирается, даже если рядом «неизвестному
-    # покупателю» описывает ДРУГУЮ сторону (буквальный кусок реальной базы,
-    # g01b8b8f6): это отдельный, более старый дефект разбора (хвост про
-    # покупателя не отрезался от предмета), а не предмет П4-9.
-    buyer, asset, seller = draft.guess_parties(
+    # Настоящее имя в предмете — не стирается. До 25 августа рядом с ним
+    # оставался ещё и хвост про ДРУГУЮ сторону («неизвестному покупателю» —
+    # буквальный кусок реальной базы, g01b8b8f6): П1-10 режет однозначный
+    # датив-маркер («покупателю») даже без имени после него, поэтому предлог
+    # с прилагательным без ролевого маркера остаётся, а сам маркер уходит.
+    buyer, asset, seller, hint = draft.guess_parties(
         'Восток Инвестиции продаёт 27,4% акций Ozon неизвестному покупателю')
     assert asset and 'Ozon' in asset, asset
+    assert 'покупателю' not in asset, asset
+    assert hint is None, hint  # «неизвестному» — не имя, подсказывать нечего
 
 
 def test_farm_club_is_not_ma():
@@ -2265,7 +2301,7 @@ def test_farm_club_is_not_ma():
     """
     import draft
     assert draft._named('Фарм-клуб «Сакраменто»') is None
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         'Фарм-клуб «Сакраменто» приобрел права на Лахина')
     assert buyer is None, buyer
 
@@ -2283,11 +2319,11 @@ def test_spot_commodity_purchase_is_not_ma():
     этой позиции).
     """
     import draft
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         'Индия купила партию СПГ по рекордно высокой цене')
     assert buyer is None, buyer
     # Настоящую M&A-сделку с обычным предметом правило не трогает.
-    buyer, asset, seller = draft.guess_parties(
+    buyer, asset, seller, _ = draft.guess_parties(
         'Selectel купил облачного провайдера servers.ru')
     assert buyer == 'Selectel', buyer
 
@@ -3756,7 +3792,7 @@ def test_asset_case_rule_measured_on_the_whole_base():
         assets = []
         for c in cards:
             try:
-                _, asset, _ = drafter.guess_parties(str(c.get("title") or ""))
+                _, asset, _, _ = drafter.guess_parties(str(c.get("title") or ""))
             except Exception:
                 continue
             if asset:
@@ -3772,7 +3808,7 @@ def test_draft_extraction_normalizes_asset_case():
     """Правило подключено в draft.py — тот же путь, каким собираются черновики
     притока, а не только отдельно проверенная функция."""
     import draft as drafter
-    _, asset, _ = drafter.guess_parties("МКБ завершил присоединение Дальневосточного банка")
+    _, asset, _, _ = drafter.guess_parties("МКБ завершил присоединение Дальневосточного банка")
     assert asset == "Дальневосточный банк"
 
 

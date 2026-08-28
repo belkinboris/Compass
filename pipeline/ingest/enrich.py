@@ -173,7 +173,7 @@ def proposals(deal, item, names, comps, match_keys=None):
     новость называет другое значение заполненного поля (в базу не идёт).
     """
     text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
-    buyer, asset, seller = draft.guess_parties(item.get('title'))
+    buyer, asset, seller, _ = draft.guess_parties(item.get('title'))
     out = []
 
     url = str(item.get('url') or '')
@@ -279,7 +279,7 @@ def measure():
     forward = wrong_forward = 0
     for deal in deals:
         title = str(deal.get('title') or '')
-        buyer, _asset, seller = draft.guess_parties(title)
+        buyer, _asset, seller, _hint = draft.guess_parties(title)
         truth = {
             'сумма': deal.get('sum') if has(deal.get('sum')) else None,
             'продавец': (comps.get(deal.get('seller_id')) or {}).get('name')
