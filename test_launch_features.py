@@ -782,9 +782,18 @@ def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch)
         if not db.get(Company, "registry-sync-test"):
             db.add(Company(id="registry-sync-test", name="Реестр-Тест"))
             db.flush(); db.commit()
+        # Идемпотентная подготовка: тесты этого файла делят одну dev-базу
+        # между прогонами (тот же приём, что у соседнего теста про limit) —
+        # если сделка уже подтверждена и свежа с прошлого прогона, первый
+        # вызов ниже увидел бы skipped_fresh вместо confirmed_now/synced.
+        leftover = db.query(LegalEntity).filter_by(company_id="registry-sync-test").one_or_none()
+        if leftover is not None:
+            db.delete(leftover)
+            db.commit()
 
         stats = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
-        assert stats == {"confirmed_now": 1, "synced": 1, "skipped_fresh": 0, "errors": 0, "requests": 3}
+        assert stats == {"confirmed_now": 1, "synced": 1, "skipped_fresh": 0, "errors": 0, "requests": 3,
+                          "revoked": 0}
         assert calls == {"egr": 2, "bo": 1, "changes": 1}  # confirm_by_inn + sync_entity оба читают egr
 
         entity = db.query(LegalEntity).filter_by(company_id="registry-sync-test").one()
@@ -796,13 +805,73 @@ def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch)
         # Второй прогон — данные свежие, ни одного запроса.
         calls_before = dict(calls)
         stats2 = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
-        assert stats2 == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 1, "errors": 0, "requests": 0}
+        assert stats2 == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 1, "errors": 0, "requests": 0,
+                           "revoked": 0}
         assert calls == calls_before
 
         # --force игнорирует свежесть.
         stats3 = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False, force=True)
         assert stats3["synced"] == 1
         assert calls["bo"] == 2
+    finally:
+        db.close()
+
+
+def test_fns_sync_from_registry_revokes_entities_whose_decision_changed(monkeypatch):
+    """28 августа 2026: gf0a760bf/gcbf833da — реестр по ошибке подтвердил ИНН
+    предмета сделки профилю покупателя; правка decision (confirmed -> no_match)
+    в git-файле сама по себе не убирает уже синхронизированную строку БД —
+    sync_from_registry читает только ТЕКУЩИЙ confirmed-список и молча не
+    замечает, что company_id из него исчез. `revoke_stale_confirmations()`
+    обязана снять именно такую строку — и ТОЛЬКО такую: запись, о которой
+    текущий реестр молчит вовсе (её нет в фиктивном реестре ниже совсем),
+    трогать нельзя — иначе прогон на общей dev-базе стирал бы confirmed-
+    строки ДРУГИХ тестов, для которых этот фиктивный реестр их не упоминает."""
+    from pipeline import sync_fns
+
+    fake_registry = [
+        {"company_id": "revoke-still-confirmed", "decision": "confirmed", "inn": "7700000301",
+         "reason": "т", "date": "2026-08-28"},
+        {"company_id": "revoke-now-no-match", "decision": "no_match", "inn": None,
+         "reason": "решение сменилось: confirmed -> no_match", "date": "2026-08-28"},
+    ]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
+
+    db = get_session()
+    try:
+        ids = ("revoke-still-confirmed", "revoke-now-no-match", "revoke-unmentioned-by-this-registry")
+        for cid in ids:
+            if not db.get(Company, cid):
+                db.add(Company(id=cid, name=cid))
+        db.flush()
+
+        entity_id = {}
+        for i, cid in enumerate(ids):
+            existing = db.query(LegalEntity).filter_by(company_id=cid).one_or_none()
+            if existing is not None:
+                db.delete(existing)
+                db.flush()
+            entity = LegalEntity(company_id=cid, inn="77000003%02d" % (i + 1), legal_name="Тест",
+                                  match_status=LegalEntityMatchStatus.confirmed,
+                                  fetched_at=datetime.utcnow())
+            db.add(entity)
+            db.flush()
+            db.add(FinancialReport(legal_entity_id=entity.id, year=2025, revenue_rub=1))
+            entity_id[cid] = entity.id
+        db.commit()
+
+        removed = sync_fns.revoke_stale_confirmations(db)
+        assert removed == 1, "снять обязана ровно ту строку, чьё решение явно сменилось"
+
+        assert db.get(LegalEntity, entity_id["revoke-still-confirmed"]) is not None
+        assert db.get(LegalEntity, entity_id["revoke-now-no-match"]) is None
+        assert db.get(LegalEntity, entity_id["revoke-unmentioned-by-this-registry"]) is not None, (
+            "запись, которой в ТЕКУЩЕМ реестре просто нет, — не то же самое, что "
+            "«решение сменилось», и удаляться не должна")
+
+        # Каскад: отчёт удалённой строки не осиротел, а исчез вместе с ней.
+        assert db.query(FinancialReport).filter_by(
+            legal_entity_id=entity_id["revoke-now-no-match"]).count() == 0
     finally:
         db.close()
 
@@ -977,7 +1046,8 @@ def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
         stats = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
     finally:
         db.close()
-    assert stats == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
+    assert stats == {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0,
+                      "revoked": 0}
 
 
 def test_fns_queue_clean_query_name_strips_only_our_own_trailing_disambiguator():

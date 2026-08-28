@@ -356,6 +356,61 @@ def sync_confirmed(db, client: ApiFnsClient, *, limit: int | None = None,
     return ok, errors
 
 
+def revoke_stale_confirmations(db) -> int:
+    """Удалить `LegalEntity`, чей `company_id` в РЕЕСТРЕ (git-файле, не БД)
+    больше не несёт `decision == "confirmed"` — решение сменилось задним
+    числом, а `sync_from_registry` сам никогда не удаляет то, что уже
+    подтвердил (он читает только текущий `confirmed`-список, молча минуя
+    строки, которых там больше нет).
+
+    ПОВОД (28 августа 2026, найдено кампанией дозакрытия реестра за 2024
+    год). `gf0a760bf` («АО «Управление активами»» — ПОКУПАТЕЛЬ делового
+    квартала «Даниловская мануфактура») был по ошибке подтверждён ИНН
+    самой «Даниловская мануфактура» (ПРЕДМЕТА сделки, профиль `gcbf833da`)
+    — перепутаны сторона и предмет. Запись в `pipeline/fns_registry.py`
+    исправлена (decision у `gf0a760bf` -> `no_match`, верный ИНН передан
+    `gcbf833da`), но прод к этому моменту уже синхронизировал СТАРУЮ,
+    неверную запись — carточка «АО «Управление активами»» показывала
+    отчётность текстильной фабрики живьём. Правка git-файла сама по себе
+    это не убирает: `sync_from_registry` смотрит только на текущий
+    `confirmed`-список и никогда не проверяет, не ИСЧЕЗ ли из него
+    company_id, у которого уже есть строка в БД.
+
+    Удаление каскадное (`cascade="all, delete-orphan"` на `financial_
+    reports`/`registry_events`/`ownership_snapshots` в db/models.py) —
+    сирот не остаётся. Вызывается в начале `sync_from_registry`, тем же
+    естественным событием (старт процесса после деплоя), а не отдельным
+    расписанием — родня уже записанному принципу «расписание не нужно там,
+    где уже есть естественное событие».
+
+    НАМЕРЕННО УЗКОЕ УСЛОВИЕ: ревокация срабатывает, только если `company_id`
+    ЯВНО присутствует в реестре с decision, отличным от "confirmed" — а не
+    просто отсутствует в текущем `confirmed`-списке. Разница существенна:
+    первая версия сравнивала с множеством `{company_id, где confirmed}`, и
+    ЛЮБАЯ строка БД, чей company_id не входит в него (в том числе потому,
+    что реестр в моменте просто не о ней — так работают тесты, где
+    `FNS_REGISTRY` подменяется маленьким фиктивным списком), удалялась бы
+    как «устаревшая». На боевом реестре (полном, аддитивном) разницы почти
+    нет, но на любом НЕПОЛНОМ снимке реестра — включая тестовый — узкое
+    условие safety-critical: пропускает всё, о чём реестр молчит, и трогает
+    только то, о чём он прямо говорит «уже не confirmed».
+    """
+    registry_idx = {row["company_id"]: row for row in FNS_REGISTRY}
+    stale = list(db.scalars(select(LegalEntity).where(
+        LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+        LegalEntity.company_id.is_not(None),
+    )).all())
+    removed = 0
+    for entity in stale:
+        row = registry_idx.get(entity.company_id)
+        if row is not None and row["decision"] != "confirmed":
+            db.delete(entity)
+            removed += 1
+    if removed:
+        db.commit()
+    return removed
+
+
 def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
                        force: bool = False, dry_run: bool = False) -> dict[str, int]:
     """Применяет `pipeline/fns_registry.py` к базе: суждение («какой ИНН
@@ -378,8 +433,15 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
     класс, что уже записанный «тормоз, который держит дверь закрытой» —
     только здесь дверь держал не запрет, а порядок операций.
     """
+    stats = {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0,
+             "revoked": 0}
+    if not dry_run:
+        # См. docstring revoke_stale_confirmations(): решение реестра могло
+        # смениться (confirmed -> другое) задним числом — прод не должен
+        # молча носить уже известную неверную запись до следующего живого
+        # запроса к этому company_id, которого может не случиться никогда.
+        stats["revoked"] = revoke_stale_confirmations(db)
     confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
-    stats = {"confirmed_now": 0, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 0}
     cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
     work_done = 0
     for row in confirmed:
