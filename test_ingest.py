@@ -1158,6 +1158,100 @@ def test_edit_message_raises_on_real_error():
         send_telegram.edit_message(client, "TOKEN", "@channel", 555, "текст")
 
 
+def test_is_message_gone_distinguishes_deleted_posts_from_other_errors():
+    """П4-10: «пост удалён из канала человеком» — не то же самое, что сбой
+    сети/токена. Проверено на реальном тексте ошибки (g01e3fd26, 25 августа)."""
+    assert send_telegram.is_message_gone("editMessageText: Bad Request: message to edit not found")
+    assert send_telegram.is_message_gone("sendMessage: Bad Request: chat not found")
+    assert not send_telegram.is_message_gone("editMessageText: Bad Request: message is not modified")
+    assert not send_telegram.is_message_gone("sendMessage: Forbidden: bot was blocked by the user")
+    assert not send_telegram.is_message_gone(None)
+
+
+def test_parse_skip_ids_reads_until_next_flag():
+    """П3-10: id'ы после --skip до следующего --флага или конца строки —
+    тот же лёгкий разбор, что уже используется для --now."""
+    assert send_telegram.parse_skip_ids(["send_telegram.py", "--write"]) == frozenset()
+    assert send_telegram.parse_skip_ids(["--write", "--skip", "gX1", "gX2"]) == {"gX1", "gX2"}
+    assert send_telegram.parse_skip_ids(["--skip", "gX1", "--now"]) == {"gX1"}
+    assert send_telegram.parse_skip_ids(["--skip"]) == frozenset()
+
+
+def test_main_dry_run_with_a_real_token_prints_full_post_text(monkeypatch, tmp_path, capsys):
+    """25 августа: владелец спросил, читаются ли посты перед публикацией.
+    Оказалось, что рутина публикации (которая и есть модель-читатель) в
+    сухом прогоне с настоящим токеном видела только счётчики — текст,
+    который она собирается отправить, был physически не показан. Теперь
+    полный текст печатается целиком, не обрезан до 400 знаков."""
+    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
+            "buyer": "b1", "seller": "Иван Петрович Сидоров",
+            "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ и интернет",
+            "reviewed": "2026-08-01",
+            "eco": {"context": "Компания работает на рынке коммерческой недвижимости "
+                                "пятнадцать лет и управляет офисными центрами в нескольких "
+                                "крупных городах России, включая хвостовую метку "
+                                "КОНЕЦ-ТЕКСТА-ЗДЕСЬ.",
+                    "rationale": "Сделка укрепляет позиции покупателя на рынке услуг для бизнеса."},
+            "law": {"adv": [["ф1", "Иванов и партнёры"]]},
+            "src": [["РБК", "https://example.com/article"]]}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    def boom():
+        raise AssertionError("сухой прогон не должен вызывать _client()")
+    monkeypatch.setattr(send_telegram, "_client", boom)
+
+    send_telegram.main(write=False, ignore_pace=True)
+
+    out = capsys.readouterr().out
+    assert len(out) > 400, "вывод подозрительно короткий для проверки на обрезание"
+    assert "КОНЕЦ-ТЕКСТА-ЗДЕСЬ" in out, "текст обрезан — то же самое, что раньше (было text[:400])"
+    assert "Источник: " in out, "хвост поста (после 400-го знака) не попал в вывод"
+    assert "--skip" in out, "нет инструкции, как задержать пост после чтения"
+
+
+def test_main_write_skips_specified_ids_without_marking_them_sent(monkeypatch, tmp_path, capsys):
+    """--skip задерживает конкретную карточку в ЭТОМ прогоне, но не
+    помечает её отправленной: следующий прогон должен увидеть её снова."""
+    deal_skip = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
+                "sum": "1 млрд ₽", "reviewed": "2026-08-01"}
+    deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
+                "sum": "500 млн ₽", "reviewed": "2026-08-01"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal_skip, deal_send]
+    real_data["companies"] = {}
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 2002}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True, ignore_pace=True, skip_ids={"gX1"})
+
+    out = capsys.readouterr().out
+    assert "Пропущено по --skip (1): gX1" in out
+    assert len(fake.calls) == 1, "только gX2 должен реально уйти в Telegram"
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert "gX1" not in written["telegram_posts"], "пропущенная карточка не помечается отправленной"
+    assert written["telegram_posts"]["gX2"] == 2002
+
+
 def test_main_without_token_never_touches_network_or_writes(monkeypatch, tmp_path, base):
     """Без токена/канала — план на экран, ни одного сетевого вызова, файл базы не тронут."""
     def boom():
@@ -1273,6 +1367,48 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
 
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_posts"][seeded_deal["id"]] == 777, "null должен смениться на настоящий message_id"
+
+
+def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_path, capsys):
+    """П4-10: 25 августа правка g01e3fd26 (message_id 32) упала с «message
+    to edit not found» — пост был удалён из канала человеком. Такая ошибка
+    не должна ронять весь прогон (другие отправки/правки того же батча
+    обязаны дойти) и не должна затеряться в общем списке ошибок — нужна
+    отдельная, явно читаемая строка отчёта с именем сделки."""
+    deal_edit = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
+                 "buyer": "b1", "sum": "1 млрд ₽", "status": "Закрыта",
+                 "reviewed": "2026-08-01"}
+    deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
+                 "sum": "500 млн ₽", "reviewed": "2026-08-01"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal_edit, deal_send]
+    real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
+    real_data["telegram_posts"] = {"gX1": 32}  # уже отправлен, будет правиться
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {"gX1": ["появилась сумма"]})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+
+    # Очередь строится как send + edit: gX2 (новый пост) идёт первым, потом
+    # правка gX1 — тот же порядок, что в queue = [...send...] + [...edit...].
+    fake = _FakeClient([
+        {"ok": True, "result": {"message_id": 1001}},               # sendMessage gX2
+        {"ok": False, "description": "Bad Request: message to edit not found"},  # editMessageText gX1
+    ])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True, ignore_pace=True)  # не должно бросить исключение
+
+    out = capsys.readouterr().out
+    assert "УДАЛЁННЫЕ ПОСТЫ" in out
+    assert "gX1" in out and "«Ромашка» купила «Одуванчик»" in out
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gX2"] == 1001, "второй элемент батча обязан дойти, несмотря на ошибку первого"
+    assert written["telegram_posts"]["gX1"] == 32, "message_id удалённого поста не трогаем молча"
 
 
 class _FakeFnsClient:
