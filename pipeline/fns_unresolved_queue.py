@@ -245,12 +245,24 @@ def main():
                              "с --to-console: реально отправить и проставить fns_asked")
     args = parser.parse_args()
 
+    # ИТОГ ПРОГОНА (28 августа, П1-11) — печатается ВСЕГДА, одной строкой, и
+    # обязан попасть в коммит-сообщение рутины (шаг 6 её промпта требует
+    # называть эти числа). Триггер пять прогонов подряд не оставил следа
+    # (0 fns_asked, 0 коммитов) при непустой очереди 1013 кандидатов — а
+    # обычные "print" внутри условий легко потерять в выводе модели,
+    # пересказывающей прогон своими словами. Эта строка — не пересказ,
+    # три голых числа, специально ради того, чтобы тихий провал стало
+    # физически не с чем спутать.
+    confirmed_n = sent_n = 0
+
     base = json.load(open(DATA, encoding="utf-8"))
     registry_idx = by_company_id()
     rows = unresolved_companies(base, registry_idx)[: args.limit]
+    total_unresolved = len(unresolved_companies(base, registry_idx))
     print("Неразрешённых кандидатов всего: %d (показаны первые %d по свежести сделки)"
-         % (len(unresolved_companies(base, registry_idx)), len(rows)))
+         % (total_unresolved, len(rows)))
     if not rows:
+        print("ИТОГ ПРОГОНА: очередь пуста, отправлять некому (confirmed=0, отправлено=0).")
         return
 
     if not args.attempt:
@@ -274,6 +286,7 @@ def main():
                 print("  %s (%s) -> ИНН %s, %s" % (name, cid, inn, legal_name))
             if args.write:
                 _append_registry(confirmed)
+                confirmed_n = len(confirmed)
                 print("Записано в pipeline/fns_registry.py.")
 
     if queue:
@@ -285,7 +298,11 @@ def main():
         sent = send_queue_to_console(queue, args.write)
         if sent:
             stamp_asked(base, sent)
-            print("Проставлен fns_asked профилям: %d" % len(sent))
+            sent_n = len(sent)
+            print("Проставлен fns_asked профилям: %d" % sent_n)
+
+    print("ИТОГ ПРОГОНА: неразрешённых кандидатов %d, автоподтверждено %d, "
+          "отправлено в консоль %d." % (total_unresolved, confirmed_n, sent_n))
 
 
 def _append_registry(confirmed, path=None):

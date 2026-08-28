@@ -125,12 +125,18 @@ def console_message(cid, name, note):
 
 
 def main():
+    # ИТОГ ПРОГОНА (28 августа, П1-11) — печатается ВСЕГДА, при любом выходе
+    # из функции, одной строкой с голыми числами: тот же приём, что и в
+    # fns_unresolved_queue.py, и по той же причине — пять прогонов триггера
+    # подряд не оставили следа при непустой очереди, и «print внутри if» это
+    # не поймал ни разу.
     write = "--write" in sys.argv
     registry_idx = by_company_id()
     base = json.load(open(DATA, encoding="utf-8"))
     rows = eligible(registry_idx, base["companies"])
     print("Решаемых no_match, ещё не спрошенных: %d" % len(rows))
     if not rows:
+        print("ИТОГ ПРОГОНА: очередь пуста, отправлять некому (отправлено=0).")
         return
 
     batch = rows[:BATCH_PER_RUN]
@@ -140,6 +146,7 @@ def main():
 
     if not write:
         print("\nСухой прогон. Отправка — с ключом --write.")
+        print("ИТОГ ПРОГОНА: сухой прогон, ничего не отправлено (отправлено=0).")
         return
 
     HERE = os.path.dirname(os.path.abspath(__file__))
@@ -150,10 +157,12 @@ def main():
     if not targets:
         print("Ни TELEGRAM_REVIEW_GROUP_ID, ни TELEGRAM_REVIEW_CHAT_IDS не заданы — "
               "консоли нет, ничего не отправлено.")
+        print("ИТОГ ПРОГОНА: консоли нет, ничего не отправлено (отправлено=0).")
         return
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     if not token:
         print("TELEGRAM_BOT_TOKEN не задан — консоли нет, ничего не отправлено.")
+        print("ИТОГ ПРОГОНА: токена нет, ничего не отправлено (отправлено=0).")
         return
 
     import httpx
@@ -174,6 +183,7 @@ def main():
             base["companies"][cid]["fns_asked"] = today
         json.dump(base, open(DATA, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     print("В консоль отправлено: %d, fns_asked проставлен." % len(sent))
+    print("ИТОГ ПРОГОНА: отправлено в консоль %d." % len(sent))
 
 
 if __name__ == "__main__":
