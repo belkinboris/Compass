@@ -118,22 +118,41 @@ def parse_mergers_ru_news(body, source_id):
 def parse_telegram(body, source_id):
     """Веб-зеркало канала t.me/s/<канал>: посты лежат в div-ах с классом
     tgme_widget_message_text. Разбираем регулярками, а не HTML-парсером, чтобы
-    не тянуть зависимость: структура зеркала простая и меняется редко."""
+    не тянуть зависимость: структура зеркала простая и меняется редко.
+
+    ССЫЛКА И ТЕКСТ ИЩУТСЯ ВНУТРИ ОДНОГО БЛОКА СООБЩЕНИЯ, а не как два отдельных
+    списка по всей странице. До 28 августа 2026 даты/ссылки и тексты собирались
+    ДВУМЯ независимыми `findall` и склеивались по ПОЗИЦИИ (`out[i]` <- `bodies[i]`)
+    — а посты БЕЗ текста (только фото/форвард без подписи) есть в списке дат, но
+    не в списке текстов: как только такой пост встречался, счётчик текстов
+    отставал от счётчика дат на единицу НАВСЕГДА, и все следующие посты получали
+    URL от постов, стоящих в ленте на N раньше. Живой замер на t.me/s/rusven
+    (карточка «Робатур», gc7e35605): 20 постов в ленте, 20 дат, 19 текстов — не
+    хватало текста у поста 7681, и это единственное расхождение сдвинуло текст
+    поста 7686 («Робатур... привлек инвестиции») на url поста 7684 (другая
+    новость, про The Games Fund) — дефект молчал, потому что оба URL валидны и
+    оба открываются, просто ведут не туда. Починено делением страницы на блоки
+    по `tgme_widget_message_wrap` (один блок — один пост) ДО извлечения даты и
+    текста — пост без текста просто не попадёт в результат (тот же фильтр
+    `if x['title']`, что и раньше), а не сдвинет url всех постов после себя."""
     text = body.decode('utf-8', 'ignore') if isinstance(body, bytes) else body
     out = []
-    for m in re.finditer(
+    for block in re.split(r'(?=<div class="tgme_widget_message_wrap)', text):
+        date_m = re.search(
             r'<a class="tgme_widget_message_date" href="([^"]+)"[^>]*>.*?'
-            r'<time datetime="([^"]+)"', text, re.S):
-        out.append({'source_id': source_id, 'url': m.group(1), 'published': m.group(2),
-                    'title': '', 'summary': ''})
-    bodies = re.findall(r'<div class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>', text, re.S)
-    for i, raw in enumerate(bodies):
-        plain = re.sub(r'<[^>]+>', ' ', raw)
+            r'<time datetime="([^"]+)"', block, re.S)
+        if not date_m:
+            continue
+        body_m = re.search(r'<div class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>', block, re.S)
+        if not body_m:
+            continue
+        plain = re.sub(r'<[^>]+>', ' ', body_m.group(1))
         plain = _unescape(re.sub(r'\s+', ' ', plain)).strip()
-        if i < len(out):
-            out[i]['title'] = plain[:200]
-            out[i]['summary'] = plain[:600]
-    return [x for x in out if x['title']]
+        if not plain:
+            continue
+        out.append({'source_id': source_id, 'url': date_m.group(1), 'published': date_m.group(2),
+                    'title': plain[:200], 'summary': plain[:600]})
+    return out
 
 
 def fetch_source(src, offline=False):

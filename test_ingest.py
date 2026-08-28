@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
 import casing                 # noqa: E402
 import classify              # noqa: E402
 import discover_feeds         # noqa: E402
+import fetch                  # noqa: E402
 import format_post           # noqa: E402
 import match as matcher      # noqa: E402
 
@@ -212,6 +213,52 @@ def test_quoted_common_counts_every_shared_name():
     assert matcher.quoted_common({"заряд"}, {"бери заряд"}) == {"заряд"}
     for a, b in (({"лент"}, {"лент"}), ({"заряд"}, {"бери заряд"}), ({"лент"}, {"мегафон"})):
         assert matcher.quoted_overlap(a, b) is bool(matcher.quoted_common(a, b))
+
+
+# ---------- забор (fetch.py) ----------
+
+def _tg_message_block(post_id, dt, text_html=None):
+    """Собирает один блок `tgme_widget_message_wrap` в том же порядке
+    элементов, что и настоящее веб-зеркало t.me/s/<канал> (дата — ПОСЛЕ
+    текста, внутри `tgme_widget_message_meta`)."""
+    text_div = ('<div class="tgme_widget_message_text js-message_text">%s</div>' % text_html
+                if text_html is not None else '')
+    return (
+        '<div class="tgme_widget_message_wrap js-widget_message_wrap">'
+        '<div class="tgme_widget_message text_not_supported_wrap js-widget_message" '
+        'data-post="chan/%s">'
+        '<div class="tgme_widget_message_bubble">%s'
+        '<div class="tgme_widget_message_info"><span class="tgme_widget_message_meta">'
+        '<a class="tgme_widget_message_date" href="https://t.me/chan/%s">'
+        '<time datetime="2026-08-25T%s:00:00+00:00" class="time">%s</time></a>'
+        '</span></div></div></div></div>'
+        % (post_id, text_div, post_id, dt, dt)
+    )
+
+
+def test_parse_telegram_does_not_shift_url_past_a_textless_post():
+    """28 августа 2026: карточка «Робатур» (gc7e35605) несла ссылку на
+    ЧУЖОЙ пост канала «Русский Венчур» (rusven/7684 вместо rusven/7686) —
+    живой замер на t.me/s/rusven нашёл причину: пост БЕЗ текста (только
+    фото/форвард) есть в списке дат, но не в списке текстов, и старый
+    `parse_telegram` собирал url и текст ДВУМЯ независимыми `findall`,
+    склеивая их по ПОЗИЦИИ в списке — после текстового поста без пары
+    все следующие тексты получали url постов, стоящих в ленте раньше.
+    Этот тест воспроизводит ровно такую ленту (пост №2 — без текста) и
+    проверяет, что url и текст остаются в паре независимо от него."""
+    html_page = (
+        '<html><body>'
+        + _tg_message_block('1', '10:00', 'Первая новость — про сделку A')
+        + _tg_message_block('2', '10:05', None)  # пост без текста (фото/форвард)
+        + _tg_message_block('3', '10:10', 'Третья новость — про сделку B')
+        + '</body></html>'
+    )
+    items = fetch.parse_telegram(html_page.encode('utf-8'), 'tg:chan')
+    by_url = {it['url']: it['title'] for it in items}
+    assert by_url['https://t.me/chan/1'] == 'Первая новость — про сделку A'
+    assert by_url['https://t.me/chan/3'] == 'Третья новость — про сделку B'
+    assert 'https://t.me/chan/2' not in by_url, 'у поста без текста не должно быть записи вовсе'
+    assert len(items) == 2, 'сдвига после пропущенного поста быть не должно'
 
 
 # ---------- формат телеграм-поста ----------
