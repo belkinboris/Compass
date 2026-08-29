@@ -4551,7 +4551,7 @@
    ]
   },
   {
-   "draft_id": "d77269221",
+   "draft_id": "d74950254",
    "title": "«Сбер» ожидает волну отложенных IPO в 2027 году",
    "date": "2026-08-29",
    "src": [
@@ -4578,6 +4578,91 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что ««Сбер» планирует выкупить на торгах лизинговую компанию «Век» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d55577421",
+   "title": "Сцена единения: Безруков объявил о слиянии МХАТ им. Горького и Губернского театра",
+   "date": "2026-08-29",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2156979/zoia-igumnova/bezrukov-obyavil-o-sliyanii-mhat-im-gorkogo-i-gubernskogo-teatra"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39719932",
+   "title": "Рубио оценил объем частных инвестиций в Венесуэлу после нефтяной сделки с США",
+   "date": "2026-08-29",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2157223/rubio-otcenil-obem-chastnykh-investitcii-v-venesuelu-posle-neftianoi-sdelki-s-ssha-izi"
+    ]
+   ],
+   "sum": "$100 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28481709",
+   "title": "Покупка посуды через мессенджер обернулась для астраханки потерей денег",
+   "date": "2026-08-29",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/8/29/pokupka-posudy-cherez-messendzher-obernulas-dlya-astrahanki-poterej-deneg"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
