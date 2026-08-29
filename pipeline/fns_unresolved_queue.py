@@ -129,17 +129,24 @@ def unresolved_companies(base, registry_idx=None, exclude=None):
 def attempt_single_exact_match(client, name):
     """(inn, легальное_имя) при единственном действующем точном совпадении
     имени (без формы собственности и кавычек) — иначе None. Один живой
-    запрос `search` на компанию."""
-    from fns_client import ApiFnsError, normalize_search_results
+    запрос `search` на компанию.
+
+    `ApiFnsError` (сеть, ключ, ИСЧЕРПАННАЯ ГОДОВАЯ КВОТА `search`) НЕ
+    ловится здесь и уходит вызывающему — Этап 13, П4. Раньше она молча
+    превращалась в None, то есть «поиск не нашёл совпадения», и весь
+    прогон при выключенной квоте выглядел как «спросили у ФНС про N
+    компаний, ни одна не подтвердилась» — тот же класс дефекта, что уже
+    описан в CLAUDE.md («Ноль в отчёте фонового прогона неотличимо от
+    „смотрели не в ту базу"»), только здесь неотличимы «честно не нашли»
+    и «вопрос вообще не дошёл». `main()` считает ошибки API отдельно от
+    честных промахов и обрывает попытки, если ошибки систематические."""
+    from fns_client import normalize_search_results
     from pipeline.sync_fns import norm_name
 
     query = clean_query_name(name)
     if not query:
         return None
-    try:
-        rows = normalize_search_results(client.search(query))
-    except ApiFnsError:
-        return None
+    rows = normalize_search_results(client.search(query))
     target = norm_name(query)
     active = [r for r in rows if "действ" in str(r.get("status") or "").lower()]
     exact = [r for r in active
@@ -253,7 +260,7 @@ def main():
     # пересказывающей прогон своими словами. Эта строка — не пересказ,
     # три голых числа, специально ради того, чтобы тихий провал стало
     # физически не с чем спутать.
-    confirmed_n = sent_n = 0
+    confirmed_n = sent_n = api_errors_n = 0
 
     base = json.load(open(DATA, encoding="utf-8"))
     registry_idx = by_company_id()
@@ -268,17 +275,46 @@ def main():
     if not args.attempt:
         queue = [(cid, name, date) for cid, name, date, count in rows]
     else:
-        from fns_client import ApiFnsClient
+        from fns_client import ApiFnsClient, ApiFnsError
 
-        confirmed, queue = [], []
+        # Этап 13, П4: ошибка API (сеть, ключ, исчерпанная ГОДОВАЯ квота
+        # `search` — 3000/год на метод, отдельно от bo/egr/changes) не
+        # должна тихо превращаться в «честно не нашли». Три подряд ошибки —
+        # признак систематического отказа (одна компания без совпадения не
+        # значит, что API вообще недоступен), а не разовой запинки: прогон
+        # останавливается и говорит об этом прямо, а не молча дописывает
+        # оставшиеся кандидаты в очередь как будто их проверили.
+        confirmed, queue, api_errors = [], [], 0
+        stopped_early = False
         with ApiFnsClient() as client:
-            for cid, name, date, count in rows:
-                hit = attempt_single_exact_match(client, name)
+            for i, (cid, name, date, count) in enumerate(rows):
+                try:
+                    hit = attempt_single_exact_match(client, name)
+                except ApiFnsError as exc:
+                    api_errors += 1
+                    queue.append((cid, name, date))
+                    if api_errors >= 3:
+                        print("\n⛔ Поиск ФНС недоступен (%d ошибок подряд/из %d попыток, "
+                              "последняя: %s) — похоже на исчерпанную квоту или сбой сети, "
+                              "не на честное «не нашли». Остановлено раньше лимита, "
+                              "оставшиеся %d кандидатов НЕ проверены."
+                              % (api_errors, i + 1, exc, len(rows) - i - 1))
+                        for cid2, name2, date2, _c in rows[i + 1:]:
+                            queue.append((cid2, name2, date2))
+                        stopped_early = True
+                        break
+                    time.sleep(0.15)
+                    continue
                 if hit:
                     confirmed.append((cid, name, hit[0], hit[1]))
                 else:
                     queue.append((cid, name, date))
                 time.sleep(0.15)
+
+        api_errors_n = api_errors
+        if api_errors and not stopped_early:
+            print("Ошибок API при поиске (не в счёт «не нашли»): %d из %d попыток."
+                  % (api_errors, len(rows)))
 
         if confirmed:
             print("Автоподтверждено (единственное точное совпадение): %d" % len(confirmed))
@@ -301,8 +337,11 @@ def main():
             sent_n = len(sent)
             print("Проставлен fns_asked профилям: %d" % sent_n)
 
+    errors_note = (" ошибок API при поиске %d (не путать с «честно не нашли») —"
+                    " похоже на исчерпанную квоту или сбой сети." % api_errors_n
+                    if api_errors_n else "")
     print("ИТОГ ПРОГОНА: неразрешённых кандидатов %d, автоподтверждено %d, "
-          "отправлено в консоль %d." % (total_unresolved, confirmed_n, sent_n))
+          "отправлено в консоль %d.%s" % (total_unresolved, confirmed_n, sent_n, errors_note))
 
 
 def _append_registry(confirmed, path=None):

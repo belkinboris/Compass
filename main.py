@@ -173,15 +173,25 @@ def _fns_sync_once(db) -> dict | None:
     """Одна попытка докачки ФНС по реестру — вынесена из `_run()` отдельной
     функцией, чтобы её можно было проверить тестом напрямую, без потока и
     без обхода env-гварда `_sync_fns_from_registry()`. Возвращает `stats`
-    при реальной попытке синка, `None` при пропуске (потолок достигнут)."""
-    from pipeline.sync_fns import sync_from_registry
+    при реальной попытке синка, `None` при пропуске (потолок достигнут).
+
+    Потолок — самонастраивающийся (Этап 13, П1): при большом бэклоге
+    неподтверждённых/несвежих confirmed-строк реестра (кампания
+    самопроверки ИНН может разом подтвердить сотни новых) действует
+    повышенный `FNS_DAILY_REQUEST_CAP_HIGH`, иначе — обычный
+    `FNS_DAILY_REQUEST_CAP`. Не нужно помнить «вернуть лимит обратно»:
+    как только бэклог рассосётся, потолок сам вернётся к обычному."""
+    from pipeline.sync_fns import sync_from_registry, registry_backlog
     from fns_client import ApiFnsClient
 
+    backlog = registry_backlog(db)
+    cap = (FNS_DAILY_REQUEST_CAP_HIGH if backlog > FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP
+           else FNS_DAILY_REQUEST_CAP)
     used_today = _fns_requests_today(db)
-    if used_today >= FNS_DAILY_REQUEST_CAP:
+    if used_today >= cap:
         logger.warning(
-            "ФНС: дневной потолок запросов достигнут (%d/%d) — старт "
-            "пропускает докачку, до завтра", used_today, FNS_DAILY_REQUEST_CAP)
+            "ФНС: дневной потолок запросов достигнут (%d/%d, бэклог реестра %d) — "
+            "старт пропускает докачку, до завтра", used_today, cap, backlog)
         return None
     with ApiFnsClient() as client:
         stats = sync_from_registry(db, client, limit=FNS_STARTUP_SYNC_LIMIT)
@@ -275,6 +285,16 @@ FNS_STARTUP_SYNC_LIMIT = 60
 # далеко от годовой квоты (3000/год на метод) — цель поймать петлю, а не
 # экономить бюджет по запросу.
 FNS_DAILY_REQUEST_CAP = 200
+
+# Этап 13, П1 (COMPANY_FINANCE_BRIEF.md): повышенный потолок на время
+# большого бэклога реестра. Кампания самопроверки ИНН подтверждает разом
+# сотни новых записей — при обычных 200/день и лимите старта 60 догон
+# растягивался бы на недели деплоев. Порог и повышенный потолок — оба с
+# запасом над одним стартом (FNS_STARTUP_SYNC_LIMIT=60 работ ~ до 180
+# запросов), но далеко от годовой квоты метода (3000/год) — цель ускорить
+# добор, а не заново упереться в лимит.
+FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP = 120
+FNS_DAILY_REQUEST_CAP_HIGH = 400
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки

@@ -411,6 +411,36 @@ def revoke_stale_confirmations(db) -> int:
     return removed
 
 
+def registry_backlog(db) -> int:
+    """Сколько confirmed-строк реестра всё ещё нуждаются в живом запросе к
+    api-fns.ru — не подтверждены в БД или подтверждённые данные устарели
+    (`REGISTRY_SYNC_STALE_DAYS`). Не делает СЕТЕВЫХ запросов, только читает
+    БД — та же проверка `needs_confirm`/`needs_sync`, что и в цикле
+    `sync_from_registry()` ниже, но БЕЗ самого запроса и без счёта строк,
+    уже свежих (`skipped_fresh`).
+
+    Этап 13, П1: старт с `FNS_STARTUP_SYNC_LIMIT=60` при большом бэклоге
+    (кампания самопроверки ИНН подтвердила разом сотни новых записей)
+    докатывает реестр до прода партиями по 60 — на сотни новых строк это
+    недели деплоев. Дневной потолок в main.py (`FNS_DAILY_REQUEST_CAP`)
+    завязан на этот бэклог: большой бэклог — временно выше потолок, пустой
+    бэклог — обычный. Отдельная функция, а не переиспользование
+    `sync_from_registry(dry_run=True)`, — чтобы не задевать её сигнатуру
+    (её мокают в тестах позиционными db/client/limit без `dry_run`).
+    """
+    confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
+    cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
+    backlog = 0
+    for row in confirmed:
+        entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == row["company_id"]))
+        needs_confirm = (not entity or entity.inn != row["inn"]
+                          or entity.match_status != LegalEntityMatchStatus.confirmed)
+        needs_sync = not entity or not entity.fetched_at or entity.fetched_at < cutoff
+        if needs_confirm or needs_sync:
+            backlog += 1
+    return backlog
+
+
 def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
                        force: bool = False, dry_run: bool = False) -> dict[str, int]:
     """Применяет `pipeline/fns_registry.py` к базе: суждение («какой ИНН

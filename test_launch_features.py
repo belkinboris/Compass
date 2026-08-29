@@ -982,9 +982,14 @@ def test_fns_requests_today_sums_only_todays_runs():
 def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
     """Не от нехватки квоты, а от петли/бага (докстрока FNS_DAILY_REQUEST_CAP
     в main.py): достигнутый дневной потолок останавливает докачку целиком —
-    ни один живой запрос к api-fns.ru в этом старте не уходит."""
+    ни один живой запрос к api-fns.ru в этом старте не уходит. Бэклог реестра
+    зафиксирован маленьким (`registry_backlog` замокан на 0), чтобы сработал
+    ИМЕННО обычный потолок, а не самонастраивающийся повышенный (Этап 13,
+    П1) — тот проверяется отдельным тестом ниже."""
     import json as _json
+    from pipeline import sync_fns
     monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 0)
     db = get_session()
     try:
         db.add(FnsSyncRun(started_at=datetime.utcnow(), mode="startup",
@@ -993,11 +998,40 @@ def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
 
         def _boom(*a, **kw):
             raise AssertionError("sync_from_registry не должен вызываться при достигнутом потолке")
-        from pipeline import sync_fns
         monkeypatch.setattr(sync_fns, "sync_from_registry", _boom)
 
         result = main._fns_sync_once(db)
         assert result is None, "при достигнутом потолке функция обязана вернуть None, не пытаться синковать"
+    finally:
+        db.close()
+
+
+def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch):
+    """Этап 13, П1: большой бэклог реестра (кампания самопроверки ИНН
+    подтвердила разом сотни новых строк) обязан временно поднять дневной
+    потолок — иначе догон витрины растягивается на недели деплоев.
+
+    `_fns_requests_today` замокана на фиксированное число, а не измерена
+    через реальные строки FnsSyncRun: тестовая dev-база общая между
+    прогонами (см. соседние тесты), и за день десятков прогонов этого же
+    файла реальная сумма «сегодня» непредсказуема — абсолютная вставка
+    могла бы случайно перевалить и через повышенный потолок тоже,
+    сделав тест то зелёным, то красным в зависимости от того, сколько
+    раз файл уже прогоняли сегодня."""
+    from pipeline import sync_fns
+    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP_HIGH", 300)
+    monkeypatch.setattr(main, "FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP", 120)
+    monkeypatch.setattr(main, "_fns_requests_today", lambda db: 100)
+    monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 500)
+    fake_stats = {"confirmed_now": 1, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 1}
+    monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)
+    db = get_session()
+    try:
+        # used_today=100 — между обычным (50) и повышенным (300) потолками:
+        # синк обязан пойти именно потому, что сработал повышенный потолок.
+        result = main._fns_sync_once(db)
+        assert result == fake_stats, "при большом бэклоге обязан сработать повышенный потолок, а не обычный"
     finally:
         db.close()
 
@@ -1128,6 +1162,74 @@ def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_sta
             }}]}
 
     assert attempt_single_exact_match(OnlyLiquidated(), "Тестовая компания") is None
+
+
+def test_fns_queue_attempt_single_exact_match_propagates_api_errors():
+    """Этап 13, П4: ошибка `search` (сеть, ключ, исчерпанная годовая квота)
+    больше НЕ проглатывается внутри функции и не превращается в None —
+    иначе она неотличима от честного «совпадений не найдено», и весь
+    прогон при отказавшем API выглядел бы как «спросили, ничего не
+    нашли», а не как «вопрос вообще не дошёл до ФНС». Ошибку теперь
+    считает и решает, что с ней делать, вызывающий (`main()`)."""
+    from fns_client import ApiFnsError
+    from pipeline.fns_unresolved_queue import attempt_single_exact_match
+
+    class AlwaysFails:
+        def search(self, q):
+            raise ApiFnsError("квота исчерпана (тест)")
+
+    with pytest.raises(ApiFnsError):
+        attempt_single_exact_match(AlwaysFails(), "Тестовая компания")
+
+
+def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honestly(
+        monkeypatch, tmp_path, capsys):
+    """Этап 13, П4: систематический отказ API (3 ошибки подряд) обязан
+    остановить прогон раньше лимита и сказать об этом прямо — а не
+    молча дописать все оставшиеся карточки в очередь так, будто их
+    честно проверили и не нашли совпадения. Родня уже записанного теста
+    про fns_seed_top_companies.py («скрипт не должен молчать о том, что
+    ни один запрос не удался»)."""
+    import json as _json
+    import sys as _sys
+    import pipeline.fns_unresolved_queue as uq_mod
+    from fns_client import ApiFnsError
+
+    base = {
+        "companies": {("c%d" % i): {"name": "Компания %d" % i} for i in range(5)},
+        "deals": [
+            {"id": "d%d" % i, "buyer": "c%d" % i, "date": "2026-01-0%d" % (i + 1)}
+            for i in range(5)
+        ],
+    }
+    data_path = tmp_path / "deals_promoted.json"
+    data_path.write_text(_json.dumps(base), encoding="utf-8")
+    monkeypatch.setattr(uq_mod, "DATA", str(data_path))
+    monkeypatch.setattr(uq_mod, "by_company_id", lambda: {})
+
+    class AlwaysFailsClient:
+        def __init__(self, *a, **kw):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def search(self, q):
+            raise ApiFnsError("квота исчерпана (тест)")
+
+    monkeypatch.setattr("fns_client.ApiFnsClient", AlwaysFailsClient)
+    monkeypatch.setattr(uq_mod.time, "sleep", lambda s: None)
+    monkeypatch.setattr(_sys, "argv", ["fns_unresolved_queue.py", "--attempt", "--limit", "5"])
+
+    uq_mod.main()
+    out = capsys.readouterr().out
+
+    assert "Поиск ФНС недоступен" in out, "систематический отказ обязан быть назван прямо"
+    assert "ошибок API" in out, "итоговая строка обязана отличать ошибки API от честного «не нашли»"
+    assert "Автоподтверждено" not in out, "при отказавшем API подтверждать было нечего"
 
 
 def test_fns_queue_append_registry_writes_valid_python_without_touching_existing_records(tmp_path):
