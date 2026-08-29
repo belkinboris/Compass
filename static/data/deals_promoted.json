@@ -70132,7 +70132,7 @@
    "promoted_from_bulk": true,
    "seller": "UCL Holding",
    "seller_src": "title",
-   "seller_id": "ge4dcbb49",
+   "seller_id": "volga-flot",
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-10",
@@ -98848,7 +98848,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "group": true
   },
   "ga01a21eb": {
    "name": "Окская судоверфь",
@@ -108205,6 +108206,23 @@
     "source": [
      "РБК",
      "https://kavkaz.rbc.ru/kavkaz/freenews/632c1ce19a7947fb06f8222f"
+    ]
+   }
+  },
+  "volga-flot": {
+   "name": "АО «Волга-Флот»",
+   "ind": "Транспорт и логистика",
+   "desc": "Судоходная компания группы UCL Holding (Владимир Лисин); в 2023 году продала 100% акций АО «Окская судоверфь» Александру Иванову.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ],
+   "holding": {
+    "id": "ge4dcbb49",
+    "confidence": "disclosed",
+    "source": [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/6394488"
     ]
    }
   }
