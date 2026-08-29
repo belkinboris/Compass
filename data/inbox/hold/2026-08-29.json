@@ -4551,7 +4551,7 @@
    ]
   },
   {
-   "draft_id": "d74950254",
+   "draft_id": "d12255626",
    "title": "«Сбер» ожидает волну отложенных IPO в 2027 году",
    "date": "2026-08-29",
    "src": [
@@ -4581,69 +4581,42 @@
    ]
   },
   {
-   "draft_id": "d55577421",
-   "title": "Сцена единения: Безруков объявил о слиянии МХАТ им. Горького и Губернского театра",
+   "draft_id": "d34024537",
+   "title": "Стартап Atorie, продающий люксовые вещи без наценки, привлек $9,5 млн посевных инвестиций",
    "date": "2026-08-29",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2156979/zoia-igumnova/bezrukov-obyavil-o-sliyanii-mhat-im-gorkogo-i-gubernskogo-teatra"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/startap-atorie-prodayushhij-lyuksovye-veshhi-bez-natsenki-privlek-9-5-mln-posevnyh-investitsij/"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "$9,5 млн",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Стартап Atorie, продающий люксовые вещи без наценки",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Стартап Atorie, продающий люксовые вещи без наценки",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d39719932",
-   "title": "Рубио оценил объем частных инвестиций в Венесуэлу после нефтяной сделки с США",
+   "draft_id": "d83933348",
+   "title": "В России начнут продавать лекарства в «аптеках на колесах»",
    "date": "2026-08-29",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2157223/rubio-otcenil-obem-chastnykh-investitcii-v-venesuelu-posle-neftianoi-sdelki-s-ssha-izi"
-    ]
-   ],
-   "sum": "$100 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28481709",
-   "title": "Покупка посуды через мессенджер обернулась для астраханки потерей денег",
-   "date": "2026-08-29",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/8/29/pokupka-posudy-cherez-messendzher-obernulas-dlya-astrahanki-poterej-deneg"
+     "web:ria.ru",
+     "https://ria.ru/20260829/rossija-2113974568.html"
     ]
    ],
    "sum": null,
@@ -4658,11 +4631,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": "Фармацевтика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
