@@ -4329,64 +4329,6 @@
    ]
   },
   {
-   "draft_id": "d78969183",
-   "title": "Разработчик стоматологических роботов Lupin Dental привлек €15 млн",
-   "date": "2026-08-28",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/razrabotchik-stomatologicheskih-robotov-lupin-dental-privlek-e15-mln/"
-    ]
-   ],
-   "sum": "€15 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Разработчик стоматологических роботов Lupin Dental",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Разработчик стоматологических роботов Lupin Dental",
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d40651149",
-   "title": "Финтех-сервис Stripe решил отказаться от попытки купить PayPal за $53 млрд — Bloomberg",
-   "date": "2026-08-28",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/money/3102204-stripe-otkaz-ot-pokupki-paypal?from=rss"
-    ]
-   ],
-   "sum": "$53 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d34066953",
    "title": "Национализированный у Митюшова «Салаватнефтемаш» оценен в 2 млрд рублей",
    "date": "2026-08-28",
@@ -4551,7 +4493,7 @@
    ]
   },
   {
-   "draft_id": "d73844646",
+   "draft_id": "d73342290",
    "title": "«Сбер» ожидает волну отложенных IPO в 2027 году",
    "date": "2026-08-29",
    "src": [
@@ -4581,7 +4523,7 @@
    ]
   },
   {
-   "draft_id": "d13047699",
+   "draft_id": "d37770212",
    "title": "Стартап Atorie, продающий люксовые вещи без наценки, привлек $9,5 млн посевных инвестиций",
    "date": "2026-08-29",
    "src": [
@@ -4607,34 +4549,6 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87667760",
-   "title": "На Украине арестовали подозреваемых в незаконной продаже органов",
-   "date": "2026-08-29",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260829/ukraina-2114035132.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
