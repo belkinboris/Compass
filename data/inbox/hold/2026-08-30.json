@@ -4552,16 +4552,44 @@
    ]
   },
   {
-   "draft_id": "d54536925",
-   "title": "В Абу-Даби за рекордную сумму продали редкого белого сокола",
+   "draft_id": "d39350576",
+   "title": "Стартап-экосистема Швеции нарастит объем привлеченных инвестиций до $5 млрд в 2026 году",
    "date": "2026-08-30",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260830/abu-dabi-2114114221.html"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/startap-ekosistema-shvetsii-narastit-obem-privlechennyh-investitsij-do-5-mlrd-v-2026-godu/"
     ]
    ],
-   "sum": null,
+   "sum": "$5 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66044636",
+   "title": "Джек Ма купил акции Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
+   "date": "2026-08-30",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/dzhek-ma-kupil-akcii-alibaba-bolee-chem-na-76-mln-milliarder-uveren-v-ii-strategii-kompanii/"
+    ]
+   ],
+   "sum": "$76 млн",
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -4569,25 +4597,25 @@
      "kind": "closed",
      "date": "2026-08-30",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "Основатель Alibaba Джек Ма несколько дней подряд покупал акции компании на Гонконгской бирже и вложил в них более $76,5 млн, сообщает South China Morning Post. Председатель Alibaba Джо Цай и CEO Эдди Ву также приобрели акции примерно на $25,8 млн. Покупки…",
      "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260830/abu-dabi-2114114221.html"
+      "web:rb.ru",
+      "https://rb.ru/news/dzhek-ma-kupil-akcii-alibaba-bolee-chem-na-76-mln-milliarder-uveren-v-ii-strategii-kompanii/"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "редкого белого сокола",
+   "buyer_name": "Джек Ма",
+   "asset": "Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": "редкого белого сокола",
+    "buyer": "Джек Ма",
+    "asset": "Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
