@@ -361,6 +361,31 @@ def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
     assert page.evaluate("dealMultipleLine(%s, 't1', 17400000, 2023)" % json.dumps(absurd)) is None
 
 
+def test_assistant_retrieval_finds_deal_regardless_of_word_case(page, base_url):
+    """Этап 16, П4: ассистент ищет по своей базе (`relevantDeals`) до похода в
+    Яндекс — но вопрос падежом отличается от заголовка карточки, и это не
+    должно ломать поиск.
+
+    Замер 30 августа 2026: «Ситибанком» (вопрос, творительный падеж) не
+    находил карточку с «Ситибанк» (заголовок, именительный) — усечение слова
+    до пропорциональной длины давало разный остаток для разных окончаний.
+    Починено переходом на уже проверенный компаратор `sameWordFuzzy` (тот же,
+    что работает в поиске по ленте), с ограничением разницы длины слов — иначе
+    короткое «сити» (Москва-Сити) фаззи-совпадало с «ситибанк» и перетягивало
+    ранжирование на сделки про недвижимость."""
+    visit(page, base_url, "#/")
+    for q in ("Кто купил Ситибанк?", "Что известно про сделку с Ситибанком?"):
+        ids = page.evaluate("(q) => relevantDeals(q, 40).map(d => d.id)", q)
+        assert "citibank" in ids, f"{q!r} не нашёл карточку citibank среди {len(ids)} кандидатов"
+    # Тот же класс задачи в обратную сторону: короткое слово-предлог («про»)
+    # не должно фаззи-совпадать с чужим более длинным словом («проект») и
+    # вытеснять настоящий ответ из топа.
+    top5_titles = page.evaluate(
+        "relevantDeals('Что известно про Магнит', 5).map(d => d.title.toLowerCase())")
+    assert sum(1 for t in top5_titles if "магнит" in t) >= 3, \
+        f"«Магнит» вытеснен из топ-5 нерелевантными совпадениями: {top5_titles}"
+
+
 def test_analytics_page_shows_market_multiples_block(browser, base_url):
     """Этап 16, П1: блок «Мультипликаторы рынка» на Аналитике — проверяем оба
     честных состояния (пусто и заполнено) подменой сетевого ответа, а не
@@ -787,6 +812,35 @@ def test_analytics_period_filter_narrows_every_card(page, base_url):
     page.click("#anReset")
     page.wait_for_timeout(600)
     assert page.inner_text(".an-filters-note") == whole, "сброс не вернул полную выборку"
+
+
+def test_analytics_shows_sum_dynamics_and_advisor_league(page, base_url):
+    """Этап 16, П3: «сколько сделок» и «на сколько» — разные графики.
+
+    Карточка сумм по периодам разворачивается в кварталы при выборе года
+    (та же логика, что у графика счётчика сделок), а «Лига консультантов»
+    называет знаменатель «где консультант раскрыт», а не общее число сделок.
+    """
+    visit(page, base_url, "#/analytics")
+    cards = page.locator(".an-card")
+    labels = [cards.nth(i).locator(".label").inner_text().lower() for i in range(cards.count())]
+    sum_card_idx = next((i for i, l in enumerate(labels) if "сумма сделок по годам" in l), None)
+    assert sum_card_idx is not None, f"нет карточки суммы сделок по годам: {labels}"
+    league_idx = next((i for i, l in enumerate(labels) if "лига консультантов" in l), None)
+    assert league_idx is not None, f"нет карточки «Лига консультантов»: {labels}"
+    league_note = cards.nth(league_idx).locator("p").inner_text().lower()
+    assert "консультант раскрыт" in league_note, f"нет знаменателя раскрытия: {league_note!r}"
+
+    page.select_option("#anYearSel", "2025")
+    page.wait_for_timeout(600)
+    assert not page.crashes, page.crashes[:3]
+    cards2 = page.locator(".an-card")
+    labels2 = [cards2.nth(i).locator(".label").inner_text().lower() for i in range(cards2.count())]
+    sum_card2 = next((l for l in labels2 if "сумма сделок по кварталам" in l), None)
+    assert sum_card2 and "2025" in sum_card2, f"карточка суммы не развернулась в кварталы: {labels2}"
+
+    page.click("#anReset")
+    page.wait_for_timeout(600)
 
 
 def test_analytics_names_the_set_it_counts(page, base_url):
@@ -1712,6 +1766,28 @@ def test_header_does_not_jump_while_scrolling(page, base_url):
         tops.append(page.evaluate(
             "() => Math.round(document.querySelector('.top').getBoundingClientRect().top)"))
     assert set(tops) == {0}, f"шапка ездит по вертикали при прокрутке: {tops}"
+
+
+def test_scroll_to_feed_lands_below_fixed_header(page, base_url):
+    """Этап 16, П5: прокрутка к ленте не прячет строку поиска под шапкой.
+
+    Шапка `position:fixed` не занимает места в потоке, поэтому
+    `feedAnchor.scrollIntoView()` (стрелка ↓ на герое, кнопка «Смотреть
+    сделки») выравнивала верх #feed ровно по верху вьюпорта — то есть ПОД
+    шапку. `scroll-margin-top` на #feed чинит это для того же
+    programmatic-скролла, что и для якорных ссылок браузера.
+    """
+    visit(page, base_url, "#/")
+    try:
+        page.click(".hs-cue", force=True)
+        page.wait_for_timeout(900)
+        feed_top = page.evaluate("document.getElementById('feed').getBoundingClientRect().top")
+        header_bottom = page.evaluate("document.querySelector('.top').getBoundingClientRect().bottom")
+        assert feed_top >= header_bottom, (
+            f"лента прячется под шапкой: верх ленты {feed_top}, низ шапки {header_bottom}")
+    finally:
+        page.evaluate("window.scrollTo(0,0)")
+        page.wait_for_timeout(300)
 
 
 def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
