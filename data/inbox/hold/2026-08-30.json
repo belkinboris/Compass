@@ -4552,19 +4552,30 @@
    ]
   },
   {
-   "draft_id": "d23575571",
-   "title": "Песков допустил покупку нового автомобиля Volga",
+   "draft_id": "d89698548",
+   "title": "Песков не исключил покупку нового автомобиля Volga",
    "date": "2026-08-30",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2157776/2026-08-30/peskov-dopustil-pokupku-novogo-avtomobilia-volga"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8921800"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-30",
+     "title": "Сделка завершена",
+     "note": "Пресс-секретарь президента РФ Дмитрий Песков в интервью ИС «Вести» ответил на вопрос, купил бы он новый автомобиль Volga. Он отметил, что не исключает такой возможности, но перед покупкой машину «нужно пробовать».",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8921800"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4581,41 +4592,31 @@
    ]
   },
   {
-   "draft_id": "d18776973",
-   "title": "Песков ответил, купил бы он себе новую Volga",
+   "draft_id": "d11095165",
+   "title": "OpenAI разрывает партнерство с Cursor после покупки сервиса компанией SpaceX",
    "date": "2026-08-30",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053122706"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/openai-razryvaet-partnerstvo-s-cursor-posle-pokupki-servisa-kompaniej-spacex/"
     ]
    ],
-   "sum": null,
+   "sum": "$60 млрд",
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-30",
-     "title": "Сделка завершена",
-     "note": "Пресс-секретарь российского президента Дмитрий Песков, отвечая на вопрос о покупке автомобиля Volga, заявил, что машину сначала «нужно попробовать». Об этом официальный представитель Кремля рассказал журналистам.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053122706"
-     ]
-    }
-   ],
-   "buyer_name": "Песков ответил",
-   "asset": "бы он себе новую Volga",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Песков ответил",
-    "asset": "бы он себе новую Volga",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
