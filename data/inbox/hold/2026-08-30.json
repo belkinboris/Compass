@@ -4550,6 +4550,73 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
+  },
+  {
+   "draft_id": "d67220389",
+   "title": "Песков ответил на вопрос, купил бы он себе новую Volga",
+   "date": "2026-08-30",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260830/peskov-2114142406.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-30",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260830/peskov-2114142406.html"
+     ]
+    }
+   ],
+   "buyer_name": "Песков ответил на вопрос",
+   "asset": "бы он себе новую Volga",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Песков ответил на вопрос",
+    "asset": "бы он себе новую Volga",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d73679177",
+   "title": "Киев перешел к террору против мирной инфраструктуры, заявил Песков",
+   "date": "2026-08-30",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260830/kiev-2114134770.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
