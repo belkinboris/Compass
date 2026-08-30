@@ -4552,19 +4552,30 @@
    ]
   },
   {
-   "draft_id": "d39350576",
-   "title": "Стартап-экосистема Швеции нарастит объем привлеченных инвестиций до $5 млрд в 2026 году",
+   "draft_id": "d32327135",
+   "title": "«Челси» приобрел вратаря сборной Аргентины Мартинеса",
    "date": "2026-08-30",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/startap-ekosistema-shvetsii-narastit-obem-privlechennyh-investitsij-do-5-mlrd-v-2026-godu/"
+     "web:interfax.ru",
+     "https://www.sport-interfax.ru/1112083"
     ]
    ],
-   "sum": "$5 млрд",
+   "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-30",
+     "title": "Сделка завершена",
+     "note": "\"Челси\" подписал контракт с аргентинским вратарем Эмилиано Мартинесом, сообщается на сайте английского футбольного клуба.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.sport-interfax.ru/1112083"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4580,42 +4591,31 @@
    ]
   },
   {
-   "draft_id": "d66044636",
-   "title": "Джек Ма купил акции Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
+   "draft_id": "d18162466",
+   "title": "В элитном поселке Челябинска продается дом с васильковой крышей за 115 млн. Фото",
    "date": "2026-08-30",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/dzhek-ma-kupil-akcii-alibaba-bolee-chem-na-76-mln-milliarder-uveren-v-ii-strategii-kompanii/"
+     "web:ura.news",
+     "https://ura.news/news/1053121664"
     ]
    ],
-   "sum": "$76 млн",
+   "sum": "115 млн ₽",
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-30",
-     "title": "Сделка завершена",
-     "note": "Основатель Alibaba Джек Ма несколько дней подряд покупал акции компании на Гонконгской бирже и вложил в них более $76,5 млн, сообщает South China Morning Post. Председатель Alibaba Джо Цай и CEO Эдди Ву также приобрели акции примерно на $25,8 млн. Покупки…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/dzhek-ma-kupil-akcii-alibaba-bolee-chem-na-76-mln-milliarder-uveren-v-ii-strategii-kompanii/"
-     ]
-    }
-   ],
-   "buyer_name": "Джек Ма",
-   "asset": "Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Джек Ма",
-    "asset": "Alibaba более чем на $76 млн — миллиардер уверен в ИИ-стратегии компании",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
