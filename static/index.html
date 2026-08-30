@@ -4966,7 +4966,7 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">EV/Выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">по выручке цели за ${mult.revenueYear} год (ФНС)</span></p>`:""}
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">EV/Выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">сумма сделки к выручке купленной компании за ${mult.revenueYear} год (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -5879,7 +5879,7 @@ async function mountMarketMultiples(){
   const dealsHtml = data.deals.slice(0,15).map(d=>`
     <a class="an-deal" href="#/deal/${d.id}">
       <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-      <span class="an-deal-s">${fnsMoney(d.sum_rub)} · выручка цели за ${d.revenue_year}: ${fnsMoney(d.revenue_rub)}</span>
+      <span class="an-deal-s">${fnsMoney(d.sum_rub)} · выручка купленной компании за ${d.revenue_year}: ${fnsMoney(d.revenue_rub)}</span>
     </a>`).join("");
   body.outerHTML = `
     <div id="multiplesBody">
