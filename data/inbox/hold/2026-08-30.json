@@ -4552,57 +4552,17 @@
    ]
   },
   {
-   "draft_id": "d89698548",
-   "title": "Песков не исключил покупку нового автомобиля Volga",
+   "draft_id": "d60801479",
+   "title": "В Минвостокразвития оценили транспортные инвестиции в Арктике в ₽5 трлн",
    "date": "2026-08-30",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8921800"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/20/08/2026/6a871b5f9a79476510fb269d"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-30",
-     "title": "Сделка завершена",
-     "note": "Пресс-секретарь президента РФ Дмитрий Песков в интервью ИС «Вести» ответил на вопрос, купил бы он новый автомобиль Volga. Он отметил, что не исключает такой возможности, но перед покупкой машину «нужно пробовать».",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8921800"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d11095165",
-   "title": "OpenAI разрывает партнерство с Cursor после покупки сервиса компанией SpaceX",
-   "date": "2026-08-30",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/openai-razryvaet-partnerstvo-s-cursor-posle-pokupki-servisa-kompaniej-spacex/"
-    ]
-   ],
-   "sum": "$60 млрд",
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4616,8 +4576,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
