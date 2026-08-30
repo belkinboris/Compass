@@ -29,6 +29,8 @@ from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
 import auth
+import deal_catalog
+import deal_multiples
 import notification_service
 import subscription_feed
 from company_catalog import get_company_profile
@@ -990,6 +992,47 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
         "as_of_year": as_of_year,
         "disclaimer": "Показатели относятся к указанному юридическому лицу по РСБУ и могут не отражать консолидированные показатели всей группы.",
     }
+
+
+@app.get("/api/finance/screening")
+def finance_screening(db=Depends(get_db)):
+    """Массовый company_id -> {year, revenue_rub} для финансового фильтра
+    ленты (Этап 16, П2). Один запрос вместо сотен: лента не может себе
+    позволить дёргать /api/companies/{id}/fns для каждой видимой карточки —
+    это тот же список, что уже показывает досье компании (тот же порог
+    свежести, FNS_REPORT_MAX_AGE_YEARS), просто агрегированный за раз."""
+    cutoff_year = datetime.now(timezone.utc).year - FNS_REPORT_MAX_AGE_YEARS
+    rows = db.execute(
+        select(LegalEntity.company_id, FinancialReport.year, FinancialReport.revenue_rub)
+        .join(FinancialReport, FinancialReport.legal_entity_id == LegalEntity.id)
+        .where(
+            LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+            LegalEntity.company_id.is_not(None),
+            FinancialReport.revenue_rub.is_not(None),
+            FinancialReport.year >= cutoff_year,
+        )
+    ).all()
+    companies: dict[str, dict] = {}
+    for company_id, year, revenue_rub in rows:
+        cur = companies.get(company_id)
+        if not cur or year > cur["year"]:
+            companies[company_id] = {"year": year, "revenue_rub": float(revenue_rub)}
+    return {"companies": companies}
+
+
+@app.get("/api/analytics/multiples")
+def analytics_multiples(db=Depends(get_db)):
+    """Мультипликаторы сделок (EV/Выручка) — Этап 16, П1.
+
+    Методика и её обоснование — deal_multiples.py (модуль обвешан тестами
+    на каждую ловушку, найденную пилотом Этапа 15). Здесь только сборка:
+    свои сделки, свой реестр ФНС, свои профили компаний — по одному разу
+    на запрос, без кэша (тот же стиль, что и у остальных эндпоинтов сайта:
+    файлы маленькие, а мгновенная согласованность после деплоя важнее
+    микросекунд ответа)."""
+    deals = deal_catalog.load_deals()
+    registry = fns_registry_by_company_id()
+    return deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile)
 
 
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:

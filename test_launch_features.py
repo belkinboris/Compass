@@ -160,6 +160,96 @@ def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
     assert len(anonymous["entities"][0]["events"]) >= 4
 
 
+def _seed_multiples_entity(company_id, inn, year, revenue_rub):
+    db = get_session()
+    try:
+        company = db.get(Company, company_id)
+        if not company:
+            db.add(Company(id=company_id, name=company_id, legal_name=company_id))
+            db.flush()
+        entity = db.query(LegalEntity).filter_by(inn=inn).first()
+        if not entity:
+            entity = LegalEntity(
+                company_id=company_id, legal_name='ООО "%s"' % company_id,
+                inn=inn, status="Действующая",
+                match_status=LegalEntityMatchStatus.confirmed, is_primary=True,
+                fetched_at=datetime.utcnow(),
+            )
+            db.add(entity)
+            db.flush()
+        if not db.query(FinancialReport).filter_by(legal_entity_id=entity.id, year=year).first():
+            db.add(FinancialReport(legal_entity_id=entity.id, year=year, revenue_rub=revenue_rub))
+        db.commit()
+    finally:
+        db.close()
+
+
+def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monkeypatch):
+    """Интеграционный тест на /api/analytics/multiples: реальный HTTP-запрос,
+    реальная БД, но свои сделки и свой реестр — чтобы тест не зависел от
+    содержимого живой базы, которое меняется каждый час. Одна чистая сделка,
+    одна не-M&A (отсекается текстовым фильтром), одна с целью-банком
+    (отсекается реестром) — проверяет всю цепочку, а не отдельные функции
+    (те уже покрыты test_deal_multiples.py на уровне чистых функций)."""
+    _seed_multiples_entity("mult-clean-target", "7710000301", 2023, 500_000_000)
+    _seed_multiples_entity("mult-bank-target", "7710000302", 2023, 500_000_000)
+
+    deals = {
+        "mult-clean-deal": dict(
+            id="mult-clean-deal", title="Чистая сделка для теста", type="M&A",
+            date="2024-03-01", sum="1 000 млн ₽", target="mult-clean-target",
+            buyer="mult-buyer", seller="Тестовый Продавец",
+            eco={"share": None}, asset=None,
+        ),
+        "mult-not-ma-deal": dict(
+            id="mult-not-ma-deal", title="Инвестиция, не в счёт", type="Инвестиция",
+            date="2024-03-01", sum="1 000 млн ₽", target="mult-clean-target",
+            buyer="mult-buyer", seller="Тестовый Продавец",
+            eco={"share": None}, asset=None,
+        ),
+        "mult-bank-deal": dict(
+            id="mult-bank-deal", title="Сделка с банком, не в счёт", type="M&A",
+            date="2024-03-01", sum="1 000 млн ₽", target="mult-bank-target",
+            buyer="mult-buyer", seller="Тестовый Продавец",
+            eco={"share": None}, asset=None,
+        ),
+    }
+    registry = {
+        "mult-clean-target": {"company_id": "mult-clean-target", "decision": "confirmed", "inn": "7710000301"},
+        "mult-bank-target": {"company_id": "mult-bank-target", "decision": "bank", "inn": "7710000302"},
+    }
+    monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
+    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(main, "get_company_profile",
+                         lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-clean-target" else None)
+
+    body = client.get("/api/analytics/multiples").json()
+    # Не-M&A и сделка с целью-банком отсеиваются уже текстовым фильтром
+    # (find_candidates) — до всякого обращения к БФО.
+    assert body["candidates_total"] == 1
+    assert body["clean_total"] == 1
+    assert [d["id"] for d in body["deals"]] == ["mult-clean-deal"]
+    assert body["deals"][0]["multiple"] == 2.0
+    assert body["median"] == 2.0
+    assert "methodology" in body and body["methodology"]
+
+
+def test_finance_screening_endpoint_returns_latest_non_stale_revenue_per_company(client):
+    """Этап 16, П2: /api/finance/screening — массовый company_id -> выручка
+    для финансового фильтра ленты. Проверяет три вещи разом: берётся ПОСЛЕДНИЙ
+    год (не первый попавшийся), устаревшая (за порогом FNS_REPORT_MAX_AGE_YEARS)
+    отчётность не участвует, а банк (revenue_rub всегда NULL в его отчёте)
+    структурно не может попасть в ответ — не нужен отдельный список исключений."""
+    _seed_multiples_entity("screen-target-fresh", "7710000401", 2024, 900_000_000)
+    _seed_multiples_entity("screen-target-fresh", "7710000401", 2022, 100_000_000)  # старее — не должен победить
+    _seed_multiples_entity("screen-target-bank", "7710000402", 2024, None)  # банк: revenue_rub всегда NULL
+
+    body = client.get("/api/finance/screening").json()
+    companies = body["companies"]
+    assert companies["screen-target-fresh"] == {"year": 2024, "revenue_rub": 900_000_000.0}
+    assert "screen-target-bank" not in companies
+
+
 def test_is_ao_entity_matches_joint_stock_forms_not_ooo():
     """Этап 5, П1''''': критерий, от которого зависит вся честность подписи —
     должен ловить ПАО/АО/ОАО/ЗАО и НЕ ловить ООО/АНО и подобные."""

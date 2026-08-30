@@ -1965,9 +1965,10 @@ function dealAsText(d){
   return L.join("\n");
 }
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
-                     ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"]];
+                     ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],
+                     ["rev","filterMinRevenue"]];
 function feedStateGet(){
-  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull};
+  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull, filterMinRevenue};
 }
 function feedHash(){
   const st = feedStateGet();
@@ -1998,6 +1999,8 @@ function applyFeedParams(qs){
      параметра оставлен, чтобы старые сохранённые ссылки продолжали работать;
      снять такой фильтр можно плашкой активных фильтров. */
   filterAdvisorGroup = p.get("agroup") || "Все";
+  filterMinRevenue = p.get("rev") || "Все";
+  if(filterMinRevenue!=="Все") ensureFinanceScreening(); // пришли по ссылке с уже выбранным фильтром — данные нужны сразу
   feedQuery = p.get("q") || "";
   /* Селект «Что показывать» снят с экрана: MINI_DEALS/CHANNEL_DEALS/BULK_DEALS
      всегда пусты после слияния источников данных (см. CLAUDE.md), а значит в
@@ -2062,7 +2065,7 @@ function route(){
   // Имя темы кодируется: в нём бывает «/» («IPO / SPO»), который иначе разрезал бы хэш.
   else if(page==="theme"){
     filterTheme = arg?decodeURIComponent(arg):"Все";
-    filterInd="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; feedQuery=""; feedPage=1; advOpen=true;
+    filterInd="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; feedPage=1; advOpen=true;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -2072,7 +2075,7 @@ function route(){
   // («ГМК и добыча» безопасна, а «Нефть/газ» разрезала бы хэш).
   else if(page==="ind"){
     filterInd = arg?decodeURIComponent(arg):"Все";
-    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
+    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -2080,7 +2083,7 @@ function route(){
   // подборку можно было дать ссылку, а не пересказывать «наберите вот это».
   else if(page==="search"){
     feedQuery = arg?decodeURIComponent(arg):"";
-    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; onlyFull=false; feedPage=1;
+    filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; onlyFull=false; feedPage=1;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -2596,6 +2599,39 @@ let advOpen = false;
 let filterFirm = "Все";
 let filterAdvisorGroup = "Все";
 let filterTheme = "Все";
+// Этап 16, П2: скрининг по финансам цели. `financeScreening` — null, пока не
+// загружен (фильтр тогда пропускает всё, а не прячет ленту молча), {} —
+// загружен и пуст. Тянется ЛЕНИВО (см. ensureFinanceScreening), а не при
+// каждой загрузке ленты: подавляющее большинство визитов фильтр не открывают.
+let filterMinRevenue = "Все";
+let financeScreening = null;
+const REVENUE_BUCKETS = [
+  ["Все", null], ["known", "Выручка цели известна"],
+  ["1e9", "От 1 млрд ₽"], ["1e10", "От 10 млрд ₽"], ["5e10", "От 50 млрд ₽"],
+];
+async function ensureFinanceScreening(){
+  if(financeScreening) return;
+  try{
+    const r = await fetch("/api/finance/screening");
+    const data = await r.json();
+    financeScreening = data.companies || {};
+  }catch(e){
+    financeScreening = {}; // честная пустота: сеть подвела — фильтр ничего не найдёт, а не подвиснет
+  }
+  feedPage = 1;
+  renderFeedList();
+}
+function dealRevenueTarget(d){ return d && (d.target || d.asset_id) || null; }
+function matchRevenue(it){
+  if(filterMinRevenue==="Все") return true;
+  if(financeScreening===null) return true; // ещё грузится — не прячем ленту молча, перерисуем сами
+  const d = it.kind==="full" ? it.rec : (it.kind==="milestone" ? it.rec.deal : null);
+  const target = dealRevenueTarget(d);
+  const entry = target ? financeScreening[target] : null;
+  if(!entry) return false;
+  if(filterMinRevenue==="known") return true;
+  return entry.revenue_rub >= Number(filterMinRevenue);
+}
 const PAGE_SIZE = 20;
 
 /* Темы сделок. Проставляются офлайн скриптом pipeline/tag_themes.py в поле
@@ -2798,7 +2834,7 @@ function unifiedFeed(){
   // поэтому фильтр по теме автоматически отсекает краткие записи — иначе
   // выдача молча смешивала бы «нет темы» и «тема не размечалась».
   const matchTheme = it => filterTheme==="Все" || (it.kind==="full" && (it.rec.themes||[]).includes(filterTheme));
-  const filtered = items.filter(it=>(filterInd==="Все"||(it.kind==="full"?hasIndustry(it.rec,filterInd):it.ind===filterInd)) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it));
+  const filtered = items.filter(it=>(filterInd==="Все"||(it.kind==="full"?hasIndustry(it.rec,filterInd):it.ind===filterInd)) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it));
   /* Сначала по дате публикации, внутри одного дня — по дате сделки. Второй
      ключ не украшение: 902 карточки приехали одним переносом архива 23 июля, и
      без него весь этот блок лёг бы в случайном порядке вместо хронологии. */
@@ -2841,6 +2877,10 @@ function emptyFeedHtml(){
   if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
   if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
+  if(filterMinRevenue!=="Все"){
+    const label = REVENUE_BUCKETS.find(([v])=>v===filterMinRevenue);
+    active.push({k:"rev", t:`финансы цели: ${label?label[1]:filterMinRevenue}`});
+  }
   const head = active.length
     ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
     : "В базе пока нет ни одной записи.";
@@ -2866,9 +2906,9 @@ function bindFeedListEvents(){
   const fr = document.getElementById("feedreset");
   if(fr) fr.onclick = ()=>{
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
-    onlyFull=false; feedPage=1;
+    onlyFull=false; filterMinRevenue="Все"; feedPage=1;
     const q=document.getElementById("feedq"); if(q) q.value="";
-    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selagroup","Все"],["selfmt","Все сделки"]]
+    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selagroup","Все"],["selfmt","Все сделки"],["selrev","Все"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
     syncFeedHash();
@@ -2958,6 +2998,9 @@ function renderDeals(){
     <label>Тема сделки
       <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
     </label>
+    <label>Финансы цели <span class="tool-note" title="По подтверждённой отчётности ФНС; учитываются только не устаревшие данные">ⓘ</span>
+      <select id="selrev">${REVENUE_BUCKETS.map(([v,label])=>`<option value="${v}" ${v===filterMinRevenue?"selected":""}>${v==="Все"?"Все":label}</option>`).join("")}</select>
+    </label>
     <div class="adv-share"><button class="chip" id="savefeed">Сохранить подборку</button><button class="chip" id="sharefeed">Скопировать ссылку</button><span class="tool-note" id="savefeednote" aria-live="polite"></span></div>
   </div>
   <div id="feedlist">${feedListHtml()}</div>
@@ -2992,6 +3035,12 @@ function renderDeals(){
   bindSel("selyear", v=>feedYear=v);
   bindSel("selfirm", v=>filterFirm=v);
   bindSel("seltheme", v=>filterTheme=v);
+  const selrev = document.getElementById("selrev");
+  if(selrev) selrev.onchange = ()=>{
+    filterMinRevenue = selrev.value; feedPage = 1;
+    renderFeedList(); syncFeedHash();
+    if(filterMinRevenue!=="Все") ensureFinanceScreening(); // тянем данные только когда фильтр реально нужен
+  };
   const sf = document.getElementById("sharefeed");
   if(sf) sf.onclick = ()=>{
     syncFeedHash();
@@ -4801,6 +4850,42 @@ async function mountCompanyFns(companyId){
   draw();
 }
 
+// Мультипликатор EV/Выручка для «Экономиста» — та же методика, что
+// deal_multiples.py (Этап 16, П1), но посчитанная на уже загруженных
+// данных карточки без второго запроса к серверу: сумма сделки уже лежит в
+// `d.sum` (из deals_promoted.json), выручка цели уже пришла вместе с
+// fns-ответом, который `mountDealFns` и так запрашивает для вкладки.
+// Дублирование правил с Python неизбежно (два разных места исполнения —
+// клиент и сервер), поэтому оба места ссылаются друг на друга в
+// комментариях: любое изменение порога здесь требует того же изменения
+// в deal_multiples.py, и наоборот.
+function dealMultipleLine(d, targetId, revenueRub, revenueYear){
+  const target = d.target || d.asset_id;
+  if(target !== targetId) return null; // мультипликатор только на вкладке ЦЕЛИ, не покупателя/продавца
+  if(d.type !== "M&A") return null;
+  if(!(d.buyer || d.buyer_name) || !(d.seller || d.seller_id)) return null;
+  if(!revenueRub || revenueRub <= 0) return null;
+  const dealYear = Number(String(d.date||"").slice(0,4));
+  if(!Number.isFinite(dealYear) || !Number.isFinite(revenueYear)) return null;
+  const gap = dealYear - revenueYear;
+  if(gap < 0 || gap > 1) return null;
+  const sumText = d.sum || "";
+  if(/оценк|оценив/i.test(sumText)) return null;
+  const m = sumText.match(/(\d[\d\s ]*(?:[.,]\d+)?)(?:\s*[–—-]\s*(\d[\d\s ]*(?:[.,]\d+)?))?\s*(тыс|млн|млрд|трлн)\.?\s*₽/i);
+  if(!m) return null;
+  const num = s => parseFloat(s.replace(/[\s ]/g,"").replace(",", "."));
+  const unitMult = {"тыс":1e3,"млн":1e6,"млрд":1e9,"трлн":1e12}[m[3].toLowerCase()];
+  const n1 = num(m[1]), n2 = m[2] ? num(m[2]) : null;
+  const sumRub = ((n1 + (n2!=null?n2:n1)) / 2) * unitMult;
+  const shareText = (d.eco && d.eco.share) || d.asset || "";
+  const stakeMatches = [...shareText.matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
+  const plausibleStake = stakeMatches.filter(x=>x>=1&&x<=100);
+  if(plausibleStake.length && Math.max(...plausibleStake) < 95) return null;
+  const multiple = sumRub / revenueRub;
+  if(!(multiple >= 0.1 && multiple <= 15)) return null;
+  return {multiple: Math.round(multiple*100)/100, revenueYear};
+}
+
 async function mountDealFns(d){
   const mount=document.getElementById("deal-fns"); if(!mount) return;
   // Порядок кандидатов — предмет сделки первым: читатель «Экономиста» смотрит
@@ -4832,6 +4917,7 @@ async function mountDealFns(d){
   const draw=()=>{
     const p=parties.find(x=>x.id===active)||parties[0];
     const c=co(p.id);
+    const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
@@ -4843,6 +4929,7 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">EV/Выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">по выручке цели за ${mult.revenueYear} год (ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -5680,8 +5767,49 @@ function renderAnalytics(){
       ${disclYears.map(([y,v],ri)=>{const pct=Math.round(v.d/v.t*100);return `<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${pct}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${pct}%</span></div>`;}).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля сделок года, где сумму назвали стороны: в графике ${disclCards} ${plural(disclCards,"сделка","сделки","сделок")} за годы, в которых их не меньше 20. Оценки экспертов сюда не входят. Показывает и прозрачность рынка, и то, насколько полно заполнена база.</p>
     </div>`:""}
+    <div class="an-card reveal" id="multiplesCard" style="grid-column:1/-1">
+      <span class="label">Мультипликаторы рынка (EV / Выручка)</span>
+      <p id="multiplesBody" style="color:var(--muted);font-size:13.5px;margin:0">Считаем по подтверждённой отчётности сторон…</p>
+    </div>
   </div>`;
   bindAnalyticsFilters();
+  mountMarketMultiples();
+}
+
+// Мультипликаторы рынка — Этап 16, П1. Методика (deal_multiples.py) не
+// зависит от фильтров этой страницы: она уже сама решает, какие сделки
+// сопоставимы (M&A, обе стороны названы, доля ≥95%, разрыв года ≤1,
+// граница 0,1–15) — накладывать поверх ещё и фильтр «отрасль/год/тип»
+// с этой страницы значило бы дробить и без того небольшую чистую выборку.
+async function mountMarketMultiples(){
+  const body=document.getElementById("multiplesBody"); if(!body) return;
+  let data;
+  try{
+    const r=await fetch("/api/analytics/multiples"); data=await r.json();
+  }catch(e){
+    body.textContent="Не удалось загрузить мультипликаторы — попробуйте обновить страницу.";
+    return;
+  }
+  if(!data || !data.clean_total){
+    body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (сумма в рублях, доля ≥95%, отчётность цели за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
+    return;
+  }
+  const industriesHtml = data.industries.length ? `
+    <div style="margin-bottom:18px">
+      ${data.industries.map(i=>`<div class="an-row"><span class="an-key">${esc(i.industry)}</span><span class="an-val num" style="flex:0 0 auto">×${i.median} <span style="color:var(--muted);font-weight:400">(${i.count}, ${i.min}–${i.max})</span></span></div>`).join("")}
+    </div>` : "";
+  const dealsHtml = data.deals.slice(0,15).map(d=>`
+    <a class="an-deal" href="#/deal/${d.id}">
+      <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
+      <span class="an-deal-s">${fnsMoney(d.sum_rub)} · выручка цели за ${d.revenue_year}: ${fnsMoney(d.revenue_rub)}</span>
+    </a>`).join("");
+  body.outerHTML = `
+    <div id="multiplesBody">
+      <p style="margin:0 0 16px"><span class="num" style="font-size:26px;font-weight:600">×${data.median}</span> <span style="color:var(--muted)">медиана по ${data.clean_total} ${plural(data.clean_total,"сделке","сделкам","сделкам")} из ${data.candidates_total} рассмотренных M&amp;A с известной суммой в рублях.</span></p>
+      ${industriesHtml}
+      ${dealsHtml}
+      <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(data.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>
+    </div>`;
 }
 
 

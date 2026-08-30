@@ -242,6 +242,222 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     assert page.evaluate("lastVerifiedDate({})") is None
 
 
+@pytest.mark.parametrize("width", WIDTHS)
+def test_advanced_filter_panel_with_new_select_has_no_overflow(browser, base_url, width):
+    """Этап 16, П2 добавил пятый `<select>` в панель расширенного поиска —
+    родня уже известного класса дефекта: скрытые состояния (открытая панель)
+    проверяются отдельно от свёрнутых, и именно в открытом виде панель уже
+    переполняла экран однажды (CLAUDE.md). Проверяем на всех трёх ширинах."""
+    ctx = browser.new_context(viewport={"width": width, "height": 900})
+    try:
+        pg = ctx.new_page()
+        pg.crashes = []
+        pg.on("pageerror", lambda e: pg.crashes.append(f"pageerror: {e}"))
+        pg.goto(base_url + "/#/deals?ind=Банки", wait_until="networkidle")  # advOpen=true через параметр ленты
+        pg.wait_for_timeout(900)
+        assert pg.locator("#selrev").count() == 1, "нет фильтра «Финансы цели» в открытой панели"
+        assert not pg.crashes
+        assert pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        pg.close()
+    finally:
+        ctx.close()
+
+
+def test_feed_finance_filter_narrows_by_target_revenue(browser, base_url):
+    """Этап 16, П2: фильтр «Финансы цели» в ленте. Вставляем синтетическую
+    сделку прямо в `DEALS` (та же техника, что и у теста мультипликатора на
+    карточке) и подменяем `financeScreening` напрямую, не дожидаясь сети, —
+    живая база не даёт управлять тем, у какой ИМЕННО компании есть выручка.
+    Свежий контекст, а не общий `page`: тест мутирует глобальное состояние
+    ленты (DEALS, financeScreening, filterMinRevenue), и even с откатом в
+    конце безопаснее не делить его с остальными тестами сессии вовсе — тот
+    же приём, что и у route-подмены сети в других тестах этого файла."""
+    ctx = browser.new_context()
+    try:
+        pg = ctx.new_page()
+        pg.crashes = []
+        pg.on("pageerror", lambda e: pg.crashes.append(f"pageerror: {e}"))
+        pg.goto(base_url + "/#/", wait_until="networkidle")
+        pg.wait_for_timeout(2000)
+        assert pg.evaluate("() => bulkLoaded")
+        pg.evaluate("""() => {
+            DEALS.push({id: 'zzz-screen-deal', date: '2024-06-01', added: '2024-06-01',
+                        title: 'Синтетическая сделка для теста фильтра', type: 'M&A',
+                        status: 'Закрыта', ind: 'ИТ и интернет', sum: 'Не раскрыта',
+                        target: 'zzz-screen-target', buyer: 'yandex'});
+            financeScreening = {'zzz-screen-target': {year: 2023, revenue_rub: 2e9}};
+        }""")
+        pg.evaluate("() => { feedPage = 1; feedQuery = 'Синтетическая сделка для теста'; renderFeedList(); }")
+        pg.wait_for_timeout(300)
+        link = 'a[href="#/deal/zzz-screen-deal"]'
+        assert pg.locator(link).count() == 1
+
+        # Порог выше настоящей выручки (2 млрд < 10 млрд) — карточка исчезает.
+        pg.evaluate("() => { filterMinRevenue = '1e10'; feedPage = 1; renderFeedList(); }")
+        pg.wait_for_timeout(300)
+        assert pg.locator(link).count() == 0
+
+        # Порог ниже настоящей выручки — карточка снова видна.
+        pg.evaluate("() => { filterMinRevenue = '1e9'; feedPage = 1; renderFeedList(); }")
+        pg.wait_for_timeout(300)
+        assert pg.locator(link).count() == 1
+
+        # Пока financeScreening ещё не пришёл (null) — фильтр не должен молча
+        # прятать всю ленту, а показывать всё до момента, когда данные придут.
+        pg.evaluate("() => { financeScreening = null; filterMinRevenue = '1e10'; feedPage = 1; renderFeedList(); }")
+        pg.wait_for_timeout(300)
+        assert pg.locator(link).count() == 1, \
+            "фильтр спрятал карточку до того, как данные вообще загрузились"
+
+        assert not pg.crashes, pg.crashes[:3]
+        assert pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        pg.close()
+    finally:
+        ctx.close()
+
+
+def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
+    """Этап 16, П1: `dealMultipleLine` в static/index.html дублирует методику
+    deal_multiples.py на клиенте (чтобы не делать второй запрос к серверу за
+    одной цифрой) — проверяем ПРЯМО функцию на синтетических объектах, а не
+    через живую сделку из базы: живая база меняется каждый час, и тест на
+    конкретном id сломался бы при первой же правке этой карточки рутиной
+    качества (родня комментария у lastVerifiedDate чуть выше)."""
+    visit(page, base_url, "#/deal/g1d36d186")
+    base = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
+            "target": "t1", "buyer": "b1", "seller": "Иван Иванов", "eco": {"share": None}}
+
+    ok = page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(base))
+    assert ok and ok["multiple"] == 2.0
+
+    # Не на вкладке цели — линия не показывается (только у target/asset_id).
+    assert page.evaluate("dealMultipleLine(%s, 'b1', 500000000, 2023)" % json.dumps(base)) is None
+
+    # Не M&A — IPO/инвестиция/допэмиссия не сопоставимы с продажей компании.
+    not_ma = dict(base, type="Инвестиция")
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(not_ma)) is None
+
+    # Нет продавца — структурный признак cash-in (допэмиссия/SPO), не сделки.
+    no_seller = dict(base, seller=None, seller_id=None)
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(no_seller)) is None
+
+    # Валютная сумма — курс на момент старой сделки нельзя молча пересчитывать.
+    dollar = dict(base, sum="$150 млн")
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dollar)) is None
+
+    # Доля меньше 95% — сумма за долю не делится на выручку всей компании.
+    small_stake = dict(base, eco={"share": "Приобретено 30% доли"})
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(small_stake)) is None
+
+    # Разрыв года выручки и сделки больше одного — отчётность может не
+    # отражать компанию на момент сделки.
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2020)" % json.dumps(base)) is None
+
+    # Абсурдный мультипликатор — почти всегда выручка не того юрлица/периметра
+    # (см. пилот Этапа 15, находка g5eb6ff22), а не редкая сделка.
+    absurd = dict(base, sum="75 500 млн ₽")
+    assert page.evaluate("dealMultipleLine(%s, 't1', 17400000, 2023)" % json.dumps(absurd)) is None
+
+
+def test_analytics_page_shows_market_multiples_block(browser, base_url):
+    """Этап 16, П1: блок «Мультипликаторы рынка» на Аналитике — проверяем оба
+    честных состояния (пусто и заполнено) подменой сетевого ответа, а не
+    ожиданием, что в базе БФО когда-нибудь наберётся нужный набор сделок.
+    Свежий контекст (не общий `page`), чтобы route-подмена не осталась
+    висеть на остальных тестах сессии — тот же приём, что и у чипов группы."""
+    ctx = browser.new_context()
+    try:
+        def populated(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 3, "median": 1.5,
+                "industries": [{"industry": "ИТ и интернет", "count": 3, "median": 1.5, "min": 1.0, "max": 2.0}],
+                "deals": [{"id": "citibank", "title": "Тестовая сделка", "year": 2024,
+                           "target_id": "citibank", "target_name": "ООО Тест",
+                           "sum_rub": 1000000000, "revenue_rub": 500000000,
+                           "revenue_year": 2023, "multiple": 2.0}],
+                "methodology": "Тестовая методика.",
+            }))
+        ctx.route("**/api/analytics/multiples", populated)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg.wait_for_timeout(800)
+        body = pg.inner_text("#multiplesCard")
+        assert "×1.5" in body or "×1,5" in body
+        assert "ИТ и интернет" in body
+        assert "Тестовая сделка" in body
+        assert not errors
+        assert pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        pg.close()
+
+        def empty(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 10, "clean_total": 0, "median": None,
+                "industries": [], "deals": [], "methodology": "Тестовая методика.",
+            }))
+        ctx.unroute("**/api/analytics/multiples")
+        ctx.route("**/api/analytics/multiples", empty)
+        pg2 = ctx.new_page()
+        pg2.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg2.wait_for_timeout(800)
+        body2 = pg2.inner_text("#multiplesCard")
+        assert "не прошла все проверки" in body2.lower()
+        pg2.close()
+    finally:
+        ctx.close()
+
+
+def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url):
+    """Этап 16, П1в: строка «EV/Выручка» на вкладке «Экономист» — вызываем
+    `mountDealFns` напрямую с синтетической сделкой (та же техника, что и в
+    тесте на чистую функцию выше), а сетевой ответ о выручке цели подменяем
+    route-перехватом. Так тест не зависит ни от содержимого живой базы, ни
+    от того, синхронизировалась ли уже конкретная компания с ФНС на проде."""
+    ctx = browser.new_context()
+    try:
+        def fake_fns(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "available": True, "company_id": "zzz-mult-target", "company_name": "ООО Тестцель",
+                "entities": [{
+                    "entity": {"id": 1, "legal_name": "ООО Тестцель", "inn": "7700000321"},
+                    "reports": [{"year": 2023, "revenue_rub": 500_000_000,
+                                 "net_profit_rub": 1, "assets_rub": 1, "equity_rub": 1}],
+                    "report_years": [2023], "has_more_reports": False, "has_more_events": False,
+                    "events": [], "ownership": {"available": False},
+                }],
+                "access": {"paid": True, "full_history": True, "downloads": True},
+            }))
+        ctx.route("**/api/companies/zzz-mult-target/fns*", fake_fns)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/deal/citibank", wait_until="networkidle")
+        pg.wait_for_timeout(600)
+        pg.click('[data-l="eco"]')  # рендерит #deal-fns — до этого его нет в DOM (вкладка "Обзор" по умолчанию)
+        pg.wait_for_timeout(400)
+        deal = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
+                "target": "zzz-mult-target", "buyer": "b1", "seller": "Иван Иванов",
+                "eco": {"share": None}}
+        pg.evaluate("mountDealFns(%s)" % json.dumps(deal))
+        pg.wait_for_timeout(600)
+        body = pg.inner_text("#deal-fns")
+        # .tag рендерится заглавными (text-transform:uppercase), а innerText
+        # отдаёт текст ПОСЛЕ CSS-преобразований — сравниваем без учёта регистра.
+        assert "ev/выручка" in body.lower()
+        assert "×2" in body
+        assert "2023" in body
+        assert not errors
+        assert pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        pg.close()
+    finally:
+        ctx.close()
+
+
 def test_pdf_button_note_does_not_get_stuck_on_login_prompt(page, base_url):
     # Кнопка ставила "Готовим PDF…" ДО запроса, а на 401 (гость не вошёл)
     # уводила во всплывающий тост и никогда не убирала эту строку — рядом с
