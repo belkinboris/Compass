@@ -367,6 +367,27 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     return picked
 
 
+def _join_subject_sentences(parts):
+    """Склеивает куски `_subject_detail()` в одну строку. Найдено 30 августа
+    на «Транснефть»/Газпромбанк (g60f99ba6): `eco.share` — короткая фраза без
+    точки на конце («7,52% голосующих ценных бумаг»), а не предложение; при
+    двух источниках (`eco.share` + профиль цели) `' '.join(picked)` склеивал
+    её с описанием банка встык, без знака препинания — «...ценных бумаг
+    Опорный банк газовой отрасли: ...» читалось как один сломанный кусок
+    текста. Кусок без конечной пунктуации получает точку перед склейкой со
+    следующим — тем же приёмом, каким уже оформлена пара «Покупатель: X —
+    деталь» (там сторону от детали отделяет тире, здесь между двумя
+    ДЕТАЛЯМИ ставится точка, потому что тире здесь означало бы другую пару
+    «сторона — деталь», которой у _subject_detail() вообще нет)."""
+    out = []
+    for i, part in enumerate(parts):
+        part = part.strip()
+        if i < len(parts) - 1 and part and not re.search(r'[.!?…»"\)]$', part):
+            part += '.'
+        out.append(part)
+    return ' '.join(out)
+
+
 def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, max_chars=200):
     """Одно дословное предложение о СТОРОНЕ (обычно — покупателе): профиль
     компании (`desc`), иначе поле `eco`, названное в `eco_field` (для
@@ -459,7 +480,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # ПРЕДМЕТ — с сутью (юрлицо/доля, чем занимается), не голое имя-повтор
     # заголовка. Финстрока цели — сразу под ним, отдельной строкой (П7-9).
     asset_novel = bool(asset) and has_novelty(asset, reference)
-    detail = ' '.join(_subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
+    detail = _join_subject_sentences(_subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
     if asset_novel and detail:
         subject = 'Предмет: %s — %s' % (esc(asset), esc(detail))
     elif asset_novel:
