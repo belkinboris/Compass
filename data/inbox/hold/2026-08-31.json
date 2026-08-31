@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d20456778",
+   "draft_id": "d52220526",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d26197219",
+   "draft_id": "d89121095",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d72451297",
+   "draft_id": "d22319985",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4636,30 +4636,19 @@
    ]
   },
   {
-   "draft_id": "d77936433",
-   "title": "Мантуров назвал размер инвестиций в перезапуск оставленных иностранцами автозаводов // Мантуров: в перезапуск оставленных автозаводов инвестировали 100 млрд рублей",
+   "draft_id": "d45861626",
+   "title": "Shein провел IPO при оценке в $26 млрд",
    "date": "2026-08-31",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8922171"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/08/31/1224922-shein-provel-ipo"
     ]
    ],
-   "sum": "100 млрд ₽",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-31",
-     "title": "Переговоры",
-     "note": "Россия планирует к 2035 году производить 2,8 млн автомобилей в год, заявил первый вице-премьер Денис Мантуров на совещании премьер-министра Михаила Мишустина с заместителями. По словам господина Мантурова, в перезапуск оставленных иностранцами автозаводов…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8922171"
-     ]
-    }
-   ],
+   "sum": "$26 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4668,49 +4657,77 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Автопром",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d33370860",
+   "title": "«Авито»: каждый второй россиянин покупает ребенку технику для учебы",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-31_avito_kazhdyj_vtoroj_rossiyanin"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "ребёнок технику для учебы",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ребёнок технику для учебы",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d12623372",
+   "title": "В России начали снижаться продажи цветов",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/v-rossii-nachali-snizhatsja-prodazhi-cvetov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d82889897",
-   "title": "В сегменте серверов продажи SSD впервые обошли HDD — исследование OCS",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-31_v_segmente_serverov_prodazhi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52607547",
-   "title": "Новый запрет с 1 сентября: где больше нельзя будет купить сигареты и вейпы",
+   "draft_id": "d23903961",
+   "title": "Бензин снова будут продавать без ограничений: что изменится с 1 сентября в Калужской области",
    "date": "2026-08-31",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053122902"
+     "https://ura.news/news/1053122937"
     ]
    ],
    "sum": null,
@@ -4728,8 +4745,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
