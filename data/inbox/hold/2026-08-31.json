@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d88991718",
+   "draft_id": "d54079566",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d33893835",
+   "draft_id": "d67090539",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d76690076",
+   "draft_id": "d49047140",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4636,17 +4636,45 @@
    ]
   },
   {
-   "draft_id": "d84083384",
-   "title": "Россия выступила спонсором международного инвестиционного форума в Согдийской области Таджикистана",
+   "draft_id": "d29236270",
+   "title": "Фармкомпания Eli Lilly & Co покупает биотех Merid Biosciences",
    "date": "2026-08-31",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112258"
+     "web:1prime.ru",
+     "https://1prime.ru/20260831/farmkompaniya--872824788.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Фармкомпания Eli Lilly & Co",
+   "asset": "биотех Merid Biosciences",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Фармкомпания Eli Lilly & Co",
+    "asset": "биотех Merid Biosciences",
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d80052400",
+   "title": "⚡️ Приглашаем на вебинар «Договариваемся на берегу: как не потерять инвестиции в совместное предприятие» Дата и время: 8 сентября 11:00 (МСК). Формат: онлайн, ссылка на трансляцию после регистрации. ▪",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "tg:LKPconsult",
+     "https://t.me/LKPconsult/3858"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4661,34 +4689,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d19902550",
-   "title": "Онлайн торговля исчезает: почему россияне меньше покупают на маркетплейсах",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/8/31/onlajn-torgovlya-ischezaet-pochemu-rossiyane-menshe-pokupayut-na-marketplejsah"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "на маркетплейсах",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на маркетплейсах",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
