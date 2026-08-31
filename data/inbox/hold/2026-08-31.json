@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d51282313",
+   "draft_id": "d20772748",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d41494941",
+   "draft_id": "d89827497",
    "title": "Покупку ВТБ 5% в WB-банке перенесли на сентябрь",
    "date": "2026-08-31",
    "src": [
@@ -4608,35 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d78359542",
-   "title": "В День знаний в Башкирии магазины не будут продавать алкоголь",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/volga/news/bashkortostan/2026/8/31/v-den-znanij-v-bashkirii-magaziny-ne-budut-prodavat-alkogol"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53331325",
+   "draft_id": "d21717866",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4664,42 +4636,144 @@
    ]
   },
   {
-   "draft_id": "d85444364",
-   "title": "«Надоели плохие дороги». Семья из Екатеринбурга купила вертолет, чтобы летать на нем в деревню",
+   "draft_id": "d40379790",
+   "title": "Отсутствие привычного способа оплаты может привести к отказу от покупки: исследование «Точка Банк»",
    "date": "2026-08-31",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/transport/2026/08/31/76613702/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-31_otsutstvie_privychnogo_sposoba"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-31",
-     "title": "Сделка завершена",
-     "note": "Во время обучения Екатерине Смолле пришлось столкнуться с сексизмом и пренебрежительным отношением",
-     "source": [
-      "web:74.ru",
-      "https://74.ru/text/transport/2026/08/31/76613702/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "вертолет, чтобы летать на нем в деревню",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "вертолет, чтобы летать на нем в деревню",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79707047",
+   "title": "США почти на четверть нарастили покупки удобрений из России",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260831/postavki-2114283761.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40987733",
+   "title": "Мантуров рассказал об инвестициях в перезапуск автозаводов",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260831/mlrd-2114279799.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Автопром",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d69154511",
+   "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053122875"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70255145",
+   "title": "Россиянам рассказали, как накопить на покупку дачи",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053122876"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
