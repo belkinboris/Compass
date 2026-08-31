@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d87103438",
+   "draft_id": "d51282313",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,13 +4580,13 @@
    ]
   },
   {
-   "draft_id": "d73746509",
-   "title": "ТАСС: 28 регионов России допускают ужесточение мер против продажи вейпов",
+   "draft_id": "d41494941",
+   "title": "Покупку ВТБ 5% в WB-банке перенесли на сентябрь",
    "date": "2026-08-31",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8922022"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Pokupku-VTB-5-d-WB-banke-perenesli-na-sentyabr-87451"
     ]
    ],
    "sum": null,
@@ -4608,17 +4608,45 @@
    ]
   },
   {
-   "draft_id": "d25627485",
-   "title": "Страны ЮВА активно интересуются покупкой российского ПО, заявили в РЭЦ",
+   "draft_id": "d78359542",
+   "title": "В День знаний в Башкирии магазины не будут продавать алкоголь",
    "date": "2026-08-31",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260831/rets-872805476.html"
+     "web:abnews.ru",
+     "https://abnews.ru/volga/news/bashkortostan/2026/8/31/v-den-znanij-v-bashkirii-magaziny-ne-budut-prodavat-alkogol"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53331325",
+   "title": "На востоке Москвы выставили на торги семь помещений",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/8/31/na-vostoke-moskvy-vystavili-na-torgi-sem-pomeshhenij"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4636,128 +4664,42 @@
    ]
   },
   {
-   "draft_id": "d80064371",
-   "title": "Баффету - 96! Он купил первые акции в 11 лет, а в итоге заработал $160 млрд",
-   "date": "2026-08-30",
+   "draft_id": "d85444364",
+   "title": "«Надоели плохие дороги». Семья из Екатеринбурга купила вертолет, чтобы летать на нем в деревню",
+   "date": "2026-08-31",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1345812.php"
+     "web:74.ru",
+     "https://74.ru/text/transport/2026/08/31/76613702/"
     ]
    ],
-   "sum": "$160 млрд",
+   "sum": null,
    "type": "M&A",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
-     "date": "2026-08-30",
+     "date": "2026-08-31",
      "title": "Сделка завершена",
-     "note": "Легендарному Уоррену Баффету сегодня исполнилось 96 лет. И этот юбилей особенный: впервые за 55 лет Баффет встречает его не как CEO Berkshire Hathaway — с 1 января 2026 года он передал бразды правления преемнику. В честь его дня рождения, я тут собрал топ его…",
+     "note": "Во время обучения Екатерине Смолле пришлось столкнуться с сексизмом и пренебрежительным отношением",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1345812.php"
+      "web:74.ru",
+      "https://74.ru/text/transport/2026/08/31/76613702/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "первые акции в 11 лет, а в итоге заработал $160 млрд",
+   "asset": "вертолет, чтобы летать на нем в деревню",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "первые акции в 11 лет, а в итоге заработал $160 млрд",
+    "asset": "вертолет, чтобы летать на нем в деревню",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d36232427",
-   "title": "До 10% селлеров могут потерять доступ к продажам после 1 октября из-за закона о платформенной экономике",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/do-10-sellerov-mogut-poterjat-dostup-k-prodazham-posle-1-oktjabrja-iz-za-zakona-o-platformennoj-jekonomike/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d23586047",
-   "title": "28 регионов России готовят ужесточение продажи вейпов",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/28-regionov-rossii-gotovjat-uzhestochenie-prodazhi-vejpov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74636142",
-   "title": "Так просто не замазать: как не купить жилье с «сюрпризом» и где искать скрытые дефекты — за них можно взыскать деньги",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/realty/2026/08/31/76613538/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
