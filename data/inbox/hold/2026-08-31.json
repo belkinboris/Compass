@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d34845324",
+   "draft_id": "d44015350",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d39543678",
+   "draft_id": "d24771294",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d23411755",
+   "draft_id": "d55962867",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4636,7 +4636,7 @@
    ]
   },
   {
-   "draft_id": "d62186320",
+   "draft_id": "d92054882",
    "title": "В Петербурге продали бывший головной офис банка «Таврический»",
    "date": "2026-08-31",
    "src": [
@@ -4675,7 +4675,7 @@
    ]
   },
   {
-   "draft_id": "d10837235",
+   "draft_id": "d91037194",
    "title": "Росимущество снова перенесло аукцион по продаже активов «Конти»",
    "date": "2026-08-31",
    "src": [
@@ -4703,13 +4703,13 @@
    ]
   },
   {
-   "draft_id": "d80406174",
-   "title": "Топливо классом ниже Евро-5 временно разрешили продавать на заправках",
+   "draft_id": "d54033151",
+   "title": "Кто покупает современное искусство и сколько готовы платить коллекционеры",
    "date": "2026-08-31",
    "src": [
     [
      "web:rbc.ru",
-     "https://www.rbc.ru/economics/31/08/2026/6a95b4149a794768c4258d89"
+     "https://www.rbc.ru/radio/31/08/2026/6a9599a19a79472242ae5de1"
     ]
    ],
    "sum": null,
@@ -4717,74 +4717,46 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "современное искусство и сколько готовы платить коллекционеры",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "современное искусство и сколько готовы платить коллекционеры",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52680843",
-   "title": "Топливо классов евро-2, евро-3, евро-4 с сентября может продаваться на АЗС",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1112320"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67225787",
-   "title": "Столичный суд заблокировал сайт по продаже фиктивных военных дипломов",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2158485/2026-08-31/stolichnyi-sud-zablokiroval-sait-po-prodazhe-fiktivnykh-voennykh-diplomov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d42995262",
+   "title": "Что такое падение рынка? Это значит, что хорошие активы снова продают со скидкой",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1346345.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
