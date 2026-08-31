@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d42878711",
+   "draft_id": "d34845324",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d11096581",
+   "draft_id": "d39543678",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d39871916",
+   "draft_id": "d23411755",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4636,7 +4636,7 @@
    ]
   },
   {
-   "draft_id": "d41058442",
+   "draft_id": "d62186320",
    "title": "В Петербурге продали бывший головной офис банка «Таврический»",
    "date": "2026-08-31",
    "src": [
@@ -4675,7 +4675,7 @@
    ]
   },
   {
-   "draft_id": "d66097207",
+   "draft_id": "d10837235",
    "title": "Росимущество снова перенесло аукцион по продаже активов «Конти»",
    "date": "2026-08-31",
    "src": [
@@ -4703,13 +4703,69 @@
    ]
   },
   {
-   "draft_id": "d65871520",
-   "title": "Дмитриев рассказал о совместных инвестициях России и Индии в фармотрасль",
+   "draft_id": "d80406174",
+   "title": "Топливо классом ниже Евро-5 временно разрешили продавать на заправках",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/31/08/2026/6a95b4149a794768c4258d89"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52680843",
+   "title": "Топливо классов евро-2, евро-3, евро-4 с сентября может продаваться на АЗС",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1112320"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67225787",
+   "title": "Столичный суд заблокировал сайт по продаже фиктивных военных дипломов",
    "date": "2026-08-31",
    "src": [
     [
      "web:iz.ru",
-     "https://iz.ru/2158455/2026-08-31/dmitriev-rasskazal-o-sovmestnykh-investitciiakh-rossii-i-indii-v-farmotrasl"
+     "https://iz.ru/2158485/2026-08-31/stolichnyi-sud-zablokiroval-sait-po-prodazhe-fiktivnykh-voennykh-diplomov"
     ]
    ],
    "sum": null,
@@ -4727,63 +4783,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73713898",
-   "title": "Турецкая газета раскрыла, почему рассекретили сделку о продаже оружия Киеву",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260831/ukraina-2114441983.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31924726",
-   "title": "На Балашовском шоссе в Ленобласти перешли к новому этапу ремонта",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/lenobl/2026/8/31/na-balashovskom-shosse-v-lenoblasti-pereshli-k-novomu-etapu-remonta"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
