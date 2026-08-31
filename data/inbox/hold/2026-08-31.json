@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d40658488",
+   "draft_id": "d17201264",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d21246697",
+   "draft_id": "d55052925",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d44543990",
+   "draft_id": "d57306985",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4621,112 +4621,6 @@
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64699019",
-   "title": "Распродал облигационный портфель от ВДО. Что попало под нож и на что заменил?",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1346163.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-31",
-     "title": "Сделка завершена",
-     "note": "Сейчас на долговом рынке, как и на фондовом, непростая ситуация. Инвесторы массово переходят от рискованных стратегий к надёжным активам. Новые выпуски облигаций почти не покупают — даже высокие купоны не спасают их от обвала сразу после старта. Волна…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1346163.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28638844",
-   "title": "Shein провел IPO в Гонконге",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/302285"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23041985",
-   "title": "Киркоров распродал жилье в Болгарии",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/08/31/kirkorov-bolgaria/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-31",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/08/31/kirkorov-bolgaria/"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
