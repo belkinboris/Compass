@@ -4552,102 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d72931059",
-   "title": "Минвостокразвития планирует вдвое увеличить инвестиции в ДФО",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2157999/2026-08-31/minvostokrazvitiia-planiruet-vdvoe-uvelichit-investitcii-v-dfo"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-08-31",
-     "title": "Переговоры",
-     "note": "Минвостокразвития планирует вдвое увеличить инвестиции в Дальневосточный федеральный округ (ДФО) . Это следует из проекта Стратегии социально-экономического развития ДФО до 2030 года с прогнозным планом до 2036-го, который есть у «Известий». Согласно…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2157999/2026-08-31/minvostokrazvitiia-planiruet-vdvoe-uvelichit-investitcii-v-dfo"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31011438",
-   "title": "Россиянам рассказали, как накопить денег на покупку дачи",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260831/rossijane-872803827.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11271893",
-   "title": "Россиянам рассказали, как накопить денег на покупку дачи",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260831/dacha-2114235365.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23642900",
+   "draft_id": "d87103438",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4675,13 +4580,13 @@
    ]
   },
   {
-   "draft_id": "d18740964",
-   "title": "В ГД рассказали о новой схеме мошенников с продажей курсов",
+   "draft_id": "d73746509",
+   "title": "ТАСС: 28 регионов России допускают ужесточение мер против продажи вейпов",
    "date": "2026-08-31",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260831/moshenniki-2114230777.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8922022"
     ]
    ],
    "sum": null,
@@ -4703,30 +4608,19 @@
    ]
   },
   {
-   "draft_id": "d53621737",
-   "title": "Киркоров распродал элитную недвижимость",
+   "draft_id": "d25627485",
+   "title": "Страны ЮВА активно интересуются покупкой российского ПО, заявили в РЭЦ",
    "date": "2026-08-31",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053122760"
+     "web:1prime.ru",
+     "https://1prime.ru/20260831/rets-872805476.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-31",
-     "title": "Сделка завершена",
-     "note": "Народный артист России Филипп Киркоров рассказал, что продал все 14 принадлежавших ему апартаментов в Болгарии.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053122760"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4735,11 +4629,135 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80064371",
+   "title": "Баффету - 96! Он купил первые акции в 11 лет, а в итоге заработал $160 млрд",
+   "date": "2026-08-30",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1345812.php"
+    ]
+   ],
+   "sum": "$160 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-30",
+     "title": "Сделка завершена",
+     "note": "Легендарному Уоррену Баффету сегодня исполнилось 96 лет. И этот юбилей особенный: впервые за 55 лет Баффет встречает его не как CEO Berkshire Hathaway — с 1 января 2026 года он передал бразды правления преемнику. В честь его дня рождения, я тут собрал топ его…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1345812.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "первые акции в 11 лет, а в итоге заработал $160 млрд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "первые акции в 11 лет, а в итоге заработал $160 млрд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d36232427",
+   "title": "До 10% селлеров могут потерять доступ к продажам после 1 октября из-за закона о платформенной экономике",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/do-10-sellerov-mogut-poterjat-dostup-k-prodazham-posle-1-oktjabrja-iz-za-zakona-o-platformennoj-jekonomike/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d23586047",
+   "title": "28 регионов России готовят ужесточение продажи вейпов",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/28-regionov-rossii-gotovjat-uzhestochenie-prodazhi-vejpov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74636142",
+   "title": "Так просто не замазать: как не купить жилье с «сюрпризом» и где искать скрытые дефекты — за них можно взыскать деньги",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/realty/2026/08/31/76613538/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
