@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d17201264",
+   "draft_id": "d66483387",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d55052925",
+   "draft_id": "d39019437",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d57306985",
+   "draft_id": "d61554635",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4630,6 +4630,140 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24813266",
+   "title": "НПФ во II квартале продолжили наращивать инвестиции в ОФЗ",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260831/npf-872836390.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74044250",
+   "title": "В Петербурге продали бывший головной офис банка «Таврический»",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260831/bank-2114424998.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-31",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260831/bank-2114424998.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "бывший головной офис банка «Таврический»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "бывший головной офис банка «Таврический»",
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d85474644",
+   "title": "Продажи пикапов в России в июле подскочили на 19% — лидером рынка стал Foton",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/prodazhi-pikapov-v-rossii-v-iyule-podskochili-na-19-liderom-rynka-stal-foton/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-08-31",
+     "title": "Сделка завершена",
+     "note": "В июле 2026 года россияне купили 2158 новых пикапов — на 19% больше, чем годом ранее, сообщили эксперты «Автостата». Лидером рынка впервые стал китайский бренд Foton — месяцем ранее он занимал только пятое место. Также в топе оказались преимущественно…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/prodazhi-pikapov-v-rossii-v-iyule-podskochili-na-19-liderom-rynka-stal-foton/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54646015",
+   "title": "Росимущество снова перенесло аукцион по продаже активов «Конти»",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265602/"
+    ]
+   ],
+   "sum": "4,7 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
