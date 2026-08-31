@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d66483387",
+   "draft_id": "d42878711",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,7 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d39019437",
+   "draft_id": "d11096581",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4608,7 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d61554635",
+   "draft_id": "d39871916",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4636,35 +4636,7 @@
    ]
   },
   {
-   "draft_id": "d24813266",
-   "title": "НПФ во II квартале продолжили наращивать инвестиции в ОФЗ",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260831/npf-872836390.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74044250",
+   "draft_id": "d41058442",
    "title": "В Петербурге продали бывший головной офис банка «Таврический»",
    "date": "2026-08-31",
    "src": [
@@ -4703,46 +4675,7 @@
    ]
   },
   {
-   "draft_id": "d85474644",
-   "title": "Продажи пикапов в России в июле подскочили на 19% — лидером рынка стал Foton",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-pikapov-v-rossii-v-iyule-podskochili-na-19-liderom-rynka-stal-foton/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-08-31",
-     "title": "Сделка завершена",
-     "note": "В июле 2026 года россияне купили 2158 новых пикапов — на 19% больше, чем годом ранее, сообщили эксперты «Автостата». Лидером рынка впервые стал китайский бренд Foton — месяцем ранее он занимал только пятое место. Также в топе оказались преимущественно…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/prodazhi-pikapov-v-rossii-v-iyule-podskochili-na-19-liderom-rynka-stal-foton/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54646015",
+   "draft_id": "d66097207",
    "title": "Росимущество снова перенесло аукцион по продаже активов «Конти»",
    "date": "2026-08-31",
    "src": [
@@ -4764,6 +4697,90 @@
     "seller": null
    },
    "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65871520",
+   "title": "Дмитриев рассказал о совместных инвестициях России и Индии в фармотрасль",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2158455/2026-08-31/dmitriev-rasskazal-o-sovmestnykh-investitciiakh-rossii-i-indii-v-farmotrasl"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73713898",
+   "title": "Турецкая газета раскрыла, почему рассекретили сделку о продаже оружия Киеву",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260831/ukraina-2114441983.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31924726",
+   "title": "На Балашовском шоссе в Ленобласти перешли к новому этапу ремонта",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/lenobl/2026/8/31/na-balashovskom-shosse-v-lenoblasti-pereshli-k-novomu-etapu-remonta"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
