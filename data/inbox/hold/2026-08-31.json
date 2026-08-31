@@ -4552,7 +4552,7 @@
    ]
   },
   {
-   "draft_id": "d20772748",
+   "draft_id": "d20456778",
    "title": "Москва выставила на торги 7 объектов у метро «Щелковская» и «Первомайская»",
    "date": "2026-08-31",
    "src": [
@@ -4580,35 +4580,7 @@
    ]
   },
   {
-   "draft_id": "d89827497",
-   "title": "Покупку ВТБ 5% в WB-банке перенесли на сентябрь",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Pokupku-VTB-5-d-WB-banke-perenesli-na-sentyabr-87451"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21717866",
+   "draft_id": "d26197219",
    "title": "На востоке Москвы выставили на торги семь помещений",
    "date": "2026-08-31",
    "src": [
@@ -4636,92 +4608,7 @@
    ]
   },
   {
-   "draft_id": "d40379790",
-   "title": "Отсутствие привычного способа оплаты может привести к отказу от покупки: исследование «Точка Банк»",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-08-31_otsutstvie_privychnogo_sposoba"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79707047",
-   "title": "США почти на четверть нарастили покупки удобрений из России",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260831/postavki-2114283761.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Химия и удобрения",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40987733",
-   "title": "Мантуров рассказал об инвестициях в перезапуск автозаводов",
-   "date": "2026-08-31",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260831/mlrd-2114279799.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Автопром",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d69154511",
+   "draft_id": "d72451297",
    "title": "В Тюмени выставили на продажу сеть залов бокса Good Balance",
    "date": "2026-08-31",
    "src": [
@@ -4749,13 +4636,52 @@
    ]
   },
   {
-   "draft_id": "d70255145",
-   "title": "Россиянам рассказали, как накопить на покупку дачи",
+   "draft_id": "d77936433",
+   "title": "Мантуров назвал размер инвестиций в перезапуск оставленных иностранцами автозаводов // Мантуров: в перезапуск оставленных автозаводов инвестировали 100 млрд рублей",
    "date": "2026-08-31",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053122876"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8922171"
+    ]
+   ],
+   "sum": "100 млрд ₽",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-31",
+     "title": "Переговоры",
+     "note": "Россия планирует к 2035 году производить 2,8 млн автомобилей в год, заявил первый вице-премьер Денис Мантуров на совещании премьер-министра Михаила Мишустина с заместителями. По словам господина Мантурова, в перезапуск оставленных иностранцами автозаводов…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8922171"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Автопром",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82889897",
+   "title": "В сегменте серверов продажи SSD впервые обошли HDD — исследование OCS",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-08-31_v_segmente_serverov_prodazhi"
     ]
    ],
    "sum": null,
@@ -4773,7 +4699,37 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d52607547",
+   "title": "Новый запрет с 1 сентября: где больше нельзя будет купить сигареты и вейпы",
+   "date": "2026-08-31",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053122902"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
