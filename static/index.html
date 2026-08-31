@@ -2916,7 +2916,7 @@ function emptyFeedHtml(){
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   if(filterMinRevenue!=="Все"){
     const label = REVENUE_BUCKETS.find(([v])=>v===filterMinRevenue);
-    active.push({k:"rev", t:`финансы цели: ${label?label[1]:filterMinRevenue}`});
+    active.push({k:"rev", t:`выручка покупаемой компании: ${label?label[1]:filterMinRevenue}`});
   }
   const head = active.length
     ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
@@ -3035,7 +3035,7 @@ function renderDeals(){
     <label>Тема сделки
       <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
     </label>
-    <label>Финансы цели <span class="tool-note" title="По подтверждённой отчётности ФНС; учитываются только не устаревшие данные">ⓘ</span>
+    <label>Выручка покупаемой компании <span class="tool-note" title="По подтверждённой отчётности ФНС; учитываются только не устаревшие данные">ⓘ</span>
       <select id="selrev">${REVENUE_BUCKETS.map(([v,label])=>`<option value="${v}" ${v===filterMinRevenue?"selected":""}>${v==="Все"?"Все":label}</option>`).join("")}</select>
     </label>
     <div class="adv-share"><button class="chip" id="savefeed">Сохранить подборку</button><button class="chip" id="sharefeed">Скопировать ссылку</button><span class="tool-note" id="savefeednote" aria-live="polite"></span></div>

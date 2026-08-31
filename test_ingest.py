@@ -584,8 +584,8 @@ def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
     fin = {"target": (2025, "Выручка 1,0 млрд ₽")}
     with_fin = format_post.render(deal, companies, fin=fin)
     without_fin = format_post.render(deal, companies)
-    assert "Финансы цели, 2025 год: Выручка 1,0 млрд ₽" in with_fin
-    assert "Финансы цели" not in without_fin
+    assert "Финансы покупаемой компании, 2025 год: Выручка 1,0 млрд ₽" in with_fin
+    assert "Финансы покупаемой компании" not in without_fin
 
 
 def test_post_links_to_the_card_and_the_source(base):

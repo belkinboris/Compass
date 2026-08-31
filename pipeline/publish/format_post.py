@@ -592,7 +592,9 @@ def render(deal, companies, updates=(), today=None, fin=None):
         if subject:
             emit(subject)
         if target_fin:
-            emit('Финансы цели, %s год: %s' % (target_fin[0], esc(target_fin[1])))
+            # «Финансы цели» звучало как внутренний термин («финансы чего?» —
+            # спросил партнёр 31 августа); по-русски — чья это отчётность.
+            emit('Финансы покупаемой компании, %s год: %s' % (target_fin[0], esc(target_fin[1])))
 
     facts = []
     if has(deal.get('sum')):
