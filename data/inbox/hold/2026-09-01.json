@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d31758907",
+   "draft_id": "d81449096",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d80394079",
+   "draft_id": "d88874353",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d21923811",
+   "draft_id": "d43748797",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,17 +4800,17 @@
    ]
   },
   {
-   "draft_id": "d66979667",
-   "title": "РБК: сервис по продаже подержанных машин CarPrice приостановил выплаты клиентам",
+   "draft_id": "d27044156",
+   "title": "DPA: хакеры требуют от Берлина €2 млн выкупа после масштабной кибератаки",
    "date": "2026-09-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923461"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28066553"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "€2 млн",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4828,52 +4828,13 @@
    ]
   },
   {
-   "draft_id": "d53505999",
-   "title": "«Аэрофлот» выкупил все акции производителя бортового питания «Аэромар»",
+   "draft_id": "d26250394",
+   "title": "ВТБ выяснил, где жители России раньше всех идут за покупками",
    "date": "2026-09-01",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6a96d02a3861618cf40afd6e"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-01",
-     "title": "Сделка завершена",
-     "note": "Авиакомпания &laquo;Аэрофлот&raquo; приобрела 49% акций крупнейшего поставщика бортового питания &laquo;Аэромар&raquo;, увеличив свою долю в компании до 100%, сообщил перевозчик на странице центра раскрытия корпоративной информации (ЦРКИ).",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/rbcfreenews/6a96d02a3861618cf40afd6e"
-     ]
-    }
-   ],
-   "buyer_name": "«Аэрофлот»",
-   "asset": "все акции производителя бортового питания «Аэромар»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Аэрофлот»",
-    "asset": "все акции производителя бортового питания «Аэромар»",
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d17397912",
-   "title": "РЖД начали продавать билеты за цифровые рубли на электрички",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260901/rzhd-872887874.html"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/1/vtb-vyyasnil-gde-zhiteli-rossii-ranshe-vseh-idut-za-pokupkami"
     ]
    ],
    "sum": null,
@@ -4889,90 +4850,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69656179",
-   "title": "РЖД начали продавать билеты на электрички за цифровые рубли",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260901/rzhd-2114672781.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d57460279",
-   "title": "На Украине продают школьные рюкзаки с изображением Бандеры",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260901/ukraina-2114667160.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45920293",
-   "title": "Альфа-банк провел первую сделку финансирования через покупку намайненной цифровой валюты",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/302557"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

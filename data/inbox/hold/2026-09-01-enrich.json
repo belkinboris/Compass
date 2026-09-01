@@ -2,10 +2,28 @@
  "made": "2026-09-01",
  "items": [
   {
+   "news": "https://realty.ria.ru/20260901/nyu-deli-2114653072.html",
+   "title": "Сбербанк приобрел два бизнес-центра в Нью-Дели",
+   "verdict": "enrich:g0ff8c5c4",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «два бизнес-центра Summit Towers в Нью-Дели»"
+   ]
+  },
+  {
+   "news": "https://frankmedia.ru/302634",
+   "title": "«Сбер» приобрел два строящихся бизнес-центра в Индии",
+   "verdict": "enrich:g0ff8c5c4",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «два бизнес-центра Summit Towers в Нью-Дели»"
+   ]
+  },
+  {
    "news": "https://mergers.ru/news/Ajeroflot-vykupil-dolyu-struktury-Lufthansa-v-dochernem-Ajeromare-87461",
    "title": "\"Аэрофлот\" выкупил долю структуры Lufthansa в дочернем \"Аэромаре\"",
    "verdict": "enrich:g2c27516d",
-   "why": "общее название в кавычках и общие слова: 2",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «АО «Аэромар»»"
    ]
