@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d17910282",
+   "draft_id": "d84982967",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,36 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d32068062",
-   "title": "Право на оружие: как челябинцам купить ружье в 2026 году",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053123076"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d75500111",
+   "draft_id": "d15756283",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4795,6 +4766,118 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58745845",
+   "title": "Инвестиции в основной капитал в России выросли на 2%, заявил Центробанк",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260901/tsentrobank-872864209.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52739812",
+   "title": "Национализированное «Ямалкоммунэнерго» заказывает машину, которая понравилась Путину",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053123260"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35850220",
+   "title": "В Угличе снова не смогли продать гостиницу",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/9/1/v-ugliche-snova-ne-smogli-prodat-gostiniczu"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59863929",
+   "title": "Садись, двойка! На АЗС Челябинска разрешили продавать топливо по стандарту 20-летней давности",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/auto/2026/09/01/76617971/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
