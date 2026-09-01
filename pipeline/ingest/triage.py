@@ -44,8 +44,23 @@ DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 
 
 def read_raw(all_days):
+    """Файлы ленты за день, БЕЗ кэша полных текстов статей.
+
+    `<дата>-articles.jsonl` пишет `fetch_article_texts.py` — это скачанный
+    ПОЛНЫЙ текст уже известного источника, для `review.py`, а не свежая
+    новость. Оба файла начинаются с одной и той же даты, и без явного
+    исключения `-articles.jsonl` разбор принимал уже привязанный к карточке
+    источник за новую запись: `date`/`source_id` у такой записи пустые
+    (кэш хранит только `url`/`title`/`summary`), `draft.guess_event()`
+    получал `date=None` -> `'unknown'` и час за часом дописывал в ту же
+    карточку дублирующий `events[]` с одним и тем же мусорным «unknown»-
+    событием, собранным из текста статьи целиком (включая навигацию сайта
+    и рекламу) — три раза подряд на `g0ff8c5c4`/`g2c27516d` 1 сентября
+    2026, прежде чем найдено здесь.
+    """
     day = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     names = sorted(os.listdir(RAW)) if os.path.isdir(RAW) else []
+    names = [n for n in names if not n.endswith('-articles.jsonl')]
     if not all_days:
         names = [n for n in names if n.startswith(day)]
     rows = []
