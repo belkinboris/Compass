@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d84982967",
+   "draft_id": "d27837842",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d15756283",
+   "draft_id": "d61973727",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,63 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d58745845",
-   "title": "Инвестиции в основной капитал в России выросли на 2%, заявил Центробанк",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260901/tsentrobank-872864209.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52739812",
-   "title": "Национализированное «Ямалкоммунэнерго» заказывает машину, которая понравилась Путину",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053123260"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35850220",
+   "draft_id": "d61245683",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4856,13 +4800,81 @@
    ]
   },
   {
-   "draft_id": "d59863929",
-   "title": "Садись, двойка! На АЗС Челябинска разрешили продавать топливо по стандарту 20-летней давности",
+   "draft_id": "d59362157",
+   "title": "Интернет-ритейлер Shein привлек на IPO $1,7 млрд при общей оценке $26,3 млрд",
    "date": "2026-09-01",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/auto/2026/09/01/76617971/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8923090"
+    ]
+   ],
+   "sum": "$1,7 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Интернет-ритейлер Shein",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Интернет-ритейлер Shein",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d27738685",
+   "title": "Gulf News: в Абу-Даби и Дубае полностью распродали все комплекты Starlink",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28064745"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-01",
+     "title": "Сделка завершена",
+     "note": "Желающие купить комплект должны внести 285,71 дирхама залога и записаться в лист ожидания",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28064745"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52651515",
+   "title": "В Тюмени выставили на продажу легендарную круглую баню",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053123249"
     ]
    ],
    "sum": null,
@@ -4877,7 +4889,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
