@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d75851407",
+   "draft_id": "d26492167",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d34003922",
+   "draft_id": "d17215295",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d43734004",
+   "draft_id": "d55358179",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,13 +4800,41 @@
    ]
   },
   {
-   "draft_id": "d40821116",
-   "title": "«Билайн бизнес» увеличил среднемесячные продажи роутеров в 7 раз",
+   "draft_id": "d67324381",
+   "title": "Минфин возобновит аукционы ОФЗ со 2 сентября",
    "date": "2026-09-01",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-01_bilajn_biznes_uvelichil"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8923390"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16358618",
+   "title": "«Зенит» отклонил предложение «Ромы» о покупке бразильского форварда Луиса Энрике",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8923364"
     ]
    ],
    "sum": null,
@@ -4828,95 +4856,17 @@
    ]
   },
   {
-   "draft_id": "d20984220",
-   "title": "Любимова: по Пушкинской карте за пять лет приобрели 115 млн билетов",
+   "draft_id": "d50633778",
+   "title": "Минфин возобновит аукционы по размещению ОФЗ",
    "date": "2026-09-01",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28065929"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/finance/news/2026/09/01/1225370-minfin-vozobnovit"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-01",
-     "title": "Сделка завершена",
-     "note": "В Минкультуры рады возможности реализовать такой проект и его результатам, отметила министр культуры",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/kultura/28065929"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "115 млн билетов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "115 млн билетов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d27875334",
-   "title": "«Аэрофлот» закрыл сделку по приобретению 49% в Aeromar",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28065669"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-01",
-     "title": "Сделка завершена",
-     "note": "Компания получила согласование правкомиссии на приобретение 49% Aeromar в сентябре 2025 года, сообщал тогда ее гендиректор Сергей Александровский",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28065669"
-     ]
-    }
-   ],
-   "buyer_name": "«Аэрофлот»",
-   "asset": "Aeromar",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Аэрофлот»",
-    "asset": "Aeromar",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d39475902",
-   "title": "Забастовки рабочих обрушили продажи машин ушедшего из России производителя",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/zabastovki-rabochih-obrushili-prodazhi-mashin-ushedshego-iz-rossii-proizvoditelya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4934,30 +4884,58 @@
    ]
   },
   {
-   "draft_id": "d67946468",
-   "title": "✅ ОДИН ИНСТРУМЕНТ РЕДКО РЕШАЕТ ВСЮ ЗАДАЧУ На вебинаре «Тренды в структурировании: актуальные инструменты в сделках M&A, совместных проектах и инвестициях» команда BIRCH обсудила, как выбирать конструк",
+   "draft_id": "d74348884",
+   "title": "«Барселона» купила у «Арсенала» нападающего сборной Бразилии",
    "date": "2026-09-01",
    "src": [
     [
-     "tg:BIRCHLEGAL",
-     "https://t.me/BIRCHLEGAL/2253"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-09-01",
-     "title": "Переговоры",
-     "note": "✅ ОДИН ИНСТРУМЕНТ РЕДКО РЕШАЕТ ВСЮ ЗАДАЧУ На вебинаре «Тренды в структурировании: актуальные инструменты в сделках M&A, совместных проектах и инвестициях» команда BIRCH обсудила, как выбирать конструкцию для сделок, инвестиций и владения активами. Начинать…",
+     "title": "Сделка завершена",
+     "note": "Габриэл Жезус подписал трехлетний контракт с испанским клубом",
      "source": [
-      "tg:BIRCHLEGAL",
-      "https://t.me/BIRCHLEGAL/2253"
+      "web:rbc.ru",
+      "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
      ]
     }
    ],
+   "buyer_name": "«Барселона»",
+   "asset": null,
+   "seller": "«Арсенала» нападающего сборной Бразилии",
+   "parsed_parties": {
+    "buyer": "«Барселона»",
+    "asset": null,
+    "seller": "«Арсенала» нападающего сборной Бразилии"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87209303",
+   "title": "Минфин РФ 2 сентября проведет аукцион по размещению ОФЗ 29031",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1112476"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -4970,6 +4948,119 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37921690",
+   "title": "Минфин 2 сентября возобновит проведение аукционов по размещению ОФЗ",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28066063"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20372280",
+   "title": "Минфин возобновит проведение аукционов ОФЗ",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260901/ofz-872884398.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45519198",
+   "title": "Дерипаска осудил ЦБ за беззаботное отношение к спаду инвестиций в России",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/302555"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24738340",
+   "title": "Купите осенью — сэкономите зимой: какие товары выгоднее приобрести уже сейчас",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053123340"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
