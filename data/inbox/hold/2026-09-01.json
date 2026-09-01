@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d81449096",
+   "draft_id": "d87764319",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d88874353",
+   "draft_id": "d82798909",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d43748797",
+   "draft_id": "d15709007",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,59 +4800,42 @@
    ]
   },
   {
-   "draft_id": "d27044156",
-   "title": "DPA: хакеры требуют от Берлина €2 млн выкупа после масштабной кибератаки",
+   "draft_id": "d10147758",
+   "title": "«Аэрофлот» выкупил все акции производителя бортового питания «Аэромар» — ранее перевозчик владел 51% компании",
    "date": "2026-09-01",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28066553"
-    ]
-   ],
-   "sum": "€2 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26250394",
-   "title": "ВТБ выяснил, где жители России раньше всех идут за покупками",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/1/vtb-vyyasnil-gde-zhiteli-rossii-ranshe-vseh-idut-za-pokupkami"
+     "web:rb.ru",
+     "https://rb.ru/news/aeroflot-vykupil-vse-akcii-proizvoditelya-bortovogo-pitaniya-aeromar-ranee-perevozchik-vladel-51-kompanii/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-01",
+     "title": "Сделка завершена",
+     "note": "«Аэрофлот» приобрел 49% акций производителя бортового питания «Аэромар», доведя свою долю в компании до 100%, сообщил перевозчик на странице центра раскрытия корпоративной информации (ЦРКИ). Акции были зачислены на счет авиакомпании 1 сентября.",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/aeroflot-vykupil-vse-akcii-proizvoditelya-bortovogo-pitaniya-aeromar-ranee-perevozchik-vladel-51-kompanii/"
+     ]
+    }
+   ],
+   "buyer_name": "«Аэрофлот»",
+   "asset": "все акции производителя бортового питания «Аэромар» — ранее перевозчик владел 51% компании",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "«Аэрофлот»",
+    "asset": "все акции производителя бортового питания «Аэромар» — ранее перевозчик владел 51% компании",
     "seller": null
    },
-   "ind": null,
+   "ind": "Транспорт и логистика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
