@@ -178,6 +178,21 @@ class DealMultiple:
     multiple: float
 
 
+def _sanity_checked_multiple(sum_rub: float, metric_rub: float | None,
+                              metric_year: int | None, deal_year: int) -> float | None:
+    """Общая граница для ЛЮБОГО мультипликатора «сумма сделки / показатель
+    отчётности» — вынесена, чтобы пороги (MIN/MAX_MULTIPLE, MAX_YEAR_GAP)
+    не жили в двух копиях для выручки и для операционной прибыли."""
+    if metric_rub is None or metric_year is None or metric_rub <= 0:
+        return None
+    if deal_year - metric_year > MAX_YEAR_GAP or deal_year - metric_year < 0:
+        return None
+    multiple = sum_rub / metric_rub
+    if not (MIN_MULTIPLE <= multiple <= MAX_MULTIPLE):
+        return None
+    return round(multiple, 2)
+
+
 def multiple_for_candidate(cand: MultipleCandidate, revenue_rub: float | None,
                             revenue_year: int | None, target_name: str | None
                             ) -> DealMultiple | None:
@@ -187,17 +202,50 @@ def multiple_for_candidate(cand: MultipleCandidate, revenue_rub: float | None,
     требует БД и тестируется без фикстур, а этот шаг — единственное место,
     трогающее реальное число выручки, и его легче всего проверить на
     придуманных значениях (см. test_deal_multiples.py)."""
-    if revenue_rub is None or revenue_year is None or revenue_rub <= 0:
-        return None
-    if cand.year - revenue_year > MAX_YEAR_GAP or cand.year - revenue_year < 0:
-        return None
-    multiple = cand.sum_rub / revenue_rub
-    if not (MIN_MULTIPLE <= multiple <= MAX_MULTIPLE):
+    multiple = _sanity_checked_multiple(cand.sum_rub, revenue_rub, revenue_year, cand.year)
+    if multiple is None:
         return None
     return DealMultiple(
         deal_id=cand.deal_id, title=cand.title, target_id=cand.target_id,
         target_name=target_name, year=cand.year, sum_rub=cand.sum_rub,
-        revenue_rub=revenue_rub, revenue_year=revenue_year, multiple=round(multiple, 2))
+        revenue_rub=revenue_rub, revenue_year=revenue_year, multiple=multiple)
+
+
+@dataclass
+class OpProfitMultiple:
+    """Второй мультипликатор — сумма сделки к прибыли от продаж
+    (операционной прибыли), а не к выручке. Ближайший к EV/EBITDA
+    показатель, который вообще есть в официальной отчётности: амортизация
+    отдельной строкой в ней не раскрывается, настоящую EBITDA из неё не
+    собрать (см. `methodology_operating_profit` в `compute_market_multiples`
+    — то же честное объяснение уходит и на экран)."""
+    deal_id: str
+    title: str
+    target_id: str
+    target_name: str | None
+    year: int
+    sum_rub: float
+    operating_profit_rub: float
+    operating_profit_year: int
+    multiple: float
+
+
+def multiple_for_candidate_op(cand: MultipleCandidate, operating_profit_rub: float | None,
+                               operating_profit_year: int | None, target_name: str | None
+                               ) -> OpProfitMultiple | None:
+    """То же самое, что `multiple_for_candidate`, только знаменатель —
+    операционная прибыль, а не выручка. Операционный убыток (или его
+    отсутствие в отчётности) означает, что мультипликатор просто не
+    считается — это честная пустота, а не ноль."""
+    multiple = _sanity_checked_multiple(cand.sum_rub, operating_profit_rub,
+                                         operating_profit_year, cand.year)
+    if multiple is None:
+        return None
+    return OpProfitMultiple(
+        deal_id=cand.deal_id, title=cand.title, target_id=cand.target_id,
+        target_name=target_name, year=cand.year, sum_rub=cand.sum_rub,
+        operating_profit_rub=operating_profit_rub, operating_profit_year=operating_profit_year,
+        multiple=multiple)
 
 
 def industry_medians(rows: list[DealMultiple], industry_of: dict[str, str]
@@ -243,6 +291,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     candidates = find_candidates(deals, confirmed_ids, bank_ids)
 
     rows: list[DealMultiple] = []
+    op_rows: list[OpProfitMultiple] = []
     industry_of: dict[str, str] = {}
     for cand in candidates:
         entity = db.scalar(select(LegalEntity).where(
@@ -259,14 +308,24 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         if not report:
             continue
         dm = multiple_for_candidate(cand, float(report.revenue_rub), report.year, entity.legal_name)
-        if not dm:
-            continue
-        rows.append(dm)
-        profile = get_company_profile(cand.target_id)
-        if profile and profile.get('ind'):
-            industry_of[cand.target_id] = profile['ind']
+        if dm:
+            rows.append(dm)
+        # Та же строка отчётности уже несёт операционную прибыль — второй
+        # запрос к БД не нужен, только своя санитарная проверка (операционный
+        # убыток и `None` отсеиваются внутри `multiple_for_candidate_op`).
+        op_profit = report.operating_profit_rub
+        op_dm = multiple_for_candidate_op(
+            cand, float(op_profit) if op_profit is not None else None,
+            report.year, entity.legal_name)
+        if op_dm:
+            op_rows.append(op_dm)
+        if dm or op_dm:
+            profile = get_company_profile(cand.target_id)
+            if profile and profile.get('ind'):
+                industry_of[cand.target_id] = profile['ind']
 
     rows.sort(key=lambda r: r.year, reverse=True)
+    op_rows.sort(key=lambda r: r.year, reverse=True)
     return {
         'candidates_total': len(candidates),
         'clean_total': len(rows),
@@ -289,4 +348,26 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'входит и принятый на себя долг компании — тогда мультипликатор '
             'получается чуть выше, чем по цене одних только акций.'
         ),
+        'operating_profit': {
+            'clean_total': len(op_rows),
+            'median': overall_median(op_rows),
+            'industries': industry_medians(op_rows, industry_of),
+            'deals': [{
+                'id': r.deal_id, 'title': r.title, 'year': r.year,
+                'target_id': r.target_id, 'target_name': r.target_name,
+                'sum_rub': r.sum_rub, 'operating_profit_rub': r.operating_profit_rub,
+                'operating_profit_year': r.operating_profit_year, 'multiple': r.multiple,
+            } for r in op_rows],
+            'methodology': (
+                'В M&A обычно сравнивают цену сделки с EBITDA (прибылью до вычета '
+                'процентов, налогов и амортизации) — это точнее выручки, потому что '
+                'учитывает, сколько компания реально зарабатывает. Но официальная '
+                'отчётность, на которую мы опираемся, амортизацию отдельной строкой '
+                'не показывает, и собрать из неё настоящую EBITDA нельзя. Прибыль от '
+                'продаж (операционная прибыль) — ближайшая доступная замена: та же '
+                'прибыль, но с учётом амортизации, поэтому мультипликатор обычно '
+                'получается немного выше настоящего EV/EBITDA. Условия отбора сделок '
+                'и границы — те же, что и у мультипликатора по выручке.'
+            ),
+        },
     }

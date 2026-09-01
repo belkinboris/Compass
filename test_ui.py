@@ -436,12 +436,69 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         ctx.close()
 
 
+def test_analytics_multiples_toggle_switches_to_operating_profit_view(browser, base_url):
+    """Мультипликатор по операционной прибыли — второй, переключаемый вид
+    того же блока (не отдельная карточка). По умолчанию открыт «По
+    выручке» (revenue-содержимое из первого теста этого блока); клик по
+    «По операционной прибыли» должен подменить содержимое на другую
+    методику и другую цифру, не оставляя оба набора цифр на экране разом."""
+    ctx = browser.new_context()
+    try:
+        def populated(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 3, "median": 1.5,
+                "industries": [{"industry": "ИТ и интернет", "count": 3, "median": 1.5, "min": 1.0, "max": 2.0}],
+                "deals": [{"id": "citibank", "title": "Тестовая сделка (выручка)", "year": 2024,
+                           "target_id": "citibank", "target_name": "ООО Тест",
+                           "sum_rub": 1000000000, "revenue_rub": 500000000,
+                           "revenue_year": 2023, "multiple": 2.0}],
+                "methodology": "Тестовая методика по выручке.",
+                "operating_profit": {
+                    "clean_total": 2, "median": 4.0,
+                    "industries": [{"industry": "ИТ и интернет", "count": 2, "median": 4.0, "min": 3.0, "max": 5.0}],
+                    "deals": [{"id": "citibank", "title": "Тестовая сделка (опер. прибыль)", "year": 2024,
+                               "target_id": "citibank", "target_name": "ООО Тест",
+                               "sum_rub": 1000000000, "operating_profit_rub": 250000000,
+                               "operating_profit_year": 2023, "multiple": 4.0}],
+                    "methodology": "Тестовая методика по операционной прибыли.",
+                },
+            }))
+        ctx.route("**/api/analytics/multiples", populated)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg.wait_for_timeout(800)
+        before = pg.inner_text("#multiplesCard")
+        assert "×1.5" in before or "×1,5" in before
+        assert "тестовая методика по выручке" in before.lower()
+        assert "тестовая методика по операционной прибыли" not in before.lower()
+
+        pg.click("#multiplesCard [data-multview='op']")
+        pg.wait_for_timeout(300)
+        after = pg.inner_text("#multiplesCard")
+        assert "×4" in after
+        assert "тестовая методика по операционной прибыли" in after.lower()
+        assert "тестовая методика по выручке" not in after.lower()  # старый вид не остался на экране рядом
+        assert not errors
+        assert pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        pg.close()
+    finally:
+        ctx.close()
+
+
 def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url):
     """Этап 16, П1в: строка «EV/Выручка» на вкладке «Экономист» — вызываем
     `mountDealFns` напрямую с синтетической сделкой (та же техника, что и в
     тесте на чистую функцию выше), а сетевой ответ о выручке цели подменяем
     route-перехватом. Так тест не зависит ни от содержимого живой базы, ни
-    от того, синхронизировалась ли уже конкретная компания с ФНС на проде."""
+    от того, синхронизировалась ли уже конкретная компания с ФНС на проде.
+
+    Отчёт заодно несёт operating_profit_rub — проверяем, что рядом со
+    строкой по выручке появляется и вторая, по операционной прибыли
+    (ближе к привычному EV/EBITDA, deal_multiples.py), а не только одна
+    из двух — это два независимых расчёта на одной и той же карточке."""
     ctx = browser.new_context()
     try:
         def fake_fns(route):
@@ -449,7 +506,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
                 "available": True, "company_id": "zzz-mult-target", "company_name": "ООО Тестцель",
                 "entities": [{
                     "entity": {"id": 1, "legal_name": "ООО Тестцель", "inn": "7700000321"},
-                    "reports": [{"year": 2023, "revenue_rub": 500_000_000,
+                    "reports": [{"year": 2023, "revenue_rub": 500_000_000, "operating_profit_rub": 100_000_000,
                                  "net_profit_rub": 1, "assets_rub": 1, "equity_rub": 1}],
                     "report_years": [2023], "has_more_reports": False, "has_more_events": False,
                     "events": [], "ownership": {"available": False},
@@ -475,6 +532,8 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         assert "ev/выручка" in body.lower()
         assert "×2" in body
         assert "2023" in body
+        assert "ev/операционная прибыль" in body.lower()
+        assert "×10" in body  # 1000 млн / 100 млн
         assert not errors
         assert pg.evaluate(
             "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0

@@ -4887,25 +4887,26 @@ async function mountCompanyFns(companyId){
   draw();
 }
 
-// Мультипликатор EV/Выручка для «Экономиста» — та же методика, что
-// deal_multiples.py (Этап 16, П1), но посчитанная на уже загруженных
-// данных карточки без второго запроса к серверу: сумма сделки уже лежит в
-// `d.sum` (из deals_promoted.json), выручка цели уже пришла вместе с
-// fns-ответом, который `mountDealFns` и так запрашивает для вкладки.
-// Дублирование правил с Python неизбежно (два разных места исполнения —
-// клиент и сервер), поэтому оба места ссылаются друг на друга в
-// комментариях: любое изменение порога здесь требует того же изменения
-// в deal_multiples.py, и наоборот.
-function dealMultipleLine(d, targetId, revenueRub, revenueYear){
+// Мультипликаторы для «Экономиста» — та же методика, что deal_multiples.py
+// (Этап 16, П1 — по выручке; следом — по операционной прибыли), но
+// посчитанная на уже загруженных данных карточки без второго запроса к
+// серверу: сумма сделки уже лежит в `d.sum` (из deals_promoted.json),
+// показатели цели уже пришли вместе с fns-ответом, который `mountDealFns`
+// и так запрашивает для вкладки. Дублирование правил с Python неизбежно
+// (два разных места исполнения — клиент и сервер), поэтому оба места
+// ссылаются друг на друга в комментариях: любое изменение порога здесь
+// требует того же изменения в deal_multiples.py, и наоборот.
+//
+// Проверки типа сделки, сторон, суммы и доли — общие для обоих
+// мультипликаторов, вынесены в один хелпер, чтобы не разойтись в двух
+// копиях; сами `dealMultipleLine`/`dealMultipleLineOp` сохраняют прежнюю
+// сигнатуру и форму результата (первую вызывает и Playwright-тест
+// напрямую на синтетических данных).
+function _dealMultipleSumRub(d, targetId){
   const target = d.target || d.asset_id;
   if(target !== targetId) return null; // мультипликатор только на вкладке ЦЕЛИ, не покупателя/продавца
   if(d.type !== "M&A") return null;
   if(!(d.buyer || d.buyer_name) || !(d.seller || d.seller_id)) return null;
-  if(!revenueRub || revenueRub <= 0) return null;
-  const dealYear = Number(String(d.date||"").slice(0,4));
-  if(!Number.isFinite(dealYear) || !Number.isFinite(revenueYear)) return null;
-  const gap = dealYear - revenueYear;
-  if(gap < 0 || gap > 1) return null;
   const sumText = d.sum || "";
   if(/оценк|оценив/i.test(sumText)) return null;
   const m = sumText.match(/(\d[\d\s ]*(?:[.,]\d+)?)(?:\s*[–—-]\s*(\d[\d\s ]*(?:[.,]\d+)?))?\s*(тыс|млн|млрд|трлн)\.?\s*₽/i);
@@ -4918,9 +4919,38 @@ function dealMultipleLine(d, targetId, revenueRub, revenueYear){
   const stakeMatches = [...shareText.matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
   const plausibleStake = stakeMatches.filter(x=>x>=1&&x<=100);
   if(plausibleStake.length && Math.max(...plausibleStake) < 95) return null;
+  return sumRub;
+}
+
+function dealMultipleLine(d, targetId, revenueRub, revenueYear){
+  if(!revenueRub || revenueRub <= 0) return null;
+  const dealYear = Number(String(d.date||"").slice(0,4));
+  if(!Number.isFinite(dealYear) || !Number.isFinite(revenueYear)) return null;
+  const gap = dealYear - revenueYear;
+  if(gap < 0 || gap > 1) return null;
+  const sumRub = _dealMultipleSumRub(d, targetId);
+  if(!sumRub) return null;
   const multiple = sumRub / revenueRub;
   if(!(multiple >= 0.1 && multiple <= 15)) return null;
   return {multiple: Math.round(multiple*100)/100, revenueYear};
+}
+
+// Тот же расчёт, знаменатель — прибыль от продаж (операционная прибыль),
+// а не выручка: ближайшее к EV/EBITDA, что вообще есть в отчётности (см.
+// methodology операционной прибыли в deal_multiples.py — амортизация
+// отдельной строкой не раскрывается, настоящую EBITDA не собрать).
+// Операционный убыток или его отсутствие — честная пустота, не ноль.
+function dealMultipleLineOp(d, targetId, opProfitRub, opProfitYear){
+  if(!opProfitRub || opProfitRub <= 0) return null;
+  const dealYear = Number(String(d.date||"").slice(0,4));
+  if(!Number.isFinite(dealYear) || !Number.isFinite(opProfitYear)) return null;
+  const gap = dealYear - opProfitYear;
+  if(gap < 0 || gap > 1) return null;
+  const sumRub = _dealMultipleSumRub(d, targetId);
+  if(!sumRub) return null;
+  const multiple = sumRub / opProfitRub;
+  if(!(multiple >= 0.1 && multiple <= 15)) return null;
+  return {multiple: Math.round(multiple*100)/100, opProfitYear};
 }
 
 async function mountDealFns(d){
@@ -4955,6 +4985,7 @@ async function mountDealFns(d){
     const p=parties.find(x=>x.id===active)||parties[0];
     const c=co(p.id);
     const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
+    const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year);
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
@@ -4967,6 +4998,7 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
         ${mult?`<p style="margin:14px 0 0"><span class="tag steel">EV/Выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">сумма сделки к выручке купленной компании за ${mult.revenueYear} год (данные ФНС)</span></p>`:""}
+        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">EV/Операционная прибыль ≈ ×${multOp.multiple}</span> <span style="color:var(--muted);font-size:13px">сумма сделки к прибыли от продаж за ${multOp.opProfitYear} год — ближе к привычному EV/EBITDA, чем выручка, потому что отчётность не раскрывает амортизацию отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -5872,22 +5904,47 @@ async function mountMarketMultiples(){
     body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (сумма в рублях, доля ≥95%, отчётность цели за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
     return;
   }
-  const industriesHtml = data.industries.length ? `
-    <div style="margin-bottom:18px">
-      ${data.industries.map(i=>`<div class="an-row"><span class="an-key">${esc(i.industry)}</span><span class="an-val num" style="flex:0 0 auto">×${i.median} <span style="color:var(--muted);font-weight:400">(${i.count}, ${i.min}–${i.max})</span></span></div>`).join("")}
-    </div>` : "";
-  const dealsHtml = data.deals.slice(0,15).map(d=>`
-    <a class="an-deal" href="#/deal/${d.id}">
-      <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-      <span class="an-deal-s">${fnsMoney(d.sum_rub)} · выручка купленной компании за ${d.revenue_year}: ${fnsMoney(d.revenue_rub)}</span>
-    </a>`).join("");
-  body.outerHTML = `
-    <div id="multiplesBody">
-      <p style="margin:0 0 16px"><span class="num" style="font-size:26px;font-weight:600">×${data.median}</span> <span style="color:var(--muted)">медиана по ${data.clean_total} ${plural(data.clean_total,"сделке","сделкам","сделкам")} из ${data.candidates_total} рассмотренных M&amp;A с известной суммой в рублях.</span></p>
+  // Второй мультипликатор — по операционной прибыли (ближе к привычному
+  // EV/EBITDA, см. deal_multiples.py). Переключатель, а не два блока
+  // подряд: методика и денежный масштаб те же, отличается только
+  // знаменатель — дублировать карточку целиком значило бы удвоить страницу
+  // ради одной другой цифры.
+  const VIEWS = [
+    {key:"revenue", label:"По выручке", section:data,
+     metricLabel:"выручка купленной компании", rubKey:"revenue_rub", yearKey:"revenue_year"},
+    {key:"op", label:"По операционной прибыли", section:data.operating_profit,
+     metricLabel:"операционная прибыль купленной компании", rubKey:"operating_profit_rub", yearKey:"operating_profit_year"},
+  ];
+  let activeKey = "revenue";
+  const renderSection = (v) => {
+    const s = v.section;
+    if(!s || !s.clean_total){
+      return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>`;
+    }
+    const industriesHtml = s.industries.length ? `
+      <div style="margin-bottom:18px">
+        ${s.industries.map(i=>`<div class="an-row"><span class="an-key">${esc(i.industry)}</span><span class="an-val num" style="flex:0 0 auto">×${i.median} <span style="color:var(--muted);font-weight:400">(${i.count}, ${i.min}–${i.max})</span></span></div>`).join("")}
+      </div>` : "";
+    const dealsHtml = s.deals.slice(0,15).map(d=>`
+      <a class="an-deal" href="#/deal/${d.id}">
+        <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
+        <span class="an-deal-s">${fnsMoney(d.sum_rub)} · ${v.metricLabel} за ${d[v.yearKey]}: ${fnsMoney(d[v.rubKey])}</span>
+      </a>`).join("");
+    return `
+      <p style="margin:0 0 16px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")} из ${data.candidates_total} рассмотренных M&amp;A с известной суммой в рублях.</span></p>
       ${industriesHtml}
       ${dealsHtml}
-      <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(data.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>
-    </div>`;
+      <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>`;
+  };
+  const draw = () => {
+    const active = VIEWS.find(v=>v.key===activeKey);
+    document.getElementById("multiplesBody").innerHTML = `
+      <div class="adv-share" style="margin-bottom:16px">${VIEWS.map(v=>`<button class="chip ${v.key===activeKey?"on":""}" data-multview="${v.key}">${v.label}</button>`).join("")}</div>
+      <div>${renderSection(active)}</div>`;
+    document.querySelectorAll("[data-multview]").forEach(b=>b.onclick=()=>{activeKey=b.dataset.multview;draw();});
+  };
+  body.outerHTML = `<div id="multiplesBody"></div>`;
+  draw();
 }
 
 

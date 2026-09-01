@@ -212,6 +212,60 @@ def test_multiple_boundary_values_are_inclusive():
     assert hi is not None and hi.multiple == 15.0
 
 
+# ---------- multiple_for_candidate_op: тот же санитарный шаг, знаменатель —
+# операционная прибыль, а не выручка ----------
+
+def test_op_multiple_computed_for_reasonable_case():
+    c = _cand()
+    r = dm.multiple_for_candidate_op(c, operating_profit_rub=200_000_000,
+                                      operating_profit_year=2023, target_name='ООО Т')
+    assert r is not None
+    assert r.multiple == 5.0
+    assert r.operating_profit_rub == 200_000_000
+    assert r.operating_profit_year == 2023
+
+
+def test_op_multiple_none_when_operating_loss():
+    # Операционный убыток — не ноль и не маленькое число, а отсутствие
+    # осмысленного мультипликатора: делить на отрицательное нельзя.
+    c = _cand()
+    r = dm.multiple_for_candidate_op(c, operating_profit_rub=-50_000_000,
+                                      operating_profit_year=2023, target_name='ООО Т')
+    assert r is None
+
+
+def test_op_multiple_none_when_missing():
+    c = _cand()
+    assert dm.multiple_for_candidate_op(c, None, None, None) is None
+
+
+def test_op_multiple_respects_same_year_gap_rule():
+    c = _cand(year=2024)
+    assert dm.multiple_for_candidate_op(
+        c, operating_profit_rub=200_000_000, operating_profit_year=2021,
+        target_name='ООО Т') is None
+
+
+def test_op_multiple_respects_same_absurd_ratio_rule():
+    c = _cand(sum_rub=75_500_000_000)
+    assert dm.multiple_for_candidate_op(
+        c, operating_profit_rub=17_400_000, operating_profit_year=2023,
+        target_name='ООО Т') is None
+
+
+def test_op_multiple_independent_from_revenue_multiple():
+    # Одна и та же сделка: выручка даёт честный мультипликатор, операционная
+    # прибыль (например, компания на грани нуля) — нет. Функции не должны
+    # зависеть друг от друга или делить общее состояние.
+    c = _cand()
+    revenue_side = dm.multiple_for_candidate(c, revenue_rub=500_000_000,
+                                              revenue_year=2023, target_name='ООО Т')
+    op_side = dm.multiple_for_candidate_op(c, operating_profit_rub=1_000_000,
+                                            operating_profit_year=2023, target_name='ООО Т')
+    assert revenue_side is not None and revenue_side.multiple == 2.0
+    assert op_side is None  # 1000x — за границей MAX_MULTIPLE
+
+
 # ---------- industry_medians ----------
 
 def _dm_row(multiple, target_id='t1', deal_id=None):
@@ -250,3 +304,24 @@ def test_overall_median_empty_list():
 def test_overall_median_even_count_averages_middle_two():
     rows = [_dm_row(1.0, deal_id='d1'), _dm_row(3.0, deal_id='d2')]
     assert dm.overall_median(rows) == 2.0
+
+
+def test_generic_helpers_work_on_op_profit_rows_too():
+    # industry_medians/overall_median читают только .multiple/.target_id —
+    # тот же код обязан честно работать и на OpProfitMultiple, без
+    # отдельной копии ради операционной прибыли.
+    op_rows = [
+        dm.OpProfitMultiple(deal_id='d1', title='т', target_id='t1', target_name='Т',
+                             year=2024, sum_rub=1, operating_profit_rub=1,
+                             operating_profit_year=2023, multiple=1.0),
+        dm.OpProfitMultiple(deal_id='d2', title='т', target_id='t2', target_name='Т',
+                             year=2024, sum_rub=1, operating_profit_rub=1,
+                             operating_profit_year=2023, multiple=2.0),
+        dm.OpProfitMultiple(deal_id='d3', title='т', target_id='t3', target_name='Т',
+                             year=2024, sum_rub=1, operating_profit_rub=1,
+                             operating_profit_year=2023, multiple=3.0),
+    ]
+    assert dm.overall_median(op_rows) == 2.0
+    industry_of = {'t1': 'ИТ', 't2': 'ИТ', 't3': 'ИТ'}
+    out = dm.industry_medians(op_rows, industry_of)
+    assert out == [{'industry': 'ИТ', 'count': 3, 'median': 2.0, 'min': 1.0, 'max': 3.0}]

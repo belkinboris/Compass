@@ -160,7 +160,7 @@ def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
     assert len(anonymous["entities"][0]["events"]) >= 4
 
 
-def _seed_multiples_entity(company_id, inn, year, revenue_rub):
+def _seed_multiples_entity(company_id, inn, year, revenue_rub, operating_profit_rub=None):
     db = get_session()
     try:
         company = db.get(Company, company_id)
@@ -178,7 +178,8 @@ def _seed_multiples_entity(company_id, inn, year, revenue_rub):
             db.add(entity)
             db.flush()
         if not db.query(FinancialReport).filter_by(legal_entity_id=entity.id, year=year).first():
-            db.add(FinancialReport(legal_entity_id=entity.id, year=year, revenue_rub=revenue_rub))
+            db.add(FinancialReport(legal_entity_id=entity.id, year=year, revenue_rub=revenue_rub,
+                                    operating_profit_rub=operating_profit_rub))
         db.commit()
     finally:
         db.close()
@@ -232,6 +233,46 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     assert body["deals"][0]["multiple"] == 2.0
     assert body["median"] == 2.0
     assert "methodology" in body and body["methodology"]
+    # У сида этого теста нет operating_profit_rub (не передан) — второй
+    # мультипликатор обязан честно остаться пустым, а не упасть или
+    # выдумать число из выручки.
+    assert body["operating_profit"]["clean_total"] == 0
+    assert body["operating_profit"]["median"] is None
+    assert body["operating_profit"]["deals"] == []
+    assert "methodology" in body["operating_profit"] and body["operating_profit"]["methodology"]
+
+
+def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(client, monkeypatch):
+    """Та же цепочка, но с operating_profit_rub в отчётности — второй
+    мультипликатор обязан посчитаться НЕЗАВИСИМО от первого, по той же
+    строке отчёта (без второго похода к БД, см. deal_multiples.py)."""
+    _seed_multiples_entity("mult-op-target", "7710000501", 2023, 500_000_000,
+                            operating_profit_rub=100_000_000)
+
+    deals = {
+        "mult-op-deal": dict(
+            id="mult-op-deal", title="Сделка с операционной прибылью", type="M&A",
+            date="2024-03-01", sum="1 000 млн ₽", target="mult-op-target",
+            buyer="mult-buyer", seller="Тестовый Продавец",
+            eco={"share": None}, asset=None,
+        ),
+    }
+    registry = {
+        "mult-op-target": {"company_id": "mult-op-target", "decision": "confirmed", "inn": "7710000501"},
+    }
+    monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
+    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(main, "get_company_profile",
+                         lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-op-target" else None)
+
+    body = client.get("/api/analytics/multiples").json()
+    assert body["deals"][0]["multiple"] == 2.0  # 1000/500 — выручка, как и раньше
+    op = body["operating_profit"]
+    assert op["clean_total"] == 1
+    assert [d["id"] for d in op["deals"]] == ["mult-op-deal"]
+    assert op["deals"][0]["multiple"] == 10.0  # 1000/100 — операционная прибыль
+    assert op["deals"][0]["operating_profit_rub"] == 100_000_000
+    assert op["median"] == 10.0
 
 
 def test_finance_screening_endpoint_returns_latest_non_stale_revenue_per_company(client):
