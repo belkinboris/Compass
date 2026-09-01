@@ -897,12 +897,30 @@ a.dp-asset-name:hover{color:var(--accent)}
   display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .co-nums{display:flex;gap:28px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft)}
 .co-nums .val{font-family:var(--f-display);font-weight:600;font-size:15px;margin-top:3px}
-/* Бейдж «Группа компаний» — ВНЕ потока (position:absolute), а не строкой
-   рядом с отраслевым тегом: тег над `.co-nums` уже намеренно держит
-   постоянную высоту (комментарий выше), и обычная inline-строка сдвинула бы
-   вниз имя/описание ровно у профилей с group:true — линия разъехалась бы
-   заново, тем же дефектом, который уже один раз чинили. */
-.co-group-badge{position:absolute;top:-9px;left:20px;z-index:2}
+/* Бейдж «Группа компаний» стоял ВНЕ потока (position:absolute; top:-9px) — и
+   у карточки с overflow:hidden срезался пополам («кривой формат», владелец
+   31 августа 2026). Теперь оба тега лежат в одной строке постоянной высоты:
+   имя и описание не сдвигаются у профилей с group:true, линия над цифрами
+   остаётся на одной высоте (ради чего бейдж когда-то и вынесли из потока). */
+.co-tags{display:flex;gap:6px;align-items:center;height:26px;overflow:hidden;white-space:nowrap}
+.co-tags .tag{flex:0 0 auto}
+.co-nums .label{white-space:nowrap}
+/* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
+   пустые 30px под коротким именем и 20px под коротким описанием только
+   растягивали карточку. Кнопки «+»/«♡» — в ряд в углу, а не столбиком,
+   отбирающим у текста 54px ширины. */
+@media(max-width:560px){
+  .co-card{padding:18px 18px 16px}
+  .co-card h3{height:auto;margin:8px 0 4px}
+  .co-card .desc{height:auto}
+  .co-card-main{padding-right:0}
+  .co-tags{margin-right:84px}
+  .co-tags .co-tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .co-actions{flex-direction:row;top:12px;right:12px}
+  .co-compare{width:32px;height:32px}
+  .co-nums{gap:20px;margin-top:14px;padding-top:12px}
+  .co-nums>div{flex:1 1 0;min-width:0}
+}
 .filters select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
 
 /* Компактный список сделок компании. На странице остаётся короткая
@@ -1498,6 +1516,38 @@ const advDetail = text => {
   const bare = t.replace(/юридическ\w*|финансов\w*|консультант\w*|советник\w*|покупател\w*|продавц\w*|продавец|сторон\w*|не уточнен\w*|эмитент\w*|инвестор\w*|[,;:.]/gi,"").trim();
   return bare.length >= 6 ? t : "";
 };
+/* ОДИН список консультантов на карточку — из него берут и «Команда сделки»
+   на «Обзоре», и вкладки «Юрист» (юридические) и «Экономист» (финансовые).
+   Владелец 31 августа 2026: «в экономисте надо делать финансовых, в юристе
+   юридических; если нажать юриста, то Алор брокера нет — надо чтобы
+   соответствовало». Раньше вкладки читали разные поля (law.adv и eco.finadv),
+   и финансовый консультант из law.adv показывался у юриста, а брокер из
+   eco.finadv — нигде, кроме «Обзора». Вид — из текста роли, а не из поля. */
+const advKindOf = text => /финансов|инвестбанк|инвестиционн[а-яё]*\s+банк|оценщик|оценк|брокер/i.test(String(text||"")) ? "финансовый" : "юридический";
+const advCleanNote = t => String(t||"").replace(/\s*Источник:.*$/i,"").trim();
+function dealAdvisorItems(d){
+  const items = [];
+  realAdv(d).forEach(a=>{
+    const role=a[0]||"", note=advCleanNote(typeof a[2]==="string"?a[2]:"");
+    items.push({kind:advKindOf(role), name:a[1], role, note, side:advSide(role+" "+note, d), raw:a});
+  });
+  const fin = hasFact(d.eco&&d.eco.finadv) ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
+  fin.forEach(x=>{
+    const p=x.split("—"); const name=p[0].replace(/\s*\([^)]*\)\s*$/,"").trim(); const note=p.slice(1).join("—").trim();
+    if(!name) return;
+    items.push({kind:"финансовый", name, role:"Финансовый консультант", note, side:advSide(note+" "+p[0], d), raw:null});
+  });
+  /* Одна фирма одного вида — один раз; запись с известной стороной важнее записи без неё. */
+  const keyOf = it => (firmIdOf(it.name)||it.name.toLowerCase().replace(/\s+/g," "))+"|"+it.kind;
+  const known = new Set(items.filter(it=>it.side!=="none").map(keyOf));
+  const seen = new Set();
+  return items.filter(it=>{
+    if(it.side==="none" && known.has(keyOf(it))) return false;
+    const k=keyOf(it)+"|"+it.side; if(seen.has(k)) return false; seen.add(k); return true;
+  });
+}
+const legalAdvisors = d => dealAdvisorItems(d).filter(it=>it.kind==="юридический");
+const financialAdvisors = d => dealAdvisorItems(d).filter(it=>it.kind==="финансовый");
 /* Одна фирма дважды на одной карточке (АЛРУД и ALRUD, Baker McKenzie и её
    бывший российский офис) — оставляем первую запись каждой пары «фирма + сторона». */
 const uniqAdvisors = (list, d) => {
@@ -3868,7 +3918,7 @@ const realAdv = d => (d.law && d.law.adv || []).filter(a => hasFact(a[1]));
 const PLACEHOLDER = /^(?:[—-]|н\/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*(?:\s+(?:официально|публично))?)[.\s]*$/i;
 const hasFact = v => { const s = String(v==null?"":v).trim(); return !!s && !PLACEHOLDER.test(s); };
 const lawHasContent = d => hasFact(d.law && d.law.struct) || hasFact(d.law && d.law.appr) ||
-  hasFact(d.law && d.law.terms) || realAdv(d).length > 0;
+  hasFact(d.law && d.law.terms) || legalAdvisors(d).length > 0;
 /* Линза «Экономист» пуста у 37 карточек из 1352: всё её содержимое — заглушки
    «Не раскрыта» и «Не привлекался», нарисованные как значения показателей.
    Тот же дефект, что чинили в линзе «Юрист» (A2), только незамеченный: у
@@ -4116,7 +4166,7 @@ function lawPartialNote(d){
     !hasFact(d.law && d.law.terms) && "условия",
     !hasFact(d.law && d.law.appr) && "согласования",
   ].filter(Boolean);
-  if(missing.length !== 3 || !realAdv(d).length) return "";
+  if(missing.length !== 3 || !legalAdvisors(d).length) return "";
   return `<p class="lens-part">Из юридических деталей раскрыты только консультанты:
     ${missing.join(", ")} сделки в источниках не называли.</p>`;
 }
@@ -4476,29 +4526,14 @@ function renderDeal(id, qs, previewCard){
        читается из текста роли и заметки; одна и та же фирма (по регуляркам
        каталога) на одной стороне показывается один раз. */
     const dealTeam = ()=>{
-      const fin = hasFact(d.eco&&d.eco.finadv)
-        ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
-      const items = [];
-      /* Вид консультанта — из текста роли: в law.adv лежат и финансовые
-         («Финансовый консультант продавца»), не только юридические. */
-      const kindOf = text => /финансов|инвестбанк|инвестиционн\w+\s+банк|оценщик|оценк/i.test(text) ? "финансовый" : "юридический";
-      const side = text => advSide(text, d);
-      realAdv(d).forEach(a=>{const text=[a[0]||"", typeof a[2]==="string"?a[2]:""].join(" "); items.push({kind:kindOf(a[0]||""), name:a[1], text, side:side(text)});});
-      fin.forEach(x=>{const p=x.split("—"); const text=p.slice(1).join("—").trim(); items.push({kind:"финансовый", name:p[0].replace(/\s*\([^)]*\)\s*$/,"").trim(), text:text+" "+p[0], side:side(text+" "+p[0])});});
-      if(!items.length) return "";
-      /* Одна фирма одного вида — один раз; запись с известной стороной важнее записи без неё. */
-      const keyOf = it => (firmIdOf(it.name)||it.name.toLowerCase().replace(/\s+/g," "))+"|"+it.kind;
-      const known = new Set(items.filter(it=>it.side!=="none").map(keyOf));
-      const seen=new Set();
-      const uniq=items.filter(it=>{
-        if(it.side==="none" && known.has(keyOf(it))) return false;
-        const key=keyOf(it)+"|"+it.side; if(seen.has(key)) return false; seen.add(key); return true;});
+      const uniq = dealAdvisorItems(d);
+      if(!uniq.length) return "";
       const groups={buyer:[],seller:[],target:[],none:[]};
       uniq.forEach(it=>groups[it.side].push(it));
       const onlyUnknown = !groups.buyer.length && !groups.seller.length && !groups.target.length;
       const title={buyer:"Со стороны покупателя",seller:"Со стороны продавца",target:"Со стороны компании",none:onlyUnknown?"Консультанты сделки":"Сторона не уточнена"};
       const item = it => {
-        const detail = advDetail(it.text);
+        const detail = advDetail(it.role+" "+it.note);
         return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)} <span class="t-kind">${it.kind}</span></div>${detail?`<div class="t-side">${esc(detail)}</div>`:""}</div>`;
       };
       const cols = ["buyer","seller","target","none"].filter(k=>groups[k].length)
@@ -4531,7 +4566,8 @@ function renderDeal(id, qs, previewCard){
         specRow("Оценка и дисконт", d.eco.val),
         specRow(targetMetricLabel(kindKey), d.eco.target_fin),
         specRow("Форма расчётов", d.eco.fin),
-        specRow("Финансовый консультант", d.eco.finadv),
+        specRow(financialAdvisors(d).length>1?"Финансовые консультанты":"Финансовый консультант",
+                financialAdvisors(d).length ? financialAdvisors(d).map(it=>esc(it.name)+(it.note?" — "+esc(it.note):"")).join("; ") : d.eco.finadv),
       ])}
       ${para("Цель сделки", d.eco.rationale)}
       ${para("Контекст", d.eco.context)}
@@ -4550,11 +4586,11 @@ function renderDeal(id, qs, previewCard){
       ${para("Структура", d.law.struct)}
       ${para("Условия и особенности (из публичных данных)", d.law.terms)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
-      ${uniqAdvisors(realAdv(d), d).map(a=>`
+      ${legalAdvisors(d).map(it=>`
         <div class="adv-card">
-          <span class="label">${a[0]}</span>
-          <div class="adv-name">${advFirmLink(a[1])}</div>
-          ${advNoteHtml(a[2])}
+          <span class="label">${esc(it.role)}</span>
+          <div class="adv-name">${advFirmLink(it.name)}</div>
+          ${advNoteHtml(it.raw?it.raw[2]:it.note)}
         </div>`).join("")}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
@@ -4679,8 +4715,7 @@ function companyGridHtml(){
   ${shown.map(({id,c,n})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
-        ${c.group?`<span class="tag steel co-group-badge">Группа компаний</span>`:""}
-        <span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span>
+        <div class="co-tags">${c.group?`<span class="tag steel co-group-badge">Группа компаний</span>`:""}<span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span></div>
         <h3 title="${esc(c.name)}">${c.name}</h3>
         <div class="desc">${coDescHtml(id,c)}</div>
         <div class="co-nums">
@@ -6348,7 +6383,7 @@ async function renderAssistant(){
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
   document.getElementById("newThread").onclick=()=>{
-    activeThreadId=null;history.length=0;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();
+    activeThreadId=null;history.length=0;box.innerHTML=`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются. Спрашивайте.</div>`;renderThreadList();
     /* Кнопка стоит в боковой панели над историей диалогов, а сама лента —
        на телефоне ниже переключателя режима, за пределами первого экрана.
        Первая починка (30 августа) прокручивала к ленте и ставила курсор в
@@ -6356,9 +6391,13 @@ async function renderAssistant(){
        стоит ПОД лентой и подсказками, и человека «отбрасывало в самый низ»
        (жалоба владельца 31 августа). Теперь: к верху ленты — только если
        она не на экране, и фокус без прокрутки. */
-    const r=box.getBoundingClientRect();
-    if(r.top<0||r.top>window.innerHeight*0.7) window.scrollTo({top:window.scrollY+r.top-84,behavior:"smooth"});
-    document.getElementById("q").focus({preventScroll:true});
+    /* Вторая жалоба (31 августа, вечер): «кнопка новый диалог не нравится,
+       что делает». На телефоне любой focus() внутри клика открывает
+       клавиатуру и сам прокручивает к полю ввода внизу — preventScroll
+       этого не отменяет. Поэтому на сенсорных экранах курсор не ставим и
+       ничего не прокручиваем: кнопка стоит прямо над лентой, смена текста
+       в ней видна и так. На компьютере — фокус без прокрутки. */
+    if(!window.matchMedia("(pointer:coarse)").matches) document.getElementById("q").focus({preventScroll:true});
   };
   bindModeToggles(app);renderThreadList();
   const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}

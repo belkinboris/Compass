@@ -509,15 +509,36 @@ def _detect_term(question: str) -> str | None:
     return None
 
 
+def _declension_match(a: str, b: str) -> bool:
+    """Одно слово в разных падежах: общее начало от шести знаков и хвосты не
+    длиннее трёх («никольская» / «никольскую»). Строже `same_word`: имя фирмы
+    не должно ловиться на общем корне («групп», «мед»)."""
+    n = 0
+    for x, y in zip(a, b):
+        if x != y:
+            break
+        n += 1
+    return n >= 6 and len(a) - n <= 3 and len(b) - n <= 3
+
+
 def _detect_firm(question: str, idx: Index) -> Firm | None:
-    q = question
-    hits = [f for f in idx.firms if f.rx.search(q)]
-    if not hits:
-        return None
-    # Из нескольких совпадений берём фирму с самым длинным именем — «Level»
-    # совпадёт и с «LEVEL Legal Services», и с любым «level» в вопросе.
-    hits.sort(key=lambda f: -len(f.name))
-    return hits[0]
+    hits = [f for f in idx.firms if f.rx.search(question)]
+    if hits:
+        return max(hits, key=lambda f: len(f.name))
+    # Регулярки каталога знают именительный падеж («никольская»), а вопрос —
+    # любой («Никольскую»): владелец 31 августа 2026 не нашёл фирму и получил
+    # вместо неё компанию «Никольское». Сверяем значимые русские слова имени
+    # фирмы со словами вопроса по общему началу.
+    words = query_words(question)
+    best: tuple[int, Firm] | None = None
+    for f in idx.firms:
+        sig = [w for w in tokens(f.name) if w not in ADVISOR_GENERIC and len(w) >= 6 and re.fullmatch(r"[а-я]+", w)]
+        if not sig:
+            continue
+        if all(any(_declension_match(sw, w) for w in words) for sw in sig):
+            if best is None or len(sig) > best[0]:
+                best = (len(sig), f)
+    return best[1] if best else None
 
 
 def _significant(name: str) -> list[str]:
@@ -749,7 +770,8 @@ def _answer_advisor(intent: Intent, idx: Index) -> Retrieval:
     docs = _filter(idx.firm_deals.get(firm.id) or [], intent.year, intent.industry)
     if not docs:
         scope = f" за {intent.year} год" if intent.year else ""
-        text = (f"В базе «Компаса» нет сделок{scope}, где {firm.name} названа консультантом. "
+        text = (f"В «Компасе» пока нет сделок{scope}, где [{firm.name}](#/advisors/{firm.id}) названа "
+                f"консультантом: фирма есть в каталоге, но её проекты в открытых источниках не встретились. "
                 f"{NOTE_ADVISORS} Каталог фирмы: [{firm.name}](#/advisors/{firm.id}).")
         return Retrieval("advisor", text, [], firm.name)
     n = len(docs)

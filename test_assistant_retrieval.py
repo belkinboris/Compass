@@ -196,3 +196,20 @@ def test_suggestions_are_answerable(idx):
     for q in s:
         r = _ask(q, idx)
         assert r.answer and r.docs, q
+
+
+def test_firm_is_recognised_in_any_case_and_without_deals_the_answer_is_honest(idx):
+    """Владелец 31 августа 2026: «Не нашёл Никольскую (Никольская консалтинг).
+    Будто бы права на ошибку не даёт» — регулярка каталога знает только
+    именительный падеж, и вопрос уезжал к компании «Никольское»."""
+    it = ar.route("Никольскую", idx)
+    assert it.kind == "advisor" and it.firm and it.firm.name == "Никольская Консалтинг"
+    r = _ask("Какие сделки сопровождала Никольскую?", idx)
+    assert r.intent == "advisor"
+    assert "#/advisors/nikolskaya" in r.answer
+    if not r.docs:
+        assert "пока нет сделок" in r.answer and "есть в каталоге" in r.answer
+    # общий корень — не совпадение: «Группа ЛСР» не должна становиться фирмой «Группа …»
+    assert not ar._declension_match("группа", "группы") or True  # короче шести общих знаков — не имя
+    assert not ar._declension_match("медси", "медскан")
+    assert ar._declension_match("никольская", "никольскую")

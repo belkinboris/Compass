@@ -2002,3 +2002,76 @@ def test_feed_search_suggests_by_first_letters_and_hides_filters_behind_a_button
     h = page.evaluate("location.hash")
     assert h.startswith("#/companies/") and "undefined" not in h, h
     assert not page.crashes
+
+
+def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, base_url):
+    """«Кривой формат» (владелец, 31 августа 2026, список компаний с телефона):
+    бейдж «Группа компаний» стоял вне потока и срезался верхом карточки, а
+    фиксированные высоты имени и описания оставляли пустые дыры в одной
+    колонке. Проверяем на узком экране: бейдж внутри карточки целиком, имя
+    из одной строки не тянет 60px, переполнения нет."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    try:
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/companies", wait_until="networkidle")
+        pg.wait_for_selector(".co-card")
+        pg.wait_for_timeout(700)
+        card = pg.locator(".co-card").first
+        badge = card.locator(".co-group-badge")
+        assert badge.count() == 1, "первая карточка (Сбербанк) должна быть группой"
+        cb, bb = card.bounding_box(), badge.bounding_box()
+        assert bb["y"] >= cb["y"] and bb["y"] + bb["height"] <= cb["y"] + cb["height"], (cb, bb)
+        assert bb["x"] + bb["width"] <= cb["x"] + cb["width"]
+        h3 = card.locator("h3").bounding_box()
+        assert h3["height"] < 45, f"имя в одну строку занимает {h3['height']}px — фиксированная высота осталась"
+        actions = card.locator(".co-actions").bounding_box()
+        assert actions["height"] < 45, "кнопки должны стоять в ряд, а не столбиком"
+        labels = [x.text_content() for x in card.locator(".co-nums .label").all()]
+        for x in card.locator(".co-nums .label").all():
+            assert x.bounding_box()["height"] < 22, f"подпись {x.text_content()!r} переносится на две строки"
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        assert not errors
+    finally:
+        ctx.close()
+
+
+def test_deal_lenses_split_advisors_by_kind(page, base_url):
+    """«В экономисте надо делать финансовых консультантов, в юристе
+    юридических; если нажать юриста, то Алор брокера нет — надо чтобы
+    соответствовало» (владелец, 31 августа 2026). Один список на карточку,
+    по вкладкам — по виду консультанта, а не по полю, где он лежал."""
+    visit(page, base_url, "#/deal/g64a94e27")
+    page.click(".lens [data-l='law']")
+    page.wait_for_timeout(400)
+    law = page.locator("#app").text_content()
+    assert "LEVEL Legal Services" in law and "АЛРУД" in law
+    assert "Aspring" not in law and "Алор" not in law, "финансовые консультанты попали к юристу"
+    page.click(".lens [data-l='eco']")
+    page.wait_for_timeout(400)
+    eco = page.locator("#app").text_content()
+    assert "Aspring Capital" in eco and "Алор брокер" in eco
+    assert "Финансовые консультанты" in eco
+    # юридическая фирма у экономиста может встретиться только в списке источников, не в показателях
+    assert "Юридический консультант" not in eco
+
+
+def test_new_dialog_button_does_not_scroll_or_open_the_keyboard_on_a_phone(browser, base_url):
+    """Вторая жалоба на «+ Новый диалог» (31 августа, вечер): на телефоне
+    любой focus() открывает клавиатуру и уводит к полю ввода внизу.
+    В сенсорном контексте кнопка только начинает новый диалог."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/assistant", wait_until="networkidle")
+        pg.wait_for_selector("#newThread")
+        pg.wait_for_timeout(500)
+        pg.evaluate("window.scrollTo(0, 0)")
+        pg.click("#newThread")
+        pg.wait_for_timeout(600)
+        assert pg.evaluate("window.scrollY") < 10
+        assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
+        assert "Начат новый диалог" in pg.inner_text("#chatbox")
+    finally:
+        ctx.close()
