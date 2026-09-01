@@ -532,13 +532,25 @@ def _detect_firm(question: str, idx: Index) -> Firm | None:
     words = query_words(question)
     best: tuple[int, Firm] | None = None
     for f in idx.firms:
-        sig = [w for w in tokens(f.name) if w not in ADVISOR_GENERIC and len(w) >= 6 and re.fullmatch(r"[а-я]+", w)]
+        # Родовые слова имени («Консалт», «Партнёры», «Групп») — не имя: по
+        # ним «Никольской Консалтинг» узнавалась как «Б1 – Консалт».
+        sig = [w for w in tokens(f.name)
+               if len(w) >= 6 and re.fullmatch(r"[а-я]+", w) and not _generic_firm_word(w)]
         if not sig:
             continue
         if all(any(_declension_match(sw, w) for w in words) for sw in sig):
-            if best is None or len(sig) > best[0]:
-                best = (len(sig), f)
+            score = sum(len(w) for w in sig)
+            if best is None or score > best[0]:
+                best = (score, f)
     return best[1] if best else None
+
+
+_GENERIC_FIRM_ROOTS = ("консалт", "консульт", "партн", "групп", "юрид", "прав", "лигал", "адвокат", "бюро", "коллег", "компани")
+
+
+def _generic_firm_word(word: str) -> bool:
+    w = norm(word)
+    return w in ADVISOR_GENERIC or any(w.startswith(r) for r in _GENERIC_FIRM_ROOTS)
 
 
 def _significant(name: str) -> list[str]:
@@ -581,13 +593,27 @@ def _industry_covers(token: str) -> bool:
     return False
 
 
+def _without_firm_name(question: str, firm: Firm) -> str:
+    """Вопрос без слов, которыми названа фирма (по регулярке каталога и по
+    самим словам имени в любом падеже)."""
+    text = firm.rx.sub(" ", question)
+    name_words = [w for w in tokens(firm.name) if len(w) >= 4]
+    kept = [w for w in re.split(r"(\s+)", text)
+            if not any(_declension_match(norm(w).strip("«»\"()"), nw) or norm(w).strip("«»\"()") == nw for nw in name_words)]
+    return "".join(kept)
+
+
 def route(question: str, idx: Index | None = None) -> Intent:
     idx = idx or get_index()
     terms = query_terms(question)
     words = query_words(question)
     year = year_in(question)
     firm = _detect_firm(question, idx)
-    industry = _detect_industry(question, idx)
+    # Слова из имени фирмы не должны читаться как отрасль: «Никольская
+    # консалтинг» узнавалась фирмой, а «консалтинг» — отраслью, и список её
+    # сделок фильтровался по отрасли до нуля (владелец 31 августа 2026:
+    # «у Никольской вообще-то есть 2 сделки»).
+    industry = _detect_industry(_without_firm_name(question, firm) if firm else question, idx)
     theme = _detect_theme(question)
     term_rx = _detect_term(question)
     wants_adv = bool(ADVISOR_WORDS.search(question))

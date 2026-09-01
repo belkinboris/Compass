@@ -213,3 +213,17 @@ def test_firm_is_recognised_in_any_case_and_without_deals_the_answer_is_honest(i
     assert not ar._declension_match("группа", "группы") or True  # короче шести общих знаков — не имя
     assert not ar._declension_match("медси", "медскан")
     assert ar._declension_match("никольская", "никольскую")
+
+
+def test_firm_name_words_are_not_read_as_an_industry(idx):
+    """«Какие сделки сопровождала Никольская консалтинг?» — фирма узнавалась,
+    но «консалтинг» читался ещё и как отрасль, и её две сделки отсеивались
+    до нуля. Ответ обязан совпадать с каталогом консультантов на сайте."""
+    n = len(idx.firm_deals.get("nikolskaya") or [])
+    for q in ("Какие сделки сопровождала Никольская консалтинг?", "Никольскую", "сделки Никольской Консалтинг"):
+        it = ar.route(q, idx)
+        assert it.kind == "advisor" and it.firm and it.firm.id == "nikolskaya", q
+        r = _ask(q, idx)
+        assert len(r.docs) == n, (q, len(r.docs), n)
+        if n:
+            assert f" {n} " in r.answer and "#/deal/" in r.answer
