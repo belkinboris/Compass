@@ -4703,74 +4703,17 @@
    ]
   },
   {
-   "draft_id": "d11865806",
-   "title": "Ozon открыл продажи на рынке Монголии",
+   "draft_id": "d56657556",
+   "title": "Поставщик авто с японских аукционов подсчитал цену ввоза машины в Россию",
    "date": "2026-09-01",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112381"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6a965c83884e1199ae9cda95"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82496581",
-   "title": "Самсонова не смогла выйти во второй раунд US Open",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260901/raund-2114516200.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d57611444",
-   "title": "Хачанов вышел во второй раунд Открытого чемпионата США по теннису",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260901/tennis-2114515599.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4785,120 +4728,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d49962218",
-   "title": "США захотели продать одной стране военные вертолеты на сотни миллионов долларов",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/ssha-zahoteli-prodat-odnoy-strane-voennye-vertolety-na-sotni-millionov-dollarov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d25518827",
-   "title": "В России изменились правила продажи сигарет",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/v-rossii-izmenilis-pravila-prodazhi-sigaret/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90853560",
-   "title": "В Перми продают премиальный особняк с купелью и вольером для собак",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053123052"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84279990",
-   "title": "Сигареты и вейпы запретили продавать: где их нельзя будет купить",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/business/2026/09/01/76617797/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
