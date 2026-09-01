@@ -877,18 +877,22 @@ def test_analytics_shows_sum_dynamics_and_advisor_league(page, base_url):
     """Этап 16, П3: «сколько сделок» и «на сколько» — разные графики.
 
     Карточка сумм по периодам разворачивается в кварталы при выборе года
-    (та же логика, что у графика счётчика сделок), а «Лига консультантов»
-    называет знаменатель «где консультант раскрыт», а не общее число сделок.
+    (та же логика, что у графика счётчика сделок), а «Консультанты»
+    называют знаменатель «где консультант известен», а не общее число сделок.
     """
     visit(page, base_url, "#/analytics")
     cards = page.locator(".an-card")
     labels = [cards.nth(i).locator(".label").inner_text().lower() for i in range(cards.count())]
     sum_card_idx = next((i for i, l in enumerate(labels) if "сумма сделок по годам" in l), None)
     assert sum_card_idx is not None, f"нет карточки суммы сделок по годам: {labels}"
-    league_idx = next((i for i, l in enumerate(labels) if "лига консультантов" in l), None)
-    assert league_idx is not None, f"нет карточки «Лига консультантов»: {labels}"
+    # «Лига консультантов» → «Консультанты» (просьба владельца 31 августа 2026:
+    # слово «лига» по-русски здесь не говорят); знаменатель по-прежнему «где
+    # консультант известен», а не общее число сделок.
+    league_idx = next((i for i, l in enumerate(labels) if l == "консультанты"), None)
+    assert league_idx is not None, f"нет карточки «Консультанты»: {labels}"
     league_note = cards.nth(league_idx).locator("p").inner_text().lower()
-    assert "консультант раскрыт" in league_note, f"нет знаменателя раскрытия: {league_note!r}"
+    assert "консультант известен" in league_note, f"нет знаменателя раскрытия: {league_note!r}"
+    assert "лига" not in " ".join(labels)
 
     page.select_option("#anYearSel", "2025")
     page.wait_for_timeout(600)
