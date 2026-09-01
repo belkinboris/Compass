@@ -4703,13 +4703,83 @@
    ]
   },
   {
-   "draft_id": "d56657556",
-   "title": "Поставщик авто с японских аукционов подсчитал цену ввоза машины в Россию",
+   "draft_id": "d17910282",
+   "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6a965c83884e1199ae9cda95"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8923014"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-01",
+     "title": "Переговоры",
+     "note": "Генеральный директор «Росатома» Алексей Лихачев рассказал журналу «Эксперт» о планах строительства верфи в районе Мурманска. Инвестиции в проект оцениваются в несколько десятков миллиардов рублей.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8923014"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Правительство одобрило создание СП «Росатома» и DP World» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d32068062",
+   "title": "Право на оружие: как челябинцам купить ружье в 2026 году",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053123076"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d75500111",
+   "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/1/moskva-vystavila-na-torgi-pyat-kommercheskih-pomeshhenij-na-ulicze-dmitriya-ulyanova"
     ]
    ],
    "sum": null,
