@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d66711775",
+   "draft_id": "d58080414",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d89012043",
+   "draft_id": "d27711761",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d91217101",
+   "draft_id": "d41918043",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,114 +4800,19 @@
    ]
   },
   {
-   "draft_id": "d47278454",
-   "title": "«Общественное. Новости»: Украина официально запросила у ЕК разрешение на покупку Patriot",
+   "draft_id": "d22994784",
+   "title": "Суд продлил на полгода конкурсное производство в отношении «Трансаэро»",
    "date": "2026-09-01",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28066911"
-    ]
-   ],
-   "sum": "€2 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11406062",
-   "title": "Россиянам назвали лучшее время для покупки авто",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/avto-novyigod/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24019082",
-   "title": "Часы легендарного бейсболиста продадут на аукционе за 104 миллиона рублей",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/chasy-legendarnogo-beysbolista-prodadut-na-auktsione-za-104-milliona-rubley/"
+     "web:1prime.ru",
+     "https://1prime.ru/20260901/sud-872893709.html"
     ]
    ],
    "sum": null,
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36705629",
-   "title": "«Эстудиантес» ведет переговоры о покупке полузащитника ЦСКА",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/01/estudiantes-vedet-peregovory-o-pokupke-poluzaschitnika-tsska/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-01",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/01/estudiantes-vedet-peregovory-o-pokupke-poluzaschitnika-tsska/"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
