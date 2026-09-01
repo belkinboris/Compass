@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d26492167",
+   "draft_id": "d31758907",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d17215295",
+   "draft_id": "d80394079",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d55358179",
+   "draft_id": "d21923811",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,41 +4800,13 @@
    ]
   },
   {
-   "draft_id": "d67324381",
-   "title": "Минфин возобновит аукционы ОФЗ со 2 сентября",
+   "draft_id": "d66979667",
+   "title": "РБК: сервис по продаже подержанных машин CarPrice приостановил выплаты клиентам",
    "date": "2026-09-01",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923390"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16358618",
-   "title": "«Зенит» отклонил предложение «Ромы» о покупке бразильского форварда Луиса Энрике",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923364"
+     "https://www.kommersant.ru/doc/8923461"
     ]
    ],
    "sum": null,
@@ -4856,41 +4828,13 @@
    ]
   },
   {
-   "draft_id": "d50633778",
-   "title": "Минфин возобновит аукционы по размещению ОФЗ",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/finance/news/2026/09/01/1225370-minfin-vozobnovit"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74348884",
-   "title": "«Барселона» купила у «Арсенала» нападающего сборной Бразилии",
+   "draft_id": "d53505999",
+   "title": "«Аэрофлот» выкупил все акции производителя бортового питания «Аэромар»",
    "date": "2026-09-01",
    "src": [
     [
      "web:rbc.ru",
-     "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
+     "https://www.rbc.ru/rbcfreenews/6a96d02a3861618cf40afd6e"
     ]
    ],
    "sum": null,
@@ -4901,147 +4845,35 @@
      "kind": "closed",
      "date": "2026-09-01",
      "title": "Сделка завершена",
-     "note": "Габриэл Жезус подписал трехлетний контракт с испанским клубом",
+     "note": "Авиакомпания &laquo;Аэрофлот&raquo; приобрела 49% акций крупнейшего поставщика бортового питания &laquo;Аэромар&raquo;, увеличив свою долю в компании до 100%, сообщил перевозчик на странице центра раскрытия корпоративной информации (ЦРКИ).",
      "source": [
       "web:rbc.ru",
-      "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
+      "https://www.rbc.ru/rbcfreenews/6a96d02a3861618cf40afd6e"
      ]
     }
    ],
-   "buyer_name": "«Барселона»",
-   "asset": null,
-   "seller": "«Арсенала» нападающего сборной Бразилии",
-   "parsed_parties": {
-    "buyer": "«Барселона»",
-    "asset": null,
-    "seller": "«Арсенала» нападающего сборной Бразилии"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87209303",
-   "title": "Минфин РФ 2 сентября проведет аукцион по размещению ОФЗ 29031",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112476"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "«Аэрофлот»",
+   "asset": "все акции производителя бортового питания «Аэромар»",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "«Аэрофлот»",
+    "asset": "все акции производителя бортового питания «Аэромар»",
     "seller": null
    },
-   "ind": null,
+   "ind": "Транспорт и логистика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d37921690",
-   "title": "Минфин 2 сентября возобновит проведение аукционов по размещению ОФЗ",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28066063"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20372280",
-   "title": "Минфин возобновит проведение аукционов ОФЗ",
+   "draft_id": "d17397912",
+   "title": "РЖД начали продавать билеты за цифровые рубли на электрички",
    "date": "2026-09-01",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260901/ofz-872884398.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45519198",
-   "title": "Дерипаска осудил ЦБ за беззаботное отношение к спаду инвестиций в России",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/302555"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24738340",
-   "title": "Купите осенью — сэкономите зимой: какие товары выгоднее приобрести уже сейчас",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053123340"
+     "https://1prime.ru/20260901/rzhd-872887874.html"
     ]
    ],
    "sum": null,
@@ -5059,8 +4891,91 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69656179",
+   "title": "РЖД начали продавать билеты на электрички за цифровые рубли",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260901/rzhd-2114672781.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57460279",
+   "title": "На Украине продают школьные рюкзаки с изображением Бандеры",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260901/ukraina-2114667160.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45920293",
+   "title": "Альфа-банк провел первую сделку финансирования через покупку намайненной цифровой валюты",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/302557"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
