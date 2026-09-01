@@ -810,6 +810,12 @@ a.dp-asset-name:hover{color:var(--accent)}
 .msg.ai{align-self:flex-start;background:var(--paper);border:1px solid var(--line-soft)}
 .msg.ai a{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
 .msg.wait{color:var(--muted);font-style:italic}
+.msg.ai ul{margin:8px 0 8px 18px;padding:0}.msg.ai li{margin:4px 0}
+.ai-more,.ai-note{font-size:12px;color:var(--muted);font-style:italic;margin:8px 0 0}
+.ai-fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:12px;color:var(--muted)}
+.ai-fb button{padding:4px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:12px;color:var(--muted);transition:all .2s var(--ease)}
+.ai-fb button:hover{border-color:var(--accent);color:var(--accent-deep)}
+.ai-fb input{flex:1 1 200px;min-width:0;padding:6px 10px;border:1px solid var(--line);border-radius:var(--radius);font:inherit;font-size:12.5px;background:var(--paper);color:var(--ink)}
 .ask{display:flex;gap:10px}
 .ask input{flex:1;padding:12px 15px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);font:inherit;color:var(--ink);transition:border-color .2s}
 .ask input:focus{outline:none;border-color:var(--accent);background:var(--card)}
@@ -2410,65 +2416,72 @@ function buildContext(question, contextType, contextId){
   });
 }
 
+/* Ответ, когда сервер не ответил вовсе. Раньше здесь лежали зашитые факты
+   («Orion — N сделок», «Балтика — 34 млрд») трёхмесячной давности, и они
+   расходились с базой — то есть в момент сбоя ассистент ещё и врал. Теперь
+   только то, что страница может проверить сама: похожие по словам сделки
+   из уже загруженной базы, честно подписанные. */
 function localAnswer(q){
-  const s = q.toLowerCase();
-  const link = d => `<a href="#/deal/${d.id}">${d.title}</a>`;
-  if(/крупн|больш|дорог/.test(s)){
-    return `Крупнейшие по известным цифрам: структурная сделка <a href="#/advisors/orion">ВТБ — АФК «Система»</a> на 320 млрд ₽ и <a href="#/deal/baltika">«Балтика»</a> — 34 млрд ₽ по данным Reuters. Из архива канала M&A Новости — сделка X5 с сибирскими ритейлерами (аналитики оценивали доли в 2–3 млрд ₽ каждая) и УГМК–«Сусуманзолото». Суммы известны не по всем сделкам.`;
-  }
-  if(/иностран|уход|выход|exit|санкц|опцион/.test(s)){
-    const ds = DEALS.filter(d=>/иностран|MBO|Выход|опцион/i.test(d.type));
-    return `Сделок выхода иностранцев среди полных карточек ${ds.length}: ${ds.map(link).join("; ")}. Плюс компактные: Freedom Holding ($140 млн) и Fortenova. Общие черты: правкомиссия, дисконт, опционы обратного выкупа.`;
-  }
-  if(/консультант|юрист|фирм|сопровожда|orion|орион|level|алруд/.test(s)){
-    return `В базе ${TOTAL_DEALS()} сделок. По публикациям фирм: <a href="#/advisors/orion">Orion — ${firmCount("orion")} сделок</a>, <a href="#/advisors/level">LEVEL Legal Services — ${firmCount("level")}</a>, инвестиционный консультант <a href="#/advisors/aspring">Aspring Capital — ${firmCount("aspring")}</a>, по «Технорэду» — ASB Consulting Group. Полный каталог — в разделе <a href="#/advisors">Консультанты</a>. Это публичные данные, не рейтинг.`;
-  }
-  if(/правкомисс|согласован|одобрен|указ/.test(s)){
-    /* «правкомисс» не совпадает с «правительственной комиссией», написанной
-       полностью, — а так её называют чаще: правило видело 29 карточек из 56.
-       И `\w` здесь писать нельзя: в JS это [A-Za-z0-9_], кириллицы там нет. */
-    const ds = DEALS.filter(d=>/правкомисс|правительственн[а-яё]*\s+(?:под)?комисси|президент/i
-      .test((d.law&&d.law.appr)||"")).slice().sort((a,b)=>b.date.localeCompare(a.date));
-    const top = ds.slice(0,10);
-    return `Правкомиссия или указ Президента названы в поле «Согласования» у ${ds.length} карточек из ${DEALS.length}. Свежие: ${top.map(link).join("; ")}${ds.length>top.length?` — и ещё ${ds.length-top.length}`:""}.`;
-  }
-  if(/литий|мали|росатом/.test(s)){
-    const d = DEALS.find(x=>x.id==="rosatom-mali");
-    return `По литию: ${link(d)} — 75% у «дочки» Росатома, разрешение на Бугулу у Moketi Mining SARL.`;
-  }
-  const hit = DEALS.find(d=>(d.title+" "+d.ind+" "+d.type).toLowerCase().split(/[^а-яa-zё0-9]+/).some(w=>w.length>3&&s.includes(w)));
-  if(hit) return `Похоже, вы про ${link(hit)} (${hit.ind}, ${fmtDate(hit.date)}).`;
-  return `В демо-базе ${TOTAL_DEALS()} сделок — точного совпадения нет. Попробуйте: «самая крупная сделка», «кто сопровождал сделки», «выходы иностранцев». С ключами Yandex AI Studio доступен полноценный ИИ и режим «По всему интернету».`;
+  const head = "Сервер не ответил — похоже, пропала связь. Попробуйте ещё раз через минуту.";
+  const stems = askStems(q);
+  if(!stems.length) return head;
+  const hits = relevantDeals(q, 5).filter(d=>dealStems(d).some(h=>stems.some(st=>sameStemForAsk(st,h))));
+  if(!hits.length) return head;
+  return head + " Пока — похожие по словам сделки из базы:<ul>"
+    + hits.map(d=>`<li><a href="#/deal/${d.id}">${esc(d.title)}</a> — ${fmtDate(d.date)}</li>`).join("") + "</ul>";
 }
 
-/* ИИ отвечает не мгновенно: DeepSeek думает перед каждым ответом (до 8000
-   токенов рассуждения, отключить нельзя — main.py, THINKING_BUDGET), а на
-   таймауте сервер повторяет попытку до трёх раз по 60 секунд. Без обратной
-   связи статичная строка «Ищу по базе…» после 20–30 секунд выглядит зависшей.
-   Таймер тикает раз в секунду и после порогов честно объясняет, что происходит,
-   вместо того чтобы молчать. */
-function aiWaitTimer(el, mode){
-  const base = mode==="web" ? "Ищу по базе и в интернете" : "Ищу по базе";
+/* Разметка ответа → HTML. Ассистенту разрешены ссылки, **жирный** и списки
+   со «- »; всё остальное — текст. Списки раньше не рендерились вовсе (строки
+   с дефисами шли сплошняком через <br>), поэтому промпт их запрещал — и ответ
+   на «какие сделки…» превращался в абзац из шести названий подряд. */
+function mdToHtml(text){
+  const inline = t => String(t)
+    .replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/\[([^\]]+)\]\((#\/[^\)]+)\)/g,'<a href="$2">$1</a>')
+    .replace(/\[([^\]]+)\]\((https?:[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
+  const out=[]; let list=null;
+  String(text||"").split("\n").forEach(line=>{
+    const m=line.match(/^\s*[-•*]\s+(.+)$/);
+    if(m){ (list=list||[]).push("<li>"+inline(m[1])+"</li>"); return; }
+    if(list){ out.push("<ul>"+list.join("")+"</ul>"); list=null; }
+    out.push(inline(line));
+  });
+  if(list) out.push("<ul>"+list.join("")+"</ul>");
+  return out.join("<br>").replace(/<br><ul>/g,"<ul>").replace(/<\/ul><br>/g,"</ul>").replace(/(<br>){3,}/g,"<br><br>");
+}
+
+/* ИИ отвечает не мгновенно: DeepSeek думает перед каждым ответом (бюджет
+   рассуждения — main.py, THINKING_BUDGET), а на таймауте сервер повторяет
+   попытку. Без обратной связи статичная строка «Ищу по базе…» после 20–30
+   секунд выглядит зависшей. Таймер тикает раз в секунду и после порогов
+   честно объясняет, что происходит, вместо того чтобы молчать. */
+function tickTimer(el, fmt){
   let s = 0;
-  const tick = () => {
-    el.textContent = s < 8 ? base + "…"
-      : s < 25 ? base + `… ИИ формирует ответ (${s} с)`
-      : base + `… дольше обычного, но ещё считаем — до минуты бывает нормой (${s} с)`;
-    s++;
-  };
+  const tick = () => { el.textContent = fmt(s); s++; };
   tick();
   const t = setInterval(tick, 1000);
   return () => clearInterval(t);
+}
+function aiWaitTimer(el, mode){
+  const base = mode==="web" ? "Ищу по базе и в интернете" : "Ищу по базе";
+  return tickTimer(el, s => s < 8 ? base + "…"
+      : s < 25 ? base + `… формулирую ответ (${s} с)`
+      : base + `… дольше обычного, но ещё считаем — до минуты бывает нормой (${s} с)`);
 }
 
 async function aiAnswer(q, mode, meta){
   mode = mode || aiMode;
   meta = meta || {};
   try{
-    const payload={question:q,context:buildContext(q,meta.contextType,meta.contextId),mode,
+    /* Контекст (40 карточек, до 30 КБ) больше не собирается в браузере:
+       поиск по базе делает сервер — точнее и без лишних байтов в запросе. */
+    const payload={question:q,context:"",mode,
       thread_id:meta.threadId===undefined?null:meta.threadId,
       context_type:meta.contextType||"general",context_id:meta.contextId||null,
-      save_thread:meta.saveThread===true};
+      save_thread:meta.saveThread===true,
+      history:(meta.history||[]).slice(-6)};
     /* ЖДАТЬ ПРИХОДИТСЯ ДОЛГО, И ЖДАТЬ НАДО ЧЕСТНО. Замер живого сайта
        9 августа: ответ в режиме «по всему интернету» пришёл через 26,7 с
        (поиск + модель). Браузер сам запрос не обрывает, а вот прокси
@@ -2484,10 +2497,8 @@ async function aiAnswer(q, mode, meta){
       data = await r.json();
     } finally { clearTimeout(killer); }
     if(data.thread_id) activeThreadId=data.thread_id;
-    if(data.answer) return data.answer
-      .replace(/\[([^\]]+)\]\((#\/[^\)]+)\)/g,'<a href="$2">$1</a>')
-      .replace(/\[([^\]]+)\]\((https?:[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
-      .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+    if(data.answer) return {ok:true, raw:data.answer, html:mdToHtml(data.answer),
+      intent:data.intent||null, model:data.model!==false, deals:data.deals||[]};
   }catch(e){}
   /* СООБЩЕНИЕ О СБОЕ НЕ ДОЛЖНО НАЗЫВАТЬ ПРИЧИНУ, КОТОРОЙ НЕ ПРОВЕРЯЛО.
      Здесь стояло «поиск включится, когда будут заданы YANDEX_API_KEY и
@@ -2508,10 +2519,79 @@ async function aiAnswer(q, mode, meta){
       : ready===false
         ? "Поиск по интернету пока выключен на сервере."
         : "Не удалось связаться с сервером — похоже, пропала связь.";
-    return why+" Пока отвечаю по базе:<br><br>"+localAnswer(q);
+    return {ok:false, raw:"", html: why+"<br><br>"+localAnswer(q)};
   }
-  return localAnswer(q);
+  return {ok:false, raw:"", html: localAnswer(q)};
 }
+
+/* Один вопрос — два ответа, быстрый и полный. Поиск по базе на сервере
+   отвечает за доли секунды: его показываем сразу, а модель тем временем
+   дописывает живой текст поверх тех же фактов. 30–40 секунд молчания были
+   главной жалобой партнёра (31 августа 2026); теперь факты видны почти
+   мгновенно, и ждать остаётся только формулировку. Если модель так и не
+   ответила, быстрый ответ остаётся на экране — он точный, просто сухой. */
+async function runAsk(q, mode, meta, w){
+  mode = mode || aiMode; meta = meta || {};
+  let quick=null, stopMore=null, done=false;
+  const stopWait=aiWaitTimer(w, mode);
+  fetch("/api/assistant/lookup",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({question:q,context:"",context_type:meta.contextType||"general",context_id:meta.contextId||null})})
+    .then(r=>r.ok?r.json():null).catch(()=>null)
+    .then(d=>{
+      if(done||!d||!d.answer) return;
+      quick=d; stopWait(); w.classList.remove("wait");
+      w.innerHTML=mdToHtml(d.answer)+`<div class="ai-more"></div>`;
+      stopMore=tickTimer(w.querySelector(".ai-more"), s=> s<3
+        ? "Это данные из базы «Компаса». Дописываю ответ…"
+        : `Это данные из базы «Компаса». Дописываю ответ… (${s} с)`);
+    });
+  const a=await aiAnswer(q, mode, meta);
+  done=true; stopWait(); if(stopMore) stopMore(); w.classList.remove("wait");
+  if(a.ok){ w.innerHTML=a.html+feedbackBar(q,a); return a; }
+  if(quick){
+    const raw=quick.answer;
+    w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
+    const res={ok:true, raw, html:w.innerHTML, intent:quick.intent||null, model:false};
+    w.insertAdjacentHTML("beforeend", feedbackBar(q,res));
+    return res;
+  }
+  w.innerHTML=a.html; return a;
+}
+
+/* «Ответ помог?» под каждым ответом — начало петли улучшений: плохой ответ
+   раньше просто пропадал, и о нём узнавали, только когда партнёр присылал
+   скриншот. Оценка «нет» уходит сразу (не потеряется, если вкладку закроют),
+   комментарий — вторым запросом к той же записи. */
+const _fbStore = {};
+function feedbackBar(q, a){
+  const id = "fb"+Math.random().toString(36).slice(2,9);
+  _fbStore[id] = {q, a};
+  return `<div class="ai-fb" data-fb-id="${id}"><span>Ответ помог?</span><button type="button" data-fb="up">Да</button><button type="button" data-fb="down">Нет</button></div>`;
+}
+document.addEventListener("click", async e=>{
+  const b = e.target.closest("[data-fb]"); if(!b) return;
+  const bar = b.closest(".ai-fb"); const st = bar && _fbStore[bar.dataset.fbId]; if(!st) return;
+  const verdict = b.dataset.fb;
+  const send = async (note, feedbackId) => {
+    try{
+      const r = await fetch("/api/assistant/feedback",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({question:st.q, answer:st.a.raw, verdict, note:note||null, mode:aiMode,
+          intent:st.a.intent||null, thread_id:activeThreadId, feedback_id:feedbackId||null})});
+      return r.ok ? (await r.json()).id : null;
+    }catch(err){ return null; }
+  };
+  if(verdict==="up"){ send(); bar.innerHTML=`<span>Спасибо!</span>`; return; }
+  const fid = await send();
+  bar.innerHTML=`<span>Что было не так?</span><input type="text" placeholder="Например: не та сумма или не та сделка" aria-label="Что было не так"><button type="button" data-fb-send="1">Отправить</button>`;
+  const inp = bar.querySelector("input"); inp.focus({preventScroll:true});
+  const finish = async () => {
+    const note = inp.value.trim();
+    if(note) await send(note, fid);
+    bar.innerHTML=`<span>Спасибо, передали команде «Компаса».</span>`;
+  };
+  bar.querySelector("[data-fb-send]").onclick = finish;
+  inp.addEventListener("keydown", ev=>{ if(ev.key==="Enter") finish(); });
+});
 const modeToggleHtml = light => `
   <div class="mode ${light?"light":""}" data-mode-toggle>
     <button data-m="base" class="${aiMode==="base"?"on":""}">По базе Компаса</button>
@@ -3151,14 +3231,17 @@ function mountMiniAI(contextName, contextType="general", contextId=null){
   const log=root.querySelector(".miniai-log");
   const input=root.querySelector("input");
   const btn=root.querySelector("button.go");
+  const history=[];  // реплики этого мини-диалога — чтобы «а кто продавец?» понимался после первого вопроса
   const push=(cls,html)=>{const m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;log.appendChild(m);return m;};
   const send=async()=>{
     const v=input.value.trim();if(!v)return;
     push("user",esc(v));input.value="";
     const w=push("ai wait","");
-    const stopWait=aiWaitTimer(w,aiMode);
-    const a=await aiAnswer(`Контекст: пользователь смотрит «${contextName}». Вопрос: ${v}`, aiMode, {saveThread:true,contextType,contextId});
-    stopWait();w.classList.remove("wait");w.innerHTML=a;
+    /* Раньше вопрос склеивался с подсказкой «Контекст: пользователь смотрит
+       «X»…» — сервер и так знает страницу по context_type/context_id, а
+       склейка портила поиск по базе словами «контекст», «смотрит». */
+    const a=await runAsk(v, aiMode, {saveThread:true,contextType,contextId,history:history.slice()}, w);
+    history.push({role:"user",body:v}); if(a&&a.raw) history.push({role:"assistant",body:a.raw});
   };
   btn.onclick=send;
   input.addEventListener("keydown",e=>{if(e.key==="Enter")send();});
@@ -5581,7 +5664,19 @@ function renderIndustry(ind){
 }
 
 /* ================= АССИСТЕНТ ================= */
-const SUGGESTS = ["Кто сопровождал сделки в базе?","Какая самая крупная сделка?","Кто выходил из российского рынка?","Какие сделки с опционом обратного выкупа?"];
+/* Примеры вопросов приходят с сервера (/api/assistant/suggestions) — из
+   данных, у каждого гарантированно есть ответ. Список ниже — на случай, если
+   сервер не ответил. Прежний «Кто сопровождал сделки в базе?» снят по просьбе
+   владельца (31 августа 2026): звучало нелепо. */
+const SUGGESTS_FALLBACK = ["Какая самая крупная сделка 2025 года?","Кто из иностранных владельцев уходил из России?","Какие сделки с опционом обратного выкупа?"];
+let SUGGESTS = SUGGESTS_FALLBACK.slice();
+async function loadSuggests(){
+  try{
+    const r=await fetch("/api/assistant/suggestions"); const d=r.ok?await r.json():null;
+    if(d&&Array.isArray(d.suggestions)&&d.suggestions.length) SUGGESTS=d.suggestions;
+  }catch(e){}
+  return SUGGESTS;
+}
 /* Состояние фильтров аналитики живёт снаружи функции: `renderAnalytics()`
    вызывается заново на каждый выбор, и локальная переменная обнулялась бы. */
 let anYear = "Все";
@@ -6027,6 +6122,7 @@ async function renderMaterials(){
 async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
+  const history=[];  // реплики диалога гостя; у вошедшего история берётся сервером из сохранённого диалога
   app.innerHTML = `
   <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Отвечает по базе «Компаса» или, в режиме «По всему интернету», по открытым источникам — со ссылками на то, откуда взят факт. Обсуждения сохраняются в аккаунте.</p></div></div>
   <div class="chat-layout">
@@ -6037,8 +6133,8 @@ async function renderAssistant(){
     <div class="chat">
       <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
       <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
-      <div class="suggests reveal">${SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${q}</button>`).join("")}</div>
-      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала юридическая фирма [•]?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+      <div class="suggests reveal" id="suggests"></div>
+      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала фирма Orion?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
     </div>
   </div>`;
   rerun();
@@ -6053,30 +6149,37 @@ async function renderAssistant(){
   };
   const loadThread=async id=>{
     const r=await fetch(`/api/assistant/threads/${id}`); if(!r.ok)return;
-    const t=await r.json();activeThreadId=t.id;box.innerHTML="";
-    t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?m.body.replace(/\n/g,"<br>"):esc(m.body)));
+    const t=await r.json();activeThreadId=t.id;box.innerHTML="";history.length=0;
+    t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?mdToHtml(m.body):esc(m.body)));
     renderThreadList();
   };
   const answer=async q=>{
     push("user",esc(q));
     const w=push("ai wait","");
-    const stopWait=aiWaitTimer(w,aiMode);
-    const a=await aiAnswer(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general"});
-    stopWait();w.classList.remove("wait");w.innerHTML=a;box.scrollTop=box.scrollHeight;renderThreadList();
+    const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general",history:history.slice()},w);
+    history.push({role:"user",body:q}); if(a&&a.raw) history.push({role:"assistant",body:a.raw});
+    box.scrollTop=box.scrollHeight;renderThreadList();
   };
+  const paintSuggests=()=>{
+    const el=document.getElementById("suggests"); if(!el) return;
+    el.innerHTML=SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${esc(q)}</button>`).join("");
+    el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
+  };
+  paintSuggests(); loadSuggests().then(paintSuggests);
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
-  app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
   document.getElementById("newThread").onclick=()=>{
-    activeThreadId=null;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();
-    // Кнопка стоит в боковой панели над историей диалогов, а сама лента —
-    // на телефоне ниже переключателя режима, за пределами первого экрана
-    // (замерено: ~150–250px между кнопкой и лентой при 390×844). Клик менял
-    // текст в ленте, но пользователь этого не видел и решал, что кнопка не
-    // сработала. Прокручиваем к ленте и ставим курсор в поле — то же самое,
-    // что подтверждает «новый диалог начат» в мессенджерах.
-    box.scrollIntoView({behavior:"smooth",block:"center"});
-    document.getElementById("q").focus();
+    activeThreadId=null;history.length=0;box.innerHTML=`<div class="msg ai">Новый диалог. Задайте вопрос.</div>`;renderThreadList();
+    /* Кнопка стоит в боковой панели над историей диалогов, а сама лента —
+       на телефоне ниже переключателя режима, за пределами первого экрана.
+       Первая починка (30 августа) прокручивала к ленте и ставила курсор в
+       поле — но `focus()` сам прокручивает страницу к полю ввода, которое
+       стоит ПОД лентой и подсказками, и человека «отбрасывало в самый низ»
+       (жалоба владельца 31 августа). Теперь: к верху ленты — только если
+       она не на экране, и фокус без прокрутки. */
+    const r=box.getBoundingClientRect();
+    if(r.top<0||r.top>window.innerHeight*0.7) window.scrollTo({top:window.scrollY+r.top-84,behavior:"smooth"});
+    document.getElementById("q").focus({preventScroll:true});
   };
   bindModeToggles(app);renderThreadList();
   const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}

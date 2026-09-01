@@ -495,6 +495,25 @@ class AssistantMessage(Base):
     thread: Mapped[AssistantThread] = relationship(back_populates="messages")
 
 
+class AssistantFeedback(Base):
+    """«Полезно / не помогло» под ответом ассистента — начало петли улучшения,
+    о которой договорились с владельцем 31 августа 2026: плохой ответ раньше
+    просто пропадал, никто о нём не узнавал. Храним вопрос и ответ целиком:
+    через неделю их уже не восстановить из диалога анонимного посетителя."""
+    __tablename__ = "assistant_feedback"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    thread_id: Mapped[int | None] = mapped_column(ForeignKey("assistant_threads.id"), nullable=True)
+    question: Mapped[str] = mapped_column(Text)
+    answer: Mapped[str] = mapped_column(Text)
+    verdict: Mapped[str] = mapped_column(String(10))          # up | down
+    note: Mapped[str | None] = mapped_column(Text, nullable=True)
+    mode: Mapped[str] = mapped_column(String(20), default="base")
+    intent: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
 class Webinar(Base):
     __tablename__ = "webinars"
 

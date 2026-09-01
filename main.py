@@ -28,6 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
+import assistant_retrieval
 import auth
 import deal_catalog
 import deal_multiples
@@ -38,7 +39,7 @@ from deal_catalog import get_deal
 from deal_export import render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
-    AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
+    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
     DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     ModerationDecision, Notification,
     NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
@@ -312,11 +313,13 @@ LLM_RETRIES = 2  # повторов сверх первой попытки
 # всегда, и эти токены генерируются ПОСЛЕДОВАТЕЛЬНО перед первым словом ответа —
 # то есть прямо превращаются в ожидание пользователя. Замер 7 августа на бою:
 # вопрос по базе с настоящим контекстом — 20,8 с, веб-режим — 25,8 с; владелец
-# видел и больше 30. Бюджет в 8000 токенов брался с запасом «чтобы точно
-# хватило», но задача ассистента — не олимпиадная математика, а выборка фактов
-# из переданного JSON: столько рассуждений ей не нужно. Значение вынесено в
-# переменную окружения, чтобы подбирать его без выкладки кода.
-THINKING_BUDGET = int(os.environ.get("LLM_THINKING_BUDGET", "2000"))
+# видел и больше 30 (партнёр 31 августа — 30–40 с). Бюджет был 8000, потом
+# 2000. С 1 сентября 2026 поиск по базе и все подсчёты делает сервер
+# (assistant_retrieval.py): модель получает уже ПРОВЕРЕННУЮ сводку и ≤12
+# компактных карточек вместо 40 полных, и её работа — написать по ним живой
+# текст, а не искать факты. На это 800 токенов рассуждения хватает с запасом.
+# Значение вынесено в переменную окружения, чтобы подбирать его без выкладки кода.
+THINKING_BUDGET = int(os.environ.get("LLM_THINKING_BUDGET", "800"))
 
 # Общий keep-alive клиент (урок TruePost: не создавать новый на каждый вызов).
 _http = httpx.Client(
@@ -325,50 +328,70 @@ _http = httpx.Client(
     limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
 )
 
-SYSTEM_BASE = """Ты — ассистент платформы «КОМПАС» о сделках и компаниях российского рынка.
-Отвечай ТОЛЬКО на основе базы данных, переданной в сообщении (JSON).
-Правила:
-- По-русски, кратко, как аналитик для юристов и банкиров.
-- Ссылки на сделки платформы: [название](#/deal/ID).
-- Разрешённое форматирование: ссылки [текст](адрес) и выделение **жирным**. Запрещены: заголовки #, списки с - или *, таблицы, код в ```.
-- Никаких вступительных фраз («Отличный вопрос», «Конечно») — сразу ответ по существу.
-- Не выдумывай факты, суммы, консультантов. Нет данных — так и скажи.
-- Данные из публичных источников и могут быть неполными; упоминай это, когда уместно.
-- Никаких рейтингов качества фирм — только факты."""
+SYSTEM_BASE = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
-SYSTEM_WEB = """Ты — аналитик платформы «КОМПАС» о сделках и компаниях российского рынка.
-У тебя два источника: база платформы (JSON в сообщении) и блок «СВЕЖАЯ ВЫДАЧА ПОИСКА (Яндекс)».
+Что тебе дают в сообщении: проверенную СВОДКУ по вопросу (её счётчики и список сделок уже сверены с базой «Компаса» — не пересчитывай их и не спорь с ними) и КАРТОЧКИ сделок с подробностями. Опирайся только на них.
 
-ГЛАВНОЕ: от тебя ждут ВЫВОД, а не пересказ выдачи со ссылками. Пользователь и сам
-видит ссылки — ценность в том, что ты их сопоставил.
-Структура ответа:
-1. Первым абзацем — прямой ответ на вопрос одной-двумя фразами. Что произошло, кто
-   участники, какая сумма. Без предисловий.
-2. Дальше — существенные детали и, если они есть, связи: как это соотносится со
-   сделками из базы «Компаса», продолжение ли это уже известной истории, сходятся ли
-   цифры разных источников. Расхождение источников — само по себе важный факт, назови его.
-3. Если из фактов следует осторожность (сумма только по оценке, сделка не закрыта,
-   сторона не раскрыта) — скажи об этом прямо.
+Как отвечать:
+- Сначала прямой ответ на вопрос, потом подробности. Без вступлений вроде «Отличный вопрос» и без пересказа того, что тебе дали.
+- Живым русским языком: короткие фразы, без канцелярита. Не употребляй слова из внутренней кухни — «база данных», «JSON», «записи», «контекст», «переданные данные», «карточка». Говори «в Компасе», «по нашим данным», «сделка».
+- Числа, суммы, даты, имена консультантов — только из сводки и карточек. Чего там нет — того не знаешь: скажи прямо «сумму этой сделки не раскрывали» или «в Компасе такой сделки нет». Не выдумывай ничего.
+- Каждую сделку, которую называешь, давай ссылкой вида [название сделки](#/deal/ID), где ID — из карточки. Никогда не показывай ID отдельно: ни в скобках, ни в тексте.
+- Если сделок несколько — перечисли их списком, каждая строка начинается с «- ». Не больше шести строк; если сделок больше, скажи, сколько ещё, и дай ссылку на страницу из сводки.
+- Разрешено: ссылки [текст](адрес), списки со «- », выделение **жирным**. Нельзя: заголовки с #, таблицы, код в ```.
+- Не оценивай, какая фирма или компания лучше, — только факты.
+- Данные собраны из открытых источников и могут быть неполными; напомни об этом там, где это меняет вывод (например, консультанты раскрывают не все проекты).
+- Объём: три–восемь предложений плюс список сделок. Не растягивай."""
 
-Правила достоверности:
-- Факты бери ТОЛЬКО из базы и из блока выдачи. Ничего сверх этих двух источников не добавляй.
+SYSTEM_WEB = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
+
+У тебя два источника: проверенная СВОДКА и КАРТОЧКИ сделок из «Компаса» и блок «СВЕЖАЯ ВЫДАЧА ПОИСКА (Яндекс)».
+
+ГЛАВНОЕ: от тебя ждут вывод, а не пересказ выдачи со ссылками. Читатель и сам видит ссылки — ценность в том, что ты их сопоставил.
+Как построить ответ:
+1. Первым абзацем — прямой ответ одной-двумя фразами: что произошло, кто участники, какая сумма. Без предисловий.
+2. Дальше — существенные детали и связи: продолжение ли это истории, которая уже есть в «Компасе», сходятся ли цифры разных источников. Расхождение источников — само по себе важный факт, назови его.
+3. Если из фактов следует осторожность (сумма только по оценке, сделка не закрыта, сторона не раскрыта) — скажи об этом прямо.
+
+Достоверность:
+- Факты — только из сводки, карточек и выдачи. Ничего сверх этого не добавляй.
 - Каждый факт из выдачи сопровождай ссылкой [название источника](URL) — URL из строки «Источник:».
-- Чётко различай, что из базы «Компаса», а что найдено в сети.
-- Нет данных ни в базе, ни в выдаче — так и скажи, коротко.
+- Чётко различай, что известно «Компасу», а что найдено в сети.
+- Сделки «Компаса» давай ссылкой [название сделки](#/deal/ID); ID отдельно не показывай.
+- Нет данных ни там, ни там — так и скажи, коротко.
 
-Форма: по-русски, как аналитик для юристов и банкиров, 3–6 предложений плюс детали.
-Разрешено: ссылки [текст](адрес) и **жирный**. Запрещены: заголовки #, списки с - или *,
-таблицы, код в ```. Никаких вступительных фраз вроде «Отличный вопрос»."""
+Язык: живой русский, без канцелярита и без слов из внутренней кухни («база данных», «JSON», «контекст», «карточка»). Разрешено: ссылки [текст](адрес), списки со «- », **жирный**. Нельзя: заголовки с #, таблицы, код в ```. Никаких вступлений вроде «Отличный вопрос»."""
 
 
 class AskRequest(BaseModel):
     question: str
-    context: str
+    # До 1 сентября 2026 браузер сам собирал контекст (40 карточек, до 30 КБ)
+    # и присылал его сюда. Теперь поиск по базе делает сервер; поле оставлено,
+    # чтобы старый index.html из кеша браузера не получал 422, и не читается.
+    context: str = ""
     mode: str = "base"  # base | web
     thread_id: int | None = None
     context_type: str = "general"
     context_id: str | None = None
     save_thread: bool = True
+    # Предыдущие реплики диалога для гостя (без аккаунта диалог нигде не
+    # хранится): [{"role": "user"|"assistant", "body": "..."}]. У вошедшего
+    # история берётся из его сохранённого диалога по thread_id.
+    history: list[dict] | None = None
+
+
+class AssistantFeedbackRequest(BaseModel):
+    question: str
+    answer: str
+    verdict: str  # up | down
+    note: str | None = None
+    mode: str = "base"
+    intent: str | None = None
+    thread_id: int | None = None
+    # Оценка «не помогло» уходит сразу по клику (чтобы не потеряться, если
+    # человек закроет вкладку), а комментарий к ней — вторым запросом с id
+    # той же записи: так в таблице одна строка, а не две.
+    feedback_id: int | None = None
 
 
 def _yandex_ready() -> bool:
@@ -409,7 +432,9 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
         "model": f"gpt://{folder_id}/{model}",
         "instructions": system,
         "input": user,
-        "temperature": float(os.environ.get("LLM_TEMPERATURE", "0.7")),
+        # 0,7 давала «творческие» пересказы с неверными числами; ответ по
+        # проверенной сводке должен быть ровным и предсказуемым.
+        "temperature": float(os.environ.get("LLM_TEMPERATURE", "0.3")),
         "max_output_tokens": max_tokens + THINKING_BUDGET,
     }
     headers = {"Authorization": f"Api-Key {api_key}", "Content-Type": "application/json"}
@@ -442,9 +467,89 @@ def _sources_footer(results: list[SearchResult]) -> str:
     return f"\n\nИсточники:\n{lines}"
 
 
+HISTORY_TURNS = 6          # сколько прошлых реплик показываем модели
+HISTORY_CHARS = 600        # и насколько длинных
+# Мини-диалог на странице сущности раньше склеивал вопрос с подсказкой
+# «Контекст: пользователь смотрит «X». Вопрос: …» — теперь страница передаёт
+# context_type/context_id, а старый index.html из кеша браузера может прислать
+# и склейку: снимаем её, иначе слова «контекст», «пользователь», «смотрит»
+# попадут в поиск по базе как слова вопроса.
+_CONTEXT_PREFIX_RE = re.compile(r"^\s*Контекст:\s*пользователь смотрит\s*«[^»]*»\.\s*Вопрос:\s*", re.I)
+_BARE_ID_RE = re.compile(r"\s*\(\s*(?:id:?\s*)?([A-Za-z0-9_-]{6,40})\s*\)")
+_DEAL_LINK_RE = re.compile(r"\[([^\]]+)\]\(#/deal/([^)\s]+)\)")
+_BARE_DEAL_PATH_RE = re.compile(r"(?<![\(\w/])#/deal/([A-Za-z0-9_-]+)")
+
+
+def _history_lines(rows: list[tuple[str, str]]) -> str:
+    rows = rows[-HISTORY_TURNS:]
+    if not rows:
+        return ""
+    out = []
+    for role, body in rows:
+        who = "Посетитель" if role == "user" else "Ассистент"
+        text = " ".join((body or "").split())
+        if len(text) > HISTORY_CHARS:
+            text = text[:HISTORY_CHARS] + "…"
+        out.append(f"{who}: {text}")
+    return "\n".join(out)
+
+
+def _build_user_message(question: str, ret, search_block: str, history: str) -> str:
+    summary = ret.answer or "По словам вопроса в «Компасе» ничего подходящего не нашлось."
+    parts = [f"СВОДКА из «Компаса» по вопросу (проверена, опирайся на неё):\n{summary}"]
+    cards = assistant_retrieval.context_for_model(ret)
+    if cards and cards != "[]":
+        parts.append(f"КАРТОЧКИ сделок (подробности к сводке):\n{cards}")
+    if search_block:
+        parts.append(search_block)
+    if history:
+        parts.append("Предыдущие реплики диалога (для связности; факты — только из сводки, карточек и выдачи):\n" + history)
+    parts.append(f"Вопрос посетителя: {question}")
+    return "\n\n".join(parts)
+
+
+def _polish_answer(text: str, idx) -> str:
+    """Убираем то, что модель делает вопреки инструкции: служебные id в
+    скобках («(ga4082daa)» видел партнёр 31 августа), ссылки на сделки,
+    которых в базе нет, и голые адреса #/deal/… без названия."""
+    by_id = idx.by_id if idx is not None else {}
+
+    def drop_id(m):
+        return "" if m.group(1) in by_id or re.fullmatch(r"[gc][0-9a-f]{8,9}", m.group(1)) else m.group(0)
+    text = _BARE_ID_RE.sub(drop_id, text)
+
+    def fix_link(m):
+        title, did = m.group(1), m.group(2)
+        return m.group(0) if did in by_id else title
+    text = _DEAL_LINK_RE.sub(fix_link, text)
+
+    def name_path(m):
+        doc = by_id.get(m.group(1))
+        return f"[{doc.title}](#/deal/{doc.id})" if doc else m.group(0)
+    text = _BARE_DEAL_PATH_RE.sub(name_path, text)
+    return text.strip()
+
+
+def _deals_payload(ret) -> list[dict]:
+    return [{"id": d.id, "title": d.title} for d in ret.docs[:12]]
+
+
 @app.post("/api/ask")
 def ask(req: AskRequest, request: Request, db=Depends(get_db)):
+    question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    # Поиск по базе — на сервере и ДО модели: он даёт проверенные счётчики и
+    # ссылки, а модели остаётся написать по ним живой текст. Без ключей к
+    # модели точный ответ по базе всё равно отдаём — это лучше заглушки.
+    try:
+        idx = assistant_retrieval.get_index()
+        ret = assistant_retrieval.retrieve(question, req.context_type, req.context_id, idx)
+    except Exception as e:  # noqa: BLE001 — сбой поиска не должен ронять ассистента целиком
+        logger.error("assistant retrieval failed: %s", e)
+        idx, ret = None, assistant_retrieval.Retrieval("search", None, [], None)
+
     if not _yandex_ready():
+        if ret.answer:
+            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
         return JSONResponse({"fallback": True})
 
     deadline = time.monotonic() + LLM_DEADLINE
@@ -455,7 +560,7 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
 
     if web:
         try:
-            results = yandex_search(req.question, config=SearchConfig.from_env(), client=_http)
+            results = yandex_search(question, config=SearchConfig.from_env(), client=_http)
             if results:
                 search_block = build_search_block(results)
                 system = SYSTEM_WEB
@@ -464,17 +569,28 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         except SearchError as e:
             logger.warning("web-режим: поиск упал (%s), деградация в base", e)
 
-    user_msg = f"База данных платформы (JSON):\n{req.context}\n\n"
-    if search_block:
-        user_msg += f"{search_block}\n\n"
-    user_msg += f"Вопрос пользователя: {req.question}"
+    user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
+    history_rows: list[tuple[str, str]] = []
+    if user and req.thread_id:
+        thread_for_history = db.scalar(select(AssistantThread).where(
+            AssistantThread.id == req.thread_id, AssistantThread.user_id == user.id))
+        if thread_for_history:
+            msgs = list(db.scalars(select(AssistantMessage).where(AssistantMessage.thread_id == thread_for_history.id)
+                                   .order_by(AssistantMessage.created_at.desc(), AssistantMessage.id.desc())
+                                   .limit(HISTORY_TURNS)).all())
+            history_rows = [(m.role, m.body) for m in reversed(msgs)]
+    elif req.history:
+        history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
+                        for h in req.history if isinstance(h, dict) and h.get("body")]
+
+    user_msg = _build_user_message(question, ret, search_block, _history_lines(history_rows))
 
     try:
         text = call_llm(system, user_msg, max_tokens=1400 if search_block else 700, deadline=deadline)
+        text = _polish_answer(text, idx)
         if search_block and not _MD_LINK_RE.search(text):
             logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
             text += _sources_footer(results)
-        user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
         thread_id = None
         if user and req.save_thread:
             thread = None
@@ -484,7 +600,7 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
                     AssistantThread.user_id == user.id,
                 ))
             if not thread:
-                title = " ".join(req.question.strip().split())[:120] or "Новый диалог"
+                title = " ".join(question.strip().split())[:120] or "Новый диалог"
                 thread = AssistantThread(
                     user_id=user.id,
                     title=title,
@@ -493,12 +609,12 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
                 )
                 db.add(thread)
                 db.flush()
-            db.add(AssistantMessage(thread_id=thread.id, role="user", body=req.question, mode=req.mode))
+            db.add(AssistantMessage(thread_id=thread.id, role="user", body=question, mode=req.mode))
             db.add(AssistantMessage(thread_id=thread.id, role="assistant", body=text, mode=req.mode))
             thread.updated_at = datetime.utcnow()
             db.commit()
             thread_id = thread.id
-        payload = {"answer": text}
+        payload = {"answer": text, "deals": _deals_payload(ret), "intent": ret.intent}
         if thread_id is not None:
             payload["thread_id"] = thread_id
         return payload
@@ -510,7 +626,120 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         if results:
             return {"answer": "Не удалось собрать ответ — модель не ответила вовремя. "
                               "Вот что нашлось по вопросу в сети:" + _sources_footer(results)}
+        # Точный ответ по базе у нас уже есть — модель нужна была только для
+        # живого текста. Отдаём факты, а не заглушку.
+        if ret.answer:
+            return {"answer": "Модель не ответила вовремя, поэтому отвечаю коротко, по данным «Компаса»:\n"
+                              + ret.answer,
+                    "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
         return JSONResponse({"fallback": True})
+
+
+@app.on_event("startup")
+def _warm_assistant_index():
+    """Индекс базы для ассистента строится ~1 с; греем его в фоне при старте,
+    чтобы первый вопрос посетителя не платил за это ожиданием."""
+    threading.Thread(target=assistant_retrieval.get_index, daemon=True).start()
+
+
+@app.post("/api/assistant/lookup")
+def assistant_lookup(req: AskRequest):
+    """Быстрая часть ответа — только поиск по базе, без модели. Интерфейс
+    показывает её сразу (доли секунды), пока модель дописывает живой текст:
+    30–40 секунд молчания были главной жалобой на ассистента."""
+    question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    try:
+        ret = assistant_retrieval.retrieve(question, req.context_type, req.context_id)
+    except Exception as e:  # noqa: BLE001
+        logger.error("assistant lookup failed: %s", e)
+        return {"answer": None, "deals": [], "intent": "search"}
+    return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "subject": ret.subject}
+
+
+@app.get("/api/assistant/suggestions")
+def assistant_suggestions():
+    """Примеры вопросов для экрана ассистента — из данных: у каждого
+    гарантированно есть ответ по базе (в отличие от прежнего списка в
+    index.html, где «Кто сопровождал сделки в базе?» звучало нелепо)."""
+    try:
+        return {"suggestions": assistant_retrieval.suggestions()}
+    except Exception as e:  # noqa: BLE001
+        logger.error("assistant suggestions failed: %s", e)
+        return {"suggestions": []}
+
+
+def _review_chat_ids() -> list[str]:
+    group = os.environ.get("TELEGRAM_REVIEW_GROUP_ID", "").strip()
+    if group:
+        return [group]
+    return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()]
+
+
+def _forward_note_to_console(row: AssistantFeedback) -> None:
+    chats = _review_chat_ids()
+    if not chats or not row.note:
+        return
+    text = ("✏️ Ассистент: посетитель пояснил, что было не так\n"
+            f"Вопрос: {row.question}\nКомментарий: {row.note}")
+    for chat in chats:
+        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True)
+
+
+def _forward_feedback_to_console(row: AssistantFeedback) -> None:
+    """«Не помогло» уходит в Telegram-консоль основателей тем же путём, что и
+    решения модерации, — чтобы плохой ответ не пропадал молча. Сбой отправки
+    не критичен: запись уже в таблице."""
+    chats = _review_chat_ids()
+    if not chats:
+        return
+    answer = " ".join(row.answer.split())
+    if len(answer) > 700:
+        answer = answer[:700] + "…"
+    lines = ["👎 Ассистент: посетитель отметил, что ответ не помог",
+             f"Вопрос: {row.question}",
+             f"Ответ: {answer}"]
+    if row.note:
+        lines.append(f"Комментарий посетителя: {row.note}")
+    lines.append("Режим: " + ("по всему интернету" if row.mode == "web" else "по базе Компаса")
+                 + (f" · вид вопроса: {row.intent}" if row.intent else ""))
+    text = "\n".join(lines)
+    for chat in chats:
+        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True)
+
+
+@app.post("/api/assistant/feedback")
+def assistant_feedback(req: AssistantFeedbackRequest, request: Request, db=Depends(get_db)):
+    verdict = (req.verdict or "").strip().lower()
+    if verdict not in ("up", "down"):
+        return JSONResponse({"error": "verdict must be up or down"}, status_code=400)
+    if not (req.question or "").strip() or not (req.answer or "").strip():
+        return JSONResponse({"error": "question and answer are required"}, status_code=400)
+    user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
+    if req.feedback_id:
+        row = db.get(AssistantFeedback, req.feedback_id)
+        # Чужую запись по угаданному id не трогаем: вопрос обязан совпасть.
+        if not row or row.question != req.question.strip()[:4000]:
+            return JSONResponse({"error": "feedback not found"}, status_code=404)
+        row.note = (req.note or "").strip()[:2000] or row.note
+        db.commit()
+        if row.verdict == "down" and row.note:
+            threading.Thread(target=_forward_note_to_console, args=(row,), daemon=True).start()
+        return {"ok": True, "id": row.id}
+    row = AssistantFeedback(
+        user_id=user.id if user else None,
+        thread_id=req.thread_id,
+        question=req.question.strip()[:4000],
+        answer=req.answer.strip()[:20000],
+        verdict=verdict,
+        note=(req.note or "").strip()[:2000] or None,
+        mode=(req.mode or "base")[:20],
+        intent=(req.intent or None) and req.intent[:30],
+    )
+    db.add(row)
+    db.commit()
+    if verdict == "down":
+        threading.Thread(target=_forward_feedback_to_console, args=(row,), daemon=True).start()
+    return {"ok": True, "id": row.id}
 
 
 # ==================== АККАУНТЫ: email + пароль, подписки, комментарии ====================

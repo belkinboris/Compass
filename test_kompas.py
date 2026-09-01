@@ -127,7 +127,7 @@ def test_ask_base_mode(client, monkeypatch):
 
     monkeypatch.setattr(main, "call_llm", fake_llm)
     r = client.post("/api/ask", json={"question": "Кто купил X?", "context": "{}", "mode": "base"})
-    assert r.json() == {"answer": "Ответ ассистента"}
+    assert r.json()["answer"] == "Ответ ассистента"
     assert captured["system"] == main.SYSTEM_BASE
     assert "СВЕЖАЯ ВЫДАЧА" not in captured["user"]
     assert captured["max_tokens"] == 700
@@ -146,7 +146,7 @@ def test_ask_web_mode_with_results(client, monkeypatch):
 
     monkeypatch.setattr(main, "call_llm", fake_llm)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
-    assert r.json() == {"answer": "Ответ с фактами" + main._sources_footer(results)}
+    assert r.json()["answer"] == "Ответ с фактами" + main._sources_footer(results)
     assert captured["system"] == main.SYSTEM_WEB
     assert "СВЕЖАЯ ВЫДАЧА ПОИСКА (Яндекс)" in captured["user"]
     assert captured["max_tokens"] == 1400
@@ -161,7 +161,7 @@ def test_ask_web_mode_model_already_cited_no_footer(client, monkeypatch):
     cited = "Ответ с фактами и [ссылкой на источник](https://fresh.example.ru/b)."
     monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: cited)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
-    assert r.json() == {"answer": cited}
+    assert r.json()["answer"] == cited
 
 
 def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
@@ -173,7 +173,7 @@ def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
     monkeypatch.setattr(main, "yandex_search", broken_search)
     monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
-    assert r.json() == {"answer": "Ответ по базе"}  # пользователь не видит ошибку
+    assert r.json()["answer"] == "Ответ по базе"  # пользователь не видит ошибку
     assert captured["system"] == main.SYSTEM_BASE
 
 
@@ -182,7 +182,7 @@ def test_ask_web_mode_empty_results_degrades_to_base(client, monkeypatch):
     monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: [])
     monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
-    assert r.json() == {"answer": "Ответ по базе"}
+    assert r.json()["answer"] == "Ответ по базе"
     assert captured["system"] == main.SYSTEM_BASE
 
 
@@ -263,3 +263,141 @@ def test_web_mode_returns_found_sources_when_the_model_is_silent(client, monkeyp
     body = r.json()
     assert "fallback" not in body
     assert results[0].url in body["answer"]
+
+
+# ---------- поиск по базе на сервере (1 сентября 2026) ----------
+# Партнёр 31 августа получил от ассистента «у Orion сделок нет» при 15
+# карточках в базе, служебные id в скобках и 30–40 секунд ожидания. Теперь
+# факты ищет сервер (assistant_retrieval.py) ДО модели, и ниже — контракт.
+
+ORION_Q = "Какие сделки сопровождала Orion?"
+
+
+def test_ask_gives_the_model_a_verified_summary_and_cards(client, monkeypatch):
+    captured = {}
+
+    def fake_llm(system, user, max_tokens, deadline=None):
+        captured.update(user=user)
+        return "Ответ"
+
+    monkeypatch.setattr(main, "call_llm", fake_llm)
+    body = client.post("/api/ask", json={"question": ORION_Q}).json()
+    assert "СВОДКА" in captured["user"] and "КАРТОЧКИ" in captured["user"]
+    assert "#/advisors/orion" in captured["user"]
+    assert captured["user"].rstrip().endswith("Вопрос посетителя: " + ORION_Q)
+    assert body["intent"] == "advisor" and len(body["deals"]) >= 5
+    assert all({"id", "title"} <= set(d) for d in body["deals"])
+
+
+def test_ask_without_keys_still_answers_from_the_base(monkeypatch):
+    monkeypatch.delenv("YANDEX_API_KEY", raising=False)
+    monkeypatch.delenv("YANDEX_FOLDER_ID", raising=False)
+    body = TestClient(main.app).post("/api/ask", json={"question": ORION_Q}).json()
+    assert "fallback" not in body
+    assert body["model"] is False and "#/advisors/orion" in body["answer"]
+
+
+def test_ask_llm_dead_but_the_base_knows_returns_facts(client, monkeypatch):
+    def dead(s, u, max_tokens, deadline=None):
+        raise RuntimeError("LLM недоступен")
+
+    monkeypatch.setattr(main, "call_llm", dead)
+    body = client.post("/api/ask", json={"question": ORION_Q}).json()
+    assert "fallback" not in body
+    assert body["model"] is False and "#/advisors/orion" in body["answer"]
+    assert body["answer"].startswith("Модель не ответила вовремя")
+
+
+def test_ask_passes_guest_history_to_the_model(client, monkeypatch):
+    captured = {}
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
+    client.post("/api/ask", json={
+        "question": "А кто консультировал?",
+        "history": [{"role": "user", "body": "Кто купил Ситибанк?"},
+                    {"role": "assistant", "body": "Ренессанс Капитал, в феврале 2026 года."}],
+    })
+    assert "Посетитель: Кто купил Ситибанк?" in captured["user"]
+    assert "Ассистент: Ренессанс Капитал" in captured["user"]
+
+
+def test_ask_strips_the_context_prefix_of_old_clients(client, monkeypatch):
+    captured = {}
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
+    client.post("/api/ask", json={
+        "question": "Контекст: пользователь смотрит «Магнит». Вопрос: какие сделки были у Магнита?",
+        "context_type": "company", "context_id": "gd19e26bf",
+    })
+    assert captured["user"].rstrip().endswith("Вопрос посетителя: какие сделки были у Магнита?")
+    assert "пользователь смотрит" not in captured["user"]
+
+
+def test_polish_removes_bare_ids_and_links_to_unknown_deals():
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    did = "citibank"
+    assert did in idx.by_id
+    text = (f"Сделка [Ситибанк](#/deal/{did}) и она же ({did}), "
+            f"чужая [ссылка](#/deal/nope-123) и голый адрес #/deal/{did}.")
+    out = main._polish_answer(text, idx)
+    assert f"({did})" not in out
+    assert "#/deal/nope-123" not in out and "ссылка" in out
+    assert out.count(f"(#/deal/{did})") == 2  # ссылка осталась, голый адрес стал ссылкой с названием
+
+
+def test_lookup_returns_facts_without_the_model(client):
+    body = client.post("/api/assistant/lookup", json={"question": ORION_Q}).json()
+    assert body["intent"] == "advisor" and body["deals"] and "#/advisors/orion" in body["answer"]
+    assert client.post("/api/assistant/lookup", json={"question": "q"}).json()["answer"] is None
+
+
+def test_suggestions_come_from_the_base_and_not_the_silly_list(client):
+    s = client.get("/api/assistant/suggestions").json()["suggestions"]
+    assert len(s) >= 3
+    assert "Кто сопровождал сделки в базе?" not in s
+    assert all("база" not in q.lower() for q in s)
+
+
+def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
+    from db.models import AssistantFeedback
+    from db.session import get_session
+    from sqlalchemy import select as sa_select
+
+    sent = []
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100500")
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: sent.append((method, p)) or {"ok": True})
+
+    class SyncThread:  # отправка идёт в фоне; в тесте — сразу
+        def __init__(self, target=None, args=(), daemon=None):
+            self.target, self.args = target, args
+
+        def start(self):
+            self.target(*self.args)
+
+    monkeypatch.setattr(main.threading, "Thread", SyncThread)
+    with TestClient(main.app) as c:
+        bad = c.post("/api/assistant/feedback", json={"question": "q", "answer": "a", "verdict": "maybe"})
+        assert bad.status_code == 400
+        r = c.post("/api/assistant/feedback", json={
+            "question": ORION_Q, "answer": "У Orion сделок нет.", "verdict": "down",
+            "mode": "base", "intent": "advisor"})
+        assert r.json()["ok"] is True
+        fid = r.json()["id"]
+        assert sent and sent[0][0] == "sendMessage" and sent[0][1]["chat_id"] == "-100500"
+        assert "не помог" in sent[0][1]["text"] and ORION_Q in sent[0][1]["text"]
+        # Комментарий — вторым запросом к той же записи, не новой строкой.
+        r2 = c.post("/api/assistant/feedback", json={
+            "question": ORION_Q, "answer": "У Orion сделок нет.", "verdict": "down",
+            "note": "В базе 15 сделок Orion", "feedback_id": fid})
+        assert r2.json() == {"ok": True, "id": fid}
+        assert "В базе 15 сделок Orion" in sent[-1][1]["text"]
+        up = c.post("/api/assistant/feedback", json={"question": "x", "answer": "y", "verdict": "up"})
+        assert up.json()["ok"] is True
+    db = get_session()
+    try:
+        row = db.get(AssistantFeedback, fid)  # тестовая БД живёт между прогонами — ищем свою строку
+        assert row.verdict == "down"
+        assert row.note == "В базе 15 сделок Orion" and row.intent == "advisor"
+        assert db.scalar(sa_select(AssistantFeedback).where(AssistantFeedback.question == "x")).verdict == "up"
+    finally:
+        db.close()
