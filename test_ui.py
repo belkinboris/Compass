@@ -436,12 +436,12 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         ctx.close()
 
 
-def test_analytics_multiples_toggle_switches_to_operating_profit_view(browser, base_url):
-    """Мультипликатор по операционной прибыли — второй, переключаемый вид
-    того же блока (не отдельная карточка). По умолчанию открыт «По
-    выручке» (revenue-содержимое из первого теста этого блока); клик по
-    «По операционной прибыли» должен подменить содержимое на другую
-    методику и другую цифру, не оставляя оба набора цифр на экране разом."""
+def test_analytics_multiples_toggle_switches_to_revenue_view(browser, base_url):
+    """Два вида одного блока (не две карточки). С 31 августа 2026 первым и
+    по умолчанию открыт «По прибыли» (просьба владельца), «По выручке» —
+    второй; клик по нему должен подменить содержимое на другую методику и
+    другую цифру, не оставляя оба набора цифр на экране разом. Если данных
+    по прибыли нет (первый тест этого блока), открывается «По выручке»."""
     ctx = browser.new_context()
     try:
         def populated(route):
@@ -470,16 +470,20 @@ def test_analytics_multiples_toggle_switches_to_operating_profit_view(browser, b
         pg.goto(base_url + "/#/analytics", wait_until="networkidle")
         pg.wait_for_timeout(800)
         before = pg.inner_text("#multiplesCard")
-        assert "×1.5" in before or "×1,5" in before
-        assert "тестовая методика по выручке" in before.lower()
-        assert "тестовая методика по операционной прибыли" not in before.lower()
+        assert "×4" in before
+        assert "тестовая методика по операционной прибыли" in before.lower()
+        assert "тестовая методика по выручке" not in before.lower()
+        assert "по прибыли" in before.lower() and "операционной прибыли" not in before.lower().split("тестовая")[0]
+        # кнопки одинаковой ширины — сетка из двух равных колонок
+        widths = pg.evaluate("[...document.querySelectorAll('#multiplesCard [data-multview]')].map(b=>b.getBoundingClientRect().width)")
+        assert len(widths) == 2 and abs(widths[0] - widths[1]) < 2, widths
 
-        pg.click("#multiplesCard [data-multview='op']")
+        pg.click("#multiplesCard [data-multview='revenue']")
         pg.wait_for_timeout(300)
         after = pg.inner_text("#multiplesCard")
-        assert "×4" in after
-        assert "тестовая методика по операционной прибыли" in after.lower()
-        assert "тестовая методика по выручке" not in after.lower()  # старый вид не остался на экране рядом
+        assert "×1.5" in after or "×1,5" in after
+        assert "тестовая методика по выручке" in after.lower()
+        assert "тестовая методика по операционной прибыли" not in after.lower()  # старый вид не остался на экране рядом
         assert not errors
         assert pg.evaluate(
             "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
@@ -1948,3 +1952,53 @@ def test_web_search_failure_does_not_blame_missing_variables(page, base_url):
     html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
     assert "включится, когда в переменных приложения" not in html
     assert "не ответил вовремя" in html and '"/health"' in html
+
+
+def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
+    """Замечания владельца 31 августа 2026 на карточке MBO «ВымпелКома»
+    (g64a94e27): «два раза АЛРУД» и «юридический и финансовый сливаются —
+    надо поделить на стороны». Команда сделки группируется по сторонам,
+    одна фирма на одной стороне показывается один раз, финансовый
+    консультант стоит рядом с юридическим той же стороны."""
+    visit(page, base_url, "#/deal/g64a94e27")
+    page.wait_for_selector(".team")
+    # text_content, а не inner_text: заголовки колонок набраны капителью через CSS
+    team = page.locator(".team").text_content()
+    assert "Со стороны покупателя" in team and "Со стороны продавца" in team
+    assert len(re.findall(r"АЛРУД|ALRUD", team)) == 1, team
+    seller_col = next(c for c in page.locator(".team-col").all() if "продавца" in c.text_content())
+    seller_text = seller_col.text_content()
+    assert "АЛРУД" in seller_text and "Aspring Capital" in seller_text, seller_text
+    assert "юридический" in seller_text.lower() and "финансовый" in seller_text.lower()
+    # плашка темы объясняет, что это за кнопка
+    assert "Ещё сделки с той же особенностью" in page.locator(".theme-chips").text_content()
+    # вкладка «Юрист»: расчёты по облигациям ушли к экономисту, условия — наш текст без «как предполагал „Ъ“»
+    page.click(".lens [data-l='law']")
+    page.wait_for_timeout(400)
+    law = page.inner_text("#app")
+    assert "как и предполагал" not in law.lower()
+    assert "Сделка не предусматривает соглашений об обратном выкупе" in law
+    assert "замещающие" not in law
+
+
+def test_feed_search_suggests_by_first_letters_and_hides_filters_behind_a_button(page, base_url):
+    """Просьба владельца 31 августа 2026: «предлагать должно по первым
+    буквам», а категории — за кнопкой «Фильтры», а не на виду."""
+    visit(page, base_url, "#/deals")
+    page.wait_for_selector("#feedq")
+    assert page.inner_text("#advtoggle").strip() == "Фильтры"
+    page.fill("#feedq", "Магн")
+    page.wait_for_selector("#feedac .ac-item", timeout=5000)
+    items = [x.inner_text() for x in page.locator("#feedac .ac-item").all()]
+    assert any("Магнит" in x and "компания" in x for x in items), items
+    assert len(items) <= 8
+    assert not any("0 сделок" in x for x in items), items  # без сделок — просто «компания», а не «0 сделок»
+    assert any("Магнит" in x and "сделок" in x for x in items), items  # id компании — ключ словаря, не поле профиля
+    # подсказки рисуются поверх ленты, а не под ней
+    z = page.evaluate("getComputedStyle(document.querySelector('.feed-search')).zIndex")
+    assert z not in ("auto", "0"), z
+    page.locator("#feedac .ac-item").first.dispatch_event("mousedown")
+    page.wait_for_timeout(500)
+    h = page.evaluate("location.hash")
+    assert h.startswith("#/companies/") and "undefined" not in h, h
+    assert not page.crashes

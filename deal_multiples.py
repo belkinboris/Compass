@@ -293,6 +293,11 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     rows: list[DealMultiple] = []
     op_rows: list[OpProfitMultiple] = []
     industry_of: dict[str, str] = {}
+    # Отрасль — из самой сделки, а не из профиля компании: у профиля ключ
+    # называется `industry` (а здесь читали `ind`), и все двадцать сделок
+    # уезжали в «Не определена» одной строкой — партнёр увидел это на
+    # экране 31 августа 2026. У сделки отрасль есть всегда.
+    deal_industry = {did: (deal.get('ind') or '') for did, deal in deals.items()}
     for cand in candidates:
         entity = db.scalar(select(LegalEntity).where(
             LegalEntity.company_id == cand.target_id,
@@ -320,9 +325,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         if op_dm:
             op_rows.append(op_dm)
         if dm or op_dm:
-            profile = get_company_profile(cand.target_id)
-            if profile and profile.get('ind'):
-                industry_of[cand.target_id] = profile['ind']
+            ind = deal_industry.get(cand.deal_id) or ''
+            if not ind or ind == 'Не определена':
+                profile = get_company_profile(cand.target_id)
+                ind = (profile or {}).get('industry') or ind
+            if ind:
+                industry_of[cand.target_id] = ind
 
     rows.sort(key=lambda r: r.year, reverse=True)
     op_rows.sort(key=lambda r: r.year, reverse=True)

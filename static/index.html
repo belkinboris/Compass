@@ -537,7 +537,14 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    задачу для якорных ссылок в браузере, здесь применяем его и к programmatic
    scrollIntoView, потому что оба читают одно и то же CSS-свойство. */
 #feed{scroll-margin-top:80px}
-.feed-search{margin:40px 0 26px;display:flex;gap:10px;align-items:stretch}
+/* z-index: карточки ленты ниже — со своими transform они образуют слои, и
+   без явного уровня у строки поиска выпадающие подсказки рисовались ПОД ними. */
+.feed-search{margin:40px 0 26px;display:flex;gap:10px;align-items:stretch;position:relative;z-index:40}
+.ac{position:absolute;left:0;right:0;z-index:30;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.08);overflow:hidden}
+.ac-item{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;text-align:left;padding:10px 14px;font-size:14px;color:var(--ink);border-bottom:1px solid var(--line-soft);background:none}
+.ac-item:last-child{border-bottom:none}.ac-item:hover,.ac-item.on{background:var(--paper)}
+.ac-item .ac-text{min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.3}
+.ac-item .ac-note{color:var(--muted);font-size:12px;white-space:nowrap;flex:0 0 auto}
 .feed-search input{flex:1;min-width:0;padding:13px 18px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:border-color .2s;text-overflow:ellipsis}
 .feed-search input:focus{border-color:var(--accent)}
 .feed-search .chip{white-space:nowrap}
@@ -609,6 +616,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .theme-chip{display:inline-block;font-size:12px;line-height:1.3;padding:5px 11px;border-radius:99px;
   border:1px solid var(--line);background:var(--card);color:var(--steel);text-decoration:none;transition:all .2s var(--ease)}
 .theme-chip:hover{border-color:var(--accent);color:var(--accent)}
+.theme-lbl{font-size:12px;color:var(--muted);align-self:center}
 /* Роль компании в сделке на её странице */
 .role-badge{display:inline-block;font-weight:600;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--accent);border:1px solid var(--accent);opacity:.8;border-radius:2px;padding:2px 6px;margin-right:2px;vertical-align:1px}
@@ -789,6 +797,12 @@ a.dp-asset-name:hover{color:var(--accent)}
 .team-item .t-firm{font-weight:600;font-size:14px;color:var(--ink)}
 .team-item .t-firm a:hover{color:var(--accent)}
 .team-item .t-side{font-size:12px;color:var(--muted);margin-top:1px}
+.team-item .t-kind{font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
+.mult-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.mult-toggle .chip{text-align:center;padding:9px 12px;white-space:normal;line-height:1.3}
+.mult-ind{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line-soft);font-size:13.5px}
+.mult-ind:last-child{border-bottom:none}
+.mult-ind .num{flex:0 0 auto;text-align:right}.mult-ind-note{color:var(--muted);font-weight:400;font-size:12px}
 .team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
 
 /* ---------- цепочка владения ---------- */
@@ -1451,6 +1465,48 @@ const advFirmLink = name => {
   if(!text) return "";
   const firm = [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text));
   return firm ? `<a href="#/advisors/${firm.id}">${esc(text)}</a>` : esc(text);
+};
+const firmIdOf = name => {
+  const text = String(name || "").trim();
+  const firm = text ? [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text)) : null;
+  return firm ? firm.id : null;
+};
+/* Сторона сделки, которую консультировала фирма, — из текста роли и заметки:
+   «консультант покупателя», «советник продавца (VEON)», «эмитент». */
+const advSide = (text, d) => {
+  const t = String(text||"").toLowerCase();
+  if(/покупател|приобретател|инвестор(?!ов)|консорциум|заказчик/.test(t)) return "buyer";
+  if(/продавц|продавец|продающ|акционер|владельц|собственник/.test(t)) return "seller";
+  if(/эмитент|компани[ия]-цел|цели\b|целев|за[её]мщик|самой компани/.test(t)) return "target";
+  /* Роль не названа словом, но названа сторона по имени: «финансовый
+     консультант VEON по сделке» — VEON у этой сделки продавец. */
+  if(d){
+    const names = side => (side==="buyer" ? [d.buyer&&co(d.buyer)&&co(d.buyer).name, d.buyer_name]
+                         : side==="seller" ? [d.seller_id&&co(d.seller_id)&&co(d.seller_id).name, d.seller]
+                         : [d.target&&co(d.target)&&co(d.target).name, d.asset]).filter(Boolean);
+    const mentions = n => { const w = String(n).toLowerCase().replace(/[«»"()]/g," ").split(/[\s,]+/).filter(x=>x.length>=4 && !/^(ооо|пао|ао|зао|group|holding|holdings|ltd|llc|inc|компани\w*|группа|холдинг\w*)$/.test(x)); return w.length && w.some(x=>t.includes(x)); };
+    for(const side of ["buyer","seller","target"]) if(names(side).some(mentions)) return side;
+  }
+  return "none";
+};
+/* Что показать под именем фирмы: уточнение в скобках («топ-менеджмент
+   ВымпелКома»), а не повтор роли, которую уже сказал заголовок колонки. */
+const advDetail = text => {
+  const t = String(text||"").replace(/Источник:.*$/i,"").trim();
+  const m = t.match(/\(([^()]{2,80})\)/);
+  if(m) return m[1].trim();
+  const bare = t.replace(/юридическ\w*|финансов\w*|консультант\w*|советник\w*|покупател\w*|продавц\w*|продавец|сторон\w*|не уточнен\w*|эмитент\w*|инвестор\w*|[,;:.]/gi,"").trim();
+  return bare.length >= 6 ? t : "";
+};
+/* Одна фирма дважды на одной карточке (АЛРУД и ALRUD, Baker McKenzie и её
+   бывший российский офис) — оставляем первую запись каждой пары «фирма + сторона». */
+const uniqAdvisors = (list, d) => {
+  const seen = new Set();
+  return list.filter(a=>{
+    const key = (firmIdOf(a[1])||String(a[1]).toLowerCase().replace(/\s+/g," ")) + "|" + advSide((a[0]||"")+" "+(typeof a[2]==="string"?a[2]:""), d);
+    if(seen.has(key)) return false;
+    seen.add(key); return true;
+  });
 };
 /* Заметка о консультанте (`law.adv[i][2]`) собиралась притоком с «Источник: …»
    прямо внутри текста — то как голым URL в конце абзаца, то как служебной
@@ -3033,6 +3089,44 @@ function bindFeedListEvents(){
     syncFeedHash();
   };
 }
+/* Подсказки по первым буквам под строкой поиска (просьба владельца
+   31 августа 2026: «предлагать должно по первым буквам»). Компании, фирмы
+   и сделки, у которых название или любое его слово начинается с набранного;
+   компания открывается своей страницей, сделка — карточкой. Считается только
+   по нескольким найденным записям — полный проход по базе на каждую букву
+   здесь не нужен. */
+const acNorm = s => String(s||"").toLowerCase().replace(/ё/g,"е");
+/* Таймер отложенного поиска — общий: выбор подсказки обязан его снять, иначе
+   через 250 мс после клика лента перепишет адрес обратно на #/deals?q=… */
+let feedSearchTimer = null;
+function hideSuggest(){ const ac=document.getElementById("feedac"); if(ac){ac.hidden=true; ac.innerHTML="";} }
+function renderSuggest(input){
+  const ac=document.getElementById("feedac"); if(!ac) return;
+  const q=acNorm(input.value).trim();
+  if(q.length<2){ hideSuggest(); return; }
+  const hit = name => { const n=acNorm(name); if(!n) return 0; if(n.startsWith(q)) return 2; return n.split(/[^a-zа-я0-9]+/).some(w=>w.startsWith(q))?1:0; };
+  const pick=(list, get, limit)=>{
+    const out=[];
+    for(const x of list){ const r=hit(get(x)); if(r){ out.push([r,x]); } }
+    return out.sort((a,b)=>b[0]-a[0]).slice(0,limit).map(x=>x[1]);
+  };
+  // COMPANIES — словарь id → профиль, и id лежит в ключе, а не в самом профиле.
+  // Компании: сначала те, у кого есть сделки, — «Магнит» выше «Магнит Альянса» без единой.
+  const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name).map(([id,c])=>({id, name:c.name})), c=>c.name, 6)
+    .map(c=>({...c, n:companyDeals(c.id).structured.length})).sort((a,b)=>b.n-a.n).slice(0,3);
+  const firms=pick([...FIRMS,...INV_FIRMS], f=>f.n, 2);
+  const deals=pick(DEALS, d=>d.title, 3);
+  const rows=[
+    ...cos.map(c=>({href:`#/companies/${c.id}`, text:c.name, note:c.n?`компания · ${c.n} ${plural(c.n,"сделка","сделки","сделок")}`:"компания"})),
+    ...firms.map(f=>({href:`#/advisors/${f.id}`, text:f.n, note:"консультант"})),
+    ...deals.map(d=>({href:`#/deal/${d.id}`, text:d.title, note:`сделка · ${fmtDate(d.date)}`})),
+  ];
+  if(!rows.length){ hideSuggest(); return; }
+  ac.innerHTML=rows.map(r=>`<button type="button" class="ac-item" data-href="${r.href}"><span class="ac-text">${esc(r.text)}</span><span class="ac-note">${esc(r.note)}</span></button>`).join("");
+  ac.style.top=(input.offsetTop+input.offsetHeight+6)+"px";
+  ac.hidden=false;
+  ac.querySelectorAll(".ac-item").forEach(b=>b.onmousedown=e=>{e.preventDefault(); clearTimeout(feedSearchTimer); hideSuggest(); location.hash=b.dataset.href;});
+}
 function renderFeedList(){
   const el = document.getElementById("feedlist");
   if(!el) return;
@@ -3102,7 +3196,8 @@ function renderDeals(){
   <div class="feed-search reveal">
     <input id="feedq" placeholder="Найти в базе: компания, сделка, консультант…" value="${esc(feedQuery)}" aria-label="Поиск по сделкам">
     <button id="feedgo" class="chip on">Найти</button>
-    <button id="advtoggle" class="chip ${advOpen?"on":""}">Расширенный поиск</button>
+    <button id="advtoggle" class="chip ${advOpen?"on":""}">Фильтры</button>
+    <div class="ac" id="feedac" hidden></div>
   </div>
   <div id="advpanel" class="adv-panel reveal" style="${advOpen?"":"display:none"}">
     <label>Отрасль
@@ -3133,12 +3228,29 @@ function renderDeals(){
   bindFeedListEvents();
   const fq = document.getElementById("feedq");
   if(fq){
-    let t=null;
     fq.addEventListener("input", ()=>{
-      clearTimeout(t);
-      t=setTimeout(()=>{feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();},250);
+      clearTimeout(feedSearchTimer);
+      renderSuggest(fq);
+      feedSearchTimer=setTimeout(()=>{feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();},250);
     });
-    fq.addEventListener("keydown",e=>{if(e.key==="Enter"){feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();}});
+    fq.addEventListener("keydown",e=>{
+      const ac=document.getElementById("feedac");
+      const items=ac&&!ac.hidden?[...ac.querySelectorAll(".ac-item")]:[];
+      if(items.length&&(e.key==="ArrowDown"||e.key==="ArrowUp")){
+        e.preventDefault();
+        const cur=items.findIndex(x=>x.classList.contains("on"));
+        const next=e.key==="ArrowDown"?(cur+1)%items.length:(cur-1+items.length)%items.length;
+        items.forEach((x,i)=>x.classList.toggle("on",i===next));
+        return;
+      }
+      if(e.key==="Escape"){hideSuggest();return;}
+      if(e.key==="Enter"){
+        const on=items.find(x=>x.classList.contains("on"));
+        if(on){on.click();return;}
+        hideSuggest();feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();
+      }
+    });
+    fq.addEventListener("blur",()=>setTimeout(hideSuggest,180));
   }
   const fg = document.getElementById("feedgo");
   if(fg) fg.onclick = ()=>{const el=document.getElementById("feedq");feedQuery=el?el.value:"";feedPage=1;renderFeedList();syncFeedHash();};
@@ -4131,7 +4243,7 @@ function renderDeal(id, qs, previewCard){
     </div>
     <h1>${d.title}</h1>
     <div class="d-parties"><span>Тип: <b>${capType(d.type)}</b></span></div>
-    ${(d.themes||[]).length?`<div class="theme-chips">${d.themes.map(t=>`<a class="theme-chip" href="#/theme/${encodeURIComponent(t)}" title="Показать все сделки с этой темой">${t}</a>`).join("")}</div>`:""}
+    ${(d.themes||[]).length?`<div class="theme-chips"><span class="theme-lbl">Ещё сделки с той же особенностью:</span>${d.themes.map(t=>`<a class="theme-chip" href="#/theme/${encodeURIComponent(t)}" title="Показать все сделки с этой особенностью">${t} →</a>`).join("")}</div>`:""}
   </div>
   ${timelineHtml(d)}
   ${sparseNoticeHtml(d)}
@@ -4357,17 +4469,41 @@ function renderDeal(id, qs, previewCard){
         </div></div>`;
     };
 
-    /* --- команда сделки: юридические + финансовые консультанты одним блоком --- */
+    /* --- команда сделки: по сторонам, без дублей одной фирмы --- */
+    /* Замечания владельца 31 августа 2026 на карточке MBO «ВымпелКома»:
+       «два раза АЛРУД» (кириллицей и латиницей из двух прогонов обогащения),
+       «юридический и финансовый сливаются — надо поделить на стороны». Сторона
+       читается из текста роли и заметки; одна и та же фирма (по регуляркам
+       каталога) на одной стороне показывается один раз. */
     const dealTeam = ()=>{
-      const legal = realAdv(d);
       const fin = hasFact(d.eco&&d.eco.finadv)
         ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
-      if(!legal.length && !fin.length) return "";
-      const legalHtml = legal.length?`<div class="team-col"><span class="team-kind">Юридические консультанты</span>
-        ${legal.map(a=>`<div class="team-item"><div class="t-firm">${advFirmLink(a[1])}</div>${a[0]&&!/сторона не уточнена/i.test(a[0])?`<div class="t-side">${a[0]}</div>`:""}</div>`).join("")}</div>`:"";
-      const finHtml = fin.length?`<div class="team-col"><span class="team-kind">Финансовые консультанты</span>
-        ${fin.map(x=>{const p=x.split("—");return `<div class="team-item"><div class="t-firm">${advFirmLink(p[0].trim())}</div>${p[1]?`<div class="t-side">${p.slice(1).join("—").trim()}</div>`:""}</div>`}).join("")}</div>`:"";
-      return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${legalHtml}${finHtml}</div>
+      const items = [];
+      /* Вид консультанта — из текста роли: в law.adv лежат и финансовые
+         («Финансовый консультант продавца»), не только юридические. */
+      const kindOf = text => /финансов|инвестбанк|инвестиционн\w+\s+банк|оценщик|оценк/i.test(text) ? "финансовый" : "юридический";
+      const side = text => advSide(text, d);
+      realAdv(d).forEach(a=>{const text=[a[0]||"", typeof a[2]==="string"?a[2]:""].join(" "); items.push({kind:kindOf(a[0]||""), name:a[1], text, side:side(text)});});
+      fin.forEach(x=>{const p=x.split("—"); const text=p.slice(1).join("—").trim(); items.push({kind:"финансовый", name:p[0].replace(/\s*\([^)]*\)\s*$/,"").trim(), text:text+" "+p[0], side:side(text+" "+p[0])});});
+      if(!items.length) return "";
+      /* Одна фирма одного вида — один раз; запись с известной стороной важнее записи без неё. */
+      const keyOf = it => (firmIdOf(it.name)||it.name.toLowerCase().replace(/\s+/g," "))+"|"+it.kind;
+      const known = new Set(items.filter(it=>it.side!=="none").map(keyOf));
+      const seen=new Set();
+      const uniq=items.filter(it=>{
+        if(it.side==="none" && known.has(keyOf(it))) return false;
+        const key=keyOf(it)+"|"+it.side; if(seen.has(key)) return false; seen.add(key); return true;});
+      const groups={buyer:[],seller:[],target:[],none:[]};
+      uniq.forEach(it=>groups[it.side].push(it));
+      const onlyUnknown = !groups.buyer.length && !groups.seller.length && !groups.target.length;
+      const title={buyer:"Со стороны покупателя",seller:"Со стороны продавца",target:"Со стороны компании",none:onlyUnknown?"Консультанты сделки":"Сторона не уточнена"};
+      const item = it => {
+        const detail = advDetail(it.text);
+        return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)} <span class="t-kind">${it.kind}</span></div>${detail?`<div class="t-side">${esc(detail)}</div>`:""}</div>`;
+      };
+      const cols = ["buyer","seller","target","none"].filter(k=>groups[k].length)
+        .map(k=>`<div class="team-col"><span class="team-kind">${title[k]}</span>${groups[k].map(item).join("")}</div>`).join("");
+      return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${cols}</div>
         <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
     };
 
@@ -4403,7 +4539,7 @@ function renderDeal(id, qs, previewCard){
       ${para("Структура", d.law.struct)}
       ${para("Условия и особенности (из публичных данных)", d.law.terms)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
-      ${realAdv(d).map(a=>`
+      ${uniqAdvisors(realAdv(d), d).map(a=>`
         <div class="adv-card">
           <span class="label">${a[0]}</span>
           <div class="adv-name">${advFirmLink(a[1])}</div>
@@ -5982,7 +6118,7 @@ function renderAnalytics(){
     <div class="an-card reveal">
       <span class="label">Темы сделок</span>
       ${themeRank.map(([t,n],ri)=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/maxT*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">У одной сделки может быть несколько тем. Нажмите на тему, чтобы открыть список сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Это особые признаки сделок, а не их виды: обычная покупка компании отдельной темой не считается. У одной сделки может быть несколько тем. Нажмите на тему, чтобы открыть список сделок.</p>
     </div>`:""}
     ${topIndMoney.length?`
     <div class="an-card reveal">
@@ -5997,7 +6133,7 @@ function renderAnalytics(){
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля сделок года, где стороны назвали цену. Оценки экспертов не считаются; годы, где сделок меньше 20, не показаны.</p>
     </div>`:""}
     <div class="an-card reveal" id="multiplesCard" style="grid-column:1/-1">
-      <span class="label">Мультипликаторы рынка (EV / Выручка)</span>
+      <span class="label">Мультипликаторы рынка: цена сделки к прибыли и выручке</span>
       <p id="multiplesBody" style="color:var(--muted);font-size:13.5px;margin:0">Считаем по подтверждённой отчётности сторон…</p>
     </div>
   </div>`;
@@ -6028,13 +6164,20 @@ async function mountMarketMultiples(){
   // подряд: методика и денежный масштаб те же, отличается только
   // знаменатель — дублировать карточку целиком значило бы удвоить страницу
   // ради одной другой цифры.
+  /* Порядок и подписи — по замечаниям владельца 31 августа 2026: «пусть
+     первой кнопкой будет прибыль, а не выручка», «почему написано
+     операционная? как соотносится с просто прибылью». Кнопка называется
+     «По прибыли», а какая это прибыль и почему не чистая — одной фразой
+     под кнопками, не термином в самой кнопке. */
   const VIEWS = [
+    {key:"op", label:"По прибыли", section:data.operating_profit,
+     metricLabel:"прибыль от продаж купленной компании", rubKey:"operating_profit_rub", yearKey:"operating_profit_year",
+     explain:"Прибыль здесь — прибыль от продаж из официальной отчётности: до процентов по кредитам и налогов. Чистую прибыль для сравнения сделок не берут: она зависит от долгов и налоговых льгот компании, а не от самого бизнеса."},
     {key:"revenue", label:"По выручке", section:data,
-     metricLabel:"выручка купленной компании", rubKey:"revenue_rub", yearKey:"revenue_year"},
-    {key:"op", label:"По операционной прибыли", section:data.operating_profit,
-     metricLabel:"операционная прибыль купленной компании", rubKey:"operating_profit_rub", yearKey:"operating_profit_year"},
+     metricLabel:"выручка купленной компании", rubKey:"revenue_rub", yearKey:"revenue_year",
+     explain:"Выручка — из той же официальной отчётности за год сделки или предыдущий."},
   ];
-  let activeKey = "revenue";
+  let activeKey = (data.operating_profit && data.operating_profit.clean_total) ? "op" : "revenue";
   const renderSection = (v) => {
     const s = v.section;
     if(!s || !s.clean_total){
@@ -6042,7 +6185,7 @@ async function mountMarketMultiples(){
     }
     const industriesHtml = s.industries.length ? `
       <div style="margin-bottom:18px">
-        ${s.industries.map(i=>`<div class="an-row"><span class="an-key">${esc(i.industry)}</span><span class="an-val num" style="flex:0 0 auto">×${i.median} <span style="color:var(--muted);font-weight:400">(${i.count}, ${i.min}–${i.max})</span></span></div>`).join("")}
+        ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">×${i.median} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
       </div>` : "";
     const dealsHtml = s.deals.slice(0,15).map(d=>`
       <a class="an-deal" href="#/deal/${d.id}">
@@ -6050,7 +6193,8 @@ async function mountMarketMultiples(){
         <span class="an-deal-s">${fnsMoney(d.sum_rub)} · ${v.metricLabel} за ${d[v.yearKey]}: ${fnsMoney(d[v.rubKey])}</span>
       </a>`).join("");
     return `
-      <p style="margin:0 0 16px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")} из ${data.candidates_total} рассмотренных M&amp;A с известной суммой в рублях.</span></p>
+      <p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>
+      ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}
       <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>`;
@@ -6058,7 +6202,7 @@ async function mountMarketMultiples(){
   const draw = () => {
     const active = VIEWS.find(v=>v.key===activeKey);
     document.getElementById("multiplesBody").innerHTML = `
-      <div class="adv-share" style="margin-bottom:16px">${VIEWS.map(v=>`<button class="chip ${v.key===activeKey?"on":""}" data-multview="${v.key}">${v.label}</button>`).join("")}</div>
+      <div class="mult-toggle">${VIEWS.map(v=>`<button class="chip ${v.key===activeKey?"on":""}" data-multview="${v.key}">${v.label}</button>`).join("")}</div>
       <div>${renderSection(active)}</div>`;
     document.querySelectorAll("[data-multview]").forEach(b=>b.onclick=()=>{activeKey=b.dataset.multview;draw();});
   };
