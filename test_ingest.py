@@ -3568,6 +3568,39 @@ def test_full_text_fetch_skips_already_cached_urls(monkeypatch, tmp_path):
     assert (got, lost) == (0, 0), "закэшированный адрес ушёл в сеть повторно"
 
 
+def test_triage_ignores_the_full_text_article_cache(monkeypatch, tmp_path):
+    """`triage.py` не должен принимать кэш `fetch_article_texts.py` за свежую
+    ленту: `<дата>-articles.jsonl` начинается с той же даты, что и
+    `<дата>.jsonl`, и без явного исключения оба файла проходили один и тот же
+    `startswith(day)`. Запись кэша несёт только `url`/`title`/`summary` (без
+    `date`/`source_id`) — 1 сентября 2026 это трижды подряд породило
+    дублирующий мусорный `events[]` на уже известной карточке
+    (`draft.guess_event()` получал `date=None` -> `'unknown'`, и дедуп по
+    `(kind, date)` в `enrich.py` не срабатывал против настоящей даты первого
+    события). Проверяем сам источник данных — `read_raw` — а не косвенно
+    через `guess_event`, чтобы тест падал ровно там, где было сломано.
+    """
+    from datetime import datetime, timezone
+    import triage
+    monkeypatch.setattr(triage, "RAW", str(tmp_path))
+    day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    feed_row = {"title": "настоящая новость дня", "url": "https://example.ru/a",
+                "date": day, "source_id": "web:example.ru"}
+    (tmp_path / f"{day}.jsonl").write_text(
+        json.dumps(feed_row, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    cache_row = {"url": "https://example.ru/a", "title": "настоящая новость дня",
+                 "summary": "полный текст статьи, скачанный отдельным шагом"}
+    (tmp_path / f"{day}-articles.jsonl").write_text(
+        json.dumps(cache_row, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    rows = triage.read_raw(False)
+    assert rows == [feed_row], (
+        "read_raw обязан читать только настоящую ленту дня, "
+        "а не кэш полных текстов статей: %r" % rows)
+
+
 # ---------- статус прогона в консоль основателей (ops_status.py) ----------
 
 sys.path.insert(0, str(ROOT / "pipeline"))

@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d26492167",
+   "draft_id": "d58080414",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d17215295",
+   "draft_id": "d27711761",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d55358179",
+   "draft_id": "d41918043",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,192 +4800,13 @@
    ]
   },
   {
-   "draft_id": "d67324381",
-   "title": "Минфин возобновит аукционы ОФЗ со 2 сентября",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923390"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16358618",
-   "title": "«Зенит» отклонил предложение «Ромы» о покупке бразильского форварда Луиса Энрике",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923364"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50633778",
-   "title": "Минфин возобновит аукционы по размещению ОФЗ",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/finance/news/2026/09/01/1225370-minfin-vozobnovit"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74348884",
-   "title": "«Барселона» купила у «Арсенала» нападающего сборной Бразилии",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-01",
-     "title": "Сделка завершена",
-     "note": "Габриэл Жезус подписал трехлетний контракт с испанским клубом",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/sport/01/09/2026/6a96ca5e9a794730dbd7a2ee"
-     ]
-    }
-   ],
-   "buyer_name": "«Барселона»",
-   "asset": null,
-   "seller": "«Арсенала» нападающего сборной Бразилии",
-   "parsed_parties": {
-    "buyer": "«Барселона»",
-    "asset": null,
-    "seller": "«Арсенала» нападающего сборной Бразилии"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87209303",
-   "title": "Минфин РФ 2 сентября проведет аукцион по размещению ОФЗ 29031",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112476"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37921690",
-   "title": "Минфин 2 сентября возобновит проведение аукционов по размещению ОФЗ",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28066063"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20372280",
-   "title": "Минфин возобновит проведение аукционов ОФЗ",
+   "draft_id": "d22994784",
+   "title": "Суд продлил на полгода конкурсное производство в отношении «Трансаэро»",
    "date": "2026-09-01",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260901/ofz-872884398.html"
+     "https://1prime.ru/20260901/sud-872893709.html"
     ]
    ],
    "sum": null,
@@ -5004,63 +4825,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45519198",
-   "title": "Дерипаска осудил ЦБ за беззаботное отношение к спаду инвестиций в России",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/302555"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24738340",
-   "title": "Купите осенью — сэкономите зимой: какие товары выгоднее приобрести уже сейчас",
-   "date": "2026-09-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053123340"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
