@@ -4703,7 +4703,7 @@
    ]
   },
   {
-   "draft_id": "d19251840",
+   "draft_id": "d75851407",
    "title": "«Росатом» построит под Мурманском верфь для достройки плавучих энергоблоков // Лихачев: модель развития ТТК подразумевает инвестиции в объеме 10 трлн рублей",
    "date": "2026-09-01",
    "src": [
@@ -4744,7 +4744,7 @@
    ]
   },
   {
-   "draft_id": "d59837822",
+   "draft_id": "d34003922",
    "title": "Москва выставила на торги пять коммерческих помещений на улице Дмитрия Ульянова",
    "date": "2026-09-01",
    "src": [
@@ -4772,7 +4772,7 @@
    ]
   },
   {
-   "draft_id": "d11390365",
+   "draft_id": "d43734004",
    "title": "В Угличе снова не смогли продать гостиницу",
    "date": "2026-09-01",
    "src": [
@@ -4800,17 +4800,17 @@
    ]
   },
   {
-   "draft_id": "d48936672",
-   "title": "Мосбиржа провела первый аукцион по серебру в режиме крупных лотов",
+   "draft_id": "d40821116",
+   "title": "«Билайн бизнес» увеличил среднемесячные продажи роутеров в 7 раз",
    "date": "2026-09-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8923278"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-01_bilajn_biznes_uvelichil"
     ]
    ],
-   "sum": "9 млн ₽",
-   "type": "Продажа с торгов",
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -4821,20 +4821,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d12609616",
-   "title": "«Аэрофлот» выкупил у Lufthansa оставшиеся 49% производителя бортового питания",
+   "draft_id": "d20984220",
+   "title": "Любимова: по Пушкинской карте за пять лет приобрели 115 млн билетов",
    "date": "2026-09-01",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/09/01/1225331-aeroflot-vikupil"
+     "web:tass.ru",
+     "https://tass.ru/kultura/28065929"
     ]
    ],
    "sum": null,
@@ -4845,41 +4845,119 @@
      "kind": "closed",
      "date": "2026-09-01",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "В Минкультуры рады возможности реализовать такой проект и его результатам, отметила министр культуры",
      "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/09/01/1225331-aeroflot-vikupil"
+      "web:tass.ru",
+      "https://tass.ru/kultura/28065929"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "115 млн билетов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "115 млн билетов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d27875334",
+   "title": "«Аэрофлот» закрыл сделку по приобретению 49% в Aeromar",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28065669"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-01",
+     "title": "Сделка завершена",
+     "note": "Компания получила согласование правкомиссии на приобретение 49% Aeromar в сентябре 2025 года, сообщал тогда ее гендиректор Сергей Александровский",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28065669"
      ]
     }
    ],
    "buyer_name": "«Аэрофлот»",
-   "asset": null,
-   "seller": "Lufthansa оставшиеся 49% производителя бортового питания",
+   "asset": "Aeromar",
+   "seller": null,
    "parsed_parties": {
     "buyer": "«Аэрофлот»",
-    "asset": null,
-    "seller": "Lufthansa оставшиеся 49% производителя бортового питания"
+    "asset": "Aeromar",
+    "seller": null
    },
-   "ind": "Транспорт и логистика",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d65342472",
-   "title": "В ЮГК дали нейтральные рекомендации миноритариям по оферте о выкупе акций",
+   "draft_id": "d39475902",
+   "title": "Забастовки рабочих обрушили продажи машин ушедшего из России производителя",
    "date": "2026-09-01",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260901/juzhuralzoloto-872876989.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/01/zabastovki-rabochih-obrushili-prodazhi-mashin-ushedshego-iz-rossii-proizvoditelya/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67946468",
+   "title": "✅ ОДИН ИНСТРУМЕНТ РЕДКО РЕШАЕТ ВСЮ ЗАДАЧУ На вебинаре «Тренды в структурировании: актуальные инструменты в сделках M&A, совместных проектах и инвестициях» команда BIRCH обсудила, как выбирать конструк",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "tg:BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/2253"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-01",
+     "title": "Переговоры",
+     "note": "✅ ОДИН ИНСТРУМЕНТ РЕДКО РЕШАЕТ ВСЮ ЗАДАЧУ На вебинаре «Тренды в структурировании: актуальные инструменты в сделках M&A, совместных проектах и инвестициях» команда BIRCH обсудила, как выбирать конструкцию для сделок, инвестиций и владения активами. Начинать…",
+     "source": [
+      "tg:BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/2253"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
