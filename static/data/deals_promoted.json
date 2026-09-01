@@ -91858,12 +91858,16 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/realty/articles/2026/08/25/1223402-vim-sberezheniya-vikupili-u-pik-sklad"
+    ],
+    [
+     "MirKvartir.ru",
+     "https://www.mirkvartir.ru/journal/news/2026/08/26/obzor-klyuchevyh-sobytiy-rynke/"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
-    "share": "—",
+    "sum": "7,5–8,2 млрд ₽ (по оценке)",
+    "share": "По данным Коммерсанта, склад заполнен на 90%, среди арендаторов — «Яндекс.Маркет».",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
@@ -91920,7 +91924,9 @@
    "seller": "Parametr",
    "reviewed": "2026-08-25",
    "deep_researched": "2026-08-25",
-   "added": "2026-08-25"
+   "added": "2026-08-25",
+   "sum": "7,5–8,2 млрд ₽ (по оценке)",
+   "weekly_researched": "2026-09-01"
   },
   {
    "id": "g9108dfd0",
