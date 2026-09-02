@@ -95,7 +95,7 @@ def test_me_without_cookie_is_200_and_anonymous(client):
     консоль при каждой загрузке страницы любым не вошедшим посетителем."""
     r = client.get("/api/me")
     assert r.status_code == 200
-    assert r.json() == {"logged_in": False}
+    assert r.json() == {"logged_in": False, "gate": False}
 
 
 def test_full_login_flow(client):
@@ -113,7 +113,7 @@ def test_logout_clears_the_session(client):
     login(client, "выход@firm.ru")
     assert client.get("/api/me").json()["logged_in"] is True
     client.post("/api/auth/logout")
-    assert client.get("/api/me").json() == {"logged_in": False}
+    assert client.get("/api/me").json() == {"logged_in": False, "gate": False}
 
 
 def test_profile_update_round_trip(client):
@@ -160,7 +160,7 @@ def test_delete_account_round_trip(client):
 
     r = client.request("DELETE", "/api/account", json={"password": TEST_PASSWORD})
     assert r.status_code == 200
-    assert client.get("/api/me").json() == {"logged_in": False}
+    assert client.get("/api/me").json() == {"logged_in": False, "gate": False}
 
     again = client.post("/api/auth/register",
                          json={"email": email, "password": TEST_PASSWORD, "full_name": "Тест Тестов"})
@@ -294,3 +294,178 @@ def test_general_editorial_message_is_stored_without_a_deal(client):
 def test_empty_correction_is_rejected(client):
     r = client.post("/api/deals/gtest0001/corrections", json={"body": "   "})
     assert r.status_code == 400
+
+
+# ==================== Вход по заявке (ACCESS_GATE, 2 сентября 2026) ====================
+# Гейт для тестов выключен в conftest.py (ACCESS_GATE=0); здесь он включается
+# явно через main.ACCESS_GATE — эндпоинты читают модульную константу при
+# каждом вызове, monkeypatch её видит.
+
+def _gate_on(monkeypatch):
+    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1001234567890")
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    return sent
+
+
+def _request_access(client, email, **extra):
+    payload = {"email": email, "password": TEST_PASSWORD, "full_name": "Заявка Заявкина",
+               "company": "ООО Ромашка", "position": "Партнёр"}
+    payload.update(extra)
+    r = client.post("/api/auth/register", json=payload)
+    assert r.status_code == 200 and r.json() == {"ok": True, "pending": True}
+    assert "kompas_session" not in r.cookies, "заявка не должна ставить сессию"
+    s = get_session()
+    try:
+        return s.query(User).filter_by(email=email).one().id
+    finally:
+        s.close()
+
+
+def test_me_reports_whether_the_gate_is_on(client, monkeypatch):
+    """Интерфейс решает, показывать ли экран входа вместо сайта, по полю gate."""
+    assert client.get("/api/me").json() == {"logged_in": False, "gate": False}
+    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    assert client.get("/api/me").json() == {"logged_in": False, "gate": True}
+
+
+def test_registration_under_gate_is_a_pending_request_with_a_telegram_notice(client, monkeypatch):
+    """Заявка: аккаунт с approved=False, без сессии, владельцам уходит сообщение
+    с кнопками «Одобрить»/«Отклонить» (callback_data acc:<id>:ok|no)."""
+    sent = _gate_on(monkeypatch)
+    uid = _request_access(client, "заявка@firm.ru")
+    s = get_session()
+    try:
+        assert s.get(User, uid).approved is False
+    finally:
+        s.close()
+    assert [m for m, _ in sent] == ["sendMessage"]
+    body = sent[0][1]
+    assert body["chat_id"] == "-1001234567890"
+    for word in ("Заявка на доступ", "Заявка Заявкина", "ООО Ромашка", "Партнёр", "заявка@firm.ru"):
+        assert word in body["text"], word
+    buttons = [b["callback_data"] for row in body["reply_markup"]["inline_keyboard"] for b in row]
+    assert buttons == [f"acc:{uid}:ok", f"acc:{uid}:no"]
+
+
+def test_login_under_gate_is_403_until_the_owner_approves(client, monkeypatch):
+    _gate_on(monkeypatch)
+    uid = _request_access(client, "ждёт@firm.ru")
+    r = client.post("/api/auth/login", json={"email": "ждёт@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 403 and r.json()["pending"] is True
+    assert "доступ откроем после проверки" in r.json()["error"]
+    assert "kompas_session" not in r.cookies
+
+    ok = client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "1", "data": f"acc:{uid}:ok", "from": {"id": 111, "first_name": "Борис"},
+                            "message": {"chat": {"id": -1001234567890}, "message_id": 7, "text": "Заявка"}}})
+    assert ok.status_code == 200
+    r = client.post("/api/auth/login", json={"email": "ждёт@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 200 and "kompas_session" in r.cookies
+    me = client.get("/api/me").json()
+    assert me["logged_in"] is True and me["gate"] is True and me["approved"] is True
+
+
+def test_approval_is_stamped_into_the_telegram_message(client, monkeypatch):
+    """Как у модерации: решение дописывается в само сообщение группы, чтобы
+    второй человек видел, что первый уже нажал."""
+    sent = _gate_on(monkeypatch)
+    uid = _request_access(client, "штамп@firm.ru")
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "9", "data": f"acc:{uid}:ok", "from": {"id": 222, "first_name": "Партнёр"},
+                            "message": {"chat": {"id": -1001234567890}, "message_id": 7, "text": "Заявка на доступ"}}})
+    methods = {m: kw for m, kw in sent}
+    assert methods["answerCallbackQuery"]["callback_query_id"] == "9"
+    assert methods["editMessageText"]["message_id"] == 7
+    assert "Доступ открыт" in methods["editMessageText"]["text"] and "(Партнёр)" in methods["editMessageText"]["text"]
+
+
+def test_stranger_cannot_approve_an_access_request(client, monkeypatch):
+    """Право решать — по from.id, как у mod: (в общей группе chat.id один на всех)."""
+    sent = _gate_on(monkeypatch)
+    uid = _request_access(client, "чужой-судья@firm.ru")
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "2", "data": f"acc:{uid}:ok", "from": {"id": 999}}})
+    s = get_session()
+    try:
+        assert s.get(User, uid).approved is False
+    finally:
+        s.close()
+    assert sent and sent[0][0] == "answerCallbackQuery" and "только владелец" in sent[0][1]["text"]
+    r = client.post("/api/auth/login", json={"email": "чужой-судья@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 403
+
+
+def test_rejected_request_stays_closed_and_does_not_duplicate(client, monkeypatch):
+    """Отклонённый не удаляется: вход отвечает тем же «доступ не открыт», а
+    повторная заявка тем же адресом — отказ «уже зарегистрирована», не дубль."""
+    _gate_on(monkeypatch)
+    uid = _request_access(client, "отказ@firm.ru")
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "3", "data": f"acc:{uid}:no", "from": {"id": 111}}})
+    r = client.post("/api/auth/login", json={"email": "отказ@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 403 and "доступ откроем после проверки" in r.json()["error"]
+    again = client.post("/api/auth/register", json={"email": "отказ@firm.ru", "password": TEST_PASSWORD,
+                                                     "full_name": "Заявка Заявкина"})
+    assert again.status_code == 400 and "уже зарегистрирована" in again.json()["error"]
+    s = get_session()
+    try:
+        assert s.query(User).filter_by(email="отказ@firm.ru").count() == 1
+        assert s.get(User, uid).approved is False
+    finally:
+        s.close()
+
+
+def test_telegram_failure_does_not_break_the_registration(client, monkeypatch):
+    """Сеть до Telegram упала — заявка всё равно сохранена и отвечает pending."""
+    _gate_on(monkeypatch)
+
+    def boom(method, **kw):
+        raise RuntimeError("telegram недоступен")
+    monkeypatch.setattr(main.notification_service, "tg_api", boom)
+    uid = _request_access(client, "без-сети@firm.ru")
+    s = get_session()
+    try:
+        assert s.get(User, uid).approved is False
+    finally:
+        s.close()
+
+
+def test_gate_off_registers_approved_users_and_logs_them_in(client, monkeypatch):
+    """Выключенный гейт (ACCESS_GATE=0) — прежнее поведение: сессия сразу,
+    approved=True, чтобы при последующем включении гейта эти люди вошли."""
+    monkeypatch.setattr(main, "ACCESS_GATE", False)
+    login(client, "до-гейта@firm.ru")
+    s = get_session()
+    try:
+        assert s.query(User).filter_by(email="до-гейта@firm.ru").one().approved is True
+    finally:
+        s.close()
+    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    other = TestClient(main.app)
+    r = other.post("/api/auth/login", json={"email": "до-гейта@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 200
+
+
+def test_users_table_created_before_the_gate_gets_approved_column_set_to_true(tmp_path):
+    """Миграция для уже существующей таблицы users (create_all колонку не
+    добавит): approved появляется диалект-независимым ADD COLUMN, и всем
+    существующим аккаунтам ставится True — владелец и партнёр не оказываются
+    за дверью. Повторный запуск ничего не ломает."""
+    from sqlalchemy import create_engine, inspect, text
+    engine = create_engine(f"sqlite:///{tmp_path}/old.db")
+    with engine.begin() as conn:
+        conn.execute(text("CREATE TABLE users (id INTEGER PRIMARY KEY, email VARCHAR(300))"))
+        conn.execute(text("INSERT INTO users (email) VALUES ('старый@firm.ru')"))
+    main._ensure_user_columns(engine)
+    main._ensure_user_columns(engine)
+    cols = {c["name"] for c in inspect(engine).get_columns("users")}
+    assert {"password_hash", "full_name", "company", "position", "approved"} <= cols
+    with engine.connect() as conn:
+        assert conn.execute(text("SELECT approved FROM users")).scalar() == 1

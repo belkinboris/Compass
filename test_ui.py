@@ -11,6 +11,7 @@
 Пропускается, если не установлен Playwright (тогда гоняются только остальные).
 """
 import json
+import os
 import re
 import socket
 import subprocess
@@ -38,12 +39,14 @@ def _free_port():
         return s.getsockname()[1]
 
 
-@pytest.fixture(scope="session")
-def base_url():
+def _start_server(extra_env):
+    """uvicorn в отдельном процессе. Переменные окружения — явно: вход по
+    заявке (ACCESS_GATE, main.py) по умолчанию ВКЛЮЧЁН, и без ACCESS_GATE=0
+    каждый экран этого файла оказался бы за дверью."""
     port = _free_port()
     proc = subprocess.Popen(
         [sys.executable, "-m", "uvicorn", "main:app", "--port", str(port), "--log-level", "warning"],
-        cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        cwd=ROOT, env={**os.environ, **extra_env}, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     url = f"http://127.0.0.1:{port}"
     for _ in range(100):
         try:
@@ -54,6 +57,25 @@ def base_url():
     else:
         proc.terminate()
         pytest.skip("не удалось поднять uvicorn")
+    return proc, url
+
+
+@pytest.fixture(scope="session")
+def base_url():
+    proc, url = _start_server({"ACCESS_GATE": "0"})
+    yield url
+    proc.terminate()
+    proc.wait(timeout=10)
+
+
+@pytest.fixture(scope="session")
+def gated_url():
+    """Второй сервер с включённым гейтом — для единственного теста двери.
+    Без TELEGRAM_BOT_TOKEN уведомление владельцам молча не уходит (сети нет),
+    а вебхук с секретом и списком решающих — живой."""
+    env = {"ACCESS_GATE": "1", "TELEGRAM_WEBHOOK_SECRET": "ui-secret",
+           "TELEGRAM_REVIEW_CHAT_IDS": "111", "TELEGRAM_BOT_TOKEN": ""}
+    proc, url = _start_server(env)
     yield url
     proc.terminate()
     proc.wait(timeout=10)
@@ -2073,5 +2095,100 @@ def test_new_dialog_button_does_not_scroll_or_open_the_keyboard_on_a_phone(brows
         assert pg.evaluate("window.scrollY") < 10
         assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
         assert "Начат новый диалог" in pg.inner_text("#chatbox")
+    finally:
+        ctx.close()
+
+
+def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, browser):
+    """Вход по заявке (ACCESS_GATE, 2 сентября 2026). Гость видит экран
+    «Войти / Запросить доступ» вместо любого раздела; заявка создаёт
+    неодобренный аккаунт; вход до одобрения — отказ; одобрение приходит
+    вебхуком (кнопка acc:<id>:ok от разрешённого from.id); после входа
+    открывается ТОТ адрес, на который человек шёл. Проверяется на трёх
+    ширинах: нет pageerror, нет горизонтального переполнения, экран
+    действительно отрисован (свой элемент #gateScreen, а не «нет ошибок»)."""
+    from db.models import User
+    from db.session import get_session
+
+    ctx = browser.new_context()
+    try:
+        pg = ctx.new_page()
+        crashes = []
+        pg.on("pageerror", lambda e: crashes.append(f"pageerror: {e}"))
+        pg.on("console", lambda m: crashes.append(f"console: {m.text}") if m.type == "error" else None)
+        for w in WIDTHS:
+            pg.set_viewport_size({"width": w, "height": 900})
+            # goto на ТОТ ЖЕ адрес с тем же хешем — переход по фрагменту, а не
+            # перезагрузка: скрипт не переисполняется, и на экране осталась бы
+            # форма заявки с прошлой итерации. Перезагружаем явно.
+            pg.goto(gated_url + "/#/companies", wait_until="networkidle")
+            pg.reload(wait_until="networkidle")
+            pg.wait_for_selector("#gateScreen", timeout=10000)
+            assert pg.locator("#gateLoginForm").is_visible()
+            assert "Компании" not in pg.inner_text("#app") or "приглашённых" in pg.inner_text("#app")
+            over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over <= 0, f"гейт (вход) переполняет экран на {w}px: {over}px"
+            pg.click("#gateToRegister")
+            pg.wait_for_selector("#gateRegisterForm")
+            over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over <= 0, f"гейт (заявка) переполняет экран на {w}px: {over}px"
+        assert not crashes, crashes[:3]
+        # Шапка над гейтом — светлая: тёмный режим героя главной здесь не к месту.
+        pg.goto(gated_url + "/#/", wait_until="networkidle")
+        pg.reload(wait_until="networkidle")
+        pg.wait_for_selector("#gateScreen")
+        assert not pg.evaluate("document.querySelector('.top').classList.contains('on-hero')")
+
+        email = f"gate{int(time.time()*1000)}@example.com"
+        # Смена хеша за закрытой дверью форму не трогает (нельзя стирать
+        # введённое, когда приезжает база) — только запоминает адрес.
+        pg.goto(gated_url + "/#/companies", wait_until="networkidle")
+        pg.wait_for_selector("#gateLoginForm")
+        pg.click("#gateToRegister")
+        pg.fill("#gateFullName", "Тест Гейтов")
+        pg.fill("#gateCompany", "ООО Ромашка")
+        pg.fill("#gatePosition", "Партнёр")
+        pg.fill("#gateRegEmail", email)
+        pg.fill("#gateRegPassword", "password-123")
+        pg.fill("#gateRegPasswordConfirm", "password-123")
+        pg.click("#gateRegisterForm button[type=submit]")
+        pg.wait_for_selector("#gateDone", timeout=10000)
+        assert "Заявка отправлена" in pg.inner_text("#gateCard")
+
+        db = get_session()
+        try:
+            user = db.query(User).filter_by(email=email).one()
+            uid, approved = user.id, user.approved
+        finally:
+            db.close()
+        assert approved is False, "заявка должна создавать неодобренный аккаунт"
+
+        pg.click("#gateToLogin")
+        pg.fill("#gateEmail", email)
+        pg.fill("#gatePassword", "password-123")
+        pg.click("#gateLoginForm button[type=submit]")
+        pg.wait_for_timeout(800)
+        assert "доступ откроем после проверки" in pg.inner_text("#gateMsg")
+        assert pg.locator("#gateScreen").count() == 1
+
+        # Чужой from.id одобрить не может, разрешённый — может.
+        for from_id in (999, 111):
+            r = pg.request.post(gated_url + "/api/telegram/webhook/ui-secret",
+                                data={"callback_query": {"id": "1", "data": f"acc:{uid}:ok", "from": {"id": from_id}}})
+            assert r.status == 200
+            pg.click("#gateLoginForm button[type=submit]")
+            pg.wait_for_timeout(1200)
+            if from_id == 999:
+                assert pg.locator("#gateScreen").count() == 1, "посторонний открыл доступ"
+        assert pg.locator("#gateScreen").count() == 0, "после одобрения дверь не открылась"
+        assert pg.evaluate("location.hash") == "#/companies", "после входа потерян адрес, на который шёл человек"
+        assert "Компании" in pg.inner_text("#app")
+        assert pg.locator("#navAccount .avatar-dot").count() == 1
+        # Два входа до одобрения намеренно получили 403 — браузер пишет об этом
+        # в консоль («Failed to load resource: 403»), и это ожидаемый ответ, а
+        # не поломка. Падений страницы (pageerror) быть не должно вовсе.
+        assert not [c for c in crashes if c.startswith("pageerror")], crashes[:3]
+        console_errors = [c for c in crashes if c.startswith("console:")]
+        assert len(console_errors) == 2 and all("403" in c for c in console_errors), console_errors
     finally:
         ctx.close()

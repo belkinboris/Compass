@@ -323,6 +323,13 @@ class User(Base):
     full_name: Mapped[str | None] = mapped_column(String(200), nullable=True)
     company: Mapped[str | None] = mapped_column(String(200), nullable=True)
     position: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # Вход по заявке (2 сентября 2026, этап закрытого тестирования, см.
+    # ACCESS_GATE в main.py): при включённом гейте регистрация создаёт
+    # аккаунт с approved=False, и войти он не может, пока владелец или
+    # партнёр не нажмёт «Одобрить» в Telegram-консоли. По умолчанию True —
+    # аккаунты, заведённые до гейта (и при выключенном гейте), входят как
+    # раньше; для уже существующей таблицы то же делает миграция в main.py.
+    approved: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
     saved_filters: Mapped[list["SavedFilter"]] = relationship(back_populates="user", cascade="all, delete-orphan")

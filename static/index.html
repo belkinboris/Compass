@@ -498,6 +498,33 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .acct-note.err{color:#B3402A}
 .acct-note a{color:var(--accent);font-weight:600}
 .acct-card{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:20px 0;max-width:520px}
+/* Вход по заявке (ACCESS_GATE в main.py): экран «Войти / Запросить доступ»
+   вместо любого раздела сайта, пока гейт закрыт. Композиция — как у экрана
+   входа в «Автопосте» (соседний проект владельца): узкая колонка по центру,
+   заголовок и одна фраза сверху, одна карточка с подписанными полями, одна
+   широкая кнопка, переключатель режима строкой под карточкой. Палитра и
+   шрифты — свои (--ink/--accent/--line, PT Serif в заголовке). min-height —
+   не фиксированная высота и без overflow:hidden: на невысоком телефоне
+   форма просто становится длиннее страницы, а не обрезается с двух концов. */
+.gate{min-height:calc(100vh - 154px);display:flex;align-items:center;justify-content:center;padding:32px 0}
+.gate-box{width:100%;max-width:440px;min-width:0}
+.gate-box .label{display:block;text-align:center;margin-bottom:12px;color:var(--bronze)}
+.gate-box h1{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,4vw,34px);line-height:1.2;text-align:center;text-wrap:balance}
+.gate-sub{text-align:center;color:var(--muted);font-size:14.5px;line-height:1.6;margin:12px auto 26px;max-width:400px}
+.gate-card{padding:24px 22px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:0 10px 30px rgba(15,43,33,.05)}
+.gate-card .acct-form{flex-direction:column;gap:14px;margin:0;max-width:none}
+.gate-field{display:flex;flex-direction:column;gap:6px}
+.gate-field span{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.gate-field input{width:100%;min-width:0}
+.gate-card .chip{padding:13px 16px;font-size:14.5px;font-weight:600;margin-top:4px}
+.gate-card .acct-note{max-width:none;margin-top:12px}
+.gate-card .acct-note:empty{display:none}
+.gate-switch{text-align:center;margin-top:18px;font-size:13.5px;color:var(--muted)}
+.gate-switch a{color:var(--accent);font-weight:600;cursor:pointer}
+.gate-done{text-align:center;padding:6px 0}
+.gate-done .gate-mark{width:44px;height:44px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.gate-done p{font-size:14.5px;line-height:1.6;color:var(--ink);max-width:340px;margin:0 auto}
+@media(max-width:560px){.gate{min-height:0;padding:16px 0 8px}.gate-card{padding:20px 16px}}
 .acct-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line-soft)}
 .acct-row:last-child{border-bottom:none}
 .acct-row .del{cursor:pointer;color:var(--muted);font-size:13px;border-bottom:1px dotted var(--muted)}
@@ -2147,6 +2174,25 @@ function route(){
   const h = qi >= 0 ? raw.slice(0, qi) : raw;
   const qs = qi >= 0 ? raw.slice(qi + 1) : "";
   const [_,page,arg,sub,subarg] = h.split("/");
+  // Вход по заявке (ACCESS_GATE): пока /api/me не ответил, не рисуем ничего —
+  // иначе сайт мелькнул бы перед дверью; refreshMe() позовёт route() сам.
+  // Пока гейт закрыт, любой адрес рисует экран входа, но адрес не теряется:
+  // после входа тот же route() откроет то, куда человек шёл.
+  if(GATE === null){ app.innerHTML = ""; return; }
+  if(gated()){
+    document.body.style.background = ""; document.documentElement.style.background = "";
+    const tc0 = document.querySelector('meta[name="theme-color"]'); if(tc0) tc0.setAttribute("content", "#F5F5F1");
+    document.querySelectorAll("#nav a").forEach(a=>a.classList.remove("on"));
+    // Плашка сравнения живёт в body, а не в #app, и пережила бы выход из
+    // аккаунта — за дверью ей делать нечего.
+    const tray = document.getElementById("compareTray"); if(tray) tray.remove();
+    // Форму не перерисовываем, если она уже на экране: route() зовут и смена
+    // хеша, и приход базы (loadBulkDeals) — стирать введённое нельзя (тот же
+    // урок, что у «Подписок» аккаунта).
+    if(!document.getElementById("gateScreen")){ renderGate(); window.scrollTo(0,0); }
+    if(typeof updTop==="function") updTop();
+    return;
+  }
   const onHome = (page===""||page===undefined);
   document.body.style.background = onHome ? "#0A1210" : "";
   document.documentElement.style.background = onHome ? "#0A1210" : "";
@@ -2279,7 +2325,8 @@ let navRevealed=false;
 function updTop(){
   const top = document.querySelector(".top"); if(!top) return;
   const h = location.hash.replace("#","");
-  const onHome = h==="" || h==="/";
+  // За закрытым гейтом главной с тёмным героем нет — шапке нужен светлый режим.
+  const onHome = (h==="" || h==="/") && !gated();
   /* Раньше строка пряталась КАЖДЫЙ раз, когда пользователь возвращался к
      началу главной, — вкладки то появлялись, то исчезали. Прячем только до
      первого показа: сначала видно чистый экран с героем, а как только он
@@ -6431,15 +6478,26 @@ async function renderAssistant(){
    Решение владельца (2 августа 2026): обычные email + пароль, как в
    Telegram-боте — без переписки на каждый вход (см. docstring auth.py). */
 let ME = null;
+// Вход по заявке (ACCESS_GATE в main.py, 2 сентября 2026). GATE: null —
+// /api/me ещё не ответил (route() ничего не рисует, чтобы сайт не мелькнул
+// перед дверью), true/false — ответ сервера. Гейт закрыт для гостя и для
+// аккаунта, чью заявку ещё не одобрили или отклонили.
+let GATE = null;
+function gated(){ return GATE === true && (!ME || ME.approved === false); }
 async function refreshMe(){
   // /api/me отвечает 200 всегда (и для анонимного визита тоже) — иначе
   // браузер писал бы «Failed to load resource: 401» в консоль при каждой
   // загрузке страницы, а это самое частое состояние, не ошибка.
+  const firstAnswer = GATE === null;
   try{
     const r = await fetch("/api/me");
     const data = r.ok ? await r.json() : {logged_in:false};
     ME = data.logged_in ? data : null;
-  }catch(e){ ME = null; }
+    GATE = !!data.gate;
+  }catch(e){ ME = null; if(GATE === null) GATE = false; }
+  // Первый ответ /api/me — тот, которого ждал стартовый route(): теперь
+  // известно, показывать сайт или экран входа.
+  if(firstAnswer) route();
   const a = document.getElementById("navAccount");
   // Вместо имени — кружок с инициалом: имя пользователя в собственной шапке
   // сайта читается странно, а кружок сразу понятен как вход в профиль.
@@ -6467,6 +6525,108 @@ async function refreshMe(){
 
 const ACCOUNT_ROLES = [["individual","Частное лицо"],["corporate","Корпоративный аккаунт"],["firm","Юридическая фирма / консультант"]];
 function roleLabel(role){ return (ACCOUNT_ROLES.find(([v])=>v===role)||[])[1] || "Частное лицо"; }
+
+// Один запрос входа/регистрации на оба экрана — «Аккаунт» и экран гейта.
+// Возвращает JSON ответа или null; ошибку пишет в переданный элемент.
+const GATE_SENT_TEXT = "Заявка отправлена. Как только проверим, вход по этим данным заработает — обычно в течение дня.";
+async function authRequest(endpoint, label, payload, msg){
+  msg.className="acct-note reveal in"; msg.textContent=label+"…";
+  try{
+    const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const x=await r.json().catch(()=>({}));
+    if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return null;}
+    msg.textContent="";
+    return x;
+  }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");return null;}
+}
+
+/* ================= ВХОД ПО ЗАЯВКЕ (гейт на этапе тестирования) =================
+   Просьба владельца 2 сентября 2026: «как в Автопосте» — посетитель без входа
+   видит блок с логином и паролем / запросом доступа вместо сайта, заявка уходит
+   владельцам в Telegram, вход открывается после одобрения. Композиция повторяет
+   экран входа «Автопоста»: одна узкая колонка, подписанные поля, одна широкая
+   кнопка, переключатель режима строкой под карточкой; тексты и палитра — свои.
+   Включается сервером (ACCESS_GATE в main.py, поле gate в /api/me); шапка и
+   футер остаются, адрес не теряется — после входа route() открывает его. */
+function renderGate(){
+  let mode = "login";
+  const field = (id, label, type, extra) =>
+    `<label class="gate-field"><span>${label}</span><input id="${id}" type="${type}" ${extra}></label>`;
+  const paint = () => {
+    app.innerHTML = `<section class="gate reveal" id="gateScreen"><div class="gate-box">
+      <span class="label">Закрытое тестирование</span>
+      <h1>Компас открыт для приглашённых</h1>
+      <p class="gate-sub">${mode==="login"
+        ? "Сделки российского рынка: стороны, условия, консультанты и первоисточники. Пока доступ по заявке: если его уже открыли — войдите, если нет — запросите."
+        : "Оставьте имя, компанию и почту — мы проверим заявку и откроем вход, обычно в течение дня."}</p>
+      <div class="gate-card" id="gateCard">
+        ${mode==="login" ? `
+        <form class="acct-form" id="gateLoginForm">
+          ${field("gateEmail","Почта","email",'placeholder="you@firma.ru" required autocomplete="email"')}
+          ${field("gatePassword","Пароль","password",'placeholder="Пароль" required autocomplete="current-password" minlength="8"')}
+          <button class="chip on" type="submit" style="width:100%">Войти</button>
+        </form>` : `
+        <form class="acct-form" id="gateRegisterForm">
+          ${field("gateFullName","Имя и фамилия","text",'placeholder="Иван Иванов" required autocomplete="name" minlength="2"')}
+          ${field("gateCompany","Компания","text",'placeholder="Где вы работаете" autocomplete="organization"')}
+          ${field("gatePosition","Должность","text",'placeholder="Партнёр, юрист, аналитик…" autocomplete="organization-title"')}
+          ${field("gateRegEmail","Почта","email",'placeholder="you@firma.ru" required autocomplete="email"')}
+          ${field("gateRegPassword","Пароль","password",'placeholder="От 8 символов" required autocomplete="new-password" minlength="8"')}
+          ${field("gateRegPasswordConfirm","Повторите пароль","password",'placeholder="Ещё раз" required autocomplete="new-password" minlength="8"')}
+          <button class="chip on" type="submit" style="width:100%">Запросить доступ</button>
+        </form>`}
+        <p class="acct-note" id="gateMsg"></p>
+      </div>
+      <p class="gate-switch" id="gateSwitch">${mode==="login"
+        ? `Нет доступа? <a id="gateToRegister">Запросить →</a>`
+        : `Уже есть доступ? <a id="gateToLogin">Войти</a>`}</p>
+    </div></section>`;
+    rerun();
+    const msg = document.getElementById("gateMsg");
+    const toReg = document.getElementById("gateToRegister"); if(toReg) toReg.onclick = e=>{e.preventDefault(); mode="register"; paint();};
+    const toLog = document.getElementById("gateToLogin"); if(toLog) toLog.onclick = e=>{e.preventDefault(); mode="login"; paint();};
+    if(mode==="login"){
+      document.getElementById("gateLoginForm").onsubmit = async e=>{
+        e.preventDefault();
+        const x = await authRequest("/api/auth/login","Входим",{
+          email: document.getElementById("gateEmail").value.trim(),
+          password: document.getElementById("gatePassword").value,
+        }, msg);
+        if(!x) return;
+        // Сессия поставлена — /api/me скажет approved, и route() откроет
+        // тот адрес, на который человек шёл (хеш всё это время не менялся).
+        await refreshMe();
+        route();
+      };
+    } else {
+      document.getElementById("gateRegisterForm").onsubmit = async e=>{
+        e.preventDefault();
+        const p1 = document.getElementById("gateRegPassword").value, p2 = document.getElementById("gateRegPasswordConfirm").value;
+        if(p1!==p2){ msg.className="acct-note err"; msg.textContent="Пароли не совпадают."; return; }
+        const x = await authRequest("/api/auth/register","Отправляем заявку",{
+          email: document.getElementById("gateRegEmail").value.trim(),
+          password: p1,
+          full_name: document.getElementById("gateFullName").value.trim(),
+          company: document.getElementById("gateCompany").value.trim()||null,
+          position: document.getElementById("gatePosition").value.trim()||null,
+          role: "individual",
+        }, msg);
+        if(!x) return;
+        if(!x.pending){ await refreshMe(); route(); return; }   // гейт выключили между открытием страницы и отправкой
+        document.getElementById("gateCard").innerHTML = `<div class="gate-done" id="gateDone">
+          <div class="gate-mark" aria-hidden="true">✓</div>
+          <p><b>Заявка отправлена.</b> Как только проверим, вход по этим данным заработает — обычно в течение дня.</p>
+        </div>`;
+        document.getElementById("gateSwitch").innerHTML = `Доступ уже открыли? <a id="gateToLogin">Войти</a>`;
+        document.getElementById("gateToLogin").onclick = e=>{e.preventDefault(); mode="login"; paint();};
+        // Кнопка была внизу длинной формы, подтверждение встало на её место
+        // вверху — на телефоне без прокрутки человек увидел бы футер.
+        window.scrollTo({top:0, behavior:"smooth"});
+      };
+    }
+  };
+  paint();
+}
 
 async function renderAccount(qs){
   await refreshMe();
@@ -6505,13 +6665,12 @@ async function renderAccount(qs){
       const toReg=document.getElementById("toRegister"); if(toReg) toReg.onclick=e=>{e.preventDefault();mode="register";paint();};
       const toLog=document.getElementById("toLogin"); if(toLog) toLog.onclick=e=>{e.preventDefault();mode="login";paint();};
       const submit=async(endpoint, label, payload)=>{
-        msg.className="acct-note reveal";msg.textContent=label+"…";
-        try{
-          const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-          const x=await r.json().catch(()=>({}));
-          if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return;}
-          location.hash="#/account";route();
-        }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");}
+        const x=await authRequest(endpoint,label,payload,msg);
+        if(!x) return;
+        // pending — гейт включён (ACCESS_GATE): аккаунт создан, но сессии нет,
+        // пока владелец не одобрит заявку в Telegram.
+        if(x.pending){msg.textContent=GATE_SENT_TEXT;return;}
+        location.hash="#/account";route();
       };
       if(mode==="login"){
         document.getElementById("loginForm").onsubmit=e=>{e.preventDefault();
