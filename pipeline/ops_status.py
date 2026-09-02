@@ -26,6 +26,7 @@
     python3 pipeline/ops_status.py публикация --posted 3 --edited 1
     python3 pipeline/ops_status.py публикация --nothing --soon 6 --held 4
     python3 pipeline/ops_status.py качество --did "Дополнили карточку «Пеко»…" --left 57
+    python3 pipeline/ops_status.py вычитка --proofread 58 --refused 3 --left 1334 --ids g1,g2,g3
     python3 pipeline/ops_status.py приток --broken "Источники не отвечают"
 """
 import argparse
@@ -397,6 +398,46 @@ def render_quality(did='', left=0, ids=(), facts=0, base=None, fns_budget=''):
     return '\n'.join(lines)
 
 
+def render_proofread(done=0, refused=0, left=0, ids=(), base=None):
+    """Вычитка (2 сентября 2026): сколько карточек переписано понятным языком.
+
+    Владельцу важно одно обещание — «факты, цифры и имена не менялись»: это
+    не вежливая фраза, а то, что proofread.py проверяет на каждой правке, и
+    отчёт повторяет его каждый раз, чтобы партнёр знал, ЧТО именно делает
+    рутина с базой. Отказы — не тревога, а норма: правка, не прошедшая
+    проверку, просто не записана, текст остался прежним."""
+    lines = ['✍️ <b>Компас · вычитка</b>', '']
+    if base is None:
+        try:
+            base = load_base()
+        except Exception:
+            base = None
+    names = deal_links(ids, base) if ids and base else (deal_names(ids) if ids else [])
+    if done:
+        head = 'Переписали понятным языком %d %s' % (
+            done, _plural(done, 'карточку', 'карточки', 'карточек'))
+        if names:
+            head += ': ' + ', '.join(names[:3])
+            if len(names) > 3:
+                head += ' и ещё %d' % (len(names) - 3)
+        lines.append(head + '. Факты, цифры и имена не менялись — только язык.')
+    else:
+        lines.append('За этот час вычитать ничего не удалось.')
+    if refused:
+        lines.append('')
+        lines.append('%d %s не %s проверку и не %s — тексты этих полей остались как были.' % (
+            refused, _plural(refused, 'правка', 'правки', 'правок'),
+            _plural(refused, 'прошла', 'прошли', 'прошли'),
+            _plural(refused, 'записана', 'записаны', 'записаны')))
+    lines.append('')
+    if left:
+        lines.append('📚 Ещё не вычитаны: %d %s.'
+                     % (left, _plural(left, 'карточка', 'карточки', 'карточек')))
+    else:
+        lines.append('📚 Все карточки вычитаны — очередь пуста.')
+    return '\n'.join(lines)
+
+
 def render_broken(routine, why):
     return ('🚨 <b>Компас · сбой</b>\n\nНе сработало: %s.\n\n<i>%s</i>\n\n'
             'Платформа продолжает работать, но этот шаг сегодня не выполнен.'
@@ -443,12 +484,18 @@ def build(args):
                               args.soon, args.held, args.unread, args.nothing)
         return text, queue_keyboard(args.soon, args.held, args.unread)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
+    if args.routine == 'вычитка':
+        return render_proofread(args.proofread, args.refused, args.left, ids), None
     return render_quality(args.did, args.left, ids, args.facts, fns_budget=args.fns_budget), None
 
 
 def main(argv):
     p = argparse.ArgumentParser(add_help=False)
-    p.add_argument('routine', choices=['приток', 'публикация', 'качество'])
+    p.add_argument('routine', choices=['приток', 'публикация', 'качество', 'вычитка'])
+    p.add_argument('--proofread', type=int, default=0,
+                   help='вычитка: сколько карточек переписано и получило штамп proofread')
+    p.add_argument('--refused', type=int, default=0,
+                   help='вычитка: сколько правок не прошли проверку proofread.py')
     p.add_argument('--looked', type=int, default=0)
     p.add_argument('--found', type=int, default=0)
     p.add_argument('--cards', type=int, default=0)
@@ -562,6 +609,13 @@ def _self_check():
     unread_text = render_publish(nothing=True, unread=2)
     assert 'выйдут сами' not in unread_text and 'ждут прочтения' in unread_text
     assert queue_keyboard(0, 0, 3)['inline_keyboard'][0][0]['callback_data'] == 'show:unread'
+    # Вычитка: обещание «факты не менялись» — в каждом отчёте, отказы названы
+    # по-человечески, пустой час не выглядит как молчание.
+    text = render_proofread(58, 3, 1334, base={'deals': []})
+    assert '58 карточек' in text and 'не менялись' in text and '3 правки не прошли' in text
+    assert '1334' in text and not find_jargon(text)
+    assert 'ничего не удалось' in render_proofread(0, 0, 10, base={'deals': []})
+    assert 'очередь пуста' in render_proofread(5, 0, 0, base={'deals': []})
     print('Самопроверка отчётов пройдена.')
 
 
