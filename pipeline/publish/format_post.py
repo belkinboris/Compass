@@ -578,6 +578,14 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # заголовка. Финстрока цели — сразу под ним, отдельной строкой (П7-9).
     asset_novel = bool(asset) and has_novelty(asset, reference)
     detail = _join_subject_sentences(_subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
+    # Деталь сама называет предмет — имя перед тире не повторяем. Найдено
+    # владельцем 2 сентября на посте о госпакете Шереметьево: «Предмет:
+    # Международный аэропорт Шереметьево (МАШ) — Госпакет Международного
+    # аэропорта Шереметьево (МАШ) — на конец января…» — одно и то же дважды,
+    # потому что новизна детали считалась против имени (в ней есть «госпакет»
+    # и «30%»), а новизна имени против детали — нет.
+    if asset_novel and detail and not has_novelty(asset, detail):
+        asset_novel = False
     if asset_novel and detail:
         subject = 'Предмет: %s — %s' % (esc(asset), esc(detail))
     elif asset_novel:
