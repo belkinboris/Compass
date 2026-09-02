@@ -241,6 +241,21 @@ def needs_review_before_post(deal):
     return True
 
 
+def _adviser_key(name):
+    """Ключ, по которому две записи считаются ОДНОЙ фирмой. Точного совпадения
+    строк мало: владелец 31 августа 2026 увидел на карточке «два раза АЛРУД»
+    (кириллицей и латиницей из двух прогонов обогащения), а в посте — «Aspring
+    Capital» и «Aspring Capital (инвестиционный банк)». Скобочное уточнение и
+    правовая форма к имени не относятся; латиницу и кириллицу сводит только
+    список пар из каталога сайта, поэтому здесь — то, что можно сделать без
+    него: имя без скобок, без правовой формы и без регистра."""
+    t = re.sub(r'\s*\([^)]*\)', ' ', str(name or ''))
+    t = re.sub(r'\b(ооо|оао|зао|пао|ао|мка|ак|адвокатское\s+бюро|юридическая\s+фирма|'
+               r'группа\s+компаний|llc|ltd|inc|llp|group)\b', ' ', t, flags=re.I)
+    t = re.sub(r'[«»"\'`,.]', ' ', t)
+    return ' '.join(t.lower().split())
+
+
 def advisers(deal):
     out = []
     for row in ((deal.get('law') or {}).get('adv') or []):
@@ -251,8 +266,12 @@ def advisers(deal):
         out += [x.strip().split('—')[0].strip() for x in str(fin).split(';') if x.strip()]
     seen, uniq = set(), []
     for a in out:
-        if a.lower() not in seen:
-            seen.add(a.lower())
+        key = _adviser_key(a)
+        if key and key not in seen:
+            seen.add(key)
+            # Из двух записей одной фирмы оставляем более короткую подпись:
+            # «Aspring Capital» читается лучше, чем «Aspring Capital
+            # (инвестиционный банк)», а роль и так видна на карточке.
             uniq.append(a)
     return uniq
 
@@ -670,17 +689,18 @@ def render(deal, companies, updates=(), today=None, fin=None):
         lines.append('')
         lines.append('Консультанты: %s' % esc(', '.join(adv[:6])))
 
+    # ССЫЛКИ НА ПЛАТФОРМУ — НЕ В ТЕКСТЕ, А КНОПКАМИ ПОД ПОСТОМ (`lens_links`,
+    # `render_buttons`). Владелец 2 сентября 2026: «кнопки экономист/юрист
+    # красивые со стрелочками, но нивелируют ценность перехода на карточку
+    # сделки — надо элегантное решение, а не просто убрать стрелки». Три
+    # текстовые ссылки подряд конкурировали друг с другом, и две узкие
+    # (линзы) выигрывали у главной у самой широкой по смыслу. В настоящей
+    # клавиатуре Telegram иерархия видна глазами: карточка — отдельная
+    # широкая кнопка первым рядом, линзы — узкие вторым. Текст поста при
+    # этом заканчивается фактом (источником), а не столбиком ссылок.
     src = [s for s in (deal.get('src') or []) if len(s) > 1 and str(s[1]).startswith('http')]
-    lines.append('')
-    lines.append('<a href="%s/#/deal/%s">Карточка сделки</a>' % (SITE, deal['id']))
-    # Прямые ссылки на линзу — только когда там правда что-то есть: иначе
-    # читатель кликает «Юрист» и попадает на приглушённую пустую вкладку.
-    eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
-    if facts or subject or has(eco.get('rationale')):
-        lines.append('<a href="%s/#/deal/%s?lens=eco">→ Экономист</a>' % (SITE, deal['id']))
-    if adv or has(law.get('struct')) or has(law.get('appr')) or has(law.get('terms')):
-        lines.append('<a href="%s/#/deal/%s?lens=law">→ Юрист</a>' % (SITE, deal['id']))
     if src:
+        lines.append('')
         lines.append('Источник: <a href="%s">%s</a>' % (esc(src[0][1]), esc(src[0][0])))
         if len(src) > 1:
             lines.append('Ещё источников: %d' % (len(src) - 1))
@@ -700,6 +720,70 @@ def render(deal, companies, updates=(), today=None, fin=None):
     lines.append('')
     lines.append(' '.join(t for t in tags if len(t) > 1))
     return '\n'.join(lines)
+
+
+def lens_links(deal):
+    """Какие линзы карточки стоит открывать прямой ссылкой: [(подпись, lens)].
+
+    Условие то же, что было у текстовых ссылок: линза предлагается, только
+    если там правда что-то есть, — иначе читатель жмёт «Юрист» и попадает на
+    пустую вкладку. Вынесено в отдельную функцию, потому что теперь этим
+    пользуются двое: клавиатура поста и её текстовый предпросмотр в консоли."""
+    eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
+    out = []
+    if (has(deal.get('sum')) or has(deal.get('status')) or has(deal.get('ind'))
+            or has(eco.get('share')) or has(eco.get('rationale')) or has(eco.get('val'))
+            or has(eco.get('target_fin')) or has(eco.get('finadv'))):
+        out.append(('Экономист', 'eco'))
+    if (advisers(deal) or has(law.get('struct')) or has(law.get('appr'))
+            or has(law.get('terms'))):
+        out.append(('Юрист', 'law'))
+    return out
+
+
+_OWN_LINK_LINE = re.compile(
+    r'^\s*(?:→\s*)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
+
+
+def strip_platform_links(text):
+    """Убрать из готового текста НАШИ ссылки-строки на карточку и линзы.
+
+    Нужно для `post_override` — текста, который основатель написал (или
+    одобрил) в консоли ДО 2 сентября 2026, когда эти ссылки ещё стояли в
+    теле поста. Теперь они живут кнопками под постом, и без чистки старый
+    override показал бы их дважды. Трогаем только строки, состоящие ровно
+    из нашей ссылки: ссылка на источник и любая ссылка внутри предложения
+    остаются на месте."""
+    lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
+    out = '\n'.join(lines)
+    return re.sub(r'\n{3,}', '\n\n', out).strip()
+
+
+def render_buttons(deal):
+    """Клавиатура под постом: карточка сделки — широкой кнопкой первым рядом,
+    линзы — вторым. Формат готов для `reply_markup` Telegram."""
+    did = deal.get('id')
+    if not did:
+        return None
+    rows = [[{'text': 'Открыть карточку сделки', 'url': '%s/#/deal/%s' % (SITE, did)}]]
+    lenses = [{'text': label, 'url': '%s/#/deal/%s?lens=%s' % (SITE, did, lens)}
+              for label, lens in lens_links(deal)]
+    if lenses:
+        rows.append(lenses)
+    return {'inline_keyboard': rows}
+
+
+def buttons_preview(deal_or_buttons):
+    """Строка для консоли основателей: что за кнопки будут под постом и куда
+    ведут. Черновик обязан показывать ВЕСЬ пост — а кнопки в текст сообщения
+    не видны, и без этой строки проверяющий не мог бы ни увидеть их, ни
+    пройти по ссылке."""
+    buttons = (deal_or_buttons if isinstance(deal_or_buttons, dict) and 'inline_keyboard' in deal_or_buttons
+               else render_buttons(deal_or_buttons))
+    if not buttons:
+        return ''
+    items = ['%s — %s' % (b['text'], b['url']) for row in buttons['inline_keyboard'] for b in row]
+    return 'Кнопки под постом: ' + ' · '.join(items)
 
 
 def render_milestone(deal, event):
@@ -740,8 +824,7 @@ def render_milestone(deal, event):
         lines.append('')
         lines += facts
 
-    lines.append('')
-    lines.append('<a href="%s/#/deal/%s">Карточка сделки</a>' % (SITE, deal['id']))
+
     return '\n'.join(lines)
 
 

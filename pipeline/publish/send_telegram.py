@@ -99,7 +99,8 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
 import approve  # noqa: E402  (fetch_decisions/consume — тот же мост, что у карточек)
 import check_post  # noqa: E402
-import format_post  # noqa: E402
+import format_post
+import monthly_digest  # noqa: E402
 import review  # noqa: E402  (POSTWORTHY_MILESTONE_KINDS — один список на пайплайн и сайт)
 import telegram_endpoint  # noqa: E402
 
@@ -187,10 +188,12 @@ def _client():
     return httpx.Client(timeout=20.0)
 
 
-def post_message(client, token, chat_id, text):
-    r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json={
-        'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML', 'disable_web_page_preview': True,
-    })
+def post_message(client, token, chat_id, text, buttons=None):
+    payload = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML',
+               'disable_web_page_preview': True}
+    if buttons:
+        payload['reply_markup'] = buttons
+    r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
     body = r.json()
     if not body.get('ok'):
         raise TelegramError('sendMessage: %s' % (body.get('description') or r.text[:200]))
@@ -208,11 +211,14 @@ def is_message_gone(error_text):
     return 'message to edit not found' in t or 'chat not found' in t
 
 
-def edit_message(client, token, chat_id, message_id, text):
-    r = client.post(telegram_endpoint.method_url(token, 'editMessageText'), json={
-        'chat_id': chat_id, 'message_id': message_id, 'text': text,
-        'parse_mode': 'HTML', 'disable_web_page_preview': True,
-    })
+def edit_message(client, token, chat_id, message_id, text, buttons=None):
+    # Клавиатуру передаём и при правке: `editMessageText` без `reply_markup`
+    # снимает кнопки с уже опубликованного поста, а не оставляет их как были.
+    payload = {'chat_id': chat_id, 'message_id': message_id, 'text': text,
+               'parse_mode': 'HTML', 'disable_web_page_preview': True}
+    if buttons:
+        payload['reply_markup'] = buttons
+    r = client.post(telegram_endpoint.method_url(token, 'editMessageText'), json=payload)
     body = r.json()
     if not body.get('ok'):
         # "message is not modified" — Telegram считает правкой даже пробел;
@@ -328,6 +334,10 @@ def milestone_decisions(decisions):
     out = {}
     for d in decisions:
         did = str(d.get('deal_id') or '')
+        # `digest~2026-08` — решение по месячной сводке, а не по вехе: тот же
+        # разделитель, другая сущность (см. `digest_decisions`).
+        if did.startswith('digest~'):
+            continue
         if '~' not in did or d.get('verdict') not in ('post_yes', 'post_no'):
             continue
         deal_id, _, kind = did.partition('~')
@@ -345,6 +355,130 @@ def milestone_age_hours(event, now):
     if drafted.tzinfo is None:
         drafted = drafted.replace(tzinfo=timezone.utc)
     return (now - drafted).total_seconds() / 3600.0
+
+
+DIGEST_SILENCE_HOURS = 24
+# Со второго числа: за первое число месяца ещё приезжают сделки последних
+# дней — сводка, собранная в ночь на первое, недосчитается их.
+DIGEST_FROM_DAY = 2
+
+
+def digest_due(data, today):
+    """Месяц (год, номер), за который сводка ещё не выходила, — или None.
+
+    Смотрим только на ПРЕДЫДУЩИЙ месяц: сводка за август выходит в начале
+    сентября и один раз. Признак «уже выходила» — запись с `message_id` в
+    `telegram_digests`; черновик без `message_id` не считается вышедшим."""
+    if today.day < DIGEST_FROM_DAY:
+        return None
+    year, month = monthly_digest.previous_month(today)
+    key = monthly_digest.month_key(year, month)
+    state = (data.get('telegram_digests') or {}).get(key) or {}
+    if state.get('message_id'):
+        return None
+    if not monthly_digest.enough(monthly_digest.stats(data, year, month)):
+        return None
+    return year, month
+
+
+def digest_decisions(decisions):
+    """{ключ месяца: (вердикт, id решения)} — кнопки сводки используют те же
+    вердикты `post_ok`/`post_no`, что карточка и веха; отличает её форма
+    `deal_id` в решении — `digest~2026-08`."""
+    out = {}
+    for d in decisions:
+        did = str(d.get('deal_id') or '')
+        if not did.startswith('digest~') or d.get('verdict') not in ('post_yes', 'post_no'):
+            continue
+        out[did.split('~', 1)[1]] = (d['verdict'], d['id'])
+    return out
+
+
+def digest_age_hours(state, now):
+    raw = str((state or {}).get('drafted_at') or '')
+    try:
+        drafted = datetime.fromisoformat(raw)
+    except ValueError:
+        return 0.0
+    if drafted.tzinfo is None:
+        drafted = drafted.replace(tzinfo=timezone.utc)
+    return (now - drafted).total_seconds() / 3600.0
+
+
+def plan_digest(data, decisions, now, today=None):
+    """('draft'|'send'|None, ключ месяца, причина, id решений на консумацию).
+
+    Тот же порядок, что у вехи: черновик в консоль -> сутки молчания ->
+    публикация. Чистая функция — проверяется без сети."""
+    due = digest_due(data, today or now.astimezone(MSK).date())
+    if not due:
+        return None, None, 'сводка за прошлый месяц уже выходила или месяц пустой', []
+    year, month = due
+    key = monthly_digest.month_key(year, month)
+    state = (data.get('telegram_digests') or {}).get(key) or {}
+    decision = digest_decisions(decisions).get(key)
+    if decision and decision[0] == 'post_no':
+        return None, key, 'основатели решили не публиковать', [decision[1]]
+    if decision and decision[0] == 'post_yes':
+        return 'send', key, 'одобрено в консоли', [decision[1]]
+    if not state.get('drafted_at'):
+        return 'draft', key, 'черновик ещё не отправлен в консоль', []
+    age = digest_age_hours(state, now)
+    if age >= DIGEST_SILENCE_HOURS:
+        return 'send', key, 'молчание %.0f ч' % age, []
+    return None, key, 'ждёт решения (%.0f ч из %d)' % (age, DIGEST_SILENCE_HOURS), []
+
+
+def deliver_digest(action, key, text, token, chat_id, digests, now, client_factory=None):
+    """Отправить сводку — в канал или черновиком в консоль. Возвращает
+    (изменилось ли состояние, ошибка или None).
+
+    Отдельной функцией, а не куском `main()`, ровно по одной причине: у
+    `main()` есть ранний выход «отправлять сейчас нечего» — и в самый частый
+    для сводки день (спокойное начало месяца, новых сделок нет) она бы просто
+    не дошла до кода отправки. Функция вызывается ДО этого выхода."""
+    client = (client_factory or _client)()
+    try:
+        if action == 'send':
+            mid = post_message(client, token, chat_id, text,
+                               monthly_digest.render_buttons(int(key[:4]), int(key[5:7])))
+            digests[key] = dict(digests.get(key) or {}, message_id=mid,
+                                at=now.isoformat(timespec='seconds'))
+            print('Сводка %s опубликована (message_id %s)' % (key, mid))
+            return True, None
+        import send_drafts                                        # noqa: E402
+        chats = send_drafts.send_targets()
+        if not chats:
+            print('Сводка %s: консоль не настроена — черновик некому показать' % key)
+            return False, None
+        buttons = monthly_digest.render_buttons(int(key[:4]), int(key[5:7]))
+        for chat in chats:
+            send_drafts.send_one(client, token, chat,
+                                 digest_draft_message(text, key, buttons),
+                                 digest_keyboard(key))
+        digests[key] = dict(digests.get(key) or {},
+                            drafted_at=now.isoformat(timespec='seconds'))
+        print('Сводка %s: черновик отправлен в консоль' % key)
+        return True, None
+    except (TelegramError, OSError) as e:
+        # Сводка — не критичный шаг: её сбой не должен ронять отчёт по постам
+        # сделок, которые уже ушли.
+        return False, str(e)
+
+
+def digest_keyboard(key):
+    return {'inline_keyboard': [[
+        {'text': '📣 Пост в канал', 'callback_data': 'mod:digest~%s:post_ok' % key},
+        {'text': '🔕 Без поста', 'callback_data': 'mod:digest~%s:post_no' % key},
+    ]]}
+
+
+def digest_draft_message(text, key, buttons):
+    return ('📊 [сводка %s] — В КАНАЛ, на проверку\n'
+            'Итоги месяца одним постом. Молчание сутки — выходит как есть; '
+            'ответ своим текстом заменит пост.\n'
+            '━━━━━━━━━━━━\n%s\n\n%s'
+            % (key, text, format_post.buttons_preview(buttons)))
 
 
 def plan_milestones(deals, stage_posts, decisions, now):
@@ -403,8 +537,27 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     # см. docstring `milestone_candidates`), поэтому двухфазный `--consume`
     # не нужен: повторная выборка того же решения безопасна в любом порядке.
     m_decisions, m_handle = approve.fetch_decisions()
+    now_utc = datetime.now(timezone.utc)
     m_send, m_hold, m_discard_ids, m_sent_decision_ids = plan_milestones(
-        data['deals'], milestones, m_decisions, datetime.now(timezone.utc))
+        data['deals'], milestones, m_decisions, now_utc)
+
+    # МЕСЯЧНАЯ СВОДКА (просьба владельца 2 сентября 2026). Тот же путь, что у
+    # вехи: черновик в консоль -> сутки молчания -> публикация. Живёт здесь, а
+    # не отдельной рутиной: единственный момент, когда сводку есть смысл
+    # собирать, — тот же прогон публикации, который и так ходит в канал
+    # («расписание не нужно там, где уже есть естественное событие»).
+    digests = data.setdefault('telegram_digests', {})
+    digest_action, digest_key_, digest_why, digest_decision_ids = plan_digest(
+        data, m_decisions, now_utc)
+    digest_text = ''
+    if digest_action:
+        y, mth = int(digest_key_[:4]), int(digest_key_[5:7])
+        digest_text = monthly_digest.render(data, y, mth)
+        problems = check_post.check_digest(digest_text) if digest_text else ["сводка не собралась"]
+        if problems:
+            print('Сводка %s не отправлена: %s' % (digest_key_, '; '.join(problems)))
+            digest_action, digest_text = None, ''
+    print('Сводка месяца: %s (%s)' % (digest_action or 'ничего', digest_why))
     to_send_m = [(deal, event, format_post.render_milestone(deal, event)) for deal, event in m_send]
     m_flagged = []
     for deal, event, text in list(to_send_m):
@@ -455,7 +608,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                 # Текст, который владелец продиктовал в Telegram при модерации
                 # черновика, важнее автоформата — но только для ПЕРВОГО поста:
                 # дальнейшие обновления снова собирает format_post.
-                text = deal.get('post_override') or format_post.render(deal, comps)
+                text = (format_post.strip_platform_links(deal['post_override'])
+                        if deal.get('post_override') else format_post.render(deal, comps))
                 to_send.append((did, text))
 
     # ВЫЧИТКА ПЕРЕД ОТПРАВКОЙ — ДО отчёта и до выхода из сухого прогона: план
@@ -556,10 +710,19 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     to_send = to_send[:allow]
     if held:
         print('Придержано новых постов: %d — уйдут следующими прогонами.' % len(held))
+    # СВОДКА — ДО раннего выхода. Самый частый для неё день (начало месяца,
+    # новых сделок ещё нет) — это ровно тот прогон, который выходит здесь.
+    digest_failed = None
+    if write and digest_action and digest_text:
+        digest_saved, digest_failed = deliver_digest(
+            digest_action, digest_key_, digest_text, token, chat_id, digests, now_utc)
+    else:
+        digest_saved = False
+
     if not to_send and not to_edit and not to_send_m and not m_discard_ids:
         # Засев «без поста» — тоже изменение состояния: не записать его —
         # значит показывать эти карточки в плане каждый прогон заново.
-        if to_seed:
+        if to_seed or digest_saved:
             for did in to_seed:
                 posts[did] = None
             with open(DATA, 'w', encoding='utf-8') as f:
@@ -567,6 +730,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
             print('Постов нет; засеяно без поста: %d.' % len(to_seed))
         else:
             print('Отправлять сейчас нечего.')
+        if digest_failed:
+            print('Сводка %s не ушла: %s' % (digest_key_, digest_failed))
+        approve.consume(m_handle, digest_decision_ids)
         return
 
     queue = [('send', did, text) for did, text in to_send] + \
@@ -619,18 +785,19 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                       else SEND_DELAY_S)
         prev_kind = kind
         try:
+            buttons = format_post.render_buttons(deals_by_id.get(did) or {'id': did})
             if kind == 'send':
-                posts[did] = post_message(client, token, chat_id, payload)
+                posts[did] = post_message(client, token, chat_id, payload, buttons)
                 sent += 1
             elif kind == 'milestone':
                 event, text = payload
-                mid = post_message(client, token, chat_id, text)
+                mid = post_message(client, token, chat_id, text, buttons)
                 milestones[event['id']] = {'message_id': mid,
                                            'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
                 milestoned += 1
             else:
                 mid, text = payload
-                edit_message(client, token, chat_id, mid, text)
+                edit_message(client, token, chat_id, mid, text, buttons)
                 edited += 1
         except TelegramError as e:
             # П4-10: удалённый из канала пост (человек убрал его руками — ни
@@ -645,6 +812,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
             else:
                 failed.append((did, str(e)))
 
+    if digest_failed:
+        failed.append(('сводка %s' % digest_key_, digest_failed))
+
     for did in to_seed:
         posts[did] = None
     with open(DATA, 'w', encoding='utf-8') as f:
@@ -654,7 +824,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     # повторной выборке того же решения держит `milestones[event_id]`, а не
     # факт консумации (см. комментарий в начале main()), поэтому здесь можно
     # без второго прохода `--consume` после git push, в отличие от approve.py.
-    approve.consume(m_handle, m_discard_ids + m_sent_decision_ids)
+    approve.consume(m_handle, m_discard_ids + m_sent_decision_ids + digest_decision_ids)
     print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, вех отправлено: %d, ошибок: %d'
           % (sent, edited, len(to_seed), milestoned, len(failed)))
     for did, err in failed:

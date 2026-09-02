@@ -23,7 +23,8 @@ import casing                 # noqa: E402
 import classify              # noqa: E402
 import discover_feeds         # noqa: E402
 import fetch                  # noqa: E402
-import format_post           # noqa: E402
+import format_post
+import monthly_digest           # noqa: E402
 import match as matcher      # noqa: E402
 
 
@@ -588,13 +589,55 @@ def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
     assert "Финансы покупаемой компании" not in without_fin
 
 
-def test_post_links_to_the_card_and_the_source(base):
+def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
+    """Ссылки на платформу — кнопками под постом, источник — в тексте.
+
+    Владелец 2 сентября 2026: «кнопки экономист/юрист красивые со стрелочками,
+    но нивелируют ценность перехода на карточку сделки». Три текстовые ссылки
+    подряд конкурировали друг с другом; в настоящей клавиатуре Telegram
+    иерархия видна: карточка — широкая кнопка первым рядом, линзы — узкие
+    вторым. Источник остаётся в тексте: это факт о сделке, а не навигация.
+    """
     comps = base["companies"]
     deal = next(d for d in base["deals"]
                 if d.get("src") and len(d["src"][0]) > 1 and str(d["src"][0][1]).startswith("http"))
     text = format_post.render(deal, comps)
-    assert f"/#/deal/{deal['id']}" in text
     assert deal["src"][0][1] in text
+    assert f"/#/deal/{deal['id']}" not in text, "ссылка на карточку осталась в тексте"
+    assert "→ Экономист" not in text and "→ Юрист" not in text
+
+    buttons = format_post.render_buttons(deal)
+    rows = buttons["inline_keyboard"]
+    assert len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows[0]
+    assert "карточку" in rows[0][0]["text"].lower()
+    lenses = [b for row in rows[1:] for b in row]
+    assert all("lens=" in b["url"] for b in lenses), lenses
+    # Черновик в консоли обязан показывать и кнопки: их не видно в тексте.
+    preview = format_post.buttons_preview(deal)
+    for row in rows:
+        for b in row:
+            assert b["url"] in preview and b["text"] in preview
+
+
+def test_post_offers_a_lens_button_only_when_that_lens_has_something(base):
+    """Кнопка «Юрист» на карточке без единого юридического факта вела бы на
+    пустую вкладку — то же условие, что стояло у текстовых ссылок."""
+    empty = {"id": "x1", "title": "Т", "sum": "1 млрд ₽"}
+    labels = [b["text"] for row in format_post.render_buttons(empty)["inline_keyboard"] for b in row]
+    assert "Юрист" not in labels, labels
+    lawful = dict(empty, law={"struct": "Сделка оформлена через допэмиссию."})
+    labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
+    assert "Юрист" in labels
+
+
+def test_post_does_not_repeat_the_same_advisory_firm(base):
+    """«Aspring Capital» и «Aspring Capital (инвестиционный банк)» — одна
+    фирма: скобочное уточнение и правовая форма к имени не относятся
+    (жалоба владельца «два раза АЛРУД» — тот же класс)."""
+    deal = {"law": {"adv": [["Юридический консультант", "АЛРУД", ""]]},
+            "eco": {"finadv": "Aspring Capital (инвестиционный банк) — консультант продавца; "
+                              "ООО «АЛРУД» — уже назван"}}
+    assert format_post.advisers(deal) == ["АЛРУД", "Aspring Capital (инвестиционный банк)"]
 
 
 def test_update_notifies_only_when_a_fact_is_added(base):
@@ -1469,6 +1512,12 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     # отсутствие API_FNS_KEY в окружении, где запущен тест.
     monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
 
+    # Месячная сводка — отдельное сообщение того же прогона (2 сентября 2026),
+    # и в начале месяца она добавила бы к трём постам четвёртый вызов. Тест
+    # про ЛИМИТ ПОСТОВ СДЕЛОК за прогон, поэтому сводку глушим явно, а не
+    # надеемся, что тест запускают не первого числа.
+    monkeypatch.setattr(send_telegram, "plan_digest",
+                        lambda *a, **k: (None, None, "выключена в тесте", []))
     # ignore_pace: тест про ЛИМИТ за прогон, а не про дневное окно. Без него
     # он проходил бы только с 10 до 19 по Москве и падал бы по вечерам.
     send_telegram.main(write=True, ignore_pace=True)
@@ -1697,7 +1746,9 @@ def test_render_milestone_uses_the_snapshot_not_live_fields():
     assert "100 млн ₽ (на момент)" in text
     assert "СЕГОДНЯШНИЙ" not in text and "999 млрд" not in text
     assert "ООО «Покупатель»" in text
-    assert "/#/deal/d1" in text
+    # Ссылка на карточку у вехи — тоже кнопкой под постом, а не в тексте.
+    assert "/#/deal/d1" not in text
+    assert format_post.render_buttons(deal)["inline_keyboard"][0][0]["url"].endswith("/#/deal/d1")
 
 
 def test_milestone_candidates_requires_headline_and_postworthy_kind():
@@ -4271,3 +4322,155 @@ def test_telegram_channel_gets_a_name_not_a_raw_feed_id():
     assert source_names.edition_label("https://t.me/unknownchannel/1") == "Телеграм-канал @unknownchannel"
     # Обычные http(s)-адреса эта правка не трогает.
     assert source_names.edition_label("https://www.kommersant.ru/doc/1") == "Коммерсантъ"
+
+
+# ---------- месячная сводка рынка (2 сентября 2026) ----------
+# Просьба владельца: «ежемесячную сводку в тг канале добавить, интересная
+# аналитика должна выходить, чтобы люди пересылали друг другу».
+
+def _digest_month(base):
+    """Последний месяц базы, по которому сводка вообще выпускается."""
+    months = sorted({str(d.get("date") or "")[:7] for d in base["deals"]
+                     if re.fullmatch(r"\d{4}-\d{2}", str(d.get("date") or "")[:7])})
+    for key in reversed(months):
+        y, m = int(key[:4]), int(key[5:7])
+        if monthly_digest.enough(monthly_digest.stats(base, y, m)):
+            return y, m
+    raise AssertionError("в базе нет ни одного месяца, по которому выйдет сводка")
+
+
+def test_old_override_does_not_show_the_same_links_twice(base):
+    """Текст, одобренный в консоли ДО перехода на кнопки, нёс ссылки на
+    карточку и линзы прямо в теле. Теперь они кнопками — старый текст без
+    чистки показал бы их дважды. Чистим только строки, состоящие ровно из
+    нашей ссылки: источник и ссылка внутри предложения остаются."""
+    override = ('<b>Заголовок</b>\n\n'
+                'Статус: Обсуждается\n\n'
+                '<a href="%s/#/deal/g1">Карточка сделки</a>\n'
+                '<a href="%s/#/deal/g1?lens=eco">→ Экономист</a>\n'
+                'Источник: <a href="https://kommersant.ru/doc/1">Коммерсантъ</a>'
+                % (format_post.SITE, format_post.SITE))
+    cleaned = format_post.strip_platform_links(override)
+    assert "/#/deal/" not in cleaned
+    assert "kommersant.ru/doc/1" in cleaned and "Статус: Обсуждается" in cleaned
+    assert "\n\n\n" not in cleaned
+
+
+def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
+    y, m = _digest_month(base)
+    st = monthly_digest.stats(base, y, m)
+    text = monthly_digest.render(base, y, m)
+    assert monthly_digest.MONTHS_IN[m - 1] in text and str(y) in text
+    assert str(st["total"]) in text
+    assert text.count("/#/deal/") == len(st["top"]) and st["top"], text[:400]
+    # Число обязано называть своё множество: без оговорки его перескажут как
+    # статистику всего рынка (CLAUDE.md, «у числа два свойства»).
+    assert "не весь рынок" in text
+    # Никакого нашего диалекта — сводку читают в канале, а не в репозитории.
+    low = text.lower()
+    for word in ("карточк", "база", "знаменател", "bulk", "json", "инвариант"):
+        assert word not in low, word
+
+
+def test_monthly_digest_does_not_count_auction_start_prices_and_failed_deals():
+    """Цифра есть, а сделки за ней нет: у незакрытых торгов в `sum` стоит
+    стартовая цена лота, у сорвавшейся сделки — цена, которую никто не
+    заплатил. Ни то, ни другое не складывается с ценами состоявшихся."""
+    assert not monthly_digest.counts_as_price(
+        {"status": "Обсуждается", "type": "Продажа с торгов", "sum": "7,8 млрд ₽"})
+    assert monthly_digest.counts_as_price(
+        {"status": "Закрыта", "type": "Продажа с торгов", "sum": "7,8 млрд ₽"})
+    assert not monthly_digest.counts_as_price({"status": "Не состоялась", "sum": "10 млрд ₽"})
+    assert monthly_digest.counts_as_price({"status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽"})
+
+
+def test_monthly_digest_counts_only_named_ruble_prices():
+    assert monthly_digest.rub_billions("40 млрд ₽") == 40.0
+    assert monthly_digest.rub_billions("1,3 трлн ₽") == 1300.0
+    assert monthly_digest.rub_billions("50–100 млрд ₽ (по оценке)") is None
+    assert monthly_digest.rub_billions("$2,42 млрд") is None
+
+
+def test_monthly_digest_skips_a_month_without_enough_deals(base):
+    """Пост «за месяц две сделки» — не аналитика, а признак того, что приток
+    стоял: такой месяц сводкой не выпускается вовсе."""
+    thin = {"deals": [{"id": "a", "title": "Т", "date": "2019-04-02", "sum": "1 млрд ₽"}],
+            "companies": {}}
+    assert monthly_digest.render(thin, 2019, 4) == ""
+
+
+def test_monthly_digest_goes_out_once_and_only_after_a_day_in_the_console(base):
+    """Путь сводки — тот же, что у вехи: черновик в консоль, сутки молчания,
+    публикация. И ровно один раз за месяц."""
+    import datetime
+    now = datetime.datetime(2026, 9, 3, 12, 0, tzinfo=datetime.timezone.utc)
+    data = {"deals": base["deals"], "companies": base["companies"]}
+    y, m = monthly_digest.previous_month(datetime.date(2026, 9, 3))
+    key = monthly_digest.month_key(y, m)
+
+    action, k, _why, _ids = send_telegram.plan_digest(data, [], now)
+    assert (action, k) == ("draft", key)
+    # Первого числа не выпускаем: за последние дни месяца сделки ещё приезжают.
+    assert send_telegram.plan_digest(data, [], now, today=datetime.date(2026, 9, 1))[0] is None
+
+    data["telegram_digests"] = {key: {"drafted_at": "2026-09-03T11:00:00+00:00"}}
+    assert send_telegram.plan_digest(data, [], now)[0] is None, "сутки ещё не прошли"
+    data["telegram_digests"][key]["drafted_at"] = "2026-09-02T09:00:00+00:00"
+    assert send_telegram.plan_digest(data, [], now)[0] == "send"
+
+    no = [{"deal_id": "digest~%s" % key, "verdict": "post_no", "id": 42}]
+    action, _k, _why, ids = send_telegram.plan_digest(data, no, now)
+    assert action is None and ids == [42], "решение «без поста» должно и отменить, и консуммироваться"
+    # Решение по сводке не должно читаться как решение по вехе: разделитель тот же.
+    assert send_telegram.milestone_decisions(no) == {}
+
+    data["telegram_digests"][key]["message_id"] = 777
+    assert send_telegram.plan_digest(data, [], now)[0] is None, "сводка за месяц выходит один раз"
+
+
+def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, tmp_path, base):
+    """Планирование проверено отдельно — здесь путь целиком: прогон публикации
+    с настоящим `--write` обязан отправить сводку в канал, приложить кнопки и
+    записать message_id, чтобы в следующем месяце она не ушла второй раз."""
+    import datetime
+    data = json.loads(json.dumps({"deals": base["deals"], "companies": base["companies"],
+                                  "telegram_posts": {d["id"]: None for d in base["deals"]}}))
+    y, m = monthly_digest.previous_month(datetime.date.today())
+    key = monthly_digest.month_key(y, m)
+    if not monthly_digest.enough(monthly_digest.stats(data, y, m)):
+        pytest.skip("за прошлый месяц в базе слишком мало сделок для сводки")
+    # Черновик «отправлен» сутки назад — значит по молчанию пора публиковать.
+    data["telegram_digests"] = {key: {"drafted_at": "2000-01-01T00:00:00+00:00"}}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setattr(send_telegram.approve, "fetch_decisions", lambda: ([], None))
+    monkeypatch.setattr(send_telegram.approve, "consume", lambda *a, **k: None)
+    monkeypatch.setattr(send_telegram.time, "sleep", lambda s: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 555}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert len(fake.calls) == 1, "в канал ушло не одно сообщение (сводка)"
+    _url, body = fake.calls[0]
+    assert monthly_digest.MONTHS_IN[m - 1] in body["text"]
+    assert body["reply_markup"]["inline_keyboard"], "сводка ушла без кнопок"
+    saved = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert saved["telegram_digests"][key]["message_id"] == 555
+    # Второй прогон уже ничего не шлёт: сводка за месяц выходит один раз.
+    assert send_telegram.plan_digest(saved, [], datetime.datetime.now(datetime.timezone.utc))[0] is None
+
+
+def test_monthly_digest_is_proofread_by_its_own_rules(base):
+    """Общая вычитка поста требует строку «Предмет/Покупатель/Сумма» — у
+    сводки таких строк нет по устройству, и она браковала бы каждую."""
+    import check_post
+    y, m = _digest_month(base)
+    text = monthly_digest.render(base, y, m)
+    assert not check_post.check_digest(text), check_post.check_digest(text)
+    assert check_post.check(text), "общая проверка не должна признавать сводку постом о сделке"

@@ -58,7 +58,9 @@ def milestone_keyboard(deal_id, kind):
 
 def milestone_message(deal, event):
     header = '📌 [веха %s~%s] — НА КАНАЛ, на проверку\n\n' % (deal['id'], event['kind'])
-    return header + format_post.render_milestone(deal, event)
+    buttons = format_post.buttons_preview(deal)
+    return (header + format_post.render_milestone(deal, event)
+            + ('\n\n' + buttons if buttons else ''))
 
 
 def build_plan():
