@@ -4802,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d53828833",
+   "draft_id": "d40935741",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4832,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d35397931",
+   "draft_id": "d57076648",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4860,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d86793935",
+   "draft_id": "d83189464",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4899,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d62811356",
+   "draft_id": "d15710480",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d45245573",
+   "draft_id": "d57415457",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4955,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d64973726",
+   "draft_id": "d11825764",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4983,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d25815037",
+   "draft_id": "d43326674",
    "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5012,7 @@
    ]
   },
   {
-   "draft_id": "d60663688",
+   "draft_id": "d53261047",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5040,7 +5040,7 @@
    ]
   },
   {
-   "draft_id": "d32652646",
+   "draft_id": "d82270611",
    "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
@@ -5070,7 +5070,7 @@
    ]
   },
   {
-   "draft_id": "d59073089",
+   "draft_id": "d84228096",
    "title": "Аукцион по приватизации актива экс-владельца «Макфы» вновь провалился",
    "date": "2026-09-02",
    "src": [
@@ -5098,7 +5098,7 @@
    ]
   },
   {
-   "draft_id": "d38263512",
+   "draft_id": "d33594473",
    "title": "В Тюмени за миллионы продают продают полуразрушенную гаупвахту на набережной",
    "date": "2026-09-02",
    "src": [
@@ -5126,7 +5126,7 @@
    ]
   },
   {
-   "draft_id": "d39785249",
+   "draft_id": "d54482170",
    "title": "Под Челябинском продается бизнес с миллиардами прибыли. Скрин",
    "date": "2026-09-02",
    "src": [
@@ -5154,7 +5154,7 @@
    ]
   },
   {
-   "draft_id": "d45162687",
+   "draft_id": "d80050341",
    "title": "В Перми через сайт объявлений продают стационар больницы на Никулина",
    "date": "2026-09-02",
    "src": [
@@ -5182,81 +5182,13 @@
    ]
   },
   {
-   "draft_id": "d62130653",
-   "title": "Клубы АПЛ за лето потратили на покупку футболистов рекордные 3,46 млрд фунтов",
+   "draft_id": "d60410028",
+   "title": "Золотые монеты с Трампом начали продавать в США",
    "date": "2026-09-02",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8924338"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15386e04 (общие редкие слова: покупк, потрат) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d76614644",
-   "title": "Инвестиции СГК в модернизацию Новосибирской ТЭЦ-3 составят 33 млрд рублей",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28071647"
-    ]
-   ],
-   "sum": "33 млрд ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-02",
-     "title": "Переговоры",
-     "note": "Завершить работы планируют к концу 2029 года",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28071647"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Энергетика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d83740594",
-   "title": "Узбекистан предложил создать совместное предприятие для управления возводимой РФ АЭС",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28071557"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/09/02/1225759-zolotie-moneti-s-trampom"
     ]
    ],
    "sum": null,
@@ -5278,13 +5210,69 @@
    ]
   },
   {
-   "draft_id": "d73069292",
-   "title": "Москва вложилась в развитие пищевой промышленности",
+   "draft_id": "d35632606",
+   "title": "Инвестиции в новый терминал резидента свободного порта Владивосток превысили 8 млрд рублей",
    "date": "2026-09-02",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/2/moskva-vlozhilas-v-razvitie-pishhevoj-promyshlennosti"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28071827"
+    ]
+   ],
+   "sum": "8 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76352370",
+   "title": "Эксперт Сидоренко предложила устранить лазейки при продаже просроченной готовой еды",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28071223"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47732939",
+   "title": "Ближе Восток: за 13 лет в ДФО запущено свыше 1,2 тыс. предприятий с инвестициями в 5 трлн",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2159698/natalia-bashlykova/za-13-let-v-dfo-zapushcheno-svyshe-1-2-tys-predpriyatij-s-investiciyami-v-5-trln"
     ]
    ],
    "sum": null,
@@ -5299,7 +5287,120 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Пищепром и напитки",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85360600",
+   "title": "РЖД стали продавать билеты на дальние поезда за цифровые рубли",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260902/rzhd-2114973251.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82173282",
+   "title": "Индия привлекла валютных депозитов членов диаспоры на $127 млрд",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/302889"
+    ]
+   ],
+   "sum": "$127 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Индия",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Индия",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d75308085",
+   "title": "Россиян призвали купить модную вещь на осень",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/02/rossiyan-prizvali/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31766470",
+   "title": "Астраханец стал жертвой обмана при покупке мобильного телефона",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/9/2/astrahanecz-stal-zhertvoj-obmana-pri-pokupke-mobilnogo-telefona"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
