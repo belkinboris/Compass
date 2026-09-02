@@ -41,7 +41,9 @@
    "asset": "госпакет (около 30%) Международного аэропорта Шереметьево",
    "added": "2026-09-02",
    "from_ingest": true,
-   "reviewed": "2026-09-02"
+   "reviewed": "2026-09-02",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g672dcca1",
@@ -84,7 +86,9 @@
    "asset": "госдоля (20%) в ПАО «Новороссийский морской торговый порт» (НМТП)",
    "added": "2026-09-02",
    "from_ingest": true,
-   "reviewed": "2026-09-02"
+   "reviewed": "2026-09-02",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
