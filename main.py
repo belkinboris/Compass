@@ -528,7 +528,16 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
         if left is not None and left < LLM_MIN_ATTEMPT:
             logger.warning("LLM: до дедлайна осталось %.1f с, попытку %d не начинаю", left, attempt + 1)
             break
-        timeout = LLM_TIMEOUT if left is None else min(LLM_TIMEOUT, left)
+        # Первой попытке — весь остаток дедлайна: в режиме «по интернету»
+        # дедлайн 60 с, а LLM_TIMEOUT 30 с резал попытку пополам, и модель,
+        # отвечающая за 35–50 с (deepseek с длинной сводкой поиска), падала по
+        # таймауту чтения при половине запаса впереди — замер стенда 2 сентября:
+        # 1 успех из 5. Повторы после быстрого сбоя по-прежнему ограничены
+        # LLM_TIMEOUT, чтобы два подряд не съели больше дедлайна.
+        if left is None:
+            timeout = LLM_TIMEOUT
+        else:
+            timeout = left if attempt == 0 else min(LLM_TIMEOUT, left)
         info["attempts"] = attempt + 1
         started = time.monotonic()
         try:
