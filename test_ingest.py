@@ -4365,7 +4365,7 @@ def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
     assert text.count("/#/deal/") == len(st["top"]) and st["top"], text[:400]
     # Число обязано называть своё множество: без оговорки его перескажут как
     # статистику всего рынка (CLAUDE.md, «у числа два свойства»).
-    assert "не весь рынок" in text
+    assert "публично доступна" in text
     # Никакого нашего диалекта — сводку читают в канале, а не в репозитории.
     low = text.lower()
     for word in ("карточк", "база", "знаменател", "bulk", "json", "инвариант"):

@@ -592,16 +592,39 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 }
 /* Тот же минимум-шире-контента, что чинили у .co-grid: 340px не помещается
    на узких телефонах и уводит графики аналитики вбок. */
-.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:18px;margin-top:26px;align-items:start}
-.an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+/* Партнёр 2 сентября 2026 («на компьютере очень криво… чтобы одинаковые
+   были прямоугольники, ровные, равномерно распределённые»): карточки шли
+   auto-fit'ом разной высоты (align-items:start), а колонка значений в 44px
+   ломала «1,8 трлн» на две строки. Теперь на компьютере ровно три равные
+   колонки, карточки в ряду одной высоты, подпись под графиком прижата к
+   низу, значение не переносится. */
+.an-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:18px;margin-top:26px;align-items:stretch}
+@media(min-width:1000px){
+  .an-grid-main{grid-template-columns:repeat(3,minmax(0,1fr))}
+  /* Ряд собирается из карточек одной высоты (иначе рядом с десятью строками
+     стоит пять и полкарточки воздуха): по годам · сумма по годам · доля с
+     ценой; отрасли · темы · отрасли по сумме; крупнейшие · консультанты ·
+     серийные покупатели. «Статус» — один на всю ширину, в две колонки. */
+  .an-c-years{order:1}.an-c-sumyears{order:2}.an-c-discl{order:3}
+  .an-c-topind{order:4}.an-c-themes{order:5}.an-c-indmoney{order:6}
+  .an-c-topsum{order:7}.an-c-firms{order:8}.an-c-buyers{order:9}
+  /* .an-card.an-c-status, а не .an-c-status: правило .an-card{display:flex}
+     стоит НИЖЕ в файле и при равной специфичности побеждало бы — урок
+     «в CSS позже в файле значит сильнее». */
+  .an-card.an-c-status{order:10;grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;align-content:start}
+  .an-card.an-c-status>.label,.an-card.an-c-status>p{grid-column:1/-1}
+  #multiplesCard{order:11}
+}
+.an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;min-width:0}
 .an-card>.label{display:block;margin-bottom:16px}
-.an-row{display:grid;grid-template-columns:minmax(70px,150px) 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:13.5px}
+.an-card>p:last-child{margin-top:auto!important;padding-top:10px}
+.an-row{display:grid;grid-template-columns:minmax(70px,150px) minmax(0,1fr) auto;gap:10px;align-items:center;margin:7px 0;font-size:13.5px}
 /* Подпись столбца переносится на вторую строку, а не обрезается: «Искусственный ин…»
    и «Переговоры без н…» на 360px теряли ровно то слово, ради которого строка есть. */
 .an-key{color:var(--ink);overflow:hidden;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:normal;overflow-wrap:anywhere}
 .an-bar{height:9px;background:var(--paper2,#F0EFEA);border-radius:5px;overflow:hidden}
 .an-bar div{height:100%;background:linear-gradient(90deg,var(--accent),#33556B);border-radius:5px;min-width:3px;transform-origin:left;animation:wipe .7s var(--ease) both}
-.an-val{text-align:right;color:var(--muted)}
+.an-val{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .an-deal{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);text-decoration:none}
 .an-deal:last-of-type{border-bottom:none}
 .an-deal:hover .an-deal-t{color:var(--accent)}
@@ -1084,7 +1107,13 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fns-shell{margin:30px 0 38px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .fns-head{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;padding:24px 26px 18px;border-bottom:1px solid var(--line-soft)}
 .fns-head h2{font-family:var(--f-display);font-size:25px;font-weight:400;line-height:1.25;margin-top:5px}
-.fns-badge{flex:0 0 auto;border:1px solid #C5D4CC;color:var(--accent);padding:6px 10px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;border-radius:999px}
+.fns-badge{flex:0 0 auto;border:1px solid #C5D4CC;color:var(--accent);padding:6px 10px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;border-radius:999px;text-decoration:none}
+/* Партнёр 2 сентября 2026: «можно ли кликнуть на источник/форму и перейти на
+   релевантную страницу?» — плашка источника стала ссылкой на ту самую форму
+   на сайте Банка России (регномер банка и дата баланса) или на карточку
+   юрлица в ГИР БО ФНС по ИНН. Стрелка показывает, что это переход наружу. */
+a.fns-badge:hover{border-color:var(--accent);background:var(--paper2,#F0EFEA)}
+a.fns-badge::after{content:" ↗";letter-spacing:0}
 .fns-tabs,.account-tabs{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
 .fns-tabs::-webkit-scrollbar,.account-tabs::-webkit-scrollbar{display:none}
 .fns-tabs button,.account-tabs a{padding:13px 20px;white-space:nowrap;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line)}
@@ -2920,16 +2949,18 @@ function kindBadge(kind){
   const meta = KIND_BADGE_META[kind || dealKindOf("")];
   return meta ? `<span class="kind-badge ${meta.cls}">${meta.label}</span>` : "";
 }
-/* Подпись «сделка — май 2026» под заголовком. Не показывается, когда обе даты
-   в одном месяце (тогда она повторяла бы то, что уже стоит слева) и когда даты
-   сделки нет вовсе. */
+/* Подпись «дата сделки — май 2026» под заголовком. Не показывается, когда обе
+   даты в одном месяце (тогда она повторяла бы то, что уже стоит слева) и когда
+   даты сделки нет вовсе. Была «сделка — май 2026» — партнёр 2 сентября 2026:
+   «непонятно и некрасиво»; слева в строке стоит дата публикации, и без слова
+   «дата» читатель не понимал, что это за второй месяц. */
 function dealDateNote(d){
   const deal = String(d.date||"");
   if(!deal || deal==="unknown") return "";
   const pub = String(d.added||"");
   if(!pub || pub.slice(0,7)===deal.slice(0,7)) return "";
   const m = fmtMonthYear(deal);
-  return m ? ` · сделка — ${m}` : "";
+  return m ? ` · дата сделки — ${m}` : "";
 }
 function unifiedFeed(){
   const rowHtml = {
@@ -4991,7 +5022,7 @@ function bankFinanceHtml(entry){
     entry.as_of_profit?`прибыль нарастающим итогом на ${fmtDate(entry.as_of_profit)}`:"",
   ].filter(Boolean).join(", ");
   return `<section class="fns-shell reveal">
-    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы</h2></div><span class="fns-badge">Источник: Банк России</span></div>
+    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы</h2></div>${sourceBadge("Источник: Банк России", cbrFormUrl(entry.regnum, entry.as_of_balance), "Открыть форму 0409806 этого банка на сайте Банка России")}</div>
     <div class="fns-body">
       <div class="fns-metrics">${rows.map(([label,val,prev])=>`<div class="fns-metric"><span class="label">${label}</span><div class="v num">${fnsMoney(val)}</div>${prev!=null?`<div class="delta">${fnsDelta(val,prev)}</div>`:""}</div>`).join("")}</div>
       <p class="fns-disclaimer">Официальный баланс (форма 0409806) и отчёт о прибыли (форма 0409102), которые банк публикует перед Банком России, — не то же самое, что бухгалтерская отчётность через ФНС. Показатели относятся к юридическому лицу, не к консолидированной группе${dateBits?`; ${dateBits}`:""}.</p>
@@ -4999,6 +5030,18 @@ function bankFinanceHtml(entry){
   </section>`;
 }
 
+/* Плашка источника: ссылка на страницу источника, если адрес удалось собрать,
+   иначе прежняя надпись без ссылки. Адрес формы 806 у ЦБ: регномер банка и
+   месяц даты баланса (та же схема, что в pipeline/cbr_f806.py). */
+function cbrFormUrl(regnum, asOf){
+  if(!regnum) return "";
+  const m = String(asOf||"").match(/^(\d{4})-(\d{2})/);
+  return `https://www.cbr.ru/banking_sector/credit/coinfo/f806/?regnum=${regnum}`+(m?`&dt=${m[1]}${m[2]}`:"");
+}
+function sourceBadge(label, url, title){
+  return url ? `<a class="fns-badge" href="${url}" target="_blank" rel="noopener" title="${title||""}">${label}</a>`
+             : `<span class="fns-badge">${label}</span>`;
+}
 // Полный баланс (разделы I-III формы 806) — отдельный файл от bank_finance.json
 // (просьба владельца и партнёра 24 августа: «Активы и пассивы, 1-2
 // странички», не только два итога), грузится лениво и только на странице
@@ -5033,7 +5076,7 @@ function bankFullBalanceHtml(entry){
   }).join("");
   if(!sectionsHtml) return "";
   return `<section class="fns-shell reveal">
-    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Бухгалтерский баланс</h2></div><span class="fns-badge">Форма 0409806</span></div>
+    <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Бухгалтерский баланс</h2></div>${sourceBadge("Форма 0409806", cbrFormUrl(entry.regnum, entry.as_of||entry.as_of_balance), "Открыть эту форму на сайте Банка России")}</div>
     <div class="fns-body">
       ${sectionsHtml}
       <p class="fns-disclaimer">Публикуемая форма баланса на ${fmtDate(entry.as_of)}, целиком — разделы «Активы» и «Пассивы». Строки без данных за отчётный период не показаны; внебалансовые обязательства (гарантии, условные обязательства) в таблицу не входят.</p>
@@ -5138,7 +5181,7 @@ async function mountCompanyFns(companyId){
     if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
     if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
     mount.innerHTML=`<section class="fns-shell reveal">
-      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы и ЕГРЮЛ</h2></div><span class="fns-badge">Источник: ФНС</span></div>
+      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>Финансы и ЕГРЮЛ</h2></div>${sourceBadge("Источник: ФНС", e.inn?`https://bo.nalog.gov.ru/search?query=${encodeURIComponent(e.inn)}`:"", "Открыть отчётность этого юрлица в ГИР БО ФНС")}</div>
       ${data.entities.length>1?`<div class="fns-entity-switch">${data.entities.map((x,i)=>`<button class="chip ${i===entityIndex?"on":""}" data-fnsentity="${i}">${esc(x.entity.short_name||x.entity.legal_name)}</button>`).join("")}</div>`:""}
       <div class="fns-tabs"><button data-fnstab="overview" class="${tab==="overview"?"on":""}">Обзор</button><button data-fnstab="ownership" class="${tab==="ownership"?"on":""}">Участники</button><button data-fnstab="finance" class="${tab==="finance"?"on":""}">Финансы</button><button data-fnstab="registry" class="${tab==="registry"?"on":""}">ЕГРЮЛ</button><button data-fnstab="changes" class="${tab==="changes"?"on":""}">Изменения</button></div>
       <div class="fns-body">${content}<p class="fns-disclaimer">${esc(data.disclaimer||"")} Данные обновлены ${e.fetched_at?new Date(e.fetched_at).toLocaleDateString("ru-RU"):"по последней синхронизации"}.</p></div>
@@ -6135,8 +6178,8 @@ function renderAnalytics(){
     </svg>
     <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>В «Компасе» ${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года. Всё собрано из открытых источников: это то, что стало известно рынку, а не полная статистика.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
-  <div class="an-grid">
-    <div class="an-card reveal">
+  <div class="an-grid an-grid-main">
+    <div class="an-card an-c-years reveal">
       <span class="label">${anYear==="Все"?"Сделок по годам":`Сделок по месяцам, ${anYear}`}</span>
       ${byPeriod.map(([k,n],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${anYear==="Все"
@@ -6144,51 +6187,51 @@ function renderAnalytics(){
         : `${where}${all.length-yearOnly} ${plural(all.length-yearOnly,"сделка","сделки","сделок")} с известным месяцем${yearOnly?`; ещё у ${yearOnly} известен только год, на графике их нет`:""}. У части сделок это месяц новости, а не подписания.`}</p>
     </div>
     ${sumByPeriod.length?`
-    <div class="an-card reveal">
+    <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где стороны назвали цену в рублях. Оценки экспертов и суммы в валюте не учитываются.</p>
     </div>`:""}
-    <div class="an-card reveal">
+    <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки может быть две отрасли.</p>
     </div>
-    <div class="an-card reveal">
+    <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки, где стороны назвали цену в рублях, — таких ${rubDisclosed}. Оценки экспертов, стартовые цены незакрытых торгов и цены сорвавшихся сделок не учитываются.</p>
     </div>
-    <div class="an-card reveal">
+    <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>
       ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span></div><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Консультант известен у ${advisorDisclosed} ${plural(advisorDisclosed,"сделки","сделок","сделок")} из ${deals.length}. Фирмы раскрывают не все свои проекты, поэтому это не рейтинг.</p>
     </div>
-    <div class="an-card reveal">
+    <div class="an-card an-c-status reveal">
       <span class="label">Статус сделок</span>
       ${Object.entries(statuses).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/withStatus*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")}${ofTotal(withStatus,deals.length)}. Это последнее, что писали источники: если переговоры закончились без огласки, здесь они так и остались переговорами${statuses[STALE_TALKS]?`, поэтому сделки без новостей больше года показаны отдельно`:""}.${rareTotal?` Ещё ${rareTotal} ${plural(rareTotal,"сделка","сделки","сделок")} с редкими статусами (${rare.map(([k])=>k.toLowerCase()).join("; ")}) на график не попали.`:""}</p>
     </div>
     ${topBuyers.length?`
-    <div class="an-card reveal">
+    <div class="an-card an-c-buyers reveal">
       <span class="label">Серийные покупатели</span>
       ${topBuyers.map(([id,n],i)=>`<a class="an-deal" href="#/companies/${id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${co(id).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"покупка","покупки","покупок")}</span></a>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Компании, у которых в «Компасе» не меньше трёх покупок, — таких ${serialBuyers.length}. Показаны десять самых активных.</p>
     </div>`:""}
     ${themeRank.length?`
-    <div class="an-card reveal">
+    <div class="an-card an-c-themes reveal">
       <span class="label">Темы сделок</span>
       ${themeRank.map(([t,n],ri)=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/maxT*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Это особые признаки сделок, а не их виды: обычная покупка компании отдельной темой не считается. У одной сделки может быть несколько тем. Нажмите на тему, чтобы открыть список сделок.</p>
     </div>`:""}
     ${topIndMoney.length?`
-    <div class="an-card reveal">
+    <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где стороны назвали цену в рублях. Оценки экспертов и суммы в валюте не учитываются.</p>
     </div>`:""}
     ${disclYears.length?`
-    <div class="an-card reveal">
+    <div class="an-card an-c-discl reveal">
       <span class="label">Доля сделок с раскрытой суммой</span>
       ${disclYears.map(([y,v],ri)=>{const pct=Math.round(v.d/v.t*100);return `<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${pct}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${pct}%</span></div>`;}).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Доля сделок года, где стороны назвали цену. Оценки экспертов не считаются; годы, где сделок меньше 20, не показаны.</p>
@@ -6687,5 +6730,28 @@ refreshMe();
 
 route();
 </script>
+<!-- Yandex.Metrika counter -->
+<script>
+/* Яндекс Метрика, счётчик 112192428 — код из кабинета владельца (2 сентября
+   2026). Номер счётчика не секрет (он виден в исходнике любого сайта),
+   поэтому лежит здесь, а не в переменной окружения — урок про
+   TELEGRAM_CHANNEL_ID: несекретное значение в окружении — лишняя точка
+   отказа. Два отличия от кода из кабинета: trackHash — маршруты сайта это
+   #/…, без него Метрика видела бы один просмотр на весь визит; на localhost
+   счётчик не грузится — тесты и локальные запуски не должны попадать в
+   статистику и не должны зависеть от внешней сети. */
+const YANDEX_METRIKA_ID = 112192428;
+if (YANDEX_METRIKA_ID && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id='+YANDEX_METRIKA_ID, 'ym');
+  ym(YANDEX_METRIKA_ID, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true, trackHash:true});
+}
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112192428" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>

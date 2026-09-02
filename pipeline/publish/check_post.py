@@ -122,8 +122,8 @@ def check_digest(text):
         problems.append('на экране служебное слово (undefined/null/NaN)')
     if '/#/deal/' not in text:
         problems.append('в сводке нет ни одной сделки — рассказывать не о чем')
-    if 'не весь рынок' not in text:
-        problems.append('потеряна оговорка о том, что это не весь рынок')
+    if 'публично доступн' not in text:
+        problems.append('потеряна оговорка о том, что мы собираем только публично доступные сделки')
     return problems
 
 
@@ -166,10 +166,10 @@ def _self_check():
     # Сводка месяца проверяется своими правилами: у неё нет строк «Предмет/
     # Покупатель», и общая проверка забраковала бы любую.
     digest = ('📊 <b>Рынок в августе</b>\n\n1. <a href="https://x/#/deal/g1">Сделка</a> — 1 млрд ₽\n'
-              'Считаем по открытым источникам — это не весь рынок.')
+              'Мы собираем только сделки, информация о которых публично доступна.')
     assert not check_digest(digest), check_digest(digest)
     assert check(digest), 'общая проверка не должна признавать сводку постом о сделке'
-    assert any('ни одной сделки' in p for p in check_digest('Просто текст, это не весь рынок.'))
+    assert any('ни одной сделки' in p for p in check_digest('Просто текст, информация публично доступна.'))
     assert any('оговорка' in p for p in check_digest('<a href="https://x/#/deal/g1">Сделка</a>'))
 
 
