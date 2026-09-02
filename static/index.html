@@ -4277,6 +4277,12 @@ function renderDeal(id, qs, previewCard){
   const kind = KIND_LABELS[kindKey] || KIND_LABELS.acquisition;
   const buyerName = d.buyer && co(d.buyer) ? co(d.buyer).name : null;
   const targetName = d.target && co(d.target) ? co(d.target).name : null;
+  // Кнопка вкладки «Экономист» и решение, что рисовать ВНУТРИ неё (строка ниже,
+  // в ветке lens==="eco"), должны опираться на одно и то же условие — иначе
+  // кнопка не появляется вовсе, и уже написанный код показа `extra` при пустых
+  // eco.* (см. комментарий там) становится недостижимым. Ровно это нашлось на
+  // 15 карточках 2 сентября: extraHtml(d) добавляли туда, а кнопку — нет.
+  const showEcoTab = ecoHasContent(d) || !!extraHtml(d);
   app.innerHTML = `
   <a class="back reveal" href="#/">← Все сделки</a>
   <div class="d-head reveal">
@@ -4299,7 +4305,7 @@ function renderDeal(id, qs, previewCard){
   ${sparseNoticeHtml(d)}
   <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
     <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
-    ${ecoHasContent(d)?`<button data-l="eco" class="${lens==="eco"?"on":""}">Экономист</button>`:""}
+    ${showEcoTab?`<button data-l="eco" class="${lens==="eco"?"on":""}">Экономист</button>`:""}
     ${lawHasContent(d)?`<button data-l="law" class="${lens==="law"?"on":""}">Юрист</button>`:""}
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
