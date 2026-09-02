@@ -117,7 +117,9 @@
    "pending_since": "2026-09-02T08:27:43+00:00",
    "buyer": "ga2cfae5b",
    "reviewed": "2026-09-02",
-   "deep_researched": "2026-09-02"
+   "deep_researched": "2026-09-02",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gaee6179c",
@@ -188,7 +190,9 @@
    "buyer": "g12111389",
    "seller": "ООО «Лидер строй»",
    "reviewed": "2026-09-02",
-   "deep_researched": "2026-09-02"
+   "deep_researched": "2026-09-02",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
