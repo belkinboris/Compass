@@ -2155,8 +2155,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8c5c784d (общие редкие слова: иностр, рф) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -4803,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d22091041",
+   "draft_id": "d19391304",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4833,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d42781603",
+   "draft_id": "d84415844",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4861,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d49351141",
+   "draft_id": "d15857300",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4900,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d15181167",
+   "draft_id": "d73616602",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4928,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d55569620",
+   "draft_id": "d22232365",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4956,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d54102738",
+   "draft_id": "d32487442",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4984,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d52034065",
+   "draft_id": "d63013079",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5011,7 @@
    ]
   },
   {
-   "draft_id": "d85035297",
+   "draft_id": "d72253653",
    "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
@@ -5042,7 +5041,7 @@
    ]
   },
   {
-   "draft_id": "d91732446",
+   "draft_id": "d31057546",
    "title": "Аукцион по приватизации актива экс-владельца «Макфы» вновь провалился",
    "date": "2026-09-02",
    "src": [
@@ -5070,7 +5069,7 @@
    ]
   },
   {
-   "draft_id": "d44784194",
+   "draft_id": "d76686630",
    "title": "В Тюмени за миллионы продают продают полуразрушенную гаупвахту на набережной",
    "date": "2026-09-02",
    "src": [
@@ -5098,7 +5097,7 @@
    ]
   },
   {
-   "draft_id": "d67686621",
+   "draft_id": "d28386525",
    "title": "Под Челябинском продается бизнес с миллиардами прибыли. Скрин",
    "date": "2026-09-02",
    "src": [
@@ -5126,7 +5125,7 @@
    ]
   },
   {
-   "draft_id": "d24459367",
+   "draft_id": "d45587109",
    "title": "В Перми через сайт объявлений продают стационар больницы на Никулина",
    "date": "2026-09-02",
    "src": [
@@ -5154,91 +5153,7 @@
    ]
   },
   {
-   "draft_id": "d42088835",
-   "title": "Инвестиции в основной капитал в РФ в I полугодии упали на 9,9%",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112797"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62000081",
-   "title": "В России инвестиции в основной капитал в I полугодии снизились на 9,9%",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28072175"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60236021",
-   "title": "РЖД начали продавать билеты на поезда дальнего следования за цифровые рубли",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260902/rzhd-872947519.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64647339",
+   "draft_id": "d72472904",
    "title": "«Сбер» не планирует проводить IPO компаний экосистемы — ситуация на рынке неблагоприятная для оценки бизнеса",
    "date": "2026-09-02",
    "src": [
@@ -5279,13 +5194,167 @@
    ]
   },
   {
-   "draft_id": "d17356625",
-   "title": "Бар «Ковер» в центре Тюмени выставили на продажу",
+   "draft_id": "d19502127",
+   "title": "В Крыму будут продавать топливо по четыре часа в сутки",
    "date": "2026-09-02",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053123705"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6a98500be4ca7371d205d173"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97310780",
+   "title": "«Яндекс Книги» добавили покупку электронных и аудиокниг за отдельную плату — без подписки",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/services/3117934-yandeks-knigi-prodazha-elektronnykh-i-audioknig?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Wildberries, Ozon, МТС, «Яндекс» , РСХБ, Совкомбанк&nbsp;—&n» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d62173949",
+   "title": "Билеты на поезда дальнего следования теперь можно купить за цифровые рубли",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28072297"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d31744931",
+   "title": "Кабмин Болгарии разрешил АЭС «Козлодуй» купить у России оборудование",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28072303"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16926867",
+   "title": "Esteo стал лидером рынка премиальных гибридов в России — за август бренд продал 1,5 тыс. автомобилей",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/esteo-stal-liderom-rynka-premialnyh-gibridov-v-rossii-za-avgust-brend-prodal-15-tys-avtomobilej/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-02",
+     "title": "Сделка завершена",
+     "note": "Российский автомобильный бренд Esteo по итогам августа 2026 года занял первое место в премиальном сегменте российского рынка гибридов, сообщили в компании. За месяц на учёт поставили 933 гибридных автомобиля марки. В общей сложности дилеры реализовали 1516…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/esteo-stal-liderom-rynka-premialnyh-gibridov-v-rossii-za-avgust-brend-prodal-15-tys-avtomobilej/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "1,5 тыс. автомобилей",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "1,5 тыс. автомобилей",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d49108692",
+   "title": "В России призвали устранить лазейки при продаже просроченной еды",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/02/v-rossii-prizvali-ustranit-lazeyki-pri-prodazhe-prosrochennoy-edy/"
     ]
    ],
    "sum": null,
