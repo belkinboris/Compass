@@ -66,6 +66,15 @@ def has(value):
     return bool(v) and not PLACEHOLDER.match(v)
 
 
+def _plural(n, one, few, many):
+    n = abs(int(n))
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
 def esc(text):
     return (str(text or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
 
@@ -703,7 +712,12 @@ def render(deal, companies, updates=(), today=None, fin=None):
         lines.append('')
         lines.append('Источник: <a href="%s">%s</a>' % (esc(src[0][1]), esc(src[0][0])))
         if len(src) > 1:
-            lines.append('Ещё источников: %d' % (len(src) - 1))
+            # «Ещё источников: 2» — пустая строка: непонятно, где они и
+            # зачем о них знать (замечание владельца 3 сентября 2026).
+            # Говорим то же самое, но так, чтобы читателю было куда пойти.
+            more = len(src) - 1
+            lines.append('Ещё %d %s — в карточке сделки'
+                         % (more, _plural(more, 'источник', 'источника', 'источников')))
 
     # «⟳ Обновлено» — для ПРАВКИ уже опубликованного поста. У старой сделки то
     # же самое уже сказано шапкой «Новое о сделке», и повторять незачем.

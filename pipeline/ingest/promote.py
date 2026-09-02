@@ -76,6 +76,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 
 import match as matcher                                  # noqa: E402
 import source_names                                      # noqa: E402
+import tag_themes                                        # noqa: E402  (pipeline/ уже в sys.path)
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -506,6 +507,11 @@ def to_card(draft, deal_id):
             for ev in draft['events']]
     if draft.get('seller'):
         card['seller_src'] = 'text'
+    # Темы — сразу при рождении карточки, по тому, что уже известно
+    # (заголовок и предмет). Дочитывание позже допишет остальные, когда
+    # наполнит eco/law (review.py). До 3 сентября 2026 темы не проставлял
+    # никто: у августа их было 0 из 44.
+    tag_themes.add_themes(card)
     source_url = next((s[1] for s in card.get('src', []) if len(s) > 1 and str(s[1]).startswith('http')), None)
     if source_url:
         evidence = {}

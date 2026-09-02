@@ -4391,6 +4391,19 @@ def test_monthly_digest_counts_only_named_ruble_prices():
     assert monthly_digest.rub_billions("$2,42 млрд") is None
 
 
+def test_monthly_digest_shows_themes_only_when_they_say_something(base):
+    """Строка «продажа с торгов — 1» не наблюдение, а случайность: тема идёт
+    в сводку от двух сделок, а весь раздел — от двух таких тем."""
+    deals = [{"id": "a%d" % i, "title": "Сделка %d" % i, "date": "2030-05-0%d" % (i + 1),
+              "themes": ["Продажа с торгов"] if i < 3 else (["IPO / SPO"] if i < 5 else [])}
+             for i in range(9)]
+    st = monthly_digest.stats({"deals": deals, "companies": {}}, 2030, 5)
+    assert st["themes"] == [("Продажа с торгов", 3), ("IPO / SPO", 2)]
+    # Одна тема с двумя сделками — не «особенности месяца».
+    lonely = [dict(d, themes=["Продажа с торгов"] if i < 2 else []) for i, d in enumerate(deals)]
+    assert monthly_digest.stats({"deals": lonely, "companies": {}}, 2030, 5)["themes"] == []
+
+
 def test_monthly_digest_skips_a_month_without_enough_deals(base):
     """Пост «за месяц две сделки» — не аналитика, а признак того, что приток
     стоял: такой месяц сводкой не выпускается вовсе."""
@@ -4474,3 +4487,76 @@ def test_monthly_digest_is_proofread_by_its_own_rules(base):
     text = monthly_digest.render(base, y, m)
     assert not check_post.check_digest(text), check_post.check_digest(text)
     assert check_post.check(text), "общая проверка не должна признавать сводку постом о сделке"
+
+
+# ---------- темы: приток и дочитывание проставляют их сами (3 сентября 2026) ----------
+
+def test_new_card_is_born_with_themes():
+    """До 3 сентября 2026 темы не проставлял никто после промоута: у августа
+    их стояло 0 из 44. Карточка обязана получать тему сразу, по тому, что
+    уже известно из заголовка."""
+    import promote
+    card = promote.to_card({"date": "2026-09-01", "title": "IPO «Тест» на Московской бирже",
+                            "src": [["Ъ", "https://k.ru/1"]], "events": []}, "gtest")
+    assert card.get("themes") == ["IPO / SPO"], card.get("themes")
+
+
+def test_themes_are_added_but_never_removed():
+    """Поле `themes` давно живёт своей жизнью: у 82 карточек стоят темы,
+    которых нынешние правила не подтверждают, и среди них есть верные.
+    Дописываем, не удаляя."""
+    import tag_themes
+    deal = {"title": "Обычная покупка доли", "themes": ["Поставлено человеком"]}
+    assert tag_themes.add_themes(deal) == []
+    assert deal["themes"] == ["Поставлено человеком"]
+    ipo = {"title": "IPO «Тест» на бирже", "themes": ["Поставлено человеком"]}
+    assert tag_themes.add_themes(ipo) == ["IPO / SPO"]
+    assert ipo["themes"] == ["Поставлено человеком", "IPO / SPO"]
+
+
+def test_theme_rules_do_not_confuse_an_exchange_with_an_auction():
+    """«Торги» — это и продажа с молотка, и биржа (урок CLAUDE.md). Голое
+    слово ловило «приостановку торгов на бирже» и «30 дней после начала
+    торгов» у IPO."""
+    import tag_themes
+    exchange = {"title": "IPO банка", "eco": {"share": "через 30 дней после начала торгов на бирже"}}
+    assert "Продажа с торгов" not in tag_themes.themes_of(exchange)
+    auction = {"title": "Продажа завода", "eco": {"share": "актив продан на открытых торгах"}}
+    assert "Продажа с торгов" in tag_themes.themes_of(auction)
+
+
+def test_theme_is_about_the_deal_itself_not_a_word_in_the_text():
+    """«IPO» и «ИИ» ловились в любом месте текста: карточка о покупке доли
+    получала «IPO / SPO» из-за фразы «компания рассматривает возможность
+    проведения IPO», а карточка о продаже аптечной сети — «Искусственный
+    интеллект» из-за «сосредоточиться на разработках в области ИИ»."""
+    import tag_themes
+    someone_elses_ipo = {"title": "VK приобрела 25% Р7",
+                         "eco": {"share": "компания рассматривает возможность проведения IPO"}}
+    assert "IPO / SPO" not in tag_themes.themes_of(someone_elses_ipo)
+    assert "IPO / SPO" in tag_themes.themes_of({"title": "IPO «Группа Астра» на Московской бирже"})
+    ai_in_passing = {"title": "Сбер продал 45% Еаптеки",
+                     "eco": {"rationale": "сосредоточиться на разработках в области ИИ"}}
+    assert "Искусственный интеллект" not in tag_themes.themes_of(ai_in_passing)
+    assert "Искусственный интеллект" in tag_themes.themes_of({"title": "ИИ-платформа Wegosty привлекла 23 млн ₽"})
+
+
+def test_bankruptcy_theme_is_not_set_by_a_denial():
+    """У карточки «Шереметьево приобрёл активы Домодедово» в тексте прямо
+    написано «(по иску Генпрокуратуры, не банкротство)» — и тема ставилась
+    именно на этих словах."""
+    import tag_themes
+    denial = {"title": "Шереметьево приобрело активы",
+              "eco": {"share": "по иску Генпрокуратуры, не банкротство"}}
+    assert "Банкротство / долги" not in tag_themes.themes_of(denial)
+
+
+def test_post_says_where_the_other_sources_are(base):
+    """«Ещё источников: 2» — пустая информация: непонятно, где они
+    (замечание владельца 3 сентября 2026)."""
+    deal = next(d for d in base["deals"]
+                if len([s for s in (d.get("src") or [])
+                        if len(s) > 1 and str(s[1]).startswith("http")]) > 1)
+    text = format_post.render(deal, base["companies"])
+    assert "Ещё источников:" not in text
+    assert re.search(r"Ещё \d+ источник\w* — в карточке сделки", text), text[-200:]

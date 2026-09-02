@@ -67,6 +67,13 @@ MONTHS_NOM = ('январь', 'февраль', 'март', 'апрель', 'м�
 
 TOP_DEALS = 5
 TOP_INDUSTRIES = 3
+TOP_THEMES = 3
+# Тема попадает в сводку, только если ею помечено больше одной сделки: строка
+# «продажа с торгов — 1» не наблюдение, а случайность. И весь раздел
+# показывается, только когда таких тем хотя бы две, — одна тема с двумя
+# сделками не «особенности месяца», а одна сделка с ярлыком.
+MIN_THEME_DEALS = 2
+MIN_THEMES_TO_SHOW = 2
 # Сводка выходит, только если месяц не пустой: пост «за месяц 2 сделки» не
 # аналитика, а признак того, что приток стоял.
 MIN_DEALS = 8
@@ -166,6 +173,13 @@ def stats(base, year, month):
         if bid and companies.get(bid):
             buyers[bid] = buyers.get(bid, 0) + 1
 
+    themes = {}
+    for d in cur:
+        for t in (d.get('themes') or []):
+            themes[t] = themes.get(t, 0) + 1
+    themes = [(t, n) for t, n in sorted(themes.items(), key=lambda kv: (-kv[1], kv[0]))
+              if n >= MIN_THEME_DEALS][:TOP_THEMES]
+
     closed = sum(1 for d in cur if str(d.get('status') or '') == 'Закрыта')
     talks = sum(1 for d in cur if str(d.get('status') or '') in ('Обсуждается', 'Подписана'))
     return {
@@ -179,6 +193,7 @@ def stats(base, year, month):
         'industries': sorted(industries.items(), key=lambda kv: (-kv[1], kv[0]))[:TOP_INDUSTRIES],
         'serial_buyers': sorted(((companies[b]['name'], n) for b, n in buyers.items() if n >= 2),
                                 key=lambda kv: -kv[1])[:3],
+        'themes': themes if len(themes) >= MIN_THEMES_TO_SHOW else [],
         'closed': closed, 'talks': talks,
     }
 
@@ -221,6 +236,10 @@ def render(base, year, month):
     if st['industries']:
         parts = ['%s — %d' % (name, cnt) for name, cnt in st['industries']]
         lines.append('<b>Где сделок больше всего:</b> %s.' % esc(', '.join(parts)))
+
+    if st['themes']:
+        parts = ['%s — %d' % (name, cnt) for name, cnt in st['themes']]
+        lines.append('<b>Особенности месяца:</b> %s.' % esc(', '.join(parts)))
 
     if st['serial_buyers']:
         parts = ['%s (%d)' % (name, cnt) for name, cnt in st['serial_buyers']]

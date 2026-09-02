@@ -5994,7 +5994,16 @@ function renderAnalytics(){
   // В карточку «по раскрытой сумме» не должны попадать экспертные оценки и стартовые
   // цены торгов: это не раскрытая сторонами цена, а чужая прикидка.
   const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
-  const rubSum = deals.map(d=>({...d,_b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(d=>d._b>0);
+  /* Подпись под этой карточкой год обещала, что стартовые цены торгов не в
+     счёт, а код их считал: у незакрытых торгов в `sum` стоит цена, которую
+     назначил ПРОДАВЕЦ, а не та, о которой договорились стороны (пример —
+     лот «Хортицы» на 7,8 млрд ₽, торги ещё шли). У сорвавшейся сделки цифра
+     тоже есть, а сделки за ней нет. Слово «стартовая цена» в тексте суммы
+     `isEstimate` уже ловил — но только когда оно там написано; признак
+     надёжнее берётся из типа и статуса самой сделки. */
+  const countsAsPrice = d => d.status !== "Не состоялась"
+    && !(d.type === "Продажа с торгов" && d.status !== "Закрыта");
+  const rubSum = deals.map(d=>({...d,_b:(isEstimate(d.sum)||!countsAsPrice(d))?0:parseB(d.sum)})).filter(d=>d._b>0);
   const rubDisclosed = rubSum.length;
   const topSum = rubSum.slice().sort((a,b)=>b._b-a._b).slice(0,10);
   // П3-16(а): та же временная шкала, что у счётчика сделок выше, но по СУММЕ —
@@ -6148,7 +6157,7 @@ function renderAnalytics(){
     <div class="an-card reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки, где стороны назвали цену в рублях, — таких ${rubDisclosed}. Оценки экспертов и стартовые цены торгов не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки, где стороны назвали цену в рублях, — таких ${rubDisclosed}. Оценки экспертов, стартовые цены незакрытых торгов и цены сорвавшихся сделок не учитываются.</p>
     </div>
     <div class="an-card reveal">
       <span class="label">Консультанты</span>

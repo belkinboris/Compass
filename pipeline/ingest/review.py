@@ -52,6 +52,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
 
 import draft as drafter                                   # noqa: E402
+import tag_themes                                         # noqa: E402
 import link_named_parties_to_existing_profiles as linker  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -981,6 +982,22 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
                                                  'method': 'human_review', 'url': url}]
             if not card['party_evidence']:
                 card.pop('party_evidence')
+
+    # ТЕМЫ — ПОСЛЕ ПРАВОК, НЕ ДО. Тема считается по заголовку и полям
+    # eco/law, а дочитывание как раз их и наполняет: карточка, пришедшая
+    # притоком с одним заголовком, получает «Правкомиссия» или «Продажа с
+    # торгов» только теперь, когда факт записан. Замер 3 сентября 2026: у
+    # июля тема стояла у 1 карточки из 41, у августа — у 0 из 44, потому
+    # что после промоута темы не пересчитывал никто. Дописываем, ничего не
+    # удаляя (см. tag_themes.add_themes).
+    themed = []
+    for cid in sorted({f['id'] for f, _ in ok} | set(to_mark) | set(to_mark_deep)
+                      | set(to_mark_weekly) | set(to_mark_followup)):
+        if cid in cards:
+            for t in tag_themes.add_themes(cards[cid]):
+                themed.append((cid, t))
+    for cid, t in themed:
+        print('  ТЕМА     %s + %s' % (cid, t))
 
     # Отметка прочтения: и на карточки с правками (включая применённые в
     # прошлых прогонах — их читали, просто штампа тогда ещё не было), и на
