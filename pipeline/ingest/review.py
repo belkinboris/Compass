@@ -456,6 +456,20 @@ def typo_flat(s):
     return re.sub(r'\s+', ' ', s).strip()
 
 
+def fix_fingerprint(value):
+    """Короткий отпечаток значения правки — с точностью до типографики.
+
+    Нужен вычитке (pipeline/proofread.py): вычитанное поле перестаёт
+    совпадать с `new` записи таблицы посимвольно, и карточка запоминает
+    отпечатки записей, применённых ДО вычитки, в `proofread_absorbed`.
+    Отпечаток, а не сама запись, — чтобы не тащить в базу второй экземпляр
+    текста; с точностью до типографики — по той же причине, что `typo_flat`
+    в `already_applied`."""
+    import hashlib
+    text = value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, sort_keys=True)
+    return hashlib.sha1(typo_flat(text).encode('utf-8')).hexdigest()[:12]
+
+
 def already_applied(fix, card):
     """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
     if fix['field'] == 'src':
@@ -465,7 +479,18 @@ def already_applied(fix, card):
         return True
     if current is None or fix['new'] is None:
         return False
-    return typo_flat(current) == typo_flat(fix['new'])
+    if typo_flat(current) == typo_flat(fix['new']):
+        return True
+    # ВЫЧИТКА (2 сентября 2026). Поле переписано редактором, и совпадать с
+    # `new` оно больше не будет никогда — но факт, который правка внесла,
+    # стоит в нём по-прежнему (proofread.py проверяет числа и имена). Запись
+    # считается применённой, если её отпечаток лежит в `proofread_absorbed`
+    # карточки: туда попадают ТОЛЬКО записи, которые были применены до
+    # вычитки (proofread.py отказывает в записи, пока есть неприменённые).
+    # Запись, добавленная после вычитки, отпечатка не имеет и проверяется
+    # как обычно — иначе `--write` молча пропускал бы её навсегда.
+    absorbed = (card.get('proofread_absorbed') or {}).get(fix['field']) or []
+    return fix_fingerprint(fix['new']) in absorbed
 
 
 def check(fix, card, texts, companies, inds, urls=frozenset()):
