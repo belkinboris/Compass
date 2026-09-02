@@ -75,30 +75,49 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 # компаний. create_all создаёт только НЕДОСТАЮЩИЕ таблицы и никогда не трогает
 # существующие данные — безопасно и на пустой sqlite для разработки, и на
 # уже заполненном Postgres на Timeweb.
+def _ensure_user_columns(db_engine) -> None:
+    """Колонки users, которых нет в таблице, созданной до их появления в модели.
+
+    password_hash добавлен в User 2 августа — create_all его на уже
+    СУЩЕСТВОВАВШЕЙ (до этой даты) таблице users не создаст: он создаёт
+    только недостающие ТАБЛИЦЫ целиком, а не недостающие колонки в уже
+    существующих. `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` — синтаксис
+    только Postgres, на SQLite это просто синтаксическая ошибка (проверено
+    здесь же: колонка молча не добавлялась). Проверяем через инспектор
+    SQLAlchemy — он одинаково работает на обоих диалектах — и добавляем
+    обычным ADD COLUMN без IF NOT EXISTS, который тоже понимают оба.
+    Вынесено в функцию с параметром-движком, чтобы миграцию можно было
+    проверить тестом на отдельной базе со «старой» таблицей.
+    """
+    with db_engine.begin() as conn:
+        cols = {c["name"] for c in inspect(conn).get_columns("users")}
+        if "password_hash" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(200)"))
+        # full_name/company/position добавлены 2 августа тем же способом —
+        # см. комментарий выше про password_hash, тот же диалект-независимый приём.
+        for col in ("full_name", "company", "position"):
+            if col not in cols:
+                conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} VARCHAR(200)"))
+        # approved добавлен 2 сентября (вход по заявке, ACCESS_GATE). Всем
+        # УЖЕ существующим аккаунтам ставим True — иначе владелец и партнёр,
+        # зарегистрировавшиеся до гейта, оказались бы за дверью, которую
+        # сами же и держат. Значение задаём отдельным UPDATE с параметром, а
+        # не `DEFAULT TRUE` в ALTER: литерал TRUE понимают не все версии
+        # SQLite, а `DEFAULT 1` не примет Postgres для BOOLEAN — параметр
+        # SQLAlchemy привязывает верно для обоих диалектов.
+        if "approved" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN approved BOOLEAN"))
+            conn.execute(text("UPDATE users SET approved = :yes WHERE approved IS NULL"), {"yes": True})
+
+
 @app.on_event("startup")
 def _create_account_tables():
     try:
         DBBase.metadata.create_all(engine)
-        # password_hash добавлен в User 2 августа — create_all его на уже
-        # СУЩЕСТВОВАВШЕЙ (до этой даты) таблице users не создаст: он создаёт
-        # только недостающие ТАБЛИЦЫ целиком, а не недостающие колонки в уже
-        # существующих. `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` — синтаксис
-        # только Postgres, на SQLite это просто синтаксическая ошибка (проверено
-        # здесь же: колонка молча не добавлялась). Проверяем через инспектор
-        # SQLAlchemy — он одинаково работает на обоих диалектах — и добавляем
-        # обычным ADD COLUMN без IF NOT EXISTS, который тоже понимают оба.
         try:
-            with engine.begin() as conn:
-                cols = {c["name"] for c in inspect(conn).get_columns("users")}
-                if "password_hash" not in cols:
-                    conn.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(200)"))
-                # full_name/company/position добавлены 2 августа тем же способом —
-                # см. комментарий выше про password_hash, тот же диалект-независимый приём.
-                for col in ("full_name", "company", "position"):
-                    if col not in cols:
-                        conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} VARCHAR(200)"))
+            _ensure_user_columns(engine)
         except Exception as e:
-            logger.error("не удалось добавить password_hash в users: %s", e)
+            logger.error("не удалось добавить колонки в users: %s", e)
         # chat_id/reply_message_id добавлены в moderation_decisions 22 августа
         # для ответа рутины реплаем на заметку (раздел C MILESTONES_BRIEF.md) —
         # тот же диалект-независимый приём инспектора, что и выше для users.
@@ -244,6 +263,16 @@ def get_db():
 
 
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
+
+# ВХОД ПО ЗАЯВКЕ — этап закрытого тестирования (просьба владельца 2 сентября
+# 2026: «как в Автопосте»). Пока включено, посетитель без входа видит вместо
+# любого экрана сайта блок «Войти / Запросить доступ»; регистрация создаёт
+# аккаунт с approved=False и шлёт заявку в Telegram-консоль, где владелец или
+# партнёр нажимает «Одобрить» — только после этого вход по этим данным
+# работает. По умолчанию ВКЛЮЧЕНО (на боевом хосте переменной нет), выключить
+# — `ACCESS_GATE=0` в окружении или одна правка здесь. Гейт визуальный: API
+# сделок и компаний не закрываются, закрыт только вход в аккаунт.
+ACCESS_GATE = os.environ.get("ACCESS_GATE", "1") == "1"
 
 # «Компания сегодня» не показывает отчётность старше этого числа лет от
 # текущего года — правило владельца от 18 августа 2026 после жалобы на
@@ -675,6 +704,35 @@ def _review_chat_ids() -> list[str]:
     return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()]
 
 
+def _notify_access_request(user: User) -> None:
+    """Заявка на доступ — в Telegram-консоль основателей, с кнопками
+    «Одобрить»/«Отклонить» (callback_data `acc:<id>:ok|no`, разбирается в
+    telegram_webhook рядом с `mod:`). Тот же путь, что у обратной связи
+    ассистента: `_review_chat_ids()` + `notification_service.tg_api`. Сбой
+    отправки регистрацию не роняет — заявка уже в таблице, а без токена
+    (локальная разработка, тесты) вызов молча ничего не делает."""
+    try:
+        chats = _review_chat_ids()
+        if not chats:
+            logger.warning("заявка на доступ #%s: консоль не настроена, в Telegram не ушла", user.id)
+            return
+        when = datetime.now(timezone(timedelta(hours=3))).strftime("%d.%m.%Y %H:%M МСК")
+        text = "\n".join([
+            f"🔑 Заявка на доступ: {user.full_name or '—'}, "
+            f"{user.company or 'компания не указана'}, {user.position or 'должность не указана'}",
+            f"Почта: {user.email}",
+            f"Отправлена: {when}",
+        ])
+        keys = [[{"text": "✅ Одобрить", "callback_data": "acc:%d:ok" % user.id},
+                 {"text": "🗑 Отклонить", "callback_data": "acc:%d:no" % user.id}]]
+        for chat in chats:
+            notification_service.tg_api("sendMessage", chat_id=chat, text=text,
+                                        reply_markup={"inline_keyboard": keys},
+                                        disable_web_page_preview=True)
+    except Exception as exc:  # noqa: BLE001 — регистрация важнее уведомления
+        logger.error("заявка на доступ #%s: не удалось отправить в Telegram: %s", user.id, exc)
+
+
 def _forward_note_to_console(row: AssistantFeedback) -> None:
     chats = _review_chat_ids()
     if not chats or not row.note:
@@ -815,12 +873,21 @@ def _current_user(request: Request, db=Depends(get_db)) -> User | None:
     return auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
 
 
+GATE_PENDING_TEXT = "Заявка получена, доступ откроем после проверки. Попробуйте войти позже."
+
+
 @app.post("/api/auth/register")
 def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
     user, err = auth.register_user(db, req.email, req.password, req.full_name,
-                                    company=req.company, position=req.position, role=req.role)
+                                    company=req.company, position=req.position, role=req.role,
+                                    approved=not ACCESS_GATE)
     if not user:
         return JSONResponse({"error": err}, status_code=400)
+    if ACCESS_GATE:
+        # Заявка, а не вход: сессию не ставим, владельцу уходит сообщение с
+        # кнопками. Войти человек сможет после «Одобрить» (см. telegram_webhook).
+        _notify_access_request(user)
+        return {"ok": True, "pending": True}
     cookie = auth.create_session(db, user)
     response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
                          httponly=True, samesite="lax", secure=COOKIE_SECURE)
@@ -832,6 +899,10 @@ def login(req: LoginRequest, response: Response, db=Depends(get_db)):
     user, err = auth.authenticate(db, req.email, req.password)
     if not user:
         return JSONResponse({"error": err}, status_code=400)
+    if ACCESS_GATE and not user.approved:
+        # Пароль верный, но заявка ещё не одобрена (или отклонена — снаружи это
+        # одно и то же «доступ не открыт», отклонённых не удаляем и не выдаём).
+        return JSONResponse({"error": GATE_PENDING_TEXT, "pending": True}, status_code=403)
     cookie = auth.create_session(db, user)
     response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
                          httponly=True, samesite="lax", secure=COOKIE_SECURE)
@@ -854,11 +925,14 @@ def me(user: User | None = Depends(_current_user)):
     # load resource: 401» в консоль при КАЖДОЙ загрузке страницы — что прямо
     # нарушает правило «в консоли нет ошибок» (test_ui.py) для анонимного
     # визитора, то есть почти всегда.
+    # gate — включён ли вход по заявке: по нему интерфейс решает, показывать
+    # сайт или экран «Войти / Запросить доступ» (см. ACCESS_GATE).
     if not user:
-        return {"logged_in": False}
+        return {"logged_in": False, "gate": ACCESS_GATE}
     return {"logged_in": True, "email": user.email, "role": user.role.value,
             "tier": user.tier.value, "is_verified": user.is_verified,
-            "full_name": user.full_name, "company": user.company, "position": user.position}
+            "full_name": user.full_name, "company": user.company, "position": user.position,
+            "gate": ACCESS_GATE, "approved": bool(user.approved)}
 
 
 @app.patch("/api/me")
@@ -1494,6 +1568,32 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             _send_queue_batch(chat, kind)
             return {"ok": True}
 
+        # Заявка на доступ к сайту (ACCESS_GATE): «Одобрить»/«Отклонить» под
+        # сообщением из _notify_access_request. В отличие от `mod:`, решение
+        # применяется ЗДЕСЬ ЖЕ, без таблицы и рутины: аккаунты живут в этой
+        # же базе, а не в git-файле. Право решать — по отправителю
+        # (from.id), как и у модерации: в общей группе chat.id один на всех.
+        acc = re.match(r"^acc:(\d{1,12}):(ok|no)$", str(callback.get("data") or ""))
+        if acc:
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Решать могут только владелец и партнёр.")
+                return {"ok": True}
+            applicant = db.get(User, int(acc.group(1)))
+            if not applicant:
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Этого аккаунта уже нет — заявку отозвали удалением.")
+                return {"ok": True}
+            # Отклонённый остаётся в базе с approved=False: повторная заявка
+            # тем же адресом не создаст дубля (почта уникальна), а вход
+            # отвечает тем же «доступ не открыт».
+            applicant.approved = acc.group(2) == "ok"
+            db.commit()
+            _mark_decided(callback, "acc_ok" if applicant.approved else "acc_no")
+            return {"ok": True}
+
         # [\w~-]: `~` — разделитель id сделки и вида этапа у вехи
         # («<id>~<kind>», раздел A, 22 августа) — id сделок сами бывают с
         # дефисами, поэтому обычный `-` для разделителя не годится, а `:`
@@ -1870,6 +1970,8 @@ _VERDICT_LABEL = {
     "discard": "🗑 Выкинута — не выйдет ни на сайт, ни в канал",
     "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
     "take": "✅ Признана сделкой — уйдёт в работу", "drop": "🗑 Отброшена как не-сделка",
+    "acc_ok": "✅ Доступ открыт — человек может войти",
+    "acc_no": "🗑 Отклонено — доступ не открыт",
 }
 
 

@@ -160,3 +160,27 @@ def test_invalid_passwords_are_rejected(bad):
 
 def test_valid_password_passes():
     assert auth.valid_password("восемь-символов-и-больше")
+
+
+# ==================== Вход по заявке (ACCESS_GATE) ====================
+
+def test_register_user_can_be_created_as_a_pending_request(session):
+    """При включённом гейте регистрация — заявка: аккаунт есть, approved=False.
+    По умолчанию (и при выключенном гейте) аккаунт одобрен сразу — так же
+    ведут себя все аккаунты, заведённые до появления гейта."""
+    pending, err = auth.register_user(session, "заявка@firm.ru", "надёжный-пароль", "Иван Иванов", approved=False)
+    assert err is None and pending.approved is False
+    plain, err = auth.register_user(session, "обычный@firm.ru", "надёжный-пароль", "Пётр Петров")
+    assert err is None and plain.approved is True
+
+
+def test_pending_request_is_not_a_duplicate_and_password_still_checks(session):
+    """Повторная заявка тем же адресом — тот же отказ «уже зарегистрирована»
+    (дубля нет), а authenticate() по-прежнему отвечает за пароль, не за
+    одобрение: решение «пускать или нет» принимает эндпоинт входа."""
+    auth.register_user(session, "заявка@firm.ru", "надёжный-пароль", "Иван Иванов", approved=False)
+    again, err = auth.register_user(session, "заявка@firm.ru", "другой-пароль-1", "Иван Иванов", approved=False)
+    assert again is None and "уже зарегистрирована" in err
+    assert session.query(User).filter_by(email="заявка@firm.ru").count() == 1
+    user, err = auth.authenticate(session, "заявка@firm.ru", "надёжный-пароль")
+    assert err is None and user.approved is False

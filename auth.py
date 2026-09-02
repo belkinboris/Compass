@@ -86,11 +86,17 @@ def valid_role(role):
         return False
 
 
-def register_user(session, email, password, full_name, company=None, position=None, role="individual"):
+def register_user(session, email, password, full_name, company=None, position=None, role="individual",
+                  approved=True):
     """(User, None) при успехе, (None, причина отказа) иначе. Email уникален —
     вторая регистрация тем же адресом отклоняется явно, а не тихо перезаписывает
     чужой пароль. ФИО и тип аккаунта обязательны — это то, что раньше молча
-    записывалось как role=individual всем подряд без выбора при регистрации."""
+    записывалось как role=individual всем подряд без выбора при регистрации.
+
+    `approved=False` — заявка на доступ при включённом гейте (ACCESS_GATE в
+    main.py): аккаунт создаётся, но войти не сможет, пока владелец не одобрит
+    его кнопкой в Telegram. Повторная заявка тем же адресом — тот же отказ
+    «уже зарегистрирована», дубля не будет."""
     if not valid_email(email):
         return None, "некорректная почта"
     if not valid_password(password):
@@ -106,7 +112,8 @@ def register_user(session, email, password, full_name, company=None, position=No
     user = User(email=email, role=UserRole(role), tier=UserTier.free,
                 password_hash=hash_password(password), full_name=full_name,
                 company=(str(company).strip() or None) if company else None,
-                position=(str(position).strip() or None) if position else None)
+                position=(str(position).strip() or None) if position else None,
+                approved=bool(approved))
     session.add(user)
     session.commit()
     return user, None
