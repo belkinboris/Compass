@@ -4802,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d90100836",
+   "draft_id": "d45979628",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4832,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d60401110",
+   "draft_id": "d26579211",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4860,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d59193911",
+   "draft_id": "d32787256",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4899,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d27380307",
+   "draft_id": "d11669489",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d77269456",
+   "draft_id": "d92134494",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4955,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d45189766",
+   "draft_id": "d17377460",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4983,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d26426243",
+   "draft_id": "d81048353",
    "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5012,7 @@
    ]
   },
   {
-   "draft_id": "d34762480",
+   "draft_id": "d16463755",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5040,13 +5040,42 @@
    ]
   },
   {
-   "draft_id": "d91710414",
-   "title": "В ВТБ прогнозируют проведение минимум трех IPO до конца года",
+   "draft_id": "d63065104",
+   "title": "Решетников спрогнозировал снижение объема инвестиций в 2026 году",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8924002"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d80967816",
+   "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/02/1225580-provedenie-treh-ipo"
+     "https://www.vedomosti.ru/investments/news/2026/09/02/1225614-ipo-ekosistemi"
     ]
    ],
    "sum": null,
@@ -5063,104 +5092,20 @@
    },
    "ind": null,
    "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30686749",
-   "title": "Решетников заявил, что ожидает снижения инвестиций в 2026 году",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28069699"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "та же новость, что ««Сбер» планирует выкупить на торгах лизинговую компанию «Век» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d38872796",
-   "title": "Инвестиции в недвижимость РФ выросли в три раза за 10 лет",
+   "draft_id": "d50177512",
+   "title": "Продажа госпакета «Шереметьево» может состояться ближе к концу года",
    "date": "2026-09-02",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28069595"
-    ]
-   ],
-   "sum": "900 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86742422",
-   "title": "Сбер пока не видит перспектив IPO для компаний своей экосистемы",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28069301"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d40457914",
-   "title": "В «АвтоВАЗе» дали прогноз по продажам автомобилей в России",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260902/avtomobili-872917724.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/02/1225589-prodazha-gospaketa"
     ]
    ],
    "sum": null,
@@ -5182,42 +5127,109 @@
    ]
   },
   {
-   "draft_id": "d16845928",
-   "title": "Озвучен срок продажи госпакета Шереметьево",
+   "draft_id": "d56048900",
+   "title": "«Сибагро» перевела закупки и продажи в единый цифровой контур на B2B-Center",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-02_sibagro_perevela_zakupki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18507659",
+   "title": "Директор Корпорации развития Донбасса: сумма инвестиций в экономику ДНР ежемесячно растет",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28069731"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15042003",
+   "title": "Рынок WorkTech и HRTech в августе: раунды, сделки, M&A",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/headhunter/blog/1347048.php"
+    ]
+   ],
+   "sum": "$30 млн",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-02",
+     "title": "Сделка завершена",
+     "note": "Собрали крупнейшие раунды и сделки прошлого месяца. HRTech-платформы продолжают развивать ИИ-инструменты, а заодно покупают новые сервисы, чтобы расширять экосистемы и предлагать клиентам комплексные решения. Безопасность → Yardstik привлёк $30 млн. Платформа…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/headhunter/blog/1347048.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d15382860",
+   "title": "В ХМАО рекордно выросли продажи подержанных мотоциклов",
    "date": "2026-09-02",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053123607"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: госпак, шереме) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d52203459",
-   "title": "Жительница Калининграда потеряла деньги при покупке запчастей",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/kaliningrad/2026/9/2/zhitelnicza-kaliningrada-poteryala-dengi-pri-pokupke-zapchastej"
+     "https://ura.news/news/1053123414"
     ]
    ],
    "sum": null,
