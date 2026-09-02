@@ -48,7 +48,7 @@ from db.models import (
 from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError, full_lines_payload
 from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
-from sqlalchemy import inspect, select, text
+from sqlalchemy import func, inspect, select, text
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
 _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
@@ -2379,6 +2379,44 @@ def moderation_decisions(token: str = "", db=Depends(get_db)):
                            "edited_text": r.edited_text, "decided_by": r.decided_by,
                            "chat_id": r.chat_id, "reply_message_id": r.reply_message_id,
                            "created_at": r.created_at.isoformat()} for r in rows]}
+
+
+@app.get("/api/access/requests")
+def access_requests(token: str = "", db=Depends(get_db)):
+    """Заявки на доступ (ACCESS_GATE) для владельца, который смотрит не в
+    Telegram, а через сессию Claude: аккаунты живут в базе сайта (приватная
+    сеть Timeweb), и единственный путь до неё снаружи — сам сервер, тем же
+    токеном, что у /api/moderation/decisions. Отдаём ожидающих (approved=False)
+    и число уже одобренных — чтобы «никого нет» отличалось от «все одобрены»."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    pending = list(db.scalars(select(User).where(User.approved.is_(False))
+                              .order_by(User.created_at)).all())
+    approved = db.scalar(select(func.count()).select_from(User).where(User.approved.is_(True))) or 0
+    return {"pending": [{"id": u.id, "email": u.email, "full_name": u.full_name, "company": u.company,
+                         "position": u.position, "created_at": u.created_at.isoformat()} for u in pending],
+            "approved_count": int(approved), "gate": ACCESS_GATE}
+
+
+class AccessDecideIn(BaseModel):
+    token: str = ""
+    user_id: int = 0
+    approve: bool = True
+
+
+@app.post("/api/access/decide")
+def access_decide(req: AccessDecideIn, db=Depends(get_db)):
+    """То же решение, что кнопка «Одобрить»/«Отклонить» в Telegram, но по
+    токену: для случая, когда владелец даёт команду в чате сессии, а не в
+    группе. Право — тот же токен, что у моста модерации."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    applicant = db.get(User, int(req.user_id))
+    if not applicant:
+        return JSONResponse({"error": "аккаунта с таким id нет"}, status_code=404)
+    applicant.approved = bool(req.approve)
+    db.commit()
+    return {"ok": True, "user_id": applicant.id, "email": applicant.email, "approved": applicant.approved}
 
 
 class ModerationConsumeIn(BaseModel):

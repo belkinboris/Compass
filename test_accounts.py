@@ -370,6 +370,27 @@ def test_login_under_gate_is_403_until_the_owner_approves(client, monkeypatch):
     assert me["logged_in"] is True and me["gate"] is True and me["approved"] is True
 
 
+def test_access_requests_are_listed_and_decided_by_token(client, monkeypatch):
+    """Владелец, который смотрит заявки не из Telegram: список ожидающих и
+    решение по токену моста модерации; чужой токен — 404, как у моста."""
+    _gate_on(monkeypatch)
+    monkeypatch.setenv("MODERATION_TOKEN", "секрет")
+    uid = _request_access(client, "список@firm.ru")
+    assert client.get("/api/access/requests", params={"token": "чужой"}).status_code == 404
+    r = client.get("/api/access/requests", params={"token": "секрет"})
+    assert r.status_code == 200
+    body = r.json()
+    mine = [p for p in body["pending"] if p["id"] == uid]
+    assert mine and mine[0]["email"] == "список@firm.ru" and mine[0]["company"] == "ООО Ромашка"
+    assert body["gate"] is True and isinstance(body["approved_count"], int)
+    d = client.post("/api/access/decide", json={"token": "секрет", "user_id": uid, "approve": True})
+    assert d.status_code == 200 and d.json()["approved"] is True
+    assert uid not in [p["id"] for p in client.get("/api/access/requests", params={"token": "секрет"}).json()["pending"]]
+    r = client.post("/api/auth/login", json={"email": "список@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 200
+    assert client.post("/api/access/decide", json={"token": "секрет", "user_id": 10**9}).status_code == 404
+
+
 def test_approval_is_stamped_into_the_telegram_message(client, monkeypatch):
     """Как у модерации: решение дописывается в само сообщение группы, чтобы
     второй человек видел, что первый уже нажал."""
