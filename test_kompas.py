@@ -217,7 +217,7 @@ def test_call_llm_thinking_budget_and_retry(monkeypatch):
     assert text == "Ответ ассистента"
     assert calls["n"] == 2  # первый упал, второй прошёл
     p = calls["payload"]
-    assert p["model"] == "gpt://f/deepseek-v4-flash/latest"
+    assert p["model"] == "gpt://f/gpt-oss-120b/latest"
     assert p["max_output_tokens"] == 700 + main.THINKING_BUDGET
     assert p["instructions"] == "sys"
 
