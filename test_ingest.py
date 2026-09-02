@@ -848,6 +848,28 @@ def test_enrich_adds_a_new_stage_to_the_same_card(base):
     assert not [p for p in again if p[0] == "event"], "этап закрытия задублировался"
 
 
+def test_enrich_stage_source_is_an_edition_name_not_a_feed_id(base):
+    """`events[].source` подписывается именем издания, а не internal-id
+    ленты. 2 сентября 2026 `enrich.py` дважды подряд дописал в живые
+    карточки (Шереметьево, ФГК/«Трансфин-М») этап с подписью
+    `web:kommersant.ru`/`web:rbc.ru» вместо «Коммерсантъ»/«РБК» —
+    `promote.py`'s `to_card()` резолвит это для НОВЫХ карточек через
+    `source_names.edition_label()`, но обогащение уже существующих
+    карточек шло в обход этого шага. Та же болезнь, что уже чинилась для
+    `events[].source` раньше (см. CLAUDE.md), только для другого пути
+    записи — обогащения, а не создания карточки."""
+    import enrich
+    deal = {"id": "stage-label-test", "title": "Тестовая сделка",
+            "date": "2026-07-01", "status": "Обсуждается", "src": [], "events": []}
+    item = {"title": "Стороны подписали документы", "summary": "Сделка закрыта.",
+            "date": "2026-09-02", "url": "https://www.kommersant.ru/doc/1",
+            "source_id": "web:kommersant.ru"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    event = next(p[1] for p in props if p[0] == "event")
+    assert event["source"][0] == "Коммерсантъ", (
+        "источник этапа должен называть издание, а не internal-id ленты: %r" % event["source"])
+
+
 def test_enrich_updates_title_from_the_new_stage_source(base):
     import enrich
     deal = {"id": "title-stage", "title": "«Альфа» покупает «Бету»",

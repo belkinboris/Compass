@@ -61,9 +61,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
+sys.path.insert(0, os.path.dirname(HERE))
 
 import draft                                        # noqa: E402
 import format_post                                  # noqa: E402
+import source_names as editions                     # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 SOURCES = os.path.join(HERE, 'sources.json')
@@ -234,6 +236,18 @@ def proposals(deal, item, names, comps, match_keys=None):
 
     event = draft.guess_event(item)
     if event:
+        # `guess_event()` подписывает событие внутренним id ленты
+        # (`item['source_name']` там никогда не заполнено — только
+        # `source_id`, вида «web:kommersant.ru»), а не именем издания.
+        # `promote.py`'s `to_card()` резолвит это для НОВЫХ карточек через
+        # `edition_label()`, но обогащение уже существующих карточек шло в
+        # обход этого шага — на экране появлялось «web:kommersant.ru»
+        # вместо «Коммерсантъ» (тот же класс дефекта, что уже чинился для
+        # `events[].source`, только для другого пути записи). Резолвим
+        # здесь же, по URL источника, а не по internal-id.
+        if event.get('source') and len(event['source']) > 1:
+            event = dict(event, source=[editions.edition_label(event['source'][1]),
+                                         event['source'][1]])
         known_events = {(str(e.get('kind') or ''), str(e.get('date') or ''))
                         for e in (deal.get('events') or []) if isinstance(e, dict)}
         event_key = (str(event.get('kind') or ''), str(event.get('date') or ''))
