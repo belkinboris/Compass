@@ -4802,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d16192359",
+   "draft_id": "d12601014",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4832,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d29423178",
+   "draft_id": "d81062430",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4860,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d79265700",
+   "draft_id": "d25513272",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4899,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d59099692",
+   "draft_id": "d24602876",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d51885443",
+   "draft_id": "d80033527",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4955,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d17665070",
+   "draft_id": "d85978478",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4983,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d79167594",
+   "draft_id": "d56677919",
    "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5012,7 @@
    ]
   },
   {
-   "draft_id": "d58217699",
+   "draft_id": "d57507182",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5040,7 +5040,7 @@
    ]
   },
   {
-   "draft_id": "d74379625",
+   "draft_id": "d19429358",
    "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
@@ -5070,7 +5070,7 @@
    ]
   },
   {
-   "draft_id": "d72340009",
+   "draft_id": "d92029458",
    "title": "Аукцион по приватизации актива экс-владельца «Макфы» вновь провалился",
    "date": "2026-09-02",
    "src": [
@@ -5098,170 +5098,7 @@
    ]
   },
   {
-   "draft_id": "d42054855",
-   "title": "Французский производитель икры привлек €11 млн для борьбы с доминированием Китая",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8924119"
-    ]
-   ],
-   "sum": "€11 млн",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-02",
-     "title": "Сделка завершена",
-     "note": "Компания Caviar de Neuvic, один из ведущих производителей черной икры во Франции, объявила о привлечении €11,6 млн для расширения производственных мощностей, сообщает La Tribune. Компания, базирующаяся в Дордони, приобрела два рыбных хозяйства в департаменте…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8924119"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Французский производитель икры",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Французский производитель икры",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87222317",
-   "title": "ВТБ: участие инвесторов из дружественных стран в IPO остается ограниченным",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28070827"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d57617735",
-   "title": "Корпорация развития Донбасса привлекла в экономику ДНР более 39 млрд рублей",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28069559"
-    ]
-   ],
-   "sum": "39 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Корпорация развития Донбасса",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Корпорация развития Донбасса",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d54456500",
-   "title": "Си Цзиньпин заявил о намерении Китая наращивать инвестиции в Египет",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260902/kitay-872930052.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-02",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260902/kitay-872930052.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16185189",
-   "title": "Россиянка бежала от мошенников в Мьянме при перепродаже в другой колл-центр",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260902/rossijanka-2114885197.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17363308",
+   "draft_id": "d32886373",
    "title": "В Тюмени за миллионы продают продают полуразрушенную гаупвахту на набережной",
    "date": "2026-09-02",
    "src": [
@@ -5272,6 +5109,158 @@
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54201637",
+   "title": "Минфин провел аукцион по размещению ОФЗ на рекордные 1 трлн рублей",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/finance/news/2026/09/02/1225708-ofz-na-1-trln"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89009358",
+   "title": "Минфин заявил о готовности госпакета «Аэрофлота» к продаже на рынке",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/02/09/2026/6a98082738bec94cb5e2c5a0"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "Государство планирует продать на рынке 23,76% акций «Аэрофлота». Сделку рассчитывают провести в 2026 году, а время размещения выберут с учетом спроса и рекомендаций инвестбанкиров",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/02/09/2026/6a98082738bec94cb5e2c5a0"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d78301399",
+   "title": "Решетников: темпы роста инвестиций в ДФО вдвое превышают средние показатели по РФ",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28069639"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81578436",
+   "title": "Решетников рассказал, когда инвестиции в России вернутся к росту",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260902/investitsii--2114917761.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31664644",
+   "title": "Минфин разместил ОФЗ на 1 трлн рублей на первом аукционе после приостановки",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/302809"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
