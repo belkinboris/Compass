@@ -4802,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d45979628",
+   "draft_id": "d24049481",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4832,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d26579211",
+   "draft_id": "d87534131",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4860,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d32787256",
+   "draft_id": "d30974216",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4899,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d11669489",
+   "draft_id": "d83875028",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d92134494",
+   "draft_id": "d56989735",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4955,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d17377460",
+   "draft_id": "d59055644",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4983,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d81048353",
+   "draft_id": "d18803993",
    "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5012,7 @@
    ]
   },
   {
-   "draft_id": "d16463755",
+   "draft_id": "d83545139",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5040,36 +5040,7 @@
    ]
   },
   {
-   "draft_id": "d63065104",
-   "title": "Решетников спрогнозировал снижение объема инвестиций в 2026 году",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8924002"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d80967816",
+   "draft_id": "d58141880",
    "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
@@ -5099,111 +5070,66 @@
    ]
   },
   {
-   "draft_id": "d50177512",
-   "title": "Продажа госпакета «Шереметьево» может состояться ближе к концу года",
+   "draft_id": "d25790915",
+   "title": "АвтоВАЗ исключил рост рынка новых легковых машин в России в 2027 году // АвтоВАЗ: в августе в России продали 29,2 тысячи новых Lada",
    "date": "2026-09-02",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/02/1225589-prodazha-gospaketa"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8924042"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56048900",
-   "title": "«Сибагро» перевела закупки и продажи в единый цифровой контур на B2B-Center",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-02_sibagro_perevela_zakupki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18507659",
-   "title": "Директор Корпорации развития Донбасса: сумма инвестиций в экономику ДНР ежемесячно растет",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28069731"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15042003",
-   "title": "Рынок WorkTech и HRTech в августе: раунды, сделки, M&A",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/headhunter/blog/1347048.php"
-    ]
-   ],
-   "sum": "$30 млн",
-   "type": "Инвестиция",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-09-02",
      "title": "Сделка завершена",
-     "note": "Собрали крупнейшие раунды и сделки прошлого месяца. HRTech-платформы продолжают развивать ИИ-инструменты, а заодно покупают новые сервисы, чтобы расширять экосистемы и предлагать клиентам комплексные решения. Безопасность → Yardstik привлёк $30 млн. Платформа…",
+     "note": "Объем рынка новых легковых и легких коммерческих автомобилей (LCV) в России в 2026–2027 годах сохранится на уровне предыдущего года и составит 1,4–1,45 млн штук. Такой прогноз привел вице-президент по внешним связям АвтоВАЗа Сергей Громак на полях Восточного…",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/company/headhunter/blog/1347048.php"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8924042"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "29,2 тысячи новых Lada",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "29,2 тысячи новых Lada",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d55140604",
+   "title": "В Минфине назвали сроки продажи госпакета акций НМТП",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/02/09/2026/6a97f2f2802e0fef256b78d4"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "Минфин планирует до конца года успеть продать госпакет акций Новороссийского морского порта, однако в сентябре правительство его продать не успеет.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/02/09/2026/6a97f2f2802e0fef256b78d4"
      ]
     }
    ],
@@ -5219,17 +5145,249 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: госпак, минфин) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d87560482",
+   "title": "Эдтех-компанию с оценкой $3,4 млрд продали за $206 млн: как закончилась эпоха ковидных переоценок",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/edteh-kompaniyu-s-otsenkoj-3-4-mlrd-prodali-za-206-mln-kak-zakonchilas-epoha-kovidnyh-pereotsenok/"
+    ]
+   ],
+   "sum": "$3,4 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-02",
+     "title": "Сделка завершена",
+     "note": "Индийский EdTech-стартап Unacademy продали конкуренту за $206 млн — на 94% дешевле пиковых $3,4 млрд. Так закончился один из символов ковидного бума.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/edteh-kompaniyu-s-otsenkoj-3-4-mlrd-prodali-za-206-mln-kak-zakonchilas-epoha-kovidnyh-pereotsenok/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "за $206 млн: как закончилась эпоха ковидных переоценок",
+   "seller": "Эдтех-компанию с оценкой $3,4 млрд",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "за $206 млн: как закончилась эпоха ковидных переоценок",
+    "seller": "Эдтех-компанию с оценкой $3,4 млрд"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d15382860",
-   "title": "В ХМАО рекордно выросли продажи подержанных мотоциклов",
+   "draft_id": "d55284339",
+   "title": "Минфин рассказал о планах по продаже госпакета НМТП",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260902/minfin-872927608.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20260902/minfin-872927608.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: госпак, минфин) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d39301827",
+   "title": "Инвестиции в инфраструктуру ИИ в мире могут достичь рекордных $31,6 трлн",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260902/investitsii-872926437.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d86344961",
+   "title": "СМИ: власти Южной Кореи выкупили у SK Hynix около 20 миллиардов долларов",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260902/koreja-872925229.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-02",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20260902/koreja-872925229.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": "SK Hynix около 20 миллиардов долларов",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": "SK Hynix около 20 миллиардов долларов"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59474256",
+   "title": "Аукцион по приватизации актива экс-владельца «Макфы» вновь провалился",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265646/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68162920",
+   "title": "ФАС отменила аукцион службы спасения на 3 миллиарда рублей в Курганской области",
    "date": "2026-09-02",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053123414"
+     "https://ura.news/news/1053123650"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54993030",
+   "title": "Покупка машины обернулась для жителя ХМАО доплатой почти в два миллиона рублей",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053123651"
+    ]
+   ],
+   "sum": "1,98 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g15386e04 (общие редкие слова: миллио, покупк) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d56145884",
+   "title": "Пассажиры Волгоград-1 смогут приобрести лекарства прямо на вокзале",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/volgograd/2026/9/2/passazhiry-volgograd-1-smogut-priobresti-lekarstva-pryamo-na-vokzale"
     ]
    ],
    "sum": null,
