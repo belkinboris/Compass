@@ -198,6 +198,17 @@ def test_suggestions_are_answerable(idx):
         assert r.answer and r.docs, q
 
 
+def test_suggestions_do_not_name_a_consultant(idx):
+    """Партнёр, 3 сентября 2026: «удалить VERBA LEGAL из предложки в вопросах
+    ассистенту» — имя одной фирмы в подсказке для всех читается как её
+    реклама. Подсказки строятся из данных, поэтому запрет — на любое имя из
+    каталога, а не на одну фирму."""
+    names = [f.name.lower() for f in idx.firms if len(f.name) >= 3]
+    for q in ar.suggestions(idx):
+        assert not any(n in q.lower() for n in names), q
+    assert any("отрасл" in q.lower() for q in ar.suggestions(idx))
+
+
 def test_firm_is_recognised_in_any_case_and_without_deals_the_answer_is_honest(idx):
     """Владелец 31 августа 2026: «Не нашёл Никольскую (Никольская консалтинг).
     Будто бы права на ошибку не даёт» — регулярка каталога знает только

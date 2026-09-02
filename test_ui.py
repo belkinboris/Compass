@@ -1008,6 +1008,19 @@ def test_company_sector_opens_the_industry_page(page, base_url):
     assert (tag.get_attribute("href") or "").startswith("#/industry/")
 
 
+def _company_links_shown(pg):
+    """`SHOW_COMPANY_LINKS` в static/index.html: связи между компаниями
+    («Контроль у», «Под контролем», «Входит в группу», «В группу входит»,
+    «Портфель») выключены 3 сентября 2026 по просьбе владельца до тех пор,
+    пока данные неполные. Тесты, проверяющие текст этих строк, при
+    выключенном флаге пропускаются, а их отсутствие держит
+    `test_company_links_are_hidden_while_the_data_is_incomplete`."""
+    return bool(pg.evaluate("typeof SHOW_COMPANY_LINKS !== 'undefined' && SHOW_COMPANY_LINKS"))
+
+
+LINKS_OFF = "связи между компаниями выключены (SHOW_COMPANY_LINKS=false, 3 сентября 2026)"
+
+
 def test_company_group_membership_is_shown_both_ways(page, base_url):
     """`holding.id` резолвится через `co()`, а не через отдельный справочник.
 
@@ -1020,6 +1033,8 @@ def test_company_group_membership_is_shown_both_ways(page, base_url):
     экране, а не структурой DOM: именно так дефект и находился раньше.
     """
     visit(page, base_url, "#/companies/ugmkinvest")
+    if not _company_links_shown(page):
+        pytest.skip(LINKS_OFF)
     body = page.inner_text("#app").lower()
     assert "входит в группу" in body, "бейдж группы не показан у дочерней карточки"
     assert "угмк" in body
@@ -1060,6 +1075,8 @@ def test_group_members_show_finance_chip_and_honest_disclaimer(browser, base_url
         pg.on("pageerror", lambda e: errors.append(str(e)))
         pg.goto(base_url + "/#/companies/g300b9ead", wait_until="networkidle")
         pg.wait_for_timeout(1200)
+        if not _company_links_shown(pg):
+            pytest.skip(LINKS_OFF)
         body = pg.inner_text("#app")
         assert "консолидированная отчётность группы обычно не раскрывается" in body.lower()
         assert "700" in body and ("млрд" in body.lower())
@@ -1098,6 +1115,8 @@ def test_investor_portfolio_never_says_group_membership(page, base_url):
     CLAUDE.md, 23 августа 2026). Карточка инвестора показывает «Портфель», а
     не бейдж «Группа компаний» и не блок «В группу входит»."""
     visit(page, base_url, "#/companies/gc2792a44")
+    if not _company_links_shown(page):
+        pytest.skip(LINKS_OFF)
     body = page.inner_text("#app").lower()
     assert "портфель" in body, "блок «Портфель» не показан на карточке инвестора"
     assert "мтс" in body, "МТС не видна в портфеле АФК «Система»"
@@ -1148,8 +1167,9 @@ def test_group_schema_button_is_gone_everywhere(page, base_url):
             f"кнопка схемы не должна показываться на {company_id}"
         assert page.locator("#group-schema").count() == 0, \
             f"контейнер схемы не должен рендериться на {company_id}"
-    body = page.inner_text("#app").lower()
-    assert "портфель" in body and "мтс" in body, "строка «Портфель» обязана остаться и без кнопки схемы"
+    if _company_links_shown(page):
+        body = page.inner_text("#app").lower()
+        assert "портфель" in body and "мтс" in body, "строка «Портфель» обязана остаться и без кнопки схемы"
 
 
 def test_company_ownership_block_shown_only_when_known(page, base_url):
@@ -2044,24 +2064,49 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
 
 def test_feed_search_suggests_by_first_letters_and_hides_filters_behind_a_button(page, base_url):
     """Просьба владельца 31 августа 2026: «предлагать должно по первым
-    буквам», а категории — за кнопкой «Фильтры», а не на виду."""
+    буквам», а категории — за кнопкой «Фильтры», а не на виду.
+    3 сентября 2026: «в разделе сделок пусть поиск ищет именно по сделкам,
+    а в разделе компаний именно по компаниям» — над лентой подсказки только
+    из карточек сделок (и уводят на карточку), в каталоге — только профили."""
     visit(page, base_url, "#/deals")
     page.wait_for_selector("#feedq")
     assert page.inner_text("#advtoggle").strip() == "Фильтры"
     page.fill("#feedq", "Магн")
     page.wait_for_selector("#feedac .ac-item", timeout=5000)
     items = [x.inner_text() for x in page.locator("#feedac .ac-item").all()]
-    assert any("Магнит" in x and "компания" in x for x in items), items
-    assert len(items) <= 8
-    assert not any("0 сделок" in x for x in items), items  # без сделок — просто «компания», а не «0 сделок»
-    assert any("Магнит" in x and "сделок" in x for x in items), items  # id компании — ключ словаря, не поле профиля
+    # Подпись справа («сделка · дата»), а не весь текст: в заголовке сделки
+    # слово «компания» встречается само по себе.
+    notes = [x.inner_text() for x in page.locator("#feedac .ac-note").all()]
+    assert notes and all(n.startswith("сделка") for n in notes), notes
+    assert any("Магнит" in x for x in items), items
+    assert len(items) <= 6
     # подсказки рисуются поверх ленты, а не под ней
     z = page.evaluate("getComputedStyle(document.querySelector('.feed-search')).zIndex")
     assert z not in ("auto", "0"), z
     page.locator("#feedac .ac-item").first.dispatch_event("mousedown")
     page.wait_for_timeout(500)
     h = page.evaluate("location.hash")
-    assert h.startswith("#/companies/") and "undefined" not in h, h
+    assert h.startswith("#/deal/") and "undefined" not in h, h
+    assert not page.crashes
+
+    visit(page, base_url, "#/companies")
+    page.wait_for_selector("#coq")
+    try:
+        page.fill("#coq", "Магн")
+        page.wait_for_selector("#coac .ac-item", timeout=5000)
+        items = [x.inner_text() for x in page.locator("#coac .ac-item").all()]
+        assert items and any("Магнит" in x for x in items), items
+        assert not any("сделка ·" in x for x in items), items  # это компании, не карточки сделок
+        assert not any("0 сделок" in x for x in items), items  # без сделок — «компания», а не «0 сделок»
+        assert any("Магнит" in x and "сделок" in x for x in items), items  # id компании — ключ словаря, не поле профиля
+        page.locator("#coac .ac-item").first.dispatch_event("mousedown")
+        page.wait_for_timeout(500)
+        h = page.evaluate("location.hash")
+        assert h.startswith("#/companies/") and "undefined" not in h, h
+    finally:
+        # `coQuery` — глобальная переменная, хешем не сбрасывается (см. урок
+        # «переход по хешу — не перезагрузка страницы для теста»).
+        page.evaluate("coQuery = ''")
     assert not page.crashes
 
 
@@ -2118,24 +2163,103 @@ def test_deal_lenses_split_advisors_by_kind(page, base_url):
     assert "Юридический консультант" not in eco
 
 
-def test_new_dialog_button_does_not_scroll_or_open_the_keyboard_on_a_phone(browser, base_url):
-    """Вторая жалоба на «+ Новый диалог» (31 августа, вечер): на телефоне
-    любой focus() открывает клавиатуру и уводит к полю ввода внизу.
-    В сенсорном контексте кнопка только начинает новый диалог."""
+def test_new_dialog_control_sits_above_the_chat_and_appears_only_mid_conversation(browser, base_url):
+    """Третья жалоба на «+ Новый диалог» (владелец, 3 сентября 2026: «в
+    нелогичном месте, нет никакого перехода, может, он и не нужен»).
+    Решение: кнопки нет, пока разговор не начат (новый диалог и так
+    начинается при каждом открытии раздела); после первого вопроса над
+    лентой появляется «Начать заново», нажатие меняет ленту прямо под ней;
+    на телефоне — без прокрутки и без клавиатуры (уроки 30–31 августа).
+    Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе — вопрос
+    настоящий, а не подменённый сетью."""
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     try:
         pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
         pg.goto(base_url + "/#/assistant", wait_until="networkidle")
-        pg.wait_for_selector("#newThread")
+        pg.wait_for_selector("#chatState")
         pg.wait_for_timeout(500)
-        pg.evaluate("window.scrollTo(0, 0)")
+        assert pg.locator("#threadPanel").count() == 0, "гостю панель истории не нужна — сохранять нечего"
+        assert pg.inner_text("#chatState").strip() == "Новый диалог"
+        assert pg.locator("#newThread").is_hidden(), "кнопка не должна быть видна, пока разговор не начат"
+        pg.fill("#q", "Самые крупные сделки 2025 года")
+        pg.click("#send")
+        pg.wait_for_selector("#newThread", state="visible", timeout=10000)
+        assert "1 вопрос" in pg.inner_text("#chatState")
+        bar, box = pg.locator(".chat-bar").bounding_box(), pg.locator("#chatbox").bounding_box()
+        assert bar["y"] + bar["height"] <= box["y"] + 1, "строка состояния с кнопкой стоит прямо над лентой"
+        pg.locator("#newThread").scroll_into_view_if_needed()
+        pg.wait_for_timeout(200)
+        y0 = pg.evaluate("window.scrollY")
         pg.click("#newThread")
         pg.wait_for_timeout(600)
-        assert pg.evaluate("window.scrollY") < 10
+        assert abs(pg.evaluate("window.scrollY") - y0) < 10, "нажатие не должно прокручивать страницу"
         assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
         assert "Начат новый диалог" in pg.inner_text("#chatbox")
+        assert pg.inner_text("#chatState").strip() == "Новый диалог"
+        assert pg.locator("#newThread").is_hidden()
+        assert not errors, errors
     finally:
         ctx.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_nav_items_are_centred_on_the_logo_for_a_signed_in_user(browser, base_url, width):
+    """«Сверху криво» (партнёр, 3 сентября 2026, профиль Сбербанка с
+    телефона); владелец: «разделы по центру логотипу, а не выше, на всех
+    устройствах». Проявлялось ТОЛЬКО у вошедшего: кружок-аватар 26px в
+    последнем пункте тянул все ссылки до своей высоты (align-items:stretch),
+    а текст в них оставался у верхнего края — на 3–4px выше центра
+    «КОМПАС». Меряем центр самих букв (Range), а не боксов ссылок: боксы
+    были центрированы и до починки."""
+    ctx = browser.new_context(viewport={"width": width, "height": 844},
+                              is_mobile=width < 700, has_touch=width < 700)
+    try:
+        pg = ctx.new_page()
+        email = f"nav-centre-{width}@ui.test"
+        r = pg.request.post(base_url + "/api/auth/register",
+                            data={"email": email, "password": "secret123", "full_name": "Тест Навигации"})
+        if r.status != 200:
+            r = pg.request.post(base_url + "/api/auth/login", data={"email": email, "password": "secret123"})
+        assert r.status == 200, r.text()
+        pg.goto(base_url + "/#/companies/g300b9ead", wait_until="networkidle")
+        pg.wait_for_selector("#navAccount .avatar-dot", timeout=10000)
+        pg.wait_for_timeout(300)
+        m = pg.evaluate("""() => {
+          const mid = b => (b.top + b.bottom) / 2;
+          const glyph = e => { const r = document.createRange(); r.selectNodeContents(e); return mid(r.getBoundingClientRect()); };
+          const logo = mid(document.querySelector('.top .wordmark').getBoundingClientRect());
+          return {links: [...document.querySelectorAll('#nav a:not(#navAccount)')].map(a => glyph(a) - logo),
+                  dot: mid(document.querySelector('#navAccount .avatar-dot').getBoundingClientRect()) - logo};
+        }""")
+        assert all(abs(d) <= 1.5 for d in m["links"]), m
+        assert abs(m["dot"]) <= 1.5, m
+    finally:
+        ctx.close()
+
+
+def test_company_links_are_hidden_while_the_data_is_incomplete(page, base_url):
+    """Владелец, 3 сентября 2026: «все связи сейчас лучше убрать (под
+    контролем, в группу входит и портфель) — информация неполная и
+    misleading, добавим, когда будет полная». Строки связей не рендерятся у
+    профилей, где раньше стояли все их виды; данные и код остались за
+    константой SHOW_COMPANY_LINKS. «Собственники» (доля с датой и
+    источником) остаются — на этот блок ссылается вкладка «Участники»."""
+    if _company_links_shown(page):
+        pytest.skip("SHOW_COMPANY_LINKS=true — связи снова показываются, этот тест не о том состоянии")
+    labels = ("контроль у", "под контролем", "входит в группу", "в группу входит", "портфель")
+    for company_id in ("ugmkinvest", "g3a8fb04f", "gc2792a44", "g00f14033", "g300b9ead"):
+        visit(page, base_url, f"#/companies/{company_id}")
+        assert page.locator("#app h1").count() == 1
+        heads = [t.lower() for t in page.evaluate("[...document.querySelectorAll('#app .d-head b, #app .d-head .tag')].map(e => e.textContent)")]
+        for label in labels:
+            assert not any(h.startswith(label) for h in heads), (company_id, label, heads)
+        assert "структура и связи" not in page.inner_text("#app .d-head").lower(), company_id
+        assert page.locator("#group-members, #portfolio-members").count() == 0, company_id
+    visit(page, base_url, "#/companies/g69c88bc7")  # МТС: собственники с долей и источником остаются
+    body = page.inner_text("#app").lower()
+    assert "собственники" in body and "42,085%" in page.inner_text("#app")
 
 
 def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, browser):

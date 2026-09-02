@@ -291,6 +291,14 @@ FNS_REPORT_MAX_AGE_YEARS = 2
 # режиме бесплатности.
 FNS_ALL_FREE = True
 
+# ВРЕМЕННО, по прямой просьбе владельца 3 сентября 2026: «разрешить
+# авторизованным пользователям скачивать PDF без платной подписки, пока её
+# нет». Карточку сделки в PDF (export_deal) может скачать любой вошедший;
+# гостю — по-прежнему 401 (вход нужен, чтобы выгрузка не была анонимной).
+# Когда подписка появится — поставить False, и скачивание снова станет
+# только для тарифа paid, без другой правки кода и интерфейса.
+DEAL_EXPORT_ALL_FREE = True
+
 # Сколько подтверждённых профилей (pipeline/fns_registry.py) докачивать за
 # ОДИН старт процесса. COMPANY_FINANCE_BRIEF.md, раздел П2: расписания нет —
 # новые решения реестра появляются деплоем, и старт после деплоя уже и есть
@@ -2499,7 +2507,7 @@ def export_deal(deal_id: str, _payload: DealExportIn | None = None,
                 user: User | None = Depends(_current_user)):
     if not user:
         return JSONResponse({"error": "войдите, чтобы скачать карточку"}, status_code=401)
-    if user.tier != UserTier.paid:
+    if not DEAL_EXPORT_ALL_FREE and user.tier != UserTier.paid:
         return JSONResponse({"error": "скачивание карточек доступно по подписке"}, status_code=403)
     deal = get_deal(deal_id)
     if not deal:

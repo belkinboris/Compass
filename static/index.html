@@ -55,7 +55,14 @@
    увеличить текст для слабовидящих (viewport специально без max-scale/
    user-scalable=no). Но `touch-action:manipulation` убирает именно ДВОЙНОЙ
    ТАП как жест зума — самый вероятный случайный триггер при быстрой
-   прокрутке ленты карточек, — не трогая щипок двумя пальцами. */
+   прокрутке ленты карточек, — не трогая щипок двумя пальцами.
+   3 сентября 2026 владелец вернулся к вопросу («возможно, не надо допускать
+   pinch in/out») — `maximum-scale=1, user-scalable=no` НЕ поставлено
+   сознательно: Safari на iOS с 10-й версии игнорирует эти параметры (щипок
+   работает всегда, ради доступности), так что симптом с айфона они бы не
+   сняли, а на Android и во встроенных браузерах только отняли бы у людей
+   увеличение текста. Вместо этого жест отключён там, где он мешает, —
+   `touch-action:pan-y` на самом слайдере (см. `.heroslider`). */
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
@@ -103,7 +110,19 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .top.on-hero .wordmark em{color:var(--bronze-light)}
 .top.on-hero nav a{color:rgba(243,241,233,.78)}
 .top.on-hero nav a:hover,.top.on-hero nav a.on{color:var(--ivory)}
-.heroslider{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;height:100svh;min-height:600px;overflow:hidden;background:#0A1210;color:var(--ivory)}
+/* touch-action:pan-y — по жалобе партнёра (3 сентября 2026, айфон): при
+   свайпе между панелями «вся страница сдвигается в сторону и возвращается
+   назад». В Chromium ни на одной ширине 360–430 и ни на одной из пяти
+   панелей документ не шире экрана (замер: scrollWidth − clientWidth = 0,
+   элементы правее края — только клипнутые фигуры SVG и пункты прокручиваемого
+   меню), то есть это не наша сетка, а сам жест: горизонтальный свайп по
+   панели Safari читает ещё и как панорамирование страницы с отскоком
+   («резинка»). pan-y говорит браузеру, что по горизонтали здесь жестов нет —
+   свайп остаётся нашему обработчику touchstart/touchend, страница стоит на
+   месте. Побочно на самом герое отключается щипок-зум (на остальной странице
+   он остаётся — см. комментарий у `body{touch-action:manipulation}`). Плюс
+   страховки `html{overflow-x:hidden}`/`body{overflow-x:clip}` ниже. */
+.heroslider{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;height:100svh;min-height:600px;overflow:hidden;background:#0A1210;color:var(--ivory);touch-action:pan-y}
 .hs-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s;pointer-events:none}
 .hs-slide.on{opacity:1;visibility:visible;transition:opacity .35s ease;pointer-events:auto}
 /* На главной оставляем только спокойный cross-fade. Автопрокрутка, параллельное
@@ -241,7 +260,21 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .top.on-hero .wordmark .bm-accent{fill:var(--bronze-light)}
 .top.on-hero .wordmark .bm-dot{fill:#0A1210}
 .foot-brand{display:flex;align-items:center;gap:10px}
-nav{display:flex;gap:30px;margin-left:auto}
+/* align-items:center здесь — не украшение. У flex-контейнера по умолчанию
+   align-items:stretch: каждая ссылка тянется до высоты самой высокой, а
+   текст внутри ссылки стоит у ЕЁ верхнего края. Пока последним пунктом было
+   слово «Войти», все пункты были одной высоты и подвоха не было видно; у
+   вошедшего вместо слова стоит кружок-аватар 26px (`.avatar-dot`,
+   inline-flex, vertical-align:middle) — его строка выше текстовой на ~9px,
+   остальные ссылки вытягивались до неё, и подписи разделов оказывались на
+   3–4px ВЫШЕ центра логотипа (замер 3 сентября 2026: центр текста 27,8px
+   при центре «КОМПАС» 32px, одинаково на 360/390/414/1280; партнёр: «сверху
+   криво», владелец: «по центру логотипу, а не выше, на всех устройствах»).
+   Ловилось только у вошедшего — проверять шапку надо в обоих состояниях. */
+nav{display:flex;align-items:center;gap:30px;margin-left:auto}
+/* Ссылка с аватаром: кружок центрируется внутри своей ссылки, а оптический
+   сдвиг в 1,5px (ниже) — только для текста, у кружка капители нет. */
+nav a.has-avatar{display:inline-flex;align-items:center;margin-top:0}
 /* top:1.5px — оптика, не геометрия: боксы навигации и бренда центрированы
    ровно (замерено), но капитель системного шрифта 12px сидит в своей строке
    выше, чем капитель PT Serif 22px в своей, — подписи разделов выглядели
@@ -321,7 +354,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 .hero p{color:#A9BDB2;margin-top:18px;max-width:600px;font-size:15.5px}
 .aisearch{display:flex;gap:0;margin-top:32px;max-width:680px;border:1px solid rgba(243,241,233,.25);border-radius:var(--radius);overflow:hidden;background:rgba(15,43,33,.45);backdrop-filter:blur(4px);transition:border-color .3s}
 .aisearch:focus-within{border-color:rgba(243,241,233,.55)}
-.aisearch input{flex:1;padding:15px 20px;border:none;background:transparent;font:inherit;color:var(--ivory)}
+.aisearch input{flex:1;min-width:0;padding:15px 20px;border:none;background:transparent;font:inherit;color:var(--ivory)}
 .aisearch input::placeholder{color:#7E948A}
 .aisearch input:focus{outline:none}
 .aisearch button{background:var(--ivory);color:var(--accent-deep);padding:0 26px;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
@@ -1071,7 +1104,15 @@ a.dp-asset-name:hover{color:var(--accent)}
 .chat-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);min-height:300px;padding:24px;display:flex;flex-direction:column;gap:14px}
 .suggests{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
 
-html{background:var(--paper)}
+/* Страховка от горизонтального панорамирования на телефоне (см. комментарий
+   у `.heroslider{touch-action:pan-y}`): документ не должен уметь ехать вбок,
+   даже если какой-то элемент окажется шире экрана на шрифтах другой системы.
+   overflow-x:hidden — на html (уходит на viewport), а на body — clip, а НЕ
+   hidden: hidden делает body прокручиваемым контейнером, и `position:sticky`
+   внутри (липкие фильтры «Аналитики») перестал бы прилипать; clip контейнера
+   не создаёт. overscroll-behavior-x:none — без «резинки» по горизонтали. */
+html{background:var(--paper);overflow-x:hidden;overscroll-behavior-x:none}
+body{overflow-x:clip}
 .src-fix{font-size:12.5px;color:var(--muted);max-width:72ch;margin:10px 0 0;line-height:1.55}
 /* ---------- footer ---------- */
 footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:#A9BDB2}
@@ -1213,7 +1254,14 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 
 .chat-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px}
 .thread-panel{background:var(--card);border:1px solid var(--line);padding:14px;min-height:420px}
-.thread-new{width:100%;padding:10px;border:1px solid var(--accent);color:var(--accent);margin-bottom:12px}
+/* Гостю панель истории не рисуется вовсе (сохранять нечего) — лента занимает
+   всю ширину. Строка состояния над лентой: «Новый диалог» / «Текущий диалог ·
+   N вопросов» и кнопка «Начать заново», которая есть только пока есть что
+   начинать заново (см. комментарий в renderAssistant). */
+.chat-layout.solo{grid-template-columns:minmax(0,1fr)}
+.thread-head{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:2px 0 12px}
+.chat-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:30px;margin-bottom:8px}
+.chat-state{font-size:12.5px;color:var(--muted)}
 .thread-list{display:grid;gap:5px}.thread-item{padding:9px 10px;text-align:left;font-size:12.5px;color:var(--muted);border-radius:3px}.thread-item.on{background:var(--accent-soft);color:var(--accent-deep)}
 .thread-empty{font-size:12px;color:var(--muted);padding:8px}
 
@@ -3225,42 +3273,76 @@ function bindFeedListEvents(){
   };
 }
 /* Подсказки по первым буквам под строкой поиска (просьба владельца
-   31 августа 2026: «предлагать должно по первым буквам»). Компании, фирмы
-   и сделки, у которых название или любое его слово начинается с набранного;
-   компания открывается своей страницей, сделка — карточкой. Считается только
+   31 августа 2026: «предлагать должно по первым буквам»). Считается только
    по нескольким найденным записям — полный проход по базе на каждую букву
-   здесь не нужен. */
+   здесь не нужен.
+   У каждого раздела — свой предмет поиска (владелец, 3 сентября 2026: «в
+   разделе сделок пусть поиск ищет именно по сделкам, а в разделе компаний —
+   именно по компаниям»). До этого строка над лентой предлагала компании и
+   консультантов раньше сделок, и человек, искавший сделку, уезжал на
+   страницу компании. kind="deals" — только карточки сделок: по заголовку и
+   по названиям сторон (покупатель, продавец, предмет), новые выше старых;
+   kind="companies" — только профили, те, у кого есть сделки, выше (иначе
+   «Магнит Альянс» без единой спорил с «Магнитом»). */
 const acNorm = s => String(s||"").toLowerCase().replace(/ё/g,"е");
 /* Таймер отложенного поиска — общий: выбор подсказки обязан его снять, иначе
    через 250 мс после клика лента перепишет адрес обратно на #/deals?q=… */
 let feedSearchTimer = null;
-function hideSuggest(){ const ac=document.getElementById("feedac"); if(ac){ac.hidden=true; ac.innerHTML="";} }
-function renderSuggest(input){
-  const ac=document.getElementById("feedac"); if(!ac) return;
-  const q=acNorm(input.value).trim();
-  if(q.length<2){ hideSuggest(); return; }
+function hideSuggest(acId){ const ac=document.getElementById(acId||"feedac"); if(ac){ac.hidden=true; ac.innerHTML="";} }
+function suggestRows(q, kind){
   const hit = name => { const n=acNorm(name); if(!n) return 0; if(n.startsWith(q)) return 2; return n.split(/[^a-zа-я0-9]+/).some(w=>w.startsWith(q))?1:0; };
-  const pick=(list, get, limit)=>{
+  const pick=(list, get, limit, tie)=>{
     const out=[];
     for(const x of list){ const r=hit(get(x)); if(r){ out.push([r,x]); } }
-    return out.sort((a,b)=>b[0]-a[0]).slice(0,limit).map(x=>x[1]);
+    return out.sort((a,b)=>(b[0]-a[0]) || (tie?tie(a[1],b[1]):0)).slice(0,limit).map(x=>x[1]);
   };
-  // COMPANIES — словарь id → профиль, и id лежит в ключе, а не в самом профиле.
-  // Компании: сначала те, у кого есть сделки, — «Магнит» выше «Магнит Альянса» без единой.
-  const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name).map(([id,c])=>({id, name:c.name})), c=>c.name, 6)
-    .map(c=>({...c, n:companyDeals(c.id).structured.length})).sort((a,b)=>b.n-a.n).slice(0,3);
-  const firms=pick([...FIRMS,...INV_FIRMS], f=>f.n, 2);
-  const deals=pick(DEALS, d=>d.title, 3);
-  const rows=[
-    ...cos.map(c=>({href:`#/companies/${c.id}`, text:c.name, note:c.n?`компания · ${c.n} ${plural(c.n,"сделка","сделки","сделок")}`:"компания"})),
-    ...firms.map(f=>({href:`#/advisors/${f.id}`, text:f.n, note:"консультант"})),
-    ...deals.map(d=>({href:`#/deal/${d.id}`, text:d.title, note:`сделка · ${fmtDate(d.date)}`})),
-  ];
-  if(!rows.length){ hideSuggest(); return; }
+  if(kind==="companies"){
+    // COMPANIES — словарь id → профиль, и id лежит в ключе, а не в самом профиле.
+    const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name).map(([id,c])=>({id, name:c.name})), c=>c.name, 12)
+      .map(c=>({...c, n:companyDeals(c.id).structured.length})).sort((a,b)=>b.n-a.n).slice(0,6);
+    return cos.map(c=>({href:`#/companies/${c.id}`, text:c.name, note:c.n?`${c.n} ${plural(c.n,"сделка","сделки","сделок")}`:"компания"}));
+  }
+  // Заголовок первым: совпадение с его началом ранжируется выше, чем со
+  // словом внутри или с именем стороны.
+  const dealText = d => [d.title, d.buyer&&co(d.buyer)?co(d.buyer).name:"", d.target&&co(d.target)?co(d.target).name:"",
+                         d.buyer_name||"", d.seller||"", d.asset||""].filter(Boolean).join(" · ");
+  const deals=pick(DEALS, dealText, 6, (a,b)=>(b.date||"").localeCompare(a.date||""));
+  return deals.map(d=>({href:`#/deal/${d.id}`, text:d.title, note:`сделка · ${fmtDate(d.date)}`}));
+}
+function renderSuggest(input, acId, kind){
+  const ac=document.getElementById(acId||"feedac"); if(!ac) return;
+  const q=acNorm(input.value).trim();
+  if(q.length<2){ hideSuggest(acId); return; }
+  const rows=suggestRows(q, kind||"deals");
+  if(!rows.length){ hideSuggest(acId); return; }
   ac.innerHTML=rows.map(r=>`<button type="button" class="ac-item" data-href="${r.href}"><span class="ac-text">${esc(r.text)}</span><span class="ac-note">${esc(r.note)}</span></button>`).join("");
   ac.style.top=(input.offsetTop+input.offsetHeight+6)+"px";
   ac.hidden=false;
-  ac.querySelectorAll(".ac-item").forEach(b=>b.onmousedown=e=>{e.preventDefault(); clearTimeout(feedSearchTimer); hideSuggest(); location.hash=b.dataset.href;});
+  ac.querySelectorAll(".ac-item").forEach(b=>b.onmousedown=e=>{e.preventDefault(); clearTimeout(feedSearchTimer); hideSuggest(acId); location.hash=b.dataset.href;});
+}
+/* Стрелки, Esc и Enter для списка подсказок — одна привязка на оба раздела.
+   Enter на выделенной подсказке открывает её адрес напрямую: у подсказок
+   обработчик на mousedown, и синтетический click() до него не доходил. */
+function bindSuggestKeys(input, acId, onEnter){
+  input.addEventListener("keydown",e=>{
+    const ac=document.getElementById(acId);
+    const items=ac&&!ac.hidden?[...ac.querySelectorAll(".ac-item")]:[];
+    if(items.length&&(e.key==="ArrowDown"||e.key==="ArrowUp")){
+      e.preventDefault();
+      const cur=items.findIndex(x=>x.classList.contains("on"));
+      const next=e.key==="ArrowDown"?(cur+1)%items.length:(cur-1+items.length)%items.length;
+      items.forEach((x,i)=>x.classList.toggle("on",i===next));
+      return;
+    }
+    if(e.key==="Escape"){hideSuggest(acId);return;}
+    if(e.key==="Enter"){
+      const on=items.find(x=>x.classList.contains("on"));
+      hideSuggest(acId);
+      if(on){clearTimeout(feedSearchTimer); location.hash=on.dataset.href; return;}
+      if(onEnter) onEnter();
+    }
+  });
+  input.addEventListener("blur",()=>setTimeout(()=>hideSuggest(acId),180));
 }
 function renderFeedList(){
   const el = document.getElementById("feedlist");
@@ -3329,7 +3411,7 @@ function renderDeals(){
   </div>
   <div id="feed"></div>
   <div class="feed-search reveal">
-    <input id="feedq" placeholder="Найти в базе: компания, сделка, консультант…" value="${esc(feedQuery)}" aria-label="Поиск по сделкам">
+    <input id="feedq" placeholder="Найти сделку: стороны, предмет, консультант…" value="${esc(feedQuery)}" aria-label="Поиск по сделкам">
     <button id="feedgo" class="chip on">Найти</button>
     <button id="advtoggle" class="chip ${advOpen?"on":""}">Фильтры</button>
     <div class="ac" id="feedac" hidden></div>
@@ -3365,27 +3447,10 @@ function renderDeals(){
   if(fq){
     fq.addEventListener("input", ()=>{
       clearTimeout(feedSearchTimer);
-      renderSuggest(fq);
+      renderSuggest(fq,"feedac","deals");
       feedSearchTimer=setTimeout(()=>{feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();},250);
     });
-    fq.addEventListener("keydown",e=>{
-      const ac=document.getElementById("feedac");
-      const items=ac&&!ac.hidden?[...ac.querySelectorAll(".ac-item")]:[];
-      if(items.length&&(e.key==="ArrowDown"||e.key==="ArrowUp")){
-        e.preventDefault();
-        const cur=items.findIndex(x=>x.classList.contains("on"));
-        const next=e.key==="ArrowDown"?(cur+1)%items.length:(cur-1+items.length)%items.length;
-        items.forEach((x,i)=>x.classList.toggle("on",i===next));
-        return;
-      }
-      if(e.key==="Escape"){hideSuggest();return;}
-      if(e.key==="Enter"){
-        const on=items.find(x=>x.classList.contains("on"));
-        if(on){on.click();return;}
-        hideSuggest();feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();
-      }
-    });
-    fq.addEventListener("blur",()=>setTimeout(hideSuggest,180));
+    bindSuggestKeys(fq,"feedac",()=>{feedQuery=fq.value;feedPage=1;renderFeedList();syncFeedHash();});
   }
   const fg = document.getElementById("feedgo");
   if(fg) fg.onclick = ()=>{const el=document.getElementById("feedq");feedQuery=el?el.value:"";feedPage=1;renderFeedList();syncFeedHash();};
@@ -4884,7 +4949,7 @@ function bindCompanyGridActions(el){
 function renderCompanies(){
   app.innerHTML = `
   <div class="page-hero light"><div class="ph-in reveal"><span class="label">Каталог</span><h1>Компании</h1><p>Участники сделок: профиль, ключевые лица и показатели, история сделок из публичных источников.</p></div></div>
-  <div class="feed-search reveal"><input id="coq" placeholder="Найти компанию по названию…" value="${esc(coQuery)}" aria-label="Поиск по компаниям"></div>
+  <div class="feed-search reveal"><input id="coq" placeholder="Найти компанию по названию…" value="${esc(coQuery)}" aria-label="Поиск по компаниям"><div class="ac" id="coac" hidden></div></div>
   <div class="filters reveal">
     <select id="coind"><option ${coInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===coInd?"selected":""}>${i}</option>`).join("")}</select>
     <span style="flex:1"></span>
@@ -4896,7 +4961,8 @@ function renderCompanies(){
   const cq = document.getElementById("coq");
   if(cq){
     let t=null;
-    cq.addEventListener("input", ()=>{clearTimeout(t); t=setTimeout(()=>{coQuery=cq.value;coShown=60;renderCompanyGrid();},250);});
+    cq.addEventListener("input", ()=>{clearTimeout(t); renderSuggest(cq,"coac","companies"); t=setTimeout(()=>{coQuery=cq.value;coShown=60;renderCompanyGrid();},250);});
+    bindSuggestKeys(cq,"coac",()=>{clearTimeout(t);coQuery=cq.value;coShown=60;renderCompanyGrid();});
   }
   const ci = document.getElementById("coind");
   if(ci) ci.onchange=()=>{coInd=ci.value;coShown=60;renderCompanies();rerun();};
@@ -4911,6 +4977,17 @@ function renderCompanies(){
    Настоящее время не используем: «сейчас» мы не знаем. Если компанию потом
    перепродали, а сделки в базе нет, здесь этого не будет — так и написано в
    пояснении под блоком. */
+/* Связи между компаниями на экране ВЫКЛЮЧЕНЫ. Владелец, 3 сентября 2026:
+   «все связи сейчас лучше убрать (в картах компаний: под контролем, в группу
+   входит и портфель) — информация неполная и misleading, будем добавлять на
+   новых этапах, когда будет полная». Данные (`holding`, `ownership`, контроль
+   по закрытым сделкам) и весь код рендера остаются на месте — чтобы вернуть
+   строки «Контроль у», «Под контролем», «Входит в группу», «В группу входит»
+   и «Портфель» на страницу компании, достаточно поставить здесь true.
+   «Собственники» (доля с датой и ссылкой на источник) под выключатель не
+   попадают: это факт о самой компании, а не связь, построенная по нашей
+   базе, и на этот блок ссылается вкладка «Участники» из ЕГРЮЛ. */
+const SHOW_COMPANY_LINKS = false;
 const CTRL_WORDS = /контрольн[а-яё]*\s+(?:пакет|дол)|единственн[а-яё]*\s+(?:участник|акционер)|100%\s*(?:долей|акций|уставного)/i;
 const isControlDeal = d => {
   if(d.status!=="Закрыта" || d.type!=="M&A" || !d.buyer || !co(d.buyer)) return false;
@@ -5529,26 +5606,29 @@ function renderCompany(id){
       // «Структура и связи», строки с чёткими текстовыми подписями вместо
       // чипов-близнецов, один общий дисклеймер вместо трёх. Семантика строк
       // (что показывается и когда) не изменилась — изменилась только рамка.
-      const got = controlGot(id), over = controlOver(id);
+      // SHOW_COMPANY_LINKS (см. у controlGot): пока false, из блока остаются
+      // только «Собственники» — строки связей не рендерятся, а не прячутся.
+      const links = SHOW_COMPANY_LINKS;
+      const got = links ? controlGot(id) : null, over = links ? controlOver(id) : [];
       const rows = [];
       if(got) rows.push(`<div><b>Контроль у:</b> <a href="#/companies/${got.buyer}">${co(got.buyer).name}</a> <span style="color:var(--muted)">с ${fmtDate(got.date)} — <a href="#/deal/${got.id}">по сделке</a></span></div>`);
       if(over.length) rows.push(`<div><b>Под контролем (${over.length}):</b> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и ещё ${over.length-6}`:""}</span></div>`);
-      if(holding) rows.push(`<div><b>${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"}:</b> <a href="#/companies/${c.holding.id}">${holding.name}</a>${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}</div>`);
-      if(groupMembers.length) rows.push(`<div><b>В группу входит (${groupMembers.length}):</b><div id="group-members" style="width:100%;margin-top:4px"></div></div>`);
-      if(c.ownership&&c.ownership.length) rows.push(`<div><b>Собственники:</b><div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
+      if(links && holding) rows.push(`<div><b>${c.holding.confidence==="rumored"?"По неподтверждённым данным входит в группу":"Входит в группу"}:</b> <a href="#/companies/${c.holding.id}">${holding.name}</a>${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}</div>`);
+      if(links && groupMembers.length) rows.push(`<div><b>В группу входит (${groupMembers.length}):</b><div id="group-members" style="width:100%;margin-top:4px"></div></div>`);
+      if(c.ownership&&c.ownership.length) rows.push(`<div>${links?`<b>Собственники:</b>`:""}<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
         ${c.ownership.map(o=>`<div style="font-size:13px;color:var(--muted)">
           ${o.id&&co(o.id)?`<a href="#/companies/${o.id}">${esc(o.name)}</a>`:esc(o.name)}${o.share?` — ${esc(o.share)}`:""}
           <span style="font-size:12px">(на ${esc(fmtMonthYear(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
         </div>`).join("")}
       </div></div>`);
-      if(portfolio.length) rows.push(`<div><b>Портфель (${portfolio.length}):</b><div id="portfolio-members" style="width:100%;margin-top:4px"></div></div>`);
+      if(links && portfolio.length) rows.push(`<div><b>Портфель (${portfolio.length}):</b><div id="portfolio-members" style="width:100%;margin-top:4px"></div></div>`);
       if(!rows.length) return "";
       const notes = [];
       if(got||over.length) notes.push("контроль показан по закрытым сделкам в базе — более поздние изменения могут быть ещё не учтены");
-      if(groupMembers.length||portfolio.length||(c.ownership&&c.ownership.length)){
+      if((links && (groupMembers.length||portfolio.length))||(c.ownership&&c.ownership.length)){
         let n = "доли и состав показаны на дату источника, не текущее состояние";
-        if(groupMembers.length) n += "; консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно";
-        if(portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
+        if(links && groupMembers.length) n += "; консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно";
+        if(links && portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
         notes.push(n);
       }
       // Этап 8: кнопка «Показать схему» снята решением обоих партнёров —
@@ -5558,7 +5638,7 @@ function renderCompany(id){
       // будет собираться из настоящих источников (см. COMPANY_FINANCE_BRIEF.md,
       // этап 8, П4-8), а не из id-ссылок holding/ownership внутри своей базы.
       return `<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:10px">
-        <span class="tag steel">Структура и связи</span>
+        <span class="tag steel">${links?"Структура и связи":"Собственники"}</span>
         <div style="display:flex;flex-direction:column;gap:10px;width:100%">${rows.join("")}</div>
         ${notes.length?`<span style="color:var(--muted);font-size:12.5px;max-width:72ch">${notes.map(t=>t[0].toUpperCase()+t.slice(1)).join(". ")}.</span>`:""}
       </div>`;
@@ -5585,13 +5665,13 @@ function renderCompany(id){
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
   mountMiniAI(c.name,"company",id);
   mountCompanyFns(id);
-  if(groupMembers.length) mountGroupMembers(groupMembers, "group-members");
+  if(SHOW_COMPANY_LINKS && groupMembers.length) mountGroupMembers(groupMembers, "group-members");
   // Портфель показывает долю в той же строке, что и имя (просьба владельца
   // 23 августа) — доля берётся из ownership-записи ПОРТФЕЛЬНОЙ компании,
   // которая ссылается обратно на текущий профиль (обратное направление той
   // же связи, что уже подписана в блоке «Собственники» у самой портфельной
   // компании).
-  if(portfolio.length) mountGroupMembers(portfolio, "portfolio-members",
+  if(SHOW_COMPANY_LINKS && portfolio.length) mountGroupMembers(portfolio, "portfolio-members",
     pid => { const stake=(co(pid).ownership||[]).find(o=>o.id===id); return stake&&stake.share?stake.share:null; });
 }
 
@@ -6456,25 +6536,49 @@ async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
   const history=[];  // реплики диалога гостя; у вошедшего история берётся сервером из сохранённого диалога
+  /* Как устроен «новый диалог» — третья жалоба владельца на эту кнопку
+     (3 сентября 2026: «в нелогичном месте, нет никакого перехода, когда
+     нажимаешь; может, он и не нужен»). Отдельная кнопка «+ Новый диалог» над
+     списком истории убрана. Новый диалог и так начинается сам при каждом
+     открытии раздела (activeThreadId обнулён строкой выше) — значит, кнопка
+     нужна ровно в одном случае: разговор уже идёт, и человек хочет начать
+     заново, не уходя со страницы. Поэтому: (а) панель истории есть только у
+     вошедшего (гостю сохранять нечего) и называется «История диалогов»;
+     (б) прямо над лентой стоит строка состояния — «Новый диалог» / «Текущий
+     диалог · N вопросов» / «Диалог из истории · N вопросов» — и в ней же
+     кнопка «Начать заново», которая появляется только когда есть что начинать
+     заново; (в) нажатие меняет ленту сразу под кнопкой — переход виден без
+     прокрутки на любом экране, — а курсор в поле ставится только на
+     компьютере: на телефоне focus() открывает клавиатуру и сам прокручивает
+     к полю внизу (урок 31 августа). */
   app.innerHTML = `
   <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Отвечает по базе «Компаса» или, в режиме «По всему интернету», по открытым источникам — со ссылками на то, откуда взят факт. Обсуждения сохраняются в аккаунте.</p></div></div>
-  <div class="chat-layout">
-    <aside class="thread-panel reveal" id="threadPanel">
-      <button class="thread-new" id="newThread">+ Новый диалог</button>
-      <div class="thread-list" id="threadList">${ME?`<span class="thread-empty">Загружаем историю…</span>`:`<span class="thread-empty">Войдите, чтобы сохранять диалоги.</span>`}</div>
-    </aside>
+  <div class="chat-layout${ME?"":" solo"}">
+    ${ME?`<aside class="thread-panel reveal" id="threadPanel">
+      <div class="thread-head">История диалогов</div>
+      <div class="thread-list" id="threadList"><span class="thread-empty">Загружаем историю…</span></div>
+    </aside>`:""}
     <div class="chat">
       <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
+      <div class="chat-bar reveal"><span class="chat-state" id="chatState">Новый диалог</span><button class="chip" id="newThread" type="button" hidden>Начать заново</button></div>
       <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
       <div class="suggests reveal" id="suggests"></div>
-      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки сопровождала фирма Orion?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки были в фармацевтике в 2025 году?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+      ${ME?"":`<p class="acct-note reveal" style="margin-top:12px"><a href="#/account">Войдите</a>, чтобы диалоги сохранялись — они будут под рукой в истории.</p>`}
     </div>
   </div>`;
   rerun();
   const box=document.getElementById("chatbox"), list=document.getElementById("threadList");
+  const stateEl=document.getElementById("chatState"), fresh=document.getElementById("newThread");
+  let turns=0, fromHistory=false;  // вопросов в текущем диалоге; открыт ли он из истории
+  const paintState=()=>{
+    const n=`${turns} ${plural(turns,"вопрос","вопроса","вопросов")}`;
+    stateEl.textContent = !turns ? "Новый диалог" : (fromHistory ? `Диалог из истории · ${n}` : `Текущий диалог · ${n}`);
+    fresh.hidden = !turns;
+  };
   const push=(cls,html)=>{const m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;box.appendChild(m);box.scrollTop=box.scrollHeight;return m;};
   const renderThreadList=async()=>{
-    if(!ME)return;
+    if(!ME||!list)return;
     try{const r=await fetch("/api/assistant/threads"), rows=r.ok?await r.json():[];
       list.innerHTML=rows.length?rows.map(t=>`<button class="thread-item ${t.id===activeThreadId?"on":""}" data-thread="${t.id}">${esc(t.title)}</button>`).join(""):`<span class="thread-empty">Сохранённых диалогов пока нет.</span>`;
       list.querySelectorAll("[data-thread]").forEach(b=>b.onclick=()=>loadThread(Number(b.dataset.thread)));
@@ -6484,10 +6588,12 @@ async function renderAssistant(){
     const r=await fetch(`/api/assistant/threads/${id}`); if(!r.ok)return;
     const t=await r.json();activeThreadId=t.id;box.innerHTML="";history.length=0;
     t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?mdToHtml(m.body):esc(m.body)));
+    turns=t.messages.filter(m=>m.role==="user").length; fromHistory=true; paintState();
     renderThreadList();
   };
   const answer=async q=>{
     push("user",esc(q));
+    turns++; paintState();
     const w=push("ai wait","");
     const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general",history:history.slice()},w);
     history.push({role:"user",body:q}); if(a&&a.raw) history.push({role:"assistant",body:a.raw});
@@ -6501,21 +6607,17 @@ async function renderAssistant(){
   paintSuggests(); loadSuggests().then(paintSuggests);
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
-  document.getElementById("newThread").onclick=()=>{
-    activeThreadId=null;history.length=0;box.innerHTML=`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются. Спрашивайте.</div>`;renderThreadList();
-    /* Кнопка стоит в боковой панели над историей диалогов, а сама лента —
-       на телефоне ниже переключателя режима, за пределами первого экрана.
-       Первая починка (30 августа) прокручивала к ленте и ставила курсор в
-       поле — но `focus()` сам прокручивает страницу к полю ввода, которое
-       стоит ПОД лентой и подсказками, и человека «отбрасывало в самый низ»
-       (жалоба владельца 31 августа). Теперь: к верху ленты — только если
-       она не на экране, и фокус без прокрутки. */
-    /* Вторая жалоба (31 августа, вечер): «кнопка новый диалог не нравится,
-       что делает». На телефоне любой focus() внутри клика открывает
-       клавиатуру и сам прокручивает к полю ввода внизу — preventScroll
-       этого не отменяет. Поэтому на сенсорных экранах курсор не ставим и
-       ничего не прокручиваем: кнопка стоит прямо над лентой, смена текста
-       в ней видна и так. На компьютере — фокус без прокрутки. */
+  fresh.onclick=()=>{
+    // «остался в истории» — только если сервер этот диалог действительно
+    // сохранил (тогда у него есть id); без модели /api/ask диалоги не пишет.
+    const saved = ME && activeThreadId!==null;
+    activeThreadId=null;history.length=0;turns=0;fromHistory=false;
+    box.innerHTML=`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются${saved?", прошлый разговор остался в истории":""}. Спрашивайте.</div>`;
+    paintState();renderThreadList();
+    /* Курсор — только на компьютере. На телефоне любой focus() внутри клика
+       открывает клавиатуру и сам прокручивает к полю ввода внизу,
+       preventScroll этого не отменяет (жалобы 30 и 31 августа); лента и так
+       стоит прямо под кнопкой, смена текста видна без прокрутки. */
     if(!window.matchMedia("(pointer:coarse)").matches) document.getElementById("q").focus({preventScroll:true});
   };
   bindModeToggles(app);renderThreadList();
