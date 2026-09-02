@@ -4802,7 +4802,7 @@
    ]
   },
   {
-   "draft_id": "d68111011",
+   "draft_id": "d53828833",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4832,7 +4832,7 @@
    ]
   },
   {
-   "draft_id": "d53756439",
+   "draft_id": "d35397931",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4860,7 +4860,7 @@
    ]
   },
   {
-   "draft_id": "d43250126",
+   "draft_id": "d86793935",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4899,7 +4899,7 @@
    ]
   },
   {
-   "draft_id": "d39371824",
+   "draft_id": "d62811356",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4927,7 +4927,7 @@
    ]
   },
   {
-   "draft_id": "d89570508",
+   "draft_id": "d45245573",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4955,7 +4955,7 @@
    ]
   },
   {
-   "draft_id": "d36774583",
+   "draft_id": "d64973726",
    "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
    "date": "2026-09-01",
    "src": [
@@ -4983,7 +4983,7 @@
    ]
   },
   {
-   "draft_id": "d88176695",
+   "draft_id": "d25815037",
    "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
    "date": "2026-09-02",
    "src": [
@@ -5012,7 +5012,7 @@
    ]
   },
   {
-   "draft_id": "d84695534",
+   "draft_id": "d60663688",
    "title": "В районе Строгино выставили на торги крупное помещение",
    "date": "2026-09-02",
    "src": [
@@ -5040,7 +5040,7 @@
    ]
   },
   {
-   "draft_id": "d70659678",
+   "draft_id": "d32652646",
    "title": "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
    "date": "2026-09-02",
    "src": [
@@ -5070,7 +5070,7 @@
    ]
   },
   {
-   "draft_id": "d60364707",
+   "draft_id": "d59073089",
    "title": "Аукцион по приватизации актива экс-владельца «Макфы» вновь провалился",
    "date": "2026-09-02",
    "src": [
@@ -5098,7 +5098,7 @@
    ]
   },
   {
-   "draft_id": "d94848163",
+   "draft_id": "d38263512",
    "title": "В Тюмени за миллионы продают продают полуразрушенную гаупвахту на набережной",
    "date": "2026-09-02",
    "src": [
@@ -5126,189 +5126,7 @@
    ]
   },
   {
-   "draft_id": "d65465958",
-   "title": "Минэкономразвития ждет возобновления роста инвестиций в основной капитал в РФ с 2028 г.",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1112754"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67453086",
-   "title": "PwC оценила мировые инвестиции в дата-центры до 2050 года в $31,6 трлн",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/pwc-otsenila-mirovye-investitsii-v-data-tsentry-do-2050-goda-v-31-6-trln/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d41918201",
-   "title": "Решетников спрогнозировал возвращение роста инвестиций в России к 2028 году",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2159767/2026-09-02/reshetnikov-sprognoziroval-vozvrashchenie-rosta-investitcii-v-rossii-k-2028-godu"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15933865",
-   "title": "Производители электромобилей BYD и Leapmotor нарастили продажи",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260902/b-872938324.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d36662750",
-   "title": "Lada за месяц продала почти 30 тыс. машин — самой востребованной моделью осталась Granta",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/lada-za-mesyac-prodala-pochti-30-tys-mashin-samoj-vostrebovannoj-modelyu-ostalas-granta/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-02",
-     "title": "Сделка завершена",
-     "note": "В августе 2026 года дилеры Lada продали 29 225 автомобилей — на 3,3% больше, чем годом ранее. Как сообщили в компании, за январь–август продажи составили 212 316 машин и практически не изменились по сравнению с аналогичным периодом 2025-го. Самой…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/lada-za-mesyac-prodala-pochti-30-tys-mashin-samoj-vostrebovannoj-modelyu-ostalas-granta/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "почти 30 тыс. машин — самой востребованной моделью осталась Granta",
-   "seller": "Lada за месяц",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "почти 30 тыс. машин — самой востребованной моделью осталась Granta",
-    "seller": "Lada за месяц"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d13518625",
-   "title": "Минфин хочет продать 1/4 «Аэрофлота». Но хорошей цены рынок не даст",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1347100.php"
-    ]
-   ],
-   "sum": "30 млрд ₽",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d71233144",
+   "draft_id": "d39785249",
    "title": "Под Челябинском продается бизнес с миллиардами прибыли. Скрин",
    "date": "2026-09-02",
    "src": [
@@ -5336,7 +5154,7 @@
    ]
   },
   {
-   "draft_id": "d61858926",
+   "draft_id": "d45162687",
    "title": "В Перми через сайт объявлений продают стационар больницы на Никулина",
    "date": "2026-09-02",
    "src": [
@@ -5361,6 +5179,131 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62130653",
+   "title": "Клубы АПЛ за лето потратили на покупку футболистов рекордные 3,46 млрд фунтов",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8924338"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g15386e04 (общие редкие слова: покупк, потрат) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d76614644",
+   "title": "Инвестиции СГК в модернизацию Новосибирской ТЭЦ-3 составят 33 млрд рублей",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28071647"
+    ]
+   ],
+   "sum": "33 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "Завершить работы планируют к концу 2029 года",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28071647"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83740594",
+   "title": "Узбекистан предложил создать совместное предприятие для управления возводимой РФ АЭС",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28071557"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73069292",
+   "title": "Москва вложилась в развитие пищевой промышленности",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/2/moskva-vlozhilas-v-razvitie-pishhevoj-promyshlennosti"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
