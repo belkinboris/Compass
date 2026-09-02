@@ -64,6 +64,12 @@ STOP = set((
     "год года году годы лет рынок рынка рынке российский российского российском россии россия "
     "ооо пао ао оао зао гк ук нко ип ltd llc inc plc group the and for of "
     "известно информация данные база базе базы компас компаса "
+    # Вопросные и родовые слова: сами по себе ничего не ищут, а по общему
+    # началу цепляют чужие имена («так» → «Такси», «столько» → «Столичных»,
+    # «почему» → «Почта»). Со страницы компании «Почему так много покупает?»
+    # без них становится вопросом о самой компании (2 сентября 2026).
+    "почему зачем отчего как так тоже уже еще ещё очень столько такой такая такие "
+    "последние последних последний последняя последнюю новые новых новая новый свежие недавние "
     # Глаголы сделки стоят в сотнях заголовков — как признак они ничего не
     # различают, а как шум подмешивают к точному попаданию чужие карточки
     # («Кто купил Ситибанк?» тянул за «купил» ещё четыре сделки).
@@ -557,6 +563,26 @@ def _significant(name: str) -> list[str]:
     return [stem(t) for t in tokens(name) if t not in GENERIC_NAME_WORDS and len(t) >= 3]
 
 
+def _name_word_match(name_stem: str, term: str) -> bool:
+    """Слово вопроса называет слово ИМЕНИ (компании, стороны, заголовка).
+    `same_word` здесь слишком мягок: у него общее начало в три знака, и
+    «почему» ложилось на «Почта» (Почта Банк), «получил» — на «Полюс», «так»
+    — на «Такси»; вопрос «Почему так много покупает?» со страницы «Яндекса»
+    отвечал про Почта Банк (2 сентября 2026). Имя — не обычное слово: требуем
+    общее начало от четырёх знаков (или равенство — для коротких «ВТБ»,
+    «МТС»)."""
+    if name_stem == term:
+        return True
+    if not same_word(name_stem, term):
+        return False
+    n = 0
+    for x, y in zip(name_stem, term):
+        if x != y:
+            break
+        n += 1
+    return n >= 4
+
+
 def _detect_company(question: str, idx: Index, terms: list[str]) -> tuple[str, list[str]] | None:
     """Компания из вопроса — по значимым словам её имени. Возвращает id и те
     слова вопроса, по которым она узнана: `route` сверяет их с отраслевыми
@@ -568,8 +594,8 @@ def _detect_company(question: str, idx: Index, terms: list[str]) -> tuple[str, l
         sig = _significant(c.get("name") or "")
         if not sig or len(sig) > 4:
             continue
-        matched_terms = [t for s in sig for t in terms if same_word(s, t)]
-        if len({s for s in sig if any(same_word(s, t) for t in terms)}) < len(sig):
+        matched_terms = [t for s in sig for t in terms if _name_word_match(s, t)]
+        if len({s for s in sig if any(_name_word_match(s, t) for t in terms)}) < len(sig):
             continue
         n_deals = len(idx.company_deals.get(cid) or [])
         if n_deals == 0:
@@ -640,7 +666,9 @@ def route(question: str, idx: Index | None = None) -> Intent:
     if industry:
         return Intent("industry", industry=industry, year=year, wants_advisors=wants_adv, terms=terms)
     if not terms:
-        return Intent("empty", terms=terms)
+        # Признаки вопроса нужны и пустому маршруту: со страницы компании «кто
+        # консультировал сделки?» — это вопрос о консультантах этой компании.
+        return Intent("empty", year=year, wants_advisors=wants_adv, terms=terms)
     return Intent("search", year=year, wants_advisors=wants_adv, terms=terms, words=words)
 
 
@@ -648,24 +676,26 @@ def route(question: str, idx: Index | None = None) -> Intent:
 # Поиск по словам (когда вопрос не про конкретную сущность)
 # --------------------------------------------------------------------------
 
+def _term_weight(term: str, idx: Index) -> float:
+    """Вес слова вопроса: редкое в заголовках — отличительное, частое — фон."""
+    total = max(1, len(idx.docs))
+    n = sum(cnt for t, cnt in idx.df.items() if same_word(term, t))
+    if n == 0:
+        return 0.0
+    if n <= 5:
+        return 6.0
+    if n <= 40:
+        return 3.0
+    if n <= 0.15 * total:
+        return 1.0
+    return 0.3
+
+
 def search(terms: list[str], idx: Index, limit: int = MAX_DEALS_FOR_MODEL) -> list[Doc]:
     if not terms:
         return idx.docs[:limit]
-    total = max(1, len(idx.docs))
 
-    def weight(term: str) -> float:
-        n = sum(cnt for t, cnt in idx.df.items() if same_word(term, t))
-        if n == 0:
-            return 0.0
-        if n <= 5:
-            return 6.0
-        if n <= 40:
-            return 3.0
-        if n <= 0.15 * total:
-            return 1.0
-        return 0.3
-
-    weights = {t: weight(t) for t in terms}
+    weights = {t: _term_weight(t, idx) for t in terms}
     scored = []
     for doc in idx.docs:
         score = 0.0
@@ -1002,6 +1032,67 @@ def _answer_search(intent: Intent, idx: Index) -> Retrieval:
     return Retrieval("search", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], None)
 
 
+def _answer_deal(doc: Doc) -> Retrieval:
+    """Сводка одной сделки — для вопроса, заданного с её страницы."""
+    bits = [_fmt_date(doc.date)]
+    if doc.status:
+        bits.append(doc.status.lower())
+    lines = [f"Сделка {_link(doc)} — {', '.join(bits)}."]
+    parties = []
+    if doc.buyer:
+        parties.append(f"покупатель — {doc.buyer}")
+    if doc.seller:
+        parties.append(f"продавец — {doc.seller}")
+    if doc.target or doc.asset:
+        parties.append(f"предмет — {doc.target or doc.asset}")
+    if parties:
+        lines.append("Стороны: " + "; ".join(parties) + ".")
+    lines.append(f"Сумма: {doc.sum_text}." if has_fact(doc.sum_text) else "Сумму сделки не раскрывали.")
+    if doc.advisor_roles:
+        lines.append("Консультанты: " + ", ".join(f"{n} ({r.lower()})" if r else n
+                                                 for r, n in doc.advisor_roles[:4]) + ".")
+    else:
+        lines.append("Консультанты в открытых источниках не назывались.")
+    return Retrieval("deal", "\n".join(lines), [doc], doc.title)
+
+
+def _answer_entity(context_type: str | None, context_id: str | None, intent: Intent, idx: Index) -> Retrieval | None:
+    """Ответ о сущности страницы, с которой задан вопрос, — когда сам вопрос
+    её не называет. «Что известно?» или «Кто консультировал сделки?» на
+    странице «Яндекса» до 2 сентября 2026 давали пустой быстрый ответ (все
+    слова вопроса — стоп-слова), и посетитель ждал модель 30–40 секунд, хотя
+    точная сводка по компании считается за миллисекунды."""
+    if not context_type or not context_id:
+        return None
+    if context_type == "company" and context_id in idx.companies:
+        return _answer_company(Intent("company", company_id=context_id, year=intent.year,
+                                      wants_advisors=intent.wants_advisors, terms=intent.terms), idx)
+    if context_type == "advisor":
+        firm = next((f for f in idx.firms if f.id == context_id), None)
+        if firm:
+            return _answer_advisor(Intent("advisor", firm=firm, year=intent.year, terms=intent.terms), idx)
+    if context_type == "industry" and context_id in idx.industries:
+        return _answer_industry(Intent("industry", industry=context_id, year=intent.year,
+                                       wants_advisors=intent.wants_advisors, terms=intent.terms), idx)
+    if context_type == "deal":
+        doc = idx.by_id.get(context_id)
+        if doc:
+            return _answer_deal(doc)
+    return None
+
+
+def _search_is_specific(intent: Intent, docs: list[Doc], idx: Index) -> bool:
+    """Поиск по словам попал во что-то конкретное: хотя бы одно отличительное
+    (редкое) слово вопроса стоит в заголовке или сторонах первой найденной
+    сделки. «Кто купил Ситибанк?» — да; «какие последние сделки?» — нет,
+    это фоновые слова, и со страницы сущности такой вопрос про неё."""
+    if not docs:
+        return False
+    top = docs[0]
+    return any(len(t) >= 4 and _term_weight(t, idx) >= 3.0 and any(_name_word_match(s, t) for s in top.strong)
+               for t in intent.terms)
+
+
 def _scoped(context_type: str | None, context_id: str | None, idx: Index) -> list[Doc] | None:
     """Вопрос, заданный со страницы сделки/компании/фирмы/отрасли, — про неё."""
     if not context_type or not context_id:
@@ -1029,15 +1120,26 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         "term": _answer_term, "search": _answer_search,
     }
     if intent.kind == "empty":
+        own = _answer_entity(context_type, context_id, intent, idx)
+        if own:
+            return own
         scoped = _scoped(context_type, context_id, idx)
         return Retrieval("empty", None, scoped or [], None)
     result = handlers[intent.kind](intent, idx)
     # Со страницы сущности вопрос почти всегда про неё: если поиск по словам
-    # ничего внятного не нашёл, отдаём модели именно её сделки.
+    # не попал ни во что конкретное, быстрый ответ — сводка по самой
+    # сущности, а модели уходят её сделки первыми. Конкретное попадание
+    # («Кто купил Ситибанк?» со страницы «Яндекса») остаётся ответом на
+    # заданный вопрос — сделки страницы лишь добавляются к нему.
     if intent.kind == "search":
+        own = _answer_entity(context_type, context_id, intent, idx)
+        if own and own.answer and result.intent == "search" and not _search_is_specific(intent, result.docs, idx):
+            merged = own.docs + [d for d in result.docs if d not in own.docs]
+            return Retrieval(own.intent, own.answer, merged[:MAX_DEALS_FOR_MODEL], own.subject)
         scoped = _scoped(context_type, context_id, idx)
         if scoped:
-            merged = scoped + [d for d in result.docs if d not in scoped]
+            # Найденное — первым: сводка говорит о нём; сделки страницы — контекст для модели.
+            merged = result.docs + [d for d in scoped if d not in result.docs]
             result = Retrieval(result.intent, result.answer, merged[:MAX_DEALS_FOR_MODEL], result.subject)
     return result
 

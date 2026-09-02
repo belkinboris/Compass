@@ -227,3 +227,48 @@ def test_firm_name_words_are_not_read_as_an_industry(idx):
         assert len(r.docs) == n, (q, len(r.docs), n)
         if n:
             assert f" {n} " in r.answer and "#/deal/" in r.answer
+
+
+# ---------- быстрый ответ со страницы сущности (2 сентября 2026) ----------
+# Партнёр на странице «Яндекса»: «Почему яндекс так много покупает?» — ждал
+# 40 секунд. Быстрый ответ обязан быть у сервера сразу, и обязан быть про
+# ту компанию, чью страницу открыли, — а не про «Почта Банк», на который
+# ложилось слово «почему».
+
+PARTNER_Q = "Почему яндекс так много покупает?"
+
+
+def test_company_page_answers_the_partner_question_instantly(idx):
+    import time
+    t = time.perf_counter()
+    r = _ask(PARTNER_Q, idx, context_type="company", context_id="yandex")
+    took = time.perf_counter() - t
+    assert r.answer and r.intent == "company" and r.subject == "Яндекс"
+    assert set(d.id for d in r.docs) <= set(d.id for d in idx.company_deals["yandex"])
+    assert took < 1.0, f"быстрый ответ занял {took:.2f} с"
+    # Без имени компании в вопросе — страница уже знает, о ком речь.
+    r2 = _ask("Почему так много покупает?", idx, context_type="company", context_id="yandex")
+    assert r2.intent == "company" and "Яндекс" in r2.answer
+
+
+def test_question_words_are_not_company_names(idx):
+    for q in ("Почему так много покупает?", "кто получил разрешение фас?"):
+        assert _ask(q, idx).intent != "company", q
+    assert not ar._name_word_match("почт", "почем")     # «почему» → «Почта Банк»
+    assert not ar._name_word_match("полюс", "получ")    # «получил» → «Полюс»
+    assert ar._name_word_match("яндекс", "яндекс") and ar._name_word_match("магнит", "магнита")
+    assert ar._name_word_match("втб", "втб")
+
+
+def test_entity_page_answers_about_itself_when_the_question_names_nothing(idx):
+    r = _ask("что известно?", idx, context_type="advisor", context_id="orion")
+    assert r.intent == "advisor" and "Orion" in r.answer
+    r = _ask("кто консультировал сделки?", idx, context_type="company", context_id="yandex")
+    assert r.intent == "company" and "онсультант" in r.answer
+    r = _ask("что известно?", idx, context_type="deal", context_id="citibank")
+    assert r.intent == "deal" and "#/deal/citibank" in r.answer and len(r.docs) == 1
+    r = _ask("что известно?", idx, context_type="industry", context_id="Банки")
+    assert r.intent == "industry" and "Банки" in r.answer
+    # Конкретный вопрос со страницы — по-прежнему про то, о чём спросили.
+    r = _ask("Кто купил Ситибанк?", idx, context_type="company", context_id="yandex")
+    assert r.docs[0].id == "citibank"

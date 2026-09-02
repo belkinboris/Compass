@@ -329,15 +329,42 @@ FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP = 120
 FNS_DAILY_REQUEST_CAP_HIGH = 400
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
+DEFAULT_MODEL = "deepseek-v4-flash/latest"
 # СКОЛЬКО ЖДЁТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки
 # 60 с» и «повторов 2» — и это молча означало худший случай 180 с ожидания с
 # ПУСТЫМ ответом в конце: замер 7 августа на бою поймал ровно такой запрос
 # (вопрос про сделки в фарме, 180,0 с, ноль знаков ответа). Три независимых
 # таймаута не складывались ни в какое обещание пользователю. Теперь обещание
 # одно — общий дедлайн; попытки укладываются в него, а не наоборот.
-LLM_TIMEOUT = 30.0  # одна попытка
-LLM_DEADLINE = float(os.environ.get("LLM_DEADLINE", "70"))  # весь ответ, включая повторы
-LLM_RETRIES = 2  # повторов сверх первой попытки
+#
+# ДЕДЛАЙН СЧИТАЕТСЯ ОТ ТОГО, СКОЛЬКО ЖДЁТ БРАУЗЕР, А НЕ НАОБОРОТ (2 сентября
+# 2026, «40 секунд ту мач» партнёра). Интерфейс обрывает запрос через 45 с в
+# режиме «по базе» и через 75 с «по всему интернету» (aiAnswer в index.html), а
+# сервер обещал 70 с на модель — плюс до 15 с поиска перед ней: 85 с, которых
+# браузер не ждал. Худший случай по базе складывался так: попытка 30 с →
+# повтор 30 с → третья попытка на остаток 10 с (порог был 8) — 70 с, из
+# которых пользователь видел 45 и получал обрыв. Теперь: по базе — 35 с
+# целиком, по интернету — 60 с от начала запроса, включая поиск; попытка не
+# начинается, если ей остаётся меньше LLM_MIN_ATTEMPT (за 8 с модель, которая
+# думает 20, не ответит). Все четыре числа — переменные окружения, чтобы их
+# подбирать по стенду /api/assistant/bench, а не выкладкой кода.
+LLM_TIMEOUT = float(os.environ.get("LLM_TIMEOUT", "30"))          # одна попытка
+LLM_DEADLINE = float(os.environ.get("LLM_DEADLINE", "35"))        # режим «по базе», весь ответ
+LLM_DEADLINE_WEB = float(os.environ.get("LLM_DEADLINE_WEB", "60"))  # «по интернету»: поиск + модель
+LLM_MIN_ATTEMPT = float(os.environ.get("LLM_MIN_ATTEMPT", "12"))  # короче этого попытку не начинаем
+LLM_RETRIES = 2  # повторов сверх первой попытки — только после БЫСТРОГО сбоя (см. call_llm)
+# РЕЖИМ РАССУЖДЕНИЯ. Responses API принимает `reasoning: {"effort": ...}` со
+# значениями none | minimal | low | medium | high | xhigh (документация
+# Yandex AI Studio, раздел «Режим рассуждения»; сайт документации из среды
+# разработки закрыт капчей, значения взяты из поисковой выдачи по нему и из
+# SDK yandex-ai-studio-sdk, где для Chat Completions тот же параметр зовётся
+# reasoning_effort). До 2 сентября 2026 параметр не передавался вовсе, и
+# THINKING_BUDGET ограничивал рассуждение только косвенно — через общий
+# max_output_tokens: модель, надумавшая больше, упиралась в потолок, отдавала
+# ПУСТОЙ текст, и call_llm повторял тот же запрос ещё дважды. Значение по
+# умолчанию пустое = поведение как раньше; какое усилие нужно для ответа по
+# ГОТОВОЙ сводке — вопрос замера стендом, а не догадки.
+LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "").strip()
 # СКОЛЬКО МОДЕЛИ ПОЗВОЛЕНО «ДУМАТЬ» ДО ОТВЕТА. DeepSeek через Yandex рассуждает
 # всегда, и эти токены генерируются ПОСЛЕДОВАТЕЛЬНО перед первым словом ответа —
 # то есть прямо превращаются в ожидание пользователя. Замер 7 августа на бою:
@@ -447,18 +474,41 @@ def _extract_text(data: dict) -> str:
     return "".join(parts).strip()
 
 
-def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = None) -> str:
+def current_model() -> str:
+    return os.environ.get("YANDEX_MODEL", DEFAULT_MODEL)
+
+
+class _NoRetry(RuntimeError):
+    """Сбой, который повторять тем же запросом бессмысленно."""
+
+
+def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = None,
+             model: str | None = None, reasoning_effort: str | None = None,
+             stats: dict | None = None) -> str:
     """Вызов Yandex AI Studio Responses API с ретраями. Пустой ответ/сбой -> RuntimeError.
 
     `deadline` — момент (time.monotonic), после которого попыток больше не будет.
-    Повтор запускается, только если до дедлайна осталось хотя бы 8 секунд: иначе
-    он гарантированно не успеет, а пользователь всё это время ждёт.
+    Повтор запускается, только если до дедлайна осталось хотя бы LLM_MIN_ATTEMPT
+    секунд: иначе он гарантированно не успеет, а пользователь всё это время ждёт.
+
+    Повторяем только БЫСТРЫЕ сбои (HTTP 5xx/429, обрыв сети, битый JSON). Два
+    случая повторять нельзя, и до 2 сентября 2026 именно они складывались в
+    40–70 секунд ожидания: (1) попытка не уложилась в таймаут — второй такой же
+    запрос будет думать столько же; (2) модель потратила весь max_output_tokens
+    на рассуждение и не начала ответ (status=incomplete, текста нет) — при
+    температуре 0,3 второй прогон упрётся в тот же потолок.
+
+    `model` / `reasoning_effort` — переопределения для стенда сравнения моделей
+    (/api/assistant/bench); `stats` — словарь, в который записываются число
+    попыток, статус ответа и расход токенов, чтобы стенд и лог отвечали на
+    вопрос «куда ушли секунды», а не только «сколько их было».
     """
     api_key = os.environ.get("YANDEX_API_KEY", "")
     folder_id = os.environ.get("YANDEX_FOLDER_ID", "")
-    model = os.environ.get("YANDEX_MODEL", "deepseek-v4-flash/latest")
+    model = model or current_model()
+    effort = LLM_REASONING_EFFORT if reasoning_effort is None else reasoning_effort.strip()
     payload = {
-        "model": f"gpt://{folder_id}/{model}",
+        "model": model if model.startswith("gpt://") else f"gpt://{folder_id}/{model}",
         "instructions": system,
         "input": user,
         # 0,7 давала «творческие» пересказы с неверными числами; ответ по
@@ -466,27 +516,59 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
         "temperature": float(os.environ.get("LLM_TEMPERATURE", "0.3")),
         "max_output_tokens": max_tokens + THINKING_BUDGET,
     }
+    if effort:
+        payload["reasoning"] = {"effort": effort}
     headers = {"Authorization": f"Api-Key {api_key}", "Content-Type": "application/json"}
+    info = stats if stats is not None else {}
+    info.update({"model": model, "attempts": 0, "reasoning_effort": effort or None})
 
     last_err: Exception | None = None
     for attempt in range(1 + LLM_RETRIES):
         left = None if deadline is None else deadline - time.monotonic()
-        if left is not None and left < 8:
+        if left is not None and left < LLM_MIN_ATTEMPT:
             logger.warning("LLM: до дедлайна осталось %.1f с, попытку %d не начинаю", left, attempt + 1)
             break
+        timeout = LLM_TIMEOUT if left is None else min(LLM_TIMEOUT, left)
+        info["attempts"] = attempt + 1
+        started = time.monotonic()
         try:
-            timeout = LLM_TIMEOUT if left is None else min(LLM_TIMEOUT, left)
             resp = _http.post(RESPONSES_URL, json=payload, headers=headers, timeout=timeout)
+            took = time.monotonic() - started
             if resp.status_code != 200:
                 raise RuntimeError(f"Responses API HTTP {resp.status_code}: {resp.text[:300]}")
-            text = _extract_text(resp.json())
+            data = resp.json()
+            usage = data.get("usage") or {}
+            details = usage.get("output_tokens_details") or {}
+            info.update({"status": data.get("status"), "seconds": round(took, 2),
+                         "output_tokens": usage.get("output_tokens"),
+                         "reasoning_tokens": details.get("reasoning_tokens")})
+            text = _extract_text(data)
+            logger.info("LLM %s: попытка %d — %.1f с, status=%s, токенов вывода %s (рассуждение %s), "
+                        "текста %d знаков", model, attempt + 1, took, data.get("status"),
+                        usage.get("output_tokens"), details.get("reasoning_tokens"), len(text))
             if text:
                 return text
+            if data.get("status") == "incomplete":
+                reason = (data.get("incomplete_details") or {}).get("reason") or "incomplete"
+                raise _NoRetry(f"модель потратила весь бюджет вывода ({usage.get('output_tokens')} токенов, "
+                               f"из них рассуждение {details.get('reasoning_tokens')}) и не начала ответ ({reason})")
             raise RuntimeError("Responses API вернул пустой текст")
+        except _NoRetry as e:
+            last_err = e
+            logger.warning("LLM %s: попытка %d — %s; повтор бессмыслен", model, attempt + 1, e)
+            break
+        except httpx.TimeoutException as e:
+            last_err = e
+            info["status"] = "timeout"
+            logger.warning("LLM %s: попытка %d не уложилась в %.0f с — повтор занял бы столько же, не повторяю",
+                           model, attempt + 1, timeout)
+            break
         except (httpx.HTTPError, RuntimeError, ValueError) as e:
             last_err = e
-            logger.warning("LLM attempt %d/%d failed: %s", attempt + 1, 1 + LLM_RETRIES, e)
-    raise RuntimeError(f"LLM недоступен после {1 + LLM_RETRIES} попыток: {last_err}")
+            logger.warning("LLM %s: попытка %d/%d не удалась (%.1f с): %s",
+                           model, attempt + 1, 1 + LLM_RETRIES, time.monotonic() - started, e)
+    info["error"] = str(last_err)
+    raise RuntimeError(f"LLM недоступен после {info['attempts']} попыток: {last_err}")
 
 
 def _sources_footer(results: list[SearchResult]) -> str:
@@ -563,31 +645,37 @@ def _deals_payload(ret) -> list[dict]:
     return [{"id": d.id, "title": d.title} for d in ret.docs[:12]]
 
 
-@app.post("/api/ask")
-def ask(req: AskRequest, request: Request, db=Depends(get_db)):
-    question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
-    # Поиск по базе — на сервере и ДО модели: он даёт проверенные счётчики и
-    # ссылки, а модели остаётся написать по ним живой текст. Без ключей к
-    # модели точный ответ по базе всё равно отдаём — это лучше заглушки.
+def _retrieve(question: str, context_type: str | None, context_id: str | None):
+    """Поиск по базе — на сервере и ДО модели: он даёт проверенные счётчики и
+    ссылки, а модели остаётся написать по ним живой текст. Сбой поиска не
+    должен ронять ассистента целиком."""
     try:
         idx = assistant_retrieval.get_index()
-        ret = assistant_retrieval.retrieve(question, req.context_type, req.context_id, idx)
-    except Exception as e:  # noqa: BLE001 — сбой поиска не должен ронять ассистента целиком
+        return idx, assistant_retrieval.retrieve(question, context_type, context_id, idx)
+    except Exception as e:  # noqa: BLE001
         logger.error("assistant retrieval failed: %s", e)
-        idx, ret = None, assistant_retrieval.Retrieval("search", None, [], None)
+        return None, assistant_retrieval.Retrieval("search", None, [], None)
 
-    if not _yandex_ready():
-        if ret.answer:
-            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
-        return JSONResponse({"fallback": True})
 
-    deadline = time.monotonic() + LLM_DEADLINE
-    web = req.mode == "web"
+class AskPrep:
+    """Всё, что уходит модели, собранное ОДИН раз: промпт, сводка, выдача поиска.
+    Один и тот же путь для /api/ask и для стенда /api/assistant/bench — иначе
+    стенд мерил бы не то, что видит посетитель."""
+
+    def __init__(self, system: str, user_msg: str, results: list, search_block: str):
+        self.system = system
+        self.user_msg = user_msg
+        self.results = results
+        self.search_block = search_block
+        self.max_tokens = 1400 if search_block else 700
+        self.deadline_seconds = LLM_DEADLINE_WEB if search_block else LLM_DEADLINE
+
+
+def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
     system = SYSTEM_BASE
     search_block = ""
     results: list = []
-
-    if web:
+    if mode == "web":
         try:
             results = yandex_search(question, config=SearchConfig.from_env(), client=_http)
             if results:
@@ -597,6 +685,20 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
                 logger.info("web-режим: пустая выдача, деградация в base")
         except SearchError as e:
             logger.warning("web-режим: поиск упал (%s), деградация в base", e)
+    return AskPrep(system, _build_user_message(question, ret, search_block, history), results, search_block)
+
+
+@app.post("/api/ask")
+def ask(req: AskRequest, request: Request, db=Depends(get_db)):
+    started = time.monotonic()
+    question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    idx, ret = _retrieve(question, req.context_type, req.context_id)
+
+    if not _yandex_ready():
+        # Без ключей к модели точный ответ по базе всё равно отдаём — это лучше заглушки.
+        if ret.answer:
+            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
+        return JSONResponse({"fallback": True})
 
     user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
     history_rows: list[tuple[str, str]] = []
@@ -612,10 +714,13 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
                         for h in req.history if isinstance(h, dict) and h.get("body")]
 
-    user_msg = _build_user_message(question, ret, search_block, _history_lines(history_rows))
+    prep = _prepare_ask(question, ret, req.mode, _history_lines(history_rows))
+    search_block, results = prep.search_block, prep.results
+    # Дедлайн — от начала запроса: поиск по интернету уже потратил свою часть.
+    deadline = started + prep.deadline_seconds
 
     try:
-        text = call_llm(system, user_msg, max_tokens=1400 if search_block else 700, deadline=deadline)
+        text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens, deadline=deadline)
         text = _polish_answer(text, idx)
         if search_block and not _MD_LINK_RE.search(text):
             logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
@@ -653,8 +758,15 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         # чем общий отказ: ссылки на источники добыты и они по делу. Пустой
         # экран после минуты ожидания читается как «ассистент не работает».
         if results:
-            return {"answer": "Не удалось собрать ответ — модель не ответила вовремя. "
-                              "Вот что нашлось по вопросу в сети:" + _sources_footer(results)}
+            # Точный ответ по базе, если он есть, — впереди ссылок: партнёр
+            # 2 сентября 2026 в этом месте видел только «не удалось собрать
+            # ответ» и список ссылок, хотя сводка по базе была готова.
+            lines = ["Модель не ответила вовремя, поэтому отвечаю коротко."]
+            if ret.answer:
+                lines.append("По данным «Компаса»:\n" + ret.answer)
+            lines.append("Что нашлось по вопросу в сети:" + _sources_footer(results))
+            return {"answer": "\n\n".join(lines), "deals": _deals_payload(ret), "intent": ret.intent,
+                    "model": False}
         # Точный ответ по базе у нас уже есть — модель нужна была только для
         # живого текста. Отдаём факты, а не заглушку.
         if ret.answer:
@@ -683,6 +795,70 @@ def assistant_lookup(req: AskRequest):
         logger.error("assistant lookup failed: %s", e)
         return {"answer": None, "deals": [], "intent": "search"}
     return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "subject": ret.subject}
+
+
+class BenchRequest(BaseModel):
+    token: str = ""
+    question: str = ""
+    models: list[str] = []
+    mode: str = "base"  # base | web
+    repeats: int = 1
+    reasoning_effort: str | None = None  # None — как в окружении сервера; "" — не передавать
+    context_type: str = "general"
+    context_id: str | None = None
+
+
+BENCH_MAX_MODELS = 8
+BENCH_MAX_REPEATS = 5
+
+
+@app.post("/api/assistant/bench")
+def assistant_bench(req: BenchRequest):
+    """Стенд сравнения моделей — тем же путём, что /api/ask: та же сводка по
+    базе, тот же промпт, тот же дедлайн. Ключи к Yandex AI Studio есть только
+    на боевом хосте, поэтому мерить модели можно только через него — и только
+    с токеном модерации (тот же, что у /api/moderation/decisions). Скрипт:
+    pipeline/assistant_bench.py. Ничего не пишет: ни диалогов, ни оценок."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    if not question:
+        return JSONResponse({"error": "нужен вопрос (question)"}, status_code=400)
+    if not _yandex_ready():
+        return JSONResponse({"error": "на сервере не заданы YANDEX_API_KEY и YANDEX_FOLDER_ID — "
+                                      "модель вызвать нельзя, стенд работает только там, где есть ключи"},
+                            status_code=503)
+    models = [m.strip() for m in (req.models or []) if isinstance(m, str) and m.strip()][:BENCH_MAX_MODELS]
+    if not models:
+        models = ["current"]
+    repeats = max(1, min(int(req.repeats or 1), BENCH_MAX_REPEATS))
+    idx, ret = _retrieve(question, req.context_type, req.context_id)
+    prep = _prepare_ask(question, ret, req.mode, "")
+    rows = []
+    for name in models:
+        model = current_model() if name == "current" else name
+        for _ in range(repeats):
+            stats: dict = {}
+            t0 = time.monotonic()
+            row = {"model": model, "ok": False, "seconds": None, "chars": 0, "error": None, "answer_head": None}
+            try:
+                text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens,
+                                deadline=t0 + prep.deadline_seconds, model=model,
+                                reasoning_effort=req.reasoning_effort, stats=stats)
+                text = _polish_answer(text, idx)
+                row.update({"ok": True, "chars": len(text), "answer_head": text[:240]})
+            except RuntimeError as e:
+                row["error"] = str(e)[:400]
+            row["seconds"] = round(time.monotonic() - t0, 2)
+            for key in ("attempts", "status", "output_tokens", "reasoning_tokens"):
+                row[key] = stats.get(key)
+            rows.append(row)
+    return {"question": question, "mode": "web" if prep.search_block else "base",
+            "web_results": len(prep.results), "prompt_chars": len(prep.user_msg),
+            "deadline_seconds": prep.deadline_seconds,
+            "reasoning_effort": (req.reasoning_effort if req.reasoning_effort is not None
+                                 else (LLM_REASONING_EFFORT or None)),
+            "results": rows}
 
 
 @app.get("/api/assistant/suggestions")
