@@ -6310,9 +6310,16 @@ async function mountMarketMultiples(){
   try{
     const r=await fetch("/api/analytics/multiples"); data=await r.json();
   }catch(e){
-    body.textContent="Не удалось загрузить мультипликаторы — попробуйте обновить страницу.";
+    if(body.isConnected) body.textContent="Не удалось загрузить мультипликаторы — попробуйте обновить страницу.";
     return;
   }
+  // Пока ждали ответ, могли уйти на другой экран — route() уже заменил
+  // #app, и этот узел (как и document.getElementById того же id) больше
+  // не в документе. Писать в него дальше — тот же класс гонки, что уже
+  // чинили в renderPreview, только там ломалась анимация, а здесь без
+  // проверки падает необработанным исключением (getElementById вернёт
+  // null у ЧУЖОЙ, новой страницы, а не у этого узла).
+  if(!body.isConnected) return;
   if(!data || !data.clean_total){
     body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (сумма в рублях, доля ≥95%, отчётность цели за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
     return;

@@ -458,6 +458,45 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         ctx.close()
 
 
+def test_leaving_analytics_before_multiples_reply_does_not_crash_advisors(browser, base_url):
+    """2 сентября 2026: health-check поймал `pageerror` на «Консультантах»
+    («Cannot set properties of null (setting 'innerHTML')»), хотя ломалась
+    не эта страница — виновата `mountMarketMultiples()` со страницы
+    «Аналитика»: она захватывает DOM-узел ДО await, а если пользователь
+    уходит на другой экран, пока ответ ещё в пути, `route()` уже заменил
+    `#app`, и запись в отсоединённый узел роняет исключение с ЧУЖОЙ, новой
+    страницы. Подмена ответа через `page.route`/`route.fulfill` с задержкой
+    ЗДЕСЬ НЕ ГОДИТСЯ (проверено — такой тест проходит одинаково что с
+    починкой, что без неё, ничего не ловит) — гонку даёт только подмена
+    `window.fetch` ДО загрузки страницы (`add_init_script`), чтобы
+    задержался ЕДИНСТВЕННЫЙ, естественно запущенный самим рендером вызов,
+    без второго, наведённого вручную (второй вызов сам путает картину —
+    его собственный поздний ответ обгоняет первый, и узел оказывается
+    отсоединён ещё до перехода на другой экран)."""
+    ctx = browser.new_context()
+    try:
+        ctx.add_init_script("""
+            const orig = window.fetch;
+            window.fetch = function(url, ...args) {
+                if (String(url).includes('/api/analytics/multiples')) {
+                    return new Promise(resolve => setTimeout(() => resolve(orig(url, ...args)), 1500));
+                }
+                return orig(url, ...args);
+            };
+        """)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/analytics", wait_until="domcontentloaded")
+        pg.wait_for_timeout(900)
+        pg.evaluate("location.hash = '#/advisors'")
+        pg.wait_for_timeout(2000)
+        assert not errors
+        pg.close()
+    finally:
+        ctx.close()
+
+
 def test_analytics_multiples_toggle_switches_to_revenue_view(browser, base_url):
     """Два вида одного блока (не две карточки). С 31 августа 2026 первым и
     по умолчанию открыт «По прибыли» (просьба владельца), «По выручке» —
