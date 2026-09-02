@@ -4800,7 +4800,7 @@
    ]
   },
   {
-   "draft_id": "d31624743",
+   "draft_id": "d49775512",
    "title": "Аукцион по продаже акций «Вектор Рейл» перенесен с 4 на 17 сентября",
    "date": "2026-09-02",
    "src": [
@@ -4830,7 +4830,7 @@
    ]
   },
   {
-   "draft_id": "d27734044",
+   "draft_id": "d80528750",
    "title": "«Скидка не сработала»: сорвались третьи торги по продаже 83 активов челябинского экс-губернатора",
    "date": "2026-09-02",
    "src": [
@@ -4858,7 +4858,7 @@
    ]
   },
   {
-   "draft_id": "d58497661",
+   "draft_id": "d80112390",
    "title": "В Кургане продают кафе со строящейся гостиницей за 35 миллионов рублей. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4897,7 +4897,7 @@
    ]
   },
   {
-   "draft_id": "d58262172",
+   "draft_id": "d60598597",
    "title": "В пермской деревне продают респектабельный коттедж с огромной автопарковкой. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4925,7 +4925,7 @@
    ]
   },
   {
-   "draft_id": "d90447260",
+   "draft_id": "d47914844",
    "title": "В центре Челябинска продают башню Рапунцель за 40 миллионов. Фото",
    "date": "2026-09-02",
    "src": [
@@ -4953,17 +4953,343 @@
    ]
   },
   {
-   "draft_id": "d35470996",
-   "title": "В ВТБ допустили проведение до трех IPO в России до конца года",
+   "draft_id": "d67849354",
+   "title": "Минфин планирует продать госпакет Шереметьево ближе к концу года",
    "date": "2026-09-02",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28068989"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8923860"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "Продажа госпакета аэропорта Шереметьево «будет зависеть от корпоративных процедур», заявил «Интерфаксу» замглавы Минфина Алексей Моисеев. По его словам, министерство рассчитывает продать госпакет «ближе к концу года».",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8923860"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36831587",
+   "title": "Минфин сохраняет планы продать госдолю НМТП до конца года",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/02/1225568-plani-prodat-nmtp"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/09/02/1225568-plani-prodat-nmtp"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66667829",
+   "title": "«Трансфин-М» допустил покупку контрольного пакета ФГК у РЖД",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/02/09/2026/6a97b50a5bd2c4a73a49f137"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "РЖД рассматривают продажу ФГК. «Трансфин-М» готов войти в число претендентов, но только если на продажу выставят контрольный пакет, заявил РБК гендиректор лизинговой компании Алафинов",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/02/09/2026/6a97b50a5bd2c4a73a49f137"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41474358",
+   "title": "Минфин РФ сохраняет планы продать госдолю в НМТП единым пакетом до конца года",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1112671"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-02",
+     "title": "Переговоры",
+     "note": "Минфин РФ сохраняет планы продать принадлежащий государству пакет акций ПАО \"Новороссийский морской торговый порт\" в текущем году.\"Сейчас идут оценочные мероприятия, и если все пойдет в плановом режиме, то продажа должна состояться в этом году\", - сказал…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1112671"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82534716",
+   "title": "Минфин не ставит цели продать госпакет «Аэрофлота» в рамках SPO «любой ценой»",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1112660"
     ]
    ],
    "sum": null,
    "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2c27516d (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d87558074",
+   "title": "Минфин рассчитывает продать госпакет «Шереметьево» ближе к концу года",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1112656"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82550017",
+   "title": "Платформа для продажи подержанных автомобилей CarPrice предупредила клиентов о временном ограничении выплат — РБК",
+   "date": "2026-09-01",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/transport/3115696-carprice-ogranichil-vyplaty-klientam?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77488155",
+   "title": "Янтарный комбинат начал прием заявок для проведения аукциона по продаже уникального янтаря",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28068965"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d41516831",
+   "title": "СГК увеличила инвестиции в подготовку к отопительному сезону на 11%",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28069371"
+    ]
+   ],
+   "sum": "19,4 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47038845",
+   "title": "«Динамо» в последний момент отказалось от покупки двух футболистов",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/02/dinamo-v-posledniy-moment-otkazalos-ot-pokupki-dvuh-futbolistov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63924768",
+   "title": "В районе Строгино выставили на торги крупное помещение",
+   "date": "2026-09-02",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/2/v-rajone-strogino-vystavili-na-torgi-krupnoe-pomeshhenie"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
