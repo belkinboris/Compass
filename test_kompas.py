@@ -401,3 +401,146 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
         assert db.scalar(sa_select(AssistantFeedback).where(AssistantFeedback.question == "x")).verdict == "up"
     finally:
         db.close()
+
+
+# ---------- стенд сравнения моделей и честные повторы (2 сентября 2026) ----------
+# Партнёр: «40 секунд ту мач». Причины были в call_llm: повтор после таймаута
+# (ещё столько же), повтор после ответа без текста (тот же потолок токенов) и
+# дедлайн 70 с при 45 с ожидания в браузере. Стенд /api/assistant/bench
+# нужен, чтобы выбирать модель и усилие рассуждения по замеру, а не на глаз.
+
+RESPONSES_WITH_USAGE = dict(RESPONSES_OK, status="completed",
+                            usage={"output_tokens": 57, "output_tokens_details": {"reasoning_tokens": 7}})
+
+
+def test_call_llm_passes_model_and_reasoning_effort(monkeypatch):
+    monkeypatch.setenv("YANDEX_API_KEY", "k")
+    monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
+    payloads = []
+
+    def handler(request):
+        payloads.append(json.loads(request.content))
+        return httpx.Response(200, json=RESPONSES_WITH_USAGE)
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    stats = {}
+    text = main.call_llm("sys", "user", max_tokens=700, model="yandexgpt/latest",
+                         reasoning_effort="low", stats=stats)
+    assert text == "Ответ ассистента"
+    assert payloads[-1]["model"] == "gpt://f/yandexgpt/latest"
+    assert payloads[-1]["reasoning"] == {"effort": "low"}
+    assert stats["attempts"] == 1 and stats["status"] == "completed"
+    assert stats["reasoning_tokens"] == 7 and stats["output_tokens"] == 57
+    # Пустое усилие — параметр не передаётся вовсе (поведение до 2 сентября).
+    main.call_llm("sys", "user", max_tokens=700, reasoning_effort="")
+    assert "reasoning" not in payloads[-1]
+    assert payloads[-1]["model"] == "gpt://f/" + main.current_model()
+
+
+def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
+    """Повтор после таймаута ждёт столько же ещё раз; повтор после ответа без
+    текста (модель всё потратила на рассуждение) упрётся в тот же потолок.
+    Оба случая — один заход, не три."""
+    monkeypatch.setenv("YANDEX_API_KEY", "k")
+    monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
+    calls = {"n": 0}
+
+    def slow(request):
+        calls["n"] += 1
+        raise httpx.ReadTimeout("read timed out", request=request)
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(slow)))
+    with pytest.raises(RuntimeError):
+        main.call_llm("sys", "user", max_tokens=700)
+    assert calls["n"] == 1
+
+    calls["n"] = 0
+    exhausted = {"status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"},
+                 "output": [{"type": "reasoning", "content": [{"type": "reasoning_text", "text": "думаю..."}]}],
+                 "usage": {"output_tokens": 1500, "output_tokens_details": {"reasoning_tokens": 1500}}}
+
+    def truncated(request):
+        calls["n"] += 1
+        return httpx.Response(200, json=exhausted)
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(truncated)))
+    stats = {}
+    with pytest.raises(RuntimeError) as err:
+        main.call_llm("sys", "user", max_tokens=700, stats=stats)
+    assert calls["n"] == 1
+    assert "бюджет" in str(err.value) and stats["reasoning_tokens"] == 1500
+
+    # А быстрый сбой (5xx) по-прежнему повторяется.
+    calls["n"] = 0
+
+    def boom(request):
+        calls["n"] += 1
+        return httpx.Response(500, text="boom")
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(boom)))
+    with pytest.raises(RuntimeError):
+        main.call_llm("sys", "user", max_tokens=700)
+    assert calls["n"] == 1 + main.LLM_RETRIES
+
+
+def test_server_deadlines_fit_inside_what_the_browser_waits():
+    """Браузер ждёт 45 с по базе и 75 с по интернету (aiAnswer в index.html);
+    сервер обязан обещать меньше — иначе он дописывает ответ тому, кто уже ушёл."""
+    import re
+    html = open("static/index.html", encoding="utf-8").read()
+    m = re.search(r'mode==="web"\s*\?\s*(\d+)\s*:\s*(\d+)\)', html)
+    assert m, "в index.html не найден таймер обрыва запроса к /api/ask"
+    web_ms, base_ms = int(m.group(1)), int(m.group(2))
+    assert main.LLM_DEADLINE + 5 <= base_ms / 1000
+    assert main.LLM_DEADLINE_WEB + 5 <= web_ms / 1000
+    assert main.LLM_MIN_ATTEMPT < main.LLM_TIMEOUT <= main.LLM_DEADLINE
+
+
+def test_bench_requires_the_moderation_token(monkeypatch):
+    monkeypatch.setenv("MODERATION_TOKEN", "secret")
+    r = TestClient(main.app).post("/api/assistant/bench", json={"token": "wrong", "question": "q"})
+    assert r.status_code == 404
+
+
+def test_bench_without_keys_explains_itself(monkeypatch):
+    monkeypatch.setenv("MODERATION_TOKEN", "secret")
+    monkeypatch.delenv("YANDEX_API_KEY", raising=False)
+    monkeypatch.delenv("YANDEX_FOLDER_ID", raising=False)
+    r = TestClient(main.app).post("/api/assistant/bench", json={"token": "secret", "question": ORION_Q})
+    assert r.status_code == 503
+    assert "YANDEX_API_KEY" in r.json()["error"]
+
+
+def test_bench_measures_each_model_on_the_same_prompt(client, monkeypatch):
+    monkeypatch.setenv("MODERATION_TOKEN", "secret")
+    monkeypatch.setenv("YANDEX_MODEL", "deepseek-v4-flash/latest")
+    seen = []
+
+    def fake_llm(system, user, max_tokens, deadline=None, model=None, reasoning_effort=None, stats=None):
+        seen.append((model, user, reasoning_effort))
+        if stats is not None:
+            stats.update(attempts=1, status="completed", output_tokens=50, reasoning_tokens=10)
+        if model == "broken/latest":
+            raise RuntimeError("Responses API HTTP 404: model not found")
+        time.sleep(0.05)
+        return f"Ответ модели {model}"
+
+    monkeypatch.setattr(main, "call_llm", fake_llm)
+    r = client.post("/api/assistant/bench", json={
+        "token": "secret", "question": ORION_Q, "models": ["current", "broken/latest"],
+        "repeats": 2, "reasoning_effort": "low"})
+    assert r.status_code == 200
+    body = r.json()
+    rows = body["results"]
+    assert [x["model"] for x in rows] == ["deepseek-v4-flash/latest"] * 2 + ["broken/latest"] * 2
+    ok = [x for x in rows if x["ok"]]
+    bad = [x for x in rows if not x["ok"]]
+    assert len(ok) == 2 and len(bad) == 2
+    assert all(x["seconds"] >= 0.05 and x["chars"] > 0 and x["reasoning_tokens"] == 10 for x in ok)
+    assert "404" in bad[0]["error"] and bad[0]["seconds"] is not None
+    # Всем моделям — один и тот же промпт, тот же, что у /api/ask (сводка + карточки).
+    assert len({u for _, u, _ in seen}) == 1
+    assert "СВОДКА" in seen[0][1] and "Orion" in seen[0][1]
+    assert all(e == "low" for _, _, e in seen)
+    assert body["mode"] == "base" and body["prompt_chars"] == len(seen[0][1])
+    assert body["deadline_seconds"] == main.LLM_DEADLINE
