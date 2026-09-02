@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Новые функции запуска: ФНС, алерты, экспорт, вебинары и mobile UI."""
+import uuid
 from datetime import date, datetime
 from pathlib import Path
 
@@ -657,15 +658,32 @@ def test_saved_assistant_thread(client, monkeypatch):
     assert [m["role"] for m in thread["messages"]] == ["user", "assistant"]
 
 
-def test_pdf_export_is_paid_and_branded(client):
-    _login(client, "export-free@firm.ru")
+def test_pdf_export_is_open_to_every_signed_in_user_until_the_subscription_exists(client, monkeypatch):
+    """Владелец, 3 сентября 2026: «разрешить авторизованным пользователям
+    скачивать PDF без платной подписки, пока её нет». Гость — 401 (вход
+    нужен), любой вошедший — PDF. Граница тарифа из кода не удалена, а
+    выключена флагом DEAL_EXPORT_ALL_FREE: с ним False бесплатный тариф
+    снова получает 403, платный — PDF."""
+    # Адреса уникальны на прогон: тестовая база (`test_accounts.db`) чистится
+    # только модулем test_accounts.py, и одиночный запуск этого файла после
+    # него оставлял бы в базе уже зарегистрированный адрес — 400 на входе.
+    stamp = uuid.uuid4().hex[:8]
+    free_email, paid_email = f"export-free-{stamp}@firm.ru", f"export-paid-{stamp}@firm.ru"
+    assert TestClient(main.app).post("/api/deals/g1d36d186/export", json={}).status_code == 401
+    _login(client, free_email)
+    response = client.post("/api/deals/g1d36d186/export", json={})
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("application/pdf")
+    assert response.content.startswith(b"%PDF")
+
+    monkeypatch.setattr(main, "DEAL_EXPORT_ALL_FREE", False)
     assert client.post("/api/deals/g1d36d186/export", json={}).status_code == 403
 
     paid_client = TestClient(main.app)
-    _login(paid_client, "export-paid@firm.ru")
+    _login(paid_client, paid_email)
     db = get_session()
     try:
-        user = db.query(User).filter_by(email="export-paid@firm.ru").one()
+        user = db.query(User).filter_by(email=paid_email).one()
         user.tier = UserTier.paid
         db.commit()
     finally:

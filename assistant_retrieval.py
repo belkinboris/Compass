@@ -1187,11 +1187,21 @@ def suggestions(idx: Index | None = None) -> list[str]:
     у каждого примера гарантированно есть ответ по базе."""
     idx = idx or get_index()
     out: list[str] = []
-    top_firm = max(idx.firm_deals.items(), key=lambda kv: len(kv[1]), default=None)
-    if top_firm:
-        firm = next((f for f in idx.firms if f.id == top_firm[0]), None)
-        if firm:
-            out.append(f"Какие сделки сопровождала {firm.name}?")
+    # Первой подсказкой стоял вопрос про самую активную фирму каталога («Какие
+    # сделки сопровождала VERBA LEGAL?») — партнёр 3 сентября 2026 попросил
+    # убрать: имя одного консультанта в подсказке для всех читается как его
+    # реклама. Вместо фирмы — самая заполненная отрасль: у неё, как и у фирмы,
+    # гарантированно есть ответ по базе (маршрут «industry»), а никого
+    # конкретного она не выделяет. Имена фирм в подсказках теперь запрещены
+    # тестом (test_assistant_retrieval.py).
+    by_industry: dict[str, int] = {}
+    for d in idx.docs:
+        for ind in d.industries:
+            if ind and ind != "Не определена":
+                by_industry[ind] = by_industry.get(ind, 0) + 1
+    if by_industry:
+        top_ind = max(by_industry.items(), key=lambda kv: kv[1])[0]
+        out.append(f"Какие сделки были в отрасли «{top_ind}»?")
     years = sorted({d.year for d in idx.docs}, reverse=True)
     if years:
         y = years[1] if len(years) > 1 else years[0]
