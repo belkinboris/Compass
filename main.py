@@ -806,6 +806,9 @@ class BenchRequest(BaseModel):
     reasoning_effort: str | None = None  # None — как в окружении сервера; "" — не передавать
     context_type: str = "general"
     context_id: str | None = None
+    # Полный текст ответа в строке результата — чтобы сравнивать КАЧЕСТВО, а
+    # не только скорость: 240 знаков заголовка (answer_head) для этого мало.
+    full_answer: bool = False
 
 
 BENCH_MAX_MODELS = 8
@@ -847,6 +850,8 @@ def assistant_bench(req: BenchRequest):
                                 reasoning_effort=req.reasoning_effort, stats=stats)
                 text = _polish_answer(text, idx)
                 row.update({"ok": True, "chars": len(text), "answer_head": text[:240]})
+                if req.full_answer:
+                    row["answer"] = text
             except RuntimeError as e:
                 row["error"] = str(e)[:400]
             row["seconds"] = round(time.monotonic() - t0, 2)

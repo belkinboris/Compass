@@ -544,3 +544,11 @@ def test_bench_measures_each_model_on_the_same_prompt(client, monkeypatch):
     assert all(e == "low" for _, _, e in seen)
     assert body["mode"] == "base" and body["prompt_chars"] == len(seen[0][1])
     assert body["deadline_seconds"] == main.LLM_DEADLINE
+    # Без full_answer — только заголовок ответа (240 знаков); с ним — весь
+    # текст, чтобы стенд годился для сравнения качества, а не только скорости.
+    assert all("answer" not in x for x in rows)
+    r2 = client.post("/api/assistant/bench", json={
+        "token": "secret", "question": ORION_Q, "models": ["current"], "full_answer": True})
+    assert r2.status_code == 200
+    row = r2.json()["results"][0]
+    assert row["answer"] == "Ответ модели deepseek-v4-flash/latest" and row["answer_head"] == row["answer"][:240]

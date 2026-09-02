@@ -98,7 +98,8 @@ def render_table(summary: list[dict]) -> str:
 
 
 def run(site: str, token: str, questions: list[str], models: list[str], mode: str, repeats: int,
-        effort: str | None, context: tuple[str, str] | None, pause: float, verbose: bool) -> list[dict]:
+        effort: str | None, context: tuple[str, str] | None, pause: float, verbose: bool,
+        full: bool = False) -> list[dict]:
     import httpx
     rows: list[dict] = []
     url = site.rstrip("/") + "/api/assistant/bench"
@@ -108,6 +109,8 @@ def run(site: str, token: str, questions: list[str], models: list[str], mode: st
         for q in questions:
             for m in models:
                 body = {"token": token, "question": q, "models": [m], "mode": mode, "repeats": repeats}
+                if full:
+                    body["full_answer"] = True
                 if effort is not None:
                     body["reasoning_effort"] = effort
                 if context:
@@ -147,6 +150,8 @@ def main(argv: list[str]) -> int:
     p.add_argument("--effort", default=None, help="reasoning effort: none|minimal|low|medium|high|xhigh; \"\" — не передавать")
     p.add_argument("--pause", type=float, default=2.0)
     p.add_argument("--json", action="store_true", help="напечатать все строки как JSON вместо таблицы")
+    p.add_argument("--full", action="store_true",
+                   help="запросить полный текст ответа (поле answer) — для сравнения качества, не только скорости")
     p.add_argument("-v", "--verbose", action="store_true")
     a = p.parse_args(argv)
 
@@ -156,7 +161,7 @@ def main(argv: list[str]) -> int:
         return 2
     questions = a.question or DEFAULT_QUESTIONS
     rows = run(a.site, token, questions, a.models, a.mode, a.repeats, a.effort,
-               tuple(a.context) if a.context else None, a.pause, a.verbose)
+               tuple(a.context) if a.context else None, a.pause, a.verbose, a.full)
     if a.json:
         print(json.dumps(rows, ensure_ascii=False, indent=1))
         return 0
