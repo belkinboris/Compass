@@ -181,7 +181,15 @@ def proposals(deal, item, names, comps, match_keys=None):
     url = str(item.get('url') or '')
     known = {str(s[1]) for s in (deal.get('src') or []) if len(s) > 1}
     if url.startswith('http') and url not in known:
-        label = names.get(item.get('source_id')) or item.get('source_id') or 'источник'
+        # Имя издания — по домену ссылки, не по внутреннему id ленты
+        # («Источник — то, что подтверждает факт, а не то, как о нём
+        # узнали»): у агрегаторов вроде `tg:dealsma` реестр называет канал,
+        # а ссылка ведёт на настоящую статью («@dealsma» вместо «RB.ru»
+        # для карточки Минфин/«Леста», 3 сентября 2026). `promote.to_card()`
+        # и добавление источника события ниже уже резолвят так же — только
+        # это добавление источника шло в обход.
+        label = editions.edition_label(url) or names.get(item.get('source_id')) \
+            or item.get('source_id') or 'источник'
         out.append(('src', [label, url], 'добавить', 'ещё один источник'))
 
     sum_guess = draft.guess_sum(text)
@@ -254,12 +262,27 @@ def proposals(deal, item, names, comps, match_keys=None):
         if event.get('source') and len(event['source']) > 1:
             event = dict(event, source=[editions.edition_label(event['source'][1]),
                                          event['source'][1]])
+        existing_events = [e for e in (deal.get('events') or []) if isinstance(e, dict)]
         known_events = {(str(e.get('kind') or ''), str(e.get('date') or ''))
-                        for e in (deal.get('events') or []) if isinstance(e, dict)}
+                        for e in existing_events}
         event_key = (str(event.get('kind') or ''), str(event.get('date') or ''))
+        # Одна и та же ссылка на источник, найденная повторно (RSS отдаёт её
+        # заново из часа в час, пока новость не устарела в ленте — уже
+        # записанный урок «память о сырье помнит прогон, а не новость»),
+        # получает НОВЫЙ draft_id и, значит, дату СЕГОДНЯШНЕГО прогона, а не
+        # дату самого события — (kind, date) тогда не совпадает с уже
+        # внесённой (человеком или прошлым прогоном) записью с точной датой,
+        # и без этой проверки одна и та же допокупка доли писалась в базу
+        # заново каждый час («Магнит»/«Азбука вкуса», 3 сентября 2026, три
+        # раза подряд). Сверяем ещё и по (kind, адрес источника).
+        known_event_urls = {(str(e.get('kind') or ''), e['source'][1])
+                             for e in existing_events
+                             if e.get('source') and len(e['source']) > 1}
+        event_url = (event.get('source') or [None, None])[1] if event.get('source') else None
+        event_url_key = (event_key[0], event_url) if event_url else None
         # Несколько публикаций об одном этапе в один день не создают дубли.
         # Этапы одного вида в разные даты допустимы, например два согласования.
-        if event_key not in known_events:
+        if event_key not in known_events and event_url_key not in known_event_urls:
             out.append(('event', event, 'добавить', 'новый подтверждённый этап сделки'))
     return out
 
