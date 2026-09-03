@@ -726,7 +726,11 @@ def test_launch_ui_contains_requested_changes():
     assert "Скачать PDF" in html and "Скопировать ссылку" in html
     assert "navigator.share" in html
     assert "fnsChart" in html and "as_of_year" in html
-    assert 'data-fnstab="ownership"' in html and "ownershipHtml" in html
+    # Вкладки блока ФНС с 3 сентября 2026 собираются из списка, а не написаны
+    # разметкой поштучно: у банка их три (ЕГРЮЛ/Участники/Изменения), у обычной
+    # компании пять. Проверяем сам список, а не исчезнувший литерал в HTML.
+    assert '["ownership","Участники"]' in html and "ownershipHtml" in html
+    assert 'data-fnstab="${k}"' in html
     assert "Связи по сделкам" not in html and "companyRelationshipHtml" not in html
     assert "Другие сделки с участием" in html and "openCompanyDealsDialog" in html
     assert "Подробные карточки" not in html and "Также упомина" not in html

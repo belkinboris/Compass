@@ -377,6 +377,27 @@ def sync_confirmed(db, client: ApiFnsClient, *, limit: int | None = None,
     return ok, errors
 
 
+def registry_row_is_syncable(row) -> bool:
+    """Строку реестра синхронизируем, если решение — `confirmed` ЛИБО `bank`
+    с уже известным ИНН.
+
+    Банки добавлены 3 сентября 2026 по просьбе владельца («по банкам из
+    ЕГРЮЛ тоже нужно взять инфу; в ВТБ даже нигде не видно полное
+    наименование»). Финансы банка приходят из ЦБ (формы 806 и 102, Этап 6
+    брифа) — а РЕКВИЗИТЫ (полное наименование, ОГРН, адрес, руководитель,
+    участники) лежат в ЕГРЮЛ ровно так же, как у любой компании, и до сих
+    пор просто не запрашивались: строка с решением `bank` не попадала в
+    выборку вовсе. Коммерческие строки БФО у банка при этом пустые — это
+    уже обработанное честное состояние на экране, а не поломка.
+
+    Один предикат на два места намеренно: `sync_from_registry` берёт по
+    нему работу, а `revoke_stale_confirmations` по нему же решает, что
+    удалять. Разойдись они — синхронизация банка и её же удаление
+    случались бы в одном прогоне, друг за другом.
+    """
+    return bool(row.get("inn")) and row["decision"] in ("confirmed", "bank")
+
+
 def revoke_stale_confirmations(db) -> int:
     """Удалить `LegalEntity`, чей `company_id` в РЕЕСТРЕ (git-файле, не БД)
     больше не несёт `decision == "confirmed"` — решение сменилось задним
@@ -424,7 +445,7 @@ def revoke_stale_confirmations(db) -> int:
     removed = 0
     for entity in stale:
         row = registry_idx.get(entity.company_id)
-        if row is not None and row["decision"] != "confirmed":
+        if row is not None and not registry_row_is_syncable(row):
             db.delete(entity)
             removed += 1
     if removed:
@@ -449,7 +470,7 @@ def registry_backlog(db) -> int:
     `sync_from_registry(dry_run=True)`, — чтобы не задевать её сигнатуру
     (её мокают в тестах позиционными db/client/limit без `dry_run`).
     """
-    confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
+    confirmed = [row for row in FNS_REGISTRY if registry_row_is_syncable(row)]
     cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
     backlog = 0
     for row in confirmed:
@@ -471,9 +492,12 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
 
     Это МЕХАНИКА, а не суждение (см. докстроку самого реестра) — вызывается
     и вручную, и стартовым сканом боевого процесса (COMPANY_FINANCE_BRIEF.md,
-    П2). `decision` не в {"confirmed"} пропускается: banку/foreign/state_org/
-    person/lot/no_match/brand_needs_inn взять из ФНС нечего — либо данных
-    там нет по природе (банки — ЦБ, П3), либо ИНН ещё не подтверждён.
+    П2).
+
+    Какие строки берём — см. registry_row_is_syncable(): `confirmed` и
+    `bank` с известным ИНН. Остальным (foreign/state_org/person/lot/
+    no_match/brand_needs_inn) взять из ФНС нечего — либо юрлица в ЕГРЮЛ нет
+    по природе, либо ИНН ещё не подтверждён.
 
     `limit` — ПОТОЛОК РЕАЛЬНОЙ РАБОТЫ (живых запросов), а не потолок того,
     сколько строк реестра просматривается. До 23 августа 2026 срез стоял
@@ -492,7 +516,7 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
         # молча носить уже известную неверную запись до следующего живого
         # запроса к этому company_id, которого может не случиться никогда.
         stats["revoked"] = revoke_stale_confirmations(db)
-    confirmed = [row for row in FNS_REGISTRY if row["decision"] == "confirmed" and row.get("inn")]
+    confirmed = [row for row in FNS_REGISTRY if registry_row_is_syncable(row)]
     cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
     work_done = 0
     for row in confirmed:

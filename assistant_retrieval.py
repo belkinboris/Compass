@@ -560,7 +560,43 @@ def _generic_firm_word(word: str) -> bool:
 
 
 def _significant(name: str) -> list[str]:
-    return [stem(t) for t in tokens(name) if t not in GENERIC_NAME_WORDS and len(t) >= 3]
+    """Значимые слова имени компании — то, по чему её узнают в вопросе.
+
+    Порог в три знака отсекает служебные хвосты («.ру», «им.», «РФ») — но
+    вместе с ними отсекал и сами имена длиной в два знака: у «VK», «X5 Group»,
+    «S8 Capital», «1С» значимых слов не оставалось ВОВСЕ, и ни один вопрос не
+    мог узнать эти компании — ни по-русски, ни латиницей (найдено 3 сентября
+    2026 при просьбе владельца «Vk пусть находится буквами вк»). Поэтому
+    двухзначные слова берутся ТОЛЬКО как запасной вариант — когда иначе список
+    пуст. Добавлять их всегда нельзя: `_detect_company` требует совпадения
+    ВСЕХ значимых слов, и «Учи.ру» с «ру» в списке перестала бы узнаваться по
+    слову «учи».
+    """
+    keep = [stem(t) for t in tokens(name) if t not in GENERIC_NAME_WORDS and len(t) >= 3]
+    if keep:
+        return keep
+    return [stem(t) for t in tokens(name) if t not in GENERIC_NAME_WORDS and len(t) >= 2]
+
+
+RU2LAT = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ж": "zh",
+          "з": "z", "и": "i", "й": "y", "к": "k", "л": "l", "м": "m", "н": "n",
+          "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f",
+          "х": "h", "ц": "c", "ч": "ch", "ш": "sh", "щ": "sch", "ъ": "", "ы": "y",
+          "ь": "", "э": "e", "ю": "yu", "я": "ya"}
+
+
+def translit(word: str) -> str:
+    """Кириллица и латиница — один ключ (та же таблица, что в static/index.html).
+
+    Просьба владельца 3 сентября 2026: «VK пусть находится буквами вк (и другие
+    компании тоже)». Имя компании в базе записано так, как её пишут источники
+    («VK», «Ozon»), а спрашивают о ней с русской раскладки. Приводим обе стороны
+    к латинице побуквенно: «вк» и «vk» дают один ключ. Сложившееся написание
+    бренда, расходящееся с побуквенной транслитерацией («Яндекс» → «yandeks»
+    против «Yandex»), это НЕ ловит и ловить не должно — такие имена в базе и так
+    стоят по-русски, а список брендов-исключений был бы уже не механикой.
+    """
+    return "".join(RU2LAT.get(ch, ch) for ch in (word or "").lower().replace("ё", "е"))
 
 
 def _name_word_match(name_stem: str, term: str) -> bool:
@@ -573,6 +609,9 @@ def _name_word_match(name_stem: str, term: str) -> bool:
     «МТС»)."""
     if name_stem == term:
         return True
+    # «вк» = «VK»: побуквенная транслитерация, не догадка о похожести
+    if len(term) >= 2 and translit(name_stem) == translit(term):
+        return True
     if not same_word(name_stem, term):
         return False
     n = 0
@@ -581,6 +620,24 @@ def _name_word_match(name_stem: str, term: str) -> bool:
             break
         n += 1
     return n >= 4
+
+
+def short_name_terms(question: str) -> list[str]:
+    """Двухзначные слова вопроса с кириллицей — кандидаты на ИМЯ компании
+    («вк», «1с»; чисто латинские «vk», «x5» проходят и так).
+
+    `query_words` отбрасывает такие слова намеренно: по-русски двухбуквенное
+    слово почти всегда предлог или частица, и в поиск по словам им попадать
+    нечего. Но именно на них разбилось «Vk пусть находится буквами вк»
+    (владелец, 3 сентября 2026): «вк» отсеивалось ещё до того, как дело
+    доходило до сверки с именами компаний. Поэтому такие слова добавляются
+    ТОЛЬКО в распознавание компании (там сверка идёт на полное равенство
+    после транслитерации, см. _name_word_match) и не идут ни в поиск по
+    словам, ни в веса терминов — иначе «за», «до», «от» стали бы значимыми
+    словами вопроса.
+    """
+    return [t for t in tokens(question)
+            if len(t) == 2 and t not in STOP and not re.fullmatch(r"[a-z0-9]+", t)]
 
 
 def _detect_company(question: str, idx: Index, terms: list[str]) -> tuple[str, list[str]] | None:
@@ -653,7 +710,7 @@ def route(question: str, idx: Index | None = None) -> Intent:
         return Intent("term", term_rx=term_rx, year=year, industry=industry, terms=terms)
     if theme:
         return Intent("theme", theme=theme, year=year, industry=industry, terms=terms)
-    found = _detect_company(question, idx, terms)
+    found = _detect_company(question, idx, terms + short_name_terms(question))
     if found:
         company, matched = found
         # Компанию узнали по слову, которое одновременно называет отрасль

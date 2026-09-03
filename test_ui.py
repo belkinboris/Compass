@@ -2305,61 +2305,54 @@ def test_saved_dialogs_are_listed_in_the_side_panel_for_a_signed_in_user(browser
         pg.wait_for_timeout(600)
         stream = pg.inner_text("#chatbox")
         assert "Что покупал Сбербанк" in stream and "три сделки Сбербанка" in stream, stream[:200]
-        assert "Диалог из истории · 1 вопрос" in pg.inner_text("#chatState")
+        # Открытый диалог отмечен в списке — это и есть «где я сейчас».
+        # Строки состояния под лентой больше нет (владелец, 3 сентября 2026:
+        # «снизу тоже убрать»), поэтому проверяем список, а не подпись.
+        assert pg.locator(".chat-thread.on").count() == 1
         assert not errors, errors
     finally:
         ctx.close()
 
 
 def test_new_dialog_button_lives_above_the_thread_list_and_resets_the_conversation(browser, base_url):
-    """Четвёртый заход на «Новый диалог» (30, 31 августа, 3 сентября её уже
-    чинили). Теперь кнопка стоит НАД СПИСКОМ ДИАЛОГОВ — там, где виден её
-    эффект, и там, где её ждут в любом привычном чате. На телефоне список
-    спрятан в ящик, поэтому над полем ввода есть «Начать заново» — и только
-    когда есть что начинать заново; нажатие не прокручивает страницу и не
-    ставит курсор в поле (иначе откроется клавиатура — уроки 30–31 августа).
-    Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе."""
-    ctx, pg, errors = _assistant_page(browser, base_url, 390, 844)
-    try:
-        assert pg.inner_text("#chatState").strip() == "Новый диалог"
-        assert pg.locator("#chatReset").is_hidden(), "нечего начинать заново — кнопки нет"
-        pg.fill("#q", "Самые крупные сделки 2025 года")
-        pg.click("#send")
-        pg.wait_for_selector("#chatReset", state="visible", timeout=20000)
-        assert "1 вопрос" in pg.inner_text("#chatState")
-        # Результат нажатия (лента) стоит прямо над кнопкой — без прокрутки.
-        line = pg.locator(".chat-statusline").bounding_box()
-        box = pg.locator("#chatbox").bounding_box()
-        assert line["y"] >= box["y"] + box["height"] - 1, "строка состояния не под лентой"
-        y0 = pg.evaluate("window.scrollY")
-        pg.click("#chatReset")
-        pg.wait_for_timeout(600)
-        assert abs(pg.evaluate("window.scrollY") - y0) < 10, "нажатие прокрутило страницу"
-        assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
-        assert "Начат новый диалог" in pg.inner_text("#chatbox")
-        assert pg.inner_text("#chatState").strip() == "Новый диалог"
-        assert pg.locator("#chatReset").is_hidden()
-        assert not errors, errors
-    finally:
-        ctx.close()
+    """Пятый заход на «Новый диалог» (30, 31 августа, дважды 3 сентября).
+    Кнопка стоит НАД СПИСКОМ ДИАЛОГОВ — там, где виден её эффект, и там, где
+    её ждут в любом привычном чате; на телефоне список открывает кнопка
+    «Диалоги» в шапке раздела. Под лентой не осталось ничего, кроме поля
+    вопроса: ни строки состояния, ни второй кнопки «Начать заново» (просьба
+    владельца 3 сентября 2026). Нажатие не прокручивает страницу и не ставит
+    курсор в поле — иначе на телефоне откроется клавиатура (уроки 30-31
+    августа). Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе."""
+    for width, height in ((390, 844), (1280, 1000)):
+        ctx, pg, errors = _assistant_page(browser, base_url, width, height)
+        try:
+            assert pg.locator("#chatState").count() == 0, "строка состояния вернулась под ленту"
+            assert pg.locator("#chatReset").count() == 0, "вторая кнопка сброса вернулась под ленту"
+            pg.fill("#q", "Самые крупные сделки 2025 года")
+            pg.click("#send")
+            pg.wait_for_selector(".chat-stream .msg.ai:not(.wait)", timeout=20000)
+            assert pg.locator("#chatState").count() == 0
 
-    # На компьютере кнопка живёт в панели и видна всегда — второй такой же
-    # кнопки у ленты там нет, иначе это дубль.
-    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000)
-    try:
-        assert pg.locator("#newThread").is_visible()
-        assert pg.locator("#chatReset").is_hidden(), "на компьютере дублирующей кнопки быть не должно"
-        pg.fill("#q", "Самые крупные сделки 2025 года")
-        pg.click("#send")
-        pg.wait_for_selector(".chat-stream .msg.ai:not(.wait)", timeout=20000)
-        assert "1 вопрос" in pg.inner_text("#chatState")
-        pg.click("#newThread")
-        pg.wait_for_timeout(500)
-        assert "Начат новый диалог" in pg.inner_text("#chatbox")
-        assert pg.inner_text("#chatState").strip() == "Новый диалог"
-        assert not errors, errors
-    finally:
-        ctx.close()
+            if width < 700:
+                # На телефоне список уехал за левый край экрана (ящик закрыт) —
+                # Playwright считает такой узел «видимым», поэтому меряем бокс,
+                # а не is_visible(). Открывает ящик кнопка «Диалоги».
+                assert pg.locator("#threadPanel").bounding_box()["x"] < 0
+                pg.click("#chatBurger")
+                pg.wait_for_timeout(500)
+            assert pg.locator("#threadPanel").bounding_box()["x"] >= -1
+            assert pg.locator("#newThread").is_visible()
+
+            y0 = pg.evaluate("window.scrollY")
+            pg.click("#newThread")
+            pg.wait_for_timeout(600)
+            assert abs(pg.evaluate("window.scrollY") - y0) < 10, "нажатие прокрутило страницу"
+            if width < 700:
+                assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
+            assert "Начат новый диалог" in pg.inner_text("#chatbox")
+            assert not errors, errors
+        finally:
+            ctx.close()
 
 
 @pytest.mark.parametrize("width", WIDTHS)
@@ -2513,3 +2506,49 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
         assert len(console_errors) == 2 and all("403" in c for c in console_errors), console_errors
     finally:
         ctx.close()
+
+
+def test_search_finds_latin_named_company_typed_in_cyrillic(page, base_url):
+    """«VK» находится буквами «вк» — и в подсказках, и в каталоге компаний.
+
+    Просьба владельца 3 сентября 2026 («Vk пусть находится буквами вк, и другие
+    компании тоже»): имя компании в базе записано так, как её пишут источники,
+    а ищут её с русской раскладки. Держит побуквенную транслитерацию
+    (translitKey в static/index.html) — не «похожее написание», а таблицу
+    буква-в-букву, поэтому у теста три примера, а не один.
+    """
+    visit(page, base_url, "#/companies")
+    # `page` — общий на весь файл, а смена хеша не перезапускает скрипт: фильтр
+    # отрасли мог остаться от соседнего теста, и тогда поиск ищет внутри него
+    # (урок «переход по хешу — не перезагрузка страницы для теста»).
+    page.evaluate("() => { coInd = 'Все'; coQuery = ''; coShown = 60; renderCompanies(); }")
+    page.wait_for_timeout(400)
+    for query, expected in (("вк", "VK"), ("озон", "Ozon"), ("лента", "Лента")):
+        page.fill("#coq", query)
+        page.wait_for_timeout(800)
+        names = page.eval_on_selector_all(
+            ".co-grid > *", "els => els.slice(0, 8).map(e => e.innerText)")
+        assert any(expected.lower() in (n or "").lower() for n in names), \
+            f"запрос «{query}» не нашёл {expected}: {[n.split(chr(10))[1] if n else n for n in names[:5]]}"
+    # И подсказки под строкой поиска знают ту же таблицу.
+    page.fill("#coq", "вк")
+    page.wait_for_timeout(800)
+    hints = page.eval_on_selector_all("#coac .ac-item .ac-text", "els => els.map(e => e.textContent)")
+    assert "VK" in hints, hints
+
+
+def test_bank_profile_names_the_legal_entity_it_shows(page, base_url):
+    """У банка на экране названо ЮРЛИЦО, о котором идут цифры.
+
+    Владелец 3 сентября 2026: «в втб даже нигде не видно полное наименование».
+    Полное наименование приезжает со страницы формы 806 ЦБ вместе с балансом
+    (pipeline/cbr_sync_bank_finance.py) — раньше лежало в данных и не
+    показывалось. ЕГРЮЛ-блок банка проверить этим тестом нельзя: он приходит
+    из боевой базы, которой у дымового прогона нет.
+    """
+    visit(page, base_url, "#/companies/gcafc31dc")   # ВТБ
+    page.wait_for_timeout(1500)
+    text = page.inner_text("#app")
+    assert "ВТБ" in text and "акционерное общество" in text, text[:400]
+    assert "регистрационный номер в Банке России 1000" in text, \
+        "не назван регистрационный номер банка, по которому взяты цифры"

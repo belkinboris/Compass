@@ -283,3 +283,20 @@ def test_entity_page_answers_about_itself_when_the_question_names_nothing(idx):
     # Конкретный вопрос со страницы — по-прежнему про то, о чём спросили.
     r = _ask("Кто купил Ситибанк?", idx, context_type="company", context_id="yandex")
     assert r.docs[0].id == "citibank"
+
+
+def test_company_written_in_latin_is_found_typed_in_cyrillic(idx):
+    """«Какие сделки у ВК?» находит компанию, записанную в базе как «VK».
+
+    Просьба владельца 3 сентября 2026. Транслитерация побуквенная, поэтому
+    проверяем и обратное направление, и что она не размывает уже действующее
+    правило: «почему»/«получил» по-прежнему не имена компаний.
+    """
+    assert ar.translit("вк") == ar.translit("vk") == "vk"
+    assert ar._name_word_match("vk", "вк") and ar._name_word_match("ozon", "озон")
+    assert ar._name_word_match("втб", "vtb")
+    assert not ar._name_word_match("почт", "почем")
+    assert not ar._name_word_match("полюс", "получ")
+    r = _ask("какие сделки у вк?", idx)
+    assert r.intent == "company", r.intent
+    assert "VK" in r.answer, r.answer[:200]
