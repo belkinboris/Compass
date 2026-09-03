@@ -234,3 +234,27 @@ def test_allowed_fields_are_prose_only(field):
     assert proofread.field_allowed(field)
     assert not proofread.field_allowed("sum") and not proofread.field_allowed("law.adv")
     assert proofread.field_allowed("events.0.note") and not proofread.field_allowed("events.0.date")
+
+def test_outlets_found_by_the_running_routine_are_recognised():
+    """Прогоны вычитки 1-9 (3 сентября 2026) девять раз подряд упирались в один
+    и тот же класс: издание не в списке — значит его имя нельзя снять, не
+    получив отказ «из new пропало имя». Список расширен по факту, а не на глаз;
+    настоящие имена компаний по-прежнему именами и остаются."""
+    for outlet in ('Хабр', 'Хабра', 'Абирега', 'Известий', 'ADPASS', 'PrimaMedia',
+                   'УФА1.ру', 'МР7.ру', 'Ъ-СПб', 'НГ.ru', 'Прайм', 'АКМ',
+                   'ФВ', 'ДП', 'ЧП', 'СМИ'):
+        assert proofread.outlet_like(outlet), outlet
+    for name in ('Сбербанк', 'Яндекс', 'Русагро', 'Транснефть', 'Ковалёва',
+                 'Хабаровск', 'Новый', 'Прайс'):
+        assert not proofread.outlet_like(name), name
+
+
+def test_attribution_to_a_newly_listed_outlet_can_be_removed():
+    """Снятие «по данным Хабра» больше не считается потерей имени: до правки
+    проверка требовала сохранить «Хабра» как имя собственное."""
+    card = card_fixture()
+    card["eco"]["fin"] = "По данным Хабра, выручка выросла до 5 млрд \u20bd."
+    edit = dict(id="x1", field="eco.fin", old=card["eco"]["fin"],
+                new="Выручка выросла до 5 млрд \u20bd.")
+    bad, _ = proofread.check(edit, card)
+    assert not any("пропало имя" in b for b in bad), bad

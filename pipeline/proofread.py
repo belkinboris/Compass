@@ -224,14 +224,25 @@ def all_words(text):
 
 OUTLET = (r"(?:Коммерсант[ъа-яё]*|Kommersant|Ведомост[а-яё]*|Vedomosti|РБК|RBC|Интерфакс[а-яё]*|Interfax"
           r"|ТАСС|TASS|Forbes|Reuters|Bloomberg|Financial\s+Times|РИА\s+Новости|РИА|TAdviser|CNews|ComNews"
-          r"|mergers\.ru|Frank\s*(?:Media|RG|Медиа)|The\s+Bell|Известия[а-яё]*|Газета\.ru|Фонтанк[а-яё]*"
+          r"|mergers\.ru|Frank\s*(?:Media|RG|Медиа)|The\s+Bell|Извести[яйюе][а-яё]*|Газета\.ru|Фонтанк[а-яё]*"
           r"|Деловой\s+Петербург|DP\.ru|Vademecum|AdIndex|Retail\.ru|vc\.ru|Lenta\.ru|Лента\.ру"
-          r"|Бизнес\s+Online|БИЗНЕС\s+Online|Абирег|Право\.ru|Pravo\.ru|BFM|Banki\.ru|Банки\.ру|Sostav|Rusbase"
+          r"|Бизнес\s+Online|БИЗНЕС\s+Online|Абирег[а-яё]*|Право\.ru|Pravo\.ru|BFM|Banki\.ru|Банки\.ру|Sostav|Rusbase"
+          # Издания, на которых спотыкались прогоны вычитки 1-9 (3 сентября
+          # 2026): их не было в списке, и снять «по данным X» без потери
+          # имени редактор не мог. Добавляются с падежными хвостами там, где
+          # имя склоняется («Нового проспекта», «АСН-новостей»).
+          r"|Хабр[а-яё]*|Нов[а-яё]+\s+проспект[а-яё]*|АСН[- ]новост[а-яё]*|ADPASS|PrimaMedia|Прайм"
+          r"|АК\s*&\s*М|АКМ|AKM|Ъ-[А-ЯЁA-Za-zа-яё]+|НГ\.ru|РИА\s+Недвижимост[а-яё]*|Реальное\s+врем[яени][а-яё]*"
+          r"|Октагон|Октагон\.Медиа|Фармвестник|Медвестник|Эксперт\s+РА|Sperant|Shopper[’\']?s"
           r"|Yahoo\s+Finance|Wall\s+Street\s+Journal|WSJ|New\s+York\s+Times|Handelsblatt|The\s+Insider"
           r"|Shopper'?s|Фармацевтическ[а-яё]+\s+вестник|Мясной\s+эксперт|Milknews|Агроинвестор"
           r"|Секрет\s+фирмы|Инк\.|Inc\.\s*Russia|Ъ)")
 OUTLET_RX = re.compile(OUTLET)
-DOMAIN = r"\b[a-z0-9-]+\.(?:ru|com|org|net|io|media|su|kz|by|ua)\b"
+# Домен издания — и латиницей, и кириллицей: «УФА1.ру» и «МР7.ру» не ложились
+# ни на список изданий, ни на латинский шаблон, и их исчезновение из текста
+# читалось как потеря имени (прогоны вычитки 5 и 6, 3 сентября 2026).
+DOMAIN = (r"\b(?:[a-z0-9-]+\.(?:ru|com|org|net|io|media|su|kz|by|ua)"
+          r"|[а-яёa-z0-9-]+\.(?:ру|рф))\b")
 ATTR_VERB = (r"(?:по\s+(?:данным|информации|сведениям|словам|оценк[а-яё]*|подсч[её]там)"
              r"|как\s+(?:и\s+)?(?:ранее\s+)?(?:писал|сообщ|отмеч|передав|уточн|указыв|напомин|подтвержд|рассказ)[а-яё]*"
              r"|(?:сообщ|пи[сш]|переда[юёе]|отмеча|уточня|указыва|напомина|подтвержда|рассказыва|утвержда|цитиру"
@@ -336,8 +347,17 @@ def quotes_balanced(text):
     return not unclosed and text.count('«') == text.count('»') and text.count('„') == text.count('“')
 
 
+# Аббревиатуры изданий («ФВ» — «Фармацевтический вестник», «ДП» — «Деловой
+# Петербург») и общеупотребительные сокращения («ЧП» — чистая прибыль, «СМИ»)
+# писались с заглавных и потому считались именами собственными: снять их из
+# текста было нельзя. Именами они не являются — список закрытый и короткий.
+SHORT_OUTLET = {'ИФ', 'Ъ', 'ФВ', 'ДП', 'НГ', 'АСН', 'ASN', 'AKM', 'РГ', 'ЕЖ'}
+COMMON_ABBR = {'ЧП', 'СМИ', 'ЕГРЮЛ', 'ЕГРН', 'СПАРК', 'МСФО', 'РСБУ', 'НДС', 'ФЗ'}
+
+
 def outlet_like(word):
-    return bool(OUTLET_RX.fullmatch(word) or re.fullmatch(DOMAIN, word.lower()) or word in ('ИФ', 'Ъ'))
+    return bool(OUTLET_RX.fullmatch(word) or re.fullmatch(DOMAIN, word.lower())
+                or word in SHORT_OUTLET or word in COMMON_ABBR)
 
 
 def strip_press(text):
