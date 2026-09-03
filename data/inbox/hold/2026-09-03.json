@@ -5224,7 +5224,7 @@
    ]
   },
   {
-   "draft_id": "d32685114",
+   "draft_id": "d99232495",
    "title": "«Самолет» продал участок в Мурманске «Аквилону»",
    "date": "2026-09-03",
    "src": [
@@ -5263,7 +5263,7 @@
    ]
   },
   {
-   "draft_id": "d24203211",
+   "draft_id": "d29521705",
    "title": "«Росатом» намерен как можно скорее завершить покупку ГК «Дело» // Лихачев: «Росатом» исполнит все параметры акционерного соглашения в ГК «Дело»",
    "date": "2026-09-03",
    "src": [
@@ -5304,7 +5304,7 @@
    ]
   },
   {
-   "draft_id": "d43300434",
+   "draft_id": "d71996356",
    "title": "«Роквелл Капитал» передал акции «Краслесинвеста» ВЭБ.РФ",
    "date": "2026-09-03",
    "src": [
@@ -5332,7 +5332,7 @@
    ]
   },
   {
-   "draft_id": "d84743350",
+   "draft_id": "d66652935",
    "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
    "date": "2026-09-03",
    "src": [
@@ -5360,7 +5360,7 @@
    ]
   },
   {
-   "draft_id": "d45647270",
+   "draft_id": "d13660975",
    "title": "В Тюмени продают сеть мистических кофеен за 25 миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5388,7 +5388,7 @@
    ]
   },
   {
-   "draft_id": "d44856373",
+   "draft_id": "d15255575",
    "title": "В Перми торговый центр с долгосрочными арендаторами продают за десятки миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5416,7 +5416,7 @@
    ]
   },
   {
-   "draft_id": "d89245655",
+   "draft_id": "d89881294",
    "title": "В Челябинске продают завод майонеза и сыров за 300 миллионов",
    "date": "2026-09-03",
    "src": [
@@ -5444,7 +5444,7 @@
    ]
   },
   {
-   "draft_id": "d94788115",
+   "draft_id": "d52819218",
    "title": "Российская SaaS-компания Roomsharing привлекла инвестиции от основателя TravelLine Александра Галочкина. Детали сделки не разглашаются.   Roomsharing была основана Александром Масловым в 2022 году. Ст",
    "date": "2026-09-03",
    "src": [
@@ -5472,102 +5472,7 @@
    ]
   },
   {
-   "draft_id": "d14009133",
-   "title": "«Монако» собирается продать полузащитника Головина до 10 сентября",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8925092"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "Футбольный клуб «Монако» намерен продать российского полузащитника Александра Головина в течение ближайшей недели. Об этом сообщает Nice-Matin.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8925092"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51885287",
-   "title": "«ДП» собирает круглый стол об инвестициях в новостройки на региональных рынках",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/03/dp-sobiraet-kruglij-stol"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61298570",
-   "title": "Венчурные инвестиции в российские стартапы за полгода сократились на 62%",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/venchurnye-investitsii-v-rossijskie-startapy-za-polgoda-sokratilis-na-62/"
-    ]
-   ],
-   "sum": "$29,3 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65152800",
+   "draft_id": "d64975418",
    "title": "«Монако» намерен продать Головина в российский клуб, пишут СМИ",
    "date": "2026-09-03",
    "src": [
@@ -5601,89 +5506,172 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Монако» собирается продать полузащитника Головина до 10 сен» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d89804785",
-   "title": "Минфин с 7 сентября заметно сократит объемы покупки золота и валюты",
+   "draft_id": "d35071063",
+   "title": "Nice-Matin узнала о планах «Монако» продать Головина в РПЛ",
    "date": "2026-09-03",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260903/minfin-2115228998.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/03/09/2026/6a9962a39a79476b56871f93"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52184537",
-   "title": "В июле центробанки купили 23 тонны золота",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/303073"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-09-03",
-     "title": "Сделка завершена",
-     "note": "Российский центробанк занял первое место по объемам продаж в этом месяце Сообщение В июле центробанки купили 23 тонны золота появилось сначала на Frank Media .",
+     "title": "Переговоры",
+     "note": "На 30-летнего футболиста претендуют петербургский «Зенит» и московский «Спартак», а сумма сделки оценивается в €20–25 млн",
      "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/303073"
+      "web:rbc.ru",
+      "https://www.rbc.ru/sport/03/09/2026/6a9962a39a79476b56871f93"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "23 тонны золота",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "23 тонны золота",
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Монако» намерен продать Головина в российский клуб, пишут С» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d92103975",
+   "title": "Купить в TikTok по цене обеда: синтетические алмазы превращают бриллианты в массовый товар и заставляют ювелиров переизобретать роскошь",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/marketing/3102807-sinteticheskie-almazy-tiktok-rynok-brilliantov?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d60873963",
+   "title": "Сын Высоцкого опроверг слухи о продаже квартиры отца",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28076679"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34028003",
+   "title": "«Сочи» арендовал выбранного в первом раунде драфта НХЛ вратаря Андреянова",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28076533"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54531826",
+   "title": "Nvidia приобретет платформу машинного обучения Hugging Face",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260903/nvidia-872998726.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Nvidia",
+   "asset": "платформа машинного обучения Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "платформа машинного обучения Hugging Face",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d17545142",
-   "title": "«Краснодар» близок к покупке бывшего вингера «Атлетико»",
+   "draft_id": "d87095476",
+   "title": "Продажи книг на маркетплейсах могут сократиться на 9,8% к концу года",
    "date": "2026-09-03",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/03/krasnodar-blizok-k-pokupke-byvshego-vingera-atletiko/"
+     "web:retailer.ru",
+     "https://retailer.ru/prodazhi-knig-na-marketplejsah-mogut-sokratitsja-na-9-8-k-koncu-goda/"
     ]
    ],
    "sum": null,
@@ -5702,17 +5690,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15386e04 (общие редкие слова: бывшег, покупк) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d66306265",
-   "title": "Бизнесмен из Надыма продает недвижимость после пожара в поликлинике трассовой медсанчасти",
+   "draft_id": "d28016957",
+   "title": "Тюменские бизнесмены массово вложились в депутата облдумы Ковина",
    "date": "2026-09-03",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053124054"
+     "https://ura.news/news/1053124067"
     ]
    ],
    "sum": null,
@@ -5720,17 +5708,56 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "недвижимость после пожара в поликлинике трассовой медсанчасти",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "недвижимость после пожара в поликлинике трассовой медсанчасти",
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15637570",
+   "title": "Шуфутинский уже шесть лет не может продать особняк за 30 миллионов рублей",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/3/shufutinskij-uzhe-shest-let-ne-mozhet-prodat-osobnyak-za-30-millionov-rublej"
+    ]
+   ],
+   "sum": "30 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "Содержание американского поместья Михаила Шуфутинского обходится ему в более чем 30 млн рублей.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/9/3/shufutinskij-uzhe-shest-let-ne-mozhet-prodat-osobnyak-za-30-millionov-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
