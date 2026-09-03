@@ -258,3 +258,25 @@ def test_attribution_to_a_newly_listed_outlet_can_be_removed():
                 new="Выручка выросла до 5 млрд \u20bd.")
     bad, _ = proofread.check(edit, card)
     assert not any("пропало имя" in b for b in bad), bad
+
+
+def test_marking_one_card_clean_is_actually_written(tmp_path, monkeypatch, capsys):
+    """Прогон, записавший РОВНО ОДНУ карточку, обязан сохраниться на диск.
+
+    `run` возвращает и число записанных карточек, и код ошибки (0/1), а `main`
+    раньше считал единицу кодом ошибки — и `--mark-clean <один id>` молча не
+    писал ничего: скрипт печатал «карточек к записи 1», штамп не появлялся,
+    карточка возвращалась в очередь на следующий час навсегда. Тот же класс,
+    что «„готово“ подменяет „мы перестали пытаться“» из CLAUDE.md.
+    """
+    base = {"deals": [{"id": "solo", "title": "Карточка, которую править нечем",
+                       "extra": "—"}], "companies": {}}
+    data_file = tmp_path / "deals_promoted.json"
+    data_file.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(proofread, "DATA", str(data_file))
+
+    assert proofread.main(["--write", "--mark-clean", "solo"]) == 0
+    assert "ЗАПИСАНО: 1" in capsys.readouterr().out
+
+    written = json.loads(data_file.read_text(encoding="utf-8"))
+    assert written["deals"][0].get("proofread"), "штамп не попал на диск"

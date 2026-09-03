@@ -623,7 +623,7 @@ def queue(data, limit=None):
 # ---------------------------------------------------------------------------
 # Прогон
 
-def run(edits, data, write=False, mark_clean=(), day=None, out=print):
+def run(edits, data, write=False, mark_clean=(), day=None, out=print, stats=None):
     cards = {d['id']: d for d in data['deals']}
     companies = data.get('companies') or {}
     by_card = {}
@@ -710,6 +710,8 @@ def run(edits, data, write=False, mark_clean=(), day=None, out=print):
     for cid in clean:
         if stamp_proofread(cards[cid], day):
             changed += 1
+    if stats is not None:
+        stats['changed'] = changed
     if not changed:
         out('Записывать нечего.')
         return 1 if refused else 0
@@ -750,10 +752,16 @@ def main(argv):
     print('Правок в файле: %d, карточек: %d%s'
           % (len(edits), len({str(e.get('id')) for e in edits}),
              ', пометить чистыми: %d' % len(mark_clean) if mark_clean else ''))
-    result = run(edits, data, write=write, mark_clean=mark_clean)
-    if write and result not in (0, 1):
+    # `run` возвращает и число записанных карточек, и код ошибки (0/1), поэтому
+    # прогон, записавший РОВНО ОДНУ карточку, был неотличим от «записывать нечего»
+    # и молча не сохранялся — ровно случай `--mark-clean <один id>`. Число берём
+    # из `stats`, код возврата оставляем кодом возврата.
+    stats = {}
+    result = run(edits, data, write=write, mark_clean=mark_clean, stats=stats)
+    if write and stats.get('changed'):
         json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-        print('ЗАПИСАНО: %d карточек со штампом proofread в %s' % (result, os.path.relpath(DATA, ROOT)))
+        print('ЗАПИСАНО: %d карточек со штампом proofread в %s'
+              % (stats['changed'], os.path.relpath(DATA, ROOT)))
         return 0
     return result
 
