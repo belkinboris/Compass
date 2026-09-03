@@ -81,10 +81,19 @@
    "news": "https://mergers.ru/news/Nacionalnaya-Media-Gruppa-priobrel-kontrolnuyu-dolyu-v-ID-Komsomolskaya-pravda-87469",
    "title": "Национальная Медиа Группа приобрел контрольную долю в ИД «Комсомольская правда»",
    "verdict": "enrich:g70c0a9ff",
-   "why": "общее название в кавычках и общие слова: 2",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «МИЦ «Известия»»",
     "в карточке «Контрольная доля издательского дома «Комсомольская правда»»"
+   ]
+  },
+  {
+   "news": "https://rb.ru/news/nmg-kupila-kontrolnyj-paket-komsomolskoj-pravdy-sdelka-usilit-pozicii-holdinga-na-rynke-reklamy/",
+   "title": "НМГ купила контрольный пакет «Комсомольской правды» — сделка усилит позиции холдинга на рынке рекламы",
+   "verdict": "enrich:g70c0a9ff",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
    ]
   }
  ]
