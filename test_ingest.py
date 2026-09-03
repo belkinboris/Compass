@@ -3387,6 +3387,47 @@ def test_enrich_allows_a_second_event_of_the_same_kind_on_a_different_date():
         "второе одобрение в другую дату обязано остаться отдельным событием"
 
 
+def test_enrich_does_not_duplicate_an_event_from_the_same_source_url_on_a_different_date():
+    """3 сентября 2026: одна и та же ссылка на retailer.ru («Магнит»/«Азбука
+    вкуса», допокупка доли) переоткрывалась RSS-лентой три часа подряд — у
+    каждого повторного захвата свой draft_id и дата СЕГОДНЯШНЕГО прогона, а
+    не дата самого события (её уже поправили вручную на настоящую, июнь
+    2026). Дедуп по (kind, date) это пропускал: разные даты — «разные»
+    события, и одна и та же допокупка трижды писалась в `events[]`.
+    Сверка ещё и по (kind, адрес источника) обязана эту ссылку узнать, даже
+    когда дата у входящего события не совпадает с уже записанной."""
+    import enrich
+    url = "https://retailer.ru/magnit-uvelichil-dolju-v-azbuke-vkusa-do-86-68/"
+    deal = {"id": "g91ec3558", "title": "«Магнит» покупает «Азбуку вкуса»", "type": "M&A",
+            "events": [{"kind": "closed", "date": "2026-06-01",
+                        "source": ["RETAILER.ru", url]}]}
+    item = {"title": "«Магнит» увеличил долю в «Азбуке вкуса» до 86,68%",
+            "summary": "«Магнит» в июне 2026 года приобрел 0,49% ООО «Городской супермаркет».",
+            "url": url, "date": "2026-09-03", "source_id": "web:retailer.ru"}
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), \
+        "тот же адрес источника породил вторую запись события в другую дату"
+
+
+def test_enrich_names_a_new_source_by_domain_not_by_feed_id():
+    """3 сентября 2026: приток дописал источник карточке Минфин/«Леста» по
+    ссылке на rb.ru, но подписал его «@dealsma» — внутренним id
+    Telegram-агрегатора из реестра лент, а не именем издания по домену
+    самой ссылки. Тот же класс дефекта, что уже чинился для «web:kommersant.ru»
+    и для событий (`editions.edition_label` в `proposals()` ниже) — только
+    для обычного добавления `src` эта резолвция ещё не применялась."""
+    import enrich
+    deal = {"id": "gd9ccfdd2", "title": "Минфин продаёт «Лесту»", "type": "M&A", "src": []}
+    item = {"title": "Минфин рассчитывает продать «Лесту» частному инвестору",
+            "summary": "осенью", "url": "https://rb.ru/news/minfin-lestu/",
+            "date": "2026-09-03", "source_id": "tg:dealsma"}
+    names = {"tg:dealsma": "@dealsma"}
+    props = enrich.proposals(deal, item, names, {})
+    src_props = [p for p in props if p[0] == "src"]
+    assert src_props and src_props[0][1][0] == "RB.ru", \
+        "источник обязан называться по домену ссылки, а не по имени ленты"
+
+
 def _write_hold_file(tmp_path, name, drafts):
     import json as _json
     hold_dir = tmp_path / "data" / "inbox" / "hold"
