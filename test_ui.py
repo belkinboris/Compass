@@ -17,6 +17,7 @@ import socket
 import subprocess
 import sys
 import time
+import uuid
 from pathlib import Path
 
 import pytest
@@ -124,6 +125,7 @@ SCREENS = [
     ("аналитика", "#/analytics"),
     ("отрасль", "#/industry/Банки"),
     ("подборка по ссылке", "#/deals?ind=Банки&year=2024&full=1"),
+    ("ассистент", "#/assistant"),
     ("вход", "#/account"),
 ]
 
@@ -174,7 +176,7 @@ def test_no_horizontal_overflow(page, base_url, width):
     # цветных плашек (раздел B, 22 августа); citibank один короче не ловит
     # переполнение на самом длинном значении, как уже требует урок CLAUDE.md.
     checks = ["#/", "#/deal/citibank", "#/deal/g8ce554c5", "#/analytics",
-              "#/industry/Банки", "#/ind/Банки", "#/advisors/orion"]
+              "#/assistant", "#/industry/Банки", "#/ind/Банки", "#/advisors/orion"]
     bad = []
     for h in checks:
         page.goto(base_url + "/" + h, wait_until="networkidle")
@@ -2163,42 +2165,198 @@ def test_deal_lenses_split_advisors_by_kind(page, base_url):
     assert "Юридический консультант" not in eco
 
 
-def test_new_dialog_control_sits_above_the_chat_and_appears_only_mid_conversation(browser, base_url):
-    """Третья жалоба на «+ Новый диалог» (владелец, 3 сентября 2026: «в
-    нелогичном месте, нет никакого перехода, может, он и не нужен»).
-    Решение: кнопки нет, пока разговор не начат (новый диалог и так
-    начинается при каждом открытии раздела); после первого вопроса над
-    лентой появляется «Начать заново», нажатие меняет ленту прямо под ней;
-    на телефоне — без прокрутки и без клавиатуры (уроки 30–31 августа).
-    Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе — вопрос
-    настоящий, а не подменённый сетью."""
-    ctx = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+THREADS_STUB = (
+    '[{"id":1,"title":"Сделки Сбербанка за 2025 год","context_type":"general",'
+    '"context_id":null,"updated_at":"2026-09-03T08:00:00"},'
+    '{"id":2,"title":"Кто консультировал Ленту","context_type":"general",'
+    '"context_id":null,"updated_at":"2026-08-20T08:00:00"}]')
+
+
+THREAD_STUB = (
+    '{"id":1,"title":"Сделки Сбербанка за 2025 год","context_type":"general","context_id":null,'
+    '"messages":[{"role":"user","body":"Что покупал Сбербанк в 2025 году?","mode":"base",'
+    '"created_at":"2026-09-03T08:00:00"},'
+    '{"role":"assistant","body":"В базе «Компаса» за 2025 год — три сделки Сбербанка.",'
+    '"mode":"base","created_at":"2026-09-03T08:00:05"}]}')
+
+
+def _assistant_page(browser, base_url, width, height=844, signed_in=False, threads=None):
+    """Отдельный контекст под экран ассистента: у страницы два состояния шапки
+    (гость и вошедший) и своя раскладка на каждой ширине. Историю диалогов
+    подменяем ответом сервера: без ключей к модели /api/ask диалоги не пишет,
+    и живого списка в тестах взяться неоткуда."""
+    ctx = browser.new_context(viewport={"width": width, "height": height},
+                              is_mobile=width < 700, has_touch=width < 700)
+    pg = ctx.new_page()
+    errors = []
+    pg.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    pg.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    if signed_in:
+        email = f"chat-{uuid.uuid4().hex[:10]}@ui.test"
+        r = pg.request.post(base_url + "/api/auth/register",
+                            data={"email": email, "password": "secret123", "full_name": "Артем Тест"})
+        assert r.status == 200, r.text()
+    if threads is not None:
+        pg.route("**/api/assistant/threads", lambda route: route.fulfill(
+            status=200, content_type="application/json", body=threads))
+        pg.route("**/api/assistant/threads/*", lambda route: route.fulfill(
+            status=200, content_type="application/json", body=THREAD_STUB))
+    pg.goto(base_url + "/#/assistant", wait_until="networkidle")
+    pg.wait_for_selector("#chatShell")
+    pg.wait_for_timeout(700)
+    return ctx, pg, errors
+
+
+def test_assistant_is_a_two_column_workspace_on_the_desktop(browser, base_url):
+    """Партнёр 3 сентября 2026: «сейчас это довольно поганое окошко на одной
+    странице… сделать как в клоде/чат гпт, с диалогами слева». На компьютере
+    раздел занимает весь экран: слева панель диалогов, справа лента и поле
+    ввода; футера на этой странице нет (он мешал бы ленте), но на соседних
+    экранах он обязан остаться."""
+    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000)
     try:
-        pg = ctx.new_page()
-        errors = []
-        pg.on("pageerror", lambda e: errors.append(str(e)))
-        pg.goto(base_url + "/#/assistant", wait_until="networkidle")
-        pg.wait_for_selector("#chatState")
+        side = pg.locator(".chat-side").bounding_box()
+        main = pg.locator(".chat-main").bounding_box()
+        assert side and main, "панель диалогов или лента не отрисовались"
+        assert side["x"] + side["width"] <= main["x"] + 1, "колонки наложились друг на друга"
+        assert side["height"] > 400 and main["height"] > 400, "рабочее место не во всю высоту"
+        assert pg.locator("#newThread").is_visible(), "кнопки «Новый диалог» не видно в панели"
+        assert not pg.locator("footer").is_visible(), "футер занимает место у полноэкранной ленты"
+        # Прокручивается лента, а не вся страница.
+        assert pg.evaluate("getComputedStyle(document.getElementById('chatbox')).overflowY") == "auto"
+        assert pg.evaluate(
+            "document.documentElement.scrollHeight - window.innerHeight") <= 2, "страница выше окна"
+        # Плашка сравнения компаний висит внизу экрана (position:fixed) и на
+        # обычной странице просто лежит поверх её конца — здесь конец страницы
+        # это поле ввода, и она накрыла бы его целиком.
+        pg.evaluate("localStorage.setItem('kompas_compare_companies_v1',"
+                    " JSON.stringify(Object.keys(COMPANIES).slice(0,2)))")
+        pg.reload(wait_until="networkidle")
+        pg.wait_for_timeout(1200)
+        tray = pg.locator(".compare-tray")
+        assert tray.count() == 0 or not tray.is_visible(), "плашка сравнения накрыла поле ввода"
+        pg.fill("#q", "проверка")
+        assert pg.input_value("#q") == "проверка", "в поле ввода не напечатать"
+        # Уходим с раздела — футер и плашка возвращаются, класс страницы снят.
+        pg.goto(base_url + "/#/companies", wait_until="networkidle")
+        pg.wait_for_timeout(2000)
+        assert pg.locator("footer").is_visible(), "футер не вернулся на соседнем экране"
+        assert pg.locator(".compare-tray").is_visible(), "плашка сравнения не вернулась"
+        assert not pg.evaluate("document.body.classList.contains('chat-page')")
+        assert not errors, errors
+    finally:
+        ctx.close()
+
+
+@pytest.mark.parametrize("width", (360, 390))
+def test_assistant_on_the_phone_is_one_column_with_a_drawer(browser, base_url, width):
+    """На телефоне колонка одна, список диалогов — выдвижной ящик по кнопке
+    «Диалоги». Закрытое и открытое состояния меряем ОБА (скрытые состояния
+    проверяются отдельно): ящик не должен уметь толкать страницу вбок."""
+    ctx, pg, errors = _assistant_page(browser, base_url, width, 780)
+    try:
+        over = lambda: pg.evaluate(
+            "document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        side = pg.locator(".chat-side").bounding_box()
+        assert side and side["x"] < -10, f"панель не спрятана за краем (x={side['x'] if side else None})"
+        assert over() == 0, f"{width}px: горизонтальное переполнение при закрытом ящике"
+        pg.click("#chatBurger")
         pg.wait_for_timeout(500)
-        assert pg.locator("#threadPanel").count() == 0, "гостю панель истории не нужна — сохранять нечего"
+        side = pg.locator(".chat-side").bounding_box()
+        assert side and side["x"] >= -1, "ящик не выехал"
+        assert pg.locator("#newThread").is_visible(), "в ящике не видно «Новый диалог»"
+        assert over() == 0, f"{width}px: горизонтальное переполнение при открытом ящике"
+        pg.click("#chatSideClose")
+        pg.wait_for_timeout(500)
+        side = pg.locator(".chat-side").bounding_box()
+        assert side and side["x"] < -10, "ящик не закрылся"
+        assert not errors, errors
+    finally:
+        ctx.close()
+
+
+def test_assistant_guest_is_invited_to_sign_in_instead_of_the_thread_list(browser, base_url):
+    """Гостю сохранять нечего — на месте списка диалогов приглашение войти."""
+    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000)
+    try:
+        assert pg.locator("#chatSignin").count() == 1
+        assert "Войдите" in pg.inner_text("#chatSignin")
+        assert pg.locator(".chat-thread").count() == 0
+        assert not errors, errors
+    finally:
+        ctx.close()
+
+
+def test_saved_dialogs_are_listed_in_the_side_panel_for_a_signed_in_user(browser, base_url):
+    """У вошедшего в панели — его диалоги, сгруппированные по времени. Время
+    сервер отдаёт по UTC без буквы Z; без её подстановки вечерний диалог
+    оказался бы в «завтрашней» группе."""
+    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000,
+                                      signed_in=True, threads=THREADS_STUB)
+    try:
+        assert pg.locator("#chatSignin").count() == 0, "вошедшему не нужно приглашение войти"
+        titles = pg.locator(".chat-thread").all_inner_texts()
+        assert len(titles) == 2, titles
+        assert "Сделки Сбербанка за 2025 год" in titles[0]
+        groups = [g.strip().lower() for g in pg.locator(".chat-group").all_inner_texts()]
+        assert groups and groups[0] == "сегодня", groups
+        # Диалог из списка открывается в ленте: реплики на месте, счётчик тоже.
+        pg.locator(".chat-thread").first.click()
+        pg.wait_for_timeout(600)
+        stream = pg.inner_text("#chatbox")
+        assert "Что покупал Сбербанк" in stream and "три сделки Сбербанка" in stream, stream[:200]
+        assert "Диалог из истории · 1 вопрос" in pg.inner_text("#chatState")
+        assert not errors, errors
+    finally:
+        ctx.close()
+
+
+def test_new_dialog_button_lives_above_the_thread_list_and_resets_the_conversation(browser, base_url):
+    """Четвёртый заход на «Новый диалог» (30, 31 августа, 3 сентября её уже
+    чинили). Теперь кнопка стоит НАД СПИСКОМ ДИАЛОГОВ — там, где виден её
+    эффект, и там, где её ждут в любом привычном чате. На телефоне список
+    спрятан в ящик, поэтому над полем ввода есть «Начать заново» — и только
+    когда есть что начинать заново; нажатие не прокручивает страницу и не
+    ставит курсор в поле (иначе откроется клавиатура — уроки 30–31 августа).
+    Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе."""
+    ctx, pg, errors = _assistant_page(browser, base_url, 390, 844)
+    try:
         assert pg.inner_text("#chatState").strip() == "Новый диалог"
-        assert pg.locator("#newThread").is_hidden(), "кнопка не должна быть видна, пока разговор не начат"
+        assert pg.locator("#chatReset").is_hidden(), "нечего начинать заново — кнопки нет"
         pg.fill("#q", "Самые крупные сделки 2025 года")
         pg.click("#send")
-        pg.wait_for_selector("#newThread", state="visible", timeout=10000)
+        pg.wait_for_selector("#chatReset", state="visible", timeout=20000)
         assert "1 вопрос" in pg.inner_text("#chatState")
-        bar, box = pg.locator(".chat-bar").bounding_box(), pg.locator("#chatbox").bounding_box()
-        assert bar["y"] + bar["height"] <= box["y"] + 1, "строка состояния с кнопкой стоит прямо над лентой"
-        pg.locator("#newThread").scroll_into_view_if_needed()
-        pg.wait_for_timeout(200)
+        # Результат нажатия (лента) стоит прямо над кнопкой — без прокрутки.
+        line = pg.locator(".chat-statusline").bounding_box()
+        box = pg.locator("#chatbox").bounding_box()
+        assert line["y"] >= box["y"] + box["height"] - 1, "строка состояния не под лентой"
         y0 = pg.evaluate("window.scrollY")
-        pg.click("#newThread")
+        pg.click("#chatReset")
         pg.wait_for_timeout(600)
-        assert abs(pg.evaluate("window.scrollY") - y0) < 10, "нажатие не должно прокручивать страницу"
+        assert abs(pg.evaluate("window.scrollY") - y0) < 10, "нажатие прокрутило страницу"
         assert pg.evaluate("document.activeElement && document.activeElement.id") != "q"
         assert "Начат новый диалог" in pg.inner_text("#chatbox")
         assert pg.inner_text("#chatState").strip() == "Новый диалог"
-        assert pg.locator("#newThread").is_hidden()
+        assert pg.locator("#chatReset").is_hidden()
+        assert not errors, errors
+    finally:
+        ctx.close()
+
+    # На компьютере кнопка живёт в панели и видна всегда — второй такой же
+    # кнопки у ленты там нет, иначе это дубль.
+    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000)
+    try:
+        assert pg.locator("#newThread").is_visible()
+        assert pg.locator("#chatReset").is_hidden(), "на компьютере дублирующей кнопки быть не должно"
+        pg.fill("#q", "Самые крупные сделки 2025 года")
+        pg.click("#send")
+        pg.wait_for_selector(".chat-stream .msg.ai:not(.wait)", timeout=20000)
+        assert "1 вопрос" in pg.inner_text("#chatState")
+        pg.click("#newThread")
+        pg.wait_for_timeout(500)
+        assert "Начат новый диалог" in pg.inner_text("#chatbox")
+        assert pg.inner_text("#chatState").strip() == "Новый диалог"
         assert not errors, errors
     finally:
         ctx.close()

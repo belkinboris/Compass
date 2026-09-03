@@ -1099,10 +1099,162 @@ a.dp-asset-name:hover{color:var(--accent)}
 .compare-owner .share{font-size:11.5px;color:var(--muted);margin-top:2px}
 .compare-empty{padding:34px;background:var(--card);border:1px solid var(--line);color:var(--muted);line-height:1.65}
 
-/* ---------- assistant ---------- */
-.chat{max-width:740px;margin:0 auto}
-.chat-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);min-height:300px;padding:24px;display:flex;flex-direction:column;gap:14px}
+/* ---------- ассистент: рабочее место во весь экран ---------- */
+/* Партнёр 3 сентября 2026: «сейчас это довольно поганое окошко на одной
+   странице, а мы позиционируем это как премиум функционал… сделать как в
+   клоде/чат гпт, с диалогами слева». Раздел перестал быть формой посреди
+   обычной страницы: под шапкой сайта разворачивается рабочее место во весь
+   экран — тёмная панель диалогов слева, переписка и поле ввода справа.
+   Футер на этой странице скрыт: полноэкранной ленте он мешает, а все его
+   ссылки есть в шапке. Класс ставит route() (body.chat-page) и снимает,
+   уходя с раздела, — иначе футер пропал бы на всём сайте. */
+body.chat-page footer{display:none}
+/* 65px — ровно высота шапки (.top-in 64px + рамка). Обычный отступ .wrap
+   (74px и поля по бокам) здесь не нужен: рабочее место идёт от края до края. */
+body.chat-page .wrap{max-width:none;padding:65px 0 0}
+/* Плашка сравнения компаний висит внизу экрана (position:fixed) и на любой
+   обычной странице просто лежит поверх её конца. Здесь конец страницы — это
+   поле ввода: плашка накрыла бы его целиком. Выбор компаний при этом не
+   теряется, плашка вернётся на соседнем экране. */
+body.chat-page .compare-tray{display:none}
 .suggests{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+
+.chat-shell{display:grid;grid-template-columns:288px minmax(0,1fr);
+  height:calc(100vh - 65px);height:calc(100svh - 65px);position:relative}
+/* .reveal на самой оболочке и на панели диалогов СТАВИТЬ НЕЛЬЗЯ: анимация
+   fadeUp держит transform:none в последнем кадре (fill-mode:forwards), а
+   панель на телефоне закрыта именно трансформацией (translateX) — выдвижной
+   ящик распахнулся бы сам собой. Проявляем содержимое правой колонки. */
+
+/* Панель диалогов — тёмная поверхность из палитры сайта (та же, что у футера
+   и героя главной): она и даёт «объём», о котором просил партнёр, и сразу
+   читается как боковая колонка чата. */
+.chat-side{position:relative;display:flex;flex-direction:column;min-height:0;
+  background:linear-gradient(168deg,var(--accent-deep) 0%,#0C2430 58%,#0A1A15 100%);
+  color:var(--ivory);border-right:1px solid rgba(243,241,233,.10)}
+.chat-side:before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 55% at 12% 0%,rgba(201,174,124,.17),transparent 62%)}
+.chat-side>*{position:relative;z-index:1}
+.chat-side-top{padding:20px 18px 16px;border-bottom:1px solid rgba(243,241,233,.10)}
+.chat-side-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chat-side-row .label{color:var(--bronze-light)}
+.chat-side-close{display:none;font-size:12px;color:rgba(243,241,233,.72);padding:4px 8px;border-radius:99px;border:1px solid rgba(243,241,233,.22)}
+.chat-new{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:14px;
+  padding:12px 16px;border:1px solid rgba(243,241,233,.30);border-radius:99px;color:var(--ivory);
+  font-size:13px;font-weight:600;transition:background .2s var(--ease),border-color .2s var(--ease)}
+.chat-new:hover{background:rgba(243,241,233,.12);border-color:var(--ivory)}
+.chat-new .plus{font-size:17px;line-height:1;color:var(--bronze-light)}
+.chat-threads{flex:1;min-height:0;overflow-y:auto;padding:12px 10px 18px}
+.chat-group{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(243,241,233,.40);padding:14px 8px 6px}
+.chat-threads>.chat-group:first-child{padding-top:4px}
+.chat-thread{display:block;width:100%;text-align:left;padding:9px 10px;border-radius:6px;font-size:13px;
+  line-height:1.45;color:rgba(243,241,233,.76);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:background .18s var(--ease),color .18s var(--ease)}
+.chat-thread:hover{background:rgba(243,241,233,.09);color:var(--ivory)}
+.chat-thread.on{background:rgba(243,241,233,.15);color:var(--ivory)}
+.chat-side-note{font-size:12.5px;line-height:1.65;color:rgba(243,241,233,.66);padding:10px 8px}
+.chat-side-note a{color:var(--bronze-light);border-bottom:1px solid rgba(201,174,124,.45)}
+
+/* Правая колонка: тёплая полоса-заголовок раздела (тот же градиент, что у
+   светлых hero-полос Компаний и Материалов), лента и поле ввода. */
+.chat-main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--paper)}
+.chat-top{flex:0 0 auto;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap;padding:22px 34px 18px;
+  border-bottom:1px solid var(--line-soft);
+  background:linear-gradient(160deg,var(--bronze-soft) 0%,#F7F3EA 55%,var(--paper) 100%)}
+.chat-title{flex:1 1 260px;min-width:0}
+.chat-top h1{font-family:var(--f-display);font-weight:400;font-size:29px;line-height:1.15;margin-top:6px}
+.chat-top .mode{margin-top:0}
+.chat-top .mode-note{margin-top:8px;max-width:430px}
+.chat-top-right{flex:0 1 460px;min-width:0}
+.chat-burger{display:none;align-items:center;gap:8px;padding:8px 13px;border:1px solid var(--line);
+  border-radius:99px;background:var(--card);font-size:12.5px;color:var(--muted)}
+
+.chat-stream{flex:1;min-height:0;overflow-y:auto;padding:30px 34px 26px;display:flex;flex-direction:column;gap:18px}
+/* Вопрос и ответ различаются не только цветом, но и формой: у вопроса срезан
+   правый нижний угол, у ответа — левый верхний, как у выносок. Подпись
+   «Ассистент» над ответом ставится псевдоэлементом — в разметке ответа лежит
+   только сам текст модели. */
+.chat-stream .msg{max-width:min(760px,100%);border-radius:14px;animation:fadeUp .35s var(--ease)}
+.chat-stream .msg.user{align-self:flex-end;padding:13px 18px;border-bottom-right-radius:4px;
+  background:var(--accent-deep);color:var(--ivory);box-shadow:0 10px 26px rgba(10,27,21,.16)}
+.chat-stream .msg.ai{align-self:flex-start;padding:20px 22px;border-top-left-radius:4px;font-size:14.5px;
+  line-height:1.72;background:var(--card);border:1px solid var(--line);box-shadow:0 14px 34px rgba(10,27,21,.06)}
+.chat-stream .msg.ai:before{content:"Ассистент";display:block;font-weight:600;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+/* Пока приветствие одно в ленте — оно стоит по центру пустого поля; как
+   только под ним появилась реплика («начат новый диалог»), центрировать
+   больше нечего, и оно возвращается в обычный поток. */
+.chat-welcome{max-width:640px;padding:6px 2px}
+.chat-welcome:only-child{margin:auto 0}
+.chat-welcome h2{font-family:var(--f-display);font-weight:400;font-size:31px;line-height:1.2}
+.chat-welcome p{margin-top:14px;color:var(--muted);font-size:14.5px;line-height:1.75}
+
+/* Появление поля ввода — ТОЛЬКО прозрачностью, без `.reveal`. Общая анимация
+   проявления сдвигает элемент на 14px вниз (translateY), и у самого нижнего
+   блока рабочего места этот сдвиг остаётся в области прокрутки страницы даже
+   после того, как анимация закончилась: документ становился на 14px выше
+   окна, и вся страница чуть-чуть ездила по вертикали — ровно то, чего у
+   полноэкранной ленты быть не должно. */
+@keyframes chatFadeIn{from{opacity:0}to{opacity:1}}
+.chat-composer{flex:0 0 auto;padding:14px 34px calc(18px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--line);background:var(--card);animation:chatFadeIn .5s var(--ease) both}
+.chat-composer>*{max-width:820px;margin-left:auto;margin-right:auto}
+.chat-statusline{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:20px;margin-bottom:9px}
+.chat-state{font-size:12.5px;color:var(--muted)}
+/* На компьютере «Новый диалог» всегда виден в панели слева — вторая такая же
+   кнопка рядом с лентой была бы дублем. На телефоне панель спрятана в ящик,
+   поэтому там же, где виден результат (лента прямо над строкой), стоит
+   «Начать заново» — и только когда есть что начинать заново. */
+.chat-reset{display:none;padding:5px 13px;border:1px solid var(--line);border-radius:99px;
+  background:var(--paper);font-size:12px;color:var(--muted)}
+.chat-composer .ask input{padding:15px 18px;border-radius:12px}
+.chat-composer .ask button{border-radius:12px}
+.chat-composer .suggests{margin:12px auto 0}
+/* Подсказки — приглашение к первому вопросу: как только разговор начался,
+   они уступают место самой переписке (тем более на телефоне). */
+.chat-shell.started .chat-composer .suggests{display:none}
+.chat-scrim{display:none}
+
+@media(max-width:999px){
+  .chat-shell{grid-template-columns:minmax(0,1fr)}
+  .chat-side{position:fixed;top:65px;bottom:0;left:0;width:min(300px,84vw);z-index:46;
+    transform:translateX(-102%);transition:transform .28s var(--ease);
+    box-shadow:0 0 44px rgba(10,18,16,.38);border-right:none}
+  .chat-shell.side-open .chat-side{transform:none}
+  .chat-scrim{display:block;position:fixed;inset:65px 0 0;z-index:45;background:rgba(10,18,16,.46);
+    opacity:0;transition:opacity .28s var(--ease)}
+  .chat-shell.side-open .chat-scrim{opacity:1}
+  .chat-scrim[hidden]{display:none}
+  .chat-side-close{display:inline-flex}
+  /* Высота на телефоне — дефицитный ресурс: под ленту остаётся то, что не
+     заняли шапка раздела и поле ввода. Поэтому кнопка «Диалоги» стоит В ОДНОЙ
+     строке с заголовком (своя строка стоила бы 40px), подсказки-примеры едут
+     одной прокручиваемой строкой вместо четырёх столбиком (200px -> 40px), а
+     поле ввода и кнопка не переносятся друг под друга. */
+  .chat-top{padding:14px 18px 12px;gap:10px 12px;align-items:center}
+  .chat-top h1{font-size:22px;margin-top:2px}
+  .chat-burger{display:inline-flex;order:1;flex:0 0 auto}
+  .chat-title{flex:1 1 auto;order:2;min-width:0}
+  /* Надпись «ИИ-поиск по базе «Компаса»» рядом с кнопкой «Диалоги» ломается
+     на две строки и отодвигает сам заголовок — на телефоне остаётся имя
+     раздела, а что он делает, написано в самой ленте. */
+  .chat-title .label{display:none}
+  .chat-top-right{order:3;flex:1 1 100%}
+  .chat-top .mode-note{max-width:none;font-size:11px;margin-top:6px}
+  .chat-stream{padding:18px 18px 16px;gap:14px}
+  .chat-stream .msg.ai{padding:16px 17px}
+  .chat-welcome h2{font-size:25px}
+  .chat-welcome p{font-size:13.5px;margin-top:11px}
+  .chat-composer{padding:10px 18px calc(12px + env(safe-area-inset-bottom,0px))}
+  .chat-composer .ask{flex-wrap:nowrap}
+  .chat-composer .ask input{flex:1 1 auto;min-width:0;padding:13px 15px}
+  .chat-composer .ask button{flex:0 0 auto;padding:0 16px}
+  .chat-composer .suggests{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:10px}
+  .chat-composer .suggests::-webkit-scrollbar{display:none}
+  .chat-composer .suggests .chip{flex:0 0 auto;white-space:nowrap;font-size:12px;padding:6px 12px}
+  .chat-reset:not([hidden]){display:inline-flex}
+}
 
 /* Страховка от горизонтального панорамирования на телефоне (см. комментарий
    у `.heroslider{touch-action:pan-y}`): документ не должен уметь ехать вбок,
@@ -1252,19 +1404,6 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .switch{position:relative;width:42px;height:24px;display:inline-block;flex:0 0 auto}
 .switch input{opacity:0;width:0;height:0}.switch span{position:absolute;inset:0;background:#C9CEC8;border-radius:20px;transition:.2s}.switch span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+span{background:var(--accent)}.switch input:checked+span:before{transform:translateX(18px)}
 
-.chat-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px}
-.thread-panel{background:var(--card);border:1px solid var(--line);padding:14px;min-height:420px}
-/* Гостю панель истории не рисуется вовсе (сохранять нечего) — лента занимает
-   всю ширину. Строка состояния над лентой: «Новый диалог» / «Текущий диалог ·
-   N вопросов» и кнопка «Начать заново», которая есть только пока есть что
-   начинать заново (см. комментарий в renderAssistant). */
-.chat-layout.solo{grid-template-columns:minmax(0,1fr)}
-.thread-head{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:2px 0 12px}
-.chat-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:30px;margin-bottom:8px}
-.chat-state{font-size:12.5px;color:var(--muted)}
-.thread-list{display:grid;gap:5px}.thread-item{padding:9px 10px;text-align:left;font-size:12.5px;color:var(--muted);border-radius:3px}.thread-item.on{background:var(--accent-soft);color:var(--accent-deep)}
-.thread-empty{font-size:12px;color:var(--muted);padding:8px}
-
 .materials-pitch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
 .mp-item{background:var(--card);border:1px solid var(--line);padding:20px;min-width:0}
 .mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
@@ -1296,7 +1435,6 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-filters::-webkit-scrollbar{display:none}.advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
   .fns-head{padding:20px}.fns-body{padding:20px}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .fns-registry{grid-template-columns:1fr}.fns-event{grid-template-columns:1fr;gap:2px}.owner-current{grid-template-columns:1fr}
-  .chat-layout{grid-template-columns:1fr}.thread-panel{min-height:0}.thread-list{display:flex;overflow-x:auto}.thread-item{min-width:180px}
   .webinar-grid{grid-template-columns:1fr}.fns-charts{grid-template-columns:1fr}
 }
 @media(max-width:430px){
@@ -2256,6 +2394,11 @@ function route(){
   // Пока гейт закрыт, любой адрес рисует экран входа, но адрес не теряется:
   // после входа тот же route() откроет то, куда человек шёл.
   if(GATE === null){ app.innerHTML = ""; return; }
+  /* Ассистент — единственная страница во весь экран: у неё нет полей .wrap и
+     нет футера (он мешал бы ленте, а его ссылки есть в шапке). Класс живёт на
+     body, поэтому снимать его надо на КАЖДОМ уходе с раздела — иначе футер
+     пропал бы на всём сайте. За дверью гейта тоже снимаем: там своя форма. */
+  document.body.classList.toggle("chat-page", !gated() && page==="assistant");
   if(gated()){
     document.body.style.background = ""; document.documentElement.style.background = "";
     const tc0 = document.querySelector('meta[name="theme-color"]'); if(tc0) tc0.setAttribute("content", "#F5F5F1");
@@ -6532,63 +6675,136 @@ async function renderMaterials(){
   rerun();
 }
 
+/* Пустой экран ассистента: вместо «Задайте вопрос…» одной строкой — короткое
+   объяснение, что он умеет. Это первое, что видит человек, открыв раздел, и
+   ровно та «страница», о которой просил партнёр, — а не подпись под формой. */
+const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome">
+  <h2>О чём спросить?</h2>
+  <p>Ассистент ищет по базе «Компаса»: сделки, компании, консультанты, суммы и сроки — и в каждом ответе даёт ссылку на первоисточник. В режиме «По всему интернету» он добавляет к этому открытые источники.</p>
+</div>`;
+// Поправка высоты под клавиатуру телефона живёт одна на все открытия раздела:
+// иначе каждый заход вешал бы на visualViewport ещё один обработчик.
+let chatViewportFit = null;
+
 async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
   const history=[];  // реплики диалога гостя; у вошедшего история берётся сервером из сохранённого диалога
-  /* Как устроен «новый диалог» — третья жалоба владельца на эту кнопку
-     (3 сентября 2026: «в нелогичном месте, нет никакого перехода, когда
-     нажимаешь; может, он и не нужен»). Отдельная кнопка «+ Новый диалог» над
-     списком истории убрана. Новый диалог и так начинается сам при каждом
-     открытии раздела (activeThreadId обнулён строкой выше) — значит, кнопка
-     нужна ровно в одном случае: разговор уже идёт, и человек хочет начать
-     заново, не уходя со страницы. Поэтому: (а) панель истории есть только у
-     вошедшего (гостю сохранять нечего) и называется «История диалогов»;
-     (б) прямо над лентой стоит строка состояния — «Новый диалог» / «Текущий
-     диалог · N вопросов» / «Диалог из истории · N вопросов» — и в ней же
-     кнопка «Начать заново», которая появляется только когда есть что начинать
-     заново; (в) нажатие меняет ленту сразу под кнопкой — переход виден без
-     прокрутки на любом экране, — а курсор в поле ставится только на
-     компьютере: на телефоне focus() открывает клавиатуру и сам прокручивает
-     к полю внизу (урок 31 августа). */
+  /* Раздел — рабочее место во весь экран, а не форма на обычной странице
+     (просьба партнёра 3 сентября 2026). Слева тёмная панель диалогов, справа
+     переписка на всю высоту и поле ввода внизу; на телефоне панель уезжает в
+     выдвижной ящик, который открывает кнопка «Диалоги» в шапке раздела.
+
+     ПОЧЕМУ «НОВЫЙ ДИАЛОГ» ТЕПЕРЬ УМЕСТЕН — четвёртый заход на эту кнопку
+     (30, 31 августа, 3 сентября её чинили прокруткой, фокусом и переносом).
+     Все прежние жалобы были об одном: кнопка стояла там, где её эффект не
+     виден. Теперь она стоит НАД СПИСКОМ ДИАЛОГОВ — то есть ровно над тем, что
+     меняется при нажатии: прошлый разговор уходит в список, лента очищается.
+     Это же место у неё в любом привычном чате, так что объяснять её больше не
+     нужно. На телефоне список спрятан в ящик, и там кнопка далеко от ленты —
+     поэтому на узких экранах над полем ввода есть ещё «Начать заново», и
+     только когда есть что начинать заново (строка состояния рядом называет,
+     сколько вопросов в текущем разговоре). Курсор в поле ввода ставится
+     только на компьютере: на сенсорном экране focus() открывает клавиатуру и
+     сам прокручивает страницу (урок 31 августа). */
   app.innerHTML = `
-  <div class="page-hero light"><div class="ph-in reveal"><span class="label">ИИ-поиск</span><h1>Ассистент</h1><p>Отвечает по базе «Компаса» или, в режиме «По всему интернету», по открытым источникам — со ссылками на то, откуда взят факт. Обсуждения сохраняются в аккаунте.</p></div></div>
-  <div class="chat-layout${ME?"":" solo"}">
-    ${ME?`<aside class="thread-panel reveal" id="threadPanel">
-      <div class="thread-head">История диалогов</div>
-      <div class="thread-list" id="threadList"><span class="thread-empty">Загружаем историю…</span></div>
-    </aside>`:""}
-    <div class="chat">
-      <div style="margin-bottom:16px" class="reveal">${modeToggleHtml(true)}</div>
-      <div class="chat-bar reveal"><span class="chat-state" id="chatState">Новый диалог</span><button class="chip" id="newThread" type="button" hidden>Начать заново</button></div>
-      <div class="chat-box reveal" id="chatbox"><div class="msg ai">Задайте вопрос о сделках, компаниях или консультантах.</div></div>
-      <div class="suggests reveal" id="suggests"></div>
-      <div class="ask reveal"><input id="q" placeholder="Например: какие сделки были в фармацевтике в 2025 году?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
-      ${ME?"":`<p class="acct-note reveal" style="margin-top:12px"><a href="#/account">Войдите</a>, чтобы диалоги сохранялись — они будут под рукой в истории.</p>`}
-    </div>
+  <div class="chat-shell" id="chatShell">
+    <div class="chat-scrim" id="chatScrim" hidden></div>
+    <aside class="chat-side" id="threadPanel" aria-label="Диалоги с ассистентом">
+      <div class="chat-side-top">
+        <div class="chat-side-row">
+          <span class="label">Диалоги</span>
+          <button class="chat-side-close" id="chatSideClose" type="button">Закрыть</button>
+        </div>
+        <button class="chat-new" id="newThread" type="button"><span class="plus" aria-hidden="true">+</span>Новый диалог</button>
+      </div>
+      ${ME
+        ? `<div class="chat-threads" id="threadList"><p class="chat-side-note">Загружаем историю…</p></div>`
+        : `<div class="chat-threads"><p class="chat-side-note" id="chatSignin"><a href="#/account">Войдите</a>, чтобы диалоги сохранялись — они будут под рукой в этом списке.</p></div>`}
+    </aside>
+    <section class="chat-main">
+      <header class="chat-top">
+        <button class="chat-burger" id="chatBurger" type="button"><span aria-hidden="true">☰</span> Диалоги</button>
+        <div class="chat-title reveal">
+          <span class="label">ИИ-поиск по базе «Компаса»</span>
+          <h1>Ассистент</h1>
+        </div>
+        <div class="chat-top-right reveal">${modeToggleHtml(true)}</div>
+      </header>
+      <div class="chat-stream" id="chatbox">${CHAT_WELCOME}</div>
+      <div class="chat-composer">
+        <div class="chat-statusline"><span class="chat-state" id="chatState">Новый диалог</span><button class="chat-reset" id="chatReset" type="button" hidden>Начать заново</button></div>
+        <div class="ask"><input id="q" placeholder="Например: какие сделки были в фармацевтике в 2025 году?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+        <div class="suggests" id="suggests"></div>
+      </div>
+    </section>
   </div>`;
   rerun();
+  const shell=document.getElementById("chatShell");
   const box=document.getElementById("chatbox"), list=document.getElementById("threadList");
-  const stateEl=document.getElementById("chatState"), fresh=document.getElementById("newThread");
+  const stateEl=document.getElementById("chatState"), reset=document.getElementById("chatReset");
+  const scrim=document.getElementById("chatScrim");
   let turns=0, fromHistory=false;  // вопросов в текущем диалоге; открыт ли он из истории
+  const openSide=()=>{shell.classList.add("side-open");scrim.hidden=false;};
+  const closeSide=()=>{shell.classList.remove("side-open");scrim.hidden=true;};
+  document.getElementById("chatBurger").onclick=openSide;
+  document.getElementById("chatSideClose").onclick=closeSide;
+  scrim.onclick=closeSide;
   const paintState=()=>{
     const n=`${turns} ${plural(turns,"вопрос","вопроса","вопросов")}`;
     stateEl.textContent = !turns ? "Новый диалог" : (fromHistory ? `Диалог из истории · ${n}` : `Текущий диалог · ${n}`);
-    fresh.hidden = !turns;
+    reset.hidden = !turns;
+    // Подсказки-примеры — приглашение к ПЕРВОМУ вопросу: начался разговор —
+    // место под ним отдаём самой переписке (на телефоне это две-три строки).
+    shell.classList.toggle("started", turns>0);
   };
-  const push=(cls,html)=>{const m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;box.appendChild(m);box.scrollTop=box.scrollHeight;return m;};
+  const push=(cls,html)=>{
+    const w=document.getElementById("chatWelcome"); if(w) w.remove();
+    const m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;
+    box.appendChild(m);box.scrollTop=box.scrollHeight;return m;
+  };
+  /* Время диалога сервер пишет по UTC и БЕЗ буквы Z (datetime.utcnow), а
+     `new Date("…T21:10:00")` без неё читается как местное — вечерний диалог
+     оказался бы «завтрашним». Дописываем Z, если пояса в строке нет. */
+  const threadDate = iso => {
+    const s=String(iso||""); if(!s) return null;
+    const d=new Date(/(Z|[+-]\d\d:?\d\d)$/.test(s)?s:s+"Z");
+    return isNaN(d.getTime()) ? null : d;
+  };
+  const threadGroup = iso => {
+    const d=threadDate(iso); if(!d) return "Ранее";
+    const day=x=>new Date(x.getFullYear(),x.getMonth(),x.getDate()).getTime();
+    const diff=Math.round((day(new Date())-day(d))/86400000);
+    return diff<=0?"Сегодня":diff===1?"Вчера":diff<7?"На этой неделе":"Ранее";
+  };
   const renderThreadList=async()=>{
     if(!ME||!list)return;
-    try{const r=await fetch("/api/assistant/threads"), rows=r.ok?await r.json():[];
-      list.innerHTML=rows.length?rows.map(t=>`<button class="thread-item ${t.id===activeThreadId?"on":""}" data-thread="${t.id}">${esc(t.title)}</button>`).join(""):`<span class="thread-empty">Сохранённых диалогов пока нет.</span>`;
-      list.querySelectorAll("[data-thread]").forEach(b=>b.onclick=()=>loadThread(Number(b.dataset.thread)));
-    }catch(e){list.innerHTML=`<span class="thread-empty">История временно недоступна.</span>`;}
+    try{
+      const r=await fetch("/api/assistant/threads"), rows=r.ok?await r.json():[];
+      // Пока ждали ответ, человек мог уйти с раздела: писать больше некуда
+      // (тот же класс гонки, что у mountMarketMultiples, урок 2 сентября).
+      if(!list.isConnected) return;
+      if(!rows.length){
+        list.innerHTML=`<p class="chat-side-note">Пока пусто. Задайте вопрос — разговор сохранится сам, и вы вернётесь к нему отсюда.</p>`;
+        return;
+      }
+      let html="", group=null;
+      rows.forEach(t=>{
+        const g=threadGroup(t.updated_at);
+        if(g!==group){ group=g; html+=`<div class="chat-group">${g}</div>`; }
+        html+=`<button class="chat-thread${t.id===activeThreadId?" on":""}" data-thread="${t.id}">${esc(t.title)}</button>`;
+      });
+      list.innerHTML=html;
+      list.querySelectorAll("[data-thread]").forEach(b=>b.onclick=()=>{closeSide();loadThread(Number(b.dataset.thread));});
+    }catch(e){ if(list.isConnected) list.innerHTML=`<p class="chat-side-note">История временно недоступна.</p>`; }
   };
   const loadThread=async id=>{
     const r=await fetch(`/api/assistant/threads/${id}`); if(!r.ok)return;
-    const t=await r.json();activeThreadId=t.id;box.innerHTML="";history.length=0;
+    const t=await r.json(); if(!box.isConnected) return;
+    activeThreadId=t.id;box.innerHTML="";history.length=0;
     t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?mdToHtml(m.body):esc(m.body)));
     turns=t.messages.filter(m=>m.role==="user").length; fromHistory=true; paintState();
+    box.scrollTop=box.scrollHeight;
     renderThreadList();
   };
   const answer=async q=>{
@@ -6607,19 +6823,33 @@ async function renderAssistant(){
   paintSuggests(); loadSuggests().then(paintSuggests);
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});
-  fresh.onclick=()=>{
+  const startFresh=()=>{
     // «остался в истории» — только если сервер этот диалог действительно
     // сохранил (тогда у него есть id); без модели /api/ask диалоги не пишет.
     const saved = ME && activeThreadId!==null;
     activeThreadId=null;history.length=0;turns=0;fromHistory=false;
-    box.innerHTML=`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются${saved?", прошлый разговор остался в истории":""}. Спрашивайте.</div>`;
-    paintState();renderThreadList();
+    box.innerHTML=CHAT_WELCOME+`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются${saved?", прошлый разговор остался в истории":""}. Спрашивайте.</div>`;
+    closeSide();paintState();renderThreadList();
     /* Курсор — только на компьютере. На телефоне любой focus() внутри клика
        открывает клавиатуру и сам прокручивает к полю ввода внизу,
-       preventScroll этого не отменяет (жалобы 30 и 31 августа); лента и так
-       стоит прямо под кнопкой, смена текста видна без прокрутки. */
+       preventScroll этого не отменяет (жалобы 30 и 31 августа). */
     if(!window.matchMedia("(pointer:coarse)").matches) document.getElementById("q").focus({preventScroll:true});
   };
+  document.getElementById("newThread").onclick=startFresh;
+  reset.onclick=startFresh;
+  /* Клавиатура на телефоне не уменьшает окно, только видимую его часть, —
+     без поправки поле ввода и низ ленты уезжают под неё. Правку делаем
+     только когда закрыто заметно много (клавиатура, а не полоса браузера). */
+  const fitKeyboard=()=>{
+    const vv=window.visualViewport; if(!vv||!shell.isConnected) return;
+    const covered=Math.max(0, window.innerHeight-vv.height);
+    shell.style.height = covered>120 ? `calc(100svh - 65px - ${Math.round(covered)}px)` : "";
+  };
+  if(window.visualViewport){
+    if(chatViewportFit) window.visualViewport.removeEventListener("resize", chatViewportFit);
+    chatViewportFit=fitKeyboard;
+    window.visualViewport.addEventListener("resize", chatViewportFit);
+  }
   bindModeToggles(app);renderThreadList();
   const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
 }
