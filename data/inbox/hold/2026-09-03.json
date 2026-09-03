@@ -5224,7 +5224,7 @@
    ]
   },
   {
-   "draft_id": "d34410866",
+   "draft_id": "d52511580",
    "title": "«Самолет» продал участок в Мурманске «Аквилону»",
    "date": "2026-09-03",
    "src": [
@@ -5263,7 +5263,7 @@
    ]
   },
   {
-   "draft_id": "d30681183",
+   "draft_id": "d39855485",
    "title": "«Росатом» намерен как можно скорее завершить покупку ГК «Дело» // Лихачев: «Росатом» исполнит все параметры акционерного соглашения в ГК «Дело»",
    "date": "2026-09-03",
    "src": [
@@ -5304,7 +5304,7 @@
    ]
   },
   {
-   "draft_id": "d51993835",
+   "draft_id": "d67672331",
    "title": "«Роквелл Капитал» передал акции «Краслесинвеста» ВЭБ.РФ",
    "date": "2026-09-03",
    "src": [
@@ -5332,7 +5332,7 @@
    ]
   },
   {
-   "draft_id": "d53334759",
+   "draft_id": "d73799655",
    "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
    "date": "2026-09-03",
    "src": [
@@ -5360,7 +5360,7 @@
    ]
   },
   {
-   "draft_id": "d83342288",
+   "draft_id": "d71024275",
    "title": "В Тюмени продают сеть мистических кофеен за 25 миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5388,7 +5388,7 @@
    ]
   },
   {
-   "draft_id": "d84558402",
+   "draft_id": "d65476285",
    "title": "В Перми торговый центр с долгосрочными арендаторами продают за десятки миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5416,7 +5416,7 @@
    ]
   },
   {
-   "draft_id": "d52325002",
+   "draft_id": "d56668391",
    "title": "В Челябинске продают завод майонеза и сыров за 300 миллионов",
    "date": "2026-09-03",
    "src": [
@@ -5444,7 +5444,7 @@
    ]
   },
   {
-   "draft_id": "d26072220",
+   "draft_id": "d42315155",
    "title": "Российская SaaS-компания Roomsharing привлекла инвестиции от основателя TravelLine Александра Галочкина. Детали сделки не разглашаются.   Roomsharing была основана Александром Масловым в 2022 году. Ст",
    "date": "2026-09-03",
    "src": [
@@ -5472,13 +5472,53 @@
    ]
   },
   {
-   "draft_id": "d23983961",
-   "title": "Путин анонсировал перезапуск инвестиционного цикла в России",
+   "draft_id": "d24082146",
+   "title": "Путин заявил об отсутствии планов национализировать критическую инфраструктуру",
    "date": "2026-09-03",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/03/1225978-putin-anonsiroval-investitsionnogo"
+     "https://www.vedomosti.ru/politics/news/2026/09/03/1226006-putin-nazval-tsel"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/politics/news/2026/09/03/1226006-putin-nazval-tsel"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d96454349",
+   "title": "Международные инвесторы задумали купить долю прав на показ матчей Серии А",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.sport-interfax.ru/1112971"
     ]
    ],
    "sum": null,
@@ -5500,57 +5540,17 @@
    ]
   },
   {
-   "draft_id": "d46045119",
-   "title": "Путин заявил об отсутствии планов национализировать критические объекты",
+   "draft_id": "d37930121",
+   "title": "Путин заявил, что инвестиции в защиту НПЗ измеряются десятками миллиардов рублей",
    "date": "2026-09-03",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/economics/03/09/2026/6a99398a7a862c7d1ea63371"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1112970"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "У государства &laquo;в мыслях не было&raquo; ничего национализировать, власти отреагировали на отсутствие обязательств у бизнеса защищать свои предприятия.",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/economics/03/09/2026/6a99398a7a862c7d1ea63371"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d37378603",
-   "title": "Путин назвал источники запуска нового инвестиционного цикла в экономике",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/politics/03/09/2026/6a99308e8a24a6a6a004b86a"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -5561,25 +5561,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d32994659",
-   "title": "Путин: у государства в мыслях не было ничего национализировать",
+   "draft_id": "d62858547",
+   "title": "Новак назвал снижение инвестиций в I полугодии некритичным",
    "date": "2026-09-03",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28075391"
+     "https://tass.ru/ekonomika/28075667"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -5598,84 +5597,46 @@
    ]
   },
   {
-   "draft_id": "d70242673",
-   "title": "Совладелица похоронной компании купила склад рядом с кладбищем в Петербурге",
+   "draft_id": "d28042794",
+   "title": "Путин призвал создать условия для привлечения инвестиций в важные отрасли",
    "date": "2026-09-03",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/03/sovladelica-pohoronnoj-kompanii"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28075237"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/09/03/sovladelica-pohoronnoj-kompanii"
-     ]
-    }
-   ],
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "склад рядом с кладбищем в Петербурге",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "склад рядом с кладбищем в Петербурге",
+    "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d21635769",
-   "title": "Путин рассказал об иностранных инвестициях в Россию",
+   "draft_id": "d48629853",
+   "title": "Государство создаст условия для инвестиций в важные для экономики отрасли",
    "date": "2026-09-03",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260903/investitsii-872981369.html"
+     "https://1prime.ru/20260903/putin-872987062.html"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82116116",
-   "title": "Porsche представила 100 редких 911 GT3 Bergsport — спорткары будут продавать только в четырёх странах",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/porsche-predstavila-100-redkih-911-gt3-bergsport-sportkary-budut-prodavat-tolko-v-chetyryoh-stranah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -5694,192 +5655,13 @@
    ]
   },
   {
-   "draft_id": "d60154705",
-   "title": "Путин назвал условие для инвестиций в российскую экономику",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/ekonomika-2115149794.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59275975",
-   "title": "Строить планы по инвестициям в условиях инфляции сложно, заявил Путин",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/plany-2115149167.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260903/plany-2115149167.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71647304",
-   "title": "Путин анонсировал новый инвестиционный цикл в российской экономике",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/investitsii-2115148765.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87641360",
-   "title": "Иностранные инвестиции приходят в Россию, заявил Путин",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/putin-2115146689.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66808880",
-   "title": "Путин назвал условие для перезапуска инвестиционного цикла в России",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/rossija-2115146535.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36138421",
-   "title": "Минфин в сентябре купить вдвое меньше валюты и золота",
+   "draft_id": "d26997832",
+   "title": "«Лесту» могут продать частному инвестору в сентябре-октябре 2026 года",
    "date": "2026-09-03",
    "src": [
     [
      "web:frankmedia.ru",
-     "https://frankmedia.ru/303006"
-    ]
-   ],
-   "sum": "2,5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17609260",
-   "title": "Россиянам назвали самую выгодную для покупки в 2027 году машину",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/03/rossiyanam-nazvali-samuyu-vygodnuyu-dlya-pokupki-v-2027-godu-mashinu/"
+     "https://frankmedia.ru/303016"
     ]
    ],
    "sum": null,
@@ -5901,13 +5683,13 @@
    ]
   },
   {
-   "draft_id": "d86527344",
-   "title": "В России задумали пересмотр распределения доходов от продажи нефти",
+   "draft_id": "d80598887",
+   "title": "Продажи новых машин в соседней с Россией стране установили рекорд",
    "date": "2026-09-03",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/03/50/"
+     "https://lenta.ru/news/2026/09/03/prodazhi-novyh-mashin-v-sosedney-s-rossiey-strane-ustanovili-rekord/"
     ]
    ],
    "sum": null,
