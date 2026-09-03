@@ -102183,6 +102183,10 @@
     [
      "Bankinform.ru",
      "https://bankinform.ru/news/142894"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/561243"
     ]
    ],
    "from_ingest": true,
@@ -102212,6 +102216,16 @@
      "source": [
       "Mergers.ru",
       "https://mergers.ru/news/Alfa-Bank-kupil-platformu-analitiki-i-podbora-blogerov-WhoIsBlogger-87463"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-03",
+     "title": "Сделка завершена",
+     "note": "История 2026: «Альфа-Банк» купил WhoIsBlogger В сентябре 2026 года «Альфа-Банк» объявил о приобретении платформы WhoIsBlogger (юрлицо - «Даблюайби»), специализирующейся на аналитике и подборе блогеров. Сделка была закрыта в рамках стратегии развития…",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/561243"
      ]
     }
    ],
