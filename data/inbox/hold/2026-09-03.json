@@ -5224,7 +5224,7 @@
    ]
   },
   {
-   "draft_id": "d99232495",
+   "draft_id": "d50584907",
    "title": "«Самолет» продал участок в Мурманске «Аквилону»",
    "date": "2026-09-03",
    "src": [
@@ -5263,7 +5263,7 @@
    ]
   },
   {
-   "draft_id": "d29521705",
+   "draft_id": "d74522988",
    "title": "«Росатом» намерен как можно скорее завершить покупку ГК «Дело» // Лихачев: «Росатом» исполнит все параметры акционерного соглашения в ГК «Дело»",
    "date": "2026-09-03",
    "src": [
@@ -5304,7 +5304,7 @@
    ]
   },
   {
-   "draft_id": "d71996356",
+   "draft_id": "d85787477",
    "title": "«Роквелл Капитал» передал акции «Краслесинвеста» ВЭБ.РФ",
    "date": "2026-09-03",
    "src": [
@@ -5332,7 +5332,7 @@
    ]
   },
   {
-   "draft_id": "d66652935",
+   "draft_id": "d70509806",
    "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
    "date": "2026-09-03",
    "src": [
@@ -5360,7 +5360,7 @@
    ]
   },
   {
-   "draft_id": "d13660975",
+   "draft_id": "d64816262",
    "title": "В Тюмени продают сеть мистических кофеен за 25 миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5388,7 +5388,7 @@
    ]
   },
   {
-   "draft_id": "d15255575",
+   "draft_id": "d21468653",
    "title": "В Перми торговый центр с долгосрочными арендаторами продают за десятки миллионов рублей",
    "date": "2026-09-03",
    "src": [
@@ -5416,7 +5416,7 @@
    ]
   },
   {
-   "draft_id": "d89881294",
+   "draft_id": "d74250864",
    "title": "В Челябинске продают завод майонеза и сыров за 300 миллионов",
    "date": "2026-09-03",
    "src": [
@@ -5444,7 +5444,7 @@
    ]
   },
   {
-   "draft_id": "d52819218",
+   "draft_id": "d87930647",
    "title": "Российская SaaS-компания Roomsharing привлекла инвестиции от основателя TravelLine Александра Галочкина. Детали сделки не разглашаются.   Roomsharing была основана Александром Масловым в 2022 году. Ст",
    "date": "2026-09-03",
    "src": [
@@ -5472,46 +5472,7 @@
    ]
   },
   {
-   "draft_id": "d64975418",
-   "title": "«Монако» намерен продать Головина в российский клуб, пишут СМИ",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260903/golovin-2115242398.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260903/golovin-2115242398.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35071063",
+   "draft_id": "d34985724",
    "title": "Nice-Matin узнала о планах «Монако» продать Головина в РПЛ",
    "date": "2026-09-03",
    "src": [
@@ -5545,99 +5506,12 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Монако» намерен продать Головина в российский клуб, пишут С» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d92103975",
-   "title": "Купить в TikTok по цене обеда: синтетические алмазы превращают бриллианты в массовый товар и заставляют ювелиров переизобретать роскошь",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/marketing/3102807-sinteticheskie-almazy-tiktok-rynok-brilliantov?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d60873963",
-   "title": "Сын Высоцкого опроверг слухи о продаже квартиры отца",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28076679"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d34028003",
-   "title": "«Сочи» арендовал выбранного в первом раунде драфта НХЛ вратаря Андреянова",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/sport/28076533"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54531826",
+   "draft_id": "d58113695",
    "title": "Nvidia приобретет платформу машинного обучения Hugging Face",
    "date": "2026-09-03",
    "src": [
@@ -5665,13 +5539,80 @@
    ]
   },
   {
-   "draft_id": "d87095476",
-   "title": "Продажи книг на маркетплейсах могут сократиться на 9,8% к концу года",
+   "draft_id": "d37560984",
+   "title": "Nvidia купила платформу Hugging Face за $12,93 млрд",
    "date": "2026-09-03",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/prodazhi-knig-na-marketplejsah-mogut-sokratitsja-na-9-8-k-koncu-goda/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8925178"
+    ]
+   ],
+   "sum": "$12,93 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-03",
+     "title": "Сделка завершена",
+     "note": "Компания Nvidia объявила о покупке платформы Hugging Face за $12,93 млрд. Ранее о договоренности двух компаний сообщало издание The Information со ссылкой на источники.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8925178"
+     ]
+    }
+   ],
+   "buyer_name": "Nvidia",
+   "asset": "платформа Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "платформа Hugging Face",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d56441518",
+   "title": "Nvidia покупает ИИ-стартап Hugging Face за $13 млрд",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/09/03/1226126-ii-startap-hugging-face"
+    ]
+   ],
+   "sum": "$13 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Nvidia",
+   "asset": "ИИ-стартап Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "ИИ-стартап Hugging Face",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d54223359",
+   "title": "Моисеев: осенью «Лесту» продадут заинтересованному инвестору",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/03/1226112-lestu-prodadut"
     ]
    ],
    "sum": null,
@@ -5690,17 +5631,297 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd9ccfdd2 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d30545932",
+   "title": "Nvidia договорилась о покупке ИИ-платформы Hugging Face",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/03/09/2026/6a996a3e4c2dbe0eb1088469"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "После сделки Hugging Face не закроет доступ к своим ИИ-моделям и продолжит работать с чипоами других производителей. Ранее стартап отказывался от инвестиций Nvidia, опасаясь влияния доминирующего инвестора — производителя чипов",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/03/09/2026/6a996a3e4c2dbe0eb1088469"
+     ]
+    }
+   ],
+   "buyer_name": "Nvidia",
+   "asset": "ИИ-платформы Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "ИИ-платформы Hugging Face",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g8b03762d (общие редкие слова: ии, платфо) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d87841261",
+   "title": "СМИ сообщили о планах «Монако» продать Головина",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.sport-interfax.ru/1113033"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "Выступающий в чемпионате Франции по футболу \"Монако\" намерен в ближайшее время расстаться с несколькими игроками.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.sport-interfax.ru/1113033"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Nice-Matin узнала о планах «Монако» продать Головина в РПЛ» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d40649081",
+   "title": "Nvidia покупает ИИ-стартап Hugging Face за $12,9 млрд",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1113031"
+    ]
+   ],
+   "sum": "$12,9 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Nvidia",
+   "asset": "ИИ-стартап Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "ИИ-стартап Hugging Face",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d28016957",
-   "title": "Тюменские бизнесмены массово вложились в депутата облдумы Ковина",
+   "draft_id": "d70334186",
+   "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
    "date": "2026-09-03",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053124067"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Akcii-zavoda-Ventprom-izyaty-v-dohod-gosudarstva-po-resheniyu-suda-87471"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Акции завода «Вентпром» изъяты в доход государства по решени» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d55649989",
+   "title": "Артемовский машиностроительный завод «Вентпром» национализирован",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/262957"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Акции завода «Вентпром» изъяты в доход государства по решени» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d55076727",
+   "title": "Совладелец «Смарт Телекома» выкупил за 375 млн рублей здание бывшего головного офиса банка «Таврический» в историческом центре Петербурга",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/69413"
+    ]
+   ],
+   "sum": "375 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-03",
+     "title": "Сделка завершена",
+     "note": "История 2026: Совладелец «Смарт Телекома» выкупил за 375 млн рублей здание бывшего головного офиса банка «Таврический» в историческом центре Петербурга В конце августа 2026 года на торгах продан бывший головной офис признанного банкротом банка «Таврический» в…",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/69413"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "за 375 млн рублей здание бывшего головного офиса банка «Таврический» в историческом центре Петербург",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "за 375 млн рублей здание бывшего головного офиса банка «Таврический» в историческом центре Петербург",
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «В Петербурге продали бывший головной офис банка «Таврический» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d39170058",
+   "title": "Nvidia покупает стартап Hugging Face за почти $13 млрд",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28076743"
+    ]
+   ],
+   "sum": "$13 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Nvidia",
+   "asset": "стартап Hugging Face за почти $13 млрд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "стартап Hugging Face за почти $13 млрд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d30479020",
+   "title": "Активы игровой студии «Леста» продадут частному инвестору осенью",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2160679/aktivy-lesty-prodadut-chastnomu-investoru-oseniu-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "Переходящие государству активы компании «Леста», разработчика игр «Мир танков» и «Мир кораблей», планируется продать частному инвестору, а саму сделку рассчитывают провести в ближайшие два месяца. Об этом 3 сентября сообщил замглавы Минфина РФ Алексей…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2160679/aktivy-lesty-prodadut-chastnomu-investoru-oseniu-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd9ccfdd2 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Моисеев: осенью «Лесту» продадут заинтересованному инвестору» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d31996512",
+   "title": "СМИ: Таллину грозит возврат денег, отложенных на покупку ракет для Киева",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260903/estoniya-2115271541.html"
     ]
    ],
    "sum": null,
@@ -5722,30 +5943,19 @@
    ]
   },
   {
-   "draft_id": "d15637570",
-   "title": "Шуфутинский уже шесть лет не может продать особняк за 30 миллионов рублей",
+   "draft_id": "d43781363",
+   "title": "Уральский завод «Вентпром» перешел в собственность государства",
    "date": "2026-09-03",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/3/shufutinskij-uzhe-shest-let-ne-mozhet-prodat-osobnyak-za-30-millionov-rublej"
+     "web:ria.ru",
+     "https://ria.ru/20260903/zavod-2115268617.html"
     ]
    ],
-   "sum": "30 млн ₽",
+   "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "Содержание американского поместья Михаила Шуфутинского обходится ему в более чем 30 млн рублей.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/news/2026/9/3/shufutinskij-uzhe-shest-let-ne-mozhet-prodat-osobnyak-za-30-millionov-rublej"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -5754,10 +5964,51 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Акции завода «Вентпром» изъяты в доход государства по решени» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d87565154",
+   "title": "Nvidia договорилась о приобретении Hugging Face",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/303145"
+    ]
+   ],
+   "sum": "$12,93 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "Сумма сделки составила $12,93 млрд Сообщение Nvidia договорилась о приобретении Hugging Face появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/303145"
+     ]
+    }
+   ],
+   "buyer_name": "Nvidia",
+   "asset": "Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "Hugging Face",
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
