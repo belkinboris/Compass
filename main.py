@@ -30,6 +30,7 @@ from pydantic import BaseModel
 
 import assistant_retrieval
 import auth
+import data_refresh
 import deal_catalog
 import deal_multiples
 import notification_service
@@ -151,13 +152,22 @@ def _create_account_tables():
 
 # Подписки сверяются здесь, а не в притоке: приток работает в другом облаке, а
 # база пользователей стоит во внутренней сети хостинга и оттуда недостижима.
-# Отдельного расписания у сверки нет и не нужно — новые карточки попадают на
-# сайт ровно одним способом, деплоем нового deals_promoted.json, и старт
-# процесса после деплоя и есть единственный момент, когда есть что сверять.
 # Первый прогон никого не будит: он только запоминает состав базы.
+# ВАЖНО с 3 сентября 2026: старт процесса больше НЕ единственный момент, когда
+# есть что сверять, — новые карточки теперь приезжают подтягиванием данных без
+# перезапуска (data_refresh.py), и после каждой такой замены сверка зовётся
+# оттуда же. Здесь она осталась ради первого прогона после деплоя.
 @app.on_event("startup")
 def _match_subscriptions_against_new_deals():
     subscription_feed.scan_on_startup()
+
+
+# Свежая база без пересборки: рутины коммитят данные 4–5 раз в час, и каждый
+# такой пуш до 3 сентября 2026 перезапускал сайт (три пуша за минуту дали 502
+# на девять минут). Почему так и что качается — docstring data_refresh.py.
+@app.on_event("startup")
+def _start_data_refresh():
+    data_refresh.start()
 
 
 # Докачка ФНС по git-реестру (pipeline/fns_registry.py) — механика,
@@ -2373,6 +2383,20 @@ def ops_summary(token: str = ""):
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
     return _ops_numbers()
+
+
+@app.get("/api/data/status")
+def data_status(token: str = ""):
+    """Как идёт подтягивание свежих данных с GitHub (data_refresh.py).
+
+    Нужен, чтобы «работает» и «молча не работает» различались снаружи: сеть до
+    raw.githubusercontent.com из России бывает закрыта, и сайт в этом случае
+    честно живёт на файле, приехавшем деплоем, — но узнать об этом иначе как
+    из лога одноразового контейнера было бы негде. Закрыт тем же токеном, что
+    и мост решений: состав очереди и внутренняя механика не для публики."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return data_refresh.status()
 
 
 @app.get("/api/moderation/decisions")
