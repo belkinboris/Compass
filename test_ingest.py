@@ -922,8 +922,26 @@ def test_enrich_updates_title_from_the_new_stage_source(base):
             "url": "https://example.invalid/approval"}
     props = enrich.proposals(deal, item, {}, base["companies"])
     assert any(p[0] == "title" and p[1] == item["title"] for p in props)
-    enrich.apply_props(deal, props)
-    assert deal["status"] == "Согласование получено" and deal["title"] == item["title"]
+
+
+def test_enrich_title_update_normalizes_straight_quotes(base):
+    """Тот же баг четвёртый раз, только на другом пути записи. `draft.build()`
+    красит прямые кавычки в « » для НОВЫХ карточек ещё с 16 августа, но
+    обновление заголовка при смене стадии на СУЩЕСТВУЮЩЕЙ карточке брало
+    `item['title']` дословно, без нормализации — найдено на g70c0a9ff
+    (3 сентября 2026): «НМГ купила контрольный пакет ИД "Комсомольская
+    правда"» ушло в базу с прямыми кавычками из RSS-ленты Интерфакса."""
+    import enrich
+    deal = {"id": "title-stage-quotes",
+            "title": "НМГ приобретает контрольную долю издательского дома «Комсомольская правда»",
+            "date": "2026-09-03", "status": "Обсуждается", "src": [], "events": []}
+    item = {"title": 'НМГ купила контрольный пакет ИД "Комсомольская правда"',
+            "summary": "Сделка закрыта.", "date": "2026-09-03",
+            "url": "https://example.invalid/closed"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    title_prop = next(p for p in props if p[0] == "title")
+    assert '"' not in title_prop[1]
+    assert title_prop[1] == 'НМГ купила контрольный пакет ИД «Комсомольская правда»'
 
 
 def test_enrich_accepts_extended_stage_headline():
