@@ -25,6 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from sqlalchemy import select
+from sqlalchemy.exc import SQLAlchemyError
 
 from company_catalog import load_company_catalog
 from db.models import (
@@ -85,6 +86,26 @@ def _score(profile: dict[str, Any], candidate: dict[str, Any]) -> tuple[float, l
         best += 0.02
         reasons.append("действующая организация")
     return min(best, 1.0), reasons
+
+
+def ensure_company_row(db, company_id: str) -> bool:
+    """Есть ли профиль в SQL-таблице `companies`; если нет — завести из
+    JSON-справочника. Возвращает False, только если профиля нет и там.
+
+    Нужна потому, что справочник компаний живёт в JSON (его правят рутины
+    каждый час), а SQL-таблица наполняется отдельной командой `--seed`:
+    между ними всегда есть отставание, и запись юрлица для нового профиля
+    упиралась во внешний ключ."""
+    if db.get(Company, company_id):
+        return True
+    item = load_company_catalog().get(company_id)
+    if not item:
+        return False
+    db.add(Company(id=company_id, name=item["name"], legal_name=item.get("legal_name"),
+                   industry=item.get("industry"), description=item.get("description"),
+                   auto_generated=bool(item.get("auto_generated"))))
+    db.flush()
+    return True
 
 
 def seed_companies(db, *, dry_run: bool = False) -> int:
@@ -478,6 +499,19 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
         if limit and work_done >= limit:
             break
         company_id, inn = row["company_id"], row["inn"]
+        # Профиль обязан существовать в SQL-таблице `companies`, иначе запись
+        # юрлица упирается во внешний ключ. Таблица наполняется `--seed` из
+        # JSON-справочника и потому отстаёт: реестр подтверждает ИНН профилю,
+        # который завели в базе ПОЗЖЕ последнего посева. 3 сентября 2026 это
+        # уронило весь стартовый скан на проде — одна запись
+        # («g113002a7-target») давала IntegrityError, а он не ApiFnsError и
+        # потому не ловился: остальные компании не докачались вовсе.
+        # Досеиваем профиль по месту, а не пропускаем: данные о нём нужны.
+        if not ensure_company_row(db, company_id):
+            print(f"[FNS] {company_id}: профиля нет ни в SQL, ни в справочнике — пропускаю",
+                  file=sys.stderr)
+            stats["errors"] += 1
+            continue
         entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
         needs_confirm = not entity or entity.inn != inn or entity.match_status != LegalEntityMatchStatus.confirmed
         needs_sync = force or not entity or not entity.fetched_at or entity.fetched_at < cutoff
@@ -498,7 +532,12 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
                     db.commit()
                 stats["synced"] += 1
                 stats["requests"] += 2  # egr + bo, changes уже внутри sync_entity
-        except ApiFnsError as exc:
+        except (ApiFnsError, SQLAlchemyError) as exc:
+            # SQLAlchemyError здесь наравне с ApiFnsError: до 3 сентября 2026
+            # ловилась только ошибка API, и любая ошибка БД (нарушенный
+            # внешний ключ, оборванное соединение) прекращала стартовый скан
+            # целиком — на проде это выглядело как «ФНС молчит», хотя не
+            # работала одна запись из тысячи.
             print(f"[FNS] {company_id}/{inn}: {exc}", file=sys.stderr)
             db.rollback()
             stats["errors"] += 1

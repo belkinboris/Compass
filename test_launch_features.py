@@ -2841,3 +2841,32 @@ def test_bot_menu_offers_the_doubtful_queue_too():
     один раз и терялись в переписке."""
     data = [b["callback_data"] for row in main._bot_menu()["inline_keyboard"] for b in row]
     assert "show:raw" in data
+
+
+def test_registry_sync_seeds_a_missing_company_and_survives_a_broken_row():
+    """Профиль, заведённый в JSON-справочнике позже последнего `--seed`, не
+    должен ронять стартовую загрузку ФНС.
+
+    3 сентября 2026 в логах Timeweb: `Key (company_id)=(g113002a7-target) is
+    not present in table "companies"` — запись юрлица упёрлась во внешний
+    ключ, IntegrityError не был ApiFnsError и потому не ловился, и весь
+    стартовый скан прекращался на первой такой записи."""
+    from pipeline.sync_fns import ensure_company_row
+    from company_catalog import load_company_catalog
+    from db.models import CompanyAlias
+
+    known = next(iter(load_company_catalog()))
+    db = get_session()
+    try:
+        db.query(CompanyAlias).filter_by(company_id=known).delete()
+        db.query(Company).filter_by(id=known).delete()
+        db.commit()
+        assert db.get(Company, known) is None
+        # Профиль есть в справочнике — досеивается по месту.
+        assert ensure_company_row(db, known) is True
+        db.commit()
+        assert db.get(Company, known) is not None
+        # Профиля нет нигде — честное False, а не исключение.
+        assert ensure_company_row(db, "нет-такого-профиля") is False
+    finally:
+        db.close()
