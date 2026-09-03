@@ -5224,210 +5224,7 @@
    ]
   },
   {
-   "draft_id": "d74258435",
-   "title": "46% инвестиций в крупные ГЧП-проекты сконцентрировано всего в семи субъектах РФ",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8924570"
-    ]
-   ],
-   "sum": "1 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70759246",
-   "title": "Ротенберг заявил о продолжении инвестиций в большие проекты",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/economics/03/09/2026/6a98fe63bfbb251519468ec0"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24725653",
-   "title": "СГК планирует ежегодные инвестиции в 80 млрд рублей после 2029 года",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28073891"
-    ]
-   ],
-   "sum": "80 млрд ₽",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "Цифры могут меняться в зависимости от инфляции, отметил председатель совета директоров компании Юрий Малявкин",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28073891"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29269790",
-   "title": "Росатом намерен как можно скорее завершить покупку компании «Дело»",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28073699"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "Компания сейчас находится в сложном положении, отметил глава госкорпорации Алексей Лихачев",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28073699"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Энергетика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63704237",
-   "title": "Инвестиции в загородный отдых: дефицит качественных проектов усиливает спрос",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/03/investicii-v-zagorodnij-otdih"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d50322603",
-   "title": "Почти 80% россиян рассматривают кредит для покупки автомобиля",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2159811/2026-09-03/pochti-80-rossiian-rassmatrivaiut-kredit-dlia-pokupki-avtomobilia"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-03",
-     "title": "Сделка завершена",
-     "note": "Согласно результатам опроса более 10 тыс. россиян, более половины (53%) на данный момент находятся в процессе выбора автомобиля, планируют начать поиск или недавно приобрели машину. Среди них 78% готовы воспользоваться кредитом при подходящих условиях. Об…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2159811/2026-09-03/pochti-80-rossiian-rassmatrivaiut-kredit-dlia-pokupki-avtomobilia"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28876571",
+   "draft_id": "d21212066",
    "title": "«Самолет» продал участок в Мурманске «Аквилону»",
    "date": "2026-09-03",
    "src": [
@@ -5466,13 +5263,83 @@
    ]
   },
   {
-   "draft_id": "d89767648",
-   "title": "Первая ракетка мира Соболенко обыграла Яценко во втором раунде US Open",
+   "draft_id": "d88767533",
+   "title": "«Росатом» намерен как можно скорее завершить покупку ГК «Дело» // Лихачев: «Росатом» исполнит все параметры акционерного соглашения в ГК «Дело»",
    "date": "2026-09-03",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260903/sobolenko--2115065074.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8924711"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "«Росатом» намерен как можно скорее завершить сделку по выкупу 51-процентной доли Сергея Шишкарева в ГК «Дело», заявил гендиректор госкорпорации Алексей Лихачев. По его словам, «Росатом» готов выполнить все параметры акционерного соглашения и применить…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8924711"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Правительство одобрило создание СП «Росатома» и DP World» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d84778007",
+   "title": "Алиханов заявил о продаже более 131 тыс. авто по льготным программам в 2026 году",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28074163"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d89219800",
+   "title": "Путин об инвестициях в АТР",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2160207/video/putin-ob-investitciiakh-v-atr"
     ]
    ],
    "sum": null,
@@ -5494,53 +5361,13 @@
    ]
   },
   {
-   "draft_id": "d55233940",
-   "title": "Классика: продавать дешевле, покупать дороже",
-   "date": "2026-09-02",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1347342.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-02",
-     "title": "Сделка завершена",
-     "note": "За последние несколько месяцев компания Strategy Майкла Сейлора, в три захода, продала 5310 BTC в диапазоне от $60 200 до $64 300. Когда биткоин вырос, компания приобрела 4603 BTC по $80 300, что на 25-35% выше. Судя по действиям Сейлора, он никакой не…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1347342.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87234060",
-   "title": "В России выросли продажи электрокаров и гибридов",
+   "draft_id": "d83577324",
+   "title": "Россия активно участвует в инвестициях и торговле в АТР, заявил Путин",
    "date": "2026-09-03",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/03/v-rossii-vyrosli-prodazhi-elektrokarov-i-gibridov/"
+     "web:1prime.ru",
+     "https://1prime.ru/20260903/putin-872970671.html"
     ]
    ],
    "sum": null,
@@ -5559,35 +5386,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82755430",
-   "title": "Что съедает деньги пермских инвесторов: неочевидные расходы при покупке торговых центров и офисов",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053123672"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
