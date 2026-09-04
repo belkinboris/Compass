@@ -18,6 +18,7 @@ import subprocess
 import sys
 import time
 import uuid
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -2165,19 +2166,31 @@ def test_deal_lenses_split_advisors_by_kind(page, base_url):
     assert "Юридический консультант" not in eco
 
 
-THREADS_STUB = (
-    '[{"id":1,"title":"Сделки Сбербанка за 2025 год","context_type":"general",'
-    '"context_id":null,"updated_at":"2026-09-03T08:00:00"},'
-    '{"id":2,"title":"Кто консультировал Ленту","context_type":"general",'
-    '"context_id":null,"updated_at":"2026-08-20T08:00:00"}]')
+# Даты — от РЕАЛЬНОГО "сейчас", а не зашитая дата: раньше здесь стояла
+# буквальная строка "2026-09-03T08:00:00", и тест ломался сам собой, как
+# только настенное время переваливало за полночь этой даты (группа
+# "сегодня" превращалась в "вчера" без единой правки продукта или данных).
+_STUB_TODAY = datetime.utcnow().strftime("%Y-%m-%dT08:00:00")
+_STUB_TODAY_PLUS5S = datetime.utcnow().strftime("%Y-%m-%dT08:00:05")
+_STUB_EARLIER = (datetime.utcnow() - timedelta(days=14)).strftime("%Y-%m-%dT08:00:00")
+
+THREADS_STUB = json.dumps([
+    {"id": 1, "title": "Сделки Сбербанка за 2025 год", "context_type": "general",
+     "context_id": None, "updated_at": _STUB_TODAY},
+    {"id": 2, "title": "Кто консультировал Ленту", "context_type": "general",
+     "context_id": None, "updated_at": _STUB_EARLIER},
+])
 
 
-THREAD_STUB = (
-    '{"id":1,"title":"Сделки Сбербанка за 2025 год","context_type":"general","context_id":null,'
-    '"messages":[{"role":"user","body":"Что покупал Сбербанк в 2025 году?","mode":"base",'
-    '"created_at":"2026-09-03T08:00:00"},'
-    '{"role":"assistant","body":"В базе «Компаса» за 2025 год — три сделки Сбербанка.",'
-    '"mode":"base","created_at":"2026-09-03T08:00:05"}]}')
+THREAD_STUB = json.dumps({
+    "id": 1, "title": "Сделки Сбербанка за 2025 год", "context_type": "general", "context_id": None,
+    "messages": [
+        {"role": "user", "body": "Что покупал Сбербанк в 2025 году?", "mode": "base",
+         "created_at": _STUB_TODAY},
+        {"role": "assistant", "body": "В базе «Компаса» за 2025 год — три сделки Сбербанка.",
+         "mode": "base", "created_at": _STUB_TODAY_PLUS5S},
+    ],
+})
 
 
 def _assistant_page(browser, base_url, width, height=844, signed_in=False, threads=None):
