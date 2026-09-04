@@ -5874,7 +5874,7 @@
    ]
   },
   {
-   "draft_id": "d50974376",
+   "draft_id": "d89331382",
    "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
    "date": "2026-09-03",
    "src": [
@@ -5903,7 +5903,7 @@
    ]
   },
   {
-   "draft_id": "d17262364",
+   "draft_id": "d52674708",
    "title": "Nvidia договорилась о покупке Hugging Face за $12,93 млрд — платформу для разработчиков ИИ планируют масштабировать",
    "date": "2026-09-04",
    "src": [
@@ -5943,7 +5943,7 @@
    ]
   },
   {
-   "draft_id": "d76011447",
+   "draft_id": "d60500611",
    "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
    "date": "2026-09-04",
    "src": [
@@ -5982,7 +5982,7 @@
    ]
   },
   {
-   "draft_id": "d33642101",
+   "draft_id": "d67405900",
    "title": "«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке для диверсификации активов",
    "date": "2026-09-04",
    "src": [
@@ -6021,7 +6021,7 @@
    ]
   },
   {
-   "draft_id": "d47425304",
+   "draft_id": "d72143087",
    "title": "Прием заявок на повторные торги по продаже «Вектор Рейла» вновь продлен - до 15 сентября",
    "date": "2026-09-04",
    "src": [
@@ -6051,13 +6051,81 @@
    ]
   },
   {
-   "draft_id": "d39129074",
-   "title": "CHINT: рынку ЦОДов нужна не продажа «решений», а инженерная экспертиза",
+   "draft_id": "d31377891",
+   "title": "Бывший стеариновый завод в Выборге продают за 34,4 млн рублей",
    "date": "2026-09-04",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-04_chint_rynku_tsodov_nuzhna_ne"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/04/bivshij-stearinovij-zavod-v"
+    ]
+   ],
+   "sum": "34,4 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22554576",
+   "title": "GoPro договорилась о слиянии с производителем оптических технологий — сумма сделки составит $285 млн",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/gopro-dogovorilas-o-sliyanii-s-proizvoditelem-opticheskih-tehnologij-summa-sdelki-sostavit-285-mln/"
+    ]
+   ],
+   "sum": "$285 млн",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-04",
+     "title": "Переговоры",
+     "note": "GoPro договорилась объединить бизнес со Starman Optical, американским разработчиком и производителем оптических приемопередатчиков. Производитель экшен-камер получит новое направление бизнеса, сохранив существующие продукты и сервисы, говорится в пресс-релизе…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/gopro-dogovorilas-o-sliyanii-s-proizvoditelem-opticheskih-tehnologij-summa-sdelki-sostavit-285-mln/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d82943521",
+   "title": "Седокова могла приобрести в браке с Тиммой еще три квартиры",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260904/sedokova-2115471648.html"
     ]
    ],
    "sum": null,
@@ -6079,52 +6147,13 @@
    ]
   },
   {
-   "draft_id": "d79682510",
-   "title": "«М.Видео»: россияне купили более 1,2 млн устройств для домашних заготовок за полгода",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-04_mvideo_rossiyane_kupili"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-04",
-     "title": "Сделка завершена",
-     "note": "ПАО «М.Видео», российская компания в сфере электронной коммерции и розничной торговли электроникой и бытовой...",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/line/2026-09-04_mvideo_rossiyane_kupili"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "более 1,2 млн устройств для домашних заготовок за полгода",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "более 1,2 млн устройств для домашних заготовок за полгода",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d27511079",
-   "title": "Продавщицу арестовали за слишком навязчивые продажи",
+   "draft_id": "d50683871",
+   "title": "Россиян проинструктировали на случай обнаружения в квартире дефектов после покупки",
    "date": "2026-09-04",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/04/prodavschitsu-arestovali-za-slishkom-navyazchivye-prodazhi/"
+     "https://lenta.ru/news/2026/09/04/defect-kv/"
     ]
    ],
    "sum": null,
@@ -6142,8 +6171,36 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60419663",
+   "title": "В Перми по цене квартиры продают гостиницу с атмосферой старинного уральского поселка",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053124385"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку ge957fc7b (общие редкие слова: гостин, кварти) — проверьте, не дубль ли"
    ]
   }
  ]
