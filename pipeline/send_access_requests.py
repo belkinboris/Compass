@@ -28,6 +28,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
+import console_topics                                      # noqa: E402
 import telegram_endpoint                                  # noqa: E402
 from send_drafts import send_one, PAUSE                   # noqa: E402
 
@@ -89,9 +90,7 @@ def main():
     pending = fresh
 
     bot = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
-    chats = [x.strip() for x in
-             (os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '') or
-              os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '')).split(',') if x.strip()]
+    chats = console_topics.console_chats()
     for req in pending:
         print('\n' + render(req))
         print('   кнопки: acc:%d:ok / acc:%d:no' % (req['id'], req['id']))
@@ -105,12 +104,13 @@ def main():
     import httpx
     import time
     sent = 0
+    thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         for i, req in enumerate(pending):
             keys = {'inline_keyboard': [[
                 {'text': '✅ Одобрить', 'callback_data': 'acc:%d:ok' % req['id']},
                 {'text': '🗑 Отклонить', 'callback_data': 'acc:%d:no' % req['id']}]]}
-            ok = all(send_one(client, bot, chat, render(req), keys) for chat in chats)
+            ok = all(send_one(client, bot, chat, render(req), keys, thread) for chat in chats)
             if ok and req['id'] not in state['sent']:
                 state['sent'].append(req['id'])
                 save_state(state)

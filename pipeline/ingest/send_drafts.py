@@ -49,7 +49,9 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, ROOT)                                  # telegram_endpoint в корне
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import console_topics                                     # noqa: E402
 import format_post                                       # noqa: E402
 import promote                                           # noqa: E402
 import telegram_endpoint                                 # noqa: E402
@@ -67,10 +69,8 @@ def reviewers():
 
 
 def send_targets():
-    """Куда слать. Группа (TELEGRAM_REVIEW_GROUP_ID) — одна копия на всех;
-    без неё — личное сообщение каждому из TELEGRAM_REVIEW_CHAT_IDS."""
-    group = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
-    return [group] if group else reviewers()
+    """Куда слать — pipeline/console_topics.console_chats()."""
+    return console_topics.console_chats()
 
 
 # --- три типа сообщений -----------------------------------------------------
@@ -206,15 +206,19 @@ PAUSE = 3.5
 RETRIES = 3
 
 
-def send_one(client, token, chat, text, keyboard):
+def send_one(client, token, chat, text, keyboard, thread_id=None):
     """Отправить одно сообщение, дождавшись, если Telegram просит подождать.
     keyboard=None — сообщение без кнопок (решение приходит только ответом
     текстом, как у очереди «нужен ИНН»): `reply_markup` тогда не кладём в
     тело запроса вовсе, а не шлём null — так же, как notification_service.
-    _send_telegram уже делает для обычных уведомлений без клавиатуры."""
+    _send_telegram уже делает для обычных уведомлений без клавиатуры.
+    thread_id — номер темы форума (console_topics.thread_id); None — не
+    указываем вовсе, сообщение уйдёт в общую ленту."""
     payload = {'chat_id': chat, 'text': text, 'disable_web_page_preview': True}
     if keyboard is not None:
         payload['reply_markup'] = keyboard
+    if thread_id is not None:
+        payload['message_thread_id'] = thread_id
     for attempt in range(RETRIES):
         r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
         if r.status_code == 200 and r.json().get('ok'):
@@ -335,13 +339,16 @@ def main(write=False):
 
     import httpx
     sent = 0
+    # Все три вида сообщений (пост/карточка/сырьё) ждут решения владельца или
+    # партнёра — тема одна на всех, «Подтверждение постов».
+    thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         for i, (text, keyboard, (kind, item, mark)) in enumerate(plan):
             if i:
                 time.sleep(PAUSE)
             ok_all = True
             for chat in chats:
-                if not send_one(client, token, chat, text, keyboard):
+                if not send_one(client, token, chat, text, keyboard, thread):
                     ok_all = False
             if ok_all:
                 sent += 1

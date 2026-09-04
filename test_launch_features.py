@@ -2976,3 +2976,105 @@ def test_publishing_asks_the_site_for_the_channel_when_the_name_is_dead(monkeypa
     # Числовой адрес в окружении сильнее: он задан человеком осознанно.
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004444444444")
     assert send_telegram.channel_address() == "-1004444444444"
+
+
+def test_forum_topic_created_is_learned_and_served_by_slug(client, monkeypatch):
+    """4 сентября 2026 владелец превратил группу-консоль в форум и попросил
+    разложить сообщения бота по темам вместо одной кучи. Bot API не даёт
+    список тем — номер темы (message_thread_id) узнаётся из служебного
+    сообщения о её создании, тем же приёмом, что и адрес приватного канала."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 42, "message_thread_id": 42,
+                   "forum_topic_created": {"name": "Подтверждение постов"},
+                   "chat": {"id": -100111, "type": "supergroup"}}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/topics", params={"token": "тайна"})
+    assert r.status_code == 200
+    assert r.json()["topics"].get("подтверждение-постов") == "42", r.json()
+    # Чужой токен тем не получает.
+    assert client.get("/api/moderation/topics", params={"token": "не тот"}).status_code == 404
+
+
+def test_forum_topic_bootstrap_by_typing_its_own_name(client, monkeypatch):
+    """Для тем, заведённых ДО того, как бот начал слушать служебные
+    сообщения, — служебное сообщение о создании уже пропало (Telegram не
+    хранит недоставленные апдейты вечно). Бутстрап: человек один раз печатает
+    точное название темы внутри неё самой."""
+    _mod_env(monkeypatch)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 7, "message_thread_id": 99,
+                   "text": "Обновления",
+                   "chat": {"id": -100111, "type": "supergroup"},
+                   "from": {"id": 111}}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/topics", params={"token": "тайна"})
+    assert r.json()["topics"].get("обновления") == "99", r.json()
+    # Случайное сообщение, совпавшее по тексту с посторонним словом, темой
+    # не считается — бутстрап срабатывает ТОЛЬКО на точное совпадение с
+    # одним из известных названий.
+    r2 = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 8, "message_thread_id": 123,
+                   "text": "привет всем",
+                   "chat": {"id": -100111, "type": "supergroup"},
+                   "from": {"id": 111}}})
+    assert r2.status_code == 200
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert "123" not in topics.values()
+
+
+def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):
+    """Ответ на команду/кнопку обязан остаться в той же теме, где её
+    нажали/напечатали — Telegram НЕ выводит тему сама по reply_to_message_id,
+    её нужно передать явно (message_thread_id)."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    sent = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 5, "message_thread_id": 42, "text": "/help",
+                   "chat": {"id": -100111}, "from": {"id": 111}}})
+    assert r.status_code == 200
+    calls = [kw for m, kw in sent if m == "sendMessage"]
+    assert calls and calls[0].get("message_thread_id") == 42, calls
+
+
+def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch):
+    """4 сентября 2026: включение тем в группе-консоли незаметно превратило
+    её в супергруппу, а Bot API при этом ВСЕГДА меняет chat_id — старый
+    номер умер («group chat was upgraded to a supergroup chat»). Сайт учится
+    актуальному id из любого сообщения владельца/партнёра в группе."""
+    _mod_env(monkeypatch)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 1, "text": "привет",
+                   "chat": {"id": -1005550001111, "type": "supergroup"},
+                   "from": {"id": 111}}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/group", params={"token": "тайна"})
+    assert r.status_code == 200 and r.json()["chat_id"] == "-1005550001111", r.json()
+    # Сообщение от постороннего (не владельца/партнёра) id группы не меняет —
+    # иначе кто угодно, добавленный в группу, мог бы подменить адрес консоли.
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 2, "text": "привет",
+                   "chat": {"id": -1009990002222, "type": "supergroup"},
+                   "from": {"id": 999}}})
+    assert client.get("/api/moderation/group", params={"token": "тайна"}).json()["chat_id"] \
+        == "-1005550001111"
+    assert client.get("/api/moderation/group", params={"token": "не тот"}).status_code == 404
+
+
+def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkeypatch):
+    """Даже если TELEGRAM_REVIEW_GROUP_ID в окружении устарел, сайт обязан
+    слать по свежему, только что узнанному номеру, а не по мёртвому."""
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100000000000")
+    import main as main_module
+    from db.session import get_session
+    db = get_session()
+    try:
+        main_module._remember_setting(db, main_module.REVIEW_GROUP_SETTING, "-1007778889999")
+        assert main_module._review_chat_ids(db) == ["-1007778889999"]
+    finally:
+        db.close()

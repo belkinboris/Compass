@@ -39,7 +39,9 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, ROOT)                                  # telegram_endpoint в корне
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import console_topics                                      # noqa: E402
 import format_post                                        # noqa: E402
 import send_drafts                                        # noqa: E402  (send_targets/send_one/PAUSE)
 import send_telegram                                       # noqa: E402  (milestone_candidates)
@@ -93,13 +95,14 @@ def main(write=False):
 
     import httpx
     sent = 0
+    thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         for i, (text, keyboard, deal, event) in enumerate(plan):
             if i:
                 time.sleep(send_drafts.PAUSE)
             ok_all = True
             for chat in chats:
-                if not send_drafts.send_one(client, token, chat, text, keyboard):
+                if not send_drafts.send_one(client, token, chat, text, keyboard, thread):
                     ok_all = False
             if ok_all:
                 sent += 1

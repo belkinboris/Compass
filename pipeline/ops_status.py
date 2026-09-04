@@ -39,6 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
+import console_topics                                      # noqa: E402
 import telegram_endpoint                                  # noqa: E402
 
 # ВНУТРЕННЯЯ КУХНЯ, КОТОРОЙ НЕ МЕСТО В КОНСОЛИ. Слева — что писать нельзя,
@@ -458,11 +459,15 @@ def queue_keyboard(soon=0, held=0, unread=0):
 
 def post_status(client, token, chat, text, keyboard=None):
     """(отправлено?, причина отказа). Сеть недоступна — не бросаем: отчёт о
-    прогоне не должен ронять сам прогон."""
+    прогоне не должен ронять сам прогон. Тема — «Обновления»: это отчёт о
+    прогоне, не решение, которое от вас ждут."""
     body = {'chat_id': chat, 'text': text, 'parse_mode': 'HTML',
             'disable_web_page_preview': True}
     if keyboard:
         body['reply_markup'] = keyboard
+    thread = console_topics.thread_id('update')
+    if thread:
+        body['message_thread_id'] = thread
     try:
         r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=body)
         data = r.json()
@@ -538,7 +543,10 @@ def main(argv):
 
     text, keyboard = build(args)
     token = os.environ.get('TELEGRAM_BOT_TOKEN')
-    chat = os.environ.get('TELEGRAM_REVIEW_GROUP_ID')
+    # Свежий id группы — у сайта в первую очередь (см. console_topics):
+    # включение тем 4 сентября 2026 незаметно сменило id группы, переменная
+    # окружения могла остаться со старым значением.
+    chat = console_topics.review_group_id() or os.environ.get('TELEGRAM_REVIEW_GROUP_ID')
     if not token or not chat:
         print('TELEGRAM_BOT_TOKEN/TELEGRAM_REVIEW_GROUP_ID не заданы — вот что ушло бы:')
         print(re.sub(r'<[^>]+>', '', text))

@@ -917,14 +917,29 @@ def assistant_suggestions():
         return {"suggestions": []}
 
 
-def _review_chat_ids() -> list[str]:
+def _review_chat_ids(db=None) -> list[str]:
+    """Куда слать в консоль. Группа — id из `TELEGRAM_REVIEW_GROUP_ID`, но
+    4 сентября 2026 выяснилось, что этот номер может устареть НЕЗАМЕТНО и БЕЗ
+    участия человека: как только владелец включил в группе темы (форум),
+    Telegram сам превратил её в супергруппу — а у супергруппы ВСЕГДА другой
+    chat_id, старый отвечает 400 «group chat was upgraded to a supergroup
+    chat». Переменная окружения при этом продолжает выглядеть настроенной.
+    Поэтому здесь та же иерархия, что у адреса канала, только источники
+    поменялись местами: САЙТ уже знает свежий id (учит его из любого
+    сообщения владельца/партнёра в группе, см. `_learn_review_group`) —
+    спрашиваем БД первой, а переменная окружения остаётся запасным путём для
+    вызовов без доступа к базе (фоновые потоки без своей сессии)."""
+    if db is not None:
+        row = db.get(AppSetting, REVIEW_GROUP_SETTING)
+        if row and row.value:
+            return [row.value]
     group = os.environ.get("TELEGRAM_REVIEW_GROUP_ID", "").strip()
     if group:
         return [group]
     return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()]
 
 
-def _notify_access_request(user: User) -> None:
+def _notify_access_request(user: User, db=None) -> None:
     """Заявка на доступ — в Telegram-консоль основателей, с кнопками
     «Одобрить»/«Отклонить» (callback_data `acc:<id>:ok|no`, разбирается в
     telegram_webhook рядом с `mod:`). Тот же путь, что у обратной связи
@@ -932,7 +947,7 @@ def _notify_access_request(user: User) -> None:
     отправки регистрацию не роняет — заявка уже в таблице, а без токена
     (локальная разработка, тесты) вызов молча ничего не делает."""
     try:
-        chats = _review_chat_ids()
+        chats = _review_chat_ids(db)
         if not chats:
             logger.warning("заявка на доступ #%s: консоль не настроена, в Telegram не ушла", user.id)
             return
@@ -945,31 +960,40 @@ def _notify_access_request(user: User) -> None:
         ])
         keys = [[{"text": "✅ Одобрить", "callback_data": "acc:%d:ok" % user.id},
                  {"text": "🗑 Отклонить", "callback_data": "acc:%d:no" % user.id}]]
+        thread = _console_thread_id(db, "decision") if db is not None else None
         for chat in chats:
             notification_service.tg_api("sendMessage", chat_id=chat, text=text,
                                         reply_markup={"inline_keyboard": keys},
-                                        disable_web_page_preview=True)
+                                        disable_web_page_preview=True,
+                                        **({"message_thread_id": thread} if thread else {}))
     except Exception as exc:  # noqa: BLE001 — регистрация важнее уведомления
         logger.error("заявка на доступ #%s: не удалось отправить в Telegram: %s", user.id, exc)
 
 
 def _forward_note_to_console(row: AssistantFeedback) -> None:
-    chats = _review_chat_ids()
-    if not chats or not row.note:
+    if not row.note:
         return
     text = ("✏️ Ассистент: посетитель пояснил, что было не так\n"
             f"Вопрос: {row.question}\nКомментарий: {row.note}")
+    # Фоновый поток (см. вызов ниже): своя сессия, а не сессия запроса — та
+    # закрывается вместе с ответом клиенту раньше, чем поток успеет её читать.
+    thread_db = get_session()
+    try:
+        chats = _review_chat_ids(thread_db)
+        if not chats:
+            return
+        thread = _console_thread_id(thread_db, "info")
+    finally:
+        thread_db.close()
     for chat in chats:
-        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True)
+        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True,
+                                    **({"message_thread_id": thread} if thread else {}))
 
 
 def _forward_feedback_to_console(row: AssistantFeedback) -> None:
     """«Не помогло» уходит в Telegram-консоль основателей тем же путём, что и
     решения модерации, — чтобы плохой ответ не пропадал молча. Сбой отправки
     не критичен: запись уже в таблице."""
-    chats = _review_chat_ids()
-    if not chats:
-        return
     answer = " ".join(row.answer.split())
     if len(answer) > 700:
         answer = answer[:700] + "…"
@@ -981,8 +1005,17 @@ def _forward_feedback_to_console(row: AssistantFeedback) -> None:
     lines.append("Режим: " + ("по всему интернету" if row.mode == "web" else "по базе Компаса")
                  + (f" · вид вопроса: {row.intent}" if row.intent else ""))
     text = "\n".join(lines)
+    thread_db = get_session()
+    try:
+        chats = _review_chat_ids(thread_db)
+        if not chats:
+            return
+        thread = _console_thread_id(thread_db, "info")
+    finally:
+        thread_db.close()
     for chat in chats:
-        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True)
+        notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True,
+                                    **({"message_thread_id": thread} if thread else {}))
 
 
 @app.post("/api/assistant/feedback")
@@ -1116,7 +1149,7 @@ def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
     if ACCESS_GATE:
         # Заявка, а не вход: сессию не ставим, владельцу уходит сообщение с
         # кнопками. Войти человек сможет после «Одобрить» (см. telegram_webhook).
-        _notify_access_request(user)
+        _notify_access_request(user, db)
         return {"ok": True, "pending": True}
     cookie = auth.create_session(db, user)
     response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
@@ -1747,9 +1780,14 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     expected = os.environ.get("TELEGRAM_WEBHOOK_SECRET", "")
     if not expected or secret != expected:
         return JSONResponse({"error": "not found"}, status_code=404)
+    # Учится молча на КАЖДОМ апдейте из группы-консоли, ничего не решает и не
+    # мешает обработке ниже — id группы мог смениться (см. _review_chat_ids).
+    _learn_review_group(payload, db)
     # Пост в канале или смена прав бота — не команда и не вердикт: у них одна
     # задача, назвать числовой адрес канала (см. TelegramWebhookIn).
     if _announce_channel_id(payload, db):
+        return {"ok": True}
+    if _learn_console_topics(payload, db):
         return {"ok": True}
     # Кнопка под черновиком карточки: callback_data вида "mod:<id>:ok|hold".
     # Решение пишется в таблицу, а применяет его рутина публикации — у неё нет
@@ -1776,7 +1814,8 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             notification_service.tg_api(
                 "sendMessage",
                 chat_id=(callback.get("message") or {}).get("chat", {}).get("id"),
-                text=body, parse_mode="HTML", disable_web_page_preview=True)
+                text=body, parse_mode="HTML", disable_web_page_preview=True,
+                **_thread_kwargs(callback.get("message")))
             notification_service.tg_api("answerCallbackQuery",
                                         callback_query_id=callback.get("id"))
             return {"ok": True}
@@ -1799,7 +1838,7 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             kind = show.group(1)
             notification_service.tg_api("answerCallbackQuery",
                                         callback_query_id=callback.get("id"))
-            _send_queue_batch(chat, kind)
+            _send_queue_batch(chat, kind, thread=(callback.get("message") or {}).get("message_thread_id"))
             return {"ok": True}
 
         # Заявка на доступ к сайту (ACCESS_GATE): «Одобрить»/«Отклонить» под
@@ -1910,7 +1949,9 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             reply_message_id=reply.get("message_id") if verdict == "note" else None))
         db.commit()
         if verdict == "approve":
-            notification_service._send_telegram(str(chat_id), "Принято: пост уйдёт с вашим текстом.")
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id), text="Принято: пост уйдёт с вашим текстом.",
+                disable_web_page_preview=True, **_thread_kwargs(reply))
         else:
             # МГНОВЕННОЕ ПОДТВЕРЖДЕНИЕ — раздел C MILESTONES_BRIEF.md. Раньше
             # заметка уходила в отдельное сообщение и терялась среди прочих;
@@ -1942,7 +1983,7 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             # У /start и /help — меню кнопками: текстом человек не понимает,
             # что вообще можно нажать, и команду приходится помнить наизусть.
             body = {"chat_id": str(chat_id), "text": reply, "parse_mode": "HTML",
-                    "disable_web_page_preview": True}
+                    "disable_web_page_preview": True, **_thread_kwargs(message)}
             if name in ("start", "help") and _is_reviewer(sender_id):
                 body["reply_markup"] = _bot_menu()
             notification_service.tg_api("sendMessage", **body)
@@ -2015,7 +2056,7 @@ def _card_line(card: dict) -> str:
     return "\n\n".join(parts)
 
 
-def _send_queue_batch(chat_id, kind: str) -> int:
+def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
     """Прислать карточки очереди — каждую своим сообщением с кнопками.
 
     `kind`: held   — придержанные (можно опубликовать или выкинуть);
@@ -2061,11 +2102,12 @@ def _send_queue_batch(chat_id, kind: str) -> int:
             head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
                     "в течение суток." % len(items))
 
+    thread_kw = {"message_thread_id": thread} if thread else {}
     notification_service.tg_api("sendMessage", chat_id=chat_id, text=head,
-                                parse_mode="HTML", disable_web_page_preview=True)
+                                parse_mode="HTML", disable_web_page_preview=True, **thread_kw)
     if not items:
         notification_service.tg_api("sendMessage", chat_id=chat_id,
-                                    text="Сейчас пусто — решать нечего.")
+                                    text="Сейчас пусто — решать нечего.", **thread_kw)
         return 0
 
     shown = items[:BATCH_LIMIT]
@@ -2096,7 +2138,7 @@ def _send_queue_batch(chat_id, kind: str) -> int:
                      {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
         notification_service.tg_api(
             "sendMessage", chat_id=chat_id, text=text, parse_mode="HTML",
-            disable_web_page_preview=True, reply_markup={"inline_keyboard": keys})
+            disable_web_page_preview=True, reply_markup={"inline_keyboard": keys}, **thread_kw)
 
     if len(items) > len(shown):
         # Умолчавший предел читается как «это всё» — называем его вслух.
@@ -2215,6 +2257,7 @@ _VERDICT_LABEL = {
 _CHANNEL_IDS_TOLD: set[str] = set()
 
 
+REVIEW_GROUP_SETTING = "telegram_review_group_id"
 CHANNEL_SETTING = "telegram_channel_id"
 
 
@@ -2234,6 +2277,96 @@ def _remember_setting(db, key: str, value: str) -> None:
     except SQLAlchemyError as exc:  # noqa: BLE001
         db.rollback()
         logger.error("настройку %s записать не удалось: %s", key, exc)
+
+
+# ТОПИКИ КОНСОЛИ. 4 сентября 2026 владелец превратил группу-консоль в форум
+# и завёл темы («Подтверждение постов», «Обновления», «Общая информация»),
+# чтобы решения, отчёты рутин и разное не лежали одной кучей. Bot API не
+# даёт список тем группы (нет метода вроде getForumTopics) — номер темы
+# (`message_thread_id`) узнаётся так же, как адрес приватного канала выше:
+# из служебного сообщения о создании/переименовании темы (несёт имя и id
+# напрямую), а для уже существующих тем, чьё служебное сообщение прошло ДО
+# того, как бот начал их слушать, — разовым бутстрапом: человек печатает
+# точное название темы внутри неё самой.
+CONSOLE_TOPIC_NAMES = {
+    "decision": "Подтверждение постов",   # чего-то ждёт ваше решение
+    "update": "Обновления",               # отчёт рутины о прогоне
+    "info": "Общая информация",           # остальное: заметки, отзывы, служебное
+}
+
+
+def _topic_slug(name: str) -> str:
+    s = re.sub(r"[^\w\s-]", "", name.strip().lower(), flags=re.UNICODE)
+    return re.sub(r"\s+", "-", s)
+
+
+def _learn_console_topics(payload, db=None) -> bool:
+    """Запомнить номер темы форума, если Telegram его показал.
+
+    Возвращает True, если апдейт был целиком служебным про тему (создание,
+    переименование) — такой обрабатывать дальше нечего."""
+    message = payload.message or {}
+    created = message.get("forum_topic_created")
+    edited = message.get("forum_topic_edited")
+    if created or edited:
+        name = (created or edited or {}).get("name")
+        thread_id = message.get("message_thread_id") or message.get("message_id")
+        if db is not None and name and thread_id:
+            slug = _topic_slug(name)
+            if slug in {_topic_slug(v) for v in CONSOLE_TOPIC_NAMES.values()}:
+                _remember_setting(db, "telegram_topic:%s" % slug, str(thread_id))
+        return True
+    # Бутстрап для тем, заведённых до того, как бот начал слушать служебные
+    # сообщения: человек один раз печатает точное название темы внутри неё.
+    text = (message.get("text") or "").strip()
+    thread_id = message.get("message_thread_id")
+    if db is not None and text and thread_id:
+        for name in CONSOLE_TOPIC_NAMES.values():
+            if text == name:
+                _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
+                return True
+    return False
+
+
+def _console_thread_id(db, kind: str) -> int | None:
+    """Номер темы для сообщений вида `kind`, запущенных из этого же процесса
+    (сайт уже держит базу — незачем ходить за собой по HTTP, как это делают
+    рутины через /api/moderation/topics)."""
+    name = CONSOLE_TOPIC_NAMES.get(kind)
+    if not name:
+        return None
+    row = db.get(AppSetting, "telegram_topic:%s" % _topic_slug(name))
+    return int(row.value) if row and row.value.lstrip("-").isdigit() else None
+
+
+def _thread_kwargs(source: dict | None) -> dict:
+    """kwargs с message_thread_id, если сообщение стоит внутри темы форума —
+    иначе пустой dict. Ответ обязан оставаться там же, где его ждут: Telegram
+    НЕ выводит тему сам по `reply_to_message_id`, это нужно указать явно."""
+    tid = (source or {}).get("message_thread_id")
+    return {"message_thread_id": tid} if tid else {}
+
+
+def _learn_review_group(payload, db=None) -> None:
+    """Запомнить актуальный id группы-консоли — той же болезни, что у адреса
+    канала, только источник другой: не смена имени, а то, что Telegram САМ
+    меняет id при переходе группы в супергруппу (см. `_review_chat_ids`).
+    Источник истины — любое сообщение от владельца/партнёра ИЗ группы: его
+    `chat.id` — единственно верный, актуальный номер прямо сейчас. Ничего не
+    возвращает и не мешает дальнейшей обработке того же апдейта."""
+    if db is None:
+        return
+    message = payload.message or (payload.callback_query or {}).get("message") or {}
+    chat = message.get("chat") or {}
+    if str(chat.get("type") or "") not in ("group", "supergroup"):
+        return
+    sender_id = ((payload.message or {}).get("from") or {}).get("id") \
+        or ((payload.callback_query or {}).get("from") or {}).get("id")
+    if not _is_reviewer(sender_id):
+        return
+    chat_id = str(chat.get("id") or "")
+    if chat_id:
+        _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
 
 
 def _announce_channel_id(payload, db=None) -> bool:
@@ -2259,14 +2392,16 @@ def _announce_channel_id(payload, db=None) -> bool:
     if chat_id not in _CHANNEL_IDS_TOLD:
         _CHANNEL_IDS_TOLD.add(chat_id)
         title = chat.get("title") or "без названия"
-        for target in _review_chat_ids():
+        thread = _console_thread_id(db, "info") if db is not None else None
+        for target in _review_chat_ids(db):
             notification_service.tg_api(
                 "sendMessage", chat_id=target, disable_web_page_preview=True,
                 text=("\U0001F4E1 Канал «%s» отозвался — адрес запомнили.\n\n"
                       "У закрытого канала нет короткого имени, и постить в него "
                       "можно только по внутреннему номеру. Телеграм назвал его "
                       "сам, сайт его сохранил, публикация подхватит в ближайший "
-                      "прогон — делать ничего не нужно." ) % title)
+                      "прогон — делать ничего не нужно." ) % title,
+                **({"message_thread_id": thread} if thread else {}))
     return channel_update
 
 
@@ -2505,6 +2640,29 @@ def moderation_channel(token: str = "", db=Depends(get_db)):
     row = db.get(AppSetting, CHANNEL_SETTING)
     return {"chat_id": row.value if row else None,
             "updated_at": row.updated_at.isoformat() if row else None}
+
+
+@app.get("/api/moderation/group")
+def moderation_group(token: str = "", db=Depends(get_db)):
+    """Актуальный id группы-консоли для рутин: тот же мост, что у канала и
+    тем — рутина работает в другом процессе и не видит эту базу напрямую."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    row = db.get(AppSetting, REVIEW_GROUP_SETTING)
+    return {"chat_id": row.value if row else None,
+            "updated_at": row.updated_at.isoformat() if row else None}
+
+
+@app.get("/api/moderation/topics")
+def moderation_topics(token: str = "", db=Depends(get_db)):
+    """Номера тем группы-консоли для рутин: та же логика, что у
+    /api/moderation/channel — рутина работает в другом процессе, у неё нет
+    доступа к этой базе, и адреса приходится спрашивать по токену."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    rows = db.scalars(select(AppSetting).where(
+        AppSetting.key.like("telegram_topic:%"))).all()
+    return {"topics": {r.key.split(":", 1)[1]: r.value for r in rows}}
 
 
 @app.get("/api/access/requests")

@@ -4703,3 +4703,142 @@ def test_post_says_where_the_other_sources_are(base):
     text = format_post.render(deal, base["companies"])
     assert "Ещё источников:" not in text
     assert re.search(r"Ещё \d+ источник\w* — в карточке сделки", text), text[-200:]
+
+
+# ---------- темы группы-консоли (console_topics.py) ----------
+
+def test_console_topics_slug_matches_the_site():
+    """Слаг здесь и в main.py — один и тот же алгоритм: если они разойдутся,
+    рутина будет спрашивать по одному ключу, а сайт хранить по другому, и
+    номер темы не найдётся никогда."""
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+    assert console_topics._slug("Подтверждение постов") == "подтверждение-постов"
+    assert console_topics._slug("Обновления") == "обновления"
+    assert console_topics._slug("Общая информация") == "общая-информация"
+
+
+def test_console_topics_thread_id_prefers_env_override(monkeypatch):
+    """`TELEGRAM_TOPIC_<KIND>` — числовой оверрайд для случая, когда сайт ещё
+    не узнал номер темы, а ждать неохота. Непохожая на число строка (старое
+    @имя, пустота) не считается — падаем на запрос к сайту."""
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+    console_topics._cache = None
+    monkeypatch.setenv("TELEGRAM_TOPIC_DECISION", "555")
+    assert console_topics.thread_id("decision") == 555
+    monkeypatch.delenv("TELEGRAM_TOPIC_DECISION", raising=False)
+    console_topics._cache = None
+
+
+def test_console_topics_thread_id_asks_the_site(monkeypatch):
+    """Без оверрайда — спросить сайт по тому же токену, что и решения
+    модерации, и запомнить ответ на весь прогон (не по сообщению за раз)."""
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+    console_topics._cache = None
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    monkeypatch.delenv("TELEGRAM_TOPIC_UPDATE", raising=False)
+    calls = []
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"topics": {"обновления": "77"}}
+
+    import httpx
+
+    def fake_get(url, params=None, timeout=None):
+        calls.append(url)
+        return FakeResponse()
+    monkeypatch.setattr(httpx, "get", fake_get)
+    assert console_topics.thread_id("update") == 77
+    assert console_topics.thread_id("update") == 77
+    assert len(calls) == 1, "второй вызов обязан взять из кэша, не ходить в сеть снова"
+    console_topics._cache = None
+
+
+def test_send_one_includes_message_thread_id_only_when_given(monkeypatch):
+    """Ключ `message_thread_id` кладётся в тело запроса, только если тема
+    известна — Telegram не принимает явный null там, где ждёт число."""
+    import send_drafts
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"ok": True}
+    captured = {}
+
+    class FakeClient:
+        def post(self, url, json):
+            captured.update(json)
+            return FakeResponse()
+    send_drafts.send_one(FakeClient(), "tok", "chat", "текст", None, 123)
+    assert captured.get("message_thread_id") == 123
+    captured.clear()
+    send_drafts.send_one(FakeClient(), "tok", "chat", "текст", None, None)
+    assert "message_thread_id" not in captured
+
+
+def test_ops_status_post_status_uses_the_update_topic(monkeypatch):
+    """Отчёты рутин — тема «Обновления», не «Подтверждение постов»: это
+    информация о прогоне, а не то, чего ждут кнопкой."""
+    import console_topics
+    import ops_status
+    console_topics._cache = {"обновления": "88"}
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"ok": True}
+    captured = {}
+
+    class FakeClient:
+        def post(self, url, json):
+            captured.update(json)
+            return FakeResponse()
+    ops_status.post_status(FakeClient(), "tok", "chat", "текст прогона")
+    assert captured.get("message_thread_id") == 88
+    console_topics._cache = None
+
+
+def test_console_chats_prefers_the_site_over_env(monkeypatch):
+    """Та же болезнь, что у номера темы: включение тем сменило id группы, и
+    переменная окружения могла остаться со старым, мёртвым значением. Сайт —
+    источник истины первым, переменная — запасной путь."""
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+    console_topics._group_cache = None
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100000000000")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"chat_id": "-1009998887777"}
+
+    import httpx
+    monkeypatch.setattr(httpx, "get", lambda *a, **kw: FakeResponse())
+    assert console_topics.console_chats() == ["-1009998887777"]
+    console_topics._group_cache = None
+
+
+def test_console_chats_falls_back_to_env_when_the_site_does_not_know(monkeypatch):
+    """Сайт ещё не услышал ни одного сообщения из группы (свежий деплой,
+    тишина) — переменная окружения остаётся рабочим путём, не тишиной."""
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+    console_topics._group_cache = None
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET", raising=False)
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100222333444")
+    assert console_topics.console_chats() == ["-100222333444"]
+    console_topics._group_cache = None

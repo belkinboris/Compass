@@ -96,8 +96,10 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
 import approve  # noqa: E402  (fetch_decisions/consume — тот же мост, что у карточек)
+import console_topics  # noqa: E402
 import check_post  # noqa: E402
 import format_post
 import monthly_digest  # noqa: E402
@@ -495,10 +497,11 @@ def deliver_digest(action, key, text, token, chat_id, digests, now, client_facto
             print('Сводка %s: консоль не настроена — черновик некому показать' % key)
             return False, None
         buttons = monthly_digest.render_buttons(int(key[:4]), int(key[5:7]))
+        thread = console_topics.thread_id('decision')
         for chat in chats:
             send_drafts.send_one(client, token, chat,
                                  digest_draft_message(text, key, buttons),
-                                 digest_keyboard(key))
+                                 digest_keyboard(key), thread)
         digests[key] = dict(digests.get(key) or {},
                             drafted_at=now.isoformat(timespec='seconds'))
         print('Сводка %s: черновик отправлен в консоль' % key)

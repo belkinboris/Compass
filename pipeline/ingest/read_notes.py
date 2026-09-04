@@ -38,7 +38,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, ROOT)                                  # telegram_endpoint в корне
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import console_topics                                      # noqa: E402
 import telegram_endpoint                                  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -92,11 +94,18 @@ def send_reply(note_id, text):
         print('У заметки %d нет chat_id/reply_message_id — отправить ответ некуда.' % note_id)
         return False
     import httpx
-    r = httpx.post(telegram_endpoint.method_url(bot_token, 'sendMessage'), json={
+    body = {
         'chat_id': note['chat_id'], 'text': text,
         'reply_to_message_id': note['reply_message_id'],
         'disable_web_page_preview': True,
-    }, timeout=20)
+    }
+    # Заметка всегда рождена в теме «Подтверждение постов» (карточка/сырьё/
+    # ИНН) — `reply_to_message_id` сам по себе тему не выводит, Telegram
+    # требует message_thread_id явно.
+    thread = console_topics.thread_id('decision')
+    if thread:
+        body['message_thread_id'] = thread
+    r = httpx.post(telegram_endpoint.method_url(bot_token, 'sendMessage'), json=body, timeout=20)
     if r.status_code == 200 and r.json().get('ok'):
         print('Ответ на заметку %d отправлен.' % note_id)
         return True

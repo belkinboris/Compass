@@ -151,6 +151,8 @@ def main():
 
     HERE = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, os.path.join(HERE, "ingest"))
+    sys.path.insert(0, HERE)                               # console_topics
+    import console_topics
     import send_drafts
 
     targets = send_drafts.send_targets()
@@ -169,10 +171,11 @@ def main():
     from datetime import date as _date
 
     sent = []
+    thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         for cid, name, note in batch:
             text = console_message(cid, name, note)
-            ok = all(send_drafts.send_one(client, token, chat, text, None) for chat in targets)
+            ok = all(send_drafts.send_one(client, token, chat, text, None, thread) for chat in targets)
             if ok:
                 sent.append(cid)
             time.sleep(send_drafts.PAUSE)

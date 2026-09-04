@@ -45,6 +45,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
+import console_topics                                      # noqa: E402
 import telegram_endpoint                                  # noqa: E402
 from send_drafts import send_one, PAUSE                   # noqa: E402
 
@@ -292,9 +293,7 @@ def main():
     print("К отправке: %d из %d (уже отправлено %d)" % (len(todo), total, len(state["sent"])))
 
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
-    chats = [x.strip() for x in
-             (os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '') or
-              os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '')).split(',') if x.strip()]
+    chats = console_topics.console_chats()
     if write and (not token or not chats):
         print("Отправлять некому: нет TELEGRAM_BOT_TOKEN или адреса консоли.")
         return 1
@@ -308,18 +307,19 @@ def main():
 
     import httpx
     sent = 0
+    thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         # Шапка — один раз, первым сообщением: 44 сообщения без объяснения,
         # что это и зачем, читаются как поломка бота.
         if not state.get("header_sent") and not only:
-            if all(send_one(client, token, chat, HEADER, None) for chat in chats):
+            if all(send_one(client, token, chat, HEADER, None, thread) for chat in chats):
                 state["header_sent"] = True
                 json.dump(state, open(STATE, 'w', encoding='utf-8'),
                           ensure_ascii=False, indent=1, sort_keys=True)
                 time.sleep(PAUSE)
         for i, q in enumerate(todo):
             text = render(q, QUESTIONS.index(q) + 1, total)
-            ok = all(send_one(client, token, chat, text, None) for chat in chats)
+            ok = all(send_one(client, token, chat, text, None, thread) for chat in chats)
             if ok:
                 state["sent"][q["id"]] = True
                 sent += 1
