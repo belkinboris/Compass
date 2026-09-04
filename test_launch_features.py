@@ -2289,10 +2289,17 @@ def test_send_targets_prefers_the_shared_group_over_personal_dms(monkeypatch):
     ответ любого её участника засчитывался бы за решение — ровно тот баг,
     который поймал предыдущий тест на уровне вебхука. Здесь проверяется
     только выбор адреса отправки.
+
+    `console_topics.review_group_id()` с 4 сентября 2026 сначала спрашивает
+    сайт о свежем id супергруппы (реальный сетевой запрос) — без мока тест
+    бил бы в боевой projectcompass.ru и получал ЕГО текущий ответ вместо
+    проверки резервной логики по переменным окружения; подменяем функцию,
+    чтобы тест не зависел от сети и от состояния прода.
     """
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
     import send_drafts
+    monkeypatch.setattr(send_drafts.console_topics, "review_group_id", lambda: None)
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
     monkeypatch.delenv("TELEGRAM_REVIEW_GROUP_ID", raising=False)
     assert send_drafts.send_targets() == ["111", "222"]
