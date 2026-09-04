@@ -2565,3 +2565,75 @@ def test_bank_profile_names_the_legal_entity_it_shows(page, base_url):
     assert "ВТБ" in text and "акционерное общество" in text, text[:400]
     assert "регистрационный номер в Банке России 1000" in text, \
         "не назван регистрационный номер банка, по которому взяты цифры"
+
+
+def _open_economist_lens(pg, base_url):
+    """Открыть карточку с длинными абзацами и перейти на вкладку «Экономист».
+    Карточка выбирается по данным, а не по вбитому id: сделки сливаются и
+    исчезают, а тест должен пережить это."""
+    pg.goto(base_url + "/#/deals", wait_until="networkidle")
+    pg.wait_for_function("() => DEALS.length > 100", timeout=15000)
+    deal_id = pg.evaluate(
+        "() => (DEALS.find(d => d.eco && (d.eco.rationale || '').length > 200) || {}).id || null")
+    assert deal_id, "в базе не нашлось сделки с длинным абзацем «Цель сделки»"
+    pg.goto(base_url + "/#/deal/" + deal_id, wait_until="networkidle")
+    pg.wait_for_timeout(900)
+    for btn in pg.locator(".lens button").all():
+        if "эконом" in (btn.text_content() or "").strip().lower():
+            btn.click()
+            break
+    pg.wait_for_timeout(500)
+    return deal_id
+
+
+def test_deal_paragraphs_are_not_justified_on_a_phone(browser, base_url):
+    """Скриншот владельца 4 сентября 2026: на айфоне у абзацев «Цель сделки» и
+    «Контекст» в каждой строке срезано по букве-две справа, а между словами
+    дыры. Выключка по ширине придумана для меры в 72 знака (компьютер); на
+    телефоне в строку влезает вдвое меньше, и она же выталкивает последнее
+    слово за край карточки.
+
+    Меряем не бокс, а САМИ СТРОКИ ТЕКСТА (Range) — тот же приём, что уже
+    понадобился для центровки шапки: бокс может стоять в границах, пока текст
+    из него вылезает, и проверка по `getBoundingClientRect` элемента этого не
+    видит."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    try:
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        _open_economist_lens(pg, base_url)
+        para = pg.locator(".spec-v-text").first
+        assert para.count() > 0, "на «Экономисте» не нашлось ни одного абзаца"
+        align = pg.evaluate("() => getComputedStyle(document.querySelector('.spec-v-text')).textAlign")
+        assert align != "justify", "на телефоне абзацы не выключаются по ширине"
+        far = pg.evaluate("""() => {
+            let far = 0;
+            document.querySelectorAll('.spec-v').forEach(v => v.childNodes.forEach(n => {
+                if (n.nodeType !== 3) return;
+                const rg = document.createRange();
+                rg.selectNodeContents(n);
+                for (const b of rg.getClientRects()) far = Math.max(far, b.right);
+            }));
+            return Math.round(far);
+        }""")
+        assert far <= 390, f"строка текста уходит за край экрана: правый край {far} при ширине 390"
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+        assert not errors
+    finally:
+        ctx.close()
+
+
+def test_deal_paragraphs_stay_justified_on_the_desktop(browser, base_url):
+    """Обратная половина того же правила: выключка по ширине — сознательное
+    решение владельца от 18 августа, и на компьютере, где мера в 72 знака
+    реальна, она обязана остаться. Иначе «починка телефона» тихо отменит её
+    везде."""
+    ctx = browser.new_context(viewport={"width": 1280, "height": 900})
+    try:
+        pg = ctx.new_page()
+        _open_economist_lens(pg, base_url)
+        align = pg.evaluate("() => getComputedStyle(document.querySelector('.spec-v-text')).textAlign")
+        assert align == "justify", f"на компьютере абзац должен быть выключен по ширине, а стоит {align}"
+    finally:
+        ctx.close()

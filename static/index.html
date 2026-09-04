@@ -775,7 +775,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 /* min-width:0 — иначе элемент сетки не сжимается ниже своего min-content, и
    длинное значение («Rothschild & Co — финансовый консультант и спонсор…»)
    выталкивает строку за экран. */
-.spec-v{font-size:14px;color:var(--ink);min-width:0;max-width:72ch;overflow-wrap:anywhere;text-wrap:pretty}
+.spec-v{font-size:14px;color:var(--ink);min-width:0;max-width:min(72ch,100%);overflow-wrap:anywhere;text-wrap:pretty}
 /* Абзацы «Цель сделки»/«Контекст»/«Структура»/«Условия» (para()) — та же
    строка, что у specRow, с выключкой по ширине: пробовали (просьба
    владельца 18 августа) — на мере в 72 знака заметно ровнее, чем рваный
@@ -1252,9 +1252,14 @@ body.chat-page .compare-tray{display:none}
    hidden: hidden делает body прокручиваемым контейнером, и `position:sticky`
    внутри (липкие фильтры «Аналитики») перестал бы прилипать; clip контейнера
    не создаёт. overscroll-behavior-x:none — без «резинки» по горизонтали. */
-html{background:var(--paper);overflow-x:hidden;overscroll-behavior-x:none}
+/* -webkit-text-size-adjust:100% — iOS Safari сам увеличивает шрифт в блоках,
+   которые считает широкими, и на телефоне владельца текст карточки выходил
+   заметно крупнее наших 14px: строки ломались не там, где мы их меряем.
+   Это не мешает пользователю увеличивать страницу пальцами — отключается
+   только самодеятельность браузера. */
+html{background:var(--paper);overflow-x:hidden;overscroll-behavior-x:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{overflow-x:clip}
-.src-fix{font-size:12.5px;color:var(--muted);max-width:72ch;margin:10px 0 0;line-height:1.55}
+.src-fix{font-size:12.5px;color:var(--muted);max-width:min(72ch,100%);margin:10px 0 0;line-height:1.55}
 /* ---------- footer ---------- */
 footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:#A9BDB2}
 .foot-in{max-width:1120px;margin:0 auto;padding:56px 28px 0}
@@ -1290,6 +1295,14 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   /* На телефоне подпись и значение в столбик: колонка в 190px съела бы половину
      экрана. */
   .spec-row{grid-template-columns:1fr;gap:4px}
+  /* Выключка по ширине (просьба владельца 18 августа) придумана для меры в 72
+     знака — на компьютере она и правда ровнее. На телефоне в строку влезает
+     вдвое меньше, и та же выключка даёт огромные дыры между словами, а в
+     Safari последнее слово строки вдобавок вылезало за край карточки и
+     срезалось нашей же страховкой `overflow-x` — читатель терял по букве-две
+     в каждой строке (скриншот владельца 4 сентября 2026). На узком экране
+     обычный левый край честнее. */
+  .spec-v-text{text-align:left;text-justify:auto}
 }
 
 
