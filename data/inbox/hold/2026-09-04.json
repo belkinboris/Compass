@@ -5874,7 +5874,7 @@
    ]
   },
   {
-   "draft_id": "d89331382",
+   "draft_id": "d89834923",
    "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
    "date": "2026-09-03",
    "src": [
@@ -5903,7 +5903,7 @@
    ]
   },
   {
-   "draft_id": "d52674708",
+   "draft_id": "d52986882",
    "title": "Nvidia договорилась о покупке Hugging Face за $12,93 млрд — платформу для разработчиков ИИ планируют масштабировать",
    "date": "2026-09-04",
    "src": [
@@ -5943,7 +5943,7 @@
    ]
   },
   {
-   "draft_id": "d60500611",
+   "draft_id": "d86637925",
    "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
    "date": "2026-09-04",
    "src": [
@@ -5982,7 +5982,7 @@
    ]
   },
   {
-   "draft_id": "d67405900",
+   "draft_id": "d20988214",
    "title": "«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке для диверсификации активов",
    "date": "2026-09-04",
    "src": [
@@ -6021,7 +6021,7 @@
    ]
   },
   {
-   "draft_id": "d72143087",
+   "draft_id": "d79915269",
    "title": "Прием заявок на повторные торги по продаже «Вектор Рейла» вновь продлен - до 15 сентября",
    "date": "2026-09-04",
    "src": [
@@ -6051,35 +6051,7 @@
    ]
   },
   {
-   "draft_id": "d31377891",
-   "title": "Бывший стеариновый завод в Выборге продают за 34,4 млн рублей",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/04/bivshij-stearinovij-zavod-v"
-    ]
-   ],
-   "sum": "34,4 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22554576",
+   "draft_id": "d34794236",
    "title": "GoPro договорилась о слиянии с производителем оптических технологий — сумма сделки составит $285 млн",
    "date": "2026-09-04",
    "src": [
@@ -6119,17 +6091,17 @@
    ]
   },
   {
-   "draft_id": "d82943521",
-   "title": "Седокова могла приобрести в браке с Тиммой еще три квартиры",
+   "draft_id": "d27736588",
+   "title": "Орешкин: инвестиции в ИИ в США превращаются в финансовую пирамиду",
    "date": "2026-09-04",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260904/sedokova-2115471648.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20260904/oreshkin-873046732.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -6140,67 +6112,78 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50683871",
-   "title": "Россиян проинструктировали на случай обнаружения в квартире дефектов после покупки",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/04/defect-kv/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60419663",
-   "title": "В Перми по цене квартиры продают гостиницу с атмосферой старинного уральского поселка",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053124385"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ge957fc7b (общие редкие слова: гостин, кварти) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d41885003",
+   "title": "Роснедра объявили аукцион на право добычи титана в Тамбовской области",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260904/auktsion-873046451.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63869168",
+   "title": "Структура Газпромбанка продала ТЦ «Город Косино»",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/struktura-gazprombanka-prodala-tc-gorod-kosino/"
+    ]
+   ],
+   "sum": "10 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-04",
+     "title": "Сделка завершена",
+     "note": "Эксперты оценивают стоимость объекта в 6,5–10 млрд руб. Сообщение Структура Газпромбанка продала ТЦ «Город Косино» появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/struktura-gazprombanka-prodala-tc-gorod-kosino/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "ТЦ «Город Косино»",
+   "seller": "Газпромбанка",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ТЦ «Город Косино»",
+    "seller": "Газпромбанка"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gddb34475 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
