@@ -443,6 +443,8 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .status.cancelled{border-color:#B3402A;color:#B3402A}
 .status.negotiations{border-color:var(--steel);color:var(--steel)}
 .status.pending{border-color:var(--bronze);color:var(--bronze)}
+.stalled-hint{display:inline-block;color:var(--muted);cursor:help;font-size:13px;line-height:1;opacity:.7}
+.stalled-hint:hover{opacity:1}
 
 /* ---------- CTA ---------- */
 .cta{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--accent-deep),#1B3B45);color:var(--ivory);border-radius:var(--radius);padding:36px 34px;margin-top:34px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
@@ -3899,6 +3901,26 @@ const kindClass = kind =>
   : kind==="negotiations" ? "negotiations"
   : (kind==="approval"||kind==="signed") ? "pending" : "";
 const statusClass = status => kindClass(stageKind(status));
+/* Заметка владельца 4 сентября 2026 (карточка «Медскан»/«Сова», обсуждается
+   с сентября 2025 года без единого подтверждения): статус «Обсуждается» сам
+   по себе не говорит, что сделка ещё жива — иногда это просто карточка, о
+   которой давно ничего не слышно. Ненавязчивая подсказка при наведении на
+   плашку статуса, без изменения самого статуса и без нового поля в данных
+   (порог — те же два года, что уже используются в текстовых оговорках
+   «Известных проблем»). Дата отсчёта — `date` сделки, а если её нет
+   (`unknown`/только год без месяца — see fmtDate) — `added` (когда карточка
+   попала в базу), это и есть нижняя граница того, сколько сделка уже видна. */
+const STALLED_DISCUSSION_DAYS = 730;
+const stalledDiscussionHint = d => {
+  if(stageKind(d.status) !== "negotiations") return null;
+  const raw = (d.date && d.date !== "unknown") ? d.date : d.added;
+  if(!raw) return null;
+  const parsed = /^\d{4}$/.test(String(raw)) ? new Date(String(raw)+"-01-01") : new Date(raw);
+  if(isNaN(parsed)) return null;
+  const days = Math.round((new Date() - parsed) / 86400000);
+  if(days < STALLED_DISCUSSION_DAYS) return null;
+  return "Статус «Обсуждается» держится больше двух лет без подтверждения — возможно, сделка не состоялась.";
+};
 /* Раздел A (MILESTONES_BRIEF.md, 22 августа): не каждая веха достойна
    отдельной строки в общей ленте — только эти три вида, тот же закрытый
    список, что и `review.POSTWORTHY_MILESTONE_KINDS` на стороне пайплайна
@@ -4619,6 +4641,7 @@ function renderDeal(id, qs, previewCard){
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <span class="label num">${fmtDate(d.date)}</span>
       ${d.status?`<span class="status ${statusClass(d.status)}">${d.status}</span>`:""}
+      ${stalledDiscussionHint(d)?`<span class="stalled-hint" title="${esc(stalledDiscussionHint(d))}">ⓘ</span>`:""}
       ${industryLinksHtml(d)}
     </div>
     <div class="deal-parties-strong reveal">

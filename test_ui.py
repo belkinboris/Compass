@@ -2637,3 +2637,35 @@ def test_deal_paragraphs_stay_justified_on_the_desktop(browser, base_url):
         assert align == "justify", f"на компьютере абзац должен быть выключен по ширине, а стоит {align}"
     finally:
         ctx.close()
+
+
+def test_long_stalled_negotiations_get_a_hover_hint(page, base_url):
+    """Заметка владельца 4 сентября 2026 («Медскан»/«Сова»): статус
+    «Обсуждается», который держится больше двух лет без подтверждения, —
+    не то же самое, что свежие переговоры, и читателю стоит намекнуть на
+    это без изменения самого статуса. Карточка выбирается по данным
+    (recent негативный случай — тоже), не по вбитому id: и старая, и
+    свежая сделка в статусе переговоров могут исчезнуть при слиянии."""
+    stale_id = page.evaluate("""() => {
+        const d = DEALS.find(d => stageKind(d.status) === 'negotiations'
+            && d.date && d.date !== 'unknown'
+            && (new Date() - new Date(/^\\d{4}$/.test(d.date) ? d.date + '-01-01' : d.date)) / 86400000 > 730);
+        return d ? d.id : null;
+    }""")
+    assert stale_id, "в базе не нашлось карточки в переговорах старше двух лет"
+    visit(page, base_url, "#/deal/" + stale_id)
+    hint = page.query_selector(".stalled-hint")
+    assert hint, f"{stale_id}: подсказка не показана у старых переговоров"
+    title = hint.get_attribute("title")
+    assert title and "обсужд" in title.lower() and "не состоялась" in title.lower(), title
+
+    fresh_id = page.evaluate("""() => {
+        const d = DEALS.find(d => stageKind(d.status) === 'negotiations'
+            && d.date && d.date !== 'unknown'
+            && (new Date() - new Date(/^\\d{4}$/.test(d.date) ? d.date + '-01-01' : d.date)) / 86400000 < 700);
+        return d ? d.id : null;
+    }""")
+    if fresh_id:
+        visit(page, base_url, "#/deal/" + fresh_id)
+        assert not page.query_selector(".stalled-hint"), \
+            f"{fresh_id}: подсказка не должна показываться у свежих переговоров"
