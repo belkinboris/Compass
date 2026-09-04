@@ -5615,7 +5615,7 @@
    ]
   },
   {
-   "draft_id": "d40937182",
+   "draft_id": "d18867307",
    "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
    "date": "2026-09-04",
    "src": [
@@ -5654,7 +5654,7 @@
    ]
   },
   {
-   "draft_id": "d11869327",
+   "draft_id": "d33414302",
    "title": "«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке для диверсификации активов",
    "date": "2026-09-04",
    "src": [
@@ -5693,7 +5693,7 @@
    ]
   },
   {
-   "draft_id": "d78774087",
+   "draft_id": "d88113029",
    "title": "Прием заявок на повторные торги по продаже «Вектор Рейла» вновь продлен - до 15 сентября",
    "date": "2026-09-04",
    "src": [
@@ -5723,7 +5723,7 @@
    ]
   },
   {
-   "draft_id": "d67820458",
+   "draft_id": "d65794308",
    "title": "Роснедра объявили аукцион на право добычи титана в Тамбовской области",
    "date": "2026-09-04",
    "src": [
@@ -5751,7 +5751,7 @@
    ]
   },
   {
-   "draft_id": "d44120859",
+   "draft_id": "d27415072",
    "title": "Структура Газпромбанка продала ТЦ «Город Косино»",
    "date": "2026-09-04",
    "src": [
@@ -5790,13 +5790,136 @@
    ]
   },
   {
-   "draft_id": "d30899180",
-   "title": "Citadel хочет купить сланцевые активы в США на фоне роста цен на нефть",
+   "draft_id": "d76808211",
+   "title": "Стримы с Даньдань на ВЭФ 2026 обеспечили продажи более 1 млрд рублей",
    "date": "2026-09-04",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260904/citadel-873050005.html"
+     "web:ria.ru",
+     "https://ria.ru/20260904/prodazhi-2115518832.html"
+    ]
+   ],
+   "sum": "1 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55500439",
+   "title": "Совет директоров «Глоракса» установил цену выкупа у несогласных с реорганизацией",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/04/1226509-gloraksa-tsenu-vikupa"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80035156",
+   "title": "«Распадская» продала «УК Межегейуголь» в Туве",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/04/1226466-raspadskaya-prodala"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-04",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/business/news/2026/09/04/1226466-raspadskaya-prodala"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "«УК Межегейуголь» в Туве",
+   "seller": "«Распадская»",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "«УК Межегейуголь» в Туве",
+    "seller": "«Распадская»"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gd3556cc0 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d64401651",
+   "title": "В Белоруссии выставили на продажу семь домов за 315 рублей",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/04/v-belarusi-vystavili-na-prodazhu-sem-domov-za-315-rubley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89498854",
+   "title": "Перечислены рекомендации при покупке зарядки для смартфона",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/04/usb/"
     ]
    ],
    "sum": null,
