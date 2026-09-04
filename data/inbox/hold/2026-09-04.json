@@ -5874,7 +5874,7 @@
    ]
   },
   {
-   "draft_id": "d41042044",
+   "draft_id": "d51770185",
    "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
    "date": "2026-09-03",
    "src": [
@@ -5903,7 +5903,7 @@
    ]
   },
   {
-   "draft_id": "d25527540",
+   "draft_id": "d56613493",
    "title": "Nvidia договорилась о покупке Hugging Face за $12,93 млрд — платформу для разработчиков ИИ планируют масштабировать",
    "date": "2026-09-04",
    "src": [
@@ -5943,7 +5943,7 @@
    ]
   },
   {
-   "draft_id": "d33543584",
+   "draft_id": "d20766517",
    "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
    "date": "2026-09-04",
    "src": [
@@ -5982,13 +5982,52 @@
    ]
   },
   {
-   "draft_id": "d85128387",
-   "title": "«Azimut отель Ярославль» выставили на торги",
+   "draft_id": "d87785013",
+   "title": "«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке для диверсификации активов",
    "date": "2026-09-04",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/yaroslavl/2026/9/4/azimut-otel-yaroslavl-vystavili-na-torgi"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1113186"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-04",
+     "title": "Переговоры",
+     "note": "ПАО \"Т Плюс\" рассматривает выход на рынок Дальнего Востока в качестве одного из сценариев развития компании, рассказал журналистам гендиректор компании Павел Сниккарс в кулуарах ВЭФ-2026.\"Мы рассматриваем строительство тепловой станции для производства…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1113186"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23428004",
+   "title": "Прием заявок на повторные торги по продаже «Вектор Рейла» вновь продлен - до 15 сентября",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1113181"
     ]
    ],
    "sum": null,
@@ -6003,10 +6042,99 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Гостиницы и туризм",
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Сбер» планирует выкупить на торгах лизинговую компанию «Век» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d52434571",
+   "title": "Курс юаня к рублю в начале дня перешел к небольшому росту",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260904/mosbirzha-873028268.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d67473867",
+   "title": "Неликвидная квартира: какое жилье сложнее всего продать",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/4/nelikvidnaya-kvartira-kakoe-zhile-slozhnee-vsego-prodat"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d51635830",
+   "title": "Откажетесь от покупки, чтобы не брать в долг? 8 привычек, которые выдают, что вы росли в бедной семье",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/health/2026/09/04/76623367/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
