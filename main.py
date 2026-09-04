@@ -1079,6 +1079,16 @@ class TelegramWebhookIn(BaseModel):
     update_id: int | None = None
     message: dict | None = None
     callback_query: dict | None = None
+    # У ПРИВАТНОГО КАНАЛА НЕТ @ИМЕНИ. 4 сентября 2026 владелец с партнёром
+    # закрыли канал, чтобы закрытый тест не привёл посторонних, — и
+    # публикация встала: `sendMessage` на «@projectcompassru» стал отвечать
+    # «chat not found», причём и `getChat` тоже, то есть узнать адрес канала
+    # снаружи нечем. Постить в приватный канал можно, но только по ЧИСЛОВОМУ
+    # id, а его сообщает лишь сам Telegram — в посте канала, в правке поста
+    # или в смене прав бота. Эти три типа обновлений мы и слушаем.
+    channel_post: dict | None = None
+    edited_channel_post: dict | None = None
+    my_chat_member: dict | None = None
 
 
 class DealExportIn(BaseModel):
@@ -1735,6 +1745,10 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     expected = os.environ.get("TELEGRAM_WEBHOOK_SECRET", "")
     if not expected or secret != expected:
         return JSONResponse({"error": "not found"}, status_code=404)
+    # Пост в канале или смена прав бота — не команда и не вердикт: у них одна
+    # задача, назвать числовой адрес канала (см. TelegramWebhookIn).
+    if _announce_channel_id(payload):
+        return {"ok": True}
     # Кнопка под черновиком карточки: callback_data вида "mod:<id>:ok|hold".
     # Решение пишется в таблицу, а применяет его рутина публикации — у неё нет
     # доступа к этой базе напрямую, поэтому она заберёт решение по
@@ -2191,6 +2205,45 @@ _VERDICT_LABEL = {
     "acc_ok": "✅ Доступ открыт — человек может войти",
     "acc_no": "🗑 Отклонено — доступ не открыт",
 }
+
+
+# Каким каналам уже сказали их числовой адрес — чтобы не повторяться на
+# каждом посте. Память живёт в процессе: перезапуск сайта бывает только при
+# сборке, и повторить сообщение раз в несколько дней не страшно.
+_CHANNEL_IDS_TOLD: set[str] = set()
+
+
+def _announce_channel_id(payload) -> bool:
+    """Сказать в консоль числовой адрес канала, если Telegram его показал.
+
+    Единственный способ узнать адрес приватного канала — услышать его от
+    самого Telegram (см. комментарий у TelegramWebhookIn). Возвращает True,
+    если обновление было целиком «про канал» и обрабатывать его дальше
+    нечего.
+    """
+    post = payload.channel_post or payload.edited_channel_post or {}
+    member = payload.my_chat_member or {}
+    forwarded = ((payload.message or {}).get("forward_from_chat") or {})
+    chat = post.get("chat") or member.get("chat") or forwarded or {}
+    channel_update = bool(post or member)
+    if str(chat.get("type") or "") != "channel":
+        return channel_update
+    chat_id = str(chat.get("id") or "")
+    if not chat_id or chat_id == os.environ.get("TELEGRAM_CHANNEL_ID", "").strip():
+        return channel_update
+    if chat_id not in _CHANNEL_IDS_TOLD:
+        _CHANNEL_IDS_TOLD.add(chat_id)
+        title = chat.get("title") or "без названия"
+        for target in _review_chat_ids():
+            notification_service.tg_api(
+                "sendMessage", chat_id=target, disable_web_page_preview=True,
+                text=("\U0001F4E1 Канал «%s» отозвался.\n"
+                      "Его адрес для бота: %s\n\n"
+                      "У закрытого канала нет короткого имени, и постить в него "
+                      "можно только по этому номеру. Передайте его мне — впишу "
+                      "в настройки публикации, и посты пойдут снова." )
+                     % (title, chat_id))
+    return channel_update
 
 
 def _mark_decided(callback: dict, verdict: str) -> None:

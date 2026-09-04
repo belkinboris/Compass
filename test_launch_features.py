@@ -2874,3 +2874,54 @@ def test_registry_sync_seeds_a_missing_company_and_survives_a_broken_row():
         assert ensure_company_row(db, "нет-такого-профиля") is False
     finally:
         db.close()
+
+
+def test_channel_post_tells_the_console_the_private_channel_id(client, monkeypatch):
+    """4 сентября 2026 канал сделали приватным, и публикация встала: у
+    приватного канала нет @имени, `sendMessage` и `getChat` по имени отвечают
+    «chat not found». Постить в него можно, но только по числовому id, а
+    услышать этот id больше неоткуда — его приносит сам Telegram в посте
+    канала. Сайт обязан назвать его в консоли: иначе адрес знает только
+    Telegram, и никто из людей."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    main_module._CHANNEL_IDS_TOLD.clear()
+    sent = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)))
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "channel_post": {"message_id": 5,
+                         "chat": {"id": -1001234567890, "type": "channel",
+                                  "title": "Проект Компас"},
+                         "text": "тест"}})
+    assert r.status_code == 200
+    texts = [kw.get("text", "") for method, kw in sent if method == "sendMessage"]
+    assert texts, "сайт промолчал про канал"
+    assert "-1001234567890" in texts[0], texts[0]
+    assert "Проект Компас" in texts[0]
+    # Второй пост в том же канале — уже без напоминания: консоль не должна
+    # получать одно и то же сообщение на каждый пост.
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={
+        "channel_post": {"message_id": 6,
+                         "chat": {"id": -1001234567890, "type": "channel",
+                                  "title": "Проект Компас"}, "text": "ещё"}})
+    assert not [kw for method, kw in sent if method == "sendMessage"], sent
+
+
+def test_channel_id_is_not_repeated_when_it_is_already_configured(client, monkeypatch):
+    """Когда адрес канала уже настроен, напоминать о нём незачем: сообщение
+    в консоли, которое приходит на каждый пост канала, читать перестанут."""
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1009999999999")
+    import main as main_module
+    main_module._CHANNEL_IDS_TOLD.clear()
+    sent = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)))
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "channel_post": {"message_id": 7,
+                         "chat": {"id": -1009999999999, "type": "channel",
+                                  "title": "Проект Компас"}, "text": "тест"}})
+    assert r.status_code == 200
+    assert not sent, sent

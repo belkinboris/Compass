@@ -49,7 +49,14 @@ import telegram_endpoint  # noqa: E402
 # callback_query — значит зарегистрировать вебхук, на который кнопки молча не
 # доходят: Telegram их просто не шлёт, если тип не в списке, а сообщение
 # «зарегистрировано» при этом печатается как успех.
-ALLOWED_UPDATES = ['message', 'callback_query']
+# С 4 сентября 2026 к ним добавились три «канальных» типа. Канал закрыли
+# (чтобы закрытый тест не привёл посторонних), у приватного канала нет
+# @имени, и постить в него можно только по числовому id — а услышать этот id
+# больше неоткуда: `getChat` по имени отвечает «chat not found». Пост в
+# канале, правка поста и смена прав бота приносят его сами, и сайт сообщает
+# адрес в консоль (см. `_announce_channel_id` в main.py).
+ALLOWED_UPDATES = ['message', 'callback_query',
+                   'channel_post', 'edited_channel_post', 'my_chat_member']
 
 
 def env(name):
@@ -133,15 +140,20 @@ def main(argv):
 
     wanted = webhook_url()
     print('Нужный адрес:      %s' % wanted)
-    if current == wanted:
-        print('Совпадает — регистрировать нечего.')
+    if current == wanted and '--force' not in argv:
+        # Адрес совпадает — но список типов обновлений мог измениться, а по
+        # адресу этого не видно: Telegram молча не шлёт тип, которого нет в
+        # списке (так однажды не доходили кнопки). Поэтому есть --force.
+        print('Совпадает — регистрировать нечего (перерегистрировать: --force).')
         return 0
     if '--write' not in argv:
         print('Сухой прогон. Регистрация — с ключом --write.')
         return 0
 
+    # drop_pending_updates только при ПЕРВОЙ регистрации: при --force вебхук
+    # уже работает, и выбросить очередь значит потерять нажатую кнопку.
     answer = call(token, 'setWebhook', url=wanted, allowed_updates=ALLOWED_UPDATES,
-                  drop_pending_updates=True)
+                  drop_pending_updates=(current != wanted))
     print('Ответ Telegram: %s' % answer)
     # Команды в меню бота: без setMyCommands список «/» в клиенте пуст, и
     # человек не догадывается, что боту вообще можно что-то написать. Сбой
