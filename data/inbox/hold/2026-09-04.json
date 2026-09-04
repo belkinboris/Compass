@@ -5874,102 +5874,7 @@
    ]
   },
   {
-   "draft_id": "d33972624",
-   "title": "Кобяков: Запад вложил в украинскую авантюру $600 млрд",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28078361"
-    ]
-   ],
-   "sum": "$600 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "украинская авантюра $600 млрд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "украинская авантюра $600 млрд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d23586863",
-   "title": "Московский «ПИК» планирует продать ещё один свой проект в центре Петербурга",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/04/moskovskij-pik-planiruet"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-04",
-     "title": "Переговоры",
-     "note": "ГК \"ПИК\" готовится продать компании \"Геометрия\" ещё один свой проект. На этот раз — на Малом проспекте Петроградской стороны.",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/09/04/moskovskij-pik-planiruet"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47162932",
-   "title": "Российские риелторы столкнулись с трудностями в продаже массовых новостроек",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260904/trudnosti-2115185967.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28896768",
+   "draft_id": "d83046319",
    "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
    "date": "2026-09-03",
    "src": [
@@ -5998,13 +5903,41 @@
    ]
   },
   {
-   "draft_id": "d25380377",
-   "title": "Мультимиллионер решил продать бизнес и уйти в монахи",
+   "draft_id": "d18427490",
+   "title": "Хакеры пытались захватить сервера ГК «Солар» для выкупа",
    "date": "2026-09-04",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/04/multimillioner-reshil-prodat-biznes-i-uyti-v-monahi/"
+     "web:1prime.ru",
+     "https://1prime.ru/20260904/solara-873017591.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37952625",
+   "title": "Синхронная распродажа: это сигнал ожиданий глобального ужесточения монетарной политики",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1347789.php"
     ]
    ],
    "sum": null,
@@ -6027,13 +5960,13 @@
    ]
   },
   {
-   "draft_id": "d42897264",
-   "title": "«Цена «квадрата» — лишь входной билет»: на что в Перми обращать внимание при покупке офисов и торговых центров",
+   "draft_id": "d60985847",
+   "title": "«Омское лекарство» нарвалось на предостережение Роспотребнадзора . Регулятор объявил предостережение АО «Аптечная сеть «Омское лекарство» из-за нарушений при продаже специализированной пищевой продукц",
    "date": "2026-09-04",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053123746"
+     "tg:bezrec",
+     "https://t.me/bezrec/7961"
     ]
    ],
    "sum": null,
@@ -6048,20 +5981,77 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Фармацевтика",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d98714285",
-   "title": "В Кургане продается ресторан, открытый в начале года. Фото",
+   "draft_id": "d37337428",
+   "title": "Роспотребнадзор предотвратил более 2 млн попыток продажи масел с нарушениями",
    "date": "2026-09-04",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053124055"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28078959"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d64524946",
+   "title": "Тайский миллионер Аккарасриюк решил продать бизнес и стать монахом",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28079041"
+    ]
+   ],
+   "sum": "434 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69603331",
+   "title": "В ВТБ назвали города-лидеры по покупкам книг",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28078513"
     ]
    ],
    "sum": null,
@@ -6080,6 +6070,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55903756",
+   "title": "Риелторам стало труднее продавать квартиры в новостройках",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/04/rieltoram-stalo-trudnee-prodvavat-kvartiry-v-novostroykah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
