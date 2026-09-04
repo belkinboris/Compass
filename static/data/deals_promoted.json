@@ -109231,6 +109231,72 @@
     ]
    },
    "proofread": "2026-09-04"
+  },
+  {
+   "id": "g39e9e9c2",
+   "date": "2026-09-04",
+   "title": "«Azimut отель Ярославль» выставили на торги",
+   "ind": "Гостиницы и туризм",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/9/4/azimut-otel-yaroslavl-vystavili-na-torgi"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8780442"
+    ],
+    [
+     "YarNews",
+     "https://yarnews.net/news/98134-v-yaroslavle-ne-smogli-prodat-gostinicu-na-moskovskom-prospekte"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Нижний порог цены установлен на отметке 361,9 млн рублей.",
+    "share": "В состав лота включено само здание площадью 12 тыс. кв. метров со всем движимым имуществом и участок земли на 7,3 тыс. «квадратов».",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Областное министерство имущественных отношений выставило на продажу гостиницу «Azimut отель Ярославль», расположенную на Московском проспекте. Начальная цена объекта определена в 723,9 млн руб.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "«Признать аукцион несостоявшимся в связи с отсутствием заявок» — говорится в протоколе.",
+    "appr": "—",
+    "adv": [],
+    "terms": "Покупателю придется учесть обременение: с 2021 года объект арендует управляющая компания «Azimut Hotels», договор рассчитан на 25 лет."
+   },
+   "seller": "Министерство имущественных отношений Ярославской области",
+   "asset": "гостиница «Azimut отель Ярославль»",
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "гостиница «Azimut отель Ярославль»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/center/news/yaroslavl/2026/9/4/azimut-otel-yaroslavl-vystavili-na-torgi"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Ярославская область",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/center/news/yaroslavl/2026/9/4/azimut-otel-yaroslavl-vystavili-na-torgi"
+     }
+    ]
+   },
+   "reviewed": "2026-09-04",
+   "deep_researched": "2026-09-04",
+   "added": "2026-09-04"
   }
  ],
  "companies": {
@@ -134710,7 +134776,8 @@
   "g2f5143f4": 81,
   "gddb34475": 82,
   "g749a7844": 83,
-  "gbdefd889": 84
+  "gbdefd889": 84,
+  "g39e9e9c2": 85
  },
  "telegram_milestones": {},
  "telegram_digests": {
