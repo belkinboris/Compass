@@ -40,6 +40,7 @@ from deal_catalog import get_deal
 from deal_export import render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
+    AppSetting,
     AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
     DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     ModerationDecision, Notification,
@@ -50,6 +51,7 @@ from db.session import engine, get_session
 from fns_client import ApiFnsClient, ApiFnsError, full_lines_payload
 from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
 from sqlalchemy import func, inspect, select, text
+from sqlalchemy.exc import SQLAlchemyError
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
 _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
@@ -1747,7 +1749,7 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
         return JSONResponse({"error": "not found"}, status_code=404)
     # Пост в канале или смена прав бота — не команда и не вердикт: у них одна
     # задача, назвать числовой адрес канала (см. TelegramWebhookIn).
-    if _announce_channel_id(payload):
+    if _announce_channel_id(payload, db):
         return {"ok": True}
     # Кнопка под черновиком карточки: callback_data вида "mod:<id>:ok|hold".
     # Решение пишется в таблицу, а применяет его рутина публикации — у неё нет
@@ -2213,7 +2215,28 @@ _VERDICT_LABEL = {
 _CHANNEL_IDS_TOLD: set[str] = set()
 
 
-def _announce_channel_id(payload) -> bool:
+CHANNEL_SETTING = "telegram_channel_id"
+
+
+def _remember_setting(db, key: str, value: str) -> None:
+    """Запомнить настройку, которую сайт узнал сам. Сбой записи не должен
+    ронять вебхук: сообщение в консоль уже ушло, а адрес Telegram назовёт
+    снова при следующем посте канала."""
+    try:
+        row = db.get(AppSetting, key)
+        if row is None:
+            db.add(AppSetting(key=key, value=value))
+        elif row.value != value:
+            row.value = value
+        else:
+            return
+        db.commit()
+    except SQLAlchemyError as exc:  # noqa: BLE001
+        db.rollback()
+        logger.error("настройку %s записать не удалось: %s", key, exc)
+
+
+def _announce_channel_id(payload, db=None) -> bool:
     """Сказать в консоль числовой адрес канала, если Telegram его показал.
 
     Единственный способ узнать адрес приватного канала — услышать его от
@@ -2231,18 +2254,19 @@ def _announce_channel_id(payload) -> bool:
     chat_id = str(chat.get("id") or "")
     if not chat_id or chat_id == os.environ.get("TELEGRAM_CHANNEL_ID", "").strip():
         return channel_update
+    if db is not None:
+        _remember_setting(db, CHANNEL_SETTING, chat_id)
     if chat_id not in _CHANNEL_IDS_TOLD:
         _CHANNEL_IDS_TOLD.add(chat_id)
         title = chat.get("title") or "без названия"
         for target in _review_chat_ids():
             notification_service.tg_api(
                 "sendMessage", chat_id=target, disable_web_page_preview=True,
-                text=("\U0001F4E1 Канал «%s» отозвался.\n"
-                      "Его адрес для бота: %s\n\n"
+                text=("\U0001F4E1 Канал «%s» отозвался — адрес запомнили.\n\n"
                       "У закрытого канала нет короткого имени, и постить в него "
-                      "можно только по этому номеру. Передайте его мне — впишу "
-                      "в настройки публикации, и посты пойдут снова." )
-                     % (title, chat_id))
+                      "можно только по внутреннему номеру. Телеграм назвал его "
+                      "сам, сайт его сохранил, публикация подхватит в ближайший "
+                      "прогон — делать ничего не нужно." ) % title)
     return channel_update
 
 
@@ -2464,6 +2488,23 @@ def moderation_decisions(token: str = "", db=Depends(get_db)):
                            "edited_text": r.edited_text, "decided_by": r.decided_by,
                            "chat_id": r.chat_id, "reply_message_id": r.reply_message_id,
                            "created_at": r.created_at.isoformat()} for r in rows]}
+
+
+@app.get("/api/moderation/channel")
+def moderation_channel(token: str = "", db=Depends(get_db)):
+    """Адрес телеграм-канала для рутины публикации.
+
+    Тот же мост, что и у решений модерации, и по той же причине: адрес знает
+    САЙТ (Telegram называет его в посте канала, вебхук здесь), а нужен он
+    РУТИНЕ, у которой доступа к этой базе нет. С 4 сентября 2026 канал
+    закрытый: короткого имени у него не существует, и другого способа узнать
+    адрес, кроме как услышать от Telegram, нет.
+    """
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    row = db.get(AppSetting, CHANNEL_SETTING)
+    return {"chat_id": row.value if row else None,
+            "updated_at": row.updated_at.isoformat() if row else None}
 
 
 @app.get("/api/access/requests")

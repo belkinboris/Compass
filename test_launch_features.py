@@ -2897,8 +2897,11 @@ def test_channel_post_tells_the_console_the_private_channel_id(client, monkeypat
     assert r.status_code == 200
     texts = [kw.get("text", "") for method, kw in sent if method == "sendMessage"]
     assert texts, "сайт промолчал про канал"
-    assert "-1001234567890" in texts[0], texts[0]
-    assert "Проект Компас" in texts[0]
+    assert "Проект Компас" in texts[0], texts[0]
+    # Самого номера в сообщении нет намеренно: человеку с ним делать нечего,
+    # адрес уже сохранён (см. соседний тест) — а число в консоли выглядело бы
+    # как задание, которое надо куда-то вписать.
+    assert "-1001234567890" not in texts[0], texts[0]
     # Второй пост в том же канале — уже без напоминания: консоль не должна
     # получать одно и то же сообщение на каждый пост.
     sent.clear()
@@ -2925,3 +2928,51 @@ def test_channel_id_is_not_repeated_when_it_is_already_configured(client, monkey
                                   "title": "Проект Компас"}, "text": "тест"}})
     assert r.status_code == 200
     assert not sent, sent
+
+
+def test_channel_id_is_stored_and_served_to_the_publishing_routine(client, monkeypatch):
+    """Адрес закрытого канала знает САЙТ (Telegram называет его в посте
+    канала, вебхук здесь), а нужен он РУТИНЕ публикации, у которой доступа к
+    этой базе нет. Тот же мост, что у решений модерации: сайт пишет, рутина
+    читает по токену. Иначе адрес пришлось бы вписывать руками в окружение —
+    а оно не доезжает до уже работающих сессий рутин."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    main_module._CHANNEL_IDS_TOLD.clear()
+    monkeypatch.setattr(main_module.notification_service, "tg_api", lambda method, **kw: None)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "channel_post": {"message_id": 9,
+                         "chat": {"id": -1002222222222, "type": "channel",
+                                  "title": "Проект Компас"}, "text": "тест"}})
+    assert r.status_code == 200
+    r = client.get("/api/moderation/channel", params={"token": "тайна"})
+    assert r.status_code == 200 and r.json()["chat_id"] == "-1002222222222", r.json()
+    # Чужой токен адреса не получает: канал закрытый, и его адрес — не то,
+    # что стоит отдавать всем подряд.
+    assert client.get("/api/moderation/channel", params={"token": "не тот"}).status_code == 404
+
+
+def test_publishing_asks_the_site_for_the_channel_when_the_name_is_dead(monkeypatch):
+    """@имя закрытого канала боту не видно, и по нему постить нельзя. Если в
+    окружении осталось старое имя, публикация обязана спросить адрес у сайта,
+    а не биться в «chat not found»."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "publish"))
+    import send_telegram
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@projectcompassru")
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"chat_id": "-1003333333333"}
+
+    import httpx
+    monkeypatch.setattr(httpx, "get", lambda *a, **kw: FakeResponse())
+    assert send_telegram.channel_address() == "-1003333333333"
+
+    # Числовой адрес в окружении сильнее: он задан человеком осознанно.
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004444444444")
+    assert send_telegram.channel_address() == "-1004444444444"

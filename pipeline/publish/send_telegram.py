@@ -233,6 +233,44 @@ def edit_message(client, token, chat_id, message_id, text, buttons=None):
         raise TelegramError('editMessageText: %s' % (body.get('description') or r.text[:200]))
 
 
+def channel_address():
+    """Куда постить. Порядок: переменная окружения -> адрес, который сайт
+    услышал от самого Telegram -> пусто.
+
+    Почему второй шаг вообще есть. 4 сентября 2026 канал сделали приватным, и
+    старое @имя перестало существовать: `sendMessage` и `getChat` по нему
+    отвечают «chat not found». Постить в закрытый канал можно только по
+    внутреннему числовому адресу, а называет его сам Telegram — в посте
+    канала, то есть САЙТУ (у него вебхук). Сайт его запоминает, рутина
+    забирает по токену тем же мостом, что и решения модерации. Так адрес не
+    надо ни вписывать руками в окружение (оно не доезжает до уже работающих
+    сессий рутин), ни держать в публичном репозитории.
+    """
+    from_env = os.environ.get('TELEGRAM_CHANNEL_ID', '').strip()
+    if from_env and not from_env.startswith('@'):
+        return from_env
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if token:
+        try:
+            import httpx
+            r = httpx.get('%s/api/moderation/channel' % site,
+                          params={'token': token}, timeout=20)
+            if r.status_code == 200 and (r.json().get('chat_id') or '').strip():
+                return r.json()['chat_id'].strip()
+        except Exception as e:                                # noqa: BLE001
+            print('Адрес канала у сайта не спросить (%s).' % e)
+    if from_env:
+        print('ВНИМАНИЕ: адрес канала задан именем (%s), а канал закрытый — '
+              'по имени он боту не виден. Сайт адреса пока не знает: напишите '
+              'любое сообщение в канале, Telegram назовёт адрес сам.' % from_env)
+        return from_env
+    print('ВНИМАНИЕ: адреса канала нет ни в окружении, ни у сайта. Напишите '
+          'любое сообщение в канале — Telegram назовёт адрес, сайт его '
+          'запомнит, и следующий прогон отправит посты.')
+    return ''
+
+
 def load_today_updates():
     """{deal_id: [изменения]} из самого свежего файла data/inbox/updates/."""
     if not os.path.isdir(UPDATES_DIR):
@@ -528,16 +566,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     ошибка формата. Не помечаются отправленными: следующий прогон увидит их
     заново, если владелец не решит иначе."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
-    chat_id = os.environ.get('TELEGRAM_CHANNEL_ID', '') or DEFAULT_CHANNEL
-    if chat_id.startswith('@'):
-        # Канал закрыт с 4 сентября 2026, и @имени у него нет. Сказать это
-        # словами дешевле, чем разбирать «chat not found» второй раз.
-        print('ВНИМАНИЕ: адрес канала задан именем (%s), а канал закрытый — '
-              'по имени он боту не виден. Нужен числовой id канала в '
-              'TELEGRAM_CHANNEL_ID.' % chat_id)
-    elif not chat_id:
-        print('ВНИМАНИЕ: адрес канала не задан. Положите числовой id канала '
-              'в TELEGRAM_CHANNEL_ID — у закрытого канала другого адреса нет.')
+    chat_id = channel_address()
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
     milestones = data.setdefault('telegram_milestones', {})
