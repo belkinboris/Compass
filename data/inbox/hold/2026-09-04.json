@@ -5444,169 +5444,6 @@
    ]
   },
   {
-   "draft_id": "d11586162",
-   "title": "Nvidia приобретет платформу машинного обучения Hugging Face",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260903/nvidia-872998726.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Nvidia",
-   "asset": "платформа машинного обучения Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "платформа машинного обучения Hugging Face",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19434892",
-   "title": "Nvidia купила платформу Hugging Face за $12,93 млрд",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8925178"
-    ]
-   ],
-   "sum": "$12,93 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-03",
-     "title": "Сделка завершена",
-     "note": "Компания Nvidia объявила о покупке платформы Hugging Face за $12,93 млрд. Ранее о договоренности двух компаний сообщало издание The Information со ссылкой на источники.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8925178"
-     ]
-    }
-   ],
-   "buyer_name": "Nvidia",
-   "asset": "платформа Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "платформа Hugging Face",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d46015466",
-   "title": "Nvidia покупает ИИ-стартап Hugging Face за $13 млрд",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/technology/news/2026/09/03/1226126-ii-startap-hugging-face"
-    ]
-   ],
-   "sum": "$13 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Nvidia",
-   "asset": "ИИ-стартап Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "ИИ-стартап Hugging Face",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d73141770",
-   "title": "Nvidia договорилась о покупке ИИ-платформы Hugging Face",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/03/09/2026/6a996a3e4c2dbe0eb1088469"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "После сделки Hugging Face не закроет доступ к своим ИИ-моделям и продолжит работать с чипоами других производителей. Ранее стартап отказывался от инвестиций Nvidia, опасаясь влияния доминирующего инвестора — производителя чипов",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/03/09/2026/6a996a3e4c2dbe0eb1088469"
-     ]
-    }
-   ],
-   "buyer_name": "Nvidia",
-   "asset": "ИИ-платформы Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "ИИ-платформы Hugging Face",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g8b03762d (общие редкие слова: ии, платфо) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d64441629",
-   "title": "Nvidia покупает ИИ-стартап Hugging Face за $12,9 млрд",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1113031"
-    ]
-   ],
-   "sum": "$12,9 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Nvidia",
-   "asset": "ИИ-стартап Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "ИИ-стартап Hugging Face",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d18369067",
    "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
    "date": "2026-09-03",
@@ -5709,34 +5546,6 @@
    ]
   },
   {
-   "draft_id": "d26151152",
-   "title": "Nvidia покупает стартап Hugging Face за почти $13 млрд",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28076743"
-    ]
-   ],
-   "sum": "$13 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Nvidia",
-   "asset": "стартап Hugging Face за почти $13 млрд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "стартап Hugging Face за почти $13 млрд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d25312841",
    "title": "Уральский завод «Вентпром» перешел в собственность государства",
    "date": "2026-09-03",
@@ -5764,45 +5573,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Акции завода «Вентпром» изъяты в доход государства по решени» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d29055341",
-   "title": "Nvidia договорилась о приобретении Hugging Face",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/303145"
-    ]
-   ],
-   "sum": "$12,93 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-03",
-     "title": "Переговоры",
-     "note": "Сумма сделки составила $12,93 млрд Сообщение Nvidia договорилась о приобретении Hugging Face появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/303145"
-     ]
-    }
-   ],
-   "buyer_name": "Nvidia",
-   "asset": "Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "Hugging Face",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -5845,105 +5615,7 @@
    ]
   },
   {
-   "draft_id": "d96087974",
-   "title": "Qualcomm backs Ultrahuman in $70M round on bet to turn smart rings into computers",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/03/qualcomm-backs-ultrahuman-in-70m-round-on-bet-to-turn-smart-rings-into-computers/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d89834923",
-   "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
-   "date": "2026-09-03",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/03/accel-reportedly-in-talks-to-lead-1b-round-for-thinking-machines-at-40b-valuation/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52986882",
-   "title": "Nvidia договорилась о покупке Hugging Face за $12,93 млрд — платформу для разработчиков ИИ планируют масштабировать",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/nvidia-dogovorilas-o-pokupke-hugging-face-za-1293-mlrd-platformu-dlya-razrabotchikov-ii-planiruyut-masshtabirovat/"
-    ]
-   ],
-   "sum": "$12,93 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-04",
-     "title": "Переговоры",
-     "note": "Nvidia сообщила о покупке платформы для разработки ИИ Hugging Face за $12,93 млрд. После сделки Nvidia планирует масштабировать сервис, повысить его надёжность и безопасность, а также расширить возможности для разработчиков и компаний, работающих с ИИ. При…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/nvidia-dogovorilas-o-pokupke-hugging-face-za-1293-mlrd-platformu-dlya-razrabotchikov-ii-planiruyut-masshtabirovat/"
-     ]
-    }
-   ],
-   "buyer_name": "Nvidia",
-   "asset": "Hugging Face",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "Hugging Face",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g8b03762d (общие редкие слова: ии, платфо) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d86637925",
+   "draft_id": "d90863353",
    "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
    "date": "2026-09-04",
    "src": [
@@ -5982,7 +5654,7 @@
    ]
   },
   {
-   "draft_id": "d20988214",
+   "draft_id": "d37362408",
    "title": "«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке для диверсификации активов",
    "date": "2026-09-04",
    "src": [
@@ -6021,7 +5693,7 @@
    ]
   },
   {
-   "draft_id": "d79915269",
+   "draft_id": "d23298893",
    "title": "Прием заявок на повторные торги по продаже «Вектор Рейла» вновь продлен - до 15 сентября",
    "date": "2026-09-04",
    "src": [
@@ -6051,76 +5723,7 @@
    ]
   },
   {
-   "draft_id": "d34794236",
-   "title": "GoPro договорилась о слиянии с производителем оптических технологий — сумма сделки составит $285 млн",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/gopro-dogovorilas-o-sliyanii-s-proizvoditelem-opticheskih-tehnologij-summa-sdelki-sostavit-285-mln/"
-    ]
-   ],
-   "sum": "$285 млн",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-04",
-     "title": "Переговоры",
-     "note": "GoPro договорилась объединить бизнес со Starman Optical, американским разработчиком и производителем оптических приемопередатчиков. Производитель экшен-камер получит новое направление бизнеса, сохранив существующие продукты и сервисы, говорится в пресс-релизе…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/gopro-dogovorilas-o-sliyanii-s-proizvoditelem-opticheskih-tehnologij-summa-sdelki-sostavit-285-mln/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27736588",
-   "title": "Орешкин: инвестиции в ИИ в США превращаются в финансовую пирамиду",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260904/oreshkin-873046732.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d41885003",
+   "draft_id": "d28180239",
    "title": "Роснедра объявили аукцион на право добычи титана в Тамбовской области",
    "date": "2026-09-04",
    "src": [
@@ -6148,7 +5751,7 @@
    ]
   },
   {
-   "draft_id": "d63869168",
+   "draft_id": "d76963254",
    "title": "Структура Газпромбанка продала ТЦ «Город Косино»",
    "date": "2026-09-04",
    "src": [
@@ -6184,6 +5787,75 @@
    "needs_review": true,
    "hold_reasons": [
     "похоже на уже описанную сделку gddb34475 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d69467565",
+   "title": "В ДНР по итогам года планируются инвестиции в объеме более 200 млрд рублей",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28080737"
+    ]
+   ],
+   "sum": "200 млрд ₽",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-04",
+     "title": "Переговоры",
+     "note": "Глава региона Денис Пушилин держит на контроле взаимодействие с инвесторами и реализацию каждого проекта",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28080737"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-1 (общие редкие слова: более, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d57435299",
+   "title": "Доллар перешел к росту к евро после выхода данных о занятости в США",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260904/dollar-873047620.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
