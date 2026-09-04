@@ -5874,7 +5874,7 @@
    ]
   },
   {
-   "draft_id": "d83046319",
+   "draft_id": "d41042044",
    "title": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
    "date": "2026-09-03",
    "src": [
@@ -5903,17 +5903,96 @@
    ]
   },
   {
-   "draft_id": "d18427490",
-   "title": "Хакеры пытались захватить сервера ГК «Солар» для выкупа",
+   "draft_id": "d25527540",
+   "title": "Nvidia договорилась о покупке Hugging Face за $12,93 млрд — платформу для разработчиков ИИ планируют масштабировать",
    "date": "2026-09-04",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260904/solara-873017591.html"
+     "web:rb.ru",
+     "https://rb.ru/news/nvidia-dogovorilas-o-pokupke-hugging-face-za-1293-mlrd-platformu-dlya-razrabotchikov-ii-planiruyut-masshtabirovat/"
+    ]
+   ],
+   "sum": "$12,93 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-04",
+     "title": "Переговоры",
+     "note": "Nvidia сообщила о покупке платформы для разработки ИИ Hugging Face за $12,93 млрд. После сделки Nvidia планирует масштабировать сервис, повысить его надёжность и безопасность, а также расширить возможности для разработчиков и компаний, работающих с ИИ. При…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/nvidia-dogovorilas-o-pokupke-hugging-face-za-1293-mlrd-platformu-dlya-razrabotchikov-ii-planiruyut-masshtabirovat/"
+     ]
+    }
+   ],
+   "buyer_name": "Nvidia",
+   "asset": "Hugging Face",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "Hugging Face",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g8b03762d (общие редкие слова: ии, платфо) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33543584",
+   "title": "Голливуд добрался до спорта: актер из «Людей Икс» покупает футбольный клуб",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053124276"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-04",
+     "title": "Переговоры",
+     "note": "Голливудский актер Хью Джекман, известный по роли Росомахи в серии фильмов «Люди Икс», ведет переговоры о приобретении доли в английском футбольном клубе «Норвич Сити». Артист давно болеет за команду и не скрывает интереса к возможной сделке.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053124276"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "футбольный клуб",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "футбольный клуб",
+    "seller": null
+   },
+   "ind": "Развлечения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d85128387",
+   "title": "«Azimut отель Ярославль» выставили на торги",
+   "date": "2026-09-04",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/9/4/azimut-otel-yaroslavl-vystavili-na-torgi"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -5924,181 +6003,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37952625",
-   "title": "Синхронная распродажа: это сигнал ожиданий глобального ужесточения монетарной политики",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1347789.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d60985847",
-   "title": "«Омское лекарство» нарвалось на предостережение Роспотребнадзора . Регулятор объявил предостережение АО «Аптечная сеть «Омское лекарство» из-за нарушений при продаже специализированной пищевой продукц",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "tg:bezrec",
-     "https://t.me/bezrec/7961"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37337428",
-   "title": "Роспотребнадзор предотвратил более 2 млн попыток продажи масел с нарушениями",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28078959"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64524946",
-   "title": "Тайский миллионер Аккарасриюк решил продать бизнес и стать монахом",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28079041"
-    ]
-   ],
-   "sum": "434 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69603331",
-   "title": "В ВТБ назвали города-лидеры по покупкам книг",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28078513"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d55903756",
-   "title": "Риелторам стало труднее продавать квартиры в новостройках",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/04/rieltoram-stalo-trudnee-prodvavat-kvartiry-v-novostroykah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
