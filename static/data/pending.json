@@ -74,7 +74,9 @@
    "pending_since": "2026-09-04T05:24:56+00:00",
    "buyer_name": "ООО «Афкап»",
    "reviewed": "2026-09-04",
-   "seller_id": "gf0ac5fc7"
+   "seller_id": "gf0ac5fc7",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g749a7844",
@@ -136,7 +138,9 @@
      }
     ]
    },
-   "reviewed": "2026-09-04"
+   "reviewed": "2026-09-04",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gbdefd889",
@@ -198,7 +202,9 @@
      }
     ]
    },
-   "reviewed": "2026-09-04"
+   "reviewed": "2026-09-04",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
