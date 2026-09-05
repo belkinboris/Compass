@@ -5885,7 +5885,7 @@
    ]
   },
   {
-   "draft_id": "d15287490",
+   "draft_id": "d19711947",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5913,17 +5913,17 @@
    ]
   },
   {
-   "draft_id": "d83482688",
-   "title": "Аксаков рассказал, как оживить рынок IPO в России",
+   "draft_id": "d45798646",
+   "title": "Эксперт Крикунова объяснила, когда стоит купить коляску для питомца",
    "date": "2026-09-05",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260905/aksakov--2115609404.html"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28081125"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -5934,20 +5934,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Здравоохранение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d14242178",
-   "title": "Куклачева ответила на слухи о покупке победы в конкурсе «Миссис Россия»",
+   "draft_id": "d39397241",
+   "title": "В Белоруссии семь домов выставили на продажу за 9 тыс. рублей",
    "date": "2026-09-05",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260905/kuklacheva-2115608590.html"
+     "web:iz.ru",
+     "https://iz.ru/2161612/v-belorussii-sem-domov-vystavili-na-prodazhu-za-9-tys-rublei-izi"
     ]
    ],
    "sum": null,
@@ -5966,35 +5966,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31041131",
-   "title": "Калинская шокирована первым в карьере выходом в четвертый раунд US Open",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260905/kalinskaja-2115607357.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
