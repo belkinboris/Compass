@@ -626,9 +626,20 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                 # не с чем), а не молчим вечно и не правим несуществующее сообщение.
                 changes = updates_by_id.get(did)
                 if changes and sendable(deal):
-                    # П2-9: пустая, ещё не прочитанная карточка ждёт дочитывания,
-                    # а не уходит первым постом со всеми пустыми линзами.
-                    if not deal.get('post_override') and format_post.needs_review_before_post(deal):
+                    # 5 сентября 2026, просьба владельца: не оживлять
+                    # молчавшую бэклог-карточку постом, если сама сделка всё
+                    # ещё не свежая — даже настоящий новый факт о ней читатель
+                    # канала увидит как «зачем мне это старьё» и отпишется.
+                    # Гейт `is_fresh()` тот же, что решает заголовок поста
+                    # («Новое о сделке» / «Сделка из базы») — только раньше он
+                    # выбирал ФОРМУЛИРОВКУ, а теперь решает, публиковать ли
+                    # вообще. `post_override` пропускает его: там уже есть
+                    # решение владельца по этой конкретной сделке.
+                    if not deal.get('post_override') and not format_post.is_fresh(deal):
+                        pass
+                    elif not deal.get('post_override') and format_post.needs_review_before_post(deal):
+                        # П2-9: пустая, ещё не прочитанная карточка ждёт дочитывания,
+                        # а не уходит первым постом со всеми пустыми линзами.
                         needs_review.append(did)
                     else:
                         text = format_post.render(deal, comps)
@@ -645,10 +656,19 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
             # о новости, а не получит запоздалый первый пост.
             to_seed.append(did)
         elif sendable(deal):
+            # 5 сентября 2026, просьба владельца: сделка не первой свежести не публикуется
+            # в канал вовсе, даже честным «Сделка из базы · Публикуем впервые»
+            # — ровно так карточка «МорТехПром» (2026 год без месяца, добавлена
+            # в базу задним числом) ушла в канал и выглядела архивом, поданным
+            # за новость. Засеваем как бэклог (None), тем же путём, что решение
+            # модерации «без поста», — если позже найдётся настоящий новый
+            # факт, тот же гейт в ветке выше решит его судьбу заново.
+            if not deal.get('post_override') and not format_post.is_fresh(deal):
+                to_seed.append(did)
             # П2-9: та же дочитка — но для самого обычного, первого-в-жизни
             # поста. `post_override` пропускает гейт: там уже есть текст,
             # который владелец продиктовал сам, — читать за него нечего.
-            if not deal.get('post_override') and format_post.needs_review_before_post(deal):
+            elif not deal.get('post_override') and format_post.needs_review_before_post(deal):
                 needs_review.append(did)
             else:
                 # Текст, который владелец продиктовал в Telegram при модерации

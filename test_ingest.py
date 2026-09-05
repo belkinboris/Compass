@@ -11,6 +11,7 @@ import json
 import re
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -26,6 +27,14 @@ import fetch                  # noqa: E402
 import format_post
 import monthly_digest           # noqa: E402
 import match as matcher      # noqa: E402
+
+
+FRESH_DATE = date.today().isoformat()
+"""Дата для тестовых карточек, которым нужно пройти гейт `is_fresh()` в
+send_telegram.main() (5 сентября 2026: сделки не первой свежести больше не
+публикуются вовсе, см. CLAUDE.md), но которые проверяют что-то другое —
+темп отправки, --skip, финстроку, дочитывание. Не хардкодить дату: тест не
+должен протухать сам по себе с течением времени."""
 
 
 @pytest.fixture(scope="module")
@@ -608,6 +617,7 @@ def test_main_holds_back_an_empty_unreviewed_card_instead_of_posting_it(monkeypa
     deal = {
         "id": "gX2", "title": "«Алор брокер» купил неназванную брокерскую компанию",
         "buyer_name": "«Алор брокер»", "asset": "неназванная брокерская компания",
+        "date": FRESH_DATE,
         "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
                 "rationale": "—", "context": "—", "finadv": "—"},
         "law": {"struct": "—", "appr": "—", "terms": "—"},
@@ -1481,6 +1491,7 @@ def test_main_dry_run_with_a_real_token_prints_full_post_text(monkeypatch, tmp_p
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
             "buyer": "b1", "seller": "Иван Петрович Сидоров",
             "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ и интернет",
+            "date": FRESH_DATE,
             "reviewed": "2026-08-01",
             # Предложение контекста обязано НАЗЫВАТЬ покупателя — иначе с 30
             # августа оно законно отсеется из строки «Покупатель» (правило
@@ -1521,9 +1532,9 @@ def test_main_write_skips_specified_ids_without_marking_them_sent(monkeypatch, t
     """--skip задерживает конкретную карточку в ЭТОМ прогоне, но не
     помечает её отправленной: следующий прогон должен увидеть её снова."""
     deal_skip = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
-                "sum": "1 млрд ₽", "reviewed": "2026-08-01"}
+                "sum": "1 млрд ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                "sum": "500 млн ₽", "reviewed": "2026-08-01"}
+                "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_skip, deal_send]
     real_data["companies"] = {}
@@ -1604,8 +1615,12 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     assert len(fake.calls) == 3, "за один прогон ушло больше сообщений, чем разрешает лимит"
     assert len(sleeps) == 2, "между тремя отправками должно быть ровно две паузы"
 
+    # У остальных кандидатов (не первой свежести — вся боевая база, кроме
+    # нескольких последних недель) прогон тем же заходом проставляет null —
+    # это не отправка, а честное «не публикуем», и она не считается в лимит.
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
-    assert len(written["telegram_posts"]) == 3
+    real_sends = [v for v in written["telegram_posts"].values() if v]
+    assert len(real_sends) == 3
 
 
 def test_main_skips_seeded_backlog_entries_without_new_facts(monkeypatch, tmp_path):
@@ -1638,15 +1653,91 @@ def test_main_skips_seeded_backlog_entries_without_new_facts(monkeypatch, tmp_pa
     assert boom.calls == [], "бэклог-карточку без нового факта нельзя ни публиковать, ни редактировать"
 
 
+def test_main_never_posts_a_stale_deal_on_first_encounter(monkeypatch, tmp_path, capsys):
+    """5 сентября 2026, просьба владельца: карточка «МорТехПром» (2026 год
+    без месяца — не первой свежести) ушла в канал первым постом с честным
+    «Сделка из базы · Публикуем впервые» — и это неправильно само по себе:
+    подписчики, которые следят за настоящими новостями, отписываются, увидев
+    архив, даже поданный честно. Не первой свежести сделка, впервые
+    встреченная прогоном, теперь молча засевается (как решение модерации
+    «без поста»), а не отправляется вовсе."""
+    deal = {"id": "gX3", "title": "Роман Шаров довёл долю в «МорТехПроме» до 100%",
+            "buyer_name": "Роман Шаров", "asset": "100% ООО «МорТехПром»", "sum": "—",
+            "date": "2026", "reviewed": "2026-08-01"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {}
+    real_data["telegram_posts"] = {}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+
+    boom = _FakeClient([])  # ни один вызов не ожидается
+    monkeypatch.setattr(send_telegram, "_client", lambda: boom)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert boom.calls == [], "сделка не первой свежести не должна уходить постом даже впервые встреченная"
+    out = capsys.readouterr().out
+    assert "засеяно без поста: 1" in out
+
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gX3"] is None, "молча засеяна, а не отправлена"
+
+
+def test_main_never_revives_a_stale_seeded_deal_even_with_a_new_fact(monkeypatch, tmp_path):
+    """Продолжение предыдущего теста: тот же гейт держит и вторую ветку —
+    бэклог-сделку, которая УЖЕ засеяна как «без поста» (например, тем же
+    прогоном, что и выше, или решением модерации), а не первой свежести.
+    Настоящий новый факт из data/inbox/updates/ раньше оживил бы её первым
+    постом («без Обновлено — сравнивать не с чем») — теперь и это молчит:
+    владелец прямо запретил публиковать НЕ НОВУЮ сделку, даже если карточка
+    про неё меняется."""
+    deal = {"id": "gX4", "title": "Роман Шаров довёл долю в «МорТехПроме» до 100%",
+            "buyer_name": "Роман Шаров", "asset": "100% ООО «МорТехПром»", "sum": "—",
+            "date": "2026", "reviewed": "2026-08-01"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {}
+    real_data["telegram_posts"] = {"gX4": None}  # уже засеяна бэклогом
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates",
+                         lambda: {"gX4": ["появился источник"]})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+
+    boom = _FakeClient([])
+    monkeypatch.setattr(send_telegram, "_client", lambda: boom)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert boom.calls == [], "новый факт о старой сделке не должен оживлять её постом"
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gX4"] is None, "остаётся засеянной, а не помеченной отправленной"
+
+
 def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatch, tmp_path):
     """Уточнение владельца (2 августа): бэклог — это «не публиковать историю
     разом при включении канала», а не «эта карточка никогда не появится в
     канале». Если у бэклог-сделки позже появляется настоящий новый факт из
     data/inbox/updates/, для читателя это первый пост про неё — уходит как
     НОВЫЙ (sendMessage, без «⟳ Обновлено» — сравнивать не с чем), а не
-    молчит и не пытается редактировать несуществующее сообщение."""
+    молчит и не пытается редактировать несуществующее сообщение.
+
+    Дата сделки — свежая (5 сентября 2026): владелец запретил публиковать
+    даже настоящий новый факт, если сама сделка не первой свежести (см.
+    CLAUDE.md, «МорТехПром») — этот тест проверяет ДРУГОЕ правило (бэклог с
+    фактом уходит как первый пост, а не правка несуществующего сообщения),
+    и не должен зависеть от гейта свежести."""
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
-    seeded_deal = real_data["deals"][0]
+    seeded_deal = dict(real_data["deals"][0], date=FRESH_DATE)
     real_data["deals"] = [seeded_deal]
     real_data["telegram_posts"] = {seeded_deal["id"]: None}
     tmp_data = tmp_path / "deals_promoted.json"
@@ -1681,9 +1772,9 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     отдельная, явно читаемая строка отчёта с именем сделки."""
     deal_edit = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
                  "buyer": "b1", "sum": "1 млрд ₽", "status": "Закрыта",
-                 "reviewed": "2026-08-01"}
+                 "date": FRESH_DATE, "reviewed": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                 "sum": "500 млн ₽", "reviewed": "2026-08-01"}
+                 "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_edit, deal_send]
     real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
@@ -1738,6 +1829,7 @@ def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tm
     ≤MAX_SENDS_PER_RUN писем, которые реально уйдут)."""
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
             "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ",
+            "date": FRESH_DATE,
             # reviewed: карточку УЖЕ читали — иначе П2-9 отложит её до
             # дочитывания, и этот тест (он про финстроку, не про П2-9) не
             # увидит ни одной реальной отправки.

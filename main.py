@@ -2317,12 +2317,17 @@ def _learn_console_topics(payload, db=None) -> bool:
                 _remember_setting(db, "telegram_topic:%s" % slug, str(thread_id))
         return True
     # Бутстрап для тем, заведённых до того, как бот начал слушать служебные
-    # сообщения: человек один раз печатает точное название темы внутри неё.
+    # сообщения: человек один раз печатает название темы внутри неё. Сверка
+    # по слагу (`_topic_slug`), а не строка в строку: первая версия требовала
+    # точного совпадения (`text == name`), и лишний пробел от автокоррекции
+    # клиента или другой регистр молча не засчитывались — то же слепое пятно,
+    # что и с падежами/окончаниями в других частях кода.
     text = (message.get("text") or "").strip()
     thread_id = message.get("message_thread_id")
     if db is not None and text and thread_id:
+        text_slug = _topic_slug(text)
         for name in CONSOLE_TOPIC_NAMES.values():
-            if text == name:
+            if text_slug == _topic_slug(name):
                 _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
                 return True
     return False

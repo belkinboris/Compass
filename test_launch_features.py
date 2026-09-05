@@ -3031,6 +3031,24 @@ def test_forum_topic_bootstrap_by_typing_its_own_name(client, monkeypatch):
     assert "123" not in topics.values()
 
 
+def test_forum_topic_bootstrap_tolerates_case_and_stray_whitespace(client, monkeypatch):
+    """5 сентября 2026: три темы висели пустыми (`{"topics":{}}`) после того,
+    как владелец их уже переименовал, — точное посимвольное сравнение
+    (`text == name`) молча не засчитывало сообщение, если клиент Telegram
+    добавил лишний пробел или прислал другой регистр. Сверка теперь идёт по
+    тому же слагу, что и у служебных сообщений о переименовании (`_topic_slug`)
+    — лишний пробел, перенос строки и регистр не мешают узнать своё название."""
+    _mod_env(monkeypatch)
+    r = client.post("/api/telegram/webhook/тайна", json={
+        "message": {"message_id": 9, "message_thread_id": 55,
+                   "text": " подтверждение постов \n",
+                   "chat": {"id": -100111, "type": "supergroup"},
+                   "from": {"id": 111}}})
+    assert r.status_code == 200
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert topics.get("подтверждение-постов") == "55", topics
+
+
 def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):
     """Ответ на команду/кнопку обязан остаться в той же теме, где её
     нажали/напечатали — Telegram НЕ выводит тему сама по reply_to_message_id,
