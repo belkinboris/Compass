@@ -191,16 +191,49 @@ def _sync_fns_from_registry():
     if os.environ.get("PYTEST_CURRENT_TEST"):
         return
 
-    def _run():
+    def _attempt(label):
         db = get_session()
         try:
             _fns_sync_once(db)
         except Exception as e:  # сеть/квота/что угодно — сайт не должен упасть из-за этого
-            logger.error("не удалось докачать ФНС из реестра при старте: %s", e)
+            logger.error("не удалось докачать ФНС из реестра (%s): %s", label, e)
         finally:
             db.close()
 
+    def _run():
+        _attempt("при старте")
+        # Старт процесса перестал быть надёжным событием (см. комментарий к
+        # _seconds_until_next_fns_window): пока в реестре есть бэклог, докачка
+        # повторяется раз в сутки сама, сразу после сброса дневного потолка.
+        while FNS_DAILY_RESYNC:
+            time.sleep(_seconds_until_next_fns_window())
+            _attempt("суточная докачка")
+
     threading.Thread(target=_run, daemon=True).start()
+
+
+def _seconds_until_next_fns_window(now: datetime | None = None) -> float:
+    """Сколько ждать до следующего окна суточной докачки — пять минут после
+    полуночи UTC, когда `_fns_requests_today()` начинает считать с нуля.
+
+    Почему окно вообще нужно. Докачка по реестру шла ТОЛЬКО при старте
+    процесса, а процесс на Timeweb перезапускается только пересборкой — с
+    3 сентября 2026 пересборку даёт лишь пуш кода в `release`, данные едут
+    мимо. 5 сентября 2026 /api/fns/status показал: бэклог реестра 278 строк
+    (кампания по сторонам сделок 2024 года), три старта за день истратили
+    532 запроса при потолке 400, и подтверждённый ИНН «МорТехПрома» из
+    свежего поста канала остался несопоставленным — а следующий старт
+    случился бы только с очередным пушем кода, которого в выходные может
+    не быть вовсе. Раз в сутки после сброса потолка — естественное окно:
+    бэклог тает по 60 работ в день без единого деплоя, а при пустом
+    бэклоге попытка стоит один проход по реестру без живых запросов."""
+    now = now or datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    window = now.replace(hour=0, minute=5, second=0, microsecond=0)
+    if window <= now:
+        window += timedelta(days=1)
+    return max(60.0, (window - now).total_seconds())
 
 
 def _fns_sync_once(db) -> dict | None:
@@ -333,6 +366,10 @@ DEAL_EXPORT_GUESTS = True
 # (растёт партиями по 50-60) догонял прод за один-два деплоя, а не тянулся
 # неделями за счёт частоты рестартов процесса.
 FNS_STARTUP_SYNC_LIMIT = 60
+
+# Суточная докачка по реестру внутри процесса (см. _seconds_until_next_fns_window):
+# выключается FNS_DAILY_RESYNC=0, если понадобится оставить только старт.
+FNS_DAILY_RESYNC = os.environ.get("FNS_DAILY_RESYNC", "1") == "1"
 
 # Дневной потолок живых запросов к api-fns.ru (П5''', этап 3). НЕ от нехватки
 # квоты — её достаточно (см. «Открытие, которое меняет бюджет» в CLAUDE.md),

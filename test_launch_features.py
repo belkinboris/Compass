@@ -1044,13 +1044,16 @@ def test_fns_sync_from_registry_limit_counts_real_work_not_list_position(monkeyp
     новых записей позади него."""
     from pipeline import sync_fns
 
+    # Свежие строки датированы ПОЗЖЕ нуждающихся в работе: с 5 сентября 2026
+    # реестр обходится от новых строк к старым, и именно новые-но-свежие
+    # строки должны стоять впереди, чтобы проверка осталась про то же самое.
     fake_registry = [
         {"company_id": "already-fresh-1", "decision": "confirmed", "inn": "7700000101",
-         "reason": "т", "date": "2026-08-22"},
+         "reason": "т", "date": "2026-08-24"},
         {"company_id": "already-fresh-2", "decision": "confirmed", "inn": "7700000102",
-         "reason": "т", "date": "2026-08-22"},
+         "reason": "т", "date": "2026-08-24"},
         {"company_id": "already-fresh-3", "decision": "confirmed", "inn": "7700000103",
-         "reason": "т", "date": "2026-08-22"},
+         "reason": "т", "date": "2026-08-24"},
         {"company_id": "needs-work-1", "decision": "confirmed", "inn": "7700000201",
          "reason": "т", "date": "2026-08-23"},
         {"company_id": "needs-work-2", "decision": "confirmed", "inn": "7700000202",
@@ -3270,3 +3273,75 @@ def test_fns_status_reports_the_last_background_runs_and_the_daily_budget(client
     assert last["mode"] == "startup" and last["errors"] == 1
     assert last["details"]["skipped_fresh"] == 2 and last["details"]["requests"] == 1
     assert last["started_at"]
+
+
+def test_fns_sync_from_registry_takes_newest_registry_rows_first(monkeypatch):
+    """5 сентября 2026: строка «МорТехПрома» (свежий пост канала) стояла
+    последней в реестре за 278 строками кампании по сделкам 2024 года, а
+    стартовый скан идёт по 60 работ и упирается в дневной потолок — читатель
+    из поста ждал бы отчётность несколько дней. Новые строки (по дате)
+    обязаны получать работу первыми; внутри даты — порядок файла."""
+    from pipeline import sync_fns
+
+    fake_registry = [
+        {"company_id": "old-campaign-1", "decision": "confirmed", "inn": "7700000501",
+         "reason": "т", "date": "2026-09-01"},
+        {"company_id": "old-campaign-2", "decision": "confirmed", "inn": "7700000502",
+         "reason": "т", "date": "2026-09-01"},
+        {"company_id": "fresh-intake", "decision": "confirmed", "inn": "7700000503",
+         "reason": "т", "date": "2026-09-05"},
+    ]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
+
+    class FakeClient:
+        def egr(self, inn):
+            return {"items": [{"ЮЛ": {
+                "ИНН": inn, "ОГРН": "10277" + inn[-8:],
+                "НаимСокрЮЛ": 'ООО "Тест"', "Статус": "Действующая",
+            }}]}
+
+        def bo(self, inn):
+            return {inn: {"2025": {"2110": "1000000"}}}
+
+        def changes(self, inn):
+            return {"items": []}
+
+    db = get_session()
+    try:
+        for row in fake_registry:
+            if not db.get(Company, row["company_id"]):
+                db.add(Company(id=row["company_id"], name=row["company_id"]))
+            leftover = db.query(LegalEntity).filter_by(company_id=row["company_id"]).one_or_none()
+            if leftover is not None:
+                db.delete(leftover)
+        db.commit()
+
+        stats = sync_fns.sync_from_registry(db, FakeClient(), limit=1, dry_run=False)
+        assert stats["confirmed_now"] == 1
+        assert db.query(LegalEntity).filter_by(company_id="fresh-intake").one_or_none() is not None, \
+            "единственная работа обязана достаться самой новой строке реестра"
+        for cid in ("old-campaign-1", "old-campaign-2"):
+            assert db.query(LegalEntity).filter_by(company_id=cid).one_or_none() is None
+    finally:
+        db.close()
+
+
+def test_fns_daily_resync_window_opens_five_minutes_after_utc_midnight():
+    """Докачка по реестру шла только при старте процесса, а старт с
+    3 сентября 2026 даёт лишь пуш кода: бэклог реестра (278 строк 5 сентября)
+    таял бы только по деплоям, а «МорТехПром» из свежего поста ждал бы
+    следующего пуша кода. Окно суточной докачки — через пять минут после
+    полуночи UTC, когда счётчик дневного потолка обнуляется; ждать меньше
+    минуты нельзя (петля при сбое часов)."""
+    from datetime import datetime, timezone
+
+    evening = datetime(2026, 9, 5, 20, 30, tzinfo=timezone.utc)
+    assert main._seconds_until_next_fns_window(evening) == 3 * 3600 + 35 * 60
+    just_after = datetime(2026, 9, 6, 0, 6, tzinfo=timezone.utc)
+    assert main._seconds_until_next_fns_window(just_after) == 24 * 3600 - 60
+    at_window = datetime(2026, 9, 6, 0, 5, tzinfo=timezone.utc)
+    assert main._seconds_until_next_fns_window(at_window) == 24 * 3600
+    almost = datetime(2026, 9, 6, 0, 4, 30, tzinfo=timezone.utc)
+    assert main._seconds_until_next_fns_window(almost) == 60
+    naive = datetime(2026, 9, 5, 20, 30)
+    assert main._seconds_until_next_fns_window(naive) == 3 * 3600 + 35 * 60
