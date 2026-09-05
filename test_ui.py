@@ -2797,7 +2797,10 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
     for row in rows:
         low = row.lower()
         for bad in ("неофициально", "допэмисси", "около", "по оценке", "ipo"):
-            assert bad not in low, row
+            # \b слева, а не сплошной `in`: «около» — обычная приставка в
+            # фамилиях («у Артема Соколова»), и подстрочная проверка находит
+            # её внутри «с-около-ва», хотя к сумме сделки это не относится.
+            assert not re.search(r"\b" + re.escape(bad), low), row
         assert "₽" in row, row  # валютная сумма считается только через рублёвый эквивалент в скобках
     # общие функции суммы существуют и согласованы с правилами
     checks = page.evaluate("""() => ({
