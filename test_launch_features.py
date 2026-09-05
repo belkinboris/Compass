@@ -3222,3 +3222,24 @@ def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkey
         assert main_module._review_chat_ids(db) == ["-1007778889999"]
     finally:
         db.close()
+
+
+def test_home_screen_icon_and_manifest_are_served(client):
+    """Просьба владельца 5 сентября 2026: при «Добавить на экран Домой» на
+    айфоне должен появляться логотип «Компаса». iOS не берёт SVG-фавикон из
+    data:-ссылки — ему нужна PNG-иконка 180×180 по `apple-touch-icon`;
+    Android берёт иконки из манифеста. Всё лежит в static/, без внешних
+    сервисов (сайт обязан работать из России)."""
+    html = client.get("/").text
+    assert 'rel="apple-touch-icon"' in html and "/static/icons/apple-touch-icon.png" in html
+    assert 'rel="manifest"' in html and "/static/site.webmanifest" in html
+    assert 'name="apple-mobile-web-app-title" content="Компас"' in html
+    icon = client.get("/static/icons/apple-touch-icon.png")
+    assert icon.status_code == 200 and icon.headers["content-type"].startswith("image/png")
+    assert icon.content[:8] == b"\x89PNG\r\n\x1a\n"
+    manifest = client.get("/static/site.webmanifest")
+    assert manifest.status_code == 200
+    data = manifest.json()
+    assert data["name"] == "Компас" and data["icons"]
+    for entry in data["icons"]:
+        assert client.get(entry["src"]).status_code == 200, entry
