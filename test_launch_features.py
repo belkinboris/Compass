@@ -660,16 +660,21 @@ def test_saved_assistant_thread(client, monkeypatch):
 
 def test_pdf_export_is_open_to_every_signed_in_user_until_the_subscription_exists(client, monkeypatch):
     """Владелец, 3 сентября 2026: «разрешить авторизованным пользователям
-    скачивать PDF без платной подписки, пока её нет». Гость — 401 (вход
-    нужен), любой вошедший — PDF. Граница тарифа из кода не удалена, а
-    выключена флагом DEAL_EXPORT_ALL_FREE: с ним False бесплатный тариф
-    снова получает 403, платный — PDF."""
+    скачивать PDF без платной подписки, пока её нет»; 5 сентября — «разрешим
+    пдф скачивать всем, даже тем, кто не платил»: гостю вход больше не нужен.
+    Обе границы из кода не удалены, а выключены флагами: DEAL_EXPORT_GUESTS
+    False возвращает гостю 401, DEAL_EXPORT_ALL_FREE False — бесплатному
+    тарифу 403, платный получает PDF в любом случае."""
     # Адреса уникальны на прогон: тестовая база (`test_accounts.db`) чистится
     # только модулем test_accounts.py, и одиночный запуск этого файла после
     # него оставлял бы в базе уже зарегистрированный адрес — 400 на входе.
     stamp = uuid.uuid4().hex[:8]
     free_email, paid_email = f"export-free-{stamp}@firm.ru", f"export-paid-{stamp}@firm.ru"
+    guest = TestClient(main.app).post("/api/deals/g1d36d186/export", json={})
+    assert guest.status_code == 200 and guest.content.startswith(b"%PDF"), "гость скачивает PDF без входа"
+    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", False)
     assert TestClient(main.app).post("/api/deals/g1d36d186/export", json={}).status_code == 401
+    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", True)
     _login(client, free_email)
     response = client.post("/api/deals/g1d36d186/export", json={})
     assert response.status_code == 200

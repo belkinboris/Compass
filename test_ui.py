@@ -461,6 +461,51 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         ctx.close()
 
 
+def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
+    """Просьба владельца 5 сентября 2026: раздел «Аналитики» об изъятых и
+    национализированных активах. Строится по теме «Национализация / иск
+    Генпрокуратуры» (структурный признак, не поиск слов на лету): годы,
+    отрасли, список последних сделок и ссылка на все сделки темы. Проверяем
+    на трёх ширинах: карточка на всю ширину сетки, строки графиков не
+    вылезают за экран (min-width:0 у колонок), ошибок нет."""
+    for width in (1280, 390, 360):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+            pg.wait_for_function(
+                "typeof DEALS !== 'undefined' && DEALS.length > 100 && !!document.getElementById('nationalizedCard')",
+                timeout=20000)
+            pg.wait_for_timeout(700)
+            # .label рисуется капителью (text-transform) — inner_text отдаёт ВЕРХНИЙ регистр.
+            body = pg.inner_text("#nationalizedCard").lower()
+            assert "изъятые и национализированные активы" in body
+            assert "иску генпрокуратуры" in body and "все сделки темы" in body
+            stats = pg.evaluate("""() => {
+              const c = document.getElementById('nationalizedCard');
+              const rows = [...c.querySelectorAll('.nat-grid .an-row')];
+              return {items: c.querySelectorAll('.nat-list .an-deal').length,
+                      years: c.querySelectorAll('.nat-grid > div:first-child .an-row').length,
+                      clipped: rows.filter(r => r.getBoundingClientRect().right > document.documentElement.clientWidth + 1).length,
+                      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+                      opacity: getComputedStyle(c).opacity};
+            }""")
+            assert stats["items"] >= 5, stats
+            assert stats["years"] >= 2, stats
+            assert stats["clipped"] == 0 and stats["overflow"] == 0, (width, stats)
+            assert stats["opacity"] == "1", "карточка осталась прозрачной после анимации проявления"
+            assert not errors, errors
+            # Ссылка на все сделки темы ведёт на список с карточками.
+            pg.click("#nationalizedCard a[href^='#/theme/']")
+            pg.wait_for_timeout(600)
+            assert pg.evaluate("document.querySelectorAll('#app a[href^=\"#/deal/\"]').length") >= 5
+            assert not errors, errors
+        finally:
+            ctx.close()
+
+
 def test_leaving_analytics_before_multiples_reply_does_not_crash_advisors(browser, base_url):
     """2 сентября 2026: health-check поймал `pageerror` на «Консультантах»
     («Cannot set properties of null (setting 'innerHTML')»), хотя ломалась
@@ -614,10 +659,21 @@ def test_pdf_button_note_does_not_get_stuck_on_login_prompt(page, base_url):
     # Кнопка ставила "Готовим PDF…" ДО запроса, а на 401 (гость не вошёл)
     # уводила во всплывающий тост и никогда не убирала эту строку — рядом с
     # кнопками навсегда оставалось "Готовим PDF…", хотя ничего не готовилось.
+    # С 5 сентября 2026 гость получает PDF без входа (DEAL_EXPORT_GUESTS), и
+    # 401 в живом сервере не встречается — ветку проверяем подменой ответа:
+    # флаг когда-нибудь выключат, и строка не должна зависнуть и тогда.
     visit(page, base_url, "#/deal/g1d36d186")
     page.locator("#downloaddeal").click()
-    page.wait_for_selector(".toast")
-    assert page.locator("#dealtoolnote").inner_text() == ""
+    page.wait_for_function(
+        "document.getElementById('dealtoolnote').innerText === 'PDF скачан.'", timeout=15000)
+    page.route("**/api/deals/*/export", lambda route: route.fulfill(
+        status=401, content_type="application/json", body='{"error":"войдите"}'))
+    try:
+        page.locator("#downloaddeal").click()
+        page.wait_for_selector(".toast")
+        assert page.locator("#dealtoolnote").inner_text() == ""
+    finally:
+        page.unroute("**/api/deals/*/export")
 
 
 def test_pre_2022_deals_hidden_from_site(page, base_url):

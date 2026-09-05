@@ -311,6 +311,14 @@ FNS_ALL_FREE = True
 # только для тарифа paid, без другой правки кода и интерфейса.
 DEAL_EXPORT_ALL_FREE = True
 
+# 5 сентября 2026, владелец: «разрешим пдф скачивать всем, даже тем, кто не
+# платил». Вход для карточки в PDF больше не нужен: гость получает файл так
+# же, как вошедший (текст PDF собирается из нашей же базы, ничьих секретов в
+# нём нет). Живая отчётность ФНС (bo_file) под это не попадает — каждый её
+# клик тратит платную квоту API-ФНС. Когда появится подписка — поставить
+# False, и гостю снова вернётся 401 без правки интерфейса (там ветка есть).
+DEAL_EXPORT_GUESTS = True
+
 # Сколько подтверждённых профилей (pipeline/fns_registry.py) докачивать за
 # ОДИН старт процесса. COMPANY_FINANCE_BRIEF.md, раздел П2: расписания нет —
 # новые решения реестра появляются деплоем, и старт после деплоя уже и есть
@@ -2886,9 +2894,9 @@ def list_webinars(db=Depends(get_db)):
 @app.post("/api/deals/{deal_id}/export")
 def export_deal(deal_id: str, _payload: DealExportIn | None = None,
                 user: User | None = Depends(_current_user)):
-    if not user:
+    if not user and not DEAL_EXPORT_GUESTS:
         return JSONResponse({"error": "войдите, чтобы скачать карточку"}, status_code=401)
-    if not DEAL_EXPORT_ALL_FREE and user.tier != UserTier.paid:
+    if user and not DEAL_EXPORT_ALL_FREE and user.tier != UserTier.paid:
         return JSONResponse({"error": "скачивание карточек доступно по подписке"}, status_code=403)
     deal = get_deal(deal_id)
     if not deal:
