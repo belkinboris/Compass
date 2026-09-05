@@ -2992,6 +2992,7 @@ def test_forum_topic_created_is_learned_and_served_by_slug(client, monkeypatch):
     сообщения о её создании, тем же приёмом, что и адрес приватного канала."""
     _mod_env(monkeypatch)
     import main as main_module
+    monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
     r = client.post("/api/telegram/webhook/тайна", json={
         "message": {"message_id": 42, "message_thread_id": 42,
                    "forum_topic_created": {"name": "Подтверждение постов"},
@@ -3010,6 +3011,8 @@ def test_forum_topic_bootstrap_by_typing_its_own_name(client, monkeypatch):
     хранит недоставленные апдейты вечно). Бутстрап: человек один раз печатает
     точное название темы внутри неё самой."""
     _mod_env(monkeypatch)
+    import main as main_module
+    monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
     r = client.post("/api/telegram/webhook/тайна", json={
         "message": {"message_id": 7, "message_thread_id": 99,
                    "text": "Обновления",
@@ -3039,6 +3042,8 @@ def test_forum_topic_bootstrap_tolerates_case_and_stray_whitespace(client, monke
     тому же слагу, что и у служебных сообщений о переименовании (`_topic_slug`)
     — лишний пробел, перенос строки и регистр не мешают узнать своё название."""
     _mod_env(monkeypatch)
+    import main as main_module
+    monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
     r = client.post("/api/telegram/webhook/тайна", json={
         "message": {"message_id": 9, "message_thread_id": 55,
                    "text": " подтверждение постов \n",
@@ -3047,6 +3052,60 @@ def test_forum_topic_bootstrap_tolerates_case_and_stray_whitespace(client, monke
     assert r.status_code == 200
     topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
     assert topics.get("подтверждение-постов") == "55", topics
+
+
+def test_forum_topic_bootstrap_answers_in_the_same_topic_and_only_to_reviewers(client, monkeypatch):
+    """Молчание при успехе неотличимо от молчания при неудаче: 5 сентября 2026
+    владелец напечатал названия тем, не увидел ответа и решил, что нужны две
+    отдельные группы. Бот отвечает «Запомнил» в ту же тему; настраивать
+    консоль может только тот, у кого есть право решать (по отправителю, как
+    у кнопок); а в общей ленте форума номера темы нет — об этом тоже
+    говорится вслух, а не молчится."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    calls = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: calls.append((method, kw)) or {"ok": True})
+
+    def post(text, from_id, thread=None, mid=10):
+        body = {"message_id": mid, "text": text,
+                "chat": {"id": -100111, "type": "supergroup"}, "from": {"id": from_id}}
+        if thread:
+            body["message_thread_id"] = thread
+        return client.post("/api/telegram/webhook/тайна", json={"message": body})
+
+    # Владелец в теме «Обновления»: запомнили и ответили в ту же тему.
+    assert post("Обновления", 111, thread=99).status_code == 200
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert topics.get("обновления") == "99", topics
+    assert len(calls) == 1 and calls[0][0] == "sendMessage"
+    assert calls[0][1]["message_thread_id"] == 99 and calls[0][1]["chat_id"] == "-100111"
+    assert "Запомнил" in calls[0][1]["text"] and "Обновления" in calls[0][1]["text"]
+
+    # Посторонний, попавший в группу, тему не назначит и ответа не получит.
+    calls.clear()
+    assert post("Подтверждение постов", 999, thread=77).status_code == 200
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert "77" not in topics.values() and calls == []
+
+    # Название темы, написанное в общей ленте (без номера темы): для «Общая
+    # информация» это и есть верный ответ — общая лента, запоминать нечего;
+    # для «Подтверждение постов» — объяснение, что писать надо внутри темы.
+    calls.clear()
+    assert post("Общая информация", 111).status_code == 200
+    assert len(calls) == 1 and "message_thread_id" not in calls[0][1]
+    assert "общая лента" in calls[0][1]["text"]
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert "общая-информация" not in topics
+
+    # База у тестов модуля общая — сверяем не «ключа нет», а «ничего не
+    # перезаписано»: значение (если оно есть от соседнего теста) не сдвинулось.
+    before = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    calls.clear()
+    assert post("Подтверждение постов", 111).status_code == 200
+    assert len(calls) == 1 and "внутри темы" in calls[0][1]["text"]
+    after = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert after == before, (before, after)
 
 
 def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):

@@ -2308,29 +2308,66 @@ def _learn_console_topics(payload, db=None) -> bool:
     message = payload.message or {}
     created = message.get("forum_topic_created")
     edited = message.get("forum_topic_edited")
+    known = {_topic_slug(v): k for k, v in CONSOLE_TOPIC_NAMES.items()}
     if created or edited:
-        name = (created or edited or {}).get("name")
+        name = (created or edited or {}).get("name") or ""
         thread_id = message.get("message_thread_id") or message.get("message_id")
-        if db is not None and name and thread_id:
-            slug = _topic_slug(name)
-            if slug in {_topic_slug(v) for v in CONSOLE_TOPIC_NAMES.values()}:
-                _remember_setting(db, "telegram_topic:%s" % slug, str(thread_id))
+        kind = known.get(_topic_slug(name))
+        if db is not None and kind and thread_id:
+            _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
+            _ack_console_topic(message, kind, thread_id)
         return True
     # Бутстрап для тем, заведённых до того, как бот начал слушать служебные
     # сообщения: человек один раз печатает название темы внутри неё. Сверка
     # по слагу (`_topic_slug`), а не строка в строку: первая версия требовала
     # точного совпадения (`text == name`), и лишний пробел от автокоррекции
     # клиента или другой регистр молча не засчитывались — то же слепое пятно,
-    # что и с падежами/окончаниями в других частях кода.
+    # что и с падежами/окончаниями в других частях кода. И бот ОТВЕЧАЕТ в ту
+    # же тему, что запомнил: молчание при успехе неотличимо от молчания при
+    # неудаче — 5 сентября 2026 владелец напечатал названия, не увидел ничего
+    # и решил, что темы не работают и нужны две отдельные группы.
     text = (message.get("text") or "").strip()
+    kind = known.get(_topic_slug(text)) if text else None
+    if db is None or not kind:
+        return False
+    # Право настраивать консоль — у тех же, у кого право решать (по
+    # отправителю, не по чату — см. _is_reviewer).
+    if not _is_reviewer((message.get("from") or {}).get("id")):
+        return False
     thread_id = message.get("message_thread_id")
-    if db is not None and text and thread_id:
-        text_slug = _topic_slug(text)
-        for name in CONSOLE_TOPIC_NAMES.values():
-            if text_slug == _topic_slug(name):
-                _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
-                return True
-    return False
+    if thread_id:
+        _remember_setting(db, "telegram_topic:%s" % _topic_slug(text), str(thread_id))
+    _ack_console_topic(message, kind, thread_id)
+    return True
+
+
+CONSOLE_TOPIC_PURPOSE = {
+    "decision": "всё, что ждёт вашего решения: посты, карточки, сырьё, заявки на доступ",
+    "update": "отчёты о каждом прогоне рутин",
+    "info": "заметки, отзывы и служебные сообщения",
+}
+
+
+def _ack_console_topic(message: dict, kind: str, thread_id) -> None:
+    """Ответить в ту же тему, что её номер запомнили, — или объяснить, почему
+    нет. Общая лента форума (General) номера темы не несёт вовсе: сообщение
+    без `message_thread_id` и так уходит туда, запоминать нечего — но человеку
+    об этом надо сказать, иначе он повторяет попытку и ждёт."""
+    chat_id = (message.get("chat") or {}).get("id")
+    if not chat_id:
+        return
+    name = CONSOLE_TOPIC_NAMES[kind]
+    if thread_id:
+        text = "Запомнил: это тема «%s». Сюда теперь пойдут %s." % (name, CONSOLE_TOPIC_PURPOSE[kind])
+    elif kind == "info":
+        text = ("Понял: «%s» — это общая лента группы, без своей темы. Сюда и так идут %s — "
+                "запоминать ничего не нужно." % (name, CONSOLE_TOPIC_PURPOSE[kind]))
+    else:
+        text = ("«%s» написано в общей ленте, а не внутри темы — так номер темы не узнать. "
+                "Откройте саму тему и напишите её название там." % name)
+    notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=text,
+                                disable_web_page_preview=True,
+                                **({"message_thread_id": thread_id} if thread_id else {}))
 
 
 def _console_thread_id(db, kind: str) -> int | None:
