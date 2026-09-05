@@ -5857,7 +5857,7 @@
    ]
   },
   {
-   "draft_id": "d22734253",
+   "draft_id": "d56840027",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5885,7 +5885,7 @@
    ]
   },
   {
-   "draft_id": "d38261121",
+   "draft_id": "d30554567",
    "title": "Торги по приватизации национализированного у Митюшова «Салаватнефтемаша» пройдут 7 октября",
    "date": "2026-09-05",
    "src": [
@@ -5915,71 +5915,13 @@
    ]
   },
   {
-   "draft_id": "d62714432",
-   "title": "Путин поддержал идею снизить ипотечную ставку для многодетных при покупке дома",
+   "draft_id": "d91169076",
+   "title": "Видео. Путин поддержал идею снизить ставку по ипотеке для многодетных при покупке дома",
    "date": "2026-09-05",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/05/1226607-putin-podderzhal"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d75275116",
-   "title": "Путин поддержал идею льгот для многодетных семей на покупку больших автомобилей",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28083365"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d25355952",
-   "title": "Львова-Белова предложила льготы для многодетных семей при покупке автомобилей",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/05/lvova-belova-predlozhila-novye-lgoty-dlya-mnogodetnyh-semey/"
+     "web:iz.ru",
+     "https://iz.ru/2161842/video/video-putin-podderzhal-ideiu-snizit-stavku-po-ipoteke-dlia-mnogodetnykh-pri-pokupke-doma"
     ]
    ],
    "sum": null,
@@ -5998,6 +5940,62 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54168948",
+   "title": "Ставку по ипотеке снизят, а автомобиль станет проще купить: Путин поддержал новые льготы",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/world/2026/09/05/76627198/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80065729",
+   "title": "«Самое ценное у страусов — это жир»: как фермеры разводят австралийских эму, которых покупают по всей России",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/animals/2026/09/05/76626057/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "по всей России",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "по всей России",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
