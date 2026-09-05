@@ -3246,6 +3246,22 @@ def test_home_screen_icon_and_manifest_are_served(client):
     assert data["name"] == "Компас" and data["icons"]
     for entry in data["icons"]:
         assert client.get(entry["src"]).status_code == 200, entry
+    # Скриншот владельца тем же вечером: в «Add Bookmark» Safari вместо
+    # логотипа — буква «K». Safari не понимает SVG-фавикон в data: и сам
+    # просит /favicon.ico и /apple-touch-icon.png по корню — а catch-all
+    # отдавал на них index.html со статусом 200, то есть HTML вместо
+    # картинки. Корневые адреса обязаны отдавать картинку с верным типом,
+    # а PNG-фавиконы — стоять в <head> рядом с SVG.
+    assert 'rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32.png"' in html
+    for path, ctype, magic in (("/favicon.ico", "image/x-icon", b"\x00\x00\x01\x00"),
+                               ("/apple-touch-icon.png", "image/png", b"\x89PNG"),
+                               ("/apple-touch-icon-precomposed.png", "image/png", b"\x89PNG"),
+                               ("/static/icons/favicon-32.png", "image/png", b"\x89PNG")):
+        r = client.get(path)
+        assert r.status_code == 200 and r.headers["content-type"].startswith(ctype), (path, r.headers)
+        assert r.content.startswith(magic), path
+    # Остальные адреса с .png по-прежнему уходят в приложение (SPA), не в 404
+    assert client.get("/whatever.png").headers["content-type"].startswith("text/html")
 
 
 def test_fns_status_reports_the_last_background_runs_and_the_daily_budget(client):

@@ -3085,6 +3085,34 @@ def post_general_correction(correction: CorrectionIn,
     return _save_correction(None, correction, user, db)
 
 
+# Иконки по корневым адресам, которые браузеры запрашивают САМИ, не читая
+# <link> в <head>: Safari на iPhone просит /favicon.ico для значка закладки
+# (SVG-фавикон в data: он не понимает вовсе) и /apple-touch-icon.png для
+# экрана «Домой». До 5 сентября 2026 эти адреса ловил catch-all ниже и
+# отдавал index.html со статусом 200 — Safari получал HTML вместо картинки,
+# не считал это ошибкой и рисовал вместо логотипа букву «K» (скриншот
+# владельца: окно «Add Bookmark»). Правильный ответ здесь — файл картинки,
+# а не «страница не найдена».
+ROOT_ICONS = {
+    "favicon.ico": ("favicon.ico", "image/x-icon"),
+    "apple-touch-icon.png": ("apple-touch-icon.png", "image/png"),
+    "apple-touch-icon-precomposed.png": ("apple-touch-icon.png", "image/png"),
+    "apple-touch-icon-180x180.png": ("apple-touch-icon.png", "image/png"),
+    "apple-touch-icon-180x180-precomposed.png": ("apple-touch-icon.png", "image/png"),
+}
+
+
+@app.get("/{icon_name}.ico")
+@app.get("/{icon_name}.png")
+def root_icon(icon_name: str, request: Request):
+    name = request.url.path.lstrip("/")
+    if name not in ROOT_ICONS:
+        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    filename, media_type = ROOT_ICONS[name]
+    return FileResponse(os.path.join(STATIC_DIR, "icons", filename), media_type=media_type,
+                        headers={"Cache-Control": "public, max-age=86400"})
+
+
 @app.get("/{full_path:path}")
 def index(full_path: str):
     return FileResponse(os.path.join(STATIC_DIR, "index.html"))

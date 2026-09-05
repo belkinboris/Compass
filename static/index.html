@@ -18,6 +18,12 @@
      apple-touch-icon; Android берёт иконки из манифеста. PNG собраны из того
      же SVG, что и фавикон (static/icons/), тёмный квадрат под скругление
      iOS — прозрачные углы система залила бы чёрным. -->
+<!-- PNG-фавиконы рядом с SVG: Safari на iPhone не понимает SVG-фавикон в data:
+     и без PNG рисует в закладках букву вместо логотипа (владелец, 5 сентября 2026). -->
+<link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+<link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
 <link rel="manifest" href="/static/site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Компас">
