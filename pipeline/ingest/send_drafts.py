@@ -78,13 +78,26 @@ def field(label, value):
     return '%s: %s\n' % (label, value) if value else ''
 
 
+def goes_to_channel(card):
+    """Дойдёт ли карточка до канала, если её одобрить. Тот же гейт, что в
+    send_telegram.py: сделка не первой свежести (`format_post.is_fresh`,
+    30 дней по дате самой сделки; год без месяца свежим не считается) в
+    канал не публикуется вовсе — кроме поста, который владелец продиктовал
+    сам (`post_override`)."""
+    return bool(card.get('post_override')) or format_post.is_fresh(card)
+
+
 def card_message(card):
     """🗂 Проект карточки сайта: поля + предпросмотр. Ответ = заметка."""
     src = next((s[1] for s in card.get('src') or [] if len(s) > 1), '')
+    channel = ('' if goes_to_channel(card) else
+               'В канал не пойдёт: сделке больше %d дней (или у неё известен '
+               'только год) — на сайт выйдет, подписчики уведомления не получат.\n'
+               % format_post.FRESH_DAYS)
     return ('🗂 [карточка %s] — НА САЙТ, на проверку\n'
             '%s\n\n'
             '%s%s%s%s%s%s%s'
-            'Предпросмотр: %s/#/preview/%s\n\n'
+            'Предпросмотр: %s/#/preview/%s\n%s\n'
             '✅/✋ — кнопками. Ответ на это сообщение — заметка для рутины '
             '(«дата не та, в источнике 4 мая»): применит через проверки, не дословно.\n'
             'Молчание сутки — уйдёт на сайт как есть.'
@@ -95,7 +108,7 @@ def card_message(card):
                field('Продавец', card.get('seller')),
                field('Предмет', card.get('asset')) + field('Сумма', card.get('sum'))
                + field('Источник', src),
-               SITE, card['id']))
+               SITE, card['id'], channel))
 
 
 def post_message_text(card, companies):
@@ -276,6 +289,13 @@ def build_plan():
         if not card.get('draft_sent'):
             plan.append((card_message(card), card_keyboard(card),
                          ('card', card, 'draft_sent')))
+        # СДЕЛКА НЕ ПЕРВОЙ СВЕЖЕСТИ В КАНАЛ НЕ ПОЙДЁТ (5 сентября 2026, см.
+        # send_telegram.py и CLAUDE.md, «МорТехПром») — значит, и проект поста
+        # с кнопкой «пост в канал» ей не нужен: это вопрос, ответ на который
+        # ничего не решает («кнопка нужна ровно там, где виден её эффект»).
+        # Карточка (🗂) уходит как обычно и сама говорит, что канал промолчит.
+        if not goes_to_channel(card):
+            continue
         if not card.get('post_draft_sent', card.get('draft_sent')):
             plan.append((post_message_text(card, comps), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))

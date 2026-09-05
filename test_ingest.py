@@ -3305,6 +3305,42 @@ def test_console_withholds_unreviewed_cards(monkeypatch):
     assert unread == 1
 
 
+def test_console_does_not_ask_about_a_post_that_will_never_go_out(monkeypatch):
+    """5 сентября 2026: сделка не первой свежести в канал не публикуется
+    (send_telegram.py) — значит, 📣 «проект поста» с кнопкой «пост в канал»
+    для неё бессмыслен: вопрос, ответ на который ничего не решает. Ровно так
+    «МорТехПром» (год без месяца) получил в консоли пост, был одобрен и ушёл
+    в канал архивом. Карточка 🗂 уходит как обычно и сама говорит, что канал
+    промолчит; свежая сделка по-прежнему получает оба сообщения; текст,
+    продиктованный владельцем (`post_override`), гейт не перекрывает."""
+    import promote
+    import send_drafts
+    cards = [
+        {"id": "g-old", "title": "Старая сделка", "date": "2026", "reviewed": "2026-09-05",
+         "src": [["Т", "https://t.example/1"]]},
+        {"id": "g-new", "title": "Свежая сделка", "date": FRESH_DATE, "reviewed": "2026-09-05",
+         "src": [["Т", "https://t.example/2"]]},
+        {"id": "g-dictated", "title": "Старая, но с текстом владельца", "date": "2024-01-15",
+         "reviewed": "2026-09-05", "post_override": "Текст от владельца",
+         "src": [["Т", "https://t.example/3"]]},
+    ]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts.promote, "load_state",
+                        lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, *_rest = send_drafts.build_plan()
+    marks = {(item["id"], mark) for _t, _kb, (kind, item, mark) in plan if kind == "card"}
+    assert ("g-old", "draft_sent") in marks, "карточка старой сделки на сайт всё равно идёт"
+    assert ("g-old", "post_draft_sent") not in marks, "проект поста для старой сделки не нужен"
+    assert ("g-new", "post_draft_sent") in marks
+    assert ("g-dictated", "post_draft_sent") in marks, "текст владельца гейт не перекрывает"
+    old_text = next(t for t, _kb, (_k, item, mark) in plan if item["id"] == "g-old" and mark == "draft_sent")
+    assert "В канал не пойдёт" in old_text
+    new_text = next(t for t, _kb, (_k, item, mark) in plan if item["id"] == "g-new" and mark == "draft_sent")
+    assert "В канал не пойдёт" not in new_text
+
+
 def test_classifier_rejects_live_console_junk():
     """Госзакупки, советы, антиквариат и операции Минфина — не кандидаты.
 
