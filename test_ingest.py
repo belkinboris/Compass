@@ -2349,6 +2349,15 @@ def test_old_deal_is_posted_as_news_about_a_known_deal():
     assert "Сделка из базы" in format_post.render(dict(ingest, added="2026-06-01"), {}, today=today)
     assert "Сделка из базы" in format_post.render(dict(ingest, from_ingest=False), {}, today=today)
     assert "Сделка из базы" in format_post.render(dict(ingest, date="2025"), {}, today=today)
+    # Карточка притока с полной датой старше 30 дней — тоже новость, если приток
+    # завёл её на этой неделе («МорТехПром»: доля перешла 4 августа, статья —
+    # 4 сентября). Давняя сделка (старше полугода) новостью не становится, а
+    # без признака притока действует прежнее правило по дате сделки.
+    late = dict(old, date="2026-06-20", from_ingest=True, added="2026-08-03")
+    assert "Сделка из базы" not in format_post.render(late, {}, today=today)
+    assert "Сделка из базы" in format_post.render(dict(late, date="2025-06-20"), {}, today=today)
+    assert "Сделка из базы" in format_post.render(dict(late, from_ingest=False), {}, today=today)
+    assert format_post.is_fresh(late, today) and not format_post.is_fresh(dict(late, added="2026-06-01"), today)
 
     # НОВИЗНУ ОБЕЩАЕМ, ТОЛЬКО ЕСЛИ ЕСТЬ ЧТО СКАЗАТЬ. 7 августа в канал ушёл пост
     # «Новое о сделке · май 2026» про бизнес-центр «Обсидиан», в котором про

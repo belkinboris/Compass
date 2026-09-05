@@ -352,6 +352,9 @@ def fmt_month(raw):
 # Сколько дней сделка считается свежей новостью. Дальше пост читается не как
 # объявление о сделке, а как сообщение о новых сведениях по известной сделке.
 FRESH_DAYS = 30
+# Для карточки притока новость свежая по дню появления в базе (`added`), а
+# дата самой сделки лишь отсекает давние истории — см. is_fresh().
+INGEST_DEAL_MAX_AGE_DAYS = 180
 
 
 def deal_age_days(deal, today=None):
@@ -586,20 +589,32 @@ def is_fresh(deal, today=None):
     Свежесть такой карточки считаем по дню, когда приток её завёл (`added`).
     Архивные карточки без `from_ingest` под исключение не попадают — их
     прежнее правило и держало.
+
+    То же — для карточки притока с ПОЛНОЙ датой, которая старше 30 дней:
+    у «МорТехПрома» доля перешла 4 августа (так в ЕГРЮЛ), а газета написала
+    4 сентября — для читателя канала это новость, а не архив. Приток пишет
+    о том, что вышло сегодня, поэтому для его карточек новость свежая по
+    `added`, а дата сделки лишь отсекает давние истории (`INGEST_DEAL_MAX_AGE_
+    DAYS`): статья «как продавали X два года назад» новостью не становится.
     """
+    now = today or date.today()
     age = deal_age_days(deal, today)
-    if age is not None:
-        return age <= FRESH_DAYS
     raw = str(deal.get('date') or '')
-    if deal.get('from_ingest') and re.fullmatch(r'\d{4}', raw):
-        now = today or date.today()
+    if deal.get('from_ingest'):
         added = str(deal.get('added') or '')
-        if int(raw) == now.year and re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
+        added_age = None
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
             try:
-                return (now - datetime.strptime(added, '%Y-%m-%d').date()).days <= FRESH_DAYS
+                added_age = (now - datetime.strptime(added, '%Y-%m-%d').date()).days
             except ValueError:
-                return False
-    return False
+                added_age = None
+        if added_age is not None and added_age <= FRESH_DAYS:
+            if age is not None:
+                return age <= INGEST_DEAL_MAX_AGE_DAYS
+            if re.fullmatch(r'\d{4}', raw):
+                return int(raw) == now.year
+            return False
+    return age is not None and age <= FRESH_DAYS
 
 
 def render(deal, companies, updates=(), today=None, fin=None):
