@@ -809,7 +809,8 @@
   "d16941704": "auto-drop",
   "d42935794": "auto-drop",
   "d64208206": "auto-drop",
-  "d84014612": "auto-drop"
+  "d84014612": "auto-drop",
+  "d88752633": "enrich:gmortehprom2026"
  },
  "sent_raw": [
   "d89202979",
@@ -1148,7 +1149,9 @@
   "d63869168",
   "d55500439",
   "d80035156",
-  "d19912982"
+  "d19912982",
+  "d80823918",
+  "d88752633"
  ],
  "raw_titles": {
   "всшавыставилинапродажудомдетстванилаармстронга": "drop",
@@ -2128,7 +2131,9 @@
   "сестрыуильямсневышливовторойраундпарноготурнираusopen": "auto-drop",
   "xdofjustthreemonthsoutofstealthisintalksforaseriesbata12bvaluation": "auto-drop",
   "aicomputeprovidernscaleislookingfor35binpreipofinancing": "auto-drop",
-  "россиянамрассказалиопокупкеавтомобилянаматкапитал": "auto-drop"
+  "россиянамрассказалиопокупкеавтомобилянаматкапитал": "auto-drop",
+  "главаросавиациисообщилопереговорахоакопродажемс21дружественнымстранам": "sent",
+  "владельцыпромкластеравколпинокупилипроизводствокорабельногооборудования": "enrich:gmortehprom2026"
  },
  "discarded_urls": {
   "https://t.me/rusven/7641": {
