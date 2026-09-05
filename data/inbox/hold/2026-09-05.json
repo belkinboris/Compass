@@ -5857,7 +5857,7 @@
    ]
   },
   {
-   "draft_id": "d45427603",
+   "draft_id": "d75862704",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5885,7 +5885,7 @@
    ]
   },
   {
-   "draft_id": "d49028795",
+   "draft_id": "d50980907",
    "title": "Торги по приватизации национализированного у Митюшова «Салаватнефтемаша» пройдут 7 октября",
    "date": "2026-09-05",
    "src": [
@@ -5915,13 +5915,52 @@
    ]
   },
   {
-   "draft_id": "d15747456",
-   "title": "Итальянский концерн Leonardo готовится к поглощениям на Украине",
+   "draft_id": "d54802585",
+   "title": "YouTube-блогер купил крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
    "date": "2026-09-05",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/05/1226591-italyanskii-kontsern-leonardo"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/youtube-bloger-kupil-krupnyj-paket-aktsij-gopro-posle-etogo-kompaniya-zayavila-chto-budet-prodavat-oborudovanie-dlya-ii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-05",
+     "title": "Сделка завершена",
+     "note": "Акции GoPro выросли более чем на 183% за неделю на фоне покупки блогером Marquiplier доли в компании и объявленного слияния со Starman Optical для перехода к производству ИИ-компонентов.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/youtube-bloger-kupil-krupnyj-paket-aktsij-gopro-posle-etogo-kompaniya-zayavila-chto-budet-prodavat-oborudovanie-dlya-ii/"
+     ]
+    }
+   ],
+   "buyer_name": "YouTube-блогер",
+   "asset": "крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "YouTube-блогер",
+    "asset": "крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d72280925",
+   "title": "Продают по 250 рублей за литр! Как россияне делают деньги на топливном кризисе",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/business/2026/09/05/76626916/"
     ]
    ],
    "sum": null,
