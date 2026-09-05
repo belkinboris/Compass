@@ -3361,3 +3361,38 @@ def test_fns_daily_resync_window_opens_five_minutes_after_utc_midnight():
     assert main._seconds_until_next_fns_window(almost) == 60
     naive = datetime(2026, 9, 5, 20, 30)
     assert main._seconds_until_next_fns_window(naive) == 3 * 3600 + 35 * 60
+
+
+def test_deal_pdf_embeds_a_cyrillic_font_shipped_with_the_site():
+    """Аудит перед бетой (5 сентября 2026): выгруженный с боевого сайта PDF
+    карточки Яндекса перечислял невстроенные Helvetica/ZapfDingbats — на
+    хосте нет системных DejaVu/Liberation, и кириллица превращалась в
+    квадраты. Шрифт теперь едет в поставке (static/fonts) и берётся оттуда
+    первым; PDF обязан нести встроенный TrueType с кириллицей."""
+    import deal_export
+
+    regular = deal_export._font_path("DejaVuSans.ttf", "LiberationSans-Regular.ttf")
+    bold = deal_export._font_path("DejaVuSans-Bold.ttf", "LiberationSans-Bold.ttf")
+    assert regular and regular.startswith(str(deal_export.FONT_DIR)), regular
+    assert bold and bold.startswith(str(deal_export.FONT_DIR)), bold
+    deal = {"id": "pdf-test", "title": "Тестовая сделка: покупка ООО «Ромашка» за 1,5 млрд ₽",
+            "date": "2026-09-05", "status": "Закрыта", "type": "M&A", "sum": "1,5 млрд ₽",
+            "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": []}
+    pdf = deal_export.render_deal_pdf(deal)
+    assert pdf.startswith(b"%PDF")
+    assert b"/FontFile2" in pdf, "TrueType-шрифт не встроен"
+    assert b"DejaVuSans" in pdf or b"LiberationSans" in pdf, "нет шрифта с кириллицей"
+
+
+def test_owner_payload_names_the_bank_of_russia_by_inn():
+    """У РКЦ Банка России тот же ИНН, что у самого ЦБ, и API-ФНС отдаёт для
+    учредителя Сбербанка имя ликвидированного РКЦ г. Курильска (аудит перед
+    бетой, 5 сентября 2026). Имя по ИНН — «Банк России»."""
+    row = OwnershipStake(owner_key="k", owner_name="РКЦ  Г. КУРИЛЬСКА", owner_type="legal",
+                         inn="7702235133", ogrn="1026501100515", country=None,
+                         share_percent=None, nominal_value_rub=None)
+    assert main._owner_payload(row)["name"] == "Банк России"
+    other = OwnershipStake(owner_key="k2", owner_name="ООО «Ромашка»", owner_type="legal",
+                           inn="7700000001", ogrn=None, country=None, share_percent=None,
+                           nominal_value_rub=None)
+    assert main._owner_payload(other)["name"] == "ООО «Ромашка»"

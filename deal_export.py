@@ -17,8 +17,17 @@ from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer, 
 from xml.sax.saxutils import escape
 
 
+# Шрифт с кириллицей едет В ПОСТАВКЕ (static/fonts/DejaVuSans*.ttf, лицензия
+# DejaVu/Bitstream Vera — свободная), а системные каталоги — только запасной
+# путь. До 5 сентября 2026 искали только в /usr/share/fonts: в среде
+# разработки они есть, на боевом хосте — нет, и PDF уходил читателю на
+# Helvetica без кириллицы — квадраты вместо русского текста (аудит перед
+# бетой). Проверять надо файл из того же окружения, где работает сайт.
+FONT_DIR = Path(__file__).resolve().parent / "static" / "fonts"
+
+
 def _font_path(*names: str) -> str | None:
-    roots = [Path("/usr/share/fonts/truetype/dejavu"), Path("/usr/share/fonts/truetype/liberation2")]
+    roots = [FONT_DIR, Path("/usr/share/fonts/truetype/dejavu"), Path("/usr/share/fonts/truetype/liberation2")]
     for root in roots:
         for name in names:
             path = root / name

@@ -54,7 +54,13 @@ from sqlalchemy import select
 MIN_MULTIPLE = 0.1
 MAX_MULTIPLE = 15.0
 MIN_STAKE_PERCENT = 95.0
-MAX_YEAR_GAP = 1
+# Отчётность — за последний ПОЛНЫЙ год до сделки (разрыв 1), на крайний
+# случай — за позапрошлый (разрыв 2: отчёт за прошлый год ещё не сдан).
+# Тот же год, что и сделка, не годится: на дату сделки его результата не
+# существует (аудит 5 сентября 2026: цену февраля 2025 делили на выручку
+# за весь 2025 год).
+MIN_YEAR_GAP = 1
+MAX_YEAR_GAP = 2
 MIN_YEAR = 2022
 MIN_INDUSTRY_SAMPLE = 3
 
@@ -66,7 +72,14 @@ _RUB_AMOUNT = re.compile(
     r'\s*(?P<unit>тыс|млн|млрд|трлн)\.?\s*₽',
     re.I)
 _STAKE_PCT = re.compile(r'(\d{1,3}(?:[.,]\d+)?)\s*%')
-_ESTIMATE = re.compile(r'оценк|оценив', re.I)
+# Не твёрдая цена: оценка, «около»/«~»/«до», сумма одного этапа или один из
+# вариантов («или EV…»), допэмиссия, «без учёта долга», неофициальные и
+# предварительные цифры (аудит 5 сентября 2026: «~100 млн ₽ (или EV ~1 млрд
+# ₽)» и «400 млн ₽ (первый этап)» проходили как цена и давали ×0,55 и ×9,28).
+_ESTIMATE = re.compile(
+    r'оценк|оценив|~|≈|около|^\s*до\s|не\s+более|\bили\b|этап|допэмисс|без\s+уч[её]т'
+    r'|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|запрашива|ориентировочн',
+    re.I)
 
 
 def parse_rub_sum(text: str | None) -> float | None:
@@ -102,7 +115,11 @@ def stake_percent(deal: dict[str, Any]) -> float | None:
     ТРЕТИРУЕМ как потенциально 100% (это стандартное умолчание для сделок
     смены контроля без явно указанной меньшей доли), а не отбрасываем;
     отбрасываются только сделки, где доля НАЗВАНА и она меньше порога."""
-    for text in (deal.get('eco', {}).get('share'), deal.get('asset')):
+    # Заголовок — тоже место, где названа доля («Ростех приобрел 25% в …»,
+    # «Софтлайн купил 51% К2-9b»): у 24 из 83 кандидатов (замер 5 сентября
+    # 2026) доля стояла ТОЛЬКО в заголовке, и сумму за пакет делили на
+    # выручку всей компании.
+    for text in (deal.get('eco', {}).get('share'), deal.get('asset'), deal.get('title')):
         if not text:
             continue
         nums = [float(x.replace(',', '.')) for x in _STAKE_PCT.findall(text)]
@@ -185,7 +202,7 @@ def _sanity_checked_multiple(sum_rub: float, metric_rub: float | None,
     не жили в двух копиях для выручки и для операционной прибыли."""
     if metric_rub is None or metric_year is None or metric_rub <= 0:
         return None
-    if deal_year - metric_year > MAX_YEAR_GAP or deal_year - metric_year < 0:
+    if not (MIN_YEAR_GAP <= deal_year - metric_year <= MAX_YEAR_GAP):
         return None
     multiple = sum_rub / metric_rub
     if not (MIN_MULTIPLE <= multiple <= MAX_MULTIPLE):
@@ -307,7 +324,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             continue
         report = db.scalar(select(FinancialReport).where(
             FinancialReport.legal_entity_id == entity.id,
-            FinancialReport.year < cand.year + 1,
+            FinancialReport.year < cand.year,
             FinancialReport.revenue_rub.is_not(None),
         ).order_by(FinancialReport.year.desc()))
         if not report:
@@ -350,7 +367,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'компания покупателю. Считаем его только там, где сравнение честное: '
             'компания куплена целиком (доля 95% и выше), цену назвали сами стороны '
             'и в рублях (оценки экспертов не в счёт), а выручка взята из отчётности '
-            'за год сделки или предыдущий. Значения вне разумных границ не '
+            'за последний полный год до сделки (или за позапрошлый, если прошлогодний ещё не сдан). Значения вне разумных границ не '
             'показываем: почти всегда это значит, что отчётность нашлась не у того '
             'юрлица, а не что сделка настолько необычная. В цену сделки иногда '
             'входит и принятый на себя долг компании — тогда мультипликатор '

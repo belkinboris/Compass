@@ -798,13 +798,28 @@ def _fmt_date(ds: str) -> str:
     return ds[:4]
 
 
+def _source_link(doc: Doc) -> str:
+    """Первый внешний источник карточки — ссылкой рядом со сделкой. Экран
+    ассистента обещает первоисточник в каждом ответе, а ответ «по базе» до
+    5 сентября 2026 давал только ссылку на карточку «Компаса» (аудит перед
+    бетой, вопрос про Boxberry). Ссылка на карточку и ссылка на источник —
+    разные вещи, и читатель должен видеть обе."""
+    for item in doc.raw.get("src") or []:
+        if isinstance(item, list) and len(item) > 1 and str(item[1]).startswith("http"):
+            label = str(item[0] or "источник").strip()
+            return f" · [{label}]({item[1]})"
+        if isinstance(item, str) and item.startswith("http"):
+            return f" · [источник]({item})"
+    return ""
+
+
 def _line(doc: Doc) -> str:
     bits = [_fmt_date(doc.date)]
     if has_fact(doc.sum_text):
         bits.append(doc.sum_text)
     if doc.status:
         bits.append(doc.status.lower())
-    return f"- {_link(doc)} — {', '.join(bits)}"
+    return f"- {_link(doc)} — {', '.join(bits)}{_source_link(doc)}"
 
 
 def _plural(n: int, one: str, few: str, many: str) -> str:

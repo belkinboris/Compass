@@ -430,6 +430,7 @@ nav a.on::after,nav a:hover::after{width:100%}
 .deal-title{font-family:var(--f-display);font-weight:500;font-size:19.5px;line-height:1.34;transition:color .2s}
 .deal-row:hover .deal-title{color:var(--accent)}
 .deal-row.mini:hover .deal-title{color:var(--steel)}
+.date-kind{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:2px}
 .deal-sub{color:var(--muted);font-size:13.5px;margin-top:6px}
 .deal-meta{text-align:right}
 .deal-sum{font-family:var(--f-display);font-weight:600;font-size:17.5px}
@@ -1604,13 +1605,22 @@ async function renderCompare(){
   const ids=compareIds();
   app.innerHTML=`<a class="back reveal" href="#/companies">← Все компании</a><div class="sec-head reveal"><span class="label">Рабочий инструмент</span><h1>Сравнение компаний</h1><p>Сделки, роли, финансовые показатели и текущие участники — рядом. Можно выбрать до трёх компаний.</p></div>${ids.length?`<div id="compareGrid" class="compare-grid reveal" style="--compare-cols:${ids.length}"></div>`:`<div class="compare-empty reveal">Компании пока не выбраны. Откройте профиль компании и нажмите «Добавить к сравнению».</div>`}`;
   if(!ids.length){rerun();renderCompareTray();return;}
-  const fns=await Promise.all(ids.map(compareFnsData));
+  const [fns, bankFin]=await Promise.all([Promise.all(ids.map(compareFnsData)), loadBankFinance()]);
   const grid=document.getElementById("compareGrid"); if(!grid)return;
   grid.innerHTML=ids.map((id,i)=>{
     const c=co(id), base=compareBaseRows(id), entry=fns[i], report=entry&&entry.reports&&entry.reports[0], ownership=entry&&entry.ownership;
     const owners=ownership&&ownership.current||[];
-    const finance=report?`<div class="compare-section"><h3>Финансы · ${report.year}</h3>${[["Выручка",report.revenue_rub],["Чистая прибыль",report.net_profit_rub],["Активы",report.assets_rub],["Капитал",report.equity_rub]].map(([k,v])=>`<div class="compare-row"><span class="k">${k}</span><span class="v">${fnsMoney(v)}</span></div>`).join("")}<p class="fns-disclaimer">${esc(entry.entity.legal_name)}</p></div>`:`<div class="compare-section"><h3>Финансы</h3><p class="fns-disclaimer">Подтверждённая БФО пока не загружена.</p></div>`;
-    const ownerBlock=owners.length?`<div class="compare-section"><h3>Текущие участники</h3>${owners.slice(0,4).map(o=>`<div class="compare-owner"><div class="name">${esc(o.name)}</div><div class="share">${ownerShareLabel(o.share_percent)}</div></div>`).join("")}${owners.length>4?`<p class="fns-disclaimer">И ещё ${owners.length-4}</p>`:""}</div>`:"";
+    /* Банк: у него нет БФО в ФНС, зато есть баланс и прибыль по данным Банка
+       России — те же цифры, что на профиле (bank_finance.json). До 5 сентября
+       2026 сравнение писало Сбербанку «БФО пока не загружена» при живом
+       блоке ЦБ на его же профиле (аудит перед бетой). */
+    const bank=bankFin&&bankFin[id];
+    const bankFinance=(!report&&bank&&bank.assets_rub)?`<div class="compare-section"><h3>По данным Банка России</h3>${[["Активы",bank.assets_rub],["Собственные средства",bank.equity_rub],["Чистая прибыль",bank.net_profit_rub]].map(([k,v])=>`<div class="compare-row"><span class="k">${k}</span><span class="v">${fnsMoney(v)}</span></div>`).join("")}<p class="fns-disclaimer">${esc(bank.legal_name||c.name)}: баланс на ${fmtDate(bank.as_of_balance)}, прибыль на ${fmtDate(bank.as_of_profit)} (формы 806 и 102, отчётность юрлица, не группы).</p></div>`:"";
+    /* ЕГРЮЛ не ведёт реестр акционеров АО — у Сбербанка это учредители при
+       регистрации, а не «текущие участники» (там и всплыл «РКЦ г. Курильска»). */
+    const ownersHeading=ownership&&ownership.is_ao?"Учредители при регистрации (ЕГРЮЛ не ведёт реестр акционеров АО)":"Текущие участники";
+    const finance=report?`<div class="compare-section"><h3>Финансы · ${report.year}</h3>${[["Выручка",report.revenue_rub],["Чистая прибыль",report.net_profit_rub],["Активы",report.assets_rub],["Капитал",report.equity_rub]].map(([k,v])=>`<div class="compare-row"><span class="k">${k}</span><span class="v">${fnsMoney(v)}</span></div>`).join("")}<p class="fns-disclaimer">${esc(entry.entity.legal_name)} — отчётность юрлица по РСБУ, не консолидированная отчётность группы.</p></div>`:(bankFinance||`<div class="compare-section"><h3>Финансы</h3><p class="fns-disclaimer">Подтверждённая отчётность пока не загружена.</p></div>`);
+    const ownerBlock=owners.length?`<div class="compare-section"><h3>${ownersHeading}</h3>${owners.slice(0,4).map(o=>`<div class="compare-owner"><div class="name">${esc(o.name)}</div><div class="share">${ownerShareLabel(o.share_percent)}</div></div>`).join("")}${owners.length>4?`<p class="fns-disclaimer">И ещё ${owners.length-4}</p>`:""}</div>`:"";
     return `<article class="compare-card"><div class="compare-card-head"><button class="compare-remove" data-compare-remove="${id}" aria-label="Убрать из сравнения">×</button><span class="tag">${esc(c.ind)}</span><h2><a href="#/companies/${id}">${esc(c.name)}</a></h2><p>${esc(c.desc)}</p></div><div class="compare-section"><h3>Сделки</h3><div class="compare-row"><span class="k">Всего в базе</span><span class="v">${base.deals.length}</span></div><div class="compare-row"><span class="k">Как покупатель</span><span class="v">${base.buyer}</span></div><div class="compare-row"><span class="k">Как продавец</span><span class="v">${base.seller}</span></div><div class="compare-row"><span class="k">Как объект сделки</span><span class="v">${base.target}</span></div>${base.latest?`<a class="relationship-latest" href="#/deal/${base.latest.id}">Последняя: ${fmtDate(base.latest.date)} · ${esc(base.latest.title)} →</a>`:""}</div>${finance}${ownerBlock}<div class="compare-section"><a class="chip" href="#/companies/${id}">Открыть профиль</a></div></article>`;
   }).join("");
   grid.querySelectorAll("[data-compare-remove]").forEach(b=>b.onclick=()=>{saveCompareIds(ids.filter(id=>id!==b.dataset.compareRemove));renderCompare();});
@@ -3341,7 +3351,7 @@ function unifiedFeed(){
        отличается по месяцу от даты публикации. */
     full: d => `
     <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(d.added||d.date)}</span>${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
+      <div><span class="label num">${fmtDate(d.added||d.date)}</span>${dealDateNote(d)?`<span class="date-kind">добавлено</span>`:""}${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
       <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}${dealDateNote(d)}</div></div>
       ${dealMetaHtml(d)}
     </a>`,
@@ -5664,6 +5674,30 @@ async function mountCompanyFns(companyId){
   draw();
 }
 
+/* Сумма сделки для агрегатов — ОДНИ правила на «Аналитику» и страницу отрасли
+   (до 5 сентября 2026 у каждой была своя копия, и списки слов разошлись).
+   sumBillionsRub: миллиарды РУБЛЕЙ, и только если в строке есть рублёвое
+   число («не более $2 млрд (193 млрд ₽)» — 193, «$3,2 млрд» — 0); диапазон —
+   по нижней границе. isSoftSum: не твёрдая цена — оценки, стартовые цены,
+   «около/~/до/не более», «неофициально», объём допэмиссии, «без учёта долга»,
+   предварительные и ожидаемые суммы (аудит перед бетой нашёл в «крупнейших»
+   «300 млрд ₽ (неофициально)» и «около 500 млрд ₽ (допэмиссия ВТБ)»). `\w`
+   тут не годится: в JS он не знает кириллицы. countsAsPrice: у незакрытых
+   торгов в `sum` стоит цена продавца, у сорвавшейся сделки — цифра без
+   сделки. */
+const sumBillionsRub = s => {
+  const m=(s||"").replace(/\u00a0/g," ").match(/(\d+(?:[.,]\d+)?)(?:\s*[–—-]\s*\d+(?:[.,]\d+)?)?\s*(млн|млрд|трлн)\.?\s*₽/i);
+  if(!m) return 0;
+  const n=parseFloat(m[1].replace(",","."));
+  return m[2].toLowerCase()==="млн" ? n/1000 : m[2].toLowerCase()==="трлн" ? n*1000 : n;
+};
+const isSoftSum = s => /оценк|оценив|экспертн|расчётн|расчетн|начальн[а-яё]*\s+цен|стартов[а-яё]*\s+цен|запрашива|по\s+капитализации|оценочн|~|≈|около|^\s*до\s|не\s+более|(?:^|[^а-яё])или(?![а-яё])|этап|допэмисс|без\s+уч[её]т|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|ориентировочн/i.test(s||"");
+const countsAsPrice = d => d.status !== "Не состоялась" && !(d.type === "Продажа с торгов" && d.status !== "Закрыта")
+  // IPO не складывается с покупками: у размещения в `sum` стоит то объём
+  // размещения (11,5 млрд ₽ у МТС Банка), то оценка всей компании (200–219
+  // млрд ₽ у Совкомбанка) — разные величины под одной подписью.
+  && !/ipo/i.test(String(d.type||""));
+
 // Мультипликаторы для «Экономиста» — та же методика, что deal_multiples.py
 // (Этап 16, П1 — по выручке; следом — по операционной прибыли), но
 // посчитанная на уже загруженных данных карточки без второго запроса к
@@ -5685,14 +5719,17 @@ function _dealMultipleSumRub(d, targetId){
   if(d.type !== "M&A") return null;
   if(!(d.buyer || d.buyer_name) || !(d.seller || d.seller_id)) return null;
   const sumText = d.sum || "";
-  if(/оценк|оценив/i.test(sumText)) return null;
+  // Не твёрдая цена (то же правило, что _ESTIMATE в deal_multiples.py).
+  if(/оценк|оценив|~|≈|около|^\s*до\s|не\s+более|(?:^|[^а-яё])или(?![а-яё])|этап|допэмисс|без\s+уч[её]т|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|запрашива|ориентировочн/i.test(sumText)) return null;
   const m = sumText.match(/(\d[\d\s ]*(?:[.,]\d+)?)(?:\s*[–—-]\s*(\d[\d\s ]*(?:[.,]\d+)?))?\s*(тыс|млн|млрд|трлн)\.?\s*₽/i);
   if(!m) return null;
   const num = s => parseFloat(s.replace(/[\s ]/g,"").replace(",", "."));
   const unitMult = {"тыс":1e3,"млн":1e6,"млрд":1e9,"трлн":1e12}[m[3].toLowerCase()];
   const n1 = num(m[1]), n2 = m[2] ? num(m[2]) : null;
   const sumRub = ((n1 + (n2!=null?n2:n1)) / 2) * unitMult;
-  const shareText = (d.eco && d.eco.share) || d.asset || "";
+  // Доля — и из заголовка тоже («Ростех приобрел 25% в …»): у 24 из 83
+  // кандидатов (замер 5 сентября 2026) она стояла только там.
+  const shareText = [(d.eco && d.eco.share), d.asset, d.title].filter(Boolean).join(" ");
   const stakeMatches = [...shareText.matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
   const plausibleStake = stakeMatches.filter(x=>x>=1&&x<=100);
   if(plausibleStake.length && Math.max(...plausibleStake) < 95) return null;
@@ -5703,8 +5740,10 @@ function dealMultipleLine(d, targetId, revenueRub, revenueYear){
   if(!revenueRub || revenueRub <= 0) return null;
   const dealYear = Number(String(d.date||"").slice(0,4));
   if(!Number.isFinite(dealYear) || !Number.isFinite(revenueYear)) return null;
+  // Отчёт — за последний полный год ДО сделки (разрыв 1), на крайний случай
+  // за позапрошлый (2); тот же год не годится — на дату сделки его нет.
   const gap = dealYear - revenueYear;
-  if(gap < 0 || gap > 1) return null;
+  if(gap < 1 || gap > 2) return null;
   const sumRub = _dealMultipleSumRub(d, targetId);
   if(!sumRub) return null;
   const multiple = sumRub / revenueRub;
@@ -5722,7 +5761,7 @@ function dealMultipleLineOp(d, targetId, opProfitRub, opProfitYear){
   const dealYear = Number(String(d.date||"").slice(0,4));
   if(!Number.isFinite(dealYear) || !Number.isFinite(opProfitYear)) return null;
   const gap = dealYear - opProfitYear;
-  if(gap < 0 || gap > 1) return null;
+  if(gap < 1 || gap > 2) return null;
   const sumRub = _dealMultipleSumRub(d, targetId);
   if(!sumRub) return null;
   const multiple = sumRub / opProfitRub;
@@ -6038,7 +6077,7 @@ function renderAdvisors(){
     <div class="advisor-list reveal">
       ${rows.map(r=>`<article class="advisor-card">
         <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
-        <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">Сделок пока нет</span>`}</div>
+        <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">В базе пока нет подтверждённых сделок</span>`}</div>
       </article>`).join("")}
     </div>`;
   } else if(advType==="invest"){
@@ -6052,7 +6091,7 @@ function renderAdvisors(){
     <div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
       <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
       <div class="advisor-card-groups"><span class="label">Профиль</span><br>${r.f.desc||r.f.g.join(" · ")}</div>
-      <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">Сделок пока нет</span>`}</div>
+      <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">В базе пока нет подтверждённых сделок</span>`}</div>
     </article>`).join("")}</div>`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
@@ -6198,9 +6237,9 @@ function firmSummaryHtml(id, full, mini, bulk){
     </div>`:""}
     ${repeat.length?`
     <div class="an-card reveal">
-      <span class="label">Возвращаются к фирме</span>
+      <span class="label">Компании в нескольких сделках фирмы</span>
       ${repeat.map(([cid,n])=>`<a class="an-deal" href="#/companies/${cid}"><div class="an-deal-head"><span class="an-deal-t">${co(cid).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"сделка","сделки","сделок")} с участием компании</span></a>`).join("")}
-      ${note(`Компании, которые встречаются в сделках фирмы не по одному разу — как покупатель, продавец или предмет сделки.`)}
+      ${note(`Компании, которые встречаются в сделках фирмы не по одному разу — как покупатель, продавец или предмет сделки. Это не обязательно клиенты фирмы: чью сторону она вела, сказано в каждой сделке.`)}
     </div>`:""}
   </div>`;
 }
@@ -6240,7 +6279,7 @@ function renderFirm(id){
     <div><span class="label num">${fmtDate(d.date)}</span></div>
     <div>
       <div class="deal-title" style="font-size:17px">${d.title}</div>
-      <div class="deal-sub">${role?role[0]:""}${role&&role[2]?` — ${role[2]}`:""}</div>
+      <div class="deal-sub">${role?role[0]:""}${role&&advCleanNote(role[2])?` — ${advCleanNote(role[2])}`:""}</div>
     </div>
     ${dealMetaHtml(d)}
   </a>`;}).join("")}
@@ -6276,11 +6315,9 @@ function renderIndustry(ind){
   const all = [...DEALS.filter(x=>hasIndustry(x,ind)), ...MINI_DEALS.filter(x=>x.ind===ind), ...CHANNEL_DEALS.filter(x=>x.ind===ind), ...BULK_DEALS.filter(x=>x.ind===ind)];
   if(!all.length){ location.hash = "#/analytics"; return; }
   const cards = DEALS.filter(d=>hasIndustry(d,ind));
-  const parseB = s => {const m=(s||"").replace(",",".").match(/([\d.]+)\s*млрд/); return m?parseFloat(m[1]):0;};
-  // Экспертная оценка — не раскрытая сумма (то же правило, что в аналитике)
-  const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
-  const disclosed = cards.filter(d=>!undisclosed(d.sum) && !isEstimate(d.sum));
-  const rub = cards.map(d=>({d, b:isEstimate(d.sum)?0:parseB(d.sum)})).filter(o=>o.b>0).sort((a,b)=>b.b-a.b);
+  const parseB = sumBillionsRub, isEstimate = isSoftSum;  // те же правила, что на «Аналитике»
+  const disclosed = cards.filter(d=>!undisclosed(d.sum) && !isEstimate(d.sum) && countsAsPrice(d));
+  const rub = cards.map(d=>({d, b:(isEstimate(d.sum)||!countsAsPrice(d))?0:parseB(d.sum)})).filter(o=>o.b>0).sort((a,b)=>b.b-a.b);
   const byYear = {};
   all.forEach(x=>{const y=(x.date||"").slice(0,4); if(/^20\d\d$/.test(y)) byYear[y]=(byYear[y]||0)+1;});
   const years = Object.entries(byYear).sort((a,b)=>a[0].localeCompare(b[0]));
@@ -6332,7 +6369,7 @@ function renderIndustry(ind){
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${rub.length
         ? rub.slice(0,8).map((o,i)=>`<a class="an-deal" href="#/deal/${o.d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${o.d.title}</span></div><span class="an-deal-s num">${sumHtml(o.d.sum)}</span></a>`).join("")
-          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где цену назвали стороны и она указана в рублях. Валютные суммы и оценки экспертов не в счёт — складывать их некорректно. Вместе — ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
+          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где цену назвали стороны и она указана в рублях. Не в счёт: валютные суммы, оценки и неофициальные цифры, незакрытые торги, сорвавшиеся сделки и IPO. Вместе — ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
         : emptyNote("Ни по одной сделке отрасли стороны не назвали цену в рублях — сравнивать нечего.")}
     </div>
     <div class="an-card reveal">
@@ -6505,19 +6542,7 @@ function renderAnalytics(){
   const topInd = Object.entries(byInd).sort((a,b)=>b[1]-a[1]).slice(0,10);
   const topIndSum = topInd.reduce((s,[,n])=>s+n,0);
   const maxI = topInd.length?topInd[0][1]:1;
-  const parseB = s => {const m=(s||"").replace(",",".").match(/([\d.]+)\s*млрд/); return m?parseFloat(m[1]):0;};
-  // В карточку «по раскрытой сумме» не должны попадать экспертные оценки и стартовые
-  // цены торгов: это не раскрытая сторонами цена, а чужая прикидка.
-  const isEstimate = s => /оценк|экспертн|расчётн|расчетн|начальн\w*\s+цен|стартов\w*\s+цен|запрашива|по\s+капитализации|оценочн/i.test(s||"");
-  /* Подпись под этой карточкой год обещала, что стартовые цены торгов не в
-     счёт, а код их считал: у незакрытых торгов в `sum` стоит цена, которую
-     назначил ПРОДАВЕЦ, а не та, о которой договорились стороны (пример —
-     лот «Хортицы» на 7,8 млрд ₽, торги ещё шли). У сорвавшейся сделки цифра
-     тоже есть, а сделки за ней нет. Слово «стартовая цена» в тексте суммы
-     `isEstimate` уже ловил — но только когда оно там написано; признак
-     надёжнее берётся из типа и статуса самой сделки. */
-  const countsAsPrice = d => d.status !== "Не состоялась"
-    && !(d.type === "Продажа с торгов" && d.status !== "Закрыта");
+  const parseB = sumBillionsRub, isEstimate = isSoftSum;
   const rubSum = deals.map(d=>({...d,_b:(isEstimate(d.sum)||!countsAsPrice(d))?0:parseB(d.sum)})).filter(d=>d._b>0);
   const rubDisclosed = rubSum.length;
   const topSum = rubSum.slice().sort((a,b)=>b._b-a._b).slice(0,10);
@@ -6530,7 +6555,7 @@ function renderAnalytics(){
     const y=(d.date||"").slice(0,4); if(!/^20\d\d$/.test(y)) return;
     sumByYear[y]=sumByYear[y]||{sumB:0,cnt:0,total:0};
     sumByYear[y].total++;
-    if(isEstimate(d.sum)) return;
+    if(isEstimate(d.sum) || !countsAsPrice(d)) return;
     const b=parseB(d.sum); if(!b) return;
     sumByYear[y].sumB+=b; sumByYear[y].cnt++;
   });
@@ -6541,7 +6566,7 @@ function renderAnalytics(){
       const ord=Math.ceil(+m/3), q=QLABELS[ord-1];
       sumByQuarter[q]=sumByQuarter[q]||{sumB:0,cnt:0,total:0,ord};
       sumByQuarter[q].total++;
-      if(isEstimate(d.sum)) return;
+      if(isEstimate(d.sum) || !countsAsPrice(d)) return;
       const b=parseB(d.sum); if(!b) return;
       sumByQuarter[q].sumB+=b; sumByQuarter[q].cnt++;
     });
@@ -6695,7 +6720,7 @@ function renderAnalytics(){
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки, где стороны назвали цену в рублях, — таких ${rubDisclosed}. Оценки экспертов, стартовые цены незакрытых торгов и цены сорвавшихся сделок не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только покупки, где стороны назвали цену в рублях, — таких ${rubDisclosed}. Не в счёт: оценки экспертов и неофициальные цифры, валютные суммы, стартовые цены незакрытых торгов, цены сорвавшихся сделок и IPO (у размещения сумма — то объём размещения, то оценка компании).</p>
     </div>
     <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>

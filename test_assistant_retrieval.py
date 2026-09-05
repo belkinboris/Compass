@@ -300,3 +300,15 @@ def test_company_written_in_latin_is_found_typed_in_cyrillic(idx):
     r = _ask("какие сделки у вк?", idx)
     assert r.intent == "company", r.intent
     assert "VK" in r.answer, r.answer[:200]
+
+
+def test_deal_line_carries_the_primary_source_link():
+    """Аудит перед бетой (5 сентября 2026): ответ «по базе» про Boxberry
+    ссылался только на карточку «Компаса», хотя экран обещает первоисточник.
+    Строка сделки в точном ответе несёт и карточку, и внешний источник."""
+    idx = ar.get_index()
+    doc = idx.by_id.get("g46c6e23f")
+    assert doc is not None
+    line = ar._line(doc)
+    assert "](#/deal/g46c6e23f)" in line
+    assert "](https://www.interfax.ru/business/1022482)" in line, line

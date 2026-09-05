@@ -376,9 +376,22 @@ def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
     small_stake = dict(base, eco={"share": "Приобретено 30% доли"})
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(small_stake)) is None
 
-    # Разрыв года выручки и сделки больше одного — отчётность может не
-    # отражать компанию на момент сделки.
+    # Разрыв года выручки и сделки больше двух — отчётность может не
+    # отражать компанию на момент сделки; отчёт за ГОД САМОЙ сделки тоже не
+    # годится — на дату сделки его ещё нет (аудит 5 сентября 2026: цену
+    # февраля 2025 делили на выручку за весь 2025 год).
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2020)" % json.dumps(base)) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2024)" % json.dumps(base)) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(base)) is not None
+
+    # Доля, названная только в заголовке, — тоже доля (g85883f11: «Ростех
+    # приобрел 25% в …», eco.share пуст).
+    title_stake = dict(base, title="Ростех приобрел 25% в разработчике платформы")
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(title_stake)) is None
+
+    # Не твёрдая цена: «~», «около», «до», «первый этап», «или EV…».
+    for soft in ("~1 000 млн ₽ (или EV ~5 млрд ₽)", "около 1 млрд ₽", "1 000 млн ₽ (первый этап)"):
+        assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum=soft))) is None, soft
 
     # Абсурдный мультипликатор — почти всегда выручка не того юрлица/периметра
     # (см. пилот Этапа 15, находка g5eb6ff22), а не редкая сделка.
@@ -2769,3 +2782,51 @@ def test_long_stalled_negotiations_get_a_hover_hint(page, base_url):
         visit(page, base_url, "#/deal/" + fresh_id)
         assert not page.query_selector(".stalled-hint"), \
             f"{fresh_id}: подсказка не должна показываться у свежих переговоров"
+
+
+def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url):
+    """Аудит перед бетой (5 сентября 2026): в «Крупнейших сделках по
+    раскрытой сумме» стояли «300 млрд ₽ (неофициально)» и «около 500 млрд ₽
+    (допэмиссия ВТБ)», «$3,2 млрд» считалось как 3,2 млрд ₽, а IPO
+    Совкомбанка с оценкой компании 200–219 млрд ₽ соседствовало с покупками.
+    Правила суммы — одни на «Аналитику» и страницу отрасли."""
+    visit(page, base_url, "#/analytics")
+    page.wait_for_selector(".an-c-topsum .an-deal")
+    rows = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal").all()]
+    assert rows
+    for row in rows:
+        low = row.lower()
+        for bad in ("неофициально", "допэмисси", "около", "по оценке", "ipo"):
+            assert bad not in low, row
+        assert "₽" in row, row  # валютная сумма считается только через рублёвый эквивалент в скобках
+    # общие функции суммы существуют и согласованы с правилами
+    checks = page.evaluate("""() => ({
+      soft: ["300 млрд ₽ (неофициально)", "около 500 млрд ₽ (допэмиссия ВТБ)", "~5 млрд ₽", "до 6 млрд ₽",
+             "~100 млн ₽ (или EV ~1 млрд ₽)", "400 млн ₽ (первый этап)"].map(isSoftSum),
+      firm: ["340 млрд ₽", "754 млн ₽ (плюс условное возмещение)", "15–20 млрд ₽"].map(isSoftSum),
+      rub: [sumBillionsRub("не более $2 млрд (193 млрд ₽)"), sumBillionsRub("$3,2 млрд (до вычета долга)"),
+            sumBillionsRub("754 млн ₽"), sumBillionsRub("1,2 трлн ₽")],
+      ipo: countsAsPrice({type: "IPO", status: "Закрыта"}),
+    })""")
+    assert all(checks["soft"]) and not any(checks["firm"]), checks
+    assert checks["rub"] == [193, 0, 0.754, 1200], checks
+    assert checks["ipo"] is False
+
+
+def test_compare_shows_bank_of_russia_data_for_a_bank(page, base_url):
+    """Аудит перед бетой: сравнение писало Сбербанку «Подтверждённая БФО пока
+    не загружена», хотя на его профиле стоит блок «По данным Банка России»
+    (bank_finance.json). Сравнение обязано читать тот же источник, а у АО
+    называть учредителей при регистрации, не «текущих участников»."""
+    visit(page, base_url, "#/advisors")
+    page.wait_for_function("typeof DEALS !== 'undefined' && DEALS.length > 100")
+    page.evaluate("() => localStorage.setItem(COMPARE_KEY, JSON.stringify(['g28ff15bb','yandex']))")
+    visit(page, base_url, "#/compare")
+    page.wait_for_selector(".compare-card", timeout=10000)
+    page.wait_for_timeout(1500)
+    cards = [c.inner_text() for c in page.locator(".compare-card").all()]
+    sber = next(c for c in cards if "Сбербанк" in c)
+    assert "По данным Банка России" in sber and "Активы" in sber, sber
+    assert "БФО пока не загружена" not in sber
+    assert "Текущие участники" not in sber, sber
+    page.evaluate("() => localStorage.removeItem(COMPARE_KEY)")

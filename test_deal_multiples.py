@@ -325,3 +325,41 @@ def test_generic_helpers_work_on_op_profit_rows_too():
     industry_of = {'t1': 'ИТ', 't2': 'ИТ', 't3': 'ИТ'}
     out = dm.industry_medians(op_rows, industry_of)
     assert out == [{'industry': 'ИТ', 'count': 3, 'median': 2.0, 'min': 1.0, 'max': 3.0}]
+
+
+# ---------- аудит 5 сентября 2026: доля из заголовка, мягкие суммы, год отчётности ----------
+
+def test_stake_is_read_from_the_title_too():
+    # g85883f11: «Ростех приобрел 25% в разработчике платформы OneCell…» — доля
+    # только в заголовке, eco.share пуст; сумму за пакет делили на выручку всей
+    # компании (×0,55 при честных ×2,2 даже без поправки на долг).
+    deal = {'title': 'Ростех приобрел 25% в разработчике платформы OneCell', 'eco': {'share': '—'}}
+    assert dm.stake_percent(deal) == 25.0
+    deal = {'title': 'Софтлайн купил 51% К2-9b, ИБ-компанию', 'eco': {}}
+    assert dm.stake_percent(deal) == 51.0
+    assert dm.stake_percent({'title': 'Купил завод', 'eco': {}}) is None
+
+
+def test_soft_prices_are_not_prices():
+    for text in ('~100 млн ₽ (или EV ~1 млрд ₽)', '400 млн ₽ (первый этап)', 'около 10 млрд ₽',
+                 'до 6 млрд ₽', '≈20 млрд ₽', '35–40 млрд ₽ (неофициально)', '~3 млрд ₽ (без учета долга)',
+                 'около 500 млрд ₽ (допэмиссия ВТБ)'):
+        assert dm.is_estimate(text), text
+    for text in ('1,5 млрд ₽', '754 млн ₽ (плюс условное возмещение до 478 млн ₽)', '15–20 млрд ₽'):
+        assert not dm.is_estimate(text), text
+
+
+def test_multiple_none_when_report_is_for_the_deal_year():
+    # На дату сделки результата за тот же год ещё нет: февраль 2025 нельзя
+    # делить на выручку за весь 2025 год (аудит 5 сентября 2026).
+    c = _cand(year=2025)
+    assert dm.multiple_for_candidate(c, revenue_rub=500_000_000, revenue_year=2025, target_name='X') is None
+    assert dm.multiple_for_candidate_op(c, operating_profit_rub=200_000_000,
+                                        operating_profit_year=2025, target_name='X') is None
+
+
+def test_multiple_ok_when_report_is_two_years_old():
+    # Сделка в начале года, отчёт за прошлый год ещё не сдан — берётся позапрошлый.
+    c = _cand(year=2025)
+    r = dm.multiple_for_candidate(c, revenue_rub=500_000_000, revenue_year=2023, target_name='X')
+    assert r is not None and r.revenue_year == 2023

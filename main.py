@@ -1333,10 +1333,18 @@ def _report_payload(row: FinancialReport) -> dict:
     return payload
 
 
+# ИНН 7702235133 — Банк России; в ЕГРЮЛ учредителем Сбербанка записан этот
+# ИНН, а API-ФНС резолвит его в имя одного из расчётно-кассовых центров
+# ЦБ (у РКЦ тот же ИНН, свой ОГРН): на сравнении Сбербанк «принадлежал»
+# «РКЦ Г. КУРИЛЬСКА» (аудит перед бетой, 5 сентября 2026). Имя по ИНН
+# надёжнее имени филиала.
+OWNER_NAME_BY_INN = {"7702235133": "Банк России"}
+
+
 def _owner_payload(row: OwnershipStake) -> dict:
     return {
         "key": row.owner_key,
-        "name": row.owner_name,
+        "name": OWNER_NAME_BY_INN.get(str(row.inn or ""), row.owner_name),
         "type": row.owner_type,
         "inn": row.inn,
         "ogrn": row.ogrn,
