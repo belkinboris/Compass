@@ -3243,3 +3243,30 @@ def test_home_screen_icon_and_manifest_are_served(client):
     assert data["name"] == "Компас" and data["icons"]
     for entry in data["icons"]:
         assert client.get(entry["src"]).status_code == 200, entry
+
+
+def test_fns_status_reports_the_last_background_runs_and_the_daily_budget(client):
+    """5 сентября 2026: подтверждённый ИНН «МорТехПрома» два деплоя подряд
+    оставался несопоставленным на проде, а снаружи было видно только
+    «ещё не сопоставлено» — причина (потолок? ошибка запроса? строка не
+    дошла до работы?) жила в логе приложения. /api/fns/status обязан
+    показывать, что сделал последний стартовый скан и сколько запросов
+    осталось до дневного потолка."""
+    db = get_session()
+    try:
+        db.add(FnsSyncRun(mode="startup", companies_total=3, matched=1, errors=1,
+                          details_json='{"confirmed_now": 1, "synced": 0, "skipped_fresh": 2, '
+                                       '"errors": 1, "requests": 1, "revoked": 0}'))
+        db.commit()
+    finally:
+        db.close()
+    body = client.get("/api/fns/status").json()
+    assert body["provider"] == "API-ФНС"
+    assert body["daily_cap"] in (main.FNS_DAILY_REQUEST_CAP, main.FNS_DAILY_REQUEST_CAP_HIGH)
+    assert body["startup_limit"] == main.FNS_STARTUP_SYNC_LIMIT
+    assert isinstance(body["requests_today"], int) and body["requests_today"] >= 1
+    assert isinstance(body["registry_backlog"], int)
+    last = body["last_runs"][0]
+    assert last["mode"] == "startup" and last["errors"] == 1
+    assert last["details"]["skipped_fresh"] == 2 and last["details"]["requests"] == 1
+    assert last["started_at"]

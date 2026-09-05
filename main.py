@@ -1455,14 +1455,42 @@ def _ownership_payload(db, entity: LegalEntity, paid: bool) -> dict:
 
 @app.get("/api/fns/status")
 def fns_status(db=Depends(get_db)):
+    """Счётчики витрины плюс то, что сделал ФОНОВЫЙ шаг: последние прогоны
+    докачки (стартовые сканы) с их статистикой, сколько живых запросов
+    потрачено за сутки и какой потолок действует. Без этого «строка реестра
+    не доехала до прода» неотличима снаружи от «старт пропустил докачку из-за
+    потолка» и от «запрос к ФНС упал» — 5 сентября 2026 подтверждённый ИНН
+    «МорТехПрома» два деплоя подряд оставался несопоставленным, а причина
+    была видна только в логе приложения на Timeweb (тот же класс, что
+    «молчание неотличимо от „нечего делать"»)."""
+    from pipeline.sync_fns import registry_backlog
     confirmed = db.query(LegalEntity).filter_by(match_status=LegalEntityMatchStatus.confirmed).count()
     synced = db.query(LegalEntity).filter(LegalEntity.fetched_at.is_not(None)).count()
+    runs = db.scalars(select(FnsSyncRun).order_by(FnsSyncRun.started_at.desc()).limit(5)).all()
+    backlog = registry_backlog(db)
     return {
         "configured": bool(os.environ.get("API_FNS_KEY")),
         "confirmed_entities": confirmed,
         "synced_entities": synced,
         "provider": "API-ФНС",
+        "registry_backlog": backlog,
+        "requests_today": _fns_requests_today(db),
+        "daily_cap": (FNS_DAILY_REQUEST_CAP_HIGH if backlog > FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP
+                      else FNS_DAILY_REQUEST_CAP),
+        "startup_limit": FNS_STARTUP_SYNC_LIMIT,
+        "last_runs": [{
+            "started_at": r.started_at.isoformat() if r.started_at else None,
+            "mode": r.mode, "matched": r.matched, "errors": r.errors,
+            "details": _json_or_empty(r.details_json),
+        } for r in runs],
     }
+
+
+def _json_or_empty(text):
+    try:
+        return json.loads(text or "{}")
+    except (ValueError, TypeError):
+        return {}
 
 
 @app.get("/api/companies/{company_id}/fns")
