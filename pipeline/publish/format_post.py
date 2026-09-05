@@ -577,10 +577,29 @@ def is_fresh(deal, today=None):
     нужны новости, а не выдача архива за новость.
 
     Дата, у которой известен только год, свежей не считается: если мы не знаем
-    даже месяца, объявлять сделку сегодняшней нельзя.
+    даже месяца, объявлять сделку сегодняшней нельзя. ИСКЛЮЧЕНИЕ (5 сентября
+    2026): карточка, которую ПРИТОК завёл на этой неделе из свежей новости, —
+    новость свежая, даже если день самой сделки в статье не назван. Правило
+    без исключения делало архивом «МорТехПром» (статья dp.ru от 4 сентября,
+    в базе с 5-го, дата «2026»): пост ушёл с шапкой «Сделка из базы ·
+    Публикуем впервые», а владелец: «это свежая карта и свежая сделка».
+    Свежесть такой карточки считаем по дню, когда приток её завёл (`added`).
+    Архивные карточки без `from_ingest` под исключение не попадают — их
+    прежнее правило и держало.
     """
     age = deal_age_days(deal, today)
-    return age is not None and age <= FRESH_DAYS
+    if age is not None:
+        return age <= FRESH_DAYS
+    raw = str(deal.get('date') or '')
+    if deal.get('from_ingest') and re.fullmatch(r'\d{4}', raw):
+        now = today or date.today()
+        added = str(deal.get('added') or '')
+        if int(raw) == now.year and re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
+            try:
+                return (now - datetime.strptime(added, '%Y-%m-%d').date()).days <= FRESH_DAYS
+            except ValueError:
+                return False
+    return False
 
 
 def render(deal, companies, updates=(), today=None, fin=None):

@@ -3108,6 +3108,61 @@ def test_forum_topic_bootstrap_answers_in_the_same_topic_and_only_to_reviewers(c
     assert after == before, (before, after)
 
 
+def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
+    """Настоящая причина тишины 5 сентября 2026: у бота режим приватности, и в
+    группе он обычный участник — Telegram отдаёт ему только команды, ответы
+    на его сообщения и нажатия кнопок. Напечатанное «Обновления» до бота не
+    доходило вовсе. /topic внутри темы отвечает кнопками с тремя названиями,
+    нажатие закрепляет номер ТОЙ темы, где стоит сообщение бота, и правит
+    его на «Запомнил». Право — у владельца и партнёра; в общей ленте номера
+    темы нет, и бот говорит это словами."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    calls = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: calls.append((method, kw)) or {"ok": True})
+    chat = {"id": -100111, "type": "supergroup"}
+
+    # /topic в теме (с суффиксом @бот, как приходит из группы) -> кнопки в ту же тему.
+    r = client.post("/api/telegram/webhook/тайна", json={"message": {
+        "message_id": 20, "message_thread_id": 99, "text": "/topic@projectcompassru_bot",
+        "chat": chat, "from": {"id": 111}}})
+    assert r.status_code == 200
+    assert len(calls) == 1 and calls[0][0] == "sendMessage"
+    assert calls[0][1]["message_thread_id"] == 99
+    buttons = [b for row in calls[0][1]["reply_markup"]["inline_keyboard"] for b in row]
+    assert {b["callback_data"] for b in buttons} == {"topic:decision", "topic:update", "topic:info"}
+    assert {b["text"] for b in buttons} == set(main_module.CONSOLE_TOPIC_NAMES.values())
+
+    # Нажатие «Обновления» под сообщением бота в теме 99 -> запомнено, текст поправлен.
+    calls.clear()
+    r = client.post("/api/telegram/webhook/тайна", json={"callback_query": {
+        "id": "cb1", "data": "topic:update", "from": {"id": 111},
+        "message": {"message_id": 500, "message_thread_id": 99, "chat": chat}}})
+    assert r.status_code == 200
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert topics.get("обновления") == "99", topics
+    edited = [kw for m, kw in calls if m == "editMessageText"]
+    assert edited and edited[0]["message_id"] == 500 and "Запомнил" in edited[0]["text"]
+    assert any(m == "answerCallbackQuery" for m, _kw in calls)
+
+    # Посторонний жмёт кнопку в теме 77 -> ничего не записано.
+    calls.clear()
+    client.post("/api/telegram/webhook/тайна", json={"callback_query": {
+        "id": "cb2", "data": "topic:decision", "from": {"id": 999},
+        "message": {"message_id": 501, "message_thread_id": 77, "chat": chat}}})
+    topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+    assert "77" not in topics.values()
+    assert [m for m, _kw in calls] == ["answerCallbackQuery"]
+
+    # /topic в общей ленте (без номера темы) -> объяснение, без кнопок.
+    calls.clear()
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "message_id": 21, "text": "/topic", "chat": chat, "from": {"id": 111}}})
+    assert len(calls) == 1 and "reply_markup" not in calls[0][1]
+    assert "общая лента" in calls[0][1]["text"] and "message_thread_id" not in calls[0][1]
+
+
 def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):
     """Ответ на команду/кнопку обязан остаться в той же теме, где её
     нажали/напечатали — Telegram НЕ выводит тему сама по reply_to_message_id,

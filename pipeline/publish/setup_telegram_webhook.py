@@ -163,6 +163,7 @@ def main(argv):
         call(token, 'setMyCommands', commands=[
             {'command': 'queue', 'description': 'что ждёт решения'},
             {'command': 'help', 'description': 'как устроена модерация'},
+            {'command': 'topic', 'description': 'закрепить эту тему форума за сообщениями бота'},
         ])
         print('Команды /queue и /help добавлены в меню бота.')
     except httpx.HTTPError as exc:

@@ -1802,6 +1802,35 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
         # человеческим 9 августа (см. pipeline/ops_status.py), и кнопки —
         # его часть: цифра «6 карточек выйдут сами» бесполезна, если нельзя
         # тут же посмотреть, какие именно.
+        # Кнопка под ответом на /topic: закрепить номер ЭТОЙ темы за видом
+        # сообщений. Номер берётся из сообщения самого бота — оно живёт внутри
+        # темы и несёт message_thread_id; нажатие доходит и в режиме
+        # приватности, в отличие от напечатанного названия.
+        topic = re.match(r"^topic:(decision|update|info)$", str(callback.get("data") or ""))
+        if topic:
+            msg = callback.get("message") or {}
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Настраивать темы могут только владелец и партнёр.")
+                return {"ok": True}
+            kind = topic.group(1)
+            name = CONSOLE_TOPIC_NAMES[kind]
+            thread_id = msg.get("message_thread_id")
+            if thread_id:
+                _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
+                done = "Запомнил: это тема «%s». Сюда теперь пойдут %s." % (name, CONSOLE_TOPIC_PURPOSE[kind])
+            else:
+                done = ("У общей ленты нет номера темы — сюда и так идёт всё, для чего "
+                        "не назначена своя тема. Дайте /topic внутри самой темы.")
+            if msg.get("message_id"):
+                notification_service.tg_api(
+                    "editMessageText", chat_id=(msg.get("chat") or {}).get("id"),
+                    message_id=msg["message_id"], text=done, disable_web_page_preview=True)
+            notification_service.tg_api("answerCallbackQuery",
+                                        callback_query_id=callback.get("id"))
+            return {"ok": True}
+
         # Кнопки меню под /start: очередь и сводка о платформе.
         menu = re.match(r"^menu:(queue|stats)$", str(callback.get("data") or ""))
         if menu:
@@ -1972,6 +2001,14 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
     if match and chat_id is not None:
         notification_service.bind_telegram(db, match.group(1), str(chat_id))
         return {"ok": True}
+    # /topic — закрепить за темой форума вид сообщений бота. Именно КОМАНДА и
+    # КНОПКИ, а не напечатанное название: у бота включён режим приватности, и
+    # в группе он получает только команды, ответы на свои сообщения и нажатия
+    # кнопок — обычный текст «Обновления» до него не доходит вовсе (5 сентября
+    # 2026 владелец написал названия в трёх темах, бот не увидел ни одного).
+    if re.match(r"^/topic(?:@\S+)?(?:\s.*)?$", text.strip(), re.I) and chat_id is not None:
+        _offer_topic_binding(message, chat_id, sender_id)
+        return {"ok": True}
     # Команды бота. Голый «/start» раньше не делал НИЧЕГО и молчал — человек
     # писал боту и получал тишину, неотличимую от поломки. В группе команда
     # приходит с суффиксом («/queue@compass_bot»), его надо отрезать.
@@ -2010,7 +2047,8 @@ BOT_HELP = (
     "<b>Как вернуться к отложенному</b>\n"
     "Нажмите кнопку ниже — карточки придут заново, каждая со своими кнопками. "
     "Решать можно прямо там, искать ничего не нужно.\n\n"
-    "/queue — то же самое одним списком."
+    "/queue — то же самое одним списком.\n"
+    "/topic — внутри темы форума: закрепить за ней сообщения бота (кнопками)."
 )
 
 
@@ -2368,6 +2406,31 @@ def _ack_console_topic(message: dict, kind: str, thread_id) -> None:
     notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=text,
                                 disable_web_page_preview=True,
                                 **({"message_thread_id": thread_id} if thread_id else {}))
+
+
+def _offer_topic_binding(message: dict, chat_id, sender_id) -> None:
+    """Ответ на /topic: кнопки с тремя названиями внутри той темы, где команду
+    дали. Нажатие (см. ветку `topic:` в вебхуке) закрепляет номер темы за
+    видом сообщений. В общей ленте форума номера темы нет — так и говорим."""
+    if not _is_reviewer(sender_id):
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text="Настраивать темы могут только владелец и партнёр.",
+            disable_web_page_preview=True, **_thread_kwargs(message))
+        return
+    thread_id = message.get("message_thread_id")
+    if not thread_id:
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id), disable_web_page_preview=True,
+            text=("Это общая лента группы, у неё нет номера темы: сюда и так идёт всё, "
+                  "для чего не назначена своя тема. Откройте нужную тему и дайте /topic там."))
+        return
+    keyboard = {"inline_keyboard": [[{"text": name, "callback_data": "topic:%s" % kind}]
+                                    for kind, name in CONSOLE_TOPIC_NAMES.items()]}
+    notification_service.tg_api(
+        "sendMessage", chat_id=str(chat_id), message_thread_id=thread_id,
+        text="Что должно приходить в эту тему? Нажмите название — бот запомнит её номер.",
+        reply_markup=keyboard, disable_web_page_preview=True)
 
 
 def _console_thread_id(db, kind: str) -> int | None:
