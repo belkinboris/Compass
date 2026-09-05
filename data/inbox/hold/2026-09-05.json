@@ -5857,7 +5857,7 @@
    ]
   },
   {
-   "draft_id": "d75862704",
+   "draft_id": "d66808512",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5885,7 +5885,7 @@
    ]
   },
   {
-   "draft_id": "d50980907",
+   "draft_id": "d20829058",
    "title": "Торги по приватизации национализированного у Митюшова «Салаватнефтемаша» пройдут 7 октября",
    "date": "2026-09-05",
    "src": [
@@ -5915,52 +5915,71 @@
    ]
   },
   {
-   "draft_id": "d54802585",
-   "title": "YouTube-блогер купил крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
+   "draft_id": "d86695316",
+   "title": "Производитель умных колец Oura подал документы на IPO",
    "date": "2026-09-05",
    "src": [
     [
      "web:incrussia.ru",
-     "https://incrussia.ru/news/youtube-bloger-kupil-krupnyj-paket-aktsij-gopro-posle-etogo-kompaniya-zayavila-chto-budet-prodavat-oborudovanie-dlya-ii/"
+     "https://incrussia.ru/news/proizvoditel-umnyh-kolets-oura-podal-dokumenty-na-ipo/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-05",
-     "title": "Сделка завершена",
-     "note": "Акции GoPro выросли более чем на 183% за неделю на фоне покупки блогером Marquiplier доли в компании и объявленного слияния со Starman Optical для перехода к производству ИИ-компонентов.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/youtube-bloger-kupil-krupnyj-paket-aktsij-gopro-posle-etogo-kompaniya-zayavila-chto-budet-prodavat-oborudovanie-dlya-ii/"
-     ]
-    }
-   ],
-   "buyer_name": "YouTube-блогер",
-   "asset": "крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "YouTube-блогер",
-    "asset": "крупный пакет акций GoPro — после этого компания заявила, что будет продавать оборудование для ИИ",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d72280925",
-   "title": "Продают по 250 рублей за литр! Как россияне делают деньги на топливном кризисе",
+   "draft_id": "d91544695",
+   "title": "Путин поддержал идею снизить ставку по ипотеке для многодетных при покупке дома",
    "date": "2026-09-05",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/business/2026/09/05/76626916/"
+     "web:iz.ru",
+     "https://iz.ru/2161814/2026-09-05/putin-podderzhal-ideiu-snizit-stavku-po-ipoteke-dlia-mnogodetnykh-pri-pokupke-dom"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d63394978",
+   "title": "Львова-Белова предложила льготы для покупки машин для многодетных семей",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260905/lvova-belova-2115691461.html"
     ]
    ],
    "sum": null,
@@ -5979,6 +5998,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79809749",
+   "title": "Путин сделал предложение по льготам для многодетных семей на покупку авто",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260905/lgoty-2115688705.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
