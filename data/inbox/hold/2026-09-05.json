@@ -5885,64 +5885,7 @@
    ]
   },
   {
-   "draft_id": "d68208922",
-   "title": "Reuters назвал возможную дату запуска IPO Anthropic",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/05/09/2026/6a9b5883a253bdbe3d350602"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d88005737",
-   "title": "В ЛНР в сферу строительства привлекли более 151 млрд рублей инвестиций",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28082169"
-    ]
-   ],
-   "sum": "151 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "В ЛНР в сферу строительства",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "В ЛНР в сферу строительства",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d80823918",
+   "draft_id": "d15287490",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5970,138 +5913,13 @@
    ]
   },
   {
-   "draft_id": "d88752633",
-   "title": "Владельцы промкластера в Колпино купили производство корабельного оборудования",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/04/vladelci-promklastera-v-kolpino"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-05",
-     "title": "Сделка завершена",
-     "note": "Владельцы промышленного кластера в Колпино стали единственными собственниками ООО \"МорТехПром\", производителя корпусов пультов управления корабельными системами и металлоконструкций для нефтегазовой сферы.",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/09/04/vladelci-promklastera-v-kolpino"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "производство корабельного оборудования",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "производство корабельного оборудования",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d61835290",
-   "title": "На IPO могут выйти всего три–четыре компании с госучастием — других кандидатов пока нет",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/na-ipo-mogut-vyjti-vsego-trichetyre-kompanii-s-gosuchastiem-drugih-kandidatov-poka-net/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d16941704",
-   "title": "Сестры Уильямс не вышли во второй раунд парного турнира US Open",
+   "draft_id": "d83482688",
+   "title": "Аксаков рассказал, как оживить рынок IPO в России",
    "date": "2026-09-05",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20260905/tennis-2115604833.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42935794",
-   "title": "XDOF, just three months out of stealth, is in talks for a Series B at a $1.2B valuation",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/04/xdof-just-three-months-out-of-stealth-is-in-talks-for-a-series-b-at-a-1-2b-valuation/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64208206",
-   "title": "AI compute provider Nscale is looking for $3.5B in pre-IPO financing",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/04/ai-compute-provider-nscale-is-looking-for-3-5b-in-pre-ipo-financing/"
+     "https://ria.ru/20260905/aksakov--2115609404.html"
     ]
    ],
    "sum": null,
@@ -6119,18 +5937,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d84014612",
-   "title": "Россиянам рассказали о покупке автомобиля на маткапитал",
+   "draft_id": "d14242178",
+   "title": "Куклачева ответила на слухи о покупке победы в конкурсе «Миссис Россия»",
    "date": "2026-09-05",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/05/rossiyanam-rasskazali-o-pokupke-avtomobilya-na-matkapital/"
+     "web:ria.ru",
+     "https://ria.ru/20260905/kuklacheva-2115608590.html"
     ]
    ],
    "sum": null,
@@ -6149,6 +5966,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31041131",
+   "title": "Калинская шокирована первым в карьере выходом в четвертый раунд US Open",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260905/kalinskaja-2115607357.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
