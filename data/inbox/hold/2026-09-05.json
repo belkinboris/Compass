@@ -5857,35 +5857,7 @@
    ]
   },
   {
-   "draft_id": "d19912982",
-   "title": "Оборудование мукомольного завода снова пытаются продать в Петербурге за 910 млн",
-   "date": "2026-09-04",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/04/tretij-pomol-peterburg-vnov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d19711947",
+   "draft_id": "d64381203",
    "title": "Глава Росавиации сообщил о переговорах ОАК о продаже МС-21 дружественным странам",
    "date": "2026-09-05",
    "src": [
@@ -5913,13 +5885,100 @@
    ]
   },
   {
-   "draft_id": "d45798646",
-   "title": "Эксперт Крикунова объяснила, когда стоит купить коляску для питомца",
+   "draft_id": "d29320485",
+   "title": "Япония и США достигли прогресса с инвестициями на $550 млрд в рамках торгового соглашения",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1113335"
+    ]
+   ],
+   "sum": "$550 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d33572703",
+   "title": "Торги по приватизации национализированного у Митюшова «Салаватнефтемаша» пройдут 7 октября",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1113332"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Национализированный у Митюшова «Салаватнефтемаш» оценен в 2 » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d36379744",
+   "title": "В «СДС» связали деловую репутацию с реальными инвестициями в сотрудников",
    "date": "2026-09-05",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28081125"
+     "https://tass.ru/ekonomika/28082165"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88415645",
+   "title": "Эксперт Нуриева рассказала, как распознать обман заводчика при покупке собаки",
+   "date": "2026-09-05",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28082429"
     ]
    ],
    "sum": null,
@@ -5935,34 +5994,6 @@
     "seller": null
    },
    "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39397241",
-   "title": "В Белоруссии семь домов выставили на продажу за 9 тыс. рублей",
-   "date": "2026-09-05",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2161612/v-belorussii-sem-domov-vystavili-na-prodazhu-za-9-tys-rublei-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
