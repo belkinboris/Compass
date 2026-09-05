@@ -1754,23 +1754,96 @@ const firmIdOf = name => {
   const firm = text ? [...FIRMS, ...INV_FIRMS].find(f => firmRxOf(f).test(text)) : null;
   return firm ? firm.id : null;
 };
-/* Сторона сделки, которую консультировала фирма, — из текста роли и заметки:
-   «консультант покупателя», «советник продавца (VEON)», «эмитент». */
-const advSide = (text, d) => {
-  const t = String(text||"").toLowerCase();
-  if(/покупател|приобретател|инвестор(?!ов)|консорциум|заказчик/.test(t)) return "buyer";
-  if(/продавц|продавец|продающ|акционер|владельц|собственник/.test(t)) return "seller";
-  if(/эмитент|компани[ия]-цел|цели\b|целев|за[её]мщик|самой компани/.test(t)) return "target";
-  /* Роль не названа словом, но названа сторона по имени: «финансовый
-     консультант VEON по сделке» — VEON у этой сделки продавец. */
-  if(d){
-    const names = side => (side==="buyer" ? [d.buyer&&co(d.buyer)&&co(d.buyer).name, d.buyer_name]
-                         : side==="seller" ? [d.seller_id&&co(d.seller_id)&&co(d.seller_id).name, d.seller]
-                         : [d.target&&co(d.target)&&co(d.target).name, d.asset]).filter(Boolean);
-    const mentions = n => { const w = String(n).toLowerCase().replace(/[«»"()]/g," ").split(/[\s,]+/).filter(x=>x.length>=4 && !/^(ооо|пао|ао|зао|group|holding|holdings|ltd|llc|inc|компани\w*|группа|холдинг\w*)$/.test(x)); return w.length && w.some(x=>t.includes(x)); };
-    for(const side of ["buyer","seller","target"]) if(names(side).some(mentions)) return side;
+/* Сторона сделки, которую консультировала фирма, — из текста роли, имён
+   сторон самой сделки и пояснения: «консультант покупателя», «советник
+   продавца (VEON)», «эмитент», «консультировала Ingka». Один предикат на
+   «Команду сделки» карточки и «За кого выступала» страницы фирмы (владелец,
+   5 сентября 2026: «неужели из контекста не понятно?»).
+   Слова стороны. «Консорциум» тут больше нет: консорциум бывает и продавцов
+   («консультант консорциума продавцов» у EPAM читался как покупатель), а
+   «акционер/владелец/собственник» — только в тексте РОЛИ, где они про
+   клиента; в пояснении «…по продаже австрийским акционером MCCR…» это
+   описание сделки, и Nextons получала «продавца» там, где источник прямо
+   пишет «чью сторону представлял, не уточняет». */
+const SIDE_WORDS = {
+  buyer:  /покупател|приобретател|инвестор|заказчик/,
+  seller: /продавц|продавец|продающ/,
+  target: /эмитент|компани[ия]-цел|цели(?![а-яё])|целев|за[её]мщик|самой компани/,
+  bank:   /организатор|андеррайтер|underwriter|букраннер|стабилизац|кредитор/,
+};
+const SIDES = ["buyer","seller","target","bank"];
+const advSide = (role, d, note) => {
+  // «Сторону не уточняет» читается ДО снятия отрицаний; потом «не кредитор»,
+  // «не покупатель» перестают быть словами стороны («ВТБ — организатор
+  // размещения (не кредитор)» — организатор, а не кредитор).
+  const rawNote = String(note||"").toLowerCase();
+  if(/сторон[а-яё]*[^.;]{0,60}не\s+(?:уточня|указ|назван|раскры)|не\s+(?:уточня|указ)[а-яё]*[^.;]{0,60}сторон/.test(rawNote)) return "none";
+  const unneg = t => t.replace(/(?:^|[^а-яё])не\s+[a-zа-яё\-]+/g, " ");
+  const r = unneg(String(role||"").toLowerCase()), n = unneg(rawNote);
+  const wordSides = t => SIDES.filter(s=>SIDE_WORDS[s].test(t));
+  // Имена стороны: профиль (с его псевдонимами из MATCH_KEYS — «сбер», «втб»,
+  // «система») и текстовое поле.
+  const profileNames = id => id && co(id) ? [co(id).name, ...(MATCH_KEYS[id]||[])] : [];
+  const names = side => !d ? [] : (side==="buyer" ? [...profileNames(d.buyer), d.buyer_name]
+                       : side==="seller" ? [...profileNames(d.seller_id), d.seller]
+                       : side==="target" ? [...profileNames(d.target), ...profileNames(d.asset_id), d.asset] : []).filter(Boolean);
+  // Слова имени: от четырёх букв, без скобок («Ingka Centres (портфель ТЦ «Мега»)»
+  // — только «ingka»/«centres»: пояснение в скобках — не имя) и без правовых
+  // форм. У короткого имени («Р7», «VK», «ВТБ») длинных слов нет — тогда
+  // берутся и короткие, но сверяются только целым словом (урок про порог
+  // длины, который выбрасывал ровно имена).
+  const SKIP = /^(ооо|пао|ао|зао|group|holding|holdings|ltd|llc|inc|plc|компани[а-яё]*|группа|группы|холдинг[а-яё]*)$/;
+  const words = t => String(t).toLowerCase().replace(/\([^)]*\)/g," ").replace(/[«»"]/g," ").split(/[^a-zа-яё0-9.\-]+/).filter(x=>x && !SKIP.test(x));
+  const tokens = nm => { const w = words(nm); const long = w.filter(x=>x.length>=4); return long.length ? long : w.filter(x=>x.length>=2); };
+  // Слово текста и слово имени совпадают целиком или с точностью до окончания:
+  // общее начало от четырёх букв и не короче 80% длинного слова («ленты» и
+  // «лента», «яндекса» и «яндекс»). Свободнее нельзя: обрубленное «прое…» в
+  // заметке ложилось на «Проекты» из имени покупателя. Сокращения («Сбер»,
+  // «ВТБ») приходят псевдонимами профиля, не префиксом.
+  const wordFits = (w, tok) => {
+    if(w===tok) return true;
+    let i = 0; while(i < w.length && i < tok.length && w[i]===tok[i]) i++;
+    return i>=4 && i >= 0.8*Math.max(w.length, tok.length);
+  };
+  // Где в тексте впервые названа сторона — словом или именем; Infinity, если нигде.
+  const firstAt = (t, side) => {
+    const m = t.search(SIDE_WORDS[side]);
+    const toks = names(side).flatMap(tokens);
+    let byName = Infinity;
+    if(toks.length){
+      const rx = /[a-zа-яё0-9.\-]+/g; let w;
+      while((w = rx.exec(t))){ if(toks.some(tok=>wordFits(w[0], tok))){ byName = w.index; break; } }
+    }
+    return Math.min(m>=0 ? m : Infinity, byName);
+  };
+  // 1. Текст роли: словом («консультант покупателя») — если названы обе
+  //    стороны, побеждает последняя: «консорциума продавцов», «акционера
+  //    покупателя». Слабые слова роли — акционер/владелец/собственник — продавец.
+  //    Короткая заметка без глагола («организатор торгов») — тоже роль.
+  const inRole = wordSides(n.length <= 40 ? r+" "+n : r);
+  if(inRole.length) return inRole.sort((a,b)=>r.search(SIDE_WORDS[b])-r.search(SIDE_WORDS[a]))[0];
+  if(/акционер|владельц|собственник/.test(r)) return "seller";
+  // 2. Текст роли: именем стороны («финансовый консультант VEON»). Если имя
+  //    общее у продавца и предмета («Nokian Tyres plc» продаёт «Nokian Tyres»
+  //    — российский бизнес), фирма вела продавца, а не проданную компанию.
+  const roleNames = SIDES.filter(s=>firstAt(r, s)<Infinity);
+  if(roleNames.length===1) return roleNames[0];
+  if(roleNames.length===2 && roleNames.includes("target")) return roleNames.find(s=>s!=="target");
+  // 3. Пояснение — только там, где сказано, КОГО консультировали: после
+  //    глагола консультирования или «за …»/«интересы …», а не в пересказе
+  //    сделки («сопровождала сделку по продаже … компании «Ароса»»). Если
+  //    источник сам говорит, что сторону не уточняет, — не гадаем.
+  //    В JS `\w` и `\b` не знают кириллицы (урок в CLAUDE.md): «консультир\w+»
+  //    не совпало бы с «консультировала», «\bза» — с « за продавца».
+  const ADVISING = /(?:консультир[а-яё]+|консультант[а-яё]*|советник[а-яё]*|представля[а-яё]+\s+интерес[а-яё]*|интерес[а-яё]+|сопровожда[а-яё]+|сопровожден[а-яё]*|на\s+стороне|со\s+стороны|(?:^|[^а-яё])за)\s+(?!сделк|выкуп|продаж|размещен|обмен|реструктур|проект|spo|ipo|сторон[а-яё]*\s+не)/g;
+  let best = null, m;
+  while((m = ADVISING.exec(n))){
+    const tail = n.slice(m.index + m[0].length, m.index + m[0].length + 90);
+    const hits = SIDES.map(s=>[s, firstAt(tail, s)]).filter(([,i])=>i<Infinity).sort((a,b)=>a[1]-b[1]);
+    if(hits.length && (!best || hits[0][1] < best[1])) best = hits[0];
+    if(best && best[1]===0) break;
   }
-  return "none";
+  return best ? best[0] : "none";
 };
 /* Что показать под именем фирмы: уточнение в скобках («топ-менеджмент
    ВымпелКома»), а не повтор роли, которую уже сказал заголовок колонки. */
@@ -1794,13 +1867,13 @@ function dealAdvisorItems(d){
   const items = [];
   realAdv(d).forEach(a=>{
     const role=a[0]||"", note=advCleanNote(typeof a[2]==="string"?a[2]:"");
-    items.push({kind:advKindOf(role), name:a[1], role, note, side:advSide(role+" "+note, d), raw:a});
+    items.push({kind:advKindOf(role), name:a[1], role, note, side:advSide(role, d, note), raw:a});
   });
   const fin = hasFact(d.eco&&d.eco.finadv) ? d.eco.finadv.split(";").map(s=>s.trim()).filter(Boolean) : [];
   fin.forEach(x=>{
     const p=x.split("—"); const name=p[0].replace(/\s*\([^)]*\)\s*$/,"").trim(); const note=p.slice(1).join("—").trim();
     if(!name) return;
-    items.push({kind:"финансовый", name, role:"Финансовый консультант", note, side:advSide(note+" "+p[0], d), raw:null});
+    items.push({kind:"финансовый", name, role:"Финансовый консультант", note, side:advSide(p[0], d, note), raw:null});
   });
   /* Одна фирма одного вида — один раз; запись с известной стороной важнее записи без неё. */
   const keyOf = it => (firmIdOf(it.name)||it.name.toLowerCase().replace(/\s+/g," "))+"|"+it.kind;
@@ -1818,7 +1891,7 @@ const financialAdvisors = d => dealAdvisorItems(d).filter(it=>it.kind==="фин�
 const uniqAdvisors = (list, d) => {
   const seen = new Set();
   return list.filter(a=>{
-    const key = (firmIdOf(a[1])||String(a[1]).toLowerCase().replace(/\s+/g," ")) + "|" + advSide((a[0]||"")+" "+(typeof a[2]==="string"?a[2]:""), d);
+    const key = (firmIdOf(a[1])||String(a[1]).toLowerCase().replace(/\s+/g," ")) + "|" + advSide(a[0]||"", d, advCleanNote(typeof a[2]==="string"?a[2]:""));
     if(seen.has(key)) return false;
     seen.add(key); return true;
   });
@@ -4906,15 +4979,27 @@ function renderDeal(id, qs, previewCard){
     const dealTeam = ()=>{
       const uniq = dealAdvisorItems(d);
       if(!uniq.length) return "";
-      const groups={buyer:[],seller:[],target:[],none:[]};
+      const groups={buyer:[],seller:[],target:[],bank:[],none:[]};
       uniq.forEach(it=>groups[it.side].push(it));
-      const onlyUnknown = !groups.buyer.length && !groups.seller.length && !groups.target.length;
-      const title={buyer:"Со стороны покупателя",seller:"Со стороны продавца",target:"Со стороны компании",none:onlyUnknown?"Консультанты сделки":"Сторона не уточнена"};
+      const onlyUnknown = !groups.buyer.length && !groups.seller.length && !groups.target.length && !groups.bank.length;
+      /* Подпись колонки — по типу сделки, как и плашка сторон над ней: у
+         финансирования нет «покупателя», у IPO — «компания» это эмитент. */
+      const SIDE_BY_KIND = {
+        acquisition: {buyer:"покупателя", target:"компании"},
+        jv:          {buyer:"участника СП", target:"второго участника СП"},
+        financing:   {buyer:"инвестора", target:"получателя инвестиций"},
+        structured:  {buyer:"инвестора", target:"получателя финансирования"},
+        credit:      {buyer:"кредитора", target:"заёмщика"},
+        ipo:         {buyer:"инвесторов", target:"эмитента"},
+        reorg:       {buyer:"правопреемника", target:"присоединяемого общества"},
+      };
+      const sideWords = SIDE_BY_KIND[dealKindOf(d.type)] || SIDE_BY_KIND.acquisition;
+      const title={buyer:"Со стороны "+sideWords.buyer,seller:"Со стороны продавца",target:"Со стороны "+sideWords.target,bank:"Со стороны организаторов и кредиторов",none:onlyUnknown?"Консультанты сделки":"Сторона не уточнена"};
       const item = it => {
         const detail = advDetail(it.role+" "+it.note);
         return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)} <span class="t-kind">${it.kind}</span></div>${detail?`<div class="t-side">${esc(detail)}</div>`:""}</div>`;
       };
-      const cols = ["buyer","seller","target","none"].filter(k=>groups[k].length)
+      const cols = ["buyer","seller","target","bank","none"].filter(k=>groups[k].length)
         .map(k=>`<div class="team-col"><span class="team-kind">${title[k]}</span>${groups[k].map(item).join("")}</div>`).join("");
       return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${cols}</div>
         <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
@@ -6045,12 +6130,9 @@ function firmEmptyHtml(f, isLegal){
    выступала»), а не часть предложения. Раньше стояло «покупателя», «продавца»
    (родительный, с маленькой буквы) — на графике рядом с процентом это читалось
    как обрывок фразы. */
-const ADV_ROLE = [
-  ["Покупатель", /покупател[а-яё]*|инвестор[а-яё]*|приобретател[а-яё]*/i],
-  ["Продавец",   /продав[а-яё]*|продающ[а-яё]*|выход[а-яё]*\s+из|акционер[а-яё]*\s+прода/i],
-  ["Предмет сделки", /таргет[а-яё]*|объект[а-яё]*|компани[ий]-цел[а-яё]*|цел[еи]в[а-яё]*/i],
-];
-const advRoleOf = label => (ADV_ROLE.find(([,rx])=>rx.test(String(label||"")))||[null])[0];
+/* ЗДЕСЬ СТОЯЛ свой предикат стороны (ADV_ROLE/advRoleOf) по одному тексту
+   роли — снят 5 сентября 2026, страница фирмы читает advSide вместе с
+   карточкой сделки (см. firmSummaryHtml). */
 
 /* Профиль консультанта как рабочий инструмент: в каких отраслях работает
    фирма, за кого выступает и с кем работает повторно. Раньше страница была
@@ -6063,12 +6145,24 @@ function firmSummaryHtml(id, full, mini, bulk){
   const inds = {};
   all.forEach(d=>{if(d.ind) inds[d.ind]=(inds[d.ind]||0)+1;});
   const topInds = Object.entries(inds).sort((a,b)=>b[1]-a[1]);
+  /* Сторона — тем же правилом, что «Команда сделки» на карточке (advSide:
+     текст роли + пояснение + имена сторон самой сделки). Раньше здесь стоял
+     свой, узкий предикат по одному тексту роли — и у Nextons 10 сделок из 18
+     значились «сторона не названа», хотя в пояснении прямо стояло «за
+     продавца», «консультант эмитента», «консультировала Ingka» (владелец,
+     5 сентября 2026: «неужели из контекста не понятно?»). Два места, решающие
+     одно и то же, обязаны читать один предикат. Третий ответ — «сама
+     компания»: у IPO, обмена акций, выкупа своих бумаг покупателя и продавца
+     нет, фирма ведёт эмитента. */
+  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Сама компания", bank:"Организаторы и кредиторы"};
+  const SIDE_HINT = {target:"«Сама компания» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
+                     bank:"«Организаторы и кредиторы» — банки-организаторы размещения, андеррайтеры, банки-кредиторы."};
   const roles = {};
   let noSide = 0;
   full.forEach(d=>{
-    const mine = (d.law&&d.law.adv||[]).filter(a=>a[1]&&rx&&rx.test(a[1]));
-    const r = mine.map(a=>advRoleOf(a[0])).find(Boolean);
-    if(r) roles[r]=(roles[r]||0)+1; else noSide++;
+    const mine = dealAdvisorItems(d).filter(it=>rx&&rx.test(it.name));
+    const side = (mine.map(it=>it.side).find(s=>s&&s!=="none")) || "none";
+    if(side!=="none") roles[SIDE_LABEL[side]]=(roles[SIDE_LABEL[side]]||0)+1; else noSide++;
   });
   const topRoles = Object.entries(roles).sort((a,b)=>b[1]-a[1]);
   const clients = {};
@@ -6092,9 +6186,9 @@ function firmSummaryHtml(id, full, mini, bulk){
     <div class="an-card reveal">
       <span class="label">За кого выступала</span>
       ${bar(topRoles, topRoles[0][1])}
-      ${note(noSide
-        ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} сторона не названа — известно только, что фирма её вела.`
-        : `Сторона названа по каждой сделке фирмы.`)}
+      ${note([roles[SIDE_LABEL.target]?SIDE_HINT.target:"", roles[SIDE_LABEL.bank]?SIDE_HINT.bank:"",
+              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} источник не уточняет, чью сторону вела фирма.`
+                     : `Сторона известна по каждой сделке фирмы.`].filter(Boolean).join(" "))}
     </div>`:""}
     ${repeat.length?`
     <div class="an-card reveal">

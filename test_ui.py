@@ -2121,6 +2121,50 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
     assert "замещающие" not in law
 
 
+def test_firm_page_reads_the_advised_side_from_context(page, base_url):
+    """Владелец 5 сентября 2026 на странице Nextons: «Продавец 4, Покупатель 4,
+    ещё у 10 сделок сторона не названа — это странно, неужели из контекста
+    не понятно, с какой стороны они были?» Понятно: в пояснении стояло «за
+    продавца», «консультировала Ingka», «консультант эмитента» — но страница
+    фирмы читала только текст роли, своим узким правилом. Теперь сторона
+    считается тем же advSide, что и «Команда сделки» на карточке: роль,
+    имена сторон сделки (с псевдонимами профиля) и пояснение — а у IPO,
+    выкупа и привлечения средств есть третий ответ, «сама компания».
+    Замер по всем 229 парам фирма-сделка: известная сторона 134 → 205,
+    у Nextons неизвестных 10 → 3 (у тех трёх источник действительно молчит)."""
+    visit(page, base_url, "#/advisors/nextons")
+    page.wait_for_selector(".an-card")
+    card = next(c for c in page.locator(".an-card").all() if "За кого выступала" in c.text_content())
+    text = card.text_content()
+    rows = {r.locator(".an-key").text_content(): int(r.locator(".an-val").text_content())
+            for r in card.locator(".an-row").all()}
+    assert rows.get("Покупатель", 0) >= 5 and rows.get("Продавец", 0) >= 5, rows
+    assert any(k.startswith("Сама компания") for k in rows), rows
+    m = re.search(r"Ещё у (\d+) сдел", text)
+    assert m and int(m.group(1)) <= 3, text
+    assert "сторона не названа" not in text and "известно только" not in text, text
+    # Та же сторона на карточке: «консультировала Ingka» — продавца, Иванян — покупателя
+    visit(page, base_url, "#/deal/g4f1b5909")
+    page.wait_for_selector(".team")
+    cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
+    assert "Nextons" in cols.get("Со стороны продавца", ""), cols
+    assert "Иванян" in cols.get("Со стороны покупателя", ""), cols
+    # IPO: эмитент — «сама компания», банки-организаторы — своя колонка, не «не уточнена»
+    visit(page, base_url, "#/deal/g6206d0f7")
+    page.wait_for_selector(".team")
+    cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
+    assert "Nextons" in cols.get("Со стороны эмитента", ""), cols
+    assert "VERBA" in cols.get("Со стороны организаторов и кредиторов", ""), cols
+    assert "Сторона не уточнена" not in cols, cols
+    # Финансирование: подпись колонки — по типу сделки, «(не кредитор)» — не кредитор
+    visit(page, base_url, "#/deal/ga46c5b15")
+    page.wait_for_selector(".team")
+    cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
+    assert "Orion" in cols.get("Со стороны инвестора", ""), cols
+    assert "ККМП" in cols.get("Со стороны получателя финансирования", ""), cols
+    assert "Со стороны покупателя" not in cols, cols
+
+
 def test_feed_search_suggests_by_first_letters_and_hides_filters_behind_a_button(page, base_url):
     """Просьба владельца 31 августа 2026: «предлагать должно по первым
     буквам», а категории — за кнопкой «Фильтры», а не на виду.
