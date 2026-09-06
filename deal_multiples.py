@@ -612,6 +612,18 @@ NOT_SHOWN_LABELS = {
 }
 
 
+# Причины, по которым сделка ЕЩЁ не прочитана (её мультипликатор может
+# появиться), — в отличие от причин, по которым чтение её отвергло.
+AWAITING_REASONS = ('price_not_verified', 'stake_not_verified', 'control_change_not_verified',
+                    'perimeter_report_missing', 'stale', 'price_author_unknown')
+
+
+def _awaits_reading(deal: dict | None) -> bool:
+    if not deal:
+        return True
+    return (deal.get('facts') or {}).get('reasons', {}).get('multiple_text') in AWAITING_REASONS
+
+
 def _why_not(sum_rub: float, metric_rub: float | None, metric_year: int | None, deal_year: int) -> tuple[str, float | None]:
     """Почему санитарная проверка не пропустила проверенную сделку — с самим
     числом, если оно есть: скрыть выброс молча значит показать читателю
@@ -699,6 +711,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     # правила и ждут чтения. В расчёт идут только сделки, у которых все
     # текстовые факты ПОДТВЕРЖДЕНЫ двумя чтениями (facts.admitted.multiple_text).
     text_candidates = find_candidates(deals, confirmed_ids, bank_ids, lot_ids)
+    deal_by_id = {did: dict(d, id=did) for did, d in deals.items()}
     candidates = []
     facts_reasons: dict[str, int] = {}
     verified_meta: dict[str, dict[str, Any]] = {}
@@ -802,8 +815,22 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     return {
         # сколько сделок проходят правила по тексту (предложение правил) …
         'candidates_total': len(text_candidates),
-        # … и сколько из них ждут подтверждения чтением
-        'awaiting_reading': len([c for c in text_candidates if c.deal_id not in verified_ids]),
+        # … и сколько из них ЖДУТ чтения. Разделено 6 сентября 2026 по вопросу
+        # владельца «а что сейчас в таблице»: раньше сюда попадали и сделки,
+        # которые чтение уже РАССМОТРЕЛО И ОТВЕРГЛО по существу (у «Пансионата
+        # Камелия» выручка отеля в другом юрлице, у «Росспиртпрома» головное АО
+        # против группы заводов, «Бизнес-Недвижимость» — сделка внутри группы).
+        # Строка «ещё N ждут чтения» обещала, что список подрастёт на N, хотя
+        # половина из них не вернётся никогда: обещание новизны без новизны —
+        # тот же класс, что уже записан про посты канала.
+        'awaiting_reading': len([c for c in text_candidates if c.deal_id not in verified_ids
+                                 and _awaits_reading(deal_by_id.get(c.deal_id))]),
+        'rejected_by_reading': [{'id': c.deal_id, 'title': c.title,
+                                 'reason': (deal_by_id.get(c.deal_id) or {}).get('facts', {}).get('reasons', {}).get('multiple_text'),
+                                 'label': facts_layer.REASON_LABELS.get(
+                                     (deal_by_id.get(c.deal_id) or {}).get('facts', {}).get('reasons', {}).get('multiple_text', ''), '')}
+                                for c in text_candidates if c.deal_id not in verified_ids
+                                and not _awaits_reading(deal_by_id.get(c.deal_id))],
         'verified_total': len(candidates),
         'clean_total': len(rows),
         'median': overall_median(rows),

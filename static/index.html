@@ -6870,10 +6870,10 @@ async function mountMarketMultiples(){
      под кнопками, не термином в самой кнопке. */
   const VIEWS = [
     {key:"op", label:"По прибыли", section:data.operating_profit,
-     metricLabel:"прибыль от продаж купленной компании", rubKey:"operating_profit_rub", yearKey:"operating_profit_year",
+     metricLabel:"прибыль от продаж купленной компании", metricShort:"прибыль от продаж", rubKey:"operating_profit_rub", yearKey:"operating_profit_year",
      explain:"Прибыль здесь — прибыль от продаж из официальной отчётности: до процентов по кредитам и налогов. Чистую прибыль для сравнения сделок не берут: она зависит от долгов и налоговых льгот компании, а не от самого бизнеса."},
     {key:"revenue", label:"По выручке", section:data,
-     metricLabel:"выручка купленной компании", rubKey:"revenue_rub", yearKey:"revenue_year",
+     metricLabel:"выручка купленной компании", metricShort:"выручка", rubKey:"revenue_rub", yearKey:"revenue_year",
      explain:"Выручка — из той же официальной отчётности за год сделки или предыдущий."},
   ];
   let activeKey = (data.operating_profit && data.operating_profit.clean_total) ? "op" : "revenue";
@@ -6898,21 +6898,34 @@ async function mountMarketMultiples(){
       <div style="margin-bottom:18px">
         ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">×${i.median} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
       </div>` : "";
+    // Имя купленной компании — как её знает читатель (профиль в базе), а не
+    // капсом из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"»
+    // на витрине читается как казённая выписка (правило «язык для людей»).
+    const targetName = d => (co(d.target_id)||{}).name || d.target_name || "";
     const dealsHtml = s.deals.slice(0,15).map(d=>`
       <a class="an-deal" href="#/deal/${d.id}">
         <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""}${PRICE_TERMS_NOTE[d.price_terms]?` (${PRICE_TERMS_NOTE[d.price_terms]})`:""} ÷ ${v.metricLabel} за ${d[v.yearKey]} (${fnsMoney(d[v.rubKey])}${d.target_name?`, ${esc(d.target_name)}`:""})${d.year_basis?` · год сделки ${d.year}: ${esc(d.year_basis)}`:""}${d.verified_by?` · проверено: ${esc(d.verified_by)}`:""}</span>
+        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${fnsMoney(d[v.rubKey])}${targetName(d)?` — ${esc(targetName(d))}`:""}, ${v.metricShort} за ${d[v.yearKey]}${PRICE_TERMS_NOTE[d.price_terms]?` · ${PRICE_TERMS_NOTE[d.price_terms]}`:""}${d.year_basis&&d.year_basis.indexOf("предварительн")>=0?` · год сделки ${d.year} предварительный`:""}</span>
       </a>`).join("");
     const awaiting = (data.awaiting_reading||0);
-    const awaitingHtml = awaiting ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">Ещё ${awaiting} ${plural(awaiting,"сделка проходит","сделки проходят","сделок проходят")} правила по тексту карточки и ${plural(awaiting,"ждёт","ждут","ждут")} подтверждения чтением источников — до этого их мультипликаторы не показываются.</p>` : "";
+    const rejected = (data.rejected_by_reading||[]);
+    // Одна спокойная строка вместо простыни: сколько ещё придёт и сколько
+    // чтение уже не пропустило; поимённый разбор — в раскрывашке ниже, он
+    // нужен проверяющему, а не читателю витрины.
+    const awaitingHtml = (awaiting || rejected.length) ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">${
+      awaiting ? `Ещё ${awaiting} ${plural(awaiting,"сделка ждёт","сделки ждут","сделок ждут")} чтения источников. ` : ""}${
+      rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} чтение проверило и не пропустило — почему, видно ниже.` : ""}</p>` : "";
+    const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не пропущено чтением: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
-      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)">Проверки допуска прошли ${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")}: у каждой доля, цена и юрлицо подтверждены двумя независимыми чтениями источников, формула — цена ÷ показатель за последний полный год до сделки. Медиану по ним не показываем: сопоставимость сделок между собой (периметр, долг, год отчётности) ещё не утверждена методикой, и одна цифра по нескольким сделкам читалась бы как ориентир рынка.</p>`}
+      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки. Медиану пока не выводим — сделки слишком разные, чтобы одна цифра читалась как ориентир рынка.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}
       ${notShownHtml}
       ${awaitingHtml}
-      <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>`;
+      <details style="margin:16px 0 0"><summary style="font-size:12.5px;color:var(--muted);cursor:pointer">Как считаем и почему так</summary>
+      <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>
+      ${rejectedHtml}</details>`;
   };
   const draw = () => {
     const active = VIEWS.find(v=>v.key===activeKey);

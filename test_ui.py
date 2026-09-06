@@ -487,8 +487,14 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         assert "×1.5" not in body1 and "×1,5" not in body1, body1
         assert "ИТ и интернет" not in body1
         assert "Тестовая сделка" in body1 and "×2" in body1
-        assert "Медиану по ним не показываем" in body1
-        assert "Тестовая методика" in body1
+        assert "Медиану пока не выводим" in body1  # медианы скрыты (SHOW_MULTIPLE_MEDIANS)
+        # Методика с 6 сентября 2026 — под раскрывашкой «Как считаем и почему
+        # так»: три абзаца пояснений над пятью строками данных читались как
+        # объяснительная записка (вопрос владельца «а что сейчас в таблице»).
+        assert "Как считаем и почему так" in body1 and "Тестовая методика" not in body1
+        pg1.click("#multiplesCard summary")
+        pg1.wait_for_timeout(200)
+        assert "Тестовая методика" in pg1.inner_text("#multiplesCard")
         pg1.close()
 
         def empty(route):
@@ -627,15 +633,19 @@ def test_analytics_multiples_toggle_switches_to_revenue_view(browser, base_url):
         pg.wait_for_timeout(800)
         before = pg.inner_text("#multiplesCard")
         assert "×4" in before
+        pg.click("#multiplesCard summary")
+        pg.wait_for_timeout(200)
+        before = pg.inner_text("#multiplesCard")
         assert "тестовая методика по операционной прибыли" in before.lower()
         assert "тестовая методика по выручке" not in before.lower()
-        assert "по прибыли" in before.lower() and "операционной прибыли" not in before.lower().split("тестовая")[0]
         # кнопки одинаковой ширины — сетка из двух равных колонок
         widths = pg.evaluate("[...document.querySelectorAll('#multiplesCard [data-multview]')].map(b=>b.getBoundingClientRect().width)")
         assert len(widths) == 2 and abs(widths[0] - widths[1]) < 2, widths
 
         pg.click("#multiplesCard [data-multview='revenue']")
         pg.wait_for_timeout(300)
+        pg.click("#multiplesCard summary")
+        pg.wait_for_timeout(200)
         after = pg.inner_text("#multiplesCard")
         assert "×1.5" in after or "×1,5" in after
         assert "тестовая методика по выручке" in after.lower()
