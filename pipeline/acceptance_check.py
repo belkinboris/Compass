@@ -123,6 +123,25 @@ def check_assistant_chain(base: str, p: Protocol) -> None:
               base + '/api/assistant/lookup', ' | '.join(seen))
 
 
+def _pdf_text(body: bytes) -> str | None:
+    """Текст PDF любой доступной библиотекой. Импорт pdfminer в этой среде
+    роняет процесс паникой из cryptography (PanicException — не Exception,
+    обычный except его не ловит), поэтому ловится BaseException, а запасной
+    путь — pypdf; нет ни того ни другого — None, и сценарий помечается
+    непроверенным, а не проваленным."""
+    import io
+    try:
+        from pdfminer.high_level import extract_text
+        return extract_text(io.BytesIO(body)) or ''
+    except BaseException:  # noqa: BLE001
+        pass
+    try:
+        from pypdf import PdfReader
+        return '\n'.join((pg.extract_text() or '') for pg in PdfReader(io.BytesIO(body)).pages)
+    except BaseException:  # noqa: BLE001
+        return None
+
+
 def check_pdf(base: str, p: Protocol) -> None:
     """PDF карточки: настоящий PDF с кириллическим шрифтом (аудит, раунд 1:
     квадраты вместо русского текста)."""
@@ -142,12 +161,9 @@ def check_pdf(base: str, p: Protocol) -> None:
     # 6 сентября 2026): текст извлекается из PDF — в нём обязан читаться
     # заголовок сделки по-русски и не должно быть служебных пометок притока
     # («Источник: обогащение», «веб-поиск»), которые аудит видел в файле.
-    try:
-        import io
-        from pdfminer.high_level import extract_text
-        text = extract_text(io.BytesIO(body)) or ''
-    except Exception as e:  # noqa: BLE001
-        p.add('PDF карточки — текст файла', None, base + f'/api/deals/{deal_id}/export', f'pdfminer недоступен: {e}')
+    text = _pdf_text(body)
+    if text is None:
+        p.add('PDF карточки — текст файла', None, base + f'/api/deals/{deal_id}/export', 'ни pdfminer, ни pypdf в этой среде не работают')
         return
     title_words = [w for w in re.findall(r'[А-Яа-яЁё]{5,}', DEALS[deal_id]['title'])][:3]
     flat = re.sub(r'\s+', ' ', text)

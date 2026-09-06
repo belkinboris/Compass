@@ -29,3 +29,9 @@ python3 -m pip install --quiet --disable-pip-version-check pymorphy3 pymorphy3-d
 
 # Браузер предустановлен (PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers), и ставить
 # его правилами репозитория запрещено — здесь только питоновский пакет.
+
+# cffi — без него в контейнере сессии не импортируется cryptography, а с ней
+# и pdfminer: приёмка (pipeline/acceptance_check.py) не могла прочитать текст
+# скачанного PDF — импорт падал паникой pyo3, а не обычным исключением
+# (6 сентября 2026). pdfminer стоит в образе, не хватало только cffi.
+python3 -m pip install --quiet --disable-pip-version-check cffi
