@@ -569,7 +569,15 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     ошибка формата. Не помечаются отправленными: следующий прогон увидит их
     заново, если владелец не решит иначе."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
-    chat_id = channel_address()
+    # Без токена слать всё равно некуда — не спрашиваем сайт за адресом
+    # канала: без этой проверки функция без токена всё равно делала
+    # живой сетевой запрос (см. `channel_address()`), а в средах, где
+    # `MODERATION_TOKEN`/`TELEGRAM_WEBHOOK_SECRET` заданы, но исходящая
+    # сеть к боевому сайту не работает или отвечает медленно, — это
+    # реальный, воспроизводимый сетевой вызов там, где по докстрингу и
+    # тесту (`test_main_without_token_never_touches_network_or_writes`)
+    # его быть не должно.
+    chat_id = channel_address() if token else ''
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
     milestones = data.setdefault('telegram_milestones', {})

@@ -24,3 +24,17 @@ os.environ.setdefault("ACCESS_GATE", "0")
 os.environ["API_FNS_KEY"] = ""
 os.environ.setdefault("FNS_DAILY_RESYNC", "0")
 os.environ.setdefault("DATA_REFRESH_ENABLED", "0")
+# Тот же класс, что и API_FNS_KEY выше: секреты консоли/бота в контейнере
+# сессии — боевые. `send_telegram.channel_address()` и `approve.
+# fetch_decisions()` делают живой сетевой запрос к projectcompass.ru всякий
+# раз, когда `MODERATION_TOKEN`/`TELEGRAM_WEBHOOK_SECRET` заданы, — НЕЗАВИСИМО
+# от того, есть ли `TELEGRAM_BOT_TOKEN` (найдено 6 сентября 2026: тест
+# `test_main_without_token_never_touches_network_or_writes` завис на несколько
+# минут в SSL-хендшейке через прокси, потому что unset был только у
+# TELEGRAM_BOT_TOKEN/TELEGRAM_CHANNEL_ID). Тестам, которым нужен путь «с
+# токеном», ставят его сами через monkeypatch.setenv — он подменяет это
+# значение только на время теста.
+os.environ["TELEGRAM_BOT_TOKEN"] = ""
+os.environ["TELEGRAM_CHANNEL_ID"] = ""
+os.environ["TELEGRAM_WEBHOOK_SECRET"] = ""
+os.environ["MODERATION_TOKEN"] = ""
