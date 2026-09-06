@@ -164,3 +164,29 @@ def test_gold_multiple_shown_matches_verified_facts(row):
     d = DEALS[row['id']]
     ok, reason = facts.admitted(d, 'multiple_text')
     assert ok == row['multiple_shown'], (row['id'], reason, row['why'])
+
+
+@pytest.mark.parametrize('row', [r for r in GOLD['deals'] if 'price_terms' in r], ids=lambda r: r['id'])
+def test_gold_price_terms_match_readings(row):
+    """Четвёртый разбор рецензента: 754 млн ₽ у SmartDeal — 640 млн ₽
+    отложенного и 114 млн ₽ условного возмещения, оценённого на дату покупки,
+    а не твёрдая выплаченная цена. Состав цены читается из источников и
+    обязан совпадать с тем, что установлено чтением карточки в выборке."""
+    _pending(row)
+    d = DEALS[row['id']]
+    assert (d.get('facts') or {}).get('price', {}).get('terms') == row['price_terms'], (row['id'], row['why'])
+
+
+@pytest.mark.parametrize('row', [r for r in GOLD['deals'] if 'intragroup' in r], ids=lambda r: r['id'])
+def test_gold_intragroup_transfers_stay_out_of_money(row):
+    """Передача внутри одной группы (казахстанские активы между структурами
+    VEON, расчёт взаимозачётом) — прямой держатель сменился, конечный
+    контроль нет: в покупки и в мультипликаторы не идёт, и признак стоит
+    по чтению, а не по правилу."""
+    _pending(row)
+    d = DEALS[row['id']]
+    f = d.get('facts') or {}
+    assert bool(f.get('nature', {}).get('intragroup')) == row['intragroup'], (row['id'], row['why'])
+    if row['intragroup']:
+        assert not f['admitted']['purchase_sums'] and f['reasons']['purchase_sums'] == 'intragroup'
+        assert not f['admitted']['multiple_text']

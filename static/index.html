@@ -5720,8 +5720,9 @@ function factsVerifiedHtml(d){
     // подал консультант стороны в таблицу издания или назвали анонимные
     // источники, — не раскрытие сторонами (третий разбор рецензента).
     const who = PRICE_ATTRIBUTION_LABELS[p.attribution] || "";
+    const terms = PRICE_TERMS_NOTE[p.terms] ? `, ${PRICE_TERMS_NOTE[p.terms]}` : "";
     const what = p.meaning === "disclosed"
-      ? `цена${p.scope==="ev"?" (с учётом долга)":p.scope==="package"?" за пакет":""}${who?`, ${who}`:""}`
+      ? `цена${p.scope==="ev"?" (с учётом долга)":p.scope==="package"?" за пакет":""}${terms}${who?`, ${who}`:""}`
       : `${PRICE_MEANING_LABELS[p.meaning] || "сумма"}${who && p.meaning!=="undisclosed"?` (${who})`:""}`;
     rows.push(what+src(p)+(p.quote?` — «${esc(p.quote)}»`:""));
   }
@@ -5734,6 +5735,8 @@ const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подпис�
 const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",
   adviser:"число подал консультант стороны, сами стороны его не называли", media_sources:"по данным источников издания, стороны не подтверждали",
   analyst:"оценка аналитика", disputed:"читатели разошлись, кто назвал число"};
+const PRICE_TERMS_NOTE = {includes_contingent:"включая условную или отложенную часть, оценённую на дату покупки", paid:"фактически выплачено",
+  disputed:"читатели разошлись, твёрдая ли это сумма"};
 const PRICE_MEANING_LABELS = {reported:"сумма по данным источников, сторонами не раскрыта", estimate:"оценка, не цена сделки", range:"диапазон",
   lower_bound:"нижняя граница суммы", auction_start:"стартовая цена торгов", foreign_currency:"сумма в валюте", not_a_price:"число в источнике — не цена сделки",
   valuation:"оценка компании при размещении", raise:"объём привлечения", undisclosed:"источники цену не называют"};
@@ -5843,7 +5846,7 @@ async function mountDealFns(d){
     const c=co(p.id);
     const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
     const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year, p.latest.revenue_rub);
-    const pf=priceFact(d), scopeNote=pf.scope==="ev"?"цена с учётом долга":pf.scope==="package"?`цена за ${fmtPct(stakeFact(d).value||0)}`:"цена за 100% акций";
+    const pf=priceFact(d), scopeNote=(pf.scope==="ev"?"цена с учётом долга":pf.scope==="package"?`цена за ${fmtPct(stakeFact(d).value||0)}`:"цена за 100% акций")+(PRICE_TERMS_NOTE[pf.terms]?` (${PRICE_TERMS_NOTE[pf.terms]})`:"");
     const yearNote=my.basis==="дата карточки"?"":`; год сделки — ${my.basis}`;
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
@@ -6876,8 +6879,14 @@ async function mountMarketMultiples(){
   let activeKey = (data.operating_profit && data.operating_profit.clean_total) ? "op" : "revenue";
   const renderSection = (v) => {
     const s = v.section;
+    // Проверенные сделки, которых в списке нет, называются поимённо с причиной:
+    // выброс за границами, операционный убыток, нет отчёта. Скрыть их молча
+    // значило бы сказать читателю «остальные убыточны или без данных»
+    // (четвёртый разбор рецензента: «Убик» ×902 по прибыли исчезал без слов).
+    const notShown = (s && s.not_shown) || [];
+    const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ×${n.value})`:""}`).join("; ")}.</p>` : "";
     if(!s || !s.clean_total){
-      return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>`;
+      return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>${notShownHtml}`;
     }
     // Медианы (общая и отраслевые) показываются только при data.show_medians:
     // сделки прошли правила допуска, но их сопоставимость между собой (периметр,
@@ -6892,7 +6901,7 @@ async function mountMarketMultiples(){
     const dealsHtml = s.deals.slice(0,15).map(d=>`
       <a class="an-deal" href="#/deal/${d.id}">
         <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${v.metricLabel} за ${d[v.yearKey]} (${fnsMoney(d[v.rubKey])}${d.target_name?`, ${esc(d.target_name)}`:""})${d.year_basis?` · год сделки ${d.year}: ${esc(d.year_basis)}`:""}${d.verified_by?` · проверено: ${esc(d.verified_by)}`:""}</span>
+        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""}${PRICE_TERMS_NOTE[d.price_terms]?` (${PRICE_TERMS_NOTE[d.price_terms]})`:""} ÷ ${v.metricLabel} за ${d[v.yearKey]} (${fnsMoney(d[v.rubKey])}${d.target_name?`, ${esc(d.target_name)}`:""})${d.year_basis?` · год сделки ${d.year}: ${esc(d.year_basis)}`:""}${d.verified_by?` · проверено: ${esc(d.verified_by)}`:""}</span>
       </a>`).join("");
     const awaiting = (data.awaiting_reading||0);
     const awaitingHtml = awaiting ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">Ещё ${awaiting} ${plural(awaiting,"сделка проходит","сделки проходят","сделок проходят")} правила по тексту карточки и ${plural(awaiting,"ждёт","ждут","ждут")} подтверждения чтением источников — до этого их мультипликаторы не показываются.</p>` : "";
@@ -6901,6 +6910,7 @@ async function mountMarketMultiples(){
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}
+      ${notShownHtml}
       ${awaitingHtml}
       <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>`;
   };

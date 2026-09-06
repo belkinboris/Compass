@@ -290,6 +290,37 @@ def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch
     assert any(e["reason"] == "price_not_verified" for e in body["excluded"]), body["excluded"]
 
 
+def test_analytics_multiples_endpoint_names_every_verified_deal_it_hides(client, monkeypatch):
+    """Четвёртый разбор рецензента, пункт 6: «Убик» (прибыль 2 млн ₽ при цене
+    1,8 млрд ₽ — ×902) и «Бизнес-Недвижимость» (×16) исчезали из выдачи по
+    прибыли без единого слова, и читатель мог решить, что остальные убыточны
+    или без данных. Проверенная, но не показанная сделка обязана быть названа
+    с причиной — и с самим числом, если оно есть."""
+    _seed_multiples_entity("mult-out-target", "7710000701", 2023, 500_000_000,
+                            operating_profit_rub=1_000_000)  # 1000 / 1 = ×1000 — выброс
+    deals = {"mult-out-deal": dict(
+        id="mult-out-deal", title="Сделка с крошечной прибылью", type="M&A",
+        date="2024-03-01", sum="1 000 млн ₽", target="mult-out-target",
+        buyer="mult-buyer", seller="Тестовый Продавец",
+        eco={"share": "Куплено 100% долей"}, asset=None)}
+    registry = {"mult-out-target": {"company_id": "mult-out-target", "decision": "confirmed", "inn": "7710000701"}}
+    deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
+    monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
+    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+
+    body = client.get("/api/analytics/multiples").json()
+    assert [d["id"] for d in body["deals"]] == ["mult-out-deal"] and body["not_shown"] == []
+    op = body["operating_profit"]
+    assert op["deals"] == []
+    assert len(op["not_shown"]) == 1
+    hidden = op["not_shown"][0]
+    assert hidden["id"] == "mult-out-deal" and hidden["reason"] == "outlier" and hidden["value"] == 1000.0
+    assert "вне границ" in hidden["label"]
+    # и у каждой показанной строки виден состав цены и событие (пусть и пустые)
+    assert "price_terms" in body["deals"][0] and "price_event" in body["deals"][0]
+
+
 def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(client, monkeypatch):
     """Та же цепочка, но с operating_profit_rub в отчётности — второй
     мультипликатор обязан посчитаться НЕЗАВИСИМО от первого, по той же

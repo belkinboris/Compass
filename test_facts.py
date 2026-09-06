@@ -147,14 +147,17 @@ def test_check_reading_flags_quote_not_in_source_and_bad_values():
 
 
 def test_two_readers_agree_verified_disagree_disputed():
-    a = {'_key': 'stake', 'value': 100.0, 'event': 'closing', 'quote': 'X купил 100% долей ООО «Ромашка» у продавца за деньги', 'quote_checked': True}
+    a = {'_key': 'stake', 'value': 100.0, 'event': 'closing', 'quote': 'X купил 100% долей ООО «Ромашка» у продавца за деньги',
+         'quote_checked': True, 'source': 'https://example.com/a'}
     b = dict(a, reader='B')
     assert fc._basis_for([a, b])[0] == 'verified'
     assert fc._basis_for([a, dict(b, value=51.0)])[0] == 'disputed'
     assert fc._basis_for([a])[0] == 'read'
     # цитаты не сверены с текстом, но совпадают на восемь слов — verified; разные — read
     a2, b2 = dict(a, quote_checked=None), dict(b, quote_checked=None)
-    assert fc._basis_for([a2, b2])[0] == 'verified'
+    # источника в кэше нет, цитата не сверена — одинаковые цитаты двух чтений
+    # больше НЕ дают verified: статус не может быть сильнее основания
+    assert fc._basis_for([a2, b2])[0] == 'read'
     assert fc._basis_for([a2, dict(b2, quote='совсем другая фраза о том же')])[0] == 'read'
 
 
@@ -183,7 +186,39 @@ def test_third_review_rules():
     # год из подтверждённой даты закрытия
     f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='closing', value='2025-10-09')
     assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтверждённая дата закрытия')
-    assert dm.multiple_year(d) == (2024, 'дата карточки')
+    year, basis = dm.multiple_year(d)
+    assert year == 2024 and basis.startswith('дата карточки') and 'предварительн' in basis
+    # подписано в декабре, закрытие не прочитано — год предварительный по подписанию;
+    # прочитали закрытие в январе — год сменился и больше не предварительный
+    f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='signing', value='2024-12-20')
+    year, basis = dm.multiple_year(dict(d, facts=f))
+    assert year == 2024 and 'подписания' in basis and 'предварительн' in basis
+    f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='closing', value='2025-01-15')
+    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтверждённая дата закрытия')
+    # неполное основание чтения: без адреса «подтверждённым» не становится
+    import pipeline.facts_confirm as fc
+    r1 = {'_key': 'nature', 'control_change': True, 'quote': 'купил', 'quote_checked': True, 'source': 'https://x/1'}
+    assert fc._basis_for([r1, dict(r1, reader='B')])[0] == 'verified'
+    assert fc._basis_for([r1, dict(r1, reader='B', source=None)])[0] == 'read'
+    assert fc._basis_for([r1, dict(r1, reader='B', quote_checked=None)])[0] == 'read'
+    # ярлык стадии одной сделки — не спор: берётся сильнейший, разночтения видны
+    m = fc.merged_fields('price', [{'value_rub': 1e9, 'meaning': 'disclosed', 'event': 'announcement', 'scope': 'equity', 'terms': 'fixed'},
+                                   {'value_rub': 1e9, 'meaning': 'disclosed', 'event': 'closing', 'scope': 'equity', 'terms': 'fixed'}])
+    assert m['event'] == 'closing' and m['event_variants'] == ['announcement', 'closing'] and m['terms'] == 'fixed'
+    # но неразрешённый спор о событии — не допуск к деньгам
+    f = dict(v); f['price'] = dict(v['price'], event='disputed')
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['purchase_sums'] == 'price_event_disputed'
+    # передача внутри группы — не покупка на рынке
+    f = dict(v); f['nature'] = dict(v['nature'], intragroup=True, control_change=False)
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['purchase_sums'] == 'intragroup'
+    # точность: значение не точнее цитаты
+    assert fc.price_precise_enough(50_800_000_000, 'сумма сделки — 50,8 млрд руб.')
+    assert not fc.price_precise_enough(50_785_000_000, 'сумма сделки — 50,8 млрд руб.')
+    assert fc.price_precise_enough(50_785_000_000, 'сумма сделки — 50,785 млрд руб.')
+    assert not fc.price_precise_enough(66_132_908_002.5, 'за 66,1 млрд руб.')
+    assert fc.price_precise_enough(66_132_908_002.5, 'цена продажи составила 66 132 908 002,5 руб.')
     # число, названное анонимными источниками, — не цена, названная сторонами
     assert dm.sum_basis({'sum': '38,2 млрд ₽', 'sum_basis': 'reported'}) == 'reported'
     f = dict(v); f['price'] = dict(v['price'], meaning='reported')

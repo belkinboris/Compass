@@ -423,9 +423,18 @@ def multiple_year(deal: dict[str, Any]) -> tuple[int | None, str]:
     разбор рецензента). Основание возвращается наружу: от года зависит
     знаменатель, и API обязан сказать, откуда год."""
     f = (deal.get('facts') or {}).get('date') or {}
-    if f.get('basis') == 'verified' and f.get('meaning') in ('closing', 'registry') and str(f.get('value') or '')[:4].isdigit():
-        return int(str(f['value'])[:4]), 'подтверждённая дата закрытия' if f['meaning'] == 'closing' else 'подтверждённая дата записи в реестре'
-    return year_of(deal), 'дата карточки'
+    value = str(f.get('value') or '')
+    if f.get('basis') == 'verified' and value[:4].isdigit():
+        if f.get('meaning') in ('closing', 'registry'):
+            return int(value[:4]), 'подтверждённая дата закрытия' if f['meaning'] == 'closing' else 'подтверждённая дата записи в реестре'
+        # Закрытие не подтверждено — год берём по лучшей подтверждённой дате
+        # (подписание, объявление) и называем предварительным: сделка,
+        # подписанная в декабре и закрытая в январе, сменит год, когда
+        # закрытие прочитают (четвёртый разбор рецензента, пункт 7).
+        label = {'signing': 'подтверждённая дата подписания', 'announcement': 'подтверждённая дата объявления',
+                 'publication': 'дата сообщения о сделке'}.get(f.get('meaning'), 'подтверждённая дата')
+        return int(value[:4]), label + ' — закрытие не подтверждено, год предварительный'
+    return year_of(deal), 'дата карточки — закрытие не подтверждено, год предварительный'
 
 
 def target_of(deal: dict[str, Any]) -> str | None:
@@ -592,6 +601,35 @@ class OpProfitMultiple:
     multiple: float
 
 
+NOT_SHOWN_LABELS = {
+    'no_entity': 'юрлицо предмета не сопоставлено в базе сайта',
+    'no_report': 'нет отчёта за нужный год',
+    'report_changed': 'в знаменателе оказался другой отчёт, чем подтверждали читатели',
+    'no_metric': 'показатель в отчёте не раскрыт',
+    'loss': 'операционный убыток — мультипликатор не считается',
+    'year_gap': 'отчёт не за последний полный год до сделки',
+    'outlier': 'значение вне границ 0,1–15 — показано отдельно, в список не идёт',
+}
+
+
+def _why_not(sum_rub: float, metric_rub: float | None, metric_year: int | None, deal_year: int) -> tuple[str, float | None]:
+    """Почему санитарная проверка не пропустила проверенную сделку — с самим
+    числом, если оно есть: скрыть выброс молча значит показать читателю
+    «остальные убыточны или без данных»."""
+    if metric_rub is None or metric_year is None:
+        return 'no_metric', None
+    if metric_rub <= 0:
+        return 'loss', None
+    if not (MIN_YEAR_GAP <= deal_year - metric_year <= MAX_YEAR_GAP):
+        return 'year_gap', None
+    return 'outlier', round(sum_rub / metric_rub, 2)
+
+
+def _not_shown_row(cand: MultipleCandidate, reason: str, value: float | None = None) -> dict:
+    return {'id': cand.deal_id, 'title': cand.title, 'reason': reason,
+            'label': NOT_SHOWN_LABELS.get(reason, reason), 'value': value}
+
+
 def multiple_for_candidate_op(cand: MultipleCandidate, operating_profit_rub: float | None,
                                operating_profit_year: int | None, target_name: str | None
                                ) -> OpProfitMultiple | None:
@@ -679,6 +717,10 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                          else 'цена с учётом долга (EV)')
             verified_meta[deal_id] = {
                 'stake': stake.get('value'), 'price_scope': scope, 'year_basis': year_basis,
+                # состав цены и событие — чтобы ×2,09 у SmartDeal не читалось
+                # как твёрдая выплаченная цена: 640 млн ₽ отложенного и 114 млн ₽
+                # условного возмещения, оценённого на дату покупки
+                'price_terms': price.get('terms'), 'price_event': price.get('event'),
                 'formula': f'{numerator} ÷ показатель купленной компании за последний полный год до сделки',
                 'verified_by': price.get('verified_by'), 'price_quote': price.get('quote'),
                 'price_source': price.get('source'), 'checks': facts_layer.number_checks(d),
@@ -690,6 +732,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
 
     rows: list[DealMultiple] = []
     op_rows: list[OpProfitMultiple] = []
+    not_shown: dict[str, list] = {'revenue': [], 'operating_profit': []}
     industry_of: dict[str, str] = {}
     # Отрасль — из самой сделки, а не из профиля компании: у профиля ключ
     # называется `industry` (а здесь читали `ind`), и все двадцать сделок
@@ -702,6 +745,8 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
         ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
         if not entity:
+            not_shown['revenue'].append(_not_shown_row(cand, 'no_entity'))
+            not_shown['operating_profit'].append(_not_shown_row(cand, 'no_entity'))
             continue
         report = db.scalar(select(FinancialReport).where(
             FinancialReport.legal_entity_id == entity.id,
@@ -709,6 +754,8 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             FinancialReport.revenue_rub.is_not(None),
         ).order_by(FinancialReport.year.desc()))
         if not report:
+            not_shown['revenue'].append(_not_shown_row(cand, 'no_report'))
+            not_shown['operating_profit'].append(_not_shown_row(cand, 'no_report'))
             continue
         # Периметр подтверждался читателями ПО КОНКРЕТНОМУ отчёту (ИНН, год,
         # выручка); если сейчас в знаменателе другой отчёт — восстановленный,
@@ -718,10 +765,14 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         if seen and (str(seen.get('inn')) != str(entity.inn) or int(seen.get('year') or 0) != int(report.year)
                      or abs(float(seen.get('revenue_rub') or 0) - float(report.revenue_rub)) > 0.01 * float(report.revenue_rub)):
             verified_meta[cand.deal_id]['checks'].append('report_changed')
+            not_shown['revenue'].append(_not_shown_row(cand, 'report_changed'))
+            not_shown['operating_profit'].append(_not_shown_row(cand, 'report_changed'))
             continue
         dm = multiple_for_candidate(cand, float(report.revenue_rub), report.year, entity.legal_name)
         if dm:
             rows.append(dm)
+        else:
+            not_shown['revenue'].append(_not_shown_row(cand, *_why_not(cand.sum_rub, float(report.revenue_rub), report.year, cand.year)))
         # Та же строка отчётности уже несёт операционную прибыль — второй
         # запрос к БД не нужен, только своя санитарная проверка (операционный
         # убыток и `None` отсеиваются внутри `multiple_for_candidate_op`).
@@ -731,6 +782,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             report.year, entity.legal_name)
         if op_dm:
             op_rows.append(op_dm)
+        else:
+            # Исчезновение из выдачи по прибыли обязано иметь названную причину
+            # (четвёртый разбор, пункт 6): «Убик» — прибыль 2 млн ₽ при цене
+            # 1,8 млрд ₽ даёт ×902, и это не «нет данных», а выброс.
+            not_shown['operating_profit'].append(_not_shown_row(
+                cand, *_why_not(cand.sum_rub, float(op_profit) if op_profit is not None else None, report.year, cand.year)))
         if dm or op_dm:
             ind = deal_industry.get(cand.deal_id) or ''
             if not ind or ind == 'Не определена':
@@ -756,6 +813,9 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         'excluded': [{'reason': k, 'label': facts_layer.REASON_LABELS.get(k, k), 'count': v}
                      for k, v in sorted(excluded.items(), key=lambda kv: -kv[1])],
         'no_report': len(candidates) - len(rows),
+        # Проверенные сделки, которых в списке нет, — с причиной по каждой:
+        # выброс за границами, убыток, нет отчёта, отчёт сменился.
+        'not_shown': not_shown['revenue'],
         'deals': [dict({
             'id': r.deal_id, 'title': r.title, 'year': r.year,
             'target_id': r.target_id, 'target_name': r.target_name,
@@ -778,6 +838,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         ),
         'operating_profit': {
             'clean_total': len(op_rows),
+            'not_shown': not_shown['operating_profit'],
             'median': overall_median(op_rows),
             'industries': industry_medians(op_rows, industry_of),
             'deals': [dict({

@@ -59,6 +59,28 @@ EVENTS = ('closing', 'signing', 'announcement', 'publication', 'registry')
 # первые три дают meaning 'disclosed'; «по данным источников» — 'reported'.
 ATTRIBUTIONS = ('parties', 'filing', 'registry', 'adviser', 'media_sources', 'analyst', 'unknown')
 PARTY_ATTRIBUTIONS = ('parties', 'filing', 'registry')
+# Ярлыки стадии одной и той же сделки — по силе: закрытие сильнее подписания,
+# подписание сильнее объявления. Два чтения с разными ярлыками — не спор о
+# цене (четвёртый разбор рецензента: «объявление итогов торгов и протокол
+# торгов описывают одно событие»), а разные названия одного события; берётся
+# сильнейший, остальные остаются в event_variants. Разные СДЕЛКИ с одной суммой
+# ловит спорная дата.
+EVENT_STRENGTH = {'publication': 0, 'announcement': 1, 'signing': 2, 'registry': 3, 'closing': 4}
+# Состав цены: фиксированная, с условной/отложенной частью (оценённой на дату
+# покупки — SmartDeal: 640 млн ₽ отложенного + 114 млн ₽ условного возмещения),
+# фактически выплаченная, неизвестно.
+PRICE_TERMS = ('fixed', 'includes_contingent', 'paid', 'unknown')
+# Слова, по которым цитата подтверждает, что число назвала СТОРОНА, документ
+# или реестр, — а не просто повторила его редакция. Без такого слова в цитате
+# (или в attribution_quote из того же текста) attribution parties/filing/
+# registry не принимается: «Европлан» 50,785 млрд ₽ подтверждали цитатой из
+# smart-lab, где число округлено и автор не назван.
+ATTRIBUTION_CUE = re.compile(
+    r'сообщил|сообщает|сообщи[лт]|заяви|говорится|пресс-?служб|пресс-?релиз|отч[её]тност|проспект|'
+    r'протокол|распоряжен|егрюл|реестр|итог[а-яё]* (?:аукцион|торг)|ход[а-яё]* торг|площадк|'
+    r'по данным компании|компани[яи] (?:сообщ|объяв|раскры|уведом)|раскры[лт]|уведомлени|'
+    r'в сообщении|официальн|презентаци|отчёт[а-яё]* компании|отчет[а-яё]* компании|мсфо|рсбу|'
+    r'банк[а-яё]* (?:сообщ|заяв)|группа (?:сообщ|заяв)|материал[а-яё]* (?:компании|торгов)', re.I)
 PROD = 'https://projectcompass.ru'
 MONTHS = ('январ', 'феврал', 'март', 'апрел', 'ма[йя]', 'июн', 'июл', 'август', 'сентябр', 'октябр', 'ноябр', 'декабр')
 
@@ -138,8 +160,18 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
                     and f['nature'].get('control_change') and not (f['target'].get('perimeter_report') or {}).get('inn') \
                     and f['target'].get('perimeter') != 'refuted':
                 rows.append(d)
+    elif metric == 'grounds':
+        # Четвёртый разбор: у подтверждённой цены должны быть автор с цитатой,
+        # точность цитаты и состав (фиксированная/с условной частью), у смены
+        # контроля — адрес и сверенная цитата и ответ, не внутригрупповая ли
+        # это передача. Перечитываются все сделки с прочитанной ценой.
+        for d in deals.values():
+            pf, nf = d['facts']['price'], d['facts']['nature']
+            if pf.get('basis') in ('read', 'verified') or nf.get('control_change_basis') in ('read', 'verified'):
+                rows.append(d)
+        rows.sort(key=lambda d: -(d['facts']['price'].get('value_rub') or 0))
     else:
-        raise SystemExit('metric: multiple | top | price_recheck | perimeter')
+        raise SystemExit('metric: multiple | top | price_recheck | perimeter | grounds')
     rows = rows[:limit]
     tasks = []
     for d in rows:
@@ -154,6 +186,7 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
             'target_profile': prof.get('name'), 'target_inn': r.get('inn') if r.get('decision') == 'confirmed' else None,
             'sources': _urls(d),
             'confirm': (['price'] if metric == 'price_recheck' else ['perimeter'] if metric == 'perimeter'
+                        else ['price', 'nature'] if metric == 'grounds'
                         else ['price', 'date', 'nature'] + (['stake', 'perimeter'] if metric == 'multiple' else [])),
             'current': {k: d['facts'][k] for k in ('stake', 'price', 'date')},
         })
@@ -221,6 +254,34 @@ def price_supported(value_rub, quote) -> bool:
         n = float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()]
         return abs(n - value_rub) <= max(1.0, 0.01 * value_rub)
     return False
+
+
+def quote_number_rub(quote) -> float | None:
+    """Число из цитаты в рублях — ровно с той точностью, с какой оно там
+    записано (50,8 млрд → 50 800 000 000; 66 132 908 002,5 руб. → как есть)."""
+    if not quote:
+        return None
+    parsed = dm.parse_rub_sum(quote)
+    if parsed:
+        return float(parsed)
+    m = re.search(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)', quote, re.I)
+    if m:
+        return float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()]
+    m = re.search(r'(\d[\d\s\xa0]{6,}(?:[.,]\d+)?)\s*(?:руб|₽)', quote, re.I)
+    if m:
+        return float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.'))
+    return None
+
+
+def price_precise_enough(value_rub, quote) -> bool:
+    """Значение не точнее своей цитаты. «50,785 млрд» с цитатой «50,8 млрд»
+    — согласие двух чтений подтвердило точность, которой в цитате нет
+    (четвёртый разбор рецензента); точная цифра требует цитаты с точной
+    цифрой. Допуск — половина последнего разряда цитаты, не 1%."""
+    q = quote_number_rub(quote)
+    if q is None or value_rub is None:
+        return False
+    return abs(q - float(value_rub)) <= max(1.0, 1e-6 * q)
 
 
 def date_supported(value, quote) -> bool:
@@ -317,11 +378,25 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
                 # («Сделки года» Ъ, запись Verba Legal о ВТБ/«Аврора Инвест»,
                 # 255 млрд ₽), — не раскрытие сторонами: сам ВТБ цену не называл.
                 problems.append('price: disclosed при attribution adviser/media_sources/analyst — это reported или estimate')
+            if fact.get('terms') is not None and fact.get('terms') not in PRICE_TERMS:
+                problems.append(f'price: terms вне {PRICE_TERMS}')
+            if attr in PARTY_ATTRIBUTIONS and fact.get('meaning') == 'disclosed':
+                # Кто назвал число — обязано быть видно в цитате, а не только в
+                # уверенности читателя. Вторая цитата (attribution_quote) из того
+                # же текста годится, если в первой цитате цифра, а автор — рядом.
+                aq = fact.get('attribution_quote') or ''
+                cue_in = ATTRIBUTION_CUE.search(q) or (aq and ATTRIBUTION_CUE.search(aq))
+                if not cue_in:
+                    problems.append('price: attribution %s не подтверждена цитатой — нужна attribution_quote со словами «сообщил/заявил/говорится/пресс-служба/отчётность/протокол»' % attr)
+                elif aq and quote_ok(aq, url) is False:
+                    problems.append(f'price: attribution_quote не найдена дословно в {url}')
             if fact.get('meaning') == 'disclosed':
                 if v is None:
                     problems.append('price: disclosed без value_rub')
                 elif not price_supported(float(v), q):
                     problems.append(f'price: {v} не выводится из цитаты')
+                elif not price_precise_enough(float(v), q):
+                    problems.append(f'price: {v} точнее своей цитаты ({quote_number_rub(q):.0f}) — нужна цитата с точной цифрой или значение в точности цитаты')
                 else:
                     card_v = dm.parse_rub_sum(card.get('sum'))
                     if card_v and abs(card_v - float(v)) > 0.01 * card_v:
@@ -334,6 +409,10 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
         elif key == 'nature':
             if not isinstance(fact.get('control_change'), bool):
                 problems.append('nature: control_change не bool')
+            if fact.get('intragroup') is not None and not isinstance(fact.get('intragroup'), bool):
+                problems.append('nature: intragroup не bool')
+            if fact.get('intragroup') and fact.get('control_change'):
+                problems.append('nature: intragroup=true вместе с control_change=true — при передаче внутри группы конечный контроль не меняется')
         elif key == 'perimeter':
             if not isinstance(fact.get('ok'), bool):
                 problems.append('perimeter: ok не bool')
@@ -414,7 +493,7 @@ def _agree(key, a, b) -> bool:
     if key == 'date':
         return a.get('value') == b.get('value')
     if key == 'nature':
-        return a.get('control_change') == b.get('control_change')
+        return a.get('control_change') == b.get('control_change') and bool(a.get('intragroup')) == bool(b.get('intragroup'))
     if key == 'perimeter':
         if a.get('ok') != b.get('ok'):
             return False
@@ -440,8 +519,16 @@ def merged_fields(key, readings: list[dict]) -> dict:
             out['attribution_variants'] = sorted(set(attrs))
         events = [r.get('event') for r in readings if r.get('event')]
         if events:
-            out['event'] = events[0] if len(set(events)) == 1 else 'disputed'
+            # ярлык стадии одной сделки — берётся сильнейший, разночтения видны
+            out['event'] = max(events, key=lambda e: EVENT_STRENGTH.get(e, -1))
             out['event_variants'] = sorted(set(events))
+        terms = [r.get('terms') for r in readings if r.get('terms')]
+        if terms:
+            out['terms'] = terms[0] if len(set(terms)) == 1 else 'disputed'
+            out['terms_variants'] = sorted(set(terms))
+        aqs = [r.get('attribution_quote') for r in readings if r.get('attribution_quote')]
+        if aqs:
+            out['attribution_quote'] = aqs[0]
         if len(scopes) >= 2 and len(set(scopes)) == 1 and scopes[0] != 'unknown':
             out['scope'], out['scope_basis'] = scopes[0], 'verified'
         elif len(scopes) == 1 and scopes[0] != 'unknown':
@@ -458,7 +545,7 @@ def merged_fields(key, readings: list[dict]) -> dict:
         return {'value': float(r0['value']), 'object': r0.get('object'), 'event': r0.get('event'),
                 'event_variants': sorted({r.get('event') for r in readings})}
     if key == 'nature':
-        return {'control_change': r0.get('control_change')}
+        return {'control_change': r0.get('control_change'), 'intragroup': bool(r0.get('intragroup'))}
     if key == 'perimeter':
         out = {'perimeter_entity': r0.get('entity')}
         if r0.get('report'):
@@ -472,10 +559,15 @@ def _basis_for(readings: list[dict]) -> tuple[str, str]:
     """Основание по набору чтений одного факта: verified / read / disputed."""
     if len(readings) >= 2:
         if all(_agree_key(readings[0], r) for r in readings[1:]):
-            checked = any(r.get('quote_checked') for r in readings)
-            if checked or _same_quote(readings):
+            # verified — только когда у КАЖДОГО чтения есть адрес и цитата сверена
+            # с текстом: иначе статус сильнее сохранённого основания, и проверку
+            # нельзя воспроизвести (четвёртый разбор: семь «подтверждённых» смен
+            # контроля без единого адреса и сверки).
+            complete = all(str(r.get('source') or '').startswith('http') and r.get('quote_checked') is True
+                           for r in readings)
+            if complete:
                 return 'verified', 'model×%d' % len(readings)
-            return 'read', 'model×%d, цитаты не сверены с текстом' % len(readings)
+            return 'read', 'model×%d, основание неполное (нет адреса или цитата не сверена)' % len(readings)
         return 'disputed', 'model×%d' % len(readings)
     r = readings[0]
     return 'read', 'model×1' + ('' if r.get('quote_checked') else ', цитата не сверена с текстом')

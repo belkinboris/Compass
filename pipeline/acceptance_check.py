@@ -106,6 +106,15 @@ def check_multiples(base: str, p: Protocol) -> None:
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
           f"запрещённые: {forbidden or 'нет'}; доля <95%: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
           f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
+    # Проверенная сделка, которой нет в списке, обязана быть названа с причиной
+    # (выброс, убыток, нет отчёта): скрытая молча, она читается как «данных нет»
+    # или «убыточна» (четвёртый разбор рецензента, пункт 6).
+    hidden = list(m.get('not_shown') or []) + list((m.get('operating_profit') or {}).get('not_shown') or [])
+    unexplained = [h for h in hidden if not h.get('label')]
+    p.add('Мультипликаторы: у каждой проверенной, но не показанной сделки названа причина', not unexplained,
+          base + '/api/analytics/multiples',
+          'не показано: %d (%s)' % (len(hidden), '; '.join(
+              f"{h['id']}: {h['label']}" + (f" ×{h['value']}" if h.get('value') is not None else '') for h in hidden) or 'нет'))
 
 
 def check_assistant_chain(base: str, p: Protocol) -> None:

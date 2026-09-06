@@ -15647,16 +15647,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
+     "multiple_text": "price_event_disputed"
     }
    }
   },
@@ -19947,16 +19947,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
+     "multiple_text": "price_event_disputed"
     }
    }
   },
@@ -22760,15 +22760,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
      "multiple_text": "not_control_change"
     }
    },
@@ -67853,7 +67853,7 @@
     "sum": "50,785 млрд ₽",
     "share": "Инвестиционный холдинг SFI (ПАО «ЭсЭфАй») и Альфа-Банк договорились о покупке банком 87,5% акций независимой автолизинговой компании ПАО «ЛК „Европлан“».",
     "val": "В сделке «Европлан» оценён в 65 млрд ₽ за 100% акций компании.",
-    "target_fin": "Чистая прибыль ЛК «Европлан» по МСФО за 2024 год составила 14,9 млрд ₽, без учёта единовременного эффекта от увеличения ставки налога на прибыль — 17,2 млрд ₽. За первое полугодие 2025 года чистая прибыль по МСФО упала на 78% по сравнению с годом ранее, до 19 млрд ₽. За первое полугодие 2026 года, уже под контролем Альфа-банка, «Европлан» отчитался о чистой прибыли 4,3 млрд ₽ (+129% к первому полугодию 2025 года) при лизинговом портфеле 139,5 млрд ₽ (−17% с начала 2026 года).",
+    "target_fin": "Чистая прибыль ЛК «Европлан» по МСФО за 2024 год составила 14,9 млрд ₽, без учёта единовременного эффекта от увеличения ставки налога на прибыль — 17,2 млрд ₽. За первое полугодие 2025 года чистая прибыль по МСФО упала на 78% по сравнению с годом ранее, до 1,9 млрд ₽. За первое полугодие 2026 года, уже под контролем Альфа-банка, «Европлан» отчитался о чистой прибыли 4,3 млрд ₽ (+129% к первому полугодию 2025 года) при лизинговом портфеле 139,5 млрд ₽ (−17% с начала 2026 года).",
     "fin": "—",
     "rationale": "SFI начала рассматривать продажу активов, чтобы снизить чрезмерную долговую нагрузку дочерних компаний.",
     "context": "По неофициальным данным, Альфа-банк был не единственным претендентом на покупку «Европлана»: в переговорах также участвовали Сбербанк, ВТБ, банк «Дом.РФ» и Т-Банк.",
@@ -67911,6 +67911,10 @@
     [
      "Smart-Lab (МСФО I полугодие 2026)",
      "https://smart-lab.ru/blog/1342001.php"
+    ],
+    [
+     "Финансы Mail.ru",
+     "https://finance.mail.ru/article/chistaya-pribyil-evroplana-uvelichilas-v-dva-raza-po-itogam-pervogo-polugodiya-69223620/"
     ]
    ],
    "extra": "Альфа-банк купил крупнейшую российскую независимую лизинговую компанию. Покупатель — АО «Альфа-банк», один из крупнейших частных банков России; продавец — инвестиционный холдинг SFI (ПАО «ЭсЭфАй»). Сделка закрыта 25 декабря 2025 года.",
@@ -103849,16 +103853,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "perimeter_not_verified"
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
+     "multiple_text": "price_event_disputed"
     }
    }
   },
@@ -114159,15 +114163,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
      "multiple_text": "price_scope_unknown"
     }
    }
@@ -131448,16 +131452,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
+     "multiple_text": "price_event_disputed"
     }
    }
   },
@@ -142955,16 +142959,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "perimeter_not_verified"
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
+     "multiple_text": "price_event_disputed"
     }
    },
    "date_basis": "announcement"
@@ -164467,15 +164471,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
      "multiple_text": "price_scope_unknown"
     }
    },
@@ -178469,15 +178473,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
+     "purchase_sums": "price_event_disputed",
+     "top_purchases": "price_event_disputed",
      "multiple_text": "not_control_change"
     }
    },

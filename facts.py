@@ -129,6 +129,8 @@ REASON_LABELS = {
     'possible_duplicate': 'похожа на другую карточку той же сделки — ждёт сканера дублей',
     'control_change_not_verified': 'смена контроля не подтверждена двумя чтениями',
     'perimeter_report_missing': 'периметр подтверждён без привязки к конкретному отчёту',
+    'intragroup': 'передача внутри одной группы — конечный контроль не менялся',
+    'price_event_disputed': 'два чтения относят цену к разным событиям — не разрешено',
 }
 
 
@@ -319,6 +321,14 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
         # в 2024-м при одинаковой сумме).
         if _basis(date) == 'disputed':
             return False, 'date_disputed'
+        # Цена, у которой не разрешено, к какому событию она относится, в
+        # показатель по годам не идёт — даже подтверждённая (четвёртый разбор).
+        if price.get('event') == 'disputed':
+            return False, 'price_event_disputed'
+        # Передача внутри одной группы (казахстанские активы между структурами
+        # VEON, взаимозачётом) — не покупка на рынке; чтение говорит это прямо.
+        if nature.get('intragroup'):
+            return False, 'intragroup'
         if (f.get('identity') or {}).get('possible_duplicate'):
             return False, 'possible_duplicate'
         if metric == 'top_purchases' and deal.get('status') == 'Обсуждается':
@@ -356,6 +366,10 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
         # самую содержательную причину, а не ту, что проверилась первой.
         if nature.get('control_change_basis') != 'verified':
             return False, 'control_change_not_verified'
+        if nature.get('intragroup'):
+            return False, 'intragroup'
+        if price.get('event') == 'disputed':
+            return False, 'price_event_disputed'
         if (f.get('identity') or {}).get('possible_duplicate'):
             return False, 'possible_duplicate'
         if _basis(stake) != 'verified':
