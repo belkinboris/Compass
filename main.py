@@ -2565,8 +2565,36 @@ def _learn_review_group(payload, db=None) -> None:
     меняет id при переходе группы в супергруппу (см. `_review_chat_ids`).
     Источник истины — любое сообщение от владельца/партнёра ИЗ группы: его
     `chat.id` — единственно верный, актуальный номер прямо сейчас. Ничего не
-    возвращает и не мешает дальнейшей обработке того же апдейта."""
+    возвращает и не мешает дальнейшей обработке того же апдейта.
+
+    ВТОРОЙ ИСТОЧНИК — добавление бота в группу (`my_chat_member`), и он
+    важнее первого. У бота включён режим приватности
+    (`can_read_all_group_messages: false`), поэтому обычный текст в группе
+    до него НЕ доходит — только команды, ответы на его собственные
+    сообщения и нажатия кнопок. А своих сообщений в новой группе у него нет
+    и быть не может, пока он не знает её номера: круг замкнут, и «ждать,
+    пока владелец что-нибудь напишет» — тупик. 6 сентября 2026 консоль
+    молчала ровно так: бот вообще не состоял в новом чате
+    (`getChatMember` → status: left), а рутина час за часом отчитывалась,
+    что ждёт сообщения. Смена прав бота приходит ВСЕГДА, независимо от
+    приватности, — значит, достаточно добавить бота в группу, и адрес
+    запомнится сам."""
     if db is None:
+        return
+    member = payload.my_chat_member or {}
+    if member:
+        chat = member.get("chat") or {}
+        status = str((member.get("new_chat_member") or {}).get("status") or "")
+        chat_id = str(chat.get("id") or "")
+        # Учимся только на ВХОДЕ бота в чат: «left»/«kicked» — это выход, и
+        # запоминать по нему адрес значило бы записать чат, где бот уже никто.
+        if chat_id and str(chat.get("type") or "") in ("group", "supergroup") \
+                and status in ("member", "administrator", "creator") \
+                and _is_reviewer((member.get("from") or {}).get("id")):
+            known = db.get(AppSetting, REVIEW_GROUP_SETTING)
+            if not (known and known.value == chat_id):
+                _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
+                _greet_console_group(db, chat_id, chat.get("title"))
         return
     message = payload.message or (payload.callback_query or {}).get("message") or {}
     chat = message.get("chat") or {}
@@ -2579,6 +2607,22 @@ def _learn_review_group(payload, db=None) -> None:
     chat_id = str(chat.get("id") or "")
     if chat_id:
         _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
+
+
+def _greet_console_group(db, chat_id: str, title: str | None) -> None:
+    """Сказать в группе, что консоль подключена. Человек, добавивший бота,
+    иначе не отличит «работает» от «молчит»: тот же урок, что у настройки
+    тем 5 сентября 2026 — у действия, которое человек делает руками, обязан
+    быть видимый ответ."""
+    try:
+        notification_service.tg_api(
+            "sendMessage", chat_id=chat_id, disable_web_page_preview=True,
+            text=("\U0001F4CC Консоль «%s» подключена — отчёты и карточки на решение "
+                  "будут приходить сюда.\n\nЕсли в группе включены темы, откройте "
+                  "нужную и отправьте там /topic — бот покажет кнопки, какой вид "
+                  "сообщений в неё складывать." ) % (title or "без названия"))
+    except Exception as exc:  # noqa: BLE001 — адрес уже сохранён, приветствие не главное
+        logger.warning("приветствие в группу-консоль не ушло: %s", exc)
 
 
 def _announce_channel_id(payload, db=None) -> bool:

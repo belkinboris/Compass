@@ -3264,6 +3264,41 @@ def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch)
     assert client.get("/api/moderation/group", params={"token": "не тот"}).status_code == 404
 
 
+def test_review_group_id_is_learned_when_the_bot_is_added_to_the_group(client, monkeypatch):
+    """6 сентября 2026: консоль молчала сутки, а рутина час за часом писала,
+    что ждёт сообщения владельца в новой группе. Ждать было бесполезно с
+    двух сторон: у бота включён режим приватности (обычный текст в группе до
+    него не доходит), а в новом чате он вообще не состоял. Добавление бота
+    и смена его прав приходят ВСЕГДА — по ним сайт и запоминает адрес, а в
+    группу говорит, что подключился."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda m, **kw: sent.append((m, kw)))
+
+    def added(chat_id, status="administrator", by=111):
+        return client.post("/api/telegram/webhook/тайна", json={"my_chat_member": {
+            "chat": {"id": chat_id, "type": "supergroup", "title": "Компас · консоль"},
+            "from": {"id": by},
+            "new_chat_member": {"user": {"id": 1, "is_bot": True}, "status": status}}})
+
+    assert added(-1004440003333).status_code == 200
+    group = client.get("/api/moderation/group", params={"token": "тайна"})
+    assert group.status_code == 200 and group.json()["chat_id"] == "-1004440003333", group.json()
+    assert sent and sent[0][0] == "sendMessage" and str(sent[0][1]["chat_id"]) == "-1004440003333"
+    assert "консоль" in sent[0][1]["text"].lower()
+
+    # Выход бота из чужого чата адрес консоли не подменяет: учимся только на входе.
+    added(-1009990002222, status="left")
+    # И посторонний, добавивший бота куда-то ещё, — тоже.
+    added(-1008880001111, by=999)
+    assert client.get("/api/moderation/group", params={"token": "тайна"}).json()["chat_id"] \
+        == "-1004440003333"
+    # Повторное сообщение о правах в том же чате не рассылает приветствие снова.
+    before = len(sent)
+    added(-1004440003333)
+    assert len(sent) == before
+
+
 def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkeypatch):
     """Даже если TELEGRAM_REVIEW_GROUP_ID в окружении устарел, сайт обязан
     слать по свежему, только что узнанному номеру, а не по мёртвому."""
