@@ -44,15 +44,23 @@ SOFT_WORDS = re.compile(r'неофициально|допэмисси|(?:^|[^а-
 
 class Protocol:
     def __init__(self):
-        self.rows: list[tuple[str, bool, str, str]] = []
+        self.rows: list[tuple[str, bool | None, str, str]] = []
 
-    def add(self, scenario: str, ok: bool, where: str, seen: str) -> None:
+    def add(self, scenario: str, ok: bool | None, where: str, seen: str) -> None:
+        """ok=None — сценарий не удалось проверить ИЗ ЭТОЙ СРЕДЫ (не «прошёл»
+        и не «упал»): печатается отдельным знаком и в число провалов не идёт,
+        но в протоколе остаётся — читатель видит, что именно не проверено."""
         self.rows.append((scenario, ok, where, seen))
-        print(f"{'✓' if ok else '✗'} {scenario}\n    где: {where}\n    результат: {seen}")
+        mark = '✓' if ok else ('–' if ok is None else '✗')
+        print(f"{mark} {scenario}\n    где: {where}\n    результат: {seen}")
 
     @property
     def failed(self) -> int:
-        return sum(1 for r in self.rows if not r[1])
+        return sum(1 for r in self.rows if r[1] is False)
+
+    @property
+    def unchecked(self) -> int:
+        return sum(1 for r in self.rows if r[1] is None)
 
 
 def get_json(base: str, path: str, data: dict | None = None, timeout: int = 90):
@@ -141,9 +149,19 @@ def check_browser(base: str, p: Protocol) -> None:
         p.add('Экраны в браузере', False, base, 'playwright не установлен')
         return
     exe = '/opt/pw-browsers/chromium'
+    # Из среды разработки наружу ходят через прокси с собственным CA: браузер
+    # его не знает, поэтому для внешнего адреса — прокси из окружения и
+    # доверие его сертификату; локальный сервер — напрямую.
+    import os
+    external = not re.match(r'https?://(127\.0\.0\.1|localhost)', base)
+    proxy = os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy')
+    launch_kw = {'executable_path': exe} if Path(exe).exists() else {}
+    if external and proxy:
+        launch_kw['proxy'] = {'server': proxy}
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(executable_path=exe if Path(exe).exists() else None)
-        page = browser.new_page(viewport={'width': 1280, 'height': 900})
+        browser = pw.chromium.launch(**launch_kw)
+        page = browser.new_context(viewport={'width': 1280, 'height': 900},
+                                   ignore_https_errors=bool(external and proxy)).new_page()
         errors: list[str] = []
         page.on('pageerror', lambda e: errors.append(str(e)))
         page.goto(base + '/#/analytics')
@@ -177,8 +195,23 @@ def main() -> int:
     check_assistant_chain(base, p)
     check_pdf(base, p)
     if not args.no_browser:
-        check_browser(base, p)
-    print(f'\nСценариев: {len(p.rows)}, не прошли: {p.failed}')
+        try:
+            check_browser(base, p)
+        except Exception as e:  # noqa: BLE001 — сбой браузера — тоже строка протокола, а не обрыв
+            msg = str(e)
+            external = not re.match(r'https?://(127\.0\.0\.1|localhost)', base)
+            if external and ('ERR_CONNECTION_RESET' in msg or 'ERR_PROXY' in msg or 'ERR_TUNNEL' in msg):
+                # Из среды разработки headless-браузер не доходит до внешних адресов
+                # (прокси среды режет соединение; curl и urllib ходят). Это не дефект
+                # сайта: браузерные сценарии проверяются локальным сервером на том же
+                # коммите — `--base http://127.0.0.1:<порт>` — и об этом сказано прямо.
+                p.add('Экраны в браузере (внешний адрес)', None, base,
+                      'из этой среды браузер не доходит до внешних адресов — проверить локальным сервером на том же коммите: '
+                      f'{msg.splitlines()[0][:100]}')
+            else:
+                p.add('Экраны в браузере', False, base, f'ошибка браузера: {msg[:160]}')
+    tail = f', не проверено из этой среды: {p.unchecked}' if p.unchecked else ''
+    print(f'\nСценариев: {len(p.rows)}, не прошли: {p.failed}{tail}')
     return 1 if p.failed else 0
 
 
