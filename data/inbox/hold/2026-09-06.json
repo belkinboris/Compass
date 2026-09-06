@@ -5915,17 +5915,45 @@
    ]
   },
   {
-   "draft_id": "d44283687",
-   "title": "Cyberpunk, Need for Speed и Forza: названы автомобили из игр, которые можно купить в России",
+   "draft_id": "d83812308",
+   "title": "АКОРТ: российские сети нарастили долю отечественных овощей и фруктов",
    "date": "2026-09-06",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/cyberpunk-need-for-speed-i-forza-nazvany-avtomobili-iz-igr-kotorye-mozhno-kupit-v-rossii/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/06/1226662-akort-rossiiskie-seti-narastili"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86329580",
+   "title": "«Кажется, её время прошло»: как Shein, бросавшая вызов Zara и H&amp;M, растеряла три четверти оценки по пути к IPO",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/marketplace/3115602-shein-teryaet-otsenku?from=rss"
+    ]
+   ],
+   "sum": "$98 млрд",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
