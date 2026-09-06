@@ -56,6 +56,30 @@ def _fetch_topics() -> dict:
 
 
 _group_cache = None
+_group_source = None
+
+
+def migrated_chat_id(data) -> str | None:
+    """Новый номер чата, если Telegram отказал словами «группа стала
+    супергруппой». Telegram отдаёт его прямо в отказе
+    (`parameters.migrate_to_chat_id`) — значит, адрес не потерян, и
+    единственно верная реакция на такой отказ не «сообщить о сбое», а
+    повторить отправку по названному номеру. 6 сентября 2026 рутина вместо
+    этого час за часом писала владельцу, что ждёт от него сообщения."""
+    if not isinstance(data, dict) or data.get('ok'):
+        return None
+    new = (data.get('parameters') or {}).get('migrate_to_chat_id')
+    return str(new) if new else None
+
+
+def address_note() -> str | None:
+    """Откуда взят адрес консоли, если НЕ от сайта, — строка для отчёта.
+    Молчать здесь нельзя: переменная окружения контейнера могла остаться со
+    старым номером и выглядеть настроенной, а рутина, не сказав об этом,
+    придумывает диагноз вместо того, чтобы назвать факт."""
+    if _group_source == 'сайт' or _group_source is None:
+        return None
+    return 'адрес консоли взят из переменной окружения (сайт не ответил) — он может быть устаревшим'
 
 
 def review_group_id():
@@ -68,7 +92,7 @@ def review_group_id():
     и выглядеть настроенной, ничего не сигналя об ошибке заранее. Сайт узнаёт
     свежий id из любого сообщения владельца/партнёра в группе и хранит его —
     это надёжнее, чем номер, вписанный один раз и забытый."""
-    global _group_cache
+    global _group_cache, _group_source
     if _group_cache is not None:
         return _group_cache or None
     site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
@@ -76,13 +100,23 @@ def review_group_id():
     _group_cache = ''
     if not token:
         return None
-    try:
-        import httpx
-        r = httpx.get('%s/api/moderation/group' % site, params={'token': token}, timeout=20)
-        if r.status_code == 200:
-            _group_cache = r.json().get('chat_id') or ''
-    except Exception:                                       # noqa: BLE001
-        pass
+    # Сайт перезапускается при каждой сборке, и прогон рутины легко попадает
+    # в эту минуту. Одна неудачная попытка роняла нас на переменную окружения
+    # со старым номером — три попытки с паузой дешевле, чем сообщение,
+    # ушедшее в мёртвый чат.
+    for attempt in range(3):
+        try:
+            import httpx
+            r = httpx.get('%s/api/moderation/group' % site, params={'token': token}, timeout=20)
+            if r.status_code == 200:
+                _group_cache = r.json().get('chat_id') or ''
+                _group_source = 'сайт' if _group_cache else None
+                break
+        except Exception:                                   # noqa: BLE001
+            pass
+        if attempt < 2:
+            import time
+            time.sleep(3 * (attempt + 1))
     return _group_cache or None
 
 
@@ -93,7 +127,12 @@ def console_chats():
     для send_drafts.py, send_access_requests.py, send_open_questions.py и
     ops_status.py — раньше каждый читал переменные по-своему, и обновлять
     логику приходилось в четырёх местах сразу."""
-    group = review_group_id() or os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
+    global _group_source
+    group = review_group_id()
+    if not group:
+        group = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
+        if group:
+            _group_source = 'переменная окружения'
     if group:
         return [group]
     return [x.strip() for x in os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '').split(',') if x.strip()]

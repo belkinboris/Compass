@@ -236,10 +236,21 @@ def send_one(client, token, chat, text, keyboard, thread_id=None):
         r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
         if r.status_code == 200 and r.json().get('ok'):
             return True
+        try:
+            data = r.json()
+        except ValueError:
+            data = {}
+        # Отказ «группа стала супергруппой» несёт новый номер чата — идём по
+        # нему, а не считаем это сбоем связи (6 сентября 2026).
+        moved = console_topics.migrated_chat_id(data)
+        if moved and moved != payload['chat_id']:
+            print('  адрес консоли изменился на %s — повторяю по нему' % moved)
+            payload['chat_id'] = chat = moved
+            continue
         wait = 0
         try:
-            wait = int(r.json().get('parameters', {}).get('retry_after') or 0)
-        except ValueError:
+            wait = int((data.get('parameters') or {}).get('retry_after') or 0)
+        except (ValueError, AttributeError):
             wait = 0
         if wait and attempt < RETRIES - 1:
             print('  Telegram просит подождать %d с — жду' % wait)

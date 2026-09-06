@@ -475,6 +475,19 @@ def post_status(client, token, chat, text, keyboard=None):
         return False, '%s: %s' % (type(e).__name__, e)
     if data.get('ok'):
         return True, None
+    # «Группа стала супергруппой» — не сбой, а новый номер чата: Telegram
+    # называет его в самом отказе. Повторяем по нему и говорим об этом вслух,
+    # чтобы человек знал, куда ушёл отчёт.
+    moved = console_topics.migrated_chat_id(data)
+    if moved:
+        body['chat_id'] = moved
+        try:
+            again = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=body).json()
+        except Exception as e:                             # noqa: BLE001
+            return False, '%s: %s' % (type(e).__name__, e)
+        if again.get('ok'):
+            return True, 'адрес консоли изменился, отчёт ушёл по новому номеру %s' % moved
+        return False, again.get('description') or str(again)
     return False, data.get('description') or str(data)
 
 

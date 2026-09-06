@@ -4991,3 +4991,43 @@ def test_console_chats_falls_back_to_env_when_the_site_does_not_know(monkeypatch
     monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100222333444")
     assert console_topics.console_chats() == ["-100222333444"]
     console_topics._group_cache = None
+
+
+
+def test_console_send_follows_the_chat_id_telegram_hands_back_on_migration():
+    """6 сентября 2026: включение тем превратило группу в супергруппу, номер
+    сменился, и рутина час за часом писала владельцу, что ждёт от него
+    сообщения. Ждать было нечего: Telegram называет новый номер прямо в
+    отказе (`parameters.migrate_to_chat_id`) — по нему и надо слать."""
+    import sys, types, os
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "pipeline"))
+    import console_topics
+    отказ = {"ok": False, "error_code": 400,
+             "description": "Bad Request: group chat was upgraded to a supergroup chat",
+             "parameters": {"migrate_to_chat_id": -1004389405776}}
+    assert console_topics.migrated_chat_id(отказ) == "-1004389405776"
+    assert console_topics.migrated_chat_id({"ok": True, "result": {}}) is None
+    assert console_topics.migrated_chat_id({"ok": False, "description": "chat not found"}) is None
+    assert console_topics.migrated_chat_id(None) is None
+
+    # send_drafts повторяет отправку по новому номеру, а не считает это сбоем
+    from pipeline.ingest import send_drafts
+    calls = []
+
+    class Ответ:
+        def __init__(self, data):
+            self._data, self.status_code = data, 200 if data.get("ok") else 400
+            self.text = str(data)
+
+        def json(self):
+            return self._data
+
+    class Клиент:
+        def post(self, url, json=None):
+            calls.append(json["chat_id"])
+            if json["chat_id"] == "-100старый":
+                return Ответ(отказ)
+            return Ответ({"ok": True, "result": {"message_id": 1}})
+
+    assert send_drafts.send_one(Клиент(), "токен", "-100старый", "текст", None) is True
+    assert calls == ["-100старый", "-1004389405776"], calls
