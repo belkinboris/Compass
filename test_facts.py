@@ -28,6 +28,8 @@ def _verified(d):
         f[key]['basis'] = 'verified'
     f['price']['scope'] = 'equity'
     f['target']['perimeter'] = 'verified'
+    f['target']['perimeter_report'] = {'inn': '7700000001', 'year': 2023, 'revenue_rub': 5e8}
+    f['nature']['control_change_basis'] = 'verified'
     return facts.derive(dict(d, facts=f), CTX)
 
 
@@ -35,7 +37,9 @@ def test_rules_only_propose_and_multiple_needs_verified():
     f = facts.derive(_deal(), CTX)
     assert f['stake'] == dict(f['stake'], value=100.0, basis='rule')
     assert f['price']['meaning'] == 'disclosed' and f['price']['basis'] == 'rule' and f['price']['value_rub'] == 1e9
-    assert f['admitted']['purchase_sums'] is True and f['admitted']['count'] is True
+    assert f['admitted']['count'] is True
+    # деньги только из прочитанных цен — и для графиков, и для списка крупнейших
+    assert f['admitted']['purchase_sums'] is False and f['reasons']['purchase_sums'] == 'price_not_read'
     assert f['admitted']['top_purchases'] is False and f['reasons']['top_purchases'] == 'price_not_read'
     assert f['admitted']['multiple_text'] is False and f['reasons']['multiple_text'] == 'price_not_verified'
     v = _verified(_deal())
@@ -47,9 +51,10 @@ def test_metrics_admit_independently():
     f = facts.derive(_deal(sum='Не раскрыта'), CTX)
     assert f['admitted']['count'] and f['admitted']['industry'] and not f['admitted']['purchase_sums']
     assert f['reasons']['purchase_sums'] == 'price_not_disclosed'
-    # доля не названа — суммы считаются, мультипликатор нет
-    f = facts.derive(_deal(eco={'share': '—'}, title='X купил ООО «Ромашка»'), CTX)
-    assert f['admitted']['purchase_sums'] and f['reasons']['multiple_text'] in ('price_not_verified', 'stake_not_verified')
+    # доля не названа, цена прочитана — суммы считаются, мультипликатор нет
+    d = _deal(eco={'share': '—'}, title='X купил ООО «Ромашка»')
+    f = facts.derive(d, CTX); f['price']['basis'] = 'read'; f = facts.derive(dict(d, facts=f), CTX)
+    assert f['admitted']['purchase_sums'] and f['reasons']['multiple_text'] in ('control_change_not_verified', 'price_not_verified', 'stake_not_verified')
     # допэмиссия — не покупка ни для сумм, ни для мультипликатора
     f = facts.derive(_deal(type='Инвестиция', title='Допэмиссия в пользу X'), CTX)
     assert f['nature']['cash_in'] and not f['admitted']['purchase_sums'] and f['reasons']['purchase_sums'] == 'not_purchase'
@@ -151,3 +156,77 @@ def test_two_readers_agree_verified_disagree_disputed():
     a2, b2 = dict(a, quote_checked=None), dict(b, quote_checked=None)
     assert fc._basis_for([a2, b2])[0] == 'verified'
     assert fc._basis_for([a2, dict(b2, quote='совсем другая фраза о том же')])[0] == 'read'
+
+
+def test_third_review_rules():
+    """Третий разбор рецензента (6 сентября 2026): спорная дата блокирует
+    денежные показатели; подозрение на дубль — тоже; смена контроля должна быть
+    подтверждена сама по себе; периметр — привязан к конкретному отчёту; год
+    мультипликатора берётся из подтверждённой даты закрытия."""
+    import deal_multiples as dm
+    d = _deal()
+    v = _verified(d)
+    assert v['admitted']['multiple_text'] and v['admitted']['purchase_sums']
+    # спорная дата
+    f = dict(v); f['date'] = dict(v['date'], basis='disputed')
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['purchase_sums'] == 'date_disputed' and f['reasons']['multiple_text'] == 'date_disputed'
+    # смена контроля не подтверждена
+    f = dict(v); f['nature'] = dict(v['nature'], control_change_basis='rule')
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['multiple_text'] == 'control_change_not_verified'
+    assert f['nature']['basis'] == 'rule'  # флаги природы остаются правилом
+    # периметр без отчёта
+    f = dict(v); f['target'] = dict(v['target']); f['target'].pop('perimeter_report')
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['multiple_text'] == 'perimeter_report_missing'
+    # год из подтверждённой даты закрытия
+    f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='closing', value='2025-10-09')
+    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтверждённая дата закрытия')
+    assert dm.multiple_year(d) == (2024, 'дата карточки')
+    # число, названное анонимными источниками, — не цена, названная сторонами
+    assert dm.sum_basis({'sum': '38,2 млрд ₽', 'sum_basis': 'reported'}) == 'reported'
+    f = dict(v); f['price'] = dict(v['price'], meaning='reported')
+    f = facts.derive(dict(d, facts=f), CTX)
+    assert f['reasons']['purchase_sums'] == 'price_not_disclosed'
+
+
+def test_own_shares_are_not_a_purchase():
+    """Buyback и выкуп у нерезидентов — сделка компании с собственными
+    акциями: цена названа и прочитана («Магнит», 48,5 млрд ₽), а в покупки
+    и мультипликаторы не идёт. «С правом обратного выкупа» — условие залога,
+    а не выкуп."""
+    for title in ('«Магнит» выкупил свои акции у иностранных инвесторов с дисконтом',
+                  'Buyback ПАО «Полюс»: приобретение до 29,99% собственных обыкновенных акций',
+                  'ЛУКОЙЛ выкупает до 25% акций у нерезидентов',
+                  'X5 рассматривает продажу казначейского пакета акций (9,7%) инвесторам'):
+        f = _verified(_deal(title=title))
+        f = facts.derive(dict(_deal(title=title), facts=f), CTX)
+        assert f['nature']['own_shares'] and not f['nature']['control_change'], title
+        assert f['reasons']['purchase_sums'] == 'not_purchase' and f['reasons']['multiple_text'] == 'not_control_change', title
+    f = facts.derive(_deal(title='Государство может получить пакет акций «Самолета» с правом обратного выкупа'), CTX)
+    assert not f['nature']['own_shares']
+    f = facts.derive(_deal(title='«Медскан» выкупил долю «Сбербанк Инвестиций» в KDL'), CTX)
+    assert not f['nature']['own_shares'] and f['nature']['control_change']
+
+
+def test_possible_duplicates_block_money_metrics():
+    a = _verified(_deal(id='a1', title='«Магнит» покупает контрольный пакет «Азбуки вкуса»', sum='29,65 млрд ₽'))
+    b = _verified(_deal(id='b1', title='«Тандер» покупает сеть «Азбука вкуса»', sum='29,6 млрд ₽', target='t2'))
+    base = {'deals': [dict(_deal(id='a1', title='«Магнит» покупает контрольный пакет «Азбуки вкуса»', sum='29,65 млрд ₽'), facts=a),
+                      dict(_deal(id='b1', title='«Тандер» покупает сеть «Азбука вкуса»', sum='29,6 млрд ₽', target='t2'), facts=b)],
+            'companies': {}}
+    facts.mark_possible_duplicates(base, CTX)
+    for d in base['deals']:
+        assert d['facts']['identity']['possible_duplicate'], d['id']
+        assert d['facts']['reasons']['purchase_sums'] == 'possible_duplicate'
+    # прочитанная пара не-дублей снимает подозрение
+    facts.mark_possible_duplicates(base, dict(CTX, not_duplicates={frozenset(('a1', 'b1'))}))
+    assert all('identity' not in d['facts'] for d in base['deals'])
+    # общий покупатель и близкая сумма при разных предметах — не подозрение
+    c = _verified(_deal(id='c1', title='Softline купила «МД Аудит»', sum='163 млн ₽', target='t1'))
+    e = _verified(_deal(id='e1', title='Softline купила Visitech', sum='162 млн ₽', target='t2'))
+    base2 = {'deals': [dict(_deal(id='c1', title='Softline купила «МД Аудит»', sum='163 млн ₽', target='t1'), facts=c),
+                       dict(_deal(id='e1', title='Softline купила Visitech', sum='162 млн ₽', target='t2'), facts=e)], 'companies': {}}
+    facts.mark_possible_duplicates(base2, CTX)
+    assert all('identity' not in d['facts'] for d in base2['deals'])

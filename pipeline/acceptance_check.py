@@ -97,14 +97,15 @@ def check_multiples(base: str, p: Protocol) -> None:
     # чтениями и чистую арифметику (facts.number_checks) — по ответу сайта.
     unverified = [row['id'] for row in m['deals'] if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
     dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
-    ok = not forbidden and not bad_share and not bad_basis and not unverified and not dirty
+    no_year_basis = [row['id'] for row in m['deals'] if not row.get('year_basis')]
+    ok = not forbidden and not bad_share and not bad_basis and not unverified and not dirty and not no_year_basis
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
     p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без долей <95% и не-цен', ok,
           base + '/api/analytics/multiples',
           f"показано {m['clean_total']} (подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
           f"запрещённые: {forbidden or 'нет'}; доля <95%: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
-          f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; исключены: {excluded}")
+          f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
 
 
 def check_assistant_chain(base: str, p: Protocol) -> None:
@@ -252,6 +253,12 @@ def check_browser(base: str, p: Protocol) -> None:
         unread = [i for i in shown if not ((DEALS.get(i) or {}).get('facts') or {}).get('admitted', {}).get('top_purchases')]
         p.add('Крупнейшие покупки: у каждой строки цена прочитана в источнике', not unread and bool(shown),
               where, f'{len(shown)} строк; без прочитанной цены: {unread or "нет"}')
+        # …и названа стороной, документом или реестром — не консультантом в
+        # таблице издания и не «источниками» (третий разбор рецензента):
+        # «Аврора Инвест», 255 млрд ₽ от Verba Legal, в список не идёт.
+        weak = [i for i in shown if (((DEALS.get(i) or {}).get('facts') or {}).get('price') or {}).get('attribution') not in ('parties', 'filing', 'registry')]
+        p.add('Крупнейшие покупки: число названо стороной, документом или реестром', not weak and bool(shown),
+              where, f'иначе: {weak or "нет"}')
         page.wait_for_function('document.getElementById("multiplesBody") && !document.getElementById("multiplesBody").innerText.includes("Считаем")', timeout=120000)
         mult = page.inner_text('#multiplesCard')
         medians_hidden = 'Медиану по ним не показываем' in mult or 'не прошла все проверки' in mult

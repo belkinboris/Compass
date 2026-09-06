@@ -54,6 +54,12 @@ from pipeline import fns_registry, source_names  # noqa: E402
 DATA = ROOT / 'static' / 'data' / 'deals_promoted.json'
 RAW = ROOT / 'data' / 'inbox' / 'raw'
 EVENTS = ('closing', 'signing', 'announcement', 'publication', 'registry')
+# Кто назвал число: стороны/официальное сообщение, документ (отчётность,
+# проспект, раскрытие), реестр, анонимные источники СМИ, аналитик. Только
+# первые три дают meaning 'disclosed'; «по данным источников» — 'reported'.
+ATTRIBUTIONS = ('parties', 'filing', 'registry', 'adviser', 'media_sources', 'analyst', 'unknown')
+PARTY_ATTRIBUTIONS = ('parties', 'filing', 'registry')
+PROD = 'https://projectcompass.ru'
 MONTHS = ('январ', 'феврал', 'март', 'апрел', 'ма[йя]', 'июн', 'июл', 'август', 'сентябр', 'октябр', 'ноябр', 'декабр')
 
 
@@ -110,11 +116,30 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
     elif metric == 'top':
         for d in deals.values():
             f = d['facts']
-            if f['admitted']['purchase_sums'] and f['reasons']['top_purchases'] != 'ok':
+            if f['price'].get('meaning') == 'disclosed' and f['price'].get('value_rub') \
+                    and f['price'].get('basis') not in ('read', 'verified', 'disputed') \
+                    and f['reasons']['purchase_sums'] in ('price_not_read', 'stale'):
                 rows.append(d)
         rows.sort(key=lambda d: -(d['facts']['price'].get('value_rub') or 0))
+    elif metric == 'price_recheck':
+        # Повторное чтение цены с вопросом «кто назвал число» (attribution) —
+        # для уже подтверждённых цен без этого признака.
+        for d in deals.values():
+            pf = d['facts']['price']
+            if pf.get('basis') in ('read', 'verified') and not pf.get('attribution'):
+                rows.append(d)
+        rows.sort(key=lambda d: -(d['facts']['price'].get('value_rub') or 0))
+    elif metric == 'perimeter':
+        # Периметр по КОНКРЕТНОМУ отчёту: подтверждённые доля и цена, но
+        # периметр без привязки к отчёту (или не прочитан).
+        for d in deals.values():
+            f = d['facts']
+            if f['stake'].get('basis') == 'verified' and f['price'].get('basis') == 'verified' \
+                    and f['nature'].get('control_change') and not (f['target'].get('perimeter_report') or {}).get('inn') \
+                    and f['target'].get('perimeter') != 'refuted':
+                rows.append(d)
     else:
-        raise SystemExit('metric: multiple | top')
+        raise SystemExit('metric: multiple | top | price_recheck | perimeter')
     rows = rows[:limit]
     tasks = []
     for d in rows:
@@ -128,10 +153,39 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
             'seller': d.get('seller') or ((base['companies'] or {}).get(d.get('seller_id')) or {}).get('name'),
             'target_profile': prof.get('name'), 'target_inn': r.get('inn') if r.get('decision') == 'confirmed' else None,
             'sources': _urls(d),
-            'confirm': ['price', 'date', 'nature'] + (['stake', 'perimeter'] if metric == 'multiple' else []),
+            'confirm': (['price'] if metric == 'price_recheck' else ['perimeter'] if metric == 'perimeter'
+                        else ['price', 'date', 'nature'] + (['stake', 'perimeter'] if metric == 'multiple' else [])),
             'current': {k: d['facts'][k] for k in ('stake', 'price', 'date')},
         })
+        if metric in ('perimeter', 'multiple') and target:
+            tasks[-1]['report'] = report_for(target, d)
     return tasks
+
+
+def report_for(company_id: str, deal: dict) -> dict | None:
+    """Отчёт, который пойдёт в знаменатель: юрлицо, ИНН, год и выручка с
+    боевого сайта (/api/companies/<id>/fns) — тот же выбор года, что в
+    compute_market_multiples (последний полный год до сделки, разрыв 1–2).
+    Читатель подтверждает периметр относительно ЭТОГО отчёта."""
+    import urllib.request
+    # тот же год, что возьмёт compute_market_multiples: подтверждённая дата
+    # закрытия сильнее даты карточки (multiple_year), отчёты — строго до него
+    year, _ = dm.multiple_year(deal)
+    year = year or 0
+    try:
+        with urllib.request.urlopen(f'{PROD}/api/companies/{company_id}/fns?as_of_year={year}', timeout=60) as r:
+            j = json.load(r)
+    except Exception as e:  # noqa: BLE001
+        return {'error': str(e)[:80]}
+    ent = (j.get('entities') or [{}])[0]
+    e = ent.get('entity') or {}
+    reps = [x for x in (ent.get('reports') or []) if x.get('revenue_rub') is not None and x.get('year') and year - dm.MAX_YEAR_GAP <= x['year'] < year]
+    reps.sort(key=lambda x: -x['year'])
+    if not reps:
+        return {'legal_name': e.get('legal_name'), 'inn': e.get('inn'), 'note': 'подходящего отчёта нет'}
+    r0 = reps[0]
+    return {'legal_name': e.get('legal_name'), 'inn': e.get('inn'), 'year': r0['year'],
+            'revenue_rub': r0['revenue_rub'], 'operating_profit_rub': r0.get('operating_profit_rub')}
 
 
 def prefetch(tasks) -> None:
@@ -208,6 +262,15 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
             return None  # источника в кэше нет — проверить нельзя
         return flat(q) in flat(text)
 
+    def find_source(q):
+        """Источник по цитате: в каком из скачанных текстов карточки она лежит
+        дословно (для nature читатель раньше источник не указывал)."""
+        for u in _urls(card):
+            t = texts.get(u)
+            if t and flat(q) in flat(t):
+                return u
+        return None
+
     for key in ('stake', 'price', 'date', 'nature', 'perimeter'):
         fact = rec.get(key)
         if fact is None:
@@ -217,8 +280,12 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
             problems.append(f'{key}: не объект')
             continue
         q, url = fact.get('quote') or '', fact.get('source')
-        if key != 'nature' and not (url and str(url).startswith('http')):
-            problems.append(f'{key}: нет source')
+        if key == 'nature' and not url and q:
+            url = find_source(q)
+            if url:
+                fact = dict(fact, source=url)
+        if not (url and str(url).startswith('http')):
+            problems.append(f'{key}: нет source' + (' (цитата не найдена ни в одном источнике карточки)' if key == 'nature' else ''))
         qc = quote_ok(q, url)
         if qc is False:
             problems.append(f'{key}: цитата не найдена дословно в {url}')
@@ -240,6 +307,16 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
             if fact.get('scope') not in facts.PRICE_SCOPES:
                 problems.append('price: scope вне package/equity/ev/unknown')
             v = fact.get('value_rub')
+            attr = fact.get('attribution')
+            if attr is not None and attr not in ATTRIBUTIONS:
+                problems.append(f'price: attribution вне {ATTRIBUTIONS}')
+            if fact.get('event') is not None and fact.get('event') not in EVENTS:
+                problems.append(f'price: event вне {EVENTS}')
+            if fact.get('meaning') == 'disclosed' and attr in ('adviser', 'media_sources', 'analyst'):
+                # Число, поданное консультантом стороны в таблицу издания
+                # («Сделки года» Ъ, запись Verba Legal о ВТБ/«Аврора Инвест»,
+                # 255 млрд ₽), — не раскрытие сторонами: сам ВТБ цену не называл.
+                problems.append('price: disclosed при attribution adviser/media_sources/analyst — это reported или estimate')
             if fact.get('meaning') == 'disclosed':
                 if v is None:
                     problems.append('price: disclosed без value_rub')
@@ -262,6 +339,18 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
                 problems.append('perimeter: ok не bool')
             if fact.get('ok') and not entity_supported(fact.get('entity'), q):
                 problems.append('perimeter: entity не встречается в цитате')
+            rep = fact.get('report')
+            if rep is not None and (not isinstance(rep, dict) or not rep.get('inn') or not rep.get('year')):
+                # У задания без подходящего отчёта (ТПГК: выручки за нужный
+                # год нет) читатель подтверждает только юрлицо — отчёта, к
+                # которому привязать периметр, нет, и это не ошибка чтения.
+                fact['report'] = rep = None
+            if rep is not None:
+                # версия 2: периметр относительно конкретного отчёта
+                if fact.get('ok') and fact.get('covers_business') is not True:
+                    problems.append('perimeter: ok=true, но covers_business не true')
+                if fact.get('ok') and fact.get('other_entities'):
+                    problems.append(f'perimeter: ok=true при других юрлицах в периметре {fact.get("other_entities")}')
         out[key] = f
     out['notes'] = rec.get('notes') or ''
     return out, problems
@@ -312,6 +401,14 @@ def _agree(key, a, b) -> bool:
             return False
         if not da:
             return True  # оба: «это не цена, названная сторонами» — какая именно, для допуска не важно
+        # одно и то же СОБЫТИЕ: если оба читателя назвали событие цены, оно обязано совпасть
+        # (Shell/«Сахалин-2»: равные суммы у разрешения 2023 года и у покупки 2024-го)
+        # Ярлык события (объявление / подписание / закрытие / реестр) у
+        # одной и той же цены читатели ставят по-разному — это не спор о
+        # цене: девять из 25 цен первого прогона «разошлись» только в нём.
+        # Две РАЗНЫЕ сделки с одной суммой (Shell/«Сахалин-2»: разрешение
+        # НОВАТЭКу и покупка «Газпромом») ловит спорная ДАТА — она снимает
+        # сделку с показателей по годам; ярлыки сохраняются в event_variants.
         va, vb = a.get('value_rub'), b.get('value_rub')
         return va is not None and vb is not None and abs(va - vb) <= 0.01 * max(va, vb, 1)
     if key == 'date':
@@ -319,7 +416,12 @@ def _agree(key, a, b) -> bool:
     if key == 'nature':
         return a.get('control_change') == b.get('control_change')
     if key == 'perimeter':
-        return a.get('ok') == b.get('ok')
+        if a.get('ok') != b.get('ok'):
+            return False
+        ra, rb = a.get('report') or {}, b.get('report') or {}
+        # Два чтения подтверждают периметр ОДНОГО отчёта: разные ИНН или
+        # годы — это два разных знаменателя, а не согласие.
+        return (ra.get('inn'), ra.get('year')) == (rb.get('inn'), rb.get('year'))
     return False
 
 
@@ -330,8 +432,16 @@ def merged_fields(key, readings: list[dict]) -> dict:
     if key == 'price':
         meanings = [r.get('meaning') for r in readings]
         scopes = [r.get('scope') for r in readings]
+        attrs = [r.get('attribution') for r in readings if r.get('attribution')]
         out = {'value_rub': r0.get('value_rub') if all(m == 'disclosed' for m in meanings) else None,
                'meaning': r0.get('meaning'), 'meaning_variants': sorted(set(meanings))}
+        if attrs:
+            out['attribution'] = attrs[0] if len(set(attrs)) == 1 else 'disputed'
+            out['attribution_variants'] = sorted(set(attrs))
+        events = [r.get('event') for r in readings if r.get('event')]
+        if events:
+            out['event'] = events[0] if len(set(events)) == 1 else 'disputed'
+            out['event_variants'] = sorted(set(events))
         if len(scopes) >= 2 and len(set(scopes)) == 1 and scopes[0] != 'unknown':
             out['scope'], out['scope_basis'] = scopes[0], 'verified'
         elif len(scopes) == 1 and scopes[0] != 'unknown':
@@ -350,7 +460,11 @@ def merged_fields(key, readings: list[dict]) -> dict:
     if key == 'nature':
         return {'control_change': r0.get('control_change')}
     if key == 'perimeter':
-        return {'perimeter_entity': r0.get('entity')}
+        out = {'perimeter_entity': r0.get('entity')}
+        if r0.get('report'):
+            out['perimeter_report'] = {k: r0['report'].get(k) for k in ('inn', 'year', 'revenue_rub', 'legal_name')}
+            out['perimeter_other_entities'] = r0.get('other_entities') or []
+        return out
     return {}
 
 
@@ -414,6 +528,10 @@ def write_readings(paths, write=False, asked=('stake', 'price', 'date', 'nature'
                 fact.update(merged_fields(key, readings))
             if key == 'perimeter':
                 fact['perimeter'] = (basis if r0.get('ok') else 'refuted') if basis != 'disputed' else 'disputed'
+                if basis == 'disputed':
+                    fact.pop('perimeter_report', None)
+            elif key == 'nature':
+                fact['control_change_basis'] = basis  # флаги природы остаются правилом (basis 'rule')
             else:
                 fact['basis'] = basis
             # Подтверждённый двумя чтениями смысл — в явные поля карточки

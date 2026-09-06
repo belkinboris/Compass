@@ -200,7 +200,8 @@ def _with_verified_facts(deal, registry):
         f[key]['verified_by'] = 'model×2'
     f['price']['scope'] = 'equity'
     f['target']['perimeter'] = 'verified'
-    f['nature']['basis'] = 'verified'
+    f['target']['perimeter_report'] = {'inn': registry[deal['target']]['inn'], 'year': 2023, 'revenue_rub': 500_000_000}
+    f['nature']['control_change_basis'] = 'verified'
     return dict(deal, facts=facts.derive(dict(deal, facts=f), ctx))
 
 def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monkeypatch):

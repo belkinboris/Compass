@@ -34,12 +34,16 @@ PURCHASE_TYPES = ('M&A', 'Продажа с торгов')
 
 
 def counts_in_top_purchases(d: dict) -> bool:
-    """Покупка с ценой, названной сторонами в рублях: допуск к суммам по
-    годам и отраслям (facts: purchase_sums). Список крупнейших на экране
-    требует ещё и прочитанной в источнике цены (top_purchases) — это
-    проверяется отдельно, приёмкой на живом сайте."""
+    """Текстовый допуск к суммам покупок: тип, статус, смысл суммы, дата не
+    спорная, не дубль — как будто цена уже прочитана (basis 'read'). Само
+    чтение — процесс, его проверяет приёмка на живом сайте, а не выборка."""
+    import copy
     import facts
-    return facts.admitted(d, 'purchase_sums')[0]
+    dd = copy.deepcopy(d)
+    price = dd['facts']['price']
+    if price.get('basis') in ('rule', 'unknown', 'stale'):
+        price['basis'] = 'read'
+    return facts.admitted(dd, 'purchase_sums')[0]
 
 
 def _rows():

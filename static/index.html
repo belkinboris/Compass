@@ -5695,8 +5695,10 @@ const factAdmitted = (d, metric) => !!((factsOf(d).admitted || {})[metric]);
 const factReason = (d, metric) => (factsOf(d).reasons || {})[metric] || "unknown";
 const sumBasis = d => priceFact(d).meaning || "unparsed";
 const priceRub = d => priceFact(d).value_rub || 0;
-// Покупка с ценой, названной сторонами, хотя бы по тексту карточки — идёт в
-// суммы по годам и отраслям (графики).
+// Покупка с ценой, названной сторонами И прочитанной в источнике — идёт в
+// суммы по годам и отраслям (графики). С третьего разбора рецензента
+// (6 сентября 2026) текста карточки для денег недостаточно: «фонд планирует
+// привлечь до 30 млрд ₽» шёл в суммы покупок как цена.
 const countsAsPrice = d => factAdmitted(d, "purchase_sums");
 // То же, но цена ПРОЧИТАНА в источнике — только такие сделки попадают в
 // список крупнейших покупок: каждая строка списка видна и обязана быть
@@ -5713,13 +5715,46 @@ function factsVerifiedHtml(d){
   const rows = [];
   const p = priceFact(d), st = stakeFact(d), dt = dateFact(d);
   const src = f => f.source ? ` <a href="${esc(f.source)}" target="_blank" rel="noopener">${esc(editionLabelJs(f.source))}</a>` : "";
-  if(factVerified(p) && p.meaning === "disclosed") rows.push(`цена${p.scope==="ev"?" (с учётом долга)":p.scope==="package"?" за пакет":""}`+src(p)+(p.quote?` — «${esc(p.quote)}»`:""));
+  if(factVerified(p) && p.meaning){
+    // Читатель видит не только число, но и КТО его назвал: цена, которую
+    // подал консультант стороны в таблицу издания или назвали анонимные
+    // источники, — не раскрытие сторонами (третий разбор рецензента).
+    const who = PRICE_ATTRIBUTION_LABELS[p.attribution] || "";
+    const what = p.meaning === "disclosed"
+      ? `цена${p.scope==="ev"?" (с учётом долга)":p.scope==="package"?" за пакет":""}${who?`, ${who}`:""}`
+      : `${PRICE_MEANING_LABELS[p.meaning] || "сумма"}${who && p.meaning!=="undisclosed"?` (${who})`:""}`;
+    rows.push(what+src(p)+(p.quote?` — «${esc(p.quote)}»`:""));
+  }
   if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st)+(st.quote?` — «${esc(st.quote)}»`:""));
   if(factVerified(dt) && dt.value) rows.push(`дата (${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"})`+src(dt)+(dt.quote?` — «${esc(dt.quote)}»`:""));
   if(!rows.length) return "";
   return `<div class="fact-verified"><span class="label">Проверено по источникам</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`;
 }
 const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подписание", announcement:"объявление", publication:"дата сообщения о закрытии", registry:"запись в ЕГРЮЛ"};
+const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",
+  adviser:"число подал консультант стороны, сами стороны его не называли", media_sources:"по данным источников издания, стороны не подтверждали",
+  analyst:"оценка аналитика", disputed:"читатели разошлись, кто назвал число"};
+const PRICE_MEANING_LABELS = {reported:"сумма по данным источников, сторонами не раскрыта", estimate:"оценка, не цена сделки", range:"диапазон",
+  lower_bound:"нижняя граница суммы", auction_start:"стартовая цена торгов", foreign_currency:"сумма в валюте", not_a_price:"число в источнике — не цена сделки",
+  valuation:"оценка компании при размещении", raise:"объём привлечения", undisclosed:"источники цену не называют"};
+// Год сделки для мультипликатора — как deal_multiples.multiple_year(): подтверждённая
+// двумя чтениями дата закрытия (или записи в реестре) сильнее даты карточки
+// («ВымпелКом»: карточка — подписание 2022, закрытие — 2023, знаменатель — 2022-й год).
+function multipleYear(d){
+  const f = dateFact(d);
+  if(f.basis === "verified" && (f.meaning === "closing" || f.meaning === "registry") && /^\d{4}/.test(String(f.value||"")))
+    return {year: Number(String(f.value).slice(0,4)), basis: f.meaning === "closing" ? "подтверждённая дата закрытия" : "подтверждённая дата записи в реестре"};
+  const y = Number(String(d.date||"").slice(0,4));
+  return {year: Number.isFinite(y) ? y : null, basis: "дата карточки"};
+}
+// Знаменатель обязан быть ТЕМ отчётом, по которому читатели подтвердили периметр
+// (год и выручка в пределах 1%): другой год или восстановленный отчёт — это уже
+// не проверенная сделка, и мультипликатор не показывается (report_changed на сервере).
+function reportMatchesPerimeter(d, year, revenueRub){
+  const pr = (factsOf(d).target || {}).perimeter_report;
+  if(!pr || !(pr.revenue_rub > 0) || !(revenueRub > 0)) return false;
+  return String(pr.year) === String(year) && Math.abs(pr.revenue_rub - revenueRub) <= 0.01 * revenueRub;
+}
 const fmtPct = v => (Math.round(v*100)/100).toString().replace(".", ",") + "%";
 function editionLabelJs(url){
   try{ const h = new URL(url).hostname.replace(/^www\./,""); return h; }catch(e){ return "источник"; }
@@ -5742,8 +5777,9 @@ function _dealMultipleSumRub(d, targetId){
 
 function dealMultipleLine(d, targetId, revenueRub, revenueYear){
   if(!revenueRub || revenueRub <= 0) return null;
-  const dealYear = Number(String(d.date||"").slice(0,4));
+  const dealYear = multipleYear(d).year;
   if(!Number.isFinite(dealYear) || !Number.isFinite(revenueYear)) return null;
+  if(!reportMatchesPerimeter(d, revenueYear, revenueRub)) return null;
   // Отчёт — за последний полный год ДО сделки (разрыв 1), на крайний случай
   // за позапрошлый (2); тот же год не годится — на дату сделки его нет.
   const gap = dealYear - revenueYear;
@@ -5760,10 +5796,11 @@ function dealMultipleLine(d, targetId, revenueRub, revenueYear){
 // methodology операционной прибыли в deal_multiples.py — амортизация
 // отдельной строкой не раскрывается, настоящую EBITDA не собрать).
 // Операционный убыток или его отсутствие — честная пустота, не ноль.
-function dealMultipleLineOp(d, targetId, opProfitRub, opProfitYear){
+function dealMultipleLineOp(d, targetId, opProfitRub, opProfitYear, revenueRub){
   if(!opProfitRub || opProfitRub <= 0) return null;
-  const dealYear = Number(String(d.date||"").slice(0,4));
+  const dealYear = multipleYear(d).year;
   if(!Number.isFinite(dealYear) || !Number.isFinite(opProfitYear)) return null;
+  if(!reportMatchesPerimeter(d, opProfitYear, revenueRub)) return null; // тот же отчёт, что подтверждён для выручки
   const gap = dealYear - opProfitYear;
   if(gap < 1 || gap > 2) return null;
   const sumRub = _dealMultipleSumRub(d, targetId);
@@ -5785,7 +5822,7 @@ async function mountDealFns(d){
     .map(id=>({id, role: companyRole(d,id)}))
     .filter(x=>x.role);
   if(!candidates.length) return;
-  const dealYear=Number(String(d.date||"").slice(0,4));
+  const my=multipleYear(d), dealYear=my.year;
   const suffix=Number.isFinite(dealYear)?`?as_of_year=${dealYear}`:"";
   // У банков в источнике есть строка отчёта (год, юрлицо), но все
   // коммерческие показатели в ней пустые — сторона сделки такого рода
@@ -5805,7 +5842,9 @@ async function mountDealFns(d){
     const p=parties.find(x=>x.id===active)||parties[0];
     const c=co(p.id);
     const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
-    const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year);
+    const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year, p.latest.revenue_rub);
+    const pf=priceFact(d), scopeNote=pf.scope==="ev"?"цена с учётом долга":pf.scope==="package"?`цена за ${fmtPct(stakeFact(d).value||0)}`:"цена за 100% акций";
+    const yearNote=my.basis==="дата карточки"?"":`; год сделки — ${my.basis}`;
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
@@ -5817,8 +5856,8 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">EV/Выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">сумма сделки к выручке купленной компании за ${mult.revenueYear} год (данные ФНС)</span></p>`:""}
-        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">EV/Операционная прибыль ≈ ×${multOp.multiple}</span> <span style="color:var(--muted);font-size:13px">сумма сделки к прибыли от продаж за ${multOp.opProfitYear} год — ближе к привычному EV/EBITDA, чем выручка, потому что отчётность не раскрывает амортизацию отдельной строкой (данные ФНС)</span></p>`:""}
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена подтверждены двумя чтениями источников)</span></p>`:""}
+        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ×${multOp.multiple}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -6717,7 +6756,7 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где стороны назвали цену в рублях. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
@@ -6727,7 +6766,7 @@ function renderAnalytics(){
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут подтверждены чтением источников — пока ни одна не прошла проверку и ждёт проверки.</p>`}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена названа в тексте карточки и ждёт проверки чтением`:""}. Только покупки (M&A и продажа с торгов), где стороны назвали цену в рублях, — таких ${rubDisclosed}. Не в счёт: финансирование и инвестиционные раунды, IPO (у размещения сумма — то объём размещения, то оценка компании), оценки экспертов и неофициальные цифры, валютные суммы, стартовые цены незакрытых торгов и цены сорвавшихся сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена названа в тексте карточки и ждёт проверки чтением`:""}. Только покупки (M&A и продажа с торгов), где цена названа сторонами в рублях и прочитана в источнике, — таких ${rubDisclosed}. Не в счёт: финансирование и инвестиционные раунды, IPO (у размещения сумма — то объём размещения, то оценка компании), оценки экспертов и неофициальные цифры, валютные суммы, стартовые цены незакрытых торгов и цены сорвавшихся сделок.</p>
     </div>
     <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>
@@ -6774,7 +6813,7 @@ function renderAnalytics(){
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где стороны назвали цену в рублях. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
@@ -6853,7 +6892,7 @@ async function mountMarketMultiples(){
     const dealsHtml = s.deals.slice(0,15).map(d=>`
       <a class="an-deal" href="#/deal/${d.id}">
         <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.stake!=null?` за ${fmtPct(d.stake)}`:""} ÷ ${v.metricLabel} за ${d[v.yearKey]} (${fnsMoney(d[v.rubKey])}${d.target_name?`, ${esc(d.target_name)}`:""})${d.verified_by?` · проверено: ${esc(d.verified_by)}`:""}</span>
+        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${v.metricLabel} за ${d[v.yearKey]} (${fnsMoney(d[v.rubKey])}${d.target_name?`, ${esc(d.target_name)}`:""})${d.year_basis?` · год сделки ${d.year}: ${esc(d.year_basis)}`:""}${d.verified_by?` · проверено: ${esc(d.verified_by)}`:""}</span>
       </a>`).join("");
     const awaiting = (data.awaiting_reading||0);
     const awaitingHtml = awaiting ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">Ещё ${awaiting} ${plural(awaiting,"сделка проходит","сделки проходят","сделок проходят")} правила по тексту карточки и ${plural(awaiting,"ждёт","ждут","ждут")} подтверждения чтением источников — до этого их мультипликаторы не показываются.</p>` : "";

@@ -124,7 +124,7 @@ _UNDISCLOSED = re.compile(r'^\s*(?:—|-|не\s+раскрыт[а-яё]*|пуб�
 
 # Смысл суммы — закрытый список. Порядок важен: явное поле карточки сильнее
 # разбора текста, «не цена» сильнее «оценки», оценка сильнее «раскрыто».
-SUM_BASES = ('disclosed', 'estimate', 'range', 'lower_bound', 'auction_start',
+SUM_BASES = ('disclosed', 'reported', 'estimate', 'range', 'lower_bound', 'auction_start',
              'foreign_currency', 'not_a_price', 'valuation', 'raise', 'undisclosed', 'unparsed')
 # Смысл ДАТЫ карточки — тоже закрытый список и тоже явное поле (`date_basis`):
 # дата закрытия, подписания, объявления, ПУБЛИКАЦИИ сообщения, записи в
@@ -145,6 +145,11 @@ DATE_BASIS_LABELS = {
 ADMITTED_SUM_BASES = ('disclosed',)
 SUM_BASIS_LABELS = {
     'disclosed': 'цена, названная сторонами',
+    # Число есть, но назвали его анонимные «источники» издания, а не стороны,
+    # отчётность или реестр (третий разбор рецензента: Ozon/«О23» — один
+    # читатель видел «по данным источников РБК», другой — пересказ как факт).
+    # В расчёты не допускается: требование «цену назвали стороны» не выполнено.
+    'reported': 'сумма по данным источников СМИ, сторонами не подтверждена',
     'estimate': 'оценка (эксперты, СМИ, «около»)',
     'range': 'диапазон (пределы цены или оценка — способ расчёта не определён)',
     'lower_bound': 'нижняя граница («более», «не менее»)',
@@ -410,6 +415,19 @@ def year_of(deal: dict[str, Any]) -> int | None:
     return int(ds[:4]) if ds[:4].isdigit() else None
 
 
+def multiple_year(deal: dict[str, Any]) -> tuple[int | None, str]:
+    """Год сделки для мультипликатора и его основание. Подтверждённая двумя
+    чтениями дата закрытия (или записи в реестре) сильнее даты карточки:
+    у «ВымпелКома» карточка датирована подписанием 24.11.2022, закрытие —
+    9.10.2023, и делить цену на выручку 2021 года было бы неверно (третий
+    разбор рецензента). Основание возвращается наружу: от года зависит
+    знаменатель, и API обязан сказать, откуда год."""
+    f = (deal.get('facts') or {}).get('date') or {}
+    if f.get('basis') == 'verified' and f.get('meaning') in ('closing', 'registry') and str(f.get('value') or '')[:4].isdigit():
+        return int(str(f['value'])[:4]), 'подтверждённая дата закрытия' if f['meaning'] == 'closing' else 'подтверждённая дата записи в реестре'
+    return year_of(deal), 'дата карточки'
+
+
 def target_of(deal: dict[str, Any]) -> str | None:
     return deal.get('target') or deal.get('asset_id')
 
@@ -651,13 +669,20 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         ok, reason = facts_layer.admitted(dict(d, id=deal_id), 'multiple_text') if f else (False, 'no_facts')
         if ok:
             price, stake = f['price'], f['stake']
+            year, year_basis = multiple_year(d)
             candidates.append(MultipleCandidate(
                 deal_id=deal_id, title=d.get('title') or deal_id, target_id=target_of(d) or '',
-                year=year_of(d) or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value')))
+                year=year or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value')))
+            scope = price.get('scope')
+            numerator = ('цена за 100% акций' if scope == 'equity'
+                         else f"цена за пакет {stake.get('value')}%" if scope == 'package'
+                         else 'цена с учётом долга (EV)')
             verified_meta[deal_id] = {
-                'stake': stake.get('value'), 'price_scope': price.get('scope'),
+                'stake': stake.get('value'), 'price_scope': scope, 'year_basis': year_basis,
+                'formula': f'{numerator} ÷ показатель купленной компании за последний полный год до сделки',
                 'verified_by': price.get('verified_by'), 'price_quote': price.get('quote'),
                 'price_source': price.get('source'), 'checks': facts_layer.number_checks(d),
+                'perimeter_report': (f.get('target') or {}).get('perimeter_report'),
             }
         elif reason not in ('not_control_change', 'before_site_year', 'no_facts'):
             facts_reasons[reason] = facts_reasons.get(reason, 0) + 1
@@ -684,6 +709,15 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             FinancialReport.revenue_rub.is_not(None),
         ).order_by(FinancialReport.year.desc()))
         if not report:
+            continue
+        # Периметр подтверждался читателями ПО КОНКРЕТНОМУ отчёту (ИНН, год,
+        # выручка); если сейчас в знаменателе другой отчёт — восстановленный,
+        # другого года — это уже не проверенная сделка: карточка не менялась,
+        # а знаменатель изменился (третий разбор рецензента).
+        seen = verified_meta[cand.deal_id].get('perimeter_report') or {}
+        if seen and (str(seen.get('inn')) != str(entity.inn) or int(seen.get('year') or 0) != int(report.year)
+                     or abs(float(seen.get('revenue_rub') or 0) - float(report.revenue_rub)) > 0.01 * float(report.revenue_rub)):
+            verified_meta[cand.deal_id]['checks'].append('report_changed')
             continue
         dm = multiple_for_candidate(cand, float(report.revenue_rub), report.year, entity.legal_name)
         if dm:
@@ -729,19 +763,18 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'revenue_year': r.revenue_year, 'multiple': r.multiple,
         }, **verified_meta.get(r.deal_id, {})) for r in rows],
         'methodology': (
-            'Мультипликатор показывает, во сколько годовых выручек обошлась '
-            'компания покупателю. Считаем его только там, где сравнение честное и '
-            'проверенное: доля, цена и юрлицо каждой сделки подтверждены двумя '
-            'независимыми чтениями источников с цитатами; '
-            'в карточке прямо сказано, что компания куплена целиком (доля 95% и '
-            'выше; если доля не названа, сделка в расчёт не идёт), цену назвали '
-            'сами стороны и в рублях (оценки, диапазоны, стартовые цены торгов и '
-            '«более…» не в счёт), а выручка взята из отчётности '
-            'за последний полный год до сделки (или за позапрошлый, если прошлогодний ещё не сдан). Значения вне разумных границ не '
+            'Что здесь считается: цена сделки ÷ выручка купленной компании за последний '
+            'полный год до сделки (или за позапрошлый, если прошлогодний отчёт ещё не сдан). '
+            'Цена — за 100% акций, если так подтверждено чтением; за пакет — тогда это '
+            'указано у сделки; долг компании в цену не входит, если у сделки не сказано '
+            '«с учётом долга». Показываются только сделки, у которых доля (95% и выше), '
+            'цена и юрлицо подтверждены двумя независимыми чтениями источников с '
+            'цитатами, а отчётность относится именно к купленному юрлицу. Год сделки — '
+            'подтверждённая дата закрытия, если она прочитана, иначе дата карточки; '
+            'основание года указано у каждой сделки. Значения вне границ 0,1–15 не '
             'показываем: почти всегда это значит, что отчётность нашлась не у того '
-            'юрлица, а не что сделка настолько необычная. В цену сделки иногда '
-            'входит и принятый на себя долг компании — тогда мультипликатор '
-            'получается чуть выше, чем по цене одних только акций.'
+            'юрлица. Это не EV/EBITDA и не его замена — другой числитель и другой '
+            'знаменатель.'
         ),
         'operating_profit': {
             'clean_total': len(op_rows),
@@ -754,15 +787,14 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                 'operating_profit_year': r.operating_profit_year, 'multiple': r.multiple,
             }, **verified_meta.get(r.deal_id, {})) for r in op_rows],
             'methodology': (
-                'В M&A обычно сравнивают цену сделки с EBITDA (прибылью до вычета '
-                'процентов, налогов и амортизации) — это точнее выручки, потому что '
-                'учитывает, сколько компания реально зарабатывает. Но официальная '
-                'отчётность, на которую мы опираемся, амортизацию отдельной строкой '
-                'не показывает, и собрать из неё настоящую EBITDA нельзя. Прибыль от '
-                'продаж (операционная прибыль) — ближайшая доступная замена: та же '
-                'прибыль, но с учётом амортизации, поэтому мультипликатор обычно '
-                'получается немного выше настоящего EV/EBITDA. Условия отбора сделок '
-                'и границы — те же, что и у мультипликатора по выручке.'
+                'Что здесь считается: цена сделки ÷ прибыль от продаж купленной компании '
+                '(строка 2200 отчёта о финансовых результатах) за последний полный год до '
+                'сделки. Цена — за 100% акций или за пакет, как подтверждено чтением; долг '
+                'в цену не входит, если не сказано «с учётом долга». Это не EV/EBITDA: '
+                'прибыль от продаж считается после амортизации, а цена акций — без долга, '
+                'поэтому сравнивать с рыночными EV/EBITDA нельзя. Показываются только '
+                'сделки с подтверждёнными двумя чтениями долей, ценой и юрлицом; '
+                'операционный убыток или его отсутствие — честная пустота, не ноль.'
             ),
         },
     }

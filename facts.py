@@ -44,14 +44,33 @@
     industry       — + отрасль названа;
     purchase_sums  — суммы по годам/отраслям (графики): покупка (не cash-in,
                      не финансирование, не реорганизация), состоялась, цена
-                     названа сторонами в рублях хотя бы по тексту (rule);
+                     названа сторонами в рублях и ПРОЧИТАНА в источнике
+                     (read/verified), дата не спорная, дубль не заподозрен;
+                     до третьего разбора рецензента хватало текста (rule) —
+                     и «фонд планирует привлечь до 30 млрд ₽» шёл в суммы
+                     покупок как цена;
     top_purchases  — список крупнейших покупок на экране: то же, но сделка
-                     не «обсуждается» и цена ПРОЧИТАНА в источнике (read/verified);
+                     не «обсуждается»;
     multiple_text  — текстовая часть допуска к мультипликатору: смена
-                     контроля, предмет — одно юрлицо с ИНН, не банк и не лот,
-                     периметр подтверждён, доля ≥95% и цена — ВСЁ verified;
-                     финансовую часть (отчётность за нужный год) добавляет
-                     deal_multiples.compute_market_multiples.
+                     контроля (подтверждена чтением), предмет — одно юрлицо
+                     с ИНН, не банк и не лот, периметр подтверждён ПО
+                     КОНКРЕТНОМУ ОТЧЁТУ (perimeter_report), доля ≥95% и цена
+                     — ВСЁ verified; финансовую часть (отчётность за нужный
+                     год) добавляет deal_multiples.compute_market_multiples.
+
+Природа сделки: флаги считаются правилом по типу карточки (basis 'rule' у
+объекта), а прочитан только ОДИН признак — смена контроля; его основание
+лежит отдельно (`control_change_basis`), чтобы метка «подтверждено» не
+распространялась на признаки, которых читатель не видел (третий разбор).
+`auction` — «карточка типа «Продажа с торгов»», не «сделка прошла на
+торгах»: M&A-карточка с аукционом в тексте этот флаг не получает.
+
+Тождество между карточками: `identity.possible_duplicate` ставится
+проходом по всей базе (derive_all): две допущенные к деньгам сделки одного
+года с суммами в пределах полутора процентов и общим названием в кавычках,
+предметом или покупателем — обе выпадают из денежных показателей, пока
+сканер дублей (pipeline/find_duplicate_deal_candidates.py) не прочитан:
+прочитанная и признанная не-дублем пара снимает подозрение.
 
 Отсутствие цены не выкидывает достоверную сделку из числа сделок, а
 отсутствие точной доли не мешает показать раскрытую цену покупки — у каждого
@@ -71,7 +90,7 @@ TRUSTED = ('read', 'verified')
 FACT_KEYS = ('stake', 'price', 'date', 'nature', 'target')
 METRICS = ('count', 'industry', 'purchase_sums', 'top_purchases', 'multiple_text')
 PRICE_SCOPES = ('package', 'equity', 'ev', 'unknown')
-NATURE_FLAGS = ('control_change', 'cash_in', 'financing', 'auction', 'reorganization')
+NATURE_FLAGS = ('control_change', 'cash_in', 'financing', 'auction', 'reorganization', 'own_shares')
 PURCHASE_TYPES = ('M&A', 'Продажа с торгов')
 
 BASIS_LABELS = {
@@ -106,6 +125,10 @@ REASON_LABELS = {
     'target_unconfirmed': 'у предмета не подтверждён ИНН',
     'perimeter_not_verified': 'периметр отчётности не подтверждён чтением',
     'stale': 'карточка изменилась после чтения — факт ждёт повторного чтения',
+    'date_disputed': 'два чтения даты разошлись — сделку нельзя отнести к году',
+    'possible_duplicate': 'похожа на другую карточку той же сделки — ждёт сканера дублей',
+    'control_change_not_verified': 'смена контроля не подтверждена двумя чтениями',
+    'perimeter_report_missing': 'периметр подтверждён без привязки к конкретному отчёту',
 }
 
 
@@ -145,9 +168,17 @@ def _nature_by_rule(deal: dict[str, Any]) -> dict[str, Any]:
     financing = t.startswith('Финансирование')
     reorganization = t == 'Реорганизация'
     auction = t == 'Продажа с торгов'
-    control_change = t in PURCHASE_TYPES and not cash_in
+    # Сделка компании с СОБСТВЕННЫМИ акциями (buyback, выкуп у нерезидентов,
+    # продажа казначейского пакета) — не покупка бизнеса: «Магнит» выкупил
+    # свои акции за 48,5 млрд ₽, цена названа компанией и прочитана — и всё
+    # равно в «Крупнейшие покупки» ей не место. «С правом обратного выкупа»
+    # (залог госпакета «Самолёта») — не выкуп, а условие.
+    own_shares = bool(re.search(
+        r'buyback|(?<!с правом )обратн[а-яё]*\s+выкуп|выкуп[а-яё]*\s+(?:собственн[а-яё]*|сво[а-яё]+)\s+(?:акци|дол)'
+        r'|у\s+нерезидент|казначейск[а-яё]*\s+(?:пакет|акци)', title, re.I))
+    control_change = t in PURCHASE_TYPES and not cash_in and not own_shares
     return {'control_change': control_change, 'cash_in': bool(cash_in), 'financing': financing,
-            'auction': auction, 'reorganization': reorganization}
+            'auction': auction, 'reorganization': reorganization, 'own_shares': own_shares}
 
 
 def _target_by_rule(deal: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
@@ -209,9 +240,20 @@ def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str,
                          'meaning': deal.get('date_basis') if deal.get('date_basis') in dm.DATE_BASES else 'unknown',
                          'basis': 'rule' if ds else 'unknown', 'card_hash': card_hash(deal, 'date')}
 
-    # природа
-    kept = _fresh(old.get('nature'), deal, 'nature')
-    facts['nature'] = kept or dict(_nature_by_rule(deal), basis='rule', card_hash=card_hash(deal, 'nature'))
+    # природа: флаги — правилом, прочитанный признак смены контроля — поверх,
+    # со своим основанием
+    prev = old.get('nature') or {}
+    nature = dict(_nature_by_rule(deal), basis='rule', card_hash=card_hash(deal, 'nature'))
+    cc_basis = prev.get('control_change_basis') or (prev.get('basis') if prev.get('basis') in ('read', 'verified', 'disputed') else None)
+    if cc_basis:
+        if prev.get('card_hash') != card_hash(deal, 'nature'):
+            cc_basis = 'stale'
+        nature.update({k: v for k, v in prev.items() if k not in NATURE_FLAGS and k not in ('basis', 'card_hash')})
+        if cc_basis != 'disputed' and prev.get('control_change') is not None:
+            nature['control_change'] = prev['control_change']
+        nature['control_change_basis'] = cc_basis
+        nature['card_hash'] = prev.get('card_hash') if cc_basis != 'stale' else card_hash(deal, 'nature')
+    facts['nature'] = nature
 
     # предмет: «прочитанность» здесь — подтверждение периметра, а не basis
     # (basis у предмета — registry/rule, ИНН приходит из реестра)
@@ -226,6 +268,8 @@ def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str,
         facts['target'] = dict(t, basis='registry' if t['confirmed'] else ('rule' if t['company_id'] else 'unknown'),
                                perimeter='unknown', card_hash=card_hash(deal, 'target'))
 
+    if old.get('identity'):
+        facts['identity'] = old['identity']  # перепроверяется проходом derive_all
     facts['admitted'] = {m: admitted(dict(deal, facts=facts), m)[0] for m in METRICS}
     facts['reasons'] = {m: admitted(dict(deal, facts=facts), m)[1] for m in METRICS}
     return facts
@@ -254,7 +298,7 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
         return True, 'ok'
     if metric in ('purchase_sums', 'top_purchases'):
         if nature.get('cash_in') or nature.get('financing') or nature.get('reorganization') \
-                or str(deal.get('type') or '').strip() not in PURCHASE_TYPES:
+                or nature.get('own_shares') or str(deal.get('type') or '').strip() not in PURCHASE_TYPES:
             return False, 'not_purchase'
         if deal.get('status') == 'Не состоялась':
             return False, 'failed'
@@ -266,15 +310,22 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'price_not_disclosed'
         if not price.get('value_rub'):
             return False, 'price_not_rub'
-        if metric == 'top_purchases':
+        # Деньги складываются только из прочитанных цен: правило предлагает,
+        # чтение решает — для графиков так же, как для списка крупнейших.
+        if _basis(price) not in TRUSTED:
+            return False, 'stale' if _basis(price) == 'stale' else 'price_not_read'
+        # Спорная дата — сделку нельзя отнести к году (Shell/«Сахалин-2»: одно
+        # чтение о разрешении НОВАТЭКу в 2023-м, другое о покупке «Газпромом»
+        # в 2024-м при одинаковой сумме).
+        if _basis(date) == 'disputed':
+            return False, 'date_disputed'
+        if (f.get('identity') or {}).get('possible_duplicate'):
+            return False, 'possible_duplicate'
+        if metric == 'top_purchases' and deal.get('status') == 'Обсуждается':
             # Список крупнейших — о сделках, которые состоялись или подписаны;
             # обсуждаемая цена (оферта «русской рулетки» Шишкарёв/«Дело», 74 млрд ₽,
-            # от которой он потом отказался) в нём вводит в заблуждение, а в
-            # суммах по годам объявленная стоимость — обычная практика.
-            if deal.get('status') == 'Обсуждается':
-                return False, 'discussion_only'
-            if _basis(price) not in TRUSTED:
-                return False, 'stale' if _basis(price) == 'stale' else 'price_not_read'
+            # от которой он потом отказался) в нём вводит в заблуждение.
+            return False, 'discussion_only'
         return True, 'ok'
     if metric == 'multiple_text':
         if not nature.get('control_change') or str(deal.get('type') or '').strip() != 'M&A':
@@ -299,6 +350,14 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'price_not_verified'
         if price.get('scope') not in ('package', 'equity', 'ev'):
             return False, 'price_scope_unknown'
+        # Порядок причин — от устройства сделки к чтению: сначала «не та
+        # сделка / не тот предмет», потом «цена не прочитана», и только затем
+        # «природа не подтверждена»: в списке исключённых читатель видит
+        # самую содержательную причину, а не ту, что проверилась первой.
+        if nature.get('control_change_basis') != 'verified':
+            return False, 'control_change_not_verified'
+        if (f.get('identity') or {}).get('possible_duplicate'):
+            return False, 'possible_duplicate'
         if _basis(stake) != 'verified':
             return False, 'stake_not_verified'
         if (stake.get('value') or 0) < dm.MIN_STAKE_PERCENT:
@@ -307,6 +366,10 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'stale'
         if target.get('perimeter') != 'verified':
             return False, 'perimeter_not_verified'
+        if not (target.get('perimeter_report') or {}).get('inn'):
+            return False, 'perimeter_report_missing'
+        if _basis(date) == 'disputed':
+            return False, 'date_disputed'
         return True, 'ok'
     raise KeyError(metric)
 
@@ -320,12 +383,83 @@ def build_ctx(base: dict[str, Any], registry_rows: list[dict[str, Any]]) -> dict
 
 
 def derive_all(base: dict[str, Any], ctx: dict[str, Any]) -> int:
-    """Проставить facts всем сделкам базы; возвращает число изменённых."""
+    """Проставить facts всем сделкам базы; возвращает число изменённых.
+    Второй проход — тождество между карточками (possible_duplicate)."""
     changed = 0
     for d in base['deals']:
         new = derive(d, ctx)
         if d.get('facts') != new:
             d['facts'] = new
+            changed += 1
+    changed += mark_possible_duplicates(base, ctx)
+    return changed
+
+
+_QUOTED = re.compile(r'[«"“]([^»"”]{2,60})[»"”]')
+
+
+def _names(deal: dict[str, Any]) -> set[tuple[str, ...]]:
+    """Названия в кавычках из заголовка как кортежи основ слов (первые пять
+    букв): «Азбука вкуса» и «Азбуки вкуса» — одно название."""
+    out = set()
+    for m in _QUOTED.findall(str(deal.get('title') or '')):
+        words = tuple(w[:5] for w in re.findall(r'[а-яёa-z0-9]+', m.lower().replace('ё', 'е')) if len(w) >= 3)
+        if words:
+            out.add(words)
+    return out
+
+
+def _not_duplicate_pairs(ctx: dict[str, Any]) -> set[frozenset]:
+    pairs = set(ctx.get('not_duplicates') or ())
+    try:
+        from pipeline import find_duplicate_deal_candidates as scanner
+        pairs |= set(scanner.NOT_DUPLICATES.keys())
+        pairs |= {frozenset(v['pair']) for v in scanner.load_read_state().values() if v.get('pair')}
+    except Exception:  # noqa: BLE001 — сканер не обязателен для derive
+        pass
+    return pairs
+
+
+def mark_possible_duplicates(base: dict[str, Any], ctx: dict[str, Any]) -> int:
+    """Две сделки одного года с суммой в пределах 1,5% и общим названием в
+    кавычках, предметом или покупателем — подозрение на одну сделку в двух
+    карточках («Магнит» и «Тандер» покупают «Азбуку вкуса», 29,65 и 29,6
+    млрд ₽). Обе выпадают из денежных показателей, пока пара не прочитана
+    сканером дублей. Ставится только тем, у кого есть цена и год."""
+    ok_pairs = _not_duplicate_pairs(ctx)
+    by_year: dict[int, list[dict[str, Any]]] = {}
+    for d in base['deals']:
+        f = d.get('facts') or {}
+        v = (f.get('price') or {}).get('value_rub')
+        y = dm.year_of(d)
+        if v and y and (f.get('price') or {}).get('meaning') == 'disclosed':
+            by_year.setdefault(y, []).append(d)
+    suspects: dict[str, set[str]] = {}
+    for rows in by_year.values():
+        for i, a in enumerate(rows):
+            for b in rows[i + 1:]:
+                va, vb = a['facts']['price']['value_rub'], b['facts']['price']['value_rub']
+                if abs(va - vb) > 0.015 * max(va, vb):
+                    continue
+                if frozenset((a['id'], b['id'])) in ok_pairs:
+                    continue
+                # общий покупатель сам по себе — не признак: Softline за один
+                # месяц купила «МД Аудит» за 163 млн ₽ и Visitech за 162 млн ₽
+                same_target = dm.target_of(a) and dm.target_of(a) == dm.target_of(b)
+                if same_target or (_names(a) & _names(b)):
+                    suspects.setdefault(a['id'], set()).add(b['id'])
+                    suspects.setdefault(b['id'], set()).add(a['id'])
+    changed = 0
+    for d in base['deals']:
+        f = d['facts']
+        want = {'possible_duplicate': sorted(suspects[d['id']]), 'basis': 'rule'} if d['id'] in suspects else None
+        if (f.get('identity') or None) != want:
+            if want:
+                f['identity'] = want
+            else:
+                f.pop('identity', None)
+            f['admitted'] = {m: admitted(d, m)[0] for m in METRICS}
+            f['reasons'] = {m: admitted(d, m)[1] for m in METRICS}
             changed += 1
     return changed
 

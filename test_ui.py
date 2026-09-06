@@ -364,6 +364,8 @@ def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
                 f[key]["basis"] = "verified"
             f["price"]["scope"] = "equity"
             f["target"]["perimeter"] = "verified"
+            f["target"]["perimeter_report"] = {"inn": "7700000001", "year": 2023, "revenue_rub": 5e8}
+            f["nature"]["control_change_basis"] = "verified"
             f = facts.derive(dict(d, facts=f), ctx)
         return dict(d, facts=f)
 
@@ -380,16 +382,23 @@ def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
     assert page.evaluate("countsAsPrice(%s)" % json.dumps(base)) is False
     # не на вкладке цели — нет
     assert page.evaluate("dealMultipleLine(%s, 'b1', 500000000, 2023)" % json.dumps(ok)) is None
-    # год отчётности: за год сделки и старше двух лет — нет
+    # знаменатель — только тот отчёт, по которому читатели подтвердили периметр
+    # (год и выручка): другой год или другая выручка — мультипликатора нет
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2024)" % json.dumps(ok)) is None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2020)" % json.dumps(ok)) is None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(ok)) is not None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(ok)) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 600000000, 2023)" % json.dumps(ok)) is None
+    # год сделки — из подтверждённой даты закрытия, а не из даты карточки
+    closed_later = dict(ok, facts=dict(ok["facts"], date=dict(ok["facts"]["date"], basis="verified", meaning="closing", value="2025-02-01")))
+    assert page.evaluate("multipleYear(%s)" % json.dumps(closed_later))["year"] == 2025
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(closed_later)) is not None  # разрыв 2 — допустим
+    assert page.evaluate("multipleYear(%s)" % json.dumps(ok)) == {"year": 2024, "basis": "дата карточки"}
     # абсурдный мультипликатор — почти всегда выручка не того юрлица
     absurd = dict(ok, facts=dict(ok["facts"], price=dict(ok["facts"]["price"], value_rub=75_500_000_000)))
     assert page.evaluate("dealMultipleLine(%s, 't1', 17400000, 2023)" % json.dumps(absurd)) is None
-    # допуски по показателям — из facts, разные для сумм и для списка крупнейших
-    assert page.evaluate("countsAsPrice(%s)" % json.dumps(rule_only)) is True
-    assert page.evaluate("countsAsTopPurchase(%s)" % json.dumps(rule_only)) is False
+    # допуски по показателям — из facts: деньги только из прочитанных цен
+    assert page.evaluate("countsAsPrice(%s)" % json.dumps(rule_only)) is False
+    assert page.evaluate("factReason(%s, 'purchase_sums')" % json.dumps(rule_only)) == "price_not_read"
+    assert page.evaluate("countsAsPrice(%s)" % json.dumps(ok)) is True
     assert page.evaluate("countsAsTopPurchase(%s)" % json.dumps(ok)) is True
     est = with_facts(dict(base, sum="~1 000 млн ₽"))
     assert page.evaluate("sumBasis(%s)" % json.dumps(est)) == "estimate"
@@ -684,16 +693,20 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
             f[key]["basis"] = "verified"
         f["price"]["scope"] = "equity"
         f["target"]["perimeter"] = "verified"
+        f["target"]["perimeter_report"] = {"inn": "7700000321", "year": 2023, "revenue_rub": 5e8}
+        f["nature"]["control_change_basis"] = "verified"
         deal["facts"] = facts.derive(dict(deal, facts=f), ctx_f)
         pg.evaluate("mountDealFns(%s)" % json.dumps(deal))
         pg.wait_for_timeout(600)
         body = pg.inner_text("#deal-fns")
         # .tag рендерится заглавными (text-transform:uppercase), а innerText
         # отдаёт текст ПОСЛЕ CSS-преобразований — сравниваем без учёта регистра.
-        assert "ev/выручка" in body.lower()
+        # «EV» на карточке больше не обещается: считается цена пакета к выручке,
+        # без долга — и подпись говорит это прямо (третий разбор рецензента)
+        assert "цена ÷ выручка" in body.lower() and "ev/" not in body.lower()
         assert "×2" in body
         assert "2023" in body
-        assert "ev/операционная прибыль" in body.lower()
+        assert "цена ÷ операционная прибыль" in body.lower()
         assert "×10" in body  # 1000 млн / 100 млн
         assert not errors
         assert pg.evaluate(
@@ -2871,6 +2884,8 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
       if(!d) return {id: r.id, missing: true};
       const target = d.target || d.asset_id;
       return {id: r.id, basis: sumBasis(d), top: countsAsPrice(d),
+              admitted: !!(d.facts && d.facts.admitted && d.facts.admitted.purchase_sums),
+              reason: d.facts && d.facts.reasons ? d.facts.reasons.purchase_sums : null,
               multiple: target ? _dealMultipleSumRub(d, target) !== null : false, type: d.type};
     })""", gold["deals"])
     problems = []
@@ -2879,7 +2894,15 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
             continue  # карточки раньше 2022 года на клиент не грузятся
         if g["basis"] != row["sum_basis"]:
             problems.append((row["id"], "sumBasis", g["basis"], row["sum_basis"]))
-        if g["top"] != row["in_top_purchases"]:
+        # Клиент обязан читать допуск ровно так, как его посчитал сервер, —
+        # а сам допуск (in_top_purchases в выборке — про ПРАВИЛА, при
+        # прочитанной цене) сверяет test_gold_analytics.py: непрочитанная
+        # цена на клиенте честно не считается, и это не расхождение правил.
+        if g["top"] != g["admitted"]:
+            problems.append((row["id"], "top≠admitted", g["top"], g["admitted"]))
+        if row["in_top_purchases"] and g["reason"] not in ("ok", "price_not_read", "stale"):
+            problems.append((row["id"], "top", g["reason"], row["in_top_purchases"]))
+        if not row["in_top_purchases"] and g["top"]:
             problems.append((row["id"], "top", g["top"], row["in_top_purchases"]))
         # клиент показывает мультипликатор только для сделки с подтверждёнными
         # чтением фактами — это ПОДМНОЖЕСТВО текстового допуска выборки
