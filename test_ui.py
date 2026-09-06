@@ -352,7 +352,21 @@ def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
     качества (родня комментария у lastVerifiedDate чуть выше)."""
     visit(page, base_url, "#/deal/g1d36d186")
     base = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
-            "target": "t1", "buyer": "b1", "seller": "Иван Иванов", "eco": {"share": None}}
+            "target": "t1", "buyer": "b1", "seller": "Иван Иванов", "eco": {"share": "Куплено 100% долей"}}
+
+    # Доля не названа — не допуск (правило владельца, 6 сентября 2026): раньше
+    # такая сделка считалась «потенциально 100%» и шла в расчёт.
+    unknown_stake = dict(base, eco={"share": None})
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(unknown_stake)) is None
+    # Слова о покупке целиком — доля установлена.
+    whole = dict(base, eco={"share": "Компания куплена целиком"})
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(whole)) is not None
+    # «на 30% выше» — сравнение цен, не доля; диапазон и «более…» — не цена; явное sum_basis сильнее текста.
+    compare = dict(base, eco={"share": "Куплено 100%. Сумма на 30% выше прежней цены."})
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(compare)) is not None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum="более 1 000 млн ₽"))) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum_basis="not_a_price"))) is None
+    assert page.evaluate("sumBasis(%s)" % json.dumps(dict(base, sum="500 млн – 2 млрд ₽"))) == "range"
 
     ok = page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(base))
     assert ok and ok["multiple"] == 2.0
@@ -649,7 +663,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         pg.wait_for_timeout(400)
         deal = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
                 "target": "zzz-mult-target", "buyer": "b1", "seller": "Иван Иванов",
-                "eco": {"share": None}}
+                "eco": {"share": "Куплено 100% долей"}}  # неизвестная доля — не допуск (6 сентября 2026)
         pg.evaluate("mountDealFns(%s)" % json.dumps(deal))
         pg.wait_for_timeout(600)
         body = pg.inner_text("#deal-fns")
@@ -2817,6 +2831,41 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
     assert all(checks["soft"]) and not any(checks["firm"]), checks
     assert checks["rub"] == [193, 0, 0.754, 1200], checks
     assert checks["ipo"] is False
+
+
+def test_gold_rows_agree_with_client_rules(page, base_url):
+    """Контрольная выборка pipeline/gold/analytics_gold.json против КЛИЕНТСКИХ
+    копий правил (sumBasis, countsAsPrice/isSoftSum, _dealMultipleSumRub):
+    серверные копии проверяет test_gold_analytics.py, здесь — что клиент
+    говорит то же самое на тех же живых карточках. Ожидания зафиксированы
+    чтением, а не кодом."""
+    gold = json.loads((Path(__file__).parent / "pipeline" / "gold" / "analytics_gold.json").read_text(encoding="utf-8"))
+    visit(page, base_url, "#/analytics")
+    page.wait_for_function('typeof DEALS!=="undefined" && DEALS.length>1000', timeout=60000)
+    got = page.evaluate("""(rows) => rows.map(r => {
+      const d = DEALS.find(x => x.id === r.id);
+      if(!d) return {id: r.id, missing: true};
+      const target = d.target || d.asset_id;
+      return {id: r.id, basis: sumBasis(d), top: countsAsPrice(d) && !isSoftSum(d.sum) && String(d.sum||"").includes("₽"),
+              multiple: target ? _dealMultipleSumRub(d, target) !== null : false, type: d.type};
+    })""", gold["deals"])
+    problems = []
+    for row, g in zip(gold["deals"], got):
+        if g.get("missing"):
+            continue  # карточки раньше 2022 года на клиент не грузятся
+        if g["basis"] != row["sum_basis"]:
+            problems.append((row["id"], "sumBasis", g["basis"], row["sum_basis"]))
+        if g["top"] != row["in_top_purchases"]:
+            problems.append((row["id"], "top", g["top"], row["in_top_purchases"]))
+        # клиент не знает реестра ИНН и банков — он не может ДОПУСТИТЬ то, чего выборка не допускает,
+        # но не обязан отвергать по причинам, которых не видит (банк, неподтверждённый ИНН)
+        if g["multiple"] and not row["in_multiples"] and row["share"] is not None and row["share"] >= 95 and row["sum_basis"] == "disclosed":
+            pass
+        elif g["multiple"] and not row["in_multiples"] and (row["share"] is None or row["share"] < 95 or row["sum_basis"] != "disclosed"):
+            problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
+        if row["in_multiples"] and not g["multiple"] and not row.get("pending"):
+            problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
+    assert not problems, problems
 
 
 def test_compare_shows_bank_of_russia_data_for_a_bank(page, base_url):

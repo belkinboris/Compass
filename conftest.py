@@ -17,3 +17,10 @@ os.environ.setdefault("COOKIE_SECURE", "false")  # TestClient ходит по ht
 # Тесты самого гейта включают его явно: monkeypatch.setattr(main, "ACCESS_GATE",
 # True) или отдельный сервер с ACCESS_GATE=1 (test_ui.py).
 os.environ.setdefault("ACCESS_GATE", "0")
+# Ключ API-ФНС в контейнере сессии — боевой: сервер тестов на старте запускал
+# бы платную докачку реестра в тестовую SQLite и полминуты отвечал с задержкой
+# (6 сентября 2026: таймауты Playwright и приёмочного скрипта нашлись по логу
+# сервера). Тестам ключ не нужен вовсе — гасим, а не setdefault.
+os.environ["API_FNS_KEY"] = ""
+os.environ.setdefault("FNS_DAILY_RESYNC", "0")
+os.environ.setdefault("DATA_REFRESH_ENABLED", "0")

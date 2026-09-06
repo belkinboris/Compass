@@ -5692,7 +5692,24 @@ const sumBillionsRub = s => {
   const n=parseFloat(m[1].replace(",","."));
   return m[2].toLowerCase()==="млн" ? n/1000 : m[2].toLowerCase()==="трлн" ? n*1000 : n;
 };
-const isSoftSum = s => /\d\s*[–—-]\s*\d|оценк|оценив|экспертн|расчётн|расчетн|начальн[а-яё]*\s+цен|стартов[а-яё]*\s+цен|запрашива|по\s+капитализации|оценочн|~|≈|около|^\s*до\s|не\s+более|(?:^|[^а-яё])или(?![а-яё])|этап|допэмисс|без\s+уч[её]т|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|ориентировочн/i.test(s||"");
+// Смысл суммы — та же таблица, что sum_basis() в deal_multiples.py; явное поле
+// карточки `sum_basis` сильнее разбора текста. «Покупки» и мультипликаторы
+// считают только 'disclosed' — цену, названную сторонами.
+const SUM_BASES = ["disclosed","estimate","range","lower_bound","auction_start","foreign_currency","not_a_price","valuation","raise","undisclosed","unparsed"];
+const sumBasis = d => {
+  if(d && SUM_BASES.includes(d.sum_basis)) return d.sum_basis;
+  const t = String((d && d.sum) || "");
+  if(/^\s*(—|-|не\s+раскрыт[а-яё]*|публично\s+не\s+сообщал[а-яё]*|нет\s+данных)?\s*\.?\s*$/i.test(t)) return "undisclosed";
+  const foreign = /[$€£¥]|(?:^|[^a-zа-яё])(?:usd|eur|долл|евро)/i.test(t);
+  if(foreign && !t.includes("₽")) return "foreign_currency";
+  if(/стартов|начальн|по\s+стартовой/i.test(t)) return "auction_start";
+  if(/\d\s*(?:тыс|млн|млрд|трлн)?\.?\s*[–—-]\s*\d/i.test(t)) return "range";
+  if(/оценк|оценив|экспертн|расчётн|расчетн|запрашива|по\s+капитализации|оценочн|~|≈|около|^\s*до\s|не\s+более|(?:^|[^а-яё])или(?![а-яё])|этап|допэмисс|без\s+уч[её]т|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|ориентировочн/i.test(t)) return "estimate";
+  if(/(?:^|[^а-яё])(?:более|свыше|не\s+менее|как\s+минимум|минимум|от)\s*\d/i.test(t)) return "lower_bound";
+  if(!t.includes("₽")) return foreign ? "foreign_currency" : "unparsed";
+  return "disclosed";
+};
+const isSoftSum = s => { const b = sumBasis({sum: s}); return b !== "disclosed" && b !== "undisclosed" && b !== "foreign_currency" && b !== "unparsed"; };
 // У допэмиссии (закрытая подписка, SPO) слово «допэмисс» иногда стоит только
 // в заголовке («Segezha Group: допэмиссия акций... на 113 млрд руб.»), а
 // поле `sum` — чистое число без него: isSoftSum(d.sum) такую сделку не
@@ -5706,6 +5723,7 @@ const isSoftSum = s => /\d\s*[–—-]\s*\d|оценк|оценив|экспер
 const isSoftPriceDeal = d => isSoftSum(d.sum) ||
   (/допэмисс/i.test(d.title||"") && !/оплат[а-яё]*\s+допэмисс/i.test(d.title||""));
 const countsAsPrice = d => d.status !== "Не состоялась" && !(d.type === "Продажа с торгов" && d.status !== "Закрыта")
+  && !(d.sum_basis && d.sum_basis !== "disclosed") // явная пометка карточки: «это не цена» (иск, оценка компании, объём привлечения)
   // «Только покупки»: M&A и продажа с торгов. IPO не складывается с
   // покупками (у размещения в `sum` то объём размещения, то оценка всей
   // компании), финансирование и инвестиции — тем более: у структурной сделки
@@ -5732,24 +5750,28 @@ function _dealMultipleSumRub(d, targetId){
   const target = d.target || d.asset_id;
   if(target !== targetId) return null; // мультипликатор только на вкладке ЦЕЛИ, не покупателя/продавца
   if(d.type !== "M&A") return null;
+  if(d.status === "Не состоялась") return null;
   if(!(d.buyer || d.buyer_name) || !(d.seller || d.seller_id)) return null;
+  const tp = co(target); if(tp && tp.lot) return null; // лот из нескольких юрлиц — отчётность одного не описывает периметр
+  // Только цена, названная сторонами (то же правило, что sum_basis() в deal_multiples.py).
+  if(sumBasis(d) !== "disclosed") return null;
   const sumText = d.sum || "";
-  // Не твёрдая цена (то же правило, что _ESTIMATE в deal_multiples.py).
-  if(/оценк|оценив|~|≈|около|^\s*до\s|не\s+более|(?:^|[^а-яё])или(?![а-яё])|этап|допэмисс|без\s+уч[её]т|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|запрашива|ориентировочн/i.test(sumText)) return null;
-  const m = sumText.match(/(\d[\d\s ]*(?:[.,]\d+)?)(?:\s*[–—-]\s*(\d[\d\s ]*(?:[.,]\d+)?))?\s*(тыс|млн|млрд|трлн)\.?\s*₽/i);
+  const m = sumText.match(/(\d[\d\s ]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)\.?\s*₽/i);
   if(!m) return null;
-  const num = s => parseFloat(s.replace(/[\s ]/g,"").replace(",", "."));
-  const unitMult = {"тыс":1e3,"млн":1e6,"млрд":1e9,"трлн":1e12}[m[3].toLowerCase()];
-  const n1 = num(m[1]), n2 = m[2] ? num(m[2]) : null;
-  const sumRub = ((n1 + (n2!=null?n2:n1)) / 2) * unitMult;
-  // Доля — и из заголовка тоже («Ростех приобрел 25% в …»): у 24 из 83
-  // кандидатов (замер 5 сентября 2026) она стояла только там.
-  const shareText = [(d.eco && d.eco.share), d.asset, d.title].filter(Boolean).join(" ");
-  const stakeMatches = [...shareText.matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
+  const num = s => parseFloat(s.replace(/[\s ]/g,"").replace(",", "."));
+  const unitMult = {"тыс":1e3,"млн":1e6,"млрд":1e9,"трлн":1e12}[m[2].toLowerCase()];
+  const sumRub = num(m[1]) * unitMult;
+  // Доля обязана быть УСТАНОВЛЕНА: процентом (наименьший из названных — «консолидировали
+  // 100%, выкупив 30%» — покупка 30%) или словами о покупке целиком. Неизвестная доля —
+  // не допуск (правило владельца, 6 сентября 2026). Процент рядом со словом о сравнении
+  // («на 30% выше», «дисконт 20%») долей не считается — то же, что _NOT_A_STAKE в deal_multiples.py.
+  const notStake = /(?:(?:^|[^а-яё])(?:на|в|до|с|со|от)\s+(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|уступа))|(?:(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|дисконт|скидк|годовых|ставк))|(?:(?:дисконт|скидк|ставк|рост|снижен|падени|выросл|упал|сократил|увеличил)[а-яё]*\s+(?:на\s+|в\s+|до\s+)?(?:\d{1,3}(?:[.,]\d+)?)\s*%)/gi;
+  const shareTexts = [(d.eco && d.eco.share), d.asset, d.title].filter(Boolean).map(x=>String(x).replace(notStake," "));
+  const stakeMatches = [...shareTexts.join(" ").matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
   const plausibleStake = stakeMatches.filter(x=>x>=1&&x<=100);
-  // Наименьшая из названных долей, не наибольшая: «консолидировали 100%,
-  // выкупив 30%» — покупка 30% (то же правило, что stake_percent в deal_multiples.py).
-  if(plausibleStake.length && Math.min(...plausibleStake) < 95) return null;
+  let stake = plausibleStake.length ? Math.min(...plausibleStake) : null;
+  if(stake === null && /целиком|полностью|единственн[а-яё]*\s+(?:владельц|собственник|акционер)|весь\s+бизнес|вс[ея]\s+(?:акци|дол)/i.test(shareTexts.join(" "))) stake = 100;
+  if(stake === null || stake < 95) return null;
   return sumRub;
 }
 

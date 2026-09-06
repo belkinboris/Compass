@@ -22,9 +22,21 @@
     сегодняшним пересчётом молча искажается, см. CLAUDE.md «Число может
     быть верным фактом и совсем не той величиной»).
   * сумма НЕ помечена «(по оценке)» — оценка не то же самое, что цена.
-  * доля предмета сделки (если она вообще названа в тексте) — не меньше
-    95%: сумма за долю меньше этого нельзя молча делить на выручку всей
-    компании.
+  * доля предмета сделки УСТАНОВЛЕНА и не меньше 95%: названа цифрой
+    («100% акций») или словами о покупке целиком («целиком», «полностью»,
+    «единственным владельцем»). Неизвестная доля — не допуск: до 6 сентября
+    2026 карточка без процента считалась «потенциально 100%», и это молча
+    превращало «нет распознанного 30%» в «куплено целиком» (замечание
+    аудита, раунд 2). Теперь неизвестность оставляет сделку в базе, но не
+    в мультипликаторе — пока чтение источника не запишет долю явно.
+  * сумма — ЦЕНА, НАЗВАННАЯ СТОРОНАМИ (`sum_basis` == 'disclosed'): не
+    оценка, не диапазон, не «более/не менее», не стартовая цена торгов, не
+    объём допэмиссии. Смысл суммы выводится из её текста (`sum_basis()`), а
+    карточка может нести явное поле `sum_basis`, которое сильнее разбора —
+    для случаев, где по тексту не видно, что число не цена (иск о
+    компенсации, оценка всей компании при IPO).
+  * предмет — один профиль-компания, а не лот из нескольких юрлиц
+    (`lot`): отчётность одного юрлица не описывает весь купленный периметр.
   * цель сделки — не банк (РСБУ банков не сопоставим с обычной выручкой,
     см. блок «По данным Банка России») и с подтверждённым по ИНН профилем
     (fns_registry.py, decision=confirmed).
@@ -72,14 +84,81 @@ _RUB_AMOUNT = re.compile(
     r'\s*(?P<unit>тыс|млн|млрд|трлн)\.?\s*₽',
     re.I)
 _STAKE_PCT = re.compile(r'(\d{1,3}(?:[.,]\d+)?)\s*%')
+# Процент, который НЕ доля: «на 30% выше», «дисконт 20%», «выросла на 15%»,
+# «ставка 12%» — рядом с ним стоит слово о сравнении величин, а не о
+# пакете. Замер по золотой выборке 6 сентября 2026: у «Камы» (куплено
+# 100%) `eco.share` говорил «на 30% превышает стоимость», и наименьший
+# процент (30) выбрасывал сделку как покупку меньшей доли.
+_NOT_A_STAKE = re.compile(
+    r'(?:(?:^|[^а-яё])(?:на|в|до|с|со|от)\s+(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|уступа))'
+    r'|(?:(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|дисконт|скидк|годовых|ставк))'
+    r'|(?:(?:дисконт|скидк|ставк|рост|снижен|падени|выросл|упал|сократил|увеличил)[а-яё]*\s+(?:на\s+|в\s+|до\s+)?(?:\d{1,3}(?:[.,]\d+)?)\s*%)',
+    re.I)
 # Не твёрдая цена: оценка, «около»/«~»/«до», сумма одного этапа или один из
 # вариантов («или EV…»), допэмиссия, «без учёта долга», неофициальные и
 # предварительные цифры (аудит 5 сентября 2026: «~100 млн ₽ (или EV ~1 млрд
 # ₽)» и «400 млн ₽ (первый этап)» проходили как цена и давали ×0,55 и ×9,28).
+_RANGE = re.compile(r'\d\s*(?:тыс|млн|млрд|трлн)?\.?\s*[–—-]\s*\d', re.I)
+_LOWER_BOUND = re.compile(r'(?:^|[^а-яё])(?:более|свыше|не\s+менее|как\s+минимум|минимум|от)\s*\d', re.I)
+_AUCTION_START = re.compile(r'стартов|начальн|по\s+стартовой', re.I)
 _ESTIMATE = re.compile(
-    r'\d\s*[–—-]\s*\d|оценк|оценив|~|≈|около|^\s*до\s|не\s+более|\bили\b|этап|допэмисс|без\s+уч[её]т'
+    r'оценк|оценив|~|≈|около|^\s*до\s|не\s+более|\bили\b|этап|допэмисс|без\s+уч[её]т'
     r'|неофициальн|предварит|ожида|по\s+данным|по\s+одним|списан|запрашива|ориентировочн',
     re.I)
+_FOREIGN = re.compile(r'[$€£¥]|\b(?:USD|EUR|долл|евро)', re.I)
+_UNDISCLOSED = re.compile(r'^\s*(?:—|-|не\s+раскрыт[а-яё]*|публично\s+не\s+сообщал[а-яё]*|нет\s+данных)?\s*\.?\s*$', re.I)
+
+# Смысл суммы — закрытый список. Порядок важен: явное поле карточки сильнее
+# разбора текста, «не цена» сильнее «оценки», оценка сильнее «раскрыто».
+SUM_BASES = ('disclosed', 'estimate', 'range', 'lower_bound', 'auction_start',
+             'foreign_currency', 'not_a_price', 'valuation', 'raise', 'undisclosed', 'unparsed')
+SUM_BASIS_LABELS = {
+    'disclosed': 'цена, названная сторонами',
+    'estimate': 'оценка (эксперты, СМИ, «около»)',
+    'range': 'диапазон',
+    'lower_bound': 'нижняя граница («более», «не менее»)',
+    'auction_start': 'стартовая цена торгов',
+    'foreign_currency': 'сумма в валюте',
+    'not_a_price': 'число не является ценой сделки',
+    'valuation': 'оценка всей компании, не цена пакета',
+    'raise': 'объём привлечения (допэмиссия, раунд, размещение)',
+    'undisclosed': 'не раскрыта',
+    'unparsed': 'не разобрана',
+}
+
+
+def sum_basis(deal: dict[str, Any]) -> str:
+    """Что означает число в `sum` — единственное место, где это решается
+    (клиентская копия — `sumBasis` в static/index.html, правила те же).
+
+    До 6 сентября 2026 смысл суммы нигде не хранился и не вычислялся: топ
+    «Аналитики» и мультипликаторы читали `sum` как цену, если в строке не
+    было слова «оценк». Так в «покупки» попали 320 млрд ₽ структурной сделки
+    под залог и допэмиссия Segezha, а в мультипликаторы — стартовая цена
+    торгов и «более 200 млрд ₽» (аудит, раунды 1 и 2). Явное поле карточки
+    `sum_basis` сильнее разбора текста — им рутина или человек помечают
+    то, чего по тексту не видно (компенсация по иску, оценка всей компании)."""
+    explicit = deal.get('sum_basis')
+    if explicit in SUM_BASES:
+        return explicit
+    text = str(deal.get('sum') or '')
+    if _UNDISCLOSED.match(text):
+        return 'undisclosed'
+    if _FOREIGN.search(text) and '₽' not in text:
+        return 'foreign_currency'
+    if _AUCTION_START.search(text):
+        return 'auction_start'
+    if _RANGE.search(text):
+        return 'range'
+    if _ESTIMATE.search(text):
+        return 'estimate'
+    if _LOWER_BOUND.search(text):
+        return 'lower_bound'
+    if '₽' not in text:
+        return 'foreign_currency' if _FOREIGN.search(text) else 'unparsed'
+    if not _RUB_AMOUNT.search(text):
+        return 'unparsed'  # «несколько млрд ₽ (точно не указана)» — рубли есть, числа нет
+    return 'disclosed'
 
 
 def parse_rub_sum(text: str | None) -> float | None:
@@ -105,7 +184,11 @@ def parse_rub_sum(text: str | None) -> float | None:
 
 
 def is_estimate(text: str | None) -> bool:
-    return bool(text) and bool(_ESTIMATE.search(text))
+    """Не твёрдая цена: оценка, диапазон, нижняя граница, стартовая цена
+    торгов. Обёртка над `sum_basis` для строки без карточки."""
+    if not text:
+        return False
+    return sum_basis({'sum': text}) in ('estimate', 'range', 'lower_bound', 'auction_start')
 
 
 def stake_percent(deal: dict[str, Any]) -> float | None:
@@ -130,9 +213,31 @@ def stake_percent(deal: dict[str, Any]) -> float | None:
     for text in (deal.get('eco', {}).get('share'), deal.get('asset'), deal.get('title')):
         if not text:
             continue
-        nums += [float(x.replace(',', '.')) for x in _STAKE_PCT.findall(text)]
+        cleaned = _NOT_A_STAKE.sub(' ', str(text))
+        nums += [float(x.replace(',', '.')) for x in _STAKE_PCT.findall(cleaned)]
     plausible = [n for n in nums if 1 <= n <= 100]
     return min(plausible) if plausible else None
+
+
+# Покупка целиком, названная словами, а не процентом: «купил компанию
+# целиком», «выкупил полностью», «стал единственным владельцем».
+_FULL_WORDS = re.compile(
+    r'целиком|полностью|единственн[а-яё]*\s+(?:владельц|собственник|акционер)|весь\s+бизнес|вс[ея]\s+(?:акци|дол)',
+    re.I)
+
+
+def stake_established(deal: dict[str, Any]) -> float | None:
+    """Доля, которую карточка НАЗЫВАЕТ: процент (наименьший из названных)
+    или слова о покупке целиком (100). None — доля не установлена, и это
+    не допуск (правило владельца, 6 сентября 2026: неизвестность не
+    превращается в предположение «куплено 100%»)."""
+    pct = stake_percent(deal)
+    if pct is not None:
+        return pct
+    for text in (deal.get('eco', {}).get('share'), deal.get('asset'), deal.get('title')):
+        if text and _FULL_WORDS.search(str(text)):
+            return 100.0
+    return None
 
 
 def year_of(deal: dict[str, Any]) -> int | None:
@@ -156,36 +261,87 @@ class MultipleCandidate:
     stake_percent: float | None
 
 
+EXCLUSION_LABELS = {
+    'type': 'не покупка компании (IPO, инвестиция, финансирование)',
+    'parties': 'не названы обе стороны',
+    'year': 'сделка раньше 2022 года',
+    'target': 'предмет не привязан к профилю компании',
+    'target_lot': 'предмет — лот из нескольких юрлиц',
+    'target_bank': 'предмет — банк',
+    'target_unconfirmed': 'у предмета не подтверждён ИНН',
+    'status': 'сделка не состоялась',
+    'sum_basis': 'сумма — не цена, названная сторонами',
+    'share_unknown': 'доля не установлена',
+    'share_below': 'куплена доля меньше 95%',
+    'sum_unparsed': 'сумма не разобрана',
+}
+
+
+def admission(d: dict[str, Any], confirmed_ids: set[str], bank_ids: set[str],
+              lot_ids: set[str] | None = None) -> tuple[MultipleCandidate | None, str | None]:
+    """Одна сделка: либо кандидат, либо причина отказа (ключ EXCLUSION_LABELS).
+    Причины видны в ответе `/api/analytics/multiples` — чтобы «почему этой
+    сделки нет в мультипликаторах» отвечалось цифрой, а не догадкой."""
+    if d.get('type') != 'M&A':
+        return None, 'type'
+    has_buyer = bool(d.get('buyer') or d.get('buyer_name'))
+    has_seller = bool(d.get('seller') or d.get('seller_id'))
+    if not (has_buyer and has_seller):
+        return None, 'parties'
+    yr = year_of(d)
+    if not yr or yr < MIN_YEAR:
+        return None, 'year'
+    target = target_of(d)
+    if not target:
+        return None, 'target'
+    if lot_ids and target in lot_ids:
+        return None, 'target_lot'
+    if target in bank_ids:
+        return None, 'target_bank'
+    if target not in confirmed_ids:
+        return None, 'target_unconfirmed'
+    if d.get('status') == 'Не состоялась':
+        return None, 'status'
+    if sum_basis(d) != 'disclosed':
+        return None, 'sum_basis'
+    stake = stake_established(d)
+    if stake is None:
+        return None, 'share_unknown'
+    if stake < MIN_STAKE_PERCENT:
+        return None, 'share_below'
+    sum_rub = parse_rub_sum(d.get('sum'))
+    if not sum_rub or sum_rub <= 0:
+        return None, 'sum_unparsed'
+    return MultipleCandidate(
+        deal_id=d.get('id') or '', title=d.get('title') or d.get('id') or '', target_id=target,
+        year=yr, sum_rub=sum_rub, stake_percent=stake), None
+
+
 def find_candidates(deals: dict[str, dict[str, Any]], confirmed_ids: set[str],
-                     bank_ids: set[str]) -> list[MultipleCandidate]:
+                     bank_ids: set[str], lot_ids: set[str] | None = None) -> list[MultipleCandidate]:
     """Кандидаты по ТЕКСТУ карточки — без обращения к БФО (та часть фильтра,
     которую можно применить без единого запроса к базе)."""
     out = []
     for deal_id, d in deals.items():
-        if d.get('type') != 'M&A':
-            continue
-        has_buyer = bool(d.get('buyer') or d.get('buyer_name'))
-        has_seller = bool(d.get('seller') or d.get('seller_id'))
-        if not (has_buyer and has_seller):
-            continue
-        yr = year_of(d)
-        if not yr or yr < MIN_YEAR:
-            continue
-        target = target_of(d)
-        if not target or target in bank_ids or target not in confirmed_ids:
-            continue
-        if is_estimate(d.get('sum')):
-            continue
-        stake = stake_percent(d)
-        if stake is not None and stake < MIN_STAKE_PERCENT:
-            continue
-        sum_rub = parse_rub_sum(d.get('sum'))
-        if not sum_rub or sum_rub <= 0:
-            continue
-        out.append(MultipleCandidate(
-            deal_id=deal_id, title=d.get('title') or deal_id, target_id=target,
-            year=yr, sum_rub=sum_rub, stake_percent=stake))
+        cand, _ = admission(dict(d, id=deal_id), confirmed_ids, bank_ids, lot_ids)
+        if cand:
+            out.append(cand)
     return out
+
+
+def exclusion_counts(deals: dict[str, dict[str, Any]], confirmed_ids: set[str],
+                     bank_ids: set[str], lot_ids: set[str] | None = None) -> dict[str, int]:
+    """Сколько сделок M&A с 2022 года не дошли до мультипликатора и почему —
+    считается только по тем, у кого есть покупатель и продавец: остальное
+    не сделки этого класса."""
+    counts: dict[str, int] = {}
+    for deal_id, d in deals.items():
+        cand, reason = admission(dict(d, id=deal_id), confirmed_ids, bank_ids, lot_ids)
+        if reason in ('type', 'parties', 'year'):
+            continue
+        if reason:
+            counts[reason] = counts.get(reason, 0) + 1
+    return counts
 
 
 @dataclass
@@ -303,7 +459,8 @@ def overall_median(rows: list[DealMultiple]) -> float | None:
 
 
 def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
-                              registry: dict[str, dict], get_company_profile) -> dict[str, Any]:
+                              registry: dict[str, dict], get_company_profile,
+                              lot_ids: set[str] | None = None) -> dict[str, Any]:
     """Полный расчёт для эндпоинта /api/analytics/multiples — единственная
     функция здесь, которая трогает БД; всё остальное в модуле — чистые
     функции над словарями, проверяемые без фикстур базы."""
@@ -311,7 +468,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
 
     confirmed_ids = {cid for cid, row in registry.items() if row['decision'] == 'confirmed'}
     bank_ids = {cid for cid, row in registry.items() if row['decision'] == 'bank'}
-    candidates = find_candidates(deals, confirmed_ids, bank_ids)
+    # Лоты приходят готовым множеством от вызывающего кода: get_company_profile
+    # перечитывает весь справочник на каждый вызов (0,1 с), и перебор тысячи
+    # предметов сделок через него занимал две минуты на запрос (6 сентября 2026).
+    lot_ids = set(lot_ids or ())
+    candidates = find_candidates(deals, confirmed_ids, bank_ids, lot_ids)
+    excluded = exclusion_counts(deals, confirmed_ids, bank_ids, lot_ids)
 
     rows: list[DealMultiple] = []
     op_rows: list[OpProfitMultiple] = []
@@ -362,6 +524,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         'clean_total': len(rows),
         'median': overall_median(rows),
         'industries': industry_medians(rows, industry_of),
+        # Почему сделки не попали в мультипликатор — по причинам, с подписями
+        # для экрана; «доля не установлена» здесь самая частая, и это
+        # очередь на чтение, а не дефект расчёта.
+        'excluded': [{'reason': k, 'label': EXCLUSION_LABELS[k], 'count': v}
+                     for k, v in sorted(excluded.items(), key=lambda kv: -kv[1])],
+        'no_report': len(candidates) - len(rows),
         'deals': [{
             'id': r.deal_id, 'title': r.title, 'year': r.year,
             'target_id': r.target_id, 'target_name': r.target_name,
@@ -371,8 +539,10 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         'methodology': (
             'Мультипликатор показывает, во сколько годовых выручек обошлась '
             'компания покупателю. Считаем его только там, где сравнение честное: '
-            'компания куплена целиком (доля 95% и выше), цену назвали сами стороны '
-            'и в рублях (оценки экспертов не в счёт), а выручка взята из отчётности '
+            'в карточке прямо сказано, что компания куплена целиком (доля 95% и '
+            'выше; если доля не названа, сделка в расчёт не идёт), цену назвали '
+            'сами стороны и в рублях (оценки, диапазоны, стартовые цены торгов и '
+            '«более…» не в счёт), а выручка взята из отчётности '
             'за последний полный год до сделки (или за позапрошлый, если прошлогодний ещё не сдан). Значения вне разумных границ не '
             'показываем: почти всегда это значит, что отчётность нашлась не у того '
             'юрлица, а не что сделка настолько необычная. В цену сделки иногда '

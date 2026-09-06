@@ -164,6 +164,16 @@ def test_industry_is_set(deals):
     assert not bad, f"сделки без отрасли: {bad[:5]}"
 
 
+def test_sum_basis_values_are_from_the_closed_list(deals):
+    """Явное поле `sum_basis` (смысл суммы: не цена / оценка / объём
+    привлечения…) сильнее разбора текста, поэтому значение — только из
+    закрытого списка deal_multiples.SUM_BASES; опечатка молча вернула бы
+    сумму в «покупки» как цену."""
+    import deal_multiples as dm
+    bad = [(d["id"], d["sum_basis"]) for d in deals if d.get("sum_basis") and d["sum_basis"] not in dm.SUM_BASES]
+    assert not bad, f"sum_basis вне списка: {bad}"
+
+
 def test_industries_are_from_the_known_list(deals):
     html = INDEX.read_text(encoding="utf-8")
     listed = set(re.search(r'const INDUSTRIES\s*=\s*\[(.*?)\]', html, re.S).group(1)

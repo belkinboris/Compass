@@ -201,19 +201,19 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
             id="mult-clean-deal", title="Чистая сделка для теста", type="M&A",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-clean-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
-            eco={"share": None}, asset=None,
+            eco={"share": "Куплено 100% долей"}, asset=None,
         ),
         "mult-not-ma-deal": dict(
             id="mult-not-ma-deal", title="Инвестиция, не в счёт", type="Инвестиция",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-clean-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
-            eco={"share": None}, asset=None,
+            eco={"share": "Куплено 100% долей"}, asset=None,
         ),
         "mult-bank-deal": dict(
             id="mult-bank-deal", title="Сделка с банком, не в счёт", type="M&A",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-bank-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
-            eco={"share": None}, asset=None,
+            eco={"share": "Куплено 100% долей"}, asset=None,
         ),
     }
     registry = {
@@ -255,7 +255,7 @@ def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(cli
             id="mult-op-deal", title="Сделка с операционной прибылью", type="M&A",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-op-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
-            eco={"share": None}, asset=None,
+            eco={"share": "Куплено 100% долей"}, asset=None,
         ),
     }
     registry = {
@@ -1168,6 +1168,8 @@ def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
 
 
 def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch):
+    # conftest гасит боевой API_FNS_KEY; клиенту нужен хоть какой-то ключ, сеть здесь подменена
+    monkeypatch.setenv("API_FNS_KEY", "test-key")
     """Этап 13, П1: большой бэклог реестра (кампания самопроверки ИНН
     подтвердила разом сотни новых строк) обязан временно поднять дневной
     потолок — иначе догон витрины растягивается на недели деплоев.
@@ -1198,6 +1200,8 @@ def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch)
 
 
 def test_fns_sync_once_records_a_run_that_counts_toward_the_cap(monkeypatch):
+    # conftest гасит боевой API_FNS_KEY; клиенту нужен хоть какой-то ключ, сеть здесь подменена
+    monkeypatch.setenv("API_FNS_KEY", "test-key")
     """Успешная попытка обязана оставить след в FnsSyncRun — иначе следующий
     рестарт того же дня не увидит уже потраченные запросы и потолок не
     сработает вовсе."""

@@ -35,7 +35,7 @@ import deal_catalog
 import deal_multiples
 import notification_service
 import subscription_feed
-from company_catalog import get_company_profile
+from company_catalog import get_company_profile, load_company_catalog
 from deal_catalog import get_deal
 from deal_export import render_deal_pdf
 from db.models import Base as DBBase
@@ -1693,7 +1693,9 @@ def analytics_multiples(db=Depends(get_db)):
     микросекунд ответа)."""
     deals = deal_catalog.load_deals()
     registry = fns_registry_by_company_id()
-    return deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile)
+    # Лоты из нескольких юрлиц — одним чтением справочника, а не профиль за профилем.
+    lot_ids = {cid for cid, row in load_company_catalog().items() if row.get("lot")}
+    return deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile, lot_ids)
 
 
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:

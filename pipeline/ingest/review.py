@@ -50,8 +50,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+sys.path.insert(0, ROOT)
 
 import draft as drafter                                   # noqa: E402
+from deal_multiples import SUM_BASES                     # noqa: E402
 import tag_themes                                         # noqa: E402
 import link_named_parties_to_existing_profiles as linker  # noqa: E402
 
@@ -536,6 +538,12 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
             bad.append('неизвестный статус %r' % new)
         elif not any(w in quote.lower() for w in STATUS_WORDS[new]):
             bad.append('в цитате нет слова, подтверждающего статус «%s»' % new)
+    elif field == 'sum_basis':
+        # Смысл суммы — закрытый список (deal_multiples.SUM_BASES); поле сильнее
+        # разбора текста `sum`, поэтому цитата обязана объяснять, ЧТО это за
+        # число: иск, оценка всей компании, объём привлечения — а не пересказ суммы.
+        if new not in SUM_BASES:
+            bad.append('sum_basis вне списка %s' % ', '.join(SUM_BASES))
     elif field == 'type':
         if new not in TYPE_WORDS:
             bad.append('неизвестный тип сделки %r — из %s' % (new, sorted(TYPE_WORDS)))

@@ -7,9 +7,11 @@ import deal_multiples as dm
 
 
 def _deal(**kw):
+    # Доля названа явно: с 6 сентября 2026 неизвестная доля — не допуск,
+    # поэтому базовая сделка тестов говорит «100%» сама.
     base = dict(type='M&A', date='2024-06-01', sum='1 000 млн ₽',
                 target='target1', buyer='buyer1', seller='Иван Иванов',
-                eco={'share': None}, asset=None)
+                eco={'share': 'Куплено 100% долей'}, asset=None)
     base.update(kw)
     return base
 
@@ -63,7 +65,7 @@ def test_stake_percent_from_asset():
 
 
 def test_stake_percent_none_when_not_mentioned():
-    d = _deal()
+    d = _deal(eco={'share': None})
     assert dm.stake_percent(d) is None
 
 
@@ -136,12 +138,68 @@ def test_candidate_accepts_large_stake():
     assert len(out) == 1
 
 
-def test_candidate_accepts_unspecified_stake():
-    # Доля не названа вовсе — трактуется как потенциально 100%, не
-    # отбрасывается заранее (в отличие от явно названной маленькой доли).
+def test_candidate_rejects_unspecified_stake():
+    # Доля не названа вовсе — НЕ допуск (правило владельца, 6 сентября 2026):
+    # неизвестность не превращается в предположение «куплено 100%». До этого
+    # такая сделка трактовалась как потенциально 100% и шла в расчёт.
     d = _deal(eco={'share': None}, asset=None)
-    out = dm.find_candidates({'d1': d}, CONFIRMED, BANKS)
-    assert len(out) == 1
+    assert dm.find_candidates({'d1': d}, CONFIRMED, BANKS) == []
+    cand, reason = dm.admission(dict(d, id='d1'), CONFIRMED, BANKS)
+    assert cand is None and reason == 'share_unknown'
+
+
+def test_candidate_accepts_full_purchase_named_in_words():
+    d = _deal(eco={'share': 'Компания куплена целиком'}, asset=None)
+    assert len(dm.find_candidates({'d1': d}, CONFIRMED, BANKS)) == 1
+    assert dm.stake_established(d) == 100.0
+
+
+def test_comparison_percent_is_not_a_stake():
+    # «на 30% превышает стоимость» — сравнение цен, а не доля пакета: у «Камы»
+    # (куплено 100%) такой процент выбрасывал сделку как покупку 30%.
+    d = _deal(eco={'share': 'Куплено 100% ООО «Кама». Эта сумма на 30% превышает стоимость, уплаченную ранее.'})
+    assert dm.stake_percent(d) == 100.0
+    assert dm.stake_percent({'title': 'Купил 51% с дисконтом 20%', 'eco': {}}) == 51.0
+    assert dm.stake_percent({'title': 'Ростех приобрел 25% в разработчике', 'eco': {}}) == 25.0
+
+
+def test_sum_basis_table():
+    cases = {
+        '1,5 млрд ₽': 'disclosed', '41 500 млн ₽': 'disclosed',
+        '754 млн ₽ (плюс условное возмещение до 478 млн ₽)': 'disclosed',
+        '500 млн ₽ (по оценке)': 'estimate', 'около 10 млрд ₽': 'estimate',
+        '15–20 млрд ₽': 'range', '500 млн – 2 млрд ₽': 'range',
+        'более 200 млрд ₽ (с учетом долга)': 'lower_bound', 'не менее 1 млрд ₽': 'lower_bound',
+        '1,66 млрд ₽ (стартовая цена торгов)': 'auction_start',
+        '$702,5 млн': 'foreign_currency', '€8 млн (689,5 млн ₽)': 'disclosed',
+        'Не раскрыта': 'undisclosed', '—': 'undisclosed', None: 'undisclosed',
+        '113 млрд руб.': 'unparsed',
+    }
+    for text, expected in cases.items():
+        assert dm.sum_basis({'sum': text}) == expected, (text, dm.sum_basis({'sum': text}))
+    # явное поле карточки сильнее разбора текста
+    assert dm.sum_basis({'sum': '71 млрд ₽', 'sum_basis': 'not_a_price'}) == 'not_a_price'
+    assert dm.sum_basis({'sum': '71 млрд ₽', 'sum_basis': 'мусор'}) == 'disclosed'
+
+
+def test_candidate_rejects_failed_deal_and_lot_target():
+    failed = _deal(status='Не состоялась', eco={'share': 'куплено 100%'})
+    assert dm.admission(dict(failed, id='d1'), CONFIRMED, BANKS)[1] == 'status'
+    ok = _deal(eco={'share': 'куплено 100%'})
+    assert dm.admission(dict(ok, id='d1'), CONFIRMED, BANKS, lot_ids={'target1'})[1] == 'target_lot'
+    assert dm.admission(dict(ok, id='d1'), CONFIRMED, BANKS)[0] is not None
+
+
+def test_exclusion_counts_name_every_reason():
+    deals = {
+        'a': _deal(eco={'share': None}, asset=None),                       # доля не установлена
+        'b': _deal(sum='около 1 млрд ₽', eco={'share': '100%'}),            # оценка
+        'c': _deal(eco={'share': 'куплено 30%'}),                           # доля меньше порога
+        'd': _deal(type='IPO'),                                             # не покупка — в счёт не идёт
+    }
+    counts = dm.exclusion_counts(deals, CONFIRMED, BANKS)
+    assert counts == {'share_unknown': 1, 'sum_basis': 1, 'share_below': 1}
+    assert set(counts) <= set(dm.EXCLUSION_LABELS)
 
 
 def test_candidate_rejects_non_ruble_sum():
