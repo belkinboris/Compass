@@ -467,7 +467,7 @@ class MultipleCandidate:
 
 EXCLUSION_LABELS = {
     'type': 'не покупка компании (IPO, инвестиция, финансирование)',
-    'parties': 'не названы обе стороны',
+    'no_buyer': 'покупатель не назван',
     'year': 'сделка раньше 2022 года',
     'target': 'предмет не привязан к профилю компании',
     'target_lot': 'предмет — лот из нескольких юрлиц',
@@ -488,10 +488,19 @@ def admission(d: dict[str, Any], confirmed_ids: set[str], bank_ids: set[str],
     сделки нет в мультипликаторах» отвечалось цифрой, а не догадкой."""
     if d.get('type') != 'M&A':
         return None, 'type'
-    has_buyer = bool(d.get('buyer') or d.get('buyer_name'))
-    has_seller = bool(d.get('seller') or d.get('seller_id'))
-    if not (has_buyer and has_seller):
-        return None, 'parties'
+    # Продавца правило НЕ требует. Требовало до 6 сентября 2026 — и это была
+    # подмена: имя продавца не участвует в мультипликаторе никак (в нём цена,
+    # доля, предмет и его отчётность), а «обе стороны названы» стояло дешёвым
+    # признаком «сделка описана хорошо». Признак отсекал 16 обычных покупок,
+    # где продавцов просто не раскрыли («МТС приобрела 51% «Винтео»»,
+    # «Магнит» покупает контрольный пакет «Азбуки вкуса»»). Нашлось не
+    # замером, а инвариантом «чтение подтверждает, но не расширяет»: два
+    # чтения подтвердили факты «Винтео», а текстовые правила отказали.
+    # Защита от допэмиссии (cash-in), ради которой продавец и требовался,
+    # осталась там, где ей место, — в слое фактов: `nature.control_change`
+    # подтверждается чтением, а не выводится из наличия поля.
+    if not (d.get('buyer') or d.get('buyer_name')):
+        return None, 'no_buyer'
     yr = year_of(d)
     if not yr or yr < MIN_YEAR:
         return None, 'year'
@@ -541,7 +550,7 @@ def exclusion_counts(deals: dict[str, dict[str, Any]], confirmed_ids: set[str],
     counts: dict[str, int] = {}
     for deal_id, d in deals.items():
         cand, reason = admission(dict(d, id=deal_id), confirmed_ids, bank_ids, lot_ids)
-        if reason in ('type', 'parties', 'year'):
+        if reason in ('type', 'no_buyer', 'year'):
             continue
         if reason:
             counts[reason] = counts.get(reason, 0) + 1

@@ -92,9 +92,22 @@ def test_candidate_requires_both_buyer_and_seller():
     assert dm.find_candidates({'d1': d}, CONFIRMED, BANKS) == []
 
 
-def test_candidate_requires_seller_even_with_buyer_name():
+def test_candidate_does_not_require_a_named_seller():
+    # Имя продавца в мультипликаторе не участвует: в нём цена, доля, предмет
+    # и его отчётность. До 6 сентября 2026 правило требовало «названы обе
+    # стороны» — и отсекало 16 обычных покупок, где продавца не раскрыли
+    # («МТС приобрела 51% «Винтео»», «Магнит» — контрольный пакет «Азбуки
+    # вкуса»»). Защита от допэмиссии осталась в слое фактов, где смена
+    # контроля подтверждается чтением.
     d = _deal(buyer=None, buyer_name='Некий фонд', seller=None, seller_id=None)
+    out = dm.find_candidates({'d1': d}, CONFIRMED, BANKS)
+    assert len(out) == 1
+
+
+def test_candidate_requires_a_buyer():
+    d = _deal(buyer=None, buyer_name=None)
     assert dm.find_candidates({'d1': d}, CONFIRMED, BANKS) == []
+    assert dm.admission(dict(d, id='d1'), CONFIRMED, BANKS)[1] == 'no_buyer'
 
 
 def test_candidate_accepts_seller_id_without_seller_text():

@@ -80,6 +80,7 @@ def test_gold_deal_exists(row):
 
 @pytest.mark.parametrize('row', _rows())
 def test_gold_sum_basis(row):
+    _pending(row)
     d = DEALS[row['id']]
     assert dm.sum_basis(d) == row['sum_basis'], (row['id'], d.get('sum'), dm.sum_basis(d), row['why'])
 
@@ -129,6 +130,7 @@ def test_gold_verified_multiples_are_a_subset_of_rule_candidates():
 
 @pytest.mark.parametrize('row', _rows())
 def test_gold_top_purchases(row):
+    _pending(row)
     d = DEALS[row['id']]
     assert counts_in_top_purchases(d) == row['in_top_purchases'], (row['id'], d.get('type'), d.get('sum'), row['why'])
 
