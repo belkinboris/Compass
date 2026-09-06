@@ -5915,13 +5915,13 @@
    ]
   },
   {
-   "draft_id": "d19924248",
-   "title": "На Всемирные игры кочевников продали около 37,2 тыс. билетов",
+   "draft_id": "d22933247",
+   "title": "«Динамо» распродало все билеты на матч со «Спартаком»",
    "date": "2026-09-06",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28084961"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/06/dinamo-rasprodalo-vse-bilety-na-match-so-spartakom/"
     ]
    ],
    "sum": null,
@@ -5932,25 +5932,25 @@
      "kind": "closed",
      "date": "2026-09-06",
      "title": "Сделка завершена",
-     "note": "Вечером 6 сентября состоится официальная церемония закрытия",
+     "note": "",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28084961"
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/09/06/dinamo-rasprodalo-vse-bilety-na-match-so-spartakom/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "около 37,2 тыс. билетов",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "около 37,2 тыс. билетов",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
