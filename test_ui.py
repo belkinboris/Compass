@@ -2906,6 +2906,12 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
     for row, g in zip(gold["deals"], got):
         if g.get("missing"):
             continue  # карточки раньше 2022 года на клиент не грузятся
+        # Строка, помеченная `pending`, говорит правду, которой карточка пока
+        # не соответствует (или два чтения разошлись и вопрос ждёт человека).
+        # Требовать её здесь нечего: за неё отвечает строгий xfail в
+        # test_gold_analytics.py — он покраснеет, когда вопрос решат.
+        if row.get("pending"):
+            continue
         if g["basis"] != row["sum_basis"]:
             problems.append((row["id"], "sumBasis", g["basis"], row["sum_basis"]))
         # Клиент обязан читать допуск ровно так, как его посчитал сервер, —
