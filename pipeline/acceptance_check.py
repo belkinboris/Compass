@@ -267,7 +267,8 @@ def check_browser(base: str, p: Protocol) -> None:
             page.wait_for_selector('.fact-verified', timeout=15000)
             text = page.inner_text('.fact-verified')
             quote = ((DEALS[verified_deal]['facts']['price'] or {}).get('quote') or '')[:30]
-            ok = 'Проверено по источникам' in text and (not quote or quote[:20] in text)
+            # .label рисуется заглавными (text-transform), innerText отдаёт текст после CSS
+            ok = 'проверено по источникам' in text.lower() and (not quote or quote[:20].lower() in text.lower())
             p.add(f'Карточка {verified_deal}: блок «Проверено по источникам» с цитатой на «Обзоре»', ok,
                   base + '/#/deal/' + verified_deal, text[:140].replace(chr(10), ' | '))
         for pair in GOLD['duplicates']:
