@@ -11758,21 +11758,127 @@
    "facts": {
     "stake": {
      "value": 75.0,
-     "basis": "rule",
-     "card_hash": "e011efa72f08"
+     "basis": "verified",
+     "card_hash": "e011efa72f08",
+     "object": "\"Учи.ру\"",
+     "event": "announcement",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+     "source": "https://www.interfax.ru/business/886936",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 75.0,
+       "object": "\"Учи.ру\"",
+       "event": "announcement",
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 75.0,
+       "object": "Учи.ру",
+       "event": "closing",
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 8700000000.0,
+     "value_rub": 8700000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "0af5e0d5e586"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "0af5e0d5e586",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Как говорится в сообщении VK, сделка усилит позиции интернет-компании в сегменте дополнительного школьного образования.",
+     "scope_basis": "verified",
+     "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+     "source": "https://www.interfax.ru/business/886936",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 8700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "attribution_quote": "Как говорится в сообщении VK, сделка усилит позиции интернет-компании в сегменте дополнительного школьного образования.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 8700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "attribution_quote": "Как говорится в сообщении VK, сделка усилит позиции интернет-компании в сегменте дополнительного школьного образования.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-02-20",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "9b3ca451a0bf"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "b3902c312af6",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Москва. 20 февраля. INTERFAX.RU - Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+     "source": "https://www.interfax.ru/business/886936",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-02-20",
+       "meaning": "announcement",
+       "quote": "Москва. 20 февраля. INTERFAX.RU - Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-02-20",
+       "meaning": "announcement",
+       "quote": "Москва. 20 февраля. INTERFAX.RU - Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -11782,7 +11888,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0846313d5c82"
+     "card_hash": "0846313d5c82",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+     "source": "https://www.interfax.ru/business/886936",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Интернет-компания VK стала единственным владельцем образовательной платформы \"Учи.ру\", выкупив долю в 75% за 8,7 млрд рублей.",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g07528c13",
@@ -11791,24 +11921,84 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "c6890f83a3ba"
+     "perimeter": "refuted",
+     "card_hash": "c6890f83a3ba",
+     "perimeter_entity": "ООО \"Учи.ру\"",
+     "perimeter_report": {
+      "inn": "7704821246",
+      "year": 2022,
+      "revenue_rub": 3022445000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
+     },
+     "perimeter_other_entities": [
+      "\"Учи.Дома\"",
+      "\"Учи.Ответы\"",
+      "\"ЯКласс\""
+     ],
+     "quote": "Помимо образовательной платформы, группа компаний \"Учи.ру\" также развивает школу онлайн-репетиторов \"Учи.Дома\", образовательный портал \"Учи.Ответы\", сеть офлайн-кружков и центров \"Учи.ру\" по программированию, математике и английскому языку, образовательный онлайн-ресурс \"ЯКласс\".",
+     "source": "https://www.interfax.ru/business/886936",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "\"Учи.Дома\"",
+        "\"Учи.Ответы\"",
+        "\"ЯКласс\""
+       ],
+       "entity": "ООО \"Учи.ру\"",
+       "report": {
+        "inn": "7704821246",
+        "year": 2022,
+        "revenue_rub": 3022445000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
+       },
+       "quote": "Помимо образовательной платформы, группа компаний \"Учи.ру\" также развивает школу онлайн-репетиторов \"Учи.Дома\", образовательный портал \"Учи.Ответы\", сеть офлайн-кружков и центров \"Учи.ру\" по программированию, математике и английскому языку, образовательный онлайн-ресурс \"ЯКласс\".",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "\"Учи.Дома\"",
+        "\"Учи.Ответы\"",
+        "\"ЯКласс\"",
+        "сеть офлайн-кружков и центров \"Учи.ру\""
+       ],
+       "entity": "ООО «Учи.ру»",
+       "report": {
+        "inn": "7704821246",
+        "year": 2022,
+        "revenue_rub": 3022445000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
+       },
+       "quote": "Помимо образовательной платформы, группа компаний \"Учи.ру\" также развивает школу онлайн-репетиторов \"Учи.Дома\", образовательный портал \"Учи.Ответы\", сеть офлайн-кружков и центров \"Учи.ру\" по программированию, математике и английскому языку, образовательный онлайн-ресурс \"ЯКласс\".",
+       "source": "https://www.interfax.ru/business/886936",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
-   }
+   },
+   "date_basis": "announcement"
   },
   {
    "id": "g9d134cf4",
@@ -19419,17 +19609,105 @@
      "card_hash": "63c6e7e7e8ee"
     },
     "price": {
-     "value_rub": 36000000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "33918ee909a1"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "ev",
+     "basis": "verified",
+     "card_hash": "e7d2639578cc",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "Итоговая сумма сделки составила 36 млрд руб., из которых 15 млрд руб.— стоимость активов предприятия, 21 млрд руб.— долг компании перед банком «Открытие», средства которого привлекались на развитие производства.",
+     "source": "https://www.kommersant.ru/doc/5799156",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 36000000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "signing",
+       "scope": "ev",
+       "terms": "fixed",
+       "quote": "Итоговая сумма сделки составила 36 млрд руб., из которых 15 млрд руб.— стоимость активов предприятия, 21 млрд руб.— долг компании перед банком «Открытие», средства которого привлекались на развитие производства.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 36000000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "ev",
+       "terms": "unknown",
+       "quote": "Итоговая сумма сделки составила 36 млрд руб., из которых 15 млрд руб.— стоимость активов предприятия, 21 млрд руб.— долг компании перед банком «Открытие», средства которого привлекались на развитие производства.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-01-27",
      "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "a1f91df25ebc"
+     "basis": "disputed",
+     "card_hash": "a1f91df25ebc",
+     "disputed": [
+      {
+       "value": "2023-02-03",
+       "meaning": "publication",
+       "quote": "Деятельность банка «Траст» 03.02.2023, 00:49 Картон недешево переупаковался Покупка «Камы» обойдется Виктору Харитонину в 36 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-01",
+       "meaning": "closing",
+       "quote": "Производство захотел выкупить Виктор Харитонин, сделка должна была состояться в конце 2022 года, но в итоге была завершена в конце января 2023 года.",
+       "source": "https://pharmmedprom.ru/news/proizvodstvo-lekarstv-i-upakovochnogo-kartona-teper-v-rukah-viktora-haritonina/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Деятельность банка «Траст» 03.02.2023, 00:49 Картон недешево переупаковался Покупка «Камы» обойдется Виктору Харитонину в 36 млрд руб.",
+     "source": "https://www.kommersant.ru/doc/5799156",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-02-03",
+       "meaning": "publication",
+       "quote": "Деятельность банка «Траст» 03.02.2023, 00:49 Картон недешево переупаковался Покупка «Камы» обойдется Виктору Харитонину в 36 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-01",
+       "meaning": "closing",
+       "quote": "Производство захотел выкупить Виктор Харитонин, сделка должна была состояться в конце 2022 года, но в итоге была завершена в конце января 2023 года.",
+       "source": "https://pharmmedprom.ru/news/proizvodstvo-lekarstv-i-upakovochnogo-kartona-teper-v-rukah-viktora-haritonina/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -19439,7 +19717,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "8f8ec570888d"
+     "card_hash": "8f8ec570888d",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Совладелец фармацевтического холдинга «Фармстандарт» Виктор Харитонин завершил сделку по приобретению ООО «Кама», управляющего единственным в России производством мелованного картона.",
+     "source": "https://www.kommersant.ru/doc/5799156",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Совладелец фармацевтического холдинга «Фармстандарт» Виктор Харитонин завершил сделку по приобретению ООО «Кама», управляющего единственным в России производством мелованного картона.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Совладелец фармацевтического холдинга «Фармстандарт» Виктор Харитонин завершил сделку по приобретению ООО «Кама», управляющего единственным в России производством мелованного картона.",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gcc2d3689",
@@ -19448,8 +19750,69 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "168409646679"
+     "perimeter": "refuted",
+     "card_hash": "168409646679",
+     "perimeter_entity": "ООО «Кама»",
+     "perimeter_report": {
+      "inn": "5916031750",
+      "year": 2022,
+      "revenue_rub": 25471607000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КАМА\""
+     },
+     "perimeter_other_entities": [
+      "ООО «Кама Картон»",
+      "ЦБК «Кама»",
+      "ООО «Камабумпром»",
+      "ООО «Камабумпром. Очистка»"
+     ],
+     "quote": "В состав ООО «Кама» входят ООО «Кама Картон», «ЦБК \"Кама\"», ООО «Камабумпром» и ООО «Камабумпром. Очистка».",
+     "source": "https://www.kommersant.ru/doc/5799156",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Кама Картон»",
+        "ЦБК «Кама»",
+        "ООО «Камабумпром»",
+        "ООО «Камабумпром. Очистка»"
+       ],
+       "entity": "ООО «Кама»",
+       "report": {
+        "inn": "5916031750",
+        "year": 2022,
+        "revenue_rub": 25471607000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КАМА\""
+       },
+       "quote": "В состав ООО «Кама» входят ООО «Кама Картон», «ЦБК \"Кама\"», ООО «Камабумпром» и ООО «Камабумпром. Очистка».",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Кама Картон»",
+        "ЦБК «Кама»",
+        "ООО «Камабумпром»",
+        "ООО «Камабумпром. Очистка»"
+       ],
+       "entity": "ООО «Кама»",
+       "report": {
+        "inn": "5916031750",
+        "year": 2022,
+        "revenue_rub": 25471607000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КАМА\""
+       },
+       "quote": "В состав ООО «Кама» входят ООО «Кама Картон», «ЦБК \"Кама\"», ООО «Камабумпром» и ООО «Камабумпром. Очистка».",
+       "source": "https://www.kommersant.ru/doc/5799156",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -19461,11 +19824,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "reported"
   },
   {
    "id": "gde4f9941",
@@ -27769,21 +28133,124 @@
    "facts": {
     "stake": {
      "value": 75.07,
-     "basis": "rule",
-     "card_hash": "18bcf603178e"
+     "basis": "verified",
+     "card_hash": "18bcf603178e",
+     "object": "ПАО \"Глобалтрак Менеджмент\" (Globaltruck)",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+     "source": "https://www.interfax.ru/business/898394",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 75.07,
+       "object": "ПАО \"Глобалтрак Менеджмент\" (Globaltruck)",
+       "event": "closing",
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 75.07,
+       "object": "ПАО \"Глобалтрак Менеджмент\" (Globaltruck)",
+       "event": "closing",
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 3620000000.0,
+     "value_rub": 3620000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "67b99ee6b152"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "67b99ee6b152",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
+     "scope_basis": "verified",
+     "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
+     "source": "https://www.interfax.ru/business/898394",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 3620000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
+       "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 3620000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
+       "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-04-21",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "8bbe1af5a478"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "abd3a5ad0888",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Сделка была завершена 21 апреля.",
+     "source": "https://www.interfax.ru/business/898394",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-04-21",
+       "meaning": "closing",
+       "quote": "Сделка была завершена 21 апреля.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-04-21",
+       "meaning": "closing",
+       "quote": "Сделка была завершена 21 апреля.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -27793,7 +28260,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4c8bfa2f973e"
+     "card_hash": "4c8bfa2f973e",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+     "source": "https://www.interfax.ru/business/898394",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g3cc9e79b",
@@ -27802,24 +28293,77 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "6d3bbbd3c1a8"
+     "perimeter": "refuted",
+     "card_hash": "6d3bbbd3c1a8",
+     "perimeter_entity": "ПАО \"Глобалтрак Менеджмент\"",
+     "perimeter_report": {
+      "inn": "9701082537",
+      "year": 2022,
+      "revenue_rub": 132725000.0,
+      "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\""
+     },
+     "perimeter_other_entities": [
+      "семь операционных компаний, входящих в структуру Globaltruck"
+     ],
+     "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
+     "source": "https://www.interfax.ru/business/898394",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "семь операционных компаний, входящих в структуру Globaltruck"
+       ],
+       "entity": "ПАО \"Глобалтрак Менеджмент\"",
+       "report": {
+        "inn": "9701082537",
+        "year": 2022,
+        "revenue_rub": 132725000.0,
+        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\""
+       },
+       "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "семь операционных компаний в структуре Globaltruck"
+       ],
+       "entity": "ПАО \"Глобалтрак Менеджмент\"",
+       "report": {
+        "inn": "9701082537",
+        "year": 2022,
+        "revenue_rub": 132725000.0,
+        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\""
+       },
+       "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
+       "source": "https://www.interfax.ru/business/898394",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
-   }
+   },
+   "date_basis": "closing"
   },
   {
    "id": "g4ff4b24c",
@@ -39248,17 +39792,91 @@
      "card_hash": "929644391fd8"
     },
     "price": {
-     "value_rub": 50000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "6643baf99e61"
+     "basis": "verified",
+     "card_hash": "f939aa694712",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Сумму сделки в «ЛабКвест» оценили в 50 млн рублей.",
+     "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 50000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Сумму сделки в «ЛабКвест» оценили в 50 млн рублей.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 50000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Сумму сделки в «ЛабКвест» оценили в 50 млн рублей.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2023-06-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "aef0766d64e8"
+     "value": "2023-05",
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "aef0766d64e8",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "С мая 2023 года 90% компании владеет основатель АО «ЛабКвест» Дарья Пикалюк.",
+     "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-05",
+       "meaning": "registry",
+       "quote": "С мая 2023 года 90% компании владеет основатель АО «ЛабКвест» Дарья Пикалюк.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-05",
+       "meaning": "registry",
+       "quote": "С мая 2023 года 90% компании владеет основатель АО «ЛабКвест» Дарья Пикалюк.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -39268,7 +39886,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7dbd6df30326"
+     "card_hash": "7dbd6df30326",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "По данным СПАРК-Интерфакс, ООО «ФораЛаб» ранее принадлежало Александру и Рашиде Марковым.",
+     "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "По данным СПАРК-Интерфакс, ООО «ФораЛаб» ранее принадлежало Александру и Рашиде Марковым.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "По данным СПАРК-Интерфакс, ООО «ФораЛаб» ранее принадлежало Александру и Рашиде Марковым.",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g0b6a8c17",
@@ -39277,8 +39919,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "5129e2d651d6"
+     "perimeter": "refuted",
+     "card_hash": "5129e2d651d6",
+     "perimeter_entity": "ООО «ФораЛаб»",
+     "perimeter_report": {
+      "inn": "7810788537",
+      "year": 2022,
+      "revenue_rub": 47931000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ФОРАЛАБ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Группа компаний «ЛабКвест» приобрела готовый технологический комплекс в Санкт-Петербурге у лаборатории «ФораЛаб».",
+     "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «ФораЛаб»",
+       "report": {
+        "inn": "7810788537",
+        "year": 2022,
+        "revenue_rub": 47931000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ФОРАЛАБ\""
+       },
+       "quote": "Группа компаний «ЛабКвест» приобрела готовый технологический комплекс в Санкт-Петербурге у лаборатории «ФораЛаб».",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «ФораЛаб»",
+       "report": {
+        "inn": "7810788537",
+        "year": 2022,
+        "revenue_rub": 47931000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ФОРАЛАБ\""
+       },
+       "quote": "Группа компаний «ЛабКвест» приобрела готовый технологический комплекс в Санкт-Петербурге у лаборатории «ФораЛаб».",
+       "source": "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -39290,11 +39978,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g7eea2f33",
@@ -51442,31 +52131,159 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "4e7e2779ce27"
+     "basis": "verified",
+     "card_hash": "4e7e2779ce27",
+     "object": "\"Утконос\" (ООО \"Новый Импульс-50\")",
+     "event": "signing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "quote": "По условиям соглашения, \"Лента\" получит 100% в \"Утконосе\" до конца первой недели февраля 2022 года.",
+     "source": "https://www.interfax.ru/business/809723",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "\"Утконос\" (ООО \"Новый Импульс-50\")",
+       "event": "signing",
+       "quote": "По условиям соглашения, \"Лента\" получит 100% в \"Утконосе\" до конца первой недели февраля 2022 года.",
+       "source": "https://www.interfax.ru/business/809723",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "ООО \"Новый Импульс-50\" (\"Утконос\")",
+       "event": "closing",
+       "quote": "По условиям соглашения, \"Лента\" получит 100% в \"Утконосе\" до конца первой недели февраля 2022 года.",
+       "source": "https://www.interfax.ru/business/809723",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 20000000000.0,
+     "value_rub": 20000000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "bbe51f160943"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "bbe51f160943",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Цена покупки на момент закрытия сделки составила 20 млрд рублей, говорится в сообщении \"Ленты\".",
+     "scope_basis": "verified",
+     "quote": "Цена покупки на момент закрытия сделки составила 20 млрд рублей, говорится в сообщении \"Ленты\".",
+     "source": "https://www.interfax.ru/business/819600",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 20000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Цена покупки на момент закрытия сделки составила 20 млрд рублей, говорится в сообщении \"Ленты\".",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 20000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "unknown",
+       "quote": "Цена покупки на момент закрытия сделки составила 20 млрд рублей, говорится в сообщении \"Ленты\".",
+       "attribution_quote": "Цена покупки на момент закрытия сделки составила 20 млрд рублей, говорится в сообщении \"Ленты\".",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2022-02-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "6065c3610417"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "fddf799a2b33",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "1 февраля «Лента» объявила о завершении сделки по покупке онлайн-ритейлера «Утконос», итоговая сумма сделки составила 20 млрд руб.",
+     "source": "https://www.vedomosti.ru/business/news/2022/02/14/909238-lenta-provedet-dopemissiyu-na-256-mlrd-rublei-v-polzu-severgrupp",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2022-02-01",
+       "meaning": "closing",
+       "quote": "1 февраля «Лента» объявила о завершении сделки по покупке онлайн-ритейлера «Утконос», итоговая сумма сделки составила 20 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/news/2022/02/14/909238-lenta-provedet-dopemissiyu-na-256-mlrd-rublei-v-polzu-severgrupp",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2022-02-01",
+       "meaning": "closing",
+       "quote": "Москва. 1 февраля. INTERFAX.RU - \"Лента\" закрыла сделку по покупке онлайн-ритейлера \"Утконос\" у своего акционера - \"Севергрупп\" Алексея Мордашова.",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "977417995a05"
+     "card_hash": "977417995a05",
+     "intragroup": true,
+     "control_change_basis": "verified",
+     "quote": "\"Лента\" закрыла сделку по покупке онлайн-ритейлера \"Утконос\" у своего акционера - \"Севергрупп\" Алексея Мордашова.",
+     "source": "https://www.interfax.ru/business/819600",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "\"Лента\" закрыла сделку по покупке онлайн-ритейлера \"Утконос\" у своего акционера - \"Севергрупп\" Алексея Мордашова.",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "Москва. 1 февраля. INTERFAX.RU - \"Лента\" закрыла сделку по покупке онлайн-ритейлера \"Утконос\" у своего акционера - \"Севергрупп\" Алексея Мордашова.",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gcca31da7",
@@ -51475,8 +52292,60 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "9d814ee05bd4"
+     "perimeter": "refuted",
+     "card_hash": "9d814ee05bd4",
+     "perimeter_entity": "МКПАО \"Лента\"",
+     "perimeter_report": {
+      "inn": "3906399157",
+      "year": 2021,
+      "revenue_rub": 855000.0,
+      "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
+     },
+     "perimeter_other_entities": [
+      "ООО \"Новый Импульс-50\""
+     ],
+     "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
+     "source": "https://www.interfax.ru/business/819600",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО \"Новый Импульс-50\""
+       ],
+       "entity": "МКПАО \"Лента\"",
+       "report": {
+        "inn": "3906399157",
+        "year": 2021,
+        "revenue_rub": 855000.0,
+        "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
+       },
+       "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО \"Новый Импульс-50\""
+       ],
+       "entity": "МКПАО \"Лента\"",
+       "report": {
+        "inn": "3906399157",
+        "year": 2021,
+        "revenue_rub": 855000.0,
+        "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
+       },
+       "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
+       "source": "https://www.interfax.ru/business/819600",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -51488,11 +52357,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "intragroup",
+     "top_purchases": "intragroup",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "closing"
   },
   {
    "id": "g552abe79",
@@ -56864,22 +57734,127 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "5ac7824e6414"
+     "value": 73.9,
+     "basis": "verified",
+     "card_hash": "2d67efa41815",
+     "object": "АО «Завод \"Электропульт\"»",
+     "event": "announcement",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Согласно ему, предприятие «Тракс» планирует приобрести 73,9% голосующих акций завода «Электропульт».",
+     "source": "https://www.kommersant.ru/doc/6649248",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 73.9,
+       "object": "АО «Завод \"Электропульт\"»",
+       "event": "announcement",
+       "quote": "Согласно ему, предприятие «Тракс» планирует приобрести 73,9% голосующих акций завода «Электропульт».",
+       "source": "https://www.kommersant.ru/doc/6649248",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 73.9,
+       "object": "АО «Завод \"Электропульт\"» (голосующие акции)",
+       "event": "closing",
+       "quote": "В начале марта Федеральная антимонопольная служба одобрила ООО «Тракс» (входит в ГК «КСК») покупку 73,9% голосующих акций петербургского предприятия.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 2500000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "3dcbc58490ca"
+     "basis": "verified",
+     "card_hash": "15e8f2822979",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "analyst",
+     "attribution_variants": [
+      "analyst"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Стоимость сделки в КСК не разглашают. Эксперты оценивают ее в 2,5 млрд рублей.",
+     "source": "https://www.kommersant.ru/doc/6865950",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 2500000000,
+       "meaning": "estimate",
+       "attribution": "analyst",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость сделки в КСК не разглашают. Эксперты оценивают ее в 2,5 млрд рублей.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 2500000000,
+       "meaning": "estimate",
+       "attribution": "analyst",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость сделки в КСК не разглашают. Эксперты оценивают ее в 2,5 млрд рублей.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2024-08-02",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "b308e4a93a64"
+     "value": "2024-03",
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "b308e4a93a64",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Московская ГК «Ключевые системы и компоненты» (входит в ООО «Холдинг \"Транскомпонент\"») в марте 2024 года закрыла сделку по приобретению завода «Электропульт» (АО «Завод \"Электропульт\"») в Санкт-Петербурге, сообщили «Ъ-СПб» в пресс-службе ГК «КСК».",
+     "source": "https://www.kommersant.ru/doc/6865950",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2024-03",
+       "meaning": "closing",
+       "quote": "Московская ГК «Ключевые системы и компоненты» (входит в ООО «Холдинг \"Транскомпонент\"») в марте 2024 года закрыла сделку по приобретению завода «Электропульт» (АО «Завод \"Электропульт\"») в Санкт-Петербурге, сообщили «Ъ-СПб» в пресс-службе ГК «КСК».",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2024-03",
+       "meaning": "closing",
+       "quote": "Московская ГК «Ключевые системы и компоненты» (входит в ООО «Холдинг \"Транскомпонент\"») в марте 2024 года закрыла сделку по приобретению завода «Электропульт» (АО «Завод \"Электропульт\"») в Санкт-Петербурге, сообщили «Ъ-СПб» в пресс-службе ГК «КСК».",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -56889,7 +57864,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f3c6f08af276"
+     "card_hash": "f3c6f08af276",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Согласно данным ФАС, после завершения сделки ГК стала владельцем 98,5% акций производства.",
+     "source": "https://www.kommersant.ru/doc/6865950",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Согласно данным ФАС, после завершения сделки ГК стала владельцем 98,5% акций производства.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В начале марта Федеральная антимонопольная служба одобрила ООО «Тракс» (входит в ГК «КСК») покупку 73,9% голосующих акций петербургского предприятия. Согласно данным ФАС, после завершения сделки ГК стала владельцем 98,5% акций производства.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g25cc55da",
@@ -56898,8 +57897,60 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "0a5be6658787"
+     "perimeter": "refuted",
+     "card_hash": "0a5be6658787",
+     "perimeter_entity": "АО «Завод \"Электропульт\"»",
+     "perimeter_report": {
+      "inn": "7806008569",
+      "year": 2023,
+      "revenue_rub": 1165912000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЗАВОД ЭЛЕКТРОПУЛЬТ\""
+     },
+     "perimeter_other_entities": [
+      "ООО «Ипсилон 1» (цех «Сименс Привод»)"
+     ],
+     "quote": "Вместе с «Электропультом» ГК «КСК» приобрела производственный цех «Сименс Привод», расположенный на территории завода, и выкупила оборудование у немецкой компании.",
+     "source": "https://www.kommersant.ru/doc/6865950",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Ипсилон 1» (цех «Сименс Привод»)"
+       ],
+       "entity": "АО «Завод \"Электропульт\"»",
+       "report": {
+        "inn": "7806008569",
+        "year": 2023,
+        "revenue_rub": 1165912000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЗАВОД ЭЛЕКТРОПУЛЬТ\""
+       },
+       "quote": "Вместе с «Электропультом» ГК «КСК» приобрела производственный цех «Сименс Привод», расположенный на территории завода, и выкупила оборудование у немецкой компании.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": true,
+       "other_entities": [
+        "ООО «Ипсилон 1» (площадка «Сименс Привод»)"
+       ],
+       "entity": "АО «Завод \"Электропульт\"»",
+       "report": {
+        "inn": "7806008569",
+        "year": 2023,
+        "revenue_rub": 1165912000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЗАВОД ЭЛЕКТРОПУЛЬТ\""
+       },
+       "quote": "Согласно данным «СПАРК-Интерфакс» , чистый убыток компании в 2023 году составил 368,2 млн рублей, в 2022-м — 219,9 млн, в 2021-м — 274,5 млн. Выручка от продаж в 2023 году — 1,165 млрд рублей, в 2022-м — 1,697 млрд, в 2021-м — 1,972 млрд.",
+       "source": "https://www.kommersant.ru/doc/6865950",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -56911,11 +57962,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "stake_acquired": 73.9,
+   "sum_basis": "estimate"
   },
   {
    "id": "g99780470",
@@ -73520,32 +74573,158 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "6fad0208197e"
+     "value": 39.0,
+     "basis": "verified",
+     "card_hash": "4f668a3d63ff",
+     "object": "ООО «Медскан Лаб»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 39.0,
+       "object": "ООО «Медскан Лаб»",
+       "event": "closing",
+       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 39.0,
+       "object": "ООО «Медскан Лаб»",
+       "event": "closing",
+       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 4767000000.0,
+     "value_rub": 4767000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "c482a26cfd84"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "c482a26cfd84",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "signing",
+     "event_variants": [
+      "signing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+     "scope_basis": "verified",
+     "quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+     "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 4767000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "signing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 4767000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "signing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+       "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025-10-24",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "9149d0a09ff1"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "54b6fcf0ee74",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "По итогам сделки, закрытой 24 октября 2025 года, «Медскан» получил «полный контроль над активом в виде сети лабораторий KDL».",
+     "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2025-10-24",
+       "meaning": "closing",
+       "quote": "По итогам сделки, закрытой 24 октября 2025 года, «Медскан» получил «полный контроль над активом в виде сети лабораторий KDL».",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2025-10-24",
+       "meaning": "closing",
+       "quote": "По итогам сделки, закрытой 24 октября 2025 года, «Медскан» получил «полный контроль над активом в виде сети лабораторий KDL».",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "2ba2ddbcf4f3"
+     "card_hash": "2ba2ddbcf4f3",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g729ef6c5",
@@ -73554,24 +74733,85 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "d447eb56e9f5"
+     "perimeter": "refuted",
+     "card_hash": "d447eb56e9f5",
+     "perimeter_entity": "ООО «Медскан Лаб»",
+     "perimeter_report": {
+      "inn": "7736328675",
+      "year": 2024,
+      "revenue_rub": 341117000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
+     },
+     "perimeter_other_entities": [
+      "ООО «Диагностика»",
+      "ООО «КДЛ Домодедово-тест»",
+      "ООО «КДЛ Тест»"
+     ],
+     "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
+     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Диагностика»",
+        "ООО «КДЛ Домодедово-тест»",
+        "ООО «КДЛ Тест»"
+       ],
+       "entity": "ООО «Медскан Лаб»",
+       "report": {
+        "inn": "7736328675",
+        "year": 2024,
+        "revenue_rub": 341117000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
+       },
+       "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Медскан Лаб»",
+        "ООО «Диагностика»",
+        "ООО «КДЛ Домодедово-тест»",
+        "ООО «КДЛ Тест»"
+       ],
+       "entity": "АО «Медскан»",
+       "report": {
+        "inn": "7736328675",
+        "year": 2024,
+        "revenue_rub": 341117000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
+       },
+       "quote": "ООО «Медскан Лаб», зарегистрированное в 2022 году в Москве, является головной компанией ООО «Диагностика» (доля 99,99%), владеющей ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "stake_acquired": 39.0,
+   "date_basis": "closing"
   },
   {
    "id": "gbb7e25e1",
@@ -84849,31 +86089,158 @@
    "facts": {
     "stake": {
      "value": 25.0,
-     "basis": "rule",
-     "card_hash": "ac877bc5cad3"
+     "basis": "verified",
+     "card_hash": "ac877bc5cad3",
+     "object": "ООО «Байоник-Медси»",
+     "event": "registry",
+     "event_variants": [
+      "registry"
+     ],
+     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 25.0,
+       "object": "ООО «Байоник-Медси»",
+       "event": "registry",
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 25.0,
+       "object": "ООО «Байоник-Медси»",
+       "event": "registry",
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 37000000.0,
+     "value_rub": 37000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "2c5af940c454"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "2c5af940c454",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+     "scope_basis": "verified",
+     "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 37000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 37000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+       "attribution_quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025-02-10",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "ce0a55c91e22"
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "6905f50c85e8",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2025-02-10",
+       "meaning": "registry",
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2025-02-10",
+       "meaning": "registry",
+       "quote": "По данным ЕГРЮЛ, владелец доли «Медси» в ООО «Байоник-Медси» сменился 10 февраля, сумма сделки составила 37 млн рублей.",
+       "source": "https://rb.ru/news/medsi-medtech-bionic/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4b54b13bc758"
+     "card_hash": "4b54b13bc758",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля. Новым владельцем стал Федор Викторов.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля. Новым владельцем стал Федор Викторов.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g06264a27",
@@ -84882,24 +86249,71 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "b90330e44473"
+     "perimeter": "verified",
+     "card_hash": "b90330e44473",
+     "perimeter_entity": "ООО «Байоник-Медси»",
+     "perimeter_report": {
+      "inn": "9710081787",
+      "year": 2024,
+      "revenue_rub": 142457000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "«Байоник-Медси» управляет онлайн-платформой по назначению витаминов и микроэлементов на основе анализов крови Bioniq.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Байоник-Медси»",
+       "report": {
+        "inn": "9710081787",
+        "year": 2024,
+        "revenue_rub": 142457000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\""
+       },
+       "quote": "«Байоник-Медси» управляет онлайн-платформой по назначению витаминов и микроэлементов на основе анализов крови Bioniq.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Байоник-Медси»",
+       "report": {
+        "inn": "9710081787",
+        "year": 2024,
+        "revenue_rub": 142457000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\""
+       },
+       "quote": "По данным ЕГРЮЛ, владелец доли «Медси» в ООО «Байоник-Медси» сменился 10 февраля, сумма сделки составила 37 млн рублей.",
+       "source": "https://rb.ru/news/medsi-medtech-bionic/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "registry"
   },
   {
    "id": "g85883f11",
@@ -99664,11 +101078,45 @@
      "card_hash": "6671bdf4cd03"
     },
     "price": {
-     "value_rub": 204400000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "41eb1011070a"
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "package",
+     "basis": "read",
+     "card_hash": "41eb1011070a",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "read",
+     "quote": "Компания выкупила доли прежних владельцев Михаила Ляско и Евгения Чернышева, которые держали по 49,09 % бизнеса, сумма сделки составила порядка 204 млн рублей.",
+     "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+     "verified_by": "model×1, цитата не сверена с текстом",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 204000000,
+       "meaning": "estimate",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Компания выкупила доли прежних владельцев Михаила Ляско и Евгения Чернышева, которые держали по 49,09 % бизнеса, сумма сделки составила порядка 204 млн рублей.",
+       "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+       "quote_checked": null,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2024-10-01",
@@ -99684,7 +101132,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "2a0d8f527c9e"
+     "card_hash": "2a0d8f527c9e",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "Мажоритарным акционером АО «Артис–Детское питание» стало зарегистрированное в Петербурге ООО «Продовольственная инициатива».",
+     "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+     "verified_by": "model×1, цитата не сверена с текстом",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Мажоритарным акционером АО «Артис–Детское питание» стало зарегистрированное в Петербурге ООО «Продовольственная инициатива».",
+       "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+       "quote_checked": null,
+       "reader": "A"
+      }
+     ]
     },
     "target": {
      "company_id": "g2678d3df",
@@ -99693,8 +101157,38 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "c97984c4a2f8"
+     "perimeter": "read",
+     "card_hash": "c97984c4a2f8",
+     "perimeter_entity": "АО «Артис–Детское питание»",
+     "perimeter_report": {
+      "inn": "7804054351",
+      "year": 2023,
+      "revenue_rub": 3354843000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"АРТИС-ДЕТСКОЕ ПИТАНИЕ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "при выручке 3,35 млрд рублей «Артис-Детское питание» получил 12,6 млн чистой прибыли",
+     "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+     "verified_by": "model×1, цитата не сверена с текстом",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО «Артис–Детское питание»",
+       "report": {
+        "inn": "7804054351",
+        "year": 2023,
+        "revenue_rub": 3354843000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"АРТИС-ДЕТСКОЕ ПИТАНИЕ\""
+       },
+       "quote": "при выручке 3,35 млрд рублей «Артис-Детское питание» получил 12,6 млн чистой прибыли",
+       "source": "https://www.fontanka.ru/2024/10/18/74229098/",
+       "quote_checked": null,
+       "reader": "A"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -99706,9 +101200,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -107127,7 +108621,8 @@
      "object": "АО «Росспиртпром»",
      "event": "announcement",
      "event_variants": [
-      "announcement"
+      "announcement",
+      "registry"
      ],
      "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
      "source": "https://www.kommersant.ru/doc/6662266",
@@ -107146,7 +108641,7 @@
       {
        "value": 100.0,
        "object": "АО «Росспиртпром»",
-       "event": "announcement",
+       "event": "registry",
        "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
@@ -107164,7 +108659,7 @@
       "disclosed"
      ],
      "scope_basis": "verified",
-     "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+     "quote": "Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
      "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
      "verified_at": "2026-09-06",
@@ -107176,8 +108671,8 @@
        "event": "announcement",
        "scope": "equity",
        "terms": "fixed",
-       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-       "attribution_quote": null,
+       "quote": "Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+       "attribution_quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "A"
@@ -107186,12 +108681,12 @@
        "value_rub": 8289000000,
        "meaning": "disclosed",
        "attribution": "registry",
-       "event": "announcement",
+       "event": "registry",
        "scope": "equity",
        "terms": "fixed",
-       "quote": "Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-       "source": "https://www.kommersant.ru/doc/6662266",
+       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
        "attribution_quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
+       "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
       }
@@ -107200,9 +108695,10 @@
      "attribution_variants": [
       "registry"
      ],
-     "event": "announcement",
+     "event": "registry",
      "event_variants": [
-      "announcement"
+      "announcement",
+      "registry"
      ],
      "terms": "fixed",
      "terms_variants": [
@@ -107266,7 +108762,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
@@ -107285,27 +108781,56 @@
      "perimeter": "refuted",
      "card_hash": "58ce769533b7",
      "perimeter_entity": "АО «Росспиртпром»",
-     "quote": "АО «Росспиртпром» создано 16 января 2009 года. Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год.",
+     "quote": "Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год. Выручка АО от реализации спирта в 2024 году прогнозируется в размере 10,743 млрд руб., в 2025 году — 11,859 млрд руб., в 2026 году — 13,042 млрд руб.",
      "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
      "verified_at": "2026-09-06",
      "readings": [
       {
        "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "восемь спиртовых заводов, входящих в АО «Росспиртпром»"
+       ],
        "entity": "АО «Росспиртпром»",
-       "quote": "АО «Росспиртпром» создано 16 января 2009 года. Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год.",
+       "report": {
+        "inn": "7730605160",
+        "year": 2023,
+        "revenue_rub": 1805169000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
+       },
+       "quote": "Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год. Выручка АО от реализации спирта в 2024 году прогнозируется в размере 10,743 млрд руб., в 2025 году — 11,859 млрд руб., в 2026 году — 13,042 млрд руб.",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "восемь спиртовых заводов в составе АО «Росспиртпром»"
+       ],
        "entity": "АО «Росспиртпром»",
+       "report": {
+        "inn": "7730605160",
+        "year": 2023,
+        "revenue_rub": 1805169000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
+       },
        "quote": "АО «Росспиртпром» создано 16 января 2009 года. Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год.",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
       }
+     ],
+     "perimeter_report": {
+      "inn": "7730605160",
+      "year": 2023,
+      "revenue_rub": 1805169000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
+     },
+     "perimeter_other_entities": [
+      "восемь спиртовых заводов, входящих в АО «Росспиртпром»"
      ]
     },
     "admitted": {
@@ -110345,21 +111870,122 @@
    "facts": {
     "stake": {
      "value": 40.0,
-     "basis": "rule",
-     "card_hash": "94795da87212"
+     "basis": "verified",
+     "card_hash": "94795da87212",
+     "object": "ООО «Интикетс»",
+     "event": "announcement",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "VK (MOEX: VKCO ) объявляет о приобретении 40% компании «Интикетс» — облачного сервиса для контроля и управления продажей билетов на культурно-массовые и зрелищные мероприятия, следует из сообщения холдинга, поступившего в «Ъ».",
+     "source": "https://www.kommersant.ru/doc/6686581",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 40.0,
+       "object": "ООО «Интикетс»",
+       "event": "announcement",
+       "quote": "VK (MOEX: VKCO ) объявляет о приобретении 40% компании «Интикетс» — облачного сервиса для контроля и управления продажей билетов на культурно-массовые и зрелищные мероприятия, следует из сообщения холдинга, поступившего в «Ъ».",
+       "source": "https://www.kommersant.ru/doc/6686581",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 40.0,
+       "object": "ООО «Интикетс» (Intickets.ru)",
+       "event": "closing",
+       "quote": "VK (MOEX: VKCO ) объявляет о приобретении 40% компании «Интикетс» — облачного сервиса для контроля и управления продажей билетов на культурно-массовые и зрелищные мероприятия, следует из сообщения холдинга, поступившего в «Ъ».",
+       "source": "https://www.kommersant.ru/doc/6686581",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 721000000.0,
+     "value_rub": 721000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "4f5e7e2c6f26"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "4f5e7e2c6f26",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "includes_contingent",
+     "terms_variants": [
+      "includes_contingent"
+     ],
+     "scope_basis": "verified",
+     "quote": "То есть общая сумма сделки составит 721 млн руб.",
+     "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 721000000,
+       "meaning": "disclosed",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "includes_contingent",
+       "quote": "То есть общая сумма сделки составит 721 млн руб.",
+       "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 721000000,
+       "meaning": "disclosed",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "includes_contingent",
+       "quote": "То есть общая сумма сделки составит 721 млн руб.",
+       "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-05-03",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "fb065820baa8"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "f98ab7483b6a",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Телекоммуникации 03.05.2024, 14:00 VK приобрела 40% билетной платформы Intickets.ru",
+     "source": "https://www.kommersant.ru/doc/6686581",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2024-05-03",
+       "meaning": "announcement",
+       "quote": "Телекоммуникации 03.05.2024, 14:00 VK приобрела 40% билетной платформы Intickets.ru",
+       "source": "https://www.kommersant.ru/doc/6686581",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2024-05-03",
+       "meaning": "announcement",
+       "quote": "Телекоммуникации 03.05.2024, 14:00 VK приобрела 40% билетной платформы Intickets.ru",
+       "source": "https://www.kommersant.ru/doc/6686581",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -110369,7 +111995,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "edd37141994f"
+     "card_hash": "edd37141994f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "В VK утверждают, что приобретенной доли достаточно для принятия решений по ключевым вопросам, поэтому интернет-холдинг установил контроль над «Интикетс».",
+     "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В VK утверждают, что приобретенной доли достаточно для принятия решений по ключевым вопросам, поэтому интернет-холдинг установил контроль над «Интикетс».",
+       "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В VK утверждают, что приобретенной доли достаточно для принятия решений по ключевым вопросам, поэтому интернет-холдинг установил контроль над «Интикетс».",
+       "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gabdc9810",
@@ -110378,8 +112028,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "11cd10d28a52"
+     "perimeter": "verified",
+     "card_hash": "11cd10d28a52",
+     "perimeter_entity": "ООО «Интикетс»",
+     "perimeter_report": {
+      "inn": "7720312951",
+      "year": 2023,
+      "revenue_rub": 578227000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ИНТИКЕТС\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "«Интикетс» оперирует доменами intickets .ru, всеконферты .рф и нашамолодость. рф .",
+     "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Интикетс»",
+       "report": {
+        "inn": "7720312951",
+        "year": 2023,
+        "revenue_rub": 578227000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ИНТИКЕТС\""
+       },
+       "quote": "«Интикетс» оперирует доменами intickets .ru, всеконферты .рф и нашамолодость. рф .",
+       "source": "https://www.cnews.ru/news/top/2025-01-02_kak_vk_potratil_bolee_12_mlrd",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Интикетс»",
+       "report": {
+        "inn": "7720312951",
+        "year": 2023,
+        "revenue_rub": 578227000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ИНТИКЕТС\""
+       },
+       "quote": "ООО «Компания ВК» стало владельцем 15% ООО «ИНТИКЕТС» (оператор системы INTICKETS.RU).",
+       "source": "https://mergers.akm.ru/news/vk_priobrela_15_onlayn_servisa_prodazhi_biletov_intickets/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -110391,11 +112087,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_author_unknown",
+     "top_purchases": "price_author_unknown",
+     "multiple_text": "price_author_unknown"
     }
-   }
+   },
+   "date_basis": "announcement"
   },
   {
    "id": "g54843952",
@@ -118254,9 +119951,8 @@
      "meaning_variants": [
       "disclosed"
      ],
-     "scope_basis": "disputed",
+     "scope_basis": "unknown",
      "scope_variants": [
-      "package",
       "unknown"
      ],
      "quote": "В рамках процедуры банкротства комплекс был выставлен на продажу, в конце августа этого года его за 46,5 млрд руб. приобрела связанная со Сбербанком компания МБП.",
@@ -118269,10 +119965,9 @@
        "meaning": "disclosed",
        "attribution": "unknown",
        "event": "announcement",
-       "scope": "package",
+       "scope": "unknown",
        "terms": "fixed",
        "quote": "В рамках процедуры банкротства комплекс был выставлен на продажу, в конце августа этого года его за 46,5 млрд руб. приобрела связанная со Сбербанком компания МБП.",
-       "attribution_quote": null,
        "source": "https://www.vedomosti.ru/realty/articles/2025/10/22/1149003-struktura-nashla-arendatora",
        "quote_checked": true,
        "reader": "A"
@@ -118281,7 +119976,7 @@
        "value_rub": 46500000000,
        "meaning": "disclosed",
        "attribution": "unknown",
-       "event": "announcement",
+       "event": "closing",
        "scope": "unknown",
        "terms": "fixed",
        "quote": "В рамках процедуры банкротства комплекс был выставлен на продажу, в конце августа этого года его за 46,5 млрд руб. приобрела связанная со Сбербанком компания МБП.",
@@ -118294,9 +119989,10 @@
      "attribution_variants": [
       "unknown"
      ],
-     "event": "announcement",
+     "event": "closing",
      "event_variants": [
-      "announcement"
+      "announcement",
+      "closing"
      ],
      "terms": "fixed",
      "terms_variants": [
@@ -118309,7 +120005,6 @@
      "basis": "verified",
      "card_hash": "c35a9eb6bcb8",
      "meaning_variants": [
-      "announcement",
       "publication"
      ],
      "quote": "11:05 29.08.2025 (обновлено: 11:08 29.08.2025) Бизнес-центр \"Белая площадь\" в Москве меняет владельца МБП выиграла торги по продаже бизнес-центра \"Белая площадь\" в Москве",
@@ -118327,7 +120022,7 @@
       },
       {
        "value": "2025-08-29",
-       "meaning": "announcement",
+       "meaning": "publication",
        "quote": "11:05 29.08.2025 (обновлено: 11:08 29.08.2025) Бизнес-центр \"Белая площадь\" в Москве меняет владельца МБП выиграла торги по продаже бизнес-центра \"Белая площадь\" в Москве",
        "source": "https://realty.ria.ru/20250829/mbp-2038271423.html",
        "quote_checked": true,
@@ -118376,8 +120071,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "5230d9fadac0"
+     "perimeter": "refuted",
+     "card_hash": "5230d9fadac0",
+     "perimeter_entity": "ООО \"Квартал 674-675\"",
+     "perimeter_report": {
+      "inn": "7710520840",
+      "year": 2024,
+      "revenue_rub": 3554957000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КВАРТАЛ 674-675\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "В составе лота - движимое и недвижимое имущество, в том числе находящиеся в залоге у Сбербанка коммерческо-деловой центр на 51,6 тысячи квадратных метров (Лесная улица, 5, блок \"В\" и \"С\" с подземной автостоянкой под блоками \"Б\" и \"С\"), здание на 45,1 тысячи \"квадратов\" (Бутырский Вал, 10).",
+     "source": "https://realty.ria.ru/20250829/mbp-2038271423.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО \"Квартал 674-675\"",
+       "report": {
+        "inn": "7710520840",
+        "year": 2024,
+        "revenue_rub": 3554957000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КВАРТАЛ 674-675\""
+       },
+       "quote": "В составе лота - движимое и недвижимое имущество, в том числе находящиеся в залоге у Сбербанка коммерческо-деловой центр на 51,6 тысячи квадратных метров (Лесная улица, 5, блок \"В\" и \"С\" с подземной автостоянкой под блоками \"Б\" и \"С\"), здание на 45,1 тысячи \"квадратов\" (Бутырский Вал, 10).",
+       "source": "https://realty.ria.ru/20250829/mbp-2038271423.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «Квартал 674–675»",
+       "report": {
+        "inn": "7710520840",
+        "year": 2024,
+        "revenue_rub": 3554957000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КВАРТАЛ 674-675\""
+       },
+       "quote": "В составе лота - движимое и недвижимое имущество, в том числе находящиеся в залоге у Сбербанка коммерческо-деловой центр на 51,6 тысячи квадратных метров (Лесная улица, 5, блок \"В\" и \"С\" с подземной автостоянкой под блоками \"Б\" и \"С\"), здание на 45,1 тысячи \"квадратов\" (Бутырский Вал, 10).",
+       "source": "https://realty.ria.ru/20250829/mbp-2038271423.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -122615,27 +124356,125 @@
      "card_hash": "e939251fa78a"
     },
     "price": {
-     "value_rub": 5000000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "c1893d3423bb"
+     "basis": "verified",
+     "card_hash": "9cb6d011a84e",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "По их словам, стоимость актива возможным покупателем оценивалась в 5 млрд руб.",
+     "source": "https://www.kommersant.ru/doc/7180850",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 5000000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "По их словам, стоимость актива возможным покупателем оценивалась в 5 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 5000000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Холдинг «Росхим» приостановил начавшиеся весной переговоры о покупке пермского АО «Камтэкс-Химпром», сообщили источники «Ъ-Прикамье». По их словам, стоимость актива возможным покупателем оценивалась в 5 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-09-24",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "92c8e052cd81"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "b4c0f4999157",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Бизнес 24.09.2024, 01:53 У пластмасс не пошла реакция Сделка «Росхима» и «Камтэкс-Химпрома» встала на паузу",
+     "source": "https://www.kommersant.ru/doc/7180850",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2024-09-24",
+       "meaning": "publication",
+       "quote": "Бизнес 24.09.2024, 01:53 У пластмасс не пошла реакция Сделка «Росхима» и «Камтэкс-Химпрома» встала на паузу",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2024-09-24",
+       "meaning": "publication",
+       "quote": "Бизнес 24.09.2024, 01:53 У пластмасс не пошла реакция Сделка «Росхима» и «Камтэкс-Химпрома» встала на паузу",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "fd2f1ec9801d"
+     "card_hash": "fd2f1ec9801d",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Холдинг «Росхим» приостановил начавшиеся весной переговоры о покупке пермского АО «Камтэкс-Химпром», сообщили источники «Ъ-Прикамье».",
+     "source": "https://www.kommersant.ru/doc/7180850",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Холдинг «Росхим» приостановил начавшиеся весной переговоры о покупке пермского АО «Камтэкс-Химпром», сообщили источники «Ъ-Прикамье».",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Холдинг «Росхим» приостановил начавшиеся весной переговоры о покупке пермского АО «Камтэкс-Химпром», сообщили источники «Ъ-Прикамье».",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "ge12527f2",
@@ -122644,8 +124483,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "0398b1c944ff"
+     "perimeter": "verified",
+     "card_hash": "0398b1c944ff",
+     "perimeter_entity": "АО «Камтэкс-Химпром»",
+     "perimeter_report": {
+      "inn": "5907016890",
+      "year": 2023,
+      "revenue_rub": 5651584000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КАМТЭКС-ХИМПРОМ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "АО «Камтэкс-Химпром» является правопреемником Пермского химического завода имени Серго Орджоникидзе, основанного в 1916 году как Пермский суперфосфатный завод. Сегодня предприятие выпускает фталевый ангидрид и диоктилфталат, а также фумаровую и бензойную кислоты.",
+     "source": "https://www.kommersant.ru/doc/7624523",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО «Камтэкс-Химпром»",
+       "report": {
+        "inn": "5907016890",
+        "year": 2023,
+        "revenue_rub": 5651584000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КАМТЭКС-ХИМПРОМ\""
+       },
+       "quote": "АО «Камтэкс-Химпром» является правопреемником Пермского химического завода имени Серго Орджоникидзе, основанного в 1916 году как Пермский суперфосфатный завод. Сегодня предприятие выпускает фталевый ангидрид и диоктилфталат, а также фумаровую и бензойную кислоты.",
+       "source": "https://www.kommersant.ru/doc/7624523",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО «Камтэкс-Химпром»",
+       "report": {
+        "inn": "5907016890",
+        "year": 2023,
+        "revenue_rub": 5651584000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КАМТЭКС-ХИМПРОМ\""
+       },
+       "quote": "«Камтэкс-Химпром» создан на базе Пермского химического завода, основанного в 1916 году как Пермский суперфосфатный завод. Сегодня выпускает фталевый ангидрид и диоктилфталат, а также фумаровую и бензойную кислоты.",
+       "source": "https://www.kommersant.ru/doc/7180850",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -122657,11 +124542,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g96674c34",
@@ -136246,7 +138133,7 @@
        "scope": "equity",
        "terms": "fixed",
        "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
-       "attribution_quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев).",
+       "attribution_quote": "Продажа не требует одобрения акционеров Mondi, отмечается в сообщении.",
        "source": "https://www.interfax.ru/business/921255",
        "quote_checked": true,
        "reader": "A"
@@ -136258,9 +138145,9 @@
        "event": "signing",
        "scope": "equity",
        "terms": "fixed",
-       "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
+       "quote": "Москва. 18 сентября. INTERFAX.RU - Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
+       "attribution_quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев).",
        "source": "https://www.interfax.ru/business/921255",
-       "attribution_quote": "Продажа не требует одобрения акционеров Mondi, отмечается в сообщении.",
        "quote_checked": true,
        "reader": "B"
       }
@@ -136277,7 +138164,7 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев)."
+     "attribution_quote": "Продажа не требует одобрения акционеров Mondi, отмечается в сообщении."
     },
     "date": {
      "value": "2023-10",
@@ -136288,7 +138175,7 @@
       "closing",
       "publication"
      ],
-     "quote": "04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре Ведомости Читайте нас в MAX Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+     "quote": "04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
      "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
      "verified_by": "model×2",
      "verified_at": "2026-09-06",
@@ -136296,7 +138183,7 @@
       {
        "value": "2023-10",
        "meaning": "publication",
-       "quote": "04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре Ведомости Читайте нас в MAX Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+       "quote": "04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
        "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "A"
@@ -136304,7 +138191,7 @@
       {
        "value": "2023-10",
        "meaning": "closing",
-       "quote": "Главная / Бизнес / 04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре Ведомости Читайте нас в MAX Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+       "quote": "Главная / Бизнес / 04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
        "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "B"
@@ -136320,23 +138207,23 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "38c99049fcf9",
-     "quote": "О продаже предприятия Mondi объявила в середине сентября, покупателем выступила ООО «Сезар Инвест», сумма сделки составила 80 млрд руб.",
-     "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
+     "quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев).",
+     "source": "https://www.interfax.ru/business/921255",
      "verified_by": "model×2",
      "verified_at": "2026-09-06",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "О продаже предприятия Mondi объявила в середине сентября, покупателем выступила ООО «Сезар Инвест», сумма сделки составила 80 млрд руб.",
-       "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
+       "quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев).",
+       "source": "https://www.interfax.ru/business/921255",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "В сообщении группы покупателем Сыктывкарского ЛПК названо ООО \"Сезар Инвест\", дочерняя компания московской девелоперской компании Sezar Group (по данным ЕГРЮЛ, основным бенефициаром компании является предприниматель Исай Захаряев).",
+       "quote": "Москва. 18 сентября. INTERFAX.RU - Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
        "source": "https://www.interfax.ru/business/921255",
        "quote_checked": true,
        "reader": "B"
@@ -136352,8 +138239,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "6c1639923e97"
+     "perimeter": "verified",
+     "card_hash": "6c1639923e97",
+     "perimeter_entity": "АО \"Монди Сыктывкар\"",
+     "perimeter_report": {
+      "inn": "1121003135",
+      "year": 2022,
+      "revenue_rub": 77969417000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"СЫКТЫВКАРСКИЙ ЛПК\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
+     "source": "https://www.interfax.ru/business/921255",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО \"Монди Сыктывкар\"",
+       "report": {
+        "inn": "1121003135",
+        "year": 2022,
+        "revenue_rub": 77969417000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"СЫКТЫВКАРСКИЙ ЛПК\""
+       },
+       "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
+       "source": "https://www.interfax.ru/business/921255",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "Монди Сыктывкарский ЛПК",
+       "report": {
+        "inn": "1121003135",
+        "year": 2022,
+        "revenue_rub": 77969417000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"СЫКТЫВКАРСКИЙ ЛПК\""
+       },
+       "quote": "По итогам 2022 года \"Монди Сыктывкарский ЛПК\" получила выручку в размере 78 млрд рублей (рост на 9% г/г), чистую прибыль - 22,5 млрд рублей (рост на 18% г/г).",
+       "source": "https://www.interfax.ru/business/921255",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -144330,31 +146263,169 @@
    "facts": {
     "stake": {
      "value": 30.0,
-     "basis": "rule",
-     "card_hash": "cd1760ec12bb"
+     "basis": "verified",
+     "card_hash": "cd1760ec12bb",
+     "object": "ООО «Гесс? Сиайэс»",
+     "event": "registry",
+     "event_variants": [
+      "registry"
+     ],
+     "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+     "source": "https://www.kommersant.ru/doc/6001381",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 30.0,
+       "object": "ООО «Гесс? Сиайэс»",
+       "event": "registry",
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 30.0,
+       "object": "ООО «Гесс? Сиайэс»",
+       "event": "registry",
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 689500000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "5e5dbdffaa39"
+     "basis": "disputed",
+     "card_hash": "5e5dbdffaa39",
+     "disputed": [
+      {
+       "value_rub": 689500000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "689,5 млн руб. по курсу ЦБ на 25 мая",
+       "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 689500000,
+       "meaning": "foreign_currency",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Стоимость пакета господина Шикулова — €8 млн (689,5 млн руб. по курсу ЦБ на 25 мая).",
+       "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "689,5 млн руб. по курсу ЦБ на 25 мая",
+     "source": "https://www.kommersant.ru/doc/6001381",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 689500000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "689,5 млн руб. по курсу ЦБ на 25 мая",
+       "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 689500000,
+       "meaning": "foreign_currency",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Стоимость пакета господина Шикулова — €8 млн (689,5 млн руб. по курсу ЦБ на 25 мая).",
+       "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-05-22",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "630f6c21dabe"
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "41abb61e21ca",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "Изменения в ЕГРЮЛ внесены 22 мая.",
+     "source": "https://www.kommersant.ru/doc/6001381",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-05-22",
+       "meaning": "registry",
+       "quote": "Изменения в ЕГРЮЛ внесены 22 мая.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-05-22",
+       "meaning": "registry",
+       "quote": "Изменения в ЕГРЮЛ внесены 22 мая.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1c0136f72e1c"
+     "card_hash": "1c0136f72e1c",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+     "source": "https://www.kommersant.ru/doc/6001381",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g3b9d27f8",
@@ -144363,8 +146434,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "d8c558ceeea6"
+     "perimeter": "verified",
+     "card_hash": "d8c558ceeea6",
+     "perimeter_entity": "ООО «Гесс? Сиайэс»",
+     "perimeter_report": {
+      "inn": "7729482411",
+      "year": 2022,
+      "revenue_rub": 4020431000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+     "source": "https://www.kommersant.ru/doc/6001381",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Гесс? Сиайэс»",
+       "report": {
+        "inn": "7729482411",
+        "year": 2022,
+        "revenue_rub": 4020431000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
+       },
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Гесс? Сиайэс»",
+       "report": {
+        "inn": "7729482411",
+        "year": 2022,
+        "revenue_rub": 4020431000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
+       },
+       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "source": "https://www.kommersant.ru/doc/6001381",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -144376,11 +146493,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "registry"
   },
   {
    "id": "gf87a65f7",
@@ -149017,21 +151135,125 @@
    "facts": {
     "stake": {
      "value": 67.0,
-     "basis": "rule",
-     "card_hash": "bec43b15432c"
+     "basis": "verified",
+     "card_hash": "bec43b15432c",
+     "object": "группа Buzzoola (ООО «Баззула интернет технологии»)",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+     "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 67.0,
+       "object": "группа Buzzoola (ООО «Баззула интернет технологии»)",
+       "event": "closing",
+       "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+       "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 67.0,
+       "object": "ООО «Баззула интернет технологии» (Buzzoola)",
+       "event": "closing",
+       "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+       "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 371000000.0,
+     "value_rub": 371000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "04a067fcc2ab"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "04a067fcc2ab",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola.",
+     "scope_basis": "verified",
+     "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+     "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 371000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+       "attribution_quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola.",
+       "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 371000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola. Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+       "attribution_quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola.",
+       "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2023-02-21",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "ee90fbbb348b"
+     "value": "2023-02-22",
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "ee90fbbb348b",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Экономика 10:58, 22 февраля 2023 МТС купила 67% платформы для размещения нативной рекламы Buzzoola",
+     "source": "https://www.interfax.ru/business/887334",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-02-22",
+       "meaning": "announcement",
+       "quote": "Экономика 10:58, 22 февраля 2023 МТС купила 67% платформы для размещения нативной рекламы Buzzoola",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-02-22",
+       "meaning": "announcement",
+       "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -149041,7 +151263,48 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "05aa9584d60a"
+     "card_hash": "05aa9584d60a",
+     "disputed": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Важный момент состоит в том, что, приобретая в 2022 г. 67%-ную долю в Buzzola, МТС не получала контроль над компанией. Инвестиции МТС в Buzzola учитывались как инвестиции в совместное предприятие. Контроль над Buzzola у МТС появился только в 2024 г.",
+       "source": "https://runet.news/articles/61865",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "control_change_basis": "disputed",
+     "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+     "source": "https://www.interfax.ru/business/887334",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Важный момент состоит в том, что, приобретая в 2022 г. 67%-ную долю в Buzzola, МТС не получала контроль над компанией. Инвестиции МТС в Buzzola учитывались как инвестиции в совместное предприятие. Контроль над Buzzola у МТС появился только в 2024 г.",
+       "source": "https://runet.news/articles/61865",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g478eb55f",
@@ -149050,22 +151313,74 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "45c0a803fc8a"
+     "perimeter": "refuted",
+     "card_hash": "45c0a803fc8a",
+     "perimeter_entity": "ООО \"Баззула интернет технологии\"",
+     "perimeter_report": {
+      "inn": "7706749080",
+      "year": 2022,
+      "revenue_rub": 695351000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЗЗУЛА ИНТЕРНЕТ ТЕХНОЛОГИИ\""
+     },
+     "perimeter_other_entities": [
+      "ООО \"Баззула рекламные технологии\""
+     ],
+     "quote": "По данным системы \" СПАРК-Интерфакс \", \"Баззула интернет технологии\" зарегистрирована в 2011 году, выручка компании в 2021 году составила 568,6 млн рублей. Этой компании принадлежит 100% \"Баззула рекламные технологии\" (зарегистрирована в июне 2022 года).",
+     "source": "https://www.interfax.ru/business/887334",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО \"Баззула рекламные технологии\""
+       ],
+       "entity": "ООО \"Баззула интернет технологии\"",
+       "report": {
+        "inn": "7706749080",
+        "year": 2022,
+        "revenue_rub": 695351000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЗЗУЛА ИНТЕРНЕТ ТЕХНОЛОГИИ\""
+       },
+       "quote": "По данным системы \" СПАРК-Интерфакс \", \"Баззула интернет технологии\" зарегистрирована в 2011 году, выручка компании в 2021 году составила 568,6 млн рублей. Этой компании принадлежит 100% \"Баззула рекламные технологии\" (зарегистрирована в июне 2022 года).",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО \"Баззула рекламные технологии\""
+       ],
+       "entity": "ООО \"Баззула интернет технологии\"",
+       "report": {
+        "inn": "7706749080",
+        "year": 2022,
+        "revenue_rub": 695351000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЗЗУЛА ИНТЕРНЕТ ТЕХНОЛОГИИ\""
+       },
+       "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "source": "https://www.interfax.ru/business/887334",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "control_change_not_verified"
     }
    }
   },
@@ -154950,27 +157265,128 @@
      "card_hash": "b78d611dad99"
     },
     "price": {
-     "value_rub": 945000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "6a6a9e3ca91e"
+     "basis": "verified",
+     "card_hash": "9fc1386b9e96",
+     "meaning_variants": [
+      "auction_start",
+      "lower_bound"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "parties",
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В мае 2023 года права требования выставлялись на аукцион с минимальной ценой 945 млн руб., но заявок не поступило.",
+     "source": "https://www.kommersant.ru/doc/6137536",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 945000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "В мае 2023 года права требования выставлялись на аукцион с минимальной ценой 945 млн руб., но заявок не поступило.",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 945000000,
+       "meaning": "lower_bound",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Там добавили, что сделка была прямой, что позволило завершить продажу в короткий срок, а цена оказалась не ниже установленной ранее на торгах. В мае 2023 года права требования выставлялись на аукцион с минимальной ценой 945 млн руб., но заявок не поступило.",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-08-03",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "0e3f081b9733"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "50ae13f5e487",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Потребительский рынок 03.08.2023, 00:59 Инвесторы в тепличных условиях «Траст» продал долги крупного оператора цветочного комплекса",
+     "source": "https://www.kommersant.ru/doc/6137536",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2023-08-03",
+       "meaning": "publication",
+       "quote": "Потребительский рынок 03.08.2023, 00:59 Инвесторы в тепличных условиях «Траст» продал долги крупного оператора цветочного комплекса",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-08-03",
+       "meaning": "publication",
+       "quote": "Потребительский рынок 03.08.2023, 00:59 Инвесторы в тепличных условиях «Траст» продал долги крупного оператора цветочного комплекса",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "932b543e1565"
+     "card_hash": "932b543e1565",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Права требования на 6 млрд руб. к «РоузХилл», на 594 млн руб. к физлицам и опцион на 50% акций компании приобрело АО «Атерра», уточнили в банке.",
+     "source": "https://www.kommersant.ru/doc/6137536",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Права требования на 6 млрд руб. к «РоузХилл», на 594 млн руб. к физлицам и опцион на 50% акций компании приобрело АО «Атерра», уточнили в банке.",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Права требования на 6 млрд руб. к «РоузХилл», на 594 млн руб. к физлицам и опцион на 50% акций компании приобрело АО «Атерра», уточнили в банке.",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g5eb71006",
@@ -154979,8 +157395,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "a55661e12181"
+     "perimeter": "refuted",
+     "card_hash": "a55661e12181",
+     "perimeter_entity": "АО «РоузХилл»",
+     "perimeter_report": {
+      "inn": "4003029848",
+      "year": 2022,
+      "revenue_rub": 65607000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОУЗХИЛЛ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Права требования на 6 млрд руб. к «РоузХилл», на 594 млн руб. к физлицам и опцион на 50% акций компании приобрело АО «Атерра», уточнили в банке.",
+     "source": "https://www.kommersant.ru/doc/6137536",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "АО «РоузХилл»",
+       "report": {
+        "inn": "4003029848",
+        "year": 2022,
+        "revenue_rub": 65607000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОУЗХИЛЛ\""
+       },
+       "quote": "Права требования на 6 млрд руб. к «РоузХилл», на 594 млн руб. к физлицам и опцион на 50% акций компании приобрело АО «Атерра», уточнили в банке.",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "АО «РоузХилл»",
+       "report": {
+        "inn": "4003029848",
+        "year": 2022,
+        "revenue_rub": 65607000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОУЗХИЛЛ\""
+       },
+       "quote": "Банк непрофильных активов «Траст» продал права требования к оператору цветочного комплекса АО «РоузХилл», рассказали два источника “Ъ” и подтвердили в «Трасте».",
+       "source": "https://www.kommersant.ru/doc/6137536",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -154992,11 +157454,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "auction_start",
+   "date_basis": "publication"
   },
   {
    "id": "gb9fdfce4",
@@ -161401,22 +163865,128 @@
    "followup_researched": "2026-09-05",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "52b771d33e18"
+     "value": 100.0,
+     "basis": "verified",
+     "card_hash": "85456daf0c40",
+     "object": "ООО «Союз-ТТМ»",
+     "event": "announcement",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "На торгах по продаже 100% долей ООО «Союз-ТТМ» победило ООО «Союз-22», которое предложило за лот 299,05 млн рублей.",
+     "source": "https://probankrotstvo.ru/news/firma-eks-topa-lukoila-za-299-mln-kupila-maslozirovoi-aktiv-1583",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "ООО «Союз-ТТМ»",
+       "event": "announcement",
+       "quote": "На торгах по продаже 100% долей ООО «Союз-ТТМ» победило ООО «Союз-22», которое предложило за лот 299,05 млн рублей.",
+       "source": "https://probankrotstvo.ru/news/firma-eks-topa-lukoila-za-299-mln-kupila-maslozirovoi-aktiv-1583",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "ООО «Союз-ТТМ»",
+       "event": "closing",
+       "quote": "На торгах по продаже 100% долей ООО «Союз-ТТМ» победило ООО «Союз-22», которое предложило за лот 299,05 млн рублей.",
+       "source": "https://probankrotstvo.ru/news/firma-eks-topa-lukoila-za-299-mln-kupila-maslozirovoi-aktiv-1583",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 299050000.0,
+     "value_rub": 299000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "a14bc3bd3a68"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "a14bc3bd3a68",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Это следует из сообщения в реестре сведений о банкротстве от 1 декабря.",
+     "scope_basis": "verified",
+     "quote": "Стоимость 100% «Союза-ТТМ» — 299 млн руб.",
+     "source": "https://www.kommersant.ru/doc/5706046",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 299000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "unknown",
+       "quote": "Стоимость 100% «Союза-ТТМ» — 299 млн руб.",
+       "attribution_quote": "Это следует из сообщения в реестре сведений о банкротстве от 1 декабря.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 299050000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "На торгах по продаже 100% долей ООО «Союз-ТТМ» победило ООО «Союз-22», которое предложило за лот 299,05 млн рублей.",
+       "attribution_quote": "«Союз-22» представляет интересы одного из кредиторов корпорации «Союз» – ООО «Рэвард инвест», говорится в сообщении на Федресурсе.",
+       "source": "https://probankrotstvo.ru/news/firma-eks-topa-lukoila-za-299-mln-kupila-maslozirovoi-aktiv-1583",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2022-12-08",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "58584a54ac57"
+     "value": "2022-12-01",
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "58584a54ac57",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "Это следует из сообщения в реестре сведений о банкротстве от 1 декабря.",
+     "source": "https://www.kommersant.ru/doc/5706046",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2022-12-01",
+       "meaning": "registry",
+       "quote": "Это следует из сообщения в реестре сведений о банкротстве от 1 декабря.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2022-12-01",
+       "meaning": "registry",
+       "quote": "Это следует из сообщения в реестре сведений о банкротстве от 1 декабря.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -161426,7 +163996,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "3707f1c57825"
+     "card_hash": "3707f1c57825",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Связанное с бизнесменом Александром Раппопортом ООО «Союз-22» договорилось о покупке ООО «Союз-ТТМ», дочерней структуры корпорации «Союз», некогда крупного поставщика масложировой продукции.",
+     "source": "https://www.kommersant.ru/doc/5706046",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Связанное с бизнесменом Александром Раппопортом ООО «Союз-22» договорилось о покупке ООО «Союз-ТТМ», дочерней структуры корпорации «Союз», некогда крупного поставщика масложировой продукции.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Связанное с бизнесменом Александром Раппопортом ООО «Союз-22» договорилось о покупке ООО «Союз-ТТМ», дочерней структуры корпорации «Союз», некогда крупного поставщика масложировой продукции.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "ga39603d6",
@@ -161435,24 +164029,71 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "504c88cd4507"
+     "perimeter": "refuted",
+     "card_hash": "504c88cd4507",
+     "perimeter_entity": "ООО «Союз-ТТМ»",
+     "perimeter_report": {
+      "inn": "3906099876",
+      "year": 2021,
+      "revenue_rub": 45252000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СОЮЗ-ТТМ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "«Союз-ТТМ» управляет в Калининграде терминалом для перевалки растительных масел, мощностями по переработке масел, производству жиров для пищевой промышленности и кофейным предприятием.",
+     "source": "https://www.kommersant.ru/doc/5706046",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Союз-ТТМ»",
+       "report": {
+        "inn": "3906099876",
+        "year": 2021,
+        "revenue_rub": 45252000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СОЮЗ-ТТМ\""
+       },
+       "quote": "«Союз-ТТМ» управляет в Калининграде терминалом для перевалки растительных масел, мощностями по переработке масел, производству жиров для пищевой промышленности и кофейным предприятием.",
+       "source": "https://www.kommersant.ru/doc/5706046",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «Союз-ТТМ»",
+       "report": {
+        "inn": "3906099876",
+        "year": 2021,
+        "revenue_rub": 45252000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СОЮЗ-ТТМ\""
+       },
+       "quote": "В дальнейшем показатели снижались и в 2021 году компания получила выручку 45,3 млн рублей и убыток 9,8 млн рублей.",
+       "source": "https://probankrotstvo.ru/news/firma-eks-topa-lukoila-za-299-mln-kupila-maslozirovoi-aktiv-1583",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
-   }
+   },
+   "stake_acquired": 100.0
   },
   {
    "id": "gbbad8e7c",
@@ -177595,31 +180236,158 @@
    "facts": {
     "stake": {
      "value": 49.9,
-     "basis": "rule",
-     "card_hash": "67e8080f0e24"
+     "basis": "verified",
+     "card_hash": "67e8080f0e24",
+     "object": "ООО «Башенная инфраструктурная компания» (БИК)",
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "quote": "МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
+     "source": "https://www.kommersant.ru/doc/8765262",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": 49.9,
+       "object": "ООО «Башенная инфраструктурная компания» (БИК)",
+       "event": "announcement",
+       "quote": "МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 49.9,
+       "object": "ООО «Башенная инфраструктурная компания» (БИК)",
+       "event": "announcement",
+       "quote": "МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 21700000000.0,
+     "value_rub": 21700000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "ff4310406019"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "ff4310406019",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
+     "scope_basis": "verified",
+     "quote": "привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
+     "source": "https://www.kommersant.ru/doc/8765262",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value_rub": 21700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 21700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
+       "attribution_quote": "но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-06-25",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "a730c2db22dd"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "e1195e1e3131",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Телекоммуникации 25.06.2026, 21:22 обновлено 23:07 МТС продала 49,9% в своей башенной компании",
+     "source": "https://www.kommersant.ru/doc/8765262",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "value": "2026-06-25",
+       "meaning": "announcement",
+       "quote": "Телекоммуникации 25.06.2026, 21:22 обновлено 23:07 МТС продала 49,9% в своей башенной компании",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-06-25",
+       "meaning": "announcement",
+       "quote": "Телекоммуникации 25.06.2026, 21:22 обновлено 23:07 МТС продала 49,9% в своей башенной компании",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "01774de1a46c"
+     "card_hash": "01774de1a46c",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Условиями сделки предусмотрен совместный контроль МТС и ЗПИФ в отношении основной деятельности БИК, уточнили в МТС",
+     "source": "https://www.kommersant.ru/doc/8765262",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Условиями сделки предусмотрен совместный контроль МТС и ЗПИФ в отношении основной деятельности БИК, уточнили в МТС",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Условиями сделки предусмотрен совместный контроль МТС и ЗПИФ в отношении основной деятельности БИК, уточнили в МТС",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "bik",
@@ -177628,24 +180396,71 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "f1df42a34c5f"
+     "perimeter": "verified",
+     "card_hash": "f1df42a34c5f",
+     "perimeter_entity": "ООО «Башенная инфраструктурная компания»",
+     "perimeter_report": {
+      "inn": "5027312461",
+      "year": 2025,
+      "revenue_rub": 15913106000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Оператор МТС сообщил CNews о заключении сделки по продаже 49,9% своей дочерней компании ООО «Башенная инфраструктурная компания» (БИК).",
+     "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-06",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Башенная инфраструктурная компания»",
+       "report": {
+        "inn": "5027312461",
+        "year": 2025,
+        "revenue_rub": 15913106000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
+       },
+       "quote": "Оператор МТС сообщил CNews о заключении сделки по продаже 49,9% своей дочерней компании ООО «Башенная инфраструктурная компания» (БИК).",
+       "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "БИК",
+       "report": {
+        "inn": "5027312461",
+        "year": 2025,
+        "revenue_rub": 15913106000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
+       },
+       "quote": "По данным МТС, БИК принадлежит более 24,7 тыс. антенно-мачтовых сооружений (АМС) в России, а по данным агентства TelecomDaily, БИК находится на третьем месте среди инфраструктурных (башенных) операторов России по количеству АМС.",
+       "source": "https://www.kommersant.ru/doc/8765262",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "announcement"
   },
   {
    "id": "absolut-strah",
