@@ -363,6 +363,7 @@ def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
             for key in ("stake", "price"):
                 f[key]["basis"] = "verified"
             f["price"]["scope"] = "equity"
+            f["price"]["attribution"] = "parties"
             f["target"]["perimeter"] = "verified"
             f["target"]["perimeter_report"] = {"inn": "7700000001", "year": 2023, "revenue_rub": 5e8}
             f["nature"]["control_change_basis"] = "verified"
@@ -692,6 +693,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         for key in ("stake", "price"):
             f[key]["basis"] = "verified"
         f["price"]["scope"] = "equity"
+        f["price"]["attribution"] = "parties"
         f["target"]["perimeter"] = "verified"
         f["target"]["perimeter_report"] = {"inn": "7700000321", "year": 2023, "revenue_rub": 5e8}
         f["nature"]["control_change_basis"] = "verified"

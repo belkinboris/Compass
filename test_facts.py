@@ -27,6 +27,7 @@ def _verified(d):
     for key in ('stake', 'price'):
         f[key]['basis'] = 'verified'
     f['price']['scope'] = 'equity'
+    f['price']['attribution'] = 'parties'
     f['target']['perimeter'] = 'verified'
     f['target']['perimeter_report'] = {'inn': '7700000001', 'year': 2023, 'revenue_rub': 5e8}
     f['nature']['control_change_basis'] = 'verified'
@@ -53,7 +54,8 @@ def test_metrics_admit_independently():
     assert f['reasons']['purchase_sums'] == 'price_not_disclosed'
     # доля не названа, цена прочитана — суммы считаются, мультипликатор нет
     d = _deal(eco={'share': '—'}, title='X купил ООО «Ромашка»')
-    f = facts.derive(d, CTX); f['price']['basis'] = 'read'; f = facts.derive(dict(d, facts=f), CTX)
+    f = facts.derive(d, CTX); f['price']['basis'] = 'read'; f['price']['attribution'] = 'parties'
+    f = facts.derive(dict(d, facts=f), CTX)
     assert f['admitted']['purchase_sums'] and f['reasons']['multiple_text'] in ('control_change_not_verified', 'price_not_verified', 'stake_not_verified')
     # допэмиссия — не покупка ни для сумм, ни для мультипликатора
     f = facts.derive(_deal(type='Инвестиция', title='Допэмиссия в пользу X'), CTX)
@@ -213,6 +215,11 @@ def test_third_review_rules():
     f = dict(v); f['nature'] = dict(v['nature'], intragroup=True, control_change=False)
     f = facts.derive(dict(d, facts=f), CTX)
     assert f['reasons']['purchase_sums'] == 'intragroup'
+    # автор числа неизвестен или слаб — цена не идёт в деньги, даже подтверждённая
+    for who in (None, 'unknown', 'adviser', 'media_sources', 'analyst'):
+        f = dict(v); f['price'] = dict(v['price'], attribution=who)
+        f = facts.derive(dict(d, facts=f), CTX)
+        assert f['reasons']['purchase_sums'] == 'price_author_unknown' and f['reasons']['multiple_text'] == 'price_author_unknown', who
     # точность: значение не точнее цитаты
     assert fc.price_precise_enough(50_800_000_000, 'сумма сделки — 50,8 млрд руб.')
     assert not fc.price_precise_enough(50_785_000_000, 'сумма сделки — 50,8 млрд руб.')

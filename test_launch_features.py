@@ -199,6 +199,7 @@ def _with_verified_facts(deal, registry):
         f[key]['basis'] = 'verified'
         f[key]['verified_by'] = 'model×2'
     f['price']['scope'] = 'equity'
+    f['price']['attribution'] = 'parties'
     f['target']['perimeter'] = 'verified'
     f['target']['perimeter_report'] = {'inn': registry[deal['target']]['inn'], 'year': 2023, 'revenue_rub': 500_000_000}
     f['nature']['control_change_basis'] = 'verified'

@@ -43,6 +43,7 @@ def counts_in_top_purchases(d: dict) -> bool:
     price = dd['facts']['price']
     if price.get('basis') in ('rule', 'unknown', 'stale'):
         price['basis'] = 'read'
+        price.setdefault('attribution', 'parties')  # «как будто прочитано у сторон»
     return facts.admitted(dd, 'purchase_sums')[0]
 
 

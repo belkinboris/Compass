@@ -131,7 +131,12 @@ REASON_LABELS = {
     'perimeter_report_missing': 'периметр подтверждён без привязки к конкретному отчёту',
     'intragroup': 'передача внутри одной группы — конечный контроль не менялся',
     'price_event_disputed': 'два чтения относят цену к разным событиям — не разрешено',
+    'price_author_unknown': 'кто назвал цену, из источника не видно — в деньги не идёт',
 }
+# Автор числа, при котором цена считается раскрытой: стороны, документ, реестр.
+# Консультант в таблице издания, анонимные «источники», аналитик и «не видно» —
+# нет (третий и четвёртый разборы рецензента).
+PRICE_AUTHORS_ACCEPTED = ('parties', 'filing', 'registry')
 
 
 # ---------- отпечатки: какие поля карточки «держат» каждый факт ----------
@@ -316,6 +321,10 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
         # чтение решает — для графиков так же, как для списка крупнейших.
         if _basis(price) not in TRUSTED:
             return False, 'stale' if _basis(price) == 'stale' else 'price_not_read'
+        # …и только если из источника видно, КТО назвал число: «Европлан»
+        # 50,8 млрд ₽ по посту smart-lab без автора — не раскрытие сторонами.
+        if price.get('attribution') not in PRICE_AUTHORS_ACCEPTED:
+            return False, 'price_author_unknown'
         # Спорная дата — сделку нельзя отнести к году (Shell/«Сахалин-2»: одно
         # чтение о разрешении НОВАТЭКу в 2023-м, другое о покупке «Газпромом»
         # в 2024-м при одинаковой сумме).
@@ -358,6 +367,8 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'stale'
         if _basis(price) != 'verified':
             return False, 'price_not_verified'
+        if price.get('attribution') not in PRICE_AUTHORS_ACCEPTED:
+            return False, 'price_author_unknown'
         if price.get('scope') not in ('package', 'equity', 'ev'):
             return False, 'price_scope_unknown'
         # Порядок причин — от устройства сделки к чтению: сначала «не та
