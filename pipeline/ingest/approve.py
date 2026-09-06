@@ -329,6 +329,13 @@ def main(write=False):
         print('  ОТБРОШЕНА   %s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
 
     if fresh:
+        # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
+        # читает только facts, не покажет их ни в одном показателе.
+        if ROOT not in sys.path:
+            sys.path.insert(0, ROOT)
+        import facts as facts_layer
+        from pipeline import fns_registry as _fns_registry
+        facts_layer.derive_all(data, facts_layer.build_ctx(data, _fns_registry.REGISTRY))
         json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)

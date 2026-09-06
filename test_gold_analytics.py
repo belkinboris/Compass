@@ -34,15 +34,12 @@ PURCHASE_TYPES = ('M&A', 'Продажа с торгов')
 
 
 def counts_in_top_purchases(d: dict) -> bool:
-    """Python-двойник countsAsPrice && !isSoftSum && ₽ из static/index.html:
-    только покупки, только цена, названная сторонами, только рубли."""
-    if d.get('status') == 'Не состоялась':
-        return False
-    if d.get('type') == 'Продажа с торгов' and d.get('status') != 'Закрыта':
-        return False
-    if d.get('type') not in PURCHASE_TYPES:
-        return False
-    return dm.sum_basis(d) == 'disclosed'
+    """Покупка с ценой, названной сторонами в рублях: допуск к суммам по
+    годам и отраслям (facts: purchase_sums). Список крупнейших на экране
+    требует ещё и прочитанной в источнике цены (top_purchases) — это
+    проверяется отдельно, приёмкой на живом сайте."""
+    import facts
+    return facts.admitted(d, 'purchase_sums')[0]
 
 
 def _rows():
@@ -80,10 +77,27 @@ def test_gold_share(row):
 
 @pytest.mark.parametrize('row', _rows())
 def test_gold_multiples_admission(row):
+    """in_multiples в выборке — проходит ли сделка ТЕКСТОВЫЕ правила
+    мультипликатора (предложение правил, dm.admission). Показывается ли она
+    на экране — отдельный вопрос: только после двух согласных чтений
+    (facts.admitted.multiple_text), и это проверяет
+    test_gold_verified_multiples_are_a_subset_of_rule_candidates."""
     _pending(row)
     d = DEALS[row['id']]
     cand, reason = dm.admission(dict(d, id=row['id']), CONFIRMED, BANKS, LOTS)
     assert (cand is not None) == row['in_multiples'], (row['id'], reason, row['why'])
+
+
+def test_gold_verified_multiples_are_a_subset_of_rule_candidates():
+    """Чтение подтверждает, но не расширяет: сделка с verified-фактами
+    для мультипликатора обязана проходить и текстовые правила, иначе читатель
+    записал факт, которого правила не видят, — повод проверить обоих."""
+    import facts
+    for did, d in DEALS.items():
+        if (d.get('facts') or {}).get('admitted', {}).get('multiple_text'):
+            cand, reason = dm.admission(dict(d, id=did), CONFIRMED, BANKS, LOTS)
+            assert cand is not None, (did, reason)
+            assert facts.number_checks(d) == [], (did, facts.number_checks(d))
 
 
 @pytest.mark.parametrize('row', _rows())
@@ -135,3 +149,14 @@ def test_gold_assistant_chain_keeps_the_deal(chain, idx):
         mentioned = chain['must_mention'] in (r.answer or '') or any(d.id == chain['must_mention'] for d in r.docs)
         assert mentioned, (question, r.answer[:200] if r.answer else r.answer, chain['why'])
         previous = question
+
+
+@pytest.mark.parametrize('row', [pytest.param(r, id=r['id']) for r in GOLD['deals'] if 'multiple_shown' in r])
+def test_gold_multiple_shown_matches_verified_facts(row):
+    """Показ мультипликатора на сайте — по подтверждённым чтением фактам, а не
+    по правилам: Росспиртпром проходит правила по тексту, но периметр
+    отчётности (головное АО против группы заводов) чтение отвергло."""
+    import facts
+    d = DEALS[row['id']]
+    ok, reason = facts.admitted(d, 'multiple_text')
+    assert ok == row['multiple_shown'], (row['id'], reason, row['why'])

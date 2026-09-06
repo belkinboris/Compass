@@ -343,97 +343,57 @@ def test_feed_finance_filter_narrows_by_target_revenue(browser, base_url):
         ctx.close()
 
 
-def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
-    """Этап 16, П1: `dealMultipleLine` в static/index.html дублирует методику
-    deal_multiples.py на клиенте (чтобы не делать второй запрос к серверу за
-    одной цифрой) — проверяем ПРЯМО функцию на синтетических объектах, а не
-    через живую сделку из базы: живая база меняется каждый час, и тест на
-    конкретном id сломался бы при первой же правке этой карточки рутиной
-    качества (родня комментария у lastVerifiedDate чуть выше)."""
+def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
+    """С 6 сентября 2026 клиент ничего не выводит из прозы: `dealMultipleLine`
+    берёт числитель из d.facts и показывает мультипликатор только для
+    сделки, у которой доля, цена и периметр ПОДТВЕРЖДЕНЫ двумя чтениями
+    (facts.admitted.multiple_text). facts для синтетических сделок считает
+    Python (facts.derive) — единственный исполнитель правил; здесь
+    проверяется, что клиент честно читает результат, а не свои копии."""
+    import facts
     visit(page, base_url, "#/deal/g1d36d186")
-    base = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
+    registry = {"t1": {"company_id": "t1", "decision": "confirmed", "inn": "7700000001"}}
+    ctx = {"registry": registry, "lot_ids": set()}
+    base = {"type": "M&A", "status": "Закрыта", "date": "2024-06-01", "sum": "1 000 млн ₽",
             "target": "t1", "buyer": "b1", "seller": "Иван Иванов", "eco": {"share": "Куплено 100% долей"}}
 
-    # Доля не названа — не допуск (правило владельца, 6 сентября 2026): раньше
-    # такая сделка считалась «потенциально 100%» и шла в расчёт.
-    unknown_stake = dict(base, eco={"share": None})
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(unknown_stake)) is None
-    # Слова о покупке целиком — доля установлена.
-    whole = dict(base, eco={"share": "Компания куплена целиком"})
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(whole)) is not None
-    # «на 30% выше» — сравнение цен, не доля; диапазон и «более…» — не цена; явное sum_basis сильнее текста.
-    compare = dict(base, eco={"share": "Куплено 100%. Сумма на 30% выше прежней цены."})
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(compare)) is not None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum="более 1 000 млн ₽"))) is None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum_basis="not_a_price"))) is None
-    assert page.evaluate("sumBasis(%s)" % json.dumps(dict(base, sum="500 млн – 2 млрд ₽"))) == "range"
+    def with_facts(d, verified=False):
+        f = facts.derive(d, ctx)
+        if verified:
+            for key in ("stake", "price"):
+                f[key]["basis"] = "verified"
+            f["price"]["scope"] = "equity"
+            f["target"]["perimeter"] = "verified"
+            f = facts.derive(dict(d, facts=f), ctx)
+        return dict(d, facts=f)
 
-    ok = page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(base))
-    assert ok and ok["multiple"] == 2.0
-
-    # Не на вкладке цели — линия не показывается (только у target/asset_id).
-    assert page.evaluate("dealMultipleLine(%s, 'b1', 500000000, 2023)" % json.dumps(base)) is None
-
-    # Не M&A — IPO/инвестиция/допэмиссия не сопоставимы с продажей компании.
-    not_ma = dict(base, type="Инвестиция")
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(not_ma)) is None
-
-    # Нет продавца — структурный признак cash-in (допэмиссия/SPO), не сделки.
-    no_seller = dict(base, seller=None, seller_id=None)
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(no_seller)) is None
-
-    # Валютная сумма — курс на момент старой сделки нельзя молча пересчитывать.
-    dollar = dict(base, sum="$150 млн")
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dollar)) is None
-
-    # Доля меньше 95% — сумма за долю не делится на выручку всей компании.
-    small_stake = dict(base, eco={"share": "Приобретено 30% доли"})
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(small_stake)) is None
-
-    # Разрыв года выручки и сделки больше двух — отчётность может не
-    # отражать компанию на момент сделки; отчёт за ГОД САМОЙ сделки тоже не
-    # годится — на дату сделки его ещё нет (аудит 5 сентября 2026: цену
-    # февраля 2025 делили на выручку за весь 2025 год).
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2020)" % json.dumps(base)) is None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2024)" % json.dumps(base)) is None
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(base)) is not None
-
-    # Доля, названная только в заголовке, — тоже доля (g85883f11: «Ростех
-    # приобрел 25% в …», eco.share пуст).
-    title_stake = dict(base, title="Ростех приобрел 25% в разработчике платформы")
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(title_stake)) is None
-
-    # Не твёрдая цена: «~», «около», «до», «первый этап», «или EV…».
-    for soft in ("~1 000 млн ₽ (или EV ~5 млрд ₽)", "около 1 млрд ₽", "1 000 млн ₽ (первый этап)"):
-        assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(dict(base, sum=soft))) is None, soft
-
-    # Абсурдный мультипликатор — почти всегда выручка не того юрлица/периметра
-    # (см. пилот Этапа 15, находка g5eb6ff22), а не редкая сделка.
-    absurd = dict(base, sum="75 500 млн ₽")
+    # по тексту всё сходится (100%, цена в рублях, ИНН подтверждён) — но не прочитано: нет
+    rule_only = with_facts(base)
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(rule_only)) is None
+    assert page.evaluate("factReason(%s, 'multiple_text')" % json.dumps(rule_only)) == "price_not_verified"
+    # подтверждено двумя чтениями — есть, и формула та же: 1000 / 500
+    ok = with_facts(base, verified=True)
+    line = page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(ok))
+    assert line and line["multiple"] == 2.0
+    # без facts (карточка предпросмотра) — ни в один показатель
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(base)) is None
+    assert page.evaluate("countsAsPrice(%s)" % json.dumps(base)) is False
+    # не на вкладке цели — нет
+    assert page.evaluate("dealMultipleLine(%s, 'b1', 500000000, 2023)" % json.dumps(ok)) is None
+    # год отчётности: за год сделки и старше двух лет — нет
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2024)" % json.dumps(ok)) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2020)" % json.dumps(ok)) is None
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(ok)) is not None
+    # абсурдный мультипликатор — почти всегда выручка не того юрлица
+    absurd = dict(ok, facts=dict(ok["facts"], price=dict(ok["facts"]["price"], value_rub=75_500_000_000)))
     assert page.evaluate("dealMultipleLine(%s, 't1', 17400000, 2023)" % json.dumps(absurd)) is None
-
-    # Доля — по контексту ПОКУПКИ, а не наименьший процент (вторая критика,
-    # 6 сентября 2026): «консолидировала 100%, выкупив 30%» — покупка 30%;
-    # «консолидировал 100%» без названной покупки — не установлена; «ранее
-    # владел 30%, теперь приобрёл 70%» — 70; этапы — не установлена; явное
-    # поле stake_acquired сильнее текста.
-    consol = dict(base, eco={"share": "Структуры консолидировали 100% ООО «Гесс», выкупив 30% в компании"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(consol)) == 30
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(consol)) is None
-    only_result = dict(base, title="Ростелеком консолидировал 100% ООО «ОМП»", eco={"share": "—"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(only_result)) is None
-    history = dict(base, eco={"share": "Ранее покупатель владел 30%, теперь приобрёл 70%"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(history)) == 70
-    stages = dict(base, eco={"share": "На первом этапе куплено 68%, затем приобретены оставшиеся 32%"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(stages)) is None
-    verb_after = dict(base, eco={"share": "100% акций АО «КИВИ» переданы гонконгской компании Fusion Factor"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(verb_after)) == 100
-    subject = dict(base, eco={"share": "100% долей ООО «Флоктори»"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(subject)) == 100
-    ownership = dict(base, eco={"share": "99,9% находятся на балансе ООО «Агроинвест». В этой структуре 68,6% долей принадлежат фонду"})
-    assert page.evaluate("stakeEstablished(%s)" % json.dumps(ownership)) is None
-    explicit = dict(base, eco={"share": None}, stake_acquired=100)
-    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(explicit)) is not None
+    # допуски по показателям — из facts, разные для сумм и для списка крупнейших
+    assert page.evaluate("countsAsPrice(%s)" % json.dumps(rule_only)) is True
+    assert page.evaluate("countsAsTopPurchase(%s)" % json.dumps(rule_only)) is False
+    assert page.evaluate("countsAsTopPurchase(%s)" % json.dumps(ok)) is True
+    est = with_facts(dict(base, sum="~1 000 млн ₽"))
+    assert page.evaluate("sumBasis(%s)" % json.dumps(est)) == "estimate"
+    assert page.evaluate("countsAsPrice(%s)" % json.dumps(est)) is False
 
 
 def test_assistant_retrieval_finds_deal_regardless_of_word_case(page, base_url):
@@ -711,9 +671,20 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         pg.wait_for_timeout(600)
         pg.click('[data-l="eco"]')  # рендерит #deal-fns — до этого его нет в DOM (вкладка "Обзор" по умолчанию)
         pg.wait_for_timeout(400)
-        deal = {"type": "M&A", "date": "2024-06-01", "sum": "1 000 млн ₽",
+        import facts
+        deal = {"type": "M&A", "status": "Закрыта", "date": "2024-06-01", "sum": "1 000 млн ₽",
                 "target": "zzz-mult-target", "buyer": "b1", "seller": "Иван Иванов",
-                "eco": {"share": "Куплено 100% долей"}}  # неизвестная доля — не допуск (6 сентября 2026)
+                "eco": {"share": "Куплено 100% долей"}}
+        # Мультипликатор на карточке — только по фактам, подтверждённым двумя
+        # чтениями (facts.admitted.multiple_text); синтетической сделке они
+        # выставляются так, как их записал бы facts_confirm.py.
+        ctx_f = {"registry": {"zzz-mult-target": {"company_id": "zzz-mult-target", "decision": "confirmed", "inn": "7700000321"}}, "lot_ids": set()}
+        f = facts.derive(deal, ctx_f)
+        for key in ("stake", "price"):
+            f[key]["basis"] = "verified"
+        f["price"]["scope"] = "equity"
+        f["target"]["perimeter"] = "verified"
+        deal["facts"] = facts.derive(dict(deal, facts=f), ctx_f)
         pg.evaluate("mountDealFns(%s)" % json.dumps(deal))
         pg.wait_for_timeout(600)
         body = pg.inner_text("#deal-fns")
@@ -2855,9 +2826,15 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
     Совкомбанка с оценкой компании 200–219 млрд ₽ соседствовало с покупками.
     Правила суммы — одни на «Аналитику» и страницу отрасли."""
     visit(page, base_url, "#/analytics")
-    page.wait_for_selector(".an-c-topsum .an-deal")
+    page.wait_for_selector(".an-c-topsum")
+    page.wait_for_function('typeof DEALS!=="undefined" && DEALS.length>1000', timeout=60000)
     rows = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal").all()]
-    assert rows
+    # список крупнейших — только сделки с прочитанной в источнике ценой; пока
+    # таких нет, блок честно говорит об этом, а не показывает непрочитанные
+    if not page.evaluate("DEALS.some(countsAsTopPurchase)"):
+        assert not rows and "ждёт проверки" in page.inner_text(".an-c-topsum")
+    else:
+        assert rows
     sums = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal .an-deal-s").all()]
     assert len(sums) == len(rows)
     for row, total in zip(rows, sums):
@@ -2869,17 +2846,14 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
         # диапазон «30–40 млрд ₽» — оценка, а не цена, названная сторонами
         assert not re.search(r"\d\s*[–—-]\s*\d", total), row
         assert "₽" in total, row  # валютная сумма считается только через рублёвый эквивалент в скобках
-    # общие функции суммы существуют и согласованы с правилами
-    checks = page.evaluate("""() => ({
-      soft: ["300 млрд ₽ (неофициально)", "около 500 млрд ₽ (допэмиссия ВТБ)", "~5 млрд ₽", "до 6 млрд ₽",
-             "~100 млн ₽ (или EV ~1 млрд ₽)", "400 млн ₽ (первый этап)", "15–20 млрд ₽", "30-40 млрд ₽"].map(isSoftSum),
-      firm: ["340 млрд ₽", "754 млн ₽ (плюс условное возмещение)", "41 500 млн ₽"].map(isSoftSum),
-      rub: [sumBillionsRub("не более $2 млрд (193 млрд ₽)"), sumBillionsRub("$3,2 млрд (до вычета долга)"),
-            sumBillionsRub("754 млн ₽"), sumBillionsRub("1,2 трлн ₽")],
-      ipo: countsAsPrice({type: "IPO", status: "Закрыта"}),
-    })""")
-    assert all(checks["soft"]) and not any(checks["firm"]), checks
-    assert checks["rub"] == [193, 0, 0.754, 1200], checks
+    # допуск к суммам и к списку крупнейших — из facts, а не из текста
+    checks = page.evaluate("""() => {
+      const inTop = DEALS.filter(countsAsTopPurchase);
+      return {top_read: inTop.every(d => ["read","verified"].includes(priceFact(d).basis)),
+              top_subset: inTop.every(countsAsPrice),
+              ipo: DEALS.filter(d => d.type === "IPO").some(countsAsPrice)};
+    }""")
+    assert checks["top_read"] and checks["top_subset"], checks
     assert checks["ipo"] is False
 
 
@@ -2896,7 +2870,7 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
       const d = DEALS.find(x => x.id === r.id);
       if(!d) return {id: r.id, missing: true};
       const target = d.target || d.asset_id;
-      return {id: r.id, basis: sumBasis(d), top: countsAsPrice(d) && !isSoftSum(d.sum) && String(d.sum||"").includes("₽"),
+      return {id: r.id, basis: sumBasis(d), top: countsAsPrice(d),
               multiple: target ? _dealMultipleSumRub(d, target) !== null : false, type: d.type};
     })""", gold["deals"])
     problems = []
@@ -2907,13 +2881,9 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
             problems.append((row["id"], "sumBasis", g["basis"], row["sum_basis"]))
         if g["top"] != row["in_top_purchases"]:
             problems.append((row["id"], "top", g["top"], row["in_top_purchases"]))
-        # клиент не знает реестра ИНН и банков — он не может ДОПУСТИТЬ то, чего выборка не допускает,
-        # но не обязан отвергать по причинам, которых не видит (банк, неподтверждённый ИНН)
-        if g["multiple"] and not row["in_multiples"] and row["share"] is not None and row["share"] >= 95 and row["sum_basis"] == "disclosed":
-            pass
-        elif g["multiple"] and not row["in_multiples"] and (row["share"] is None or row["share"] < 95 or row["sum_basis"] != "disclosed"):
-            problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
-        if row["in_multiples"] and not g["multiple"] and not row.get("pending"):
+        # клиент показывает мультипликатор только для сделки с подтверждёнными
+        # чтением фактами — это ПОДМНОЖЕСТВО текстового допуска выборки
+        if g["multiple"] and not row["in_multiples"]:
             problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
     assert not problems, problems
 

@@ -186,6 +186,23 @@ def _seed_multiples_entity(company_id, inn, year, revenue_rub, operating_profit_
         db.close()
 
 
+def _with_verified_facts(deal, registry):
+    """facts для синтетической сделки: как в конвейере (facts.derive), но с
+    основанием verified у доли и цены и подтверждённым периметром — так, как
+    их записал бы facts_confirm.py после двух согласных чтений. Без этого
+    эндпоинт честно не показывает мультипликатор (правило 6 сентября 2026:
+    в расчёт идут только подтверждённые факты)."""
+    import facts
+    ctx = {'registry': registry, 'lot_ids': set()}
+    f = facts.derive(deal, ctx)
+    for key in ('stake', 'price'):
+        f[key]['basis'] = 'verified'
+        f[key]['verified_by'] = 'model×2'
+    f['price']['scope'] = 'equity'
+    f['target']['perimeter'] = 'verified'
+    f['nature']['basis'] = 'verified'
+    return dict(deal, facts=facts.derive(dict(deal, facts=f), ctx))
+
 def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monkeypatch):
     """Интеграционный тест на /api/analytics/multiples: реальный HTTP-запрос,
     реальная БД, но свои сделки и свой реестр — чтобы тест не зависел от
@@ -220,6 +237,7 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
         "mult-clean-target": {"company_id": "mult-clean-target", "decision": "confirmed", "inn": "7710000301"},
         "mult-bank-target": {"company_id": "mult-bank-target", "decision": "bank", "inn": "7710000302"},
     }
+    deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
     monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
     monkeypatch.setattr(main, "get_company_profile",
@@ -229,10 +247,13 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     # Не-M&A и сделка с целью-банком отсеиваются уже текстовым фильтром
     # (find_candidates) — до всякого обращения к БФО.
     assert body["candidates_total"] == 1
+    assert body["verified_total"] == 1 and body["awaiting_reading"] == 0
     assert body["clean_total"] == 1
     assert [d["id"] for d in body["deals"]] == ["mult-clean-deal"]
     assert body["deals"][0]["multiple"] == 2.0
+    assert body["deals"][0]["verified_by"] == "model×2" and body["deals"][0]["checks"] == []
     assert body["median"] == 2.0
+    assert body["show_medians"] is False  # скрыты до утверждения методики (SHOW_MULTIPLE_MEDIANS)
     assert "methodology" in body and body["methodology"]
     # У сида этого теста нет operating_profit_rub (не передан) — второй
     # мультипликатор обязан честно остаться пустым, а не упасть или
@@ -241,6 +262,31 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     assert body["operating_profit"]["median"] is None
     assert body["operating_profit"]["deals"] == []
     assert "methodology" in body["operating_profit"] and body["operating_profit"]["methodology"]
+
+
+def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch):
+    """Сделка, проходящая все правила ПО ТЕКСТУ (100%, цена в рублях, ИНН
+    подтверждён), но без двух согласных чтений источника — в списке
+    мультипликаторов не показывается: правила предлагают, чтение решает.
+    Эндпоинт говорит, что она ждёт чтения, и почему исключена."""
+    import facts
+    _seed_multiples_entity("mult-unread-target", "7710000601", 2023, 500_000_000)
+    deal = dict(
+        id="mult-unread-deal", title="Непрочитанная сделка", type="M&A",
+        date="2024-03-01", sum="1 000 млн ₽", target="mult-unread-target",
+        buyer="mult-buyer", seller="Тестовый Продавец",
+        eco={"share": "Куплено 100% долей"}, asset=None,
+    )
+    registry = {"mult-unread-target": {"company_id": "mult-unread-target", "decision": "confirmed", "inn": "7710000601"}}
+    deal["facts"] = facts.derive(deal, {"registry": registry, "lot_ids": set()})
+    monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: {"mult-unread-deal": deal})
+    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+
+    body = client.get("/api/analytics/multiples").json()
+    assert body["candidates_total"] == 1 and body["awaiting_reading"] == 1
+    assert body["verified_total"] == 0 and body["deals"] == []
+    assert any(e["reason"] == "price_not_verified" for e in body["excluded"]), body["excluded"]
 
 
 def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(client, monkeypatch):
@@ -261,6 +307,7 @@ def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(cli
     registry = {
         "mult-op-target": {"company_id": "mult-op-target", "decision": "confirmed", "inn": "7710000501"},
     }
+    deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
     monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
     monkeypatch.setattr(main, "get_company_profile",

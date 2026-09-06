@@ -1265,3 +1265,41 @@ def test_holding_target_is_always_flagged_as_group(companies):
                if c.get("holding") and c["holding"].get("id")}
     unflagged = [cid for cid in targets if not companies.get(cid, {}).get("group")]
     assert not unflagged, "цель holding без group:true: %r" % unflagged
+
+
+def test_facts_are_current(deals):
+    """У каждой сделки есть `facts`, и они совпадают с тем, что даёт
+    facts.derive прямо сейчас: клиент ничего не выводит из прозы и читает
+    только facts, поэтому карточка без них (или с устаревшими) выпадает из
+    всех показателей молча. Чинится `python3 pipeline/facts_derive.py --write`
+    в конце прогона, который трогал карточки."""
+    import json as _json
+    import facts
+    from pipeline import fns_registry
+    base = _json.load(open("static/data/deals_promoted.json", encoding="utf-8"))
+    ctx = facts.build_ctx(base, fns_registry.REGISTRY)
+    missing = [d["id"] for d in deals if not d.get("facts")]
+    assert not missing, f"сделки без facts: {missing[:5]} — python3 pipeline/facts_derive.py --write"
+    stale = [d["id"] for d in deals if facts.derive(d, ctx) != d["facts"]]
+    assert not stale, f"facts устарели у {len(stale)} сделок: {stale[:5]} — python3 pipeline/facts_derive.py --write"
+
+
+def test_facts_bases_and_reasons_are_from_closed_lists(deals):
+    import facts
+    for d in deals:
+        f = d["facts"]
+        for key in facts.FACT_KEYS:
+            assert f[key].get("basis", "registry") in facts.BASES + ("registry",), (d["id"], key, f[key].get("basis"))
+        for m in facts.METRICS:
+            assert f["reasons"][m] in facts.REASON_LABELS, (d["id"], m, f["reasons"][m])
+            assert f["admitted"][m] == (f["reasons"][m] == "ok"), (d["id"], m)
+
+
+def test_admitted_deals_pass_number_checks(deals):
+    """Третий уровень проверки — арифметика: у сделок, допущенных к суммам
+    или мультипликаторам, нет замечаний по порядку величины, единицам,
+    валюте и доле против периметра цены."""
+    import facts
+    bad = [(d["id"], facts.number_checks(d)) for d in deals
+           if (d["facts"]["admitted"]["purchase_sums"] or d["facts"]["admitted"]["multiple_text"]) and facts.number_checks(d)]
+    assert not bad, bad[:10]

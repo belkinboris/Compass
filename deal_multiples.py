@@ -160,7 +160,7 @@ SUM_BASIS_LABELS = {
 
 def sum_basis(deal: dict[str, Any]) -> str:
     """Что означает число в `sum` — единственное место, где это решается
-    (клиентская копия — `sumBasis` в static/index.html, правила те же).
+    (клиент с 6 сентября 2026 копии не держит: читает facts.price.meaning).
 
     До 6 сентября 2026 смысл суммы нигде не хранился и не вычислялся: топ
     «Аналитики» и мультипликаторы читали `sum` как цену, если в строке не
@@ -179,6 +179,10 @@ def sum_basis(deal: dict[str, Any]) -> str:
         return 'foreign_currency'
     if _AUCTION_START.search(text):
         return 'auction_start'
+    # «2,5 тыс. ₽ (номинальная цена по решению суда)» — число есть, цены нет;
+    # нашлось третьим уровнем проверки (facts.number_checks: порядок величины).
+    if re.search(r'номинальн|заявлено как объём инвестиц|не цена', text, re.I):
+        return 'not_a_price'
     if _RANGE.search(text):
         return 'range'
     if _ESTIMATE.search(text):
@@ -627,14 +631,37 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     функции над словарями, проверяемые без фикстур базы."""
     from db.models import FinancialReport, LegalEntity, LegalEntityMatchStatus
 
+    import facts as facts_layer
+
     confirmed_ids = {cid for cid, row in registry.items() if row['decision'] == 'confirmed'}
     bank_ids = {cid for cid, row in registry.items() if row['decision'] == 'bank'}
     # Лоты приходят готовым множеством от вызывающего кода: get_company_profile
     # перечитывает весь справочник на каждый вызов (0,1 с), и перебор тысячи
     # предметов сделок через него занимал две минуты на запрос (6 сентября 2026).
     lot_ids = set(lot_ids or ())
-    candidates = find_candidates(deals, confirmed_ids, bank_ids, lot_ids)
-    excluded = exclusion_counts(deals, confirmed_ids, bank_ids, lot_ids)
+    # Кандидаты по ТЕКСТУ (правила — предложение): сколько сделок проходят
+    # правила и ждут чтения. В расчёт идут только сделки, у которых все
+    # текстовые факты ПОДТВЕРЖДЕНЫ двумя чтениями (facts.admitted.multiple_text).
+    text_candidates = find_candidates(deals, confirmed_ids, bank_ids, lot_ids)
+    candidates = []
+    facts_reasons: dict[str, int] = {}
+    verified_meta: dict[str, dict[str, Any]] = {}
+    for deal_id, d in deals.items():
+        f = d.get('facts') or {}
+        ok, reason = facts_layer.admitted(dict(d, id=deal_id), 'multiple_text') if f else (False, 'no_facts')
+        if ok:
+            price, stake = f['price'], f['stake']
+            candidates.append(MultipleCandidate(
+                deal_id=deal_id, title=d.get('title') or deal_id, target_id=target_of(d) or '',
+                year=year_of(d) or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value')))
+            verified_meta[deal_id] = {
+                'stake': stake.get('value'), 'price_scope': price.get('scope'),
+                'verified_by': price.get('verified_by'), 'price_quote': price.get('quote'),
+                'price_source': price.get('source'), 'checks': facts_layer.number_checks(d),
+            }
+        elif reason not in ('not_control_change', 'before_site_year', 'no_facts'):
+            facts_reasons[reason] = facts_reasons.get(reason, 0) + 1
+    excluded = facts_reasons
 
     rows: list[DealMultiple] = []
     op_rows: list[OpProfitMultiple] = []
@@ -680,26 +707,32 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
 
     rows.sort(key=lambda r: r.year, reverse=True)
     op_rows.sort(key=lambda r: r.year, reverse=True)
+    verified_ids = {c.deal_id for c in candidates}
     return {
-        'candidates_total': len(candidates),
+        # сколько сделок проходят правила по тексту (предложение правил) …
+        'candidates_total': len(text_candidates),
+        # … и сколько из них ждут подтверждения чтением
+        'awaiting_reading': len([c for c in text_candidates if c.deal_id not in verified_ids]),
+        'verified_total': len(candidates),
         'clean_total': len(rows),
         'median': overall_median(rows),
         'industries': industry_medians(rows, industry_of),
-        # Почему сделки не попали в мультипликатор — по причинам, с подписями
-        # для экрана; «доля не установлена» здесь самая частая, и это
-        # очередь на чтение, а не дефект расчёта.
-        'excluded': [{'reason': k, 'label': EXCLUSION_LABELS[k], 'count': v}
+        # Почему сделки не попали в мультипликатор — по причинам из слоя
+        # фактов (facts.REASON_LABELS), с подписями для экрана.
+        'excluded': [{'reason': k, 'label': facts_layer.REASON_LABELS.get(k, k), 'count': v}
                      for k, v in sorted(excluded.items(), key=lambda kv: -kv[1])],
         'no_report': len(candidates) - len(rows),
-        'deals': [{
+        'deals': [dict({
             'id': r.deal_id, 'title': r.title, 'year': r.year,
             'target_id': r.target_id, 'target_name': r.target_name,
             'sum_rub': r.sum_rub, 'revenue_rub': r.revenue_rub,
             'revenue_year': r.revenue_year, 'multiple': r.multiple,
-        } for r in rows],
+        }, **verified_meta.get(r.deal_id, {})) for r in rows],
         'methodology': (
             'Мультипликатор показывает, во сколько годовых выручек обошлась '
-            'компания покупателю. Считаем его только там, где сравнение честное: '
+            'компания покупателю. Считаем его только там, где сравнение честное и '
+            'проверенное: доля, цена и юрлицо каждой сделки подтверждены двумя '
+            'независимыми чтениями источников с цитатами; '
             'в карточке прямо сказано, что компания куплена целиком (доля 95% и '
             'выше; если доля не названа, сделка в расчёт не идёт), цену назвали '
             'сами стороны и в рублях (оценки, диапазоны, стартовые цены торгов и '
@@ -714,12 +747,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'clean_total': len(op_rows),
             'median': overall_median(op_rows),
             'industries': industry_medians(op_rows, industry_of),
-            'deals': [{
+            'deals': [dict({
                 'id': r.deal_id, 'title': r.title, 'year': r.year,
                 'target_id': r.target_id, 'target_name': r.target_name,
                 'sum_rub': r.sum_rub, 'operating_profit_rub': r.operating_profit_rub,
                 'operating_profit_year': r.operating_profit_year, 'multiple': r.multiple,
-            } for r in op_rows],
+            }, **verified_meta.get(r.deal_id, {})) for r in op_rows],
             'methodology': (
                 'В M&A обычно сравнивают цену сделки с EBITDA (прибылью до вычета '
                 'процентов, налогов и амортизации) — это точнее выручки, потому что '

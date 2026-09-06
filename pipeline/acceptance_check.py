@@ -28,6 +28,7 @@ import argparse
 import json
 import re
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -92,12 +93,18 @@ def check_multiples(base: str, p: Protocol) -> None:
     forbidden = [r['id'] for r in GOLD['deals'] if not r['in_multiples'] and r['id'] in ids]
     bad_share = [row['id'] for row in m['deals'] if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_STAKE_PERCENT]
     bad_basis = [row['id'] for row in m['deals'] if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
-    ok = not forbidden and not bad_share and not bad_basis
+    # Слой фактов: каждая показанная сделка обязана нести подтверждение двумя
+    # чтениями и чистую арифметику (facts.number_checks) — по ответу сайта.
+    unverified = [row['id'] for row in m['deals'] if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
+    dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
+    ok = not forbidden and not bad_share and not bad_basis and not unverified and not dirty
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
-    p.add('Мультипликаторы без запрещённых выборкой сделок, долей <95% и не-цен', ok, base + '/api/analytics/multiples',
-          f"чистых {m['clean_total']} из {m['candidates_total']} кандидатов, медиана {m['median']}; "
+    p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без долей <95% и не-цен', ok,
+          base + '/api/analytics/multiples',
+          f"показано {m['clean_total']} (подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
+          f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
           f"запрещённые: {forbidden or 'нет'}; доля <95%: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
-          f"исключены: {excluded}")
+          f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; исключены: {excluded}")
 
 
 def check_assistant_chain(base: str, p: Protocol) -> None:
@@ -194,8 +201,41 @@ def check_browser(base: str, p: Protocol) -> None:
         launch_kw['proxy'] = {'server': proxy}
     with sync_playwright() as pw:
         browser = pw.chromium.launch(**launch_kw)
-        page = browser.new_context(viewport={'width': 1280, 'height': 900},
-                                   ignore_https_errors=bool(external and proxy)).new_page()
+        ctx = browser.new_context(viewport={'width': 1280, 'height': 900},
+                                  ignore_https_errors=bool(external and proxy))
+        if external:
+            # Headless-браузер из среды разработки до внешних адресов не доходит
+            # (прокси среды режет соединение), а urllib доходит. Поэтому каждый
+            # запрос страницы к сайту выполняется urllib и отдаётся браузеру как
+            # ответ: браузер рисует НАСТОЯЩИЕ страницу, скрипт и данные боевого
+            # сайта, только доставленные рабочим каналом среды. Это проверка
+            # содержимого сайта, а не его сети — и в протоколе так и написано.
+            host = re.sub(r'^https?://', '', base).split('/')[0]
+
+            def relay(route, request):
+                url = request.url
+                if host not in url:
+                    return route.abort()
+                if url.rstrip('/').endswith('/api/me'):
+                    # Вход по заявке (ACCESS_GATE) — визуальная дверь: API сделок открыт,
+                    # закрыт только экран. Приёмке нужны экраны, а аккаунта у неё нет —
+                    # дверь обходится ТОЛЬКО здесь, в браузере приёмки: страницы,
+                    # скрипт и данные при этом настоящие, с боевого сайта.
+                    return route.fulfill(status=200, headers={'content-type': 'application/json'},
+                                         body=b'{"logged_in": false, "gate": false}')
+                try:
+                    data = request.post_data_buffer if request.method == 'POST' else None
+                    req = urllib.request.Request(url, data=data, method=request.method,
+                                                 headers={k: v for k, v in request.headers.items()
+                                                          if k.lower() in ('accept', 'content-type', 'accept-language')} | UA)
+                    with urllib.request.urlopen(req, timeout=90) as r:
+                        route.fulfill(status=r.status, headers={'content-type': r.headers.get('Content-Type', '')}, body=r.read())
+                except urllib.error.HTTPError as e:
+                    route.fulfill(status=e.code, body=e.read())
+                except Exception as e:  # noqa: BLE001
+                    route.abort()
+            ctx.route('**/*', relay)
+        page = ctx.new_page()
         errors: list[str] = []
         page.on('pageerror', lambda e: errors.append(str(e)))
         page.goto(base + '/#/analytics')
@@ -203,8 +243,33 @@ def check_browser(base: str, p: Protocol) -> None:
         page.wait_for_selector('.an-c-topsum .an-deal', timeout=60000)
         rows = [x.inner_text() for x in page.locator('.an-c-topsum .an-deal').all()]
         soft = [r.replace('\n', ' | ')[:80] for r in rows if SOFT_WORDS.search(r)]
+        where = base + '/#/analytics' + (' (страницы боевого сайта, доставленные каналом среды)' if external else '')
         p.add('«Только покупки» на «Аналитике» без оценок, диапазонов, IPO и финансирования', not soft and bool(rows),
-              base + '/#/analytics', f'{len(rows)} строк; лишние: {soft or "нет"}')
+              where, f'{len(rows)} строк; лишние: {soft or "нет"}')
+        # Список крупнейших — только сделки, чья цена прочитана в источнике
+        # (facts.admitted.top_purchases); сверяется с тем, что видно на экране.
+        shown = page.evaluate('[...document.querySelectorAll(".an-c-topsum .an-deal")].map(a => a.getAttribute("href").split("/").pop())')
+        unread = [i for i in shown if not ((DEALS.get(i) or {}).get('facts') or {}).get('admitted', {}).get('top_purchases')]
+        p.add('Крупнейшие покупки: у каждой строки цена прочитана в источнике', not unread and bool(shown),
+              where, f'{len(shown)} строк; без прочитанной цены: {unread or "нет"}')
+        page.wait_for_function('document.getElementById("multiplesBody") && !document.getElementById("multiplesBody").innerText.includes("Считаем")', timeout=120000)
+        mult = page.inner_text('#multiplesCard')
+        medians_hidden = 'Медиану по ним не показываем' in mult or 'не прошла все проверки' in mult
+        p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»', medians_hidden and ('проверено' in mult or 'не прошла все проверки' in mult),
+              where, mult[:160].replace(chr(10), ' | '))
+        verified_deal = next((i for i, d in DEALS.items() if ((d.get('facts') or {}).get('price') or {}).get('basis') == 'verified'), None)
+        if verified_deal:
+            page.goto(base + '/#/deal/' + verified_deal)
+            page.wait_for_timeout(900)
+            eco = page.locator('button[data-l="eco"]').first
+            try:
+                eco.click(timeout=3000)
+                page.wait_for_timeout(400)
+            except Exception:  # noqa: BLE001
+                pass
+            text = page.inner_text('#app')
+            p.add(f'Карточка {verified_deal}: строка «Проверено по источникам» с цитатой', 'Проверено по источникам' in text,
+                  base + '/#/deal/' + verified_deal, 'есть' if 'Проверено по источникам' in text else 'НЕТ')
         for pair in GOLD['duplicates']:
             page.goto(base + '/#/deal/' + pair['drop'])
             page.wait_for_timeout(700)

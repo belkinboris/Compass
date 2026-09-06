@@ -1084,6 +1084,12 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
             milestone_event['snapshot'] = build_snapshot(milestone_card, data['companies'])
         milestone_event['headline'] = mheadline.strip()
 
+    # Слой фактов (facts.py): правки полей меняют предложения правил и
+    # помечают прочитанные факты stale — считается здесь же, чтобы карточка
+    # не уехала в базу с устаревшими facts (test_facts_are_current).
+    import facts as facts_layer
+    from pipeline import fns_registry as _fns_registry
+    facts_layer.derive_all(data, facts_layer.build_ctx(data, _fns_registry.REGISTRY))
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
