@@ -3396,3 +3396,25 @@ def test_owner_payload_names_the_bank_of_russia_by_inn():
                            inn="7700000001", ogrn=None, country=None, share_percent=None,
                            nominal_value_rub=None)
     assert main._owner_payload(other)["name"] == "ООО «Ромашка»"
+
+
+def test_deal_pdf_strips_the_enrichment_method_label_from_advisor_notes():
+    """Аудит, раунд 2 (6 сентября 2026): в PDF Яндекса у Morgan Lewis
+    осталось «Источник: обогащение/веб-поиск» — на карточке сайта метку
+    снимают, а в выгрузку она доезжала. Настоящий адрес из «Источник: …»
+    остаётся ссылкой."""
+    import deal_export
+
+    assert deal_export._clean_note("Представляла продавца. Источник: обогащение/веб-поиск") == ("Представляла продавца.", None)
+    assert deal_export._clean_note("Сопровождала сделку. Источник: https://example.ru/news/1") == \
+        ("Сопровождала сделку.", "https://example.ru/news/1")
+    assert deal_export._clean_note("") == ("", None)
+    deal = {"id": "pdf-adv", "title": "Тестовая сделка", "date": "2026-09-06", "status": "Закрыта",
+            "type": "M&A", "sum": "1 млрд ₽", "buyer_name": "Покупатель", "seller": "Продавец",
+            "eco": {"finadv": "Банк — организатор"},
+            "law": {"adv": [["Юридический консультант", "Morgan Lewis", "Представляла продавца. Источник: обогащение/веб-поиск"]]},
+            "src": []}
+    pdf = deal_export.render_deal_pdf(deal)
+    assert pdf.startswith(b"%PDF")
+    # текст в PDF лежит в потоках, но метка метода целиком в них попадать не должна
+    assert "обогащение/веб-поиск".encode("utf-16-be") not in pdf and b"web-poisk" not in pdf

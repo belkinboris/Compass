@@ -312,3 +312,26 @@ def test_deal_line_carries_the_primary_source_link():
     line = ar._line(doc)
     assert "](#/deal/g46c6e23f)" in line
     assert "](https://www.interfax.ru/business/1022482)" in line, line
+
+
+def test_specific_search_answers_with_the_deal_stages_and_source():
+    """Аудит, раунд 2: «Когда Яндекс приобрёл Boxberry?» — на карточке два
+    этапа (объявлено 16 апреля 2025, закрыта 24 апреля 2025), а ассистент
+    отвечал «дата анонса не указана». Точный ответ обязан назвать этапы и
+    первоисточник."""
+    ret = ar.retrieve("Когда Яндекс приобрёл Boxberry?")
+    assert ret.docs and ret.docs[0].id == "g46c6e23f", [d.id for d in ret.docs[:3]]
+    assert "16 апреля 2025" in ret.answer and "24 апреля 2025" in ret.answer, ret.answer
+    assert "interfax.ru" in ret.answer
+
+
+def test_follow_up_without_an_entity_reuses_the_previous_question():
+    """Аудит, раунд 2: на «перепроверь» ассистент отвечал «в Компасе нет
+    сделки Яндекс — Boxberry» — поиск шёл только по текущей фразе."""
+    alone = ar.retrieve("Перепроверь, пожалуйста")
+    assert not alone.docs
+    ret = ar.retrieve("Перепроверь, пожалуйста", previous="Когда Яндекс приобрёл Boxberry?")
+    assert ret.docs and ret.docs[0].id == "g46c6e23f", [d.id for d in ret.docs[:3]]
+    assert "16 апреля 2025" in ret.answer
+    ret2 = ar.retrieve("А дата объявления?", previous="Когда Яндекс приобрёл Boxberry?")
+    assert ret2.docs and ret2.docs[0].id == "g46c6e23f"

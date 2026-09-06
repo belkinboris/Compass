@@ -729,13 +729,23 @@ def _deals_payload(ret) -> list[dict]:
     return [{"id": d.id, "title": d.title} for d in ret.docs[:12]]
 
 
-def _retrieve(question: str, context_type: str | None, context_id: str | None):
+def _previous_user_question(history_rows: list[tuple[str, str]]) -> str | None:
+    """Последняя реплика посетителя до текущей — для уточняющих вопросов
+    («перепроверь», «а дата объявления?»), которые сами никого не называют."""
+    for role, body in reversed(history_rows):
+        if role == "user" and body and body.strip():
+            return _CONTEXT_PREFIX_RE.sub("", body).strip()
+    return None
+
+
+def _retrieve(question: str, context_type: str | None, context_id: str | None,
+              previous: str | None = None):
     """Поиск по базе — на сервере и ДО модели: он даёт проверенные счётчики и
     ссылки, а модели остаётся написать по ним живой текст. Сбой поиска не
     должен ронять ассистента целиком."""
     try:
         idx = assistant_retrieval.get_index()
-        return idx, assistant_retrieval.retrieve(question, context_type, context_id, idx)
+        return idx, assistant_retrieval.retrieve(question, context_type, context_id, idx, previous=previous)
     except Exception as e:  # noqa: BLE001
         logger.error("assistant retrieval failed: %s", e)
         return None, assistant_retrieval.Retrieval("search", None, [], None)
@@ -776,14 +786,8 @@ def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
 def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     started = time.monotonic()
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
-    idx, ret = _retrieve(question, req.context_type, req.context_id)
-
-    if not _yandex_ready():
-        # Без ключей к модели точный ответ по базе всё равно отдаём — это лучше заглушки.
-        if ret.answer:
-            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
-        return JSONResponse({"fallback": True})
-
+    # История — ДО поиска по базе: уточняющий вопрос ищется вместе с
+    # предыдущим (см. assistant_retrieval.retrieve, `previous`).
     user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
     history_rows: list[tuple[str, str]] = []
     if user and req.thread_id:
@@ -797,6 +801,13 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     elif req.history:
         history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
                         for h in req.history if isinstance(h, dict) and h.get("body")]
+    idx, ret = _retrieve(question, req.context_type, req.context_id, _previous_user_question(history_rows))
+
+    if not _yandex_ready():
+        # Без ключей к модели точный ответ по базе всё равно отдаём — это лучше заглушки.
+        if ret.answer:
+            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
+        return JSONResponse({"fallback": True})
 
     prep = _prepare_ask(question, ret, req.mode, _history_lines(history_rows))
     search_block, results = prep.search_block, prep.results
@@ -873,8 +884,11 @@ def assistant_lookup(req: AskRequest):
     показывает её сразу (доли секунды), пока модель дописывает живой текст:
     30–40 секунд молчания были главной жалобой на ассистента."""
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
+                    for h in (req.history or []) if isinstance(h, dict) and h.get("body")]
     try:
-        ret = assistant_retrieval.retrieve(question, req.context_type, req.context_id)
+        ret = assistant_retrieval.retrieve(question, req.context_type, req.context_id,
+                                           previous=_previous_user_question(history_rows))
     except Exception as e:  # noqa: BLE001
         logger.error("assistant lookup failed: %s", e)
         return {"answer": None, "deals": [], "intent": "search"}

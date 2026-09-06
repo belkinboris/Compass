@@ -36,21 +36,6 @@ FIXES = [
          quote='Выручка составила 38,6 млрд руб. (-12% г/г).',
          why='источник финансовых показателей за 2025 год'),
 
-    dict(id='g57de980b', field='src', old=None,
-         new=['RB.RU', 'https://rb.ru/news/gazprombank-motorika-deal/'],
-         quote='По данным ЕГРЮЛ, 27 декабря в число учредителей МК ООО '
-               '«Хомо Ауктус» (юрлицо «Моторика») вошло ООО «Орбита».',
-         why='источник фактов о новом совладельце и M&A-сделке на '
-             'средства раунда'),
-    dict(id='g57de980b', field='src', old=None,
-         new=['Monavista',
-              'https://monavista.ru/4/4880150-motorika-podtverdila-'
-              'plany-vyhoda-na-ipo-v-2026-godu-na-konferencii-'
-              'smartlab.html'],
-         quote='Финансовый директор «Моторики» Сергей Куценко сообщил '
-               'в кулуарах конференции «Смартлаб» в Санкт-Петербурге, '
-               'что компания готовится к IPO в осеннее окно',
-         why='источник статуса планов IPO на конец 2026 года'),
 
     dict(id='g0be691b7', field='src', old=None,
          new=['vc.ru', 'https://vc.ru/invest/1731654-yandex-berizaryad'],

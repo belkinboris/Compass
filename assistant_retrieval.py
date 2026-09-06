@@ -940,6 +940,16 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
         any(same_word(t, s) for s in d.strong) or any(same_word(t, s) for s in d.weak) for t in extra)]
     if picked and len(picked) < n:
         k = len(picked)
+        if k == 1:
+            # Одна конкретная сделка компании — сводка с этапами и источником,
+            # а не строка списка: «Когда Яндекс приобрёл Boxberry?» спрашивает
+            # про даты, и они лежат в этапах (аудит, раунд 2).
+            single = _answer_deal(picked[0])
+            tail = (f"Всего у компании [{name}](#/companies/{cid}) в «Компасе» {n} "
+                    f"{_plural(n, 'сделка', 'сделки', 'сделок')}"
+                    + (f" за {intent.year} год" if intent.year else "") + ".")
+            rest = [d for d in docs if d not in picked]
+            return Retrieval("company", single.answer + "\n" + tail, (picked + rest)[:MAX_DEALS_FOR_MODEL], name)
         lines = [f"По вопросу {'подходит' if k == 1 else 'подходят'} {k} "
                  f"{_plural(k, 'сделка', 'сделки', 'сделок')} компании [{name}](#/companies/{cid}):"]
         lines += [_line(d) for d in picked[:MAX_LISTED]]
@@ -1099,17 +1109,42 @@ def _answer_search(intent: Intent, idx: Index) -> Retrieval:
         docs = by_year or docs
     if not docs:
         return Retrieval("search", None, [], None)
+    # Попали во что-то конкретное («Когда Яндекс приобрёл Boxberry?») —
+    # отвечаем сводкой этой сделки с этапами и источником, остальное списком.
+    if _search_is_specific(intent, docs, idx):
+        return _answer_deal(docs[0], docs[1:])
     lines = ["Похожие по словам вопроса сделки из базы:"]
     lines += [_line(d) for d in docs[:MAX_LISTED]]
     return Retrieval("search", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], None)
 
 
-def _answer_deal(doc: Doc) -> Retrieval:
-    """Сводка одной сделки — для вопроса, заданного с её страницы."""
+def _events(doc: Doc) -> list[str]:
+    """Этапы сделки с датами («16 апреля 2025 — объявлено о сделке»). Аудит,
+    раунд 2 (6 сентября 2026): ассистент отвечал «дата анонса не указана»,
+    хотя на карточке Boxberry этап 16 апреля стоял — этапы просто не
+    попадали ни в сводку, ни в карточку для модели."""
+    out = []
+    for ev in doc.raw.get("events") or []:
+        if not isinstance(ev, dict):
+            continue
+        date, title = str(ev.get("date") or ""), str(ev.get("title") or ev.get("kind") or "").strip()
+        if not re.fullmatch(r"\d{4}(-\d{2}-\d{2})?", date) or not title:
+            continue
+        out.append(f"{_fmt_date(date)} — {title[0].lower() + title[1:]}")
+    return out
+
+
+def _answer_deal(doc: Doc, more: list[Doc] | None = None) -> Retrieval:
+    """Сводка одной сделки — для вопроса с её страницы или для поиска по
+    словам, который попал в конкретную сделку (тогда `more` — остальные
+    найденные, коротким списком следом)."""
     bits = [_fmt_date(doc.date)]
     if doc.status:
         bits.append(doc.status.lower())
-    lines = [f"Сделка {_link(doc)} — {', '.join(bits)}."]
+    lines = [f"Сделка {_link(doc)} — {', '.join(bits)}.{_source_link(doc)}"]
+    events = _events(doc)
+    if events:
+        lines.append("Этапы: " + "; ".join(events) + ".")
     parties = []
     if doc.buyer:
         parties.append(f"покупатель — {doc.buyer}")
@@ -1125,7 +1160,14 @@ def _answer_deal(doc: Doc) -> Retrieval:
                                                  for r, n in doc.advisor_roles[:4]) + ".")
     else:
         lines.append("Консультанты в открытых источниках не назывались.")
-    return Retrieval("deal", "\n".join(lines), [doc], doc.title)
+    docs = [doc]
+    if more:
+        rest = [d for d in more if d.id != doc.id]
+        if rest:
+            lines.append("Похожие по словам вопроса сделки:")
+            lines += [_line(d) for d in rest[:MAX_LISTED]]
+            docs += rest[:MAX_DEALS_FOR_MODEL - 1]
+    return Retrieval("deal", "\n".join(lines), docs, doc.title)
 
 
 def _answer_entity(context_type: str | None, context_id: str | None, intent: Intent, idx: Index) -> Retrieval | None:
@@ -1183,9 +1225,27 @@ def _scoped(context_type: str | None, context_id: str | None, idx: Index) -> lis
 
 
 def retrieve(question: str, context_type: str | None = None, context_id: str | None = None,
-             idx: Index | None = None) -> Retrieval:
+             idx: Index | None = None, previous: str | None = None) -> Retrieval:
+    """`previous` — предыдущая реплика посетителя в том же диалоге. Уточняющий
+    вопрос («перепроверь», «а дата объявления?») сам по себе никого не
+    называет, и поиск по нему пуст — тогда он читается вместе с предыдущим
+    вопросом. Аудит, раунд 2 (6 сентября 2026): на «перепроверь» ассистент
+    отвечал «в Компасе нет сделки Яндекс — Boxberry», сославшись на неё
+    репликой раньше, — поиск шёл только по текущей фразе."""
     idx = idx or get_index()
     intent = route(question, idx)
+    if previous and intent.kind in ("empty", "search"):
+        # Слабый вопрос: никого не называет, а поиск по его словам не попал ни
+        # во что конкретное («а дата объявления?» находит по слову «дата»
+        # случайные сделки — это не попадание).
+        weak = intent.kind == "empty" or not _search_is_specific(intent, search(intent.terms, idx), idx)
+        if weak:
+            # Сначала предыдущий вопрос сам по себе: слова уточнения («дата»,
+            # «объявления») только размывают отбор внутри найденной компании.
+            for text in (previous, f"{previous} {question}"):
+                again = retrieve(text, context_type, context_id, idx)
+                if again.answer or again.docs:
+                    return again
     handlers = {
         "advisor": _answer_advisor, "company": _answer_company, "industry": _answer_industry,
         "largest": _answer_largest, "count": _answer_count, "theme": _answer_theme,
@@ -1237,6 +1297,9 @@ def compact(doc: Doc, facts_chars: int = 320) -> dict[str, Any]:
         out["subject"] = doc.target or doc.asset
     if doc.advisor_roles:
         out["advisors"] = [f"{r}: {n}" if r else n for r, n in doc.advisor_roles][:4]
+    events = _events(doc)
+    if events:
+        out["events"] = events[:5]
     facts = []
     for key in ("rationale", "share", "val", "context"):
         if has_fact(eco.get(key)):

@@ -2794,19 +2794,22 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
     page.wait_for_selector(".an-c-topsum .an-deal")
     rows = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal").all()]
     assert rows
-    for row in rows:
+    sums = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal .an-deal-s").all()]
+    assert len(sums) == len(rows)
+    for row, total in zip(rows, sums):
         low = row.lower()
-        for bad in ("неофициально", "допэмисси", "около", "по оценке", "ipo"):
-            # \b слева, а не сплошной `in`: «около» — обычная приставка в
-            # фамилиях («у Артема Соколова»), и подстрочная проверка находит
-            # её внутри «с-около-ва», хотя к сумме сделки это не относится.
-            assert not re.search(r"\b" + re.escape(bad), low), row
-        assert "₽" in row, row  # валютная сумма считается только через рублёвый эквивалент в скобках
+        # «около» ищется по границе слова: в «у Артема Соколова» оно тоже есть
+        for bad in (r"неофициально", r"допэмисси", r"(?:^|[^а-яё])около", r"по оценке", r"(?:^|[^a-zа-яё])ipo(?![a-zа-яё])",
+                    r"под залог", r"структурн[а-яё]* сделк"):
+            assert not re.search(bad, low), row
+        # диапазон «30–40 млрд ₽» — оценка, а не цена, названная сторонами
+        assert not re.search(r"\d\s*[–—-]\s*\d", total), row
+        assert "₽" in total, row  # валютная сумма считается только через рублёвый эквивалент в скобках
     # общие функции суммы существуют и согласованы с правилами
     checks = page.evaluate("""() => ({
       soft: ["300 млрд ₽ (неофициально)", "около 500 млрд ₽ (допэмиссия ВТБ)", "~5 млрд ₽", "до 6 млрд ₽",
-             "~100 млн ₽ (или EV ~1 млрд ₽)", "400 млн ₽ (первый этап)"].map(isSoftSum),
-      firm: ["340 млрд ₽", "754 млн ₽ (плюс условное возмещение)", "15–20 млрд ₽"].map(isSoftSum),
+             "~100 млн ₽ (или EV ~1 млрд ₽)", "400 млн ₽ (первый этап)", "15–20 млрд ₽", "30-40 млрд ₽"].map(isSoftSum),
+      firm: ["340 млрд ₽", "754 млн ₽ (плюс условное возмещение)", "41 500 млн ₽"].map(isSoftSum),
       rub: [sumBillionsRub("не более $2 млрд (193 млрд ₽)"), sumBillionsRub("$3,2 млрд (до вычета долга)"),
             sumBillionsRub("754 млн ₽"), sumBillionsRub("1,2 трлн ₽")],
       ipo: countsAsPrice({type: "IPO", status: "Закрыта"}),

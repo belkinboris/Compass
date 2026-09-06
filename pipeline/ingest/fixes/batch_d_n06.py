@@ -99,11 +99,6 @@ FIXES = [
          why='условие сохранения занятости сотрудников не было '
              'отражено.'),
 
-    dict(id='ga3afca6c', field='src', old=None,
-         new=['VC.ru', 'https://vc.ru/services/766493-alfa-bank-zaplaniroval-kupit-dolyu-v-biletnom-operatore-kassir-ru'],
-         quote='«Альфа-банк» запланировал купить долю в билетном операторе '
-               '«Кассир.ру»',
-         why='привязанный РБК недоступен для скачивания.'),
 
     dict(id='ge309729f', field='src', old=None,
          new=['Коммерсантъ', 'https://www.kommersant.ru/doc/6137760'],

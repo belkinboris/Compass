@@ -224,27 +224,6 @@ FIXES = [
                   'практически по начальной цене в 1 млрд 353 млн руб.',
          why='партия 5 агентов, раунд 4, 15.08.2026, источник v-tagile.ru: перенесено '
                   'дословно'),
-    dict(id='g246f4b6b', field='law.struct', old='—',
-         new='Из этой суммы 7,7 млрд руб. пойдут на обслуживание долга российского бизнеса, а остальное — на оплату доли Danone в компании.',
-         quote='Of this amount, 7.7 billion rubles will go toward servicing the debt of '
-                  'the Russian business and the rest will go toward paying for Danone\'s stake '
-                  'in the company.',
-         why='партия 5 агентов, раунд 4, 15.08.2026, источник interfax.com: перенесено '
-                  'дословно'),
-    dict(id='g246f4b6b', field='law.terms', old='—',
-         new='Danone согласилась оказывать поддержку до конца июля 2025 года, поскольку H&N продолжает локализацию производства ряда ингредиентов, чтобы сохранить «высокое качество продукции, к которому привыкли российские потребители».',
-         quote='Danone has agreed to provide support until the end of July 2025, since H&N '
-                  'is continuing to localize production of certain ingredients in order to '
-                  'maintain the \'high quality of products that Russian consumers are used '
-                  'to.\'',
-         why='партия 5 агентов, раунд 4, 15.08.2026, источник interfax.com: перенесено '
-                  'дословно'),
-    dict(id='g246f4b6b', field='law.appr', old='Публично не сообщалось',
-         new='Сделка подлежит одобрению Министерства сельского хозяйства России, а затем — правительственной комиссии, которая рассматривает выход западных компаний.',
-         quote='The deal is subject to approval by Russia\'s Agriculture Ministry, followed '
-                  'by a government commission tasked with reviewing Western companies\' exits.',
-         why='партия 5 агентов, раунд 4, 15.08.2026, источник themoscowtimes.com: '
-                  'перенесено дословно'),
     # g246f4b6b/eco.context дополнен 30.08.2026 (месячная очередь,
     # пятьдесят второй заход) фактами о переименовании в «Логика
     # молока», перестройке владения (Алисултанов) и финансовых итогах

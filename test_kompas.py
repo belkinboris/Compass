@@ -552,3 +552,24 @@ def test_bench_measures_each_model_on_the_same_prompt(client, monkeypatch):
     assert r2.status_code == 200
     row = r2.json()["results"][0]
     assert row["answer"] == "Ответ модели deepseek-v4-flash/latest" and row["answer_head"] == row["answer"][:240]
+
+
+def test_lookup_follow_up_keeps_the_deal_from_the_previous_question():
+    """Аудит, раунд 2 (6 сентября 2026): на «перепроверь» ассистент отвечал
+    «в Компасе нет сделки Яндекс — Boxberry», сославшись на неё репликой
+    раньше. Быстрый ответ по базе получает историю и ищет уточнение вместе
+    с предыдущим вопросом."""
+    from fastapi.testclient import TestClient
+    import main
+    client = TestClient(main.app)
+    history = [{"role": "user", "body": "Когда Яндекс приобрёл Boxberry?"},
+               {"role": "assistant", "body": "Сделка закрыта 24 апреля 2025."}]
+    r = client.post("/api/assistant/lookup", json={"question": "Перепроверь, пожалуйста", "context": "",
+                                                    "context_type": "general", "context_id": None,
+                                                    "history": history})
+    body = r.json()
+    assert body["deals"] and body["deals"][0]["id"] == "g46c6e23f", body
+    assert "16 апреля 2025" in (body["answer"] or ""), body["answer"]
+    alone = client.post("/api/assistant/lookup", json={"question": "Перепроверь, пожалуйста", "context": "",
+                                                        "context_type": "general", "context_id": None}).json()
+    assert not alone["deals"]

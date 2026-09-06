@@ -29,6 +29,9 @@ def main(write=False):
     with open(PATH, encoding='utf-8') as f:
         data = json.load(f)
     ids = {c['id'] for c in data['deals']}
+    # 6 сентября 2026: карточка оказалась дублем уже стоявшей в базе ge386fb20 и слита в неё
+    # (pipeline/merge_duplicate_deals_batch.py) — повторный запуск завёл бы дубль заново.
+    assert NEW_ID not in data.get('merged', {}), 'карточка слита в %s, скрипт больше не запускать' % data['merged'].get(NEW_ID)
     assert NEW_ID not in ids
     assert data['companies'].get('gd19e26bf', {}).get('name') == 'Магнит'
     assert data['companies'].get('gf4207471', {}).get('name'), 'нет профиля Колос Кубани'

@@ -2,6 +2,7 @@
 """Брендированный PDF карточки сделки для платного тарифа."""
 from __future__ import annotations
 
+import re
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -50,6 +51,30 @@ def _text(value: Any) -> str:
     if value is None or value == "":
         return "Не раскрыто"
     return str(value)
+
+
+_PLACEHOLDER = re.compile(r"^\s*(—|-|не раскрыт\w*|публично не сообщалось|не привлекал\w*|нет данных)\s*\.?\s*$", re.I)
+
+
+def _has_fact(value: Any) -> bool:
+    return bool(value) and isinstance(value, str) and not _PLACEHOLDER.match(value)
+
+
+def _clean_note(note: Any) -> tuple[str, str | None]:
+    """Заметка о консультанте без служебной метки метода. Приток писал в неё
+    «Источник: обогащение/веб-поиск» — это след обработки, не источник; на
+    карточке сайта его снимает advNoteHtml, а в PDF он доезжал до читателя
+    (аудит, раунд 2, 6 сентября 2026). Настоящий адрес из «Источник: …»
+    возвращается отдельно — ссылкой, а не текстом внутри заметки."""
+    text = str(note or "").strip()
+    m = re.search(r"\s*Источник:\s*(.*)$", text, re.I | re.S)
+    url = None
+    if m:
+        tail = m.group(1).strip()
+        found = re.search(r"https?://\S+", tail)
+        url = found.group(0).rstrip(".,;)") if found else None
+        text = text[:m.start()].strip()
+    return text, url
 
 
 def render_deal_pdf(deal: dict[str, Any]) -> bytes:
@@ -114,12 +139,22 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         ("Условия", law.get("terms")),
     ])
     advisors = law.get("adv") if isinstance(law.get("adv"), list) else []
-    if advisors:
+    finadv = eco.get("finadv")
+    if advisors or _has_fact(finadv):
         story.append(Paragraph("КОМАНДА СДЕЛКИ", h2))
         for item in advisors:
             if isinstance(item, list):
-                story.append(Paragraph(" — ".join(escape(_text(x)) for x in item if x), body))
+                role, name = _text(item[0] if len(item) > 0 else ""), _text(item[1] if len(item) > 1 else "")
+                note, url = _clean_note(item[2] if len(item) > 2 else "")
+                parts = [escape(x) for x in (role, name, note) if x and x != "Не раскрыто"]
+                line = " — ".join(parts)
+                if url:
+                    line += f' (<link href="{escape(url)}" color="#1D5A44">источник</link>)'
+                story.append(Paragraph(line, body))
                 story.append(Spacer(1, 2*mm))
+        if _has_fact(finadv):
+            story.append(Paragraph("Финансовые консультанты — " + escape(str(finadv)), body))
+            story.append(Spacer(1, 2*mm))
 
     sources = deal.get("src") if isinstance(deal.get("src"), list) else []
     if sources:
