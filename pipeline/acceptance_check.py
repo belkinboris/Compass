@@ -268,6 +268,14 @@ def check_browser(base: str, p: Protocol) -> None:
         weak = [i for i in shown if (((DEALS.get(i) or {}).get('facts') or {}).get('price') or {}).get('attribution') not in ('parties', 'filing', 'registry')]
         p.add('Крупнейшие покупки: число названо стороной, документом или реестром', not weak and bool(shown),
               where, f'иначе: {weak or "нет"}')
+        # …событие цены разрешено, а состав цены назван читателем (четвёртый
+        # разбор): «событие спорное» и «подтверждено» одновременно — противоречие;
+        # «неизвестно» у состава — честный ответ, не пропуск.
+        pf = lambda i: (((DEALS.get(i) or {}).get('facts') or {}).get('price') or {})
+        disputed_ev = [i for i in shown if pf(i).get('event') == 'disputed']
+        no_terms = [i for i in shown if pf(i).get('terms') is None]
+        p.add('Крупнейшие покупки: событие цены разрешено и состав цены назван', not disputed_ev and not no_terms and bool(shown),
+              where, f'спорное событие: {disputed_ev or "нет"}; состав не назван: {no_terms or "нет"}')
         page.wait_for_function('document.getElementById("multiplesBody") && !document.getElementById("multiplesBody").innerText.includes("Считаем")', timeout=120000)
         mult = page.inner_text('#multiplesCard')
         medians_hidden = 'Медиану по ним не показываем' in mult or 'не прошла все проверки' in mult
