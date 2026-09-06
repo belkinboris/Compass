@@ -1928,8 +1928,9 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                 _remember_setting(db, "telegram_topic:%s" % _topic_slug(name), str(thread_id))
                 done = "Запомнил: это тема «%s». Сюда теперь пойдут %s." % (name, CONSOLE_TOPIC_PURPOSE[kind])
             else:
-                done = ("У общей ленты нет номера темы — сюда и так идёт всё, для чего "
-                        "не назначена своя тема. Дайте /topic внутри самой темы.")
+                done = ("Это главная тема группы — своего номера у неё нет, и закреплять "
+                        "её не нужно: всё, для чего не назначена отдельная тема, приходит "
+                        "сюда само.")
             if msg.get("message_id"):
                 notification_service.tg_api(
                     "editMessageText", chat_id=(msg.get("chat") or {}).get("id"),
@@ -2527,10 +2528,21 @@ def _offer_topic_binding(message: dict, chat_id, sender_id) -> None:
         return
     thread_id = message.get("message_thread_id")
     if not thread_id:
+        # Главная тема форума (в Telegram она всегда со значком #, её можно
+        # переименовать — у владельца это «Общая информация») номера НЕ имеет:
+        # сообщение без темы приходит именно в неё. Прежний ответ говорил
+        # «это общая лента группы», и человек, стоя ВНУТРИ темы, читал его
+        # как «вы не в теме» и давал команду снова (6 сентября 2026, дважды).
+        forum = bool((message.get("chat") or {}).get("is_forum"))
         notification_service.tg_api(
             "sendMessage", chat_id=str(chat_id), disable_web_page_preview=True,
-            text=("Это общая лента группы, у неё нет номера темы: сюда и так идёт всё, "
-                  "для чего не назначена своя тема. Откройте нужную тему и дайте /topic там."))
+            text=("Это главная тема группы — у неё в Telegram нет своего номера, и "
+                  "закреплять её не нужно: всё, для чего не назначена отдельная тема, "
+                  "приходит сюда само. Заметки и служебные сообщения уже идут именно "
+                  "в неё."
+                  if forum else
+                  "Это обычная группа без тем: сюда и так идёт всё. Темы включаются "
+                  "в настройках группы, после этого дайте /topic внутри нужной темы."))
         return
     keyboard = {"inline_keyboard": [[{"text": name, "callback_data": "topic:%s" % kind}]
                                     for kind, name in CONSOLE_TOPIC_NAMES.items()]}

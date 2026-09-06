@@ -3215,12 +3215,13 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     assert "77" not in topics.values()
     assert [m for m, _kw in calls] == ["answerCallbackQuery"]
 
-    # /topic в общей ленте (без номера темы) -> объяснение, без кнопок.
+    # /topic в главной теме форума (номера у неё нет) -> объяснение, без
+    # кнопок: закреплять её не нужно, сообщения без темы приходят туда сами.
     calls.clear()
     client.post("/api/telegram/webhook/тайна", json={"message": {
-        "message_id": 21, "text": "/topic", "chat": chat, "from": {"id": 111}}})
+        "message_id": 21, "text": "/topic", "chat": dict(chat, is_forum=True), "from": {"id": 111}}})
     assert len(calls) == 1 and "reply_markup" not in calls[0][1]
-    assert "общая лента" in calls[0][1]["text"] and "message_thread_id" not in calls[0][1]
+    assert "главная тема" in calls[0][1]["text"] and "message_thread_id" not in calls[0][1]
 
 
 def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):
@@ -3262,6 +3263,31 @@ def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch)
     assert client.get("/api/moderation/group", params={"token": "тайна"}).json()["chat_id"] \
         == "-1005550001111"
     assert client.get("/api/moderation/group", params={"token": "не тот"}).status_code == 404
+
+
+def test_topic_command_in_the_general_topic_says_nothing_needs_binding(client, monkeypatch):
+    """Скриншот владельца 6 сентября 2026: он стоит В теме «Общая информация»
+    (главная тема форума, значок #), даёт /topic — и слышит «это общая лента
+    группы», то есть «вы не в теме». Так и есть по данным Telegram: у главной
+    темы номера нет, сообщение без темы приходит именно в неё. Значит, менять
+    надо не механику, а ответ: закреплять её не нужно, всё уже правильно."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda m, **kw: sent.append((m, kw)))
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "message_id": 7, "text": "/topic", "from": {"id": 111},
+        "chat": {"id": -1004389405776, "type": "supergroup", "is_forum": True}}})
+    assert sent, "бот обязан ответить"
+    text = sent[-1][1]["text"]
+    assert "главная тема" in text and "не нужно" in text, text
+    assert "не в теме" not in text and "общая лента" not in text
+    # А внутри обычной темы — по-прежнему кнопки с тремя названиями
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "message_id": 8, "text": "/topic", "from": {"id": 111}, "message_thread_id": 5,
+        "chat": {"id": -1004389405776, "type": "supergroup", "is_forum": True}}})
+    assert sent and sent[-1][1].get("message_thread_id") == 5
+    assert "inline_keyboard" in str(sent[-1][1].get("reply_markup"))
 
 
 def test_review_group_id_is_learned_when_the_bot_is_added_to_the_group(client, monkeypatch):
