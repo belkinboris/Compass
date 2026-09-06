@@ -291,8 +291,19 @@ def check_browser(base: str, p: Protocol) -> None:
               where, f'спорное событие: {disputed_ev or "нет"}; состав не назван: {no_terms or "нет"}')
         page.wait_for_function('document.getElementById("multiplesBody") && !document.getElementById("multiplesBody").innerText.includes("Считаем")', timeout=120000)
         mult = page.inner_text('#multiplesCard')
-        medians_hidden = 'Медиану по ним не показываем' in mult or 'не прошла все проверки' in mult
-        p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»', medians_hidden and ('проверено' in mult or 'не прошла все проверки' in mult),
+        # Проверяем НАМЕРЕНИЕ, а не формулировку: медиана не показана и сказано,
+        # почему; строки помечены как проверенные по источникам. Прежняя версия
+        # искала фразу дословно («Медиану по ним не показываем») и покраснела на
+        # переписанном тексте, хотя на экране всё было верно, — приёмка обязана
+        # ловить дефект, а не редактуру.
+        low = mult.lower()
+        api = get_json(base, '/api/analytics/multiples')
+        no_median_number = not any(f"×{api['median']}" in mult for _ in [0] if api.get('median'))
+        medians_hidden = (api.get('show_medians') is False and no_median_number
+                          and ('медиан' in low and ('не выводим' in low or 'не показываем' in low))) \
+            or 'не прошла все проверки' in mult
+        p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»',
+              medians_hidden and ('провер' in low or 'не прошла все проверки' in mult),
               where, mult[:160].replace(chr(10), ' | '))
         # Блок «Проверено по источникам» стоит на «Обзоре» — его видит каждый
         # посетитель, не только тот, кто открыл «Экономиста».
