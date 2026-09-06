@@ -105,7 +105,10 @@ def test_company_plus_counterparty_focuses_on_the_matching_deal(idx):
     r = _ask("Расскажи про сделку Яндекса с Uber", idx)
     assert r.intent == "company" and r.subject == "Яндекс"
     assert "Uber" in r.docs[0].title
-    assert r.answer.startswith("По вопросу")
+    # одна подходящая сделка (дубль g551049ec слит 6 сентября 2026) — точный
+    # ответ о ней с этапами и источником, а не список «По вопросу…»; хвост
+    # напоминает, сколько всего сделок у компании
+    assert r.answer.startswith("Сделка [") and "Всего у компании" in r.answer, r.answer[:200]
 
 
 def test_year_alone_does_not_count_as_a_counterparty(idx):

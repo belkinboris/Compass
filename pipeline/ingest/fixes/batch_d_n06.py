@@ -64,18 +64,6 @@ FIXES = [
                'из РФ',
          why='привязанный РБК недоступен для скачивания.'),
 
-    dict(id='gedc0eb10', field='src', old=None,
-         new=['VC.ru', 'https://vc.ru/money/821716-mts-kupil-85-v-platforme-dlya-prodazhi-biletov-i-organizacii-meropriyatiy-ticketscloud'],
-         quote='МТС купил 85% в платформе для продажи билетов',
-         why='привязанный РБК недоступен для скачивания.'),
-    dict(id='gedc0eb10', field='eco.target_fin', old='—',
-         new='По данным Rusprofile, выручка ООО «Тикетсклауд» по итогам '
-             '2022 года составила 212 млн рублей (прирост на 90% год к '
-             'году), прибыль — 80 млн рублей.',
-         quote='По данным Rusprofile, выручка ООО «Тикетсклауд» по итогам '
-               '2022 года составила 212 млн рублей (прирост на 90% год к '
-               'году), прибыль — 80 млн рублей.',
-         why='финансовые показатели цели стояли прочерком.'),
 
     dict(id='g95777200', field='src', old=None,
          new=['КП', 'https://www.kp.ru/online/news/5442001/'],
