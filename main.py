@@ -352,6 +352,14 @@ DEAL_EXPORT_ALL_FREE = True
 # False, и гостю снова вернётся 401 без правки интерфейса (там ветка есть).
 DEAL_EXPORT_GUESTS = True
 
+# Медианы мультипликаторов (общая и по отраслям) на «Аналитике» — скрыты до
+# утверждения методики оценщиком (разбор рецензента, 6 сентября 2026): сделки
+# проходят правила допуска, но их сопоставимость между собой не подтверждена,
+# и одна цифра по десятку сделок читается как ориентир рынка. Список сделок с
+# ценой и показателем и текст методики показываются по-прежнему. Включить —
+# SHOW_MULTIPLE_MEDIANS=1 в окружении боевого хоста.
+SHOW_MULTIPLE_MEDIANS = os.environ.get("SHOW_MULTIPLE_MEDIANS", "0") == "1"
+
 # Сколько подтверждённых профилей (pipeline/fns_registry.py) докачивать за
 # ОДИН старт процесса. COMPANY_FINANCE_BRIEF.md, раздел П2: расписания нет —
 # новые решения реестра появляются деплоем, и старт после деплоя уже и есть
@@ -1695,7 +1703,9 @@ def analytics_multiples(db=Depends(get_db)):
     registry = fns_registry_by_company_id()
     # Лоты из нескольких юрлиц — одним чтением справочника, а не профиль за профилем.
     lot_ids = {cid for cid, row in load_company_catalog().items() if row.get("lot")}
-    return deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile, lot_ids)
+    out = deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile, lot_ids)
+    out["show_medians"] = SHOW_MULTIPLE_MEDIANS
+    return out
 
 
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:

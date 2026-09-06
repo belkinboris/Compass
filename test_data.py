@@ -174,6 +174,24 @@ def test_sum_basis_values_are_from_the_closed_list(deals):
     assert not bad, f"sum_basis вне списка: {bad}"
 
 
+def test_explicit_date_basis_and_stake_acquired_are_valid(deals):
+    """Два явных поля того же рода (разбор рецензента, 6 сентября 2026):
+    `date_basis` — что за дата стоит в карточке (закрытие, подписание,
+    объявление, публикация сообщения, реестр) — только из
+    deal_multiples.DATE_BASES; `stake_acquired` — доля, приобретаемая ИМЕННО в
+    этой сделке, число от 0 до 100. Опечатка в первом молча вернула бы дату
+    новости в роль даты события, во втором — пустила бы пакет в мультипликатор
+    как покупку целиком."""
+    import deal_multiples as dm
+    bad_date = [(d["id"], d["date_basis"]) for d in deals if d.get("date_basis") and d["date_basis"] not in dm.DATE_BASES]
+    assert not bad_date, f"date_basis вне списка: {bad_date}"
+    bad_stake = [(d["id"], d["stake_acquired"]) for d in deals
+                 if d.get("stake_acquired") is not None
+                 and not (isinstance(d["stake_acquired"], (int, float)) and not isinstance(d["stake_acquired"], bool)
+                          and 0 < d["stake_acquired"] <= 100)]
+    assert not bad_stake, f"stake_acquired вне 0–100: {bad_stake}"
+
+
 def test_industries_are_from_the_known_list(deals):
     html = INDEX.read_text(encoding="utf-8")
     listed = set(re.search(r'const INDUSTRIES\s*=\s*\[(.*?)\]', html, re.S).group(1)

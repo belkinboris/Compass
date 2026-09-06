@@ -138,6 +138,24 @@ def check_pdf(base: str, p: Protocol) -> None:
     ok = ctype.startswith('application/pdf') and body[:5] == b'%PDF-' and b'DejaVuSans' in body
     p.add('PDF карточки — настоящий PDF с кириллическим шрифтом', ok, base + f'/api/deals/{deal_id}/export',
           f'{ctype}, {len(body)} байт, шрифт DejaVu: {"есть" if b"DejaVuSans" in body else "НЕТ"}')
+    # Проверяется САМ скачанный файл, а не его заголовки (разбор рецензента,
+    # 6 сентября 2026): текст извлекается из PDF — в нём обязан читаться
+    # заголовок сделки по-русски и не должно быть служебных пометок притока
+    # («Источник: обогащение», «веб-поиск»), которые аудит видел в файле.
+    try:
+        import io
+        from pdfminer.high_level import extract_text
+        text = extract_text(io.BytesIO(body)) or ''
+    except Exception as e:  # noqa: BLE001
+        p.add('PDF карточки — текст файла', None, base + f'/api/deals/{deal_id}/export', f'pdfminer недоступен: {e}')
+        return
+    title_words = [w for w in re.findall(r'[А-Яа-яЁё]{5,}', DEALS[deal_id]['title'])][:3]
+    flat = re.sub(r'\s+', ' ', text)
+    has_title = all(w in flat for w in title_words) if title_words else bool(re.search(r'[А-Яа-я]{5,}', flat))
+    leaks = re.findall(r'Источник:\s*(?:обогащ|веб-поиск|web)', flat, re.I)
+    p.add('PDF карточки — в тексте файла заголовок по-русски и нет служебных пометок', has_title and not leaks,
+          base + f'/api/deals/{deal_id}/export',
+          f'слова заголовка {title_words}: {"найдены" if has_title else "НЕ найдены"}; служебных пометок: {len(leaks)}')
 
 
 def check_browser(base: str, p: Protocol) -> None:

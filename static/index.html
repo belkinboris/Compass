@@ -4748,7 +4748,7 @@ function renderDeal(id, qs, previewCard){
   <a class="back reveal" href="#/">← Все сделки</a>
   <div class="d-head reveal">
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-      <span class="label num">${fmtDate(d.date)}</span>
+      <span class="label num">${fmtDate(d.date)}${d.date_basis==="publication"?` <span title="Точный день закрытия стороны не называли; карточка датирована днём, когда о закрытии сообщили">— дата сообщения о закрытии</span>`:""}</span>
       ${d.status?`<span class="status ${statusClass(d.status)}">${d.status}</span>`:""}
       ${stalledDiscussionHint(d)?`<span class="stalled-hint" title="${esc(stalledDiscussionHint(d))}">ⓘ</span>`:""}
       ${industryLinksHtml(d)}
@@ -5709,6 +5709,13 @@ const sumBasis = d => {
   if(!t.includes("₽")) return foreign ? "foreign_currency" : "unparsed";
   return "disclosed";
 };
+// Два разных признака (разбор рецензента, 6 сентября 2026): КАК раскрыта
+// сумма (sumBasis — свойство карточки, диапазон остаётся диапазоном) и
+// ДОПУСКАЕТСЯ ли она к конкретному расчёту (здесь: к топу «Только покупки»
+// и к сложению по отраслям). isSoftSum — второе: «мягкой» сумма считается
+// для расчёта, а не переименовывается в оценку — диапазон бывает и пределами
+// цены по договору (earn-out), и оценкой, и до утверждения методики его
+// просто не складывают.
 const isSoftSum = s => { const b = sumBasis({sum: s}); return b !== "disclosed" && b !== "undisclosed" && b !== "foreign_currency" && b !== "unparsed"; };
 // У допэмиссии (закрытая подписка, SPO) слово «допэмисс» иногда стоит только
 // в заголовке («Segezha Group: допэмиссия акций... на 113 млрд руб.»), а
@@ -5746,6 +5753,92 @@ const countsAsPrice = d => d.status !== "Не состоялась" && !(d.type 
 // копиях; сами `dealMultipleLine`/`dealMultipleLineOp` сохраняют прежнюю
 // сигнатуру и форму результата (первую вызывает и Playwright-тест
 // напрямую на синтетических данных).
+// ---- Доля, приобретаемая в этой сделке (копия stake_established() из deal_multiples.py) ----
+// Процент считается купленной долей, если ближе всего к нему стоит слово о
+// ПРИОБРЕТЕНИИ, а не о результате («довела долю до 51%, приобретя 36%» → 36)
+// и не об истории («ранее владел 30%, теперь приобрёл 70%» → 70). Несколько
+// разных таких процентов (этапы, участники консорциума) — доля не установлена.
+// Явное поле карточки `stake_acquired` сильнее разбора текста. Любое изменение
+// правил здесь требует того же в deal_multiples.py, и наоборот.
+const _ACQ_RX = /приобр|купи|купл|покуп|выкуп|прода[её]?[тжлн]|продаж|получи|перешл|переход|переда|переоформ|уступ|взыска|выстав|на\s+торг|на\s+аукцион|лот\s+включа|в\s+периметр|предмет(?:ом)?\s+сделки|речь\s+ид[её]т\s+о|стал[аио]?\s+(?:владельц|собственник)|оставшиес|оставшихся/gi;
+const _RESULT_RX = /консолидир|довел|довед|увеличи|нарасти|сохрани|принадлеж(?!ащ|авш)|владе(?!льц|вш)|контролир|составля|состави|наход|остаётся|остается|остал[аи]сь|(?:^|[^а-яё])до\s*$/gi;
+const _HISTORY_RX = /ранее|прежде|до этого|тогда|в\s+20\d\d\s+год|c\s+20\d\d|с\s+20\d\d/gi;
+const _PRESENT_RX = /теперь|сейчас|на этот раз|в рамках (?:этой |данной |новой |нынешней )?сделки|по (?:итогам|результатам) сделки|в результате сделки/gi;
+const _PARENS_RX = /\((?!\s*\d{1,3}(?:[.,]\d+)?\s*%[^()]{0,25}\))[^()]*\)/g;
+const _SENT_END_RX = /[.;,:]\s|[.;,:]$|\s[—–]\s/;
+const _SUBJECT_HEAD_RX = /^\s*(?:предмет(?:\s+сделки)?\s*[—–:-]\s*|лот\s*[—–:-]\s*)?(\d{1,3}(?:[.,]\d+)?)\s*%/i;
+const _STAKE_PCT_RX = /(\d{1,3}(?:[.,]\d+)?)\s*%/g;
+// Процент рядом со словом о сравнении («на 30% выше», «дисконт 20%») — не доля (_NOT_A_STAKE в deal_multiples.py).
+const _NOT_A_STAKE_RX = /(?:(?:^|[^а-яё])(?:на|в|до|с|со|от)\s+(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|уступа))|(?:(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|дисконт|скидк|годовых|ставк))|(?:(?:дисконт|скидк|ставк|рост|снижен|падени|выросл|упал|сократил|увеличил)[а-яё]*\s+(?:на\s+|в\s+|до\s+)?(?:\d{1,3}(?:[.,]\d+)?)\s*%)/gi;
+const _FULL_RX = /(?:купи|купл|выкуп|приобр)[а-яё]*\s+(?:[а-яё«»"\w-]+\s+){0,2}?(?:целиком|полностью)|(?:целиком|полностью)\s+(?:выкуп|куп|приобр)|весь\s+бизнес|вс[ея]\s+(?:акци|дол)|всех\s+(?:акци|дол)/i;
+// «стал единственным владельцем» — покупка целиком; «прежде был единственным владельцем» — история продавца
+const _SOLE_RX = /(?:(прежде|ранее|был[аио]?)\s+)?единственн[а-яё]*\s+(?:владельц|собственник|акционер|участник)/gi;
+const _ends = (rx, s) => [...s.matchAll(rx)].map(m => m.index + m[0].length);
+function _windowVerdict(before, after){
+  const acq = _ends(_ACQ_RX, before), res = _ends(_RESULT_RX, before), hist = _ends(_HISTORY_RX, before), pres = _ends(_PRESENT_RX, before);
+  if(hist.length && !(pres.length && Math.max(...pres) > Math.max(...hist))) return false; // история этой доли
+  if(acq.length) return !(res.length && Math.max(...res) > Math.max(...acq));            // результат названнее покупки
+  const acqAfter = after.search(_ACQ_RX);                                                  // глагол после дополнения
+  const stops = [after.search(_RESULT_RX), after.search(_HISTORY_RX)].filter(i => i >= 0);
+  return acqAfter >= 0 && (!stops.length || acqAfter < Math.min(...stops));
+}
+function _splitWindows(cleaned, pos){
+  let before = cleaned.slice(Math.max(0, pos - 70), pos);
+  const cut = Math.max(before.lastIndexOf(". "), before.lastIndexOf("; "));
+  if(cut >= 0) before = before.slice(cut + 2);
+  let after = cleaned.slice(pos, pos + 90);
+  const m = after.match(_SENT_END_RX);
+  if(m) after = after.slice(0, m.index);
+  return [before, after];
+}
+function acquiredPercents(text){
+  if(!text) return [];
+  const cleaned = String(text).replace(_PARENS_RX, " ").replace(_NOT_A_STAKE_RX, " ");
+  const out = [];
+  for(const m of cleaned.matchAll(_STAKE_PCT_RX)){
+    const value = parseFloat(m[1].replace(",", "."));
+    if(!(value >= 1 && value <= 100)) continue;
+    const [before, after] = _splitWindows(cleaned, m.index);
+    if(_windowVerdict(before, after.slice(m[0].length))) out.push(value);
+  }
+  return out;
+}
+// Поле предмета (eco.share, asset): процент в начале поля — купленная доля по смыслу
+// самого поля, если сразу за ним нет слова о владении («99,9% находятся на балансе…»).
+function subjectPercents(text){
+  const out = acquiredPercents(text);
+  if(!text) return out;
+  const cleaned = String(text).replace(_PARENS_RX, " ");
+  const m = cleaned.match(_SUBJECT_HEAD_RX);
+  if(m){
+    const value = parseFloat(m[1].replace(",", "."));
+    const g1 = m.index + m[0].lastIndexOf(m[1]);
+    let [, after] = _splitWindows(cleaned, g1);
+    after = after.slice(m[0].length - (g1 - m.index));
+    const blocked = after.search(_RESULT_RX) >= 0 || after.search(_HISTORY_RX) >= 0;
+    if(value >= 1 && value <= 100 && !blocked && !out.some(x => Math.abs(x - value) < 0.05)) out.unshift(value);
+  }
+  return out;
+}
+function _isFullPurchase(t){
+  if(_FULL_RX.test(t)) return true;
+  for(const m of t.matchAll(_SOLE_RX)) if(!m[1]) return true;
+  return false;
+}
+function stakeEstablished(d){
+  const explicit = d.stake_acquired;
+  if(typeof explicit === "number" && explicit > 0 && explicit <= 100) return explicit;
+  const share = d.eco && d.eco.share;
+  const distinct = [];
+  const add = v => { if(!distinct.some(x => Math.abs(x - v) < 0.05)) distinct.push(v); };
+  acquiredPercents(d.title).forEach(add);
+  [share, d.asset].forEach(t => subjectPercents(t).forEach(add));
+  if(distinct.length === 1) return distinct[0];
+  if(distinct.length > 1) return null; // проценты о покупке есть, но разные — слова «целиком» их не разрешают
+  for(const t of [d.title, share, d.asset]) if(t && _isFullPurchase(String(t))) return 100;
+  return null; // не установлена — и это не допуск
+}
+
 function _dealMultipleSumRub(d, targetId){
   const target = d.target || d.asset_id;
   if(target !== targetId) return null; // мультипликатор только на вкладке ЦЕЛИ, не покупателя/продавца
@@ -5761,16 +5854,11 @@ function _dealMultipleSumRub(d, targetId){
   const num = s => parseFloat(s.replace(/[\s ]/g,"").replace(",", "."));
   const unitMult = {"тыс":1e3,"млн":1e6,"млрд":1e9,"трлн":1e12}[m[2].toLowerCase()];
   const sumRub = num(m[1]) * unitMult;
-  // Доля обязана быть УСТАНОВЛЕНА: процентом (наименьший из названных — «консолидировали
-  // 100%, выкупив 30%» — покупка 30%) или словами о покупке целиком. Неизвестная доля —
-  // не допуск (правило владельца, 6 сентября 2026). Процент рядом со словом о сравнении
-  // («на 30% выше», «дисконт 20%») долей не считается — то же, что _NOT_A_STAKE в deal_multiples.py.
-  const notStake = /(?:(?:^|[^а-яё])(?:на|в|до|с|со|от)\s+(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|уступа))|(?:(?:\d{1,3}(?:[.,]\d+)?)\s*%\s*(?:выше|ниже|больше|меньше|дороже|дешевле|превыша|дисконт|скидк|годовых|ставк))|(?:(?:дисконт|скидк|ставк|рост|снижен|падени|выросл|упал|сократил|увеличил)[а-яё]*\s+(?:на\s+|в\s+|до\s+)?(?:\d{1,3}(?:[.,]\d+)?)\s*%)/gi;
-  const shareTexts = [(d.eco && d.eco.share), d.asset, d.title].filter(Boolean).map(x=>String(x).replace(notStake," "));
-  const stakeMatches = [...shareTexts.join(" ").matchAll(/(\d{1,3}(?:[.,]\d+)?)\s*%/g)].map(x=>parseFloat(x[1].replace(",",".")));
-  const plausibleStake = stakeMatches.filter(x=>x>=1&&x<=100);
-  let stake = plausibleStake.length ? Math.min(...plausibleStake) : null;
-  if(stake === null && /целиком|полностью|единственн[а-яё]*\s+(?:владельц|собственник|акционер)|весь\s+бизнес|вс[ея]\s+(?:акци|дол)/i.test(shareTexts.join(" "))) stake = 100;
+  // Доля обязана быть УСТАНОВЛЕНА (stakeEstablished: явное поле, процент в
+  // контексте покупки или слова о покупке целиком). Неизвестная доля — не
+  // допуск (правило владельца, 6 сентября 2026); несколько разных процентов о
+  // покупке (этапы, консорциум) — тоже неизвестность, а не наименьший из них.
+  const stake = stakeEstablished(d);
   if(stake === null || stake < 95) return null;
   return sumRub;
 }
@@ -6749,7 +6837,7 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где стороны назвали цену в рублях. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где стороны назвали цену в рублях. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
@@ -6806,7 +6894,7 @@ function renderAnalytics(){
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где стороны назвали цену в рублях. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где стороны назвали цену в рублях. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
@@ -6872,7 +6960,13 @@ async function mountMarketMultiples(){
     if(!s || !s.clean_total){
       return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>`;
     }
-    const industriesHtml = s.industries.length ? `
+    // Медианы (общая и отраслевые) показываются только при data.show_medians:
+    // сделки прошли правила допуска, но их сопоставимость между собой (периметр,
+    // долг, год отчётности) методикой не утверждена — до этого медиана по
+    // десятку сделок читалась бы как рыночный ориентир (разбор рецензента,
+    // 6 сентября 2026). Список сделок и способ расчёта остаются.
+    const showMedians = data.show_medians !== false;
+    const industriesHtml = showMedians && s.industries.length ? `
       <div style="margin-bottom:18px">
         ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">×${i.median} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
       </div>` : "";
@@ -6882,7 +6976,7 @@ async function mountMarketMultiples(){
         <span class="an-deal-s">${fnsMoney(d.sum_rub)} · ${v.metricLabel} за ${d[v.yearKey]}: ${fnsMoney(d[v.rubKey])}</span>
       </a>`).join("");
     return `
-      <p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>
+      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)">Проверки допуска прошли ${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")} — по каждой ниже цена и показатель купленной компании. Медиану по ним не показываем: сопоставимость сделок между собой (периметр, долг, год отчётности) ещё не утверждена методикой, и одна цифра по нескольким сделкам читалась бы как ориентир рынка.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}

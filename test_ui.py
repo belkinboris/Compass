@@ -412,6 +412,29 @@ def test_deal_multiple_line_pure_function_matches_filter_rules(page, base_url):
     absurd = dict(base, sum="75 500 млн ₽")
     assert page.evaluate("dealMultipleLine(%s, 't1', 17400000, 2023)" % json.dumps(absurd)) is None
 
+    # Доля — по контексту ПОКУПКИ, а не наименьший процент (вторая критика,
+    # 6 сентября 2026): «консолидировала 100%, выкупив 30%» — покупка 30%;
+    # «консолидировал 100%» без названной покупки — не установлена; «ранее
+    # владел 30%, теперь приобрёл 70%» — 70; этапы — не установлена; явное
+    # поле stake_acquired сильнее текста.
+    consol = dict(base, eco={"share": "Структуры консолидировали 100% ООО «Гесс», выкупив 30% в компании"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(consol)) == 30
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(consol)) is None
+    only_result = dict(base, title="Ростелеком консолидировал 100% ООО «ОМП»", eco={"share": "—"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(only_result)) is None
+    history = dict(base, eco={"share": "Ранее покупатель владел 30%, теперь приобрёл 70%"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(history)) == 70
+    stages = dict(base, eco={"share": "На первом этапе куплено 68%, затем приобретены оставшиеся 32%"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(stages)) is None
+    verb_after = dict(base, eco={"share": "100% акций АО «КИВИ» переданы гонконгской компании Fusion Factor"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(verb_after)) == 100
+    subject = dict(base, eco={"share": "100% долей ООО «Флоктори»"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(subject)) == 100
+    ownership = dict(base, eco={"share": "99,9% находятся на балансе ООО «Агроинвест». В этой структуре 68,6% долей принадлежат фонду"})
+    assert page.evaluate("stakeEstablished(%s)" % json.dumps(ownership)) is None
+    explicit = dict(base, eco={"share": None}, stake_acquired=100)
+    assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(explicit)) is not None
+
 
 def test_assistant_retrieval_finds_deal_regardless_of_word_case(page, base_url):
     """Этап 16, П4: ассистент ищет по своей базе (`relevantDeals`) до похода в
@@ -470,6 +493,33 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         assert pg.evaluate(
             "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
         pg.close()
+
+        # Сервер сказал «медианы не показывать» (SHOW_MULTIPLE_MEDIANS, по
+        # умолчанию выключено до утверждения методики — вторая критика,
+        # 6 сентября 2026): ни общей ×1.5, ни отраслевой строки, но список
+        # сделок с ценой и показателем и текст методики остаются.
+        def hidden(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 3, "median": 1.5, "show_medians": False,
+                "industries": [{"industry": "ИТ и интернет", "count": 3, "median": 1.5, "min": 1.0, "max": 2.0}],
+                "deals": [{"id": "citibank", "title": "Тестовая сделка", "year": 2024,
+                           "target_id": "citibank", "target_name": "ООО Тест",
+                           "sum_rub": 1000000000, "revenue_rub": 500000000,
+                           "revenue_year": 2023, "multiple": 2.0}],
+                "methodology": "Тестовая методика.",
+            }))
+        ctx.unroute("**/api/analytics/multiples")
+        ctx.route("**/api/analytics/multiples", hidden)
+        pg1 = ctx.new_page()
+        pg1.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg1.wait_for_timeout(800)
+        body1 = pg1.inner_text("#multiplesCard")
+        assert "×1.5" not in body1 and "×1,5" not in body1, body1
+        assert "ИТ и интернет" not in body1
+        assert "Тестовая сделка" in body1 and "×2" in body1
+        assert "Медиану по ним не показываем" in body1
+        assert "Тестовая методика" in body1
+        pg1.close()
 
         def empty(route):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({

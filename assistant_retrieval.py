@@ -798,6 +798,18 @@ def _fmt_date(ds: str) -> str:
     return ds[:4]
 
 
+def _date_phrase(doc: Doc) -> str:
+    """Дата сделки словами — с оговоркой, если карточка датирована днём
+    ПУБЛИКАЦИИ сообщения, а не самим закрытием (`date_basis == 'publication'`,
+    Boxberry: Интерфакс 24 апреля 2025 сообщил о закрытии, точный день стороны
+    не называли). Ответ «сделка закрыта 24 апреля» превращал бы дату новости
+    в дату события (разбор рецензента, 6 сентября 2026)."""
+    text = _fmt_date(doc.date)
+    if doc.raw.get("date_basis") == "publication":
+        return f"{text} (дата сообщения о закрытии; точный день закрытия не раскрывался)"
+    return text
+
+
 def _source_link(doc: Doc) -> str:
     """Первый внешний источник карточки — ссылкой рядом со сделкой. Экран
     ассистента обещает первоисточник в каждом ответе, а ответ «по базе» до
@@ -1130,6 +1142,12 @@ def _events(doc: Doc) -> list[str]:
         date, title = str(ev.get("date") or ""), str(ev.get("title") or ev.get("kind") or "").strip()
         if not re.fullmatch(r"\d{4}(-\d{2}-\d{2})?", date) or not title:
             continue
+        # Карточка датирована днём ПУБЛИКАЦИИ сообщения о закрытии — этап
+        # закрытия с той же датой обязан говорить то же, а не «сделка завершена
+        # 24 апреля» (см. _date_phrase).
+        if doc.raw.get("date_basis") == "publication" and ev.get("kind") == "closed" and date == doc.date:
+            out.append(f"{_fmt_date(date)} — опубликовано сообщение о закрытии сделки")
+            continue
         out.append(f"{_fmt_date(date)} — {title[0].lower() + title[1:]}")
     return out
 
@@ -1138,7 +1156,7 @@ def _answer_deal(doc: Doc, more: list[Doc] | None = None) -> Retrieval:
     """Сводка одной сделки — для вопроса с её страницы или для поиска по
     словам, который попал в конкретную сделку (тогда `more` — остальные
     найденные, коротким списком следом)."""
-    bits = [_fmt_date(doc.date)]
+    bits = [_date_phrase(doc)]
     if doc.status:
         bits.append(doc.status.lower())
     lines = [f"Сделка {_link(doc)} — {', '.join(bits)}.{_source_link(doc)}"]

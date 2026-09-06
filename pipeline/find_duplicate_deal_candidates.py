@@ -101,11 +101,35 @@ def candidates(deals):
     return found
 
 
+def fingerprint(d):
+    """Что считается существенным изменением карточки после чтения: заголовок,
+    дата, сумма, стороны и предмет. Изменилось — пара читается заново
+    (замечание рецензента, 6 сентября 2026: разобранные не-дубли перепроверять
+    при существенном изменении карточек)."""
+    return (d.get('title'), d.get('date'), d.get('sum'), d.get('buyer'), d.get('buyer_name'),
+            d.get('seller_id'), d.get('seller'), d.get('target'), d.get('asset_id'))
+
+
+def load_read_state():
+    path = Path(__file__).resolve().parent / 'gold' / 'non_duplicates_seen.json'
+    return path, (json.load(open(path, encoding='utf-8')) if path.exists() else {})
+
+
 def main():
     data = json.load(open(DATA, encoding='utf-8'))
     deals = {d['id']: d for d in data['deals']}
     found = candidates(list(deals.values()))
+    seen_path, seen = load_read_state()
+    changed = {}
+    for pair in NOT_DUPLICATES:
+        key = '|'.join(sorted(pair))
+        now = {i: list(fingerprint(deals[i])) for i in sorted(pair) if i in deals}
+        if key in seen and seen[key] != now:
+            changed[pair] = 'карточка изменилась после чтения — пару перечитать'
+        seen.setdefault(key, now)
+    json.dump(seen, open(seen_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     fresh = {pair: why for pair, why in found.items() if pair not in NOT_DUPLICATES}
+    fresh.update({pair: why for pair, why in changed.items() if pair in found})
     stale = [pair for pair in NOT_DUPLICATES if not pair <= set(deals)]
     for pair, why in sorted(fresh.items(), key=lambda kv: sorted(kv[0])):
         a, b = sorted(pair)

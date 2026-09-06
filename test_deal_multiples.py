@@ -60,7 +60,9 @@ def test_stake_percent_from_eco_share():
 
 
 def test_stake_percent_from_asset():
-    d = _deal(asset='49,9% акций ООО «Ромашка»')
+    # eco.share базового примера называет 100% — с ним asset (49,9%) дал бы
+    # две разные доли и None; читаем asset отдельно
+    d = _deal(asset='49,9% акций ООО «Ромашка»', eco={})
     assert dm.stake_percent(d) == 49.9
 
 
@@ -426,10 +428,13 @@ def test_multiple_ok_when_report_is_two_years_old():
     assert r is not None and r.revenue_year == 2023
 
 
-def test_stake_is_the_smallest_named_share_not_the_largest():
+def test_stake_is_the_percent_in_the_context_of_the_purchase():
     # Аудит, раунд 2 (6 сентября 2026): Guess «консолидировали 100% …, выкупив
     # 30%» и БФТ «приобрёл 49% …, партнёр сохранил 51%» проходили порог 95%,
-    # потому что бралась наибольшая доля из текста.
+    # потому что бралась наибольшая доля из текста. Вторая критика того же
+    # дня: «наименьшая из названных» тоже ненадёжна (прежняя доля 30%,
+    # участник консорциума 10%, первый этап 68%) — берётся процент, ближе
+    # всего к которому стоит слово о ПРИОБРЕТЕНИИ.
     guess = {'title': 'Guess выкупил 30% долю российского партнера',
              'eco': {'share': 'Структуры Guess консолидировали 100% ООО «Гесс», выкупив 30% в компании'}}
     assert dm.stake_percent(guess) == 30.0
@@ -438,3 +443,57 @@ def test_stake_is_the_smallest_named_share_not_the_largest():
     assert dm.stake_percent(bft) == 49.0
     whole = {'title': 'Купил 100% акций', 'eco': {'share': 'Приобретено 100% уставного капитала'}}
     assert dm.stake_percent(whole) == 100.0
+    # результат названнее покупки: довела ДО 51%, купив 36
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'МТС довела долю до 51%, приобретя 36%'}}) == 36.0
+    # прежняя доля — история, а «теперь» возвращает к сделке
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Ранее покупатель владел 30%, теперь приобрёл 70%'}}) == 70.0
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Покупатель получил 100% долей; в 2021 году он купил 20%'}}) == 100.0
+    # консолидация без названной покупки — не 100 и не «наименьший»
+    assert dm.stake_percent({'title': 'Ростелеком консолидировал 100% ООО «ОМП»', 'eco': {'share': '—'}}) is None
+    # этапы и участники консорциума — несколько разных процентов о покупке: не установлено
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'На первом этапе куплено 68%, затем приобретены оставшиеся 32%'}}) is None
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Купил 25% в составе консорциума; партнёр получил 10%'}}) is None
+
+
+def test_stake_reads_the_verb_after_the_object_and_ignores_parentheses():
+    # глагол после дополнения — обычный русский порядок слов
+    assert dm.stake_percent({'title': '', 'eco': {'share': '100% акций АО «КИВИ» переданы гонконгской компании Fusion Factor'}}) == 100.0
+    assert dm.stake_percent({'title': '', 'eco': {'share': '30 июня 100% долей ООО «ТПГК» были переоформлены на нового владельца'}}) == 100.0
+    # скобка — пояснение, «ранее» в ней не история этой доли
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Финтехгруппа «Свой» (ранее холдинг IDF Eurasia) купила 100% долей страховой компании'}}) == 100.0
+    # причастие «принадлежащих X» говорит, ЧЬИ акции проданы, а не кто владеет теперь
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Аукцион по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром»'}}) == 100.0
+    # а глагол «принадлежат» — текущее владение, не покупка
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'По данным ЕГРЮЛ, 100% долей принадлежат АО «Аладушкин групп»: он купил «Дарницу» в 2017 году'}}) is None
+
+
+def test_subject_field_names_the_stake_without_a_verb():
+    # «Предмет / доля» и asset называют ПРЕДМЕТ: процент в начале поля — купленная доля
+    assert dm.stake_percent({'title': 'Альфа-банк приобрел платформу Flocktory', 'eco': {'share': '100% долей ООО «Флоктори»'}}) == 100.0
+    assert dm.stake_percent({'title': '', 'eco': {'share': 'Предмет — 100% акций АО «Ильинская больница» и 100% долей ООО «КМГ»'}}) == 100.0
+    assert dm.stake_percent({'title': 'Купил курорт', 'eco': {}, 'asset': '100% акций УК «Архыз»'}) == 100.0
+    # но не структура собственности, начинающаяся с процента
+    assert dm.stake_percent({'title': '', 'eco': {'share': '99,9% находятся на балансе ООО «Агроинвест». В этой структуре 68,6% долей принадлежат фонду'}}) is None
+
+
+def test_explicit_stake_acquired_beats_the_text():
+    # «Ингосстрах Банк»: заголовок — 99,9%, eco.share описывает реструктуризацию
+    # покупателя (100% перешли к…) — правило честно не знает; явное поле решает
+    d = {'title': 'Продажа «Ингосстрахом» 99,9% акций АО «Ингосстрах Банк» холдингу',
+         'eco': {'share': 'К концу января 100% долей головной компании перешли к сейшельской Барнада'}}
+    assert dm.stake_established(d) is None
+    assert dm.stake_established(dict(d, stake_acquired=99.9)) == 99.9
+    # мусор в поле не считается долей
+    assert dm.stake_established(dict(d, stake_acquired=0)) is None
+    assert dm.stake_established(dict(d, stake_acquired=150)) is None
+
+
+def test_full_purchase_words_need_the_buyer_not_the_former_owner():
+    assert dm.stake_established({'title': 'X купил Y', 'eco': {'share': 'Покупатель стал единственным владельцем компании.'}}) == 100.0
+    # «прежде был единственным владельцем» — про продавца до сделки
+    assert dm.stake_established({'title': 'Норникель приобрел долю', 'eco': {'share': 'доля ВТЗ, который прежде был единственным владельцем холдинга, сократилась до 50%.'}}) is None
+    # «полностью вышла из капитала» — про продавца, не покупка целиком
+    assert dm.stake_established({'title': 'Приобретение Сбером 41,9% акций ПАО «Элемент»',
+                                 'eco': {'share': 'Сбер приобрёл 37,6% у АФК «Система» (которая полностью вышла из капитала) и 4,3% у миноритариев'}}) is None
+    # «продать могут как целиком, так и долю» — вариант, не покупка
+    assert dm.stake_established({'title': 'Продажа страховой компании', 'eco': {'share': 'Продать могут как компанию целиком, так и долю одного из владельцев.'}}) is None
