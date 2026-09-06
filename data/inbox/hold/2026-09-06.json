@@ -5913,6 +5913,34 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Национализированный у Митюшова «Салаватнефтемаш» оценен в 2 » — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d66659216",
+   "title": "Экономия как новая норма: как россияне перестраивают покупки",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/6/ekonomiya-kak-novaya-norma-kak-rossiyane-perestraivayut-pokupki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
