@@ -124,10 +124,16 @@ def _urls(card) -> list[str]:
     return [str(s[1]) for s in card.get('src') or [] if isinstance(s, list) and len(s) > 1 and str(s[1]).startswith('http')]
 
 
-def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
+def build_queue(metric: str, limit: int, base, ctx, ids: list[str] | None = None) -> list[dict]:
     deals = {d['id']: d for d in base['deals']}
     reg = ctx['registry']
     rows = []
+    if ids:
+        # Явный список сделок — когда очередь строится замером снаружи
+        # (например, «у кого на боевом сайте есть знаменатель»): правила
+        # допуска для этого не годятся, они и есть то, что мы двигаем.
+        rows = [deals[i] for i in ids if i in deals]
+        metric = 'coverage'
     if metric == 'multiple':
         confirmed = {c for c, r in reg.items() if r['decision'] == 'confirmed'}
         banks = {c for c, r in reg.items() if r['decision'] == 'bank'}
@@ -160,6 +166,8 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
                     and f['nature'].get('control_change') and not (f['target'].get('perimeter_report') or {}).get('inn') \
                     and f['target'].get('perimeter') != 'refuted':
                 rows.append(d)
+    elif metric == 'coverage':
+        pass  # список задан снаружи
     elif metric == 'grounds':
         # Четвёртый разбор: у подтверждённой цены должны быть автор с цитатой,
         # точность цитаты и состав (фиксированная/с условной частью), у смены
@@ -187,10 +195,11 @@ def build_queue(metric: str, limit: int, base, ctx) -> list[dict]:
             'sources': _urls(d),
             'confirm': (['price'] if metric == 'price_recheck' else ['perimeter'] if metric == 'perimeter'
                         else ['price', 'nature'] if metric == 'grounds'
+                        else ['price', 'date', 'nature', 'stake', 'perimeter'] if metric == 'coverage'
                         else ['price', 'date', 'nature'] + (['stake', 'perimeter'] if metric == 'multiple' else [])),
             'current': {k: d['facts'][k] for k in ('stake', 'price', 'date')},
         })
-        if metric in ('perimeter', 'multiple') and target:
+        if metric in ('perimeter', 'multiple', 'coverage') and target:
             tasks[-1]['report'] = report_for(target, d)
     return tasks
 
@@ -692,6 +701,7 @@ def main():
     ap.add_argument('--metric', default='multiple')
     ap.add_argument('--limit', type=int, default=40)
     ap.add_argument('--out')
+    ap.add_argument('--ids', help='файл со списком id сделок (JSON-список) — очередь строится по нему')
     ap.add_argument('--no-fetch', action='store_true')
     ap.add_argument('--check', nargs='+')
     ap.add_argument('--apply', nargs='+', help='файлы читателей для записи')
@@ -702,7 +712,8 @@ def main():
     if a.queue:
         base = load_base()
         ctx = facts.build_ctx(base, fns_registry.REGISTRY)
-        tasks = build_queue(a.metric, a.limit, base, ctx)
+        ids = json.load(open(a.ids, encoding='utf-8')) if getattr(a, 'ids', None) else None
+        tasks = build_queue(a.metric, a.limit, base, ctx, ids)
         print(f'Очередь «{a.metric}»: {len(tasks)} сделок.')
         for t in tasks:
             print(f'  {t["id"]} {t["title"][:70]} | {t["sum"]} | источников {len(t["sources"])}')

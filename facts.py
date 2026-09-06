@@ -115,7 +115,7 @@ REASON_LABELS = {
     'price_not_read': 'цена не прочитана в источнике',
     'price_disputed': 'два чтения цены разошлись',
     'stake_not_verified': 'доля не подтверждена двумя чтениями',
-    'stake_below': 'куплена доля меньше 95%',
+    'stake_below': 'куплена доля меньше 25% — цену такого пакета не пересчитать на всю компанию',
     'price_not_verified': 'цена не подтверждена двумя чтениями',
     'price_scope_unknown': 'не ясно, за что цена: пакет, компания или с долгом',
     'not_control_change': 'не смена контроля',
@@ -385,7 +385,11 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'possible_duplicate'
         if _basis(stake) != 'verified':
             return False, 'stake_not_verified'
-        if (stake.get('value') or 0) < dm.MIN_STAKE_PERCENT:
+        # Цена пакета пересчитывается на 100% компании (стандартная практика
+        # сравнения сделок), поэтому порог здесь — не «95% и выше», а нижняя
+        # граница осмысленности пересчёта: у пакета меньше четверти нет ни
+        # контроля, ни пропорционального влияния.
+        if (stake.get('value') or 0) < dm.MIN_SCALABLE_STAKE:
             return False, 'stake_below'
         if target.get('perimeter') == 'stale':
             return False, 'stale'
@@ -512,6 +516,8 @@ def number_checks(deal: dict[str, Any]) -> list[str]:
     s = stake.get('value')
     if s is not None and not (1 <= s <= 100):
         out.append('stake_out_of_range')
+    # Цена «за всю компанию» при купленном пакете — противоречие: пересчитывать
+    # такую цену на 100% нельзя, она уже за 100%.
     if s is not None and s < dm.MIN_STAKE_PERCENT and price.get('scope') in ('equity', 'ev') \
             and f.get('admitted', {}).get('multiple_text'):
         out.append('package_stake_with_company_price')

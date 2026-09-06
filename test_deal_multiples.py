@@ -3,6 +3,8 @@
 конкретную ловушку, найденную пилотом (pipeline/measure_deal_multiples_pilot.py,
 Этап 15) или встречающуюся в реальной базе. Не happy-path ради галочки:
 цель — чтобы регрессия в фильтре была не тише, чем сам баг, который он чинит."""
+import pytest
+
 import deal_multiples as dm
 
 
@@ -129,9 +131,35 @@ def test_candidate_rejects_estimate_marker():
     assert dm.find_candidates({'d1': d}, CONFIRMED, BANKS) == []
 
 
-def test_candidate_rejects_small_stake():
-    d = _deal(eco={'share': 'Приобретено 30% доли'})
+def test_candidate_rejects_stake_too_small_to_scale():
+    # Порог с 6 сентября 2026 — не «контрольный пакет», а нижняя граница
+    # осмысленности пересчёта цены пакета на 100% компании: у доли меньше
+    # четверти нет ни контроля, ни пропорционального влияния.
+    d = _deal(eco={'share': 'Приобретено 10% доли'})
     assert dm.find_candidates({'d1': d}, CONFIRMED, BANKS) == []
+    assert dm.admission(dict(d, id='d1'), CONFIRMED, BANKS)[1] == 'share_below'
+
+
+def test_candidate_accepts_package_and_scales_price_to_the_whole_company():
+    # 30% Guess и 49% «Полиматики» — те самые сделки, ради которых порог
+    # менялся: цена пакета делится на долю и сравнивается с показателем
+    # всей компании, а не отбрасывается вместе со сделкой.
+    d = _deal(sum='1 млрд ₽', eco={'share': 'Приобретено 50% доли'})
+    out = dm.find_candidates({'d1': d}, CONFIRMED, BANKS)
+    assert len(out) == 1 and out[0].stake_percent == 50
+    dm_row = dm.multiple_for_candidate(out[0], 500_000_000.0, 2023, 'ООО')
+    assert dm_row.price_basis == 'scaled'
+    assert dm_row.price_full_rub == pytest.approx(2_000_000_000.0)
+    assert dm_row.multiple == 4.0  # 2 млрд ₽ за 100% ÷ 500 млн ₽ выручки
+
+
+def test_price_for_the_whole_company_is_never_divided_by_the_stake():
+    # Обратный случай: цена УЖЕ за всю компанию (scope equity) — делить её на
+    # долю значило бы посчитать одну и ту же величину дважды.
+    cand = dm.MultipleCandidate(deal_id='d1', title='т', target_id='target1', year=2024,
+                                sum_rub=1_000_000_000.0, stake_percent=50, price_scope='equity')
+    row = dm.multiple_for_candidate(cand, 500_000_000.0, 2023, 'ООО')
+    assert row.price_basis == 'full' and row.multiple == 2.0
 
 
 def test_candidate_accepts_large_stake():
@@ -196,7 +224,7 @@ def test_exclusion_counts_name_every_reason():
     deals = {
         'a': _deal(eco={'share': None}, asset=None),                       # доля не установлена
         'b': _deal(sum='около 1 млрд ₽', eco={'share': '100%'}),            # оценка
-        'c': _deal(eco={'share': 'куплено 30%'}),                           # доля меньше порога
+        'c': _deal(eco={'share': 'куплено 10%'}),                           # доля меньше порога пересчёта
         'd': _deal(type='IPO'),                                             # не покупка — в счёт не идёт
     }
     counts = dm.exclusion_counts(deals, CONFIRMED, BANKS)

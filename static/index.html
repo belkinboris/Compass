@@ -5768,14 +5768,28 @@ function editionLabelJs(url){
 // deal_multiples.py (единственное, что здесь ещё дублируется: год и границы).
 // Числитель мультипликатора на карточке — только из фактов, подтверждённых
 // двумя независимыми чтениями (facts.admitted.multiple_text: смена контроля,
-// предмет — одно юрлицо с ИНН, периметр подтверждён, доля ≥95% и цена
+// предмет — одно юрлицо с ИНН, периметр подтверждён, доля от четверти и цена
 // verified). Неподтверждённая сделка мультипликатора на экране не получает,
 // даже если по тексту карточки всё сходится.
-function _dealMultipleSumRub(d, targetId){
+// Копия deal_multiples.implied_full_price: цена пакета делится на его долю —
+// получается стоимость всей компании «по этой сделке». Цена, которая уже за
+// компанию (equity) или за компанию с долгом (ev), не пересчитывается.
+function impliedFullPrice(sumRub, stakePercent, scope){
+  if(scope === "equity" || scope === "ev") return {value: sumRub, basis: "full"};
+  if(stakePercent == null || stakePercent >= 99.5) return {value: sumRub, basis: "full"};
+  return {value: sumRub * 100 / stakePercent, basis: "scaled"};
+}
+function _dealMultiplePrice(d, targetId){
   const target = d.target || d.asset_id;
   if(target !== targetId) return null; // мультипликатор только на вкладке ЦЕЛИ, не покупателя/продавца
   if(!factAdmitted(d, "multiple_text")) return null;
-  return priceRub(d) || null;
+  const raw = priceRub(d);
+  if(!raw) return null;
+  return impliedFullPrice(raw, (stakeFact(d)||{}).value, priceFact(d).scope);
+}
+function _dealMultipleSumRub(d, targetId){
+  const p = _dealMultiplePrice(d, targetId);
+  return p ? p.value : null;
 }
 
 function dealMultipleLine(d, targetId, revenueRub, revenueYear){
@@ -5846,7 +5860,10 @@ async function mountDealFns(d){
     const c=co(p.id);
     const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
     const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year, p.latest.revenue_rub);
-    const pf=priceFact(d), scopeNote=(pf.scope==="ev"?"цена с учётом долга":pf.scope==="package"?`цена за ${fmtPct(stakeFact(d).value||0)}`:"цена за 100% акций")+(PRICE_TERMS_NOTE[pf.terms]?` (${PRICE_TERMS_NOTE[pf.terms]})`:"");
+    const pf=priceFact(d), pb=_dealMultiplePrice(d, p.id);
+    const scopeNote=(pf.scope==="ev"?"цена с учётом долга"
+      :pb&&pb.basis==="scaled"?`цена пакета ${fmtPct(stakeFact(d).value||0)} (${fnsMoney(priceRub(d))}) в пересчёте на 100% компании`
+      :"цена за 100% акций")+(PRICE_TERMS_NOTE[pf.terms]?` (${PRICE_TERMS_NOTE[pf.terms]})`:"");
     const yearNote=my.basis==="дата карточки"?"":`; год сделки — ${my.basis}`;
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
@@ -6835,7 +6852,8 @@ function renderAnalytics(){
 
 // Мультипликаторы рынка — Этап 16, П1. Методика (deal_multiples.py) не
 // зависит от фильтров этой страницы: она уже сама решает, какие сделки
-// сопоставимы (M&A, обе стороны названы, доля ≥95%, разрыв года ≤1,
+// сопоставимы (M&A, обе стороны названы, доля известна и не меньше
+// четверти, разрыв года ≤1,
 // граница 0,1–15) — накладывать поверх ещё и фильтр «отрасль/год/тип»
 // с этой страницы значило бы дробить и без того небольшую чистую выборку.
 async function mountMarketMultiples(){
@@ -6855,7 +6873,7 @@ async function mountMarketMultiples(){
   // null у ЧУЖОЙ, новой страницы, а не у этого узла).
   if(!body.isConnected) return;
   if(!data || !data.clean_total){
-    body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (сумма в рублях, доля ≥95%, отчётность цели за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
+    body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (цена в рублях, известная доля, отчётность купленной компании за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
     return;
   }
   // Второй мультипликатор — по операционной прибыли (ближе к привычному
@@ -6905,7 +6923,7 @@ async function mountMarketMultiples(){
     const dealsHtml = s.deals.slice(0,15).map(d=>`
       <a class="an-deal" href="#/deal/${d.id}">
         <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-        <span class="an-deal-s">${fnsMoney(d.sum_rub)}${d.price_scope==="package"&&d.stake!=null?` за ${fmtPct(d.stake)}`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${fnsMoney(d[v.rubKey])}${targetName(d)?` — ${esc(targetName(d))}`:""}, ${v.metricShort} за ${d[v.yearKey]}${PRICE_TERMS_NOTE[d.price_terms]?` · ${PRICE_TERMS_NOTE[d.price_terms]}`:""}${d.year_basis&&d.year_basis.indexOf("предварительн")>=0?` · год сделки ${d.year} предварительный`:""}</span>
+        <span class="an-deal-s">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` (цена пакета ${fmtPct(d.stake)} — ${fnsMoney(d.sum_rub)} — в пересчёте на 100%)`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${fnsMoney(d[v.rubKey])}${targetName(d)?` — ${esc(targetName(d))}`:""}, ${v.metricShort} за ${d[v.yearKey]}${PRICE_TERMS_NOTE[d.price_terms]?` · ${PRICE_TERMS_NOTE[d.price_terms]}`:""}${d.year_basis&&d.year_basis.indexOf("предварительн")>=0?` · год сделки ${d.year} предварительный`:""}</span>
       </a>`).join("");
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);

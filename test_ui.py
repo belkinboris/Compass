@@ -2898,7 +2898,9 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
       return {id: r.id, basis: sumBasis(d), top: countsAsPrice(d),
               admitted: !!(d.facts && d.facts.admitted && d.facts.admitted.purchase_sums),
               reason: d.facts && d.facts.reasons ? d.facts.reasons.purchase_sums : null,
-              multiple: target ? _dealMultipleSumRub(d, target) !== null : false, type: d.type};
+              multiple: target ? _dealMultipleSumRub(d, target) !== null : false,
+              priceBasis: target ? ((_dealMultiplePrice(d, target)||{}).basis || null) : null,
+              type: d.type};
     })""", gold["deals"])
     problems = []
     for row, g in zip(gold["deals"], got):
@@ -2920,6 +2922,11 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
         # чтением фактами — это ПОДМНОЖЕСТВО текстового допуска выборки
         if g["multiple"] and not row["in_multiples"]:
             problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
+        # Числитель: клиент обязан пересчитывать цену пакета на 100% ровно там
+        # же, где это делает сервер (deal_multiples.implied_full_price), —
+        # иначе на карточке и в блоке «Аналитики» будут разные ×.
+        if g["priceBasis"] and (g["priceBasis"] == "scaled") != bool(row.get("price_scaled")):
+            problems.append((row["id"], "price_basis", g["priceBasis"], row.get("price_scaled")))
     assert not problems, problems
 
 

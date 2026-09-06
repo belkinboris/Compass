@@ -79,6 +79,14 @@ from sqlalchemy import select
 
 MIN_MULTIPLE = 0.1
 MAX_MULTIPLE = 15.0
+# До 6 сентября 2026 мультипликатор считался ТОЛЬКО для сделок, где куплено
+# 95% и больше: цену пакета не с чем было сравнивать. Владелец спросил прямо
+# — «неужели из полутора тысяч сделок мультипликатор только у пяти» — и замер
+# показал, что порог отсекал 26 сделок из 54 с известной долей. Теперь цена
+# пакета пересчитывается на 100% (implied_full_price), как это делают при
+# сравнении сделок; порог остаётся, но только как нижняя граница осмысленности
+# пересчёта (MIN_SCALABLE_STAKE). MIN_STAKE_PERCENT — граница, ниже которой
+# цена считается ценой ПАКЕТА, а не всей компании.
 MIN_STAKE_PERCENT = 95.0
 # Отчётность — за последний ПОЛНЫЙ год до сделки (разрыв 1), на крайний
 # случай — за позапрошлый (разрыв 2: отчёт за прошлый год ещё не сдан).
@@ -451,6 +459,10 @@ class MultipleCandidate:
     year: int
     sum_rub: float
     stake_percent: float | None
+    # За что заплачена цена: package — за пакет (тогда её пересчитывают на
+    # 100% компании), equity/ev — уже за всю компанию. У текстового кандидата
+    # периметр неизвестен: правила его не устанавливают, это делает чтение.
+    price_scope: str | None = None
 
 
 EXCLUSION_LABELS = {
@@ -464,7 +476,7 @@ EXCLUSION_LABELS = {
     'status': 'сделка не состоялась',
     'sum_basis': 'сумма — не цена, названная сторонами',
     'share_unknown': 'доля не установлена',
-    'share_below': 'куплена доля меньше 95%',
+    'share_below': 'куплена доля меньше 25% — цену пакета не пересчитать на всю компанию',
     'sum_unparsed': 'сумма не разобрана',
 }
 
@@ -499,7 +511,7 @@ def admission(d: dict[str, Any], confirmed_ids: set[str], bank_ids: set[str],
     stake = stake_established(d)
     if stake is None:
         return None, 'share_unknown'
-    if stake < MIN_STAKE_PERCENT:
+    if stake < MIN_SCALABLE_STAKE:
         return None, 'share_below'
     sum_rub = parse_rub_sum(d.get('sum'))
     if not sum_rub or sum_rub <= 0:
@@ -547,6 +559,44 @@ class DealMultiple:
     revenue_rub: float
     revenue_year: int
     multiple: float
+    # Числитель мультипликатора: цена за 100% компании. Отличается от
+    # `sum_rub`, если куплен пакет, — и тогда `price_basis == 'scaled'`.
+    price_full_rub: float = 0.0
+    price_basis: str = 'full'
+
+
+# Доля, ниже которой пересчёт цены пакета на 100% теряет смысл: у пакета
+# меньше четверти нет ни контроля, ни пропорциональной доли влияния, и
+# «цена ÷ доля» превращается в фантазию (6 сентября 2026, вопрос владельца
+# «неужели из полутора тысяч сделок мультипликатор только у пяти»).
+MIN_SCALABLE_STAKE = 25.0
+
+
+def _pct(value: float | None) -> str:
+    """Доля для подписи: «51%», «50,1%» — без хвоста «.0» и с запятой."""
+    if value is None:
+        return '?'
+    text = f'{value:.2f}'.rstrip('0').rstrip('.')
+    return text.replace('.', ',') + '%'
+
+
+def implied_full_price(sum_rub: float, stake_percent: float | None,
+                        price_scope: str | None = None) -> tuple[float, str]:
+    """Цена за 100% компании и как она получена ('full' или 'scaled').
+
+    Стандартная практика сравнения сделок: цена, уплаченная за X%, делится на
+    X — получается стоимость всей компании «по этой сделке». Пересчёт назван
+    на экране прямо, потому что допущение сильное: премия за контроль и
+    скидка за миноритарный пакет в нём не учтены.
+
+    Цена, которая УЖЕ за всю компанию (`equity`) или за компанию с долгом
+    (`ev`), не пересчитывается никогда — иначе одна и та же величина
+    поделится на долю дважды."""
+    if price_scope in ('equity', 'ev'):
+        return sum_rub, 'full'
+    if stake_percent is None or stake_percent >= 99.5:
+        return sum_rub, 'full'
+    return sum_rub * 100.0 / stake_percent, 'scaled'
 
 
 def _sanity_checked_multiple(sum_rub: float, metric_rub: float | None,
@@ -573,13 +623,15 @@ def multiple_for_candidate(cand: MultipleCandidate, revenue_rub: float | None,
     требует БД и тестируется без фикстур, а этот шаг — единственное место,
     трогающее реальное число выручки, и его легче всего проверить на
     придуманных значениях (см. test_deal_multiples.py)."""
-    multiple = _sanity_checked_multiple(cand.sum_rub, revenue_rub, revenue_year, cand.year)
+    price_full, price_basis = implied_full_price(cand.sum_rub, cand.stake_percent, cand.price_scope)
+    multiple = _sanity_checked_multiple(price_full, revenue_rub, revenue_year, cand.year)
     if multiple is None:
         return None
     return DealMultiple(
         deal_id=cand.deal_id, title=cand.title, target_id=cand.target_id,
         target_name=target_name, year=cand.year, sum_rub=cand.sum_rub,
-        revenue_rub=revenue_rub, revenue_year=revenue_year, multiple=multiple)
+        revenue_rub=revenue_rub, revenue_year=revenue_year, multiple=multiple,
+        price_full_rub=price_full, price_basis=price_basis)
 
 
 @dataclass
@@ -599,6 +651,8 @@ class OpProfitMultiple:
     operating_profit_rub: float
     operating_profit_year: int
     multiple: float
+    price_full_rub: float = 0.0
+    price_basis: str = 'full'
 
 
 NOT_SHOWN_LABELS = {
@@ -649,7 +703,8 @@ def multiple_for_candidate_op(cand: MultipleCandidate, operating_profit_rub: flo
     операционная прибыль, а не выручка. Операционный убыток (или его
     отсутствие в отчётности) означает, что мультипликатор просто не
     считается — это честная пустота, а не ноль."""
-    multiple = _sanity_checked_multiple(cand.sum_rub, operating_profit_rub,
+    price_full, price_basis = implied_full_price(cand.sum_rub, cand.stake_percent, cand.price_scope)
+    multiple = _sanity_checked_multiple(price_full, operating_profit_rub,
                                          operating_profit_year, cand.year)
     if multiple is None:
         return None
@@ -657,7 +712,7 @@ def multiple_for_candidate_op(cand: MultipleCandidate, operating_profit_rub: flo
         deal_id=cand.deal_id, title=cand.title, target_id=cand.target_id,
         target_name=target_name, year=cand.year, sum_rub=cand.sum_rub,
         operating_profit_rub=operating_profit_rub, operating_profit_year=operating_profit_year,
-        multiple=multiple)
+        multiple=multiple, price_full_rub=price_full, price_basis=price_basis)
 
 
 def industry_medians(rows: list[DealMultiple], industry_of: dict[str, str]
@@ -721,15 +776,23 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         if ok:
             price, stake = f['price'], f['stake']
             year, year_basis = multiple_year(d)
+            scope = price.get('scope')
             candidates.append(MultipleCandidate(
                 deal_id=deal_id, title=d.get('title') or deal_id, target_id=target_of(d) or '',
-                year=year or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value')))
-            scope = price.get('scope')
+                year=year or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value'),
+                price_scope=scope))
+            price_full, price_basis = implied_full_price(
+                float(price['value_rub']), stake.get('value'), scope)
             numerator = ('цена за 100% акций' if scope == 'equity'
-                         else f"цена за пакет {stake.get('value')}%" if scope == 'package'
-                         else 'цена с учётом долга (EV)')
+                         else 'цена с учётом долга (EV)' if scope == 'ev'
+                         else f"цена пакета {_pct(stake.get('value'))}, пересчитанная на 100% компании"
+                         if price_basis == 'scaled'
+                         else 'цена за 100% акций')
             verified_meta[deal_id] = {
                 'stake': stake.get('value'), 'price_scope': scope, 'year_basis': year_basis,
+                # Числитель: цена за 100% компании и то, как она получена —
+                # заплаченная сумма или пересчёт цены пакета (6 сентября 2026).
+                'price_full_rub': price_full, 'price_basis': price_basis,
                 # состав цены и событие — чтобы ×2,09 у SmartDeal не читалось
                 # как твёрдая выплаченная цена: 640 млн ₽ отложенного и 114 млн ₽
                 # условного возмещения, оценённого на дату покупки
@@ -785,7 +848,9 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         if dm:
             rows.append(dm)
         else:
-            not_shown['revenue'].append(_not_shown_row(cand, *_why_not(cand.sum_rub, float(report.revenue_rub), report.year, cand.year)))
+            not_shown['revenue'].append(_not_shown_row(cand, *_why_not(
+                implied_full_price(cand.sum_rub, cand.stake_percent, cand.price_scope)[0],
+                float(report.revenue_rub), report.year, cand.year)))
         # Та же строка отчётности уже несёт операционную прибыль — второй
         # запрос к БД не нужен, только своя санитарная проверка (операционный
         # убыток и `None` отсеиваются внутри `multiple_for_candidate_op`).
@@ -800,7 +865,8 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             # (четвёртый разбор, пункт 6): «Убик» — прибыль 2 млн ₽ при цене
             # 1,8 млрд ₽ даёт ×902, и это не «нет данных», а выброс.
             not_shown['operating_profit'].append(_not_shown_row(
-                cand, *_why_not(cand.sum_rub, float(op_profit) if op_profit is not None else None, report.year, cand.year)))
+                cand, *_why_not(implied_full_price(cand.sum_rub, cand.stake_percent, cand.price_scope)[0],
+                                float(op_profit) if op_profit is not None else None, report.year, cand.year)))
         if dm or op_dm:
             ind = deal_industry.get(cand.deal_id) or ''
             if not ind or ind == 'Не определена':
@@ -848,14 +914,18 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'target_id': r.target_id, 'target_name': r.target_name,
             'sum_rub': r.sum_rub, 'revenue_rub': r.revenue_rub,
             'revenue_year': r.revenue_year, 'multiple': r.multiple,
+            'price_full_rub': r.price_full_rub, 'price_basis': r.price_basis,
         }, **verified_meta.get(r.deal_id, {})) for r in rows],
         'methodology': (
             'Что здесь считается: цена сделки ÷ выручка купленной компании за последний '
             'полный год до сделки (или за позапрошлый, если прошлогодний отчёт ещё не сдан). '
-            'Цена — за 100% акций, если так подтверждено чтением; за пакет — тогда это '
-            'указано у сделки; долг компании в цену не входит, если у сделки не сказано '
-            '«с учётом долга». Показываются только сделки, у которых доля (95% и выше), '
-            'цена и юрлицо подтверждены двумя независимыми чтениями источников с '
+            'Цена — за 100% компании: если куплен пакет, цену пакета делим на его долю '
+            '(так сравнивают сделки между собой), и у такой строки прямо написано, с '
+            'какого пакета сделан пересчёт. Пересчёт не учитывает премию за контроль и '
+            'скидку за миноритарный пакет, поэтому доли меньше четверти в расчёт не идут '
+            'вовсе. Долг компании в цену не входит, если у сделки не сказано «с учётом '
+            'долга». Показываются только сделки, у которых доля, цена и юрлицо '
+            'подтверждены двумя независимыми чтениями источников с '
             'цитатами, а отчётность относится именно к купленному юрлицу. Год сделки — '
             'подтверждённая дата закрытия, если она прочитана, иначе дата карточки; '
             'основание года указано у каждой сделки. Значения вне границ 0,1–15 не '
@@ -873,11 +943,13 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                 'target_id': r.target_id, 'target_name': r.target_name,
                 'sum_rub': r.sum_rub, 'operating_profit_rub': r.operating_profit_rub,
                 'operating_profit_year': r.operating_profit_year, 'multiple': r.multiple,
+                'price_full_rub': r.price_full_rub, 'price_basis': r.price_basis,
             }, **verified_meta.get(r.deal_id, {})) for r in op_rows],
             'methodology': (
                 'Что здесь считается: цена сделки ÷ прибыль от продаж купленной компании '
                 '(строка 2200 отчёта о финансовых результатах) за последний полный год до '
-                'сделки. Цена — за 100% акций или за пакет, как подтверждено чтением; долг '
+                'сделки. Цена — за 100% компании: цена пакета пересчитывается на 100% по '
+                'его доле, и это указано у каждой такой сделки; долг '
                 'в цену не входит, если не сказано «с учётом долга». Это не EV/EBITDA: '
                 'прибыль от продаж считается после амортизации, а цена акций — без долга, '
                 'поэтому сравнивать с рыночными EV/EBITDA нельзя. Показываются только '

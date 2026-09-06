@@ -87,24 +87,37 @@ def check_data_is_current(base: str, p: Protocol) -> None:
 
 def check_multiples(base: str, p: Protocol) -> None:
     """Мультипликаторы: ни одной сделки из «нельзя» контрольной выборки, ни
-    диапазона, ни доли ниже 95% — по ТОМУ, что отдаёт сайт, а не по коду."""
+    диапазона, ни доли ниже порога пересчёта — по ТОМУ, что отдаёт сайт, а не
+    по коду. Плюс арифметика самого пересчёта: числитель строки обязан
+    получаться из цены и доли, а не быть взят откуда-то ещё."""
     m = get_json(base, '/api/analytics/multiples')
     ids = {row['id'] for row in m['deals']}
     forbidden = [r['id'] for r in GOLD['deals'] if not r['in_multiples'] and r['id'] in ids]
-    bad_share = [row['id'] for row in m['deals'] if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_STAKE_PERCENT]
+    bad_share = [row['id'] for row in m['deals'] if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_SCALABLE_STAKE]
+    # Цена пакета, пересчитанная на 100%: числитель = цена ÷ доля, и сам
+    # мультипликатор считается от него, а не от заплаченной суммы.
+    bad_scale = []
+    for row in m['deals']:
+        expect, basis = dm.implied_full_price(row['sum_rub'], row.get('stake'), row.get('price_scope'))
+        if abs(expect - (row.get('price_full_rub') or 0)) > max(1.0, expect * 1e-6) or basis != row.get('price_basis'):
+            bad_scale.append(row['id'])
+        elif abs(round(expect / row['revenue_rub'], 2) - row['multiple']) > 0.011:
+            bad_scale.append(row['id'])
     bad_basis = [row['id'] for row in m['deals'] if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
     # Слой фактов: каждая показанная сделка обязана нести подтверждение двумя
     # чтениями и чистую арифметику (facts.number_checks) — по ответу сайта.
     unverified = [row['id'] for row in m['deals'] if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
     dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
     no_year_basis = [row['id'] for row in m['deals'] if not row.get('year_basis')]
-    ok = not forbidden and not bad_share and not bad_basis and not unverified and not dirty and not no_year_basis
+    ok = (not forbidden and not bad_share and not bad_basis and not unverified
+          and not dirty and not no_year_basis and not bad_scale)
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
-    p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без долей <95% и не-цен', ok,
+    p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без малых долей и не-цен', ok,
           base + '/api/analytics/multiples',
           f"показано {m['clean_total']} (подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
-          f"запрещённые: {forbidden or 'нет'}; доля <95%: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
+          f"запрещённые: {forbidden or 'нет'}; доля ниже порога: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
+          f"пересчёт цены пакета: {bad_scale or 'сходится'}; "
           f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
     # Проверенная сделка, которой нет в списке, обязана быть названа с причиной
     # (выброс, убыток, нет отчёта): скрытая молча, она читается как «данных нет»
