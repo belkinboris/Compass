@@ -1696,34 +1696,6 @@
    ]
   },
   {
-   "draft_id": "d56006702",
-   "title": "Национализированные ТРК Михаила Юревича ушли с молотка за шесть миллиардов",
-   "date": "2026-08-17",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/business/2026/08/17/76584242/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d14652934",
    "title": "Канье Уэст даст два концерта в России: он продал почти все билеты за полчаса",
    "date": "2026-08-17",
@@ -4828,7 +4800,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gmru-psb-tpk-chelyabinsk (общие редкие слова: продаж, челяби) — проверьте, не дубль ли"
    ]
   },
   {
@@ -5915,30 +5888,115 @@
    ]
   },
   {
-   "draft_id": "d22933247",
-   "title": "«Динамо» распродало все билеты на матч со «Спартаком»",
+   "draft_id": "d19288062",
+   "title": "В Киеве закончился первый раунд переговоров Украины и США",
    "date": "2026-09-06",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/06/dinamo-rasprodalo-vse-bilety-na-match-so-spartakom/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6a9d7d7befaf49a5233dbe40"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36238452",
+   "title": "Укринформ: в Киеве завершился первый раунд переговоров с Уиткоффом и Кушнером",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28085061"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-09-06",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "С украинской стороны участвовали, в частности, Владимир Зеленский и руководитель Службы внешней разведки Украины Рустем Умеров",
      "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/06/dinamo-rasprodalo-vse-bilety-na-match-so-spartakom/"
+      "web:tass.ru",
+      "https://tass.ru/mezhdunarodnaya-panorama/28085061"
      ]
     }
    ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35650630",
+   "title": "Депутат предложила упростить продажу жилья, приобретенного на маткапитал",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260906/rossiya-2115883393.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d88020696",
+   "title": "На Украине рассказали о втором раунде переговоров Уиткоффа и Кушнера с Зеленским",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/06/na-ukraine-rasskazali-o-vtorom-raunde-peregovorov-uitkoffa-i-kushnera-s-zelenskim/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -5951,6 +6009,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20899229",
+   "title": "Киев объявил о новом участнике переговоров с США во втором раунде",
+   "date": "2026-09-06",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053124826"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
