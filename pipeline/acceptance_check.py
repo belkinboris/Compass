@@ -257,19 +257,19 @@ def check_browser(base: str, p: Protocol) -> None:
         medians_hidden = 'Медиану по ним не показываем' in mult or 'не прошла все проверки' in mult
         p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»', medians_hidden and ('проверено' in mult or 'не прошла все проверки' in mult),
               where, mult[:160].replace(chr(10), ' | '))
-        verified_deal = next((i for i, d in DEALS.items() if ((d.get('facts') or {}).get('price') or {}).get('basis') == 'verified'), None)
+        # Блок «Проверено по источникам» стоит на «Обзоре» — его видит каждый
+        # посетитель, не только тот, кто открыл «Экономиста».
+        verified_deal = next((i for i, d in DEALS.items()
+                              if ((d.get('facts') or {}).get('price') or {}).get('basis') == 'verified'
+                              and (d['facts']['price'] or {}).get('meaning') == 'disclosed'), None)
         if verified_deal:
             page.goto(base + '/#/deal/' + verified_deal)
-            page.wait_for_timeout(900)
-            eco = page.locator('button[data-l="eco"]').first
-            try:
-                eco.click(timeout=3000)
-                page.wait_for_timeout(400)
-            except Exception:  # noqa: BLE001
-                pass
-            text = page.inner_text('#app')
-            p.add(f'Карточка {verified_deal}: строка «Проверено по источникам» с цитатой', 'Проверено по источникам' in text,
-                  base + '/#/deal/' + verified_deal, 'есть' if 'Проверено по источникам' in text else 'НЕТ')
+            page.wait_for_selector('.fact-verified', timeout=15000)
+            text = page.inner_text('.fact-verified')
+            quote = ((DEALS[verified_deal]['facts']['price'] or {}).get('quote') or '')[:30]
+            ok = 'Проверено по источникам' in text and (not quote or quote[:20] in text)
+            p.add(f'Карточка {verified_deal}: блок «Проверено по источникам» с цитатой на «Обзоре»', ok,
+                  base + '/#/deal/' + verified_deal, text[:140].replace(chr(10), ' | '))
         for pair in GOLD['duplicates']:
             page.goto(base + '/#/deal/' + pair['drop'])
             page.wait_for_timeout(700)

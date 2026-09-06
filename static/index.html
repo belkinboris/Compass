@@ -5042,7 +5042,6 @@ function renderDeal(id, qs, previewCard){
       const extraBlock = extraHtml(d);
       f.innerHTML = (ecoHasContent(d) || extraBlock) ? `
       ${hero("Сумма сделки", d.eco.sum)}
-      ${factsVerifiedHtml(d)}
       ${specBlock([
         specRow("Предмет / доля", d.eco.share),
         specRow("Оценка и дисконт", d.eco.val),
@@ -5079,6 +5078,7 @@ function renderDeal(id, qs, previewCard){
       ${hero("Сумма", d.sum, true)}
       ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`:""}
       ${dealPlate()}
+      ${factsVerifiedHtml(d)}
       ${dealTeam()}
       ${specBlock([
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
