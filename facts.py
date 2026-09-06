@@ -516,8 +516,10 @@ def number_checks(deal: dict[str, Any]) -> list[str]:
     s = stake.get('value')
     if s is not None and not (1 <= s <= 100):
         out.append('stake_out_of_range')
-    # Цена «за всю компанию» при купленном пакете — противоречие: пересчитывать
-    # такую цену на 100% нельзя, она уже за 100%.
+    # Цена «за всю компанию» при купленном пакете — не арифметическая ошибка,
+    # а место, где читатель мог спутать цену сделки с ОЦЕНКОЙ компании. Такую
+    # цену мы намеренно не делим на долю (implied_full_price), поэтому ошибка
+    # чтения здесь не всплывёт сама собой — её и помечает эта строка.
     if s is not None and s < dm.MIN_STAKE_PERCENT and price.get('scope') in ('equity', 'ev') \
             and f.get('admitted', {}).get('multiple_text'):
         out.append('package_stake_with_company_price')

@@ -914,6 +914,35 @@ a.dp-asset-name:hover{color:var(--accent)}
 .mult-ind{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line-soft);font-size:13.5px}
 .mult-ind:last-child{border-bottom:none}
 .mult-ind .num{flex:0 0 auto;text-align:right}.mult-ind-note{color:var(--muted);font-weight:400;font-size:12px}
+/* Таблица мультипликаторов. Владелец 6 сентября 2026: «раньше у нас была
+   удобная таблица, а что сейчас?» — компактные строки-карточки читаются
+   как лента, а не как ряд сопоставимых величин: чтобы сравнить два ×,
+   глазу нужна общая вертикаль. Числа выключены вправо (это колонка
+   ОДНОРОДНЫХ величин — тот случай, для которого выключка и придумана,
+   см. правило про меру в 72 знака), заголовок сделки — влево.
+   На узком экране таблица не скроллится вбок, а разбирается на строки с
+   подписями: горизонтальная прокрутка витрины хуже переноса. */
+.mult-table{width:100%;border-collapse:collapse;font-size:14px}
+.mult-table th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;text-align:left;padding:0 0 8px;border-bottom:1px solid var(--line)}
+.mult-table th.num,.mult-table td.num{text-align:right;white-space:nowrap}
+.mult-table td{padding:10px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.mult-table tr:last-child td{border-bottom:none}
+.mult-table th+th,.mult-table td+td{padding-left:14px}
+.mult-table a{color:var(--ink);text-decoration:none;line-height:1.35}
+.mult-table a:hover{color:var(--accent)}
+.mult-x{font-weight:600}
+.mult-sub{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.4}
+@media(max-width:760px){
+  .mult-table,.mult-table tbody,.mult-table tr,.mult-table td{display:block;width:auto}
+  .mult-table thead{display:none}
+  .mult-table tr{padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  .mult-table td{border:none;padding:2px 0}
+  .mult-table td+td{padding-left:0}
+  .mult-table td.num{text-align:left}
+  .mult-table td[data-l]:not(.mult-name):before{content:attr(data-l) ": ";color:var(--muted);font-size:12.5px}
+  .mult-table td.mult-x-cell{font-size:15px}
+}
 .team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
 
 /* ---------- цепочка владения ---------- */
@@ -5759,6 +5788,9 @@ function reportMatchesPerimeter(d, year, revenueRub){
   return String(pr.year) === String(year) && Math.abs(pr.revenue_rub - revenueRub) <= 0.01 * revenueRub;
 }
 const fmtPct = v => (Math.round(v*100)/100).toString().replace(".", ",") + "%";
+// Множитель пишется с запятой: «×3,44», а не «×3.44» — точка в дробях
+// читается как английская запись и спотыкает глаз на русской странице.
+const fmtMult = v => "×" + String(v).replace(".", ",");
 function editionLabelJs(url){
   try{ const h = new URL(url).hostname.replace(/^www\./,""); return h; }catch(e){ return "источник"; }
 }
@@ -5876,8 +5908,8 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ×${mult.multiple}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена подтверждены двумя чтениями источников)</span></p>`:""}
-        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ×${multOp.multiple}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена подтверждены двумя чтениями источников)</span></p>`:""}
+        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ${fmtMult(multOp.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -6902,7 +6934,7 @@ async function mountMarketMultiples(){
     // значило бы сказать читателю «остальные убыточны или без данных»
     // (четвёртый разбор рецензента: «Убик» ×902 по прибыли исчезал без слов).
     const notShown = (s && s.not_shown) || [];
-    const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ×${n.value})`:""}`).join("; ")}.</p>` : "";
+    const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ${fmtMult(n.value)})`:""}`).join("; ")}.</p>` : "";
     if(!s || !s.clean_total){
       return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>${notShownHtml}`;
     }
@@ -6914,17 +6946,33 @@ async function mountMarketMultiples(){
     const showMedians = data.show_medians !== false;
     const industriesHtml = showMedians && s.industries.length ? `
       <div style="margin-bottom:18px">
-        ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">×${i.median} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
+        ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">${fmtMult(i.median)} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
       </div>` : "";
     // Имя купленной компании — как её знает читатель (профиль в базе), а не
     // капсом из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"»
     // на витрине читается как казённая выписка (правило «язык для людей»).
     const targetName = d => (co(d.target_id)||{}).name || d.target_name || "";
-    const dealsHtml = s.deals.slice(0,15).map(d=>`
-      <a class="an-deal" href="#/deal/${d.id}">
-        <div class="an-deal-head"><span class="an-deal-t">${esc(d.title)}</span><span class="num" style="flex:0 0 auto;font-weight:600">×${d.multiple}</span></div>
-        <span class="an-deal-s">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` (цена пакета ${fmtPct(d.stake)} — ${fnsMoney(d.sum_rub)} — в пересчёте на 100%)`:d.price_scope==="ev"?" с учётом долга":""} ÷ ${fnsMoney(d[v.rubKey])}${targetName(d)?` — ${esc(targetName(d))}`:""}, ${v.metricShort} за ${d[v.yearKey]}${PRICE_TERMS_NOTE[d.price_terms]?` · ${PRICE_TERMS_NOTE[d.price_terms]}`:""}${d.year_basis&&d.year_basis.indexOf("предварительн")>=0?` · год сделки ${d.year} предварительный`:""}</span>
-      </a>`).join("");
+    // Оговорки под названием сделки — только те, что меняют чтение числа:
+    // пересчёт цены пакета, цена с учётом долга, отложенная часть цены,
+    // предварительный год. Остальное — на карточке сделки.
+    const notes = d => [
+      d.price_basis==="scaled" ? `цена пакета ${fmtPct(d.stake)} (${fnsMoney(d.sum_rub)}) пересчитана на 100%` : "",
+      d.price_scope==="ev" ? "цена с учётом долга" : "",
+      PRICE_TERMS_NOTE[d.price_terms] || "",
+      d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
+    ].filter(Boolean).join(" · ");
+    const dealsHtml = `<table class="mult-table"><thead><tr>
+        <th>Сделка</th><th class="num">Год</th><th class="num">Цена за 100%</th>
+        <th class="num">${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}</th><th class="num">Мультипликатор</th>
+      </tr></thead><tbody>${s.deals.slice(0,15).map(d=>`
+      <tr>
+        <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
+          targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
+        <td class="num" data-l="Год сделки">${d.year}</td>
+        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}</td>
+        <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
+        <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span></td>
+      </tr>`).join("")}</tbody></table>`;
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);
     // Одна спокойная строка вместо простыни: сколько ещё придёт и сколько
@@ -6935,7 +6983,7 @@ async function mountMarketMultiples(){
       rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} чтение проверило и не пропустило — почему, видно ниже.` : ""}</p>` : "";
     const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не пропущено чтением: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
-      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">×${s.median}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки. Медиану пока не выводим — сделки слишком разные, чтобы одна цифра читалась как ориентир рынка.</p>`}
+      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки. Медиану пока не выводим — сделки слишком разные, чтобы одна цифра читалась как ориентир рынка.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}
