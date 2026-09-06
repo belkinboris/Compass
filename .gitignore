@@ -19,3 +19,6 @@ data/inbox/updates/
 # pipeline/ingest/approve.py) — если её не будет к следующему прогону,
 # он просто ничего не подтвердит, а не потеряет решение.
 data/inbox/consume_pending.json
+
+# журнал SQLite остаётся после убитого локального сервера — не данные
+*.db-journal
