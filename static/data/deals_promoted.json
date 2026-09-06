@@ -4001,7 +4001,7 @@
   },
   {
    "id": "g1125c0ec",
-   "date": "2026-01-20",
+   "date": "2026-01-19",
    "title": "Wink купил сервис «Смотрешка» (ООО «ЛайфСтрим»)",
    "buyer": "g050522dd",
    "target": "g78add6eb",
@@ -4164,34 +4164,9 @@
     },
     "date": {
      "value": "2026-01-19",
-     "meaning": "closing",
-     "basis": "verified",
-     "card_hash": "6e455fc22d70",
-     "meaning_variants": [
-      "closing"
-     ],
-     "quote": "Сделка была закрыта 19 января 2026 года.",
-     "source": "https://habr.com/ru/news/986854/",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2026-01-19",
-       "meaning": "closing",
-       "quote": "Сделка была закрыта 19 января 2026 года.",
-       "source": "https://habr.com/ru/news/986854/",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2026-01-19",
-       "meaning": "closing",
-       "quote": "Онлайн-кинотеатр Wink («Ростелеком» и НМГ) 19 января закрыл сделку по покупке онлайн-кинотеатра «Смотрешка», сообщает РБК .",
-       "source": "https://www.kommersant.ru/doc/8362652",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "5562bef076a0"
     },
     "nature": {
      "control_change": true,
@@ -27433,7 +27408,7 @@
   },
   {
    "id": "g6f4a071a",
-   "date": "2023-05-04",
+   "date": "2023-04-21",
    "title": "Henkel продала российский бизнес (Lab Industries) консорциуму инвесторов (Augment Investments, Kismet Capital Group, Elbrus Services)",
    "buyer": null,
    "target": "g14db9bb2",
@@ -27585,34 +27560,9 @@
     },
     "date": {
      "value": "2023-04-21",
-     "meaning": "registry",
-     "basis": "verified",
-     "card_hash": "1dc07beb2d36",
-     "meaning_variants": [
-      "registry"
-     ],
-     "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
-     "source": "https://www.interfax.ru/business/897373",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2023-04-21",
-       "meaning": "registry",
-       "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
-       "source": "https://www.interfax.ru/business/897373",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2023-04-21",
-       "meaning": "registry",
-       "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
-       "source": "https://www.interfax.ru/business/897373",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "8bbe1af5a478"
     },
     "nature": {
      "control_change": true,
@@ -104062,7 +104012,7 @@
   },
   {
    "id": "g00773994",
-   "date": "2024-09-02",
+   "date": "2024-08-29",
    "title": "Softline приобрела контроль в производителе лазеров ИРЭ-Полюс у IPG Photonics",
    "buyer": "gda7d982b",
    "target": "g71078e21",
@@ -104221,34 +104171,9 @@
     },
     "date": {
      "value": "2024-08-29",
-     "meaning": "closing",
-     "basis": "verified",
-     "card_hash": "c963d86a7e68",
-     "meaning_variants": [
-      "closing"
-     ],
-     "quote": "Как указала IPG Photonics Corporation в годовом отчете за 2024 г. (форма 10-K, направлена в Американскую комиссию по ценным бумагам и биржам), сделка по продаже НТО \"ИРЭ-Полюс\" состоялась 29 августа 2024 г.",
-     "source": "https://www.comnews.ru/content/238253/2025-03-14/2025-w11/1008/ire-polyus-zasvetilsya-kak-vpg-laserone",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2024-08-29",
-       "meaning": "closing",
-       "quote": "Как указала IPG Photonics Corporation в годовом отчете за 2024 г. (форма 10-K, направлена в Американскую комиссию по ценным бумагам и биржам), сделка по продаже НТО \"ИРЭ-Полюс\" состоялась 29 августа 2024 г.",
-       "source": "https://www.comnews.ru/content/238253/2025-03-14/2025-w11/1008/ire-polyus-zasvetilsya-kak-vpg-laserone",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2024-08-29",
-       "meaning": "closing",
-       "quote": "Как указала IPG Photonics Corporation в годовом отчете за 2024 г. (форма 10-K, направлена в Американскую комиссию по ценным бумагам и биржам), сделка по продаже НТО \"ИРЭ-Полюс\" состоялась 29 августа 2024 г.",
-       "source": "https://www.comnews.ru/content/238253/2025-03-14/2025-w11/1008/ire-polyus-zasvetilsya-kak-vpg-laserone",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7d26b092ab7f"
     },
     "nature": {
      "control_change": true,
@@ -131026,7 +130951,7 @@
   },
   {
    "id": "gb5e69c73",
-   "date": "2023-09-20",
+   "date": "2023-09-18",
    "title": "Сбербанк продал торговые комплексы «Сибирские городки» фирме «Онлайн финанс»",
    "buyer": "gfd1d67e3",
    "target": "gefdf55a9",
@@ -131157,34 +131082,9 @@
     },
     "date": {
      "value": "2023-09-18",
-     "meaning": "closing",
-     "basis": "verified",
-     "card_hash": "f9f17b34667a",
-     "meaning_variants": [
-      "closing"
-     ],
-     "quote": "Согласно «СПАРК-Интерфаксу», сделка была закрыта 18 сентября.",
-     "source": "https://vedomosti.ru/realty/articles/2023/09/20/996212-sberbank-nashel-pokupatelya-na-set-torgovih-tsentrov-region",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2023-09-18",
-       "meaning": "closing",
-       "quote": "Согласно «СПАРК-Интерфаксу», сделка была закрыта 18 сентября.",
-       "source": "https://vedomosti.ru/realty/articles/2023/09/20/996212-sberbank-nashel-pokupatelya-na-set-torgovih-tsentrov-region",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2023-09-18",
-       "meaning": "closing",
-       "quote": "Согласно «СПАРК-Интерфаксу», сделка была закрыта 18 сентября.",
-       "source": "https://vedomosti.ru/realty/articles/2023/09/20/996212-sberbank-nashel-pokupatelya-na-set-torgovih-tsentrov-region",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3d027980478f"
     },
     "nature": {
      "control_change": true,
@@ -150099,7 +149999,7 @@
   },
   {
    "id": "g38129341",
-   "date": "2023-04-13",
+   "date": "2023-04-27",
    "title": "МТС приобрела контроль в разработчике телематических решений СКАУТ-КР",
    "buyer": "g69c88bc7",
    "target": "gf19b3163",
@@ -150282,34 +150182,9 @@
     },
     "date": {
      "value": "2023-04-27",
-     "meaning": "closing",
-     "basis": "verified",
-     "card_hash": "848405fe2aa8",
-     "meaning_variants": [
-      "closing"
-     ],
-     "quote": "27 апреля 2023 Москва, РФ — ПАО «МТС» (MOEX: MTSS), цифровая экосистема, объявляет о закрытии сделки по приобретению 51% акций ООО «Проектная среда» (группа компаний «СКАУТ-Корпоративные решения»), одного из лидирующих в России и СНГ ИТ-разработчиков и интеграторов телематических решений для управления коммерческими автопарками (fleet-менеджмент).",
-     "source": "https://moskva.mts.ru/about/media-centr/soobshheniya-kompanii/novosti-mts-v-rossii-i-mire/2023-04-27/mts-priobrela-kontrol-v-kompanii-skaut-kr-dlya-razvitiya-reshenij-umnogo-avtotransporta",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2023-04-27",
-       "meaning": "closing",
-       "quote": "27 апреля 2023 Москва, РФ — ПАО «МТС» (MOEX: MTSS), цифровая экосистема, объявляет о закрытии сделки по приобретению 51% акций ООО «Проектная среда» (группа компаний «СКАУТ-Корпоративные решения»), одного из лидирующих в России и СНГ ИТ-разработчиков и интеграторов телематических решений для управления коммерческими автопарками (fleet-менеджмент).",
-       "source": "https://moskva.mts.ru/about/media-centr/soobshheniya-kompanii/novosti-mts-v-rossii-i-mire/2023-04-27/mts-priobrela-kontrol-v-kompanii-skaut-kr-dlya-razvitiya-reshenij-umnogo-avtotransporta",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2023-04-27",
-       "meaning": "closing",
-       "quote": "27 апреля 2023 Москва, РФ — ПАО «МТС» (MOEX: MTSS), цифровая экосистема, объявляет о закрытии сделки по приобретению 51% акций ООО «Проектная среда» (группа компаний «СКАУТ-Корпоративные решения»), одного из лидирующих в России и СНГ ИТ-разработчиков и интеграторов телематических решений для управления коммерческими автопарками (fleet-менеджмент).",
-       "source": "https://moskva.mts.ru/about/media-centr/soobshheniya-kompanii/novosti-mts-v-rossii-i-mire/2023-04-27/mts-priobrela-kontrol-v-kompanii-skaut-kr-dlya-razvitiya-reshenij-umnogo-avtotransporta",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "eee82dfaf7ab"
     },
     "nature": {
      "control_change": true,
