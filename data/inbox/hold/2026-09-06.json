@@ -5915,31 +5915,42 @@
    ]
   },
   {
-   "draft_id": "d66659216",
-   "title": "Экономия как новая норма: как россияне перестраивают покупки",
+   "draft_id": "d19924248",
+   "title": "На Всемирные игры кочевников продали около 37,2 тыс. билетов",
    "date": "2026-09-06",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/6/ekonomiya-kak-novaya-norma-kak-rossiyane-perestraivayut-pokupki"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28084961"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-06",
+     "title": "Сделка завершена",
+     "note": "Вечером 6 сентября состоится официальная церемония закрытия",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28084961"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "около 37,2 тыс. билетов",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "около 37,2 тыс. билетов",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
