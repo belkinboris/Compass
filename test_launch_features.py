@@ -3806,6 +3806,7 @@ def test_a_process_that_stopped_serving_kills_itself(monkeypatch):
 
     monkeypatch.setattr(m.threading, "Thread", Immediate)
     monkeypatch.setattr(m.time, "sleep", lambda *_: None)
+    monkeypatch.setattr(m, "_served_at_least_once", True)
     m._die_when_no_longer_serving()
     assert calls == [0], (
         "процесс, переставший обслуживать запросы, не гасит себя — платформа "
@@ -3822,3 +3823,23 @@ def test_shutdown_does_not_kill_the_process_under_pytest(monkeypatch):
     monkeypatch.setenv("PYTEST_CURRENT_TEST", "да")
     m._die_when_no_longer_serving()
     assert calls == [], "выход из процесса сработал под pytest: %s" % calls
+
+
+def test_a_process_that_never_served_is_not_killed_by_us(monkeypatch):
+    """Неудачный старт — не зомби, и гасить его своими руками нельзя.
+
+    Выход по остановке заведён против процесса, который ОБСЛУЖИВАЛ и
+    перестал (см. соседний тест). Если же процесс не успел ответить ни на
+    один запрос — порт занят, падение в lifespan, — то наш `os._exit`
+    только превратил бы честную причину в цикл перезапусков, где платформа
+    не успевает её даже записать."""
+    import main as m
+    calls = []
+    monkeypatch.setattr(m.os, "_exit", lambda code: calls.append(code))
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.delitem(sys.modules, "pytest")
+    monkeypatch.setattr(m, "_served_at_least_once", False)
+    m._die_when_no_longer_serving()
+    assert calls == [], (
+        "процесс, ни разу не ответивший на запрос, погашен нами — "
+        "неудачный старт превращается в цикл перезапусков: %s" % calls)
