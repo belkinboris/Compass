@@ -5888,7 +5888,7 @@
    ]
   },
   {
-   "draft_id": "d49657372",
+   "draft_id": "d12368682",
    "title": "В «Яндекс маркете» рассказали, кто из россиян чаще покупает новые iPhone",
    "date": "2026-09-07",
    "src": [
@@ -5918,7 +5918,7 @@
    ]
   },
   {
-   "draft_id": "d83463136",
+   "draft_id": "d42596873",
    "title": "RBI миллиардера Тиктинского отказалась от покупки участка возле Лавры",
    "date": "2026-09-07",
    "src": [
@@ -5946,35 +5946,7 @@
    ]
   },
   {
-   "draft_id": "d22370933",
-   "title": "Сотрудники нацполиции Украины пытались продать иностранцам девятилетнюю девочку",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2162376/2026-09-07/sotrudniki-natcpolitcii-ukrainy-pytalis-prodat-inostrantcam-deviatiletniuiu-devochku"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d85713234",
+   "draft_id": "d46344831",
    "title": "«М.видео» привлекло 17,5 млрд рублей на развитие маркетплейса",
    "date": "2026-09-07",
    "src": [
@@ -6013,7 +5985,7 @@
    ]
   },
   {
-   "draft_id": "d91894266",
+   "draft_id": "d66807015",
    "title": "Склад Obi в Солнечногорске перешел к производителю косметики Mixit",
    "date": "2026-09-07",
    "src": [
@@ -6041,19 +6013,145 @@
    ]
   },
   {
-   "draft_id": "d29717494",
-   "title": "«Я хочу свои деньги!»: как 11-летний школьник выносит мусор, чтобы купить LEGO, пока родители не работают",
+   "draft_id": "d81555759",
+   "title": "WSJ узнала о схеме продажи ключей от пляжа в США за сотни тысяч долларов // WSJ: в США можно купить ключи от пляжа за $650 тыс.",
    "date": "2026-09-07",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/business/2026/09/07/76626214/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8937805"
+    ]
+   ],
+   "sum": "$650 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d36208450",
+   "title": "Малайзия в августе привлекла рекордные $3,9 млрд в облигации",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/303578"
+    ]
+   ],
+   "sum": "$3,9 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малайзия в августе",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малайзия в августе",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d57605041",
+   "title": "Стало известно о продаже российских Су-57 и Ил-78МК-90А",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/07/stalo-izvestno-o-prodazhe-rossiyskih-su-57-i-il-78mk-90a/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70926816",
+   "title": "Мурманская область заняла восьмое место по росту инвестиций в стране",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/murmansk/2026/9/7/murmanskaya-oblast-zanyala-vosmoe-mesto-po-rostu-investiczij-v-strane"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d89456433",
+   "title": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе преду",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7713"
+    ]
+   ],
+   "sum": "100 млн ₽",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-07",
+     "title": "Переговоры",
+     "note": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе предусмотрена возможность расширения капитала. Фонд займется…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7713"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
