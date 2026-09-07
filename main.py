@@ -1986,14 +1986,17 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                     "answerCallbackQuery", callback_query_id=callback.get("id"),
                     text="Это видят только владелец и партнёр.")
                 return {"ok": True}
-            body = _queue_report() if menu.group(1) == "queue" else _stats_report()
-            notification_service.tg_api(
-                "sendMessage",
-                chat_id=(callback.get("message") or {}).get("chat", {}).get("id"),
-                text=body, parse_mode="HTML", disable_web_page_preview=True,
-                **_thread_kwargs(callback.get("message")))
-            notification_service.tg_api("answerCallbackQuery",
-                                        callback_query_id=callback.get("id"))
+            which = menu.group(1)
+            chat = (callback.get("message") or {}).get("chat", {}).get("id")
+            thread_kw = _thread_kwargs(callback.get("message"))
+
+            def _send_menu():
+                body = _queue_report() if which == "queue" else _stats_report()
+                notification_service.tg_api(
+                    "sendMessage", chat_id=chat, text=body, parse_mode="HTML",
+                    disable_web_page_preview=True, **thread_kw)
+
+            _answer_and_do(callback, _send_menu)
             return {"ok": True}
 
         # «Показать придержанные / что скоро выйдет» — НЕ список, а рабочие
@@ -2012,9 +2015,8 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                 return {"ok": True}
             chat = (callback.get("message") or {}).get("chat", {}).get("id")
             kind = show.group(1)
-            notification_service.tg_api("answerCallbackQuery",
-                                        callback_query_id=callback.get("id"))
-            _send_queue_batch(chat, kind, thread=(callback.get("message") or {}).get("message_thread_id"))
+            thread = (callback.get("message") or {}).get("message_thread_id")
+            _answer_and_do(callback, lambda: _send_queue_batch(chat, kind, thread=thread))
             return {"ok": True}
 
         # Заявка на доступ к сайту (ACCESS_GATE): «Одобрить»/«Отклонить» под
@@ -2093,7 +2095,12 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                 db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
                                           decided_by=str(from_id)))
                 db.commit()
-            _mark_decided(callback, verdict, answered=True)
+            # Правка самого сообщения («— ✅ Одобрено (Борис)») — ещё один
+            # вызов Bot API, и он не должен задерживать ответ вебхуку:
+            # решение уже в базе, а Telegram ждёт ответа секунды, не десятки
+            # секунд (см. _answer_and_do).
+            threading.Thread(target=_mark_decided, args=(callback, verdict),
+                             kwargs={"answered": True}, daemon=True).start()
         elif callback.get("id"):
             notification_service.tg_api("answerCallbackQuery",
                                         callback_query_id=callback["id"],
@@ -2264,6 +2271,32 @@ def _card_line(card: dict) -> str:
         parts.append('<a href="%s/#/preview/%s">Открыть карточку целиком</a>'
                      % (SITE_URL, html_escape(str(card["id"]))))
     return "\n\n".join(parts)
+
+
+def _answer_and_do(callback, work, text=None):
+    """Ответить Telegram НЕМЕДЛЕННО, а отправку сообщений сделать в фоне.
+
+    НАЙДЕНО ВЛАДЕЛЬЦЕМ 7 сентября 2026: он нажал «Что скоро выйдет», и
+    сорок секунд не происходило ничего — «раньше было мгновенно».
+    `getWebhookInfo` в ту же минуту показал `last_error_message: Connection
+    timed out` и очередь недоставленных обновлений. Причина не в кнопке:
+    обработчик делал ВСЮ работу внутри запроса вебхука — ответ на нажатие
+    плюс заголовок очереди плюс по сообщению на каждую карточку, и каждый
+    вызов Bot API с боевого хоста стоит до 12 секунд таймаута (связь
+    Timeweb → api.telegram.org нестабильна, см. telegram_endpoint.py).
+    Telegram столько не ждёт: он считает вебхук недоступным, отваливается по
+    таймауту и присылает то же нажатие снова — очередь растёт, а человек
+    видит бесконечное вращение.
+
+    Правило: обработчик вебхука обязан вернуть ответ быстро. Всё, что
+    делает БОЛЬШЕ ОДНОГО вызова Bot API, уходит в фоновый поток; сам
+    `answerCallbackQuery` остаётся в запросе — он один, и именно он гасит
+    вращение кнопки.
+    """
+    if callback.get("id"):
+        notification_service.tg_api("answerCallbackQuery",
+                                    callback_query_id=callback["id"], text=text)
+    threading.Thread(target=work, daemon=True).start()
 
 
 def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
