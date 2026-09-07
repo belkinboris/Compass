@@ -225,7 +225,16 @@ _MONEY_AMOUNT = re.compile(
 
 
 def _is_financial_report(sentence):
-    """Предложение только сообщает финансовый показатель с суммой."""
+    """Предложение только сообщает финансовый показатель с суммой.
+
+    Второе условие — про поле `eco.target_fin`, где ВСЁ по определению
+    отчётность: сумма без слова-показателя («Годом ранее это было 23 млн ₽ и
+    14,8 млн ₽» — продолжение предыдущей фразы про выручку и прибыль) тоже
+    цифра из отчёта, а не описание компании. Нашлось 8 сентября 2026 на посте
+    «Базис»/Proto: первая фраза с «выручкой» отсеялась, а её хвост без
+    подлежащего попал в «Предмет»."""
+    if _MONEY_AMOUNT.search(sentence) and re.search(r'(годом ранее|это было|годом раньше|соответственно)', sentence, re.I):
+        return True
     return bool(_FINANCIAL_INDICATOR.search(sentence) and _MONEY_AMOUNT.search(sentence))
 
 
@@ -651,6 +660,91 @@ def is_fresh(deal, today=None):
     return age is not None and age <= FRESH_DAYS
 
 
+# ХЭШТЕГИ — ДВА УРОВНЯ, БЕЗ СКЛЕЙКИ СЛОВ (K+, 7 сентября 2026).
+#
+# Раньше тег делался из названия отрасли «как есть», с вырезанными пробелами:
+# «#Пищепромнапитки», «#Транспортилогистика», «#Продажасторгов» — партнёр:
+# «я бы не сливала слова в хэштэгах, так сложнее читается», «почему-то
+# хэштэги вообще не ищутся». Не ищутся ровно потому, что склеены: человек
+# ищет #транспорт или #торги, а в канале лежит #Транспортилогистика.
+# Её же предложение — два типа тегов, общий и специфический («типа
+# промышленность и уголь»): по общему собирается вся отрасль, по
+# специфическому — узкая тема. Слова — одиночные, какими их ищут.
+INDUSTRY_TAGS = {
+    'Нефть и газ': ('ТЭК', 'нефтегаз'),
+    'Уголь': ('ТЭК', 'уголь'),
+    'Энергетика': ('ТЭК', 'энергетика'),
+    'ГМК и добыча': ('промышленность', 'ГМК'),
+    'Химия и удобрения': ('промышленность', 'химия'),
+    'Машиностроение': ('промышленность', 'машиностроение'),
+    'Автопром': ('промышленность', 'автопром'),
+    'Лесопром': ('промышленность', 'лесопром'),
+    'Производство тары': ('промышленность', 'упаковка'),
+    'Агро': ('потребрынок', 'агро'),
+    'Пищепром и напитки': ('потребрынок', 'пищепром'),
+    'Ритейл': ('потребрынок', 'ритейл'),
+    'E-commerce': ('потребрынок', 'ecommerce'),
+    'Потребительские товары': ('потребрынок', 'FMCG'),
+    'ИТ и интернет': ('технологии', 'ИТ'),
+    'Искусственный интеллект': ('технологии', 'ИИ'),
+    'Телеком': ('технологии', 'телеком'),
+    'Финтех': ('финансы', 'финтех'),
+    'Банки': ('финансы', 'банки'),
+    'Страхование': ('финансы', 'страхование'),
+    'Финансовые услуги': ('финансы', 'финуслуги'),
+    'Рынок ценных бумаг': ('финансы', 'биржа'),
+    'Управление активами': ('финансы', 'фонды'),
+    'Холдинги': ('финансы', 'холдинги'),
+    'Транспорт и логистика': ('инфраструктура', 'логистика'),
+    'Порты и инфраструктура': ('инфраструктура', 'порты'),
+    'ЖКХ и обращение с отходами': ('инфраструктура', 'ЖКХ'),
+    'Недвижимость': ('недвижимость', 'недвижимость'),
+    'Строительство': ('недвижимость', 'девелопмент'),
+    'Гостиницы и туризм': ('недвижимость', 'гостиницы'),
+    'Здравоохранение': ('медицина', 'клиники'),
+    'Фармацевтика': ('медицина', 'фарма'),
+    'Образование': ('услуги', 'образование'),
+    'Развлечения': ('услуги', 'развлечения'),
+    'Профессиональные услуги': ('услуги', 'консалтинг'),
+    'Медиа': ('медиа', 'медиа'),
+}
+TYPE_TAGS = {
+    'M&A': 'MA',
+    'Продажа с торгов': 'торги',
+    'IPO': 'IPO',
+    'Инвестиция': 'инвестиции',
+    'Финансирование': 'финансирование',
+    'Реорганизация': 'реорганизация',
+    'СП': 'СП',
+    'Создание СП': 'СП',
+    'Продажа недвижимости': 'недвижимость',
+}
+
+
+def hashtags(deal):
+    """Теги поста: общий и специфический по каждой отрасли карточки, потом
+    тип сделки. Порядок стабильный, повторов нет; неизвестная отрасль
+    («Не определена») тега не даёт вовсе."""
+    out = []
+    def add(word):
+        if word and ('#' + word) not in out:
+            out.append('#' + word)
+    inds = [deal.get('ind')] + list(deal.get('industries') or [])
+    for ind in inds:
+        pair = INDUSTRY_TAGS.get(str(ind or '').strip())
+        if pair:
+            add(pair[0]); add(pair[1])
+    kind = str(deal.get('type') or '').split('·')[0].strip()
+    add(TYPE_TAGS.get(kind))
+    return out
+
+
+def _lab(name):
+    """Подпись строки поста. Жирная — партнёр 7 сентября 2026: «я бы как-то
+    выделила слова «статус», «сумма» и прочее, чтобы они не сливались»."""
+    return '<b>%s:</b>' % name
+
+
 def render(deal, companies, updates=(), today=None, fin=None):
     """Текст поста (HTML для Telegram). Пустых строк-заглушек в посте нет.
 
@@ -718,45 +812,30 @@ def render(deal, companies, updates=(), today=None, fin=None):
     if asset_novel and detail and not has_novelty(asset, detail):
         asset_novel = False
     if asset_novel and detail:
-        subject = 'Предмет: %s — %s' % (esc(asset), esc(detail))
+        subject = '%s %s — %s' % (_lab('Предмет'), esc(asset), esc(detail))
     elif asset_novel:
-        subject = 'Предмет: %s' % esc(asset)
+        subject = '%s %s' % (_lab('Предмет'), esc(asset))
     elif detail:
-        subject = 'Предмет: %s' % esc(detail)
+        subject = '%s %s' % (_lab('Предмет'), esc(detail))
     else:
         subject = None
     target_fin = fin.get('target')
-    if subject or target_fin:
-        lines.append('')
-        if subject:
-            emit(subject)
-        if target_fin:
-            # «Финансы цели» звучало как внутренний термин («финансы чего?» —
-            # спросил партнёр 31 августа); по-русски — чья это отчётность.
-            emit('Финансы покупаемой компании, %s год: %s' % (target_fin[0], esc(target_fin[1])))
-
-    facts = []
-    if has(deal.get('sum')):
-        facts.append('Сумма: %s' % esc(deal['sum']))
-    elif PLACEHOLDER.match(str(deal.get('sum') or '')):
-        # Карточка ПРЯМО утверждает, что сумма не раскрыта, — честный факт,
-        # не пустота (партнёры сами хвалили именно такую строку у конкурента).
-        # `sum=None`, наоборот, значит «мы не нашли», а не «стороны скрыли» —
-        # молчание там честнее любой формулировки.
-        facts.append('Сумма: не раскрывается')
-    if has(deal.get('status')):
-        status_line = 'Статус: %s' % esc(deal['status'])
-        if deal['status'] == 'Закрыта':
-            when = fmt_month(deal.get('date'))
-            if when:
-                status_line += ' · %s' % esc(when)
-        facts.append(status_line)
-    if has(deal.get('ind')):
-        facts.append('Отрасль: %s' % esc(deal['ind']))
-    if facts:
-        lines.append('')
-        for f in facts:
-            emit(f)
+    # ОДНА КАРТОЧКА ФАКТОВ, БЕЗ ПУСТЫХ СТРОК ВНУТРИ. Партнёр 7 сентября 2026:
+    # «непонятен принцип пробелов между строками — между суммой и статусом
+    # нет пробела, а между отраслью и деталями есть». Принцип теперь один:
+    # всё, что с подписью (предмет, стороны, их отчётность, сумма, статус,
+    # отрасль), стоит одним блоком; абзацы прозы («Зачем», консультанты,
+    # источник) отделены пустой строкой.
+    card = []
+    if subject:
+        card.append(subject)
+    if target_fin:
+        # «Финансы цели» звучало как внутренний термин («финансы чего?» —
+        # спросил партнёр 31 августа); по-русски — чья это отчётность.
+        card.append('%s %s' % (_lab('Финансы покупаемой компании, %s год' % target_fin[0]),
+                               esc(target_fin[1])))
+    for text in card:
+        reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
 
     # ПОКУПАТЕЛЬ — тоже с сутью (профиль компании либо `eco.context`, где эта
     # сторона обычно и описывается), плюс его собственная финстрока (П7-9).
@@ -778,38 +857,62 @@ def render(deal, companies, updates=(), today=None, fin=None):
         # (2 сентября, госпакет Шереметьево), только здесь проверка строже —
         # см. докстроку names_party_upfront: имя из строки при этом НЕ
         # пропадает, оно остаётся внутри самой детали.
-        buyer_line = 'Покупатель: %s' % esc(buyer_detail)
+        buyer_line = '%s %s' % (_lab('Покупатель'), esc(buyer_detail))
     elif buyer and (buyer_novel or buyer_detail):
-        buyer_line = 'Покупатель: %s' % esc(buyer)
+        buyer_line = '%s %s' % (_lab('Покупатель'), esc(buyer))
         if buyer_detail:
             buyer_line += ' — %s' % esc(buyer_detail)
     else:
         buyer_line = None
     buyer_fin = fin.get('buyer')
-    if buyer_line or buyer_fin:
-        lines.append('')
-        if buyer_line:
-            emit(buyer_line)
-        if buyer_fin:
-            emit('Финансы покупателя, %s год: %s' % (buyer_fin[0], esc(buyer_fin[1])))
+    if buyer_line:
+        emit_card = card.append
+        emit_card(buyer_line)
+        reference = reference + ' ' + re.sub(r'<[^>]+>', '', buyer_line)
+    if buyer_fin:
+        card.append('%s %s' % (_lab('Финансы покупателя, %s год' % buyer_fin[0]), esc(buyer_fin[1])))
 
     # ПРОДАВЕЦ — только имя, только с новизной (брифом не обещана суть, чтобы
     # не раздувать пост: покупатель и предмет для читателя важнее).
     if seller and has_novelty(seller, reference):
+        line = '%s %s' % (_lab('Продавец'), esc(seller))
+        card.append(line)
+        reference = reference + ' ' + re.sub(r'<[^>]+>', '', line)
+
+    if has(deal.get('sum')):
+        card.append('%s %s' % (_lab('Сумма'), esc(deal['sum'])))
+    elif PLACEHOLDER.match(str(deal.get('sum') or '')):
+        # Карточка ПРЯМО утверждает, что сумма не раскрыта, — честный факт,
+        # не пустота (партнёры сами хвалили именно такую строку у конкурента).
+        # `sum=None`, наоборот, значит «мы не нашли», а не «стороны скрыли» —
+        # молчание там честнее любой формулировки.
+        card.append('%s не раскрывается' % _lab('Сумма'))
+    if has(deal.get('status')):
+        status_line = '%s %s' % (_lab('Статус'), esc(deal['status']))
+        if deal['status'] == 'Закрыта':
+            when = fmt_month(deal.get('date'))
+            if when:
+                status_line += ' · %s' % esc(when)
+        card.append(status_line)
+    if has(deal.get('ind')):
+        card.append('%s %s' % (_lab('Отрасль'), esc(deal['ind'])))
+    if card:
         lines.append('')
-        emit('Продавец: %s' % esc(seller))
+        lines.extend(card)
+        for text in card:
+            reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
 
     # ЗАЧЕМ — одно предложение из `eco.rationale`, если оно ещё не сказано.
     rationale = (deal.get('eco') or {}).get('rationale')
     why = _pick_novel_sentences(rationale, reference, limit=1, max_chars=200) if has(rationale) else []
     if why:
         lines.append('')
-        emit('Зачем: %s' % esc(' '.join(why)))
+        emit('%s %s' % (_lab('Зачем'), esc(' '.join(why))))
 
     adv = advisers(deal)
     if adv:
         lines.append('')
-        lines.append('Консультанты: %s' % esc(', '.join(adv[:6])))
+        lines.append('%s %s' % (_lab('Консультанты'), esc(', '.join(adv[:6]))))
 
     # ССЫЛКИ НА ПЛАТФОРМУ — НЕ В ТЕКСТЕ, А КНОПКАМИ ПОД ПОСТОМ (`lens_links`,
     # `render_buttons`). Владелец 2 сентября 2026: «кнопки экономист/юрист
@@ -823,7 +926,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
     src = [s for s in (deal.get('src') or []) if len(s) > 1 and str(s[1]).startswith('http')]
     if src:
         lines.append('')
-        lines.append('Источник: <a href="%s">%s</a>' % (esc(src[0][1]), esc(src[0][0])))
+        lines.append('%s <a href="%s">%s</a>' % (_lab('Источник'), esc(src[0][1]), esc(src[0][0])))
         if len(src) > 1:
             # «Ещё источников: 2» — пустая строка: непонятно, где они и
             # зачем о них знать (замечание владельца 3 сентября 2026).
@@ -838,14 +941,10 @@ def render(deal, companies, updates=(), today=None, fin=None):
         lines.append('')
         lines.append('⟳ Обновлено: %s' % esc(', '.join(updates)))
 
-    # Хештег — из названия отрасли и типа как есть: регистр не трогаем, иначе
-    # «#ИТиинтернет» превращается в нечитаемое «#итиинтернет».
-    tag = lambda s: '#' + re.sub(r'[^\wА-Яа-яЁё]+', '', str(s or ''))
-    tags = [tag(deal.get('ind'))]
-    if has(deal.get('type')):
-        tags.append(tag(str(deal['type']).split('·')[0]))
-    lines.append('')
-    lines.append(' '.join(t for t in tags if len(t) > 1))
+    tags = hashtags(deal)
+    if tags:
+        lines.append('')
+        lines.append(' '.join(tags))
     return '\n'.join(lines)
 
 
@@ -862,8 +961,9 @@ def lens_links(deal):
             or has(eco.get('share')) or has(eco.get('rationale')) or has(eco.get('val'))
             or has(eco.get('target_fin')) or has(eco.get('finadv'))):
         out.append(('Экономист', 'eco'))
-    if (advisers(deal) or has(law.get('struct')) or has(law.get('appr'))
-            or has(law.get('terms'))):
+    # «Юрист» — только согласования, условия и юридические консультанты
+    # (Артем, 7 сентября 2026); структура сделки теперь на «Обзоре».
+    if advisers(deal) or has(law.get('appr')) or has(law.get('terms')):
         out.append(('Юрист', 'law'))
     return out
 

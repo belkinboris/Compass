@@ -106,19 +106,26 @@ def check_multiples(base: str, p: Protocol) -> None:
     bad_basis = [row['id'] for row in m['deals'] if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
     # Слой фактов: каждая показанная сделка обязана нести подтверждение двумя
     # чтениями и чистую арифметику (facts.number_checks) — по ответу сайта.
-    unverified = [row['id'] for row in m['deals'] if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
+    # Два сигнала (8 сентября 2026): строка либо проверена двумя чтениями
+    # (`verified_by`), либо честно помечена «по тексту карточки» (`confidence:
+    # computed`). Без подтверждения и без пометки — дефект.
+    unverified = [row['id'] for row in m['deals']
+                  if row.get('confidence') != 'computed'
+                  and not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
+    unflagged = [row['id'] for row in m['deals'] if row.get('confidence') not in ('verified', 'computed')]
     dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
     no_year_basis = [row['id'] for row in m['deals'] if not row.get('year_basis')]
-    ok = (not forbidden and not bad_share and not bad_basis and not unverified
+    ok = (not forbidden and not bad_share and not bad_basis and not unverified and not unflagged
           and not dirty and not no_year_basis and not bad_scale)
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
-    p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без малых долей и не-цен', ok,
+    p.add('Мультипликаторы: каждая строка либо подтверждена двумя чтениями, либо помечена «по тексту карточки»; без малых долей и не-цен', ok,
           base + '/api/analytics/multiples',
-          f"показано {m['clean_total']} (подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
+          f"проверенных показано {m['clean_total']}, по тексту карточки {m.get('computed_total', 0)} "
+          f"(подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
           f"запрещённые: {forbidden or 'нет'}; доля ниже порога: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
           f"пересчёт цены пакета: {bad_scale or 'сходится'}; "
-          f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
+          f"без подтверждения: {unverified or 'нет'}; без пометки сигнала: {unflagged or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
     # Проверенная сделка, которой нет в списке, обязана быть названа с причиной
     # (выброс, убыток, нет отчёта): скрытая молча, она читается как «данных нет»
     # или «убыточна» (четвёртый разбор рецензента, пункт 6).

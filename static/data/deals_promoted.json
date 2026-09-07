@@ -115415,7 +115415,7 @@
    "title": "Аэрофлот приобретает долю в АО «Аэромар»",
    "buyer": "gf3ed02a1",
    "target": "g40580395",
-   "ind": "Транспорт и логистика",
+   "ind": "Пищепром и напитки",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Обсуждается",
@@ -115524,7 +115524,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "industries": [
+    "Пищепром и напитки",
+    "Транспорт и логистика"
+   ]
   },
   {
    "id": "g3d9af03c",
@@ -208883,7 +208887,7 @@
    "id": "g2c27516d",
    "date": "2026-09-01",
    "title": "«Аэрофлот» выкупил долю структуры Lufthansa в дочернем «Аэромаре»",
-   "ind": "Транспорт и логистика",
+   "ind": "Пищепром и напитки",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
@@ -209035,7 +209039,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "industries": [
+    "Пищепром и напитки",
+    "Транспорт и логистика"
+   ]
   },
   {
    "id": "g0ff8c5c4",

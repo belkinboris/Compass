@@ -267,11 +267,15 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     assert "methodology" in body["operating_profit"] and body["operating_profit"]["methodology"]
 
 
-def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch):
+def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client, monkeypatch):
     """Сделка, проходящая все правила ПО ТЕКСТУ (100%, цена в рублях, ИНН
-    подтверждён), но без двух согласных чтений источника — в списке
-    мультипликаторов не показывается: правила предлагают, чтение решает.
-    Эндпоинт говорит, что она ждёт чтения, и почему исключена."""
+    подтверждён), но без двух согласных чтений источника, с 8 сентября 2026
+    показывается ВТОРЫМ сигналом — «рассчитано по тексту карточки»: помечена
+    `confidence: computed`, в проверенные (`clean_total`) и в отраслевые
+    ориентиры не входит, а эндпоинт по-прежнему говорит, что она ждёт чтения
+    и почему не подтверждена. До этого дня такие сделки не показывались
+    вовсе — владелец: «мультипликаторов стало слишком мало», рецензент:
+    три сигнала вместо одного."""
     import facts
     _seed_multiples_entity("mult-unread-target", "7710000601", 2023, 500_000_000)
     deal = dict(
@@ -288,7 +292,13 @@ def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch
 
     body = client.get("/api/analytics/multiples").json()
     assert body["candidates_total"] == 1 and body["awaiting_reading"] == 1
-    assert body["verified_total"] == 0 and body["deals"] == []
+    assert body["verified_total"] == 0 and body["clean_total"] == 0
+    assert body["computed_total"] == 1 and body["computed_candidates_total"] == 1
+    assert [d["id"] for d in body["deals"]] == ["mult-unread-deal"]
+    row = body["deals"][0]
+    assert row["confidence"] == "computed" and row["reason_not_verified"] == "price_not_verified"
+    assert "по тексту" in row["formula"] or "текст" in row["formula"]
+    assert body["industries"] == [], "строка по тексту карточки не должна давать отраслевой ориентир"
     assert any(e["reason"] == "price_not_verified" for e in body["excluded"]), body["excluded"]
 
 

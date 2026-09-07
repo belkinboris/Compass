@@ -935,6 +935,8 @@ a.dp-asset-name:hover{color:var(--accent)}
   border:1px solid var(--line);color:var(--muted);font-size:10.5px;letter-spacing:.04em;
   text-transform:uppercase;vertical-align:2px;white-space:nowrap}
 .mult-scale-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.mult-flag-verified{background:#e6f4ea;color:#1e6b3a;border-color:#bfe3c9}
+.mult-flag-computed{background:#fff4e0;color:#8a5a00;border-color:#f0d9a8}
 .mult-x{font-weight:600}
 .mult-sub{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.4}
 @media(max-width:760px){
@@ -1938,14 +1940,6 @@ const legalAdvisors = d => dealAdvisorItems(d).filter(it=>it.kind==="юриди�
 const financialAdvisors = d => dealAdvisorItems(d).filter(it=>it.kind==="финансовый");
 /* Одна фирма дважды на одной карточке (АЛРУД и ALRUD, Baker McKenzie и её
    бывший российский офис) — оставляем первую запись каждой пары «фирма + сторона». */
-const uniqAdvisors = (list, d) => {
-  const seen = new Set();
-  return list.filter(a=>{
-    const key = (firmIdOf(a[1])||String(a[1]).toLowerCase().replace(/\s+/g," ")) + "|" + advSide(a[0]||"", d, advCleanNote(typeof a[2]==="string"?a[2]:""));
-    if(seen.has(key)) return false;
-    seen.add(key); return true;
-  });
-};
 /* Заметка о консультанте (`law.adv[i][2]`) собиралась притоком с «Источник: …»
    прямо внутри текста — то как голым URL в конце абзаца, то как служебной
    меткой метода («Источник: обогащение/веб-поиск»), которая читателю ничего
@@ -2242,7 +2236,6 @@ const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.lengt
 /* «Раскрытая команда» — это сделки, где назван хотя бы один консультант.
    Считаем отдельной функцией: в шаблоне такое выражение не читается, а цифру
    на первом экране пользователь должен уметь проверить. */
-const TEAM_KNOWN = () => DEALS.filter(d=>d.law&&d.law.adv&&d.law.adv.some(a=>hasFact(a[1]))).length;
 
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
@@ -2903,55 +2896,6 @@ function relevantDeals(question, limit){
   scored.sort((a,b)=>b.score-a.score || (b.d.date||"").localeCompare(a.d.date||""));
   return scored.slice(0, limit).map(x=>x.d);
 }
-function buildContext(question, contextType, contextId){
-  /* ЗАГЛУШКИ В КОНТЕКСТ НЕ КЛАДЁМ. Объекты eco/law у каждой карточки имеют
-     фиксированный набор полей, и у большинства сделок они заполнены прочерком
-     «—». Отправляя их модели, мы платим временем ответа за строки, которые не
-     несут ни одного факта: на 40 карточках это 30,1 КБ против 22,3 КБ — четверть
-     запроса. Скорость ответа — жалоба владельца №1 по ассистенту, и это самая
-     дешёвая её часть. Пустое поле и так значит «не раскрыто»; модель не должна
-     узнавать об этом из явного прочерка. */
-  const filled = obj => {
-    if(!obj) return undefined;
-    const out = {};
-    Object.keys(obj).forEach(k=>{
-      const v = obj[k];
-      if(v===null||v===undefined) return;
-      if(Array.isArray(v)){ if(v.length) out[k]=v; return; }
-      const s = String(v).trim();
-      if(s && s!=="—" && !/^не\s+раскры/i.test(s)) out[k]=v;
-    });
-    return Object.keys(out).length ? out : undefined;
-  };
-  const fullOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,type:d.type,status:d.status,
-                        sum:d.sum||undefined,buyer:d.buyer_name||undefined,seller:d.seller||undefined,
-                        asset:d.asset||undefined,
-                        economist:filled(d.eco),lawyer:filled(d.law),sources:d.src});
-  const autoOf = d => ({id:d.id,date:d.date,title:d.title,industry:d.ind,status:d.status,sum:d.sum,advisor:((d.law&&d.law.adv||[])[0]&&d.law.adv[0][1]!=="Не раскрывались")?d.law.adv[0][1]:null,summary:((d.eco&&d.eco.rationale)||"").slice(0,220)});
-  const mapDeal = d => d.auto ? autoOf(d) : fullOf(d);
-  const byDateDesc = list => list.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-
-  let scoped = null;
-  if(contextType==="deal" && contextId){
-    const d = DEALS.find(x=>x.id===contextId);
-    if(d) scoped = [d, ...relatedList(d).slice(0,6).map(o=>o.x)];
-  } else if((contextType==="company"||contextType==="advisor") && contextId){
-    const list = contextType==="company" ? companyDeals(contextId).structured : firmDeals(contextId).full;
-    if(list.length) scoped = byDateDesc(list).slice(0,40);
-  } else if(contextType==="industry" && contextId){
-    const list = DEALS.filter(d=>d.ind===contextId);
-    if(list.length) scoped = byDateDesc(list).slice(0,50);
-  }
-  const deals = scoped || relevantDeals(question, 40);
-
-  return JSON.stringify({
-    deals:deals.map(mapDeal),
-    compact_deals:MINI_DEALS.map(m=>({date:m.date,title:m.title,industry:m.ind,advisor:ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:m.firm,role:m.role,source:m.src})),
-    channel_deals:CHANNEL_DEALS.map(c=>({date:c.date,title:c.title,industry:c.ind,note:c.note,found_via:c.channel,source:c.src})),
-    firms_catalog:FIRMS.map(f=>f.n),
-    investment_advisors:INV_FIRMS.map(f=>f.n)
-  });
-}
 
 /* Ответ, когда сервер не ответил вовсе. Раньше здесь лежали зашитые факты
    («Orion — N сделок», «Балтика — 34 млрд») трёхмесячной давности, и они
@@ -3359,10 +3303,6 @@ const KIND_BADGE_META = {
   ipo:         {label:"IPO", cls:"badge-ipo"},
   reorg:       {label:"Реорганизация", cls:"badge-reorg"},
 };
-function kindBadge(kind){
-  const meta = KIND_BADGE_META[kind || dealKindOf("")];
-  return meta ? `<span class="kind-badge ${meta.cls}">${meta.label}</span>` : "";
-}
 /* Подпись «дата сделки — май 2026» под заголовком. Не показывается, когда обе
    даты в одном месяце (тогда она повторяла бы то, что уже стоит слева) и когда
    даты сделки нет вовсе. Была «сделка — май 2026» — партнёр 2 сентября 2026:
@@ -4412,7 +4352,15 @@ const realAdv = d => (d.law && d.law.adv || []).filter(a => hasFact(a[1]));
    молча не срабатывает (тот же род граблей, что \b после приставки). */
 const PLACEHOLDER = /^(?:[—-]|н\/д|нет\s+данных|(?:публично|официально)\s+не\s+(?:раскры|сообщал|разглаш)[а-яё]*|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*(?:\s+(?:официально|публично))?)[.\s]*$/i;
 const hasFact = v => { const s = String(v==null?"":v).trim(); return !!s && !PLACEHOLDER.test(s); };
-const lawHasContent = d => hasFact(d.law && d.law.struct) || hasFact(d.law && d.law.appr) ||
+/* ЛИНЗА «ЮРИСТ» — ТОЛЬКО СОГЛАСОВАНИЯ, УСЛОВИЯ И ЮРИДИЧЕСКИЕ КОНСУЛЬТАНТЫ.
+   Артем, 7 сентября 2026, на карточке ТЦ «Родник»/«Алмаз»: «это не имеет
+   отношения к юристам… пусть в юристе будут только регуляторные согласования,
+   заверения / обязательства по возмещению потерь и консультанты. Пусть пока
+   будет меньше». Поле «Структура» (law.struct) чаще несёт историю сделки —
+   «с шестой попытки», «объединили в один лот», «претендентом была компания X», —
+   чем юридическую конструкцию; читателю оно полезно, но на «Обзоре», как
+   рассказ о том, как сделка устроена, а не под вывеской «Юрист». */
+const lawHasContent = d => hasFact(d.law && d.law.appr) ||
   hasFact(d.law && d.law.terms) || legalAdvisors(d).length > 0;
 /* Линза «Экономист» пуста у 37 карточек из 1352: всё её содержимое — заглушки
    «Не раскрыта» и «Не привлекался», нарисованные как значения показателей.
@@ -4644,7 +4592,7 @@ function regPanelHtml(d){
 function lawEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
-    <p>В открытых источниках не названы структура сделки, согласования, условия и консультанты. Поэтому в этом разделе показываем только известные стороны, сумму и ссылки на источники.</p>
+    <p>В открытых источниках не названы согласования, условия сделки и юридические консультанты. Поэтому в этом разделе показываем только известные стороны, сумму и ссылки на источники.</p>
     ${knownRowsHtml(d, true)}
     ${srcFootHtml(d)}
   </div>`;
@@ -4657,11 +4605,10 @@ function lawEmptyHtml(d){
    появилось согласование, и они перестали быть полу-пустыми. */
 function lawPartialNote(d){
   const missing = [
-    !hasFact(d.law && d.law.struct) && "структуру",
     !hasFact(d.law && d.law.terms) && "условия",
     !hasFact(d.law && d.law.appr) && "согласования",
   ].filter(Boolean);
-  if(missing.length !== 3 || !legalAdvisors(d).length) return "";
+  if(missing.length !== 2 || !legalAdvisors(d).length) return "";
   return `<p class="lens-part">Из юридических деталей раскрыты только консультанты:
     ${missing.join(", ")} сделки в источниках не называли.</p>`;
 }
@@ -4831,7 +4778,7 @@ function renderDeal(id, qs, previewCard){
     // без «мультипликаторов»: они есть у 14 карточек из 1352 (1%), обещать их
     // в подписи к линзе — обещать то, чего почти нигде нет
     eco: "Экономист: сумма и доля, оценка, показатели актива, цель сделки.",
-    law: "Юрист: структура сделки, согласования, условия и юридические консультанты.",
+    law: "Юрист: согласования, условия сделки (заверения, гарантии, возмещение потерь) и юридические консультанты.",
   };
   // Раньше пустая вкладка оставалась видна, приглушённой, и подпись объясняла
   // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
@@ -5097,9 +5044,8 @@ function renderDeal(id, qs, previewCard){
        (условия) → что пришлось получить (согласования) → кто вёл. */
     else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${lawPartialNote(d)}
-      ${para("Структура", d.law.struct)}
-      ${para("Условия и особенности (из публичных данных)", d.law.terms)}
       ${specBlock([specRow("Согласования", d.law.appr)])}
+      ${para("Условия сделки", d.law.terms)}
       ${legalAdvisors(d).map(it=>`
         <div class="adv-card">
           <span class="label">${esc(it.role)}</span>
@@ -5113,6 +5059,7 @@ function renderDeal(id, qs, previewCard){
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
+      ${para("Как устроена сделка", d.law && d.law.struct)}
       ${specBlock([
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
            Иначе одно и то же читается дважды: сначала плашка «Продавец →
@@ -6908,7 +6855,7 @@ async function mountMarketMultiples(){
   // проверки падает необработанным исключением (getElementById вернёт
   // null у ЧУЖОЙ, новой страницы, а не у этого узла).
   if(!body.isConnected) return;
-  if(!data || !data.clean_total){
+  if(!data || (!data.clean_total && !data.computed_total)){
     body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (цена в рублях, известная доля, отчётность купленной компании за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
     return;
   }
@@ -6941,6 +6888,15 @@ async function mountMarketMultiples(){
      из списка совсем. Контрольную премию не оцениваем и не собираемся: это
      была бы новая псевдоточность. */
   let onlyFull = false;
+  /* ДВА СИГНАЛА В ОДНОЙ ТАБЛИЦЕ (8 сентября 2026). Владелец: «мультипликаторов
+     стало слишком мало» — на витрине стояли только сделки, подтверждённые
+     двумя чтениями (12 из 1566). Рецензент в тот же день: показывать три
+     сигнала — «подтверждено источником», «рассчитано „Компасом"»,
+     «недостаточно данных». Строки «по тексту карточки» считаются той же
+     формулой, но цена и доля взяты из текста без двойного чтения, а периметр
+     отчётности не проверен: они помечены, убираются одним чипом и в отраслевые
+     ориентиры не идут. */
+  let onlyVerified = false;
   const renderSection = (v) => {
     const s = v.section;
     // Проверенные сделки, которых в списке нет, называются поимённо с причиной:
@@ -6949,7 +6905,7 @@ async function mountMarketMultiples(){
     // (четвёртый разбор рецензента: «Убик» ×902 по прибыли исчезал без слов).
     const notShown = (s && s.not_shown) || [];
     const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ${fmtMult(n.value)})`:""}`).join("; ")}.</p>` : "";
-    if(!s || !s.clean_total){
+    if(!s || (!s.clean_total && !s.computed_total)){
       return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>${notShownHtml}`;
     }
     // Медианы (общая и отраслевые) показываются только при data.show_medians:
@@ -6957,8 +6913,11 @@ async function mountMarketMultiples(){
     // долг, год отчётности) методикой не утверждена — до этого медиана по
     // десятку сделок читалась бы как рыночный ориентир (разбор рецензента,
     // 6 сентября 2026). Список сделок и способ расчёта остаются.
-    const scaledTotal = s.deals.filter(d=>d.price_basis==="scaled").length;
-    const shown = (onlyFull ? s.deals.filter(d=>d.price_basis!=="scaled") : s.deals);
+    const isComputed = d => d.confidence === "computed";
+    const computedTotal = s.deals.filter(isComputed).length;
+    const pool = onlyVerified ? s.deals.filter(d=>!isComputed(d)) : s.deals;
+    const scaledTotal = pool.filter(d=>d.price_basis==="scaled").length;
+    const shown = (onlyFull ? pool.filter(d=>d.price_basis!=="scaled") : pool);
     const showMedians = data.show_medians !== false;
     /* Отраслевой ориентир больше НЕ ждёт общего разрешения показывать медианы:
        порогом служит сама группа — восемь сопоставимых сделок одной отрасли,
@@ -6980,15 +6939,18 @@ async function mountMarketMultiples(){
     // предварительный год. Остальное — на карточке сделки.
     const notes = d => [
       d.price_basis==="scaled" ? `цена пакета ${fmtPct(d.stake)} (${fnsMoney(d.sum_rub)}) пересчитана на 100%` : "",
+      isComputed(d) && d.scope_assumed ? "за что заплачена цена, в карточке не сказано — считаем, что за пакет" : "",
+      isComputed(d) && d.reason_label ? d.reason_label : "",
       d.price_scope==="ev" ? "цена с учётом долга" : "",
       PRICE_TERMS_NOTE[d.price_terms] || "",
       d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
     ].filter(Boolean).join(" · ");
     // Фильтр показывается, только когда есть что фильтровать, и называет,
     // сколько строк уйдёт, — иначе чип выглядит как настройка без эффекта.
-    const scaleFilterHtml = scaledTotal ? `<div class="mult-scale-filter">
-        <button class="chip ${onlyFull?"":"on"}" data-multscale="all">Все сделки (${s.deals.length})</button>
-        <button class="chip ${onlyFull?"on":""}" data-multscale="full">Только цена за 100% (${s.deals.length-scaledTotal})</button>
+    const scaleFilterHtml = (scaledTotal || computedTotal) ? `<div class="mult-scale-filter">
+        ${computedTotal?`<button class="chip ${onlyVerified?"":"on"}" data-multconf="all">Все сделки (${s.deals.length})</button>
+        <button class="chip ${onlyVerified?"on":""}" data-multconf="verified">Только проверенные (${s.deals.length-computedTotal})</button>`:""}
+        ${scaledTotal?`<button class="chip ${onlyFull?"on":""}" data-multscale="${onlyFull?"all":"full"}">${onlyFull?"Показать и пересчитанные":"Только цена за 100%"} (${onlyFull?pool.length:pool.length-scaledTotal})</button>`:""}
       </div>` : "";
     const dealsHtml = `${scaleFilterHtml}${shown.length?`<table class="mult-table"><thead><tr>
         <th>Сделка</th><th class="num">Год</th><th class="num">Цена за 100%</th>
@@ -6998,10 +6960,10 @@ async function mountMarketMultiples(){
         <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
           targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
         <td class="num" data-l="Год сделки">${d.year}</td>
-        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}</td>
+        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без двойного чтения источников; не проверено, покрывает ли отчётность весь периметр сделки">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо подтверждены двумя независимыми чтениями источников">проверено</span>`}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
         <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span></td>
-      </tr>`).join("")}</tbody></table>`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Сделок, где цена заплачена сразу за всю компанию, среди проверенных пока нет.</p>`}`;
+      </tr>`).join("")}</tbody></table>`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);
     // Одна спокойная строка вместо простыни: сколько ещё придёт и сколько
@@ -7012,7 +6974,8 @@ async function mountMarketMultiples(){
       rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} чтение проверило и не пропустило — почему, видно ниже.` : ""}</p>` : "";
     const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не пропущено чтением: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
-      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${shown.length} ${plural(shown.length,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки.${
+      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${shown.length} ${plural(shown.length,"сделка","сделки","сделок")}</b>: цена ÷ показатель купленной компании за последний полный год до сделки. ${
+        computedTotal && !onlyVerified ? `У ${s.deals.length-computedTotal} из них цену, долю и юрлицо мы проверили по источникам дважды, у ${computedTotal} — взяли из текста карточки (помечены).` : `Цену, долю и юрлицо каждой мы проверили по источникам дважды.`}${
         onlyFull?" Показаны только те, где цену заплатили сразу за всю компанию.":""}${
         shown.length>1?` Наблюдаемые значения — от ${fmtMult(Math.min(...shown.map(d=>d.multiple)))} до ${fmtMult(Math.max(...shown.map(d=>d.multiple)))}.`:""} Это сделки, которые можно взять как ориентиры, а не медиана рынка: насколько они сопоставимы между собой, решает оценщик.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
@@ -7031,6 +6994,7 @@ async function mountMarketMultiples(){
       <div>${renderSection(active)}</div>`;
     document.querySelectorAll("[data-multview]").forEach(b=>b.onclick=()=>{activeKey=b.dataset.multview;draw();});
     document.querySelectorAll("[data-multscale]").forEach(b=>b.onclick=()=>{onlyFull=b.dataset.multscale==="full";draw();});
+    document.querySelectorAll("[data-multconf]").forEach(b=>b.onclick=()=>{onlyVerified=b.dataset.multconf==="verified";draw();});
   };
   body.outerHTML = `<div id="multiplesBody"></div>`;
   draw();

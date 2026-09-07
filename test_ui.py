@@ -1062,7 +1062,10 @@ def test_regulatory_analyzer_is_hidden(page, base_url):
     assert any_id, "в базе нет карточек для проверки"
     visit(page, base_url, "#/deal/" + any_id)
     assert page.locator("[data-reg-open]").count() == 0, "кнопка анализатора всё ещё на экране"
-    page.evaluate("document.querySelector('[data-l=\"law\"]').click()")
+    # С 8 сентября 2026 кнопка «Юрист» есть не у каждой карточки (линза
+    # открывается только согласованиями, условиями и консультантами) — нет
+    # кнопки, нет и панели; есть кнопка — заходим и проверяем.
+    page.evaluate("(() => { const b = document.querySelector('[data-l=\"law\"]'); if (b) b.click(); })()")
     page.wait_for_timeout(400)
     assert page.locator("#reg-panel").count() == 0, "панель анализатора всё ещё на экране"
     assert not page.crashes, f"падения на карточке: {page.crashes[:3]}"

@@ -789,6 +789,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     text_candidates = find_candidates(deals, confirmed_ids, bank_ids, lot_ids)
     deal_by_id = {did: dict(d, id=did) for did, d in deals.items()}
     candidates = []
+    computed_candidates: list[MultipleCandidate] = []
     facts_reasons: dict[str, int] = {}
     verified_meta: dict[str, dict[str, Any]] = {}
     for deal_id, d in deals.items():
@@ -810,6 +811,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                          if price_basis == 'scaled'
                          else 'цена за 100% акций')
             verified_meta[deal_id] = {
+                'confidence': 'verified',
                 'stake': stake.get('value'), 'price_scope': scope, 'year_basis': year_basis,
                 # Числитель: цена за 100% компании и то, как она получена —
                 # заплаченная сумма или пересчёт цены пакета (6 сентября 2026).
@@ -825,10 +827,44 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             }
         elif reason not in ('not_control_change', 'before_site_year', 'no_facts'):
             facts_reasons[reason] = facts_reasons.get(reason, 0) + 1
+            # ВТОРОЙ УРОВЕНЬ — «рассчитано по тексту карточки» (8 сентября 2026,
+            # см. facts.admitted('multiple_text_computed')): сделка не прошла
+            # двойное чтение, но цена, доля и юрлицо известны по тексту.
+            # Считается той же формулой, на экране помечена и отфильтровывается;
+            # в медианы не идёт.
+            ok2, _ = facts_layer.admitted(dict(d, id=deal_id), 'multiple_text_computed')
+            if ok2:
+                price, stake = f['price'], f['stake']
+                year, year_basis = multiple_year(d)
+                raw_scope = price.get('scope')
+                scope = raw_scope if raw_scope in ('package', 'equity', 'ev') else 'package'
+                computed_candidates.append(MultipleCandidate(
+                    deal_id=deal_id, title=d.get('title') or deal_id, target_id=target_of(d) or '',
+                    year=year or 0, sum_rub=float(price['value_rub']), stake_percent=stake.get('value'),
+                    price_scope=scope))
+                price_full, price_basis = implied_full_price(
+                    float(price['value_rub']), stake.get('value'), scope)
+                verified_meta[deal_id] = {
+                    'confidence': 'computed',
+                    'stake': stake.get('value'), 'price_scope': scope,
+                    'scope_assumed': raw_scope not in ('package', 'equity', 'ev'),
+                    'price_fact_basis': price.get('basis'), 'stake_fact_basis': stake.get('basis'),
+                    'year_basis': year_basis,
+                    'price_full_rub': price_full, 'price_basis': price_basis,
+                    'price_terms': price.get('terms'), 'price_event': price.get('event'),
+                    'formula': ('цена по тексту карточки'
+                                + (f", пакет {_pct(stake.get('value'))} пересчитан на 100%" if price_basis == 'scaled' else '')
+                                + ' ÷ показатель купленной компании за последний полный год до сделки'),
+                    'reason_not_verified': reason,
+                    'reason_label': facts_layer.REASON_LABELS.get(reason, reason),
+                    'checks': facts_layer.number_checks(d),
+                }
     excluded = facts_reasons
 
     rows: list[DealMultiple] = []
     op_rows: list[OpProfitMultiple] = []
+    computed_rows: list[DealMultiple] = []
+    computed_op_rows: list[OpProfitMultiple] = []
     not_shown: dict[str, list] = {'revenue': [], 'operating_profit': []}
     industry_of: dict[str, str] = {}
     # Отрасль — из самой сделки, а не из профиля компании: у профиля ключ
@@ -836,14 +872,17 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
     # уезжали в «Не определена» одной строкой — партнёр увидел это на
     # экране 31 августа 2026. У сделки отрасль есть всегда.
     deal_industry = {did: (deal.get('ind') or '') for did, deal in deals.items()}
-    for cand in candidates:
+    computed_ids = {c.deal_id for c in computed_candidates}
+    for cand in candidates + computed_candidates:
+        is_computed = cand.deal_id in computed_ids
         entity = db.scalar(select(LegalEntity).where(
             LegalEntity.company_id == cand.target_id,
             LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
         ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
         if not entity:
-            not_shown['revenue'].append(_not_shown_row(cand, 'no_entity'))
-            not_shown['operating_profit'].append(_not_shown_row(cand, 'no_entity'))
+            if not is_computed:
+                not_shown['revenue'].append(_not_shown_row(cand, 'no_entity'))
+                not_shown['operating_profit'].append(_not_shown_row(cand, 'no_entity'))
             continue
         report = db.scalar(select(FinancialReport).where(
             FinancialReport.legal_entity_id == entity.id,
@@ -851,14 +890,15 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             FinancialReport.revenue_rub.is_not(None),
         ).order_by(FinancialReport.year.desc()))
         if not report:
-            not_shown['revenue'].append(_not_shown_row(cand, 'no_report'))
-            not_shown['operating_profit'].append(_not_shown_row(cand, 'no_report'))
+            if not is_computed:
+                not_shown['revenue'].append(_not_shown_row(cand, 'no_report'))
+                not_shown['operating_profit'].append(_not_shown_row(cand, 'no_report'))
             continue
         # Периметр подтверждался читателями ПО КОНКРЕТНОМУ отчёту (ИНН, год,
         # выручка); если сейчас в знаменателе другой отчёт — восстановленный,
         # другого года — это уже не проверенная сделка: карточка не менялась,
         # а знаменатель изменился (третий разбор рецензента).
-        seen = verified_meta[cand.deal_id].get('perimeter_report') or {}
+        seen = (verified_meta[cand.deal_id].get('perimeter_report') or {}) if not is_computed else {}
         if seen and (str(seen.get('inn')) != str(entity.inn) or int(seen.get('year') or 0) != int(report.year)
                      or abs(float(seen.get('revenue_rub') or 0) - float(report.revenue_rub)) > 0.01 * float(report.revenue_rub)):
             verified_meta[cand.deal_id]['checks'].append('report_changed')
@@ -867,7 +907,9 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             continue
         dm = multiple_for_candidate(cand, float(report.revenue_rub), report.year, entity.legal_name)
         if dm:
-            rows.append(dm)
+            (computed_rows if is_computed else rows).append(dm)
+        elif is_computed:
+            pass   # выброс у строки «по тексту» молча не показывается: причины называем только у проверенных
         else:
             not_shown['revenue'].append(_not_shown_row(cand, *_why_not(
                 implied_full_price(cand.sum_rub, cand.stake_percent, cand.price_scope)[0],
@@ -880,7 +922,9 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             cand, float(op_profit) if op_profit is not None else None,
             report.year, entity.legal_name)
         if op_dm:
-            op_rows.append(op_dm)
+            (computed_op_rows if is_computed else op_rows).append(op_dm)
+        elif is_computed:
+            pass
         else:
             # Исчезновение из выдачи по прибыли обязано иметь названную причину
             # (четвёртый разбор, пункт 6): «Убик» — прибыль 2 млн ₽ при цене
@@ -898,6 +942,8 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
 
     rows.sort(key=lambda r: r.year, reverse=True)
     op_rows.sort(key=lambda r: r.year, reverse=True)
+    computed_rows.sort(key=lambda r: r.year, reverse=True)
+    computed_op_rows.sort(key=lambda r: r.year, reverse=True)
     verified_ids = {c.deal_id for c in candidates}
     return {
         # сколько сделок проходят правила по тексту (предложение правил) …
@@ -920,6 +966,10 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                                 and not _awaits_reading(deal_by_id.get(c.deal_id))],
         'verified_total': len(candidates),
         'clean_total': len(rows),
+        # Второй сигнал витрины: сколько строк рассчитано по тексту карточки
+        # (без двойного чтения) и сколько таких кандидатов было до отчётности.
+        'computed_total': len(computed_rows),
+        'computed_candidates_total': len(computed_candidates),
         'median': overall_median(rows),
         'industries': industry_medians(rows, industry_of),
         # Почему сделки не попали в мультипликатор — по причинам из слоя
@@ -936,7 +986,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'sum_rub': r.sum_rub, 'revenue_rub': r.revenue_rub,
             'revenue_year': r.revenue_year, 'multiple': r.multiple,
             'price_full_rub': r.price_full_rub, 'price_basis': r.price_basis,
-        }, **verified_meta.get(r.deal_id, {})) for r in rows],
+        }, **verified_meta.get(r.deal_id, {})) for r in rows + computed_rows],
         'methodology': (
             'Что здесь считается: цена сделки ÷ выручка купленной компании за последний '
             'полный год до сделки (или за позапрошлый, если прошлогодний отчёт ещё не сдан). '
@@ -945,9 +995,12 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'какого пакета сделан пересчёт. Пересчёт не учитывает премию за контроль и '
             'скидку за миноритарный пакет, поэтому доли меньше четверти в расчёт не идут '
             'вовсе. Долг компании в цену не входит, если у сделки не сказано «с учётом '
-            'долга». Показываются только сделки, у которых доля, цена и юрлицо '
-            'подтверждены двумя независимыми чтениями источников с '
-            'цитатами, а отчётность относится именно к купленному юрлицу. Год сделки — '
+            'долга». У каждой строки один из двух сигналов: «проверено» — доля, цена и '
+            'юрлицо подтверждены двумя независимыми чтениями источников с цитатами, а '
+            'отчётность относится именно к купленному юрлицу; «по тексту карточки» — '
+            'цена и доля взяты из текста карточки без двойного чтения, и не проверено, '
+            'покрывает ли отчётность весь периметр сделки. Отраслевые ориентиры '
+            'считаются только по проверенным строкам. Год сделки — '
             'подтверждённая дата закрытия, если она прочитана, иначе дата карточки; '
             'основание года указано у каждой сделки. Значения вне границ 0,1–15 не '
             'показываем: почти всегда это значит, что отчётность нашлась не у того '
@@ -956,6 +1009,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         ),
         'operating_profit': {
             'clean_total': len(op_rows),
+            'computed_total': len(computed_op_rows),
             'not_shown': not_shown['operating_profit'],
             'median': overall_median(op_rows),
             'industries': industry_medians(op_rows, industry_of),
@@ -965,7 +1019,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                 'sum_rub': r.sum_rub, 'operating_profit_rub': r.operating_profit_rub,
                 'operating_profit_year': r.operating_profit_year, 'multiple': r.multiple,
                 'price_full_rub': r.price_full_rub, 'price_basis': r.price_basis,
-            }, **verified_meta.get(r.deal_id, {})) for r in op_rows],
+            }, **verified_meta.get(r.deal_id, {})) for r in op_rows + computed_op_rows],
             'methodology': (
                 'Что здесь считается: цена сделки ÷ прибыль от продаж купленной компании '
                 '(строка 2200 отчёта о финансовых результатах) за последний полный год до '

@@ -311,10 +311,10 @@ def test_post_drops_lines_that_only_echo_the_headline():
             "asset": "неназванная брокерская компания", "buyer_name": "«Алор брокер»",
             "status": "Закрыта", "date": "2026-08-01", "ind": "Рынок ценных бумаг"}
     text = format_post.render(deal, {})
-    assert "Предмет:" not in text, text
-    assert "Покупатель:" not in text, text
-    assert "Статус: Закрыта · август 2026" in text
-    assert "Отрасль: Рынок ценных бумаг" in text
+    assert "<b>Предмет:</b>" not in text, text
+    assert "<b>Покупатель:</b>" not in text, text
+    assert "<b>Статус:</b> Закрыта · август 2026" in text
+    assert "<b>Отрасль:</b> Рынок ценных бумаг" in text
 
 
 def test_post_keeps_a_party_name_not_covered_by_the_headline():
@@ -322,7 +322,7 @@ def test_post_keeps_a_party_name_not_covered_by_the_headline():
     deal = {"id": "x1", "title": "«Алор брокер» купил неназванную брокерскую компанию",
             "seller": "Иван Петров"}
     text = format_post.render(deal, {})
-    assert "Продавец: Иван Петров" in text
+    assert "<b>Продавец:</b> Иван Петров" in text
 
 
 def test_post_headline_echo_survives_case_and_declension():
@@ -347,7 +347,7 @@ def test_post_subject_gets_substance_not_a_bare_repeated_name():
                                    '«СЧАСТЛИВАЯ РАБОТА» по ОКВЭД: 62.01 Разработка '
                                    'компьютерного программного обеспечения.'}}
     text = format_post.render(deal, {})
-    assert "Предмет: Happy Job" not in text, "голое имя — тот же кусок заголовка"
+    assert "<b>Предмет:</b> Happy Job" not in text, "голое имя — тот же кусок заголовка"
     assert "«СЧАСТЛИВАЯ РАБОТА»" in text, "точное юрлицо не попало в пост"
 
 
@@ -381,7 +381,7 @@ def test_post_attaches_buyer_detail_only_alongside_the_buyer_name():
     }
     companies = {"b1": {"name": "«Ромашка»"}}
     text = format_post.render(deal, companies)
-    assert "Покупатель: «Ромашка» — крупный региональный девелопер" in text
+    assert "<b>Покупатель:</b> «Ромашка» — крупный региональный девелопер" in text
     assert "«Ромашка» — «Ромашка»" not in text, "имя покупателя напечатано дважды подряд"
 
 
@@ -402,7 +402,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
                             "Мохнатова, сына основателя азербайджанской AF Holding."},
     }
     text = format_post.render(deal, {})
-    assert "Покупатель: Новым владельцем компании стало ООО «Афкап»" in text
+    assert "<b>Покупатель:</b> Новым владельцем компании стало ООО «Афкап»" in text
     assert "«Афкап» — Новым владельцем" not in text, "имя покупателя напечатано дважды"
 
     # 2. ИМЯ В ДЕТАЛИ ОТСУТСТВУЕТ, а по основам слов похоже («Займер» ложится
@@ -414,7 +414,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
         "eco": {"context": "Микрофинансовая компания: онлайн-займы физическим лицам."},
     }
     text_stem = format_post.render(deal_stem, {})
-    assert "Покупатель: Займер — Микрофинансовая компания" in text_stem, \
+    assert "<b>Покупатель:</b> Займер — Микрофинансовая компания" in text_stem, \
         "имя покупателя пропало из строки: в детали его нет, похожи только основы слов"
 
     # 3. Имя есть, но в ХВОСТЕ чужой фразы — подлежащее там не покупатель, и
@@ -426,7 +426,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
                             "привлекла 200 млн ₽ от инвестиционного фонда «ТилТех Капитал»."},
     }
     text_tail = format_post.render(deal_tail, {})
-    assert "Покупатель: «ТилТех Капитал» — Московская сеть клиник" in text_tail, \
+    assert "<b>Покупатель:</b> «ТилТех Капитал» — Московская сеть клиник" in text_tail, \
         "имя стоит в хвосте детали — строка обязана назвать покупателя впереди"
 
     # И сама граница проверяется напрямую, без рендера целого поста.
@@ -460,7 +460,7 @@ def test_post_buyer_detail_skips_the_sentence_about_who_reported_the_deal():
         "мета-предложение о раскрытии ушло в пост как пояснение покупателя"
     # Второе предложение контекста — о цене, не о покупателе: тоже не годится,
     # и строка целиком исчезает (имя и так в заголовке).
-    assert "Покупатель:" not in text, text
+    assert "<b>Покупатель:</b>" not in text, text
 
 
 def test_post_buyer_detail_requires_a_sentence_about_the_buyer_itself():
@@ -476,7 +476,7 @@ def test_post_buyer_detail_requires_a_sentence_about_the_buyer_itself():
                             "евро убытка по МСФО против прибыли годом ранее."},
     }
     text = format_post.render(deal, {})
-    assert "Покупатель: Иван Тырышкин" in text, "имя с новизной к заголовку остаётся"
+    assert "<b>Покупатель:</b> Иван Тырышкин" in text, "имя с новизной к заголовку остаётся"
     assert "PPF Group" not in text, "чужое предложение приклеилось к имени покупателя"
     # А предложение, называющее покупателя, — законный довесок.
     deal_ok = dict(deal, eco={"context": "Иван Тырышкин ранее возглавлял биржу РТС "
@@ -484,7 +484,7 @@ def test_post_buyer_detail_requires_a_sentence_about_the_buyer_itself():
     text_ok = format_post.render(deal_ok, {})
     # Деталь начинается с имени — печатаем её одну, без имени перед тире
     # (4 сентября 2026, см. `names_party_upfront`).
-    assert "Покупатель: Иван Тырышкин ранее возглавлял" in text_ok
+    assert "<b>Покупатель:</b> Иван Тырышкин ранее возглавлял" in text_ok
     assert "Тырышкин — Иван Тырышкин" not in text_ok, "имя напечатано дважды"
 
 
@@ -520,7 +520,7 @@ def test_post_subject_line_names_the_subject_not_its_revenue():
     companies = {"t1": {"name": "ООО «Протосервисез»",
                         "desc": "Московская компания, работает с 2014 года."}}
     text = format_post.render(deal, companies)
-    assert "Предмет: ООО «Протосервисез» — Московская компания, работает с 2014 года." in text
+    assert "<b>Предмет:</b> ООО «Протосервисез» — Московская компания, работает с 2014 года." in text
     assert "9,5 млн руб." not in text, "показатели предмета выданы за предмет"
 
     # Предложение «Финансов предмета», которое называет юрлицо, а не показатель,
@@ -556,21 +556,21 @@ def test_post_sum_placeholder_is_shown_honestly_only_when_the_card_states_it():
     (текст-заглушка «Не раскрыта»), а не когда `sum=None` (мы просто не
     нашли — молчание честнее)."""
     stated = {"id": "x1", "title": "Т", "sum": "Не раскрыта"}
-    assert "Сумма: не раскрывается" in format_post.render(stated, {})
+    assert "<b>Сумма:</b> не раскрывается" in format_post.render(stated, {})
 
     unknown = {"id": "x2", "title": "Т"}
-    assert "Сумма:" not in format_post.render(unknown, {})
+    assert "<b>Сумма:</b>" not in format_post.render(unknown, {})
 
 
 def test_post_status_gets_the_closing_month_only_when_closed():
     from datetime import date as _date
     today = _date(2026, 7, 20)
     closed = {"id": "x1", "title": "Т", "status": "Закрыта", "date": "2026-07-15"}
-    assert "Статус: Закрыта · июль 2026" in format_post.render(closed, {}, today=today)
+    assert "<b>Статус:</b> Закрыта · июль 2026" in format_post.render(closed, {}, today=today)
 
     discussed = {"id": "x2", "title": "Т", "status": "Обсуждается", "date": "2026-07-15"}
     text = format_post.render(discussed, {}, today=today)
-    assert "Статус: Обсуждается" in text and "июль 2026" not in text
+    assert "<b>Статус:</b> Обсуждается" in text and "июль 2026" not in text
 
 
 def test_fin_summary_matches_the_owner_sample_post():
@@ -685,7 +685,7 @@ def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
     fin = {"target": (2025, "Выручка 1,0 млрд ₽")}
     with_fin = format_post.render(deal, companies, fin=fin)
     without_fin = format_post.render(deal, companies)
-    assert "Финансы покупаемой компании, 2025 год: Выручка 1,0 млрд ₽" in with_fin
+    assert "<b>Финансы покупаемой компании, 2025 год:</b> Выручка 1,0 млрд ₽" in with_fin
     assert "Финансы покупаемой компании" not in without_fin
 
 
@@ -725,7 +725,13 @@ def test_post_offers_a_lens_button_only_when_that_lens_has_something(base):
     empty = {"id": "x1", "title": "Т", "sum": "1 млрд ₽"}
     labels = [b["text"] for row in format_post.render_buttons(empty)["inline_keyboard"] for b in row]
     assert "Юрист" not in labels, labels
-    lawful = dict(empty, law={"struct": "Сделка оформлена через допэмиссию."})
+    # «Юрист» открывается согласованиями, условиями и консультантами — не
+    # структурой: она с 8 сентября 2026 живёт на «Обзоре» (Артем: «пусть в
+    # юристе будут только регуляторные согласования, заверения и консультанты»).
+    struct_only = dict(empty, law={"struct": "Сделка оформлена через допэмиссию."})
+    labels = [b["text"] for row in format_post.render_buttons(struct_only)["inline_keyboard"] for b in row]
+    assert "Юрист" not in labels, labels
+    lawful = dict(empty, law={"appr": "ФАС одобрила сделку в июне."})
     labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
     assert "Юрист" in labels
 
@@ -1553,7 +1559,7 @@ def test_main_dry_run_with_a_real_token_prints_full_post_text(monkeypatch, tmp_p
     out = capsys.readouterr().out
     assert len(out) > 400, "вывод подозрительно короткий для проверки на обрезание"
     assert "КОНЕЦ-ТЕКСТА-ЗДЕСЬ" in out, "текст обрезан — то же самое, что раньше (было text[:400])"
-    assert "Источник: " in out, "хвост поста (после 400-го знака) не попал в вывод"
+    assert "<b>Источник:</b> " in out, "хвост поста (после 400-го знака) не попал в вывод"
     assert "--skip" in out, "нет инструкции, как задержать пост после чтения"
 
 
@@ -1897,7 +1903,7 @@ def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tm
     assert fake_fns.calls == ["1234567890"], "финансы искали ровно по подтверждённому ИНН покупателя"
     assert len(fake_tg.calls) == 1
     text = fake_tg.calls[0][1]["text"]
-    assert "Финансы покупателя, 2025 год: Выручка 1,0 млрд ₽" in text
+    assert "<b>Финансы покупателя, 2025 год:</b> Выручка 1,0 млрд ₽" in text
 
 
 def test_main_never_queries_fns_for_the_backlog_that_will_not_be_sent(monkeypatch, tmp_path):
@@ -5009,14 +5015,28 @@ def test_console_chats_prefers_the_site_over_env(monkeypatch):
     class FakeResponse:
         status_code = 200
 
-        @staticmethod
-        def json():
-            return {"chat_id": "-1009998887777"}
+        def __init__(self, payload):
+            self._payload = payload
+
+        def json(self):
+            return self._payload
 
     import httpx
-    monkeypatch.setattr(httpx, "get", lambda *a, **kw: FakeResponse())
+    # Сайт отвечает по-разному на два разных вопроса: адрес консоли и адрес
+    # канала. Один ответ на всё делал бы группу «каналом», и заслон от
+    # утечки (7 сентября 2026) справедливо отверг бы её.
+    def fake_get(url, *a, **kw):
+        if url.endswith('/api/moderation/channel'):
+            return FakeResponse({"chat_id": None})
+        return FakeResponse({"chat_id": "-1009998887777"})
+    monkeypatch.setattr(httpx, "get", fake_get)
+    console_topics._channel_cache = None
+    console_topics._type_cache.clear()
+    monkeypatch.delenv("TELEGRAM_CHANNEL_ID", raising=False)
+    monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
     assert console_topics.console_chats() == ["-1009998887777"]
     console_topics._group_cache = None
+    console_topics._channel_cache = None
 
 
 def test_console_chats_falls_back_to_env_when_the_site_does_not_know(monkeypatch):
