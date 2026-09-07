@@ -25,11 +25,22 @@
 названы в источнике и добавлены в «Структуру сделки» — они размылись,
 а не продали.
 
+Отдельно про «Структуру сделки»: это поле ставила таблица `FIXES`
+(дочитывание притока тем же утром), и переписанное руками оно перестаёт
+совпадать с записью таблицы посимвольно — `test_review_table_is_applied_
+and_not_pending` из-за этого краснеет. По правилу репозитория такая правка
+обязана дописать в карточку ОТПЕЧАТОК прежнего значения
+(`review.fix_fingerprint` → `proofread_absorbed`): запись таблицы остаётся
+применённой, а поле живёт дальше своей жизнью. Тот же приём, что у вычитки.
+
 Запуск: python3 pipeline/fix_proto_asset_is_a_legal_entity.py [--write]
 """
 import json
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'ingest'))
+import review  # noqa: E402  (pipeline/ingest в sys.path)
 
 PENDING = Path(__file__).resolve().parent.parent / 'static' / 'data' / 'pending.json'
 DEAL_ID = 'g95370469'
@@ -50,7 +61,22 @@ def main(write: bool) -> None:
     data = json.loads(PENDING.read_text(encoding='utf-8'))
     cards = {c['id']: c for c in data['cards']}
     card = cards[DEAL_ID]
-    assert card.get('asset') == OLD_ASSET, f"предмет уже другой: {card.get('asset')!r}"
+    if card.get('asset') not in (OLD_ASSET, NEW_ASSET):
+        raise AssertionError(f"предмет уже другой: {card.get('asset')!r}")
+    if (card.get('law') or {}).get('struct') == NEW_STRUCT:
+        print('уже применено — скрипт идемпотентен')
+        # отпечаток мог не лечь при прошлом прогоне; дописываем и выходим
+        absorbed = card.setdefault('proofread_absorbed', {}).setdefault('law.struct', [])
+        stamp = review.fix_fingerprint(OLD_STRUCT)
+        if stamp in absorbed:
+            return
+        if write:
+            absorbed.append(stamp)
+            PENDING.write_text(json.dumps(data, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+            print('Отпечаток прежнего значения дописан.')
+        else:
+            print('Не хватает отпечатка прежнего значения. Запись — с ключом --write.')
+        return
     assert (card.get('law') or {}).get('struct') == OLD_STRUCT, 'структура сделки уже другая'
     assert not card.get('seller') and not card.get('seller_id'), 'продавец уже записан — разберитесь руками'
     assert card.get('type') == 'Инвестиция', 'тип сделки изменился — вклад в капитал больше не подтверждается'
@@ -65,6 +91,10 @@ def main(write: bool) -> None:
         return
     card['asset'] = NEW_ASSET
     card['law']['struct'] = NEW_STRUCT
+    absorbed = card.setdefault('proofread_absorbed', {}).setdefault('law.struct', [])
+    stamp = review.fix_fingerprint(OLD_STRUCT)
+    if stamp not in absorbed:
+        absorbed.append(stamp)
     PENDING.write_text(json.dumps(data, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print('Записано.')
 
