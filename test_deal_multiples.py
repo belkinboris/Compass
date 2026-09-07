@@ -382,19 +382,22 @@ def test_industry_medians_requires_minimum_sample():
 
 
 def test_industry_medians_with_enough_samples():
-    industry_of = {'t1': 'ИТ', 't2': 'ИТ', 't3': 'ИТ'}
-    rows = [_dm_row(1.0, 't1', 'd1'), _dm_row(2.0, 't2', 'd2'), _dm_row(3.0, 't3', 'd3')]
+    n = dm.MIN_INDUSTRY_SAMPLE
+    industry_of = {'t%d' % i: 'ИТ' for i in range(1, n + 1)}
+    rows = [_dm_row(float(i), 't%d' % i, 'd%d' % i) for i in range(1, n + 1)]
     out = dm.industry_medians(rows, industry_of)
     assert len(out) == 1
     assert out[0]['industry'] == 'ИТ'
-    assert out[0]['count'] == 3
-    assert out[0]['median'] == 2.0
+    assert out[0]['count'] == n
+    mid = sorted(float(i) for i in range(1, n + 1))
+    expect = mid[n // 2] if n % 2 else (mid[n // 2 - 1] + mid[n // 2]) / 2
+    assert out[0]['median'] == round(expect, 2)
 
 
 def test_industry_medians_unknown_industry_bucketed_honestly():
-    industry_of = {}
-    rows = [_dm_row(1.0, 't1', 'd1'), _dm_row(2.0, 't2', 'd2'), _dm_row(3.0, 't3', 'd3')]
-    out = dm.industry_medians(rows, industry_of)
+    n = dm.MIN_INDUSTRY_SAMPLE
+    rows = [_dm_row(float(i), 't%d' % i, 'd%d' % i) for i in range(1, n + 1)]
+    out = dm.industry_medians(rows, {})
     assert out[0]['industry'] == 'Не определена'
 
 
@@ -423,9 +426,17 @@ def test_generic_helpers_work_on_op_profit_rows_too():
                              operating_profit_year=2023, multiple=3.0),
     ]
     assert dm.overall_median(op_rows) == 2.0
-    industry_of = {'t1': 'ИТ', 't2': 'ИТ', 't3': 'ИТ'}
-    out = dm.industry_medians(op_rows, industry_of)
-    assert out == [{'industry': 'ИТ', 'count': 3, 'median': 2.0, 'min': 1.0, 'max': 3.0}]
+    # Медиана по отрасли считается по тем же строкам прибыли, что и по выручке,
+    # но группа обязана набрать порог — берём ровно столько строк, сколько он
+    # требует, а не три (порог поднят до 8 седьмого сентября 2026).
+    n = dm.MIN_INDUSTRY_SAMPLE
+    many = [dm.OpProfitMultiple(deal_id='x%d' % i, title='т', target_id='t%d' % i,
+                                 target_name='Т', year=2024, sum_rub=1,
+                                 operating_profit_rub=1, operating_profit_year=2023,
+                                 multiple=float(i)) for i in range(1, n + 1)]
+    out = dm.industry_medians(many, {'t%d' % i: 'ИТ' for i in range(1, n + 1)})
+    assert len(out) == 1 and out[0]['industry'] == 'ИТ' and out[0]['count'] == n
+    assert out[0]['min'] == 1.0 and out[0]['max'] == float(n)
 
 
 # ---------- аудит 5 сентября 2026: доля из заголовка, мягкие суммы, год отчётности ----------
@@ -538,3 +549,32 @@ def test_full_purchase_words_need_the_buyer_not_the_former_owner():
                                  'eco': {'share': 'Сбер приобрёл 37,6% у АФК «Система» (которая полностью вышла из капитала) и 4,3% у миноритариев'}}) is None
     # «продать могут как целиком, так и долю» — вариант, не покупка
     assert dm.stake_established({'title': 'Продажа страховой компании', 'eco': {'share': 'Продать могут как компанию целиком, так и долю одного из владельцев.'}}) is None
+
+
+def test_industry_median_needs_eight_comparable_deals_in_one_group():
+    """Порог поднят с трёх до восьми (владелец, 7 сентября 2026, по совету
+    рецензента: «двадцать несопоставимых сделок не лучше десяти»), и группа —
+    это не просто отрасль: сделки, где цену заплатили за всю компанию, и
+    сделки, где цену пакета пересчитали на 100%, в одну медиану не идут —
+    премия за контроль в пересчёт не заложена."""
+    n = dm.MIN_INDUSTRY_SAMPLE
+    assert n == 8, "порог менялся — обновите и этот тест, и текст методики на экране"
+
+    def row(i, basis):
+        r = _dm_row(float(i), "t%d" % i, "d%d" % i)
+        r.price_basis = basis
+        return r
+    ind = {"t%d" % i: "ИТ и интернет" for i in range(1, 2 * n + 1)}
+
+    almost = [row(i, "full") for i in range(1, n)]
+    assert dm.industry_medians(almost, ind) == [], "на одну сделку меньше порога — медианы нет"
+
+    enough = [row(i, "full") for i in range(1, n + 1)]
+    got = dm.industry_medians(enough, ind)
+    assert len(got) == 1 and got[0]["count"] == n and got[0]["price_basis"] == "full"
+
+    # Строк ровно порог, но пополам разной природы — ни одна группа не набирает.
+    half = n // 2
+    mixed = ([row(i, "full") for i in range(1, half + 1)]
+             + [row(i, "scaled") for i in range(half + 1, n + 1)])
+    assert dm.industry_medians(mixed, ind) == [], "пересчёт и цена за 100% в одну медиану не идут"

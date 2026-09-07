@@ -43,6 +43,7 @@ import json
 import os
 import sys
 import time
+from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -87,6 +88,42 @@ def goes_to_channel(card):
     return bool(card.get('post_override')) or format_post.is_fresh(card)
 
 
+def _channel_gate_line(card):
+    """Почему поста не будет — с возрастом сделки и с выходом, если он нужен.
+
+    Владелец 7 сентября 2026: пришёл черновик карточки про ТЦ «Родник» и
+    «Алмаз» за 6 млрд ₽, а черновика поста не пришло — «это как?». Строка об
+    этом в сообщении БЫЛА, но стояла обычным предложением между ссылкой на
+    предпросмотр и подписью про кнопки, и читалась как ещё одна служебная
+    фраза. Правило она называла верно (сам владелец его и задал 5 сентября:
+    не первой свежести сделки в канал не идут вовсе, иначе подписчики,
+    пришедшие за новостями, отписываются), но не говорила ни насколько
+    сделка старая, ни что делать, если пост всё-таки нужен."""
+    age = None
+    raw = str(card.get('date') or '')[:10]
+    try:
+        age = (date.today() - date.fromisoformat(raw)).days
+    except ValueError:
+        pass
+    how_old = ('сделке %d %s' % (age, _plural_days(age)) if age is not None
+               else 'у сделки известен только год')
+    return ('\n⛔ Поста в канал не будет: %s, а в канал идут только сделки не '
+            'старше %d дней — иначе подписчики, пришедшие за новостями, видят '
+            'архив. На сайт карточка выйдет как обычно.\n'
+            'Если пост всё-таки нужен — ответьте на это сообщение своим '
+            'текстом, он и станет постом.\n'
+            % (how_old, format_post.FRESH_DAYS))
+
+
+def _plural_days(n):
+    n = abs(int(n))
+    if n % 10 == 1 and n % 100 != 11:
+        return 'день'
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return 'дня'
+    return 'дней'
+
+
 def card_message(card, companies=None):
     """🗂 Проект карточки сайта: поля + предпросмотр. Ответ = заметка.
 
@@ -100,10 +137,7 @@ def card_message(card, companies=None):
     заполненное в данных и не показанное на экране."""
     src = next((s[1] for s in card.get('src') or [] if len(s) > 1), '')
     seller, asset, buyer = format_post.party_names(card, companies or {})
-    channel = ('' if goes_to_channel(card) else
-               'В канал не пойдёт: сделке больше %d дней (или у неё известен '
-               'только год) — на сайт выйдет, подписчики уведомления не получат.\n'
-               % format_post.FRESH_DAYS)
+    channel = '' if goes_to_channel(card) else _channel_gate_line(card)
     return ('🗂 [карточка %s] — НА САЙТ, на проверку\n'
             '%s\n\n'
             '%s%s%s%s%s%s%s'

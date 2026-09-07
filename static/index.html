@@ -6960,9 +6960,16 @@ async function mountMarketMultiples(){
     const scaledTotal = s.deals.filter(d=>d.price_basis==="scaled").length;
     const shown = (onlyFull ? s.deals.filter(d=>d.price_basis!=="scaled") : s.deals);
     const showMedians = data.show_medians !== false;
-    const industriesHtml = showMedians && s.industries.length ? `
+    /* Отраслевой ориентир больше НЕ ждёт общего разрешения показывать медианы:
+       порогом служит сама группа — восемь сопоставимых сделок одной отрасли,
+       у которых числитель получен одинаково (решение владельца 7 сентября
+       2026 по совету рецензента). Медиана «по всему рынку» остаётся закрытой:
+       она смешивает отрасли, а это наименее сопоставимое, что вообще можно
+       сложить. */
+    const basisNote = b => b === "scaled" ? "цена пакета в пересчёте на 100%" : "цена за 100% компании";
+    const industriesHtml = s.industries.length ? `
       <div style="margin-bottom:18px">
-        ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">${fmtMult(i.median)} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}</span></span></div>`).join("")}
+        ${s.industries.map(i=>`<div class="mult-ind"><span>${esc(i.industry)}</span><span class="num">${fmtMult(i.median)} <span class="mult-ind-note">${i.count} ${plural(i.count,"сделка","сделки","сделок")}, от ${i.min} до ${i.max}${i.price_basis?` · ${esc(basisNote(i.price_basis))}`:""}</span></span></div>`).join("")}
       </div>` : "";
     // Имя купленной компании — как её знает читатель (профиль в базе), а не
     // капсом из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"»
@@ -7014,7 +7021,7 @@ async function mountMarketMultiples(){
       ${notShownHtml}
       ${awaitingHtml}
       <details style="margin:16px 0 0"><summary style="font-size:12.5px;color:var(--muted);cursor:pointer">Как считаем и почему так</summary>
-      <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">${esc(s.methodology)} Отраслевая медиана считается только при трёх и более сделках.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">${esc(s.methodology)} Отраслевой ориентир показываем только там, где в одной отрасли набралось восемь сделок с одинаково полученным числителем: медиана по двум-трём сделкам выглядит точнее, чем есть, а сделки разной природы складывать нельзя.</p>
       ${rejectedHtml}</details>`;
   };
   const draw = () => {

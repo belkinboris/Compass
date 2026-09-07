@@ -471,7 +471,10 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         def hidden(route):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({
                 "candidates_total": 42, "clean_total": 3, "median": 1.5, "show_medians": False,
-                "industries": [{"industry": "ИТ и интернет", "count": 3, "median": 1.5, "min": 1.0, "max": 2.0}],
+                # Групп с отраслевым ориентиром сервер здесь не отдаёт: порог —
+                # восемь сопоставимых сделок в одной отрасли (7 сентября 2026),
+                # и на трёх строках ни одна группа его не набирает.
+                "industries": [],
                 "deals": [{"id": "citibank", "title": "Тестовая сделка", "year": 2024,
                            "target_id": "citibank", "target_name": "ООО Тест",
                            "sum_rub": 1000000000, "revenue_rub": 500000000,
@@ -493,6 +496,30 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         # можно взять как ориентиры, а не медиана рынка», и привязка к одной
         # фразе роняла тест на верной правке текста.
         assert "не медиана рынка" in body1 or "Медиану пока не выводим" in body1, body1
+
+        # А когда группа порог НАБРАЛА, ориентир показывается — и подписан тем,
+        # чем получен числитель, чтобы пересчитанные сделки не читались как
+        # заплаченная цена за всю компанию.
+        def with_group(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 8, "median": 4.0, "show_medians": False,
+                "industries": [{"industry": "ИТ и интернет", "price_basis": "scaled",
+                                "count": 8, "median": 4.0, "min": 1.0, "max": 9.0}],
+                "deals": [{"id": "citibank", "title": "Тестовая сделка", "year": 2024,
+                           "target_id": "citibank", "target_name": "ООО Тест",
+                           "sum_rub": 1000000000, "revenue_rub": 500000000,
+                           "revenue_year": 2023, "multiple": 2.0}],
+                "methodology": "Тестовая методика.",
+            }))
+        ctx.unroute("**/api/analytics/multiples")
+        ctx.route("**/api/analytics/multiples", with_group)
+        pg2 = ctx.new_page()
+        pg2.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg2.wait_for_timeout(800)
+        body2 = pg2.inner_text("#multiplesCard")
+        assert "ИТ и интернет" in body2 and "8 сделок" in body2, body2
+        assert "пересчёт" in body2.lower(), body2
+        pg2.close()
         # Методика с 6 сентября 2026 — под раскрывашкой «Как считаем и почему
         # так»: три абзаца пояснений над пятью строками данных читались как
         # объяснительная записка (вопрос владельца «а что сейчас в таблице»).

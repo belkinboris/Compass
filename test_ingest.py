@@ -3386,7 +3386,12 @@ def test_console_does_not_ask_about_a_post_that_will_never_go_out(monkeypatch):
     assert ("g-new", "post_draft_sent") in marks
     assert ("g-dictated", "post_draft_sent") in marks, "текст владельца гейт не перекрывает"
     old_text = next(t for t, _kb, (_k, item, mark) in plan if item["id"] == "g-old" and mark == "draft_sent")
-    assert "В канал не пойдёт" in old_text
+    # Формулировка стала громче и с выходом (7 сентября 2026: владелец не
+    # заметил прежнюю строку и спросил, почему поста нет) — проверяем
+    # смысл: что поста не будет и что делать, если он всё-таки нужен.
+    assert "Поста в канал не будет" in old_text
+    assert "ответьте на это сообщение своим текстом" in old_text.lower()
+    assert "известен только год" in old_text or "у сделки известен только год" in old_text
     new_text = next(t for t, _kb, (_k, item, mark) in plan if item["id"] == "g-new" and mark == "draft_sent")
     assert "В канал не пойдёт" not in new_text
 

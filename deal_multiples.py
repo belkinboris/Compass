@@ -96,7 +96,17 @@ MIN_STAKE_PERCENT = 95.0
 MIN_YEAR_GAP = 1
 MAX_YEAR_GAP = 2
 MIN_YEAR = 2022
-MIN_INDUSTRY_SAMPLE = 3
+# Отраслевой ориентир показывается только при восьми сопоставимых сделках в
+# одной группе (решение владельца 7 сентября 2026 по совету рецензента; было
+# три). «Сопоставимых» — не просто «в одной отрасли»: рецензент перечислил, что
+# обязано совпадать, и из этого списка механически проверяемы три вещи —
+# показатель в знаменателе (у нас это разные вкладки), отрасль и то, ЧЕМ
+# получен числитель: заплаченной ценой за всю компанию или ценой пакета,
+# пересчитанной на 100%. Смешивать последние две в одной медиане нельзя:
+# премия за контроль в пересчёт не заложена, и сделки разной природы дали бы
+# ориентир, которого на рынке нет. Двадцать несопоставимых сделок не лучше
+# десяти — поэтому порог стоит на ГРУППЕ, а не на общем числе строк.
+MIN_INDUSTRY_SAMPLE = 8
 
 UNIT_MULT = {'тыс': 1e3, 'млн': 1e6, 'млрд': 1e9, 'трлн': 1e12}
 
@@ -726,22 +736,24 @@ def multiple_for_candidate_op(cand: MultipleCandidate, operating_profit_rub: flo
 
 def industry_medians(rows: list[DealMultiple], industry_of: dict[str, str]
                       ) -> list[dict[str, Any]]:
-    """Медиана по отраслям с >=MIN_INDUSTRY_SAMPLE наблюдениями — меньше
-    трёх сделок медианой не подписываем (см. CLAUDE.md, «У числа на экране
-    два свойства: величина и множество» — знаменатель обязан быть честным,
-    а на выборке в одну-две сделки медиана выглядит точнее, чем есть)."""
-    by_ind: dict[str, list[float]] = {}
+    """Медиана по группе «отрасль + чем получен числитель», и только при
+    MIN_INDUSTRY_SAMPLE сделках в группе (см. комментарий к константе).
+    Группа несёт `price_basis`, чтобы на экране было видно, о каких сделках
+    речь: о тех, где цену заплатили сразу за всю компанию, или о тех, где
+    цену пакета пересчитали на 100%."""
+    by_group: dict[tuple[str, str], list[float]] = {}
     for r in rows:
         ind = industry_of.get(r.target_id) or 'Не определена'
-        by_ind.setdefault(ind, []).append(r.multiple)
+        by_group.setdefault((ind, r.price_basis or 'full'), []).append(r.multiple)
     out = []
-    for ind, mults in by_ind.items():
+    for (ind, basis), mults in by_group.items():
         if len(mults) < MIN_INDUSTRY_SAMPLE:
             continue
         s = sorted(mults)
         n = len(s)
         median = s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2
-        out.append({'industry': ind, 'count': n, 'median': round(median, 2),
+        out.append({'industry': ind, 'price_basis': basis, 'count': n,
+                     'median': round(median, 2),
                      'min': round(s[0], 2), 'max': round(s[-1], 2)})
     out.sort(key=lambda x: -x['count'])
     return out
