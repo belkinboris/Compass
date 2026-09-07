@@ -168,6 +168,44 @@ def channel_ids() -> set:
     return ids
 
 
+def is_channel(chat_id) -> bool:
+    """Правда ли, что этот адрес — КАНАЛ, а не группа. Спрашиваем сам Telegram.
+
+    Сравнения с известным номером канала мало, и это выяснилось в тот же
+    вечер: владелец, поправляя переменные после утечки, записал в
+    `TELEGRAM_CHANNEL_ID` старое @имя канала — а оно перестало существовать,
+    когда канал сделали приватным (`getChat` по нему отвечает «chat not
+    found»). Номера канала мы после этого не знали ВООБЩЕ, и защита,
+    построенная только на сравнении номеров, стала пустой.
+
+    Тип чата — свойство самого чата, его не может «не быть» из-за того, что
+    кто-то не так заполнил переменную. Один запрос на процесс, ответ
+    запоминается. Сеть не ответила — не блокируем отправку (иначе любая
+    заминка загоняла бы все сообщения в личку), но сравнение по номерам
+    остаётся вторым рубежом."""
+    chat_id = str(chat_id or '').strip()
+    if not chat_id:
+        return False
+    if chat_id in _type_cache:
+        return _type_cache[chat_id]
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
+    if not token:
+        return False
+    verdict = False
+    try:
+        import httpx
+        import telegram_endpoint
+        r = httpx.post(telegram_endpoint.method_url(token, 'getChat'),
+                       json={'chat_id': chat_id}, timeout=20)
+        data = r.json()
+        if data.get('ok'):
+            verdict = str((data.get('result') or {}).get('type') or '') == 'channel'
+            _type_cache[chat_id] = verdict
+    except Exception:                                       # noqa: BLE001
+        pass
+    return verdict
+
+
 def channel_leak_note() -> str | None:
     """Строка для отчёта, если адрес канала стоял там, где ждали консоль."""
     return _leak_note
@@ -175,6 +213,7 @@ def channel_leak_note() -> str | None:
 
 _channel_cache = None
 _leak_note = None
+_type_cache: dict = {}
 
 def console_chats():
     """Куда слать сообщения консоли: группа в первую очередь (сайт знает
@@ -186,13 +225,13 @@ def console_chats():
     global _group_source, _leak_note
     forbidden = channel_ids()
     group = review_group_id()
-    if group and str(group) in forbidden:
+    if group and (str(group) in forbidden or is_channel(group)):
         _leak_note = ('адрес канала публикации стоял как адрес консоли — '
                       'сообщение туда НЕ отправлено')
         group = None
     if not group:
         env = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
-        if env and env in forbidden:
+        if env and (env in forbidden or is_channel(env)):
             _leak_note = ('TELEGRAM_REVIEW_GROUP_ID указывает на канал публикации, '
                           'а не на группу-консоль — пишу лично владельцу и партнёру')
         elif env:

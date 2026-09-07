@@ -1037,12 +1037,16 @@ def _review_chat_ids(db=None) -> list[str]:
     спрашиваем БД первой, а переменная окружения остаётся запасным путём для
     вызовов без доступа к базе (фоновые потоки без своей сессии)."""
     forbidden = _channel_chat_ids(db)
+
+    def usable(chat_id: str) -> bool:
+        return bool(chat_id) and chat_id not in forbidden and not _chat_is_channel(chat_id)
+
     if db is not None:
         row = db.get(AppSetting, REVIEW_GROUP_SETTING)
-        if row and row.value and row.value not in forbidden:
+        if row and row.value and usable(row.value):
             return [row.value]
     group = os.environ.get("TELEGRAM_REVIEW_GROUP_ID", "").strip()
-    if group and group not in forbidden:
+    if usable(group):
         return [group]
     return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",")
             if x.strip() and x.strip() not in forbidden]
@@ -1069,6 +1073,36 @@ def _channel_chat_ids(db=None) -> set[str]:
         if row and row.value:
             ids.add(str(row.value))
     return ids
+
+
+_CHAT_IS_CHANNEL: dict[str, bool] = {}
+
+
+def _chat_is_channel(chat_id) -> bool:
+    """Правда ли, что этот адрес — КАНАЛ. Спрашиваем сам Telegram.
+
+    Сравнения с известным номером канала мало, и это выяснилось в тот же
+    вечер, что и утечка: владелец, поправляя переменные, записал в
+    `TELEGRAM_CHANNEL_ID` старое @имя канала — а оно перестало существовать,
+    когда канал сделали приватным. Номера канала мы после этого не знали
+    вообще, и защита, построенная только на сравнении номеров, стала пустой.
+    Тип чата — свойство самого чата: он не может «не быть» из-за того, что
+    кто-то не так заполнил переменную. Один запрос на адрес за жизнь
+    процесса; сеть молчит — не блокируем (сравнение по номерам остаётся
+    вторым рубежом)."""
+    chat_id = str(chat_id or "").strip()
+    if not chat_id:
+        return False
+    if chat_id in _CHAT_IS_CHANNEL:
+        return _CHAT_IS_CHANNEL[chat_id]
+    if not os.environ.get("TELEGRAM_BOT_TOKEN", "").strip():
+        return False
+    answer = notification_service.tg_api("getChat", chat_id=chat_id) or {}
+    if answer.get("ok"):
+        verdict = str((answer.get("result") or {}).get("type") or "") == "channel"
+        _CHAT_IS_CHANNEL[chat_id] = verdict
+        return verdict
+    return False
 
 
 def _notify_access_request(user: User, db=None) -> None:

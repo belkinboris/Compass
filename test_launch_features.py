@@ -3715,6 +3715,30 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
     monkeypatch.setattr(console_topics, "_group_cache", "-1004448538393", raising=False)
     assert "-1004448538393" not in console_topics.console_chats()
 
+    # А ГЛАВНОЕ — защита не должна опираться на то, что кто-то верно заполнил
+    # переменную. Вечером того же дня владелец, поправляя окружение, записал в
+    # TELEGRAM_CHANNEL_ID старое @имя канала — а оно перестало существовать,
+    # когда канал сделали приватным. Номера канала мы после этого не знали
+    # вообще, и сравнение номеров стало пустым. Тип чата спрашиваем у самого
+    # Telegram: он не может «не быть» из-за неверной переменной.
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@projectcompassru")
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1004448538393")
+    monkeypatch.setattr(console_topics, "_group_cache", "", raising=False)
+    monkeypatch.setattr(console_topics, "_channel_cache", "", raising=False)
+    monkeypatch.setattr(console_topics, "_type_cache", {"-1004448538393": True}, raising=False)
+    assert console_topics.channel_ids() == {"@projectcompassru"}, "номера канала мы не знаем"
+    assert console_topics.console_chats() == ["160794536", "57671646"], \
+        "канал узнан по типу чата, а не по номеру"
+
     # --- сторона сайта ------------------------------------------------------
+    # Тип чата сайт узнаёт тем же способом и тоже помнит; здесь подставляем
+    # ответ Telegram, чтобы тест не ходил в сеть.
+    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
     assert "-1004448538393" not in main._review_chat_ids()
+    assert main._review_chat_ids() == ["160794536", "57671646"]
+
+    # И то же самое, когда номер канала известен, а тип спросить не у кого
+    # (нет токена): работает сравнение по номерам — второй рубеж.
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004448538393")
+    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {}, raising=False)
     assert main._review_chat_ids() == ["160794536", "57671646"]
