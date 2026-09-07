@@ -537,7 +537,13 @@ def _yandex_ready() -> bool:
     return bool(os.environ.get("YANDEX_API_KEY")) and bool(os.environ.get("YANDEX_FOLDER_ID"))
 
 
-@app.get("/health")
+# HEAD, а не только GET: проверка живости у хостинга ходит методом HEAD, а
+# FastAPI — в отличие от «голого» Starlette — сам HEAD к GET-маршруту НЕ
+# добавляет. 6 сентября 2026 это уронило сайт на всю ночь: платформа стучалась
+# «HEAD /», получала 405, считала приложение мёртвым и перезапускала контейнер
+# по кругу; живого процесса за прокси не было, и он даже не смог отдать
+# сертификат — снаружи это выглядело как «сломался HTTPS», а не как 405.
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok", "ai": _yandex_ready()}
 
@@ -3203,6 +3209,9 @@ def root_icon(icon_name: str, request: Request):
                         headers={"Cache-Control": "public, max-age=86400"})
 
 
-@app.get("/{full_path:path}")
+# Тот же HEAD: этот маршрут ловит «/» и любой адрес одностраничного
+# приложения — именно сюда приходит проверка живости хостинга.
+# FileResponse на HEAD сам не отправляет тело, только заголовки.
+@app.api_route("/{full_path:path}", methods=["GET", "HEAD"])
 def index(full_path: str):
     return FileResponse(os.path.join(STATIC_DIR, "index.html"))

@@ -111,6 +111,18 @@ def test_health_ai_flag(monkeypatch):
     assert TestClient(main.app).get("/health").json() == {"status": "ok", "ai": False}
 
 
+@pytest.mark.parametrize("path", ["/", "/health", "/#/analytics"])
+def test_head_request_is_answered_not_rejected(path):
+    """Проверка живости у хостинга ходит методом HEAD, и 405 в ответ означает
+    для платформы «приложение мертво»: 6 сентября 2026 контейнер из-за этого
+    перезапускался по кругу, живого процесса за прокси не было, и сайт не
+    открывался всю ночь. FastAPI, в отличие от «голого» Starlette, сам HEAD к
+    GET-маршруту не добавляет — поэтому его надо объявлять явно, и поэтому
+    здесь стоит тест, а не надежда на фреймворк."""
+    r = TestClient(main.app).head(path)
+    assert r.status_code == 200, (path, r.status_code)
+
+
 def test_ask_no_keys_fallback(monkeypatch):
     monkeypatch.delenv("YANDEX_API_KEY", raising=False)
     monkeypatch.delenv("YANDEX_FOLDER_ID", raising=False)
