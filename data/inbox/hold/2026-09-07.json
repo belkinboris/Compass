@@ -5887,7 +5887,7 @@
    ]
   },
   {
-   "draft_id": "d54993907",
+   "draft_id": "d77998976",
    "title": "В «Яндекс маркете» рассказали, кто из россиян чаще покупает новые iPhone",
    "date": "2026-09-07",
    "src": [
@@ -5917,7 +5917,7 @@
    ]
   },
   {
-   "draft_id": "d17412970",
+   "draft_id": "d56117863",
    "title": "«М.видео» привлекло 17,5 млрд рублей на развитие маркетплейса",
    "date": "2026-09-07",
    "src": [
@@ -5956,7 +5956,7 @@
    ]
   },
   {
-   "draft_id": "d56631525",
+   "draft_id": "d42000637",
    "title": "Склад Obi в Солнечногорске перешел к производителю косметики Mixit",
    "date": "2026-09-07",
    "src": [
@@ -5984,7 +5984,7 @@
    ]
   },
   {
-   "draft_id": "d55322357",
+   "draft_id": "d35462626",
    "title": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе преду",
    "date": "2026-09-07",
    "src": [
@@ -6023,7 +6023,7 @@
    ]
   },
   {
-   "draft_id": "d84876285",
+   "draft_id": "d79418697",
    "title": "СМИ: Украина пытается национализировать компанию, связанную с Фридманом",
    "date": "2026-09-07",
    "src": [
@@ -6051,35 +6051,7 @@
    ]
   },
   {
-   "draft_id": "d75173002",
-   "title": "Аферист обманул россиянку ради покупки сыну PlayStation 5 с GTA",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/07/afrist-obmanul-rossiyanku-radi-pokupki-synu-playstation-5-s-gta/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54691113",
+   "draft_id": "d37235187",
    "title": "Арестованный тюменский бизнесмен Гоцык передал сыну крупнейшие активы",
    "date": "2026-09-07",
    "src": [
@@ -6104,6 +6076,131 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88201610",
+   "title": "Корпорация МСП: малые техкомпании привлекли 21 млрд рублей капитала с господдержкой",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28087825"
+    ]
+   ],
+   "sum": "21 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Корпорация МСП: малые техкомпании",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Корпорация МСП: малые техкомпании",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d79387104",
+   "title": "В Херсонской области ввели программу льготных займов на покупку генераторов",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28087775"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31769935",
+   "title": "Volkswagen договорился о продаже завода в Оснабрюке",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260907/volkswagen-873078709.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-07",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20260907/volkswagen-873078709.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71171661",
+   "title": "Астраханца заподозрили в продаже данных пользователей «Госуслуг»",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/9/7/astrahancza-zapodozrili-v-prodazhe-dannyh-polzovatelej-gosuslug"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Россияне смогут на «Госуслугах» выбрать и купить себе место » — второе издание, в группу не шлём"
    ]
   }
  ]
