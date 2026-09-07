@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Новые функции запуска: ФНС, алерты, экспорт, вебинары и mobile UI."""
+import sys
 import uuid
 from datetime import date, datetime
 from pathlib import Path
@@ -3766,3 +3767,58 @@ def test_webhook_is_dropped_only_after_telegram_answered(monkeypatch):
 
     monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: Ok())
     assert main._telegram_reachable("токен") is True
+
+
+def test_a_process_that_stopped_serving_kills_itself(monkeypatch):
+    """Процесс, переставший обслуживать запросы, обязан умереть, а не
+    писать бодрые строки в журнал.
+
+    7 сентября 2026 сайт отдавал 503 («upstream connect error … remote
+    connection failure» — прокси не достучался до контейнера) почти
+    полчаса, а журнал приложения в это же время выглядел здоровым: опрос
+    Telegram отвечал 200 каждые 25 секунд, данные подтягивались из GitHub
+    каждые 5 минут, ни одного исключения. Двумя строками выше стояло
+    «Shutting down / Application shutdown complete», и после этого — ни
+    одной строки о входящем запросе, даже от проверки живости, которая
+    ходит из самого контейнера. uvicorn перестал слушать порт, а процесс
+    остался жив фоновыми потоками.
+
+    Для платформы это худшее состояние: контейнер не упал — значит,
+    перезапускать нечего. Молчаливый зомби опаснее честного падения."""
+    import main as m
+
+    calls = []
+    monkeypatch.setattr(m.os, "_exit", lambda code: calls.append(code))
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.delenv("KOMPAS_NO_EXIT_ON_SHUTDOWN", raising=False)
+    monkeypatch.setitem(sys.modules, "pytest", None)   # как в бою: pytest не импортирован
+    monkeypatch.delitem(sys.modules, "pytest")
+    started = []
+    real_thread = m.threading.Thread
+
+    class Immediate:
+        def __init__(self, target=None, daemon=None, **kw):
+            self._target = target
+            started.append(self)
+
+        def start(self):
+            self._target()
+
+    monkeypatch.setattr(m.threading, "Thread", Immediate)
+    monkeypatch.setattr(m.time, "sleep", lambda *_: None)
+    m._die_when_no_longer_serving()
+    assert calls == [0], (
+        "процесс, переставший обслуживать запросы, не гасит себя — платформа "
+        "будет считать зомби живым контейнером: %s" % calls)
+    assert real_thread is not Immediate
+
+
+def test_shutdown_does_not_kill_the_process_under_pytest(monkeypatch):
+    """Обратная сторона: под pytest TestClient закрывает приложение на
+    каждом выходе из фикстуры — погасив процесс, мы убили бы сам прогон."""
+    import main as m
+    calls = []
+    monkeypatch.setattr(m.os, "_exit", lambda code: calls.append(code))
+    monkeypatch.setenv("PYTEST_CURRENT_TEST", "да")
+    m._die_when_no_longer_serving()
+    assert calls == [], "выход из процесса сработал под pytest: %s" % calls
