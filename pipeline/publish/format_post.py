@@ -199,6 +199,36 @@ def _is_reporting_meta(sentence):
     return bool(_REPORTING_VERB.search(sentence) and _DISCLOSURE_CHANNEL.search(sentence))
 
 
+# «Предмет» отвечает на вопрос «ЧТО купили», а не «сколько предмет
+# зарабатывает». Найдено владельцем 7 сентября 2026 на черновике поста о
+# сделке «Базис»/Proto: строка читалась «Предмет: По данным Saby Profile,
+# доходы ООО «ПротоСервисез» по итогам 2025 г. составили 9,5 млн руб., …» —
+# то есть вместо предмета в ней стояли финансовые показатели. Причина —
+# приоритет источников в `_subject_detail()`: когда «Предмет / доля»
+# (`eco.share`) пуст, деталь берётся из «Финансов предмета»
+# (`eco.target_fin`), а там первое предложение почти всегда чисто
+# числовое. Само по себе правило верное и заведено не зря (у карточки-
+# образца HeadHunter/Happy Job именно в `target_fin` лежит точное юрлицо) —
+# поэтому фильтруется не источник целиком, а ОТДЕЛЬНОЕ предложение: из
+# «Финансов предмета» в «Предмет» не идёт предложение, которое ТОЛЬКО
+# сообщает показатель с суммой. Замер по всем 839 карточкам с непустым
+# `target_fin`: деталь предмета меняется у 206, и в каждом просмотренном
+# случае на месте показателей встаёт описание предмета («Производитель
+# картонной упаковки…», «Продажа 100% долей ООО «Вториум»…»); у 16 деталь
+# исчезает совсем — там в «Финансах предмета» ничего, кроме чисел, и не
+# было, а имя предмета печатает соседняя строка `asset`.
+_FINANCIAL_INDICATOR = re.compile(
+    r'(выручк|доход|прибыл|убыт|EBITDA|оборот|рентабельн|активов|активы'
+    r'|показател)', re.I)
+_MONEY_AMOUNT = re.compile(
+    r'\d[\d\s.,]*\s*(?:млн|млрд|тыс|трлн)\b|\d\s*(?:руб|₽)', re.I)
+
+
+def _is_financial_report(sentence):
+    """Предложение только сообщает финансовый показатель с суммой."""
+    return bool(_FINANCIAL_INDICATOR.search(sentence) and _MONEY_AMOUNT.search(sentence))
+
+
 def _pick_novel_sentences(text, reference, limit=2, max_chars=280, drop=None):
     """Дословные предложения из `text`, каждое — с новизной к постоянно
     расширяющемуся `reference` (уже выбранные предложения тоже входят в
@@ -433,28 +463,32 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     («Финансы предмета») — добавлен НЕ по букве брифа, а по факту разбора
     карточки-образца (HeadHunter/Happy Job, `gebead2e8`): там `eco.share`
     пуст, а точное юрлицо («ООО «Счастливая работа»») и учредители лежат
-    именно в `target_fin`, первым предложением; профиль цели (`desc`) —
-    когда предмет связан со своим профилем компании."""
+    именно в `target_fin`, первым предложением — но ТОЛЬКО те предложения
+    `target_fin`, которые называют предмет, а не сообщают его показатели
+    (`_is_financial_report`); профиль цели (`desc`) — когда предмет связан
+    со своим профилем компании."""
     eco = deal.get('eco') or {}
     sources = []
     if has(eco.get('share')):
-        sources.append(eco['share'])
+        sources.append((eco['share'], None))
     elif has(deal.get('extra')):
-        sources.append(deal['extra'])
+        sources.append((deal['extra'], None))
     if has(eco.get('target_fin')):
-        sources.append(eco['target_fin'])
+        # Из «Финансов предмета» берём только то, что называет предмет, а не
+        # его показатели (см. _is_financial_report выше).
+        sources.append((eco['target_fin'], _is_financial_report))
     target_id = deal.get('target')
     if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
-        sources.append(companies[target_id]['desc'])
+        sources.append((companies[target_id]['desc'], None))
 
     picked, ref = [], reference
-    for src in sources:
+    for src, drop in sources:
         if len(picked) >= limit:
             break
         budget = max_chars - sum(len(s) for s in picked)
         if budget <= 0:
             break
-        new = _pick_novel_sentences(src, ref, limit=limit - len(picked), max_chars=budget)
+        new = _pick_novel_sentences(src, ref, limit=limit - len(picked), max_chars=budget, drop=drop)
         if new:
             picked += new
             ref = ref + ' ' + ' '.join(new)
