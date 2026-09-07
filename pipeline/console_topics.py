@@ -120,6 +120,62 @@ def review_group_id():
     return _group_cache or None
 
 
+
+# ---------------------------------------------------------------------------
+# КОНСОЛЬ И КАНАЛ — РАЗНЫЕ ЧАТЫ, И ПЕРЕПУТАТЬ ИХ НЕЛЬЗЯ НИ ПРИ КАКОМ СБОЕ.
+#
+# 7 сентября 2026 отчёт рутины «🔧 Компас · качество» ушёл в ПУБЛИЧНЫЙ канал,
+# к подписчикам: внутренняя кухня («дополнили 3 карточки», «ещё в очереди на
+# проверку: 165») на витрине проекта. Владелец удалил пост руками.
+#
+# Как это стало возможно. Адрес консоли берётся у сайта, а если сайт не
+# ответил — из переменной окружения `TELEGRAM_REVIEW_GROUP_ID`. В контейнере
+# рутин эта переменная содержала номер КАНАЛА (тот же, что
+# `TELEGRAM_CHANNEL_ID`), а сайт в ту минуту перезапускался после сборки —
+# и запасной путь честно отработал, отправив отчёт по неверному адресу.
+#
+# Вывод не «сделать запасной путь надёжнее»: любой запасной путь однажды
+# сработает, и цена ошибки здесь несимметрична. Сообщение консоли,
+# не дошедшее до владельца, — неудобство; сообщение консоли, ушедшее
+# подписчикам, — публичный ущерб. Поэтому адрес канала ВЫЧЕРКИВАЕТСЯ из
+# кандидатов в консоль всегда, откуда бы он ни пришёл, а если после этого
+# группы не осталось — пишем лично владельцу и партнёру. Хуже личного
+# сообщения быть не может; хуже публикации — может.
+def channel_ids() -> set:
+    """Адреса канала публикации — всё, что мы о нём знаем. Из окружения и,
+    если сайт отвечает, из его памяти (он узнаёт номер приватного канала от
+    самого Telegram — см. `_announce_channel_id` в main.py)."""
+    ids = set()
+    env = (os.environ.get('TELEGRAM_CHANNEL_ID') or '').strip()
+    if env:
+        ids.add(env)
+    global _channel_cache
+    if _channel_cache is None:
+        _channel_cache = ''
+        site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+        token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+        if token:
+            try:
+                import httpx
+                r = httpx.get('%s/api/moderation/channel' % site,
+                              params={'token': token}, timeout=20)
+                if r.status_code == 200:
+                    _channel_cache = str(r.json().get('chat_id') or '')
+            except Exception:                               # noqa: BLE001
+                pass
+    if _channel_cache:
+        ids.add(_channel_cache)
+    return ids
+
+
+def channel_leak_note() -> str | None:
+    """Строка для отчёта, если адрес канала стоял там, где ждали консоль."""
+    return _leak_note
+
+
+_channel_cache = None
+_leak_note = None
+
 def console_chats():
     """Куда слать сообщения консоли: группа в первую очередь (сайт знает
     свежий id — см. review_group_id — иначе TELEGRAM_REVIEW_GROUP_ID из
@@ -127,15 +183,27 @@ def console_chats():
     для send_drafts.py, send_access_requests.py, send_open_questions.py и
     ops_status.py — раньше каждый читал переменные по-своему, и обновлять
     логику приходилось в четырёх местах сразу."""
-    global _group_source
+    global _group_source, _leak_note
+    forbidden = channel_ids()
     group = review_group_id()
+    if group and str(group) in forbidden:
+        _leak_note = ('адрес канала публикации стоял как адрес консоли — '
+                      'сообщение туда НЕ отправлено')
+        group = None
     if not group:
-        group = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
-        if group:
+        env = os.environ.get('TELEGRAM_REVIEW_GROUP_ID', '').strip()
+        if env and env in forbidden:
+            _leak_note = ('TELEGRAM_REVIEW_GROUP_ID указывает на канал публикации, '
+                          'а не на группу-консоль — пишу лично владельцу и партнёру')
+        elif env:
+            group = env
             _group_source = 'переменная окружения'
     if group:
         return [group]
-    return [x.strip() for x in os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '').split(',') if x.strip()]
+    # Личные адреса — последний рубеж: хуже личного сообщения быть не может,
+    # хуже публикации — может. Канал вычёркиваем и отсюда тоже.
+    return [x.strip() for x in os.environ.get('TELEGRAM_REVIEW_CHAT_IDS', '').split(',')
+            if x.strip() and x.strip() not in forbidden]
 
 
 def thread_id(kind: str):

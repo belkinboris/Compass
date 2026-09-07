@@ -1036,14 +1036,39 @@ def _review_chat_ids(db=None) -> list[str]:
     сообщения владельца/партнёра в группе, см. `_learn_review_group`) —
     спрашиваем БД первой, а переменная окружения остаётся запасным путём для
     вызовов без доступа к базе (фоновые потоки без своей сессии)."""
+    forbidden = _channel_chat_ids(db)
     if db is not None:
         row = db.get(AppSetting, REVIEW_GROUP_SETTING)
-        if row and row.value:
+        if row and row.value and row.value not in forbidden:
             return [row.value]
     group = os.environ.get("TELEGRAM_REVIEW_GROUP_ID", "").strip()
-    if group:
+    if group and group not in forbidden:
         return [group]
-    return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()]
+    return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",")
+            if x.strip() and x.strip() not in forbidden]
+
+
+def _channel_chat_ids(db=None) -> set[str]:
+    """Адреса канала публикации — всё, что о нём известно сайту.
+
+    КОНСОЛЬ И КАНАЛ НЕЛЬЗЯ ПЕРЕПУТАТЬ НИ ПРИ КАКОМ СБОЕ. 7 сентября 2026
+    отчёт рутины ушёл в публичный канал, к подписчикам: в контейнере рутин
+    `TELEGRAM_REVIEW_GROUP_ID` содержал номер КАНАЛА, сайт в ту минуту
+    перезапускался после сборки, и запасной путь честно отработал по
+    неверному адресу. Цена ошибки несимметрична: сообщение консоли, не
+    дошедшее до владельца, — неудобство; ушедшее подписчикам — публичный
+    ущерб. Поэтому адрес канала вычёркивается из кандидатов в консоль
+    всегда, откуда бы он ни пришёл; если после этого ничего не осталось,
+    пишем лично владельцу и партнёру."""
+    ids = set()
+    env = (os.environ.get("TELEGRAM_CHANNEL_ID") or "").strip()
+    if env:
+        ids.add(env)
+    if db is not None:
+        row = db.get(AppSetting, CHANNEL_SETTING)
+        if row and row.value:
+            ids.add(str(row.value))
+    return ids
 
 
 def _notify_access_request(user: User, db=None) -> None:
@@ -2818,6 +2843,10 @@ def _learn_review_group(payload, db=None) -> None:
     запомнится сам."""
     if db is None:
         return
+    # Канал публикации адресом консоли стать не может НИКОГДА — даже если бота
+    # добавят туда администратором и Telegram пришлёт про это `my_chat_member`
+    # (см. _channel_chat_ids: 7 сентября 2026 отчёт рутины ушёл подписчикам).
+    forbidden = _channel_chat_ids(db)
     member = payload.my_chat_member or {}
     if member:
         chat = member.get("chat") or {}
@@ -2830,7 +2859,8 @@ def _learn_review_group(payload, db=None) -> None:
                 and _is_reviewer((member.get("from") or {}).get("id")):
             known = db.get(AppSetting, REVIEW_GROUP_SETTING)
             if not (known and known.value == chat_id):
-                _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
+                if chat_id not in forbidden:
+                    _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
                 _greet_console_group(db, chat_id, chat.get("title"))
         return
     message = payload.message or (payload.callback_query or {}).get("message") or {}
@@ -2842,7 +2872,7 @@ def _learn_review_group(payload, db=None) -> None:
     if not _is_reviewer(sender_id):
         return
     chat_id = str(chat.get("id") or "")
-    if chat_id:
+    if chat_id and chat_id not in forbidden:
         _remember_setting(db, REVIEW_GROUP_SETTING, chat_id)
 
 

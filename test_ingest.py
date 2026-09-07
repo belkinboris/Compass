@@ -4119,8 +4119,13 @@ def test_ops_status_main_without_token_does_not_pretend_to_send(monkeypatch, cap
     успеха (тот же принцип, что у send_telegram.py без TELEGRAM_BOT_TOKEN)."""
     monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
     monkeypatch.delenv("TELEGRAM_REVIEW_GROUP_ID", raising=False)
+    monkeypatch.delenv("TELEGRAM_REVIEW_CHAT_IDS", raising=False)
     assert ops_status.main(["публикация", "--nothing"]) == 1
-    assert "не заданы" in capsys.readouterr().out
+    # Формулировка сменилась 7 сентября 2026 вместе с переходом на общий
+    # адрес консоли (console_chats): проверяем смысл — что отправки не было
+    # и что текст показан целиком, а не буквальную фразу.
+    out = capsys.readouterr().out
+    assert "Некому отправлять" in out and "вот что ушло бы" in out
 
 
 def test_ops_status_main_requires_text():

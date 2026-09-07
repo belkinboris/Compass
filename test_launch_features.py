@@ -3680,3 +3680,41 @@ def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue
     assert main._poll_once("токен") == 3
     assert seen == [10, 11, 12], "разбор должен получить все обновления по порядку"
     assert main._poll_state["offset"] == 13, "смещение двигается даже через сбойное обновление"
+
+
+def test_console_never_sends_to_the_publication_channel(monkeypatch):
+    """7 сентября 2026 отчёт рутины «🔧 Компас · качество» ушёл в ПУБЛИЧНЫЙ
+    канал, к подписчикам: внутренняя кухня на витрине проекта. В контейнере
+    рутин `TELEGRAM_REVIEW_GROUP_ID` содержал номер КАНАЛА, сайт в ту минуту
+    перезапускался после сборки, и запасной путь честно отработал по
+    неверному адресу.
+
+    Цена ошибки несимметрична: сообщение консоли, не дошедшее до владельца, —
+    неудобство; ушедшее подписчикам — публичный ущерб. Поэтому адрес канала
+    вычёркивается из кандидатов в консоль ВСЕГДА, откуда бы он ни пришёл, а
+    последним рубежом остаются личные адреса владельца и партнёра."""
+    import importlib
+    import main
+
+    console_topics = importlib.import_module("pipeline.console_topics")
+
+    # --- сторона рутины -----------------------------------------------------
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004448538393")
+    monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1004448538393")
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "160794536,57671646")
+    monkeypatch.setattr(console_topics, "_group_cache", "", raising=False)
+    monkeypatch.setattr(console_topics, "_channel_cache", "", raising=False)
+    monkeypatch.setattr(console_topics, "_leak_note", None, raising=False)
+
+    chats = console_topics.console_chats()
+    assert "-1004448538393" not in chats, "канал публикации не может быть адресом консоли"
+    assert chats == ["160794536", "57671646"], "остаются личные адреса владельца и партнёра"
+    assert console_topics.channel_leak_note(), "о подмене адреса надо сказать вслух"
+
+    # Сайт тоже может ошибиться — и его ответ проверяется так же.
+    monkeypatch.setattr(console_topics, "_group_cache", "-1004448538393", raising=False)
+    assert "-1004448538393" not in console_topics.console_chats()
+
+    # --- сторона сайта ------------------------------------------------------
+    assert "-1004448538393" not in main._review_chat_ids()
+    assert main._review_chat_ids() == ["160794536", "57671646"]

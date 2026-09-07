@@ -556,21 +556,39 @@ def main(argv):
 
     text, keyboard = build(args)
     token = os.environ.get('TELEGRAM_BOT_TOKEN')
-    # Свежий id группы — у сайта в первую очередь (см. console_topics):
-    # включение тем 4 сентября 2026 незаметно сменило id группы, переменная
-    # окружения могла остаться со старым значением.
-    chat = console_topics.review_group_id() or os.environ.get('TELEGRAM_REVIEW_GROUP_ID')
-    if not token or not chat:
-        print('TELEGRAM_BOT_TOKEN/TELEGRAM_REVIEW_GROUP_ID не заданы — вот что ушло бы:')
+    # ЗДЕСЬ И БЫЛА УТЕЧКА 7 сентября 2026. Этот шаг читал
+    # `TELEGRAM_REVIEW_GROUP_ID` НАПРЯМУЮ, мимо `console_chats()`, — а в
+    # контейнере рутин эта переменная содержала номер публичного КАНАЛА. Сайт
+    # в ту минуту перезапускался после сборки, запасной путь честно
+    # отработал, и отчёт «🔧 Компас · качество» ушёл подписчикам. Общая точка
+    # входа для этого и заводилась («раньше каждый читал переменные
+    # по-своему»), но ops_status.py к ней так и не перевели — правило,
+    # записанное в одном месте, ничего не значит для кода, который его не
+    # зовёт. Теперь адрес берётся там же, где у остальных трёх скриптов
+    # консоли, и канал из кандидатов вычеркнут.
+    chats = console_topics.console_chats()
+    leak = console_topics.channel_leak_note()
+    if leak:
+        print('ВНИМАНИЕ: %s' % leak)
+    if not token or not chats:
+        print('Некому отправлять отчёт (нет токена или адреса консоли) — вот что ушло бы:')
         print(re.sub(r'<[^>]+>', '', text))
         return 1
     import httpx
+    sent, last_why = 0, None
     with httpx.Client(timeout=20) as client:
-        ok, why = post_status(client, token, chat, text, keyboard)
-    if not ok:
-        print('Отчёт не ушёл (%s).' % why)
+        for chat in chats:
+            ok, why = post_status(client, token, chat, text, keyboard)
+            if ok:
+                sent += 1
+                if why:
+                    print(why)
+            else:
+                last_why = why
+    if not sent:
+        print('Отчёт не ушёл (%s).' % last_why)
         return 1
-    print('Отчёт отправлен в консоль.')
+    print('Отчёт отправлен в консоль (адресов: %d).' % sent)
     return 0
 
 
