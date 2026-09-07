@@ -27,6 +27,14 @@ if str(ROOT) not in sys.path:
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
+
+def _fit(value, limit):
+    """Строка, гарантированно влезающая в колонку такой ширины."""
+    if value is None:
+        return None
+    value = str(value)
+    return value if len(value) <= limit else value[:limit - 1] + '…'
+
 from company_catalog import load_company_catalog
 from db.models import (
     Base, Company, CompanyAlias, FinancialReport, FnsSyncRun, LegalEntity,
@@ -317,7 +325,11 @@ def sync_entity(db, client: ApiFnsClient, entity: LegalEntity) -> None:
         db.add(RegistryEvent(
             legal_entity_id=entity.id,
             event_date=event.get("event_date"),
-            event_type=event.get("event_type"),
+            # Страховка сверх ширины колонки: ЕГРЮЛ пишет сюда предложения
+            # произвольной длины, и одна слишком длинная строка на Postgres
+            # откатывала докачку по всей компании (7 сентября 2026). Полный
+            # текст никуда не девается — он в `text` и в `raw_json`.
+            event_type=_fit(event.get("event_type"), 400),
             text=event.get("text") or "Изменение в ЕГРЮЛ",
             raw_json=json.dumps(event.get("raw") or {}, ensure_ascii=False, default=str),
         ))

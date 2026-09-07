@@ -3616,3 +3616,25 @@ def test_deal_pdf_strips_the_enrichment_method_label_from_advisor_notes():
     assert pdf.startswith(b"%PDF")
     # текст в PDF лежит в потоках, но метка метода целиком в них попадать не должна
     assert "обогащение/веб-поиск".encode("utf-16-be") not in pdf and b"web-poisk" not in pdf
+
+
+def test_registry_event_type_fits_a_whole_egrul_sentence():
+    """Найдено на проде 7 сентября 2026, не тестом: ЕГРЮЛ пишет в «тип
+    события» целое предложение — «Регистрирующим органом принято решение о
+    предстоящем исключении юридического лица из ЕГРЮЛ (наличие в ЕГРЮЛ
+    сведений о юридическом лице, в отношении которых внесена запись о
+    недостоверности)», 189 знаков. Колонка была VARCHAR(160): SQLite длину не
+    проверяет и молчал во всех прогонах, Postgres отверг вставку и откатил
+    докачку по всей компании. Держим оба конца — ширину колонки и обрезку
+    перед записью, чтобы ЛЮБАЯ длина не могла уронить прогон целиком."""
+    from db.models import RegistryEvent
+    from pipeline.sync_fns import _fit
+
+    long_type = ("Регистрирующим органом принято решение о предстоящем исключении "
+                 "юридического лица из ЕГРЮЛ (наличие в ЕГРЮЛ сведений о юридическом "
+                 "лице, в отношении которых внесена запись о недостоверности)")
+    assert len(long_type) > 160, "образец перестал быть длинным — возьмите другой"
+    assert RegistryEvent.__table__.c.event_type.type.length >= len(long_type)
+    assert _fit(long_type, 400) == long_type
+    assert len(_fit("я" * 5000, 400)) == 400
+    assert _fit(None, 400) is None

@@ -191,7 +191,14 @@ class RegistryEvent(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     legal_entity_id: Mapped[int] = mapped_column(ForeignKey("legal_entities.id"))
     event_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-    event_type: Mapped[str | None] = mapped_column(String(160), nullable=True)
+    # 400, а не 160: ЕГРЮЛ пишет в «тип события» целые предложения —
+    # «Регистрирующим органом принято решение о предстоящем исключении
+    # юридического лица из ЕГРЮЛ (наличие в ЕГРЮЛ сведений о юридическом
+    # лице, в отношении которых внесена запись о недостоверности)» — это
+    # 189 знаков. SQLite длину не проверяет и молчал; Postgres на проде
+    # 7 сентября 2026 отверг вставку (StringDataRightTruncation), и вся
+    # докачка по этой компании откатилась.
+    event_type: Mapped[str | None] = mapped_column(String(400), nullable=True)
     text: Mapped[str] = mapped_column(Text)
     raw_json: Mapped[str | None] = mapped_column(Text, nullable=True)
     fetched_at: Mapped[datetime] = mapped_column(DateTime, default=_now)

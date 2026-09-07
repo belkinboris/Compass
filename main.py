@@ -148,6 +148,21 @@ def _create_account_tables():
                         "ALTER TABLE moderation_decisions ALTER COLUMN deal_id TYPE VARCHAR(80)"))
         except Exception as e:
             logger.error("не удалось расширить deal_id в moderation_decisions: %s", e)
+        # event_type в registry_events расширен со 160 до 400 знаков 7 сентября
+        # 2026 — тот же класс, что и deal_id выше, и найден он так же: на
+        # проде, не тестами. ЕГРЮЛ пишет в «тип события» целое предложение
+        # («Регистрирующим органом принято решение о предстоящем исключении
+        # юридического лица из ЕГРЮЛ…» — 189 знаков), Postgres отверг вставку
+        # (StringDataRightTruncation), и докачка ФНС по этой компании
+        # откатилась целиком. SQLite длину VARCHAR не проверяет вовсе, поэтому
+        # ни один локальный прогон этого увидеть не мог.
+        try:
+            with engine.begin() as conn:
+                if conn.dialect.name == "postgresql":
+                    conn.execute(text(
+                        "ALTER TABLE registry_events ALTER COLUMN event_type TYPE VARCHAR(400)"))
+        except Exception as e:
+            logger.error("не удалось расширить event_type в registry_events: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
 
@@ -201,7 +216,14 @@ def _sync_fns_from_registry():
             db.close()
 
     def _run():
-        _attempt("при старте")
+        if FNS_STARTUP_SYNC:
+            # Пауза до первой живой работы: платформа проверяет живость
+            # запросом к сайту, и она должна получить ответ раньше, чем
+            # начнётся докачка (см. FNS_STARTUP_DELAY_SECONDS выше).
+            time.sleep(FNS_STARTUP_DELAY_SECONDS)
+            _attempt("при старте")
+        else:
+            logger.info("ФНС: докачка при старте выключена (FNS_STARTUP_SYNC=0)")
         # Старт процесса перестал быть надёжным событием (см. комментарий к
         # _seconds_until_next_fns_window): пока в реестре есть бэклог, докачка
         # повторяется раз в сутки сама, сразу после сброса дневного потолка.
@@ -374,6 +396,17 @@ SHOW_MULTIPLE_MEDIANS = os.environ.get("SHOW_MULTIPLE_MEDIANS", "0") == "1"
 # (растёт партиями по 50-60) догонял прод за один-два деплоя, а не тянулся
 # неделями за счёт частоты рестартов процесса.
 FNS_STARTUP_SYNC_LIMIT = 60
+
+# Докачка при старте — ВЫКЛЮЧАЕМАЯ и ОТЛОЖЕННАЯ, потому что она стоит на пути
+# загрузки живого сайта. 7 сентября 2026 сайт не отвечал полчаса, и в журнале
+# приложения последним, что происходило, была именно она. Причину (переполнение
+# колонки на Postgres) починили, но урок шире одной ошибки: у шага, который
+# ходит в чужой платный API десятками запросов сразу после старта, обязан быть
+# выключатель в переменной окружения (FNS_STARTUP_SYNC=0) и пауза, чтобы сайт
+# успел начать отвечать до того, как начнётся тяжёлая работа. Суточное окно
+# (_seconds_until_next_fns_window) всё равно догонит бэклог без этого шага.
+FNS_STARTUP_SYNC = os.environ.get("FNS_STARTUP_SYNC", "1") != "0"
+FNS_STARTUP_DELAY_SECONDS = float(os.environ.get("FNS_STARTUP_DELAY_SECONDS", "60"))
 
 # Суточная докачка по реестру внутри процесса (см. _seconds_until_next_fns_window):
 # выключается FNS_DAILY_RESYNC=0, если понадобится оставить только старт.
