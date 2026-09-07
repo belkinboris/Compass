@@ -5888,201 +5888,7 @@
    ]
   },
   {
-   "draft_id": "d21592847",
-   "title": "В бьюти-сетях растут продажи домашней техники и электроники",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8937652"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64529042",
-   "title": "«Базис» купил разработчика платформы для мониторинга IT-систем",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/technology/news/2026/09/07/1226706-bazis-kupil-razrabotchika"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-07",
-     "title": "Сделка завершена",
-     "note": "Приобретение разработчика Proto позволит сократить сроки внедрения по сравнению с самостоятельной разработкой с нуля",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/technology/news/2026/09/07/1226706-bazis-kupil-razrabotchika"
-     ]
-    }
-   ],
-   "buyer_name": "«Базис»",
-   "asset": "разработчик платформы для мониторинга IT-систем",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Базис»",
-    "asset": "разработчик платформы для мониторинга IT-систем",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку pending-1 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d10007251",
-   "title": "WSJ рассказала, как в США продают ключи от пляжа за $650 тысяч",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/07/09/2026/6a9df8011ee6c9705d15c9d1"
-    ]
-   ],
-   "sum": "$650 тыс",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d23485398",
-   "title": "«Базис» купил российского «убийцу» Dynatrace",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-07_bazis_kupil_rossijskogo"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-07",
-     "title": "Сделка завершена",
-     "note": "Компания «Базис» купила Proto, разработчика российской observability-платформы. Proto Observabilty Platform допустимо считать импортонезависимым аналогом американской Dynatrace. Обе эти системы могут «заглянуть» внтурь сложной ИТ-системы и попытаться на…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-09-07_bazis_kupil_rossijskogo"
-     ]
-    }
-   ],
-   "buyer_name": "«Базис»",
-   "asset": "российское «убийца» Dynatrace",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Базис»",
-    "asset": "российское «убийца» Dynatrace",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку pending-1 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что ««Базис» купил разработчика платформы для мониторинга IT-сист» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d31541192",
-   "title": "Сотрудники Нацполиции Украины пытались продать иностранцам 9-летнюю девочку",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28085951"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11401123",
-   "title": "АКОРТ выступила против легализации онлайн-продажи алкоголя и табака",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28085905"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13603542",
+   "draft_id": "d49657372",
    "title": "В «Яндекс маркете» рассказали, кто из россиян чаще покупает новые iPhone",
    "date": "2026-09-07",
    "src": [
@@ -6112,7 +5918,7 @@
    ]
   },
   {
-   "draft_id": "d68009592",
+   "draft_id": "d83463136",
    "title": "RBI миллиардера Тиктинского отказалась от покупки участка возле Лавры",
    "date": "2026-09-07",
    "src": [
@@ -6140,69 +5946,13 @@
    ]
   },
   {
-   "draft_id": "d45528583",
-   "title": "Российский венчур сжался до $29,3 млн. Деньги уходят в промышленные технологии и M&A",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:comnews.ru",
-     "https://www.comnews.ru/content/247242/2026-09-07/2026-w37/1008/rossiyskiy-venchur-szhalsya-do-293-mln-dengi-ukhodyat-promyshlennye-tekhnologii-i-ma"
-    ]
-   ],
-   "sum": "$29,3 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38566812",
-   "title": "WSJ сообщила о продаже в США «пляжных ключей» за $650 тыс.",
+   "draft_id": "d22370933",
+   "title": "Сотрудники нацполиции Украины пытались продать иностранцам девятилетнюю девочку",
    "date": "2026-09-07",
    "src": [
     [
      "web:iz.ru",
-     "https://iz.ru/2162358/wsj-soobshchila-o-prodazhe-v-ssha-pliazhnykh-kliuchei-za-650-tys-izi"
-    ]
-   ],
-   "sum": "$650 тыс",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28398461",
-   "title": "Камчатка привлекла 55 миллиардов рублей инвестиций на фоне ВЭФ",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260907/kamchatka-873060809.html"
+     "https://iz.ru/2162376/2026-09-07/sotrudniki-natcpolitcii-ukrainy-pytalis-prodat-inostrantcam-deviatiletniuiu-devochku"
     ]
    ],
    "sum": null,
@@ -6210,27 +5960,66 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Камчатка",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Камчатка",
+    "asset": null,
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85713234",
+   "title": "«М.видео» привлекло 17,5 млрд рублей на развитие маркетплейса",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/m-video-privleklo-17-5-mlrd-rublej-na-razvitie-marketplejsa/"
+    ]
+   ],
+   "sum": "17,5 млрд ₽",
+   "type": "Финансирование · структурная сделка",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-07",
+     "title": "Переговоры",
+     "note": "«М.видео» договорилась с ключевым кредитором об открытии кредитной линии на 17,5 млрд руб. со сроком погашения в сентябре 2033 года. Сообщение «М.видео» привлекло 17,5 млрд рублей на развитие маркетплейса появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/m-video-privleklo-17-5-mlrd-rublej-na-razvitie-marketplejsa/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "«М.видео»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "«М.видео»",
+    "seller": null
+   },
+   "ind": "Ритейл",
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d64302298",
-   "title": "Раскрыты подробности попытки Нацполиции Украины продать девятилетнюю девочку иностранцам",
+   "draft_id": "d91894266",
+   "title": "Склад Obi в Солнечногорске перешел к производителю косметики Mixit",
    "date": "2026-09-07",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/07/raskryty-podrobnosti-popytki-natspolitsii-ukrainy-prodat-devyatiletnyuyu-devochku-inostrantsam/"
+     "web:retailer.ru",
+     "https://retailer.ru/sklad-obi-v-solnechnogorske-pereshel-k-proizvoditelju-kosmetiki-mixit/"
     ]
    ],
    "sum": null,
@@ -6245,20 +6034,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d51837981",
-   "title": "Советский радиоприемник Р-399А 1982 года продают в Новосибирске за 149 тысяч",
-   "date": "2026-09-06",
+   "draft_id": "d29717494",
+   "title": "«Я хочу свои деньги!»: как 11-летний школьник выносит мусор, чтобы купить LEGO, пока родители не работают",
+   "date": "2026-09-07",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/novosibirsk/2026/9/6/sovetskij-radiopriemnik-r-399a-1982-goda-prodayut-v-novosibirske-za-149-tysyach"
+     "web:74.ru",
+     "https://74.ru/text/business/2026/09/07/76626214/"
     ]
    ],
    "sum": null,
