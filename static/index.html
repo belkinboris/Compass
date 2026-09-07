@@ -931,6 +931,10 @@ a.dp-asset-name:hover{color:var(--accent)}
 .mult-table th+th,.mult-table td+td{padding-left:14px}
 .mult-table a{color:var(--ink);text-decoration:none;line-height:1.35}
 .mult-table a:hover{color:var(--accent)}
+.mult-flag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;
+  border:1px solid var(--line);color:var(--muted);font-size:10.5px;letter-spacing:.04em;
+  text-transform:uppercase;vertical-align:2px;white-space:nowrap}
+.mult-scale-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
 .mult-x{font-weight:600}
 .mult-sub{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.4}
 @media(max-width:760px){
@@ -6927,6 +6931,16 @@ async function mountMarketMultiples(){
      explain:"Выручка — из той же официальной отчётности за год сделки или предыдущий."},
   ];
   let activeKey = (data.operating_profit && data.operating_profit.clean_total) ? "op" : "revenue";
+  /* ПЯТЫЙ РАЗБОР РЕЦЕНЗЕНТА (7 сентября 2026): «пересчёт цены пакета на 100%
+     оставить, но не смешивать бесшовно со 100%-ными покупками… пользователь
+     должен одним фильтром отключить пересчитанные сделки». До этого пересчёт
+     был виден только мелкой оговоркой под названием сделки — то есть цифры
+     двух РАЗНЫХ природ («заплачено за всю компанию» и «заплачено за пакет,
+     а мы поделили на долю») стояли в одной колонке и читались одинаково.
+     Теперь у строки есть видимая пометка «пересчёт», а чипом её можно убрать
+     из списка совсем. Контрольную премию не оцениваем и не собираемся: это
+     была бы новая псевдоточность. */
+  let onlyFull = false;
   const renderSection = (v) => {
     const s = v.section;
     // Проверенные сделки, которых в списке нет, называются поимённо с причиной:
@@ -6943,6 +6957,8 @@ async function mountMarketMultiples(){
     // долг, год отчётности) методикой не утверждена — до этого медиана по
     // десятку сделок читалась бы как рыночный ориентир (разбор рецензента,
     // 6 сентября 2026). Список сделок и способ расчёта остаются.
+    const scaledTotal = s.deals.filter(d=>d.price_basis==="scaled").length;
+    const shown = (onlyFull ? s.deals.filter(d=>d.price_basis!=="scaled") : s.deals);
     const showMedians = data.show_medians !== false;
     const industriesHtml = showMedians && s.industries.length ? `
       <div style="margin-bottom:18px">
@@ -6961,18 +6977,24 @@ async function mountMarketMultiples(){
       PRICE_TERMS_NOTE[d.price_terms] || "",
       d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
     ].filter(Boolean).join(" · ");
-    const dealsHtml = `<table class="mult-table"><thead><tr>
+    // Фильтр показывается, только когда есть что фильтровать, и называет,
+    // сколько строк уйдёт, — иначе чип выглядит как настройка без эффекта.
+    const scaleFilterHtml = scaledTotal ? `<div class="mult-scale-filter">
+        <button class="chip ${onlyFull?"":"on"}" data-multscale="all">Все сделки (${s.deals.length})</button>
+        <button class="chip ${onlyFull?"on":""}" data-multscale="full">Только цена за 100% (${s.deals.length-scaledTotal})</button>
+      </div>` : "";
+    const dealsHtml = `${scaleFilterHtml}${shown.length?`<table class="mult-table"><thead><tr>
         <th>Сделка</th><th class="num">Год</th><th class="num">Цена за 100%</th>
         <th class="num">${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}</th><th class="num">Мультипликатор</th>
-      </tr></thead><tbody>${s.deals.slice(0,15).map(d=>`
+      </tr></thead><tbody>${shown.slice(0,15).map(d=>`
       <tr>
         <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
           targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
         <td class="num" data-l="Год сделки">${d.year}</td>
-        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}</td>
+        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
         <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span></td>
-      </tr>`).join("")}</tbody></table>`;
+      </tr>`).join("")}</tbody></table>`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Сделок, где цена заплачена сразу за всю компанию, среди проверенных пока нет.</p>`}`;
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);
     // Одна спокойная строка вместо простыни: сколько ещё придёт и сколько
@@ -6983,7 +7005,9 @@ async function mountMarketMultiples(){
       rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} чтение проверило и не пропустило — почему, видно ниже.` : ""}</p>` : "";
     const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не пропущено чтением: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
-      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${s.clean_total} ${plural(s.clean_total,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки. Медиану пока не выводим — сделки слишком разные, чтобы одна цифра читалась как ориентир рынка.</p>`}
+      ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${shown.length} ${plural(shown.length,"сделка","сделки","сделок")}</b>, где цену и купленную компанию мы проверили по источникам: цена ÷ показатель компании за последний полный год до сделки.${
+        onlyFull?" Показаны только те, где цену заплатили сразу за всю компанию.":""}${
+        shown.length>1?` Наблюдаемые значения — от ${fmtMult(Math.min(...shown.map(d=>d.multiple)))} до ${fmtMult(Math.max(...shown.map(d=>d.multiple)))}.`:""} Это сделки, которые можно взять как ориентиры, а не медиана рынка: насколько они сопоставимы между собой, решает оценщик.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
       ${industriesHtml}
       ${dealsHtml}
@@ -6999,6 +7023,7 @@ async function mountMarketMultiples(){
       <div class="mult-toggle">${VIEWS.map(v=>`<button class="chip ${v.key===activeKey?"on":""}" data-multview="${v.key}">${v.label}</button>`).join("")}</div>
       <div>${renderSection(active)}</div>`;
     document.querySelectorAll("[data-multview]").forEach(b=>b.onclick=()=>{activeKey=b.dataset.multview;draw();});
+    document.querySelectorAll("[data-multscale]").forEach(b=>b.onclick=()=>{onlyFull=b.dataset.multscale==="full";draw();});
   };
   body.outerHTML = `<div id="multiplesBody"></div>`;
   draw();

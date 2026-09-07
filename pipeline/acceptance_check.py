@@ -299,8 +299,15 @@ def check_browser(base: str, p: Protocol) -> None:
         low = mult.lower()
         api = get_json(base, '/api/analytics/multiples')
         no_median_number = not any(f"×{api['median']}" in mult for _ in [0] if api.get('median'))
+        # Проверяем НАМЕРЕНИЕ, а не буквальную фразу: медианного числа на
+        # экране нет, и страница сама говорит, что это не медиана рынка.
+        # Формулировка менялась (7 сентября 2026 — «это сделки, которые можно
+        # взять как ориентиры, а не медиана рынка»), и привязка к одной фразе
+        # роняла сценарий на верной правке текста.
+        says_not_a_median = 'медиан' in low and (
+            'не выводим' in low or 'не показываем' in low or 'не медиана' in low)
         medians_hidden = (api.get('show_medians') is False and no_median_number
-                          and ('медиан' in low and ('не выводим' in low or 'не показываем' in low))) \
+                          and says_not_a_median) \
             or 'не прошла все проверки' in mult
         p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»',
               medians_hidden and ('провер' in low or 'не прошла все проверки' in mult),
