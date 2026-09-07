@@ -2032,10 +2032,35 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
             verdict = {"ok": "approve", "hold": "hold", "discard": "discard",
                        "post_ok": "post_yes",
                        "post_no": "post_no", "take": "take", "drop": "drop"}[match.group(2)]
-            db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
-                                      decided_by=str(from_id)))
-            db.commit()
-            _mark_decided(callback, verdict)
+            # Отвечаем Telegram ПЕРВЫМ делом. Пока бот не ответил на нажатие,
+            # у человека на кнопке крутится индикатор — и это ровно то, что
+            # он описывает словами «кнопка не нажимается». Раньше ответ шёл
+            # последним, ПОСЛЕ записи в базу и правки сообщения: стоило
+            # правке подвиснуть или не пройти (сайт перезапускался,
+            # сообщение старше суток), и нажатие выглядело потерянным, хотя
+            # решение уже было записано. 7 сентября 2026 партнёр из-за этого
+            # нажал «не сделка» шесть раз за две секунды.
+            if callback.get("id"):
+                notification_service.tg_api("answerCallbackQuery",
+                                            callback_query_id=callback["id"], text="Принято")
+            # Тот же вердикт по той же карточке от того же человека за
+            # последнюю минуту — это ПОВТОРНАЯ ДОСТАВКА одного нажатия
+            # (Telegram шлёт апдейт заново, если вебхук не ответил вовремя)
+            # или частые тычки по неотзывчивой кнопке. Человек не решает
+            # одно и то же дважды за минуту, а вот шесть одинаковых
+            # решений в очереди рутина применит шесть раз — для `take` это
+            # шесть карточек, для `post_yes` шесть постов в канал.
+            since = datetime.now(timezone.utc) - timedelta(minutes=1)
+            twin = db.scalar(select(ModerationDecision).where(
+                ModerationDecision.deal_id == match.group(1),
+                ModerationDecision.verdict == verdict,
+                ModerationDecision.decided_by == str(from_id),
+                ModerationDecision.created_at >= since))
+            if not twin:
+                db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
+                                          decided_by=str(from_id)))
+                db.commit()
+            _mark_decided(callback, verdict, answered=True)
         elif callback.get("id"):
             notification_service.tg_api("answerCallbackQuery",
                                         callback_query_id=callback["id"],
@@ -2679,12 +2704,16 @@ def _announce_channel_id(payload, db=None) -> bool:
     return channel_update
 
 
-def _mark_decided(callback: dict, verdict: str) -> None:
+def _mark_decided(callback: dict, verdict: str, answered: bool = False) -> None:
     """Показать решение В САМОМ сообщении — иначе в общей группе второй
     человек не видит, что первый уже нажал, и жмёт ещё раз. Кнопки снимаются,
     под текстом появляется строка «решил такой-то». Оба вызова best-effort:
-    решение уже в таблице, и сбой отрисовки его не отменяет."""
-    if callback.get("id"):
+    решение уже в таблице, и сбой отрисовки его не отменяет.
+
+    `answered=True` — на нажатие уже ответили раньше (вердикты модерации
+    отвечают первым делом, чтобы кнопка не крутилась); второй
+    answerCallbackQuery по тому же id Telegram отвергает."""
+    if callback.get("id") and not answered:
         notification_service.tg_api("answerCallbackQuery",
                                     callback_query_id=callback["id"], text="Принято")
     message = callback.get("message") or {}
@@ -2694,9 +2723,16 @@ def _mark_decided(callback: dict, verdict: str) -> None:
     who = (callback.get("from") or {}).get("first_name") or "участник"
     stamped = "%s\n\n— %s (%s)" % (str(message.get("text") or ""),
                                    _VERDICT_LABEL.get(verdict, verdict), who)
-    notification_service.tg_api("editMessageText", chat_id=chat,
-                                message_id=message["message_id"], text=stamped,
-                                disable_web_page_preview=True)
+    # Отрисовка — best-effort не только по смыслу, но и по коду: любая ошибка
+    # здесь не должна доходить до вебхука. Иначе Telegram получит 500, сочтёт
+    # доставку неудачной и пришлёт то же нажатие заново — одно нажатие
+    # превратится в несколько решений в очереди.
+    try:
+        notification_service.tg_api("editMessageText", chat_id=chat,
+                                    message_id=message["message_id"], text=stamped,
+                                    disable_web_page_preview=True)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("не удалось дописать решение в сообщение: %s", exc)
 
 
 def _is_reviewer(chat_id) -> bool:

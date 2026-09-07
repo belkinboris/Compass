@@ -2238,6 +2238,59 @@ def test_milestone_button_decision_carries_the_tilde_separated_id(client, monkey
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
 
+def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkeypatch):
+    """Одно нажатие — одно решение, даже если Telegram доставит его несколько раз.
+
+    Telegram шлёт апдейт заново, если вебхук не ответил вовремя, а человек,
+    видя неотзывчивую кнопку, жмёт ещё. 7 сентября 2026 партнёр так нажал
+    «не сделка» шесть раз за две секунды, и в очередь легли шесть одинаковых
+    решений. Для `drop` это просто шум, а для `take` — шесть карточек, для
+    `post_yes` — шесть постов в канал: рутина применяет решения по одному.
+    """
+    _mod_env(monkeypatch)
+    press = {"callback_query": {"id": "cb-1", "from": {"id": 222},
+                                 "data": "mod:gtwice:take",
+                                 "message": {"message_id": 7, "chat": {"id": 222},
+                                              "text": "[сырьё gtwice]"}}}
+    for _ in range(3):
+        client.post("/api/telegram/webhook/тайна", json=press)
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "gtwice"]
+    assert len(rows) == 1, rows
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def test_button_press_is_answered_before_the_message_is_edited(client, monkeypatch):
+    """Ответ на нажатие идёт ПЕРВЫМ, до правки сообщения.
+
+    Пока бот не ответил, у человека на кнопке крутится индикатор — и это
+    ровно то, что он описывает словами «кнопка не нажимается». Если правка
+    сообщения подвисает или падает (сайт перезапускается, сообщение старше
+    суток), нажатие не должно выглядеть потерянным: решение уже записано.
+    """
+    _mod_env(monkeypatch)
+    calls = []
+
+    def fake(method, **payload):
+        calls.append(method)
+        if method == "editMessageText":
+            return None  # так ведёт себя настоящий tg_api при сбое: тихий None
+        return {"ok": True}
+
+    monkeypatch.setattr(main.notification_service, "tg_api", fake)
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "cb-2", "from": {"id": 222}, "data": "mod:gorder:ok",
+                            "message": {"message_id": 8, "chat": {"id": 222},
+                                         "text": "[карточка gorder]"}}})
+    assert calls and calls[0] == "answerCallbackQuery", calls
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "gorder"]
+    assert len(rows) == 1 and rows[0]["verdict"] == "approve"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
 def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
     """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом».
 
