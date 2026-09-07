@@ -34,6 +34,7 @@ import data_refresh
 import deal_catalog
 import deal_multiples
 import notification_service
+import telegram_endpoint
 import subscription_feed
 from company_catalog import get_company_profile, load_company_catalog
 from deal_catalog import get_deal
@@ -1923,9 +1924,21 @@ def notification_telegram_link(user: User | None = Depends(_current_user), db=De
 
 @app.post("/api/telegram/webhook/{secret}")
 def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)):
+    """Вход для вебхука. Остаётся рабочим, но с 7 сентября 2026 по умолчанию
+    обновления забираются опросом (см. `_poll_telegram_updates`) — разбор у
+    обоих путей общий, чтобы поведение не могло разойтись."""
     expected = os.environ.get("TELEGRAM_WEBHOOK_SECRET", "")
     if not expected or secret != expected:
         return JSONResponse({"error": "not found"}, status_code=404)
+    return _handle_telegram_update(payload, db)
+
+
+def _handle_telegram_update(payload: TelegramWebhookIn, db):
+    """Разбор одного обновления Telegram: команды, кнопки, ответы текстом.
+
+    Вынесено из маршрута вебхука, чтобы тем же кодом обрабатывались
+    обновления, забранные опросом (`getUpdates`). Единственная разница между
+    путями — как обновление к нам попало."""
     # Учится молча на КАЖДОМ апдейте из группы-консоли, ничего не решает и не
     # мешает обработке ниже — id группы мог смениться (см. _review_chat_ids).
     _learn_review_group(payload, db)
@@ -2204,6 +2217,121 @@ def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)
                 body["reply_markup"] = _bot_menu()
             notification_service.tg_api("sendMessage", **body)
     return {"ok": True}
+
+
+# ---------------------------------------------------------------------------
+# ОБНОВЛЕНИЯ TELEGRAM ЗАБИРАЕМ САМИ, А НЕ ЖДЁМ, ПОКА ДО НАС ДОСТУЧАТСЯ.
+#
+# 7 сентября 2026 владелец полдня не мог нажать ни одну кнопку в консоли:
+# «нажимаю, прошло секунд 30, ничего». Замер в те же минуты развёл причину и
+# следствие окончательно: НАШ POST в тот же самый адрес вебхука отвечал за
+# 0,9 секунды кодом 200, вызов Bot API с боевого хоста — за 0,2 секунды, а
+# `getWebhookInfo` в ту же секунду показывал `Connection timed out`. То есть
+# сайт жив и быстр, а Telegram до него не доходит.
+#
+# Это обратная сторона уже описанной в CLAUDE.md нестабильности связи
+# Timeweb <-> Telegram (в соседнем проекте владельца на том же хостинге
+# замерено ~32% отказов на попытку соединения). Для ИСХОДЯЩИХ у нас есть
+# лекарство — релей на Cloudflare (telegram_endpoint.py). Для ВХОДЯЩИХ его
+# не было, и почини мы вебхук ещё десять раз, доступность нас снаружи от
+# этого не изменилась бы: чинить надо не обработчик, а направление.
+#
+# Опрос убирает входящее направление целиком: сайт сам спрашивает «что
+# нового» долгим запросом (`getUpdates` с `timeout`), и весь обмен идёт
+# ИСХОДЯЩИМ путём, где релей уже работает. Ответ на нажатие приходит тем же
+# путём, что и раньше.
+#
+# Выключатели: `TELEGRAM_POLLING=0` возвращает прежнюю схему (вебхук),
+# `TELEGRAM_POLL_TIMEOUT` — длина долгого запроса. Вебхук при включённом
+# опросе снимается: Telegram не отдаёт обновления обоими способами сразу и
+# на `getUpdates` при живом вебхуке отвечает отказом 409.
+TELEGRAM_POLLING = os.environ.get("TELEGRAM_POLLING", "1") != "0"
+TELEGRAM_POLL_TIMEOUT = int(os.environ.get("TELEGRAM_POLL_TIMEOUT", "25"))
+_poll_state = {"offset": None, "last_ok": None, "updates": 0, "errors": 0,
+               "last_error": None, "running": False}
+
+
+def _poll_once(token: str) -> int:
+    """Один долгий запрос за обновлениями. Возвращает, сколько обработано."""
+    params = {"timeout": TELEGRAM_POLL_TIMEOUT,
+              "allowed_updates": ["message", "channel_post", "edited_channel_post",
+                                  "callback_query", "my_chat_member"]}
+    if _poll_state["offset"] is not None:
+        params["offset"] = _poll_state["offset"]
+    response = httpx.post(telegram_endpoint.method_url(token, "getUpdates"),
+                          json=params, timeout=TELEGRAM_POLL_TIMEOUT + 15)
+    response.raise_for_status()
+    data = response.json()
+    if not data.get("ok"):
+        raise RuntimeError(data.get("description") or "getUpdates отказал")
+    updates = data.get("result") or []
+    for raw in updates:
+        # Смещение двигаем ДО обработки: обновление, на котором разбор упал,
+        # не должно приходить снова и снова — оно уже не станет разбираемым,
+        # а очередь встанет намертво (тот же класс, что зацикленный вебхук).
+        _poll_state["offset"] = int(raw.get("update_id", 0)) + 1
+        db = get_session()
+        try:
+            _handle_telegram_update(TelegramWebhookIn(**{
+                k: raw.get(k) for k in TelegramWebhookIn.model_fields}), db)
+        except Exception as exc:      # одно плохое обновление не валит опрос
+            logger.error("не удалось разобрать обновление Telegram: %s", exc)
+        finally:
+            db.close()
+    _poll_state["last_ok"] = datetime.now(timezone.utc)
+    _poll_state["updates"] += len(updates)
+    return len(updates)
+
+
+@app.on_event("startup")
+def _start_telegram_polling():
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    if not TELEGRAM_POLLING or not token or os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+
+    def _run():
+        # Вебхук и опрос вместе Telegram не разрешает — снимаем вебхук, но
+        # НЕ трогаем накопленные обновления (`drop_pending_updates` не шлём):
+        # нажатия, которые Telegram не смог нам доставить, придут первым же
+        # запросом, и человеку не придётся жать заново.
+        try:
+            httpx.post(telegram_endpoint.method_url(token, "deleteWebhook"),
+                       json={}, timeout=20)
+        except httpx.HTTPError as exc:
+            logger.warning("не удалось снять вебхук перед опросом: %s", exc)
+        _poll_state["running"] = True
+        pause = 1.0
+        while True:
+            try:
+                _poll_once(token)
+                pause = 1.0
+            except Exception as exc:
+                _poll_state["errors"] += 1
+                _poll_state["last_error"] = str(exc)[:200]
+                logger.warning("опрос Telegram не удался: %s", exc)
+                # Нарастающая пауза — чтобы при недоступной сети не молотить
+                # запросами; потолок минута, иначе кнопки «оживают» слишком
+                # долго после того, как связь восстановилась.
+                time.sleep(pause)
+                pause = min(pause * 2, 60.0)
+
+    threading.Thread(target=_run, daemon=True).start()
+
+
+@app.get("/api/telegram/status")
+def telegram_status(token: str = ""):
+    """Жив ли опрос и когда последний раз получал ответ — чтобы «кнопки не
+    работают» проверялось цифрой, а не пересказом."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    last_ok = _poll_state["last_ok"]
+    return {"polling": TELEGRAM_POLLING, "running": _poll_state["running"],
+            "poll_timeout": TELEGRAM_POLL_TIMEOUT,
+            "offset": _poll_state["offset"], "updates": _poll_state["updates"],
+            "errors": _poll_state["errors"], "last_error": _poll_state["last_error"],
+            "last_ok": last_ok.isoformat() if last_ok else None,
+            "seconds_since_last_ok": (
+                (datetime.now(timezone.utc) - last_ok).total_seconds() if last_ok else None)}
 
 
 BOT_HELP = (

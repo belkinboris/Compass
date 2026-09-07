@@ -3638,3 +3638,45 @@ def test_registry_event_type_fits_a_whole_egrul_sentence():
     assert _fit(long_type, 400) == long_type
     assert len(_fit("я" * 5000, 400)) == 400
     assert _fit(None, 400) is None
+
+
+def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue(monkeypatch):
+    """7 сентября 2026: владелец полдня не мог нажать кнопку в консоли, при
+    этом НАШ запрос в тот же адрес вебхука отвечал за 0,9 с кодом 200, а
+    Telegram в ту же секунду писал «Connection timed out». Сайт был жив и
+    быстр — до него не доходил Telegram. Лечится не обработчиком, а
+    направлением: обновления забираем сами (`getUpdates`), и весь обмен идёт
+    исходящим путём, где релей уже работает.
+
+    Проверяем две вещи, каждая — про то, из-за чего очередь встаёт:
+    обновления реально доходят до общего разбора, и обновление, на котором
+    разбор упал, СМЕЩЕНИЕ ВСЁ РАВНО ДВИГАЕТ — иначе Telegram присылал бы его
+    снова и снова, а всё, что за ним, не пришло бы никогда."""
+    import main
+
+    seen = []
+
+    def fake_handle(payload, db):
+        seen.append(payload.update_id)
+        if payload.update_id == 11:
+            raise RuntimeError("нарочно ломаем разбор второго обновления")
+        return {"ok": True}
+
+    class FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"ok": True, "result": [
+                {"update_id": 10, "message": {"text": "раз"}},
+                {"update_id": 11, "message": {"text": "два"}},
+                {"update_id": 12, "message": {"text": "три"}},
+            ]}
+
+    monkeypatch.setattr(main, "_handle_telegram_update", fake_handle)
+    monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: FakeResponse())
+    monkeypatch.setitem(main._poll_state, "offset", None)
+
+    assert main._poll_once("токен") == 3
+    assert seen == [10, 11, 12], "разбор должен получить все обновления по порядку"
+    assert main._poll_state["offset"] == 13, "смещение двигается даже через сбойное обновление"
