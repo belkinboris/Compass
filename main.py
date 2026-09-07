@@ -2342,6 +2342,17 @@ def _poll_once(token: str) -> int:
     return len(updates)
 
 
+def _telegram_reachable(token: str) -> bool:
+    """Отвечает ли нам Telegram вообще. Один дешёвый вызов `getMe`: если он
+    прошёл, снимать вебхук безопасно — опрос заработает. Если нет, прежний
+    вход трогать нельзя (см. комментарий в `_start_telegram_polling`)."""
+    try:
+        r = httpx.post(telegram_endpoint.method_url(token, "getMe"), json={}, timeout=20)
+        return bool(r.json().get("ok"))
+    except Exception:                                        # noqa: BLE001
+        return False
+
+
 @app.on_event("startup")
 def _start_telegram_polling():
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -2349,19 +2360,41 @@ def _start_telegram_polling():
         return
 
     def _run():
-        # Вебхук и опрос вместе Telegram не разрешает — снимаем вебхук, но
-        # НЕ трогаем накопленные обновления (`drop_pending_updates` не шлём):
-        # нажатия, которые Telegram не смог нам доставить, придут первым же
-        # запросом, и человеку не придётся жать заново.
-        try:
-            httpx.post(telegram_endpoint.method_url(token, "deleteWebhook"),
-                       json={}, timeout=20)
-        except httpx.HTTPError as exc:
-            logger.warning("не удалось снять вебхук перед опросом: %s", exc)
+        # ВЕБХУК СНИМАЕТСЯ НЕ РАНЬШЕ, ЧЕМ ОПРОС ДОКАЗАЛ, ЧТО РАБОТАЕТ.
+        #
+        # Первая версия снимала его сразу на старте — и это оказалось
+        # необратимым побочным эффектом запуска, который не обязан
+        # завершиться успехом. 7 сентября 2026 сборка с опросом упала уже
+        # ПОСЛЕ того, как контейнер стартовал и вебхук снял: платформа
+        # откатилась на прежний код, где опроса нет, а вебхука уже не было
+        # ни у кого. Консоль осталась вообще без входа — не «иногда не
+        # доходит», а глухо, и владелец не мог нажать ни одной кнопки.
+        #
+        # Правило общее: если у запуска есть шаг, ЛОМАЮЩИЙ прежний способ
+        # работы, он идёт ПОСЛЕ того, как новый способ подтвердил свою
+        # работоспособность, а не до. Пока `getUpdates` не ответил ни разу,
+        # вебхук остаётся на месте — Telegram при живом вебхуке отвечает на
+        # `getUpdates` отказом 409, и это ожидаемое состояние первых секунд,
+        # а не сбой.
         _poll_state["running"] = True
+        webhook_dropped = False
         pause = 1.0
         while True:
             try:
+                if not webhook_dropped:
+                    # Пробный запрос: живы ли мы вообще для Telegram. Отказ
+                    # 409 («вебхук активен») здесь ожидаем и означает «связь
+                    # есть» — а значит, вебхук можно снимать.
+                    reachable = _telegram_reachable(token)
+                    if not reachable:
+                        raise RuntimeError("Telegram не отвечает — вебхук не снимаю")
+                    httpx.post(telegram_endpoint.method_url(token, "deleteWebhook"),
+                               json={}, timeout=20)
+                    # `drop_pending_updates` не шлём: нажатия, которые Telegram
+                    # не смог доставить, придут первым же запросом, и человеку
+                    # не придётся жать заново.
+                    webhook_dropped = True
+                    logger.info("вебхук снят, работает опрос getUpdates")
                 _poll_once(token)
                 pause = 1.0
             except Exception as exc:

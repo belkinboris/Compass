@@ -3742,3 +3742,27 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004448538393")
     monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {}, raising=False)
     assert main._review_chat_ids() == ["160794536", "57671646"]
+
+
+def test_webhook_is_dropped_only_after_telegram_answered(monkeypatch):
+    """7 сентября 2026 сборка с опросом упала уже ПОСЛЕ того, как контейнер
+    стартовал и снял вебхук: платформа откатилась на прежний код, где опроса
+    нет, а вебхука уже не было ни у кого. Консоль осталась вообще без входа —
+    не «иногда не доходит», а глухо.
+
+    Шаг, ломающий прежний способ работы, обязан идти ПОСЛЕ того, как новый
+    подтвердил работоспособность. Здесь это одна проверка: пока Telegram не
+    ответил ни разу, вебхук не трогаем."""
+    import main
+
+    monkeypatch.setattr(main.httpx, "post",
+                        lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("сети нет")))
+    assert main._telegram_reachable("токен") is False, \
+        "недоступный Telegram не должен читаться как «можно снимать вебхук»"
+
+    class Ok:
+        def json(self):
+            return {"ok": True, "result": {"id": 1}}
+
+    monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: Ok())
+    assert main._telegram_reachable("токен") is True
