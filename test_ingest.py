@@ -5089,3 +5089,57 @@ def test_console_card_names_parties_even_when_they_are_linked_to_profiles():
     assert "Покупатель: «Базис»" in text
     assert "Предмет: ООО «Протосервисез»" in text
     assert "Продавец: Денис Бескоровайный и Надежда Фердман" in text
+
+
+def test_a_raw_decision_without_its_draft_on_disk_is_not_reported_as_applied(
+        tmp_path, monkeypatch, capsys):
+    """Нажатие владельца нельзя объявлять применённым, если применить его
+    было нечем.
+
+    7 сентября 2026, в тот же день, когда кнопки наконец начали доходить:
+    владелец нажал «это сделка — в работу» по сырью d15201933. Черновики
+    сырья лежат в `data/inbox/hold/`, а эта папка не хранится в git и живёт
+    на диске той рутины, которая её создала, — прогон в другом контейнере
+    черновика не видит. `plan_raw` молча его пропускал, а `--consume` всё
+    равно подтверждал сайту ВСЕ решения подряд: нажатие исчезало бесследно
+    и без единой строки в отчёте. Тот же класс, что «Уведомлений создано: 0»
+    — ноль, который значит «мы смотрели не туда», а выглядит как «нечего
+    делать».
+
+    Теперь такое решение остаётся у сайта живым (его применит рутина, у
+    которой черновик есть) и называется вслух."""
+    import approve
+
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps({"deals": [], "companies": {}}, ensure_ascii=False),
+                    encoding="utf-8")
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}},
+                                ensure_ascii=False), encoding="utf-8")
+    consume_file = tmp_path / "consume_pending.json"
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)   # пустая: черновиков нет
+
+    decisions = [
+        {"id": 549, "deal_id": "d15201933", "verdict": "take", "edited_text": None},
+        {"id": 546, "deal_id": "d51441351", "verdict": "drop", "edited_text": None},
+    ]
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(consume_file))
+    monkeypatch.setattr(approve, "fetch_decisions",
+                        lambda: (decisions, ("https://example.test", "t")))
+    import promote
+    monkeypatch.setattr(promote, "STATE", str(state))
+
+    approve.main(write=True)
+    out = capsys.readouterr().out
+    assert "НЕ ПРИМЕНЕНО" in out and "d15201933" in out, (
+        "решение, которое некуда применить, не названо в отчёте: %s" % out)
+    saved = (json.loads(consume_file.read_text(encoding="utf-8"))["ids"]
+             if consume_file.exists() else [])
+    assert saved == [], (
+        "непримененные решения отправлены на подтверждение сайту — "
+        "нажатие владельца будет потеряно: %s" % saved)

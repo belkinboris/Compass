@@ -227,6 +227,48 @@ def main(write=False):
     now = datetime.now(timezone.utc)
     publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now)
 
+    # СЫРЬЁ РАЗБИРАЕТСЯ ДО СУХОГО ПРОГОНА. Раньше решения по сырью («это
+    # сделка — в работу» / «не сделка») применялись только под `--write`, а
+    # сухой прогон о них молчал: проверить, дойдёт ли нажатие, было нечем —
+    # ровно тот случай, когда «ничего не напечатало» неотличимо от «нечего
+    # делать».
+    import promote
+    state = promote.load_state()
+    decided_raw = state.get('decided_raw', {})
+    # Одно и то же недорешённое сырьё переносится вперёд КАЖДЫЙ день, пока
+    # по нему нет решения (иначе оно бы пропадало из консоли, не дождавшись
+    # ответа) — draft_id d59961733 (Wegosty/tadviser) лежал сразу в трёх
+    # дневных файлах (18, 19, 21 августа). Без дедупликации по draft_id
+    # `plan_raw` находил его в списке трижды, и единственное решение «в
+    # работу» превращалось в ТРИ карточки-близнеца с тремя разными id (найдено
+    # 21 августа: g855e50b1/gf544dd13/g5cba276f — один и тот же черновик).
+    # Держим первое найденное вхождение — содержание одинаковое, id решает.
+    raw_all = []
+    seen_draft_ids = set()
+    hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
+    if os.path.isdir(hold_dir):
+        for name in sorted(os.listdir(hold_dir)):
+            if name.endswith('.json'):
+                for draft in json.load(open(os.path.join(hold_dir, name),
+                                            encoding='utf-8')).get('drafts', []):
+                    did = str(draft.get('draft_id'))
+                    if did not in seen_draft_ids:
+                        seen_draft_ids.add(did)
+                        raw_all.append(draft)
+    taken, dropped = plan_raw(raw_all, decisions, decided_raw)
+    # РЕШЕНИЕ, КОТОРОЕ НЕКУДА ПРИМЕНИТЬ, НЕЛЬЗЯ ОБЪЯВЛЯТЬ ПРИМЕНЁННЫМ.
+    # Сырьё лежит в `data/inbox/hold/` — а эта папка не хранится в git и
+    # живёт на диске той рутины, которая её создала. Прогон в другом
+    # контейнере черновика не видит, `plan_raw` его молча пропускает — и до
+    # 7 сентября 2026 `--consume` всё равно подтверждал сайту ВСЕ решения
+    # подряд, включая непримененные: нажатие владельца исчезало без следа и
+    # без единой строки в отчёте. Такие решения оставляем сайту живыми (их
+    # применит рутина, у которой черновик есть) и называем вслух.
+    orphan = [d for d in decisions
+              if d['verdict'] in RAW_VERDICTS
+              and str(d['deal_id']) not in seen_draft_ids
+              and str(d['deal_id']) not in decided_raw]
+
     for card, override, why in publish:
         print('  ПУБЛИКУЕМ   %-11s %s%s' % (card['id'], str(card.get('title'))[:56],
                                             ' [текст поста заменён]' if override else ''))
@@ -237,6 +279,14 @@ def main(write=False):
         print('  ВЫКИНУТА    %-11s %s' % (card['id'], str(card.get('title'))[:56]))
     for card, why in wait:
         print('  ЖДЁТ        %-11s %s' % (card['id'], why))
+
+    for draft in taken:
+        print('  В РАБОТУ    %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+    for draft in dropped:
+        print('  ОТБРОШЕНА   %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+    for d in orphan:
+        print('  НЕ ПРИМЕНЕНО %-10s решение «%s» есть, а черновика нет на этом диске — '
+              'оставляю сайту для рутины притока' % (d['deal_id'], d['verdict']))
 
     if not write:
         print('Сухой прогон. Применение — с ключом --write.')
@@ -274,9 +324,6 @@ def main(write=False):
     # предпросмотра (дальше он придёт в группу сообщениями «пост» и
     # «карточка»); «не сделка» запоминается навсегда — promote больше не
     # покажет этот draft_id.
-    import promote
-    state = promote.load_state()
-    decided_raw = state.get('decided_raw', {})
     # «ВЫКИНУТЬ» — ТОЖЕ РЕШЕНИЕ, КОТОРОЕ НЕЛЬЗЯ ЗАБЫВАТЬ. Черновик, из
     # которого выросла выкинутая карточка, остаётся лежать в старом файле
     # data/inbox/drafts/<дата>.json (его никто не чистит), и promote.py
@@ -291,27 +338,6 @@ def main(write=False):
                 state.setdefault('discarded_urls', {})[str(s[1])] = {
                     'id': card['id'], 'title': card.get('title'),
                     'at': now.isoformat(timespec='seconds')}
-    # Одно и то же недорешённое сырьё переносится вперёд КАЖДЫЙ день, пока
-    # по нему нет решения (иначе оно бы пропадало из консоли, не дождавшись
-    # ответа) — draft_id d59961733 (Wegosty/tadviser) лежал сразу в трёх
-    # дневных файлах (18, 19, 21 августа). Без дедупликации по draft_id
-    # `plan_raw` находил его в списке трижды, и единственное решение «в
-    # работу» превращалось в ТРИ карточки-близнеца с тремя разными id (найдено
-    # 21 августа: g855e50b1/gf544dd13/g5cba276f — один и тот же черновик).
-    # Держим первое найденное вхождение — содержание одинаковое, id решает.
-    raw_all = []
-    seen_draft_ids = set()
-    if os.path.isdir(os.path.join(ROOT, 'data', 'inbox', 'hold')):
-        hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
-        for name in sorted(os.listdir(hold_dir)):
-            if name.endswith('.json'):
-                for draft in json.load(open(os.path.join(hold_dir, name),
-                                            encoding='utf-8')).get('drafts', []):
-                    did = str(draft.get('draft_id'))
-                    if did not in seen_draft_ids:
-                        seen_draft_ids.add(did)
-                        raw_all.append(draft)
-    taken, dropped = plan_raw(raw_all, decisions, decided_raw)
     pending_ids = {c['id'] for c in pending['cards']} | existing
     for draft in taken:
         card = promote.to_card(draft, promote.new_id(pending_ids))
@@ -320,13 +346,14 @@ def main(write=False):
         pending['cards'].append(card)
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'take'
-        print('  В РАБОТУ    %s -> предпросмотр %s' % (draft['draft_id'], card['id']))
+        print('              %s -> предпросмотр %s' % (draft['draft_id'], card['id']))
     for draft in dropped:
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'drop'
         # Память и по заголовку: та же новость назавтра приходит с НОВЫМ
         # draft_id, и партнёр жал «не сделка» по Рижскому вокзалу трижды.
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'drop'
-        print('  ОТБРОШЕНА   %s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+        # Не печатаем повторно: план по сырью уже назван выше, до сухого
+        # возврата, и второй такой же строкой отчёт только шумит.
 
     if fresh:
         # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
@@ -345,7 +372,9 @@ def main(write=False):
     # необратимо, а то, что мы только что записали, ещё не пережило git push
     # (см. docstring `consume_pending`). Рутина вызывает
     # `approve.py --consume` последним шагом, после успешного push.
-    ids_to_consume = [d['id'] for d in decisions if d['verdict'] != 'note']
+    orphan_ids = {d['id'] for d in orphan}
+    ids_to_consume = [d['id'] for d in decisions
+                      if d['verdict'] != 'note' and d['id'] not in orphan_ids]
     if handle and ids_to_consume:
         site, token = handle
         json.dump({'site': site, 'token': token, 'ids': ids_to_consume},
