@@ -77,8 +77,6 @@
    "pending_since": "2026-09-07T05:26:09+00:00",
    "reviewed": "2026-09-07",
    "deep_researched": "2026-09-07",
-   "draft_sent": true,
-   "post_draft_sent": true,
    "proofread_absorbed": {
     "law.struct": [
      "0432578cb201"
@@ -86,7 +84,9 @@
    },
    "buyer": "gc30e392d",
    "target": "g01320fb7",
-   "seller": "Денис Бескоровайный и Надежда Фердман"
+   "seller": "Денис Бескоровайный и Надежда Фердман",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }

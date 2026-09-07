@@ -87,9 +87,19 @@ def goes_to_channel(card):
     return bool(card.get('post_override')) or format_post.is_fresh(card)
 
 
-def card_message(card):
-    """🗂 Проект карточки сайта: поля + предпросмотр. Ответ = заметка."""
+def card_message(card, companies=None):
+    """🗂 Проект карточки сайта: поля + предпросмотр. Ответ = заметка.
+
+    Стороны берутся ТАК ЖЕ, КАК ИХ УВИДИТ ЧИТАТЕЛЬ (`format_post.party_names`),
+    а не из текстовых полей `buyer_name`/`asset` напрямую. Найдено 7 сентября
+    2026 на карточке «Базис»/Proto: когда стороны привязаны к профилям
+    компаний — то есть сделаны ПРАВИЛЬНО — текстовые поля пусты, и в консоли
+    строки «Покупатель» и «Предмет» просто исчезали. Хорошо собранная карточка
+    выглядела в консоли хуже плохо собранной, и решение по ней принималось
+    вслепую — ровно тот класс, что уже записан в CLAUDE.md про поле,
+    заполненное в данных и не показанное на экране."""
     src = next((s[1] for s in card.get('src') or [] if len(s) > 1), '')
+    seller, asset, buyer = format_post.party_names(card, companies or {})
     channel = ('' if goes_to_channel(card) else
                'В канал не пойдёт: сделке больше %d дней (или у неё известен '
                'только год) — на сайт выйдет, подписчики уведомления не получат.\n'
@@ -104,9 +114,9 @@ def card_message(card):
             % (card['id'], str(card.get('title') or ''),
                field('Дата', card.get('date')), field('Отрасль', card.get('ind')),
                field('Тип', card.get('type')), field('Статус', card.get('status')),
-               field('Покупатель', card.get('buyer_name')),
-               field('Продавец', card.get('seller')),
-               field('Предмет', card.get('asset')) + field('Сумма', card.get('sum'))
+               field('Покупатель', buyer),
+               field('Продавец', seller),
+               field('Предмет', asset) + field('Сумма', card.get('sum'))
                + field('Источник', src),
                SITE, card['id'], channel))
 
@@ -298,7 +308,7 @@ def build_plan():
         # знают только `draft_sent`, поэтому его значение и служит ответом за
         # пост, пока не появился отдельный флаг.
         if not card.get('draft_sent'):
-            plan.append((card_message(card), card_keyboard(card),
+            plan.append((card_message(card, comps), card_keyboard(card),
                          ('card', card, 'draft_sent')))
         # СДЕЛКА НЕ ПЕРВОЙ СВЕЖЕСТИ В КАНАЛ НЕ ПОЙДЁТ (5 сентября 2026, см.
         # send_telegram.py и CLAUDE.md, «МорТехПром») — значит, и проект поста

@@ -5060,3 +5060,22 @@ def test_console_send_follows_the_chat_id_telegram_hands_back_on_migration():
 
     assert send_drafts.send_one(Клиент(), "токен", "-100старый", "текст", None) is True
     assert calls == ["-100старый", "-1004389405776"], calls
+
+
+def test_console_card_names_parties_even_when_they_are_linked_to_profiles():
+    """Найдено владельцем 7 сентября 2026 на «Базис»/Proto: строки
+    «Покупатель» и «Предмет» в консоли читали ТОЛЬКО текстовые поля
+    (`buyer_name`, `asset`). У правильно собранной карточки — где стороны
+    привязаны к профилям компаний — эти поля пусты, и строки просто
+    исчезали: хорошо собранная карточка выглядела в консоли хуже плохо
+    собранной."""
+    import importlib
+    send_drafts = importlib.import_module("pipeline.ingest.send_drafts")
+    card = {"id": "gx1", "title": "«Базис» купил 70% компании Proto",
+            "date": "2026-09-07", "buyer": "b1", "target": "t1",
+            "seller": "Денис Бескоровайный и Надежда Фердман"}
+    companies = {"b1": {"name": "«Базис»"}, "t1": {"name": "ООО «Протосервисез»"}}
+    text = send_drafts.card_message(card, companies)
+    assert "Покупатель: «Базис»" in text
+    assert "Предмет: ООО «Протосервисез»" in text
+    assert "Продавец: Денис Бескоровайный и Надежда Фердман" in text
