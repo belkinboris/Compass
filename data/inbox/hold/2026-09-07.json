@@ -5887,7 +5887,7 @@
    ]
   },
   {
-   "draft_id": "d77998976",
+   "draft_id": "d28300852",
    "title": "В «Яндекс маркете» рассказали, кто из россиян чаще покупает новые iPhone",
    "date": "2026-09-07",
    "src": [
@@ -5917,7 +5917,7 @@
    ]
   },
   {
-   "draft_id": "d56117863",
+   "draft_id": "d15305278",
    "title": "«М.видео» привлекло 17,5 млрд рублей на развитие маркетплейса",
    "date": "2026-09-07",
    "src": [
@@ -5956,7 +5956,7 @@
    ]
   },
   {
-   "draft_id": "d42000637",
+   "draft_id": "d78212367",
    "title": "Склад Obi в Солнечногорске перешел к производителю косметики Mixit",
    "date": "2026-09-07",
    "src": [
@@ -5984,7 +5984,7 @@
    ]
   },
   {
-   "draft_id": "d35462626",
+   "draft_id": "d50077145",
    "title": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе преду",
    "date": "2026-09-07",
    "src": [
@@ -6023,7 +6023,7 @@
    ]
   },
   {
-   "draft_id": "d79418697",
+   "draft_id": "d62603038",
    "title": "СМИ: Украина пытается национализировать компанию, связанную с Фридманом",
    "date": "2026-09-07",
    "src": [
@@ -6051,7 +6051,7 @@
    ]
   },
   {
-   "draft_id": "d37235187",
+   "draft_id": "d84715198",
    "title": "Арестованный тюменский бизнесмен Гоцык передал сыну крупнейшие активы",
    "date": "2026-09-07",
    "src": [
@@ -6079,102 +6079,7 @@
    ]
   },
   {
-   "draft_id": "d88201610",
-   "title": "Корпорация МСП: малые техкомпании привлекли 21 млрд рублей капитала с господдержкой",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28087825"
-    ]
-   ],
-   "sum": "21 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Корпорация МСП: малые техкомпании",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Корпорация МСП: малые техкомпании",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d79387104",
-   "title": "В Херсонской области ввели программу льготных займов на покупку генераторов",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28087775"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31769935",
-   "title": "Volkswagen договорился о продаже завода в Оснабрюке",
-   "date": "2026-09-07",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260907/volkswagen-873078709.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-07",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260907/volkswagen-873078709.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71171661",
+   "draft_id": "d55068162",
    "title": "Астраханца заподозрили в продаже данных пользователей «Госуслуг»",
    "date": "2026-09-07",
    "src": [
@@ -6201,6 +6106,175 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Россияне смогут на «Госуслугах» выбрать и купить себе место » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d12268588",
+   "title": "Утечки, конфликты и рекордные продажи. Что происходит вокруг видеоигры GTA VI?",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28087537"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d52691413",
+   "title": "Расход продавцов на все услуги Ozon составил 24,73% от цены продажи",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260907/rashod-873082615.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37003734",
+   "title": "Россияне нарастили покупки спортивных товаров на Aliexpress",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260907/rossijane-873082084.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28086535",
+   "title": "СМИ: Украина пытается национализировать компанию, связанную с Фридманом",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260907/ukraina-2116103104.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63133686",
+   "title": "Малые технологические компании привлекли 21 млрд рублей с господдержкой",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260907/msp-2116100743.html"
+    ]
+   ],
+   "sum": "21 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малые технологические компании",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малые технологические компании",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d66537309",
+   "title": "Банк России снова нарастил долю золота в резервах",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/07/bank-rossii-snova-narastil-dolyu-zolota-v-rezervah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
