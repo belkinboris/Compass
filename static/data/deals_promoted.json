@@ -192097,14 +192097,14 @@
   },
   {
    "id": "cacdb5edc",
-   "date": "2024",
+   "date": "2026-02-13",
    "title": "ВЭБ.РФ и VK приступают к трансформации Группы «Просвещение»",
    "ind": "Медиа",
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
-     "http://%D0%92%D0%AD%D0%91.%D0%A0%D0%A4/"
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8438720"
     ]
    ],
    "from_compact": "bulk",
@@ -192152,13 +192152,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "529698fcab44"
     },
     "date": {
-     "value": "2024",
+     "value": "2026-02-13",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "card_hash": "237d3ca3014c"
     },
     "nature": {
      "control_change": true,
@@ -192168,7 +192168,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c7b1f6155ba1"
+     "card_hash": "a19f2bb9340e"
     },
     "target": {
      "company_id": null,
@@ -192194,11 +192194,13 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c4534c6d1",
-   "date": "2024",
+   "date": "2026-02-04",
    "title": "Государство может получить пакет акций девелопера «Самолет» с правом обратного выкупа",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -192218,7 +192220,7 @@
     "target_fin": "Чистая прибыль группы в первой половине 2025 года упала в 2,6 раза, до 1,8 млрд ₽. По предварительным данным, отношение чистого долга к скорректированной EBITDA в 2025 году достигло 2,84.",
     "fin": "—",
     "rationale": "Акиньшина попросила рассмотреть как меру поддержки льготный кредит или другой стабилизационный инструмент на 50 млрд ₽ сроком до трёх лет — с учётом корректировки программы льготной ипотеки, чтобы не допустить невыполнения обязательств перед дольщиками и инвесторами.",
-    "context": "Согласно письму генерального директора Анны Акиньшиной в адрес премьер-министра Мишустина, компания предлагает государству блокирующий и более пакеты акций для участия в управлении с правом обратного выкупа по новой цене, а также готова обеспечить дополнительное внешнее финансирование до 10 млрд руб.",
+    "context": "Согласно письму генерального директора Анны Акиньшиной в адрес премьер-министра Мишустина, компания предлагает государству блокирующий и более пакеты акций для участия в управлении с правом обратного выкупа по новой цене, а также готова обеспечить дополнительное внешнее финансирование до 10 млрд руб. 19 февраля 2026 года правительство отказало в отдельной части просьбы — прямом льготном кредите на 50 млрд ₽: «Правительство не намерено предоставлять девелоперу «Самолет» прямые субсидии»; вместо этого рассматривается возврат застройщику национализированного жилого комплекса «Квартал Марьино». Судьба предложения об обмене пакетом акций отдельно не прокомментирована.",
     "finadv": "—"
    },
    "law": {
@@ -192250,64 +192252,14 @@
      "value_rub": null,
      "meaning": "not_a_price",
      "scope": "unknown",
-     "basis": "verified",
-     "card_hash": "46dc1e059ba0",
-     "meaning_variants": [
-      "not_a_price"
-     ],
-     "scope_basis": "unknown",
-     "scope_variants": [
-      "unknown"
-     ],
-     "quote": "просим рассмотреть в качестве меры поддержки возможность выделения компании льготного кредита или другого стабилизационного инструмента в объеме 50 млрд руб. на срок до трех лет», — написала Акиньшина.",
-     "source": "https://t.me/dealsma/6799",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value_rub": 50000000000,
-       "meaning": "not_a_price",
-       "attribution": "parties",
-       "event": "announcement",
-       "scope": "unknown",
-       "terms": "unknown",
-       "quote": "просим рассмотреть в качестве меры поддержки возможность выделения компании льготного кредита или другого стабилизационного инструмента в объеме 50 млрд руб. на срок до трех лет», — написала Акиньшина.",
-       "attribution_quote": null,
-       "source": "https://t.me/dealsma/6799",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value_rub": 50000000000,
-       "meaning": "not_a_price",
-       "attribution": "parties",
-       "event": "announcement",
-       "scope": "unknown",
-       "terms": "unknown",
-       "quote": "просим рассмотреть в качестве меры поддержки возможность выделения компании льготного кредита или другого стабилизационного инструмента в объеме 50 млрд руб. на срок до трех лет",
-       "source": "https://t.me/dealsma/6799",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ],
-     "attribution": "parties",
-     "attribution_variants": [
-      "parties"
-     ],
-     "event": "announcement",
-     "event_variants": [
-      "announcement"
-     ],
-     "terms": "unknown",
-     "terms_variants": [
-      "unknown"
-     ]
+     "basis": "rule",
+     "card_hash": "cb6e9696936c"
     },
     "date": {
-     "value": "2024",
+     "value": "2026-02-04",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "card_hash": "74fb8c83b896"
     },
     "nature": {
      "control_change": false,
@@ -192317,7 +192269,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "b8bc167f73a3",
+     "card_hash": "c0ac18fe96ac",
      "quote": "В обращении сообщается, что акционеры готовы предоставить блокирующий и более пакеты акций компании для участия в управлении с правом обратного выкупа по новой цене, а также обеспечить дополнительное внешнее финансирование в размере до 10 млрд руб.",
      "source": "https://t.me/dealsma/6799",
      "verified_by": "model×2",
@@ -192340,7 +192292,7 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "intragroup": false
     },
     "target": {
@@ -192368,11 +192320,13 @@
      "multiple_text": "not_control_change"
     }
    },
-   "sum_basis": "not_a_price"
+   "sum_basis": "not_a_price",
+   "status": "Обсуждается",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c56a6cc5f",
-   "date": "2024",
+   "date": "2026-02-05",
    "title": "МТС ликвидирует экосистему Erion, передав активы в АФК «Система»",
    "ind": "ИТ и интернет",
    "type": "M&A",
@@ -192426,13 +192380,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "92725277de89"
     },
     "date": {
-     "value": "2024",
+     "value": "2026-02-05",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "card_hash": "64aa1fec7bc8"
     },
     "nature": {
      "control_change": true,
@@ -192442,7 +192396,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e1249ccab868"
+     "card_hash": "02c7ba11a316"
     },
     "target": {
      "company_id": null,
@@ -192468,7 +192422,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Обсуждается",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "caeac8f4e",
