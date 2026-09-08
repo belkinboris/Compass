@@ -205270,6 +205270,16 @@
       "CNews",
       "https://www.cnews.ru/news/line/2026-08-10_ibs_priobrela_razrabotchika"
      ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-24",
+     "title": "Сделка завершена",
+     "note": "Сделка продолжает стратегический курс IBS на планомерное приобретение активов для расширения продуктового портфеля в части управления корпоративными данными с применением ИИ, решая задачи клиентов по достижению технологической независимости, отметили в…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/IBS-priobrela-razrabotchika-IT-reshenij-na-baze-iskusstvennogo-intellekta-Rubbles-87419"
+     ]
     }
    ],
    "party_evidence": {
@@ -205332,7 +205342,7 @@
      "value": "2026-08-10",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "2600798c010d"
+     "card_hash": "b417ec32d395"
     },
     "nature": {
      "control_change": true,
@@ -206794,6 +206804,16 @@
       "Frank Media",
       "https://frankmedia.ru/300861"
      ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-28",
+     "title": "Сделка завершена",
+     "note": "По словам одного из источников на фондовом рынке, сделка прошла недавно. «Алор» приобрел среднего брокера, название компании неизвестно. Второй источник пояснил, что покупка брокера поможет «Алору» заполучить новую депозитарную лицензию. «Алор» — одна из…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Alor-Broker-lishivshijsya-v-konce-iyunya-depozitarnoj-licenzii-kupil-novuyu-brokerskuyu-firmu-87445"
+     ]
     }
    ],
    "party_evidence": {
@@ -206841,7 +206861,7 @@
      "value": "2026-08-24",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "3a7561c0830b"
+     "card_hash": "db4015cc12b2"
     },
     "nature": {
      "control_change": true,

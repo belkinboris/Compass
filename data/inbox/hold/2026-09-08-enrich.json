@@ -1,0 +1,159 @@
+{
+ "made": "2026-09-08",
+ "items": [
+  {
+   "news": "https://www.kommersant.ru/doc/8937674",
+   "title": "«Базис» купил 70% компании Proto",
+   "verdict": "enrich:g95370469",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Протосервисез»»"
+   ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/technology/news/2026/09/07/1226706-bazis-kupil-razrabotchika",
+   "title": "«Базис» купил разработчика платформы для мониторинга IT-систем",
+   "verdict": "enrich:g95370469",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Протосервисез»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Bazis-kupil-70-razrabotchika-platformy-dlya-monitoringa-IT-sistem-Proto-87477",
+   "title": "«Базис» купил 70% разработчика платформы для мониторинга IT-систем Proto",
+   "verdict": "enrich:g95370469",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Протосервисез»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Nacionalnaya-Media-Gruppa-priobrel-kontrolnuyu-dolyu-v-ID-Komsomolskaya-pravda-87469",
+   "title": "Национальная Медиа Группа приобрел контрольную долю в ИД «Комсомольская правда»",
+   "verdict": "enrich:g70c0a9ff",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «МИЦ «Известия»»",
+    "в карточке «Контрольная доля издательского дома «Комсомольская правда»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Ajeroflot-vykupil-dolyu-struktury-Lufthansa-v-dochernem-Ajeromare-87461",
+   "title": "\"Аэрофлот\" выкупил долю структуры Lufthansa в дочернем \"Аэромаре\"",
+   "verdict": "enrich:g2c27516d",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «АО «Аэромар»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Alor-Broker-lishivshijsya-v-konce-iyunya-depozitarnoj-licenzii-kupil-novuyu-brokerskuyu-firmu-87445",
+   "title": "«Алор Брокер», лишившийся в конце июня депозитарной лицензии, купил новую брокерскую фирму",
+   "verdict": "enrich:g6bf41023",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «неназванная брокерская компания»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Peterburgskij-logisticheskij-holding-YuSTA-priobrel-konditerskuyu-fabriku-v-Kronshtadte-87443",
+   "title": "Петербургский логистический холдинг «ЮСТА» приобрел кондитерскую фабрику в Кронштадте",
+   "verdict": "enrich:gabdbe320",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «КФ «Кронштадтская»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/IBS-priobrela-razrabotchika-IT-reshenij-na-baze-iskusstvennogo-intellekta-Rubbles-87419",
+   "title": "IBS приобрела разработчика ИТ-решений на базе искусственного интеллекта Rubbles",
+   "verdict": "enrich:gda6baa02",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Раблз» (Rubbles)»"
+   ]
+  },
+  {
+   "news": "https://www.tadviser.ru/a/730591",
+   "title": "«Базис» купил разработчика платформы инфраструктурного мониторинга и аналитики «Протосервисез»",
+   "verdict": "enrich:g95370469",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Протосервисез»»"
+   ]
+  },
+  {
+   "news": "https://www.tadviser.ru/a/964796",
+   "title": "«Центр инжиниринговых услуг при проектировании и строительстве» купил ТЦ «Родник» и «Алмаз» в Челябинске за 6 млрд рублей",
+   "verdict": "enrich:g10bfcb70",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «6,08 млрд ₽»"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/top/2026-09-07_bazis_kupil_rossijskogo",
+   "title": "«Базис» купил российского «убийцу» Dynatrace",
+   "verdict": "enrich:g95370469",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «Протосервисез»»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260904/peterburg-2115392684.html",
+   "title": "ПИК планирует продать еще один проект в центре Петербурга",
+   "verdict": "enrich:g749a7844",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260903/petergof-2115291703.html",
+   "title": "\"Дом.РФ\" продает на торгах историческое здание в Петергофе",
+   "verdict": "enrich:g7ea48d66",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «флигель старинной дачи в Петергофе»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260902/samolet-2114837824.html",
+   "title": "\"Самолет\" выкупает долю партнера в жилом комплексе во Владивостоке",
+   "verdict": "enrich:gaee6179c",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ООО «СЗ «Самолет-Сабанеева»» — ЖК «Сабанеева 125» во Владиво»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260901/nyu-deli-2114653072.html",
+   "title": "Сбербанк приобрел два бизнес-центра в Нью-Дели",
+   "verdict": "enrich:g0ff8c5c4",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «два бизнес-центра Summit Towers в Нью-Дели»"
+   ]
+  },
+  {
+   "news": "https://pravo.ru/news/265713/",
+   "title": "Росимущество выставило на торги национализированный «Салаватнефтемаш»",
+   "verdict": "enrich:c46d3e581",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://t.me/dealsma/7339",
+   "title": "ВТБ перенес покупку 5% WB Банка на сентябрь ВТБ сохраняет планы по приобретению миноритарной доли в WB Банке и других финтех-активах объединенной компании Wildberries & Russ (RWB). Закрытие сделки теп",
+   "verdict": "enrich:gmru-vtb-otkrytie-office-rwb",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  }
+ ]
+}
