@@ -26,11 +26,26 @@ import sys
 # Что реально исполняет или отдаёт боевой процесс. Всё остальное (pipeline/,
 # tests, документация, data) на сайте не выполняется — только читается как
 # данные, а данные приезжают из `main` сами.
+#
+# ИСКЛЮЧЕНИЕ, найденное 8 сентября 2026: `pipeline/fns_registry.py` и
+# `pipeline/sync_fns.py` формально лежат в `pipeline/`, но `main.py` их
+# ИМПОРТИРУЕТ («from pipeline.fns_registry import by_company_id», «from
+# pipeline.sync_fns import sync_from_registry») — а любой модуль, загруженный
+# в память процесса, отражает файл на диске на момент СБОРКИ, а не на момент
+# git-пуша, ровно как и весь остальной код сайта. Правка REGISTRY (новая
+# подтверждённая запись ИНН) простояла бы в `main` до следующей пересборки
+# `release` по ДРУГОЙ причине — незаметно и без всякого предупреждения,
+# потому что комментарий выше («всё остальное в pipeline/ — только данные»)
+# для этих двух файлов неверен. Тот же класс дефекта, что и «правило,
+# написанное для начала строки, не увидит того же дефекта в конце»: список
+# ниже перечислял ФАЙЛЫ по расположению (корень репозитория), а не по тому,
+# импортирует ли их процесс, — два файла из pipeline/ прошли мимо.
 APP_FILES = {
     'main.py', 'facts.py', 'deal_multiples.py', 'deal_catalog.py', 'deal_export.py',
     'data_refresh.py', 'assistant_retrieval.py', 'yandex_search.py', 'fns_client.py',
     'cbr_client.py', 'notification_service.py', 'subscription_feed.py',
     'telegram_endpoint.py', 'requirements.txt', 'Procfile', 'runtime.txt',
+    'pipeline/fns_registry.py', 'pipeline/sync_fns.py',
 }
 APP_DIRS = ('static/', 'db/')
 # Данные внутри static/ сайт подтягивает сам из `main` — сборка им не нужна.
