@@ -57088,9 +57088,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "не разглашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "не разглашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
     "share": "—",
     "val": "—",
     "target_fin": "ГК «Западная» — группа российских золотодобывающих компаний с 40-летней историей. Она ведёт 13 проектов в Бурятии, Якутии и Забайкальском крае: 2 подземных рудника (Бадран и Кедровка), горно-обогатительный комплекс Александровское с добычей руды открытым способом и 10 проектов на этапе разведки. В 2023 году «Западная» произвела 108 871 унцию золота.",
@@ -57099,7 +57099,7 @@
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "Все стратегические решения будут приниматься в Москве, в офисе «ОКТО-Золото»: управление горнорудными компаниями предполагает взаимодействие с федеральными органами власти, в первую очередь надзорными.",
+    "struct": "Приобретение до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед». Все стратегические решения будут приниматься в Москве, в офисе «ОКТО-Золото»: управление горнорудными компаниями предполагает взаимодействие с федеральными органами власти, в первую очередь надзорными.",
     "appr": "Сделка потребовала согласия ФАС России; его получение сопровождала команда LEVEL Legal Services, которая также провела всестороннюю юридическую проверку приобретаемой группы компаний и консультировала покупателя по другим вопросам сделки.",
     "adv": [
      [
@@ -57110,7 +57110,7 @@
      [
       "Юридический консультант продавца (акционеров МКАО «Западная Голд Майнинг»)",
       "BIRCH",
-      "Продажа ГК «Западная». Источник: birchlegal.ru"
+      "Корпоративный, финансовый и налоговый блоки сделки. Проектом руководили старший партнёр Антон Ситников и советник Виталий Колосков (корпоративный блок), партнёр Антон Баков (финансовый блок) и партнёр Андрей Шпак (налоговый блок). Источник: https://t.me/LawFirms/8961"
      ]
     ],
     "terms": "—"
@@ -57147,6 +57147,14 @@
     [
      "Золото и технологии",
      "https://zolteh.ru/news/okto_zoloto_pereimenovalo_a_s_zapadnaya_v_gok_kedrovskiy/"
+    ],
+    [
+     "Коммерсантъ — «Сделки года»",
+     "https://www.kommersant.ru/doc/8077927"
+    ],
+    [
+     "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
+     "https://t.me/LawFirms/8961"
     ]
    ],
    "extra": "Сделка — покупка 100% акционерного капитала МКАО «Западная Голд Майнинг Лимитед» группой ОКТО. Собственники до сделки: менеджмент 65,41%, казначейский пакет 25,06%, миноритарии 9,53%. ОКТО — частная многопрофильная группа по добыче полезных ископаемых (уголь, золото); в 2024 году она приобрела у Полюса ЗДК «Лензолото» и владеет угольным «Разрезом Степной» в Хакасии.",
@@ -57177,10 +57185,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "foreign_currency",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "24055e6ddd39"
     },
     "date": {
      "value": "2025-04-25",
@@ -184471,124 +184479,6 @@
    }
   },
   {
-   "id": "cc2929a95",
-   "date": "2025-04-25",
-   "title": "Продажа группы золотодобывающих компаний Zapadnaya Gold Mining (ГРК «Западная»)",
-   "ind": "ГМК и добыча",
-   "type": "M&A",
-   "src": [
-    [
-     "Коммерсантъ — «Сделки года»",
-     "https://www.kommersant.ru/doc/8077927"
-    ],
-    [
-     "BIRCH Legal",
-     "https://www.birchlegal.ru/services/sectors/energy_and_natural_resources/"
-    ],
-    [
-     "LEVEL Legal Services",
-     "https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya"
-    ],
-    [
-     "LEVEL Legal Services",
-     "https://www.level-legal.com/news"
-    ]
-   ],
-   "from_compact": "mini",
-   "law": {
-    "adv": [
-     [
-      "Юридический консультант",
-      "BIRCH",
-      "BIRCH — за продавца (акционеров МКАО «Западная Голд Майнинг Лимитед»); топ-15 золотодобытчиков РФ, ~3 т золота/год, 13 проектов. Возможная сумма — $400 млн (по открытым источникам)"
-     ],
-     [
-      "Юридический консультант покупателя (частного инвестора)",
-      "LEVEL Legal Services",
-      "LEVEL Legal Services на своём сайте называет себя консультантом частного инвестора при приобретении группы компаний «Западная» — той же сделки, где продавцов вёл BIRCH (эта карточка — тот же сюжет, что и g8ed07ff5, под другим id). Источник: https://www.level-legal.com/news"
-     ]
-    ],
-    "struct": "Приобретение до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед».",
-    "appr": "Сделка требовала согласия ФАС России, юристы сопровождали его получение."
-   },
-   "eco": {
-    "sum": "не разглашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
-    "rationale": "Акционеры МКАО «Западная Голд Майнинг Лимитед» продали частному инвестору группу золотодобывающих компаний, которые работают более 40 лет и ведут 13 проектов на золотых месторождениях на северо-востоке России и в Восточной Сибири — от геологоразведки и разработки до добычи. ГРК «Западная» входит в топ-15 крупнейших золотодобытчиков страны.",
-    "target_fin": "ГРК «Западная» производит около 3 тонн золота в год"
-   },
-   "added": "2026-08-03",
-   "seller": "Акционеры МКАО «Западная Голд Майнинг Лимитед»",
-   "status": "Закрыта",
-   "reviewed": "2026-08-09",
-   "buyer_name": null,
-   "deep_researched": "2026-08-14",
-   "buyer": "g51ad562a",
-   "weekly_researched": "2026-08-14",
-   "proofread_absorbed": {
-    "eco.rationale": [
-     "01cfb8b29e16"
-    ],
-    "law.appr": [
-     "6b8e3320d459"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "bcc484c39564"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
-    },
-    "date": {
-     "value": "2025-04-25",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "0fda8f56213f"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "99b4c2ce2a13"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   }
-  },
-  {
    "id": "cb30dbbc8",
    "date": "2025-09-30",
    "title": "«Яндекс» и SolidSoft создают СП в сфере кибербезопасности (Web Application Firewall)",
@@ -199102,121 +198992,6 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "68f5c159cfeb"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   }
-  },
-  {
-   "id": "g8ed07ff5",
-   "date": "2025-05-15",
-   "title": "Акционеры МКАО «Западная Голд Майнинг» продали группу золотодобывающих компаний",
-   "ind": "ГМК и добыча",
-   "type": "M&A",
-   "status": "Закрыта",
-   "sum": "Не раскрыта",
-   "asset": "Группа золотодобывающих компаний под МКАО «Западная Голд Майнинг»",
-   "eco": {
-    "sum": "Не раскрыта",
-    "share": "Частный инвестор купил группу золотодобывающих компаний, которые работают больше 40 лет и ведут 13 проектов на золотых месторождениях Северо-Востока России и Восточной Сибири — от геологоразведки до добычи.",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "Продажа группы золотодобывающих компаний частному инвестору.",
-    "appr": "Предварительное согласие на покупку акций ранее выдала Федеральная антимонопольная служба РФ.",
-    "adv": [
-     [
-      "Юридический консультант продавцов (акционеров МКАО «Западная Голд Майнинг»)",
-      "BIRCH",
-      "Корпоративный, финансовый и налоговый блоки сделки. Проектом руководили старший партнёр Антон Ситников и советник Виталий Колосков (корпоративный блок), партнёр Антон Баков (финансовый блок) и партнёр Андрей Шпак (налоговый блок). Источник: https://t.me/LawFirms/8961"
-     ],
-     [
-      "Юридический консультант покупателя (частного инвестора)",
-      "LEVEL Legal Services",
-      "LEVEL Legal Services на своём сайте называет себя консультантом частного инвестора при приобретении группы компаний «Западная» — той же сделки, где продавцов вёл BIRCH. Источник: https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya"
-     ]
-    ],
-    "terms": "—"
-   },
-   "src": [
-    [
-     "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
-     "https://t.me/LawFirms/8961"
-    ],
-    [
-     "Zolteh.ru",
-     "https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/"
-    ],
-    [
-     "Level Legal Services",
-     "https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya"
-    ]
-   ],
-   "from_ingest": true,
-   "duplicate_reviewed": true,
-   "seller": "Акционеры МКАО «Западная Голд Майнинг»",
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "buyer_name": null,
-   "deep_researched": "2026-08-14",
-   "buyer": "g51ad562a",
-   "weekly_researched": "2026-08-14",
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "541954f2bf94"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
-    },
-    "date": {
-     "value": "2025-05-15",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "9ace520890e3"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "9c7b240674dd"
     },
     "target": {
      "company_id": null,
@@ -236170,7 +235945,9 @@
   "g809f9155": "g3fb43064",
   "ga7298401": "g2197ed53",
   "gbaf3c565": "gdb2a120f",
-  "cc80b229f": "g91ec3558"
+  "cc80b229f": "g91ec3558",
+  "cc2929a95": "g15f35a5d",
+  "g8ed07ff5": "g15f35a5d"
  },
  "merged_companies": {
   "ge5be0c9f": "ga2cfae5b",

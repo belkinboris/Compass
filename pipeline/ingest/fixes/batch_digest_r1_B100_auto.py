@@ -71,10 +71,9 @@ FIXES = [
          new='В 2024 году выручка БСК составила 61 млрд руб., чистая прибыль — 4,6 млрд руб.',
          quote='В 2024 году выручка БСК составила 61 млрд руб., чистая прибыль — 4,6 млрд руб.',
          why='из digest ChatGPT round1 (B_100), сверено с https://www.kommersant.ru/doc/7777916'),
-    dict(id='g8ed07ff5', field='law.appr', old='—',
-         new='Предварительное согласие на покупку акций ранее выдала Федеральная антимонопольная служба РФ.',
-         quote='Предварительное согласие на покупку акций ранее выдала Федеральная антимонопольная служба РФ.',
-         why='из digest ChatGPT round1 (B_100), сверено с https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/'),
+    # СНЯТО (8 сентября 2026): g8ed07ff5 слита в g15f35a5d — тройной
+    # дубль, pipeline/merge_zapadnaya_gold_mining_triplicate.py. Согласие
+    # ФАС уже по существу стоит у g15f35a5d (law.appr).
     dict(id='g5d835058', field='eco.target_fin', old='—',
          new='По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.',
          quote='По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.',
@@ -91,18 +90,12 @@ FIXES = [
          new='Сделку одобрила Федеральная антимонопольная служба (ФАС)',
          quote='Сделку одобрила Федеральная антимонопольная служба (ФАС)',
          why='из digest ChatGPT round1 (B_100), сверено с https://www.rbc.ru/business/05/05/2025/681874769a7947864a3eee7a'),
-    dict(id='cc2929a95', field='law.struct', old=None,
-         new='Приобретение до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед».',
-         quote='приобретение до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед».',
-         why='из digest ChatGPT round1 (B_100), сверено с https://www.rbc.ru/business/25/04/2025/680b35279a79473cf11967ae'),
-    dict(id='cc2929a95', field='law.appr', old=None,
-         new='Сопровождала получение согласия ФАС России на совершение сделки',
-         quote='сопровождала получение согласия ФАС России на совершение сделки',
-         why='из digest ChatGPT round1 (B_100), сверено с https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya'),
-    dict(id='cc2929a95', field='eco.target_fin', old=None,
-         new='ГРК «Западная» производит около 3 тонн золота в год',
-         quote='ГРК «Западная» производит около 3 тонн золота в год',
-         why='из digest ChatGPT round1 (B_100), сверено с https://www.kommersant.ru/doc/8077927'),
+    # СНЯТО (8 сентября 2026): cc2929a95 слита в g15f35a5d — тройной
+    # дубль, pipeline/merge_zapadnaya_gold_mining_triplicate.py. ФАС и
+    # «3 тонны золота» уже по существу стояли у g15f35a5d (law.appr,
+    # eco.target_fin/context); факт «100% голосующих акций» был
+    # действительно новым и дописан в существующую запись law.struct —
+    # см. pipeline/ingest/fixes/batch_monthly_2026_08_21_r5.py.
     dict(id='gaa82c6f6', field='eco.target_fin', old='—',
          new='Собственный капитал банка оценивался в 3,48 млрд руб.',
          quote='собственный капитал банка оценивался в 3,48 млрд руб.',
@@ -224,10 +217,8 @@ FIXES = [
          new=['Коммерсантъ', 'https://www.kommersant.ru/doc/7777916'],
          quote='В 2024 году выручка БСК составила 61 млрд руб., чистая прибыль — 4,6 млрд руб.',
          why='источник из digest ChatGPT round1 (B_100)'),
-    dict(id='g8ed07ff5', field='src', old=None,
-         new=['zolteh.ru', 'https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/'],
-         quote='Предварительное согласие на покупку акций ранее выдала Федеральная антимонопольная служба РФ.',
-         why='источник из digest ChatGPT round1 (B_100)'),
+    # СНЯТО (8 сентября 2026): g8ed07ff5 слита в g15f35a5d — тот же адрес
+    # zolteh.ru уже стоит в src у g15f35a5d.
     dict(id='g5d835058', field='src', old=None,
          new=['vademec.ru', 'https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/'],
          quote='По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.',
@@ -240,14 +231,9 @@ FIXES = [
          new=['newprospect.ru', 'https://newprospect.ru/news/sozdatel-brenda-baltijskij-bereg-xochet-privlech-45-mlrd-rublej-na-pre-ipo'],
          quote='Выручка в 2024 году по собственным данным –19 млрд рублей, EBITDA – 1,4 млрд рублей.',
          why='источник из digest ChatGPT round1 (B_100)'),
-    dict(id='cc2929a95', field='src', old=None,
-         new=['LEVEL Legal Services', 'https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya'],
-         quote='сопровождала получение согласия ФАС России на совершение сделки',
-         why='источник из digest ChatGPT round1 (B_100)'),
-    dict(id='cc2929a95', field='src', old=None,
-         new=['Коммерсантъ', 'https://www.kommersant.ru/doc/8077927'],
-         quote='ГРК «Западная» производит около 3 тонн золота в год',
-         why='источник из digest ChatGPT round1 (B_100)'),
+    # СНЯТО (8 сентября 2026): cc2929a95 слита в g15f35a5d — LEVEL Legal
+    # Services уже стоит в src у g15f35a5d, Коммерсантъ doc/8077927
+    # перенесён туда же слиянием (merge_zapadnaya_gold_mining_triplicate.py).
     dict(id='gaa82c6f6', field='src', old=None,
          new=['Коммерсантъ', 'https://www.kommersant.ru/doc/7476881'],
          quote='собственный капитал банка оценивался в 3,48 млрд руб.',

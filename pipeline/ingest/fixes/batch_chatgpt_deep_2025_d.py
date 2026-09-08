@@ -13,26 +13,9 @@
 """
 
 FIXES = [
-    # === g8ed07ff5: ГК «Западная» / Группа «ОКТО» ===
-    # Zolteh (отраслевой портал) подтверждает ОКТО как покупателя.
-    # Level Legal опубликовала пресс-релиз о своей роли как buyer-side советника.
-
-    dict(id='g8ed07ff5', field='src', old=None,
-         new=['Zolteh.ru',
-              'https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/'],
-         quote='100% акций МКАО «Западная Голд Майнинг Лимитед» приобрела группа «ОКТО»',
-         why='портал «Золото и технологии» — профильный для горнодобывающей отрасли; '
-             'скачан и сверен'),
-
-    dict(id='g8ed07ff5', field='src', old=None,
-         new=['Level Legal Services',
-              'https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-'
-              'osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-'
-              'svyazi-s-priobreteniem-gk-zapadnaya'],
-         quote='Юридическая фирма LEVEL Legal Services осуществила комплексное юридическое '
-               'консультирование частного инвестора в связи с приобретением ГК «Западная»',
-         why='пресс-релиз советника со стороны покупателя; подтверждает роль и закрытие; '
-             'скачан и сверен'),
+    # СНЯТО (8 сентября 2026): g8ed07ff5 слита в g15f35a5d — тройной
+    # дубль, pipeline/merge_zapadnaya_gold_mining_triplicate.py. Оба
+    # источника (Zolteh, Level Legal) уже стоят в src у g15f35a5d.
 
     # === gf9932079: Просвещение / ВЭБ ===
     # Interfax подтверждает долю ВЭБа (75%) после выкупа доли Сбербанка.
