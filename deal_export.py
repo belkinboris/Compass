@@ -134,12 +134,9 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         ("Финансирование", eco.get("fin")), ("Мотивы", eco.get("rationale")),
         ("Контекст", eco.get("context")),
     ])
-    # Структура сделки — рассказ о том, как она устроена, а не юридический
-    # раздел (Артем, 7 сентября 2026: в «Юристе» — только согласования,
-    # условия и консультанты). Тот же порядок, что на экране карточки.
-    add_section("КАК УСТРОЕНА СДЕЛКА", [("Описание", law.get("struct"))])
     add_section("ЮРИДИЧЕСКИЙ ОБЗОР", [
-        ("Согласования", law.get("appr")), ("Условия", law.get("terms")),
+        ("Структура", law.get("struct")), ("Согласования", law.get("appr")),
+        ("Условия", law.get("terms")),
     ])
     advisors = law.get("adv") if isinstance(law.get("adv"), list) else []
     finadv = eco.get("finadv")

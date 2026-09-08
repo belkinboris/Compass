@@ -138,10 +138,6 @@ REASON_LABELS = {
     'intragroup': 'передача внутри одной группы — конечный контроль не менялся',
     'price_event_disputed': 'два чтения относят цену к разным событиям — не разрешено',
     'price_author_unknown': 'кто назвал цену, из источника не видно — в деньги не идёт',
-    'stake_unknown': 'доля не установлена — цену пакета не на что пересчитать',
-    'perimeter_refuted': 'чтение установило, что отчётность этого юрлица не покрывает купленный бизнес',
-    'perimeter_disputed': 'два чтения разошлись в том, покрывает ли отчётность купленный бизнес',
-    'stake_disputed': 'два чтения доли разошлись',
 }
 # Автор числа, при котором цена считается раскрытой: стороны, документ, реестр.
 # Консультант в таблице издания, анонимные «источники», аналитик и «не видно» —
@@ -407,72 +403,6 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'perimeter_not_verified'
         if not (target.get('perimeter_report') or {}).get('inn'):
             return False, 'perimeter_report_missing'
-        if _basis(date) == 'disputed':
-            return False, 'date_disputed'
-        return True, 'ok'
-    if metric == 'multiple_text_computed':
-        # ВТОРОЙ УРОВЕНЬ — «РАССЧИТАНО ПО ТЕКСТУ КАРТОЧКИ». Владелец,
-        # 8 сентября 2026: «мультипликаторов стало слишком мало. В чём проблема
-        # взять по бухотчётности выручку, цену и долю из источника и
-        # посчитать?» Проблема была в том, что на витрину шли ТОЛЬКО сделки,
-        # где цена, доля, смена контроля и периметр подтверждены двумя
-        # чтениями, — 12 из 1566. Рецензент в тот же день предложил три
-        # сигнала вместо одного: «подтверждено источником», «рассчитано
-        # „Компасом"», «недостаточно данных». Это второй сигнал: те же
-        # структурные требования (смена контроля, одно юрлицо с подтверждённым
-        # ИНН, не банк и не лот, цена названа сторонами в рублях), но цена и
-        # доля могут стоять по тексту карточки, а периметр отчётности не
-        # проверен. На экране такая строка помечена и отфильтровывается одним
-        # чипом; в медианы она не идёт. Метрика считается на лету и в
-        # `facts.admitted` карточки НЕ записывается (не в METRICS): это
-        # решение витрины, а не свойство факта.
-        if not nature.get('control_change') or str(deal.get('type') or '').strip() != 'M&A':
-            return False, 'not_control_change'
-        if deal.get('status') == 'Не состоялась':
-            return False, 'failed'
-        if not year or year < dm.MIN_YEAR:
-            return False, 'before_site_year'
-        if not target.get('company_id'):
-            return False, 'no_target'
-        if target.get('lot'):
-            return False, 'target_lot'
-        if target.get('bank'):
-            return False, 'target_bank'
-        if not target.get('confirmed'):
-            return False, 'target_unconfirmed'
-        if price.get('meaning') != 'disclosed' or not price.get('value_rub'):
-            return False, 'price_not_disclosed'
-        if _basis(price) == 'stale' or _basis(stake) == 'stale' or target.get('perimeter') == 'stale':
-            return False, 'stale'
-        # ЧТЕНИЕ, КОТОРОЕ УЖЕ СКАЗАЛО «НЕТ», СИЛЬНЕЕ ЛЮБОГО ТЕКСТА. Первый
-        # локальный прогон второго уровня (8 сентября 2026) вернул на витрину
-        # «Росспиртпром» ×4,59 — головное АО против группы восьми заводов, тот
-        # самый периметр, который два читателя отвергли 6 сентября и который
-        # рецензент назвал «ценой здания на выручку продавца». «По тексту
-        # карточки» — это про непрочитанное, а не про прочитанное и отвергнутое.
-        if target.get('perimeter') == 'refuted':
-            return False, 'perimeter_refuted'
-        if target.get('perimeter') == 'disputed':
-            return False, 'perimeter_disputed'
-        if _basis(price) == 'disputed':
-            return False, 'price_disputed'
-        if price.get('event') == 'disputed':
-            return False, 'price_event_disputed'
-        if nature.get('intragroup'):
-            return False, 'intragroup'
-        if (f.get('identity') or {}).get('possible_duplicate'):
-            return False, 'possible_duplicate'
-        # Не сказано, за что цена, — считаем, что за купленный пакет (так
-        # пишут почти всегда: «купил 51% за 2 млрд ₽»). Это допущение, и на
-        # экране оно названо; для «цены за всю компанию» доля не нужна.
-        scope = price.get('scope') if price.get('scope') in ('package', 'equity', 'ev') else 'package'
-        if scope == 'package':
-            if stake.get('value') is None:
-                return False, 'stake_unknown'
-            if _basis(stake) == 'disputed':
-                return False, 'stake_disputed'
-            if (stake.get('value') or 0) < dm.MIN_SCALABLE_STAKE:
-                return False, 'stake_below'
         if _basis(date) == 'disputed':
             return False, 'date_disputed'
         return True, 'ok'
