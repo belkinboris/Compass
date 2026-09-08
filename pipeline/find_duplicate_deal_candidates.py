@@ -31,6 +31,10 @@ from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / 'pipeline' / 'ingest'))
+import match as matcher  # noqa: E402  — те же quoted()/days_between(), что у ворот притока
+
 DATA = Path(__file__).resolve().parent.parent / 'static' / 'data' / 'deals_promoted.json'
 
 # Пары, прочитанные глазами и признанные РАЗНЫМИ сделками (порядок id не важен).
@@ -61,6 +65,10 @@ NOT_DUPLICATES = {
     frozenset({'g0591604d', 'gdd45b5d5'}): 'фонд «Восход»: учреждение фонда «Интерросом» (2022) и продажа его УК менеджменту (2023)',
     frozenset({'g81a766ac', 'g97d9fa60'}): '«Агро-Белогорье»: 25% по решению суда за номинал (сентябрь 2024) и 100% по мировому соглашению (ноябрь) — два юридически разных шага',
     frozenset({'g46cc9712', 'gcd2b0954'}): 'банк «Точка»: продажа 90,01% «Трастом» консорциуму (август 2023) и отдельная покупка 25% VK у участников консорциума (ноябрь)',
+    # Прочитаны 8 сентября 2026, при первом же прогоне нового признака
+    # «названия из заголовка стоят в теле» — оба ложные, совпало родовое слово.
+    frozenset({'g55ac5f34', 'gedc48d89'}): 'совпало «систем»: ООО «ЕСК Системс» у RBE Group и АФК «Система» у сделки Сбера с «Элементом» — разные компании, разные сделки',
+    frozenset({'g5d9d8e6c', 'gc3d735fc'}): '«Открытие»: продажа банком 14% Qiwi и продажа самого банка «ФК Открытие» группе ВТБ — банк как продавец и он же как предмет',
 }
 
 PLACEHOLDER = re.compile(r'^\s*(—|-|не раскрыт[а-яё]*|публично не сообщалось|нет данных)?\s*\.?\s*$', re.I)
@@ -98,6 +106,31 @@ def candidates(deals):
             same_sum = norm_sum(a.get('sum')) and norm_sum(a.get('sum')) == norm_sum(b.get('sum'))
             if same_year and same_sum:
                 found.setdefault(frozenset({a['id'], b['id']}), 'один покупатель, один год, одна сумма')
+
+    # ИМЕНА ИЗ ЗАГОЛОВКА ОДНОЙ КАРТОЧКИ В ТЕЛЕ ДРУГОЙ. Оба признака выше
+    # держатся на СВЯЗАННОМ профиле предмета или покупателя — а у карточки,
+    # где стороны стоят только текстом, связывать нечего, и пара не находится
+    # вовсе. Так 8 сентября 2026 владелец сам нашёл дубль про ТРК «Родник» и
+    # «Алмаз»: одна карточка написана со стороны продавца («ПСБ выставил на
+    # продажу компании, владеющие двумя ТРК в Челябинске» — в заголовке нет ни
+    # одного названия в кавычках), вторая со стороны покупателя; профилей не
+    # было ни у одной. Замер по всей базе: одно общее имя — 22 пары, почти все
+    # серийные игроки («Траст», «Система»), ДВА имени — 5 пар, из них три
+    # оказались настоящими дублями. Порог поэтому два, окно — 30 дней.
+    rows = [(d, matcher.quoted(d.get('title')),
+             matcher.quoted(' '.join([str(d.get('asset') or ''), str(d.get('buyer_name') or ''),
+                                      str(d.get('seller') or ''),
+                                      str((d.get('eco') or {}).get('share') or '')])))
+            for d in deals]
+    for (a, a_title, a_body), (b, b_title, b_body) in combinations(rows, 2):
+        gap = matcher.days_between(a.get('date'), b.get('date'))
+        if gap is None or gap > 30:
+            continue
+        cross = matcher.quoted_common(a_title, b_body) | matcher.quoted_common(b_title, a_body)
+        if len(cross) >= 2:
+            found.setdefault(frozenset({a['id'], b['id']}),
+                             'названия из заголовка стоят в предмете и сторонах: %s'
+                             % ', '.join(sorted(cross)))
     return found
 
 

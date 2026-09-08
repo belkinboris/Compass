@@ -239,9 +239,23 @@ def index_base(deals, companies=None, match_keys=None):
             key = entity_key(value)
             if key:
                 bucket.add(key)
+        # ИМЕНА ИЗ ТЕЛА КАРТОЧКИ, А НЕ ТОЛЬКО ИЗ ЗАГОЛОВКА. 8 сентября 2026
+        # владелец нашёл дубль, которого не увидела ни одна проверка на дубли:
+        # «ПСБ выставил на продажу компании, владеющие двумя ТРК в Челябинске»
+        # и ««Центр инжиниринговых услуг…» купил ТЦ «Родник» и «Алмаз»…» — одна
+        # сделка, описанная со стороны продавца и со стороны покупателя. Общих
+        # слов в заголовках одно («челяби»), общих названий в кавычках — ноль:
+        # у первого заголовка кавычек нет вовсе, имена проданных юрлиц и обоих
+        # ТРК лежат в ПРЕДМЕТЕ и в «Предмете / доле». Отсюда отдельный набор:
+        # названия в кавычках из полей, которые называют стороны и предмет.
+        body_quoted = quoted(' '.join([
+            str(d.get('asset') or ''), str(d.get('buyer_name') or ''),
+            str(d.get('seller') or ''), str((d.get('eco') or {}).get('share') or ''),
+        ]))
         rows.append({
             'id': d['id'], 'date': d.get('date'), 'title': d.get('title'),
             'stems': stems(d.get('title')), 'quoted': quoted(d.get('title')),
+            'body_quoted': body_quoted,
             'amount': amount(d.get('title')) or amount(d.get('sum')),
             'status': d.get('status'),
             'urls': {str(s[1]) for s in (d.get('src') or []) if len(s) > 1},
