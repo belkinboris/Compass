@@ -188047,7 +188047,7 @@
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "213b2f3615bd"
+     "card_hash": "4870fc6b9c2b"
     },
     "date": {
      "value": "2025-03-24",
@@ -188063,7 +188063,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "adb237032e23"
+     "card_hash": "8aad62b92b4a"
     },
     "target": {
      "company_id": null,
@@ -188089,7 +188089,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Обсуждается",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c6b5fb9f3",
@@ -189039,7 +189041,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2024-12-12",
@@ -189055,7 +189057,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4596bf4b36e8"
+     "card_hash": "af34b1084ebd"
     },
     "target": {
      "company_id": null,
@@ -189081,7 +189083,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c6fd3a848",
@@ -189242,7 +189246,7 @@
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "7c5740c7ad14"
+     "card_hash": "e98a9a8d455e"
     },
     "date": {
      "value": "2024-12-01",
@@ -189258,7 +189262,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "cd8764bb2a40"
+     "card_hash": "44a12093d1ba"
     },
     "target": {
      "company_id": null,
@@ -189284,7 +189288,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "cea87de0a",
@@ -189603,7 +189609,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f5dc63d9d0d4"
+     "card_hash": "76f124e852c8"
     },
     "date": {
      "value": "2024-11-01",
@@ -189619,7 +189625,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "248931bb0da2"
+     "card_hash": "0f767f6996cd"
     },
     "target": {
      "company_id": null,
@@ -189645,7 +189651,9 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "cfdc0e962",
@@ -189749,7 +189757,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "cc63cf578",
@@ -189899,7 +189908,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2024-09-23",
@@ -189915,7 +189924,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "427f206dfb91"
+     "card_hash": "d2cdea65a679"
     },
     "target": {
      "company_id": null,
@@ -189941,7 +189950,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "caac79625",
@@ -189957,11 +189968,11 @@
    ],
    "from_compact": "bulk",
    "extra": "Росэлектроника выставила на продажу 100% акций АО «Спецмагнит» вместе с недвижимостью на Дмитровском шоссе, 58 — бывшей территорией Владыкинского механического завода.",
-   "sum": "960,2 млн ₽",
+   "sum": "576,1 млн ₽",
    "eco": {
-    "sum": "960,2 млн ₽",
+    "sum": "576,1 млн ₽",
     "share": "На продажу выставлены 100% акций АО «Спецмагнит», принадлежащих Росэлектронике.",
-    "val": "960,2 млн ₽.",
+    "val": "Стартовая цена торгов — 960,2 млн ₽, минимально допустимая — 480,1 млн ₽; итоговая цена продажи (576,1 млн ₽) сложилась между ними.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "Актив интересен тому, кто готов объединить соседние участки под проект КРТ — мэрия Москвы для этой территории его пока не разработала.",
@@ -189995,11 +190006,11 @@
      "card_hash": "49500a97de66"
     },
     "price": {
-     "value_rub": 960200000.0,
+     "value_rub": 576100000.0,
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0536f8305565"
+     "card_hash": "f450a0d4922a"
     },
     "date": {
      "value": "2024-09-01",
@@ -190015,7 +190026,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "92eea46e8e7b"
+     "card_hash": "bb93f747284c"
     },
     "target": {
      "company_id": null,
@@ -190037,11 +190048,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "auction_open",
-     "top_purchases": "auction_open",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c01291410",
