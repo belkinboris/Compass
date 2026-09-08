@@ -1372,14 +1372,21 @@ def test_fns_queue_unresolved_companies_sorted_by_freshest_deal_and_skips_covere
     assert "cid-covered" not in ids and "cid-lot" not in ids and "cid-twin" not in ids
 
 
-def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_status():
+def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_status(monkeypatch):
     """Механика этого шага НАРОЧНО у́же, чем match_companies(auto_confirm=True)
     (0.965 похожести имени без ОКВЭД/региона — на «Арнест» вернул 10
     кандидатов без сигнала, какой из них главный, см. докстринг скрипта):
     подтверждает только когда после поиска остаётся РОВНО один действующий
     результат с точным (не похожим) именем. Два действующих тёзки или один
-    ликвидированный результат — не подтверждение."""
+    ликвидированный результат — не подтверждение.
+
+    Бесплатный ЕГРЮЛ (первый шаг, см. `attempt_public_egrul_match`) здесь
+    отключён монкипатчем — этот тест проверяет ВТОРОЙ, платный шаг, а не
+    делает живой запрос к egrul.nalog.ru."""
+    import pipeline.fns_unresolved_queue as uq_mod
     from pipeline.fns_unresolved_queue import attempt_single_exact_match
+
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", lambda name, http_client=None: None)
 
     class OneExactMatch:
         def search(self, q):
@@ -1410,15 +1417,20 @@ def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_sta
     assert attempt_single_exact_match(OnlyLiquidated(), "Тестовая компания") is None
 
 
-def test_fns_queue_attempt_single_exact_match_propagates_api_errors():
+def test_fns_queue_attempt_single_exact_match_propagates_api_errors(monkeypatch):
     """Этап 13, П4: ошибка `search` (сеть, ключ, исчерпанная годовая квота)
     больше НЕ проглатывается внутри функции и не превращается в None —
     иначе она неотличима от честного «совпадений не найдено», и весь
     прогон при отказавшем API выглядел бы как «спросили, ничего не
     нашли», а не как «вопрос вообще не дошёл до ФНС». Ошибку теперь
-    считает и решает, что с ней делать, вызывающий (`main()`)."""
+    считает и решает, что с ней делать, вызывающий (`main()`).
+
+    Бесплатный ЕГРЮЛ отключён монкипатчем — тест проверяет платный шаг."""
+    import pipeline.fns_unresolved_queue as uq_mod
     from fns_client import ApiFnsError
     from pipeline.fns_unresolved_queue import attempt_single_exact_match
+
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", lambda name, http_client=None: None)
 
     class AlwaysFails:
         def search(self, q):
@@ -1426,6 +1438,95 @@ def test_fns_queue_attempt_single_exact_match_propagates_api_errors():
 
     with pytest.raises(ApiFnsError):
         attempt_single_exact_match(AlwaysFails(), "Тестовая компания")
+
+
+class _FakeEgrulResponse:
+    def __init__(self, status_code=200, body=None):
+        self.status_code = status_code
+        self._body = body or {}
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError("тестовая ошибка HTTP %d" % self.status_code)
+
+    def json(self):
+        return self._body
+
+
+class _FakeEgrulClient:
+    """Подменяет httpx.Client целиком: `post` кладёт заявку, `get` отдаёт
+    результат сразу (без реального асинхронного ожидания egrul.nalog.ru)."""
+
+    def __init__(self, rows):
+        self._rows = rows
+
+    def post(self, url, data=None):
+        return _FakeEgrulResponse(200, {"t": "id-теста"})
+
+    def get(self, url):
+        return _FakeEgrulResponse(200, {"rows": self._rows})
+
+
+def test_attempt_public_egrul_match_confirms_a_single_exact_hit():
+    """Найдено 8 сентября 2026 на карточке «Базис»/«Протосервисез»: годовая
+    платная квота `search` (api-fns.ru) обнулилась (3000 из 3000, по
+    `/api/stat`), а владелец сам нашёл ИНН за минуту через бесплатный
+    официальный ЕГРЮЛ — в нём на это имя ровно одно действующее юрлицо.
+    Проверено вживую перед тем, как писать этот тест: реальный запрос к
+    egrul.nalog.ru на «Протосервисез» дал ИНН 7725829920 — то же число,
+    что владелец получил кликом по ссылке в статье Ведомостей."""
+    from pipeline.fns_unresolved_queue import attempt_public_egrul_match
+
+    rows = [{
+        "k": "ul", "i": "7725829920",
+        "n": 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ПРОТОСЕРВИСЕЗ"',
+        "c": 'ООО "ПРОТОСЕРВИСЕЗ"',
+    }]
+    hit = attempt_public_egrul_match("ООО «Протосервисез»", http_client=_FakeEgrulClient(rows))
+    assert hit == ("7725829920", 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ПРОТОСЕРВИСЕЗ"')
+
+
+def test_attempt_public_egrul_match_refuses_homonyms_and_fuzzy_hits():
+    """Родня платного пути: два ТОЧНЫХ тёзки — не подтверждение. И строка,
+    похожая по подстроке, но не совпадающая по нормализованному имени
+    («Протосервис» вместо «Протосервисез» — реальная находка того же живого
+    прогона, нечёткий движок поиска ЕГРЮЛ подтягивает такие соседями),
+    не должна засчитываться за совпадение."""
+    from pipeline.fns_unresolved_queue import attempt_public_egrul_match
+
+    fuzzy_neighbor = [
+        {"k": "ul", "i": "7725829920", "n": 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ПРОТОСЕРВИСЕЗ"'},
+        {"k": "ul", "i": "2310021340", "n": 'МНОГОПРОФИЛЬНАЯ ПРОИЗВОДСТВЕННО-ТОРГОВАЯ КОММЕРЧЕСКАЯ ФИРМА "ПРОТОСЕРВИС "'},
+    ]
+    assert attempt_public_egrul_match("ООО «Протосервисез»", http_client=_FakeEgrulClient(fuzzy_neighbor)) == \
+        ("7725829920", 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ПРОТОСЕРВИСЕЗ"')
+
+    two_exact_homonyms = [
+        {"k": "ul", "i": "7700000001", "n": 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "КАМА"'},
+        {"k": "ul", "i": "7700000002", "n": 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "КАМА"'},
+    ]
+    assert attempt_public_egrul_match("«Кама»", http_client=_FakeEgrulClient(two_exact_homonyms)) is None
+
+    not_a_legal_entity = [{"k": "ip", "i": "770000000003", "n": "ИП КАМА"}]
+    assert attempt_public_egrul_match("«Кама»", http_client=_FakeEgrulClient(not_a_legal_entity)) is None
+
+
+def test_attempt_single_exact_match_tries_free_egrul_first(monkeypatch):
+    """Бесплатный ЕГРЮЛ — первый шаг: если он уже дал точный ответ, платный
+    `search` (годовая квота 3000/год, ограниченный ресурс) не трогается
+    вовсе — клиент не должен получить ни одного вызова `search`."""
+    import pipeline.fns_unresolved_queue as uq_mod
+    from pipeline.fns_unresolved_queue import attempt_single_exact_match
+
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match",
+                        lambda name, http_client=None: ("7725829920", "ОБЩЕСТВО С ОГРАНИЧЕННОЙ...ПРОТОСЕРВИСЕЗ"))
+
+    class ClientThatMustNotBeCalled:
+        def search(self, q):
+            raise AssertionError("платный search вызван, хотя бесплатный ЕГРЮЛ уже подтвердил")
+
+    hit = attempt_single_exact_match(ClientThatMustNotBeCalled(), "ООО «Протосервисез»")
+    assert hit == ("7725829920", "ОБЩЕСТВО С ОГРАНИЧЕННОЙ...ПРОТОСЕРВИСЕЗ")
 
 
 def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honestly(
@@ -1467,6 +1568,7 @@ def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honest
             raise ApiFnsError("квота исчерпана (тест)")
 
     monkeypatch.setattr("fns_client.ApiFnsClient", AlwaysFailsClient)
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", lambda name, http_client=None: None)
     monkeypatch.setattr(uq_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(_sys, "argv", ["fns_unresolved_queue.py", "--attempt", "--limit", "5"])
 

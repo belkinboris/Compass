@@ -211632,11 +211632,11 @@
     },
     "target": {
      "company_id": "g01320fb7",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7725829920",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "0dc4cea2fc55"
     },
@@ -211652,7 +211652,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread": "2026-09-07"

@@ -67,6 +67,8 @@ import re
 import sys
 import time
 
+import httpx
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
@@ -126,10 +128,90 @@ def unresolved_companies(base, registry_idx=None, exclude=None):
     return rows
 
 
+def attempt_public_egrul_match(name, http_client=None):
+    """(inn, полное_имя) при единственном точном совпадении в БЕСПЛАТНОМ
+    публичном поиске egrul.nalog.ru — иначе None.
+
+    ЗАЧЕМ ЭТОТ ПУТЬ РЯДОМ С `attempt_single_exact_match`. Обнаружено
+    8 сентября 2026 на карточке «Базис»/«Протосервисез»: годовая квота
+    `search` в api-fns.ru исчерпана ПОЛНОСТЬЮ (`/api/stat`: Лимит 3000,
+    Истрачено 3000, окно 2026-08-17 → 2027-08-17) — а владелец нашёл ИНН
+    сам за минуту, кликнув на ссылку в статье Ведомостей, при том что в
+    ЕГРЮЛ у этого имени ровно ОДНО действующее юрлицо. Автоматика не
+    ошиблась и не схалтурила: живой поиск честно вернул ошибку API
+    («Исчерпано количество запросов»), и прогон `f35e2a1` от того же утра
+    прямо написал в свой же отчёт «похоже на исчерпанную квоту» — но
+    альтернативы не было, и компанию отправили в консоль вопросом. Годовая
+    квота не обнулится до августа 2027, и до тех пор `attempt_single_exact_
+    match` будет отказывать систематически, а не «иногда не находить», —
+    тот же класс дефекта, что уже описан в CLAUDE.md («Один except на один
+    вид ошибки» и «Ноль в отчёте не значит „смотрели не туда"»): решение не
+    в более длинном ожидании квоты, а в том, чтобы не зависеть от неё там,
+    где есть бесплатная альтернатива. Официальный сервис egrul.nalog.ru
+    (тот же, которым уже вручную резолвили ИНН банков — см. записи
+    `pipeline/fns_registry.py`, «egrul.nalog.ru по этому наименованию») не
+    требует ключа и не делит с `search` ни один лимит — эта функция
+    превращает тот же ручной приём в код, а не заменяет проверку.
+
+    УСТРОЙСТВО ЗАПРОСА. `POST /` кладёт заявку и возвращает id (`t`);
+    `GET /search-result/<id>` отдаёт результат — сервис асинхронный, первый
+    ответ иногда ещё не готов (`rows` отсутствует), поэтому запрос
+    повторяется до RETRIES раз с паузой. Строки ответа несут `k` (тип: `ul`
+    — юрлицо, остальное — ИП и не годится), `n` (полное официальное имя, ИМ
+    сверяем точное совпадение — не по `c`, короткому имени в кавычках, оно
+    ловит однокоренные тёзки), `i` (ИНН). Поле `e` есть только у записей,
+    которые сервис для этого запроса считает менее релевантными (в наблюдении
+    — у совсем других юрлиц, подтянутых нечётким поиском); для основного
+    результата его нет, но полагаться на одно это поле рискованно — граница
+    здесь та же самая, что и у платного метода: ТОЧНОЕ совпадение нормали-
+    зованного имени, и совпадение обязано быть РОВНО ОДНО среди юрлиц."""
+    from pipeline.sync_fns import norm_name
+
+    query = clean_query_name(name)
+    if not query:
+        return None
+    target = norm_name(query)
+    owns_client = http_client is None
+    client = http_client or httpx.Client(timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        resp = client.post("https://egrul.nalog.ru/", data={"vyp3CaptchaToken": "", "query": query, "region": ""})
+        resp.raise_for_status()
+        search_id = resp.json().get("t")
+        if not search_id:
+            return None
+        rows = []
+        for _ in range(6):
+            time.sleep(1)
+            r2 = client.get("https://egrul.nalog.ru/search-result/%s" % search_id)
+            if r2.status_code != 200:
+                continue
+            body = r2.json()
+            if body.get("rows") is not None:
+                rows = body["rows"]
+                break
+        exact = [r for r in rows
+                 if r.get("k") == "ul" and str(r.get("i") or "").strip()
+                 and norm_name(r.get("n")) == target]
+        if len(exact) == 1:
+            return exact[0]["i"], exact[0].get("n")
+        return None
+    except (httpx.HTTPError, ValueError, KeyError):
+        return None
+    finally:
+        if owns_client:
+            client.close()
+
+
 def attempt_single_exact_match(client, name):
     """(inn, легальное_имя) при единственном действующем точном совпадении
-    имени (без формы собственности и кавычек) — иначе None. Один живой
-    запрос `search` на компанию.
+    имени (без формы собственности и кавычек) — иначе None.
+
+    Сначала пробует БЕСПЛАТНЫЙ публичный ЕГРЮЛ (`attempt_public_egrul_
+    match`, см. её докстринг — почему он теперь первый, а не запасной): не
+    делает ни одного запроса `search` к api-fns.ru, если публичный сервис
+    уже дал точный ответ. Платный `search` остаётся вторым шагом — не
+    убран, а именно на случай, если ЕГРЮЛ по какой-то причине недоступен
+    или не находит (например, поиск не всегда ловит все словоформы имени).
 
     `ApiFnsError` (сеть, ключ, ИСЧЕРПАННАЯ ГОДОВАЯ КВОТА `search`) НЕ
     ловится здесь и уходит вызывающему — Этап 13, П4. Раньше она молча
@@ -142,6 +224,10 @@ def attempt_single_exact_match(client, name):
     честных промахов и обрывает попытки, если ошибки систематические."""
     from fns_client import normalize_search_results
     from pipeline.sync_fns import norm_name
+
+    hit = attempt_public_egrul_match(name)
+    if hit:
+        return hit
 
     query = clean_query_name(name)
     if not query:
