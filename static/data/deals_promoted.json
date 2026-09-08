@@ -188869,7 +188869,7 @@
   },
   {
    "id": "c29710ac5",
-   "date": "2025",
+   "date": "2025-08-27",
    "title": "Эфко (через Эксойл) покупает Маслоэкстракционный завод Bunge под Воронежем",
    "ind": "Химия и удобрения",
    "type": "M&A",
@@ -188890,7 +188890,7 @@
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
    "law": {
-    "appr": "ГК «Эфко» получила разрешение ФАС на приобретение ООО «Масленица». Доля группы в этой компании вырастет с нынешних 31,4% до 100%.",
+    "appr": "ГК «Эфко» получила разрешение ФАС на приобретение ООО «Масленица». Доля группы в этой компании вырастет с нынешних 31,4% до 100%. По данным ЕГРЮЛ, доля увеличена не напрямую, а через контролирующую структуру ООО «Агроинвест»: изменения отражены в реестре с 27 августа 2025 года.",
     "terms": "Согласовав сделку, ФАС одновременно выдала предписание закупать подсолнечник на бирже. Группа обязана регулярно выставлять на биржу заявки на покупку не менее 10% всего закупаемого подсолнечника. Кроме того, она должна сообщать службе о росте оптово-отпускных цен на 10% и более и объяснять причины такого повышения, разработать и опубликовать на своём сайте торгово-сбытовую политику продаж фасованного подсолнечного масла на внутреннем рынке и следовать ей. Предписание действует пять лет с даты сделки."
    },
    "seller": "Exoil Group",
@@ -188925,13 +188925,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "529698fcab44"
     },
     "date": {
-     "value": "2025",
+     "value": "2025-08-27",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "c35a9eb6bcb8"
+     "card_hash": "e8d24b2b23d8"
     },
     "nature": {
      "control_change": true,
@@ -188941,7 +188941,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c96cdd45af1e"
+     "card_hash": "aa9790b29dd3"
     },
     "target": {
      "company_id": null,
@@ -188967,7 +188967,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c0b43766f",
@@ -189495,7 +189497,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "193a32f4ba6d"
+     "card_hash": "c5b22e3991e9"
     },
     "date": {
      "value": "2024-11-01",
@@ -189511,7 +189513,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0d94f52005b5"
+     "card_hash": "55ff5aa297f9"
     },
     "target": {
      "company_id": null,
@@ -189533,11 +189535,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "auction_open",
-     "top_purchases": "auction_open",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c197ac551",
