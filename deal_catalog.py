@@ -5,8 +5,10 @@ import json
 from pathlib import Path
 from typing import Any
 
+import base_data
+
 ROOT = Path(__file__).resolve().parent
-PROMOTED = ROOT / "static" / "data" / "deals_promoted.json"
+PROMOTED = base_data.PROMOTED_PATH
 CURATED = ROOT / "static" / "data" / "curated_deals.json"
 
 
@@ -19,7 +21,9 @@ def _read(path: Path) -> Any:
 
 def load_deals() -> dict[str, dict[str, Any]]:
     rows: dict[str, dict[str, Any]] = {}
-    promoted = _read(PROMOTED) or {}
+    # База — через общий кэш `base_data`: раньше её разбирал заново каждый
+    # вызов, и `get_deal()` на каждой странице сделки стоил ≈72 МБ.
+    promoted = base_data.promoted()
     for item in promoted.get("deals") or []:
         if isinstance(item, dict) and item.get("id"):
             rows[str(item["id"])] = item

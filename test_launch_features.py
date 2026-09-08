@@ -2841,9 +2841,12 @@ def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
             "companies": {}, "telegram_posts": {}}
 
     def fake_read(path, default):
-        return fake if "deals_promoted" in path else {"cards": []}
+        return {"cards": []}
 
     monkeypatch.setattr(main, "_read_json", fake_read)
+    # База читается через общий кэш `base_data` (заведён 8 сентября 2026
+    # против OOM), а не своим json.load на каждый вызов, — подменяем его.
+    monkeypatch.setattr(main.base_data, "promoted", lambda: fake)
     n = main._ops_numbers()
     assert n["added_week"] == 3, "день с 50 карточками — импорт, его считать нельзя"
 

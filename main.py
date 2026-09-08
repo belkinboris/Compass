@@ -30,6 +30,7 @@ from pydantic import BaseModel
 
 import assistant_retrieval
 import auth
+import base_data
 import data_refresh
 import deal_catalog
 import deal_multiples
@@ -3045,7 +3046,7 @@ def _ops_numbers() -> dict:
     интерфейсе стоит подпись, ИЗ КАКОГО множества она получена (урок CLAUDE.md
     про то, что у числа на экране два свойства — величина и множество).
     """
-    base = _read_json("static/data/deals_promoted.json", {})
+    base = base_data.promoted()   # общий кэш, а не свой разбор 10 МБ на запрос
     deals = base.get("deals") or []
     pending = (_read_json("static/data/pending.json", {}).get("cards") or [])
 

@@ -12,8 +12,10 @@ import json
 from pathlib import Path
 from typing import Any
 
+import base_data
+
 ROOT = Path(__file__).resolve().parent
-PROMOTED_PATH = ROOT / "static" / "data" / "deals_promoted.json"
+PROMOTED_PATH = base_data.PROMOTED_PATH
 CURATED_PATH = ROOT / "static" / "data" / "curated_companies.json"
 
 
@@ -49,7 +51,10 @@ def _deal_counts(promoted: dict[str, Any]) -> dict[str, int]:
 
 
 def load_company_catalog() -> dict[str, dict[str, Any]]:
-    promoted = _load(PROMOTED_PATH)
+    # Через общий кэш: этот справочник и `deal_catalog` читают ОДИН файл, и
+    # до 8 сентября 2026 каждый разбирал его сам — эндпоинт мультипликаторов
+    # платил за базу дважды в одном запросе.
+    promoted = base_data.promoted()
     deal_counts = _deal_counts(promoted)
     rows: dict[str, dict[str, Any]] = {}
     for company_id, item in (promoted.get("companies") or {}).items():

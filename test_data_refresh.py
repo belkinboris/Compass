@@ -323,3 +323,84 @@ def test_status_endpoint_is_closed_by_the_moderation_token(monkeypatch):
     assert body["branch"] and body["repo"] == "belkinboris/Compass"
     assert body["deals_on_disk"] > 1000, "статус читает настоящий файл сайта"
     assert [f["path"] for f in body["files"]][0] == data_refresh.MAIN_FILE
+
+
+# --------------------------------------------------------------------------
+# Кэш разобранной базы в памяти (base_data). Заведён 8 сентября 2026, когда
+# системные инженеры Timeweb показали строку OOM-killer: процесс сайта
+# доедал память сервера (`anon-rss:489624kB`, `global_oom`) и ядро его
+# убивало — сайт лежал, деплой падал. Ели её повторные разборы одного файла:
+# база (10 МБ) разбиралась заново на каждый запрос, ≈72 МБ за раз.
+# --------------------------------------------------------------------------
+
+def test_parsed_base_is_read_from_disk_once_and_shared(tmp_path, monkeypatch):
+    """Второй читатель получает ТОТ ЖЕ объект, а не свою копию базы.
+
+    Это и есть экономия: до правки `deal_catalog` и `company_catalog`
+    разбирали один файл каждый сам, и эндпоинт мультипликаторов платил за
+    базу дважды в одном запросе."""
+    import base_data
+    path = tmp_path / "deals_promoted.json"
+    path.write_text(json.dumps(_base(7), ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(base_data, "PROMOTED_PATH", path)
+    base_data.drop()
+
+    first = base_data.promoted()
+    assert len(first["deals"]) == 7
+    assert base_data.promoted() is first, \
+        "база разбирается заново на каждый вызов — вернулись к тому, из-за чего был OOM"
+
+
+def test_parsed_base_notices_the_file_was_replaced(tmp_path, monkeypatch):
+    """`data_refresh` подменяет файл на диске раз в несколько минут, и кэш
+    обязан это заметить сам. Иначе сайт застрянет на данных, приехавших
+    деплоем, — ровно та беда, ради которой подтягивание и заводили."""
+    import base_data
+    path = tmp_path / "deals_promoted.json"
+    path.write_text(json.dumps(_base(3), ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(base_data, "PROMOTED_PATH", path)
+    base_data.drop()
+    assert len(base_data.promoted()["deals"]) == 3
+
+    # так же, как это делает data_refresh: пишем рядом и подменяем
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(_base(9), ensure_ascii=False), encoding="utf-8")
+    os.replace(tmp, path)
+
+    assert len(base_data.promoted()["deals"]) == 9, \
+        "кэш не заметил подмену файла — сайт показывал бы старую базу до перезапуска"
+
+
+def test_missing_or_broken_base_gives_empty_dict_not_an_exception(tmp_path, monkeypatch):
+    """Битый или пропавший файл не должен ронять сайт: пустая база — плохо,
+    пятисотая на каждой странице — хуже."""
+    import base_data
+    path = tmp_path / "deals_promoted.json"
+    monkeypatch.setattr(base_data, "PROMOTED_PATH", path)
+    base_data.drop()
+    assert base_data.promoted() == {}, "файла нет — ожидали пустую базу"
+
+    path.write_text("{это не JSON", encoding="utf-8")
+    base_data.drop()
+    assert base_data.promoted() == {}, "битый файл — ожидали пустую базу"
+
+
+def test_refresh_drops_the_parsed_base_so_the_old_copy_is_not_kept(tmp_path, monkeypatch):
+    """`drop_in_process_caches` обязан отпускать разобранную базу.
+
+    Свежесть кэш проверяет и сам, по времени правки файла; этот вызов нужен
+    ради ПАМЯТИ — иначе старая копия (≈72 МБ) висела бы до первого запроса
+    после подмены, ровно в ту минуту, когда на сервере и так тесно."""
+    import base_data
+    path = tmp_path / "deals_promoted.json"
+    path.write_text(json.dumps(_base(4), ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(base_data, "PROMOTED_PATH", path)
+    base_data.drop()
+    base_data.promoted()
+    assert base_data._DATA, "база должна была попасть в кэш"
+
+    monkeypatch.setattr(data_refresh.assistant_retrieval, "get_index",
+                        lambda force=False: None)
+    data_refresh.drop_in_process_caches()
+    assert not base_data._DATA, \
+        "старая копия базы осталась в памяти после подмены файла"
