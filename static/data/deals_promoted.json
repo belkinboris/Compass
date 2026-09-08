@@ -191500,7 +191500,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "a24324954941"
+     "card_hash": "ed82a2abf7a1"
     },
     "date": {
      "value": "2026",
@@ -191516,7 +191516,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f18b4198406e"
+     "card_hash": "7b561f80be25"
     },
     "target": {
      "company_id": null,
@@ -191542,7 +191542,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Обсуждается",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c46d3e581",
@@ -191671,7 +191673,7 @@
    "eco": {
     "sum": "4,8 млрд ₽",
     "share": "—",
-    "val": "Партнёр NF Group Станислав Бибик считает цену рыночной. Управляющий партнёр Alto Real Estate Fund Наталия Тишендорф согласна с этим, но оговаривается: актив привлекателен для инвесторов только при условии, что здание в хорошем состоянии и не обременено долгом. Руководитель департамента рынков капитала и инвестиций IBC Real Estate Микаэл Казарян добавляет, что офисы в Хамовниках стоят до 300 000 ₽ за 1 кв. м, то есть за бизнес-центр на территории «Московского шёлка» можно выручить около 5,5 млрд ₽.",
+    "val": "Партнёр NF Group Станислав Бибик считает цену рыночной. Управляющий партнёр Alto Real Estate Fund Наталия Тишендорф согласна с этим, но оговаривается: актив привлекателен для инвесторов только при условии, что здание в хорошем состоянии и не обременено долгом. Руководитель департамента рынков капитала и инвестиций IBC Real Estate Микаэл Казарян добавляет, что офисы в Хамовниках стоят до 300 000 ₽ за 1 кв. м, то есть за бизнес-центр на территории «Московского шёлка» можно выручить около 5,5 млрд ₽. Сделка закрылась в 2024 году — покупателем стал энергохолдинг «Интер РАО» (сообщено в декабре 2024 года), точная цена не раскрыта: 4,8 млрд ₽ — это апрельская запрошенная цена, независимые источники оценивают саму сделку в диапазоне 4,2–5 млрд ₽.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "Участок под этим объектом, согласно стратегии развития территории «Московского шелка», не попадает под застройку, поэтому его решили продать.",
@@ -191715,7 +191717,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5059e43b2bfc"
+     "card_hash": "42009d323aea"
     },
     "date": {
      "value": "2024-04-23",
@@ -191731,7 +191733,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "cd7ec8c4552b"
+     "card_hash": "2a0fc8c2e77f"
     },
     "target": {
      "company_id": null,
@@ -191757,11 +191759,13 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "c7996afb5",
-   "date": "2024",
+   "date": "2026-04-30",
    "title": "Погашение структурных облигаций ПАО «ПРОМОМЕД» путем поставки акций",
    "ind": "Здравоохранение",
    "type": "M&A",
@@ -191814,13 +191818,13 @@
      "meaning": "lower_bound",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e7d299697ff9"
+     "card_hash": "19ce9589b34d"
     },
     "date": {
-     "value": "2024",
+     "value": "2026-04-30",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "card_hash": "341ac529f12e"
     },
     "nature": {
      "control_change": true,
@@ -191830,7 +191834,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ed2f9a7b9c34"
+     "card_hash": "74af0d2da6bf"
     },
     "target": {
      "company_id": null,
@@ -191856,7 +191860,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "status": "Закрыта",
+   "followup_researched": "2026-09-08"
   },
   {
    "id": "cbfe737bd",
