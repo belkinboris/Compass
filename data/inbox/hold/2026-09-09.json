@@ -1,0 +1,840 @@
+{
+ "made": "2026-09-09",
+ "drafts": [
+  {
+   "draft_id": "d29707416",
+   "title": "Совет директоров ПИК установил цену выкупа акций при делистинге",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8938431"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74800802",
+   "title": "Акции завода «Вентпром» изъяты в доход государства по решению суда",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Akcii-zavoda-Ventprom-izyaty-v-dohod-gosudarstva-po-resheniyu-suda-87471"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13068930",
+   "title": "Национализированный «Салаватнефтемаш» оценен в 2 млрд рублей",
+   "date": "2026-08-28",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Nacionalizirovannyj-Salavatneftemash-ocenen-v-2-mlrd-rublej-87449"
+    ]
+   ],
+   "sum": "2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82299087",
+   "title": "«Росатом» 28 августа планирует выкупить 51% ГК «Дело» за 77 млрд рублей",
+   "date": "2026-08-26",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Rosatom-28-avgusta-planiruet-vykupit-51-GK-Delo-za-77-mlrd-rublej-87439"
+    ]
+   ],
+   "sum": "77 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-26",
+     "title": "Переговоры",
+     "note": "Предусмотренная корпоративным соглашением участников ГК «Дело» процедура выкупа «Росатомом» 51% доли Сергея Шишкарева юридически завершается 28 августа, сообщил представитель «Росатома». «Необходимые документы подготовлены и переданы нотариусу для совершения…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Rosatom-28-avgusta-planiruet-vykupit-51-GK-Delo-za-77-mlrd-rublej-87439"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52077162",
+   "title": "«Сбер» станет основным претендентом на приобретение национализированной лизинговой компании «Вектор Рейл»",
+   "date": "2026-08-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Sber-stanet-osnovnym-pretendentom-na-priobretenie-nacionalizirovannoj-lizingovoj-kompanii-Vektor-Rejl-87407"
+    ]
+   ],
+   "sum": "20,2 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-08-20",
+     "title": "Переговоры",
+     "note": "По информации одного из собеседников, банк намерен приобрести «Вектор Рейл» на публичных торгах, организованных банком ПСБ. Первоначально, уточнил он, «Сбер» планировал закрыть сделку не позднее 31 августа. Ближайшие торги, объявленные 10 июля, состоятся 4…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Sber-stanet-osnovnym-pretendentom-na-priobretenie-nacionalizirovannoj-lizingovoj-kompanii-Vektor-Rejl-87407"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50283257",
+   "title": "«Самолет» продал участок в Мурманске «Аквилону»",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260903/uchastok-2114967646.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260903/uchastok-2114967646.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "участок в Мурманске «Аквилону»",
+   "seller": "«Самолет»",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "участок в Мурманске «Аквилону»",
+    "seller": "«Самолет»"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку gaee6179c (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d30119202",
+   "title": "Акции Евротранса стоят 29 рублей, а через год их обещают выкупить по 350",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1348918.php"
+    ]
+   ],
+   "sum": "86,6 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72937223",
+   "title": "В Прикамье за десятки миллионов рублей продают завод по производству бензина",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053125146"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77270508",
+   "title": "Арестованный тюменский бизнесмен Гоцык передал сыну крупнейшие активы",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053125066"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22500210",
+   "title": "Минфин: пул федеральных компаний для приватизации почти исчерпан В России осталось всего 3–4 крупные федеральные компании, в которых государство потенциально может снизить свою долю и провести IPO. Об",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7348"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-03",
+     "title": "Переговоры",
+     "note": "Минфин: пул федеральных компаний для приватизации почти исчерпан В России осталось всего 3–4 крупные федеральные компании, в которых государство потенциально может снизить свою долю и провести IPO. Об этом заявил замминистра финансов Алексей Моисеев на…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7348"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28317473",
+   "title": "Российская SaaS-компания Roomsharing привлекла инвестиции от основателя TravelLine Александра Галочкина. Детали сделки не разглашаются.   Roomsharing была основана Александром Масловым в 2022 году. Ст",
+   "date": "2026-09-03",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7703"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российская SaaS-компания Roomsharing",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российская SaaS-компания Roomsharing",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d53543518",
+   "title": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе преду",
+   "date": "2026-09-07",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7713"
+    ]
+   ],
+   "sum": "100 млн ₽",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-07",
+     "title": "Переговоры",
+     "note": "#новыйфонд Венчурная компания “Якутия” и компания brainbox.VC намерены создать региональный венчурный фонд в формате договора инвестиционного товарищества объемом в 100 млн рублей. В перспективе предусмотрена возможность расширения капитала. Фонд займется…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7713"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58341907",
+   "title": "Деприватизация: Госдума включила «таймер» 🖋 26 мая Госдума приняла в третьем чтении закон о 10-летнем сроке исковой давности по искам об истребовании незаконно приватизированного имущества . Поправки ",
+   "date": "2026-05-29",
+   "src": [
+    [
+     "tg:alumnimna",
+     "https://t.me/alumnimna/273"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86859425",
+   "title": "Больше проектов, но меньше стоимость: итоги корпоративного исследования. Комментарий Екатерины Дедовой для Право.ru 💼 2025 год оказался непростым для рынка слияний и поглощений: количество сделок было",
+   "date": "2026-06-29",
+   "src": [
+    [
+     "tg:alumnimna",
+     "https://t.me/alumnimna/277"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18691002",
+   "title": "ALUMNI Partners сопровождала сделку по продаже производителя упаковки «Полекс Урал»   🤝 ALUMNI Partners консультировала продавца в связи с продажей группы компаний «Полекс Урал» , работающей в сфере п",
+   "date": "2026-08-17",
+   "src": [
+    [
+     "tg:alumnimna",
+     "https://t.me/alumnimna/287"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Производство тары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66238488",
+   "title": "Ушедший из России автопроизводитель решил продать завод под производство систем ПВО",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/08/ushedshiy-iz-rossii-avtoproizvoditel-reshil-prodat-zavod-pod-proizvodstvo-pvo/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Автопром",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10700002",
+   "title": "Тюменский торговый центр «Матрикс» снова выставили на продажу",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053125289"
+    ]
+   ],
+   "sum": "600 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56630781",
+   "title": "Власти Москвы выставили на торги проект КРТ в Зябликове",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260908/zemlya-2116248940.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35811864",
+   "title": "В Костроме выставили на торги фабрику XVIII века",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/kostroma/2026/9/8/v-kostrome-vystavili-na-torgi-fabriku-xviii-vekaza-77-mln-rublej"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57552772",
+   "title": "В Салехарде за рубль попытаются продать очередной памятник культуры",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053125411"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41598177",
+   "title": "Solidcore Resources plc выкупит акции на $1,2 миллиарда",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260908/aktsii-873120065.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Solidcore Resources plc",
+   "asset": "на $1,2 миллиарда",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Solidcore Resources plc",
+    "asset": "на $1,2 миллиарда",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d10064459",
+   "title": "ЦБ допустил несколько SPO на рынке из-за новых правил расчета free-float",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/09/09/2026/6aa0144a9a79476df94606e4"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93025190",
+   "title": "Миронов предложил разрешить тратить маткапитал на покупку машины",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28093467"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d63413956",
+   "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/09/otkaz-smolnogo-v-vikupe-uchastka"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g749a7844 (общие редкие слова: петерб, центре) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d71844532",
+   "title": "Рубио назвал сроки для нового раунда переговоров по Украине",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053125535"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91181941",
+   "title": "«Стол и стул купил, договор нарисовал»: Алексей Текслер ответил на вопросы челябинских бизнесменов",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/business/2026/09/09/76609083/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "Губернатор встретился с победителями Народной премии 74.RU и партнерами 74 САП ФЕСТ — репортаж",
+     "source": [
+      "web:74.ru",
+      "https://74.ru/text/business/2026/09/09/76609083/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "договор нарисовал»: Алексей Текслер ответил на вопросы челябинских бизнесменов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "договор нарисовал»: Алексей Текслер ответил на вопросы челябинских бизнесменов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d19994925",
+   "title": "«Промресурс» Сергея Дьяконова приобрел два угольных актива в Туве Об объекте сделки 1) 100% ООО «Улугхемуголь» у «Северстали». «Улугхемуголь» владеет лицензией на разработку участка в Улуг-Хемском уго",
+   "date": "2026-09-08",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7361"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-08",
+     "title": "Сделка завершена",
+     "note": "«Промресурс» Сергея Дьяконова приобрел два угольных актива в Туве Об объекте сделки 1) 100% ООО «Улугхемуголь» у «Северстали». «Улугхемуголь» владеет лицензией на разработку участка в Улуг-Хемском угольном бассейне. Актив связан с добычей коксующегося угля…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7361"
+     ]
+    }
+   ],
+   "buyer_name": "«Промресурс» Сергея Дьяконова",
+   "asset": "два угольных актива в Туве Об объекте сделки 1) 100% ООО «Улугхемуголь»",
+   "seller": "«Северстали»",
+   "parsed_parties": {
+    "buyer": "«Промресурс» Сергея Дьяконова",
+    "asset": "два угольных актива в Туве Об объекте сделки 1) 100% ООО «Улугхемуголь»",
+    "seller": "«Северстали»"
+   },
+   "ind": "Уголь",
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку ge0cc0dfe (названия из заголовка стоят в предмете и сторонах: промресурс, северстал, улугхемуголь) — проверьте, не дубль ли"
+   ]
+  }
+ ]
+}
