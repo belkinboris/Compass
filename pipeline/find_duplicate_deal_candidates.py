@@ -85,6 +85,21 @@ def year_of(value):
     return m.group(1) if m else None
 
 
+def _seller_key(deal):
+    """Продавец как ключ: профиль, иначе имя текстом. Заглушка — не ключ."""
+    text = str(deal.get('seller') or '').strip().lower()
+    if deal.get('seller_id'):
+        return deal['seller_id']
+    return text if text and not PLACEHOLDER.match(text) else None
+
+
+def _is_auction(deal):
+    """Сделка идёт через публичные торги — по типу карточки или по слою фактов."""
+    if deal.get('type') == 'Продажа с торгов':
+        return True
+    return bool(((deal.get('facts') or {}).get('nature') or {}).get('auction'))
+
+
 def candidates(deals):
     by_asset, by_buyer = defaultdict(list), defaultdict(list)
     for d in deals:
@@ -131,6 +146,37 @@ def candidates(deals):
             found.setdefault(frozenset({a['id'], b['id']}),
                              'названия из заголовка стоят в предмете и сторонах: %s'
                              % ', '.join(sorted(cross)))
+
+    # ЭТАПЫ ОДНИХ ТОРГОВ. Все правила выше смотрят в окно 30 дней или требуют
+    # СВЯЗАННОГО профиля — и потому структурно не видят пару, найденную
+    # 9 сентября 2026 уже ПОСЛЕ слияния двух других карточек той же сделки:
+    # «Росимущество повторно выставило акции «Амбер Талвис» на торги»
+    # (g96ef3005) и «„Росспиртпром" купил… «Амбер Талвис» за 1,94 млрд рублей»
+    # (g63c7d1bb). У первой не было ни `target`, ни `buyer` (только текстом),
+    # суммы разные (начальная цена лота против цены сделки), а между
+    # объявлением и итогом 56 дней — втрое больше окна.
+    #
+    # Причина глубже сроков: ПУБЛИЧНЫЕ ТОРГИ ИДУТ МЕСЯЦАМИ. Объявление,
+    # несостоявшийся аукцион, повторные торги, итог — это одна сделка, растянутая
+    # на полгода, и окно «одна новость, рассказанная дважды» ей не подходит по
+    # устройству. Поэтому для торгов окно — год, зато требования жёстче: обе
+    # карточки должны быть торгами, у обеих ОДИН продавец (организатор торгов
+    # всегда назван — см. `test_auction_deal_names_its_seller`), и хотя бы одно
+    # общее название в кавычках. Замер по всей базе до слияния: правило находит
+    # РОВНО одну пару — ту самую, и ни одной ложной даже при окне 550 дней.
+    auctions = [(d, _seller_key(d), names_a | names_b)
+                for d, names_a, names_b in rows if _is_auction(d)]
+    for (a, ka, na), (b, kb, nb) in combinations(auctions, 2):
+        if not ka or ka != kb:
+            continue
+        gap = matcher.days_between(a.get('date'), b.get('date'))
+        if gap is None or gap > 365:
+            continue
+        common = na & nb
+        if common:
+            found.setdefault(frozenset({a['id'], b['id']}),
+                             'этапы одних торгов: один продавец, общее название %s'
+                             % ', '.join(sorted(common)))
     return found
 
 
