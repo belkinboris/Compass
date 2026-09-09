@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d33174612",
+   "draft_id": "d51080318",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,17 +646,45 @@
    ]
   },
   {
-   "draft_id": "d56468849",
-   "title": "Reuters: DeepSeek готовится к выходу на IPO",
+   "draft_id": "d84546426",
+   "title": "GE Aerospace за $11,75 млрд купит поставщика высокоточного литья",
    "date": "2026-09-09",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8939848"
+     "https://www.kommersant.ru/doc/8939863"
+    ]
+   ],
+   "sum": "$11,75 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "GE Aerospace",
+   "asset": "поставщик высокоточного литья",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "GE Aerospace",
+    "asset": "поставщик высокоточного литья",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d27236315",
+   "title": "Курс юаня перешел к снижению в направлении 12,7 рубля",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260909/kurs-873145909.html"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -671,129 +699,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27881810",
-   "title": "Дефицит консолидированного бюджета РФ в январе-июле снизился до 5,3 трлн рублей",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1114038"
-    ]
-   ],
-   "sum": "307,6 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22651925",
-   "title": "В Литве предложили ограничить покупку недвижимости для граждан Белоруссии",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260909/litva-873144561.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26704745",
-   "title": "Глава департамента МЭР Кондратьев: иностранцы покупают зимние туры в Россию",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260909/kondratev-2116543589.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "зимние туры в Россию",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "зимние туры в Россию",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d92167791",
-   "title": "Месси договорился о покупке футбольного клуба",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/09/messi-dogovorilsya-o-pokupke-futbolnogo-kluba/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-09",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/09/messi-dogovorilsya-o-pokupke-futbolnogo-kluba/"
-     ]
-    }
-   ],
-   "buyer_name": "Месси",
-   "asset": "футбольный клуб",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Месси",
-    "asset": "футбольный клуб",
-    "seller": null
-   },
-   "ind": "Развлечения",
-   "needs_review": true,
-   "hold_reasons": [
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
