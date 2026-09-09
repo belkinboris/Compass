@@ -3,7 +3,7 @@
   {
    "id": "g3ecb7b86",
    "date": "2026-09-09",
-   "title": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы америка",
+   "title": "«Дом.РФ» приобрел лифтовый бизнес S8 Capital",
    "ind": "Холдинги",
    "type": "M&A",
    "status": "Закрыта",
@@ -11,28 +11,40 @@
     [
      "Телеграм-канал: Сделки M&A",
      "https://t.me/dealsma/7364"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/dom-rf-priobrel-liftovyj-biznes-s8-capital-86794.html"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1114026"
+    ],
+    [
+     "tehnowar.ru",
+     "https://tehnowar.ru/581989-domrf_stal_vladelycem_proizvoditelya_liftov_meteor_lift.html"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "Параметры новой сделки стороны пока официально не раскрыли.",
     "share": "—",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "Выручка «Метеор лифт Москва» в 2025 году снизилась на 1,8%, до 3,8 млрд руб., при этом чистый убыток вырос на 32%, до 238,3 млн руб. «Лифт Коннект» за тот же период увеличил выручку на 19%, до 1,1 млрд руб., а чистую прибыль — в 2,7 раза, до 126,9 млн руб.",
     "fin": "—",
-    "rationale": "—",
+    "rationale": "Данное событие логично вписывается в стратегию группы «ДОМ.РФ» с учетом опыта развития лифтостроительных активов.",
     "context": "—",
     "finadv": "—"
    },
    "law": {
-    "struct": "—",
-    "appr": "—",
+    "struct": "Сделка проведена через ООО «УК Метеор»: с 10 июля управляющей компании принадлежит весь капитал производителя, а к 9 сентября сама «УК Метеор» полностью перешла под контроль «Дом.РФ».",
+    "appr": "Все необходимые процедуры проведены в строгом соответствии с требованиями ФАС России.",
     "adv": [],
     "terms": "—"
    },
-   "seller": "S8 Capital лифтовый бизнес",
-   "buyer_name": "« ДОМ.РФ »",
-   "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+   "seller": "АО «Айс Девелопмент»",
+   "buyer_name": "«Дом.РФ»",
+   "asset": "активы Meteor Lift и «Лифт Коннект»",
    "events": [
     {
      "kind": "closed",
@@ -49,30 +61,32 @@
    "party_evidence": {
     "buyer": [
      {
-      "value": "« ДОМ.РФ »",
+      "value": "«Дом.РФ»",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/dealsma/7364"
      }
     ],
     "target": [
      {
-      "value": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+      "value": "активы Meteor Lift и «Лифт Коннект»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/dealsma/7364"
      }
     ],
     "seller": [
      {
-      "value": "S8 Capital лифтовый бизнес",
+      "value": "АО «Айс Девелопмент»",
       "field": "seller",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/dealsma/7364"
      }
     ]
    },
-   "pending_since": "2026-09-09T13:16:22+00:00"
+   "pending_since": "2026-09-09T13:16:22+00:00",
+   "reviewed": "2026-09-09",
+   "deep_researched": "2026-09-09"
   }
  ]
 }
