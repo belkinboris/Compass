@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d83776270",
+   "draft_id": "d30311862",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,69 +646,13 @@
    ]
   },
   {
-   "draft_id": "d43053147",
-   "title": "В «Литфонде» исключили появление украденных картин Ренуара в открытой продаже",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28094127"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68285827",
-   "title": "Первую биографию Ивана Грозного выставили на торги",
+   "draft_id": "d18390170",
+   "title": "Житель Липецка лишился 763 тыс. рублей из-за фиктивной продажи машины",
    "date": "2026-09-09",
    "src": [
     [
      "web:iz.ru",
-     "https://iz.ru/2163759/video/pervuiu-biografiiu-ivana-groznogo-vystavili-na-torgi"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53962442",
-   "title": "В Минфине рассказали о новых правилах продажи ювелирных изделий",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260909/minfin-873137736.html"
+     "https://iz.ru/2163790/2026-09-09/zhitel-lipetcka-lishilsia-763-tys-rublei-iz-za-fiktivnoi-prodazhi-mashiny"
     ]
    ],
    "sum": null,
@@ -730,13 +674,13 @@
    ]
   },
   {
-   "draft_id": "d42989056",
-   "title": "Россия обошла почти все страны Европы по продажам автомобилей",
+   "draft_id": "d54306479",
+   "title": "Жительница Кирова заплатила «террористам» выкуп за «морского офицера»",
    "date": "2026-09-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/09/rossiya-oboshla-pochti-vse-strany-evropy-po-prodazham-avtombiley/"
+     "web:ria.ru",
+     "https://ria.ru/20260909/kirov-2116519317.html"
     ]
    ],
    "sum": null,
