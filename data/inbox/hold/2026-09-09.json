@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d27558259",
+   "draft_id": "d49657389",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,113 +646,7 @@
    ]
   },
   {
-   "draft_id": "d28449688",
-   "title": "Бренд Umo открыл продажи электромобиля Umo 5 для частных покупателей",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/transport/3129525-brend-umo-otkryl-prodazhi-elektromobilya-umo-5-dlya-chastnyh-pokupatelei?from=rss"
-    ]
-   ],
-   "sum": "2,59 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40682952",
-   "title": "Индия рассматривает возможность инвестиций в РФ в сфере критического сырья",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28095401"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-09",
-     "title": "Переговоры",
-     "note": "Индийский замминистра горнодобывающей промышленности Кешав Чандра указал, что российская сторона представила некоторые проекты в этой сфере, которые изучаются",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28095401"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31575363",
-   "title": "Избиратели в Саксонии не купились на антироссийскую карту, заявила Захарова",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260909/zaharova-2116579789.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-09",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260909/zaharova-2116579789.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87502237",
+   "draft_id": "d29887967",
    "title": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы америка",
    "date": "2026-09-09",
    "src": [
@@ -788,6 +682,90 @@
    "needs_review": true,
    "hold_reasons": [
     "похоже на уже описанную сделку g7ea48d66 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d89342550",
+   "title": "Средневзвешенная доходность ОФЗ на аукционе составила 15,45%",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/09/1227559-dohodnost-ofz"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52616505",
+   "title": "В Евролиге оценят предложение НБА о поглощении, пишут СМИ",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260909/evroliga-2116602021.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68278542",
+   "title": "Песков: многие страны готовы принять новый раунд переговоров по Украине",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260909/peskov-2116601138.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
