@@ -1,3 +1,78 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "g3ecb7b86",
+   "date": "2026-09-09",
+   "title": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы америка",
+   "ind": "Холдинги",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7364"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "S8 Capital лифтовый бизнес",
+   "buyer_name": "« ДОМ.РФ »",
+   "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы американской Otis и финской KONE. Meteor Lift создан на базе…",
+     "source": [
+      "Телеграм-канал: Сделки M&A",
+      "https://t.me/dealsma/7364"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "« ДОМ.РФ »",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ],
+    "target": [
+     {
+      "value": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ],
+    "seller": [
+     {
+      "value": "S8 Capital лифтовый бизнес",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ]
+   },
+   "pending_since": "2026-09-09T13:16:22+00:00"
+  }
+ ]
 }
