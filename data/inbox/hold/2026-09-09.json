@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d51080318",
+   "draft_id": "d27558259",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,44 +646,16 @@
    ]
   },
   {
-   "draft_id": "d84546426",
-   "title": "GE Aerospace за $11,75 млрд купит поставщика высокоточного литья",
+   "draft_id": "d28449688",
+   "title": "Бренд Umo открыл продажи электромобиля Umo 5 для частных покупателей",
    "date": "2026-09-09",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8939863"
+     "web:vc.ru",
+     "https://vc.ru/transport/3129525-brend-umo-otkryl-prodazhi-elektromobilya-umo-5-dlya-chastnyh-pokupatelei?from=rss"
     ]
    ],
-   "sum": "$11,75 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "GE Aerospace",
-   "asset": "поставщик высокоточного литья",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "GE Aerospace",
-    "asset": "поставщик высокоточного литья",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27236315",
-   "title": "Курс юаня перешел к снижению в направлении 12,7 рубля",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260909/kurs-873145909.html"
-    ]
-   ],
-   "sum": null,
+   "sum": "2,59 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -698,8 +670,124 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40682952",
+   "title": "Индия рассматривает возможность инвестиций в РФ в сфере критического сырья",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28095401"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-09",
+     "title": "Переговоры",
+     "note": "Индийский замминистра горнодобывающей промышленности Кешав Чандра указал, что российская сторона представила некоторые проекты в этой сфере, которые изучаются",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28095401"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31575363",
+   "title": "Избиратели в Саксонии не купились на антироссийскую карту, заявила Захарова",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260909/zaharova-2116579789.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260909/zaharova-2116579789.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87502237",
+   "title": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы америка",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7364"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы американской Otis и финской KONE. Meteor Lift создан на базе…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7364"
+     ]
+    }
+   ],
+   "buyer_name": "« ДОМ.РФ »",
+   "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+   "seller": "S8 Capital лифтовый бизнес",
+   "parsed_parties": {
+    "buyer": "« ДОМ.РФ »",
+    "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
+    "seller": "S8 Capital лифтовый бизнес"
+   },
+   "ind": "Холдинги",
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на уже описанную сделку g7ea48d66 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
