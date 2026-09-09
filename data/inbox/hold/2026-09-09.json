@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d68086544",
+   "draft_id": "d83776270",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,17 +646,17 @@
    ]
   },
   {
-   "draft_id": "d40699018",
-   "title": "Ювелиров будут лишать права продажи за нарушения требования к информации о товаре",
+   "draft_id": "d43053147",
+   "title": "В «Литфонде» исключили появление украденных картин Ренуара в открытой продаже",
    "date": "2026-09-09",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28094017"
+     "https://tass.ru/kultura/28094127"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -670,18 +670,45 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d91286200",
-   "title": "Девушка забаррикадировалась в доме россиянина в Таиланде и потребовала выкуп за выселение",
+   "draft_id": "d68285827",
+   "title": "Первую биографию Ивана Грозного выставили на торги",
    "date": "2026-09-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/09/devushka-zabarrikadirovalas-v-dome-rossiyanina-v-tailande-i-potrebovala-vykup-za-vyselenie/"
+     "web:iz.ru",
+     "https://iz.ru/2163759/video/pervuiu-biografiiu-ivana-groznogo-vystavili-na-torgi"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53962442",
+   "title": "В Минфине рассказали о новых правилах продажи ювелирных изделий",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260909/minfin-873137736.html"
     ]
    ],
    "sum": null,
@@ -703,17 +730,17 @@
    ]
   },
   {
-   "draft_id": "d42552013",
-   "title": "В Тверском районе выставили на торги помещение для бизнеса",
+   "draft_id": "d42989056",
+   "title": "Россия обошла почти все страны Европы по продажам автомобилей",
    "date": "2026-09-09",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/9/v-8"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/09/rossiya-oboshla-pochti-vse-strany-evropy-po-prodazham-avtombiley/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
