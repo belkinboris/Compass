@@ -617,35 +617,7 @@
    ]
   },
   {
-   "draft_id": "d41598177",
-   "title": "Solidcore Resources plc выкупит акции на $1,2 миллиарда",
-   "date": "2026-09-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260908/aktsii-873120065.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Solidcore Resources plc",
-   "asset": "на $1,2 миллиарда",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Solidcore Resources plc",
-    "asset": "на $1,2 миллиарда",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d41042544",
+   "draft_id": "d68086544",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -674,17 +646,74 @@
    ]
   },
   {
-   "draft_id": "d45263973",
-   "title": "FT: в США считают инвестиции в $185 млрд на «Золотой купол» военной необходимостью",
+   "draft_id": "d40699018",
+   "title": "Ювелиров будут лишать права продажи за нарушения требования к информации о товаре",
    "date": "2026-09-09",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28093791"
+     "https://tass.ru/ekonomika/28094017"
     ]
    ],
-   "sum": "$185 млрд",
-   "type": "Инвестиция",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d91286200",
+   "title": "Девушка забаррикадировалась в доме россиянина в Таиланде и потребовала выкуп за выселение",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/09/devushka-zabarrikadirovalas-v-dome-rossiyanina-v-tailande-i-potrebovala-vykup-za-vyselenie/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42552013",
+   "title": "В Тверском районе выставили на торги помещение для бизнеса",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/9/v-8"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
