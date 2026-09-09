@@ -7020,7 +7020,7 @@
      "https://sibmix.com/?doc=20707"
     ],
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/industries/news/69cf8b819a794762a06fddad"
     ]
    ],
@@ -66002,7 +66002,7 @@
    },
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Malina VC",
      "https://malina.vc/"
     ],
     [
@@ -98139,283 +98139,6 @@
    }
   },
   {
-   "id": "gf63744d6",
-   "date": "2024-12-01",
-   "title": "Газпромбанк через АО «ААА Управление Капиталом» купил 22% ПАО «Южуралзолото»",
-   "buyer": "g9492707f",
-   "target": "g2c0e743d",
-   "ind": "ГМК и добыча",
-   "type": "M&A",
-   "kind": "acquisition",
-   "status": "Закрыта",
-   "sum": "33,3 млрд ₽",
-   "eco": {
-    "sum": "33,3 млрд ₽",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "context": "Пакет Газпромбанка не вошёл в периметр национализации ЮГК 2025 года: иск Генпрокуратуры в июле 2025 года касался только личных акций основателя Константина Струкова и 100% управляющей компании ЮГК, доля Газпромбанка среди арестованного не упоминается. После национализации акции Струкова (67,85%) проданы на торгах в июне 2026 года структуре Руслана Байсарова «БТС-Мост Холдинг», компания переименована в «БТС-Золото». В 2026 году «БТС-Мост Холдинг» направил в Банк России оферту миноритариям на 32,8% бумаг — это соответствует доле Газпромбанка (22%) и бумагам в свободном обращении (около 10,5%): пакет банка сохранился как миноритарный.",
-    "finadv": "Публично не сообщалось"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Юридический консультант продавца (президента/основного акционера ЮГК)",
-      "VERBA LEGAL",
-      "Продажа 22% ПАО «Южуралзолото» АО «ААА Управление Капиталом» (Газпромбанк). Источник: verba.legal"
-     ]
-    ],
-    "terms": "—"
-   },
-   "src": [
-    [
-     "РБК",
-     "https://www.rbc.ru/business/23/12/2024/676968db9a794737c3154a56"
-    ],
-    [
-     "Ведомости",
-     "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom"
-    ],
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/8859999"
-    ]
-   ],
-   "extra": "АО «ААА Управление Капиталом» из группы Газпромбанка, владеющее ПАО «ОМЗ», купило 22% акций ПАО «Южуралзолото Группа Компаний» у основного акционера Константина Струкова. Полученные средства направлены на погашение долгов связанных сторон.",
-   "auto": true,
-   "promoted_from_bulk": true,
-   "seller_src": "adv",
-   "added": "2026-07-23",
-   "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "followup_researched": "2026-08-28",
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": 22.0,
-     "basis": "verified",
-     "card_hash": "974992dc75b4",
-     "object": "акции ПАО «Южуралзолото группа компаний»",
-     "event": "closing",
-     "event_variants": [
-      "closing"
-     ],
-     "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-     "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": 22.0,
-       "object": "акции ПАО «Южуралзолото группа компаний»",
-       "event": "closing",
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": 22.0,
-       "object": "ПАО «Южуралзолото группа компаний» (ЮГК)",
-       "event": "closing",
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "estimate",
-     "scope": "package",
-     "basis": "read",
-     "card_hash": "cc5015de072c",
-     "meaning_variants": [
-      "estimate"
-     ],
-     "attribution": "analyst",
-     "attribution_variants": [
-      "analyst"
-     ],
-     "event": "closing",
-     "event_variants": [
-      "closing"
-     ],
-     "terms": "unknown",
-     "terms_variants": [
-      "unknown"
-     ],
-     "scope_basis": "read",
-     "quote": "Если сделка была совершена по рыночным ценам последних месяцев, то ее сумма могла составить около 30 млрд руб.",
-     "source": "https://amp.rbc.ru/rbcnews/business/23/12/2024/676968db9a794737c3154a56",
-     "verified_by": "model×1, цитата не сверена с текстом",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value_rub": 30000000000,
-       "meaning": "estimate",
-       "attribution": "analyst",
-       "event": "closing",
-       "scope": "package",
-       "terms": "unknown",
-       "quote": "Если сделка была совершена по рыночным ценам последних месяцев, то ее сумма могла составить около 30 млрд руб.",
-       "source": "https://amp.rbc.ru/rbcnews/business/23/12/2024/676968db9a794737c3154a56",
-       "quote_checked": null,
-       "reader": "A"
-      }
-     ]
-    },
-    "date": {
-     "value": "2024-12",
-     "meaning": "closing",
-     "basis": "verified",
-     "card_hash": "fd5a2e5bc1f3",
-     "meaning_variants": [
-      "closing"
-     ],
-     "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-     "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": "2024-12",
-       "meaning": "closing",
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": "2024-12",
-       "meaning": "closing",
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
-    },
-    "nature": {
-     "control_change": false,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "a690cf74af13",
-     "intragroup": false,
-     "control_change_basis": "verified",
-     "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-     "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "control_change": false,
-       "intragroup": false,
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК. У Струкова осталось 67,85% компании.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "control_change": false,
-       "intragroup": false,
-       "quote": "В декабре 2024 г. управляющая компания Газпромбанка «ААА управление капиталом», действующая в качестве доверительного управляющего ЗПИФ «Фиалка», приобрела у Струкова 22% акций ЮГК.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
-    },
-    "target": {
-     "company_id": "g2c0e743d",
-     "inn": "7424024375",
-     "confirmed": true,
-     "bank": false,
-     "lot": false,
-     "basis": "registry",
-     "perimeter": "refuted",
-     "card_hash": "32726d508318",
-     "perimeter_entity": "ПАО «Южуралзолото группа компаний»",
-     "perimeter_report": {
-      "inn": "7424024375",
-      "year": 2023,
-      "revenue_rub": 33897215000.0,
-      "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЮЖУРАЛЗОЛОТО ГРУППА КОМПАНИЙ\""
-     },
-     "perimeter_other_entities": [
-      "ООО «УК ЮГК»"
-     ],
-     "quote": "Выручка «Южуралзолота» в 2024 г. на фоне роста цен на золото увеличилась на 12% по сравнению с показателем предыдущего года и составила 75,9 млрд руб.",
-     "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО «УК ЮГК»"
-       ],
-       "entity": "ПАО «Южуралзолото группа компаний»",
-       "report": {
-        "inn": "7424024375",
-        "year": 2023,
-        "revenue_rub": 33897215000.0,
-        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЮЖУРАЛЗОЛОТО ГРУППА КОМПАНИЙ\""
-       },
-       "quote": "Выручка «Южуралзолота» в 2024 г. на фоне роста цен на золото увеличилась на 12% по сравнению с показателем предыдущего года и составила 75,9 млрд руб.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО «Управляющая компания ЮГК»",
-        "операционные предприятия Уральского и Сибирского хабов группы"
-       ],
-       "entity": "ПАО «Южуралзолото группа компаний»",
-       "report": {
-        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЮЖУРАЛЗОЛОТО ГРУППА КОМПАНИЙ\"",
-        "inn": "7424024375",
-        "year": 2023,
-        "revenue_rub": 33897215000.0,
-        "operating_profit_rub": 6499417000.0
-       },
-       "quote": "Выручка «Южуралзолота» в 2024 г. на фоне роста цен на золото увеличилась на 12% по сравнению с показателем предыдущего года и составила 75,9 млрд руб.",
-       "source": "https://www.vedomosti.ru/society/articles/2025/07/04/1122039-kak-aktivi-yuzhuralzolota-okazalis-pod-arestom",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "not_control_change"
-    }
-   }
-  },
-  {
    "id": "g84a06224",
    "date": "2024-12-01",
    "title": "T2 приобрел три AdTech-компании: Yabbi, Redllama и Plazkart",
@@ -100273,133 +99996,6 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
-    }
-   }
-  },
-  {
-   "id": "geaa4fc71",
-   "date": "2024-11-01",
-   "title": "Ароса-логистика купила 100% Selgros (Зельгрос) у Transgourmet",
-   "buyer": "ga16d4baa",
-   "target": "gce55f3f5",
-   "ind": "Ритейл",
-   "type": "M&A",
-   "kind": "acquisition",
-   "status": "Закрыта",
-   "sum": "Не раскрыта",
-   "eco": {
-    "sum": "Не раскрыта",
-    "share": "«Ароса-логистика» приобрела у австрийской MCCR Beteiligungs GmbH 100-процентную долю в группе компаний «Зельгрос Россия», которой принадлежат гипермаркеты Selgros Cash&Carry. В сделку вошла также дистрибуторская компания российской сети — Global Foods.",
-    "val": "Рыночную стоимость активов компании аналитики оценивают более чем в 40 млрд ₽. Но иностранные компании при продаже своего бизнеса в РФ сейчас вынуждены соглашаться на дисконт в 35–40%, отмечают в Infoline.",
-    "target_fin": "Сеть Selgros основана в 1990 году в Германии как мелкооптовая торговля формата cash&carry. В России она работает с 2006 года и насчитывает 11 магазинов в Москве и ряде регионов. По версии Infoline, ритейлер занимает 77-е место среди FMCG-сетей РФ. Его выручка в первой половине 2024 года, по подсчётам аналитиков, составила 4,8 млрд ₽ — на 12% меньше, чем годом ранее.",
-    "fin": "—",
-    "rationale": "Бенефициар «Ароса-логистика» Василий Цветков отметил, что сделка позволит компании расширить бизнес в сегменте HoReСa и стать национальным игроком на российском рынке.",
-    "context": "Судьба двух купленных активов сложилась по-разному. Сеть гипермаркетов Selgros закрылась полностью: последний торговый объект перестал работать в мае 2025 года, а операционная компания «Зельгрос» оказалась на грани банкротства — заявление подала консалтинговая компания Molga, а за 2025-2026 годы против «Зельгроса» подано более 110 исков. Дистрибуторская «дочка» Global Foods, наоборот, растёт: её выручка в 2025 году поднялась с 14,4 млрд до 18,4 млрд ₽.",
-    "finadv": "Публично не сообщалось"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "Смена собственника одобрена антимонопольной комиссией и правительственной комиссией по контролю за иностранными инвестициями в России.",
-    "adv": [
-     [
-      "Юридический консультант",
-      "Nextons",
-      "«Nextons сопровождала сделку по продаже австрийским акционером MCCR Beteiligungs GmbH 100% доли в группе компаний «Зельгрос Россия» компании «Ароса-Логистика»» — команду возглавляли управляющий партнер Алексей Захарько и советник Ольга Попель при поддержке советника Дмитрия Микрюкова. Чью именно сторону представлял Nextons, источник не уточняет. Источник: pravo.ru"
-     ]
-    ],
-    "terms": "Бренды «Selgros Cash&Carry» и Global Foods продолжат работать под своими названиями."
-   },
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/7330299"
-    ],
-    [
-     "Право.ru",
-     "https://pravo.ru/company_news/256636/"
-    ],
-    [
-     "Retail.ru",
-     "https://www.retail.ru/news/set-selgros-mozhet-okonchatelno-zakryt-biznes-v-rf-15-iyulya-2026-279934/"
-    ]
-   ],
-   "extra": "Сделка закрыта в ноябре 2024 года. Покупатель — группа «Ароса» Рустема Миргалимова, продавец — австрийская инвесткомпания Transgourmet, которой принадлежала Selgros. Куплено 100% долей в ООО «Зельгрос», управляющем сетью гипермаркетов Selgros Cash&Carry Russia из 11 магазинов, и в ООО «ТД Глобал Фудс», поставщике продуктов для ресторанов и отелей. В портфель входят также 30 объектов недвижимости: площадка в Новой Москве (3,9 млрд ₽), ТЦ «Гавань» (3,5 млрд ₽) и участки в Шереметьеве (3,1 млрд ₽).",
-   "auto": true,
-   "promoted_from_bulk": true,
-   "seller": "MCCR Beteiligungs GmbH",
-   "seller_src": "title",
-   "added": "2026-07-23",
-   "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-14",
-   "weekly_researched": "2026-08-14",
-   "followup_researched": "2026-08-28",
-   "themes": [
-    "Правкомиссия / указ президента"
-   ],
-   "proofread_absorbed": {
-    "eco.val": [
-     "30d072c6aff0"
-    ],
-    "eco.share": [
-     "8bd16d04bdd8"
-    ],
-    "eco.target_fin": [
-     "3e29cc75c686"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": 100.0,
-     "basis": "rule",
-     "card_hash": "0a774700f6a4"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
-    },
-    "date": {
-     "value": "2024-11-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "163d53bf510b"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "c7e010739b09"
-    },
-    "target": {
-     "company_id": "gce55f3f5",
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": true,
-     "basis": "rule",
-     "perimeter": "unknown",
-     "card_hash": "06a7de4e8931"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_lot"
     }
    }
   },
@@ -184448,6 +184044,10 @@
     [
      "Интерфакс",
      "https://www.interfax.ru/business/1000231"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8859999"
     ]
    ],
    "from_compact": "mini",
@@ -184517,14 +184117,14 @@
      "card_hash": "3f33b8330c2c"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g2c0e743d",
+     "inn": "7424024375",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "32726d508318"
     },
     "admitted": {
      "count": true,
@@ -184538,10 +184138,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "target": "g2c0e743d"
   },
   {
    "id": "cb30dbbc8",
@@ -186929,7 +186530,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/milliardery/504146-roman-abramovic-tajno-investiroval-63-mln-v-rad-evropejskih-startapov"
     ],
     [
@@ -187034,7 +186635,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Rusbase",
      "https://rb.ru/news/yango-israel-deal/"
     ],
     [
@@ -187122,7 +186723,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "АК&М",
      "https://www.akm.ru/news/rostekh_obedinit_ne_menee_15_predpriyatiy/"
     ],
     [
@@ -187309,7 +186910,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Reuters",
      "https://www.reuters.com/sustainability/boards-policy-regulation/russian-bank-vtb-create-agriculture-giant-nationalised-assets-ceo-says-2025-12-01/"
     ],
     [
@@ -187408,7 +187009,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/investments/articles/2025/11/26/1158089-v-rossii-zapustili-dolgovoi-fond-dlya-podderzhki-startapov"
     ],
     [
@@ -187515,7 +187116,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Bloomberg",
      "https://www.bloomberg.com/news/articles/2025-11-06/gunvor-quits-lukoil-deal-after-us-calls-it-kremlin-puppet"
     ],
     [
@@ -187742,7 +187343,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Яндекс",
      "https://yandex.ru/company/news/07-07-2025-01"
     ],
     [
@@ -187849,7 +187450,7 @@
    "type": "IPO",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/technology_and_media/30/05/2025/683893099a79471b9979c65d"
     ],
     [
@@ -187956,7 +187557,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/investments/articles/2025/03/24/1099706-bank-tochka-i-akselerator-frii-planiruyut-investirovat-v-startapi"
     ]
    ],
@@ -188054,7 +187655,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Официальный интернет-портал правовой информации",
      "http://publication.pravo.gov.ru/document/0001202503170004?index=1"
     ]
    ],
@@ -188142,7 +187743,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7584814"
     ]
    ],
@@ -188338,7 +187939,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "МГКЛ",
      "https://mgkl.group/news-center/news/pao-mgkl-priobretet-bank_45436/"
     ]
    ],
@@ -188429,7 +188030,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8377451"
     ]
    ],
@@ -188525,7 +188126,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8162332"
     ],
     [
@@ -188621,7 +188222,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "АК&М",
      "https://www.akm.ru/news/za_dva_mesyatsa_bolee_desyati_natsionalizirovannykh_kompaniy_peredany_pod_upravlenie_gruppe_fesko/"
     ],
     [
@@ -188733,7 +188334,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7638104"
     ]
    ],
@@ -188934,7 +188535,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "КамчаткаМедиа",
      "https://kamchatkamedia.ru/news/1946654"
     ],
     [
@@ -189048,7 +188649,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7988696"
     ]
    ],
@@ -189253,7 +188854,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/realty/articles/2024/11/27/1077496-selgros-reanimiroval-peregovori-o-prodazhe-biznesa-v-rossii"
     ],
     [
@@ -189267,6 +188868,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7329390"
+    ],
+    [
+     "Право.ру",
+     "https://pravo.ru/company_news/256636/"
     ]
    ],
    "from_compact": "bulk",
@@ -189347,14 +188952,14 @@
      "card_hash": "679adce1c67a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gce55f3f5",
      "inn": null,
      "confirmed": false,
      "bank": false,
-     "lot": false,
-     "basis": "unknown",
+     "lot": true,
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "06a7de4e8931"
     },
     "admitted": {
      "count": true,
@@ -189368,10 +188973,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_lot"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "target": "gce55f3f5"
   },
   {
    "id": "ce7b84bec",
@@ -189510,7 +189116,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "ВЭБ.РФ",
      "http://%D0%92%D0%AD%D0%91.%D0%A0%D0%A4/"
     ],
     [
@@ -189616,7 +189222,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/realty/articles/2024/11/01/1072304-sud-arestoval-zhemchuzhnaya-plaza"
     ]
    ],
@@ -189721,7 +189327,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7552134"
     ]
    ],
@@ -189818,7 +189424,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Интерфакс",
      "https://www.interfax.ru/business/1050425"
     ]
    ],
@@ -190017,7 +189623,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/media/articles/2024/08/13/1055585-tavrin-prodal-mediabiznes-gruppe-investorov"
     ]
    ],
@@ -190107,7 +189713,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/technology_and_media/27/08/2024/66cc760e9a794719ed48a5bd"
     ],
     [
@@ -190225,7 +189831,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/technology_and_media/02/08/2024/66ace2879a7947b8f00693b8"
     ]
    ],
@@ -190625,7 +190231,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/business/articles/2024/07/11/1049271-invitro-gotova-vikupit-u-franchaizi-medofisi"
     ],
     [
@@ -190728,7 +190334,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6692847"
     ]
    ],
@@ -190824,7 +190430,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Лента.ру",
      "https://lenta.ru/news/2024/04/26/peredal/"
     ]
    ],
@@ -190928,7 +190534,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/investments/news/2024/04/19/1033062-mts-investiruet-v-razrabotchikov-blokchein-produktov"
     ]
    ],
@@ -191021,7 +190627,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6893677"
     ]
    ],
@@ -191109,7 +190715,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/business/04/03/2024/65e183ad9a79471c8f01f372"
     ]
    ],
@@ -191204,7 +190810,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Интерфакс",
      "https://www.interfax.ru/business/946827"
     ]
    ],
@@ -191300,7 +190906,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/technology/articles/2024/02/02/1018035-frii-planiruet-vlozhit-v-15-startapov"
     ]
    ],
@@ -191401,7 +191007,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК Pro",
      "https://pro.rbc.ru/demo/6a2e985b9a79471a8344e389"
     ]
    ],
@@ -191498,7 +191104,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
     ],
     [
@@ -191597,115 +191203,6 @@
    "followup_researched": "2026-09-08"
   },
   {
-   "id": "c46d3e581",
-   "date": "2026-08-10",
-   "title": "Росимущество выставило на торги спиртзавод «Амбер Талвис»",
-   "ind": "Пищепром и напитки",
-   "type": "Продажа с торгов",
-   "src": [
-    [
-     "@dealsma (Telegram)",
-     "https://torgi.gov.ru/new/public/lots/lot/21000030950000001156_1"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Росимущество продаёт на аукционе 72,9% акций АО «Амбер Талвис». Начальная цена лота — 3,89 млрд ₽, задаток — 777,5 млн ₽ (20%). Заявки принимают до 15 июня, торги назначены на 18 июня. Остальные акции у Росспиртпрома (25,5%) и 81 физического лица (1,6%).",
-   "sum": "1,94 млрд ₽",
-   "eco": {
-    "sum": "1,94 млрд ₽",
-    "share": "АО «Росспиртпром» выкупило 72,87% акций АО «Амбер Талвис» на повторных торгах (публичное предложение), увеличив свою долю в компании до 98,4%.",
-    "val": "—",
-    "target_fin": "По данным «СПАРК-Интерфакса», за 2025 год выручка предприятия выросла на 22,8% до 2,5 млрд ₽, прибыль от продаж — на 44,8% до 835,5 млн ₽, чистая прибыль — почти в пять раз, до 869,5 млн ₽.",
-    "fin": "—",
-    "rationale": "—",
-    "context": "Первый аукцион 18 июня 2026 года не состоялся — заявок не было. Повторно акции выставили публичным предложением: начальная цена лота осталась на уровне 3,9 млрд ₽, цена отсечения — 1,9 млрд ₽, заявки принимались до 5 августа, итоги подвели 10 августа. Единственным участником стал «Росспиртпром», купивший пакет по минимальной цене. До сделки остальные акции принадлежали Росспиртпрому (25,5%) и 81 физическому лицу (1,6%).",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "buyer_name": "АО «Росспиртпром»",
-   "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15",
-   "themes": [
-    "Продажа с торгов",
-    "Национализация / иск Генпрокуратуры"
-   ],
-   "proofread_absorbed": {
-    "eco.target_fin": [
-     "d8ea6704f21d"
-    ]
-   },
-   "proofread": "2026-09-04",
-   "facts": {
-    "stake": {
-     "value": 72.87,
-     "basis": "rule",
-     "card_hash": "4e2475672728"
-    },
-    "price": {
-     "value_rub": 1940000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "aea5e187c128"
-    },
-    "date": {
-     "value": "2026-08-10",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "9a055b1c0eef"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": true,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "d37b6d43a421"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "not_control_change"
-    },
-    "identity": {
-     "possible_duplicate": [
-      "g63c7d1bb"
-     ],
-     "basis": "rule"
-    }
-   },
-   "status": "Закрыта",
-   "followup_researched": "2026-09-07"
-  },
-  {
    "id": "ce4180b68",
    "date": "2024-04-23",
    "title": "Sminex выставляет на продажу бизнес-центр из комплекса «Московский шёлк»",
@@ -191713,7 +191210,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/realty/articles/2024/04/23/1033483-sminex-vistavila-na-prodazhu-chast-kvartala-moskovskii-shelk"
     ]
    ],
@@ -191821,7 +191318,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Промомед",
      "https://promomed.ru/news/dolya-aktsiy-promomed-nakhodyashchikhsya-v-svobodnom-obrashchenii-uvelichitsya-v-svyazi-s-pogasheniem-strukturnykh-obligatsiy-putem-peredachi-aktsiy-kompanii"
     ]
    ],
@@ -191922,7 +191419,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8590858?tg"
     ]
    ],
@@ -192030,7 +191527,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "MAX",
      "https://max.ru/filatofff"
     ],
     [
@@ -192358,7 +191855,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8401192"
     ]
    ],
@@ -192460,7 +191957,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8160509"
     ]
    ],
@@ -192612,7 +192109,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/8005070"
     ]
    ],
@@ -192822,7 +192319,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7988676"
     ]
    ],
@@ -193014,7 +192511,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7606644"
     ]
    ],
@@ -193115,7 +192612,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7550441"
     ]
    ],
@@ -193315,7 +192812,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/7312900"
     ],
     [
@@ -193425,7 +192922,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/investicii/520567-minoritarii-byvsej-yandex-n-v-podali-vtoroj-isk-k-konsorciumu-investorov"
     ]
    ],
@@ -193522,7 +193019,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6998296"
     ]
    ],
@@ -193616,7 +193113,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/516686-putin-peredal-zavody-avstrijskoj-silgan-v-rossii-v-upravlenie-rosimusestva"
     ]
    ],
@@ -193710,7 +193207,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6790872"
     ]
    ],
@@ -193810,7 +193307,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6762424"
     ]
    ],
@@ -193907,7 +193404,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6525044"
     ]
    ],
@@ -194006,7 +193503,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/500081-putin-podpisal-ukaz-o-peredace-rosatomu-iz-atyh-u-magomedovyh-akcij-dvmp"
     ]
    ],
@@ -194095,7 +193592,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6254171"
     ]
    ],
@@ -194191,7 +193688,7 @@
    "type": "Продажа с торгов",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Абирег",
      "https://abireg.ru/newsitem/98356"
     ]
    ],
@@ -194296,7 +193793,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "АК&М",
      "https://www.akm.ru/news/miratorg_i_vkusno_i_tochka_sozdayut_sp/"
     ],
     [
@@ -194399,7 +193896,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "More.tv",
      "http://more.tv/"
     ],
     [
@@ -194501,7 +193998,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/investicii/487491-bloomberg-uznal-o-planah-polusa-na-listing-na-mezdunarodnoj-birze-v-astane"
     ],
     [
@@ -194703,7 +194200,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/business/02/12/2023/6569b8fc9a7947cad044c3be"
     ],
     [
@@ -194802,7 +194299,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Ведомости",
      "https://www.vedomosti.ru/business/articles/2023/11/20/1006598-akademik-grigorii-roitberg-pristupil-k-poisku-investora-v-svoi-meditsinskii-biznes"
     ]
    ],
@@ -194998,7 +194495,7 @@
    "type": "Инвестиция",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/rbcfreenews/655fe0f59a7947899d92059b"
     ],
     [
@@ -195098,7 +194595,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Абирег",
      "https://abireg.ru/newsitem/100987"
     ]
    ],
@@ -195193,7 +194690,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Frank Media",
      "https://frankmedia.ru/129878?ysclid=ljmhofd7qc627147966"
     ]
    ],
@@ -195283,7 +194780,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Financial Times",
      "https://www.ft.com/content/d5234953-cddf-4b64-8a55-dc749843ab5c"
     ]
    ],
@@ -195377,7 +194874,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Официальный интернет-портал правовой информации",
      "http://publication.pravo.gov.ru/document/0001202307160001?index=1"
     ]
    ],
@@ -195471,7 +194968,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/business/31/03/2023/6425abb79a79477297e32c03"
     ],
     [
@@ -195583,7 +195080,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Frank Media",
      "https://frankmedia.ru/124568"
     ],
     [
@@ -195673,7 +195170,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://www.rbc.ru/business/17/02/2023/63ed034c9a79479affa55050"
     ],
     [
@@ -195868,7 +195365,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6208974"
     ]
    ],
@@ -195965,7 +195462,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6198328"
     ]
    ],
@@ -196066,7 +195563,7 @@
    "type": "Реорганизация",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "АК&М",
      "https://www.akm.ru/news/s7_zaregistriroval_v_egryul_reorganizatsiyu/"
     ]
    ],
@@ -196164,7 +195661,7 @@
    "type": "Реорганизация",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Интерфакс",
      "https://www.interfax.ru/amp/903832"
     ]
    ],
@@ -196275,7 +195772,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Smart-Lab",
      "https://smart-lab.ru/blog/907650.php"
     ]
    ],
@@ -196380,7 +195877,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/5862108"
     ]
    ],
@@ -196490,7 +195987,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/5813079"
     ],
     [
@@ -196604,7 +196101,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/496680-putin-otdal-v-upravlenie-rosimusestva-norvezskie-doli-v-tipografiah-prajm-print"
     ],
     [
@@ -196707,7 +196204,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/498637-sud-vpervye-otmenil-provedennuu-v-obhod-pravkomissii-sdelku-s-inostrannymi-aktivami"
     ]
    ],
@@ -196791,7 +196288,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "РБК",
      "https://reader.rbc.ru/share/7LxcbTnMQ3ZnsDe36"
     ],
     [
@@ -196979,7 +196476,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Forbes",
      "https://www.forbes.ru/biznes/500047-interfaks-uznal-o-zelanii-carlsberg-polucit-za-baltiku-ot-rossii-71-mlrd-rublej"
     ]
    ],
@@ -197073,7 +196570,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/6094865"
     ]
    ],
@@ -197148,7 +196645,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/5888872"
     ]
    ],
@@ -197241,7 +196738,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/5695016"
     ],
     [
@@ -197349,7 +196846,7 @@
    "type": "M&A",
    "src": [
     [
-     "@dealsma (Telegram)",
+     "Коммерсантъ",
      "https://www.kommersant.ru/doc/5773585"
     ]
    ],
@@ -205266,10 +204763,10 @@
   },
   {
    "id": "g63c7d1bb",
-   "date": "2026-08-12",
+   "date": "2026-08-10",
    "title": "«Росспиртпром» купил производителя спирта «Амбер Талвис» за 1,94 млрд рублей",
    "ind": "Пищепром и напитки",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": "Закрыта",
    "src": [
     [
@@ -205287,17 +204784,21 @@
     [
      "ОнлайнТамбов.ру",
      "https://www.onlinetambov.ru/news/eksklyuzivno/tambovskiy-spirtzavod-amber-talvis-mozhet-pereyti-ao-rosspirtprom-za-1-9-mlrd-rubley/"
+    ],
+    [
+     "Торги.гов",
+     "https://torgi.gov.ru/new/public/lots/lot/21000030950000001156_1"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "1,94 млрд ₽",
-    "share": "Ранее «Росспиртпрому» принадлежало 25,5% тамбовской компании. Таким образом, по итогам аукциона доля достигла 98,37%.",
+    "share": "72,87% акций АО «Амбер Талвис» — 62 486 акций, выставленных единым лотом. Ранее «Росспиртпрому» принадлежало 25,5% тамбовской компании. Таким образом, по итогам аукциона доля достигла 98,37%.",
     "val": "Директор практики «Потребительский сектор и АПК» Strategy Partners Вадим Аникин обратил внимание на соотношение цены сделки и финансовых показателей предприятия. По его расчётам, исходя из стоимости пакета вся компания была оценена в 2,6 млрд ₽ — примерно в одну годовую выручку предприятия. Опрошенные эксперты считают такие условия крайне выгодными для «Росспиртпрома».",
     "target_fin": "По данным «СПАРК-Интерфакса», в 2025 году выручка предприятия выросла на 22,8%, до 2,5 млрд ₽, прибыль от продаж — на 44,8%, до 835,5 млн ₽, а чистая прибыль — почти в 5 раз, до 869,5 млн ₽.",
     "fin": "—",
     "rationale": "По мнению Аникина, рассматривать покупку «Амбер Талвиса» как отдельную сделку не совсем корректно: компания формирует вертикально интегрированную алкогольную группу, объединяющую производство спирта, готового алкоголя и бренды. До консолидации «Амбер Талвиса» «Росспиртпром» уже занимал лидирующие позиции на российском рынке пищевого спирта. После включения в состав компании «Татспиртпрома» доля группы, по оценке эксперта, составила 40–45%, а «Амбер Талвис» принесёт ей ещё 5 п. п.",
-    "context": "По данным Rusprofile, АО «Росспиртпром» учреждено в январе 2009 года и зарегистрировано в Республике Татарстан. Уставный капитал предприятия — 6,9 млрд ₽. Генеральный директор — Андрей Дронов, единственный учредитель — московское ООО «Бизнес-Альянс».",
+    "context": "По данным Rusprofile, АО «Росспиртпром» учреждено в январе 2009 года и зарегистрировано в Республике Татарстан. Уставный капитал предприятия — 6,9 млрд ₽. Генеральный директор — Андрей Дронов, единственный учредитель — московское ООО «Бизнес-Альянс». Государству пакет достался по суду: Тамбовский районный суд удовлетворил иск Генпрокуратуры об обращении в доход государства активов бизнесмена Юрия Шефлера, и контрольный пакет «Амбер Талвиса» перешёл Росимуществу в июле 2024 года.",
     "finadv": "—"
    },
    "law": {
@@ -205307,17 +204808,26 @@
     "terms": "Договор купли-продажи должен быть заключён не ранее чем через десять и не позднее двадцати дней со дня размещения протокола."
    },
    "sum": "1,94 млрд ₽",
-   "buyer_name": "«Росспиртпром»",
    "asset": "производитель спирта «Амбер Талвис»",
    "events": [
     {
-     "kind": "closed",
-     "date": "2026-08-12",
-     "title": "Сделка завершена",
-     "note": "В середине августа 2026 года стало известно, что крупнейший производитель спирта в России «Росспиртпром» приобрёл мажоритарную долю в тамбовском предприятии «Амбер Талвис» за 1,94 млрд ₽.",
+     "kind": "announced",
+     "date": "2026-06-18",
+     "title": "Актив выставлен на торги",
+     "note": "Росимущество выставило на аукцион 72,87% акций АО «Амбер Талвис». Начальная цена лота — 3,89 млрд ₽, задаток — 777,5 млн ₽. Аукцион 18 июня не состоялся: заявок не поступило.",
      "source": [
-      "TAdviser",
-      "https://www.tadviser.ru/a/813709"
+      "Торги.гов",
+      "https://torgi.gov.ru/new/public/lots/lot/21000030950000001156_1"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-08-10",
+     "title": "Сделка завершена",
+     "note": "Повторные торги прошли публичным предложением: цена отсечения — вдвое ниже начальной. Единственным участником стал «Росспиртпром», выкупивший пакет за 1,94 млрд ₽ и доведший долю в компании до 98,37%.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2026/08/11/1220271-aktiv-yuriya-sheflera"
      ]
     }
    ],
@@ -205345,7 +204855,8 @@
    "post_override": "📣 [пост g63c7d1bb] — В КАНАЛ, на проверку\nНиже — текст поста как он уйдёт подписчикам. Ответ на это сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n━━━━━━━━━━━━\n<b>«Росспиртпром» купил производителя спирта «Амбер Талвис» за 1,94 млрд рублей</b>\n\nПредмет: производитель спирта «Амбер Талвис»\nПокупатель: «Росспиртпром»\n\nСумма: 1,94 млрд ₽\nСтатус: Закрыта\nОтрасль: Не определена\n\n<a href=\"https://projectcompass.ru/#/deal/g63c7d1bb\">Карточка сделки</a>\n<a href=\"https://projectcompass.ru/#/deal/g63c7d1bb?lens=eco\">→ Экономист</a>\n<a href=\"https://projectcompass.ru/#/deal/g63c7d1bb?lens=law\">→ Юрист</a>\nИсточник: <a href=\"https://www.tadviser.ru/a/813709\">TAdviser</a>",
    "weekly_researched": "2026-08-21",
    "themes": [
-    "Продажа с торгов"
+    "Продажа с торгов",
+    "Национализация / иск Генпрокуратуры"
    ],
    "proofread_absorbed": {
     "law.struct": [
@@ -205365,47 +204876,50 @@
     ],
     "law.terms": [
      "6f42f536a072"
+    ],
+    "eco.share": [
+     "a2929cfb6131"
     ]
    },
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "a168356cfb80"
+     "value": 72.87,
+     "basis": "rule",
+     "card_hash": "64699937cc18"
     },
     "price": {
      "value_rub": 1940000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "fca4c403074c"
+     "card_hash": "aea5e187c128"
     },
     "date": {
-     "value": "2026-08-12",
+     "value": "2026-08-10",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "70635cabd5fb"
+     "card_hash": "2f1fefd38590"
     },
     "nature": {
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "582be913a3a9"
+     "card_hash": "2d51b8460e92"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gambertalvis",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "51696058c23a"
     },
     "admitted": {
      "count": true,
@@ -205419,15 +204933,14 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
-    },
-    "identity": {
-     "possible_duplicate": [
-      "c46d3e581"
-     ],
-     "basis": "rule"
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "extra": "Росимущество продаёт на аукционе 72,9% акций АО «Амбер Талвис». Начальная цена лота — 3,89 млрд ₽, задаток — 777,5 млн ₽ (20%). Заявки принимают до 15 июня, торги назначены на 18 июня. Остальные акции у Росспиртпрома (25,5%) и 81 физического лица (1,6%). Первый аукцион 18 июня 2026 года не состоялся — заявок не было.",
+   "buyer": "g130b6d10",
+   "target": "gambertalvis",
+   "seller": "Росимущество",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "gcaa03820",
@@ -229516,6 +229029,15 @@
     "Профиль",
     "Прочитан"
    ]
+  },
+  "gambertalvis": {
+   "name": "Амбер Талвис",
+   "ind": "Пищепром и напитки",
+   "desc": "Тамбовский производитель этилового спирта; производственная площадка в рабочем посёлке Новая Ляда. До 2026 года 72,87% акций принадлежали государству и были включены в план приватизации, остальное — «Росспиртпрому» и миноритариям.",
+   "kpi": [
+    "Профиль",
+    "Прочитан"
+   ]
   }
  },
  "match_keys": {
@@ -235369,6 +234891,9 @@
   ],
   "grodnik-almaz": [
    "родник"
+  ],
+  "gambertalvis": [
+   "амбер талвис"
   ]
  },
  "consumed_urls": [
@@ -235879,7 +235404,10 @@
   "cb50ea645": "gcc232775",
   "c06799f22": "g5eb6ff22",
   "g10bfcb70": "gmru-psb-tpk-chelyabinsk",
-  "cf9ca3b8f": "gcc677615"
+  "cf9ca3b8f": "gcc677615",
+  "c46d3e581": "g63c7d1bb",
+  "geaa4fc71": "cea87de0a",
+  "gf63744d6": "ceeb8c214"
  },
  "merged_companies": {
   "ge5be0c9f": "ga2cfae5b",
@@ -236666,7 +236194,6 @@
   "g99448cd9": null,
   "g2668950b": null,
   "g576de71f": null,
-  "gf63744d6": null,
   "g84a06224": null,
   "g211615eb": null,
   "g5160d16f": null,
@@ -236682,7 +236209,6 @@
   "g42e11ded": null,
   "gc9f8d104": null,
   "g8e46beea": null,
-  "geaa4fc71": null,
   "gffed92e4": null,
   "g063c2d68": null,
   "gdcda51be": null,
@@ -237380,7 +236906,6 @@
   "cdbb80afb": null,
   "c06611bae": null,
   "c51d0bb64": null,
-  "c46d3e581": null,
   "ce4180b68": null,
   "c7996afb5": null,
   "cbfe737bd": null,
@@ -237547,7 +237072,8 @@
   "gmortehprom2026": 101,
   "g95370469": 102,
   "gc52a53dd": 105,
-  "gbc7b1e8d": 106
+  "gbc7b1e8d": 106,
+  "g63c7d1bb": null
  },
  "telegram_milestones": {},
  "telegram_digests": {

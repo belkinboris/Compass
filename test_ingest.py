@@ -3674,8 +3674,16 @@ def test_enrich_names_a_new_source_by_domain_not_by_feed_id():
     names = {"tg:dealsma": "@dealsma"}
     props = enrich.proposals(deal, item, names, {})
     src_props = [p for p in props if p[0] == "src"]
-    assert src_props and src_props[0][1][0] == "RB.ru", \
+    # Сверяем с ОБЩЕЙ таблицей изданий, а не с захардкоженной строкой: 9 сентября
+    # 2026 в таблицу добавили «rb.ru → Rusbase» (издание называется так, домен —
+    # сокращение), и тест покраснел на верной правке, потому что держал не сам
+    # инвариант, а запасной вариант подписи «RB.ru» из `display_name()`.
+    from pipeline.source_names import edition_label
+    label = src_props[0][1][0]
+    assert src_props and label == edition_label("https://rb.ru/news/minfin-lestu/"), \
         "источник обязан называться по домену ссылки, а не по имени ленты"
+    assert label != "@dealsma" and not label.startswith("tg:"), \
+        "подпись — имя издания, а не внутренний id ленты"
 
 
 def _write_hold_file(tmp_path, name, drafts):

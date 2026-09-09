@@ -12,9 +12,29 @@
 Для домена вне таблицы имя не выдумывается: подписью становится сам домен
 с заглавной буквы («Eqiva.ru») — честная запись того, что стоит в ссылке.
 """
-from urllib.parse import urlparse
+import re
+from urllib.parse import unquote, urlparse
 
 DOMAIN_NAMES = {
+    # Дописано 9 сентября 2026, когда чинился хвост ложных подписей
+    # «@dealsma (Telegram)» на ссылках в обычные издания: без имени в таблице
+    # `edition_label()` возвращает сам домен («Lenta.ru»), и подпись выходит
+    # не лучше исходной. `torgi.gov.ru` — не издание, а официальный портал
+    # торгов, и подпись это называет прямо: читатель должен понимать, что
+    # переходит к первичному документу аукциона, а не к статье.
+    'вэб.рф': 'ВЭБ.РФ',               # кириллический домен, в ссылке — в процентной кодировке
+    'yandex.ru': 'Яндекс',            # пресс-центр компании, не издание
+    'mgkl.group': 'МГКЛ',             # сообщение самой компании
+    'promomed.ru': 'Промомед',        # сообщение самой компании
+    'fintelegram.com': 'FinTelegram',
+    'max.ru': 'MAX',
+    'more.tv': 'More.tv',
+    'malina.vc': 'Malina VC',
+    'torgi.gov.ru': 'Торги.гов',
+    'lenta.ru': 'Лента.ру',
+    'ft.com': 'Financial Times',
+    'smart-lab.ru': 'Smart-Lab',
+    'kamchatkamedia.ru': 'КамчаткаМедиа',
     'kommersant.ru': 'Коммерсантъ',
     'vedomosti.ru': 'Ведомости',
     'vdmsti.ru': 'Ведомости',
@@ -41,7 +61,7 @@ DOMAIN_NAMES = {
     'tass.ru': 'ТАСС',
     'thebell.io': 'The Bell',
     'iz.ru': 'Известия',
-    'rb.ru': 'RB.ru',
+    'rb.ru': 'Rusbase',   # издание называется так, домен — сокращение
     'akm.ru': 'АК&М',
     'cnews.ru': 'CNews',
     'comnews.ru': 'ComNews',
@@ -132,12 +152,45 @@ def telegram_channel_label(username):
     return 'Телеграм-канал: %s' % name if name else 'Телеграм-канал @%s' % username
 
 
+_TELEGRAM_WORD = re.compile(r'(?:^|[^a-zа-яё])telegram(?:[^a-zа-яё]|$)', re.I)
+
+
+def label_promises_telegram(label):
+    """Подпись обещает читателю переход в Telegram.
+
+    Один предикат на скрипт-чистку и на тест-забор: два места, решающие
+    одно и то же, обязаны читать одно правило (урок CLAUDE.md о
+    `console_chats()`, до которого не перевели `ops_status.py`).
+
+    Слово ищется ЦЕЛИКОМ, а не подстрокой: издание «FinTelegram» содержит
+    «telegram» внутри имени и мессенджером не является — первая версия
+    проверки честно попыталась переподписать его само в себя.
+    """
+    text = str(label or '')
+    return text.strip().startswith('@') or bool(_TELEGRAM_WORD.search(text))
+
+
+def host_of(url):
+    """Домен ссылки в том виде, в каком он лежит в таблице.
+
+    Кириллический домен приезжает в адресе процентной кодировкой
+    («%d0%92%d0%ad%d0%91.%d0%a0%d0%a4» — это «ВЭБ.РФ»), и без раскодирования
+    таблица его не узнаёт никогда: подпись остаётся мусорной строкой.
+    """
+    host = (urlparse(str(url)).hostname or '')
+    host = unquote(host).lower()
+    return host[4:] if host.startswith('www.') else host
+
+
+def domain_is_known(url):
+    """Имя для этого домена есть в таблице, а не выведено из самого адреса."""
+    return host_of(url) in DOMAIN_NAMES
+
+
 def edition_label(url):
     """Имя издания по адресу статьи; www. отрезается до поиска в таблице."""
     parsed = urlparse(str(url))
-    host = (parsed.hostname or '').lower()
-    if host.startswith('www.'):
-        host = host[4:]
+    host = host_of(url)
     if host == 't.me':
         username = parsed.path.strip('/').split('/')[0]
         if username:
