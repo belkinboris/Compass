@@ -3267,21 +3267,28 @@ def moderation_topics(token: str = "", db=Depends(get_db)):
     return {"topics": {r.key.split(":", 1)[1]: r.value for r in rows}}
 
 
+def _access_row(u: User) -> dict:
+    return {"id": u.id, "email": u.email, "full_name": u.full_name, "company": u.company,
+            "position": u.position, "created_at": u.created_at.isoformat()}
+
+
 @app.get("/api/access/requests")
 def access_requests(token: str = "", db=Depends(get_db)):
     """Заявки на доступ (ACCESS_GATE) для владельца, который смотрит не в
     Telegram, а через сессию Claude: аккаунты живут в базе сайта (приватная
     сеть Timeweb), и единственный путь до неё снаружи — сам сервер, тем же
     токеном, что у /api/moderation/decisions. Отдаём ожидающих (approved=False)
-    и число уже одобренных — чтобы «никого нет» отличалось от «все одобрены»."""
+    и полный список уже одобренных — чтобы «никого нет» отличалось от «все
+    одобрены», и чтобы можно было увидеть, кто вообще зарегистрирован."""
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
     pending = list(db.scalars(select(User).where(User.approved.is_(False))
                               .order_by(User.created_at)).all())
-    approved = db.scalar(select(func.count()).select_from(User).where(User.approved.is_(True))) or 0
-    return {"pending": [{"id": u.id, "email": u.email, "full_name": u.full_name, "company": u.company,
-                         "position": u.position, "created_at": u.created_at.isoformat()} for u in pending],
-            "approved_count": int(approved), "gate": ACCESS_GATE}
+    approved = list(db.scalars(select(User).where(User.approved.is_(True))
+                               .order_by(User.created_at)).all())
+    return {"pending": [_access_row(u) for u in pending],
+            "approved": [_access_row(u) for u in approved],
+            "approved_count": len(approved), "gate": ACCESS_GATE}
 
 
 class AccessDecideIn(BaseModel):
