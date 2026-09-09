@@ -617,7 +617,7 @@
    ]
   },
   {
-   "draft_id": "d49657389",
+   "draft_id": "d72829810",
    "title": "Отказ Смольного в выкупе участка в центре Петербурга признали незаконным",
    "date": "2026-09-09",
    "src": [
@@ -646,52 +646,137 @@
    ]
   },
   {
-   "draft_id": "d29887967",
-   "title": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы америка",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7364"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-09",
-     "title": "Сделка завершена",
-     "note": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы американской Otis и финской KONE. Meteor Lift создан на базе…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7364"
-     ]
-    }
-   ],
-   "buyer_name": "« ДОМ.РФ »",
-   "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
-   "seller": "S8 Capital лифтовый бизнес",
-   "parsed_parties": {
-    "buyer": "« ДОМ.РФ »",
-    "asset": "лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела",
-    "seller": "S8 Capital лифтовый бизнес"
-   },
-   "ind": "Холдинги",
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку g7ea48d66 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d89342550",
-   "title": "Средневзвешенная доходность ОФЗ на аукционе составила 15,45%",
+   "draft_id": "d10612302",
+   "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке за счет акционера",
    "date": "2026-09-09",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/09/1227559-dohodnost-ofz"
+     "https://www.vedomosti.ru/investments/news/2026/09/09/1227593-dolyu-v-sovkombanke"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77558745",
+   "title": "Готовность доверить ИИ поиск товаров в четыре раза выше, чем оформление и оплату покупки",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-09_gotovnost_doverit_ii_poisk"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d86917420",
+   "title": "DeepSeek наняла CITIC Securities для подготовки к IPO в Шанхае",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/deepseek-nanyala-citic-securities-dlya-podgotovki-k-ipo-v-shanhae/"
+    ]
+   ],
+   "sum": "$75 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59082287",
+   "title": "В Армении решили национализировать «Электросети» Карапетяна до октября 2027 года",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2164103/v-armenii-khotiat-natcionalizirovat-elektroseti-karapetiana-do-oktiabria-2027-goda"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-09",
+     "title": "Переговоры",
+     "note": "Правительство Армении планирует национализировать компанию «Электрические сети Армении» лидера оппозиционной партии «Сильная Армения» Самвела Карапетяна до 1 октября 2027 года. Об этом 9 сентября сообщается на едином сайте публикации проектов правовых актов…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2164103/v-armenii-khotiat-natcionalizirovat-elektroseti-karapetiana-do-oktiabria-2027-goda"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57797898",
+   "title": "Минфин доразместил ОФЗ серии 26230 после аукциона на 3,9 миллиарда рублей",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260909/minfin-873160847.html"
     ]
    ],
    "sum": null,
@@ -713,13 +798,13 @@
    ]
   },
   {
-   "draft_id": "d52616505",
-   "title": "В Евролиге оценят предложение НБА о поглощении, пишут СМИ",
+   "draft_id": "d10467757",
+   "title": "Эксперты назвали способы купить жилье в России при высокой ключевой ставке",
    "date": "2026-09-09",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260909/evroliga-2116602021.html"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260909/zhile-2116627675.html"
     ]
    ],
    "sum": null,
@@ -741,17 +826,85 @@
    ]
   },
   {
-   "draft_id": "d68278542",
-   "title": "Песков: многие страны готовы принять новый раунд переговоров по Украине",
+   "draft_id": "d24729549",
+   "title": "Продажи люксовых автомобилей в России растут с начала 2026 года: самый популярный бренд — Lamborghini",
    "date": "2026-09-09",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260909/peskov-2116601138.html"
+     "web:rb.ru",
+     "https://rb.ru/news/prodazhi-lyuksovyh-avtomobilej-v-rossii-rastut-s-nachala-2026-goda-samyj-populyarnyj-brend-lamborghini/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "В августе 2026 года в России продали 56 новых автомобилей класса люкс, а самым популярным брендом стал Lamborghini. Как сообщили в агентстве «Автостат», спрос на люксовые машины растёт в стране с начала года. За 8 месяцев в РФ реализовали 500 премиум-авто…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/prodazhi-lyuksovyh-avtomobilej-v-rossii-rastut-s-nachala-2026-goda-samyj-populyarnyj-brend-lamborghini/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26901851",
+   "title": "Европейские золотые ETF привлекли рекордные $7,9 млрд",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/304036"
+    ]
+   ],
+   "sum": "$7,9 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Европейские золотые ETF",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Европейские золотые ETF",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d88862072",
+   "title": "Россиянам назвали неочевидный документ для проверки перед покупкой квартиры",
+   "date": "2026-09-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/09/rossiyanam-nazvali-neochevidnyy-dokument-dlya-proverki-pered-pokupkoy-kvartiry/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
