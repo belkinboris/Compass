@@ -32712,8 +32712,8 @@
    "id": "gad633118",
    "date": "2025-12-29",
    "title": "Приобретение СП «Каталитик Пипл» (Интеррос + Т-Технологии) 25% доли в Selectel",
-   "buyer": null,
-   "target": "g62dd02d2",
+   "buyer": "g62dd02d2",
+   "target": "gd4a7c612",
    "ind": "ИТ и интернет",
    "type": "M&A",
    "kind": "acquisition",
@@ -32843,14 +32843,14 @@
      "card_hash": "04191c9bea96"
     },
     "target": {
-     "company_id": "g62dd02d2",
-     "inn": "3900012237",
+     "company_id": "gd4a7c612",
+     "inn": "7810962785",
      "confirmed": true,
      "bank": false,
      "lot": false,
      "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "130a36d4119f"
+     "card_hash": "412d326c7195"
     },
     "admitted": {
      "count": true,
@@ -78696,7 +78696,7 @@
   {
    "id": "g2197ed53",
    "date": "2025-09-01",
-   "title": "Неизвестный инвестор может стать акционером сети медицинских центров «Медскан»",
+   "title": "По данным РБК, акционером «Медскана» стал Газпромбанк (через «Строй-профит»)",
    "buyer": null,
    "target": "g729ef6c5",
    "ind": "Здравоохранение",
@@ -78711,7 +78711,7 @@
     "target_fin": "«Медскан» на конец 2024 года объединял 65 клиник и 451 медлабораторию сети KDL. Компания также управляет филиалом израильской клиники «Медскан Hadassah». Общая выручка группы, включая лабораторный бизнес, в 2024 году выросла на 25% год к году, до 28 млрд ₽. Чистый убыток сократился на 7%, до 1,2 млрд ₽.",
     "fin": "—",
     "rationale": "По словам представителя группы, «Медскан» ведёт диалог с рядом потенциальных партнёров в различных перспективных отраслях экономики ради структурного финансирования.",
-    "context": "Сейчас 50% в этом обществе принадлежит структуре «Росатома», а остальное — основателю Евгению Туголукову. Размер доли, которую может приобрести Газпромбанк, и кто выступает продавцом, не раскрываются. 16 декабря 2025 года сам Туголуков на прямой вопрос о Газпромбанке ответил «Нет, не про это», назвав вместо этого безымянных серьёзных институциональных инвесторов в pre-IPO раунде. При этом 3 июня 2026 года стало известно, что компания провела допэмиссию привилегированных акций типа А в пользу одного из финансовых инвесторов — представитель «Медскана» имя не назвал, а по неофициальным данным покупатель — именно Газпромбанк; «Росатом» заявляет, что по-прежнему контролирует «Медскан». Ни сама компания, ни Газпромбанк сделку публично не подтвердили.",
+    "context": "Сейчас 50% в этом обществе принадлежит структуре «Росатома», а остальное — основателю Евгению Туголукову. Размер доли, которую может приобрести Газпромбанк, и кто выступает продавцом, не раскрываются. 16 декабря 2025 года сам Туголуков на прямой вопрос о Газпромбанке ответил «Нет, не про это», назвав вместо этого безымянных серьёзных институциональных инвесторов в pre-IPO раунде. При этом 3 июня 2026 года стало известно, что компания провела допэмиссию привилегированных акций типа А в пользу одного из финансовых инвесторов — представитель «Медскана» имя не назвал, а по неофициальным данным покупатель — именно Газпромбанк; «Росатом» заявляет, что по-прежнему контролирует «Медскан». Ни сама компания, ни Газпромбанк сделку публично не подтвердили. РБК (со ссылкой на два источника, знакомых с условиями сделки) называет прямого получателя размещения — ООО «Строй-профит»; по данным ЕГРЮЛ, 90% этой компании принадлежит самому Газпромбанку (10% — у ООО «Финпроект»). Официального подтверждения по-прежнему нет.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -78783,12 +78783,12 @@
     ]
    },
    "proofread": "2026-09-03",
-   "buyer_name": "неизвестный инвестор",
+   "buyer_name": "Газпромбанк (через ООО «Строй-профит», 90% которого принадлежит банку)",
    "facts": {
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "8e737bdc4eb7"
+     "card_hash": "0b12647eb144"
     },
     "price": {
      "value_rub": null,
@@ -78811,7 +78811,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "46a2e0a7d65f"
+     "card_hash": "86b9f933bfac"
     },
     "target": {
      "company_id": "g729ef6c5",
@@ -82485,7 +82485,7 @@
    "ind": "Машиностроение",
    "type": "M&A",
    "kind": "acquisition",
-   "status": "Обсуждается",
+   "status": "Не состоялась",
    "sum": "40–55 млрд ₽ (по оценке)",
    "eco": {
     "sum": "40–55 млрд ₽ (по оценке)",
@@ -82493,7 +82493,7 @@
     "val": "С учётом роста мощностей — в Твери запущен комплекс — и доли на рынке серверов до 75% в корпоративном сегменте текущая оценка компании может достигать 90–100 млрд ₽. Тогда базовая стоимость 51% составит порядка 40 млрд ₽, а с премией 20–30% за контрольный пакет — 45–55 миллиардов ₽.",
     "target_fin": "—",
     "fin": "—",
-    "context": "В ноябре 2024 года «СберИнвест», входящий в блок корпоративно-инвестиционного бизнеса Сбербанка, получил 12% в капитале «Аквариуса», а позже, по неофициальным данным, докупил ещё 12% — сейчас у него 24%. Крупными долями «Аквариуса» владеют также Алексей Калинин и президент одноимённой группы Владимир Степанов. О возможной продаже доли говорили ещё в июне 2025 года, но тогда назывались другие потенциальные инвесторы — Уральская горно-металлургическая компания (УГМК) и Трансмашхолдинг (ТМХ); в число владельцев обеих входит Искандер Махмудов. К августу 2025 года вместо Махмудова покупателем называли S8 Capital и ГК «МТ-Интеграция», но связь между двумя версиями ни разу не подтверждена.",
+    "context": "В ноябре 2024 года «СберИнвест», входящий в блок корпоративно-инвестиционного бизнеса Сбербанка, получил 12% в капитале «Аквариуса», а позже, по неофициальным данным, докупил ещё 12% — сейчас у него 24%. Крупными долями «Аквариуса» владеют также Алексей Калинин и президент одноимённой группы Владимир Степанов. О возможной продаже доли говорили ещё в июне 2025 года, но тогда назывались другие потенциальные инвесторы — Уральская горно-металлургическая компания (УГМК) и Трансмашхолдинг (ТМХ); в число владельцев обеих входит Искандер Махмудов. К августу 2025 года вместо Махмудова покупателем называли S8 Capital и ГК «МТ-Интеграция», но связь между двумя версиями ни разу не подтверждена. Основатель реального покупателя, S8 Capital, публично назван: «Инвестиционный холдинг S8 Capital Армена Саркисяна» (Sostav.ru, 22.08.2025) — Махмудов ни в этой, ни в других публикациях о финальной сделке не фигурирует.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -82543,7 +82543,7 @@
      "meaning": "range",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "55f4b283b676"
+     "card_hash": "fdf7dcc1ee81"
     },
     "date": {
      "value": "2025-06-01",
@@ -82559,7 +82559,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "03cf6f590c59"
+     "card_hash": "e904af196f6c"
     },
     "target": {
      "company_id": "g1816256d",
@@ -82581,9 +82581,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "failed",
+     "top_purchases": "failed",
+     "multiple_text": "failed"
     }
    }
   },
@@ -93199,7 +93199,7 @@
    "id": "gcdd2b6de",
    "date": "2025-04-29",
    "title": "Севергрупп выкупил сеть магазинов OBI у Синдики",
-   "buyer": "gcca31da7",
+   "buyer": "g30bc92fd",
    "target": "g79f93ccb",
    "ind": "Ритейл",
    "type": "M&A",
@@ -95165,7 +95165,8 @@
     "target_fin": "Сеть клиник «Центр Эко» основана в 2012 году и объединяет 35 филиалов в 34 городах России. За 2024 год в ней планировали выполнить 6 тысяч циклов ВРТ. Выручка 25 юрлиц сети, раскрытых в СПАРК-Интерфакс, в 2023 году превысила 1,45 млрд рублей.",
     "fin": "—",
     "context": "Всего в России циклы ВРТ проводят примерно в 330 клиниках ЭКО, около 70% из них частные. Рынок в стране оценивают в 25–27 млрд рублей, крупнейший оператор сегмента — сеть клиник «Мать и дитя» Марка Курцера. 29 мая 2026 года АО «Эко Холдинг» из ГК «Р-Фарм» выкупило у Сергея Лебедева оставшиеся 50,1% акций «Центр ЭКО» и довело долю до 100%; сумму сделки не раскрывали, а выручка сети за 2025 год превысила 2,3 млрд ₽. Оценки экспертов разошлись: 800–900 млн ₽ за пакет 49,9% в декабре 2024 года против 1,6–1,8 млрд ₽ за всю группу в мае 2026 года — это оценки, а не объявленная цена.",
-    "finadv": "Публично не сообщалось"
+    "finadv": "Публично не сообщалось",
+    "rationale": "В течение двух месяцев партнеры разработают новую стратегию развития компании."
    },
    "law": {
     "struct": "—",
@@ -95195,6 +95196,14 @@
     [
      "vedomosti.ru",
      "https://www.vedomosti.ru/business/articles/2026/06/03/1202336-struktura-gk-r-farm-polnostyu-vikupila-set-klinik"
+    ],
+    [
+     "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
+     "https://t.me/LawFirms/8290"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2024/12/26/1083800-struktura-r-farma-kupila-tsentr-eko"
     ]
    ],
    "extra": "Структура ГК «Р-фарм» купила 49,9% акционерного капитала ГК «Центр ЭКО», которая объединяет 29 операционных компаний и управляет 35 клиниками репродуктивного здоровья в 34 российских городах. Долю продал основатель сети Сергей Лебедев. Эксперты видят в сделке появление вертикально интегрированной структуры на рынке вспомогательных репродуктивных технологий.",
@@ -133000,7 +133009,7 @@
   {
    "id": "gc1a34417",
    "date": "2023-02-15",
-   "title": "Менеджмент и финансовый инвестор приобрели Deutsche Leasing Восток и АЛД Автомотив у Deutsche Leasing AG",
+   "title": "Менеджмент и финансовый инвестор приобрели «Дойче Лизинг Восток» у Deutsche Leasing AG",
    "buyer": "gcf6f1146",
    "target": "gcd03a064",
    "ind": "Финансовые услуги",
@@ -133070,7 +133079,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "6ab48c2565cc"
+     "card_hash": "64d17a241811"
     },
     "price": {
      "value_rub": null,
@@ -133093,7 +133102,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "97d518699a6d"
+     "card_hash": "497bebe85d1e"
     },
     "target": {
      "company_id": "gcd03a064",
@@ -136602,7 +136611,7 @@
      "https://www.kommersant.ru/doc/7923870"
     ]
    ],
-   "extra": "Павел Тё вышел из этой структуры: 29 июля 2025 года подконтрольное ему ООО «Велна» покинуло состав учредителей «СМ» — теперь 90% долей «СМ» у Максима Буре, 10% — у Ольги Шатровой. Осталась ли доля РЧФ у «СМ» под новыми владельцами или перешла к кому-то ещё, публично не раскрывалось. Финансы фабрики за это время ухудшились: выручка за 2024 год — 743,1 млн ₽ (−22,1% год к году), чистая прибыль — 118,5 млн ₽ (−33,5%).",
+   "extra": "Павел Тё вышел из этой структуры: 29 июля 2025 года подконтрольное ему ООО «Велна» покинуло состав учредителей «СМ» — теперь 90% долей «СМ» у Максима Буре, 10% — у Ольги Шатровой. По данным ЕГРЮЛ на 2026 год, доля осталась у «СМ»: 25% в РЧФ по-прежнему принадлежит этой компании, не переоформлены. Финансы фабрики за это время ухудшились: выручка за 2024 год — 743,1 млн ₽ (−22,1% год к году), чистая прибыль — 118,5 млн ₽ (−33,5%).",
    "auto": true,
    "promoted_from_bulk": true,
    "added": "2026-07-23",
@@ -152496,7 +152505,7 @@
    "ind": "Транспорт и логистика",
    "type": "Инвестиция",
    "kind": "financing",
-   "status": "Обсуждается",
+   "status": "Не состоялась",
    "sum": "6,4 млрд ₽ (по оценке)",
    "eco": {
     "sum": "6,4 млрд ₽ (по оценке)",
@@ -152564,7 +152573,7 @@
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "70e42e7fc26c"
+     "card_hash": "9be4072697dc"
     },
     "date": {
      "value": "2023-03-01",
@@ -152580,7 +152589,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5fbc7e8f8fe8"
+     "card_hash": "44a0de9275d6"
     },
     "target": {
      "company_id": "g30d7fdce",
@@ -153451,7 +153460,7 @@
     "val": "—",
     "target_fin": "По данным системы «СПАРК-Интерфакс», ООО «Румбери» зарегистрировано в 2015 году в Туле. Выручка компании за 2021 год составила 116,1 млн ₽ — в 3,3 раза больше, чем за 2020 год; чистая прибыль — 6,6 млн ₽.",
     "fin": "—",
-    "rationale": "По данным ЕГРЮЛ, сделка состоялась 10 февраля, покупателем выступило основное юрлицо Avito — ООО «Кех Екоммерц».",
+    "rationale": "Сделка закрылась 10 февраля, но по данным ЕГРЮЛ юрлицо ООО «Румбери» не переоформлялось на Avito/«Кех еКоммерц»: единственным учредителем и гендиректором остаётся основатель сервиса Михаил Хайкин — похоже, куплен сервис и команда, а не доли самого ООО. Само ООО «Румбери» находится в процессе ликвидации с 23.04.2025.",
     "context": "«Румбери» вошёл в проект «Авито Недвижимость». Финансовые условия сделки в Avito не раскрыли. В июле 2023 года ФРИИ подал иск к основателю «Румбери» Михаилу Хайкину: фонд считал, что тот ввёл его в заблуждение перед продажей сервиса Avito. Иск отозвали после того, как Хайкин выплатил фонду компенсацию, её размер не раскрывался. Оба сооснователя — Хайкин и Ольга Бочкова — ушли из проекта после сделки.",
     "finadv": "Публично не сообщалось"
    },
@@ -160105,7 +160114,7 @@
      "value": "2023",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "5294525e4d7a"
+     "card_hash": "b5c730dfd933"
     },
     "nature": {
      "control_change": true,
@@ -160141,7 +160150,29 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-02-21",
+     "title": "VK увеличила долю с 51% до 75%",
+     "note": "VK выкупила долю у ООО «Нота Медиа» Сергея Адонина, чья доля снизилась с 49% до 25%.",
+     "source": [
+      "AKM",
+      "https://www.akm.ru/"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-03-06",
+     "title": "VK стала единственным владельцем (100%)",
+     "note": "VK выкупила оставшиеся 25% у ООО «Нота Медиа», полностью консолидировав контроль (по данным ЕГРЮЛ).",
+     "source": [
+      "AKM",
+      "https://www.akm.ru/"
+     ]
+    }
+   ]
   },
   {
    "id": "g12370211",
@@ -161049,7 +161080,7 @@
    "ind": "Здравоохранение",
    "type": "Инвестиция",
    "kind": "financing",
-   "status": "Обсуждается",
+   "status": "Не состоялась",
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
@@ -161117,7 +161148,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "a5aa2b52a7b0"
+     "card_hash": "a65222f81fa8"
     },
     "date": {
      "value": "2023",
@@ -161133,7 +161164,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5029e98044dd"
+     "card_hash": "5e5f9503fd40"
     },
     "target": {
      "company_id": "g523665d3",
@@ -175881,7 +175912,7 @@
    "ind": "ГМК и добыча",
    "type": "M&A",
    "kind": "acquisition",
-   "status": "Обсуждается",
+   "status": "Не состоялась",
    "sum": "1–2 млрд ₽",
    "eco": {
     "sum": "1–2 млрд ₽",
@@ -175942,7 +175973,7 @@
      "meaning": "range",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "523787b42572"
+     "card_hash": "d12af25bcc43"
     },
     "date": {
      "value": "2022",
@@ -175958,7 +175989,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f85f57f5084f"
+     "card_hash": "0d0aacc08c17"
     },
     "target": {
      "company_id": "gd28693f6",
@@ -175980,9 +176011,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "failed",
+     "top_purchases": "failed",
+     "multiple_text": "failed"
     }
    },
    "followup_researched": "2026-09-06"
@@ -184272,10 +184303,6 @@
     [
      "Shopper's",
      "https://shoppers.media/news/19670_okei-grupp-prodast-biznes-gipermarketov-menedzmentu"
-    ],
-    [
-     "Эксперт",
-     "https://expert.ru/news/vladelets-seti-gipermarketov-o-key-prodal-biznes-menedzhmentu/"
     ]
    ],
    "from_compact": "mini",
@@ -184288,19 +184315,19 @@
      ]
     ],
     "struct": "Долг сети составляет 45,9 млрд рублей. По неофициальным сведениям, из-за высокой долговой нагрузки передача бизнеса «О`кей» менеджменту может оказаться фактически безденежной.",
-    "appr": "14 октября ФАС России согласовала покупку ООО «Земун» 99% уставного капитала холдинговой компании ООО «РБФ Ритейл», которая принадлежит менеджерам сети гипермаркетов «О’Кей»."
+    "appr": ""
    },
    "eco": {
     "rationale": "LEVEL Legal Services сопровождала продажу части бизнеса гипермаркетов «О’Кей» менеджменту. Сделка прошла в несколько этапов, включая предпродажную реструктуризацию внутри группы.",
     "share": "В сделку входят сеть магазинов, товарный знак, логистическая инфраструктура и другие материальные и нематериальные активы.",
     "target_fin": "За 9 месяцев 2024 года чистая розничная выручка группы «О'Кей» выросла на 5,6%, до 155,6 млрд рублей: гипермаркеты прибавили 1,6% год к году (102,7 млрд рублей), дискаунтеры — 14,3% (52,9 млрд рублей). На конец сентября 2024 года в группе было 77 гипермаркетов и 220 дискаунтеров.",
-    "context": "Покупатель получит 99,56% уставного капитала холдинга ООО «О’кей» и после закрытия сделки будет косвенно контролировать всю сеть розничных гипермаркетов."
+    "context": ""
    },
    "added": "2026-08-03",
    "seller": "O'Key Group S.A.",
    "reviewed": "2026-08-09",
    "buyer_name": null,
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "deep_researched": "2026-08-10",
    "buyer": "g4949ccfd",
    "weekly_researched": "2026-08-10",
@@ -184336,7 +184363,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "92725277de89"
     },
     "date": {
      "value": "2024-12-26",
@@ -184352,7 +184379,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a16591c1a3e6"
+     "card_hash": "07edbe1f4cb1"
     },
     "target": {
      "company_id": null,
@@ -192275,7 +192302,7 @@
   {
    "id": "c45ad6ae9",
    "date": "2025-08-08",
-   "title": "ВТБ продаёт гостиницы Hyatt Regency Moscow Petrovsky Park и Swissotel Камелия",
+   "title": "ВТБ продал гостиничный комплекс Swissotel «Камелия»",
    "ind": "Гостиницы и туризм",
    "type": "M&A",
    "src": [
@@ -192308,7 +192335,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "85193aa68e03"
+     "card_hash": "2b61e2ad48a3"
     },
     "price": {
      "value_rub": null,
@@ -192331,7 +192358,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "40f338a3c0ed"
+     "card_hash": "273a1ca51fe7"
     },
     "target": {
      "company_id": null,
@@ -197841,125 +197868,6 @@
    },
    "seller": "Servertech Holding Ltd.",
    "followup_researched": "2026-09-09"
-  },
-  {
-   "id": "gf090d86e",
-   "date": "2024-12-26",
-   "title": "«Р-Фарм» приобрела 49,9% в группе «Центр ЭКО»",
-   "ind": "Здравоохранение",
-   "type": "M&A",
-   "status": "Закрыта",
-   "sum": "Не раскрыта",
-   "asset": "Группа «Центр ЭКО»",
-   "eco": {
-    "sum": "Не раскрыта",
-    "share": "Предметом сделки стали 49,9% в группе «Центр ЭКО», которая объединяет 29 операционных компаний.",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "В ближайшие два месяца партнёры разработают новую стратегию развития компании. 29 мая 2026 года «Р-Фарм» выкупила у Сергея Лебедева оставшиеся 50,1% акций и стала 100%-м владельцем «Центр ЭКО»; сумму этой сделки стороны также не раскрыли.",
-    "context": "«Центр ЭКО» — один из трёх крупнейших в России центров вспомогательных репродуктивных технологий (ВРТ); группа управляет 35 клиниками репродуктивного здоровья.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "Приобретение 49,9% в группе «Центр ЭКО».",
-    "appr": "—",
-    "adv": [
-     [
-      "Юридический консультант покупателя («Р-Фарм»)",
-      "Better Chance",
-      "Партнёр корпоративной практики Артём Тамаев, старший юрист Андрей Шевчук и команда юристов. Источник: https://t.me/LawFirms/8290"
-     ]
-    ],
-    "terms": "—"
-   },
-   "src": [
-    [
-     "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
-     "https://t.me/LawFirms/8290"
-    ],
-    [
-     "Vademecum",
-     "https://www.vademec.ru/news/2024/12/26/struktura-gk-r-farm-priobrela-49-9-v-seti-klinik-tsentr-eko/"
-    ],
-    [
-     "Ведомости",
-     "https://www.vedomosti.ru/business/articles/2024/12/26/1083800-struktura-r-farma-kupila-tsentr-eko"
-    ],
-    [
-     "Ведомости",
-     "https://www.vedomosti.ru/business/articles/2026/06/03/1202336-struktura-gk-r-farm-polnostyu-vikupila-set-klinik"
-    ]
-   ],
-   "from_ingest": true,
-   "duplicate_reviewed": true,
-   "added": "2026-08-03",
-   "reviewed": "2026-08-09",
-   "seller": "Сергей Лебедев",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "proofread_absorbed": {
-    "eco.rationale": [
-     "a5d7f5e2be49"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": 49.9,
-     "basis": "rule",
-     "card_hash": "2eafbb4dd164"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
-    },
-    "date": {
-     "value": "2024-12-26",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "07cd9a95c468"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "7ebbad6d7cc5"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   },
-   "followup_researched": "2026-09-09",
-   "buyer": "g0ff63178"
   },
   {
    "id": "g9f6fe860",
@@ -212681,6 +212589,818 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "ga4d82b1c",
+   "date": "2024-05-17",
+   "title": "Danone продала российский бизнес структуре «Вамин Р»",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/961100"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "17,7 млрд ₽ ($191,5 млн)",
+    "share": "—",
+    "val": "Из суммы сделки 7,7 млрд ₽ пошли на обслуживание долга — скидка к рыночной стоимости бизнеса оценивается примерно в 56%.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Общий убыток, отражённый Danone на своих счетах по факту ухода из России, составил 1,2 млрд €.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "g2cbdb3e8",
+   "seller_id": "g8cf40802",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "f3e8bf6787a4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2024-05-17",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a559639fd32d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2eb6c05c423c"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "gb20ec0ef",
+   "date": "2025-10-10",
+   "title": "ВТБ продал отель Hyatt Regency Moscow Petrovsky Park",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/VTB-prodal-gostinicu-Hyatt-Regency-v-Petrovskom-parke-85997"
+    ],
+    [
+     "Frontdesk",
+     "https://www.frontdesk.ru/news/vtb-zavershil-sdelku-po-prodazhe-otelya-hyatt-regency-moscow-petrovsky-park"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "Не раскрыта (по оценке эксперта 8–10 млрд ₽)",
+    "share": "—",
+    "val": "—",
+    "target_fin": "298 номеров, отель открыт в 2017 году.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "gpetrparkotel",
+   "seller_id": "gcafc31dc",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "0f2bdbe6e12c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2025-10-10",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "ac0ac4d2944d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d5c4c8892725"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "gd95bf2d7",
+   "date": "2026-02-03",
+   "title": "Суд обратил в доход государства бизнес-центр Kellermann Center и комплекс в Мытищах",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20260203/sud-2072022675.html"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Девятый арбитражный апелляционный суд подтвердил решение по иску Генпрокуратуры к бывшим владельцам Raven Russia Игорю Богородову и Ярославу Шувалову: суд признал незаконными несколько десятков сделок 2022–2024 годов по переводу средств в адрес эмиратской Phoenix Property Group Limited и взыскал с Богородова, Шувалова и Phoenix Property Group Limited около 6,3 млрд ₽. Предыстория — продажа бизнеса Raven Russia менеджменту во главе с Игорем Богородовым в марте 2022 года.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Государство (Росимущество, по иску Генпрокуратуры)",
+   "seller": "Игорь Богородов, Ярослав Шувалов (через ООО «Первомайская заря»)",
+   "target": "gpervomaiskayazarya",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "1fcbb0a1c183"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-02-03",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a0cba2400b09"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7a613d37ee01"
+    },
+    "target": {
+     "company_id": "gpervomaiskayazarya",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "7e7d15e49ef5"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "g47cc407c",
+   "date": "2019-02-18",
+   "title": "Эмиратский фонд Tawazun вошёл в капитал Aurus, вложив €110 млн",
+   "ind": "Автопром",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2019/02/18/794394-aurus"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/business/18/02/2019/5c6a72c59a79477a8e931bc9"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "—",
+    "share": "36% акций ООО «Аурус»",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Инвестиция за счёт новой эмиссии, а не выкупа доли у конкретного продавца (cash-in): доли прежних совладельцев размыты — ФГУП «НАМИ» (63,5%) и «Соллерс» (0,5%). В декабре 2024 года Tawazun передал свою долю российской компании «Дедал» (карточка g04edfc17).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "gtawazunfund",
+   "target": "gf4733fef",
+   "sum": "110 млн €",
+   "facts": {
+    "stake": {
+     "value": 36.0,
+     "basis": "rule",
+     "card_hash": "cd0d8f7fe935"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "ac6555850250"
+    },
+    "date": {
+     "value": "2019-02-18",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7ba61d49a7ba"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ae53179f788c"
+    },
+    "target": {
+     "company_id": "gf4733fef",
+     "inn": "7743237789",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "081b21c383f5"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   }
+  },
+  {
+   "id": "gb2bed44c",
+   "date": "2026",
+   "title": "ЛСР продала участок на Петровском острове застройщику «Геометрия»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8860958"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "Не раскрыта (по оценке экспертов 10–15 млрд ₽)",
+    "share": "Земельный участок общей продаваемой площадью 30,7 тыс. кв. м на Петровском острове.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "ggeometria",
+   "seller_id": "gb396abf4",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "625faa73b84b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7c8511cdb6ae"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "408a712272ec"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g18bb9694",
+   "date": "2023-08-10",
+   "title": "Инвестиционная группа «Инсайт» купила лизинговую компанию «РНЛ Лизинг» у RCI Banque",
+   "ind": "Транспорт и логистика",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/136125"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Investgruppa-Insajt-kupila-lizingovuyu-dochku-gruppy-Renault-RNL-Lizing-81785"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Покупка профинансирована за счёт собственных средств «Инсайта»; вместе с «РНЛ Лизинг» куплена и её 100%-я «дочка» «РНЛ Финанс». Переименована в «Флит Автолизинг» 8 ноября 2023 года. Ранее Renault собирался продать эту же компанию АвтоВАЗу — сделка не состоялась (карточка gbf0be72c).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "g21fac69d",
+   "seller": "RCI Banque (структура Renault, бренд Mobilize Financial Services)",
+   "target": "g29e037c9",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "a43365af654a"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2023-08-10",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "aa439a7d4a71"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "51276bfd0677"
+    },
+    "target": {
+     "company_id": "g29e037c9",
+     "inn": "7705757890",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "87da2eeff160"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "gb0d1c79e",
+   "date": "2026",
+   "title": "«Союз-ТТМ» выкупил на торгах производственный комплекс «Союз-М» в Калининграде",
+   "ind": "Агро",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Rugrad",
+     "https://rugrad.online/news/1457950/"
+    ],
+    [
+     "Rugrad",
+     "https://rugrad.online/news/1469127/"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "—",
+    "share": "Производственный комплекс на Правой набережной: оборудование, 3,2 га земли, здания; мощность переработки растительных масел и жиров — 164 тыс. тонн в год.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Конкурент на торгах, «ДВ Трейдинг» (Санкт-Петербург), предлагал 728 млн ₽ при стартовой цене лота 727,5 млн ₽.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "ga39603d6",
+   "seller": "ООО «Союз-М» (банкрот, бывшая структура корпорации «Союз»)",
+   "sum": "735 млн ₽",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "094d9141ad57"
+    },
+    "price": {
+     "value_rub": 735000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "93135083db7c"
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7c8511cdb6ae"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3a072893f4a5"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g76fb4663",
+   "date": "2023",
+   "title": "Олег Сохацкий продал 100% сети «Кораблик» структурам Александра Мамута",
+   "ind": "Потребительские товары",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/byvshiy-vladelets-seti-korablik-khochet-vzyskat-dolg-s-nyneshnikh-vladeltsev-kom-19-aprelya-2024-239988/"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/894605"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "Не раскрыта (известен лишь предмет иска о недоплате — 43 млн ₽, не полная цена)",
+    "share": "100% АО «Кораблик» (головная компания сети детских товаров).",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В апреле 2024 года Сохацкий подал иск к «Весперу» о взыскании 43 млн ₽ долга по договору купли-продажи. Дальнейшая судьба сети (ребрендинг в Toyspro, банкротство) — в карточке g0885d151, где описана более ранняя покупка Сохацким 5% доли у Алексея Зуева.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "gvesper",
+   "seller_id": "g30bbcea2",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "929e7c576fb0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2023",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "5294525e4d7a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "102886247e50"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g87443ed1",
+   "date": "2024-01-25",
+   "title": "АО «Лучшее решение» купило у Fabcell Limited угольные активы «Донской антрацит» и «Обуховскую»",
+   "ind": "Уголь",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8710294"
+    ],
+    [
+     "РИА Новости",
+     "https://ria.ru/20260331/sud-2083965374.html"
+    ]
+   ],
+   "from_ingest": false,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Указ президента от 25 января 2024 года разрешил сделку (п.5 указа №520 от 05.08.2022); точная дата юридического закрытия не названа ни одним источником. В ноябре 2024 года Сбербанк подал иск к Fabcell Limited о взыскании долга — 31 марта 2026 года суд взыскал около $12,3 млн (почти 1 млрд ₽). Повторные торги по дальнейшей продаже актива сорвались 2 июня 2026 года из-за отсутствия заявок — актив к 2026 году в кризисе.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "gluchsheereshenie",
+   "seller": "Fabcell Limited (Кипр)",
+   "target": "g3341534c",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "fb7d20aefb39"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2024-01-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "00cf479b9dc0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "836070ad2061"
+    },
+    "target": {
+     "company_id": "g3341534c",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": true,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "58fd7e45cc59"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_lot"
     }
    }
   }
@@ -230314,6 +231034,42 @@
     "Профиль",
     "Автоматический"
    ]
+  },
+  "gluchsheereshenie": {
+   "name": "АО «Лучшее решение»",
+   "ind": "Уголь",
+   "desc": "Московская компания, купившая у кипрской Fabcell Limited угольные активы «Донской антрацит» и «Обуховскую» по указу президента от 25 января 2024 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gpervomaiskayazarya": {
+   "name": "ООО «Первомайская заря»",
+   "ind": "Недвижимость",
+   "desc": "Держит бизнес-центр Kellermann Center в Санкт-Петербурге и офисно-складской комплекс в Мытищах; в феврале 2026 года обращено в доход государства по иску Генпрокуратуры к бывшим владельцам Raven Russia.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gpetrparkotel": {
+   "name": "АО «Петровский парк отель»",
+   "ind": "Недвижимость",
+   "desc": "Владелец отеля Hyatt Regency Moscow Petrovsky Park (298 номеров, открыт в 2017 году); зарегистрировано в июле 2025 года, управляется АО «360 Менеджмент» (360 Executive Hotel Management). Купил отель у ВТБ в октябре 2025 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gvesper": {
+   "name": "ООО «Веспер»",
+   "ind": "Потребительские товары",
+   "desc": "Держит 100% сети детских товаров «Кораблик»; конечный владелец — Надежда Ермакова (исполнительный директор фонда A&NN Investments, управляющего активами Александра Мамута).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -236203,6 +236959,19 @@
   ],
   "gcodspb": [
    "цод спб"
+  ],
+  "gluchsheereshenie": [
+   "лучшее решение"
+  ],
+  "gpervomaiskayazarya": [
+   "первомайская заря",
+   "kellermann"
+  ],
+  "gpetrparkotel": [
+   "петровский парк отель"
+  ],
+  "gvesper": [
+   "веспер"
   ]
  },
  "consumed_urls": [
@@ -236718,7 +237487,8 @@
   "geaa4fc71": "cea87de0a",
   "gf63744d6": "ceeb8c214",
   "g96ef3005": "g63c7d1bb",
-  "c9bad29b7": "g4f1b5909"
+  "c9bad29b7": "g4f1b5909",
+  "gf090d86e": "g7f396659"
  },
  "merged_companies": {
   "ge5be0c9f": "ga2cfae5b",
