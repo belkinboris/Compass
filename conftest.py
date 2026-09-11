@@ -34,6 +34,12 @@ os.environ.setdefault("DATA_REFRESH_ENABLED", "0")
 # TELEGRAM_BOT_TOKEN/TELEGRAM_CHANNEL_ID). Тестам, которым нужен путь «с
 # токеном», ставят его сами через monkeypatch.setenv — он подменяет это
 # значение только на время теста.
+# Страховка «пост не уходит раньше карточки» (send_telegram.
+# deals_missing_on_site, 11 сентября 2026) спрашивает боевой сайт, какие
+# карточки он уже отдаёт. В тестах карточки выдуманные — на сайте их нет по
+# определению, и без выключателя страховка отсекала бы каждый тестовый пост.
+# Тест самой страховки включает её обратно через monkeypatch.setenv.
+os.environ["PUBLISH_WAIT_FOR_SITE"] = "0"
 os.environ["TELEGRAM_BOT_TOKEN"] = ""
 os.environ["TELEGRAM_CHANNEL_ID"] = ""
 os.environ["TELEGRAM_WEBHOOK_SECRET"] = ""

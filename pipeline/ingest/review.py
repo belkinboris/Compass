@@ -52,7 +52,9 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
 sys.path.insert(0, ROOT)
 
+import casing                                             # noqa: E402
 import draft as drafter                                   # noqa: E402
+from link_parties import company_key as _linker_key        # noqa: E402
 from deal_multiples import SUM_BASES, DATE_BASES         # noqa: E402
 import tag_themes                                         # noqa: E402
 import link_named_parties_to_existing_profiles as linker  # noqa: E402
@@ -86,6 +88,17 @@ POSTWORTHY_MILESTONE_KINDS = frozenset({'approval', 'closed', 'cancelled'})
 # «объединения Whoosh и «Юрент» не будет» — ни одно старое слово списка
 # («не состоял», «отказал», «прекращен», «отменен») не встречалось в
 # источниках дословно, хотя сделка сорвалась максимально однозначно.
+# Родовое описание компании там, где ожидается её ИМЯ. Узко намеренно:
+# ловятся обороты пересказа рода занятий, а не длина. Формулы с долей и
+# правовой формой («49% ООО «Полиматика Рус»») не задеты.
+ASSET_IS_A_DESCRIPTION = re.compile(
+    r'(?:^|[^а-яёa-z])('
+    r'компани[июяей][-‑\s]*(?:разработчик|производител|оператор)|'
+    r'котор[ыаяое]\w*\s+(?:разрабатыва|производ|владе|занима)|'
+    r'разработчик[а-яё]*\s+(?:решений|платформ|программ|систем)|'
+    r'в\s+(?:области|сфере)\s|специализирующ|занимающ[аеиюя]\w*ся'
+    r')', re.I)
+
 STATUS_WORDS = {
     'Обсуждается': ('переговор', 'рассматрива', 'обсужда', 'изучает', 'намерен', 'планирует'),
     'Подписана': ('объявил', 'подписал', 'заключил', 'договорил', 'соглашени'),
@@ -472,12 +485,26 @@ def fix_fingerprint(value):
     return hashlib.sha1(typo_flat(text).encode('utf-8')).hexdigest()[:12]
 
 
-def already_applied(fix, card):
+def already_applied(fix, card, companies=None):
     """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
     if fix['field'] == 'src':
         return any(len(s) > 1 and s[1] == fix['new'][1] for s in card.get('src') or [])
     current = get_field(card, fix['field'])
     if current == fix['new']:
+        return True
+    # Имя покупателя переехало в ссылку на профиль: `link_parties` снимает
+    # `buyer_name` (пара «ссылка + текст» запрещена). Факт не потерян —
+    # записан сильнее. Сверяем ИМЯ профиля, иначе любая привязка засчитывала
+    # бы чужую правку.
+    if fix['field'] == 'buyer_name' and current is None and card.get('buyer') and companies:
+        profile = (companies.get(card['buyer']) or {}).get('name')
+        if profile and _linker_key(profile) == _linker_key(fix['new']):
+            return True
+    # «Снять неверную ссылку» достигнуто, если этой ссылки больше нет. У
+    # Qiwi/RealWeb запись снимала профиль, бывший названием самой сделки, и
+    # оставляла текст — верного профиля тогда не было. Теперь он есть.
+    if fix['new'] is None and fix['field'] in ('target', 'asset_id', 'buyer', 'seller_id') \
+            and current != fix['old']:
         return True
     if current is None or fix['new'] is None:
         return False
@@ -525,6 +552,16 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
     # с притока, эта проверка чинит вход через ручное/агентское наполнение.
     if field in ('title', 'seller', 'buyer_name', 'asset') and isinstance(new, str) and '"' in new:
         bad.append('прямые кавычки вместо «» — запишите %r' % drafter.normalize_quotes(new))
+    # Предмет — имя компании (или формула «49% ООО «Икс»»), а не проза о ней:
+    # схема печатает его как «Предмет сделки». Разбор — в CLAUDE.md,
+    # 11 сентября 2026.
+    if field == 'asset' and isinstance(new, str):
+        fixed, changed = casing.to_nominative_asset(new)
+        if changed:
+            bad.append('предмет в косвенном падеже — запишите %r' % fixed)
+        if ASSET_IS_A_DESCRIPTION.search(new):
+            bad.append('предмет — имя компании, а не описание её занятий; '
+                       'описание место в eco.target_fin или в профиле компании')
     if field == 'date':
         problem = date_is_supported(fix['old'], new, quote)
         if problem:
@@ -886,7 +923,7 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         if not card:
             refused.append((fix, ['карточки %s нет в базе' % fix['id']]))
             continue
-        if already_applied(fix, card):
+        if already_applied(fix, card, data['companies']):
             done += 1
             continue
         bad = check(fix, card, texts, data['companies'], inds, urls)

@@ -339,8 +339,15 @@ def main(write=False):
                     'id': card['id'], 'title': card.get('title'),
                     'at': now.isoformat(timespec='seconds')}
     pending_ids = {c['id'] for c in pending['cards']} | existing
+    # Карточка, рождённая кнопкой «это сделка — в работу», проходит те же
+    # шаги, что и карточка из ворот: иначе стороны остаются текстом и
+    # карточка некликабельна (замер 11 сентября 2026 — 107 из 145).
+    import link_parties
+    party_index = link_parties.build_index(data['companies'])
     for draft in taken:
         card = promote.to_card(draft, promote.new_id(pending_ids))
+        for line in link_parties.link_card(card, party_index, data['companies']):
+            print('              %s | связано -> %s' % (card['id'], line))
         pending_ids.add(card['id'])
         card['pending_since'] = now.isoformat(timespec='seconds')
         pending['cards'].append(card)

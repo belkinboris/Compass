@@ -556,6 +556,42 @@ def plan_milestones(deals, stage_posts, decisions, now):
     return send, hold, discard_ids, sent_decision_ids
 
 
+def deals_missing_on_site(deal_ids):
+    """Каких карточек сайт ещё НЕ отдаёт. Пусто — все на месте или проверить
+    не удалось.
+
+    Сайт живёт на своей копии базы: код едет деплоем, а
+    `deals_promoted.json` подтягивается из `main` раз в
+    DATA_REFRESH_MINUTES. Между коммитом и появлением карточки на сайте —
+    минуты, и ровно в это окно пост со ссылкой «Открыть карточку сделки»
+    ведёт в никуда (жалоба владельца 11 сентября 2026).
+
+    Сеть недоступна -> возвращаем пусто, то есть шлём как раньше: молчащий
+    канал хуже, чем ссылка, которая заработает через пять минут. Это то же
+    решение, что в `send_drafts.site_pending_ids`."""
+    ids = {d for d in deal_ids if d}
+    if not ids or os.environ.get('PUBLISH_WAIT_FOR_SITE', '1') != '1':
+        # Выключатель того же рода, что `DATA_REFRESH_ENABLED=0` и пустой
+        # `TELEGRAM_BOT_TOKEN`: тесты гоняют `main()` на выдуманных
+        # карточках, которых на боевом сайте нет и быть не может, — без
+        # выключателя страховка честно отсекала бы их все, и пять тестов
+        # публикации проверяли бы пустой список вместо поста.
+        return set()
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    try:
+        import httpx
+        r = httpx.get('%s/static/data/deals_promoted.json' % site,
+                      params={'nocache': os.getpid()}, timeout=30)
+        if r.status_code != 200:
+            return set()
+        live = {d.get('id') for d in r.json().get('deals', [])}
+    except Exception as e:                                    # noqa: BLE001
+        print('Не удалось спросить сайт, какие карточки он уже отдаёт (%s) — '
+              'шлём как есть.' % e)
+        return set()
+    return {d for d in ids if d not in live}
+
+
 def main(write, ignore_pace=False, skip_ids=frozenset()):
     """`ignore_pace` — то же, что ключ `--now`, но параметром.
 
@@ -707,6 +743,25 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
         if problems:
             flagged.append((did, problems))
             to_edit = [(d, m, t) for d, m, t in to_edit if d != did]
+
+    # ПОСТ НЕ УХОДИТ РАНЬШЕ САМОЙ КАРТОЧКИ. 11 сентября 2026 владелец нажал
+    # в свежем посте «Открыть карточку сделки» и попал в никуда: пост ушёл
+    # сразу после коммита, а сайт подтягивает базу из `main` по расписанию
+    # (`data_refresh.py`, раз в DATA_REFRESH_MINUTES) — несколько минут
+    # ссылка ведёт на несуществующую карточку. У консоли эта страховка есть
+    # с 6 августа (`send_drafts.site_pending_ids`), у канала её не было:
+    # тот же урок применили к одному из двух мест. Разница между ними в
+    # цене ошибки — в консоли пустую ссылку видят двое, в канале
+    # подписчики.
+    not_on_site = deals_missing_on_site([d for d, _t in to_send] +
+                                        [d['id'] for d, _e, _t in to_send_m])
+    if not_on_site:
+        to_send = [(d, t) for d, t in to_send if d not in not_on_site]
+        to_send_m = [(deal, e, t) for deal, e, t in to_send_m
+                     if deal['id'] not in not_on_site]
+        print('Отложено до следующего прогона: %d — сайт ещё не отдаёт эти '
+              'карточки, ссылка в посте вела бы в никуда (%s).'
+              % (len(not_on_site), ', '.join(sorted(not_on_site))))
 
     # П3-10: решение читающего — «эта карточка сейчас не идёт», даже если
     # механическая вычитка её пропустила. Не помечается отправленной —

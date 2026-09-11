@@ -34818,7 +34818,7 @@
    "date": "2021-07-22",
    "title": "TMT Investments возглавил раунд на $1,5 млн в эстонский SaaS-стартап Postoplan",
    "buyer": "g5f515899",
-   "target": null,
+   "target": "gdb00e690",
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
    "kind": "financing",
@@ -34906,14 +34906,14 @@
      "card_hash": "9867e39a40cf"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gdb00e690",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "09a469bfb3d6"
     },
     "admitted": {
      "count": true,
@@ -35872,7 +35872,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
-   }
+   },
+   "seller_id": "gd5d02d09"
   },
   {
    "id": "ge882f973",
@@ -36951,7 +36952,7 @@
    "id": "gecc48c49",
    "date": "2022-12-07",
    "title": "Приобретение Qiwi группы компаний RealWeb (78% → 100%)",
-   "buyer": null,
+   "buyer": "gd5d02d09",
    "ind": "ИТ и интернет",
    "type": "M&A",
    "kind": "acquisition",
@@ -37013,7 +37014,6 @@
    "auto": true,
    "added": "2026-07-15",
    "asset": "Realweb",
-   "buyer_name": "Qiwi",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-15",
    "followup_researched": "2026-08-15",
@@ -37060,14 +37060,14 @@
      "card_hash": "6e6fb1a05480"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g1e2d10ab",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "f53e758ec4af"
     },
     "admitted": {
      "count": true,
@@ -37081,9 +37081,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "g1e2d10ab"
   },
   {
    "id": "g68323715",
@@ -50957,7 +50958,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller_id": "stockmann"
   },
   {
    "id": "g4882cbbe",
@@ -74740,7 +74742,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_lot"
     }
-   }
+   },
+   "seller_id": "gd5d02d09"
   },
   {
    "id": "ge56325d9",
@@ -93826,7 +93829,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "gd5d02d09"
   },
   {
    "id": "g2d90c4d5",
@@ -106865,7 +106869,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "gd5d02d09"
   },
   {
    "id": "ge292671d",
@@ -109066,7 +109071,7 @@
    "id": "gcef50cb7",
    "date": "2024-06-24",
    "title": "Моторика привлекла 900 млн руб. финансирования",
-   "buyer": null,
+   "buyer": "g7b46ca7a",
    "target": "g523665d3",
    "ind": "Здравоохранение",
    "type": "Инвестиция",
@@ -109128,7 +109133,6 @@
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-14",
    "weekly_researched": "2026-08-14",
-   "buyer_name": "АО УК «Первая»",
    "followup_researched": "2026-08-29",
    "proofread_absorbed": {
     "eco.target_fin": [
@@ -187121,7 +187125,6 @@
    },
    "added": "2026-08-03",
    "seller": "ООО «Сбербанк Инвестиции»",
-   "buyer_name": "АО «Медскан»",
    "status": "Закрыта",
    "reviewed": "2026-08-09",
    "sum": "4,767 млрд ₽",
@@ -187187,7 +187190,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "g729ef6c5"
   },
   {
    "id": "c7240231e",
@@ -193562,8 +193566,8 @@
     }
    },
    "status": "Закрыта",
-   "buyer_name": "ЗПИФ «Консорциум.Первый»",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "gd3a8fa25"
   },
   {
    "id": "ca754c77a",
@@ -196891,7 +196895,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "Lamoda",
    "seller": "Татьяна Куценко и участники ООО «Фаст Фешн»",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
@@ -196963,7 +196966,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "buyer": "gaac38b60"
   },
   {
    "id": "g13d60ebc",
@@ -197513,14 +197517,14 @@
      "card_hash": "d43ad754404d"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g8e1a15a7",
+     "inn": "6320080729",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "5a53198cff41"
     },
     "admitted": {
      "count": true,
@@ -197537,7 +197541,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g8e1a15a7"
   },
   {
    "id": "gb0759159",
@@ -197825,7 +197830,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "«Р-Фарм»",
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
    "seller": "Сергей Лебедев",
@@ -197891,7 +197895,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "g0ff63178"
   },
   {
    "id": "g9f6fe860",
@@ -197949,7 +197954,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "Selectel",
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-10",
@@ -198018,7 +198022,8 @@
     }
    },
    "seller": "Людмила Губарева, Татьяна Чистякова и Александр Двас",
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "gd4a7c612"
   },
   {
    "id": "gaa603e6d",
@@ -198476,14 +198481,14 @@
      "card_hash": "87c5fa2e15b9"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g49b227e3",
+     "inn": "9717163245",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2d01310ec301"
     },
     "admitted": {
      "count": true,
@@ -198500,7 +198505,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g49b227e3"
   },
   {
    "id": "g6e1bb001",
@@ -198816,14 +198822,14 @@
      "card_hash": "0d0c8838c594"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g431a713e",
+     "inn": "7726476459",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "561a73e89c36"
     },
     "admitted": {
      "count": true,
@@ -198841,7 +198847,8 @@
     }
    },
    "seller": "Денис Фролов",
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g431a713e"
   },
   {
    "id": "gb1cacbc1",
@@ -198951,14 +198958,14 @@
      "card_hash": "0100853b9824"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g431a713e",
+     "inn": "7726476459",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "561a73e89c36"
     },
     "admitted": {
      "count": true,
@@ -198975,7 +198982,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g431a713e"
   },
   {
    "id": "g4dd7a75c",
@@ -199807,7 +199815,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "ГК «АВС-медицина»",
    "seller": "ООО «Доктор Рядом Холдинг» и ООО «Доктор Рядом Инвест»",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
@@ -199868,7 +199875,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "g67e99c13"
   },
   {
    "id": "g37a1b2e2",
@@ -199955,14 +199963,14 @@
      "card_hash": "24fb5ea9a2e6"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g37d577dc",
      "inn": null,
      "confirmed": false,
-     "bank": false,
+     "bank": true,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "e18114862d6e"
     },
     "admitted": {
      "count": true,
@@ -199979,7 +199987,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g37d577dc"
   },
   {
    "id": "g1a626d5b",
@@ -200286,7 +200295,7 @@
     "terms": "Пять акционеров заключили корпоративное соглашение: каждый из них вправе участвовать в стратегическом планировании и утверждении бюджетов. CARGO.RUN продолжит работать под своим брендом и останется отдельным юрлицом с прежней командой и всеми нынешними продуктами."
    },
    "buyer_name": "Святослав Вильде и Олег Круглов",
-   "asset": "разработчик системы для управления автомобильными грузоперевозками CARGO.RUN",
+   "asset": "CARGO.RUN",
    "events": [
     {
      "kind": "closed",
@@ -200340,7 +200349,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "952633a06907"
+     "card_hash": "10768e40c915"
     },
     "price": {
      "value_rub": null,
@@ -203565,14 +203574,14 @@
      "card_hash": "7b75e83786b9"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g127cf704",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "af286f8c3a3b"
     },
     "admitted": {
      "count": true,
@@ -203586,9 +203595,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "g127cf704"
   },
   {
    "id": "g7f6d55a9",
@@ -204409,14 +204419,14 @@
      "card_hash": "b590426869bd"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g12111389",
+     "inn": "9731004688",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "cde8b6a7ce8a"
     },
     "admitted": {
      "count": true,
@@ -204430,9 +204440,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "g12111389"
   },
   {
    "id": "gda6baa02",
@@ -204706,14 +204717,14 @@
      "card_hash": "2c0c74347bab"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gf9a640d2",
+     "inn": "0274051582",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fc39bb467434"
     },
     "admitted": {
      "count": true,
@@ -204727,9 +204738,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "gf9a640d2"
   },
   {
    "id": "g63c7d1bb",
@@ -205931,7 +205943,7 @@
     "terms": "—"
    },
    "buyer_name": "Константин Рензяев",
-   "asset": "российский производитель решений в области кибербезопасности «Кодмастер»",
+   "asset": "«Кодмастер»",
    "party_evidence": {
     "buyer": [
      {
@@ -205967,7 +205979,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ea94b354ef2d"
+     "card_hash": "779e02bb8cae"
     },
     "price": {
      "value_rub": null,
@@ -207260,7 +207272,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller_id": "g7802e51e"
   },
   {
    "id": "gabdbe320",
@@ -210453,7 +210466,6 @@
      }
     ]
    },
-   "buyer_name": "ООО «Промресурс»",
    "reviewed": "2026-09-04",
    "seller_id": "g4e2d0a88",
    "deep_researched": "2026-09-04",
@@ -210526,7 +210538,8 @@
      "multiple_text": "no_target"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "buyer": "gpromresurs"
   },
   {
    "id": "gd3556cc0",
@@ -211785,7 +211798,6 @@
     "adv": [],
     "terms": "После закрытия сделки основатели и менеджмент «Лимба» продолжат руководить операционной деятельностью компании."
    },
-   "buyer_name": "«Моторика»",
    "asset": "50,1% акционерного капитала АО «ГК Лимб»",
    "events": [
     {
@@ -211889,7 +211901,8 @@
      "10e5f51a6701"
     ]
    },
-   "proofread": "2026-09-11"
+   "proofread": "2026-09-11",
+   "buyer": "g523665d3"
   },
   {
    "id": "g2349d667",
@@ -212049,7 +212062,7 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "Доля в CyberOK. Размер доли стороны не назвали.",
     "val": "По оценке Positive Technologies, объем российского рынка решений класса EASM в 2026 году составит порядка 2–2,5 млрд рублей. Компания ожидает, что в ближайшие пять лет сегмент будет расти опережающими темпами и к 2031 году вместе со смежными технологиями непрерывной проверки защищенности может достичь 8 млрд рублей.",
     "target_fin": "CyberOK специализируется на технологиях управления внешней поверхностью атаки и непрерывной оценки защищенности. Компания развивает базу знаний об уязвимостях и угрозах Vulnum и облачный сервис непрерывного пентестинга PentOps. В основе продуктов CyberOK — собственный R&D, AI‑агенты и экспертный Offensive SOC (операционный центр наступательной кибербезопасности). Технологии компании позволяют обнаруживать внешние активы, выявлять связанные с ними риски и проверять возможность их эксплуатации до того, как они приведут к инциденту. CyberOK занимает второе место по числу обнаруженных уязвимостей, внесенных в банк данных угроз безопасности информации ФСТЭК России.",
     "fin": "—",
@@ -212063,8 +212076,7 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Positive Technologies",
-   "asset": "долю в компании‑разработчике решений в области кибербезопасности CyberOK",
+   "asset": "CyberOK",
    "events": [
     {
      "kind": "closed",
@@ -212085,7 +212097,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "3f6222cc2ea6"
+     "card_hash": "1357bbc9f150"
     },
     "price": {
      "value_rub": null,
@@ -212111,14 +212123,14 @@
      "card_hash": "5a6db4c3bb85"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gcyberok",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "85b2f0e85f1b"
     },
     "admitted": {
      "count": true,
@@ -212132,9 +212144,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "gcyberok",
+   "buyer": "gpositivetech"
   },
   {
    "id": "g08d1c155",
@@ -229789,6 +229803,24 @@
     "Профиль",
     "Прочитан"
    ]
+  },
+  "gcyberok": {
+   "name": "CyberOK",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик решений в области кибербезопасности: ищет уязвимости на внешнем периметре компании и проверяет, можно ли их использовать.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gpositivetech": {
+   "name": "Positive Technologies",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик решений в области кибербезопасности.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -235645,6 +235677,13 @@
   ],
   "gambertalvis": [
    "амбер талвис"
+  ],
+  "gcyberok": [
+   "cyberok",
+   "сайберок"
+  ],
+  "gpositivetech": [
+   "positive technologies"
   ]
  },
  "consumed_urls": [

@@ -77,6 +77,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 import match as matcher                                  # noqa: E402
 import source_names                                      # noqa: E402
 import tag_themes                                        # noqa: E402  (pipeline/ уже в sys.path)
+import link_parties                                      # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -695,10 +696,18 @@ def main(write):
     pending = load_pending()
     taken = existing | {c['id'] for c in pending['cards']}
     added, new_cards = 0, []
+    # СТОРОНЫ НОВОЙ КАРТОЧКИ СРАЗУ ССЫЛАЮТСЯ НА ПРОФИЛИ, если они в базе
+    # есть. Без этого шага карточка рождается с текстовыми сторонами и
+    # некликабельна — замер 11 сентября 2026: 107 карточек притока из 145 не
+    # имели ни привязанного предмета, ни покупателя. Индекс строится один
+    # раз на всю партию, а не на карточку.
+    party_index = link_parties.build_index(data['companies'])
     for draft, _ in passed:
         deal_id = new_id(taken)
         taken.add(deal_id)
         card = to_card(draft, deal_id)
+        for line in link_parties.link_card(card, party_index, data['companies']):
+            print('    %s | связано -> %s' % (deal_id, line))
         card['pending_since'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
         pending['cards'].append(card)
         new_cards.append(card)

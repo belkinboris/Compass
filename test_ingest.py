@@ -2928,7 +2928,9 @@ def test_review_table_is_applied_and_not_pending(base):
                       f"предпросмотра — правку надо снять вместе с карточкой")
         # `src` дописывается в список, а не присваивается, поэтому «применено ли»
         # знает сам скрипт: сравнивать поле со значением правки тут нельзя.
-        assert review.already_applied(fix, card), (
+        # `companies` нужен, чтобы узнать имя покупателя, переехавшее из
+        # `buyer_name` в ссылку на профиль (link_parties, 11 сентября 2026).
+        assert review.already_applied(fix, card, base["companies"]), (
             f"{fix['id']}.{fix['field']}: правка из таблицы не применена к базе")
 
 
@@ -5223,3 +5225,100 @@ def test_promote_holds_the_same_deal_told_from_the_other_side(base):
                 "date": "2026-09-05"}
     assert promote.near_duplicate(one_name, idx, df) is None, (
         "одного общего названия оказалось достаточно — правило слишком мягкое")
+
+
+def test_link_parties_key_matches_the_twins_test():
+    """Ключ «одна и та же компания» у привязки сторон и у теста близнецов —
+    один и тот же.
+
+    `link_parties.company_key` держит копию ключа из
+    `test_data.py::test_no_company_twins` (импортировать из теста нельзя —
+    тесты не модуль пайплайна). Если копии разойдутся, привязка начнёт
+    считать одной компанией то, что тест считает разными профилями, —
+    поэтому расхождение ловится здесь, а не глазами.
+    """
+    import link_parties
+
+    # Проверяется ПОВЕДЕНИЕ, а не текст файла: пары имён, которые тест
+    # близнецов обязан считать одной компанией, должны давать один ключ и
+    # здесь. Пара «Альфа-Банк»/«Alfa-Bank» — та самая, ради которой ключ и
+    # писался (прогон 51).
+    for a, b in (("Альфа-Банк", "Alfa-Bank"),
+                 ("ООО «Селектел»", "Selectel"),
+                 ("ПАО «Группа Астра»", "Группа Астра")):
+        assert link_parties.company_key(a) == link_parties.company_key(b), \
+            "ключ перестал узнавать %r и %r как одну компанию" % (a, b)
+    assert link_parties.company_key("Ростех") != link_parties.company_key("Росатом")
+
+
+def test_link_parties_links_sides_and_is_idempotent():
+    """Стороны с текстом получают ссылку на профиль; повтор ничего не меняет.
+
+    Ради этого шага всё и затевалось: 11 сентября 2026 владелец спросил,
+    почему в свежей карточке не кликабельны ни предмет, ни покупатель —
+    замер показал 107 таких карточек из 145.
+    """
+    import link_parties
+
+    companies = {"gx": {"name": "ООО «Селектел»"}, "gy": {"name": "Ростех"}}
+    index = link_parties.build_index(companies)
+    card = {"id": "gtest", "asset": "Selectel", "buyer_name": "«Ростех»"}
+
+    done = link_parties.link_card(card, index, companies)
+    assert len(done) == 2, done
+    assert card["target"] == "gx"
+    assert card["buyer"] == "gy"
+    # Пара «ссылка + текст» у покупателя запрещена (test_buyer_is_named_once).
+    assert "buyer_name" not in card
+
+    assert link_parties.link_card(card, index, companies) == [], \
+        "повторный вызов снова что-то связал — шаг не идемпотентен"
+
+
+def test_link_parties_ignores_aliases_and_known_different_companies():
+    """Псевдоним не связывает, и прочитанные «разные компании» не слипаются.
+
+    Псевдонимы `match_keys` заведены для поиска упоминаний, а не для
+    отождествления: по ним продавец «JetBrains» уезжал в профиль «JetBrains
+    (офисная недвижимость СПб)» — профиль ПРЕДМЕТА сделки, а не стороны
+    (7 таких привязок в первом прогоне).
+    """
+    import link_parties
+
+    companies = {"gz": {"name": "JetBrains (офисная недвижимость СПб)"}}
+    index = link_parties.build_index(companies, {"gz": ["JetBrains"]})
+    card = {"id": "gtest", "seller": "JetBrains"}
+    assert link_parties.link_card(card, index, companies) == []
+    assert "seller_id" not in card
+
+    # Пара, прочитанная и признанная разными компаниями, не связывается.
+    companies2 = {"ga": {"name": "ООО «Аутолив»"}}
+    index2 = link_parties.build_index(companies2)
+    card2 = {"id": "gtest2", "seller": "Autoliv"}
+    assert link_parties.link_card(card2, index2, companies2) == [], \
+        "шведский продавец связался с профилем проданного им завода"
+
+
+def test_review_rejects_a_description_in_the_asset_field():
+    """Предмет — имя компании, а не пересказ её занятий.
+
+    Дочитывание заменило `asset` «CyberOK» на «долю в компании‑разработчике
+    решений в области кибербезопасности CyberOK»: фраза дословно лежала в
+    источнике, и проверка дословности пропустила её честно. На экране это
+    напечаталось как «ПРЕДМЕТ СДЕЛКИ: долю в компании‑разработчике…».
+    """
+    import review
+
+    card = {"id": "gtest", "asset": "CyberOK", "eco": {}, "law": {}}
+    bad = review.check(
+        dict(field="asset", old="CyberOK",
+             new="долю в компании‑разработчике решений в области кибербезопасности CyberOK",
+             quote="долю в компании‑разработчике решений в области кибербезопасности CyberOK"),
+        card, texts=[], companies={}, inds=[])
+    assert any("косвенном падеже" in b for b in bad), bad
+    assert any("имя компании, а не описание" in b for b in bad), bad
+
+    # Настоящее имя и короткая формула с долей проходят.
+    for good in ("«Полекс»", "49% ООО «Полиматика Рус»"):
+        assert review.check(dict(field="asset", old="CyberOK", new=good, quote=good),
+                            card, texts=[], companies={}, inds=[]) == [], good
