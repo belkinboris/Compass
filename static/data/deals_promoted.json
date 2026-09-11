@@ -213840,6 +213840,130 @@
     }
    },
    "proofread": "2026-09-11"
+  },
+  {
+   "id": "gbeb0dfe8",
+   "date": "2026-09-11",
+   "title": "Экспобанк приобрел контрольный пакет акций СДМ-банка",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/304498"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "По данным «СПАРК-Интерфакса», до этого Экспобанку принадлежало 23,5% акций. По ее итогам доля Экспобанка выросла до 86%.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "контрольный пакет акций СДМ-банка",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Сделка завершена",
+     "note": "Экспобанк увеличил долю в СДМ-Банке с 23,5% до 86% и стал контролирующим акционером. Продавец и сумма сделки не раскрыты.",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/304498"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Экспобанк",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/304498"
+     }
+    ],
+    "target": [
+     {
+      "value": "контрольный пакет акций СДМ-банка",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/304498"
+     }
+    ]
+   },
+   "buyer": "g0a130abd",
+   "target": "gsdmbank",
+   "reviewed": "2026-09-11",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "notes": "профили покупателя и предмета заведены, ИНН СДМ-Банка найден бесплатным поиском ЕГРЮЛ и внесён в реестр"
+   },
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "ad1cf19ecae0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "240b9bbaf3b5"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "74fed9f8f3c0"
+    },
+    "target": {
+     "company_id": "gsdmbank",
+     "inn": "7733043350",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "e959ca019d27"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
@@ -239634,7 +239758,21 @@
   "gdc686ec2": 110,
   "g08d1c155": 111,
   "g0931ed04": 112,
-  "gf080e8f0": null
+  "gf080e8f0": null,
+  "g29d31edd": 113,
+  "g2b1ff5cb": 114,
+  "g298c1588": 115,
+  "g6743f902": 116,
+  "gce803e3f": 117,
+  "ga4d82b1c": null,
+  "gb20ec0ef": null,
+  "gd95bf2d7": null,
+  "g47cc407c": null,
+  "gb2bed44c": null,
+  "g18bb9694": null,
+  "gb0d1c79e": null,
+  "g76fb4663": null,
+  "g87443ed1": null
  },
  "telegram_milestones": {},
  "telegram_digests": {
