@@ -215716,6 +215716,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Иван Таврин",
+     "id": null,
+     "as_of": "2023-01",
+     "source": [
+      "Forbes Russia",
+      "https://www.forbes.ru/tekhnologii/484184-kismet-tavrina-zaplatila-za-dolu-v-headhunter-147-mln"
+     ]
+    }
    ]
   },
   "g96dd2af2": {
@@ -217237,6 +217248,48 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Chevre Investments Limited",
+     "id": null,
+     "share": "64,68%",
+     "as_of": "2021-10",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5039601"
+     ]
+    },
+    {
+     "name": "Nortox Investments Limited",
+     "id": null,
+     "share": "34,12%",
+     "as_of": "2021-10",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5039601"
+     ]
+    },
+    {
+     "name": "Лев Кветной",
+     "id": null,
+     "share": "0,7%",
+     "as_of": "2021-10",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5039601"
+     ]
+    },
+    {
+     "name": "Надежда Анисимова",
+     "id": null,
+     "share": "0,5%",
+     "as_of": "2021-10",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5039601"
+     ]
+    }
    ]
   },
   "g6d8a19ee": {
@@ -230965,7 +231018,29 @@
     "Председатель СД",
     "Сергей Шишкарёв"
    ],
-   "group": true
+   "group": true,
+   "ownership": [
+    {
+     "name": "Сергей Шишкарёв",
+     "id": null,
+     "share": "51%",
+     "as_of": "2026-02",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2026/02/26/1179096-shishkarev-vikupil-1-uk-delo-u-transmashholdinga"
+     ]
+    },
+    {
+     "name": "Росатом",
+     "id": "rosatom",
+     "share": "49%",
+     "as_of": "2026-02",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/25/12/2024/676aff8d9a7947bb1f5e22e9"
+     ]
+    }
+   ]
   },
   "cargill": {
    "name": "Cargill",
