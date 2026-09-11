@@ -350,8 +350,7 @@
    "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g20ec3d5e (общие редкие слова: 2022, основа) — проверьте, не дубль ли"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -647,35 +646,7 @@
    ]
   },
   {
-   "draft_id": "d10612302",
-   "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке за счет акционера",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/09/1227593-dolyu-v-sovkombanke"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d57266745",
+   "draft_id": "d50459914",
    "title": "Продажа 1,3% акций Совкомбанка прошла в закрытом режиме",
    "date": "2026-09-09",
    "src": [
@@ -703,37 +674,7 @@
    ]
   },
   {
-   "draft_id": "d67272742",
-   "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке за счет неназванного акционера",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Sovko-kapital-partners-narastil-dolyu-v-Sovkombanke-za-schet-nenazvannogo-akcionera-87497"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Совко капитал партнерс» нарастил долю в Совкомбанке за счет» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d28920981",
+   "draft_id": "d60193930",
    "title": "Владельцы разработчика скандального процессора «Иртыш» купили контрольную долю в российском дизайн-центре",
    "date": "2026-09-10",
    "src": [
@@ -772,7 +713,7 @@
    ]
   },
   {
-   "draft_id": "d19243477",
+   "draft_id": "d46484632",
    "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
    "date": "2026-09-10",
    "src": [
@@ -800,7 +741,7 @@
    ]
   },
   {
-   "draft_id": "d11481815",
+   "draft_id": "d13764718",
    "title": "DST Global Юрия Мильнера вновь вложился во французского единорога Mistral AI , говорится в сообщении стартапа. Фонд инвестировал в проект в раунде D на €3 млрд, который возглавили Samsung Electronics,",
    "date": "2026-09-10",
    "src": [
@@ -828,35 +769,7 @@
    ]
   },
   {
-   "draft_id": "d42665041",
-   "title": "Mento VC под управлением Александра Журавлева инвестировал в американский ИИ-стартап Pin . Об этом управляющий партнер фонда написал в сообщении в своем Telegram-канале.  Pin был основан в 2024 году С",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7722"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": "Mento VC под управлением Александра Журавлева",
-   "asset": "американский ИИ-стартап Pin . Об этом управляющий партнер фонда написал в сообщении в своем Telegram",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Mento VC под управлением Александра Журавлева",
-    "asset": "американский ИИ-стартап Pin . Об этом управляющий партнер фонда написал в сообщении в своем Telegram",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "похоже на уже описанную сделку g20ec3d5e (общие редкие слова: америк, основа) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d76753270",
+   "draft_id": "d79195072",
    "title": "Сроки возможной продажи «Росгосстраха» определят в течение 1-2 месяцев",
    "date": "2026-09-11",
    "src": [
@@ -884,7 +797,7 @@
    ]
   },
   {
-   "draft_id": "d88626034",
+   "draft_id": "d31086794",
    "title": "ВТБ намерены продать Росгосстрах в этом году",
    "date": "2026-09-11",
    "src": [
@@ -923,7 +836,7 @@
    ]
   },
   {
-   "draft_id": "d89512135",
+   "draft_id": "d74858226",
    "title": "ВТБ назвал сроки возможной продажи «Росгосстраха»",
    "date": "2026-09-11",
    "src": [
@@ -953,35 +866,7 @@
    ]
   },
   {
-   "draft_id": "d72748406",
-   "title": "Один из крупнейших инструментов для программистов изгнал россиян после его покупки Илоном Маском",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-11_odin_iz_krupnejshih_ii-instrumentov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80509497",
+   "draft_id": "d72151036",
    "title": "«Дом.РФ» выставил на торги четыре здания и земельный участок в Хамовниках",
    "date": "2026-09-11",
    "src": [
@@ -1010,13 +895,219 @@
    ]
   },
   {
-   "draft_id": "d15461669",
-   "title": "Стивен Сигал снял подмосковный дом с открытой продажи из-за фанатов",
+   "draft_id": "d84428361",
+   "title": "МТС планирует на 20% увеличить инвестиции в развитие технологии 5G",
    "date": "2026-09-11",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/11/sigal-dom/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/09/11/1228056-investitsii-v-5g"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-11",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/technology/news/2026/09/11/1228056-investitsii-v-5g"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33645420",
+   "title": "Positive Technologies приобрела долю в CyberOK",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6aa3982a048df5576e86aee5"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Сделка завершена",
+     "note": "Positive Technologies приобрела долю в компании CyberOK, которая разрабатывает решения в области кибербезопасности, сообщила РБК пресс-служба компании.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6aa3982a048df5576e86aee5"
+     ]
+    }
+   ],
+   "buyer_name": "Positive Technologies",
+   "asset": "CyberOK",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Positive Technologies",
+    "asset": "CyberOK",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d61838585",
+   "title": "Механизм финансирования сетей прописали в обновленном законопроекте об инвестициях в электроэнергетику",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1115464"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d84442469",
+   "title": "Продажи нового iPhone могут упасть на 25% в России",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2165141/video/prodazhi-novogo-iphone-mogut-upast-na-25-v-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-11",
+     "title": "Переговоры",
+     "note": "Спрос на новый iPhone в России может упасть на 25%. Предзаказы на iPhone 18 Pro и Pro Max не превысили прошлогодние показатели, сообщает телеканал «Известия» . Раньше число броней перед стартом продаж стабильно росло, теперь тренд изменился. Один из факторов…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2165141/video/prodazhi-novogo-iphone-mogut-upast-na-25-v-rossii"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50213637",
+   "title": "«Дом.РФ» выставил на торги крупный земельный массив в Астраханской области",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260911/zemlya-2117012010.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3ecb7b86 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Дом.РФ» выставил на торги четыре здания и земельный участок» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d59749712",
+   "title": "Дрозденко оценил объем инвестиций в промышленное строительство",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260911/investitsii-2117018595.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d24207239",
+   "title": "Совладельцы «Челси» близки к продаже долей в клубе, пишут СМИ",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260911/chelsi-2117011113.html"
     ]
    ],
    "sum": null,
@@ -1038,31 +1129,88 @@
    ]
   },
   {
-   "draft_id": "d60555878",
-   "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
+   "draft_id": "d44641960",
+   "title": "Балтийский региональный инвестиционный форум начался в Ленобласти",
    "date": "2026-09-11",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7373"
+     "web:ria.ru",
+     "https://ria.ru/20260911/forum-2117006078.html"
     ]
    ],
-   "sum": "300 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра",
-   "asset": "Российский ИИ-стартап EORA",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра",
-    "asset": "Российский ИИ-стартап EORA",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "похоже на уже описанную сделку g8b03762d (общие редкие слова: ангело, ии) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31683794",
+   "title": "Миронов предложил выкупать квартиры застройщиков под социальное жилье",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260911/mironov-2117003610.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d20523442",
+   "title": "В России обрушились продажи одного автомобильного сектора",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/11/v-rossii-obrushilis-prodazhi-odnogo-avtomobilnogo-sektora/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
