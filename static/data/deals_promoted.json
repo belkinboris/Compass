@@ -212000,6 +212000,109 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "gdc686ec2",
+   "date": "2026-09-11",
+   "title": "Positive Technologies приобрела долю в CyberOK",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6aa3982a048df5576e86aee5"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "По оценке Positive Technologies, объем российского рынка решений класса EASM в 2026 году составит порядка 2–2,5 млрд рублей. Компания ожидает, что в ближайшие пять лет сегмент будет расти опережающими темпами и к 2031 году вместе со смежными технологиями непрерывной проверки защищенности может достичь 8 млрд рублей.",
+    "target_fin": "CyberOK специализируется на технологиях управления внешней поверхностью атаки и непрерывной оценки защищенности. Компания развивает базу знаний об уязвимостях и угрозах Vulnum и облачный сервис непрерывного пентестинга PentOps. В основе продуктов CyberOK — собственный R&D, AI‑агенты и экспертный Offensive SOC (операционный центр наступательной кибербезопасности). Технологии компании позволяют обнаруживать внешние активы, выявлять связанные с ними риски и проверять возможность их эксплуатации до того, как они приведут к инциденту. CyberOK занимает второе место по числу обнаруженных уязвимостей, внесенных в банк данных угроз безопасности информации ФСТЭК России.",
+    "fin": "—",
+    "rationale": "Инвестиция позволит ускорить развитие продуктового направления защиты внешнего периметра — прежде всего технологий управления внешней поверхностью атаки (EASM) и непрерывного тестирования на проникновение (PentOps). По оценке Positive Technologies, объем российского рынка этих решений к 2031 году может достичь 8 млрд рублей.",
+    "context": "Сделка продолжает партнерство компаний, начавшееся в 2026 году: технологии CyberOK уже используются в продуктах Positive Technologies и показали высокий спрос со стороны заказчиков.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Positive Technologies",
+   "asset": "долю в компании‑разработчике решений в области кибербезопасности CyberOK",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Сделка завершена",
+     "note": "Positive Technologies приобрела долю в компании CyberOK, которая разрабатывает решения в области кибербезопасности, сообщила РБК пресс-служба компании.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/rbcfreenews/6aa3982a048df5576e86aee5"
+     ]
+    }
+   ],
+   "reviewed": "2026-09-11",
+   "deep_researched": "2026-09-11",
+   "added": "2026-09-11",
+   "post_override": "<b>Positive Technologies приобрела долю в CyberOK</b>\n\n<b>Предмет:</b> CyberOK специализируется на технологиях управления внешней поверхностью атаки и непрерывной оценки защищенности. Компания развивает базу знаний об уязвимостях и угрозах Vulnum и облачный сервис непрерывного пентестинга PentOps.\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.rbc.ru/rbcfreenews/6aa3982a048df5576e86aee5\">РБК</a>\n\n#технологии #ИТ #MA",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "3f6222cc2ea6"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "240b9bbaf3b5"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5a6db4c3bb85"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
@@ -237576,7 +237679,8 @@
   "g63c7d1bb": 4,
   "g3ecb7b86": 107,
   "g45a72968": 108,
-  "g2349d667": 109
+  "g2349d667": 109,
+  "gdc686ec2": 110
  },
  "telegram_milestones": {},
  "telegram_digests": {
