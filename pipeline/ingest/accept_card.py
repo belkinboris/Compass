@@ -46,7 +46,7 @@ import json
 import os
 import re
 import sys
-from datetime import date
+from datetime import date, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -65,6 +65,16 @@ import source_names                # noqa: E402
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 RAW_DIR = os.path.join(ROOT, 'data', 'inbox', 'raw')
+HOLD_DIR = os.path.join(ROOT, 'data', 'inbox', 'hold')
+TRIAGE_DIR = os.path.join(ROOT, 'data', 'inbox', 'triage')
+REGISTRY_PATH = os.path.join(ROOT, 'pipeline', 'fns_registry.py')
+# Сколько дней назад приток мог найти публикацию об этой же сделке: карточка
+# принимается в день-два после появления, дальше её читают дельта-уровни.
+COVERAGE_DAYS = 14
+
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+from pipeline import fns_registry          # noqa: E402
 
 STAMP = 'accepted'
 CHECKLIST = ('sources', 'parties', 'asset', 'title', 'why', 'fields', 'wording', 'post', 'status')
@@ -132,11 +142,235 @@ def _title_words(text):
     return proofread.capitalised_words(text or '', skip_sentence_start=False)
 
 
-def findings(card, base, waived=None):
+def coverage(card, days=COVERAGE_DAYS):
+    """Публикации об ЭТОЙ сделке, которые приток нашёл и никто не прочитал.
+
+    11 сентября 2026 CNews о Positive Technologies/CyberOK лежал в
+    `data/inbox/hold/2026-09-11-enrich.json` с вердиктом «слабое совпадение:
+    общие слова заголовка: 3» — `enrich.py` по слабому совпадению правильно
+    ничего не пишет, но файл, куда он откладывает такие находки, не читал ни
+    один шаг: ни дочитывание, ни приёмка, ни консоль. Конкурент тем временем
+    процитировал CNews. Здесь тот же файл (и разбор дня, если он на диске)
+    читается для карточки, которую принимают: каждая найденная публикация —
+    или источник карточки после чтения (`src_add`), или отведена с причиной
+    (`no_source`), но не потеряна молча."""
+    have = {str(s[1]) for s in card.get('src') or [] if len(s) > 1}
+    want = 'enrich:%s' % card.get('id')
+    since = (date.today() - timedelta(days=days)).isoformat()
+    out, seen = [], set()
+    for folder, only_enrich in ((HOLD_DIR, True), (TRIAGE_DIR, False)):
+        if not os.path.isdir(folder):
+            continue
+        for name in sorted(os.listdir(folder)):
+            if not name.endswith('.json') or name[:10] < since:
+                continue
+            if only_enrich and not name.endswith('-enrich.json'):
+                continue
+            try:
+                doc = json.load(open(os.path.join(folder, name), encoding='utf-8'))
+            except ValueError:
+                continue
+            for it in (doc.get('items') if isinstance(doc, dict) else None) or []:
+                if str(it.get('verdict') or '') != want:
+                    continue
+                url = str(it.get('news') or it.get('url') or '')
+                if not url.startswith('http') or url in have or url in seen:
+                    continue
+                seen.add(url)
+                out.append({'url': url, 'title': it.get('title'), 'why': it.get('why'), 'day': name[:10]})
+    return out
+
+
+def registry_ids(registry=None):
+    """Профили, о юрлице которых реестр ИНН уже что-то знает — подтверждённый
+    ИНН или честное решение «иностранец / физлицо / лот / банк»."""
+    return {r.get('company_id') for r in (fns_registry.REGISTRY if registry is None else registry)}
+
+
+_RESOLVED = {}
+
+
+def resolve_inn(legal_name):
+    """(ИНН, официальное имя) по бесплатному поиску ЕГРЮЛ — единственное
+    действующее юрлицо с точным именем, иначе None. Латинский бренд ЕГРЮЛ не
+    знает («CyberOK» → пусто), поэтому читатель называет юрлицо кириллицей —
+    с сайта компании, из статьи или из раскрытия."""
+    key = str(legal_name or '').strip()
+    if not key:
+        return None
+    if key not in _RESOLVED:
+        from pipeline import fns_unresolved_queue
+        _RESOLVED[key] = fns_unresolved_queue.attempt_public_egrul_match(key)
+    return _RESOLVED[key]
+
+
+def add_registry_row(cid, name, inn, legal_name, card_id, registry=None, path=None, day=None):
+    """Дописывает подтверждённый ИНН в `pipeline/fns_registry.py` — тем же
+    блоком в конце REGISTRY, что и очередь «нужен ИНН». Реестр — код, который
+    импортирует сайт: строка доедет до боевого процесса со следующей сборкой
+    `release`, а пост канала (send_telegram.build_fin) увидит её сразу."""
+    registry = fns_registry.REGISTRY if registry is None else registry
+    path = path or REGISTRY_PATH
+    day = day or date.today().isoformat()
+    reason = ('Приёмка карточки %s (%s): юрлицо %s названо читателем, ИНН подтверждён точным '
+              'совпадением имени в ЕГРЮЛ (единственное действующее юрлицо).'
+              % (card_id, day, (legal_name or name).replace('"', "'")))
+    row = {'company_id': cid, 'decision': 'confirmed', 'inn': str(inn), 'reason': reason, 'date': day}
+    src = open(path, encoding='utf-8').read()
+    marker = "\n\ndef by_company_id() -> dict[str, dict]:"
+    assert marker in src, 'не нашли конец REGISTRY в fns_registry.py — формат файла изменился'
+    if '"company_id": %r,' % cid in src or '"company_id": "%s",' % cid in src:
+        # Повторный прогон того же ответа (приёмка не поставила штамп с
+        # первого раза) не должен дописать ту же строку второй раз.
+        registry.append(row)
+        return row
+    block = '\n'.join([
+        '', '',
+        '# Приёмка карточки %s — %s (pipeline/ingest/accept_card.py).' % (card_id, day),
+        'REGISTRY += [',
+        '    {"company_id": %r, "decision": "confirmed", "inn": %r,' % (cid, str(inn)),
+        '     "reason": %r,' % reason,
+        '     "date": %r},' % day,
+        ']',
+    ])
+    open(path, 'w', encoding='utf-8').write(src.replace(marker, block + marker, 1))
+    registry.append(row)
+    return row
+
+
+def fns_client_or_none():
+    """Живой клиент ФНС или None — без ключа приёмка обходится без финансов,
+    а не падает (тот же приём, что у send_telegram)."""
+    try:
+        from fns_client import ApiFnsClient
+        return ApiFnsClient()
+    except Exception:                                                     # noqa: BLE001
+        return None
+
+
+def employees_from_egr(egr):
+    """(год, средняя численность) из открытых данных ЕГРЮЛ; None, если нет."""
+    try:
+        # Ответ метода `egr` завёрнут так же, как у `changes`: {"items": [{"ЮЛ": {...}}]}.
+        if isinstance(egr, dict) and egr.get('items'):
+            egr = (egr['items'][0] or {}).get('ЮЛ') or egr['items'][0]
+        block = egr.get('ОткрСведения') or {}
+        if isinstance(block, list):
+            block = block[-1] if block else {}
+        n = int(str(block.get('КолРаб') or '').strip())
+        when = str(block.get('Дата') or '')
+        year = int(when[:4]) - (1 if when[5:10] == '01-01' else 0)
+        return (year, n) if n > 0 else None
+    except (ValueError, TypeError, AttributeError):
+        return None
+
+
+def fin_prose(rows, legal_name=None, employees=None):
+    """«Финансы покупаемой компании» из ГИР БО человеческим языком.
+
+    Владелец 11 сентября 2026: конкурент показал выручку, убыток и
+    численность АО «Сайбер ОК» за 2025 год, у нас в этом поле стояло
+    описание технологий. Цифры берутся из той же отчётности, что и блок на
+    странице компании, — но карточка сделки обязана нести их сама: пост и
+    PDF читают поле, а не сайт. Атрибуция «по данным ГИР БО/ЕГРЮЛ» — не
+    пресс-язык, а квалификация числа (правило вычитки)."""
+    rows = sorted([r for r in rows or []
+                   if r.get('revenue_rub') is not None or r.get('net_profit_rub') is not None],
+                  key=lambda r: r['year'])
+    if not rows:
+        return None
+    latest = rows[-1]
+    prior = next((r for r in rows[:-1] if r['year'] == latest['year'] - 1), None)
+    who = legal_name or 'компании'
+    parts = []
+    if latest.get('revenue_rub') is not None:
+        s = 'выручка %s за %d год — %s' % (who, latest['year'], format_post._fmt_rub(latest['revenue_rub']))
+        if prior and prior.get('revenue_rub') is not None:
+            s += ' (за %d год — %s)' % (prior['year'], format_post._fmt_rub(prior['revenue_rub']))
+        parts.append(s)
+    if latest.get('net_profit_rub') is not None:
+        v = float(latest['net_profit_rub'])
+        s = '%s — %s' % ('чистая прибыль' if v >= 0 else 'чистый убыток', format_post._fmt_rub(abs(v)))
+        if prior and prior.get('net_profit_rub') is not None:
+            pv = float(prior['net_profit_rub'])
+            s += ' (за %d год — %s %s)' % (prior['year'], 'прибыль' if pv >= 0 else 'убыток',
+                                           format_post._fmt_rub(abs(pv)))
+        parts.append(s)
+    text = 'По данным ГИР БО, ' + ', '.join(parts) + '.'
+    if employees:
+        text += ' Средняя численность работников за %d год — %d человек (ЕГРЮЛ).' % employees
+    return text
+
+
+def target_financials(card, comps, inn, legal_name, fns):
+    """Пишет `eco.target_fin` из ГИР БО, если там ещё нет ни одного числа.
+    Описание, которое стояло вместо показателей, не выбрасывается — уезжает в
+    `extra`, если его там ещё нет. Возвращает строку отчёта или None."""
+    if fns is None or not inn:
+        return None
+    try:
+        from fns_client import normalize_bo
+        rows = normalize_bo(fns.bo(inn), inn)
+    except Exception as e:                                                # noqa: BLE001
+        return 'ФНС не ответила по %s: %s' % (inn, e)
+    employees = None
+    try:
+        employees = employees_from_egr(fns.egr(inn))
+    except Exception:                                                     # noqa: BLE001
+        pass
+    prose = fin_prose(rows, legal_name=legal_name, employees=employees)
+    if not prose:
+        return 'ГИР БО по %s пуста — финансов нет' % inn
+    eco = card.setdefault('eco', {})
+    old = eco.get('target_fin')
+    if has(old) and re.search(r'\d', str(old)):
+        return None
+    if has(old):
+        extra = str(card.get('extra') or '')
+        if review.flat(old) not in review.flat(extra):
+            card['extra'] = (extra.rstrip() + '\n\n' + old).strip() if has(extra) else old
+    # Прежнее значение могла поставить таблица FIXES (у PT/CyberOK так и
+    # было: описание технологий пришло записью дочитывания). После замены
+    # запись перестанет совпадать с полем посимвольно, и
+    # `test_review_table_is_applied_and_not_pending` назовёт её неприменённой
+    # — хотя факт не потерян, он уехал в `extra`. Тот же ответ, что у вычитки:
+    # отпечаток применённой записи ложится в `proofread_absorbed`, и
+    # `review.already_applied` узнаёт её по нему. Только УЖЕ применённые
+    # записи: неприменённую отпечаток спрятал бы навсегда.
+    _absorb_applied_fixes(card, 'eco.target_fin')
+    eco['target_fin'] = prose
+    return 'eco.target_fin из ГИР БО: %s' % prose
+
+
+def _absorb_applied_fixes(card, field):
+    """Запомнить отпечатки записей FIXES по полю, которые применены к карточке
+    СЕЙЧАС, — перед тем как поле перепишется. Возвращает число записей."""
+    n = 0
+    for f in review.FIXES:
+        if f['id'] != card['id'] or f['field'] != field:
+            continue
+        if not review.already_applied(f, card):
+            continue
+        absorbed = card.setdefault('proofread_absorbed', {}).setdefault(field, [])
+        fp = review.fix_fingerprint(f['new'])
+        if fp not in absorbed:
+            absorbed.append(fp)
+            n += 1
+    return n
+
+
+def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
-    читатель. `waived` — роли, для которых читатель назвал причину без профиля."""
-    waived = waived or (card.get(STAMP + '_notes') or {}).get('no_profile') or {}
+    читатель. `waived` — роли, для которых читатель назвал причину без профиля;
+    `waived_inn` — роли, у которых юрлица с ИНН быть не может (иностранец,
+    физлицо, лот); `waived_sources` — найденные притоком публикации, которые
+    читатель отвёл с причиной (о другой сделке)."""
+    notes = card.get(STAMP + '_notes') or {}
+    waived = waived or notes.get('no_profile') or {}
+    waived_inn = set(waived_inn or notes.get('no_inn') or {})
+    waived_sources = set(waived_sources or notes.get('no_source') or {})
     out = []
+    comps = base.get('companies') or {}
     asset = card.get('asset')
     if asset:
         fixed, changed = casing.to_nominative_asset(asset)
@@ -169,11 +403,25 @@ def findings(card, base, waived=None):
         first = (format_post._sentences(rationale) or [''])[0]
         if format_post.NOT_A_MOTIVE.search(first):
             out.append(('why', '«Цель сделки» начинается с оценки рынка, а не с мотива'))
-        if has(card.get('extra')) and proofread.typo_flat(rationale) == proofread.typo_flat(card['extra']) \
-                if hasattr(proofread, 'typo_flat') else False:
+        if has(card.get('extra')) and review.flat(rationale) == review.flat(card['extra']):
             out.append(('why_dup', '«Цель сделки» дословно повторяет «Дополнительную информацию»'))
     if not any(str(s[1]).startswith('http') for s in card.get('src') or [] if len(s) > 1):
         out.append(('source', 'ни одной http-ссылки в источниках'))
+    for c in coverage(card):
+        if c['url'] not in waived_sources:
+            out.append(('coverage:' + c['url'],
+                        'публикация об этой сделке не прочитана: %s — %s' % (c['url'], c.get('title'))))
+    known = registry_ids(registry)
+    for role, (_tf, idf) in ROLES.items():
+        cid = card.get(idf) or (role == 'target' and card.get('asset_id'))
+        if cid and cid not in known and role not in waived_inn:
+            out.append(('inn_missing:' + role,
+                        '%s «%s» — юрлицо не установлено: в реестре ИНН нет ни строки'
+                        % (role, comps.get(cid, {}).get('name') or cid)))
+    tf = _text(card, 'eco.target_fin')
+    if has(tf) and not re.search(r'\d', str(tf)):
+        out.append(('target_fin_prose',
+                    '«Финансы покупаемой компании» без единого числа — это описание, а не показатели'))
     if card.get('type') == 'Продажа с торгов' and not (card.get('seller') or card.get('seller_id')) \
             and 'seller' not in waived:
         out.append(('auction_seller', 'у продажи с торгов продавец назван всегда — здесь его нет'))
@@ -241,6 +489,18 @@ def dossier(card, base):
     for s in card.get('src') or []:
         url = s[1] if len(s) > 1 else ''
         lines.append('  %s — %s%s' % (s[0], url, '  [текст в кэше]' if cached_text_available(url) else ''))
+    cov = coverage(card)
+    if cov:
+        lines.append('Другие публикации об этой сделке, найденные притоком и не прочитанные:')
+        for c in cov:
+            lines.append('  %s — %s  [%s, %s]%s' % (c['url'], c.get('title'), c.get('day'), c.get('why'),
+                                                  '  [текст в кэше]' if cached_text_available(c['url']) else ''))
+    known = registry_ids()
+    for role, (_tf, idf) in ROLES.items():
+        ref = card.get(idf) or (role == 'target' and card.get('asset_id'))
+        if ref:
+            lines.append('%-10s юрлицо: %s' % (role, 'в реестре ИНН есть' if ref in known
+                                               else 'НЕТ в реестре ИНН — назовите legal_name (кириллицей, как в ЕГРЮЛ) или inn'))
     lines.append('Пост, как он уйдёт подписчику:')
     try:
         lines.extend('  | ' + l for l in format_post.render(card, comps).splitlines())
@@ -292,6 +552,14 @@ def check_answer(ans, card, base):
         if role not in ROLES:
             bad.append('profiles: роль %r не из target/buyer/seller' % role)
             continue
+        inn, legal = p.get('inn'), str(p.get('legal_name') or '').strip()
+        if inn is not None and not re.fullmatch(r'\d{10}', str(inn)):
+            bad.append('profiles: inn %r — ИНН юрлица это десять цифр' % inn)
+        if legal and '"' in legal:
+            bad.append('profiles: прямые кавычки в legal_name %r' % legal)
+        if legal and inn is None and not resolve_inn(legal):
+            bad.append('profiles: ЕГРЮЛ не нашёл единственного действующего юрлица с именем %r — '
+                       'уточните legal_name (кириллицей, как в ЕГРЮЛ) или назовите inn' % legal)
         if p.get('id'):
             if p['id'] not in comps:
                 bad.append('profiles: профиля %s нет в базе' % p['id'])
@@ -320,11 +588,17 @@ def check_answer(ans, card, base):
             bad.append('profiles: описание %r с пресс-атрибуцией' % name)
         if p.get('ind') and p['ind'] not in industries(base):
             bad.append('profiles: отрасль %r не из списка' % p['ind'])
-    for role, reason in (ans.get('no_profile') or {}).items():
-        if role not in ROLES:
-            bad.append('no_profile: роль %r не из target/buyer/seller' % role)
+    for key in ('no_profile', 'no_inn'):
+        for role, reason in (ans.get(key) or {}).items():
+            if role not in ROLES:
+                bad.append('%s: роль %r не из target/buyer/seller' % (key, role))
+            elif not str(reason or '').strip():
+                bad.append('%s: у %s нет причины' % (key, role))
+    for url, reason in (ans.get('no_source') or {}).items():
+        if not str(url).startswith('http'):
+            bad.append('no_source: ключ должен быть адресом публикации')
         elif not str(reason or '').strip():
-            bad.append('no_profile: у %s нет причины' % role)
+            bad.append('no_source: у %s нет причины' % url)
     title = ans.get('title')
     if title:
         old_blob = ' '.join(str(card.get(k) or '') for k in ('title', 'asset', 'buyer_name', 'seller', 'extra'))
@@ -371,11 +645,15 @@ def check_answer(ans, card, base):
     return bad
 
 
-def apply_answer(ans, card, base, day=None):
+def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, fns=None):
     """Применяет проверенный ответ к карточке. Возвращает строки отчёта и
-    признак «штамп поставлен»."""
+    признак «штамп поставлен». `registry`/`registry_path`/`fns` подменяются в
+    самопроверке и тестах, чтобы не трогать настоящий реестр и не ходить в сеть."""
     comps = base['companies']
     lines = []
+    if fns is None and any((p.get('inn') or p.get('legal_name')) for p in ans.get('profiles') or []):
+        fns = fns_client_or_none()
+    known = registry_ids(registry)
     for p in ans.get('profiles') or []:
         role = p['role']
         tf, idf = ROLES[role]
@@ -398,6 +676,22 @@ def apply_answer(ans, card, base, day=None):
             if not has(card.get('asset')) and not ans.get('asset'):
                 card['asset'] = comps[cid]['name']
         lines.append('%s -> %s (%s)' % (role, cid, comps[cid]['name']))
+        inn, legal = p.get('inn'), str(p.get('legal_name') or '').strip()
+        if legal and inn is None:
+            hit = resolve_inn(legal)
+            inn = hit[0] if hit else None
+        if inn and cid not in known:
+            add_registry_row(cid, comps[cid]['name'], inn, legal or None, card['id'],
+                             registry=registry, path=registry_path, day=day)
+            known.add(cid)
+            lines.append('реестр ИНН + %s: %s (%s)' % (cid, inn, legal or comps[cid]['name']))
+        if legal and legal not in str(comps[cid].get('desc') or ''):
+            desc = str(comps[cid].get('desc') or '').rstrip()
+            comps[cid]['desc'] = ((desc.rstrip('.') + '. ') if desc else '') + 'Юрлицо — %s.' % legal
+        if role == 'target' and inn:
+            note = target_financials(card, comps, inn, legal or None, fns)
+            if note:
+                lines.append(note)
     for k in ('title', 'asset', 'status'):
         if ans.get(k) and card.get(k) != ans[k]:
             lines.append('%s: %r -> %r' % (k, card.get(k), ans[k]))
@@ -410,10 +704,12 @@ def apply_answer(ans, card, base, day=None):
         card.setdefault('src', []).append([label, s[1]])
         lines.append('src + %s' % s[1])
     waived = ans.get('no_profile') or {}
-    left = findings(card, base, waived=waived)
+    left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
+                    waived_sources=ans.get('no_source') or {}, registry=registry)
     if ans.get('verdict') == 'accept' and not left:
         card[STAMP] = day or date.today().isoformat()
-        notes = {k: v for k, v in (('no_profile', waived), ('notes', ans.get('notes'))) if v}
+        notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
+                                   ('no_source', ans.get('no_source')), ('notes', ans.get('notes'))) if v}
         if notes:
             card[STAMP + '_notes'] = notes
         lines.append('ПРИНЯТА (%s)' % card[STAMP])
@@ -459,28 +755,75 @@ def _self_check():
     # hold без причины, accept с незакрытым чек-листом — отказ.
     assert check_answer({'verdict': 'hold'}, card, base)
     assert any('чек-лист' in b for b in check_answer({'verdict': 'accept', 'checklist': {}}, card, base))
+    # ИНН — десять цифр; legal_name, которого ЕГРЮЛ не знает, — отказ (без сети:
+    # резолвер подменён). no_inn/no_source — только с причиной.
+    import tempfile
+    saved = dict(_RESOLVED)
+    _RESOLVED.clear()
+    _RESOLVED.update({'АО «Сайбер ОК»': ('9722020179', 'АКЦИОНЕРНОЕ ОБЩЕСТВО "САЙБЕР ОК"'),
+                      'ООО «Нет такого»': None})
+    bad = check_answer({'verdict': 'accept', 'checklist': {k: True for k in CHECKLIST},
+                        'profiles': [{'role': 'target', 'id': 'gsb', 'inn': '12345'},
+                                     {'role': 'buyer', 'name': 'Икс', 'desc': 'z' * 30, 'legal_name': 'ООО «Нет такого»'}],
+                        'no_inn': {'seller': ''}, 'no_source': {'ftp://x': 'о другой сделке'}}, card, base)
+    assert any('десять цифр' in b for b in bad) and any('ЕГРЮЛ не нашёл' in b for b in bad) \
+        and any('no_inn' in b for b in bad) and any('no_source' in b for b in bad), bad
     # Верный ответ: привязка, новый профиль, честная пустота у продавца — штамп.
     ok = {'verdict': 'accept', 'checklist': {k: True for k in CHECKLIST},
-          'profiles': [{'role': 'target', 'id': 'gsb'},
+          'profiles': [{'role': 'target', 'id': 'gsb', 'inn': '4401116480'},
                        {'role': 'buyer', 'name': '«Совко Капитал Партнерс»', 'ind': 'Холдинги',
-                        'desc': 'Холдинговая компания основных акционеров Совкомбанка.', 'group': True}],
+                        'desc': 'Холдинговая компания основных акционеров Совкомбанка.', 'group': True,
+                        'inn': '3906406196', 'legal_name': 'МКАО «Совко Капитал Партнерс»'}],
           'no_profile': {'seller': 'один из акционеров, имя не раскрыто'},
           'title': '«Совко Капитал Партнерс» увеличил долю в Совкомбанке',
           'asset': 'акции Совкомбанка', 'status': 'Закрыта',
           'src_add': [['Совкомбанк', 'https://sovcombank.ru/press']]}
     assert not check_answer(ok, card, base), check_answer(ok, card, base)
+
+    class _FakeFns:
+        """ГИР БО и ЕГРЮЛ без сети — ровно те числа, что у АО «Сайбер ОК»."""
+        def bo(self, inn):
+            return {inn: {'2024': {'2110': '87116', '2400': '1047'}, '2025': {'2110': '41371', '2400': '-40225'}}}
+
+        def egr(self, inn):
+            return {'ОткрСведения': {'КолРаб': '49', 'Дата': '2026-01-01'}}
+
+    def _tmp_registry():
+        f = tempfile.NamedTemporaryFile('w', suffix='.py', delete=False, encoding='utf-8')
+        f.write('REGISTRY = []\n\n\ndef by_company_id() -> dict[str, dict]:\n    return {}\n')
+        f.close()
+        return f.name
+
     # Но проза ещё с пресс-языком и «Зачем» о рынке — штампа нет, пока не вычитано.
-    _lines, stamped = apply_answer(json.loads(json.dumps(ok)), json.loads(json.dumps(card)), json.loads(json.dumps(base)))
+    _lines, stamped = apply_answer(json.loads(json.dumps(ok)), json.loads(json.dumps(card)), json.loads(json.dumps(base)),
+                                   registry=[], registry_path=_tmp_registry(), fns=_FakeFns())
     assert not stamped, _lines
     card2 = json.loads(json.dumps(card))
     card2['law']['struct'] = 'Пакет продан в формате ускоренного формирования книги заявок.'
     card2['eco']['rationale'] = '—'
+    # «Финансы покупаемой компании» без единого числа — описание; после приёмки
+    # там показатели из ГИР БО, а описание переехало в extra, не пропало.
+    card2['eco']['target_fin'] = 'Банк специализируется на розничном кредитовании.'
     base2 = json.loads(json.dumps(base))
-    lines, stamped = apply_answer(json.loads(json.dumps(ok)), card2, base2, day='2026-09-11')
+    reg2, reg_path = [], _tmp_registry()
+    assert 'target_fin_prose' in {c for c, _t in findings(card2, base2, registry=reg2)}
+    lines, stamped = apply_answer(json.loads(json.dumps(ok)), card2, base2, day='2026-09-11',
+                                  registry=reg2, registry_path=reg_path, fns=_FakeFns())
     assert stamped and card2[STAMP] == '2026-09-11' and card2['target'] == 'gsb' and card2.get('buyer') \
         and 'buyer_name' not in card2 and len(base2['companies']) == 2, (lines, card2)
     assert card2['accepted_notes']['no_profile']['seller']
-    assert not findings(card2, base2), findings(card2, base2)
+    assert card2['eco']['target_fin'].startswith('По данным ГИР БО, выручка') and '49 человек' in card2['eco']['target_fin'] \
+        and 'розничном кредитовании' in card2['extra'], card2
+    assert {r['company_id'] for r in reg2} == {'gsb', card2['buyer']} and 'REGISTRY += [' in open(reg_path, encoding='utf-8').read()
+    assert 'Юрлицо — МКАО «Совко Капитал Партнерс».' in base2['companies'][card2['buyer']]['desc']
+    assert not findings(card2, base2, registry=reg2), findings(card2, base2, registry=reg2)
+    # Без ИНН и без причины штампа нет; с причиной — есть.
+    card3 = json.loads(json.dumps(card2)); card3.pop(STAMP); card3.pop(STAMP + '_notes')
+    assert 'inn_missing:target' in {c for c, _t in findings(card3, base2, registry=[])}
+    assert not [c for c, _t in findings(card3, base2, registry=[], waived_inn={'target': 'x', 'buyer': 'y'})
+                if c.startswith('inn_missing')]
+    _RESOLVED.clear()
+    _RESOLVED.update(saved)
     return True
 
 
@@ -528,7 +871,8 @@ def main(argv):
                 print('         - %s' % b)
             continue
         if not apply:
-            left = findings(card, base, waived=ans.get('no_profile') or {})
+            left = findings(card, base, waived=ans.get('no_profile') or {},
+                            waived_inn=ans.get('no_inn') or {}, waived_sources=ans.get('no_source') or {})
             print('  ГОДЕН  %s (%s)%s' % (card['id'], where,
                                           '' if not left else ' — но штамп не встанет, пока есть: ' + '; '.join(t for _c, t in left)))
             continue

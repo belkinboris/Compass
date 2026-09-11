@@ -3890,3 +3890,24 @@ def test_webhook_is_dropped_only_after_telegram_answered(monkeypatch):
     monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: Ok())
     assert main._telegram_reachable("токен") is True
 
+
+
+def test_attempt_public_egrul_match_skips_liquidated_entities_and_strips_pao():
+    """11 сентября 2026: за «ПАО «Группа Позитив»» бесплатный поиск отдавал
+    красноярское ООО «Группа Позитив», исключённое из ЕГРЮЛ в 2014 году, —
+    потому что у настоящего ПАО форма «публичное акционерное общество» не
+    снималась при сравнении, а у ликвидированного ООО — снималась. Обе
+    половины: ликвидированное (поле `e`) не считается, ПАО/НАО/МКАО
+    снимаются так же, как ООО и АО."""
+    from pipeline.fns_unresolved_queue import attempt_public_egrul_match
+
+    rows = [
+        {"k": "ul", "i": "9718077239", "n": 'ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО "ГРУППА ПОЗИТИВ"', "e": None},
+        {"k": "ul", "i": "1903021500", "n": 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ГРУППА ПОЗИТИВ"', "e": "03.12.2014"},
+    ]
+    assert attempt_public_egrul_match("ПАО «Группа Позитив»", http_client=_FakeEgrulClient(rows)) == \
+        ("9718077239", 'ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО "ГРУППА ПОЗИТИВ"')
+    only_dead = [rows[1]]
+    assert attempt_public_egrul_match("ООО «Группа Позитив»", http_client=_FakeEgrulClient(only_dead)) is None
+    sar = [{"k": "ul", "i": "3906406196", "n": 'МЕЖДУНАРОДНАЯ КОМПАНИЯ АКЦИОНЕРНОЕ ОБЩЕСТВО "СОВКО КАПИТАЛ ПАРТНЕРС"'}]
+    assert attempt_public_egrul_match("МКАО «Совко Капитал Партнерс»", http_client=_FakeEgrulClient(sar))[0] == "3906406196"

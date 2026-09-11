@@ -3381,7 +3381,15 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
              "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {}}
     base["companies"]["gsb2"] = {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}
-    assert not accept_card.findings(clean, base), accept_card.findings(clean, base)
+    known = [{"company_id": "gsb"}, {"company_id": "gsb2"}]
+    assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
+    # А без строки в реестре ИНН — юрлицо не установлено, и это находка (11 сентября
+    # 2026: у «CyberOK» не было ни ИНН, ни отчётности, пока конкурент показал и то и другое).
+    assert {"inn_missing:target", "inn_missing:buyer"} <= {c for c, _t in accept_card.findings(clean, base, registry=[])}
+    assert not [c for c, _t in accept_card.findings(clean, base, registry=[], waived_inn={"target": "x", "buyer": "y"})
+                if c.startswith("inn_missing")]
+    clean["eco"]["target_fin"] = "Разрабатывает решения для защиты внешнего периметра."
+    assert "target_fin_prose" in {c for c, _t in accept_card.findings(clean, base, registry=known)}
 
 
 def test_acceptance_refuses_invented_names_descriptions_and_twins():
@@ -3413,7 +3421,7 @@ def test_acceptance_refuses_invented_names_descriptions_and_twins():
         "asset": "акции Совкомбанка"}, card, base)
 
 
-def test_acceptance_stamps_only_a_card_without_findings_left():
+def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
     """Штамп — итог, а не намерение: ответ верный, но проза ещё с газетой —
     штампа нет; после вычитки тот же ответ ставит его, заводит профиль,
     привязывает стороны и убирает текстовое имя покупателя."""
@@ -3424,22 +3432,39 @@ def test_acceptance_stamps_only_a_card_without_findings_left():
             "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "«Совко капитал партнерс»",
             "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {"struct": "Так пишут «Ведомости»."}}
     ans = {"verdict": "accept", "checklist": {k: True for k in accept_card.CHECKLIST},
-           "profiles": [{"role": "target", "id": "gsb"},
+           "profiles": [{"role": "target", "id": "gsb", "inn": "4401116480"},
                         {"role": "buyer", "name": "«Совко Капитал Партнерс»", "ind": "Холдинги",
-                         "desc": "Холдинговая компания основных акционеров Совкомбанка.", "group": True}],
+                         "desc": "Холдинговая компания основных акционеров Совкомбанка.", "group": True,
+                         "inn": "3906406196", "legal_name": "МКАО «Совко Капитал Партнерс»"}],
            "no_profile": {"seller": "один из акционеров, имя не раскрыто"},
            "asset": "акции Совкомбанка", "status": "Закрыта",
            "src_add": [["Совкомбанк", "https://sovcombank.ru/press"]]}
+    reg_path = str(tmp_path / "registry.py")
+    reg_path_file = open(reg_path, "w", encoding="utf-8")
+    reg_path_file.write("REGISTRY = []\n\n\ndef by_company_id() -> dict[str, dict]:\n    return {}\n")
+    reg_path_file.close()
+    registry = []
     _lines, stamped = accept_card.apply_answer(json.loads(json.dumps(ans)), json.loads(json.dumps(card)),
-                                               json.loads(json.dumps(base)))
+                                               json.loads(json.dumps(base)), registry=registry, registry_path=reg_path, fns=None)
     assert not stamped
     card["law"]["struct"] = "Пакет продан в формате ускоренного формирования книги заявок."
-    lines, stamped = accept_card.apply_answer(ans, card, base, day="2026-09-11")
+    lines, stamped = accept_card.apply_answer(ans, card, base, day="2026-09-11", registry=registry,
+                                              registry_path=reg_path, fns=None)
     assert stamped and card["accepted"] == "2026-09-11", lines
+    # Реестр ИНН пополнен обеими сторонами — в памяти и в файле, который читает сайт;
+    # повторный прогон того же ответа строку второй раз не дописывает.
+    assert {r["company_id"] for r in registry} == {"gsb", card["buyer"]}
+    assert open(reg_path, encoding="utf-8").read().count("REGISTRY += [") == 2
+    again = dict(ans, profiles=[{"role": "target", "id": "gsb", "inn": "4401116480"},
+                                {"role": "buyer", "id": card["buyer"], "inn": "3906406196"}])
+    accept_card.apply_answer(again, json.loads(json.dumps(card)), json.loads(json.dumps(base)),
+                             registry=[], registry_path=reg_path, fns=None)
+    assert open(reg_path, encoding="utf-8").read().count("REGISTRY += [") == 2
+    assert "Юрлицо — МКАО «Совко Капитал Партнерс»." in base["companies"][card["buyer"]]["desc"]
     assert card["target"] == "gsb" and card["buyer"] in base["companies"] and "buyer_name" not in card
     assert base["companies"][card["buyer"]]["group"] is True
     assert card["src"][-1][1] == "https://sovcombank.ru/press" and card["status"] == "Закрыта"
-    assert not accept_card.findings(card, base)
+    assert not accept_card.findings(card, base, registry=registry)
 
 
 def test_console_withholds_cards_that_passed_reading_but_not_acceptance(monkeypatch):
@@ -5473,3 +5498,81 @@ def test_review_rejects_a_description_in_the_asset_field():
     for good in ("«Полекс»", "49% ООО «Полиматика Рус»"):
         assert review.check(dict(field="asset", old="CyberOK", new=good, quote=good),
                             card, texts=[], companies={}, inds=[]) == [], good
+
+
+def test_acceptance_reads_publications_the_enrichment_step_set_aside(tmp_path, monkeypatch):
+    """11 сентября 2026: CNews о Positive Technologies/CyberOK лежал в
+    `hold/<день>-enrich.json` как «слабое совпадение» — файл, который не
+    читал ни один шаг, — а конкурент его цитировал. Теперь приёмка видит
+    такие публикации: пока адрес не в `src` и не отведён в `no_source` с
+    причиной, штампа нет."""
+    import accept_card
+    hold = tmp_path / "hold"
+    hold.mkdir()
+    day = accept_card.date.today().isoformat()
+    (hold / (day + "-enrich.json")).write_text(json.dumps({"made": day, "items": [
+        {"news": "https://www.cnews.ru/news/line/pt-cyberok", "title": "Positive Technologies приобрела долю в CyberOK",
+         "verdict": "enrich:gt9", "why": "общие слова заголовка: 3", "reasons": ["слабое совпадение"]},
+        {"news": "https://example.org/other", "title": "Другая сделка", "verdict": "enrich:gother",
+         "why": "общие слова заголовка: 3", "reasons": ["слабое совпадение"]},
+    ]}, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(accept_card, "HOLD_DIR", str(hold))
+    monkeypatch.setattr(accept_card, "TRIAGE_DIR", str(tmp_path / "нет-такой-папки"))
+    base = {"companies": {"gb": {"name": "Positive Technologies", "ind": "ИТ и интернет", "desc": "Разработчик."},
+                          "gt": {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}},
+            "deals": [], "telegram_posts": {}}
+    card = {"id": "gt9", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+            "date": FRESH_DATE, "status": "Закрыта", "buyer": "gb", "target": "gt", "asset": "CyberOK",
+            "src": [["РБК", "https://www.rbc.ru/x"]], "eco": {}, "law": {}}
+    cov = accept_card.coverage(card)
+    assert [c["url"] for c in cov] == ["https://www.cnews.ru/news/line/pt-cyberok"], cov
+    known = [{"company_id": "gb"}, {"company_id": "gt"}]
+    codes = {c for c, _t in accept_card.findings(card, base, registry=known)}
+    assert "coverage:https://www.cnews.ru/news/line/pt-cyberok" in codes, codes
+    # Прочитана и добавлена источником — находки нет; отведена с причиной — тоже нет.
+    card["src"].append(["CNews", "https://www.cnews.ru/news/line/pt-cyberok"])
+    assert not [c for c, _t in accept_card.findings(card, base, registry=known) if c.startswith("coverage:")]
+    card["src"].pop()
+    assert not [c for c, _t in accept_card.findings(card, base, registry=known,
+                                                    waived_sources={"https://www.cnews.ru/news/line/pt-cyberok": "о другой сделке"})
+                if c.startswith("coverage:")]
+    # Ответ без причины — отказ.
+    bad = accept_card.check_answer({"verdict": "accept", "checklist": {k: True for k in accept_card.CHECKLIST},
+                                    "no_source": {"https://www.cnews.ru/news/line/pt-cyberok": ""}}, card, base)
+    assert any("no_source" in b for b in bad), bad
+    assert "Другие публикации об этой сделке" in accept_card.dossier(card, base)
+
+
+def test_gate_shows_a_complete_latin_named_draft_instead_of_hiding_it(monkeypatch):
+    """11 сентября 2026: «Positive Technologies приобрела долю в CyberOK» —
+    обе стороны российские, обе латиницей — ворота спрятали под «не видно
+    связи с российским рынком», и консоль этого не показала; черновик спас
+    только ручной разбор рутины, через час после конкурента. Полностью
+    собранный черновик (предмет и сторона разобраны) получает свою причину,
+    которую консоль показывает; недособранный остаётся скрытым."""
+    import promote
+    import send_drafts
+    complete = {"draft_id": "d-lat-1", "title": "Positive Technologies приобрела долю в CyberOK",
+                "hold_reasons": ["стороны названы латиницей — если компании российские, это наша сделка: "
+                                 "нажмите «это сделка — в работу»; если иностранная — «не сделка»"],
+                "buyer_name": "Positive Technologies", "asset": "CyberOK", "src": [["web:rbc.ru", "https://www.rbc.ru/x"]]}
+    incomplete = {"draft_id": "d-lat-2", "title": "Atomic dohaeris: стартап привлек $1 млрд на компактные реакторы",
+                  "hold_reasons": ["не названа ни одна сторона — ни покупатель, ни продавец",
+                                   "не видно связи с российским рынком — стороны и предмет названы латиницей, "
+                                   "российских признаков нет"]}
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [complete, incomplete])
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted = send_drafts.build_plan()
+    raw_ids = [item[1]["draft_id"] for _t, _kb, item in plan if item[0] == "raw"]
+    assert raw_ids == ["d-lat-1"], raw_ids
+    assert foreign == 1
+    # Сами ворота: у собранного черновика — новая причина, у пустого — старая.
+    assert promote.russian_evidence({"title": "Positive Technologies приобрела долю в CyberOK",
+                                     "buyer_name": "Positive Technologies", "asset": "CyberOK"}, []) is None
+    # Одна чужая новость в шести изданиях — один черновик в консоли: латинские
+    # имена склеивают партию так же, как названия в кавычках.
+    a = promote.batch_names_of("Nvidia покупает ИИ-стартап Hugging Face за $13 млрд")
+    b = promote.batch_names_of("Nvidia договорилась о приобретении Hugging Face")
+    c = promote.batch_names_of("IBS купила разработчика ИИ-решений Rubbles")
+    assert promote.matcher.quoted_common(a, b) and not promote.matcher.quoted_common(a, c)

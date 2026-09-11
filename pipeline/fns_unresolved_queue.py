@@ -189,8 +189,14 @@ def attempt_public_egrul_match(name, http_client=None):
             if body.get("rows") is not None:
                 rows = body["rows"]
                 break
+        # Поле `e` в строке ответа — дата прекращения деятельности: такое юрлицо
+        # ликвидировано и стороной сегодняшней сделки быть не может. Без этого
+        # фильтра 11 сентября 2026 за «Группу Позитив» выдавалось красноярское
+        # ООО, исключённое из ЕГРЮЛ в 2014 году, а настоящее ПАО оставалось в
+        # стороне (у него ещё и форма собственности не снималась — см. `_OPF`).
         exact = [r for r in rows
                  if r.get("k") == "ul" and str(r.get("i") or "").strip()
+                 and not r.get("e")
                  and norm_name(r.get("n")) == target]
         if len(exact) == 1:
             return exact[0]["i"], exact[0].get("n")

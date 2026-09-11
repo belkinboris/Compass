@@ -299,6 +299,26 @@ def russian_evidence(draft, names):
     return None
 
 
+# Латинские имена в заголовке — для склейки ОДНОЙ новости в разных изданиях
+# внутри партии придержанных черновиков. Кавычек у латинского бренда нет
+# («Nvidia покупает Hugging Face» — 6 изданий за один день 3 сентября 2026),
+# а с 11 сентября такие черновики идут в консоль, и шесть сообщений об одной
+# чужой сделке — это ровно та куча, из-за которой консоль перестают читать.
+# Только для склейки в пределах партии: в базу и в поиск дублей это не идёт.
+LATIN_NAME = re.compile(r'\b([A-Z][A-Za-z0-9&.\-]{2,})\b')
+LATIN_STOP = {'ipo', 'spo', 'ceo', 'cfo', 'coo', 'llc', 'ltd', 'inc', 'plc', 'gmbh', 'group', 'capital',
+              'partners', 'holding', 'holdings', 'company', 'corp', 'the', 'and', 'for', 'new'}
+
+
+def batch_names_of(title):
+    names = set(matcher.quoted(title))
+    for m in LATIN_NAME.finditer(str(title or '')):
+        w = m.group(1).lower().strip('.-')
+        if len(w) >= 3 and w not in LATIN_STOP:
+            names.add(w)
+    return names
+
+
 def stem_frequency(idx):
     """Сколько заголовков базы содержат каждую основу — чтобы отличать
     различающее слово от общего. «разраб» стоит в 34 заголовках и не значит
@@ -406,8 +426,29 @@ def check(draft, base, idx, inds, df=None):
     if parsed.get('seller') and not (draft.get('seller') or draft.get('seller_id')):
         hold.append('в источнике назван продавец, но он не перенесён в карточку')
     if not russian_evidence(draft, profile_names(base.get('companies'))):
-        hold.append('не видно связи с российским рынком — стороны и предмет названы '
-                    'латиницей, российских признаков нет')
+        # ДВА РАЗНЫХ СЛУЧАЯ ПОД ОДНОЙ ПРИЧИНОЙ — И ОДИН ИЗ НИХ ТЕРЯЛ НАШИ
+        # СДЕЛКИ. «Не видно связи с российским рынком» консоль прячет целиком
+        # (решение владельца 5–6 августа: иностранный контур не публикуем и
+        # не носим). Но 11 сентября 2026 под ту же причину попала настоящая
+        # российская сделка — Positive Technologies купила долю в CyberOK:
+        # обе стороны российские, просто названы латиницей, и ни одного
+        # русского маркера в заголовке РБК не оказалось. Черновик спасло
+        # только то, что рутина сама перечитала спрятанное, — через час,
+        # когда конкурент уже опубликовал. Замер по hold-файлам за месяц:
+        # черновиков, у которых ЭТО ЕДИНСТВЕННАЯ причина (предмет и сторона
+        # разобраны, глагол сделки есть), — 36 уникальных за 36 дней, и
+        # среди них IBS/Rubbles и PT/CyberOK — наши. Один такой черновик в
+        # день консоль выдержит; потерянная сделка стоит дороже. Поэтому
+        # полностью собранный черновик получает СВОЮ причину, которую
+        # send_drafts не прячет, а недособранный («не названа ни одна
+        # сторона» и т. п.) остаётся под прежней, скрытой.
+        shape_ok = bool(draft.get('target') or draft.get('asset_id') or draft.get('asset')) and bool(named_side)
+        if shape_ok:
+            hold.append('стороны названы латиницей — если компании российские, это наша '
+                        'сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»')
+        else:
+            hold.append('не видно связи с российским рынком — стороны и предмет названы '
+                        'латиницей, российских признаков нет')
     parties = [flat(draft.get(f)) for f in ('buyer_name', 'seller', 'asset') if draft.get(f)]
     if len(parties) != len(set(parties)):
         bad.append('одна и та же сторона стоит в двух ролях')
@@ -621,13 +662,13 @@ def main(write):
             # файле остаётся: если первый отбросят по ошибке, второй можно
             # поднять руками.
             twin = next((t for t, names in held_names
-                         if matcher.quoted_common(matcher.quoted(draft.get('title')), names)), None)
+                         if matcher.quoted_common(batch_names_of(draft.get('title')), names)), None)
             if twin:
                 hold = hold + ['та же новость, что «%s» — второе издание, в группу не шлём'
                                % str(twin)[:60]]
                 draft = dict(draft, dup_in_batch=True)
             else:
-                held_names.append((draft.get('title'), matcher.quoted(draft.get('title'))))
+                held_names.append((draft.get('title'), batch_names_of(draft.get('title'))))
             held.append((draft, hold))
         else:
             # Внутри одной партии общего названия в кавычках ДОСТАТОЧНО, чтобы
