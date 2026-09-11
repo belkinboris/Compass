@@ -204143,6 +204143,10 @@
     [
      "AKM",
      "https://www.akm.ru/news/softlayn_opublikoval_dannye_po_m_a_za_2025_god/"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1050562"
     ]
    ],
    "from_ingest": true,
@@ -204166,7 +204170,7 @@
       "Юридические консультанты в публичных источниках не раскрывались"
      ]
     ],
-    "terms": "—"
+    "terms": "Акции «Софтлайна», которыми частично выплачено вознаграждение продавцам, переданы с условием lock-up на 6 месяцев с поэтапным высвобождением 1/6 пакета ежемесячно."
    },
    "sum": "340 млн ₽",
    "buyer": "gda7d982b",
@@ -204247,7 +204251,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "followup_researched": "2026-09-11"
   },
   {
    "id": "g57b2c1aa",
@@ -204363,7 +204368,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "followup_researched": "2026-09-11"
   },
   {
    "id": "g0551fc60",
@@ -204528,7 +204534,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "target": "g12111389"
+   "target": "g12111389",
+   "followup_researched": "2026-09-11"
   },
   {
    "id": "gda6baa02",
@@ -204549,6 +204556,10 @@
     [
      "Mergers.ru",
      "https://mergers.ru/news/IBS-priobrela-razrabotchika-IT-reshenij-na-baze-iskusstvennogo-intellekta-Rubbles-87419"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/246823/2026-08-10/2026-w33/1010/ibs-poglotila-rubbles"
     ]
    ],
    "from_ingest": true,
@@ -204563,7 +204574,7 @@
     "finadv": "—"
    },
    "law": {
-    "struct": "До сделки 100% долей ООО «Раблз» принадлежали кипрской фирме SBDA Group Ltd.",
+    "struct": "До сделки 100% долей ООО «Раблз» принадлежали кипрской фирме SBDA Group Ltd. Приобретателем выступило ООО «УК Центр» (входит в группу IBS): 99,99% его капитала принадлежит ООО «Цифровые бизнес-системы», которое контролируется АО «ИБС ИТ Услуги» и Павлом Кутузовым.",
     "appr": "—",
     "adv": [],
     "terms": "—"
@@ -204688,7 +204699,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "followup_researched": "2026-09-11"
   },
   {
    "id": "g8e30b9a8",
