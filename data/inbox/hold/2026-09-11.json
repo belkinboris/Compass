@@ -350,7 +350,8 @@
    "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g20ec3d5e (общие редкие слова: 2022, основа) — проверьте, не дубль ли"
    ]
   },
   {
@@ -674,130 +675,7 @@
    ]
   },
   {
-   "draft_id": "d66031535",
-   "title": "Bloomberg: совладельцы «Челси» близки к продаже своих долей в клубе",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8941358"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15479996",
-   "title": "Региональные страховщики в России стали продавать бизнес из-за падения прибыли",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8941209"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Страхование",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21663607",
-   "title": "«Платье мести» принцессы Дианы выставят на аукцион Sotheby’s",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8940994"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61247018",
-   "title": "Porsche продал Bugatti за €1 млрд",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8940777"
-    ]
-   ],
-   "sum": "€1 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "Германский бренд автомобилей класса люкс Porsche, который входит в Volkswagen Group, завершил сделку по продаже Bugatti и Rimac. Porsche продал 45-процентную долю в компании, которая контролирует бренд Bugatti, и 21-процентную долю в хорватском производителе…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8940777"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Bugatti",
-   "seller": "Porsche",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Bugatti",
-    "seller": "Porsche"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d70431037",
+   "draft_id": "d89511525",
    "title": "Продажа 1,3% акций Совкомбанка прошла в закрытом режиме",
    "date": "2026-09-09",
    "src": [
@@ -825,75 +703,7 @@
    ]
   },
   {
-   "draft_id": "d76796457",
-   "title": "Минфин провел два аукциона гособлигаций с постоянным купоном",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8940324"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d81555126",
-   "title": "Porsche продала доли в Bugatti Rimac и Rimac Group за 1 млрд евро",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/09/10/1227936-porsche-prodala"
-    ]
-   ],
-   "sum": "€1 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/09/10/1227936-porsche-prodala"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "доли в Bugatti Rimac и Rimac Group",
-   "seller": "Porsche",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "доли в Bugatti Rimac и Rimac Group",
-    "seller": "Porsche"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d10088144",
+   "draft_id": "d79712676",
    "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке за счет неназванного акционера",
    "date": "2026-09-10",
    "src": [
@@ -923,7 +733,7 @@
    ]
   },
   {
-   "draft_id": "d82313289",
+   "draft_id": "d52941813",
    "title": "Владельцы разработчика скандального процессора «Иртыш» купили контрольную долю в российском дизайн-центре",
    "date": "2026-09-10",
    "src": [
@@ -962,603 +772,7 @@
    ]
   },
   {
-   "draft_id": "d63186729",
-   "title": "Россиян ограничили в покупке цифровых прав. Без экзамена – не более 300 тысяч рублей в год",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-10_rossiyan_ogranichili_v_pokupke"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d55651448",
-   "title": "В МФТИ создали цифровую платформу для спортивных врачей и тренеров",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-10_v_mfti_sozdali_tsifrovuyu_platformu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14340329",
-   "title": "The Boring Company Илона Маска подтвердила привлечение инвестиций при оценке $23 млрд, раунд возглавили ОАЭ — компания построит тоннель в Дубае",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/transport/3128026-the-boring-company-investitsii-tonneli-dubai?from=rss"
-    ]
-   ],
-   "sum": "$23 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86302107",
-   "title": "Bloomberg: Nasdaq вложила $100 млн в материнскую компанию криптобиржи Kraken — её пользователи смогут торговать токенизированными акциями с теми же правами, что и у обычных бумаг",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/crypto/3131366-nasdaq-investiruet-v-kraken-torgovlya-tokennymi-aktsiyami?from=rss"
-    ]
-   ],
-   "sum": "$100 млн",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-10",
-     "title": "Переговоры",
-     "note": "А во втором квартале 2027 года Nasdaq планирует запустить собственный токен.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/crypto/3131366-nasdaq-investiruet-v-kraken-torgovlya-tokennymi-aktsiyami?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "материнская компания криптобиржи Kraken — её пользователи смогут торговать токенизированными акциями",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "материнская компания криптобиржи Kraken — её пользователи смогут торговать токенизированными акциями",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d16246501",
-   "title": "Porsche продала свою долю в Bugatti Rimac примерно за €1 млрд на фоне реструктуризации в материнской Volkswagen",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/transport/3131794-porsche-prodala-dolyu-v-bugatti-rimac?from=rss"
-    ]
-   ],
-   "sum": "€1 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "Компании принадлежало 45% совместного предприятия.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/transport/3131794-porsche-prodala-dolyu-v-bugatti-rimac?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "своя доля в Bugatti Rimac примерно",
-   "seller": "Porsche",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "своя доля в Bugatti Rimac примерно",
-    "seller": "Porsche"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24203801",
-   "title": "День 1660: спрос на смартфоны Apple в России сохраняется при общем падении рынка на 11% — за девять месяцев продали около 700 тысяч iPhone на 61 млрд рублей",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/money/3130626-spros-na-smartfony-apple-v-rossii-sokhranyayetsya?from=rss"
-    ]
-   ],
-   "sum": "61 млрд ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "Собираем новости, события и мнения о рынках, банках и реакциях компаний.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/money/3130626-spros-na-smartfony-apple-v-rossii-sokhranyayetsya?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "около 700 тысяч iPhone на 61 млрд рублей",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "около 700 тысяч iPhone на 61 млрд рублей",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d19057551",
-   "title": "Ленобласть готовится побить рекорд по инвестициям в строительство в 2026 году",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/10/lenoblast-gotovitsja-pobit"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d47955673",
-   "title": "Ленобласть возглавила рейтинг регионов по онлайн-покупкам с долей 58%",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/10/lenoblast-vozglavila-rejting"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d29291111",
-   "title": "В Петербурге стали активно продавать продукты с неожиданным вкусом или составом",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/09/vkus-hajpa-na-prilavki-magazinov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75181363",
-   "title": "Visa и Mastercard готовятся к миру, где покупки за человека делает ИИ",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/visa-i-mastercard-gotovyatsya-k-miru-gde-pokupki-za-cheloveka-delaet-ii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d16191252",
-   "title": "Китай усложнит IPO для стартапов в сфере человекоподобных роботов",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/kitaj-uslozhnit-ipo-dlya-startapov-v-sfere-chelovekopodobnyh-robotov/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку gc7e35605 (общие редкие слова: робото, старта) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d66552290",
-   "title": "Родненькие «франкенштейны». «Россети» почти избавились от иностранного ПО, но получили новую проблему",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:comnews.ru",
-     "https://www.comnews.ru/content/247316/2026-09-11/2026-w37/1008/rodnenkie-frankenshteyny-rosseti-pochti-izbavilis-inostrannogo-no-poluchili-novuyu-problemu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "новая проблема",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "новая проблема",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d95350539",
-   "title": "iPhone заняли треть российского рынка смартфонов в денежном выражении — при этом общие продажи телефонов падают",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/iphone-zanyali-tret-rossijskogo-rynka-smartfonov-v-denezhnom-vyrazhenii-pri-etom-obshie-prodazhi-telefonov-padayut/"
-    ]
-   ],
-   "sum": "370 млрд ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "С января по сентябрь 2026 года в России продали 14,4 млн смартфонов на 370 млрд рублей, сообщает «Коммерсант». Это на 11% меньше в штуках и на 5,9% — в деньгах по сравнению с прошлым годом. За этот период россияне купили около 700 тыс. iPhone на 61 млрд…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/iphone-zanyali-tret-rossijskogo-rynka-smartfonov-v-denezhnom-vyrazhenii-pri-etom-obshie-prodazhi-telefonov-padayut/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44987872",
-   "title": "Итальянская компания купила сервис Miro",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/304217"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "Miro была основана в 2011 году российскими предпринимателями Сообщение Итальянская компания купила сервис Miro появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/304217"
-     ]
-    }
-   ],
-   "buyer_name": "Итальянская компания",
-   "asset": "сервис Miro",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Итальянская компания",
-    "asset": "сервис Miro",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку pending-1 (общие редкие слова: miro, сервис) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d80298005",
-   "title": "Комиссия по ценным бумагам КНР потребовала от банков занижать оценку компаний на IPO",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/304119"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81731795",
-   "title": "Галеристку и главу аукционного дома обвинили в подделке скульптур Эрнста Неизвестного",
-   "date": "2026-09-09",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/304103"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21527343",
-   "title": "The Boring Company raises $3B in round led by UAE",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/10/the-boring-company-raises-3b-in-round-led-by-uae/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d85207420",
-   "title": "РФ вошла в топ-10 мировых лидеров по продажам новых авто",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053126217"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86354727",
-   "title": "Какой iPhone лучше купить по соотношению цена-качество",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053126200"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d42282425",
+   "draft_id": "d67790133",
    "title": "«Платье мести» принцессы Дианы выставили на аукцион",
    "date": "2026-09-10",
    "src": [
@@ -1581,126 +795,12 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Платье мести» принцессы Дианы выставят на аукцион Sotheby’s» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d28656103",
-   "title": "В панельной девятиэтажке Ноябрьска продают самую дорогую в ЯНАО квартиру. Скрин",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053126138"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d67260343",
-   "title": "Издалека долго. В Челябинске впервые за 15 лет возобновились продажи Volga",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/auto/2026/09/10/76632418/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75593780",
-   "title": "«Команда Walnut Capital детально разбирает сделки M&A и связанные с ними вопросы».",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7371"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52629838",
-   "title": "Страховой рынок готовится к новой волне M&A В 2025–2026 годах на продажу все чаще выходят российские non-life страховщики, а основными покупателями становятся крупные финансовые группы. Причины — рост",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7372"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11664011",
+   "draft_id": "d44962571",
    "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
    "date": "2026-09-10",
    "src": [
@@ -1728,7 +828,7 @@
    ]
   },
   {
-   "draft_id": "d34252600",
+   "draft_id": "d50557737",
    "title": "DST Global Юрия Мильнера вновь вложился во французского единорога Mistral AI , говорится в сообщении стартапа. Фонд инвестировал в проект в раунде D на €3 млрд, который возглавили Samsung Electronics,",
    "date": "2026-09-10",
    "src": [
@@ -1756,7 +856,7 @@
    ]
   },
   {
-   "draft_id": "d21551342",
+   "draft_id": "d29570234",
    "title": "Mento VC под управлением Александра Журавлева инвестировал в американский ИИ-стартап Pin . Об этом управляющий партнер фонда написал в сообщении в своем Telegram-канале.  Pin был основан в 2024 году С",
    "date": "2026-09-10",
    "src": [
@@ -1780,7 +880,172 @@
    "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "похоже на уже описанную сделку pending-1 (общие редкие слова: америк, основа) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g20ec3d5e (общие редкие слова: америк, основа) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d63925813",
+   "title": "Bloomberg узнало о возможном слиянии игровых компаний EA и Savvy",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6aa3939e9408446a9b64ee9e"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-11",
+     "title": "Переговоры",
+     "note": "Государственный инвестиционный фонд Саудовской Аравии (PIF) рассматривает возможность слияния игровых компаний Electronic Arts Inc.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6aa3939e9408446a9b64ee9e"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d57950587",
+   "title": "Сроки возможной продажи «Росгосстраха» определят в течение 1-2 месяцев",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28101703"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47162207",
+   "title": "«Выберу.ру»: треть россиян покупают детям гаджеты за 15 - 30 тыс. рублей",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28101567"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "дети гаджеты",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "дети гаджеты",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d76053848",
+   "title": "ВТБ намерены продать Росгосстрах в этом году",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2164862/2026-09-11/vtb-namereny-prodat-rosgosstrakh-v-etom-godu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-11",
+     "title": "Переговоры",
+     "note": "ВТБ планирует ускорить сделку по продаже Росгосстраха, рассказал 11 сентября журналистам первый зампред банка Дмитрий Пьянов. Крайний срок — 1 апреля 2027 года, однако соглашение постараются провести уже в этом году. Это связано с тем, что в сентябре этого…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2164862/2026-09-11/vtb-namereny-prodat-rosgosstrakh-v-etom-godu"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Страхование",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21402477",
+   "title": "ВТБ назвал сроки возможной продажи «Росгосстраха»",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260911/vtb-873213482.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Сроки возможной продажи «Росгосстраха» определят в течение 1» — второе издание, в группу не шлём"
    ]
   }
  ]
