@@ -1,6 +1,23 @@
-[{"id": "gcbf6e44b",
-  "verdict": "accept",
-  "no_profile": {"seller": "продавец не назван — один из действующих акционеров; имя не раскрыто ни банком, ни Ведомостями"},
-  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
-                "why": true, "fields": true, "wording": true, "post": true, "status": true},
-  "notes": "Прочитаны Ведомости (полный текст) и пресс-релиз Совкомбанка в перепечатке abn.agency (sovcombank.ru отвечает 503 автоматическому чтению; адрес взят из ссылки в статье Ведомостей, владелец страницу открывал). Профиль холдинга заведён по Интерфаксу 03.09.2021 и cbonds. Мотива сделки источники не называют — «Цель сделки» пуста."}]
+[
+  {
+    "id": "g0931ed04",
+    "verdict": "accept",
+    "no_profile": {
+      "target": "лот из пяти небольших юрлиц (совокупная выручка 515 млн ₽), профиль ради лота не заводится — состав назван в asset",
+      "seller": "государство как таковое — не конкретное ведомство; источник не называет Росимущество"
+    },
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "eco.rationale/eco.context честно пустые: источник не называет мотив передачи, кроме самого указа — это не пробел, а то, что источник сообщает"
+  },
+  {
+    "id": "g298c1588",
+    "verdict": "accept",
+    "no_profile": {
+      "seller": "физлицо (основатель), профиль не заводится по правилу — имя остаётся текстом"
+    },
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "сумма и условия сделки не разглашаются по прямому заявлению обоих источников — честная пустота, не пробел"
+  }
+]
