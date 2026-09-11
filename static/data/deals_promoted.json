@@ -214652,6 +214652,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Ваган Гаспарян",
+     "id": null,
+     "as_of": "2026-03",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8571846"
+     ]
+    }
    ]
   },
   "g17625390": {
@@ -215022,6 +215033,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Смарт сервис ЛТД» (Константин Котов и Андрей Осколков)",
+     "id": "g3104e805",
+     "share": "77%",
+     "as_of": "2026-05",
+     "source": [
+      "Sostav.ru",
+      "https://www.sostav.ru/publication/franchajzi-rostic-s-poluchil-20-v-strukture-vladeltsa-seti-83666.html"
+     ]
+    },
+    {
+     "name": "International Restaurant Brands (IRB)",
+     "id": "g68204914",
+     "share": "20%",
+     "as_of": "2026-05",
+     "source": [
+      "Sostav.ru",
+      "https://www.sostav.ru/publication/franchajzi-rostic-s-poluchil-20-v-strukture-vladeltsa-seti-83666.html"
+     ]
+    },
+    {
+     "name": "Татьяна Шаманская (гендиректор)",
+     "id": null,
+     "share": "3%",
+     "as_of": "2026-05",
+     "source": [
+      "Sostav.ru",
+      "https://www.sostav.ru/publication/franchajzi-rostic-s-poluchil-20-v-strukture-vladeltsa-seti-83666.html"
+     ]
+    }
    ]
   },
   "g388b0f09": {
@@ -230704,6 +230747,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "АО «Антрацит» (бенефициар — Лариса Пустовалова)",
+     "id": "g337092b8",
+     "share": "100%",
+     "as_of": "2026-03",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/25/03/2026/69c3e8ea9a79477845d9411d"
+     ]
+    }
    ]
   },
   "g3341534c": {
