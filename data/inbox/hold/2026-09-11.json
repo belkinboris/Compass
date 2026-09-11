@@ -674,45 +674,6 @@
    ]
   },
   {
-   "draft_id": "d86073150",
-   "title": "Владельцы разработчика скандального процессора «Иртыш» купили контрольную долю в российском дизайн-центре",
-   "date": "2026-09-10",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-10_vladelets_razrabotchika_skandalnogo"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "АО «Трамплин Холдинг», владеющее разработчиком процессора «Иртыш», приобрело 51% в микроэлектронном дизайн-центре Malt System с собственной процессорной архитектурой. Долю у основателя дизайн-центра Сергея Елизарова структура выкупила 3 сентября 2026 г.",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-09-10_vladelets_razrabotchika_skandalnogo"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "контрольная доля в российском дизайн-центре",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "контрольная доля в российском дизайн-центре",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d74255859",
    "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
    "date": "2026-09-10",
@@ -1012,13 +973,13 @@
    ]
   },
   {
-   "draft_id": "d65351329",
-   "title": "Титов предложил продавать в Китае русские чебуреки",
+   "draft_id": "d63791223",
+   "title": "ЦБ объяснил, зачем продает золото",
    "date": "2026-09-11",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20260911/kuhnja-2117087895.html"
+     "https://ria.ru/20260911/zoloto-2117117577.html"
     ]
    ],
    "sum": null,
@@ -1026,86 +987,17 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "золото",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "золото",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d17171939",
-   "title": "Титов призвал продавать в Китае русские чебуреки",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/11/titov-prizval-prodavat-v-kitae-russkie-chebureki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d27580020",
-   "title": "Пенсионерка продала две квартиры без денег и умерла до экспертизы",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/11/pensionerka-prodala-dve-kvartiry-bez-deneg-i-umerla-do-ekspertizy/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-11",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/11/pensionerka-prodala-dve-kvartiry-bez-deneg-i-umerla-do-ekspertizy/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "две квартиры без денег и умерла до экспертизы",
-   "seller": "Пенсионерка",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "две квартиры без денег и умерла до экспертизы",
-    "seller": "Пенсионерка"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
