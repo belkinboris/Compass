@@ -46,6 +46,24 @@
    "reasons": [
     "в карточке «100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак»»"
    ]
+  },
+  {
+   "news": "https://rb.ru/news/pravitelstvo-vpervye-prodayot-izyatye-it-aktivy-inforion-i-status-komplajns-byli-v-gossobstvennosti-5-mesyacev/",
+   "title": "Правительство впервые продаёт изъятые ИТ-активы — «Инфорион» и «Статус комплайнс» были в госсобственности 5 месяцев",
+   "verdict": "enrich:g08d1c155",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ИТ-компании ООО «Инфорион» и ООО «Статус комплайнс»»"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/line/2026-09-11_positive_technologies_priobrela_dolyu",
+   "title": "Positive Technologies приобрела долю в CyberOK для развития технологий защиты внешнего периметра",
+   "verdict": "enrich:gdc686ec2",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
   }
  ]
 }
