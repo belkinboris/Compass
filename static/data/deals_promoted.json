@@ -29311,7 +29311,7 @@
    "ind": "Пищепром и напитки",
    "type": "IPO",
    "kind": "ipo",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "sum": "450 млн ₽",
    "eco": {
     "sum": "450 млн ₽",
@@ -29388,7 +29388,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f1fa68c572eb"
+     "card_hash": "e18106450510"
     },
     "date": {
      "value": "2026-05-13",
@@ -29404,7 +29404,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c0426c1ff79b"
+     "card_hash": "6833ec7112ee"
     },
     "target": {
      "company_id": "g238791a2",
@@ -211248,7 +211248,7 @@
    "id": "g29d31edd",
    "date": "2026-09-08",
    "title": "НМГ приобрела долю в технологической компании — собственнике билетно-пропускной системы «Лайм»",
-   "ind": "Не определена",
+   "ind": "Развлечения",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
@@ -211290,7 +211290,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Национальная Медиа Группа",
    "asset": "«Лайм»",
    "events": [
     {
@@ -211365,28 +211364,28 @@
      "card_hash": "ea6b7f531994"
     },
     "target": {
-     "company_id": null,
+     "company_id": "glaim",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "52a479be6bde"
     },
     "admitted": {
      "count": true,
-     "industry": false,
+     "industry": true,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
-     "industry": "no_industry",
+     "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "proofread_absorbed": {
@@ -211397,7 +211396,21 @@
      "f31b461fc3c8"
     ]
    },
-   "proofread": "2026-09-08"
+   "proofread": "2026-09-08",
+   "buyer": "gnmg",
+   "target": "glaim",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ни один из пяти источников не называет юрлицо-собственника «Лайм» (ни ООО/АО, ни ИНН) — профиль заведён брендом, без строки в реестре",
+     "buyer": "ни один источник не называет конкретное юрлицо НМГ (только бренд медиахолдинга) — профиль заведён брендом, без строки в реестре, как и у большинства крупных холдингов базы"
+    },
+    "no_inn": {
+     "target": "источники не называют юрлицо «Лайм» — искать ИНН не по чему",
+     "buyer": "источники не называют юрлицо НМГ — искать ИНН не по чему"
+    },
+    "notes": "отрасль заменена с заглушки «Не определена» на «Развлечения» — по предмету (билетно-пропускная платформа для парков и аквапарков), а не по отрасли покупателя"
+   }
   },
   {
    "id": "gbc7b1e8d",
@@ -211544,7 +211557,7 @@
    "date": "2026-09-07",
    "title": "«Норникель» и БЕЛАЗ договорились о создании совместного предприятия для разработки и производства подземной горной техники",
    "ind": "ГМК и добыча",
-   "type": "M&A",
+   "type": "Создание СП",
    "status": "Обсуждается",
    "src": [
     [
@@ -211607,14 +211620,14 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "2872f9b169c8"
+     "card_hash": "92cc5b92bb91"
     },
     "price": {
      "value_rub": null,
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "92725277de89"
+     "card_hash": "10afadc0f049"
     },
     "date": {
      "value": "2026-09-07",
@@ -211623,14 +211636,14 @@
      "card_hash": "0e247b87ce98"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "febc562cb686"
+     "card_hash": "b49be04ba2aa"
     },
     "target": {
      "company_id": null,
@@ -211652,9 +211665,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "proofread_absorbed": {
@@ -211665,7 +211678,15 @@
      "87d0bd2fae6d"
     ]
    },
-   "proofread": "2026-09-08"
+   "proofread": "2026-09-08",
+   "asset": "Совместное предприятие «Норникеля» и БЕЛАЗа для разработки и производства подземной горной техники (на первом этапе — ремонт и восстановление машин)",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет — само создаваемое СП, а не существующая компания; профиль ради названия партнёрства не заводится (та же конвенция, что у gaa603e6d/gmru-geotek-bashneftegeofizika)"
+    },
+    "notes": "type исправлен с M&A на «Создание СП» (партнёрство, не покупка — buyer/seller у СП намеренно не заполняются, см. конвенцию); asset описывает состав и предмет СП"
+   }
   },
   {
    "id": "g3ecb7b86",
@@ -231466,6 +231487,33 @@
     "Профиль",
     "Автоматический"
    ]
+  },
+  "gsdmbank": {
+   "name": "СДМ-Банк",
+   "ind": "Банки",
+   "desc": "Российский коммерческий банк, работает с 1991 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gnmg": {
+   "name": "Национальная Медиа Группа",
+   "ind": "Медиа",
+   "desc": "Российский медиахолдинг: телеканалы, издательские и цифровые активы; с 2026 года развивает направление офлайн-развлечений.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "glaim": {
+   "name": "«Лайм»",
+   "ind": "Развлечения",
+   "desc": "Технологическая платформа для парков аттракционов, аквапарков, термальных комплексов и других объектов досуга: кассовые и онлайн-продажи, бронирование, контроль доступа, абонементы и отчётность.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -237368,6 +237416,17 @@
   ],
   "gvesper": [
    "веспер"
+  ],
+  "gsdmbank": [
+   "сдм-банк",
+   "сдм банк"
+  ],
+  "gnmg": [
+   "национальная медиа группа",
+   "нмг"
+  ],
+  "glaim": [
+   "лайм"
   ]
  },
  "consumed_urls": [
