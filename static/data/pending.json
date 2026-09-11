@@ -34,6 +34,90 @@
     "Консолидация доли"
    ],
    "pending_since": "2026-09-11T07:09:07+00:00"
+  },
+  {
+   "id": "g2349d667",
+   "date": "2026-09-11",
+   "title": "Canpack продала российские активы за $122 млн",
+   "ind": "Производство тары",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Retailer.ru",
+     "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/"
+    ],
+    [
+     "Lenta.ru",
+     "https://lenta.ru/news/2026/09/11/proizvoditel-banok-canpack-zavershil-vyhod-iz-rossii/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "Польский производитель продал оставшиеся доли в российских подразделениях за $122 млн, зафиксировав убыток $354,7 млн.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В январе 2026 года Владимир Путин передал активы Canpack во временное управление «Стальэлемента». В марте компании вывели из-под временного управления. После завершения сделки предприятия прекратят использовать бренд Canpack.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Активы оформлены на новое юрлицо — ООО «Дом пак». В состав приобретенных активов вошли два завода по производству алюминиевых банок — в Волоколамске Московской области и Новочеркасске Ростовской области. Обе площадки работают в штатном режиме, персонал сохранен, договоры с заказчиками исполняются.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$122 млн",
+   "seller": "Canpack",
+   "asset": "100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Сделка завершена",
+     "note": "Владелец заводов «Бочкари» Вадим Смагин завершил сделку по приобретению 100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак». Сообщение Canpack продала российские активы за $122 млн появились сначала на RETAILER.ru .",
+     "source": [
+      "Retailer.ru",
+      "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Canpack",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Вадим Смагин",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/"
+     }
+    ]
+   },
+   "pending_since": "2026-09-11T07:23:22+00:00",
+   "buyer_name": "Вадим Смагин",
+   "reviewed": "2026-09-11",
+   "deep_researched": "2026-09-11"
   }
  ]
 }
