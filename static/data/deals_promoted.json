@@ -211699,6 +211699,10 @@
     [
      "Rusbase",
      "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Motorika-priobrela-501-proizvoditelya-protezov-Limb-87501"
     ]
    ],
    "from_ingest": true,
@@ -211729,6 +211733,16 @@
      "source": [
       "Rusbase",
       "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Сделка завершена",
+     "note": "Покупка позволит «Моторике» расширить присутствие в сегменте протезов нижних конечностей и усилить собственную сеть центров восстановления мобильности. В частности, в продуктовую линейку группы должен войти гидравлический коленный модуль с микропроцессорным…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Motorika-priobrela-501-proizvoditelya-protezov-Limb-87501"
      ]
     }
    ],
@@ -211770,7 +211784,7 @@
      "value": "2026-09-10",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "3fb0fc51bf1f"
+     "card_hash": "de232f0c0fe7"
     },
     "nature": {
      "control_change": true,
