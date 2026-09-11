@@ -57,8 +57,17 @@
    ]
   },
   {
-   "news": "https://www.cnews.ru/news/line/2026-09-11_positive_technologies_priobrela_dolyu",
-   "title": "Positive Technologies приобрела долю в CyberOK для развития технологий защиты внешнего периметра",
+   "news": "https://mergers.ru/news/Positive-Technologies-priobrela-dolyu-v-CyberOK-87503",
+   "title": "Positive Technologies приобрела долю в CyberOK",
+   "verdict": "enrich:gdc686ec2",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://www.tadviser.ru/a/666275",
+   "title": "Positive Technologies купила долю в разработчике решений для кибербезопасности CyberOK",
    "verdict": "enrich:gdc686ec2",
    "why": "общие слова заголовка: 3",
    "reasons": [

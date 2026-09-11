@@ -1,0 +1,29 @@
+[
+  {
+    "id": "g6743f902",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "id": "gmaltsystem", "legal_name": "ООО «Мальт Систем»"},
+      {"role": "buyer", "id": "gtramplin", "legal_name": "АО «Трамплин Холдинг»"}
+    ],
+    "no_profile": {
+      "seller": "физлицо (основатель дизайн-центра), профиль не заводится по правилу — имя остаётся текстом"
+    },
+    "share": "51% ООО «Мальт Систем» — дизайн-центра микроэлектроники с архитектурой Malt-C для потоковой обработки сетевого трафика и криптопреобразований.",
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "сумма официально не раскрыта, названа только оценка независимого эксперта (300-400 млн ₽) — источник CNews прямо говорит, что это оценка, а не цена сторон"
+  },
+  {
+    "id": "gf080e8f0",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "id": "gcodspb", "legal_name": "ООО «ЦОД СПб»"}
+    ],
+    "no_profile": {},
+    "share": "30% «ЦОД СПб» — компании, которая строит дата-центры в Санкт-Петербурге.",
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "источник — не новостная статья, а корпоративная карточка TAdviser: точной даты и суммы там нет, только год и доля; отдельной новости о сделке WebSearch не нашёл"
+  }
+]
