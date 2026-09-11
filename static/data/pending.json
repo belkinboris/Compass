@@ -1,163 +1,16 @@
 {
  "cards": [
   {
-   "id": "g3ecb7b86",
+   "id": "gcbf6e44b",
    "date": "2026-09-09",
-   "title": "«Дом.РФ» приобрел лифтовый бизнес S8 Capital",
-   "ind": "Холдинги",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Телеграм-канал: Сделки M&A",
-     "https://t.me/dealsma/7364"
-    ],
-    [
-     "Sostav",
-     "https://www.sostav.ru/publication/dom-rf-priobrel-liftovyj-biznes-s8-capital-86794.html"
-    ],
-    [
-     "Интерфакс",
-     "https://www.interfax.ru/business/1114026"
-    ],
-    [
-     "tehnowar.ru",
-     "https://tehnowar.ru/581989-domrf_stal_vladelycem_proizvoditelya_liftov_meteor_lift.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "Параметры новой сделки стороны пока официально не раскрыли.",
-    "share": "—",
-    "val": "—",
-    "target_fin": "Выручка «Метеор лифт Москва» в 2025 году снизилась на 1,8%, до 3,8 млрд руб., при этом чистый убыток вырос на 32%, до 238,3 млн руб. «Лифт Коннект» за тот же период увеличил выручку на 19%, до 1,1 млрд руб., а чистую прибыль — в 2,7 раза, до 126,9 млн руб.",
-    "fin": "—",
-    "rationale": "Данное событие логично вписывается в стратегию группы «ДОМ.РФ» с учетом опыта развития лифтостроительных активов.",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "Сделка проведена через ООО «УК Метеор»: с 10 июля управляющей компании принадлежит весь капитал производителя, а к 9 сентября сама «УК Метеор» полностью перешла под контроль «Дом.РФ».",
-    "appr": "Все необходимые процедуры проведены в строгом соответствии с требованиями ФАС России.",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "АО «Айс Девелопмент»",
-   "buyer_name": "«Дом.РФ»",
-   "asset": "активы Meteor Lift и «Лифт Коннект»",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-09",
-     "title": "Сделка завершена",
-     "note": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы американской Otis и финской KONE. Meteor Lift создан на базе…",
-     "source": [
-      "Телеграм-канал: Сделки M&A",
-      "https://t.me/dealsma/7364"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Дом.РФ»",
-      "field": "buyer_name",
-      "method": "human_review",
-      "url": "https://t.me/dealsma/7364"
-     }
-    ],
-    "target": [
-     {
-      "value": "активы Meteor Lift и «Лифт Коннект»",
-      "field": "asset",
-      "method": "human_review",
-      "url": "https://t.me/dealsma/7364"
-     }
-    ],
-    "seller": [
-     {
-      "value": "АО «Айс Девелопмент»",
-      "field": "seller",
-      "method": "human_review",
-      "url": "https://t.me/dealsma/7364"
-     }
-    ]
-   },
-   "pending_since": "2026-09-09T13:16:22+00:00",
-   "reviewed": "2026-09-09",
-   "deep_researched": "2026-09-09",
-   "draft_sent": true,
-   "post_draft_sent": true
-  },
-  {
-   "id": "g20ec3d5e",
-   "date": "2026-09-10",
-   "title": "Bending Spoons купит американский сервис для совместной работы Miro с основателями из Перми за $1,36 млрд — это на 90% меньше оценки в 2022 году",
-   "ind": "ИТ и интернет",
+   "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке за счет акционера",
+   "ind": "Не определена",
    "type": "M&A",
    "status": "Обсуждается",
    "src": [
     [
-     "VC.ru",
-     "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "Стоимость акционерного капитала (equity value) — $1,79 млрд.",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "Bending Spoons, которая летом 2026 года вышла на биржу в США, обычно выгодно покупает разработчиков ПО, которое теряет популярность или прошло её пик, — а затем сокращает расходы и повышает цены, отмечает Bloomberg. Среди её активов — видеохостинг Vimeo и сервис для заметок Evernote.",
-    "context": "В январе 2022 года его оценка составляла $17,5 млрд. Но после пандемии компании стали пересматривать расходы и сокращать количество дублирующих приложений и лицензий, отмечает издание. Miro, среди конкурентов которого оно называет Canva, Figma и продукты Microsoft, отошёл на второй план. Компания дважды увольняла сотрудников: в 2023-м сократила штат на 7% (119 человек), в 2024-м, как писало Pitchbook, — на 15% (275 сотрудников). Сейчас у Miro более 100 млн пользователей в 250 тысячах компаниях-клиентах, в том числе Salesforce, Asos, Deloitte и других.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "Bending Spoons выкупит 100% акций Miro, условия единогласно одобрили советы директоров обеих компаний. Сделку рассчитывают закрыть в четвёртом квартале 2026 года.",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$1,355 млрд (по оценке)",
-   "buyer_name": "Bending Spoons",
-   "asset": "американский сервис для совместной работы Miro с основателями из Перми",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Bending Spoons",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
-     }
-    ],
-    "target": [
-     {
-      "value": "американский сервис для совместной работы Miro с основателями из Перми",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
-     }
-    ]
-   },
-   "pending_since": "2026-09-11T05:25:07+00:00",
-   "reviewed": "2026-09-11",
-   "deep_researched": "2026-09-11",
-   "draft_sent": true,
-   "post_draft_sent": true
-  },
-  {
-   "id": "g45a72968",
-   "date": "2026-09-10",
-   "title": "«Моторика» купила 50,1% акций группы «Лимб»: компании объединят центры протезирования и инженерные разработки",
-   "ind": "Здравоохранение",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Rusbase",
-     "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2026/09/09/1227593-dolyu-v-sovkombanke"
     ]
    ],
    "from_ingest": true,
@@ -167,53 +20,20 @@
     "val": "—",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "Одним из ключевых результатов объединения станет расширение линейки продукции «Моторики». Конструкторское бюро «Лимба» завершает разработку коленного модуля с микропроцессорным управлением, рассказали в компании. Микропроцессорный модуль регулирует работу коленного механизма с помощью электроники и позволяет адаптировать движение протеза под разные условия ходьбы.",
-    "context": "«ГК Лимб» объединяет протезно-ортопедические центры в Москве, Санкт-Петербурге и Ростове-на-Дону. В состав группы также входит собственное конструкторское бюро, которое разрабатывает компоненты и модули для протезов нижних конечностей.",
+    "rationale": "—",
+    "context": "—",
     "finadv": "—"
    },
    "law": {
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "После закрытия сделки основатели и менеджмент «Лимба» продолжат руководить операционной деятельностью компании."
+    "terms": "—"
    },
-   "buyer_name": "«Моторика»",
-   "asset": "50,1% акционерного капитала АО «ГК Лимб»",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-10",
-     "title": "Сделка завершена",
-     "note": "«Группа Моторика» приобрела 50,1% акционерного капитала АО «ГК Лимб», одного из заметных игроков российского рынка протезирования, сообщили Russian Business в компании. Три протезно-ортопедических центра «Лимба» в Москве, Санкт-Петербурге и Ростове-на-Дону…",
-     "source": [
-      "Rusbase",
-      "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
-     ]
-    }
+   "themes": [
+    "Консолидация доли"
    ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Моторика»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
-     }
-    ],
-    "target": [
-     {
-      "value": "50,1% акционерного капитала АО «ГК Лимб»",
-      "field": "asset",
-      "method": "human_review",
-      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
-     }
-    ]
-   },
-   "pending_since": "2026-09-11T05:25:07+00:00",
-   "reviewed": "2026-09-11",
-   "deep_researched": "2026-09-11",
-   "draft_sent": true,
-   "post_draft_sent": true
+   "pending_since": "2026-09-11T07:09:07+00:00"
   }
  ]
 }

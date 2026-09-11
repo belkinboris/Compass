@@ -211483,6 +211483,268 @@
     ]
    },
    "proofread": "2026-09-08"
+  },
+  {
+   "id": "g3ecb7b86",
+   "date": "2026-09-09",
+   "title": "«Дом.РФ» приобрел лифтовый бизнес S8 Capital",
+   "ind": "Холдинги",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7364"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/dom-rf-priobrel-liftovyj-biznes-s8-capital-86794.html"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1114026"
+    ],
+    [
+     "tehnowar.ru",
+     "https://tehnowar.ru/581989-domrf_stal_vladelycem_proizvoditelya_liftov_meteor_lift.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Параметры новой сделки стороны пока официально не раскрыли.",
+    "share": "—",
+    "val": "—",
+    "target_fin": "Выручка «Метеор лифт Москва» в 2025 году снизилась на 1,8%, до 3,8 млрд руб., при этом чистый убыток вырос на 32%, до 238,3 млн руб. «Лифт Коннект» за тот же период увеличил выручку на 19%, до 1,1 млрд руб., а чистую прибыль — в 2,7 раза, до 126,9 млн руб.",
+    "fin": "—",
+    "rationale": "Данное событие логично вписывается в стратегию группы «ДОМ.РФ» с учетом опыта развития лифтостроительных активов.",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Сделка проведена через ООО «УК Метеор»: с 10 июля управляющей компании принадлежит весь капитал производителя, а к 9 сентября сама «УК Метеор» полностью перешла под контроль «Дом.РФ».",
+    "appr": "Все необходимые процедуры проведены в строгом соответствии с требованиями ФАС России.",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "АО «Айс Девелопмент»",
+   "buyer_name": "«Дом.РФ»",
+   "asset": "активы Meteor Lift и «Лифт Коннект»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "« ДОМ.РФ » приобрел лифтовый бизнес S8 Capital Об объекте сделки Группа « ДОМ.РФ » приобрела у S8 Capital лифтовый бизнес, включающий Meteor Lift и АО «Лифт Коннект» — бывшие российские активы американской Otis и финской KONE. Meteor Lift создан на базе…",
+     "source": [
+      "Телеграм-канал: Сделки M&A",
+      "https://t.me/dealsma/7364"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ],
+    "target": [
+     {
+      "value": "активы Meteor Lift и «Лифт Коннект»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ],
+    "seller": [
+     {
+      "value": "АО «Айс Девелопмент»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://t.me/dealsma/7364"
+     }
+    ]
+   },
+   "reviewed": "2026-09-09",
+   "deep_researched": "2026-09-09",
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "48e04634780f"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-09",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "798fc55b0129"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d244f3364ea6"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g45a72968",
+   "date": "2026-09-10",
+   "title": "«Моторика» купила 50,1% акций группы «Лимб»: компании объединят центры протезирования и инженерные разработки",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Rusbase",
+     "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Одним из ключевых результатов объединения станет расширение линейки продукции «Моторики». Конструкторское бюро «Лимба» завершает разработку коленного модуля с микропроцессорным управлением, рассказали в компании. Микропроцессорный модуль регулирует работу коленного механизма с помощью электроники и позволяет адаптировать движение протеза под разные условия ходьбы.",
+    "context": "«ГК Лимб» объединяет протезно-ортопедические центры в Москве, Санкт-Петербурге и Ростове-на-Дону. В состав группы также входит собственное конструкторское бюро, которое разрабатывает компоненты и модули для протезов нижних конечностей.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "После закрытия сделки основатели и менеджмент «Лимба» продолжат руководить операционной деятельностью компании."
+   },
+   "buyer_name": "«Моторика»",
+   "asset": "50,1% акционерного капитала АО «ГК Лимб»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-10",
+     "title": "Сделка завершена",
+     "note": "«Группа Моторика» приобрела 50,1% акционерного капитала АО «ГК Лимб», одного из заметных игроков российского рынка протезирования, сообщили Russian Business в компании. Три протезно-ортопедических центра «Лимба» в Москве, Санкт-Петербурге и Ростове-на-Дону…",
+     "source": [
+      "Rusbase",
+      "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Моторика»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     }
+    ],
+    "target": [
+     {
+      "value": "50,1% акционерного капитала АО «ГК Лимб»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     }
+    ]
+   },
+   "reviewed": "2026-09-11",
+   "deep_researched": "2026-09-11",
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": 50.1,
+     "basis": "rule",
+     "card_hash": "0dbf3f57bfb4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-10",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3fb0fc51bf1f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a5c01ccbf795"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
@@ -237056,7 +237318,8 @@
   "g95370469": 102,
   "gc52a53dd": 105,
   "gbc7b1e8d": 106,
-  "g63c7d1bb": 4
+  "g63c7d1bb": 4,
+  "g3ecb7b86": 107
  },
  "telegram_milestones": {},
  "telegram_digests": {
