@@ -155,19 +155,21 @@ def card_message(card, companies=None):
                SITE, card['id'], channel))
 
 
-def post_message_text(card, companies):
+def post_message_text(card, companies, rendered=None):
     """📣 Проект поста в канал — ровно тот текст, что уйдёт подписчикам, плюс
     строка о кнопках: с 2 сентября 2026 ссылки на карточку и линзы живут не в
     тексте, а в клавиатуре под постом (см. `format_post.render_buttons`) — и
     без этой строки проверяющий не увидел бы в черновике ни их, ни адресов,
-    по которым они ведут."""
+    по которым они ведут. `rendered` — уже посчитанный `format_post.render()`,
+    чтобы его не пересчитывать дважды (вызывающий сохраняет тот же текст в
+    `post_preview`, см. `build_plan()`)."""
     buttons = format_post.buttons_preview(card)
+    text = rendered if rendered is not None else format_post.render(card, companies)
     return ('📣 [пост %s] — В КАНАЛ, на проверку\n'
             'Ниже — текст поста как он уйдёт подписчикам. Ответ на это '
             'сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n'
             '━━━━━━━━━━━━\n%s%s'
-            % (card['id'], format_post.render(card, companies),
-               '\n\n' + buttons if buttons else ''))
+            % (card['id'], text, '\n\n' + buttons if buttons else ''))
 
 
 def raw_message(draft):
@@ -361,7 +363,23 @@ def build_plan():
         if not goes_to_channel(card):
             continue
         if not card.get('post_draft_sent', card.get('draft_sent')):
-            plan.append((post_message_text(card, comps), post_keyboard(card),
+            # СНИМОК, А НЕ ССЫЛКА НА ЖИВЫЕ ДАННЫЕ (11 сентября 2026, Трамплин
+            # Холдинг/«Мальт Систем», g6743f902): между показом этого превью
+            # и настоящей отправкой карточку успевает дообогатить ФНС и
+            # вычитка — `send_telegram.py` раньше всегда собирал пост ЗАНОВО
+            # из ТЕКУЩИХ полей карточки, и владелец одобрял кнопкой один
+            # текст, а подписчики получали другой (два новых финансовых блока
+            # и переписанные фразы появились уже ПОСЛЕ «Пост одобрен»).
+            # Ровно тот текст, что видит владелец здесь, кладём во временное
+            # поле `_pending_post_preview` — `main()` при успешной отправке
+            # переносит его в постоянное `post_preview` (и чистит временное
+            # в любом случае, даже при сбое отправки — оно не должно
+            # просочиться в pending.json). Кортеж записи НЕ меняем (3
+            # элемента, `kind='card'`) — тесты на `build_plan()` уже
+            # распаковывают его фиксированной формой.
+            rendered = format_post.render(card, comps)
+            card['_pending_post_preview'] = rendered
+            plan.append((post_message_text(card, comps, rendered=rendered), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))
     state = promote.load_state()
     seen = set(state.get('sent_raw', [])) | set(state.get('decided_raw', {}))
@@ -440,10 +458,24 @@ def main(write=False):
             for chat in chats:
                 if not send_one(client, token, chat, text, keyboard, thread):
                     ok_all = False
+            # Временное поле `_pending_post_preview` (см. build_plan()) живёт
+            # на карточке ДО отправки её собственного поста — у одной
+            # карточки в `plan` два отдельных пункта («карточка» и «пост»), и
+            # оба видят один и тот же объект `card`, поэтому снимать поле
+            # нужно РОВНО на записи с `mark == 'post_draft_sent'`, а не на
+            # любой записи `kind == 'card'` (иначе более раннее сообщение
+            # «карточка» для той же сделки забрало бы его первым и «пост»
+            # остался бы ни с чем). Не должно просочиться в pending.json ни
+            # при успехе, ни при сбое — забираем его всегда, сохраняем как
+            # `post_preview` только если сообщение реально дошло.
+            pending_preview = (item.pop('_pending_post_preview', None)
+                                if kind == 'card' and mark == 'post_draft_sent' else None)
             if ok_all:
                 sent += 1
                 if kind == 'card':
                     item[mark] = True
+                    if mark == 'post_draft_sent' and pending_preview is not None:
+                        item['post_preview'] = pending_preview
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
                     state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'

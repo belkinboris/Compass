@@ -310,7 +310,8 @@ def main(write=False):
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
         clean = {k: v for k, v in card.items()
-                 if k not in ('pending_since', 'draft_sent', 'held', 'post_draft_sent')}
+                 if k not in ('pending_since', 'draft_sent', 'held', 'post_draft_sent',
+                               '_pending_post_preview')}
         # КОГДА КАРТОЧКА ПОЯВИЛАСЬ НА САЙТЕ — это не то же самое, что дата
         # сделки. Лента сортируется по дате СДЕЛКИ, и одобренная сегодня
         # карточка о сделке 28 июля встаёт в середину списка: владелец 7 августа

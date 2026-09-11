@@ -331,6 +331,32 @@ def sendable(deal):
         or (deal.get('target') or deal.get('asset') or deal.get('asset_id'))
 
 
+def initial_post_text(deal, comps):
+    """Текст ПЕРВОГО поста о сделке. Приоритет: `post_override` (владелец
+    продиктовал текст сам — его решение сильнее всего) > `post_preview`
+    (снимок текста, который владелец уже видел и одобрил кнопкой в консоли,
+    см. `pipeline/ingest/send_drafts.py`) > свежая сборка `format_post.render`
+    — только если превью почему-то не сохранилось (например, у карточек до
+    11 сентября 2026, когда снимок ещё не делался).
+
+    БЕЗ ПРИОРИТЕТА `post_preview` ПОСТ МОГ РАЗОЙТИСЬ С ОДОБРЕННЫМ. До этой
+    правки текст всегда собирался заново, из ТЕКУЩИХ полей карточки: между
+    показом черновика в консоли и настоящей отправкой карточку успевает
+    дообогатить ФНС или вычитка — владелец одобрял кнопкой один текст,
+    подписчики получали другой. На карточке «Трамплин Холдинг»/«Мальт
+    Систем» (`g6743f902`, 11 сентября 2026) так в уже одобренный пост
+    молча добавились две строки «Финансы покупателя/покупаемой компании» и
+    переписалось несколько фраз — владелец увидел это только после
+    публикации. `post_preview` не используется для ПРАВОК уже вышедшего
+    поста (`to_edit`, «⟳ Обновлено») — те как раз ОБЯЗАНЫ собираться заново,
+    в них и смысл сообщить о том, что стало известно НОВОГО."""
+    if deal.get('post_override'):
+        return format_post.strip_platform_links(deal['post_override'])
+    if deal.get('post_preview'):
+        return deal['post_preview']
+    return format_post.render(deal, comps)
+
+
 # ---------- ВЕХИ: отдельные посты по закрытому списку видов (раздел A) ------
 # Молчание сутки = веха выходит, тот же принцип, что у карточек предпросмотра
 # (approve.py's SILENCE_HOURS). Отсчёт — от `event['milestone_drafted_at']`,
@@ -688,7 +714,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                     elif not deal.get('post_override') and not deal.get('accepted'):
                         needs_acceptance.append(did)
                     else:
-                        text = format_post.render(deal, comps)
+                        text = initial_post_text(deal, comps)
                         to_send.append((did, text))
                 continue
             changes = updates_by_id.get(did)
@@ -731,10 +757,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                 needs_acceptance.append(did)
             else:
                 # Текст, который владелец продиктовал в Telegram при модерации
-                # черновика, важнее автоформата — но только для ПЕРВОГО поста:
-                # дальнейшие обновления снова собирает format_post.
-                text = (format_post.strip_platform_links(deal['post_override'])
-                        if deal.get('post_override') else format_post.render(deal, comps))
+                # черновика (`post_override`), или снимок того, что он уже
+                # видел и одобрил кнопкой (`post_preview`), важнее автоформата
+                # — но только для ПЕРВОГО поста: дальнейшие обновления снова
+                # собирает format_post (см. initial_post_text).
+                text = initial_post_text(deal, comps)
                 to_send.append((did, text))
 
     # ВЫЧИТКА ПЕРЕД ОТПРАВКОЙ — ДО отчёта и до выхода из сухого прогона: план

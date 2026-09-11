@@ -623,14 +623,17 @@ FIXES = [
          quote='Ожидаемая прибыль от реализации активов оценивается в 5–7 млрд руб. без '
                   'учета налогов',
          why='партия 5 агентов 14.08.2026, источник kommersant.ru: перенесено дословно'),
-    dict(id='ga4082daa', field='law.struct', old='—',
-         new='По данным сервиса Moneyhouse, в августе швейцарские Mechel Carbon AG и '
-                  'Mechel International Holdings GmbH сменили названия на Teiwaz A Group AG и '
-                  'A Group Switzerland Holdings GmbH.',
-         quote='По данным сервиса Moneyhouse, в августе швейцарские Mechel Carbon AG и '
-                  'Mechel International Holdings GmbH сменили названия на Teiwaz A Group AG и '
-                  'A Group Switzerland Holdings GmbH.',
-         why='партия 5 агентов 14.08.2026, источник kommersant.ru: перенесено дословно'),
+    # СНЯТО 11 сентября 2026 (владелец, по факту ошибки): переименование
+    # швейцарских холдингов — не структура сделки, факт перенесён в
+    # eco.context. См. pipeline/fix_mechel_field_placement_and_naming.py.
+    # dict(id='ga4082daa', field='law.struct', old='—',
+    #      new='По данным сервиса Moneyhouse, в августе швейцарские Mechel Carbon AG и '
+    #               'Mechel International Holdings GmbH сменили названия на Teiwaz A Group AG и '
+    #               'A Group Switzerland Holdings GmbH.',
+    #      quote='По данным сервиса Moneyhouse, в августе швейцарские Mechel Carbon AG и '
+    #               'Mechel International Holdings GmbH сменили названия на Teiwaz A Group AG и '
+    #               'A Group Switzerland Holdings GmbH.',
+    #      why='партия 5 агентов 14.08.2026, источник kommersant.ru: перенесено дословно'),
     # gd38acdec/eco.context: запись заменена — месячная очередь 29.08.2026
     # дописала к этому же тексту состав совладельцев остающихся 50% и
     # факт локализации до сделки. См.

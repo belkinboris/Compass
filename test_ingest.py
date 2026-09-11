@@ -317,32 +317,44 @@ def test_post_drops_lines_that_only_echo_the_headline():
     assert "<b>Отрасль:</b> Рынок ценных бумаг" in text
 
 
-def test_post_why_line_is_the_motive_not_the_market_size():
-    """Владелец, 11 сентября 2026, пост Positive Technologies/CyberOK: под
-    «Зачем» стояло «объём российского рынка … может достичь 8 млрд рублей» —
-    «это не ответ на вопрос зачем». Мотив был первым предложением «Цели
-    сделки», но не влезал в 200 знаков, и выбор по длине взял второе.
-    Теперь: первое предложение о мотиве — или строки нет вовсе; оценка
-    рынка под «Зачем» не идёт никогда."""
+def test_post_never_shows_a_why_line():
+    """Владелец, 11 сентября 2026: строка «Зачем» то есть, то нет (зависит от
+    того, влез ли мотив в лимит и остался ли он новым к этому моменту поста)
+    — «получается дебильно», решение снять её из постов целиком, а не чинить
+    очередным частным случаем (родня уже снятого 11 сентября бага, где
+    «Зачем» показывал оценку объёма рынка вместо мотива, — тот дефект был бы
+    неисчерпаем, пока строка вообще существует). Проверено с честным
+    мотивом, который раньше давал строку, — теперь не даёт её никогда."""
     motive = ('Инвестиция позволит ускорить развитие продуктового направления защиты '
               'внешнего периметра — прежде всего технологий управления внешней '
               'поверхностью атаки (EASM) и непрерывного тестирования на проникновение '
               '(PentOps).')
-    market = ('По оценке Positive Technologies, объем российского рынка этих решений к '
-              '2031 году может достичь 8 млрд рублей.')
     deal = {"id": "x2", "title": "Positive Technologies купила долю в CyberOK",
             "status": "Закрыта", "date": "2026-09-10", "ind": "ИТ и интернет",
-            "eco": {"rationale": motive + ' ' + market}}
+            "eco": {"rationale": motive}}
     text = format_post.render(deal, {})
-    assert "<b>Зачем:</b> " + motive in text, text
-    assert "8 млрд" not in text, text
-    # Только оценка рынка — строки «Зачем» нет, а не «хоть что-нибудь».
-    deal["eco"]["rationale"] = market
-    assert "<b>Зачем:</b>" not in format_post.render(deal, {})
-    # Мотив длиннее лимита строки — тоже нет строки, а не второе предложение.
-    deal["eco"]["rationale"] = ('Покупка нужна, чтобы ' + 'расширить продуктовую линейку, ' * 12
-                                + 'и закрепиться на рынке. ' + market)
-    assert "<b>Зачем:</b>" not in format_post.render(deal, {})
+    assert "Зачем" not in text, text
+    assert not hasattr(format_post, '_why_sentence'), \
+        "функция строки «Зачем» должна быть удалена вместе со строкой, а не просто не вызываться"
+
+
+def test_post_subject_line_drops_employee_headcount():
+    """Владелец, 11 сентября 2026, карточка «Трамплин Холдинг»/«Мальт
+    Систем»: «сколько сотрудников в компании — это не должно быть в
+    предмете». Предложение о численности персонала (`eco.target_fin`) не
+    описывает ПРЕДМЕТ сделки — оно описывает компанию, как и выручка/
+    прибыль, которые уже не попадают в «Предмет» по той же причине
+    (`_is_financial_report`)."""
+    deal = {"id": "x3", "title": "«Трамплин Холдинг» купил 51% «Мальт Систем»",
+            "status": "Закрыта", "date": "2026-09-03", "ind": "ИТ и интернет",
+            "asset": "51% ООО «Мальт Систем»",
+            "eco": {"share": "51% ООО «Мальт Систем» — дизайн-центр микроэлектроники.",
+                    "target_fin": "Выручка ООО «Мальт Систем» за 2025 год — 295,9 млн ₽. "
+                                   "Средняя численность работников за 2025 год, по данным "
+                                   "ЕГРЮЛ, — 53 человека."}}
+    text = format_post.render(deal, {})
+    assert "численность" not in text.lower(), text
+    assert "53 человека" not in text, text
 
 
 def test_post_keeps_a_party_name_not_covered_by_the_headline():
@@ -3578,6 +3590,66 @@ def test_console_does_not_ask_about_a_post_that_will_never_go_out(monkeypatch):
     assert "известен только год" in old_text or "у сделки известен только год" in old_text
     new_text = next(t for t, _kb, (_k, item, mark) in plan if item["id"] == "g-new" and mark == "draft_sent")
     assert "В канал не пойдёт" not in new_text
+
+
+def test_post_preview_snapshot_is_captured_when_building_the_console_message(monkeypatch):
+    """11 сентября 2026, Трамплин Холдинг/«Мальт Систем» (`g6743f902`):
+    владелец одобрил кнопкой «Пост в канал» ровно тот текст, что видел в
+    консоли, — а в канал ушёл ДРУГОЙ, с двумя новыми строками финансов и
+    переписанными фразами, потому что `send_telegram.py` всегда собирал
+    пост ЗАНОВО из ТЕКУЩИХ полей карточки в момент отправки, а не из того,
+    что владелец одобрял. Первый слой починки — `send_drafts.build_plan()`
+    обязан положить снимок РОВНО того, что покажет консоли (`_pending_post_
+    preview`, временное поле — постоянным `post_preview` оно становится
+    только после подтверждённой доставки, см. `main()`), а не ссылку на
+    карточку, которая ещё будет меняться."""
+    import send_drafts
+    card = {"id": "g-snap", "title": "«Ромашка» купила «Лютик»", "date": FRESH_DATE,
+            "status": "Закрыта", "reviewed": "2026-09-11", "accepted": "2026-09-11",
+            "draft_sent": True, "post_draft_sent": False,  # 🗂 ушла, 📣 ещё нет
+            "src": [["Т", "https://t.example/snap"]]}
+    cards = [card]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts.promote, "load_state",
+                         lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, *_rest = send_drafts.build_plan()
+    expected = format_post.render(card, {})
+    assert card.get("_pending_post_preview") == expected, \
+        "снимок не совпадает с тем, что реально покажется в превью"
+    post_entry = next(t for t, _kb, (_k, item, mark) in plan
+                       if item["id"] == "g-snap" and mark == "post_draft_sent")
+    assert expected in post_entry, "превью в консоли должно нести ровно тот же текст, что снимок"
+
+
+def test_send_telegram_uses_the_approved_snapshot_not_a_fresh_render(monkeypatch):
+    """Вторая половина той же починки: `send_telegram.initial_post_text()`
+    обязана вернуть ЗАМОРОЖЕННЫЙ текст (`post_preview`), даже если карточка
+    успела дообогатиться ПОСЛЕ того, как владелец её одобрил, — иначе первый
+    слой (снимок при показе) ничего не гарантирует на выходе. Проверено на
+    точном классе расхождения из инцидента: `eco.target_fin` появляется
+    только ПОСЛЕ одобрения, и свежая сборка добавила бы строку «Финансы
+    покупаемой компании», которой владелец не видел."""
+    import send_telegram
+    frozen = "Уже одобренный владельцем текст без финансовой строки."
+    deal = {"id": "g-frozen", "title": "«Ромашка» купила «Лютик»",
+            "status": "Закрыта", "date": FRESH_DATE, "ind": "ИТ и интернет",
+            "post_preview": frozen}
+    # Дообогащение ПОСЛЕ одобрения — ровно то, что случилось с g6743f902.
+    deal["eco"] = {"target_fin": "Выручка выросла на 20% — новый факт, добавленный позже."}
+    text = send_telegram.initial_post_text(deal, {})
+    assert text == frozen, "должен уйти снимок, а не пересборка с новым фактом"
+    assert "Выручка" not in text
+    # `post_override` (текст, продиктованный владельцем) остаётся сильнее снимка.
+    deal["post_override"] = "Текст, который владелец написал сам поверх снимка."
+    text2 = send_telegram.initial_post_text(deal, {})
+    assert text2 == deal["post_override"]
+    # Без снимка (карточки до 11 сентября 2026) — обычная свежая сборка.
+    del deal["post_preview"]
+    del deal["post_override"]
+    text3 = send_telegram.initial_post_text(deal, {})
+    assert text3 == format_post.render(deal, {})
 
 
 def test_classifier_rejects_live_console_junk():
