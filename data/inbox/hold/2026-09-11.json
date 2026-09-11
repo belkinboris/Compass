@@ -646,7 +646,7 @@
    ]
   },
   {
-   "draft_id": "d67622625",
+   "draft_id": "d22973244",
    "title": "Продажа 1,3% акций Совкомбанка прошла в закрытом режиме",
    "date": "2026-09-09",
    "src": [
@@ -674,7 +674,7 @@
    ]
   },
   {
-   "draft_id": "d88734418",
+   "draft_id": "d71662501",
    "title": "Владельцы разработчика скандального процессора «Иртыш» купили контрольную долю в российском дизайн-центре",
    "date": "2026-09-10",
    "src": [
@@ -713,7 +713,7 @@
    ]
   },
   {
-   "draft_id": "d22379828",
+   "draft_id": "d74111591",
    "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
    "date": "2026-09-10",
    "src": [
@@ -741,7 +741,7 @@
    ]
   },
   {
-   "draft_id": "d17832510",
+   "draft_id": "d11579523",
    "title": "DST Global Юрия Мильнера вновь вложился во французского единорога Mistral AI , говорится в сообщении стартапа. Фонд инвестировал в проект в раунде D на €3 млрд, который возглавили Samsung Electronics,",
    "date": "2026-09-10",
    "src": [
@@ -769,7 +769,7 @@
    ]
   },
   {
-   "draft_id": "d41374770",
+   "draft_id": "d26471995",
    "title": "Сроки возможной продажи «Росгосстраха» определят в течение 1-2 месяцев",
    "date": "2026-09-11",
    "src": [
@@ -797,7 +797,7 @@
    ]
   },
   {
-   "draft_id": "d39554412",
+   "draft_id": "d79118235",
    "title": "ВТБ намерены продать Росгосстрах в этом году",
    "date": "2026-09-11",
    "src": [
@@ -836,7 +836,7 @@
    ]
   },
   {
-   "draft_id": "d59296443",
+   "draft_id": "d82859549",
    "title": "ВТБ назвал сроки возможной продажи «Росгосстраха»",
    "date": "2026-09-11",
    "src": [
@@ -866,7 +866,7 @@
    ]
   },
   {
-   "draft_id": "d34088224",
+   "draft_id": "d16070632",
    "title": "«Дом.РФ» выставил на торги четыре здания и земельный участок в Хамовниках",
    "date": "2026-09-11",
    "src": [
@@ -895,7 +895,7 @@
    ]
   },
   {
-   "draft_id": "d52128137",
+   "draft_id": "d85107473",
    "title": "Российский ИИ-стартап EORA привлек инвестиции от ГК “КОРУС Консалтинг”, бизнес-ангелов Вячеслава Закусилова и Александра Долгова, а также ряда частных инвесторов, сообщили “Русскому Венчуру” в компани",
    "date": "2026-09-11",
    "src": [
@@ -923,7 +923,7 @@
    ]
   },
   {
-   "draft_id": "d72488629",
+   "draft_id": "d13482008",
    "title": "«Дом.РФ» выставил на торги крупный земельный массив в Астраханской области",
    "date": "2026-09-11",
    "src": [
@@ -954,199 +954,7 @@
    ]
   },
   {
-   "draft_id": "d36688365",
-   "title": "Акции конкурента Nvidia взлетели более чем на 230% после IPO",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/11/09/2026/6aa3b34d9a7947615133a945"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d66032937",
-   "title": "Владелец «Бочкарей» приобрел активы «Кэн-пак» в России",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Vladelec-Bochkarej-priobrel-aktivy-Kjen-pak-v-Rossii-87499"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-11",
-     "title": "Сделка завершена",
-     "note": "Вадим Смагин, владелец заводов по производству напитков ООО \"Бочкари\" (Алтайский край) и ООО \"Бочкари-Раменское\" (Московская область), завершил сделку по приобретению 100% долей в уставных капиталах ООО \"Кэн-пак завод упаковки\" и ООО \"Кэн-пак\" у компаний…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Vladelec-Bochkarej-priobrel-aktivy-Kjen-pak-v-Rossii-87499"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "активы «Кэн-пак» в России",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "активы «Кэн-пак» в России",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d88713989",
-   "title": "В Казахстане выставили на торги оборонный завод времен СССР",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28102505"
-    ]
-   ],
-   "sum": "$39,5 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58593357",
-   "title": "В Пулково из-за технического сбоя перешли к регистрации на рейсы в ручном режиме",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/11/v-pulkovo-iz-za-tehnicheskogo"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84896545",
-   "title": "OpenAI перестала продавать самый дорогой тариф ChatGPT из-за высокого спроса на модель Astra",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/openai-perestala-prodavat-samyj-dorogoj-tarif-chatgpt-iz-za-vysokogo-sprosa-na-model-astra/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d48938507",
-   "title": "Культовое «платье мести» принцессы Дианы выставят на аукцион",
-   "date": "2026-09-11",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2165145/video/kultovoe-plate-mesti-printcessy-diany-vystaviat-na-auktcion"
-    ]
-   ],
-   "sum": "$300 тыс",
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-11",
-     "title": "Переговоры",
-     "note": "«Платье мести» принцессы Дианы продадут на аукционе, сообщает Bloomberg. Леди Ди надела наряд после того, как принц Чарльз признался в неверности в телевизионном интервью. Принцесса появилась в платье на благотворительном вечере в 1994 году, передает…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2165145/video/kultovoe-plate-mesti-printcessy-diany-vystaviat-na-auktcion"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39262330",
+   "draft_id": "d59108285",
    "title": "На улице Николая Старостина выставили на торги шесть помещений для бизнеса",
    "date": "2026-09-11",
    "src": [
@@ -1157,6 +965,157 @@
    ],
    "sum": null,
    "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24831183",
+   "title": "Объявление о продаже особняка Сигала на Рублевке сняли с публикации на «Циан»",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28102653"
+    ]
+   ],
+   "sum": "650 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79560399",
+   "title": "Швеция купит HIMARS",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/11/shvetsiya-kupit-himars/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Швеция",
+   "asset": "HIMARS",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Швеция",
+    "asset": "HIMARS",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d33748273",
+   "title": "«Платье мести» принцессы Дианы продадут за рекордную сумму",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/11/platie-mesti-printsessy-diany-prodadut-za-rekordnuyu-summu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29484338",
+   "title": "Евангелисты хотят купить в Перми торгово-развлекательный центр «Горный хрусталь»",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053126404"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-11",
+     "title": "Переговоры",
+     "note": "Церковь «Новый завет» ведет переговоры о покупке пермского торгово-развлекательного центра «Горный хрусталь». Такая сделка может быть заключена до конца 2026 года.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053126404"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92344621",
+   "title": "Тюменские власти попробуют продать алкогольный завод «Бенат» за сотни миллионов рублей",
+   "date": "2026-09-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053126401"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,

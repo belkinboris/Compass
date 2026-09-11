@@ -21,12 +21,30 @@
    ]
   },
   {
+   "news": "https://retailer.ru/canpack-prodala-rossijskie-aktivy-za-122-mln/",
+   "title": "Canpack продала российские активы за $122 млн",
+   "verdict": "enrich:g2349d667",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак»»"
+   ]
+  },
+  {
    "news": "https://mergers.ru/news/Motorika-priobrela-501-proizvoditelya-protezov-Limb-87501",
    "title": "«Моторика» приобрела 50,1% производителя протезов «Лимб»",
    "verdict": "enrich:g45a72968",
-   "why": "общее название в кавычках и общие слова: 2",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «50,1% акционерного капитала АО «ГК Лимб»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Vladelec-Bochkarej-priobrel-aktivy-Kjen-pak-v-Rossii-87499",
+   "title": "Владелец \"Бочкарей\" приобрел активы \"Кэн-пак\" в России",
+   "verdict": "enrich:g2349d667",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «100% долей в ООО «Кэн-пак завод упаковки» и ООО «Кэн-пак»»"
    ]
   }
  ]
