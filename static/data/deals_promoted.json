@@ -219956,7 +219956,28 @@
      "РБК",
      "https://www.rbc.ru/business/17/05/2024/6647b4b09a794773f7c3d867"
     ]
-   }
+   },
+   "ownership": [
+    {
+     "name": "Вамин Татарстан",
+     "id": "g896e444d",
+     "share": "99%",
+     "as_of": "2023-09",
+     "source": [
+      "РеалноеВремя",
+      "https://realnoevremya.ru/news/323948-byvshie-aktivy-danone-v-rossii-pereshli-chechencam"
+     ]
+    },
+    {
+     "name": "Руслан Алисултанов",
+     "share": "1%",
+     "as_of": "2023-09",
+     "source": [
+      "РеалноеВремя",
+      "https://realnoevremya.ru/news/323948-byvshie-aktivy-danone-v-rossii-pereshli-chechencam"
+     ]
+    }
+   ]
   },
   "g896e444d": {
    "name": "Вамин Татарстан",
@@ -228203,6 +228224,18 @@
    "kpi": [
     "Президент (2023–2024)",
     "Таймураз Боллоев"
+   ],
+   "ownership": [
+    {
+     "name": "ВГ Инвест",
+     "id": "vginvest",
+     "share": "100%",
+     "as_of": "2026-06",
+     "source": [
+      "shopandmall.ru",
+      "https://shopandmall.ru/news/baltika-peresla-pod-polnyj-kontrol-vg-invest"
+     ]
+    }
    ]
   },
   "vginvest": {
