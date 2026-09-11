@@ -89,6 +89,123 @@
    "deep_researched": "2026-09-09",
    "draft_sent": true,
    "post_draft_sent": true
+  },
+  {
+   "id": "g20ec3d5e",
+   "date": "2026-09-10",
+   "title": "Bending Spoons купит американский сервис для совместной работы Miro с основателями из Перми за $1,36 млрд — это на 90% меньше оценки в 2022 году",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "VC.ru",
+     "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$1,36 млрд",
+   "buyer_name": "Bending Spoons",
+   "asset": "американский сервис для совместной работы Miro с основателями из Перми",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Bending Spoons",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
+     }
+    ],
+    "target": [
+     {
+      "value": "американский сервис для совместной работы Miro с основателями из Перми",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://vc.ru/services/3131820-bending-spoons-pokupka-miro?from=rss"
+     }
+    ]
+   },
+   "pending_since": "2026-09-11T05:25:07+00:00"
+  },
+  {
+   "id": "g45a72968",
+   "date": "2026-09-10",
+   "title": "«Моторика» купила 50,1% акций группы «Лимб»: компании объединят центры протезирования и инженерные разработки",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Rusbase",
+     "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Моторика»",
+   "asset": "«Лимб»: компании объединят центры протезирования и инженерные разработки",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-10",
+     "title": "Сделка завершена",
+     "note": "«Группа Моторика» приобрела 50,1% акционерного капитала АО «ГК Лимб», одного из заметных игроков российского рынка протезирования, сообщили Russian Business в компании. Три протезно-ортопедических центра «Лимба» в Москве, Санкт-Петербурге и Ростове-на-Дону…",
+     "source": [
+      "Rusbase",
+      "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Моторика»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Лимб»: компании объединят центры протезирования и инженерные разработки",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/motorika-kupila-501-akcij-gruppy-limb-kompanii-obedinyat-centry-protezirovaniya-i-inzhenernye-razrabotkii/"
+     }
+    ]
+   },
+   "pending_since": "2026-09-11T05:25:07+00:00"
   }
  ]
 }

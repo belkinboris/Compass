@@ -210266,6 +210266,16 @@
       "ПРАЙМ",
       "https://1prime.ru/20260904/severstal-873037075.html"
      ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-10",
+     "title": "Сделка завершена",
+     "note": "Компания выкупила 100% долей в ООО «Улугхемуголь» у «Северстали» и 81,3% акций ООО «УК «Межегейуголь» у ПАО «Распадская». «Улугхемуголь» оставался единственным угольным активом «Северстали» после продажи «Воркутаугля» в 2022 году. В компании сообщили, что…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Novosibirskaya-kompaniya-Promresurs-priobrela-ugolnye-aktivy-v-Tuve-87495"
+     ]
     }
    ],
    "seller_src": "text",
@@ -210331,7 +210341,7 @@
      "value": "2026-08-27",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "b77b2e7d2a42"
+     "card_hash": "b0dc15b058d6"
     },
     "nature": {
      "control_change": true,
@@ -211034,6 +211044,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/965240"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Nacionalnaya-Media-Gruppa-priobrela-dolyu-v-kompanii-sobstvennike-biletno-propusknoj-sistemy-Lajm-87493"
     ]
    ],
    "from_ingest": true,
@@ -211064,6 +211078,16 @@
      "source": [
       "CNews",
       "https://www.cnews.ru/news/line/2026-09-08_nmg_priobrela_dolyu_v_tehnologicheskoj"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-10",
+     "title": "Сделка завершена",
+     "note": "Сделка является одним из элементов стратегии холдинга по трансформации классического медиабизнеса в интегрированную экосистему информации и развлечений, отметили в НМГ. Команда «Лайм» во главе с текущим руководством продолжит операционное управление…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Nacionalnaya-Media-Gruppa-priobrela-dolyu-v-kompanii-sobstvennike-biletno-propusknoj-sistemy-Lajm-87493"
      ]
     }
    ],
@@ -211105,7 +211129,7 @@
      "value": "2026-09-08",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "9e0917fe7b9b"
+     "card_hash": "08a4b0f3f923"
     },
     "nature": {
      "control_change": true,
