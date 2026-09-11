@@ -204776,11 +204776,11 @@
     },
     "target": {
      "company_id": "gambertalvis",
-     "inn": null,
-     "confirmed": false,
+     "inn": "6831000321",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "51696058c23a"
     },
