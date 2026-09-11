@@ -5576,3 +5576,28 @@ def test_gate_shows_a_complete_latin_named_draft_instead_of_hiding_it(monkeypatc
     b = promote.batch_names_of("Nvidia договорилась о приобретении Hugging Face")
     c = promote.batch_names_of("IBS купила разработчика ИИ-решений Rubbles")
     assert promote.matcher.quoted_common(a, b) and not promote.matcher.quoted_common(a, c)
+
+
+def test_gate_names_the_true_reason_for_a_cyrillic_draft_without_russian_marks(base):
+    """Приток 11 сентября 2026 разбирал «Северную верфь» как загадку: весь
+    текст русский, а ворота писали «стороны и предмет названы латиницей».
+    Прятать такой черновик по-прежнему верно (замер: 44 за 36 дней, сделка —
+    одна, и у неё не разобран предмет), но причина обязана называть то, что
+    случилось: российских признаков разбор не нашёл, а не «латиница»."""
+    import promote
+    import send_drafts
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    cyr = {"title": "Женщины все чаще покупают сами себе бриллианты", "date": "2026-08-14",
+           "buyer_name": "Женщины", "asset": "бриллианты", "src": [["web:x", "https://x.ru/1"]]}
+    lat = {"title": "Atomic dohaeris: стартап привлек $1 млрд на компактные реакторы", "date": "2026-08-14",
+           "src": [["web:x", "https://x.ru/2"]]}
+    _bad, hold_cyr = promote.check(cyr, base, idx, inds)
+    _bad, hold_lat = promote.check(lat, base, idx, inds)
+    r_cyr = [r for r in hold_cyr if r.startswith("не видно связи с российским рынком")]
+    r_lat = [r for r in hold_lat if r.startswith("не видно связи с российским рынком")]
+    assert r_cyr and "латиницей" not in r_cyr[0] and "ни ООО/АО" in r_cyr[0], hold_cyr
+    assert r_lat and "латиницей" in r_lat[0], hold_lat
+    # И консоль по-прежнему прячет обоих: префикс причины тот же.
+    assert all(any(str(r).startswith("не видно связи с российским рынком") for r in h)
+               for h in (hold_cyr, hold_lat))
+    assert send_drafts is not None

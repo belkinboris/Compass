@@ -36,14 +36,17 @@ def main(write=False):
     fixes = [f for f in review.FIXES if f['id'] == DEAL and f['field'] == FIELD]
     assert len(fixes) == 1, fixes
     fix = fixes[0]
-    assert 'ГИР БО' in (card.get('eco') or {}).get('target_fin', ''), 'поле уже другое'
-    assert review.flat(fix['new']) in review.flat(card.get('extra') or ''), \
-        'описание не в extra — факт потерян, отпечаток ставить нельзя'
     fp = review.fix_fingerprint(fix['new'])
     absorbed = card.setdefault('proofread_absorbed', {}).setdefault(FIELD, [])
     if fp in absorbed:
+        # Уже записано — этим скриптом или вычиткой (прогон 12:00 того же дня
+        # переписал описание и сам поставил тот же отпечаток). Сверять `extra`
+        # дальше нельзя: после вычитки там лежит пересказ, а не дословный текст.
         print('уже записано:', fp)
         return
+    assert 'ГИР БО' in (card.get('eco') or {}).get('target_fin', ''), 'поле уже другое'
+    assert review.flat(fix['new']) in review.flat(card.get('extra') or ''), \
+        'описание не в extra — факт потерян, отпечаток ставить нельзя'
     absorbed.append(fp)
     print('отпечаток %s для %s.%s' % (fp, DEAL, FIELD))
     assert review.already_applied(fix, card)
