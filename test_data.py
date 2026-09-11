@@ -1398,3 +1398,51 @@ def test_source_label_matches_the_link(deals):
                 bad.append((d["id"], label, host))
     assert not bad, (
         "подпись обещает Telegram, а ссылка ведёт в другое место: %s" % bad[:5])
+
+
+def test_no_internal_card_id_in_reader_text(deals):
+    """Служебный id карточки не показывается читателю.
+
+    Найдено вычиткой 11 сентября 2026: у «Инсайт»/«РНЛ Лизинг» в «Контексте»
+    стояло «сделка не состоялась (карточка gbf0be72c)» — перекрёстная ссылка
+    по внутреннему id, которую читатель не может ни расшифровать, ни никуда
+    ввести: поиска по id на сайте нет. Замер по всей базе дал 7 таких мест в
+    прозе — то есть не разовая описка, а класс.
+
+    Забор поставлен сразу, а не после второй разовой чистки: тот же урок, что
+    у подписи «@dealsma» (89 карточек наросли заново, потому что чинили
+    накопленное без теста). Связь между карточками выражается словами и датой
+    («сделка закрыта 30 декабря 2025 года»), а не идентификатором.
+    """
+    import re
+
+    ids = {d["id"] for d in deals}
+    rx = re.compile(r"\b[gc][0-9a-f]{8}\b")
+    fields = (
+        "extra", "eco.share", "eco.val", "eco.target_fin", "eco.fin",
+        "eco.rationale", "eco.context", "law.struct", "law.terms", "law.appr",
+    )
+
+    def value(card, path):
+        cur = card
+        for key in path.split("."):
+            if not isinstance(cur, dict):
+                return None
+            cur = cur.get(key)
+        return cur
+
+    bad = []
+    for d in deals:
+        texts = [(f, value(d, f)) for f in fields]
+        texts += [
+            ("events.%d.note" % n, ev.get("note"))
+            for n, ev in enumerate(d.get("events") or [])
+            if isinstance(ev, dict)
+        ]
+        for field, text in texts:
+            if not isinstance(text, str):
+                continue
+            for found in rx.findall(text):
+                if found in ids:
+                    bad.append((d["id"], field, found))
+    assert not bad, "id карточки в тексте для читателя: %s" % bad[:5]
