@@ -315,7 +315,7 @@ def build_plan():
     pending = promote.load_pending() if os.path.exists(PENDING) else {'cards': []}
     comps = json.load(open(DATA, encoding='utf-8'))['companies']
     live = site_pending_ids()
-    postponed, unread = 0, 0
+    postponed, unread, unaccepted = 0, 0, 0
     for card in pending['cards']:
         if live is not None and card['id'] not in live \
                 and not (card.get('draft_sent') and card.get('post_draft_sent')):
@@ -334,6 +334,15 @@ def build_plan():
         # (правкой или `--mark-read`, если источник и правда беден).
         if not card.get('reviewed') and not (card.get('draft_sent') or card.get('post_draft_sent')):
             unread += 1
+            continue
+        # ПРИЁМКА (11 сентября 2026): владелец видел в консоли карточки с
+        # предметом-описанием в косвенном падеже, некликабельными сторонами и
+        # газетной фразой под «Юристом» — и был первым, кто их прочитал. Без
+        # штампа `accepted` (pipeline/ingest/accept_card.py) ни 🗂, ни 📣 не
+        # уходят: консоль показывает карточку, которую уже кто-то принял, а не
+        # просит человека быть корректором.
+        if not card.get('accepted') and not (card.get('draft_sent') or card.get('post_draft_sent')):
+            unaccepted += 1
             continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
@@ -376,11 +385,14 @@ def build_plan():
         fresh_raw.append(d)
     for draft in fresh_raw[:RAW_PER_RUN]:
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
-    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted
 
 
 def main(write=False):
-    plan, pending, state, deferred, postponed, foreign, unread = build_plan()
+    plan, pending, state, deferred, postponed, foreign, unread, unaccepted = build_plan()
+    if unaccepted:
+        print('Не показано карточек без приёмки: %d — сначала accept_card.py '
+              '(--queue, ответ читателя, --apply --write), потом консоль.' % unaccepted)
     if postponed:
         print('Отложено карточек: %d — сайт ещё не отдаёт их в pending.json.' % postponed)
         print('Сначала закоммитьте и запушьте pending.json, дождитесь деплоя, потом отправка.')

@@ -2557,12 +2557,15 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
                     % len(items))
         elif kind == "unread":
-            items = [c for c in not_held if not c.get("reviewed")]
-            head = ("📖 <b>Ждут прочтения: %d</b>\nПока карточку не сверят с "
-                    "источником — молчание её не публикует, сама не выйдет."
+            # Приёмка (11 сентября 2026): прочитанная, но не принятая карточка
+            # по молчанию тоже не выходит (approve.plan_actions) — и обещать
+            # «выйдет сама» ей нельзя.
+            items = [c for c in not_held if not (c.get("reviewed") and c.get("accepted"))]
+            head = ("📖 <b>Ждут прочтения или приёмки: %d</b>\nПока карточку не сверят с "
+                    "источником и не примут целиком — молчание её не публикует, сама не выйдет."
                     % len(items))
         else:  # soon
-            items = [c for c in not_held if c.get("reviewed")]
+            items = [c for c in not_held if c.get("reviewed") and c.get("accepted")]
             head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
                     "в течение суток." % len(items))
 
@@ -2635,7 +2638,7 @@ def _stats_report() -> str:
         "🆕 Добавлено за неделю: <b>%(added_week)d</b>\n"
         "📣 Опубликовано в канале: <b>%(published)d</b>\n\n"
         "⏳ Выйдут сами в течение суток: <b>%(queue_soon)d</b>\n"
-        "📖 Ждут прочтения (сами не выйдут): <b>%(queue_unread)d</b>\n"
+        "📖 Ждут прочтения или приёмки (сами не выйдут): <b>%(queue_unread)d</b>\n"
         "✋ Вы придержали: <b>%(queue_held)d</b>\n\n"
         "🔧 <b>В работе</b>\n"
         "Не дополнены по источнику: <b>%(unread)d</b> из %(from_ingest)d\n"
@@ -3087,8 +3090,9 @@ def _ops_numbers() -> dict:
         # карточка не публикуется по молчанию никогда (approve.py,
         # `plan_actions`), и раньше это число молча включало её тоже —
         # владелец 18 августа поймал два таких «зависших» примера.
-        "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed")),
-        "queue_unread": sum(1 for c in pending if not c.get("held") and not c.get("reviewed")),
+        "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed") and c.get("accepted")),
+        "queue_unread": sum(1 for c in pending if not c.get("held")
+                            and not (c.get("reviewed") and c.get("accepted"))),
         "queue_held": sum(1 for c in pending if c.get("held")),
         "unread": len(unread),
         "from_ingest": len(from_ingest),
@@ -3138,7 +3142,7 @@ ol.prev .tag{font-size:12px;color:var(--acc);margin-left:6px;white-space:nowrap}
 <h2>Ждёт вашего решения</h2>
 <div class="grid">
 <div class="c"><div class="n">%(queue_soon)d</div><div class="l">выйдут сами в течение суток</div></div>
-<div class="c"><div class="n">%(queue_unread)d</div><div class="l">ждут прочтения — сами не выйдут</div></div>
+<div class="c"><div class="n">%(queue_unread)d</div><div class="l">ждут прочтения или приёмки — сами не выйдут</div></div>
 <div class="c"><div class="n">%(queue_held)d</div><div class="l">вы придержали</div></div>
 </div>
 %(queue_list)s

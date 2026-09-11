@@ -317,6 +317,34 @@ def test_post_drops_lines_that_only_echo_the_headline():
     assert "<b>Отрасль:</b> Рынок ценных бумаг" in text
 
 
+def test_post_why_line_is_the_motive_not_the_market_size():
+    """Владелец, 11 сентября 2026, пост Positive Technologies/CyberOK: под
+    «Зачем» стояло «объём российского рынка … может достичь 8 млрд рублей» —
+    «это не ответ на вопрос зачем». Мотив был первым предложением «Цели
+    сделки», но не влезал в 200 знаков, и выбор по длине взял второе.
+    Теперь: первое предложение о мотиве — или строки нет вовсе; оценка
+    рынка под «Зачем» не идёт никогда."""
+    motive = ('Инвестиция позволит ускорить развитие продуктового направления защиты '
+              'внешнего периметра — прежде всего технологий управления внешней '
+              'поверхностью атаки (EASM) и непрерывного тестирования на проникновение '
+              '(PentOps).')
+    market = ('По оценке Positive Technologies, объем российского рынка этих решений к '
+              '2031 году может достичь 8 млрд рублей.')
+    deal = {"id": "x2", "title": "Positive Technologies купила долю в CyberOK",
+            "status": "Закрыта", "date": "2026-09-10", "ind": "ИТ и интернет",
+            "eco": {"rationale": motive + ' ' + market}}
+    text = format_post.render(deal, {})
+    assert "<b>Зачем:</b> " + motive in text, text
+    assert "8 млрд" not in text, text
+    # Только оценка рынка — строки «Зачем» нет, а не «хоть что-нибудь».
+    deal["eco"]["rationale"] = market
+    assert "<b>Зачем:</b>" not in format_post.render(deal, {})
+    # Мотив длиннее лимита строки — тоже нет строки, а не второе предложение.
+    deal["eco"]["rationale"] = ('Покупка нужна, чтобы ' + 'расширить продуктовую линейку, ' * 12
+                                + 'и закрепиться на рынке. ' + market)
+    assert "<b>Зачем:</b>" not in format_post.render(deal, {})
+
+
 def test_post_keeps_a_party_name_not_covered_by_the_headline():
     """Продавец, которого в заголовке нет вовсе, — остаётся."""
     deal = {"id": "x1", "title": "«Алор брокер» купил неназванную брокерскую компанию",
@@ -1527,7 +1555,7 @@ def test_main_dry_run_with_a_real_token_prints_full_post_text(monkeypatch, tmp_p
             "buyer": "b1", "seller": "Иван Петрович Сидоров",
             "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ и интернет",
             "date": FRESH_DATE,
-            "reviewed": "2026-08-01",
+            "reviewed": "2026-08-01", "accepted": "2026-08-01",
             # Предложение контекста обязано НАЗЫВАТЬ покупателя — иначе с 30
             # августа оно законно отсеется из строки «Покупатель» (правило
             # _mentions_party) и пост станет короче своей контрольной метки.
@@ -1567,9 +1595,9 @@ def test_main_write_skips_specified_ids_without_marking_them_sent(monkeypatch, t
     """--skip задерживает конкретную карточку в ЭТОМ прогоне, но не
     помечает её отправленной: следующий прогон должен увидеть её снова."""
     deal_skip = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
-                "sum": "1 млрд ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
+                "sum": "1 млрд ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
+                "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_skip, deal_send]
     real_data["companies"] = {}
@@ -1701,7 +1729,7 @@ def test_main_never_posts_a_stale_deal_on_first_encounter(monkeypatch, tmp_path,
     признака притока."""
     deal = {"id": "gX3", "title": "Роман Шаров довёл долю в «МорТехПроме» до 100%",
             "buyer_name": "Роман Шаров", "asset": "100% ООО «МорТехПром»", "sum": "—",
-            "date": "2026", "reviewed": "2026-08-01"}
+            "date": "2026", "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
     real_data["companies"] = {}
@@ -1737,7 +1765,7 @@ def test_main_never_revives_a_stale_seeded_deal_even_with_a_new_fact(monkeypatch
     про неё меняется."""
     deal = {"id": "gX4", "title": "Роман Шаров довёл долю в «МорТехПроме» до 100%",
             "buyer_name": "Роман Шаров", "asset": "100% ООО «МорТехПром»", "sum": "—",
-            "date": "2026", "reviewed": "2026-08-01"}
+            "date": "2026", "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
     real_data["companies"] = {}
@@ -1775,7 +1803,8 @@ def test_main_sends_backlog_entry_as_fresh_post_when_new_fact_appears(monkeypatc
     фактом уходит как первый пост, а не правка несуществующего сообщения),
     и не должен зависеть от гейта свежести."""
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
-    seeded_deal = dict(real_data["deals"][0], date=FRESH_DATE)
+    # accepted: первый пост о сделке уходит только после приёмки (11 сентября 2026).
+    seeded_deal = dict(real_data["deals"][0], date=FRESH_DATE, accepted="2026-08-01")
     real_data["deals"] = [seeded_deal]
     real_data["telegram_posts"] = {seeded_deal["id"]: None}
     tmp_data = tmp_path / "deals_promoted.json"
@@ -1810,9 +1839,9 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     отдельная, явно читаемая строка отчёта с именем сделки."""
     deal_edit = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
                  "buyer": "b1", "sum": "1 млрд ₽", "status": "Закрыта",
-                 "date": FRESH_DATE, "reviewed": "2026-08-01"}
+                 "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                 "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01"}
+                 "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_edit, deal_send]
     real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
@@ -1871,7 +1900,7 @@ def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tm
             # reviewed: карточку УЖЕ читали — иначе П2-9 отложит её до
             # дочитывания, и этот тест (он про финстроку, не про П2-9) не
             # увидит ни одной реальной отправки.
-            "reviewed": "2026-08-01"}
+            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     companies = {"b1": {"name": "«Ромашка»"}}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
@@ -1911,7 +1940,7 @@ def test_main_never_queries_fns_for_the_backlog_that_will_not_be_sent(monkeypatc
     не должен получить ни одного вызова `bo()`, даже если кандидатов на
     отправку много."""
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
-            "reviewed": "2026-08-01"}
+            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
     real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
@@ -3298,7 +3327,7 @@ def test_raw_console_remembers_the_news_not_the_draft_id(monkeypatch):
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
-    plan, _p, _s, _deferred, _postponed, _foreign, _unread = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, _foreign, _unread, _unaccepted = send_drafts.build_plan()
     raw_titles = [item.get("title") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
     assert drafts[1]["title"] in raw_titles
     assert drafts[0]["title"] not in raw_titles, \
@@ -3325,10 +3354,132 @@ def test_raw_console_hides_foreign_only_deals(monkeypatch):
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, foreign, _unread = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted = send_drafts.build_plan()
     assert foreign == 1
     assert not [1 for _t, _kb, (kind, _i, _m) in plan if kind == "raw"], \
         "иностранный черновик всё равно попал в план рассылки"
+
+
+def test_acceptance_findings_point_at_what_the_owner_saw():
+    """11 сентября 2026: предмет-описание в косвенном падеже, стороны текстом,
+    газетная фраза в поле, «Зачем» об объёме рынка — всё это механика обязана
+    назвать ДО того, как карточку увидит владелец. Находки — подсказка
+    читателю и замок для штампа, а не приговор карточке."""
+    import accept_card
+    base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
+            "deals": [], "telegram_posts": {}}
+    card = {"id": "gt1", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+            "date": FRESH_DATE, "status": "Закрыта", "buyer_name": "Positive Technologies",
+            "asset": "долю в компании-разработчике решений в области кибербезопасности CyberOK",
+            "src": [["Ведомости", "https://www.vedomosti.ru/x"]],
+            "eco": {"rationale": "По оценке компании, объем российского рынка может достичь 8 млрд рублей."},
+            "law": {"struct": "Книгу заявок закрыли семь инвесторов, пишут «Ведомости»."}}
+    codes = {c for c, _t in accept_card.findings(card, base)}
+    assert {"asset_case", "asset_description", "party_unlinked:buyer", "party_unlinked:target", "why"} <= codes, codes
+    assert any(c.startswith("press:") for c in codes), codes
+    clean = {"id": "gt2", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+             "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
+             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {}}
+    base["companies"]["gsb2"] = {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}
+    assert not accept_card.findings(clean, base), accept_card.findings(clean, base)
+
+
+def test_acceptance_refuses_invented_names_descriptions_and_twins():
+    """Ответ читателя не может внести выдумку: новое имя в заголовке, профиль
+    с описанием вместо имени, профиль-близнец уже существующего, hold без
+    причины, accept с незакрытым чек-листом."""
+    import accept_card
+    base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
+            "deals": [], "telegram_posts": {}}
+    card = {"id": "gt1", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+            "date": FRESH_DATE, "buyer_name": "«Совко капитал партнерс»", "src": [["В", "https://v.ru/1"]],
+            "eco": {}, "law": {}}
+    full = {k: True for k in accept_card.CHECKLIST}
+    bad = accept_card.check_answer({
+        "verdict": "accept", "checklist": full,
+        "profiles": [{"role": "buyer", "name": "компания-разработчик решений в области ИБ", "desc": "x" * 30},
+                     {"role": "target", "name": "Совкомбанк", "desc": "y" * 30}],
+        "title": "Петров купил долю в Совкомбанке"}, card, base)
+    assert any("описание" in b for b in bad) and any("уже есть профиль" in b for b in bad) \
+        and any("Петров" in b for b in bad), bad
+    assert accept_card.check_answer({"verdict": "hold"}, card, base)
+    assert any("чек-лист" in b for b in accept_card.check_answer({"verdict": "accept", "checklist": {}}, card, base))
+    assert not accept_card.check_answer({
+        "verdict": "accept", "checklist": full,
+        "profiles": [{"role": "target", "id": "gsb"},
+                     {"role": "buyer", "name": "«Совко Капитал Партнерс»", "ind": "Холдинги",
+                      "desc": "Холдинговая компания основных акционеров Совкомбанка.", "group": True}],
+        "no_profile": {"seller": "один из акционеров, имя не раскрыто"},
+        "asset": "акции Совкомбанка"}, card, base)
+
+
+def test_acceptance_stamps_only_a_card_without_findings_left():
+    """Штамп — итог, а не намерение: ответ верный, но проза ещё с газетой —
+    штампа нет; после вычитки тот же ответ ставит его, заводит профиль,
+    привязывает стороны и убирает текстовое имя покупателя."""
+    import accept_card
+    base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
+            "deals": [], "telegram_posts": {}}
+    card = {"id": "gt1", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+            "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "«Совко капитал партнерс»",
+            "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {"struct": "Так пишут «Ведомости»."}}
+    ans = {"verdict": "accept", "checklist": {k: True for k in accept_card.CHECKLIST},
+           "profiles": [{"role": "target", "id": "gsb"},
+                        {"role": "buyer", "name": "«Совко Капитал Партнерс»", "ind": "Холдинги",
+                         "desc": "Холдинговая компания основных акционеров Совкомбанка.", "group": True}],
+           "no_profile": {"seller": "один из акционеров, имя не раскрыто"},
+           "asset": "акции Совкомбанка", "status": "Закрыта",
+           "src_add": [["Совкомбанк", "https://sovcombank.ru/press"]]}
+    _lines, stamped = accept_card.apply_answer(json.loads(json.dumps(ans)), json.loads(json.dumps(card)),
+                                               json.loads(json.dumps(base)))
+    assert not stamped
+    card["law"]["struct"] = "Пакет продан в формате ускоренного формирования книги заявок."
+    lines, stamped = accept_card.apply_answer(ans, card, base, day="2026-09-11")
+    assert stamped and card["accepted"] == "2026-09-11", lines
+    assert card["target"] == "gsb" and card["buyer"] in base["companies"] and "buyer_name" not in card
+    assert base["companies"][card["buyer"]]["group"] is True
+    assert card["src"][-1][1] == "https://sovcombank.ru/press" and card["status"] == "Закрыта"
+    assert not accept_card.findings(card, base)
+
+
+def test_console_withholds_cards_that_passed_reading_but_not_acceptance(monkeypatch):
+    """Прочитанная, но не принятая карточка в консоль не уходит — иначе
+    владелец снова первым читает предмет-описание и некликабельные стороны."""
+    import promote
+    import send_drafts
+    cards = [
+        {"id": "g-read-only", "title": "Прочитана, не принята", "reviewed": "2026-09-11",
+         "src": [["Т", "https://t.example/1"]]},
+        {"id": "g-accepted", "title": "Прочитана и принята", "reviewed": "2026-09-11",
+         "accepted": "2026-09-11", "src": [["Т", "https://t.example/2"]]},
+    ]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {})
+    plan, *_rest, unaccepted = send_drafts.build_plan()
+    ids = {item[1]["id"] for _t, _k, item in plan}
+    assert ids == {"g-accepted"}, ids
+    assert unaccepted == 1
+
+
+def test_silence_does_not_publish_an_unaccepted_card():
+    """Молчание — согласие на ПРИНЯТУЮ карточку; явное «опубликовать» —
+    по-прежнему сильнее."""
+    import approve
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    cards = [{"id": "s1", "title": "прочитана, не принята", "draft_sent": True,
+              "pending_since": stale, "reviewed": "2026-09-11"},
+             {"id": "s2", "title": "принята", "draft_sent": True,
+              "pending_since": stale, "reviewed": "2026-09-11", "accepted": "2026-09-11"},
+             {"id": "s3", "title": "не принята, но владелец нажал", "draft_sent": True,
+              "pending_since": stale, "reviewed": "2026-09-11"}]
+    publish, _hold, wait, _discard = approve.plan_actions(
+        cards, [{"deal_id": "s3", "verdict": "approve"}], now)
+    assert {c["id"] for c, _o, _w in publish} == {"s2", "s3"}
+    assert any(c["id"] == "s1" and "приёмк" in w for c, w in wait), wait
 
 
 def test_console_withholds_unreviewed_cards(monkeypatch):
@@ -3348,7 +3499,7 @@ def test_console_withholds_unreviewed_cards(monkeypatch):
     cards = [
         {"id": "g-unread", "title": "Непрочитанная карточка",
          "src": [["Т", "https://t.example/1"]]},
-        {"id": "g-read", "title": "Прочитанная карточка", "reviewed": "2026-08-10",
+        {"id": "g-read", "title": "Прочитанная карточка", "reviewed": "2026-08-10", "accepted": "2026-08-10",
          "src": [["Т", "https://t.example/2"]]},
     ]
     monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
@@ -3356,7 +3507,7 @@ def test_console_withholds_unreviewed_cards(monkeypatch):
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, _foreign, unread = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, _foreign, unread, _unaccepted = send_drafts.build_plan()
     ids_in_plan = {item["id"] for _t, _kb, (kind, item, _m) in plan if kind == "card"}
     assert "g-unread" not in ids_in_plan, "непрочитанная карточка попала в план консоли"
     assert "g-read" in ids_in_plan
@@ -3374,12 +3525,12 @@ def test_console_does_not_ask_about_a_post_that_will_never_go_out(monkeypatch):
     import promote
     import send_drafts
     cards = [
-        {"id": "g-old", "title": "Старая сделка", "date": "2026", "reviewed": "2026-09-05",
+        {"id": "g-old", "title": "Старая сделка", "date": "2026", "reviewed": "2026-09-05", "accepted": "2026-09-05",
          "src": [["Т", "https://t.example/1"]]},
-        {"id": "g-new", "title": "Свежая сделка", "date": FRESH_DATE, "reviewed": "2026-09-05",
+        {"id": "g-new", "title": "Свежая сделка", "date": FRESH_DATE, "reviewed": "2026-09-05", "accepted": "2026-09-05",
          "src": [["Т", "https://t.example/2"]]},
         {"id": "g-dictated", "title": "Старая, но с текстом владельца", "date": "2024-01-15",
-         "reviewed": "2026-09-05", "post_override": "Текст от владельца",
+         "reviewed": "2026-09-05", "accepted": "2026-09-05", "post_override": "Текст от владельца",
          "src": [["Т", "https://t.example/3"]]},
     ]
     monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})

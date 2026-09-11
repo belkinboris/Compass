@@ -187,7 +187,7 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
                          % (soon, _plural(soon, 'карточка', 'карточки', 'карточек'),
                             _plural(soon, 'выйдет', 'выйдут', 'выйдут')))
         if unread:
-            lines.append('📖 %d %s ждут прочтения — сами не выйдут, пока их не сверят со статьёй'
+            lines.append('📖 %d %s ждут прочтения или приёмки — сами не выйдут, пока их не сверят со статьёй и не примут целиком'
                          % (unread, _plural(unread, 'карточка', 'карточки', 'карточек')))
         if held:
             lines.append('✋ %d %s вы придержали — %s вашего слова'
@@ -451,7 +451,7 @@ def queue_keyboard(soon=0, held=0, unread=0):
     if soon:
         row.append({'text': '👀 Что скоро выйдет', 'callback_data': 'show:soon'})
     if unread:
-        row.append({'text': '📖 Что ждёт прочтения', 'callback_data': 'show:unread'})
+        row.append({'text': '📖 Что ждёт прочтения или приёмки', 'callback_data': 'show:unread'})
     if held:
         row.append({'text': '✋ Что придержано', 'callback_data': 'show:held'})
     return {'inline_keyboard': [row]} if row else None

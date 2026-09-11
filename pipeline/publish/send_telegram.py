@@ -656,7 +656,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
             m_flagged.append((event['id'], problems))
             to_send_m = [(d, e, t) for d, e, t in to_send_m if e['id'] != event['id']]
 
-    to_send, to_edit, to_seed, needs_review = [], [], [], []
+    to_send, to_edit, to_seed, needs_review, needs_acceptance = [], [], [], [], []
     for deal in data['deals']:
         did = deal['id']
         if did in posts:
@@ -685,6 +685,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
                         # П2-9: пустая, ещё не прочитанная карточка ждёт дочитывания,
                         # а не уходит первым постом со всеми пустыми линзами.
                         needs_review.append(did)
+                    elif not deal.get('post_override') and not deal.get('accepted'):
+                        needs_acceptance.append(did)
                     else:
                         text = format_post.render(deal, comps)
                         to_send.append((did, text))
@@ -716,6 +718,17 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
             # который владелец продиктовал сам, — читать за него нечего.
             elif not deal.get('post_override') and format_post.needs_review_before_post(deal):
                 needs_review.append(did)
+            elif not deal.get('post_override') and not deal.get('accepted'):
+                # ПРИЁМКА (11 сентября 2026): первый пост о сделке уходит
+                # только после того, как карточку прочитали целиком по
+                # чек-листу (`pipeline/ingest/accept_card.py`, штамп
+                # `accepted`). Пост наследует каждый дефект карточки и
+                # показывает его подписчикам; «Зачем» об объёме рынка и
+                # предмет-описание владелец увидел именно в канале. Текст,
+                # продиктованный владельцем (`post_override`), — его решение,
+                # гейт его не перекрывает; правки уже вышедших постов
+                # (`to_edit`) — тоже не здесь.
+                needs_acceptance.append(did)
             else:
                 # Текст, который владелец продиктовал в Telegram при модерации
                 # черновика, важнее автоформата — но только для ПЕРВОГО поста:

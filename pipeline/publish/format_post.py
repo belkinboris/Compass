@@ -287,6 +287,35 @@ def _pick_novel_sentences(text, reference, limit=2, max_chars=280, drop=None):
     return [s for s in sentences if s in picked_set]
 
 
+# Предложение о РЫНКЕ, а не о мотиве: «объём российского рынка … может
+# достичь 8 млрд рублей», «рынок оценивается в …». В «Цели сделки» такие
+# фразы стоят вторым-третьим предложением как контекст, и под подписью
+# «Зачем» они читаются как ответ не на тот вопрос. «Выйти на рынок
+# Казахстана» и «увеличить долю рынка» правило не задевает — там нет ни
+# слова об объёме или оценке.
+NOT_A_MOTIVE = re.compile(
+    r'(?:объ[её]м|размер|[её]мкость)\s+(?:\S+\s+){0,2}рынк'
+    r'|рынок\s+(?:\S+\s+){0,3}(?:оценива|достиг|вырастет|составит|составил)'
+    r'|по\s+оценк[а-яё]*\s+(?:\S+\s+){0,4}рынк',
+    re.I)
+
+
+def _why_sentence(rationale, reference, max_chars=280):
+    """Одно предложение для строки «Зачем»: первое по порядку, которое
+    говорит о мотиве (а не об объёме рынка) и ещё не сказано в посте.
+    Если оно не влезает в `max_chars`, строки не будет вовсе — подменять
+    мотив следующим предложением нельзя: следующее почти всегда контекст,
+    прогноз или оценка рынка, и под «Зачем» оно врёт читателю (пост
+    PT/CyberOK, 11 сентября 2026). Лучше нет строки, чем строка не о том."""
+    for s in _sentences(rationale):
+        if NOT_A_MOTIVE.search(s):
+            continue
+        if len(s) > max_chars:
+            return None
+        return s if has_novelty(s, reference) else None
+    return None
+
+
 def party_names(deal, companies):
     """Стороны так, как их видит читатель: имя из профиля либо имя текстом."""
     def name(ref, text):
@@ -914,12 +943,16 @@ def render(deal, companies, updates=(), today=None, fin=None):
         for text in card:
             reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
 
-    # ЗАЧЕМ — одно предложение из `eco.rationale`, если оно ещё не сказано.
+    # ЗАЧЕМ — ПЕРВОЕ предложение «Цели сделки», если оно ещё не сказано.
+    # Именно первое, а не «любое, которое влезло»: 11 сентября 2026 в посте
+    # Positive Technologies/CyberOK под «Зачем» стояла оценка объёма рынка к
+    # 2031 году — мотив (первое предложение) не уместился в 200 знаков, и
+    # выбор по длине взял второе. Владелец: «это не ответ на вопрос зачем».
     rationale = (deal.get('eco') or {}).get('rationale')
-    why = _pick_novel_sentences(rationale, reference, limit=1, max_chars=200) if has(rationale) else []
+    why = _why_sentence(rationale, reference) if has(rationale) else None
     if why:
         lines.append('')
-        emit('%s %s' % (_lab('Зачем'), esc(' '.join(why))))
+        emit('%s %s' % (_lab('Зачем'), esc(why)))
 
     adv = advisers(deal)
     if adv:

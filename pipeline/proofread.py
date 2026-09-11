@@ -108,6 +108,30 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(HERE, 'ingest'))
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
+
+
+def load_with_pending():
+    """База и очередь предпросмотра ОДНИМ списком карточек.
+
+    До 11 сентября 2026 вычитка читала только базу, и карточка в очереди
+    предпросмотра доходила до владельца в консоли сырой — с дословной
+    газетной фразой под «Юристом» (CLAUDE.md: «Владелец видит карточку в
+    консоли РАНЬШЕ, чем её вычитывают»). Приёмка (accept_card.py) правит
+    прозу именно ТАМ, поэтому редактор обязан видеть и очередь. Списки
+    склеиваются ссылками на те же объекты: `run()` правит карточки на
+    месте, а `save_with_pending()` пишет каждый файл в своё место."""
+    base = json.load(open(DATA, encoding='utf-8'))
+    pending = json.load(open(PENDING, encoding='utf-8')) if os.path.exists(PENDING) else {'cards': []}
+    merged = dict(base)
+    merged['deals'] = list(base['deals']) + list(pending.get('cards') or [])
+    return merged, base, pending
+
+
+def save_with_pending(base, pending):
+    json.dump(base, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+    if os.path.exists(PENDING):
+        json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
 
 PROOFREAD_FIELDS = ('extra', 'eco.share', 'eco.val', 'eco.target_fin', 'eco.fin',
                     'eco.rationale', 'eco.context', 'law.struct', 'law.terms',
@@ -611,7 +635,10 @@ def absorb_fixes(card, fields):
 def queue(data, limit=None):
     """Карточки без штампа, видимые на сайте, — самые читаемые первыми."""
     review = _review()
-    cards = [c for c in data['deals'] if not c.get('proofread') and review.site_visible(c)]
+    # Карточка очереди предпросмотра (`pending_since`) ещё не на сайте, но
+    # вот-вот будет — и в консоль уходит уже сейчас: она в очереди наравне.
+    cards = [c for c in data['deals'] if not c.get('proofread')
+             and (review.site_visible(c) or c.get('pending_since'))]
 
     def weight(c):
         text = ''.join(str(get_field(c, f) or '') for f in PROOFREAD_FIELDS)
@@ -726,9 +753,9 @@ def main(argv):
     if '--queue' in argv:
         rest = [a for a in argv if a != '--queue']
         limit = int(rest[0]) if rest and rest[0].isdigit() else 60
-        data = json.load(open(DATA, encoding='utf-8'))
+        data, _base, _pending = load_with_pending()
         q = queue(data)
-        print('Не вычитано (видимых на сайте): %d' % len(q))
+        print('Не вычитано (видимых на сайте и в очереди предпросмотра): %d' % len(q))
         for c in q[:limit]:
             print('  %s  %s  %s' % (c['id'], c.get('date'), str(c.get('title'))[:70]))
         return 0
@@ -748,7 +775,7 @@ def main(argv):
     if not isinstance(edits, list):
         print('Файл правок обязан быть списком объектов {id, field, old, new}.')
         return 1
-    data = json.load(open(DATA, encoding='utf-8'))
+    data, base, pending = load_with_pending()
     print('Правок в файле: %d, карточек: %d%s'
           % (len(edits), len({str(e.get('id')) for e in edits}),
              ', пометить чистыми: %d' % len(mark_clean) if mark_clean else ''))
@@ -759,8 +786,8 @@ def main(argv):
     stats = {}
     result = run(edits, data, write=write, mark_clean=mark_clean, stats=stats)
     if write and stats.get('changed'):
-        json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-        print('ЗАПИСАНО: %d карточек со штампом proofread в %s'
+        save_with_pending(base, pending)
+        print('ЗАПИСАНО: %d карточек со штампом proofread в %s (и в pending.json, если карточка там)'
               % (stats['changed'], os.path.relpath(DATA, ROOT)))
         return 0
     return result
