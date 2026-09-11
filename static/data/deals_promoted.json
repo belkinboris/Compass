@@ -213972,6 +213972,111 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g1536c7fc",
+   "date": "2026-09-09",
+   "title": "Райффайзенбанк вошёл в капитал разработчика ПО «Точный код»",
+   "ind": "ИТ и интернет",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/304517"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "49%",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Компания зарегистрирована 9 сентября 2026 года. Остальные 51% распределены между пятью физлицами-соучредителями: Наталья Меньшикова — 18%, Эльвира Емец, Андрей Кабанов, Андрей Почеснев и Шухрат Собиров — по 8,25% каждому. Сумма сделки не раскрывается.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "g39cb6128",
+   "target": "gtochnykod",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-09",
+     "title": "Сделка завершена",
+     "note": "Райффайзенбанк вошел в капитал новой компании «Точный код» с долей 49%. Компания зарегистрирована 9 сентября 2026 года. Остальные 51% распределены между пятью физлицами-соучредителями: Наталья Меньшикова — 18%, Эльвира Емец, Андрей Кабанов, Андрей Почеснев и Шухрат Собиров — по 8,25% каждому. Сумма сделки не раскрывается.",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/304517"
+     ]
+    }
+   ],
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "notes": "профиль предмета заведён, ИНН «Точного кода» найден бесплатным поиском ЕГРЮЛ (юрлицо зарегистрировано 9 сентября 2026 года); покупатель привязан к уже существующему профилю бренда «Райффайзенбанк» (в базе нет отдельного профиля именно российского АО, только групповой)"
+   },
+   "reviewed": "2026-09-11",
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "19beeb1a1943"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "3a68f7b82a0b"
+    },
+    "date": {
+     "value": "2026-09-09",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "798fc55b0129"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ddbb48af68ad"
+    },
+    "target": {
+     "company_id": "gtochnykod",
+     "inn": "9725211196",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "882e9b5c39b0"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
