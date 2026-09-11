@@ -213426,6 +213426,366 @@
      "multiple_text": "target_lot"
     }
    }
+  },
+  {
+   "id": "g6743f902",
+   "date": "2026-09-03",
+   "title": "«Трамплин Холдинг» купил 51% дизайн-центра «Мальт Систем»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/874022"
+    ],
+    [
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-09-10_vladelets_razrabotchika_skandalnogo"
+    ],
+    [
+     "Компьютерра",
+     "https://www.computerra.ru/361624/ao-tramplin-holding-obedinilos-s-ooo-malt-sistem-dlya-uskoreniya-razvitiya-rossijskoj-mikroelektroniki/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "300-400 млн ₽ (по оценке)",
+    "share": "51% ООО «Мальт Систем» — дизайн-центра микроэлектроники с архитектурой Malt-C для потоковой обработки сетевого трафика и криптопреобразований.",
+    "val": "—",
+    "target_fin": "По данным ГИР БО, выручка ООО «Мальт Систем» за 2025 год — 295,9 млн ₽ (за 2024 год — 371,5 млн ₽), чистая прибыль — 24,0 млн ₽ (за 2024 год — прибыль 95,0 млн ₽). Средняя численность работников за 2025 год — 53 человек (ЕГРЮЛ).",
+    "fin": "—",
+    "rationale": "«Трамплину» требовалась команда с компетенциями в криптографии и отраслевых связями для усиления проекта «Иртыш» через разработку модуля безопасности и криптоускорителя.",
+    "context": "Malt System известна разработкой процессоров с оригинальной архитектурой Malt-C для потоковой обработки сетевого трафика и криптопреобразований. Минпромторг ранее заявил, что характеристики процессора «Иртыш C632» почти идентичны китайскому Loongson LS3C6000/D, а «Иртыш C616» полностью идентичен китайскому аналогу, что потенциально создаёт угрозу национальной безопасности.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "51% ООО «Мальт Систем»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-03",
+     "title": "Сделка завершена",
+     "note": "АО «Трамплин Холдинг» приобрело 51% в уставном капитале ООО «Мальт Систем» у основателя дизайн-центра Сергея Елизарова.",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2026-09-10_vladelets_razrabotchika_skandalnogo"
+     ]
+    }
+   ],
+   "buyer": "gtramplin",
+   "target": "gmaltsystem",
+   "seller": "Сергей Елизаров",
+   "sum": "300-400 млн ₽ (по оценке)",
+   "reviewed": "2026-09-11",
+   "deep_researched": "2026-09-11",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо (основатель дизайн-центра), профиль не заводится по правилу — имя остаётся текстом"
+    },
+    "notes": "сумма официально не раскрыта, названа только оценка независимого эксперта (300-400 млн ₽) — источник CNews прямо говорит, что это оценка, а не цена сторон"
+   },
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": 51.0,
+     "basis": "rule",
+     "card_hash": "465cd10b29b4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "range",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "9312075d079b"
+    },
+    "date": {
+     "value": "2026-09-03",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "57cec6eb2ea4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "07ad85d0065b"
+    },
+    "target": {
+     "company_id": "gmaltsystem",
+     "inn": "7722492890",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "85b61474505f"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "gce803e3f",
+   "date": "2026-09-11",
+   "title": "«Дом.РФ» продал на торгах палаты Кожевенной слободы XVII века",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260911/briz-2117122443.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "100,5 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Памятник архитектуры можно приспособить под ресторан, офис или использовать с иными коммерческими целями. В лот включена аренда земельного участка 0,18 гектара.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "buyer_name": "«Бриз»",
+   "asset": "палаты Кожевенной слободы (Москва, Кожевническая, 19с6)",
+   "sum": "100,5 млн ₽",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-11",
+     "title": "Торги завершены",
+     "note": "«Дом.РФ» продал на торгах палаты Кожевенной слободы XVII века постройки в Замоскворечье — объект культурного наследия федерального значения площадью 525,7 кв. м. Новым владельцем стала компания «Бриз», связываемая с девелопером «Крост». Итоговая цена лота составила около 100,5 млн ₽ при стартовой цене торгов 67,4 млн ₽.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260911/briz-2117122443.html"
+     ]
+    }
+   ],
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-09-11",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "недвижимость (объект культурного наследия), профиль не заводится — это лот, а не компания",
+     "buyer": "разовая структура-победитель торгов, юрлицо-владелец достоверно не подтверждено (источник пишет «связываемая с Крост», не владение)",
+     "seller": "государственный институт развития, продающий десятки разных активов — тот же класс, что «Росимущество»/«Государство» в базе"
+    },
+    "notes": "ворота ошибочно сочли карточку дублем g3ecb7b86 (тот же продавец «Дом.РФ», но другой актив — там покупка лифтового бизнеса, здесь продажа исторического здания на торгах)"
+   },
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "bb3c038d4d5e"
+    },
+    "price": {
+     "value_rub": 100500000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "cd72567c4a10"
+    },
+    "date": {
+     "value": "2026-09-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "240b9bbaf3b5"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3ca52ebb211a"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "not_control_change"
+    }
+   }
+  },
+  {
+   "id": "gf080e8f0",
+   "date": "2025",
+   "title": "СберИнвест приобрёл 30% в «ЦОД СПб»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/965928"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "30% «ЦОД СПб» — компании, которая строит дата-центры в Санкт-Петербурге.",
+    "val": "—",
+    "target_fin": "По данным ГИР БО, чистый убыток — 14 тыс. ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "30% «ЦОД СПб»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025",
+     "title": "Сделка завершена",
+     "note": "СберИнвест (Сбербанк Инвестиции) владеет 30% в компании «ЦОД СПб», которая строит дата-центры.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/965928"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Сбербанк",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/965928"
+     }
+    ],
+    "target": [
+     {
+      "value": "«ЦОД СПб», которая строит дата-центры",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/965928"
+     }
+    ]
+   },
+   "buyer": "gac30cf97",
+   "target": "gcodspb",
+   "reviewed": "2026-09-11",
+   "deep_researched": "2026-09-11",
+   "accepted": "2026-09-11",
+   "accepted_notes": {
+    "notes": "источник — не новостная статья, а корпоративная карточка TAdviser: точной даты и суммы там нет, только год и доля; отдельной новости о сделке WebSearch не нашёл"
+   },
+   "added": "2026-09-11",
+   "facts": {
+    "stake": {
+     "value": 30.0,
+     "basis": "rule",
+     "card_hash": "b852c2b9cdf8"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2025",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "48a2350f6995"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7ababdf511a4"
+    },
+    "target": {
+     "company_id": "gcodspb",
+     "inn": "7810776669",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "0102b0933411"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
@@ -239180,7 +239540,9 @@
   "g45a72968": 108,
   "g2349d667": 109,
   "gdc686ec2": 110,
-  "g08d1c155": 111
+  "g08d1c155": 111,
+  "g0931ed04": 112,
+  "gf080e8f0": null
  },
  "telegram_milestones": {},
  "telegram_digests": {
