@@ -267,11 +267,15 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     assert "methodology" in body["operating_profit"] and body["operating_profit"]["methodology"]
 
 
-def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch):
+def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client, monkeypatch):
     """Сделка, проходящая все правила ПО ТЕКСТУ (100%, цена в рублях, ИНН
-    подтверждён), но без двух согласных чтений источника — в списке
-    мультипликаторов не показывается: правила предлагают, чтение решает.
-    Эндпоинт говорит, что она ждёт чтения, и почему исключена."""
+    подтверждён), но без двух согласных чтений источника, с 8 сентября 2026
+    показывается ВТОРЫМ сигналом — «рассчитано по тексту карточки»: помечена
+    `confidence: computed`, в проверенные (`clean_total`) и в отраслевые
+    ориентиры не входит, а эндпоинт по-прежнему говорит, что она ждёт чтения
+    и почему не подтверждена. До этого дня такие сделки не показывались
+    вовсе — владелец: «мультипликаторов стало слишком мало», рецензент:
+    три сигнала вместо одного."""
     import facts
     _seed_multiples_entity("mult-unread-target", "7710000601", 2023, 500_000_000)
     deal = dict(
@@ -288,7 +292,13 @@ def test_analytics_multiples_endpoint_hides_unverified_deals(client, monkeypatch
 
     body = client.get("/api/analytics/multiples").json()
     assert body["candidates_total"] == 1 and body["awaiting_reading"] == 1
-    assert body["verified_total"] == 0 and body["deals"] == []
+    assert body["verified_total"] == 0 and body["clean_total"] == 0
+    assert body["computed_total"] == 1 and body["computed_candidates_total"] == 1
+    assert [d["id"] for d in body["deals"]] == ["mult-unread-deal"]
+    row = body["deals"][0]
+    assert row["confidence"] == "computed" and row["reason_not_verified"] == "price_not_verified"
+    assert "по тексту" in row["formula"] or "текст" in row["formula"]
+    assert body["industries"] == [], "строка по тексту карточки не должна давать отраслевой ориентир"
     assert any(e["reason"] == "price_not_verified" for e in body["excluded"]), body["excluded"]
 
 
@@ -2484,19 +2494,19 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
     # «как есть» значит выпускать каркасные дефекты (см. approve.plan_actions).
     cards = [
         {"id": "a1", "title": "решили опубликовать", "draft_sent": True, "pending_since": fresh,
-         "reviewed": "2026-08-09"},
+         "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a2", "title": "решили придержать",   "draft_sent": True, "pending_since": fresh,
-         "reviewed": "2026-08-09"},
+         "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a3", "title": "молчание сутки",      "draft_sent": True, "pending_since": stale,
-         "reviewed": "2026-08-09"},
+         "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a4", "title": "ещё ждём",            "draft_sent": True, "pending_since": fresh,
-         "reviewed": "2026-08-09"},
+         "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a5", "title": "придержана раньше",   "draft_sent": True, "pending_since": stale,
-         "held": True, "reviewed": "2026-08-09"},
+         "held": True, "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         # Черновик, который никому не разослали, по таймауту НЕ публикуется:
         # молчание — согласие только того, кто сообщение получил.
         {"id": "a6", "title": "не рассылался",       "pending_since": stale,
-         "reviewed": "2026-08-09"},
+         "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         # А этот разослан и отмолчался сутки, но НЕ ПРОЧИТАН против источника —
         # и потому тоже ждёт. Владелец 9 августа: «косячные карточки не должны
         # появляться, пока не изучена статья».
@@ -2632,7 +2642,7 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
     now = datetime.now(timezone.utc)
     stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
     cards = [{"id": "p1", "title": "карточка без поста", "draft_sent": True,
-              "pending_since": stale, "reviewed": "2026-08-09"}]
+              "pending_since": stale, "reviewed": "2026-08-09", "accepted": "2026-08-09"}]
     decisions = [{"deal_id": "p1", "verdict": "post_no", "created_at": "x"}]
     publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
     assert not hold, "post_no придержал карточку — это модификатор, а не вердикт"
@@ -2998,7 +3008,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
         "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
                    "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
                   {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»",
-                   "reviewed": "2026-08-01"}],
+                   "reviewed": "2026-08-01", "accepted": "2026-08-01"}],
     } if "pending" in path else default)
 
     main._send_queue_batch(-100, "held")
@@ -3036,7 +3046,7 @@ def test_unread_card_is_not_counted_as_soon(monkeypatch):
     monkeypatch.setattr(main, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Ещё не прочитана", "buyer_name": "«Компания»"},
                   {"id": "gs1", "title": "Прочитана, ждёт таймаута",
-                   "buyer_name": "«Другая»", "reviewed": "2026-08-01"}],
+                   "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01"}],
     } if "pending" in path else default)
 
     assert main._send_queue_batch(-100, "soon") == 1
@@ -3528,6 +3538,13 @@ def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkey
         main_module._remember_setting(db, main_module.REVIEW_GROUP_SETTING, "-1007778889999")
         assert main_module._review_chat_ids(db) == ["-1007778889999"]
     finally:
+        # Выученный адрес не должен пережить тест: база test_accounts.db общая
+        # на все наборы, и с этой записью test_kompas.py (консоль по env
+        # -100500) падал на каждом одиночном прогоне после этого модуля.
+        row = db.get(main_module.AppSetting, main_module.REVIEW_GROUP_SETTING)
+        if row is not None:
+            db.delete(row)
+            db.commit()
         db.close()
 
 
