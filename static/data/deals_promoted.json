@@ -214777,6 +214777,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Росимущество",
+     "id": null,
+     "as_of": "до 2024",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2025/08/08/1130442-rosspirtprom-priobrel-vodki"
+     ]
+    }
    ]
   },
   "ga481b0bf": {
@@ -216709,7 +216720,19 @@
     "Профиль",
     "Автоматический"
    ],
-   "group": true
+   "group": true,
+   "ownership": [
+    {
+     "name": "ВТБ с партнёрами",
+     "id": null,
+     "share": "29,4%",
+     "as_of": "2020",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/rbcfreenews/5e43bc5c9a7947a2636b9f60"
+     ]
+    }
+   ]
   },
   "g79091b1d": {
    "name": "Сириус",
@@ -219161,6 +219184,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Марс Гайнутдинов",
+     "id": null,
+     "share": "100%",
+     "as_of": "2007-2023",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/03/12/beneficiar-peterburgskoj-zvezdi"
+     ]
+    }
    ]
   },
   "g2508428e": {
@@ -228030,6 +228065,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ГК Verme",
+     "id": null,
+     "as_of": "2025",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/technologies/industries_and_markets/news/2025/10/09/1145756-headhunter-investiroval-v-moya-smena"
+     ]
+    }
    ]
   },
   "g2fbd1d7c": {
@@ -228491,6 +228537,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Максим Яремко",
+     "id": null,
+     "share": "44,10%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/amp/6014872"
+     ]
+    },
+    {
+     "name": "Александр Коляскин",
+     "id": null,
+     "share": "4,9%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/amp/6014872"
+     ]
+    }
    ]
   },
   "g7619ce08": {
@@ -229973,6 +230041,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "«Нортекс»",
+     "id": null,
+     "share": "100%",
+     "as_of": "2023-05-31",
+     "source": [
+      "Nortex",
+      "https://nortex-chem.ru/news/Kompaniya-Nortex-priobrela-zavod-Lanxess/"
+     ]
+    }
    ]
   },
   "gd0e81cc0": {
