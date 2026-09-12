@@ -215190,6 +215190,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "АО «Киви» (контролируется Андреем Протопоповым)",
+     "id": null,
+     "as_of": "2026-06",
+     "source": [
+      "Forbes.ru",
+      "https://www.forbes.ru/finansy/562732-gruppa-zajmer-kupila-50-plateznoj-sistemy-best-u-vladel-ca-ao-kivi"
+     ]
+    }
    ]
   },
   "gcafc31dc": {
@@ -217441,6 +217452,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Darkforest Holding Company (Кипр)",
+     "id": null,
+     "as_of": "2022-12",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/realty/articles/2025/07/24/1126543-aviapark-vistavlen-na-prodazhu"
+     ]
+    }
    ]
   },
   "ge64430f4": {
@@ -217732,6 +217754,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Kinnevik (шведский инвестхолдинг)",
+     "id": null,
+     "as_of": "до 2006",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6000855"
+     ]
+    }
    ]
   },
   "g67ef3e91": {
@@ -219860,6 +219893,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Вадим Змовик",
+     "id": null,
+     "share": "51%",
+     "as_of": "2025-07",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
+     ]
+    },
+    {
+     "name": "Павел Вараксин",
+     "id": null,
+     "share": "33%",
+     "as_of": "2025-07",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
+     ]
+    },
+    {
+     "name": "Евгений Авин (Антонов)",
+     "id": null,
+     "share": "16%",
+     "as_of": "2025-07",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
+     ]
+    }
    ]
   },
   "g8fd0df01": {
@@ -220450,6 +220515,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Антон Мальцев (основатель и гендиректор)",
+     "id": null,
+     "share": "45%",
+     "as_of": "2025-02",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7497438"
+     ]
+    },
+    {
+     "name": "«Основа Капитал» (Александр Бабаев)",
+     "id": null,
+     "share": "10%",
+     "as_of": "2025-02",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7497438"
+     ]
+    }
    ]
   },
   "g7ab0b23d": {
@@ -221599,6 +221686,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Сергей Дьяченко",
+     "id": null,
+     "share": "17%",
+     "as_of": "до 2024-02",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/945677"
+     ]
+    },
+    {
+     "name": "Фёдор Железняков",
+     "id": null,
+     "share": "17%",
+     "as_of": "до 2024-02",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/945677"
+     ]
+    },
+    {
+     "name": "Пётр Железняков",
+     "id": null,
+     "share": "16%",
+     "as_of": "до 2024-02",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/945677"
+     ]
+    }
    ]
   },
   "g1ea0e717": {
@@ -222930,6 +223049,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Стинн» (головная структура)",
+     "id": null,
+     "as_of": "2023-06",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6055321"
+     ]
+    }
    ]
   },
   "g47e9e420": {
@@ -223384,6 +223514,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Евгений Черторижский (основатель)",
+     "id": null,
+     "share": "40%",
+     "as_of": "2022-12",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2023/01/12/958849-promomed-vikupil-dolyu"
+     ]
+    },
+    {
+     "name": "Ирина Аксёнова (генеральный директор)",
+     "id": null,
+     "share": "9%",
+     "as_of": "2022-12",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2023/01/12/958849-promomed-vikupil-dolyu"
+     ]
+    }
    ]
   },
   "gdbf41437": {
@@ -224020,6 +224172,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Андрей Черногоров",
+     "id": null,
+     "share": "76%",
+     "as_of": "2021-06",
+     "source": [
+      "vc.ru",
+      "https://vc.ru/services/260552-cervis-avtomatizacii-zakupok-dlya-biznesa-bidzaar-privlek-2-mln-ot-svoego-osnovatelya-i-sozdatelya-sber-eapteki"
+     ]
+    },
+    {
+     "name": "Антон Буздалин",
+     "id": null,
+     "share": "24%",
+     "as_of": "2021-06",
+     "source": [
+      "vc.ru",
+      "https://vc.ru/services/260552-cervis-avtomatizacii-zakupok-dlya-biznesa-bidzaar-privlek-2-mln-ot-svoego-osnovatelya-i-sozdatelya-sber-eapteki"
+     ]
+    }
    ]
   },
   "g437b0a3b": {
@@ -225056,6 +225230,48 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "«Бумеранг капитал» (Ваган Гаспарян)",
+     "id": null,
+     "share": "49%",
+     "as_of": "2025-09",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2025/09/10/1138375-vlozhilis-v-proizvoditelya-salatov"
+     ]
+    },
+    {
+     "name": "Перфильев (гендиректор «Бумеранг капитала»)",
+     "id": null,
+     "share": "1%",
+     "as_of": "2025-09",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2025/09/10/1138375-vlozhilis-v-proizvoditelya-salatov"
+     ]
+    },
+    {
+     "name": "АО «Пикалевская сода» (Максим Волков)",
+     "id": null,
+     "share": "25%",
+     "as_of": "2025-09",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2025/09/10/1138375-vlozhilis-v-proizvoditelya-salatov"
+     ]
+    },
+    {
+     "name": "ЗПИФ «Рэвард Капитал» (Александр Раппопорт)",
+     "id": null,
+     "share": "25%",
+     "as_of": "2025-09",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2025/09/10/1138375-vlozhilis-v-proizvoditelya-salatov"
+     ]
+    }
    ]
   },
   "gf87d9961": {
@@ -230430,6 +230646,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Александр Елисеев (через кипрскую GT Globaltruck Ltd)",
+     "id": null,
+     "share": "61%",
+     "as_of": "2023-04",
+     "source": [
+      "Forbes",
+      "https://www.forbes.ru/biznes/487111-rbk-uznal-o-vozmoznoj-prodaze-61-gruzoperevozcika-globaltruck-gruppe-monopolia"
+     ]
+    },
+    {
+     "name": "РФПИ с соинвесторами",
+     "id": null,
+     "share": "19,4%",
+     "as_of": "2023-04",
+     "source": [
+      "Forbes",
+      "https://www.forbes.ru/biznes/487111-rbk-uznal-o-vozmoznoj-prodaze-61-gruzoperevozcika-globaltruck-gruppe-monopolia"
+     ]
+    }
    ]
   },
   "gdc0facb1": {
