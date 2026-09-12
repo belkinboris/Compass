@@ -216533,6 +216533,48 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Леонид Румянцев",
+     "id": null,
+     "share": "56%",
+     "as_of": "2022-12",
+     "source": [
+      "vc.ru (данные «Контур-Фокуса»)",
+      "https://vc.ru/money/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-banka-blank-i-osnovatelya-kudago"
+     ]
+    },
+    {
+     "name": "Алексей Мишуровский",
+     "id": null,
+     "share": "23%",
+     "as_of": "2022-12",
+     "source": [
+      "vc.ru (данные «Контур-Фокуса»)",
+      "https://vc.ru/money/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-banka-blank-i-osnovatelya-kudago"
+     ]
+    },
+    {
+     "name": "Александр Прокофьев",
+     "id": null,
+     "share": "16%",
+     "as_of": "2022-12",
+     "source": [
+      "vc.ru (данные «Контур-Фокуса»)",
+      "https://vc.ru/money/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-banka-blank-i-osnovatelya-kudago"
+     ]
+    },
+    {
+     "name": "Наиль Абдуллин",
+     "id": null,
+     "share": "5%",
+     "as_of": "2022-12",
+     "source": [
+      "vc.ru (данные «Контур-Фокуса»)",
+      "https://vc.ru/money/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-banka-blank-i-osnovatelya-kudago"
+     ]
+    }
    ]
   },
   "g99e35a0c": {
@@ -222003,6 +222045,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Артём Чайка",
+     "id": "gbef46925",
+     "share": "99%",
+     "as_of": "2024-06-04",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6712251"
+     ]
+    },
+    {
+     "name": "Александр Китаев",
+     "id": null,
+     "share": "1%",
+     "as_of": "2024-06-04",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6712251"
+     ]
+    }
    ]
   },
   "ge65ef82b": {
@@ -224877,6 +224941,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "«РТ-Развитие бизнеса» (структура Ростеха)",
+     "id": null,
+     "share": "35%",
+     "as_of": "2022",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5707294"
+     ]
+    },
+    {
+     "name": "Arsanol Holdings Ltd (Кипр)",
+     "id": null,
+     "share": "55,25%",
+     "as_of": "2022",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5707294"
+     ]
+    },
+    {
+     "name": "Илья Рыбалкин",
+     "id": null,
+     "share": "9,75%",
+     "as_of": "2022",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5707294"
+     ]
+    }
    ]
   },
   "gfb0dc8c7": {
@@ -228519,6 +228615,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Даниил Кручинин",
+     "id": null,
+     "share": "44,05%",
+     "as_of": "2026",
+     "source": [
+      "audit-it.ru (данные ЕГРЮЛ)",
+      "https://www.audit-it.ru/contragent/1247700113330_ooo-intellektualnye-stroyresheniya"
+     ]
+    },
+    {
+     "name": "Аркадий Фроймчук",
+     "id": null,
+     "share": "44,05%",
+     "as_of": "2026",
+     "source": [
+      "audit-it.ru (данные ЕГРЮЛ)",
+      "https://www.audit-it.ru/contragent/1247700113330_ooo-intellektualnye-stroyresheniya"
+     ]
+    },
+    {
+     "name": "ООО «Матрикс»",
+     "id": null,
+     "share": "11,9%",
+     "as_of": "2026",
+     "source": [
+      "audit-it.ru (данные ЕГРЮЛ)",
+      "https://www.audit-it.ru/contragent/1247700113330_ooo-intellektualnye-stroyresheniya"
+     ]
+    }
    ]
   },
   "g0e6a7021": {
@@ -231567,6 +231695,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Игорь Краснолуцкий",
+     "id": null,
+     "share": "58,12%",
+     "as_of": "2022-12",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2023/02/13/dochka-gazprombanka-stala-sovladeltsem-peterburgskoy-seti-lahta-clinic/"
+     ]
+    },
+    {
+     "name": "ЗПИФ «Яшма» (структура Газпромбанка)",
+     "id": null,
+     "share": "41,88%",
+     "as_of": "2022-12",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2023/02/13/dochka-gazprombanka-stala-sovladeltsem-peterburgskoy-seti-lahta-clinic/"
+     ]
+    }
    ]
   },
   "g72b8345d": {
@@ -231668,6 +231818,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «ИнноХаб» (100% — АО «Атомэнергопром», структура Росатома)",
+     "id": null,
+     "as_of": "2023-07-03",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5771545"
+     ]
+    }
    ]
   },
   "gd46e458b": {
