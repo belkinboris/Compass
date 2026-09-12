@@ -219072,6 +219072,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "USM (холдинг)",
+     "id": null,
+     "as_of": "2023",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/technology_and_media/13/01/2023/63c17ded9a7947853241d24c"
+     ]
+    }
    ]
   },
   "g33c71ec5": {
@@ -220745,6 +220756,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Александр Казаков",
+     "id": null,
+     "as_of": "2020",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/22653833"
+     ]
+    }
    ]
   },
   "g5c1afb05": {
@@ -221480,6 +221502,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Анастасия Романова",
+     "id": null,
+     "as_of": "2024",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/945677"
+     ]
+    }
    ]
   },
   "g1617e6cd": {
@@ -222393,6 +222426,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Allianz Group",
+     "id": null,
+     "as_of": "2023",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/spb_sz/02/11/2023/6543b6b49a79472c391b4d04"
+     ]
+    }
    ]
   },
   "g5c16aa2d": {
@@ -222905,6 +222949,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Сергей Грушко",
+     "id": null,
+     "as_of": "2023",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2023/04/05/969519-sovladelets-eksmo-ast-oleg-novikov-poluchil-51-v-servise-samizdata-litnet"
+     ]
+    }
    ]
   },
   "ga5ef20dd": {
@@ -232901,7 +232956,18 @@
     "Профиль",
     "Автоматический"
    ],
-   "fns_asked": "2026-09-05"
+   "fns_asked": "2026-09-05",
+   "ownership": [
+    {
+     "name": "Сергей Дьяконов",
+     "id": null,
+     "as_of": "2026",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20260904/severstal-873037075.html"
+     ]
+    }
+   ]
   },
   "ggeometria": {
    "name": "ООО «Геометрия»",
