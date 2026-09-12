@@ -215831,6 +215831,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "«Назарбаев Фонд»",
+     "id": null,
+     "share": "67,45%",
+     "as_of": "2021",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/finance/news/2021/09/17/887100-kazahstanskii-investor-kupil-u-tsb-aziatsko-tihookeanskii-bank"
+     ]
+    }
    ]
   },
   "g2d8c2e9b": {
@@ -217832,6 +217844,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Андрей Мельниченко",
+     "id": null,
+     "share": "90%",
+     "as_of": "2018",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2018/05/16/769708-evrohim"
+     ]
+    }
    ]
   },
   "ge2674422": {
@@ -218484,6 +218508,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Виктор Наурузов",
+     "id": null,
+     "as_of": "2025",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7497422"
+     ]
+    }
    ]
   },
   "g12111389": {
@@ -218716,6 +218751,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Ресурс» Камиля Музафарова",
+     "id": null,
+     "share": "100%",
+     "as_of": "2023-11-10",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6196897"
+     ]
+    }
    ]
   },
   "g21fac69d": {
@@ -219557,6 +219604,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Лариса Тетина",
+     "id": null,
+     "share": "50,1%",
+     "as_of": "2025",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7922850"
+     ]
+    },
+    {
+     "name": "Евгений Сидоров",
+     "id": null,
+     "share": "49,9%",
+     "as_of": "2025",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7922850"
+     ]
+    }
    ]
   },
   "g9b44e8e8": {
@@ -228661,6 +228730,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Единорог»",
+     "id": null,
+     "share": "1%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6480757"
+     ]
+    },
+    {
+     "name": "МКООО «Винда Лимитед»",
+     "id": null,
+     "share": "99%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6480757"
+     ]
+    }
    ]
   },
   "gbef46925": {
