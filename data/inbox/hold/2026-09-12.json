@@ -2,17 +2,17 @@
  "made": "2026-09-12",
  "drafts": [
   {
-   "draft_id": "d41471610",
-   "title": "Оверчук: очередной раунд о ЗСТ между ЕАЭС и Индией прошел очень хорошо",
+   "draft_id": "d66415687",
+   "title": "Nvidia может провести инвестиции в IPO Anthropic",
    "date": "2026-09-12",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/politika/28105743"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/12/1228348-nvidia-mozhet-provesti"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -26,7 +26,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
