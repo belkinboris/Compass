@@ -215729,6 +215729,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "VEON",
+     "id": "gc6434a72",
+     "as_of": "2023",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2022/11/24/951964-veon-prodala-vimpelkom-rossiiskomu-menedzhmentu"
+     ]
+    }
    ]
   },
   "ga8b5d62a": {
@@ -215914,6 +215925,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Игорь Шилов",
+     "id": null,
+     "share": "94,5%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6110116"
+     ]
+    },
+    {
+     "name": "Андрей Яновский",
+     "id": null,
+     "share": "5,5%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6110116"
+     ]
+    }
    ]
   },
   "ga48b2459": {
@@ -220590,7 +220623,29 @@
    "holding": {
     "id": "g300b9ead",
     "confidence": "disclosed"
-   }
+   },
+   "ownership": [
+    {
+     "name": "Роснефть",
+     "id": null,
+     "share": "57,66%",
+     "as_of": "2026-06",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1098261"
+     ]
+    },
+    {
+     "name": "ООО «Башнефть-Инвест»",
+     "id": null,
+     "share": "4,41%",
+     "as_of": "2026-06",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1098261"
+     ]
+    }
+   ]
   },
   "g3239f553": {
    "name": "Efes Breweries International",
