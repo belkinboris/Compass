@@ -2,19 +2,30 @@
  "made": "2026-09-12",
  "drafts": [
   {
-   "draft_id": "d65750913",
-   "title": "США теряют свой статус опции по умолчанию для покупки оружия, пишут СМИ",
+   "draft_id": "d61748370",
+   "title": "Россияне стали чаще планировать визиты на развлекательные площадки заранее — покупки билетов онлайн выросли на 15%",
    "date": "2026-09-12",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260912/ssha-2117314531.html"
+     "web:rb.ru",
+     "https://rb.ru/news/rossiyane-stali-chashe-planirovat-vizity-na-razvlekatelnye-ploshadki-zaranee-pokupki-biletov-onlajn-vyrosli-na-15/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-12",
+     "title": "Переговоры",
+     "note": "Жители городов стали чаще заранее планировать посещение развлекательных площадок и покупать билеты заранее, сообщили в многофункциональном комплексе «Солнце Москвы». За год доля онлайн-покупок билетов выросла на 15% — с 8,6% до 9,9%. При этом большая часть…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/rossiyane-stali-chashe-planirovat-vizity-na-razvlekatelnye-ploshadki-zaranee-pokupki-biletov-onlajn-vyrosli-na-15/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
