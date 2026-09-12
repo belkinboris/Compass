@@ -222922,7 +222922,29 @@
     "Профиль",
     "Автоматический"
    ],
-   "group": true
+   "group": true,
+   "ownership": [
+    {
+     "name": "Эльбрус Капитал",
+     "id": null,
+     "share": "45,1%",
+     "as_of": "2022",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2023-02-14_goldman_sachs_prodal_aktsii_tsian"
+     ]
+    },
+    {
+     "name": "Дмитрий Дёмин (через MPOC Technologies)",
+     "id": null,
+     "share": "8%",
+     "as_of": "2022",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2023-02-14_goldman_sachs_prodal_aktsii_tsian"
+     ]
+    }
+   ]
   },
   "g474b6e6c": {
    "name": "SmartDeal",
@@ -224254,6 +224276,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Александр Аксёнов",
+     "id": null,
+     "share": "80%",
+     "as_of": "2022",
+     "source": [
+      "VC.ru",
+      "https://vc.ru/media/584636-struktura-byvshih-menedzherov-warner-music-russia-kupila-kompaniyu-kotoraya-upravlyaet-rossiyskim-katalogom-sony-music"
+     ]
+    },
+    {
+     "name": "Лилия Беляева",
+     "id": null,
+     "share": "20%",
+     "as_of": "2022",
+     "source": [
+      "VC.ru",
+      "https://vc.ru/media/584636-struktura-byvshih-menedzherov-warner-music-russia-kupila-kompaniyu-kotoraya-upravlyaet-rossiyskim-katalogom-sony-music"
+     ]
+    }
    ]
   },
   "g63a953b7": {
@@ -228501,6 +228545,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Эм-джи русланд» (Заза Горгиджанов)",
+     "id": null,
+     "share": "50%",
+     "as_of": "2024",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6636078"
+     ]
+    },
+    {
+     "name": "ООО «Эм-джи русланд» (Андижан Моисеев)",
+     "id": null,
+     "share": "45%",
+     "as_of": "2024",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6636078"
+     ]
+    },
+    {
+     "name": "ООО «Эм-джи русланд» (Дмитрий Шашкин)",
+     "id": null,
+     "share": "5%",
+     "as_of": "2024",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6636078"
+     ]
+    }
    ]
   },
   "g9a79dd40": {
@@ -228780,6 +228856,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «АБ Холдинг» (материнская структура Альфа-Банка)",
+     "id": null,
+     "share": "49%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5979256"
+     ]
+    }
    ]
   },
   "gcd03a064": {
@@ -233119,6 +233207,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "СберИнвест",
+     "id": "gac30cf97",
+     "share": "30%",
+     "as_of": "2025",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/965928"
+     ]
+    }
    ]
   },
   "gluchsheereshenie": {
@@ -233213,6 +233313,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "«Недвижимые активы»",
+     "id": null,
+     "share": "98%",
+     "as_of": "2026",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8938431"
+     ]
+    }
    ]
   },
   "g3bceee3d": {
