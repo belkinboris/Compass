@@ -212945,11 +212945,11 @@
     },
     "target": {
      "company_id": "gpervomaiskayazarya",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7839506496",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "7e7d15e49ef5"
     },
@@ -212965,7 +212965,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread": "2026-09-11"
@@ -232087,7 +232087,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "fns_asked": "2026-09-12"
   },
   "gtramplin": {
    "name": "АО «Трамплин Холдинг»",
@@ -232123,7 +232124,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "fns_asked": "2026-09-12"
   },
   "gpervomaiskayazarya": {
    "name": "ООО «Первомайская заря»",
@@ -232150,7 +232152,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "fns_asked": "2026-09-12"
   },
   "gsdmbank": {
    "name": "СДМ-Банк",
@@ -232177,7 +232180,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "fns_asked": "2026-09-12"
   },
   "gtochnykod": {
    "name": "«Точный код»",
@@ -232195,7 +232199,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "fns_asked": "2026-09-12"
   }
  },
  "match_keys": {
