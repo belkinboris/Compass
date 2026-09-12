@@ -221927,6 +221927,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Александр Орехов",
+     "id": null,
+     "share": "100%",
+     "as_of": "2026-05-28",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8693027"
+     ]
+    }
    ]
   },
   "gf0a760bf": {
@@ -222008,6 +222020,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Муса Бажаев",
+     "id": null,
+     "as_of": "2024",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1016640"
+     ]
+    }
    ]
   },
   "g34180872": {
@@ -222026,6 +222049,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Муса Бажаев",
+     "id": null,
+     "share": "88%",
+     "as_of": "2024",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1016640"
+     ]
+    }
    ]
   },
   "gce291e54": {
@@ -226776,6 +226811,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Vinci Concessions",
+     "id": null,
+     "share": "50%",
+     "as_of": "2015-2024",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/russia/1004096"
+     ]
+    },
+    {
+     "name": "ПАО «Мостотрест»",
+     "id": null,
+     "share": "50%",
+     "as_of": "2015-2024",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/russia/1004096"
+     ]
+    }
    ]
   },
   "ga473273a": {
@@ -227508,6 +227565,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Джеральд Бэнкс (Герман Алиев) и Майкл Эббот",
+     "id": null,
+     "as_of": "2024-06",
+     "source": [
+      "Bloomberg",
+      "https://www.bloomberg.com/news/articles/2024-07-09/former-potanin-executive-buys-uk-unit-of-top-russian-brokerage"
+     ]
+    }
    ]
   },
   "gfd02a072": {
@@ -227517,6 +227585,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Олег Михасенко (через ФГ БКС)",
+     "id": null,
+     "as_of": "до 2024-06",
+     "source": [
+      "Bloomberg",
+      "https://www.bloomberg.com/news/articles/2024-07-09/former-potanin-executive-buys-uk-unit-of-top-russian-brokerage"
+     ]
+    }
    ]
   },
   "gefc0d1df": {
@@ -227778,6 +227857,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «Компания ВК»",
+     "id": null,
+     "share": "15%",
+     "as_of": "2024-06-27",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6686581"
+     ]
+    },
+    {
+     "name": "Анна Субчева",
+     "id": null,
+     "share": "8,5%",
+     "as_of": "2024-06-27",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6686581"
+     ]
+    },
+    {
+     "name": "Кондратенко",
+     "id": null,
+     "share": "76,5%",
+     "as_of": "2024-06-27",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6686581"
+     ]
+    }
    ]
   },
   "gf0ac5fc7": {
