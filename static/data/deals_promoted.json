@@ -214996,6 +214996,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Александр Киселевич (гендиректор)",
+     "id": null,
+     "share": "89%",
+     "as_of": "до 2026-01",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8362652"
+     ]
+    },
+    {
+     "name": "Тимур Родионов",
+     "id": null,
+     "share": "7,25%",
+     "as_of": "до 2026-01",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8362652"
+     ]
+    },
+    {
+     "name": "Георгий Юфа",
+     "id": null,
+     "share": "3,75%",
+     "as_of": "до 2026-01",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8362652"
+     ]
+    }
    ]
   },
   "g5542b639": {
@@ -218840,6 +218872,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Marathon Group (Сергей Захаров, Александр Винокуров) через ООО «СПН»",
+     "id": null,
+     "share": "10,57%",
+     "as_of": "2020-2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6149973"
+     ]
+    }
    ]
   },
   "g69c88bc7": {
@@ -219211,6 +219255,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ЕБРР через МКООО «Рейкрофт Лимитед»",
+     "id": null,
+     "share": "29,43%",
+     "as_of": "2011-2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5772275"
+     ]
+    }
    ]
   },
   "g936f9597": {
@@ -220696,7 +220752,27 @@
    "holding": {
     "id": "g4e694234",
     "confidence": "disclosed"
-   }
+   },
+   "ownership": [
+    {
+     "name": "VK",
+     "id": null,
+     "as_of": "до 2022-09",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/917057"
+     ]
+    },
+    {
+     "name": "Александр Чачава (LETA Capital)",
+     "id": null,
+     "as_of": "2022-09",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/917057"
+     ]
+    }
+   ]
   },
   "g289b83ec": {
    "name": "Boosty",
@@ -230411,6 +230487,17 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Холдинг ВМП (Екатеринбург)",
+     "id": null,
+     "as_of": "2023-06",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2023/06/07/blizkaya-k-vmp-struktura-kupila-rossiyskiy-zavod-zm/"
+     ]
+    }
    ]
   },
   "g5c0322a3": {
@@ -231058,6 +231145,38 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "F+ tech",
+     "id": "gdd8d0439",
+     "share": "49%",
+     "as_of": "2023-02",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2023-02-07_marvel_vykupil_49_proizvoditelya"
+     ]
+    },
+    {
+     "name": "Пётр Ефимов (основатель «Информзащиты»)",
+     "id": null,
+     "share": "41%",
+     "as_of": "2023-02",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2023-02-07_marvel_vykupil_49_proizvoditelya"
+     ]
+    },
+    {
+     "name": "Рукавишникова",
+     "id": null,
+     "share": "10%",
+     "as_of": "2023-02",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2023-02-07_marvel_vykupil_49_proizvoditelya"
+     ]
+    }
    ]
   },
   "g6e4d31ea": {
