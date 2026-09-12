@@ -61,6 +61,7 @@ import format_post                 # noqa: E402
 import check_post                  # noqa: E402
 import proofread                   # noqa: E402
 import source_names                # noqa: E402
+import normalize_sum               # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -82,9 +83,52 @@ ROLES = {'target': ('asset', 'target'), 'buyer': ('buyer_name', 'buyer'), 'selle
 PROSE_FIELDS = proofread.PROOFREAD_FIELDS
 PLACEHOLDER = re.compile(r'^\s*(—|-|не раскрыт[а-яё]*|публично не сообщал[а-яё]*|не привлекал[а-яё]*|нет данных|n/?a)?\s*$', re.I)
 
+# Аудит 12 сентября 2026 (audit_prompt_fable): опровержение или неснятая
+# гипотеза о МЕХАНИКЕ сделки, дожившая до закрытия/срыва. Шире узкого
+# `denial_re`/`speculative_re` из test_data.py (тот регэксп — для уже
+# записанных карточек с именным списком исключений; здесь исключений нет,
+# потому что это НОВЫЕ карточки — находка обязана быть починена, а не
+# унаследована). Проверяется на себе в `_self_check()`.
+STALE_STATEMENT_RE = re.compile(
+    r'не соответствует действительности|опроверг|опровержени'
+    r'|возможно,?\s*будет\s+провед|может быть проведена?\s+через|будет\s+проведена?\s+через'
+    r'|планир(?:ует|уется|ует[а-яё]*)\s+(?:провести|заключить|закрыть|осуществить)'
+    r'|рассматрива(?:ет|ют)\s+возможность\s+(?:провед|заключ|закрыти|осуществ)'
+    r'|ожида(?:ется|ем)\s+закрыти'
+    r'|в случае одобрени', re.I)
+# ТОЛЬКО law.struct/law.terms: `eco.context` — ЕДИНСТВЕННОЕ документированное
+# место для «кто опроверг» и «чем кончилось потом» (см. семантику поля в
+# CARD_ACCEPTANCE_BRIEF.md/READER_BRIEF) — сканировать его на слово
+# «опроверг» значило бы находить факт ровно там, где ему положено быть.
+# Проверено на живой базе 12 сентября 2026: с этим набором полей находки —
+# ровно два уже известных, сознательно оставленных исключения
+# (`DENIAL_ALLOWED_IN_LAW` в test_data.py), новых ложных срабатываний нет.
+STALE_STATEMENT_FIELDS = ('law.struct', 'law.terms')
+# «Активы <иностранца>»/«(российский бизнес X)»/«(бренд X в России)» —
+# документированное соглашение для проданного российского бизнеса
+# иностранной компании (см. «Knauf (российский бизнес)», «российские активы
+# Rockwool», «Viola (бренд Valio в России)» в брифе читателя), а не
+# PARTY_IN_ASSET_NAME: имя стороны стоит там по замыслу.
+PARTY_IN_ASSET_NAME_EXEMPT = re.compile(
+    r'\(российск\w+\s+бизнес|российск\w+\s+актив|\(бренд\s+\S+\s+в\s+росси', re.I)
+
 
 def has(v):
     return bool(v) and not PLACEHOLDER.match(str(v))
+
+
+def _party_name_inside(needle, haystack):
+    """Заметная часть имени `needle` встречается внутри `haystack` — признак
+    PARTY_IN_ASSET_NAME (см. Dogma/ПИК: продавец «ГК ПИК» внутри имени
+    профиля предмета «2 участка ГК ПИК в Москве (6 га)»). Правовая форма
+    (ООО/ЗАО/ПАО/АО/МКАО/НКО) снимается — профили чаще носят бренд без неё;
+    короткие обрубки (<4 знаков) не проверяются, чтобы не поймать «ВТБ» на
+    любом упоминании банка где угодно в тексте."""
+    n = re.sub(r'^(ооо|зао|пао|мкао|нко|ао)\s+', '', str(needle or '').strip().strip('«»"').strip(), flags=re.I)
+    n = n.strip('«»" ').lower()
+    if len(n) < 4:
+        return False
+    return n in str(haystack or '').lower()
 
 
 # ---------------------------------------------------------------------------
@@ -359,16 +403,25 @@ def _absorb_applied_fixes(card, field):
     return n
 
 
-def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None):
+def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
+             waived_names=None, waived_stale=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
     читатель. `waived` — роли, для которых читатель назвал причину без профиля;
     `waived_inn` — роли, у которых юрлица с ИНН быть не может (иностранец,
     физлицо, лот); `waived_sources` — найденные притоком публикации, которые
-    читатель отвёл с причиной (о другой сделке)."""
+    читатель отвёл с причиной (о другой сделке); `waived_names` — роли, для
+    которых читатель подтвердил, что имя внутри имени предмета — не Dogma/ПИК,
+    а законное совпадение бренда (дочка названа в честь материнской компании и
+    т. п.); `waived_stale` — поля (law.struct/law.terms), в которых читатель
+    подтвердил, что денай/гипотеза — часть намеренно рассказанной истории
+    сделки (родня `DENIAL_ALLOWED_IN_LAW` в test_data.py, только для новых
+    карточек, где решение принимает читатель, а не именной список)."""
     notes = card.get(STAMP + '_notes') or {}
     waived = waived or notes.get('no_profile') or {}
     waived_inn = set(waived_inn or notes.get('no_inn') or {})
     waived_sources = set(waived_sources or notes.get('no_source') or {})
+    waived_names = waived_names or notes.get('name_ok') or {}
+    waived_stale = set(waived_stale or notes.get('stale_ok') or {})
     out = []
     comps = base.get('companies') or {}
     asset = card.get('asset')
@@ -425,6 +478,39 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     if card.get('type') == 'Продажа с торгов' and not (card.get('seller') or card.get('seller_id')) \
             and 'seller' not in waived:
         out.append(('auction_seller', 'у продажи с торгов продавец назван всегда — здесь его нет'))
+    # Аудит 12 сентября 2026 — четыре класса, найденные владельцем на живых
+    # карточках (БКС/«Форштадт», S8/«Аквариус», Мать и дитя/«Инвитро»,
+    # Dogma/ПИК), теперь проверяются механически у КАЖДОЙ новой карточки, а
+    # не только у тех, что владелец успел открыть сам.
+    target_id = card.get('target') or card.get('asset_id')
+    seller_id = card.get('seller_id')
+    if seller_id and target_id and seller_id == target_id and 'seller' not in waived:
+        out.append(('self_sale', 'продавец и предмет — один и тот же профиль (%s): похоже на cash-in '
+                    '(допэмиссия/инвестиция) под неверным типом сделки, а не на продажу'
+                    % (comps.get(seller_id, {}).get('name') or seller_id)))
+    asset_text = (comps.get(target_id, {}).get('name') if target_id else None) or card.get('asset')
+    is_lot = bool(comps.get(target_id, {}).get('lot')) if target_id else False
+    if has(asset_text) and not is_lot and not PARTY_IN_ASSET_NAME_EXEMPT.search(str(asset_text)):
+        for role, role_text in (('seller', card.get('seller')), ('buyer', card.get('buyer_name'))):
+            if has(role_text) and role not in waived_names and _party_name_inside(role_text, asset_text):
+                out.append(('party_in_asset_name:' + role,
+                            'имя стороны «%s» — внутри имени предмета «%s» (см. Dogma/ПИК: имя '
+                            'продавца должно стоять в %s, а не в имени профиля предмета)'
+                            % (role_text, asset_text, role)))
+    top_sum, eco_sum = card.get('sum'), (card.get('eco') or {}).get('sum')
+    if has(top_sum) and has(eco_sum) \
+            and normalize_sum.normalize_full(str(top_sum)) != normalize_sum.normalize_full(str(eco_sum)):
+        out.append(('sum_fields_differ', 'sum %r ≠ eco.sum %r — одна и та же цена должна совпадать в обоих полях'
+                    % (top_sum, eco_sum)))
+    if card.get('status') in ('Закрыта', 'Не состоялась'):
+        for field in STALE_STATEMENT_FIELDS:
+            if field in waived_stale:
+                continue
+            v = _text(card, field)
+            if has(v) and STALE_STATEMENT_RE.search(str(v)):
+                out.append(('stale_statement:' + field,
+                            'денай или неснятая гипотеза о механике сделки в %s при статусе «%s»: %r'
+                            % (field, card.get('status'), str(v)[:120])))
     try:
         text = format_post.render(card, base.get('companies') or {})
         for p in check_post.check(text):
@@ -588,7 +674,7 @@ def check_answer(ans, card, base):
             bad.append('profiles: описание %r с пресс-атрибуцией' % name)
         if p.get('ind') and p['ind'] not in industries(base):
             bad.append('profiles: отрасль %r не из списка' % p['ind'])
-    for key in ('no_profile', 'no_inn'):
+    for key in ('no_profile', 'no_inn', 'name_ok'):
         for role, reason in (ans.get(key) or {}).items():
             if role not in ROLES:
                 bad.append('%s: роль %r не из target/buyer/seller' % (key, role))
@@ -599,6 +685,11 @@ def check_answer(ans, card, base):
             bad.append('no_source: ключ должен быть адресом публикации')
         elif not str(reason or '').strip():
             bad.append('no_source: у %s нет причины' % url)
+    for field, reason in (ans.get('stale_ok') or {}).items():
+        if field not in STALE_STATEMENT_FIELDS:
+            bad.append('stale_ok: поле %r не из %s' % (field, STALE_STATEMENT_FIELDS))
+        elif not str(reason or '').strip():
+            bad.append('stale_ok: у %s нет причины' % field)
     title = ans.get('title')
     if title:
         old_blob = ' '.join(str(card.get(k) or '') for k in ('title', 'asset', 'buyer_name', 'seller', 'extra'))
@@ -705,11 +796,13 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         lines.append('src + %s' % s[1])
     waived = ans.get('no_profile') or {}
     left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
-                    waived_sources=ans.get('no_source') or {}, registry=registry)
+                    waived_sources=ans.get('no_source') or {}, registry=registry,
+                    waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {})
     if ans.get('verdict') == 'accept' and not left:
         card[STAMP] = day or date.today().isoformat()
         notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
-                                   ('no_source', ans.get('no_source')), ('notes', ans.get('notes'))) if v}
+                                   ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
+                                   ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes'))) if v}
         if notes:
             card[STAMP + '_notes'] = notes
         lines.append('ПРИНЯТА (%s)' % card[STAMP])
@@ -779,6 +872,59 @@ def _self_check():
           'asset': 'акции Совкомбанка', 'status': 'Закрыта',
           'src_add': [['Совкомбанк', 'https://sovcombank.ru/press']]}
     assert not check_answer(ok, card, base), check_answer(ok, card, base)
+
+    # Аудит 12 сентября 2026: четыре класса, проверенные на живых примерах,
+    # которые владелец нашёл сам (БКС/«Форштадт», S8/«Аквариус», Мать и
+    # дитя/«Инвитро», Dogma/ПИК) — здесь на минимальных карточках, чтобы
+    # проверка не зависела от текущего состояния базы.
+    src1 = [['Ведомости', 'https://www.vedomosti.ru/x']]
+    card4 = {'id': 'gtest4', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+             'seller_id': 'gsb', 'target': 'gsb', 'src': src1}
+    assert 'self_sale' in {c for c, _t in findings(card4, base)}, findings(card4, base)
+
+    base5 = {'companies': {'gpik2': {'name': '2 участка ГК ПИК в Москве (6 га)',
+                                     'ind': 'Недвижимость', 'desc': 'x'}},
+             'deals': [], 'telegram_posts': {}}
+    card5 = {'id': 'gtest5', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+             'target': 'gpik2', 'seller': 'ГК ПИК', 'src': src1}
+    assert 'party_in_asset_name:seller' in {c for c, _t in findings(card5, base5)}, findings(card5, base5)
+    card5b = dict(card5); card5b['seller'] = 'Не раскрыт'
+    assert 'party_in_asset_name:seller' not in {c for c, _t in findings(card5b, base5)}
+    # Лот, документированная конвенция «(российский бизнес X)» и явная
+    # причина читателя (`name_ok`) снимают находку без переименования.
+    base5c = {'companies': {'gpik3': {'name': '2 участка ГК ПИК в Москве (6 га)',
+                                      'ind': 'Недвижимость', 'desc': 'x', 'lot': True}},
+              'deals': [], 'telegram_posts': {}}
+    card5c = {'id': 'gtest5c', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+              'target': 'gpik3', 'seller': 'ГК ПИК', 'src': src1}
+    assert 'party_in_asset_name:seller' not in {c for c, _t in findings(card5c, base5c)}
+    base5d = {'companies': {'gknauf': {'name': 'Knauf (российский бизнес)', 'ind': 'Строительство', 'desc': 'x'}},
+              'deals': [], 'telegram_posts': {}}
+    card5d = {'id': 'gtest5d', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+              'target': 'gknauf', 'seller': 'Knauf', 'src': src1}
+    assert 'party_in_asset_name:seller' not in {c for c, _t in findings(card5d, base5d)}
+    assert 'party_in_asset_name:seller' not in \
+        {c for c, _t in findings(card5, base5, waived_names={'seller': 'дочка названа в честь материнской'})}
+
+    card6 = {'id': 'gtest6', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+             'sum': '12 млрд ₽', 'eco': {'sum': '15 млрд ₽'}, 'src': src1}
+    assert 'sum_fields_differ' in {c for c, _t in findings(card6, base)}, findings(card6, base)
+    card6b = dict(card6); card6b['eco'] = {'sum': '12 млрд ₽'}
+    assert 'sum_fields_differ' not in {c for c, _t in findings(card6b, base)}
+
+    card7 = {'id': 'gtest7', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+             'law': {'struct': 'Сделка возможно, будет проведена через SPV.'}, 'src': src1}
+    assert any(c.startswith('stale_statement:') for c, _t in findings(card7, base)), findings(card7, base)
+    card7b = dict(card7); card7b['status'] = 'Обсуждается'
+    assert not any(c.startswith('stale_statement:') for c, _t in findings(card7b, base))
+    # eco.context — документированное место для «кто опроверг»: то же слово
+    # там НЕ находка (иначе проверка ловила бы факт ровно там, где ему место).
+    card7c = {'id': 'gtest7c', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+              'eco': {'context': 'Компания публично опровергала переговоры об этом активе.'}, 'src': src1}
+    assert not any(c.startswith('stale_statement:') for c, _t in findings(card7c, base))
+    # Явная причина читателя (`stale_ok`) снимает находку без правки текста.
+    assert not any(c.startswith('stale_statement:') for c, _t in
+                   findings(card7, base, waived_stale={'law.struct': 'осознанно оставлено, полная история'}))
 
     class _FakeFns:
         """ГИР БО и ЕГРЮЛ без сети — ровно те числа, что у АО «Сайбер ОК»."""
@@ -872,7 +1018,8 @@ def main(argv):
             continue
         if not apply:
             left = findings(card, base, waived=ans.get('no_profile') or {},
-                            waived_inn=ans.get('no_inn') or {}, waived_sources=ans.get('no_source') or {})
+                            waived_inn=ans.get('no_inn') or {}, waived_sources=ans.get('no_source') or {},
+                            waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {})
             print('  ГОДЕН  %s (%s)%s' % (card['id'], where,
                                           '' if not left else ' — но штамп не встанет, пока есть: ' + '; '.join(t for _c, t in left)))
             continue

@@ -3404,6 +3404,54 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert "target_fin_prose" in {c for c, _t in accept_card.findings(clean, base, registry=known)}
 
 
+def test_acceptance_findings_catch_the_2026_09_12_audit_classes():
+    """Аудит адреса фактов (12 сентября 2026, audit_prompt_fable): четыре
+    класса, найденные владельцем на живых карточках — БКС/«Форштадт»
+    (денай в law.struct), S8/«Аквариус» (неснятая гипотеза «возможно, будет
+    проведена через SPV» в law.struct), Мать и дитя/«Инвитро» (денай в
+    law.terms), Dogma/ПИК (имя продавца внутри имени профиля предмета) —
+    теперь проверяются механически у КАЖДОЙ новой карточки, а не только
+    у тех, что владелец успел открыть сам. `eco.context` НЕ входит в
+    проверку денай/гипотезы: это документированное, ЕДИНСТВЕННОЕ место для
+    «кто опроверг» (см. семантику поля в READER_BRIEF/CARD_ACCEPTANCE_BRIEF),
+    и слово «опроверг» там — не находка, а факт на своём месте."""
+    import accept_card
+    base = {"companies": {
+        "gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."},
+        "gpik": {"name": "2 участка ГК ПИК в Москве (6 га)", "ind": "Недвижимость", "desc": "x"},
+        "glot": {"name": "2 участка ГК ПИК в Москве (6 га)", "ind": "Недвижимость", "desc": "x", "lot": True},
+    }, "deals": [], "telegram_posts": {}}
+    src = [["Ведомости", "https://www.vedomosti.ru/x"]]
+
+    self_sale = {"id": "gt10", "title": "x", "type": "M&A", "status": "Обсуждается",
+                 "seller_id": "gsb", "target": "gsb", "src": src}
+    assert "self_sale" in {c for c, _t in accept_card.findings(self_sale, base)}
+
+    party_in_asset = {"id": "gt11", "title": "x", "type": "M&A", "status": "Обсуждается",
+                       "target": "gpik", "seller": "ГК ПИК", "src": src}
+    assert "party_in_asset_name:seller" in {c for c, _t in accept_card.findings(party_in_asset, base)}
+    # У лота (несколько юрлиц в одном предмете) перечисление в имени — конвенция, не дефект.
+    lot = dict(party_in_asset, id="gt11b", target="glot")
+    assert "party_in_asset_name:seller" not in {c for c, _t in accept_card.findings(lot, base)}
+
+    sum_differ = {"id": "gt12", "title": "x", "type": "M&A", "status": "Обсуждается",
+                  "sum": "12 млрд ₽", "eco": {"sum": "15 млрд ₽"}, "src": src}
+    assert "sum_fields_differ" in {c for c, _t in accept_card.findings(sum_differ, base)}
+
+    stale = {"id": "gt13", "title": "x", "type": "M&A", "status": "Закрыта",
+             "law": {"struct": "Сделка возможно, будет проведена через SPV."}, "src": src}
+    assert any(c.startswith("stale_statement:") for c, _t in accept_card.findings(stale, base))
+    # Тот же денай в eco.context — на своём месте, не находка.
+    denial_in_context = {"id": "gt14", "title": "x", "type": "M&A", "status": "Закрыта",
+                          "eco": {"context": "Компания публично опровергала переговоры об этом активе."}, "src": src}
+    assert not any(c.startswith("stale_statement:") for c, _t in accept_card.findings(denial_in_context, base))
+    # Явные причины читателя снимают обе находки без переименования/переписывания текста.
+    assert not any(c.startswith("stale_statement:") for c, _t in
+                   accept_card.findings(stale, base, waived_stale={"law.struct": "полная история, оставлено осознанно"}))
+    assert "party_in_asset_name:seller" not in \
+        {c for c, _t in accept_card.findings(party_in_asset, base, waived_names={"seller": "не Dogma/ПИК"})}
+
+
 def test_acceptance_refuses_invented_names_descriptions_and_twins():
     """Ответ читателя не может внести выдумку: новое имя в заголовке, профиль
     с описанием вместо имени, профиль-близнец уже существующего, hold без

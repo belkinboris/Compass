@@ -24,3 +24,7 @@ data/inbox/consume_pending.json
 *.db-journal
 # Ответы читателей фактов (цитаты уже лежат в facts.readings карточек)
 data/inbox/facts/
+# Аудит адреса фактов (12 сентября 2026): партии карточек и сырые findings
+# читателей — рабочие входы/выходы одного прогона, не данные продукта.
+# Итог аудита — pipeline/audit_field_placement/*.md — в git.
+data/inbox/audit/
