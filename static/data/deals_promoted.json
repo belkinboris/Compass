@@ -216214,6 +216214,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "В. Резер",
+     "id": null,
+     "share": "90%",
+     "as_of": "2023",
+     "source": [
+      "NUR.KZ",
+      "https://www.nur.kz/politics/universe/2008988-aeroport-uralska-kupila-rossiyskaya-kompaniya/"
+     ]
+    },
+    {
+     "name": "Менеджмент компании",
+     "id": null,
+     "share": "10%",
+     "as_of": "2023",
+     "source": [
+      "NUR.KZ",
+      "https://www.nur.kz/politics/universe/2008988-aeroport-uralska-kupila-rossiyskaya-kompaniya/"
+     ]
+    }
    ]
   },
   "g2f93d858": {
@@ -219089,6 +219111,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ЗПИФ «Квинта»",
+     "id": null,
+     "share": "100%",
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6043082"
+     ]
+    }
    ]
   },
   "ga8cf6ba0": {
@@ -222997,6 +223031,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Андрей Филатов (через Marigold Investments)",
+     "id": null,
+     "share": "11,5%",
+     "as_of": "2024",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6453387"
+     ]
+    }
    ]
   },
   "ga7b1712b": {
@@ -229986,6 +230032,26 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Борис Мастуненко",
+     "id": null,
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5928509"
+     ]
+    },
+    {
+     "name": "Лео Шмунк",
+     "id": null,
+     "as_of": "2023",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/5928509"
+     ]
+    }
    ]
   },
   "ge3587b6a": {
@@ -230130,6 +230196,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Евгений Каценельсон",
+     "id": null,
+     "share": "50%",
+     "as_of": "2023",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/27/03/2023/642050059a79470e6b0e41cd?ysclid=lfsk4d5iwp697037191"
+     ]
+    },
+    {
+     "name": "Игорь Моисеев",
+     "id": null,
+     "share": "50%",
+     "as_of": "2023",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/27/03/2023/642050059a79470e6b0e41cd?ysclid=lfsk4d5iwp697037191"
+     ]
+    }
    ]
   },
   "g84357246": {
@@ -232711,7 +232799,19 @@
     "Профиль",
     "Автоматический"
    ],
-   "fns_asked": "2026-09-03"
+   "fns_asked": "2026-09-03",
+   "ownership": [
+    {
+     "name": "Государство (через Росимущество)",
+     "id": null,
+     "share": "20%",
+     "as_of": "2026",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/investments/news/2026/09/02/1225568-plani-prodat-nmtp"
+     ]
+    }
+   ]
   },
   "glautao": {
    "name": "АО «Лаут»",
