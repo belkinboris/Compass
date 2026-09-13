@@ -6935,7 +6935,9 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ПСБ",
+   "seller_id": "g8bafde28"
   },
   {
    "id": "g2b1fe015",
@@ -12249,7 +12251,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "АО «ВЭБ-Лизинг»"
   },
   {
    "id": "g58a1ac17",
@@ -15986,7 +15989,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Евродон-Юг»"
   },
   {
    "id": "gf8549c5f",
@@ -16814,7 +16818,8 @@
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ОАО «Санаторий «Россиянка»»"
   },
   {
    "id": "g270c77f8",
@@ -17055,7 +17060,9 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "Банк «Санкт-Петербург»",
+   "seller_id": "gf881a88f"
   },
   {
    "id": "g5c524dac",
@@ -20709,7 +20716,8 @@
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ИПК «Атлас» (бывший «Подиум маркет»)"
   },
   {
    "id": "g420cae8d",
@@ -21851,7 +21859,8 @@
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Торговый центр Студенец»"
   },
   {
    "id": "gd73a6964",
@@ -22077,7 +22086,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Крепость-Сириус»"
   },
   {
    "id": "ga0427eac",
@@ -22198,7 +22208,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Разрез «Степановский»»"
   },
   {
    "id": "g9c247746",
@@ -23902,7 +23913,9 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "announcement"
+   "date_basis": "announcement",
+   "seller": "ПСБ",
+   "seller_id": "g8bafde28"
   },
   {
    "id": "gabc867f3",
@@ -31759,7 +31772,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Донстар»"
   },
   {
    "id": "g6babf612",
@@ -43526,7 +43540,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Рост Капитал»"
   },
   {
    "id": "g5ff3f9ee",
@@ -45648,7 +45663,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «ОЭУ Блок №2 шахта «Анжерская-Южная»»"
   },
   {
    "id": "gd5671442",
@@ -50474,7 +50490,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Виват-Трейд»"
   },
   {
    "id": "g259866c4",
@@ -50582,7 +50599,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО ТПК «Камский сапропель»"
   },
   {
    "id": "g171f9461",
@@ -50719,7 +50737,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "АО «Динамикс Групп»"
   },
   {
    "id": "g4ebb84f2",
@@ -50836,7 +50855,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ООО «Волховнефтехим»"
   },
   {
    "id": "g8bd5e457",
@@ -51296,7 +51316,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "ЗАО «ЧР-Менеджер»"
   },
   {
    "id": "g09d132ef",
@@ -53320,7 +53341,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "СУ-155"
   },
   {
    "id": "g15bee2cf",
@@ -54121,7 +54143,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "— По поручению Росимущества торги проводил Российский аукционный дом в рамках федерального плана приватизации на 2020–2022 годы.",
     "finadv": "Российский аукционный дом (РАД) — организатор торгов по поручению Росимущества"
    },
    "law": {
@@ -54221,7 +54243,9 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller": "Росимущество",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "g941b547e",
@@ -179140,7 +179164,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "seller": "Государство"
   },
   {
    "id": "gmru-dobroflot-ikorny",
@@ -182469,7 +182494,9 @@
     }
    },
    "date_basis": "announcement",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller": "ПСБ",
+   "seller_id": "g8bafde28"
   },
   {
    "id": "inkab-ipo",
@@ -189001,7 +189028,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller": "«КР плюс» и «Сбербанк капитал»"
   },
   {
    "id": "c197ac551",
@@ -189508,7 +189536,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller": "Росэлектроника"
   },
   {
    "id": "c01291410",
@@ -202770,7 +202799,9 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "Росимущество",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "ge482f106",
