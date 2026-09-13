@@ -5585,6 +5585,54 @@ def test_promote_holds_the_same_deal_told_from_the_other_side(base):
         "одного общего названия оказалось достаточно — правило слишком мягкое")
 
 
+def test_near_duplicate_catches_a_stalled_negotiation_on_the_same_asset():
+    """Сорвавшиеся переговоры и реальное закрытие на том же активе — правило
+    ловит их даже через годы и при разных покупателях, без окна по дате.
+
+    Владелец сам нашёл дубль 13 сентября 2026: карточка про переговоры
+    2022 года («М Холдинг Лтд приобретает ТЦ Метрополис») простояла в базе
+    со статусом «Обсуждается» до тех пор, пока реальное закрытие 2023 года
+    с ДРУГИМ покупателем (Balchug Capital) не завели отдельной карточкой —
+    три прежних правила `near_duplicate` её не поймали бы: все три
+    ограничены окном 7 или 30 дней, а между сорвавшейся сделкой и её
+    исходом обычно проходят месяцы или годы. Матчим ТОЛЬКО предмет — не
+    покупателя, он и есть то, что меняется.
+    """
+    import promote
+    existing = {
+        "id": "gtest-stalled", "date": "2022",
+        "title": "М Холдинг Лтд приобретает ТЦ «Тестpolis» у Morgan Stanley и Hines",
+        "ind": "Недвижимость", "type": "M&A", "status": "Обсуждается",
+        "target": "gtest-target-company",
+        "src": [["источник", "https://example.invalid/testpolis-2022"]]}
+    companies = {"gtest-target-company": {"name": "Торгово-развлекательный центр «Тестполис»"}}
+    idx = matcher.index_base([existing], companies)
+    df = promote.stem_frequency(idx)
+
+    real_close = {"title": "Продажа ТРЦ «Тестполис» фонду Balchug Capital",
+                  "date": "2023-04-06", "asset": "Торгово-развлекательный центр «Тестполис»"}
+    found = promote.near_duplicate(real_close, idx, df)
+    assert found and found[0] == "gtest-stalled", (
+        "реальное закрытие на том же активе не связано со стоящими на месте "
+        "переговорами: %r" % (found,))
+    assert "Обсуждается" in found[1], (
+        "сработало не то правило, ради которого писался тест: %r" % (found[1],))
+
+    # `separate_transaction_reviewed` снимает срабатывание — та же метка,
+    # что уже держит `match.match()` для ровно такого класса пар.
+    reviewed = dict(existing, separate_transaction_reviewed=True)
+    idx2 = matcher.index_base([reviewed], companies)
+    assert promote.near_duplicate(real_close, idx2, promote.stem_frequency(idx2)) is None, (
+        "помеченную человеком пару правило нашло снова")
+
+    # Закрытая карточка на том же предмете — не сигнал: последовательные
+    # сделки на одном активе (перепродажа) не должны считаться дублями.
+    closed = dict(existing, status="Закрыта")
+    idx3 = matcher.index_base([closed], companies)
+    assert promote.near_duplicate(real_close, idx3, promote.stem_frequency(idx3)) is None, (
+        "правило сработало на уже закрытой карточке — должно ловить только «Обсуждается»")
+
+
 def test_link_parties_key_matches_the_twins_test():
     """Ключ «одна и та же компания» у привязки сторон и у теста близнецов —
     один и тот же.
