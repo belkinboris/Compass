@@ -122790,7 +122790,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "g399c1f98",
@@ -200120,7 +200121,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Дом.РФ»",
    "asset": "бизнес-центр «Обсидиан» на Ходынском поле",
    "events": [
     {
@@ -200239,7 +200239,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "gb2b066c3"
   },
   {
    "id": "gc5951fac",
@@ -202362,7 +202363,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "seller_id": "gb2b066c3"
   },
   {
    "id": "g8827d795",
@@ -202524,7 +202526,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "seller_id": "gb2b066c3"
   },
   {
    "id": "g677f3309",
@@ -209357,7 +209360,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "seller_id": "gb2b066c3"
   },
   {
    "id": "gddb34475",
@@ -211808,7 +211812,6 @@
     "terms": "—"
    },
    "seller": "АО «Айс Девелопмент»",
-   "buyer_name": "«Дом.РФ»",
    "asset": "активы Meteor Lift и «Лифт Коннект»",
    "events": [
     {
@@ -211917,7 +211920,8 @@
      "7214c1f29a1c"
     ]
    },
-   "proofread": "2026-09-11"
+   "proofread": "2026-09-11",
+   "buyer": "gb2b066c3"
   },
   {
    "id": "g45a72968",
@@ -213802,7 +213806,8 @@
     }
    },
    "proofread": "2026-09-11",
-   "deep_researched": "2026-09-12"
+   "deep_researched": "2026-09-12",
+   "seller_id": "gb2b066c3"
   },
   {
    "id": "gf080e8f0",
@@ -234110,6 +234115,15 @@
     "Профиль",
     "Автоматический"
    ]
+  },
+  "gb2b066c3": {
+   "name": "АО «ДОМ.РФ»",
+   "ind": "Профессиональные услуги",
+   "desc": "Финансовый институт развития в жилищной сфере: поддержка ипотечного кредитования, инфраструктурные облигации, развитие рынка арендного жилья, управление земельными ресурсами для застройки и продажа непрофильной недвижимости с торгов. Образован в 1997 году как АИЖК, переименован в АО «ДОМ.РФ» в 2018 году.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -240027,6 +240041,10 @@
   "gkpik": [
    "гк пик",
    "пик"
+  ],
+  "gb2b066c3": [
+   "дом.рф",
+   "дом рф"
   ]
  },
  "consumed_urls": [
