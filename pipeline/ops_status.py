@@ -136,8 +136,13 @@ def render_intake(looked=0, found=0, cards=0, screened=0):
     консоли (шаг D, `raw_screen.py --drop`/`--enrich`): владелец 21 августа
     жаловался на поток мусора вроде свадебных заметок в «сомнительных» —
     печатается ВСЕГДА, включая ноль, чтобы «отсеивали и просто нечего было»
-    и «шаг не сработал» не выглядели одинаково молчанием."""
-    lines = ['🌅 <b>Компас · утренний обзор рынка</b>', '']
+    и «шаг не сработал» не выглядели одинаково молчанием.
+
+    Заголовок был «утренний обзор рынка» — приток идёт весь день (08–21
+    МСК), а не только утром; слово снято 13 сентября 2026 (см.
+    `intake_is_quiet_hour` — ОТПРАВКА этого текста в тихий час теперь
+    решается отдельно от самого текста)."""
+    lines = ['🌅 <b>Компас · приток</b>', '']
     if looked:
         lines.append('Просмотрели %d %s.' % (looked, _plural(looked, 'новость', 'новости', 'новостей')))
     lines.append('Отсеяли как явный мусор ещё до консоли — %d.' % screened)
@@ -150,6 +155,34 @@ def render_intake(looked=0, found=0, cards=0, screened=0):
     lines.append('📋 <b>%d %s ждут вашей проверки</b> — с кнопками, ниже в этой группе.'
                  % (cards, _plural(cards, 'карточка', 'карточки', 'карточек')))
     return '\n'.join(lines)
+
+
+# Последний час окна притока (08–21 МСК, `20 5-18 * * *`): 18 UTC = 21 МСК.
+INTAKE_DAILY_SUMMARY_HOUR_MSK = 21
+
+
+def intake_is_quiet_hour(cards, hour_msk):
+    """Приток: слать ли пустой («тихий») отчёт ПРЯМО СЕЙЧАС.
+
+    Просьба владельца 13 сентября 2026: «не каждый час — утро… не уверен,
+    что нужно что-то писать, если вообще ничего нет… можно писать такой
+    обзор один раз в день, так как нам и так каждый час приходит „Компас ·
+    публикация"». У притока и публикации разные сессии — публикация не
+    доказывает, что приток жив, — поэтому «отменить совсем» было бы потерей
+    сигнала «а приток вообще работал сегодня?» (тот самый урок 9 августа:
+    молчание неотличимо от поломки). Разрешение — не отменять, а СВЕСТИ к
+    одному разу в день: карточка есть — отчёт уходит немедленно, как и
+    раньше (это не «тихий час»); карточек нет — отчёт уходит только на
+    последнем часовом прогоне окна (21:00 МСК), а не на всех 14. Не
+    состояние в файле (лишний коммит на каждый тихий час), а чистая функция
+    от часа: расписание притока и так фиксировано в cron, «последний час»
+    не меняется без правки самого триггера.
+
+    Возвращает True, если отчёт уходит; False — если рутина молча
+    (`print`, без сети) пропускает этот час."""
+    if cards:
+        return True
+    return hour_msk >= INTAKE_DAILY_SUMMARY_HOUR_MSK
 
 
 def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False):
@@ -507,6 +540,13 @@ def build(args):
     return render_quality(args.did, args.left, ids, args.facts, fns_budget=args.fns_budget), None
 
 
+def _hour_msk():
+    """Текущий час по Москве (UTC+3, без перевода времени — как и сам cron
+    триггеров). Локальный импорт — тот же стиль, что у `reading_queues()`."""
+    from datetime import datetime, timezone
+    return (datetime.now(timezone.utc).hour + 3) % 24
+
+
 def main(argv):
     p = argparse.ArgumentParser(add_help=False)
     p.add_argument('routine', choices=['приток', 'публикация', 'качество', 'вычитка'])
@@ -553,6 +593,13 @@ def main(argv):
     if invented:
         print('НЕ ОТПРАВЛЕНО: %s' % invented)
         return 1
+
+    if (args.routine == 'приток' and not args.broken
+            and not intake_is_quiet_hour(args.cards, _hour_msk())):
+        print('Тихий час притока (карточек нет) — отчёт не отправлен, '
+              'дневная сводка уйдёт на последнем часе окна (%d:00 МСК).'
+              % INTAKE_DAILY_SUMMARY_HOUR_MSK)
+        return 0
 
     text, keyboard = build(args)
     token = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -635,10 +682,19 @@ def _self_check():
     # Пустой прогон обязан быть внятным, а не молчаливым.
     assert 'публиковать нечего' in render_publish(nothing=True).lower()
     assert 'тихие дни' in render_intake(looked=1633)
+    assert 'утренний' not in render_intake(looked=1633).lower()
     # Отсев сырья (раздел D) печатается даже нулём — иначе «отсеивать
     # нечего» и «шаг отсева не запускался» снова неотличимы в отчёте.
     assert 'Отсеяли' in render_intake(looked=100, screened=0)
     assert '7' in render_intake(looked=100, screened=7)
+    # Тихий час притока: карточка есть — отчёт уходит в любой час; карточек
+    # нет — только на последнем часе окна (13 сентября 2026, просьба
+    # владельца «можно писать такой обзор только один раз в день»).
+    assert intake_is_quiet_hour(cards=1, hour_msk=9) is True
+    assert intake_is_quiet_hour(cards=0, hour_msk=9) is False
+    assert intake_is_quiet_hour(cards=0, hour_msk=14) is False
+    assert intake_is_quiet_hour(cards=0, hour_msk=INTAKE_DAILY_SUMMARY_HOUR_MSK) is True
+    assert intake_is_quiet_hour(cards=0, hour_msk=23) is True
     # Кнопки появляются только там, где есть что показать.
     assert queue_keyboard(0, 0) is None
     assert queue_keyboard(6, 4)['inline_keyboard'][0][0]['callback_data'] == 'show:soon'

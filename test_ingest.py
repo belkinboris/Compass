@@ -4506,6 +4506,39 @@ def test_ops_status_main_requires_text():
     assert ops_status.main([]) == 1
 
 
+def test_ops_status_main_skips_the_network_on_a_quiet_intake_hour(monkeypatch, capsys):
+    """13 сентября 2026: тихий час притока не должен даже пытаться
+    отправить сообщение (заголовок «утренний обзор» лишал это чётко видно
+    в отчёте, что рутина жива) — только напечатать честную причину и выйти
+    кодом 0 (это не сбой)."""
+    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 14)
+
+    def _boom(*a, **k):
+        raise AssertionError("main() не должен был дойти до сети в тихий час")
+    monkeypatch.setattr(ops_status, "post_status", _boom)
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]) == 0
+    out = capsys.readouterr().out
+    assert "Тихий час" in out and "21:00" in out
+
+    # На последнем часе окна (или когда карточки есть) сеть вызывается.
+    calls = []
+    monkeypatch.setattr(ops_status, "post_status",
+                         lambda *a, **k: (calls.append(1) or (True, None)))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setattr(ops_status.console_topics, "console_chats", lambda: ["-1001"])
+    monkeypatch.setattr(ops_status.console_topics, "channel_leak_note", lambda: None)
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]
+                            + []) == 0  # ещё 14:00 — не отправлено, calls пуст
+    assert calls == []
+    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 21)
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]) == 0
+    assert calls == [1]
+    calls.clear()
+    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 9)
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "3"]) == 0
+    assert calls == [1]
+
+
 def test_ops_status_refuses_internal_jargon_reaching_the_console():
     """Ровно те две фразы, которые владелец прислал 9 августа как непонятные
     партнёру. Тот же класс ошибки, что «знаменатель» и «bulk» на экране сайта
