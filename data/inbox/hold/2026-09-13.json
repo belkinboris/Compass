@@ -1,0 +1,203 @@
+{
+ "made": "2026-09-13",
+ "drafts": [
+  {
+   "draft_id": "d29787509",
+   "title": "OpenAI отложила выход на IPO из-за вопросов безопасности",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8953540"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d75231948",
+   "title": "OpenAI: IPO в 2026 году не будет, компания сосредоточится на безопасности",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/09/13/1228400-openai-ipo-v-2026"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «OpenAI отложила выход на IPO из-за вопросов безопасности» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d64654620",
+   "title": "Reuters узнал, что Anthropic обсуждает привлечение Nvidia для IPO",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/13/09/2026/6aa601899a79474d28fe8d12"
+    ]
+   ],
+   "sum": "$100 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-13",
+     "title": "Переговоры",
+     "note": "Компания намерена привлечь до $100 млрд, что может обеспечить ИИ-стартапу стоимость до около $2 трлн. Один из источников Reuters заявил, что Nvidia может вложить в IPO Anthropic до $10 млрд",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/13/09/2026/6aa601899a79474d28fe8d12"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d68903637",
+   "title": "Глава OpenAI сообщил о переносе IPO компании из-за вопросов безопасности",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6aa5c4d47d22419f6b5cbd90"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «OpenAI отложила выход на IPO из-за вопросов безопасности» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d33459102",
+   "title": "Торговый центр в Кемерове выставили на продажу за 400 млн рублей",
+   "date": "2026-09-12",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/kemerovo/2026/9/12/torgovyj-czentr-v-kemerove-vystavili-na-prodazhu-za-400-mln-rublej"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62724822",
+   "title": "Популярное «Страусиное ранчо» под Кемеровом выставили на продажу за 14 млн рублей",
+   "date": "2026-09-12",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/kemerovo/2026/9/12/populyarnoe-strausinoe-rancho-pod-kemerovom-vystavili-na-prodazhu-za-14-mln-rublej-semejnyj-zoopark-pod-kemerovom-ishhet-novogo-vladelcza-vmeste-so-vsemi-pitomczami"
+    ]
+   ],
+   "sum": "14 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-12",
+     "title": "Переговоры",
+     "note": "Популярное «Страусиное ранчо» в Кемеровском округе выставили на продажу. За готовый бизнес владельцы хотят получить 14 млн рублей. В сделку планируют включить территорию, инфраструктуру и животных, которые сейчас находятся на территории зоопарка.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/siberia/news/kemerovo/2026/9/12/populyarnoe-strausinoe-rancho-pod-kemerovom-vystavili-na-prodazhu-za-14-mln-rublej-semejnyj-zoopark-pod-kemerovom-ishhet-novogo-vladelcza-vmeste-so-vsemi-pitomczami"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
