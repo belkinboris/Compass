@@ -344,6 +344,13 @@ def stem_frequency(idx):
     return df
 
 
+# Общий префикс причины near_duplicate() — по нему main() узнаёт, что
+# ЕДИНСТВЕННОЕ, что стоит между черновиком и карточкой, — подозрение на дубль,
+# а не что-то ещё (латиница, нет стороны и т. п.). Строка человекочитаема и
+# идёт в hold_reasons как есть — маркер только для внутренней развилки.
+DUP_CANDIDATE_MARK = 'похоже на уже описанную сделку'
+
+
 def near_duplicate(draft, idx, df, rare=5):
     """Свежая карточка про то же самое — повод показать человеку, а не пустить.
 
@@ -412,8 +419,14 @@ def near_duplicate(draft, idx, df, rare=5):
     return None
 
 
-def check(draft, base, idx, inds, df=None):
-    """(причины отказа, причины «на решение»). Обе пусты — карточку пишем."""
+def check(draft, base, idx, inds, df=None, dup_out=None):
+    """(причины отказа, причины «на решение»). Обе пусты — карточку пишем.
+
+    `dup_out`, если передан, получает `(candidate_id, reason)`, когда
+    сработал `near_duplicate()` — чтобы вызывающий код мог отличить «это
+    ЕДИНСТВЕННОЕ, чего не хватает» (кандидат на автоматическое разрешение
+    чтением, см. `resolve_duplicates.py`) от «дубль — один из нескольких
+    поводов на решение» (обычный hold, дочитывание дубля ничего не изменит)."""
     bad, hold = [], []
     if not str(draft.get('title') or '').strip():
         bad.append('нет заголовка')
@@ -527,8 +540,9 @@ def check(draft, base, idx, inds, df=None):
         # если новость свежая. Ошибка стоит одного взгляда, а не карточки-дубля.
         near = near_duplicate(draft, idx, df or {})
         if near:
-            hold.append('похоже на уже описанную сделку %s (%s) — проверьте, не дубль ли'
-                        % near)
+            if dup_out is not None:
+                dup_out.append(near)
+            hold.append('%s %s (%s) — проверьте, не дубль ли' % ((DUP_CANDIDATE_MARK,) + near))
     if not bad and NEW_CARDS_NEED_REVIEW:
         hold.append('фильтр «это сделка» не проверен на живом потоке — ждёт подтверждения человека (см. E9)')
     return bad, hold
@@ -706,10 +720,33 @@ def main(write):
 
     passed, refused, held = [], [], []
     admitted, batch_names, held_names = [], [], []
+    # ПОДОЗРЕНИЕ НА ДУБЛЬ — НЕ ВОПРОС ЧЕЛОВЕКУ, А ЗАДАЧА ДЛЯ ЧТЕНИЯ. До
+    # 13 сентября 2026 near_duplicate() отправлял такой черновик в hold ровно
+    # как «нет стороны» или «латиница» — владелец нажимал кнопку, хотя ответ
+    # почти всегда лежит в самой статье: «то же самое, что уже в карточке»,
+    # «новый этап», «другая сделка на том же активе». Когда ЕДИНСТВЕННАЯ
+    # причина hold — near_duplicate (dup_hit непуст, других причин нет),
+    # черновик уходит не в консоль, а в `data/inbox/duplicates/` —
+    # `resolve_duplicates.py` читает пару (черновик + карточка-кандидат) и
+    # решает сам: та же сделка без нового факта — черновик выбрасывается
+    # (`raw_titles[...] = 'enrich:<id>'`, тот же приём, что уже применяет
+    # match.py для сильных совпадений); новый этап — событие дописывается
+    # карточке; отдельная деталь — правка через review.py; действительно
+    # другая сделка — снимается флагом `separate_transaction_reviewed`, и
+    # черновик идёт своей дорогой на следующем прогоне. В консоль попадает
+    # ТОЛЬКО «unclear» — когда чтение само не смогло решить; тогда владелец
+    # видит не рутинный вопрос «это дубль?», а прочитанное обоснование,
+    # почему решить не вышло. Остальные случаи консоль узнаёт как FYI в
+    # отчёте прогона («обновили карточку X»), а не как запрос решения.
+    dup_queue = []
     for draft in drafts:
-        bad, hold = check(draft, data, idx, inds, stem_frequency(idx))
+        dup_hit = []
+        bad, hold = check(draft, data, idx, inds, stem_frequency(idx), dup_out=dup_hit)
         if bad:
             refused.append((draft, bad))
+        elif hold and len(hold) == 1 and dup_hit:
+            candidate_id, reason = dup_hit[0]
+            dup_queue.append((draft, candidate_id, reason))
         elif hold:
             # ОДНА НОВОСТЬ В ДВУХ ИЗДАНИЯХ — ОДНО СООБЩЕНИЕ В ГРУППУ, не два.
             # 6 августа «аукцион по Рижскому вокзалу не состоялся» пришёл из
@@ -747,8 +784,9 @@ def main(write):
             idx = matcher.index_base(data['deals'] + queued + admitted,
                                      data.get('companies'), data.get('match_keys'))
 
-    print('Черновиков: %d | пустить: %d | на решение: %d | отказ: %d'
-          % (len(drafts), len(passed), len(held), len(refused)))
+    print('Черновиков: %d | пустить: %d | на решение: %d | дубль-кандидатов (читает '
+          'resolve_duplicates.py, не консоль): %d | отказ: %d'
+          % (len(drafts), len(passed), len(held), len(dup_queue), len(refused)))
     for draft, _ in passed:
         print('  ПУСТИТЬ      %s' % str(draft.get('title'))[:84])
         if draft.get('buyer_hint'):
@@ -760,9 +798,39 @@ def main(write):
     for draft, reasons in held:
         print('  НА РЕШЕНИЕ   %s\n               %s'
               % (str(draft.get('title'))[:76], '; '.join(reasons)))
+    for draft, candidate_id, reason in dup_queue:
+        print('  ДУБЛЬ?       %s\n               кандидат: %s (%s)'
+              % (str(draft.get('title'))[:76], candidate_id, reason))
     for draft, reasons in refused:
         print('  ОТКАЗ        %s\n               причина: %s'
               % (str(draft.get('title'))[:76], '; '.join(reasons)))
+    if dup_queue:
+        dup_dir = os.path.join(ROOT, 'data', 'inbox', 'duplicates')
+        os.makedirs(dup_dir, exist_ok=True)
+        day = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+        dup_file = os.path.join(dup_dir, day + '.json')
+        # ДОПИСЫВАЕМ, А НЕ ПЕРЕЗАПИСЫВАЕМ: прогон идёт ежечасно, и если
+        # `resolve_duplicates.py` ещё не разобрал утреннюю партию, дневной
+        # файл не должен её терять. `key` — по адресу источника черновика +
+        # кандидату: draft_id меняется от прогона к прогону, а адрес и
+        # кандидат — нет, и по нему `resolve_duplicates.py` не покажет
+        # дважды то, что уже было решено (см. resolved.json).
+        existing = []
+        if os.path.exists(dup_file):
+            existing = json.load(open(dup_file, encoding='utf-8')).get('items') or []
+        seen_keys = {item.get('key') for item in existing}
+        for draft, candidate_id, reason in dup_queue:
+            urls = [str(s[1]) for s in (draft.get('src') or []) if len(s) > 1]
+            key = '%s::%s' % (urls[0] if urls else draft.get('title'), candidate_id)
+            if key in seen_keys:
+                continue
+            existing.append({'key': key, 'candidate_id': candidate_id, 'reason': reason,
+                              'draft': draft, 'queued': day})
+            seen_keys.add(key)
+        json.dump({'made': day, 'items': existing}, open(dup_file, 'w', encoding='utf-8'),
+                  indent=1, ensure_ascii=False)
+        print('  (кандидаты на дубль сложены в data/inbox/duplicates/%s.json — '
+              'читает resolve_duplicates.py, не консоль)' % day)
     if held:
         hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
         os.makedirs(hold_dir, exist_ok=True)

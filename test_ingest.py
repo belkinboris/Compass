@@ -5831,3 +5831,262 @@ def test_gate_names_the_true_reason_for_a_cyrillic_draft_without_russian_marks(b
     assert all(any(str(r).startswith("не видно связи с российским рынком") for r in h)
                for h in (hold_cyr, hold_lat))
     assert send_drafts is not None
+
+
+def _dup_base():
+    existing = {
+        "id": "gtest-dupcand", "date": "2022",
+        "title": "М Холдинг Лтд приобретает ТЦ «Тестpolis» у Morgan Stanley и Hines",
+        "ind": "Недвижимость", "type": "M&A", "status": "Обсуждается",
+        "target": "gtest-target-company",
+        "src": [["источник", "https://example.invalid/testpolis-2022"]]}
+    companies = {"gtest-target-company": {"name": "Торгово-развлекательный центр «Тестполис»"}}
+    return existing, companies
+
+
+def test_check_dup_out_flags_only_the_pure_duplicate_candidate():
+    """`dup_out` из `promote.check()` наполняется ровно тогда, когда подозрение
+    на дубль — ЕДИНСТВЕННАЯ причина hold, — а не при любом её появлении.
+
+    13 сентября 2026 владелец возразил на план развивать консольную кнопку
+    «это этап уже описанной сделки»: «мне бы хотелось, чтобы ты сам понимал,
+    что это дубль». `main()` теперь отличает черновик, у которого near_duplicate
+    — единственная причина (уходит на чтение, не владельцу), от черновика,
+    у которого дубль — лишь одна из нескольких причин (латиница, нет стороны
+    и т. п. — дочитывание пары ничего бы не решило, нужен человек всё равно)."""
+    import promote
+    existing, companies = _dup_base()
+    idx = matcher.index_base([existing], companies)
+    df = promote.stem_frequency(idx)
+
+    # Единственная причина — near_duplicate: dup_out получает кандидата.
+    pure = {"title": "Продажа ТРЦ «Тестполис» фонду Balchug Capital",
+           "date": "2023-04-06", "asset": "Торгово-развлекательный центр «Тестполис»",
+           "buyer_name": "Balchug Capital",
+           "src": [["источник", "https://example.invalid/testpolis-close"]]}
+    out = []
+    bad, hold = promote.check(pure, {"deals": [], "companies": companies}, idx,
+                              promote.industries(), df, dup_out=out)
+    assert not bad
+    assert len(hold) == 1, "у черновика должна быть ровно одна причина hold: %r" % hold
+    assert out and out[0][0] == "gtest-dupcand", (
+        "dup_out не наполнился, хотя near_duplicate — единственная причина: %r" % out)
+
+    # Дубль — не единственная причина (сторона не названа вовсе, предмет
+    # остаётся): dup_out наполняется всё равно (near_duplicate сработал по
+    # предмету), но у hold больше одной причины, и main() не должен
+    # маршрутизировать такой черновик в очередь разрешения — читать пару
+    # само по себе вопрос о стороне не снимет.
+    messy = dict(pure)
+    messy.pop("buyer_name")
+    out2 = []
+    bad2, hold2 = promote.check(messy, {"deals": [], "companies": companies}, idx,
+                                promote.industries(), df, dup_out=out2)
+    assert not bad2
+    assert out2, "near_duplicate должен был сработать и по предмету без стороны"
+    assert len(hold2) > 1, "тест должен создавать черновик с НЕСКОЛЬКИМИ причинами: %r" % hold2
+
+
+def test_promote_routes_a_pure_duplicate_candidate_to_the_resolution_queue(tmp_path, monkeypatch):
+    """Живой прогон `promote.py`: черновик, у которого подозрение на дубль —
+    единственная причина, уходит в `data/inbox/duplicates/`, а НЕ в
+    `data/inbox/hold/` (откуда send_drafts.py спросил бы владельца)."""
+    import promote
+    existing, companies = _dup_base()
+    data_path = tmp_path / "deals.json"
+    data_path.write_text(json.dumps({"deals": [existing], "companies": companies,
+                                     "match_keys": {}}, ensure_ascii=False), encoding="utf-8")
+    pending_path = tmp_path / "pending.json"
+    pending_path.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}},
+                                     ensure_ascii=False), encoding="utf-8")
+    drafts_dir = tmp_path / "drafts"
+    drafts_dir.mkdir()
+    (drafts_dir / "d1.json").write_text(json.dumps({"drafts": [
+        {"draft_id": "dtest1", "title": "Продажа ТРЦ «Тестполис» фонду Balchug Capital",
+         "date": "2023-04-06", "asset": "Торгово-развлекательный центр «Тестполис»",
+         "buyer_name": "Balchug Capital",
+         "src": [["источник", "https://example.invalid/testpolis-close"]]}]},
+        ensure_ascii=False), encoding="utf-8")
+
+    monkeypatch.setattr(promote, "ROOT", str(tmp_path))
+    monkeypatch.setattr(promote, "DATA", str(data_path))
+    monkeypatch.setattr(promote, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+    monkeypatch.setattr(promote, "DRAFTS", str(drafts_dir))
+    monkeypatch.setattr(promote, "NEW_CARDS_NEED_REVIEW", False)
+
+    promote.main(write=True)
+
+    hold_files = list((tmp_path / "data" / "inbox" / "hold").glob("*.json")) \
+        if (tmp_path / "data" / "inbox" / "hold").exists() else []
+    assert not hold_files, "чистый дубль-кандидат не должен попасть в hold/консоль: %s" % hold_files
+    dup_files = list((tmp_path / "data" / "inbox" / "duplicates").glob("*.json"))
+    assert dup_files, "кандидат должен лечь в data/inbox/duplicates/"
+    payload = json.loads(dup_files[0].read_text(encoding="utf-8"))
+    assert payload["items"] and payload["items"][0]["candidate_id"] == "gtest-dupcand"
+    assert payload["items"][0]["draft"]["title"].startswith("Продажа ТРЦ")
+
+
+def test_resolve_duplicates_validate_rejects_a_verdict_without_a_real_quote(tmp_path, monkeypatch):
+    """Чтение может решить `new_stage`/`enrich`, только если факт дословно
+    лежит в закэшированном тексте источника — та же граница, что у обычной
+    правки через `review.py`, переиспользованная, а не скопированная."""
+    import resolve_duplicates as rd
+    existing, companies = _dup_base()
+    data_path = tmp_path / "deals.json"
+    data_path.write_text(json.dumps({"deals": [existing], "companies": companies},
+                                    ensure_ascii=False), encoding="utf-8")
+    pending_path = tmp_path / "pending.json"
+    pending_path.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(rd, "DATA", str(data_path))
+    monkeypatch.setattr(rd, "PENDING", str(pending_path))
+
+    item = {"key": "k1", "candidate_id": "gtest-dupcand",
+           "draft": {"title": "x"}, "reason": "тест"}
+    texts, inds = [], rd.review.industries()
+    data = json.load(open(data_path, encoding="utf-8"))
+
+    # event.note — выдуманная цитата, которой нет ни в одном источнике.
+    ans_bad = {"resolved": [{"key": "k1", "candidate_id": "gtest-dupcand", "verdict": "new_stage",
+                             "reasoning": "источник сообщил о закрытии сделки, дословно",
+                             "event": {"kind": "closed", "date": "2023-04-06",
+                                      "title": "Сделка закрыта",
+                                      "note": "Сделка закрыта на выдуманных условиях.",
+                                      "source": ["x", "https://x.invalid"]}}]}
+    out_bad = rd.validate(ans_bad, {"k1": item}, texts, inds, companies, set())
+    assert out_bad[0][2], "выдуманная цитата должна быть отклонена"
+
+    # enrich без дословной цитаты — тоже отказ.
+    ans_enrich = {"resolved": [{"key": "k1", "candidate_id": "gtest-dupcand", "verdict": "enrich",
+                                "reasoning": "источник называет точную сумму сделки",
+                                "field_fixes": [{"field": "sum", "new": "6,08 млрд ₽",
+                                                "quote": "этой фразы нет ни в одном источнике",
+                                                "why": "точная цена"}]}]}
+    out_enrich = rd.validate(ans_enrich, {"k1": item}, texts, inds, companies, set())
+    assert out_enrich[0][2], "правка без дословной цитаты должна быть отклонена"
+
+    # same_fact и unclear не требуют цитаты — только содержательное обоснование.
+    ans_ok = {"resolved": [{"key": "k1", "candidate_id": "gtest-dupcand", "verdict": "same_fact",
+                            "reasoning": "то же объявление, что уже стоит в карточке-кандидате"}]}
+    out_ok = rd.validate(ans_ok, {"k1": item}, texts, inds, companies, set())
+    assert not out_ok[0][2], "содержательный same_fact без цитаты не должен отклоняться: %r" % out_ok[0][2]
+
+    # Пустое/штампованное обоснование отклоняется даже для same_fact.
+    ans_lazy = {"resolved": [{"key": "k1", "candidate_id": "gtest-dupcand", "verdict": "same_fact",
+                              "reasoning": "дубль"}]}
+    out_lazy = rd.validate(ans_lazy, {"k1": item}, texts, inds, companies, set())
+    assert out_lazy[0][2], "штамп вместо обоснования должен быть отклонён"
+
+    # Неизвестный verdict отклоняется.
+    ans_unknown = {"resolved": [{"key": "k1", "candidate_id": "gtest-dupcand",
+                                 "verdict": "ignore_it", "reasoning": "неважно, достаточно длинный текст"}]}
+    out_unknown = rd.validate(ans_unknown, {"k1": item}, texts, inds, companies, set())
+    assert out_unknown[0][2], "неизвестный verdict должен быть отклонён"
+
+
+def test_resolve_duplicates_apply_same_fact_discards_the_draft(tmp_path, monkeypatch):
+    """`same_fact` не пишет ничего в карточку-кандидата — только помечает
+    заголовок черновика так же, как это делает `match.py` для сильных
+    совпадений (`enrich:<id>`), чтобы promote.py больше не заводил под него
+    новую карточку."""
+    import resolve_duplicates as rd
+    import promote
+    existing, companies = _dup_base()
+    data_path = tmp_path / "deals.json"
+    data_path.write_text(json.dumps({"deals": [existing], "companies": companies},
+                                    ensure_ascii=False), encoding="utf-8")
+    pending_path = tmp_path / "pending.json"
+    pending_path.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    dup_dir = tmp_path / "duplicates"
+    dup_dir.mkdir()
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}},
+                                     ensure_ascii=False), encoding="utf-8")
+
+    draft = {"title": "Продажа ТРЦ «Тестполис» фонду Balchug Capital", "date": "2023-04-06",
+            "src": [["источник", "https://example.invalid/testpolis-close"]]}
+    queue_path = dup_dir / "2026-09-13.json"
+    queue_path.write_text(json.dumps({"made": "2026-09-13", "items": [
+        {"key": "u::gtest-dupcand", "candidate_id": "gtest-dupcand",
+         "reason": "тест", "draft": draft, "queued": "2026-09-13"}]},
+        ensure_ascii=False), encoding="utf-8")
+
+    monkeypatch.setattr(rd, "DATA", str(data_path))
+    monkeypatch.setattr(rd, "PENDING", str(pending_path))
+    monkeypatch.setattr(rd, "DUP_DIR", str(dup_dir))
+    monkeypatch.setattr(rd, "RESOLVED_PATH", str(dup_dir / "resolved.json"))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+
+    answers_path = tmp_path / "answers.json"
+    answers_path.write_text(json.dumps({"resolved": [
+        {"key": "u::gtest-dupcand", "candidate_id": "gtest-dupcand", "verdict": "same_fact",
+         "reasoning": "то же объявление, что уже описано в карточке-кандидате"}]},
+        ensure_ascii=False), encoding="utf-8")
+
+    rc = rd.cmd_apply(str(answers_path), write=True)
+    assert rc == 0
+
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    key = promote.raw_key(draft["title"])
+    assert state["raw_titles"].get(key) == "enrich:gtest-dupcand", (
+        "same_fact обязан пометить заголовок как принадлежащий кандидату: %r" % state["raw_titles"])
+    resolved = json.loads((dup_dir / "resolved.json").read_text(encoding="utf-8"))
+    assert "u::gtest-dupcand" in resolved
+    # Карточка-кандидат не тронута — same_fact ничего в неё не пишет.
+    data_after = json.loads(data_path.read_text(encoding="utf-8"))
+    assert data_after["deals"][0] == existing
+
+
+def test_resolve_duplicates_apply_separate_releases_the_draft_as_its_own_card(tmp_path, monkeypatch):
+    """`separate` не подменяет карточку-кандидата и не выбрасывает черновик —
+    ставит `separate_transaction_reviewed` и отпускает черновик как отдельную
+    сделку, ровно как поступил бы promote.py, не сработай near_duplicate()."""
+    import resolve_duplicates as rd
+    import promote
+    existing, companies = _dup_base()
+    data_path = tmp_path / "deals.json"
+    data_path.write_text(json.dumps({"deals": [existing], "companies": companies},
+                                    ensure_ascii=False), encoding="utf-8")
+    pending_path = tmp_path / "pending.json"
+    pending_path.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    dup_dir = tmp_path / "duplicates"
+    dup_dir.mkdir()
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}},
+                                     ensure_ascii=False), encoding="utf-8")
+
+    draft = {"title": "«Тестполис-2» купил другой инвестор годы спустя", "date": "2026-01-10",
+            "src": [["источник", "https://example.invalid/testpolis-second"]]}
+    queue_path = dup_dir / "2026-09-13.json"
+    queue_path.write_text(json.dumps({"made": "2026-09-13", "items": [
+        {"key": "v::gtest-dupcand", "candidate_id": "gtest-dupcand",
+         "reason": "тест", "draft": draft, "queued": "2026-09-13"}]},
+        ensure_ascii=False), encoding="utf-8")
+
+    monkeypatch.setattr(rd, "DATA", str(data_path))
+    monkeypatch.setattr(rd, "PENDING", str(pending_path))
+    monkeypatch.setattr(rd, "DUP_DIR", str(dup_dir))
+    monkeypatch.setattr(rd, "RESOLVED_PATH", str(dup_dir / "resolved.json"))
+    monkeypatch.setattr(promote, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+
+    answers_path = tmp_path / "answers.json"
+    answers_path.write_text(json.dumps({"resolved": [
+        {"key": "v::gtest-dupcand", "candidate_id": "gtest-dupcand", "verdict": "separate",
+         "reasoning": "другой год, другой покупатель — не тот же переговорный процесс"}]},
+        ensure_ascii=False), encoding="utf-8")
+
+    rc = rd.cmd_apply(str(answers_path), write=True)
+    assert rc == 0
+
+    data_after = json.loads(data_path.read_text(encoding="utf-8"))
+    assert data_after["deals"][0]["separate_transaction_reviewed"] is True
+    pending_after = json.loads(pending_path.read_text(encoding="utf-8"))
+    assert len(pending_after["cards"]) == 1, "черновик должен стать своей карточкой в предпросмотре"
+    assert pending_after["cards"][0]["title"] == draft["title"]
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    key = promote.raw_key(draft["title"])
+    assert key not in state.get("raw_titles", {}), (
+        "separate не должен помечать черновик как чужое обогащение — он стал своей карточкой")
