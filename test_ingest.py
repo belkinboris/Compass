@@ -2828,13 +2828,26 @@ def test_party_rules_are_measured_on_the_base(base):
     Большая часть «ошибок» — наша же линейка: «Selectel» против «ООО
     «Селектел»», «Агрохолдинг „Таврос"» против «ГК „Таврос"». Порог держит
     ошибку дешевле молчания: если точность падает, правило стало выдумывать.
+
+    Кампания #122 (13 сентября) связала стороны сделок притока с профилями
+    компаний — и `truth` (через `comps.get(buyer).name`) стало КАНОНИЧЕСКИМ
+    именем профиля вместо сырого `buyer_name`, а имя профиля не обязано
+    дословно повторять текст заголовка («ВК» в заголовке — «VK» в профиле).
+    Строгая подстрока этого не видит — родня уже записанного урока «Линейка
+    стареет сама, даже если правило не менялось». Чинится не понижением
+    порога, а тем же транслитерационным ключом, которым уже проверяется
+    «это одна компания» в `link_parties.py`/`test_no_company_twins`: с ним
+    точность на этой же базе не падает, а растёт (0,855 → 0,867).
     """
     import draft
+    import link_parties
     comps = base["companies"]
 
     def same(a, b):
         norm = lambda s: re.sub(r"[«»\"'’(),.\s]", "", str(s or "")).lower()
-        return norm(a) == norm(b) or norm(a) in norm(b) or norm(b) in norm(a)
+        if norm(a) == norm(b) or norm(a) in norm(b) or norm(b) in norm(a):
+            return True
+        return link_parties.company_key(a) == link_parties.company_key(b)
 
     hit = miss = 0
     for d in base["deals"]:

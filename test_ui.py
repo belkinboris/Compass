@@ -861,7 +861,11 @@ def test_deal_plate_hides_asset_text_that_admits_there_is_no_name(page, base_url
     assert plate.is_visible(), "плашка должна остаться — покупатель известен"
     assert plate.locator(".dp-asset").count() == 0, \
         "текст сам признаётся, что имени нет, — в ячейку он не идёт"
-    assert "«Алор брокер»" in plate.inner_text()
+    # Кампания #122 (13 сентября) связала покупателя с профилем компании —
+    # раньше текст ««Алор брокер»» стоял НЕ кликабельным (родня уже
+    # записанного урока про PT/CyberOK, «почему не кликабелен покупатель»),
+    # теперь плашка показывает канонический вид профиля ссылкой.
+    assert "Алор Брокер" in plate.inner_text()
 
 
 def test_deal_plate_shows_asset_text_with_real_novelty(page, base_url):

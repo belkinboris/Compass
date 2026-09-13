@@ -177131,7 +177131,6 @@
    "from_ingest": true,
    "sum": "1,4–2 млрд ₽ (по оценке)",
    "seller": "«Стар Нафта»",
-   "buyer_name": "«Продо»",
    "asset": "бизнес «Башкирского бройлера»",
    "eco": {
     "sum": "1,4–2 млрд ₽ (по оценке)",
@@ -177216,14 +177215,14 @@
      "card_hash": "3acff18af139"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g5eb2d756",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0751bd98ed8b"
     },
     "admitted": {
      "count": true,
@@ -177237,10 +177236,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g5eb2d756",
+   "buyer": "g6798454b",
+   "seller_id": "gf43cebd7"
   },
   {
    "id": "gmru-prime-pervy-poliplastik",
@@ -177256,7 +177258,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "ЗПИФ «Прайм Первый» (УК «Диалог Инвестиции»)",
    "asset": "14% в группе «Полипластик»",
    "eco": {
     "sum": "Сумма сделки не раскрывается",
@@ -177366,7 +177367,8 @@
     }
    },
    "followup_researched": "2026-09-06",
-   "target": "g5dd3e034"
+   "target": "g5dd3e034",
+   "buyer": "g93d93b4b"
   },
   {
    "id": "gmru-svoj-kredit-evropa-strah",
@@ -177384,7 +177386,6 @@
    "from_ingest": true,
    "sum": "400–600 млн ₽ (по оценке)",
    "seller": "«Кредит Европа банк»",
-   "buyer_name": "«Свой»",
    "asset": "«Кредит Европа лайф» (страховая компания)",
    "eco": {
     "sum": "400–600 млн ₽ (по оценке)",
@@ -177464,14 +177465,14 @@
      "card_hash": "e28527317904"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g000fda65",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "18cd3038290c"
     },
     "admitted": {
      "count": true,
@@ -177485,10 +177486,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g000fda65",
+   "buyer": "g7b9c6187"
   },
   {
    "id": "gmru-kolomenskoe-peko",
@@ -177509,7 +177512,6 @@
    ],
    "from_ingest": true,
    "sum": "800–900 млн ₽ (по оценке)",
-   "buyer_name": "ГК «Коломенский»",
    "asset": "100% долей ООО «Хлебокомбинат «Пеко»» (через ООО «Хлебинвест»)",
    "events": [
     {
@@ -177607,14 +177609,14 @@
      "card_hash": "e77856699829"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gbd6de100",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b756834306be"
     },
     "admitted": {
      "count": true,
@@ -177628,11 +177630,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "Исак Гилядов, Галина Фрольцова и Марина Цебоева",
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "gbd6de100",
+   "buyer": "gce291e54"
   },
   {
    "id": "gmru-arnest-reckitt",
@@ -177741,14 +177745,14 @@
      "card_hash": "a87a152c1b67"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g087c141d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "4ed555f01c8b"
     },
     "admitted": {
      "count": true,
@@ -177762,10 +177766,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g087c141d",
+   "seller_id": "g5ba54588"
   },
   {
    "id": "gmru-mariholodmash-borsky",
@@ -177782,7 +177788,6 @@
    ],
    "from_ingest": true,
    "sum": "более 10 млрд ₽ (по оценке)",
-   "buyer_name": "«Марихолодмаш»",
    "asset": "Борский завод торгового оборудования",
    "eco": {
     "sum": "более 10 млрд ₽ (по оценке)",
@@ -177868,14 +177873,14 @@
      "card_hash": "160a892880b6"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gf492fc96",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "45284729bc63"
     },
     "admitted": {
      "count": true,
@@ -177889,10 +177894,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "gf492fc96",
+   "buyer": "g822abb9f"
   },
   {
    "id": "gmru-nordline-totalenergies-arctic",
@@ -177918,7 +177925,6 @@
    "from_ingest": true,
    "sum": "Не раскрыта",
    "seller": "TotalEnergies",
-   "buyer_name": "«Нордлайн»",
    "asset": "10% в проекте «Арктик СПГ 2»",
    "events": [
     {
@@ -178007,14 +178013,14 @@
      "card_hash": "6fd2610c14bf"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g932583db",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "8c1aef7ad090"
     },
     "admitted": {
      "count": true,
@@ -178028,10 +178034,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g932583db",
+   "buyer": "g3ab5d406",
+   "seller_id": "g30486604"
   },
   {
    "id": "gmru-mtsbank-kdpay",
@@ -178132,14 +178141,14 @@
      "card_hash": "6eadda2bc066"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g8eb8af7e",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "786e710778d5"
     },
     "admitted": {
      "count": true,
@@ -178153,10 +178162,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g8eb8af7e"
   },
   {
    "id": "gmru-roshim-vnt",
@@ -178240,14 +178250,14 @@
      "card_hash": "51df528e4f89"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g730c2829",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fe5a5d4c40b6"
     },
     "admitted": {
      "count": true,
@@ -178261,10 +178271,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g730c2829"
   },
   {
    "id": "gmru-geopromining-zabaikalie",
@@ -178280,7 +178291,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "«ГеоПроМайнинг» (через ООО «Кряж Инвест»)",
    "asset": "25% ООО «Золотоноша» (лицензии на добычу золота, Забайкалье)",
    "eco": {
     "sum": "—",
@@ -178354,14 +178364,14 @@
      "card_hash": "1c0e67e79842"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g93fc66c3",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "16cb98fb4651"
     },
     "admitted": {
      "count": true,
@@ -178375,10 +178385,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g93fc66c3",
+   "buyer": "g0be9547a",
+   "seller_id": "g3565bf3b"
   },
   {
    "id": "gmru-rostech-avia-holding",
@@ -178686,14 +178699,14 @@
      "card_hash": "7b2f09e74ae4"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gb9ead213",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "51a60efcfa14"
     },
     "admitted": {
      "count": true,
@@ -178707,11 +178720,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "followup_researched": "2026-09-06",
-   "buyer": "gb933c2b2"
+   "buyer": "gb933c2b2",
+   "target": "gb9ead213"
   },
   {
    "id": "gmru-nordgold-chukotka",
@@ -178731,7 +178745,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "«Нордголд Развитие»",
    "asset": "ООО «Новая сырьевая компания» (золотодобыча, Чукотка)",
    "eco": {
     "sum": "—",
@@ -178804,14 +178817,14 @@
      "card_hash": "eaabc6d80a15"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g020cfaff",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b561bce631bc"
     },
     "admitted": {
      "count": true,
@@ -178825,10 +178838,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g020cfaff",
+   "buyer": "g75ffe423"
   },
   {
    "id": "gmru-voshod-voronezh-rocket",
@@ -178845,7 +178860,6 @@
    ],
    "from_ingest": true,
    "sum": "100 млн ₽",
-   "buyer_name": "Фонд «Восход»",
    "asset": "проект сверхлёгкой ракеты-носителя «Воронеж»",
    "eco": {
     "sum": "100 млн ₽",
@@ -178939,7 +178953,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "buyer": "g427bcb12"
   },
   {
    "id": "gmru-mirgorodsky-nattys",
@@ -179023,14 +179038,14 @@
      "card_hash": "572a97624db4"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g58e83a60",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0d17270fff85"
     },
     "admitted": {
      "count": true,
@@ -179044,10 +179059,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g58e83a60"
   },
   {
    "id": "gmru-rodnye-polya",
@@ -179082,7 +179098,6 @@
     "terms": "Начальная цена составила 11,7 млрд ₽, шаг аукциона — 585 млн ₽, шаг понижения — 1,17 млрд ₽, цена отсечения — 5,85 млрд ₽."
    },
    "added": "2026-07-31",
-   "buyer_name": "АО «Тиара Холдинг»",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-16",
    "weekly_researched": "2026-08-16",
@@ -179141,14 +179156,14 @@
      "card_hash": "abe6ae40d574"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g922e8866",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "79051ee30f38"
     },
     "admitted": {
      "count": true,
@@ -179166,7 +179181,9 @@
     }
    },
    "followup_researched": "2026-09-06",
-   "seller": "Государство"
+   "seller": "Государство",
+   "target": "g922e8866",
+   "buyer": "g2785bc8d"
   },
   {
    "id": "gmru-dobroflot-ikorny",
@@ -179182,7 +179199,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "«Доброфлот»",
    "asset": "доля в сети рыбных магазинов «Икорный»",
    "eco": {
     "sum": "—",
@@ -179252,14 +179268,14 @@
      "card_hash": "26b4f5d2532d"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gf3e193a3",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9c8ef500b16d"
     },
     "admitted": {
      "count": true,
@@ -179273,10 +179289,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "gf3e193a3",
+   "buyer": "g0cb6b658"
   },
   {
    "id": "gmru-razvitie-stroy-aktivov-akzo",
@@ -179401,7 +179419,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "Фонд «Восток-Север»",
    "asset": "100% «Морпорта Певек»",
    "eco": {
     "sum": "—",
@@ -179465,14 +179482,14 @@
      "card_hash": "395acab84ad5"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g55e415f5",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "549f5dd6c79a"
     },
     "admitted": {
      "count": true,
@@ -179486,10 +179503,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g55e415f5",
+   "buyer": "g10409490"
   },
   {
    "id": "gmru-vim-poklonka",
@@ -179505,7 +179524,6 @@
     ]
    ],
    "from_ingest": true,
-   "buyer_name": "фонд под управлением «ВИМ Сбережения»",
    "asset": "деловой квартал «Поклонка плейс» на Поклонной горе",
    "eco": {
     "sum": "—",
@@ -179593,7 +179611,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g50c327a7"
   },
   {
    "id": "gmru-rwb-eapteka",
@@ -179614,7 +179633,6 @@
    ],
    "from_ingest": true,
    "sum": "7–12 млрд ₽ (по оценке)",
-   "buyer_name": "RWB (Wildberries и Russ)",
    "asset": "мажоритарная доля в «Еаптеке»",
    "events": [
     {
@@ -179709,14 +179727,14 @@
      "card_hash": "d7439201c3da"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g5a939ce1",
+     "inn": "7704865540",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "f55068fc9e69"
     },
     "admitted": {
      "count": true,
@@ -179730,10 +179748,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g5a939ce1",
+   "buyer": "g549ab474"
   },
   {
    "id": "gmru-vtb-otkrytie-office-rwb",
@@ -179762,7 +179782,6 @@
    ],
    "from_ingest": true,
    "seller": "БМ-банк (входит в ВТБ)",
-   "buyer_name": "объединённая компания Wildberries и Russ (RWB)",
    "asset": "бывший офис банка «Открытие»",
    "eco": {
     "sum": "7,7–13,5 млрд ₽ (по оценке)",
@@ -179876,7 +179895,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g549ab474"
   },
   {
    "id": "gmru-sutochno-onetwotrip",
@@ -179963,14 +179983,14 @@
      "card_hash": "07defd5af62a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g39002479",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "789cac05b10e"
     },
     "admitted": {
      "count": true,
@@ -179984,10 +180004,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "target": "g39002479"
   },
   {
    "id": "gmru-darkin-vladmorribport",
@@ -180009,7 +180030,6 @@
    "from_ingest": true,
    "sum": "17,5 млрд ₽",
    "seller": "Александр Евдокимов",
-   "buyer_name": "ООО «ГЕОТЭКС» (Сергей Дарькин)",
    "asset": "47% «Владивостокского морского рыбного порта»",
    "eco": {
     "sum": "17,5 млрд ₽",
@@ -180076,14 +180096,14 @@
      "card_hash": "635a54360127"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ga8f1d220",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "681a75405817"
     },
     "admitted": {
      "count": true,
@@ -180097,10 +180117,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "target": "ga8f1d220",
+   "buyer": "g925928bd"
   },
   {
    "id": "gmru-strana-development-sreda",
@@ -180118,7 +180140,6 @@
    "from_ingest": true,
    "sum": "1,5–1,7 млрд ₽ (по оценке)",
    "seller": "«Страна Девелопмент»",
-   "buyer_name": "ООО «Приморская строительная корпорация» (Дмитрий Сулеев)",
    "asset": "торговый комплекс «Среда. Царицыно» на юге Москвы",
    "eco": {
     "sum": "1,5–1,7 млрд ₽",
@@ -180183,14 +180204,14 @@
      "card_hash": "8b9f31637dda"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g79461e21",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2b5fa6482655"
     },
     "admitted": {
      "count": true,
@@ -180204,10 +180225,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g79461e21",
+   "buyer": "g6b2a2e7d"
   },
   {
    "id": "gmru-sollers-jf-mould",
@@ -180224,7 +180247,6 @@
    ],
    "from_ingest": true,
    "seller": "«Соллерс»",
-   "buyer_name": "JF Mould (Hefei Hualong Mould, Китай)",
    "asset": "20% ООО «Штамповые технологии»",
    "eco": {
     "sum": "—",
@@ -180289,14 +180311,14 @@
      "card_hash": "8a610fcd5adb"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gd47e07f8",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "37d40a2ea80a"
     },
     "admitted": {
      "count": true,
@@ -180310,10 +180332,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "gd47e07f8",
+   "buyer": "g217e5925"
   },
   {
    "id": "gmru-veb-gtlk",
@@ -180398,14 +180422,14 @@
      "card_hash": "e90c05e7a0f1"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g2322c829",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "1cfcfde62bc8"
     },
     "admitted": {
      "count": true,
@@ -180419,10 +180443,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g2322c829"
   },
   {
    "id": "gmru-nspk-privatization",
@@ -180540,14 +180565,14 @@
      "card_hash": "65401ec38f6e"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gc6e1e175",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "613d75656fe3"
     },
     "admitted": {
      "count": true,
@@ -180561,10 +180586,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "gc6e1e175",
+   "seller_id": "g889e2038"
   },
   {
    "id": "citibank",
@@ -197073,14 +197100,14 @@
      "card_hash": "e5fc561ef66a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g2c28aae3",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d7030a73ea4a"
     },
     "admitted": {
      "count": true,
@@ -197094,11 +197121,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "followup_researched": "2026-09-06",
-   "buyer": "gaac38b60"
+   "buyer": "gaac38b60",
+   "target": "g2c28aae3"
   },
   {
    "id": "g13d60ebc",
@@ -197179,14 +197207,14 @@
      "card_hash": "cd95d8d07e83"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g858b6b2e",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "62194e2ab63d"
     },
     "admitted": {
      "count": true,
@@ -197203,7 +197231,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g858b6b2e"
   },
   {
    "id": "g1f302e4f",
@@ -197290,14 +197319,14 @@
      "card_hash": "70620164be2a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ga5a81614",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "dd5ffd81b173"
     },
     "admitted": {
      "count": true,
@@ -197314,7 +197343,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "ga5a81614"
   },
   {
    "id": "g2e6254b6",
@@ -197355,7 +197385,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "NanduQ plc",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-16",
@@ -197415,7 +197444,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "gdf829638"
   },
   {
    "id": "gad241bb3",
@@ -197475,7 +197505,6 @@
    "seller": "ООО «Новамедика»",
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
-   "buyer_name": "АО «Синмедекс»",
    "deep_researched": "2026-08-14",
    "weekly_researched": "2026-08-14",
    "themes": [
@@ -197526,14 +197555,14 @@
      "card_hash": "4b52420816aa"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gf5e95f2b",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "ea6a247cdcd4"
     },
     "admitted": {
      "count": true,
@@ -197550,7 +197579,10 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "gf5e95f2b",
+   "buyer": "g8488d2a1",
+   "seller_id": "ge801b25b"
   },
   {
    "id": "g09f78960",
@@ -197766,14 +197798,14 @@
      "card_hash": "e18cec25aa76"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gec9d9d34",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "eeb0a0f6d9dc"
     },
     "admitted": {
      "count": true,
@@ -197787,13 +197819,14 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "themes": [
     "Продажа с торгов"
    ],
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "gec9d9d34"
   },
   {
    "id": "gacc757b6",
@@ -197909,7 +197942,8 @@
    },
    "seller": "Servertech Holding Ltd.",
    "followup_researched": "2026-09-09",
-   "target": "gd4a7c612"
+   "target": "gd4a7c612",
+   "seller_id": "g29b75af8"
   },
   {
    "id": "g9f6fe860",
@@ -198010,14 +198044,14 @@
      "card_hash": "00679ac10958"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g91146401",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "974cd9bcf1f7"
     },
     "admitted": {
      "count": true,
@@ -198031,12 +198065,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "Людмила Губарева, Татьяна Чистякова и Александр Двас",
    "followup_researched": "2026-09-09",
-   "buyer": "gd4a7c612"
+   "buyer": "gd4a7c612",
+   "target": "g91146401"
   },
   {
    "id": "gaa603e6d",
@@ -198215,7 +198250,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "Группа «Синара»",
    "seller": "Банк ГПБ (АО)",
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
@@ -198263,14 +198297,14 @@
      "card_hash": "aa7ef1102a50"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g2c44c71d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "8a956ce997bb"
     },
     "admitted": {
      "count": true,
@@ -198284,10 +198318,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g2c44c71d",
+   "buyer": "g0ecbc0fb",
+   "seller_id": "gf1f56e08"
   },
   {
    "id": "geb221705",
@@ -198382,14 +198419,14 @@
      "card_hash": "136bb2795952"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g2ed59e67",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "7a6dd7839267"
     },
     "admitted": {
      "count": true,
@@ -198403,10 +198440,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g2ed59e67"
   },
   {
    "id": "g3acbe2ec",
@@ -198600,14 +198638,14 @@
      "card_hash": "dfd7924d3cad"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g7a009fcf",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "cea427b3d34e"
     },
     "admitted": {
      "count": true,
@@ -198621,10 +198659,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "target": "g7a009fcf"
   },
   {
    "id": "g24b33459",
@@ -198669,7 +198708,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "Группа «Эталон»",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-14",
@@ -198713,14 +198751,14 @@
      "card_hash": "91af41952599"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ga9f3ed32",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "e1479ba4512d"
     },
     "admitted": {
      "count": true,
@@ -198734,11 +198772,14 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "ЗПИФ комбинированный «Астерия»",
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "ga9f3ed32",
+   "buyer": "ga37e3cf6",
+   "seller_id": "g7f09fd2b"
   },
   {
    "id": "g4c98dcba",
@@ -199081,14 +199122,14 @@
      "card_hash": "dcc4530557c5"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ge10ede50",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "cc89588a712c"
     },
     "admitted": {
      "count": true,
@@ -199102,10 +199143,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "ge10ede50",
+   "seller_id": "g015e974a"
   },
   {
    "id": "g97a481d8",
@@ -199154,7 +199197,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "«ВК»",
    "seller": "P.J.V. Digital Forces LTD (Кипр)",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
@@ -199191,14 +199233,14 @@
      "card_hash": "0b471f6ba61c"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g03bd26c1",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "05e18da08fb1"
     },
     "admitted": {
      "count": true,
@@ -199212,10 +199254,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g03bd26c1",
+   "buyer": "g4e694234",
+   "seller_id": "gd6f2d2a5"
   },
   {
    "id": "g17a6fd62",
@@ -199269,7 +199314,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "ООО «Пункт Е»",
    "seller": "Группа «Ситроникс»",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
@@ -199306,14 +199350,14 @@
      "card_hash": "b89e0567db72"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g8d07c803",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0c3a71d5f414"
     },
     "admitted": {
      "count": true,
@@ -199327,10 +199371,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g8d07c803",
+   "buyer": "g890ebaf6",
+   "seller_id": "g0d41f06b"
   },
   {
    "id": "gc44de028",
@@ -199375,7 +199422,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "Компания в структуре девелоперской группы «Колди»",
    "added": "2026-08-03",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-16",
@@ -199411,14 +199457,14 @@
      "card_hash": "dca755cdb204"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gb2885273",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "03537563a04d"
     },
     "admitted": {
      "count": true,
@@ -199432,10 +199478,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "gb2885273",
+   "buyer": "gfa46c2cd"
   },
   {
    "id": "g925a9d17",
@@ -199642,14 +199690,14 @@
      "card_hash": "863f28aeda16"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g4cd83394",
+     "inn": "7743462664",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "1ab461cead77"
     },
     "admitted": {
      "count": true,
@@ -199666,7 +199714,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g4cd83394"
   },
   {
    "id": "gd3769bb9",
@@ -199720,7 +199769,6 @@
    ],
    "from_ingest": true,
    "duplicate_reviewed": true,
-   "buyer_name": "ЗПИФ «Фонд пре-АйПиО 2» под управлением АО «ВИМ Инвестиции»",
    "added": "2026-08-03",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-14",
@@ -199756,14 +199804,14 @@
      "card_hash": "cc81c4e2658d"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g876ac66c",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "396194051b91"
     },
     "admitted": {
      "count": true,
@@ -199780,7 +199828,9 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g876ac66c",
+   "buyer": "g17451b4f"
   },
   {
    "id": "gc8fac4fb",
@@ -199865,14 +199915,14 @@
      "card_hash": "189f6b16c386"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gd0791726",
      "inn": null,
      "confirmed": false,
      "bank": false,
-     "lot": false,
-     "basis": "unknown",
+     "lot": true,
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "04ee87aee0af"
     },
     "admitted": {
      "count": true,
@@ -199886,11 +199936,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_lot"
     }
    },
    "followup_researched": "2026-09-09",
-   "buyer": "g67e99c13"
+   "buyer": "g67e99c13",
+   "target": "gd0791726"
   },
   {
    "id": "g37a1b2e2",
@@ -200089,14 +200140,14 @@
      "card_hash": "adf5dc4ec428"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gb233260a",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "a7c233923e04"
     },
     "admitted": {
      "count": true,
@@ -200110,10 +200161,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "gb233260a"
   },
   {
    "id": "gdfce7e3d",
@@ -200247,14 +200299,14 @@
      "card_hash": "e83a1a18620b"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gf2c8977b",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0ba42d459b95"
     },
     "admitted": {
      "count": true,
@@ -200268,11 +200320,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "followup_researched": "2026-09-09",
-   "buyer": "gb2b066c3"
+   "buyer": "gb2b066c3",
+   "target": "gf2c8977b",
+   "seller_id": "g1b0536a4"
   },
   {
    "id": "gc5951fac",
@@ -200389,14 +200443,14 @@
      "card_hash": "7c9db7e0e6f6"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g9343c2c8",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0d4f9676974b"
     },
     "admitted": {
      "count": true,
@@ -200410,10 +200464,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g9343c2c8"
   },
   {
    "id": "gfa114edc",
@@ -200461,7 +200516,6 @@
     "adv": [],
     "terms": "Команда разработки в полном составе, около 50 специалистов, перейдёт в «Тантор Лабс» и продолжит развивать продукт."
    },
-   "buyer_name": "«Тантор Лабс»",
    "asset": "права на СУБД «Персей»",
    "events": [
     {
@@ -200582,7 +200636,9 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "g854685d9",
+   "seller_id": "ge9363c29"
   },
   {
    "id": "gf70a43e6",
@@ -200667,7 +200723,6 @@
      }
     ]
    },
-   "buyer_name": "Dr. Reddy’s",
    "added": "2026-08-05",
    "sum": "550–610 млн ₽ (по оценке)",
    "reviewed": "2026-08-09",
@@ -200742,7 +200797,9 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "gf80101aa",
+   "seller_id": "g64b35c63"
   },
   {
    "id": "gbf6f6432",
@@ -200847,7 +200904,6 @@
      }
     ]
    },
-   "buyer_name": "«Строма»",
    "added": "2026-08-05",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-16",
@@ -200891,14 +200947,14 @@
      "card_hash": "6870dc0232e6"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g90d6e8a7",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "71109d545f2c"
     },
     "admitted": {
      "count": true,
@@ -200912,10 +200968,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "g90d6e8a7",
+   "buyer": "ga41c9e8f"
   },
   {
    "id": "g97e1f483",
@@ -200951,7 +201009,6 @@
     "adv": [],
     "terms": "Все точки постепенно перейдут под управление региональной сети и до конца года сменят вывески на «Здравсити»."
    },
-   "buyer_name": "«Ригла-Здравсити»",
    "asset": "сети «Здоровый город» в Воронежской области",
    "events": [
     {
@@ -201062,7 +201119,8 @@
     }
    },
    "seller": "Олег и Рита Литаврины",
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "buyer": "g7313d9af"
   },
   {
    "id": "g21795ec9",
@@ -201182,14 +201240,14 @@
      "card_hash": "e4118bc1e351"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ge52720b7",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "59aac88e5ad6"
     },
     "admitted": {
      "count": true,
@@ -201203,10 +201261,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-09"
+   "followup_researched": "2026-09-09",
+   "target": "ge52720b7"
   },
   {
    "id": "g6d73538c",
@@ -201238,7 +201297,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Основа»",
    "asset": "5 гектаров земли в бывшей промзоне «Свиблово» в Москве",
    "events": [
     {
@@ -201340,7 +201398,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "g4b89f3e2"
   },
   {
    "id": "g70e51ff1",
@@ -201459,14 +201518,14 @@
      "card_hash": "47c8a4c6684b"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g300b9ead",
+     "inn": "7706107510",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2bbd7aed5561"
     },
     "admitted": {
      "count": true,
@@ -201480,10 +201539,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g300b9ead",
+   "seller_id": "g99f5e9d8"
   },
   {
    "id": "g5647e100",
@@ -201527,7 +201588,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Нейропоток»",
    "asset": "производство хлебобулочной продукции под брендом Frozella",
    "events": [
     {
@@ -201635,14 +201695,14 @@
      "card_hash": "e42bd4d78f4a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ge3873f70",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9a1891ee56c2"
     },
     "admitted": {
      "count": true,
@@ -201656,10 +201716,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "ge3873f70",
+   "buyer": "ge01bf4b4"
   },
   {
    "id": "g35357328",
@@ -201850,7 +201912,6 @@
     "adv": [],
     "terms": "Закон о банкротстве не запрещает принимать новых участников, поэтому вхождение инвестора возможно."
    },
-   "buyer_name": "NexTouch",
    "asset": "обанкротившийся производитель телевизоров «Квант»",
    "party_evidence": {
     "buyer": [
@@ -201933,14 +201994,14 @@
      "card_hash": "aa8eaae8902b"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g274a2d42",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "ca91706fbd4b"
     },
     "admitted": {
      "count": true,
@@ -201954,10 +202015,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g274a2d42",
+   "buyer": "g83461952"
   },
   {
    "id": "gac1a0c11",
@@ -202074,14 +202137,14 @@
      "card_hash": "65f4631f84e8"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g4fc96b1a",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "4ae0bfdb2a2f"
     },
     "admitted": {
      "count": true,
@@ -202095,11 +202158,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "Александр Авакянц",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g4fc96b1a"
   },
   {
    "id": "g80f18d3d",
@@ -202214,14 +202278,14 @@
      "card_hash": "d1329928ea7a"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g7985a80d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9ea17fa30c87"
     },
     "admitted": {
      "count": true,
@@ -202235,11 +202299,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "Адам Китариев",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g7985a80d"
   },
   {
    "id": "g9254527a",
@@ -202279,7 +202344,6 @@
     "adv": [],
     "terms": "Покупатель обязан провести работы по сохранению объекта культурного наследия, то есть привести усадьбу в порядок, и соблюдать требования по охране памятников; закон разрешает приспособить его под различные виды использования, в том числе под жильё."
    },
-   "buyer_name": "СтройИнвест",
    "asset": "усадьба в Екатеринбурге",
    "events": [
     {
@@ -202396,7 +202460,8 @@
     }
    },
    "followup_researched": "2026-09-11",
-   "seller_id": "gb2b066c3"
+   "seller_id": "gb2b066c3",
+   "buyer": "g8c655a33"
   },
   {
    "id": "g8827d795",
@@ -202436,7 +202501,6 @@
     "adv": [],
     "terms": "На здании нет таблички об объекте культурного наследия — новый собственник обязан установить её до 1 декабря 2026 года."
    },
-   "buyer_name": "Рид Ойл",
    "asset": "старинная усадьба в Москве",
    "events": [
     {
@@ -202559,7 +202623,8 @@
     }
    },
    "followup_researched": "2026-09-11",
-   "seller_id": "gb2b066c3"
+   "seller_id": "gb2b066c3",
+   "buyer": "gf8c3a45a"
   },
   {
    "id": "g677f3309",
@@ -202607,7 +202672,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "ООО «Индекс»",
    "seller": "Александра Лютикова и Айбек Баймахан",
    "asset": "«Интел-руал»",
    "added": "2026-08-08",
@@ -202668,14 +202732,14 @@
      "card_hash": "23692584fd3f"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gb8377092",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "29e1d0a51a99"
     },
     "admitted": {
      "count": true,
@@ -202689,13 +202753,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "themes": [
     "Банкротство / долги"
    ],
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "gb8377092",
+   "buyer": "gbc408bbe"
   },
   {
    "id": "g01e3fd26",
@@ -203087,14 +203153,14 @@
      "card_hash": "fbe16189bcdc"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g36d77593",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "817fb56bbe72"
     },
     "admitted": {
      "count": true,
@@ -203108,10 +203174,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g36d77593",
+   "seller_id": "g32697f60"
   },
   {
    "id": "g998e5eb5",
@@ -203151,7 +203219,6 @@
     "adv": [],
     "terms": "Планируется разместить 1,475 млрд обыкновенных акций МКБ. Одна обыкновенная и привилегированная акция ДВБ конвертируется в 141,3 обыкновенной акции МКБ. Акционеры, которые проголосуют против или не примут участия в голосовании по вопросу реорганизации, получат право требовать выкупа принадлежащих им акций МКБ по цене 10,35 ₽ за акцию."
    },
-   "buyer_name": "МКБ",
    "asset": "Дальневосточный банк",
    "events": [
     {
@@ -203229,14 +203296,14 @@
      "card_hash": "1c6d55d7edf8"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g631fd4d3",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "348d4e02b7b8"
     },
     "admitted": {
      "count": true,
@@ -203253,7 +203320,9 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g631fd4d3",
+   "buyer": "g4bbbd408"
   },
   {
    "id": "g8f7479bd",
@@ -203389,7 +203458,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller_id": "gf24e2a58"
   },
   {
    "id": "gab0f3dde",
@@ -203535,14 +203605,14 @@
      "card_hash": "5b7a2bdacefd"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g754d1dc1",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "5694929ae911"
     },
     "admitted": {
      "count": true,
@@ -203556,10 +203626,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g754d1dc1"
   },
   {
    "id": "g94268c8d",
@@ -203608,7 +203679,6 @@
     "terms": "—"
    },
    "sum": "16,5 млрд ₽",
-   "buyer_name": "АО «Международный аэропорт «Внуково»",
    "asset": "ООО «Перспектива»",
    "events": [
     {
@@ -203730,7 +203800,9 @@
     }
    },
    "target": "g127cf704",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "g2083329a",
+   "seller_id": "sheremetyevo"
   },
   {
    "id": "g7f6d55a9",
@@ -203774,7 +203846,6 @@
     "adv": [],
     "terms": "На станциях продолжит использоваться бренд Elke Auto. Компания заявила, что будет обеспечивать стабильные поставки топлива класса «Евро-5»."
    },
-   "buyer_name": "ООО «Кузбасский деловой союз»",
    "asset": "частная сеть АЗС Elke Auto в Томске",
    "events": [
     {
@@ -203888,7 +203959,9 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "gc49301d4",
+   "seller_id": "ga2f25b66"
   },
   {
    "id": "g18a6d375",
@@ -203932,7 +204005,6 @@
     "adv": [],
     "terms": "Стороны заявили, что после одобрения антимонопольного ведомства приступят к совместным EdTech-проектам."
    },
-   "buyer_name": "Freedom Holding Corp.",
    "asset": "казахстанская ИТ-компания Bilim Group",
    "events": [
     {
@@ -204016,14 +204088,14 @@
      "card_hash": "03a4c4edc994"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g7ab56b51",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2a8091dbc858"
     },
     "admitted": {
      "count": true,
@@ -204037,10 +204109,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g7ab56b51",
+   "buyer": "g587ec65e"
   },
   {
    "id": "gdfa13cf0",
@@ -204282,14 +204356,14 @@
      "card_hash": "109dfaea1980"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g76b878ca",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "351f12b9e5aa"
     },
     "admitted": {
      "count": true,
@@ -204303,10 +204377,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g76b878ca"
   },
   {
    "id": "g57b2c1aa",
@@ -204479,7 +204554,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Fonte Capital",
    "asset": "ГК «Самолет»",
    "events": [
     {
@@ -204589,7 +204663,9 @@
     }
    },
    "target": "g12111389",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "g1bbb95d9",
+   "seller_id": "g0cafe252"
   },
   {
    "id": "gda6baa02",
@@ -204633,7 +204709,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "IBS",
    "asset": "ООО «Раблз» (Rubbles)",
    "events": [
     {
@@ -204730,14 +204805,14 @@
      "card_hash": "6c77fe4f9a26"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g8f1f069d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9869a273210f"
     },
     "admitted": {
      "count": true,
@@ -204751,10 +204826,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "target": "g8f1f069d",
+   "buyer": "g4f201549"
   },
   {
    "id": "g8e30b9a8",
@@ -205333,7 +205410,6 @@
     "terms": "—"
    },
    "sum": "3 млрд ₽",
-   "buyer_name": "«Союз Маринс Групп»",
    "asset": "гостиница «Амбассадор» в Санкт-Петербурге",
    "events": [
     {
@@ -205430,14 +205506,14 @@
      "card_hash": "eb9a3c4d1266"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g30baf27b",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "377e2e77c765"
     },
     "admitted": {
      "count": true,
@@ -205451,9 +205527,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "g30baf27b",
+   "buyer": "gdd85fbbf"
   },
   {
    "id": "gd1771616",
@@ -205489,7 +205567,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Тандем-Истейт»",
    "seller": "ООО «ТД Эдельвейс»",
    "asset": "производственно-складской комплекс в деревне Заневка во Всеволожском районе Ленинградской области",
    "sum": "550–650 млн ₽ (по оценке)",
@@ -205562,7 +205639,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "buyer": "g6afe404c",
+   "seller_id": "gf9bc7955"
   },
   {
    "id": "gb5d8a18a",
@@ -205797,14 +205876,14 @@
      "card_hash": "f79bd97e7d2f"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gcdb65170",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "cdd7adb9fa03"
     },
     "admitted": {
      "count": true,
@@ -205818,9 +205897,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "gcdb65170"
   },
   {
    "id": "g8b03762d",
@@ -205902,14 +205982,14 @@
      "card_hash": "689cb86eb954"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g3cf9290d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b3e5b5310c3d"
     },
     "admitted": {
      "count": true,
@@ -205925,7 +206005,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "target": "g3cf9290d"
   },
   {
    "id": "g9076dfc3",
@@ -205961,7 +206042,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Русская рыбная компания",
    "asset": "перерабатывающий цех в Подмосковье",
    "events": [
     {
@@ -206049,14 +206129,14 @@
      "card_hash": "5eb1ded08fb0"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ga3e0371b",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "dceea835dd9f"
     },
     "admitted": {
      "count": true,
@@ -206070,9 +206150,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "ga3e0371b",
+   "buyer": "g28762671"
   },
   {
    "id": "g3f0400db",
@@ -206175,14 +206257,14 @@
      "card_hash": "40fe735dd4ad"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ge8852322",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9513994914a1"
     },
     "admitted": {
      "count": true,
@@ -206198,7 +206280,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "target": "ge8852322"
   },
   {
    "id": "g6bf41023",
@@ -206242,7 +206325,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Алор брокер»",
    "asset": "неназванная брокерская компания",
    "events": [
     {
@@ -206347,7 +206429,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "buyer": "g13b2a65e"
   },
   {
    "id": "gb9a22f5f",
@@ -206472,7 +206555,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "seller_id": "gda75c255"
   },
   {
    "id": "ge283bafc",
@@ -206585,14 +206669,14 @@
      "card_hash": "e78265743c43"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gd6a56998",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "6dc463eee423"
     },
     "admitted": {
      "count": true,
@@ -206606,9 +206690,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "gd6a56998",
+   "seller_id": "gc5c1cec7"
   },
   {
    "id": "g0db67d5b",
@@ -206780,7 +206866,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Прииск Соловьевский»",
    "asset": "100% ООО «Кодар»",
    "events": [
     {
@@ -206856,14 +206941,14 @@
      "card_hash": "59fc9d9aecf6"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g7b1c3941",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fffcb2bd0cd2"
     },
     "admitted": {
      "count": true,
@@ -206877,9 +206962,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "g7b1c3941",
+   "buyer": "gdf491665",
+   "seller_id": "g7c8837f5"
   },
   {
    "id": "gc7e35605",
@@ -206943,7 +207031,6 @@
      }
     ]
    },
-   "buyer_name": "Южная фабрика стартапов",
    "reviewed": "2026-08-25",
    "deep_researched": "2026-08-25",
    "added": "2026-08-25",
@@ -206990,14 +207077,14 @@
      "card_hash": "9df7dc78335d"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gd061d4dc",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "9c17833a4512"
     },
     "admitted": {
      "count": true,
@@ -207013,7 +207100,9 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "target": "gd061d4dc",
+   "buyer": "g88a5c4c2"
   },
   {
    "id": "gad66fcec",
@@ -207053,7 +207142,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "ЗПИФ «Вим недвижимость»",
    "asset": "складской комплекс в Новой Москве",
    "events": [
     {
@@ -207158,7 +207246,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "buyer": "g59f4de1d",
+   "seller_id": "g2eaee278"
   },
   {
    "id": "g9108dfd0",
@@ -207205,7 +207295,6 @@
     "terms": "—"
    },
    "sum": "8 млрд ₽",
-   "buyer_name": "ЗПИФ «Вим Недвижимость» (УК «Вим сбережения»)",
    "asset": "ООО «Фипс» (штаб-квартира группы Okkam в башне «Империя», Москва-Сити)",
    "events": [
     {
@@ -207292,14 +207381,14 @@
      "card_hash": "eb9230176093"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g96801875",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "c080662c40cf"
     },
     "admitted": {
      "count": true,
@@ -207313,9 +207402,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "g96801875",
+   "buyer": "g59f4de1d",
+   "seller_id": "gd49c1a51"
   },
   {
    "id": "ge957fc7b",
@@ -207483,7 +207575,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "Петербургский логистический холдинг «ЮСТА»",
    "asset": "КФ «Кронштадтская»",
    "events": [
     {
@@ -207571,14 +207662,14 @@
      "card_hash": "5486ded27028"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gec2d70f3",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d69aa13aa280"
     },
     "admitted": {
      "count": true,
@@ -207592,9 +207683,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "target": "gec2d70f3",
+   "buyer": "g736dc3f5"
   },
   {
    "id": "g60f99ba6",
@@ -207642,7 +207735,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Транснефть»",
    "asset": "Газпромбанк",
    "events": [
     {
@@ -207849,7 +207941,8 @@
      "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer": "gf89319d9"
   },
   {
    "id": "g2c27516d",
@@ -208012,7 +208105,8 @@
     "Пищепром и напитки",
     "Транспорт и логистика"
    ],
-   "weekly_researched": "2026-09-08"
+   "weekly_researched": "2026-09-08",
+   "seller_id": "g21e04900"
   },
   {
    "id": "g0ff8c5c4",
@@ -208630,14 +208724,14 @@
      "card_hash": "47209a9dbe13"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g71a251f8",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "6763f36a7212"
     },
     "admitted": {
      "count": true,
@@ -208651,10 +208745,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "weekly_researched": "2026-09-09"
+   "weekly_researched": "2026-09-09",
+   "target": "g71a251f8"
   },
   {
    "id": "gaee6179c",
@@ -208772,14 +208867,14 @@
      "card_hash": "3192a43bc9ef"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gdccb7223",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "27918ad97d9a"
     },
     "admitted": {
      "count": true,
@@ -208793,10 +208888,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "weekly_researched": "2026-09-09"
+   "weekly_researched": "2026-09-09",
+   "target": "gdccb7223",
+   "seller_id": "gc43e14be"
   },
   {
    "id": "g3dcf441e",
@@ -208976,7 +209073,6 @@
     "adv": [],
     "terms": "Первый заместитель генерального директора НМГ, генеральный директор МИЦ «Известия» Владимир Тюлин заявил, что медиабренд «Комсомолка» будет бережно сохранён, а его лучшие традиции получат современное развитие в едином холдинге."
    },
-   "buyer_name": "МИЦ «Известия»",
    "asset": "Контрольная доля издательского дома «Комсомольская правда»",
    "party_evidence": {
     "buyer": [
@@ -209075,14 +209171,14 @@
      "card_hash": "cb68e805da22"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gb04d9cfd",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "4961bc894170"
     },
     "admitted": {
      "count": true,
@@ -209096,11 +209192,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "seller": "Сергей Руднов",
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "target": "gb04d9cfd",
+   "buyer": "g3209dcd2"
   },
   {
    "id": "gd9ccfdd2",
@@ -209234,14 +209332,14 @@
      "card_hash": "ba7dae82033e"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g483cfb4f",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "17106685f86b"
     },
     "admitted": {
      "count": true,
@@ -209255,10 +209353,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "target": "g483cfb4f"
   },
   {
    "id": "g7ea48d66",
@@ -209472,7 +209571,6 @@
      }
     ]
    },
-   "buyer_name": "ООО «Афкап»",
    "reviewed": "2026-09-04",
    "seller_id": "gf0ac5fc7",
    "added": "2026-09-04",
@@ -209520,14 +209618,14 @@
      "card_hash": "19f66130e66e"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g0682cdb7",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "de678765054f"
     },
     "admitted": {
      "count": true,
@@ -209541,10 +209639,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "target": "g0682cdb7",
+   "buyer": "g218f246e"
   },
   {
    "id": "g749a7844",
@@ -209691,7 +209791,8 @@
      "multiple_text": "no_target"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "seller_id": "gkpik"
   },
   {
    "id": "gbdefd889",
@@ -209835,7 +209936,8 @@
      "multiple_text": "no_target"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "seller_id": "gkpik"
   },
   {
    "id": "g61b33118",
@@ -209927,14 +210029,14 @@
      "card_hash": "4de238bbe777"
     },
     "target": {
-     "company_id": null,
+     "company_id": "ge53d0ff8",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "6bd312d77e4e"
     },
     "admitted": {
      "count": true,
@@ -209948,11 +210050,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "reviewed": "2026-09-13",
-   "deep_researched": "2026-09-13"
+   "deep_researched": "2026-09-13",
+   "target": "ge53d0ff8"
   },
   {
    "id": "g39e9e9c2",
@@ -210717,14 +210820,14 @@
      "card_hash": "9f51445a4402"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g41456481",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "751bb37d737f"
     },
     "admitted": {
      "count": true,
@@ -210738,11 +210841,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "weekly_researched": "2026-09-11",
-   "buyer": "gpromresurs"
+   "buyer": "gpromresurs",
+   "target": "g41456481"
   },
   {
    "id": "gd3556cc0",
@@ -210952,14 +211056,14 @@
      "card_hash": "128ab3cffd11"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g264ec466",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "f1bc48062659"
     },
     "admitted": {
      "count": true,
@@ -210973,10 +211077,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
-   "weekly_researched": "2026-09-11"
+   "weekly_researched": "2026-09-11",
+   "target": "g264ec466"
   },
   {
    "id": "gmortehprom2026",
@@ -211354,14 +211459,14 @@
      "card_hash": "95aa69f9adf7"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g41e754fb",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b612fe56ceff"
     },
     "admitted": {
      "count": true,
@@ -211375,7 +211480,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "proofread_absorbed": {
@@ -211389,7 +211494,8 @@
      "6e9cdf132a5d"
     ]
    },
-   "proofread": "2026-09-08"
+   "proofread": "2026-09-08",
+   "target": "g41e754fb"
   },
   {
    "id": "g29d31edd",
@@ -211593,7 +211699,6 @@
     "adv": [],
     "terms": "—"
    },
-   "buyer_name": "«Гранель»",
    "asset": "строящийся жилой комплекс на Автозаводской улице, 22, в Москве",
    "events": [
     {
@@ -211697,7 +211802,9 @@
      "070eb0c5cda2"
     ]
    },
-   "proofread": "2026-09-08"
+   "proofread": "2026-09-08",
+   "buyer": "gee63afc6",
+   "seller_id": "g5a214bdf"
   },
   {
    "id": "g2b1ff5cb",
@@ -211987,7 +212094,8 @@
     ]
    },
    "proofread": "2026-09-11",
-   "buyer": "gb2b066c3"
+   "buyer": "gb2b066c3",
+   "seller_id": "gd392372b"
   },
   {
    "id": "g45a72968",
@@ -212097,14 +212205,14 @@
      "card_hash": "a5c01ccbf795"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g3435cc07",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "c342d39866bc"
     },
     "admitted": {
      "count": true,
@@ -212118,7 +212226,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "proofread_absorbed": {
@@ -212127,7 +212235,8 @@
     ]
    },
    "proofread": "2026-09-11",
-   "buyer": "g523665d3"
+   "buyer": "g523665d3",
+   "target": "g3435cc07"
   },
   {
    "id": "g2349d667",
@@ -212279,7 +212388,8 @@
     ]
    },
    "proofread": "2026-09-11",
-   "target": "g6c930a0d"
+   "target": "g6c930a0d",
+   "seller_id": "gc6965a4f"
   },
   {
    "id": "gdc686ec2",
@@ -234202,6 +234312,1275 @@
     "Профиль",
     "Автоматический"
    ]
+  },
+  "g5eb2d756": {
+   "name": "Башкирский бройлер",
+   "ind": "Агро",
+   "desc": "Репродуктор второго ряда: закупает молодых кур от родительского стада и производит финальный гибрид мясной породы для птицефабрик; выпускает инкубационное яйцо в Альшеевском районе Башкирии (валовый сбор 46 млн штук в год). До сделки входил в состав холдинга «Стар Нафта».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g6798454b": {
+   "name": "Продо",
+   "ind": "Пищепром и напитки",
+   "desc": "Агропромышленный холдинг, работает с 2004 года, контролирует Андрей Городилов; основное направление — мясопереработка. В портфеле бренды «Клинский», «Троекурово», «Наша Ряба», «Черный кабан» и другие.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf43cebd7": {
+   "name": "Стар Нафта",
+   "ind": "Агро",
+   "desc": "Башкирский агропромышленный холдинг, работает с 2015 года, объединяет 12 предприятий; ключевое направление — производство сахара, годовой оборот около 7,5 млрд ₽. Владелец — Мансур Латыпов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g93d93b4b": {
+   "name": "ЗПИФ «Прайм Первый»",
+   "ind": "Управление активами",
+   "desc": "Закрытый паевой инвестиционный фонд под управлением УК «Диалог Инвестиции» (66,67% принадлежит Вадиму Дубовику, совладелица — Елена Маркина); в 2026 году приобрёл 14,08% в группе «Полипластик» (37,7% совокупно вместе с косвенной долей). Кто стоит за фондом как конечный инвестор, публично не раскрыто.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g000fda65": {
+   "name": "Кредит Европа лайф",
+   "ind": "Страхование",
+   "desc": "Страховая компания с бессрочными лицензиями на добровольное личное страхование (кроме страхования жизни) и добровольное имущественное страхование; портфель — в основном ДМС и страхование от несчастных случаев и болезней. До сделки принадлежала «Кредит Европа банку».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7b9c6187": {
+   "name": "Свой",
+   "ind": "Финтех",
+   "desc": "Финтехгруппа (ранее холдинг IDF Eurasia, в конце 2023 года переехал с Кипра в Россию); под единым брендом «Свой» объединяет «Свой банк», «Свой капитал», IT-компании IDF Technology и IDF Lab, МФО Moneyman и Platiza, коллекторские агентства ID Collect и «Финансовые системы».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gbd6de100": {
+   "name": "Хлебокомбинат «Пеко»",
+   "ind": "Пищепром и напитки",
+   "desc": "ООО ХБК «Пеко» выпускает хлебобулочные и кондитерские изделия под брендами «Медведковский», «Пеко» и Alpin Brot; крупнейший по выручке производитель хлеба в России (около 15% рынка в денежном выражении в 2025 году). Комбинат на Полярной улице в Москве основан в 1973 году, выручка в 2025 году — 3,5 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g087c141d": {
+   "name": "Рекитт Бенкизер",
+   "ind": "Потребительские товары",
+   "desc": "Российское юридическое лицо (ООО «Рекитт Бенкизер»), владеющее заводом по выпуску бытовой химии в Клину (бренды Vanish, Air Wick, Cilit Bang, Tiret, Calgon). Выручка в 2023 году — 12,3 млрд ₽ (последние доступные данные), чистая прибыль — 2,6 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g5ba54588": {
+   "name": "Reckitt Benckiser",
+   "ind": "Потребительские товары",
+   "desc": "Британская компания — производитель товаров для дома, здоровья и гигиены (бренды Vanish, Air Wick, Cilit Bang, Tiret, Calgon и др.); в России её бизнес представлен, в частности, заводом бытовой химии в Клину.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf492fc96": {
+   "name": "Борский завод торгового оборудования",
+   "ind": "Машиностроение",
+   "desc": "ООО «Борский завод торгового оборудования» (БЗТО) — семь цехов площадью 12,7 тыс. кв. м и склады более 7 тыс. кв. м; выпускает более 4 тыс. изделий в сутки («сухое» торговое оборудование — стеллажи и т.п.), занимает около 50% этого рынка. Поставщик оборудования для «Пятёрочки», «Магнита», «М.Видео» и др. Выручка в 2025 году — 8,16 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g822abb9f": {
+   "name": "Марихолодмаш",
+   "ind": "Машиностроение",
+   "desc": "Российский производитель холодильного оборудования (входит в группу ОПК, выручка группы в 2025 году — 17,05 млрд ₽). Согласно ЕГРЮЛ, 97% принадлежит Светлане Коробейниковой, остальное — Кириллу Митрохину.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g932583db": {
+   "name": "Арктик СПГ 2",
+   "ind": "Нефть и газ",
+   "desc": "Оператор крупнотоннажного проекта НОВАТЭКа по добыче природного газа и производству СПГ в Арктике (ООО «Арктик СПГ 2»); ресурсная база — месторождение Утреннее на полуострове Гыдан (ЯНАО), общая мощность завода — 19,8 млн т СПГ в год.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g3ab5d406": {
+   "name": "Нордлайн",
+   "ind": "Нефть и газ",
+   "desc": "100-процентная дочерняя компания НОВАТЭКа (ООО «Нордлайн»), зарегистрирована в Тарко-Сале (ЯНАО) в мае 2026 года специально для выкупа 10% доли TotalEnergies в «Арктик СПГ 2»; основной вид деятельности — управление холдинговыми компаниями.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g30486604": {
+   "name": "TotalEnergies",
+   "ind": "Нефть и газ",
+   "desc": "Французская нефтегазовая компания; в 2022 году списала российские активы, главным образом акции «Арктик СПГ 2», на $4,1 млрд.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g8eb8af7e": {
+   "name": "Ритейл-Процессинг",
+   "ind": "Финтех",
+   "desc": "ООО «Ритейл-Процессинг» — владелец платёжного сервиса KD Pay (оплата по QR-коду с начислением бонусов по программе «Клуб Друзей»); технология работает в торговой сети «Спар-Калининград» (110 магазинов). Выручка в 2025 году — 60,3 млн ₽, чистый убыток — 24,6 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g730c2829": {
+   "name": "Восточный нефтехимический терминал",
+   "ind": "Порты и инфраструктура",
+   "desc": "Терминал перевалки нефтепродуктов и нефтехимических грузов в Приморье; объём резервуарного парка — 94 тыс. куб. м, обрабатывает танкеры дедвейтом до 50 тыс. тонн. До января 2026 года принадлежал Валерию Бочкову, затем — «СпецХимТрансу» Дмитрия Амельченко, гендиректор с 15 июля 2026 года — глава «Росхима» Эдуард Давыдов. Выручка в 2025 году — 2,5 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g93fc66c3": {
+   "name": "Золотоноша",
+   "ind": "ГМК и добыча",
+   "desc": "ООО «Золотоноша» владеет лицензиями на изучение, разведку и добычу металлов на Золотоношинской перспективной площади и Поперечно-Зерентуевской площади в Нерчинско-Заводском районе Забайкальского края (лицензии до 2036 года).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0be9547a": {
+   "name": "ГеоПроМайнинг",
+   "ind": "ГМК и добыча",
+   "desc": "Российская горнодобывающая группа: разведывает, добывает и перерабатывает сурьму, золото, серебро, цинк, свинец и другие металлы в Якутии и Забайкальском крае; основные активы — месторождения Сарылах, Сентачан, Верхне-Менкече и Железный кряж. Бенефициар по данным отчётности — Александр Орехов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g3565bf3b": {
+   "name": "Железный кряж",
+   "ind": "ГМК и добыча",
+   "desc": "ООО «Железный кряж», продавец 25% в ООО «Золотоноша» (после сделки его доля — 74,99%); контролируется семьёй Анатолия Кондратюкина, бывшего главы «Читагеологоразведки» (входила в «Росгеологию»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gb9ead213": {
+   "name": "Милфудс",
+   "ind": "Пищепром и напитки",
+   "desc": "ООО «Милфудс» — российский производитель и дистрибьютор кофе (бренды Poetti, Milagro, D’Arte, Belagio); существует с 2008 года, в 2022 году выкупила российские активы финского производителя кофе Paulig, на его мощностях в Твери запустила линейку Poetti. Единственный владелец — Викас Сои. Выручка в 2025 году — 9,46 млрд ₽, чистая прибыль — 427,9 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g020cfaff": {
+   "name": "Новая сырьевая компания",
+   "ind": "ГМК и добыча",
+   "desc": "ООО «Новая сырьевая компания» владеет лицензией на разработку месторождения Ленотап на Чукотке (золото); авторские ресурсы по категориям Р1+Р2 превышают 69 тонн.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g58e83a60": {
+   "name": "Нуттис",
+   "ind": "Пищепром и напитки",
+   "desc": "ООО «Нуттис» — производитель арахисовой пасты и протеиновых батончиков под брендом Nattys; выручка в 2025 году — 433 млн ₽, чистый убыток — 38,1 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g922e8866": {
+   "name": "Родные поля",
+   "ind": "Агро",
+   "desc": "Зернотрейдер, ранее известный как ТД «Риф», один из крупнейших экспортёров зерна в России (владелец — Пётр Ходыкин); в 2024 году сменил название, в 2025 году обращён в доход государства по иску Генпрокуратуры. Портфель включает 11 судов класса «река—море», вагонный парк из 1,64 тыс. вагонов и портовый терминал в Азове. Выручка в 2025 году — 2,32 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2785bc8d": {
+   "name": "Тиара Холдинг",
+   "ind": "Агро",
+   "desc": "АО «Тиара Холдинг» зарегистрировано в апреле 2025 года, учредители не раскрываются, гендиректор — Дмитрий Шевчук; купило имущественный комплекс «Родных полей» на торгах за 11,7 млрд ₽. По неофициальным данным, конечным покупателем на аграрном рынке считается «Деметра-Холдинг» (прямых подтверждений этому карточка не даёт).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf3e193a3": {
+   "name": "Икорный",
+   "ind": "Ритейл",
+   "desc": "ООО «Икорный» — розничная сеть, основана в 2003 году, специализируется на торговле дальневосточной дикой рыбой, морепродуктами и красной икрой, частично работает по системе франшиз; управляет 127 точками в Москве, Подмосковье, Уфе и Сочи. Выручка в 2025 году — 1,97 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0cb6b658": {
+   "name": "Доброфлот",
+   "ind": "Агро",
+   "desc": "Дальневосточная рыбопромышленная группа (ГК «Доброфлот»); управляющий — Александр Ефремов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g55e415f5": {
+   "name": "Морпорт Певек",
+   "ind": "Порты и инфраструктура",
+   "desc": "АО «Морпорт Певек» — морской порт на Северном морском пути, через который идёт более 25% всех грузов, доставляемых на Чукотку морем; связывает регион с Баимским проектом. До сделки принадлежал Вячеславу Доманину (с 2022 года), ранее — Марине Гончаровой (топ-менеджер Millhouse).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g10409490": {
+   "name": "Восток-Север",
+   "ind": "Управление активами",
+   "desc": "Фонд, собственники не раскрываются; зарегистрирован по одному адресу с фондом «Север-Восток» и, по данным карточки, косвенно связан со структурами вокруг Баимского проекта (через УК «Рускапитал» и ЗПИФ «Пальмира Севера»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g50c327a7": {
+   "name": "ВИМ Сбережения",
+   "ind": "Управление активами",
+   "desc": "Управляющая компания фонда, ранее называлась «ВТБ Капитал Пенсионный резерв» (подтверждено чтением источника mergers.ru). Планирует включить квартал «Поклонка плейс» в закрытый паевой инвестиционный фонд для квалифицированных инвесторов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g39002479": {
+   "name": "OneTwoTrip",
+   "ind": "Гостиницы и туризм",
+   "desc": "Один из старейших российских онлайн-сервисов бронирования путешествий; основан в 2011 году бывшим топ-менеджером Anywayanyday Петром Кутисом. Услугами пользуются более 11 млн человек, доступны предложения свыше 800 авиакомпаний и более 3 млн мест размещения по всему миру.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga8f1d220": {
+   "name": "Владивостокский морской рыбный порт",
+   "ind": "Порты и инфраструктура",
+   "desc": "Универсальный перегрузочный комплекс в порту Владивосток мощностью 5 млн тонн в год, с контейнерным терминалом; в группу также входят тыловые контейнерные терминалы «ПИК» и «Фреш Терминал» на станции Угольная и «Терминал Хлебная база» вблизи станции Уссурийск.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g925928bd": {
+   "name": "ГЕОТЭКС",
+   "ind": "Порты и инфраструктура",
+   "desc": "ООО «ГЕОТЭКС» — компания Сергея Дарькина, после сделки владеет 99,76% капитала стивидорной компании «Владивостокский морской рыбный порт»; покупку профинансировал ВТБ двухлетним займом под залог недвижимости порта.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g79461e21": {
+   "name": "Логистик-сервис",
+   "ind": "Недвижимость",
+   "desc": "ООО «Логистик-сервис» владеет торговым комплексом «Среда. Царицыно» на юге Москвы; ранее входило в структуру ГК «Страна Девелопмент» (через ООО «СЗ «Страна Запад»»), в 2026 году его купила «Приморская строительная корпорация» Дмитрия Сулеева, который сам стал гендиректором «Логистик-сервиса».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g6b2a2e7d": {
+   "name": "Приморская строительная корпорация",
+   "ind": "Строительство",
+   "desc": "Строительная компания Дмитрия Сулеева, основателя торговой сети «Реми» на Дальнем Востоке и бывшего депутата думы Владивостока (2009–2017); основана в 2005 году. Купила ООО «Логистик-сервис», владеющее торговым комплексом «Среда. Царицыно».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd47e07f8": {
+   "name": "Штамповые технологии",
+   "ind": "Автопром",
+   "desc": "Предприятие по производству крупных кузовных деталей и рам для автомобилей Sollers, расположенное в Ульяновске на индустриальной площадке УАЗа; мощность автоматизированной прессовой линии — 800 тыс. штамповочных операций в год.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g217e5925": {
+   "name": "JF Mould",
+   "ind": "Автопром",
+   "desc": "Китайская компания (Hefei Hualong Mould Co. Ltd), выпускающая пресс-формы для автомобильной промышленности; специализируется на производстве штамповой оснастки.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2322c829": {
+   "name": "ГТЛК",
+   "ind": "Транспорт и логистика",
+   "desc": "Государственная транспортная лизинговая компания (ГТЛК) — одна из крупнейших лизинговых компаний России, портфель оценивается в 2,7-2,9 трлн ₽ (доля рынка 20-26%); поставляет технику, ведёт проекты на средства ФНБ по передаче самолётов и вертолётов авиакомпаниям, закупает гражданские беспилотники, поезда для ВСМ Москва - Санкт-Петербург.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gc6e1e175": {
+   "name": "НСПК",
+   "ind": "Финтех",
+   "desc": "Национальная система платёжных карт (НСПК) — оператор платёжной системы «Мир» и Системы быстрых платежей (СБП), 100% принадлежит Банку России. Уставный капитал — 4,3 млрд ₽; по РСБУ за 2023 год выручка 71,9 млрд ₽, чистая прибыль 35,1 млрд ₽. За 2025 год через СБП прошло 18,3 млрд операций на 103 трлн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g889e2038": {
+   "name": "Банк России",
+   "ind": "Банки",
+   "desc": "Центральный банк Российской Федерации — орган денежно-кредитного регулирования и надзора за финансовым рынком; на момент карточки владел 100% акций НСПК и обсуждал частичную приватизацию компании.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2c28aae3": {
+   "name": "Selfmade",
+   "ind": "Ритейл",
+   "desc": "Бренд женской одежды Selfmade (юрлицо — ООО «Фаст Фешн»); пять розничных магазинов в Москве и Санкт-Петербурге, 340 тыс. подписчиков в соцсетях. Основатель — Татьяна Куценко.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g858b6b2e": {
+   "name": "Callisto Vision",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик систем маркировки и контроля качества продукции; работает более чем на 150 высокоскоростных линиях в России, Узбекистане и Саудовской Аравии. За 2025 год на её оборудовании и ПО промаркировано свыше 6 млрд единиц продукции.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga5a81614": {
+   "name": "Steplife",
+   "ind": "Здравоохранение",
+   "desc": "Российский разработчик и производитель бионических протезов верхних и нижних конечностей, объединяющий собственные разработки в механике, электронике и программном обеспечении.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf5e95f2b": {
+   "name": "Новамедика Иннотех",
+   "ind": "Фармацевтика",
+   "desc": "Производственная площадка и научно-исследовательский центр фармацевтической компании «Новамедика»; в 2025 году проданы с торгов (стартовая цена 720 млн ₽) структуре «Роснано» — АО «Синмедекс». Выручка за 2024 год — 57,6 млн ₽, чистый убыток — 155,9 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g8488d2a1": {
+   "name": "Синмедекс",
+   "ind": "Фармацевтика",
+   "desc": "Юрлицо, зарегистрированное 4 июля 2025 года незадолго до торгов по продаже «Новамедика Иннотех» (уставный капитал 100 тыс. ₽, заявленный вид деятельности — производство лекарственных препаратов); выступило покупателем как структура «Роснано».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge801b25b": {
+   "name": "Новамедика",
+   "ind": "Фармацевтика",
+   "desc": "Российская фармацевтическая компания; владела производственной площадкой и научно-исследовательским центром «Новамедика Иннотех», проданными с торгов в 2025 году структуре «Роснано».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gec9d9d34": {
+   "name": "Кузнецкая ТЭЦ",
+   "ind": "Энергетика",
+   "desc": "Угольная тепловая электростанция в Новокузнецке, один из главных источников теплоснабжения города; в 2025 году продана новокузнецкому ООО «Стройтехпроект». По РСБУ за 2023 год убыток 67 млн ₽ при выручке 3,6 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g29b75af8": {
+   "name": "Servertech Holding Ltd.",
+   "ind": "ИТ и интернет",
+   "desc": "Холдинговая структура — контролирующий акционер Selectel; на 19 мая 2025 года владела 53,564% акций компании после продажи миноритарных пакетов в 10% и 4,852%.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2c44c71d": {
+   "name": "Уралхиммаш",
+   "ind": "Машиностроение",
+   "desc": "Производитель оборудования для газовой, нефтеперерабатывающей, нефтехимической и химической отраслей, атомной и традиционной энергетики. Выручка за 2023 год — 13,1 млрд ₽, чистая прибыль — 689,4 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0ecbc0fb": {
+   "name": "Группа «Синара»",
+   "ind": "Машиностроение",
+   "desc": "Российская промышленная группа; в 2024 году приобрела у Газпромбанка около 75% акций АО «Уралхиммаш» — производителя оборудования для газовой, нефтепереработки и энергетики, сохранив профиль предприятия.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2ed59e67": {
+   "name": "МАЙ24",
+   "ind": "E-commerce",
+   "desc": "Цифровая торговая площадка MAY24 (с марта 2025 года переименована в OKOLO.Market): помогает производителям и дистрибьюторам товаров повседневного спроса продавать их региональным сетям и независимым магазинам несетевой розницы; объединяет более 200 производителей и дистрибьюторов в 65 регионах России.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7a009fcf": {
+   "name": "Центр Развития Портовой Инфраструктуры",
+   "ind": "Порты и инфраструктура",
+   "desc": "Один из крупнейших транспортно-логистических холдингов России (активы оценивались более чем в 160 млрд ₽); ведёт проекты угольного перегрузочного комплекса «Лавна» в Мурманской области (программа «Развитие транспортной системы») и угольного терминала «Суходол» в свободном порту Владивосток.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga9f3ed32": {
+   "name": "Кумжаград",
+   "ind": "Недвижимость",
+   "desc": "Совместное предприятие (ООО «Кумжаград», по рабочему названию будущего микрорайона рядом с Кумженской рощей) для проекта комплексного развития территории свыше 300 га в Железнодорожном районе Ростова-на-Дону; 65% принадлежит группе «Эталон».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7f09fd2b": {
+   "name": "ЗПИФ «Астерия»",
+   "ind": "Управление активами",
+   "desc": "Закрытый паевой инвестиционный фонд комбинированный «Астерия»; в 2024 году продал 65% доли в совместном предприятии для строительного проекта в Ростове-на-Дону группе «Эталон».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge10ede50": {
+   "name": "Systeme Electric",
+   "ind": "Машиностроение",
+   "desc": "Российское подразделение Schneider Electric, проданное местному менеджменту в 2022 году; бизнес продолжил работу под новым брендом Systeme Electric, гендиректором стал Алексей Кашаев.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g015e974a": {
+   "name": "Schneider Electric",
+   "ind": "Машиностроение",
+   "desc": "Французский производитель электротехнического и промышленного оборудования; в 2022 году продал российское подразделение местному менеджменту (бизнес продолжил работу под брендом Systeme Electric).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g03bd26c1": {
+   "name": "Деньги.Мэйл.Ру",
+   "ind": "Финтех",
+   "desc": "Небанковская кредитная организация; в феврале 2024 года переименована в РНКО «ВК Платёжные решения». До октября 2022 года входила в перечень организаций, принадлежащих лицам из «недружественных стран» (владелец — кипрская P.J.V. Digital Forces LTD, часть группы VK); указ, разрешивший сделку, подписан 17 февраля 2023 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd6f2d2a5": {
+   "name": "P.J.V. Digital Forces LTD",
+   "ind": "Холдинги",
+   "desc": "Кипрская структура международного холдинга VK Company Limited; в 2023 году выступила продавцом 100% РНКО «Деньги.Мэйл.Ру» — сделка была переводом актива внутри группы ВК, а не покупкой у независимой стороны.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g8d07c803": {
+   "name": "Ситроникс Электро",
+   "ind": "Автопром",
+   "desc": "Оператор сети электрозарядных станций: операторская сеть ЭЗС, мобильное приложение, системы мониторинга и диспетчеризации электротранспорта, бизнес по проектированию и строительству зарядных хабов; в апреле 2026 года продан ООО «Пункт Е».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g890ebaf6": {
+   "name": "Пункт Е",
+   "ind": "Автопром",
+   "desc": "Оператор зарядной инфраструктуры для электротранспорта; в апреле 2026 года купил у группы «Ситроникс» операторский бизнес «Ситроникс Электро», в результате чего стал крупнейшим оператором зарядной инфраструктуры в стране.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0d41f06b": {
+   "name": "Sitronics Group",
+   "ind": "ИТ и интернет",
+   "desc": "Российская технологическая группа; после продажи операторского бизнеса «Ситроникс Электро» в 2026 году сосредоточилась на разработке и производстве зарядного оборудования для электротранспорта — от индивидуальных станций до ультрабыстрых ЭЗС.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gb2885273": {
+   "name": "Интерсервисинвест",
+   "ind": "Недвижимость",
+   "desc": "Владелец двух земельных участков на Малой Никитской улице в Москве (вл. 29 и 31), где расположены два административных здания начала XX века общей площадью около 4000 кв. м; в 2026 году участки купила девелоперская группа «Колди» под элитное жильё.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gfa46c2cd": {
+   "name": "Монолит (Колди)",
+   "ind": "Недвижимость",
+   "desc": "Юрлицо в структуре девелоперской группы «Колди»; купило 100% доли в уставном капитале ООО «Интерсервисинвест» (два участка на Малой Никитской ул. в Москве под элитное жильё).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g876ac66c": {
+   "name": "E-ПРОМ",
+   "ind": "Автопром",
+   "desc": "Производитель зарядных станций для электромобилей; поставила более 1400 быстрых ЭЗС в 42 региона России, продукция входит в реестр промышленной продукции Минпромторга. Единственным учредителем ООО «Е-ПРОМ» до входа фонда «ВИМ Инвестиции» был Булат Валиев.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gb233260a": {
+   "name": "RuStore",
+   "ind": "ИТ и интернет",
+   "desc": "Российский магазин приложений (маркетплейс мобильных приложений); в его создании участвовал red_mad_robot. В июле 2026 года VK договорилась о продаже 100% RuStore Дмитрию Панкрушеву, гендиректору ООО «Много приложений» — компании, которую VK привлекал к разработке RuStore.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf2c8977b": {
+   "name": "Бизнес-центр «Обсидиан»",
+   "ind": "Недвижимость",
+   "desc": "Бизнес-центр площадью 10 734 кв. м на улице Авиаконструктора Микояна на Ходынском поле в Москве; в мае 2026 года его купил ЗПИФ недвижимости Дом.РФ у сети сервисных офисов Business Club.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g1b0536a4": {
+   "name": "Business Club",
+   "ind": "Недвижимость",
+   "desc": "Сеть сервисных офисов Business Club (юрлицо — ООО «Бизнес клаб. БТС 2»); первоначально подразделение девелоперской Capital Group, с 2024 года единственный собственник — Мурад Дамиров. Выручка юрлица в 2024 году — 1,7 млрд ₽ (+5% год к году), чистая прибыль — 214 млн ₽ (рост в 4 раза).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g9343c2c8": {
+   "name": "CARGO.RUN",
+   "ind": "ИТ и интернет",
+   "desc": "Сервис для управления грузоперевозками и автопарками (юрлицо — ООО «Цифровизация транспорта»); основатель и гендиректор — Тимур Каримов. За 2025 год выручка выросла на 37%, до 248 млн ₽, чистая прибыль — в 7,3 раза, до 39,5 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g854685d9": {
+   "name": "Тантор Лабс",
+   "ind": "ИТ и интернет",
+   "desc": "Разработчик СУБД Tantor Postgres на базе PostgreSQL и AI-платформы для управления базами данных; в 2024 году 25% компании купила «Группа Астра».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge9363c29": {
+   "name": "МТ-Интеграция",
+   "ind": "ИТ и интернет",
+   "desc": "ИТ-интегратор, разработчик отечественной СУБД «Персей» (сертифицирована ФСТЭК России); в 2026 году продал права на неё «Тантор Лабс».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf80101aa": {
+   "name": "Dr. Reddy's",
+   "ind": "Фармацевтика",
+   "desc": "Индийская фармацевтическая корпорация, производитель дженериков и биоаналогов; российское подразделение — ООО «Др. Редди'с Лабораторис» (выручка 2025 года — 35 млрд ₽).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g64b35c63": {
+   "name": "Вертекс",
+   "ind": "Фармацевтика",
+   "desc": "Российская фармацевтическая компания (Санкт-Петербург), производит лекарства, БАДы и косметику; юрлицо — АО «Вертекс», контролируется кипрской Raoth Holdings Limited. Выручка 2025 года — 24,9 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g90d6e8a7": {
+   "name": "Полекс",
+   "ind": "Производство тары",
+   "desc": "Производитель пластиковой упаковки (в т.ч. для молочной продукции), юрлицо ООО «Полекс Урал» (после сделки переименовано в ООО «Пегас»); выручка 2025 года — 2,44 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga41c9e8f": {
+   "name": "Строма",
+   "ind": "Финансовые услуги",
+   "desc": "Инвестиционная компания прямых инвестиций (Россия и СНГ), владельцы — Михаил Беккер и Ваган Хранян.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge52720b7": {
+   "name": "Алми прайм",
+   "ind": "ИТ и интернет",
+   "desc": "Холдинговая компания, владеет разработчиком офисного ПО «Алми партнерс» (на рынке также известен как «АЛМИ Партнер»; продукт — «АльтерОфис»); выручка операционной компании за 2025 год — 1,1 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g4b89f3e2": {
+   "name": "Группа «Основа»",
+   "ind": "Недвижимость",
+   "desc": "Девелоперская компания, управление коммерческой недвижимостью и инвестиции в стартапы; образована в 2016 году бывшими акционерами застройщика «Мортон» (Александр Ручьев, Олег Колченко, Егор Храмов) после его продажи ПИК.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge3873f70": {
+   "name": "Фрозен Бек",
+   "ind": "Пищепром и напитки",
+   "desc": "Производитель хлебобулочных изделий и замороженной выпечки под брендом Frozella; выручка 2025 года — 5,53 млрд ₽, чистая прибыль — 1,39 млрд ₽. Прежний собственник — Патвакан Мкртчян.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge01bf4b4": {
+   "name": "Нейропоток",
+   "ind": "Финансовые услуги",
+   "desc": "Инвестиционная компания (АО «Нейропоток»), зарегистрирована в августе 2025 года; гендиректор Сергей Жданов, владеющий также «Новой инвестиционной группой».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g274a2d42": {
+   "name": "Квант",
+   "ind": "Потребительские товары",
+   "desc": "Производитель отечественных телевизоров, видеомониторов и видеопроекторов (Зеленоград и Воронеж); юрлицо ООО «Квант», в августе 2026 года признано банкротом.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g83461952": {
+   "name": "NexTouch",
+   "ind": "ИТ и интернет",
+   "desc": "Производитель интерактивных досок и дисплеев; юрлицо ООО «Некс-Т» (полностью принадлежит АО «Некс-Т»), выручка 2025 года — 3,2 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g4fc96b1a": {
+   "name": "Sentra",
+   "ind": "ИТ и интернет",
+   "desc": "ИБ-стартап («AI-native кибербезопасность», защита от «теневых данных»), юрлицо ООО «Защищённые системы»; создана командой белых хакеров под руководством Максима Брагина и Егора Богомолова.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7985a80d": {
+   "name": "Икс Фаб Восток",
+   "ind": "Недвижимость",
+   "desc": "Компания-владелец площадки бывшего домостроительного комбината в ОЭЗ «Надеждинская» (Приморский край); зарегистрирована в декабре 2025 года, с июля 2026 года принадлежит ООО «Икс Холдинг» (владеет Yadro).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g8c655a33": {
+   "name": "СтройИнвест (Екатеринбург)",
+   "ind": "Недвижимость",
+   "desc": "Инвестиционная компания (Екатеринбург), учредитель — ресторатор Олег Ферганов; занимается инвестициями в недвижимость.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf8c3a45a": {
+   "name": "Рид Ойл",
+   "ind": "Нефть и газ",
+   "desc": "Нефтедобывающая компания, учредитель — пермский бизнесмен Андрей Кузяев (экс-президент LUKOIL Overseas, ныне возглавляет «ЭР-Телеком холдинг»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gb8377092": {
+   "name": "Интел-руал",
+   "ind": "Ритейл",
+   "desc": "Управляющая компания, контролирует операционную компанию сети книжных магазинов «Республика» (ООО «Пролайф»); выручка «Пролайф» за 2025 год — 711,7 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gbc408bbe": {
+   "name": "ООО «Индекс»",
+   "ind": "Финансовые услуги",
+   "desc": "Инвестиционная холдинговая структура, принадлежит АО «Концерн производительных сил» (99,99% контролирует Михаил Полежаев через ООО «Лайфгрупп»); концерн в основном занимается банкротством и ликвидацией организаций.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g36d77593": {
+   "name": "Экоагрофарминг",
+   "ind": "Агро",
+   "desc": "Одна из крупнейших овощеводческих компаний Тверской области, выращивает картофель; с 2024 года поставляет сырьё для чипсов Lay's (PepsiCo).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g32697f60": {
+   "name": "ЕТС",
+   "ind": "Холдинги",
+   "desc": "Юрлицо (АО «ЕТС»), владело «Ремтехно» (49% в «Экоагрофарминге») с 24 апреля по 30 июля 2026 года как промежуточный держатель перед продажей; собственники и профиль деятельности источники не раскрывают.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g631fd4d3": {
+   "name": "Дальневосточный банк",
+   "ind": "Банки",
+   "desc": "Региональный банк, работал на Дальнем Востоке России; в 2026 году присоединён к МКБ (акции ДВБ конвертированы в акции МКБ, юрлицо АО «Дальневосточный банк» прекратило существование).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g4bbbd408": {
+   "name": "Московский кредитный банк",
+   "ind": "Банки",
+   "desc": "Крупный российский банк: внешнеторговое сопровождение и валютный контроль, обслуживание корпоративных и розничных клиентов; в 2026 году присоединил Дальневосточный банк.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf24e2a58": {
+   "name": "Еврострой",
+   "ind": "Строительство",
+   "desc": "Строительная компания в Сургуте; директор Виталий Ганин. В 2026 году выставила на продажу производственную базу за 404 млн ₽ ввиду сокращения объёмов строительства.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g754d1dc1": {
+   "name": "МБ РУС Финанс",
+   "ind": "Транспорт и логистика",
+   "desc": "Бывшая лизинговая «дочка» Mercedes-Benz в России (после продажи российского бизнеса Mercedes-Benz «Автодому» в 2023 году переименована в «МБ РУС»); предоставляла лизинг легковых и грузовых автомобилей.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2083329a": {
+   "name": "Международный аэропорт Внуково",
+   "ind": "Транспорт и логистика",
+   "desc": "Международный аэропорт Москвы (АО «Международный аэропорт «Внуково»»); в 2026 году приобрёл 25,01% в ООО «Перспектива», контролирующей аэропорт «Домодедово».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gc49301d4": {
+   "name": "Кузбасский деловой союз",
+   "ind": "Нефть и газ",
+   "desc": "Топливная торговая компания (Новокузнецк), единственный владелец — АО «Инрусинвест» (бенефициар Светлана Говор); работает под брендом «ЛУКОЙЛ» на более чем 100 АЗС в Сибири, выручка 2025 года — 10,2 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga2f25b66": {
+   "name": "Сибнефтепродукт",
+   "ind": "Нефть и газ",
+   "desc": "Томская компания, управляла сетью АЗС Elke Auto (12 станций); владелец — Виктор Маршев, выручка — 1,2–1,5 млрд ₽ в год.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7ab56b51": {
+   "name": "Bilim Group",
+   "ind": "Образование",
+   "desc": "Крупнейшая EdTech-компания Казахстана и Центральной Азии (Bilim Group LTD, основана в 2011 году основателем Рауаном Кенжеханулы): цифровой контент, автоматизация образования, тьюторинг, ~1 млн пользователей в день.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g76b878ca": {
+   "name": "BeringPro",
+   "ind": "Профессиональные услуги",
+   "desc": "ИТ-консалтинговая компания (юрлицо ООО «БП Партнеры»), выросла из консалтингового подразделения KPMG (KPMG Consulting → BeringPoint → с 2016 года российское ООО «БерингПойнт» → с 2024 года бренд BeringPro); выручка 2024 года — 1,9 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g1bbb95d9": {
+   "name": "Fonte Capital",
+   "ind": "Финансовые услуги",
+   "desc": "Казахстанская частная инвестиционная компания; покупателем в сделке выступила управляемая ею Private Investment Company Fonte Inceptia Alpha Fund OEIC Limited (Международный финансовый центр «Астана»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0cafe252": {
+   "name": "Фонд «Горизонт»",
+   "ind": "Управление активами",
+   "desc": "Фонд, держащий акции наследников сооснователя ГК «Самолет» Михаила Кенина (умер в августе 2025 года); в его пользу перешли 29,12% акций «Самолета», часть которых фонд впоследствии продал.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g8f1f069d": {
+   "name": "Раблз (Rubbles)",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик программных продуктов на основе искусственного интеллекта для управления корпоративными данными; до продажи в августе 2026 года 100% долей ООО «Раблз» принадлежали кипрской SBDA Group Ltd.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g4f201549": {
+   "name": "IBS",
+   "ind": "ИТ и интернет",
+   "desc": "Российская группа ИТ-компаний; развивает портфель платформенных решений для управления корпоративными данными и технологической независимости бизнеса. Юридически покупателем Rubbles выступило ООО «УК Центр» (входит в группу IBS), контролируемое АО «ИБС ИТ Услуги» и Павлом Кутузовым.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g30baf27b": {
+   "name": "ООО «РК 5-7»",
+   "ind": "Гостиницы и туризм",
+   "desc": "Владеет гостиницей «Амбассадор» на 251 номер (17,2 тыс. кв. м) на улице Римского-Корсакова в Адмиралтейском районе Санкт-Петербурга. В августе 2026 года 100% долей приобрело АО «Интеринвест М», управляемое сетью Marins Hotels.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gdd85fbbf": {
+   "name": "Союз Маринс Групп",
+   "ind": "Гостиницы и туризм",
+   "desc": "Компания создана Александром Куликовым, погибшим в 2016 году; сейчас конечные бенефициары не раскрываются. Занимается производством фильмов (сериал «Морпехи», фильм «Вий») и управляет коммерческой недвижимостью (например, бизнес-центром «Нагатинский», 70 тыс. кв. м, в Москве). Гостиничный бизнес под брендом Marins Hotels — отдельное направление, портфель из 12 отелей в городах России. В 2025 году выручка ООО УК «Союз Маринс Групп» составила 841,5 млн ₽, чистая прибыль — 10,8 млн ₽ (СПАРК).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g6afe404c": {
+   "name": "Тандем-Истейт",
+   "ind": "Недвижимость",
+   "desc": "Девелоперская компания; в августе 2026 года приобрела производственно-складской комплекс в деревне Заневка (Всеволожский район Ленинградской области) с расчётом на дальнейшую застройку участка — почти вдвое увеличить площадь объекта позволяет градостроительная документация.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf9bc7955": {
+   "name": "ТД Эдельвейс",
+   "ind": "Недвижимость",
+   "desc": "Продавец производственно-складского комплекса в деревне Заневка (Всеволожский район Ленинградской области), проданного «Тандем-Истейт» в августе 2026 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gcdb65170": {
+   "name": "Happy Job (ООО «Счастливая работа»)",
+   "ind": "ИТ и интернет",
+   "desc": "Платформа для оценки вовлечённости и удовлетворённости сотрудников (HR-tech); юрлицо — ООО «Счастливая работа» (ОКВЭД 62.01, разработка ПО). Выручка за 2025 год — 440,56 млн ₽, прибыль — 2,13 млн ₽. Учредители — Алексей Клочков, Вадим Завалов и Артём Карматских. В августе 2026 года 51% компании приобрёл HeadHunter.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g3cf9290d": {
+   "name": "Wegosty",
+   "ind": "ИТ и интернет",
+   "desc": "ИИ-платформа для ресторанов, отелей и туристической отрасли: автоматизирует путь гостя от обращения до бронирования и оплаты (ИИ-ресепшн, онлайн-бронирование, партнёрские каналы, гастронавигатор), интегрируется с iiko и Bnovo. Юрлицо — ООО «Гости Путеводители» (Элиста, создано в январе 2025 года). Основатель — Роман Тян (85,04%), второй совладелец — Евгений Степанов (14,96%). Выручка за 2025 год — 1,35 млн ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ga3e0371b": {
+   "name": "ООО «Морская миля»",
+   "ind": "Пищепром и напитки",
+   "desc": "Компания с перерабатывающим цехом рыбной продукции в Домодедово (Московская область). По оценке Rusprofile стоит около 19 млн ₽. В августе 2026 года 51% приобрела «Русская рыбная компания», оставшиеся 49% принадлежат Николаю Власкину.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g28762671": {
+   "name": "Русская рыбная компания",
+   "ind": "Пищепром и напитки",
+   "desc": "Создана в 1997 году, специализировалась на импорте рыбы и морепродуктов из Норвегии, входила в «Русскую аквакультуру» (с 2020 года — «Инарктика»). В 2016 году бизнес за 1,8 млрд ₽ купили Дмитрий Дангауэр, Дмитрий Коцюбинский и Сергей Дарькин (контролируют через ООО «РРК Холдинг»). Сейчас один из крупнейших в России дистрибуторов рыбной продукции (19 складов по стране), также импортирует из Чили, Китая, Вьетнама, Гренландии, с Фарерских островов и с Дальнего Востока; продаёт «Пятёрочке», «Перекрёстку», «Магниту», «Ленте», «Ашану». Выручка за 2025 год — 39,79 млрд ₽, чистая прибыль — 1,85 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge8852322": {
+   "name": "Кодмастер (ООО «КДМ»)",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик межсетевых экранов нового поколения (NGFW). Юрлицо — ООО «КДМ», создано в сентябре 2015 года, бенефициар — Мария Маркова через ООО «Техинвест», гендиректор — Олег Рыцев. В 2025 году выручка упала в 16 раз, до 42,2 млн ₽, чистая прибыль ушла в минус на 118 млн ₽ (против 485,8 млн ₽ прибыли в 2024 году).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g13b2a65e": {
+   "name": "Алор Брокер",
+   "ind": "Рынок ценных бумаг",
+   "desc": "Российская брокерская компания финансовой группы «Алор». 26 июня 2026 года ЦБ аннулировал её депозитарную лицензию (регулятор счёл, что брокер не соблюдал антисанкционное законодательство). После этого сменился гендиректор (Александр Лужбин), а 30 июня 2026 года учёт и хранение ценных бумаг клиентов переданы партнёру, ИК «Риком-Траст».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gda75c255": {
+   "name": "ООО «Русский Стандарт Водка» (РСВ)",
+   "ind": "Пищепром и напитки",
+   "desc": "Один из крупнейших производителей водки в мире; входит в холдинг «Руст» бизнесмена Рустама Тарико. Недвижимость (офисно-складской комплекс в Шушарах) заложена в ООО «КБ Ростфинанс» и АО «Датабанк»; часть здания арендует «Руст Инкорпорэйтэд».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gc5c1cec7": {
+   "name": "Pridex",
+   "ind": "Строительство",
+   "desc": "Российская компания по проектированию и строительству офисных пространств (fit-out) — от концепции до строительства и технологического оснащения. Сеть сервисных офисов Multispace развивала как отдельное направление, продала её в августе 2026 года группе частных инвесторов (4 объекта, 18,2 тыс. кв. м в Москве и Санкт-Петербурге).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7b1c3941": {
+   "name": "ООО «Кодар»",
+   "ind": "ГМК и добыча",
+   "desc": "Зарегистрировано в Чите в июне 2020 года. Владеет двумя лицензиями на геологическое изучение недр в Забайкальском крае: ЧИТ 04252 БП (до 28 февраля 2028 года) и ЧИТ 030208 БП (выдана 28 декабря 2024 года, до 28 декабря 2029 года). До августа 2026 года принадлежало структуре с китайским капиталом.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gdf491665": {
+   "name": "Прииск Соловьевский",
+   "ind": "ГМК и добыча",
+   "desc": "Золотодобывающая компания в Забайкальском крае (Карымский, Читинский и Шилкинский районы, рудник Арчикой) и Амурской области (Сковородинский и Тындинский районы, Соловьёвский рудник). По итогам 2025 года добыла 5080,3 кг золота (+3% к предыдущему году).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7c8837f5": {
+   "name": "Горнопромышленная инвестиционная компания Лункунь",
+   "ind": "ГМК и добыча",
+   "desc": "Структура с китайским капиталом; владела ООО «Кодар» (два геологоразведочных актива в Забайкалье) до продажи «Прииску Соловьевскому» в августе 2026 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd061d4dc": {
+   "name": "Робатур",
+   "ind": "Машиностроение",
+   "desc": "Основана в 2024 году Александром Абатуровым (резидент «Южной фабрики стартапов», победитель конкурса «Студенческий стартап»). Разрабатывает и внедряет промышленных роботов на сенсорных технологиях, заменяющих ручной труд на производстве — в т.ч. робота-манипулятора для укладки мягкой пищевой продукции. На трёх предприятиях, где уже стоят её роботы, затраты на оплату труда снизились на 65%.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g88a5c4c2": {
+   "name": "Южная фабрика стартапов",
+   "ind": "Образование",
+   "desc": "Университетская стартап-студия (ООО «Южная фабрика стартапов»), зарегистрирована в декабре 2022 года; среди учредителей — Южный федеральный университет и Донской государственный технический университет.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g59f4de1d": {
+   "name": "ЗПИФ «Вим Недвижимость»",
+   "ind": "Управление активами",
+   "desc": "Закрытый паевой инвестиционный фонд недвижимости под управлением УК «Вим сбережения». В августе 2026 года выкупил складской комплекс у девелопера Parametr (ГК ПИК) в Новой Москве и офисный актив (штаб-квартиру группы Okkam в башне «Империя», Москва-Сити) у Инвестиционной группы «К1».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2eaee278": {
+   "name": "Parametr",
+   "ind": "Недвижимость",
+   "desc": "Девелопер, входит в группу компаний ПИК; в августе 2026 году продал ЗПИФ «Вим Недвижимость» складской комплекс площадью 75700 кв. м в промышленном парке «Кувекино» (Новая Москва), заполненный на 90% (среди арендаторов — «Яндекс.Маркет»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g96801875": {
+   "name": "ООО «Фипс»",
+   "ind": "Недвижимость",
+   "desc": "На балансе — штаб-квартира коммуникационной группы Okkam в башне «Империя» делового центра «Москва-Сити» (три этажа, около 9000 кв. м). Сделка оформлена 7 августа 2026 года как покупка 100% долей юрлица (не прямая покупка недвижимости) — ЗПИФ «Вим Недвижимость» купил ООО «Фипс» у Инвестиционной группы «К1» за 8 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd49c1a51": {
+   "name": "Инвестиционная группа «К1»",
+   "ind": "Управление активами",
+   "desc": "Инвестиционная группа; управляющий директор — Антон Халдин. До августа 2026 года владела офисным активом (штаб-квартира коммуникационной группы Okkam) в башне «Империя» делового центра «Москва-Сити», проданным ЗПИФ «Вим Недвижимость» за 8 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gec2d70f3": {
+   "name": "КФ «Кронштадтская»",
+   "ind": "Пищепром и напитки",
+   "desc": "Кондитерская фабрика в Кронштадте: выпускает зефир, пастилу, суфле, конфеты и десерты. Юрлицо — ООО «КФ Кронштадтская». За 2025 год выручка — 446 млн ₽ (против 374 млн годом ранее), чистая прибыль выросла с 6,1 млн до 15,3 млн ₽. Продукция продаётся в ТЦ «Гостиный двор» (Кронштадт) и в здании Московского вокзала (Петербург), есть представительство в Бишкеке.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g736dc3f5": {
+   "name": "Петербургский логистический холдинг «ЮСТА»",
+   "ind": "Транспорт и логистика",
+   "desc": "Петербургский дистрибьютор и логистический оператор: обслуживает 2500 торговых точек в Санкт-Петербурге и Ленобласти и ещё 3000 в других городах СЗФО, держит склады общей площадью 19800 м² и 96 грузовых автомобилей, ежедневно отгружает клиентам более 200 тонн продукции. Совладелец и гендиректор — Станислав Бартош.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gf89319d9": {
+   "name": "Транснефть",
+   "ind": "Нефть и газ",
+   "desc": "Российская нефтепроводная монополия (характеристика из источника карточки — «зачем нефтепроводной монополии доля в банке»). В июле 2026 года приобрела 7,52% голосующих ценных бумаг Газпромбанка за 40 млрд ₽, отразит долю в составе долгосрочных финансовых вложений.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g21e04900": {
+   "name": "Truffle 2 GmbH",
+   "ind": "Пищепром и напитки",
+   "desc": "Немецкая структура, аффилированная с Lufthansa (LSG Group); владела 49% АО «Аэромар» — крупнейшей в России компании по производству бортового питания — до продажи «Аэрофлоту» в сентябре 2026 года. О намерении продать долю Lufthansa объявила ещё в сентябре 2022 года; сделка одобрена распоряжением президента РФ от 16 марта.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g71a251f8": {
+   "name": "WhoIsBlogger (ООО «Даблюайби»)",
+   "ind": "Медиа",
+   "desc": "Платформа аналитики и подбора блогеров для рекламных кампаний; юрлицо — ООО «Даблюайби» (по данным TAdviser). Основатель и гендиректор — Лев Грунин. В сентябре 2026 года вошла в состав Альфа-Банка, сохранив руководство и команду.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gdccb7223": {
+   "name": "ООО «СЗ «Самолет-Сабанеева»»",
+   "ind": "Недвижимость",
+   "desc": "Проектная компания-застройщик жилого комплекса «Сабанеева 125» во Владивостоке (три дома на 895 квартир, почти 38 тыс. кв. м). 49% принадлежало ООО «Лидер строй»; в сентябре 2026 года «Самолет» выкупает эту долю партнёра, чтобы полностью контролировать проект.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gc43e14be": {
+   "name": "Лидер строй",
+   "ind": "Строительство",
+   "desc": "Партнёр ГК «Самолет» по проекту жилого комплекса «Сабанеева 125» во Владивостоке; владело 49% в ООО «СЗ «Самолет-Сабанеева»». Обратилось в суд, оспаривая решение общего собрания о передаче долей в залог Газпромбанку; в 2026 году стороны договорились о выкупе доли «Самолетом».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gb04d9cfd": {
+   "name": "Издательский дом «Комсомольская правда»",
+   "ind": "Медиа",
+   "desc": "Российский издательский дом. Формально сделка оформлена как приобретение 9 сентября 2026 года 75,1% в ООО «ЛДВ Пресс» — промежуточном холдинге, которому принадлежало около 60,5% капитала самого ИД; прежним контролирующим лицом «ЛДВ Пресс» с 2016 года был Сергей Руднов, сын основателя «Балтийской медиагруппы» Олега Руднова. Участники рынка отмечают, что де-факто «Комсомольская правда» принадлежит «Национальной медиа группе» ещё с 2016 года — сделка перевела её в прямое владение.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g3209dcd2": {
+   "name": "МИЦ «Известия»",
+   "ind": "Медиа",
+   "desc": "Мультимедийный центр «Известия» — подразделение холдинга «Национальная медиа группа» (НМГ), через которое НМГ купила контрольную долю ИД «Комсомольская правда» в сентябре 2026 года.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g483cfb4f": {
+   "name": "Леста",
+   "ind": "ИТ и интернет",
+   "desc": "Разработчик игр «Мир танков» и «Мир кораблей»; ранее — российское подразделение белорусской Wargaming, которая после начала СВО и санкций вышла из капитала «Лесты». Компания перешла к Малику Хатажаеву, позже признанному экстремистом; в апреле 2025 года Генпрокуратура наложила арест на её активы. В середине июля 2025 года три юрлица разработчика (ООО «Леста», ООО «Леста Геймс Эдженси», ООО «Леста Геймс Москва») перешли в собственность Росимущества, гендиректором назначен Борис Добродеев (ранее — «ВКонтакте», VK). Долг ООО «Леста Геймс Эдженси» перед бюджетом РФ по данным ФССП на март 2026 года — 11,4 млрд ₽.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g0682cdb7": {
+   "name": "Строй инвест (ТЦ «Город Косино»)",
+   "ind": "Недвижимость",
+   "desc": "Юрлицо, на балансе которого числится торговый центр «Город Косино» на востоке Москвы (130 тыс. кв. м, открыт в конце 2021 года). Проект начинала девелоперская группа ТЭН; в 2023 году 100% контроля над компанией получил «Газпромбанк-инвест», а в сентябре 2026 года актив продан ООО «Афкап».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g218f246e": {
+   "name": "Афкап",
+   "ind": "Недвижимость",
+   "desc": "Российское юрлицо, принадлежащее Агилю Мохнатову — сыну Азая Мохнатова, основателя азербайджанской группы AF Holding (строительные компании UGUR 97 и Everton, производство пластиковых изделий Afsan Plastik, бизнес-центры, торговые центры и аквапарки в Баку, сеть AF Euro Home). В сентябре 2026 года купил у «Газпромбанк-инвеста» торговый центр «Город Косино» в Москве.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge53d0ff8": {
+   "name": "ООО «Руском» (Голышманово)",
+   "ind": "Агро",
+   "desc": "Птицефабрика в Голышманово (Тюменская область), бренд «Богатство Сибири. Бройлер»: семь площадок выращивания, репродуктор, мясоперерабатывающее предприятие, комбикормовый завод и элеватор мощностью 60 тыс. тонн мяса в год; ИНН 5507085811. Продана «Черкизово» (АО «Куриное царство») в декабре 2024 года, после чего юрлицо присоединено к покупателю и ликвидировано.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g41456481": {
+   "name": "Улугхемуголь",
+   "ind": "Уголь",
+   "desc": "Угольный актив в Республике Тыва: лицензия на участок «Западный» Улуг-Хемского угольного бассейна (запасы C1 — 250,5 млн т, C2 — 246,2 млн т). До 2026 года — единственный оставшийся угольный актив «Северстали» после продажи «Воркутаугля» в 2022 году; в августе 2026 года 100% долей куплено ООО «Промресурс».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g264ec466": {
+   "name": "Королевство сладостей",
+   "ind": "Пищепром и напитки",
+   "desc": "Компания зарегистрирована в июне 2026 года; владеет товарным знаком «Королевство сладостей» для кондитерских изделий и услуг кафе, баров и кафетериев. Открывает магазин сладостей площадью 700 кв. м в ТЦ «Авиапарк» в Москве (совладельцы — Андрей Пупков и, с сентября 2026 года, Филипп Киркоров; ранее долю 50% держал Юрий Левитас, совладелец сети Black Star Burger).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g41e754fb": {
+   "name": "СЗ «АВА Белоостровская»",
+   "ind": "Недвижимость",
+   "desc": "Специализированный застройщик, которому принадлежит земельный участок в Приморском районе Санкт-Петербурга под многофункциональный жилой комплекс площадью около 79,8 тыс. м² (продаваемая площадь — более 47 тыс. м²). Куплен AVA Group осенью 2025 года у ЗПИФ «СКИФ»; в сентябре 2026 года продан на торгах РАД (начальная цена 634,7 млн ₽).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gee63afc6": {
+   "name": "Гранель",
+   "ind": "Недвижимость",
+   "desc": "Российская девелоперская группа, строит жильё в Москве и регионах. В сентябре 2026 года купила у смоленского девелопера «Консоль» строящийся жилой комплекс на Автозаводской улице в Москве (45 тыс. м² жилой площади).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g5a214bdf": {
+   "name": "Консоль",
+   "ind": "Недвижимость",
+   "desc": "Девелоперская компания из Смоленска; в сентябре 2026 года продала «Гранели» строящийся жилой комплекс на Автозаводской улице в Москве.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd392372b": {
+   "name": "Айс Девелопмент",
+   "ind": "Машиностроение",
+   "desc": "Структура холдинга S8 Capital (Армена Саркисяна); владела 100% лифтового бизнеса «Метеор лифт» (бывшие российские активы Otis, купленные S8 Capital летом 2022 года) и лифтового бизнеса «Лифт Коннект» (бывшее подразделение KONE). В сентябре 2026 года эти активы проданы «Дом.РФ».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g3435cc07": {
+   "name": "ГК «Лимб»",
+   "ind": "Здравоохранение",
+   "desc": "Группа объединяет протезно-ортопедические центры в Москве, Санкт-Петербурге и Ростове-на-Дону; в её составе собственное конструкторское бюро, разрабатывающее компоненты и модули для протезов нижних конечностей (в том числе коленный модуль с микропроцессорным управлением). В сентябре 2026 года 50,1% акций купила «Моторика».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -240123,6 +241502,546 @@
   "gb2b066c3": [
    "дом.рф",
    "дом рф"
+  ],
+  "g5eb2d756": [
+   "башкирский бройлер"
+  ],
+  "g6798454b": [
+   "продо",
+   "группа продо"
+  ],
+  "gf43cebd7": [
+   "стар нафта",
+   "star nafta"
+  ],
+  "g93d93b4b": [
+   "зпиф прайм первый",
+   "прайм первый"
+  ],
+  "g000fda65": [
+   "кредит европа лайф"
+  ],
+  "g7b9c6187": [
+   "свой",
+   "idf eurasia"
+  ],
+  "gbd6de100": [
+   "пеко",
+   "хбк пеко",
+   "хлебокомбинат пеко"
+  ],
+  "g087c141d": [
+   "рекитт бенкизер",
+   "ооо рекитт бенкизер"
+  ],
+  "g5ba54588": [
+   "reckitt benckiser",
+   "reckitt",
+   "рекитт бенкизер"
+  ],
+  "gf492fc96": [
+   "борский завод торгового оборудования",
+   "бзто"
+  ],
+  "g822abb9f": [
+   "марихолодмаш"
+  ],
+  "g932583db": [
+   "арктик спг 2",
+   "arctic lng 2"
+  ],
+  "g3ab5d406": [
+   "нордлайн"
+  ],
+  "g30486604": [
+   "totalenergies",
+   "тоталэнерджиз",
+   "total"
+  ],
+  "g8eb8af7e": [
+   "ритейл-процессинг",
+   "kd pay"
+  ],
+  "g730c2829": [
+   "восточный нефтехимический терминал",
+   "внт"
+  ],
+  "g93fc66c3": [
+   "золотоноша"
+  ],
+  "g0be9547a": [
+   "геопромайнинг",
+   "geopromining"
+  ],
+  "g3565bf3b": [
+   "железный кряж"
+  ],
+  "gb9ead213": [
+   "милфудс",
+   "milfoods"
+  ],
+  "g020cfaff": [
+   "новая сырьевая компания",
+   "нск"
+  ],
+  "g58e83a60": [
+   "нуттис",
+   "nattys"
+  ],
+  "g922e8866": [
+   "родные поля",
+   "тд риф",
+   "риф"
+  ],
+  "g2785bc8d": [
+   "тиара холдинг"
+  ],
+  "gf3e193a3": [
+   "икорный"
+  ],
+  "g0cb6b658": [
+   "доброфлот"
+  ],
+  "g55e415f5": [
+   "морпорт певек",
+   "порт певек"
+  ],
+  "g10409490": [
+   "восток-север",
+   "фонд восток-север"
+  ],
+  "g50c327a7": [
+   "вим сбережения"
+  ],
+  "g39002479": [
+   "onetwotrip"
+  ],
+  "ga8f1d220": [
+   "владивостокский морской рыбный порт",
+   "вмрп"
+  ],
+  "g925928bd": [
+   "геотэкс"
+  ],
+  "g79461e21": [
+   "логистик-сервис",
+   "логистик сервис"
+  ],
+  "g6b2a2e7d": [
+   "приморская строительная корпорация"
+  ],
+  "gd47e07f8": [
+   "штамповые технологии"
+  ],
+  "g217e5925": [
+   "jf mould",
+   "hefei hualong mould"
+  ],
+  "g2322c829": [
+   "гтлк",
+   "государственная транспортная лизинговая компания"
+  ],
+  "gc6e1e175": [
+   "нспк",
+   "национальная система платежных карт"
+  ],
+  "g889e2038": [
+   "банк россии",
+   "цб рф",
+   "центральный банк"
+  ],
+  "g2c28aae3": [
+   "selfmade",
+   "фаст фешн"
+  ],
+  "g858b6b2e": [
+   "callisto vision",
+   "каллисто вижн"
+  ],
+  "ga5a81614": [
+   "steplife",
+   "степлайф"
+  ],
+  "gf5e95f2b": [
+   "новамедика иннотех"
+  ],
+  "g8488d2a1": [
+   "синмедекс"
+  ],
+  "ge801b25b": [
+   "новамедика"
+  ],
+  "gec9d9d34": [
+   "кузнецкая тэц"
+  ],
+  "g29b75af8": [
+   "servertech holding",
+   "servertech"
+  ],
+  "g2c44c71d": [
+   "уралхиммаш",
+   "уральский завод химического машиностроения"
+  ],
+  "g0ecbc0fb": [
+   "синара",
+   "группа синара"
+  ],
+  "g2ed59e67": [
+   "май24",
+   "may24",
+   "около",
+   "okolo.market"
+  ],
+  "g7a009fcf": [
+   "црпи",
+   "центр развития портовой инфраструктуры"
+  ],
+  "ga9f3ed32": [
+   "кумжаград"
+  ],
+  "g7f09fd2b": [
+   "астерия",
+   "зпиф астерия"
+  ],
+  "ge10ede50": [
+   "systeme electric",
+   "системе электрик",
+   "шнейдер электрик россия"
+  ],
+  "g015e974a": [
+   "schneider electric",
+   "шнейдер электрик"
+  ],
+  "g03bd26c1": [
+   "деньги.мэйл.ру",
+   "вк платежные решения"
+  ],
+  "gd6f2d2a5": [
+   "p.j.v. digital forces ltd",
+   "p.j.v. digital forces"
+  ],
+  "g8d07c803": [
+   "ситроникс электро"
+  ],
+  "g890ebaf6": [
+   "пункт е"
+  ],
+  "g0d41f06b": [
+   "ситроникс",
+   "sitronics group",
+   "sitronics"
+  ],
+  "gb2885273": [
+   "интерсервисинвест"
+  ],
+  "gfa46c2cd": [
+   "монолит"
+  ],
+  "g876ac66c": [
+   "e-пром",
+   "епром"
+  ],
+  "gb233260a": [
+   "rustore",
+   "рустор"
+  ],
+  "gf2c8977b": [
+   "обсидиан",
+   "бизнес-центр обсидиан"
+  ],
+  "g1b0536a4": [
+   "business club",
+   "бизнес клаб"
+  ],
+  "g9343c2c8": [
+   "cargo.run",
+   "цифровизация транспорта"
+  ],
+  "g854685d9": [
+   "тантор лабс",
+   "tantor labs"
+  ],
+  "ge9363c29": [
+   "мт-интеграция",
+   "мт интеграция"
+  ],
+  "gf80101aa": [
+   "dr. reddy's",
+   "dr reddy's",
+   "редди'с"
+  ],
+  "g64b35c63": [
+   "вертекс",
+   "ао «вертекс»"
+  ],
+  "g90d6e8a7": [
+   "полекс",
+   "полекс урал",
+   "пегас"
+  ],
+  "ga41c9e8f": [
+   "строма",
+   "инвестиционная компания строма"
+  ],
+  "ge52720b7": [
+   "алми прайм",
+   "алми партнерс",
+   "алми"
+  ],
+  "g4b89f3e2": [
+   "основа",
+   "группа основа",
+   "гк основа"
+  ],
+  "ge3873f70": [
+   "фрозен бек",
+   "frozella"
+  ],
+  "ge01bf4b4": [
+   "нейропоток"
+  ],
+  "g274a2d42": [
+   "квант",
+   "ооо «квант»"
+  ],
+  "g83461952": [
+   "nextouch",
+   "некс-т"
+  ],
+  "g4fc96b1a": [
+   "sentra",
+   "сентра",
+   "защищённые системы",
+   "защищенные системы"
+  ],
+  "g7985a80d": [
+   "икс фаб восток"
+  ],
+  "g8c655a33": [
+   "стройинвест"
+  ],
+  "gf8c3a45a": [
+   "рид ойл",
+   "reid oil"
+  ],
+  "gb8377092": [
+   "интел-руал",
+   "пролайф"
+  ],
+  "gbc408bbe": [
+   "ооо «индекс»",
+   "концерн производительных сил"
+  ],
+  "g36d77593": [
+   "экоагрофарминг"
+  ],
+  "g32697f60": [
+   "етс",
+   "ао «етс»"
+  ],
+  "g631fd4d3": [
+   "дальневосточный банк",
+   "двб"
+  ],
+  "g4bbbd408": [
+   "мкб",
+   "московский кредитный банк"
+  ],
+  "gf24e2a58": [
+   "еврострой"
+  ],
+  "g754d1dc1": [
+   "мб рус финанс",
+   "мб рус"
+  ],
+  "g2083329a": [
+   "внуково",
+   "международный аэропорт внуково"
+  ],
+  "gc49301d4": [
+   "кузбасский деловой союз"
+  ],
+  "ga2f25b66": [
+   "сибнефтепродукт"
+  ],
+  "g7ab56b51": [
+   "bilim group",
+   "билим групп"
+  ],
+  "g76b878ca": [
+   "beringpro",
+   "бп партнеры",
+   "берингпойнт"
+  ],
+  "g1bbb95d9": [
+   "fonte capital",
+   "fonte inceptia"
+  ],
+  "g0cafe252": [
+   "фонд горизонт",
+   "горизонт"
+  ],
+  "g8f1f069d": [
+   "раблз",
+   "rubbles"
+  ],
+  "g4f201549": [
+   "ibs",
+   "айбиэс"
+  ],
+  "g30baf27b": [
+   "рк 5-7",
+   "рк 5--7"
+  ],
+  "gdd85fbbf": [
+   "союз маринс групп",
+   "marins hotels"
+  ],
+  "g6afe404c": [
+   "тандем-истейт",
+   "тандем истейт"
+  ],
+  "gf9bc7955": [
+   "тд эдельвейс"
+  ],
+  "gcdb65170": [
+   "happy job",
+   "счастливая работа"
+  ],
+  "g3cf9290d": [
+   "wegosty",
+   "гости путеводители"
+  ],
+  "ga3e0371b": [
+   "морская миля"
+  ],
+  "g28762671": [
+   "русская рыбная компания",
+   "ррк"
+  ],
+  "ge8852322": [
+   "кодмастер",
+   "кдм"
+  ],
+  "g13b2a65e": [
+   "алор брокер",
+   "алор"
+  ],
+  "gda75c255": [
+   "русский стандарт водка",
+   "русский стандарт"
+  ],
+  "gc5c1cec7": [
+   "pridex",
+   "придекс"
+  ],
+  "g7b1c3941": [
+   "кодар"
+  ],
+  "gdf491665": [
+   "прииск соловьевский"
+  ],
+  "g7c8837f5": [
+   "горнопромышленная инвестиционная компания лункунь",
+   "лункунь"
+  ],
+  "gd061d4dc": [
+   "робатур"
+  ],
+  "g88a5c4c2": [
+   "южная фабрика стартапов"
+  ],
+  "g59f4de1d": [
+   "вим недвижимость",
+   "зпиф вим недвижимость",
+   "вим сбережения"
+  ],
+  "g2eaee278": [
+   "parametr",
+   "параметр"
+  ],
+  "g96801875": [
+   "фипс"
+  ],
+  "gd49c1a51": [
+   "инвестиционная группа к1",
+   "группа к1"
+  ],
+  "gec2d70f3": [
+   "кф кронштадтская",
+   "кронштадтская"
+  ],
+  "g736dc3f5": [
+   "юста",
+   "гк юста"
+  ],
+  "gf89319d9": [
+   "транснефть"
+  ],
+  "g21e04900": [
+   "truffle 2 gmbh",
+   "truffle"
+  ],
+  "g71a251f8": [
+   "whoisblogger",
+   "даблюайби"
+  ],
+  "gdccb7223": [
+   "самолет-сабанеева",
+   "сз самолет-сабанеева"
+  ],
+  "gc43e14be": [
+   "лидер строй"
+  ],
+  "gb04d9cfd": [
+   "комсомольская правда",
+   "ид комсомольская правда"
+  ],
+  "g3209dcd2": [
+   "миц известия"
+  ],
+  "g483cfb4f": [
+   "леста",
+   "леста геймс",
+   "wargaming"
+  ],
+  "g0682cdb7": [
+   "строй инвест",
+   "ооо строй инвест"
+  ],
+  "g218f246e": [
+   "афкап",
+   "ооо афкап"
+  ],
+  "ge53d0ff8": [
+   "руском голышманово",
+   "ооо руском 5507085811"
+  ],
+  "g41456481": [
+   "улугхемуголь",
+   "ооо улугхемуголь"
+  ],
+  "g264ec466": [
+   "королевство сладостей"
+  ],
+  "g41e754fb": [
+   "ава белоостровская",
+   "сз ава белоостровская"
+  ],
+  "gee63afc6": [
+   "гранель",
+   "гк гранель"
+  ],
+  "g5a214bdf": [
+   "консоль"
+  ],
+  "gd392372b": [
+   "айс девелопмент",
+   "ао айс девелопмент"
+  ],
+  "g3435cc07": [
+   "лимб",
+   "гк лимб"
   ]
  },
  "consumed_urls": [
