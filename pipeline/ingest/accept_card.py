@@ -112,6 +112,35 @@ STALE_STATEMENT_FIELDS = ('law.struct', 'law.terms')
 PARTY_IN_ASSET_NAME_EXEMPT = re.compile(
     r'\(российск\w+\s+бизнес|российск\w+\s+актив|\(бренд\s+\S+\s+в\s+росси', re.I)
 
+# Аудит 13 сентября 2026 (2420 находок, 62 партии): пять узких проверок,
+# каждая измерена на живой базе перед принятием (см. коммит с отчётом
+# `pipeline/audit_field_placement/2026-09-13-report.md`) — ни одна не даёт
+# ложных срабатываний на текущих 1382 карточках.
+#
+# Служебная вики-разметка источника (TAdviser): «Компания:», «Персона:»,
+# заголовок «История 20XX: …» — те же три маркера, что нашлись в трёх
+# карточках живой базы (gc5951fac, gac1a0c11, gb0f1f736), узнаваемы дословно.
+TADVISER_MARKUP_RE = re.compile(r'(?:^|\n)\s*(?:Компания|Персона)\s*:\s|История\s+20\d\d\s*:\s', re.I)
+# Обрыв текста многоточием на середине предложения — тот же класс, что уже
+# дважды чинился в draft.py (`truncate_note()`), но нашёлся снова в 9
+# карточках живой базы: либо путь записи другой, либо регрессия. Узкий
+# признак (текст оканчивается на «…»/«...») — обрыв в НАЧАЛЕ поля этим не
+# ловится, это отдельный, более редкий класс (см. TRUNCATED в отчёте).
+TRAILING_CUTOFF_RE = re.compile(r'(?:…|\.\.\.)\s*$')
+# Одна и та же фраза дословно в двух прозаических полях — расширение уже
+# существовавшей проверки `why_dup` (только rationale/extra) на соседние
+# пары, которые аудит нашёл дублирующими друг друга (`c59e65efb`,
+# `c71e19cc1`). Порог — точное совпадение после `review.flat()`, без
+# нечёткого сравнения: как и у `sum_fields_differ`, риска ложных
+# срабатываний нет, потому что совпадение либо есть побайтово, либо нет.
+DUPLICATE_PAIRS = (
+    ('eco.rationale', 'extra'),          # исторический код 'why_dup', не переименован
+    ('eco.rationale', 'eco.context'),
+    ('eco.context', 'extra'),
+    ('eco.share', 'extra'),
+    ('eco.rationale', 'eco.share'),
+)
+
 
 def has(v):
     return bool(v) and not PLACEHOLDER.match(str(v))
@@ -176,6 +205,21 @@ def queue(base, pending):
 
 def _text(card, field):
     return proofread.get_field(card, field) if '.' in field else card.get(field)
+
+
+def _scannable_texts(card):
+    """(поле, текст) по прозаическим полям и по заметкам этапов — общее место
+    для проверок, которым всё равно, где именно лежит текст (обрыв на
+    многоточии, чужая вики-разметка источника: оба класса находились в
+    аудите и в `events[].note`, и в обычных прозаических полях)."""
+    for f in PROSE_FIELDS:
+        v = _text(card, f)
+        if has(v):
+            yield f, str(v)
+    for i, e in enumerate(card.get('events') or []):
+        v = e.get('note') if isinstance(e, dict) else None
+        if has(v):
+            yield 'events[%d].note' % i, str(v)
 
 
 def _title_words(text):
@@ -456,8 +500,17 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         first = (format_post._sentences(rationale) or [''])[0]
         if format_post.NOT_A_MOTIVE.search(first):
             out.append(('why', '«Цель сделки» начинается с оценки рынка, а не с мотива'))
-        if has(card.get('extra')) and review.flat(rationale) == review.flat(card['extra']):
-            out.append(('why_dup', '«Цель сделки» дословно повторяет «Дополнительную информацию»'))
+    for fa, fb in DUPLICATE_PAIRS:
+        va, vb = _text(card, fa), _text(card, fb)
+        if has(va) and has(vb) and review.flat(str(va)) == review.flat(str(vb)):
+            code = 'why_dup' if (fa, fb) == ('eco.rationale', 'extra') else 'duplicate_text:%s=%s' % (fa, fb)
+            out.append((code, '«%s» дословно повторяет «%s»' % (fa, fb)))
+    for f, v in _scannable_texts(card):
+        if TADVISER_MARKUP_RE.search(v):
+            out.append(('tadviser_markup:' + f,
+                        'служебная вики-разметка источника (TAdviser) просочилась в %s: %r' % (f, v[:80])))
+        if TRAILING_CUTOFF_RE.search(v.rstrip()):
+            out.append(('truncated:' + f, 'текст обрывается многоточием на середине в %s: %r' % (f, v[-60:])))
     if not any(str(s[1]).startswith('http') for s in card.get('src') or [] if len(s) > 1):
         out.append(('source', 'ни одной http-ссылки в источниках'))
     for c in coverage(card):
@@ -497,6 +550,36 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                             'имя стороны «%s» — внутри имени предмета «%s» (см. Dogma/ПИК: имя '
                             'продавца должно стоять в %s, а не в имени профиля предмета)'
                             % (role_text, asset_text, role)))
+    # Аудит 13 сентября 2026: `check_answer()` уже проверяет описание-вместо-
+    # имени для НОВОГО профиля, который читатель создаёт этим же ответом
+    # (`review.ASSET_IS_A_DESCRIPTION.search(name)`), но не для профиля, УЖЕ
+    # существующего в базе, на который читатель просто ссылается — а именно
+    # так родился класс ASSET_IS_DESCRIPTION у 14 из 21 карточек аудита
+    # (профиль создан раньше, задолго до приёмки, другим путём). Тот же
+    # доверенный регэксп, применённый к уже привязанному имени: измерено на
+    # живой базе 13 сентября — 0 существующих профилей ему соответствуют, то
+    # есть находка появится только у НОВОГО совпадения, а не как шум сейчас.
+    for role, (_tf, idf) in ROLES.items():
+        cid = card.get(idf) or (role == 'target' and card.get('asset_id'))
+        name = comps.get(cid, {}).get('name') if cid else None
+        if name and role not in waived_names and review.ASSET_IS_A_DESCRIPTION.search(name):
+            out.append(('profile_name_is_description:' + role,
+                        '%s — профиль %r уже в базе, но имя — описание, а не имя компании; переименование '
+                        'профиля — отдельный скрипт, не эта карточка (см. `name_ok`, если сейчас не до этого)'
+                        % (role, name)))
+    # Та же проверка, что `test_source_label_matches_the_link` держит для
+    # всей базы (урок 9 сентября: подпись «@dealsma» на ссылке в
+    # torgi.gov) — здесь раньше, до того как карточка вообще попадёт в базу.
+    for item in card.get('src') or []:
+        if not (isinstance(item, list) and len(item) >= 2):
+            continue
+        label, url = str(item[0]), str(item[1])
+        if not url.startswith('http'):
+            continue
+        host = source_names.host_of(url)
+        if source_names.label_promises_telegram(label) and not host.endswith(('t.me', 'telegram.me')):
+            out.append(('source_telegram_mismatch',
+                        'подпись «%s» обещает Telegram, а ссылка ведёт на %s' % (label, host)))
     top_sum, eco_sum = card.get('sum'), (card.get('eco') or {}).get('sum')
     if has(top_sum) and has(eco_sum) \
             and normalize_sum.normalize_full(str(top_sum)) != normalize_sum.normalize_full(str(eco_sum)):
@@ -970,6 +1053,40 @@ def _self_check():
                 if c.startswith('inn_missing')]
     _RESOLVED.clear()
     _RESOLVED.update(saved)
+
+    # Аудит 13 сентября 2026 — пять новых механических классов.
+    card8 = {'id': 'gtest8', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+             'events': [{'kind': 'closed', 'date': '2026-01-01', 'title': 'x',
+                         'note': 'История 2026: компания купила другую в январе…'}],
+             'src': src1}
+    codes8 = {c for c, _t in findings(card8, base)}
+    assert 'tadviser_markup:events[0].note' in codes8, codes8
+    assert 'truncated:events[0].note' in codes8, codes8
+    card8b = dict(card8); card8b['events'] = [{'kind': 'closed', 'date': '2026-01-01', 'title': 'x',
+                                               'note': 'Сделка закрыта в январе 2026 года.'}]
+    codes8b = {c for c, _t in findings(card8b, base)}
+    assert not any(c.startswith(('tadviser_markup', 'truncated')) for c in codes8b), codes8b
+
+    card9 = {'id': 'gtest9', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+             'eco': {'rationale': 'Компания расширяет присутствие на рынке за счёт нового актива.',
+                     'context': 'Компания расширяет присутствие на рынке за счёт нового актива.'},
+             'src': src1}
+    assert 'duplicate_text:eco.rationale=eco.context' in {c for c, _t in findings(card9, base)}
+    card9b = dict(card9); card9b['eco'] = dict(card9['eco'], context='Совсем другой факт про сроки.')
+    assert 'duplicate_text:eco.rationale=eco.context' not in {c for c, _t in findings(card9b, base)}
+
+    base10 = {'companies': {'gdesc': {'name': 'компания-разработчик решений для ритейла',
+                                      'ind': 'ИТ и интернет', 'desc': 'x'}},
+              'deals': [], 'telegram_posts': {}}
+    card10 = {'id': 'gtest10', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+              'target': 'gdesc', 'src': src1}
+    assert 'profile_name_is_description:target' in {c for c, _t in findings(card10, base10)}
+
+    card11 = {'id': 'gtest11', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается', 'target': 'gsb',
+              'src': [['@dealsma (Telegram)', 'https://torgi.gov.ru/x']]}
+    assert 'source_telegram_mismatch' in {c for c, _t in findings(card11, base)}, findings(card11, base)
+    card11b = dict(card11); card11b['src'] = [['@dealsma (Telegram)', 'https://t.me/dealsma/12345']]
+    assert 'source_telegram_mismatch' not in {c for c, _t in findings(card11b, base)}
     return True
 
 

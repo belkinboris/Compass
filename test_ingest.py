@@ -3452,6 +3452,55 @@ def test_acceptance_findings_catch_the_2026_09_12_audit_classes():
         {c for c, _t in accept_card.findings(party_in_asset, base, waived_names={"seller": "не Dogma/ПИК"})}
 
 
+def test_acceptance_findings_catch_the_2026_09_13_audit_classes():
+    """Аудит адреса фактов (13 сентября 2026): пять узких классов из
+    отчёта `pipeline/audit_field_placement/2026-09-13-report.md` (2420
+    находок, 62 партии) — служебная вики-разметка TAdviser в тексте
+    события, обрыв текста многоточием (та же болезнь, что уже дважды
+    чинилась в draft.py, найдена снова), дословный дубль пары прозаических
+    полей за пределами уже проверявшейся rationale/extra, имя-описание у
+    УЖЕ СУЩЕСТВУЮЩЕГО (не только у нового) привязанного профиля и подпись
+    источника, обещающая Telegram, когда ссылка ведёт не туда (тот же
+    класс, что держит `test_source_label_matches_the_link` для всей базы,
+    здесь — раньше, до попадания карточки в базу). Каждое правило измерено
+    на живой базе перед принятием: ни одно не дало нового срабатывания,
+    кроме уже найденных аудитом карточек."""
+    import accept_card
+    base = {"companies": {
+        "gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."},
+        "gdesc": {"name": "компания-разработчик решений для ритейла", "ind": "ИТ и интернет", "desc": "x"},
+    }, "deals": [], "telegram_posts": {}}
+    src = [["Ведомости", "https://www.vedomosti.ru/x"]]
+
+    markup = {"id": "gt20", "title": "x", "type": "M&A", "status": "Обсуждается", "target": "gsb", "src": src,
+              "events": [{"kind": "closed", "date": "2026-01-01", "title": "x",
+                          "note": "История 2026: компания купила другую в январе…"}]}
+    codes = {c for c, _t in accept_card.findings(markup, base)}
+    assert "tadviser_markup:events[0].note" in codes, codes
+    assert "truncated:events[0].note" in codes, codes
+    clean_note = dict(markup, id="gt20b",
+                      events=[{"kind": "closed", "date": "2026-01-01", "title": "x",
+                               "note": "Сделка закрыта в январе 2026 года."}])
+    assert not any(c.startswith(("tadviser_markup", "truncated")) for c, _t in accept_card.findings(clean_note, base))
+
+    dup = {"id": "gt21", "title": "x", "type": "M&A", "status": "Обсуждается", "target": "gsb", "src": src,
+           "eco": {"rationale": "Компания расширяет присутствие на рынке за счёт нового актива.",
+                   "context": "Компания расширяет присутствие на рынке за счёт нового актива."}}
+    assert "duplicate_text:eco.rationale=eco.context" in {c for c, _t in accept_card.findings(dup, base)}
+    not_dup = dict(dup, id="gt21b", eco=dict(dup["eco"], context="Совсем другой факт про сроки закрытия."))
+    assert "duplicate_text:eco.rationale=eco.context" not in {c for c, _t in accept_card.findings(not_dup, base)}
+
+    old_profile = {"id": "gt22", "title": "x", "type": "M&A", "status": "Обсуждается",
+                   "target": "gdesc", "src": src}
+    assert "profile_name_is_description:target" in {c for c, _t in accept_card.findings(old_profile, base)}
+
+    mismatch = {"id": "gt23", "title": "x", "type": "M&A", "status": "Обсуждается", "target": "gsb",
+                "src": [["@dealsma (Telegram)", "https://torgi.gov.ru/x"]]}
+    assert "source_telegram_mismatch" in {c for c, _t in accept_card.findings(mismatch, base)}
+    fixed = dict(mismatch, id="gt23b", src=[["@dealsma (Telegram)", "https://t.me/dealsma/1"]])
+    assert "source_telegram_mismatch" not in {c for c, _t in accept_card.findings(fixed, base)}
+
+
 def test_acceptance_refuses_invented_names_descriptions_and_twins():
     """Ответ читателя не может внести выдумку: новое имя в заголовке, профиль
     с описанием вместо имени, профиль-близнец уже существующего, hold без
