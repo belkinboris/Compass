@@ -2,27 +2,27 @@
  "made": "2026-09-13",
  "drafts": [
   {
-   "draft_id": "d84201015",
-   "title": "Ларри Эллисон решил не продавать акции Oracle на $7,5 млрд",
+   "draft_id": "d71044950",
+   "title": "OpenAI не выйдет на IPO в 2026 году из-за ситуации с безопасностью ИИ",
    "date": "2026-09-13",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8953729"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/news/1350933.php"
     ]
    ],
-   "sum": "$7,5 млрд",
-   "type": "M&A",
+   "sum": null,
+   "type": "IPO",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-09-13",
      "title": "Переговоры",
-     "note": "Сооснователь и глава совета директоров технологической корпорации Oracle Ларри Эллисон отказался от намерения продать 50 млн ее акций по правилу 10b5-1 до конца октября. Их общая стоимость оценивается в $7,5 млрд.",
+     "note": "OpenAI не планирует проводить первичное размещение акций (IPO) в 2026 году. Об этом заявил гендиректор компании Сэм Альтман в интервью Fortune. «Не в 2026 году», — ответил Альтман на вопрос, стоит ли ждать IPO OpenAI в этом году. По его словам, компании…",
      "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8953729"
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/news/1350933.php"
      ]
     }
    ],
@@ -34,39 +34,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42352434",
-   "title": "Квартиру решили продать: старые ошибки в документах способны привести к спору",
-   "date": "2026-09-13",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/13/kvartiru-reshili-prodat-starye-oshibki-v-dokumentah-sposobny-privesti-k-sporu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
