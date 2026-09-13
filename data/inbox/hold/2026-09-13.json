@@ -2,17 +2,45 @@
  "made": "2026-09-13",
  "drafts": [
   {
-   "draft_id": "d42096571",
-   "title": "Аукционы Минфина — впервые за 2 месяца министерство представило классику, но без флоатеров квартальный план не выполнить.",
+   "draft_id": "d70260018",
+   "title": "Топливо по QR-кодам и сниженной цене будет в продаже в Севастополе в понедельник",
    "date": "2026-09-13",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1350976.php"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1115881"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83970894",
+   "title": "В США выставили на продажу Rolls-Royce, купленный Майклом Джексоном",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260913/dzhekson-2117470217.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
