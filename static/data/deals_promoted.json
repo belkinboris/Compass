@@ -214700,6 +214700,148 @@
      "multiple_text": "target_bank"
     }
    }
+  },
+  {
+   "id": "g2b62ae77",
+   "date": "2026-09-14",
+   "title": "Производитель электроники для авиации «Рубин» купил здания бывшего ВНИИ «Эталон» в центре Москвы за 1,16 млрд рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/267713"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1,16 млрд ₽",
+   "asset": "здания бывшего ВНИИ «Эталон» в центре Москвы",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "Авиационная корпорация «Рубин» приобрела у концерна «Созвездие» здания бывшего ВНИИ «Эталон» рядом с Белорусским вокзалом в Москве за 1,16 млрд рублей.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/267713"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Авиационная корпорация «Рубин»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.tadviser.ru/a/267713"
+     }
+    ],
+    "target": [
+     {
+      "value": "здания бывшего ВНИИ «Эталон» в центре Москвы",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/267713"
+     }
+    ],
+    "seller": [
+     {
+      "value": "концерн «Созвездие»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.tadviser.ru/a/267713"
+     }
+    ]
+   },
+   "seller": "концерн «Созвездие»",
+   "reviewed": "2026-09-14",
+   "buyer": "g1b7a92fe",
+   "seller_id": "g6765f7ba",
+   "accepted": "2026-09-14",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "здание/имущественный комплекс, не компания"
+    },
+    "no_inn": {
+     "buyer": "не найдено достоверно за отведённое время, требует отдельной проверки ЕГРЮЛ",
+     "seller": "не найдено достоверно за отведённое время, требует отдельной проверки ЕГРЮЛ"
+    },
+    "notes": "Отрасль сделки — покупка недвижимости (здания бывшего ВНИИ у Белорусского вокзала), а не авиационное приборостроение самого покупателя. ИНН сторон не установлены за один цикл притока — оставлено на дочитывание."
+   },
+   "post_preview": "<b>Производитель электроники для авиации «Рубин» купил здания бывшего ВНИИ «Эталон» в центре Москвы за 1,16 млрд рублей</b>\n\n<b>Покупатель:</b> Авиационная корпорация «Рубин»\n<b>Продавец:</b> Концерн «Созвездие»\n<b>Сумма:</b> 1,16 млрд ₽\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.tadviser.ru/a/267713\">TAdviser</a>\n\n#недвижимость #MA",
+   "added": "2026-09-14",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "ec128241a046"
+    },
+    "price": {
+     "value_rub": 1160000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "116fb4287e68"
+    },
+    "date": {
+     "value": "2026-09-14",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "786078c9aad3"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7c6f2929022b"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
