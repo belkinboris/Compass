@@ -2,7 +2,7 @@
  "made": "2026-09-14",
  "drafts": [
   {
-   "draft_id": "d32584542",
+   "draft_id": "d53000843",
    "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
    "date": "2026-09-14",
    "src": [
@@ -41,7 +41,7 @@
    ]
   },
   {
-   "draft_id": "d70593041",
+   "draft_id": "d36212938",
    "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
    "date": "2026-09-14",
    "src": [
@@ -80,7 +80,7 @@
    ]
   },
   {
-   "draft_id": "d38435524",
+   "draft_id": "d41729112",
    "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
    "date": "2026-09-14",
    "src": [
@@ -105,254 +105,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d73407799",
-   "title": "Трудовые мигранты потратили на онлайн-покупки 1,2 млрд рублей",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/09/14/1228574-trudovie-migranti"
-    ]
-   ],
-   "sum": "1,2 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78576510",
-   "title": "В Казани пенсионерка продала квартиру и отдала мошенникам свыше 11 млн рублей",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/proisshestviya/28109875"
-    ]
-   ],
-   "sum": "11 млн ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-14",
-     "title": "Сделка завершена",
-     "note": "Женщина отдала деньги курьеру",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/proisshestviya/28109875"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "квартира и отдала мошенникам свыше 11 млн рублей",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "квартира и отдала мошенникам свыше 11 млн рублей",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d45932576",
-   "title": "Belga: обложку комикса «Астерикс в Британии» продали за рекордные €1,2 млн",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28109857"
-    ]
-   ],
-   "sum": "€1,2 млн",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-14",
-     "title": "Сделка завершена",
-     "note": "Перед торгами она оценивалась в €150-200 тыс., передает агентство",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/kultura/28109857"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "за рекордные €1,2 млн",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "за рекордные €1,2 млн",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d33126088",
-   "title": "По-видимому Мосбиржа по акциям Евротранса проводит дискретный аукцион из-за роста цены более, чем на 20%. Но это не точно, потому что сообщение Мосбиржи опубликовано на непонятном для россиян языке",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/news/1351136.php"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88789435",
-   "title": "Нигерийская компания проведет крупнейшее IPO в Африке",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/304584"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d10698407",
-   "title": "Россияне опустошают маркетплейсы: что они срочно покупают этой осенью домой",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053127060"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "эта осень домой",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "эта осень домой",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d81411991",
-   "title": "В центре Кургана продают гостиницу в историческом здании",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053127038"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25187991",
-   "title": "Звонок стал только первым шагом: мошенники перешли к комбинированным атакам",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/14/zvonok-stal-tolko-pervym-shagom-moshenniki-pereshli-k-kombinirovannym-atakam"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
