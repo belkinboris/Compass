@@ -2,7 +2,7 @@
  "made": "2026-09-14",
  "drafts": [
   {
-   "draft_id": "d69825796",
+   "draft_id": "d74440527",
    "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
    "date": "2026-09-14",
    "src": [
@@ -41,7 +41,7 @@
    ]
   },
   {
-   "draft_id": "d42673903",
+   "draft_id": "d12037793",
    "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
    "date": "2026-09-14",
    "src": [
@@ -80,7 +80,7 @@
    ]
   },
   {
-   "draft_id": "d60384906",
+   "draft_id": "d80306413",
    "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
    "date": "2026-09-14",
    "src": [
@@ -108,17 +108,159 @@
    ]
   },
   {
-   "draft_id": "d27672851",
-   "title": "В Роскачестве рассказали об опасности покупки билетов на концерты с рук",
+   "draft_id": "d36324178",
+   "title": "Reuters: производитель роботов Boston Dynamics не будет проводить IPO в 2027 году",
    "date": "2026-09-14",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260914/roskachestvo-2117576757.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8954300"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d77148739",
+   "title": "OpenAI не будет проводить IPO в 2026 году",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1116009"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d46356420",
+   "title": "Кумпилов: свыше 3 млрд рублей инвестировали в развитие Адыгейска за пять лет",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28110619"
+    ]
+   ],
+   "sum": "3 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "развитие Адыгейска за пять лет",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "развитие Адыгейска за пять лет",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d85826790",
+   "title": "Эксперт назвал лучшее время для выгодной покупки нового авто в России",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2166743/2026-09-14/ekspert-nazval-luchshee-vremia-dlia-vygodnoi-pokupki-novogo-avto-v-rossii"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63047534",
+   "title": "Вложения россиян в инвестиционные и страховые услуги выросли в 2,2 раза",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260914/vlozhenija-873275672.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Страхование",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74567855",
+   "title": "Инвестиции в сельское хозяйство Кубани снизились до 54,4 млрд рублей",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/krasnodar/2026/9/14/investiczii-v-selskoe-hozyajstvo-kubani-snizilis-do-544-mlrd-rublej"
+    ]
+   ],
+   "sum": "54,4 млрд ₽",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -136,13 +278,13 @@
    ]
   },
   {
-   "draft_id": "d72050854",
-   "title": "Россиянам назвали выгодный период для покупки машины",
+   "draft_id": "d79605444",
+   "title": "Воровство и «выкуп» места на проекте. На что еще были готовы участники шоу «Большой куш» ради полуфинала",
    "date": "2026-09-14",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/14/rossiyanam-nazvali-vygodnyy-period-dlya-pokupki-mashiny/"
+     "web:74.ru",
+     "https://74.ru/text/entertainment/2026/09/14/76641393/"
     ]
    ],
    "sum": null,
