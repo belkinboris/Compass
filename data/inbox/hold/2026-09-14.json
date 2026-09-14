@@ -1,0 +1,196 @@
+{
+ "made": "2026-09-14",
+ "drafts": [
+  {
+   "draft_id": "d23306639",
+   "title": "Anthropic выбрала Nasdaq для проведения потенциально рекордного IPO",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/13/1228499-anthropic-vibrala-nasdaq"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d34147804",
+   "title": "Купленный Майклом Джексоном Rolls-Royce выставили на аукцион",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6aa73b4f64d87df88be80b21"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35156543",
+   "title": "Рыбаки поймали 300-килограммового тунца и продали его суши-ресторану",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/14/rybaki-poymali-300-kilogrammovogo-tuntsa-i-prodali-ego-sushi-restoranu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/09/14/rybaki-poymali-300-kilogrammovogo-tuntsa-i-prodali-ego-sushi-restoranu/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "его суши-ресторану",
+   "seller": "Рыбаки поймали 300-килограммового тунца и",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "его суши-ресторану",
+    "seller": "Рыбаки поймали 300-килограммового тунца и"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d82796918",
+   "title": "Россиянам напомнили о важнейшей процедуре перед продажей недвижимости",
+   "date": "2026-09-13",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/13/rossiyanam-napomnili-o-vazhneyshey-protsedure-pered-prodazhey-nedvizhimosti/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45591563",
+   "title": "В пермской зоне высадки НЛО продают за миллионы рублей молочную ферму",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053126911"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-14",
+     "title": "Переговоры",
+     "note": "В деревне Молебке Пермского края, которая больше известна как аномальная зона, где часто появляются инопланетяне, выставили на продажу ферму для разведения крупного рогатого скота.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053126911"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43531872",
+   "title": "Зерно есть, а продать нельзя: во что российским фермерам обходится цифровизация, которую специалисты считают «кривой»",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/economics/2026/09/14/76637857/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
