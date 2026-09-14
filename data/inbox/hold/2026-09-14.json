@@ -2,7 +2,7 @@
  "made": "2026-09-14",
  "drafts": [
   {
-   "draft_id": "d74440527",
+   "draft_id": "d71385181",
    "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
    "date": "2026-09-14",
    "src": [
@@ -41,7 +41,7 @@
    ]
   },
   {
-   "draft_id": "d12037793",
+   "draft_id": "d12825312",
    "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
    "date": "2026-09-14",
    "src": [
@@ -80,7 +80,7 @@
    ]
   },
   {
-   "draft_id": "d80306413",
+   "draft_id": "d91678065",
    "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
    "date": "2026-09-14",
    "src": [
@@ -108,45 +108,16 @@
    ]
   },
   {
-   "draft_id": "d36324178",
-   "title": "Reuters: производитель роботов Boston Dynamics не будет проводить IPO в 2027 году",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8954300"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d77148739",
-   "title": "OpenAI не будет проводить IPO в 2026 году",
+   "draft_id": "d56087045",
+   "title": "Anthropic хочет привлечь рекордные $100 млрд в ходе IPO на Nasdaq с участием Nvidia",
    "date": "2026-09-14",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/business/1116009"
+     "https://www.interfax.ru/business/1116021"
     ]
    ],
-   "sum": null,
+   "sum": "$100 млрд",
    "type": "IPO",
    "status": null,
    "events": [],
@@ -166,41 +137,13 @@
    ]
   },
   {
-   "draft_id": "d46356420",
-   "title": "Кумпилов: свыше 3 млрд рублей инвестировали в развитие Адыгейска за пять лет",
+   "draft_id": "d47265901",
+   "title": "При продаже топлива на бирже разрешили учитывать поставки тепловым и электростанциям",
    "date": "2026-09-14",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28110619"
-    ]
-   ],
-   "sum": "3 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "развитие Адыгейска за пять лет",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "развитие Адыгейска за пять лет",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d85826790",
-   "title": "Эксперт назвал лучшее время для выгодной покупки нового авто в России",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2166743/2026-09-14/ekspert-nazval-luchshee-vremia-dlia-vygodnoi-pokupki-novogo-avto-v-rossii"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1116016"
     ]
    ],
    "sum": null,
@@ -215,20 +158,61 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Здравоохранение",
+   "ind": "Энергетика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d63047534",
-   "title": "Вложения россиян в инвестиционные и страховые услуги выросли в 2,2 раза",
+   "draft_id": "d17469088",
+   "title": "Владельцы разработчика процессора «Иртыш» купили контрольную долю в российском дизайн-центре",
    "date": "2026-09-14",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260914/vlozhenija-873275672.html"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Vladelcy-razrabotchika-processora-Irtysh-kupili-kontrolnuyu-dolyu-v-rossijskom-dizajn-centre-87513"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "АО «Трамплин Холдинг», владеющее разработчиком процессора «Иртыш» («Трамплин электроникс») приобрело контрольный пакет в микроэлектронном дизайн-центре Malt System. Эту долю компания выкупила у основателя дизайн-центра Сергея Елизарова, теперь ему принадлежит…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Vladelcy-razrabotchika-processora-Irtysh-kupili-kontrolnuyu-dolyu-v-rossijskom-dizajn-centre-87513"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "контрольная доля в российском дизайн-центре",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "контрольная доля в российском дизайн-центре",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g7a96dda2 (общие редкие слова: процес, разраб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d91817908",
+   "title": "AstraZeneca не смогла добиться запрета продажи дженерика Форсиги от «Герофарма»",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/09/14/astrazeneca-ne-smogla-dobitsya-zapreta-prodazhi-dzhenerika-forsigi-ot-gerofarma/"
     ]
    ],
    "sum": null,
@@ -243,24 +227,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Страхование",
+   "ind": "Фармацевтика",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d74567855",
-   "title": "Инвестиции в сельское хозяйство Кубани снизились до 54,4 млрд рублей",
+   "draft_id": "d12995577",
+   "title": "Аналитический центр ДОМ.РФ: продажи новостроек за 8 месяцев 2026 года",
    "date": "2026-09-14",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/9/14/investiczii-v-selskoe-hozyajstvo-kubani-snizilis-do-544-mlrd-rublej"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/domrf/blog/1351267.php"
     ]
    ],
-   "sum": "54,4 млрд ₽",
-   "type": "Инвестиция",
+   "sum": "357 млрд ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -271,20 +255,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d79605444",
-   "title": "Воровство и «выкуп» места на проекте. На что еще были готовы участники шоу «Большой куш» ради полуфинала",
+   "draft_id": "d77609435",
+   "title": "В Пермском крае продают охотничьи угодья вблизи уникальных природных достопримечательностей",
    "date": "2026-09-14",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/entertainment/2026/09/14/76641393/"
+     "web:ura.news",
+     "https://ura.news/news/1053127160"
     ]
    ],
    "sum": null,
