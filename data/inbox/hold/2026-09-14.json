@@ -2,7 +2,7 @@
  "made": "2026-09-14",
  "drafts": [
   {
-   "draft_id": "d85297997",
+   "draft_id": "d27142242",
    "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
    "date": "2026-09-14",
    "src": [
@@ -41,7 +41,7 @@
    ]
   },
   {
-   "draft_id": "d26691123",
+   "draft_id": "d66514044",
    "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
    "date": "2026-09-14",
    "src": [
@@ -80,7 +80,7 @@
    ]
   },
   {
-   "draft_id": "d76190510",
+   "draft_id": "d11603488",
    "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
    "date": "2026-09-14",
    "src": [
@@ -108,17 +108,56 @@
    ]
   },
   {
-   "draft_id": "d88936998",
-   "title": "Траты россиян на покупку новых отечественных авто выросли почти вдвое",
+   "draft_id": "d57710724",
+   "title": "ВТБ планирует продать  «Росгосстраха» к 1 апреля 2027 года",
    "date": "2026-09-14",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2166819/2026-09-14/traty-rossiian-na-pokupku-novykh-otechestvennykh-avto-vyrosli-pochti-vdvoe"
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-planiruet-prodat-Rosgosstraha-k-1-aprelya-2027-goda-87517"
     ]
    ],
-   "sum": "107 млрд ₽",
+   "sum": null,
    "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-14",
+     "title": "Переговоры",
+     "note": "Как рассказал журналистам первый зампред ВТБ Дмитрий Пьянов, банк планирует продать «Росгосстрах» до 1 апреля 2027 года. «С большой вероятностью — внутри 2026 года»,— уточнил он. Господин Пьянов говорит, что есть два кандидата, лишь уточняя, что «это точно не…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-planiruet-prodat-Rosgosstraha-k-1-aprelya-2027-goda-87517"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35186179",
+   "title": "Права Бурдина по долгам «Трансаэро» на 174 млрд руб выставляются на торги",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260914/pravo-873281632.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -136,118 +175,31 @@
    ]
   },
   {
-   "draft_id": "d34329193",
-   "title": "Не хватает денег на покупку — не обязательно продавать другие активы",
+   "draft_id": "d13332328",
+   "title": "Волков: Люберцы привлекли компании с инвестпортфелем более 82 млрд рублей",
    "date": "2026-09-14",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/bcs/blog/1351318.php"
+     "web:ria.ru",
+     "https://ria.ru/20260914/volkov-2117633052.html"
     ]
    ],
-   "sum": null,
+   "sum": "82 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Волков: Люберцы",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Волков: Люберцы",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76409249",
-   "title": "Россиянам предоставят право на покупку противогаза",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/14/razreshili/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65532638",
-   "title": "Покупка смартфона в соцсети обернулась для астраханки потерей денег",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/9/14/pokupka-smartfona-v-soczseti-obernulas-dlya-astrahanki-poterej-deneg"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d38007966",
-   "title": "Каждая третья компания работает в убыток, а новостройки не продаются: главные экономические новости недели",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/economics/2026/09/14/76641822/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
