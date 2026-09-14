@@ -2,35 +2,7 @@
  "made": "2026-09-14",
  "drafts": [
   {
-   "draft_id": "d87220011",
-   "title": "Uniper продает свою долю в 20% в газопроводе OPAL",
-   "date": "2026-09-14",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260914/uniper-873261917.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "свою долю в 20% в газопроводе OPAL",
-   "seller": "Uniper",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "свою долю в 20% в газопроводе OPAL",
-    "seller": "Uniper"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d21785688",
+   "draft_id": "d45633955",
    "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
    "date": "2026-09-14",
    "src": [
@@ -69,7 +41,7 @@
    ]
   },
   {
-   "draft_id": "d51799089",
+   "draft_id": "d29875310",
    "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
    "date": "2026-09-14",
    "src": [
@@ -108,7 +80,7 @@
    ]
   },
   {
-   "draft_id": "d88752414",
+   "draft_id": "d64383879",
    "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
    "date": "2026-09-14",
    "src": [
@@ -133,6 +105,73 @@
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d16637269",
+   "title": "Rolls-Royce матери Майкла Джексона выставили на аукцион",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2166583/video/rolls-royce-materi-maikla-dzheksona-vystavili-na-auktcion"
+    ]
+   ],
+   "sum": "$49 тыс",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "Купленный Майклом Джексоном Rolls-Royce выставили на продажу. Silver Spur приобрели в 1984 году в качестве подарка для матери артиста, передает телеканал «Известия» . Седан оснащен бензиновым V8 и автоматической коробкой передач. Пробег — 118 тыс. км, в…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2166583/video/rolls-royce-materi-maikla-dzheksona-vystavili-na-auktcion"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91639785",
+   "title": "В России выставили на продажу редкий электромобиль Lada",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/14/v-rossii-vystavili-na-prodazhu-redkiy-elektromobil-lada/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
