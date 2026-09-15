@@ -211772,7 +211772,8 @@
      "target": "предмет — само создаваемое СП, а не существующая компания; профиль ради названия партнёрства не заводится (та же конвенция, что у gaa603e6d/gmru-geotek-bashneftegeofizika)"
     },
     "notes": "type исправлен с M&A на «Создание СП» (партнёрство, не покупка — buyer/seller у СП намеренно не заполняются, см. конвенцию); asset описывает состав и предмет СП"
-   }
+   },
+   "weekly_researched": "2026-09-15"
   },
   {
    "id": "g3ecb7b86",
@@ -214723,21 +214724,29 @@
   },
   {
    "id": "g2b62ae77",
-   "date": "2026-09-14",
+   "date": "2026-09-10",
    "title": "Производитель электроники для авиации «Рубин» купил здания бывшего ВНИИ «Эталон» в центре Москвы за 1,16 млрд рублей",
    "ind": "Недвижимость",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": "Закрыта",
    "src": [
     [
      "TAdviser",
      "https://www.tadviser.ru/a/267713"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8878630"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260910/rubin-2116889627.html"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "Концерн «Созвездие» (входит в «Ростех») выставлял на торги земельный участок площадью 0,34 гектара (1-я улица Ямского Поля, 19) и восьмиэтажное здание площадью 7,7 тысячи квадратных метров 1950-х годов постройки. В составе лота также долгосрочная аренда соседнего участка площадью 0,13 гектара. Оба участка — в границах проекта комплексного развития территории.",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
@@ -214746,7 +214755,7 @@
     "finadv": "—"
    },
    "law": {
-    "struct": "—",
+    "struct": "Авиационная корпорация «Рубин» подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ «Эталон».",
     "appr": "—",
     "adv": [],
     "terms": "—"
@@ -214812,30 +214821,30 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ec128241a046"
+     "card_hash": "2e7aae7a47ef"
     },
     "price": {
      "value_rub": 1160000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "116fb4287e68"
+     "card_hash": "d80f914640f7"
     },
     "date": {
-     "value": "2026-09-14",
+     "value": "2026-09-10",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "786078c9aad3"
+     "card_hash": "a4f5a8523db8"
     },
     "nature": {
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7c6f2929022b"
+     "card_hash": "e014d945e7ad"
     },
     "target": {
      "company_id": null,
@@ -214859,10 +214868,19 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-09-14"
+   "proofread": "2026-09-14",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "deep_researched": "2026-09-15",
+   "proofread_absorbed": {
+    "eco.share": [
+     "09a7286fdd0c"
+    ]
+   }
   }
  ],
  "companies": {
