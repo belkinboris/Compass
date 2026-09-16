@@ -214903,6 +214903,129 @@
      "09a7286fdd0c"
     ]
    }
+  },
+  {
+   "id": "g7c536b72",
+   "date": "2026-09-14",
+   "title": "«Дом.РФ» продает старинную усадьбу в Рязанской области",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260914/batashovy-2117589004.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "Начальная цена лота — 14,7 миллиона рублей, торги назначены на 18 сентября.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "промышленно-усадебный комплекс",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "промышленно-усадебный комплекс",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260914/batashovy-2117589004.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260914/batashovy-2117589004.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "reviewed": "2026-09-14",
+   "accepted": "2026-09-14",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "имущественный комплекс (здания и участок), не компания"
+    },
+    "notes": "Объявление о предстоящих торгах (18 сентября, старт 14,7 млн ₽), не закрытая сделка — статус «Обсуждается» верен. Продавец — уже существующий профиль АО «ДОМ.РФ». ИНН продавца не нужен отдельно (публичная госструктура, профиль уже полный). «Баташовых» в имени объекта — родительный падеж фамилии владельцев усадьбы (стандартное название памятника, как «дом Пушкина»), не ошибка падежа."
+   },
+   "post_preview": "<b>«Дом.РФ» продает старинную усадьбу в Рязанской области</b>\n\n<b>Предмет:</b> промышленно-усадебный комплекс\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20260914/batashovy-2117589004.html\">РИА Недвижимость</a>\n\n#недвижимость #MA",
+   "proofread_absorbed": {
+    "eco.val": [
+     "b8784e435ef5"
+    ]
+   },
+   "proofread": "2026-09-14",
+   "added": "2026-09-16",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "804ce44d39b8"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-09-14",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a01880f63c96"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2d8a8f0f8f8f"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
