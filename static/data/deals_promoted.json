@@ -211805,6 +211805,10 @@
     [
      "tehnowar.ru",
      "https://tehnowar.ru/581989-domrf_stal_vladelycem_proizvoditelya_liftov_meteor_lift.html"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/S8-Capital-prodala-DomRF-liftovoj-biznes-87489"
     ]
    ],
    "from_ingest": true,
@@ -214634,6 +214638,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8940331"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Sovko-kapital-partners-narastil-dolyu-v-Sovkombanke-za-schet-nenazvannogo-akcionera-87497"
     ]
    ],
    "from_ingest": true,
@@ -235981,6 +235989,24 @@
    "ind": "Машиностроение",
    "desc": "Структура госкорпорации «Ростех».",
    "kpi": []
+  },
+  "g6fc583df": {
+   "name": "Defbox",
+   "ind": "ИТ и интернет",
+   "desc": "Платформа для практической подготовки корпоративных ИБ-команд: лабораторные стенды с уязвимыми виртуальными машинами, сценарии атак и материалы для Red Team, Blue Team, SOC-инженеров и пентестеров. Юрлицо — ООО «Дефбокс».",
+   "kpi": []
+  },
+  "gdc39cc69": {
+   "name": "Metascan",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик решений в сфере информационной безопасности.",
+   "kpi": []
+  },
+  "g5f73fcaf": {
+   "name": "«Русская промышленная компания»",
+   "ind": "Уголь",
+   "desc": "Угледобывающий холдинг; управляет активами в сфере добычи и обогащения угля и антрацита. Зарегистрирован в мае 2026 года, гендиректор — Феликс Нахшунов.",
+   "kpi": []
   }
  },
  "match_keys": {
@@ -242448,6 +242474,9 @@
   ],
   "g6765f7ba": [
    "концерн созвездие"
+  ],
+  "g5f73fcaf": [
+   "русская промышленная компания"
   ]
  },
  "consumed_urls": [
