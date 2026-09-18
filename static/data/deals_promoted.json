@@ -210416,7 +210416,7 @@
   {
    "id": "g672c6dfe",
    "date": "2025-07-29",
-   "title": "Павел Тё вышел из капитала ООО «СМ»",
+   "title": "Павел Тё вышел из доли в Рязанской чаеразвесочной фабрике",
    "ind": "Пищепром и напитки",
    "type": "M&A",
    "status": "Закрыта",
@@ -210459,13 +210459,13 @@
     ]
    },
    "seller_id": "g4544d3b3",
-   "target": "goooosm",
+   "target": "g8ee31e1c",
    "proofread": "2026-09-04",
    "facts": {
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a7f56a31940b"
+     "card_hash": "600f3cc189e3"
     },
     "price": {
      "value_rub": null,
@@ -210488,17 +210488,17 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ee5b1a439be1"
+     "card_hash": "16f98da6a4ff"
     },
     "target": {
-     "company_id": "goooosm",
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g8ee31e1c",
+     "inn": "6234150771",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "22ac6b6eb1d5"
+     "card_hash": "c8d9798de49a"
     },
     "admitted": {
      "count": true,
@@ -210512,7 +210512,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "reviewed": "2026-09-13",
