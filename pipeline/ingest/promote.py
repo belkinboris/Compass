@@ -815,19 +815,19 @@ def main(write):
         # кандидату: draft_id меняется от прогона к прогону, а адрес и
         # кандидат — нет, и по нему `resolve_duplicates.py` не покажет
         # дважды то, что уже было решено (см. resolved.json).
-        existing = []
+        existing_dups = []
         if os.path.exists(dup_file):
-            existing = json.load(open(dup_file, encoding='utf-8')).get('items') or []
-        seen_keys = {item.get('key') for item in existing}
+            existing_dups = json.load(open(dup_file, encoding='utf-8')).get('items') or []
+        seen_keys = {item.get('key') for item in existing_dups}
         for draft, candidate_id, reason in dup_queue:
             urls = [str(s[1]) for s in (draft.get('src') or []) if len(s) > 1]
             key = '%s::%s' % (urls[0] if urls else draft.get('title'), candidate_id)
             if key in seen_keys:
                 continue
-            existing.append({'key': key, 'candidate_id': candidate_id, 'reason': reason,
-                              'draft': draft, 'queued': day})
+            existing_dups.append({'key': key, 'candidate_id': candidate_id, 'reason': reason,
+                                   'draft': draft, 'queued': day})
             seen_keys.add(key)
-        json.dump({'made': day, 'items': existing}, open(dup_file, 'w', encoding='utf-8'),
+        json.dump({'made': day, 'items': existing_dups}, open(dup_file, 'w', encoding='utf-8'),
                   indent=1, ensure_ascii=False)
         print('  (кандидаты на дубль сложены в data/inbox/duplicates/%s.json — '
               'читает resolve_duplicates.py, не консоль)' % day)

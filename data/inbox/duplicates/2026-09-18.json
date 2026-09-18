@@ -1,0 +1,78 @@
+{
+ "made": "2026-09-18",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/8956817::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d72693909",
+    "title": "Тодд Бёли продал свою долю в «Челси»",
+    "date": "2026-09-17",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8956817"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-09-17",
+      "title": "Сделка завершена",
+      "note": "Миллиардеры-финансисты Тодд Бёли и Марк Уолтер продали Clearlake Capital Group свои доли в лондонском «Челси». Компания стала единственным владельцем футбольного клуба.",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/8956817"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "своя доля в «Челси»",
+    "seller": "Тодд Бёли",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "своя доля в «Челси»",
+     "seller": "Тодд Бёли"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-18"
+  },
+  {
+   "key": "https://realty.ria.ru/20260916/gostinitsa-2118020812.html::g3ecb7b86",
+   "candidate_id": "g3ecb7b86",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d67912503",
+    "title": "«Дом.РФ» продает гостиницу «Мадрид» в Екатеринбурге",
+    "date": "2026-09-16",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260916/gostinitsa-2118020812.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "гостиница «Мадрид» в Екатеринбурге",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "гостиница «Мадрид» в Екатеринбурге",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": "Гостиницы и туризм",
+    "needs_review": true
+   },
+   "queued": "2026-09-18"
+  }
+ ]
+}
