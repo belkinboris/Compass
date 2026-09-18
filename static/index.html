@@ -3844,6 +3844,15 @@ const KIND_LABELS = {
   credit:      {a:"Кредитор",b:"Заёмщик",empty:"Стороны не раскрыты",arrow:true},
   ipo:         {a:"Эмитент",b:null,empty:"Эмитент не раскрыт",arrow:false},
   reorg:       {a:"Правопреемник",b:"Присоединяемое общество",empty:"Стороны не раскрыты",arrow:true},
+  /* Национализация/временное управление по указу президента (Ariston, Carlsberg,
+     Danone, CanPack — и 17 сентября 2026 Nestlé/«Ашан»/FM Logistic/«Лемана ПРО»):
+     нет покупателя и продавца — есть временный управляющий, назначенный указом,
+     и актив, переданный ему в управление. Владелец 18 сентября 2026 о карточке
+     «Ашана»: «когда национализируют активы там нет покупателя и продавца, там
+     только может быть предмет и бывший владелец и новый владелец». d.kind
+     выставляется вручную (см. buyerRole/targetRole/dealPlate ниже) — из строки
+     type это не вывести, «M&A» здесь формально верно, но ролей не называет. */
+  custody:     {a:"Временный управляющий",b:"Актив под управлением",empty:"Управляющий не раскрыт",arrow:true},
 };
 function dealKindOf(typeStr){
   const t = (typeStr||"").toLowerCase();
@@ -4426,8 +4435,13 @@ const REORG_ROLES = {
   "выделение": {a:"Реорганизуемое общество", b:"Выделяемое общество"},
 };
 const reorgRoles = d => REORG_ROLES[d.reorg_form] || {a:"Правопреемник", b:"Присоединяемое общество"};
-const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : "Покупатель";
-const targetRole = d => isReorg(d) ? reorgRoles(d).b : "Предмет сделки";
+/* Национализация/временное управление — тоже своя пара ролей, и тоже не
+   выводится из типа сделки (type остаётся «M&A», как и для обычной покупки):
+   различает только явно проставленный d.kind (см. KIND_LABELS.custody). */
+const isCustody = d => d.kind === "custody" && dealKindOf(d.type) === "acquisition";
+const CUSTODY_ROLES = {a:"Временный управляющий", b:"Актив под управлением"};
+const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : isCustody(d) ? CUSTODY_ROLES.a : "Покупатель";
+const targetRole = d => isReorg(d) ? reorgRoles(d).b : isCustody(d) ? CUSTODY_ROLES.b : "Предмет сделки";
 
 function knownRowsHtml(d, withSum){
   const known = [];
@@ -4897,6 +4911,34 @@ function renderDeal(id, qs, previewCard){
             ${survivorBox}
             <div class="dp-link">${sum?`<span class="dp-sum num">${sum}</span>`:""}<span class="dp-arrow"></span></div>
             ${absorbedBox}
+          </div></div>`;
+      }
+      /* Временное управление по указу президента — своя пара боксов, той же
+         формы, что у реорганизации: нет продавца (владелец актива его не
+         продавал — у него изъяли право управления), нет и «покупателя» в
+         экономическом смысле, есть назначенный управляющий и переданный ему
+         актив. Плашка «Продавец → Предмет → Покупатель» веткой acquisition
+         ниже рисовала бы оба как «Не раскрыт» — это не честная пустота, а
+         несуществующие роли, поданные как забытые поля (тот же класс, что уже
+         описан для допэмиссии cash-in в CLAUDE.md). */
+      if(kindKey==="custody"){
+        if(!buyerName && !d.buyer_name && !targetName && !d.asset) return "";
+        const managerBox = buyerName
+          ? party(buyerRole(d), d.buyer, buyerName)
+          : d.buyer_name
+            ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">${d.buyer_name}</span></div>`
+            : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
+        const custodyAssetName = targetName || d.asset || "";
+        const assetBox = custodyAssetName
+          ? (targetName
+              ? party(targetRole(d), d.target, targetName)
+              : `<div class="dp-party"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">${custodyAssetName}</span></div>`)
+          : `<div class="dp-party is-empty"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
+        return `<div class="deal-plate"><span class="label">Структура сделки</span>
+          <div class="dp-row">
+            ${managerBox}
+            <div class="dp-link"><span class="dp-arrow"></span></div>
+            ${assetBox}
           </div></div>`;
       }
       if(!kind.arrow) return "";

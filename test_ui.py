@@ -2001,6 +2001,60 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
             pending_path.write_text(backup, encoding="utf-8")
 
 
+def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
+    """18 сентября 2026: владелец увидел черновик карточки «Ашана»
+    (национализация/временное управление по указу президента) и написал
+    прямо — «когда национализируют активы там нет покупателя и продавца, там
+    только может быть предмет и бывший владелец и новый владелец... что за
+    позор вообще находится в блоке «Команда сделки»?». Причина: `d.target`
+    был проставлен, а `d.buyer`/`d.seller` — нет, и ветка `kindKey===
+    "acquisition"` в `dealPlate()` честно, но неверно рисовала «Продавец: Не
+    раскрыт» и «Покупатель: Не раскрыт» — таких ролей у указа о временном
+    управлении нет вовсе. Починено новым `kindKey==="custody"`
+    (`static/index.html`): роли «Временный управляющий»/«Актив под
+    управлением», без «Продавца» вовсе. `g9ba426b0` (АО «Л.Е.В. Менеджмент»)
+    и `gd835e8a5` («Ашан») — настоящие профили из базы, не выдуманные для
+    теста."""
+    import json as _json
+    pending_path = Path("static/data/pending.json")
+    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
+    card = {"id": "gtest-custody", "date": "2026-09-17",
+            "title": "«Тест-Превью» в России передан во временное управление по указу Президента РФ",
+            "ind": "Ритейл", "type": "M&A", "status": "Закрыта", "kind": "custody",
+            "src": [["источник", "https://example.invalid/custody"]],
+            "buyer": "g9ba426b0", "target": "gd835e8a5",
+            "eco": {"sum": "—", "share": "Указ передаёт 100% ООО «Тест-Превью» во временное управление.",
+                     "val": "—", "target_fin": "—", "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "Указ вступает в силу со дня опубликования.", "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-09-17T00:00:00+00:00"}
+    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    errors = []
+    try:
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        visit(page, base_url, "#/preview/gtest-custody")
+        page.wait_for_timeout(900)
+        # Смотрим именно на плашку «Структура сделки» (.dp-party), а не на
+        # весь текст страницы: честная общая оговорка «цена и условия не
+        # раскрыты» (sparseNoticeHtml) законно живёт рядом и содержит
+        # «раскрыты» — это не тот дефект, который здесь проверяется.
+        # .dp-role — с CSS text-transform:uppercase, поэтому сверяем в
+        # верхнем регистре.
+        roles = page.eval_on_selector_all(
+            ".deal-plate .dp-party", "els => els.map(el => el.innerText.toUpperCase())")
+        assert any("ВРЕМЕННЫЙ УПРАВЛЯЮЩИЙ" in r for r in roles), \
+            "плашка не называет управляющего своей ролью: %r" % roles
+        assert not any("ПРОДАВЕЦ" in r for r in roles), \
+            "нет продавца у национализации — а его всё равно нарисовали: %r" % roles
+        assert not any("НЕ РАСКРЫТ" in r for r in roles), \
+            "выдуманная пустая роль вместо честного отсутствия покупателя/продавца: %r" % roles
+        assert not errors, "pageerror при рендере плашки custody: %s" % errors
+    finally:
+        if backup is None:
+            pending_path.unlink(missing_ok=True)
+        else:
+            pending_path.write_text(backup, encoding="utf-8")
+
+
 def test_slow_load_hint_mentions_vpn(page, base_url):
     """Долгая загрузка объясняется, а не просто крутится.
 
