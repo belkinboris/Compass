@@ -1,0 +1,88 @@
+[
+  {
+    "id": "g9edfa8d8",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "name": "ГК «Фотомеханика»", "ind": "Машиностроение",
+       "desc": "Российский производитель конвейерного, сортировочного и роботизированного оборудования для автоматизации складов; группа из трёх юрлиц — ООО «Фотомеханика», ООО «Фотомеханика Софт» и ООО «Фотомеханика Роботикс».",
+       "match_keys": ["фотомеханика"]},
+      {"role": "buyer", "name": "«Корпорация робототехники»", "legal_name": "АО «Корпорация Робототехники»",
+       "ind": "Машиностроение",
+       "desc": "Дочерняя структура АФК «Система», консолидирующая российских производителей робототехники — разработку, производство и интеграцию роботизированных систем для промышленности."}
+    ],
+    "no_inn": {"target": "лот из трёх юрлиц (ООО «Фотомеханика», ООО «Фотомеханика Софт», ООО «Фотомеханика Роботикс») — единого ИНН у группы нет, финансовые показатели приведены по основному юрлицу"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "лот из трёх юрлиц одной группы; отрасль (Машиностроение) выставляется отдельной правкой review.py после создания профиля"
+  },
+  {
+    "id": "gb1efa21d",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "name": "M1Cloud", "legal_name": "ООО «Стек Групп»", "ind": "ИТ и интернет",
+       "desc": "M1Cloud — облачный провайдер приватных решений на базе партнёрских дата-центров в Москве; работает под товарным знаком M1Клауд."}
+    ],
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "обрыв events[0].note дописан отдельным скриптом (review.py не адресует events[] по точечному пути)"
+  },
+  {
+    "id": "g54ef2ac5",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "seller", "name": "«Почта России»", "legal_name": "АО «Почта России»", "ind": "Транспорт и логистика",
+       "desc": "Национальный почтовый оператор России."}
+    ],
+    "no_profile": {"target": "бывший детский лагерь имени Гайдара — объект недвижимости, продаваемый на торгах, не юрлицо"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  },
+  {
+    "id": "g7c2329a4",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "name": "Кумжинское и Коровинское месторождения (АО «СН Инвест», ООО ЕСН)",
+       "ind": "Нефть и газ",
+       "desc": "Компании-держатели лицензий на разработку Кумжинского (АО «СН Инвест») и Коровинского (ООО ЕСН) газоконденсатных месторождений в Ненецком автономном округе.",
+       "match_keys": ["сн инвест", "евросевернефть"]},
+      {"role": "buyer", "name": "«ЗН Перспектива»", "legal_name": "ООО «ЗН Перспектива»", "ind": "Нефть и газ",
+       "desc": "Структура государственной «Зарубежнефти», созданная для консолидации газовых активов в Ненецком автономном округе."}
+    ],
+    "no_inn": {"target": "лот из двух юрлиц-держателей лицензий разных месторождений — единого ИНН нет"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true},
+    "notes": "eco.rationale переписан через proofread.py (снята пресс-атрибуция «источник «Ъ»»), eco.finadv возвращён к прочерку (нёс не консультанта, а цитату об отказе от комментария), events[0].note дописан отдельным скриптом"
+  },
+  {
+    "id": "g88dfc8c8",
+    "verdict": "accept",
+    "no_profile": {"target": "усадьба Веденской — объект культурного наследия, продаваемый на торгах, не юрлицо"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  },
+  {
+    "id": "gd85b3ba8",
+    "verdict": "accept",
+    "no_profile": {"target": "гостиница «Мадрид» — объект культурного наследия, продаваемый на торгах, не юрлицо"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  },
+  {
+    "id": "g64462179",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "id": "g119c8094", "legal_name": "ООО «Нестле Россия»"}
+    ],
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  },
+  {
+    "id": "g2daf32fe",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "id": "g0a95d38c", "legal_name": "ООО «Ашан»", "inn": "7703270067"}
+    ],
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "g9edfa8d8",
+    "verdict": "accept",
+    "profiles": [
+      {"role": "target", "id": "gb74c10ff"},
+      {"role": "buyer", "id": "ga93e903d"}
+    ],
+    "no_inn": {"target": "лот из трёх юрлиц (ООО «Фотомеханика», ООО «Фотомеханика Софт», ООО «Фотомеханика Роботикс») — единого ИНН у группы нет, финансовые показатели приведены по основному юрлицу"},
+    "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                  "why": true, "fields": true, "wording": true, "post": true, "status": true}
+  }
+]
