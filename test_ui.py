@@ -546,6 +546,70 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         ctx.close()
 
 
+def test_multiples_table_flags_outliers_only_when_medians_are_shown(browser, base_url):
+    """G5 (18 сентября 2026): подсветка строки, заметно отклонившейся от
+    медианы группы, — приём из comps-таблиц профессиональных M&A баз
+    (Capital IQ и общая практика). Число не новое (медиана уже считалась и
+    уже печаталась текстом) — только заметнее в самой строке. Ровно поэтому
+    метка рисуется ТОЛЬКО когда сервер разрешил показывать саму медиану
+    (`show_medians`): до утверждения методики оценщиком отдельная подсветка
+    в обход этого флага была бы тем же рыночным ориентиром через чёрный ход."""
+    ctx = browser.new_context()
+    try:
+        deals = [
+            {"id": "citibank", "title": "Медианная сделка", "year": 2024,
+             "target_id": "citibank", "target_name": "ООО Медиана",
+             "sum_rub": 1000000000, "revenue_rub": 500000000,
+             "revenue_year": 2023, "multiple": 2.0},
+            {"id": "sberbank", "title": "Дорогая сделка", "year": 2024,
+             "target_id": "sberbank", "target_name": "ООО Дорого",
+             "sum_rub": 4000000000, "revenue_rub": 500000000,
+             "revenue_year": 2023, "multiple": 8.0},
+            {"id": "vtb", "title": "Дешёвая сделка", "year": 2024,
+             "target_id": "vtb", "target_name": "ООО Дёшево",
+             "sum_rub": 500000000, "revenue_rub": 500000000,
+             "revenue_year": 2023, "multiple": 1.0},
+        ]
+
+        def populated(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 3, "median": 2.0, "show_medians": True,
+                "industries": [], "deals": deals, "methodology": "Тестовая методика.",
+            }))
+        ctx.route("**/api/analytics/multiples", populated)
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg.wait_for_timeout(800)
+        body = pg.inner_text("#multiplesCard")
+        assert "выше медианы группы в 4 раза" in body, body
+        assert "ниже медианы группы в 2 раза" in body, body
+        assert "Медианная сделка" in body
+        assert not errors
+        pg.close()
+
+        # Медианы скрыты (show_medians=False) — метка не рисуется вовсе, хотя
+        # сами мультипликаторы и медиана в ответе по-прежнему присутствуют.
+        def hidden(route):
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "candidates_total": 42, "clean_total": 3, "median": 2.0, "show_medians": False,
+                "industries": [], "deals": deals, "methodology": "Тестовая методика.",
+            }))
+        ctx.unroute("**/api/analytics/multiples")
+        ctx.route("**/api/analytics/multiples", hidden)
+        pg1 = ctx.new_page()
+        pg1.goto(base_url + "/#/analytics", wait_until="networkidle")
+        pg1.wait_for_timeout(800)
+        body1 = pg1.inner_text("#multiplesCard")
+        assert "выше медианы группы" not in body1, body1
+        assert "ниже медианы группы" not in body1, body1
+        assert "Дорогая сделка" in body1 and "×8" in body1
+        pg1.close()
+    finally:
+        ctx.close()
+
+
 def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
     """Просьба владельца 5 сентября 2026: раздел «Аналитики» об изъятых и
     национализированных активах. Строится по теме «Национализация / иск
