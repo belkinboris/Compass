@@ -108,7 +108,7 @@
    ]
   },
   {
-   "draft_id": "d83131357",
+   "draft_id": "d44852954",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -136,58 +136,19 @@
    ]
   },
   {
-   "draft_id": "d45736716",
-   "title": "Экс-ведущий Top Gear Джереми Кларксон продаст три авто из своей коллекции",
+   "draft_id": "d68266397",
+   "title": "Галузин заявил об угрозах российским инвестициям в Армении",
    "date": "2026-09-18",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2169268/2026-09-18/eks-vedushchii-top-gear-dzheremi-klarkson-prodast-tri-avto-iz-svoei-kollektcii"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "три авто из своей коллекции",
-   "seller": "Экс-ведущий Top Gear Джереми Кларксон",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "три авто из своей коллекции",
-    "seller": "Экс-ведущий Top Gear Джереми Кларксон"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d88317260",
-   "title": "ЦБ Узбекистана увеличит инвестиции в покупку ценных бумаг",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1116916"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/09/18/1230027-galuzin-ob-ugrozah"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-18",
-     "title": "Переговоры",
-     "note": "Центральный банк Узбекистана планирует постепенно расширять перечень активов, в которые инвестируются международные резервы страны, включая покупку высоколиквидных активов, заявил зампред ЦБ Аброр Мирзо Олимов на Международном форуме по управлению…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1116916"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -203,13 +164,13 @@
    ]
   },
   {
-   "draft_id": "d78090932",
-   "title": "Хакеры выкрали данные из правительственных сетей Берлина. Власти платить выкуп отказались",
+   "draft_id": "d51614612",
+   "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
    "date": "2026-09-18",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-18_hakery_vykrali_dannye_iz"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28126333"
     ]
    ],
    "sum": null,
@@ -231,17 +192,171 @@
    ]
   },
   {
-   "draft_id": "d50016106",
-   "title": "Галузин: Армения заверяла, что отечественным инвестициям в республике ничего не угрожает",
+   "draft_id": "d90030918",
+   "title": "Галузин прокомментировал разговоры о продаже ЮКЖД",
    "date": "2026-09-18",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/politika/28125949"
+     "https://tass.ru/ekonomika/28125975"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-18",
+     "title": "Переговоры",
+     "note": "Они могут указывать на намерение обеспечить изъятие и передачу железных дорог в интересах других стран, заявил замглавы МИД РФ",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28125975"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18730682",
+   "title": "«Выксунизация»: как металлурги вложили миллиарды в стрит-арт в малом городе",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/bez-rubriki/vyksunizatsiya-kak-metallurgi-vlozhili-milliardy-v-strit-art/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "стрит-арт в малом городе",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "стрит-арт в малом городе",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d66836370",
+   "title": "В Москве выставили на торги старинный купеческий особняк",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260918/moskva-2118571651.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61734421",
+   "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/lukoyl-2118576929.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d67076857",
+   "title": "Банки стали чаще отказывать застройщикам в кредитах на покупку земли для строительства",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/305510"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d23599870",
+   "title": "В Пермском крае автозаправку продают по цене квартиры",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053128564"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
