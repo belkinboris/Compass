@@ -73,6 +73,37 @@
     "needs_review": true
    },
    "queued": "2026-09-18"
+  },
+  {
+   "key": "https://realty.ria.ru/20260918/lipetsk-2118470654.html::gce803e3f",
+   "candidate_id": "gce803e3f",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d14292515",
+    "title": "«Дом.РФ» продает три недостроенных многоэтажных дома в Липецке",
+    "date": "2026-09-18",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20260918/lipetsk-2118470654.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "три недостроенных многоэтажных дома в Липецке",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "три недостроенных многоэтажных дома в Липецке",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-18"
   }
  ]
 }

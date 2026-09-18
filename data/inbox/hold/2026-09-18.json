@@ -136,7 +136,7 @@
    ]
   },
   {
-   "draft_id": "d69872259",
+   "draft_id": "d59107616",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -164,55 +164,27 @@
    ]
   },
   {
-   "draft_id": "d56797917",
-   "title": "Совбез предупредил о «рейдерских захватах» российских предприятий в Армении // Совбез РФ: команда Пашиняна хочет национализировать «Электрические сети Армении»",
+   "draft_id": "d40246676",
+   "title": "Сбербанк увеличивает инвестиции в строительство ЦОД",
    "date": "2026-09-18",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8957761"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Sberbank-uvelichivaet-investicii-v-stroitelstvo-COD-87541"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10188100",
-   "title": "В Совбезе РФ заявили о планах Пашиняна национализировать «Электросети Армении»",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
+   "type": "Инвестиция",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-09-18",
-     "title": "Переговоры",
-     "note": "",
+     "title": "Сделка завершена",
+     "note": "Как сообщалось ранее, ООО «Сбербанк Инвестиции» вошло в проект строительства ЦОД в г. Санкт-Петербург совместно с ГК \"ЦОД Эксперт\". Сейчас банк продолжает рассматривать другие проекты ГК \"ЦОД Эксперт\" по строительству географически распределенных ЦОД.…",
      "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
+      "web:mergers.ru",
+      "https://mergers.ru/news/Sberbank-uvelichivaet-investicii-v-stroitelstvo-COD-87541"
      ]
     }
    ],
@@ -224,76 +196,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d67004542",
-   "title": "СБ РФ: команда Пашиняна хочет национализировать компанию бизнесмена России",
+   "draft_id": "d33721760",
+   "title": "В России начали продавать новый семейный Suzuki",
    "date": "2026-09-18",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28124593"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15254548",
-   "title": "Запад перешел к тактике сдерживания России в Заполярье, заявил МИД",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260918/mid-2118451714.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10577005",
-   "title": "СМИ: в России резко выросли продажи редьки, малины и апельсинов",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260918/redka-2118440611.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/18/v-rossii-nachali-prodavat-novyy-semeynyy-suzuki/"
     ]
    ],
    "sum": null,
