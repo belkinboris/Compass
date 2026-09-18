@@ -136,34 +136,6 @@
    ]
   },
   {
-   "draft_id": "d68266397",
-   "title": "Галузин заявил об угрозах российским инвестициям в Армении",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/18/1230027-galuzin-ob-ugrozah"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d51614612",
    "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
    "date": "2026-09-18",
@@ -189,73 +161,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90030918",
-   "title": "Галузин прокомментировал разговоры о продаже ЮКЖД",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28125975"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-18",
-     "title": "Переговоры",
-     "note": "Они могут указывать на намерение обеспечить изъятие и передачу железных дорог в интересах других стран, заявил замглавы МИД РФ",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28125975"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18730682",
-   "title": "«Выксунизация»: как металлурги вложили миллиарды в стрит-арт в малом городе",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/bez-rubriki/vyksunizatsiya-kak-metallurgi-vlozhili-milliardy-v-strit-art/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "стрит-арт в малом городе",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "стрит-арт в малом городе",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -314,63 +219,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d67076857",
-   "title": "Банки стали чаще отказывать застройщикам в кредитах на покупку земли для строительства",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/305510"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d23599870",
-   "title": "В Пермском крае автозаправку продают по цене квартиры",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053128564"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
