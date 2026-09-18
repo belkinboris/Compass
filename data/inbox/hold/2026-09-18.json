@@ -108,7 +108,7 @@
    ]
   },
   {
-   "draft_id": "d44852954",
+   "draft_id": "d14739619",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -136,7 +136,7 @@
    ]
   },
   {
-   "draft_id": "d51614612",
+   "draft_id": "d20074079",
    "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
    "date": "2026-09-18",
    "src": [
@@ -164,7 +164,7 @@
    ]
   },
   {
-   "draft_id": "d66836370",
+   "draft_id": "d29004897",
    "title": "В Москве выставили на торги старинный купеческий особняк",
    "date": "2026-09-18",
    "src": [
@@ -192,7 +192,7 @@
    ]
   },
   {
-   "draft_id": "d61734421",
+   "draft_id": "d72540537",
    "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
    "date": "2026-09-18",
    "src": [
@@ -219,6 +219,239 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d85269615",
+   "title": "Минфин США снова продлил лицензию на переговоры о продаже активов ЛУКОЙЛа",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8969977"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d84605195",
+   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/18/1230043-ssha-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d52642846",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 22 октября",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1116935"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d35748734",
+   "title": "США продлили лицензию на переговоры о продаже активов компании «Лукойл»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169431/2026-09-18/ssha-prodlili-litcenziiu-na-peregovory-o-prodazhe-aktivov-kompanii-lukoil"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d77952015",
+   "title": "Путин о субсидиях на покупку газового оборудования и накручивании цен",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169421/video/putin-o-subsidiiakh-na-pokupku-gazovogo-oborudovaniia-i-nakruchivanii-tcen"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d21794017",
+   "title": "Путин одобрил выделение 1,2 млрд рублей на покупку газового оборудования гражданами",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169417/putin-odobril-subsidii-na-12-mlrd-rublei-dlia-pokupki-gazovogo-oborudovaniia-izi"
+    ]
+   ],
+   "sum": "1,2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47673277",
+   "title": "Петербург оказался первым по инвестициям в гостиничную недвижимость в 2026 году",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/18/peterburg-okazalsja-pervim"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d29298724",
+   "title": "Путин предложил ульяновцу купить на сэкономленные на ЖКХ деньги подарок супруге",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169462/putin-predlozhil-ulianovtcu-kupit-na-sekonomlennoe-na-zhkkh-podarok-supruge-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ЖКХ и обращение с отходами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
