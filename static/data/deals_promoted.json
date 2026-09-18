@@ -215916,6 +215916,289 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "g5599430f",
+   "date": "2026-04-15",
+   "title": "Таиландская CPF купила российского производителя свинины «Новомясово» за 2,05 млрд рублей",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/967166"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "В рамках сделки тайская сторона получила контроль над частью бизнеса группы: репродуктором, откормочной площадкой, товарными фермами и земельными участками.",
+    "val": "—",
+    "target_fin": "По данным ГИР БО, чистый убыток — 2,0 млн ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "российский производитель свинины «Новомясово»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-04-15",
+     "title": "Сделка завершена",
+     "note": "В компании «Новомясово», управляющей свиноводческими активами новгородской группы «Адепт», сменился владелец. Им стала компания СПФО — российская «дочка» тайского агропромышленного гиганта Charoen Pokphand Foods (CPF).",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/967166"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Таиландская CPF",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/967166"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский производитель свинины «Новомясово»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/967166"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ООО «Новгородский бекон» (входит в группу «Адепт»)",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.tadviser.ru/a/967166"
+     }
+    ]
+   },
+   "seller": "ООО «Новгородский бекон» (входит в группу «Адепт»)",
+   "reviewed": "2026-09-18",
+   "deep_researched": "2026-09-18",
+   "target": "gea9c5d41",
+   "buyer": "ged973f3c",
+   "seller_id": "gbfe2a739",
+   "accepted": "2026-09-18",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "Точное юрлицо ООО «СПФО» не найдено однозначно через публичный ЕГРЮЛ по имени; в реестр не заносим до подтверждения ИНН"
+    }
+   },
+   "proofread": "2026-09-18",
+   "added": "2026-09-18",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "1d5cc1af408d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-04-15",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f7109f1718c4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "205e881e7556"
+    },
+    "target": {
+     "company_id": "gea9c5d41",
+     "inn": "5300021963",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "7632e4ecea53"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g73dba9d6",
+   "date": "2026-09-18",
+   "title": "ЗПИФ «ВИМ Недвижимость» приобрел бизнес-центр на Пресненском Валу",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260918/forma-2118425182.html"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2026/09/18/1229780-struktura-pik-prodala-delovoi-tsentr-freim"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "«Фрейм», расположенный на ул. Пресненский Вал, должен быть введен в эксплуатацию в 2029 г. Общая площадь бизнес-центра составляет 69 700 кв. м, из которых 60 900 кв. м придется непосредственно на офисы. Проект также включает в себя ритейл, образовательные и спортивные помещения.",
+    "val": "Рыночную стоимость этого объекта партнер NF Group Станислав Бибик оценивает в 40–45 млрд руб. с учетом НДС. Впрочем, руководитель департамента рынков капитала и инвестиций IBC Real Estate Микаэл Казарян уверен, что он обошелся инвестору значительно дешевле – в 27–29 млрд руб. Похожие цифры – 25–28 млрд руб. называет и директор департамента инвестиций и рынков капитала Bright Rich | Corfac International Екатерина Андреева.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Для его нового владельца – фонда «ВИМ сбережения» – это будет первый объект без арендатора.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "бизнес-центр «Фрейм»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-18",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260918/forma-2118425182.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ЗПИФ «ВИМ Недвижимость»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260918/forma-2118425182.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "бизнес-центр «Фрейм»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260918/forma-2118425182.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Девелопер Forma (входит в группу ПИК)",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260918/forma-2118425182.html"
+     }
+    ]
+   },
+   "buyer": "g59f4de1d",
+   "seller": "Девелопер Forma (входит в группу ПИК)",
+   "reviewed": "2026-09-18",
+   "deep_researched": "2026-09-18",
+   "seller_id": "g437baf41",
+   "accepted": "2026-09-18",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "бизнес-центр «Фрейм» — объект недвижимости, а не юрлицо"
+    },
+    "no_inn": {
+     "buyer": "ЗПИФ — паевой инвестиционный фонд, не юридическое лицо; ИНН не предусмотрен, действует через УК «ВИМ Сбережения»"
+    }
+   },
+   "proofread": "2026-09-18",
+   "post_preview": "<b>ЗПИФ «ВИМ Недвижимость» приобрел бизнес-центр на Пресненском Валу</b>\n\n<b>Предмет:</b> бизнес-центр «Фрейм» — «Фрейм», расположенный на ул. Пресненский Вал, должен быть введен в эксплуатацию в 2029 г.\n<b>Покупатель:</b> ЗПИФ «Вим Недвижимость» — Закрытый паевой инвестиционный фонд недвижимости под управлением УК «Вим сбережения».\n<b>Продавец:</b> Forma\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20260918/forma-2118425182.html\">РИА Недвижимость</a>\nЕщё 1 источник — в карточке сделки\n\n#недвижимость #MA",
+   "added": "2026-09-18",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "fc637284a5bf"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-18",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a65e570e13b2"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "b3cc791183a4"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
@@ -245822,7 +246105,8 @@
   "g9edfa8d8": 126,
   "ge92b1463": null,
   "gb1cd8142": null,
-  "g88dfc8c8": null
+  "g88dfc8c8": null,
+  "gb1efa21d": 127
  },
  "telegram_milestones": {},
  "telegram_digests": {
