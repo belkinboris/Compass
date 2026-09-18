@@ -108,101 +108,6 @@
    ]
   },
   {
-   "draft_id": "d74342339",
-   "title": "OpenAI приобрела разработчика камер для смартфонов Glass Imaging за $300 млн",
-   "date": "2026-09-15",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/openai-priobrela-razrabotchika-kamer-dlya-smartfonov-glass-imaging-za-300-mln/"
-    ]
-   ],
-   "sum": "$300 млн",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-15",
-     "title": "Сделка завершена",
-     "note": "OpenAI купила разработчика камерных технологий Glass Imaging за 300 млн долларов — сделка усиливает аппаратные амбиции компании после покупки студии Джони Айва за 6,5 млрд долларов.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/openai-priobrela-razrabotchika-kamer-dlya-smartfonov-glass-imaging-za-300-mln/"
-     ]
-    }
-   ],
-   "buyer_name": "OpenAI",
-   "asset": "разработчик камер для смартфонов Glass Imaging",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "OpenAI",
-    "asset": "разработчик камер для смартфонов Glass Imaging",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d47492034",
-   "title": "Российский ИБ-стартап привлек 10 млн руб. при оценке в 41 млн — и уже подписал контрактов на 67 млн",
-   "date": "2026-09-15",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/rossijskij-ib-startap-privlek-10-mln-rub-pri-otsenke-v-41-mln-i-uzhe-podpisal-kontraktov-na-67-mln/"
-    ]
-   ],
-   "sum": "10 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российский ИБ-стартап",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российский ИБ-стартап",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d69322071",
-   "title": "Бывший офис «Ленспецстроя» в Петербурге сменил владельца",
-   "date": "2026-09-16",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260916/ofis-2117988139.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d12180739",
    "title": "Экс-гонщика «Формулы-1» назвали претендентом на покупку издателя «Мира танков»",
    "date": "2026-09-16",
@@ -231,259 +136,7 @@
    ]
   },
   {
-   "draft_id": "d51152959",
-   "title": "Компания Higgsfield, основанная Алексом Машрабовым и Ерзатом Дулатом, не давала разрешения на объявленное российским брокером “Финамом” pre-IPO и не имеет с этой организацией никаких отношений. Об это",
-   "date": "2026-09-15",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7734"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Рынок ценных бумаг",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40563086",
-   "title": "Компания Higgsfield, основанная Алексом Машрабовым и Ерзатом Дулатом, не давала разрешения на объявленное российским брокером “Финамом” pre-IPO и не имеет с этой организацией никаких отношений. Об это",
-   "date": "2026-09-15",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7735"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Рынок ценных бумаг",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Компания Higgsfield, основанная Алексом Машрабовым и Ерзатом» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d38668431",
-   "title": "«Зарубежнефть» выкупила у «Русхима» бизнес по добыче газа",
-   "date": "2026-09-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8956566"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-17",
-     "title": "Сделка завершена",
-     "note": "Структура государственной «Зарубежнефти» «ЗН Перспектива» приобрела у «Русхима» ООО ЕСН, владеющее лицензией на Коровинское месторождение газа в Ненецком автономном округе. Соответствующие изменения в ЕГРЮЛ внесены 15 сентября.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8956566"
-     ]
-    }
-   ],
-   "buyer_name": "«Зарубежнефть»",
-   "asset": null,
-   "seller": "«Русхима» бизнес по добыче газа",
-   "parsed_parties": {
-    "buyer": "«Зарубежнефть»",
-    "asset": null,
-    "seller": "«Русхима» бизнес по добыче газа"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7c2329a4 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d18268971",
-   "title": "«Ирисы» Клода Моне впервые выставят на торги в Париже",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6aacb59259529fa9c79a3a54"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18442647",
-   "title": "«Зарубежнефть» выкупила у «Русхима» бизнес по добыче газа",
-   "date": "2026-09-17",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Zarubezhneft-vykupila-u-Rushima-biznes-po-dobyche-gaza-87535"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-17",
-     "title": "Сделка завершена",
-     "note": "Структура государственной «Зарубежнефти» «ЗН Перспектива» приобрела у «Русхима» ООО ЕСН, владеющее лицензией на Коровинское месторождение газа в Ненецком автономном округе. В тот же день гендиректор «ЗН Перспектива» Вячеслав Терентьев возглавил АО «СН…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Zarubezhneft-vykupila-u-Rushima-biznes-po-dobyche-gaza-87535"
-     ]
-    }
-   ],
-   "buyer_name": "«Зарубежнефть»",
-   "asset": null,
-   "seller": "«Русхима» бизнес по добыче газа",
-   "parsed_parties": {
-    "buyer": "«Зарубежнефть»",
-    "asset": null,
-    "seller": "«Русхима» бизнес по добыче газа"
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7c2329a4 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что ««Зарубежнефть» выкупила у «Русхима» бизнес по добыче газа» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d86962558",
-   "title": "Aspring Capital представляет M&A Navigator, базу публичных сделок на российском рынке от 1 млрд рублей M&A Navigator — уникальный аналитический продукт на российском рынке, все знаковые публично объяв",
-   "date": "2026-09-16",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7393"
-    ]
-   ],
-   "sum": "1 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10298858",
-   "title": "Объем покупки юаней ЦБ с расчетами 17 сентября составил 2 млрд рублей",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260918/obem-873416592.html"
-    ]
-   ],
-   "sum": "2 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88708946",
-   "title": "41% россиян считают скидки на распродажах уловкой",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/41-rossijan-schitajut-skidki-na-rasprodazhah-ulovkoj/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18165281",
+   "draft_id": "d69872259",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -494,6 +147,157 @@
    ],
    "sum": null,
    "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56797917",
+   "title": "Совбез предупредил о «рейдерских захватах» российских предприятий в Армении // Совбез РФ: команда Пашиняна хочет национализировать «Электрические сети Армении»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8957761"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10188100",
+   "title": "В Совбезе РФ заявили о планах Пашиняна национализировать «Электросети Армении»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-18",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67004542",
+   "title": "СБ РФ: команда Пашиняна хочет национализировать компанию бизнесмена России",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28124593"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15254548",
+   "title": "Запад перешел к тактике сдерживания России в Заполярье, заявил МИД",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/mid-2118451714.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10577005",
+   "title": "СМИ: в России резко выросли продажи редьки, малины и апельсинов",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/redka-2118440611.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,

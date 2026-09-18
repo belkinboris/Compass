@@ -215364,6 +215364,14 @@
     [
      "Телеграм-канал: Сделки M&A",
      "https://t.me/dealsma/7394"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Korporaciya-Robototehniki-kupila-kontrolnuyu-dolyu-v-gruppe-kompanij-Fotomehanika-87533"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/966930"
     ]
    ],
    "from_ingest": true,
@@ -215393,6 +215401,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8956273"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-17",
+     "title": "Сделка завершена",
+     "note": "«Корпорация Робототехники» приобрела 51% доли в ГК «Фотомеханика», которая занимается производством складских роботов и систем автоматизации. В периметр сделки вошли несколько компаний группы, формирующих единый производственный и R&D-контур. Об этом в «Корпорации Робототехники» сообщили TAdviser 16 сентября 2026 года.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/966930"
      ]
     }
    ],
@@ -215452,7 +215470,7 @@
      "value": "2026-09-16",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "53010e796b55"
+     "card_hash": "3f7202661003"
     },
     "nature": {
      "control_change": true,
