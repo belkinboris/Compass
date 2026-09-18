@@ -25,6 +25,20 @@
 пауза между сообщениями и повтор по `retry_after` — заимствованы у
 send_drafts.send_one, а не написаны заново.
 
+ПОВТОРНАЯ ОТПРАВКА ОБЯЗАНА СВЕРЯТЬСЯ С ТЕКУЩЕЙ РЕАЛЬНОСТЬЮ, А НЕ ТОЛЬКО С
+СОБОЙ. 18 сентября 2026 партия из 69 «свежих» вопросов (после чистки
+дублей внутри самого этого файла) на деле несла минимум 6 УЖЕ РЕШЁННЫХ —
+владелец узнал их сам («Я дал решение… но у меня стойкое ощущение, что я
+на многие уже отвечал») и был прав: `QUESTIONS` — статический снимок на
+момент последней правки файла, а реальность (карточка `CLAUDE.md`'s
+«Известные проблемы» с маркером `[ИСПРАВЛЕНО/РАЗРЕШЕНО]», либо сам статус
+карточки в базе) с тех пор ушла вперёд, и никто не сверял список ПЕРЕД
+отправкой. `_already_resolved()` — обязательная проверка на выходе:
+маркер решения в том же bullet'е CLAUDE.md для этого id, статус карточки
+уже совпадает с тем, что спрашивает `ask` («ставим не состоялась?» —
+а статус уже «Не состоялась»), или карточки нет ни в базе, ни в `merged`.
+Найденное «устарело» не отправляется НИКОГДА, даже с `--only`.
+
 ОТПРАВЛЕННОЕ ПОМНИТСЯ. `open_questions_sent.json` лежит в git рядом со
 скриптом: контейнер рутины одноразовый, и файл в data/inbox (он не хранится в
 git) означал бы повторную рассылку тех же 44 вопросов при следующем запуске.
@@ -510,6 +524,49 @@ def _key(item):
     return item.get("key") or item["id"]
 
 
+_RESOLVED_MARK_RE = None  # инициализируется лениво — модуль re импортирован ниже
+
+
+def _find_deal_bullet(claude_text, deal_id):
+    """Текст того же bullet'а «Известных проблем» (или «Соглашений»), что
+    содержит упоминание `deal_id` в обратных кавычках — не окно фиксированной
+    длины (оно ловит СОСЕДНИЙ bullet), а точные границы «до следующего
+    bullet'а верхнего уровня»."""
+    import re
+    global _RESOLVED_MARK_RE
+    if _RESOLVED_MARK_RE is None:
+        _RESOLVED_MARK_RE = re.compile(r'\[(ИСПРАВЛЕНО|ОТМЕНЕНО|РАЗРЕШЕНО|Перепроверено и РАЗРЕШЕНО)\b')
+    bullets = list(re.finditer(r'^- \*\*', claude_text, re.M))
+    needle = '`' + deal_id + '`'
+    for i, m in enumerate(bullets):
+        s = m.start()
+        e = bullets[i + 1].start() if i + 1 < len(bullets) else len(claude_text)
+        chunk = claude_text[s:e]
+        if needle in chunk:
+            yield chunk
+
+
+def _already_resolved(item, claude_text, deals_by_id, merged):
+    """Правда только на выходе, не на входе: перед отправкой сверяем вопрос
+    с ТЕКУЩИМ состоянием, а не верим тому, что записано в QUESTIONS (см.
+    докстроку файла, урок 18 сентября 2026). Возвращает причину строкой,
+    если вопрос устарел, иначе None."""
+    import re
+    deal_id = item['id']
+    for chunk in _find_deal_bullet(claude_text, deal_id):
+        m = _RESOLVED_MARK_RE.search(chunk)
+        if m:
+            return 'в CLAUDE.md уже стоит маркер решения: ' + chunk[m.start():m.start() + 80].replace('\n', ' ')
+    real_id = merged.get(deal_id, deal_id)
+    deal = deals_by_id.get(real_id)
+    if deal is None:
+        return 'карточки больше нет ни в базе, ни в merged'
+    ask_lower = item['ask'].lower()
+    if 'не состоял' in ask_lower and deal.get('status') == 'Не состоялась':
+        return 'статус уже «Не состоялась»'
+    return None
+
+
 def render(item, number, total):
     return "\n".join([
         "❓ Вопрос %d из %d — нужен ваш ответ" % (number, total),
@@ -538,6 +595,28 @@ def main():
         todo = [q for q in QUESTIONS if only in (q["id"], _key(q))]
     if limit:
         todo = todo[:limit]
+
+    claude_text = open(os.path.join(ROOT, 'CLAUDE.md'), encoding='utf-8').read()
+    base = json.load(open(os.path.join(ROOT, 'static', 'data', 'deals_promoted.json'), encoding='utf-8'))
+    deals_by_id = {d['id']: d for d in base['deals']}
+    merged = base.get('merged', {})
+
+    stale = []
+    fresh_todo = []
+    for q in todo:
+        reason = _already_resolved(q, claude_text, deals_by_id, merged)
+        if reason:
+            stale.append((q, reason))
+        else:
+            fresh_todo.append(q)
+    if stale:
+        print("Пропущено как устаревшие (не отправляю):", len(stale))
+        for q, reason in stale:
+            print("  %s [%s] — %s" % (q['id'], _key(q), reason))
+            state['sent'][_key(q)] = 'stale-skip'
+        json.dump(state, open(STATE, 'w', encoding='utf-8'),
+                  ensure_ascii=False, indent=1, sort_keys=True)
+    todo = fresh_todo
 
     total = len(QUESTIONS)
     if not todo:
