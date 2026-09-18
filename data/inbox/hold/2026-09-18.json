@@ -108,35 +108,7 @@
    ]
   },
   {
-   "draft_id": "d12180739",
-   "title": "Экс-гонщика «Формулы-1» назвали претендентом на покупку издателя «Мира танков»",
-   "date": "2026-09-16",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/16/eks-gonschika-formuly-1-nazvali-pretendentom-na-pokupku-izdatelya-mira-tankov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59107616",
+   "draft_id": "d72311612",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -164,52 +136,13 @@
    ]
   },
   {
-   "draft_id": "d40246676",
-   "title": "Сбербанк увеличивает инвестиции в строительство ЦОД",
+   "draft_id": "d35903362",
+   "title": "Петербуржцы с 19 сентября смогут купить новый лимитированный жетон метро",
    "date": "2026-09-18",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Sberbank-uvelichivaet-investicii-v-stroitelstvo-COD-87541"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-18",
-     "title": "Сделка завершена",
-     "note": "Как сообщалось ранее, ООО «Сбербанк Инвестиции» вошло в проект строительства ЦОД в г. Санкт-Петербург совместно с ГК \"ЦОД Эксперт\". Сейчас банк продолжает рассматривать другие проекты ГК \"ЦОД Эксперт\" по строительству географически распределенных ЦОД.…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Sberbank-uvelichivaet-investicii-v-stroitelstvo-COD-87541"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33721760",
-   "title": "В России начали продавать новый семейный Suzuki",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/18/v-rossii-nachali-prodavat-novyy-semeynyy-suzuki/"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/18/peterburzhci-s-19-sentjabrja"
     ]
    ],
    "sum": null,
@@ -227,7 +160,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]

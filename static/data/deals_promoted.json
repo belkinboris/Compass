@@ -215794,7 +215794,7 @@
   {
    "id": "g5599430f",
    "date": "2026-04-15",
-   "title": "Таиландская CPF купила российского производителя свинины «Новомясово» за 2,05 млрд рублей",
+   "title": "Таиландская CPF купила российского производителя свинины «Новомясово»",
    "ind": "Пищепром и напитки",
    "type": "M&A",
    "status": "Закрыта",
@@ -215878,7 +215878,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "1d5cc1af408d"
+     "card_hash": "afc1bd3ae455"
     },
     "price": {
      "value_rub": null,
@@ -215901,7 +215901,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "205e881e7556"
+     "card_hash": "a7fcb8f2142f"
     },
     "target": {
      "company_id": "gea9c5d41",
@@ -215927,7 +215927,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum": null
   },
   {
    "id": "g73dba9d6",

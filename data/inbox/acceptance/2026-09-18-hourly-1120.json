@@ -1,0 +1,22 @@
+[
+  {
+    "id": "g5ffcce01",
+    "profiles": [],
+    "no_profile": {
+      "target": "три недостроенных многоэтажных дома в Липецке — объекты недвижимости на торгах, не юрлицо; предложенный кандидат по слову «Липецк» (завод Whirlpool) — другое предприятие, не тот же объект"
+    },
+    "no_inn": {},
+    "checklist": {
+      "sources": true,
+      "parties": true,
+      "asset": true,
+      "title": true,
+      "why": true,
+      "fields": true,
+      "wording": true,
+      "post": true,
+      "status": true
+    },
+    "verdict": "accept"
+  }
+]
