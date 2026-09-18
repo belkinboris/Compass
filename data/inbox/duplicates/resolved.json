@@ -8,5 +8,20 @@
   "verdict": "separate",
   "candidate_id": "g3ecb7b86",
   "day": "2026-09-14"
+ },
+ "https://www.kommersant.ru/doc/8956817::pending-1": {
+  "verdict": "same_fact",
+  "candidate_id": "pending-1",
+  "day": "2026-09-18"
+ },
+ "https://realty.ria.ru/20260916/gostinitsa-2118020812.html::g3ecb7b86": {
+  "verdict": "separate",
+  "candidate_id": "g3ecb7b86",
+  "day": "2026-09-18"
+ },
+ "https://realty.ria.ru/20260918/lipetsk-2118470654.html::gce803e3f": {
+  "verdict": "separate",
+  "candidate_id": "gce803e3f",
+  "day": "2026-09-18"
  }
 }

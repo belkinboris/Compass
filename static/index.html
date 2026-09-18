@@ -938,6 +938,9 @@ a.dp-asset-name:hover{color:var(--accent)}
 .mult-flag-verified{background:#e6f4ea;color:#1e6b3a;border-color:#bfe3c9}
 .mult-flag-computed{background:#fff4e0;color:#8a5a00;border-color:#f0d9a8}
 .mult-x{font-weight:600}
+.mult-x-note{display:block;font-size:11px;font-weight:400;margin-top:3px;line-height:1.3}
+.mult-x-high{color:var(--accent)}
+.mult-x-low{color:#8c4a2b}
 .mult-sub{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.4}
 @media(max-width:760px){
   .mult-table,.mult-table tbody,.mult-table tr,.mult-table td{display:block;width:auto}
@@ -7000,6 +7003,24 @@ async function mountMarketMultiples(){
       PRICE_TERMS_NOTE[d.price_terms] || "",
       d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
     ].filter(Boolean).join(" · ");
+    /* Подсветка выбросов в самой таблице (G5, приём из comps-таблиц
+       Capital IQ/PitchBook: строка, заметно отклонившаяся от медианы
+       группы, помечается прямо в таблице, а не только упоминается в
+       общей сноске за её пределами). Медиана уже посчитана и уже
+       показывается текстом — метка строки не добавляет новой цифры,
+       только помогает заметить её без чтения абзаца целиком, поэтому
+       рисуется ТОЛЬКО когда сама медиана разрешена к показу
+       (showMedians): до утверждения методики оценщиком отдельная
+       медиана-в-строке была бы тем же самым рыночным ориентиром в
+       обход решения владельца не показывать её вовсе. */
+    const medianNote = d => {
+      if(!showMedians || !s.median) return "";
+      const ratio = d.multiple / s.median;
+      const times = n => String(Math.round(n*10)/10).replace(".", ",");
+      if(ratio >= 1.75) return `<span class="mult-x-note mult-x-high">выше медианы группы в ${times(ratio)} раза</span>`;
+      if(ratio > 0 && ratio <= 0.6) return `<span class="mult-x-note mult-x-low">ниже медианы группы в ${times(1/ratio)} раза</span>`;
+      return "";
+    };
     // Фильтр показывается, только когда есть что фильтровать, и называет,
     // сколько строк уйдёт, — иначе чип выглядит как настройка без эффекта.
     const scaleFilterHtml = (scaledTotal || computedTotal) ? `<div class="mult-scale-filter">
@@ -7017,7 +7038,7 @@ async function mountMarketMultiples(){
         <td class="num" data-l="Год сделки">${d.year}</td>
         <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без двойного чтения источников; не проверено, покрывает ли отчётность весь периметр сделки">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо подтверждены двумя независимыми чтениями источников">проверено</span>`}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
-        <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span></td>
+        <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span>${medianNote(d)}</td>
       </tr>`).join("")}</tbody></table>`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);

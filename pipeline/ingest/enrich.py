@@ -39,6 +39,14 @@
   * ПРЕДМЕТ СДЕЛКИ НЕ ДОПИСЫВАЕТСЯ. Его качество не измерено (в замере
     `draft.py --measure` столбца «предмет» нет), а неизмеренному правилу базу не
     доверяем.
+  * СОЗНАТЕЛЬНО СНЯТОЕ ЗНАЧЕНИЕ НЕ ВОССТАНАВЛИВАЕТСЯ МОЛЧА. Пустое поле для
+    этого шага не отличимо от «поле проверили и подтвердили пустым, потому
+    что найденное число оказалось не о той сделке» — 18 сентября 2026 одна и
+    та же статья вернулась в ленту на следующий день и дважды подряд тихо
+    вернула уже снятое неверное значение. Одноразовый скрипт, СНИМАЮЩИЙ
+    значение (а не просто заполняющий пустое поле впервые), обязан записать
+    его в `deal['retracted'][field]` — тогда `is_retracted()` превращает
+    повторную догадку в «расхождение» (человеку), а не в тихую правку.
 
 СВЯЗЬ С ТЕЛЕГРАМОМ. Каждое обогащение — это ещё и правка поста: список
 изменений считает `publish/format_post.changes`, а решение «будить читателя или
@@ -101,6 +109,20 @@ def agree(a, b):
     if not na or not nb:
         return False
     return na == nb or na in nb or nb in na
+
+
+def is_retracted(deal, field, value):
+    """Поле было пустым не потому, что его никогда не проверяли, а потому,
+    что значение сознательно СНЯЛИ (число оказалось не о той сделке/величине,
+    имя — предметом, а не стороной, и т.п.) — см. запись в PRODUCT_ROADMAP.md
+    от 18.09.2026: `enrich.py` не отличает «поле никогда не заполняли» от
+    «поле проверили и подтвердили пустым», и одна и та же статья, вернувшаяся
+    в ленту на следующий день, восстанавливала уже снятую ошибку дважды за
+    один прогон. Одноразовый скрипт, снимающий значение, обязан записать его
+    сюда — тогда та же догадка уходит человеку («расхождение»), а не тихо
+    возвращается в базу."""
+    retracted = (deal.get('retracted') or {}).get(field) or []
+    return any(agree(value, old) for old in retracted)
 
 
 def exact_company_id(value, comps, match_keys=None):
@@ -196,7 +218,11 @@ def proposals(deal, item, names, comps, match_keys=None):
     if sum_guess:
         current = current_value(deal, 'sum', comps)
         if not current:
-            out.append(('sum', sum_guess, 'добавить', 'в карточке поле пусто'))
+            if is_retracted(deal, 'sum', sum_guess):
+                out.append(('sum', sum_guess, 'расхождение',
+                            'это значение уже снимали как неверное — не восстанавливаем автоматически'))
+            else:
+                out.append(('sum', sum_guess, 'добавить', 'в карточке поле пусто'))
         elif not agree(sum_guess, current):
             out.append(('sum', sum_guess, 'расхождение', 'в карточке «%s»' % str(current)[:60]))
 
@@ -214,6 +240,10 @@ def proposals(deal, item, names, comps, match_keys=None):
         if current:
             if not agree(guess, current):
                 out.append((text_field, guess, 'расхождение', 'в карточке «%s»' % str(current)[:60]))
+            continue
+        if is_retracted(deal, text_field, guess):
+            out.append((text_field, guess, 'расхождение',
+                        'это значение уже снимали как неверное — не восстанавливаем автоматически'))
             continue
         cid = exact_company_id(guess, comps, match_keys)
         if cid:

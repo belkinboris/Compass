@@ -108,35 +108,7 @@
    ]
   },
   {
-   "draft_id": "d12180739",
-   "title": "Экс-гонщика «Формулы-1» назвали претендентом на покупку издателя «Мира танков»",
-   "date": "2026-09-16",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/16/eks-gonschika-formuly-1-nazvali-pretendentom-na-pokupku-izdatelya-mira-tankov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69872259",
+   "draft_id": "d83131357",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -164,55 +136,55 @@
    ]
   },
   {
-   "draft_id": "d56797917",
-   "title": "Совбез предупредил о «рейдерских захватах» российских предприятий в Армении // Совбез РФ: команда Пашиняна хочет национализировать «Электрические сети Армении»",
+   "draft_id": "d45736716",
+   "title": "Экс-ведущий Top Gear Джереми Кларксон продаст три авто из своей коллекции",
    "date": "2026-09-18",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8957761"
+     "web:iz.ru",
+     "https://iz.ru/2169268/2026-09-18/eks-vedushchii-top-gear-dzheremi-klarkson-prodast-tri-avto-iz-svoei-kollektcii"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "три авто из своей коллекции",
+   "seller": "Экс-ведущий Top Gear Джереми Кларксон",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "три авто из своей коллекции",
+    "seller": "Экс-ведущий Top Gear Джереми Кларксон"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d10188100",
-   "title": "В Совбезе РФ заявили о планах Пашиняна национализировать «Электросети Армении»",
+   "draft_id": "d88317260",
+   "title": "ЦБ Узбекистана увеличит инвестиции в покупку ценных бумаг",
    "date": "2026-09-18",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1116916"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-09-18",
      "title": "Переговоры",
-     "note": "",
+     "note": "Центральный банк Узбекистана планирует постепенно расширять перечень активов, в которые инвестируются международные резервы страны, включая покупку высоколиквидных активов, заявил зампред ЦБ Аброр Мирзо Олимов на Международном форуме по управлению…",
      "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/politics/news/2026/09/18/1229889-zayavili-planah-pashinyana"
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1116916"
      ]
     }
    ],
@@ -231,73 +203,45 @@
    ]
   },
   {
-   "draft_id": "d67004542",
-   "title": "СБ РФ: команда Пашиняна хочет национализировать компанию бизнесмена России",
+   "draft_id": "d78090932",
+   "title": "Хакеры выкрали данные из правительственных сетей Берлина. Власти платить выкуп отказались",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-09-18_hakery_vykrali_dannye_iz"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50016106",
+   "title": "Галузин: Армения заверяла, что отечественным инвестициям в республике ничего не угрожает",
    "date": "2026-09-18",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28124593"
+     "https://tass.ru/politika/28125949"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15254548",
-   "title": "Запад перешел к тактике сдерживания России в Заполярье, заявил МИД",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260918/mid-2118451714.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10577005",
-   "title": "СМИ: в России резко выросли продажи редьки, малины и апельсинов",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260918/redka-2118440611.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
