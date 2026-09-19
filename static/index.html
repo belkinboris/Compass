@@ -2976,7 +2976,8 @@ async function aiAnswer(q, mode, meta){
     } finally { clearTimeout(killer); }
     if(data.thread_id) activeThreadId=data.thread_id;
     if(data.answer) return {ok:true, raw:data.answer, html:mdToHtml(data.answer),
-      intent:data.intent||null, model:data.model!==false, deals:data.deals||[]};
+      intent:data.intent||null, model:data.model!==false, deals:data.deals||[],
+      refused:data.refused||null};
   }catch(e){}
   /* СООБЩЕНИЕ О СБОЕ НЕ ДОЛЖНО НАЗЫВАТЬ ПРИЧИНУ, КОТОРОЙ НЕ ПРОВЕРЯЛО.
      Здесь стояло «поиск включится, когда будут заданы YANDEX_API_KEY и
@@ -3019,6 +3020,11 @@ async function runAsk(q, mode, meta, w){
     .then(d=>{
       if(done||!d||!d.answer) return;
       quick=d; stopWait(); w.classList.remove("wait");
+      /* Отказ по границам разговора (компромат, юрконсультация, инвестсовет,
+         вопрос-обвинение) — это ОКОНЧАТЕЛЬНЫЙ ответ, а не «пока факты из
+         базы, сейчас допишу». Ни таймера «дописываю ответ…», ни второго
+         запроса: модель к такому вопросу не подключается вовсе. */
+      if(d.refused){ done=true; w.innerHTML=mdToHtml(d.answer); return; }
       w.innerHTML=mdToHtml(d.answer)+`<div class="ai-more"></div>`;
       stopMore=tickTimer(w.querySelector(".ai-more"), s=> s<3
         ? "Это данные из базы «Компаса». Дописываю ответ…"
@@ -3027,7 +3033,10 @@ async function runAsk(q, mode, meta, w){
     });
   const a=await aiAnswer(q, mode, meta);
   done=true; stopWait(); if(stopMore) stopMore(); w.classList.remove("wait");
-  if(a.ok){ w.innerHTML=a.html+feedbackBar(q,a); return a; }
+  /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
+     кнопка «Нет» тут значит «ответьте всё-таки» — и мы будем копить её как
+     жалобу на качество ответа, которого не было. */
+  if(a.ok){ w.innerHTML=a.html+(a.refused?"":feedbackBar(q,a)); return a; }
   if(quick){
     const raw=quick.answer;
     w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
