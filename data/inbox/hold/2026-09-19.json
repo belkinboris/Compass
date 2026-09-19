@@ -312,30 +312,19 @@
    ]
   },
   {
-   "draft_id": "d80433599",
-   "title": "Anthropic планирует выпустить ИИ-модель лучше GPT-6 Astra перед IPO в ноябре",
+   "draft_id": "d19300660",
+   "title": "Дипломатический паспорт Гагарина выставили на аукцион",
    "date": "2026-09-19",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/anthropic-planiruet-vypustit-ii-model-luchshe-gpt-6-astra-pered-ipo-v-noyabre/"
+     "web:ura.news",
+     "https://ura.news/news/1053128833"
     ]
    ],
    "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-19",
-     "title": "Переговоры",
-     "note": "Anthropic обсуждает выпуск новой модели в ответ на успех GPT-6 Astra от OpenAI и одновременно переносит IPO на ноябрь — компания рассчитывает на оценку около $2 трлн на фоне призывов Дарио Амодея замедлить темпы развития AI.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/anthropic-planiruet-vypustit-ii-model-luchshe-gpt-6-astra-pered-ipo-v-noyabre/"
-     ]
-    }
-   ],
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -344,11 +333,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
