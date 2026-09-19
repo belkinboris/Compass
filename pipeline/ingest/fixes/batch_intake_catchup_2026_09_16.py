@@ -52,11 +52,29 @@ QUOTE_DEFBOX_FIN = (
     'рублей.'
 )
 
+# ДОПОЛНЕНО 19 сентября 2026 (качество, дневная очередь дочитывания, G7):
+# eco.share дополнен вторым источником, CISOCLUB (тот же пресс-релиз, но с
+# подробностями об устройстве совместного фонда Metascan/ФРИИ — размер,
+# дата создания, диапазон чека), pipeline/fix_metascan_defbox_fund_details.py.
+# Запись слита в одну, как требует правило «Таблица FIXES не умеет цепочку
+# из двух правок на одно поле»: `old` — состояние ДО этого дополнения (то,
+# что применила запись выше), `new` — итоговое значение с обеих цитат.
+QUOTE_DEFBOX_FUND = (
+    'В июле 2026 года партнеры создали специализированный фонд объемом '
+    '600 млн рублей, профинансировав его в равных долях. Фонд ориентирован '
+    'на российские B2B-компании в сфере кибербезопасности с готовым '
+    'продуктом, первыми клиентами или подтвержденным спросом; размер '
+    'инвестиций может составлять от 5 до 100 млн рублей.'
+)
+QUOTE_DEFBOX_MAIN_WITH_FUND = QUOTE_DEFBOX_MAIN + ' ' + QUOTE_DEFBOX_FUND
+
 FIXES = [
-    dict(id='gb1cd8142', field='eco.share', old='—',
-         new=QUOTE_DEFBOX_MAIN,
-         quote=QUOTE_DEFBOX_MAIN,
-         why='приток 16.09.2026, tadviser.ru: механизм сделки и доля'),
+    dict(id='gb1cd8142', field='eco.share', old=QUOTE_DEFBOX_MAIN,
+         new=QUOTE_DEFBOX_MAIN_WITH_FUND,
+         quote=QUOTE_DEFBOX_FUND,
+         why='приток 16.09.2026, tadviser.ru: механизм сделки и доля; '
+             'качество 19.09.2026, cisoclub.ru: размер и дата создания '
+             'фонда Metascan/ФРИИ'),
     dict(id='gb1cd8142', field='eco.rationale', old='—',
          new=QUOTE_DEFBOX_RATIONALE,
          quote=QUOTE_DEFBOX_RATIONALE,
