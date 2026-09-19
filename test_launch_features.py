@@ -3403,7 +3403,7 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     assert len(calls) == 1 and calls[0][0] == "sendMessage"
     assert calls[0][1]["message_thread_id"] == 99
     buttons = [b for row in calls[0][1]["reply_markup"]["inline_keyboard"] for b in row]
-    assert {b["callback_data"] for b in buttons} == {"topic:decision", "topic:update", "topic:info"}
+    assert {b["callback_data"] for b in buttons} == {"topic:%s" % k for k in main_module.CONSOLE_TOPIC_NAMES}
     assert {b["text"] for b in buttons} == set(main_module.CONSOLE_TOPIC_NAMES.values())
 
     # Нажатие «Обновления» под сообщением бота в теме 99 -> запомнено, текст поправлен.

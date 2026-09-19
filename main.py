@@ -2759,6 +2759,7 @@ CONSOLE_TOPIC_NAMES = {
     "decision": "Подтверждение постов",   # чего-то ждёт ваше решение
     "update": "Обновления",               # отчёт рутины о прогоне
     "info": "Общая информация",           # остальное: заметки, отзывы, служебное
+    "user_notes": "Заметки от пользователей",  # уточнения с карточек сделок и из футера
 }
 
 
@@ -2812,6 +2813,7 @@ CONSOLE_TOPIC_PURPOSE = {
     "decision": "всё, что ждёт вашего решения: посты, карточки, сырьё, заявки на доступ",
     "update": "отчёты о каждом прогоне рутин",
     "info": "заметки, отзывы и служебные сообщения",
+    "user_notes": "уточнения и поправки, которые посетители сайта оставляют с карточек сделок и из футера",
 }
 
 
@@ -3518,6 +3520,44 @@ def post_general_correction(correction: CorrectionIn,
                             user: User | None = Depends(_current_user), db=Depends(get_db)):
     """Общее сообщение редакции из футера, без привязки к карточке."""
     return _save_correction(None, correction, user, db)
+
+
+@app.get("/api/corrections/pending")
+def corrections_pending(token: str = "", db=Depends(get_db)):
+    """Мост к рутине публикации: `CorrectionRequest` живёт в базе сайта
+    (приватная сеть), рутина работает в другом процессе — тот же токен, что
+    у /api/moderation/decisions. 19 сентября 2026: до этого канал был
+    write-only — сообщения писались в таблицу, и ни один экран или скрипт
+    их не читал (см. KNOWN_ISSUES.md)."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    rows = list(db.scalars(select(CorrectionRequest).where(CorrectionRequest.status == "new")
+                           .order_by(CorrectionRequest.created_at)).all())
+    return {"corrections": [{"id": r.id, "deal_id": r.deal_id, "contact": r.contact,
+                             "body": r.body, "created_at": r.created_at.isoformat()}
+                            for r in rows]}
+
+
+class CorrectionsConsumeIn(BaseModel):
+    token: str = ""
+    ids: list[int] = []
+
+
+@app.post("/api/corrections/consume")
+def corrections_consume(req: CorrectionsConsumeIn, db=Depends(get_db)):
+    """Удалить показанные заявки — их постоянное место теперь в Telegram-
+    консоли (тема «Заметки от пользователей»), а не в этой таблице; держать
+    прочитанное здесь незачем и только копит мусор в базе (владелец 19
+    сентября 2026: «если они засоряют базу данных, то нужно их оттуда
+    убирать»)."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    n = 0
+    for row in db.scalars(select(CorrectionRequest).where(CorrectionRequest.id.in_(req.ids or []))).all():
+        db.delete(row)
+        n += 1
+    db.commit()
+    return {"deleted": n}
 
 
 # Иконки по корневым адресам, которые браузеры запрашивают САМИ, не читая
