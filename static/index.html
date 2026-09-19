@@ -2855,11 +2855,36 @@ function smallAddDays(){
   freshDaysCache = new Set([...byDay].filter(([,n])=>n<=BULK_DAY).map(([day])=>day));
   return freshDaysCache;
 }
+/* «НОВОЕ» — ЭТО НОВОЕ ДЛЯ ЭТОГО ЧИТАТЕЛЯ, А НЕ ПО АБСОЛЮТНОМУ КАЛЕНДАРЮ.
+   Ксюша 19 сентября 2026: «логика бейджа непонятна — считать новым с
+   последнего визита (или упрощённо — за последнюю неделю)». Неделя у нас уже
+   стояла, и именно она и была непонятной: человек, заходящий каждый день,
+   седьмой раз подряд видит «Новое» на том, что уже читал, а зашедший раз в
+   месяц не видит его вовсе. Запоминаем время визита в браузере и метим то,
+   что приехало ПОСЛЕ него; кто пришёл впервые — тому прежнее правило недели.
+
+   Время читается ОДИН раз при загрузке и сразу перезаписывается: иначе за
+   первую же перерисовку ленты всё перестало бы быть новым. Хранилище может
+   не работать (частное окно, запрет на данные сайта) — тогда молча
+   возвращаемся к неделе, как и для первого визита. */
+const LAST_VISIT_KEY = "kompas_last_visit_v1";
+const lastVisitAt = (() => {
+  try{
+    const was = localStorage.getItem(LAST_VISIT_KEY);
+    localStorage.setItem(LAST_VISIT_KEY, new Date().toISOString());
+    const t = was ? Date.parse(was) : NaN;
+    return isNaN(t) ? null : t;
+  }catch(e){ return null; }
+})();
 function isFresh(d){
   const a = String(d && d.added || "");
   if(!/^\d{4}-\d{2}-\d{2}$/.test(a)) return false;
-  if(Date.now() - Date.parse(a + "T00:00:00") >= FRESH_DAYS*24*3600*1000) return false;
-  return smallAddDays().has(a);
+  const added = Date.parse(a + "T00:00:00");
+  // Разовый импорт архива — не новости рынка, и от того, кто когда заходил,
+  // это не зависит: оговорка остаётся при любом способе счёта.
+  if(!smallAddDays().has(a)) return false;
+  if(lastVisitAt !== null) return added >= lastVisitAt - 24*3600*1000;
+  return Date.now() - added < FRESH_DAYS*24*3600*1000;
 }
 
 /* Подтверждение действия одной строкой. Аргумент `html` — уже готовая
@@ -3364,6 +3389,18 @@ const themeCount = t => DEALS.filter(d=>(d.themes||[]).includes(t)).length;
    «Не раскрыта»), из-за чего точное сравнение с одной строкой не приглушало
    часть карточек. Проверяем без учёта регистра и ведущих пробелов. */
 const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
+/* ТРИ СОСТОЯНИЯ СУММЫ, А НЕ ДВА. `undisclosed()` одинаково отвечает «да» и
+   когда карточка ПРЯМО говорит «Не раскрыта» (480 сделок), и когда поля
+   суммы нет вовсе (177) — а это разные вещи. Первое мы установили чтением,
+   второе значит только, что у нас нет данных. До 19 сентября 2026 карточка
+   без поля суммы не показывала строку «Сумма» вообще, но примечание под ней
+   всё равно утверждало «Стороны не назвали сумму публично» — то самое
+   заполнение пустоты правдоподобным, от которого предостерегает правило.
+   Заодно это и была замеченная Ксюшей непоследовательность: у одних сделок
+   подпись есть, у других нет. */
+const SUM_UNKNOWN_LABEL = "Нет данных";
+const sumState = v => !String(v||"").trim() ? "unknown"
+  : /^не\s+раскры/i.test(String(v).trim()) ? "undisclosed" : "known";
 /* Хвостовая скобка у суммы — «(по оценке)» и подобные оговорки. Отделяем её
    стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
 const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
@@ -3374,7 +3411,8 @@ const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
    перестаёт быть на одной вертикали с заголовком и статусом. Рисуем блок
    суммы, только если есть что показать. */
 function dealMetaHtml(d){
-  const sum = d.sum ? `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div>` : "";
+  const sum = `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${
+    d.sum ? sumHtml(d.sum) : SUM_UNKNOWN_LABEL}</div>`;
   return `<div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>`;
 }
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
@@ -4892,7 +4930,7 @@ function renderDeal(id, qs, previewCard){
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
-  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Сверено с источником: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
+  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Карточку сверяли с источниками: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
   <div class="deal-tools reveal">
     <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
     <button class="chip" id="downloaddeal">Скачать PDF</button>
@@ -5242,8 +5280,12 @@ function renderDeal(id, qs, previewCard){
         </div>`).join("")}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
-      ${hero("Сумма", d.sum, true)}
-      ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`:""}
+      ${hero("Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
+      ${sumState(d.sum)==="undisclosed"
+        ? `<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`
+        : sumState(d.sum)==="unknown"
+          ? `<p class="fact-note">Суммы в наших источниках нет. Могли ли стороны назвать её где-то ещё, мы не проверяли — поэтому и не пишем, что она не раскрыта.</p>`
+          : ""}
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
@@ -5592,6 +5634,13 @@ const fnsDelta = (current,previous) => {
    переносим: две копии правил в Python и JS уже разъезжались, см. «Слой
    фактов» в CLAUDE.md. Показателя, которому не хватило строки отчётности,
    в ответе нет вовсе — прочерк читался бы как «посчитали, вышло ноль». */
+/* Виды записей ЕГРЮЛ — подписи и порядок кнопок. Сами виды выводит сервер
+   (`_change_kind` в main.py): у записи нет собственного поля «тип», он
+   выводится из человеческой фразы внутри неё, и делать это в двух местах
+   нельзя — правила разъезжаются (см. «Слой фактов» в CLAUDE.md). */
+const CHANGE_KIND_LABELS = {license:"Лицензии", charter:"Учредительные документы",
+  registry:"Сведения в ЕГРЮЛ", tax:"Налоговый учёт", funds:"Страховые взносы"};
+const CHANGE_KIND_ORDER = ["license","charter","registry","tax","funds"];
 const fnsDerivedHtml = (report) => {
   const d = report && report.derived;
   if(!d || !d.metrics || !d.metrics.length) return "";
@@ -5809,7 +5858,7 @@ async function mountCompanyFns(companyId){
     mount.innerHTML=`<div class="fns-empty reveal">${esc(data.reason||"Финансовые данные появятся после проверки соответствующего юридического лица.")}</div>`;
     return;
   }
-  let entityIndex=0, tab=isBank?"registry":"overview";
+  let entityIndex=0, tab=isBank?"registry":"overview", changeKind="all";
   const draw=()=>{
     const entry=data.entities[entityIndex], e=entry.entity, reports=entry.reports||[];
     const latest=reports[0]||{}, prev=reports[1]||{};
@@ -5867,15 +5916,35 @@ async function mountCompanyFns(companyId){
        подробные: список на два экрана прокрутки закрывал собой всё остальное
        на вкладке. Показываем три свежих, остальные — по кнопке (замечание
        Ксюши, 19 сентября 2026). */
-    const evRow = ev => `<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`;
+    const evRow = ev => `<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||CHANGE_KIND_LABELS[ev.kind]||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`;
     if(tab==="changes"){
-      const evs=entry.events, head=evs.slice(0,3), tail=evs.slice(3);
-      content = evs.length
+      /* Фильтр по виду записи (просьба Ксюши: «покажи только лицензии»).
+         Кнопки рисуются ТОЛЬКО для видов, которые реально встречаются у этой
+         компании, и только если их больше одного: выбор из одного пункта —
+         не выбор, а шум. Незнакомые формулировки ни в какой вид не
+         записываются и видны всегда — придуманная категория хуже её
+         отсутствия. */
+      const evs0=entry.events;
+      const counts={};
+      evs0.forEach(e=>{ if(e.kind) counts[e.kind]=(counts[e.kind]||0)+1; });
+      const kinds=CHANGE_KIND_ORDER.filter(k=>counts[k]);
+      if(kinds.length<2 || !counts[changeKind]) changeKind="all";
+      const evs = changeKind==="all" ? evs0 : evs0.filter(e=>e.kind===changeKind);
+      const head=evs.slice(0,3), tail=evs.slice(3);
+      const filterBar = kinds.length>1
+        ? `<div class="fns-entity-switch" style="padding:0 0 14px">${
+            [["all",`Все (${evs0.length})`]].concat(kinds.map(k=>[k,`${CHANGE_KIND_LABELS[k]} (${counts[k]})`]))
+              .map(([k,label])=>`<button class="chip ${k===changeKind?"on":""}" data-chkind="${k}">${esc(label)}</button>`).join("")
+          }</div>`
+        : "";
+      content = filterBar + (evs.length
         ? head.map(evRow).join("")
           + (tail.length
               ? `<button class="chip" id="moreEvents" style="margin-top:14px">Ещё ${tail.length} ${plural(tail.length,"изменение","изменения","изменений")}</button><div id="moreEventsBox" hidden>${tail.map(evRow).join("")}</div>`
               : "")
-        : `<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
+        : `<div class="fns-empty">${changeKind==="all"
+             ? "История изменений в полученных данных пока отсутствует."
+             : "Записей этого вида у компании нет."}</div>`);
     }
     const tabs = isBank
       ? [["registry","ЕГРЮЛ"],["ownership","Участники"],["changes","Изменения"]]
@@ -5888,6 +5957,7 @@ async function mountCompanyFns(companyId){
     </section>`;
     /* Показатели второго ряда прячутся не насовсем: кнопка раскрывает их на
        месте, не перерисовывая вкладку, — иначе прокрутка прыгала бы к началу. */
+    mount.querySelectorAll("[data-chkind]").forEach(b=>b.onclick=()=>{changeKind=b.dataset.chkind;draw();});
     const moreEvents = mount.querySelector("#moreEvents");
     if(moreEvents){
       const closedText = moreEvents.textContent;
@@ -5975,7 +6045,8 @@ function factsVerifiedHtml(d){
   if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st)+(st.quote?` — «${esc(st.quote)}»`:""));
   if(factVerified(dt) && dt.value) rows.push(`дата (${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"})`+src(dt)+(dt.quote?` — «${esc(dt.quote)}»`:""));
   if(!rows.length) return "";
-  return `<div class="fact-verified"><span class="label">Проверено по источникам</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`;
+  return `<div class="fact-verified"><span class="label">Подтверждено цитатой из источника</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`
+    + `<p class="fact-note">Так помечены числа, которые двое читателей независимо нашли в источнике дословно. У остальных сделок такой пометки нет — это значит, что до них ещё не дошли, а не что с ними что-то не так.</p>`;
 }
 const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подписание", announcement:"объявление", publication:"дата сообщения о закрытии", registry:"запись в ЕГРЮЛ"};
 const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",

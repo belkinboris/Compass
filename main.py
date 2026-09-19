@@ -52,7 +52,7 @@ from db.models import (
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
 from db.session import engine, get_session
-from fns_client import ApiFnsClient, ApiFnsError, full_lines_payload
+from fns_client import ApiFnsClient, ApiFnsError, change_text, full_lines_payload
 from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
 from sqlalchemy import func, inspect, select, text
 from sqlalchemy.exc import SQLAlchemyError
@@ -1736,6 +1736,33 @@ def _json_or_empty(text):
         return {}
 
 
+# ВИДЫ ЗАПИСЕЙ ЕГРЮЛ — для фильтра «покажи только лицензии» (просьба Ксюши,
+# 19 сентября 2026). Собственного поля «тип» у записи нет: замер по проду
+# показал, что `event_type` пуст у 330 записей из 334. Зато человеческая
+# фраза внутри записи начинается с узнаваемого оборота, и вид выводится из
+# неё. Порядок важен: первое совпадение и есть вид.
+CHANGE_KINDS = (
+    ("license", "Лицензии", ("лиценз",)),
+    ("charter", "Учредительные документы", ("учредительн", "устав")),
+    ("registry", "Сведения в ЕГРЮЛ", ("сведений о юридическом лице", "сведения, содержащиеся в едином")),
+    ("tax", "Налоговый учёт", ("налогов",)),
+    ("funds", "Страховые взносы", ("страхователя", "пенсионн", "социальн", "страховани")),
+)
+
+
+def _change_kind(text) -> str:
+    """Вид записи ЕГРЮЛ одним словом — или пусто, если фраза незнакомая.
+    Незнакомая фраза НЕ приписывается к «прочему»: выдуманная категория в
+    фильтре хуже её отсутствия."""
+    low = change_text(text).lower()
+    if not low:
+        return ""
+    for key, _label, cues in CHANGE_KINDS:
+        if any(cue in low for cue in cues):
+            return key
+    return ""
+
+
 @app.get("/api/companies/{company_id}/fns")
 def company_fns(company_id: str, as_of_year: int | None = None, user: User | None = Depends(_current_user), db=Depends(get_db)):
     profile = get_company_profile(company_id)
@@ -1817,11 +1844,20 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
             "reports": [_report_payload(row) for row in shown_reports],
             "report_years": [row.year for row in reports],
             "stale_latest_year": stale_latest_year,
+            # `change_text` чистит и УЖЕ СОХРАНЁННЫЕ записи: до 19 сентября 2026
+            # в базу уезжал машинный слепок `{"СПВЗ": "…"}`, и читатель видел
+            # его на странице компании. Перекачивать ЕГРЮЛ ради этого не нужно
+            # — разбираем при отдаче; новые записи приходят уже чистыми.
             "events": [{
                 "id": row.id,
                 "date": _plain(row.event_date),
+                # `type` остаётся как есть (человеческий текст или пусто), а
+                # машинный ключ вида едет отдельным полем `kind`: подставить
+                # его сюда значило бы вывести на экран слово «license» —
+                # ровно тот дефект, ради которого всё это и чинилось.
                 "type": row.event_type,
-                "text": row.text,
+                "text": change_text(row.text),
+                "kind": _change_kind(row.text),
             } for row in shown_events],
             "ownership": _ownership_payload(db, entity, paid),
             "has_more_reports": len(reports) > len(shown_reports),

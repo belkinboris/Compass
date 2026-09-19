@@ -321,8 +321,11 @@ def check_browser(base: str, p: Protocol) -> None:
         p.add('Блок мультипликаторов: медианы скрыты, показанные сделки помечены «проверено»',
               medians_hidden and ('провер' in low or 'не прошла все проверки' in mult),
               where, mult[:160].replace(chr(10), ' | '))
-        # Блок «Проверено по источникам» стоит на «Обзоре» — его видит каждый
-        # посетитель, не только тот, кто открыл «Экономиста».
+        # Блок «Подтверждено цитатой из источника» стоит на «Обзоре» — его
+        # видит каждый посетитель, не только тот, кто открыл «Экономиста».
+        # Назывался «Проверено по источникам» до 19 сентября 2026: рядом на той
+        # же карточке стоит «Карточку сверяли с источниками: <дата>», и два
+        # почти одинаковых ярлыка значили разное — читатель не мог их развести.
         verified_deal = next((i for i, d in DEALS.items()
                               if ((d.get('facts') or {}).get('price') or {}).get('basis') == 'verified'
                               and (d['facts']['price'] or {}).get('meaning') == 'disclosed'), None)
@@ -332,8 +335,8 @@ def check_browser(base: str, p: Protocol) -> None:
             text = page.inner_text('.fact-verified')
             quote = ((DEALS[verified_deal]['facts']['price'] or {}).get('quote') or '')[:30]
             # .label рисуется заглавными (text-transform), innerText отдаёт текст после CSS
-            ok = 'проверено по источникам' in text.lower() and (not quote or quote[:20].lower() in text.lower())
-            p.add(f'Карточка {verified_deal}: блок «Проверено по источникам» с цитатой на «Обзоре»', ok,
+            ok = 'подтверждено цитатой' in text.lower() and (not quote or quote[:20].lower() in text.lower())
+            p.add(f'Карточка {verified_deal}: блок «Подтверждено цитатой из источника» на «Обзоре»', ok,
                   base + '/#/deal/' + verified_deal, text[:140].replace(chr(10), ' | '))
         for pair in GOLD['duplicates']:
             page.goto(base + '/#/deal/' + pair['drop'])

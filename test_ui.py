@@ -253,7 +253,11 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     visit(page, base_url, "#/deal/g1d36d186")
     note = page.locator(".src .acct-note")
     assert note.is_visible()
-    assert "Сверено с источником" in note.inner_text()
+    # «Сверено с источником» переименовано 19 сентября 2026: рядом на карточке
+    # стоит второй ярлык про проверку («Подтверждено цитатой из источника»),
+    # и два почти одинаковых названия значили разное — про всю карточку и про
+    # отдельные числа. Теперь их видно, что это не одно и то же.
+    assert "Карточку сверяли с источниками" in note.inner_text()
     assert "16 авг" in note.inner_text()
 
     # У карточки без единой отметки о сверке строка честно не рисуется —
@@ -1008,10 +1012,30 @@ def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
     page.wait_for_timeout(300)
     row = page.locator(f'a.deal-row[href="#/deal/{did}"]')
     assert row.count() == 1
-    assert row.locator(".deal-sum").count() == 0
+    # 19 сентября 2026 требование изменилось, и замер объясняет почему.
+    # Раньше у карточки без суммы блок не рисовался вовсе — ради того, чтобы
+    # метка отрасли встала на одну вертикаль с заголовком. Но у ВСЕХ
+    # остальных карточек она и так смещена на 96–105px, так что «ровно»
+    # получалось только у этих 177 — и именно это Ксюша увидела как
+    # непоследовательность: «где-то подпись есть, где-то нет». Теперь блок
+    # есть всегда и честно говорит «Нет данных» (писать «Не раскрыта» нельзя:
+    # у этих карточек мы не проверяли, называли ли стороны сумму).
+    assert row.locator(".deal-sum").count() == 1
+    assert row.locator(".deal-sum").inner_text().strip() == "Нет данных"
     title_x = row.locator(".deal-title").bounding_box()["x"]
     tags_x = row.locator(".deal-tags").bounding_box()["x"]
-    assert title_x == tags_x, f"метка отрасли не на одной вертикали с заголовком: {title_x} vs {tags_x}"
+    with_sum = page.evaluate("""() => {
+        const rows = [...document.querySelectorAll('a.deal-row')].filter(r => {
+          const s = r.querySelector('.deal-sum');
+          return s && s.textContent.trim() !== 'Нет данных';
+        }).slice(0, 5);
+        return rows.map(r => Math.round(r.querySelector('.deal-tags').getBoundingClientRect().x
+                                      - r.querySelector('.deal-title').getBoundingClientRect().x));
+    }""")
+    assert with_sum, "в ленте не нашлось карточек с суммой для сравнения"
+    shift = round(tags_x - title_x)
+    assert min(with_sum) - 12 <= shift <= max(with_sum) + 12, (
+        "карточка без суммы выбивается из общего строя: %s против %s" % (shift, with_sum))
     page.set_viewport_size({"width": 1280, "height": 1000})
 
 

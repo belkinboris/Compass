@@ -540,6 +540,55 @@ def full_lines_payload(raw_lines: dict) -> list[dict[str, Any]]:
     return sections
 
 
+# Ключ, под которым API-ФНС отдаёт человеческое описание записи ЕГРЮЛ.
+# «СПВЗ» — сведения о причине внесения записи; именно эту фразу и нужно
+# показывать: «Представление лицензирующим органом сведений о предоставлении
+# лицензии», «Государственная регистрация изменений, внесенных в учредительные
+# документы» и т. д.
+CHANGE_TEXT_KEYS = ("СПВЗ", "Текст", "Описание", "НаимВидЗап", "Вид", "Статус")
+
+
+def change_text(item: Any) -> str:
+    """Человеческое описание записи ЕГРЮЛ.
+
+    ДО 19 СЕНТЯБРЯ 2026 ЗДЕСЬ БЫЛ `json.dumps(item)` — и на странице компании
+    читателю показывался машинный слепок: `{"СПВЗ": "Изменение сведений о
+    юридическом лице, содержащихся в Едином государственном реестре…"}`.
+    Запасной путь задумывался как «лучше, чем ничего», но сработал он не в
+    редком случае, а почти всегда: искали ключи «Текст»/«Описание»/«Статус»,
+    а API отдаёт «СПВЗ» — 330 записей из 334 в замере по проду. Урок тот же,
+    что уже записан про притворно-полезные заглушки: запасной путь, который
+    показывает человеку внутреннее представление данных, хуже пустой строки.
+    """
+    if isinstance(item, str):
+        item = _maybe_json_dict(item)
+    if not isinstance(item, dict):
+        return str(item or "").strip()
+    for key in CHANGE_TEXT_KEYS:
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    # Ключа не знаем — берём самую длинную человеческую строку, а не слепок
+    # словаря: она почти наверняка и есть описание.
+    best = max((v.strip() for v in item.values() if isinstance(v, str) and v.strip()),
+               key=len, default="")
+    return best
+
+
+def _maybe_json_dict(text: str):
+    """Строка, в которой лежит записанный словарь, — обратно словарём.
+    Нужна для записей, УЖЕ сохранённых в базе со старым запасным путём:
+    перекачивать их ради этого незачем."""
+    raw = (text or "").strip()
+    if not (raw.startswith("{") and raw.endswith("}")):
+        return raw
+    try:
+        parsed = json.loads(raw)
+    except ValueError:
+        return raw
+    return parsed if isinstance(parsed, dict) else raw
+
+
 def normalize_changes(data: dict) -> list[dict[str, Any]]:
     entity = unwrap_legal_entity(data)
     if not entity:
@@ -557,10 +606,8 @@ def normalize_changes(data: dict) -> list[dict[str, Any]]:
             continue
         event_date = parse_date(maybe_date) or parse_date(item.get("Дата"))
         event_type = item.get("Тип") or item.get("Статус") or item.get("Вид")
-        text = item.get("Текст") or item.get("Описание") or item.get("Статус")
-        if not text:
-            text = json.dumps(item, ensure_ascii=False, sort_keys=True)
-        rows.append({"event_date": event_date, "event_type": event_type, "text": str(text), "raw": item})
+        text = change_text(item)
+        rows.append({"event_date": event_date, "event_type": event_type, "text": text, "raw": item})
     return rows
 
 # ---------------------------------------------------------------- ownership ---
