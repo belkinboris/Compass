@@ -215172,6 +215172,139 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "g5ffcce01",
+   "date": "2026-09-18",
+   "title": "«Дом.РФ» продает три недостроенных многоэтажных дома в Липецке",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260918/lipetsk-2118470654.html"
+    ],
+    [
+     "Абireg",
+     "https://abireg.ru/newsitem/116828/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Это уже вторая попытка продажи: в конце августа такой же лот выставляли по той же начальной цене — 990,8 млн рублей, но на аукцион не поступило ни одной заявки, и торги признали несостоявшимися.",
+    "context": "«Дом.РФ» проведёт аукцион по продаже трёх недостроенных многоэтажных домов общей площадью 47,81 тысячи квадратных метров и участков под ними суммарной площадью 1,96 гектара в Советском округе Липецка — на территории военного городка № 1. Начальная цена лота — почти 1 миллиард рублей, торги назначены на 13 ноября.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "три недостроенных многоэтажных дома в Липецке",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "три недостроенных многоэтажных дома в Липецке",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260918/lipetsk-2118470654.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260918/lipetsk-2118470654.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-09-18",
+   "proofread_absorbed": {
+    "eco.context": [
+     "1f3c817c898a"
+    ],
+    "eco.rationale": [
+     "0e900ce4b204"
+    ]
+   },
+   "proofread": "2026-09-18",
+   "deep_researched": "2026-09-18",
+   "accepted": "2026-09-18",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "три недостроенных многоэтажных дома в Липецке — объекты недвижимости на торгах, не юрлицо; предложенный кандидат по слову «Липецк» (завод Whirlpool) — другое предприятие, не тот же объект"
+    }
+   },
+   "post_preview": "<b>«Дом.РФ» продает три недостроенных многоэтажных дома в Липецке</b>\n\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20260918/lipetsk-2118470654.html\">РИА Недвижимость</a>\nЕщё 1 источник — в карточке сделки\n\n#недвижимость #торги",
+   "added": "2026-09-19",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "eb8b6c6b756d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "e7dae0f3dc17"
+    },
+    "date": {
+     "value": "2026-09-18",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "85ef5a1c0451"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "e093be1850d0"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
