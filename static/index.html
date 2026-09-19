@@ -1068,7 +1068,12 @@ a.dp-asset-name:hover{color:var(--accent)}
    компаний»: он одинаковый у всех, а отрасль у каждой карточки своя и по
    ней кликают. */
 .co-tags .tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
-.co-tags .co-tag{flex:1 1 auto}
+/* Растягиваться бейджу не нужно — только уступать. С `flex:1 1 auto`
+   отрасль растягивалась на всю свободную ширину карточки и читалась
+   как пустое поле ввода, а не как подпись (замечено на снимке
+   19 сентября 2026, в тот же день, что и правка выше). Сжатие с
+   многоточием даёт `flex-shrink:1`, рост к нему отношения не имеет. */
+.co-tags .co-tag{flex:0 1 auto}
 /* «Группа» — короткий и одинаковый у всех: сжимать его незачем, пусть
    уступает место отрасль, у которой длина своя у каждой карточки. */
 .co-tags .co-group-badge{flex:0 0 auto}
@@ -1507,6 +1512,11 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .switch input{opacity:0;width:0;height:0}.switch span{position:absolute;inset:0;background:#C9CEC8;border-radius:20px;transition:.2s}.switch span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+span{background:var(--accent)}.switch input:checked+span:before{transform:translateX(18px)}
 
 .materials-pitch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+/* Подпись под карточками стояла вплотную к блоку вебинаров: строка
+   «обсудим формат.» и рамка ниже сходились без просвета (Артём,
+   19 сентября 2026). Отступ задан здесь, а не у .acct-note, — тот же
+   класс носят подписи в аккаунте и на двери входа, где зазор не нужен. */
+.mp-note{margin:22px 0 26px}
 .mp-item{background:var(--card);border:1px solid var(--line);padding:20px;min-width:0}
 .mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
 .mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
@@ -5310,9 +5320,36 @@ function renderDeal(id, qs, previewCard){
 /* ================= КОМПАНИИ ================= */
 let coQuery = "";
 let coInd = "Все";
+/* Выдача собрана не по названию профиля, а по заголовкам сделок (см.
+   companiesNamedInDeals): читателю надо сказать, почему в ответ на
+   «Норникель» рядом стоит «РНК-Холдинг». */
+let coFoundViaDeals = false;
 let coSort = "active"; // active | alpha
 let coShown = 60;
 const coWordEnd = n => (n%10===1&&n%100!==11) ? "я" : (n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)) ? "и" : "й";
+/* КАК КОМПАНИЮ ЗОВУТ В СДЕЛКАХ, А НЕ В ПРОФИЛЕ. Профиль называется
+   «Норильский никель», разговорное имя — «Норникель», и каталог отвечал
+   «Найдено 0 компаний из 2029» (Ксюша, 19 сентября 2026). Отдельного поля
+   с сокращённым названием у нас нет и выдумывать его нельзя, но само имя
+   в базе есть: оно стоит в заголовках карточек сделок, где компания названа
+   стороной (у «Норникеля» таких девять).
+
+   Полный проход по сделкам делается ТОЛЬКО когда по названию не нашлось
+   ничего. Обычный запрос («сбер», «вк», «авто ру») отвечает ровно как
+   раньше и той же ценой — платить сканом всей базы за каждое нажатие
+   клавиши не приходится, а это тот самый расход, от которого уходили
+   в индексе выше. */
+function companiesNamedInDeals(q){
+  const out = new Set();
+  const qsq = squashQ(q);
+  if(!q || !qsq) return out;
+  const hit = t => { const s = String(t||""); return s.toLowerCase().includes(q) || squashQ(s).includes(qsq); };
+  DEALS.forEach(d=>{
+    if(!hit(d.title)) return;
+    [d.buyer,d.target,d.seller_id,d.asset_id].forEach(id=>{ if(id && COMPANIES[id]) out.add(id); });
+  });
+  return out;
+}
 function companyRows(){
   const q = coQuery.trim().toLowerCase();
   // Тот же размен, что в поиске по сделкам: «авто ру» обязано находить «Авто.ру».
@@ -5320,8 +5357,17 @@ function companyRows(){
   const hit = name => name.toLowerCase().includes(q) || (!!qsq && squashQ(name).includes(qsq))
     || (qtr.length>=2 && translitKey(name).includes(qtr))   // «вк» находит «VK»
     || fuzzyIncludes(q, name);
-  return Object.entries(COMPANIES)
-    .filter(([,c])=>(coInd==="Все"||c.ind===coInd)&&(!q||hit(c.name)))
+  const inInd = c => coInd==="Все"||c.ind===coInd;
+  let picked = Object.entries(COMPANIES).filter(([,c])=>inInd(c)&&(!q||hit(c.name)));
+  coFoundViaDeals = false;
+  if(q && !picked.length){
+    const byDeals = companiesNamedInDeals(q);
+    if(byDeals.size){
+      picked = Object.entries(COMPANIES).filter(([id,c])=>inInd(c)&&byDeals.has(id));
+      coFoundViaDeals = picked.length > 0;
+    }
+  }
+  return picked
     // УПОМИНАНИЯ ЗДЕСЬ НЕ СЧИТАЮТСЯ ВОВСЕ. Раньше они были частью ключа
     // сортировки — и ради порядка внутри хвоста списка платили полным проходом
     // по базе регуляркой на КАЖДЫЙ из 1872 профилей (замер: 437 мс синхронно
@@ -5377,6 +5423,7 @@ function companyGridHtml(){
       ? `Найдено ${rows.length} компани${coWordEnd(rows.length)} из ${Object.keys(COMPANIES).length}`
       : `${rows.length} компани${coWordEnd(rows.length)} в базе`
   }${rows.length>shown.length?` · показано ${shown.length}`:""}</p>
+  ${coFoundViaDeals?`<p style="color:var(--muted);font-size:13px;margin:-14px 0 20px">Компании с таким названием в каталоге нет — показываем тех, кто участвует в сделках, где встречается «${esc(coQuery.trim())}».</p>`:""}
   <div class="co-grid">
   ${shown.map(({id,c,n})=>`
     <article class="co-card">
@@ -5614,7 +5661,9 @@ const fnsDelta = (current,previous) => {
 const CHANGE_KIND_LABELS = {license:"Лицензии", charter:"Учредительные документы",
   registry:"Сведения в ЕГРЮЛ", tax:"Налоговый учёт", funds:"Страховые взносы"};
 const CHANGE_KIND_ORDER = ["license","charter","registry","tax","funds"];
-const fnsDerivedHtml = (report) => {
+/* Заголовок — параметром, потому что тот же блок рисует показатели банка,
+   а у банка нет «отчётности за год»: форма 0409806 — это баланс на дату. */
+const fnsDerivedHtml = (report, heading) => {
   const d = report && report.derived;
   if(!d || !d.metrics || !d.metrics.length) return "";
   /* Единица измерения решает и подпись: «×2,5» — это отношение, а «192 дн.» —
@@ -5633,7 +5682,8 @@ const fnsDerivedHtml = (report) => {
   });
   const plural = n => n%10===1&&n%100!==11 ? "показатель"
     : [2,3,4].includes(n%10)&&![12,13,14].includes(n%100) ? "показателя" : "показателей";
-  return `<p class="fns-derived-group" style="margin-top:0">Главное по отчётности за ${report.year} год</p>`
+  const title = heading || `Главное по отчётности за ${report.year} год`;
+  return `<p class="fns-derived-group" style="margin-top:0">${esc(title)}</p>`
     + `<div class="fns-derived">${main.map(card).join("")}</div>`
     + (rest.length
         ? `<button class="chip" data-fns-more="1" style="margin:12px 0 4px">Ещё ${rest.length} ${plural(rest.length)}</button>`
@@ -5690,7 +5740,7 @@ function ownershipHtml(ownership){
 // Этап 6: банки не сдают коммерческую БФО в общем порядке (ФНС-грид у них
 // либо не показывается вовсе, либо честно пуст) — вместо неё, для профилей
 // из pipeline/fns_registry.py с decision:"bank", показываем то, что банк
-// САМ публикует перед Банком России: баланс (форма 806, чистые активы/
+// САМ подаёт в Банк России: баланс (форма 806, чистые активы/
 // капитал, не гросс — см. урок в CLAUDE.md про gross/net) и прибыль (форма
 // 102). Файл маленький (13 банков) и нужен только на их страницах —
 // загружается лениво, один раз, а не вместе с deals_promoted.json.
@@ -5720,7 +5770,12 @@ function bankFinanceHtml(entry){
            видел, о каком юрлице речь (владелец, 3 сентября 2026). */""}
       ${entry.legal_name?`<p style="color:var(--muted);margin-bottom:12px">${esc(entry.legal_name)}${entry.regnum?` · регистрационный номер в Банке России ${entry.regnum}`:""}</p>`:""}
       <div class="fns-metrics">${rows.map(([label,val,prev])=>`<div class="fns-metric"><span class="label">${label}</span><div class="v num">${fnsMoney(val)}</div>${prev!=null?`<div class="delta">${fnsDelta(val,prev)}</div>`:""}</div>`).join("")}</div>
-      <p class="fns-disclaimer">Официальный баланс (форма 0409806) и отчёт о прибыли (форма 0409102), которые банк публикует перед Банком России, — не то же самое, что бухгалтерская отчётность через ФНС. Показатели относятся к юридическому лицу, не к консолидированной группе${dateBits?`; ${dateBits}`:""}.</p>
+      ${/* Оборотного капитала и чистого долга у банка нет и быть не может —
+           его баланс не делится на оборотные и внеоборотные активы, а
+           привлечённые деньги это его работа, а не долг. Вместо них то, о
+           чём банк спрашивают первым делом (company_finance.derive_bank). */""}
+      ${fnsDerivedHtml({derived: entry.derived}, "Главное по этим данным")}
+      <p class="fns-disclaimer">Официальный баланс (форма 0409806) и отчёт о прибыли (форма 0409102) банк подаёт в Банк России. Показатели относятся к юридическому лицу, не к консолидированной группе${dateBits?`; ${dateBits}`:""}.</p>
     </div>
   </section>`;
 }
@@ -7429,7 +7484,7 @@ async function renderMaterials(){
     <div class="mp-item"><h2>Анонсируйте вебинары</h2><p>Дата, тема и ссылка на подключение — событие появляется здесь, а читатель добавляет его в свой календарь одним нажатием, чтобы не забыть о встрече.</p></div>
     <div class="mp-item"><h2>Профиль автора</h2><p>Колонки и эфиры собираются на странице фирмы или консультанта в каталоге — рядом с реальными сделками, которые она вела.</p></div>
   </div>
-  <p class="acct-note reveal">Раздел только начинается. Ниже — эфиры, о которых уже объявлено; календарь и авторские колонки добавим следом. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
+  <p class="acct-note mp-note reveal">Раздел только начинается. Ниже — эфиры, о которых уже объявлено; календарь и авторские колонки добавим следом. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
   <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
   const pitchLink=document.getElementById("materialsPitchLink");

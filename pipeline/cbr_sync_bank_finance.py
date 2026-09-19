@@ -61,6 +61,7 @@ if str(ROOT) not in sys.path:
 
 import httpx  # noqa: E402
 
+import company_finance  # noqa: E402
 from cbr_client import CbrCreditOrgClient  # noqa: E402
 from pipeline import fns_registry  # noqa: E402
 from pipeline.cbr_f806 import find_latest_page, parse_balance, parse_full_table  # noqa: E402
@@ -128,6 +129,10 @@ def collect(today: date) -> tuple[dict[str, dict], dict[str, dict]]:
             if profit is not None:
                 entry["as_of_profit"] = profit[0].isoformat()
                 entry["net_profit_rub"] = profit[1]
+            # Посчитанное из этих же двух величин — рядом с ними, одним
+            # исполнителем (company_finance): иначе показатели пришлось бы
+            # считать на клиенте второй копией формулы.
+            entry["derived"] = company_finance.derive_bank(entry)
             finance[row["company_id"]] = entry
             if full is not None:
                 full_balance[row["company_id"]] = {

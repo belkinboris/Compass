@@ -3,6 +3,11 @@
 
 Запуск: python3 -m pytest test_company_finance.py -q
 """
+import json
+import pathlib
+
+import pytest
+
 import company_finance as cf
 
 
@@ -226,3 +231,76 @@ def test_loss_year_hides_the_ratios_that_would_lie():
     assert "roe" not in m
     # Но рентабельность по чистой прибыли остаётся: −3,1% это честный факт.
     assert m["net_margin"]["value"] == -3.1
+
+
+# ============================ БАНКИ ============================
+# Данные Сбербанка на день правки — то же, что лежит в static/data/bank_finance.json:
+# они и служат проверкой, потому что вопрос владельца был именно про эту страницу.
+SBER = {
+    "as_of_balance": "2026-04-01",
+    "as_of_profit": "2026-08-01",
+    "assets_rub": 65_137_327_668_000,
+    "equity_rub": 8_627_750_211_000,
+    "net_profit_rub": 1_163_640_131_000,
+    "regnum": 1481,
+}
+
+
+def _bank_by_key(entry):
+    return {m["key"]: m for m in cf.derive_bank(entry)["metrics"]}
+
+
+def test_bank_gets_the_two_ratios_a_bank_is_asked_about():
+    m = _bank_by_key(SBER)
+    assert m["equity_to_assets"]["value"] == 13.2
+    assert m["return_on_equity"]["value"] == 13.5
+    # Оба показываются сразу: прятать под кнопку два числа незачем.
+    assert all(x["primary"] for x in m.values())
+
+
+def test_period_of_an_accumulated_profit_is_in_the_label_not_in_a_footnote():
+    """«13,5%» без слова «за 7 месяцев» читается как годовая доходность —
+    то есть почти вдвое лучше, чем есть. Период обязан стоять в подписи над
+    числом, а не в пояснении под ним."""
+    assert _bank_by_key(SBER)["return_on_equity"]["label"] == \
+        "Рентабельность капитала за 7 мес. 2026"
+    # Полный год называется годом, а не «12 мес.».
+    full = dict(SBER, as_of_profit="2027-01-01")
+    assert _bank_by_key(full)["return_on_equity"]["label"] == \
+        "Рентабельность капитала за 2026 год"
+
+
+def test_accumulated_profit_is_never_scaled_up_to_a_year():
+    """Пересчёт семи месяцев на двенадцать был бы правдоподобным заполнением
+    пустоты: 13,5% превратились бы в 23%, которых никто не публиковал."""
+    roe = _bank_by_key(SBER)["return_on_equity"]["value"]
+    assert roe == pytest.approx(SBER["net_profit_rub"] / SBER["equity_rub"] * 100, abs=0.05)
+    assert roe < 14
+
+
+def test_bank_without_a_balance_gets_no_ratios_at_all():
+    """Четыре банка из семнадцати отдали только прибыль, без баланса. Делить
+    не на что — показателя нет вовсе, прочерк читался бы как «посчитали»."""
+    only_profit = {"as_of_profit": "2025-01-01", "net_profit_rub": 51_467_590_000, "regnum": 2272}
+    assert cf.derive_bank(only_profit)["metrics"] == []
+
+
+def test_profit_dated_mid_month_leaves_the_period_unnamed():
+    """Дата не первого числа означает, что период мы назвать не можем.
+    Показатель без названного периода читался бы как годовой — не показываем."""
+    odd = dict(SBER, as_of_profit="2026-08-15")
+    assert "return_on_equity" not in _bank_by_key(odd)
+    # Но доля капитала в активах от даты прибыли не зависит и остаётся.
+    assert "equity_to_assets" in _bank_by_key(odd)
+
+
+def test_bank_finance_file_carries_what_the_module_computes():
+    """Один исполнитель: то, что лежит в JSON, обязано совпадать с тем, что
+    сейчас считает company_finance — иначе на экране старая формула."""
+    data = json.loads((pathlib.Path(__file__).parent / "static" / "data" /
+                       "bank_finance.json").read_text(encoding="utf-8"))
+    assert data, "файл с финансами банков пуст"
+    for cid, entry in data.items():
+        stored = entry.get("derived")
+        fresh = cf.derive_bank({k: v for k, v in entry.items() if k != "derived"})
+        assert stored == fresh, f"{cid}: в файле не то, что считает модуль"
