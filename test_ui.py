@@ -1481,7 +1481,11 @@ def test_group_badge_appears_in_catalog_for_operating_groups(page, base_url):
         page.wait_for_timeout(600)
         cards = page.locator(".co-card")
         assert cards.count() >= 1, "поиск «МТС» не нашёл карточку в каталоге"
-        assert "группа компаний" in cards.first.inner_text().lower(), \
+        # В КАТАЛОГЕ бейдж короче — «Группа». Полное «Группа компаний» занимало
+        # 145px из ~200px полосы и не оставляло места тегу отрасли: «ИТ и
+        # интернет» обрезалось на последней букве (замер 19 сентября 2026).
+        # На самом профиле компании текст остаётся полным — см. тесты ниже.
+        assert "группа" in cards.first.inner_text().lower(), \
             "бейдж группы не показан в каталоге у профиля с group:true"
     finally:
         # `coQuery` — глобальная JS-переменная, не сбрасывается переходом по

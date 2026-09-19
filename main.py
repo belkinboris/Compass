@@ -3469,9 +3469,60 @@ def list_webinars(db=Depends(get_db)):
 
 # ==================== Экспорт сделки ====================
 
+def _export_finance(deal: dict, db) -> list[dict]:
+    """Финансовый контекст сделки для PDF — то же, что блок на карточке.
+
+    Просьба Ксюши (19 сентября 2026): в выгрузке этого раздела не было вовсе,
+    а на карточке он есть. Отчёт уходит из рук в руки, и «за сколько купили»
+    без «сколько эта компания зарабатывает» — половина разговора.
+
+    Берём показатели ЗА ПОСЛЕДНИЙ ГОД ДО СДЕЛКИ (как и на экране): показывать
+    в отчёте о сделке 2023 года отчётность за 2025-й значило бы отвечать не на
+    тот вопрос. Юрлицо и год называются прямо — отчётность сдаётся по юрлицу,
+    а сделка заключается по группе, и подменять одно другим нельзя.
+    """
+    year_cap = None
+    date = str(deal.get("date") or "")
+    if len(date) >= 4 and date[:4].isdigit():
+        year_cap = int(date[:4])
+    rows: list[dict] = []
+    for key, role in (("target", "Покупаемая компания"), ("buyer", "Покупатель")):
+        company_id = deal.get(key)
+        if not company_id:
+            continue
+        entity = db.scalar(select(LegalEntity).where(
+            LegalEntity.company_id == company_id,
+            LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+        ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
+        if not entity:
+            continue
+        query = select(FinancialReport).where(FinancialReport.legal_entity_id == entity.id)
+        if year_cap:
+            query = query.where(FinancialReport.year <= year_cap)
+        report = db.scalar(query.order_by(FinancialReport.year.desc()))
+        if not report:
+            continue
+        profile = get_company_profile(company_id) or {}
+        rows.append({
+            "role": role,
+            # Имя из профиля базы, а не из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ
+            # ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"» капсом — нарушение правила
+            # «язык для людей», уже разобранное для экрана мультипликаторов.
+            "name": profile.get("name") or entity.short_name or entity.legal_name,
+            "legal_name": entity.legal_name,
+            "inn": entity.inn,
+            "year": report.year,
+            "revenue_rub": _plain(report.revenue_rub),
+            "net_profit_rub": _plain(report.net_profit_rub),
+            "assets_rub": _plain(report.assets_rub),
+            "equity_rub": _plain(report.equity_rub),
+        })
+    return rows
+
+
 @app.post("/api/deals/{deal_id}/export")
 def export_deal(deal_id: str, _payload: DealExportIn | None = None,
-                user: User | None = Depends(_current_user)):
+                user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user and not DEAL_EXPORT_GUESTS:
         return JSONResponse({"error": "войдите, чтобы скачать карточку"}, status_code=401)
     if user and not DEAL_EXPORT_ALL_FREE and user.tier != UserTier.paid:
@@ -3485,6 +3536,7 @@ def export_deal(deal_id: str, _payload: DealExportIn | None = None,
         profile = get_company_profile(company_id) if company_id else None
         if profile and not enriched.get(out):
             enriched[out] = profile.get("name")
+    enriched["finance"] = _export_finance(deal, db)
     pdf = render_deal_pdf(enriched)
     filename = re.sub(r"[^a-zA-Z0-9_-]+", "-", deal_id)[:80] + ".pdf"
     return StreamingResponse(iter([pdf]), media_type="application/pdf",

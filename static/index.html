@@ -79,6 +79,11 @@
    `touch-action:pan-y` на самом слайдере (см. `.heroslider`). */
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
+/* Ссылка внутри серого пояснения наследует его цвет и перестаёт выглядеть
+   ссылкой (замечание Ксюши про «вся отрасль»). Такой ссылке нужен явный
+   цвет и подчёркивание — иначе по ней просто не кликают. */
+.inline-link{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.inline-link:hover{text-decoration-thickness:2px}
 button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums}
@@ -1053,7 +1058,20 @@ a.dp-asset-name:hover{color:var(--accent)}
    имя и описание не сдвигаются у профилей с group:true, линия над цифрами
    остаётся на одной высоте (ради чего бейдж когда-то и вынесли из потока). */
 .co-tags{display:flex;gap:6px;align-items:center;height:26px;overflow:hidden;white-space:nowrap}
-.co-tags .tag{flex:0 0 auto}
+/* БЕЙДЖ СЖИМАЕТСЯ С МНОГОТОЧИЕМ, А НЕ ОБРЕЗАЕТСЯ ПОСЕРЕДИНЕ БУКВЫ.
+   До 19 сентября 2026 у тега стояло `flex:0 0 auto`: он не уступал ни
+   пикселя, вылезал за контейнер и попадал под его `overflow:hidden` —
+   «ИТ и интернет» на широком экране терял последнюю букву (замер того дня:
+   вылет 29px у восьми карточек на 1280px). Многоточие было прописано только
+   в мобильной ветке, то есть ровно там, где проблему УЖЕ увидели, — а на
+   десктопе её не искали. Теперь уступают оба бейджа, и первым — «Группа
+   компаний»: он одинаковый у всех, а отрасль у каждой карточки своя и по
+   ней кликают. */
+.co-tags .tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.co-tags .co-tag{flex:1 1 auto}
+/* «Группа» — короткий и одинаковый у всех: сжимать его незачем, пусть
+   уступает место отрасль, у которой длина своя у каждой карточки. */
+.co-tags .co-group-badge{flex:0 0 auto}
 .co-nums .label{white-space:nowrap}
 /* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
    пустые 30px под коротким именем и 20px под коротким описанием только
@@ -1065,7 +1083,6 @@ a.dp-asset-name:hover{color:var(--accent)}
   .co-card .desc{height:auto}
   .co-card-main{padding-right:0}
   .co-tags{margin-right:84px}
-  .co-tags .co-tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
   .co-actions{flex-direction:row;top:12px;right:12px}
   .co-compare{width:32px;height:32px}
   .co-nums{gap:20px;margin-top:14px;padding-top:12px}
@@ -3120,7 +3137,7 @@ async function runAsk(q, mode, meta, w){
   /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
      кнопка «Нет» тут значит «ответьте всё-таки» — и мы будем копить её как
      жалобу на качество ответа, которого не было. */
-  if(a.ok){ w.innerHTML=a.html+(a.refused?"":feedbackBar(q,a)); return a; }
+  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":feedbackBar(q,a)); return a; }
   if(quick){
     const raw=quick.answer;
     w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
@@ -3130,6 +3147,13 @@ async function runAsk(q, mode, meta, w){
   }
   w.innerHTML=a.html; return a;
 }
+
+/* Общий вопрос даёт общий ответ, уточнённый — хороший: это заметили и Ксюша,
+   и Артём. Подсказываем не всем подряд, а ровно тогда, когда видно, что
+   ответ ни на одну сделку не опёрся: постоянная подсказка под каждым ответом
+   быстро перестаёт читаться. */
+const askHintHtml = a => (a.refused || (a.deals && a.deals.length)) ? ""
+  : `<p class="ai-note">Ответ получился общим? Спросите конкретнее — назовите компанию, отрасль или год: «сделки «Магнита» в 2025 году» вместо «сделки в ритейле».</p>`;
 
 /* «Ответ помог?» под каждым ответом — начало петли улучшений: плохой ответ
    раньше просто пропадал, и о нём узнавали, только когда партнёр присылал
@@ -3374,7 +3398,7 @@ const hasIndustry = (d,industry) => industry==="Все" || dealIndustries(d).inc
    1541, поэтому дефекта и не было видно. */
 const indLabel = i => i==="Не определена" ? "Отрасль не определена" : i;
 const industryTagsHtml = (d, cls="") => dealIndustries(d).slice(0,2)
-  .map(i=>`<span class="tag ${cls}">${esc(indLabel(i))}</span>`).join("");
+  .map(i=>`<span class="tag ${cls}" data-feed-ind="${esc(i)}" role="link" tabindex="0" title="Сводка по отрасли">${esc(indLabel(i))}</span>`).join("");
 const industryLinksHtml = d => dealIndustries(d).slice(0,3)
   .map(i=>`<a class="tag" href="#/industry/${encodeURIComponent(i)}" title="Сводка по отрасли">${esc(indLabel(i))}</a>`).join(" ");
 
@@ -3593,7 +3617,24 @@ function emptyFeedHtml(){
     </div>
   </div>`;
 }
+/* Клик по тегу отрасли внутри строки ленты. Обработчик делегированный и
+   висит на документе один раз: строки перерисовываются при каждом поиске и
+   «Показать ещё», и прямые обработчики пришлось бы вешать заново. */
+let _feedIndBound = false;
+function bindFeedIndustryTags(){
+  if(_feedIndBound) return;
+  _feedIndBound = true;
+  const go = ev => {
+    const t = ev.target.closest("[data-feed-ind]");
+    if(!t) return;
+    ev.preventDefault(); ev.stopPropagation();
+    location.hash = "#/industry/" + encodeURIComponent(t.dataset.feedInd);
+  };
+  document.addEventListener("click", go);
+  document.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" ") go(e); });
+}
 function bindFeedListEvents(){
+  bindFeedIndustryTags();
   const lm = document.getElementById("loadmore");
   if(lm) lm.onclick = ()=>{feedPage++;renderFeedList();};
   const ct = document.getElementById("clrtheme");
@@ -3707,13 +3748,13 @@ function renderDeals(){
       <div class="hs-in">
         <div class="kicker">Сделки на российском рынке</div>
         <h1>Сделки российского рынка – <em>со ссылками на первоисточники</em></h1>
-        <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
+        <p>Каждую сделку разбираем с двух сторон — экономической и юридической. Пишем только то, что раскрыто публично, и не заполняем пустоту догадками: не назвали сумму или консультантов — значит, этого поля не будет.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
           : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
         }</div>
-        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
+        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Названия сторон мы приводим так, как их раскрыли источники, — это не юридически выверенные реквизиты. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CITY}
@@ -3743,7 +3784,7 @@ function renderDeals(){
     <div class="hs-slide">${SCENE_AI}
       <div class="hs-in">
         <div class="kicker">Задайте вопрос</div>
-        <h1>Ассистент – <em>спросите базу</em> обычным языком</h1>
+        <h1>Ассистент – <em>спрашивайте обычными словами</em></h1>
         <p>Кто сопровождал сделку? Какая сделка была крупнейшей в фармацевтике? Ассистент ищет по базе «Компаса» и открытым источникам.</p>
         <div class="aisearch">
           <input id="heroq" placeholder="Спросите: кто сопровождал сделки? какая самая крупная?" aria-label="Вопрос ассистенту">
@@ -4428,7 +4469,7 @@ function relatedHtml(d){
         undisclosed(o.x.sum)?fmtDate(o.x.date):sumHtml(o.x.sum), share(o.x)
       ].filter(Boolean).join(" · ")} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
     </a>`).join("")}
-    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общей темой${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
+    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общей темой${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a class="inline-link" href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
   </div>`;
 }
 
@@ -5325,7 +5366,7 @@ function companyGridHtml(){
   ${shown.map(({id,c,n})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
-        <div class="co-tags">${c.group?`<span class="tag steel co-group-badge">Группа компаний</span>`:""}<span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span></div>
+        <div class="co-tags">${c.group?`<span class="tag steel co-group-badge" title="Группа компаний">Группа</span>`:""}<span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span></div>
         <h3 title="${esc(c.name)}">${c.name}</h3>
         <div class="desc">${coDescHtml(id,c)}</div>
         <div class="co-nums">
@@ -5504,8 +5545,16 @@ function openCompanyDealsDialog(id){
   const host=document.getElementById("companyDealsAll");
   const btn=document.getElementById("openCompanyDeals");
   if(!host||!btn) return;
+  /* ПРЕВЬЮ УХОДИТ, КОГДА СПИСОК РАСКРЫТ. До 19 сентября 2026 две сделки из
+     превью оставались на месте, а раскрытый список начинался с них же —
+     читатель видел первые две дважды подряд и читал это как задвоение базы
+     (Артём прислал этот баг дважды). Прятать надо именно превью, а не резать
+     список: он озаглавлен «Все сделки с участием X», и показывать в нём «все,
+     кроме двух» значило бы сделать заголовок неправдой. */
+  const preview=document.querySelector(".company-deals-preview");
   if(host.dataset.open==="1"){
     host.innerHTML=""; host.dataset.open="0";
+    if(preview) preview.hidden=false;
     btn.textContent=btn.dataset.labelClosed;
     btn.setAttribute("aria-expanded","false");
     return;
@@ -5516,6 +5565,7 @@ function openCompanyDealsDialog(id){
   const mentionsHtml=rows.mentioned.length?`<details class="deal-mentions-toggle"><summary>Упоминания в источниках (${rows.mentioned.length})</summary><div class="deal-list-note">Здесь собраны публикации, где компания названа, но её роль — покупатель, продавец или предмет сделки — ещё не подтверждена.</div>${rows.mentioned.map(x=>`<div class="deal-list-item"><span class="date">${fmtDate(x.date)}</span><span><a class="title" href="${x.href}" ${!String(x.href).startsWith("#")?'target="_blank" rel="noopener"':""}>${esc(x.title)}</a><div class="meta">Источник: ${esc(x.source)}${String(x.href).startsWith("#")?"":" ↗"}</div></span></div>`).join("")}</details>`:"";
   host.innerHTML=`<div class="deal-list-open"><div class="deal-list-open-head">Все сделки с участием ${esc(c.name)}</div>${confirmedHtml}${mentionsHtml}</div>`;
   host.dataset.open="1";
+  if(preview) preview.hidden=true;
   btn.textContent="Свернуть список";
   btn.setAttribute("aria-expanded","true");
 }
@@ -5813,7 +5863,20 @@ async function mountCompanyFns(companyId){
        проверен живым запросом — её не трогаем. */
     if(tab==="ownership") content=ownershipHtml(entry.ownership);
     if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
-    if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
+    /* Изменений в ЕГРЮЛ у живой компании бывают десятки, и все они одинаково
+       подробные: список на два экрана прокрутки закрывал собой всё остальное
+       на вкладке. Показываем три свежих, остальные — по кнопке (замечание
+       Ксюши, 19 сентября 2026). */
+    const evRow = ev => `<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`;
+    if(tab==="changes"){
+      const evs=entry.events, head=evs.slice(0,3), tail=evs.slice(3);
+      content = evs.length
+        ? head.map(evRow).join("")
+          + (tail.length
+              ? `<button class="chip" id="moreEvents" style="margin-top:14px">Ещё ${tail.length} ${plural(tail.length,"изменение","изменения","изменений")}</button><div id="moreEventsBox" hidden>${tail.map(evRow).join("")}</div>`
+              : "")
+        : `<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
+    }
     const tabs = isBank
       ? [["registry","ЕГРЮЛ"],["ownership","Участники"],["changes","Изменения"]]
       : [["overview","Обзор"],["ownership","Участники"],["finance","Финансы"],["registry","ЕГРЮЛ"],["changes","Изменения"]];
@@ -5825,6 +5888,15 @@ async function mountCompanyFns(companyId){
     </section>`;
     /* Показатели второго ряда прячутся не насовсем: кнопка раскрывает их на
        месте, не перерисовывая вкладку, — иначе прокрутка прыгала бы к началу. */
+    const moreEvents = mount.querySelector("#moreEvents");
+    if(moreEvents){
+      const closedText = moreEvents.textContent;
+      moreEvents.onclick=()=>{
+        const box=mount.querySelector("#moreEventsBox"); if(!box) return;
+        box.hidden=!box.hidden;
+        moreEvents.textContent = box.hidden ? closedText : "Свернуть";
+      };
+    }
     const moreBtn = mount.querySelector("[data-fns-more]");
     if(moreBtn){
       const closedText = moreBtn.textContent;   // «Ещё N показателей» — запоминаем ДО первого клика
@@ -6258,8 +6330,17 @@ function renderCompany(id){
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
-  <div id="fns-company"></div>
+  <!-- СДЕЛКИ ВЫШЕ ОТЧЁТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
+       справка о стороне сделки, а не главное на странице. Блок с пятью
+       вкладками стоял выше и занимал целый экран, так что до списка сделок
+       читатель доходил прокруткой и находил его случайно (Ксюша и Артём —
+       по отдельности, 19 сентября 2026: «поднять наверх, рядом с
+       Обзор/Участники/Финансы»). Вкладкой в тот ряд сделки поставить нельзя:
+       ряд рисуется только у компаний с сопоставленным юрлицом, и у остальных
+       список сделок исчез бы вовсе. Перестановка даёт то же самое и работает
+       для всех. -->
   ${companyDealsCompactHtml(id,structured,mentions)}
+  <div id="fns-company"></div>
   ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   const compareButton=document.getElementById("compareCompany");
@@ -6985,17 +7066,17 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки может быть две отрасли, и такая сделка посчитана в каждой — поэтому сумма по отраслям больше числа сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки бывает две отрасли, и тогда она попадает в обе — поэтому сумма по отраслям больше общего числа сделок.</p>
     </div>
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут подтверждены чтением источников — пока ни одна не прошла проверку и ждёт проверки.</p>`}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена названа в тексте карточки и ждёт проверки чтением`:""}. Только покупки (M&A и продажа с торгов), где цена названа сторонами в рублях и прочитана в источнике, — таких ${rubDisclosed}. Не в счёт: финансирование и инвестиционные раунды, IPO (у размещения сумма — то объём размещения, то оценка компании), оценки экспертов и неофициальные цифры, валютные суммы, стартовые цены незакрытых торгов и цены сорвавшихся сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена есть в тексте карточки, но мы пока не сверили её с источником`:""}. Здесь только покупки бизнеса — включая покупку с торгов, — у которых цену назвали сами стороны в рублях и мы сверили её с источником. Таких ${rubDisclosed}. Не вошли: привлечение инвестиций и раунды финансирования, IPO (там сумма — это либо объём размещения, либо оценка всей компании), оценки аналитиков и цифры без официального подтверждения, суммы в валюте, стартовые цены незавершённых торгов и цены сорвавшихся сделок.</p>
     </div>
     <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>
@@ -7042,7 +7123,7 @@ function renderAnalytics(){
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
@@ -7481,14 +7562,31 @@ async function renderAssistant(){
      только когда закрыто заметно много (клавиатура, а не полоса браузера). */
   const fitKeyboard=()=>{
     const vv=window.visualViewport; if(!vv||!shell.isConnected) return;
-    const covered=Math.max(0, window.innerHeight-vv.height);
+    /* Поправка нужна, только пока клавиатура ОТКРЫТА, то есть пока курсор
+       стоит в поле. Без этой проверки блок оставался сжатым после того, как
+       клавиатура уже убралась, — поле ввода уезжало за нижний край, и
+       напечатать новое сообщение было нельзя до перезагрузки страницы
+       (Ксюша, iPad, 19 сентября 2026). Сам по себе `resize` этого не ловил:
+       на iPad при прокрутке с открытой клавиатурой Safari шлёт `scroll`, а
+       `resize` — не всегда, и `covered` застревал на старом значении. */
+    const typing = document.activeElement
+      && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)
+      && shell.contains(document.activeElement);
+    const covered = typing ? Math.max(0, window.innerHeight - vv.height) : 0;
     shell.style.height = covered>120 ? `calc(100svh - 65px - ${Math.round(covered)}px)` : "";
   };
   if(window.visualViewport){
-    if(chatViewportFit) window.visualViewport.removeEventListener("resize", chatViewportFit);
+    if(chatViewportFit){
+      window.visualViewport.removeEventListener("resize", chatViewportFit);
+      window.visualViewport.removeEventListener("scroll", chatViewportFit);
+    }
     chatViewportFit=fitKeyboard;
     window.visualViewport.addEventListener("resize", chatViewportFit);
+    window.visualViewport.addEventListener("scroll", chatViewportFit);
   }
+  // Курсор ушёл из поля — клавиатура убирается, высоту возвращаем. Ждём кадр:
+  // в момент focusout клавиатура ещё на экране, и vv.height прежний.
+  shell.addEventListener("focusout", ()=>setTimeout(fitKeyboard, 60));
   // Смена режима переспрашивает тот же вопрос — см. bindModeToggles.
   bindModeToggles(app, ()=>{ if(lastQ) answer(lastQ); });
   renderThreadList();

@@ -4106,3 +4106,49 @@ def test_site_bridge_tells_a_missing_endpoint_from_an_empty_answer():
     # Пустой, но настоящий ответ — это НЕ ошибка: заявок просто нет.
     empty = FakeResponse("application/json", '{"corrections": []}')
     assert site_bridge._as_json(empty, "/api/corrections/pending") == {"corrections": []}
+
+
+def test_deal_pdf_carries_the_financial_context_section():
+    """Финансовый контекст в выгрузке (просьба Ксюши, 19 сентября 2026): на
+    карточке блок есть, а в PDF его не было. «За сколько купили» без «сколько
+    компания зарабатывает» — половина разговора, а отчёт уходит из рук в руки.
+
+    Показатели берутся за последний год ДО сделки, юрлицо и год названы прямо:
+    отчётность сдаётся по юрлицу, а сделка заключается по группе, и подменять
+    одно другим нельзя (урок про периметр из CLAUDE.md).
+    """
+    import deal_export
+
+    # Прочерк, а не ноль: пустая строка отчётности и ноль в отчёте — разное.
+    assert deal_export._money(None) == "—" and deal_export._money("") == "—"
+    assert deal_export._money(19_400_000_000) == "19,4 млрд ₽"
+    assert deal_export._money(-511_000_000) == "−511 млн ₽"
+
+    deal = {"id": "pdf-fin", "title": "Тестовая сделка", "date": "2026-09-01",
+            "status": "Закрыта", "type": "M&A", "sum": "Не раскрыта",
+            "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": [],
+            "finance": [{"role": "Покупаемая компания", "name": "Аэромар",
+                         "legal_name": "АО «АЭРОМАР»", "inn": "7712025950", "year": 2024,
+                         "revenue_rub": 19_400_000_000, "net_profit_rub": -511_000_000,
+                         "assets_rub": 12_000_000_000, "equity_rub": None}]}
+    pdf = deal_export.render_deal_pdf(deal)
+    assert pdf.startswith(b"%PDF")
+    # Без финансовых данных раздела нет вовсе — пустая таблица хуже её отсутствия.
+    plain = deal_export.render_deal_pdf({k: v for k, v in deal.items() if k != "finance"})
+    assert len(plain) < len(pdf)
+
+
+def test_export_finance_takes_the_year_before_the_deal():
+    """Показывать в отчёте о сделке 2023 года отчётность за 2025-й — значит
+    отвечать не на тот вопрос. Отбор года проверяем на самом запросе."""
+    import inspect
+
+    import main as m
+
+    src = inspect.getsource(m._export_finance)
+    assert "FinancialReport.year <= year_cap" in src, "отбор по году до сделки пропал"
+    assert "order_by(FinancialReport.year.desc())" in src, "берётся не самый свежий из допустимых"
+    # Имя компании — из профиля базы, а не из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ
+    # ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"» капсом уже нарушало правило «язык для
+    # людей» на экране мультипликаторов, и в PDF повторять это незачем.
+    assert 'profile.get("name") or' in src

@@ -106,6 +106,23 @@ def _report_date() -> str:
     return "%d %s %d года" % (today.day, _MONTHS[today.month - 1], today.year)
 
 
+def _money(value: Any) -> str:
+    """Сумма так же, как на экране: «10,3 млрд ₽». Нет числа — прочерк, а не
+    ноль: пустая отчётная строка и ноль в отчёте — разные вещи."""
+    if value is None:
+        return "—"
+    try:
+        n = float(value)
+    except (TypeError, ValueError):
+        return "—"
+    sign, a = ("−" if n < 0 else ""), abs(n)
+    for limit, name in ((1e12, "трлн"), (1e9, "млрд"), (1e6, "млн")):
+        if a >= limit:
+            return ("%s%s %s ₽" % (sign, ("%.1f" % (a / limit)).rstrip("0").rstrip("."), name)
+                    ).replace(".", ",")
+    return "%s%s ₽" % (sign, format(int(round(a)), ",").replace(",", "\u00a0"))
+
+
 def _text(value: Any) -> str:
     if value is None or value == "":
         return "Не раскрыто"
@@ -228,6 +245,43 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         if _has_fact(finadv):
             story.append(Paragraph("Финансовые консультанты — " + escape(str(finadv)), body))
             story.append(Spacer(1, 2*mm))
+
+    # ФИНАНСОВЫЙ КОНТЕКСТ — показатели сторон за последний год ДО сделки.
+    # Просьба Ксюши 19 сентября 2026: на карточке этот блок есть, а в выгрузке
+    # его не было. Год и юрлицо названы прямо: отчётность сдаётся по юрлицу, а
+    # сделка заключается по группе, и подменять одно другим нельзя.
+    finance = deal.get("finance") if isinstance(deal.get("finance"), list) else []
+    if finance:
+        story.append(Paragraph("ФИНАНСОВЫЙ КОНТЕКСТ", h2))
+        header = ["", "Выручка", "Чистая прибыль", "Активы", "Капитал"]
+        table_rows = [[Paragraph(f"<b>{escape(x)}</b>", small) for x in header]]
+        for row in finance:
+            table_rows.append([
+                Paragraph("%s<br/><font size=7 color='#66707A'>%s · %s год</font>" % (
+                    escape(_text(row.get("name"))), escape(row.get("role") or ""), row.get("year")), small),
+                Paragraph(_money(row.get("revenue_rub")), small),
+                Paragraph(_money(row.get("net_profit_rub")), small),
+                Paragraph(_money(row.get("assets_rub")), small),
+                Paragraph(_money(row.get("equity_rub")), small),
+            ])
+        fin_tbl = Table(table_rows, colWidths=[52*mm, 27*mm, 27*mm, 27*mm, 27*mm])
+        fin_tbl.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("ALIGN", (1, 0), (-1, -1), "RIGHT"),
+            ("LINEBELOW", (0, 0), (-1, -1), 0.35, colors.HexColor("#E2E5DF")),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+            ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+        ]))
+        story.append(fin_tbl)
+        entities = "; ".join(
+            "%s — %s%s" % (_text(r.get("name")), _text(r.get("legal_name")),
+                           (", ИНН %s" % r["inn"]) if r.get("inn") else "")
+            for r in finance)
+        story.append(Spacer(1, 3*mm))
+        story.append(Paragraph(
+            "Данные ФНС по отчётности за последний год до сделки. Показатели относятся к "
+            "конкретному юридическому лицу и могут не отражать результаты всей группы: "
+            + escape(entities) + ".", small))
 
     sources = deal.get("src") if isinstance(deal.get("src"), list) else []
     if sources:
