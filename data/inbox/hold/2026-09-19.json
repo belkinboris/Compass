@@ -312,30 +312,19 @@
    ]
   },
   {
-   "draft_id": "d54943289",
-   "title": "Рябков: подготовка нового раунда трехсторонних переговоров не обсуждается",
+   "draft_id": "d56996080",
+   "title": "Активы «Ашана» и Nestlé в России могут продать другим крупным игрокам",
    "date": "2026-09-19",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260919/ryabkov-2118691659.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/19/tumannoe-budushhee-chto-teper"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-19",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260919/ryabkov-2118691659.html"
-     ]
-    }
-   ],
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -348,7 +337,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g64462179 (общие редкие слова: nestlé, активы) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d86906383",
+   "title": "В МИД высказались о новом раунде переговоров с США и Украиной",
+   "date": "2026-09-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/19/v-mid-vyskazalis-o-novom-raunde-peregovorov-s-ssha-i-ukrainoy/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
