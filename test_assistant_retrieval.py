@@ -338,3 +338,53 @@ def test_follow_up_without_an_entity_reuses_the_previous_question():
     assert "16 апреля 2025" in ret.answer
     ret2 = ar.retrieve("А дата объявления?", previous="Когда Яндекс приобрёл Boxberry?")
     assert ret2.docs and ret2.docs[0].id == "g46c6e23f"
+
+
+# ============ ДВА НОВЫХ МАРШРУТА (19 сентября 2026) ============
+
+def test_what_is_new_is_not_a_company_named_novostal(idx):
+    """Найдено разбором ассистента: «Что нового на рынке за последнюю неделю»
+    уходило в маршрут «компания» и отвечало про «Новосталь-М» — слово «нового»
+    совпало с именем по корню «новог». Маршрута «что свежего» не было вовсе."""
+    intent = ar.route("Что нового на рынке за последнюю неделю", idx)
+    assert intent.kind == "recent", intent.kind
+    assert intent.days == 7
+    assert ar.route("Что появилось за месяц", idx).days == 30
+    answer = ar.retrieve("Что нового на рынке за последнюю неделю", idx=idx).answer or ""
+    assert "Новосталь" not in answer
+
+
+def test_recent_counts_by_the_day_a_deal_appeared_here(idx):
+    """«Что нового» — про то, что появилось у НАС: сделка может быть прошлого
+    года, а в «Компас» приехать вчера. Считаем по дате добавления."""
+    from datetime import date, timedelta
+    edge = (date.today() - timedelta(days=7)).isoformat()
+    result = ar.retrieve("Что нового за последнюю неделю", idx=idx)
+    assert result.intent == "recent"
+    for doc in result.docs:
+        assert str((doc.raw or {}).get("added") or "") >= edge
+
+
+def test_compare_keeps_both_companies(idx):
+    """«Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону
+    теряло молча — и человек получал ответ про одну компанию."""
+    intent = ar.route("Сравни Сбербанк и ВТБ по сделкам", idx)
+    assert intent.kind == "compare", intent.kind
+    assert len(intent.company_ids) == 2
+    answer = ar.retrieve("Сравни Сбербанк и ВТБ по сделкам", idx=idx).answer or ""
+    assert "Сбербанк" in answer and "ВТБ" in answer
+
+
+def test_compare_does_not_grade_the_companies(idx):
+    """Сравнение показывает числа; «кто лучше» мы не оцениваем — то же
+    правило, что на экране сравнения и в границах разговора."""
+    answer = (ar.retrieve("Сравни Сбербанк и ВТБ по сделкам", idx=idx).answer or "").lower()
+    for word in ("лучше", "хуже", "надёжнее", "выгоднее", "рекомендуем"):
+        assert word not in answer, word
+
+
+def test_a_plain_company_question_still_goes_to_the_company(idx):
+    """Новые признаки не должны перехватывать обычные вопросы."""
+    assert ar.route("Какие сделки были у Сбербанка", idx).kind == "company"
+    assert ar.route("Крупнейшие сделки 2025 года", idx).kind == "largest"
+    assert ar.route("Сколько сделок в недвижимости", idx).kind == "count"

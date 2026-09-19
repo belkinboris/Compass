@@ -448,7 +448,7 @@ def get_index(force: bool = False) -> Index:
 
 @dataclass
 class Intent:
-    kind: str                       # advisor | company | industry | largest | count | theme | term | search | empty
+    kind: str                       # advisor | company | compare | industry | largest | count | theme | term | recent | search | empty
     firm: Firm | None = None
     company_id: str | None = None
     industry: str | None = None
@@ -459,11 +459,21 @@ class Intent:
     terms: list[str] = field(default_factory=list)
     matched: list[str] = field(default_factory=list)   # слова вопроса, по которым узнали компанию
     words: list[str] = field(default_factory=list)     # те же слова без обрезки окончаний
+    company_ids: list[str] = field(default_factory=list)  # для сравнения: все узнанные компании
+    days: int | None = None                            # «за последнюю неделю» — сколько дней назад
 
 
 ADVISOR_WORDS = re.compile(r"консультир|консультант|сопровожда|юрфирм|юридическ|инвестбанк|advis|law firm", re.I)
 LARGEST_WORDS = re.compile(r"крупн|больш|дорог|максимальн|самая\s+больш|топ[- ]?\d*", re.I)
 COUNT_WORDS = re.compile(r"сколько|как\s+много|число\s+сделок|количеств", re.I)
+# «Что нового на рынке за последнюю неделю» уходило в компанию «Новосталь-М»:
+# слово «нового» совпало с её именем по корню «новог». Маршрута «что свежего»
+# не было вовсе, поэтому вопрос ловился первым, кто похож по буквам.
+RECENT_WORDS = re.compile(r"что\s+нового|новые\s+сделки|свеж\w*\s+сделк|что\s+появилось"
+                          r"|последн\w*\s+(недел|дн|месяц)|за\s+(недел|месяц)", re.I)
+RECENT_MONTH = re.compile(r"месяц", re.I)
+# «Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону теряло молча.
+COMPARE_WORDS = re.compile(r"сравн|в\s+сравнении|против|или\s+лучше|кто\s+из\s+них|обе\s+компан", re.I)
 
 
 def _detect_industry(question: str, idx: Index) -> str | None:
@@ -664,6 +674,23 @@ def _detect_company(question: str, idx: Index, terms: list[str]) -> tuple[str, l
     return (best[2], best[3]) if best else None
 
 
+def _detect_companies(question: str, idx: Index, terms: list[str], limit: int = 3) -> list[str]:
+    """Все компании, названные в вопросе, — для сравнения. `_detect_company`
+    возвращает одну, самую уверенную, и «Сравни Сбербанк и ВТБ» теряло ВТБ
+    молча. Здесь вопрос режется по союзам и каждая часть узнаётся отдельно:
+    так обе стороны попадают в ответ, а порядок сохраняется тот, в котором
+    их назвал человек."""
+    parts = [p.strip() for p in re.split(r"\s+(?:и|или|против|vs\.?|c|с)\s+|[,;]", question) if p.strip()]
+    found: list[str] = []
+    for part in parts:
+        hit = _detect_company(part, idx, query_terms(part) + short_name_terms(part))
+        if hit and hit[0] not in found:
+            found.append(hit[0])
+        if len(found) >= limit:
+            break
+    return found
+
+
 def _industry_covers(token: str) -> bool:
     tn = norm(token)
     for hints in INDUSTRY_HINTS.values():
@@ -702,6 +729,15 @@ def route(question: str, idx: Index | None = None) -> Intent:
     wants_adv = bool(ADVISOR_WORDS.search(question))
     if firm:
         return Intent("advisor", firm=firm, year=year, industry=industry, terms=terms)
+    # «Что нового» — раньше всего: иначе слово «нового» узнаётся компанией
+    # «Новосталь-М» по корню, и человек получает ответ не о том.
+    if RECENT_WORDS.search(question) and not year:
+        return Intent("recent", days=30 if RECENT_MONTH.search(question) else 7,
+                      industry=industry, terms=terms)
+    if COMPARE_WORDS.search(question):
+        several = _detect_companies(question, idx, terms + short_name_terms(question))
+        if len(several) >= 2:
+            return Intent("compare", company_ids=several, year=year, terms=terms)
     if LARGEST_WORDS.search(question) and not wants_adv:
         return Intent("largest", year=year, industry=industry, terms=terms)
     if COUNT_WORDS.search(question):
@@ -1031,6 +1067,70 @@ def _answer_largest(intent: Intent, idx: Index) -> Retrieval:
     return Retrieval("largest", "\n".join(lines), (named[:8] + est[:4])[:MAX_DEALS_FOR_MODEL], None)
 
 
+def _answer_recent(intent: Intent, idx: Index) -> Retrieval:
+    """Что появилось в базе за последние дни.
+
+    Дата берётся из поля «добавлено», а не из даты сделки: человек спрашивает
+    «что нового», то есть что появилось у НАС, — сделка может быть и прошлого
+    года, а в «Компас» приехать вчера. Ровно так же устроена лента на сайте.
+    """
+    from datetime import date, timedelta
+    days = intent.days or 7
+    edge = (date.today() - timedelta(days=days)).isoformat()
+    pool = [d for d in idx.docs if str((d.raw or {}).get("added") or "") >= edge]
+    if intent.industry:
+        pool = [d for d in pool if intent.industry in d.industries]
+    pool.sort(key=lambda d: str((d.raw or {}).get("added") or ""), reverse=True)
+    scope = f" в отрасли «{intent.industry}»" if intent.industry else ""
+    period = "неделю" if days <= 7 else "месяц"
+    if not pool:
+        return Retrieval("recent", f"За последнюю {period}{scope} в «Компасе» новых сделок не появилось.", [], None)
+    n = len(pool)
+    lines = [f"За последнюю {period}{scope} в «Компасе» появилось {n} "
+             f"{_plural(n, 'сделка', 'сделки', 'сделок')}:"]
+    lines += [_line(d) for d in pool[:MAX_LISTED]]
+    if n > MAX_LISTED:
+        lines.append(f"Ещё {n - MAX_LISTED} — в [ленте сделок](#/deals).")
+    return Retrieval("recent", "\n".join(lines), pool[:MAX_DEALS_FOR_MODEL], None)
+
+
+def _answer_compare(intent: Intent, idx: Index) -> Retrieval:
+    """Две-три компании рядом: сколько сделок, в каких ролях, последняя.
+
+    Оценок «кто лучше» здесь нет и быть не может — мы показываем числа, а
+    вывод делает читатель (то же правило, что и на экране сравнения).
+    """
+    blocks: list[str] = []
+    docs: list[Doc] = []
+    for cid in intent.company_ids:
+        name = _company_name(idx.companies, cid)
+        own = _filter(idx.company_deals.get(cid) or [], intent.year, None)
+        own = sorted(own, key=lambda d: d.date, reverse=True)
+        if not own:
+            blocks.append(f"**[{name}](#/companies/{cid})** — сделок в «Компасе» нет"
+                          + (f" за {intent.year} год" if intent.year else "") + ".")
+            continue
+        roles = []
+        for label, attr in (("покупатель", "buyer"), ("продавец", "seller"), ("предмет сделки", "target")):
+            k = sum(1 for d in own if _company_name(idx.companies, cid) and getattr(d, attr, "") == name)
+            if k:
+                roles.append(f"{label} — {k}")
+        n = len(own)
+        head = (f"**[{name}](#/companies/{cid})** — {n} "
+                f"{_plural(n, 'сделка', 'сделки', 'сделок')}"
+                + (f" ({', '.join(roles)})" if roles else "") + ".")
+        blocks.append(head + " Последняя: " + _line(own[0]).lstrip("- "))
+        docs += own[:4]
+    if not blocks:
+        return Retrieval("compare", None, [], None)
+    names = " и ".join(_company_name(idx.companies, c) for c in intent.company_ids)
+    lines = [f"{names} — рядом по тому, что есть в «Компасе»:"] + blocks
+    lines.append("Сравнение строится по сделкам, которые мы нашли в открытых источниках; "
+                 "оно не полно и не является оценкой компаний. "
+                 "Показатели отчётности — на [экране сравнения](#/compare).")
+    return Retrieval("compare", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], names)
+
+
 def _answer_count(intent: Intent, idx: Index) -> Retrieval:
     pool = _filter(idx.docs, intent.year, intent.industry)
     if intent.theme:
@@ -1268,6 +1368,7 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         "advisor": _answer_advisor, "company": _answer_company, "industry": _answer_industry,
         "largest": _answer_largest, "count": _answer_count, "theme": _answer_theme,
         "term": _answer_term, "search": _answer_search,
+        "recent": _answer_recent, "compare": _answer_compare,
     }
     if intent.kind == "empty":
         own = _answer_entity(context_type, context_id, intent, idx)
