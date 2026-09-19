@@ -20,7 +20,7 @@ import time
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 import pytest
 
@@ -216,7 +216,7 @@ def test_deal_has_timeline_and_inline_correction_dialog(page, base_url):
     page.locator("#correctionBody").fill("Проверка редакционной формы")
     page.locator("#correctionSend").click()
     page.wait_for_selector(".dialog-msg.ok")
-    assert "передано редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
+    assert "передали редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
 
 
 def test_citibank_is_one_deal_with_clickable_stage_history(page, base_url):
@@ -3316,3 +3316,293 @@ def test_compare_shows_bank_of_russia_data_for_a_bank(page, base_url):
     assert "БФО пока не загружена" not in sber
     assert "Текущие участники" not in sber, sber
     page.evaluate("() => localStorage.removeItem(COMPARE_KEY)")
+
+
+def test_account_lets_you_change_password_and_email(browser, base_url):
+    """Артём: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
+    До 19 сентября 2026 на вкладке «Аккаунт» не было ни того, ни другого —
+    сменить пароль было нельзя никак."""
+    ctx = browser.new_context(viewport={"width": 1280, "height": 1000})
+    errors = []
+    try:
+        pg = ctx.new_page()
+        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+        pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+        pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+        email = "smena%d@example.com" % int(time.time() * 1000)
+        reg = pg.evaluate("""async (email) => {
+            const r = await fetch("/api/auth/register", {method:"POST", headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({email, password:"testpass123", full_name:"Ксения Збышевская",
+                    company:null, position:null, role:"individual"})});
+            return r.status;
+        }""", email)
+        assert reg == 200, "регистрация не удалась"
+
+        pg.evaluate("location.hash = '#/account?tab=profile'")
+        pg.wait_for_selector("#changePwBtn", timeout=10000)
+
+        pg.click("#changePwBtn")
+        pg.fill("#pwCurrent", "testpass123")
+        pg.fill("#pwNew", "sovsem-drugoy-parol")
+        pg.click("#changePwForm button[type=submit]")
+        pg.wait_for_function("document.getElementById('pwMsg').textContent.includes('изменён')",
+                             timeout=10000)
+        # Все входы гасятся, включая этот, — сервер обязан выдать новый,
+        # иначе человек вылетает из браузера ровно в момент смены пароля.
+        assert pg.evaluate("""async () => (await (await fetch('/api/me')).json()).logged_in""") is True
+
+        pg.click("#changeEmailBtn")
+        new_email = "novaya%d@example.com" % int(time.time() * 1000)
+        pg.fill("#emNew", new_email)
+        pg.fill("#emPassword", "sovsem-drugoy-parol")
+        pg.click("#changeEmailForm button[type=submit]")
+        pg.wait_for_function("(e) => document.body.innerText.includes(e)", arg=new_email, timeout=10000)
+
+        assert not errors, "ошибки в консоли: %s" % errors[:3]
+    finally:
+        ctx.close()
+
+
+@pytest.mark.parametrize("width", [360, 390, 1280])
+def test_account_login_forms_do_not_overflow(browser, base_url, width):
+    ctx = browser.new_context(viewport={"width": width, "height": 900})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+        email = "shirina%d_%d@example.com" % (width, int(time.time() * 1000))
+        pg.evaluate("""async (email) => {
+            await fetch("/api/auth/register", {method:"POST", headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({email, password:"testpass123", full_name:"Тест Тестов",
+                    company:null, position:null, role:"individual"})});
+        }""", email)
+        pg.evaluate("location.hash = '#/account?tab=profile'")
+        pg.wait_for_selector("#changePwBtn", timeout=10000)
+        pg.click("#changePwBtn")
+        pg.wait_for_timeout(300)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+    finally:
+        ctx.close()
+
+
+def _feed_total(pg):
+    """Сколько карточек в выдаче: видимые строки плюс «осталось N»."""
+    rows = pg.eval_on_selector_all("#feedlist a[href^='#/deal/']", "e=>e.length")
+    text = pg.inner_text("#feedlist")
+    m = re.search(r"осталось\s+(\d+)", text)
+    return rows + (int(m.group(1)) if m else 0)
+
+
+def test_filters_accept_several_industries_at_once(page, base_url):
+    """Артём: «в фильтрах надо сделать возможность выбора нескольких опций
+    (несколько годов, отраслей etc)». Между выбранными значениями — ИЛИ."""
+    page.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    agro = _feed_total(page)
+
+    page.goto(base_url + "/#/deals?ind=Пищепром и напитки", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    food = _feed_total(page)
+
+    page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    both = _feed_total(page)
+
+    assert agro > 0 and food > 0, "одна из отраслей пуста — проверка ничего не докажет"
+    assert both >= agro and both >= food, \
+        f"объединение ({both}) меньше одной из частей ({agro}, {food})"
+    assert both <= agro + food, "в объединении больше карточек, чем в двух отраслях вместе"
+
+
+def test_single_value_links_saved_earlier_keep_working(page, base_url):
+    """Значения лежат в адресе через запятую, и старая ссылка с одним
+    значением обязана открываться ровно как раньше."""
+    page.goto(base_url + "/#/deals?ind=Агро&year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    assert page.inner_text("#selind .ms-txt").strip() == "Агро"
+    assert page.inner_text("#selyear .ms-txt").strip() == "2024"
+
+
+def test_choosing_a_second_year_widens_the_feed_and_the_link(page, base_url):
+    page.goto(base_url + "/#/deals?year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selyear", timeout=15000)
+    one = _feed_total(page)
+
+    page.click("#selyear .ms-btn")
+    page.check("#selyear .ms-opt input[value='2025']")
+    page.wait_for_timeout(600)
+    two = _feed_total(page)
+
+    assert two > one, f"второй год не расширил выдачу: было {one}, стало {two}"
+    assert page.inner_text("#selyear .ms-txt").strip() == "2025 и ещё 1"
+    # Адрес обязан нести оба значения — иначе «Скопировать ссылку» отдаст не то,
+    # что человек видит на экране.
+    h = unquote(page.evaluate("location.hash"))
+    assert "year=2025,2024" in h or "year=2024,2025" in h, h
+
+
+def test_filter_reset_clears_every_chosen_value(page, base_url):
+    page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки&year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    page.click("#selind .ms-btn")
+    page.click("#selind .ms-clear")
+    page.wait_for_timeout(500)
+    assert page.inner_text("#selind .ms-txt").strip() == "Все"
+    assert page.eval_on_selector_all("#selind .ms-opt input:checked", "e=>e.length") == 0
+
+
+@pytest.mark.parametrize("width", [360, 390, 1280])
+def test_open_filter_list_does_not_overflow(browser, base_url, width):
+    ctx = browser.new_context(viewport={"width": width, "height": 880})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
+        pg.wait_for_selector("#selind", timeout=15000)
+        pg.click("#selind .ms-btn")
+        pg.wait_for_timeout(400)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, f"переполнение {over}px на {width}px с открытым списком"
+        box = pg.eval_on_selector("#selind .ms-pop", "e=>e.getBoundingClientRect().right")
+        assert box <= width + 1, f"список вылезает за экран: правый край {box} при ширине {width}"
+    finally:
+        ctx.close()
+
+
+# ================= ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА =================
+# Артём, 19 сентября 2026: «он все еще не поправил форматтинг страниц и
+# приходится листать вправо влево. Иногда норм. Иногда слетает.»
+#
+# Почему прежние замеры этого не видели. В стилях стоят страховки
+# `html{overflow-x:hidden}` и `body{overflow-x:clip}` — они ПРЯЧУТ
+# переполнение, и заодно делают `scrollWidth` равным `clientWidth`. То есть
+# величина, которой мы мерили, обнулялась самой страховкой: мы мерили
+# страховку, а не содержимое. В Chromium она держит, в Safari на iPhone —
+# нет, поэтому у владельца страница ездила, а у нас показывала ноль.
+#
+# Здесь страховки снимаются на время замера, и видно настоящую ширину.
+UNCLAMP = "html{overflow-x:visible!important}body{overflow-x:visible!important}"
+
+WIDE_ROUTES = ["#/", "#/deals", "#/companies", "#/advisors", "#/materials",
+               "#/analytics", "#/assistant", "#/account",
+               "#/companies/g28ff15bb", "#/deal/gf12c6323"]
+
+_OFFENDERS_JS = """() => {
+  const W = document.documentElement.clientWidth, out = [];
+  const clipped = el => {
+    let p = el.parentElement;
+    while(p && p !== document.documentElement){
+      if(/hidden|clip|auto|scroll/.test(getComputedStyle(p).overflowX)) return true;
+      p = p.parentElement;
+    }
+    return false;
+  };
+  document.querySelectorAll('body *').forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if(r.width === 0 || r.height === 0) return;
+    if(r.right <= W + 1) return;
+    if(clipped(el)) return;
+    out.push(el.tagName + '.' + String(el.className || '').slice(0, 40) +
+             ' w=' + Math.round(r.width) + ' «' + (el.textContent||'').trim().slice(0,40) + '»');
+  });
+  return out.slice(0, 5);
+}"""
+
+
+@pytest.mark.parametrize("route", WIDE_ROUTES)
+@pytest.mark.parametrize("width", [360, 390])
+def test_no_horizontal_overflow_with_safety_nets_off(browser, base_url, route, width):
+    ctx = browser.new_context(viewport={"width": width, "height": 800})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/" + route, wait_until="domcontentloaded")
+        pg.wait_for_timeout(2600)
+        pg.add_style_tag(content=UNCLAMP)
+        pg.wait_for_timeout(250)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        if over > 0:
+            who = pg.evaluate(_OFFENDERS_JS)
+            raise AssertionError(
+                "%s на %spx: страница шире экрана на %spx.\n  %s"
+                % (route, width, over, "\n  ".join(who) or "виновник не опознан"))
+    finally:
+        ctx.close()
+
+
+def test_advisor_card_fits_the_phone(browser, base_url):
+    """Карточка консультанта была 374px внутри контейнера в 320px: у элемента
+    сетки по умолчанию `min-width:auto`, и он отказывается сжиматься под
+    содержимое. Плюс пустое состояние — целая фраза с запретом переноса."""
+    ctx = browser.new_context(viewport={"width": 360, "height": 800})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/advisors", wait_until="domcontentloaded")
+        pg.wait_for_selector(".advisor-card", timeout=15000)
+        pg.add_style_tag(content=UNCLAMP)
+        pg.wait_for_timeout(300)
+        sizes = pg.eval_on_selector_all(
+            ".advisor-card", "els => els.map(e => Math.round(e.getBoundingClientRect().width))")
+        assert sizes, "карточек консультантов нет — проверять нечего"
+        assert max(sizes) <= 360, "карточка шире экрана: %s" % sorted(sizes)[-3:]
+    finally:
+        ctx.close()
+
+
+def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_url):
+    """Просьба владельца 19 сентября 2026: кнопки «Подготовка к встрече» и
+    «Подготовка к собеседованию» на карточке компании. Обе ведут к ассистенту
+    с уже составленным вопросом, разным по существу."""
+    page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
+    page.wait_for_selector("#prepMeeting", timeout=15000)
+    assert page.locator("#prepInterview").count() == 1
+
+    page.click("#prepMeeting")
+    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
+    page.wait_for_timeout(1200)
+    meeting = page.inner_text("body")
+    assert "Готовлюсь к встрече" in meeting
+    # Вопрос назвал компанию — иначе ассистент не поймёт, о ком речь.
+    assert "Норильский никель" in meeting
+
+    page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
+    page.wait_for_selector("#prepInterview", timeout=15000)
+    page.click("#prepInterview")
+    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
+    page.wait_for_timeout(1200)
+    interview = page.inner_text("body")
+    assert "Готовлюсь к собеседованию" in interview
+    # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
+    assert "работодателя" in interview and "работодателя" not in meeting
+
+
+def test_form_fields_are_16px_on_touch_devices(browser, base_url):
+    """Safari на iPhone увеличивает страницу, когда палец попадает в поле со
+    шрифтом меньше 16px, и обратно НЕ уменьшает: после одного касания поиска
+    сайт остаётся приближённым, правый край текста уходит за экран (владелец,
+    19 сентября 2026). Запретом масштабирования это не лечится — iOS его
+    игнорирует, — поэтому держим саму причину."""
+    routes = ["#/", "#/deals", "#/companies", "#/analytics", "#/assistant",
+              "#/account?tab=subscriptions", "#/companies/g2f93d858"]
+    ctx = browser.new_context(viewport={"width": 390, "height": 844},
+                              has_touch=True, is_mobile=True)
+    try:
+        pg = ctx.new_page()
+        small = {}
+        for route in routes:
+            pg.goto(base_url + "/" + route, wait_until="domcontentloaded")
+            pg.wait_for_timeout(2200)
+            toggle = pg.query_selector("#advtoggle")
+            if toggle:
+                toggle.click()
+                pg.wait_for_timeout(400)
+            found = pg.evaluate("""() => [...document.querySelectorAll('input,select,textarea')]
+                .filter(e => {
+                    const b = e.getBoundingClientRect();
+                    return (b.width || b.height) && parseFloat(getComputedStyle(e).fontSize) < 16;
+                })
+                .map(e => (e.id || e.className || e.tagName) + ' ' +
+                          parseFloat(getComputedStyle(e).fontSize) + 'px')""")
+            if found:
+                small[route] = found
+        assert not small, "поля мельче 16px — iPhone будет увеличивать страницу: %s" % small
+    finally:
+        ctx.close()

@@ -527,3 +527,54 @@ def test_users_table_created_before_the_gate_gets_approved_column_set_to_true(tm
     assert {"password_hash", "full_name", "company", "position", "approved"} <= cols
     with engine.connect() as conn:
         assert conn.execute(text("SELECT approved FROM users")).scalar() == 1
+
+
+# ====== Смена пароля и почты через HTTP (19 сентября 2026) ======
+
+def test_password_change_over_http_keeps_you_logged_in(client):
+    """Все входы гасятся, включая текущий, — поэтому сервер обязан выдать
+    новый прямо в ответе. Иначе человек вылетает из своего же браузера ровно
+    в тот момент, когда сменил пароль."""
+    login(client, "smena-parolya@example.com")
+    r = client.post("/api/auth/password",
+                     json={"current_password": TEST_PASSWORD, "new_password": "другой-длинный-пароль"})
+    assert r.status_code == 200 and r.json() == {"ok": True}
+    assert "kompas_session" in r.cookies, "новая сессия не выдана — человек вылетит из браузера"
+    assert client.get("/api/me").json()["logged_in"] is True
+    # Новый пароль работает, старый — нет.
+    client.post("/api/auth/logout")
+    assert client.post("/api/auth/login",
+                       json={"email": "smena-parolya@example.com", "password": TEST_PASSWORD}).status_code == 400
+    assert client.post("/api/auth/login",
+                       json={"email": "smena-parolya@example.com",
+                             "password": "другой-длинный-пароль"}).status_code == 200
+
+
+def test_password_change_needs_a_login(client):
+    r = client.post("/api/auth/password",
+                     json={"current_password": TEST_PASSWORD, "new_password": "другой-длинный-пароль"})
+    assert r.status_code == 401
+
+
+def test_email_change_over_http_updates_me(client):
+    login(client, "staraya-pochta@example.com")
+    r = client.post("/api/auth/email",
+                     json={"password": TEST_PASSWORD, "new_email": "novaya-pochta@example.com"})
+    assert r.status_code == 200 and r.json()["email"] == "novaya-pochta@example.com"
+    assert client.get("/api/me").json()["email"] == "novaya-pochta@example.com"
+
+
+def test_email_change_needs_a_login(client):
+    r = client.post("/api/auth/email",
+                     json={"password": TEST_PASSWORD, "new_email": "kto-to@example.com"})
+    assert r.status_code == 401
+
+
+def test_email_change_reports_a_taken_address_instead_of_failing_silently(client):
+    login(client, "pervyy@example.com")
+    client.post("/api/auth/logout")
+    login(client, "vtoroy@example.com")
+    r = client.post("/api/auth/email",
+                     json={"password": TEST_PASSWORD, "new_email": "pervyy@example.com"})
+    assert r.status_code == 400 and "уже зарегистрирована" in r.json()["error"]
+    assert client.get("/api/me").json()["email"] == "vtoroy@example.com"

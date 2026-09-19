@@ -1350,6 +1350,16 @@ class AccountDeleteIn(BaseModel):
     password: str
 
 
+class PasswordChangeIn(BaseModel):
+    current_password: str
+    new_password: str
+
+
+class EmailChangeIn(BaseModel):
+    password: str
+    new_email: str
+
+
 class SubscriptionIn(BaseModel):
     industry: str | None = None
     company_id: str | None = None
@@ -1485,6 +1495,36 @@ def update_profile(payload: ProfileUpdateIn, user: User | None = Depends(_curren
         user.role = UserRole(payload.role)
     db.commit()
     return {"ok": True}
+
+
+@app.post("/api/auth/password")
+def change_password(payload: PasswordChangeIn, response: Response,
+                     user: User | None = Depends(_current_user), db=Depends(get_db)):
+    """Смена пароля. Просьба Артёма 19 сентября 2026: на вкладке «Аккаунт»
+    её не было вовсе — сменить пароль было нельзя никак."""
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    ok, err = auth.change_password(db, user, payload.current_password, payload.new_password)
+    if not ok:
+        return JSONResponse({"error": err}, status_code=400)
+    # Все входы погашены, включая этот: выдаём новый, иначе человек вылетит
+    # из собственного браузера ровно в тот момент, когда сменил пароль.
+    cookie = auth.create_session(db, user)
+    response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
+                         httponly=True, samesite="lax", secure=COOKIE_SECURE)
+    return {"ok": True}
+
+
+@app.post("/api/auth/email")
+def change_email(payload: EmailChangeIn, user: User | None = Depends(_current_user),
+                  db=Depends(get_db)):
+    """Смена почты. Ксюша, тот же день: «И в идеале почту»."""
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    ok, err = auth.change_email(db, user, payload.password, payload.new_email)
+    if not ok:
+        return JSONResponse({"error": err}, status_code=400)
+    return {"ok": True, "email": user.email}
 
 
 @app.delete("/api/account")

@@ -151,3 +151,59 @@ def current_user(session, cookie_token):
     if not row or row.revoked_at is not None or row.expires_at < datetime.utcnow():
         return None
     return session.get(User, row.user_id)
+
+
+def revoke_all_sessions(session, user):
+    """Гасит все живые входы пользователя. Возвращает, сколько погасила."""
+    rows = session.scalars(select(AuthSession).where(
+        AuthSession.user_id == user.id, AuthSession.revoked_at.is_(None))).all()
+    now = datetime.utcnow()
+    for row in rows:
+        row.revoked_at = now
+    return len(rows)
+
+
+def change_password(session, user, current_password, new_password):
+    """(True, None) при успехе, (False, причина) иначе.
+
+    Текущий пароль спрашивается не для формальности: сессия живёт 30 дней,
+    и чужой человек за незаблокированным компьютером иначе сменил бы пароль
+    и забрал аккаунт, не зная старого.
+
+    Все входы гасятся — и на других устройствах тоже. Если пароль меняют
+    потому, что его кто-то узнал, оставить чужую сессию живой значит сделать
+    половину работы: пароль новый, а доступ у того человека прежний.
+    """
+    if not user.password_hash or not verify_password(current_password, user.password_hash):
+        return False, "неверный текущий пароль"
+    if not valid_password(new_password):
+        return False, "новый пароль — от %d символов" % MIN_PASSWORD_LEN
+    if verify_password(new_password, user.password_hash):
+        return False, "новый пароль совпадает с текущим"
+    user.password_hash = hash_password(new_password)
+    revoke_all_sessions(session, user)
+    session.commit()
+    return True, None
+
+
+def change_email(session, user, password, new_email):
+    """(True, None) при успехе, (False, причина) иначе.
+
+    Почта — это логин, поэтому её смена подтверждается паролем. Письма с
+    подтверждением на новый адрес мы не шлём (SMTP нет — см. CLAUDE.md,
+    «Вход по заявке»), и адрес меняется сразу; на экране об этом сказано
+    прямо, чтобы человек не ждал письма, которого не будет, и не потерял
+    вход из-за опечатки.
+    """
+    if not user.password_hash or not verify_password(password, user.password_hash):
+        return False, "неверный пароль"
+    if not valid_email(new_email):
+        return False, "некорректная почта"
+    new_email = str(new_email).strip().lower()
+    if new_email == user.email:
+        return False, "это та же почта, что и сейчас"
+    if session.scalar(select(User).where(User.email == new_email)):
+        return False, "эта почта уже зарегистрирована"
+    user.email = new_email
+    session.commit()
+    return True, None
