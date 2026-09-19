@@ -3572,3 +3572,37 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     assert "Готовлюсь к собеседованию" in interview
     # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
     assert "работодателя" in interview and "работодателя" not in meeting
+
+
+def test_form_fields_are_16px_on_touch_devices(browser, base_url):
+    """Safari на iPhone увеличивает страницу, когда палец попадает в поле со
+    шрифтом меньше 16px, и обратно НЕ уменьшает: после одного касания поиска
+    сайт остаётся приближённым, правый край текста уходит за экран (владелец,
+    19 сентября 2026). Запретом масштабирования это не лечится — iOS его
+    игнорирует, — поэтому держим саму причину."""
+    routes = ["#/", "#/deals", "#/companies", "#/analytics", "#/assistant",
+              "#/account?tab=subscriptions", "#/companies/g2f93d858"]
+    ctx = browser.new_context(viewport={"width": 390, "height": 844},
+                              has_touch=True, is_mobile=True)
+    try:
+        pg = ctx.new_page()
+        small = {}
+        for route in routes:
+            pg.goto(base_url + "/" + route, wait_until="domcontentloaded")
+            pg.wait_for_timeout(2200)
+            toggle = pg.query_selector("#advtoggle")
+            if toggle:
+                toggle.click()
+                pg.wait_for_timeout(400)
+            found = pg.evaluate("""() => [...document.querySelectorAll('input,select,textarea')]
+                .filter(e => {
+                    const b = e.getBoundingClientRect();
+                    return (b.width || b.height) && parseFloat(getComputedStyle(e).fontSize) < 16;
+                })
+                .map(e => (e.id || e.className || e.tagName) + ' ' +
+                          parseFloat(getComputedStyle(e).fontSize) + 'px')""")
+            if found:
+                small[route] = found
+        assert not small, "поля мельче 16px — iPhone будет увеличивать страницу: %s" % small
+    finally:
+        ctx.close()
