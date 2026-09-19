@@ -1600,18 +1600,86 @@ const INDUSTRIES = ["Все","Нефть и газ","Уголь","ГМК и до
    до того, как появятся аккаунты с серверной подпиской. Когда пользователь
    войдёт, этот список — готовая основа для уведомлений по компании. */
 const FOLLOW_KEY="kompas_followed_companies_v1";
-function followedCompanies(){
+function localFollowed(){
   try{
     const rows=JSON.parse(localStorage.getItem(FOLLOW_KEY)||"[]");
     return Array.isArray(rows)?rows.filter((id,i,a)=>typeof id==="string"&&co(id)&&a.indexOf(id)===i):[];
   }catch(e){return [];}
 }
-function isFollowed(id){return followedCompanies().includes(id);}
-function toggleFollowedCompany(id){
-  const ids=followedCompanies(), at=ids.indexOf(id);
-  if(at>=0) ids.splice(at,1); else ids.push(id);
-  localStorage.setItem(FOLLOW_KEY,JSON.stringify(ids));
-  return ids.includes(id);
+/* Подписки вошедшего пользователя — одним списком с сервера (отрасли,
+   компании, ключевые слова живут в одной таблице). Держим рядом с ME и
+   обновляем вместе с ним: подписка на компанию рисуется сердечком в
+   каталоге и кнопкой на профиле, и обе должны знать состояние без запроса
+   на каждый клик. */
+let SUBS=[];
+async function loadSubs(){
+  if(!ME){SUBS=[];return SUBS;}
+  try{const r=await fetch("/api/subscriptions");SUBS=r.ok?await r.json():[];}
+  catch(e){SUBS=[];}
+  return SUBS;
+}
+function companySub(id){
+  return SUBS.find(s=>s.company_id===id && !s.industry && !s.keyword) || null;
+}
+function industrySub(name){
+  return SUBS.find(s=>s.industry===name && !s.company_id && !s.keyword) || null;
+}
+function followedCompanies(){
+  return ME ? SUBS.filter(s=>s.company_id).map(s=>s.company_id).filter(id=>co(id)) : localFollowed();
+}
+function isFollowed(id){return ME ? !!companySub(id) : localFollowed().includes(id);}
+/* До входа подписка живёт в браузере (сервер не знает, кому слать), после
+   входа — на сервере. Обещание в подсказке «список в кабинете» до 19 сентября
+   2026 не сбывалось: список лежал только в localStorage, и кабинет о нём не
+   знал — ровно тот класс дефекта, от которого предостерегает правило
+   «обещание новизны без новизны». */
+async function toggleFollowedCompany(id){
+  if(!ME){
+    const ids=localFollowed(), at=ids.indexOf(id);
+    if(at>=0) ids.splice(at,1); else ids.push(id);
+    try{localStorage.setItem(FOLLOW_KEY,JSON.stringify(ids));}catch(e){}
+    return ids.includes(id);
+  }
+  const cur=companySub(id);
+  try{
+    if(cur) await fetch("/api/subscriptions/"+cur.id,{method:"DELETE"});
+    else await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({company_id:id})});
+  }catch(e){return isFollowed(id);}
+  await loadSubs();
+  return isFollowed(id);
+}
+async function toggleIndustrySub(name){
+  if(!ME) return null;
+  const cur=industrySub(name);
+  try{
+    if(cur) await fetch("/api/subscriptions/"+cur.id,{method:"DELETE"});
+    else await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({industry:name})});
+  }catch(e){return !!industrySub(name);}
+  await loadSubs();
+  return !!industrySub(name);
+}
+/* Сердечки, нажатые до входа, переезжают на сервер при первом же входе —
+   иначе человек, отметивший десяток компаний и потом зарегистрировавшийся,
+   молча теряет их и не получает ни одного письма. */
+/* Текст подтверждения зависит от того, вошёл человек или нет, и обещать
+   письма тому, кого мы не знаем по адресу, нельзя. */
+function followOnText(name){
+  return ME
+    ? `Следим за «${name}» — сообщим о новых сделках. Все подписки — в <a href="#/account?tab=subscriptions">кабинете</a>.`
+    : `«${name}» отмечена. <a href="#/account">Войдите</a>, чтобы получать сообщения о новых сделках.`;
+}
+async function syncLocalFollows(){
+  const local=localFollowed();
+  if(!ME || !local.length) return;
+  for(const id of local){
+    if(companySub(id)) continue;
+    try{await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({company_id:id})});}catch(e){return;}
+  }
+  try{localStorage.removeItem(FOLLOW_KEY);}catch(e){}
+  await loadSubs();
 }
 const COMPARE_KEY="kompas_compare_companies_v1";
 const COMPARE_MAX=3;
@@ -5307,10 +5375,10 @@ function bindCompanyGridActions(el){
     if(fav){
       ev.preventDefault();
       const id=fav.dataset.coFollow, name=esc((co(id)||{}).name||"компания");
-      const on=toggleFollowedCompany(id);
-      toast(on ? `«${name}» в избранном. Список — в <a href="#/account">кабинете</a>.`
-               : `«${name}» убрана из избранного`);
-      renderCompanyGrid();
+      toggleFollowedCompany(id).then(on=>{
+        toast(on ? followOnText(name) : `«${name}» — больше не следим`);
+        renderCompanyGrid();
+      });
       return;
     }
     /* Отрасль ведёт на свою страницу. Ссылку внутрь карточки поставить нельзя:
@@ -6155,7 +6223,7 @@ function renderCompany(id){
       </div>`;
     })()}
   </div>
-  <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
+  <div class="deal-tools company-tools reveal"><button class="chip" id="followCompany">${isFollowed(id)?"Не следить за компанией":"Следить за сделками компании"}</button><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
@@ -6171,6 +6239,18 @@ function renderCompany(id){
     compareButton.textContent=result.selected?"Убрать из сравнения":"Добавить к сравнению";
     if(note)note.textContent=result.selected?"Компания добавлена. Выберите ещё одну или две.":"Компания убрана из сравнения.";
     renderCompareTray();
+  };
+  const followButton=document.getElementById("followCompany");
+  if(followButton) followButton.onclick=async()=>{
+    followButton.disabled=true;
+    const on=await toggleFollowedCompany(id);
+    followButton.disabled=false;
+    followButton.textContent=on?"Не следить за компанией":"Следить за сделками компании";
+    const note=document.getElementById("compareCompanyNote");
+    if(note) note.innerHTML = on
+      ? (ME ? "Сообщим о новых сделках этой компании."
+            : `Отмечено в этом браузере. <a href="#/account">Войдите</a>, чтобы получать сообщения.`)
+      : "";
   };
   const openCompanyDeals=document.getElementById("openCompanyDeals");
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
@@ -6498,6 +6578,11 @@ function renderIndustry(ind){
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
+    <!-- Подписка на отрасль работала и раньше, но нажать её можно было только
+         в ленте сделок под названием «Сохранить подборку» — то есть не там,
+         где её ищут. Здесь она называется тем, что делает. -->
+    <button class="chip" id="followInd">${industrySub(ind)?"Не следить за отраслью":"Следить за сделками отрасли"}</button>
+    <span class="tool-note" id="followIndNote"></span>
   </div>
   <div class="an-grid">
     <div class="an-card reveal">
@@ -6544,6 +6629,21 @@ function renderIndustry(ind){
     </div>`:""}
   </div>
   ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
+  const followInd=document.getElementById("followInd");
+  if(followInd) followInd.onclick=async()=>{
+    const note=document.getElementById("followIndNote");
+    if(!ME){
+      if(note) note.innerHTML=`<a href="#/account">Войдите</a>, чтобы получать сообщения о новых сделках отрасли.`;
+      return;
+    }
+    followInd.disabled=true;
+    const on=await toggleIndustrySub(ind);
+    followInd.disabled=false;
+    followInd.textContent=on?"Не следить за отраслью":"Следить за сделками отрасли";
+    if(note) note.innerHTML = on
+      ? `Сообщим о новых сделках отрасли. Все подписки — в <a href="#/account?tab=subscriptions">кабинете</a>.`
+      : "";
+  };
   mountMiniAI(ind,"industry",ind);
 }
 
@@ -7395,6 +7495,11 @@ async function refreshMe(){
     ME = data.logged_in ? data : null;
     GATE = !!data.gate;
   }catch(e){ ME = null; if(GATE === null) GATE = false; }
+  // Подписки — вместе с профилем: сердечко в каталоге и кнопки на профиле
+  // компании и на странице отрасли рисуются по ним, и спрашивать сервер на
+  // каждый клик не нужно. Сердечки, нажатые до входа, переезжают на сервер.
+  await loadSubs();
+  if(ME) await syncLocalFollows();
   // Первый ответ /api/me — тот, которого ждал стартовый route(): теперь
   // известно, показывать сайт или экран входа.
   if(firstAnswer) route();
@@ -7619,9 +7724,21 @@ async function renderAccount(qs){
     document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
     loadPrefs();loadNotifications();
   }else if(tab==="subscriptions"){
-    body.innerHTML=`<div class="acct-card reveal"><span class="label">Сделки, за которыми вы следите</span><div id="watchList"><p class="acct-note">Загружаем…</p></div></div><div class="acct-card reveal" style="margin-top:18px"><span class="label">Подборки по рынку</span><div id="subList"><p class="acct-note">Загружаем…</p></div><div class="acct-newsub"><select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select><input type="text" id="subKw" placeholder="Ключевое слово"><input type="number" id="subMin" placeholder="От суммы, млн ₽" min="0"><button class="chip" id="subAdd">Добавить</button></div></div>`;
+    body.innerHTML=`<div class="acct-card reveal"><span class="label">Сделки, за которыми вы следите</span><div id="watchList"><p class="acct-note">Загружаем…</p></div></div><div class="acct-card reveal" style="margin-top:18px"><span class="label">Компании и отрасли, за которыми вы следите</span><div id="subList"><p class="acct-note">Загружаем…</p></div><div class="acct-newsub"><select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select><input type="text" id="subKw" placeholder="Ключевое слово"><input type="number" id="subMin" placeholder="От суммы, млн ₽" min="0"><button class="chip" id="subAdd">Добавить</button></div><p class="acct-note" style="margin-top:10px">За компанией проще следить с её страницы — кнопкой «Следить за сделками компании».</p></div>`;
     const drawWatches=async()=>{const r=await fetch("/api/deal-watches"),rows=r.ok?await r.json():[];document.getElementById("watchList").innerHTML=rows.length?rows.map(w=>`<div class="acct-row"><a href="#/deal/${w.deal_id}">${esc(w.title)}</a><span class="del" data-unwatch="${w.deal_id}">Отключить</span></div>`).join(""):`<p class="acct-note">Вы пока не подписаны ни на одну конкретную сделку.</p>`;document.querySelectorAll("[data-unwatch]").forEach(el=>el.onclick=async()=>{await fetch(`/api/deals/${el.dataset.unwatch}/watch`,{method:"DELETE"});drawWatches();});};
-    const drawSubs=async()=>{const r=await fetch("/api/subscriptions"),rows=r.ok?await r.json():[];const list=document.getElementById("subList");list.innerHTML=rows.length?rows.map(x=>`<div class="acct-row"><span>${esc(x.industry||"Любая отрасль")}${x.keyword?` · «${esc(x.keyword)}»`:""}${x.min_amount_mln_rub?` · от ${x.min_amount_mln_rub} млн ₽`:""}</span><span class="del" data-del="${x.id}">Удалить</span></div>`).join(""):`<p class="acct-note">Подборок пока нет.</p>`;list.querySelectorAll("[data-del]").forEach(el=>el.onclick=async()=>{await fetch(`/api/subscriptions/${el.dataset.del}`,{method:"DELETE"});drawSubs();});};
+    /* Название подписки — то, на что человек подписался, а не перечень
+       заполненных полей: «Магнит» читается, «Любая отрасль · «Магнит»» — нет.
+       Компания идёт ссылкой на свою страницу: оттуда её и отключают. */
+    const subTitle=x=>{
+      const parts=[];
+      if(x.company_id) parts.push(`<a href="#/companies/${encodeURIComponent(x.company_id)}">${esc(x.company_name||"компания")}</a>`);
+      if(x.industry) parts.push(`отрасль «${esc(x.industry)}»`);
+      if(x.keyword) parts.push(`упоминание «${esc(x.keyword)}»`);
+      if(!parts.length) parts.push("все сделки");
+      if(x.min_amount_mln_rub) parts.push(`от ${x.min_amount_mln_rub} млн ₽`);
+      return parts.join(" · ");
+    };
+    const drawSubs=async()=>{const rows=await loadSubs();const list=document.getElementById("subList");list.innerHTML=rows.length?rows.map(x=>`<div class="acct-row"><span>${subTitle(x)}</span><span class="del" data-del="${x.id}">Удалить</span></div>`).join(""):`<p class="acct-note">Вы пока ни за кем не следите. Отметьте компанию на её странице или добавьте отрасль ниже — будем сообщать о новых сделках.</p>`;list.querySelectorAll("[data-del]").forEach(el=>el.onclick=async()=>{await fetch(`/api/subscriptions/${el.dataset.del}`,{method:"DELETE"});drawSubs();});};
     document.getElementById("subAdd").onclick=async()=>{const industry=document.getElementById("subInd").value||null,keyword=document.getElementById("subKw").value.trim()||null,min=document.getElementById("subMin").value;if(!industry&&!keyword){alert("Укажите отрасль или ключевое слово");return;}await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword,min_amount_mln_rub:min?Number(min):null})});document.getElementById("subKw").value="";document.getElementById("subMin").value="";drawSubs();};
     drawWatches();drawSubs();
   }else{

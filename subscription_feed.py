@@ -107,10 +107,21 @@ def self_check():
     assert amount_mln_rub("несколько млрд ₽ (точно не указана)") is None
 
 
+PROFILE_FIELDS = ("buyer", "target", "seller_id", "asset_id")
+
+
+def company_ids(deal):
+    """Профили, на которые ссылается карточка: покупатель, предмет, продавец.
+
+    Слитые дубли учитываются на уровне базы (`merged`), а не здесь: id в
+    полях карточки уже указывают на оставшиеся профили."""
+    return {deal.get(field) for field in PROFILE_FIELDS if deal.get(field)}
+
+
 def company_names(deal, companies):
     """Имена профилей, на которые ссылается карточка."""
     names = []
-    for field in ("buyer", "target", "seller_id", "asset_id"):
+    for field in PROFILE_FIELDS:
         profile = (companies or {}).get(deal.get(field) or "")
         if profile and profile.get("name"):
             names.append(profile["name"])
@@ -133,12 +144,21 @@ def match_reason(flt, deal, companies):
     """Почему эта сделка подходит подписке. None — не подходит."""
     reasons = []
     industry = (getattr(flt, "industry", None) or "").strip()
+    company_id = (getattr(flt, "company_id", None) or "").strip()
     keyword = (getattr(flt, "keyword", None) or "").strip()
     floor = getattr(flt, "min_amount_mln_rub", None)
 
-    if not industry and not keyword and floor is None:
+    if not industry and not company_id and not keyword and floor is None:
         return None  # подписки «на всё» не бывает, её не даёт создать и API
 
+    if company_id:
+        # По ID ПРОФИЛЯ, а не по названию: подписка по слову («Магнит») ловит
+        # и «Магнитогорский металлургический комбинат», а роль в сделке
+        # проставлена ссылкой на профиль — промахнуться нечем.
+        if company_id not in company_ids(deal):
+            return None
+        name = ((companies or {}).get(company_id) or {}).get("name") or ""
+        reasons.append("компания «%s»" % name if name else "подписка на компанию")
     if industry:
         if (deal.get("ind") or "") != industry:
             return None

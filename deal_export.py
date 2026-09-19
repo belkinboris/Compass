@@ -14,7 +14,7 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import Flowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 from xml.sax.saxutils import escape
 
 
@@ -45,6 +45,65 @@ def _register_fonts() -> tuple[str, str]:
     if bold:
         pdfmetrics.registerFont(TTFont("CompassSansBold", bold))
     return ("CompassSans" if regular else "Helvetica", "CompassSansBold" if bold else "Helvetica-Bold")
+
+
+class CompassMark(Flowable):
+    """Знак «Компаса» рядом с названием — тот же компас, что в шапке сайта.
+
+    Просьба владельца 19 сентября 2026: «в пдф не забыть рядом с названием
+    компас добавить логотип, это важно». Отчёт уходит из рук в руки —
+    партнёру, в переписку, на печать, — и без знака он выглядит распечаткой
+    из чужой таблицы, а не документом «Компаса».
+
+    Рисуется примитивами, а не картинкой: растр в PDF мылится при печати и
+    требует отдельного файла в поставке, а внешних сервисов и CDN у нас нет
+    (правило «всё должно работать из России»). Координаты — из того же
+    viewBox 48×48, что у `.wordmark` в static/index.html, с поправкой на то,
+    что в SVG ось Y смотрит вниз, а в PDF вверх: стрелка перевёрнута, знак
+    поворота изменён.
+    """
+
+    def __init__(self, size: float, ink: Any, accent: Any, paper: Any):
+        super().__init__()
+        self.size, self.ink, self.accent, self.paper = size, ink, accent, paper
+
+    def wrap(self, *_args) -> tuple[float, float]:
+        return self.size, self.size
+
+    def draw(self) -> None:
+        c = self.canv
+        c.saveState()
+        c.scale(self.size / 48.0, self.size / 48.0)
+        c.setStrokeColor(self.ink)
+        c.setLineWidth(2.6)
+        c.circle(24, 24, 21, stroke=1, fill=0)
+        c.saveState()
+        c.translate(24, 24); c.rotate(38); c.translate(-24, -24)
+        for apex, color in ((43, self.accent), (5, self.ink)):
+            path = c.beginPath()
+            path.moveTo(24, apex); path.lineTo(28.5, 24); path.lineTo(19.5, 24); path.close()
+            c.setFillColor(color)
+            c.drawPath(path, stroke=0, fill=1)
+        c.restoreState()
+        c.setFillColor(self.paper)
+        c.setStrokeColor(self.ink)
+        c.setLineWidth(1.6)
+        c.circle(24, 24, 3.2, stroke=1, fill=1)
+        c.restoreState()
+
+
+_MONTHS = ("января", "февраля", "марта", "апреля", "мая", "июня",
+           "июля", "августа", "сентября", "октября", "ноября", "декабря")
+
+
+def _report_date() -> str:
+    """Дата формирования — на самой странице, а не только в свойствах файла.
+    Отчёт живёт своей жизнью после скачивания: его пересылают и открывают
+    через месяцы, и «на какое число эти данные» должно читаться глазами, не
+    через «свойства документа»."""
+    from datetime import date
+    today = date.today()
+    return "%d %s %d года" % (today.day, _MONTHS[today.month - 1], today.year)
 
 
 def _text(value: Any) -> str:
@@ -96,8 +155,19 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
     small = ParagraphStyle("CompassSmall", parent=body, fontSize=8, leading=11, textColor=muted)
 
     story: list[Any] = []
-    story.append(Paragraph("КОМПАС", ParagraphStyle("Brand", parent=body, fontName=bold,
-                                                     fontSize=16, textColor=brand, spaceAfter=12)))
+    # Знак и название — одной строкой, таблицей: у Flowable нет обтекания
+    # текстом, и положить их рядом иначе нечем.
+    brand_style = ParagraphStyle("Brand", parent=body, fontName=bold, fontSize=16,
+                                 leading=18, textColor=brand)
+    head = Table([[CompassMark(7.5*mm, brand, bronze, colors.white),
+                   Paragraph("КОМПАС", brand_style)]],
+                 colWidths=[10.5*mm, 149.5*mm])
+    head.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
+    ]))
+    story.append(head)
     story.append(Paragraph(escape(_text(deal.get("title"))), title))
     meta = " · ".join(x for x in (_text(deal.get("date")), _text(deal.get("status")),
                                   _text(deal.get("type")), _text(deal.get("ind"))) if x and x != "Не раскрыто")
@@ -166,7 +236,9 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
             if isinstance(source, list) and len(source) >= 2:
                 story.append(Paragraph(f'{escape(_text(source[0]))}: <link href="{escape(_text(source[1]))}" color="#1D5A44">{escape(_text(source[1]))}</link>', small))
     story.append(Spacer(1, 8*mm))
-    story.append(Paragraph("Сведения собраны из публичных источников и могут быть неполными. Дата формирования отчёта указывается в свойствах файла.", small))
+    story.append(Paragraph(
+        f"Отчёт сформирован {escape(_report_date())}. Сведения собраны из публичных "
+        "источников и могут быть неполными.", small))
 
     def footer(canvas, _doc):
         canvas.saveState(); canvas.setStrokeColor(bronze); canvas.setLineWidth(0.7)

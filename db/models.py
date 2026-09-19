@@ -343,12 +343,26 @@ class User(Base):
 
 
 class SavedFilter(Base):
-    """Подписка на алерт: «сообщи о сделках в отрасли X от суммы Y»."""
+    """Подписка на алерт: «сообщи о сделках в отрасли X от суммы Y».
+
+    Компания добавлена сюда же (19 сентября 2026), а не отдельной таблицей:
+    подписка — одна сущность с несколькими условиями, и условия эти
+    складываются по И («сделки «Магнита» дороже 5 млрд ₽»). Заведя вторую
+    таблицу, мы бы завели и вторую ленту, и второй экран, и второе место,
+    где чинить дедупликацию уведомлений.
+
+    `company_id` — id ПРОФИЛЯ из нашей базы, не название. Подписка по
+    названию у нас уже есть (`keyword`), и она ловит лишнее: «Магнит»
+    находит и «Магнитогорский металлургический комбинат». Профиль
+    сопоставляется с ролями сделки (покупатель, продавец, предмет) по id,
+    и такого промаха быть не может.
+    """
     __tablename__ = "saved_filters"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     industry: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    company_id: Mapped[str | None] = mapped_column(String(40), nullable=True)
     keyword: Mapped[str | None] = mapped_column(String(200), nullable=True)
     min_amount_mln_rub: Mapped[float | None] = mapped_column(Numeric, nullable=True)
     active: Mapped[bool] = mapped_column(Boolean, default=True)

@@ -20,6 +20,7 @@ import time
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import quote
 
 import pytest
 
@@ -752,6 +753,41 @@ def test_analytics_multiples_toggle_switches_to_revenue_view(browser, base_url):
         pg.close()
     finally:
         ctx.close()
+
+
+def test_follow_buttons_exist_on_company_and_industry_pages(browser, base_url):
+    """Кнопки «следить» там, где их ищут (просьба Дани, 19 сентября 2026).
+
+    До этого дня подписка на компанию была сердечком в каталоге, которое
+    писало только в localStorage и обещало «список — в кабинете», хотя
+    кабинет о нём не знал; на самом профиле компании кнопки не было вовсе, а
+    подписка на отрасль пряталась в ленте сделок под названием «Сохранить
+    подборку». Проверяем гостя (без входа): кнопки есть, нажимаются, честно
+    зовут войти и ничего не ломают."""
+    for width, height in ((360, 740), (1280, 900)):
+        ctx = browser.new_context(viewport={"width": width, "height": height})
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(base_url + "/#/companies/gcdf5803f", wait_until="networkidle")
+            pg.wait_for_selector("#followCompany")
+            pg.click("#followCompany")
+            pg.wait_for_timeout(400)
+            assert "Не следить" in pg.inner_text("#followCompany")
+            # Гостю не обещаем писем — предлагаем войти.
+            assert "ойдите" in pg.inner_text("#compareCompanyNote")
+            pg.goto(base_url + "/#/industry/" + quote("ИТ и интернет"), wait_until="networkidle")
+            pg.wait_for_selector("#followInd")
+            pg.click("#followInd")
+            pg.wait_for_timeout(300)
+            assert "ойдите" in pg.inner_text("#followIndNote")
+            assert not errors, errors
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+            pg.close()
+        finally:
+            ctx.close()
 
 
 def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url):

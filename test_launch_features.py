@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Новые функции запуска: ФНС, алерты, экспорт, вебинары и mobile UI."""
+import os
 import sys
+import tempfile
 import uuid
 from datetime import date, datetime
 from pathlib import Path
@@ -11,7 +13,8 @@ from fastapi.testclient import TestClient
 import main
 from db.models import (
     Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
-    Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
+    Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
+    UserTier, Webinar,
 )
 from db.session import get_session
 from notification_service import create_notification
@@ -2262,6 +2265,88 @@ def test_subscription_actually_reaches_the_subscriber(client):
         db.close()
 
 
+def test_company_subscription_matches_by_profile_not_by_name(client):
+    """Подписка на компанию (просьба Дани, 19 сентября 2026).
+
+    Сопоставление идёт по id ПРОФИЛЯ, а не по названию, и это не
+    придирчивость: подписка по слову у нас уже есть (`keyword`), и на
+    «Магните» она ловит «Магнитогорский металлургический комбинат» —
+    человек получает письма про чужую сделку и перестаёт верить остальным.
+    Роль в карточке проставлена ссылкой на профиль, промахнуться нечем.
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "publish"))
+    import notify_subscribers
+
+    user = _login(client, f"company-subscriber-{uuid.uuid4().hex[:8]}@example.com")
+    companies = {"co-magnit": {"name": "Магнит"},
+                 "co-mmk": {"name": "Магнитогорский металлургический комбинат"}}
+    # Профиля нет в базе — подписку не создаём: она молча никогда не
+    # сработает, а человек будет ждать писем, которых не бывает.
+    assert client.post("/api/subscriptions", json={"company_id": "co-no-such"}).status_code == 400
+    import base_data
+    real_id = next(iter((base_data.promoted().get("companies") or {})))
+    assert client.post("/api/subscriptions", json={"company_id": real_id}).status_code == 200
+    # Повторное нажатие сердечка — не вторая подписка на то же самое.
+    again = client.post("/api/subscriptions", json={"company_id": real_id})
+    assert again.status_code == 200 and again.json().get("existing") is True
+    rows = client.get("/api/subscriptions").json()
+    assert len([r for r in rows if r["company_id"] == real_id]) == 1
+    # Имя компании отдаётся рядом с id: на экране подписка называется именем.
+    assert rows[0]["company_name"], rows[0]
+
+    import subscription_feed
+    flt = SavedFilter(user_id=user.id, company_id="co-magnit", active=True)
+    mine = {"id": "sub-co-mine", "title": "Сделка", "buyer": "co-magnit", "ind": "Ритейл"}
+    namesake = {"id": "sub-co-namesake", "title": "ММК купил актив",
+                "buyer": "co-mmk", "ind": "Металлургия"}
+    assert "Магнит" in (subscription_feed.match_reason(flt, mine, companies) or "")
+    assert subscription_feed.match_reason(flt, namesake, companies) is None
+    # А подписка по слову — ловит обоих, и это ровно та разница, ради которой
+    # у подписки на компанию отдельное поле.
+    by_word = SavedFilter(user_id=user.id, keyword="Магнит", active=True)
+    assert subscription_feed.match_reason(by_word, namesake, companies)
+
+    db = get_session()
+    try:
+        db.add(SavedFilter(user_id=user.id, company_id="co-magnit", active=True))
+        db.commit()
+        stats = notify_subscribers.notify_new_deals(db, [mine, namesake], companies)
+        assert stats["created"] == 1, stats
+        got = db.query(Notification).filter_by(user_id=user.id, deal_id="sub-co-mine").all()
+        assert got and "Магнит" in (got[0].body or ""), "в уведомлении не сказано, почему оно пришло"
+    finally:
+        db.close()
+
+
+def test_saved_filters_table_made_before_company_subscriptions_gets_the_column():
+    """Миграция на «старой» таблице: колонка `company_id` появилась 19 сентября
+    2026, а таблица на проде создана раньше — `create_all` добавляет только
+    недостающие ТАБЛИЦЫ, но не колонки (тот же урок, что с `approved` у users).
+    """
+    from sqlalchemy import create_engine, inspect, text
+
+    with tempfile.TemporaryDirectory() as tmp:
+        engine = create_engine("sqlite:///" + os.path.join(tmp, "old.db"))
+        with engine.begin() as conn:
+            conn.execute(text(
+                "CREATE TABLE saved_filters (id INTEGER PRIMARY KEY, user_id INTEGER, "
+                "industry VARCHAR(120), keyword VARCHAR(200), min_amount_mln_rub NUMERIC, "
+                "active BOOLEAN, created_at DATETIME)"))
+            conn.execute(text("INSERT INTO saved_filters (id, user_id, industry, active) "
+                              "VALUES (1, 1, 'Ритейл', 1)"))
+        with engine.begin() as conn:
+            cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+            assert "company_id" not in cols
+            if "company_id" not in cols:
+                conn.execute(text("ALTER TABLE saved_filters ADD COLUMN company_id VARCHAR(40)"))
+        with engine.begin() as conn:
+            cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+            assert "company_id" in cols
+            # У старых подписок компании не было — они остаются работать как есть.
+            assert conn.execute(text("SELECT company_id FROM saved_filters WHERE id = 1")).scalar() is None
+
+
 def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
     """Сверка подписок на старте сайта: первый прогон молчит, второй сообщает.
 
@@ -3714,6 +3799,70 @@ def test_deal_pdf_embeds_a_cyrillic_font_shipped_with_the_site():
     assert pdf.startswith(b"%PDF")
     assert b"/FontFile2" in pdf, "TrueType-шрифт не встроен"
     assert b"DejaVuSans" in pdf or b"LiberationSans" in pdf, "нет шрифта с кириллицей"
+
+
+def test_deal_pdf_carries_the_compass_mark_next_to_the_name():
+    """Просьба владельца 19 сентября 2026: «в пдф не забыть рядом с названием
+    компас добавить логотип, это важно». Отчёт уходит из рук в руки, и без
+    знака он выглядит распечаткой из чужой таблицы.
+
+    Проверяем саму геометрию, а не байты файла: потоки PDF сжаты, и поиск
+    по ним ничего не доказывает. Знак обязан совпадать с тем, что в шапке
+    сайта (`.wordmark`, viewBox 48×48): круг радиуса 21, стрелка из двух
+    треугольников — бронзовый вверх, тёмный вниз — и точка в центре."""
+    import deal_export
+    from reportlab.lib import colors
+
+    class Recorder:
+        """Холст-протокол: запоминает, что на нём рисовали."""
+        def __init__(self):
+            self.calls, self.fills, self.paths = [], [], []
+        def __getattr__(self, name):
+            def record(*args, **kwargs):
+                self.calls.append((name, args))
+                if name == "setFillColor" and args:
+                    self.fills.append(args[0])
+                return self
+            return record
+        def beginPath(self):
+            path = Recorder()
+            self.paths.append(path)
+            return path
+
+    ink, accent, paper = colors.HexColor("#0F2B21"), colors.HexColor("#A3814E"), colors.white
+    mark = deal_export.CompassMark(21, ink, accent, paper)
+    assert mark.wrap(0, 0) == (21, 21)
+    mark.canv = Recorder()
+    mark.draw()
+    calls = mark.canv.calls
+    circles = [args for name, args in calls if name == "circle"]
+    assert (24, 24, 21) == circles[0][:3], "круг знака"
+    assert (24, 24, 3.2) == circles[1][:3], "точка в центре"
+    assert ("rotate", (38,)) in calls, "стрелка наклонена, как в шапке сайта"
+    # Два треугольника, и бронзовый — тот, что смотрит вверх (в PDF ось Y
+    # вверх, в SVG вниз; перепутать знак здесь значит перевернуть стрелку).
+    apexes = [p.calls[0][1][1] for p in mark.canv.paths]
+    assert apexes == [43, 5], apexes
+    assert accent in mark.canv.fills and ink in mark.canv.fills
+    # И целиком: файл собирается со знаком внутри и остаётся настоящим PDF.
+    deal = {"id": "pdf-mark", "title": "Тестовая сделка", "date": "2026-09-19",
+            "status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽",
+            "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": []}
+    assert deal_export.render_deal_pdf(deal).startswith(b"%PDF")
+
+
+def test_deal_pdf_says_the_report_date_on_the_page():
+    """Раньше внизу стояло «Дата формирования отчёта указывается в свойствах
+    файла» — отговорка: отчёт пересылают и открывают через месяцы, и «на
+    какое число эти данные» должно читаться глазами, а не через свойства
+    документа."""
+    import re
+
+    import deal_export
+
+    text = deal_export._report_date()
+    assert re.match(r"^\d{1,2} [а-я]+ \d{4} года$", text), text
+    assert not any(ch.isascii() and ch.isalpha() for ch in text)
 
 
 def test_owner_payload_names_the_bank_of_russia_by_inn():

@@ -137,6 +137,17 @@ def _create_account_tables():
                     conn.execute(text("ALTER TABLE moderation_decisions ADD COLUMN reply_message_id INTEGER"))
         except Exception as e:
             logger.error("не удалось добавить chat_id/reply_message_id в moderation_decisions: %s", e)
+        # company_id добавлен в saved_filters 19 сентября 2026 (подписка на
+        # компанию). Тот же диалект-независимый приём инспектора: колонка
+        # nullable, поэтому ничего не досчитываем — у старых подписок
+        # компании и не было.
+        try:
+            with engine.begin() as conn:
+                cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+                if "company_id" not in cols:
+                    conn.execute(text("ALTER TABLE saved_filters ADD COLUMN company_id VARCHAR(40)"))
+        except Exception as e:
+            logger.error("не удалось добавить company_id в saved_filters: %s", e)
         # deal_id расширен с 40 до 80 знаков 22 августа: у вехи это
         # "<id сделки>~<вид этапа>", длиннее одного голого id. SQLite VARCHAR
         # не проверяется движком вообще (хранится как TEXT) — расширять там
@@ -1311,6 +1322,7 @@ class AccountDeleteIn(BaseModel):
 
 class SubscriptionIn(BaseModel):
     industry: str | None = None
+    company_id: str | None = None
     keyword: str | None = None
     min_amount_mln_rub: float | None = None
 
@@ -3484,7 +3496,12 @@ def list_subscriptions(user: User | None = Depends(_current_user), db=Depends(ge
     if not user:
         return JSONResponse({"error": "не авторизован"}, status_code=401)
     rows = db.query(SavedFilter).filter_by(user_id=user.id, active=True).order_by(SavedFilter.created_at.desc()).all()
+    # Имя компании отдаём вместе с id: подписка на экране должна называться
+    # «Магнит», а не «g1a2b3c4» — id внутренний, человеку он ничего не говорит.
+    companies = (base_data.promoted() or {}).get("companies") or {}
     return [{"id": r.id, "industry": r.industry, "keyword": r.keyword,
+             "company_id": r.company_id,
+             "company_name": ((companies.get(r.company_id) or {}).get("name") if r.company_id else None),
              "min_amount_mln_rub": float(r.min_amount_mln_rub) if r.min_amount_mln_rub is not None else None}
             for r in rows]
 
@@ -3493,10 +3510,23 @@ def list_subscriptions(user: User | None = Depends(_current_user), db=Depends(ge
 def create_subscription(sub: SubscriptionIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user:
         return JSONResponse({"error": "не авторизован"}, status_code=401)
-    if not sub.industry and not sub.keyword:
-        return JSONResponse({"error": "укажите отрасль или ключевое слово"}, status_code=400)
+    if not sub.industry and not sub.keyword and not sub.company_id:
+        return JSONResponse({"error": "укажите компанию, отрасль или ключевое слово"}, status_code=400)
+    company_id = (sub.company_id or "").strip() or None
+    if company_id and company_id not in ((base_data.promoted() or {}).get("companies") or {}):
+        # Подписка на несуществующий профиль молча никогда не сработает —
+        # человек будет ждать писем, которых не бывает. Родня уже записанному
+        # уроку «не придержано — не то же самое, что выйдет по молчанию».
+        return JSONResponse({"error": "такой компании нет в базе"}, status_code=400)
+    if company_id:
+        # Второй раз на ту же компанию — не вторая подписка, а тот же самый
+        # ответ «вы подписаны»: сердечко на карточке нажимают повторно легко.
+        same = db.query(SavedFilter).filter_by(user_id=user.id, active=True,
+                                               company_id=company_id).first()
+        if same and not sub.industry and not sub.keyword and sub.min_amount_mln_rub is None:
+            return {"id": same.id, "existing": True}
     row = SavedFilter(user_id=user.id, industry=sub.industry or None, keyword=sub.keyword or None,
-                       min_amount_mln_rub=sub.min_amount_mln_rub)
+                       company_id=company_id, min_amount_mln_rub=sub.min_amount_mln_rub)
     db.add(row)
     db.commit()
     return {"id": row.id}
