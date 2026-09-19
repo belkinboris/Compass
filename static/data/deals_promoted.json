@@ -228366,7 +228366,18 @@
      "ЕГРЮЛ (данные ФНС), доля 100% на 2026-02-25",
      "https://projectcompass.ru/api/companies/ge788d903/fns"
     ]
-   }
+   },
+   "ownership": [
+    {
+     "name": "ООО «Интернет проекты» (структура Softline; 99% — Елена Волотовская, вице-президент Softline по инвестициям, 1% — ООО «Аталайя»)",
+     "id": null,
+     "as_of": "2025-04",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Severgrupp-Mordashova-prodala-OOO-Jengels-Jelektroinstrumenty-byvshij-zavod-Bosch-85439"
+     ]
+    }
+   ]
   },
   "gd873b039": {
    "name": "ООО Агроинвест",
@@ -228375,6 +228386,28 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ЭФКО",
+     "id": "g5db3de73",
+     "share": "31,4%",
+     "as_of": "2025-04",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1020897"
+     ]
+    },
+    {
+     "name": "КГА Холдинг ЛЛС (Катар)",
+     "id": null,
+     "share": "68,6%",
+     "as_of": "2025-04",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1020897"
+     ]
+    }
    ]
   },
   "gbd434171": {
