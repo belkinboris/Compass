@@ -32,14 +32,4 @@ QUOTE_OWNERSHIP = (
 )
 
 FIXES = [
-    dict(id='g6743f902', field='law.struct', old='—',
-         new=QUOTE_OWNERSHIP,
-         quote=QUOTE_OWNERSHIP,
-         why='недельная очередь 18.09.2026, источник Mergers.ru: как '
-             'распределились доли в «Мальт Систем» после сделки — 39% у '
-             'продавца-основателя, 10% у семи миноритариев'),
-    dict(id='g6743f902', field='src', old=None,
-         new=['Mergers.ru', 'https://mergers.ru/news/Vladelcy-razrabotchika-processora-Irtysh-kupili-kontrolnuyu-dolyu-v-rossijskom-dizajn-centre-87513'],
-         quote=QUOTE_OWNERSHIP,
-         why='независимое подтверждение сделки и структуры долей после неё'),
 ]

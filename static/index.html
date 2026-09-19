@@ -2243,17 +2243,6 @@ const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.lengt
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
-let slowLoad = false;
-// Через 8 секунд ожидания подсказываем возможную причину. Определить VPN из
-// браузера нельзя — и мы не утверждаем, что он включён: только напоминаем, что
-// сервер в России и зарубежный маршрут (VPN) может тормозить загрузку.
-setTimeout(()=>{
-  if(bulkLoaded || bulkLoadFailed) return;
-  slowLoad = true;
-  const hint = document.getElementById("slowhint");
-  if(hint) hint.style.display = "block";
-  else if(document.querySelector(".loading")) route();
-}, 8000);
 let bulkLoadFailed = false;
 // Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
 // история, которую можно будет включить позже), но на сайте не показываются:
@@ -2425,12 +2414,11 @@ function loadingHtml(what){
     <div class="l-head">Загружаем базу сделок</div>
     <p>Секунду — ${what.toLowerCase()} появятся, как только загрузится база.
        Показатели появятся после полной загрузки базы.</p>
-    <p id="slowhint" style="display:${slowLoad?"block":"none"};max-width:44ch;margin:10px auto 0;
+    <p id="slowhint" style="max-width:44ch;margin:10px auto 0;
        font-size:13px;color:#6B5432;background:var(--bronze-soft);
        border:1px solid rgba(163,129,78,.5);border-radius:8px;padding:10px 14px">
-      Загрузка идёт дольше обычного. Сервер «Компаса» находится в России:
-      если у вас включён VPN, попробуйте отключить его — обычно это ускоряет
-      загрузку в несколько раз. Мы тем временем продолжаем попытки.</p>
+      Сервер «Компаса» находится в России: если у вас включён VPN, попробуйте
+      отключить его — обычно это ускоряет загрузку в несколько раз.</p>
   </div>`;
 }
 /* Подборка живёт в адресе. Раньше три выставленных фильтра («Банки», 2024,

@@ -2120,19 +2120,18 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
 
 
 def test_slow_load_hint_mentions_vpn(page, base_url):
-    """Долгая загрузка объясняется, а не просто крутится.
+    """Экран загрузки сразу объясняет возможную причину, а не просто крутится.
 
     Определить VPN из браузера нельзя, и плашка этого не утверждает: она
-    напоминает, что сервер в России, и РЕКОМЕНДУЕТ выключить VPN. Появляется
-    только после 8 секунд ожидания — при обычной загрузке её никто не видит.
+    напоминает, что сервер в России, и РЕКОМЕНДУЕТ выключить VPN. Просьба
+    владельца 19 сентября 2026: показывать сразу, а не после нескольких
+    секунд ожидания — на медленной сети именно первые секунды и решают,
+    останется ли человек или уйдёт, не поняв, почему сайт не открывается.
     """
     visit(page, base_url, "#/")
-    html = page.evaluate("() => { slowLoad = true; return loadingHtml('карточка'); }")
-    assert "VPN" in html and "display:block" in html
+    html = page.evaluate("() => loadingHtml('карточка')")
+    assert "VPN" in html
     assert "Росси" in html
-    # До восьми секунд подсказка есть в разметке, но скрыта.
-    html_fast = page.evaluate("() => { slowLoad = false; return loadingHtml('карточка'); }")
-    assert "display:none" in html_fast
 
 
 def test_feed_is_ordered_by_publication_date_not_deal_date(page, base_url):
