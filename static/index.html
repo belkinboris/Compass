@@ -628,9 +628,51 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .feed-search input{flex:1;min-width:0;padding:13px 18px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:border-color .2s;text-overflow:ellipsis}
 .feed-search input:focus{border-color:var(--accent)}
 .feed-search .chip{white-space:nowrap}
-.adv-panel{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 26px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:10px}
+/* `position:relative;z-index:5` — не украшение. У панели есть класс
+   `reveal`, а он запускает анимацию появления: работающая анимация
+   opacity/transform создаёт СОБСТВЕННЫЙ контекст наложения, и z-index
+   раскрытого списка (.ms-pop) оказывается заперт внутри панели. Строки
+   ленты идут ниже по разметке и имеют position:relative, поэтому
+   рисовались ПОВЕРХ списка и перехватывали клики: кнопка «Сбросить»
+   нажималась не на список, а на карточку сделки под ним. */
+.adv-panel{position:relative;z-index:5;display:flex;gap:16px;flex-wrap:wrap;margin:0 0 26px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:10px}
 .adv-panel label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .adv-panel select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);min-width:180px}
+/* ВЫБОР НЕСКОЛЬКИХ ЗНАЧЕНИЙ. Просьба Артёма 19 сентября 2026: «в фильтрах
+   надо сделать возможность выбора нескольких опций (несколько годов,
+   отраслей etc)». Родной <select multiple> для этого не годится: на телефоне
+   он разворачивается во весь экран, а выбор нескольких пунктов там делается
+   неочевидным жестом. Поэтому кнопка и раскрывающийся список галочек —
+   своими силами, без внешних библиотек (правило «всё работает из России»). */
+/* Специфичность поднята до `.ms X`: пункт списка — тоже <label>, а
+   `.adv-panel label` задаёт колонку, заглавные буквы и 12px, и без
+   этого подпись «Пищепром и напитки» вставала КАПСОМ под галочку. */
+.ms{position:relative;min-width:180px}
+.ms-btn{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;
+  padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);
+  border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);cursor:pointer;text-align:left;
+  text-transform:none;letter-spacing:normal}
+.ms-btn:hover{border-color:var(--accent)}
+.ms.on .ms-btn{border-color:var(--accent)}
+.ms-txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ms-caret{flex:0 0 auto;color:var(--muted);font-size:11px}
+.ms-pop{position:absolute;z-index:40;top:calc(100% + 4px);left:0;min-width:100%;max-width:320px;
+  background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);
+  padding:8px;text-transform:none;letter-spacing:normal}
+.ms .ms-find{width:100%;padding:7px 10px;margin-bottom:6px;font-size:13px;font-family:var(--f-sans);
+  border:1px solid var(--line);border-radius:6px;background:var(--paper,#F5F5F1);color:var(--ink)}
+.ms-list{max-height:260px;overflow-y:auto}
+.ms .ms-opt{display:flex;flex-direction:row;align-items:center;gap:8px;padding:6px 6px;border-radius:6px;
+  font-size:13.5px;text-transform:none;letter-spacing:normal;color:var(--ink);cursor:pointer}
+.ms .ms-opt:hover{background:var(--paper,#F5F5F1)}
+.ms .ms-opt input{flex:0 0 auto;margin:0;accent-color:var(--accent)}
+.ms .ms-opt span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ms .ms-empty{padding:8px 6px;font-size:13px;color:var(--muted)}
+.ms .ms-foot{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:8px;
+  padding-top:8px;border-top:1px solid var(--line)}
+.ms .ms-foot button{font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+  background:transparent;color:var(--ink);cursor:pointer;font-family:var(--f-sans)}
+.ms .ms-foot .ms-done{background:var(--accent-dark,#14483A);border-color:transparent;color:#fff}
 .adv-share{display:flex;align-items:flex-end;margin-left:auto}
 .adv-share .chip{cursor:pointer}
 @media(max-width:720px){.adv-share{margin-left:0;width:100%}.adv-share .chip{width:100%}}
@@ -646,6 +688,8 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   .adv-panel{flex-direction:column;gap:12px}
   .adv-panel label{min-width:0;width:100%}
   .adv-panel select{min-width:0;width:100%;max-width:100%}
+  .ms{min-width:0;width:100%}
+  .ms-pop{max-width:none;left:0;right:0}
 }
 /* Фильтры аналитики. Липкие: карточек много, и уехав к нижнему графику,
    пользователь не должен возвращаться наверх, чтобы сменить год. `top` равен
@@ -1595,8 +1639,8 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
         <a href="#/assistant">Ассистент</a>
       </div>
       <div class="foot-col">
-        <div class="foot-h">Правки и дополнения</div>
-        <div class="foot-desc" style="margin:0 0 8px">Вы юридическая фирма, инвестбанк или сторона сделки и видите неточность? Напишите — поправим и укажем источник.</div>
+        <div class="foot-h">Нашли ошибку?</div>
+        <div class="foot-desc" style="margin:0 0 8px">Напишите — проверим по источникам и поправим. Если знаете, откуда факт, приложите ссылку: так быстрее.</div>
         <a id="footmail" href="#">Написать нам</a>
       </div>
       <div class="foot-col">
@@ -3345,6 +3389,125 @@ const SCENE_AI = `<svg viewBox="0 0 1440 780" preserveAspectRatio="xMidYMid slic
   <g fill="#E9DCBE" opacity=".7"><circle cx="580" cy="260" r="2.4"/><circle cx="866" cy="410" r="2.4"/><circle cx="920" cy="220" r="2"/><circle cx="540" cy="420" r="2"/></g>
 </svg>`;
 
+/* НЕСКОЛЬКО ЗНАЧЕНИЙ В ОДНОМ ФИЛЬТРЕ. Состояние осталось строкой, но теперь
+   это список через запятую: «Агро,Пищепром и напитки». «Все» и пустая строка
+   значат одно и то же — ограничения нет.
+
+   Почему строка, а не массив: тем же значением фильтр уезжает в адрес
+   страницы (feedHash) и приезжает обратно (applyFeedParams), и старые ссылки
+   с одним значением продолжают работать без единой правки. Запятых нет ни в
+   одном названии отрасли (38) и темы (10) — проверено замером перед тем, как
+   выбрать разделитель. */
+const MS_ALL = "Все";
+const msValuesLabel = (opts, sel) => {
+  if(!sel.length) return MS_ALL;
+  const label = v => { const o = opts.find(x=>x[0]===v); return o ? o[1] : v; };
+  // Подпись на кнопке называет первое выбранное, а не «Выбрано: 3» — так
+  // видно, что именно стоит в фильтре, не открывая список.
+  return sel.length===1 ? label(sel[0])
+    : `${label(sel[0])} и ещё ${sel.length-1}`;
+};
+/* Кнопка + список галочек. `opts` — пары [значение, подпись]; `state` —
+   текущая строка фильтра. Поиск внутри списка появляется, только когда
+   пунктов больше дюжины: у года и темы он был бы лишней строкой. */
+function msControl(id, opts, state){
+  const sel = msValues(state);
+  const chosen = sel.filter(v=>opts.some(o=>o[0]===v));
+  return `<div class="ms${chosen.length?" on":""}" id="${id}" data-ms-val="${esc(msJoin(chosen))}">
+    <button type="button" class="ms-btn" aria-expanded="false" aria-haspopup="true">
+      <span class="ms-txt">${esc(msValuesLabel(opts, chosen))}</span><span class="ms-caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="ms-pop" hidden>
+      ${opts.length>12?`<input type="text" class="ms-find" placeholder="Найти…" aria-label="Поиск по списку">`:""}
+      <div class="ms-list">${opts.map(([v,l])=>
+        `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${chosen.includes(v)?" checked":""}><span>${esc(l)}</span></label>`).join("")}</div>
+      <div class="ms-foot"><button type="button" class="ms-clear">Сбросить</button><button type="button" class="ms-done">Готово</button></div>
+    </div>
+  </div>`;
+}
+/* Снять все галочки снаружи (кнопки «Сбросить фильтры» и «Сбросить тему»).
+   Состояние фильтра при этом уже обнулено вызывающим кодом — здесь только
+   приводим в соответствие сам элемент. */
+function msReset(id){
+  const root = document.getElementById(id);
+  if(!root) return;
+  root.querySelectorAll(".ms-opt input").forEach(cb=>cb.checked=false);
+  root.dataset.msVal = MS_ALL;
+  root.classList.remove("on");
+  const txt = root.querySelector(".ms-txt"); if(txt) txt.textContent = MS_ALL;
+}
+/* Один открытый список за раз, закрытие по клику мимо и по Escape. `apply`
+   зовётся на каждую галочку — лента перерисовывается сразу, как это было у
+   обычного селекта; сам список при этом остаётся открытым, потому что
+   renderFeedList() трогает только #feedlist. */
+function bindMultiSelect(id, apply){
+  const root = document.getElementById(id);
+  if(!root) return;
+  const btn = root.querySelector(".ms-btn"), pop = root.querySelector(".ms-pop"),
+        txt = root.querySelector(".ms-txt"), find = root.querySelector(".ms-find");
+  const opts = [...root.querySelectorAll(".ms-opt")].map(el=>{
+    const cb = el.querySelector("input");
+    return [cb.value, el.querySelector("span").textContent, el, cb];
+  });
+  const close = () => { pop.hidden = true; btn.setAttribute("aria-expanded","false"); };
+  const open = () => {
+    document.querySelectorAll(".ms-pop:not([hidden])").forEach(x=>{
+      x.hidden = true;
+      const b = x.parentElement.querySelector(".ms-btn"); if(b) b.setAttribute("aria-expanded","false");
+    });
+    pop.hidden = false; btn.setAttribute("aria-expanded","true");
+    if(find){ find.value=""; opts.forEach(o=>o[2].style.display=""); find.focus(); }
+  };
+  btn.onclick = e => { e.stopPropagation(); pop.hidden ? open() : close(); };
+  pop.onclick = e => e.stopPropagation();
+  if(find) find.oninput = () => {
+    const q = find.value.trim().toLowerCase();
+    let shown = 0;
+    opts.forEach(([,label,el])=>{
+      const ok = !q || label.toLowerCase().includes(q);
+      el.style.display = ok ? "" : "none";
+      if(ok) shown++;
+    });
+    let empty = pop.querySelector(".ms-empty");
+    if(!shown && !empty){
+      empty = document.createElement("div");
+      empty.className = "ms-empty"; empty.textContent = "Ничего не найдено";
+      pop.querySelector(".ms-list").appendChild(empty);
+    } else if(shown && empty) empty.remove();
+  };
+  const sync = () => {
+    const chosen = opts.filter(o=>o[3].checked).map(o=>o[0]);
+    root.dataset.msVal = msJoin(chosen);
+    root.classList.toggle("on", chosen.length>0);
+    txt.textContent = msValuesLabel(opts.map(o=>[o[0],o[1]]), chosen);
+    apply(msJoin(chosen));
+  };
+  opts.forEach(([,,,cb])=>cb.onchange = sync);
+  root.querySelector(".ms-clear").onclick = () => { opts.forEach(o=>o[3].checked=false); sync(); };
+  root.querySelector(".ms-done").onclick = close;
+  root._msClose = close;
+}
+/* Общий сторож: клик мимо любого списка и Escape закрывают открытый.
+   Вешается один раз на документ, а не по одному на каждый фильтр. */
+if(!window.__msGuard){
+  window.__msGuard = true;
+  document.addEventListener("click", ()=>document.querySelectorAll(".ms-pop:not([hidden])").forEach(x=>{
+    x.hidden = true;
+    const b = x.parentElement.querySelector(".ms-btn"); if(b) b.setAttribute("aria-expanded","false");
+  }));
+  document.addEventListener("keydown", e=>{
+    if(e.key!=="Escape") return;
+    document.querySelectorAll(".ms-pop:not([hidden])").forEach(x=>{
+      x.hidden = true;
+      const b = x.parentElement.querySelector(".ms-btn");
+      if(b){ b.setAttribute("aria-expanded","false"); b.focus(); }
+    });
+  });
+}
+
+const msValues = v => (!v || v===MS_ALL) ? [] : String(v).split(",").filter(Boolean);
+const msJoin = arr => arr.length ? arr.join(",") : MS_ALL;
+
 let filterInd = "Все";
 let feedPage = 1;
 let feedQuery = "";
@@ -3559,16 +3722,29 @@ function unifiedFeed(){
     // вхождение ничего не нашло
     return fuzzyIncludes(q, ix.plain);
   };
-  const matchY = it => feedYear==="Все" || (feedYear==="до 2023" ? (it.date!=="unknown"&&it.date.slice(0,4)<"2023") : it.date.slice(0,4)===feedYear);
+  /* Выбранных значений может быть несколько, и между ними — ИЛИ: «Агро или
+     Пищепром», «2024 или 2025». Просьба Артёма 19 сентября 2026. Пустой
+     выбор значит «все», поэтому msValues() возвращает [] и проверка
+     пропускает всё. */
+  const matchY = it => {
+    const years = msValues(feedYear);
+    if(!years.length) return true;
+    return years.some(y => y==="до 2023"
+      ? (it.date!=="unknown" && it.date.slice(0,4)<"2023")
+      : it.date.slice(0,4)===y);
+  };
   const matchFirm = it => {
-    if(filterFirm==="Все") return true;
+    const firms = msValues(filterFirm);
+    if(!firms.length) return true;
     if(it.kind==="full"){
-      const fobj = ALL_FIRM(filterFirm);
-      const rx = fobj ? firmRxOf(fobj) : FIRM_MATCH[filterFirm];
-      if(!rx) return false;
-      return (it.rec.law&&it.rec.law.adv||[]).some(a=>rx.test(a[1])) || rx.test((it.rec.eco&&it.rec.eco.finadv)||"");
+      return firms.some(id=>{
+        const fobj = ALL_FIRM(id);
+        const rx = fobj ? firmRxOf(fobj) : FIRM_MATCH[id];
+        if(!rx) return false;
+        return (it.rec.law&&it.rec.law.adv||[]).some(a=>rx.test(a[1])) || rx.test((it.rec.eco&&it.rec.eco.finadv)||"");
+      });
     }
-    if(it.kind==="mini") return it.rec.firm===filterFirm;
+    if(it.kind==="mini") return firms.includes(it.rec.firm);
     return false; // сделки из телеграм-каналов и bulk-базы не привязаны к конкретному консультанту
   };
   const matchAdvisorGroup = it => {
@@ -3582,8 +3758,17 @@ function unifiedFeed(){
   // Темы размечены только у подробных карточек (см. pipeline/tag_themes.py),
   // поэтому фильтр по теме автоматически отсекает краткие записи — иначе
   // выдача молча смешивала бы «нет темы» и «тема не размечалась».
-  const matchTheme = it => filterTheme==="Все" || (it.kind==="full" && (it.rec.themes||[]).includes(filterTheme));
-  const filtered = items.filter(it=>(filterInd==="Все"||(it.kind==="full"?hasIndustry(it.rec,filterInd):it.ind===filterInd)) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it));
+  const matchTheme = it => {
+    const themes = msValues(filterTheme);
+    if(!themes.length) return true;
+    return it.kind==="full" && themes.some(t=>(it.rec.themes||[]).includes(t));
+  };
+  const matchInd = it => {
+    const inds = msValues(filterInd);
+    if(!inds.length) return true;
+    return inds.some(i => it.kind==="full" ? hasIndustry(it.rec,i) : it.ind===i);
+  };
+  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it));
   /* Сначала по дате публикации, внутри одного дня — по дате сделки. Второй
      ключ не украшение: 902 карточки приехали одним переносом архива 23 июля, и
      без него весь этот блок лёг бы в случайном порядке вместо хронологии. */
@@ -3620,10 +3805,19 @@ function feedListHtml(){
 function emptyFeedHtml(){
   const active = [];
   if(feedQuery.trim()) active.push({k:"q", t:`запрос «${esc(feedQuery.trim())}»`});
-  if(filterInd!=="Все") active.push({k:"ind", t:`отрасль «${filterInd}»`});
-  if(feedYear!=="Все") active.push({k:"year", t:`год ${feedYear}`});
-  if(filterTheme!=="Все") active.push({k:"theme", t:`тема «${filterTheme}»`});
-  if(filterFirm!=="Все"){const f=ALL_FIRM(filterFirm); active.push({k:"firm", t:`консультант «${f?f.n:filterFirm}»`});}
+  /* Значений в фильтре может быть несколько — перечисляем их все: человеку,
+     который не нашёл ничего, нужно видеть полный набор условий, а не первое. */
+  const msList = (v, one, many, label) => {
+    const a = msValues(v);
+    if(!a.length) return;
+    const names = a.map(x=>label?label(x):x);
+    active.push({k:one.k, t: a.length===1 ? one.t(names[0]) : many(names)});
+  };
+  msList(filterInd, {k:"ind", t:n=>`отрасль «${n}»`}, ns=>`отрасли: ${ns.join(", ")}`);
+  msList(feedYear, {k:"year", t:n=>`год ${n}`}, ns=>`годы: ${ns.join(", ")}`);
+  msList(filterTheme, {k:"theme", t:n=>`тема «${n}»`}, ns=>`темы: ${ns.join(", ")}`);
+  msList(filterFirm, {k:"firm", t:n=>`консультант «${n}»`}, ns=>`консультанты: ${ns.join(", ")}`,
+         id=>{const f=ALL_FIRM(id); return f?f.n:id;});
   if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   if(filterMinRevenue!=="Все"){
@@ -3666,7 +3860,7 @@ function bindFeedListEvents(){
   if(ct) ct.onclick = e=>{
     e.preventDefault();
     filterTheme="Все"; feedPage=1;
-    const sel=document.getElementById("seltheme"); if(sel) sel.value="Все";
+    msReset("seltheme");
     renderFeedList();
   };
   const fr = document.getElementById("feedreset");
@@ -3674,7 +3868,8 @@ function bindFeedListEvents(){
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     onlyFull=false; filterMinRevenue="Все"; feedPage=1;
     const q=document.getElementById("feedq"); if(q) q.value="";
-    [["selind","Все"],["selyear","Все"],["seltheme","Все"],["selfirm","Все"],["selagroup","Все"],["selfmt","Все сделки"],["selrev","Все"]]
+    ["selind","selyear","seltheme","selfirm"].forEach(msReset);
+    [["selagroup","Все"],["selfmt","Все сделки"],["selrev","Все"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
     syncFeedHash();
@@ -3833,16 +4028,16 @@ function renderDeals(){
   </div>
   <div id="advpanel" class="adv-panel reveal" style="${advOpen?"":"display:none"}">
     <label>Отрасль
-      <select id="selind"><option>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===filterInd?"selected":""}>${i}</option>`).join("")}</select>
+      ${msControl("selind", INDUSTRIES.filter(i=>i!=="Все").map(i=>[i,i]), filterInd)}
     </label>
     <label>Год
-      <select id="selyear">${["Все","2026","2025","2024","2023","до 2023"].map(y=>`<option ${y===feedYear?"selected":""}>${y}</option>`).join("")}</select>
+      ${msControl("selyear", ["2026","2025","2024","2023","до 2023"].map(y=>[y,y]), feedYear)}
     </label>
     <label>Консультант
-      <select id="selfirm"><option value="Все">Все</option>${[...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>`<option value="${f.id}" ${f.id===filterFirm?"selected":""}>${f.n}</option>`).join("")}</select>
+      ${msControl("selfirm", [...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>[f.id,f.n]), filterFirm)}
     </label>
     <label>Тема сделки
-      <select id="seltheme"><option value="Все">Все</option>${THEME_LIST.map(t=>{const n=themeCount(t);return n?`<option value="${t}" ${t===filterTheme?"selected":""}>${t} (${n})</option>`:"";}).join("")}</select>
+      ${msControl("seltheme", THEME_LIST.map(t=>{const n=themeCount(t);return n?[t,`${t} (${n})`]:null;}).filter(Boolean), filterTheme)}
     </label>
     <label>Выручка покупаемой компании <span class="tool-note" title="По подтверждённой отчётности ФНС; учитываются только не устаревшие данные">ⓘ</span>
       <select id="selrev">${REVENUE_BUCKETS.map(([v,label])=>`<option value="${v}" ${v===filterMinRevenue?"selected":""}>${v==="Все"?"Все":label}</option>`).join("")}</select>
@@ -3876,11 +4071,11 @@ function renderDeals(){
     const panel = document.getElementById("advpanel");
     if(panel) panel.style.display = advOpen ? "" : "none";
   };
-  const bindSel = (id, fn) => {const el=document.getElementById(id); if(el) el.onchange=()=>{fn(el.value);feedPage=1;renderFeedList();syncFeedHash();};};
-  bindSel("selind", v=>filterInd=v);
-  bindSel("selyear", v=>feedYear=v);
-  bindSel("selfirm", v=>filterFirm=v);
-  bindSel("seltheme", v=>filterTheme=v);
+  const bindMS = (id, fn) => bindMultiSelect(id, v=>{fn(v);feedPage=1;renderFeedList();syncFeedHash();});
+  bindMS("selind", v=>filterInd=v);
+  bindMS("selyear", v=>feedYear=v);
+  bindMS("selfirm", v=>filterFirm=v);
+  bindMS("seltheme", v=>filterTheme=v);
   const selrev = document.getElementById("selrev");
   if(selrev) selrev.onchange = ()=>{
     filterMinRevenue = selrev.value; feedPage = 1;
@@ -3895,16 +4090,26 @@ function renderDeals(){
   };
   const savef = document.getElementById("savefeed");
   if(savef) savef.onclick = async()=>{
-    const industry=filterInd==="Все"?null:filterInd, keyword=feedQuery.trim()||null;
+    /* Несколько отраслей — несколько подписок, по одной на каждую. Условия
+       ВНУТРИ одной подписки складываются по И («сделки Агро дороже 5 млрд»),
+       а «Агро или Пищепром» — это именно ИЛИ, то есть две записи. Иначе
+       пришлось бы заводить вторую форму условий на сервере ради того, что и
+       так выражается двумя строками. */
+    const inds=msValues(filterInd), keyword=feedQuery.trim()||null;
     const note=document.getElementById("savefeednote");
-    if(!industry&&!keyword){if(note)note.textContent="Сначала выберите отрасль или введите запрос.";return;}
+    if(!inds.length&&!keyword){if(note)note.textContent="Сначала выберите отрасль или введите запрос.";return;}
     savef.disabled=true;
     try{
-      const r=await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword})});
-      if(r.status===401){needLogin("сохранить подборку и получать по ней уведомления");return;}
-      const body=await r.json().catch(()=>({}));
-      if(!r.ok) throw new Error(body.error||"Не удалось сохранить подборку");
-      if(note) note.textContent="Подборка сохранена. Новые совпадения появятся в уведомлениях.";
+      const targets = inds.length ? inds.map(i=>({industry:i, keyword})) : [{industry:null, keyword}];
+      for(const payload of targets){
+        const r=await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+        if(r.status===401){needLogin("сохранить подборку и получать по ней уведомления");return;}
+        const body=await r.json().catch(()=>({}));
+        if(!r.ok) throw new Error(body.error||"Не удалось сохранить подборку");
+      }
+      if(note) note.textContent = targets.length>1
+        ? `Сохранили ${targets.length} подписки — по одной на каждую отрасль. Новые совпадения появятся в уведомлениях.`
+        : "Подборка сохранена. Новые совпадения появятся в уведомлениях.";
       savef.textContent="Сохранено";
     }catch(e){if(note)note.textContent=e.message||"Не удалось сохранить подборку";}
     finally{savef.disabled=false;setTimeout(()=>{savef.textContent="Сохранить подборку";},1800);}
@@ -4411,10 +4616,10 @@ function openCorrectionDialog(d=null){
   const wrap=document.createElement("div"); wrap.className="dialog-backdrop";
   wrap.innerHTML=`<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="correctionTitle">
     <div class="dialog-head"><div><span class="label">Сообщение редакции</span><h2 id="correctionTitle">${cardMode?"Уточнить или дополнить карточку":"Написать редакции"}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
-    <p>${cardMode?"Напишите, какой факт нужно исправить или добавить, и по возможности приложите ссылку на источник.":"Опишите вопрос, предложение или неточность и при необходимости приложите ссылку."} Сообщение получит редакция; как комментарий оно не публикуется.</p>
+    <p>${cardMode?"Напишите, какой факт нужно поправить или добавить.":"Напишите, что не так или чего не хватает."} Если знаете источник — приложите ссылку, так мы проверим быстрее. Сообщение прочитает редакция, на сайте оно не появится.</p>
     <label for="correctionBody">${cardMode?"Что нужно изменить":"Сообщение"}</label>
-    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем выступил российский девелопер. Источник: …":"Напишите сообщение и, если возможно, добавьте ссылку на источник."}"></textarea>
-    <label for="correctionContact">Контакт для уточняющих вопросов — необязательно</label>
+    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем была не сама группа, а её дочерняя компания. Источник: …":"Например: в карточке сделки не указан продавец, хотя он назван в источнике. Или: не открывается страница компании."}"></textarea>
+    <label for="correctionContact">Куда ответить, если появятся вопросы (необязательно)</label>
     <input id="correctionContact" maxlength="300" placeholder="Почта или Telegram">
     <div class="dialog-actions"><span class="dialog-msg" id="correctionMsg"></span><button class="chip" id="correctionSend">Отправить</button></div>
   </div>`;
@@ -4429,16 +4634,16 @@ function openCorrectionDialog(d=null){
   setTimeout(()=>body.focus(),0);
   send.onclick=async()=>{
     const text=body.value.trim(); msg.className="dialog-msg";
-    if(!text){msg.textContent="Напишите сообщение.";msg.classList.add("err");return;}
+    if(!text){msg.textContent="Сначала напишите сообщение.";msg.classList.add("err");return;}
     send.disabled=true;msg.textContent="Отправляем…";
     try{
       const endpoint=cardMode?`/api/deals/${d.id}/corrections`:"/api/corrections";
       const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({body:text,contact:contact.value.trim()||null})});
       const j=await r.json().catch(()=>({}));
-      if(!r.ok) throw new Error(j.error||"Не получилось отправить сообщение");
-      msg.textContent="Спасибо. Сообщение передано редакции.";msg.classList.add("ok");
+      if(!r.ok) throw new Error(j.error||"Не отправилось — попробуйте ещё раз.");
+      msg.textContent="Спасибо, передали редакции.";msg.classList.add("ok");
       body.disabled=true;contact.disabled=true;send.textContent="Готово";send.onclick=close;send.disabled=false;
-    }catch(e){msg.textContent=e.message||"Не получилось отправить сообщение";msg.classList.add("err");send.disabled=false;}
+    }catch(e){msg.textContent=e.message||"Не отправилось — попробуйте ещё раз.";msg.classList.add("err");send.disabled=false;}
   };
 }
 

@@ -20,7 +20,7 @@ import time
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 import pytest
 
@@ -216,7 +216,7 @@ def test_deal_has_timeline_and_inline_correction_dialog(page, base_url):
     page.locator("#correctionBody").fill("Проверка редакционной формы")
     page.locator("#correctionSend").click()
     page.wait_for_selector(".dialog-msg.ok")
-    assert "передано редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
+    assert "передали редакции" in page.locator(".dialog-msg.ok").inner_text().lower()
 
 
 def test_citibank_is_one_deal_with_clickable_stage_history(page, base_url):
@@ -3381,5 +3381,88 @@ def test_account_login_forms_do_not_overflow(browser, base_url, width):
         pg.wait_for_timeout(300)
         over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
         assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+    finally:
+        ctx.close()
+
+
+def _feed_total(pg):
+    """Сколько карточек в выдаче: видимые строки плюс «осталось N»."""
+    rows = pg.eval_on_selector_all("#feedlist a[href^='#/deal/']", "e=>e.length")
+    text = pg.inner_text("#feedlist")
+    m = re.search(r"осталось\s+(\d+)", text)
+    return rows + (int(m.group(1)) if m else 0)
+
+
+def test_filters_accept_several_industries_at_once(page, base_url):
+    """Артём: «в фильтрах надо сделать возможность выбора нескольких опций
+    (несколько годов, отраслей etc)». Между выбранными значениями — ИЛИ."""
+    page.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    agro = _feed_total(page)
+
+    page.goto(base_url + "/#/deals?ind=Пищепром и напитки", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    food = _feed_total(page)
+
+    page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    both = _feed_total(page)
+
+    assert agro > 0 and food > 0, "одна из отраслей пуста — проверка ничего не докажет"
+    assert both >= agro and both >= food, \
+        f"объединение ({both}) меньше одной из частей ({agro}, {food})"
+    assert both <= agro + food, "в объединении больше карточек, чем в двух отраслях вместе"
+
+
+def test_single_value_links_saved_earlier_keep_working(page, base_url):
+    """Значения лежат в адресе через запятую, и старая ссылка с одним
+    значением обязана открываться ровно как раньше."""
+    page.goto(base_url + "/#/deals?ind=Агро&year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    assert page.inner_text("#selind .ms-txt").strip() == "Агро"
+    assert page.inner_text("#selyear .ms-txt").strip() == "2024"
+
+
+def test_choosing_a_second_year_widens_the_feed_and_the_link(page, base_url):
+    page.goto(base_url + "/#/deals?year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selyear", timeout=15000)
+    one = _feed_total(page)
+
+    page.click("#selyear .ms-btn")
+    page.check("#selyear .ms-opt input[value='2025']")
+    page.wait_for_timeout(600)
+    two = _feed_total(page)
+
+    assert two > one, f"второй год не расширил выдачу: было {one}, стало {two}"
+    assert page.inner_text("#selyear .ms-txt").strip() == "2025 и ещё 1"
+    # Адрес обязан нести оба значения — иначе «Скопировать ссылку» отдаст не то,
+    # что человек видит на экране.
+    h = unquote(page.evaluate("location.hash"))
+    assert "year=2025,2024" in h or "year=2024,2025" in h, h
+
+
+def test_filter_reset_clears_every_chosen_value(page, base_url):
+    page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки&year=2024", wait_until="domcontentloaded")
+    page.wait_for_selector("#selind", timeout=15000)
+    page.click("#selind .ms-btn")
+    page.click("#selind .ms-clear")
+    page.wait_for_timeout(500)
+    assert page.inner_text("#selind .ms-txt").strip() == "Все"
+    assert page.eval_on_selector_all("#selind .ms-opt input:checked", "e=>e.length") == 0
+
+
+@pytest.mark.parametrize("width", [360, 390, 1280])
+def test_open_filter_list_does_not_overflow(browser, base_url, width):
+    ctx = browser.new_context(viewport={"width": width, "height": 880})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
+        pg.wait_for_selector("#selind", timeout=15000)
+        pg.click("#selind .ms-btn")
+        pg.wait_for_timeout(400)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, f"переполнение {over}px на {width}px с открытым списком"
+        box = pg.eval_on_selector("#selind .ms-pop", "e=>e.getBoundingClientRect().right")
+        assert box <= width + 1, f"список вылезает за экран: правый край {box} при ширине {width}"
     finally:
         ctx.close()

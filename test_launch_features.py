@@ -809,8 +809,18 @@ def test_webinars_endpoint_only_returns_published(client):
 
 def test_launch_ui_contains_requested_changes():
     html = Path("static/index.html").read_text(encoding="utf-8")
-    assert "если возможно" in html.lower()
+    # 19 сентября 2026 текст формы «Написать нам» переписан целиком (владелец:
+    # «надо этот ужасный вординг поправить»), и прежняя пара «если возможно» /
+    # не «если уместно» отпала вместе с самой фразой. Смысл проверки тот же:
+    # просьба приложить ссылку сформулирована по-человечески, а не канцелярски.
+    assert "Если знаете источник" in html
     assert "если уместно" not in html.lower()
+    assert "при необходимости приложите" not in html.lower()
+    # И главное, что было не так в подвале: приглашение сообщить об ошибке не
+    # должно начинаться с вопроса «вы юридическая фирма или инвестбанк?» —
+    # обычный читатель понимал его как «это не для меня».
+    assert "Нашли ошибку?" in html
+    assert "юридическая фирма, инвестбанк" not in html
     assert "у 180 сделок известно" not in html
     assert "#/materials" in html and "Материалы" in html
     assert 'page==="materials"||page==="webinars"' in html  # старая ссылка #/webinars не должна биться
