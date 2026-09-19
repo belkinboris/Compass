@@ -7994,6 +7994,36 @@ async function renderAccount(qs){
         <div class="fns-registry-row"><span class="k">Тариф</span>${ME.tier==="paid"?"Платный":"Бесплатный"}</div>
         <div class="fns-registry-row"><span class="k">Статус</span>${ME.is_verified?"Подтверждён":"Обычный аккаунт"}</div>
       </div><div class="deal-tools"><button class="chip" id="editProfileBtn">Редактировать</button><button class="chip" id="logoutBtn">Выйти</button></div></div>
+      <div class="acct-card reveal" style="margin-top:18px">
+        <span class="label">Вход в аккаунт</span>
+        <p class="acct-note" style="margin:10px 0 14px">Почта — это ваш логин. Письма с подтверждением мы пока не отправляем, поэтому новый адрес начинает работать сразу: проверьте, что в нём нет опечатки.</p>
+        <div class="deal-tools">
+          <button class="chip" id="changePwBtn">Сменить пароль</button>
+          <button class="chip" id="changeEmailBtn">Сменить почту</button>
+        </div>
+        <div id="changePwBox" style="display:none;margin-top:14px">
+          <form class="acct-form reveal" id="changePwForm" style="flex-direction:column;max-width:360px">
+            <input type="password" id="pwCurrent" placeholder="Текущий пароль" required autocomplete="current-password">
+            <input type="password" id="pwNew" placeholder="Новый пароль — от 8 символов" required autocomplete="new-password" minlength="8">
+            <div style="display:flex;gap:10px">
+              <button class="chip on" type="submit" style="flex:1">Сменить пароль</button>
+              <button class="chip" type="button" id="cancelPwBtn" style="flex:1">Отмена</button>
+            </div>
+          </form>
+          <p class="acct-note reveal" id="pwMsg"></p>
+        </div>
+        <div id="changeEmailBox" style="display:none;margin-top:14px">
+          <form class="acct-form reveal" id="changeEmailForm" style="flex-direction:column;max-width:360px">
+            <input type="email" id="emNew" placeholder="Новая почта" required autocomplete="email">
+            <input type="password" id="emPassword" placeholder="Подтвердите паролем" required autocomplete="current-password">
+            <div style="display:flex;gap:10px">
+              <button class="chip on" type="submit" style="flex:1">Сменить почту</button>
+              <button class="chip" type="button" id="cancelEmailBtn" style="flex:1">Отмена</button>
+            </div>
+          </form>
+          <p class="acct-note reveal" id="emMsg"></p>
+        </div>
+      </div>
       <div class="acct-card reveal" style="margin-top:18px;border-color:#E3B6A8">
         <span class="label">Удаление аккаунта</span>
         <p class="acct-note" style="margin:10px 0 14px">Аккаунт удаляется без возможности восстановления вместе с подписками, отслеживаемыми сделками, уведомлениями, диалогами с ассистентом и комментариями.</p>
@@ -8031,6 +8061,41 @@ async function renderAccount(qs){
       }else{
         document.getElementById("editProfileBtn").onclick=()=>{editing=true;paintProfile();};
         document.getElementById("logoutBtn").onclick=async()=>{await fetch("/api/auth/logout",{method:"POST"});await refreshMe();location.hash="#/account";route();};
+        /* Смена пароля и почты. До 19 сентября 2026 на этой вкладке не было
+           ни того, ни другого: пароль сменить было нельзя вообще никак
+           (Артём), почту — тем более (Ксюша). Две формы, а не одна: у них
+           разные последствия, и смешивать «поменял пароль» с «поменял логин»
+           в одном нажатии не стоит. */
+        const pwBtn=document.getElementById("changePwBtn"), pwBox=document.getElementById("changePwBox");
+        const emBtn=document.getElementById("changeEmailBtn"), emBox=document.getElementById("changeEmailBox");
+        pwBtn.onclick=()=>{pwBox.style.display="block";emBox.style.display="none";};
+        emBtn.onclick=()=>{emBox.style.display="block";pwBox.style.display="none";};
+        document.getElementById("cancelPwBtn").onclick=()=>{pwBox.style.display="none";};
+        document.getElementById("cancelEmailBtn").onclick=()=>{emBox.style.display="none";};
+        document.getElementById("changePwForm").onsubmit=async e=>{
+          e.preventDefault();
+          const msg=document.getElementById("pwMsg");
+          msg.className="acct-note reveal";msg.textContent="Меняем…";
+          const r=await fetch("/api/auth/password",{method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({current_password:document.getElementById("pwCurrent").value,
+                                 new_password:document.getElementById("pwNew").value})});
+          const x=await r.json().catch(()=>({}));
+          if(!r.ok){msg.textContent=x.error||"Не удалось сменить пароль.";msg.classList.add("err");return;}
+          document.getElementById("changePwForm").reset();
+          msg.textContent="Пароль изменён. Входы на других устройствах закрыты — там понадобится войти заново.";
+        };
+        document.getElementById("changeEmailForm").onsubmit=async e=>{
+          e.preventDefault();
+          const msg=document.getElementById("emMsg");
+          msg.className="acct-note reveal";msg.textContent="Меняем…";
+          const r=await fetch("/api/auth/email",{method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({new_email:document.getElementById("emNew").value.trim(),
+                                 password:document.getElementById("emPassword").value})});
+          const x=await r.json().catch(()=>({}));
+          if(!r.ok){msg.textContent=x.error||"Не удалось сменить почту.";msg.classList.add("err");return;}
+          await refreshMe();
+          paintProfile();
+        };
         const delBtn=document.getElementById("deleteAccountBtn"), delBox=document.getElementById("deleteAccountBox");
         delBtn.onclick=()=>{delBox.style.display="block";delBtn.style.display="none";};
         document.getElementById("cancelDeleteBtn").onclick=()=>{delBox.style.display="none";delBtn.style.display="inline-block";};

@@ -184,3 +184,91 @@ def test_pending_request_is_not_a_duplicate_and_password_still_checks(session):
     assert session.query(User).filter_by(email="заявка@firm.ru").count() == 1
     user, err = auth.authenticate(session, "заявка@firm.ru", "надёжный-пароль")
     assert err is None and user.approved is False
+
+
+# ============ СМЕНА ПАРОЛЯ И ПОЧТЫ (19 сентября 2026) ============
+# Артём: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
+# До этого дня на вкладке «Аккаунт» не было ни того, ни другого.
+
+def _user(session, email="kseniya@example.com", password="исходный-пароль-1"):
+    user, err = auth.register_user(session, email, password, "Ксения Збышевская")
+    assert err is None, err
+    return user
+
+
+def test_password_changes_and_the_old_one_stops_working(session):
+    user = _user(session)
+    ok, err = auth.change_password(session, user, "исходный-пароль-1", "новый-пароль-2")
+    assert (ok, err) == (True, None)
+    assert auth.authenticate(session, user.email, "новый-пароль-2")[0] is user
+    assert auth.authenticate(session, user.email, "исходный-пароль-1")[0] is None
+
+
+def test_password_change_requires_the_current_one(session):
+    """Сессия живёт 30 дней. Без этой проверки чужой человек за
+    незаблокированным компьютером забрал бы аккаунт, не зная старого пароля."""
+    user = _user(session)
+    ok, err = auth.change_password(session, user, "не-тот-пароль", "новый-пароль-2")
+    assert ok is False and err == "неверный текущий пароль"
+    assert auth.authenticate(session, user.email, "исходный-пароль-1")[0] is user
+
+
+def test_password_change_closes_every_other_login(session):
+    """Пароль меняют в том числе потому, что его кто-то узнал. Оставить чужую
+    сессию живой — сделать половину работы."""
+    user = _user(session)
+    phone = auth.create_session(session, user)
+    laptop = auth.create_session(session, user)
+    assert auth.current_user(session, phone) is user
+    auth.change_password(session, user, "исходный-пароль-1", "новый-пароль-2")
+    assert auth.current_user(session, phone) is None
+    assert auth.current_user(session, laptop) is None
+
+
+def test_new_password_must_be_long_enough_and_actually_new(session):
+    user = _user(session)
+    assert auth.change_password(session, user, "исходный-пароль-1", "корот")[1] \
+        == "новый пароль — от 8 символов"
+    assert auth.change_password(session, user, "исходный-пароль-1", "исходный-пароль-1")[1] \
+        == "новый пароль совпадает с текущим"
+
+
+def test_email_changes_and_becomes_the_new_login(session):
+    user = _user(session)
+    ok, err = auth.change_email(session, user, "исходный-пароль-1", "  Novaya@Example.COM ")
+    assert (ok, err) == (True, None)
+    # Адрес приводится к нижнему регистру и без пробелов — как при регистрации.
+    assert user.email == "novaya@example.com"
+    assert auth.authenticate(session, "novaya@example.com", "исходный-пароль-1")[0] is user
+    assert auth.authenticate(session, "kseniya@example.com", "исходный-пароль-1")[0] is None
+
+
+def test_email_change_is_confirmed_by_password(session):
+    user = _user(session)
+    ok, err = auth.change_email(session, user, "не-тот-пароль", "novaya@example.com")
+    assert ok is False and err == "неверный пароль"
+    assert user.email == "kseniya@example.com"
+
+
+def test_email_cannot_be_taken_from_another_account(session):
+    """Иначе двое оказались бы с одним логином, и второй потерял бы вход."""
+    _user(session, "zanyato@example.com")
+    user = _user(session)
+    ok, err = auth.change_email(session, user, "исходный-пароль-1", "zanyato@example.com")
+    assert ok is False and err == "эта почта уже зарегистрирована"
+
+
+def test_email_change_rejects_nonsense_and_the_same_address(session):
+    user = _user(session)
+    assert auth.change_email(session, user, "исходный-пароль-1", "без-собаки")[1] == "некорректная почта"
+    assert auth.change_email(session, user, "исходный-пароль-1", "KSENIYA@example.com")[1] \
+        == "это та же почта, что и сейчас"
+
+
+def test_email_change_keeps_you_logged_in(session):
+    """Почта меняется, сессия остаётся: вход опознаётся по токену, а не по
+    адресу, и выкидывать человека из браузера не за что."""
+    user = _user(session)
+    token = auth.create_session(session, user)
+    auth.change_email(session, user, "исходный-пароль-1", "novaya@example.com")
+    assert auth.current_user(session, token) is user
