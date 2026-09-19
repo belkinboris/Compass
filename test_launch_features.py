@@ -1577,17 +1577,28 @@ def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honest
         def search(self, q):
             raise ApiFnsError("квота исчерпана (тест)")
 
+    free_calls = []
+
+    def _free_always_none(name, http_client=None):
+        free_calls.append(name)
+        return None
+
     monkeypatch.setattr("fns_client.ApiFnsClient", AlwaysFailsClient)
-    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", lambda name, http_client=None: None)
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", _free_always_none)
     monkeypatch.setattr(uq_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(_sys, "argv", ["fns_unresolved_queue.py", "--attempt", "--limit", "5"])
 
     uq_mod.main()
     out = capsys.readouterr().out
 
-    assert "Поиск ФНС недоступен" in out, "систематический отказ обязан быть назван прямо"
+    assert "Платный поиск ФНС недоступен" in out, "систематический отказ платного API обязан быть назван прямо"
     assert "ошибок API" in out, "итоговая строка обязана отличать ошибки API от честного «не нашли»"
-    assert "Автоподтверждено" not in out, "при отказавшем API подтверждать было нечего"
+    assert "Автоподтверждено" not in out, "при отказавшем API и бесплатном «не нашли» подтверждать было нечего"
+    # 19 сентября 2026: обрыватель должен останавливать только ПЛАТНЫЕ
+    # попытки — бесплатный ЕГРЮЛ-поиск обязан быть вызван для ВСЕХ 5
+    # кандидатов, а не только для тех трёх, что были до срабатывания
+    # обрывателя (см. докстринг attempt_paid_exact_match).
+    assert len(free_calls) == 5, "бесплатный поиск не должен обрываться вместе с платным"
 
 
 def test_fns_queue_append_registry_writes_valid_python_without_touching_existing_records(tmp_path):
