@@ -3370,7 +3370,7 @@ function dealRevenueTarget(d){ return d && (d.target || d.asset_id) || null; }
 function matchRevenue(it){
   if(filterMinRevenue==="Все") return true;
   if(financeScreening===null) return true; // ещё грузится — не прячем ленту молча, перерисуем сами
-  const d = it.kind==="full" ? it.rec : (it.kind==="milestone" ? it.rec.deal : null);
+  const d = it.kind==="full" ? it.rec : null;
   const target = dealRevenueTarget(d);
   const entry = target ? financeScreening[target] : null;
   if(!entry) return false;
@@ -3494,47 +3494,24 @@ function unifiedFeed(){
       <div><div class="deal-title" style="font-size:16.5px">${b.title}</div><div class="deal-sub">${b.role||""}${b.src?` · источник: ${b.src[0]} ↗`:""}</div></div>
       <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
     </a>`,
-    /* Веха (раздел A) — не вторая карточка, а строка ленты, указывающая на
-       ТУ ЖЕ сделку: клик ведёт на актуальную карточку (#/deal/<id>), не на
-       страницу этапа (та открывается отдельной ссылкой «Открыть этап →» в
-       блоке «Ход сделки» самой карточки). Сумма/отрасль показываются по
-       снимку события (`e.snapshot`, записан в момент --milestone), а не по
-       ТЕКУЩИМ полям сделки: к моменту, когда читатель видит эту строку,
-       сумма могла уже уточниться, и веха обязана честно показывать то, что
-       было известно НА МОМЕНТ ЭТОГО ЭТАПА, а не задним числом. */
-    milestone: rec => {
-      const d = rec.deal, e = rec.event, snap = e.snapshot || {};
-      /* Слово «веха» — из нашей кухни: читатель видел «ВЕХА · ЗАКРЫТИЕ» и не
-         понимал, чем эта строка отличается от обычной сделки (замечание
-         Георгия, 19 сентября 2026). Объяснять надо не «чем является строка»
-         — под ней и так написано «Сделка: …», — а ЧТО СЛУЧИЛОСЬ. */
-      const chip = MILESTONE_NEWS[e.kind] || MILESTONE_LABEL[e.kind] || e.kind;
-      const sum = snap.sum ? `<div class="deal-sum num ${undisclosed(snap.sum)?"na":""}">${sumHtml(snap.sum)}</div>` : "";
-      return `
-    <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(e.date)}</span><br><span class="status ${kindClass(e.kind)}">${esc(chip)}</span></div>
-      <div><div class="deal-title">${esc(e.headline)}</div><div class="deal-sub">Сделка: ${esc(d.title)}</div></div>
-      <div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>
-    </a>`;
-    },
   };
   /* `pub` — дата, по которой лента упорядочена: когда запись появилась в
      «Компасе». У краткого сырья поля `added` нет, для него это дата сделки —
      иначе такие строки провалились бы в самый низ независимо от свежести. */
+  /* ВЕХИ В ЛЕНТЕ НЕТ — И ЭТО РЕШЕНИЕ, А НЕ ПРОПУСК. Этап сделки (получено
+     согласование, сделка закрыта, сделка сорвалась) раньше давал ВТОРУЮ
+     строку ленты рядом с самой сделкой. Ксюша прочитала это как повтор, и
+     владелец 19 сентября 2026 решил коротко: «веха должна дополнять одну
+     карточку этапом, не более». Этап живёт в блоке «Ход сделки» на самой
+     карточке, а в канал по-прежнему уходит отдельным сообщением
+     (`send_milestone_drafts.py`) — то есть ни один способ узнать о закрытии
+     не потерян, просто лента перестала показывать одну сделку дважды.
+     Держит тест test_ui::test_milestone_enriches_the_card_and_does_not_add_a_feed_row. */
   const items = [
     ...DEALS.map(d=>({kind:"full",date:d.date,pub:d.added||d.date,ind:d.ind,rec:d})),
     ...MINI_DEALS.map(m=>({kind:"mini",date:m.date,pub:m.date,ind:m.ind,rec:m})),
     ...CHANNEL_DEALS.map(c=>({kind:"chan",date:c.date,pub:c.date,ind:c.ind,rec:c})),
     ...BULK_DEALS.map(b=>({kind:"bulk",date:b.date,pub:b.date,ind:b.ind,rec:b})),
-    /* Знаменатели (TOTAL_DEALS, аналитика, счётчики профилей) считают
-       ТОЛЬКО DEALS/MINI_DEALS/CHANNEL_DEALS/BULK_DEALS — веха не попадает ни
-       в один из этих массивов, только в items ленты. isDealShownOnSite()
-       уже применён: DEALS сам по себе содержит только показанные на сайте
-       сделки (фильтр — в загрузчике), а веха строится ИЗ DEALS. */
-    ...DEALS.flatMap(d => (Array.isArray(d.events) ? d.events : [])
-      .filter(e => e && e.newsworthy && e.headline && POSTWORTHY_MILESTONE_KINDS.has(e.kind))
-      .map(e => ({kind:"milestone", date:e.date||d.date, pub:e.date||d.date, ind:d.ind,
-                  rec:{deal:d, event:e, title:e.headline, role:"Веха", note:d.title}}))),
   ];
   const q = feedQuery.trim().toLowerCase();
   /* Поиск раньше смотрел только в заголовок, поэтому запрос вроде «Сбербанк» или
@@ -4189,10 +4166,6 @@ const stalledDiscussionHint = d => {
    кандидатом — это состояние сделки, а не новость о ней. */
 const POSTWORTHY_MILESTONE_KINDS = new Set(["approval","closed","cancelled"]);
 const MILESTONE_LABEL = {approval:"Согласование", closed:"Закрытие", cancelled:"Срыв сделки"};
-// То же самое, но так, как это говорят вслух, — для ленты, где строка стоит
-// рядом с обычными сделками и должна читаться сама по себе.
-const MILESTONE_NEWS = {approval:"Сделку согласовали", closed:"Сделка закрыта",
-                        cancelled:"Сделка не состоялась"};
 const eventSources = e => {
   const raw=Array.isArray(e&&e.sources) ? e.sources
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
