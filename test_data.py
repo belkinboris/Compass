@@ -1051,6 +1051,9 @@ PARTY_CASE_EXCEPTIONS = {
     "g8cb1eb00", "gff6e08fe",                                         # личные имена вне словаря
     "gmru-svoj-kredit-evropa-strah", "gmru-roshim-vnt",               # бренды
     "c3c15a888",                                                      # «Финам»: бренд на -м, pymorphy3 считает дательным
+    "g3b9c077a",                                                      # «Тетра»: pymorphy3 не знает слова вовсе и даёт
+                                                                       # единственный разбор — родительный гипотетического
+                                                                       # «тетр» (score 1.0, именительного разбора нет совсем)
 }
 
 
@@ -1494,3 +1497,43 @@ def test_law_fields_do_not_carry_denials_or_stale_speculation(deals):
     assert not bad, (
         "денай или неснятая гипотеза в law.struct/law.terms (не по смыслу поля): %s"
         % bad[:5])
+
+
+def test_no_two_cards_claim_one_deal_is_both_closed_and_unconfirmed(base):
+    """Две карточки об одной сделке не должны спорить друг с другом.
+
+    Найдено 19 сентября 2026: «Аэрофлот»/«Аэромар» лежал в базе двумя
+    карточками — закрытой (сентябрь 2026, четыре источника) и «обсуждается»,
+    в «Контексте» которой прямым текстом стояло «Подтверждений тому, что
+    сделка после этого закрыта, в открытых источниках нет». Читатель,
+    открывший обе, справедливо перестаёт верить обеим. Слито в одну сделку
+    с этапом-согласованием (`pipeline/merge_aeroflot_aeromar_stages.py`).
+
+    Две пары, которые тест обязан ПРОПУСКАТЬ, — настоящие разные сделки на
+    одном активе, и они перечислены поимённо: «Башнефть» (часть блокирующего
+    пакета и оставшаяся часть) и ГК «Дело» (опцион 2022 года и «русская
+    рулетка» 2026-го). Появится третья такая пара — её нужно будет ПРОЧИТАТЬ
+    и либо слить, либо дописать сюда с объяснением, а не расширять
+    исключение молча.
+    """
+    known_separate = {
+        ("g300b9ead", "gf9a640d2"),   # Роснефть → Башнефть
+        ("rosatom", "delo"),          # Росатом → Группа компаний «Дело»
+    }
+    pairs = {}
+    for deal in base["deals"]:
+        buyer, target = deal.get("buyer"), deal.get("target") or deal.get("asset_id")
+        if buyer and target:
+            pairs.setdefault((buyer, target), []).append(deal)
+
+    clashes = []
+    for key, group in pairs.items():
+        if len(group) < 2:
+            continue
+        statuses = {d.get("status") for d in group}
+        if "Закрыта" in statuses and statuses - {"Закрыта"}:
+            clashes.append((key, [(d["id"], d.get("status"), d.get("date")) for d in group]))
+
+    unexplained = [c for c in clashes if c[0] not in known_separate]
+    assert not unexplained, (
+        "карточки одной пары «покупатель → предмет» спорят о статусе: %s" % unexplained)

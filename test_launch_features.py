@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Новые функции запуска: ФНС, алерты, экспорт, вебинары и mobile UI."""
+import os
 import sys
+import tempfile
 import uuid
 from datetime import date, datetime
 from pathlib import Path
@@ -11,7 +13,8 @@ from fastapi.testclient import TestClient
 import main
 from db.models import (
     Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
-    Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, User, UserTier, Webinar,
+    Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
+    UserTier, Webinar,
 )
 from db.session import get_session
 from notification_service import create_notification
@@ -1577,17 +1580,28 @@ def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honest
         def search(self, q):
             raise ApiFnsError("квота исчерпана (тест)")
 
+    free_calls = []
+
+    def _free_always_none(name, http_client=None):
+        free_calls.append(name)
+        return None
+
     monkeypatch.setattr("fns_client.ApiFnsClient", AlwaysFailsClient)
-    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", lambda name, http_client=None: None)
+    monkeypatch.setattr(uq_mod, "attempt_public_egrul_match", _free_always_none)
     monkeypatch.setattr(uq_mod.time, "sleep", lambda s: None)
     monkeypatch.setattr(_sys, "argv", ["fns_unresolved_queue.py", "--attempt", "--limit", "5"])
 
     uq_mod.main()
     out = capsys.readouterr().out
 
-    assert "Поиск ФНС недоступен" in out, "систематический отказ обязан быть назван прямо"
+    assert "Платный поиск ФНС недоступен" in out, "систематический отказ платного API обязан быть назван прямо"
     assert "ошибок API" in out, "итоговая строка обязана отличать ошибки API от честного «не нашли»"
-    assert "Автоподтверждено" not in out, "при отказавшем API подтверждать было нечего"
+    assert "Автоподтверждено" not in out, "при отказавшем API и бесплатном «не нашли» подтверждать было нечего"
+    # 19 сентября 2026: обрыватель должен останавливать только ПЛАТНЫЕ
+    # попытки — бесплатный ЕГРЮЛ-поиск обязан быть вызван для ВСЕХ 5
+    # кандидатов, а не только для тех трёх, что были до срабатывания
+    # обрывателя (см. докстринг attempt_paid_exact_match).
+    assert len(free_calls) == 5, "бесплатный поиск не должен обрываться вместе с платным"
 
 
 def test_fns_queue_append_registry_writes_valid_python_without_touching_existing_records(tmp_path):
@@ -2249,6 +2263,88 @@ def test_subscription_actually_reaches_the_subscriber(client):
         assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечён: {again}"
     finally:
         db.close()
+
+
+def test_company_subscription_matches_by_profile_not_by_name(client):
+    """Подписка на компанию (просьба Дани, 19 сентября 2026).
+
+    Сопоставление идёт по id ПРОФИЛЯ, а не по названию, и это не
+    придирчивость: подписка по слову у нас уже есть (`keyword`), и на
+    «Магните» она ловит «Магнитогорский металлургический комбинат» —
+    человек получает письма про чужую сделку и перестаёт верить остальным.
+    Роль в карточке проставлена ссылкой на профиль, промахнуться нечем.
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "publish"))
+    import notify_subscribers
+
+    user = _login(client, f"company-subscriber-{uuid.uuid4().hex[:8]}@example.com")
+    companies = {"co-magnit": {"name": "Магнит"},
+                 "co-mmk": {"name": "Магнитогорский металлургический комбинат"}}
+    # Профиля нет в базе — подписку не создаём: она молча никогда не
+    # сработает, а человек будет ждать писем, которых не бывает.
+    assert client.post("/api/subscriptions", json={"company_id": "co-no-such"}).status_code == 400
+    import base_data
+    real_id = next(iter((base_data.promoted().get("companies") or {})))
+    assert client.post("/api/subscriptions", json={"company_id": real_id}).status_code == 200
+    # Повторное нажатие сердечка — не вторая подписка на то же самое.
+    again = client.post("/api/subscriptions", json={"company_id": real_id})
+    assert again.status_code == 200 and again.json().get("existing") is True
+    rows = client.get("/api/subscriptions").json()
+    assert len([r for r in rows if r["company_id"] == real_id]) == 1
+    # Имя компании отдаётся рядом с id: на экране подписка называется именем.
+    assert rows[0]["company_name"], rows[0]
+
+    import subscription_feed
+    flt = SavedFilter(user_id=user.id, company_id="co-magnit", active=True)
+    mine = {"id": "sub-co-mine", "title": "Сделка", "buyer": "co-magnit", "ind": "Ритейл"}
+    namesake = {"id": "sub-co-namesake", "title": "ММК купил актив",
+                "buyer": "co-mmk", "ind": "Металлургия"}
+    assert "Магнит" in (subscription_feed.match_reason(flt, mine, companies) or "")
+    assert subscription_feed.match_reason(flt, namesake, companies) is None
+    # А подписка по слову — ловит обоих, и это ровно та разница, ради которой
+    # у подписки на компанию отдельное поле.
+    by_word = SavedFilter(user_id=user.id, keyword="Магнит", active=True)
+    assert subscription_feed.match_reason(by_word, namesake, companies)
+
+    db = get_session()
+    try:
+        db.add(SavedFilter(user_id=user.id, company_id="co-magnit", active=True))
+        db.commit()
+        stats = notify_subscribers.notify_new_deals(db, [mine, namesake], companies)
+        assert stats["created"] == 1, stats
+        got = db.query(Notification).filter_by(user_id=user.id, deal_id="sub-co-mine").all()
+        assert got and "Магнит" in (got[0].body or ""), "в уведомлении не сказано, почему оно пришло"
+    finally:
+        db.close()
+
+
+def test_saved_filters_table_made_before_company_subscriptions_gets_the_column():
+    """Миграция на «старой» таблице: колонка `company_id` появилась 19 сентября
+    2026, а таблица на проде создана раньше — `create_all` добавляет только
+    недостающие ТАБЛИЦЫ, но не колонки (тот же урок, что с `approved` у users).
+    """
+    from sqlalchemy import create_engine, inspect, text
+
+    with tempfile.TemporaryDirectory() as tmp:
+        engine = create_engine("sqlite:///" + os.path.join(tmp, "old.db"))
+        with engine.begin() as conn:
+            conn.execute(text(
+                "CREATE TABLE saved_filters (id INTEGER PRIMARY KEY, user_id INTEGER, "
+                "industry VARCHAR(120), keyword VARCHAR(200), min_amount_mln_rub NUMERIC, "
+                "active BOOLEAN, created_at DATETIME)"))
+            conn.execute(text("INSERT INTO saved_filters (id, user_id, industry, active) "
+                              "VALUES (1, 1, 'Ритейл', 1)"))
+        with engine.begin() as conn:
+            cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+            assert "company_id" not in cols
+            if "company_id" not in cols:
+                conn.execute(text("ALTER TABLE saved_filters ADD COLUMN company_id VARCHAR(40)"))
+        with engine.begin() as conn:
+            cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+            assert "company_id" in cols
+            # У старых подписок компании не было — они остаются работать как есть.
+            assert conn.execute(text("SELECT company_id FROM saved_filters WHERE id = 1")).scalar() is None
 
 
 def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
@@ -3392,7 +3488,7 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     assert len(calls) == 1 and calls[0][0] == "sendMessage"
     assert calls[0][1]["message_thread_id"] == 99
     buttons = [b for row in calls[0][1]["reply_markup"]["inline_keyboard"] for b in row]
-    assert {b["callback_data"] for b in buttons} == {"topic:decision", "topic:update", "topic:info"}
+    assert {b["callback_data"] for b in buttons} == {"topic:%s" % k for k in main_module.CONSOLE_TOPIC_NAMES}
     assert {b["text"] for b in buttons} == set(main_module.CONSOLE_TOPIC_NAMES.values())
 
     # Нажатие «Обновления» под сообщением бота в теме 99 -> запомнено, текст поправлен.
@@ -3705,6 +3801,70 @@ def test_deal_pdf_embeds_a_cyrillic_font_shipped_with_the_site():
     assert b"DejaVuSans" in pdf or b"LiberationSans" in pdf, "нет шрифта с кириллицей"
 
 
+def test_deal_pdf_carries_the_compass_mark_next_to_the_name():
+    """Просьба владельца 19 сентября 2026: «в пдф не забыть рядом с названием
+    компас добавить логотип, это важно». Отчёт уходит из рук в руки, и без
+    знака он выглядит распечаткой из чужой таблицы.
+
+    Проверяем саму геометрию, а не байты файла: потоки PDF сжаты, и поиск
+    по ним ничего не доказывает. Знак обязан совпадать с тем, что в шапке
+    сайта (`.wordmark`, viewBox 48×48): круг радиуса 21, стрелка из двух
+    треугольников — бронзовый вверх, тёмный вниз — и точка в центре."""
+    import deal_export
+    from reportlab.lib import colors
+
+    class Recorder:
+        """Холст-протокол: запоминает, что на нём рисовали."""
+        def __init__(self):
+            self.calls, self.fills, self.paths = [], [], []
+        def __getattr__(self, name):
+            def record(*args, **kwargs):
+                self.calls.append((name, args))
+                if name == "setFillColor" and args:
+                    self.fills.append(args[0])
+                return self
+            return record
+        def beginPath(self):
+            path = Recorder()
+            self.paths.append(path)
+            return path
+
+    ink, accent, paper = colors.HexColor("#0F2B21"), colors.HexColor("#A3814E"), colors.white
+    mark = deal_export.CompassMark(21, ink, accent, paper)
+    assert mark.wrap(0, 0) == (21, 21)
+    mark.canv = Recorder()
+    mark.draw()
+    calls = mark.canv.calls
+    circles = [args for name, args in calls if name == "circle"]
+    assert (24, 24, 21) == circles[0][:3], "круг знака"
+    assert (24, 24, 3.2) == circles[1][:3], "точка в центре"
+    assert ("rotate", (38,)) in calls, "стрелка наклонена, как в шапке сайта"
+    # Два треугольника, и бронзовый — тот, что смотрит вверх (в PDF ось Y
+    # вверх, в SVG вниз; перепутать знак здесь значит перевернуть стрелку).
+    apexes = [p.calls[0][1][1] for p in mark.canv.paths]
+    assert apexes == [43, 5], apexes
+    assert accent in mark.canv.fills and ink in mark.canv.fills
+    # И целиком: файл собирается со знаком внутри и остаётся настоящим PDF.
+    deal = {"id": "pdf-mark", "title": "Тестовая сделка", "date": "2026-09-19",
+            "status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽",
+            "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": []}
+    assert deal_export.render_deal_pdf(deal).startswith(b"%PDF")
+
+
+def test_deal_pdf_says_the_report_date_on_the_page():
+    """Раньше внизу стояло «Дата формирования отчёта указывается в свойствах
+    файла» — отговорка: отчёт пересылают и открывают через месяцы, и «на
+    какое число эти данные» должно читаться глазами, а не через свойства
+    документа."""
+    import re
+
+    import deal_export
+
+    text = deal_export._report_date()
+    assert re.match(r"^\d{1,2} [а-я]+ \d{4} года$", text), text
+    assert not any(ch.isascii() and ch.isalpha() for ch in text)
+
+
 def test_owner_payload_names_the_bank_of_russia_by_inn():
     """У РКЦ Банка России тот же ИНН, что у самого ЦБ, и API-ФНС отдаёт для
     учредителя Сбербанка имя ликвидированного РКЦ г. Курильска (аудит перед
@@ -3911,3 +4071,155 @@ def test_attempt_public_egrul_match_skips_liquidated_entities_and_strips_pao():
     assert attempt_public_egrul_match("ООО «Группа Позитив»", http_client=_FakeEgrulClient(only_dead)) is None
     sar = [{"k": "ul", "i": "3906406196", "n": 'МЕЖДУНАРОДНАЯ КОМПАНИЯ АКЦИОНЕРНОЕ ОБЩЕСТВО "СОВКО КАПИТАЛ ПАРТНЕРС"'}]
     assert attempt_public_egrul_match("МКАО «Совко Капитал Партнерс»", http_client=_FakeEgrulClient(sar))[0] == "3906406196"
+
+
+def test_site_bridge_tells_a_missing_endpoint_from_an_empty_answer():
+    """Мост «рутина → сайт» обязан различать «данных нет» и «адреса нет».
+
+    19 сентября 2026 рутина «заметки от пользователей» на первом же реальном
+    прогоне упала трассировкой JSONDecodeError: боевой сайт ответил кодом 200
+    и HTML-страницей, потому что эндпоинт ещё не был выложен, а неизвестные
+    адреса ловит catch-all. `raise_for_status` такой ответ пропускает —
+    проверять надо СОДЕРЖИМОЕ, а не только код. Тот же catch-all однажды уже
+    съел /favicon.ico (KNOWN_ISSUES.md), то есть класс дефекта был известен.
+    """
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline"))
+    import site_bridge
+
+    class FakeResponse:
+        def __init__(self, ctype, body):
+            self.headers = {"content-type": ctype}
+            self._body = body
+        def json(self):
+            import json as _json
+            return _json.loads(self._body)
+
+    page = FakeResponse("text/html; charset=utf-8", "<!DOCTYPE html><html></html>")
+    with pytest.raises(site_bridge.BridgeUnavailable) as err:
+        site_bridge._as_json(page, "/api/corrections/pending")
+    reason = err.value.reason
+    assert "не выложен" in reason and "/api/corrections/pending" in reason
+    # Причина написана для человека: без английского и без трассировки.
+    assert not any(ch.isascii() and ch.isalpha() for ch in reason.replace("/api/corrections/pending", ""))
+
+    # Пустой, но настоящий ответ — это НЕ ошибка: заявок просто нет.
+    empty = FakeResponse("application/json", '{"corrections": []}')
+    assert site_bridge._as_json(empty, "/api/corrections/pending") == {"corrections": []}
+
+
+def test_deal_pdf_carries_the_financial_context_section():
+    """Финансовый контекст в выгрузке (просьба Ксюши, 19 сентября 2026): на
+    карточке блок есть, а в PDF его не было. «За сколько купили» без «сколько
+    компания зарабатывает» — половина разговора, а отчёт уходит из рук в руки.
+
+    Показатели берутся за последний год ДО сделки, юрлицо и год названы прямо:
+    отчётность сдаётся по юрлицу, а сделка заключается по группе, и подменять
+    одно другим нельзя (урок про периметр из CLAUDE.md).
+    """
+    import deal_export
+
+    # Прочерк, а не ноль: пустая строка отчётности и ноль в отчёте — разное.
+    assert deal_export._money(None) == "—" and deal_export._money("") == "—"
+    assert deal_export._money(19_400_000_000) == "19,4 млрд ₽"
+    assert deal_export._money(-511_000_000) == "−511 млн ₽"
+
+    deal = {"id": "pdf-fin", "title": "Тестовая сделка", "date": "2026-09-01",
+            "status": "Закрыта", "type": "M&A", "sum": "Не раскрыта",
+            "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": [],
+            "finance": [{"role": "Покупаемая компания", "name": "Аэромар",
+                         "legal_name": "АО «АЭРОМАР»", "inn": "7712025950", "year": 2024,
+                         "revenue_rub": 19_400_000_000, "net_profit_rub": -511_000_000,
+                         "assets_rub": 12_000_000_000, "equity_rub": None}]}
+    pdf = deal_export.render_deal_pdf(deal)
+    assert pdf.startswith(b"%PDF")
+    # Без финансовых данных раздела нет вовсе — пустая таблица хуже её отсутствия.
+    plain = deal_export.render_deal_pdf({k: v for k, v in deal.items() if k != "finance"})
+    assert len(plain) < len(pdf)
+
+
+def test_export_finance_takes_the_year_before_the_deal():
+    """Показывать в отчёте о сделке 2023 года отчётность за 2025-й — значит
+    отвечать не на тот вопрос. Отбор года проверяем на самом запросе."""
+    import inspect
+
+    import main as m
+
+    src = inspect.getsource(m._export_finance)
+    assert "FinancialReport.year <= year_cap" in src, "отбор по году до сделки пропал"
+    assert "order_by(FinancialReport.year.desc())" in src, "берётся не самый свежий из допустимых"
+    # Имя компании — из профиля базы, а не из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ
+    # ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"» капсом уже нарушало правило «язык для
+    # людей» на экране мультипликаторов, и в PDF повторять это незачем.
+    assert 'profile.get("name") or' in src
+
+
+def test_egrul_change_text_is_a_sentence_not_a_machine_dump():
+    """Читателю показывался машинный слепок записи ЕГРЮЛ.
+
+    Найдено 19 сентября 2026 замером по боевому сайту: у 330 записей из 334
+    поле `event_type` пусто, а в тексте лежала строка вида
+    `{"СПВЗ": "Изменение сведений о юридическом лице…"}` — и она уходила
+    прямо на страницу компании. Причина: `normalize_changes` искала ключи
+    «Текст»/«Описание»/«Статус», а API отдаёт «СПВЗ», и срабатывал запасной
+    путь `json.dumps(item)`. Урок: запасной путь, показывающий человеку
+    внутреннее представление данных, хуже пустой строки.
+    """
+    import fns_client
+    import main as m
+
+    live = '{"СПВЗ": "Представление лицензирующим органом сведений о предоставлении лицензии"}'
+    assert fns_client.change_text(live) == \
+        "Представление лицензирующим органом сведений о предоставлении лицензии"
+    # И словарём (новые записи), и строкой (уже лежащие в базе) — одинаково.
+    assert fns_client.change_text({"СПВЗ": "Текст записи"}) == "Текст записи"
+    assert "{" not in fns_client.change_text(live)
+    # Ключа не знаем — берём самую длинную человеческую строку, а не слепок.
+    assert fns_client.change_text({"Код": "12", "Что": "Длинное описание записи"}) == "Длинное описание записи"
+    assert fns_client.change_text({}) == ""
+
+    # Вид записи выводится из фразы: собственного поля «тип» у записи нет.
+    assert m._change_kind(live) == "license"
+    assert m._change_kind('{"СПВЗ": "Государственная регистрация изменений, внесенных в учредительные документы"}') == "charter"
+    # Незнакомая формулировка НЕ приписывается к выдуманной категории.
+    assert m._change_kind('{"СПВЗ": "Нечто небывалое"}') == ""
+    # Машинный ключ вида не должен попадать в поле, которое рисуется на экране.
+    import inspect
+    src = inspect.getsource(m.company_fns)
+    assert '"type": row.event_type,' in src, "ключ вида снова подставляется в видимое поле"
+
+
+def test_health_carries_a_build_fingerprint(client):
+    """«Какой код сейчас на сайте» должно быть одним запросом, а не
+    расследованием.
+
+    19 сентября 2026 выкладка встала: за день в git уехало восемь коммитов, а
+    сайт отдавал сборку 18-го — в том числе без гейта, который перестаёт
+    отвечать на «найди компромат на X». Чтобы это увидеть, пришлось сравнивать
+    размер index.html, искать в нём признаки отдельных коммитов и в конце
+    спрашивать сам ассистент.
+
+    Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развёрнутом
+    контейнере каталога .git может не быть, а файлы есть всегда.
+    """
+    import hashlib
+    from pathlib import Path
+
+    import main as m
+
+    body = client.get("/health").json()
+    assert body["status"] == "ok"
+    build = body.get("build")
+    assert build and set(build) == {"main.py", "static/index.html"}, build
+    root = Path(m.__file__).resolve().parent
+    for name, got in build.items():
+        want = hashlib.sha256((root / name).read_bytes()).hexdigest()[:8]
+        assert got == want, f"отпечаток {name} не совпадает с файлом"
+        assert len(got) == 8
+
+    # Сравнение «сайт и чекаут совпадают» живёт одной функцией, а не
+    # переписывается заново в каждой рутине.
+    import sys as _sys
+    _sys.path.insert(0, str(root / "pipeline"))
+    import check_deploy
+    assert check_deploy.local_fingerprint() == build

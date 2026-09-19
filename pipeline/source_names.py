@@ -64,6 +64,7 @@ DOMAIN_NAMES = {
     'rb.ru': 'Rusbase',   # издание называется так, домен — сокращение
     'akm.ru': 'АК&М',
     'cnews.ru': 'CNews',
+    'cisoclub.ru': 'CISOCLUB',
     'comnews.ru': 'ComNews',
     'rambler.ru': 'Рамблер',
     'finance.rambler.ru': 'Рамблер',
@@ -86,6 +87,7 @@ DOMAIN_NAMES = {
     'timesofisrael.com': 'The Times of Israel',
     'derstandard.at': 'Der Standard',
     'mscwtimes.global.ssl.fastly.net': 'The Moscow Times',
+    'ru.themoscowtimes.com': 'The Moscow Times',
     'ru.wikipedia.org': 'Википедия',
     'realty.ria.ru': 'РИА Недвижимость',
     'ria.ru': 'РИА Новости',
@@ -117,6 +119,7 @@ DOMAIN_NAMES = {
     'retail.ru': 'Retail.ru',
     'ruscable.ru': 'РусКабель',
     'tomsk.aif.ru': 'АиФ Томск',
+    'oren.aif.ru': 'АиФ-Оренбург',
     'vgudok.com': 'Вгудок',
     'adindex.ru': 'AdIndex',
     # Издания, пришедшие с притоком (лент у них раньше не было).

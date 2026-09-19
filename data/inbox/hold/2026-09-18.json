@@ -108,7 +108,7 @@
    ]
   },
   {
-   "draft_id": "d83131357",
+   "draft_id": "d74146830",
    "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
    "date": "2026-09-18",
    "src": [
@@ -136,80 +136,13 @@
    ]
   },
   {
-   "draft_id": "d45736716",
-   "title": "Экс-ведущий Top Gear Джереми Кларксон продаст три авто из своей коллекции",
+   "draft_id": "d79963144",
+   "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
    "date": "2026-09-18",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2169268/2026-09-18/eks-vedushchii-top-gear-dzheremi-klarkson-prodast-tri-avto-iz-svoei-kollektcii"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "три авто из своей коллекции",
-   "seller": "Экс-ведущий Top Gear Джереми Кларксон",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "три авто из своей коллекции",
-    "seller": "Экс-ведущий Top Gear Джереми Кларксон"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d88317260",
-   "title": "ЦБ Узбекистана увеличит инвестиции в покупку ценных бумаг",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1116916"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-18",
-     "title": "Переговоры",
-     "note": "Центральный банк Узбекистана планирует постепенно расширять перечень активов, в которые инвестируются международные резервы страны, включая покупку высоколиквидных активов, заявил зампред ЦБ Аброр Мирзо Олимов на Международном форуме по управлению…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1116916"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78090932",
-   "title": "Хакеры выкрали данные из правительственных сетей Берлина. Власти платить выкуп отказались",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-18_hakery_vykrali_dannye_iz"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28126333"
     ]
    ],
    "sum": null,
@@ -231,17 +164,45 @@
    ]
   },
   {
-   "draft_id": "d50016106",
-   "title": "Галузин: Армения заверяла, что отечественным инвестициям в республике ничего не угрожает",
+   "draft_id": "d23440410",
+   "title": "В Москве выставили на торги старинный купеческий особняк",
    "date": "2026-09-18",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/politika/28125949"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260918/moskva-2118571651.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35782040",
+   "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/lukoyl-2118576929.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -254,8 +215,100 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d42876803",
+   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/18/1230043-ssha-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d48552503",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 22 октября",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1116935"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d23364061",
+   "title": "США продлили лицензию на переговоры о продаже активов компании «Лукойл»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169431/2026-09-18/ssha-prodlili-litcenziiu-na-peregovory-o-prodazhe-aktivov-kompanii-lukoil"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
    ]
   }
  ]

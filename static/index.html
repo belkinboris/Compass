@@ -79,6 +79,11 @@
    `touch-action:pan-y` на самом слайдере (см. `.heroslider`). */
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
+/* Ссылка внутри серого пояснения наследует его цвет и перестаёт выглядеть
+   ссылкой (замечание Ксюши про «вся отрасль»). Такой ссылке нужен явный
+   цвет и подчёркивание — иначе по ней просто не кликают. */
+.inline-link{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.inline-link:hover{text-decoration-thickness:2px}
 button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums}
@@ -1053,7 +1058,20 @@ a.dp-asset-name:hover{color:var(--accent)}
    имя и описание не сдвигаются у профилей с group:true, линия над цифрами
    остаётся на одной высоте (ради чего бейдж когда-то и вынесли из потока). */
 .co-tags{display:flex;gap:6px;align-items:center;height:26px;overflow:hidden;white-space:nowrap}
-.co-tags .tag{flex:0 0 auto}
+/* БЕЙДЖ СЖИМАЕТСЯ С МНОГОТОЧИЕМ, А НЕ ОБРЕЗАЕТСЯ ПОСЕРЕДИНЕ БУКВЫ.
+   До 19 сентября 2026 у тега стояло `flex:0 0 auto`: он не уступал ни
+   пикселя, вылезал за контейнер и попадал под его `overflow:hidden` —
+   «ИТ и интернет» на широком экране терял последнюю букву (замер того дня:
+   вылет 29px у восьми карточек на 1280px). Многоточие было прописано только
+   в мобильной ветке, то есть ровно там, где проблему УЖЕ увидели, — а на
+   десктопе её не искали. Теперь уступают оба бейджа, и первым — «Группа
+   компаний»: он одинаковый у всех, а отрасль у каждой карточки своя и по
+   ней кликают. */
+.co-tags .tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.co-tags .co-tag{flex:1 1 auto}
+/* «Группа» — короткий и одинаковый у всех: сжимать его незачем, пусть
+   уступает место отрасль, у которой длина своя у каждой карточки. */
+.co-tags .co-group-badge{flex:0 0 auto}
 .co-nums .label{white-space:nowrap}
 /* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
    пустые 30px под коротким именем и 20px под коротким описанием только
@@ -1065,7 +1083,6 @@ a.dp-asset-name:hover{color:var(--accent)}
   .co-card .desc{height:auto}
   .co-card-main{padding-right:0}
   .co-tags{margin-right:84px}
-  .co-tags .co-tag{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
   .co-actions{flex-direction:row;top:12px;right:12px}
   .co-compare{width:32px;height:32px}
   .co-nums{gap:20px;margin-top:14px;padding-top:12px}
@@ -1414,6 +1431,22 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .fns-metric:last-child{border-right:none}
 .fns-metric .v{font-family:var(--f-display);font-size:23px;line-height:1.2;margin-top:7px}
 .fns-metric .delta{font-size:12px;margin-top:4px;color:var(--muted)}
+/* Посчитанные показатели (оборотный капитал, долговая нагрузка,
+   рентабельность). Отдельная сетка, а не `.fns-metrics`: там ровно четыре
+   колонки и границы нарисованы через :nth-child под это число, а здесь
+   карточек от одной до девяти — сколько строк отчётности хватило посчитать.
+   auto-fit с minmax(min(100%,…)) держит и 360px (одна колонка), и десктоп.
+   Разделители рисуются границами САМИХ карточек, а не просветом сетки на
+   цветной подложке: показателей в группе бывает пять, а колонок четыре —
+   при подложке три пустые ячейки последнего ряда светились серым прямоугольником,
+   и это читалось как поломка, а не как «показателей столько». */
+.fns-derived{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,196px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);margin:4px 0 6px}
+.fns-derived .d{background:var(--card);padding:15px 16px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fns-derived .d .k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fns-derived .d .v{font-family:var(--f-display);font-size:21px;line-height:1.2}
+.fns-derived .d .how{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:6px}
+.fns-derived-group{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:20px 0 0}
+.fns-note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:9px}
 .fns-table{width:100%;border-collapse:collapse;font-size:13px}
 .fns-table th,.fns-table td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
 .fns-table th:first-child,.fns-table td:first-child{text-align:left;padding-left:0}
@@ -1584,18 +1617,86 @@ const INDUSTRIES = ["Все","Нефть и газ","Уголь","ГМК и до
    до того, как появятся аккаунты с серверной подпиской. Когда пользователь
    войдёт, этот список — готовая основа для уведомлений по компании. */
 const FOLLOW_KEY="kompas_followed_companies_v1";
-function followedCompanies(){
+function localFollowed(){
   try{
     const rows=JSON.parse(localStorage.getItem(FOLLOW_KEY)||"[]");
     return Array.isArray(rows)?rows.filter((id,i,a)=>typeof id==="string"&&co(id)&&a.indexOf(id)===i):[];
   }catch(e){return [];}
 }
-function isFollowed(id){return followedCompanies().includes(id);}
-function toggleFollowedCompany(id){
-  const ids=followedCompanies(), at=ids.indexOf(id);
-  if(at>=0) ids.splice(at,1); else ids.push(id);
-  localStorage.setItem(FOLLOW_KEY,JSON.stringify(ids));
-  return ids.includes(id);
+/* Подписки вошедшего пользователя — одним списком с сервера (отрасли,
+   компании, ключевые слова живут в одной таблице). Держим рядом с ME и
+   обновляем вместе с ним: подписка на компанию рисуется сердечком в
+   каталоге и кнопкой на профиле, и обе должны знать состояние без запроса
+   на каждый клик. */
+let SUBS=[];
+async function loadSubs(){
+  if(!ME){SUBS=[];return SUBS;}
+  try{const r=await fetch("/api/subscriptions");SUBS=r.ok?await r.json():[];}
+  catch(e){SUBS=[];}
+  return SUBS;
+}
+function companySub(id){
+  return SUBS.find(s=>s.company_id===id && !s.industry && !s.keyword) || null;
+}
+function industrySub(name){
+  return SUBS.find(s=>s.industry===name && !s.company_id && !s.keyword) || null;
+}
+function followedCompanies(){
+  return ME ? SUBS.filter(s=>s.company_id).map(s=>s.company_id).filter(id=>co(id)) : localFollowed();
+}
+function isFollowed(id){return ME ? !!companySub(id) : localFollowed().includes(id);}
+/* До входа подписка живёт в браузере (сервер не знает, кому слать), после
+   входа — на сервере. Обещание в подсказке «список в кабинете» до 19 сентября
+   2026 не сбывалось: список лежал только в localStorage, и кабинет о нём не
+   знал — ровно тот класс дефекта, от которого предостерегает правило
+   «обещание новизны без новизны». */
+async function toggleFollowedCompany(id){
+  if(!ME){
+    const ids=localFollowed(), at=ids.indexOf(id);
+    if(at>=0) ids.splice(at,1); else ids.push(id);
+    try{localStorage.setItem(FOLLOW_KEY,JSON.stringify(ids));}catch(e){}
+    return ids.includes(id);
+  }
+  const cur=companySub(id);
+  try{
+    if(cur) await fetch("/api/subscriptions/"+cur.id,{method:"DELETE"});
+    else await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({company_id:id})});
+  }catch(e){return isFollowed(id);}
+  await loadSubs();
+  return isFollowed(id);
+}
+async function toggleIndustrySub(name){
+  if(!ME) return null;
+  const cur=industrySub(name);
+  try{
+    if(cur) await fetch("/api/subscriptions/"+cur.id,{method:"DELETE"});
+    else await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({industry:name})});
+  }catch(e){return !!industrySub(name);}
+  await loadSubs();
+  return !!industrySub(name);
+}
+/* Сердечки, нажатые до входа, переезжают на сервер при первом же входе —
+   иначе человек, отметивший десяток компаний и потом зарегистрировавшийся,
+   молча теряет их и не получает ни одного письма. */
+/* Текст подтверждения зависит от того, вошёл человек или нет, и обещать
+   письма тому, кого мы не знаем по адресу, нельзя. */
+function followOnText(name){
+  return ME
+    ? `Следим за «${name}» — сообщим о новых сделках. Все подписки — в <a href="#/account?tab=subscriptions">кабинете</a>.`
+    : `«${name}» отмечена. <a href="#/account">Войдите</a>, чтобы получать сообщения о новых сделках.`;
+}
+async function syncLocalFollows(){
+  const local=localFollowed();
+  if(!ME || !local.length) return;
+  for(const id of local){
+    if(companySub(id)) continue;
+    try{await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({company_id:id})});}catch(e){return;}
+  }
+  try{localStorage.removeItem(FOLLOW_KEY);}catch(e){}
+  await loadSubs();
 }
 const COMPARE_KEY="kompas_compare_companies_v1";
 const COMPARE_MAX=3;
@@ -2243,17 +2344,6 @@ const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.lengt
 /* ================= МАССОВАЯ БАЗА (загружается отдельным JSON, не хранится в HTML) ================= */
 let BULK_DEALS = [];
 let bulkLoaded = false;
-let slowLoad = false;
-// Через 8 секунд ожидания подсказываем возможную причину. Определить VPN из
-// браузера нельзя — и мы не утверждаем, что он включён: только напоминаем, что
-// сервер в России и зарубежный маршрут (VPN) может тормозить загрузку.
-setTimeout(()=>{
-  if(bulkLoaded || bulkLoadFailed) return;
-  slowLoad = true;
-  const hint = document.getElementById("slowhint");
-  if(hint) hint.style.display = "block";
-  else if(document.querySelector(".loading")) route();
-}, 8000);
 let bulkLoadFailed = false;
 // Сделки до 2022 года остаются в deals_promoted.json (файл не трогаем — это
 // история, которую можно будет включить позже), но на сайте не показываются:
@@ -2425,12 +2515,11 @@ function loadingHtml(what){
     <div class="l-head">Загружаем базу сделок</div>
     <p>Секунду — ${what.toLowerCase()} появятся, как только загрузится база.
        Показатели появятся после полной загрузки базы.</p>
-    <p id="slowhint" style="display:${slowLoad?"block":"none"};max-width:44ch;margin:10px auto 0;
+    <p id="slowhint" style="max-width:44ch;margin:10px auto 0;
        font-size:13px;color:#6B5432;background:var(--bronze-soft);
        border:1px solid rgba(163,129,78,.5);border-radius:8px;padding:10px 14px">
-      Загрузка идёт дольше обычного. Сервер «Компаса» находится в России:
-      если у вас включён VPN, попробуйте отключить его — обычно это ускоряет
-      загрузку в несколько раз. Мы тем временем продолжаем попытки.</p>
+      Сервер «Компаса» находится в России: если у вас включён VPN, попробуйте
+      отключить его — обычно это ускоряет загрузку в несколько раз.</p>
   </div>`;
 }
 /* Подборка живёт в адресе. Раньше три выставленных фильтра («Банки», 2024,
@@ -2766,11 +2855,36 @@ function smallAddDays(){
   freshDaysCache = new Set([...byDay].filter(([,n])=>n<=BULK_DAY).map(([day])=>day));
   return freshDaysCache;
 }
+/* «НОВОЕ» — ЭТО НОВОЕ ДЛЯ ЭТОГО ЧИТАТЕЛЯ, А НЕ ПО АБСОЛЮТНОМУ КАЛЕНДАРЮ.
+   Ксюша 19 сентября 2026: «логика бейджа непонятна — считать новым с
+   последнего визита (или упрощённо — за последнюю неделю)». Неделя у нас уже
+   стояла, и именно она и была непонятной: человек, заходящий каждый день,
+   седьмой раз подряд видит «Новое» на том, что уже читал, а зашедший раз в
+   месяц не видит его вовсе. Запоминаем время визита в браузере и метим то,
+   что приехало ПОСЛЕ него; кто пришёл впервые — тому прежнее правило недели.
+
+   Время читается ОДИН раз при загрузке и сразу перезаписывается: иначе за
+   первую же перерисовку ленты всё перестало бы быть новым. Хранилище может
+   не работать (частное окно, запрет на данные сайта) — тогда молча
+   возвращаемся к неделе, как и для первого визита. */
+const LAST_VISIT_KEY = "kompas_last_visit_v1";
+const lastVisitAt = (() => {
+  try{
+    const was = localStorage.getItem(LAST_VISIT_KEY);
+    localStorage.setItem(LAST_VISIT_KEY, new Date().toISOString());
+    const t = was ? Date.parse(was) : NaN;
+    return isNaN(t) ? null : t;
+  }catch(e){ return null; }
+})();
 function isFresh(d){
   const a = String(d && d.added || "");
   if(!/^\d{4}-\d{2}-\d{2}$/.test(a)) return false;
-  if(Date.now() - Date.parse(a + "T00:00:00") >= FRESH_DAYS*24*3600*1000) return false;
-  return smallAddDays().has(a);
+  const added = Date.parse(a + "T00:00:00");
+  // Разовый импорт архива — не новости рынка, и от того, кто когда заходил,
+  // это не зависит: оговорка остаётся при любом способе счёта.
+  if(!smallAddDays().has(a)) return false;
+  if(lastVisitAt !== null) return added >= lastVisitAt - 24*3600*1000;
+  return Date.now() - added < FRESH_DAYS*24*3600*1000;
 }
 
 /* Подтверждение действия одной строкой. Аргумент `html` — уже готовая
@@ -2988,7 +3102,8 @@ async function aiAnswer(q, mode, meta){
     } finally { clearTimeout(killer); }
     if(data.thread_id) activeThreadId=data.thread_id;
     if(data.answer) return {ok:true, raw:data.answer, html:mdToHtml(data.answer),
-      intent:data.intent||null, model:data.model!==false, deals:data.deals||[]};
+      intent:data.intent||null, model:data.model!==false, deals:data.deals||[],
+      refused:data.refused||null};
   }catch(e){}
   /* СООБЩЕНИЕ О СБОЕ НЕ ДОЛЖНО НАЗЫВАТЬ ПРИЧИНУ, КОТОРОЙ НЕ ПРОВЕРЯЛО.
      Здесь стояло «поиск включится, когда будут заданы YANDEX_API_KEY и
@@ -3031,6 +3146,11 @@ async function runAsk(q, mode, meta, w){
     .then(d=>{
       if(done||!d||!d.answer) return;
       quick=d; stopWait(); w.classList.remove("wait");
+      /* Отказ по границам разговора (компромат, юрконсультация, инвестсовет,
+         вопрос-обвинение) — это ОКОНЧАТЕЛЬНЫЙ ответ, а не «пока факты из
+         базы, сейчас допишу». Ни таймера «дописываю ответ…», ни второго
+         запроса: модель к такому вопросу не подключается вовсе. */
+      if(d.refused){ done=true; w.innerHTML=mdToHtml(d.answer); return; }
       w.innerHTML=mdToHtml(d.answer)+`<div class="ai-more"></div>`;
       stopMore=tickTimer(w.querySelector(".ai-more"), s=> s<3
         ? "Это данные из базы «Компаса». Дописываю ответ…"
@@ -3039,7 +3159,10 @@ async function runAsk(q, mode, meta, w){
     });
   const a=await aiAnswer(q, mode, meta);
   done=true; stopWait(); if(stopMore) stopMore(); w.classList.remove("wait");
-  if(a.ok){ w.innerHTML=a.html+feedbackBar(q,a); return a; }
+  /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
+     кнопка «Нет» тут значит «ответьте всё-таки» — и мы будем копить её как
+     жалобу на качество ответа, которого не было. */
+  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":feedbackBar(q,a)); return a; }
   if(quick){
     const raw=quick.answer;
     w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
@@ -3049,6 +3172,13 @@ async function runAsk(q, mode, meta, w){
   }
   w.innerHTML=a.html; return a;
 }
+
+/* Общий вопрос даёт общий ответ, уточнённый — хороший: это заметили и Ксюша,
+   и Артём. Подсказываем не всем подряд, а ровно тогда, когда видно, что
+   ответ ни на одну сделку не опёрся: постоянная подсказка под каждым ответом
+   быстро перестаёт читаться. */
+const askHintHtml = a => (a.refused || (a.deals && a.deals.length)) ? ""
+  : `<p class="ai-note">Ответ получился общим? Спросите конкретнее — назовите компанию, отрасль или год: «сделки «Магнита» в 2025 году» вместо «сделки в ритейле».</p>`;
 
 /* «Ответ помог?» под каждым ответом — начало петли улучшений: плохой ответ
    раньше просто пропадал, и о нём узнавали, только когда партнёр присылал
@@ -3240,7 +3370,7 @@ function dealRevenueTarget(d){ return d && (d.target || d.asset_id) || null; }
 function matchRevenue(it){
   if(filterMinRevenue==="Все") return true;
   if(financeScreening===null) return true; // ещё грузится — не прячем ленту молча, перерисуем сами
-  const d = it.kind==="full" ? it.rec : (it.kind==="milestone" ? it.rec.deal : null);
+  const d = it.kind==="full" ? it.rec : null;
   const target = dealRevenueTarget(d);
   const entry = target ? financeScreening[target] : null;
   if(!entry) return false;
@@ -3259,6 +3389,18 @@ const themeCount = t => DEALS.filter(d=>(d.themes||[]).includes(t)).length;
    «Не раскрыта»), из-за чего точное сравнение с одной строкой не приглушало
    часть карточек. Проверяем без учёта регистра и ведущих пробелов. */
 const undisclosed = v => !v || /^не\s+раскры/i.test(String(v).trim());
+/* ТРИ СОСТОЯНИЯ СУММЫ, А НЕ ДВА. `undisclosed()` одинаково отвечает «да» и
+   когда карточка ПРЯМО говорит «Не раскрыта» (480 сделок), и когда поля
+   суммы нет вовсе (177) — а это разные вещи. Первое мы установили чтением,
+   второе значит только, что у нас нет данных. До 19 сентября 2026 карточка
+   без поля суммы не показывала строку «Сумма» вообще, но примечание под ней
+   всё равно утверждало «Стороны не назвали сумму публично» — то самое
+   заполнение пустоты правдоподобным, от которого предостерегает правило.
+   Заодно это и была замеченная Ксюшей непоследовательность: у одних сделок
+   подпись есть, у других нет. */
+const SUM_UNKNOWN_LABEL = "Нет данных";
+const sumState = v => !String(v||"").trim() ? "unknown"
+  : /^не\s+раскры/i.test(String(v).trim()) ? "undisclosed" : "known";
 /* Хвостовая скобка у суммы — «(по оценке)» и подобные оговорки. Отделяем её
    стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
 const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
@@ -3269,7 +3411,8 @@ const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
    перестаёт быть на одной вертикали с заголовком и статусом. Рисуем блок
    суммы, только если есть что показать. */
 function dealMetaHtml(d){
-  const sum = d.sum ? `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${sumHtml(d.sum)}</div>` : "";
+  const sum = `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${
+    d.sum ? sumHtml(d.sum) : SUM_UNKNOWN_LABEL}</div>`;
   return `<div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>`;
 }
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
@@ -3293,7 +3436,7 @@ const hasIndustry = (d,industry) => industry==="Все" || dealIndustries(d).inc
    1541, поэтому дефекта и не было видно. */
 const indLabel = i => i==="Не определена" ? "Отрасль не определена" : i;
 const industryTagsHtml = (d, cls="") => dealIndustries(d).slice(0,2)
-  .map(i=>`<span class="tag ${cls}">${esc(indLabel(i))}</span>`).join("");
+  .map(i=>`<span class="tag ${cls}" data-feed-ind="${esc(i)}" role="link" tabindex="0" title="Сводка по отрасли">${esc(indLabel(i))}</span>`).join("");
 const industryLinksHtml = d => dealIndustries(d).slice(0,3)
   .map(i=>`<a class="tag" href="#/industry/${encodeURIComponent(i)}" title="Сводка по отрасли">${esc(indLabel(i))}</a>`).join(" ");
 
@@ -3351,43 +3494,24 @@ function unifiedFeed(){
       <div><div class="deal-title" style="font-size:16.5px">${b.title}</div><div class="deal-sub">${b.role||""}${b.src?` · источник: ${b.src[0]} ↗`:""}</div></div>
       <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
     </a>`,
-    /* Веха (раздел A) — не вторая карточка, а строка ленты, указывающая на
-       ТУ ЖЕ сделку: клик ведёт на актуальную карточку (#/deal/<id>), не на
-       страницу этапа (та открывается отдельной ссылкой «Открыть этап →» в
-       блоке «Ход сделки» самой карточки). Сумма/отрасль показываются по
-       снимку события (`e.snapshot`, записан в момент --milestone), а не по
-       ТЕКУЩИМ полям сделки: к моменту, когда читатель видит эту строку,
-       сумма могла уже уточниться, и веха обязана честно показывать то, что
-       было известно НА МОМЕНТ ЭТОГО ЭТАПА, а не задним числом. */
-    milestone: rec => {
-      const d = rec.deal, e = rec.event, snap = e.snapshot || {};
-      const chip = `Веха · ${MILESTONE_LABEL[e.kind] || e.kind}`;
-      const sum = snap.sum ? `<div class="deal-sum num ${undisclosed(snap.sum)?"na":""}">${sumHtml(snap.sum)}</div>` : "";
-      return `
-    <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(e.date)}</span><br><span class="status ${kindClass(e.kind)}">${esc(chip)}</span></div>
-      <div><div class="deal-title">${esc(e.headline)}</div><div class="deal-sub">Сделка: ${esc(d.title)}</div></div>
-      <div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>
-    </a>`;
-    },
   };
   /* `pub` — дата, по которой лента упорядочена: когда запись появилась в
      «Компасе». У краткого сырья поля `added` нет, для него это дата сделки —
      иначе такие строки провалились бы в самый низ независимо от свежести. */
+  /* ВЕХИ В ЛЕНТЕ НЕТ — И ЭТО РЕШЕНИЕ, А НЕ ПРОПУСК. Этап сделки (получено
+     согласование, сделка закрыта, сделка сорвалась) раньше давал ВТОРУЮ
+     строку ленты рядом с самой сделкой. Ксюша прочитала это как повтор, и
+     владелец 19 сентября 2026 решил коротко: «веха должна дополнять одну
+     карточку этапом, не более». Этап живёт в блоке «Ход сделки» на самой
+     карточке, а в канал по-прежнему уходит отдельным сообщением
+     (`send_milestone_drafts.py`) — то есть ни один способ узнать о закрытии
+     не потерян, просто лента перестала показывать одну сделку дважды.
+     Держит тест test_ui::test_milestone_enriches_the_card_and_does_not_add_a_feed_row. */
   const items = [
     ...DEALS.map(d=>({kind:"full",date:d.date,pub:d.added||d.date,ind:d.ind,rec:d})),
     ...MINI_DEALS.map(m=>({kind:"mini",date:m.date,pub:m.date,ind:m.ind,rec:m})),
     ...CHANNEL_DEALS.map(c=>({kind:"chan",date:c.date,pub:c.date,ind:c.ind,rec:c})),
     ...BULK_DEALS.map(b=>({kind:"bulk",date:b.date,pub:b.date,ind:b.ind,rec:b})),
-    /* Знаменатели (TOTAL_DEALS, аналитика, счётчики профилей) считают
-       ТОЛЬКО DEALS/MINI_DEALS/CHANNEL_DEALS/BULK_DEALS — веха не попадает ни
-       в один из этих массивов, только в items ленты. isDealShownOnSite()
-       уже применён: DEALS сам по себе содержит только показанные на сайте
-       сделки (фильтр — в загрузчике), а веха строится ИЗ DEALS. */
-    ...DEALS.flatMap(d => (Array.isArray(d.events) ? d.events : [])
-      .filter(e => e && e.newsworthy && e.headline && POSTWORTHY_MILESTONE_KINDS.has(e.kind))
-      .map(e => ({kind:"milestone", date:e.date||d.date, pub:e.date||d.date, ind:d.ind,
-                  rec:{deal:d, event:e, title:e.headline, role:"Веха", note:d.title}}))),
   ];
   const q = feedQuery.trim().toLowerCase();
   /* Поиск раньше смотрел только в заголовок, поэтому запрос вроде «Сбербанк» или
@@ -3508,7 +3632,24 @@ function emptyFeedHtml(){
     </div>
   </div>`;
 }
+/* Клик по тегу отрасли внутри строки ленты. Обработчик делегированный и
+   висит на документе один раз: строки перерисовываются при каждом поиске и
+   «Показать ещё», и прямые обработчики пришлось бы вешать заново. */
+let _feedIndBound = false;
+function bindFeedIndustryTags(){
+  if(_feedIndBound) return;
+  _feedIndBound = true;
+  const go = ev => {
+    const t = ev.target.closest("[data-feed-ind]");
+    if(!t) return;
+    ev.preventDefault(); ev.stopPropagation();
+    location.hash = "#/industry/" + encodeURIComponent(t.dataset.feedInd);
+  };
+  document.addEventListener("click", go);
+  document.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" ") go(e); });
+}
 function bindFeedListEvents(){
+  bindFeedIndustryTags();
   const lm = document.getElementById("loadmore");
   if(lm) lm.onclick = ()=>{feedPage++;renderFeedList();};
   const ct = document.getElementById("clrtheme");
@@ -3622,13 +3763,13 @@ function renderDeals(){
       <div class="hs-in">
         <div class="kicker">Сделки на российском рынке</div>
         <h1>Сделки российского рынка – <em>со ссылками на первоисточники</em></h1>
-        <p>Каждая сделка — глазами экономиста и глазами юриста. Пишем только то, что раскрыто публично: если стороны не назвали сумму или консультантов, так и указываем.</p>
+        <p>Каждую сделку разбираем с двух сторон — экономической и юридической. Пишем только то, что раскрыто публично, и не заполняем пустоту догадками: не назвали сумму или консультантов — значит, этого поля не будет.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
           : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
         }</div>
-        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
+        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Названия сторон мы приводим так, как их раскрыли источники, — это не юридически выверенные реквизиты. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CITY}
@@ -3658,7 +3799,7 @@ function renderDeals(){
     <div class="hs-slide">${SCENE_AI}
       <div class="hs-in">
         <div class="kicker">Задайте вопрос</div>
-        <h1>Ассистент – <em>спросите базу</em> обычным языком</h1>
+        <h1>Ассистент – <em>спрашивайте обычными словами</em></h1>
         <p>Кто сопровождал сделку? Какая сделка была крупнейшей в фармацевтике? Ассистент ищет по базе «Компаса» и открытым источникам.</p>
         <div class="aisearch">
           <input id="heroq" placeholder="Спросите: кто сопровождал сделки? какая самая крупная?" aria-label="Вопрос ассистенту">
@@ -4339,7 +4480,7 @@ function relatedHtml(d){
         undisclosed(o.x.sum)?fmtDate(o.x.date):sumHtml(o.x.sum), share(o.x)
       ].filter(Boolean).join(" · ")} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
     </a>`).join("")}
-    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общей темой${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
+    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общей темой${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a class="inline-link" href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
   </div>`;
 }
 
@@ -4762,7 +4903,7 @@ function renderDeal(id, qs, previewCard){
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
-  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Сверено с источником: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
+  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Карточку сверяли с источниками: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
   <div class="deal-tools reveal">
     <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
     <button class="chip" id="downloaddeal">Скачать PDF</button>
@@ -5112,8 +5253,12 @@ function renderDeal(id, qs, previewCard){
         </div>`).join("")}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
-      ${hero("Сумма", d.sum, true)}
-      ${undisclosed(d.sum)?`<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`:""}
+      ${hero("Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
+      ${sumState(d.sum)==="undisclosed"
+        ? `<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`
+        : sumState(d.sum)==="unknown"
+          ? `<p class="fact-note">Суммы в наших источниках нет. Могли ли стороны назвать её где-то ещё, мы не проверяли — поэтому и не пишем, что она не раскрыта.</p>`
+          : ""}
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
@@ -5236,7 +5381,7 @@ function companyGridHtml(){
   ${shown.map(({id,c,n})=>`
     <article class="co-card">
       <a class="co-card-main" href="#/companies/${id}">
-        <div class="co-tags">${c.group?`<span class="tag steel co-group-badge">Группа компаний</span>`:""}<span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span></div>
+        <div class="co-tags">${c.group?`<span class="tag steel co-group-badge" title="Группа компаний">Группа</span>`:""}<span class="tag co-tag" data-co-ind="${esc(c.ind)}">${c.ind}</span></div>
         <h3 title="${esc(c.name)}">${c.name}</h3>
         <div class="desc">${coDescHtml(id,c)}</div>
         <div class="co-nums">
@@ -5294,10 +5439,10 @@ function bindCompanyGridActions(el){
     if(fav){
       ev.preventDefault();
       const id=fav.dataset.coFollow, name=esc((co(id)||{}).name||"компания");
-      const on=toggleFollowedCompany(id);
-      toast(on ? `«${name}» в избранном. Список — в <a href="#/account">кабинете</a>.`
-               : `«${name}» убрана из избранного`);
-      renderCompanyGrid();
+      toggleFollowedCompany(id).then(on=>{
+        toast(on ? followOnText(name) : `«${name}» — больше не следим`);
+        renderCompanyGrid();
+      });
       return;
     }
     /* Отрасль ведёт на свою страницу. Ссылку внутрь карточки поставить нельзя:
@@ -5415,8 +5560,16 @@ function openCompanyDealsDialog(id){
   const host=document.getElementById("companyDealsAll");
   const btn=document.getElementById("openCompanyDeals");
   if(!host||!btn) return;
+  /* ПРЕВЬЮ УХОДИТ, КОГДА СПИСОК РАСКРЫТ. До 19 сентября 2026 две сделки из
+     превью оставались на месте, а раскрытый список начинался с них же —
+     читатель видел первые две дважды подряд и читал это как задвоение базы
+     (Артём прислал этот баг дважды). Прятать надо именно превью, а не резать
+     список: он озаглавлен «Все сделки с участием X», и показывать в нём «все,
+     кроме двух» значило бы сделать заголовок неправдой. */
+  const preview=document.querySelector(".company-deals-preview");
   if(host.dataset.open==="1"){
     host.innerHTML=""; host.dataset.open="0";
+    if(preview) preview.hidden=false;
     btn.textContent=btn.dataset.labelClosed;
     btn.setAttribute("aria-expanded","false");
     return;
@@ -5427,6 +5580,7 @@ function openCompanyDealsDialog(id){
   const mentionsHtml=rows.mentioned.length?`<details class="deal-mentions-toggle"><summary>Упоминания в источниках (${rows.mentioned.length})</summary><div class="deal-list-note">Здесь собраны публикации, где компания названа, но её роль — покупатель, продавец или предмет сделки — ещё не подтверждена.</div>${rows.mentioned.map(x=>`<div class="deal-list-item"><span class="date">${fmtDate(x.date)}</span><span><a class="title" href="${x.href}" ${!String(x.href).startsWith("#")?'target="_blank" rel="noopener"':""}>${esc(x.title)}</a><div class="meta">Источник: ${esc(x.source)}${String(x.href).startsWith("#")?"":" ↗"}</div></span></div>`).join("")}</details>`:"";
   host.innerHTML=`<div class="deal-list-open"><div class="deal-list-open-head">Все сделки с участием ${esc(c.name)}</div>${confirmedHtml}${mentionsHtml}</div>`;
   host.dataset.open="1";
+  if(preview) preview.hidden=true;
   btn.textContent="Свернуть список";
   btn.setAttribute("aria-expanded","true");
 }
@@ -5446,6 +5600,47 @@ const fnsDelta = (current,previous) => {
   if(current===null||previous===null||current===undefined||previous===undefined||Number(previous)===0) return "";
   const pct=(Number(current)-Number(previous))/Math.abs(Number(previous))*100;
   return `${pct>=0?"↑":"↓"} ${Math.abs(pct).toLocaleString("ru-RU",{maximumFractionDigits:1})}% за год`;
+};
+/* Посчитанные показатели за последний год отчётности. Сервер присылает их
+   уже готовыми — числом, подписью и объяснением, как посчитано
+   (`company_finance.derive`); здесь только вёрстка. Формулы сюда не
+   переносим: две копии правил в Python и JS уже разъезжались, см. «Слой
+   фактов» в CLAUDE.md. Показателя, которому не хватило строки отчётности,
+   в ответе нет вовсе — прочерк читался бы как «посчитали, вышло ноль». */
+/* Виды записей ЕГРЮЛ — подписи и порядок кнопок. Сами виды выводит сервер
+   (`_change_kind` в main.py): у записи нет собственного поля «тип», он
+   выводится из человеческой фразы внутри неё, и делать это в двух местах
+   нельзя — правила разъезжаются (см. «Слой фактов» в CLAUDE.md). */
+const CHANGE_KIND_LABELS = {license:"Лицензии", charter:"Учредительные документы",
+  registry:"Сведения в ЕГРЮЛ", tax:"Налоговый учёт", funds:"Страховые взносы"};
+const CHANGE_KIND_ORDER = ["license","charter","registry","tax","funds"];
+const fnsDerivedHtml = (report) => {
+  const d = report && report.derived;
+  if(!d || !d.metrics || !d.metrics.length) return "";
+  /* Единица измерения решает и подпись: «×2,5» — это отношение, а «192 дн.» —
+     срок, и знак умножения перед сроком читался бы как ошибка. */
+  const value = m => m.kind==="money" ? fnsMoney(m.value_rub)
+    : m.kind==="percent" ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:1})}%`
+    : (m.unit && m.unit!=="x")
+      ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}&nbsp;${esc(m.unit)}`
+      : `×${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}`;
+  const card = m => `<div class="d"><span class="k">${esc(m.label)}</span><div class="v num">${value(m)}</div><div class="how">${esc(m.how)}</div></div>`;
+  const main = d.metrics.filter(m=>m.primary), rest = d.metrics.filter(m=>!m.primary);
+  const groups=[];
+  rest.forEach(m=>{
+    const g=groups.find(x=>x.title===m.group);
+    (g||groups[groups.push({title:m.group,items:[]})-1]).items.push(m);
+  });
+  const plural = n => n%10===1&&n%100!==11 ? "показатель"
+    : [2,3,4].includes(n%10)&&![12,13,14].includes(n%100) ? "показателя" : "показателей";
+  return `<p class="fns-derived-group" style="margin-top:0">Главное по отчётности за ${report.year} год</p>`
+    + `<div class="fns-derived">${main.map(card).join("")}</div>`
+    + (rest.length
+        ? `<button class="chip" data-fns-more="1" style="margin:12px 0 4px">Ещё ${rest.length} ${plural(rest.length)}</button>`
+          + `<div class="fns-derived-rest" hidden>${groups.map(g=>
+              `<p class="fns-derived-group">${esc(g.title)}</p><div class="fns-derived">${g.items.map(card).join("")}</div>`).join("")}</div>`
+        : "")
+    + (d.notes||[]).map(n=>`<p class="fns-note">${esc(n)}</p>`).join("");
 };
 const fnsChart = (reports,key,label) => {
   const rows=[...(reports||[])].filter(r=>Number.isFinite(Number(r[key]))).sort((a,b)=>a.year-b.year);
@@ -5636,7 +5831,7 @@ async function mountCompanyFns(companyId){
     mount.innerHTML=`<div class="fns-empty reveal">${esc(data.reason||"Финансовые данные появятся после проверки соответствующего юридического лица.")}</div>`;
     return;
   }
-  let entityIndex=0, tab=isBank?"registry":"overview";
+  let entityIndex=0, tab=isBank?"registry":"overview", changeKind="all";
   const draw=()=>{
     const entry=data.entities[entityIndex], e=entry.entity, reports=entry.reports||[];
     const latest=reports[0]||{}, prev=reports[1]||{};
@@ -5676,6 +5871,8 @@ async function mountCompanyFns(companyId){
       <div class="fns-registry">${registryRows.slice(0,6).map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div>`;
     if(tab==="finance") content=hasAnyFinancialData?`
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
+      ${fnsDerivedHtml(latest)}
+      <p class="fns-derived-group">Отчётность по годам</p>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
       ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы доступна по подписке.</div>`:""}
@@ -5688,16 +5885,70 @@ async function mountCompanyFns(companyId){
        проверен живым запросом — её не трогаем. */
     if(tab==="ownership") content=ownershipHtml(entry.ownership);
     if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
-    if(tab==="changes") content=entry.events.length?entry.events.map(ev=>`<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`).join(""):`<div class="fns-empty">История изменений в полученных данных пока отсутствует.</div>`;
+    /* Изменений в ЕГРЮЛ у живой компании бывают десятки, и все они одинаково
+       подробные: список на два экрана прокрутки закрывал собой всё остальное
+       на вкладке. Показываем три свежих, остальные — по кнопке (замечание
+       Ксюши, 19 сентября 2026). */
+    const evRow = ev => `<div class="fns-event"><span class="label num">${ev.date?fmtDate(ev.date):"Дата не указана"}</span><div><b>${esc(ev.type||CHANGE_KIND_LABELS[ev.kind]||"Изменение в ЕГРЮЛ")}</b><br><span style="color:var(--muted)">${esc(ev.text)}</span></div></div>`;
+    if(tab==="changes"){
+      /* Фильтр по виду записи (просьба Ксюши: «покажи только лицензии»).
+         Кнопки рисуются ТОЛЬКО для видов, которые реально встречаются у этой
+         компании, и только если их больше одного: выбор из одного пункта —
+         не выбор, а шум. Незнакомые формулировки ни в какой вид не
+         записываются и видны всегда — придуманная категория хуже её
+         отсутствия. */
+      const evs0=entry.events;
+      const counts={};
+      evs0.forEach(e=>{ if(e.kind) counts[e.kind]=(counts[e.kind]||0)+1; });
+      const kinds=CHANGE_KIND_ORDER.filter(k=>counts[k]);
+      if(kinds.length<2 || !counts[changeKind]) changeKind="all";
+      const evs = changeKind==="all" ? evs0 : evs0.filter(e=>e.kind===changeKind);
+      const head=evs.slice(0,3), tail=evs.slice(3);
+      const filterBar = kinds.length>1
+        ? `<div class="fns-entity-switch" style="padding:0 0 14px">${
+            [["all",`Все (${evs0.length})`]].concat(kinds.map(k=>[k,`${CHANGE_KIND_LABELS[k]} (${counts[k]})`]))
+              .map(([k,label])=>`<button class="chip ${k===changeKind?"on":""}" data-chkind="${k}">${esc(label)}</button>`).join("")
+          }</div>`
+        : "";
+      content = filterBar + (evs.length
+        ? head.map(evRow).join("")
+          + (tail.length
+              ? `<button class="chip" id="moreEvents" style="margin-top:14px">Ещё ${tail.length} ${plural(tail.length,"изменение","изменения","изменений")}</button><div id="moreEventsBox" hidden>${tail.map(evRow).join("")}</div>`
+              : "")
+        : `<div class="fns-empty">${changeKind==="all"
+             ? "История изменений в полученных данных пока отсутствует."
+             : "Записей этого вида у компании нет."}</div>`);
+    }
     const tabs = isBank
       ? [["registry","ЕГРЮЛ"],["ownership","Участники"],["changes","Изменения"]]
       : [["overview","Обзор"],["ownership","Участники"],["finance","Финансы"],["registry","ЕГРЮЛ"],["changes","Изменения"]];
     mount.innerHTML=bankHtml+`<section class="fns-shell reveal">
-      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>${isBank?"Реквизиты и ЕГРЮЛ":"Финансы и ЕГРЮЛ"}</h2></div>${sourceBadge("Источник: ФНС", e.inn?`https://bo.nalog.gov.ru/search?query=${encodeURIComponent(e.inn)}`:"", "Открыть отчётность этого юрлица в ГИР БО ФНС")}</div>
+      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>${isBank?"Реквизиты и ЕГРЮЛ":"Отчётность и реестр"}</h2></div>${sourceBadge("Источник: ФНС", e.inn?`https://bo.nalog.gov.ru/search?query=${encodeURIComponent(e.inn)}`:"", "Открыть отчётность этого юрлица в ГИР БО ФНС")}</div>
       ${data.entities.length>1?`<div class="fns-entity-switch">${data.entities.map((x,i)=>`<button class="chip ${i===entityIndex?"on":""}" data-fnsentity="${i}">${esc(x.entity.short_name||x.entity.legal_name)}</button>`).join("")}</div>`:""}
       <div class="fns-tabs">${tabs.map(([k,label])=>`<button data-fnstab="${k}" class="${tab===k?"on":""}">${label}</button>`).join("")}</div>
       <div class="fns-body">${content}<p class="fns-disclaimer">${esc(isBank?"Реквизиты — по данным ЕГРЮЛ. Показатели банка выше — по данным Банка России: банки отчитываются перед ним, а не в общем порядке.":(data.disclaimer||""))} Данные обновлены ${e.fetched_at?new Date(e.fetched_at).toLocaleDateString("ru-RU"):"по последней синхронизации"}.</p></div>
     </section>`;
+    /* Показатели второго ряда прячутся не насовсем: кнопка раскрывает их на
+       месте, не перерисовывая вкладку, — иначе прокрутка прыгала бы к началу. */
+    mount.querySelectorAll("[data-chkind]").forEach(b=>b.onclick=()=>{changeKind=b.dataset.chkind;draw();});
+    const moreEvents = mount.querySelector("#moreEvents");
+    if(moreEvents){
+      const closedText = moreEvents.textContent;
+      moreEvents.onclick=()=>{
+        const box=mount.querySelector("#moreEventsBox"); if(!box) return;
+        box.hidden=!box.hidden;
+        moreEvents.textContent = box.hidden ? closedText : "Свернуть";
+      };
+    }
+    const moreBtn = mount.querySelector("[data-fns-more]");
+    if(moreBtn){
+      const closedText = moreBtn.textContent;   // «Ещё N показателей» — запоминаем ДО первого клика
+      moreBtn.onclick=()=>{
+        const box=mount.querySelector(".fns-derived-rest"); if(!box) return;
+        box.hidden=!box.hidden;
+        moreBtn.textContent = box.hidden ? closedText : "Свернуть";
+      };
+    }
     mount.querySelectorAll("[data-fnstab]").forEach(b=>b.onclick=()=>{tab=b.dataset.fnstab;draw();});
     mount.querySelectorAll("[data-fnsentity]").forEach(b=>b.onclick=()=>{entityIndex=Number(b.dataset.fnsentity);tab=isBank?"registry":"overview";draw();});
     const fullLinesBtn=document.getElementById("toggleFullLines");
@@ -5767,7 +6018,8 @@ function factsVerifiedHtml(d){
   if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st)+(st.quote?` — «${esc(st.quote)}»`:""));
   if(factVerified(dt) && dt.value) rows.push(`дата (${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"})`+src(dt)+(dt.quote?` — «${esc(dt.quote)}»`:""));
   if(!rows.length) return "";
-  return `<div class="fact-verified"><span class="label">Проверено по источникам</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`;
+  return `<div class="fact-verified"><span class="label">Подтверждено цитатой из источника</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`
+    + `<p class="fact-note">Так помечены числа, которые двое читателей независимо нашли в источнике дословно. У остальных сделок такой пометки нет — это значит, что до них ещё не дошли, а не что с ними что-то не так.</p>`;
 }
 const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подписание", announcement:"объявление", publication:"дата сообщения о закрытии", registry:"запись в ЕГРЮЛ"};
 const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",
@@ -6117,13 +6369,22 @@ function renderCompany(id){
       </div>`;
     })()}
   </div>
-  <div class="deal-tools company-tools reveal"><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
+  <div class="deal-tools company-tools reveal"><button class="chip" id="followCompany">${isFollowed(id)?"Не следить за компанией":"Следить за сделками компании"}</button><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   <div class="company-profile-meta reveal">
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
-  <div id="fns-company"></div>
+  <!-- СДЕЛКИ ВЫШЕ ОТЧЁТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
+       справка о стороне сделки, а не главное на странице. Блок с пятью
+       вкладками стоял выше и занимал целый экран, так что до списка сделок
+       читатель доходил прокруткой и находил его случайно (Ксюша и Артём —
+       по отдельности, 19 сентября 2026: «поднять наверх, рядом с
+       Обзор/Участники/Финансы»). Вкладкой в тот ряд сделки поставить нельзя:
+       ряд рисуется только у компаний с сопоставленным юрлицом, и у остальных
+       список сделок исчез бы вовсе. Перестановка даёт то же самое и работает
+       для всех. -->
   ${companyDealsCompactHtml(id,structured,mentions)}
+  <div id="fns-company"></div>
   ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   const compareButton=document.getElementById("compareCompany");
@@ -6133,6 +6394,18 @@ function renderCompany(id){
     compareButton.textContent=result.selected?"Убрать из сравнения":"Добавить к сравнению";
     if(note)note.textContent=result.selected?"Компания добавлена. Выберите ещё одну или две.":"Компания убрана из сравнения.";
     renderCompareTray();
+  };
+  const followButton=document.getElementById("followCompany");
+  if(followButton) followButton.onclick=async()=>{
+    followButton.disabled=true;
+    const on=await toggleFollowedCompany(id);
+    followButton.disabled=false;
+    followButton.textContent=on?"Не следить за компанией":"Следить за сделками компании";
+    const note=document.getElementById("compareCompanyNote");
+    if(note) note.innerHTML = on
+      ? (ME ? "Сообщим о новых сделках этой компании."
+            : `Отмечено в этом браузере. <a href="#/account">Войдите</a>, чтобы получать сообщения.`)
+      : "";
   };
   const openCompanyDeals=document.getElementById("openCompanyDeals");
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
@@ -6460,6 +6733,11 @@ function renderIndustry(ind){
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
+    <!-- Подписка на отрасль работала и раньше, но нажать её можно было только
+         в ленте сделок под названием «Сохранить подборку» — то есть не там,
+         где её ищут. Здесь она называется тем, что делает. -->
+    <button class="chip" id="followInd">${industrySub(ind)?"Не следить за отраслью":"Следить за сделками отрасли"}</button>
+    <span class="tool-note" id="followIndNote"></span>
   </div>
   <div class="an-grid">
     <div class="an-card reveal">
@@ -6506,6 +6784,21 @@ function renderIndustry(ind){
     </div>`:""}
   </div>
   ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
+  const followInd=document.getElementById("followInd");
+  if(followInd) followInd.onclick=async()=>{
+    const note=document.getElementById("followIndNote");
+    if(!ME){
+      if(note) note.innerHTML=`<a href="#/account">Войдите</a>, чтобы получать сообщения о новых сделках отрасли.`;
+      return;
+    }
+    followInd.disabled=true;
+    const on=await toggleIndustrySub(ind);
+    followInd.disabled=false;
+    followInd.textContent=on?"Не следить за отраслью":"Следить за сделками отрасли";
+    if(note) note.innerHTML = on
+      ? `Сообщим о новых сделках отрасли. Все подписки — в <a href="#/account?tab=subscriptions">кабинете</a>.`
+      : "";
+  };
   mountMiniAI(ind,"industry",ind);
 }
 
@@ -6817,17 +7110,17 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки может быть две отрасли, и такая сделка посчитана в каждой — поэтому сумма по отраслям больше числа сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки бывает две отрасли, и тогда она попадает в обе — поэтому сумма по отраслям больше общего числа сделок.</p>
     </div>
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут подтверждены чтением источников — пока ни одна не прошла проверку и ждёт проверки.</p>`}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена названа в тексте карточки и ждёт проверки чтением`:""}. Только покупки (M&A и продажа с торгов), где цена названа сторонами в рублях и прочитана в источнике, — таких ${rubDisclosed}. Не в счёт: финансирование и инвестиционные раунды, IPO (у размещения сумма — то объём размещения, то оценка компании), оценки экспертов и неофициальные цифры, валютные суммы, стартовые цены незакрытых торгов и цены сорвавшихся сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена есть в тексте карточки, но мы пока не сверили её с источником`:""}. Здесь только покупки бизнеса — включая покупку с торгов, — у которых цену назвали сами стороны в рублях и мы сверили её с источником. Таких ${rubDisclosed}. Не вошли: привлечение инвестиций и раунды финансирования, IPO (там сумма — это либо объём размещения, либо оценка всей компании), оценки аналитиков и цифры без официального подтверждения, суммы в валюте, стартовые цены незавершённых торгов и цены сорвавшихся сделок.</p>
     </div>
     <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>
@@ -6874,7 +7167,7 @@ function renderAnalytics(){
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}, где цена названа сторонами в рублях и прочитана в источнике. Сделка с двумя отраслями посчитана в каждой, поэтому столбцы нельзя складывать в общий объём рынка. Только покупки: IPO, финансирование и инвестиционные раунды, оценки экспертов, неофициальные и валютные суммы не учитываются.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
@@ -7313,14 +7606,31 @@ async function renderAssistant(){
      только когда закрыто заметно много (клавиатура, а не полоса браузера). */
   const fitKeyboard=()=>{
     const vv=window.visualViewport; if(!vv||!shell.isConnected) return;
-    const covered=Math.max(0, window.innerHeight-vv.height);
+    /* Поправка нужна, только пока клавиатура ОТКРЫТА, то есть пока курсор
+       стоит в поле. Без этой проверки блок оставался сжатым после того, как
+       клавиатура уже убралась, — поле ввода уезжало за нижний край, и
+       напечатать новое сообщение было нельзя до перезагрузки страницы
+       (Ксюша, iPad, 19 сентября 2026). Сам по себе `resize` этого не ловил:
+       на iPad при прокрутке с открытой клавиатурой Safari шлёт `scroll`, а
+       `resize` — не всегда, и `covered` застревал на старом значении. */
+    const typing = document.activeElement
+      && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)
+      && shell.contains(document.activeElement);
+    const covered = typing ? Math.max(0, window.innerHeight - vv.height) : 0;
     shell.style.height = covered>120 ? `calc(100svh - 65px - ${Math.round(covered)}px)` : "";
   };
   if(window.visualViewport){
-    if(chatViewportFit) window.visualViewport.removeEventListener("resize", chatViewportFit);
+    if(chatViewportFit){
+      window.visualViewport.removeEventListener("resize", chatViewportFit);
+      window.visualViewport.removeEventListener("scroll", chatViewportFit);
+    }
     chatViewportFit=fitKeyboard;
     window.visualViewport.addEventListener("resize", chatViewportFit);
+    window.visualViewport.addEventListener("scroll", chatViewportFit);
   }
+  // Курсор ушёл из поля — клавиатура убирается, высоту возвращаем. Ждём кадр:
+  // в момент focusout клавиатура ещё на экране, и vv.height прежний.
+  shell.addEventListener("focusout", ()=>setTimeout(fitKeyboard, 60));
   // Смена режима переспрашивает тот же вопрос — см. bindModeToggles.
   bindModeToggles(app, ()=>{ if(lastQ) answer(lastQ); });
   renderThreadList();
@@ -7357,6 +7667,11 @@ async function refreshMe(){
     ME = data.logged_in ? data : null;
     GATE = !!data.gate;
   }catch(e){ ME = null; if(GATE === null) GATE = false; }
+  // Подписки — вместе с профилем: сердечко в каталоге и кнопки на профиле
+  // компании и на странице отрасли рисуются по ним, и спрашивать сервер на
+  // каждый клик не нужно. Сердечки, нажатые до входа, переезжают на сервер.
+  await loadSubs();
+  if(ME) await syncLocalFollows();
   // Первый ответ /api/me — тот, которого ждал стартовый route(): теперь
   // известно, показывать сайт или экран входа.
   if(firstAnswer) route();
@@ -7570,10 +7885,10 @@ async function renderAccount(qs){
     body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
     const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
       const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
-      const tgDesc = !p.telegram_available ? "Скоро доступно — бот ещё не настроен."
+      const tgDesc = !p.telegram_available ? "Скоро будет доступно — бот ещё не настроен."
         : p.telegram_connected ? "Подключён — сюда же придёт и еженедельная сводка, если она включена."
         : "Нажмите «Подключить» ниже: откроется чат с ботом в Telegram, останется один раз нажать Start — вводить ничего не нужно.";
-      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро будет доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро будет доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
       document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
       const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
     };
@@ -7581,9 +7896,21 @@ async function renderAccount(qs){
     document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
     loadPrefs();loadNotifications();
   }else if(tab==="subscriptions"){
-    body.innerHTML=`<div class="acct-card reveal"><span class="label">Сделки, за которыми вы следите</span><div id="watchList"><p class="acct-note">Загружаем…</p></div></div><div class="acct-card reveal" style="margin-top:18px"><span class="label">Подборки по рынку</span><div id="subList"><p class="acct-note">Загружаем…</p></div><div class="acct-newsub"><select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select><input type="text" id="subKw" placeholder="Ключевое слово"><input type="number" id="subMin" placeholder="От суммы, млн ₽" min="0"><button class="chip" id="subAdd">Добавить</button></div></div>`;
+    body.innerHTML=`<div class="acct-card reveal"><span class="label">Сделки, за которыми вы следите</span><div id="watchList"><p class="acct-note">Загружаем…</p></div></div><div class="acct-card reveal" style="margin-top:18px"><span class="label">Компании и отрасли, за которыми вы следите</span><div id="subList"><p class="acct-note">Загружаем…</p></div><div class="acct-newsub"><select id="subInd"><option value="">Любая отрасль</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option>${i}</option>`).join("")}</select><input type="text" id="subKw" placeholder="Ключевое слово"><input type="number" id="subMin" placeholder="От суммы, млн ₽" min="0"><button class="chip" id="subAdd">Добавить</button></div><p class="acct-note" style="margin-top:10px">За компанией проще следить с её страницы — кнопкой «Следить за сделками компании».</p></div>`;
     const drawWatches=async()=>{const r=await fetch("/api/deal-watches"),rows=r.ok?await r.json():[];document.getElementById("watchList").innerHTML=rows.length?rows.map(w=>`<div class="acct-row"><a href="#/deal/${w.deal_id}">${esc(w.title)}</a><span class="del" data-unwatch="${w.deal_id}">Отключить</span></div>`).join(""):`<p class="acct-note">Вы пока не подписаны ни на одну конкретную сделку.</p>`;document.querySelectorAll("[data-unwatch]").forEach(el=>el.onclick=async()=>{await fetch(`/api/deals/${el.dataset.unwatch}/watch`,{method:"DELETE"});drawWatches();});};
-    const drawSubs=async()=>{const r=await fetch("/api/subscriptions"),rows=r.ok?await r.json():[];const list=document.getElementById("subList");list.innerHTML=rows.length?rows.map(x=>`<div class="acct-row"><span>${esc(x.industry||"Любая отрасль")}${x.keyword?` · «${esc(x.keyword)}»`:""}${x.min_amount_mln_rub?` · от ${x.min_amount_mln_rub} млн ₽`:""}</span><span class="del" data-del="${x.id}">Удалить</span></div>`).join(""):`<p class="acct-note">Подборок пока нет.</p>`;list.querySelectorAll("[data-del]").forEach(el=>el.onclick=async()=>{await fetch(`/api/subscriptions/${el.dataset.del}`,{method:"DELETE"});drawSubs();});};
+    /* Название подписки — то, на что человек подписался, а не перечень
+       заполненных полей: «Магнит» читается, «Любая отрасль · «Магнит»» — нет.
+       Компания идёт ссылкой на свою страницу: оттуда её и отключают. */
+    const subTitle=x=>{
+      const parts=[];
+      if(x.company_id) parts.push(`<a href="#/companies/${encodeURIComponent(x.company_id)}">${esc(x.company_name||"компания")}</a>`);
+      if(x.industry) parts.push(`отрасль «${esc(x.industry)}»`);
+      if(x.keyword) parts.push(`упоминание «${esc(x.keyword)}»`);
+      if(!parts.length) parts.push("все сделки");
+      if(x.min_amount_mln_rub) parts.push(`от ${x.min_amount_mln_rub} млн ₽`);
+      return parts.join(" · ");
+    };
+    const drawSubs=async()=>{const rows=await loadSubs();const list=document.getElementById("subList");list.innerHTML=rows.length?rows.map(x=>`<div class="acct-row"><span>${subTitle(x)}</span><span class="del" data-del="${x.id}">Удалить</span></div>`).join(""):`<p class="acct-note">Вы пока ни за кем не следите. Отметьте компанию на её странице или добавьте отрасль ниже — будем сообщать о новых сделках.</p>`;list.querySelectorAll("[data-del]").forEach(el=>el.onclick=async()=>{await fetch(`/api/subscriptions/${el.dataset.del}`,{method:"DELETE"});drawSubs();});};
     document.getElementById("subAdd").onclick=async()=>{const industry=document.getElementById("subInd").value||null,keyword=document.getElementById("subKw").value.trim()||null,min=document.getElementById("subMin").value;if(!industry&&!keyword){alert("Укажите отрасль или ключевое слово");return;}await fetch("/api/subscriptions",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({industry,keyword,min_amount_mln_rub:min?Number(min):null})});document.getElementById("subKw").value="";document.getElementById("subMin").value="";drawSubs();};
     drawWatches();drawSubs();
   }else{

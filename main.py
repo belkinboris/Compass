@@ -11,9 +11,12 @@ LLM: DeepSeek 4 Flash через Yandex AI Studio Responses API.
 Требуются YANDEX_API_KEY и YANDEX_FOLDER_ID; без них фронтенд
 работает в демо-режиме (fallback=true).
 """
+import functools
+import hashlib
 import json
 import logging
 import os
+import pathlib
 import re
 import threading
 import time
@@ -28,9 +31,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 
+import assistant_policy
 import assistant_retrieval
 import auth
 import base_data
+import company_finance
 import data_refresh
 import deal_catalog
 import deal_multiples
@@ -50,7 +55,7 @@ from db.models import (
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
 from db.session import engine, get_session
-from fns_client import ApiFnsClient, ApiFnsError, full_lines_payload
+from fns_client import ApiFnsClient, ApiFnsError, change_text, full_lines_payload
 from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
 from sqlalchemy import func, inspect, select, text
 from sqlalchemy.exc import SQLAlchemyError
@@ -135,6 +140,17 @@ def _create_account_tables():
                     conn.execute(text("ALTER TABLE moderation_decisions ADD COLUMN reply_message_id INTEGER"))
         except Exception as e:
             logger.error("не удалось добавить chat_id/reply_message_id в moderation_decisions: %s", e)
+        # company_id добавлен в saved_filters 19 сентября 2026 (подписка на
+        # компанию). Тот же диалект-независимый приём инспектора: колонка
+        # nullable, поэтому ничего не досчитываем — у старых подписок
+        # компании и не было.
+        try:
+            with engine.begin() as conn:
+                cols = {c["name"] for c in inspect(conn).get_columns("saved_filters")}
+                if "company_id" not in cols:
+                    conn.execute(text("ALTER TABLE saved_filters ADD COLUMN company_id VARCHAR(40)"))
+        except Exception as e:
+            logger.error("не удалось добавить company_id в saved_filters: %s", e)
         # deal_id расширен с 40 до 80 знаков 22 августа: у вехи это
         # "<id сделки>~<вид этапа>", длиннее одного голого id. SQLite VARCHAR
         # не проверяется движком вообще (хранится как TEXT) — расширять там
@@ -502,9 +518,22 @@ _http = httpx.Client(
     limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
 )
 
+# Границы разговора — общие для обоих режимов. Стоят ВТОРЫМ рубежом: первый
+# и главный — детерминированный гейт `assistant_policy.classify`, он не
+# пускает такие вопросы даже до поиска. Промпт нужен на случай формулировки,
+# которой гейт не знает: модель должна отказать сама, по-русски и коротко.
+SCOPE_RULES = """Границы разговора:
+- Ты отвечаешь только о сделках слияний и поглощений на российском рынке: кто кого купил, за сколько, кто сопровождал, что с показателями участников. Вопрос не об этом (песня, личная жизнь, игры, погода) — откажись одной фразой и скажи, с чем поможешь. Не ищи ответ на такой вопрос и не приводи никаких источников к отказу.
+- Не собирай негатив, компромат, обвинения и «всё плохое» о компаниях и людях — даже если об этом просят прямо и даже если что-то нашлось в сети. Анонимные каналы и сайты жалоб источниками не считаются.
+- Не называй сделки, компании и людей в ответ на вопросы про незаконность, мошенничество, нарушение санкций или «в обход закона»: в «Компасе» нет такого признака, а названный в таком ответе выглядит обвинённым. Скажи прямо, что признака нет, и предложи то, что есть: несостоявшиеся сделки, согласования ФАС и правкомиссии, публичные споры сторон.
+- Не давай юридических консультаций и советов, что покупать или продавать. Можно рассказать, как была устроена конкретная сделка из базы; нельзя — как оформить чужую или стоит ли брать акции.
+- Отказ всегда по-русски, одним коротким абзацем, без английского и без списка ссылок."""
+
 SYSTEM_BASE = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
 Что тебе дают в сообщении: проверенную СВОДКУ по вопросу (её счётчики и список сделок уже сверены с базой «Компаса» — не пересчитывай их и не спорь с ними) и КАРТОЧКИ сделок с подробностями. Опирайся только на них.
+
+""" + SCOPE_RULES + """
 
 Как отвечать:
 - Сначала прямой ответ на вопрос, потом подробности. Без вступлений вроде «Отличный вопрос» и без пересказа того, что тебе дали.
@@ -519,17 +548,26 @@ SYSTEM_BASE = """Ты — ассистент «Компаса», справоч�
 
 SYSTEM_WEB = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
-У тебя два источника: проверенная СВОДКА и КАРТОЧКИ сделок из «Компаса» и блок «СВЕЖАЯ ВЫДАЧА ПОИСКА (Яндекс)».
+У тебя два источника, и они НЕ равны по весу: проверенная СВОДКА и КАРТОЧКИ сделок из «Компаса» — это основа ответа, а блок «СВЕЖАЯ ВЫДАЧА ПОИСКА (Яндекс)» — дополнение к ней.
+
+ПОРЯДОК РАБОТЫ — СНАЧАЛА «КОМПАС», ПОТОМ СЕТЬ:
+1. Посмотри, что по вопросу уже знает «Компас» — сводка, карточки и источники, которые к этим сделкам уже привязаны. Если ответ там есть, он и есть ответ.
+2. Выдачу поиска бери, чтобы дополнить и проверить: свежие подробности, чего в «Компасе» ещё нет, расхождения в цифрах. Расхождение — само по себе важный факт, назови его.
+3. Если «Компас» по вопросу молчит, а в сети что-то есть — так и скажи: «в «Компасе» такой сделки нет, в открытых источниках пишут…». Не выдавай найденное в сети за данные «Компаса».
 
 ГЛАВНОЕ: от тебя ждут вывод, а не пересказ выдачи со ссылками. Читатель и сам видит ссылки — ценность в том, что ты их сопоставил.
 Как построить ответ:
 1. Первым абзацем — прямой ответ одной-двумя фразами: что произошло, кто участники, какая сумма. Без предисловий.
-2. Дальше — существенные детали и связи: продолжение ли это истории, которая уже есть в «Компасе», сходятся ли цифры разных источников. Расхождение источников — само по себе важный факт, назови его.
+2. Дальше — существенные детали и связи: продолжение ли это истории, которая уже есть в «Компасе», сходятся ли цифры разных источников.
 3. Если из фактов следует осторожность (сумма только по оценке, сделка не закрыта, сторона не раскрыта) — скажи об этом прямо.
+
+""" + SCOPE_RULES + """
 
 Достоверность:
 - Факты — только из сводки, карточек и выдачи. Ничего сверх этого не добавляй.
 - Каждый факт из выдачи сопровождай ссылкой [название источника](URL) — URL из строки «Источник:».
+- Оценивай сами источники: деловое издание, сайт компании, реестр — годятся; анонимные телеграм-каналы, сайты отзывов и жалоб, форумы — нет, на них не ссылайся и выводов из них не делай.
+- Выдача не по теме вопроса (поиск принёс не то) — не притягивай её за уши: лучше честно сказать, что ничего относящегося к делу не нашлось.
 - Чётко различай, что известно «Компасу», а что найдено в сети.
 - Сделки «Компаса» давай ссылкой [название сделки](#/deal/ID); ID отдельно не показывай.
 - Нет данных ни там, ни там — так и скажи, коротко.
@@ -578,9 +616,36 @@ def _yandex_ready() -> bool:
 # «HEAD /», получала 405, считала приложение мёртвым и перезапускала контейнер
 # по кругу; живого процесса за прокси не было, и он даже не смог отдать
 # сертификат — снаружи это выглядело как «сломался HTTPS», а не как 405.
+# КАКОЙ КОД СЕЙЧАС НА САЙТЕ — ЭТО ДОЛЖЕН БЫТЬ ОДИН ЗАПРОС, А НЕ РАССЛЕДОВАНИЕ.
+# 19 сентября 2026 выкладка встала: за день в git уехало восемь коммитов, а
+# сайт продолжал отдавать сборку 18-го — в том числе без гейта, который
+# перестаёт отвечать на «найди компромат на X». Чтобы это увидеть, пришлось
+# сравнивать размер index.html, искать в нём признаки отдельных коммитов и
+# в конце спрашивать сам ассистент. Теперь отпечаток отдаёт /health.
+#
+# Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развёрнутом
+# контейнере каталога .git может не быть вовсе, а файлы есть всегда. Для
+# сравнения «сайт и репозиторий совпадают» этого достаточно — рутине не
+# нужно знать номер коммита, ей нужно знать, тот же это код или нет.
+_BUILD_FILES = ("main.py", "static/index.html")
+
+
+@functools.lru_cache(maxsize=1)
+def build_fingerprint() -> dict:
+    """Короткий отпечаток выложенного кода: по восемь знаков на файл."""
+    out = {}
+    for name in _BUILD_FILES:
+        try:
+            data = (pathlib.Path(__file__).resolve().parent / name).read_bytes()
+            out[name] = hashlib.sha256(data).hexdigest()[:8]
+        except OSError:
+            out[name] = None
+    return out
+
+
 @app.api_route("/health", methods=["GET", "HEAD"])
 def health():
-    return {"status": "ok", "ai": _yandex_ready()}
+    return {"status": "ok", "ai": _yandex_ready(), "build": build_fingerprint()}
 
 
 def _extract_text(data: dict) -> str:
@@ -835,6 +900,16 @@ def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
 def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     started = time.monotonic()
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    # ПОЛИТИКА — ПЕРВЫМ ДЕЛОМ, до поиска по базе, до Яндекса и до модели.
+    # «Найди компромат на X», «какие сделки незаконны», «нужно ли заверять
+    # ДКП у нотариуса», «стоит ли покупать акции» дальше этой строки не
+    # проходят: ни запроса в интернет, ни ответа модели, ни списка
+    # источников рядом с отказом (см. докстроку assistant_policy).
+    verdict = assistant_policy.classify(question)
+    if verdict.refused:
+        logger.info("ассистент: отказ по политике (%s)", verdict.kind)
+        return {"answer": verdict.answer, "deals": [], "intent": "refused",
+                "refused": verdict.kind, "model": False}
     # История — ДО поиска по базе: уточняющий вопрос ищется вместе с
     # предыдущим (см. assistant_retrieval.retrieve, `previous`).
     user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
@@ -866,9 +941,19 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     try:
         text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens, deadline=deadline)
         text = _polish_answer(text, idx)
+        # Ссылок в ответе нет по двум совершенно разным причинам, и до
+        # 19 сентября 2026 код различал их неверно. «Модель забыла
+        # процитировать» — подставить источники правильно. «Модель ОТКАЗАЛАСЬ
+        # отвечать» (вопрос не про рынок) — подставлять нечего: к отказу
+        # отвечать на вопрос про знакомства прилетели ссылки на форумы
+        # «Отношения с бывшим зеком», к отказу про hostile takeover — вики по
+        # видеоигре. Отказ со списком случайных ссылок читается как ответ.
         if search_block and not _MD_LINK_RE.search(text):
-            logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
-            text += _sources_footer(results)
+            if assistant_policy.looks_like_refusal(text):
+                logger.info("web-режим: модель отказалась отвечать, источники не подставляю")
+            else:
+                logger.info("web-режим: модель не дала ссылки сама, подставляю источники")
+                text += _sources_footer(results)
         thread_id = None
         if user and req.save_thread:
             thread = None
@@ -933,6 +1018,14 @@ def assistant_lookup(req: AskRequest):
     показывает её сразу (доли секунды), пока модель дописывает живой текст:
     30–40 секунд молчания были главной жалобой на ассистента."""
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
+    # Тот же гейт, что и в /api/ask: быстрый ответ рисуется в интерфейсе
+    # СРАЗУ, и если не проверить политику здесь, посетитель на вопрос
+    # «найди компромат на X» увидит список сделок этой компании ещё до
+    # того, как придёт отказ модели.
+    verdict = assistant_policy.classify(question)
+    if verdict.refused:
+        return {"answer": verdict.answer, "deals": [], "intent": "refused",
+                "refused": verdict.kind}
     history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
                     for h in (req.history or []) if isinstance(h, dict) and h.get("body")]
     try:
@@ -974,6 +1067,13 @@ def assistant_bench(req: BenchRequest):
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
     if not question:
         return JSONResponse({"error": "нужен вопрос (question)"}, status_code=400)
+    # Стенд обязан видеть то же, что посетитель: вопрос, на который ассистент
+    # не отвечает, не должен уходить в модель и здесь — иначе стенд мерил бы
+    # поведение, которого на сайте не бывает.
+    verdict = assistant_policy.classify(question)
+    if verdict.refused:
+        return {"question": question, "refused": verdict.kind, "answer": verdict.answer,
+                "rows": [], "summary": []}
     if not _yandex_ready():
         return JSONResponse({"error": "на сервере не заданы YANDEX_API_KEY и YANDEX_FOLDER_ID — "
                                       "модель вызвать нельзя, стенд работает только там, где есть ключи"},
@@ -1252,6 +1352,7 @@ class AccountDeleteIn(BaseModel):
 
 class SubscriptionIn(BaseModel):
     industry: str | None = None
+    company_id: str | None = None
     keyword: str | None = None
     min_amount_mln_rub: float | None = None
 
@@ -1452,6 +1553,11 @@ def _report_payload(row: FinancialReport) -> dict:
     except (TypeError, ValueError):
         raw_lines = {}
     payload["full_lines"] = full_lines_payload(raw_lines)
+    # Оборотный капитал, долговая нагрузка, рентабельность — считаются здесь,
+    # на сервере, и едут готовыми числами с готовыми подписями (просьба Дани
+    # 19 сентября 2026). Клиентских копий формул нет намеренно: две копии
+    # правил в Python и JS уже разъезжались, см. «Слой фактов» в CLAUDE.md.
+    payload["derived"] = company_finance.derive(payload)
     return payload
 
 
@@ -1660,6 +1766,33 @@ def _json_or_empty(text):
         return {}
 
 
+# ВИДЫ ЗАПИСЕЙ ЕГРЮЛ — для фильтра «покажи только лицензии» (просьба Ксюши,
+# 19 сентября 2026). Собственного поля «тип» у записи нет: замер по проду
+# показал, что `event_type` пуст у 330 записей из 334. Зато человеческая
+# фраза внутри записи начинается с узнаваемого оборота, и вид выводится из
+# неё. Порядок важен: первое совпадение и есть вид.
+CHANGE_KINDS = (
+    ("license", "Лицензии", ("лиценз",)),
+    ("charter", "Учредительные документы", ("учредительн", "устав")),
+    ("registry", "Сведения в ЕГРЮЛ", ("сведений о юридическом лице", "сведения, содержащиеся в едином")),
+    ("tax", "Налоговый учёт", ("налогов",)),
+    ("funds", "Страховые взносы", ("страхователя", "пенсионн", "социальн", "страховани")),
+)
+
+
+def _change_kind(text) -> str:
+    """Вид записи ЕГРЮЛ одним словом — или пусто, если фраза незнакомая.
+    Незнакомая фраза НЕ приписывается к «прочему»: выдуманная категория в
+    фильтре хуже её отсутствия."""
+    low = change_text(text).lower()
+    if not low:
+        return ""
+    for key, _label, cues in CHANGE_KINDS:
+        if any(cue in low for cue in cues):
+            return key
+    return ""
+
+
 @app.get("/api/companies/{company_id}/fns")
 def company_fns(company_id: str, as_of_year: int | None = None, user: User | None = Depends(_current_user), db=Depends(get_db)):
     profile = get_company_profile(company_id)
@@ -1741,11 +1874,20 @@ def company_fns(company_id: str, as_of_year: int | None = None, user: User | Non
             "reports": [_report_payload(row) for row in shown_reports],
             "report_years": [row.year for row in reports],
             "stale_latest_year": stale_latest_year,
+            # `change_text` чистит и УЖЕ СОХРАНЁННЫЕ записи: до 19 сентября 2026
+            # в базу уезжал машинный слепок `{"СПВЗ": "…"}`, и читатель видел
+            # его на странице компании. Перекачивать ЕГРЮЛ ради этого не нужно
+            # — разбираем при отдаче; новые записи приходят уже чистыми.
             "events": [{
                 "id": row.id,
                 "date": _plain(row.event_date),
+                # `type` остаётся как есть (человеческий текст или пусто), а
+                # машинный ключ вида едет отдельным полем `kind`: подставить
+                # его сюда значило бы вывести на экран слово «license» —
+                # ровно тот дефект, ради которого всё это и чинилось.
                 "type": row.event_type,
-                "text": row.text,
+                "text": change_text(row.text),
+                "kind": _change_kind(row.text),
             } for row in shown_events],
             "ownership": _ownership_payload(db, entity, paid),
             "has_more_reports": len(reports) > len(shown_reports),
@@ -2759,6 +2901,7 @@ CONSOLE_TOPIC_NAMES = {
     "decision": "Подтверждение постов",   # чего-то ждёт ваше решение
     "update": "Обновления",               # отчёт рутины о прогоне
     "info": "Общая информация",           # остальное: заметки, отзывы, служебное
+    "user_notes": "Заметки от пользователей",  # уточнения с карточек сделок и из футера
 }
 
 
@@ -2812,6 +2955,7 @@ CONSOLE_TOPIC_PURPOSE = {
     "decision": "всё, что ждёт вашего решения: посты, карточки, сырьё, заявки на доступ",
     "update": "отчёты о каждом прогоне рутин",
     "info": "заметки, отзывы и служебные сообщения",
+    "user_notes": "уточнения и поправки, которые посетители сайта оставляют с карточек сделок и из футера",
 }
 
 
@@ -3391,9 +3535,60 @@ def list_webinars(db=Depends(get_db)):
 
 # ==================== Экспорт сделки ====================
 
+def _export_finance(deal: dict, db) -> list[dict]:
+    """Финансовый контекст сделки для PDF — то же, что блок на карточке.
+
+    Просьба Ксюши (19 сентября 2026): в выгрузке этого раздела не было вовсе,
+    а на карточке он есть. Отчёт уходит из рук в руки, и «за сколько купили»
+    без «сколько эта компания зарабатывает» — половина разговора.
+
+    Берём показатели ЗА ПОСЛЕДНИЙ ГОД ДО СДЕЛКИ (как и на экране): показывать
+    в отчёте о сделке 2023 года отчётность за 2025-й значило бы отвечать не на
+    тот вопрос. Юрлицо и год называются прямо — отчётность сдаётся по юрлицу,
+    а сделка заключается по группе, и подменять одно другим нельзя.
+    """
+    year_cap = None
+    date = str(deal.get("date") or "")
+    if len(date) >= 4 and date[:4].isdigit():
+        year_cap = int(date[:4])
+    rows: list[dict] = []
+    for key, role in (("target", "Покупаемая компания"), ("buyer", "Покупатель")):
+        company_id = deal.get(key)
+        if not company_id:
+            continue
+        entity = db.scalar(select(LegalEntity).where(
+            LegalEntity.company_id == company_id,
+            LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+        ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
+        if not entity:
+            continue
+        query = select(FinancialReport).where(FinancialReport.legal_entity_id == entity.id)
+        if year_cap:
+            query = query.where(FinancialReport.year <= year_cap)
+        report = db.scalar(query.order_by(FinancialReport.year.desc()))
+        if not report:
+            continue
+        profile = get_company_profile(company_id) or {}
+        rows.append({
+            "role": role,
+            # Имя из профиля базы, а не из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ
+            # ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"» капсом — нарушение правила
+            # «язык для людей», уже разобранное для экрана мультипликаторов.
+            "name": profile.get("name") or entity.short_name or entity.legal_name,
+            "legal_name": entity.legal_name,
+            "inn": entity.inn,
+            "year": report.year,
+            "revenue_rub": _plain(report.revenue_rub),
+            "net_profit_rub": _plain(report.net_profit_rub),
+            "assets_rub": _plain(report.assets_rub),
+            "equity_rub": _plain(report.equity_rub),
+        })
+    return rows
+
+
 @app.post("/api/deals/{deal_id}/export")
 def export_deal(deal_id: str, _payload: DealExportIn | None = None,
-                user: User | None = Depends(_current_user)):
+                user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user and not DEAL_EXPORT_GUESTS:
         return JSONResponse({"error": "войдите, чтобы скачать карточку"}, status_code=401)
     if user and not DEAL_EXPORT_ALL_FREE and user.tier != UserTier.paid:
@@ -3407,6 +3602,7 @@ def export_deal(deal_id: str, _payload: DealExportIn | None = None,
         profile = get_company_profile(company_id) if company_id else None
         if profile and not enriched.get(out):
             enriched[out] = profile.get("name")
+    enriched["finance"] = _export_finance(deal, db)
     pdf = render_deal_pdf(enriched)
     filename = re.sub(r"[^a-zA-Z0-9_-]+", "-", deal_id)[:80] + ".pdf"
     return StreamingResponse(iter([pdf]), media_type="application/pdf",
@@ -3418,7 +3614,12 @@ def list_subscriptions(user: User | None = Depends(_current_user), db=Depends(ge
     if not user:
         return JSONResponse({"error": "не авторизован"}, status_code=401)
     rows = db.query(SavedFilter).filter_by(user_id=user.id, active=True).order_by(SavedFilter.created_at.desc()).all()
+    # Имя компании отдаём вместе с id: подписка на экране должна называться
+    # «Магнит», а не «g1a2b3c4» — id внутренний, человеку он ничего не говорит.
+    companies = (base_data.promoted() or {}).get("companies") or {}
     return [{"id": r.id, "industry": r.industry, "keyword": r.keyword,
+             "company_id": r.company_id,
+             "company_name": ((companies.get(r.company_id) or {}).get("name") if r.company_id else None),
              "min_amount_mln_rub": float(r.min_amount_mln_rub) if r.min_amount_mln_rub is not None else None}
             for r in rows]
 
@@ -3427,10 +3628,23 @@ def list_subscriptions(user: User | None = Depends(_current_user), db=Depends(ge
 def create_subscription(sub: SubscriptionIn, user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user:
         return JSONResponse({"error": "не авторизован"}, status_code=401)
-    if not sub.industry and not sub.keyword:
-        return JSONResponse({"error": "укажите отрасль или ключевое слово"}, status_code=400)
+    if not sub.industry and not sub.keyword and not sub.company_id:
+        return JSONResponse({"error": "укажите компанию, отрасль или ключевое слово"}, status_code=400)
+    company_id = (sub.company_id or "").strip() or None
+    if company_id and company_id not in ((base_data.promoted() or {}).get("companies") or {}):
+        # Подписка на несуществующий профиль молча никогда не сработает —
+        # человек будет ждать писем, которых не бывает. Родня уже записанному
+        # уроку «не придержано — не то же самое, что выйдет по молчанию».
+        return JSONResponse({"error": "такой компании нет в базе"}, status_code=400)
+    if company_id:
+        # Второй раз на ту же компанию — не вторая подписка, а тот же самый
+        # ответ «вы подписаны»: сердечко на карточке нажимают повторно легко.
+        same = db.query(SavedFilter).filter_by(user_id=user.id, active=True,
+                                               company_id=company_id).first()
+        if same and not sub.industry and not sub.keyword and sub.min_amount_mln_rub is None:
+            return {"id": same.id, "existing": True}
     row = SavedFilter(user_id=user.id, industry=sub.industry or None, keyword=sub.keyword or None,
-                       min_amount_mln_rub=sub.min_amount_mln_rub)
+                       company_id=company_id, min_amount_mln_rub=sub.min_amount_mln_rub)
     db.add(row)
     db.commit()
     return {"id": row.id}
@@ -3518,6 +3732,44 @@ def post_general_correction(correction: CorrectionIn,
                             user: User | None = Depends(_current_user), db=Depends(get_db)):
     """Общее сообщение редакции из футера, без привязки к карточке."""
     return _save_correction(None, correction, user, db)
+
+
+@app.get("/api/corrections/pending")
+def corrections_pending(token: str = "", db=Depends(get_db)):
+    """Мост к рутине публикации: `CorrectionRequest` живёт в базе сайта
+    (приватная сеть), рутина работает в другом процессе — тот же токен, что
+    у /api/moderation/decisions. 19 сентября 2026: до этого канал был
+    write-only — сообщения писались в таблицу, и ни один экран или скрипт
+    их не читал (см. KNOWN_ISSUES.md)."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    rows = list(db.scalars(select(CorrectionRequest).where(CorrectionRequest.status == "new")
+                           .order_by(CorrectionRequest.created_at)).all())
+    return {"corrections": [{"id": r.id, "deal_id": r.deal_id, "contact": r.contact,
+                             "body": r.body, "created_at": r.created_at.isoformat()}
+                            for r in rows]}
+
+
+class CorrectionsConsumeIn(BaseModel):
+    token: str = ""
+    ids: list[int] = []
+
+
+@app.post("/api/corrections/consume")
+def corrections_consume(req: CorrectionsConsumeIn, db=Depends(get_db)):
+    """Удалить показанные заявки — их постоянное место теперь в Telegram-
+    консоли (тема «Заметки от пользователей»), а не в этой таблице; держать
+    прочитанное здесь незачем и только копит мусор в базе (владелец 19
+    сентября 2026: «если они засоряют базу данных, то нужно их оттуда
+    убирать»)."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    n = 0
+    for row in db.scalars(select(CorrectionRequest).where(CorrectionRequest.id.in_(req.ids or []))).all():
+        db.delete(row)
+        n += 1
+    db.commit()
+    return {"deleted": n}
 
 
 # Иконки по корневым адресам, которые браузеры запрашивают САМИ, не читая

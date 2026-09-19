@@ -296,6 +296,43 @@ def test_empty_correction_is_rejected(client):
     assert r.status_code == 400
 
 
+def test_corrections_pending_is_a_bridge_gated_by_the_moderation_token(client, monkeypatch):
+    """19 сентября 2026: до этого канал был write-only, эти два эндпоинта —
+    мост для рутины, что до базы не достаёт (тот же токен, что у
+    /api/moderation/decisions)."""
+    monkeypatch.setenv("MODERATION_TOKEN", "секрет")
+    r = client.post("/api/deals/gtest0003/corrections", json={
+        "body": "Стороной сделки была другая компания.", "contact": "@свидетель"})
+    cid = r.json()["id"]
+    assert client.get("/api/corrections/pending", params={"token": "чужой"}).status_code == 404
+    body = client.get("/api/corrections/pending", params={"token": "секрет"}).json()
+    mine = [c for c in body["corrections"] if c["id"] == cid]
+    assert mine and mine[0]["deal_id"] == "gtest0003"
+    assert mine[0]["body"] == "Стороной сделки была другая компания."
+    assert mine[0]["contact"] == "@свидетель"
+
+
+def test_corrections_consume_deletes_shown_rows(client, monkeypatch):
+    """Владелец 19 сентября 2026: «если они засоряют базу данных, то нужно
+    их оттуда убирать» — постоянное место текста теперь Telegram, не БД."""
+    monkeypatch.setenv("MODERATION_TOKEN", "секрет")
+    r = client.post("/api/corrections", json={"body": "Общее сообщение редакции."})
+    cid = r.json()["id"]
+    assert client.post("/api/corrections/consume",
+                       json={"token": "чужой", "ids": [cid]}).status_code == 404
+    still = client.get("/api/corrections/pending", params={"token": "секрет"}).json()["corrections"]
+    assert cid in [c["id"] for c in still]
+    d = client.post("/api/corrections/consume", json={"token": "секрет", "ids": [cid]})
+    assert d.status_code == 200 and d.json()["deleted"] == 1
+    s = get_session()
+    try:
+        assert s.get(CorrectionRequest, cid) is None
+    finally:
+        s.close()
+    left = client.get("/api/corrections/pending", params={"token": "секрет"}).json()["corrections"]
+    assert cid not in [c["id"] for c in left]
+
+
 # ==================== Вход по заявке (ACCESS_GATE, 2 сентября 2026) ====================
 # Гейт для тестов выключен в conftest.py (ACCESS_GATE=0); здесь он включается
 # явно через main.ACCESS_GATE — эндпоинты читают модульную константу при
