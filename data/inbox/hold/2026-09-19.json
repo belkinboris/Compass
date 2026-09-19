@@ -310,6 +310,34 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d20863877",
+   "title": "Эксперт рассказал, почему россияне чаще покупают шоколад осенью",
+   "date": "2026-09-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/19/ekspert-rasskazal-pochemu-rossiyane-chashhe-pokupayut-shokolad-osenyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "шоколад осенью",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "шоколад осенью",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
   }
  ]
 }
