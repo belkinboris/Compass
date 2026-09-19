@@ -3466,3 +3466,109 @@ def test_open_filter_list_does_not_overflow(browser, base_url, width):
         assert box <= width + 1, f"список вылезает за экран: правый край {box} при ширине {width}"
     finally:
         ctx.close()
+
+
+# ================= ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА =================
+# Артём, 19 сентября 2026: «он все еще не поправил форматтинг страниц и
+# приходится листать вправо влево. Иногда норм. Иногда слетает.»
+#
+# Почему прежние замеры этого не видели. В стилях стоят страховки
+# `html{overflow-x:hidden}` и `body{overflow-x:clip}` — они ПРЯЧУТ
+# переполнение, и заодно делают `scrollWidth` равным `clientWidth`. То есть
+# величина, которой мы мерили, обнулялась самой страховкой: мы мерили
+# страховку, а не содержимое. В Chromium она держит, в Safari на iPhone —
+# нет, поэтому у владельца страница ездила, а у нас показывала ноль.
+#
+# Здесь страховки снимаются на время замера, и видно настоящую ширину.
+UNCLAMP = "html{overflow-x:visible!important}body{overflow-x:visible!important}"
+
+WIDE_ROUTES = ["#/", "#/deals", "#/companies", "#/advisors", "#/materials",
+               "#/analytics", "#/assistant", "#/account",
+               "#/companies/g28ff15bb", "#/deal/gf12c6323"]
+
+_OFFENDERS_JS = """() => {
+  const W = document.documentElement.clientWidth, out = [];
+  const clipped = el => {
+    let p = el.parentElement;
+    while(p && p !== document.documentElement){
+      if(/hidden|clip|auto|scroll/.test(getComputedStyle(p).overflowX)) return true;
+      p = p.parentElement;
+    }
+    return false;
+  };
+  document.querySelectorAll('body *').forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if(r.width === 0 || r.height === 0) return;
+    if(r.right <= W + 1) return;
+    if(clipped(el)) return;
+    out.push(el.tagName + '.' + String(el.className || '').slice(0, 40) +
+             ' w=' + Math.round(r.width) + ' «' + (el.textContent||'').trim().slice(0,40) + '»');
+  });
+  return out.slice(0, 5);
+}"""
+
+
+@pytest.mark.parametrize("route", WIDE_ROUTES)
+@pytest.mark.parametrize("width", [360, 390])
+def test_no_horizontal_overflow_with_safety_nets_off(browser, base_url, route, width):
+    ctx = browser.new_context(viewport={"width": width, "height": 800})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/" + route, wait_until="domcontentloaded")
+        pg.wait_for_timeout(2600)
+        pg.add_style_tag(content=UNCLAMP)
+        pg.wait_for_timeout(250)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        if over > 0:
+            who = pg.evaluate(_OFFENDERS_JS)
+            raise AssertionError(
+                "%s на %spx: страница шире экрана на %spx.\n  %s"
+                % (route, width, over, "\n  ".join(who) or "виновник не опознан"))
+    finally:
+        ctx.close()
+
+
+def test_advisor_card_fits_the_phone(browser, base_url):
+    """Карточка консультанта была 374px внутри контейнера в 320px: у элемента
+    сетки по умолчанию `min-width:auto`, и он отказывается сжиматься под
+    содержимое. Плюс пустое состояние — целая фраза с запретом переноса."""
+    ctx = browser.new_context(viewport={"width": 360, "height": 800})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/advisors", wait_until="domcontentloaded")
+        pg.wait_for_selector(".advisor-card", timeout=15000)
+        pg.add_style_tag(content=UNCLAMP)
+        pg.wait_for_timeout(300)
+        sizes = pg.eval_on_selector_all(
+            ".advisor-card", "els => els.map(e => Math.round(e.getBoundingClientRect().width))")
+        assert sizes, "карточек консультантов нет — проверять нечего"
+        assert max(sizes) <= 360, "карточка шире экрана: %s" % sorted(sizes)[-3:]
+    finally:
+        ctx.close()
+
+
+def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_url):
+    """Просьба владельца 19 сентября 2026: кнопки «Подготовка к встрече» и
+    «Подготовка к собеседованию» на карточке компании. Обе ведут к ассистенту
+    с уже составленным вопросом, разным по существу."""
+    page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
+    page.wait_for_selector("#prepMeeting", timeout=15000)
+    assert page.locator("#prepInterview").count() == 1
+
+    page.click("#prepMeeting")
+    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
+    page.wait_for_timeout(1200)
+    meeting = page.inner_text("body")
+    assert "Готовлюсь к встрече" in meeting
+    # Вопрос назвал компанию — иначе ассистент не поймёт, о ком речь.
+    assert "Норильский никель" in meeting
+
+    page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
+    page.wait_for_selector("#prepInterview", timeout=15000)
+    page.click("#prepInterview")
+    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
+    page.wait_for_timeout(1200)
+    interview = page.inner_text("body")
+    assert "Готовлюсь к собеседованию" in interview
+    # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
+    assert "работодателя" in interview and "работодателя" not in meeting
