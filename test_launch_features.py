@@ -4071,3 +4071,38 @@ def test_attempt_public_egrul_match_skips_liquidated_entities_and_strips_pao():
     assert attempt_public_egrul_match("ООО «Группа Позитив»", http_client=_FakeEgrulClient(only_dead)) is None
     sar = [{"k": "ul", "i": "3906406196", "n": 'МЕЖДУНАРОДНАЯ КОМПАНИЯ АКЦИОНЕРНОЕ ОБЩЕСТВО "СОВКО КАПИТАЛ ПАРТНЕРС"'}]
     assert attempt_public_egrul_match("МКАО «Совко Капитал Партнерс»", http_client=_FakeEgrulClient(sar))[0] == "3906406196"
+
+
+def test_site_bridge_tells_a_missing_endpoint_from_an_empty_answer():
+    """Мост «рутина → сайт» обязан различать «данных нет» и «адреса нет».
+
+    19 сентября 2026 рутина «заметки от пользователей» на первом же реальном
+    прогоне упала трассировкой JSONDecodeError: боевой сайт ответил кодом 200
+    и HTML-страницей, потому что эндпоинт ещё не был выложен, а неизвестные
+    адреса ловит catch-all. `raise_for_status` такой ответ пропускает —
+    проверять надо СОДЕРЖИМОЕ, а не только код. Тот же catch-all однажды уже
+    съел /favicon.ico (KNOWN_ISSUES.md), то есть класс дефекта был известен.
+    """
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline"))
+    import site_bridge
+
+    class FakeResponse:
+        def __init__(self, ctype, body):
+            self.headers = {"content-type": ctype}
+            self._body = body
+        def json(self):
+            import json as _json
+            return _json.loads(self._body)
+
+    page = FakeResponse("text/html; charset=utf-8", "<!DOCTYPE html><html></html>")
+    with pytest.raises(site_bridge.BridgeUnavailable) as err:
+        site_bridge._as_json(page, "/api/corrections/pending")
+    reason = err.value.reason
+    assert "не выложен" in reason and "/api/corrections/pending" in reason
+    # Причина написана для человека: без английского и без трассировки.
+    assert not any(ch.isascii() and ch.isalpha() for ch in reason.replace("/api/corrections/pending", ""))
+
+    # Пустой, но настоящий ответ — это НЕ ошибка: заявок просто нет.
+    empty = FakeResponse("application/json", '{"corrections": []}')
+    assert site_bridge._as_json(empty, "/api/corrections/pending") == {"corrections": []}

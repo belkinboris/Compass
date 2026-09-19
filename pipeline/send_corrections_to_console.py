@@ -33,6 +33,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
 import console_topics                                      # noqa: E402
+import site_bridge                                         # noqa: E402
 from send_drafts import send_one, PAUSE                   # noqa: E402
 
 SITE = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
@@ -45,17 +46,13 @@ def _token():
 
 
 def fetch_pending(token):
-    import httpx
-    r = httpx.get(SITE + '/api/corrections/pending', params={'token': token}, timeout=20)
-    r.raise_for_status()
-    return r.json().get('corrections') or []
+    return site_bridge.get_json('/api/corrections/pending',
+                                {'token': token}).get('corrections') or []
 
 
 def consume(token, ids):
-    import httpx
-    r = httpx.post(SITE + '/api/corrections/consume', json={'token': token, 'ids': ids}, timeout=20)
-    r.raise_for_status()
-    return r.json().get('deleted', 0)
+    return site_bridge.post_json('/api/corrections/consume',
+                                 {'token': token, 'ids': ids}).get('deleted', 0)
 
 
 def _deal_label(deal_id, deals_by_id, merged):
@@ -99,7 +96,16 @@ def main():
         print('Нет токена (MODERATION_TOKEN / TELEGRAM_WEBHOOK_SECRET) — сайт не ответит.')
         return 1
 
-    pending = fetch_pending(token)
+    # Отказ сайта — не повод падать трассировкой: рутина обязана сказать
+    # человеку, ЧТО именно не так. 19 сентября 2026 первый реальный прогон
+    # получил от сайта страницу приложения (эндпоинт ещё не выложен) и
+    # сообщил об этом JSONDecodeError'ом — диагноз пришлось искать руками.
+    try:
+        pending = fetch_pending(token)
+    except site_bridge.BridgeUnavailable as e:
+        print('Заявки забрать не удалось: %s' % e.reason)
+        print('ИТОГ ПРОГОНА: сайт не отдал заявки (отправлено=0, удалено=0).')
+        return 1
     print('Ждут отправки в консоль: %d' % len(pending))
     if not pending:
         print('ИТОГ ПРОГОНА: отправлять нечего (отправлено=0, удалено=0).')
@@ -138,7 +144,15 @@ def main():
             if i < len(pending) - 1:
                 time.sleep(PAUSE)
 
-    deleted = consume(token, sent_ids) if sent_ids else 0
+    try:
+        deleted = consume(token, sent_ids) if sent_ids else 0
+    except site_bridge.BridgeUnavailable as e:
+        # Сообщения уже ушли в консоль — это главное; не удалённые из базы
+        # заявки придут повторно следующим прогоном, и об этом надо сказать.
+        print('Отправлено в консоль, но из базы не удалено: %s' % e.reason)
+        print('ИТОГ ПРОГОНА: отправлено %d, удалено 0 — эти же заявки придут ещё раз.'
+              % len(sent_ids))
+        return 1
     print('\nОтправлено: %d из %d, удалено из базы: %d' % (len(sent_ids), len(pending), deleted))
     print('ИТОГ ПРОГОНА: отправлено %d, удалено %d.' % (len(sent_ids), deleted))
     return 0
