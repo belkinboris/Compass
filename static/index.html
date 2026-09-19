@@ -1414,6 +1414,22 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .fns-metric:last-child{border-right:none}
 .fns-metric .v{font-family:var(--f-display);font-size:23px;line-height:1.2;margin-top:7px}
 .fns-metric .delta{font-size:12px;margin-top:4px;color:var(--muted)}
+/* Посчитанные показатели (оборотный капитал, долговая нагрузка,
+   рентабельность). Отдельная сетка, а не `.fns-metrics`: там ровно четыре
+   колонки и границы нарисованы через :nth-child под это число, а здесь
+   карточек от одной до девяти — сколько строк отчётности хватило посчитать.
+   auto-fit с minmax(min(100%,…)) держит и 360px (одна колонка), и десктоп.
+   Разделители рисуются границами САМИХ карточек, а не просветом сетки на
+   цветной подложке: показателей в группе бывает пять, а колонок четыре —
+   при подложке три пустые ячейки последнего ряда светились серым прямоугольником,
+   и это читалось как поломка, а не как «показателей столько». */
+.fns-derived{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,232px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);margin:4px 0 6px}
+.fns-derived .d{background:var(--card);padding:15px 16px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fns-derived .d .k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fns-derived .d .v{font-family:var(--f-display);font-size:21px;line-height:1.2}
+.fns-derived .d .how{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:6px}
+.fns-derived-group{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:20px 0 0}
+.fns-note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:9px}
 .fns-table{width:100%;border-collapse:collapse;font-size:13px}
 .fns-table th,.fns-table td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
 .fns-table th:first-child,.fns-table td:first-child{text-align:left;padding-left:0}
@@ -5444,6 +5460,29 @@ const fnsDelta = (current,previous) => {
   const pct=(Number(current)-Number(previous))/Math.abs(Number(previous))*100;
   return `${pct>=0?"↑":"↓"} ${Math.abs(pct).toLocaleString("ru-RU",{maximumFractionDigits:1})}% за год`;
 };
+/* Посчитанные показатели за последний год отчётности. Сервер присылает их
+   уже готовыми — числом, подписью и объяснением, как посчитано
+   (`company_finance.derive`); здесь только вёрстка. Формулы сюда не
+   переносим: две копии правил в Python и JS уже разъезжались, см. «Слой
+   фактов» в CLAUDE.md. Показателя, которому не хватило строки отчётности,
+   в ответе нет вовсе — прочерк читался бы как «посчитали, вышло ноль». */
+const fnsDerivedHtml = (report) => {
+  const d = report && report.derived;
+  if(!d || !d.metrics || !d.metrics.length) return "";
+  const value = m => m.kind==="money" ? fnsMoney(m.value_rub)
+    : m.kind==="percent" ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:1})}%`
+    : `×${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}`;
+  const groups=[];
+  d.metrics.forEach(m=>{
+    const g=groups.find(x=>x.title===m.group);
+    (g||groups[groups.push({title:m.group,items:[]})-1]).items.push(m);
+  });
+  return `<p class="fns-derived-group" style="margin-top:0">Посчитано по отчётности за ${report.year} год</p>`
+    + groups.map(g=>`<p class="fns-derived-group">${esc(g.title)}</p><div class="fns-derived">${
+        g.items.map(m=>`<div class="d"><span class="k">${esc(m.label)}</span><div class="v num">${value(m)}</div><div class="how">${esc(m.how)}</div></div>`).join("")
+      }</div>`).join("")
+    + (d.notes||[]).map(n=>`<p class="fns-note">${esc(n)}</p>`).join("");
+};
 const fnsChart = (reports,key,label) => {
   const rows=[...(reports||[])].filter(r=>Number.isFinite(Number(r[key]))).sort((a,b)=>a.year-b.year);
   if(rows.length<2) return "";
@@ -5673,6 +5712,8 @@ async function mountCompanyFns(companyId){
       <div class="fns-registry">${registryRows.slice(0,6).map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div>`;
     if(tab==="finance") content=hasAnyFinancialData?`
       <div class="fns-charts">${fnsChart(reports,"revenue_rub","Выручка")}${fnsChart(reports,"net_profit_rub","Чистая прибыль")}</div>
+      ${fnsDerivedHtml(latest)}
+      <p class="fns-derived-group">Отчётность по годам</p>
       <div style="overflow-x:auto"><table class="fns-table"><thead><tr><th>Показатель</th>${reports.map(r=>`<th>${r.year}</th>`).join("")}</tr></thead><tbody>
       ${financialRows.map(([label,key])=>`<tr><td>${label}</td>${reports.map(r=>`<td>${fnsMoney(r[key])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
       ${entry.has_more_reports?`<div class="fns-premium">История за предыдущие годы доступна по подписке.</div>`:""}

@@ -754,6 +754,78 @@ def test_analytics_multiples_toggle_switches_to_revenue_view(browser, base_url):
         ctx.close()
 
 
+def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url):
+    """Оборотный капитал, долговая нагрузка и рентабельность на вкладке
+    «Финансы» профиля компании (просьба Дани, 19 сентября 2026).
+
+    Ответ ФНС подменяется route-перехватом: локальная база пуста, отчётность
+    живёт на проде — иначе тест проверял бы не вёрстку, а наличие синхронизации.
+    Числа считает сервер (`company_finance.derive`), здесь проверяем, что
+    посчитанное дошло до экрана целиком, объяснено человеческими словами и
+    не переполняет узкий экран."""
+    import company_finance
+    report = {
+        "year": 2024, "revenue_rub": 10_000_000_000, "gross_profit_rub": 3_000_000_000,
+        "operating_profit_rub": 2_000_000_000, "profit_before_tax_rub": 1_500_000_000,
+        "net_profit_rub": 1_200_000_000, "assets_rub": 20_000_000_000,
+        "current_assets_rub": 8_000_000_000, "short_term_liabilities_rub": 5_000_000_000,
+        "long_term_liabilities_rub": 4_000_000_000, "equity_rub": 11_000_000_000,
+        "borrowings_rub": 6_000_000_000, "cash_rub": 1_000_000_000,
+        "inventory_rub": 2_000_000_000, "receivables_rub": 3_000_000_000,
+        "payables_rub": 1_500_000_000,
+        "full_lines": [{"title": "Отчёт о финансовых результатах", "rows": [
+            {"code": "2330", "name": "Проценты к уплате", "value_rub": 500_000_000}]}],
+    }
+    report["derived"] = company_finance.derive(report)
+    payload = {
+        "available": True, "company_id": "gcdf5803f", "company_name": "Тест",
+        "entities": [{
+            "entity": {"id": 1, "legal_name": "ООО Тест", "inn": "7700000321", "fetched_at": None},
+            "reports": [report], "report_years": [2024], "has_more_reports": False,
+            "has_more_events": False, "events": [], "ownership": {"available": False},
+        }],
+        "access": {"paid": True, "full_history": True, "downloads": True},
+        "disclaimer": "Показатели юридического лица, а не группы.",
+    }
+    for width, height in ((360, 740), (390, 844), (1280, 900)):
+        ctx = browser.new_context(viewport={"width": width, "height": height})
+        try:
+            ctx.route("**/api/companies/*/fns*", lambda route: route.fulfill(
+                status=200, content_type="application/json", body=json.dumps(payload)))
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(base_url + "/#/companies/gcdf5803f", wait_until="networkidle")
+            pg.wait_for_timeout(900)
+            pg.click('[data-fnstab="finance"]')
+            pg.wait_for_timeout(300)
+            # `.k` и заголовки групп рисуются капсом через text-transform,
+            # а innerText отдаёт текст ПОСЛЕ преобразований CSS — сравниваем
+            # без учёта регистра (тот же приём, что в тесте про .tag выше).
+            body = pg.inner_text("#fns-company")
+            low = body.lower()
+            assert "оборотный капитал" in low
+            assert "чистый долг" in low
+            assert "рентабельность по чистой прибыли" in low
+            # Числа, а не пустые карточки: 8 − 5 = 3 млрд, 6 − 1 = 5 млрд.
+            assert "3 млрд ₽" in low and "5 млрд ₽" in low
+            # Обещания EBITDA на экране нет — есть честное объяснение почему.
+            # Слово встречается только в пояснениях («отношение обычно считают
+            # к EBITDA — её по открытой отчётности не посчитать»), но НИКОГДА
+            # как название показателя над числом: амортизации в источнике нет,
+            # и подписать ею число значило бы соврать в самом заметном месте.
+            assert "амортизацию раскрывают" in low
+            labels = pg.eval_on_selector_all(
+                ".fns-derived .d .k", "els => els.map(e => e.textContent.toLowerCase())")
+            assert labels and not [x for x in labels if "ebitda" in x], labels
+            assert not errors, errors
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+            pg.close()
+        finally:
+            ctx.close()
+
+
 def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url):
     """Этап 16, П1в: строка «EV/Выручка» на вкладке «Экономист» — вызываем
     `mountDealFns` напрямую с синтетической сделкой (та же техника, что и в

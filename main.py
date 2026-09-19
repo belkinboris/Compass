@@ -32,6 +32,7 @@ import assistant_policy
 import assistant_retrieval
 import auth
 import base_data
+import company_finance
 import data_refresh
 import deal_catalog
 import deal_multiples
@@ -1510,6 +1511,11 @@ def _report_payload(row: FinancialReport) -> dict:
     except (TypeError, ValueError):
         raw_lines = {}
     payload["full_lines"] = full_lines_payload(raw_lines)
+    # Оборотный капитал, долговая нагрузка, рентабельность — считаются здесь,
+    # на сервере, и едут готовыми числами с готовыми подписями (просьба Дани
+    # 19 сентября 2026). Клиентских копий формул нет намеренно: две копии
+    # правил в Python и JS уже разъезжались, см. «Слой фактов» в CLAUDE.md.
+    payload["derived"] = company_finance.derive(payload)
     return payload
 
 
