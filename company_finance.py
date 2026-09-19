@@ -25,6 +25,25 @@
     считаются «цена ÷ выручка или операционная прибыль», а не «EV/EBITDA»,
     которого у нас нет (CLAUDE.md, разбор рецензента, находка 7).
 
+    ЧТО ИЗ «ЛЕСЕНКИ ПРИБЫЛИ» ДОСТУПНО, А ЧТО НЕТ. Отчёт о финансовых
+    результатах даёт четыре уровня прибыли готовыми строками — валовую
+    (2100), от продаж (2200), до налогообложения (2300, она же EBT) и
+    чистую (2400), — плюс проценты к уплате (2330), из которых собирается
+    EBIT. Всё, что требует амортизации, не собирается ни из чего:
+    ни EBITDA, ни OIBDA, ни EBIDA. Оценивать амортизацию по изменению
+    основных средств и капитальным вложениям из отчёта о движении денег
+    можно только вместе с выбытием, которого в открытых данных нет, —
+    это и был бы «правдоподобный» ответ вместо пустого поля.
+
+    ЗНАКИ СТРОК ИЗМЕРЕНЫ, А НЕ УГАДАНЫ (19 сентября 2026, живые ответы
+    боевого сайта). Расходные строки приходят ПОЛОЖИТЕЛЬНЫМИ, вычитать их
+    надо самому: у «Лузалеса» за 2025 год 2110 − 2120 = 2100 и
+    2100 − 2210 − 2220 = 2200 сходятся до рубля. Там, где знак всё же может
+    разойтись между источниками (проценты к уплате), берём модуль, а где
+    можно — считаем через уже нормализованные поля, а не через сырые строки:
+    коммерческие и управленческие расходы получаются как «валовая прибыль
+    минус прибыль от продаж», и знак в этой формуле не участвует вовсе.
+
 ГРАНИЦА МОДУЛЯ. Здесь только арифметика над одним годом одного юрлица: ни
 сети, ни базы, ни суждений о периметре. Вопрос «описывает ли отчётность
 этого юрлица купленный бизнес» решается чтением в слое фактов и сюда не
@@ -43,9 +62,13 @@ from __future__ import annotations
 # «долг к капиталу ×4 000 000» — число верное и бессмысленное.
 MIN_DENOMINATOR_RUB = 100_000.0
 
-# Строка отчёта о финансовых результатах, которой нет среди 15
-# нормализованных полей: проценты к уплате. Берём из полного набора строк.
-INTEREST_PAID_CODE = "2330"
+# Строки, которых нет среди 15 нормализованных полей, — берём из полного
+# набора строк отчёта.
+INTEREST_PAID_CODE = "2330"      # проценты к уплате
+COST_OF_SALES_CODE = "2120"      # себестоимость продаж
+OPERATING_CASH_CODE = "4100"     # сальдо денежных потоков от текущих операций
+
+DAYS_IN_YEAR = 365
 
 
 def _f(value) -> float | None:
@@ -74,9 +97,12 @@ def _money(key, label, value, how, group):
             "value_rub": value, "how": how, "group": group}
 
 
-def _ratio(key, label, value, how, group, unit="x"):
+def _ratio(key, label, value, how, group, unit="x", digits=2):
+    """Отношение. `unit` решает и подпись, и точность: «×2,5» осмысленно с
+    сотыми, «192,25 дня» — ложная точность, дни считаются целыми."""
     return {"key": key, "label": label, "kind": "ratio",
-            "value": round(value, 2), "unit": unit, "how": how, "group": group}
+            "value": round(value, digits) if digits else round(value),
+            "unit": unit, "how": how, "group": group}
 
 
 def _percent(key, label, value, how, group):
@@ -109,7 +135,10 @@ def derive(report: dict) -> dict:
     inventory = _f(r.get("inventory_rub"))
     receivables = _f(r.get("receivables_rub"))
     payables = _f(r.get("payables_rub"))
+    gross_profit = _f(r.get("gross_profit_rub"))
     interest = _line(full_lines, INTEREST_PAID_CODE)
+    cost_of_sales = _line(full_lines, COST_OF_SALES_CODE)
+    operating_cash = _line(full_lines, OPERATING_CASH_CODE)
 
     metrics: list[dict] = []
     notes: list[str] = []
@@ -125,16 +154,56 @@ def derive(report: dict) -> dict:
             "Прибыль до налогообложения плюс проценты по кредитам. "
             "От EBITDA отличается на амортизацию — её в открытой отчётности не раскрывают.",
             PROFIT))
-    if revenue is not None and revenue >= MIN_DENOMINATOR_RUB and op_profit is not None:
+    big_revenue = revenue is not None and revenue >= MIN_DENOMINATOR_RUB
+    if big_revenue and gross_profit is not None:
+        metrics.append(_percent(
+            "gross_margin", "Валовая рентабельность", gross_profit / revenue * 100,
+            "Сколько остаётся от выручки после себестоимости — до зарплат офиса, "
+            "рекламы, процентов и налогов.", PROFIT))
+    if big_revenue and op_profit is not None:
         metrics.append(_percent(
             "operating_margin", "Рентабельность по прибыли от продаж",
             op_profit / revenue * 100,
             "Прибыль от продаж, делённая на выручку.", PROFIT))
+    # Коммерческие и управленческие расходы считаем как «валовая прибыль минус
+    # прибыль от продаж», а не складывая строки 2210 и 2220: знак в этой
+    # формуле не участвует вовсе, и упрощённая форма отчётности её не ломает.
+    if big_revenue and gross_profit is not None and op_profit is not None:
+        metrics.append(_percent(
+            "sgna_share", "Расходы на продажи и управление", (gross_profit - op_profit) / revenue * 100,
+            "Доля выручки, которая уходит на зарплаты офиса, рекламу и управление — "
+            "то есть на всё, что не себестоимость.", PROFIT))
     if revenue is not None and revenue >= MIN_DENOMINATOR_RUB and net_profit is not None:
         metrics.append(_percent(
             "net_margin", "Рентабельность по чистой прибыли",
             net_profit / revenue * 100,
             "Чистая прибыль, делённая на выручку.", PROFIT))
+    if net_profit is not None and equity is not None and equity >= MIN_DENOMINATOR_RUB:
+        metrics.append(_percent(
+            "roe", "Отдача на собственный капитал", net_profit / equity * 100,
+            "Чистая прибыль к собственному капиталу: сколько компания заработала "
+            "на каждый рубль, вложенный её собственниками.", PROFIT))
+
+    # --- откуда взялась прибыль ------------------------------------------
+    # Разница между прибылью до налога и прибылью от продаж — это всё, что
+    # компания заработала (или потеряла) НЕ на основной деятельности:
+    # дивиденды от дочерних компаний, курсовые разницы, продажа имущества,
+    # проценты. Замер того же дня: у «Урбантеха» прибыль до налога
+    # 2,2 млрд ₽ при прибыли от продаж 164 млн ₽ — в тринадцать раз больше,
+    # и покупателю такой компании важно увидеть это до, а не после сделки.
+    SOURCE = "Откуда прибыль"
+    if pre_tax is not None and op_profit is not None:
+        metrics.append(_money(
+            "non_operating_profit", "Прибыль не от продаж", pre_tax - op_profit,
+            "Разница между прибылью до налога и прибылью от продаж: дивиденды от "
+            "других компаний, курсовые разницы, продажа имущества, проценты. "
+            "Со знаком «минус» — основная деятельность кормит всё остальное.", SOURCE))
+    if operating_cash is not None and net_profit is not None and net_profit >= MIN_DENOMINATOR_RUB:
+        metrics.append(_ratio(
+            "cash_conversion", "Денег от работы на рубль прибыли", operating_cash / net_profit,
+            "Сколько живых денег принесла текущая работа на каждый рубль чистой прибыли. "
+            "Заметно меньше рубля — прибыль есть на бумаге, а деньги застряли "
+            "в запасах и долгах покупателей.", SOURCE, unit="₽"))
 
     # --- оборотный капитал ----------------------------------------------
     WC = "Оборотный капитал"
@@ -153,6 +222,24 @@ def derive(report: dict) -> dict:
             inventory + receivables - payables,
             "Запасы плюс дебиторская задолженность минус кредиторская. "
             "Столько денег заморожено в текущей работе компании.", WC))
+    # Цикл: сколько дней проходит от вложения денег в запасы до возврата
+    # деньгами от покупателя, за вычетом отсрочки, которую даёт поставщик.
+    # Дни запасов и кредиторки считают к себестоимости, дни дебиторки — к
+    # выручке; себестоимость берём по модулю, потому что у неё единственной
+    # из трёх знаменателей знак теоретически может разойтись между формами.
+    if (inventory is not None and receivables is not None and payables is not None
+            and big_revenue and cost_of_sales is not None
+            and abs(cost_of_sales) >= MIN_DENOMINATOR_RUB):
+        cost = abs(cost_of_sales)
+        inventory_days = inventory / cost * DAYS_IN_YEAR
+        payable_days = payables / cost * DAYS_IN_YEAR
+        receivable_days = receivables / revenue * DAYS_IN_YEAR
+        days = inventory_days + receivable_days - payable_days
+        metrics.append(_ratio(
+            "cash_cycle", "Цикл оборотного капитала", days,
+            "Дней от вложения денег в запасы до возврата их от покупателя, за вычетом "
+            "отсрочки, которую даёт поставщик. Чем короче, тем меньше денег нужно "
+            "держать в обороте.", WC, unit="дн.", digits=0))
 
     # --- долговая нагрузка ----------------------------------------------
     DEBT = "Долговая нагрузка"
