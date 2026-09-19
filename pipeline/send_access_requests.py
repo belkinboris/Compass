@@ -29,6 +29,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 
 import console_topics                                      # noqa: E402
+import site_bridge                                         # noqa: E402
 import telegram_endpoint                                  # noqa: E402
 from send_drafts import send_one, PAUSE                   # noqa: E402
 
@@ -51,10 +52,10 @@ def save_state(state):
 
 
 def fetch_pending(token):
-    import httpx
-    r = httpx.get(SITE + '/api/access/requests', params={'token': token}, timeout=20)
-    r.raise_for_status()
-    return r.json()
+    # Через общий мост: сайт, отдавший страницу вместо данных (не выложен
+    # новый код — catch-all с кодом 200), обязан объясниться словами, а не
+    # трассировкой JSONDecodeError. См. pipeline/site_bridge.py.
+    return site_bridge.get_json('/api/access/requests', {'token': token})
 
 
 def render(req):
