@@ -92,9 +92,28 @@ def _line(full_lines, code: str) -> float | None:
     return None
 
 
+# ЧТО ПОКАЗЫВАТЬ СРАЗУ, А ЧТО ПОД КНОПКОЙ (решение владельца, 19 сентября
+# 2026: «слишком много показателей и выглядит как мусор»). Пятнадцать
+# карточек с тремя строками пояснения под каждой читаются как свалка, и
+# читатель не находит в них того, за чем пришёл.
+#
+# Наверху — те четыре-пять чисел, которыми компанию описывают в одной фразе
+# при разговоре о сделке: «выручка столько, прибыль такая, чистый долг
+# такой, долг к прибыли столько». Выручка и чистая прибыль уже стоят выше
+# графиками, поэтому сюда идут прибыль до процентов и налога, рентабельность
+# по ней, чистый долг, долг к прибыли и оборотный капитал — последний
+# потому, что его уровень на закрытии обсуждают в каждой второй сделке.
+#
+# Остальное не выбрасывается: оно считается по тем же данным и открывается
+# кнопкой. Спрятать — не то же самое, что удалить, и разбор глубже одной
+# фразы тоже кому-то нужен.
+PRIMARY_KEYS = ("ebit", "operating_margin", "net_debt",
+                "net_debt_to_operating_profit", "working_capital")
+
+
 def _money(key, label, value, how, group):
-    return {"key": key, "label": label, "kind": "money",
-            "value_rub": value, "how": how, "group": group}
+    return {"key": key, "label": label, "kind": "money", "value_rub": value,
+            "how": how, "group": group, "primary": key in PRIMARY_KEYS}
 
 
 def _ratio(key, label, value, how, group, unit="x", digits=2):
@@ -102,12 +121,14 @@ def _ratio(key, label, value, how, group, unit="x", digits=2):
     сотыми, «192,25 дня» — ложная точность, дни считаются целыми."""
     return {"key": key, "label": label, "kind": "ratio",
             "value": round(value, digits) if digits else round(value),
-            "unit": unit, "how": how, "group": group}
+            "unit": unit, "how": how, "group": group,
+            "primary": key in PRIMARY_KEYS}
 
 
 def _percent(key, label, value, how, group):
     return {"key": key, "label": label, "kind": "percent",
-            "value": round(value, 1), "how": how, "group": group}
+            "value": round(value, 1), "how": how, "group": group,
+            "primary": key in PRIMARY_KEYS}
 
 
 def derive(report: dict) -> dict:
@@ -151,8 +172,7 @@ def derive(report: dict) -> dict:
     if pre_tax is not None and interest is not None:
         metrics.append(_money(
             "ebit", "Прибыль до процентов и налога", pre_tax + abs(interest),
-            "Прибыль до налогообложения плюс проценты по кредитам. "
-            "От EBITDA отличается на амортизацию — её в открытой отчётности не раскрывают.",
+            "Прибыль до налогообложения плюс проценты по кредитам.",
             PROFIT))
     big_revenue = revenue is not None and revenue >= MIN_DENOMINATOR_RUB
     if big_revenue and gross_profit is not None:
@@ -266,9 +286,7 @@ def derive(report: dict) -> dict:
                 metrics.append(_ratio(
                     "net_debt_to_operating_profit", "Чистый долг к прибыли от продаж",
                     (borrowings - cash) / op_profit,
-                    "Примерно столько лет компании нужно работать с такой же прибылью, "
-                    "чтобы закрыть долг. Обычно это отношение считают к EBITDA — "
-                    "её по открытой отчётности не посчитать, поэтому в знаменателе прибыль от продаж.",
+                    "Примерно столько лет нужно работать с такой же прибылью, чтобы закрыть долг.",
                     DEBT))
             elif op_profit <= 0:
                 notes.append(
@@ -283,6 +301,18 @@ def derive(report: dict) -> dict:
 
     if not metrics:
         return {"metrics": [], "notes": []}
+
+    # ОДНО ИСКЛЮЧЕНИЕ ИЗ ПОСТОЯННОГО СПИСКА: «прибыль не от продаж» поднимается
+    # наверх, когда её больше, чем прибыли от продаж. Это не украшение —
+    # без неё соседнее число вводит в заблуждение: у «Урбантеха» за 2025 год
+    # рентабельность по чистой прибыли выходит 93,6%, и выглядит это как
+    # выдающийся бизнес, пока не увидишь, что почти вся прибыль пришла не от
+    # продаж. Предупреждение показывается тогда, когда есть о чём
+    # предупреждать, а не всегда.
+    by_key = {m["key"]: m for m in metrics}
+    aside, sales = by_key.get("non_operating_profit"), op_profit
+    if aside is not None and sales is not None and abs(aside["value_rub"]) > abs(sales):
+        aside["primary"] = True
 
     notes.append(
         "EBITDA по открытой отчётности посчитать нельзя: амортизацию раскрывают в "

@@ -1423,7 +1423,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
    цветной подложке: показателей в группе бывает пять, а колонок четыре —
    при подложке три пустые ячейки последнего ряда светились серым прямоугольником,
    и это читалось как поломка, а не как «показателей столько». */
-.fns-derived{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,232px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);margin:4px 0 6px}
+.fns-derived{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,196px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);margin:4px 0 6px}
 .fns-derived .d{background:var(--card);padding:15px 16px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .fns-derived .d .k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .fns-derived .d .v{font-family:var(--f-display);font-size:21px;line-height:1.2}
@@ -5552,15 +5552,22 @@ const fnsDerivedHtml = (report) => {
     : (m.unit && m.unit!=="x")
       ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}&nbsp;${esc(m.unit)}`
       : `×${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}`;
+  const card = m => `<div class="d"><span class="k">${esc(m.label)}</span><div class="v num">${value(m)}</div><div class="how">${esc(m.how)}</div></div>`;
+  const main = d.metrics.filter(m=>m.primary), rest = d.metrics.filter(m=>!m.primary);
   const groups=[];
-  d.metrics.forEach(m=>{
+  rest.forEach(m=>{
     const g=groups.find(x=>x.title===m.group);
     (g||groups[groups.push({title:m.group,items:[]})-1]).items.push(m);
   });
-  return `<p class="fns-derived-group" style="margin-top:0">Посчитано по отчётности за ${report.year} год</p>`
-    + groups.map(g=>`<p class="fns-derived-group">${esc(g.title)}</p><div class="fns-derived">${
-        g.items.map(m=>`<div class="d"><span class="k">${esc(m.label)}</span><div class="v num">${value(m)}</div><div class="how">${esc(m.how)}</div></div>`).join("")
-      }</div>`).join("")
+  const plural = n => n%10===1&&n%100!==11 ? "показатель"
+    : [2,3,4].includes(n%10)&&![12,13,14].includes(n%100) ? "показателя" : "показателей";
+  return `<p class="fns-derived-group" style="margin-top:0">Главное по отчётности за ${report.year} год</p>`
+    + `<div class="fns-derived">${main.map(card).join("")}</div>`
+    + (rest.length
+        ? `<button class="chip" data-fns-more="1" style="margin:12px 0 4px">Ещё ${rest.length} ${plural(rest.length)}</button>`
+          + `<div class="fns-derived-rest" hidden>${groups.map(g=>
+              `<p class="fns-derived-group">${esc(g.title)}</p><div class="fns-derived">${g.items.map(card).join("")}</div>`).join("")}</div>`
+        : "")
     + (d.notes||[]).map(n=>`<p class="fns-note">${esc(n)}</p>`).join("");
 };
 const fnsChart = (reports,key,label) => {
@@ -5816,6 +5823,17 @@ async function mountCompanyFns(companyId){
       <div class="fns-tabs">${tabs.map(([k,label])=>`<button data-fnstab="${k}" class="${tab===k?"on":""}">${label}</button>`).join("")}</div>
       <div class="fns-body">${content}<p class="fns-disclaimer">${esc(isBank?"Реквизиты — по данным ЕГРЮЛ. Показатели банка выше — по данным Банка России: банки отчитываются перед ним, а не в общем порядке.":(data.disclaimer||""))} Данные обновлены ${e.fetched_at?new Date(e.fetched_at).toLocaleDateString("ru-RU"):"по последней синхронизации"}.</p></div>
     </section>`;
+    /* Показатели второго ряда прячутся не насовсем: кнопка раскрывает их на
+       месте, не перерисовывая вкладку, — иначе прокрутка прыгала бы к началу. */
+    const moreBtn = mount.querySelector("[data-fns-more]");
+    if(moreBtn){
+      const closedText = moreBtn.textContent;   // «Ещё N показателей» — запоминаем ДО первого клика
+      moreBtn.onclick=()=>{
+        const box=mount.querySelector(".fns-derived-rest"); if(!box) return;
+        box.hidden=!box.hidden;
+        moreBtn.textContent = box.hidden ? closedText : "Свернуть";
+      };
+    }
     mount.querySelectorAll("[data-fnstab]").forEach(b=>b.onclick=()=>{tab=b.dataset.fnstab;draw();});
     mount.querySelectorAll("[data-fnsentity]").forEach(b=>b.onclick=()=>{entityIndex=Number(b.dataset.fnsentity);tab=isBank?"registry":"overview";draw();});
     const fullLinesBtn=document.getElementById("toggleFullLines");

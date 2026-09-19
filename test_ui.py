@@ -791,14 +791,14 @@ def test_follow_buttons_exist_on_company_and_industry_pages(browser, base_url):
 
 
 def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url):
-    """Оборотный капитал, долговая нагрузка и рентабельность на вкладке
-    «Финансы» профиля компании (просьба Дани, 19 сентября 2026).
+    """Вкладка «Финансы» профиля компании: наверху — главное, остальное под кнопкой.
 
-    Ответ ФНС подменяется route-перехватом: локальная база пуста, отчётность
-    живёт на проде — иначе тест проверял бы не вёрстку, а наличие синхронизации.
-    Числа считает сервер (`company_finance.derive`), здесь проверяем, что
-    посчитанное дошло до экрана целиком, объяснено человеческими словами и
-    не переполняет узкий экран."""
+    Первая версия показывала все пятнадцать показателей сразу, и владелец
+    сказал прямо: «слишком много показателей и выглядит как мусор»
+    (19 сентября 2026). Поэтому тест проверяет ОБА состояния: свёрнутое
+    (видно только то, чем компанию описывают в одной фразе) и раскрытое
+    (ничего не потеряно). Ответ ФНС подменяется route-перехватом: локальная
+    база пуста, отчётность живёт на проде."""
     import company_finance
     report = {
         "year": 2024, "revenue_rub": 10_000_000_000, "gross_profit_rub": 3_000_000_000,
@@ -810,9 +810,13 @@ def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url)
         "inventory_rub": 2_000_000_000, "receivables_rub": 3_000_000_000,
         "payables_rub": 1_500_000_000,
         "full_lines": [{"title": "Отчёт о финансовых результатах", "rows": [
-            {"code": "2330", "name": "Проценты к уплате", "value_rub": 500_000_000}]}],
+            {"code": "2330", "name": "Проценты к уплате", "value_rub": 500_000_000},
+            {"code": "2120", "name": "Себестоимость продаж", "value_rub": 7_000_000_000},
+            {"code": "4100", "name": "Сальдо от текущих операций", "value_rub": 900_000_000}]}],
     }
     report["derived"] = company_finance.derive(report)
+    primary = [m["label"] for m in report["derived"]["metrics"] if m["primary"]]
+    assert 3 <= len(primary) <= 6, "наверху должно остаться немного: %s" % primary
     payload = {
         "available": True, "company_id": "gcdf5803f", "company_name": "Тест",
         "entities": [{
@@ -835,21 +839,29 @@ def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url)
             pg.wait_for_timeout(900)
             pg.click('[data-fnstab="finance"]')
             pg.wait_for_timeout(300)
-            # `.k` и заголовки групп рисуются капсом через text-transform,
-            # а innerText отдаёт текст ПОСЛЕ преобразований CSS — сравниваем
-            # без учёта регистра (тот же приём, что в тесте про .tag выше).
-            body = pg.inner_text("#fns-company")
-            low = body.lower()
-            assert "оборотный капитал" in low
-            assert "чистый долг" in low
-            assert "рентабельность по чистой прибыли" in low
-            # Числа, а не пустые карточки: 8 − 5 = 3 млрд, 6 − 1 = 5 млрд.
-            assert "3 млрд ₽" in low and "5 млрд ₽" in low
+            # `.k` и заголовки групп рисуются капсом через text-transform, а
+            # innerText отдаёт текст ПОСЛЕ преобразований CSS — сравниваем без
+            # учёта регистра (тот же приём, что в тесте про .tag выше).
+            shown = lambda: pg.eval_on_selector_all(
+                ".fns-derived:not([hidden]) .d .k, .fns-derived-rest:not([hidden]) .d .k",
+                "els => els.filter(e => e.offsetParent !== null).map(e => e.textContent.toLowerCase())")
+            # Свёрнуто: наверху главное, второй ряд не показан.
+            visible = shown()
+            assert "чистый долг" in visible, visible
+            assert "оборотный капитал" in visible, visible
+            assert "рентабельность по чистой прибыли" not in visible, "второй ряд виден сразу"
+            assert len(visible) == len(primary), (visible, primary)
+            # Раскрыто: ничего не потеряно.
+            pg.click("[data-fns-more]")
+            pg.wait_for_timeout(250)
+            opened = shown()
+            assert "рентабельность по чистой прибыли" in opened, opened
+            assert len(opened) == len(report["derived"]["metrics"]), opened
+            assert "Свернуть" in pg.inner_text("[data-fns-more]")
+            low = pg.inner_text("#fns-company").lower()
             # Обещания EBITDA на экране нет — есть честное объяснение почему.
-            # Слово встречается только в пояснениях («отношение обычно считают
-            # к EBITDA — её по открытой отчётности не посчитать»), но НИКОГДА
-            # как название показателя над числом: амортизации в источнике нет,
-            # и подписать ею число значило бы соврать в самом заметном месте.
+            # Слово встречается только в пояснениях, но НИКОГДА как название
+            # показателя над числом: амортизации в источнике нет.
             assert "амортизацию раскрывают" in low
             labels = pg.eval_on_selector_all(
                 ".fns-derived .d .k", "els => els.map(e => e.textContent.toLowerCase())")
