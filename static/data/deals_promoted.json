@@ -1237,7 +1237,6 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "8 млрд ₽",
    "eco": {
     "sum": "8 млрд ₽",
     "share": "Имущество Александра Галицкого на 8 млрд ₽ и доли в десяти компаниях: ООО «Группа С-Терра» (100%), ООО «С-Терра СиЭсПи» (10,9%), ООО «Открытые цифровые платформы» (74,9%), ООО «Модум» (75%), ООО «Ивента» (50%), ООО «Датацентр СК» (100%), ООО «Спецпроект-2» (100%), ООО «Технокад» (92%), ООО «РВО Групп» (80%) и ООО «Селаникар» (100%, юрлицо CarPrice), обращены в доход государства и переданы Ростеху.",
@@ -1311,11 +1310,11 @@
      "card_hash": "be54e104f906"
     },
     "price": {
-     "value_rub": 8000000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "baa61b6a3878"
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2026-04-24",
@@ -1353,8 +1352,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    }
@@ -4013,7 +4012,7 @@
    "eco": {
     "sum": "3,5 млрд ₽",
     "share": "100% уставного капитала ООО «ЛайфСтрим» перешли к ООО «Рестрим Медиа» (юрлицо Wink) 19 января 2026 года, по данным ЕГРЮЛ; до сделки 89% принадлежало гендиректору Александру Киселевичу, 7,25% — Тимуру Родионову, 3,75% — Георгию Юфа.",
-    "val": "Мультипликатор EV/выручка — около 1,4x: цена 3,5 млрд ₽ плюс условное вознаграждение до 500 млн ₽ против выручки 2,5 млрд ₽ за 2024 год (цена подтверждена отчётностью «Ростелекома»).",
+    "val": "EV/выручка ≈ 1,4x без учёта условного вознаграждения; до 1,6x при включении максимальных 500 млн ₽ (цена подтверждена отчётностью «Ростелекома»). Расчёт: 3,5 млрд ₽ / 2,5 млрд ₽ = 1,4x; (3,5 + 0,5) млрд ₽ / 2,5 млрд ₽ = 1,6x.",
     "target_fin": "По данным отчётности ООО «ЛайфСтрим» по РСБУ за 2024 год, выручка сервиса составила 2,5 млрд ₽, чистая прибыль — 256 млн ₽ (по данным «Контур.Фокуса» — 225,6 млн ₽).",
     "fin": "Цену сделки «Ростелеком» раскрыл в отчёте 26 февраля 2026 года: 3,5 млрд ₽ плюс условное вознаграждение до 500 млн ₽; покупку оплатили из собственных средств «Рестрим Медиа».",
     "rationale": "Сделка позволяет Wink закрепиться в сегменте B2B-видеосервисов для региональных операторов ШПД, не имеющих собственных OTT-платформ; «Смотрешка» сохранит самостоятельный бренд, команду и бизнес-модель без изменения тарифов для партнёров.",
@@ -6356,8 +6355,7 @@
    ],
    "extra": "Покупатель — АО «Новый старт», зарегистрированное в марте 2025 года в Москве (реальные совладельцы в СПАРК скрыты); гендиректор — бывший заместитель главы «Роскосмоса» Александр Блошенко. Компания реализует стратегию консолидации спутникостроительных активов вне контура «Роскосмоса», о которой глава «Роскосмоса» Дмитрий Баканов докладывал президенту Путину в апреле 2026 года; общий объём инвестиций частного инвестора в проект заявлен на уровне 600 млрд ₽ за 8 лет. Ни одна из сторон сделку официально не подтвердила. Эксперты — исполнительный директор практики «ТеДо» Антон Виноградов и директор проектов АТК Консалтинга Георгий Королев — считают сделку перспективной, но предупреждают, что ключевое условие успеха — гарантированный портфель заказов.",
    "auto": true,
-   "seller_id": "gc0f11fd7",
-   "seller": "ПАО «Газпром» (через АО «Газпром космические системы»)",
+   "seller": "АО «Газпром космические системы»",
    "seller_src": "profile_role",
    "target_was_seller": true,
    "added": "2026-07-15",
@@ -6803,7 +6801,6 @@
    "id": "gcc232775",
    "date": "2026-04-13",
    "title": "Роснефть выкупила Саянскхимпласт на торгах за 30,3 млрд рублей",
-   "buyer": "g300b9ead",
    "target": "g5cd56361",
    "ind": "Химия и удобрения",
    "type": "Продажа с торгов",
@@ -6937,7 +6934,8 @@
     }
    },
    "seller": "ПСБ",
-   "seller_id": "g8bafde28"
+   "seller_id": "g8bafde28",
+   "buyer_name": "ООО «РН-Коммерция»"
   },
   {
    "id": "g2b1fe015",
@@ -7509,7 +7507,6 @@
    "id": "g796316fe",
    "date": "2026-03-15",
    "title": "Винченцо Трани увеличил долю в ПАО «Каршеринг Россия» («Делимобиль») до 66%",
-   "buyer": "g33023870",
    "target": "gca67e7ba",
    "ind": "Транспорт и логистика",
    "type": "M&A",
@@ -7635,7 +7632,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "ООО «Делимобиль Холдинг»"
   },
   {
    "id": "g5b62a860",
@@ -13395,7 +13393,7 @@
    "seller": "Банк «Траст»",
    "seller_src": "text",
    "seller_id": "gdc4235da",
-   "buyer_name": "Консорциум инвесторов во главе с «Интерросом»",
+   "buyer_name": "Catalytic People Limited",
    "added": "2026-07-15",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-15",
@@ -15464,7 +15462,6 @@
    "date": "2024-02-14",
    "title": "ZONT Hotel Group выкупила гостиничный комплекс «Аэротель» у аэропорта Домодедово",
    "buyer": "gf5e58704",
-   "target": "domodedovo",
    "ind": "Гостиницы и туризм",
    "type": "M&A",
    "kind": "acquisition",
@@ -15539,7 +15536,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "f25c225b0ebd"
+     "card_hash": "faab61a4e4f0"
     },
     "price": {
      "value_rub": 1700000000,
@@ -15663,61 +15660,14 @@
      ]
     },
     "target": {
-     "company_id": "domodedovo",
-     "inn": "5009097148",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
-     "perimeter": "refuted",
-     "card_hash": "1508c3ab1ab4",
-     "perimeter_entity": "гостиничный комплекс «Аэротель»",
-     "perimeter_report": {
-      "inn": "5009097148",
-      "year": 2023,
-      "revenue_rub": 5212327000.0,
-      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОМОДЕДОВО МЕЖДУНАРОДНЫЙ АЭРОПОРТ\""
-     },
-     "perimeter_other_entities": [],
-     "quote": "INTERFAX.RU - Российская гостиничная компания ZONT Hotel Group выкупила у аэропорта \"Домодедово\" гостиничный комплекс \"Аэротель\", сумма сделки составила 1,7 млрд рублей, сообщает пресс-служба гостиничного оператора.",
-     "source": "https://www.interfax.ru/business/946058",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [],
-       "entity": "гостиничный комплекс «Аэротель»",
-       "report": {
-        "inn": "5009097148",
-        "year": 2023,
-        "revenue_rub": 5212327000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОМОДЕДОВО МЕЖДУНАРОДНЫЙ АЭРОПОРТ\""
-       },
-       "quote": "INTERFAX.RU - Российская гостиничная компания ZONT Hotel Group выкупила у аэропорта \"Домодедово\" гостиничный комплекс \"Аэротель\", сумма сделки составила 1,7 млрд рублей, сообщает пресс-служба гостиничного оператора.",
-       "source": "https://www.interfax.ru/business/946058",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [],
-       "entity": "ООО «Домодедово Международный аэропорт»",
-       "report": {
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОМОДЕДОВО МЕЖДУНАРОДНЫЙ АЭРОПОРТ\"",
-        "inn": "5009097148",
-        "year": 2023,
-        "revenue_rub": 5212327000.0,
-        "operating_profit_rub": 124514000.0
-       },
-       "quote": "Москва. 14 февраля. INTERFAX.RU - Российская гостиничная компания ZONT Hotel Group выкупила у аэропорта \"Домодедово\" гостиничный комплекс \"Аэротель\", сумма сделки составила 1,7 млрд рублей, сообщает пресс-служба гостиничного оператора.",
-       "source": "https://www.interfax.ru/business/946058",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -15731,10 +15681,11 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "price_scope_unknown"
+     "multiple_text": "no_target"
     }
    },
-   "date_basis": "publication"
+   "date_basis": "publication",
+   "asset": "гостиничный комплекс «Аэротель»"
   },
   {
    "id": "g4a8bd86d",
@@ -17688,7 +17639,8 @@
      "multiple_text": "target_bank"
     }
    },
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "seller_id": "g889e2038"
   },
   {
    "id": "g64a94e27",
@@ -28579,7 +28531,6 @@
    "id": "g92107ce6",
    "date": "2023-03-09",
    "title": "Приобретение Cosmos Hotel Group (АФК «Система») 100% долей в компаниях-владельцах 10 отелей у норвежской Wenaas Hotel Russia AS",
-   "buyer": "gc2792a44",
    "ind": "Гостиницы и туризм",
    "type": "M&A",
    "kind": "acquisition",
@@ -28733,7 +28684,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "buyer_name": "ООО «Космос Северо-Запад»"
   },
   {
    "id": "g9fdcb59d",
@@ -30371,7 +30323,6 @@
    "date": "2023-10-27",
    "title": "Philip Morris International оценила свою долю 23% в российском дистрибьюторе Megapolis Distribution BV в $351 млн (по отчётности на 30.09.2023)",
    "buyer": null,
-   "target": "gd03c5ade",
    "ind": "Пищепром и напитки",
    "type": "M&A",
    "kind": "acquisition",
@@ -30448,7 +30399,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "367ba02033d5"
+     "card_hash": "8befe70a3723"
     },
     "price": {
      "value_rub": null,
@@ -30474,14 +30425,14 @@
      "card_hash": "b2fe1682161e"
     },
     "target": {
-     "company_id": "gd03c5ade",
+     "company_id": null,
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "32d3a6b7d278"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -30495,9 +30446,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "no_target"
     }
-   }
+   },
+   "asset": "Megapolis Distribution BV"
   },
   {
    "id": "g432502a3",
@@ -36120,7 +36072,7 @@
    "date": "2019-06-21",
    "title": "Газпром-медиа приобрёл 51% в СП «Квант» у МаксимаТелеком за 1,67 млрд рублей",
    "buyer": "g41e65d78",
-   "target": null,
+   "target": "g274a2d42",
    "ind": "Медиа",
    "type": "M&A",
    "kind": "acquisition",
@@ -36211,14 +36163,14 @@
      "card_hash": "3654595c267f"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g274a2d42",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "ca91706fbd4b"
     },
     "admitted": {
      "count": true,
@@ -53211,7 +53163,6 @@
    "date": "2022-05-16",
    "title": "Приобретение ООО «СК С.Т.С.» (ГК «Садовое кольцо») Серпуховского лифтостроительного завода на торгах банкротного имущества СУ-155",
    "buyer": null,
-   "target": "g35283c3d",
    "ind": "Машиностроение",
    "type": "Продажа с торгов",
    "kind": "acquisition",
@@ -53292,7 +53243,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "b5530f187acd"
+     "card_hash": "c25524b42c82"
     },
     "price": {
      "value_rub": 1300000000.0,
@@ -53318,14 +53269,14 @@
      "card_hash": "3584e08a0180"
     },
     "target": {
-     "company_id": "g35283c3d",
-     "inn": "5024182052",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "30cbc65201ab"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -53342,7 +53293,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "seller": "СУ-155"
+   "seller": "СУ-155",
+   "asset": "Серпуховский лифтостроительный завод СУ-155"
   },
   {
    "id": "g15bee2cf",
@@ -55601,7 +55553,6 @@
    "id": "g55f1c662",
    "date": "2022-06-01",
    "title": "Финская Valio продала российский бизнес (бренд Viola) компании Velcom",
-   "buyer": "gdea24f2e",
    "target": "g54913880",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -55723,7 +55674,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "ООО «Дэнир»"
   },
   {
    "id": "g57b3b93c",
@@ -60916,7 +60868,6 @@
    "date": "2025-01-13",
    "title": "Компания «Виннер» (ГК «Таврос») приобрела здание бывшего гипермаркета Selgros",
    "buyer": "gcaccecb1",
-   "target": "g5700b609",
    "ind": "Недвижимость",
    "type": "M&A",
    "kind": "acquisition",
@@ -60963,7 +60914,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "af90b80f8157"
+     "card_hash": "b627940b7ae2"
     },
     "price": {
      "value_rub": null,
@@ -60989,14 +60940,14 @@
      "card_hash": "d0e8f6bef25f"
     },
     "target": {
-     "company_id": "g5700b609",
-     "inn": "5050058510",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "bcf38c54d373"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -61010,9 +60961,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
-   }
+   },
+   "asset": "здание бывшего гипермаркета Selgros"
   },
   {
    "id": "g7074c53b",
@@ -61126,7 +61078,6 @@
    "id": "gf9b54ee7",
    "date": "2026-04-22",
    "title": "Фонд «Восток Инвестиции» купил 20% в производителе спешелти-кофе Tasty Coffee",
-   "buyer": "gfe425e93",
    "target": "g4f542f90",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -61250,7 +61201,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "Международная компания «Кенигсберг инвестментс»"
   },
   {
    "id": "g8dfb3aa0",
@@ -65049,7 +65001,6 @@
    "id": "gd21bbce8",
    "date": "2025-01-13",
    "title": "Совладельцы Merlion приобрели 100% АО «Натиксис-банк» у Natixis",
-   "buyer": "g7d1a2f7d",
    "target": "g8bfedb6d",
    "ind": "Банки",
    "type": "M&A",
@@ -65171,7 +65122,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_bank"
     }
-   }
+   },
+   "buyer_name": "компания «Бюрократ»"
   },
   {
    "id": "g8bbbc262",
@@ -65298,7 +65250,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "gluchsheereshenie"
   },
   {
    "id": "gac4491d6",
@@ -67846,7 +67799,7 @@
     "sum": "303 млн ₽",
     "share": "«Мосгорломбард» (MGKL) — старейшая компания на ломбардном рынке Москвы, основанная в 1924 году. Выдаёт займы под залог золота, серебра, меха и электроники, скупает золото и серебро, предлагает сезонное хранение шуб, оценку ювелирных изделий и продажу украшений, меха и электроники.",
     "val": "—",
-    "target_fin": "Финансовые показатели 2022 года: выручка — 1,4 млрд ₽; EBITDA — 355 млрд ₽; рентабельность по EBITDA — 25%. Результаты за 9 месяцев 2023 года: выручка — 1,16 млрд ₽; операционная прибыль — 8,24 млн ₽; EBITDA — 406 млн ₽ (рентабельность по EBITDA — 35%); чистая прибыль — 55,8 млн ₽; чистый долг — 1,9 млрд ₽.",
+    "target_fin": "Финансовые показатели 2022 года: выручка — 1,4 млрд ₽; EBITDA — 355 млн ₽; рентабельность по EBITDA — 25%. Результаты за 9 месяцев 2023 года: выручка — 1,16 млрд ₽; операционная прибыль — 8,24 млн ₽; EBITDA — 406 млн ₽ (рентабельность по EBITDA — 35%); чистая прибыль — 55,8 млн ₽; чистый долг — 1,9 млрд ₽.",
     "fin": "По итогам 2023 года «Мосгорломбард» выдал 287 400 займов — на 28% больше, чем годом ранее, следует из операционных результатов компании. Кредитный портфель вырос на 71% год к году и достиг около 1,2 млрд ₽. Доля товаров, хранящихся в портфеле более 90 дней, уменьшилась за год с 50 до 16%. Число уникальных клиентов выросло на 37% год к году, до 90 100 человек.",
     "rationale": "Деньги от IPO планировалось направить в первую очередь на создание онлайн-площадки для перепродажи вещей (ресейл-маркета) и на открытие новых отделений.",
     "context": "На протяжении почти всей своей истории «Мосгорломбард» был государственным бизнесом; в 2018 году новая команда выкупила 100% его акций у ВТБ.",
@@ -73493,7 +73446,6 @@
    "id": "g4444b396",
    "date": "2025-11-28",
    "title": "Capital Group приобрела 16,6% ООО «ТВК «Тишинка»»",
-   "buyer": "g5da5d300",
    "target": "gb7d607ba",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -73613,7 +73565,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "«Велана»"
   },
   {
    "id": "g6304cf91",
@@ -74773,7 +74726,6 @@
    "id": "ge56325d9",
    "date": "2025-11-01",
    "title": "Группа Аврора купила 50% доли в ТРЦ «Жемчужная плаза» у китайской SIIC",
-   "buyer": "g4b480566",
    "target": "g3a6a6971",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -74896,7 +74848,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "ООО «КСН» (группа «Аврора»)"
   },
   {
    "id": "ga218f75c",
@@ -75170,7 +75123,6 @@
    "date": "2025-10-24",
    "title": "Сбербанк Инвестиции вышли из капитала Медскан Лаб",
    "buyer": null,
-   "target": "g729ef6c5",
    "ind": "Здравоохранение",
    "type": "M&A",
    "kind": "acquisition",
@@ -75237,37 +75189,8 @@
    "facts": {
     "stake": {
      "value": 39.0,
-     "basis": "verified",
-     "card_hash": "4f668a3d63ff",
-     "object": "ООО «Медскан Лаб»",
-     "event": "closing",
-     "event_variants": [
-      "closing"
-     ],
-     "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
-     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value": 39.0,
-       "object": "ООО «Медскан Лаб»",
-       "event": "closing",
-       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
-       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value": 39.0,
-       "object": "ООО «Медскан Лаб»",
-       "event": "closing",
-       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
-       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "basis": "rule",
+     "card_hash": "6f635a93be9a"
     },
     "price": {
      "value_rub": 4767000000,
@@ -75390,73 +75313,14 @@
      ]
     },
     "target": {
-     "company_id": "g729ef6c5",
-     "inn": "7736328675",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
-     "perimeter": "refuted",
-     "card_hash": "d447eb56e9f5",
-     "perimeter_entity": "ООО «Медскан Лаб»",
-     "perimeter_report": {
-      "inn": "7736328675",
-      "year": 2024,
-      "revenue_rub": 341117000.0,
-      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
-     },
-     "perimeter_other_entities": [
-      "ООО «Диагностика»",
-      "ООО «КДЛ Домодедово-тест»",
-      "ООО «КДЛ Тест»"
-     ],
-     "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
-     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО «Диагностика»",
-        "ООО «КДЛ Домодедово-тест»",
-        "ООО «КДЛ Тест»"
-       ],
-       "entity": "ООО «Медскан Лаб»",
-       "report": {
-        "inn": "7736328675",
-        "year": 2024,
-        "revenue_rub": 341117000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
-       },
-       "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
-       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО «Медскан Лаб»",
-        "ООО «Диагностика»",
-        "ООО «КДЛ Домодедово-тест»",
-        "ООО «КДЛ Тест»"
-       ],
-       "entity": "АО «Медскан»",
-       "report": {
-        "inn": "7736328675",
-        "year": 2024,
-        "revenue_rub": 341117000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЕДСКАН\""
-       },
-       "quote": "ООО «Медскан Лаб», зарегистрированное в 2022 году в Москве, является головной компанией ООО «Диагностика» (доля 99,99%), владеющей ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
-       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -75474,7 +75338,8 @@
     }
    },
    "stake_acquired": 39.0,
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "asset": "ООО «Медскан Лаб»"
   },
   {
    "id": "gbb7e25e1",
@@ -77516,7 +77381,6 @@
    "id": "gadcc1f58",
    "date": "2025-09-11",
    "title": "Ростелеком приобрел 51% в разработчике цифровых решений для ритейла АСТОР",
-   "buyer": "g00f14033",
    "target": "gd2ebf7b6",
    "ind": "ИТ и интернет",
    "type": "M&A",
@@ -77634,7 +77498,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_lot"
     }
-   }
+   },
+   "buyer": "g32dc0be0"
   },
   {
    "id": "g7299791f",
@@ -78218,7 +78083,6 @@
    "id": "g1d003324",
    "date": "2025-09-01",
    "title": "ВИМ Private Equity и ООО «Управление и развитие» инвестировали в BASK",
-   "buyer": "g673a17f8",
    "target": "gbe2210ef",
    "ind": "Потребительские товары",
    "type": "Инвестиция",
@@ -78330,7 +78194,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer_name": "ВИМ Private Equity через ЗПИФ «Фонд пре-IPO 2» под управлением АО «ВИМ Инвестиции» и ООО «Управление и развитие»"
   },
   {
    "id": "g2632677b",
@@ -80957,7 +80822,6 @@
    "id": "g63fc05ab",
    "date": "2025-07-01",
    "title": "Rönesans Holding продал БЦ Icon в Петербурге итальянской компании ADVENTUS INTERNATIONAL",
-   "buyer": "g8b68e6e4",
    "target": "g1035d8d8",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -81063,7 +80927,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "ООО «АДМ Группа»"
   },
   {
    "id": "g4165ba00",
@@ -89389,7 +89254,6 @@
    "id": "g6a4b0a2a",
    "date": "2026-04-02",
    "title": "Сергей Шишкарев выкупит 49% УК «Дело» у «Росатома» и продаст «Ростеху»",
-   "buyer": "g4f522aee",
    "target": "delo",
    "ind": "Транспорт и логистика",
    "type": "M&A",
@@ -89617,7 +89481,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "announcement"
+   "date_basis": "announcement",
+   "buyer_name": "«Росатом»"
   },
   {
    "id": "g8a86fc9b",
@@ -96098,7 +95963,6 @@
    "id": "g7ccf80f9",
    "date": "2024-12-17",
    "title": "Авито приобрела ГК Internest (AdRiver и Soloway)",
-   "buyer": "g1eff47f6",
    "target": "g2527f1ab",
    "ind": "E-commerce",
    "type": "M&A",
@@ -96231,13 +96095,13 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "КЕХ Екоммерц"
   },
   {
    "id": "g9995eb50",
    "date": "2024-12-16",
    "title": "«Страна девелопмент» купила участок на 13,6 га в Марьино за 8,8 млрд руб.",
-   "buyer": "g7ec1bf3f",
    "target": "g087be998",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -96352,7 +96216,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "ООО «Элит строй»"
   },
   {
    "id": "gb6a90572",
@@ -98147,11 +98012,11 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "600–800 млн ₽ (по оценке)",
+   "sum": "807 млн ₽",
    "eco": {
     "sum": "600–800 млн ₽ (по оценке)",
     "share": "—",
-    "val": "Эксперты оценивают сделку в 600–800 млн ₽.",
+    "val": "807 млн ₽ деньгами плюс доля 4,9% в российской дочерней компании Группы; заключены колл- и пут-опционы.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "Сделка. МТС Юрент приобрела компанию Eleven для создания R&D-центра и разработки собственных моделей электросамокатов, локализации компонентов и софта.",
@@ -98201,11 +98066,11 @@
      "card_hash": "a58ce106c5f3"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "range",
+     "value_rub": 807000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f6fc285df53c"
+     "card_hash": "39fd726478bb"
     },
     "date": {
      "value": "2024-12-01",
@@ -98243,8 +98108,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -100401,7 +100266,6 @@
    "id": "gbd5ad233",
    "date": "2024-10-17",
    "title": "Kokoc Group приобрела 85% блогерского агентства Players Team",
-   "buyer": "g3595d857",
    "target": "g6cba9c8e",
    "ind": "Медиа",
    "type": "M&A",
@@ -100673,7 +100537,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "sum_basis": "estimate"
+   "sum_basis": "estimate",
+   "buyer_name": "Александр Шокуров"
   },
   {
    "id": "gf9df9712",
@@ -102223,7 +102088,7 @@
   {
    "id": "g81a766ac",
    "date": "2024-09-27",
-   "title": "Русагро увеличило долю в ГК «Агро-Белогорье» с 22,5% до 47,5% по решению суда",
+   "title": "Русагро увеличило долю в ГК «Агро-Белогорье» с 22,5% до 100%",
    "buyer": "g924985ab",
    "target": "g1581ce50",
    "ind": "Агро",
@@ -102300,7 +102165,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "13b5e788a010"
+     "card_hash": "828d90ce2df4"
     },
     "price": {
      "value_rub": null,
@@ -102323,7 +102188,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "167047a94002"
+     "card_hash": "cfa1b4794c61"
     },
     "target": {
      "company_id": "g1581ce50",
@@ -103283,7 +103148,6 @@
    "id": "gd6ce73ed",
    "date": "2024-09-10",
    "title": "«Рубеж» выкупил площади в логистическом центре «Внуково 2»",
-   "buyer": "gfaf6ab0f",
    "target": "gb68d459f",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -103396,7 +103260,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "компания «Рубеж»"
   },
   {
    "id": "gb101d54d",
@@ -104705,7 +104570,6 @@
    "id": "g3b9c077a",
    "date": "2024-09-01",
    "title": "Евгений Туголуков покупает группу «Евроонко»",
-   "buyer": "g66c1d4b8",
    "target": "g5d077374",
    "ind": "Здравоохранение",
    "type": "M&A",
@@ -105006,7 +104870,8 @@
      "multiple_text": "perimeter_not_verified"
     }
    },
-   "stake_acquired": 99.99
+   "stake_acquired": 99.99,
+   "buyer_name": "«Тетра»"
   },
   {
    "id": "g2bef2143",
@@ -113512,7 +113377,6 @@
    "id": "g1a6f4fec",
    "date": "2024-04-10",
    "title": "O1 Properties приобрела российский бизнес WeWork",
-   "buyer": "g7e0da9f5",
    "target": "gad5c199b",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -113624,7 +113488,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "ООО «Спейс 1»"
   },
   {
    "id": "g1df89416",
@@ -114452,7 +114317,6 @@
    "id": "g2b6c37c1",
    "date": "2024-03-28",
    "title": "Ростелеком (ГК Солар) инвестировал в Secure-T, приобретая 28,57% акций",
-   "buyer": "g00f14033",
    "target": "g0fcec4de",
    "ind": "ИТ и интернет",
    "type": "M&A",
@@ -114556,7 +114420,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "ООО «Солар-ПТ»"
   },
   {
    "id": "g5725678a",
@@ -117681,7 +117546,7 @@
     "target_fin": "ООО «Шмит Компани» зарегистрировано в 2014 году. До конца января 80% принадлежало Радмиру Соколову, 20% — Игорю Рослякову. С 31 января Соколову принадлежит 50%, Иманову — 30%, доля Игоря Рослякова не изменилась. Выручка в 2023 году составила 1,5 млрд ₽, чистая прибыль — 125 млн ₽. В 2024 году выручка была 1,57 млрд ₽ при прибыли 55,9 млн ₽, а в 2025 году упала до 897,2 млн ₽ — на 42,7%, прибыль составила 15,9 млн ₽.",
     "fin": "—",
     "rationale": "Решение о сделке принято с расчётом на рост рынка бытовой техники в России после ухода ряда иностранных производителей.",
-    "context": "Гуламгусейн Иманов владеет по 70% в торговых ООО «Абсолют» и ООО «Бизнес Контроль», 51% в ООО «Здоровье нации» (косметология) и 70% в ООО «Смарт Дистрибьюшен», которое продаёт и производит бытовую технику Jackie's. Выручка последнего в 2023 году составила 339,3 млн ₽, чистая прибыль — 1,9 млн ₽. К августу 2026 года оба совладельца, участвовавшие в сделке 2024 года, вышли из капитала: по данным ЕГРЮЛ, единственным владельцем ООО «Шмит Компани» стал Игорь Михайлович Росляков — его доля выросла с 50% до 100%, а доля Гуламгусейна Мехди Оглы Иманова снизилась с 50% до 0%.",
+    "context": "Гуламгусейн Иманов владеет по 70% в торговых ООО «Абсолют» и ООО «Бизнес Контроль», 51% в ООО «Здоровье нации» (косметология) и 70% в ООО «Смарт Дистрибьюшен», которое продаёт и производит бытовую технику Jackie's. Выручка последнего в 2023 году составила 339,3 млн ₽, чистая прибыль — 1,9 млн ₽. К августу 2026 года оба совладельца, участвовавшие в сделке 2024 года, вышли из капитала: по данным ЕГРЮЛ, единственным владельцем ООО «Шмит Компани» стал Игорь Михайлович Росляков — его доля выросла с 50% до 100%, а доля Гуламгусейна Мехди Оглы Иманова снизилась с 30% до 0%.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -119230,7 +119095,6 @@
    "date": "2026",
    "title": "Покупка АО «Согаз» и «Газовые технологии» долей Wintershall и OMV в газовых проектах",
    "buyer": "g005c4dc3",
-   "target": "gc0f11fd7",
    "ind": "Нефть и газ",
    "type": "M&A",
    "kind": "acquisition",
@@ -119291,7 +119155,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "e954ef976df6"
+     "card_hash": "55a6c1b8aa9c"
     },
     "price": {
      "value_rub": 8100000000,
@@ -119415,81 +119279,14 @@
      ]
     },
     "target": {
-     "company_id": "gc0f11fd7",
-     "inn": "7736050003",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
-     "perimeter": "refuted",
-     "card_hash": "a88173b81479",
-     "perimeter_entity": "ПАО «Газпром»",
-     "perimeter_report": {
-      "inn": "7736050003",
-      "year": 2025,
-      "revenue_rub": 5846351786000.0,
-      "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
-     },
-     "perimeter_other_entities": [
-      "«Севернефтегазпром»",
-      "ООО «Ачим Девелопмент»",
-      "«Ачимгаз»",
-      "«Ачим сбыт»",
-      "«Газпром ЮРГМ Трейдинг»",
-      "«Газпром ЮРГМ Девелопмент»"
-     ],
-     "quote": "Как указывается в документах, продаже АО «Согаз» подлежат доля в 50% в «Севернефтегазпроме» стоимостью 1,8 млрд руб., а также доли в 0,01% в «Газпром ЮРГМ Трейдинг» (3 млрд руб.) и «Газпром ЮРГМ Девелопмент» (3,3 млрд руб.). ООО «Газовые технологии» приобретут долю в 25% в ООО «Ачим Девелопмент» за 2,8 млрд руб., 50% в «Ачимгаз» — за 4,7 млрд руб. и 9% в «Ачим сбыт» — за 110 млн руб.",
-     "source": "https://www.kommersant.ru/doc/8590995",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "«Севернефтегазпром»",
-        "ООО «Ачим Девелопмент»",
-        "«Ачимгаз»",
-        "«Ачим сбыт»",
-        "«Газпром ЮРГМ Трейдинг»",
-        "«Газпром ЮРГМ Девелопмент»"
-       ],
-       "entity": "ПАО «Газпром»",
-       "report": {
-        "inn": "7736050003",
-        "year": 2025,
-        "revenue_rub": 5846351786000.0,
-        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
-       },
-       "quote": "Как указывается в документах, продаже АО «Согаз» подлежат доля в 50% в «Севернефтегазпроме» стоимостью 1,8 млрд руб., а также доли в 0,01% в «Газпром ЮРГМ Трейдинг» (3 млрд руб.) и «Газпром ЮРГМ Девелопмент» (3,3 млрд руб.). ООО «Газовые технологии» приобретут долю в 25% в ООО «Ачим Девелопмент» за 2,8 млрд руб., 50% в «Ачимгаз» — за 4,7 млрд руб. и 9% в «Ачим сбыт» — за 110 млн руб.",
-       "source": "https://www.kommersant.ru/doc/8590995",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "«Севернефтегазпром»",
-        "«Газпром ЮРГМ Трейдинг»",
-        "«Газпром ЮРГМ Девелопмент»",
-        "ООО «Ачим Девелопмент»",
-        "«Ачимгаз»",
-        "«Ачим сбыт»"
-       ],
-       "entity": "ПАО «Газпром»",
-       "report": {
-        "inn": "7736050003",
-        "year": 2025,
-        "revenue_rub": 5846351786000.0,
-        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
-       },
-       "quote": "Как указывается в документах, продаже АО «Согаз» подлежат доля в 50% в «Севернефтегазпроме» стоимостью 1,8 млрд руб., а также доли в 0,01% в «Газпром ЮРГМ Трейдинг» (3 млрд руб.) и «Газпром ЮРГМ Девелопмент» (3,3 млрд руб.).",
-       "source": "https://www.kommersant.ru/doc/8590995",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -119505,7 +119302,8 @@
      "top_purchases": "discussion_only",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "asset": "лот: 50% «Севернефтегазпрома»; по 0,01% «Газпром ЮРГМ Трейдинг» и «Газпром ЮРГМ Девелопмент»; 25% ООО «Ачим Девелопмент»"
   },
   {
    "id": "g97679d43",
@@ -124806,7 +124604,6 @@
    "id": "gdb854428",
    "date": "2024-10-24",
    "title": "Сбербанк инвестиции приобрёл логистический склад «Пивдома» в Московской области",
-   "buyer": "g28ff15bb",
    "target": "g6f4bb996",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -124922,7 +124719,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "«Сбербанк инвестиции»"
   },
   {
    "id": "gb49e3668",
@@ -127854,7 +127652,6 @@
    "id": "g3375c312",
    "date": "2024-04-16",
    "title": "Tigers Realm Coal продаёт угольные активы на Чукотке Марку Бузуку",
-   "buyer": "gc99b37a9",
    "target": "g7e702095",
    "ind": "Уголь",
    "type": "M&A",
@@ -127961,7 +127758,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "АПМ-Инвест"
   },
   {
    "id": "g3679d62c",
@@ -129015,7 +128813,6 @@
    "date": "2024-02-12",
    "title": "VK приобрела 70% в red_mad_robot",
    "buyer": "g4e694234",
-   "target": "g9d76115a",
    "ind": "ИТ и интернет",
    "type": "M&A",
    "kind": "acquisition",
@@ -129087,7 +128884,7 @@
     "stake": {
      "value": 70.0,
      "basis": "rule",
-     "card_hash": "fb5633d902f1"
+     "card_hash": "1afaa4931596"
     },
     "price": {
      "value_rub": null,
@@ -129113,14 +128910,14 @@
      "card_hash": "3510d256e091"
     },
     "target": {
-     "company_id": "g9d76115a",
-     "inn": "7728677256",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "a33ede794b72"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -129134,9 +128931,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
-   }
+   },
+   "asset": "ООО «Много приложений»"
   },
   {
    "id": "gdd67ffde",
@@ -134561,7 +134359,6 @@
    "id": "gc92ba4cb",
    "date": "2022-12-26",
    "title": "«Логистика и точка» приобретает российский бизнес Havi",
-   "buyer": "g09ccbaca",
    "target": "g29519f4f",
    "ind": "Транспорт и логистика",
    "type": "M&A",
@@ -134690,7 +134487,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "«Логистика и точка»"
   },
   {
    "id": "gca3a8810",
@@ -136501,7 +136299,6 @@
    "id": "g3d0699a8",
    "date": "2023-11-07",
    "title": "Вымпелком инвестировал в Candy Flip Robots (анализ эмоций по видео)",
-   "buyer": "gd685b926",
    "target": "gfd9eea5c",
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
@@ -136623,7 +136420,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer": "g1209e3c2"
   },
   {
    "id": "g9f76fe60",
@@ -137625,7 +137423,6 @@
    "id": "g94dcc5cc",
    "date": "2023-10-30",
    "title": "Газпром может приобрести до 40% автопроизводителя Aurus",
-   "buyer": "gc0f11fd7",
    "target": "gf4733fef",
    "ind": "Автопром",
    "type": "Инвестиция",
@@ -137744,13 +137541,13 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer": "g6261c82c"
   },
   {
    "id": "ga5b0724c",
    "date": "2023-10-27",
    "title": "Таврос приобрел 51% ГК «Лебеди» — производителя и переработчика риса",
-   "buyer": "gcaccecb1",
    "target": "g5cb801c4",
    "ind": "Агро",
    "type": "M&A",
@@ -137873,7 +137670,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "ООО «Управление агроактивами» (49%) и Денис Майоров (2%)"
   },
   {
    "id": "g8f1fab29",
@@ -137885,7 +137683,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "$267 млн",
+   "sum": "$316 млн",
    "eco": {
     "sum": "$267 млн",
     "share": "HWNM принадлежит глинозёмный завод в китайской провинции Хэбэй, годовая мощность предприятия — 4,8 млн т.",
@@ -137950,7 +137748,7 @@
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "4018449b5a0a"
+     "card_hash": "36f5d1401d6f"
     },
     "date": {
      "value": "2023-10-23",
@@ -142400,7 +142198,6 @@
    "id": "g6f88ab01",
    "date": "2023-08-02",
    "title": "ЭГО-холдинг Кашина приобрел ООО «Промсервис» в Волгограде",
-   "buyer": "g2f6ed977",
    "target": "g5d25ac81",
    "ind": "Машиностроение",
    "type": "M&A",
@@ -142516,7 +142313,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "АО «Морские навигационные системы»"
   },
   {
    "id": "ga5f64060",
@@ -144008,7 +143806,6 @@
    "id": "g1f098415",
    "date": "2023-07-13",
    "title": "Kellogg продал российский бизнес ГК «Черноголовка»",
-   "buyer": "g5ff0a3de",
    "target": "gd79c4455",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -144143,7 +143940,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "АО «Аквалайф ресурс»"
   },
   {
    "id": "g037385e2",
@@ -145351,7 +145149,6 @@
    "id": "ged59a2eb",
    "date": "2023-07-01",
    "title": "Оманский инвестфонд инвестировал в Деметра-холдинг через допэмиссию",
-   "buyer": "gf5a3f4d2",
    "target": "g040f6110",
    "ind": "Агро",
    "type": "Инвестиция",
@@ -149611,7 +149408,6 @@
    "extra": "МТС приобрела 15% ООО «Проектная среда» у Марии и Юрия Висневских 13 апреля 2023 года, а 27 апреля 2023 года довела долю до контрольной — 51%, как и планировала. «СКАУТ-КР» (бренд компании) продолжила работать самостоятельно внутри группы МТС под руководством прежней команды основателей и менеджмента.",
    "auto": true,
    "promoted_from_bulk": true,
-   "seller": "Мария и Юрий Висневские",
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
@@ -151943,7 +151739,6 @@
    "id": "g5607637d",
    "date": "2023-08-25",
    "title": "Фонд «Сигнет Инвестиции» купил «Комсомольца» в Забайкалье у братьев Нагелей",
-   "buyer": "g24bb0846",
    "target": "gc4b5b9a8",
    "ind": "Агро",
    "type": "M&A",
@@ -152075,7 +151870,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer": "ge9ceb16e"
   },
   {
    "id": "g2d075f03",
@@ -152557,7 +152353,6 @@
    "id": "gc64703e2",
    "date": "2023-03-01",
    "title": "Газпромбанк Лизинг инвестирует в кикшеринг Urent и становится совладельцем",
-   "buyer": "gf1f56e08",
    "target": "g30d7fdce",
    "ind": "Транспорт и логистика",
    "type": "Инвестиция",
@@ -152672,7 +152467,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer_name": "Газпромбанк Лизинг"
   },
   {
    "id": "g37066bfe",
@@ -152931,7 +152727,6 @@
    "id": "g47189119",
    "date": "2023-02-21",
    "title": "МТС приобрела 67% платформы Buzzoola для размещения нативной рекламы",
-   "buyer": "g69c88bc7",
    "target": "g478eb55f",
    "ind": "Медиа",
    "type": "M&A",
@@ -153246,7 +153041,8 @@
      "top_purchases": "ok",
      "multiple_text": "control_change_not_verified"
     }
-   }
+   },
+   "buyer_name": "ООО «Стрим»"
   },
   {
    "id": "g88d5e740",
@@ -153998,7 +153794,6 @@
    "id": "g184477ed",
    "date": "2023-02-01",
    "title": "УК «Аэропорты регионов» и казахстанские партнеры приобрели аэропорт «Орал» в Уральске",
-   "buyer": "g1fdc3568",
    "target": "gbbc840fa",
    "ind": "Порты и инфраструктура",
    "type": "M&A",
@@ -154098,7 +153893,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "ТОО «Орал Аэропорт Холдинг»"
   },
   {
    "id": "g3b976e82",
@@ -157451,7 +157247,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "40 млрд ₽",
+   "sum": "45,6 млрд ₽",
    "eco": {
     "sum": "40 млрд ₽",
     "share": "«Самолет» приобрёл 11 проектов на стадии проектирования и 50 компаний, входящих в МИЦ.",
@@ -157568,71 +157364,9 @@
     "price": {
      "value_rub": null,
      "meaning": "reported",
-     "scope": "equity",
-     "basis": "verified",
-     "card_hash": "3ba0dec4b12c",
-     "meaning_variants": [
-      "reported"
-     ],
-     "scope_basis": "verified",
-     "quote": "ВТБ полностью профинансировал сделку группы компаний «Самолет» по покупке девелопера МИЦ на сумму 45,6 млрд руб.",
-     "source": "https://www.vedomosti.ru/business/news/2023/10/25/1002357-vtb-nazval-stoimost",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "value_rub": 45600000000,
-       "meaning": "reported",
-       "attribution": "adviser",
-       "event": "closing",
-       "scope": "equity",
-       "terms": "includes_contingent",
-       "quote": "ВТБ полностью профинансировал сделку группы компаний «Самолет» по покупке девелопера МИЦ на сумму 45,6 млрд руб.",
-       "attribution_quote": "Об этом сообщили в пресс-службе банка.",
-       "source": "https://www.vedomosti.ru/business/news/2023/10/25/1002357-vtb-nazval-stoimost",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value_rub": 40000000000,
-       "meaning": "reported",
-       "attribution": "media_sources",
-       "event": "closing",
-       "scope": "equity",
-       "terms": "unknown",
-       "quote": "По данным источников ТАСС , сумма сделки составила 40 млрд руб.",
-       "source": "https://www.kommersant.ru/doc/6280813",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ],
-     "reading": {
-      "result": "not_in_source",
-      "at": "2026-09-06",
-      "readers": [
-       "A",
-       "B"
-      ],
-      "notes": [
-       "Цена оставлена null, потому что подтвердить сумму карточки (40 млрд ₽) как раскрытую нельзя, а официальную цифру записать мешает расхождение с карточкой: Ъ 16.10.2023 — «По данным источников ТАСС, сумма сделки составила 40 млрд руб.» (неофициально, оценка источников); Ведомости 25.10.2023 — «ВТБ полностью профинансировал сделку группы компаний «Самолет» по покупке девелопера МИЦ на сумму 45,6 млрд руб. Об этом сообщили в пресс-службе банка» — единственная официально названная сумма (у ВТБ: с фиксированной и переменной составляющими). Рекомендация: поправить сумму карточки через review.py на 45,6 млрд ₽ (disclosed, scope unknown — обязательства ГК МИЦ переходят к покупателю, включён ли долг, не сказано), после чего факт цены подтверждается цитатой Ведомостей. Закрытие объявлено 16 октября 2023 (день не назван); соглашение подписано 20 июня 2023. Периметр: куплено более 50 компаний группы; профиль/ИНН — ООО ГК «МИЦ» (головная компания, ОКВЭД головных офисов) — его отчётность не описывает бизнес группы.",
-       "Цена: два разных числа — ВТБ (профинансировавший сделку целиком) назвал сумму 45,6 млрд руб. («ВТБ полностью профинансировал сделку ... по покупке девелопера МИЦ на сумму 45,6 млрд руб.», Ведомости 25.10.2023, с фиксированной и переменной составляющими), а Ъ со ссылкой на источники ТАСС — 40 млрд руб. (сумма карточки); ранее оценивалась в 40–60 млрд. Сам «Самолет» сумму не раскрывал. Сомнение между трактовками — price=null; если принимать раскрытие ВТБ, карточку (40 млрд) нужно править через review.py. Дата 16 октября 2023 — закрытие по сообщению «Самолета». Периметр: куплен весь бизнес группы — более 50 компаний; ООО ГК «МИЦ» (ИНН из задания) — головная компания, её отчётность не описывает купленный бизнес — ok=false."
-      ]
-     },
-     "attribution": "disputed",
-     "attribution_variants": [
-      "adviser",
-      "media_sources"
-     ],
-     "event": "closing",
-     "event_variants": [
-      "closing"
-     ],
-     "terms": "disputed",
-     "terms_variants": [
-      "includes_contingent",
-      "unknown"
-     ],
-     "attribution_quote": "Об этом сообщили в пресс-службе банка."
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "17b477b038c9"
     },
     "date": {
      "value": "2023-10-16",
@@ -163383,7 +163117,6 @@
    "id": "g200c00b5",
    "date": "2023-05-03",
    "title": "Ростелеком купил оставшиеся 49,9% акций ООО «Информ» у ЛУКОЙЛа",
-   "buyer": "g00f14033",
    "target": "g24055063",
    "ind": "Телеком",
    "type": "M&A",
@@ -163510,7 +163243,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer": "g47240603"
   },
   {
    "id": "g28f173ca",
@@ -169823,7 +169557,6 @@
    "id": "gff6e08fe",
    "date": "2023-08-23",
    "title": "Сбербанк инвестиции приобрел 9,99% доли в «Евроонко»",
-   "buyer": "g28ff15bb",
    "target": "g5d077374",
    "ind": "Здравоохранение",
    "type": "Инвестиция",
@@ -169947,7 +169680,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "buyer_name": "«Сбербанк инвестиции»"
   },
   {
    "id": "g560a4b70",
@@ -171429,7 +171163,6 @@
    "id": "g0dea398b",
    "date": "2022",
    "title": "Sminex приобрел финскую Fazer у производителя хлеба",
-   "buyer": "gdc41f40b",
    "target": "g4ace4d38",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -171534,7 +171267,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer": "gce291e54"
   },
   {
    "id": "g0be89c20",
@@ -173430,7 +173164,7 @@
    "extra": "ГК «Первая Портовая Компания», принадлежащая Владимиру Лисину, продала 91,63% акций АО «Таганрогский морской торговый порт» компании «Лемар». Группа объясняет продажу тем, что сосредоточилась на мощностях в глубоководных бассейнах.",
    "auto": true,
    "promoted_from_bulk": true,
-   "seller": "Владимир Лисин",
+   "seller": "ГК «Первая Портовая Компания»",
    "seller_src": "title",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
@@ -173496,7 +173230,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "gbe88738c"
   },
   {
    "id": "gd96404f2",
@@ -181223,7 +180958,6 @@
    "date": "2024-02-08",
    "title": "ГК «Дело» выкупила у Cargill блокпакет зернового терминала КСК",
    "buyer": "delo",
-   "target": "cargill",
    "ind": "Порты и инфраструктура",
    "type": "M&A",
    "status": "Закрыта",
@@ -181283,7 +181017,7 @@
     "stake": {
      "value": 25.0,
      "basis": "rule",
-     "card_hash": "c2c1d3c1ebd2"
+     "card_hash": "67e03fe6e95c"
     },
     "price": {
      "value_rub": null,
@@ -181309,14 +181043,14 @@
      "card_hash": "5def20eb2f47"
     },
     "target": {
-     "company_id": "cargill",
-     "inn": "7113502396",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "e85ad942d063"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -181330,10 +181064,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "asset": "зерновой терминал КСК в Новороссийске"
   },
   {
    "id": "mercedes",
@@ -184271,7 +184006,7 @@
     "val": "«Ренессанс Капитал» оценил стоимость проекта «Квартал Герцена» более чем в 10 млрд ₽; фактическая сумма сделки не раскрыта — стороны сообщили, что она станет известна из отчётности ГК «Самолет» по МСФО за 2024 год."
    },
    "added": "2026-08-03",
-   "seller": "Группа компаний ПАО «ГК \"Самолет\"»",
+   "seller": "Группа компаний ПАО «ГК «Самолет»»",
    "buyer_name": "Группа компаний «Брусника»",
    "status": "Закрыта",
    "reviewed": "2026-08-09",
@@ -186258,7 +185993,6 @@
     ]
    ],
    "from_compact": "bulk",
-   "extra": "Российский миллиардер Роман Абрамович через инвестиционный фонд Target Global вложил свыше $63 млн в европейские технологические стартапы, среди которых — Auto1, Flo, Revolut, Cazoo, Circ и др.",
    "sum": "$63 млн",
    "eco": {
     "sum": "$63 млн",
@@ -186852,7 +186586,6 @@
     ]
    ],
    "from_compact": "bulk",
-   "extra": "Gunvor пытался купить международные активы «Лукойла» — зарубежную добычу, ключевые НПЗ в Европе и сеть АЗС. Под сделку компания привлекала финансирование в $2,81 млрд от американских подразделений мировых банков. После недели переговоров с OFAC Gunvor отказался от сделки: Минфин США назвал компанию «марионеткой Кремля» и отказал в лицензии.",
    "eco": {
     "sum": "—",
     "share": "Gunvor Group Ltd. предложила купить 100% акций LUKOIL International GmbH — «дочки» ПАО «Лукойл», которой принадлежат зарубежные активы группы.",
@@ -189444,9 +189177,9 @@
     }
    },
    "status": "Закрыта",
-   "buyer": "g6eb3c726",
    "seller": "Александр Ручьев (президент ГК «Основа»)",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer_name": "ООО «Клаустрофобия онлайн» и ООО «Клаустрофобия офлайн»"
   },
   {
    "id": "cc0e7565f",
@@ -200042,7 +199775,7 @@
      "kind": "closed",
      "date": "2026-08-04",
      "title": "Сделка завершена",
-     "note": "История 2026: Владельцы логистической платформы ATI.SU купили CARGO.RUN В августе 2026 года стало известно о том, что совладельцы цифровой логистической площадки Компания:ATI.SU, АТИ.СУ (ранее АвтоТрансИнфо), Персона:Вильде Святослав Вольдемарович и Олег Круглов, стали владельцами 25-процентной доли в компании «Цифровизация Транспорт», которая развивает сервис CARGO.RUN для управления грузоперевозками и автопарками.",
+     "note": "В августе 2026 года стало известно о том, что совладельцы цифровой логистической площадки ATI.SU, АТИ.СУ (ранее АвтоТрансИнфо), Вильде Святослав Вольдемарович и Олег Круглов, стали владельцами 25-процентной доли в компании «Цифровизация Транспорт», которая развивает сервис CARGO.RUN для управления грузоперевозками и автопарками.",
      "source": [
       "TAdviser",
       "https://www.tadviser.ru/a/716777"
@@ -201736,7 +201469,7 @@
      "kind": "closed",
      "date": "2026-08-05",
      "title": "Сделка завершена",
-     "note": "История 2026: Совладелец R-Vision купил долю в Sentra В начале августа 2026 года стало известно о том, что сооснователь российского разработчика ИБ-продуктов Компания:R-Vision (Р-Вижн) Персона:Сметанев Игорь Михайлович приобрел долю в российском стартапе Sentra (ООО «Защищенные системы»).",
+     "note": "В начале августа 2026 года стало известно о том, что сооснователь российского разработчика ИБ-продуктов R-Vision (Р-Вижн) Сметанев Игорь Михайлович приобрел долю в российском стартапе Sentra (ООО «Защищенные системы»).",
      "source": [
       "TAdviser",
       "https://www.tadviser.ru/a/960196"
@@ -208336,7 +208069,7 @@
      "kind": "closed",
      "date": "2026-09-03",
      "title": "Сделка завершена",
-     "note": "История 2026: «Альфа-Банк» купил WhoIsBlogger В сентябре 2026 года «Альфа-Банк» объявил о приобретении платформы WhoIsBlogger (юрлицо - «Даблюайби»), специализирующейся на аналитике и подборе блогеров. Сделка была закрыта в рамках стратегии развития…",
+     "note": "В сентябре 2026 года «Альфа-Банк» объявил о приобретении платформы WhoIsBlogger (юрлицо - «Даблюайби»), специализирующейся на аналитике и подборе блогеров. Сделка была закрыта в рамках стратегии развития…",
      "source": [
       "TAdviser",
       "https://www.tadviser.ru/a/561243"
@@ -209677,7 +209410,6 @@
      }
     ]
    },
-   "buyer": "gd3bb09b3",
    "seller_id": "gb1814bfc",
    "proofread": "2026-09-04",
    "facts": {
@@ -209736,7 +209468,8 @@
    },
    "reviewed": "2026-09-13",
    "deep_researched": "2026-09-13",
-   "target": "ge53d0ff8"
+   "target": "ge53d0ff8",
+   "buyer_name": "АО «Куриное царство»"
   },
   {
    "id": "g39e9e9c2",
@@ -210986,7 +210719,6 @@
    },
    "buyer": "gc30e392d",
    "target": "g01320fb7",
-   "seller": "Денис Бескоровайный и Надежда Фердман",
    "added": "2026-09-07",
    "facts": {
     "stake": {
