@@ -310,34 +310,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
    ]
-  },
-  {
-   "draft_id": "d27891859",
-   "title": "В Роскачестве предупредили об опасности покупки еды с рук",
-   "date": "2026-09-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/19/v-roskachestve-predupredili-ob-opasnosti-pokupki-edy-s-ruk/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
