@@ -226911,6 +226911,18 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "ООО «РВБ» (Wildberries & Russ)",
+     "id": "g549ab474",
+     "share": "100%",
+     "as_of": "2025-09",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/1048260"
+     ]
+    }
    ]
   },
   "g5fcd8d96": {
@@ -227280,6 +227292,48 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "ownership": [
+    {
+     "name": "Владимир Марголин",
+     "id": null,
+     "share": "36,1%",
+     "as_of": "2025-05",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Venchurnyj-fond-Voshod-investiroval-v-razrabotchika-datatech-platformy-SenseMachine-85447"
+     ]
+    },
+    {
+     "name": "Сергей Коренков",
+     "id": null,
+     "share": "27,1%",
+     "as_of": "2025-05",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Venchurnyj-fond-Voshod-investiroval-v-razrabotchika-datatech-platformy-SenseMachine-85447"
+     ]
+    },
+    {
+     "name": "ООО «Хайв»",
+     "id": null,
+     "share": "23,9%",
+     "as_of": "2025-05",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Venchurnyj-fond-Voshod-investiroval-v-razrabotchika-datatech-platformy-SenseMachine-85447"
+     ]
+    },
+    {
+     "name": "Венчурный фонд «Восход»",
+     "id": "g427bcb12",
+     "share": "12,9%",
+     "as_of": "2025-05",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Venchurnyj-fond-Voshod-investiroval-v-razrabotchika-datatech-platformy-SenseMachine-85447"
+     ]
+    }
    ]
   },
   "g0a68f987": {
