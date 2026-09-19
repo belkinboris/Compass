@@ -3442,7 +3442,11 @@ function unifiedFeed(){
        было известно НА МОМЕНТ ЭТОГО ЭТАПА, а не задним числом. */
     milestone: rec => {
       const d = rec.deal, e = rec.event, snap = e.snapshot || {};
-      const chip = `Веха · ${MILESTONE_LABEL[e.kind] || e.kind}`;
+      /* Слово «веха» — из нашей кухни: читатель видел «ВЕХА · ЗАКРЫТИЕ» и не
+         понимал, чем эта строка отличается от обычной сделки (замечание
+         Георгия, 19 сентября 2026). Объяснять надо не «чем является строка»
+         — под ней и так написано «Сделка: …», — а ЧТО СЛУЧИЛОСЬ. */
+      const chip = MILESTONE_NEWS[e.kind] || MILESTONE_LABEL[e.kind] || e.kind;
       const sum = snap.sum ? `<div class="deal-sum num ${undisclosed(snap.sum)?"na":""}">${sumHtml(snap.sum)}</div>` : "";
       return `
     <a class="deal-row reveal" href="#/deal/${d.id}">
@@ -4106,6 +4110,10 @@ const stalledDiscussionHint = d => {
    кандидатом — это состояние сделки, а не новость о ней. */
 const POSTWORTHY_MILESTONE_KINDS = new Set(["approval","closed","cancelled"]);
 const MILESTONE_LABEL = {approval:"Согласование", closed:"Закрытие", cancelled:"Срыв сделки"};
+// То же самое, но так, как это говорят вслух, — для ленты, где строка стоит
+// рядом с обычными сделками и должна читаться сама по себе.
+const MILESTONE_NEWS = {approval:"Сделку согласовали", closed:"Сделка закрыта",
+                        cancelled:"Сделка не состоялась"};
 const eventSources = e => {
   const raw=Array.isArray(e&&e.sources) ? e.sources
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);
@@ -5537,9 +5545,13 @@ const fnsDelta = (current,previous) => {
 const fnsDerivedHtml = (report) => {
   const d = report && report.derived;
   if(!d || !d.metrics || !d.metrics.length) return "";
+  /* Единица измерения решает и подпись: «×2,5» — это отношение, а «192 дн.» —
+     срок, и знак умножения перед сроком читался бы как ошибка. */
   const value = m => m.kind==="money" ? fnsMoney(m.value_rub)
     : m.kind==="percent" ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:1})}%`
-    : `×${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}`;
+    : (m.unit && m.unit!=="x")
+      ? `${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}&nbsp;${esc(m.unit)}`
+      : `×${Number(m.value).toLocaleString("ru-RU",{maximumFractionDigits:2})}`;
   const groups=[];
   d.metrics.forEach(m=>{
     const g=groups.find(x=>x.title===m.group);
@@ -5799,7 +5811,7 @@ async function mountCompanyFns(companyId){
       ? [["registry","ЕГРЮЛ"],["ownership","Участники"],["changes","Изменения"]]
       : [["overview","Обзор"],["ownership","Участники"],["finance","Финансы"],["registry","ЕГРЮЛ"],["changes","Изменения"]];
     mount.innerHTML=bankHtml+`<section class="fns-shell reveal">
-      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>${isBank?"Реквизиты и ЕГРЮЛ":"Финансы и ЕГРЮЛ"}</h2></div>${sourceBadge("Источник: ФНС", e.inn?`https://bo.nalog.gov.ru/search?query=${encodeURIComponent(e.inn)}`:"", "Открыть отчётность этого юрлица в ГИР БО ФНС")}</div>
+      <div class="fns-head"><div><span class="label">Официальные данные</span><h2>${isBank?"Реквизиты и ЕГРЮЛ":"Отчётность и реестр"}</h2></div>${sourceBadge("Источник: ФНС", e.inn?`https://bo.nalog.gov.ru/search?query=${encodeURIComponent(e.inn)}`:"", "Открыть отчётность этого юрлица в ГИР БО ФНС")}</div>
       ${data.entities.length>1?`<div class="fns-entity-switch">${data.entities.map((x,i)=>`<button class="chip ${i===entityIndex?"on":""}" data-fnsentity="${i}">${esc(x.entity.short_name||x.entity.legal_name)}</button>`).join("")}</div>`:""}
       <div class="fns-tabs">${tabs.map(([k,label])=>`<button data-fnstab="${k}" class="${tab===k?"on":""}">${label}</button>`).join("")}</div>
       <div class="fns-body">${content}<p class="fns-disclaimer">${esc(isBank?"Реквизиты — по данным ЕГРЮЛ. Показатели банка выше — по данным Банка России: банки отчитываются перед ним, а не в общем порядке.":(data.disclaimer||""))} Данные обновлены ${e.fetched_at?new Date(e.fetched_at).toLocaleDateString("ru-RU"):"по последней синхронизации"}.</p></div>
@@ -7713,10 +7725,10 @@ async function renderAccount(qs){
     body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
     const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
       const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
-      const tgDesc = !p.telegram_available ? "Скоро доступно — бот ещё не настроен."
+      const tgDesc = !p.telegram_available ? "Скоро будет доступно — бот ещё не настроен."
         : p.telegram_connected ? "Подключён — сюда же придёт и еженедельная сводка, если она включена."
         : "Нажмите «Подключить» ниже: откроется чат с ботом в Telegram, останется один раз нажать Start — вводить ничего не нужно.";
-      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро будет доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро будет доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
       document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
       const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
     };
