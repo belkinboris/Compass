@@ -108,7 +108,13 @@ def client(monkeypatch):
 def test_health_ai_flag(monkeypatch):
     monkeypatch.delenv("YANDEX_API_KEY", raising=False)
     monkeypatch.delenv("YANDEX_FOLDER_ID", raising=False)
-    assert TestClient(main.app).get("/health").json() == {"status": "ok", "ai": False}
+    body = TestClient(main.app).get("/health").json()
+    assert body["status"] == "ok" and body["ai"] is False
+    # С 19 сентября 2026 в ответе есть ещё отпечаток выложенной сборки —
+    # см. test_launch_features::test_health_carries_a_build_fingerprint.
+    # Проверяем поля по именам, а не ответ целиком: иначе каждая новая
+    # строка в /health ломает тест, который про флаг поиска.
+    assert set(body) == {"status", "ai", "build"}
 
 
 @pytest.mark.parametrize("path", ["/", "/health", "/#/analytics"])

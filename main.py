@@ -11,9 +11,12 @@ LLM: DeepSeek 4 Flash через Yandex AI Studio Responses API.
 Требуются YANDEX_API_KEY и YANDEX_FOLDER_ID; без них фронтенд
 работает в демо-режиме (fallback=true).
 """
+import functools
+import hashlib
 import json
 import logging
 import os
+import pathlib
 import re
 import threading
 import time
@@ -613,9 +616,36 @@ def _yandex_ready() -> bool:
 # «HEAD /», получала 405, считала приложение мёртвым и перезапускала контейнер
 # по кругу; живого процесса за прокси не было, и он даже не смог отдать
 # сертификат — снаружи это выглядело как «сломался HTTPS», а не как 405.
+# КАКОЙ КОД СЕЙЧАС НА САЙТЕ — ЭТО ДОЛЖЕН БЫТЬ ОДИН ЗАПРОС, А НЕ РАССЛЕДОВАНИЕ.
+# 19 сентября 2026 выкладка встала: за день в git уехало восемь коммитов, а
+# сайт продолжал отдавать сборку 18-го — в том числе без гейта, который
+# перестаёт отвечать на «найди компромат на X». Чтобы это увидеть, пришлось
+# сравнивать размер index.html, искать в нём признаки отдельных коммитов и
+# в конце спрашивать сам ассистент. Теперь отпечаток отдаёт /health.
+#
+# Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развёрнутом
+# контейнере каталога .git может не быть вовсе, а файлы есть всегда. Для
+# сравнения «сайт и репозиторий совпадают» этого достаточно — рутине не
+# нужно знать номер коммита, ей нужно знать, тот же это код или нет.
+_BUILD_FILES = ("main.py", "static/index.html")
+
+
+@functools.lru_cache(maxsize=1)
+def build_fingerprint() -> dict:
+    """Короткий отпечаток выложенного кода: по восемь знаков на файл."""
+    out = {}
+    for name in _BUILD_FILES:
+        try:
+            data = (pathlib.Path(__file__).resolve().parent / name).read_bytes()
+            out[name] = hashlib.sha256(data).hexdigest()[:8]
+        except OSError:
+            out[name] = None
+    return out
+
+
 @app.api_route("/health", methods=["GET", "HEAD"])
 def health():
-    return {"status": "ok", "ai": _yandex_ready()}
+    return {"status": "ok", "ai": _yandex_ready(), "build": build_fingerprint()}
 
 
 def _extract_text(data: dict) -> str:

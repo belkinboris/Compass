@@ -4187,3 +4187,39 @@ def test_egrul_change_text_is_a_sentence_not_a_machine_dump():
     import inspect
     src = inspect.getsource(m.company_fns)
     assert '"type": row.event_type,' in src, "ключ вида снова подставляется в видимое поле"
+
+
+def test_health_carries_a_build_fingerprint(client):
+    """«Какой код сейчас на сайте» должно быть одним запросом, а не
+    расследованием.
+
+    19 сентября 2026 выкладка встала: за день в git уехало восемь коммитов, а
+    сайт отдавал сборку 18-го — в том числе без гейта, который перестаёт
+    отвечать на «найди компромат на X». Чтобы это увидеть, пришлось сравнивать
+    размер index.html, искать в нём признаки отдельных коммитов и в конце
+    спрашивать сам ассистент.
+
+    Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развёрнутом
+    контейнере каталога .git может не быть, а файлы есть всегда.
+    """
+    import hashlib
+    from pathlib import Path
+
+    import main as m
+
+    body = client.get("/health").json()
+    assert body["status"] == "ok"
+    build = body.get("build")
+    assert build and set(build) == {"main.py", "static/index.html"}, build
+    root = Path(m.__file__).resolve().parent
+    for name, got in build.items():
+        want = hashlib.sha256((root / name).read_bytes()).hexdigest()[:8]
+        assert got == want, f"отпечаток {name} не совпадает с файлом"
+        assert len(got) == 8
+
+    # Сравнение «сайт и чекаут совпадают» живёт одной функцией, а не
+    # переписывается заново в каждой рутине.
+    import sys as _sys
+    _sys.path.insert(0, str(root / "pipeline"))
+    import check_deploy
+    assert check_deploy.local_fingerprint() == build
