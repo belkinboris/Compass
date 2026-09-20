@@ -79,5 +79,11 @@
  "f60a0f8e3478": "Починено 20 сентября 2026: оценщики/организатор торгов/сторона сделки убраны из «Финансовых консультантов» — дубль удалён, остальное перенесено в поле по смыслу (pipeline/fix_audit_finadv_batch_2026_09_20.py).",
  "d1f0fd6604e7": "law.struct→eco.context: опровержение и несостоявшиеся переговоры — контекст, не механика сделки (fix_audit_struct_context_2026_09_20.py)",
  "2649e6c102da": "law.struct→eco.context: связь директора со сторонней компанией по СПАРК — фон, не механика (fix_audit_struct_context_2026_09_20.py)",
- "c890bfa6f272": "law.struct→eco.context: судьба стороннего домена после сделки — контекст, не механика (fix_audit_struct_context_2026_09_20.py)"
+ "c890bfa6f272": "law.struct→eco.context: судьба стороннего домена после сделки — контекст, не механика (fix_audit_struct_context_2026_09_20.py)",
+ "4fdc0a0eac85": "law.terms→eco.context: задаток аукциона — процедура торгов, не условие сделки (fix_audit_terms_batch_2026_09_20.py)",
+ "209210d99924": "law.terms→law.appr: сложность освобождения от оценки — часть уже описанного разрешения (fix_audit_terms_batch_2026_09_20.py)",
+ "f6a82a0f53e6": "law.terms→eco.context: план капремонта после закрытия — не условие сделки (fix_audit_terms_batch_2026_09_20.py)",
+ "a7c78af189a7": "law.terms→law.struct: шаг аукциона — механика торгов (fix_audit_terms_batch_2026_09_20.py)",
+ "1e26f5031d31": "law.terms→law.adv[0].note: объём работы консультанта — уже назван в adv, дописана деталь (fix_audit_terms_batch_2026_09_20.py)",
+ "9fd6386b39c6": "law.terms→eco.context: спор Carlsberg/Кабмин — продолжение истории, не условие несостоявшейся сделки (fix_audit_terms_batch_2026_09_20.py)"
 }
