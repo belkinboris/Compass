@@ -30,9 +30,20 @@ BOLD_VERDICT = re.compile(r"\*\*\s*(ЗАКРЫТ|СДЕЛАН|ПРОВЕРЕН|�
 
 
 def _items(text):
+    """Пункты бэклога. Пункт кончается на следующем пункте ИЛИ на заголовке
+    блока: последний пункт блока иначе «съедает» заголовок соседнего вместе
+    с его вступлением — ровно так 20 сентября 2026 пропал блок «E. Живая
+    база», и тот же промах сначала был в этой проверке."""
     starts = [m.start() for m in re.finditer(r"^- ", text, re.M)]
-    return [text[s:(starts[i + 1] if i + 1 < len(starts) else len(text))]
-            for i, s in enumerate(starts)]
+    out = []
+    for i, s in enumerate(starts):
+        e = starts[i + 1] if i + 1 < len(starts) else len(text)
+        body = text[s:e]
+        head = re.search(r"^#{2,3} ", body[1:], re.M)
+        if head:
+            body = body[:1 + head.start()]
+        out.append(body)
+    return out
 
 
 def test_roadmap_stays_within_its_budget():
@@ -73,6 +84,20 @@ def test_a_closed_item_leaves_only_a_line():
     assert not long, ("закрытый пункт всё ещё несёт разбор (>700 знаков): %s — "
                       "перенесите: python3 pipeline/roadmap_archive.py --archive "
                       "--write" % long)
+
+
+def test_every_backlog_block_keeps_its_heading():
+    """Заголовок блока — не украшение: по нему видно, какое направление ещё
+    открыто, а какое пройдено целиком.
+
+    20 сентября 2026 моя разовая правка заглушки последнего пункта блока A
+    забрала с собой заголовок «E. Живая база» и абзац о том, как устроен
+    приток: регулярка `.*?(?=^- |\Z)` дотянулась до следующего ПУНКТА, а
+    между ними стоял заголовок соседнего блока. Четыре открытых пункта E
+    после этого читались как пункты A. Список ниже меняется только
+    осознанно — когда направление закрыто целиком и блок убран руками."""
+    blocks = re.findall(r"^### ([A-ZА-Я])\.", BACKLOG, re.M)
+    assert blocks == ["A", "E", "B", "C", "D", "F", "G"], blocks
 
 
 def test_the_journal_in_the_main_file_is_short():

@@ -46,6 +46,28 @@ VERDICT = re.compile(r"(ЗАКРЫТ[А-ЯЁ]*|СДЕЛАН[А-ЯЁ]*|ПРОВЕ
                      r"(\s*\([^)]{0,60}\))?")
 
 
+def missing_lines(before: str, after: str, archived: str) -> list:
+    """Строки, которые исчезли бы вовсе, — ни в файле, ни в архиве.
+
+    Проверка по СТРОКАМ, а не по абзацам: первая версия сверяла абзацы
+    длиннее 80 знаков и поэтому не заметила пропажу заголовка блока и его
+    вступления — они короткие. Перенос обязан быть переносом: всё, что ушло
+    из бэклога, должно найтись в архиве дословно.
+    """
+    def norm(s):
+        return re.sub(r"\s+", " ", s).strip()
+    haystack = norm(after + "\n" + archived)
+    out = []
+    for line in before.splitlines():
+        line = line.rstrip()
+        n = norm(line)
+        if len(n) < 4:
+            continue
+        if n not in haystack:
+            out.append(line)
+    return out
+
+
 def tokens(text: str) -> int:
     """Оценка в токенах. Точный счётчик — если он есть в окружении."""
     try:
@@ -74,6 +96,15 @@ def parse(backlog: str) -> list:
         for k, s in enumerate(starts):
             e = starts[k + 1] if k + 1 < len(starts) else len(part)
             body = part[s:e]
+            # Последний пункт блока «съедал» всё до следующего пункта — а между
+            # ним и следующим блоком стоит заголовок этого блока со вступлением.
+            # 20 сентября так пропал весь заголовок «E. Живая база» с абзацем о
+            # том, как устроен приток: пункт заменили строкой-заглушкой, и
+            # заголовок ушёл вместе с ним.
+            head = re.search(r"^#{2,3} ", body[1:], re.M)
+            if head:
+                e = s + 1 + head.start()
+                body = part[s:e]
             m = TITLE.match(body)
             out.append({
                 "block": cur,
@@ -148,6 +179,13 @@ def main(argv=None) -> int:
         print("Журнал: %d → %d токенов (освободилось %d)"
               % (tokens(journal), tokens(new_journal),
                  tokens(journal) - tokens(new_journal)))
+        lost = missing_lines(text, head + backlog + new_journal,
+                             io.open(ARCHIVE, encoding="utf-8").read() + "".join(move_j))
+        if lost:
+            print("\nОТКАЗ: %d строк исчезло бы вовсе, а не переехало:" % len(lost))
+            for line in lost[:8]:
+                print("   %s" % line[:110])
+            return 1
         if not a.write:
             print("\n(сухой прогон; чтобы записать — --write)")
             return 0
@@ -198,6 +236,15 @@ def main(argv=None) -> int:
           % (tokens(backlog), tokens(new_backlog), saved))
     for it in move[:5]:
         print("   %-6s %s" % (it["code"], it["name"][:70]))
+    lost = missing_lines(text, head + new_backlog + journal,
+                         io.open(ARCHIVE, encoding="utf-8").read()
+                         + "".join(it["text"] for it in move))
+    if lost:
+        print("\nОТКАЗ: %d строк исчезло бы вовсе, а не переехало:" % len(lost))
+        for line in lost[:8]:
+            print("   %s" % line[:110])
+        return 1
+
     if not a.write:
         print("\n(сухой прогон; чтобы записать — --write)")
         return 0
