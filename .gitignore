@@ -32,3 +32,4 @@ data/inbox/audit/
 # Файл-блокировка одной сессии инструментария (sessionId/pid/timestamp) —
 # рантайм-артефакт контейнера, не данные продукта, каждый прогон свой.
 .claude/scheduled_tasks.lock
+data/inbox/sanctions/

@@ -3547,6 +3547,33 @@ def test_advisor_card_fits_the_phone(browser, base_url):
         ctx.close()
 
 
+def test_sanctions_badge_names_the_list_and_links_to_the_document(page, base_url):
+    """Просьба владельца 20 сентября 2026: у человека видно, что он под
+    санкциями. Значок обязан вести на сам официальный список: утверждение о
+    живом человеке без ссылки на документ показывать нельзя."""
+    page.goto(base_url + "/#/companies/gf79d11d3", wait_until="domcontentloaded")
+    page.wait_for_selector(".sanc-badge", timeout=15000)
+    labels = page.eval_on_selector_all(".sanc-badge", "els => els.map(e => e.textContent.trim())")
+    assert "Санкции США" in labels and "Санкции Великобритании" in labels, labels
+    hrefs = page.eval_on_selector_all(".sanc-badge", "els => els.map(e => e.href)")
+    assert all(h.startswith("https://") for h in hrefs), hrefs
+    assert all(h.startswith(("https://sanctionssearch.ofac.treas.gov",
+                             "https://www.gov.uk", "https://eur-lex.europa.eu",
+                             "https://www.sanctionsmap.eu")) for h in hrefs), hrefs
+    note = page.inner_text(".sanc-note")
+    assert "сам список" in note and "сверена" in note, note
+    # Слов нашего внутреннего диалекта в тексте для читателя быть не должно.
+    for word in ("перечень", "штамп", "инвариант", "знаменатель"):
+        assert word not in note.lower(), note
+
+
+def test_a_company_without_sanctions_shows_no_badge(page, base_url):
+    """Обратная сторона: отметка появляется только у сверенных профилей."""
+    page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
+    page.wait_for_selector("#prepMeeting", timeout=15000)
+    assert page.locator(".sanc-badge").count() == 0
+
+
 def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_url):
     """Просьба владельца 19 сентября 2026: кнопки «Подготовка к встрече» и
     «Подготовка к собеседованию» на карточке компании. Обе ведут к ассистенту

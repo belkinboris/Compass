@@ -1029,6 +1029,7 @@ a.dp-asset-name:hover{color:var(--accent)}
 .ai-fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:12px;color:var(--muted)}
 .ai-fb button{padding:4px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:12px;color:var(--muted);transition:all .2s var(--ease)}
 .ai-fb button:hover{border-color:var(--accent);color:var(--accent-deep)}
+.ai-fb .ai-fb-sep{color:var(--line);padding:0 2px}
 .ai-fb input{flex:1 1 200px;min-width:0;padding:6px 10px;border:1px solid var(--line);border-radius:var(--radius);font:inherit;font-size:12.5px;background:var(--paper);color:var(--ink)}
 .ask{display:flex;gap:10px}
 .ask input{flex:1;padding:12px 15px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);font:inherit;color:var(--ink);transition:border-color .2s}
@@ -1121,6 +1122,18 @@ a.dp-asset-name:hover{color:var(--accent)}
 /* «Группа» — короткий и одинаковый у всех: сжимать его незачем, пусть
    уступает место отрасль, у которой длина своя у каждой карточки. */
 .co-tags .co-group-badge{flex:0 0 auto}
+/* Санкционная отметка на профиле человека. Значок — ссылка на сам перечень:
+   утверждение о живом человеке обязано вести на документ, а не на нашу
+   базу. Цвет предупреждающий, но не красный: это факт из официального
+   списка, а не наша оценка. */
+.sanc-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.sanc-row .sanc-lead{font-size:13px;color:var(--muted)}
+.sanc-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
+  border:1px solid #d8b26a;background:#fdf6e7;color:#7a5410;font-size:12.5px;font-weight:600;
+  text-decoration:none;white-space:nowrap}
+.sanc-badge:hover{background:#f8ecd2}
+.sanc-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#c98a1e;flex:0 0 auto}
+.sanc-note{margin-top:6px;font-size:12.5px;color:var(--muted);max-width:72ch}
 .co-nums .label{white-space:nowrap}
 /* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
    пустые 30px под коротким именем и 20px под коротким описанием только
@@ -1251,6 +1264,15 @@ body.chat-page .wrap{max-width:none;padding:65px 0 0}
    теряется, плашка вернётся на соседнем экране. */
 body.chat-page .compare-tray{display:none}
 .suggests{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+/* Продолжения — под ответом, мельче основных кнопок: это подсказка,
+   а не главное действие на экране. */
+.ai-next{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 2px}
+.ai-next .chip{font-size:12.5px;padding:6px 12px}
+/* Задачи — первый ряд и заметнее примеров: примеры отвечают на «что
+   тут можно спросить», задачи — на «сделай мне работу». */
+.suggests.tasks{margin-bottom:6px}
+.chip.task{border-color:var(--accent);color:var(--accent-deep);font-weight:600}
+.chip.task:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
 
 .chat-shell{display:grid;grid-template-columns:288px minmax(0,1fr);
   height:calc(100vh - 65px);height:calc(100svh - 65px);position:relative}
@@ -1281,10 +1303,22 @@ body.chat-page .compare-tray{display:none}
 .chat-group{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(243,241,233,.40);padding:14px 8px 6px}
 .chat-threads>.chat-group:first-child{padding-top:4px}
-.chat-thread{display:block;width:100%;text-align:left;padding:9px 10px;border-radius:6px;font-size:13px;
+/* Строка истории — название плюс крестик. Артём 19 сентября 2026: «плюс
+   возможность удалять диалоги». Сервер это умел с самого начала
+   (DELETE /api/assistant/threads/{id}), кнопки не было ни одной. */
+.chat-row{display:flex;align-items:center;gap:2px;border-radius:6px;
+  transition:background .18s var(--ease)}
+.chat-row:hover{background:rgba(243,241,233,.09)}
+.chat-thread{flex:1;min-width:0;display:block;text-align:left;padding:9px 10px;border-radius:6px;font-size:13px;
   line-height:1.45;color:rgba(243,241,233,.76);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  transition:background .18s var(--ease),color .18s var(--ease)}
-.chat-thread:hover{background:rgba(243,241,233,.09);color:var(--ivory)}
+  transition:color .18s var(--ease)}
+.chat-row:hover .chat-thread,.chat-thread:hover{color:var(--ivory)}
+.chat-del{flex:0 0 auto;width:26px;height:26px;margin-right:4px;border-radius:5px;line-height:1;
+  color:rgba(243,241,233,.35);font-size:15px;opacity:0;transition:opacity .18s var(--ease),color .18s var(--ease)}
+.chat-row:hover .chat-del,.chat-del:focus-visible{opacity:1}
+.chat-del:hover{color:#E7A79A;background:rgba(243,241,233,.12)}
+/* На телефоне наведения нет — крестик виден всегда, иначе удалить нечем. */
+@media(pointer:coarse){.chat-del{opacity:1}}
 .chat-thread.on{background:rgba(243,241,233,.15);color:var(--ivory)}
 .chat-side-note{font-size:12.5px;line-height:1.65;color:rgba(243,241,233,.66);padding:10px 8px}
 .chat-side-note a{color:var(--bronze-light);border-bottom:1px solid rgba(201,174,124,.45)}
@@ -1834,10 +1868,31 @@ async function compareFnsData(id){
 }
 async function renderCompare(){
   const ids=compareIds();
-  app.innerHTML=`<a class="back reveal" href="#/companies">← Все компании</a><div class="sec-head reveal"><span class="label">Рабочий инструмент</span><h1>Сравнение компаний</h1><p>Сделки, роли, финансовые показатели и текущие участники — рядом. Можно выбрать до трёх компаний.</p></div>${ids.length?`<div id="compareGrid" class="compare-grid reveal" style="--compare-cols:${ids.length}"></div>`:`<div class="compare-empty reveal">Компании пока не выбраны. Откройте профиль компании и нажмите «Добавить к сравнению».</div>`}`;
+  app.innerHTML=`<a class="back reveal" href="#/companies">← Все компании</a><div class="sec-head reveal"><span class="label">Рабочий инструмент</span><h1>Сравнение компаний</h1><p>Сделки, роли, финансовые показатели и текущие участники — рядом. Можно выбрать до трёх компаний.</p></div>${ids.length?`<div class="deal-tools reveal"><button class="chip" id="exportCompare">Скачать сравнение в PDF</button><span class="tool-note" id="exportCompareNote" aria-live="polite"></span></div><div id="compareGrid" class="compare-grid reveal" style="--compare-cols:${ids.length}"></div>`:`<div class="compare-empty reveal">Компании пока не выбраны. Откройте профиль компании и нажмите «Добавить к сравнению».</div>`}`;
   if(!ids.length){rerun();renderCompareTray();return;}
   const [fns, bankFin]=await Promise.all([Promise.all(ids.map(compareFnsData)), loadBankFinance()]);
   const grid=document.getElementById("compareGrid"); if(!grid)return;
+  /* ВЫГРУЗКА СРАВНЕНИЯ. Ксюша 19 сентября 2026: «сделала сравнение компаний —
+     могу получить пдф». Строки собираем здесь же, из тех же величин, что
+     рисует экран, и отправляем серверу готовыми: пересобирать сравнение
+     заново значило бы рисковать тем, что в файле окажется не то, что человек
+     видел. Пустое остаётся пустым — на листе будет прочерк. */
+  const exportRows = () => ids.map((id,i)=>{
+    const c=co(id)||{}, base=compareBaseRows(id), entry=fns[i];
+    const report=entry&&entry.reports&&entry.reports[0];
+    const bank=(bankFin||{})[id];
+    const owners=((entry&&entry.ownership&&entry.ownership.current)||[]).map(o=>o.name).filter(Boolean);
+    const roles=[base.buyer?`покупатель — ${base.buyer}`:"",base.seller?`продавец — ${base.seller}`:"",
+                 base.target?`предмет сделки — ${base.target}`:""].filter(Boolean).join(", ");
+    return {
+      name: c.name || "", industry: c.ind || "", desc: c.desc || "",
+      deals: String(base.deals.length), roles,
+      report_year: report ? String(report.year||"") : (bank ? "по данным Банка России" : ""),
+      revenue: report ? fnsMoney(report.revenue_rub) : (bank ? fnsMoney(bank.assets_rub)+" (активы)" : ""),
+      net_profit: report ? fnsMoney(report.net_profit_rub) : (bank ? fnsMoney(bank.net_profit_rub) : ""),
+      owners: owners.join(", "),
+    };
+  });
   grid.innerHTML=ids.map((id,i)=>{
     const c=co(id), base=compareBaseRows(id), entry=fns[i], report=entry&&entry.reports&&entry.reports[0], ownership=entry&&entry.ownership;
     const owners=ownership&&ownership.current||[];
@@ -1855,6 +1910,22 @@ async function renderCompare(){
     return `<article class="compare-card"><div class="compare-card-head"><button class="compare-remove" data-compare-remove="${id}" aria-label="Убрать из сравнения">×</button><span class="tag">${esc(c.ind)}</span><h2><a href="#/companies/${id}">${esc(c.name)}</a></h2><p>${esc(c.desc)}</p></div><div class="compare-section"><h3>Сделки</h3><div class="compare-row"><span class="k">Всего в базе</span><span class="v">${base.deals.length}</span></div><div class="compare-row"><span class="k">Как покупатель</span><span class="v">${base.buyer}</span></div><div class="compare-row"><span class="k">Как продавец</span><span class="v">${base.seller}</span></div><div class="compare-row"><span class="k">Как объект сделки</span><span class="v">${base.target}</span></div>${base.latest?`<a class="relationship-latest" href="#/deal/${base.latest.id}">Последняя: ${fmtDate(base.latest.date)} · ${esc(base.latest.title)} →</a>`:""}</div>${finance}${ownerBlock}<div class="compare-section"><a class="chip" href="#/companies/${id}">Открыть профиль</a></div></article>`;
   }).join("");
   grid.querySelectorAll("[data-compare-remove]").forEach(b=>b.onclick=()=>{saveCompareIds(ids.filter(id=>id!==b.dataset.compareRemove));renderCompare();});
+  const expBtn=document.getElementById("exportCompare");
+  if(expBtn) expBtn.onclick=async()=>{
+    const note=document.getElementById("exportCompareNote");
+    expBtn.disabled=true; if(note) note.textContent="Готовим файл…";
+    try{
+      const r=await fetch("/api/companies/export",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({companies: exportRows()})});
+      if(r.status===401){ needLogin("скачать сравнение компаний"); return; }
+      if(!r.ok){ const j=await r.json().catch(()=>({})); throw new Error(j.error||"Не удалось собрать файл"); }
+      const blob=await r.blob(), url=URL.createObjectURL(blob), a=document.createElement("a");
+      a.href=url; a.download="compass-sravnenie.pdf"; document.body.appendChild(a); a.click();
+      a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+      if(note) note.textContent="Готово.";
+    }catch(e){ if(note) note.textContent=e.message||"Не удалось собрать файл"; }
+    finally{ expBtn.disabled=false; setTimeout(()=>{const n=document.getElementById("exportCompareNote"); if(n&&n.textContent==="Готово.") n.textContent="";},2500); }
+  };
   rerun();renderCompareTray();
 }
 
@@ -2668,9 +2739,11 @@ function dealAsText(d){
 }
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
                      ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],
-                     ["rev","filterMinRevenue"]];
+                     ["rev","filterMinRevenue"],["status","filterStatus"],["dtype","filterType"],
+                     ["priced","filterPriced"]];
 function feedStateGet(){
-  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull, filterMinRevenue};
+  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull,
+          filterMinRevenue, filterStatus, filterType, filterPriced};
 }
 function feedHash(){
   const st = feedStateGet();
@@ -2702,6 +2775,9 @@ function applyFeedParams(qs){
      снять такой фильтр можно плашкой активных фильтров. */
   filterAdvisorGroup = p.get("agroup") || "Все";
   filterMinRevenue = p.get("rev") || "Все";
+  filterStatus = p.get("status") || "Все";
+  filterType = p.get("dtype") || "Все";
+  filterPriced = p.get("priced") || "Все";
   if(filterMinRevenue!=="Все") ensureFinanceScreening(); // пришли по ссылке с уже выбранным фильтром — данные нужны сразу
   feedQuery = p.get("q") || "";
   /* Селект «Что показывать» снят с экрана: MINI_DEALS/CHANNEL_DEALS/BULK_DEALS
@@ -3239,7 +3315,7 @@ async function runAsk(q, mode, meta, w){
   /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
      кнопка «Нет» тут значит «ответьте всё-таки» — и мы будем копить её как
      жалобу на качество ответа, которого не было. */
-  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":feedbackBar(q,a)); return a; }
+  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":followUpsHtml(a)+feedbackBar(q,a)); return a; }
   if(quick){
     const raw=quick.answer;
     w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
@@ -3262,11 +3338,79 @@ const askHintHtml = a => (a.refused || (a.deals && a.deals.length)) ? ""
    скриншот. Оценка «нет» уходит сразу (не потеряется, если вкладку закроют),
    комментарий — вторым запросом к той же записи. */
 const _fbStore = {};
+/* КНОПКИ ПРОДОЛЖЕНИЯ. Владелец 20 сентября 2026: «кнопки попробуй сначала
+   сам на своё усмотрение сделать». Предлагаем не общие «спросите ещё», а
+   следующий шаг ИМЕННО ЭТОГО разговора — по тому, на что ответ опёрся.
+
+   Формулировки короткие и указательные («эти сделки», «этой компании»):
+   ассистент уже умеет читать уточнение вместе с предыдущим вопросом
+   (`previous` в retrieve), и называть сущность второй раз незачем — а если
+   назвать неправильно, ответ уедет не туда. */
+const FOLLOW_UPS = {
+  company:  ["Кто сопровождал эти сделки?", "Что известно о финансах этой компании?"],
+  industry: ["Кто чаще всего покупал в этой отрасли?", "Какие сделки здесь самые крупные?"],
+  advisor:  ["В каких отраслях работает эта фирма?", "Какие из этих сделок самые крупные?"],
+  largest:  ["Кто сопровождал эти сделки?", "Как это выглядело в прошлом году?"],
+  recent:   ["Какие из них самые крупные?", "Кто сопровождал эти сделки?"],
+  compare:  ["Кто сопровождал их сделки?"],
+  term:     ["Кто сопровождал эти сделки?"],
+  theme:    ["Какие из них самые крупные?"],
+  count:    ["Какие из них самые крупные?"],
+};
+function followUpsHtml(a){
+  if(!a || a.refused) return "";
+  const list = (FOLLOW_UPS[a.intent] || []).slice(0, 2);
+  // Ответ опёрся ровно на одну сделку — значит, уместно спросить о ней самой.
+  if(a.deals && a.deals.length === 1) list.unshift("Расскажи подробнее об этой сделке");
+  if(!list.length) return "";
+  return `<div class="ai-next">${list.slice(0,3).map(q=>
+    `<button type="button" class="chip" data-next="${esc(q)}">${esc(q)}</button>`).join("")}</div>`;
+}
+/* Нажатие продолжает разговор ТАМ ЖЕ, где он идёт: на экране ассистента — в
+   его строке, на карточке компании или сделки — в мини-окне рядом. Ищем
+   composer от самой кнопки вверх, а не по общему id. */
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-next]"); if(!b) return;
+  const q = b.dataset.next;
+  const mini = b.closest(".miniai");
+  const input = mini ? mini.querySelector("input") : document.getElementById("q");
+  const go = mini ? mini.querySelector("button.go") : document.getElementById("send");
+  if(!input || !go) return;
+  input.value = q; go.click();
+});
+
 function feedbackBar(q, a){
   const id = "fb"+Math.random().toString(36).slice(2,9);
   _fbStore[id] = {q, a};
-  return `<div class="ai-fb" data-fb-id="${id}"><span>Ответ помог?</span><button type="button" data-fb="up">Да</button><button type="button" data-fb="down">Нет</button></div>`;
+  /* УНЕСТИ ОТВЕТ. До 19 сентября 2026 ответ жил только в переписке: вставить
+     его в письмо или в свою записку было нечем. Две кнопки рядом с оценкой —
+     скопировать текстом и сохранить файлом; вопрос сохраняется вместе с
+     ответом, иначе через неделю непонятно, на что это ответ. */
+  return `<div class="ai-fb" data-fb-id="${id}"><span>Ответ помог?</span>`
+    + `<button type="button" data-fb="up">Да</button><button type="button" data-fb="down">Нет</button>`
+    + `<span class="ai-fb-sep" aria-hidden="true">·</span>`
+    + `<button type="button" data-take="copy">Скопировать</button>`
+    + `<button type="button" data-take="save">Сохранить</button></div>`;
 }
+/* Текст ответа для переноса наружу: вопрос, ответ и подпись, откуда он. */
+function answerAsText(q, a){
+  const body = String((a && a.raw) || "").trim();
+  return [`Вопрос: ${q}`, "", body, "",
+          `Ответ ассистента «Компаса», ${new Date().toLocaleDateString("ru-RU")}.`,
+          "Данные собраны из открытых источников и могут быть неполными."].join("\n");
+}
+document.addEventListener("click", async e=>{
+  const b = e.target.closest("[data-take]"); if(!b) return;
+  const bar = b.closest(".ai-fb"); const st = bar && _fbStore[bar.dataset.fbId]; if(!st) return;
+  const text = answerAsText(st.q, st.a);
+  if(b.dataset.take === "copy"){
+    copyToClipboard(text, b, "Скопировано", "Скопировать");
+  }else{
+    downloadText(text, "compass-otvet.txt", "text/plain;charset=utf-8");
+    const was = b.textContent; b.textContent = "Сохранено";
+    setTimeout(()=>{ b.textContent = was; }, 1800);
+  }
+});
 document.addEventListener("click", async e=>{
   const b = e.target.closest("[data-fb]"); if(!b) return;
   const bar = b.closest(".ai-fb"); const st = bar && _fbStore[bar.dataset.fbId]; if(!st) return;
@@ -3531,6 +3675,21 @@ if(!window.__msGuard){
 const msValues = v => (!v || v===MS_ALL) ? [] : String(v).split(",").filter(Boolean);
 const msJoin = arr => arr.length ? arr.join(",") : MS_ALL;
 
+/* УЗКИЕ ФИЛЬТРЫ. Ксюша 19 сентября 2026: «возможно стоит сделать ещё более
+   узкие фильтры, чтобы найти конкретику по отрасли». Отрасль, год,
+   консультант и тема отвечают на «где искать», а эти три — на «что именно»:
+   дошла ли сделка до конца, какого она рода и раскрыта ли цена. */
+/* Что предлагать в списках статуса и типа — берём из самой базы и по
+   частоте: пункт, которого в базе нет, выбирать незачем, а порядок «сначала
+   частое» избавляет от прокрутки ради «Закрыта». */
+function feedValuesBy(key){
+  const seen = new Map();
+  DEALS.forEach(d => { const v = String(d[key]||"").trim(); if(v) seen.set(v, (seen.get(v)||0)+1); });
+  return [...seen.entries()].sort((a,b)=>b[1]-a[1]).map(([v])=>v);
+}
+let filterStatus = "Все";
+let filterType = "Все";
+let filterPriced = "Все";
 let filterInd = "Все";
 let feedPage = 1;
 let feedQuery = "";
@@ -3601,14 +3760,84 @@ const sumState = v => !String(v||"").trim() ? "unknown"
    стилем: число должно читаться первым, а оговорка — не спорить с ним по весу. */
 const sumHtml = v => String(v||"").replace(/\s*(\([^()]*\))\s*$/,
   (_, note) => ` <span class="sum-note${note.length<=16?" nb":""}">${note}</span>`);
+/* ОЦЕНКА НЕ ДОЛЖНА ВЫГЛЯДЕТЬ КАК ЦЕНА. Ксюша 19 сентября 2026: «имеет смысл
+   как-то особенно выделять подтверждённую стоимость сделок от сделок „по
+   оценке"». Замер по базе: у 94 сделок в ленте стояло число, которое ценой
+   НЕ является, и ни одной пометки рядом — 66 диапазонов, 25 оценок, 3
+   стартовые цены торгов. «48,4 млрд ₽» читается как цена, а это оценка.
+
+   Пометка берётся из слоя фактов, а не из прозы: до сих пор она появлялась,
+   только если автор карточки сам дописал «(по оценке)» в текст суммы, — то
+   есть держалась на внимательности, а не на данных. Если хвостовая скобка в
+   тексте уже есть, вторую не добавляем.
+
+   Цена, названную сторонами, НЕ помечаем ничем: отсутствие пометки и есть
+   знак «это цена». Две метки вместо одной только утяжелили бы ленту. */
+const SUM_MEANING_SHORT = {
+  estimate: "оценка", auction_start: "стартовая цена торгов",
+  lower_bound: "нижняя граница", reported: "по данным источников",
+  raise: "объём привлечения", valuation: "оценка компании",
+  not_a_price: "не цена сделки",
+};
+/* «диапазон» в этот список НЕ входит намеренно. Замер: из 66 диапазонов без
+   своей оговорки 63 и так показывают тире («300–330 млн ₽») — подпись там
+   лишняя. У остальных трёх в тексте одно число, и подпись «диапазон» спорила
+   бы с тем, что читатель видит; это вопрос к данным, а не к оформлению. */
+const sumNoteFor = d => {
+  const meaning = (priceFact(d) || {}).meaning;
+  return SUM_MEANING_SHORT[meaning] || "";
+};
+/* Сумма вместе с пометкой о том, что это за число. */
+function dealSumHtml(d){
+  const raw = String(d && d.sum || "");
+  const shown = sumHtml(raw);
+  if(/\([^()]*\)\s*$/.test(raw)) return shown;   // оговорка уже в тексте
+  const note = sumNoteFor(d);
+  return note ? `${shown} <span class="sum-note nb">(${note})</span>` : shown;
+}
 /* На телефоне `.deal-meta` — flex с gap:14px (сумма + отраслевая метка в ряд).
    Когда суммы нет вовсе (`d.sum` пуст, а не текст «Не раскрыта»), пустой блок
    суммы всё равно создаёт зазор — метка отрасли съезжает на 14px вправо и
    перестаёт быть на одной вертикали с заголовком и статусом. Рисуем блок
    суммы, только если есть что показать. */
+/* ВЫГРУЗКА ОТФИЛЬТРОВАННОЙ ЛЕНТЫ. Ксюша 19 сентября 2026: «я отфильтровала
+   сделки по параметрам — могу сделать выгрузку».
+
+   Собирается на клиенте из того же списка, который человек видит на экране:
+   сервер не пересобирает подборку заново, поэтому в файле ровно то, что было
+   на странице, включая порядок строк.
+
+   Точка с запятой и BOM — не суеверие: Excel в русской локали открывает
+   CSV с запятой одной колонкой, а без BOM показывает кириллицу кракозябрами.
+   Выгрузка встречается с Excel чаще, чем с чем-либо ещё. */
+const csvCell = v => {
+  const t = String(v == null ? "" : v).replace(/\s+/g, " ").trim();
+  return /[";\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+};
+function feedCsv(rows){
+  const head = ["Дата","Название","Статус","Тип","Отрасль","Сумма","Что это за сумма",
+                "Покупатель","Продавец","Предмет","Ссылка"];
+  const name = id => (id && COMPANIES[id] && COMPANIES[id].name) || "";
+  const body = rows.map(d => [
+    d.date === "unknown" ? "" : d.date,
+    d.title, d.status, d.type, (d.industries || [d.ind]).filter(Boolean).join(", "),
+    d.sum, sumNoteFor(d) || (((d.facts||{}).price||{}).meaning === "disclosed" ? "цена, названная сторонами" : ""),
+    name(d.buyer) || d.buyer_name || "", name(d.seller_id) || d.seller || "",
+    name(d.target) || name(d.asset_id) || d.asset || "",
+    `${location.origin}${location.pathname}#/deal/${d.id}`,
+  ]);
+  return "\ufeff" + [head, ...body].map(r => r.map(csvCell).join(";")).join("\r\n");
+}
+function downloadText(text, filename, mime){
+  const blob = new Blob([text], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 function dealMetaHtml(d){
   const sum = `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${
-    d.sum ? sumHtml(d.sum) : SUM_UNKNOWN_LABEL}</div>`;
+    d.sum ? dealSumHtml(d) : SUM_UNKNOWN_LABEL}</div>`;
   return `<div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>`;
 }
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
@@ -3658,39 +3887,41 @@ function dealDateNote(d){
   const m = fmtMonthYear(deal);
   return m ? ` · дата сделки — ${m}` : "";
 }
-function unifiedFeed(){
-  const rowHtml = {
-    /* В ЛЕНТЕ — ДАТА ПУБЛИКАЦИИ, В КАРТОЧКЕ — ДАТА СДЕЛКИ (просьба владельца
-       7 августа). До этого лента показывала и сортировала по дате сделки, и
-       свежие карточки уходили вглубь: одобренная 6 августа сделка мая вставала
-       сотой строкой, а владелец, ища новое, видел наверху 5 августа и решал,
-       что приток встал. Дата сделки не потеряна — она стоит рядом мелким, если
-       отличается по месяцу от даты публикации. */
-    full: d => `
-    <a class="deal-row reveal" href="#/deal/${d.id}">
-      <div><span class="label num">${fmtDate(d.added||d.date)}</span>${dealDateNote(d)?`<span class="date-kind">добавлено</span>`:""}${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
-      <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}${dealDateNote(d)}</div></div>
-      ${dealMetaHtml(d)}
-    </a>`,
-    mini: m => `
-    <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
-      <div><span class="label num">${fmtDate(m.date)}</span><br><span class="status">Кратко</span></div>
-      <div><div class="deal-title" style="font-size:17px">${m.title}</div><div class="deal-sub">${ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:""} · ${m.role} · источник: ${m.src[0]} ↗</div></div>
-      <div class="deal-meta"><span class="tag steel">${m.ind}</span></div>
-    </a>`,
-    chan: c => `
-    <a class="deal-row mini reveal" href="${c.src[1]}" target="_blank" rel="noopener">
-      <div><span class="label num">${fmtDate(c.date)}</span><br><span class="status">Из канала</span></div>
-      <div><div class="deal-title" style="font-size:17px">${c.title}</div><div class="deal-sub">${c.note} · найдено: ${c.channel} · источник: ${c.src[0]} ↗</div></div>
-      <div class="deal-meta"><span class="tag bronze">${c.ind}</span></div>
-    </a>`,
-    bulk: b => `
-    <a class="deal-row mini reveal" href="${(b.src&&b.src[1])||'#'}" target="_blank" rel="noopener">
-      <div><span class="label num">${fmtDate(b.date)}</span><br><span class="status">Кратко</span></div>
-      <div><div class="deal-title" style="font-size:16.5px">${b.title}</div><div class="deal-sub">${b.role||""}${b.src?` · источник: ${b.src[0]} ↗`:""}</div></div>
-      <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
-    </a>`,
-  };
+/* Разметка строки ленты — снаружи функции отбора: ею пользуется
+   unifiedFeed(), а сама функция отбора теперь возвращает записи. */
+const rowHtml = {
+  /* В ЛЕНТЕ — ДАТА ПУБЛИКАЦИИ, В КАРТОЧКЕ — ДАТА СДЕЛКИ (просьба владельца
+     7 августа). До этого лента показывала и сортировала по дате сделки, и
+     свежие карточки уходили вглубь: одобренная 6 августа сделка мая вставала
+     сотой строкой, а владелец, ища новое, видел наверху 5 августа и решал,
+     что приток встал. Дата сделки не потеряна — она стоит рядом мелким, если
+     отличается по месяцу от даты публикации. */
+  full: d => `
+  <a class="deal-row reveal" href="#/deal/${d.id}">
+    <div><span class="label num">${fmtDate(d.added||d.date)}</span>${dealDateNote(d)?`<span class="date-kind">добавлено</span>`:""}${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
+    <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}${dealDateNote(d)}</div></div>
+    ${dealMetaHtml(d)}
+  </a>`,
+  mini: m => `
+  <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
+    <div><span class="label num">${fmtDate(m.date)}</span><br><span class="status">Кратко</span></div>
+    <div><div class="deal-title" style="font-size:17px">${m.title}</div><div class="deal-sub">${ALL_FIRM(m.firm)?ALL_FIRM(m.firm).n:""} · ${m.role} · источник: ${m.src[0]} ↗</div></div>
+    <div class="deal-meta"><span class="tag steel">${m.ind}</span></div>
+  </a>`,
+  chan: c => `
+  <a class="deal-row mini reveal" href="${c.src[1]}" target="_blank" rel="noopener">
+    <div><span class="label num">${fmtDate(c.date)}</span><br><span class="status">Из канала</span></div>
+    <div><div class="deal-title" style="font-size:17px">${c.title}</div><div class="deal-sub">${c.note} · найдено: ${c.channel} · источник: ${c.src[0]} ↗</div></div>
+    <div class="deal-meta"><span class="tag bronze">${c.ind}</span></div>
+  </a>`,
+  bulk: b => `
+  <a class="deal-row mini reveal" href="${(b.src&&b.src[1])||'#'}" target="_blank" rel="noopener">
+    <div><span class="label num">${fmtDate(b.date)}</span><br><span class="status">Кратко</span></div>
+    <div><div class="deal-title" style="font-size:16.5px">${b.title}</div><div class="deal-sub">${b.role||""}${b.src?` · источник: ${b.src[0]} ↗`:""}</div></div>
+    <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
+  </a>`,
+};
+function unifiedFeedItems(){
   /* `pub` — дата, по которой лента упорядочена: когда запись появилась в
      «Компасе». У краткого сырья поля `added` нет, для него это дата сделки —
      иначе такие строки провалились бы в самый низ независимо от свежести. */
@@ -3791,7 +4022,30 @@ function unifiedFeed(){
     if(!inds.length) return true;
     return inds.some(i => it.kind==="full" ? hasIndustry(it.rec,i) : it.ind===i);
   };
-  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it));
+  /* Три узких признака. Статус и тип есть только у подробных карточек —
+     краткие записи под такой фильтр не подходят и честно из выдачи уходят,
+     а не притворяются «неизвестным статусом». */
+  const matchStatus = it => {
+    const want = msValues(filterStatus);
+    if(!want.length) return true;
+    return it.kind==="full" && want.includes(String(it.rec.status||""));
+  };
+  const matchType = it => {
+    const want = msValues(filterType);
+    if(!want.length) return true;
+    return it.kind==="full" && want.includes(String(it.rec.type||""));
+  };
+  /* «Цена раскрыта» — это слой фактов, а не наличие текста в поле суммы:
+     оценка, диапазон и стартовая цена торгов ценой не являются. */
+  const matchPriced = it => {
+    const want = msValues(filterPriced);
+    if(!want.length) return true;
+    if(it.kind!=="full") return false;
+    const meaning = ((it.rec.facts||{}).price||{}).meaning;
+    const yes = meaning === "disclosed";
+    return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
+  };
+  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
   /* Сначала по дате публикации, внутри одного дня — по дате сделки. Второй
      ключ не украшение: 902 карточки приехали одним переносом архива 23 июля, и
      без него весь этот блок лёг бы в случайном порядке вместо хронологии. */
@@ -3801,7 +4055,12 @@ function unifiedFeed(){
     const p = String(b.pub||"").localeCompare(String(a.pub||""));
     return p || b.date.localeCompare(a.date);
   });
-  return filtered.map(it=>rowHtml[it.kind](it.rec));
+  return filtered;
+}
+/* Разметка отдельно от отбора: тот же список нужен не только экрану, но и
+   выгрузке в таблицу, а из готовых строк HTML данные обратно не достать. */
+function unifiedFeed(){
+  return unifiedFeedItems().map(it=>rowHtml[it.kind](it.rec));
 }
 
 // Список сделок рендерится отдельно от остальной страницы (hero-слайдер,
@@ -3841,6 +4100,9 @@ function emptyFeedHtml(){
   msList(filterTheme, {k:"theme", t:n=>`тема «${n}»`}, ns=>`темы: ${ns.join(", ")}`);
   msList(filterFirm, {k:"firm", t:n=>`консультант «${n}»`}, ns=>`консультанты: ${ns.join(", ")}`,
          id=>{const f=ALL_FIRM(id); return f?f.n:id;});
+  msList(filterStatus, {k:"status", t:n=>`статус «${n}»`}, ns=>`статус: ${ns.join(", ")}`);
+  msList(filterType, {k:"dtype", t:n=>`тип «${n}»`}, ns=>`тип сделки: ${ns.join(", ")}`);
+  msList(filterPriced, {k:"priced", t:n=>n.toLowerCase()}, ns=>ns.join(", ").toLowerCase());
   if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   if(filterMinRevenue!=="Все"){
@@ -3890,8 +4152,9 @@ function bindFeedListEvents(){
   if(fr) fr.onclick = ()=>{
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     onlyFull=false; filterMinRevenue="Все"; feedPage=1;
+    filterStatus="Все"; filterType="Все"; filterPriced="Все";
     const q=document.getElementById("feedq"); if(q) q.value="";
-    ["selind","selyear","seltheme","selfirm"].forEach(msReset);
+    ["selind","selyear","seltheme","selfirm","selstatus","seldtype","selpriced"].forEach(msReset);
     [["selagroup","Все"],["selfmt","Все сделки"],["selrev","Все"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
@@ -4062,10 +4325,19 @@ function renderDeals(){
     <label>Тема сделки
       ${msControl("seltheme", THEME_LIST.map(t=>{const n=themeCount(t);return n?[t,`${t} (${n})`]:null;}).filter(Boolean), filterTheme)}
     </label>
+    <label>Статус
+      ${msControl("selstatus", feedValuesBy("status").map(v=>[v,v]), filterStatus)}
+    </label>
+    <label>Тип сделки
+      ${msControl("seldtype", feedValuesBy("type").map(v=>[v,v]), filterType)}
+    </label>
+    <label>Цена <span class="tool-note" title="«Раскрыта» — сумму назвали стороны сделки; оценки, диапазоны и стартовые цены торгов сюда не входят">ⓘ</span>
+      ${msControl("selpriced", [["Цена раскрыта","Цена раскрыта"],["Цена не раскрыта","Цена не раскрыта"]], filterPriced)}
+    </label>
     <label>Выручка покупаемой компании <span class="tool-note" title="По подтверждённой отчётности ФНС; учитываются только не устаревшие данные">ⓘ</span>
       <select id="selrev">${REVENUE_BUCKETS.map(([v,label])=>`<option value="${v}" ${v===filterMinRevenue?"selected":""}>${v==="Все"?"Все":label}</option>`).join("")}</select>
     </label>
-    <div class="adv-share"><button class="chip" id="savefeed">Сохранить подборку</button><button class="chip" id="sharefeed">Скопировать ссылку</button><span class="tool-note" id="savefeednote" aria-live="polite"></span></div>
+    <div class="adv-share"><button class="chip" id="savefeed">Сохранить подборку</button><button class="chip" id="sharefeed">Скопировать ссылку</button><button class="chip" id="exportfeed">Выгрузить в таблицу</button><span class="tool-note" id="savefeednote" aria-live="polite"></span></div>
   </div>
   <div id="feedlist">${feedListHtml()}</div>
   <div class="cta reveal">
@@ -4099,6 +4371,9 @@ function renderDeals(){
   bindMS("selyear", v=>feedYear=v);
   bindMS("selfirm", v=>filterFirm=v);
   bindMS("seltheme", v=>filterTheme=v);
+  bindMS("selstatus", v=>filterStatus=v);
+  bindMS("seldtype", v=>filterType=v);
+  bindMS("selpriced", v=>filterPriced=v);
   const selrev = document.getElementById("selrev");
   if(selrev) selrev.onchange = ()=>{
     filterMinRevenue = selrev.value; feedPage = 1;
@@ -4110,6 +4385,16 @@ function renderDeals(){
     syncFeedHash();
     copyToClipboard(location.origin + location.pathname + feedHash(), sf,
       "Ссылка скопирована", "Скопировать ссылку на подборку");
+  };
+  const exf = document.getElementById("exportfeed");
+  if(exf) exf.onclick = ()=>{
+    // Берём ПОЛНЫЙ отфильтрованный список, а не одну показанную страницу:
+    // человек фильтровал подборку, а не первые двадцать строк.
+    const rows = unifiedFeedItems().filter(it=>it.kind==="full").map(it=>it.rec);
+    const note = document.getElementById("savefeednote");
+    if(!rows.length){ if(note) note.textContent="Выгружать нечего: под эти условия ничего не нашлось."; return; }
+    downloadText(feedCsv(rows), "compass-sdelki.csv", "text/csv;charset=utf-8");
+    if(note) note.textContent = `Выгружено ${rows.length} ${plural(rows.length,"сделка","сделки","сделок")}.`;
   };
   const savef = document.getElementById("savefeed");
   if(savef) savef.onclick = async()=>{
@@ -5183,8 +5468,12 @@ function renderDeal(id, qs, previewCard){
        Единственное исключение — «Сумма» на «Обзоре» (allowStub): там отсутствие
        цены само по себе ответ на вопрос «за сколько», и под ним стоит пояснение.
        Так «Не раскрыта» встречается на карточке ровно один раз, а не трижды. */
+    /* У «Суммы» пометка о том, что это за число (цена, оценка, диапазон),
+       берётся из слоя фактов — как и в ленте, см. dealSumHtml. Остальные
+       величины показываются как есть. */
     const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
-      ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${sumHtml(val)}</div></div>` : "";
+      ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${
+          label==="Сумма" && val===d.sum ? dealSumHtml(d) : sumHtml(val)}</div></div>` : "";
     // Ярлык той же строки, что и в остальных блоках карточки (жирный, капс,
     // приглушённый — класс .label, тот же, что у «Цель сделки»/«Контекст»
     // рядом): раньше spec-row нёс собственный класс .spec-k (обычным
@@ -6585,6 +6874,30 @@ async function mountGroupMembers(groupMembers, mountId, getShare){
   });
 }
 
+/* Санкционная отметка. В профиль попадает только то, что человек прочитал и
+   сверил с записью перечня (pipeline/sanctions_confirmed.json): совпадения
+   фамилии мало — в списках есть и однофамильцы, и полные тёзки, а ошибка
+   здесь — не опечатка, а обвинение живого человека. */
+const SANC_LABEL = {us:"Санкции США", eu:"Санкции ЕС", uk:"Санкции Великобритании"};
+const SANC_WHERE = {us:"в список США", eu:"в список Евросоюза", uk:"в британский список"};
+const sancDate = d => {
+  if(!d) return "";
+  const t = new Date(d);
+  return isNaN(t) ? "" : t.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"}).replace(" г.","");
+};
+function sanctionsHtml(c){
+  const marks = (c && c.sanctions) || [];
+  if(!marks.length) return "";
+  const order = {us:0, eu:1, uk:2};
+  const list = marks.slice().sort((a,b)=>(order[a.list]??9)-(order[b.list]??9));
+  const chips = list.map(m=>`<a class="sanc-badge" href="${esc(m.url)}" target="_blank" rel="noopener noreferrer"
+    title="Открыть официальный перечень">${esc(SANC_LABEL[m.list]||"Санкции")}</a>`).join("");
+  const dated = list.filter(m=>sancDate(m.since))
+    .map(m=>`${SANC_WHERE[m.list]||"в список"} — ${sancDate(m.since)} года`);
+  const when = dated.length ? ` Внесён ${dated.join("; ")}.` : "";
+  return `<div class="sanc-row">${chips}</div>
+    <div class="sanc-note">Человек назван в официальных санкционных списках — ссылка ведёт на сам список.${when} Запись сверена с профилем вручную: одной совпавшей фамилии для такой отметки мало.</div>`;
+}
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -6616,6 +6929,7 @@ function renderCompany(id){
     ${c.group?`<span class="tag steel" style="margin-left:6px">Группа компаний</span>`:""}
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
+    ${sanctionsHtml(c)}
     ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
       <span class="tag steel">Несколько юрлиц</span>
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Это не одна компания: под этим именем в сделке шли несколько юридических лиц, проданных одним лотом. Что вошло в лот и какие доли — в карточке сделки.</span>
@@ -7771,6 +8085,23 @@ async function renderMaterials(){
 /* Пустой экран ассистента: вместо «Задайте вопрос…» одной строкой — короткое
    объяснение, что он умеет. Это первое, что видит человек, открыв раздел, и
    ровно та «страница», о которой просил партнёр, — а не подпись под формой. */
+/* ГОТОВЫЕ ЗАДАЧИ, А НЕ ПРИМЕРЫ ВОПРОСОВ. Владелец 19 сентября 2026: «нужен
+   полезный ассистент… может, красиво добавить в него что-то типа примеры
+   запросов». Примеры у нас уже были и собирались из данных, но они отвечали
+   на вопрос «а что тут вообще можно спросить», а не «сделай мне работу».
+
+   Часть задач самодостаточна и уходит сразу. Часть требует имени — такая не
+   отправляется, а ВСТАВЛЯЕТ заготовку в поле и ставит курсор туда, где надо
+   дописать: отправить «сравни  и  по сделкам» с пустыми местами значило бы
+   получить ответ ни о чём. */
+const ASSISTANT_TASKS = [
+  {label: "Что нового за неделю", q: "Что нового на рынке за последнюю неделю?"},
+  {label: "Крупнейшие сделки года", q: `Крупнейшие сделки ${new Date().getFullYear()} года`},
+  {label: "Сравнить компании", fill: "Сравни  и  по сделкам", at: 7},
+  {label: "Разбор сделки", fill: "Расскажи подробно о сделке "},
+  {label: "Практика консультанта", fill: "Какие сделки сопровождала фирма "},
+  {label: "Прецеденты по условию", fill: "Найди сделки с опционом обратного выкупа"},
+];
 const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome">
   <h2>О чём спросить?</h2>
   <p>Ассистент ищет по базе «Компаса»: сделки, компании, консультанты, суммы и сроки — и в каждом ответе даёт ссылку на первоисточник. В режиме «По всему интернету» он добавляет к этому открытые источники.</p>
@@ -7827,6 +8158,7 @@ async function renderAssistant(){
       <div class="chat-stream" id="chatbox">${CHAT_WELCOME}</div>
       <div class="chat-composer">
         <div class="ask"><input id="q" placeholder="Например: какие сделки были в фармацевтике в 2025 году?" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+        <div class="suggests tasks" id="tasks"></div>
         <div class="suggests" id="suggests"></div>
       </div>
     </section>
@@ -7878,10 +8210,23 @@ async function renderAssistant(){
       rows.forEach(t=>{
         const g=threadGroup(t.updated_at);
         if(g!==group){ group=g; html+=`<div class="chat-group">${g}</div>`; }
-        html+=`<button class="chat-thread${t.id===activeThreadId?" on":""}" data-thread="${t.id}">${esc(t.title)}</button>`;
+        html+=`<div class="chat-row"><button class="chat-thread${t.id===activeThreadId?" on":""}" data-thread="${t.id}">${esc(t.title)}</button>`
+             + `<button class="chat-del" data-del="${t.id}" title="Удалить диалог" aria-label="Удалить диалог «${esc(t.title)}»">×</button></div>`;
       });
       list.innerHTML=html;
       list.querySelectorAll("[data-thread]").forEach(b=>b.onclick=()=>{closeSide();loadThread(Number(b.dataset.thread));});
+      list.querySelectorAll("[data-del]").forEach(b=>b.onclick=async e=>{
+        e.stopPropagation();
+        const id=Number(b.dataset.del);
+        const title=b.closest(".chat-row").querySelector(".chat-thread").textContent;
+        if(!confirm(`Удалить диалог «${title}»? Вернуть его будет нельзя.`)) return;
+        b.disabled=true;
+        const r=await fetch(`/api/assistant/threads/${id}`,{method:"DELETE"});
+        if(!r.ok){ b.disabled=false; return; }
+        // Удалили тот, что открыт на экране, — переписку надо убрать тоже,
+        // иначе человек смотрит на разговор, которого больше нет.
+        if(id===activeThreadId) startFresh(); else renderThreadList();
+      });
     }catch(e){ if(list.isConnected) list.innerHTML=`<p class="chat-side-note">История временно недоступна.</p>`; }
   };
   const loadThread=async id=>{
@@ -7907,6 +8252,21 @@ async function renderAssistant(){
     el.innerHTML=SUGGESTS.map((q,i)=>`<button class="chip" data-q="${i}">${esc(q)}</button>`).join("");
     el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(SUGGESTS[b.dataset.q]));
   };
+  const paintTasks=()=>{
+    const el=document.getElementById("tasks"); if(!el) return;
+    el.innerHTML=ASSISTANT_TASKS.map((t,i)=>`<button class="chip task" data-task="${i}">${esc(t.label)}</button>`).join("");
+    el.querySelectorAll("[data-task]").forEach(b=>b.onclick=()=>{
+      const t=ASSISTANT_TASKS[+b.dataset.task];
+      if(t.q){ answer(t.q); return; }
+      const f=document.getElementById("q");
+      f.value=t.fill;
+      f.focus();
+      // Курсор туда, где дописывать: в конец или в названное место заготовки.
+      const at = t.at==null ? t.fill.length : t.at;
+      f.setSelectionRange(at, at);
+    });
+  };
+  paintTasks();
   paintSuggests(); loadSuggests().then(paintSuggests);
   document.getElementById("send").onclick=()=>{const el=document.getElementById("q"),v=el.value.trim();if(v){answer(v);el.value="";}};
   document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("send").click();});

@@ -4233,3 +4233,47 @@ def test_health_carries_a_build_fingerprint(client):
     _sys.path.insert(0, str(root / "pipeline"))
     import check_deploy
     assert check_deploy.local_fingerprint() == build
+
+
+def test_assistant_thread_delete_removes_its_messages_too(client):
+    """Артём 19 сентября 2026: «плюс возможность удалять диалоги». Сервер это
+    умел с самого начала, кнопки в интерфейсе не было ни одной. Здесь держим
+    то, что легко потерять при правке модели: сообщения обязаны уходить
+    вместе с диалогом, иначе они останутся в базе сиротами."""
+    from db.models import AssistantMessage, AssistantThread
+    _login(client, "udalenie-dialogov@example.com")
+    me = client.get("/api/me").json()
+    assert me["logged_in"] is True
+
+    with get_session() as db:
+        user = db.query(User).filter(User.email == "udalenie-dialogov@example.com").one()
+        thread = AssistantThread(user_id=user.id, title="Сделки в недвижимости")
+        db.add(thread)
+        db.flush()
+        db.add(AssistantMessage(thread_id=thread.id, role="user", body="вопрос"))
+        db.add(AssistantMessage(thread_id=thread.id, role="assistant", body="ответ"))
+        db.commit()
+        thread_id = thread.id
+
+    assert any(t["id"] == thread_id for t in client.get("/api/assistant/threads").json())
+    assert client.delete("/api/assistant/threads/%d" % thread_id).status_code == 200
+    assert not any(t["id"] == thread_id for t in client.get("/api/assistant/threads").json())
+
+    with get_session() as db:
+        assert db.query(AssistantThread).filter(AssistantThread.id == thread_id).count() == 0
+        assert db.query(AssistantMessage).filter(AssistantMessage.thread_id == thread_id).count() == 0
+
+
+def test_assistant_thread_of_another_person_cannot_be_deleted(client):
+    """Чужой диалог не удаляется и не выдаёт своим существованием: 404, а не 403."""
+    from db.models import AssistantThread
+    _login(client, "chuzhoy-dialog@example.com")
+    with get_session() as db:
+        owner = db.query(User).filter(User.email == "chuzhoy-dialog@example.com").one()
+        thread = AssistantThread(user_id=owner.id, title="Мой разговор")
+        db.add(thread)
+        db.commit()
+        thread_id = thread.id
+    client.post("/api/auth/logout")
+    _login(client, "postoronniy@example.com")
+    assert client.delete("/api/assistant/threads/%d" % thread_id).status_code == 404

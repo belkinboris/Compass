@@ -1,0 +1,55 @@
+{
+ "_readme": "Сверено человеком: имя из профиля и запись перечня — один и тот же человек. Совпадения одних имён недостаточно: в поле why записано, чем подтверждено. Добавлять только после чтения записи перечня; снимать, если человека из перечня исключили (pipeline/sanctions_match.py --check).",
+ "g2ece001b": [
+  {"list": "eu", "name": "Aleksey Aleksandrovich UCHENOV", "since": "2023-02-25",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1765",
+   "why": "В перечне ЕС — бывший замминистра промышленности и торговли (2021 — март 2023), год рождения 1986, Москва. В профиле — тот же пост и тот же месяц ухода."}
+ ],
+ "g3e8d51c5": [
+  {"list": "us", "name": "SVIBLOV, Vladislav Vladimirovich", "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46715",
+   "why": "Список США: Свиблов Владислав Владимирович, 1980 года рождения, Рыбинск. В профиле — владелец Highland Gold; британский перечень прямо называет добывающий сектор."},
+  {"list": "uk", "name": "Vladislav SVIBLOV", "since": "2023-11-08",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "why": "Британский перечень, запись RUS2008: владеет компанией добывающего сектора. Совпадает с Highland Gold из профиля."}
+ ],
+ "g6699fc6f": [
+  {"list": "us", "name": "KHOTIMSKIY, Dmitry Vladimirovich", "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35976",
+   "why": "В записи США прямо указана связь с Совкомбанком, в профиле — сооснователь Совкомбанка."},
+  {"list": "uk", "name": "Dmitri Vladimirovich KHOTIMSKI", "since": "2022-09-26",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "why": "Британский перечень, запись RUS1582, то же отчество, что и в записи США."}
+ ],
+ "g70a7fe53": [
+  {"list": "us", "name": "UDODOV, Aleksandr Yevgenyevich", "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=40789",
+   "why": "Удодов Александр Евгеньевич, 1969 года рождения, Кизилюрт. Тот же человек, что в профиле: владелец «Оптима Инвеста», через который куплен «Трансхим»."}
+ ],
+ "g968f4166": [
+  {"list": "eu", "name": "Арам Ашотович ГАБРЕЛЯНОВ", "since": "2024-06-24",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401746",
+   "why": "Запись ЕС по-русски слово в слово и с тем же занятием: основатель и руководитель Life.ru. В профиле — медиаменеджер."}
+ ],
+ "gbef46925": [
+  {"list": "eu", "name": "Артём Юрьевич ЧАЙКА", "since": "2023-06-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1216",
+   "why": "Запись ЕС по-русски слово в слово, в ней назван отец — Юрий Чайка, бывший генпрокурор. Ровно это сказано и в профиле."},
+  {"list": "uk", "name": "Артём Юрьевич ЧАЙКА", "since": "2025-02-14",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "why": "Британский перечень, запись RUS2387, то же полное имя по-русски."}
+ ],
+ "gf1c9faa9": [
+  {"list": "eu", "name": "Aleksey Konstantinovich KAKHIDZE", "since": "2024-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403183",
+   "why": "«Интерфакс» 16 декабря 2024 года о том же решении ЕС: «председатель совета директоров этой компании Алексей Кахидзе» — о «Газпром СПГ технологии». В профиле та же должность."}
+ ],
+ "gf79d11d3": [
+  {"list": "us", "name": "MAKHMUDOV, Iskander", "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45056",
+   "why": "Махмудов Искандер, 1963 года рождения, Бухара. Британская запись о том же человеке называет УГМК — это и есть компания из профиля."},
+  {"list": "uk", "name": "Iskander Kakhramonovich MAKHMUDOV", "since": "2022-09-26",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "why": "Британский перечень, запись RUS1643: президент и совладелец УГМК. В профиле — совладелец УГМК."}
+ ]
+}

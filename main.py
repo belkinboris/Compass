@@ -44,7 +44,7 @@ import telegram_endpoint
 import subscription_feed
 from company_catalog import get_company_profile, load_company_catalog
 from deal_catalog import get_deal
-from deal_export import render_deal_pdf
+from deal_export import render_companies_pdf, render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
     AppSetting,
@@ -3647,6 +3647,29 @@ def export_deal(deal_id: str, _payload: DealExportIn | None = None,
     filename = re.sub(r"[^a-zA-Z0-9_-]+", "-", deal_id)[:80] + ".pdf"
     return StreamingResponse(iter([pdf]), media_type="application/pdf",
                              headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+class CompaniesExportIn(BaseModel):
+    """Сравнение собрано на экране, оттуда и приходит: сервер не пересобирает
+    его заново — иначе в PDF попало бы не то, что человек видел."""
+    companies: list[dict] = []
+
+
+@app.post("/api/companies/export")
+def export_companies(payload: CompaniesExportIn,
+                      user: User | None = Depends(_current_user)):
+    """PDF сравнения компаний. Ксюша 19 сентября 2026: «сделала сравнение
+    компаний — могу получить пдф»."""
+    if not user and not DEAL_EXPORT_GUESTS:
+        return JSONResponse({"error": "войдите, чтобы скачать сравнение"}, status_code=401)
+    rows = [r for r in (payload.companies or []) if isinstance(r, dict) and r.get("name")]
+    if not rows:
+        return JSONResponse({"error": "нечего выгружать: компании не выбраны"}, status_code=400)
+    if len(rows) > 3:
+        rows = rows[:3]
+    pdf = render_companies_pdf(rows)
+    return StreamingResponse(iter([pdf]), media_type="application/pdf",
+                             headers={"Content-Disposition": 'attachment; filename="compass-companies.pdf"'})
 
 
 @app.get("/api/subscriptions")

@@ -9,7 +9,7 @@ from typing import Any
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
@@ -303,4 +303,88 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         canvas.restoreState()
 
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
+    return buffer.getvalue()
+
+
+def render_companies_pdf(companies: list[dict[str, Any]]) -> bytes:
+    """Сравнение двух-трёх компаний одним листом.
+
+    Ксюша 19 сентября 2026: «сделала сравнение компаний — могу получить пдф».
+    На экране это сравнение уже собрано, но унести его было нечем.
+
+    На вход — то же, что рисует экран: у каждой компании имя, отрасль,
+    описание, роли в сделках и последний отчёт. Пустые поля остаются
+    пустыми: правило «не подменять отсутствующие данные правдоподобными»
+    в выгрузке действует ровно так же, как на экране.
+    """
+    regular, bold = _register_fonts()
+    buffer = BytesIO()
+    names = ", ".join(_text(c.get("name")) for c in companies if c.get("name"))
+    doc = SimpleDocTemplate(buffer, pagesize=landscape(A4),
+                            leftMargin=16*mm, rightMargin=16*mm, topMargin=16*mm, bottomMargin=16*mm,
+                            title="Сравнение компаний: %s" % names, author="КОМПАС")
+    styles = getSampleStyleSheet()
+    brand = colors.HexColor("#0F2B21")
+    bronze = colors.HexColor("#A3814E")
+    muted = colors.HexColor("#66707A")
+    line = colors.HexColor("#E2E5DF")
+    title = ParagraphStyle("CmpTitle", parent=styles["Title"], fontName=bold, fontSize=19,
+                           leading=23, textColor=colors.HexColor("#15191D"), alignment=TA_LEFT)
+    body = ParagraphStyle("CmpBody", parent=styles["BodyText"], fontName=regular,
+                          fontSize=9, leading=13, textColor=colors.HexColor("#30363B"))
+    small = ParagraphStyle("CmpSmall", parent=body, fontSize=7.8, leading=10.5, textColor=muted)
+    head_cell = ParagraphStyle("CmpHead", parent=body, fontName=bold, fontSize=11,
+                               leading=14, textColor=brand)
+
+    story: list[Any] = []
+    brand_style = ParagraphStyle("CmpBrand", parent=body, fontName=bold, fontSize=15,
+                                 leading=17, textColor=brand)
+    head = Table([[CompassMark(7*mm, brand, bronze, colors.white), Paragraph("КОМПАС", brand_style)]],
+                 colWidths=[10*mm, 235*mm])
+    head.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
+    ]))
+    story.append(head)
+    story.append(Paragraph("Сравнение компаний", title))
+    story.append(Spacer(1, 3*mm))
+    story.append(Paragraph(escape("Отчёт сформирован %s" % _report_date()), small))
+    story.append(Spacer(1, 6*mm))
+
+    # Строки таблицы — те же, что на экране, сверху вниз в том же порядке.
+    rows: list[tuple[str, str]] = [
+        ("Отрасль", "industry"), ("Чем занимается", "desc"),
+        ("Сделок в базе", "deals"), ("Роли в сделках", "roles"),
+        ("Отчётность", "report_year"), ("Выручка", "revenue"),
+        ("Чистая прибыль", "net_profit"), ("Собственники", "owners"),
+    ]
+    n = max(1, len(companies))
+    col = (245*mm - 32*mm) / n
+    table: list[list[Any]] = [
+        [Paragraph("", small)] + [Paragraph(escape(_text(c.get("name"))), head_cell) for c in companies]
+    ]
+    for label, key in rows:
+        cells = [Paragraph("<b>%s</b>" % escape(label), small)]
+        for c in companies:
+            value = _text(c.get(key))
+            cells.append(Paragraph(escape(value) if value else "—", body))
+        table.append(cells)
+
+    grid = Table(table, colWidths=[32*mm] + [col]*n, repeatRows=1)
+    grid.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LINEBELOW", (0, 0), (-1, -1), 0.35, line),
+        ("LINEAFTER", (0, 0), (-2, -1), 0.35, line),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
+    story.append(grid)
+    story.append(Spacer(1, 6*mm))
+    story.append(Paragraph(escape(
+        "Данные собраны из публичных источников и могут быть неполными. Показатели "
+        "относятся к конкретному юридическому лицу и могут не отражать всю группу. "
+        "Прочерк означает, что таких сведений у нас нет."), small))
+
+    doc.build(story)
     return buffer.getvalue()
