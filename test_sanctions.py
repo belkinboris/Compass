@@ -31,8 +31,38 @@ def test_every_confirmed_mark_names_a_list_and_a_document():
         assert marks, "пустая отметка у %s" % cid
         for m in marks:
             assert m["list"] in sm.LIST_LABEL, (cid, m)
+            assert m["kind"] in ("person", "entity"), (cid, m)
             assert m["url"].startswith("https://"), (cid, m)
             assert m.get("why"), "не сказано, чем подтверждено совпадение: %s" % cid
+            if m.get("matched_by") == "inn":
+                assert m.get("inn"), "отметка по ИНН без самого ИНН: %s" % cid
+
+
+def test_inn_marks_really_repeat_the_inn_from_the_registry():
+    """Отметка «совпал ИНН» обязана совпадать с реестром ФНС, а не с памятью."""
+    inns = sm.base_inns()
+    for cid, marks in CONFIRMED.items():
+        for m in marks:
+            if m.get("matched_by") == "inn":
+                assert inns.get(cid) == m["inn"], (cid, m["inn"], inns.get(cid))
+
+
+def test_company_name_key_survives_the_legal_form():
+    assert sm.entity_key("ПАО Сбербанк") == sm.entity_key("PJSC SBERBANK")
+    assert sm.entity_key("ООО «Лузалес»") == sm.entity_key("LUZALES LLC")
+
+
+def test_a_name_made_only_of_common_business_words_gets_no_key():
+    """Иначе «РТ-Инвест» сходится с «M INVEST, OOO», а это разные компании."""
+    for name in ("Capital Group", "KR Properties", "РТ-Инвест", "Digital Security"):
+        assert sm.entity_key(name) == "", name
+
+
+def test_common_words_stay_inside_the_key():
+    """«Почта Банк» и «Почта России» — разные компании, и ключи у них разные."""
+    assert sm.entity_key("Почта Банк") != sm.entity_key("Почта России")
+    assert sm.entity_key("Яндекс") != sm.entity_key("АО Яндекс Банк")
+    assert sm.entity_key("Сахалин-2") != sm.entity_key("Сахалин-8")
 
 
 def test_site_shows_only_what_a_human_confirmed():

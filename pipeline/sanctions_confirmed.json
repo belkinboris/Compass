@@ -1,55 +1,1881 @@
 {
  "_readme": "Сверено человеком: имя из профиля и запись перечня — один и тот же человек. Совпадения одних имён недостаточно: в поле why записано, чем подтверждено. Добавлять только после чтения записи перечня; снимать, если человека из перечня исключили (pipeline/sanctions_match.py --check).",
  "g2ece001b": [
-  {"list": "eu", "name": "Aleksey Aleksandrovich UCHENOV", "since": "2023-02-25",
+  {
+   "list": "eu",
+   "kind": "person",
+   "name": "Aleksey Aleksandrovich UCHENOV",
+   "since": "2023-02-25",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1765",
-   "why": "В перечне ЕС — бывший замминистра промышленности и торговли (2021 — март 2023), год рождения 1986, Москва. В профиле — тот же пост и тот же месяц ухода."}
+   "why": "В перечне ЕС — бывший замминистра промышленности и торговли (2021 — март 2023), год рождения 1986, Москва. В профиле — тот же пост и тот же месяц ухода."
+  }
  ],
  "g3e8d51c5": [
-  {"list": "us", "name": "SVIBLOV, Vladislav Vladimirovich", "since": "",
+  {
+   "list": "us",
+   "kind": "person",
+   "name": "SVIBLOV, Vladislav Vladimirovich",
+   "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46715",
-   "why": "Список США: Свиблов Владислав Владимирович, 1980 года рождения, Рыбинск. В профиле — владелец Highland Gold; британский перечень прямо называет добывающий сектор."},
-  {"list": "uk", "name": "Vladislav SVIBLOV", "since": "2023-11-08",
+   "why": "Список США: Свиблов Владислав Владимирович, 1980 года рождения, Рыбинск. В профиле — владелец Highland Gold; британский перечень прямо называет добывающий сектор."
+  },
+  {
+   "list": "uk",
+   "kind": "person",
+   "name": "Vladislav SVIBLOV",
+   "since": "2023-11-08",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
-   "why": "Британский перечень, запись RUS2008: владеет компанией добывающего сектора. Совпадает с Highland Gold из профиля."}
+   "why": "Британский перечень, запись RUS2008: владеет компанией добывающего сектора. Совпадает с Highland Gold из профиля."
+  }
  ],
  "g6699fc6f": [
-  {"list": "us", "name": "KHOTIMSKIY, Dmitry Vladimirovich", "since": "",
+  {
+   "list": "us",
+   "kind": "person",
+   "name": "KHOTIMSKIY, Dmitry Vladimirovich",
+   "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35976",
-   "why": "В записи США прямо указана связь с Совкомбанком, в профиле — сооснователь Совкомбанка."},
-  {"list": "uk", "name": "Dmitri Vladimirovich KHOTIMSKI", "since": "2022-09-26",
+   "why": "В записи США прямо указана связь с Совкомбанком, в профиле — сооснователь Совкомбанка."
+  },
+  {
+   "list": "uk",
+   "kind": "person",
+   "name": "Dmitri Vladimirovich KHOTIMSKI",
+   "since": "2022-09-26",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
-   "why": "Британский перечень, запись RUS1582, то же отчество, что и в записи США."}
+   "why": "Британский перечень, запись RUS1582, то же отчество, что и в записи США."
+  }
  ],
  "g70a7fe53": [
-  {"list": "us", "name": "UDODOV, Aleksandr Yevgenyevich", "since": "",
+  {
+   "list": "us",
+   "kind": "person",
+   "name": "UDODOV, Aleksandr Yevgenyevich",
+   "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=40789",
-   "why": "Удодов Александр Евгеньевич, 1969 года рождения, Кизилюрт. Тот же человек, что в профиле: владелец «Оптима Инвеста», через который куплен «Трансхим»."}
+   "why": "Удодов Александр Евгеньевич, 1969 года рождения, Кизилюрт. Тот же человек, что в профиле: владелец «Оптима Инвеста», через который куплен «Трансхим»."
+  }
  ],
  "g968f4166": [
-  {"list": "eu", "name": "Арам Ашотович ГАБРЕЛЯНОВ", "since": "2024-06-24",
+  {
+   "list": "eu",
+   "kind": "person",
+   "name": "Арам Ашотович ГАБРЕЛЯНОВ",
+   "since": "2024-06-24",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401746",
-   "why": "Запись ЕС по-русски слово в слово и с тем же занятием: основатель и руководитель Life.ru. В профиле — медиаменеджер."}
+   "why": "Запись ЕС по-русски слово в слово и с тем же занятием: основатель и руководитель Life.ru. В профиле — медиаменеджер."
+  }
  ],
  "gbef46925": [
-  {"list": "eu", "name": "Артём Юрьевич ЧАЙКА", "since": "2023-06-23",
+  {
+   "list": "eu",
+   "kind": "person",
+   "name": "Артём Юрьевич ЧАЙКА",
+   "since": "2023-06-23",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1216",
-   "why": "Запись ЕС по-русски слово в слово, в ней назван отец — Юрий Чайка, бывший генпрокурор. Ровно это сказано и в профиле."},
-  {"list": "uk", "name": "Артём Юрьевич ЧАЙКА", "since": "2025-02-14",
+   "why": "Запись ЕС по-русски слово в слово, в ней назван отец — Юрий Чайка, бывший генпрокурор. Ровно это сказано и в профиле."
+  },
+  {
+   "list": "uk",
+   "kind": "person",
+   "name": "Артём Юрьевич ЧАЙКА",
+   "since": "2025-02-14",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
-   "why": "Британский перечень, запись RUS2387, то же полное имя по-русски."}
+   "why": "Британский перечень, запись RUS2387, то же полное имя по-русски."
+  }
  ],
  "gf1c9faa9": [
-  {"list": "eu", "name": "Aleksey Konstantinovich KAKHIDZE", "since": "2024-12-16",
+  {
+   "list": "eu",
+   "kind": "person",
+   "name": "Aleksey Konstantinovich KAKHIDZE",
+   "since": "2024-12-16",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403183",
-   "why": "«Интерфакс» 16 декабря 2024 года о том же решении ЕС: «председатель совета директоров этой компании Алексей Кахидзе» — о «Газпром СПГ технологии». В профиле та же должность."}
+   "why": "«Интерфакс» 16 декабря 2024 года о том же решении ЕС: «председатель совета директоров этой компании Алексей Кахидзе» — о «Газпром СПГ технологии». В профиле та же должность."
+  }
  ],
  "gf79d11d3": [
-  {"list": "us", "name": "MAKHMUDOV, Iskander", "since": "",
+  {
+   "list": "us",
+   "kind": "person",
+   "name": "MAKHMUDOV, Iskander",
+   "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45056",
-   "why": "Махмудов Искандер, 1963 года рождения, Бухара. Британская запись о том же человеке называет УГМК — это и есть компания из профиля."},
-  {"list": "uk", "name": "Iskander Kakhramonovich MAKHMUDOV", "since": "2022-09-26",
+   "why": "Махмудов Искандер, 1963 года рождения, Бухара. Британская запись о том же человеке называет УГМК — это и есть компания из профиля."
+  },
+  {
+   "list": "uk",
+   "kind": "person",
+   "name": "Iskander Kakhramonovich MAKHMUDOV",
+   "since": "2022-09-26",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
-   "why": "Британский перечень, запись RUS1643: президент и совладелец УГМК. В профиле — совладелец УГМК."}
+   "why": "Британский перечень, запись RUS1643: президент и совладелец УГМК. В профиле — совладелец УГМК."
+  }
+ ],
+ "g029ad143": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY LISKINSKII ZAVOD MONTAZHNYKH ZAGOTOVOK",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=52031",
+   "matched_by": "inn",
+   "inn": "3652000930",
+   "why": "ИНН 3652000930 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g075196ef": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY ELEMENT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=39165",
+   "matched_by": "inn",
+   "inn": "9703014282",
+   "why": "ИНН 9703014282 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g088e8f9f": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "KHOLDINGOVAYA KOMPANIYA INTERROS OOO",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=38240",
+   "matched_by": "inn",
+   "inn": "7706419639",
+   "why": "ИНН 7706419639 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g093b0f50": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "NEXIGN JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=42037",
+   "matched_by": "inn",
+   "inn": "7801019126",
+   "why": "ИНН 7801019126 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g0be9547a": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LLC GEOPROMAINING",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47836",
+   "matched_by": "inn",
+   "inn": "7706683947",
+   "why": "ИНН 7706683947 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g1a00189d": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "KAMAZ PUBLICLY TRADED COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37756",
+   "matched_by": "inn",
+   "inn": "1650032058",
+   "why": "ИНН 1650032058 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g206237a3": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY KRAFTWAY CORPORATION PLS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45037",
+   "matched_by": "inn",
+   "inn": "5018037096",
+   "why": "ИНН 5018037096 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2586fd42": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "KNS GROUP OOO",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=41125",
+   "matched_by": "inn",
+   "inn": "7701411241",
+   "why": "ИНН 7701411241 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2aae2436": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY TUGANSK MINING AND PROCESSING ENTERPRISE ILMENITE",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=52573",
+   "matched_by": "inn",
+   "inn": "7014038550",
+   "why": "ИНН 7014038550 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2c0e743d": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY UZHURALZOLOTO GROUP OF COMPANIES",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47813",
+   "matched_by": "inn",
+   "inn": "7424024375",
+   "why": "ИНН 7424024375 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "ПАО  ‘’ЮГК’’",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "inn",
+   "inn": "7424024375",
+   "why": "ИНН 7424024375 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2d0dac7a": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "FAR EASTERN SHIPPING COMPANY (FESCO)",
+   "since": "2023-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "2540047110",
+   "why": "ИНН 2540047110 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2eb91bc8": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LLC VEB VENTURES",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35004",
+   "matched_by": "inn",
+   "inn": "7731373995",
+   "why": "ИНН 7731373995 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g2f6ed977": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "KONTROLIUOJANČIOJI BENDROVĖ „EGO-HOLDING“",
+   "since": "2022-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R2476",
+   "matched_by": "inn",
+   "inn": "7804070635",
+   "why": "ИНН 7804070635 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g300b9ead": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "OPEN JOINT-STOCK COMPANY ROSNEFT OIL COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=17022",
+   "matched_by": "inn",
+   "inn": "7706107510",
+   "why": "ИНН 7706107510 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g33c71ec5": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "ONEFACTOR LIMITED LIABILITY COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=42036",
+   "matched_by": "inn",
+   "inn": "7729660992",
+   "why": "ИНН 7729660992 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g34073f18": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY DIGITAL TECHNOLOGIES",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=36423",
+   "matched_by": "inn",
+   "inn": "7736252313",
+   "why": "ИНН 7736252313 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g35fae5fe": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LLC SIBCAPITAL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=48900",
+   "matched_by": "inn",
+   "inn": "0258954788",
+   "why": "ИНН 0258954788 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g3738b7b1": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY YAMALDORSTROY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49415",
+   "matched_by": "inn",
+   "inn": "6670189560",
+   "why": "ИНН 6670189560 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g3a8fb04f": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY URAL MINING AND METALLURGICAL COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44079",
+   "matched_by": "inn",
+   "inn": "6606013640",
+   "why": "ИНН 6606013640 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g3e014672": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY AVTOVAZ",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44877",
+   "matched_by": "inn",
+   "inn": "6320002223",
+   "why": "ИНН 6320002223 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "AvtoVAZ",
+   "since": "2025-10-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502035",
+   "matched_by": "inn",
+   "inn": "6320002223",
+   "why": "ИНН 6320002223 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g3eb1fefd": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY BASEALT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=50178",
+   "matched_by": "inn",
+   "inn": "7714350892",
+   "why": "ИНН 7714350892 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g431a713e": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY ASTRA GROUP",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=48740",
+   "matched_by": "inn",
+   "inn": "7726476459",
+   "why": "ИНН 7726476459 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g4576b0c2": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLICHNOE AKTSIONERNOE OBSHCHESTVO MECHEL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47683",
+   "matched_by": "inn",
+   "inn": "7703370008",
+   "why": "ИНН 7703370008 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g466479df": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "KOVROV MECHANICAL PLANT PJSC",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=42070",
+   "matched_by": "inn",
+   "inn": "3305004397",
+   "why": "ИНН 3305004397 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g4a281a8e": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "INGOSSTRAKH INSURANCE COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=51844",
+   "matched_by": "inn",
+   "inn": "7705042179",
+   "why": "ИНН 7705042179 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g4e2d0a88": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY SEVERSTAL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37503",
+   "matched_by": "inn",
+   "inn": "3528000597",
+   "why": "ИНН 3528000597 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PAO SEVERSTAL",
+   "since": "2023-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "3528000597",
+   "why": "ИНН 3528000597 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g4ef21c08": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLICHNOE AKTSIONERNOE OBSCHESTVO SOLLERS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44880",
+   "matched_by": "inn",
+   "inn": "3528079131",
+   "why": "ИНН 3528079131 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g51e1740e": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "UMATEX JOINT-STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=40861",
+   "matched_by": "inn",
+   "inn": "7706688991",
+   "why": "ИНН 7706688991 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "UMATEX",
+   "since": "2023-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7706688991",
+   "why": "ИНН 7706688991 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g52425c47": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "ALFASTRAKHOVANIE GROUP",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=51649",
+   "matched_by": "inn",
+   "inn": "7713056834",
+   "why": "ИНН 7713056834 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g5c8c6494": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LUKOIL OAO",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=17248",
+   "matched_by": "inn",
+   "inn": "7708004767",
+   "why": "ИНН 7708004767 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "JSC \"OIL COMPANY \"LUKOIL\"",
+   "since": "2025-10-15",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7708004767",
+   "why": "ИНН 7708004767 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g5d22aa06": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LLC RUSSIAN ENERGY GROUP",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45006",
+   "matched_by": "inn",
+   "inn": "7714456916",
+   "why": "ИНН 7714456916 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g631adee6": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "ZAO NTTS MODUL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=38759",
+   "matched_by": "inn",
+   "inn": "7714009178",
+   "why": "ИНН 7714009178 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g676ca6df": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY INSURANCE COMPANY ROSGOSSTRAKH",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=34498",
+   "matched_by": "inn",
+   "inn": "7707067683",
+   "why": "ИНН 7707067683 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g6a051041": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JSC ANGSTREM-T",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35009",
+   "matched_by": "inn",
+   "inn": "7735128151",
+   "why": "ИНН 7735128151 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g6c95bc9a": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LLC SIBUGLEMET GROUP",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35008",
+   "matched_by": "inn",
+   "inn": "7708320240",
+   "why": "ИНН 7708320240 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g6f19123a": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SKOLKOVO FOUNDATION",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=38196",
+   "matched_by": "inn",
+   "inn": "7701058410",
+   "why": "ИНН 7701058410 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g7e9287cb": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY UNITED SHIPBUILDING CORPORATION",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=16886",
+   "matched_by": "inn",
+   "inn": "7838395215",
+   "why": "ИНН 7838395215 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Egyesült Hajógyártó Vállalat Rt.",
+   "since": "2022-03-15",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202400849",
+   "matched_by": "inn",
+   "inn": "7838395215",
+   "why": "ИНН 7838395215 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g7ffb3b7a": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SEVERGROUP LIMITED LIABILITY COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37498",
+   "matched_by": "inn",
+   "inn": "3528080360",
+   "why": "ИНН 3528080360 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g829090b3": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY BONUM CAPITAL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=38053",
+   "matched_by": "inn",
+   "inn": "7722757160",
+   "why": "ИНН 7722757160 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g839c87d5": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC RUSSNEFT",
+   "since": "2025-12-18",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7717133960",
+   "why": "ИНН 7717133960 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g83feabb2": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY VOLGA DNEPR AIRLINES",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=50276",
+   "matched_by": "inn",
+   "inn": "7328510118",
+   "why": "ИНН 7328510118 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY VOLGA-DNEPR AIRLINES",
+   "since": "2024-06-13",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7328510118",
+   "why": "ИНН 7328510118 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g849d19d0": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY GEYSER GOLD",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47853",
+   "matched_by": "inn",
+   "inn": "9731074646",
+   "why": "ИНН 9731074646 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g870d935d": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY BERING METALS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46732",
+   "matched_by": "inn",
+   "inn": "9703077116",
+   "why": "ИНН 9703077116 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g8880b809": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JSC MOSCOW CENTER OF SPARC TECHNOLOGIES",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=39180",
+   "matched_by": "inn",
+   "inn": "7736053886",
+   "why": "ИНН 7736053886 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "MCST JSC",
+   "since": "2022-05-04",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7736053886",
+   "why": "ИНН 7736053886 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g8ad1a997": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "RESEARCH AND PRODUCTION COMPANY MICRAN JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49179",
+   "matched_by": "inn",
+   "inn": "7017211757",
+   "why": "ИНН 7017211757 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "АО НАУЧНО ПРОИЗВОДСТВЕ ННАЯ ФИРМА  МИКРАН",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "inn",
+   "inn": "7017211757",
+   "why": "ИНН 7017211757 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g90b3b906": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY POLIMETALL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=43096",
+   "matched_by": "inn",
+   "inn": "7805104870",
+   "why": "ИНН 7805104870 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g941bdcdf": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY HOLDING INTELLIGENT COMPUTER SYSTEMS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=41113",
+   "matched_by": "inn",
+   "inn": "9701124836",
+   "why": "ИНН 9701124836 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g94d3c4c3": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY MANAGEMENT COMPANY OF THE RUSSIAN DIRECT INVESTMENT FUND",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=34337",
+   "matched_by": "inn",
+   "inn": "7703425673",
+   "why": "ИНН 7703425673 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g98105961": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC TATNEFT",
+   "since": "2025-12-18",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "1644003838",
+   "why": "ИНН 1644003838 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g999eef95": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "AUTOMOBILE PLANT URAL JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=48874",
+   "matched_by": "inn",
+   "inn": "7415029289",
+   "why": "ИНН 7415029289 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g9fe6ac51": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "RT-CAPITAL LIMITED LIABILITY COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37790",
+   "matched_by": "inn",
+   "inn": "7704770859",
+   "why": "ИНН 7704770859 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga220a7e4": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "EUROPEAN BEARING CORPORATION",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46409",
+   "matched_by": "inn",
+   "inn": "7722242530",
+   "why": "ИНН 7722242530 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga2d76207": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY KISMET CAPITAL GROUP",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45918",
+   "matched_by": "inn",
+   "inn": "7726415826",
+   "why": "ИНН 7726415826 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga39d16dd": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JSC SUEK",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47681",
+   "matched_by": "inn",
+   "inn": "7708129854",
+   "why": "ИНН 7708129854 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga48620bb": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY TMK YARTSEVSKIY METALLURGICAL PLANT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=48016",
+   "matched_by": "inn",
+   "inn": "6623122216",
+   "why": "ИНН 6623122216 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga8b5d62a": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "GAZPROM NEFT",
+   "since": "2025-01-10",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "5504036333",
+   "why": "ИНН 5504036333 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ga8f4c86d": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY KINGISEPSKY MACHINE BUILDING PLANT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49278",
+   "matched_by": "inn",
+   "inn": "7816562511",
+   "why": "ИНН 7816562511 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gb52f53eb": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY CORDIANT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=50985",
+   "matched_by": "inn",
+   "inn": "7601001509",
+   "why": "ИНН 7601001509 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gb6301f1c": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "INTERNATIONAL COMPANY JOINT STOCK COMPANY HIGHLAND GOLD",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46747",
+   "matched_by": "inn",
+   "inn": "2540277272",
+   "why": "ИНН 2540277272 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Areal International JSC (formerly “Hylende Gold” or “Highland Gold”)",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "inn",
+   "inn": "2540277272",
+   "why": "ИНН 2540277272 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gb6e333d0": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY KONAR",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49407",
+   "matched_by": "inn",
+   "inn": "7451064592",
+   "why": "ИНН 7451064592 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gb7270224": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "RED SOFT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47388",
+   "matched_by": "inn",
+   "inn": "9705000373",
+   "why": "ИНН 9705000373 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gba0e6665": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SPB EXCHANGE",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45783",
+   "matched_by": "inn",
+   "inn": "7801268965",
+   "why": "ИНН 7801268965 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "JSC EASTERN EXCHANGE",
+   "since": "2024-06-13",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7801268965",
+   "why": "ИНН 7801268965 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gbd9b5fa5": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "MOSCOW EXCHANGE",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46526",
+   "matched_by": "inn",
+   "inn": "7702077840",
+   "why": "ИНН 7702077840 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Moskva Exchange",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "inn",
+   "inn": "7702077840",
+   "why": "ИНН 7702077840 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "MICEX-RTS PJSC",
+   "since": "2024-06-13",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7702077840",
+   "why": "ИНН 7702077840 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gc2792a44": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SISTEMA PUBLIC JOINT STOCK FINANCIAL CORPORATION",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45613",
+   "matched_by": "inn",
+   "inn": "7703104630",
+   "why": "ИНН 7703104630 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "AFK SISTEMA",
+   "since": "2023-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "7703104630",
+   "why": "ИНН 7703104630 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gc58ad0e9": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY INFRASTRUCTURE CORPORATION AEON",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45979",
+   "matched_by": "inn",
+   "inn": "7704661909",
+   "why": "ИНН 7704661909 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gcc3a75c1": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY SOVCOMFLOT",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=34741",
+   "matched_by": "inn",
+   "inn": "7702060116",
+   "why": "ИНН 7702060116 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gccd26aaf": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "OOO SOFT PLYUS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=50167",
+   "matched_by": "inn",
+   "inn": "7804686897",
+   "why": "ИНН 7804686897 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gce43e9d9": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "ATOL",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49978",
+   "matched_by": "inn",
+   "inn": "5010051677",
+   "why": "ИНН 5010051677 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gcf979752": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY POLYUS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=43097",
+   "matched_by": "inn",
+   "inn": "7703389295",
+   "why": "ИНН 7703389295 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Публичное акционерное  общество   ПОЛЮС",
+   "since": "2025-10-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502035",
+   "matched_by": "inn",
+   "inn": "7703389295",
+   "why": "ИНН 7703389295 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gd9fbff8f": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY UNITED METALLURGICAL COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44862",
+   "matched_by": "inn",
+   "inn": "7736030085",
+   "why": "ИНН 7736030085 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gdccff9b3": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY SCIENTIFIC AND PRODUCTION ASSOCIATION CRITICAL INFORMATION SYSTEMS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44300",
+   "matched_by": "inn",
+   "inn": "9705178310",
+   "why": "ИНН 9705178310 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ge00b1b13": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY PIPE METALLURGICAL COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47799",
+   "matched_by": "inn",
+   "inn": "7710373095",
+   "why": "ИНН 7710373095 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ge848daa0-target": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY RNCB INSURANCE",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=33016",
+   "matched_by": "inn",
+   "inn": "7707447597",
+   "why": "ИНН 7707447597 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "ge9c9390f": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "»VSK« Biztosítási Részvénytársaság",
+   "since": "2025-05-20",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500933",
+   "matched_by": "inn",
+   "inn": "7710026574",
+   "why": "ИНН 7710026574 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gf143a637": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY HS INVESTMENTS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47967",
+   "matched_by": "inn",
+   "inn": "9731092500",
+   "why": "ИНН 9731092500 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gf4733fef": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY AURUS",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47956",
+   "matched_by": "inn",
+   "inn": "7743237789",
+   "why": "ИНН 7743237789 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gf9a640d2": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "PAO ANK Bashneft",
+   "since": "2026-04-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202600509",
+   "matched_by": "inn",
+   "inn": "0274051582",
+   "why": "ИНН 0274051582 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gf9d213b7": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "MEGAFON PAO",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=42086",
+   "matched_by": "inn",
+   "inn": "7812014560",
+   "why": "ИНН 7812014560 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gfa66a7fc": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "KRIBRUM JSC",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49939",
+   "matched_by": "inn",
+   "inn": "7731661104",
+   "why": "ИНН 7731661104 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gfb08c766": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY PIK SPECIALIZED HOMEBUILDER",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47840",
+   "matched_by": "inn",
+   "inn": "7713011336",
+   "why": "ИНН 7713011336 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "PIK Cégcsoport Nyrt.",
+   "since": "2024-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403183",
+   "matched_by": "inn",
+   "inn": "7713011336",
+   "why": "ИНН 7713011336 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gfc474ee0": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "OBSHCHESTVO S OGRANICHENNOI OTVETSTVENNOSTYU A1",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45033",
+   "matched_by": "inn",
+   "inn": "7703437911",
+   "why": "ИНН 7703437911 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gnmg": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "AO \"Национальная Медиа Группа\"",
+   "since": "2022-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402455",
+   "matched_by": "inn",
+   "inn": "7704676655",
+   "why": "ИНН 7704676655 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gpositivetech": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Spoločnosť Positive Group PJSC",
+   "since": "2023-06-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402455",
+   "matched_by": "inn",
+   "inn": "9718077239",
+   "why": "ИНН 9718077239 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gsdmbank": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SDM-BANK PUBLIC JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=39396",
+   "matched_by": "inn",
+   "inn": "7733043350",
+   "why": "ИНН 7733043350 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Public Joint Stock  Company SDM-Bank",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "inn",
+   "inn": "7733043350",
+   "why": "ИНН 7733043350 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "gseververf": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY SHIPBUILDING PLANT SEVERNAYA VERF",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=36048",
+   "matched_by": "inn",
+   "inn": "7805034277",
+   "why": "ИНН 7805034277 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "volga-flot": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "JSC Volga Shipping",
+   "since": "2025-05-20",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500933",
+   "matched_by": "inn",
+   "inn": "5260902190",
+   "why": "ИНН 5260902190 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "VOLGA SHIPPING COMPANY",
+   "since": "2023-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "inn",
+   "inn": "5260902190",
+   "why": "ИНН 5260902190 в реестре ФНС совпал с ИНН этой же записи санкционного списка."
+  }
+ ],
+ "g0278b9c4": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY RAZREZ KOLYVANSKIY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=48880",
+   "matched_by": "name",
+   "why": "Угольная компания «Сибантрацит»: в списке США — AO SIBANTRATSIT, в британском — «СибАнтрацит» по-русски."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "MANAGEMENT COMPANY SIBANTHRACITE",
+   "since": "2025-02-24",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Угольная компания «Сибантрацит»: в списке США — AO SIBANTRATSIT, в британском — «СибАнтрацит» по-русски."
+  }
+ ],
+ "g0a130abd": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "EXPOBANK JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46568",
+   "matched_by": "name",
+   "why": "Запись США называет сайт expobank.ru, запись ЕС — московский банк из первой сороковки по активам. Это тот же Экспобанк."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "АО Экспобанк",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Запись США называет сайт expobank.ru, запись ЕС — московский банк из первой сороковки по активам. Это тот же Экспобанк."
+  }
+ ],
+ "g11858175": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "TRANSMASHHOLDING JSC",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45054",
+   "matched_by": "name",
+   "why": "Производитель локомотивов и вагонов метро: в списке США — TRANSMASHHOLDING JSC."
+  }
+ ],
+ "g1986021e": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Evraz PLC",
+   "since": "2025-10-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502035",
+   "matched_by": "name",
+   "why": "Evraz PLC назван в обоих списках под тем же именем; ЕС описывает его как сталелитейную и горнодобывающую компанию с основным бизнесом в России."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "EVRAZ PLC",
+   "since": "2022-05-05",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Evraz PLC назван в обоих списках под тем же именем; ЕС описывает его как сталелитейную и горнодобывающую компанию с основным бизнесом в России."
+  }
+ ],
+ "g1d2dd6fb": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "JSC Russian  Agricultural Bank",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Россельхозбанк: запись ЕС по-русски и британская запись RUS1073 — один и тот же банк."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "JSC ROSSELKHOZBANK",
+   "since": "2022-03-24",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Россельхозбанк: запись ЕС по-русски и британская запись RUS1073 — один и тот же банк."
+  }
+ ],
+ "g28ff15bb": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY SBERBANK OF RUSSIA",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=17018",
+   "matched_by": "name",
+   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Сбербанк",
+   "since": "2022-07-21",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L:2022:193:FULL&from=EN",
+   "matched_by": "name",
+   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC SBERBANK (PUBLIC JOINT-STOCK COMPANY SBERBANK)",
+   "since": "2022-04-06",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+  }
+ ],
+ "g2bda5372": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "ООО ВоенТекстильПром",
+   "since": "2022-06-03",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R0878&from=EN",
+   "matched_by": "name",
+   "why": "Запись ЕС по-русски слово в слово: ООО «ВоенТекстильПром»."
+  }
+ ],
+ "g41bf9d28": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "LLC INDEPENDENT OIL AND GAS COMPANY (NNK)",
+   "since": "2025-12-18",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS3163 по-русски: ООО «Независимая нефтегазовая компания (ННК)»."
+  }
+ ],
+ "g434cdc43": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY ROSBANK",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=36496",
+   "matched_by": "name",
+   "why": "Росбанк: запись США приводит сайт rosbank.ru, запись ЕС — то же название по-русски."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Публичное акционерное общество Росбанк",
+   "since": "2023-02-25",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402455",
+   "matched_by": "name",
+   "why": "Росбанк: запись США приводит сайт rosbank.ru, запись ЕС — то же название по-русски."
+  }
+ ],
+ "g4bbbd408": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Московский кредитный банк",
+   "since": "2022-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1765",
+   "matched_by": "name",
+   "why": "Московский кредитный банк назван по-русски и в списке ЕС, и в британском (RUS1119)."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "CREDIT BANK OF MOSCOW",
+   "since": "2022-04-06",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Московский кредитный банк назван по-русски и в списке ЕС, и в британском (RUS1119)."
+  }
+ ],
+ "g522c7ca1": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY MOSCOW INDUSTRIAL BANK",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37000",
+   "matched_by": "name",
+   "why": "Московский индустриальный банк: в записи США банковский код 044525600, в британской (RUS1492) — то же название по-русски."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "JOINT STOCK COMMERCIAL BANK MOSCOW INDUSTRIAL BANK",
+   "since": "2022-06-29",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Московский индустриальный банк: в записи США банковский код 044525600, в британской (RUS1492) — то же название по-русски."
+  }
+ ],
+ "g631fd4d3": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Banco de Extremo  Oriente",
+   "since": "2022-12-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R2476",
+   "matched_by": "name",
+   "why": "Запись ЕС по-русски: АО «Дальневосточный банк»."
+  }
+ ],
+ "g641ed58a": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "HIGHLAND GOLD MINING LIMITED",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46711",
+   "matched_by": "name",
+   "why": "Highland Gold Mining Limited назван в обоих списках ровно этим именем."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "HIGHLAND GOLD",
+   "since": "2023-11-08",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Highland Gold Mining Limited назван в обоих списках ровно этим именем."
+  }
+ ],
+ "g6765f7ba": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Koncern JSC Sozvezdie",
+   "since": "2022-04-08",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R0571",
+   "matched_by": "name",
+   "why": "Концерн «Созвездие» (структура «Ростеха») назван в списке ЕС."
+  }
+ ],
+ "g74eaf526": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Atlasz Bányászati Kft.",
+   "since": "2025-05-20",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500933",
+   "matched_by": "name",
+   "why": "Petropavlovsk PLC назван в списке ЕС тем же именем и описан как золотодобывающая компания, работающая в России."
+  }
+ ],
+ "g75ffe423": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "NORD GOLD PLC",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37505",
+   "matched_by": "name",
+   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Нордголд",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "NORD GOLD PLC",
+   "since": "2023-11-08",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+  }
+ ],
+ "g7ac0b3cc": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "BANK OTKRITIE FINANCIAL CORPORATION PJSC",
+   "since": "2022-02-28",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS0254 — банк «Открытие». Запись США под похожим именем относится к кипрской компании и здесь не учтена."
+  }
+ ],
+ "g847db8e9": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "SBERBANK EUROPE AG",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=18716",
+   "matched_by": "name",
+   "why": "Запись США называет код SABRATWW и сайт sberbank.at — это и есть Sberbank Europe AG."
+  }
+ ],
+ "g88a6bd0c": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "DIASOFT LTD",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=49977",
+   "matched_by": "name",
+   "why": "Запись США: DIASOFT LTD, ИНН 7715560268, Москва — разработчик банковского программного обеспечения, как и в профиле."
+  }
+ ],
+ "g8bafde28": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PROMSVYAZBANK PUBLIC JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=34656",
+   "matched_by": "name",
+   "why": "Промсвязьбанк: ИНН 7744000912 в записях США и ЕС, сайт psbank.ru, британская запись RUS0237."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "PROMSVYAZBANK",
+   "since": "2022-02-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402455",
+   "matched_by": "name",
+   "why": "Промсвязьбанк: ИНН 7744000912 в записях США и ЕС, сайт psbank.ru, британская запись RUS0237."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC PROMSVYAZBANK",
+   "since": "2022-02-22",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Промсвязьбанк: ИНН 7744000912 в записях США и ЕС, сайт psbank.ru, британская запись RUS0237."
+  }
+ ],
+ "g932583db": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "LIMITED LIABILITY COMPANY ARCTIC LNG 2",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46030",
+   "matched_by": "name",
+   "why": "«Арктик СПГ 2»: ИНН 8904075357 в записи США, британская запись RUS2092 называет компанию по-русски."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "ARCTIC LNG 2 LIMITED LIABILITY COMPANY",
+   "since": "2024-02-22",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "«Арктик СПГ 2»: ИНН 8904075357 в записи США, британская запись RUS2092 называет компанию по-русски."
+  }
+ ],
+ "ga819b90c": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY POST BANK",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45811",
+   "matched_by": "name",
+   "why": "Почта Банк: ИНН 3232005484 в обеих записях; ЕС прямо пишет, что это совместный банк «Почты России» и группы ВТБ."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Joint Stock Company Pochta Bank",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Почта Банк: ИНН 3232005484 в обеих записях; ЕС прямо пишет, что это совместный банк «Почты России» и группы ВТБ."
+  }
+ ],
+ "gabe80712": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLIC JOINT STOCK COMPANY BANK ALEXANDROVSKY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=51738",
+   "matched_by": "name",
+   "why": "Запись США называет сайт alexbank.ru и ИНН 7831000080 — банк «Александровский»."
+  }
+ ],
+ "gb7e1e33a": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC SOVCOMBANK",
+   "since": "2022-02-28",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS0255 по-русски: ПАО «Совкомбанк»."
+  }
+ ],
+ "gd1eadb78": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "RUSHYDRO",
+   "since": "2022-03-24",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS1083 по-русски: «РусГидро»."
+  }
+ ],
+ "gdab7497e": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "JOINT STOCK COMPANY ASCON",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45763",
+   "matched_by": "name",
+   "why": "АСКОН: ИНН 7809009923 (Петербург) в записях США и ЕС."
+  },
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "Ascon Rt.",
+   "since": "2024-02-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202400753",
+   "matched_by": "name",
+   "why": "АСКОН: ИНН 7809009923 (Петербург) в записях США и ЕС."
+  }
+ ],
+ "ge65ef82b": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "CJSC SOLID BANK",
+   "since": "2025-10-15",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS3077: CJSC SOLID BANK, ИНН 4101011782 — камчатский Солид-банк, как и в профиле."
+  }
+ ],
+ "gee396982": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "АО Концерн “Калашников”",
+   "since": "2022-04-08",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R0571",
+   "matched_by": "name",
+   "why": "Концерн «Калашников»: ИНН 1832090230 (Удмуртия) в записи ЕС, британская запись RUS1356 называет концерн по-русски."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "CONCERN KALASHNIKOV",
+   "since": "2022-04-21",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Концерн «Калашников»: ИНН 1832090230 (Удмуртия) в записи ЕС, британская запись RUS1356 называет концерн по-русски."
+  }
+ ],
+ "gf1f56e08": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "GAZPROMBANK JOINT STOCK COMPANY",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=17016",
+   "matched_by": "name",
+   "why": "Газпромбанк: запись США приводит сайт gazprombank.ru и код GAZPRUMM, британская — RUS1072."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "GAZPROMBANK",
+   "since": "2022-03-24",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Газпромбанк: запись США приводит сайт gazprombank.ru и код GAZPRUMM, британская — RUS1072."
+  }
+ ],
+ "gf3ed02a1": [
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "PJSC AEROFLOT",
+   "since": "2022-05-19",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Британская запись RUS1444: PJSC AEROFLOT."
+  }
+ ],
+ "gf881a88f": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "ПАО  Банк Санкт Петербург",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Банк «Санкт-Петербург»: ИНН 7831000027 в записи ЕС, британская запись RUS1732 называет банк по-русски."
+  },
+  {
+   "list": "uk",
+   "kind": "entity",
+   "name": "BANK SANKT-PETERSBURG",
+   "since": "2023-02-24",
+   "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
+   "matched_by": "name",
+   "why": "Банк «Санкт-Петербург»: ИНН 7831000027 в записи ЕС, британская запись RUS1732 называет банк по-русски."
+  }
+ ],
+ "gf8ed5e7f": [
+  {
+   "list": "eu",
+   "kind": "entity",
+   "name": "ПУБЛИЧНОЕ  АКЦИОНЕРНОЕ  ОБЩЕСТВО  ‘ИНТЕР РАО  ЕЭС’",
+   "since": "2026-07-23",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
+   "matched_by": "name",
+   "why": "Запись ЕС по-русски: ПАО «Интер РАО ЕЭС»."
+  }
+ ],
+ "graspadskaya": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "PUBLICHNOE AKTSIONERNOE OBSHCHESTVO RASPADSKAYA",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=50048",
+   "matched_by": "name",
+   "why": "Запись США: ПАО «Распадская», ИНН 4214002316 (Кемеровская область)."
+  }
+ ],
+ "gvelesmanagement": [
+  {
+   "list": "us",
+   "kind": "entity",
+   "name": "VELES MANAGEMENT LTD",
+   "since": "",
+   "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=40782",
+   "matched_by": "name",
+   "why": "Запись США: УК «Велес Менеджмент», ИНН 7703523568."
+  }
  ]
 }

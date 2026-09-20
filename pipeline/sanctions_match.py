@@ -98,7 +98,7 @@ def reduce_latin(word: str) -> str:
     # Кириллицу нельзя раскладывать по NFKD: «ё» превратится в «е», и Фёдоров
     # перестанет сходиться сам с собой.
     s = translit(s) if re.search(r"[а-яё]", s) else fold_latin(s)
-    s = re.sub(r"[^a-z]", "", s)
+    s = re.sub(r"[^a-z0-9]", "", s)
     for a, b in REDUCE:
         s = s.replace(a, b)
     s = re.sub(r"(.)\1+", r"\1", s)
@@ -126,6 +126,76 @@ TITLE_WORDS = {
     "mr", "mrs", "ms", "dr", "general", "colonel", "major", "lt", "gen",
     "г-н", "г-жа",
 }
+
+# У одного юрлица десяток написаний организационной формы: ПАО Сбербанк,
+# PJSC Sberbank, Public Joint-Stock Company Sberbank. Ключ — то, что
+# остаётся после формы.
+LEGAL_FORMS = re.compile(
+    r"\b(?:pao|oao|zao|nao|ooo|ao|pjsc|ojsc|jsc|cjsc|llc|ltd|limited|inc|plc|"
+    r"corp|corporation|company|companies|joint|stock|publicly|traded|public|"
+    r"private|open|closed|holding|holdings|group|obshchestvo|obshestvo|"
+    r"obschestvo|aktsionernoe|aktsionernoye|akcionernoe|publichnoe|"
+    r"publichnoye|ogranichennoi|ogranichennoy|otvetstvennostyu|"
+    r"otvetstvennostiu|kompaniya|kompania|firma|concern|gmbh|s\.a|sa|ag|"
+    r"\u043f\u0430\u043e|\u043e\u0430\u043e|\u0437\u0430\u043e|"
+    r"\u043d\u0430\u043e|\u043e\u043e\u043e|\u0430\u043e|\u0433\u043a|"
+    r"\u0443\u043a|\u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e|"
+    r"\u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435|"
+    r"\u043f\u0443\u0431\u043b\u0438\u0447\u043d\u043e\u0435|"
+    r"\u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f|"
+    r"\u0433\u0440\u0443\u043f\u043f\u0430|"
+    r"\u043a\u043e\u0440\u043f\u043e\u0440\u0430\u0446\u0438\u044f|"
+    r"\u0444\u0438\u0440\u043c\u0430|\u0445\u043e\u043b\u0434\u0438\u043d\u0433)\b",
+    re.I)
+
+
+GENERIC_WORDS = set("""
+invest investments investment capital properties property real estate
+security securities digital technology technologies tech systems system
+service services trade trading energy energo oil gas bank banka banking
+finance financial global international management development media
+logistics transport construction industrial industries resources mining
+gold silver steel metal metals telecom united national center centre
+project projects partners partner fund funds asset assets business
+enterprise enterprises production productions plant factory works agro
+food retail store stores house home city town region regional federal
+state russian russia rossii rossiya moscow sankt petersburg new first
+second third alfa omega plus pro max prime top best smart
+инвест капитал банк энерго тех строй пром агро
+""".split())
+# Слова стоп-списка сводятся тем же огрублением, что и имена: иначе
+# «security» останется в списке, а из имени придёт «securiti».
+GENERIC_KEYS = {reduce_latin(w) for w in GENERIC_WORDS}
+
+
+def entity_key(name: str) -> str:
+    """Ключ юрлица: форма, кавычки и общие деловые слова отброшены.
+
+    Общие слова убраны не для красоты: без этого «РТ-Инвест» сходится с
+    «M INVEST, OOO», а «KR Properties» — с «V.P. PROPERTIES, INC.». Имя,
+    от которого после чистки ничего не осталось, ключа не получает вовсе —
+    по такому имени искать нельзя.
+    """
+    s = re.sub(r"[\u00ab\u00bb\u201c\u201d\u201e\"'()]", " ", name or "")
+    s = re.sub(r"[-/,.]", " ", s)
+    s = LEGAL_FORMS.sub(" ", s)
+    parts = []
+    for w in s.split():
+        r = reduce_latin(w)
+        if r.isdigit() or len(r) >= 3:
+            parts.append(r)          # «Сахалин-2» и «Сахалин-8» — не одно и то же
+    own = [p for p in parts if not p.isdigit() and p not in GENERIC_KEYS]
+    # Имя из одних общих слов («Капитал Групп», «KR Properties») ключа не
+    # получает: по нему совпадёт что угодно. Но сами общие слова из ключа
+    # НЕ выбрасываются — иначе «Почта Банк» сойдётся с «Почтой России»,
+    # а «Газпромбанк-инвест» — с Газпромбанком.
+    if not own or len("".join(own)) < 5:
+        return ""
+    return " ".join(sorted(set(parts)))
+
+
+INN_RE = re.compile(r"\b(\d{10}|\d{12})\b")
+
 
 # --------------------------------------------------------- люди в базе
 
@@ -181,7 +251,8 @@ def _path(fname: str) -> str:
 
 
 def load_us() -> list:
-    """OFAC SDN: только записи о людях, плюс запасные написания из ALT.CSV."""
+    """OFAC SDN: и люди, и юрлица. У российских записей в примечаниях часто
+    стоит ИНН — это и есть точный ключ, имя тут только подсказка."""
     rows = []
     cols = ["ent_num", "name", "type", "program", "title", "call_sign",
             "vess_type", "tonnage", "grt", "vess_flag", "vess_owner", "remarks"]
@@ -196,20 +267,30 @@ def load_us() -> list:
             if len(r) < len(cols) or not r[0].strip().isdigit():
                 continue
             rec = dict(zip(cols, [x.strip().strip('"') for x in r]))
-            if rec["type"] != "individual":
-                continue
+            kind = "person" if rec["type"] == "individual" else "entity"
             num = int(rec["ent_num"])
             names = [rec["name"]] + alts.get(num, [])
+            remarks = rec["remarks"] if rec["remarks"] != "-0-" else ""
+            inns = [m for m in INN_RE.findall(remarks)
+                    if re.search(r"Tax ID No\.\s*%s\s*\(Russia\)" % m, remarks)]
             rows.append({
                 "list": "us",
+                "kind": kind,
                 "ident": rec["ent_num"],
                 "name": rec["name"],
                 "names": [x for x in names if x and x != "-0-"],
+                "inns": inns,
                 "program": rec["program"],
-                "remarks": rec["remarks"] if rec["remarks"] != "-0-" else "",
+                "remarks": remarks,
+                "since": "",
                 "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=%s" % rec["ent_num"],
             })
     return rows
+
+
+def _uk_date(s: str) -> str:
+    m = re.match(r"(\d{2})/(\d{2})/(\d{4})", (s or "").strip())
+    return "%s-%s-%s" % (m.group(3), m.group(2), m.group(1)) if m else ""
 
 
 def load_uk() -> list:
@@ -217,24 +298,32 @@ def load_uk() -> list:
     body = raw.split("\n", 1)[1]
     rows, seen = [], {}
     for r in csv.DictReader(io.StringIO(body)):
-        if (r.get("Group Type") or "").strip() != "Individual":
+        gtype = (r.get("Group Type") or "").strip()
+        if gtype not in ("Individual", "Entity"):
             continue
         gid = (r.get("Group ID") or "").strip()
         names = [" ".join(x for x in [r.get("Name 1"), r.get("Name 2"), r.get("Name 3"),
                                       r.get("Name 4"), r.get("Name 5"), r.get("Name 6")] if x)]
         if r.get("Name Non-Latin Script"):
             names.append(r["Name Non-Latin Script"])
+        blob = " ".join(x for x in [r.get("National Identification Number"),
+                                    r.get("National Identification Details"),
+                                    r.get("Other Information")] if x)
+        inns = INN_RE.findall(blob)
         if gid in seen:
             seen[gid]["names"].extend(names)
+            seen[gid]["inns"].extend(inns)
             continue
         rec = {
             "list": "uk",
+            "kind": "person" if gtype == "Individual" else "entity",
             "ident": gid,
             "name": names[0].strip(),
             "names": names,
+            "inns": inns,
             "program": (r.get("Regime") or "").strip(),
             "remarks": (r.get("Other Information") or "").strip()[:400],
-            "since": (r.get("Listed On") or "").strip(),
+            "since": _uk_date(r.get("Listed On") or ""),
             "url": "https://www.gov.uk/government/publications/"
                    "financial-sanctions-consolidated-list-of-targets",
         }
@@ -249,8 +338,7 @@ def load_eu() -> list:
     rows = []
     for se in root.findall("e:sanctionEntity", ns):
         sub = se.find("e:subjectType", ns)
-        if sub is None or sub.get("code") != "person":
-            continue
+        kind = "person" if (sub is not None and sub.get("code") == "person") else "entity"
         names, funcs = [], []
         for a in se.findall("e:nameAlias", ns):
             w = a.get("wholeName") or " ".join(
@@ -261,6 +349,11 @@ def load_eu() -> list:
                 funcs.append(a.get("function"))
         if not names:
             continue
+        inns = []
+        for idn in se.findall("e:identification", ns):
+            num = (idn.get("number") or "").strip()
+            if INN_RE.fullmatch(num):
+                inns.append(num)
         reg = se.find("e:regulation", ns)
         url = ""
         if reg is not None:
@@ -268,9 +361,11 @@ def load_eu() -> list:
             url = (pub.text or "").strip() if pub is not None else ""
         rows.append({
             "list": "eu",
+            "kind": kind,
             "ident": se.get("logicalId") or "",
             "name": names[0],
             "names": names,
+            "inns": inns,
             "program": (reg.get("programme") if reg is not None else "") or "",
             "remarks": (funcs[0] if funcs else "")[:400],
             "since": se.get("designationDate") or "",
@@ -291,18 +386,33 @@ def load_all() -> list:
 
 
 def index(rows: list) -> dict:
-    idx = {}
+    """Два ключа: ИНН (точный) и имя (подсказка, требующая чтения)."""
+    by_name, by_inn = {}, {}
     for rec in rows:
+        for inn in rec.get("inns") or []:
+            by_inn.setdefault(inn, []).append(rec)
         for n in rec.get("names", []):
-            k = key_of(n)
-            if k.count(" ") < 1:      # одно слово — слишком слабо
-                continue
-            idx.setdefault(k, []).append((n, rec))
-    return idx
+            if rec.get("kind") == "entity":
+                k = entity_key(n)
+            else:
+                k = key_of(n)
+                if k.count(" ") < 1:      # одно слово — слишком слабо
+                    k = ""
+            if k:
+                by_name.setdefault(k, []).append((n, rec))
+    return {"name": by_name, "inn": by_inn}
+
+
+def base_inns() -> dict:
+    """ИНН профиля из реестра решений ФНС — уже подтверждённый человеком."""
+    if ROOT not in sys.path:
+        sys.path.insert(0, ROOT)
+    from pipeline import fns_registry
+    return {cid: inn for cid, inn in fns_registry.confirmed_inns().items() if inn}
 
 
 def candidates(data: dict, rows: list) -> list:
-    """Совпадения по имени — повод прочитать запись, а не готовый ответ.
+    """Совпадения — повод прочитать запись, а не готовый ответ.
 
     Сверяются ВСЕ профили, а не только опознанные как люди: словарь имён
     ошибается (так однажды едва не потерялся «Арам Габрелянов»), а совпадение
@@ -310,18 +420,31 @@ def candidates(data: dict, rows: list) -> list:
     """
     idx = index(rows)
     known = set(load_confirmed()) | set(load_rejected())
+    inns = base_inns()
     out = []
     for cid, c in sorted(data.get("companies", {}).items()):
         if cid in known:
             continue
-        hits = idx.get(key_of(c.get("name", ""))) or []
+        name = c.get("name", "")
+        person = looks_like_person(name)
+        hits = []
+        inn = inns.get(cid)
+        if inn:
+            for rec in idx["inn"].get(inn, []):
+                hits.append((rec["name"], rec, "inn"))
+        key = key_of(name) if person else entity_key(name)
+        if key and (not person or key.count(" ") >= 1):
+            for shown, rec in idx["name"].get(key, []):
+                hits.append((shown, rec, "name"))
         if not hits:
             continue
         by_list = {}
-        for shown, rec in hits:
-            by_list.setdefault(rec["list"], []).append((shown, rec))
-        out.append({"id": cid, "name": c["name"], "desc": c.get("desc", ""),
-                    "hits": by_list})
+        for shown, rec, how in hits:
+            slot = by_list.setdefault(rec["list"], [])
+            if not any(r["ident"] == rec["ident"] for _, r, _ in slot):
+                slot.append((shown, rec, how))
+        out.append({"id": cid, "name": name, "kind": "person" if person else "entity",
+                    "inn": inn or "", "desc": c.get("desc", ""), "hits": by_list})
     return out
 
 
@@ -349,7 +472,7 @@ def apply_to_base(data: dict, confirmed: dict) -> int:
         want = confirmed.get(cid)
         if want:
             marks = [{k: v for k, v in m.items() if k in
-                      ("list", "name", "since", "url")} for m in want]
+                      ("list", "kind", "name", "since", "url")} for m in want]
             if c.get("sanctions") != marks:
                 c["sanctions"] = marks
                 changed += 1
@@ -359,10 +482,41 @@ def apply_to_base(data: dict, confirmed: dict) -> int:
     return changed
 
 
+def inn_marks(data: dict, rows: list) -> dict:
+    """Отметки, у которых доказательство механическое: ИНН.
+
+    ИНН из реестра решений ФНС (он уже подтверждён человеком) совпал с ИНН,
+    который сам санкционный список называет у своей записи. Это не догадка по
+    имени — это один и тот же ИНН, поэтому такие отметки собираются скриптом,
+    а не чтением. Имена при этом расходятся сплошь и рядом и расходиться
+    должны: ОСК в списке США называется United Shipbuilding Corporation.
+    """
+    out = {}
+    for c in candidates(data, rows):
+        marks = []
+        for lst in ("us", "eu", "uk"):
+            for shown, rec, how in c["hits"].get(lst, []):
+                if how != "inn":
+                    continue
+                marks.append({
+                    "list": lst, "kind": "entity", "name": rec["name"],
+                    "since": rec.get("since", ""), "url": rec["url"],
+                    "matched_by": "inn", "inn": c["inn"],
+                    "why": "ИНН %s в реестре ФНС совпал с ИНН этой же записи "
+                           "санкционного списка." % c["inn"],
+                })
+                break
+        if marks:
+            out[c["id"]] = marks
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--fetch", action="store_true", help="скачать перечни")
     ap.add_argument("--candidates", action="store_true", help="совпадения по имени")
+    ap.add_argument("--apply-inn", action="store_true",
+                    help="добавить отметки, доказанные совпадением ИНН")
     ap.add_argument("--check", action="store_true",
                     help="проверить, что сверенные записи ещё есть в перечнях")
     ap.add_argument("--write", action="store_true", help="разнести сверенное по базе")
@@ -383,7 +537,8 @@ def main(argv=None) -> int:
     if a.candidates:
         rows = load_all()
         persons = base_persons(data)
-        print("Людей в базе: %d. Записей о людях в перечнях: %d." % (len(persons), len(rows)))
+        print("Людей в базе: %d, профилей всего: %d. Записей в перечнях: %d."
+              % (len(persons), len(data.get("companies", {})), len(rows)))
         cands = candidates(data, rows)
         print("Совпало по имени: %d\n" % len(cands))
         for c in cands:
@@ -391,11 +546,29 @@ def main(argv=None) -> int:
             if c["desc"]:
                 print("    в базе: %s" % c["desc"][:160])
             for lst, hits in sorted(c["hits"].items()):
-                shown, rec = hits[0]
-                print("    %-3s %s | %s | %s" % (lst, shown, rec.get("program", ""),
-                                                 (rec.get("remarks") or "")[:110]))
+                shown, rec, how = hits[0]
+                print("    %-3s [%s] %s | %s | %s"
+                      % (lst, how, shown[:60], rec.get("program", ""),
+                         (rec.get("remarks") or "")[:90]))
                 print("        %s" % rec.get("url", ""))
             print()
+        return 0
+
+    if getattr(a, "apply_inn", False):
+        rows = load_all()
+        if not rows:
+            print("Перечни не скачаны: сначала --fetch")
+            return 1
+        add = inn_marks(data, rows)
+        conf = json.load(io.open(CONFIRMED, encoding="utf-8"))
+        for cid, marks in sorted(add.items()):
+            conf[cid] = marks
+        print("Новых отметок по ИНН: %d, всего в файле: %d"
+              % (len(add), len([k for k in conf if not k.startswith("_")])))
+        if a.write:
+            with io.open(CONFIRMED, "w", encoding="utf-8") as fh:
+                json.dump(conf, fh, indent=1, ensure_ascii=False)
+                fh.write("\n")
         return 0
 
     if a.check:
@@ -404,10 +577,14 @@ def main(argv=None) -> int:
             print("Перечни не скачаны: сначала --fetch")
             return 1
         idx = index(rows)
+        inns = base_inns()
         bad = 0
         for cid, marks in sorted(load_confirmed().items()):
             name = data.get("companies", {}).get(cid, {}).get("name", cid)
-            hits = {rec["list"] for _, rec in (idx.get(key_of(name)) or [])}
+            person = looks_like_person(name)
+            key = key_of(name) if person else entity_key(name)
+            hits = {rec["list"] for _, rec in (idx["name"].get(key) or [])}
+            hits |= {rec["list"] for rec in idx["inn"].get(inns.get(cid, ""), [])}
             for m in marks:
                 if m["list"] not in hits:
                     bad += 1

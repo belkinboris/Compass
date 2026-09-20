@@ -451,6 +451,15 @@ def _absorb_applied_fixes(card, field):
     return n
 
 
+FIN_IS_PAYMENT = re.compile(
+    r'(денежн|деньгами|наличн|рассрочк|взаимозач|аккредитив|эскроу|заемн|заёмн|'
+    r'оплат|расч[ёе]т|транш|рублями|обмен|финансир|кредит|долг|выплат|'
+    r'структура цены|погашен|вкладов|инвестиру)', re.I)
+FIN_IS_REPORTING = re.compile(
+    r'^(По данным (СПАРК|отч[ёе]тности|ЕГРЮЛ|РСБУ|МСФО)|Выручка|Чистая прибыль|'
+    r'Совокупная выручка|В \d{4} году выручка|Оборот)', re.I)
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -545,6 +554,34 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         out.append(('self_sale', 'продавец и предмет — один и тот же профиль (%s): похоже на cash-in '
                     '(допэмиссия/инвестиция) под неверным типом сделки, а не на продажу'
                     % (comps.get(seller_id, {}).get('name') or seller_id)))
+    # Аудит 13 сентября 2026, сквозной паттерн №1: поле «Форма расчётов»
+    # (eco.fin) систематически несло выручку и прибыль ПОКУПАТЕЛЯ вместо
+    # ответа на вопрос «чем и как платили». Замер по базе: поле заполнено у
+    # 122 карточек, отчётность без единого слова об оплате стояла у 16.
+    fin_text = ((card.get('eco') or {}).get('fin') or '').strip()
+    if fin_text and FIN_IS_REPORTING.match(fin_text) and not FIN_IS_PAYMENT.search(fin_text):
+        out.append(('fin_is_reporting',
+                    '«Форма расчётов» отвечает не на свой вопрос: %r — это отчётность, '
+                    'а не то, чем платили. Показатели покупателя — в «Историю и '
+                    'окружение», покупаемой компании — в «Финансы покупаемой компании»'
+                    % fin_text[:70]))
+    # Аудит 13 сентября 2026, подкласс ROLE_WRONG: на IPO компания не покупает
+    # сама себя. Из 40 карточек об IPO у 20 эмитент стоял покупателем, у 19 —
+    # предметом сделки, как и должно быть: на бирже покупателей тысячи, назвать
+    # одного нельзя. Починено 20 сентября (fix_audit_ipo_issuer_2026_09_20.py),
+    # а этот признак не даёт дефекту вернуться с новой карточкой.
+    # Слово «фонд» в заголовке выводит карточку из-под признака: там покупателем
+    # стоит не эмитент, а фонд-инвестор («Суточно.ру» привлекло инвестиции
+    # pre-IPO фондов «ВИМ Инвестиции») либо создатель фонда («Финам» создаёт
+    # Pre-IPO фонд). Оба случая прочитаны, и без этой оговорки признак давал бы
+    # на живой базе два ложных срабатывания из сорока.
+    if (card.get('type') or '') == 'IPO' and card.get('buyer') and not target_id \
+            and 'фонд' not in (card.get('title') or '').lower() \
+            and 'buyer' not in waived:
+        out.append(('ipo_issuer_as_buyer',
+                    'тип сделки IPO, а компания «%s» стоит покупателем: на размещении '
+                    'она предмет сделки, покупателей же тысячи и назвать одного нельзя'
+                    % (comps.get(card['buyer'], {}).get('name') or card['buyer'])))
     asset_text = (comps.get(target_id, {}).get('name') if target_id else None) or card.get('asset')
     is_lot = bool(comps.get(target_id, {}).get('lot')) if target_id else False
     if has(asset_text) and not is_lot and not PARTY_IN_ASSET_NAME_EXEMPT.search(str(asset_text)):

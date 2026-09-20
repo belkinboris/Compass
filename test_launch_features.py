@@ -4277,3 +4277,35 @@ def test_assistant_thread_of_another_person_cannot_be_deleted(client):
     client.post("/api/auth/logout")
     _login(client, "postoronniy@example.com")
     assert client.delete("/api/assistant/threads/%d" % thread_id).status_code == 404
+
+
+def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
+    """Пустой прогон тоже обязан заметить, что тема консоли не заведена.
+
+    20 сентября 2026: тема «Заметки от пользователей» так и не была заведена
+    (бот узнаёт номер только командой /topic внутри неё), а проверка стояла
+    рядом с отправкой — то есть при пустой очереди не выполнялась вовсе, и
+    рутина три дня отчитывалась «заметок нет», молча роняя будущие сообщения
+    в общую ленту группы. Проверка переехала в начало прогона; чтобы
+    напоминание раз в три часа не стало шумом, громко оно звучит один раз.
+    """
+    import importlib
+    import sys as _sys
+    root = Path(__file__).resolve().parent
+    _sys.path.insert(0, str(root / "pipeline"))
+    _sys.path.insert(0, str(root / "pipeline" / "ingest"))
+    mod = importlib.import_module("send_corrections_to_console")
+    marker = tmp_path / "console_topics_missing.json"
+    monkeypatch.setattr(mod, "TOPIC_NOTE", str(marker))
+    monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: None)
+
+    first = mod.topic_note("user_notes", today="2026-09-20")
+    assert first and "не заведена" in first and "/topic" in first
+    assert marker.exists()
+
+    second = mod.topic_note("user_notes", today="2026-09-21")
+    assert second and "по-прежнему" in second and "2026-09-20" in second
+    assert "/topic" not in second
+
+    monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: 42)
+    assert mod.topic_note("user_notes", today="2026-09-21") is None
