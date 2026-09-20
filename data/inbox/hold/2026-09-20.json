@@ -312,30 +312,19 @@
    ]
   },
   {
-   "draft_id": "d91190759",
-   "title": "SpaceX обсуждает покупку обанкротившихся стартапов ради данных для обучения Grok",
+   "draft_id": "d74102548",
+   "title": "Фрейре нокаутировал Чоя в первом раунде UFC 331",
    "date": "2026-09-20",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/spacex-obsuzhdaet-pokupku-obankrotivshihsya-startapov-radi-dannyh-dlya-obucheniya-grok/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/20/freyre-nokautiroval-choya-v-pervom-raunde-ufc-331/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-20",
-     "title": "Переговоры",
-     "note": "SpaceX рассматривает покупку клиентских и операционных данных у закрывшихся стартапов для обучения модели Grok — по данным источников Bloomberg, подразделение SpaceXAI ищет более дешевые альтернативы данным соцсети X и внутренних AI-тьюторов.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/spacex-obsuzhdaet-pokupku-obankrotivshihsya-startapov-radi-dannyh-dlya-obucheniya-grok/"
-     ]
-    }
-   ],
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -347,8 +336,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
