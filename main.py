@@ -2207,7 +2207,20 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         # сообщений. Номер берётся из сообщения самого бота — оно живёт внутри
         # темы и несёт message_thread_id; нажатие доходит и в режиме
         # приватности, в отличие от напечатанного названия.
-        topic = re.match(r"^topic:(decision|update|info)$", str(callback.get("data") or ""))
+        # Список видов берётся из САМОГО справочника, а не переписывается здесь
+        # руками. 20 сентября 2026 владелец нажал кнопку «Заметки от
+        # пользователей» — и ничего не произошло: кнопки строятся по
+        # CONSOLE_TOPIC_NAMES (там вид появился 19 сентября), а этот разбор
+        # знал только три старых вида и молча ронял нажатие, даже не ответив
+        # на него. Тот же класс, что уже записан про прямые кавычки: добавили
+        # в одном месте, забыли во втором — чинить надо связь, а не второе
+        # место.
+        topic = re.match(r"^topic:([a-z_]+)$", str(callback.get("data") or ""))
+        if topic and topic.group(1) not in CONSOLE_TOPIC_NAMES:
+            notification_service.tg_api(
+                "answerCallbackQuery", callback_query_id=callback.get("id"),
+                text="Такой темы бот не знает — обновите страницу и дайте /topic снова.")
+            return {"ok": True}
         if topic:
             msg = callback.get("message") or {}
             if not _is_reviewer(from_id):
@@ -2357,9 +2370,15 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             threading.Thread(target=_mark_decided, args=(callback, verdict),
                              kwargs={"answered": True}, daemon=True).start()
         elif callback.get("id"):
-            notification_service.tg_api("answerCallbackQuery",
-                                        callback_query_id=callback["id"],
-                                        text="Решать могут только владелец и партнёр.")
+            # Сюда падает нажатие, которого бот не узнал вовсе. Раньше он
+            # отвечал «Решать могут только владелец и партнёр» — и это была
+            # неправда: 20 сентября владелец нажал свою же кнопку и получил
+            # отказ по праву доступа, хотя право у него есть, а не узнана была
+            # сама кнопка. Ответ теперь говорит, что случилось на самом деле.
+            notification_service.tg_api(
+                "answerCallbackQuery", callback_query_id=callback["id"],
+                text="Эту кнопку бот не узнал — скорее всего, сообщение старое. "
+                     "Повторите команду, чтобы получить свежие кнопки.")
         return {"ok": True}
 
     message = payload.message or {}
