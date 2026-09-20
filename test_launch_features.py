@@ -3513,6 +3513,23 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     assert edited and edited[0]["message_id"] == 500 and "Запомнил" in edited[0]["text"]
     assert any(m == "answerCallbackQuery" for m, _kw in calls)
 
+    # КАЖДАЯ показанная кнопка обязана работать, а не две выбранные руками.
+    # 20 сентября 2026 владелец нажал «Заметки от пользователей» — и ничего не
+    # произошло: разбор нажатия знал три старых вида, а кнопок рисовалось
+    # четыре. Прошлая версия этого теста проверяла, что кнопки ЕСТЬ, и
+    # нажимала только две из них, поэтому дефект прошёл мимо.
+    for i, kind in enumerate(main_module.CONSOLE_TOPIC_NAMES):
+        calls.clear()
+        thread = 300 + i
+        client.post("/api/telegram/webhook/тайна", json={"callback_query": {
+            "id": "cb-%s" % kind, "data": "topic:%s" % kind, "from": {"id": 111},
+            "message": {"message_id": 600 + i, "message_thread_id": thread, "chat": chat}}})
+        topics = client.get("/api/moderation/topics", params={"token": "тайна"}).json()["topics"]
+        slug = main_module._topic_slug(main_module.CONSOLE_TOPIC_NAMES[kind])
+        assert topics.get(slug) == str(thread), (kind, topics)
+        assert any(m == "editMessageText" and "Запомнил" in kw["text"]
+                   for m, kw in calls), (kind, calls)
+
     # Посторонний жмёт кнопку в теме 77 -> ничего не записано.
     calls.clear()
     client.post("/api/telegram/webhook/тайна", json={"callback_query": {
