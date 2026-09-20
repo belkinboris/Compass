@@ -6894,9 +6894,17 @@ function sanctionsHtml(c){
     title="Открыть официальный перечень">${esc(SANC_LABEL[m.list]||"Санкции")}</a>`).join("");
   const dated = list.filter(m=>sancDate(m.since))
     .map(m=>`${SANC_WHERE[m.list]||"в список"} — ${sancDate(m.since)} года`);
-  const when = dated.length ? ` Внесён ${dated.join("; ")}.` : "";
+  const person = list.some(m => m.kind === "person");
+  const when = dated.length
+    ? ` ${person ? "Внесён" : "Внесена"} ${dated.join("; ")}.` : "";
+  const lead = person
+    ? "Человек назван в официальных санкционных списках"
+    : "Компания названа в официальных санкционных списках";
+  const tail = person
+    ? "одной совпавшей фамилии для такой отметки мало"
+    : "одного похожего названия для такой отметки мало";
   return `<div class="sanc-row">${chips}</div>
-    <div class="sanc-note">Человек назван в официальных санкционных списках — ссылка ведёт на сам список.${when} Запись сверена с профилем вручную: одной совпавшей фамилии для такой отметки мало.</div>`;
+    <div class="sanc-note">${lead} — ссылка ведёт на сам список.${when} Запись сверена с профилем вручную: ${tail}.</div>`;
 }
 function renderCompany(id){
   const c = co(id);

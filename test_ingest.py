@@ -3560,6 +3560,33 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert "target_fin_prose" in {c for c, _t in accept_card.findings(clean, base, registry=known)}
 
 
+def test_on_an_ipo_the_issuer_is_the_subject_not_the_buyer():
+    """Аудит адреса фактов 13 сентября 2026, повторяющийся подкласс ROLE_WRONG.
+
+    Из 40 карточек об IPO у двадцати компания, чьи акции размещались, стояла
+    ПОКУПАТЕЛЕМ — то есть карточка утверждала, что «Делимобиль» купил
+    «Делимобиля». Починено 20 сентября, и признак не пускает это обратно.
+    Карточка про ФОНД под признак не попадает: там покупателем стоит
+    фонд-инвестор, и это верно — на живой базе таких две из сорока."""
+    import accept_card
+    base = {"companies": {"gzaymer": {"name": "Займер", "ind": "Банки", "desc": "МФК."},
+                          "gvim": {"name": "ВИМ Инвестиции", "ind": "Банки", "desc": "Фонд."}},
+            "deals": [], "telegram_posts": {}}
+    src = [["Ведомости", "https://www.vedomosti.ru/x"]]
+
+    bad = {"id": "x1", "type": "IPO", "title": "IPO МФК «Займер» на Московской бирже",
+           "date": "2026-04-12", "status": "Закрыта", "buyer": "gzaymer", "src": src}
+    assert "ipo_issuer_as_buyer" in {c for c, _t in accept_card.findings(bad, base)}
+
+    good = dict(bad, buyer=None, target="gzaymer")
+    assert "ipo_issuer_as_buyer" not in {c for c, _t in accept_card.findings(good, base)}
+
+    fund = {"id": "x2", "type": "IPO", "date": "2026-04-12", "status": "Закрыта",
+            "title": "«Суточно.ру» привлекло инвестиции pre-IPO фондов ВИМ Инвестиции",
+            "buyer": "gvim", "src": src}
+    assert "ipo_issuer_as_buyer" not in {c for c, _t in accept_card.findings(fund, base)}
+
+
 def test_acceptance_findings_catch_the_2026_09_12_audit_classes():
     """Аудит адреса фактов (12 сентября 2026, audit_prompt_fable): четыре
     класса, найденные владельцем на живых карточках — БКС/«Форштадт»
