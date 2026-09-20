@@ -1122,6 +1122,18 @@ a.dp-asset-name:hover{color:var(--accent)}
 /* «Группа» — короткий и одинаковый у всех: сжимать его незачем, пусть
    уступает место отрасль, у которой длина своя у каждой карточки. */
 .co-tags .co-group-badge{flex:0 0 auto}
+/* Санкционная отметка на профиле человека. Значок — ссылка на сам перечень:
+   утверждение о живом человеке обязано вести на документ, а не на нашу
+   базу. Цвет предупреждающий, но не красный: это факт из официального
+   списка, а не наша оценка. */
+.sanc-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.sanc-row .sanc-lead{font-size:13px;color:var(--muted)}
+.sanc-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
+  border:1px solid #d8b26a;background:#fdf6e7;color:#7a5410;font-size:12.5px;font-weight:600;
+  text-decoration:none;white-space:nowrap}
+.sanc-badge:hover{background:#f8ecd2}
+.sanc-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#c98a1e;flex:0 0 auto}
+.sanc-note{margin-top:6px;font-size:12.5px;color:var(--muted);max-width:72ch}
 .co-nums .label{white-space:nowrap}
 /* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
    пустые 30px под коротким именем и 20px под коротким описанием только
@@ -1252,6 +1264,10 @@ body.chat-page .wrap{max-width:none;padding:65px 0 0}
    теряется, плашка вернётся на соседнем экране. */
 body.chat-page .compare-tray{display:none}
 .suggests{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+/* Продолжения — под ответом, мельче основных кнопок: это подсказка,
+   а не главное действие на экране. */
+.ai-next{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 2px}
+.ai-next .chip{font-size:12.5px;padding:6px 12px}
 /* Задачи — первый ряд и заметнее примеров: примеры отвечают на «что
    тут можно спросить», задачи — на «сделай мне работу». */
 .suggests.tasks{margin-bottom:6px}
@@ -3299,7 +3315,7 @@ async function runAsk(q, mode, meta, w){
   /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
      кнопка «Нет» тут значит «ответьте всё-таки» — и мы будем копить её как
      жалобу на качество ответа, которого не было. */
-  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":feedbackBar(q,a)); return a; }
+  if(a.ok){ w.innerHTML=a.html+askHintHtml(a)+(a.refused?"":followUpsHtml(a)+feedbackBar(q,a)); return a; }
   if(quick){
     const raw=quick.answer;
     w.innerHTML=mdToHtml(raw)+`<p class="ai-note">Подробнее написать не получилось — модель не ответила вовремя; выше — точные данные из базы.</p>`;
@@ -3322,6 +3338,47 @@ const askHintHtml = a => (a.refused || (a.deals && a.deals.length)) ? ""
    скриншот. Оценка «нет» уходит сразу (не потеряется, если вкладку закроют),
    комментарий — вторым запросом к той же записи. */
 const _fbStore = {};
+/* КНОПКИ ПРОДОЛЖЕНИЯ. Владелец 20 сентября 2026: «кнопки попробуй сначала
+   сам на своё усмотрение сделать». Предлагаем не общие «спросите ещё», а
+   следующий шаг ИМЕННО ЭТОГО разговора — по тому, на что ответ опёрся.
+
+   Формулировки короткие и указательные («эти сделки», «этой компании»):
+   ассистент уже умеет читать уточнение вместе с предыдущим вопросом
+   (`previous` в retrieve), и называть сущность второй раз незачем — а если
+   назвать неправильно, ответ уедет не туда. */
+const FOLLOW_UPS = {
+  company:  ["Кто сопровождал эти сделки?", "Что известно о финансах этой компании?"],
+  industry: ["Кто чаще всего покупал в этой отрасли?", "Какие сделки здесь самые крупные?"],
+  advisor:  ["В каких отраслях работает эта фирма?", "Какие из этих сделок самые крупные?"],
+  largest:  ["Кто сопровождал эти сделки?", "Как это выглядело в прошлом году?"],
+  recent:   ["Какие из них самые крупные?", "Кто сопровождал эти сделки?"],
+  compare:  ["Кто сопровождал их сделки?"],
+  term:     ["Кто сопровождал эти сделки?"],
+  theme:    ["Какие из них самые крупные?"],
+  count:    ["Какие из них самые крупные?"],
+};
+function followUpsHtml(a){
+  if(!a || a.refused) return "";
+  const list = (FOLLOW_UPS[a.intent] || []).slice(0, 2);
+  // Ответ опёрся ровно на одну сделку — значит, уместно спросить о ней самой.
+  if(a.deals && a.deals.length === 1) list.unshift("Расскажи подробнее об этой сделке");
+  if(!list.length) return "";
+  return `<div class="ai-next">${list.slice(0,3).map(q=>
+    `<button type="button" class="chip" data-next="${esc(q)}">${esc(q)}</button>`).join("")}</div>`;
+}
+/* Нажатие продолжает разговор ТАМ ЖЕ, где он идёт: на экране ассистента — в
+   его строке, на карточке компании или сделки — в мини-окне рядом. Ищем
+   composer от самой кнопки вверх, а не по общему id. */
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-next]"); if(!b) return;
+  const q = b.dataset.next;
+  const mini = b.closest(".miniai");
+  const input = mini ? mini.querySelector("input") : document.getElementById("q");
+  const go = mini ? mini.querySelector("button.go") : document.getElementById("send");
+  if(!input || !go) return;
+  input.value = q; go.click();
+});
+
 function feedbackBar(q, a){
   const id = "fb"+Math.random().toString(36).slice(2,9);
   _fbStore[id] = {q, a};
@@ -6817,6 +6874,30 @@ async function mountGroupMembers(groupMembers, mountId, getShare){
   });
 }
 
+/* Санкционная отметка. В профиль попадает только то, что человек прочитал и
+   сверил с записью перечня (pipeline/sanctions_confirmed.json): совпадения
+   фамилии мало — в списках есть и однофамильцы, и полные тёзки, а ошибка
+   здесь — не опечатка, а обвинение живого человека. */
+const SANC_LABEL = {us:"Санкции США", eu:"Санкции ЕС", uk:"Санкции Великобритании"};
+const SANC_WHERE = {us:"в список США", eu:"в список Евросоюза", uk:"в британский список"};
+const sancDate = d => {
+  if(!d) return "";
+  const t = new Date(d);
+  return isNaN(t) ? "" : t.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"}).replace(" г.","");
+};
+function sanctionsHtml(c){
+  const marks = (c && c.sanctions) || [];
+  if(!marks.length) return "";
+  const order = {us:0, eu:1, uk:2};
+  const list = marks.slice().sort((a,b)=>(order[a.list]??9)-(order[b.list]??9));
+  const chips = list.map(m=>`<a class="sanc-badge" href="${esc(m.url)}" target="_blank" rel="noopener noreferrer"
+    title="Открыть официальный перечень">${esc(SANC_LABEL[m.list]||"Санкции")}</a>`).join("");
+  const dated = list.filter(m=>sancDate(m.since))
+    .map(m=>`${SANC_WHERE[m.list]||"в список"} — ${sancDate(m.since)} года`);
+  const when = dated.length ? ` Внесён ${dated.join("; ")}.` : "";
+  return `<div class="sanc-row">${chips}</div>
+    <div class="sanc-note">Человек назван в официальных санкционных списках — ссылка ведёт на сам список.${when} Запись сверена с профилем вручную: одной совпавшей фамилии для такой отметки мало.</div>`;
+}
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -6848,6 +6929,7 @@ function renderCompany(id){
     ${c.group?`<span class="tag steel" style="margin-left:6px">Группа компаний</span>`:""}
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
+    ${sanctionsHtml(c)}
     ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
       <span class="tag steel">Несколько юрлиц</span>
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Это не одна компания: под этим именем в сделке шли несколько юридических лиц, проданных одним лотом. Что вошло в лот и какие доли — в карточке сделки.</span>

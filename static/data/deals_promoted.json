@@ -82821,6 +82821,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7497718"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/index.php/Компания:Les_Art_Resort_%28Лес_Арт_Резорт%29"
     ]
    ],
    "extra": "Отель LesArt Resort перешёл компании Vizant. Юридически покупателем выступил ЗПИФ «Терс» под управлением ООО «УК ФИН-ПАРТНЕР», конечный бенефициар — Аркадий Ротенберг. Продавец — Рузанна Рудиковна Абрамян, возможным конечным владельцем называют Вазгена Геворкяна. Отель — 4-звёздный комплекс на 300 номеров в Рузском районе Московской области, построен в 2013 году.",
@@ -218601,6 +218605,20 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "us",
+     "name": "SVIBLOV, Vladislav Vladimirovich",
+     "since": "",
+     "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=46715"
+    },
+    {
+     "list": "uk",
+     "name": "Vladislav SVIBLOV",
+     "since": "2023-11-08",
+     "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets"
+    }
    ]
   },
   "g829090b3": {
@@ -226337,6 +226355,14 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "eu",
+     "name": "Арам Ашотович ГАБРЕЛЯНОВ",
+     "since": "2024-06-24",
+     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401746"
+    }
    ]
   },
   "g623a59a1": {
@@ -226584,6 +226610,20 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "us",
+     "name": "MAKHMUDOV, Iskander",
+     "since": "",
+     "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=45056"
+    },
+    {
+     "list": "uk",
+     "name": "Iskander Kakhramonovich MAKHMUDOV",
+     "since": "2022-09-26",
+     "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets"
+    }
    ]
   },
   "gdb108d96": {
@@ -226909,6 +226949,20 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "us",
+     "name": "KHOTIMSKIY, Dmitry Vladimirovich",
+     "since": "",
+     "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=35976"
+    },
+    {
+     "list": "uk",
+     "name": "Dmitri Vladimirovich KHOTIMSKI",
+     "since": "2022-09-26",
+     "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets"
+    }
    ]
   },
   "gb316113e": {
@@ -228437,6 +228491,14 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "us",
+     "name": "UDODOV, Aleksandr Yevgenyevich",
+     "since": "",
+     "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=40789"
+    }
    ]
   },
   "gc22d52eb": {
@@ -228843,6 +228905,14 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "eu",
+     "name": "Aleksey Aleksandrovich UCHENOV",
+     "since": "2023-02-25",
+     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1765"
+    }
    ]
   },
   "gbfcf7065": {
@@ -230705,6 +230775,20 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "eu",
+     "name": "Артём Юрьевич ЧАЙКА",
+     "since": "2023-06-23",
+     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1216"
+    },
+    {
+     "list": "uk",
+     "name": "Артём Юрьевич ЧАЙКА",
+     "since": "2025-02-14",
+     "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets"
+    }
    ]
   },
   "g0067039f": {
@@ -233832,6 +233916,14 @@
    "kpi": [
     "Профиль",
     "Автоматический"
+   ],
+   "sanctions": [
+    {
+     "list": "eu",
+     "name": "Aleksey Konstantinovich KAKHIDZE",
+     "since": "2024-12-16",
+     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403183"
+    }
    ]
   },
   "g029ad143": {
