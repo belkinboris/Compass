@@ -57,14 +57,23 @@ def topic_note(kind='user_notes', today=None):
     """
     import datetime
     today = today or datetime.date.today().isoformat()
-    if console_topics.thread_id(kind) is not None:
-        return None
     seen = {}
     if os.path.exists(TOPIC_NOTE):
         try:
             seen = json.load(open(TOPIC_NOTE, encoding='utf-8'))
         except ValueError:
             seen = {}
+    if console_topics.thread_id(kind) is not None:
+        # Тему завели — отметку о жалобе снимаем. Иначе, если тема однажды
+        # пропадёт снова (группа переехала в супергруппу, тему удалили), бот
+        # скажет об этом вполголоса «по-прежнему не заведена» со старой датой
+        # вместо нормального предупреждения.
+        if kind in seen:
+            del seen[kind]
+            with open(TOPIC_NOTE, 'w', encoding='utf-8') as fh:
+                json.dump(seen, fh, indent=1, ensure_ascii=False)
+                fh.write('\n')
+        return None
     name = console_topics.TOPIC_NAMES.get(kind, kind)
     if kind in seen:
         return ('Тема «%s» в группе по-прежнему не заведена (сказали об этом %s) — '
