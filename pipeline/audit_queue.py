@@ -56,6 +56,25 @@ def key_of(f: dict) -> str:
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:12]
 
 
+def decided_by_a_reader() -> set:
+    """(id, поле) пар, по которым читатель уже принял решение — таблица FIXES
+    в review.py. Урок 20 сентября 2026: скрипт-правка сначала переписал
+    `eco.sum`/`eco.context` у карточек, где чтение с цитатой из источника
+    НАМЕРЕННО поставило текст, отличающийся от «правильного по форме» —
+    и дважды сломал инвариант «строка таблицы правок применена к базе».
+    Машинная правка не спорит с прочитанным: КАЖДЫЙ скрипт, что переносит
+    текст между полями карточки, обязан проверить пару (id, поле-назначение)
+    через эту функцию и пропустить карточку, если пара в ней есть.
+    """
+    if ROOT not in sys.path:
+        sys.path.insert(0, ROOT)
+    ingest = os.path.join(ROOT, "pipeline", "ingest")
+    if ingest not in sys.path:
+        sys.path.insert(0, ingest)
+    import review
+    return {(f["id"], f.get("field")) for f in review.FIXES}
+
+
 def load_findings() -> list:
     return json.load(io.open(FINDINGS, encoding="utf-8"))["findings"]
 
