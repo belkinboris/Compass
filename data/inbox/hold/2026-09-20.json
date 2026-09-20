@@ -312,13 +312,81 @@
    ]
   },
   {
-   "draft_id": "d62416277",
-   "title": "FT: американские ритейлеры ограничивают продажи моторного масла из-за дефицита",
+   "draft_id": "d40392656",
+   "title": "Китайский Leapmotor обогнал по мировым продажам Subaru и Mitsubishi",
    "date": "2026-09-20",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8970908"
+     "https://www.kommersant.ru/doc/8970910"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-20",
+     "title": "Сделка завершена",
+     "note": "Китайский производитель Leapmotor продал во втором квартале на мировом рынке 240 тыс. автомобилей. Это рекорд для самого стартапа и первый раз, когда Leapmotor обошел по продажам таких крупных японских производителей, как Subaru и Mitsubishi.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8970910"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d80542872",
+   "title": "Аукционы Минфина — спрос в классике позволяет выполнить квартальный план, но министерство расплачивается за это повышенной доходностью.",
+   "date": "2026-09-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1353461.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61920712",
+   "title": "Полипласт подвергся распродаже. Стоит ли паниковать вместе со всеми?",
+   "date": "2026-09-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1353430.php"
     ]
    ],
    "sum": null,
@@ -333,36 +401,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d14860221",
-   "title": "Усадьбу Брынцалова в Кисловодске продают за 2,5 млрд рублей",
-   "date": "2026-09-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129090"
-    ]
-   ],
-   "sum": "2,5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
+   "ind": "Химия и удобрения",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
