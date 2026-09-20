@@ -4307,6 +4307,7 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     напоминание раз в три часа не стало шумом, громко оно звучит один раз.
     """
     import importlib
+    import json
     import sys as _sys
     root = Path(__file__).resolve().parent
     _sys.path.insert(0, str(root / "pipeline"))
@@ -4324,5 +4325,13 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     assert second and "по-прежнему" in second and "2026-09-20" in second
     assert "/topic" not in second
 
+    # Тему завели — молчим и снимаем отметку: если тема пропадёт снова,
+    # предупреждение должно прозвучать нормально, а не вполголоса со старой
+    # датой.
     monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: 42)
     assert mod.topic_note("user_notes", today="2026-09-21") is None
+    assert json.loads(marker.read_text(encoding="utf-8")) == {}
+
+    monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: None)
+    again = mod.topic_note("user_notes", today="2026-10-01")
+    assert again and "/topic" in again, again
