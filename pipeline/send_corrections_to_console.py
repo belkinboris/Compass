@@ -38,6 +38,44 @@ from send_drafts import send_one, PAUSE                   # noqa: E402
 
 SITE = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+TOPIC_NOTE = os.path.join(HERE, 'console_topics_missing.json')
+
+
+def topic_note(kind='user_notes', today=None):
+    """Сказать, если тема консоли не заведена, — и сказать это РОВНО ОДИН РАЗ.
+
+    Номер темы бот узнаёт только командой `/topic`, посланной внутри неё
+    (Bot API списка тем не даёт). Пока номера нет, сообщения уходят в общую
+    ленту группы: ничего не теряется, но и в свою тему не попадает.
+
+    Проверка стоит в начале прогона, а не рядом с отправкой, — иначе пустой
+    прогон (а он самый частый) о поломке настройки не узнаёт вовсе: 20
+    сентября 2026 тема «Заметки от пользователей» так и не была заведена, а
+    рутина три дня отчитывалась «заметок нет» и молчала об этом. Отметка о
+    том, что уже сказали, лежит в git рядом со скриптом — иначе напоминание
+    раз в три часа само превращается в шум.
+    """
+    import datetime
+    today = today or datetime.date.today().isoformat()
+    if console_topics.thread_id(kind) is not None:
+        return None
+    seen = {}
+    if os.path.exists(TOPIC_NOTE):
+        try:
+            seen = json.load(open(TOPIC_NOTE, encoding='utf-8'))
+        except ValueError:
+            seen = {}
+    name = console_topics.TOPIC_NAMES.get(kind, kind)
+    if kind in seen:
+        return ('Тема «%s» в группе по-прежнему не заведена (сказали об этом %s) — '
+                'сообщения идут в общую ленту.' % (name, seen[kind]))
+    seen[kind] = today
+    with open(TOPIC_NOTE, 'w', encoding='utf-8') as fh:
+        json.dump(seen, fh, indent=1, ensure_ascii=False)
+        fh.write('\n')
+    return ('Тема «%s» в группе не заведена: бот не знает её номера, и сообщения '
+            'уйдут в общую ленту. Починить — открыть эту тему и отправить в ней '
+            '/topic.' % name)
 
 
 def _token():
@@ -106,6 +144,9 @@ def main():
         print('Заявки забрать не удалось: %s' % e.reason)
         print('ИТОГ ПРОГОНА: сайт не отдал заявки (отправлено=0, удалено=0).')
         return 1
+    note = topic_note()
+    if note:
+        print(note)
     print('Ждут отправки в консоль: %d' % len(pending))
     if not pending:
         print('ИТОГ ПРОГОНА: отправлять нечего (отправлено=0, удалено=0).')
