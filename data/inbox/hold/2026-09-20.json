@@ -312,16 +312,16 @@
    ]
   },
   {
-   "draft_id": "d83035177",
-   "title": "Компания, создающая ИИ-стартапы для корпораций, разрешила M&A своих проектов без выхода на рынок",
+   "draft_id": "d82753570",
+   "title": "Соперник Ельцина на выборах 1996 года решил продать самый дорогой дом на Кавказе",
    "date": "2026-09-20",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/kompaniya-sozdayushhaya-ii-startapy-dlya-korporatsij-razreshila-m-a-svoih-proektov-bez-vyhoda-na-rynok/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/20/sopernik-eltsina-na-vyborah-1996-goda-reshil-prodat-samyy-dorogoy-dom-na-kavkaze/"
     ]
    ],
-   "sum": "$100 млн",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -333,11 +333,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
