@@ -21444,7 +21444,7 @@
    "date": "2022-08-01",
    "title": "Инвестиции венчурного фонда МТС в IT-стартап Rubbles (раунд A, август 2022)",
    "buyer": null,
-   "target": "invest18",
+   "target": "g8f1f069d",
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
    "kind": "financing",
@@ -21552,14 +21552,14 @@
      "card_hash": "cebf38a0af48"
     },
     "target": {
-     "company_id": "invest18",
+     "company_id": "g8f1f069d",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
      "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "e4d9a30fe89f"
+     "card_hash": "9869a273210f"
     },
     "admitted": {
      "count": true,
@@ -29020,7 +29020,7 @@
     "Продажа с торгов",
     "Национализация / иск Генпрокуратуры"
    ],
-   "seller_id": "g80f34727",
+   "seller_id": "g9fd82fee",
    "seller": "СПИ-РВВК",
    "seller_src": "manual_2026",
    "target_was_seller": true,
@@ -39412,8 +39412,8 @@
    "id": "g0cf6a562",
    "date": "2022-07-31",
    "title": "Продажа активов Starbucks в России — ребрендинг в Stars Coffee (Тимати, Пинский, «Синдика»)",
-   "buyer": null,
-   "target": "g47fde1f7",
+   "buyer": "g47fde1f7",
+   "target": null,
    "ind": "Пищепром и напитки",
    "type": "M&A",
    "kind": "acquisition",
@@ -39520,14 +39520,14 @@
      "card_hash": "82b916e8fc8f"
     },
     "target": {
-     "company_id": "g47fde1f7",
-     "inn": "7730123456",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "323afdff84a5"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -39541,7 +39541,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "multiple_text": "no_target"
     }
    }
   },
@@ -52313,8 +52313,8 @@
    "id": "g5a1d102f",
    "date": "2022-02-01",
    "title": "Приобретение «Лентой» 100% ООО «Новый Импульс-50» (онлайн-ритейлер «Утконос») у «Севергрупп» с оплатой допэмиссией акций",
-   "buyer": null,
-   "target": "gcca31da7",
+   "buyer": "gcca31da7",
+   "target": null,
    "ind": "Ритейл",
    "type": "M&A",
    "kind": "acquisition",
@@ -52539,66 +52539,14 @@
      ]
     },
     "target": {
-     "company_id": "gcca31da7",
-     "inn": "3906399157",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
-     "perimeter": "refuted",
-     "card_hash": "9d814ee05bd4",
-     "perimeter_entity": "МКПАО \"Лента\"",
-     "perimeter_report": {
-      "inn": "3906399157",
-      "year": 2021,
-      "revenue_rub": 855000.0,
-      "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
-     },
-     "perimeter_other_entities": [
-      "ООО \"Новый Импульс-50\""
-     ],
-     "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
-     "source": "https://www.interfax.ru/business/819600",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
-     "readings": [
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО \"Новый Импульс-50\""
-       ],
-       "entity": "МКПАО \"Лента\"",
-       "report": {
-        "inn": "3906399157",
-        "year": 2021,
-        "revenue_rub": 855000.0,
-        "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
-       },
-       "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
-       "source": "https://www.interfax.ru/business/819600",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "ООО \"Новый Импульс-50\""
-       ],
-       "entity": "МКПАО \"Лента\"",
-       "report": {
-        "inn": "3906399157",
-        "year": 2021,
-        "revenue_rub": 855000.0,
-        "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЛЕНТА\""
-       },
-       "quote": "\"Севергрупп\" принадлежит 100% долей в ООО \"Новый Импульс-50\", управляющем бизнесом \"Утконоса\".",
-       "source": "https://www.interfax.ru/business/819600",
-       "quote_checked": true,
-       "reader": "B"
-      }
-     ]
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -61583,7 +61531,7 @@
    "id": "g52b8df38",
    "date": "2024-12-24",
    "title": "Сбербанк инвестиции приобрел 20% в девелопере проекта «Южный» в Санкт-Петербурге",
-   "buyer": "g28ff15bb",
+   "buyer": "gac30cf97",
    "target": "g52b8df38-target",
    "ind": "Недвижимость",
    "type": "M&A",
@@ -78789,7 +78737,7 @@
    "id": "g97d0d2a2",
    "date": "2025-09-01",
    "title": "Группа Wildberries & Russ приобрела аэропорт Магас в Ингушетии",
-   "buyer": "g549ab474",
+   "buyer": "gdb2fdb1a",
    "target": "g5fcd8d96",
    "ind": "Порты и инфраструктура",
    "type": "M&A",
@@ -145095,7 +145043,7 @@
    "id": "gb84f2b2f",
    "date": "2023-06-22",
    "title": "Ригла купила краснодарскую Трик Фарму",
-   "buyer": "g31c774c3",
+   "buyer": "g7313d9af",
    "target": "g6e0b710f",
    "ind": "Фармацевтика",
    "type": "M&A",
@@ -156237,7 +156185,7 @@
    "date": "2023",
    "title": "Группа «Черкизово» приобрела 15 тыс. га сельхозземли в Белгородской области у агрохолдинга «Бенталь»",
    "buyer": "gd3bb09b3",
-   "target": "g4254167f",
+   "target": null,
    "ind": "Агро",
    "type": "M&A",
    "kind": "acquisition",
@@ -156310,14 +156258,14 @@
      "card_hash": "eb7012daf686"
     },
     "target": {
-     "company_id": "g4254167f",
-     "inn": "6114017111",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "6e792e118877"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -156331,9 +156279,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
-   }
+   },
+   "seller_id": "g4254167f"
   },
   {
    "id": "geb343fe1",
@@ -211432,7 +211381,7 @@
     "terms": "—"
    },
    "buyer": "g2cbdb3e8",
-   "seller_id": "g8cf40802",
+   "seller_id": null,
    "facts": {
     "stake": {
      "value": null,
@@ -211463,14 +211412,14 @@
      "card_hash": "2eb6c05c423c"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g8cf40802",
+     "inn": "7714626332",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2b06cbc5172f"
     },
     "admitted": {
      "count": true,
@@ -211484,10 +211433,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "proofread": "2026-09-11"
+   "proofread": "2026-09-11",
+   "target": "g8cf40802"
   },
   {
    "id": "gb20ec0ef",

@@ -2654,7 +2654,15 @@ def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, 
     бейдж «Группа компаний» стоял вне потока и срезался верхом карточки, а
     фиксированные высоты имени и описания оставляли пустые дыры в одной
     колонке. Проверяем на узком экране: бейдж внутри карточки целиком, имя
-    из одной строки не тянет 60px, переполнения нет."""
+    из одной строки не тянет 60px, переполнения нет.
+
+    Карточка берётся по признаку «есть бейдж «Группа»», а не по имени
+    компании: сортировка «по активности» зависит от числа сделок, а оно
+    меняется по мере правок базы (21 сентября 2026 — очередная точная
+    привязка стороны сдвинула первое место с «Сбербанка» на «Росимущество»,
+    у которого бейджа нет). Порядок компаний — не то, что этот тест обязан
+    держать неизменным; неизменным должен остаться макет карточки с бейджем,
+    кто бы ею ни оказался."""
     ctx = browser.new_context(viewport={"width": 390, "height": 844})
     try:
         pg = ctx.new_page()
@@ -2663,9 +2671,9 @@ def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, 
         pg.goto(base_url + "/#/companies", wait_until="networkidle")
         pg.wait_for_selector(".co-card")
         pg.wait_for_timeout(700)
-        card = pg.locator(".co-card").first
+        card = pg.locator(".co-card:has(.co-group-badge)").first
         badge = card.locator(".co-group-badge")
-        assert badge.count() == 1, "первая карточка (Сбербанк) должна быть группой"
+        assert badge.count() == 1, "ни одна из показанных карточек не оказалась группой"
         cb, bb = card.bounding_box(), badge.bounding_box()
         assert bb["y"] >= cb["y"] and bb["y"] + bb["height"] <= cb["y"] + cb["height"], (cb, bb)
         assert bb["x"] + bb["width"] <= cb["x"] + cb["width"]
