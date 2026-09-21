@@ -144,5 +144,12 @@
  "5eebdafd2715": "eco.context→law.struct: номинальное владение в интересах АФК Система (fix_audit_context_batch_2026_09_21.py)",
  "2b16cad08a05": "eco.context→law.struct: юрлицо покупки долей (fix_audit_context_batch_2026_09_21.py)",
  "18910cc6f835": "eco.context→law.appr: решение суда, цитата сверена заново (карточка из слияния) (fix_audit_context_batch_2026_09_21.py)",
- "cd17db81b87e": "eco.context→law.appr: указ президента, цитата сверена заново (карточка из слияния) (fix_audit_context_batch_2026_09_21.py)"
+ "cd17db81b87e": "eco.context→law.appr: указ президента, цитата сверена заново (карточка из слияния) (fix_audit_context_batch_2026_09_21.py)",
+ "89b257271daf": "law.struct→eco.share: доля владения после сделки, факт о переименовании остаётся (fix_audit_struct_batch2_2026_09_21.py)",
+ "f499f4fbac4b": "law.struct→eco.context: опровержение Фонбета (fix_audit_struct_batch2_2026_09_21.py)",
+ "efb37628734e": "law.struct→eco.context: бенефициар и история холдинга-покупателя (fix_audit_struct_batch2_2026_09_21.py)",
+ "a2dfef2c4edc": "law.struct→eco.fin: расчёт встречной долей, не деньгами (fix_audit_struct_batch2_2026_09_21.py)",
+ "e6a3f3dd6b8a": "law.struct→law.terms: опцион обратного выкупа (fix_audit_struct_batch2_2026_09_21.py)",
+ "efe859ec9439": "law.struct удалён: дубль записи в law.adv (fix_audit_struct_batch2_2026_09_21.py)",
+ "aeb0420bff50": "eco.context→law.struct: паритетная структура 50/50 со Сколково (fix_audit_struct_batch2_2026_09_21.py)"
 }
