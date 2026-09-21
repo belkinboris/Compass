@@ -75,8 +75,31 @@ def decided_by_a_reader() -> set:
     return {(f["id"], f.get("field")) for f in review.FIXES}
 
 
+SUPPLEMENTS_DIR = os.path.join(ROOT, "pipeline", "audit_field_placement")
+
+
 def load_findings() -> list:
-    return json.load(io.open(FINDINGS, encoding="utf-8"))["findings"]
+    """Разовый аудит 13 сентября (2420 записей) + все последующие партии.
+
+    `findings.json` — исторический снимок ОДНОГО прогона, не трогается.
+    Периодическая проверка ЖИВОЙ базы (по методике самого аудита —
+    `2026-09-13-report.md`, «повторный аудит того же вида запускается через
+    несколько месяцев дочитывания легаси-базы») кладёт свою партию рядом,
+    файлом `supplement_<дата>.json` — тот же формат, что и `findings.json`
+    (объект с ключом `findings`, список записей с теми же полями). Ничего
+    сливать вручную не нужно: `key_of()` хэширует (id, класс, цитата), и
+    находка, переоткрытая повторной проверкой, естественно совпадает с уже
+    закрытой записью в `audit_queue_done.json`, если её уже разобрали.
+    """
+    findings = list(json.load(io.open(FINDINGS, encoding="utf-8"))["findings"])
+    if os.path.isdir(SUPPLEMENTS_DIR):
+        for name in sorted(os.listdir(SUPPLEMENTS_DIR)):
+            if not (name.startswith("supplement_") and name.endswith(".json")):
+                continue
+            payload = json.load(io.open(os.path.join(SUPPLEMENTS_DIR, name), encoding="utf-8"))
+            batch = payload["findings"] if isinstance(payload, dict) else payload
+            findings.extend(batch)
+    return findings
 
 
 def load_done() -> dict:
