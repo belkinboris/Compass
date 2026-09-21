@@ -55,7 +55,33 @@ from pipeline import audit_queue as aq  # noqa: E402
 from pipeline.fix_audit_move_utils import get_field, set_field  # noqa: E402
 
 sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
+import review  # noqa: E402
 from review import _linker_key  # noqa: E402  «ООО «Х»» и «Х» — одно имя
+
+
+def readers_rows_still_hold(card, companies, fields):
+    """Правки читателя по этим полям по-прежнему считаются применёнными.
+
+    ТОЧНАЯ ПРОВЕРКА ВМЕСТО ГРУБОГО ЗАМКА. Правило «машинная правка не спорит
+    с прочитанным» раньше запрещало трогать ЛЮБОЕ поле, которого когда-то
+    касался `review.py`. Замер 21 сентября 2026 показал, что запрет шире
+    нужного: из 252 находок класса «факт не в том поле», упиравшихся в такое
+    поле, у 203 (81%) правка читателя уже ПОГЛОЩЕНА вычиткой — её отпечаток
+    записан в `proofread_absorbed`, и сам `review.already_applied` с этого
+    момента считает строку применённой независимо от текста поля.
+
+    Поэтому спрашиваем не «трогал ли это поле читатель», а «остаётся ли его
+    правка применённой ПОСЛЕ нашей». Судья — сам review.py: один исполнитель
+    правил, а не вторая копия рассуждения о них. Проверено на живой
+    карточке: перенос предложения из `eco.context` в `law.terms` оставляет
+    `test_review_table_is_applied_and_not_pending` зелёным.
+    """
+    for row in review.FIXES:
+        if row["id"] != card["id"] or row.get("field") not in fields:
+            continue
+        if not review.already_applied(row, card, companies):
+            return False
+    return True
 
 ROLE_IDS = ("buyer", "seller_id", "target", "asset_id")
 SRC_RX = re.compile(r"^src\[(\d+)\]\[(\d+)\]$")
@@ -135,7 +161,7 @@ def main(write: bool, out_dir=None) -> int:
             skipped += len(parts)
             continue
         before = copy.deepcopy(card)
-        trouble, done = None, []
+        trouble, done, touched_decided = None, [], set()
         for it in parts:
             field = str(it.get("field") or "")
             new = it.get("new_full_text")
@@ -143,8 +169,7 @@ def main(write: bool, out_dir=None) -> int:
                 trouble = "правка без поля"
                 break
             if not field.startswith("company:") and (cid, field) in decided:
-                trouble = "%s решено читателем review.py" % field
-                break
+                touched_decided.add(field)
             if field in ROLE_IDS and new and new not in companies:
                 trouble = "профиля %s нет в базе — это была бы выдумка" % new
                 break
@@ -195,6 +220,12 @@ def main(write: bool, out_dir=None) -> int:
                 and any(p.get("field") == "target" for p in parts):
             card.pop("target_was_seller", None)
             done.append("target_was_seller снят (предмет привязан)")
+        # Поля, которых когда-то касался читатель, проверяем ТОЧНО: остаются
+        # ли его строки применёнными после нашей правки. Судит сам review.py.
+        if not trouble and touched_decided \
+                and not readers_rows_still_hold(card, companies, touched_decided):
+            trouble = ("правка оставила бы строку читателя (%s) неприменённой"
+                       % ", ".join(sorted(touched_decided)))
         if not trouble and not roles_are_distinct(card):
             trouble = "после правки компания заняла бы две роли"
         if trouble:

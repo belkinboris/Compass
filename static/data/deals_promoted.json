@@ -186842,14 +186842,14 @@
      "card_hash": "331879a007a7"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gc30a99a3",
+     "inn": "7743084941",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "f38a9ecca328"
     },
     "admitted": {
      "count": true,
@@ -186863,11 +186863,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "target": "gc30a99a3"
   },
   {
    "id": "c0b43766f",
