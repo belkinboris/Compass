@@ -1565,3 +1565,37 @@ def test_no_two_cards_claim_one_deal_is_both_closed_and_unconfirmed(base):
     unexplained = [c for c in clashes if c[0] not in known_separate]
     assert not unexplained, (
         "карточки одной пары «покупатель → предмет» спорят о статусе: %s" % unexplained)
+
+
+def test_a_party_is_not_the_business_it_sold(base):
+    """Продавец не ведёт на профиль бизнеса, который он же продал.
+
+    У четырёх карточек `seller_id` указывал на проданный актив: «Heineken
+    продал активы в России» — а продавцом стоял профиль «Heineken
+    (российский бизнес)». На сайте сделка показывалась на странице
+    проданной компании как её собственная продажа, настоящего продавца на
+    карточке не было вовсе.
+
+    Причина общая: у 17 профилей-дочек («Knauf (российский бизнес)»,
+    «Avon (российское подразделение)») среди псевдонимов стоит голое имя
+    МАТЕРИ, ключ поиска у них один, и привязка по имени попадала в дочку.
+    Запрет стоит в `link_parties.py`, где решается роль; этот тест — забор
+    с другой стороны, по всей базе и по любому пути записи.
+    """
+    import sys, os
+    sys.path.insert(0, os.path.join(ROOT, "pipeline", "ingest"))
+    from link_parties import _is_parent_of_subsidiary
+
+    bad = []
+    for deal in base["deals"]:
+        for id_field, text_field in (("seller_id", "seller"), ("buyer", "buyer_name")):
+            cid = deal.get(id_field)
+            if not cid:
+                continue
+            name = (base["companies"].get(cid) or {}).get("name") or ""
+            text = str(deal.get(text_field) or "")
+            if text and _is_parent_of_subsidiary(text, name):
+                bad.append((deal["id"], id_field, text, name))
+    assert not bad, ("сторона привязана к профилю своего же проданного бизнеса: %s — "
+                     "снимите ссылку (имя остаётся текстом) или заведите профиль "
+                     "материнской компании" % bad[:5])

@@ -2324,7 +2324,6 @@
    "seller_id": "ga3c5b4db",
    "seller": "«Транслом» (структура компании «Кронос»)",
    "seller_src": "profile_role",
-   "target_was_seller": true,
    "asset": "Финтех-сервис «Вториум»",
    "party_evidence": {
     "target": [
@@ -3036,7 +3035,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "seller_id": "gb9c8945c"
   },
   {
    "id": "g339dfcc8",
@@ -4628,7 +4628,7 @@
    "date": "2026-06-03",
    "title": "SkyNet приобрела интернет-провайдера Rnet (ООО «Фишнет Коммюникейшнз»)",
    "buyer": "gfd1c35bc",
-   "target": null,
+   "target": "g145d7380",
    "ind": "Телеком",
    "type": "M&A",
    "kind": "acquisition",
@@ -4706,14 +4706,14 @@
      "card_hash": "53c7e7e38d86"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g145d7380",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fc40b98a04b5"
     },
     "admitted": {
      "count": true,
@@ -4727,7 +4727,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    }
   },
@@ -6098,7 +6098,6 @@
    "seller": "Тигран Шахбазян, Татьяна Петрова, Рубен Асатурян, Карапет Зананян",
    "seller_src": "text",
    "seller_id": "g7ce7111f",
-   "target_was_seller": true,
    "party_evidence": {
     "target": [
      {
@@ -7240,7 +7239,7 @@
    "date": "2026-04-15",
    "title": "РЖД выставляет на торги небоскреб Moscow Towers в Москва-Сити",
    "buyer": null,
-   "target": null,
+   "target": "g4734fbe4",
    "ind": "Недвижимость",
    "type": "Продажа с торгов",
    "kind": "acquisition",
@@ -7314,7 +7313,6 @@
    "seller_id": "g8ec7e7bf",
    "seller": "РЖД",
    "seller_src": "manual_2026",
-   "target_was_seller": true,
    "asset": "Moscow Towers",
    "added": "2026-07-15",
    "reviewed": "2026-08-10",
@@ -7352,14 +7350,14 @@
      "card_hash": "b601851eeb6f"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g4734fbe4",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b615de409dc0"
     },
     "admitted": {
      "count": true,
@@ -18436,7 +18434,7 @@
    "id": "gff35947d",
    "date": "2022-12-15",
    "title": "Бренд женской одежды Noun привлёк 200 млн рублей от «ТилТех Капитал» (третий раунд)",
-   "buyer": null,
+   "buyer": "g90031892",
    "ind": "Ритейл",
    "type": "Инвестиция",
    "kind": "financing",
@@ -18492,7 +18490,6 @@
    ],
    "extra": "Это был третий раунд инвестиций «ТилТех Капитал» в Noun; всего фонд вложил в компанию 290 млн ₽. Деньги предназначались на открытие новых собственных магазинов и офиса в Москве, запуск франчайзинговой сети в регионах, расширение ассортимента и открытие склада. К концу 2022 года у компании было 15 монобрендовых магазинов, а к 2024 году их число планировалось довести до 100. Оценка компании по итогам раунда не раскрывалась; чистая прибыль ООО «Модная розница» по итогам 2021 года — 4,7 млн ₽.",
    "auto": true,
-   "buyer_name": "«ТилТех Капитал»",
    "added": "2026-07-15",
    "asset": "Noun",
    "reviewed": "2026-08-09",
@@ -19764,7 +19761,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "sum_basis": "reported"
+   "sum_basis": "reported",
+   "seller_id": "gdc4235da"
   },
   {
    "id": "gde4f9941",
@@ -21435,7 +21433,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller_id": "gdc4235da"
   },
   {
    "id": "g8559b920",
@@ -26172,7 +26171,6 @@
    "seller": "Банк «Траст»",
    "seller_src": "text",
    "seller_id": "gdc4235da",
-   "target_was_seller": true,
    "themes": [
     "Продажа с торгов",
     "Банкротство / долги"
@@ -29019,7 +29017,6 @@
    "seller_id": "g9fd82fee",
    "seller": "Росимущество",
    "seller_src": "manual_2026",
-   "target_was_seller": true,
    "asset": "активы АО «СПИ-РВВК» и ООО «РВВК»",
    "added": "2026-07-15",
    "reviewed": "2026-08-10",
@@ -33649,7 +33646,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "target_bank"
     }
-   }
+   },
+   "seller_id": "gdf829638"
   },
   {
    "id": "gbc48b9e4",
@@ -39409,7 +39407,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "buyer_name": "Руслан Саркисов (80%), Константин Гибало и Артур Мартиросов (по 10%)"
+   "buyer_name": "Руслан Саркисов (80%), Константин Гибало и Артур Мартиросов (по 10%)",
+   "seller_id": "g088e8f9f"
   },
   {
    "id": "g0cf6a562",
@@ -41390,7 +41389,6 @@
    "seller": "Дочка «ВСМПО-Ависма» («Авитранс»)",
    "seller_src": "text",
    "seller_id": "gff44d7b7",
-   "target_was_seller": true,
    "party_evidence": {
     "target": [
      {
@@ -52997,7 +52995,7 @@
    "id": "g2543c41a",
    "date": "2022-06-14",
    "title": "Инвестиция VEB Ventures (венчурный фонд ВЭБ.РФ) в EdTech-платформу профориентации «Профилум»",
-   "buyer": null,
+   "buyer": "g2eb91bc8",
    "target": "ge62128f3",
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
@@ -53050,7 +53048,6 @@
    ],
    "extra": "Платформа «Профилум», основанная в 2014 году Анной Шайхутдиновой и Виталием Алтуховым, использует психометрическое тестирование и анализ рынка труда для профориентации школьников; среди акционеров компании до сделки числились Genome Ventures, ГК «Просвещение» и Андрей Шаронов. В июле 2021 года компания уже привлекала 130 млн ₽ от АФК «Система», а выручка за 2021 год составила 37,7 млн ₽ при чистом убытке 32,9 млн ₽. По планам, до конца 2022 года платформа должна была войти в основу президентского профориентационного проекта «Билет в будущее»; генеральный директор VEB Ventures Олег Теплов отмечал, что равные образовательные возможности способны повысить производительность труда на 2,5% ВВП.",
    "auto": true,
-   "buyer_name": "VEB Ventures (венчурный фонд ВЭБ.РФ)",
    "added": "2026-07-15",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-15",
@@ -59367,7 +59364,6 @@
    "extra": "Бизнес-центр Art Plaza площадью около 15 000 кв. м на Лужнецкой набережной перешёл от компании «Русская энергия» Романа Троценко к Газпромбанку.",
    "auto": true,
    "promoted_from_bulk": true,
-   "target_was_seller": true,
    "seller": "Русская энергия",
    "seller_src": "title",
    "seller_id": "g5d22aa06",
@@ -62432,7 +62428,6 @@
    "extra": "",
    "auto": true,
    "promoted_from_bulk": true,
-   "target_was_seller": true,
    "seller": "Home Shopping Europe",
    "seller_src": "title",
    "seller_id": "gd1fddb54",
@@ -64300,7 +64295,6 @@
    "extra": "Сбербанк продал 100% акций Sber Vermögensverwaltungs AG in Abwicklung (прежнее название — Sberbank Europe AG) австрийскому предпринимателю Штефану Зочлингу. Зочлинг владеет компанией Remus, раньше работал инвестиционным банкиром в группе «Базовый элемент» Дерипаски и знакомый Германа Грефа. Сделка прошла по исключению ЕС для сделок, начатых до введения санкций.",
    "auto": true,
    "promoted_from_bulk": true,
-   "target_was_seller": true,
    "seller": "Сбербанк",
    "seller_src": "title",
    "seller_id": "g28ff15bb",
@@ -65622,7 +65616,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller_id": "g1ea0e717"
   },
   {
    "id": "g7edd263c",
@@ -69702,7 +69697,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "gd6c3c0ff"
   },
   {
    "id": "ge6b63fd9",
@@ -84788,7 +84784,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "g8259f2b1"
   },
   {
    "id": "g9da487d4",
@@ -85399,7 +85396,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "ge370cfae"
   },
   {
    "id": "g93724e30",
@@ -85765,7 +85763,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g28ff15bb"
   },
   {
    "id": "g0924279f",
@@ -86609,7 +86608,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_bank"
     }
-   }
+   },
+   "seller_id": "g6617345f"
   },
   {
    "id": "g6a6de6a6",
@@ -101180,7 +101180,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g11514f2e"
   },
   {
    "id": "g3b356148",
@@ -109046,7 +109047,8 @@
      "top_purchases": "ok",
      "multiple_text": "perimeter_not_verified"
     }
-   }
+   },
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "g10adb6ac",
@@ -112876,7 +112878,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "g9c1a072e"
   },
   {
    "id": "g1a6f4fec",
@@ -115536,7 +115539,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g5fd82a34"
   },
   {
    "id": "g60c0956e",
@@ -128071,7 +128075,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "gcafc31dc"
   },
   {
    "id": "gcef5a371",
@@ -131873,7 +131878,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "g60f722fc"
   },
   {
    "id": "g46cc9712",
@@ -136995,7 +137001,6 @@
    "followup_researched": "2026-09-02",
    "buyer_name": "Управление агробизнесом (менеджмент Viterra)",
    "seller": "Viterra",
-   "seller_id": "g1a6194cd",
    "proofread_absorbed": {
     "eco.share": [
      "ab6db8b09be8"
@@ -137631,7 +137636,6 @@
    "promoted_from_bulk": true,
    "seller": "Viterra",
    "seller_src": "title",
-   "seller_id": "g1a6194cd",
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-15",
@@ -140088,7 +140092,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "ge2585926"
   },
   {
    "id": "gb31c796f",
@@ -162460,7 +162465,7 @@
    "id": "g6168731b",
    "date": "2023",
    "title": "Heineken продает российский бизнес неразглашаемому покупателю",
-   "buyer": null,
+   "buyer": "arnest",
    "target": "ga1647be0",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -162525,7 +162530,6 @@
    "seller_src": "text",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
-   "buyer_name": "Группа «Арнест»",
    "deep_researched": "2026-08-15",
    "weekly_researched": "2026-08-15",
    "proofread_absorbed": {
@@ -162842,7 +162846,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g5a9b2039"
   },
   {
    "id": "g2ecf6ee9",
@@ -165986,7 +165991,6 @@
    "promoted_from_bulk": true,
    "seller_src": "text",
    "seller_id": null,
-   "target_was_seller": true,
    "added": "2026-07-23",
    "asset": "ООО «Кисс Коала»",
    "reviewed": "2026-08-09",
@@ -167253,7 +167257,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g47fde1f7"
   },
   {
    "id": "g547ff4b8",
@@ -170661,7 +170666,6 @@
    "promoted_from_bulk": true,
    "seller": "Heineken",
    "seller_src": "title",
-   "seller_id": "ga1647be0",
    "added": "2026-07-23",
    "reviewed": "2026-08-10",
    "deep_researched": "2026-08-15",
@@ -181985,14 +181989,14 @@
      "card_hash": "c1c7db2a247f"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g6f4bb996",
+     "inn": "9701161771",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "12a09f3a86e4"
     },
     "admitted": {
      "count": true,
@@ -182006,10 +182010,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "target": "g6f4bb996"
   },
   {
    "id": "c171fe137",
@@ -183041,7 +183046,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller_id": "g12111389"
   },
   {
    "id": "cb7eb501d",
@@ -184725,14 +184731,14 @@
      "card_hash": "6db16252db47"
     },
     "target": {
-     "company_id": null,
+     "company_id": "geed37a89",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "e47a98e33e1c"
     },
     "admitted": {
      "count": true,
@@ -184746,12 +184752,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
    },
    "buyer_name": "Ибрагим Загидулин и Елизавета Чайка",
    "followup_researched": "2026-09-07",
-   "seller": "Equifax Luxembourg"
+   "seller": "Equifax Luxembourg",
+   "target": "geed37a89"
   },
   {
    "id": "c65f082d8",
@@ -192792,14 +192799,14 @@
      "card_hash": "b6ff3a5b2582"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g12c86c6a",
+     "inn": "7729058330",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "074e1d6fd769"
     },
     "admitted": {
      "count": true,
@@ -192813,10 +192820,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "target": "g12c86c6a"
   },
   {
    "id": "cb1991390",
@@ -210859,7 +210867,6 @@
    },
    "proofread": "2026-09-11",
    "target": "g6c930a0d",
-   "seller_id": "gc6965a4f",
    "weekly_researched": "2026-09-18"
   },
   {

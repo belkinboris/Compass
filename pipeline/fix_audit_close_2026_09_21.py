@@ -186,6 +186,15 @@ def main(write: bool, out_dir=None) -> int:
             else:
                 card.pop("buyer_name", None)
                 done.append("buyer_name снято (имя несёт профиль)")
+        # Флаг «предметом стоял продавец» — пометка о ДЕФЕКТЕ, а не факт
+        # сделки: клиент по нему выводит сноску «подробности о предмете — во
+        # вкладке «Экономист»». Как только предмет привязан, пометка врёт о
+        # состоянии карточки. Снимается тем же движением, что и в
+        # `merge_essity_shilov_dup.py`.
+        if not trouble and card.get("target") and card.get("target_was_seller") \
+                and any(p.get("field") == "target" for p in parts):
+            card.pop("target_was_seller", None)
+            done.append("target_was_seller снят (предмет привязан)")
         if not trouble and not roles_are_distinct(card):
             trouble = "после правки компания заняла бы две роли"
         if trouble:

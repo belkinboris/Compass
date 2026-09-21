@@ -6369,3 +6369,34 @@ def test_resolve_duplicates_apply_separate_releases_the_draft_as_its_own_card(tm
     key = promote.raw_key(draft["title"])
     assert key not in state.get("raw_titles", {}), (
         "separate не должен помечать черновик как чужое обогащение — он стал своей карточкой")
+
+
+def test_parent_company_is_not_linked_to_the_subsidiary_it_sold():
+    """Продавец «Faurecia» не становится профилем «Faurecia (российские активы)».
+
+    У 17 профилей-дочек («Knauf (российский бизнес)», «Avon (российское
+    подразделение)», «Caterpillar (российские активы)») среди псевдонимов
+    стоит голое имя МАТЕРИ. Ключ поиска у них поэтому один, и сторона,
+    названная в карточке просто «Avon», связалась бы с профилем того
+    самого актива, который она продала: одна запись оказалась бы и
+    продавцом, и предметом. Нашли читатели очереди аудита 21 сентября
+    2026 на парах Natura&Co / Avon и SoftwareONE.
+
+    Псевдонимы при этом остаются: по ним профиль дочки ищут законно
+    («продан российский бизнес Knauf»). Запрет стоит там, где решается
+    роль, и только на случае «текст — голое имя матери».
+    """
+    import link_parties
+
+    for text, profile in (("Faurecia", "Faurecia (российские активы)"),
+                          ("Avon", "Avon (российское подразделение)"),
+                          ("Knauf", "Knauf (российский бизнес)"),
+                          ("Реккитт", "Reckitt (российский бизнес)")):
+        assert link_parties._is_parent_of_subsidiary(text, profile) or \
+            link_parties.company_key(text) != link_parties.company_key(
+                link_parties.SUBSIDIARY_MARK.sub("", profile).strip()), (text, profile)
+
+    # Обычные профили запрет не трогает — иначе он ломал бы привязку вообще.
+    for text, profile in (("Knauf", "Knauf"), ("Яндекс", "Яндекс"),
+                          ("Ponsse Plc", "Ponsse (российский бизнес)")):
+        assert not link_parties._is_parent_of_subsidiary(text, profile), (text, profile)
