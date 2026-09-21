@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d92096680",
+   "draft_id": "d36868700",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,7 +342,7 @@
    ]
   },
   {
-   "draft_id": "d58492071",
+   "draft_id": "d75995231",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -372,7 +372,7 @@
    ]
   },
   {
-   "draft_id": "d13364041",
+   "draft_id": "d52451145",
    "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
    "date": "2026-09-21",
    "src": [
@@ -402,17 +402,17 @@
    ]
   },
   {
-   "draft_id": "d22420114",
-   "title": "В «Аэрофлоте» оценили ситуацию на фондовом рынке для SPO",
+   "draft_id": "d39144926",
+   "title": "Экс-сотрудника СКР осудили за покупку диплома о техническом образовании",
    "date": "2026-09-21",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/aeroflot-873523965.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8971817"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -430,17 +430,57 @@
    ]
   },
   {
-   "draft_id": "d62233354",
-   "title": "Paramount урегулировала иски 12 штатов и продолжит слияние с Warner Bros.",
+   "draft_id": "d76732918",
+   "title": "Турция рассматривает объединение активов фондов для выплат инвесторам",
    "date": "2026-09-21",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8971725"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/305851"
+    ]
+   ],
+   "sum": "$18 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-21",
+     "title": "Переговоры",
+     "note": "Фонды, в отношении которых начата ликвидация, владеют инвестиционными активами более чем на $18 млрд Сообщение Турция рассматривает объединение активов фондов для выплат инвесторам появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/305851"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d91860898",
+   "title": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/21/ouras-2-2b-ipo-is-mostly-a-payday-for-existing-shareholders/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -459,13 +499,13 @@
    ]
   },
   {
-   "draft_id": "d15568575",
-   "title": "Допэмиссия «М.Видео»: есть ли идея в акциях ретейлера",
+   "draft_id": "d39155596",
+   "title": "Компанию, создавшую «Мир танков», могут продать в октябре",
    "date": "2026-09-21",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/radio/21/09/2026/6ab155bd9a79472010a98c2e"
+     "web:ura.news",
+     "https://ura.news/news/1053129516"
     ]
    ],
    "sum": null,
@@ -480,7 +520,35 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88696923",
+   "title": "Россиянин хотел купить телефон, а в итоге остался с кредитом на 116 тысяч",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129510"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
