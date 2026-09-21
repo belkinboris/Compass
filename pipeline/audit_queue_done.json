@@ -128,5 +128,21 @@
  "03f2d06ac7de": "extra→eco.share: доля 13,14% при IPO Кристалл (fix_audit_share_batch_2026_09_21.py)",
  "627d09afdb24": "extra→eco.share: доля 12% Аквариус (fix_audit_share_batch_2026_09_21.py)",
  "9c81f58482c6": "extra→eco.share: доля 91,63% Таганрогский порт (fix_audit_share_batch_2026_09_21.py)",
- "3a4513cc7d24": "eco.share очищен: факт об основателе уже дословно в desc профиля предмета g71a251f8 (fix_audit_share_batch_2026_09_21.py)"
+ "3a4513cc7d24": "eco.share очищен: факт об основателе уже дословно в desc профиля предмета g71a251f8 (fix_audit_share_batch_2026_09_21.py)",
+ "2e558aa91fef": "eco.context→eco.share: детализация долей основателей (fix_audit_context_batch_2026_09_21.py)",
+ "3cf4db62a418": "eco.context→eco.share: динамика доли Экспобанка (fix_audit_context_batch_2026_09_21.py)",
+ "8b91de4dfb37": "eco.context→eco.val: оценка стоимости актива (fix_audit_context_batch_2026_09_21.py)",
+ "32d7b0c949ba": "eco.context→eco.rationale: мотив продажи RuStore (fix_audit_context_batch_2026_09_21.py)",
+ "d19e3e0879b2": "eco.context→law.struct: юрлицо перехода контроля (fix_audit_context_batch_2026_09_21.py)",
+ "e44cc71dd887": "eco.context→law.struct: юрлица, на которые оформлены активы (fix_audit_context_batch_2026_09_21.py)",
+ "fac68270118e": "eco.context→eco.val: оценка суммы сделки (fix_audit_context_batch_2026_09_21.py)",
+ "781a89160b31": "eco.context→eco.rationale: мотив продажи (fix_audit_context_batch_2026_09_21.py)",
+ "7e8561db9658": "eco.context→eco.target_fin: выручка и убыток предмета (fix_audit_context_batch_2026_09_21.py)",
+ "08e65c668f9f": "eco.context→law.struct: механика двухшаговой передачи 100% (fix_audit_context_batch_2026_09_21.py)",
+ "5301114d021d": "eco.context→eco.target_fin: чистая прибыль предмета (fix_audit_context_batch_2026_09_21.py)",
+ "23189fbfe508": "eco.context→eco.rationale: альтернативный мотив передачи (fix_audit_context_batch_2026_09_21.py)",
+ "5eebdafd2715": "eco.context→law.struct: номинальное владение в интересах АФК Система (fix_audit_context_batch_2026_09_21.py)",
+ "2b16cad08a05": "eco.context→law.struct: юрлицо покупки долей (fix_audit_context_batch_2026_09_21.py)",
+ "18910cc6f835": "eco.context→law.appr: решение суда, цитата сверена заново (карточка из слияния) (fix_audit_context_batch_2026_09_21.py)",
+ "cd17db81b87e": "eco.context→law.appr: указ президента, цитата сверена заново (карточка из слияния) (fix_audit_context_batch_2026_09_21.py)"
 }
