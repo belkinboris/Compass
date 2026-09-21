@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d40738951",
+   "draft_id": "d20591397",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,64 +342,7 @@
    ]
   },
   {
-   "draft_id": "d45203712",
-   "title": "Минфин допустил SPO «Аэрофлота» и до конца текущего, и в следующем году",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1117436"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: конца, минфин) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d31810917",
-   "title": "Совет директоров «М.Видео» определил цену допэмиссии акций",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/305778"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31033222",
+   "draft_id": "d89646329",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -429,7 +372,7 @@
    ]
   },
   {
-   "draft_id": "d56936804",
+   "draft_id": "d11345919",
    "title": "В «М.видео» определили цену размещения допэмиссии",
    "date": "2026-09-21",
    "src": [
@@ -452,14 +395,12 @@
    },
    "ind": "Ритейл",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d37008252",
+   "draft_id": "d90346695",
    "title": "Ретейлер «М.Видео» установил цену допэмиссии выше рынка",
    "date": "2026-09-21",
    "src": [
@@ -485,109 +426,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+    "та же новость, что «В «М.видео» определили цену размещения допэмиссии» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d75249051",
-   "title": "Минфин по-прежнему рассчитывает провести в 2026 году два-три SPO госкомпаний",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28135241"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку gd9ccfdd2 (общие редкие слова: минфин, рассчи) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d45818802",
-   "title": "Paramount обсудила миллиардные инвестиции ради покупки Warner Bros. Discovery",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/paramount-obsudila-milliardnye-investitsii-radi-pokupki-warner-bros-discovery/"
-    ]
-   ],
-   "sum": "$1,5 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-21",
-     "title": "Переговоры",
-     "note": "Paramount готова на новые уступки ради покупки Warner Bros. Discovery: компания обсуждает с властями инвестиции $1,5 млрд и другие условия сделки.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/paramount-obsudila-milliardnye-investitsii-radi-pokupki-warner-bros-discovery/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d43924744",
-   "title": "В Саратовской области за 349 млн рублей продают бывший санаторий «РЖД-Здоровье»",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/09/21/v-saratovskoy-oblasti-za-349-mln-rubley-prodayut-byvshiy-sanatoriy-rzhd-zdorove/"
-    ]
-   ],
-   "sum": "349 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69094260",
+   "draft_id": "d89158880",
    "title": "«М.Видео» определил цену акции по допэмиссии",
    "date": "2026-09-21",
    "src": [
@@ -613,21 +456,77 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+    "та же новость, что «В «М.видео» определили цену размещения допэмиссии» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d68920327",
-   "title": "Китай стал крупнейшим источником иностранных инвестиций в Грузии",
+   "draft_id": "d71618724",
+   "title": "Вымогательство без шифрования: «Лаборатория Касперского» выявила сложную кибератаку на производство, нацеленную на получение выкупа",
    "date": "2026-09-21",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/kitaj-873507197.html"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-21_vymogatelstvo_bez_shifrovaniya"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38309540",
+   "title": "«Росвексель»: платформы могут облегчить инвесторам покупку цифровых золотых продуктов",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28135619"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42113852",
+   "title": "Венгрия попросила США подождать с наказанием за покупку нефти в России",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/odozhzhi/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
