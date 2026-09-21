@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d74999276",
+   "draft_id": "d64317000",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,7 +342,7 @@
    ]
   },
   {
-   "draft_id": "d32541126",
+   "draft_id": "d54230537",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -372,35 +372,7 @@
    ]
   },
   {
-   "draft_id": "d22283747",
-   "title": "Ретейлер «М.Видео» установил цену допэмиссии выше рынка",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/21/09/2026/6aac0c039a7947df2ff8d6e0"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18907239",
+   "draft_id": "d75607507",
    "title": "«М.Видео» определил цену акции по допэмиссии",
    "date": "2026-09-21",
    "src": [
@@ -423,138 +395,12 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Ретейлер «М.Видео» установил цену допэмиссии выше рынка» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d71389758",
-   "title": "Почти 300 вещей Брижит Бардо выставили на аукцион в Париже",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ab101a5ba14ff6989bb63ff"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d67970384",
-   "title": "Очередной раунд переговоров с Бахрейном о налоговом соглашении пройдет в октябре",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1117480"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-21",
-     "title": "Переговоры",
-     "note": "Минфин РФ планирует провести в октябре очередной раунд переговоров с Бахрейном о заключении соглашения об избежании двойного налогообложения (СИДН), сообщил журналистам замминистра финансов РФ Алексей Сазанов.\"Мы сейчас в основном с Бахрейном ведём переговоры.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/world/1117480"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22968395",
-   "title": "Мишустин: в Донбассе и Новороссии покупается на треть больше страховок",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28135919"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Страхование",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15874521",
-   "title": "Мишустин рассказал о работе над стимулами для бизнеса к размещению акций",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/mishustin-873515021.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d75281887",
+   "draft_id": "d42519276",
    "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
    "date": "2026-09-21",
    "src": [
@@ -584,13 +430,54 @@
    ]
   },
   {
-   "draft_id": "d60349801",
-   "title": "Кроссовер Toyota RAV4 появился в продаже в России",
+   "draft_id": "d18954231",
+   "title": "Минфин пока не планирует продажи акций крупных госкомпаний",
    "date": "2026-09-21",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/21/krossover-toyota-rav4-poyavilsya-v-prodazhe-v-rossii/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28136165"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-21",
+     "title": "Переговоры",
+     "note": "Министр финансов напомнил, что планируется продажа акций \"Аэрофлота\", Шереметьево и Новороссийского торгового порта",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28136165"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
+    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: минфин, планир) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d38233133",
+   "title": "Риелтор рассказала, почему Салтыкова не могла продать квартиру из «Брата-2»",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260921/saltykova-2119285312.html"
     ]
    ],
    "sum": null,
@@ -606,6 +493,103 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf8251f99 (общие редкие слова: кварти, салтык) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d23728446",
+   "title": "Минфин не намерен по дешевке продавать госкомпании, заявил Моисеев",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260921/minfin-2119300195.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-21",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260921/minfin-2119300195.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33377628",
+   "title": "Самую богатую депутатку признали виновной в продаже особняка в центре Москвы",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/samuyu-bogatuyu-deputatku-priznali-vinovnoy-v-prodazhe-osobnyaka-v-tsentre-moskvy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2b62ae77 (общие редкие слова: москвы, центре) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d13510656",
+   "title": "В Перми продается здание действующего гипермаркета",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129424"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
