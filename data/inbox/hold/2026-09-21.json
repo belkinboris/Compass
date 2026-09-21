@@ -312,46 +312,7 @@
    ]
   },
   {
-   "draft_id": "d67769740",
-   "title": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7743"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-21",
-     "title": "Сделка завершена",
-     "note": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли несколько компаний группы, формирующих единый…",
-     "source": [
-      "tg:rusven",
-      "https://t.me/rusven/7743"
-     ]
-    }
-   ],
-   "buyer_name": "“Корпорация робототехники” [входит в АФК “Система”]",
-   "asset": "доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "“Корпорация робототехники” [входит в АФК “Система”]",
-    "asset": "доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автом",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "закрытая сделка названа настоящим временем — заголовок нужно привести к завершённому действию"
-   ]
-  },
-  {
-   "draft_id": "d30582152",
+   "draft_id": "d40738951",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -381,35 +342,7 @@
    ]
   },
   {
-   "draft_id": "d79840066",
-   "title": "Моисеев: продажа госпакета «Аэрофлота» произойдет в 2026 или в 2027 году",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/21/1230460-prodazha-gospaketa-aeroflota"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50163810",
+   "draft_id": "d45203712",
    "title": "Минфин допустил SPO «Аэрофлота» и до конца текущего, и в следующем году",
    "date": "2026-09-21",
    "src": [
@@ -432,140 +365,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: конца, минфин) — проверьте, не дубль ли",
-    "та же новость, что «Моисеев: продажа госпакета «Аэрофлота» произойдет в 2026 или» — второе издание, в группу не шлём"
+    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: конца, минфин) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d86417320",
-   "title": "RTL Info: в Бельгии с 22 сентября дизель будут продавать по рекордной цене",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28134923"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64823282",
-   "title": "Совет директоров «М.Видео» определил цену размещения допэмиссии акций",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28134883"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81355226",
-   "title": "Reuters: в 2025 году по всему миру продали около 7 тыс. человекоподобных роботов",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28134783"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-21",
-     "title": "Сделка завершена",
-     "note": "Генеральный секретарь организации Сюзанна Биллер заявила агентству, что количество человекоподобных роботов по-прежнему составляет \"лишь небольшую долю\" от общего числа роботов в мире",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28134783"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "около 7 тыс. человекоподобных роботов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "около 7 тыс. человекоподобных роботов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d53597351",
-   "title": "McKinsey назвала пять направлений, инвестиции в которые вырастут в разы в 2026 году",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/305768"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d14727031",
+   "draft_id": "d31810917",
    "title": "Совет директоров «М.Видео» определил цену допэмиссии акций",
    "date": "2026-09-21",
    "src": [
@@ -588,14 +394,12 @@
    },
    "ind": "Ритейл",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Совет директоров «М.Видео» определил цену размещения допэмис» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d50149615",
+   "draft_id": "d31033222",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -625,17 +429,205 @@
    ]
   },
   {
-   "draft_id": "d29633052",
-   "title": "Поверенный Паслера распродает подарки его предшественника",
+   "draft_id": "d56936804",
+   "title": "В «М.видео» определили цену размещения допэмиссии",
    "date": "2026-09-21",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053129312"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/21/1230470-mvideo-dopemissii"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d37008252",
+   "title": "Ретейлер «М.Видео» установил цену допэмиссии выше рынка",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/21/09/2026/6aac0c039a7947df2ff8d6e0"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d75249051",
+   "title": "Минфин по-прежнему рассчитывает провести в 2026 году два-три SPO госкомпаний",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28135241"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку gd9ccfdd2 (общие редкие слова: минфин, рассчи) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d45818802",
+   "title": "Paramount обсудила миллиардные инвестиции ради покупки Warner Bros. Discovery",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/paramount-obsudila-milliardnye-investitsii-radi-pokupki-warner-bros-discovery/"
+    ]
+   ],
+   "sum": "$1,5 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-21",
+     "title": "Переговоры",
+     "note": "Paramount готова на новые уступки ради покупки Warner Bros. Discovery: компания обсуждает с властями инвестиции $1,5 млрд и другие условия сделки.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/paramount-obsudila-milliardnye-investitsii-radi-pokupki-warner-bros-discovery/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d43924744",
+   "title": "В Саратовской области за 349 млн рублей продают бывший санаторий «РЖД-Здоровье»",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/09/21/v-saratovskoy-oblasti-za-349-mln-rubley-prodayut-byvshiy-sanatoriy-rzhd-zdorove/"
+    ]
+   ],
+   "sum": "349 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69094260",
+   "title": "«М.Видео» определил цену акции по допэмиссии",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/sovet-873507735.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Совет директоров «М.Видео» определил цену допэмиссии акций» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d68920327",
+   "title": "Китай стал крупнейшим источником иностранных инвестиций в Грузии",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/kitaj-873507197.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
