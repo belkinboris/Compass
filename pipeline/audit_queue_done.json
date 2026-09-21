@@ -170,5 +170,19 @@
  "f58e9e2b9725": "extra→law.struct: гипотеза о природе сделки (fix_audit_extra_batch2_2026_09_21.py)",
  "4ca025cc34ce": "extra→eco.fin: форма расчётов, разбор одного предложения на два (fix_audit_extra_batch2_2026_09_21.py)",
  "2c19fda37880": "extra→eco.rationale: мотив покупателя, разбор одного предложения на два (fix_audit_extra_batch2_2026_09_21.py)",
- "b8def117433d": "extra→eco.target_fin: выручка приобретённых заводов (fix_audit_extra_batch2_2026_09_21.py)"
+ "b8def117433d": "extra→eco.target_fin: выручка приобретённых заводов (fix_audit_extra_batch2_2026_09_21.py)",
+ "5b420349fcb1": "перенесено eco.context→eco.target_fin (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "a71fe2f461f6": "перенесено eco.val→eco.fin (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "c1c5429bce34": "перенесено eco.val→eco.fin (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "85a094071099": "перенесено eco.val→eco.fin (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "2cfa75f8b42f": "перенесено extra→eco.val (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "82ff55d3de6e": "перенесено eco.share→eco.val (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "8a705f09718b": "перенесено eco.share→eco.context (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "d8370232b28d": "перенесено extra→eco.share (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "f90170c22ea9": "перенесено eco.context→eco.rationale (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "7d6d7e727be4": "перенесено eco.fin→eco.context (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "f2c5e5d20476": "дубль sum/eco.sum убран из eco.val без переноса (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "81f9d731c5a3": "убран из eco.finadv без переноса — судебный оценщик, не консультант сделки (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "c678c82fb0c4": "дубль убран из eco.target_fin (уже в extra) без переноса (fix_audit_field_misplaced_batch1_2026_09_21.py)",
+ "953af8df14bc": "перенесено eco.share→eco.context (fix_audit_field_misplaced_batch1_2026_09_21.py)"
 }
