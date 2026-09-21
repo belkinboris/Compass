@@ -92,6 +92,10 @@ br = await p.chromium.launch(executable_path="/opt/pw-browsers/chromium")
 платную квоту (оба случая уже происходили). Запуск локального сервера
 для health-check/приёмочных сценариев — ТОЛЬКО так:
 `DATA_REFRESH_ENABLED=0 TELEGRAM_BOT_TOKEN= API_FNS_KEY= uvicorn main:app`.
+Для приёмки (`acceptance_check.py`) к трём переменным добавляется четвёртая,
+`ACCESS_GATE=0`: она не про безопасность, а про то, что иначе браузер видит
+дверь «Войти / Запросить доступ» вместо витрины и сценарий падает так, будто
+с витрины пропал блок.
 `conftest.py` делает это за `pytest` сам, но ручной запуск сервера — нет.
 Подробности и найденные инциденты — `KNOWN_ISSUES.md`.
 

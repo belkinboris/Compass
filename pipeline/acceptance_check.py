@@ -270,6 +270,24 @@ def check_browser(base: str, p: Protocol) -> None:
         page = ctx.new_page()
         errors: list[str] = []
         page.on('pageerror', lambda e: errors.append(str(e)))
+        if not external:
+            # Локальный сервер, поднятый без ACCESS_GATE=0, показывает дверь
+            # («Войти / Запросить доступ») вместо сайта. Без этой проверки
+            # приёмка падала невнятно — «Timeout 60000ms exceeded, waiting for
+            # .an-c-topsum .an-deal», — и это читается как «блок исчез с
+            # витрины», хотя браузер просто не дошёл до витрины. Сообщение
+            # должно называть причину, а не симптом (21 сентября 2026).
+            try:
+                with urllib.request.urlopen(base + '/api/me', timeout=15) as r:
+                    if json.loads(r.read()).get('gate'):
+                        p.add('Экраны в браузере', False, base,
+                              'на сервере включён вход по заявке (ACCESS_GATE): браузер видит дверь, '
+                              'а не сайт. Поднимите сервер как ACCESS_GATE=0 DATA_REFRESH_ENABLED=0 '
+                              'TELEGRAM_BOT_TOKEN= API_FNS_KEY= uvicorn main:app')
+                        browser.close()
+                        return
+            except Exception:  # noqa: BLE001
+                pass  # не достучались до /api/me — пусть падает обычным путём
         page.goto(base + '/#/analytics')
         page.wait_for_function('typeof DEALS!=="undefined" && DEALS.length>1000', timeout=90000)
         page.wait_for_selector('.an-c-topsum .an-deal', timeout=60000)
