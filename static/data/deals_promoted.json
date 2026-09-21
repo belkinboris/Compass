@@ -8788,10 +8788,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d060c4b7a7ea"
+     "card_hash": "e4ced9a28d70"
     },
     "date": {
      "value": "2026-02-04",
@@ -8833,7 +8833,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g14fd5ba9",
@@ -8978,7 +8979,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "≈30 млрд ₽ (по оценке)",
+   "sum": null,
    "eco": {
     "sum": "≈30 млрд ₽ (по оценке)",
     "share": "100% долей польской CanPack S.A. и французской Tapon France в ООО «Кэн-пак» и ООО «Кэн-пак завод упаковки» переданы во временное управление ООО «Стальэлемент»; право собственности сохраняется за CanPack.",
@@ -9052,10 +9053,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "estimate",
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "219dc3ec9ee9"
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2026-01-13",
@@ -15702,7 +15703,7 @@
    "buyer": null,
    "target": null,
    "ind": "Потребительские товары",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "100 млн ₽",
@@ -15774,7 +15775,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "10403052fe79"
+     "card_hash": "28c72d6c0196"
     },
     "date": {
      "value": "2024-02-06",
@@ -15783,14 +15784,14 @@
      "card_hash": "a7399ce8f9e9"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9054609c3eec"
+     "card_hash": "9cb0c61f90b8"
     },
     "target": {
      "company_id": null,
@@ -15812,9 +15813,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -15902,11 +15903,11 @@
      "card_hash": "e1bfc3f641fc"
     },
     "price": {
-     "value_rub": 836000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "14d059eef392"
+     "card_hash": "103922fc6e2a"
     },
     "date": {
      "value": "2024-05-27",
@@ -15944,12 +15945,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
-   "seller": "ООО «Евродон-Юг»"
+   "seller": "ООО «Евродон-Юг»",
+   "sum_basis": "auction_start"
   },
   {
    "id": "gf8549c5f",
@@ -15958,7 +15960,7 @@
    "buyer": null,
    "target": "g427bcb12",
    "ind": "ИТ и интернет",
-   "type": "IPO",
+   "type": "Инвестиция",
    "kind": "ipo",
    "status": "Закрыта",
    "sum": "4 млрд ₽",
@@ -16041,7 +16043,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "bd905547586d"
+     "card_hash": "927a6cdaca21"
     },
     "date": {
      "value": "2024-05-30",
@@ -16057,7 +16059,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "cfd66f162641"
+     "card_hash": "82a692954acf"
     },
     "target": {
      "company_id": "g427bcb12",
@@ -18315,7 +18317,7 @@
    "title": "Инвестиции Артура Зеленого (Performance Group) в сервис оптимизации курьерской логистики TAMS (КС-Тех)",
    "buyer": null,
    "ind": "Транспорт и логистика",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "$500 тыс.",
@@ -18392,7 +18394,7 @@
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "3a646763c4e3"
+     "card_hash": "86fa3055f1a1"
     },
     "date": {
      "value": "2022-12-21",
@@ -18401,14 +18403,14 @@
      "card_hash": "0cc0249d28bf"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "80321367e50b"
+     "card_hash": "728dffab56f8"
     },
     "target": {
      "company_id": null,
@@ -18430,9 +18432,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -18973,7 +18975,7 @@
    "buyer": "g3daf2d35",
    "target": null,
    "ind": "Искусственный интеллект",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Обсуждается",
    "sum": "$15 млн",
@@ -19058,7 +19060,7 @@
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f4e7746dc149"
+     "card_hash": "61fa5bd17824"
     },
     "date": {
      "value": "2026-06-05",
@@ -19067,14 +19069,14 @@
      "card_hash": "b61d27e0e247"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "438cb0fa1796"
+     "card_hash": "3cd20f79c919"
     },
     "target": {
      "company_id": null,
@@ -19096,9 +19098,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -19858,11 +19860,11 @@
      "card_hash": "dd009eb3040b"
     },
     "price": {
-     "value_rub": 3500000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e25aeddfda11"
+     "card_hash": "a5be139b2b2d"
     },
     "date": {
      "value": "2023-02-14",
@@ -19904,7 +19906,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "auction_start"
   },
   {
    "id": "g4face480",
@@ -19913,7 +19916,7 @@
    "buyer": "gd3bb09b3",
    "target": null,
    "ind": "Агро",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "4,03 млрд ₽",
@@ -20002,7 +20005,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0a136bf917e9"
+     "card_hash": "c78370795b3b"
     },
     "date": {
      "value": "2022-12-20",
@@ -20014,11 +20017,11 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a49e073b557b"
+     "card_hash": "7de47abe921b"
     },
     "target": {
      "company_id": null,
@@ -20042,7 +20045,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -20498,10 +20501,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d74104974cf1"
+     "card_hash": "d7e1a2cbc728"
     },
     "date": {
      "value": "2022-02-27",
@@ -20543,7 +20546,8 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
-   }
+   },
+   "sum_basis": "not_a_price"
   },
   {
    "id": "gd01de1ad",
@@ -28769,10 +28773,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "57c8cbedbd23"
+     "card_hash": "f107d272f38d"
     },
     "date": {
      "value": "2022-10-14",
@@ -28814,7 +28818,8 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
-   }
+   },
+   "sum_basis": "not_a_price"
   },
   {
    "id": "g47844a63",
@@ -29038,11 +29043,11 @@
      "card_hash": "277954bae554"
     },
     "price": {
-     "value_rub": 1100000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1bfdff523e9d"
+     "card_hash": "030ab5a1fd5f"
     },
     "date": {
      "value": "2026-05-20",
@@ -29080,11 +29085,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum_basis": "auction_start"
   },
   {
    "id": "g676504a3",
@@ -30395,10 +30401,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "3ec356284550"
+     "card_hash": "892c34302265"
     },
     "date": {
      "value": "2023-10-27",
@@ -30441,7 +30447,8 @@
      "multiple_text": "no_target"
     }
    },
-   "asset": "Megapolis Distribution BV"
+   "asset": "Megapolis Distribution BV",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "g432502a3",
@@ -31664,11 +31671,11 @@
      "card_hash": "733a9ea3a885"
     },
     "price": {
-     "value_rub": 2100000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1d2596528851"
+     "card_hash": "6fe8fd93d664"
     },
     "date": {
      "value": "2022-07-15",
@@ -31706,12 +31713,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
-   "seller": "ООО «Донстар»"
+   "seller": "ООО «Донстар»",
+   "sum_basis": "auction_start"
   },
   {
    "id": "g6babf612",
@@ -32897,11 +32905,11 @@
      "card_hash": "1d585424e97f"
     },
     "price": {
-     "value_rub": 51400000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "6b64c5beb739"
+     "card_hash": "6b9720ed5dcb"
     },
     "date": {
      "value": "2023-02-21",
@@ -32939,11 +32947,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "auction_start"
   },
   {
    "id": "g554eb6ae",
@@ -39289,7 +39298,7 @@
    "type": "Инвестиция",
    "kind": "financing",
    "status": "Закрыта",
-   "sum": "10 млрд ₽",
+   "sum": null,
    "eco": {
     "sum": "10 млрд ₽",
     "share": "Сделка структурирована по механизму MBO (management buyout): с марта 2023 года 80% УК «Восход» перешло к гендиректору Руслану Саркисову, по 10% — венчурным партнёрам Константину Гибало и Артуру Мартиросову; сумма сделки сторонами не раскрывалась.",
@@ -39360,11 +39369,11 @@
      "card_hash": "fc1f7952f903"
     },
     "price": {
-     "value_rub": 10000000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "606c9c2f8dc0"
+     "basis": "unknown",
+     "card_hash": "3a68f7b82a0b"
     },
     "date": {
      "value": "2023-06-06",
@@ -48486,10 +48495,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b9b64b59ab41"
+     "card_hash": "2b747f5099ca"
     },
     "date": {
      "value": "2022-06-13",
@@ -48531,7 +48540,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g37c264bf",
@@ -49774,7 +49784,7 @@
    "buyer": null,
    "target": "gae376dd7",
    "ind": "Здравоохранение",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "500 млн ₽ (по оценке)",
@@ -49840,7 +49850,7 @@
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "369ee8b5522f"
+     "card_hash": "74db28030c53"
     },
     "date": {
      "value": "2020-07-07",
@@ -49849,14 +49859,14 @@
      "card_hash": "38f19b8b0099"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "154db0a71583"
+     "card_hash": "ee33a46971ec"
     },
     "target": {
      "company_id": "gae376dd7",
@@ -49878,9 +49888,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "before_site_year"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -50012,7 +50022,7 @@
    "buyer": null,
    "target": "gd2a34d8d",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "7,8 млн ₽",
@@ -50070,7 +50080,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d984cbf53ce1"
+     "card_hash": "791c638956a4"
     },
     "date": {
      "value": "2020-09-10",
@@ -50079,14 +50089,14 @@
      "card_hash": "d8644bf9989b"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "298b1246a9ad"
+     "card_hash": "bd7ffe06b93d"
     },
     "target": {
      "company_id": "gd2a34d8d",
@@ -50108,9 +50118,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "before_site_year"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -51283,7 +51293,7 @@
    "title": "Инвестиции Softline Venture Partners в сингапурскую HR-tech-платформу Workclass ($3 млн)",
    "buyer": "gdfb4c0d4",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "$3 млн",
@@ -51363,7 +51373,7 @@
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c8642c826b99"
+     "card_hash": "c9d182892304"
     },
     "date": {
      "value": "2022-12-26",
@@ -51372,14 +51382,14 @@
      "card_hash": "bba3494d02ac"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c3dade469cda"
+     "card_hash": "37e24a79ecf9"
     },
     "target": {
      "company_id": null,
@@ -51401,9 +51411,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -58598,10 +58608,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d5dcc7b36fd2"
+     "card_hash": "36cd21626340"
     },
     "date": {
      "value": "2023-04-19",
@@ -58643,7 +58653,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gba72051d",
@@ -63024,7 +63035,7 @@
    "buyer": "gb5bc9e57",
    "target": "gb23aa8b9",
    "ind": "Недвижимость",
-   "type": "M&A",
+   "type": "Инвестиция",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "Не раскрыта",
@@ -63090,7 +63101,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "card_hash": "c5a00ea28944"
     },
     "date": {
      "value": "2023",
@@ -63099,14 +63110,14 @@
      "card_hash": "5294525e4d7a"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bfed824bd0d1"
+     "card_hash": "807567932500"
     },
     "target": {
      "company_id": "gb23aa8b9",
@@ -63128,9 +63139,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -66754,7 +66765,7 @@
    "title": "Pre-IPO раунд «Бери заряд!» на платформе Rounds",
    "target": "berizaryad",
    "ind": "ИТ и интернет",
-   "type": "IPO",
+   "type": "Инвестиция",
    "kind": "ipo",
    "status": "Закрыта",
    "sum": "500–700 млн ₽",
@@ -66822,7 +66833,7 @@
      "meaning": "range",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "fba0b85e3bb4"
+     "card_hash": "608edbea449c"
     },
     "date": {
      "value": "2024-05-01",
@@ -66838,7 +66849,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "78a9ba22eac1"
+     "card_hash": "ba6e1d25612c"
     },
     "target": {
      "company_id": "berizaryad",
@@ -76609,10 +76620,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0bea76125ceb"
+     "card_hash": "c1a15accfc39"
     },
     "date": {
      "value": "2025-10-01",
@@ -76654,7 +76665,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g92c06203",
@@ -79496,10 +79508,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "valuation",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "ab37e35072a4"
+     "card_hash": "cf84efad12f8"
     },
     "date": {
      "value": "2025-08-07",
@@ -79541,7 +79553,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "valuation"
   },
   {
    "id": "g081ac83c",
@@ -81166,10 +81179,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "estimate",
+     "meaning": "valuation",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "6d2dff657ad0"
+     "card_hash": "6db75bfac61e"
     },
     "date": {
      "value": "2025-12-18",
@@ -81211,7 +81224,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_lot"
     }
-   }
+   },
+   "sum_basis": "valuation"
   },
   {
    "id": "gca59a6b6",
@@ -82055,10 +82069,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "81b53a3e476b"
+     "card_hash": "b4427d09d887"
     },
     "date": {
      "value": "2025-06-01",
@@ -82100,7 +82114,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gca9cd4b7",
@@ -89377,7 +89392,7 @@
    "buyer": null,
    "target": "ga75a5f6a",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "IPO",
    "kind": "ipo",
    "status": "Обсуждается",
    "sum": "Не раскрыта",
@@ -89435,7 +89450,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "card_hash": "954d497d6ce2"
     },
     "date": {
      "value": "2026-03-18",
@@ -89444,14 +89459,14 @@
      "card_hash": "e9fcbbf38482"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a289ac2ac4db"
+     "card_hash": "03fdcbf3090e"
     },
     "target": {
      "company_id": "ga75a5f6a",
@@ -89473,9 +89488,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -91575,7 +91590,7 @@
    "buyer": null,
    "target": "g40ce292b",
    "ind": "Порты и инфраструктура",
-   "type": "M&A",
+   "type": "IPO",
    "kind": "ipo",
    "status": "Обсуждается",
    "sum": "≈5 млрд ₽",
@@ -91637,7 +91652,7 @@
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5f6b62ced27b"
+     "card_hash": "26298334ec8a"
     },
     "date": {
      "value": "2025",
@@ -91646,14 +91661,14 @@
      "card_hash": "c35a9eb6bcb8"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1de3e44b155d"
+     "card_hash": "fab3a51ae39d"
     },
     "target": {
      "company_id": "g40ce292b",
@@ -91675,9 +91690,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -95811,11 +95826,11 @@
      "card_hash": "7de2be257bfd"
     },
     "price": {
-     "value_rub": 8800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "439f9c6db7fa"
+     "card_hash": "5d962ea626ad"
     },
     "date": {
      "value": "2024-12-16",
@@ -95853,12 +95868,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
    },
-   "buyer_name": "ООО «Элит строй»"
+   "buyer_name": "ООО «Элит строй»",
+   "sum_basis": "estimate"
   },
   {
    "id": "gb6a90572",
@@ -96237,7 +96253,7 @@
    "buyer": "g78feaa03",
    "target": "g8a2c05fa",
    "ind": "Ритейл",
-   "type": "Инвестиция",
+   "type": "M&A",
    "kind": "financing",
    "status": "Закрыта",
    "sum": "Не раскрыта",
@@ -96309,7 +96325,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "c5a00ea28944"
+     "card_hash": "c22efc030a0d"
     },
     "date": {
      "value": "2024-12-12",
@@ -96318,14 +96334,14 @@
      "card_hash": "6b919c9959bb"
     },
     "nature": {
-     "control_change": false,
-     "cash_in": true,
+     "control_change": true,
+     "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d789222800c1"
+     "card_hash": "40173c16445d"
     },
     "target": {
      "company_id": "g8a2c05fa",
@@ -96347,9 +96363,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "not_purchase",
-     "top_purchases": "not_purchase",
-     "multiple_text": "not_control_change"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -101057,7 +101073,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "25,6 млрд ₽ (оценка пакета на момент покупки в 2021 году)",
+   "sum": null,
    "eco": {
     "sum": "25,6 млрд ₽ (по оценке)",
     "share": "—",
@@ -101122,10 +101138,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "estimate",
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f93230521f67"
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2024-10-01",
@@ -105228,7 +105244,7 @@
    "buyer": "gf7340794",
    "target": "g4aa3d715",
    "ind": "Недвижимость",
-   "type": "Инвестиция",
+   "type": "M&A",
    "kind": "financing",
    "status": "Закрыта",
    "sum": "Не раскрыта",
@@ -105285,7 +105301,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "c5a00ea28944"
+     "card_hash": "c22efc030a0d"
     },
     "date": {
      "value": "2025-08-08",
@@ -105294,14 +105310,14 @@
      "card_hash": "24310f2ca72b"
     },
     "nature": {
-     "control_change": false,
-     "cash_in": true,
+     "control_change": true,
+     "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "48552b41fef2"
+     "card_hash": "4a48b5235872"
     },
     "target": {
      "company_id": "g4aa3d715",
@@ -105323,9 +105339,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "not_purchase",
-     "top_purchases": "not_purchase",
-     "multiple_text": "not_control_change"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
     }
    }
   },
@@ -114888,7 +114904,7 @@
    "buyer": "gd5658152",
    "target": "g30346432",
    "ind": "Агро",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "1,3 млрд ₽",
@@ -114992,7 +115008,7 @@
      "value_rub": 1300000000,
      "meaning": "disclosed",
      "scope": "package",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "ae395aa5a7cd",
      "meaning_variants": [
       "disclosed"
@@ -115042,7 +115058,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "date": {
      "value": "2024-03-18",
@@ -115079,13 +115096,13 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "347115b60157",
+     "card_hash": "1631d3b6b8c4",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "АО «Сибирская аграрная группа» («Сибагро») выкупило на торгах 51% акций Богдановичского комбикормового завода, которые принадлежали властям Свердловской области.",
      "source": "https://www.kommersant.ru/doc/6579487",
      "verified_by": "model×2",
@@ -115168,16 +115185,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
-     "multiple_text": true
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "ok"
+     "purchase_sums": "stale",
+     "top_purchases": "stale",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -115355,10 +115372,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "valuation",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d06c995c504a"
+     "card_hash": "b7bf624d1196"
     },
     "date": {
      "value": "2024-03-01",
@@ -115400,7 +115417,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "valuation"
   },
   {
    "id": "g1e73548b",
@@ -129423,7 +129441,7 @@
    "buyer": "gfd1d67e3",
    "target": "gefdf55a9",
    "ind": "Недвижимость",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "3,4 млрд ₽",
@@ -129495,7 +129513,7 @@
      "value_rub": null,
      "meaning": "estimate",
      "scope": "unknown",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "ab0496b17125",
      "meaning_variants": [
       "estimate"
@@ -129545,7 +129563,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "date": {
      "value": "2023-09-18",
@@ -129557,13 +129576,13 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bde53cc19aa1",
+     "card_hash": "14f4b67cb594",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Новым владельцем ООО «Сибирские городки», которому принадлежат 13 одноименных торгово-развлекательных центров общей площадью 173 000 кв. м в Кемеровской области и Красноярском крае, стала фирма «Онлайн финанс».",
      "source": "https://vedomosti.ru/realty/articles/2023/09/20/996212-sberbank-nashel-pokupatelya-na-set-torgovih-tsentrov-region",
      "verified_by": "model×2",
@@ -129656,7 +129675,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "not_control_change"
     }
    },
    "sum_basis": "estimate"
@@ -137798,7 +137817,7 @@
    "buyer": "g0029735f",
    "target": "gf5648889",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Реорганизация",
    "kind": "structured",
    "status": "Закрыта",
    "sum": "≈13,35–24,29 млрд ₽",
@@ -137862,7 +137881,7 @@
      "meaning": "range",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c31fc10a49a5"
+     "card_hash": "a1185ea3ba43"
     },
     "date": {
      "value": "2023-10-01",
@@ -137871,14 +137890,14 @@
      "card_hash": "f0faa40ffe73"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "78b0b64a78c4"
+     "card_hash": "16b2c3721dbc"
     },
     "target": {
      "company_id": "gf5648889",
@@ -137900,9 +137919,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -149549,7 +149568,7 @@
    "buyer": null,
    "target": "g4f3ea67e",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Реорганизация",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "Не раскрыта",
@@ -149616,7 +149635,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "card_hash": "f3a1a42db393"
     },
     "date": {
      "value": "2023-04-01",
@@ -149625,14 +149644,14 @@
      "card_hash": "0329aa98466a"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6d7219e4b7b1"
+     "card_hash": "ed5700c8ef2e"
     },
     "target": {
      "company_id": "g4f3ea67e",
@@ -149654,9 +149673,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -152216,10 +152235,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "82c56cebf440"
+     "card_hash": "e744590f513a"
     },
     "date": {
      "value": "2023-09-06",
@@ -152261,7 +152280,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gb7a4435d",
@@ -154238,11 +154258,11 @@
      "card_hash": "b4bfe0ec43bc"
     },
     "price": {
-     "value_rub": 3300000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "4873e21c1b77"
+     "card_hash": "06ad2271cc01"
     },
     "date": {
      "value": "2023",
@@ -154280,11 +154300,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gbb1c889d",
@@ -157298,10 +157319,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c987b321b192"
+     "card_hash": "28526c3c0bb7"
     },
     "date": {
      "value": "2024",
@@ -157343,7 +157364,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g31541607",
@@ -158295,10 +158317,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "a3b9f95ed1bc"
+     "card_hash": "4cdb723a2e65"
     },
     "date": {
      "value": "2023",
@@ -158340,7 +158362,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "not_a_price"
   },
   {
    "id": "g4c3f2103",
@@ -165034,7 +165057,7 @@
      "value_rub": 140000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "disputed",
+     "basis": "stale",
      "card_hash": "c6f4921d2553",
      "disputed": [
       {
@@ -165095,7 +165118,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "disputed"
     },
     "date": {
      "value": "2023-01-24",
@@ -165255,13 +165279,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_disputed",
-     "top_purchases": "price_disputed",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "stale",
+     "top_purchases": "stale",
+     "multiple_text": "stale"
     }
    },
    "stake_acquired": 95.0,
-   "date_basis": "publication"
+   "date_basis": "publication",
+   "sum_basis": "range"
   },
   {
    "id": "g5eea9928",
@@ -165613,11 +165638,11 @@
      "card_hash": "26862219e0e7"
     },
     "price": {
-     "value_rub": 1300000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "ae395aa5a7cd"
+     "card_hash": "4591995a428b"
     },
     "date": {
      "value": "2023-04-17",
@@ -165655,11 +165680,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "reported"
   },
   {
    "id": "g5d9d8e6c",
@@ -165734,11 +165760,11 @@
      "card_hash": "b0db029a33f2"
     },
     "price": {
-     "value_rub": 8850000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b0f701b48131"
+     "card_hash": "7c6271067526"
     },
     "date": {
      "value": "2022-12-30",
@@ -165776,11 +165802,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_bank"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gbb8eba27",
@@ -167967,10 +167994,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f1332d2dd10f"
+     "card_hash": "77f083514ee5"
     },
     "date": {
      "value": "2022-10-31",
@@ -168012,7 +168039,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g383b170f",
@@ -168950,7 +168978,7 @@
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e4ff55d6ff63"
+     "card_hash": "71672ff3bcd6"
     },
     "date": {
      "value": "2022-08-01",
@@ -168992,7 +169020,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "gf0b712ef",
@@ -173848,7 +173877,7 @@
    "buyer": "g8bafde28",
    "target": "g522c7ca1",
    "ind": "Банки",
-   "type": "M&A",
+   "type": "Реорганизация",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "128,7 млрд ₽ (докапитализация 2019) + 34,9 млрд ₽ (докапитализация май 2022)",
@@ -173910,7 +173939,7 @@
      "value_rub": null,
      "meaning": "not_a_price",
      "scope": "unknown",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "48852526536d",
      "meaning_variants": [
       "not_a_price"
@@ -173961,7 +173990,8 @@
      "terms": "unknown",
      "terms_variants": [
       "unknown"
-     ]
+     ],
+     "stale_from": "verified"
     },
     "date": {
      "value": "2023-01-19",
@@ -174000,10 +174030,10 @@
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "847783e51dd7",
+     "card_hash": "c6868f5f4ea3",
      "quote": "В соответствии с ним, ЦБ внес 100% акций МИнБа в качестве имущественного взноса в имущество АСВ по цене 1 рубль, а затем акции были переданы в государственную казну России. В ноябре 2022 года правительство приняло решение внести акции МИнБа в уставный капитал ПСБ, процесс завершился в январе. Промсвязьбанк через Росимущество принадлежит государству.",
      "source": "https://www.interfax.ru/business/898856",
      "verified_by": "model×2",
@@ -174026,7 +174056,7 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "intragroup": true
     },
     "target": {
@@ -174049,8 +174079,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
    },
@@ -175835,7 +175865,7 @@
    "date": "2026-07-27",
    "title": "ЗПИФ «Прайм Первый» приобрёл 14% в группе «Полипластик»",
    "ind": "Химия и удобрения",
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Закрыта",
    "src": [
     [
@@ -175909,7 +175939,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "3a68f7b82a0b"
     },
     "date": {
      "value": "2026-07-27",
@@ -175918,14 +175948,14 @@
      "card_hash": "02fdf433b23a"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "52ae4264de9b"
+     "card_hash": "88047f81b472"
     },
     "target": {
      "company_id": "g5dd3e034",
@@ -175947,9 +175977,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-06",
@@ -180490,7 +180520,7 @@
    "buyer": "erlan",
    "target": "adv",
    "ind": "Медиа",
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Закрыта",
    "sum": "Не раскрыта",
    "eco": {
@@ -180547,7 +180577,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "card_hash": "c5a00ea28944"
     },
     "date": {
      "value": "2025-07-04",
@@ -180556,14 +180586,14 @@
      "card_hash": "6225d994efee"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5bc08003f35f"
+     "card_hash": "faf8e2673633"
     },
     "target": {
      "company_id": "adv",
@@ -180585,9 +180615,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-07"
@@ -185145,11 +185175,11 @@
      "card_hash": "dc8a03282240"
     },
     "price": {
-     "value_rub": 4000000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "9e6509cb6a67"
+     "card_hash": "33badab3f47a"
     },
     "date": {
      "value": "2023-05-18",
@@ -185192,7 +185222,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "c01524a40",
@@ -185883,10 +185914,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "raise",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "a0e9a9624c34"
+     "card_hash": "6efc6a016df7"
     },
     "date": {
      "value": "2025-05-30",
@@ -185929,7 +185960,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "sum_basis": "raise"
   },
   {
    "id": "c25d07929",
@@ -185945,7 +185977,7 @@
    ],
    "from_compact": "bulk",
    "extra": "Банк «Точка» и акселератор ФРИИ создают совместный инвестиционный конвейер: акселератор отбирает проекты и готовит сделки, а банк вкладывает деньги в отобранные стартапы. В каждый подходящий проект «Точка» готова вложить до 500 млн ₽.",
-   "sum": "до 500 млн ₽",
+   "sum": null,
    "eco": {
     "sum": "до 500 млн ₽",
     "share": "Программа рассчитана на стартапы с выручкой от 20 млн ₽ в сферах электронной коммерции, финтеха, логистики и маркетинга.",
@@ -185980,10 +186012,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "estimate",
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "4870fc6b9c2b"
+     "basis": "unknown",
+     "card_hash": "92725277de89"
     },
     "date": {
      "value": "2025-03-24",
@@ -187708,7 +187740,7 @@
    "date": "2024-09-23",
    "title": "Wildberries-Russ получил в залог 100% операционной компании «Рив Гош»",
    "ind": "Ритейл",
-   "type": "M&A",
+   "type": "Финансирование · структурная сделка",
    "src": [
     [
      "Интерфакс",
@@ -187754,7 +187786,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "ce176c90c39c"
     },
     "date": {
      "value": "2024-09-23",
@@ -187763,14 +187795,14 @@
      "card_hash": "50792594bcb2"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
-     "financing": false,
+     "financing": true,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d2cdea65a679"
+     "card_hash": "8d6dcea863a6"
     },
     "target": {
      "company_id": null,
@@ -187792,9 +187824,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "status": "Закрыта",
@@ -188829,7 +188861,7 @@
    ],
    "from_compact": "bulk",
    "extra": "MTS StartUp Hub запускает акселератор для стартапов, которые разрабатывают блокчейн-продукты. Венчурный фонд МТС планирует вложить в проекты выпускников программы до $5 млн. Приём заявок продлится до 10 июня.",
-   "sum": "$5 млн",
+   "sum": null,
    "eco": {
     "sum": "$5 млн",
     "share": "—",
@@ -188859,10 +188891,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "1d07b1190a97"
+     "basis": "unknown",
+     "card_hash": "9ab5e5d274b5"
     },
     "date": {
      "value": "2024-04-19",
@@ -189549,11 +189581,11 @@
      "card_hash": "0df95cf8f596"
     },
     "price": {
-     "value_rub": 4800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "42009d323aea"
+     "card_hash": "0ed1c774df14"
     },
     "date": {
      "value": "2024",
@@ -189591,20 +189623,21 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "sum_basis": "estimate"
   },
   {
    "id": "c7996afb5",
    "date": "2026-04-30",
    "title": "Погашение структурных облигаций ПАО «ПРОМОМЕД» путем поставки акций",
    "ind": "Здравоохранение",
-   "type": "M&A",
+   "type": "Финансирование · структурная сделка",
    "src": [
     [
      "Промомед",
@@ -189665,7 +189698,7 @@
      "meaning": "lower_bound",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "19ce9589b34d"
+     "card_hash": "6decd1e46aeb"
     },
     "date": {
      "value": "2026-04-30",
@@ -189674,14 +189707,14 @@
      "card_hash": "341ac529f12e"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
-     "financing": false,
+     "financing": true,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "74af0d2da6bf"
+     "card_hash": "459d00cb7a9c"
     },
     "target": {
      "company_id": null,
@@ -189703,9 +189736,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "status": "Закрыта",
@@ -189770,10 +189803,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "870699038020"
+     "card_hash": "ea23ab286d80"
     },
     "date": {
      "value": "2026-04-17",
@@ -189817,7 +189850,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "ce56cdefd",
@@ -190035,7 +190069,7 @@
    ],
    "from_compact": "bulk",
    "extra": "Генеральный директор Анна Акиньшина написала премьер-министру Мишустину, что компания предлагает государству блокирующий или более крупный пакет акций для участия в управлении с правом обратного выкупа по новой цене. Компания также готова обеспечить дополнительное внешнее финансирование до 10 млрд ₽.",
-   "sum": "50 млрд ₽",
+   "sum": null,
    "eco": {
     "sum": "50 млрд ₽",
     "share": "—",
@@ -190076,7 +190110,7 @@
      "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "cb6e9696936c"
+     "card_hash": "81185e221a06"
     },
     "date": {
      "value": "2026-02-04",
@@ -190152,7 +190186,7 @@
    "date": "2026-02-05",
    "title": "МТС ликвидирует экосистему Erion, передав активы в АФК «Система»",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Реорганизация",
    "src": [
     [
      "Коммерсантъ",
@@ -190203,7 +190237,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "92725277de89"
+     "card_hash": "e54aa9e6668e"
     },
     "date": {
      "value": "2026-02-05",
@@ -190212,14 +190246,14 @@
      "card_hash": "64aa1fec7bc8"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "02c7ba11a316"
+     "card_hash": "3cbab103832b"
     },
     "target": {
      "company_id": null,
@@ -190241,9 +190275,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "status": "Обсуждается",
@@ -190254,7 +190288,7 @@
    "date": "2025-10-28",
    "title": "Портфель активов Raven Russia выставлен на продажу за 90,09 млрд рублей",
    "ind": "Недвижимость",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "src": [
     [
      "Коммерсантъ",
@@ -190313,7 +190347,7 @@
      "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b4a5ec53abd0"
+     "card_hash": "8454cca2858e"
     },
     "date": {
      "value": "2025-10-28",
@@ -190325,11 +190359,11 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "b8be03c5740f",
+     "card_hash": "08c01211c79b",
      "quote": "100% долей в 17 юридических лицах, изначально подконтрольных структурам Raven Russia, выставлены на продажу, следует из информации на torgi.gov.ru.",
      "source": "https://www.kommersant.ru/doc/8160509",
      "verified_by": "model×2",
@@ -190392,14 +190426,16 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
     }
    },
    "sum_basis": "auction_start",
    "status": "Обсуждается",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller": "Росимущество",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "c49c9d8b0",
@@ -190856,10 +190892,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "lower_bound",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "cf94cc82fa8e"
+     "card_hash": "19811eb037de"
     },
     "date": {
      "value": "2025-03-27",
@@ -190903,7 +190939,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "c07bedf76",
@@ -191056,11 +191093,11 @@
      "card_hash": "4364a1c6e15c"
     },
     "price": {
-     "value_rub": 650000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "087c90831738"
+     "card_hash": "51ba17fa19bb"
     },
     "date": {
      "value": "2024",
@@ -191098,12 +191135,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "sum_basis": "auction_start"
   },
   {
    "id": "c36556448",
@@ -192183,10 +192221,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "estimate",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c449836ce61e"
+     "card_hash": "814e76527f98"
     },
     "date": {
      "value": "2024",
@@ -192229,14 +192267,15 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "ca71a7545",
    "date": "2023-06-15",
    "title": "НМГ и Ростелеком закрыли сделку по объединению видеосервисов more.tv и Wink",
    "ind": "Медиа",
-   "type": "M&A",
+   "type": "СП",
    "src": [
     [
      "More.tv",
@@ -192289,7 +192328,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "d138cedd2e1e"
     },
     "date": {
      "value": "2023-06-15",
@@ -192298,14 +192337,14 @@
      "card_hash": "7ee8ec0263db"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "fa10f38b37bc"
+     "card_hash": "1ef6295f2a2f"
     },
     "target": {
      "company_id": null,
@@ -192327,9 +192366,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "status": "Закрыта",
@@ -192438,7 +192477,7 @@
    "date": "2023-12-14",
    "title": "Переезд холдинговой компании Быстринского ГОКа «Норникеля» из Кипра в Россию",
    "ind": "ГМК и добыча",
-   "type": "M&A",
+   "type": "Реорганизация",
    "src": [
     [
      "LEVEL Legal Services",
@@ -192501,7 +192540,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "3521eb24b7a9"
     },
     "date": {
      "value": "2023-12-14",
@@ -192510,14 +192549,14 @@
      "card_hash": "b2860325c7fc"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f62101c1c738"
+     "card_hash": "40a37406c845"
     },
     "target": {
      "company_id": null,
@@ -192539,9 +192578,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-11"
@@ -193057,7 +193096,7 @@
    "date": "2023-08-01",
    "title": "Qiwi завершила консолидацию российских активов и разделение бизнеса на российский и международный сегменты",
    "ind": "Финтех",
-   "type": "M&A",
+   "type": "Реорганизация",
    "src": [
     [
      "Frank Media",
@@ -193110,7 +193149,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
+     "card_hash": "889e0ed57331"
     },
     "date": {
      "value": "2023-08-01",
@@ -193119,14 +193158,14 @@
      "card_hash": "1582658f184a"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e50785c205e0"
+     "card_hash": "2e6c2eea5179"
     },
     "target": {
      "company_id": null,
@@ -193148,9 +193187,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-11"
@@ -193202,10 +193241,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5c9bb5b19d00"
+     "card_hash": "11b9a261d206"
     },
     "date": {
      "value": "2023-07-19",
@@ -193248,7 +193287,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "c374fc2ca",
@@ -193354,7 +193394,7 @@
    "date": "2023-03-31",
    "title": "Раздел активов Baring Vostok между российской и зарубежной командой",
    "ind": "Финансовые услуги",
-   "type": "M&A",
+   "type": "Реорганизация",
    "src": [
     [
      "РБК",
@@ -193418,10 +193458,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "51ba9237808b"
+     "card_hash": "07e40a0266a3"
     },
     "date": {
      "value": "2023-03-31",
@@ -193430,14 +193470,14 @@
      "card_hash": "16843e9d5832"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
-     "reorganization": false,
+     "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "be082b492c82"
+     "card_hash": "fa1ed7af626b"
     },
     "target": {
      "company_id": null,
@@ -193459,12 +193499,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "c61052e8d",
@@ -201137,11 +201178,11 @@
      "card_hash": "69f549dbab53"
     },
     "price": {
-     "value_rub": 7800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "aa1553a4af70"
+     "card_hash": "c99ef71849bb"
     },
     "date": {
      "value": "2026-08-05",
@@ -201186,7 +201227,8 @@
    },
    "followup_researched": "2026-09-07",
    "seller": "Росимущество",
-   "seller_id": "g9fd82fee"
+   "seller_id": "g9fd82fee",
+   "sum_basis": "auction_start"
   },
   {
    "id": "ge482f106",
@@ -201953,7 +201995,7 @@
    "date": "2026-08-07",
    "title": "«Внуково» приобрело 25,01% в контролирующей «Домодедово» компании",
    "ind": "Порты и инфраструктура",
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Закрыта",
    "src": [
     [
@@ -202072,7 +202114,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1127f900f616"
+     "card_hash": "1dcf4958faec"
     },
     "date": {
      "value": "2026-08-07",
@@ -202081,14 +202123,14 @@
      "card_hash": "ffc488577d16"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7b75e83786b9"
+     "card_hash": "1d5c6dc18a66"
     },
     "target": {
      "company_id": "g127cf704",
@@ -202110,9 +202152,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "target_unconfirmed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "target": "g127cf704",
@@ -205814,11 +205856,11 @@
      "card_hash": "f3e8628954ae"
     },
     "price": {
-     "value_rub": 1800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "66e50b6a0c32"
+     "card_hash": "58507c24085c"
     },
     "date": {
      "value": "2026-08-26",
@@ -205861,7 +205903,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "seller_id": "g7802e51e"
+   "seller_id": "g7802e51e",
+   "sum_basis": "auction_start"
   },
   {
    "id": "gabdbe320",
@@ -209564,7 +209607,7 @@
    "date": "2026-09-07",
    "title": "«Базис» купил 70% компании Proto",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Закрыта",
    "src": [
     [
@@ -209671,7 +209714,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "3a68f7b82a0b"
     },
     "date": {
      "value": "2026-09-07",
@@ -209680,14 +209723,14 @@
      "card_hash": "f3d2e51fde08"
     },
     "nature": {
-     "control_change": true,
-     "cash_in": false,
+     "control_change": false,
+     "cash_in": true,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "dc0ee90c1a4e"
+     "card_hash": "66c80e04a92e"
     },
     "target": {
      "company_id": "g01320fb7",
@@ -209709,9 +209752,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
    },
    "proofread": "2026-09-07",
@@ -209722,7 +209765,7 @@
    "date": "2026-09-08",
    "title": "РАД продал крупный девелоперский актив в Приморском районе Петербурга",
    "ind": "Недвижимость",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": "Закрыта",
    "src": [
     [
@@ -209798,7 +209841,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "b9dbfcc742bf"
     },
     "date": {
      "value": "2026-09-08",
@@ -209810,11 +209853,11 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "95aa69f9adf7"
+     "card_hash": "b6b7d08e3d96"
     },
     "target": {
      "company_id": "g41e754fb",
@@ -209838,7 +209881,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "not_control_change"
     }
    },
    "proofread_absorbed": {
@@ -211790,7 +211833,7 @@
    "date": "2026",
    "title": "«Союз-ТТМ» выкупил на торгах производственный комплекс «Союз-М» в Калининграде",
    "ind": "Агро",
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": "Закрыта",
    "src": [
     [
@@ -211833,7 +211876,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "93135083db7c"
+     "card_hash": "6ca6222138d7"
     },
     "date": {
      "value": "2026",
@@ -211845,11 +211888,11 @@
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": false,
+     "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "3a072893f4a5"
+     "card_hash": "db7017d7acc0"
     },
     "target": {
      "company_id": null,
@@ -211873,7 +211916,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "not_control_change"
     }
    },
    "proofread": "2026-09-11"
