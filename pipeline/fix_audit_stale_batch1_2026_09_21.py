@@ -39,6 +39,9 @@ from pipeline import audit_queue as aq  # noqa: E402
 from pipeline.fix_audit_move_utils import get_field, set_field  # noqa: E402
 
 SRC_RX = re.compile(r"^src\[(\d+)\]\[(\d+)\]$")
+# `law.adv[1][2]` — описание второго консультанта; `events[0].note` — текст вехи.
+ADV_RX = re.compile(r"^law\.adv\[(\d+)\]\[(\d+)\]$")
+EVENT_RX = re.compile(r"^events\[(\d+)\]\.(\w+)$")
 STRUCTURED = ("law.adv", "events")
 
 
@@ -57,6 +60,20 @@ def read_field(card, companies, field):
         if i >= len(src) or j >= len(src[i]):
             return None, None
         return src[i][j], lambda v: src[i].__setitem__(j, v)
+    m = ADV_RX.match(field)
+    if m:
+        i, j = int(m.group(1)), int(m.group(2))
+        adv = (card.get("law") or {}).get("adv") or []
+        if i >= len(adv) or j >= len(adv[i]):
+            return None, None
+        return adv[i][j], lambda v: adv[i].__setitem__(j, v)
+    m = EVENT_RX.match(field)
+    if m:
+        i, sub = int(m.group(1)), m.group(2)
+        events = card.get("events") or []
+        if i >= len(events):
+            return None, None
+        return events[i].get(sub), lambda v: events[i].__setitem__(sub, v)
     if field in STRUCTURED:
         cur = get_field(card, field) if "." in field else card.get(field)
         setter = ((lambda v: set_field(card, field, v)) if "." in field
@@ -110,6 +127,40 @@ def main(write: bool) -> int:
         applied += 1
         if write:
             setter(it.get("new_full_text"))
+
+    # ДВЕ ПРАВКИ ПОВЕРХ ПАРТИИ — их поймал полный pytest, а не читатель.
+    # Переименование профиля из описания в имя дважды задело то, что лежит
+    # РЯДОМ с именем и о чём находка не знала.
+    #
+    # 1. «допэмиссии «Деметра-холдинга»» → «Деметра-холдинг» столкнулось с уже
+    #    существующим профилем «Деметра-Холдинг» (test_no_company_twins): одна
+    #    компания оказалась записана дважды. У дубля была одна ссылка из
+    #    карточки, у настоящего профиля — семь; карточка переставлена на
+    #    настоящий, дубль и его псевдоним сняты.
+    # 2. У CanPack псевдонимы остались от старого имени-описания («владелец
+    #    активов, американская компания») и после переименования перестали
+    #    пересекаться с именем (test_match_key_alias_is_a_name). По таким
+    #    псевдонимам поиск не срабатывает никогда — сняты, осталось имя.
+    mk = data.get('match_keys') or {}
+    dup, real = 'g040f6110', 'g519f8484'
+    if companies.get(dup, {}).get('name') == 'Деметра-холдинг' and real in companies:
+        moved = [d['id'] for d in data['deals'] if d.get('target') == dup]
+        for d in data['deals']:
+            for role in ('buyer', 'target', 'seller_id', 'asset_id'):
+                if d.get(role) == dup:
+                    if write:
+                        d[role] = real
+        log.append('дубль профиля %s → %s (карточки: %s)' % (dup, real, ', '.join(moved)))
+        applied += 1
+        if write:
+            companies.pop(dup, None)
+            mk.pop(dup, None)
+    bad_alias = [a for a in (mk.get('gc6965a4f') or []) if 'владелец активов' in a]
+    if bad_alias:
+        log.append('CanPack: сняты %d псевдонима от старого имени-описания' % len(bad_alias))
+        applied += 1
+        if write:
+            mk['gc6965a4f'] = [a for a in mk['gc6965a4f'] if a not in bad_alias]
 
     print("Применено: %d, пропущено: %d" % (applied, skipped))
     for line in log:

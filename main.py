@@ -2747,8 +2747,19 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
                   .get("drafts") if names else None) or []
         items = [d for d in drafts if str(d.get("draft_id")) not in decided]
-        head = ("⚠️ <b>Сомнительные новости: %d</b>\n"
-                "Ворота их не пропустили. Без вашего слова не публикуются никогда."
+        # ПРОЧИТАННАЯ И ОТВЕРГНУТАЯ КАРТОЧКА — ТОЖЕ СОМНИТЕЛЬНАЯ (21 сентября
+        # 2026, вопрос владельца: «а разве она не должна оказаться в
+        # сомнительных тогда?»). Приёмка (accept_card.py) читает источник и у
+        # части карточек пишет вердикт «это не сделка, рекомендую выкинуть» —
+        # такая карточка попадала в блок «ждут прочтения», хотя ждать ей
+        # нечего: её уже прочитали. Показываем её там, где человек решает
+        # судьбу сомнительного, — рядом с сырьём, которое не прошло ворота.
+        doubted = [c for c in (_read_json("static/data/pending.json", {}).get("cards") or [])
+                   if c.get("hold_reason") and not c.get("held")]
+        items = items + doubted
+        head = ("⚠️ <b>Сомнительные: %d</b>\n"
+                "Новости, которые не прошли ворота, и карточки, которые прочитали "
+                "и не приняли. Без вашего слова не публикуются никогда."
                 % len(items))
     else:
         pending = _read_json("static/data/pending.json", {}).get("cards") or []
@@ -2761,7 +2772,10 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # Приёмка (11 сентября 2026): прочитанная, но не принятая карточка
             # по молчанию тоже не выходит (approve.plan_actions) — и обещать
             # «выйдет сама» ей нельзя.
-            items = [c for c in not_held if not (c.get("reviewed") and c.get("accepted"))]
+            # Карточки с вердиктом приёмки «не пропущена» ушли в блок
+            # «Сомнительные» — им нужно решение, а не чтение (см. выше).
+            items = [c for c in not_held if not (c.get("reviewed") and c.get("accepted"))
+                     and not c.get("hold_reason")]
             head = ("📖 <b>Ждут прочтения или приёмки: %d</b>\nПока карточку не сверят с "
                     "источником и не примут целиком — молчание её не публикует, сама не выйдет."
                     % len(items))
@@ -2780,8 +2794,14 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
 
     shown = items[:BATCH_LIMIT]
     for item in shown:
-        ident = str(item.get("draft_id") if kind == "raw" else item.get("id"))
-        if kind == "raw":
+        # В блоке «Сомнительные» лежат две разные вещи: сырьё (у него
+        # `draft_id` и кнопки «это сделка / не сделка») и уже собранная
+        # карточка, которую приёмка не пропустила (у неё `id` и обычные
+        # кнопки карточки). Вид сообщения выбирается по самой записи, а не
+        # по имени блока.
+        is_draft = bool(item.get("draft_id"))
+        ident = str(item.get("draft_id") if is_draft else item.get("id"))
+        if is_draft:
             text = "⚠️ [сырьё %s]\n\n%s" % (ident, _card_line(item))
             why = item.get("hold_reasons") or []
             if why:

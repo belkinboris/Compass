@@ -3191,16 +3191,26 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     } if "pending" in path else default)
 
     main._send_queue_batch(-100, "unread")
-    raw = next(t for t in (kw.get("text", "") for _m, kw in sent) if "gu1" in t)
-    held = next(t for t in (kw.get("text", "") for _m, kw in sent) if "gu2" in t)
+    texts = [kw.get("text", "") for _m, kw in sent]
+    raw = next(t for t in texts if "gu1" in t)
     assert "не сверили с источником" in raw, raw
-    assert "обе стороны иностранные" in held, held
-    assert held.index("обе стороны иностранные") < held.index("Orlen"), \
-        "вывод приёмки должен стоять выше машинных полей"
+    assert not [t for t in texts if "gu2" in t], \
+        "прочитанная и отвергнутая приёмкой карточка ждёт решения, а не прочтения"
     keyboards = [kw["reply_markup"] for _m, kw in sent if "reply_markup" in kw]
     for kb in keyboards:
         buttons = [b["text"] for row in kb["inline_keyboard"] for b in row]
         assert "✅ Опубликовать" in buttons, "кнопки не отнимаем — урок 10 августа"
+
+    # …а показывается она там, где человек решает судьбу сомнительного —
+    # рядом с сырьём, которое не прошло ворота (вопрос владельца 21 сентября).
+    sent.clear()
+    monkeypatch.setattr(main.os.path, "isdir", lambda p: False)
+    main._send_queue_batch(-100, "raw")
+    texts = [kw.get("text", "") for _m, kw in sent]
+    assert any("Сомнительные" in t for t in texts), texts
+    held = next(t for t in texts if "gu2" in t)
+    assert held.index("обе стороны иностранные") < held.index("Orlen"), \
+        "вывод приёмки должен стоять выше машинных полей"
 
 
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
