@@ -312,92 +312,7 @@
    ]
   },
   {
-   "draft_id": "d34769773",
-   "title": "Anthropic переносит IPO на ноябрь, пишет WSJ",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/anthropic--873496667.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87779374",
-   "title": "Единственное котокафе в Кургане выставили на продажу",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129272"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81346073",
-   "title": "В Коньково выставили на торги три нежилых помещения",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/21/v-konkovo-vystavili-na-torgi-tri-nezhilyh-pomeshheniya"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17928561",
+   "draft_id": "d37498178",
    "title": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли",
    "date": "2026-09-21",
    "src": [
@@ -433,6 +348,150 @@
    "needs_review": true,
    "hold_reasons": [
     "закрытая сделка названа настоящим временем — заголовок нужно привести к завершённому действию"
+   ]
+  },
+  {
+   "draft_id": "d83590976",
+   "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1117408"
+    ]
+   ],
+   "sum": "$20 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d32519642",
+   "title": "Президент союза писателей заявил, что онлайн продажи литературы не вытеснят офлайн",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28134289"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d40784698",
+   "title": "Объем покупки юаней ЦБ РФ с расчетами 18 сентября составил 2 млрд рублей",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/obem-873500565.html"
+    ]
+   ],
+   "sum": "2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44543072",
+   "title": "Volga установила собственный рекорд по продажам автомобилей в России — в августе бренд реализовал 608 машин",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/volga-ustanovila-sobstvennyj-rekord-po-prodazham-avtomobilej-v-rossii-v-avguste-brend-realizoval-608-mashin/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "608 машин",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "608 машин",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d64921449",
+   "title": "Китайские власти замедляют IPO производителей роботов",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/305719"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
