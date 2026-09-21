@@ -59,6 +59,22 @@ def test_claude_md_stays_within_its_budget():
         "а не очереди и не журнал" % (len(CLAUDE), CLAUDE_LIMIT))
 
 
+def test_known_issues_stays_within_its_budget():
+    """У третьего документа потолка не было, и он рос как первые два.
+
+    18 сентября 2026 CLAUDE.md ужали с 541 до 113 тыс. знаков, вынеся баги в
+    KNOWN_ISSUES.md, — и новый файл сразу начал расти теми же темпами (276
+    тыс. к 21 сентября), только теперь без всякого предела. Потолок здесь
+    мягче, чем у CLAUDE.md: этот файл читают не каждым прогоном, а поиском по
+    слову, когда чинят похожий баг. Но без предела он повторит ту же историю.
+    Запас смотреть заранее: python3 pipeline/docs_budget.py --stats
+    """
+    known = io.open(os.path.join(ROOT, "KNOWN_ISSUES.md"), encoding="utf-8").read()
+    assert len(known) <= 320_000, (
+        "KNOWN_ISSUES.md вырос до %d знаков при потолке %d — запись это «симптом, "
+        "причина в одну фразу, чем починено», без хроники поиска" % (len(known), 320_000))
+
+
 def test_a_finished_item_does_not_pretend_to_be_open():
     """Хуже зачёркнутого пункта только незачёркнутый, который уже сделан.
 

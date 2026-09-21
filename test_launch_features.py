@@ -3167,6 +3167,42 @@ def test_unread_card_is_not_counted_as_soon(monkeypatch):
     assert unread_card and "gs1" not in "".join(kw["text"] for _m, kw in sent)
 
 
+def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
+    """Непроверенная карточка в /queue выглядела точно как готовая.
+
+    21 сентября 2026 владелец открыл очередь и увидел «Корпорацию
+    робототехники»: заголовок — обрезанное предложение из новости, покупатель
+    со скобкой «[входит в АФК «Система»]», отрасль «Недвижимость» у складских
+    роботов. Ворота сработали (карточка пришла кнопкой «это сделка — в
+    работу», молчание её не публикует), но сообщение об этом не говорило ни
+    слова — и выглядело как «мусор пропустили». Теперь непринятая карточка
+    начинается со строки о том, что её никто не читал, а если приёмка
+    прочитала источник и не пропустила — первой идёт её причина. Кнопки
+    остаются все четыре: их урезание — отдельная жалоба владельца 10 августа.
+    """
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+        "cards": [{"id": "gu1", "title": "Сырой заголовок из новости",
+                   "buyer_name": "«Компания» [входит в холдинг]"},
+                  {"id": "gu2", "title": "Нероссийская сделка", "buyer_name": "Orlen",
+                   "hold_reason": "обе стороны иностранные, рекомендую выкинуть"}],
+    } if "pending" in path else default)
+
+    main._send_queue_batch(-100, "unread")
+    raw = next(t for t in (kw.get("text", "") for _m, kw in sent) if "gu1" in t)
+    held = next(t for t in (kw.get("text", "") for _m, kw in sent) if "gu2" in t)
+    assert "не сверили с источником" in raw, raw
+    assert "обе стороны иностранные" in held, held
+    assert held.index("обе стороны иностранные") < held.index("Orlen"), \
+        "вывод приёмки должен стоять выше машинных полей"
+    keyboards = [kw["reply_markup"] for _m, kw in sent if "reply_markup" in kw]
+    for kb in keyboards:
+        buttons = [b["text"] for row in kb["inline_keyboard"] for b in row]
+        assert "✅ Опубликовать" in buttons, "кнопки не отнимаем — урок 10 августа"
+
+
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
     """Умолчавший предел читается как «это всё» — урок CLAUDE.md про консоль."""
     import inspect
