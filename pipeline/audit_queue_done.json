@@ -122,5 +122,11 @@
  "05fb52183c00": "law.adv→eco.finadv: CORE.XP перенесён, заменён ложный плейсхолдер «Публично не сообщалось» (fix_audit_adv_batch_2026_09_21.py)",
  "1ed4d7ba2126": "law.adv: удалён организатор размещения — дубль eco.finadv (fix_audit_adv_batch_2026_09_21.py)",
  "e74bfa2f7a89": "law.adv: обе записи — неподтверждённые комментаторы, не консультанты, поле очищено (fix_audit_adv_batch_2026_09_21.py)",
- "0c1d83530f75": "law.adv: удалён финансовый консультант — дубль eco.finadv (fix_audit_adv_batch_2026_09_21.py)"
+ "0c1d83530f75": "law.adv: удалён финансовый консультант — дубль eco.finadv (fix_audit_adv_batch_2026_09_21.py)",
+ "7b3c664bf2f7": "extra→eco.share: доля 20% Tasty Coffee (fix_audit_share_batch_2026_09_21.py)",
+ "918d531bd4c8": "extra→eco.share: доля 15,9% Ла Лоррен Рус (fix_audit_share_batch_2026_09_21.py)",
+ "03f2d06ac7de": "extra→eco.share: доля 13,14% при IPO Кристалл (fix_audit_share_batch_2026_09_21.py)",
+ "627d09afdb24": "extra→eco.share: доля 12% Аквариус (fix_audit_share_batch_2026_09_21.py)",
+ "9c81f58482c6": "extra→eco.share: доля 91,63% Таганрогский порт (fix_audit_share_batch_2026_09_21.py)",
+ "3a4513cc7d24": "eco.share очищен: факт об основателе уже дословно в desc профиля предмета g71a251f8 (fix_audit_share_batch_2026_09_21.py)"
 }
