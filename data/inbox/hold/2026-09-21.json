@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d37498178",
+   "draft_id": "d67769740",
    "title": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли",
    "date": "2026-09-21",
    "src": [
@@ -351,7 +351,7 @@
    ]
   },
   {
-   "draft_id": "d83590976",
+   "draft_id": "d30582152",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -381,45 +381,16 @@
    ]
   },
   {
-   "draft_id": "d32519642",
-   "title": "Президент союза писателей заявил, что онлайн продажи литературы не вытеснят офлайн",
+   "draft_id": "d79840066",
+   "title": "Моисеев: продажа госпакета «Аэрофлота» произойдет в 2026 или в 2027 году",
    "date": "2026-09-21",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28134289"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/21/1230460-prodazha-gospaketa-aeroflota"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d40784698",
-   "title": "Объем покупки юаней ЦБ РФ с расчетами 18 сентября составил 2 млрд рублей",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/obem-873500565.html"
-    ]
-   ],
-   "sum": "2 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -438,41 +409,13 @@
    ]
   },
   {
-   "draft_id": "d44543072",
-   "title": "Volga установила собственный рекорд по продажам автомобилей в России — в августе бренд реализовал 608 машин",
+   "draft_id": "d50163810",
+   "title": "Минфин допустил SPO «Аэрофлота» и до конца текущего, и в следующем году",
    "date": "2026-09-21",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/volga-ustanovila-sobstvennyj-rekord-po-prodazham-avtomobilej-v-rossii-v-avguste-brend-realizoval-608-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "608 машин",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "608 машин",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d64921449",
-   "title": "Китайские власти замедляют IPO производителей роботов",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/305719"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1117436"
     ]
    ],
    "sum": null,
@@ -489,9 +432,224 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g2f5143f4 (общие редкие слова: конца, минфин) — проверьте, не дубль ли",
+    "та же новость, что «Моисеев: продажа госпакета «Аэрофлота» произойдет в 2026 или» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d86417320",
+   "title": "RTL Info: в Бельгии с 22 сентября дизель будут продавать по рекордной цене",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28134923"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64823282",
+   "title": "Совет директоров «М.Видео» определил цену размещения допэмиссии акций",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28134883"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81355226",
+   "title": "Reuters: в 2025 году по всему миру продали около 7 тыс. человекоподобных роботов",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28134783"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-21",
+     "title": "Сделка завершена",
+     "note": "Генеральный секретарь организации Сюзанна Биллер заявила агентству, что количество человекоподобных роботов по-прежнему составляет \"лишь небольшую долю\" от общего числа роботов в мире",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28134783"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "около 7 тыс. человекоподобных роботов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "около 7 тыс. человекоподобных роботов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d53597351",
+   "title": "McKinsey назвала пять направлений, инвестиции в которые вырастут в разы в 2026 году",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/305768"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d14727031",
+   "title": "Совет директоров «М.Видео» определил цену допэмиссии акций",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/305778"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Совет директоров «М.Видео» определил цену размещения допэмис» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d50149615",
+   "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/soglasovanie-prodazhi-zarubezhnyh-aktivov-lukoyla-zavislo-v-belom-dome/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d29633052",
+   "title": "Поверенный Паслера распродает подарки его предшественника",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129312"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
