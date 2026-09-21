@@ -219,10 +219,10 @@ def main(argv=None) -> int:
                                  if r["class"] in PRIORITY else 99, r["card_id"]))
         print("Ждут разбора: %d, показано: %d\n" % (len(want), min(a.limit, len(want))))
         for r in want[:a.limit]:
-            print("%s  %s  %s  поле %s" % (r["key"], r["card_id"], r["class"], r["field"]))
-            print("    видно: %s" % (r["quote"] or "")[:200])
-            print("    в чём дело: %s" % (r["problem"] or "")[:260])
-            print("    что сделать: %s" % (r["action"] or "")[:200])
+            print("%s  %s  %s  поле %s" % (r["key"], r["card_id"], r["class"], r.get("field")))
+            print("    видно: %s" % (r.get("quote") or "")[:200])
+            print("    в чём дело: %s" % (r.get("problem") or "")[:260])
+            print("    что сделать: %s" % (r.get("action") or "")[:200])
             print()
         return 0
 
