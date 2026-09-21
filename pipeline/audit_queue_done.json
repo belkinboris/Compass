@@ -165,5 +165,10 @@
  "5bc5f759c5b3": "eco.target_fin→extra: описание рода занятий холдинга, не финансы (fix_audit_target_fin_batch_2026_09_21.py)",
  "0654d6cf1872": "extra→eco.target_fin: капитал и активы банка «Точка» (fix_audit_target_fin_batch_2026_09_21.py)",
  "9dabfbc64505": "eco.target_fin→eco.val: мультипликатор EV/EBITDA (fix_audit_target_fin_batch_2026_09_21.py)",
- "890718ae9b70": "eco.target_fin→eco.rationale: мотив декарбонизации продавца (fix_audit_target_fin_batch_2026_09_21.py)"
+ "890718ae9b70": "eco.target_fin→eco.rationale: мотив декарбонизации продавца (fix_audit_target_fin_batch_2026_09_21.py)",
+ "880d731e115d": "extra→eco.context: что случилось после сделки (fix_audit_extra_batch2_2026_09_21.py)",
+ "f58e9e2b9725": "extra→law.struct: гипотеза о природе сделки (fix_audit_extra_batch2_2026_09_21.py)",
+ "4ca025cc34ce": "extra→eco.fin: форма расчётов, разбор одного предложения на два (fix_audit_extra_batch2_2026_09_21.py)",
+ "2c19fda37880": "extra→eco.rationale: мотив покупателя, разбор одного предложения на два (fix_audit_extra_batch2_2026_09_21.py)",
+ "b8def117433d": "extra→eco.target_fin: выручка приобретённых заводов (fix_audit_extra_batch2_2026_09_21.py)"
 }
