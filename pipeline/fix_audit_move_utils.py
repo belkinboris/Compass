@@ -29,11 +29,19 @@ def extend_to_sentences(full_text: str, quote: str) -> str:
         if m.end() > i:
             break
         start = m.end()
-    # вперёд до конца текста или до конца предложения, где лежит правый край
-    end = len(full_text)
-    m2 = re.search(r"[.!?](?=\s+[А-ЯЁA-Z«\"']|\s*$)", full_text[j:])
-    if m2:
-        end = j + m2.end()
+    # вперёд до конца текста или до конца предложения, где лежит правый край —
+    # но только если цитата обрывается НЕ на границе предложения: если она
+    # уже кончается на "."/"!"/"?" перед пробелом+заглавной (или концом
+    # текста), она уже полное предложение, и расширять дальше нельзя —
+    # иначе к ней приклеивалось бы ещё и СЛЕДУЮЩЕЕ предложение целиком.
+    end = j
+    already_clean = j > 0 and re.match(
+        r"[.!?](?=\s+[А-ЯЁA-Z«\"']|\s*$)", full_text[j - 1:])
+    if not already_clean:
+        end = len(full_text)
+        m2 = re.search(r"[.!?](?=\s+[А-ЯЁA-Z«\"']|\s*$)", full_text[j:])
+        if m2:
+            end = j + m2.end()
     return full_text[start:end].strip()
 
 
