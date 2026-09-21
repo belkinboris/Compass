@@ -1185,6 +1185,57 @@ def test_promote_holds_closed_title_in_present_tense(base):
     assert any("настоящим временем" in reason for reason in hold)
 
 
+def test_promote_holds_a_headline_that_was_cut_out_of_a_news_lead(base):
+    """Обрубок новости — сырьё, а не карточка.
+
+    21 сентября 2026 владелец увидел в консоли 🗂 «карточку», у которой
+    заголовок был отрезан от телеграм-поста на полуслове («…В периметр сделки
+    вошли»), предмет обрублен посреди слова («…и систем автом»), — и рядом
+    кнопка «Опубликовать». Его слова: «это не должно было как карточка
+    показаться, а должно было показаться как сомнительное».
+
+    Правило намеренно отделяет ОБРУБОК от длинного заголовка, а не длинное от
+    короткого: в базе есть настоящий заголовок на 196 знаков, и он проходит,
+    потому что кончается закрывающей кавычкой. Замер — в docstring promote.
+    """
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    common = {"date": "2026-09-21", "ind": sorted(inds)[0],
+              "src": [["Телеграм-канал", "https://example.invalid/cut-lead"]],
+              "buyer_name": "«Тест-Альфа»"}
+
+    cut = dict(common, title=("«Тест-Альфа» приобрела 51% доли в ГК «Тест-Бета», которая "
+                              "специализируется на производстве складских роботов и систем "
+                              "автоматизации. В периметр сделки вошли несколько компаний "
+                              "группы, формирующих единый"), asset="«Тест-Бета»")
+    _bad, hold = promote.check(cut, base, idx, inds)
+    assert any("обрезан" in r for r in hold), hold
+
+    # Длинный, но ДОПИСАННЫЙ заголовок — проходит: признак не длина.
+    whole = dict(common, title=("«Тест-Альфа» купила цементные заводы и горные предприятия "
+                                "(«Тест-цемент», «Тест-Бета-цемент», «Тест-Гамма-цемент») "
+                                "вместе с сопутствующей инфраструктурой у банка «Тест-Траст»"),
+                 asset="«Тест-Бета»")
+    _bad2, hold2 = promote.check(whole, base, idx, inds)
+    assert not any("обрезан" in r for r in hold2), hold2
+
+    # Предмет ровно на границе нашей же резки и с разрезанным словом.
+    asset_cut = dict(common, title="«Тест-Альфа» купила «Тест-Бету»",
+                     asset=("доли в ГК «Тест-Бета», которая специализируется на производстве "
+                            "складских роботов и систем автоматиз"))
+    assert len(asset_cut["asset"]) == promote.ASSET_CUT_LEN
+    _bad3, hold3 = promote.check(asset_cut, base, idx, inds)
+    assert any("предмет" in r and "обрезан" in r for r in hold3), hold3
+
+
+def test_directional_quotes_from_a_telegram_post_become_guillemets():
+    """“Фотомеханика” — тот же дефект, что чинили трижды, в другом начертании."""
+    import draft as drafter
+    out = drafter.normalize_quotes('“Корпорация робототехники” купила “Фотомеханику”')
+    assert out == '«Корпорация робототехники» купила «Фотомеханику»', out
+    assert '“' not in out and '”' not in out
+
+
 def test_enrich_adds_a_new_source_but_not_a_known_one(base):
     """Ссылка на источник — главный вклад обогащения, но дублей быть не должно."""
     import enrich
