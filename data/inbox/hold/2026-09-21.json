@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d47911068",
+   "draft_id": "d92096680",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,7 +342,7 @@
    ]
   },
   {
-   "draft_id": "d81323245",
+   "draft_id": "d58492071",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -372,7 +372,7 @@
    ]
   },
   {
-   "draft_id": "d15287340",
+   "draft_id": "d13364041",
    "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
    "date": "2026-09-21",
    "src": [
@@ -402,35 +402,7 @@
    ]
   },
   {
-   "draft_id": "d49184222",
-   "title": "Финдиректор «Аэрофлота» не считает ситуацию на фондовом рынке благоприятной для SPO",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28136607"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68599877",
+   "draft_id": "d22420114",
    "title": "В «Аэрофлоте» оценили ситуацию на фондовом рынке для SPO",
    "date": "2026-09-21",
    "src": [
@@ -453,10 +425,65 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62233354",
+   "title": "Paramount урегулировала иски 12 штатов и продолжит слияние с Warner Bros.",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8971725"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Финдиректор «Аэрофлота» не считает ситуацию на фондовом рынк» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d15568575",
+   "title": "Допэмиссия «М.Видео»: есть ли идея в акциях ретейлера",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/21/09/2026/6ab155bd9a79472010a98c2e"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
