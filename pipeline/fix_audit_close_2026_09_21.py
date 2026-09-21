@@ -54,6 +54,9 @@ sys.path.insert(0, str(ROOT))
 from pipeline import audit_queue as aq  # noqa: E402
 from pipeline.fix_audit_move_utils import get_field, set_field  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
+from review import _linker_key  # noqa: E402  «ООО «Х»» и «Х» — одно имя
+
 ROLE_IDS = ("buyer", "seller_id", "target", "asset_id")
 SRC_RX = re.compile(r"^src\[(\d+)\]\[(\d+)\]$")
 ADV_RX = re.compile(r"^law\.adv\[(\d+)\]\[(\d+)\]$")
@@ -100,7 +103,10 @@ def roles_are_distinct(card):
     return len(used) == len(set(used))
 
 
-def main(write: bool) -> int:
+def main(write: bool, out_dir=None) -> int:
+    global OUT_DIR
+    if out_dir:
+        OUT_DIR = ROOT / "data" / "inbox" / "audit2" / out_dir
     data = json.loads(DATA.read_text(encoding="utf-8"))
     cards = {d["id"]: d for d in data["deals"]}
     companies = data["companies"]
@@ -156,6 +162,30 @@ def main(write: bool) -> int:
                 break
             setter(new)
             done.append(field)
+        # ПОКУПАТЕЛЬ НАЗВАН ОДИН РАЗ — профилем ИЛИ текстом (замер: 1096
+        # карточек только с профилем, 155 только с текстом, ни одной с
+        # обоими; держит `test_buyer_is_named_once`). У продавца соглашение
+        # ДРУГОЕ: и профиль, и текст стоят у 316 карточек — там чистить
+        # нечего. Привязка покупателя обязана убрать текст, но убрать его
+        # можно не всегда:
+        #   • текст писал читатель через review.py и имя профиля с ним не
+        #     совпадает — снятие оставит строку таблицы правок неприменённой
+        #     («Группа компаний «Свеза»» против профиля «Свеза»);
+        #   • в тексте названы ДВЕ стороны («X и Y») — одной ссылкой это не
+        #     выражается, и половина факта пропадёт.
+        # В обоих случаях привязка откатывается, находка уходит владельцу:
+        # пустое место честнее половины факта.
+        if not trouble and card.get("buyer") and card.get("buyer_name") \
+                and any(p.get("field") == "buyer" for p in parts):
+            name = (companies.get(card["buyer"]) or {}).get("name") or ""
+            text = str(card.get("buyer_name") or "")
+            if (cid, "buyer_name") in decided and _linker_key(name) != _linker_key(text):
+                trouble = "имя покупателя текстом поставил читатель и оно шире профиля"
+            elif re.search(r"\sи\s|,", text):
+                trouble = "в тексте названы две стороны — одной ссылкой не выражается"
+            else:
+                card.pop("buyer_name", None)
+                done.append("buyer_name снято (имя несёт профиль)")
         if not trouble and not roles_are_distinct(card):
             trouble = "после правки компания заняла бы две роли"
         if trouble:
@@ -179,4 +209,8 @@ def main(write: bool) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main("--write" in sys.argv))
+    d = None
+    for i, a in enumerate(sys.argv):
+        if a == "--dir" and i + 1 < len(sys.argv):
+            d = sys.argv[i + 1]
+    sys.exit(main("--write" in sys.argv, d))

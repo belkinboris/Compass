@@ -1890,7 +1890,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "gc546ba07"
   },
   {
    "id": "g01054f2a",
@@ -2011,7 +2012,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "ga4383970"
   },
   {
    "id": "g40d9cd2e",
@@ -4618,7 +4620,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g271e0e00"
   },
   {
    "id": "gfd5e2810",
@@ -7229,7 +7232,8 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "seller_id": "gb7e1e33a"
   },
   {
    "id": "g10f783e8",
@@ -25932,7 +25936,8 @@
      "top_purchases": "ok",
      "multiple_text": "ok"
     }
-   }
+   },
+   "seller_id": "ga2cfae5b"
   },
   {
    "id": "g4cd1fa52",
@@ -54534,7 +54539,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g4058df30"
   },
   {
    "id": "g06a7a1c3",
@@ -60919,7 +60925,8 @@
      "multiple_text": "no_target"
     }
    },
-   "asset": "здание бывшего гипермаркета Selgros"
+   "asset": "здание бывшего гипермаркета Selgros",
+   "seller_id": "ga16d4baa"
   },
   {
    "id": "g7074c53b",
@@ -129165,7 +129172,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "seller_id": "g4b33b0cd"
   },
   {
    "id": "gc660ac38",
@@ -147787,7 +147795,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller_id": "g1356353d"
   },
   {
    "id": "g2d653619",
@@ -182438,7 +182447,8 @@
    },
    "date_basis": "publication",
    "sum_basis": "reported",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller_id": "gcafc31dc"
   },
   {
    "id": "ceeb8c214",
@@ -183148,7 +183158,8 @@
     }
    },
    "followup_researched": "2026-09-08",
-   "asset": "ООО «ММПОФ Пэкэджинг», ООО «ММПОФ Ротогравюр» и ООО «Невские грани»"
+   "asset": "ООО «ММПОФ Пэкэджинг», ООО «ММПОФ Ротогравюр» и ООО «Невские грани»",
+   "seller_id": "gee63afc6"
   },
   {
    "id": "c689eefe9",
@@ -211136,7 +211147,8 @@
     ]
    },
    "proofread": "2026-09-11",
-   "weekly_researched": "2026-09-15"
+   "weekly_researched": "2026-09-15",
+   "seller_id": "g041220bd"
   },
   {
    "id": "g0931ed04",
@@ -214682,14 +214694,14 @@
      "card_hash": "3d3d35d3006f"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g8ee31e1c",
+     "inn": "6234150771",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "c8d9798de49a"
     },
     "admitted": {
      "count": true,
@@ -214703,9 +214715,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "g8ee31e1c"
   },
   {
    "id": "g931e89e1",

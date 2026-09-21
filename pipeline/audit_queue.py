@@ -47,6 +47,23 @@ PRIORITY = [
 ]
 
 ROLE_FIELDS = {"asset": "target", "buyer_name": "buyer", "seller": "seller_id"}
+# Находка называет роль то текстовым полем, то полем-ссылкой, то так, как
+# роль подписана на экране («target_profile»). Все три написания ведут к
+# одной паре «текст ↔ ссылка».
+_ROLE_ALIASES = {
+    "asset": "asset", "target": "asset", "target_profile": "asset",
+    "asset_id": "asset", "предмет": "asset",
+    "buyer_name": "buyer_name", "buyer": "buyer_name", "buyer_profile": "buyer_name",
+    "seller": "seller", "seller_id": "seller", "seller_profile": "seller",
+}
+
+
+def _role_pair_of(field):
+    """(текстовое поле, поле-ссылка) для роли, о которой находка, или None."""
+    text = _ROLE_ALIASES.get(str(field or "").strip().lower())
+    return (text, ROLE_FIELDS[text]) if text else None
+
+
 JARGON_RE = re.compile(r"(Компания:|Персона:|История \d{4}:|Продукт:)")
 SENTENCE = re.compile(r"(?<=[.!?])\s+")
 
@@ -119,7 +136,7 @@ def _sentences(text) -> list:
     return [s.strip() for s in SENTENCE.split(str(text or "")) if len(s.strip()) >= 40]
 
 
-def still_broken(card: dict, cls: str) -> bool:
+def still_broken(card: dict, cls: str, field=None) -> bool:
     """Виден ли дефект этого класса в сегодняшних данных.
 
     Отвечает только за те классы, которые ВИДНЫ из самой карточки. Для
@@ -141,8 +158,17 @@ def still_broken(card: dict, cls: str) -> bool:
         return bool(card.get("seller_id")) and card["seller_id"] in (
             card.get("target"), card.get("asset_id"))
     if cls in ("ROLE_MISSING", "UNLINKED_PARTY"):
+        # ПО СВОЕМУ ПОЛЮ, А НЕ ПО ЛЮБОМУ. Раньше здесь стоял `any(...)` по
+        # всем трём ролям сразу, и находка про продавца оставалась в очереди
+        # после того, как продавца привязали, — просто потому, что у той же
+        # карточки не привязан покупатель. Читатели 21 сентября нашли это
+        # независимо друг от друга, открыв по нескольку уже закрытых находок:
+        # «13% партии — протухшие записи». Теперь находка живёт ровно до тех
+        # пор, пока сломано ТО поле, о котором она.
+        pair = _role_pair_of(field)
+        pairs = [pair] if pair else list(ROLE_FIELDS.items())
         return any((card.get(t) or "").strip() and not card.get(link)
-                   for t, link in ROLE_FIELDS.items())
+                   for t, link in pairs)
     if cls == "DUPLICATE_TEXT":
         # Клиент сам не показывает «Дополнительный контекст», повторяющий
         # соседние поля (extraHtml), поэтому дефектом считается повтор ВНУТРИ
@@ -164,7 +190,7 @@ def state_of(f: dict, cards: dict, merged: dict, done: dict) -> str:
     cid = f["card_id"]
     if cid not in cards:
         return "ушла" if cid in merged or True else "ушла"
-    if not still_broken(cards[cid], f["class"]):
+    if not still_broken(cards[cid], f["class"], f.get("field")):
         return "неактуальна"
     return "ждёт"
 
