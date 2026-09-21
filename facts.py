@@ -211,9 +211,23 @@ def _target_by_rule(deal: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]
 
 
 def _fresh(existing: dict[str, Any] | None, deal: dict[str, Any], key: str) -> dict[str, Any] | None:
-    """Прочитанный факт, если он есть и карточка с тех пор не менялась."""
-    if not existing or existing.get('basis') not in ('read', 'verified', 'disputed'):
+    """Прочитанный факт, если он есть и карточка с тех пор не менялась.
+
+    Уже помеченный `stale` факт остаётся как есть — не пересчитывается
+    заново правилом. Баг, пойманный 21 сентября 2026 (`KNOWN_ISSUES.md`,
+    «Проверенный факт слоя фактов может тихо превратиться обратно в
+    rule»): без этой ветки ВТОРОЙ подряд вызов `derive()` после того, как
+    факт уже стал stale (например, второй `facts_derive.py --write` того
+    же прогона, до или вместо повторного чтения), терял всю цитату и
+    подструктуру `disputed`/`readings` безвозвратно — картонка «до
+    повторного чтения считается как rule» (см. докстроку файла) должна
+    относиться только к ДОПУСКУ (`admitted`/`reasons`), а не к тому, что
+    хранится в самом факте.
+    """
+    if not existing or existing.get('basis') not in ('read', 'verified', 'disputed', 'stale'):
         return None
+    if existing.get('basis') == 'stale':
+        return existing
     if existing.get('card_hash') != card_hash(deal, key):
         return dict(existing, basis='stale', stale_from=existing.get('basis'))
     return existing
@@ -276,7 +290,9 @@ def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str,
     # (basis у предмета — registry/rule, ИНН приходит из реестра)
     kept = None
     prev = old.get('target') or {}
-    if prev.get('perimeter') in ('read', 'verified', 'disputed', 'refuted'):
+    if prev.get('perimeter') == 'stale':
+        kept = prev  # уже stale — не пересчитывать заново правилом (см. _fresh)
+    elif prev.get('perimeter') in ('read', 'verified', 'disputed', 'refuted'):
         kept = prev if prev.get('card_hash') == card_hash(deal, 'target') else dict(prev, perimeter='stale', stale_from=prev.get('perimeter'))
     if kept:
         facts['target'] = dict(kept, **_target_by_rule(deal, ctx))  # реестр — всегда свежий
