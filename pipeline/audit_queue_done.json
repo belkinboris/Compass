@@ -158,5 +158,12 @@
  "90868f0adb60": "eco.rationale→eco.context: рыночный комментарий, не мотив сторон (fix_audit_rationale_batch_2026_09_21.py)",
  "009410c17ecf": "eco.rationale снят (редундант структурных полей), факт о переговорах → eco.context (fix_audit_rationale_batch_2026_09_21.py)",
  "c38284d3e2fd": "eco.rationale→eco.context: статус переговоров, не мотив (fix_audit_rationale_batch_2026_09_21.py)",
- "96f5c8fd91ac": "eco.rationale→law.struct: механика финансирования через облигации (fix_audit_rationale_batch_2026_09_21.py)"
+ "96f5c8fd91ac": "eco.rationale→law.struct: механика финансирования через облигации (fix_audit_rationale_batch_2026_09_21.py)",
+ "9b2e38981799": "eco.target_fin→eco.val: оценка стоимости компонентов лота (fix_audit_target_fin_batch_2026_09_21.py)",
+ "8194883233e7": "eco.target_fin→eco.val: прогноз аналитика по отдаче для покупателя (fix_audit_target_fin_batch_2026_09_21.py)",
+ "d0e0256b63e7": "eco.target_fin переписан: оценка суммы сделки → eco.val, финансы предмета остаются (fix_audit_target_fin_batch_2026_09_21.py)",
+ "5bc5f759c5b3": "eco.target_fin→extra: описание рода занятий холдинга, не финансы (fix_audit_target_fin_batch_2026_09_21.py)",
+ "0654d6cf1872": "extra→eco.target_fin: капитал и активы банка «Точка» (fix_audit_target_fin_batch_2026_09_21.py)",
+ "9dabfbc64505": "eco.target_fin→eco.val: мультипликатор EV/EBITDA (fix_audit_target_fin_batch_2026_09_21.py)",
+ "890718ae9b70": "eco.target_fin→eco.rationale: мотив декарбонизации продавца (fix_audit_target_fin_batch_2026_09_21.py)"
 }
