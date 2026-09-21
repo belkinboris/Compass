@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d36868700",
+   "draft_id": "d77498093",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,7 +342,7 @@
    ]
   },
   {
-   "draft_id": "d75995231",
+   "draft_id": "d75063564",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -372,7 +372,7 @@
    ]
   },
   {
-   "draft_id": "d52451145",
+   "draft_id": "d25323062",
    "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
    "date": "2026-09-21",
    "src": [
@@ -402,104 +402,7 @@
    ]
   },
   {
-   "draft_id": "d39144926",
-   "title": "Экс-сотрудника СКР осудили за покупку диплома о техническом образовании",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8971817"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d76732918",
-   "title": "Турция рассматривает объединение активов фондов для выплат инвесторам",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/305851"
-    ]
-   ],
-   "sum": "$18 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-21",
-     "title": "Переговоры",
-     "note": "Фонды, в отношении которых начата ликвидация, владеют инвестиционными активами более чем на $18 млрд Сообщение Турция рассматривает объединение активов фондов для выплат инвесторам появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/305851"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d91860898",
-   "title": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/21/ouras-2-2b-ipo-is-mostly-a-payday-for-existing-shareholders/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d39155596",
+   "draft_id": "d15151282",
    "title": "Компанию, создавшую «Мир танков», могут продать в октябре",
    "date": "2026-09-21",
    "src": [
@@ -527,17 +430,45 @@
    ]
   },
   {
-   "draft_id": "d88696923",
-   "title": "Россиянин хотел купить телефон, а в итоге остался с кредитом на 116 тысяч",
+   "draft_id": "d18327792",
+   "title": "На Херсонщине «Единая Россия» получила 70% голосов на выборах в ГД",
    "date": "2026-09-21",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053129510"
+     "web:tass.ru",
+     "https://tass.ru/politika/28137011"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "голоса на выборах в ГД",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "голоса на выборах в ГД",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d38527852",
+   "title": "Parisien: аукцион вещей Брижит Бардо вызвал недовольство родных и друзей актрисы",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28136997"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
