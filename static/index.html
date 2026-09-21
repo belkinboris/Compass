@@ -2102,9 +2102,21 @@ const advSide = (role, d, note) => {
   // Имена стороны: профиль (с его псевдонимами из MATCH_KEYS — «сбер», «втб»,
   // «система») и текстовое поле.
   const profileNames = id => id && co(id) ? [co(id).name, ...(MATCH_KEYS[id]||[])] : [];
+  // У организаторов и кредиторов поля стороны НЕТ: организатор размещения —
+  // не покупатель, не продавец и не предмет, он назван только в `eco.finadv`.
+  // Без этих имён пояснение «на стороне ВТБ» не с чем было сверить, и
+  // консультант уезжал в «сторона не уточнена» — ровно та жалоба владельца,
+  // ради которой advSide и читает пояснение. Нашлось 21 сентября 2026, когда
+  // у сделки ВТБ/АФК «Система» сняли неверную ссылку buyer на ВТБ (он
+  // организатор, а не инвестор): до этого сторона угадывалась случайно —
+  // через ошибку в данных.
+  const bankNames = () => (d && d.eco && hasFact(d.eco.finadv) ? String(d.eco.finadv).split(";") : [])
+      .map(s=>s.trim()).filter(s=>SIDE_WORDS.bank.test(s.toLowerCase()))
+      .map(s=>s.split("—")[0].replace(/\s*\([^)]*\)\s*$/,"").trim()).filter(Boolean);
   const names = side => !d ? [] : (side==="buyer" ? [...profileNames(d.buyer), d.buyer_name]
                        : side==="seller" ? [...profileNames(d.seller_id), d.seller]
-                       : side==="target" ? [...profileNames(d.target), ...profileNames(d.asset_id), d.asset] : []).filter(Boolean);
+                       : side==="target" ? [...profileNames(d.target), ...profileNames(d.asset_id), d.asset]
+                       : side==="bank" ? bankNames() : []).filter(Boolean);
   // Слова имени: от четырёх букв, без скобок («Ingka Centres (портфель ТЦ «Мега»)»
   // — только «ingka»/«centres»: пояснение в скобках — не имя) и без правовых
   // форм. У короткого имени («Р7», «VK», «ВТБ») длинных слов нет — тогда

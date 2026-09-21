@@ -4295,9 +4295,9 @@
     "appr": "Требуется разрешение правительственной комиссии по контролю за иностранными инвестициями и последующее одобрение президента; заявления планируется подать к августу 2026 года — сделка на стадии предварительных договоров.",
     "adv": [
      [
-      "Юридический консультант",
-      "Юрфирма «Алимирзоев и Трофимов»",
-      "комментарий по процедуре одобрения, сторона не уточнена — партнёр Илья Алещев"
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
      ]
     ],
     "terms": "Предварительные договоры подписаны под отлагательным условием получения разрешения правительственной комиссии по контролю за иностранными инвестициями; заявления планируется подать к августу 2026 года с последующим одобрением президента."
@@ -9238,7 +9238,7 @@
    "id": "ga46c5b15",
    "date": "2026-06-30",
    "title": "ВТБ и АФК «Система»: структурная инвестиционная сделка на 320 млрд ₽ под залог акций Ozon",
-   "buyer": "gcafc31dc",
+   "buyer": "",
    "target": "gc2792a44",
    "ind": "Финансовые услуги",
    "type": "Финансирование · структурная сделка",
@@ -15694,7 +15694,8 @@
     }
    },
    "date_basis": "publication",
-   "asset": "гостиничный комплекс «Аэротель»"
+   "asset": "гостиничный комплекс «Аэротель»",
+   "seller_id": "domodedovo"
   },
   {
    "id": "g4a8bd86d",
@@ -25949,7 +25950,7 @@
    "date": "2023-01-17",
    "title": "Принудительная деконсолидация активов Wintershall Dea в России: выход из СП с «Газпромом»",
    "buyer": null,
-   "target": "gc0f11fd7",
+   "target": null,
    "ind": "Нефть и газ",
    "type": "Финансирование · структурная сделка",
    "kind": "financing",
@@ -26068,14 +26069,14 @@
      "card_hash": "57c796eec681"
     },
     "target": {
-     "company_id": "gc0f11fd7",
-     "inn": "7736050003",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "a88173b81479"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -32822,7 +32823,7 @@
    "date": "2023-02-21",
    "title": "Росимущество продало госпакет 11,9% АО «НК «Роснефть» — Артаг» (Северная Осетия) посредством публичного предложения",
    "buyer": null,
-   "target": "g300b9ead",
+   "target": null,
    "ind": "Нефть и газ",
    "type": "M&A",
    "kind": "acquisition",
@@ -32897,7 +32898,7 @@
     "stake": {
      "value": 11.9,
      "basis": "rule",
-     "card_hash": "1d585424e97f"
+     "card_hash": "299651e2d769"
     },
     "price": {
      "value_rub": null,
@@ -32923,14 +32924,14 @@
      "card_hash": "7ebef7181c00"
     },
     "target": {
-     "company_id": "g300b9ead",
-     "inn": "7706107510",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "2bbd7aed5561"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -32944,10 +32945,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
    },
-   "sum_basis": "auction_start"
+   "sum_basis": "auction_start",
+   "asset": "АО «НК «Роснефть» — Артаг»"
   },
   {
    "id": "g554eb6ae",
@@ -40700,7 +40702,7 @@
    "date": "2021-10-11",
    "title": "Инвестиции фонда «Венчурный фонд Сколково — Индустриальный I» (Skolkovo Ventures) в Cyberphysics: 50 млн рублей за 20% в уставном капитале",
    "buyer": null,
-   "target": "g6f19123a",
+   "target": null,
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
    "kind": "financing",
@@ -40791,14 +40793,14 @@
      "card_hash": "57a8bc898133"
     },
     "target": {
-     "company_id": "g6f19123a",
-     "inn": "7701058410",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "602d3b776f39"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -46368,7 +46370,7 @@
    "date": "2026-02-18",
    "title": "Альфа-банк, А1 и «Альфа-Капитал» запускают ЗПИФ «специальных ситуаций» на ₽30 млрд",
    "buyer": null,
-   "target": "g5d2fa5a0",
+   "target": "",
    "ind": "Управление активами",
    "type": "M&A",
    "kind": "acquisition",
@@ -46460,14 +46462,14 @@
      "card_hash": "ebcffc7d971e"
     },
     "target": {
-     "company_id": "g5d2fa5a0",
-     "inn": "7728142469",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "cc76a47d1c78"
+     "card_hash": "cb97af0531a1"
     },
     "admitted": {
      "count": true,
@@ -46481,7 +46483,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "multiple_text": "no_target"
     }
    },
    "sum_basis": "raise"
@@ -48662,7 +48664,7 @@
    "date": "2022-05-18",
    "title": "IndaSpace привлёк 6 млн рублей в Pre-seed раунде от основателя «Нетологии-групп» Максима Спиридонова",
    "buyer": null,
-   "target": "ga09e7dfc",
+   "target": null,
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
    "kind": "financing",
@@ -48759,14 +48761,14 @@
      "card_hash": "8afbfb3bb3fc"
     },
     "target": {
-     "company_id": "ga09e7dfc",
-     "inn": "7715964180",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "ce285d633013"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -64251,8 +64253,8 @@
    "id": "g5c3eeb06",
    "date": "2023-06-16",
    "title": "Сбербанк продал австрийскую дочку Sberbank Europe AG Штефану Зочлингу",
-   "buyer": "g847db8e9",
-   "target": null,
+   "buyer": null,
+   "target": "g847db8e9",
    "ind": "Банки",
    "type": "M&A",
    "kind": "acquisition",
@@ -64351,14 +64353,14 @@
      "card_hash": "141144b1b779"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g847db8e9",
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "8f346db618bd"
     },
     "admitted": {
      "count": true,
@@ -64372,9 +64374,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "buyer_name": "Bepoda Beteiligungsgesellschaft mbH (компания Штефана Зочлинга)"
   },
   {
    "id": "g8f638d63",
@@ -90137,7 +90140,7 @@
    "promoted_from_bulk": true,
    "added": "2026-07-23",
    "reviewed": "2026-08-09",
-   "seller": "Михаил Несветайло",
+   "seller": "АО «Форум Капитал»",
    "seller_src": "text",
    "deep_researched": "2026-08-10",
    "weekly_researched": "2026-08-10",
@@ -128194,7 +128197,8 @@
      "multiple_text": "no_target"
     }
    },
-   "asset": "ООО «Много приложений»"
+   "asset": "ООО «Много приложений»",
+   "seller_id": "g9d76115a"
   },
   {
    "id": "gdd67ffde",
@@ -135562,7 +135566,7 @@
    "id": "g9f76fe60",
    "date": "2023-11-03",
    "title": "Павел Тё приобрел 25% Рязанской чаеразвесочной фабрики",
-   "buyer": "g4544d3b3",
+   "buyer": "goooosm",
    "target": "g8ee31e1c",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -145830,7 +145834,7 @@
    "date": "2023-06-02",
    "title": "Сбербанк Инвестиции приобрел 49% доли в Медскан лаб",
    "buyer": "g28ff15bb",
-   "target": "g729ef6c5",
+   "target": null,
    "ind": "Здравоохранение",
    "type": "Инвестиция",
    "kind": "financing",
@@ -145916,14 +145920,14 @@
      "card_hash": "b3e75cb33233"
     },
     "target": {
-     "company_id": "g729ef6c5",
-     "inn": "7736328675",
-     "confirmed": true,
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "registry",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "d447eb56e9f5"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -155669,7 +155673,7 @@
    "id": "g1c5d636d",
    "date": "2023",
    "title": "Продажа Первой грузовой компании Владимира Лисина компании «Аврора Инвест» (Алексей Тайчер)",
-   "buyer": "g4b480566",
+   "buyer": null,
    "target": "gdd278a7f",
    "ind": "Транспорт и логистика",
    "type": "M&A",
@@ -169877,7 +169881,7 @@
    "date": "2023",
    "title": "Игорь Ким приобретает лизинговую и факторинговую дочки CNH Industrial",
    "buyer": "ge370cfae",
-   "target": "g1c10cbcb",
+   "target": null,
    "ind": "Финансовые услуги",
    "type": "M&A",
    "kind": "acquisition",
@@ -169940,7 +169944,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "13ec58c86d8e"
+     "card_hash": "b137d3f22c19"
     },
     "price": {
      "value_rub": null,
@@ -169966,14 +169970,14 @@
      "card_hash": "c7142f4224bf"
     },
     "target": {
-     "company_id": "g1c10cbcb",
+     "company_id": null,
      "inn": null,
      "confirmed": false,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "unknown",
      "perimeter": "unknown",
-     "card_hash": "53c86ac501fe"
+     "card_hash": "493dbc68fa9b"
     },
     "admitted": {
      "count": true,
@@ -169987,9 +169991,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "no_target"
     }
-   }
+   },
+   "seller_id": "g1c10cbcb",
+   "asset": "ООО «Сиэнэйч индастриал файненшиал сервисез Руссия» и ООО «Сиэнэйч индастриал капитал Руссия»"
   },
   {
    "id": "gd607171c",
@@ -180001,14 +180007,14 @@
      "card_hash": "5def20eb2f47"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gc859ac37",
+     "inn": "2315006923",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "dd8b3a6faae5"
     },
     "admitted": {
      "count": true,
@@ -180022,11 +180028,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-07",
-   "asset": "зерновой терминал КСК в Новороссийске"
+   "asset": "зерновой терминал КСК в Новороссийске",
+   "target": "gc859ac37",
+   "seller_id": "cargill"
   },
   {
    "id": "mercedes",
@@ -197552,7 +197560,7 @@
     "appr": "Сделку требовалось согласовать: правительство РФ запретило сделки с долями в кредитных организациях, принадлежащих лицам из «недружественных стран».",
     "adv": [
      [
-      "Юридический консультант продавца (РНКО «Деньги.Мэйл.Ру»)",
+      "Юридический консультант покупаемой компании (РНКО «Деньги.Мэйл.Ру»)",
       "Orlova\\Ermolenko",
       "Сбор документов по кредитной организации, иностранному участнику и группе компаний ВК, согласование сделки. Источник: https://t.me/LawFirms/6885"
      ]
