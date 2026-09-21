@@ -151,5 +151,12 @@
  "a2dfef2c4edc": "law.struct→eco.fin: расчёт встречной долей, не деньгами (fix_audit_struct_batch2_2026_09_21.py)",
  "e6a3f3dd6b8a": "law.struct→law.terms: опцион обратного выкупа (fix_audit_struct_batch2_2026_09_21.py)",
  "efe859ec9439": "law.struct удалён: дубль записи в law.adv (fix_audit_struct_batch2_2026_09_21.py)",
- "aeb0420bff50": "eco.context→law.struct: паритетная структура 50/50 со Сколково (fix_audit_struct_batch2_2026_09_21.py)"
+ "aeb0420bff50": "eco.context→law.struct: паритетная структура 50/50 со Сколково (fix_audit_struct_batch2_2026_09_21.py)",
+ "e6027f7b37c6": "eco.rationale→eco.context: предположение о будущем покупателе, не мотив (fix_audit_rationale_batch_2026_09_21.py)",
+ "3b29b2fce2e0": "eco.rationale→eco.share: описание продукта, не мотив (fix_audit_rationale_batch_2026_09_21.py)",
+ "cdb828207106": "eco.rationale снят: перефразированный дубль eco.fin (fix_audit_rationale_batch_2026_09_21.py)",
+ "90868f0adb60": "eco.rationale→eco.context: рыночный комментарий, не мотив сторон (fix_audit_rationale_batch_2026_09_21.py)",
+ "009410c17ecf": "eco.rationale снят (редундант структурных полей), факт о переговорах → eco.context (fix_audit_rationale_batch_2026_09_21.py)",
+ "c38284d3e2fd": "eco.rationale→eco.context: статус переговоров, не мотив (fix_audit_rationale_batch_2026_09_21.py)",
+ "96f5c8fd91ac": "eco.rationale→law.struct: механика финансирования через облигации (fix_audit_rationale_batch_2026_09_21.py)"
 }
