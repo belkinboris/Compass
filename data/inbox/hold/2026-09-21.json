@@ -312,13 +312,41 @@
    ]
   },
   {
-   "draft_id": "d58302264",
-   "title": "Марочко: большая часть запорожского Орехова перешла под контроль ВС РФ",
+   "draft_id": "d21809598",
+   "title": "«Сибур» не ожидает существенных изменений в объеме инвестиций в ДГП-2",
    "date": "2026-09-21",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/armiya-i-opk/28133661"
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/sibur-873495355.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44911614",
+   "title": "Российская певица избавилась от квартиры из фильма «Брат-2»",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/rossiyskaya-pevitsa-izbavilas-ot-kvartiry-iz-filma-brat-2/"
     ]
    ],
    "sum": null,
@@ -340,17 +368,17 @@
    ]
   },
   {
-   "draft_id": "d84936050",
-   "title": "Инвестиции в смыслы: как сохранение наследия помогает строить будущее",
-   "date": "2026-09-21",
+   "draft_id": "d14009618",
+   "title": "На Дону выставили на торги право аренды участков аэродрома Центральный",
+   "date": "2026-09-20",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/21/investicii-v-smisli-kak-sohranenie"
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/rostov/2026/9/20/na-donu-vystavili-na-torgi-pravo-arendy-uchastkov-aerodroma-czentralnyj"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -361,11 +389,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Порты и инфраструктура",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
