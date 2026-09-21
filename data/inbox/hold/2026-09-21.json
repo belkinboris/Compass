@@ -312,7 +312,7 @@
    ]
   },
   {
-   "draft_id": "d20592271",
+   "draft_id": "d47911068",
    "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
    "date": "2026-09-21",
    "src": [
@@ -342,7 +342,7 @@
    ]
   },
   {
-   "draft_id": "d22547251",
+   "draft_id": "d81323245",
    "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
    "date": "2026-09-21",
    "src": [
@@ -372,7 +372,7 @@
    ]
   },
   {
-   "draft_id": "d82997635",
+   "draft_id": "d15287340",
    "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
    "date": "2026-09-21",
    "src": [
@@ -402,45 +402,17 @@
    ]
   },
   {
-   "draft_id": "d54871822",
-   "title": "В Париже проходит аукцион личных вещей Брижит Бардо",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8971648"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90543069",
-   "title": "ТАСС: вместе с Некоглаем по подозрению в продаже наркотиков задержана его жена",
+   "draft_id": "d49184222",
+   "title": "Финдиректор «Аэрофлота» не считает ситуацию на фондовом рынке благоприятной для SPO",
    "date": "2026-09-21",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28136513"
+     "https://tass.ru/ekonomika/28136607"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -458,95 +430,17 @@
    ]
   },
   {
-   "draft_id": "d61909718",
-   "title": "Минфин не намерен «по дешевке» продавать компании с госучастием",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28136477"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-21",
-     "title": "Переговоры",
-     "note": "Ведомство будет смотреть на рыночную конъюнктуру, заявил заместитель министра финансов Алексей Моисеев",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28136477"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81079268",
-   "title": "Около семи тысяч антропоморфных роботов продали в мире в 2025 году",
+   "draft_id": "d68599877",
+   "title": "В «Аэрофлоте» оценили ситуацию на фондовом рынке для SPO",
    "date": "2026-09-21",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260921/god-873521713.html"
+     "https://1prime.ru/20260921/aeroflot-873523965.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-21",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260921/god-873521713.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "в мире в 2025 году",
-   "seller": "Около семи тысяч антропоморфных роботов",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "в мире в 2025 году",
-    "seller": "Около семи тысяч антропоморфных роботов"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d30336973",
-   "title": "В Минфине заявили, что не будут по дешевке продавать компании с госучастием",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260921/minfin-873520449.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -559,133 +453,10 @@
    },
    "ind": null,
    "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87223406",
-   "title": "«Росвексель» расширит цифровые инструменты для инвестиций в золото",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260921/zoloto-2119307497.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81581921",
-   "title": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/21/corridor-raises-25m-seed-to-build-a-health-benefits-brokerage-for-smbs/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d51392537",
-   "title": "Минфин заявил, что не будет продавать госкомпании по дешевке",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129475"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-21",
-     "title": "Переговоры",
-     "note": "Минфин России не намерен продавать компании с государственным участием по заниженным ценам, заявил заместитель министра финансов РФ Алексей Моисеев.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053129475"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d79661675",
-   "title": "Американцы такого не хотели: США случайно помогли России продавать Су-57",
-   "date": "2026-09-21",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/21/amerikanczy-takogo-ne-hoteli-ssha-sluchajno-pomogli-rossii-prodavat-su-57"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Финдиректор «Аэрофлота» не считает ситуацию на фондовом рынк» — второе издание, в группу не шлём"
    ]
   }
  ]
