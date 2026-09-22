@@ -402,7 +402,7 @@
    ]
   },
   {
-   "draft_id": "d28125852",
+   "draft_id": "d67378040",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -441,7 +441,7 @@
    ]
   },
   {
-   "draft_id": "d58770276",
+   "draft_id": "d30977108",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -469,35 +469,7 @@
    ]
   },
   {
-   "draft_id": "d80143679",
-   "title": "«1С» и «Райтек» создают совместное предприятие для развития цифровых технологий управления производством",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-22_1s_i_rajtek_sozdayut_sovmestnoe"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86050796",
+   "draft_id": "d71412619",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -525,7 +497,7 @@
    ]
   },
   {
-   "draft_id": "d60945457",
+   "draft_id": "d70848389",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -554,13 +526,13 @@
    ]
   },
   {
-   "draft_id": "d16947027",
-   "title": "В Удмуртии с 1 марта перестанут продавать вейпы",
+   "draft_id": "d91895403",
+   "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28138275"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-09-22_yandeks_vyvodit_na_rynok"
     ]
    ],
    "sum": null,
@@ -575,10 +547,109 @@
     "asset": null,
     "seller": null
    },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d41007492",
+   "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28138343"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-22",
+     "title": "Переговоры",
+     "note": "Доли компаний в предприятии могут составить по 50%",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28138343"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
    "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d88927905",
+   "title": "В Петербурге выставили на торги бывший гипермаркет «Карусель»",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260922/peterburg-2119461213.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89471685",
+   "title": "Импорт подержанных авто из Японии в 2026 году вырос на 30% — чаще всего россияне покупают Toyota и Honda",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/import-poderzhannyh-avto-iz-yaponii-v-2026-godu-vyros-na-30-chashe-vsego-rossiyane-pokupayut-toyota-i-honda/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Toyota и Honda",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Toyota и Honda",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
