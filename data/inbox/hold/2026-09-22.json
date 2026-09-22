@@ -107,7 +107,8 @@
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g076af76a (общие редкие слова: котора, платфо) — проверьте, не дубль ли"
    ]
   },
   {
@@ -446,7 +447,7 @@
    ]
   },
   {
-   "draft_id": "d26656087",
+   "draft_id": "d67977690",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -485,7 +486,7 @@
    ]
   },
   {
-   "draft_id": "d66065108",
+   "draft_id": "d22451162",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -513,7 +514,7 @@
    ]
   },
   {
-   "draft_id": "d65510299",
+   "draft_id": "d19718740",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -541,7 +542,7 @@
    ]
   },
   {
-   "draft_id": "d54140132",
+   "draft_id": "d68770103",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -570,7 +571,7 @@
    ]
   },
   {
-   "draft_id": "d61689551",
+   "draft_id": "d33957217",
    "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
@@ -600,7 +601,7 @@
    ]
   },
   {
-   "draft_id": "d37243457",
+   "draft_id": "d87314322",
    "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
    "date": "2026-09-22",
    "src": [
@@ -641,7 +642,7 @@
    ]
   },
   {
-   "draft_id": "d76729525",
+   "draft_id": "d37275435",
    "title": "Акционеры «Т-Технологий» одобрили допэмиссию акций для консолидации «Точки»",
    "date": "2026-09-22",
    "src": [
@@ -669,187 +670,13 @@
    ]
   },
   {
-   "draft_id": "d28874196",
+   "draft_id": "d50717435",
    "title": "Rostic’s перестал продавать франшизы в России — новые точки будут открывать действующие партнёры",
    "date": "2026-09-22",
    "src": [
     [
      "web:rb.ru",
      "https://rb.ru/news/rostics-perestal-prodavat-franshizy-v-rossii-novye-tochki-budut-otkryvat-dejstvuyushie-partnyory/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91892956",
-   "title": "«Русал» планирует продать активы на Ямайке и в Гайане, пишет Bloomberg",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260922/rusavshij-873565079.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-22",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260922/rusavshij-873565079.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38743586",
-   "title": "В Тобольске за 140 млн рублей продают главный бизнес-центр города",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129771"
-    ]
-   ],
-   "sum": "140 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку geb31b556 (общие редкие слова: города, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d33274926",
-   "title": "Эмиратская XRG ведет переговоры о приобретении доли в LNG Canada, пишут СМИ",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260922/xrg-873567708.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-22",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260922/xrg-873567708.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54184011",
-   "title": "«Снова состригем с народа»: планируется обложить налогом все покупки через СБП.....",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354289.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-22",
-     "title": "Переговоры",
-     "note": "Добрый денёчек!)… (ЗаяЦЪ приветствует вас поедая шоколад, сидя в удобнейшем кресле, почитывая)… Удивительные новости поразили рунет! Присмотримся к ним поподробнее: В России планируется обложить налогом покупки и переводы через СБП Термин «люди – новая нефть»…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1354289.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34692813",
-   "title": "Доходы растут медленнее трат: почему россияне становятся осмотрительнее в покупках",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/22/dohody-rastut-medlennee-trat-pochemu-rossiyane-stanovyatsya-osmotritelnee-v-pokupkah"
     ]
    ],
    "sum": null,
