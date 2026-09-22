@@ -1,0 +1,47 @@
+{
+ "made": "2026-09-22",
+ "items": [
+  {
+   "key": "https://tass.ru/kultura/28139123::g2b62ae77",
+   "candidate_id": "g2b62ae77",
+   "reason": "общие редкие слова: москвы, рублей",
+   "draft": {
+    "draft_id": "d16363798",
+    "title": "Один из первых планов Москвы продали на торгах за 400 тыс. рублей",
+    "date": "2026-09-22",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/kultura/28139123"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-09-22",
+      "title": "Сделка завершена",
+      "note": "Также продали альбом Хельмута Ньютона \"Sumo\" с автографом",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/kultura/28139123"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах",
+    "seller": "Один из первых планов Москвы",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах",
+     "seller": "Один из первых планов Москвы"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-22"
+  }
+ ]
+}

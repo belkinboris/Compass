@@ -402,7 +402,7 @@
    ]
   },
   {
-   "draft_id": "d23191410",
+   "draft_id": "d10592935",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -441,7 +441,7 @@
    ]
   },
   {
-   "draft_id": "d45210026",
+   "draft_id": "d43324985",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -469,7 +469,7 @@
    ]
   },
   {
-   "draft_id": "d43521999",
+   "draft_id": "d20375650",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -497,7 +497,7 @@
    ]
   },
   {
-   "draft_id": "d87939515",
+   "draft_id": "d67419345",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -526,7 +526,7 @@
    ]
   },
   {
-   "draft_id": "d38635708",
+   "draft_id": "d81141272",
    "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
@@ -556,7 +556,7 @@
    ]
   },
   {
-   "draft_id": "d33052897",
+   "draft_id": "d37106969",
    "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
    "date": "2026-09-22",
    "src": [
@@ -597,13 +597,13 @@
    ]
   },
   {
-   "draft_id": "d56379790",
-   "title": "Больше всего жилья в новых домах продается в Краснодаре и Ростове-на-Дону",
+   "draft_id": "d53558053",
+   "title": "Акционеры «Т-Технологий» одобрили допэмиссию акций для консолидации «Точки»",
    "date": "2026-09-22",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8972215"
+     "https://www.kommersant.ru/doc/8972311"
     ]
    ],
    "sum": null,
@@ -625,13 +625,126 @@
    ]
   },
   {
-   "draft_id": "d74690413",
-   "title": "В российском регионе выставили на продажу «морской огород» с гребешком",
+   "draft_id": "d34700862",
+   "title": "Кредитор Volkswagen оспаривает сделки по продаже российских активов",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972260"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21373115",
+   "title": "Эксперт назвал критерии выбора между покупкой и арендой спецтехники",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2171391/2026-09-22/ekspert-nazval-kriterii-vybora-mezhdu-pokupkoi-i-arendoi-spetctekhniki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53671272",
+   "title": "Красноярские семьи, где 7 и более детей, смогут купить микроавтобус",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260922/mikroavtobus-2119497403.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d62235721",
+   "title": "Чемпионский перстень олимпийской сборной России выставили на аукцион",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260922/persten-2119489102.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15528700",
+   "title": "Россиян предупредили о рисках покупки квартиры в ипотеку",
    "date": "2026-09-22",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/22/v-rossiyskom-regione-vystavili-na-prodazhu-morskoy-ogorod-s-grebeshkom/"
+     "https://lenta.ru/news/2026/09/22/rossiyan-predupredili-o-riskah-pokupki-kvartiry-v-ipoteku/"
     ]
    ],
    "sum": null,
@@ -650,35 +763,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66476544",
-   "title": "Mento VC под управлением Александра Журавлева вложился в американский ИИ-стартап Uptool . Об этом управляющий партнер фонда написал в сообщении в своем Telegram-канале. В раунде на $6 млн также участв",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7746"
-    ]
-   ],
-   "sum": "$6 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
    ]
   }
  ]
