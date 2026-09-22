@@ -184,3 +184,22 @@ def test_the_release_step_is_written_down_where_it_is_read():
     assert os.path.exists(script), "правило ссылается на скрипт, которого нет"
     text = io.open(script, encoding="utf-8").read()
     assert "data_refresh" in text, "скрипт не объясняет, почему данные не требуют пересборки"
+
+
+def test_a_document_with_a_cyrillic_name_is_not_deployed_as_code():
+    """git экранирует кириллические имена — и проверка суффикса на них молчит.
+
+    `git diff --name-only` отдаёт «finance/ЗАПИСКА.md» как
+    "finance/\\320\\227..." в кавычках, поэтому path.endswith(".md") не
+    срабатывает и документ уезжает в `release` как код, вызывая пересборку
+    сайта. Пересборка на каждый коммит однажды уложила сайт на девять минут,
+    ради чего release.py и сравнивает ветки по коду.
+    """
+    from pipeline import release
+    assert release.is_code("main.py")
+    assert release.is_code("pipeline/ingest/draft.py")
+    assert not release.is_code("CLAUDE.md")
+    assert not release.is_code("finance/ЗАПИСКА_финмодель.md")
+    assert not release.is_code("finance/Компас_финмодель_24м.xlsx")
+    assert not release.is_code("finance/build_model.py")
+    assert not release.is_code("static/data/deals_promoted.json")
