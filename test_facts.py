@@ -303,3 +303,62 @@ def test_possible_duplicates_block_money_metrics():
                        dict(_deal(id='e1', title='Softline купила Visitech', sum='162 млн ₽', target='t2'), facts=e)], 'companies': {}}
     facts.mark_possible_duplicates(base2, CTX)
     assert all('identity' not in d['facts'] for d in base2['deals'])
+
+
+def test_two_readers_on_different_stages_keep_the_strongest_and_show_the_disagreement():
+    """EVENT_STRENGTH: два чтения о цене назвали РАЗНЫЕ события одной сделки.
+
+    Ярлык стадии не «побеждает первый» и не становится disputed — берётся
+    сильнейшее событие (закрытие сильнее объявления), а само разночтение
+    остаётся видимым в event_variants. Правило жило только в коде
+    (проверка 22 сентября 2026: код есть, теста нет).
+    """
+    out = fc.merged_fields('price', [
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'announcement'},
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'closing'},
+    ])
+    assert out['event'] == 'closing'
+    assert out['event_variants'] == ['announcement', 'closing']
+    # порядок чтений ничего не решает
+    back = fc.merged_fields('price', [
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'closing'},
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'signing'},
+    ])
+    assert back['event'] == 'closing'
+    # незнакомое слово не перебивает известную стадию
+    odd = fc.merged_fields('price', [
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'signing'},
+        {'meaning': 'disclosed', 'value_rub': 1e9, 'event': 'слухи'},
+    ])
+    assert odd['event'] == 'signing'
+
+
+def test_who_named_the_price_has_to_be_visible_in_a_quote_not_in_the_readers_confidence():
+    """attribution_quote: «цену назвали стороны» — утверждение, а не впечатление.
+
+    Если в цитате с цифрой нет слов о том, кто её назвал, читатель обязан
+    приложить вторую цитату из того же текста. Правило жило только в коде
+    (проверка 22 сентября 2026: код есть, теста нет).
+    """
+    url = 'https://example.org/a'
+    quote = 'Сумма сделки составила 1 млрд рублей.'
+    said = 'Об этом сообщила пресс-служба компании.'
+    texts = {url: quote + ' ' + said}
+    card = {'id': 'd1', 'src': [{'url': url}]}
+
+    def reading(**kw):
+        price = {'meaning': 'disclosed', 'value_rub': 1_000_000_000, 'attribution': 'parties',
+                 'scope': 'equity', 'quote': quote, 'source': url, 'event': 'closing'}
+        price.update(kw)
+        return {'id': 'd1', 'reader': 'r1', 'price': price}
+
+    _, bare = fc.check_reading(reading(), card, texts)
+    assert any('attribution' in p for p in bare), bare
+
+    _, withq = fc.check_reading(reading(attribution_quote=said), card, texts)
+    assert not [p for p in withq if 'attribution' in p], withq
+
+    # вторая цитата проверяется на дословность тем же правилом, что и первая
+    _, made_up = fc.check_reading(
+        reading(attribution_quote='Об этом заявил генеральный директор.'), card, texts)
+    assert any('дословно' in p for p in made_up), made_up

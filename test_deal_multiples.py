@@ -631,3 +631,23 @@ def test_computed_tier_admits_text_facts_but_never_disputed_or_stakeless():
     # Второй уровень — решение витрины, а не свойство факта: в METRICS его нет,
     # значит derive ничего не записывает в карточки.
     assert 'multiple_text_computed' not in facts.METRICS
+
+
+def test_a_swapped_report_in_the_denominator_drops_the_verified_tier():
+    """Читатель подтверждал периметр ПО КОНКРЕТНОМУ отчёту — ИНН, год, выручка.
+
+    Правило жило только в коде `compute_market_multiples` и не было закрыто
+    тестом (проверка 22 сентября 2026: код есть, теста нет). Если в знаменателе
+    оказался другой отчёт, карточка не менялась — изменилось число под ней, и
+    подтверждение читателей к нему уже не относится.
+    """
+    seen = {'inn': '7700000001', 'year': 2023, 'revenue_rub': 1_000_000_000.0}
+    assert dm.perimeter_report_still_matches(seen, '7700000001', 2023, 1_000_000_000.0)
+    # округление выгрузки — тот же отчёт
+    assert dm.perimeter_report_still_matches(seen, '7700000001', 2023, 1_005_000_000.0)
+    # другой год, другое юрлицо, восстановленная выручка — уже не тот отчёт
+    assert not dm.perimeter_report_still_matches(seen, '7700000001', 2024, 1_000_000_000.0)
+    assert not dm.perimeter_report_still_matches(seen, '7700000099', 2023, 1_000_000_000.0)
+    assert not dm.perimeter_report_still_matches(seen, '7700000001', 2023, 1_400_000_000.0)
+    # читатели отчёт не называли — сверять нечего, допуск решается не здесь
+    assert dm.perimeter_report_still_matches({}, '7700000001', 2023, 1e9)

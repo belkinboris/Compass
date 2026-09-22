@@ -36,13 +36,21 @@ DATA_PATHS = (
     "data/inbox/",
     "pipeline/fns_registry.py",
     "pipeline/access_requests_sent.json",
+    # Папка с финансовой моделью и записками к ней: на сайте не исполняется
+    # ничего из неё, а пересборка из-за правки таблицы — это те самые 502.
+    "finance/",
 )
 # Документация и заметки на работу сайта не влияют.
-DOC_SUFFIXES = (".md",)
+DOC_SUFFIXES = (".md", ".xlsx")
 
 
 def git(*args: str) -> str:
-    out = subprocess.run(["git", *args], capture_output=True, text=True)
+    # core.quotepath=false обязателен: иначе git отдаёт кириллические имена в
+    # кавычках и восьмеричных escape-последовательностях, и любая проверка
+    # вида path.endswith(".md") на них молча не срабатывает — документ уезжает
+    # как код и тянет за собой лишнюю пересборку сайта.
+    out = subprocess.run(["git", "-c", "core.quotepath=false", *args],
+                         capture_output=True, text=True)
     if out.returncode:
         raise SystemExit("git %s: %s" % (" ".join(args), out.stderr.strip()[:300]))
     return out.stdout.strip()

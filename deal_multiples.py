@@ -633,6 +633,28 @@ def _sanity_checked_multiple(sum_rub: float, metric_rub: float | None,
     return round(multiple, 2)
 
 
+def perimeter_report_still_matches(seen: dict | None, inn, year, revenue_rub) -> bool:
+    """Тот ли отчёт сейчас в знаменателе, по которому читатели подтверждали периметр.
+
+    Читатель подтверждает не «периметр вообще», а конкретный отчёт: ИНН, год и
+    выручку. Если с тех пор в знаменатель попал другой отчёт — другого года,
+    другого юрлица или восстановленный с другой выручкой, — карточка не
+    менялась, а число под ней изменилось, и проверка читателей к нему уже не
+    относится (третий разбор рецензента, 6 сентября 2026).
+
+    Пустой `seen` значит «читатели отчёт не называли» — тогда сверять нечего.
+    Расхождение выручки в пределах 1% — округление выгрузки, а не другой отчёт.
+    """
+    if not seen:
+        return True
+    if str(seen.get('inn')) != str(inn):
+        return False
+    if int(seen.get('year') or 0) != int(year):
+        return False
+    was, now = float(seen.get('revenue_rub') or 0), float(revenue_rub)
+    return abs(was - now) <= 0.01 * abs(now)
+
+
 def multiple_for_candidate(cand: MultipleCandidate, revenue_rub: float | None,
                             revenue_year: int | None, target_name: str | None
                             ) -> DealMultiple | None:
@@ -899,8 +921,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
         # другого года — это уже не проверенная сделка: карточка не менялась,
         # а знаменатель изменился (третий разбор рецензента).
         seen = (verified_meta[cand.deal_id].get('perimeter_report') or {}) if not is_computed else {}
-        if seen and (str(seen.get('inn')) != str(entity.inn) or int(seen.get('year') or 0) != int(report.year)
-                     or abs(float(seen.get('revenue_rub') or 0) - float(report.revenue_rub)) > 0.01 * float(report.revenue_rub)):
+        if not perimeter_report_still_matches(seen, entity.inn, report.year, report.revenue_rub):
             verified_meta[cand.deal_id]['checks'].append('report_changed')
             not_shown['revenue'].append(_not_shown_row(cand, 'report_changed'))
             not_shown['operating_profit'].append(_not_shown_row(cand, 'report_changed'))
