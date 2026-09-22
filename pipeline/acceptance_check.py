@@ -93,7 +93,11 @@ def check_multiples(base: str, p: Protocol) -> None:
     m = get_json(base, '/api/analytics/multiples')
     ids = {row['id'] for row in m['deals']}
     forbidden = [r['id'] for r in GOLD['deals'] if not r['in_multiples'] and r['id'] in ids]
-    bad_share = [row['id'] for row in m['deals'] if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_SCALABLE_STAKE]
+    # Порог доли и смысл суммы спрашиваются с ПОДТВЕРЖДЁННЫХ строк: у
+    # рассчитанных по тексту доля берётся из прозы карточки и может быть не
+    # установлена вовсе — на то они и второй уровень, помеченный на экране.
+    _verified = [r for r in m['deals'] if r.get('confidence') == 'verified']
+    bad_share = [row['id'] for row in _verified if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_SCALABLE_STAKE]
     # Цена пакета, пересчитанная на 100%: числитель = цена ÷ доля, и сам
     # мультипликатор считается от него, а не от заплаченной суммы.
     bad_scale = []
@@ -103,22 +107,34 @@ def check_multiples(base: str, p: Protocol) -> None:
             bad_scale.append(row['id'])
         elif abs(round(expect / row['revenue_rub'], 2) - row['multiple']) > 0.011:
             bad_scale.append(row['id'])
-    bad_basis = [row['id'] for row in m['deals'] if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
-    # Слой фактов: каждая показанная сделка обязана нести подтверждение двумя
-    # чтениями и чистую арифметику (facts.number_checks) — по ответу сайта.
+    bad_basis = [row['id'] for row in _verified if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
+    # Слой фактов: сделка, показанная КАК ПОДТВЕРЖДЁННАЯ, обязана нести
+    # подтверждение двумя чтениями и чистую арифметику (facts.number_checks).
     #
-    # Второй сигнал («рассчитано по тексту карточки», поле `confidence`) был
-    # написан в ночь на 8 сентября 2026 и в тот же день откачен вместе с
-    # остальными правками интерфейса — на сайте его нет. Проверка на пометку
-    # ушла отсюда следом: приёмка обязана спрашивать с того, что реально
-    # работает, иначе она горит красным всегда и перестаёт быть сигналом.
-    # Вернётся вместе с самой функцией, а не раньше.
-    unverified = [row['id'] for row in m['deals']
+    # ДВА УРОВНЯ, А НЕ ОДИН (исправлено 22 сентября 2026). Ответ сайта несёт
+    # обе группы сразу: `confidence == 'verified'` — цена, доля и юрлицо
+    # подтверждены двумя независимыми чтениями; `confidence == 'computed'` —
+    # взято из текста карточки, и на экране такие строки прямо помечены
+    # («у N — взяли из текста карточки (помечены)»). Прежняя проверка
+    # требовала подтверждения от ВСЕХ строк подряд и потому горела красным
+    # на работающей и честно подписанной функции — ровно то, от чего
+    # предостерегает комментарий, стоявший здесь раньше: приёмка обязана
+    # спрашивать с того, что реально работает.
+    #
+    # Спрашиваем теперь две разные вещи: подтверждённые — действительно
+    # подтверждены, а у рассчитанных по тексту стоит пометка. Пропажа
+    # пометки опаснее самой строки: тогда непроверенное число читается как
+    # проверенное.
+    verified_rows = [r for r in m['deals'] if r.get('confidence') == 'verified']
+    unverified = [row['id'] for row in verified_rows
                   if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
+    unlabelled = [r['id'] for r in m['deals'] if r.get('confidence') not in ('verified', 'computed')]
+    if len(verified_rows) != m.get('verified_total'):
+        unlabelled.append('счёт подтверждённых не сходится с verified_total')
     dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
     no_year_basis = [row['id'] for row in m['deals'] if not row.get('year_basis')]
     ok = (not forbidden and not bad_share and not bad_basis and not unverified
-          and not dirty and not no_year_basis and not bad_scale)
+          and not dirty and not no_year_basis and not bad_scale and not unlabelled)
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
     p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без малых долей и не-цен', ok,
           base + '/api/analytics/multiples',
@@ -127,7 +143,7 @@ def check_multiples(base: str, p: Protocol) -> None:
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
           f"запрещённые: {forbidden or 'нет'}; доля ниже порога: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
           f"пересчёт цены пакета: {bad_scale or 'сходится'}; "
-          f"без подтверждения: {unverified or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
+          f"без подтверждения: {unverified or 'нет'}; без пометки уровня: {unlabelled or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
     # Проверенная сделка, которой нет в списке, обязана быть названа с причиной
     # (выброс, убыток, нет отчёта): скрытая молча, она читается как «данных нет»
     # или «убыточна» (четвёртый разбор рецензента, пункт 6).
