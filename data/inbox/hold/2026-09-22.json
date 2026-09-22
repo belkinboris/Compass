@@ -1,0 +1,585 @@
+{
+ "made": "2026-09-22",
+ "drafts": [
+  {
+   "draft_id": "d18941081",
+   "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7385"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-14",
+     "title": "Переговоры",
+     "note": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении деталей. В частности, участникам, скорее всего, придется…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7385"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22779452",
+   "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7731"
+    ]
+   ],
+   "sum": "1,5 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из повестки заседания совета директоров компании, которую…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7731"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93200414",
+   "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7732"
+    ]
+   ],
+   "sum": "$130 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский стартап UNEXT",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский стартап UNEXT",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d74146830",
+   "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053128378"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79963144",
+   "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28126333"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23440410",
+   "title": "В Москве выставили на торги старинный купеческий особняк",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260918/moskva-2118571651.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35782040",
+   "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/lukoyl-2118576929.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d42876803",
+   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/18/1230043-ssha-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d48552503",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 22 октября",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1116935"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d23364061",
+   "title": "США продлили лицензию на переговоры о продаже активов компании «Лукойл»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169431/2026-09-18/ssha-prodlili-litcenziiu-na-peregovory-o-prodazhe-aktivov-kompanii-lukoil"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d77498093",
+   "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1117408"
+    ]
+   ],
+   "sum": "$20 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d75063564",
+   "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/soglasovanie-prodazhi-zarubezhnyh-aktivov-lukoyla-zavislo-v-belom-dome/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d25323062",
+   "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/ssha-873514903.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d18686391",
+   "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/22/09/2026/6ab127299a7947537c1fd7c6"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-22",
+     "title": "Переговоры",
+     "note": "«Яндекс» и VK обсуждают возможность создания совместного предприятия на базе активов дочерних Yandex B2B Tech и VK Tech, рассказали источники РБК. На рынке наступает этап консолидации после быстрого роста, полагают эксперты",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/technology_and_media/22/09/2026/6ab127299a7947537c1fd7c6"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45280137",
+   "title": "Paramount смогла открыть путь к покупке WBD",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/22/09/2026/6ab1af4b9a79478a808dfc32"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d62630119",
+   "title": "МВД предупредило о новой схеме мошенников с продажей обучающих онлайн-курсов",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2171194/mvd-predupredilo-o-novoi-ulovke-moshennikov-s-onlain-kursami-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45602543",
+   "title": "Государство готово продать «Аэрофлот». Но зачем?",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1353934.php"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72580144",
+   "title": "Раскрыта особенность нового раунда переговоров по Украине",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/22/sus2/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69943394",
+   "title": "В Пермском крае распродают автосервисы",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129484"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}

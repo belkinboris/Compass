@@ -281,6 +281,185 @@
     ]
    },
    "pending_since": "2026-09-21T10:07:14+00:00"
+  },
+  {
+   "id": "g46cad4ee",
+   "date": "2026-09-21",
+   "title": "Ирина Салтыкова продала квартиру на Пречистенке, где снимали фильм «Брат-2»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/nedvizhimost/28136457"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Ирина Салтыкова",
+   "asset": "квартира на Пречистенке, где снимали фильм «Брат-2»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-21",
+     "title": "Сделка завершена",
+     "note": "Финальная сумма сделки не известна",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/nedvizhimost/28136457"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "квартира на Пречистенке, где снимали фильм «Брат-2»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/nedvizhimost/28136457"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Ирина Салтыкова",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/nedvizhimost/28136457"
+     }
+    ]
+   },
+   "pending_since": "2026-09-22T05:25:02+00:00",
+   "reviewed": "2026-09-22",
+   "hold_reason": "Та же самая продажа личной квартиры Ирины Салтыковой на Пречистенке (где снимали «Брат-2»), что владелец уже прямо отклонил вчера («не сделка» для черновика d39155596/gf8251f99) — покупатель по-прежнему не назван, продавец частное лицо. Рекомендую 🗑 выкинуть, но решение за владельцем."
+  },
+  {
+   "id": "g77dccac8",
+   "date": "2026-09-22",
+   "title": "Организаторы аукциона личных вещей Брижит Бардо получили почти 1 млн евро",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/lifestyle/news/2026/09/22/1230697-organizatori-auktsiona"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "€1 млн",
+   "buyer_name": "Организаторы аукциона личных вещей Брижит Бардо",
+   "asset": "почти 1 млн евро",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Организаторы аукциона личных вещей Брижит Бардо",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/lifestyle/news/2026/09/22/1230697-organizatori-auktsiona"
+     }
+    ],
+    "target": [
+     {
+      "value": "почти 1 млн евро",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/lifestyle/news/2026/09/22/1230697-organizatori-auktsiona"
+     }
+    ]
+   },
+   "pending_since": "2026-09-22T05:25:02+00:00",
+   "reviewed": "2026-09-22",
+   "hold_reason": "Отчёт об итогах того же аукциона личных вещей Брижит Бардо в Париже, который весь день 21.09.2026 отсеивался как нероссийский контур без российского элемента (тот же класс, что и аукцион паспорта Гагарина) — здесь просто названа выручка организаторов. Рекомендую 🗑 выкинуть, но решение за владельцем."
+  },
+  {
+   "id": "g4b386b98",
+   "date": "2026-09-22",
+   "title": "«Единороссы» получили 86% кресел в заксобрании Камчатки",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/russia/1117595"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Единороссы»",
+   "asset": "кресла в заксобрании Камчатки",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Единороссы»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.interfax.ru/russia/1117595"
+     }
+    ],
+    "target": [
+     {
+      "value": "кресла в заксобрании Камчатки",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.interfax.ru/russia/1117595"
+     }
+    ]
+   },
+   "pending_since": "2026-09-22T05:25:02+00:00",
+   "reviewed": "2026-09-22",
+   "hold_reason": "Результаты выборов в заксобрание Камчатки («Единороссы» получили 86% мест) — политическая новость, поля \"покупатель\"/\"предмет\" заполнились механически из слов «получили»/«кресла», сделки нет. Рекомендую 🗑 выкинуть, но решение за владельцем."
   }
  ]
 }
