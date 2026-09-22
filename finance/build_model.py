@@ -30,6 +30,10 @@
 from __future__ import annotations
 
 import datetime as dt
+import shutil
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
 
 from openpyxl import Workbook
@@ -470,8 +474,15 @@ def sheet_calc(wb, ref, scen_letter, scen_name):
                 value=("=%s%d" % (col(i), reg)) if i == 0
                       else "=%s%d+%s%d" % (col(i - 1), seen, col(i), reg)).number_format = RUB0
     new = line("Новых платящих за месяц",
-               lambda i: "=IFERROR(ROUND(INDEX($B$%d:$%s$%d,1,COLUMN()-1-%s)*%s,0),0)"
-                         % (reg, col(MONTHS - 1), reg, A("conv_lag"), A("conv")), RUB0,
+               # Проверка «столбец левее начала таблицы» обязана стоять ДО INDEX.
+               # INDEX(диапазон;1;0) — не ошибка: ноль означает «вся строка», и в
+               # скалярном месте это молча даёт значение ТЕКУЩЕГО столбца, то есть
+               # регистрации этого же месяца без всякой задержки. Из-за этого во
+               # втором месяце появлялись пять подписчиков, которых там быть не
+               # может, и они ехали дальше по всем 24 месяцам (найдено 22 сентября
+               # 2026 сверкой пересчитанной книги с питоновским двойником).
+               lambda i: "=IF(COLUMN()-1-%s<1,0,IFERROR(ROUND(INDEX($B$%d:$%s$%d,1,COLUMN()-1-%s)*%s,0),0))"
+                         % (A("conv_lag"), reg, col(MONTHS - 1), reg, A("conv_lag"), A("conv")), RUB0,
                note="Регистрация превращается в оплату не сразу: воронка с задержкой из допущений.")
     paid = line("Платящих всего на конец месяца", lambda i: "", RUB0)
     for i in range(MONTHS):
@@ -886,6 +897,43 @@ def sheet_summary(wb, rows_by_scen, unit_rows):
     return ws
 
 
+def recalculate(path: Path) -> bool:
+    """Пересчитать книгу LibreOffice и сохранить результат рядом с формулами.
+
+    ЗАЧЕМ ЭТО ОБЯЗАТЕЛЬНО. openpyxl пишет формулы, но не кладёт рядом
+    посчитанный результат. Excel на компьютере пересчитывает при открытии и
+    ничего не замечает, а просмотрщик на телефоне показывает то, что лежит в
+    файле, — то есть пустоту, которая рисуется НУЛЯМИ. 22 сентября 2026
+    владелец открыл модель с телефона и увидел страницу нулей.
+
+    LibreOffice при пересохранении считает всё и кладёт значения рядом с
+    формулами: на компьютере книга остаётся живой, на телефоне — читаемой.
+
+    Нужен пакет libreoffice-calc (одного libreoffice-core мало: без фильтра
+    Calc не открывается даже пустая книга, и ошибка выглядит как «source file
+    could not be loaded», а не как «нет Calc»).
+    """
+    if not shutil.which("soffice"):
+        print("! LibreOffice не найден — книга остаётся без посчитанных значений.")
+        print("  На телефоне она покажет нули. Поставьте libreoffice-calc и соберите заново.")
+        return False
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        src = tmp / "m.xlsx"
+        shutil.copy(path, src)
+        out = subprocess.run(
+            ["soffice", "--headless", "-env:UserInstallation=file://%s/profile" % tmp,
+             "--convert-to", "xlsx", str(src), "--outdir", str(tmp / "out")],
+            capture_output=True, text=True, timeout=600)
+        done = tmp / "out" / "m.xlsx"
+        if not done.exists():
+            print("! Пересчёт не удался: %s" % (out.stderr.strip()[:200] or "файл не появился"))
+            print("  Чаще всего это значит, что стоит libreoffice-core без libreoffice-calc.")
+            return False
+        shutil.copy(done, path)
+    return True
+
+
 def main():
     wb = Workbook()
     wb.remove(wb.active)
@@ -901,9 +949,15 @@ def main():
             ["Расчёт %s" % n for _, n in SCEN] + ["Налоги и риски"]
     wb._sheets = [wb[n] for n in order]
     wb.save(OUT)
+    names = list(wb.sheetnames)
+    ok = recalculate(OUT)
     print("Записано: %s" % OUT)
-    print("Листов: %s" % ", ".join(wb.sheetnames))
+    print("Листов: %s" % ", ".join(names))
+    print("Значения посчитаны: %s" % ("да" if ok else "НЕТ — см. предупреждение выше"))
+    if ok:
+        print("Проверить числа, не открывая Excel: python3 finance/check_model.py")
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

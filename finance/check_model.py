@@ -12,6 +12,17 @@ from __future__ import annotations
 
 MONTHS = 24
 
+
+def xlround(x):
+    """Округление как в Excel — половину ВВЕРХ, а не к чётному.
+
+    Питоновский round() округляет 62,5 до 62 (банковское правило), Excel и
+    LibreOffice — до 63. На шаге «регистраций за месяц» это давало расхождение
+    двойника с книгой уже в первом месяце (22 сентября 2026).
+    """
+    from decimal import Decimal, ROUND_HALF_UP
+    return float(Decimal(str(x)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+
 # Три сценария — три цены. Числа те же, что в build_model.py (лист «Допущения»).
 SCEN = {
     "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.02,
@@ -72,12 +83,12 @@ def run(name, p):
         org = p["reg_org0"] * (1 + p["reg_growth"]) ** i
         bought = FIX["mkt"] / p["cpr"]
         room = max(0.0, 1 - seen / p["ceiling"]) if i else 1.0
-        reg = round((org + bought) * room)
+        reg = xlround((org + bought) * room)
         regs.append(reg)
         seen += reg
 
         j = i - p["conv_lag"]
-        new = round(regs[j] * p["conv"]) if j >= 0 else 0
+        new = xlround(regs[j] * p["conv"]) if j >= 0 else 0
         share_y_now = p["share_y"] * i / MONTHS
         paid = min(paid * (1 - p["churn"] * (1 - share_y_now)) + new,
                    p["ceiling"] * p["pay_share"])
