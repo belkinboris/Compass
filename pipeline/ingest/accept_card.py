@@ -608,6 +608,22 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                         '%s — профиль %r уже в базе, но имя — описание, а не имя компании; переименование '
                         'профиля — отдельный скрипт, не эта карточка (см. `name_ok`, если сейчас не до этого)'
                         % (role, name)))
+    # То же самое для ОПИСАНИЯ уже привязанного профиля. `check_answer()`
+    # проверяет описание только у профиля, который читатель создаёт этим же
+    # ответом; профиль, созданный раньше другим путём, не проверял никто — и
+    # 22 сентября 2026 владелец увидел в проекте поста «ВИМ Сбережения —
+    # Управляющая компания фонда … (подтверждено чтением источника
+    # mergers.ru)»: профиль написан кампанией #122 13 сентября, карточка
+    # привязалась к нему сегодня, пост напечатал описание дословно. Правило
+    # здесь УЖЕ мягче, чем для нового профиля (`source_note`, а не
+    # `press_attribution`): слово «издание» законно стоит у РБК и Rusbase.
+    for role, (_tf, idf) in ROLES.items():
+        cid = card.get(idf) or (role == 'target' and card.get('asset_id'))
+        desc = str(comps.get(cid, {}).get('desc') or '') if cid else ''
+        for rule, frag in proofread.source_note(desc):
+            out.append(('profile_desc_source_note:' + role,
+                        '%s — в описании профиля %r пометка о том, где мы это прочитали: «%s» (%s); '
+                        'её увидит подписчик в посте' % (role, comps.get(cid, {}).get('name'), frag, rule)))
     # Та же проверка, что `test_source_label_matches_the_link` держит для
     # всей базы (урок 9 сентября: подпись «@dealsma» на ссылке в
     # torgi.gov) — здесь раньше, до того как карточка вообще попадёт в базу.
@@ -1128,6 +1144,26 @@ def _self_check():
     assert 'source_telegram_mismatch' in {c for c, _t in findings(card11, base)}, findings(card11, base)
     card11b = dict(card11); card11b['src'] = [['@dealsma (Telegram)', 'https://t.me/dealsma/12345']]
     assert 'source_telegram_mismatch' not in {c for c, _t in findings(card11b, base)}
+
+    # Описание уже привязанного профиля попадает в пост дословно: 22 сентября
+    # 2026 владелец прочитал в проекте поста «(подтверждено чтением источника
+    # mergers.ru)». Профиль был создан раньше, поэтому check_answer() его не
+    # видел, а findings() до этого дня не смотрел на описание вовсе.
+    base12 = {'companies': {'gnote': {'name': 'ВИМ Сбережения', 'ind': 'Финансовые услуги',
+                                      'desc': 'Управляющая компания фонда, ранее называлась '
+                                              '«ВТБ Капитал Пенсионный резерв» (подтверждено '
+                                              'чтением источника mergers.ru).'},
+                            'gclean': {'name': 'РБК (медиахолдинг)', 'ind': 'Медиа',
+                                       'desc': 'Медиахолдинг: деловой телеканал, интернет-издание '
+                                               'и печатные издания РБК.'}},
+              'deals': [], 'telegram_posts': {}}
+    card12 = {'id': 'gtest12', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+              'buyer': 'gnote', 'src': src1}
+    assert 'profile_desc_source_note:buyer' in {c for c, _t in findings(card12, base12)}
+    # Слово «издание» у медиахолдинга — факт о нём самом, а не пометка о нас.
+    card12b = dict(card12); card12b['buyer'] = 'gclean'
+    assert not any(c.startswith('profile_desc_source_note')
+                   for c, _t in findings(card12b, base12)), findings(card12b, base12)
     return True
 
 
