@@ -1,114 +1,201 @@
 # -*- coding: utf-8 -*-
-"""Проверка модели счётом: тот же расчёт на Python, чтобы увидеть числа.
+"""Двойник финмодели на Python: те же допущения, тот же счёт, без Excel.
 
-Excel в этом контейнере не пересчитать (LibreOffice не открывает даже пустой
-файл), а отдавать модель, ни разу не посмотрев на её результат, нельзя:
-формула может быть синтаксически верной и при этом считать чепуху. Здесь
-повторён тот же расчёт — если числа осмысленные, значит осмысленна и модель.
+Зачем двойник. Формулы в книге нельзя прочитать глазами и проверить — openpyxl
+их не считает, а показать владельцу таблицу, в которой число получилось «само»,
+значит показать неизвестно что. Этот файл считает то же самое обычным кодом,
+печатает результат и прямо называет, где он выглядит неправдоподобно.
 
     python3 finance/check_model.py
 """
+from __future__ import annotations
+
 MONTHS = 24
 
-# ПОТОЛОК РЫНКА. Без него экспонента за 24 месяца улетает в фантазию:
-# первая версия смелого сценария давала 1413 подписчиков и 97 млн ₽ выручки
-# на втором году. Рынок конечен, и его размер можно прикинуть от нашей же
-# базы: в сделках поимённо названы 164 юридических и 122 финансовых
-# консультанта — это ядро аудитории. Плюс корпоративные отделы развития,
-# фонды и оценщики. Реалистичный круг тех, кто ВООБЩЕ может это купить, —
-# несколько тысяч человек, а платит из них меньшинство.
+# Три сценария — три цены. Числа те же, что в build_model.py (лист «Допущения»).
 SCEN = {
-    "Осторожный": dict(price_m=6900, price_y=69000, share_y=.15, churn=.09, reg0=10,
-                       growth=.04, conv=.06, lag=3, ceiling=3000, pay_share=.03,
-                       host=4000, ai=8000, ai_u=80, fns=5000,
-                       acc=8000, reg=3000, legal=5000, mkt=25000, misc=5000, gd=0, team=0,
-                       dev_start=19, dev=180000, cash0=200000),
-    "Базовый":    dict(price_m=9900, price_y=99000, share_y=.30, churn=.06, reg0=12,
-                       growth=.10, conv=.10, lag=2, ceiling=5000, pay_share=.06,
-                       host=6000, ai=15000, ai_u=120, fns=8000,
-                       acc=12000, reg=4000, legal=10000, mkt=60000, misc=8000, gd=0, team=0,
-                       dev_start=13, dev=220000, cash0=500000),
-    "Смелый":     dict(price_m=14900, price_y=149000, share_y=.45, churn=.04, reg0=20,
-                       growth=.16, conv=.15, lag=1, ceiling=8000, pay_share=.08,
-                       host=9000, ai=40000, ai_u=200, fns=12000,
-                       acc=18000, reg=7000, legal=20000, mkt=150000, misc=15000, gd=100000,
-                       team=150000, dev_start=7, dev=300000, cash0=1500000),
+    "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.02,
+                   ceiling=25000, pay_share=0.045, reg_org0=25, reg_growth=0.10,
+                   cpr=800, conv=0.09,  conv_lag=2, ai_per_user=90),
+    "990 ₽":  dict(price_m=990,  price_y=9900,  share_y=0.22, churn=0.10,  refund=0.02,
+                   ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
+                   cpr=800, conv=0.07,  conv_lag=2, ai_per_user=90),
+    "1490 ₽": dict(price_m=1490, price_y=14900, share_y=0.28, churn=0.085, refund=0.02,
+                   ceiling=18000, pay_share=0.025, reg_org0=25, reg_growth=0.09,
+                   cpr=900, conv=0.045, conv_lag=3, ai_per_user=110),
 }
-USN, USN_MIN = .15, .01
-VAT_LIMIT, VAT_RATE = 20_000_000, .05
-MROT, INS = 27_093, .30
-ACQ = .035
+FIX = dict(host=6000, ai=15000, fns=8000, kassa=2500, acc=12000, reg=4000,
+           legal=10000, mkt=30000, misc=8000, gd_salary=0, team_cost=0)
+DEV_START = {"790 ₽": 15, "990 ₽": 14, "1490 ₽": 12}
+DEV_COST = 220000
+MROT, INS_RATE, ACQ = 27093, 0.30, 0.030
+USN, USN_MIN, VAT_LIMIT, VAT_RATE = 0.15, 0.01, 20_000_000, 0.05
+CASH0 = 500_000
 
 
-def run(p):
-    # Регистрации растут, пока в рынке остаются незарегистрированные: чем
-    # ближе к потолку, тем медленнее прирост. Это обычная S-кривая, и без неё
-    # модель обещает рост, которому неоткуда взяться.
-    regs, seen = [], 0.0
-    for i in range(MONTHS):
-        want = p["reg0"] * (1 + p["growth"]) ** i
-        room = max(0.0, 1 - seen / p["ceiling"])
-        got = want * room
-        seen += got
-        regs.append(got)
-    new = [regs[i - p["lag"]] * p["conv"] if i - p["lag"] >= 0 else 0 for i in range(MONTHS)]
-    cap = p["ceiling"] * p["pay_share"]          # больше этого платить некому
-    paid, out = [], 0.0
-    for i in range(MONTHS):
-        share_y = p["share_y"] * i / MONTHS
-        out = (out * (1 - p["churn"] * (1 - share_y)) + new[i]) if i else new[i]
-        out = min(out, cap)
-        paid.append(out)
+def unit(p):
+    arpu = p["price_m"] * (1 - p["share_y"]) + p["price_y"] / 12 * p["share_y"]
+    contrib = arpu * (1 - ACQ - p["refund"]) - p["ai_per_user"]
+    ltv = contrib / p["churn"]
+    cac = p["cpr"] / p["conv"]
+    fixed = sum(FIX.values()) + max(FIX["gd_salary"], MROT) * INS_RATE
+    return dict(arpu=arpu, contrib=contrib, ltv=ltv, cac=cac,
+                ratio=ltv / cac, life=1 / p["churn"],
+                payback=cac / contrib if contrib > 0 else None,
+                cpr_ok=ltv * p["conv"] / 3,
+                fixed=fixed, be=-(-fixed // contrib) if contrib > 0 else None,
+                be_dev=-(-(fixed + DEV_COST) // contrib) if contrib > 0 else None,
+                vat_subs=-(-VAT_LIMIT / 12 // arpu))
 
-    res = dict(rev=[], cash_in=[], costs=[], vat=[], usn=[], net=[], flow=[], cash=[], ins=[])
-    cash, ytd = p["cash0"], 0.0
+
+def run(name, p):
+    u = unit(p)
+    seen = 0.0
+    regs, paid_hist, rows = [], [], []
+    paid, cash, year_rev = 0.0, float(CASH0), 0.0
     for i in range(MONTHS):
-        share_y = p["share_y"] * i / MONTHS
-        rev = paid[i] * (p["price_m"] * (1 - share_y) + p["price_y"] / 12 * share_y)
-        cash_in = rev + new[i] * share_y * (p["price_y"] - p["price_y"] / 12)
-        ins = max(p["gd"], MROT) * INS
-        costs = (p["host"] + p["ai"] + paid[i] * p["ai_u"] + p["fns"] + p["acc"] + p["reg"]
-                 + p["legal"] + p["mkt"] + p["misc"] + cash_in * ACQ + p["gd"] + p["team"]
-                 + (p["dev"] if i + 1 >= p["dev_start"] else 0) + ins)
-        if i % 12 == 0:
-            ytd = 0.0
-        ytd += rev
-        vat = rev * VAT_RATE if ytd > VAT_LIMIT else 0.0
+        org = p["reg_org0"] * (1 + p["reg_growth"]) ** i
+        bought = FIX["mkt"] / p["cpr"]
+        room = max(0.0, 1 - seen / p["ceiling"]) if i else 1.0
+        reg = round((org + bought) * room)
+        regs.append(reg)
+        seen += reg
+
+        j = i - p["conv_lag"]
+        new = round(regs[j] * p["conv"]) if j >= 0 else 0
+        share_y_now = p["share_y"] * i / MONTHS
+        paid = min(paid * (1 - p["churn"] * (1 - share_y_now)) + new,
+                   p["ceiling"] * p["pay_share"])
+        paid_hist.append(paid)
+
+        rev = paid * (p["price_m"] * (1 - share_y_now) + p["price_y"] / 12 * share_y_now)
+        cash_in = rev + new * share_y_now * (p["price_y"] - p["price_y"] / 12)
+
+        costs = (FIX["host"] + FIX["ai"] + p["ai_per_user"] * paid + FIX["fns"] + FIX["kassa"]
+                 + FIX["acc"] + FIX["reg"] + FIX["legal"] + FIX["mkt"] + FIX["misc"]
+                 + cash_in * ACQ + rev * p["refund"] + FIX["gd_salary"] + FIX["team_cost"]
+                 + (DEV_COST if i + 1 >= DEV_START[name] else 0)
+                 + max(FIX["gd_salary"], MROT) * INS_RATE)
+
+        if i == 3:          # январь: новый календарный год
+            year_rev = 0.0
+        year_rev += rev
+        vat = rev * VAT_RATE if year_rev > VAT_LIMIT else 0.0
         usn = max((rev - costs - vat) * USN, rev * USN_MIN)
-        net = rev - costs - vat - usn
-        flow = cash_in - costs - vat - usn
-        cash += flow
-        for k, v in (("rev", rev), ("cash_in", cash_in), ("costs", costs), ("vat", vat),
-                     ("usn", usn), ("net", net), ("flow", flow), ("cash", cash), ("ins", ins)):
-            res[k].append(v)
-    res["paid"] = paid
-    return res
+        taxes = vat + usn
+        net = rev - costs - taxes
+        cash += cash_in - costs - taxes
+        rows.append(dict(m=i + 1, reg=reg, paid=paid, rev=rev, costs=costs,
+                         taxes=taxes, net=net, cash=cash))
+    return u, rows
 
 
 def money(x):
     return "%s ₽" % format(int(round(x)), ",d").replace(",", " ")
 
 
-for name, p in SCEN.items():
-    r = run(p)
-    first_plus = next((i + 1 for i, v in enumerate(r["net"]) if v > 0), None)
-    broke = next((i + 1 for i, v in enumerate(r["cash"]) if v < 0), None)
-    print("=" * 74)
-    print("%s — подписка %s/мес" % (name, money(p["price_m"])))
-    print("  потолок:   рынок %d чел., платить могут до %d"
-          % (p["ceiling"], round(p["ceiling"] * p["pay_share"])))
-    print("  платящих:  через 12 мес %3d   через 24 мес %3d"
-          % (round(r["paid"][11]), round(r["paid"][23])))
-    print("  выручка:   за 1-й год %14s   за 2-й год %14s"
-          % (money(sum(r["rev"][:12])), money(sum(r["rev"][12:]))))
-    print("  расходы:   за 1-й год %14s   за 2-й год %14s"
-          % (money(sum(r["costs"][:12])), money(sum(r["costs"][12:]))))
-    print("  налоги:    за 24 мес %15s   (в т.ч. НДС %s)"
-          % (money(sum(r["usn"]) + sum(r["vat"])), money(sum(r["vat"]))))
-    print("  взносы за ГД за 24 мес: %s" % money(sum(r["ins"])))
-    print("  прибыль:   за 24 мес %15s" % money(sum(r["net"])))
-    print("  выход в плюс: %s   деньги кончаются: %s"
-          % ("месяц %d" % first_plus if first_plus else "не выходим",
-             "месяц %d" % broke if broke else "не кончаются"))
-    print("  самая глубокая яма: %s" % money(min(r["cash"])))
-    print("  нужно денег сверх стартовых: %s" % money(max(0, -min(r["cash"]))))
+print("ЕДИНИЦА ЭКОНОМИКИ — сходится ли один подписчик")
+print("%-42s %14s %14s %14s" % ("", *SCEN))
+lines = [("Средний платёж в месяц", "arpu", money),
+         ("Вклад одного подписчика в месяц", "contrib", money),
+         ("Срок жизни подписки, месяцев", "life", lambda v: "%.1f" % v),
+         ("Принесёт за всю жизнь (LTV)", "ltv", money),
+         ("Стоит привести одного платящего (CAC)", "cac", money),
+         ("LTV ÷ CAC", "ratio", lambda v: "%.2f" % v),
+         ("Окупаемость привлечения, месяцев", "payback", lambda v: "%.1f" % v),
+         ("Нужная цена регистрации (окупаемость ×3)", "cpr_ok", money),
+         ("Постоянные расходы в месяц", "fixed", money),
+         ("ПОРОГ БЕЗУБЫТОЧНОСТИ, подписчиков", "be", lambda v: "%d" % v),
+         ("  тот же порог, если наняли разработчика", "be_dev", lambda v: "%d" % v),
+         ("20 млн ₽ в год — это подписчиков", "vat_subs", lambda v: "%d" % v)]
+units = {n: unit(p) for n, p in SCEN.items()}
+for title, key, fmt in lines:
+    print("%-42s %14s %14s %14s" % (title, *[fmt(units[n][key]) for n in SCEN]))
+
+print()
+print("ДВА ГОДА")
+res = {n: run(n, p) for n, p in SCEN.items()}
+out = [("Платящих через 12 месяцев", lambda r: "%d" % round(r[11]["paid"])),
+       ("Платящих через 24 месяца", lambda r: "%d" % round(r[23]["paid"])),
+       ("Регистраций всего за 24 месяца", lambda r: "%d" % sum(x["reg"] for x in r)),
+       ("Выручка за 12 месяцев", lambda r: money(sum(x["rev"] for x in r[:12]))),
+       ("Выручка за 24 месяца", lambda r: money(sum(x["rev"] for x in r))),
+       ("Чистая прибыль за 24 месяца", lambda r: money(sum(x["net"] for x in r))),
+       ("Деньги на конец 24-го месяца", lambda r: money(r[-1]["cash"])),
+       ("Месяц выхода в прибыль",
+        lambda r: next((str(x["m"]) for x in r if x["net"] > 0), "не выходим")),
+       ("Месяц, когда деньги в минусе",
+        lambda r: next((str(x["m"]) for x in r if x["cash"] < 0), "не уходят")),
+       ("Нужно денег сверх стартовых",
+        lambda r: money(max(0, -min(x["cash"] for x in r))))]
+print("%-42s %14s %14s %14s" % ("", *SCEN))
+for title, fmt in out:
+    print("%-42s %14s %14s %14s" % (title, *[fmt(res[n][1]) for n in SCEN]))
+
+print()
+print("ЧТО ЗДЕСЬ ВЫГЛЯДИТ ПОДОЗРИТЕЛЬНО")
+flag = False
+for n in SCEN:
+    u, rows = res[n]
+    if u["ratio"] < 1:
+        flag = True
+        print("  %-7s платное привлечение НЕ окупается: LTV ÷ CAC = %.2f. "
+              "Регистрация должна стоить не дороже %s, а заложено %s."
+              % (n, u["ratio"], money(u["cpr_ok"]), money(SCEN[n]["cpr"])))
+    last = rows[-1]["paid"]
+    if last >= SCEN[n]["ceiling"] * SCEN[n]["pay_share"] - 0.5:
+        flag = True
+        print("  %-7s упёрлись в потолок рынка (%d человек) — рост дальше модель не описывает."
+              % (n, round(SCEN[n]["ceiling"] * SCEN[n]["pay_share"])))
+    if not any(x["net"] > 0 for x in rows):
+        print("  %-7s за 24 месяца в прибыль не выходим (порог — %d подписчиков, к 24-му месяцу %d)."
+              % (n, u["be"], round(last)))
+        flag = True
+if not flag:
+    print("  — ничего")
+
+
+# --------------------------------------------------------------- что меняет исход
+print()
+print("ЧТО ЗАКРЫВАЕТ РАЗРЫВ — по одной правке за раз, сценарий 990 ₽")
+print("Каждая строка: меняем ОДНО допущение и смотрим, где оказывается порог")
+print("безубыточности и доходим ли до него за 24 месяца.")
+print()
+
+BASE = "990 ₽"
+
+
+def variant(title, scen=None, fix=None, dev=None):
+    p = dict(SCEN[BASE]); p.update(scen or {})
+    global FIX, DEV_START
+    fix_was, dev_was = dict(FIX), dict(DEV_START)
+    if fix:
+        FIX = dict(FIX); FIX.update(fix)
+    if dev is not None:
+        DEV_START = dict(DEV_START); DEV_START[BASE] = dev
+    u = unit(p)
+    _, rows = run(BASE, p)
+    month = next((x["m"] for x in rows if x["net"] > 0), None)
+    FIX, DEV_START = fix_was, dev_was
+    dev_hired = (dev if dev is not None else DEV_START[BASE]) <= MONTHS
+    print("%-46s порог %3d чел.%s   к 24-му месяцу %3d   в плюс: %s"
+          % (title, u["be_dev"] if dev_hired else u["be"],
+             " (с разработчиком)" if dev_hired else "                  ",
+             round(rows[-1]["paid"]),
+             ("с %d-го месяца" % month) if month else "не выходим"))
+
+
+variant("как есть")
+variant("не нанимаем разработчика", dev=99)
+variant("без платного продвижения (−30 тыс ₽/мес)", fix={"mkt": 0})
+variant("без продвижения и без разработчика", fix={"mkt": 0}, dev=99)
+variant("отток 7% вместо 10%", scen={"churn": 0.07})
+variant("конверсия в оплату 10% вместо 7%", scen={"conv": 0.10})
+variant("оплата через СБП: комиссия 0,6% вместо 3%")
+_acq_was = ACQ
+ACQ = 0.006
+variant("  (пересчёт с СБП)")
+ACQ = _acq_was
+variant("органика стартует с 40 в месяц вместо 25", scen={"reg_org0": 40})
+variant("всё вместе: без продвижения, без разработчика,\n  отток 7%, конверсия 10%, органика 40",
+        scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0}, dev=99)
