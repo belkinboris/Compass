@@ -638,6 +638,18 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .adv-panel{position:relative;z-index:5;display:flex;gap:16px;flex-wrap:wrap;margin:0 0 26px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:10px}
 .adv-panel label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .adv-panel select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);min-width:180px}
+/* ПЕРИОД ПО КАЛЕНДАРЮ. Быстрые кнопки сверху, два поля с датами снизу:
+   «последние 30 дней» — один клик, точные числа — для тех, кому нужен
+   именно отрезок. `input[type=date]` рисует родной календарь браузера, и
+   на телефоне это привычное колесо дат, а не чужой виджет. */
+.dr{display:flex;flex-direction:column;gap:8px;text-transform:none;letter-spacing:0}
+.dr-quick{display:flex;gap:6px;flex-wrap:wrap}
+.dr-quick .chip{font-size:12px;padding:5px 10px}
+.dr-range{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.dr-range input[type=date]{padding:8px 10px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);min-width:150px}
+.dr-dash{color:var(--muted)}
+.dr-clear{font-size:12px;padding:5px 10px}
+.feed-period-note{color:var(--muted);font-size:13px;margin:-8px 0 16px}
 /* ВЫБОР НЕСКОЛЬКИХ ЗНАЧЕНИЙ. Просьба Артёма 19 сентября 2026: «в фильтрах
    надо сделать возможность выбора нескольких опций (несколько годов,
    отраслей etc)». Родной <select multiple> для этого не годится: на телефоне
@@ -688,6 +700,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   .adv-panel{flex-direction:column;gap:12px}
   .adv-panel label{min-width:0;width:100%}
   .adv-panel select{min-width:0;width:100%;max-width:100%}
+  /* На 360px два поля даты рядом не помещаются и выдавливают полосу
+     прокрутки — ставим их друг под друга. */
+  .dr-range{flex-direction:column;align-items:stretch}
+  .dr-range input[type=date]{min-width:0;width:100%}
+  .dr-dash{display:none}
   .ms{min-width:0;width:100%}
   .ms-pop{max-width:none;left:0;right:0}
 }
@@ -2752,10 +2769,10 @@ function dealAsText(d){
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
                      ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],
                      ["rev","filterMinRevenue"],["status","filterStatus"],["dtype","filterType"],
-                     ["priced","filterPriced"]];
+                     ["priced","filterPriced"],["from","feedFrom"],["to","feedTo"]];
 function feedStateGet(){
   return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull,
-          filterMinRevenue, filterStatus, filterType, filterPriced};
+          filterMinRevenue, filterStatus, filterType, filterPriced, feedFrom, feedTo};
 }
 function feedHash(){
   const st = feedStateGet();
@@ -2779,6 +2796,9 @@ function applyFeedParams(qs){
   const p = new URLSearchParams(qs||"");
   filterInd = p.get("ind") || "Все";
   feedYear = p.get("year") || "Все";
+  const isDay = v => /^\d{4}-\d{2}-\d{2}$/.test(v||"");
+  feedFrom = isDay(p.get("from")) ? p.get("from") : "";
+  feedTo = isDay(p.get("to")) ? p.get("to") : "";
   filterTheme = p.get("theme") || "Все";
   filterFirm = p.get("firm") || "Все";
   /* Селект «Категория консультанта» снят с экрана вместе с категориями в
@@ -3589,6 +3609,42 @@ const msValuesLabel = (opts, sel) => {
 /* Кнопка + список галочек. `opts` — пары [значение, подпись]; `state` —
    текущая строка фильтра. Поиск внутри списка появляется, только когда
    пунктов больше дюжины: у года и темы он был бы лишней строкой. */
+const TODAY_ISO = () => new Date().toISOString().slice(0,10);
+const shiftDays = n => {const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10);};
+
+/* ПЕРИОД И ГАЛОЧКИ ПО ГОДАМ НЕ СКЛАДЫВАЮТСЯ, А СМЕНЯЮТ ДРУГ ДРУГА. «2025» и
+   «с 1 марта по 30 апреля 2024» вместе дают пустую ленту, и человек читает
+   это как поломку, а не как своё противоречие. Кто выбран последним, тот и
+   действует: выбрали период — галочки по годам снимаются, и наоборот. */
+function bindDateRange(){
+  const from = document.getElementById("dfrom"), to = document.getElementById("dto");
+  if(!from || !to) return;
+  const apply = () => {
+    feedFrom = from.value || "";
+    feedTo = to.value || "";
+    if(feedFrom && feedTo && feedFrom > feedTo){ const t=feedFrom; feedFrom=feedTo; feedTo=t;
+      from.value=feedFrom; to.value=feedTo; }
+    if(feedFrom || feedTo){ feedYear="Все"; msReset("selyear"); }
+    to.min = feedFrom || "";
+    from.max = feedTo || TODAY_ISO();
+    const clr = document.querySelector(".dr-clear");
+    if(clr) clr.hidden = !(feedFrom || feedTo);
+    feedPage = 1;
+    renderFeedList();
+    syncFeedHash();
+  };
+  from.onchange = apply;
+  to.onchange = apply;
+  document.querySelectorAll(".dr-q").forEach(b=>b.onclick=()=>{
+    const q = b.dataset.q;
+    from.value = q==="ytd" ? TODAY_ISO().slice(0,4)+"-01-01" : shiftDays(parseInt(q,10));
+    to.value = TODAY_ISO();
+    apply();
+  });
+  const clr = document.querySelector(".dr-clear");
+  if(clr) clr.onclick = ()=>{ from.value=""; to.value=""; apply(); };
+}
+
 function msControl(id, opts, state){
   const sel = msValues(state);
   const chosen = sel.filter(v=>opts.some(o=>o[0]===v));
@@ -3707,6 +3763,14 @@ let feedPage = 1;
 let feedQuery = "";
 let onlyFull = false;
 let feedYear = "Все";
+/* ПЕРИОД ПО КАЛЕНДАРЮ. Галочки по годам отвечают на «что было в 2025-м», но
+   не на «что было с 3 марта по 12 апреля» — а именно так спрашивают, когда
+   готовятся к встрече или пишут обзор за квартал. Два поля `input[type=date]`
+   дают настоящий календарь на телефоне и в десктопе, без единой внешней
+   библиотеки (правило проекта: ничего с чужих CDN).
+   Пусто = ограничения нет. Формат — ГГГГ-ММ-ДД, тот же, что у карточек. */
+let feedFrom = "";
+let feedTo = "";
 let advOpen = false;
 let filterFirm = "Все";
 let filterAdvisorGroup = "Все";
@@ -3999,6 +4063,18 @@ function unifiedFeedItems(){
       ? (it.date!=="unknown" && it.date.slice(0,4)<"2023")
       : it.date.slice(0,4)===y);
   };
+  /* 148 карточек из 1584 датированы только годом — дня у них нет вовсе. В
+     выборку по КАЛЕНДАРНЫМ дням такие не попадают: сказать «эта сделка была
+     в марте» мы не можем, а подсунуть её в мартовский список значило бы
+     выдать догадку за факт. Сколько их отсеялось, подписано под лентой. */
+  const matchPeriod = it => {
+    if(!feedFrom && !feedTo) return true;
+    const d = String(it.date||"");
+    if(d.length !== 10) return false;
+    if(feedFrom && d < feedFrom) return false;
+    if(feedTo && d > feedTo) return false;
+    return true;
+  };
   const matchFirm = it => {
     const firms = msValues(filterFirm);
     if(!firms.length) return true;
@@ -4057,7 +4133,7 @@ function unifiedFeedItems(){
     const yes = meaning === "disclosed";
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
-  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
+  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
   /* Сначала по дате публикации, внутри одного дня — по дате сделки. Второй
      ключ не украшение: 902 карточки приехали одним переносом архива 23 июля, и
      без него весь этот блок лёг бы в случайном порядке вместо хронологии. */
@@ -4086,7 +4162,21 @@ function feedListHtml(){
   if(!bulkLoaded) return bulkLoadFailed
     ? loadFailedHtml()
     : `<div class="reveal" style="text-align:center;padding:60px 0;color:var(--muted)"><div class="spinner"></div>Загружаем базу сделок…</div>`;
+  /* СКОЛЬКО СДЕЛОК ОТСЕЯЛ КАЛЕНДАРЬ — И ПОЧЕМУ. У 148 карточек из 1584 в
+     источниках назван только год, без числа. В выборку по дням они не
+     попадают, и промолчать об этом нельзя: человек решит, что за март
+     сделок не было, а на самом деле часть из них мы просто не умеем
+     поставить в календарь. Считаем ТОЛЬКО те, что подходят по остальным
+     условиям, — иначе подпись пугает числом из другой выборки. */
+  const periodNote = (feedFrom || feedTo) ? (()=>{
+    const years = [feedFrom, feedTo].filter(Boolean).map(d=>d.slice(0,4));
+    const lo = years[0], hi = years[years.length-1];
+    const n = DEALS.filter(d=>String(d.date||"").length===4
+      && (!lo || d.date>=lo) && (!hi || d.date<=hi)).length;
+    return n ? `<p class="feed-period-note reveal">Ещё ${n} ${plural(n,"сделка","сделки","сделок")} ${plural(n,"относится","относятся","относятся")} к этим годам, но в источниках назван только год без числа — в выборку по календарю ${plural(n,"она не попала","они не попали","они не попали")}.</p>` : "";
+  })() : "";
   return `
+  ${periodNote}
   ${filterTheme!=="Все"?`<div class="reveal theme-note">Тема: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Тема определяется по содержанию карточки; в этой подборке показываются сделки с подробным разбором. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
   ${allRows.length?"":emptyFeedHtml()}
@@ -4115,6 +4205,11 @@ function emptyFeedHtml(){
   msList(filterStatus, {k:"status", t:n=>`статус «${n}»`}, ns=>`статус: ${ns.join(", ")}`);
   msList(filterType, {k:"dtype", t:n=>`тип «${n}»`}, ns=>`тип сделки: ${ns.join(", ")}`);
   msList(filterPriced, {k:"priced", t:n=>n.toLowerCase()}, ns=>ns.join(", ").toLowerCase());
+  if(feedFrom || feedTo){
+    const human = iso => iso ? fmtDate(iso) : "";
+    active.push({k:"period", t: feedFrom && feedTo ? `период ${human(feedFrom)} — ${human(feedTo)}`
+                            : feedFrom ? `период с ${human(feedFrom)}` : `период по ${human(feedTo)}`});
+  }
   if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
   if(filterMinRevenue!=="Все"){
@@ -4163,6 +4258,7 @@ function bindFeedListEvents(){
   const fr = document.getElementById("feedreset");
   if(fr) fr.onclick = ()=>{
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
+    feedFrom=""; feedTo="";
     onlyFull=false; filterMinRevenue="Все"; feedPage=1;
     filterStatus="Все"; filterType="Все"; filterPriced="Все";
     const q=document.getElementById("feedq"); if(q) q.value="";
@@ -4206,7 +4302,7 @@ function suggestRows(q, kind){
   };
   if(kind==="companies"){
     // COMPANIES — словарь id → профиль, и id лежит в ключе, а не в самом профиле.
-    const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name).map(([id,c])=>({id, name:c.name})), c=>c.name, 12)
+    const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name&&isCatalogCompany(c)).map(([id,c])=>({id, name:c.name})), c=>c.name, 12)
       .map(c=>({...c, n:companyDeals(c.id).structured.length})).sort((a,b)=>b.n-a.n).slice(0,6);
     return cos.map(c=>({href:`#/companies/${c.id}`, text:c.name, note:c.n?`${c.n} ${plural(c.n,"сделка","сделки","сделок")}`:"компания"}));
   }
@@ -4270,7 +4366,7 @@ function renderDeals(){
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
-          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${Object.keys(COMPANIES).length}">0</b> ${plural(Object.keys(COMPANIES).length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
+          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
         }</div>
         <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Названия сторон мы приводим так, как их раскрыли источники, — это не юридически выверенные реквизиты. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
@@ -4331,6 +4427,20 @@ function renderDeals(){
     <label>Год
       ${msControl("selyear", ["2026","2025","2024","2023","до 2023"].map(y=>[y,y]), feedYear)}
     </label>
+    <label>Период
+      <div class="dr">
+        <div class="dr-quick">
+          ${[["30","30 дней"],["90","3 месяца"],["180","полгода"],["365","год"],["ytd","с начала года"]]
+            .map(([k,l])=>`<button type="button" class="chip dr-q" data-q="${k}">${l}</button>`).join("")}
+        </div>
+        <div class="dr-range">
+          <input type="date" id="dfrom" value="${esc(feedFrom)}" max="${esc(feedTo||TODAY_ISO())}" aria-label="Период с">
+          <span class="dr-dash">—</span>
+          <input type="date" id="dto" value="${esc(feedTo)}" min="${esc(feedFrom)}" max="${esc(TODAY_ISO())}" aria-label="Период по">
+          <button type="button" class="chip dr-clear"${feedFrom||feedTo?"":" hidden"}>Сбросить</button>
+        </div>
+      </div>
+    </label>
     <label>Консультант
       ${msControl("selfirm", [...FIRMS,...INV_FIRMS].sort((a,b)=>a.n.localeCompare(b.n,"ru")).map(f=>[f.id,f.n]), filterFirm)}
     </label>
@@ -4380,7 +4490,8 @@ function renderDeals(){
   };
   const bindMS = (id, fn) => bindMultiSelect(id, v=>{fn(v);feedPage=1;renderFeedList();syncFeedHash();});
   bindMS("selind", v=>filterInd=v);
-  bindMS("selyear", v=>feedYear=v);
+  bindMS("selyear", v=>{feedYear=v; if(v && v!=="Все"){feedFrom=""; feedTo="";} });
+  bindDateRange();
   bindMS("selfirm", v=>filterFirm=v);
   bindMS("seltheme", v=>filterTheme=v);
   bindMS("selstatus", v=>filterStatus=v);
@@ -5891,6 +6002,19 @@ function companiesNamedInDeals(q){
   });
   return out;
 }
+/* ПРЕДМЕТ СДЕЛКИ — НЕ КОМПАНИЯ. 22 сентября 2026 владелец открыл в каталоге
+   «проект добычи золота Быстринско-Ширинское»: «Это не компания. Это убрать
+   надо… ооошки аошки фонды зпифы но точно не дома и не проекты».
+
+   Удалить такой профиль нельзя: 131 из них — ПРЕДМЕТ реальных карточек, с
+   них ведёт плашка сторон и считается история сделок. Поэтому профиль живёт,
+   а из каталога уходит: признак `asset` ставит
+   pipeline/mark_catalog_assets_2026_09_22.py по чтению всех 2028 профилей.
+   Ссылка с карточки сделки открывается по-прежнему — на странице объекта
+   честно написано, что это объект, а не компания. */
+const isCatalogCompany = c => !!c && !c.asset;
+const CATALOG_COMPANY_IDS = () => Object.keys(COMPANIES).filter(id=>isCatalogCompany(COMPANIES[id]));
+
 function companyRows(){
   const q = coQuery.trim().toLowerCase();
   // Тот же размен, что в поиске по сделкам: «авто ру» обязано находить «Авто.ру».
@@ -5899,12 +6023,12 @@ function companyRows(){
     || (qtr.length>=2 && translitKey(name).includes(qtr))   // «вк» находит «VK»
     || fuzzyIncludes(q, name);
   const inInd = c => coInd==="Все"||c.ind===coInd;
-  let picked = Object.entries(COMPANIES).filter(([,c])=>inInd(c)&&(!q||hit(c.name)));
+  let picked = Object.entries(COMPANIES).filter(([,c])=>isCatalogCompany(c)&&inInd(c)&&(!q||hit(c.name)));
   coFoundViaDeals = false;
   if(q && !picked.length){
     const byDeals = companiesNamedInDeals(q);
     if(byDeals.size){
-      picked = Object.entries(COMPANIES).filter(([id,c])=>inInd(c)&&byDeals.has(id));
+      picked = Object.entries(COMPANIES).filter(([id,c])=>isCatalogCompany(c)&&inInd(c)&&byDeals.has(id));
       coFoundViaDeals = picked.length > 0;
     }
   }
@@ -5962,7 +6086,7 @@ function companyGridHtml(){
     // «N компаний в базе» врало при активном фильтре: показывалось отфильтрованное
     // число, а подпись утверждала, что это вся база.
     (coQuery.trim()||coInd!=="Все")
-      ? `Найдено ${rows.length} компани${coWordEnd(rows.length)} из ${Object.keys(COMPANIES).length}`
+      ? `Найдено ${rows.length} компани${coWordEnd(rows.length)} из ${CATALOG_COMPANY_IDS().length}`
       : `${rows.length} компани${coWordEnd(rows.length)} в базе`
   }${rows.length>shown.length?` · показано ${shown.length}`:""}</p>
   ${coFoundViaDeals?`<p style="color:var(--muted);font-size:13px;margin:-14px 0 20px">Компании с таким названием в каталоге нет — показываем тех, кто участвует в сделках, где встречается «${esc(coQuery.trim())}».</p>`:""}
@@ -6947,6 +7071,11 @@ function renderCompany(id){
   <div class="d-head reveal">
     <a class="tag" href="#/industry/${encodeURIComponent(c.ind)}" title="Сводка по отрасли «${esc(c.ind)}»">${c.ind}</a>
     ${c.group?`<span class="tag steel" style="margin-left:6px">Группа компаний</span>`:""}
+    ${/* Здание, участок, проект или бренд — в каталоге компаний его нет, но
+          ссылка с карточки сделки сюда ведёт и обязана открываться. Сказать
+          об этом прямо честнее, чем молча показывать объект страницей
+          компании: читатель иначе ждёт здесь выручку и владельцев. */""}
+    ${c.asset?`<span class="tag steel" style="margin-left:6px" title="Это предмет сделки, а не компания: в каталоге «Компании» его нет">Объект сделки</span>`:""}
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
     ${sanctionsHtml(c)}

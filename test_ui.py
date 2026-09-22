@@ -3651,3 +3651,76 @@ def test_form_fields_are_16px_on_touch_devices(browser, base_url):
         assert not small, "поля мельче 16px — iPhone будет увеличивать страницу: %s" % small
     finally:
         ctx.close()
+
+
+def test_the_deal_feed_can_be_narrowed_to_calendar_days(page, base_url):
+    """Период выбирается числами календаря, а не только годом.
+
+    Просьба владельца 22 сентября 2026: галочки «2025 / 2024» отвечают на
+    «что было за год», но не на «что было с 1 марта по 30 апреля» — а именно
+    так спрашивают, когда готовятся к встрече или пишут обзор за квартал.
+    У конкурента (Aspring) такой выбор есть, и он читается как норма жанра.
+
+    Два поля `input[type=date]` дают родной календарь браузера, без единой
+    внешней библиотеки. Тест держит три вещи: отбор идёт по ДАТЕ СДЕЛКИ,
+    ссылка period переживает перезагрузку, и карточки, у которых известен
+    только год, честно посчитаны отдельно, а не подмешаны в выборку по дням.
+    """
+    page.goto(f"{base_url}/#/deals?from=2025-03-01&to=2025-04-30")
+    page.wait_for_timeout(2500)
+
+    expected = page.evaluate(
+        "DEALS.filter(d=>String(d.date||'').length===10"
+        " && d.date>='2025-03-01' && d.date<='2025-04-30').length")
+    assert expected > 0, "в базе нет сделок за этот период — выберите другой"
+
+    shown = page.evaluate(
+        "unifiedFeedItems().filter(it=>it.kind==='full'||it.kind).length")
+    assert shown == expected, (shown, expected)
+
+    # Карточки, датированные одним годом, в выборку по дням не попадают — и
+    # об этом сказано вслух, иначе читатель решит, что сделок не было.
+    note = page.evaluate("(document.querySelector('.feed-period-note')||{}).textContent||''")
+    year_only = page.evaluate("DEALS.filter(d=>String(d.date||'').length===4 && d.date==='2025').length")
+    if year_only:
+        assert "только год" in note, note
+        assert str(year_only) in note, (note, year_only)
+
+    # Быстрая кнопка ставит обе даты и снимает галочки по годам.
+    page.click(".dr-q[data-q='90']")
+    page.wait_for_timeout(800)
+    assert page.input_value("#dfrom") and page.input_value("#dto")
+    assert page.evaluate("feedYear") == "Все"
+    assert "from=" in page.evaluate("location.hash")
+
+
+def test_an_object_of_a_deal_is_not_listed_among_companies(page, base_url):
+    """Каталог «Компании» — про компании; здание открывается, но не числится.
+
+    Владелец 22 сентября 2026 о профиле «проект добычи золота
+    Быстринско-Ширинское»: «Это не компания. Это убрать надо.» Удалить
+    нельзя — профиль стоит предметом реальной сделки, и плашка сторон ведёт
+    сюда. Поэтому он уходит из каталога, а страница остаётся и честно
+    называет себя объектом.
+    """
+    page.goto(f"{base_url}/#/companies")
+    page.wait_for_timeout(2500)
+    catalog = page.evaluate("CATALOG_COMPANY_IDS().length")
+    total = page.evaluate("Object.keys(COMPANIES).length")
+    assert 0 < catalog < total, (catalog, total)
+    assert page.evaluate("Object.values(COMPANIES).some(c=>c.asset)")
+
+    # Подпись под каталогом считает то же, что показывает.
+    head = page.evaluate("(document.querySelector('#coGrid p')||{}).textContent||''")
+    assert str(catalog) in head, head
+
+    # Ни один скрытый профиль не попал в сетку каталога.
+    hidden_shown = page.evaluate(
+        "companyRows().filter(r=>r.c.asset).length")
+    assert hidden_shown == 0
+
+    asset_id = page.evaluate("Object.keys(COMPANIES).find(id=>COMPANIES[id].asset)")
+    page.goto(f"{base_url}/#/companies/{asset_id}")
+    page.wait_for_timeout(1200)
+    tags = page.evaluate("[...document.querySelectorAll('.tag')].map(e=>e.textContent.trim())")
+    assert "Объект сделки" in tags, tags
