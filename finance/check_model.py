@@ -24,10 +24,24 @@ SCEN = {
                    ceiling=18000, pay_share=0.025, reg_org0=25, reg_growth=0.09,
                    cpr=900, conv=0.045, conv_lag=3, ai_per_user=110),
 }
-FIX = dict(host=6000, ai=15000, fns=8000, kassa=2500, acc=12000, reg=4000,
-           legal=10000, mkt=30000, misc=8000, gd_salary=0, team_cost=0)
-DEV_START = {"790 ₽": 15, "990 ₽": 14, "1490 ₽": 12}
-DEV_COST = 220000
+# По вашим счетам (22 сентября 2026): Timeweb 5 300 ₽/мес, Yandex.Cloud
+# 7 000 ₽/мес, Claude 20 000 ₽/мес, регистратор Р.О.С.Т. 9 000 ₽/квартал,
+# аренда офиса 22 900 ₽/год. Остальное — мои прикидки, помечены ниже.
+FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, reg=3000, office=1908,
+           fns=8000, kassa=2500, acc=12000, legal=10000, mkt=30000, misc=8000,
+           gd_salary=0, team_cost=0)
+# Разработчик лесенкой: первый квартал никого, месяцы 4–12 по 50 тыс, с 13-го
+# по 100 тыс. Оба этапа — подряд с самозанятым или ИП, поэтому без взносов.
+DEV_FREE, DEV1_UNTIL, DEV1_COST, DEV2_COST = 3, 12, 50000, 100000
+
+
+def dev_cost(month):
+    """month — номер месяца от старта, начиная с 1."""
+    if month <= DEV_FREE:
+        return 0
+    return DEV1_COST if month <= DEV1_UNTIL else DEV2_COST
+
+
 MROT, INS_RATE, ACQ = 27093, 0.30, 0.030
 USN, USN_MIN, VAT_LIMIT, VAT_RATE = 0.15, 0.01, 20_000_000, 0.05
 CASH0 = 500_000
@@ -44,7 +58,8 @@ def unit(p):
                 payback=cac / contrib if contrib > 0 else None,
                 cpr_ok=ltv * p["conv"] / 3,
                 fixed=fixed, be=-(-fixed // contrib) if contrib > 0 else None,
-                be_dev=-(-(fixed + DEV_COST) // contrib) if contrib > 0 else None,
+                be_dev1=-(-(fixed + DEV1_COST) // contrib) if contrib > 0 else None,
+                be_dev2=-(-(fixed + DEV2_COST) // contrib) if contrib > 0 else None,
                 vat_subs=-(-VAT_LIMIT / 12 // arpu))
 
 
@@ -71,10 +86,11 @@ def run(name, p):
         rev = paid * (p["price_m"] * (1 - share_y_now) + p["price_y"] / 12 * share_y_now)
         cash_in = rev + new * share_y_now * (p["price_y"] - p["price_y"] / 12)
 
-        costs = (FIX["host"] + FIX["ai"] + p["ai_per_user"] * paid + FIX["fns"] + FIX["kassa"]
-                 + FIX["acc"] + FIX["reg"] + FIX["legal"] + FIX["mkt"] + FIX["misc"]
+        costs = (FIX["timeweb"] + FIX["ycloud"] + p["ai_per_user"] * paid + FIX["claude_sub"]
+                 + FIX["reg"] + FIX["office"] + FIX["fns"] + FIX["kassa"] + FIX["acc"]
+                 + FIX["legal"] + FIX["mkt"] + FIX["misc"]
                  + cash_in * ACQ + rev * p["refund"] + FIX["gd_salary"] + FIX["team_cost"]
-                 + (DEV_COST if i + 1 >= DEV_START[name] else 0)
+                 + dev_cost(i + 1)
                  + max(FIX["gd_salary"], MROT) * INS_RATE)
 
         if i == 3:          # январь: новый календарный год
@@ -106,7 +122,8 @@ lines = [("Средний платёж в месяц", "arpu", money),
          ("Нужная цена регистрации (окупаемость ×3)", "cpr_ok", money),
          ("Постоянные расходы в месяц", "fixed", money),
          ("ПОРОГ БЕЗУБЫТОЧНОСТИ, подписчиков", "be", lambda v: "%d" % v),
-         ("  тот же порог, если наняли разработчика", "be_dev", lambda v: "%d" % v),
+         ("  то же с разработчиком за 50 тыс ₽", "be_dev1", lambda v: "%d" % v),
+         ("  то же с разработчиком за 100 тыс ₽", "be_dev2", lambda v: "%d" % v),
          ("20 млн ₽ в год — это подписчиков", "vat_subs", lambda v: "%d" % v)]
 units = {n: unit(p) for n, p in SCEN.items()}
 for title, key, fmt in lines:
@@ -148,8 +165,8 @@ for n in SCEN:
         print("  %-7s упёрлись в потолок рынка (%d человек) — рост дальше модель не описывает."
               % (n, round(SCEN[n]["ceiling"] * SCEN[n]["pay_share"])))
     if not any(x["net"] > 0 for x in rows):
-        print("  %-7s за 24 месяца в прибыль не выходим (порог — %d подписчиков, к 24-му месяцу %d)."
-              % (n, u["be"], round(last)))
+        print("  %-7s за 24 месяца в прибыль не выходим (порог к концу — %d подписчиков, "
+              "получается %d)." % (n, u["be_dev2"], round(last)))
         flag = True
 if not flag:
     print("  — ничего")
@@ -165,30 +182,31 @@ print()
 BASE = "990 ₽"
 
 
-def variant(title, scen=None, fix=None, dev=None):
+def variant(title, scen=None, fix=None, no_dev=False):
     p = dict(SCEN[BASE]); p.update(scen or {})
-    global FIX, DEV_START
-    fix_was, dev_was = dict(FIX), dict(DEV_START)
+    global FIX, DEV1_COST, DEV2_COST
+    fix_was, d1, d2 = dict(FIX), DEV1_COST, DEV2_COST
     if fix:
         FIX = dict(FIX); FIX.update(fix)
-    if dev is not None:
-        DEV_START = dict(DEV_START); DEV_START[BASE] = dev
+    if no_dev:
+        DEV1_COST = DEV2_COST = 0
     u = unit(p)
     _, rows = run(BASE, p)
     month = next((x["m"] for x in rows if x["net"] > 0), None)
-    FIX, DEV_START = fix_was, dev_was
-    dev_hired = (dev if dev is not None else DEV_START[BASE]) <= MONTHS
+    threshold = u["be"] if no_dev else u["be_dev2"]
+    FIX, DEV1_COST, DEV2_COST = fix_was, d1, d2
     print("%-46s порог %3d чел.%s   к 24-му месяцу %3d   в плюс: %s"
-          % (title, u["be_dev"] if dev_hired else u["be"],
-             " (с разработчиком)" if dev_hired else "                  ",
+          % (title, threshold,
+             "                   " if no_dev else " (со 100 тыс ₽ с 13-го)",
              round(rows[-1]["paid"]),
              ("с %d-го месяца" % month) if month else "не выходим"))
 
 
 variant("как есть")
-variant("не нанимаем разработчика", dev=99)
+variant("не нанимаем разработчика вовсе", no_dev=True)
 variant("без платного продвижения (−30 тыс ₽/мес)", fix={"mkt": 0})
-variant("без продвижения и без разработчика", fix={"mkt": 0}, dev=99)
+variant("без продвижения и без разработчика", fix={"mkt": 0}, no_dev=True)
+variant("без подписки Claude (−20 тыс ₽/мес)", fix={"claude_sub": 0})
 variant("отток 7% вместо 10%", scen={"churn": 0.07})
 variant("конверсия в оплату 10% вместо 7%", scen={"conv": 0.10})
 variant("оплата через СБП: комиссия 0,6% вместо 3%")
@@ -198,4 +216,11 @@ variant("  (пересчёт с СБП)")
 ACQ = _acq_was
 variant("органика стартует с 40 в месяц вместо 25", scen={"reg_org0": 40})
 variant("всё вместе: без продвижения, без разработчика,\n  отток 7%, конверсия 10%, органика 40",
-        scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0}, dev=99)
+        scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0}, no_dev=True)
+print()
+print("А ТЕПЕРЬ ВАШ ПЛАН ЦЕЛИКОМ — разработчик по лесенке 0 → 50 → 100 остаётся,")
+print("убрано только то, что по расчёту не окупается:")
+variant("без платного продвижения", fix={"mkt": 0})
+variant("без продвижения и без подписки Claude", fix={"mkt": 0, "claude_sub": 0})
+variant("то же и отток 7%, конверсия 10%, органика 40",
+        scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0})
