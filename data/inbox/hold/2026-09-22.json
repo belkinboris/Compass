@@ -446,7 +446,7 @@
    ]
   },
   {
-   "draft_id": "d80791456",
+   "draft_id": "d74937459",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -485,7 +485,7 @@
    ]
   },
   {
-   "draft_id": "d76884355",
+   "draft_id": "d89042728",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -513,7 +513,7 @@
    ]
   },
   {
-   "draft_id": "d14137579",
+   "draft_id": "d53530240",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -541,7 +541,7 @@
    ]
   },
   {
-   "draft_id": "d36390147",
+   "draft_id": "d85254861",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -570,7 +570,7 @@
    ]
   },
   {
-   "draft_id": "d85358716",
+   "draft_id": "d13644128",
    "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
@@ -600,7 +600,7 @@
    ]
   },
   {
-   "draft_id": "d15168052",
+   "draft_id": "d59231840",
    "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
    "date": "2026-09-22",
    "src": [
@@ -641,7 +641,7 @@
    ]
   },
   {
-   "draft_id": "d24900038",
+   "draft_id": "d86853729",
    "title": "Акционеры «Т-Технологий» одобрили допэмиссию акций для консолидации «Точки»",
    "date": "2026-09-22",
    "src": [
@@ -669,7 +669,7 @@
    ]
   },
   {
-   "draft_id": "d34360143",
+   "draft_id": "d76853159",
    "title": "Rostic’s перестал продавать франшизы в России — новые точки будут открывать действующие партнёры",
    "date": "2026-09-22",
    "src": [
@@ -697,13 +697,41 @@
    ]
   },
   {
-   "draft_id": "d22058407",
-   "title": "Reuters: Си на встрече с Трампом потребует прекратить продажи оружия Тайваню",
+   "draft_id": "d56306677",
+   "title": "Регионы опередили Москву и Петербург по продажам билетов на концерты",
    "date": "2026-09-22",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8972453"
+     "https://www.kommersant.ru/doc/8972508"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10836392",
+   "title": "В РФ вопрос о разрешении онлайн-продажи алкоголя не стоит на повестке",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28140121"
     ]
    ],
    "sum": null,
@@ -725,75 +753,59 @@
    ]
   },
   {
-   "draft_id": "d26657255",
-   "title": "Africa News: США вернут Гамбии $2,5 млн от продажи имущества экс-президента",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28139989"
-    ]
-   ],
-   "sum": "$2,5 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21078086",
-   "title": "«Газпром» в 2025 году на четверть нарастил продажи СПГ в России",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28139927"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31698777",
-   "title": "Oura подготовила одно из крупнейших IPO среди производителей носимой электроники",
+   "draft_id": "d18908082",
+   "title": "Платформа для продажи билетов добавила совместные покупки для компаний",
    "date": "2026-09-22",
    "src": [
     [
      "web:incrussia.ru",
-     "https://incrussia.ru/news/oura-podgotovila-odno-iz-krupnejshih-ipo-sredi-proizvoditelej-nosimoj-elektroniki/"
+     "https://incrussia.ru/news/platforma-dlya-prodazhi-biletov-dobavila-sovmestnye-pokupki-dlya-kompanij/"
     ]
    ],
-   "sum": "$2,2 млрд",
-   "type": "IPO",
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d23294479",
+   "title": "Покупки и продажи фондов 💼",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1354336.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-22",
+     "title": "Сделка завершена",
+     "note": "◽️Появились новые данные по сделкам фондов за август. Данные на фото. Фонды накупили Лукойла и Татнефти, концентрируя свои капиталы в нефтегазовом секторе. Разочаровались в акциях Пятерочки и Полюс золото. Источник: Framedata",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1354336.php"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -806,74 +818,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d90129124",
-   "title": "Paramount урегулировала конфликт с 12 штатами для покупки Warner Bros. — компания будет выпускать 30 фильмов в год",
+   "draft_id": "d92169822",
+   "title": "Россияне придумали знакомому долг и похитили его ради многомиллионного выкупа",
    "date": "2026-09-22",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/paramount-uregulirovala-konflikt-s-12-shtatami-dlya-pokupki-warner-bros-kompaniya-budet-vypuskat-30-filmov-v-god/"
-    ]
-   ],
-   "sum": "$30 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27228866",
-   "title": "В Пермском крае за 8,5 млн рублей продают угодья для охоты на медведей",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129831"
-    ]
-   ],
-   "sum": "8,5 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22914589",
-   "title": "BCG M&A Report 2026 https://www.bcg.com/publications/2026/m-and-a-rebounds-recovery-uneven",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7407"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/22/rossiyane-pridumali-znakomomu-dolg-i-pohitili-ego-radi-mnogomillionnogo-vykupa/"
     ]
    ],
    "sum": null,
@@ -891,8 +846,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
