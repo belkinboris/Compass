@@ -402,7 +402,7 @@
    ]
   },
   {
-   "draft_id": "d12701071",
+   "draft_id": "d45029294",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -441,46 +441,7 @@
    ]
   },
   {
-   "draft_id": "d91911138",
-   "title": "Мой портфель облигаций на 22 сентября 2026. Что изменилось за месяц? Покупки и планы на октябрь",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354003.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-22",
-     "title": "Переговоры",
-     "note": "Раз в месяц смотрю и анализирую облигационную часть своего портфеля, какие изменения произошли за месяц, пишу о покупках и продажах, показываю состав портфеля: все выпуски с указанием даты погашения, величины купона, ISIN, наличия оферты, текущей доходности и…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1354003.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66822277",
+   "draft_id": "d10356923",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -505,6 +466,91 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72589555",
+   "title": "«1С» и «Райтек» создают совместное предприятие для развития цифровых технологий управления производством",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-22_1s_i_rajtek_sozdayut_sovmestnoe"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24913594",
+   "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/22/bivshee-zdanie-gipermarketa"
+    ]
+   ],
+   "sum": "3,5 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92075378",
+   "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129631"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
