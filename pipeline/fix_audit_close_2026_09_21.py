@@ -124,6 +124,83 @@ def read_field(card, companies, field):
     return cur, setter
 
 
+def _card_strings(card):
+    """Все строки карточки, кроме слоя фактов (он производный)."""
+    out = []
+
+    def walk(v):
+        if isinstance(v, str):
+            out.append(v)
+        elif isinstance(v, dict):
+            for k, x in v.items():
+                if k != "facts":
+                    walk(x)
+        elif isinstance(v, list):
+            for x in v:
+                walk(x)
+
+    walk(card)
+    return out
+
+
+def _sentences(text):
+    # Режем ТОЛЬКО по точке-восклицанию-вопросу. По закрывающей ёлочке резать
+    # нельзя: «Об интересе «Черноголовки» к бизнесу Kellogg…» развалилось бы
+    # посреди фразы, и половина предложения объявилась бы потерянной.
+    text = re.sub(r"\s+", " ", str(text or ""))
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if len(s.strip()) >= 40]
+
+
+def sentences_readers_placed(all_items):
+    """Предложения, которые читатели этой кампании ПЕРЕНЕСЛИ в новое поле.
+
+    Вычисляется по всем ответам сразу, а не по одному: ровно в этом и была
+    беда — находки разных читателей применялись разными прогонами, и второй
+    не знал, что первый только что положил в поле.
+    """
+    placed = set()
+    for it in all_items:
+        was = re.sub(r"\s+", " ", str(it.get("old_full_text") or ""))
+        for sent in _sentences(it.get("new_full_text") or ""):
+            if sent not in was:
+                placed.add(sent)
+    return placed
+
+
+def lost_sentences(before, after, placed):
+    """Перенесённое другим читателем предложение, исчезнувшее из карточки.
+
+    ПОЧЕМУ ЭТА ПРОВЕРКА ОТДЕЛЬНАЯ ОТ СВЕРКИ «ДО». Сверка `old_full_text`
+    отвечает на вопрос «не изменилось ли поле с тех пор, как читатель его
+    прочитал». У неё нашлась слепая зона: две находки одной карточки
+    разбирали разные читатели. Первый перенёс предложение в пустой
+    «Контекст». Второй читал карточку уже ПОСЛЕ него, увидел там чужое
+    предложение — и честно заменил поле целиком, как и требует формат ответа
+    («new_full_text — полный текст поля»). «До» у него было свежим,
+    откатывать было нечего, а предложение исчезло из базы совсем
+    (`g1f098415`, Kellogg → «Черноголовка»).
+
+    ПОЧЕМУ СТОРОЖ СМОТРИТ ТОЛЬКО НА ПЕРЕНЕСЁННОЕ, А НЕ НА ЛЮБУЮ ПРОПАЖУ.
+    Удалять текст читателю МОЖНО и нужно: классы STALE_STATEMENT и
+    CONTRADICTION ровно об этом («Теперь компания намерена увеличить долю до
+    100%» при уже состоявшейся консолидации). Замер по партии 21 сентября:
+    сторож «пропало любое предложение» откатил бы 6 находок из 65, и пять из
+    шести были законными удалениями. Сторож «пропало предложение, которое
+    ТОЛЬКО ЧТО перенёс другой читатель» откатывает ровно ту одну, ради
+    которой заведён.
+    """
+    now = " || ".join(re.sub(r"\s+", " ", s) for s in _card_strings(after))
+    gone = []
+    for chunk in _card_strings(before):
+        for sent in _sentences(chunk):
+            if sent not in placed:
+                continue
+            if sent in now or sent.rstrip(".") in now or sent[:40] in now:
+                continue
+            gone.append(sent)
+    return gone
+
+
 def roles_are_distinct(card):
     used = [card.get(r) for r in ROLE_IDS if card.get(r)]
     return len(used) == len(set(used))
@@ -152,6 +229,10 @@ def main(write: bool, out_dir=None) -> int:
     by_key = {}
     for it in items:
         by_key.setdefault((it["card_id"], it["key"]), []).append(it)
+    # Считается по ВСЕМ ответам сразу и до первой правки: находки разных
+    # читателей применяются разными прогонами, и второй не должен затереть
+    # то, что первый только что перенёс.
+    placed = sentences_readers_placed(items)
 
     log, applied, skipped = [], 0, 0
     for (cid, _key), parts in by_key.items():
@@ -228,6 +309,16 @@ def main(write: bool, out_dir=None) -> int:
                        % ", ".join(sorted(touched_decided)))
         if not trouble and not roles_are_distinct(card):
             trouble = "после правки компания заняла бы две роли"
+        # ПЕРЕНОС НЕ ТЕРЯЕТ ТЕКСТ. Правка переставляет предложения между
+        # полями одной карточки, поэтому предложение, стоявшее в карточке
+        # ДО правки, обязано найтись в ней и ПОСЛЕ — хоть в другом поле.
+        # Исключение — когда читатель сам переписал это предложение
+        # (устаревшее время, противоречие): тогда его новая версия стоит в
+        # `new_full_text` той же находки, и начало предложения там есть.
+        if not trouble:
+            gone = lost_sentences(before, card, placed)
+            if gone:
+                trouble = "правка потеряла бы текст: «%s…»" % gone[0][:60]
         if trouble:
             cards[cid].clear()
             cards[cid].update(before)

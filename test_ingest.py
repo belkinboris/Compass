@@ -6400,3 +6400,59 @@ def test_parent_company_is_not_linked_to_the_subsidiary_it_sold():
     for text, profile in (("Knauf", "Knauf"), ("Яндекс", "Яндекс"),
                           ("Ponsse Plc", "Ponsse (российский бизнес)")):
         assert not link_parties._is_parent_of_subsidiary(text, profile), (text, profile)
+
+
+def test_a_move_between_fields_never_drops_a_sentence_another_reader_just_moved_in():
+    """Второй читатель переписывает поле целиком — и чужой перенос исчезает.
+
+    Случай из очереди аудита 21 сентября 2026 (`g1f098415`, Kellogg →
+    «Черноголовка»). Две находки одной карточки разбирали разные читатели.
+    Первый перенёс предложение из «Зачем» в пустой «Контекст». Второй читал
+    карточку уже ПОСЛЕ него, увидел в «Контексте» чужое предложение — и
+    честно вернул туда своё описание завода целиком, как и требует формат
+    ответа («new_full_text — полный текст поля»). Сверка `old_full_text` тут
+    молчит: «до» у второго было свежим, откатывать нечего. А предложение
+    пропало из базы совсем.
+
+    Сторож смотрит ТОЛЬКО на перенесённое другим читателем. Удалять текст
+    читателю можно и нужно — классы STALE_STATEMENT и CONTRADICTION ровно об
+    этом, — и сторож «пропало любое предложение» откатил бы пять законных
+    удалений из шести (замер той же партии).
+    """
+    import importlib.util
+
+    path = Path(__file__).resolve().parent / "pipeline" / "fix_audit_close_2026_09_21.py"
+    spec = importlib.util.spec_from_file_location("audit_applier", path)
+    applier = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(applier)
+
+    moved_in = ("Об интересе «Черноголовки» к бизнесу Kellogg стало известно "
+                "в декабре 2022 года.")
+    factory = ("«Келлогг Рус» была ключевой производственной площадкой Kellogg "
+               "в России. На заводе выпускают печенье и готовые завтраки.")
+
+    # Ответ первого читателя: предложение уехало из «Зачем» в «Контекст».
+    first = [{"field": "eco.rationale", "old_full_text": moved_in, "new_full_text": "—"},
+             {"field": "eco.context", "old_full_text": "—", "new_full_text": moved_in}]
+    # Ответ второго: он видел «Контекст» уже с чужим предложением.
+    second = [{"field": "eco.share", "old_full_text": factory, "new_full_text": "—"},
+              {"field": "eco.context", "old_full_text": moved_in, "new_full_text": factory}]
+    placed = applier.sentences_readers_placed(first + second)
+
+    before = {"id": "x", "eco": {"context": moved_in, "share": factory}}
+    after = {"id": "x", "eco": {"context": factory, "share": "—"}}
+    assert moved_in in applier.lost_sentences(before, after, placed)
+
+    # Тот же перенос, но с сохранением чужого предложения, — не потеря.
+    kept = {"id": "x", "eco": {"context": moved_in + " " + factory, "share": "—"}}
+    assert applier.lost_sentences(before, kept, placed) == []
+
+    # Умышленное удаление устаревшей фразы сторож не трогает: её никто не
+    # переносил, читатель сам решил её снять.
+    stale = ("Теперь компания намерена увеличить свою долю во владимирском "
+             "предприятии до 100%, и для этого нужно одобрение ФАС.")
+    was = {"id": "y", "law": {"struct": stale}}
+    now = {"id": "y", "law": {"struct": "—"}}
+    drop = [{"field": "law.struct", "old_full_text": stale, "new_full_text": "—"}]
+    assert applier.lost_sentences(
+        was, now, applier.sentences_readers_placed(drop)) == []
