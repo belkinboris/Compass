@@ -84,6 +84,37 @@ def test_verified_fact_survives_derive_but_goes_stale_when_card_changes():
     assert f['stake']['basis'] == 'verified'
 
 
+def test_stale_fact_survives_a_second_derive_without_losing_its_data():
+    """Баг, пойманный 21 сентября 2026 (KNOWN_ISSUES.md, «Проверенный факт
+    слоя фактов может тихо превратиться обратно в rule»): первый derive()
+    после правки поля помечает факт stale (данные целы), но ВТОРОЙ derive()
+    без промежуточного повторного чтения раньше терял disputed/readings/
+    quote безвозвратно — карточка выглядела так, будто её никогда не читали.
+    stale обязан остаться stale (и сохранить содержимое) сколько угодно
+    подряд вызовов derive(), пока facts_confirm.py не перечитает явно."""
+    d = _deal()
+    d['facts'] = _verified(d)
+    d['facts']['price']['disputed'] = [{'value_rub': 1}, {'value_rub': 2}]
+    d['facts']['target']['perimeter_report'] = {'inn': '7700000001', 'year': 2023}
+
+    changed = dict(d, sum='2 000 млн ₽', target='bank1')
+    once = facts.derive(changed, CTX)
+    assert once['price']['basis'] == 'stale' and once['price']['disputed'] == [{'value_rub': 1}, {'value_rub': 2}]
+    assert once['target']['perimeter'] == 'stale' and once['target']['perimeter_report'] == {'inn': '7700000001', 'year': 2023}
+
+    twice = facts.derive(dict(changed, facts=once), CTX)
+    assert twice['price']['basis'] == 'stale' and twice['price']['disputed'] == [{'value_rub': 1}, {'value_rub': 2}]
+    assert twice['target']['perimeter'] == 'stale' and twice['target']['perimeter_report'] == {'inn': '7700000001', 'year': 2023}
+    assert twice == once
+
+    # поле вернули как было — hash снова совпадает, но stale не «оживает» сам:
+    # это осознанный выбор (см. докстроку facts.py), нужен явный повторный
+    # читатель, а не совпадение хэша задним числом
+    reverted = facts.derive(dict(d, facts=twice), CTX)
+    assert reverted['price']['basis'] == 'stale'
+    assert reverted['target']['perimeter'] == 'stale'
+
+
 def test_derive_is_idempotent_on_the_live_base():
     import json
     from pipeline import fns_registry

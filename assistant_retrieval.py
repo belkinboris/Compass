@@ -537,6 +537,11 @@ def _declension_match(a: str, b: str) -> bool:
     return n >= 6 and len(a) - n <= 3 and len(b) - n <= 3
 
 
+def _firm_deal_count(firm: Firm, idx: Index) -> int:
+    """Сколько сделок базы фирма СОПРОВОЖДАЛА (а не участвовала в них)."""
+    return sum(1 for doc in idx.docs if any(firm.rx.search(a) for a in doc.advisors))
+
+
 def _detect_firm(question: str, idx: Index) -> Firm | None:
     hits = [f for f in idx.firms if f.rx.search(question)]
     if hits:
@@ -727,6 +732,21 @@ def route(question: str, idx: Index | None = None) -> Intent:
     theme = _detect_theme(question)
     term_rx = _detect_term(question)
     wants_adv = bool(ADVISOR_WORDS.search(question))
+    # ИМЯ БЫВАЕТ И У КОНСУЛЬТАНТА, И У СТОРОНЫ СДЕЛОК. 22 сентября 2026 в
+    # каталог консультантов добавили банки — Сбербанк, ВТБ, Газпромбанк,
+    # Альфа-Банк: они действительно организуют размещения и консультируют.
+    # Но покупают они куда чаще, чем консультируют: у Сбербанка 5 сделок как
+    # у консультанта и 11 как у стороны. Вопрос «Сбербанк купил в 2025 году»
+    # после добавления стал читаться как вопрос про консультанта — и вместо
+    # покупок человек получал список сопровождённых сделок.
+    #
+    # Решает не список исключений, а счёт: если имя чаще называет СТОРОНУ,
+    # чем консультанта, это вопрос про компанию — пока в самом вопросе не
+    # спросили про сопровождение («кто консультировал», «юрфирма»).
+    if firm and not wants_adv:
+        as_party = _detect_company(question, idx, terms + short_name_terms(question))
+        if as_party and len(idx.company_deals.get(as_party[0], ())) > _firm_deal_count(firm, idx):
+            firm = None
     if firm:
         return Intent("advisor", firm=firm, year=year, industry=industry, terms=terms)
     # «Что нового» — раньше всего: иначе слово «нового» узнаётся компанией

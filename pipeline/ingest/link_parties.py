@@ -130,6 +130,20 @@ def build_index(companies, match_keys=None):
     return index
 
 
+SUBSIDIARY_MARK = re.compile(
+    r'\((?:российск\w+\s+(?:бизнес\w*|подразделени\w*|активы?)|'
+    r'росси\w*|российское\s+юрлицо)\)\s*$', re.I)
+
+
+def _is_parent_of_subsidiary(text, profile_name):
+    """Текст называет МАТЬ, а профиль — её российскую часть."""
+    name = str(profile_name or '')
+    if not SUBSIDIARY_MARK.search(name):
+        return False
+    base = SUBSIDIARY_MARK.sub('', name).strip()
+    return company_key(text) == company_key(base)
+
+
 def link_card(card, index, companies):
     """Проставляет ссылки на профили. Возвращает список описаний того, что
     связано (пусто — значит связывать было нечего)."""
@@ -156,6 +170,21 @@ def link_card(card, index, companies):
         # инвариантом `test_one_company_holds_one_role_in_a_deal`, который
         # для того и заведён.
         if cid in {card.get(f) for f in ('target', 'asset_id', 'buyer', 'seller_id')}:
+            continue
+        # МАТЕРИНСКАЯ КОМПАНИЯ — НЕ ЕЁ ПРОДАННАЯ ДОЧКА. У 17 профилей вида
+        # «Knauf (российский бизнес)», «Avon (российское подразделение)»,
+        # «Faurecia (российские активы)» среди псевдонимов стоит голое имя
+        # МАТЕРИ («knauf», «avon», «faurecia»). Ключ у них один, поэтому
+        # сторона, названная в карточке просто «Faurecia», связалась бы с
+        # профилем того самого актива, который она продала: продавец и
+        # предмет — одна запись. Найдено читателями очереди аудита
+        # 21 сентября 2026 на Natura&Co / Avon и SoftwareONE.
+        #
+        # Псевдонимы не снимаем: по ним профиль дочки ищут законно
+        # («продан российский бизнес Knauf»). Запрет стоит здесь, где
+        # решается роль, и ровно на случае «текст — голое имя матери, а
+        # профиль отмечен как её часть».
+        if _is_parent_of_subsidiary(text, profile_name):
             continue
         card[id_field] = cid
         # Пара «ссылка + текст» у покупателя не может существовать разом:

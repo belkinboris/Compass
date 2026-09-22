@@ -111,10 +111,15 @@ def test_health_ai_flag(monkeypatch):
     body = TestClient(main.app).get("/health").json()
     assert body["status"] == "ok" and body["ai"] is False
     # С 19 сентября 2026 в ответе есть ещё отпечаток выложенной сборки —
-    # см. test_launch_features::test_health_carries_a_build_fingerprint.
-    # Проверяем поля по именам, а не ответ целиком: иначе каждая новая
-    # строка в /health ломает тест, который про флаг поиска.
-    assert set(body) == {"status", "ai", "build"}
+    # см. test_launch_features::test_health_carries_a_build_fingerprint,
+    # а с 22 сентября — имя модели, на которой прод отвечает на самом деле
+    # (владелец спросил, не сменить ли модель, и выяснилось, что узнать
+    # текущую снаружи было нельзя).
+    # Проверяем НАЛИЧИЕ нужных полей, а не равенство набора: иначе каждая
+    # новая строка в /health ломает тест, который про флаг поиска. Прежняя
+    # версия именно это и обещала в комментарии, а сравнивала набор целиком.
+    assert {"status", "ai", "build", "model"} <= set(body)
+    assert body["model"] == main.current_model()
 
 
 @pytest.mark.parametrize("path", ["/", "/health", "/#/analytics"])
@@ -392,6 +397,10 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
         def start(self):
             self.target(*self.args)
 
+    asked = []
+    real_thread_id = main._console_thread_id
+    monkeypatch.setattr(main, "_console_thread_id",
+                        lambda db, kind: asked.append(kind) or real_thread_id(db, kind))
     monkeypatch.setattr(main.threading, "Thread", SyncThread)
     with TestClient(main.app) as c:
         bad = c.post("/api/assistant/feedback", json={"question": "q", "answer": "a", "verdict": "maybe"})
@@ -411,6 +420,13 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
         assert "В базе 15 сделок Orion" in sent[-1][1]["text"]
         up = c.post("/api/assistant/feedback", json={"question": "x", "answer": "y", "verdict": "up"})
         assert up.json()["ok"] is True
+        # ТЕМА — «Заметки от пользователей», не «Общая информация». Обе
+        # половины отзыва пишет ПОСЕТИТЕЛЬ о том, что у нас не так, — то же
+        # самое, что уточнение с карточки сделки. В «Общей информации» они
+        # тонули среди отчётов о прогонах (владелец нашёл их там 22 сентября
+        # 2026). Тема ещё не заведена в тестовой базе, поэтому проверяем не
+        # номер, а то, какой вид темы спрашивают.
+        assert asked == ["user_notes", "user_notes"], asked
     db = get_session()
     try:
         row = db.get(AssistantFeedback, fid)  # тестовая БД живёт между прогонами — ищем свою строку

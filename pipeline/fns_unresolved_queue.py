@@ -84,7 +84,12 @@ DATA = os.path.join(ROOT, "static", "data", "deals_promoted.json")
 # банк «Открытие»/«ФК Открытие», «Аптечная сеть 36,6»/«Аптечная группа
 # «36,6»», Mail/VK) слиты pipeline/merge_company_twins_fns_campaign.py —
 # множество снова пусто, до следующей находки.
-SUSPECTED_TWIN_PROFILES = set()
+# 20-21 сентября 2026: очередь «нужен ИНН» два прогона подряд автоподтверждала
+# ge9363c29 («МТ-Интеграция») тем же ИНН 9710078939, что уже подтверждён
+# g745308a7 («ГК «Максима»» — та же компания под старым именем, реестровая
+# запись это прямо говорит). Без исключения кандидат появлялся бы каждый день
+# заново, и registry-тест на дубль ИНН падал бы снова.
+SUSPECTED_TWIN_PROFILES = {'ge9363c29'}
 
 _DISAMBIGUATOR = re.compile(r"\s*\([^)]*\)\s*$")
 
@@ -330,7 +335,7 @@ def send_queue_to_console(queue, write):
 
     import httpx
     sent = []
-    thread = console_topics.thread_id('decision')
+    thread = console_topics.thread_id('admin')
     with httpx.Client(timeout=20) as client:
         for cid, name, date in batch:
             text = console_message(cid, name, date)

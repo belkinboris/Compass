@@ -1185,6 +1185,57 @@ def test_promote_holds_closed_title_in_present_tense(base):
     assert any("настоящим временем" in reason for reason in hold)
 
 
+def test_promote_holds_a_headline_that_was_cut_out_of_a_news_lead(base):
+    """Обрубок новости — сырьё, а не карточка.
+
+    21 сентября 2026 владелец увидел в консоли 🗂 «карточку», у которой
+    заголовок был отрезан от телеграм-поста на полуслове («…В периметр сделки
+    вошли»), предмет обрублен посреди слова («…и систем автом»), — и рядом
+    кнопка «Опубликовать». Его слова: «это не должно было как карточка
+    показаться, а должно было показаться как сомнительное».
+
+    Правило намеренно отделяет ОБРУБОК от длинного заголовка, а не длинное от
+    короткого: в базе есть настоящий заголовок на 196 знаков, и он проходит,
+    потому что кончается закрывающей кавычкой. Замер — в docstring promote.
+    """
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    common = {"date": "2026-09-21", "ind": sorted(inds)[0],
+              "src": [["Телеграм-канал", "https://example.invalid/cut-lead"]],
+              "buyer_name": "«Тест-Альфа»"}
+
+    cut = dict(common, title=("«Тест-Альфа» приобрела 51% доли в ГК «Тест-Бета», которая "
+                              "специализируется на производстве складских роботов и систем "
+                              "автоматизации. В периметр сделки вошли несколько компаний "
+                              "группы, формирующих единый"), asset="«Тест-Бета»")
+    _bad, hold = promote.check(cut, base, idx, inds)
+    assert any("обрезан" in r for r in hold), hold
+
+    # Длинный, но ДОПИСАННЫЙ заголовок — проходит: признак не длина.
+    whole = dict(common, title=("«Тест-Альфа» купила цементные заводы и горные предприятия "
+                                "(«Тест-цемент», «Тест-Бета-цемент», «Тест-Гамма-цемент») "
+                                "вместе с сопутствующей инфраструктурой у банка «Тест-Траст»"),
+                 asset="«Тест-Бета»")
+    _bad2, hold2 = promote.check(whole, base, idx, inds)
+    assert not any("обрезан" in r for r in hold2), hold2
+
+    # Предмет ровно на границе нашей же резки и с разрезанным словом.
+    asset_cut = dict(common, title="«Тест-Альфа» купила «Тест-Бету»",
+                     asset=("доли в ГК «Тест-Бета», которая специализируется на производстве "
+                            "складских роботов и систем автоматиз"))
+    assert len(asset_cut["asset"]) == promote.ASSET_CUT_LEN
+    _bad3, hold3 = promote.check(asset_cut, base, idx, inds)
+    assert any("предмет" in r and "обрезан" in r for r in hold3), hold3
+
+
+def test_directional_quotes_from_a_telegram_post_become_guillemets():
+    """“Фотомеханика” — тот же дефект, что чинили трижды, в другом начертании."""
+    import draft as drafter
+    out = drafter.normalize_quotes('“Корпорация робототехники” купила “Фотомеханику”')
+    assert out == '«Корпорация робототехники» купила «Фотомеханику»', out
+    assert '“' not in out and '”' not in out
+
+
 def test_enrich_adds_a_new_source_but_not_a_known_one(base):
     """Ссылка на источник — главный вклад обогащения, но дублей быть не должно."""
     import enrich
@@ -6318,3 +6369,132 @@ def test_resolve_duplicates_apply_separate_releases_the_draft_as_its_own_card(tm
     key = promote.raw_key(draft["title"])
     assert key not in state.get("raw_titles", {}), (
         "separate не должен помечать черновик как чужое обогащение — он стал своей карточкой")
+
+
+def test_parent_company_is_not_linked_to_the_subsidiary_it_sold():
+    """Продавец «Faurecia» не становится профилем «Faurecia (российские активы)».
+
+    У 17 профилей-дочек («Knauf (российский бизнес)», «Avon (российское
+    подразделение)», «Caterpillar (российские активы)») среди псевдонимов
+    стоит голое имя МАТЕРИ. Ключ поиска у них поэтому один, и сторона,
+    названная в карточке просто «Avon», связалась бы с профилем того
+    самого актива, который она продала: одна запись оказалась бы и
+    продавцом, и предметом. Нашли читатели очереди аудита 21 сентября
+    2026 на парах Natura&Co / Avon и SoftwareONE.
+
+    Псевдонимы при этом остаются: по ним профиль дочки ищут законно
+    («продан российский бизнес Knauf»). Запрет стоит там, где решается
+    роль, и только на случае «текст — голое имя матери».
+    """
+    import link_parties
+
+    for text, profile in (("Faurecia", "Faurecia (российские активы)"),
+                          ("Avon", "Avon (российское подразделение)"),
+                          ("Knauf", "Knauf (российский бизнес)"),
+                          ("Реккитт", "Reckitt (российский бизнес)")):
+        assert link_parties._is_parent_of_subsidiary(text, profile) or \
+            link_parties.company_key(text) != link_parties.company_key(
+                link_parties.SUBSIDIARY_MARK.sub("", profile).strip()), (text, profile)
+
+    # Обычные профили запрет не трогает — иначе он ломал бы привязку вообще.
+    for text, profile in (("Knauf", "Knauf"), ("Яндекс", "Яндекс"),
+                          ("Ponsse Plc", "Ponsse (российский бизнес)")):
+        assert not link_parties._is_parent_of_subsidiary(text, profile), (text, profile)
+
+
+def test_a_move_between_fields_never_drops_a_sentence_another_reader_just_moved_in():
+    """Второй читатель переписывает поле целиком — и чужой перенос исчезает.
+
+    Случай из очереди аудита 21 сентября 2026 (`g1f098415`, Kellogg →
+    «Черноголовка»). Две находки одной карточки разбирали разные читатели.
+    Первый перенёс предложение из «Зачем» в пустой «Контекст». Второй читал
+    карточку уже ПОСЛЕ него, увидел в «Контексте» чужое предложение — и
+    честно вернул туда своё описание завода целиком, как и требует формат
+    ответа («new_full_text — полный текст поля»). Сверка `old_full_text` тут
+    молчит: «до» у второго было свежим, откатывать нечего. А предложение
+    пропало из базы совсем.
+
+    Сторож смотрит ТОЛЬКО на перенесённое другим читателем. Удалять текст
+    читателю можно и нужно — классы STALE_STATEMENT и CONTRADICTION ровно об
+    этом, — и сторож «пропало любое предложение» откатил бы пять законных
+    удалений из шести (замер той же партии).
+    """
+    import importlib.util
+
+    path = Path(__file__).resolve().parent / "pipeline" / "fix_audit_close_2026_09_21.py"
+    spec = importlib.util.spec_from_file_location("audit_applier", path)
+    applier = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(applier)
+
+    moved_in = ("Об интересе «Черноголовки» к бизнесу Kellogg стало известно "
+                "в декабре 2022 года.")
+    factory = ("«Келлогг Рус» была ключевой производственной площадкой Kellogg "
+               "в России. На заводе выпускают печенье и готовые завтраки.")
+
+    # Ответ первого читателя: предложение уехало из «Зачем» в «Контекст».
+    first = [{"field": "eco.rationale", "old_full_text": moved_in, "new_full_text": "—"},
+             {"field": "eco.context", "old_full_text": "—", "new_full_text": moved_in}]
+    # Ответ второго: он видел «Контекст» уже с чужим предложением.
+    second = [{"field": "eco.share", "old_full_text": factory, "new_full_text": "—"},
+              {"field": "eco.context", "old_full_text": moved_in, "new_full_text": factory}]
+    placed = applier.sentences_readers_placed(first + second)
+
+    before = {"id": "x", "eco": {"context": moved_in, "share": factory}}
+    after = {"id": "x", "eco": {"context": factory, "share": "—"}}
+    assert moved_in in applier.lost_sentences(before, after, placed)
+
+    # Тот же перенос, но с сохранением чужого предложения, — не потеря.
+    kept = {"id": "x", "eco": {"context": moved_in + " " + factory, "share": "—"}}
+    assert applier.lost_sentences(before, kept, placed) == []
+
+    # Умышленное удаление устаревшей фразы сторож не трогает: её никто не
+    # переносил, читатель сам решил её снять.
+    stale = ("Теперь компания намерена увеличить свою долю во владимирском "
+             "предприятии до 100%, и для этого нужно одобрение ФАС.")
+    was = {"id": "y", "law": {"struct": stale}}
+    now = {"id": "y", "law": {"struct": "—"}}
+    drop = [{"field": "law.struct", "old_full_text": stale, "new_full_text": "—"}]
+    assert applier.lost_sentences(
+        was, now, applier.sentences_readers_placed(drop)) == []
+
+
+def test_decision_topic_holds_posts_and_admin_topic_holds_service_queues(monkeypatch):
+    """Разделение тем 22 сентября 2026 — по ВИДУ сообщения, не по привычке.
+
+    Владелец: «Главное чтобы мы подтверждали посты в подтверждении постов».
+    До этого дня в «Подтверждение постов» писали девять отправителей: и
+    черновики постов, и заявки на вход, и вопросы про ИНН, и однофамильцы, и
+    пары возможных дублей. Пост тонул среди служебного.
+
+    Теперь «Подтверждение постов» — только то, где решается судьба поста или
+    карточки; служебные очереди ушли в «Админ». Тест держит обе половины: и
+    что служебное уехало, и что посты остались.
+    """
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+
+    admin = ("send_access_requests.py", "fns_unresolved_queue.py",
+             "fns_homonym_queue.py", "send_duplicate_candidates.py")
+    for name in admin:
+        text = (ROOT / "pipeline" / name).read_text(encoding="utf-8")
+        assert "thread_id('admin')" in text, name
+        assert "thread_id('decision')" not in text, name
+
+    posts = (("ingest", "send_drafts.py"), ("ingest", "send_milestone_drafts.py"),
+             ("publish", "send_telegram.py"))
+    for sub, name in posts:
+        text = (ROOT / "pipeline" / sub / name).read_text(encoding="utf-8")
+        assert "thread_id('decision')" in text, name
+
+    # Пока номер «Админа» не закреплён, очередь не пропадает в общей ленте,
+    # а идёт в запасную тему — потерять заявку на вход хуже, чем положить её
+    # не туда.
+    console_topics._cache = None
+    monkeypatch.delenv("TELEGRAM_TOPIC_ADMIN", raising=False)
+    monkeypatch.setenv("TELEGRAM_TOPIC_DECISION", "5")
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET", raising=False)
+    assert console_topics.thread_id("admin") == 5
+    monkeypatch.setenv("TELEGRAM_TOPIC_ADMIN", "99")
+    assert console_topics.thread_id("admin") == 99
+    console_topics._cache = None

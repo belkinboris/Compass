@@ -2596,7 +2596,17 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     visit(page, base_url, "#/deal/ga46c5b15")
     page.wait_for_selector(".team")
     cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
-    assert "Orion" in cols.get("Со стороны инвестора", ""), cols
+    # Orion консультировал ВТБ, а ВТБ здесь ОРГАНИЗАТОР размещения, не
+    # инвестор («ВТБ выступил организатором размещения, а не кредитором» —
+    # слова самой карточки). До 21 сентября 2026 строка ждала «Со стороны
+    # инвестора» и была зелёной по ошибке в данных: ВТБ стоял в `buyer`.
+    # Ссылку сняло чтение аудита, и проверка сразу перестала сходиться —
+    # так и задумано. Заодно нашлось, что имена организаторов и кредиторов
+    # advSide не знал вовсе (поля стороны у них нет, они названы только в
+    # `eco.finadv`), поэтому пояснение «на стороне ВТБ» не с чем было
+    # сверить. Замер после починки: из 362 пар консультант-сделка сторона
+    # уточнилась у 6, все шесть — настоящие организаторы размещения.
+    assert "Orion" in cols.get("Со стороны организаторов и кредиторов", ""), cols
     assert "ККМП" in cols.get("Со стороны получателя финансирования", ""), cols
     assert "Со стороны покупателя" not in cols, cols
 
@@ -2654,7 +2664,15 @@ def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, 
     бейдж «Группа компаний» стоял вне потока и срезался верхом карточки, а
     фиксированные высоты имени и описания оставляли пустые дыры в одной
     колонке. Проверяем на узком экране: бейдж внутри карточки целиком, имя
-    из одной строки не тянет 60px, переполнения нет."""
+    из одной строки не тянет 60px, переполнения нет.
+
+    Карточка берётся по признаку «есть бейдж «Группа»», а не по имени
+    компании: сортировка «по активности» зависит от числа сделок, а оно
+    меняется по мере правок базы (21 сентября 2026 — очередная точная
+    привязка стороны сдвинула первое место с «Сбербанка» на «Росимущество»,
+    у которого бейджа нет). Порядок компаний — не то, что этот тест обязан
+    держать неизменным; неизменным должен остаться макет карточки с бейджем,
+    кто бы ею ни оказался."""
     ctx = browser.new_context(viewport={"width": 390, "height": 844})
     try:
         pg = ctx.new_page()
@@ -2663,9 +2681,9 @@ def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, 
         pg.goto(base_url + "/#/companies", wait_until="networkidle")
         pg.wait_for_selector(".co-card")
         pg.wait_for_timeout(700)
-        card = pg.locator(".co-card").first
+        card = pg.locator(".co-card:has(.co-group-badge)").first
         badge = card.locator(".co-group-badge")
-        assert badge.count() == 1, "первая карточка (Сбербанк) должна быть группой"
+        assert badge.count() == 1, "ни одна из показанных карточек не оказалась группой"
         cb, bb = card.bounding_box(), badge.bounding_box()
         assert bb["y"] >= cb["y"] and bb["y"] + bb["height"] <= cb["y"] + cb["height"], (cb, bb)
         assert bb["x"] + bb["width"] <= cb["x"] + cb["width"]
@@ -3633,3 +3651,101 @@ def test_form_fields_are_16px_on_touch_devices(browser, base_url):
         assert not small, "поля мельче 16px — iPhone будет увеличивать страницу: %s" % small
     finally:
         ctx.close()
+
+
+def test_the_deal_feed_can_be_narrowed_to_calendar_days(page, base_url):
+    """Период выбирается числами календаря, а не только годом.
+
+    Просьба владельца 22 сентября 2026: галочки «2025 / 2024» отвечают на
+    «что было за год», но не на «что было с 1 марта по 30 апреля» — а именно
+    так спрашивают, когда готовятся к встрече или пишут обзор за квартал.
+    У конкурента (Aspring) такой выбор есть, и он читается как норма жанра.
+
+    Два поля `input[type=date]` дают родной календарь браузера, без единой
+    внешней библиотеки. Тест держит три вещи: отбор идёт по ДАТЕ СДЕЛКИ,
+    ссылка period переживает перезагрузку, и карточки, у которых известен
+    только год, честно посчитаны отдельно, а не подмешаны в выборку по дням.
+    """
+    page.goto(f"{base_url}/#/deals?from=2025-03-01&to=2025-04-30")
+    page.wait_for_timeout(2500)
+
+    expected = page.evaluate(
+        "DEALS.filter(d=>String(d.date||'').length===10"
+        " && d.date>='2025-03-01' && d.date<='2025-04-30').length")
+    assert expected > 0, "в базе нет сделок за этот период — выберите другой"
+
+    shown = page.evaluate(
+        "unifiedFeedItems().filter(it=>it.kind==='full'||it.kind).length")
+    assert shown == expected, (shown, expected)
+
+    # Карточки, датированные одним годом, в выборку по дням не попадают — и
+    # об этом сказано вслух, иначе читатель решит, что сделок не было.
+    note = page.evaluate("(document.querySelector('.feed-period-note')||{}).textContent||''")
+    year_only = page.evaluate("DEALS.filter(d=>String(d.date||'').length===4 && d.date==='2025').length")
+    if year_only:
+        assert "только год" in note, note
+        assert str(year_only) in note, (note, year_only)
+
+    # Быстрая кнопка ставит обе даты и снимает галочки по годам.
+    page.click(".dr-q[data-q='90']")
+    page.wait_for_timeout(800)
+    assert page.input_value("#dfrom") and page.input_value("#dto")
+    assert page.evaluate("feedYear") == "Все"
+    assert "from=" in page.evaluate("location.hash")
+
+
+def test_an_object_of_a_deal_is_not_listed_among_companies(page, base_url):
+    """Каталог «Компании» — про компании; здание открывается, но не числится.
+
+    Владелец 22 сентября 2026 о профиле «проект добычи золота
+    Быстринско-Ширинское»: «Это не компания. Это убрать надо.» Удалить
+    нельзя — профиль стоит предметом реальной сделки, и плашка сторон ведёт
+    сюда. Поэтому он уходит из каталога, а страница остаётся и честно
+    называет себя объектом.
+    """
+    page.goto(f"{base_url}/#/companies")
+    page.wait_for_timeout(2500)
+    catalog = page.evaluate("CATALOG_COMPANY_IDS().length")
+    total = page.evaluate("Object.keys(COMPANIES).length")
+    assert 0 < catalog < total, (catalog, total)
+    assert page.evaluate("Object.values(COMPANIES).some(c=>c.asset)")
+
+    # Подпись под каталогом считает то же, что показывает.
+    head = page.evaluate("(document.querySelector('#coGrid p')||{}).textContent||''")
+    assert str(catalog) in head, head
+
+    # Ни один скрытый профиль не попал в сетку каталога.
+    hidden_shown = page.evaluate(
+        "companyRows().filter(r=>r.c.asset).length")
+    assert hidden_shown == 0
+
+    asset_id = page.evaluate("Object.keys(COMPANIES).find(id=>COMPANIES[id].asset)")
+    page.goto(f"{base_url}/#/companies/{asset_id}")
+    page.wait_for_timeout(1200)
+    tags = page.evaluate("[...document.querySelectorAll('.tag')].map(e=>e.textContent.trim())")
+    assert "Объект сделки" in tags, tags
+
+
+def test_every_investment_adviser_in_the_catalog_has_at_least_one_deal(page, base_url):
+    """У каждого инвестиционного консультанта каталога есть сделка в базе.
+
+    Инвестиционных консультантов мы заводим ПО ИХ СДЕЛКАМ: фирма попадает в
+    каталог потому, что названа организатором или финансовым консультантом в
+    карточке. Значит, ноль сделок у такой фирмы — не «данных пока нет», а
+    сломанный счётчик.
+
+    Так и вышло 22 сентября 2026: у БКС стоял ноль при двух сделках.
+    Регулярка была написана как `/\bБКС\b/`, а в JavaScript граница слова
+    считается по латинице — кириллические буквы для `\w` не буквы, и
+    выражение не совпадает никогда. На Python та же строка работает, поэтому
+    проверка счётом вне браузера бага не видела. Отсюда и тест: считает в
+    БРАУЗЕРЕ, тем же кодом, что и экран.
+
+    Юридические фирмы (FIRMS) сюда НЕ входят намеренно: это справочник
+    рынка, в нём есть фирмы, которых в наших сделках пока нет, и ноль у них
+    — честное состояние, а не поломка.
+    """
+    page.goto(f"{base_url}/#/advisors")
+    page.wait_for_timeout(2500)
+    empty = page.evaluate("INV_FIRMS.map(f=>[f.n, firmCount(f.id)]).filter(x=>x[1]===0)")
+    assert not empty, f"инвестиционный консультант без единой сделки: {empty}"

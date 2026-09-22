@@ -47,6 +47,23 @@ PRIORITY = [
 ]
 
 ROLE_FIELDS = {"asset": "target", "buyer_name": "buyer", "seller": "seller_id"}
+# Находка называет роль то текстовым полем, то полем-ссылкой, то так, как
+# роль подписана на экране («target_profile»). Все три написания ведут к
+# одной паре «текст ↔ ссылка».
+_ROLE_ALIASES = {
+    "asset": "asset", "target": "asset", "target_profile": "asset",
+    "asset_id": "asset", "предмет": "asset",
+    "buyer_name": "buyer_name", "buyer": "buyer_name", "buyer_profile": "buyer_name",
+    "seller": "seller", "seller_id": "seller", "seller_profile": "seller",
+}
+
+
+def _role_pair_of(field):
+    """(текстовое поле, поле-ссылка) для роли, о которой находка, или None."""
+    text = _ROLE_ALIASES.get(str(field or "").strip().lower())
+    return (text, ROLE_FIELDS[text]) if text else None
+
+
 JARGON_RE = re.compile(r"(Компания:|Персона:|История \d{4}:|Продукт:)")
 SENTENCE = re.compile(r"(?<=[.!?])\s+")
 
@@ -56,8 +73,50 @@ def key_of(f: dict) -> str:
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:12]
 
 
+def decided_by_a_reader() -> set:
+    """(id, поле) пар, по которым читатель уже принял решение — таблица FIXES
+    в review.py. Урок 20 сентября 2026: скрипт-правка сначала переписал
+    `eco.sum`/`eco.context` у карточек, где чтение с цитатой из источника
+    НАМЕРЕННО поставило текст, отличающийся от «правильного по форме» —
+    и дважды сломал инвариант «строка таблицы правок применена к базе».
+    Машинная правка не спорит с прочитанным: КАЖДЫЙ скрипт, что переносит
+    текст между полями карточки, обязан проверить пару (id, поле-назначение)
+    через эту функцию и пропустить карточку, если пара в ней есть.
+    """
+    if ROOT not in sys.path:
+        sys.path.insert(0, ROOT)
+    ingest = os.path.join(ROOT, "pipeline", "ingest")
+    if ingest not in sys.path:
+        sys.path.insert(0, ingest)
+    import review
+    return {(f["id"], f.get("field")) for f in review.FIXES}
+
+
+SUPPLEMENTS_DIR = os.path.join(ROOT, "pipeline", "audit_field_placement")
+
+
 def load_findings() -> list:
-    return json.load(io.open(FINDINGS, encoding="utf-8"))["findings"]
+    """Разовый аудит 13 сентября (2420 записей) + все последующие партии.
+
+    `findings.json` — исторический снимок ОДНОГО прогона, не трогается.
+    Периодическая проверка ЖИВОЙ базы (по методике самого аудита —
+    `2026-09-13-report.md`, «повторный аудит того же вида запускается через
+    несколько месяцев дочитывания легаси-базы») кладёт свою партию рядом,
+    файлом `supplement_<дата>.json` — тот же формат, что и `findings.json`
+    (объект с ключом `findings`, список записей с теми же полями). Ничего
+    сливать вручную не нужно: `key_of()` хэширует (id, класс, цитата), и
+    находка, переоткрытая повторной проверкой, естественно совпадает с уже
+    закрытой записью в `audit_queue_done.json`, если её уже разобрали.
+    """
+    findings = list(json.load(io.open(FINDINGS, encoding="utf-8"))["findings"])
+    if os.path.isdir(SUPPLEMENTS_DIR):
+        for name in sorted(os.listdir(SUPPLEMENTS_DIR)):
+            if not (name.startswith("supplement_") and name.endswith(".json")):
+                continue
+            payload = json.load(io.open(os.path.join(SUPPLEMENTS_DIR, name), encoding="utf-8"))
+            batch = payload["findings"] if isinstance(payload, dict) else payload
+            findings.extend(batch)
+    return findings
 
 
 def load_done() -> dict:
@@ -77,7 +136,7 @@ def _sentences(text) -> list:
     return [s.strip() for s in SENTENCE.split(str(text or "")) if len(s.strip()) >= 40]
 
 
-def still_broken(card: dict, cls: str) -> bool:
+def still_broken(card: dict, cls: str, field=None) -> bool:
     """Виден ли дефект этого класса в сегодняшних данных.
 
     Отвечает только за те классы, которые ВИДНЫ из самой карточки. Для
@@ -99,8 +158,17 @@ def still_broken(card: dict, cls: str) -> bool:
         return bool(card.get("seller_id")) and card["seller_id"] in (
             card.get("target"), card.get("asset_id"))
     if cls in ("ROLE_MISSING", "UNLINKED_PARTY"):
+        # ПО СВОЕМУ ПОЛЮ, А НЕ ПО ЛЮБОМУ. Раньше здесь стоял `any(...)` по
+        # всем трём ролям сразу, и находка про продавца оставалась в очереди
+        # после того, как продавца привязали, — просто потому, что у той же
+        # карточки не привязан покупатель. Читатели 21 сентября нашли это
+        # независимо друг от друга, открыв по нескольку уже закрытых находок:
+        # «13% партии — протухшие записи». Теперь находка живёт ровно до тех
+        # пор, пока сломано ТО поле, о котором она.
+        pair = _role_pair_of(field)
+        pairs = [pair] if pair else list(ROLE_FIELDS.items())
         return any((card.get(t) or "").strip() and not card.get(link)
-                   for t, link in ROLE_FIELDS.items())
+                   for t, link in pairs)
     if cls == "DUPLICATE_TEXT":
         # Клиент сам не показывает «Дополнительный контекст», повторяющий
         # соседние поля (extraHtml), поэтому дефектом считается повтор ВНУТРИ
@@ -122,7 +190,7 @@ def state_of(f: dict, cards: dict, merged: dict, done: dict) -> str:
     cid = f["card_id"]
     if cid not in cards:
         return "ушла" if cid in merged or True else "ушла"
-    if not still_broken(cards[cid], f["class"]):
+    if not still_broken(cards[cid], f["class"], f.get("field")):
         return "неактуальна"
     return "ждёт"
 
@@ -177,10 +245,10 @@ def main(argv=None) -> int:
                                  if r["class"] in PRIORITY else 99, r["card_id"]))
         print("Ждут разбора: %d, показано: %d\n" % (len(want), min(a.limit, len(want))))
         for r in want[:a.limit]:
-            print("%s  %s  %s  поле %s" % (r["key"], r["card_id"], r["class"], r["field"]))
-            print("    видно: %s" % (r["quote"] or "")[:200])
-            print("    в чём дело: %s" % (r["problem"] or "")[:260])
-            print("    что сделать: %s" % (r["action"] or "")[:200])
+            print("%s  %s  %s  поле %s" % (r["key"], r["card_id"], r["class"], r.get("field")))
+            print("    видно: %s" % (r.get("quote") or "")[:200])
+            print("    в чём дело: %s" % (r.get("problem") or "")[:260])
+            print("    что сделать: %s" % (r.get("action") or "")[:200])
             print()
         return 0
 
