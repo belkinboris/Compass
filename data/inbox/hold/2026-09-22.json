@@ -402,7 +402,7 @@
    ]
   },
   {
-   "draft_id": "d67378040",
+   "draft_id": "d23191410",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -441,7 +441,7 @@
    ]
   },
   {
-   "draft_id": "d30977108",
+   "draft_id": "d45210026",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -469,7 +469,7 @@
    ]
   },
   {
-   "draft_id": "d71412619",
+   "draft_id": "d43521999",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -497,7 +497,7 @@
    ]
   },
   {
-   "draft_id": "d70848389",
+   "draft_id": "d87939515",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -526,7 +526,7 @@
    ]
   },
   {
-   "draft_id": "d91895403",
+   "draft_id": "d38635708",
    "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
@@ -556,7 +556,7 @@
    ]
   },
   {
-   "draft_id": "d41007492",
+   "draft_id": "d33052897",
    "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
    "date": "2026-09-22",
    "src": [
@@ -597,17 +597,17 @@
    ]
   },
   {
-   "draft_id": "d88927905",
-   "title": "В Петербурге выставили на торги бывший гипермаркет «Карусель»",
+   "draft_id": "d56379790",
+   "title": "Больше всего жилья в новых домах продается в Краснодаре и Ростове-на-Дону",
    "date": "2026-09-22",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260922/peterburg-2119461213.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972215"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -618,20 +618,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d89471685",
-   "title": "Импорт подержанных авто из Японии в 2026 году вырос на 30% — чаще всего россияне покупают Toyota и Honda",
+   "draft_id": "d74690413",
+   "title": "В российском регионе выставили на продажу «морской огород» с гребешком",
    "date": "2026-09-22",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/import-poderzhannyh-avto-iz-yaponii-v-2026-godu-vyros-na-30-chashe-vsego-rossiyane-pokupayut-toyota-i-honda/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/22/v-rossiyskom-regione-vystavili-na-prodazhu-morskoy-ogorod-s-grebeshkom/"
     ]
    ],
    "sum": null,
@@ -639,17 +639,46 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Toyota и Honda",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Toyota и Honda",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66476544",
+   "title": "Mento VC под управлением Александра Журавлева вложился в американский ИИ-стартап Uptool . Об этом управляющий партнер фонда написал в сообщении в своем Telegram-канале. В раунде на $6 млн также участв",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7746"
+    ]
+   ],
+   "sum": "$6 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
    ]
   }
  ]
