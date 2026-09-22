@@ -1641,3 +1641,38 @@ def test_an_object_hidden_from_the_catalog_is_never_a_side_of_a_deal(deals, comp
             if cid in hidden:
                 bad.append((d["id"], field, companies[cid].get("name")))
     assert not bad, f"скрытый профиль стоит стороной сделки: {bad[:5]}"
+
+
+def test_a_company_description_never_says_where_we_read_it(companies):
+    """Описание компании читает подписчик в посте — там нет места нашей кухне.
+
+    22 сентября 2026 владелец увидел в проекте поста: «ВИМ Сбережения —
+    Управляющая компания фонда, ранее называлась «ВТБ Капитал Пенсионный
+    резерв» (подтверждено чтением источника mergers.ru)». Профиль написан
+    кампанией #122 тринадцатого сентября, карточка привязалась к нему
+    девятью днями позже, `format_post` напечатал описание дословно.
+
+    Приёмка карточки такое ловит, но только у профиля, который читатель
+    создаёт своим же ответом; профиль, созданный раньше другим путём, не
+    проверял никто. Забор стоит здесь, чтобы ловить по ЛЮБОМУ пути записи.
+
+    Правило узкое нарочно (`source_note`, а не `press_attribution`): слово
+    «издание» законно стоит в описании РБК и Rusbase, а «(по данным
+    TAdviser)» не законно нигде.
+    """
+    import sys as _sys, os as _os
+    _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'pipeline'))
+    import proofread
+
+    bad = []
+    for cid, c in companies.items():
+        desc = str(c.get('desc') or '')
+        if not desc:
+            continue
+        for rule, frag in proofread.source_note(desc):
+            bad.append('%s (%s): «%s» — %s' % (cid, c.get('name'), frag, rule))
+        for rx in proofread.JARGON:
+            m = rx.search(desc)
+            if m:
+                bad.append('%s (%s): «%s» — наш диалект' % (cid, c.get('name'), m.group(0)))
+    assert not bad, 'пометки о происхождении в описаниях компаний:\n' + '\n'.join(bad[:20])
