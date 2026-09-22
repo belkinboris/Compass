@@ -335,7 +335,7 @@ def send_queue_to_console(queue, write):
 
     import httpx
     sent = []
-    thread = console_topics.thread_id('decision')
+    thread = console_topics.thread_id('admin')
     with httpx.Client(timeout=20) as client:
         for cid, name, date in batch:
             text = console_message(cid, name, date)

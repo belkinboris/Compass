@@ -163,7 +163,7 @@ def main(argv):
         return 1
 
     import httpx
-    thread = console_topics.thread_id('decision')
+    thread = console_topics.thread_id('admin')
     sent = 0
     with httpx.Client(timeout=20) as client:
         if not state.get('header_sent'):

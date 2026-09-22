@@ -6456,3 +6456,45 @@ def test_a_move_between_fields_never_drops_a_sentence_another_reader_just_moved_
     drop = [{"field": "law.struct", "old_full_text": stale, "new_full_text": "—"}]
     assert applier.lost_sentences(
         was, now, applier.sentences_readers_placed(drop)) == []
+
+
+def test_decision_topic_holds_posts_and_admin_topic_holds_service_queues(monkeypatch):
+    """Разделение тем 22 сентября 2026 — по ВИДУ сообщения, не по привычке.
+
+    Владелец: «Главное чтобы мы подтверждали посты в подтверждении постов».
+    До этого дня в «Подтверждение постов» писали девять отправителей: и
+    черновики постов, и заявки на вход, и вопросы про ИНН, и однофамильцы, и
+    пары возможных дублей. Пост тонул среди служебного.
+
+    Теперь «Подтверждение постов» — только то, где решается судьба поста или
+    карточки; служебные очереди ушли в «Админ». Тест держит обе половины: и
+    что служебное уехало, и что посты остались.
+    """
+    sys.path.insert(0, str(ROOT))
+    import console_topics
+
+    admin = ("send_access_requests.py", "fns_unresolved_queue.py",
+             "fns_homonym_queue.py", "send_duplicate_candidates.py")
+    for name in admin:
+        text = (ROOT / "pipeline" / name).read_text(encoding="utf-8")
+        assert "thread_id('admin')" in text, name
+        assert "thread_id('decision')" not in text, name
+
+    posts = (("ingest", "send_drafts.py"), ("ingest", "send_milestone_drafts.py"),
+             ("publish", "send_telegram.py"))
+    for sub, name in posts:
+        text = (ROOT / "pipeline" / sub / name).read_text(encoding="utf-8")
+        assert "thread_id('decision')" in text, name
+
+    # Пока номер «Админа» не закреплён, очередь не пропадает в общей ленте,
+    # а идёт в запасную тему — потерять заявку на вход хуже, чем положить её
+    # не туда.
+    console_topics._cache = None
+    monkeypatch.delenv("TELEGRAM_TOPIC_ADMIN", raising=False)
+    monkeypatch.setenv("TELEGRAM_TOPIC_DECISION", "5")
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET", raising=False)
+    assert console_topics.thread_id("admin") == 5
+    monkeypatch.setenv("TELEGRAM_TOPIC_ADMIN", "99")
+    assert console_topics.thread_id("admin") == 99
+    console_topics._cache = None

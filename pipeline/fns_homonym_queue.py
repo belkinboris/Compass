@@ -171,7 +171,7 @@ def main():
     from datetime import date as _date
 
     sent = []
-    thread = console_topics.thread_id('decision')
+    thread = console_topics.thread_id('admin')
     with httpx.Client(timeout=20) as client:
         for cid, name, note in batch:
             text = console_message(cid, name, note)

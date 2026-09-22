@@ -645,7 +645,13 @@ def build_fingerprint() -> dict:
 
 @app.api_route("/health", methods=["GET", "HEAD"])
 def health():
-    return {"status": "ok", "ai": _yandex_ready(), "build": build_fingerprint()}
+    # МОДЕЛЬ НАЗВАНА ВСЛУХ. 22 сентября 2026 владелец спросил, не сменить ли
+    # deepseek на другую модель, — а прод уже год мог работать на чём угодно:
+    # `YANDEX_MODEL` задаётся переменной окружения хоста, и снаружи узнать её
+    # было нельзя. Догадка вместо факта стоит дороже строки в /health: это
+    # идентификатор модели, а не секрет.
+    return {"status": "ok", "ai": _yandex_ready(), "model": current_model(),
+            "build": build_fingerprint()}
 
 
 def _extract_text(data: dict) -> str:
@@ -1227,7 +1233,7 @@ def _notify_access_request(user: User, db=None) -> None:
         ])
         keys = [[{"text": "✅ Одобрить", "callback_data": "acc:%d:ok" % user.id},
                  {"text": "🗑 Отклонить", "callback_data": "acc:%d:no" % user.id}]]
-        thread = _console_thread_id(db, "decision") if db is not None else None
+        thread = _console_thread_id(db, "admin") if db is not None else None
         for chat in chats:
             notification_service.tg_api("sendMessage", chat_id=chat, text=text,
                                         reply_markup={"inline_keyboard": keys},
@@ -1249,7 +1255,7 @@ def _forward_note_to_console(row: AssistantFeedback) -> None:
         chats = _review_chat_ids(thread_db)
         if not chats:
             return
-        thread = _console_thread_id(thread_db, "info")
+        thread = _console_thread_id(thread_db, "user_notes")
     finally:
         thread_db.close()
     for chat in chats:
@@ -1260,7 +1266,14 @@ def _forward_note_to_console(row: AssistantFeedback) -> None:
 def _forward_feedback_to_console(row: AssistantFeedback) -> None:
     """«Не помогло» уходит в Telegram-консоль основателей тем же путём, что и
     решения модерации, — чтобы плохой ответ не пропадал молча. Сбой отправки
-    не критичен: запись уже в таблице."""
+    не критичен: запись уже в таблице.
+
+    ТЕМА — «Заметки от пользователей», а не «Общая информация». Обе половины
+    отзыва («Ответ помог?» и «Чем не помог?») пишет посетитель сайта о том,
+    что у нас не так, — то же самое, что уточнение с карточки сделки, ради
+    которого тема и заведена. В «Общей информации» они тонули среди
+    служебного: владелец нашёл их там 22 сентября 2026 рядом с отчётами
+    прогонов."""
     answer = " ".join(row.answer.split())
     if len(answer) > 700:
         answer = answer[:700] + "…"
@@ -1277,7 +1290,7 @@ def _forward_feedback_to_console(row: AssistantFeedback) -> None:
         chats = _review_chat_ids(thread_db)
         if not chats:
             return
-        thread = _console_thread_id(thread_db, "info")
+        thread = _console_thread_id(thread_db, "user_notes")
     finally:
         thread_db.close()
     for chat in chats:
@@ -2283,8 +2296,24 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                 return {"ok": True}
             chat = (callback.get("message") or {}).get("chat", {}).get("id")
             kind = show.group(1)
-            thread = (callback.get("message") or {}).get("message_thread_id")
-            _answer_and_do(callback, lambda: _send_queue_batch(chat, kind, thread=thread))
+            # КАРТОЧКА С КНОПКАМИ РЕШЕНИЯ ЖИВЁТ В «ПОДТВЕРЖДЕНИИ ПОСТОВ», А НЕ
+            # ТАМ, ГДЕ НАЖАЛИ КНОПКУ. Отчёт рутины стоит в «Обновлениях», и
+            # кнопки «что скоро выйдет» / «что придержано» — часть отчёта;
+            # раньше ответ на нажатие оставался в той же теме, и очередь
+            # карточек с «Опубликовать / Придержать / Изменить / Выкинуть»
+            # вываливалась в ленту отчётов. Владелец 22 сентября 2026: «почему
+            # посты, которые должны приходить в „подтверждение постов", приходят
+            # в „обновления"». Тема выбирается по ВИДУ сообщения, а не по месту
+            # нажатия: где нажали — дело случая, а решение всегда ждут в одном
+            # месте.
+            pressed_in = (callback.get("message") or {}).get("message_thread_id")
+            thread = _console_thread_id(db, "decision") if db is not None else None
+            where = ("Открыл очередь в «%s»." % CONSOLE_TOPIC_NAMES["decision"]
+                     if thread and thread != pressed_in else None)
+            _answer_and_do(callback,
+                           lambda: _send_queue_batch(chat, kind,
+                                                     thread=thread or pressed_in),
+                           text=where)
             return {"ok": True}
 
         # Заявка на доступ к сайту (ACCESS_GATE): «Одобрить»/«Отклонить» под
@@ -3004,9 +3033,21 @@ def _remember_setting(db, key: str, value: str) -> None:
 CONSOLE_TOPIC_NAMES = {
     "decision": "Подтверждение постов",   # чего-то ждёт ваше решение
     "update": "Обновления",               # отчёт рутины о прогоне
-    "info": "Общая информация",           # остальное: заметки, отзывы, служебное
-    "user_notes": "Заметки от пользователей",  # уточнения с карточек сделок и из футера
+    "info": "Общая информация",           # служебное: канал отозвался, адрес запомнили
+    # Всё, что написал ПОСЕТИТЕЛЬ: уточнение с карточки сделки, заметка из
+    # футера и обе половины отзыва об ассистенте («Ответ помог?» и «Чем не
+    # помог?»). Отзывы жили в «Общей информации» и тонули среди отчётов о
+    # прогонах — переехали 22 сентября 2026.
+    "user_notes": "Заметки от пользователей",
+    # Служебные очереди, где вы отвечаете на ТЕХНИЧЕСКИЙ вопрос, а не решаете
+    # судьбу поста. Заведена 22 сентября 2026, чтобы в «Подтверждении постов»
+    # остались только посты и карточки.
+    "admin": "Админ",
 }
+
+# Запасная тема, пока номер не закреплён: пропасть очереди заявок на вход
+# хуже, чем полежать не в той теме. Дублирует pipeline/console_topics.FALLBACK.
+CONSOLE_TOPIC_FALLBACK = {"admin": "decision"}
 
 
 def _topic_slug(name: str) -> str:
@@ -3056,10 +3097,11 @@ def _learn_console_topics(payload, db=None) -> bool:
 
 
 CONSOLE_TOPIC_PURPOSE = {
-    "decision": "всё, что ждёт вашего решения: посты, карточки, сырьё, заявки на доступ",
+    "decision": "посты, карточки и сомнительные новости — всё, где вы решаете, выйдет это или нет",
     "update": "отчёты о каждом прогоне рутин",
     "info": "заметки, отзывы и служебные сообщения",
     "user_notes": "уточнения и поправки, которые посетители сайта оставляют с карточек сделок и из футера",
+    "admin": "служебные очереди: заявки на вход, вопросы про ИНН и однофамильцев, пары возможных дублей",
 }
 
 
@@ -3086,7 +3128,7 @@ def _ack_console_topic(message: dict, kind: str, thread_id) -> None:
 
 
 def _offer_topic_binding(message: dict, chat_id, sender_id) -> None:
-    """Ответ на /topic: кнопки с тремя названиями внутри той темы, где команду
+    """Ответ на /topic: кнопки с названиями тем внутри той темы, где команду
     дали. Нажатие (см. ветку `topic:` в вебхуке) закрепляет номер темы за
     видом сообщений. В общей ленте форума номера темы нет — так и говорим."""
     if not _is_reviewer(sender_id):
@@ -3129,7 +3171,10 @@ def _console_thread_id(db, kind: str) -> int | None:
     if not name:
         return None
     row = db.get(AppSetting, "telegram_topic:%s" % _topic_slug(name))
-    return int(row.value) if row and row.value.lstrip("-").isdigit() else None
+    if row and row.value.lstrip("-").isdigit():
+        return int(row.value)
+    spare = CONSOLE_TOPIC_FALLBACK.get(kind)
+    return _console_thread_id(db, spare) if spare else None
 
 
 def _thread_kwargs(source: dict | None) -> dict:
