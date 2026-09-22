@@ -402,7 +402,7 @@
    ]
   },
   {
-   "draft_id": "d18686391",
+   "draft_id": "d12701071",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -441,104 +441,30 @@
    ]
   },
   {
-   "draft_id": "d45280137",
-   "title": "Paramount смогла открыть путь к покупке WBD",
+   "draft_id": "d91911138",
+   "title": "Мой портфель облигаций на 22 сентября 2026. Что изменилось за месяц? Покупки и планы на октябрь",
    "date": "2026-09-22",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/22/09/2026/6ab1af4b9a79478a808dfc32"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d62630119",
-   "title": "МВД предупредило о новой схеме мошенников с продажей обучающих онлайн-курсов",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2171194/mvd-predupredilo-o-novoi-ulovke-moshennikov-s-onlain-kursami-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45602543",
-   "title": "Государство готово продать «Аэрофлот». Но зачем?",
-   "date": "2026-09-21",
    "src": [
     [
      "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1353934.php"
+     "https://smart-lab.ru/blog/1354003.php"
     ]
    ],
    "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72580144",
-   "title": "Раскрыта особенность нового раунда переговоров по Украине",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/22/sus2/"
-    ]
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-22",
+     "title": "Переговоры",
+     "note": "Раз в месяц смотрю и анализирую облигационную часть своего портфеля, какие изменения произошли за месяц, пишу о покупках и продажах, показываю состав портфеля: все выпуски с указанием даты погашения, величины купона, ISIN, наличия оферты, текущей доходности и…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1354003.php"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -554,13 +480,13 @@
    ]
   },
   {
-   "draft_id": "d69943394",
-   "title": "В Пермском крае распродают автосервисы",
+   "draft_id": "d66822277",
+   "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053129484"
+     "https://ura.news/news/1053129614"
     ]
    ],
    "sum": null,
