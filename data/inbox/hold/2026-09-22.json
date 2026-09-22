@@ -446,7 +446,7 @@
    ]
   },
   {
-   "draft_id": "d64919133",
+   "draft_id": "d63058252",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-22",
    "src": [
@@ -485,7 +485,7 @@
    ]
   },
   {
-   "draft_id": "d96470210",
+   "draft_id": "d35203937",
    "title": "В Перми продают скандальный долгострой на улице КИМ",
    "date": "2026-09-22",
    "src": [
@@ -513,7 +513,7 @@
    ]
   },
   {
-   "draft_id": "d77076747",
+   "draft_id": "d80759721",
    "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
    "date": "2026-09-22",
    "src": [
@@ -541,7 +541,7 @@
    ]
   },
   {
-   "draft_id": "d74549025",
+   "draft_id": "d45655645",
    "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
    "date": "2026-09-22",
    "src": [
@@ -570,7 +570,7 @@
    ]
   },
   {
-   "draft_id": "d17672973",
+   "draft_id": "d18140983",
    "title": "«Яндекс» начал продавать решение для защиты ИИ",
    "date": "2026-09-22",
    "src": [
@@ -600,7 +600,7 @@
    ]
   },
   {
-   "draft_id": "d75091056",
+   "draft_id": "d27567335",
    "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
    "date": "2026-09-22",
    "src": [
@@ -641,7 +641,7 @@
    ]
   },
   {
-   "draft_id": "d41780907",
+   "draft_id": "d91009820",
    "title": "Акционеры «Т-Технологий» одобрили допэмиссию акций для консолидации «Точки»",
    "date": "2026-09-22",
    "src": [
@@ -669,92 +669,7 @@
    ]
   },
   {
-   "draft_id": "d81404074",
-   "title": "«Финам» начал прием заявок на pre-IPO компании Безоса Blue Origin",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/22/1230832-finam-nachal-priem-zayavok"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финансовые услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84762725",
-   "title": "Лукашенко поручил сделать возможным выкуп арендного жилья у предприятий",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28139349"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d27588731",
-   "title": "Киргизия для железных дорог приобретет в США десять грузовых локомотивов",
-   "date": "2026-09-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260922/kirgizija-873552941.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Киргизия для железных дорог",
-   "asset": "в США десять грузовых локомотивов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Киргизия для железных дорог",
-    "asset": "в США десять грузовых локомотивов",
-    "seller": null
-   },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d21748783",
+   "draft_id": "d43062806",
    "title": "«Финам» открыл доступ к pre-IPO Blue Origin",
    "date": "2026-09-22",
    "src": [
@@ -777,10 +692,272 @@
    },
    "ind": "Финансовые услуги",
    "needs_review": true,
-   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68121862",
+   "title": "В Калужской области вернут систему «чет-нечет» при продаже бензина",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972426"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79585071",
+   "title": "Минфин 23 сентября проведет аукционы по размещению остатков двух выпусков ОФЗ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/22/1230880-minfin-ofz"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19321663",
+   "title": "Минфин РФ 23 сентября проведет аукционы по размещению ОФЗ 26249 и 26253",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1117734"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83261401",
+   "title": "Binance купила акции эмитента USDC на $100 млн и согласилась продвигать стейблкоин на своей платформе в течение пяти лет",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/crypto/3152730-binance-kupila-akcii-emitenta-usdc-na-100-mln-i-soglasilas-prodvigat-steiblkoin-na-svoei-platforme-v-techenie-pyati-let?from=rss"
+    ]
+   ],
+   "sum": "$100 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-22",
+     "title": "Сделка завершена",
+     "note": "За это биржа будет ежемесячно получать процент от объёма USDC, который проходит через её инфраструктуру.",
+     "source": [
+      "web:vc.ru",
+      "https://vc.ru/crypto/3152730-binance-kupila-akcii-emitenta-usdc-na-100-mln-i-soglasilas-prodvigat-steiblkoin-na-svoei-platforme-v-techenie-pyati-let?from=rss"
+     ]
+    }
+   ],
+   "buyer_name": "Binance",
+   "asset": "эмитент USDC на $100 млн и согласилась продвигать стейблкоин на своей платформе в течение пяти лет",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Binance",
+    "asset": "эмитент USDC на $100 млн и согласилась продвигать стейблкоин на своей платформе в течение пяти лет",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d62080352",
+   "title": "Минфин 23 сентября проведет аукционы по размещению ОФЗ двух выпусков",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28139667"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75826629",
+   "title": "Объем инвестиций Хубэй в российские проекты достиг 150 миллионов долларов",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260922/kitaj-873557654.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38151167",
+   "title": "Rostic’s перестал продавать франшизы в России — новые точки будут открывать действующие партнёры",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/rostics-perestal-prodavat-franshizy-v-rossii-novye-tochki-budut-otkryvat-dejstvuyushie-partnyory/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54496139",
+   "title": "Nscale’s IPO will test Wall Street’s appetite for concentrated AI bets once again",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/22/nscales-ipo-will-test-wall-streets-appetite-for-concentrated-ai-bets-once-again/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Финам» начал прием заявок на pre-IPO компании Безоса Blue O» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d62334860",
+   "title": "«Бэтмобиль» продадут за 589 миллионов рублей",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/22/betmobil-prodadut-za-589-millionov-rubley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
