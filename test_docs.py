@@ -162,3 +162,25 @@ def test_the_journal_in_the_main_file_is_short():
         "в основном файле журнал за %d дней (%s…%s) — сдвиньте старые записи: "
         "python3 pipeline/roadmap_archive.py --journal --write"
         % (len(days), days[0], days[-1]))
+
+
+def test_the_release_step_is_written_down_where_it_is_read():
+    """Шаг «выложить код в release» записан в правилах, а не в голове.
+
+    22 сентября 2026 ветка задачи была сведена в `main`, полный pytest
+    прошёл, всё выложено — и на сайте не появилось ничего. Прод собирается
+    из ветки `release`, а не из `main`: туда идёт только код, данные сайт
+    тянет сам. Шаг держался в pull request'ах, то есть нигде, и владелец в
+    это время не находил кнопку, которую мы «уже сделали».
+
+    Тест держит связку из трёх частей: правило названо в CLAUDE.md, у него
+    есть исполнитель (`pipeline/release.py`), и оба говорят про одну ветку.
+    """
+    claude = io.open(os.path.join(ROOT, "CLAUDE.md"), encoding="utf-8").read()
+    assert "release" in claude, "в правилах не сказано, что код выкладывается в release"
+    assert "pipeline/release.py" in claude, "правило есть, а чем его выполнить — не сказано"
+
+    script = os.path.join(ROOT, "pipeline", "release.py")
+    assert os.path.exists(script), "правило ссылается на скрипт, которого нет"
+    text = io.open(script, encoding="utf-8").read()
+    assert "data_refresh" in text, "скрипт не объясняет, почему данные не требуют пересборки"
