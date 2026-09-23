@@ -204850,7 +204850,8 @@
      "multiple_text": "no_target"
     }
    },
-   "buyer": "g13b2a65e"
+   "buyer": "g13b2a65e",
+   "followup_researched": "2026-09-23"
   },
   {
    "id": "gb9a22f5f",
@@ -204976,7 +204977,8 @@
      "multiple_text": "no_target"
     }
    },
-   "seller_id": "gda75c255"
+   "seller_id": "gda75c255",
+   "followup_researched": "2026-09-23"
   },
   {
    "id": "ge283bafc",
@@ -204997,6 +204999,14 @@
     [
      "CRE.ru",
      "https://cre.ru/news/105717"
+    ],
+    [
+     "Rambler Финансы",
+     "https://finance.rambler.ru/realty/57043827-obzor-klyuchevyh-sobytiy-na-rynke-nedvizhimosti-k-utru-10-sentyabrya/"
+    ],
+    [
+     "Mail Экономика",
+     "https://news.mail.ru/economics/72306920/"
     ]
    ],
    "from_ingest": true,
@@ -205045,6 +205055,14 @@
       "value": "Pridex",
       "field": "seller",
       "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260824/pridex-2112799482.html"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "«Флекс капитал»",
+      "field": "buyer_name",
+      "method": "human_review",
       "url": "https://realty.ria.ru/20260824/pridex-2112799482.html"
      }
     ]
@@ -205114,7 +205132,9 @@
     }
    },
    "target": "gd6a56998",
-   "seller_id": "gc5c1cec7"
+   "seller_id": "gc5c1cec7",
+   "buyer_name": "«Флекс капитал»",
+   "followup_researched": "2026-09-23"
   },
   {
    "id": "g0db67d5b",
@@ -213430,7 +213450,8 @@
      "multiple_text": "no_target"
     }
    },
-   "deep_researched": "2026-09-18"
+   "deep_researched": "2026-09-18",
+   "weekly_researched": "2026-09-23"
   },
   {
    "id": "gb1cd8142",
@@ -215437,7 +215458,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "deep_researched": "2026-09-23"
   },
   {
    "id": "g685f1e39",
