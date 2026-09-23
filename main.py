@@ -744,11 +744,17 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
             usage = data.get("usage") or {}
             details = usage.get("output_tokens_details") or {}
             info.update({"status": data.get("status"), "seconds": round(took, 2),
+                         "input_tokens": usage.get("input_tokens"),
                          "output_tokens": usage.get("output_tokens"),
                          "reasoning_tokens": details.get("reasoning_tokens")})
             text = _extract_text(data)
-            logger.info("LLM %s: попытка %d — %.1f с, status=%s, токенов вывода %s (рассуждение %s), "
-                        "текста %d знаков", model, attempt + 1, took, data.get("status"),
+            # Входные токены пишем в лог наравне с выходными: платим мы за те и
+            # другие одинаково (0,3 ₽ за 1000 у gpt-oss-120b), а до 23 сентября
+            # 2026 в логе была только половина счёта — стоимость ассистента
+            # приходилось оценивать пересчётом, вместо того чтобы прочитать.
+            logger.info("LLM %s: попытка %d — %.1f с, status=%s, токенов ввода %s, вывода %s "
+                        "(рассуждение %s), текста %d знаков", model, attempt + 1, took,
+                        data.get("status"), usage.get("input_tokens"),
                         usage.get("output_tokens"), details.get("reasoning_tokens"), len(text))
             if text:
                 return text

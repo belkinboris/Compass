@@ -27,13 +27,13 @@ def xlround(x):
 SCEN = {
     "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.05,
                    ceiling=25000, pay_share=0.045, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.09,  conv_lag=2, ai_q=12, ai_cost_q=1.6),
+                   cpr=800, conv=0.09,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
     "990 ₽":  dict(price_m=990,  price_y=9900,  share_y=0.22, churn=0.10,  refund=0.05,
                    ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.07,  conv_lag=2, ai_q=12, ai_cost_q=1.6),
+                   cpr=800, conv=0.07,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
     "1490 ₽": dict(price_m=1490, price_y=14900, share_y=0.28, churn=0.085, refund=0.05,
                    ceiling=18000, pay_share=0.025, reg_org0=25, reg_growth=0.09,
-                   cpr=900, conv=0.045, conv_lag=3, ai_q=15, ai_cost_q=1.9),
+                   cpr=900, conv=0.045, conv_lag=3, ai_q=15, ai_cost_q=1.2),
 }
 # По вашим счетам (22 сентября 2026): Timeweb 5 300 ₽/мес, Yandex.Cloud
 # 7 000 ₽/мес, Claude 20 000 ₽/мес, регистратор Р.О.С.Т. 9 000 ₽/квартал,
