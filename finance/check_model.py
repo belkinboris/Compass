@@ -24,20 +24,18 @@ def xlround(x):
     return float(Decimal(str(x)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
 # Три сценария — три цены. Числа те же, что в build_model.py (лист «Допущения»).
+# Подписка для человека ОДНА (990 ₽). Три сценария — три цены корпоративного
+# тарифа; у каждой свой темп прихода клиентов: дешевле — решают быстрее.
+HUMAN = dict(price_m=990, price_y=9900, share_y=0.22, churn=0.10, refund=0.05,
+             ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
+             cpr=800, conv=0.07, conv_lag=2, ai_q=12, ai_cost_q=1.0)
 SCEN = {
-    "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.05,
-                   ceiling=25000, pay_share=0.045, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.09,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
-    "990 ₽":  dict(price_m=990,  price_y=9900,  share_y=0.22, churn=0.10,  refund=0.05,
-                   ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.07,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
-    "1490 ₽": dict(price_m=1490, price_y=14900, share_y=0.28, churn=0.085, refund=0.05,
-                   ceiling=18000, pay_share=0.025, reg_org0=25, reg_growth=0.09,
-                   cpr=900, conv=0.045, conv_lag=3, ai_q=15, ai_cost_q=1.2),
+    "120 тыс": dict(HUMAN, corp_price=120000, corp_every=2.0, corp_start=4),
+    "200 тыс": dict(HUMAN, corp_price=200000, corp_every=2.5, corp_start=4),
+    "250 тыс": dict(HUMAN, corp_price=250000, corp_every=3.0, corp_start=5),
 }
-# По вашим счетам (22 сентября 2026): Timeweb 5 300 ₽/мес, Yandex.Cloud
-# 7 000 ₽/мес, Claude 20 000 ₽/мес, регистратор Р.О.С.Т. 9 000 ₽/квартал,
-# аренда офиса 22 900 ₽/год. Остальное — мои прикидки, помечены ниже.
+CORP_CHURN, CORP_VAR = 0.20, 1500
+
 # ООО + АУСН (решение владельца 23 сентября): регистратора нет, учёт проще.
 FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, office=1908,
            fns=8000, kassa=2500, acc=7000, legal=10000, mkt=30000, misc=8000,
@@ -68,7 +66,11 @@ def unit(p):
     ltv = contrib / p["churn"]
     cac = p["cpr"] / p["conv"]
     fixed = sum(FIX.values()) + INJURY_YEAR / 12
+    corp_contrib = p["corp_price"] / 12 - CORP_VAR
     return dict(arpu=arpu, contrib=contrib, ltv=ltv, cac=cac,
+                corp_contrib=corp_contrib,
+                corp_eq=round(corp_contrib / contrib) if contrib > 0 else None,
+                be_corp=-(-fixed // corp_contrib) if corp_contrib > 0 else None,
                 ratio=ltv / cac, life=1 / p["churn"],
                 payback=cac / contrib if contrib > 0 else None,
                 cpr_ok=ltv * p["conv"] / 3,
@@ -83,6 +85,7 @@ def run(name, p):
     seen = 0.0
     regs, paid_hist, rows = [], [], []
     paid, cash, year_rev = 0.0, float(CASH0), 0.0
+    corp = 0.0
     for i in range(MONTHS):
         org = p["reg_org0"] * (1 + p["reg_growth"]) ** i
         bought = FIX["mkt"] / p["cpr"]
@@ -98,13 +101,21 @@ def run(name, p):
                    p["ceiling"] * p["pay_share"])
         paid_hist.append(paid)
 
-        rev = paid * (p["price_m"] * (1 - share_y_now) + p["price_y"] / 12 * share_y_now)
+        m = i + 1
+        corp_new = 1 if (m >= p["corp_start"] and (m - p["corp_start"]) % p["corp_every"] < 1) else 0
+        corp = corp * (1 - CORP_CHURN / 12) + corp_new
+        corp_rev = corp * p["corp_price"] / 12
+
+        rev_b2c = paid * (p["price_m"] * (1 - share_y_now) + p["price_y"] / 12 * share_y_now)
+        rev = rev_b2c + corp_rev
         year_sold = new * share_y_now * p["price_y"]
-        cash_in = rev + year_sold - new * share_y_now * p["price_y"] / 12
+        cash_in = (rev_b2c + year_sold - new * share_y_now * p["price_y"] / 12
+                   + corp_new * p["corp_price"])
 
         costs = (FIX["timeweb"] + FIX["ycloud"] + p["ai_q"] * p["ai_cost_q"] * paid
                  + FIX["claude_sub"] + FIX["office"] + FIX["fns"] + FIX["kassa"] + FIX["acc"]
                  + FIX["legal"] + FIX["mkt"] + FIX["misc"]
+                 + corp * CORP_VAR
                  + cash_in * ACQ + year_sold * p["refund"] / 2
                  + FIX["gd_salary"] + FIX["team_cost"]
                  + dev_cost(i + 1)
@@ -118,8 +129,8 @@ def run(name, p):
         taxes = vat + usn
         net = rev - costs - taxes
         cash += cash_in - costs - taxes
-        rows.append(dict(m=i + 1, reg=reg, paid=paid, rev=rev, costs=costs,
-                         taxes=taxes, net=net, cash=cash))
+        rows.append(dict(m=m, reg=reg, paid=paid, corp=corp, corp_rev=corp_rev,
+                         rev=rev, costs=costs, taxes=taxes, net=net, cash=cash))
     return u, rows
 
 
@@ -138,7 +149,10 @@ lines = [("Средний платёж в месяц", "arpu", money),
          ("Окупаемость привлечения, месяцев", "payback", lambda v: "%.1f" % v),
          ("Нужная цена регистрации (окупаемость ×3)", "cpr_ok", money),
          ("Постоянные расходы в месяц", "fixed", money),
-         ("ПОРОГ БЕЗУБЫТОЧНОСТИ, подписчиков", "be", lambda v: "%d" % v),
+         ("Вклад одной компании в месяц", "corp_contrib", money),
+         ("Одна компания = столько подписчиков", "corp_eq", lambda v: "%d" % v),
+         ("ПОРОГ: только людьми, подписчиков", "be", lambda v: "%d" % v),
+         ("ПОРОГ: только компаниями, клиентов", "be_corp", lambda v: "%d" % v),
          ("  то же с разработчиком за 50 тыс ₽", "be_dev1", lambda v: "%d" % v),
          ("  то же с разработчиком за 100 тыс ₽", "be_dev2", lambda v: "%d" % v),
          ("60 млн ₽ в год (предел АУСН) — это подписчиков", "vat_subs", lambda v: "%d" % v)]
@@ -149,8 +163,10 @@ for title, key, fmt in lines:
 print()
 print("ДВА ГОДА")
 res = {n: run(n, p) for n, p in SCEN.items()}
-out = [("Платящих через 12 месяцев", lambda r: "%d" % round(r[11]["paid"])),
-       ("Платящих через 24 месяца", lambda r: "%d" % round(r[23]["paid"])),
+out = [("Платящих людей через 12 месяцев", lambda r: "%d" % round(r[11]["paid"])),
+       ("Платящих людей через 24 месяца", lambda r: "%d" % round(r[23]["paid"])),
+       ("Компаний через 24 месяца", lambda r: "%.1f" % r[23]["corp"]),
+       ("Выручка от компаний за 24 мес", lambda r: money(sum(x["corp_rev"] for x in r))),
        ("Регистраций всего за 24 месяца", lambda r: "%d" % sum(x["reg"] for x in r)),
        ("Выручка за 12 месяцев", lambda r: money(sum(x["rev"] for x in r[:12]))),
        ("Выручка за 24 месяца", lambda r: money(sum(x["rev"] for x in r))),
@@ -196,7 +212,7 @@ print("Каждая строка: меняем ОДНО допущение и с
 print("безубыточности и доходим ли до него за 24 месяца.")
 print()
 
-BASE = "990 ₽"
+BASE = "200 тыс"
 
 
 def variant(title, scen=None, fix=None, no_dev=False):
@@ -234,6 +250,17 @@ ACQ = _acq_was
 variant("органика стартует с 40 в месяц вместо 25", scen={"reg_org0": 40})
 variant("всё вместе: без продвижения, без разработчика,\n  отток 7%, конверсия 10%, органика 40",
         scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0}, no_dev=True)
+print()
+print("ОТДЕЛЬНО — ПРО КОРПОРАТИВНУЮ ЦЕНУ. Вывод «200 и 250 почти равны» держится")
+print("на моём допущении, что дороже тариф — медленнее решение. Если это неверно")
+print("и темп один и тот же, картина другая:")
+for price in (120000, 200000, 250000):
+    p2 = dict(SCEN["200 тыс"]); p2["corp_price"] = price
+    _, rr = run("200 тыс", p2)
+    m = next((x["m"] for x in rr if x["net"] > 0), None)
+    print("  %s в год при ОДНОМ темпе (1 клиент в 2,5 месяца): выручка за 24 мес %s, "
+          "в плюс %s" % (money(price), money(sum(x["rev"] for x in rr)),
+                         ("с %d-го месяца" % m) if m else "не выходим"))
 print()
 print("А ТЕПЕРЬ ВАШ ПЛАН ЦЕЛИКОМ — разработчик по лесенке 0 → 50 → 100 остаётся,")
 print("убрано только то, что по расчёту не окупается:")
