@@ -698,7 +698,7 @@
    ]
   },
   {
-   "draft_id": "d53260483",
+   "draft_id": "d15177518",
    "title": "FT: инвестор из США получил поддержку властей для покупки активов «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -728,7 +728,7 @@
    ]
   },
   {
-   "draft_id": "d14150490",
+   "draft_id": "d12405162",
    "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -769,7 +769,7 @@
    ]
   },
   {
-   "draft_id": "d69870660",
+   "draft_id": "d14688105",
    "title": "РСТИ планирует купить участок ГК «ПИК» на берегу Невы за 8 млрд рублей",
    "date": "2026-09-23",
    "src": [
@@ -808,7 +808,7 @@
    ]
   },
   {
-   "draft_id": "d68547712",
+   "draft_id": "d57927300",
    "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
    "date": "2026-09-23",
    "src": [
@@ -837,7 +837,7 @@
    ]
   },
   {
-   "draft_id": "d35504746",
+   "draft_id": "d85842680",
    "title": "В пермской Губахе продают хостел для VIP-персон. Фото",
    "date": "2026-09-23",
    "src": [
@@ -865,7 +865,7 @@
    ]
   },
   {
-   "draft_id": "d19322407",
+   "draft_id": "d45579344",
    "title": "Американский инвестор планирует выкупить активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -906,7 +906,7 @@
    ]
   },
   {
-   "draft_id": "d59176140",
+   "draft_id": "d37894187",
    "title": "«Юнирест» перестала продавать франшизы Rostic’s",
    "date": "2026-09-23",
    "src": [
@@ -936,16 +936,98 @@
    ]
   },
   {
-   "draft_id": "d39176631",
-   "title": "Эксперт Лескин допустил, что Рижский вокзал опять не продадут в октябре",
+   "draft_id": "d21274089",
+   "title": "FT узнала о планах миллиардера Тодда Боэли купить зарубежные активы «ЛУКОЙЛа»",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1117906"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "Правительство США и влиятельные лица из стран Персидского залива поддержали заявку Боэли на приобретение этих активов, сообщила газета",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1117906"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d18868301",
+   "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "«Яндекс» и VK обсуждают создание совместного предприятия на базе компаний Yandex B2B Tech и VK Tech, рассказали РБК два источника на рынке информационных технологий. Источники, близкие к сторонам возможной сделки, подтвердили проработку вариантов создания СП.…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d56134407",
+   "title": "Эксперт Кумар не ожидает влияния новых санкций США на покупку нефти Индией у РФ",
    "date": "2026-09-23",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28142045"
+     "https://tass.ru/ekonomika/28142143"
     ]
    ],
-   "sum": "4 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -964,130 +1046,13 @@
    ]
   },
   {
-   "draft_id": "d69164140",
-   "title": "Besins Healthcare приобрела UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
+   "draft_id": "d39787722",
+   "title": "СМИ сообщили о продаже магазинов «Мария-Ра» сети «Лента»",
    "date": "2026-09-23",
    "src": [
     [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/09/23/besins-healthcare-priobrela-unid-manufacturing-eksperta-v-oblasti-tekhnologiy-dostavki-preparatov-dl%3Ferid%3D2VfnxxWhobi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-23",
-     "title": "Сделка завершена",
-     "note": "Besins Healthcare, глобальная фармацевтическая компания, специализирующаяся на гормональном здоровье, объявила о приобретении UniD Manufacturing – бельгийской компании по разработке и производству фармацевтических препаратов с более чем двадцатилетним…",
-     "source": [
-      "web:vademec.ru",
-      "https://vademec.ru/news/2026/09/23/besins-healthcare-priobrela-unid-manufacturing-eksperta-v-oblasti-tekhnologiy-dostavki-preparatov-dl%3Ferid%3D2VfnxxWhobi/"
-     ]
-    }
-   ],
-   "buyer_name": "Besins Healthcare",
-   "asset": "UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Besins Healthcare",
-    "asset": "UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d29656815",
-   "title": "Покупку российских самолетов предложили компенсировать за счет пассажиров",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2171892/pokupku-rossiiskikh-samoletov-predlozhili-kompensirovat-za-schet-passazhirov-izi"
-    ]
-   ],
-   "sum": "250 млрд ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-23",
-     "title": "Переговоры",
-     "note": "В России рассматривают возможность введения дополнительного сбора для авиапассажиров, который может быть направлен на компенсацию расходов по лизингу и эксплуатации новых отечественных самолетов. Как передает газета «Коммерсант» , предполагается, что размер…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2171892/pokupku-rossiiskikh-samoletov-predlozhili-kompensirovat-za-schet-passazhirov-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22493498",
-   "title": "От 109 до 215 отделений: как МГКЛ выполняет планы после IPO",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/mgkl/blog/1354542.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-23",
-     "title": "Переговоры",
-     "note": "В декабре 2023 года МГКЛ вышла на биржу с планами расширять розничную сеть, развивать ресейл и увеличивать масштаб бизнеса. Посмотрим, каких результатов Группа достигла с того момента. 🔹 Расширили сеть сверх заявленного ориентира На момент IPO у Группы было…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/company/mgkl/blog/1354542.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37032924",
-   "title": "#газеты #экзит Российский медицинский сервис «Здоровье ру» привлек инвестиции от основателя инвесткомпании Continuum и бывшего владельца агрохолдингов «Промагро» и «Русский лен» Константина Клюки. Сог",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7748"
+     "web:retailer.ru",
+     "https://retailer.ru/smi-soobshhili-o-prodazhe-magazinov-marija-ra-seti-lenta/"
     ]
    ],
    "sum": null,
@@ -1095,19 +1060,19 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "#газеты #экзит Российский медицинский сервис «Здоровье ру»",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "#газеты #экзит Российский медицинский сервис «Здоровье ру»",
+    "asset": null,
     "seller": null
    },
-   "ind": "Здравоохранение",
+   "ind": "Ритейл",
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g076af76a (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделк» — второе издание, в группу не шлём"
    ]
   }
  ]
