@@ -25,22 +25,24 @@ def xlround(x):
 
 # Три сценария — три цены. Числа те же, что в build_model.py (лист «Допущения»).
 SCEN = {
-    "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.02,
+    "790 ₽":  dict(price_m=790,  price_y=7900,  share_y=0.20, churn=0.11,  refund=0.05,
                    ceiling=25000, pay_share=0.045, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.09,  conv_lag=2, ai_per_user=90),
-    "990 ₽":  dict(price_m=990,  price_y=9900,  share_y=0.22, churn=0.10,  refund=0.02,
+                   cpr=800, conv=0.09,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
+    "990 ₽":  dict(price_m=990,  price_y=9900,  share_y=0.22, churn=0.10,  refund=0.05,
                    ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
-                   cpr=800, conv=0.07,  conv_lag=2, ai_per_user=90),
-    "1490 ₽": dict(price_m=1490, price_y=14900, share_y=0.28, churn=0.085, refund=0.02,
+                   cpr=800, conv=0.07,  conv_lag=2, ai_q=12, ai_cost_q=1.0),
+    "1490 ₽": dict(price_m=1490, price_y=14900, share_y=0.28, churn=0.085, refund=0.05,
                    ceiling=18000, pay_share=0.025, reg_org0=25, reg_growth=0.09,
-                   cpr=900, conv=0.045, conv_lag=3, ai_per_user=110),
+                   cpr=900, conv=0.045, conv_lag=3, ai_q=15, ai_cost_q=1.2),
 }
 # По вашим счетам (22 сентября 2026): Timeweb 5 300 ₽/мес, Yandex.Cloud
 # 7 000 ₽/мес, Claude 20 000 ₽/мес, регистратор Р.О.С.Т. 9 000 ₽/квартал,
 # аренда офиса 22 900 ₽/год. Остальное — мои прикидки, помечены ниже.
-FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, reg=3000, office=1908,
-           fns=8000, kassa=2500, acc=12000, legal=10000, mkt=30000, misc=8000,
+# ООО + АУСН (решение владельца 23 сентября): регистратора нет, учёт проще.
+FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, office=1908,
+           fns=8000, kassa=2500, acc=7000, legal=10000, mkt=30000, misc=8000,
            gd_salary=0, team_cost=0)
+INJURY_YEAR = 2959.0        # единственный обязательный взнос на АУСН
 # Разработчик лесенкой: первый квартал никого, месяцы 4–12 по 50 тыс, с 13-го
 # по 100 тыс. Оба этапа — подряд с самозанятым или ИП, поэтому без взносов.
 DEV_FREE, DEV1_UNTIL, DEV1_COST, DEV2_COST = 3, 12, 50000, 100000
@@ -53,17 +55,19 @@ def dev_cost(month):
     return DEV1_COST if month <= DEV1_UNTIL else DEV2_COST
 
 
-MROT, INS_RATE, ACQ = 27093, 0.30, 0.030
-USN, USN_MIN, VAT_LIMIT, VAT_RATE = 0.15, 0.01, 20_000_000, 0.05
+MROT, INS_RATE, ACQ = 27093, 0.30, 0.030   # МРОТ и тариф — справочно: на АУСН 0%
+USN, USN_MIN, VAT_LIMIT, VAT_RATE = 0.20, 0.03, 60_000_000, 0.05   # АУСН: 20%, минимум 3% ЗА МЕСЯЦ
 CASH0 = 500_000
 
 
 def unit(p):
     arpu = p["price_m"] * (1 - p["share_y"]) + p["price_y"] / 12 * p["share_y"]
-    contrib = arpu * (1 - ACQ - p["refund"]) - p["ai_per_user"]
+    # Возврат возможен только с ГОДОВОЙ подписки и только за неиспользованный
+    # остаток — в среднем половина срока. Раньше здесь стояло «доля ВСЕЙ выручки».
+    contrib = arpu * (1 - ACQ - p["share_y"] * p["refund"] / 2) - p["ai_q"] * p["ai_cost_q"]
     ltv = contrib / p["churn"]
     cac = p["cpr"] / p["conv"]
-    fixed = sum(FIX.values()) + max(FIX["gd_salary"], MROT) * INS_RATE
+    fixed = sum(FIX.values()) + INJURY_YEAR / 12
     return dict(arpu=arpu, contrib=contrib, ltv=ltv, cac=cac,
                 ratio=ltv / cac, life=1 / p["churn"],
                 payback=cac / contrib if contrib > 0 else None,
@@ -95,14 +99,16 @@ def run(name, p):
         paid_hist.append(paid)
 
         rev = paid * (p["price_m"] * (1 - share_y_now) + p["price_y"] / 12 * share_y_now)
-        cash_in = rev + new * share_y_now * (p["price_y"] - p["price_y"] / 12)
+        year_sold = new * share_y_now * p["price_y"]
+        cash_in = rev + year_sold - new * share_y_now * p["price_y"] / 12
 
-        costs = (FIX["timeweb"] + FIX["ycloud"] + p["ai_per_user"] * paid + FIX["claude_sub"]
-                 + FIX["reg"] + FIX["office"] + FIX["fns"] + FIX["kassa"] + FIX["acc"]
+        costs = (FIX["timeweb"] + FIX["ycloud"] + p["ai_q"] * p["ai_cost_q"] * paid
+                 + FIX["claude_sub"] + FIX["office"] + FIX["fns"] + FIX["kassa"] + FIX["acc"]
                  + FIX["legal"] + FIX["mkt"] + FIX["misc"]
-                 + cash_in * ACQ + rev * p["refund"] + FIX["gd_salary"] + FIX["team_cost"]
+                 + cash_in * ACQ + year_sold * p["refund"] / 2
+                 + FIX["gd_salary"] + FIX["team_cost"]
                  + dev_cost(i + 1)
-                 + max(FIX["gd_salary"], MROT) * INS_RATE)
+                 + INJURY_YEAR / 12)
 
         if i == 3:          # январь: новый календарный год
             year_rev = 0.0
@@ -135,7 +141,7 @@ lines = [("Средний платёж в месяц", "arpu", money),
          ("ПОРОГ БЕЗУБЫТОЧНОСТИ, подписчиков", "be", lambda v: "%d" % v),
          ("  то же с разработчиком за 50 тыс ₽", "be_dev1", lambda v: "%d" % v),
          ("  то же с разработчиком за 100 тыс ₽", "be_dev2", lambda v: "%d" % v),
-         ("20 млн ₽ в год — это подписчиков", "vat_subs", lambda v: "%d" % v)]
+         ("60 млн ₽ в год (предел АУСН) — это подписчиков", "vat_subs", lambda v: "%d" % v)]
 units = {n: unit(p) for n, p in SCEN.items()}
 for title, key, fmt in lines:
     print("%-42s %14s %14s %14s" % (title, *[fmt(units[n][key]) for n in SCEN]))
