@@ -1,0 +1,1063 @@
+{
+ "made": "2026-09-23",
+ "drafts": [
+  {
+   "draft_id": "d18941081",
+   "title": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7385"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-14",
+     "title": "Переговоры",
+     "note": "«Лента» ведёт переговоры о покупке «Мария-Ра» 🟡 Статус сделки: NGS со ссылкой ещ е на три источника сообщает, что сделка находится в стадии, когда главные вопросы решены и речь идет лишь об оформлении деталей. В частности, участникам, скорее всего, придется…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7385"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22779452",
+   "title": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из пов",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7731"
+    ]
+   ],
+   "sum": "1,5 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Сделка завершена",
+     "note": "#газеты РБК может довести свою долю в рекламной платформе Hyper AdTech с 60% до 100%. Группа компаний обсуждает покупку доли Hyper AdTech [ООО “Хайпер”] у ее основателя Армена Гулиняна, следует из повестки заседания совета директоров компании, которую…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7731"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93200414",
+   "title": "Российский стартап UNEXT привлек $130 тыс. от предпринимателей-супругов Романа и Алии Алексеевой. Роман - основатель платформы Cheelee, которая платит пользователям за просмотр коротких роликов, Алия ",
+   "date": "2026-09-14",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7732"
+    ]
+   ],
+   "sum": "$130 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский стартап UNEXT",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский стартап UNEXT",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g076af76a (общие редкие слова: котора, платфо) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d74146830",
+   "title": "Семейный бизнес экс-главы челябинского Роспотребнадзора готовят к продаже",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053128378"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79963144",
+   "title": "США продлили генлицензию о переговорах по продаже зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28126333"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23440410",
+   "title": "В Москве выставили на торги старинный купеческий особняк",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260918/moskva-2118571651.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35782040",
+   "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260918/lukoyl-2118576929.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d42876803",
+   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/09/18/1230043-ssha-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d48552503",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 22 октября",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1116935"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d23364061",
+   "title": "США продлили лицензию на переговоры о продаже активов компании «Лукойл»",
+   "date": "2026-09-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2169431/2026-09-18/ssha-prodlili-litcenziiu-na-peregovory-o-prodazhe-aktivov-kompanii-lukoil"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d58367261",
+   "title": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7743"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-21",
+     "title": "Сделка завершена",
+     "note": "“Корпорация робототехники” [входит в АФК “Система”], приобрела 51% доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автоматизации. В периметр сделки вошли несколько компаний группы, формирующих единый…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7743"
+     ]
+    }
+   ],
+   "buyer_name": "“Корпорация робототехники” [входит в АФК “Система”]",
+   "asset": "доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "“Корпорация робототехники” [входит в АФК “Система”]",
+    "asset": "доли в ГК “Фотомеханика” , которая специализируется на производстве складских роботов и систем автом",
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "закрытая сделка названа настоящим временем — заголовок нужно привести к завершённому действию",
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
+   ]
+  },
+  {
+   "draft_id": "d77498093",
+   "title": "Одобрение Штатами продажи активов «ЛУКОЙЛа» затянулся из-за межведомственных согласований",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1117408"
+    ]
+   ],
+   "sum": "$20 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d75063564",
+   "title": "Согласование продажи зарубежных активов «Лукойла» зависло в Белом доме",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/21/soglasovanie-prodazhi-zarubezhnyh-aktivov-lukoyla-zavislo-v-belom-dome/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d25323062",
+   "title": "FT: сделка по продаже «Лукойлом» зарубежных активов застопорилась в США",
+   "date": "2026-09-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260921/ssha-873514903.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d67977690",
+   "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/22/09/2026/6ab127299a7947537c1fd7c6"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-22",
+     "title": "Переговоры",
+     "note": "«Яндекс» и VK обсуждают возможность создания совместного предприятия на базе активов дочерних Yandex B2B Tech и VK Tech, рассказали источники РБК. На рынке наступает этап консолидации после быстрого роста, полагают эксперты",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/technology_and_media/22/09/2026/6ab127299a7947537c1fd7c6"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22451162",
+   "title": "В Перми продают скандальный долгострой на улице КИМ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129614"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19718740",
+   "title": "Бывший гипермаркет возле «СКА Арены» выставили на торги за 3,5 млрд рублей",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/22/bivshee-zdanie-gipermarketa"
+    ]
+   ],
+   "sum": "3,5 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68770103",
+   "title": "Национализированные уральские агрохолдинги выставили на торги за полмиллиарда",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129631"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d33957217",
+   "title": "«Яндекс» начал продавать решение для защиты ИИ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-09-22_yandeks_vyvodit_na_rynok"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d87314322",
+   "title": "РБК: «Яндекс» и VK обсуждают создание совместного предприятия",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28138343"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-22",
+     "title": "Переговоры",
+     "note": "Доли компаний в предприятии могут составить по 50%",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28138343"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d37275435",
+   "title": "Акционеры «Т-Технологий» одобрили допэмиссию акций для консолидации «Точки»",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972311"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50717435",
+   "title": "Rostic’s перестал продавать франшизы в России — новые точки будут открывать действующие партнёры",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/rostics-perestal-prodavat-franshizy-v-rossii-novye-tochki-budut-otkryvat-dejstvuyushie-partnyory/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48639169",
+   "title": "Покупку отечественных самолетов могут поддержать за счет сбора с пассажиров",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972760"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "Минтранс, Минпромторг и «Ростех» обсуждают введение нового сбора с пассажиров на поддержку лизинга и эксплуатации новых российских самолетов. Об этом рассказали источники “Ъ”, знакомые с инициативой.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8972760"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20740836",
+   "title": "FT: инвестор из США получил поддержку властей для покупки активов «Лукойла»",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8972736"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "поддержка властей для покупки активов «Лукойла»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "поддержка властей для покупки активов «Лукойла»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d39546989",
+   "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28141481"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "Речь идет о Тодде Боули, сообщила газета",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28141481"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d89737825",
+   "title": "РСТИ планирует купить участок ГК «ПИК» на берегу Невы за 8 млрд рублей",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/23/rsti-planiruet-kupit-uchastok"
+    ]
+   ],
+   "sum": "8 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/09/23/rsti-planiruet-kupit-uchastok"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10806623",
+   "title": "Казахстан выставит на аукцион 56 нефтегазовых участков",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260923/kazahstan-873576345.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d60952173",
+   "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/306099"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d64751799",
+   "title": "Блогерша описала жизнь за границей словами «заболел зуб не в России — продавать почку?»",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/23/blogersha-opisala-zhizn-za-granitsey-slovami-zabolel-zub-ne-v-rossii-prodavat-pochku/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45994218",
+   "title": "В пермской Губахе продают хостел для VIP-персон. Фото",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129845"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49375445",
+   "title": "Американский инвестор планирует выкупить активы «Лукойла»",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053129921"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "Американский инвестор Тодд Боули заручился поддержкой властей США и представителей стран Персидского залива для возможной покупки иностранных активов «Лукойла». Об этом сообщают СМИ.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053129921"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили генлицензию о переговорах по продаже зарубежных» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d53475282",
+   "title": "Из чего складывается комиссия риелтора при купле-продаже жилья",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053129802"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d56965569",
+   "title": "M&A-ADVISORY РОССИИ В ЛИЦАХ После ухода банков Bulge Bracket их долю на рынке M&A-advisory забрали независимые бутики, бывшие российские подразделения Big 4 и российские банки. Ниже — списки ключевых ",
+   "date": "2026-09-22",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7410"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
