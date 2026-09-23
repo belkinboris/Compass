@@ -45,27 +45,30 @@ def head(t):
 #   • раскрывать отчётность в интернете непубличное АО с менее чем 50
 #     акционерами и без публичного размещения НЕ обязано;
 #   • значит, вся разница — регистратор и более дорогой учёт.
-OOO_SAVES = {
+# РЕШЕНИЕ ПРИНЯТО 23 сентября 2026: ООО и АУСН. Базой счёта стало именно это,
+# поэтому ниже считается не «что даст переход», а «во что обошлось бы иначе».
+AO_EXTRA = {
     "регистратор Р.О.С.Т.": 3000,        # факт: 9 000 ₽ в квартал, у ООО статьи нет
-    "бухгалтерия проще": 5000,           # ОЦЕНКА: 12 000 → 7 000, спросить бухгалтера
+    "более дорогой учёт у АО": 5000,     # ОЦЕНКА: 12 000 против 7 000, спросить бухгалтера
 }
 # АУСН: тариф взносов за работников 0%, остаётся травматизм 2 959 ₽ в год
 # (246,58 ₽ в месяц). Ставка налога 20% с «доходы минус расходы» против 15%
 # на УСН — пока убыток, это не важно; про минимальный налог на АУСН
 # источники молчат, СПРОСИТЬ БУХГАЛТЕРА.
-AUSN_INJURY_MONTH = 2959 / 12
+AUSN_INJURY_MONTH = cm.INJURY_YEAR / 12
 
 
-def fixed_costs(ooo=False, ausn=False, mkt=None, claude=None):
+def fixed_costs(ao=False, usn=False, mkt=None, claude=None):
+    """Постоянные расходы в месяц. База — ООО на АУСН; ao/usn показывают, что было бы иначе."""
     f = dict(cm.FIX)
     if mkt is not None:
         f["mkt"] = mkt
     if claude is not None:
         f["claude_sub"] = claude
     total = sum(f.values())
-    if ooo:
-        total -= sum(OOO_SAVES.values())
-    total += AUSN_INJURY_MONTH if ausn else max(f["gd_salary"], cm.MROT) * cm.INS_RATE
+    if ao:
+        total += sum(AO_EXTRA.values())
+    total += (max(f["gd_salary"], cm.MROT) * cm.INS_RATE) if usn else cm.INJURY_YEAR / 12
     return total
 
 
@@ -81,16 +84,17 @@ print("  • раскрытие отчётности в интернете: не
 print("    и без публичного размещения НЕ обязано — то есть тоже не отличие")
 print("  • реальная разница — только регистратор и более дорогой учёт")
 print()
-for k, v in OOO_SAVES.items():
+for k, v in AO_EXTRA.items():
     print("  %-26s %10s в месяц" % (k, money(v)))
 print("  %-26s %10s в месяц = %s в год"
-      % ("ИТОГО экономия", money(sum(OOO_SAVES.values())), money(sum(OOO_SAVES.values()) * 12)))
+      % ("ИТОГО экономия на ООО", money(sum(AO_EXTRA.values())), money(sum(AO_EXTRA.values()) * 12)))
 print()
 c = contribution()
-for label, kw in (("как есть (АО)", {}), ("ООО", {"ooo": True}),
-                  ("ООО + АУСН", {"ooo": True, "ausn": True})):
+for label, kw in (("АО на УСН (как было)", {"ao": True, "usn": True}),
+                  ("ООО на УСН", {"usn": True}),
+                  ("ООО + АУСН (выбрано)", {})):
     f = fixed_costs(**kw)
-    print("  %-14s постоянные %10s   порог: %3d чел. (+50 тыс: %3d, +100 тыс: %3d)"
+    print("  %-21s постоянные %10s   порог: %3d чел. (+50 тыс: %3d, +100 тыс: %3d)"
           % (label, money(f), -(-f // c), -(-(f + 50000) // c), -(-(f + 100000) // c)))
 print()
 print("  К 24-му месяцу модель даёт 96 платящих при цене 990 ₽.")
@@ -144,8 +148,8 @@ CORP_VAR = 1500        # переменные расходы на одного �
 CORP_CHURN_Y = 0.20    # уходит за год; годовая подписка продлевается или нет
 
 
-def corp_break_even(price_year, ooo=False, ausn=False, sales=0, mkt=None):
-    f = fixed_costs(ooo=ooo, ausn=ausn, mkt=mkt) + sales
+def corp_break_even(price_year, ao=False, usn=False, sales=0, mkt=None):
+    f = fixed_costs(ao=ao, usn=usn, mkt=mkt) + sales
     per = price_year / 12 - CORP_VAR
     return f / per, per
 
@@ -153,10 +157,10 @@ def corp_break_even(price_year, ooo=False, ausn=False, sales=0, mkt=None):
 print("Цена за команду в год — три ориентира. СПАРК продаёт рабочее место")
 print("от ~100 тыс ₽ в год; мы уже, но по своей теме глубже.")
 print()
-print("%-14s %14s %16s %16s" % ("цена в год", "в месяц", "порог, клиентов", "то же для ООО+АУСН"))
+print("%-14s %14s %16s %16s" % ("цена в год", "в месяц", "порог (ООО+АУСН)", "было бы у АО+УСН"))
 for price in (150000, 250000, 400000):
     n1, per = corp_break_even(price)
-    n2, _ = corp_break_even(price, ooo=True, ausn=True)
+    n2, _ = corp_break_even(price, ao=True, usn=True)
     print("%-14s %14s %16.1f %16.1f" % (money(price), money(per), n1, n2))
 print()
 print("То есть безубыточность — это ШЕСТЬ-СЕМЬ корпоративных клиентов по 250 тыс ₽,")
@@ -176,7 +180,7 @@ def corp_new(m, start=4, cap=3):
     return min(cap, 1 + (m - start) // 7)
 
 
-def run_both(scen="990 ₽", corp_price=250000, ooo=False, ausn=False,
+def run_both(scen="990 ₽", corp_price=250000, ao=False, usn=False,
              mkt=None, corp_start=4, corp_cap=3, sales_from=None, sales_cost=120000):
     """Возвращает помесячные строки: физлица из модели + корпораты сверху."""
     p = dict(cm.SCEN[scen])
@@ -195,12 +199,10 @@ def run_both(scen="990 ₽", corp_price=250000, ooo=False, ausn=False,
         sales = sales_cost if (sales_from and m >= sales_from) else 0
 
         base_costs = b2c[i]["costs"]
-        if ooo:
-            base_costs -= sum(OOO_SAVES.values())
-        if ausn:
-            base_costs -= max(cm.FIX["gd_salary"], cm.MROT) * cm.INS_RATE - AUSN_INJURY_MONTH
-        if mkt is not None:
-            pass   # уже учтено внутри cm.run
+        if ao:
+            base_costs += sum(AO_EXTRA.values())
+        if usn:
+            base_costs += max(cm.FIX["gd_salary"], cm.MROT) * cm.INS_RATE - cm.INJURY_YEAR / 12
 
         rev = b2c[i]["rev"] + corp_rev
         costs = base_costs + corp_costs + sales
@@ -236,18 +238,18 @@ print("  • цена 250 тыс ₽ в год за команду, деньги
 print()
 show("только физлица (как в модели)", run_both(corp_price=0, corp_start=99))
 show("физлица + компании по 250 тыс ₽", run_both())
-show("то же, но ООО", run_both(ooo=True))
-show("ООО + АУСН + компании  ← ответ на третий вопрос", run_both(ooo=True, ausn=True))
+show("для сравнения: то же при АО на УСН", run_both(ao=True, usn=True))
+show("ООО + АУСН + компании (выбранное устройство)", run_both())
 show("ООО + АУСН + компании, без платного продвижения",
-     run_both(ooo=True, ausn=True, mkt=0))
-show("то же, но цена компаниям 400 тыс ₽", run_both(ooo=True, ausn=True, mkt=0, corp_price=400000))
+     run_both(mkt=0))
+show("то же, но цена компаниям 400 тыс ₽", run_both(mkt=0, corp_price=400000))
 show("осторожно: компании идут вдвое медленнее (cap 2, старт с 6-го)",
-     run_both(ooo=True, ausn=True, mkt=0, corp_start=6, corp_cap=2))
+     run_both(mkt=0, corp_start=6, corp_cap=2))
 show("очень осторожно: 1 клиент в месяц, старт с 6-го",
-     run_both(ooo=True, ausn=True, mkt=0, corp_start=6, corp_cap=1))
+     run_both(mkt=0, corp_start=6, corp_cap=1))
 print("  Проверка на НДС: порог освобождения 20 млн ₽ дохода за календарный год.")
-for title, rows in (("250 тыс ₽ за клиента", run_both(ooo=True, ausn=True, mkt=0)),
-                    ("400 тыс ₽ за клиента", run_both(ooo=True, ausn=True, mkt=0, corp_price=400000))):
+for title, rows in (("250 тыс ₽ за клиента", run_both(mkt=0)),
+                    ("400 тыс ₽ за клиента", run_both(mkt=0, corp_price=400000))):
     y2 = sum(r["rev"] for r in rows[12:])
     print("     %-22s выручка 13–24 месяцев %s — %s"
           % (title, money(y2), "порог не достигнут" if y2 < 20e6 else "ПОРОГ ПЕРЕЙДЕН, считать НДС"))
@@ -260,9 +262,11 @@ print("  а продажа только физлицам не укладывае
 
 
 # --------------------------------------------------------- цена привлечения
-head("5. ЦЕНА ПРИВЛЕЧЕНИЯ: 11 429 ₽ — ЭТО МОЯ ОЦЕНКА, И ОНА ПЕССИМИСТИЧНА")
+head("5. ЦЕНА ПРИВЛЕЧЕНИЯ — ЭТО МОЯ ОЦЕНКА, И ОНА ПЕССИМИСТИЧНА")
 print("CAC = стоимость регистрации ÷ доля тех, кто начинает платить.")
-print("11 429 ₽ = 800 ₽ ÷ 7%. Оба числа — мои допущения, ни одно не измерено.")
+print("%s = %s ÷ %.0f%%. Оба числа — мои допущения, ни одно не измерено."
+      % (money(cm.SCEN["990 ₽"]["cpr"] / cm.SCEN["990 ₽"]["conv"]),
+         money(cm.SCEN["990 ₽"]["cpr"]), cm.SCEN["990 ₽"]["conv"] * 100))
 print()
 print("Откуда берётся 800 ₽. Размещение в отраслевом телеграм-канале стоит")
 print("15–25 тыс ₽ и даёт, по обычным меркам, 200–600 переходов и 20–120")
@@ -281,9 +285,11 @@ for cpr in (200, 400, 600, 800):
     print(" ".join(row))
 print()
 print("  Ниже 1,00 — привлечение сжигает деньги. От 3,00 — здоровая подписка.")
-print("  Вы правы: при 400 ₽ за регистрацию и конверсии 10% выходит 2,04,")
-print("  а при 200 ₽ и 15% — 6,12. Цифра 11 429 ₽ — не приговор каналу,")
-print("  а мой осторожный вход. Заменяется ОДНИМ посевом с отдельной ссылкой.")
+print("  Вы правы: при 400 ₽ за регистрацию и конверсии 10%% выходит %.2f,"
+      % (ltv / (400 / 0.10)))
+print("  а при 200 ₽ и 15%% — %.2f. Цифра %s — не приговор каналу, а мой"
+      % (ltv / (200 / 0.15), money(cm.SCEN["990 ₽"]["cpr"] / cm.SCEN["990 ₽"]["conv"])))
+print("  осторожный вход. Заменяется ОДНИМ посевом с отдельной ссылкой.")
 print()
 print("  И отдельно: у органических каналов — своего канала, поисковой выдачи,")
 print("  пересылок — цена регистрации в деньгах равна нулю. В таблице их нет")
@@ -303,7 +309,7 @@ print()
 
 cm.SCEN["490 ₽"] = dict(price_m=490, price_y=4900, share_y=0.18, churn=0.12, refund=0.02,
                         ceiling=30000, pay_share=0.055, reg_org0=25, reg_growth=0.10,
-                        cpr=750, conv=0.11, conv_lag=2, ai_per_user=80)
+                        cpr=750, conv=0.11, conv_lag=2, ai_q=12, ai_cost_q=1.4)
 print("Допущения для 490 ₽ (самые щедрые из всех четырёх, нарочно): рынок шире")
 print("(30 тыс человек), платит больше (5,5%), конверсия выше (11%), но и отток")
 print("выше (12% в месяц) — дешёвую подписку отменяют легче всего.")
@@ -390,7 +396,7 @@ print("  ТОЧКА РАВНОВЕСИЯ ПРИ ПРИБЫЛИ: прибыль %
 print("  Ниже — выгоднее АУСН, выше — обычная УСН.")
 
 
-def compare(title, rows, ooo=True):
+def compare(title, rows):
     y1, y2 = rows[:12], rows[12:]
     print()
     print("  %s" % title)
@@ -399,7 +405,12 @@ def compare(title, rows, ooo=True):
     for label, months in (("1-й", y1), ("2-й", y2)):
         rev = sum(m["rev"] for m in months)
         prof = rev - sum(m["costs"] for m in months)
-        u = tax_usn(months) + GD_INS_YEAR
+        # Расходы в строках посчитаны для АУСН (там травматизм 2 959 ₽ в год).
+        # Для УСН вместо него в расходах стояли бы взносы за директора, и
+        # прибыль была бы меньше — иначе налог УСН считался бы не с той базы.
+        usn_months = [dict(m, costs=m["costs"] - AUSN_INJURY_YEAR / 12 + GD_INS_YEAR / 12)
+                      for m in months]
+        u = tax_usn(usn_months) + GD_INS_YEAR
         a = tax_ausn(months) + AUSN_INJURY_YEAR
         mark = "АУСН" if a < u else "УСН"
         print("     %-8s %12s %12s %13s %13s %10s (%s)"
@@ -407,15 +418,23 @@ def compare(title, rows, ooo=True):
 
 
 compare("Только физлица, 990 ₽ (до безубыточности не доходим)",
-        run_both(corp_price=0, corp_start=99, ooo=True))
+        run_both(corp_price=0, corp_start=99))
 compare("Физлица + компании по 250 тыс ₽, без платного продвижения",
-        run_both(ooo=True, mkt=0))
+        run_both(mkt=0))
 compare("То же, но компании идут вдвое медленнее",
-        run_both(ooo=True, mkt=0, corp_start=6, corp_cap=2))
+        run_both(mkt=0, corp_start=6, corp_cap=2))
 compare("Физлица + компании по 400 тыс ₽",
-        run_both(ooo=True, mkt=0, corp_price=400000))
+        run_both(mkt=0, corp_price=400000))
 
 
+print()
+print()
+print("  ЧЕТВЁРТОЕ ОТЛИЧИЕ, КОТОРОЕ ПРОЯВИТСЯ ПОЗЖЕ: НДС. На АУСН его нет вовсе")
+print("  в пределах режима — до 60 млн ₽ дохода. На обычной УСН освобождение")
+print("  кончается на 20 млн ₽. В наших сценариях второй год даёт 6,5–10 млн,")
+print("  то есть порог ещё далеко; но на третьем году при продажах компаниям")
+print("  20 млн становятся достижимы, и тогда это отличие начнёт работать")
+print("  в пользу АУСН — ровно тогда, когда ставка 20%% работает против.")
 print()
 print("-" * 78)
 print("А ЧТО, ЕСЛИ ПЕРВЫЙ ГОД НА АУСН, А СО ВТОРОГО ПЕРЕЙТИ НА УСН")
@@ -424,9 +443,9 @@ print("Выйти с АУСН добровольно можно с начала 
 print("(уведомление до 31 декабря) — то есть такой план технически возможен.")
 print("ПРОВЕРИТЬ С БУХГАЛТЕРОМ порядок и сроки уведомления.")
 print()
-for title, rows in (("компании по 250 тыс ₽", run_both(ooo=True, mkt=0)),
-                    ("компании идут вдвое медленнее", run_both(ooo=True, mkt=0, corp_start=6, corp_cap=2)),
-                    ("только физлица", run_both(corp_price=0, corp_start=99, ooo=True))):
+for title, rows in (("компании по 250 тыс ₽", run_both(mkt=0)),
+                    ("компании идут вдвое медленнее", run_both(mkt=0, corp_start=6, corp_cap=2)),
+                    ("только физлица", run_both(corp_price=0, corp_start=99))):
     y1, y2 = rows[:12], rows[12:]
     usn = (tax_usn(y1) + GD_INS_YEAR) + (tax_usn(y2) + GD_INS_YEAR)
     ausn = (tax_ausn(y1) + AUSN_INJURY_YEAR) + (tax_ausn(y2) + AUSN_INJURY_YEAR)
