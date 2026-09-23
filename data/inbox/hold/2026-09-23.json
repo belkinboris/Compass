@@ -698,7 +698,7 @@
    ]
   },
   {
-   "draft_id": "d44078542",
+   "draft_id": "d53260483",
    "title": "FT: инвестор из США получил поддержку властей для покупки активов «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -728,7 +728,7 @@
    ]
   },
   {
-   "draft_id": "d43285292",
+   "draft_id": "d14150490",
    "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -769,7 +769,7 @@
    ]
   },
   {
-   "draft_id": "d43662358",
+   "draft_id": "d69870660",
    "title": "РСТИ планирует купить участок ГК «ПИК» на берегу Невы за 8 млрд рублей",
    "date": "2026-09-23",
    "src": [
@@ -808,7 +808,7 @@
    ]
   },
   {
-   "draft_id": "d80832950",
+   "draft_id": "d68547712",
    "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
    "date": "2026-09-23",
    "src": [
@@ -837,7 +837,7 @@
    ]
   },
   {
-   "draft_id": "d85758639",
+   "draft_id": "d35504746",
    "title": "В пермской Губахе продают хостел для VIP-персон. Фото",
    "date": "2026-09-23",
    "src": [
@@ -865,7 +865,7 @@
    ]
   },
   {
-   "draft_id": "d50629268",
+   "draft_id": "d19322407",
    "title": "Американский инвестор планирует выкупить активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -906,64 +906,7 @@
    ]
   },
   {
-   "draft_id": "d50775669",
-   "title": "Петербургский бизнес — второй в стране по инвестициям в резервное копирование",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-23_peterburgskij_biznes_vtoroj"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d39208423",
-   "title": "В России могут ввести сбор с авиабилетов на покупку новых самолётов",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/23/v-rossii-mogut-vvesti-sbor"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78075377",
+   "draft_id": "d59176140",
    "title": "«Юнирест» перестала продавать франшизы Rostic’s",
    "date": "2026-09-23",
    "src": [
@@ -993,16 +936,44 @@
    ]
   },
   {
-   "draft_id": "d15163054",
-   "title": "Новая компания за 120 млн купила долг Volkswagen AG на 16,9 млрд и теперь пытается развернуть продажу его российских активов АО «Камея», созданное 10 января 2025 года с капиталом 10 тыс. руб., купило ",
+   "draft_id": "d39176631",
+   "title": "Эксперт Лескин допустил, что Рижский вокзал опять не продадут в октябре",
    "date": "2026-09-23",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7411"
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28142045"
     ]
    ],
-   "sum": "16,9 млрд ₽",
+   "sum": "4 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69164140",
+   "title": "Besins Healthcare приобрела UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/09/23/besins-healthcare-priobrela-unid-manufacturing-eksperta-v-oblasti-tekhnologiy-dostavki-preparatov-dl%3Ferid%3D2VfnxxWhobi/"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -1010,26 +981,133 @@
      "kind": "closed",
      "date": "2026-09-23",
      "title": "Сделка завершена",
-     "note": "Новая компания за 120 млн купила долг Volkswagen AG на 16,9 млрд и теперь пытается развернуть продажу его российских активов АО «Камея», созданное 10 января 2025 года с капиталом 10 тыс. руб., купило у НАЗ (ex-ГАЗ) право требования к Volkswagen AG на 16,9…",
+     "note": "Besins Healthcare, глобальная фармацевтическая компания, специализирующаяся на гормональном здоровье, объявила о приобретении UniD Manufacturing – бельгийской компании по разработке и производству фармацевтических препаратов с более чем двадцатилетним…",
      "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7411"
+      "web:vademec.ru",
+      "https://vademec.ru/news/2026/09/23/besins-healthcare-priobrela-unid-manufacturing-eksperta-v-oblasti-tekhnologiy-dostavki-preparatov-dl%3Ferid%3D2VfnxxWhobi/"
      ]
     }
    ],
-   "buyer_name": "Новая компания",
-   "asset": "долг Volkswagen AG на 16,9 млрд и теперь пытается развернуть продажу его российских активов АО «Каме",
+   "buyer_name": "Besins Healthcare",
+   "asset": "UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
    "seller": null,
    "parsed_parties": {
-    "buyer": "Новая компания",
-    "asset": "долг Volkswagen AG на 16,9 млрд и теперь пытается развернуть продажу его российских активов АО «Каме",
+    "buyer": "Besins Healthcare",
+    "asset": "UniD Manufacturing – эксперта в области технологий доставки препаратов длительного действия",
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d29656815",
+   "title": "Покупку российских самолетов предложили компенсировать за счет пассажиров",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2171892/pokupku-rossiiskikh-samoletov-predlozhili-kompensirovat-za-schet-passazhirov-izi"
+    ]
+   ],
+   "sum": "250 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "В России рассматривают возможность введения дополнительного сбора для авиапассажиров, который может быть направлен на компенсацию расходов по лизингу и эксплуатации новых отечественных самолетов. Как передает газета «Коммерсант» , предполагается, что размер…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2171892/pokupku-rossiiskikh-samoletov-predlozhili-kompensirovat-za-schet-passazhirov-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22493498",
+   "title": "От 109 до 215 отделений: как МГКЛ выполняет планы после IPO",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/mgkl/blog/1354542.php"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "В декабре 2023 года МГКЛ вышла на биржу с планами расширять розничную сеть, развивать ресейл и увеличивать масштаб бизнеса. Посмотрим, каких результатов Группа достигла с того момента. 🔹 Расширили сеть сверх заявленного ориентира На момент IPO у Группы было…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/mgkl/blog/1354542.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37032924",
+   "title": "#газеты #экзит Российский медицинский сервис «Здоровье ру» привлек инвестиции от основателя инвесткомпании Continuum и бывшего владельца агрохолдингов «Промагро» и «Русский лен» Константина Клюки. Сог",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7748"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "#газеты #экзит Российский медицинский сервис «Здоровье ру»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "#газеты #экзит Российский медицинский сервис «Здоровье ру»",
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g076af76a (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
