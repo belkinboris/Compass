@@ -626,7 +626,7 @@
    ]
   },
   {
-   "draft_id": "d62599840",
+   "draft_id": "d29498880",
    "title": "FT: инвестор из США получил поддержку властей для покупки активов «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -656,7 +656,7 @@
    ]
   },
   {
-   "draft_id": "d68791950",
+   "draft_id": "d27120269",
    "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -697,7 +697,7 @@
    ]
   },
   {
-   "draft_id": "d50911439",
+   "draft_id": "d10353028",
    "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
    "date": "2026-09-23",
    "src": [
@@ -726,7 +726,7 @@
    ]
   },
   {
-   "draft_id": "d52477701",
+   "draft_id": "d26001948",
    "title": "В пермской Губахе продают хостел для VIP-персон. Фото",
    "date": "2026-09-23",
    "src": [
@@ -754,7 +754,7 @@
    ]
   },
   {
-   "draft_id": "d20794087",
+   "draft_id": "d27955144",
    "title": "Американский инвестор планирует выкупить активы «Лукойла»",
    "date": "2026-09-23",
    "src": [
@@ -795,7 +795,7 @@
    ]
   },
   {
-   "draft_id": "d42711616",
+   "draft_id": "d29576624",
    "title": "«Юнирест» перестала продавать франшизы Rostic’s",
    "date": "2026-09-23",
    "src": [
@@ -825,7 +825,7 @@
    ]
   },
   {
-   "draft_id": "d30024497",
+   "draft_id": "d27721486",
    "title": "FT узнала о планах миллиардера Тодда Боэли купить зарубежные активы «ЛУКОЙЛа»",
    "date": "2026-09-23",
    "src": [
@@ -866,7 +866,7 @@
    ]
   },
   {
-   "draft_id": "d69917989",
+   "draft_id": "d68194694",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -907,7 +907,7 @@
    ]
   },
   {
-   "draft_id": "d84334094",
+   "draft_id": "d38447689",
    "title": "В Челябинске выставили на продажу квартиру из дела Струкова, которую за копейки арендовал экс-руководитель СК",
    "date": "2026-09-23",
    "src": [
@@ -935,7 +935,7 @@
    ]
   },
   {
-   "draft_id": "d44020554",
+   "draft_id": "d46790991",
    "title": "Акции тюменского завода «Бенат» начали продавать на Авито",
    "date": "2026-09-23",
    "src": [
@@ -957,6 +957,90 @@
     "seller": null
    },
    "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90347581",
+   "title": "Графика. Как мошенники обманывают россиян с продажей онлайн-курсов",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2172281/video/grafika-kak-moshenniki-obmanyvaiut-rossiian-s-prodazhei-onlain-kursov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49537311",
+   "title": "Новый iPhone продается в РФ хуже прошлогоднего",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2172274/video/novyi-iphone-prodaetsia-v-rf-khuzhe-proshlogodnego"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51238231",
+   "title": "Текущий год для российского рынка IPO уже фактически потерян",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/freedom_finance_global/blog/1354761.php"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
