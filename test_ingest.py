@@ -6534,3 +6534,61 @@ def test_a_transfer_to_state_management_is_recognised_in_the_active_voice_too():
                   "В компании введено внешнее управление по заявлению кредитора",
                   "Внешнее управление в «Тракторных заводах» продлено до 2027 года"):
         assert not classify.looks_like_deal(title, ""), title
+
+
+def test_a_post_never_shows_a_stale_report_or_a_holding_companys_rsbu():
+    """Обе находки владельца 23 сентября 2026 на посте «Лента»/«Мария-Ра».
+
+    В консоль ушла строка «Финансы покупателя, 2021 год: Выручка 855 тыс. ₽ ·
+    Чистая прибыль 1,2 млрд ₽» — про сеть гипермаркетов с выручкой больше
+    триллиона. Две разные причины в одной строке: брался последний ОТЧЁТ,
+    какой есть (а он за 2021 год), и это была РСБУ головной структуры группы,
+    где выручки почти нет, а прибыль — дивиденды дочерних компаний.
+    """
+    import datetime
+    today = datetime.date(2026, 9, 23)
+    holding = [{"year": 2021, "revenue_rub": 855_000, "net_profit_rub": 1_200_000_000}]
+    assert format_post.fin_summary(holding, today=today) is None
+
+    # каждая причина по отдельности тоже отказывает
+    fresh_holding = [{"year": 2025, "revenue_rub": 855_000, "net_profit_rub": 1_200_000_000}]
+    assert format_post.fin_summary(fresh_holding, today=today) is None
+    stale_normal = [{"year": 2023, "revenue_rub": 100_000_000_000, "net_profit_rub": 2_000_000_000}]
+    assert format_post.fin_summary(stale_normal, today=today) is None
+
+    # 2024 — та граница, которую владелец назвал вслух: «2024 год максимум»
+    ok_2024 = [{"year": 2024, "revenue_rub": 100_000_000_000, "net_profit_rub": 2_000_000_000}]
+    assert format_post.fin_summary(ok_2024, today=today)[0] == 2024
+
+    # настоящие показатели «Марии-Ра» за 2025-й проходят целиком
+    maria = [{"year": 2025, "revenue_rub": 127_500_000_000, "net_profit_rub": 2_600_000_000}]
+    year, text = format_post.fin_summary(maria, today=today)
+    assert year == 2025 and "127,5 млрд ₽" in text
+
+
+def test_a_nine_day_old_draft_no_longer_swallows_a_fresh_update():
+    """Дедупликатор партии обязан смотреть на ВОЗРАСТ, а не только на имена.
+
+    23 сентября 2026 приток молча проглотил материальное обновление: черновик
+    «сотрудникам объявили о смене собственника» («Лента»/«Мария-Ра») был
+    помечен вторым изданием ДЕВЯТИДНЕВНОГО черновика о переговорах — те же
+    имена в кавычках, но другое событие. Карточку собрали руками, а владелец
+    увидел новость на девять дней позже рынка.
+
+    Правило писалось для «одной новости в двух изданиях за сутки», но в пул
+    попадают черновики всех накопленных дней, и возраст никто не проверял.
+    """
+    import promote
+    import match as matcher
+
+    def twin_of(new_date, old_date):
+        names_old = promote.batch_names_of('«Лента» ведёт переговоры о покупке «Мария-Ра»')
+        names_new = promote.batch_names_of('СМИ сообщили о продаже магазинов «Мария-Ра» сети «Лента»')
+        return (matcher.quoted_common(names_new, names_old)
+                and matcher.days_between(new_date, old_date) <= promote.DUP_IN_BATCH_DAYS)
+
+    # имена совпадают в обоих случаях — решает только возраст
+    assert not twin_of('2026-09-23', '2026-09-14'), 'девятидневный черновик снова глотает свежий'
+    assert twin_of('2026-09-23', '2026-09-23'), 'одна новость того же дня должна склеиваться'
+    assert twin_of('2026-09-23', '2026-09-22'), 'издания пишут об одном событии не строго в один день'
+    assert not twin_of('2026-09-23', '2026-09-19')

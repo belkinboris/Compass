@@ -496,18 +496,44 @@ def _yoy(new, old):
     return ' (%s%s%% г/г)' % (sign, _ru1(abs(pct)))
 
 
-def fin_summary(bo_rows):
+MAX_REPORT_AGE_YEARS = 2
+
+
+def fin_summary(bo_rows, today=None):
     """(год, «Выручка N ₽ (+X% г/г) · Чистая прибыль M ₽») по ПОСЛЕДНЕМУ году
     из `bo_rows` (результат `fns_client.normalize_bo()`), где известна выручка
     или чистая прибыль — `None`, если данных нет вовсе. Чистая, без сети:
     сам факт живого запроса к ФНС — забота вызывающего (П7-9), а не этой
-    функции, иначе render() перестал бы быть тестируемым без сети."""
+    функции, иначе render() перестал бы быть тестируемым без сети.
+
+    ДВА ОТКАЗА, ОБА НАЙДЕНЫ ВЛАДЕЛЬЦЕМ 23 сентября 2026 на одном посте
+    («Лента» / «Мария-Ра»), где строка читалась так:
+    «Финансы покупателя, 2021 год: Выручка 855 тыс. ₽ · Чистая прибыль 1,2 млрд ₽».
+
+    1. СТАРЫЙ ОТЧЁТ НЕ ПОКАЗЫВАЕМ. Брался просто последний год, какой есть, —
+       в посте 2026 года это дало 2021-й. Порог тот же, что у сайта
+       (`main.FNS_REPORT_MAX_AGE_YEARS`): отчёт старше двух лет не показывается
+       нигде, и пост не исключение.
+    2. ПРИБЫЛЬ БОЛЬШЕ ВЫРУЧКИ — ЭТО НЕ ОПЕРАЦИОННАЯ КОМПАНИЯ. У головной
+       структуры группы в РСБУ выручки почти нет, а прибыль есть: это
+       дивиденды дочерних компаний, а не продажи. Читателю такая строка
+       говорит неправду о бизнесе («выручка 855 тыс ₽» у сети гипермаркетов),
+       и показывать её нельзя — лучше не показать ничего. Родня уже
+       записанного урока про мультипликаторы: «в российских открытых данных
+       отчётность сдаётся по ЮРЛИЦУ, а сделки заключаются по ГРУППЕ».
+    """
+    import datetime as _dt
+    year_now = (today or _dt.date.today()).year
     rows = [r for r in (bo_rows or [])
             if r.get('revenue_rub') is not None or r.get('net_profit_rub') is not None]
+    rows = [r for r in rows if int(r.get('year') or 0) >= year_now - MAX_REPORT_AGE_YEARS]
     if not rows:
         return None
     rows = sorted(rows, key=lambda r: r['year'])
     latest = rows[-1]
+    rev, prof = latest.get('revenue_rub'), latest.get('net_profit_rub')
+    if rev is not None and prof is not None and prof > rev:
+        return None
     prior = next((r for r in rows[:-1] if r['year'] == latest['year'] - 1), None)
     parts = []
     if latest.get('revenue_rub') is not None:
