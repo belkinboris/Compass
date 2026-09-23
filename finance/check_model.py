@@ -26,15 +26,23 @@ def xlround(x):
 # Три сценария — три цены. Числа те же, что в build_model.py (лист «Допущения»).
 # Подписка для человека ОДНА (990 ₽). Три сценария — три цены корпоративного
 # тарифа; у каждой свой темп прихода клиентов: дешевле — решают быстрее.
+# Оба тарифа названы владельцем: One 990 ₽ в месяц, Pro 45 000 ₽ в год.
+# Свободной осталась одна величина — сколько Pro приходит в месяц; её и
+# разводят три сценария.
 HUMAN = dict(price_m=990, price_y=9900, share_y=0.22, churn=0.10, refund=0.05,
              ceiling=25000, pay_share=0.035, reg_org0=25, reg_growth=0.10,
-             cpr=800, conv=0.07, conv_lag=2, ai_q=12, ai_cost_q=1.0)
+             cpr=800, conv=0.07, conv_lag=2, ai_q=12, ai_cost_q=1.0,
+             corp_price=45000, corp_start=4)
 SCEN = {
-    "120 тыс": dict(HUMAN, corp_price=120000, corp_every=2.0, corp_start=4),
-    "200 тыс": dict(HUMAN, corp_price=200000, corp_every=2.5, corp_start=4),
-    "250 тыс": dict(HUMAN, corp_price=250000, corp_every=3.0, corp_start=5),
+    "0,5 в месяц": dict(HUMAN, corp_per_month=0.5),
+    "1 в месяц":   dict(HUMAN, corp_per_month=1.0),
+    "2 в месяц":   dict(HUMAN, corp_per_month=2.0),
 }
-CORP_CHURN, CORP_VAR = 0.20, 1500
+CORP_CHURN = 0.20
+# 400 ₽, а не 1 500: прежняя величина писалась под тариф за 200 тыс ₽ и при
+# 45 тыс съедала бы 40% чека. Считаем от измеренного — команда из трёх
+# человек по 20 вопросов ассистенту в месяц это 60 вопросов по 1 ₽.
+CORP_VAR = 400
 
 # ООО + АУСН (решение владельца 23 сентября): регистратора нет, учёт проще.
 FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, office=1908,
@@ -69,7 +77,7 @@ def unit(p):
     corp_contrib = p["corp_price"] / 12 - CORP_VAR
     return dict(arpu=arpu, contrib=contrib, ltv=ltv, cac=cac,
                 corp_contrib=corp_contrib,
-                corp_eq=round(corp_contrib / contrib) if contrib > 0 else None,
+                corp_eq=(corp_contrib / contrib) if contrib > 0 else None,
                 be_corp=-(-fixed // corp_contrib) if corp_contrib > 0 else None,
                 ratio=ltv / cac, life=1 / p["churn"],
                 payback=cac / contrib if contrib > 0 else None,
@@ -102,7 +110,7 @@ def run(name, p):
         paid_hist.append(paid)
 
         m = i + 1
-        corp_new = 1 if (m >= p["corp_start"] and (m - p["corp_start"]) % p["corp_every"] < 1) else 0
+        corp_new = p["corp_per_month"] if m >= p["corp_start"] else 0.0
         corp = corp * (1 - CORP_CHURN / 12) + corp_new
         corp_rev = corp * p["corp_price"] / 12
 
@@ -149,10 +157,10 @@ lines = [("Средний платёж в месяц", "arpu", money),
          ("Окупаемость привлечения, месяцев", "payback", lambda v: "%.1f" % v),
          ("Нужная цена регистрации (окупаемость ×3)", "cpr_ok", money),
          ("Постоянные расходы в месяц", "fixed", money),
-         ("Вклад одной компании в месяц", "corp_contrib", money),
-         ("Одна компания = столько подписчиков", "corp_eq", lambda v: "%d" % v),
-         ("ПОРОГ: только людьми, подписчиков", "be", lambda v: "%d" % v),
-         ("ПОРОГ: только компаниями, клиентов", "be_corp", lambda v: "%d" % v),
+         ("Вклад одного Pro в месяц", "corp_contrib", money),
+         ("Один Pro = столько подписчиков One", "corp_eq", lambda v: "%.1f" % v),
+         ("ПОРОГ: только One, подписчиков", "be", lambda v: "%d" % v),
+         ("ПОРОГ: только Pro, клиентов", "be_corp", lambda v: "%d" % v),
          ("  то же с разработчиком за 50 тыс ₽", "be_dev1", lambda v: "%d" % v),
          ("  то же с разработчиком за 100 тыс ₽", "be_dev2", lambda v: "%d" % v),
          ("60 млн ₽ в год (предел АУСН) — это подписчиков", "vat_subs", lambda v: "%d" % v)]
@@ -163,10 +171,10 @@ for title, key, fmt in lines:
 print()
 print("ДВА ГОДА")
 res = {n: run(n, p) for n, p in SCEN.items()}
-out = [("Платящих людей через 12 месяцев", lambda r: "%d" % round(r[11]["paid"])),
-       ("Платящих людей через 24 месяца", lambda r: "%d" % round(r[23]["paid"])),
-       ("Компаний через 24 месяца", lambda r: "%.1f" % r[23]["corp"]),
-       ("Выручка от компаний за 24 мес", lambda r: money(sum(x["corp_rev"] for x in r))),
+out = [("Платящих One через 12 месяцев", lambda r: "%d" % round(r[11]["paid"])),
+       ("Платящих One через 24 месяца", lambda r: "%d" % round(r[23]["paid"])),
+       ("Клиентов Pro через 24 месяца", lambda r: "%.1f" % r[23]["corp"]),
+       ("Выручка от Pro за 24 месяца", lambda r: money(sum(x["corp_rev"] for x in r))),
        ("Регистраций всего за 24 месяца", lambda r: "%d" % sum(x["reg"] for x in r)),
        ("Выручка за 12 месяцев", lambda r: money(sum(x["rev"] for x in r[:12]))),
        ("Выручка за 24 месяца", lambda r: money(sum(x["rev"] for x in r))),
@@ -212,7 +220,7 @@ print("Каждая строка: меняем ОДНО допущение и с
 print("безубыточности и доходим ли до него за 24 месяца.")
 print()
 
-BASE = "200 тыс"
+BASE = "1 в месяц"
 
 
 def variant(title, scen=None, fix=None, no_dev=False):
@@ -251,14 +259,14 @@ variant("органика стартует с 40 в месяц вместо 25",
 variant("всё вместе: без продвижения, без разработчика,\n  отток 7%, конверсия 10%, органика 40",
         scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0}, no_dev=True)
 print()
-print("ОТДЕЛЬНО — ПРО КОРПОРАТИВНУЮ ЦЕНУ. Вывод «200 и 250 почти равны» держится")
-print("на моём допущении, что дороже тариф — медленнее решение. Если это неверно")
-print("и темп один и тот же, картина другая:")
-for price in (120000, 200000, 250000):
-    p2 = dict(SCEN["200 тыс"]); p2["corp_price"] = price
-    _, rr = run("200 тыс", p2)
+print("ОТДЕЛЬНО — ЧЕГО СТОИТ ЦЕНА PRO. Если бы темп продаж не зависел от цены,")
+print("более дорогой тариф выигрывал бы просто так. Вот во сколько обходится")
+print("решение поставить 45 тыс, а не больше:")
+for price in (45000, 90000, 150000):
+    p2 = dict(SCEN["1 в месяц"]); p2["corp_price"] = price
+    _, rr = run("1 в месяц", p2)
     m = next((x["m"] for x in rr if x["net"] > 0), None)
-    print("  %s в год при ОДНОМ темпе (1 клиент в 2,5 месяца): выручка за 24 мес %s, "
+    print("  Pro %s в год при ОДНОМ темпе (1 клиент в месяц): выручка за 24 мес %s, "
           "в плюс %s" % (money(price), money(sum(x["rev"] for x in rr)),
                          ("с %d-го месяца" % m) if m else "не выходим"))
 print()
@@ -268,3 +276,42 @@ variant("без платного продвижения", fix={"mkt": 0})
 variant("без продвижения и без подписки Claude", fix={"mkt": 0, "claude_sub": 0})
 variant("то же и отток 7%, конверсия 10%, органика 40",
         scen={"churn": 0.07, "conv": 0.10, "reg_org0": 40}, fix={"mkt": 0})
+
+
+# ------------------------------------------------- сколько Pro нужно в месяц
+print()
+print("=" * 78)
+print("СКОЛЬКО PRO В МЕСЯЦ НУЖНО, ЧТОБЫ ВЫЙТИ В ПЛЮС ЗА 24 МЕСЯЦА")
+print("=" * 78)
+print("Главный вопрос к цене 45 000 ₽: один договор Pro стоит 3,7 подписки One,")
+print("то есть это не рычаг, а второй ручеёк той же ширины. Значит, всё решает")
+print("темп — и вот какой темп нужен.")
+print()
+print("С разработчиком по лесенке 0 → 50 → 100:")
+for _pace in (1, 2, 3, 4, 5):
+    _p = dict(SCEN["1 в месяц"]); _p["corp_per_month"] = float(_pace)
+    _, _rows = run("1 в месяц", _p)
+    _m = next((x["m"] for x in _rows if x["net"] > 0), None)
+    print("  %d Pro в месяц -> к 24-му %5.1f клиентов, выручка %10s/мес, в плюс: %s"
+          % (_pace, _rows[-1]["corp"], money(_rows[-1]["rev"]),
+             ("%d-й месяц" % _m) if _m else "не выходим"))
+
+print()
+print("Без разработчика и без платного продвижения:")
+_fix_was, _d1, _d2 = dict(FIX), DEV1_COST, DEV2_COST
+FIX = dict(FIX); FIX["mkt"] = 0
+DEV1_COST = DEV2_COST = 0
+for _pace in (0.5, 1, 2, 3):
+    _p = dict(SCEN["1 в месяц"]); _p["corp_per_month"] = float(_pace)
+    _, _rows = run("1 в месяц", _p)
+    _m = next((x["m"] for x in _rows if x["net"] > 0), None)
+    print("  %.1f Pro в месяц -> к 24-му %5.1f клиентов, в плюс: %s"
+          % (_pace, _rows[-1]["corp"], ("%d-й месяц" % _m) if _m else "не выходим"))
+FIX, DEV1_COST, DEV2_COST = _fix_was, _d1, _d2
+
+print()
+print("  ВЫВОД. С разработчиком нужно 3 Pro в месяц — это 36 договоров за год")
+print("  при тарифе, который продаётся сам. Без разработчика и без платного")
+print("  продвижения хватает 0,5 в месяц, и плюс приходит на 21-м месяце.")
+print("  То есть при цене 45 тыс Pro не оплачивает разработчика — он оплачивает")
+print("  скромную команду. Это не довод против цены, это её следствие.")
