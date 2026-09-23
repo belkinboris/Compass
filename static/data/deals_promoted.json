@@ -216265,6 +216265,144 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g4d017d5c",
+   "date": "2026-09-23",
+   "title": "Компания «Альфа Строй» купила этаж в бизнес-центре Omni Tower в Москве",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260923/stroj-2119806492.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "\"Покупателем выступила строительная компания, которая приобрела помещение под собственный офис\", - говорится в сообщении.",
+    "context": "Сумма сделки не раскрывается. В сообщении застройщика отмечается, что в бизнес-центре общей площадью около 67 тысяч квадратных метров, сдача которого намечена на третий квартал 2028 года, уже распродано 45% площадей.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Альфа Строй»",
+   "asset": "этаж в бизнес-центре Omni Tower в Москве",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-23",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260923/stroj-2119806492.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Альфа Строй»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260923/stroj-2119806492.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "этаж в бизнес-центре Omni Tower в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260923/stroj-2119806492.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Sense",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260923/stroj-2119806492.html"
+     }
+    ]
+   },
+   "seller": "Sense",
+   "reviewed": "2026-09-23",
+   "accepted": "2026-09-23",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "этаж в строящемся здании — помещение, а не юрлицо, профиля быть не может",
+     "buyer": "«Альфа Строй» — распространённое название: доп. поиск (шаг 9а) нашёл минимум 6 разных юрлиц с этим или близким именем в разных регионах и три в одной Москве, ни один источник не называет ИНН покупателя именно в этой сделке — заводить профиль по одному совпадению имени значит рисковать привязать не то юрлицо",
+     "seller": "Sense — известен только как бренд девелоперского проекта, юрлицо не названо ни в одном найденном источнике (ни на сайте проекта, ни в вебе)"
+    },
+    "notes": "Тонкий единственный источник (РИА Недвижимость): этаж 1,2 тыс. кв. м в строящемся БЦ A-класса Omni Tower, сумма не раскрыта, покупка под собственный офис. Доп. поиск источников (шаг 9а) не добавил ничего по существу сделки — только нашёл, что «Альфа Строй» слишком распространённое название для привязки профиля без ИНН, и что юрлицо девелопера Sense нигде не называется. Приёмкой почищена пресс-атрибуция в eco.context («Как уточнил РИА Недвижимость брокер сделки…» — самоссылка источника, имя покупателя и так в buyer_name)."
+   },
+   "post_preview": "<b>Компания «Альфа Строй» купила этаж в бизнес-центре Omni Tower в Москве</b>\n\n<b>Продавец:</b> Sense\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20260923/stroj-2119806492.html\">РИА Недвижимость</a>\n\n#недвижимость #MA",
+   "added": "2026-09-23",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "0ac3f87a3a87"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-23",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "5d92b95534d4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d732169d546d"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
