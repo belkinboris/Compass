@@ -715,6 +715,9 @@ def to_card(draft, deal_id):
     return card
 
 
+DUP_IN_BATCH_DAYS = 2
+
+
 def main(write):
     data = json.load(open(DATA, encoding='utf-8'))
     # ОЧЕРЕДЬ МОДЕРАЦИИ — ЭТО ТОЖЕ УЖЕ ОПИСАННЫЕ СДЕЛКИ. Прошедшая ворота
@@ -816,14 +819,28 @@ def main(write):
             # названием в кавычках помечается дублем и в группу не идёт, но в
             # файле остаётся: если первый отбросят по ошибке, второй можно
             # поднять руками.
-            twin = next((t for t, names in held_names
-                         if matcher.quoted_common(batch_names_of(draft.get('title')), names)), None)
+            # ВОЗРАСТ ОБЯЗАТЕЛЕН. Правило выше рассчитано на «одну новость в двух
+            # изданиях за сутки», но в пул попадают черновики ВСЕХ накопленных
+            # дней (DRAFTS читается целиком), и проверка по одним только именам
+            # в кавычках схлопывала свежую новость с давней. 23 сентября 2026
+            # так молча пропало материальное обновление: черновик «сотрудникам
+            # объявили о смене собственника» («Лента»/«Мария-Ра») был признан
+            # вторым изданием ДЕВЯТИДНЕВНОГО черновика о переговорах — те же
+            # имена в кавычках, но другое событие. Карточку пришлось собирать
+            # руками, и владелец увидел новость на девять дней позже рынка.
+            # Двое суток — запас на то, что издания пишут об одном событии не
+            # обязательно в один день; всё, что старше, событием уже не
+            # совпадает и обязано идти своей дорогой.
+            twin = next((t for t, names, when in held_names
+                         if matcher.quoted_common(batch_names_of(draft.get('title')), names)
+                         and matcher.days_between(draft.get('date'), when) <= DUP_IN_BATCH_DAYS), None)
             if twin:
                 hold = hold + ['та же новость, что «%s» — второе издание, в группу не шлём'
                                % str(twin)[:60]]
                 draft = dict(draft, dup_in_batch=True)
             else:
-                held_names.append((draft.get('title'), batch_names_of(draft.get('title'))))
+                held_names.append((draft.get('title'), batch_names_of(draft.get('title')),
+                                   draft.get('date')))
             held.append((draft, hold))
         else:
             # Внутри одной партии общего названия в кавычках ДОСТАТОЧНО, чтобы
@@ -833,14 +850,16 @@ def main(write):
             # заголовка про «Персей» — это одна новость в двух изданиях, а не
             # две сделки. Первый проходит, остальные ждут человека: выбрать
             # формулировку — его дело, а не наше.
-            same = [t for t, names in batch_names
-                    if matcher.quoted_common(matcher.quoted(draft.get('title')), names)]
+            same = [t for t, names, when in batch_names
+                    if matcher.quoted_common(matcher.quoted(draft.get('title')), names)
+                    and matcher.days_between(draft.get('date'), when) <= DUP_IN_BATCH_DAYS]
             if same:
                 held.append((draft, ['в этой же партии уже есть карточка про то же название: «%s» — '
                                      'скорее всего, одна сделка в двух изданиях' % str(same[0])[:60]]))
                 continue
             passed.append((draft, []))
-            batch_names.append((draft.get('title'), matcher.quoted(draft.get('title'))))
+            batch_names.append((draft.get('title'), matcher.quoted(draft.get('title')),
+                                draft.get('date')))
             admitted.append(dict(draft, id='pending-%d' % len(passed)))
             idx = matcher.index_base(data['deals'] + queued + admitted,
                                      data.get('companies'), data.get('match_keys'))
