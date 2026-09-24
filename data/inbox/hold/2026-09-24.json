@@ -942,7 +942,7 @@
    ]
   },
   {
-   "draft_id": "d30208330",
+   "draft_id": "d49643777",
    "title": "Роковую квартиру экс-главы челябинского СК продают с торгов. Фото",
    "date": "2026-09-24",
    "src": [
@@ -970,7 +970,7 @@
    ]
   },
   {
-   "draft_id": "d52903919",
+   "draft_id": "d47928360",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -998,7 +998,7 @@
    ]
   },
   {
-   "draft_id": "d50113401",
+   "draft_id": "d81633161",
    "title": "В Белоруссии на торгах продают дворцовый комплекс за 1,2 тыс. российских рублей",
    "date": "2026-09-24",
    "src": [
@@ -1027,41 +1027,13 @@
    ]
   },
   {
-   "draft_id": "d60835875",
-   "title": "Ленобласть обошла Петербург по продажам жилья в новостройках",
+   "draft_id": "d29723689",
+   "title": "Минфин предложил взимать НДС 22% при онлайн-покупке иностранных товаров",
    "date": "2026-09-24",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/24/lenoblast-oboshla-peterburg"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89897383",
-   "title": "Минцифры предложило отказаться от субдилерской схемы продажи сим-карт",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/mintsifra-873622698.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8973871"
     ]
    ],
    "sum": null,
@@ -1083,17 +1055,17 @@
    ]
   },
   {
-   "draft_id": "d32880350",
-   "title": "Статистика по IPO. Неутешительные выводы",
+   "draft_id": "d28316592",
+   "title": "Костин заявил о серьезном приросте китайских инвестиций в Россию",
    "date": "2026-09-24",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354946.php"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/24/1231391-o-priroste-kitaiskih-investitsii"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1111,30 +1083,19 @@
    ]
   },
   {
-   "draft_id": "d48635970",
-   "title": "Утренний обзор за 24 сентября: срыв сделки по продаже «Ашана» и проблемы ВТБ с переводом на счет суда Англии",
+   "draft_id": "d32019192",
+   "title": "«Скорость доставки — главный актив сезона»: как восстановить продажи на маркетплейсах в 2026 году",
    "date": "2026-09-24",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265949/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/understand/skorost-dostavki-glavnyj-aktiv-sezona-kak-vosstanovit-prodazhi-na-marketplejsah-v-2026-godu/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Согласование получено",
-   "events": [
-    {
-     "kind": "approval",
-     "date": "2026-09-24",
-     "title": "Согласование получено",
-     "note": "Высокий суд Англии и Уэльса снял всемирный арест с активов казахстанского бизнесмена Тимура Куанышева по иску ВТБ, поскольку истец не смог внести обеспечение из-за санкций. Источники рассказали, что летом французская группа Auchan вела переговоры о продаже…",
-     "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/265949/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1146,8 +1107,91 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2daf32fe (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53797788",
+   "title": "Минфин предложил ввести НДС для иностранных товаров, приобретенных онлайн",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/minfin-2119942738.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70468514",
+   "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053130371"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20555711",
+   "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053130314"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

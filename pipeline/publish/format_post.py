@@ -1025,7 +1025,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
             if when:
                 status_line += ' · %s' % esc(when)
         card.append(status_line)
-    if has(deal.get('ind')):
+    if has(deal.get('ind')) and deal['ind'] != 'Не определена':
         card.append('%s %s' % (_lab('Отрасль'), esc(deal['ind'])))
     if card:
         lines.append('')
