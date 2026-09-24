@@ -600,45 +600,6 @@
    ]
   },
   {
-   "draft_id": "d82845901",
-   "title": "Американский инвестор планирует выкупить активы «Лукойла»",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053129921"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-23",
-     "title": "Переговоры",
-     "note": "Американский инвестор Тодд Боули заручился поддержкой властей США и представителей стран Персидского залива для возможной покупки иностранных активов «Лукойла». Об этом сообщают СМИ.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053129921"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d13520554",
    "title": "«Юнирест» перестала продавать франшизы Rostic’s",
    "date": "2026-09-23",
@@ -703,10 +664,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Американский инвестор планирует выкупить активы «Лукойла»» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -836,7 +795,7 @@
    ]
   },
   {
-   "draft_id": "d61927925",
+   "draft_id": "d57595643",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -864,7 +823,7 @@
    ]
   },
   {
-   "draft_id": "d86859742",
+   "draft_id": "d51560682",
    "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
@@ -892,7 +851,7 @@
    ]
   },
   {
-   "draft_id": "d31273743",
+   "draft_id": "d82887924",
    "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
    "date": "2026-09-24",
    "src": [
@@ -920,7 +879,7 @@
    ]
   },
   {
-   "draft_id": "d60504252",
+   "draft_id": "d43752452",
    "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
    "date": "2026-09-24",
    "src": [
@@ -948,7 +907,7 @@
    ]
   },
   {
-   "draft_id": "d73672231",
+   "draft_id": "d31520803",
    "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
    "date": "2026-09-24",
    "src": [
@@ -977,204 +936,7 @@
    ]
   },
   {
-   "draft_id": "d72538617",
-   "title": "Минэкономразвития ухудшило прогноз снижения инвестиций в РФ в 2026 г. до 5,4%",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1118247"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60099619",
-   "title": "Прогноз МЭР по инвестициям учитывает более высокую траекторию ставки в прогнозе ЦБ",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28147559"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69130119",
-   "title": "МЭР в прогнозе закладывает возвращение инвестиций к росту в 2028-2029 годах до 2,5% и 3%",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28147557"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11251618",
-   "title": "В Петербурге продадут вагон, который использовали на обкатке шестой линии метро",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/24/v-peterburge-prodadut-vagon"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68710653",
-   "title": "McDonald’s начал продавать рекламу на экранах в ресторанах",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/mcdonald-s-nachal-prodavat-reklamu-na-ekranah-v-restoranah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d73223120",
-   "title": "МЭР пересмотрело прогноз снижения инвестиций в основной капитал",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/minekonomrazvitiya-873648314.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93866532",
-   "title": "МЭР ожидает ускорения роста инвестиций в основной капитал в 2028–2029 годах",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/reshetnikov-873647599.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71013606",
+   "draft_id": "d23688137",
    "title": "«Дом.РФ» выставил на торги Мариинский приют в Саратове",
    "date": "2026-09-24",
    "src": [
@@ -1205,13 +967,13 @@
    ]
   },
   {
-   "draft_id": "d91907285",
-   "title": "Прокуратура намерена национализировать оставшиеся активы экс-депутата Гайсина",
+   "draft_id": "d31770030",
+   "title": "Глава ВТБ сообщил о переносе допэмиссии на октябрь",
    "date": "2026-09-24",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265959/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8974356"
     ]
    ],
    "sum": null,
@@ -1222,10 +984,10 @@
      "kind": "negotiations",
      "date": "2026-09-24",
      "title": "Переговоры",
-     "note": "Среди активов, которые хотят забрать в доход государства, есть известная уральская сеть аптек.",
+     "note": "ВТБ перенес проведение допэмиссии для сделки с группой Wildberries-Russ (РВБ) на октябрь, сообщил журналистам глава банка Андрей Костин в кулуарах XXIII Международного банковского форума. По его словам, стратегические планы ВТБ по сотрудничеству с Wildberries…",
      "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/265959/"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8974356"
      ]
     }
    ],
@@ -1244,30 +1006,19 @@
    ]
   },
   {
-   "draft_id": "d21470642",
-   "title": "Сделка по продаже российского Auchan сорвалась после указа о временном управлении",
+   "draft_id": "d25836817",
+   "title": "МЭР ждет снижения инвестиций в основной капитал на 5,4%",
    "date": "2026-09-24",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/sdelka-po-prodazhe-rossijskogo-auchan-sorvalas-posle-ukaza-o-vremennom-upravlenii/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28147787"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-24",
-     "title": "Переговоры",
-     "note": "Французская Auchan летом договорилась о продаже российской «дочки» инвестиционной компании «Кама Капитал». Сообщение Сделка по продаже российского Auchan сорвалась после указа о временном управлении появились сначала на RETAILER.ru .",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/sdelka-po-prodazhe-rossijskogo-auchan-sorvalas-posle-ukaza-o-vremennom-upravlenii/"
-     ]
-    }
-   ],
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
