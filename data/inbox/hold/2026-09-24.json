@@ -877,7 +877,7 @@
    ]
   },
   {
-   "draft_id": "d72728572",
+   "draft_id": "d50977101",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -905,7 +905,7 @@
    ]
   },
   {
-   "draft_id": "d23412738",
+   "draft_id": "d17433380",
    "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
@@ -933,7 +933,7 @@
    ]
   },
   {
-   "draft_id": "d20292041",
+   "draft_id": "d77562790",
    "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
    "date": "2026-09-24",
    "src": [
@@ -961,7 +961,7 @@
    ]
   },
   {
-   "draft_id": "d37084367",
+   "draft_id": "d37630323",
    "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
    "date": "2026-09-24",
    "src": [
@@ -989,158 +989,7 @@
    ]
   },
   {
-   "draft_id": "d45923752",
-   "title": "ВТБ может приобрести 5% акций НСПК в октябре",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8974042"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-24",
-     "title": "Переговоры",
-     "note": "ВТБ намерен приобрести 5% акций Национальной системы платежных карт (НСПК, оператор платежной системы «Мир»). Об этом сообщил глава банка Андрей Костин на Международном банковском форуме.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8974042"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62744446",
-   "title": "Глава ВТБ Костин подтвердил перенос допэмиссии на октябрь",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ab4faf80744cfbcfc19fb0d"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73038476",
-   "title": "Минфин предложил включить доходы от вкладов и инвестиций в общую базу НДФЛ",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/minfin-predlozhil-vklyuchit-dohody-ot-vkladov-i-investitsij-v-obshhuyu-bazu-ndfl/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59152538",
-   "title": "Костин отметил серьезный прирост китайских инвестиций в Россию",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/kostin-873640282.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74893284",
-   "title": "Продажи новых Lamborghini в России идут на рекорд",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/prodazhi-873639395.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10412500",
+   "draft_id": "d34669789",
    "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
    "date": "2026-09-24",
    "src": [
@@ -1169,52 +1018,13 @@
    ]
   },
   {
-   "draft_id": "d63193520",
-   "title": "Auchan пытался продать российский бизнес — сделка сорвалась после введения временного управления",
+   "draft_id": "d84389514",
+   "title": "Пенсионные накопления разрешат использовать для покупки жилья",
    "date": "2026-09-24",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/auchan-pytalsya-prodat-rossijskij-biznes-sdelka-sorvalas-posle-vvedeniya-vremennogo-upravleniya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-24",
-     "title": "Переговоры",
-     "note": "Французская группа Auchan летом договорилась о продаже российского бизнеса инвестиционной компании «Кама Капитал», сообщают «Известия». К началу сентября 2026 года документы направили на согласование правительственной комиссии, однако разрешение получено не…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/auchan-pytalsya-prodat-rossijskij-biznes-sdelka-sorvalas-posle-vvedeniya-vremennogo-upravleniya/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39096580",
-   "title": "Костин отметил серьезный прирост инвестиций китайских инвесторов в Россию",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260924/kostin-2119993076.html"
+     "web:iz.ru",
+     "https://iz.ru/2172783/video/pensionnye-nakopleniia-razreshat-ispolzovat-dlia-pokupki-zhilia"
     ]
    ],
    "sum": null,
@@ -1232,45 +1042,47 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d37900276",
-   "title": "МСБ привлек 21,4 млрд рублей в виде льготных кредитов для инвестпроектов",
+   "draft_id": "d59528575",
+   "title": "Продажи дешевых смартфонов в мире сократятся на 40%, заявили аналитики",
    "date": "2026-09-24",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260924/kredity-2119830775.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/analitiki-873642435.html"
     ]
    ],
-   "sum": "21,4 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "МСБ",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "МСБ",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d64715073",
-   "title": "🏛 Минфин решил добить инвестиционный климат в России",
+   "draft_id": "d80704712",
+   "title": "Нигер увеличил долю государства в урановом проекте Мадауэла до 40%",
    "date": "2026-09-24",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1355109.php"
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/niger-873641928.html"
     ]
    ],
    "sum": null,
