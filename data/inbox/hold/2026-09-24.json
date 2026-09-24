@@ -543,34 +543,6 @@
    ]
   },
   {
-   "draft_id": "d19875375",
-   "title": "FT: инвестор из США получил поддержку властей для покупки активов «Лукойла»",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8972736"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "поддержка властей для покупки активов «Лукойла»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "поддержка властей для покупки активов «Лукойла»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d40511219",
    "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
    "date": "2026-09-23",
@@ -605,10 +577,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «FT: инвестор из США получил поддержку властей для покупки ак» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -706,7 +676,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «FT: инвестор из США получил поддержку властей для покупки ак» — второе издание, в группу не шлём"
+    "та же новость, что «FT узнала о намерении миллиардера из США купить зарубежные а» — второе издание, в группу не шлём"
    ]
   },
   {
@@ -777,7 +747,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «FT: инвестор из США получил поддержку властей для покупки ак» — второе издание, в группу не шлём"
+    "та же новость, что «FT узнала о намерении миллиардера из США купить зарубежные а» — второе издание, в группу не шлём"
    ]
   },
   {
@@ -907,7 +877,7 @@
    ]
   },
   {
-   "draft_id": "d56160352",
+   "draft_id": "d72728572",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -935,7 +905,7 @@
    ]
   },
   {
-   "draft_id": "d89670510",
+   "draft_id": "d23412738",
    "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
@@ -963,7 +933,7 @@
    ]
   },
   {
-   "draft_id": "d64818624",
+   "draft_id": "d20292041",
    "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
    "date": "2026-09-24",
    "src": [
@@ -991,35 +961,7 @@
    ]
   },
   {
-   "draft_id": "d86170295",
-   "title": "Взаимодействие с Wildberries и инвестиционный климат в России. Заявления главы ВТБ",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28146251"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71259386",
+   "draft_id": "d37084367",
    "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
    "date": "2026-09-24",
    "src": [
@@ -1047,19 +989,30 @@
    ]
   },
   {
-   "draft_id": "d68891832",
-   "title": "В Белоруссии усадьбу графа Чернышева-Кругликова выставили на торги за 1,2 тыс. рублей // В Белоруссии памятник архитектуры выставили на торги за 1,2 тыс. рублей",
+   "draft_id": "d45923752",
+   "title": "ВТБ может приобрести 5% акций НСПК в октябре",
    "date": "2026-09-24",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8973898"
+     "https://www.kommersant.ru/doc/8974042"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-24",
+     "title": "Переговоры",
+     "note": "ВТБ намерен приобрести 5% акций Национальной системы платежных карт (НСПК, оператор платежной системы «Мир»). Об этом сообщил глава банка Андрей Костин на Международном банковском форуме.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8974042"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1068,21 +1021,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Финтех",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: белору, рублей) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d69454176",
-   "title": "Костин сообщил о переносе SPO ВТБ на октябрь",
+   "draft_id": "d62744446",
+   "title": "Глава ВТБ Костин подтвердил перенос допэмиссии на октябрь",
    "date": "2026-09-24",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/finance/news/2026/09/24/1231447-kostin-o-perenose"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ab4faf80744cfbcfc19fb0d"
     ]
    ],
    "sum": null,
@@ -1104,69 +1056,13 @@
    ]
   },
   {
-   "draft_id": "d90948423",
-   "title": "МЮ начал продавать части старого газона домашнего стадиона «Олд Траффорд»",
+   "draft_id": "d73038476",
+   "title": "Минфин предложил включить доходы от вкладов и инвестиций в общую базу НДФЛ",
    "date": "2026-09-24",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/24/09/2026/6ab4d3449a79473add87afa6"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92028799",
-   "title": "ВТБ заинтересован в покупке доли в НСПК",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1118187"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48500204",
-   "title": "Минфин предложил распространить прогрессивную ставку НДФЛ 13-22% на доходы россиян от вкладов, инвестиций в ценные бумаги и продажи имущества",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/money/3156248-minfin-predlozhil-progrestivnyi-ndfl-13-22-na-dohody-rossiyan?from=rss"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/minfin-predlozhil-vklyuchit-dohody-ot-vkladov-i-investitsij-v-obshhuyu-bazu-ndfl/"
     ]
    ],
    "sum": null,
@@ -1188,13 +1084,41 @@
    ]
   },
   {
-   "draft_id": "d66005817",
-   "title": "«Известия»: Auchan была близка к продаже своей российской «дочки»",
+   "draft_id": "d59152538",
+   "title": "Костин отметил серьезный прирост китайских инвестиций в Россию",
    "date": "2026-09-24",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28146579"
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/kostin-873640282.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74893284",
+   "title": "Продажи новых Lamborghini в России идут на рекорд",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/prodazhi-873639395.html"
     ]
    ],
    "sum": null,
@@ -1216,45 +1140,17 @@
    ]
   },
   {
-   "draft_id": "d18286773",
-   "title": "ВТБ заинтересован в покупке доли в НСПК",
+   "draft_id": "d10412500",
+   "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
    "date": "2026-09-24",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260924/vtb-2119968607.html"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260924/krasnojarsk-2119988871.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69622993",
-   "title": "ЦУМ сменил владельца",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/24/tsum-smenil-vladeltsa/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1269,17 +1165,112 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g076af76a (общие редкие слова: владел, сменил) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g88dfc8c8 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d63953821",
-   "title": "Продажи новых Lamborghini в России растут рекордными темпами",
+   "draft_id": "d63193520",
+   "title": "Auchan пытался продать российский бизнес — сделка сорвалась после введения временного управления",
    "date": "2026-09-24",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053130404"
+     "web:rb.ru",
+     "https://rb.ru/news/auchan-pytalsya-prodat-rossijskij-biznes-sdelka-sorvalas-posle-vvedeniya-vremennogo-upravleniya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-24",
+     "title": "Переговоры",
+     "note": "Французская группа Auchan летом договорилась о продаже российского бизнеса инвестиционной компании «Кама Капитал», сообщают «Известия». К началу сентября 2026 года документы направили на согласование правительственной комиссии, однако разрешение получено не…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/auchan-pytalsya-prodat-rossijskij-biznes-sdelka-sorvalas-posle-vvedeniya-vremennogo-upravleniya/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39096580",
+   "title": "Костин отметил серьезный прирост инвестиций китайских инвесторов в Россию",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/kostin-2119993076.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37900276",
+   "title": "МСБ привлек 21,4 млрд рублей в виде льготных кредитов для инвестпроектов",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/kredity-2119830775.html"
+    ]
+   ],
+   "sum": "21,4 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСБ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСБ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d64715073",
+   "title": "🏛 Минфин решил добить инвестиционный климат в России",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1355109.php"
     ]
    ],
    "sum": null,
