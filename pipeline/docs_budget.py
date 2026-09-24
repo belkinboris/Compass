@@ -23,6 +23,14 @@ KNOWN_ISSUES.md), 20 сентября бэклог 117 → 81 тыс. (закр�
   которых потолок и ставили. Поэтому потолка нет, а вместо него — инвариант
   «одна запись = один ответ» (`test_docs.py`) и команда `--find`.
 
+ТРЕТИЙ ВИД — ЧИТАЕТСЯ НА ШАГЕ (24 сентября 2026). `routines/*.md` —
+порядок работы одной рутины, его читает только она; `docs/*.md` —
+устройство подсистемы, открывается, когда работа её касается. Сюда же
+переехало всё, что CLAUDE.md держал «на всякий случай» (97 → 17 тыс.
+знаков): правило, нужное одной рутине, больше не оплачивают остальные
+пять. Потолок здесь есть, но смысл у него другой, чем у CLAUDE.md: он
+сигнал РАЗДЕЛИТЬ документ по темам, а не вычищать его.
+
 Отсюда три вопроса, на которые отвечает этот файл:
 
   1. СКОЛЬКО ОСТАЛОСЬ ЗАПАСА — `--stats`. Потолок ловит превышение постфактум,
@@ -69,11 +77,32 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Потолки держит test_docs.py — здесь они повторены только для отчёта;
 # единственный источник правды там.
 READ_WHOLE = {
-    'CLAUDE.md': (110_000, 'вручную: правила остаются, баги — в KNOWN_ISSUES.md, '
-                           'очереди — в консоль (send_open_questions.py)'),
+    'CLAUDE.md': (30_000, 'перенести правило туда, где его читают: одной рутины — в '
+                          'routines/, подсистемы — в docs/, баг — в KNOWN_ISSUES.md, '
+                          'очередь — в консоль (send_open_questions.py)'),
     'PRODUCT_ROADMAP.md': (200_000, 'python3 pipeline/roadmap_archive.py --journal --write'),
 }
 DOCS = READ_WHOLE  # прежнее имя: им пользуются --anchors и старые вызовы
+
+# Читается на шаге: папка -> (потолок на ОДИН файл, что делать у потолка).
+# Держит test_docs.py; здесь повторено для отчёта.
+READ_ON_STEP = {
+    'routines': (20_000, 'вынести устройство в docs/, в файле рутины оставить шаги'),
+    'docs': (30_000, 'разделить документ по темам на два — не вычищать'),
+}
+
+
+def step_docs():
+    """Все файлы, которые читаются на шаге: [(путь, потолок, что делать)]."""
+    out = []
+    for folder, (limit, how) in READ_ON_STEP.items():
+        base = os.path.join(ROOT, folder)
+        if not os.path.isdir(base):
+            continue
+        for name in sorted(os.listdir(base)):
+            if name.endswith('.md') and not name.startswith('launch_texts_'):
+                out.append(('%s/%s' % (folder, name), limit, how))
+    return out
 
 # Ищется по запросу -> файл -> (уровень заголовка записи, зачем он нужен).
 # Потолка нет намеренно: см. «ДЕЛЕНИЕ» в шапке.
@@ -110,6 +139,14 @@ def stats() -> int:
         print('%s%-25s %9d %9d %5.0f%%  %+d' % (mark, name, n, limit, share * 100, limit - n))
         if share >= 0.85:
             tight.append((name, share))
+    print('\nЧИТАЕТСЯ НА ШАГЕ — одной рутиной или когда работа касается темы')
+    for name, limit, how in step_docs():
+        n = len(_read(name))
+        share = n / limit
+        mark = '⚠️ ' if share >= 0.85 else '   '
+        print('%s%-25s %9d %9d %5.0f%%  %+d' % (mark, name, n, limit, share * 100, limit - n))
+        if share >= 0.85:
+            tight.append((name, share))
     print('\nИЩЕТСЯ ПО ЗАПРОСУ (--find) — размер не важен, важен размер ОДНОЙ записи')
     print('%-28s %9s %9s  %s' % ('документ', 'знаков', 'записей', 'запись в среднем'))
     for name, (level, _what) in SEARCHED.items():
@@ -124,7 +161,9 @@ def stats() -> int:
         return 0
     print('\nЗапас кончается — чистить до того, как потолок уронит прогон:')
     for name, share in tight:
-        print('  • %s (%.0f%%) — %s' % (name, share * 100, READ_WHOLE[name][1]))
+        how = READ_WHOLE[name][1] if name in READ_WHOLE else next(
+            h for n, _l, h in step_docs() if n == name)
+        print('  • %s (%.0f%%) — %s' % (name, share * 100, how))
     print('\nПеред чисткой и после неё: python3 pipeline/docs_budget.py --anchors <коммит до>')
     return 0
 
@@ -169,7 +208,7 @@ def find(words: str, limit: int = 6) -> int:
     # по основе слова: запрос «падеж предмета» должен находить «падежом предмета»
     stems = [t[:max(4, len(t) - 2)] for t in terms]
     hits = []
-    for name in SEARCHED:
+    for name in list(SEARCHED) + [n for n, _l, _h in step_docs()]:
         for line, head, body in _entries(name):
             low_head, low_body = head.lower(), body.lower()
             hay = low_head + '\n' + low_body
@@ -202,7 +241,8 @@ def anchors(commit: str, doc: str) -> int:
     if not old.strip():
         print('Не удалось прочитать %s на коммите %s' % (doc, commit))
         return 1
-    now = ''.join(_read(n) for n in list(DOCS) + list(ARCHIVES))
+    now = ''.join(_read(n) for n in list(DOCS) + list(ARCHIVES)
+                  + [n for n, _l, _h in step_docs()])
     print('Якоря %s на %s против всех сегодняшних документов:\n' % (doc, commit))
     for kind, pat in ANCHORS.items():
         was, has = set(re.findall(pat, old)), set(re.findall(pat, now))
