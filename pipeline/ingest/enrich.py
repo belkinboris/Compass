@@ -94,6 +94,10 @@ STATUS_RANK = {
 
 has = format_post.has
 
+# Какой статус утверждает этап. Нужен, чтобы снятый статус не возвращался
+# в карточку через этап того же смысла (см. `retracted` у is_retracted).
+EVENT_STATUS = {'closed': 'Закрыта', 'approval': 'Согласование получено', 'signed': 'Подписана'}
+
 
 def is_strong(why):
     return any(mark in str(why or '') for mark in STRONG)
@@ -258,10 +262,20 @@ def proposals(deal, item, names, comps, match_keys=None):
     status = draft.guess_status(text)
     current_status = deal.get('status')
     moved = False
+    status_retracted = bool(status) and is_retracted(deal, 'status', status)
     if current_status != 'Не состоялась' and status != 'Не состоялась':
         if STATUS_RANK.get(status, -1) > STATUS_RANK.get(current_status, -1):
-            out.append(('status', status, 'обновить', 'новость сообщает о новом этапе'))
-            moved = True
+            if status_retracted:
+                # 24 сентября 2026 «Лента»/«Мария-Ра» трижды за утро получила
+                # «Закрыта» по заголовку «„Лента“ купила…»: каждый час та же
+                # статья возвращалась в ленту, а откат не оставлял памяти.
+                # Снятый статус — повод прочитать, а не вернуть его молча.
+                out.append(('status', status, 'расхождение',
+                            'этот статус уже снимали как преждевременный — '
+                            'переводить только после чтения источника'))
+            else:
+                out.append(('status', status, 'обновить', 'новость сообщает о новом этапе'))
+                moved = True
     elif status == 'Не состоялась' and current_status != 'Закрыта' and current_status != 'Не состоялась':
         out.append(('status', status, 'обновить', 'новость сообщает, что сделка не состоялась'))
         moved = True
@@ -313,7 +327,12 @@ def proposals(deal, item, names, comps, match_keys=None):
         # Несколько публикаций об одном этапе в один день не создают дубли.
         # Этапы одного вида в разные даты допустимы, например два согласования.
         if event_key not in known_events and event_url_key not in known_event_urls:
-            out.append(('event', event, 'добавить', 'новый подтверждённый этап сделки'))
+            if EVENT_STATUS.get(event.get('kind')) and is_retracted(
+                    deal, 'status', EVENT_STATUS[event['kind']]):
+                out.append(('event', event, 'расхождение',
+                            'этап «%s» уже снимали как преждевременный' % event.get('kind')))
+            else:
+                out.append(('event', event, 'добавить', 'новый подтверждённый этап сделки'))
     return out
 
 

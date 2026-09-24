@@ -1141,6 +1141,31 @@ def test_enrich_only_moves_status_forward(base):
     assert not [p for p in props if p[0] == "status"], "статус поехал назад"
 
 
+def test_enrich_does_not_bring_back_a_status_that_was_rolled_back(base):
+    """24 сентября 2026 «Лента»/«Мария-Ра» трижды за утро получила
+    «Закрыта» по заголовку «„Лента“ купила…»: статья каждый час
+    возвращалась в ленту, откат не оставлял памяти, и enrich снова двигал
+    статус вперёд. Снятый статус записывается в `retracted` — тогда та же
+    догадка идёт на решение чтением («расхождение»), а заголовок и этап
+    «закрыта» вместе с ней не переписываются."""
+    import enrich
+    deal = {"id": "retract-test", "title": "«Альфа» покупает «Бету»", "date": "2026-09-23",
+            "status": "Обсуждается", "src": [], "events": [],
+            "retracted": {"status": ["Закрыта"]}}
+    item = {"title": "«Альфа» купила «Бету»", "summary": "Сделка закрыта.",
+            "date": "2026-09-24", "url": "https://example.invalid/closed"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    kinds = {(p[0], p[2]) for p in props}
+    assert ("status", "расхождение") in kinds, props
+    assert ("status", "обновить") not in kinds
+    assert not [p for p in props if p[0] == "title"], "заголовок переписан вслед за снятым статусом"
+    assert not [p for p in props if p[0] == "event" and p[2] == "добавить"], "этап «закрыта» вернулся"
+    # без памяти о снятии поведение прежнее
+    fresh = dict(deal, retracted={})
+    assert ("status", "Закрыта", "обновить") in [(f, v, k) for f, v, k, _ in
+                                                 enrich.proposals(fresh, item, {}, base["companies"])]
+
+
 def test_enrich_adds_a_new_stage_to_the_same_card(base):
     """Новость о закрытии дополняет маршрут, а повтор не создаёт второй этап."""
     import enrich
