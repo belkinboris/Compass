@@ -972,160 +972,7 @@
    ]
   },
   {
-   "draft_id": "d59244642",
-   "title": "В Москве на Ленинградском вокзале установили терминалы для покупки билетов",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28145175"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: вокзал, москве) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d42929992",
-   "title": "Американская компания Elmet приобрела долю вьетнамского концерна",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/elmet-873619680.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-24",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260924/elmet-873619680.html"
-     ]
-    }
-   ],
-   "buyer_name": "Американская компания Elmet",
-   "asset": "ьетнамский концерн",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Американская компания Elmet",
-    "asset": "ьетнамский концерн",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d50111141",
-   "title": "Итоги аукционов Минфина РФ по размещению ОФЗ 23.09.2026",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354871.php"
-    ]
-   ],
-   "sum": "113,5 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66207609",
-   "title": "Статистика IPO",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354849.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19810189",
-   "title": "Продавать бензин детям запретили в ЯНАО",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053130286"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11316886",
+   "draft_id": "d98427192",
    "title": "Роковую квартиру экс-главы челябинского СК продают с торгов. Фото",
    "date": "2026-09-24",
    "src": [
@@ -1153,35 +1000,7 @@
    ]
   },
   {
-   "draft_id": "d57285114",
-   "title": "Больше половины россиян нанимают риелторов для покупки квартиры на вторичке",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053130012"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63882172",
+   "draft_id": "d58655624",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -1203,6 +1022,62 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80671123",
+   "title": "В ЯНАО запретили продавать ГСМ подросткам",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1118123"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43088970",
+   "title": "В Казахстане прошел третий раунд переговоров по Камбаратинской ГЭС",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/kazahstan-873621636.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Энергетика",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
