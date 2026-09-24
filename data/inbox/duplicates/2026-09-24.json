@@ -42,6 +42,37 @@
     "needs_review": true
    },
    "queued": "2026-09-24"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/8974516::g69c83a3f",
+   "candidate_id": "g69c83a3f",
+   "reason": "общие редкие слова: петерб, пик",
+   "draft": {
+    "draft_id": "d50196303",
+    "title": "Петербургский застройщик Element выкупит площадку группы ПИК в Москве",
+    "date": "2026-09-24",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8974516"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Петербургский застройщик Element",
+    "asset": "площадка группы ПИК в Москве",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Петербургский застройщик Element",
+     "asset": "площадка группы ПИК в Москве",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-24"
   }
  ]
 }
