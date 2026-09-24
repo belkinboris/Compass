@@ -756,7 +756,7 @@
    ]
   },
   {
-   "draft_id": "d15187198",
+   "draft_id": "d33617669",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -784,7 +784,7 @@
    ]
   },
   {
-   "draft_id": "d46006542",
+   "draft_id": "d53318054",
    "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
@@ -812,7 +812,7 @@
    ]
   },
   {
-   "draft_id": "d10555727",
+   "draft_id": "d71827776",
    "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
    "date": "2026-09-24",
    "src": [
@@ -840,7 +840,7 @@
    ]
   },
   {
-   "draft_id": "d40797794",
+   "draft_id": "d36518051",
    "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
    "date": "2026-09-24",
    "src": [
@@ -868,7 +868,7 @@
    ]
   },
   {
-   "draft_id": "d70406149",
+   "draft_id": "d82453955",
    "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
    "date": "2026-09-24",
    "src": [
@@ -897,7 +897,7 @@
    ]
   },
   {
-   "draft_id": "d29623758",
+   "draft_id": "d45687049",
    "title": "«Дом.РФ» выставил на торги Мариинский приют в Саратове",
    "date": "2026-09-24",
    "src": [
@@ -928,7 +928,7 @@
    ]
   },
   {
-   "draft_id": "d43007370",
+   "draft_id": "d16038730",
    "title": "«Яндекс» сделал огромную инвестицию в ИТ-решение для борьбы с опасными проявлениями ИИ",
    "date": "2026-09-24",
    "src": [
@@ -959,13 +959,13 @@
    ]
   },
   {
-   "draft_id": "d24993492",
-   "title": "Гибридная сделка: как онлайн–сервисы меняют правила покупки авто с пробегом",
+   "draft_id": "d70402023",
+   "title": "Строительство дома по семейной ипотеке может стать выгоднее покупки квартиры",
    "date": "2026-09-24",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/24/gibridnaja-sdelka-kak-onlajnservisi"
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28148549"
     ]
    ],
    "sum": null,
@@ -988,17 +988,17 @@
    ]
   },
   {
-   "draft_id": "d37978610",
-   "title": "Ferrari Стива Маккуина выставят на аукцион",
+   "draft_id": "d21395704",
+   "title": "Минцифры предложило изменить схему продажи сим-карт в России",
    "date": "2026-09-24",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2172896/video/ferrari-stiva-makkuina-vystaviat-na-auktcion"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/mintsifry-predlozhilo-izmenit-shemu-prodazhi-sim-kart-v-rossii/"
     ]
    ],
-   "sum": "$20 млн",
-   "type": "Продажа с торгов",
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1012,6 +1012,63 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77753979",
+   "title": "Meta* представила брелок-«тамагочи» Charm с ИИ-агентом — продажи устройства начнутся в декабре",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/meta-predstavila-brelok-tamagochi-charm-s-ii-agentom-prodazhi-ustrojstva-nachnutsya-v-dekabre/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25583098",
+   "title": "📣 Подводим итоги Forbes Federal Legal Forum   17 сентября в Москве прошла ежегодная конференция Forbes Federal Legal Forum. В этом году на профильной сессии M&A команду BIRCH представлял партнер Иван ",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "tg:BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/2279"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
