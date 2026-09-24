@@ -794,6 +794,52 @@ def test_follow_buttons_exist_on_company_and_industry_pages(browser, base_url):
             ctx.close()
 
 
+def test_firm_and_company_deal_lists_filter_by_year_and_industry(browser, base_url):
+    """Фильтр года и отрасли над списком сделок консультанта и компании
+    (предложено в «Десяти маршрутах», сделано 24 сентября 2026). Берём самые
+    длинные списки из живой базы, выбираем первый год, затем первую отрасль:
+    видимых строк становится меньше, подпись называет, сколько из скольких, и
+    экран не уезжает вбок на телефоне."""
+    for width, height in ((360, 740), (1280, 900)):
+        ctx = browser.new_context(viewport={"width": width, "height": height})
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(base_url + "/#/advisors", wait_until="networkidle")
+            fid = pg.evaluate("[...FIRMS].map(f=>f.id).sort((a,b)=>firmCount(b)-firmCount(a))[0]")
+            pg.evaluate("id=>{location.hash='#/advisors/'+id}", fid)
+            pg.wait_for_selector("#firmDealsFilter")
+            visible = "k=>[...document.querySelectorAll(`[data-lf=\"${k}\"]`)].filter(r=>r.style.display!=='none').length"
+            total = pg.evaluate(visible, "firmDealsFilter")
+            pg.click("#firmDealsFilter-y .ms-btn")
+            pg.click("#firmDealsFilter-y .ms-opt >> nth=0")
+            after_year = pg.evaluate(visible, "firmDealsFilter")
+            assert 0 < after_year < total, (fid, after_year, total)
+            assert "из %d" % total in pg.inner_text("#firmDealsFilter .lf-note")
+            pg.click("#firmDealsFilter-y .ms-clear")
+            assert pg.evaluate(visible, "firmDealsFilter") == total, "сброс не вернул все строки"
+            pg.click("#firmDealsFilter-y .ms-done")
+
+            cid = pg.evaluate("Object.keys(COMPANIES).sort((a,b)=>companyDeals(b).structured.length"
+                              "-companyDeals(a).structured.length)[0]")
+            pg.evaluate("id=>{location.hash='#/companies/'+id}", cid)
+            pg.wait_for_selector("#openCompanyDeals")
+            pg.click("#openCompanyDeals")
+            pg.wait_for_selector("#companyDealsFilter")
+            total = pg.evaluate(visible, "companyDealsFilter")
+            pg.click("#companyDealsFilter-i .ms-btn")
+            pg.click("#companyDealsFilter-i .ms-opt >> nth=0")
+            shown = pg.evaluate(visible, "companyDealsFilter")
+            assert 0 < shown < total, (cid, shown, total)
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+            assert not errors, errors
+            pg.close()
+        finally:
+            ctx.close()
+
+
 def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url):
     """Вкладка «Финансы» профиля компании: наверху — главное, остальное под кнопкой.
 
