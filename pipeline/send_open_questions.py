@@ -671,7 +671,14 @@ def main():
     if limit:
         todo = todo[:limit]
 
+    # Маркер решения мог уехать вместе со своим разделом: 24 сентября 2026
+    # CLAUDE.md разнесён по routines/ и docs/, поэтому читаем все три места.
     claude_text = open(os.path.join(ROOT, 'CLAUDE.md'), encoding='utf-8').read()
+    for folder in ('routines', 'docs'):
+        base = os.path.join(ROOT, folder)
+        for name in sorted(os.listdir(base)) if os.path.isdir(base) else []:
+            if name.endswith('.md'):
+                claude_text += '\n' + open(os.path.join(base, name), encoding='utf-8').read()
     base = json.load(open(os.path.join(ROOT, 'static', 'data', 'deals_promoted.json'), encoding='utf-8'))
     deals_by_id = {d['id']: d for d in base['deals']}
     merged = base.get('merged', {})

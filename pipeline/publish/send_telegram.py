@@ -365,6 +365,14 @@ def initial_post_text(deal, comps):
 # считается с момента, когда человек МОГ увидеть черновик, а не с момента
 # самого события.
 MILESTONE_SILENCE_HOURS = 24
+# Молчание публикует веху, только пока она новость. Веха о закрытии сделки,
+# три недели провисевшая в консоли, — уже не новость, а повтор поста о самой
+# сделке (найдено 24 сентября 2026: веха «НМГ закрыла сделку по „Комсомольской
+# правде"» от 3 сентября держалась ложной находкой вычитки; когда вычитку
+# починили, молчание выпустило бы её в канал с опозданием на 21 день). Старше
+# этого срока молчание веху не публикует; явная кнопка «пост в канал» —
+# публикует, решение человека сильнее.
+MILESTONE_MAX_SILENCE_DAYS = 7
 
 
 def milestone_candidates(deals, stage_posts):
@@ -575,7 +583,10 @@ def plan_milestones(deals, stage_posts, decisions, now):
             hold.append((deal, event, 'черновик ещё не отправлен в консоль'))
             continue
         age = milestone_age_hours(event, now)
-        if age >= MILESTONE_SILENCE_HOURS:
+        if age >= MILESTONE_MAX_SILENCE_DAYS * 24:
+            hold.append((deal, event, 'устарела: черновик в консоли %.0f дн., молчание уже не '
+                         'публикует — только кнопка «пост в канал»' % (age / 24)))
+        elif age >= MILESTONE_SILENCE_HOURS:
             send.append((deal, event))
         else:
             hold.append((deal, event, 'ждёт решения (%.0f ч из %d)' % (age, MILESTONE_SILENCE_HOURS)))

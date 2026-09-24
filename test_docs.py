@@ -21,7 +21,10 @@ JOURNAL = ROADMAP[ROADMAP.index("## 5. Журнал работ"):]
 # Запас взят небольшой намеренно: как только он выбран, это сигнал сдвинуть
 # журнал (`roadmap_archive.py --journal --write`), а не поднять потолок.
 ROADMAP_LIMIT = 200_000
-CLAUDE_LIMIT = 110_000
+# 24 сентября 2026 CLAUDE.md разнесён по месту чтения: 97 → 17 тыс. знаков.
+# Правило одной рутины живёт в routines/, устройство подсистемы — в docs/.
+# Потолок взят с запасом под правила, нужные КАЖДОМУ прогону, — и только им.
+CLAUDE_LIMIT = 30_000
 VERDICT = re.compile(r"\b(ЗАКРЫТ|СДЕЛАН|ПРОВЕРЕН|СНЯТ|ИСЧЕРПАН)[А-ЯЁ]*\b")
 # Вердикт о готовности пишут жирным («**СДЕЛАНО 30 августа**»). Те же слова
 # в обычном тексте — про подвопрос внутри ещё открытой задачи («вопрос закрыт
@@ -203,3 +206,93 @@ def test_a_document_with_a_cyrillic_name_is_not_deployed_as_code():
     assert not release.is_code("finance/Компас_финмодель_24м.xlsx")
     assert not release.is_code("finance/build_model.py")
     assert not release.is_code("static/data/deals_promoted.json")
+
+
+# ---------------------------------------------------------------------------
+# Документы, которые читаются на шаге (24 сентября 2026)
+# ---------------------------------------------------------------------------
+
+def _governed():
+    """CLAUDE.md, файлы рутин и документы подсистем — то, что прогон читает
+    сам, а не находит поиском. Тексты запуска до переноса — архив, в них
+    ссылки на старые места законны."""
+    out = {"CLAUDE.md": CLAUDE}
+    for folder in ("routines", "docs"):
+        base = os.path.join(ROOT, folder)
+        for name in sorted(os.listdir(base)):
+            if name.endswith(".md") and not name.startswith("launch_texts_"):
+                out["%s/%s" % (folder, name)] = io.open(
+                    os.path.join(base, name), encoding="utf-8").read()
+    return out
+
+
+def test_every_routine_has_its_file_and_every_file_its_routine():
+    """Порядок работы рутины лежит в её файле, а текст запуска только
+    ссылается на него. Таблица в routines/README.md — единственный список:
+    файл без строки в таблице никто не запустит, строка без файла —
+    рутина, которой некуда смотреть."""
+    readme = io.open(os.path.join(ROOT, "routines", "README.md"), encoding="utf-8").read()
+    listed = set(re.findall(r"`(routines/[a-z_]+\.md)`", readme))
+    on_disk = {"routines/%s" % n for n in os.listdir(os.path.join(ROOT, "routines"))
+               if n.endswith(".md") and n != "README.md" and not n.startswith("launch_texts_")}
+    assert listed == on_disk, "таблица рутин и файлы разошлись: %s" % (listed ^ on_disk)
+    assert "routines/" in CLAUDE, "CLAUDE.md не говорит рутине, где её порядок работы"
+
+
+def test_a_document_read_on_a_step_is_split_not_trimmed():
+    """У файла рутины и документа подсистемы потолок есть, но он значит
+    «разделите по темам», а не «вычистите»: владелец 24 сентября 2026 —
+    «мы не можем сказать: начинаем выборочно удалять проблемы, потому что
+    знаков слишком много»."""
+    import pipeline.docs_budget as db
+    big = [(name, len(io.open(os.path.join(ROOT, name), encoding="utf-8").read()), limit)
+           for name, limit, _how in db.step_docs()
+           if len(io.open(os.path.join(ROOT, name), encoding="utf-8").read()) > limit]
+    assert not big, ("документ перерос свой потолок — разделите его по темам на два "
+                     "и поправьте карту в CLAUDE.md, ничего не вычищая: %s" % big)
+
+
+_REF_FILE = re.compile(r"`?((?:docs|routines|pipeline)/[\w./-]+\.md)`?")
+_REF_SECTION = re.compile(r"(?:раздел[а-я]*|см\.)\s+((?:«(?:[^«»]|«[^«»]*»)+»(?:,\s*|\s+и\s+)?)+)")
+
+
+def _headings(include_archive=False):
+    heads = []
+    for dirpath, _dirs, files in os.walk(ROOT):
+        if "/." in dirpath or "node_modules" in dirpath or "/data/" in dirpath + "/":
+            continue
+        for f in files:
+            if not f.endswith(".md") or (not include_archive and "ARCHIVE" in f):
+                continue
+            text = io.open(os.path.join(dirpath, f), encoding="utf-8").read()
+            heads += re.findall(r"(?m)^#{1,6}\s+(.+)$", text)
+    return heads
+
+
+def _norm(x):
+    return re.sub(r"[«»\"„“”`\s]+", " ", x).strip().lower()
+
+
+def test_every_reference_in_the_read_documents_leads_somewhere():
+    """Ссылка на документ или раздел, которого нет, — знание без адреса.
+
+    24 сентября 2026 при переносе CLAUDE.md нашлось: таблица рутин
+    отсылала к разделу «Конкурент раньше и богаче», стёртому чисткой
+    18 сентября, — вместе с ним пропали правило «новая сделка — первой» и
+    нерешённый вопрос владельцу о частоте притока; текст запуска притока
+    велел читать раздел, которого давно не было. Проверяются документы,
+    которые прогон читает сам; ссылка может вести и в архив — он ищется,
+    — но тогда раздел должен там найтись."""
+    heads = [_norm(h) for h in _headings(include_archive=True)]
+    missing = []
+    for name, text in _governed().items():
+        for path in _REF_FILE.findall(text):
+            if not os.path.exists(os.path.join(ROOT, path.rstrip("."))):
+                missing.append("%s → файл %s" % (name, path))
+        for group in _REF_SECTION.findall(text):
+            for ref in re.findall(r"«((?:[^«»]|«[^«»]*»)+)»", group):
+                r = _norm(ref)
+                if len(r) < 6 or any(r in h for h in heads):
+                    continue
+                missing.append("%s → раздел «%s»" % (name, ref))
+    assert not missing, "ссылки ведут в никуда:\n  " + "\n  ".join(missing)
