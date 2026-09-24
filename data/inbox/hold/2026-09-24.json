@@ -543,45 +543,6 @@
    ]
   },
   {
-   "draft_id": "d40511219",
-   "title": "FT узнала о намерении миллиардера из США купить зарубежные активы «Лукойла»",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28141481"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-23",
-     "title": "Переговоры",
-     "note": "Речь идет о Тодде Боули, сообщила газета",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28141481"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d39785947",
    "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
    "date": "2026-09-23",
@@ -673,10 +634,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «FT узнала о намерении миллиардера из США купить зарубежные а» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -747,7 +706,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «FT узнала о намерении миллиардера из США купить зарубежные а» — второе издание, в группу не шлём"
+    "та же новость, что «Американский инвестор планирует выкупить активы «Лукойла»» — второе издание, в группу не шлём"
    ]
   },
   {
@@ -877,7 +836,7 @@
    ]
   },
   {
-   "draft_id": "d50977101",
+   "draft_id": "d61927925",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -905,7 +864,7 @@
    ]
   },
   {
-   "draft_id": "d17433380",
+   "draft_id": "d86859742",
    "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
@@ -933,7 +892,7 @@
    ]
   },
   {
-   "draft_id": "d77562790",
+   "draft_id": "d31273743",
    "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
    "date": "2026-09-24",
    "src": [
@@ -961,7 +920,7 @@
    ]
   },
   {
-   "draft_id": "d37630323",
+   "draft_id": "d60504252",
    "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
    "date": "2026-09-24",
    "src": [
@@ -989,7 +948,7 @@
    ]
   },
   {
-   "draft_id": "d34669789",
+   "draft_id": "d73672231",
    "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
    "date": "2026-09-24",
    "src": [
@@ -1018,13 +977,125 @@
    ]
   },
   {
-   "draft_id": "d84389514",
-   "title": "Пенсионные накопления разрешат использовать для покупки жилья",
+   "draft_id": "d72538617",
+   "title": "Минэкономразвития ухудшило прогноз снижения инвестиций в РФ в 2026 г. до 5,4%",
    "date": "2026-09-24",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2172783/video/pensionnye-nakopleniia-razreshat-ispolzovat-dlia-pokupki-zhilia"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1118247"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60099619",
+   "title": "Прогноз МЭР по инвестициям учитывает более высокую траекторию ставки в прогнозе ЦБ",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28147559"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69130119",
+   "title": "МЭР в прогнозе закладывает возвращение инвестиций к росту в 2028-2029 годах до 2,5% и 3%",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28147557"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11251618",
+   "title": "В Петербурге продадут вагон, который использовали на обкатке шестой линии метро",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/24/v-peterburge-prodadut-vagon"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68710653",
+   "title": "McDonald’s начал продавать рекламу на экранах в ресторанах",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/mcdonald-s-nachal-prodavat-reklamu-na-ekranah-v-restoranah/"
     ]
    ],
    "sum": null,
@@ -1043,21 +1114,21 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d59528575",
-   "title": "Продажи дешевых смартфонов в мире сократятся на 40%, заявили аналитики",
+   "draft_id": "d73223120",
+   "title": "МЭР пересмотрело прогноз снижения инвестиций в основной капитал",
    "date": "2026-09-24",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260924/analitiki-873642435.html"
+     "https://1prime.ru/20260924/minekonomrazvitiya-873648314.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1071,24 +1142,132 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d80704712",
-   "title": "Нигер увеличил долю государства в урановом проекте Мадауэла до 40%",
+   "draft_id": "d93866532",
+   "title": "МЭР ожидает ускорения роста инвестиций в основной капитал в 2028–2029 годах",
    "date": "2026-09-24",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260924/niger-873641928.html"
+     "https://1prime.ru/20260924/reshetnikov-873647599.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71013606",
+   "title": "«Дом.РФ» выставил на торги Мариинский приют в Саратове",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260924/saratov-2120033195.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g88dfc8c8 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Дом.РФ» выставил на торги бывшую губернскую мужскую гимнази» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d91907285",
+   "title": "Прокуратура намерена национализировать оставшиеся активы экс-депутата Гайсина",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/265959/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-24",
+     "title": "Переговоры",
+     "note": "Среди активов, которые хотят забрать в доход государства, есть известная уральская сеть аптек.",
+     "source": [
+      "web:pravo.ru",
+      "https://pravo.ru/news/265959/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21470642",
+   "title": "Сделка по продаже российского Auchan сорвалась после указа о временном управлении",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/sdelka-po-prodazhe-rossijskogo-auchan-sorvalas-posle-ukaza-o-vremennom-upravlenii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-24",
+     "title": "Переговоры",
+     "note": "Французская Auchan летом договорилась о продаже российской «дочки» инвестиционной компании «Кама Капитал». Сообщение Сделка по продаже российского Auchan сорвалась после указа о временном управлении появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/sdelka-po-prodazhe-rossijskogo-auchan-sorvalas-posle-ukaza-o-vremennom-upravlenii/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
