@@ -216032,7 +216032,12 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "asset_id": "gc6091c34"
+   "asset_id": "gc6091c34",
+   "retracted": {
+    "status": [
+     "Закрыта"
+    ]
+   }
   },
   {
    "id": "g69c83a3f",
