@@ -352,7 +352,8 @@
    "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -467,6 +468,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли",
     "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
    ]
   },
@@ -508,6 +510,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли",
     "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
    ]
   },
@@ -815,6 +818,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли",
     "та же новость, что ««Яндекс» и VK обсудят создание совместного бизнеса с облакам» — второе издание, в группу не шлём"
    ]
   },
@@ -875,45 +879,6 @@
    ]
   },
   {
-   "draft_id": "d88082559",
-   "title": "Нагиев выкупил три участка и собрал семейное поместье за сотни миллионов",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/23/nagiev-vykupil-tri-uchastka-i-sobral-semejnoe-pomeste-za-sotni-millionov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-23",
-     "title": "Сделка завершена",
-     "note": "Дмитрий Нагиев значительно увеличил свои владения в престижном поселке «Княжье Озеро» на Новорижском шоссе, сформировав единое семейное поместье.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/news/2026/9/23/nagiev-vykupil-tri-uchastka-i-sobral-semejnoe-pomeste-za-sotni-millionov"
-     ]
-    }
-   ],
-   "buyer_name": "Нагиев",
-   "asset": "три участка и собрал семейное поместье за сотни миллионов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Нагиев",
-    "asset": "три участка и собрал семейное поместье за сотни миллионов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d20994603",
    "title": "Под Кемеровом продают поместье за 170 млн рублей с бассейном и 12 гаражами",
    "date": "2026-09-23",
@@ -942,35 +907,7 @@
    ]
   },
   {
-   "draft_id": "d30208330",
-   "title": "Роковую квартиру экс-главы челябинского СК продают с торгов. Фото",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053130285"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52903919",
+   "draft_id": "d23613206",
    "title": "В Пермском крае газопровод продают по цене квартиры",
    "date": "2026-09-24",
    "src": [
@@ -998,13 +935,41 @@
    ]
   },
   {
-   "draft_id": "d50113401",
-   "title": "В Белоруссии на торгах продают дворцовый комплекс за 1,2 тыс. российских рублей",
+   "draft_id": "d92101398",
+   "title": "В Перми за десятки миллионов продают компанию-грузоперевозчика с автопоездами",
    "date": "2026-09-24",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28145605"
+     "web:ura.news",
+     "https://ura.news/news/1053130371"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11164065",
+   "title": "Цена выросла в 2,5 раза: в Тюмени снова продают недостроенный ТЦ на объездной. Фото",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053130314"
     ]
    ],
    "sum": null,
@@ -1022,18 +987,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: белору, рублей) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d60835875",
-   "title": "Ленобласть обошла Петербург по продажам жилья в новостройках",
+   "draft_id": "d32487503",
+   "title": "Костин заявил о готовности ВТБ приобрести 5% НСПК",
    "date": "2026-09-24",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/24/lenoblast-oboshla-peterburg"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/finance/news/2026/09/24/1231443-vtb-nspk"
     ]
    ],
    "sum": null,
@@ -1048,48 +1012,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Финтех",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d89897383",
-   "title": "Минцифры предложило отказаться от субдилерской схемы продажи сим-карт",
+   "draft_id": "d92364471",
+   "title": "ВТБ отложил допэмиссию для сделки с Wildberries-Russ, но она состоится",
    "date": "2026-09-24",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260924/mintsifra-873622698.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32880350",
-   "title": "Статистика по IPO. Неутешительные выводы",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1354946.php"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1118185"
     ]
    ],
    "sum": null,
@@ -1111,27 +1047,197 @@
    ]
   },
   {
-   "draft_id": "d48635970",
-   "title": "Утренний обзор за 24 сентября: срыв сделки по продаже «Ашана» и проблемы ВТБ с переводом на счет суда Англии",
+   "draft_id": "d15833319",
+   "title": "Банк России может начать переговоры о продаже НСПК в октябре",
    "date": "2026-09-24",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/265949/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1118184"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Согласование получено",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39548401",
+   "title": "Китай призвал США к осторожности в вопросе продажи вооружений Тайваню",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1118174"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39066808",
+   "title": "«Автостат»: продажи новых Lamborghini в РФ могут достичь рекорда",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28146343"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87998181",
+   "title": "Взаимодействие с Wildberries и инвестиционный климат в России. Заявления главы ВТБ",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28146251"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «ВТБ отложил допэмиссию для сделки с Wildberries-Russ, но она» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d37539638",
+   "title": "Костин: допэмиссию ВТБ в связи с приобретением доли в «WB банке» перенесли на октябрь",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28146223"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18457746",
+   "title": "ВТБ заинтересован в покупке доли НСПК",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28146213"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86805562",
+   "title": "Глава ВТБ заявил о планах купить долю в операторе СБП",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/24/glava-vtb-zajavil-o-planah"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "approval",
+     "kind": "negotiations",
      "date": "2026-09-24",
-     "title": "Согласование получено",
-     "note": "Высокий суд Англии и Уэльса снял всемирный арест с активов казахстанского бизнесмена Тимура Куанышева по иску ВТБ, поскольку истец не смог внести обеспечение из-за санкций. Источники рассказали, что летом французская группа Auchan вела переговоры о продаже…",
+     "title": "Переговоры",
+     "note": "",
      "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/265949/"
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/09/24/glava-vtb-zajavil-o-planah"
      ]
     }
    ],
@@ -1146,8 +1252,203 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2daf32fe (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55175217",
+   "title": "Минфин РФ предложил ввести НДС 22% для иностранных товаров при онлайн-покупках",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2172625/minfin-rf-predlozhil-vvesti-nds-22-dlia-inostrannykh-tovarov-pri-onlain-pokupkakh-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67630675",
+   "title": "Допэмиссия ВТБ перенеслась на октябрь, заявил Костин",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/kostin-873633266.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71708972",
+   "title": "ВТБ заинтересован в покупке доли в НСПК, заявил Костин",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260924/kostin-873632149.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56419772",
+   "title": "Туротрасль привлекла при поддержке МСП Банка 2,4 млрд рублей в 2026 году",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/msp-2119950997.html"
+    ]
+   ],
+   "sum": "2,4 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Туротрасль",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Туротрасль",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d17146596",
+   "title": "СМИ: в России предлагают отказаться от субдилерской схемы продажи сим-карт",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/sim-karty-2119950430.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40669934",
+   "title": "МСБ в сфере туризма с начала года привлек 17,7 млрд рублей с господдержкой",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260924/msb-2119863001.html"
+    ]
+   ],
+   "sum": "17,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСБ в сфере туризма с начала года",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСБ в сфере туризма с начала года",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d53120606",
+   "title": "Крупный бизнесмен из ХМАО выставил на продажу недостроенный ТЦ за 1,5 миллиарда",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053130393"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

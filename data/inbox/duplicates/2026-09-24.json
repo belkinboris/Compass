@@ -1,0 +1,47 @@
+{
+ "made": "2026-09-24",
+ "items": [
+  {
+   "key": "https://1prime.ru/20260924/tsb-873626528.html::ga0dd6563",
+   "candidate_id": "ga0dd6563",
+   "reason": "общие редкие слова: рублей, юаней",
+   "draft": {
+    "draft_id": "d83061575",
+    "title": "Банк России купил юаней на внутреннем рынке на 1,9 миллиарда рублей",
+    "date": "2026-09-24",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20260924/tsb-873626528.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-09-24",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20260924/tsb-873626528.html"
+      ]
+     }
+    ],
+    "buyer_name": "России",
+    "asset": "юани на внутреннем рынке на 1,9 миллиарда рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "России",
+     "asset": "юани на внутреннем рынке на 1,9 миллиарда рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-24"
+  }
+ ]
+}

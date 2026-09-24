@@ -262,6 +262,15 @@ def proposals(deal, item, names, comps, match_keys=None):
     status = draft.guess_status(text)
     current_status = deal.get('status')
     moved = False
+    # Статус, который уже СНИМАЛИ как неверный (человек прочитал источник и
+    # откатил преждевременное «Закрыта»/«Не состоялась»), не восстанавливаем
+    # автоматически — та же логика, что уже есть для sum/buyer_name/asset/
+    # seller выше. Нужен, потому что у enrich.py нет памяти уже разобранных
+    # новостей: один и тот же кэшированный источник (или новый агрегатор,
+    # пересказывающий тот же неподтверждённый слух) поднимает статус заново
+    # на каждом прогоне, пока в ленте лежит хоть одна такая запись — см.
+    # KNOWN_ISSUES.md, «Лента»/«Мария-Ра» (откачено четыре раза за сутки
+    # 24 сентября 2026, прежде чем статус попал в `retracted`).
     status_retracted = bool(status) and is_retracted(deal, 'status', status)
     if current_status != 'Не состоялась' and status != 'Не состоялась':
         if STATUS_RANK.get(status, -1) > STATUS_RANK.get(current_status, -1):
@@ -277,8 +286,13 @@ def proposals(deal, item, names, comps, match_keys=None):
                 out.append(('status', status, 'обновить', 'новость сообщает о новом этапе'))
                 moved = True
     elif status == 'Не состоялась' and current_status != 'Закрыта' and current_status != 'Не состоялась':
-        out.append(('status', status, 'обновить', 'новость сообщает, что сделка не состоялась'))
-        moved = True
+        if status_retracted:
+            out.append(('status', status, 'расхождение',
+                        'этот статус уже снимали как преждевременный — '
+                        'переводить только после чтения источника'))
+        else:
+            out.append(('status', status, 'обновить', 'новость сообщает, что сделка не состоялась'))
+            moved = True
     # Заголовок карточки должен отражать последнюю подтверждённую стадию. Берём
     # только фактический заголовок источника и только если он всё ещё узнаваемо
     # говорит об этой сделке; ничего не переформулируем самостоятельно.
