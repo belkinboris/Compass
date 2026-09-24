@@ -339,21 +339,62 @@ def test_post_has_no_placeholder_lines(base):
                     f"{deal['id']}: сумма-заглушка не в честной форме — {line!r}"
 
 
-def test_post_drops_lines_that_only_echo_the_headline():
-    """Реакция партнёров (Этап 9, скриншот про «Алор брокер»): «он пишет в
-    предмет кусок фразы из заголовка… смысла писать стороны и предмет тогда
-    нет вообще». Обе строки — Предмет и Покупатель — дословные куски
-    заголовка, и обе не печатаются; от карточки остаётся заголовок, статус
-    (с месяцем закрытия) и отрасль."""
+def format_post_check(text):
+    sys.path.insert(0, str(Path(__file__).parent / "pipeline" / "publish"))
+    import check_post
+    return check_post.check(text)
+
+
+def test_post_always_has_buyer_seller_and_subject_in_that_order():
+    """Владелец, 24 сентября 2026: «чтобы по содержанию разделов посты были
+    одинаковые; всегда должен быть покупатель, продавец и предмет». До этого
+    строка стороны пропадала, если имя уже стояло в заголовке (правило
+    Этапа 9 после поста «Алор брокер»), и из 300 последних карточек выходило
+    пятнадцать разных наборов строк. Теперь блок постоянен: имя печатается
+    всегда, неизвестная сторона — «не раскрыт», как на плашке сайта."""
     deal = {"id": "g6bf41023",
             "title": "«Алор брокер» купил неназванную брокерскую компанию",
             "asset": "неназванная брокерская компания", "buyer_name": "«Алор брокер»",
             "status": "Закрыта", "date": "2026-08-01", "ind": "Рынок ценных бумаг"}
     text = format_post.render(deal, {})
-    assert "<b>Предмет:</b>" not in text, text
-    assert "<b>Покупатель:</b>" not in text, text
+    labels = re.findall(r"<b>([^<:]+):</b>", text)
+    assert labels[:3] == ["Покупатель", "Продавец", "Предмет"], text
+    assert "<b>Покупатель:</b> «Алор брокер»" in text
+    assert "<b>Продавец:</b> не раскрыт" in text
+    assert "<b>Предмет:</b> неназванная брокерская компания" in text
     assert "<b>Статус:</b> Закрыта · август 2026" in text
-    assert "<b>Отрасль:</b> Рынок ценных бумаг" in text
+    assert not format_post_check(text), format_post_check(text)
+
+
+def test_post_party_block_is_the_same_across_the_base(base):
+    """Тот же вопрос на живой базе: у покупок три строки сторон стоят всегда
+    и в одном порядке; у раунда нет продавца, если его не назвали, — деньги
+    идут в компанию, и выдуманная роль была бы хуже пустоты."""
+    comps = base["companies"]
+    for deal in base["deals"][-300:]:
+        labels = re.findall(r"<b>([^<:]+):</b>", format_post.render(deal, comps))
+        roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Временный управляющий",
+                                            "Продавец", "Прежний владелец", "Предмет")]
+        buyer_label, seller_label, subject_label, required = format_post.post_roles(deal)
+        want = [l for key, l in (("buyer", buyer_label), ("seller", seller_label),
+                                 ("subject", subject_label)) if key in required]
+        assert [r for r in roles if r in want] == want, (deal["id"], labels)
+
+
+def test_post_kind_matches_the_site_classifier():
+    """Пост и карточка называют роли одинаково: `_kind_from_type` — копия
+    `dealKindOf()` из static/index.html. Сверяем на всех типах из базы по
+    тем же правилам, что записаны в JS (ключевые слова не разошлись)."""
+    html = (Path(__file__).parent / "static" / "index.html").read_text(encoding="utf-8")
+    js = html[html.index("function dealKindOf(typeStr){"):]
+    js = js[:js.index("\n}\n") + 3]
+    for word in ("ipo", "совместн", "синдицированн", "под залог", "реорганизац", "допэмисси"):
+        assert word in js, "в dealKindOf нет «%s» — сверьте копию в format_post" % word
+    cases = {"IPO": "ipo", "Создание СП": "jv", "Реорганизация": "reorg",
+             "Финансирование · структурная сделка": "structured", "M&A": "acquisition",
+             "Инвестиция": "acquisition", "Продажа с торгов": "acquisition"}
+    for type_str, kind in cases.items():
+        assert format_post._kind_from_type(type_str) == kind, type_str
 
 
 def test_post_never_shows_a_why_line():
@@ -426,7 +467,9 @@ def test_post_subject_gets_substance_not_a_bare_repeated_name():
                                    '«СЧАСТЛИВАЯ РАБОТА» по ОКВЭД: 62.01 Разработка '
                                    'компьютерного программного обеспечения.'}}
     text = format_post.render(deal, {})
-    assert "<b>Предмет:</b> Happy Job" not in text, "голое имя — тот же кусок заголовка"
+    # С 24 сентября 2026 имя предмета стоит всегда (решение владельца), но
+    # одно имя из заголовка — не вся строка: за тире идёт суть из карточки.
+    assert "<b>Предмет:</b> Happy Job — " in text, "за именем нет сути"
     assert "«СЧАСТЛИВАЯ РАБОТА»" in text, "точное юрлицо не попало в пост"
 
 
@@ -444,7 +487,9 @@ def test_post_never_prints_a_buyer_line_without_a_buyer_name():
                             "18,2 тысячи квадратных метров в Москве и Санкт-Петербурге."},
     }
     text = format_post.render(deal, {})
-    assert "Покупатель" not in text, "нет имени покупателя — строки быть не должно вовсе"
+    # Строка покупателя есть всегда (решение владельца 24 сентября 2026), но
+    # без имени она говорит «не раскрыт», а не подставляет чужое предложение.
+    assert "<b>Покупатель:</b> не раскрыт\n" in text, text
     assert "периметр сделки" not in text, "деталь без стороны, к которой она относится, не публикуется"
 
 
@@ -538,8 +583,8 @@ def test_post_buyer_detail_skips_the_sentence_about_who_reported_the_deal():
     assert "сообщила в финансовой отчетности" not in text, \
         "мета-предложение о раскрытии ушло в пост как пояснение покупателя"
     # Второе предложение контекста — о цене, не о покупателе: тоже не годится,
-    # и строка целиком исчезает (имя и так в заголовке).
-    assert "<b>Покупатель:</b>" not in text, text
+    # и от строки остаётся одно имя.
+    assert "<b>Покупатель:</b> «Транснефть»\n" in text, text
 
 
 def test_post_buyer_detail_requires_a_sentence_about_the_buyer_itself():
@@ -2223,6 +2268,28 @@ def test_plan_milestones_sends_on_silence_holds_before_it_and_respects_post_no()
     assert "d5-closed" in hold_ids, "молчание ещё не истекло — придержать"
     assert discard_ids == [9]
     assert sent_ids == []
+
+
+def test_plan_milestones_does_not_let_silence_publish_a_stale_milestone():
+    """24 сентября 2026: веха «НМГ закрыла сделку по „Комсомольской правде"»
+    от 3 сентября три недели держалась ложной находкой вычитки; без этого
+    правила починка вычитки выпустила бы её в канал с опозданием на 21 день —
+    повтором поста о самой сделке. Молчание старше недели веху не публикует,
+    явная кнопка «пост в канал» — публикует."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc)
+    stale = (now - timedelta(days=21)).isoformat()
+    deals = [{"id": "d7", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыто", "id": "d7-closed",
+         "milestone_drafted_at": stale}]},
+             {"id": "d8", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыто", "id": "d8-closed",
+         "milestone_drafted_at": stale}]}]
+    decisions = [{"id": 5, "deal_id": "d8~closed", "verdict": "post_yes"}]
+    send, hold, _discard, _sent = send_telegram.plan_milestones(deals, {}, decisions, now)
+    assert [e["id"] for _d, e in send] == ["d8-closed"], "решение человека сильнее срока"
+    assert [e["id"] for _d, e, *_ in hold] == ["d7-closed"]
+    assert "устарела" in hold[0][2]
 
 
 def test_main_sends_an_approved_milestone_and_records_dedup(monkeypatch, tmp_path):
@@ -5129,7 +5196,8 @@ def test_post_proofreading_does_not_flag_legitimate_subjects():
     import check_post
     for value in ('права на СУБД «Персей»', 'производственная база',
                   'московский фармритейлер «Диалог»', '96% акций Челябинского завода',
-                  'Дальневосточный банк'):
+                  'Дальневосточный банк', 'здание Рижского вокзала',
+                  'платформа персонализированных добавок Bioniq'):
         post = '<b>Заголовок</b>\n\nПредмет: %s\nПокупатель: МКБ' % value
         assert not check_post.check(post), (value, check_post.check(post))
 

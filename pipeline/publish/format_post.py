@@ -845,8 +845,61 @@ def _buyer_label(deal):
     return 'Временный управляющий' if deal.get('kind') == 'custody' else 'Покупатель'
 
 
+def _kind_from_type(type_str):
+    """Копия `dealKindOf()` из static/index.html: пост и карточка обязаны
+    называть роли одинаково. Держит `test_ingest.py::
+    test_post_kind_matches_the_site_classifier`."""
+    t = (type_str or '').lower()
+    if 'ipo' in t:
+        return 'ipo'
+    if re.search(r'(^|[^а-яёa-z])сп($|[^а-яёa-z])|совместн|greenfield|joint venture', t):
+        return 'jv'
+    if re.search(r'кредитн[а-яё]* (договор|лини|соглашен)|синдицированн|(^|[^а-яё])(за[её]м|займ)|кредитован', t):
+        return 'credit'
+    if re.search(r'структурн[а-яё]* (сделк|финансирован)|под залог|(^|[^а-яё])репо($|[^а-яё])|форвардн', t):
+        return 'structured'
+    if 'реорганизац' in t:
+        return 'reorg'
+    if re.search(r'финансирован|венчурн|раунд|\bseed\b|допэмисси', t):
+        return 'financing'
+    return 'acquisition'
+
+
+def post_roles(deal):
+    """Подписи трёх строк сторон и какие из них печатаются ВСЕГДА.
+
+    Для покупки — все три, с «не раскрыт» на месте неизвестной (решение
+    владельца 24 сентября 2026). Исключения там же, где их делает карточка
+    сайта, иначе пост выдумал бы роль, которой у сделки нет:
+      • инвестиционный раунд — деньги идут в компанию, продавца нет вовсе;
+        строка «Продавец» печатается, только если он назван (так бывает,
+        когда «инвестицией» записана покупка доли у конкретного человека);
+      • временное управление по указу — вместо покупателя управляющий,
+        вместо продавца прежний владелец;
+      • IPO, СП, кредит, структурное финансирование, реорганизация — у них
+        другая раскладка ролей, поэтому печатается только то, что названо.
+    Возвращает (подпись покупателя, подпись продавца, подпись предмета,
+    множество обязательных строк из {'buyer', 'seller', 'subject'})."""
+    kind = _kind_from_type(deal.get('type'))
+    if kind == 'acquisition':
+        kind = deal.get('kind') or 'acquisition'
+    if kind == 'custody':
+        return 'Временный управляющий', 'Прежний владелец', 'Предмет', {'buyer', 'seller', 'subject'}
+    if deal.get('type') == 'Инвестиция' or kind == 'financing':
+        return 'Инвестор', 'Продавец', 'Предмет', {'buyer', 'subject'}
+    if kind == 'acquisition':
+        return 'Покупатель', 'Продавец', 'Предмет', {'buyer', 'seller', 'subject'}
+    return _buyer_label(deal), 'Продавец', 'Предмет', {'subject'}
+
+
 def render(deal, companies, updates=(), today=None, fin=None):
-    """Текст поста (HTML для Telegram). Пустых строк-заглушек в посте нет.
+    """Текст поста (HTML для Telegram).
+
+    СОСТАВ ПОСТОЯНЕН (решение владельца 24 сентября 2026): покупатель,
+    продавец, предмет — всегда и в этом порядке; неизвестная сторона —
+    «не раскрыт», как на плашке сайта (исключения по типу сделки —
+    `post_roles`). Следом свежие финансы, если есть, потом сумма, статус,
+    отрасль, консультанты — когда известны. Других заглушек в посте нет.
 
     ЭТАП 9 — реакция партнёров на пост «Алор брокер»: «он пишет в предмет
     кусок фразы из заголовка… смысла писать стороны и предмет тогда нет
@@ -894,90 +947,68 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # даже если само по себе слово в заголовке не встречалось.
     reference = title
 
-    def emit(text):
-        nonlocal reference
-        lines.append(text)
-        reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
-
-    # ПРЕДМЕТ — с сутью (юрлицо/доля, чем занимается), не голое имя-повтор
-    # заголовка. Финстрока цели — сразу под ним, отдельной строкой (П7-9).
-    asset_novel = bool(asset) and has_novelty(asset, reference)
-    detail = _join_subject_sentences(_subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
-    # Деталь сама называет предмет — имя перед тире не повторяем. Найдено
-    # владельцем 2 сентября на посте о госпакете Шереметьево: «Предмет:
-    # Международный аэропорт Шереметьево (МАШ) — Госпакет Международного
-    # аэропорта Шереметьево (МАШ) — на конец января…» — одно и то же дважды,
-    # потому что новизна детали считалась против имени (в ней есть «госпакет»
-    # и «30%»), а новизна имени против детали — нет.
-    if asset_novel and detail and not has_novelty(asset, detail):
-        asset_novel = False
-    if asset_novel and detail:
-        subject = '%s %s — %s' % (_lab('Предмет'), esc(asset), esc(detail))
-    elif asset_novel:
-        subject = '%s %s' % (_lab('Предмет'), esc(asset))
-    elif detail:
-        subject = '%s %s' % (_lab('Предмет'), esc(detail))
-    else:
-        subject = None
-    target_fin = fin.get('target')
-    # ОДНА КАРТОЧКА ФАКТОВ, БЕЗ ПУСТЫХ СТРОК ВНУТРИ. Партнёр 7 сентября 2026:
-    # «непонятен принцип пробелов между строками — между суммой и статусом
-    # нет пробела, а между отраслью и деталями есть». Принцип теперь один:
-    # всё, что с подписью (предмет, стороны, их отчётность, сумма, статус,
-    # отрасль), стоит одним блоком; абзацы прозы (консультанты, источник)
-    # отделены пустой строкой.
+    # СТОРОНЫ — ОДИН И ТОТ ЖЕ БЛОК В КАЖДОМ ПОСТЕ (владелец, 24 сентября 2026:
+    # «чтобы по содержанию разделов они были одинаковые; всегда должен быть
+    # покупатель, продавец и предмет»). До этого строка стороны печаталась,
+    # только если её имя не встречалось в заголовке, и из 300 последних
+    # карточек выходило пятнадцать разных наборов строк: у одних поста был
+    # покупатель, у других нет — в зависимости от того, как написан заголовок.
+    # Теперь порядок и состав постоянны: покупатель, продавец, предмет; имя
+    # стоит всегда, неизвестная сторона называется «не раскрыт», как на
+    # плашке карточки сайта. Правило новизны осталось только для ПОЯСНЕНИЙ
+    # после тире: имя повторить можно, пересказывать заголовок — нет.
+    buyer_label, seller_label, subject_label, required = post_roles(deal)
     card = []
-    if subject:
-        card.append(subject)
-    if target_fin:
-        # «Финансы цели» звучало как внутренний термин («финансы чего?» —
-        # спросил партнёр 31 августа); по-русски — чья это отчётность.
-        card.append('%s %s' % (_lab('Финансы покупаемой компании, %s год' % target_fin[0]),
-                               esc(target_fin[1])))
-    for text in card:
-        reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
 
-    # ПОКУПАТЕЛЬ — тоже с сутью (профиль компании либо `eco.context`, где эта
-    # сторона обычно и описывается), плюс его собственная финстрока (П7-9).
-    # НАЙДЕНО ВЛАДЕЛЬЦЕМ 25 августа (Pridex/Multispace, ge283bafc): без
-    # проверки на пустой `buyer` строка «Покупатель: …» печаталась из ОДНОЙ
-    # детали (eco.context), когда имени стороны не было вовсе, — читатель
-    # видел «Покупатель: В периметр сделки вошли четыре объекта…», хотя это
-    # предложение вообще не о покупателе. Деталь без имени не идентифицирует
-    # сторону — строка обязана нести хотя бы имя.
-    buyer_novel = bool(buyer) and has_novelty(buyer, reference)
+    def add(line):
+        nonlocal reference
+        card.append(line)
+        reference = reference + ' ' + re.sub(r'<[^>]+>', '', line)
+
     buyer_detail = _party_detail(deal, companies, 'buyer', 'context',
                                   reference + ' ' + buyer) if buyer else None
     if buyer and buyer_detail and names_party_upfront(buyer, buyer_detail):
         # Деталь сама называет покупателя в начале фразы — имя перед тире было
-        # бы вторым таким же. Владелец 4 сентября 2026 на живом посте о ТЦ
-        # «Город Косино» (gddb34475): «Покупатель: ООО «Афкап» — Новым
-        # владельцем компании стало ООО «Афкап» Агиля Мохнатова…» — «повторение
-        # странное». Тот же дефект и та же починка, что у «Предмета» выше
-        # (2 сентября, госпакет Шереметьево), только здесь проверка строже —
-        # см. докстроку names_party_upfront: имя из строки при этом НЕ
-        # пропадает, оно остаётся внутри самой детали.
-        buyer_line = '%s %s' % (_lab(_buyer_label(deal)), esc(buyer_detail))
-    elif buyer and (buyer_novel or buyer_detail):
-        buyer_line = '%s %s' % (_lab(_buyer_label(deal)), esc(buyer))
-        if buyer_detail:
-            buyer_line += ' — %s' % esc(buyer_detail)
-    else:
-        buyer_line = None
-    buyer_fin = fin.get('buyer')
-    if buyer_line:
-        emit_card = card.append
-        emit_card(buyer_line)
-        reference = reference + ' ' + re.sub(r'<[^>]+>', '', buyer_line)
-    if buyer_fin:
-        card.append('%s %s' % (_lab('Финансы покупателя, %s год' % buyer_fin[0]), esc(buyer_fin[1])))
+        # бы вторым таким же («Покупатель: ООО «Афкап» — Новым владельцем
+        # компании стало ООО «Афкап»…», пост о ТЦ «Город Косино», 4 сентября
+        # 2026). Имя при этом не пропадает — оно внутри самой детали.
+        add('%s %s' % (_lab(buyer_label), esc(buyer_detail)))
+    elif buyer:
+        # Деталь без имени не печатается никогда (Pridex/Multispace, 25 августа
+        # 2026: «Покупатель: В периметр сделки вошли четыре объекта…»).
+        add('%s %s%s' % (_lab(buyer_label), esc(buyer),
+                         (' — %s' % esc(buyer_detail)) if buyer_detail else ''))
+    elif 'buyer' in required:
+        add('%s не раскрыт' % _lab(buyer_label))
 
-    # ПРОДАВЕЦ — только имя, только с новизной (брифом не обещана суть, чтобы
-    # не раздувать пост: покупатель и предмет для читателя важнее).
-    if seller and has_novelty(seller, reference):
-        line = '%s %s' % (_lab('Продавец'), esc(seller))
-        card.append(line)
-        reference = reference + ' ' + re.sub(r'<[^>]+>', '', line)
+    if seller:
+        add('%s %s' % (_lab(seller_label), esc(seller)))
+    elif 'seller' in required:
+        add('%s не раскрыт' % _lab(seller_label))
+
+    detail = _join_subject_sentences(
+        _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
+    if asset and detail and not has_novelty(asset, detail):
+        # Деталь сама называет предмет — имя перед тире не повторяем (пост о
+        # госпакете Шереметьево, 2 сентября 2026: одно и то же дважды).
+        add('%s %s' % (_lab(subject_label), esc(detail)))
+    elif asset:
+        add('%s %s%s' % (_lab(subject_label), esc(asset), (' — %s' % esc(detail)) if detail else ''))
+    elif detail:
+        add('%s %s' % (_lab(subject_label), esc(detail)))
+    elif 'subject' in required:
+        add('%s не раскрыт' % _lab(subject_label))
+
+    # ФИНАНСЫ — только свежие (`fin_summary` отбрасывает отчёт старше двух
+    # лет), и только сразу после сторон, чтобы блок читался одинаково.
+    # «Финансы цели» звучало как внутренний термин («финансы чего?» — партнёр
+    # 31 августа 2026); по-русски — чья это отчётность.
+    target_fin, buyer_fin = fin.get('target'), fin.get('buyer')
+    if target_fin:
+        add('%s %s' % (_lab('Финансы покупаемой компании, %s год' % target_fin[0]),
+                       esc(target_fin[1])))
+    if buyer_fin:
+        add('%s %s' % (_lab('Финансы покупателя, %s год' % buyer_fin[0]), esc(buyer_fin[1])))
 
     if has(deal.get('sum')):
         card.append('%s %s' % (_lab('Сумма'), esc(deal['sum'])))
@@ -999,8 +1030,6 @@ def render(deal, companies, updates=(), today=None, fin=None):
     if card:
         lines.append('')
         lines.extend(card)
-        for text in card:
-            reference = reference + ' ' + re.sub(r'<[^>]+>', '', text)
 
     adv = advisers(deal)
     if adv:
