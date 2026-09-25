@@ -1,0 +1,118 @@
+{
+ "meta": {
+  "date": "2026-09-25",
+  "note": "Попутные находки пяти читателей, разбиравших 99 вопросов аудита, отложенных 21 сентября на решение владельца (pipeline/fix_audit_owner99_2026_09_25.py). В сами вопросы не входили, поэтому не правились — ставятся в очередь рутины «качество»."
+ },
+ "findings": [
+  {
+   "card_id": "g926d097b",
+   "class": "CONTRADICTION",
+   "field": "seller",
+   "quote": "Продавец по карточке — Геннадий Бобрицкий",
+   "problem": "По данным ФНС (смена владельца зарегистрирована 24.10.2025) продавцом АО «Приосколье» записан Сергей Феськов, а не Геннадий Бобрицкий; дата карточки 2025-01-16 — день первых сообщений, а не регистрации сделки.",
+   "action": "проверить продавца и дату по ЕГРЮЛ и источникам; исправить через review.py с цитатой",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "ce1b2321f",
+   "class": "OTHER",
+   "field": "id",
+   "quote": "Сбербанк Инвестиции приобрел 100% долей СДМ ТК-2 и продал 50% долей Логопарк 7",
+   "problem": "Та же сделка описана второй карточкой g4e3ec471 — возможный дубль.",
+   "action": "resolve_duplicates.py: сравнить ce1b2321f и g4e3ec471",
+   "confidence": "medium",
+   "needs_source": false,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "ce1b2321f",
+   "class": "PROFILE_DESC_IS_EVENT",
+   "field": "company:gac30cf97.desc",
+   "quote": "Инвестиционно-банковское подразделение Сбербанка.",
+   "problem": "Профиль «СберИнвест» описан как инвестиционно-банковское подразделение, а по TAdviser это компания прямых инвестиций Сбербанка (СберИнвест, Сбербанк Инвестиции).",
+   "action": "поправить описание профиля по источнику",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "cf6de2938",
+   "class": "CONTRADICTION",
+   "field": "eco.context",
+   "quote": "Санкций избежал только Алекперов",
+   "problem": "Утверждение сомнительно: Великобритания ввела санкции против Вагита Алекперова в 2022 году.",
+   "action": "проверить по источнику карточки и санкционным спискам; уточнить или удалить фразу",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "ga1828730",
+   "class": "CONTRADICTION",
+   "field": "eco.share",
+   "quote": "12,75% + 12,25%",
+   "problem": "Два транша (12,75% и 12,25%, всего 25%) не сходятся с пакетом Glencore 23,46%.",
+   "action": "сверить доли по раскрытию «Русснефти»; при расхождении источников — вопрос владельцу",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "g339dfcc8",
+   "class": "CONTRADICTION",
+   "field": "eco.val",
+   "quote": "Тишин оценил в 40–50 млн ₽",
+   "problem": "У аналитика 40–50 млн ₽ — цена пакета 25%, а всю компанию он оценил в 150–200 млн ₽ (Коммерсантъ, doc/8342338); карточка относит 40–50 млн ₽ ко всей компании.",
+   "action": "исправить eco.val по цитате Коммерсанта",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "gmru-prime-pervy-poliplastik",
+   "class": "CONTRADICTION",
+   "field": "eco.context",
+   "quote": "Михаил Гориловский",
+   "problem": "Председатель совета директоров «Полипластика» — Лев Гориловский (интервью Интерфаксу 1 сентября 2026, interfax.ru/interview/1112426); источника нет в src.",
+   "action": "исправить имя и добавить источник в src",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "g3d815d6f",
+   "class": "DATE_MISMATCH",
+   "field": "date",
+   "quote": "2024-12-16",
+   "problem": "Дата карточки — день ходатайства в ФАС; по ЕГРЮЛ «Бурсервис» владеет 100% ООО «Нафта Дриллинг Компани» с 21.02.2025. Профиль gc06dddd1 пишет «в 2024 году купила» — должно быть 2025.",
+   "action": "решить, какую дату считать датой сделки (закрытие по ЕГРЮЛ); поправить профиль",
+   "confidence": "medium",
+   "needs_source": true,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "g202f49be",
+   "class": "SOURCE_MISMATCH",
+   "field": "src",
+   "quote": "diasoft.ru/about/news/22236",
+   "problem": "В источниках «Диасофта» стоит посторонний релиз о дивидендах (22236), а не объявление цены IPO (diasoft.ru/about/news/20981).",
+   "action": "заменить ссылку на релиз 20981",
+   "confidence": "medium",
+   "needs_source": false,
+   "batch": "2026-09-25-owner99-side"
+  },
+  {
+   "card_id": "g7ae9bb53",
+   "class": "FIELD_MISPLACED",
+   "field": "eco.fin",
+   "quote": "eco.fin «Ямалдорстроя»",
+   "problem": "«Форма расчётов» содержит пересказ покупки и выручку, а не то, чем и как платили.",
+   "action": "move: eco.fin → eco.context / eco.target_fin; eco.fin — пусто или «—»",
+   "confidence": "medium",
+   "needs_source": false,
+   "batch": "2026-09-25-owner99-side"
+  }
+ ]
+}
