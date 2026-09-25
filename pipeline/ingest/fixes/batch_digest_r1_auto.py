@@ -121,10 +121,8 @@ FIXES = [
          new='Чистая прибыль выросла почти в три раза и достигла 616,3 млн руб.',
          quote='Чистая прибыль выросла почти в три раза и достигла 616,3 млн руб.',
          why='из digest ChatGPT round1, сверено с https://shoppers.media/news/21794_set-vernyi-v-2024-g-uvelicila-cistuiu-pribyl-pocti-v-tri-raza-do-6163-mln-rub'),
-    dict(id='c54966856', field='law.terms', old='—',
-         new='Одновременно с этим прекратил свое действие пут-опцион Сбера.',
-         quote='Одновременно с этим прекратил свое действие пут-опцион Сбера.',
-         why='из digest ChatGPT round1, сверено с https://t.me/s/bitkogan?after=27765'),
+    # c54966856/law.terms: запись снята 25.09.2026 — карточка слита в gc9461b5c
+    # (pipeline/fix_medskan_lab_owner_2026_09_25.py).
     # gbb7e25e1/eco.target_fin: запись снята — 23.08.2026 месячная очередь
     # дописала чистую прибыль поверх старого значения. См.
     # fix_wb_funsun_context_and_finances.py.
@@ -641,10 +639,8 @@ FIXES = [
          new=['shoppers.media', 'https://shoppers.media/news/21794_set-vernyi-v-2024-g-uvelicila-cistuiu-pribyl-pocti-v-tri-raza-do-6163-mln-rub'],
          quote='Чистая прибыль выросла почти в три раза и достигла 616,3 млн руб.',
          why='источник из digest ChatGPT round1'),
-    dict(id='c54966856', field='src', old=None,
-         new=['t.me', 'https://t.me/s/bitkogan?after=27765'],
-         quote='Одновременно с этим прекратил свое действие пут-опцион Сбера.',
-         why='источник из digest ChatGPT round1'),
+    # c54966856/src: запись снята 25.09.2026 — карточка слита в gc9461b5c
+    # (pipeline/fix_medskan_lab_owner_2026_09_25.py).
     dict(id='gbb7e25e1', field='src', old=None,
          new=['sberometer.ru', 'https://www.sberometer.ru/rvn/200865/priobreten-krupnyy-turoperator-fun/'],
          quote='По итогам 2024 года выручка «ТТ-трэвел» (юридическое лицо Fun&Sun) составила 104,4 млрд рублей, показав рост на 46,2% по сравнению с предыдущим годом.',
