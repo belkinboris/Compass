@@ -38,6 +38,9 @@ from datetime import datetime, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
+
+import format_post                                        # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -319,7 +322,7 @@ def main(write=False):
         # поля отличить свежее пополнение от старожила нечем.
         clean['added'] = now.date().isoformat()
         if override:
-            clean['post_override'] = override
+            clean['post_override'] = format_post.owner_text_as_html(override)
         # «Без поста»: карточка выходит на сайт, а канал молчит. send_telegram
         # увидит признак и засеет telegram_posts как бэклог, не отправляя.
         post = post_mod.get(card['id'])

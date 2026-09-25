@@ -41,6 +41,7 @@ approve.py публикует как есть (немой шаг, держащи
 """
 import json
 import os
+import re
 import sys
 import time
 from datetime import date
@@ -165,11 +166,14 @@ def post_message_text(card, companies, rendered=None):
     `post_preview`, см. `build_plan()`)."""
     buttons = format_post.buttons_preview(card)
     text = rendered if rendered is not None else format_post.render(card, companies)
+    # Сообщение уходит с разметкой (`send_one(..., html=True)`): пост уже
+    # HTML, а шапку и строку кнопок экранируем сами.
     return ('📣 [пост %s] — В КАНАЛ, на проверку\n'
             'Ниже — текст поста как он уйдёт подписчикам. Ответ на это '
             'сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n'
             '━━━━━━━━━━━━\n%s%s'
-            % (card['id'], text, '\n\n' + buttons if buttons else ''))
+            % (format_post.esc(card['id']), text,
+               '\n\n' + format_post.esc(buttons) if buttons else ''))
 
 
 def raw_message(draft):
@@ -265,15 +269,31 @@ PAUSE = 3.5
 RETRIES = 3
 
 
-def send_one(client, token, chat, text, keyboard, thread_id=None):
+def plain_text(html):
+    """Тот же текст без разметки — запасной вид черновика, если Telegram
+    не принял HTML: лучше показать пост без жирного, чем не показать вовсе."""
+    text = re.sub(r'<a href="([^"]*)">([^<]*)</a>', r'\2 (\1)', html)
+    text = re.sub(r'<[^>]+>', '', text)
+    return text.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&amp;', '&')
+
+
+def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     """Отправить одно сообщение, дождавшись, если Telegram просит подождать.
     keyboard=None — сообщение без кнопок (решение приходит только ответом
     текстом, как у очереди «нужен ИНН»): `reply_markup` тогда не кладём в
     тело запроса вовсе, а не шлём null — так же, как notification_service.
     _send_telegram уже делает для обычных уведомлений без клавиатуры.
     thread_id — номер темы форума (console_topics.thread_id); None — не
-    указываем вовсе, сообщение уйдёт в общую ленту."""
+    указываем вовсе, сообщение уйдёт в общую ленту.
+
+    html=True — текст с разметкой Telegram (черновики поста, вехи и сводки:
+    проверяющий видит пост ровно таким, каким его увидят подписчики). До
+    25 сентября 2026 черновики уходили без `parse_mode`, и владелец читал
+    в консоли «<b>Покупатель:</b>» с тегами. Telegram отверг разметку —
+    повторяем тот же текст без неё, а не теряем черновик."""
     payload = {'chat_id': chat, 'text': text, 'disable_web_page_preview': True}
+    if html:
+        payload['parse_mode'] = 'HTML'
     if keyboard is not None:
         payload['reply_markup'] = keyboard
     if thread_id is not None:
@@ -288,6 +308,11 @@ def send_one(client, token, chat, text, keyboard, thread_id=None):
             data = {}
         # Отказ «группа стала супергруппой» несёт новый номер чата — идём по
         # нему, а не считаем это сбоем связи (6 сентября 2026).
+        if payload.get('parse_mode') and "can't parse entities" in str(data.get('description') or ''):
+            print('  разметку не приняли — повторяю без неё: %s' % str(data.get('description'))[:120])
+            del payload['parse_mode']
+            payload['text'] = plain_text(payload['text'])
+            continue
         moved = console_topics.migrated_chat_id(data)
         if moved and moved != payload['chat_id']:
             print('  адрес консоли изменился на %s — повторяю по нему' % moved)
@@ -456,7 +481,8 @@ def main(write=False):
                 time.sleep(PAUSE)
             ok_all = True
             for chat in chats:
-                if not send_one(client, token, chat, text, keyboard, thread):
+                if not send_one(client, token, chat, text, keyboard, thread,
+                                html=(mark == 'post_draft_sent')):
                     ok_all = False
             # Временное поле `_pending_post_preview` (см. build_plan()) живёт
             # на карточке ДО отправки её собственного поста — у одной

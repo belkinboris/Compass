@@ -2215,13 +2215,98 @@ def test_render_milestone_uses_the_snapshot_not_live_fields():
              "snapshot": {"title": "Заголовок на момент этапа", "sum": "100 млн ₽ (на момент)",
                          "status": "Закрыта", "buyer": "ООО «Покупатель»"}}
     text = format_post.render_milestone(deal, event)
-    assert "Заголовок на момент этапа" in text
     assert "100 млн ₽ (на момент)" in text
     assert "СЕГОДНЯШНИЙ" not in text and "999 млрд" not in text
     assert "ООО «Покупатель»" in text
     # Ссылка на карточку у вехи — тоже кнопкой под постом, а не в тексте.
     assert "/#/deal/d1" not in text
     assert format_post.render_buttons(deal)["inline_keyboard"][0][0]["url"].endswith("/#/deal/d1")
+
+
+def test_render_milestone_has_the_same_party_block_as_a_post():
+    """Владелец 25 сентября 2026: «веха неправильно отформатирована». У вехи
+    был свой порядок (продавец, предмет, покупатель последним), подписи без
+    выделения и строка «Сделка:», повторявшая заголовок. Теперь блок тот же,
+    что у поста: покупатель, продавец, предмет — жирными подписями, с «не
+    раскрыт» на месте неизвестной стороны; дальше сумма, статус, отрасль,
+    источник этапа."""
+    deal = {"id": "ge957fc7b", "type": "Продажа с торгов"}
+    event = {"kind": "closed", "date": "2026-09-25",
+             "headline": "«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова",
+             "source": ["Коммерсант", "https://www.kommersant.ru/doc/1"],
+             "snapshot": {"title": "«Ростех» продал штаб-квартиру «Швабе»", "type": "Продажа с торгов",
+                          "seller": "Ростех", "asset": "штаб-квартира «Швабе» в Москве",
+                          "buyer": "ООО «Оптика Мира»", "sum": "1,8 млрд ₽", "status": "Закрыта",
+                          "ind": "Недвижимость"}}
+    import check_post
+    text = format_post.render_milestone(deal, event)
+    lines = text.split("\n")
+    assert lines[0] == "📌 <b>«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова</b>"
+    assert "Сделка:" not in text
+    parties = [l for l in lines if l.startswith(("<b>Покупатель:", "<b>Продавец:", "<b>Предмет:"))]
+    assert parties == ["<b>Покупатель:</b> ООО «Оптика Мира»", "<b>Продавец:</b> Ростех",
+                       "<b>Предмет:</b> штаб-квартира «Швабе» в Москве"]
+    assert "<b>Сумма:</b> 1,8 млрд ₽" in lines
+    assert "<b>Статус:</b> Закрыта · сентябрь 2026" in lines
+    assert '<b>Источник:</b> <a href="https://www.kommersant.ru/doc/1">Коммерсант</a>' in lines
+    assert check_post.check(text) == []
+
+    event["snapshot"]["seller"] = None
+    assert "<b>Продавец:</b> не раскрыт" in format_post.render_milestone(deal, event)
+
+
+def test_console_drafts_of_posts_are_sent_with_markup(monkeypatch):
+    """Черновики поста, вехи и сводки уходят в консоль с `parse_mode=HTML`
+    — владелец видит пост таким, каким его увидят подписчики, а не
+    «<b>Покупатель:</b>» с тегами (25 сентября 2026). Шапка и строка
+    кнопок экранированы, текст самого поста — уже HTML. Если Telegram
+    разметку не принял, черновик уходит тем же текстом без неё."""
+    import send_drafts
+    import send_milestone_drafts
+    deal = {"id": "g1", "type": "M&A"}
+    event = {"kind": "closed", "headline": "A & B закрыли сделку",
+             "snapshot": {"buyer": "A", "seller": "B", "asset": "C", "status": "Закрыта"}}
+    msg = send_milestone_drafts.milestone_message(deal, event)
+    assert msg.startswith("📌 [веха g1~closed] — В КАНАЛ, на проверку")
+    assert "A &amp; B" in msg and "<b>Покупатель:</b> A" in msg
+    assert re.search(r"\[веха ([\w~-]+)\]", send_drafts.plain_text(msg)).group(1) == "g1~closed"
+
+    sent = []
+
+    class Ответ:
+        def __init__(self, data):
+            self._data, self.status_code = data, 200 if data.get("ok") else 400
+            self.text = str(data)
+
+        def json(self):
+            return self._data
+
+    class Клиент:
+        def __init__(self, reject_markup):
+            self.reject_markup = reject_markup
+
+        def post(self, url, json=None):
+            sent.append(dict(json))
+            if self.reject_markup and json.get("parse_mode"):
+                return Ответ({"ok": False, "description": "Bad Request: can't parse entities"})
+            return Ответ({"ok": True, "result": {"message_id": 1}})
+
+    assert send_drafts.send_one(Клиент(False), "tok", "chat", msg, None, html=True) is True
+    assert sent[-1]["parse_mode"] == "HTML"
+    sent.clear()
+    assert send_drafts.send_one(Клиент(True), "tok", "chat", msg, None, html=True) is True
+    assert len(sent) == 2 and "parse_mode" not in sent[1]
+    assert "<b>" not in sent[1]["text"] and "A & B закрыли сделку" in sent[1]["text"]
+    sent.clear()
+    send_drafts.send_one(Клиент(False), "tok", "chat", "текст", None)
+    assert "parse_mode" not in sent[-1]
+
+
+def test_owner_replacement_text_is_escaped_unless_it_carries_tags():
+    """Текст, скопированный из черновика с разметкой, приходит без тегов —
+    «M&A» в нём Telegram принял бы за начало разметки и не отправил пост."""
+    assert format_post.owner_text_as_html("Сделка M&A <тест>") == "Сделка M&amp;A &lt;тест&gt;"
+    assert format_post.owner_text_as_html("<b>Покупатель:</b> X") == "<b>Покупатель:</b> X"
 
 
 def test_milestone_candidates_requires_headline_and_postworthy_kind():
@@ -2361,6 +2446,112 @@ def test_main_sends_an_approved_milestone_and_records_dedup(monkeypatch, tmp_pat
     assert consumed == [5]
     # ...и в живом посте сделки НИЧЕГО не менялось — это отдельное сообщение.
     assert not written["telegram_posts"]
+
+
+def test_main_remembers_a_rejected_milestone_so_silence_never_sends_it(monkeypatch, tmp_path):
+    """«Без поста» у вехи раньше только гасилось на сайте: в следующем
+    прогоне решения уже не было, и веха выходила по суткам молчания
+    (25 сентября 2026, «Ростех»/«Швабе»). Теперь отказ ложится в
+    `telegram_milestones`, и веха больше не кандидат."""
+    from datetime import datetime, timedelta, timezone
+    drafted = (datetime.now(timezone.utc) - timedelta(hours=30)).isoformat(timespec="seconds")
+    deal = {"id": "dmilestone2", "title": "Сделка Y", "type": "M&A", "ind": "Не определена",
+            "events": [{"kind": "closed", "newsworthy": True, "headline": "Сделка Y закрыта",
+                       "id": "dmilestone2-closed",
+                       "snapshot": {"title": "Сделка Y", "status": "Закрыта", "buyer": "ООО «Y»"},
+                       "milestone_drafted_at": drafted}]}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps({"deals": [deal], "companies": {}, "telegram_posts": {},
+                                    "telegram_milestones": {}}), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    decisions = [[{"id": 7, "deal_id": "dmilestone2~closed", "verdict": "post_no"}]]
+    consumed = []
+    monkeypatch.setattr(send_telegram.approve, "fetch_decisions",
+                        lambda: (decisions[0], ("https://site", "тайна")))
+    monkeypatch.setattr(send_telegram.approve, "consume",
+                        lambda handle, ids: consumed.extend(ids))
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 1}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+
+    send_telegram.main(write=True, ignore_pace=True)
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_milestones"]["dmilestone2-closed"]["no_post"] is True
+    assert consumed == [7] and fake.calls == []
+
+    decisions[0] = []                      # решение погашено — на сайте его больше нет
+    send_telegram.main(write=True, ignore_pace=True)
+    assert fake.calls == [], "отклонённая веха не должна выйти по молчанию"
+
+
+def test_a_decision_on_an_earlier_milestone_draft_does_not_decide_the_new_one():
+    """Черновик вехи отправлен заново (формат починили) — «без поста»,
+    нажатое на прежний текст, гасится, но веху не отклоняет: решает новый
+    черновик, по кнопке или по суткам молчания."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime(2026, 9, 26, 12, 0, tzinfo=timezone.utc)
+    redrafted = (now - timedelta(hours=2)).isoformat()
+    deals = [{"id": "d9", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыто", "id": "d9-closed",
+         "milestone_drafted_at": redrafted}]}]
+    old_no = [{"id": 11, "deal_id": "d9~closed", "verdict": "post_no",
+               "created_at": (now - timedelta(hours=20)).replace(tzinfo=None).isoformat()}]
+    send, hold, discard_ids, _ = send_telegram.plan_milestones(deals, {}, old_no, now)
+    assert discard_ids == [11] and send == []
+    assert [e["id"] for _d, e, *_ in hold] == ["d9-closed"], "ждёт решения по новому черновику"
+    assert send_telegram.rejected_milestones(deals, old_no, discard_ids) == []
+
+    new_no = [dict(old_no[0], created_at=(now - timedelta(hours=1)).replace(tzinfo=None).isoformat())]
+    _s, _h, discard_ids, _ = send_telegram.plan_milestones(deals, {}, new_no, now)
+    assert send_telegram.rejected_milestones(deals, new_no, discard_ids) == ["d9-closed"]
+
+    undrafted = [{"id": "d9", "events": [dict(deals[0]["events"][0], milestone_drafted_at=None)]}]
+    _s, _h, discard_ids, _ = send_telegram.plan_milestones(undrafted, {}, new_no, now)
+    assert discard_ids == [11]
+    assert send_telegram.rejected_milestones(undrafted, new_no, discard_ids) == [], \
+        "черновик отозван для повторной отправки — прежнее решение его не хоронит"
+
+
+def test_main_waits_for_the_site_instead_of_deferring_the_post_an_hour(monkeypatch, tmp_path):
+    """`--wait-for-site N`: карточка только что легла в `main`, сайт её ещё
+    не отдаёт — прогон спрашивает сайт раз в минуту и шлёт пост, как только
+    она появилась, а не откладывает его до следующего часа (25 сентября
+    2026: «Т-Технологии»/«Точка» — применена в 10:18, пост в 11:18). Без
+    ключа поведение прежнее: отложить."""
+    deal = {"id": "dwait1", "title": "Сделка Z", "type": "M&A", "ind": "Не определена",
+            "events": [{"kind": "closed", "newsworthy": True, "headline": "Сделка Z закрыта",
+                       "id": "dwait1-closed",
+                       "snapshot": {"title": "Сделка Z", "status": "Закрыта", "buyer": "ООО «Z»"},
+                       "milestone_drafted_at": "2020-01-01T00:00:00+00:00"}]}
+
+    def run(wait, answers):
+        tmp_data = tmp_path / ("d%d.json" % wait)
+        tmp_data.write_text(json.dumps({"deals": [deal], "companies": {}, "telegram_posts": {},
+                                        "telegram_milestones": {}}), encoding="utf-8")
+        monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+        monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+        monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+        monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+        monkeypatch.setattr(send_telegram.approve, "fetch_decisions",
+                            lambda: ([{"id": 5, "deal_id": "dwait1~closed", "verdict": "post_yes"}],
+                                     ("https://site", "тайна")))
+        monkeypatch.setattr(send_telegram.approve, "consume", lambda handle, ids: None)
+        monkeypatch.setattr(send_telegram, "deals_missing_on_site", lambda ids: answers.pop(0))
+        monkeypatch.setattr(send_telegram.time, "sleep", lambda s: None)
+        fake = _FakeClient([{"ok": True, "result": {"message_id": 77}}])
+        monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+        monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+        send_telegram.main(write=True, ignore_pace=True, wait_for_site=wait)
+        return fake.calls
+
+    assert run(0, [{"dwait1"}]) == [], "без ожидания — отложить, как раньше"
+    answers = [{"dwait1"}, {"dwait1"}, set()]
+    assert len(run(15, answers)) == 1 and answers == [], "дождались сайта — пост ушёл в этом прогоне"
+    assert send_telegram.parse_wait_minutes(["x", "--write", "--wait-for-site", "10"]) == 10
+    assert send_telegram.parse_wait_minutes(["x", "--write"]) == 0
 
 
 def test_send_milestone_drafts_uses_a_tilde_separated_callback():

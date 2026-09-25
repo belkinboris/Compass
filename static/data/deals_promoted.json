@@ -29265,7 +29265,7 @@
    "ind": "Пищепром и напитки",
    "type": "IPO",
    "kind": "ipo",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "sum": "450 млн ₽",
    "eco": {
     "sum": "450 млн ₽",
@@ -29342,7 +29342,7 @@
      "meaning": "disclosed",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e18106450510"
+     "card_hash": "f1fa68c572eb"
     },
     "date": {
      "value": "2026-05-13",
@@ -29358,7 +29358,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6833ec7112ee"
+     "card_hash": "c0426c1ff79b"
     },
     "target": {
      "company_id": "g238791a2",
@@ -29384,6 +29384,11 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
+   },
+   "retracted": {
+    "status": [
+     "Закрыта"
+    ]
    }
   },
   {
@@ -170164,13 +170169,13 @@
   {
    "id": "g20d4cc38",
    "date": "2026-01-29",
-   "title": "ЛУКОЙЛ продал зарубежные активы (LUKOIL International GmbH) компании Carlyle",
+   "title": "ЛУКОЙЛ продаёт зарубежные активы (LUKOIL International GmbH) компании Carlyle",
    "buyer": "g41dae07f",
    "target": "g6b0b26d9",
    "ind": "Нефть и газ",
    "type": "M&A",
    "kind": "acquisition",
-   "status": "Подписана",
+   "status": "Обсуждается",
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
@@ -170243,14 +170248,14 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "974f46bf6a81"
+     "card_hash": "9ae88dd52710"
     },
     "price": {
      "value_rub": null,
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "f98fc919393c"
+     "card_hash": "ed82a2abf7a1"
     },
     "date": {
      "value": "2026-01-29",
@@ -170266,7 +170271,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9ad2b8b429ae"
+     "card_hash": "579c70426a1d"
     },
     "target": {
      "company_id": "g6b0b26d9",
@@ -170292,6 +170297,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
+   },
+   "retracted": {
+    "status": [
+     "Подписана"
+    ]
    }
   },
   {

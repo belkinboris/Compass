@@ -31,7 +31,7 @@ FIX = dict(timeweb=5300, ycloud=7000, claude_sub=20000, office=1908,
            fns=8000, kassa=2500, acc=7000, legal=10000, mkt=30000, misc=8000,
            gd_salary=0, team_cost=0)
 INJURY_YEAR = 2959.0
-DEV_FREE, DEV1_UNTIL, DEV1_COST, DEV2_COST = 3, 12, 50000, 100000
+DEV_FREE, DEV1_UNTIL, DEV1_COST, DEV2_COST = 6, 12, 50000, 100000
 ACQ = 0.030
 USN, USN_MIN, VAT_LIMIT, VAT_RATE = 0.20, 0.03, 60_000_000, 0.05
 CASH0 = 500_000
