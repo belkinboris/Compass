@@ -960,7 +960,7 @@
    ]
   },
   {
-   "draft_id": "d94500501",
+   "draft_id": "d72449728",
    "title": "В пермском селе Фролы за 140 млн рублей продают почти готовый торговый центр",
    "date": "2026-09-25",
    "src": [
@@ -988,7 +988,7 @@
    ]
   },
   {
-   "draft_id": "d50704359",
+   "draft_id": "d21626610",
    "title": "Самый дорогой пентхаус Москвы продают за 9,4 млрд рублей",
    "date": "2026-09-25",
    "src": [
@@ -1016,7 +1016,7 @@
    ]
   },
   {
-   "draft_id": "d13274245",
+   "draft_id": "d11494100",
    "title": "В Кургане продают огромный промышленный комплекс за полмиллиарда рублей. Фото",
    "date": "2026-09-25",
    "src": [
@@ -1044,7 +1044,7 @@
    ]
   },
   {
-   "draft_id": "d23783913",
+   "draft_id": "d21976491",
    "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
    "date": "2026-09-25",
    "src": [
@@ -1072,7 +1072,7 @@
    ]
   },
   {
-   "draft_id": "d79336827",
+   "draft_id": "d23224589",
    "title": "«Дом.РФ» выставил на торги бывший корпус Астраханского госуниверситета",
    "date": "2026-09-25",
    "src": [
@@ -1103,7 +1103,7 @@
    ]
   },
   {
-   "draft_id": "d84357941",
+   "draft_id": "d66670703",
    "title": "BASF направил предложение о слиянии своему конкуренту Evonik, пишут СМИ",
    "date": "2026-09-25",
    "src": [
@@ -1131,35 +1131,7 @@
    ]
   },
   {
-   "draft_id": "d18992105",
-   "title": "Продажи домашних тренажёров в России начали зависеть от погоды",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/25/prodazhi-domashnih-trenazhjorov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63846549",
+   "draft_id": "d73112353",
    "title": "Бывший санаторий в Выборге выставили на продажу за 330 млн рублей",
    "date": "2026-09-25",
    "src": [
@@ -1181,6 +1153,91 @@
     "seller": null
    },
    "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81698522",
+   "title": "СДЭК начал продавать кофе и батончики под своей маркой",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/sdek-nachal-prodavat-kofe-i-batonchiki-pod-svoej-markoj/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d84204784",
+   "title": "Anthropic’s founders seek voting control ahead of IPO",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/25/anthropics-founders-seek-voting-control-ahead-of-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d21697570",
+   "title": "В пермском Кунгуре продают самую большую в городе батут-арену",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053130836"
+    ]
+   ],
+   "sum": "6,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
