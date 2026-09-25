@@ -485,6 +485,13 @@ def fix_fingerprint(value):
     return hashlib.sha1(typo_flat(text).encode('utf-8')).hexdigest()[:12]
 
 
+def party_name_key(name):
+    """`_linker_key` без приставок «Группа компаний»/«ГК»/«МКПАО»: «ГК
+    «Брусника»» и «Группа компаний «Брусника»» — одно имя (25.09.2026)."""
+    text = re.sub(r'^\s*(?:МКПАО|Группа компаний|ГК)\s+', '', str(name or ''), flags=re.I)
+    return _linker_key(text)
+
+
 def already_applied(fix, card, companies=None):
     """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
     if fix['field'] == 'src':
@@ -498,7 +505,7 @@ def already_applied(fix, card, companies=None):
     # бы чужую правку.
     if fix['field'] == 'buyer_name' and current is None and card.get('buyer') and companies:
         profile = (companies.get(card['buyer']) or {}).get('name')
-        if profile and _linker_key(profile) == _linker_key(fix['new']):
+        if profile and party_name_key(profile) == party_name_key(fix['new']):
             return True
     # «Снять неверную ссылку» достигнуто, если этой ссылки больше нет. У
     # Qiwi/RealWeb запись снимала профиль, бывший названием самой сделки, и

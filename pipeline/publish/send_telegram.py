@@ -589,15 +589,17 @@ def answered_an_earlier_draft(created_at, event):
     return decided < drafted
 
 
-def rejected_milestones(deals, decisions, discard_ids):
+def rejected_milestones(deals, decisions, discard_ids, stage_posts=()):
     """id вех, которым в этом прогоне сказали «без поста» — их запоминает
     `telegram_milestones`. Решение о прежнем черновике гасится, но вехой
-    не отказывает (`answered_an_earlier_draft`)."""
+    не отказывает (`answered_an_earlier_draft`); веха, уже записанная в
+    `stage_posts` (вышла или отклонена раньше), не перезаписывается."""
     created = {d.get('id'): d.get('created_at') for d in decisions}
     events = {e.get('id'): e for deal in deals for e in (deal.get('events') or [])
               if isinstance(e, dict)}
     return [eid for eid, (verdict, did) in milestone_decisions(decisions).items()
             if verdict == 'post_no' and did in discard_ids and eid in events
+            and eid not in stage_posts
             and not answered_an_earlier_draft(created.get(did), events[eid])]
 
 
@@ -635,6 +637,19 @@ def plan_milestones(deals, stage_posts, decisions, now):
             send.append((deal, event))
         else:
             hold.append((deal, event, 'ждёт решения (%.0f ч из %d)' % (age, MILESTONE_SILENCE_HOURS)))
+    # Решения, которые больше ничего не решают, тоже гасим: перекрытые более
+    # поздним нажатием по той же вехе и решения по вехе, которая уже вышла
+    # или отклонена. Иначе они висят на сайте вечно (25.09.2026: «без поста»
+    # на прежний черновик «Швабе» осталось после выхода нового по кнопке).
+    chosen = {did for _v, did in by_event.values()}
+    for d in decisions:
+        did = str(d.get('deal_id') or '')
+        if did.startswith('digest~') or '~' not in did or d.get('verdict') not in ('post_yes', 'post_no'):
+            continue
+        deal_id, _, kind = did.partition('~')
+        stale = d['id'] not in chosen or '%s-%s' % (deal_id, kind) in stage_posts
+        if stale and d['id'] not in discard_ids and d['id'] not in sent_decision_ids:
+            discard_ids.append(d['id'])
     return send, hold, discard_ids, sent_decision_ids
 
 
@@ -721,7 +736,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # а сама веха оставалась кандидатом — и в следующем прогоне, уже без
     # решения, выходила по суткам молчания (нашлось на вехе «Ростех»/«Швабе»,
     # которую владелец не пустил из-за формата).
-    m_rejected = rejected_milestones(data['deals'], m_decisions, m_discard_ids)
+    m_rejected = rejected_milestones(data['deals'], m_decisions, m_discard_ids, milestones)
 
     # МЕСЯЧНАЯ СВОДКА (просьба владельца 2 сентября 2026). Тот же путь, что у
     # вехи: черновик в консоль -> сутки молчания -> публикация. Живёт здесь, а

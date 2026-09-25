@@ -2554,6 +2554,29 @@ def test_main_waits_for_the_site_instead_of_deferring_the_post_an_hour(monkeypat
     assert send_telegram.parse_wait_minutes(["x", "--write"]) == 0
 
 
+def test_decisions_that_decide_nothing_are_consumed_but_never_overwrite_a_posted_milestone():
+    """«Без поста» на прежний черновик, перекрытое «пост в канал» на новый, и
+    любое решение по вехе, которая уже вышла, гасятся — иначе висят на сайте
+    вечно. Но отказом они не становятся: запись о вышедшем посте цела."""
+    from datetime import datetime, timezone
+    now = datetime(2026, 9, 25, 13, 5, tzinfo=timezone.utc)
+    deals = [{"id": "d10", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыто", "id": "d10-closed",
+         "milestone_drafted_at": "2026-09-25T12:15:00+00:00"}]}]
+    posted = {"d10-closed": {"message_id": 141}}
+    decisions = [{"id": 776, "deal_id": "d10~closed", "verdict": "post_no",
+                  "created_at": "2026-09-25T11:35:26"}]
+    send, hold, discard_ids, sent = send_telegram.plan_milestones(deals, posted, decisions, now)
+    assert send == [] and discard_ids == [776]
+    assert send_telegram.rejected_milestones(deals, decisions, discard_ids, posted) == []
+
+    both = decisions + [{"id": 800, "deal_id": "d10~closed", "verdict": "post_yes",
+                         "created_at": "2026-09-25T12:20:00"}]
+    send, _h, discard_ids, sent = send_telegram.plan_milestones(deals, {}, both, now)
+    assert [e["id"] for _d, e in send] == ["d10-closed"] and sent == [800]
+    assert discard_ids == [776], "перекрытое решение гасится вместе с отправкой"
+
+
 def test_send_milestone_drafts_uses_a_tilde_separated_callback():
     """Кнопки черновика вехи несут `deal_id~kind` — тот же вид id, который
     main.py режет по `~`, а не по `:` (занят) и не по `-` (id сделок сами
