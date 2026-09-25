@@ -125,6 +125,7 @@ UPDATES_DIR = os.path.join(ROOT, 'data', 'inbox', 'updates')
 DEFAULT_CHANNEL = ''
 MAX_SENDS_PER_RUN = int(os.environ.get('TELEGRAM_MAX_SENDS_PER_RUN', '20'))
 SEND_DELAY_S = float(os.environ.get('TELEGRAM_SEND_DELAY_S', '1.2'))
+SITE_POLL_S = 60          # как часто спрашивать сайт при --wait-for-site
 # Пауза между НОВЫМИ постами внутри одного прогона. Она нужна отдельно от
 # `SEND_DELAY_S` (та защищает от лимитов Bot API и меряется секундами): в
 # последнем слоте окна уходит весь остаток очереди, и без разведения читатель
@@ -535,7 +536,7 @@ def deliver_digest(action, key, text, token, chat_id, digests, now, client_facto
         for chat in chats:
             send_drafts.send_one(client, token, chat,
                                  digest_draft_message(text, key, buttons),
-                                 digest_keyboard(key), thread)
+                                 digest_keyboard(key), thread, html=True)
         digests[key] = dict(digests.get(key) or {},
                             drafted_at=now.isoformat(timespec='seconds'))
         print('Сводка %s: черновик отправлен в консоль' % key)
@@ -554,22 +555,66 @@ def digest_keyboard(key):
 
 
 def digest_draft_message(text, key, buttons):
+    """Уходит с разметкой (`send_one(..., html=True)`), как и сам пост."""
     return ('📊 [сводка %s] — В КАНАЛ, на проверку\n'
             'Итоги месяца одним постом. Молчание сутки — выходит как есть; '
             'ответ своим текстом заменит пост.\n'
             '━━━━━━━━━━━━\n%s\n\n%s'
-            % (key, text, format_post.buttons_preview(buttons)))
+            % (format_post.esc(key), text, format_post.esc(format_post.buttons_preview(buttons))))
+
+
+def answered_an_earlier_draft(created_at, event):
+    """Решение принято ДО того, как ушёл нынешний черновик вехи, — значит,
+    человек отвечал на прежний текст, а не на этот. Так бывает, когда
+    черновик отозвали и отправили заново (25 сентября 2026: владелец не
+    пустил веху «Ростех»/«Швабе» из-за формата; после починки формата она
+    ушла в консоль ещё раз, и старое «без поста» не должно решать за новый
+    текст). Черновика нет вовсе (метку сняли, чтобы отправить заново) — тоже
+    прежний. Время решения неизвестно — считаем решение действующим, как
+    раньше."""
+    if not created_at:
+        return False
+    try:
+        decided = datetime.fromisoformat(str(created_at))
+        drafted = datetime.fromisoformat(str(event['milestone_drafted_at'])) \
+            if event.get('milestone_drafted_at') else None
+    except ValueError:
+        return False
+    if drafted is None:
+        return True
+    if decided.tzinfo is None:
+        decided = decided.replace(tzinfo=timezone.utc)      # сайт пишет наивное UTC
+    if drafted.tzinfo is None:
+        drafted = drafted.replace(tzinfo=timezone.utc)
+    return decided < drafted
+
+
+def rejected_milestones(deals, decisions, discard_ids):
+    """id вех, которым в этом прогоне сказали «без поста» — их запоминает
+    `telegram_milestones`. Решение о прежнем черновике гасится, но вехой
+    не отказывает (`answered_an_earlier_draft`)."""
+    created = {d.get('id'): d.get('created_at') for d in decisions}
+    events = {e.get('id'): e for deal in deals for e in (deal.get('events') or [])
+              if isinstance(e, dict)}
+    return [eid for eid, (verdict, did) in milestone_decisions(decisions).items()
+            if verdict == 'post_no' and did in discard_ids and eid in events
+            and not answered_an_earlier_draft(created.get(did), events[eid])]
 
 
 def plan_milestones(deals, stage_posts, decisions, now):
     """(отправить, придержать, отклонённые id решений-заглушек) — чистая
     функция аналогично `approve.plan_actions`, чтобы логика проверялась без
-    сети. `discard_ids` — decision id вехам с `post_no`: их надо
-    consume'нуть, даже если сама веха никогда не отправится."""
+    сети. `discard_ids` — decision id вехам с `post_no` и решениям о прежнем
+    черновике: их надо consume'нуть, даже если сама веха никогда не
+    отправится."""
     by_event = milestone_decisions(decisions)
+    created = {d.get('id'): d.get('created_at') for d in decisions}
     send, hold, discard_ids, sent_decision_ids = [], [], [], []
     for deal, event in milestone_candidates(deals, stage_posts):
         decision = by_event.get(event['id'])
+        if decision and answered_an_earlier_draft(created.get(decision[1]), event):
+            discard_ids.append(decision[1])
+            decision = None
         if decision and decision[0] == 'post_no':
             discard_ids.append(decision[1])
             continue
@@ -629,7 +674,7 @@ def deals_missing_on_site(deal_ids):
     return {d for d in ids if d not in live}
 
 
-def main(write, ignore_pace=False, skip_ids=frozenset()):
+def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     """`ignore_pace` — то же, что ключ `--now`, но параметром.
 
     Нужен тестам: они проверяют лимит сообщений за прогон и правило бэклога, а
@@ -640,7 +685,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     прошли механическую вычитку (`check_post.py`) — решение читающего (рутина
     публикации ПОСЛЕ того, как прочла полные тексты в сухом прогоне), не
     ошибка формата. Не помечаются отправленными: следующий прогон увидит их
-    заново, если владелец не решит иначе."""
+    заново, если владелец не решит иначе.
+
+    `wait_for_site` — сколько минут ждать, пока сайт покажет только что
+    одобренные карточки (ключ `--wait-for-site N`; см. комментарий у
+    `deals_missing_on_site` в теле)."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     # Без токена слать всё равно некуда — не спрашиваем сайт за адресом
     # канала: без этой проверки функция без токена всё равно делала
@@ -667,6 +716,12 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     now_utc = datetime.now(timezone.utc)
     m_send, m_hold, m_discard_ids, m_sent_decision_ids = plan_milestones(
         data['deals'], milestones, m_decisions, now_utc)
+    # «Без поста» у вехи ЗАПОМИНАЕТСЯ в `telegram_milestones`, как и
+    # отправленная веха. До 25 сентября 2026 решение только гасилось на сайте,
+    # а сама веха оставалась кандидатом — и в следующем прогоне, уже без
+    # решения, выходила по суткам молчания (нашлось на вехе «Ростех»/«Швабе»,
+    # которую владелец не пустил из-за формата).
+    m_rejected = rejected_milestones(data['deals'], m_decisions, m_discard_ids)
 
     # МЕСЯЧНАЯ СВОДКА (просьба владельца 2 сентября 2026). Тот же путь, что у
     # вехи: черновик в консоль -> сутки молчания -> публикация. Живёт здесь, а
@@ -804,8 +859,20 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
     # тот же урок применили к одному из двух мест. Разница между ними в
     # цене ошибки — в консоли пустую ссылку видят двое, в канале
     # подписчики.
-    not_on_site = deals_missing_on_site([d for d, _t in to_send] +
-                                        [d['id'] for d, _e, _t in to_send_m])
+    wanted = [d for d, _t in to_send] + [d['id'] for d, _e, _t in to_send_m]
+    not_on_site = deals_missing_on_site(wanted)
+    # ПОДОЖДАТЬ САЙТ В ЭТОМ ЖЕ ПРОГОНЕ (25 сентября 2026). Без ожидания пост
+    # только что одобренной карточки уходил лишь в СЛЕДУЮЩИЙ прогон публикации
+    # — через час после того, как карточка уже легла в `main`: «Т-Технологии»/
+    # «Точка» применена в 10:18 МСК, пост — в 11:18; Element/ПИК — 10:19 и
+    # 11:33. `--wait-for-site N` (после git push) опрашивает сайт раз в минуту
+    # до N минут: сайт подтягивает базу раз в DATA_REFRESH_MINUTES (5), и
+    # пост уходит в том же прогоне.
+    deadline = time.monotonic() + wait_for_site * 60
+    while not_on_site and write and time.monotonic() < deadline:
+        print('Жду, пока сайт покажет %d карточ. (%s)…' % (len(not_on_site), ', '.join(sorted(not_on_site))))
+        time.sleep(SITE_POLL_S)
+        not_on_site = deals_missing_on_site(wanted)
     if not_on_site:
         to_send = [(d, t) for d, t in to_send if d not in not_on_site]
         to_send_m = [(deal, e, t) for deal, e, t in to_send_m
@@ -999,6 +1066,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset()):
 
     for did in to_seed:
         posts[did] = None
+    for event_id in m_rejected:
+        milestones[event_id] = {'no_post': True,
+                                'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
     # Решения по вехам консуммируются ПОСЛЕ того, как их эффект (сообщение
@@ -1033,5 +1103,17 @@ def parse_skip_ids(argv):
     return frozenset(ids)
 
 
+def parse_wait_minutes(argv):
+    """`--wait-for-site N` → N минут (по умолчанию 0 — не ждать)."""
+    if '--wait-for-site' not in argv:
+        return 0
+    i = argv.index('--wait-for-site') + 1
+    try:
+        return max(0, int(argv[i]))
+    except (IndexError, ValueError):
+        return 15
+
+
 if __name__ == '__main__':
-    main('--write' in sys.argv, skip_ids=parse_skip_ids(sys.argv))
+    main('--write' in sys.argv, skip_ids=parse_skip_ids(sys.argv),
+         wait_for_site=parse_wait_minutes(sys.argv))

@@ -59,10 +59,15 @@ def milestone_keyboard(deal_id, kind):
 
 
 def milestone_message(deal, event):
-    header = '📌 [веха %s~%s] — НА КАНАЛ, на проверку\n\n' % (deal['id'], event['kind'])
+    """Черновик вехи в консоль — с разметкой, как пост в канале
+    (`send_one(..., html=True)`): шапку и строку кнопок экранируем, текст
+    вехи уже HTML. До 25 сентября 2026 владелец видел в консоли сырые теги."""
+    header = ('📌 [веха %s~%s] — В КАНАЛ, на проверку\n'
+              'Ниже — пост о новом этапе сделки, как он уйдёт подписчикам.\n'
+              '━━━━━━━━━━━━\n' % (format_post.esc(deal['id']), format_post.esc(event['kind'])))
     buttons = format_post.buttons_preview(deal)
     return (header + format_post.render_milestone(deal, event)
-            + ('\n\n' + buttons if buttons else ''))
+            + ('\n\n' + format_post.esc(buttons) if buttons else ''))
 
 
 def build_plan():
@@ -102,7 +107,7 @@ def main(write=False):
                 time.sleep(send_drafts.PAUSE)
             ok_all = True
             for chat in chats:
-                if not send_drafts.send_one(client, token, chat, text, keyboard, thread):
+                if not send_drafts.send_one(client, token, chat, text, keyboard, thread, html=True):
                     ok_all = False
             if ok_all:
                 sent += 1

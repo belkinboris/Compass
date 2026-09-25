@@ -1108,6 +1108,20 @@ def strip_platform_links(text):
     return re.sub(r'\n{3,}', '\n\n', out).strip()
 
 
+_OWNER_TAG = re.compile(r'</?(?:b|strong|i|em|u|s|a|code|pre)\b[^>]*>', re.I)
+
+
+def owner_text_as_html(text):
+    """Текст поста, который владелец прислал ответом в консоли, — в HTML для
+    канала. С 25 сентября 2026 черновик в консоли показывается с разметкой,
+    и скопированный из него текст приходит без тегов: «M&A» или «<» в нём
+    Telegram принял бы за разметку и отказал бы в отправке. Текст без тегов
+    экранируем; с тегами (набран вручную или скопирован из старого черновика,
+    где теги были видны) оставляем как есть."""
+    text = str(text or '')
+    return text if _OWNER_TAG.search(text) else esc(text)
+
+
 def render_buttons(deal):
     """Клавиатура под постом: карточка сделки — широкой кнопкой первым рядом,
     линзы — вторым. Формат готов для `reply_markup` Telegram."""
@@ -1149,31 +1163,49 @@ def render_milestone(deal, event):
     момент этого этапа» на странице этапа.
     """
     snap = event.get('snapshot') or {}
-    lines = ['📌 <b>%s</b>' % esc(event.get('headline') or '')]
-    lines.append('')
-    lines.append('Сделка: %s' % esc(snap.get('title') or deal.get('title')))
+    lines = ['📌 <b>%s</b>' % esc(event.get('headline') or snap.get('title') or deal.get('title') or '')]
 
-    parties = []
-    if has(snap.get('seller')):
-        parties.append('Продавец: %s' % esc(snap['seller']))
-    if has(snap.get('asset')):
-        parties.append('Предмет: %s' % esc(snap['asset']))
-    if has(snap.get('buyer')):
-        parties.append('%s: %s' % (_buyer_label(deal), esc(snap['buyer'])))
-    if parties:
-        lines.append('')
-        lines += parties
+    # ТОТ ЖЕ БЛОК, ЧТО У ОБЫЧНОГО ПОСТА (владелец, 25 сентября 2026: «веха
+    # неправильно отформатирована»). До этого у вехи был свой порядок —
+    # продавец, предмет, покупатель последним, — подписи без выделения и
+    # строка «Сделка: <заголовок карточки>», которая почти дословно повторяла
+    # заголовок вехи. Теперь стороны идут так же, как в `render()`:
+    # покупатель, продавец, предмет, по `post_roles` и с «не раскрыт» на
+    # месте неизвестной стороны; дальше сумма, статус, отрасль и источник
+    # этапа. Роли считаются по типу сделки из СНИМКА — тип на момент этапа.
+    buyer_label, seller_label, subject_label, required = post_roles(
+        {'type': snap.get('type') or deal.get('type'), 'kind': deal.get('kind')})
+    card = []
+    for value, label, role in ((snap.get('buyer'), buyer_label, 'buyer'),
+                               (snap.get('seller'), seller_label, 'seller'),
+                               (snap.get('asset'), subject_label, 'subject')):
+        if has(value):
+            card.append('%s %s' % (_lab(label), esc(value)))
+        elif role in required:
+            card.append('%s не раскрыт' % _lab(label))
 
-    facts = []
     if has(snap.get('sum')):
-        facts.append('Сумма: %s' % esc(snap['sum']))
+        card.append('%s %s' % (_lab('Сумма'), esc(snap['sum'])))
+    elif PLACEHOLDER.match(str(snap.get('sum') or '')):
+        card.append('%s не раскрывается' % _lab('Сумма'))
     if has(snap.get('status')):
-        facts.append('Статус: %s' % esc(snap['status']))
-    if facts:
+        status_line = '%s %s' % (_lab('Статус'), esc(snap['status']))
+        if snap['status'] == 'Закрыта':
+            when = fmt_month(event.get('date'))
+            if when:
+                status_line += ' · %s' % esc(when)
+        card.append(status_line)
+    ind = snap.get('ind') or deal.get('ind')
+    if has(ind) and ind != 'Не определена':
+        card.append('%s %s' % (_lab('Отрасль'), esc(ind)))
+    if card:
         lines.append('')
-        lines += facts
+        lines.extend(card)
 
-
+    src = event.get('source') or []
+    if len(src) > 1 and str(src[1]).startswith('http'):
+        lines.append('')
+        lines.append('%s <a href="%s">%s</a>' % (_lab('Источник'), esc(src[1]), esc(src[0])))
     return '\n'.join(lines)
 
 
