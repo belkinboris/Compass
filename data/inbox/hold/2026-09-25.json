@@ -959,7 +959,7 @@
    ]
   },
   {
-   "draft_id": "d49265384",
+   "draft_id": "d67878909",
    "title": "В пермском селе Фролы за 140 млн рублей продают почти готовый торговый центр",
    "date": "2026-09-25",
    "src": [
@@ -987,7 +987,7 @@
    ]
   },
   {
-   "draft_id": "d87149536",
+   "draft_id": "d39583910",
    "title": "Самый дорогой пентхаус Москвы продают за 9,4 млрд рублей",
    "date": "2026-09-25",
    "src": [
@@ -1015,46 +1015,7 @@
    ]
   },
   {
-   "draft_id": "d25686420",
-   "title": "Минфин предложил установить НДС 22% на трансграничные покупки без переходного периода",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/minfin-predlozhil-ustanovit-nds-22-na-transgranichnye-pokupki-bez-perehodnogo-perioda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-25",
-     "title": "Переговоры",
-     "note": "Ранее ведомство обсуждало плавный переход: 7% в 2027 году, 14% в 2028-м, затем 22%. Сообщение Минфин предложил установить НДС 22% на трансграничные покупки без переходного периода появились сначала на RETAILER.ru .",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/minfin-predlozhil-ustanovit-nds-22-na-transgranichnye-pokupki-bez-perehodnogo-perioda/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67030391",
+   "draft_id": "d28070448",
    "title": "В Кургане продают огромный промышленный комплекс за полмиллиарда рублей. Фото",
    "date": "2026-09-25",
    "src": [
@@ -1082,35 +1043,7 @@
    ]
   },
   {
-   "draft_id": "d40191110",
-   "title": "Дешево уже не будет: Минфин предложил НДС на зарубежные покупки",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/25/deshevo-uzhe-ne-budet-minfin-predlozhil-nds-na-zarubezhnye-pokupki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58439866",
+   "draft_id": "d59879757",
    "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
    "date": "2026-09-25",
    "src": [
@@ -1138,17 +1071,17 @@
    ]
   },
   {
-   "draft_id": "d11770505",
-   "title": "Минфин внес в Правительство налоговые поправки: НДФЛ до 22% при продаже бизнеса и 15% для ПИФов (update - предыдущая новость стерлась, случайно) M&A Сейчас: доход физлица от продажи акций и долей обла",
+   "draft_id": "d16189679",
+   "title": "В Басманном районе выставили на торги крупное помещение для бизнеса",
    "date": "2026-09-25",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7420"
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/25/v-basmannom-rajone-vystavili-na-torgi-krupnoe-pomeshhenie-dlya-biznesa"
     ]
    ],
-   "sum": "2,4 млн ₽",
-   "type": "M&A",
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1162,7 +1095,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

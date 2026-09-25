@@ -216792,6 +216792,160 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "gc65bacdf",
+   "date": "2026-09-25",
+   "title": "Владелец Nielsen и GfK продал активы в России",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac"
+    ],
+    [
+     "URA.RU",
+     "https://ura.news/news/1053130742"
+    ],
+    [
+     "Kinometro.ru",
+     "https://www.kinometro.ru/news/show/name/nielsen_gfk_sale_25092026"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Сообщается, что по данным ЕГРЮЛ, 25 сентября 100% ООО «Эй Си Нильсен» перешло к ООО «Конверсия», которым владеет Леонович. Руководить Nielsen тоже будет Дорофеев.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "По словам Леоновича, покупка позволяет и дальше использовать накопленную экспертизу и данные, развивать рынок и наращивать ключевые компетенции.",
+    "context": "Стоимость сделки не разглашается. Обе компании сохранят профиль: исследования потребительского рынка, аудит розницы, мониторинг и анализ покупательского поведения. Дорофеев отметил, что покупка позволит сберечь команду, действующие контракты и обязательства перед партнерами. GfK пришла в Россию в 1991 году и более 35 лет специализируется на маркетинговых исследованиях. Nielsen работает в России с 1994 года, предоставляя данные о розничных продажах и поведении покупателей в сегменте товаров повседневного спроса (FMCG).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Доли распределились так: 60% «ГФК-Русь» получила структура Леоновича, 40% — компания Дорофеева. Параллельно фирма Леоновича выкупила и российские активы Nielsen.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Nielsen/GfK",
+   "buyer_name": "Константин Леонович и Алексей Дорофеев",
+   "asset": "российские активы Nielsen и «ГФК-Русь»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-25",
+     "title": "Сделка завершена",
+     "note": "Международная группа Nielsen продала активы в России. Новыми владельцами компаний, занимавшихся анализом потребительского рынка, стали инвестор Константин Леонович и гендиректор «ГФК-Русь» Алексей Дорофеев",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Константин Леонович и Алексей Дорофеев",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac"
+     }
+    ],
+    "target": [
+     {
+      "value": "российские активы Nielsen и «ГФК-Русь»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Nielsen/GfK",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac"
+     }
+    ]
+   },
+   "reviewed": "2026-09-25",
+   "deep_researched": "2026-09-25",
+   "proofread_absorbed": {
+    "eco.rationale": [
+     "6c77d5503e65"
+    ]
+   },
+   "proofread": "2026-09-25",
+   "accepted": "2026-09-25",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Леонович и Дорофеев — физические лица, а не компании; их покупающие юрлица (ООО «Конверсия», доля Дорофеева) точно не подтверждены ни одним источником.",
+     "target": "две компании (ООО «Эй Си Нильсен» и «ГФК-Русь») с разными долями и структурой — предмет описан текстом, а не единым профилем.",
+     "seller": "международная группа Nielsen/GfK продаёт через российские «дочки», единого юрлица-продавца ни один источник не называет."
+    }
+   },
+   "post_preview": "<b>Владелец Nielsen и GfK продал активы в России</b>\n\n<b>Покупатель:</b> Константин Леонович и Алексей Дорофеев — Дорофеев отметил, что покупка позволит сберечь команду, действующие контракты и обязательства перед партнерами.\n<b>Продавец:</b> Nielsen/GfK\n<b>Предмет:</b> российские активы Nielsen и «ГФК-Русь» — Сообщается, что по данным ЕГРЮЛ, 25 сентября 100% ООО «Эй Си Нильсен» перешло к ООО «Конверсия», которым владеет Леонович. Руководить Nielsen тоже будет Дорофеев.\n<b>Статус:</b> Закрыта · сентябрь 2026\n\n<b>Источник:</b> <a href=\"https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac\">РБК</a>\nЕщё 2 источника — в карточке сделки\n\n#MA",
+   "added": "2026-09-25",
+   "post_override": "<b>Владелец Nielsen и GfK продал активы в России</b>\n\n<b>Покупатель:</b> Константин Леонович и Алексей Дорофеев.\n<b>Продавец:</b> Nielsen/GfK\n<b>Предмет:</b> российские активы Nielsen и «ГФК-Русь» —\n<b>Статус:</b> Закрыта · сентябрь 2026\n\n<b>Источник:</b> <a href=\"https://www.rbc.ru/business/25/09/2026/6ab621ec9a7947ca065740ac\">РБК</a>\nЕщё 2 источника — в карточке сделки\n\n#MA",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "5762e777ae53"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "70e6cf5ed6bf"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "e5633349e3f6"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "no_industry",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
