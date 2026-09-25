@@ -960,7 +960,7 @@
    ]
   },
   {
-   "draft_id": "d61953252",
+   "draft_id": "d94500501",
    "title": "В пермском селе Фролы за 140 млн рублей продают почти готовый торговый центр",
    "date": "2026-09-25",
    "src": [
@@ -988,7 +988,7 @@
    ]
   },
   {
-   "draft_id": "d91605095",
+   "draft_id": "d50704359",
    "title": "Самый дорогой пентхаус Москвы продают за 9,4 млрд рублей",
    "date": "2026-09-25",
    "src": [
@@ -1016,7 +1016,7 @@
    ]
   },
   {
-   "draft_id": "d23949143",
+   "draft_id": "d13274245",
    "title": "В Кургане продают огромный промышленный комплекс за полмиллиарда рублей. Фото",
    "date": "2026-09-25",
    "src": [
@@ -1044,7 +1044,7 @@
    ]
   },
   {
-   "draft_id": "d34692052",
+   "draft_id": "d23783913",
    "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
    "date": "2026-09-25",
    "src": [
@@ -1072,7 +1072,7 @@
    ]
   },
   {
-   "draft_id": "d58517215",
+   "draft_id": "d79336827",
    "title": "«Дом.РФ» выставил на торги бывший корпус Астраханского госуниверситета",
    "date": "2026-09-25",
    "src": [
@@ -1103,7 +1103,7 @@
    ]
   },
   {
-   "draft_id": "d36508081",
+   "draft_id": "d84357941",
    "title": "BASF направил предложение о слиянии своему конкуренту Evonik, пишут СМИ",
    "date": "2026-09-25",
    "src": [
@@ -1131,69 +1131,13 @@
    ]
   },
   {
-   "draft_id": "d36957636",
-   "title": "Банк «Санк-Петербург» погасит часть выкупленных акций",
+   "draft_id": "d18992105",
+   "title": "Продажи домашних тренажёров в России начали зависеть от погоды",
    "date": "2026-09-25",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/09/25/1231922-sank-peterburg-pogasit"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28497425",
-   "title": "Сделавший ставку на ИТ-направление российский логистический оператор решил зарабатывать продажей сладостей на Ozon",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-25_krupnaya_rossijskaya_logisticheskaya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50665157",
-   "title": "«Газпром» за полгода нарастил продажи газа на 4,4%",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260925/gazprom-873691089.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/25/prodazhi-domashnih-trenazhjorov"
     ]
    ],
    "sum": null,
@@ -1215,16 +1159,16 @@
    ]
   },
   {
-   "draft_id": "d84260912",
-   "title": "Врач предупредил об опасности покупки икры на сомнительных сайтах",
+   "draft_id": "d63846549",
+   "title": "Бывший санаторий в Выборге выставили на продажу за 330 млн рублей",
    "date": "2026-09-25",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260925/ikra-2120306248.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/25/bivshij-sanatorij-v-viborge"
     ]
    ],
-   "sum": null,
+   "sum": "330 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1236,36 +1180,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d20316500",
-   "title": "На инвестиционном форуме в Санкт-Петербурге обсудили будущее долгового рынка",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053130794"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
