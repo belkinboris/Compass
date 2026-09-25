@@ -205928,10 +205928,10 @@
   {
    "id": "ge957fc7b",
    "date": "2026-08-26",
-   "title": "«Ростех» продает штаб-квартиру «Швабе» рядом с гостиницей «Космос» в Москве",
+   "title": "«Ростех» продал штаб-квартиру «Швабе» в Москве экс-полпреду Клебанову",
    "ind": "Недвижимость",
    "type": "Продажа с торгов",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "РИА Недвижимость",
@@ -205940,6 +205940,10 @@
     [
      "Ведомости.Недвижимость",
      "https://www.vedomosti.ru/realty/articles/2026/08/26/1223688-na-meste-shtab-kvartiri-shvabe-mozhet-poyavitsya-novii-kompleks"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260925/rostehi-2120243766.html"
     ]
    ],
    "from_ingest": true,
@@ -205950,7 +205954,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "«Ростех» уже искал инвестора на этот комплекс в 2022 году. Тогда компания рассчитывала выручить за него 1,77 млрд ₽, но инвестор мог предложить и меньше — вплоть до 1,57 млрд ₽. Торги признали несостоявшимися: заявок не поступило.",
+    "context": "«Ростех» уже искал инвестора на этот комплекс в 2022 году. Тогда компания рассчитывала выручить за него 1,77 млрд ₽, но инвестор мог предложить и меньше — вплоть до 1,57 млрд ₽. Торги признали несостоявшимися: заявок не поступило. Илья Клебанов — бывший полномочный представитель президента в Северо-Западном федеральном округе.",
     "finadv": "—"
    },
    "law": {
@@ -205978,6 +205982,14 @@
       "method": "explicit_news_title",
       "url": "https://realty.ria.ru/20260826/shvabe-2113215916.html"
      }
+    ],
+    "buyer": [
+     {
+      "value": "ООО «Оптика Мира»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20260826/shvabe-2113215916.html"
+     }
     ]
    },
    "sum": "1,8 млрд ₽",
@@ -206001,20 +206013,20 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "4271d2e7e681"
+     "card_hash": "9ffbe9235f3b"
     },
     "price": {
      "value_rub": null,
      "meaning": "auction_start",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "58507c24085c"
+     "card_hash": "c2d511c0a299"
     },
     "date": {
      "value": "2026-08-26",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "af142c2a7887"
+     "card_hash": "4ee858e4f16a"
     },
     "nature": {
      "control_change": true,
@@ -206024,7 +206036,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "68e00ed14133"
+     "card_hash": "a48d8f5e78d8"
     },
     "target": {
      "company_id": null,
@@ -206046,13 +206058,40 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "auction_open",
-     "top_purchases": "auction_open",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
    "seller_id": "g7802e51e",
-   "sum_basis": "auction_start"
+   "sum_basis": "auction_start",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-25",
+     "title": "Сделка завершена",
+     "note": "Согласно протоколу торгов, актив достался ООО «Оптика Мира». «Оптика Мира», учредителем которой является Илья Клебанов, получит актив по начальной цене, составляющей 1,8 миллиарда рублей.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260925/rostehi-2120243766.html"
+     ],
+     "id": "ge957fc7b-closed",
+     "newsworthy": true,
+     "snapshot": {
+      "title": "«Ростех» продал штаб-квартиру «Швабе» в Москве экс-полпреду Клебанову",
+      "type": "Продажа с торгов",
+      "status": "Закрыта",
+      "sum": "1,8 млрд ₽",
+      "buyer": "ООО «Оптика Мира»",
+      "seller": "Ростех",
+      "asset": "штаб-квартира «Швабе» рядом с гостиницей «Космос» в Москве",
+      "ind": "Недвижимость"
+     },
+     "headline": "«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова",
+     "milestone_drafted_at": "2026-09-25T11:27:10+00:00"
+    }
+   ],
+   "buyer_name": "ООО «Оптика Мира»"
   },
   {
    "id": "gabdbe320",
