@@ -152,7 +152,8 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3629ebb7 (общие редкие слова: москве, старин) — проверьте, не дубль ли"
    ]
   },
   {
@@ -959,7 +960,7 @@
    ]
   },
   {
-   "draft_id": "d42347143",
+   "draft_id": "d61953252",
    "title": "В пермском селе Фролы за 140 млн рублей продают почти готовый торговый центр",
    "date": "2026-09-25",
    "src": [
@@ -987,7 +988,7 @@
    ]
   },
   {
-   "draft_id": "d88609349",
+   "draft_id": "d91605095",
    "title": "Самый дорогой пентхаус Москвы продают за 9,4 млрд рублей",
    "date": "2026-09-25",
    "src": [
@@ -1015,7 +1016,7 @@
    ]
   },
   {
-   "draft_id": "d52927314",
+   "draft_id": "d23949143",
    "title": "В Кургане продают огромный промышленный комплекс за полмиллиарда рублей. Фото",
    "date": "2026-09-25",
    "src": [
@@ -1043,7 +1044,7 @@
    ]
   },
   {
-   "draft_id": "d59493334",
+   "draft_id": "d34692052",
    "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
    "date": "2026-09-25",
    "src": [
@@ -1071,7 +1072,7 @@
    ]
   },
   {
-   "draft_id": "d18872133",
+   "draft_id": "d58517215",
    "title": "«Дом.РФ» выставил на торги бывший корпус Астраханского госуниверситета",
    "date": "2026-09-25",
    "src": [
@@ -1102,35 +1103,7 @@
    ]
   },
   {
-   "draft_id": "d12405331",
-   "title": "ОМК на 27% снизила инвестиции в достижение технологического суверенитета на фоне кризисной ситуации в отрасли",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/397848"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11254129",
+   "draft_id": "d36508081",
    "title": "BASF направил предложение о слиянии своему конкуренту Evonik, пишут СМИ",
    "date": "2026-09-25",
    "src": [
@@ -1158,93 +1131,97 @@
    ]
   },
   {
-   "draft_id": "d46156198",
-   "title": "Алиханов заявил, что купил бы себе Lada Azimut",
+   "draft_id": "d36957636",
+   "title": "Банк «Санк-Петербург» погасит часть выкупленных акций",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/25/1231922-sank-peterburg-pogasit"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28497425",
+   "title": "Сделавший ставку на ИТ-направление российский логистический оператор решил зарабатывать продажей сладостей на Ozon",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-09-25_krupnaya_rossijskaya_logisticheskaya"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50665157",
+   "title": "«Газпром» за полгода нарастил продажи газа на 4,4%",
    "date": "2026-09-25",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260925/alihanov-873685762.html"
+     "https://1prime.ru/20260925/gazprom-873691089.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-25",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20260925/alihanov-873685762.html"
-     ]
-    }
-   ],
-   "buyer_name": "Алиханов заявил, что",
-   "asset": "бы себе Lada Azimut",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Алиханов заявил, что",
-    "asset": "бы себе Lada Azimut",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d81577701",
-   "title": "Алиханов заявил, что купил бы себе Lada Azimut",
+   "draft_id": "d84260912",
+   "title": "Врач предупредил об опасности покупки икры на сомнительных сайтах",
    "date": "2026-09-25",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20260925/alihanov-2120251688.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-25",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260925/alihanov-2120251688.html"
-     ]
-    }
-   ],
-   "buyer_name": "Алиханов заявил, что",
-   "asset": "бы себе Lada Azimut",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Алиханов заявил, что",
-    "asset": "бы себе Lada Azimut",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Алиханов заявил, что купил бы себе Lada Azimut» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d52581260",
-   "title": "🥩 Черкизово: продажи падают, маржа растет",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1355560.php"
+     "https://ria.ru/20260925/ikra-2120306248.html"
     ]
    ],
    "sum": null,
@@ -1262,45 +1239,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d29325994",
-   "title": "СДЭК начал продавать еду под своим брендом на Ozon",
+   "draft_id": "d20316500",
+   "title": "На инвестиционном форуме в Санкт-Петербурге обсудили будущее долгового рынка",
    "date": "2026-09-25",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/sdjek-nachal-prodavat-edu-pod-svoim-brendom-na-ozon/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91666028",
-   "title": "В России увеличат доходы государства от продажи алкоголя",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/25/akciz/"
+     "web:ura.news",
+     "https://ura.news/news/1053130794"
     ]
    ],
    "sum": null,
