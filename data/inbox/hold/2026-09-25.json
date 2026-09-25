@@ -959,35 +959,7 @@
    ]
   },
   {
-   "draft_id": "d12510459",
-   "title": "Как ввод НДС 22% на иностранные онлайн-покупки отразится на рынке",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/25/09/2026/6ab551419a7947e4141ab810"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62824481",
+   "draft_id": "d58919525",
    "title": "В пермском селе Фролы за 140 млн рублей продают почти готовый торговый центр",
    "date": "2026-09-25",
    "src": [
@@ -1009,6 +981,45 @@
     "seller": null
    },
    "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66102960",
+   "title": "В Дагестане запустят два инвестиционных проекта в промышленности",
+   "date": "2026-09-25",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/skfo/news/dagestan/2026/9/25/v-dagestane-zapustyat-dva-investiczionnyh-proekta-v-promyshlennosti"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-25",
+     "title": "Переговоры",
+     "note": "В Дагестане в текущем году планируется реализовать два инвестиционных проекта.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/skfo/news/dagestan/2026/9/25/v-dagestane-zapustyat-dva-investiczionnyh-proekta-v-promyshlennosti"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
