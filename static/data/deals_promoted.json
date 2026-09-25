@@ -248326,9 +248326,15 @@
   "g69c83a3f": null,
   "g4d017d5c": 136,
   "g4b00b18e": 137,
-  "ga7020b5e": 138
+  "ga7020b5e": 138,
+  "gfd9c0206": 139
  },
- "telegram_milestones": {},
+ "telegram_milestones": {
+  "g17fc21d6-cancelled": {
+   "message_id": 140,
+   "at": "2026-09-25T08:08:55+00:00"
+  }
+ },
  "telegram_digests": {
   "2026-08": {
    "drafted_at": "2026-09-02T12:19:13+00:00",

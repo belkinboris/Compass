@@ -5525,6 +5525,14 @@ def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, t
     import datetime
     data = json.loads(json.dumps({"deals": base["deals"], "companies": base["companies"],
                                   "telegram_posts": {d["id"]: None for d in base["deals"]}}))
+    # `telegram_posts=None` для каждой сделки нейтрализует кандидатуру в
+    # «новый пост», но веха с `milestone_drafted_at` в реальной базе может
+    # ждать отправки по молчанию независимо от этого — тест должен слать
+    # РОВНО сводку, а не то, что реальная база успела накопить к моменту
+    # прогона; снимаем эту же кандидатуру у вех.
+    for deal in data["deals"]:
+        for event in deal.get("events") or []:
+            event.pop("milestone_drafted_at", None)
     y, m = monthly_digest.previous_month(datetime.date.today())
     key = monthly_digest.month_key(y, m)
     if not monthly_digest.enough(monthly_digest.stats(data, y, m)):
