@@ -216655,6 +216655,143 @@
      "multiple_text": "target_bank"
     }
    }
+  },
+  {
+   "id": "gfd9c0206",
+   "date": "2026-09-24",
+   "title": "Петербургский застройщик Element выкупит площадку группы ПИК в Москве",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8974516"
+    ],
+    [
+     "Московская перспектива",
+     "https://mperspektiva.ru/topics/peterburgskiy-element-mozhet-kupit-u-pik-ploshchadku-pod-75-tys-kv-m-zhilya-v-moskve/"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260925/developer-2120185120.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Объект занимает 3,2 га земли, где согласовано строительство жилого комплекса на 75,2 тыс. кв. м.",
+    "val": "Директор департамента земельных проектов NF Group Максим Чернядьев оценивает сумму сделки в 4–5 млрд руб., коммерческий директор «Метриума» Дмитрий Проскурин — в 5–6 млрд руб. В строительство комплекса новому владельцу нужно будет вложить еще 10–13 млрд руб., а выручка от реализации жилья может достигнуть 32–35 млрд руб., не исключает господин Проскурин.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Продать участок с готовым проектом можно гораздо дороже, чем землю без документации, этим и пользуется ПИК, говорит господин Проскурин.",
+    "context": "В последнее время группа ПИК активно распродает свой земельный банк. Так, в конце 2025 года площадка по соседству с River City была продана региональному девелоперу Unikey, который приобрел у входящего в ГК ПИК застройщика Forma бывшую территорию Московского винно-коньячного завода на Ленинградском шоссе. Там можно построить жилой комплекс на 145 тыс. кв. м. ПИК также избавляется и от активов в других регионах. По данным «Дом.РФ», в январе–августе 2026 года продажи новостроек в Москве сократились на 29% год к году, до 1,7 млн кв. м. При этом по России в целом объем продаж вырос на 2%, до 14,6 млн кв. м. Element работает в Москве с 2023 года. Владельцами застройщика в равных долях выступают Андрей Скоблов, Виталий Коробов, Андрей Захаренков и Дмитрий Андреев, добавляет \"Коммерсант\".",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Петербургский застройщик Element",
+   "asset": "бизнес-парк River City на Ленинградском шоссе",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Петербургский застройщик Element",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/8974516"
+     }
+    ],
+    "target": [
+     {
+      "value": "бизнес-парк River City на Ленинградском шоссе",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8974516"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ПИК",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/8974516"
+     }
+    ]
+   },
+   "seller": "ПИК",
+   "reviewed": "2026-09-24",
+   "deep_researched": "2026-09-24",
+   "seller_id": "gkpik",
+   "accepted": "2026-09-24",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Element впервые встречается в сделках; ни один найденный источник, включая сайт самой компании, не называет точное юрлицо (ООО/АО) или ИНН — только бренд «Element».",
+     "target": "конкретная площадка (бизнес-парк River City), а не самостоятельное юрлицо с профилем в базе."
+    },
+    "no_inn": {
+     "seller": "профиль gkpik — публичная группа компаний («ПАО «Группа компаний ПИК»), а не одно юрлицо с единым ИНН; профиль уже помечен group=true, ФНС запрашивалась 12.09.2026 без результата — тот же честный пробел, не новый."
+    }
+   },
+   "post_preview": "<b>Петербургский застройщик Element выкупит площадку группы ПИК в Москве</b>\n\n<b>Покупатель:</b> Петербургский застройщик Element\n<b>Продавец:</b> ГК ПИК\n<b>Предмет:</b> бизнес-парк River City на Ленинградском шоссе — Объект занимает 3,2 га земли, где согласовано строительство жилого комплекса на 75,2 тыс. кв. м.\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/8974516\">Коммерсантъ</a>\nЕщё 1 источник — в карточке сделки\n\n#MA",
+   "added": "2026-09-25",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "6a67d1443d6b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-09-24",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "cd687f2c2a77"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "cd3e34f4f749"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "no_industry",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
@@ -248189,9 +248326,15 @@
   "g69c83a3f": null,
   "g4d017d5c": 136,
   "g4b00b18e": 137,
-  "ga7020b5e": 138
+  "ga7020b5e": 138,
+  "gfd9c0206": 139
  },
- "telegram_milestones": {},
+ "telegram_milestones": {
+  "g17fc21d6-cancelled": {
+   "message_id": 140,
+   "at": "2026-09-25T08:08:55+00:00"
+  }
+ },
  "telegram_digests": {
   "2026-08": {
    "drafted_at": "2026-09-02T12:19:13+00:00",
