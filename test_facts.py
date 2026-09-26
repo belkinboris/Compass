@@ -135,8 +135,46 @@ def test_number_checks_catch_units_currency_and_package_price():
     assert 'unit_mismatch' in facts.number_checks(d)
     d = _deal(sum='$150 млн')
     d['facts'] = facts.derive(d, CTX)
+    assert facts.number_checks(d) == [], "пересчёт по курсу ЦБ — не ошибка"
+    for k in ('currency', 'amount', 'fx_rate', 'fx_date', 'fx_method'):
+        d['facts']['price'].pop(k, None)
     d['facts']['price']['value_rub'] = 1.5e10
-    assert 'foreign_currency' in facts.number_checks(d)
+    assert 'foreign_currency' in facts.number_checks(d), "рубли вписаны без пересчёта"
+
+
+# ---------- цена в валюте (26 сентября 2026) ----------
+
+def test_foreign_price_is_converted_at_the_cbr_rate_of_the_deal_date(monkeypatch):
+    """Твёрдая цена одной суммой в долларах или евро пересчитывается в рубли
+    по курсу ЦБ на дату сделки; исходная сумма и курс остаются в факте."""
+    import fx
+    monkeypatch.setattr(fx, '_table', {'USD': {'2024-02-29': 90.0, '2024-03-01': 91.0},
+                                       'EUR': {'2024-03-01': 99.0}})
+    p = facts.derive(_deal(sum='$484 млн'), CTX)['price']
+    assert p['meaning'] == 'foreign_currency' and facts.firm_price(p) and p['value_rub'] == round(484e6 * 91.0)
+    assert (p['currency'], p['amount'], p['fx_rate'], p['fx_date'], p['fx_method']) == \
+        ('USD', 484e6, 91.0, '2024-03-01', 'day')
+    assert facts.derive(_deal(sum='531 млн €'), CTX)['price']['value_rub'] == round(531e6 * 99.0)
+    # выходной — последний курс до даты; только месяц — средний за месяц
+    assert facts.derive(_deal(sum='$1 млн', date='2024-03-03'), CTX)['price']['fx_date'] == '2024-03-01'
+    assert facts.derive(_deal(sum='$1 млн', date='2024-02'), CTX)['price']['fx_method'] == 'month_avg'
+    # «до вычета долга» — цена вместе с долгом, на долю не делится
+    assert facts.derive(_deal(sum='$3,2 млрд (до вычета долга)'), CTX)['price']['scope'] == 'ev'
+
+
+def test_foreign_price_is_not_converted_when_it_is_not_one_firm_price(monkeypatch):
+    """Оценка, диапазон, «до», две суммы в строке, другая валюта, год без
+    месяца, курс старше недели — рублей не появляется, смысл остаётся «сумма
+    в валюте»."""
+    import fx
+    monkeypatch.setattr(fx, '_table', {'USD': {'2024-03-01': 91.0}, 'EUR': {'2024-03-01': 99.0}})
+    for text in ('до $150 млн', '$25–50 млн (по оценке)', '≈€500 млн', 'более $1 млрд',
+                 '€1 + €100 млн (погашение долга)', '$12 млн (в т.ч. $10 млн от фонда)',
+                 '851 млн датских крон (более $113,5 млн)'):
+        p = facts.derive(_deal(sum=text), CTX)['price']
+        assert p['value_rub'] is None and p['meaning'] == 'foreign_currency', text
+    assert facts.derive(_deal(sum='$1 млн', date='2024'), CTX)['price']['value_rub'] is None
+    assert facts.derive(_deal(sum='$1 млн', date='2024-03-20'), CTX)['price']['value_rub'] is None
 
 
 # ---------- подтверждение чтением ----------

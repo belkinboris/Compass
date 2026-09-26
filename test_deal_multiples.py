@@ -651,3 +651,22 @@ def test_a_swapped_report_in_the_denominator_drops_the_verified_tier():
     assert not dm.perimeter_report_still_matches(seen, '7700000001', 2023, 1_400_000_000.0)
     # читатели отчёт не называли — сверять нечего, допуск решается не здесь
     assert dm.perimeter_report_still_matches({}, '7700000001', 2023, 1e9)
+
+
+def test_foreign_price_parses_one_amount_and_keeps_its_meaning():
+    """Разбор суммы в валюте: одна сумма — валюта, число и смысл по тем же
+    правилам, что у рублей; две суммы, кроны и рубли рядом — не разбираются."""
+    cases = {
+        '$484 млн': ('USD', 484e6, 'disclosed'), '531 млн €': ('EUR', 531e6, 'disclosed'),
+        '$1 209 млн': ('USD', 1209e6, 'disclosed'), '$550 000': ('USD', 550000.0, 'disclosed'),
+        '800 млн $': ('USD', 800e6, 'disclosed'), 'до $150 млн': ('USD', 150e6, 'estimate'),
+        '$25–50 млн (по оценке)': ('USD', 37.5e6, 'range'), 'более $1 млрд': ('USD', 1e9, 'lower_bound'),
+        '$243,75 млн (первый этап)': ('USD', 243.75e6, 'estimate'),
+    }
+    for text, (cur, amount, meaning) in cases.items():
+        fp = dm.foreign_price(text)
+        assert (fp['currency'], fp['amount'], fp['meaning']) == (cur, amount, meaning), text
+    for text in ('€1 + €100 млн', '$12 млн (в т.ч. $10 млн от фонда)', '851 млн датских крон (более $113,5 млн)',
+                 '€8 млн (689,5 млн ₽)', 'не разглашается (возможная сумма — $400 млн)', '1 000 млн ₽'):
+        assert dm.foreign_price(text) is None, text
+

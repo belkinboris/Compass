@@ -4240,8 +4240,7 @@ function unifiedFeedItems(){
     const want = msValues(filterPriced);
     if(!want.length) return true;
     if(it.kind!=="full") return false;
-    const meaning = ((it.rec.facts||{}).price||{}).meaning;
-    const yes = meaning === "disclosed";
+    const yes = firmPrice(((it.rec.facts||{}).price||{}));
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
   const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
@@ -6818,6 +6817,9 @@ const factAdmitted = (d, metric) => !!((factsOf(d).admitted || {})[metric]);
 const factReason = (d, metric) => (factsOf(d).reasons || {})[metric] || "unknown";
 const sumBasis = d => priceFact(d).meaning || "unparsed";
 const priceRub = d => priceFact(d).value_rub || 0;
+// Копия facts.firm_price: цена названа сторонами — в рублях или в валюте,
+// пересчитанной по курсу ЦБ на дату сделки (26 сентября 2026).
+const firmPrice = p => p.meaning === "disclosed" || (p.meaning === "foreign_currency" && !!p.fx_rate && !!p.value_rub);
 // Покупка с ценой, названной сторонами И прочитанной в источнике — идёт в
 // суммы по годам и отраслям (графики). С третьего разбора рецензента
 // (6 сентября 2026) текста карточки для денег недостаточно: «фонд планирует
@@ -6901,6 +6903,19 @@ function editionLabelJs(url){
 // Копия deal_multiples.implied_full_price: цена пакета делится на его долю —
 // получается стоимость всей компании «по этой сделке». Цена, которая уже за
 // компанию (equity) или за компанию с долгом (ev), не пересчитывается.
+// Цена была в долларах или евро и пересчитана по курсу ЦБ (facts.py,
+// 26 сентября 2026) — говорим, из какой суммы и по какому курсу.
+function fxNote(fx){
+  if(!fx || !fx.amount || !fx.fx_rate) return "";
+  const sym = fx.currency === "EUR" ? "€" : "$";
+  const amt = fx.amount >= 1e9 ? `${String(Math.round(fx.amount/1e7)/100).replace(".", ",")} млрд`
+    : fx.amount >= 1e6 ? `${String(Math.round(fx.amount/1e4)/100).replace(".", ",")} млн`
+    : fx.amount >= 1e3 ? `${String(Math.round(fx.amount/10)/100).replace(".", ",")} тыс.` : String(fx.amount);
+  const rate = String(fx.fx_rate).replace(".", ",");
+  const when = fx.fx_method === "month_avg" ? `средний курс ЦБ за ${fx.fx_date.slice(5,7)}.${fx.fx_date.slice(0,4)}`
+    : `курс ЦБ на ${fx.fx_date.slice(8,10)}.${fx.fx_date.slice(5,7)}.${fx.fx_date.slice(0,4)}`;
+  return `цена ${sym}${amt} пересчитана в рубли: ${when} — ${rate} ₽`;
+}
 function impliedFullPrice(sumRub, stakePercent, scope){
   if(scope === "equity" || scope === "ev") return {value: sumRub, basis: "full"};
   if(stakePercent == null || stakePercent >= 99.5) return {value: sumRub, basis: "full"};
@@ -8148,6 +8163,11 @@ async function mountMarketMultiples(){
      отчётности не проверен: они помечены, убираются одним чипом и в отраслевые
      ориентиры не идут. */
   let onlyVerified = false;
+  // Таблица показывала только первые 15 строк и молчала об остальных (владелец
+  // 25 сентября 2026: «видим только 12 мультипликаторов»). Теперь 15 — лишь
+  // первый экран, остальные открываются кнопкой с числом.
+  let showAllMult = false;
+  const MULT_FIRST_ROWS = 15;
   const renderSection = (v) => {
     const s = v.section;
     // Проверенные сделки, которых в списке нет, называются поимённо с причиной:
@@ -8195,6 +8215,7 @@ async function mountMarketMultiples(){
       d.price_scope==="ev" ? "цена с учётом долга" : "",
       PRICE_TERMS_NOTE[d.price_terms] || "",
       d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
+      d.price_fx ? fxNote(d.price_fx) : "",
     ].filter(Boolean).join(" · ");
     /* Подсветка выбросов в самой таблице (G5, приём из comps-таблиц
        Capital IQ/PitchBook: строка, заметно отклонившаяся от медианы
@@ -8224,7 +8245,7 @@ async function mountMarketMultiples(){
     const dealsHtml = `${scaleFilterHtml}${shown.length?`<table class="mult-table"><thead><tr>
         <th>Сделка</th><th class="num">Год</th><th class="num">Цена за 100%</th>
         <th class="num">${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}</th><th class="num">Мультипликатор</th>
-      </tr></thead><tbody>${shown.slice(0,15).map(d=>`
+      </tr></thead><tbody>${shown.slice(0, showAllMult ? shown.length : MULT_FIRST_ROWS).map(d=>`
       <tr>
         <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
           targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
@@ -8232,7 +8253,7 @@ async function mountMarketMultiples(){
         <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без двойного чтения источников; не проверено, покрывает ли отчётность весь периметр сделки">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо подтверждены двумя независимыми чтениями источников">проверено</span>`}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
         <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span>${medianNote(d)}</td>
-      </tr>`).join("")}</tbody></table>`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
+      </tr>`).join("")}</tbody></table>${shown.length > MULT_FIRST_ROWS ? `<button class="chip" data-multall="1" style="margin-top:10px">${showAllMult ? "Свернуть до " + MULT_FIRST_ROWS : "Показать все " + shown.length + " " + plural(shown.length,"сделку","сделки","сделок")}</button>` : ""}`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
     const awaiting = (data.awaiting_reading||0);
     const rejected = (data.rejected_by_reading||[]);
     // Одна спокойная строка вместо простыни: сколько ещё придёт и сколько
@@ -8264,6 +8285,7 @@ async function mountMarketMultiples(){
     document.querySelectorAll("[data-multview]").forEach(b=>b.onclick=()=>{activeKey=b.dataset.multview;draw();});
     document.querySelectorAll("[data-multscale]").forEach(b=>b.onclick=()=>{onlyFull=b.dataset.multscale==="full";draw();});
     document.querySelectorAll("[data-multconf]").forEach(b=>b.onclick=()=>{onlyVerified=b.dataset.multconf==="verified";draw();});
+    document.querySelectorAll("[data-multall]").forEach(b=>b.onclick=()=>{showAllMult=!showAllMult;draw();});
   };
   body.outerHTML = `<div id="multiplesBody"></div>`;
   draw();
