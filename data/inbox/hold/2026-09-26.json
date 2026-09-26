@@ -1261,7 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d38509056",
+   "draft_id": "d18885495",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1272,6 +1272,35 @@
    ],
    "sum": null,
    "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d91988254",
+   "title": "Турлову не хватило одного голоса в первом раунде выборов главы FIDE",
+   "date": "2026-09-26",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260926/turlov-2120413878.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
