@@ -1261,7 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d58692258",
+   "draft_id": "d28581345",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1287,6 +1287,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d49662052",
+   "title": "Портрет таксы Дэвида Хокни выставили на аукцион за £2,5 млн",
+   "date": "2026-09-26",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ab7a61f9a6709ae6b3b9f92"
+    ]
+   ],
+   "sum": "279,4 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
