@@ -1261,7 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d70281610",
+   "draft_id": "d61238970",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1287,63 +1287,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27902595",
-   "title": "В Лондоне за $10,5 млн выставили на продажу дом из фильма «Ноттинг Хилл»",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28154877"
-    ]
-   ],
-   "sum": "$10,5 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75550087",
-   "title": "Отрывок из книги Ольги Мамаевой «Волшебный сачок» о юридическом факультете МГУ в 1993 - 1998 годах. Книга электронная, продаётся на Литресе. Я не учился и не работал на юрфаке в 90-е, но я очень сомне",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "tg:LawFirms",
-     "https://t.me/LawFirms/11437"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
