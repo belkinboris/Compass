@@ -1261,7 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d18885495",
+   "draft_id": "d34423506",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1290,17 +1290,17 @@
    ]
   },
   {
-   "draft_id": "d91988254",
-   "title": "Турлову не хватило одного голоса в первом раунде выборов главы FIDE",
+   "draft_id": "d53522340",
+   "title": "Портрет собаки британского художника Дэвида Хокни выставили на торги за $3,3 млн",
    "date": "2026-09-26",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260926/turlov-2120413878.html"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28154269"
     ]
    ],
-   "sum": null,
-   "type": "Инвестиция",
+   "sum": "$3,3 млн",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1314,8 +1314,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69531525",
+   "title": "Вася станет очень богатым! Только если не купит квартиру!",
+   "date": "2026-09-26",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1355914.php"
+    ]
+   ],
+   "sum": "6 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
