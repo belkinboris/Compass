@@ -1,0 +1,47 @@
+{
+ "made": "2026-09-26",
+ "items": [
+  {
+   "key": "https://lenta.ru/news/2026/09/26/telezhurnalist-prodal-kvartiru-za-22-mln-rubley-i-obvinil-pokupatelnitsu-v-moshennichestve/::g46cad4ee",
+   "candidate_id": "g46cad4ee",
+   "reason": "общие редкие слова: кварти, продал",
+   "draft": {
+    "draft_id": "d11843073",
+    "title": "Тележурналист продал квартиру за миллионы рублей и обвинил покупательницу в мошенничестве",
+    "date": "2026-09-26",
+    "src": [
+     [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/09/26/telezhurnalist-prodal-kvartiru-za-22-mln-rubley-i-obvinil-pokupatelnitsu-v-moshennichestve/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-09-26",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:lenta.ru",
+       "https://lenta.ru/news/2026/09/26/telezhurnalist-prodal-kvartiru-za-22-mln-rubley-i-obvinil-pokupatelnitsu-v-moshennichestve/"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "квартира за миллионы рублей и обвинил покупательницу в мошенничестве",
+    "seller": "Тележурналист",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "квартира за миллионы рублей и обвинил покупательницу в мошенничестве",
+     "seller": "Тележурналист"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-09-26"
+  }
+ ]
+}
