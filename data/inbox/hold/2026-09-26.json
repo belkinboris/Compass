@@ -1261,7 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d34423506",
+   "draft_id": "d79689503",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1290,44 +1290,16 @@
    ]
   },
   {
-   "draft_id": "d53522340",
-   "title": "Портрет собаки британского художника Дэвида Хокни выставили на торги за $3,3 млн",
+   "draft_id": "d59158883",
+   "title": "Любимова раскрыла число приобретенных по «Пушкинской карте» билетов в 2026 году",
    "date": "2026-09-26",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28154269"
+     "https://tass.ru/kultura/28154313"
     ]
    ],
-   "sum": "$3,3 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69531525",
-   "title": "Вася станет очень богатым! Только если не купит квартиру!",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1355914.php"
-    ]
-   ],
-   "sum": "6 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1342,7 +1314,37 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-1 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d49285491",
+   "title": "Сразу три населенных пункта перешли под контроль ВС РФ: карта СВО на 26 сентября",
+   "date": "2026-09-26",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053131021"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
    ]
   }
  ]
