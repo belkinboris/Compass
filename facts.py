@@ -233,6 +233,42 @@ def _fresh(existing: dict[str, Any] | None, deal: dict[str, Any], key: str) -> d
     return existing
 
 
+def firm_price(price: dict[str, Any]) -> bool:
+    """Цена, которую можно складывать и делить: названная сторонами в рублях
+    или в валюте, пересчитанная по курсу ЦБ (`_price_from_foreign`)."""
+    if price.get('meaning') == 'disclosed':
+        return True
+    return price.get('meaning') == 'foreign_currency' and bool(price.get('fx_rate') and price.get('value_rub'))
+
+
+def _price_from_foreign(deal: dict[str, Any]) -> dict[str, Any] | None:
+    """Цена в долларах или евро — в рубли по курсу ЦБ на дату сделки
+    (26 сентября 2026). До этого 77 покупок с ценой в валюте выпадали из
+    мультипликаторов целиком: расчёт понимает только рубли, а пересчёт по
+    официальному курсу — арифметика, не оценка. Смысл суммы остаётся
+    «сумма в валюте» — это правда о тексте карточки; твёрдой ценой такую
+    сумму делает `firm_price` по наличию курса. Пересчитывается только
+    твёрдая цена одной суммой (`dm.foreign_price`: «до», «≈», диапазон,
+    две суммы в строке — нет); исходная сумма, курс и дата курса остаются
+    в факте, чтобы на экране было видно, откуда взялись рубли."""
+    import fx
+    fp = dm.foreign_price(deal.get('sum'))
+    if not fp or fp['meaning'] != 'disclosed':
+        return None
+    rate = fx.rate_on(fp['currency'], deal.get('date'))
+    if not rate:
+        return None
+    out = {'value_rub': round(fp['amount'] * rate['rate']),
+           'currency': fp['currency'], 'amount': fp['amount'],
+           'fx_rate': rate['rate'], 'fx_date': rate['date'], 'fx_method': rate['method']}
+    # «$3,2 млрд (до вычета долга)» у «Сибантрацита» — цена компании вместе с
+    # долгом: пересчитывать её с пакета на 100% нельзя, это уже вся компания.
+    if re.search(r'до\s+вычета\s+долга|с\s+уч[её]том\s+долга|включая\s+долг|вместе\s+с\s+долгом',
+                 str(deal.get('sum') or ''), re.I):
+        out['scope'] = 'ev'
+    return out
+
+
 def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str, Any]:
     """Объект `facts` для карточки: прочитанные факты сохраняются (или
     помечаются stale), остальное предлагается правилами (basis 'rule').
@@ -260,6 +296,8 @@ def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str,
         facts['price'] = {'value_rub': value, 'meaning': meaning, 'scope': 'unknown',
                           'basis': 'rule' if meaning != 'undisclosed' else 'unknown',
                           'card_hash': card_hash(deal, 'price')}
+        if meaning == 'foreign_currency' and deal.get('sum_basis') not in dm.SUM_BASES:
+            facts['price'].update(_price_from_foreign(deal) or {})
 
     # дата
     kept = _fresh(old.get('date'), deal, 'date')
@@ -339,7 +377,7 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'auction_open'
         if _basis(price) == 'disputed':
             return False, 'price_disputed'
-        if price.get('meaning') != 'disclosed':
+        if not firm_price(price):
             return False, 'price_not_disclosed'
         if not price.get('value_rub'):
             return False, 'price_not_rub'
@@ -387,7 +425,7 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'target_bank'
         if not target.get('confirmed'):
             return False, 'target_unconfirmed'
-        if price.get('meaning') != 'disclosed' or not price.get('value_rub'):
+        if not firm_price(price) or not price.get('value_rub'):
             return False, 'price_not_disclosed'
         if _basis(price) == 'stale' or _basis(stake) == 'stale':
             return False, 'stale'
@@ -456,7 +494,7 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
             return False, 'target_bank'
         if not target.get('confirmed'):
             return False, 'target_unconfirmed'
-        if price.get('meaning') != 'disclosed' or not price.get('value_rub'):
+        if not firm_price(price) or not price.get('value_rub'):
             return False, 'price_not_disclosed'
         if _basis(price) == 'stale' or _basis(stake) == 'stale' or target.get('perimeter') == 'stale':
             return False, 'stale'
@@ -553,7 +591,7 @@ def mark_possible_duplicates(base: dict[str, Any], ctx: dict[str, Any]) -> int:
         f = d.get('facts') or {}
         v = (f.get('price') or {}).get('value_rub')
         y = dm.year_of(d)
-        if v and y and (f.get('price') or {}).get('meaning') == 'disclosed':
+        if v and y and firm_price(f.get('price') or {}):
             by_year.setdefault(y, []).append(d)
     suspects: dict[str, set[str]] = {}
     for rows in by_year.values():
@@ -603,7 +641,10 @@ def number_checks(deal: dict[str, Any]) -> list[str]:
             expect = dm.UNIT_MULT[unit.group(1).lower()]
             if not (expect * 0.5 <= v <= expect * 100000):
                 out.append('unit_mismatch')
-        if re.search(r'[$€£¥]', text) and '₽' not in text:
+        # Рубли при валютной сумме — ошибка, если их вписали без пересчёта;
+        # пересчёт по курсу ЦБ (`_price_from_foreign`) оставляет в факте валюту
+        # и курс, и такая цена не помечается.
+        if re.search(r'[$€£¥]', text) and '₽' not in text and not price.get('fx_rate'):
             out.append('foreign_currency')
     s = stake.get('value')
     if s is not None and not (1 <= s <= 100):

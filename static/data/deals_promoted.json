@@ -9819,11 +9819,16 @@
      "card_hash": "2e4d4204c2ed"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 11437905000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1b5b27523ced"
+     "card_hash": "1b5b27523ced",
+     "currency": "USD",
+     "amount": 150000000.0,
+     "fx_rate": 76.2527,
+     "fx_date": "2021-01-30",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-02-01",
@@ -9935,11 +9940,16 @@
      "card_hash": "7e545880f743"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 10962615000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "4b9b209f9940"
+     "card_hash": "4b9b209f9940",
+     "currency": "USD",
+     "amount": 150000000.0,
+     "fx_rate": 73.0841,
+     "fx_date": "2021-09-14",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-09-14",
@@ -10556,11 +10566,16 @@
      "card_hash": "7c84d9555309"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 805099900,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "3e66b322ee84"
+     "card_hash": "3e66b322ee84",
+     "currency": "USD",
+     "amount": 11000000.0,
+     "fx_rate": 73.1909,
+     "fx_date": "2021-09-08",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-09-08",
@@ -10937,11 +10952,16 @@
      "card_hash": "f6d314a33bad"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 302382150,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b44498647e6c"
+     "card_hash": "b44498647e6c",
+     "currency": "EUR",
+     "amount": 3500000.0,
+     "fx_rate": 86.3949,
+     "fx_date": "2021-09-02",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-09-02",
@@ -10979,8 +10999,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -11055,11 +11075,16 @@
      "card_hash": "e2ce7fe60fa2"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 73191200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1fb25f0990c0"
+     "card_hash": "1fb25f0990c0",
+     "currency": "USD",
+     "amount": 1000000.0,
+     "fx_rate": 73.1912,
+     "fx_date": "2021-09-02",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-09-02",
@@ -11198,11 +11223,16 @@
      "card_hash": "3717858d9a0f"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 751459440000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "7ae5a26e4f53"
+     "card_hash": "7ae5a26e4f53",
+     "currency": "USD",
+     "amount": 10600000000.0,
+     "fx_rate": 70.8924,
+     "fx_date": "2023-02-08",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-02-08",
@@ -11240,8 +11270,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -11474,11 +11504,16 @@
      "card_hash": "10ccb24a6253"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 46770759200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "167bbaa35277"
+     "card_hash": "167bbaa35277",
+     "currency": "USD",
+     "amount": 484000000.0,
+     "fx_rate": 96.6338,
+     "fx_date": "2023-09-16",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-09-18",
@@ -11516,9 +11551,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    },
    "buyer_name": "ООО «Илим Глобал Тимбер Рус»"
@@ -12327,11 +12362,16 @@
      "card_hash": "edeed98507e2"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2219499000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "62249daa8740"
+     "card_hash": "62249daa8740",
+     "currency": "USD",
+     "amount": 30000000.0,
+     "fx_rate": 73.9833,
+     "fx_date": "2021-02-21",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-02-24",
@@ -12674,11 +12714,16 @@
      "card_hash": "acf2f5918cc9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 41310885,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "09f24e547c8b"
+     "card_hash": "09f24e547c8b",
+     "currency": "USD",
+     "amount": 550000.0,
+     "fx_rate": 75.1107,
+     "fx_date": "2021-02-06",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-02-08",
@@ -12913,11 +12958,16 @@
      "card_hash": "7278af0a78a5"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 13439943400,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "905d98f02311"
+     "card_hash": "905d98f02311",
+     "currency": "USD",
+     "amount": 178000000.0,
+     "fx_rate": 75.5053,
+     "fx_date": "2021-02-02",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-02-02",
@@ -12955,8 +13005,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -18260,11 +18310,16 @@
      "card_hash": "bdd843d72de5"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 35103719700,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "37735c815864"
+     "card_hash": "37735c815864",
+     "currency": "EUR",
+     "amount": 531000000.0,
+     "fx_rate": 66.1087,
+     "fx_date": "2022-12-07",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-07",
@@ -18302,9 +18357,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -18387,11 +18442,16 @@
      "card_hash": "6b7218f27426"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 34501850,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "86fa3055f1a1"
+     "card_hash": "86fa3055f1a1",
+     "currency": "USD",
+     "amount": 500000.0,
+     "fx_rate": 69.0037,
+     "fx_date": "2022-12-21",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-21",
@@ -19052,11 +19112,16 @@
      "card_hash": "16ba49af4aee"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1114434000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "61fa5bd17824"
+     "card_hash": "61fa5bd17824",
+     "currency": "USD",
+     "amount": 15000000.0,
+     "fx_rate": 74.2956,
+     "fx_date": "2026-06-05",
+     "fx_method": "day"
     },
     "date": {
      "value": "2026-06-05",
@@ -21114,11 +21179,16 @@
      "card_hash": "0280dab1cbb6"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 13891586000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f3eb881181f6"
+     "card_hash": "f3eb881181f6",
+     "currency": "USD",
+     "amount": 230000000.0,
+     "fx_rate": 60.3982,
+     "fx_date": "2022-11-15",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-11-15",
@@ -21156,8 +21226,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -21253,11 +21323,16 @@
      "card_hash": "ad11f209615c"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 17547963000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "6e06f5d5477a"
+     "card_hash": "6e06f5d5477a",
+     "currency": "EUR",
+     "amount": 285000000.0,
+     "fx_rate": 61.5718,
+     "fx_date": "2022-10-28",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-10-28",
@@ -21295,8 +21370,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -24051,11 +24126,16 @@
      "card_hash": "d00367602c79"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 148528000000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "3b8cb54e3207"
+     "card_hash": "3b8cb54e3207",
+     "currency": "USD",
+     "amount": 2000000000.0,
+     "fx_rate": 74.264,
+     "fx_date": "2021-03-10",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-03-10",
@@ -24407,11 +24487,16 @@
      "card_hash": "e087bf19edcf"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 14646340,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "26b94b58c35f"
+     "card_hash": "26b94b58c35f",
+     "currency": "USD",
+     "amount": 200000.0,
+     "fx_rate": 73.2317,
+     "fx_date": "2021-03-16",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-03-16",
@@ -26363,11 +26448,16 @@
      "card_hash": "c26ab8087b66"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1373884500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5fd9999f162c"
+     "card_hash": "5fd9999f162c",
+     "currency": "USD",
+     "amount": 15000000.0,
+     "fx_rate": 91.5923,
+     "fx_date": "2023-08-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-08-01",
@@ -26405,8 +26495,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -26488,11 +26578,16 @@
      "card_hash": "9d0c3b135f65"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 99958600,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "91c19356acc4"
+     "card_hash": "91c19356acc4",
+     "currency": "EUR",
+     "amount": 1000000.0,
+     "fx_rate": 99.9586,
+     "fx_date": "2023-07-29",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-07-31",
@@ -26530,8 +26625,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -26785,11 +26880,16 @@
      "card_hash": "af8df889c236"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 10946862500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f8fc26c49953"
+     "card_hash": "f8fc26c49953",
+     "currency": "EUR",
+     "amount": 125000000.0,
+     "fx_rate": 87.5749,
+     "fx_date": "2023-05-18",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-18",
@@ -26827,9 +26927,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -26927,11 +27027,16 @@
      "card_hash": "21db4e7753b0"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 143054660000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1f4dd021194d"
+     "card_hash": "1f4dd021194d",
+     "currency": "EUR",
+     "amount": 1700000000.0,
+     "fx_rate": 84.1498,
+     "fx_date": "2023-05-11",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-11",
@@ -28478,11 +28583,16 @@
      "card_hash": "42a1d89887e5"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 77204100,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1fb25f0990c0"
+     "card_hash": "1fb25f0990c0",
+     "currency": "USD",
+     "amount": 1000000.0,
+     "fx_rate": 77.2041,
+     "fx_date": "2023-05-13",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-13",
@@ -28632,11 +28742,16 @@
      "card_hash": "2d3cbaf366bf"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 16109920000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "44bf7e510814"
+     "card_hash": "44bf7e510814",
+     "currency": "EUR",
+     "amount": 200000000.0,
+     "fx_rate": 80.5496,
+     "fx_date": "2023-03-08",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-03-09",
@@ -28674,8 +28789,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -29478,11 +29593,16 @@
      "card_hash": "40856bae983e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 9353072500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "87d0e2d57855"
+     "card_hash": "87d0e2d57855",
+     "currency": "USD",
+     "amount": 131000000.0,
+     "fx_rate": 71.3975,
+     "fx_date": "2021-11-09",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-11-09",
@@ -29520,8 +29640,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -29755,11 +29875,16 @@
      "card_hash": "c5434a9d67ac"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 211560000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c9d182892304"
+     "card_hash": "c9d182892304",
+     "currency": "USD",
+     "amount": 3000000.0,
+     "fx_rate": 70.52,
+     "fx_date": "2021-10-30",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-11-01",
@@ -29879,11 +30004,16 @@
      "card_hash": "e27bd1b38355"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 349052000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d55ad5ee66bd"
+     "card_hash": "d55ad5ee66bd",
+     "currency": "USD",
+     "amount": 5000000.0,
+     "fx_rate": 69.8104,
+     "fx_date": "2021-10-28",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-10-28",
@@ -30090,11 +30220,16 @@
      "card_hash": "4c5e447c4a0e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 18362650,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "646ed6156754"
+     "card_hash": "646ed6156754",
+     "currency": "USD",
+     "amount": 250000.0,
+     "fx_rate": 73.4506,
+     "fx_date": "2021-11-23",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-11-23",
@@ -30557,11 +30692,16 @@
      "card_hash": "435477b0eda6"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 27400766400,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e5f2de5c1304"
+     "card_hash": "e5f2de5c1304",
+     "currency": "USD",
+     "amount": 336000000.0,
+     "fx_rate": 81.5499,
+     "fx_date": "2023-04-26",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-04-26",
@@ -30599,8 +30739,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -31538,11 +31678,16 @@
      "card_hash": "84bbdd1a71e0"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1572775000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "2ccd03ba93e4"
+     "card_hash": "2ccd03ba93e4",
+     "currency": "USD",
+     "amount": 25000000.0,
+     "fx_rate": 62.911,
+     "fx_date": "2022-07-07",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-07-07",
@@ -31580,8 +31725,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -33747,11 +33892,16 @@
      "card_hash": "df85573c9797"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 200075250,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "7f4964342aae"
+     "card_hash": "7f4964342aae",
+     "currency": "USD",
+     "amount": 2500000.0,
+     "fx_rate": 80.0301,
+     "fx_date": "2025-12-19",
+     "fx_method": "day"
     },
     "date": {
      "value": "2025-12-19",
@@ -33789,9 +33939,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -33872,11 +34022,16 @@
      "card_hash": "578a4072cf1d"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 37061800000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "94b08853ba3d"
+     "card_hash": "94b08853ba3d",
+     "currency": "USD",
+     "amount": 500000000.0,
+     "fx_rate": 74.1236,
+     "fx_date": "2021-07-15",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-15",
@@ -33994,11 +34149,16 @@
      "card_hash": "e69f8028c2a4"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 14557760000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "8f39fb8b484b"
+     "card_hash": "8f39fb8b484b",
+     "currency": "USD",
+     "amount": 194000000.0,
+     "fx_rate": 75.04,
+     "fx_date": "2021-01-28",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-01-28",
@@ -34036,8 +34196,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -34126,11 +34286,16 @@
      "card_hash": "cce59707bd49"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 32023612500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "19f64a46006a"
+     "card_hash": "19f64a46006a",
+     "currency": "USD",
+     "amount": 435000000.0,
+     "fx_rate": 73.6175,
+     "fx_date": "2021-07-03",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-05",
@@ -34168,8 +34333,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -34492,11 +34657,16 @@
      "card_hash": "acd99c364cb8"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 692800710,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5d246ee60072"
+     "card_hash": "5d246ee60072",
+     "currency": "USD",
+     "amount": 9300000.0,
+     "fx_rate": 74.4947,
+     "fx_date": "2021-07-22",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-22",
@@ -34725,11 +34895,16 @@
      "card_hash": "af6cf30ca486"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 270702720,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "32cc73c4e77a"
+     "card_hash": "32cc73c4e77a",
+     "currency": "USD",
+     "amount": 3600000.0,
+     "fx_rate": 75.1952,
+     "fx_date": "2021-07-09",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-09",
@@ -34843,11 +35018,16 @@
      "card_hash": "64e594c0c70e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 111742050,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "eae3da97e597"
+     "card_hash": "eae3da97e597",
+     "currency": "USD",
+     "amount": 1500000.0,
+     "fx_rate": 74.4947,
+     "fx_date": "2021-07-22",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-22",
@@ -34964,11 +35144,16 @@
      "card_hash": "0b8a2ea48867"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 111185400,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "eae3da97e597"
+     "card_hash": "eae3da97e597",
+     "currency": "USD",
+     "amount": 1500000.0,
+     "fx_rate": 74.1236,
+     "fx_date": "2021-07-15",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-15",
@@ -35192,11 +35377,16 @@
      "card_hash": "916023cc199e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 73617500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "009f87f606d7"
+     "card_hash": "009f87f606d7",
+     "currency": "USD",
+     "amount": 1000000.0,
+     "fx_rate": 73.6175,
+     "fx_date": "2021-07-03",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-05",
@@ -35234,8 +35424,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -35301,11 +35491,16 @@
      "card_hash": "1ff646b17ed9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 29639200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e5b36d798ef2"
+     "card_hash": "e5b36d798ef2",
+     "currency": "USD",
+     "amount": 400000.0,
+     "fx_rate": 74.098,
+     "fx_date": "2021-07-27",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-27",
@@ -36305,11 +36500,16 @@
      "card_hash": "2e2398d83cf0"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 36512640000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5c9ac19ccbb5"
+     "card_hash": "5c9ac19ccbb5",
+     "currency": "USD",
+     "amount": 600000000.0,
+     "fx_rate": 60.8544,
+     "fx_date": "2022-09-07",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-09-07",
@@ -36347,8 +36547,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
    }
@@ -36444,11 +36644,16 @@
      "card_hash": "2ea337c60ae6"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2625615000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "fee7f98d6028"
+     "card_hash": "fee7f98d6028",
+     "currency": "USD",
+     "amount": 50000000.0,
+     "fx_rate": 52.5123,
+     "fx_date": "2022-07-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-07-01",
@@ -36486,9 +36691,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -36592,11 +36797,16 @@
      "card_hash": "fc37a39b0b6f"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2641072000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1f2efbb62764"
+     "card_hash": "1f2efbb62764",
+     "currency": "USD",
+     "amount": 35000000.0,
+     "fx_rate": 75.4592,
+     "fx_date": "2023-03-04",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-03-06",
@@ -36634,9 +36844,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -37242,11 +37452,16 @@
      "card_hash": "85981dd2b7d9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 18381650000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "9f728ac85578"
+     "card_hash": "9f728ac85578",
+     "currency": "USD",
+     "amount": 250000000.0,
+     "fx_rate": 73.5266,
+     "fx_date": "2021-05-25",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-05-25",
@@ -37363,11 +37578,16 @@
      "card_hash": "1465859ccd58"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1465930000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "88ada78b0bad"
+     "card_hash": "88ada78b0bad",
+     "currency": "USD",
+     "amount": 20000000.0,
+     "fx_rate": 73.2965,
+     "fx_date": "2021-06-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-01",
@@ -37484,11 +37704,16 @@
      "card_hash": "c037b7547dab"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2850540000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "da620825f435"
+     "card_hash": "da620825f435",
+     "currency": "USD",
+     "amount": 38500000.0,
+     "fx_rate": 74.04,
+     "fx_date": "2021-05-13",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-05-13",
@@ -37728,11 +37953,16 @@
      "card_hash": "cdc55859da70"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 110094450,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "eae3da97e597"
+     "card_hash": "eae3da97e597",
+     "currency": "USD",
+     "amount": 1500000.0,
+     "fx_rate": 73.3963,
+     "fx_date": "2021-05-26",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-05-26",
@@ -37847,11 +38077,16 @@
      "card_hash": "b3f1547e6f67"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 59485280,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0b031dc387ae"
+     "card_hash": "0b031dc387ae",
+     "currency": "USD",
+     "amount": 800000.0,
+     "fx_rate": 74.3566,
+     "fx_date": "2021-05-14",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-05-14",
@@ -40316,11 +40551,16 @@
      "card_hash": "d1bf354b153b"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 37073923000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0941102b607e"
+     "card_hash": "0941102b607e",
+     "currency": "USD",
+     "amount": 515000000.0,
+     "fx_rate": 71.9882,
+     "fx_date": "2021-10-09",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-10-11",
@@ -40358,8 +40598,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -40429,11 +40669,16 @@
      "card_hash": "4e5e192fd94b"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 17452600000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "9f728ac85578"
+     "card_hash": "9f728ac85578",
+     "currency": "USD",
+     "amount": 250000000.0,
+     "fx_rate": 69.8104,
+     "fx_date": "2021-10-28",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-10-28",
@@ -40900,11 +41145,16 @@
      "card_hash": "bff600569c28"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 28468560,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "20365790f1d1"
+     "card_hash": "20365790f1d1",
+     "currency": "USD",
+     "amount": 400000.0,
+     "fx_rate": 71.1714,
+     "fx_date": "2021-10-19",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-10-19",
@@ -40942,8 +41192,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -41294,11 +41544,16 @@
      "card_hash": "734b2a1a4329"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 12194643150,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "8c0488aae597"
+     "card_hash": "8c0488aae597",
+     "currency": "USD",
+     "amount": 166500000.0,
+     "fx_rate": 73.2411,
+     "fx_date": "2021-06-02",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-02",
@@ -41781,11 +42036,16 @@
      "card_hash": "ff23615d9a4b"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 144443200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c464e3020728"
+     "card_hash": "c464e3020728",
+     "currency": "USD",
+     "amount": 2000000.0,
+     "fx_rate": 72.2216,
+     "fx_date": "2021-06-19",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-21",
@@ -41907,11 +42167,16 @@
      "card_hash": "08258d447e6a"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1913618200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1472e52b6eb7"
+     "card_hash": "1472e52b6eb7",
+     "currency": "USD",
+     "amount": 26000000.0,
+     "fx_rate": 73.6007,
+     "fx_date": "2021-05-21",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-05-21",
@@ -42025,11 +42290,16 @@
      "card_hash": "da87f17625cc"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 72723400,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1fb25f0990c0"
+     "card_hash": "1fb25f0990c0",
+     "currency": "USD",
+     "amount": 1000000.0,
+     "fx_rate": 72.7234,
+     "fx_date": "2021-07-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-07-01",
@@ -42142,11 +42412,16 @@
      "card_hash": "24a6ac32821e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 73166100,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "009f87f606d7"
+     "card_hash": "009f87f606d7",
+     "currency": "USD",
+     "amount": 1000000.0,
+     "fx_rate": 73.1661,
+     "fx_date": "2021-06-23",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-23",
@@ -42184,8 +42459,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -42264,11 +42539,16 @@
      "card_hash": "7e1ba19c6534"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 5494770000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "a2d0d29f9040"
+     "card_hash": "a2d0d29f9040",
+     "currency": "USD",
+     "amount": 75000000.0,
+     "fx_rate": 73.2636,
+     "fx_date": "2021-06-04",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-04",
@@ -42306,8 +42586,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "before_site_year"
     }
    }
@@ -42385,11 +42665,16 @@
      "card_hash": "0325cabe1624"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 14585880,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "26b94b58c35f"
+     "card_hash": "26b94b58c35f",
+     "currency": "USD",
+     "amount": 200000.0,
+     "fx_rate": 72.9294,
+     "fx_date": "2021-06-08",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-08",
@@ -42624,11 +42909,16 @@
      "card_hash": "f89849c8c213"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 113559680,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e3455b03a166"
+     "card_hash": "e3455b03a166",
+     "currency": "EUR",
+     "amount": 1300000.0,
+     "fx_rate": 87.3536,
+     "fx_date": "2021-06-17",
+     "fx_method": "day"
     },
     "date": {
      "value": "2021-06-17",
@@ -46898,11 +47188,16 @@
      "card_hash": "1bb1775e4207"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 63321139640,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "2ec4d532597d"
+     "card_hash": "2ec4d532597d",
+     "currency": "USD",
+     "amount": 766700000.0,
+     "fx_rate": 82.5892,
+     "fx_date": "2025-04-17",
+     "fx_method": "day"
     },
     "date": {
      "value": "2025-04-17",
@@ -46940,8 +47235,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -48231,11 +48526,16 @@
      "card_hash": "d3ebddd8fb4d"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 41095956000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f4b391cfe036"
+     "card_hash": "f4b391cfe036",
+     "currency": "USD",
+     "amount": 682000000.0,
+     "fx_rate": 60.258,
+     "fx_date": "2022-08-05",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-08-05",
@@ -48273,8 +48573,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -48897,11 +49197,16 @@
      "card_hash": "3615da6fabca"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 19411484000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "57c976807821"
+     "card_hash": "57c976807821",
+     "currency": "USD",
+     "amount": 340000000.0,
+     "fx_rate": 57.0926,
+     "fx_date": "2022-06-15",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-06-15",
@@ -48939,8 +49244,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -51379,11 +51684,16 @@
      "card_hash": "5eb5b74a2ff9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 206028000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c9d182892304"
+     "card_hash": "c9d182892304",
+     "currency": "USD",
+     "amount": 3000000.0,
+     "fx_rate": 68.676,
+     "fx_date": "2022-12-24",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-26",
@@ -51521,11 +51831,16 @@
      "card_hash": "7d1769e3f538"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 26688322000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "3bbae52bde56"
+     "card_hash": "3bbae52bde56",
+     "currency": "USD",
+     "amount": 370000000.0,
+     "fx_rate": 72.1306,
+     "fx_date": "2022-12-23",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-23",
@@ -51563,8 +51878,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -53343,11 +53658,16 @@
      "card_hash": "61fd0416e97a"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 93515160000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "540c199bca21"
+     "card_hash": "540c199bca21",
+     "currency": "USD",
+     "amount": 1200000000.0,
+     "fx_rate": 77.9293,
+     "fx_date": "2026-07-03",
+     "fx_method": "day"
     },
     "date": {
      "value": "2026-07-03",
@@ -54507,11 +54827,16 @@
      "card_hash": "4dcf593408aa"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 333359028000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "a2b5f46cb3cf"
+     "card_hash": "a2b5f46cb3cf",
+     "currency": "USD",
+     "amount": 3690000000.0,
+     "fx_rate": 90.3412,
+     "fx_date": "2024-03-07",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-03-07",
@@ -54549,9 +54874,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    },
    "seller_id": "g4058df30"
@@ -55759,11 +56084,16 @@
      "card_hash": "aae6aa0f0f07"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 8448753600,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "2706d52ecedf"
+     "card_hash": "2706d52ecedf",
+     "currency": "EUR",
+     "amount": 134000000.0,
+     "fx_rate": 63.0504,
+     "fx_date": "2022-12-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-01",
@@ -55801,8 +56131,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -55888,11 +56218,16 @@
      "card_hash": "472544564244"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 13446312000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0c6573cb165d"
+     "card_hash": "0c6573cb165d",
+     "currency": "EUR",
+     "amount": 220000000.0,
+     "fx_rate": 61.1196,
+     "fx_date": "2022-11-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-11-01",
@@ -55930,9 +56265,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -56169,11 +56504,16 @@
      "card_hash": "5aa8d7cf374f"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2347399200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "84ebdc8b7178"
+     "card_hash": "84ebdc8b7178",
+     "currency": "USD",
+     "amount": 29000000.0,
+     "fx_rate": 80.9448,
+     "fx_date": "2025-11-20",
+     "fx_method": "day"
     },
     "date": {
      "value": "2025-11-20",
@@ -56211,9 +56551,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -58023,11 +58363,16 @@
      "card_hash": "db5426224d1d"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 6729606000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b72473858ce0"
+     "card_hash": "b72473858ce0",
+     "currency": "EUR",
+     "amount": 78000000.0,
+     "fx_rate": 86.277,
+     "fx_date": "2023-05-20",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-22",
@@ -58065,8 +58410,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -58916,11 +59261,16 @@
      "card_hash": "29c060e03e5d"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 5145295000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "ea341b0bba1d"
+     "card_hash": "ea341b0bba1d",
+     "currency": "EUR",
+     "amount": 50000000.0,
+     "fx_rate": 102.9059,
+     "fx_date": "2023-10-19",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-10-19",
@@ -58958,8 +59308,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -63253,11 +63603,16 @@
      "card_hash": "409dac5a75d0"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 7372965000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "ea0708fb15ac"
+     "card_hash": "ea0708fb15ac",
+     "currency": "EUR",
+     "amount": 75000000.0,
+     "fx_rate": 98.3062,
+     "fx_date": "2024-05-08",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-05-08",
@@ -63295,9 +63650,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -64360,11 +64715,16 @@
      "card_hash": "eecaed67906e"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 21831960000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "b92812a89a6d"
+     "card_hash": "b92812a89a6d",
+     "currency": "EUR",
+     "amount": 240000000.0,
+     "fx_rate": 90.9665,
+     "fx_date": "2023-06-16",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-06-16",
@@ -64402,8 +64762,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    },
@@ -102863,11 +103223,16 @@
      "card_hash": "6bb78f7a07d5"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 153655010,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "86aa9b198398"
+     "card_hash": "86aa9b198398",
+     "currency": "USD",
+     "amount": 1700000.0,
+     "fx_rate": 90.3853,
+     "fx_date": "2024-09-10",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-09-10",
@@ -117455,11 +117820,16 @@
      "card_hash": "73bfb00d7e63"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 8600,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "c767d6b7c463"
+     "card_hash": "c767d6b7c463",
+     "currency": "USD",
+     "amount": 97.0,
+     "fx_rate": 88.6562,
+     "fx_date": "2024-01-26",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-01-26",
@@ -117497,8 +117867,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -127098,11 +127468,16 @@
      "card_hash": "76fd1e0529c4"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 4585865900,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e89489b8b078"
+     "card_hash": "e89489b8b078",
+     "currency": "USD",
+     "amount": 49000000.0,
+     "fx_rate": 93.5891,
+     "fx_date": "2024-04-16",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-04-16",
@@ -127140,8 +127515,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    },
@@ -134220,11 +134595,16 @@
      "card_hash": "568a71a0c638"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 89910628500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "6acb5d1ccbee"
+     "card_hash": "6acb5d1ccbee",
+     "currency": "USD",
+     "amount": 1014999999.9999999,
+     "fx_rate": 88.5819,
+     "fx_date": "2023-12-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-12-01",
@@ -134262,9 +134642,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -136518,11 +136898,16 @@
      "card_hash": "22666c7eaa2b"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 294472320000,
      "meaning": "foreign_currency",
-     "scope": "unknown",
+     "scope": "ev",
      "basis": "rule",
-     "card_hash": "4437103230c5"
+     "card_hash": "4437103230c5",
+     "currency": "USD",
+     "amount": 3200000000.0,
+     "fx_rate": 92.0226,
+     "fx_date": "2023-11-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-11-01",
@@ -136560,9 +136945,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -137015,11 +137400,16 @@
      "card_hash": "91bcd43baf70"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 30306074800,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "36f5d1401d6f"
+     "card_hash": "36f5d1401d6f",
+     "currency": "USD",
+     "amount": 316000000.0,
+     "fx_rate": 95.9053,
+     "fx_date": "2023-10-21",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-10-23",
@@ -137057,8 +137447,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -137143,11 +137533,16 @@
      "card_hash": "2b8b5db5669a"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 4086910800,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "4d7d32683224"
+     "card_hash": "4d7d32683224",
+     "currency": "USD",
+     "amount": 42000000.0,
+     "fx_rate": 97.3074,
+     "fx_date": "2023-10-20",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-10-20",
@@ -137185,8 +137580,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -137783,11 +138178,16 @@
      "card_hash": "c33ea2ad34c6"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 3896588000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f0d1d2be3981"
+     "card_hash": "f0d1d2be3981",
+     "currency": "USD",
+     "amount": 40000000.0,
+     "fx_rate": 97.4147,
+     "fx_date": "2023-09-30",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-10-01",
@@ -137825,9 +138225,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -141707,11 +142107,16 @@
      "card_hash": "3ddf99442e08"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 10716299100,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5b981d977361"
+     "card_hash": "5b981d977361",
+     "currency": "USD",
+     "amount": 117000000.0,
+     "fx_rate": 91.5923,
+     "fx_date": "2023-08-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-08-01",
@@ -141749,8 +142154,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -143041,11 +143446,16 @@
      "card_hash": "83d784fc9661"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 998890000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "5869bc33889a"
+     "card_hash": "5869bc33889a",
+     "currency": "EUR",
+     "amount": 10000000.0,
+     "fx_rate": 99.889,
+     "fx_date": "2023-07-13",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-07-13",
@@ -143083,9 +143493,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -148054,11 +148464,16 @@
      "card_hash": "2bf9941cf8fc"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 8937360000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "7557a0953d2c"
+     "card_hash": "7557a0953d2c",
+     "currency": "EUR",
+     "amount": 100000000.0,
+     "fx_rate": 89.3736,
+     "fx_date": "2023-04-20",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-04-20",
@@ -148096,9 +148511,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -148189,11 +148604,16 @@
      "card_hash": "763d6ba57f46"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 4876470000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "17e369b8d913"
+     "card_hash": "17e369b8d913",
+     "currency": "USD",
+     "amount": 60000000.0,
+     "fx_rate": 81.2745,
+     "fx_date": "2023-04-25",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-04-25",
@@ -148231,8 +148651,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    }
@@ -148321,11 +148741,16 @@
      "card_hash": "5f5deea53f80"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 57337207000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e6d90d81a80d"
+     "card_hash": "e6d90d81a80d",
+     "currency": "USD",
+     "amount": 702500000.0,
+     "fx_rate": 81.6188,
+     "fx_date": "2023-04-21",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-04-21",
@@ -148363,8 +148788,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -149028,11 +149453,16 @@
      "card_hash": "b11ea32e90a8"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 90,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "2dacef85cc00"
+     "card_hash": "2dacef85cc00",
+     "currency": "EUR",
+     "amount": 1.0,
+     "fx_rate": 89.7271,
+     "fx_date": "2023-04-12",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-04-12",
@@ -149070,9 +149500,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -150952,11 +151382,16 @@
      "card_hash": "51372dd27731"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 301836800000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "de9253470bac"
+     "card_hash": "de9253470bac",
+     "currency": "USD",
+     "amount": 4000000000.0,
+     "fx_rate": 75.4592,
+     "fx_date": "2023-03-04",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-03-06",
@@ -151941,11 +152376,16 @@
      "card_hash": "4eca0b292a91"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 8608620000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "150aee44c0ed"
+     "card_hash": "150aee44c0ed",
+     "currency": "EUR",
+     "amount": 100000000.0,
+     "fx_rate": 86.0862,
+     "fx_date": "2023-05-16",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-16",
@@ -151983,9 +152423,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -152516,11 +152956,16 @@
      "card_hash": "3013cefcff70"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 10341030000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "07122d7b1080"
+     "card_hash": "07122d7b1080",
+     "currency": "USD",
+     "amount": 140000000.0,
+     "fx_rate": 73.8645,
+     "fx_date": "2023-02-15",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-02-15",
@@ -152558,8 +153003,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_lot"
     }
    }
@@ -152765,11 +153210,16 @@
      "card_hash": "d4e32c49de47"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1143505580,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "6dc1ddbf465d"
+     "card_hash": "6dc1ddbf465d",
+     "currency": "EUR",
+     "amount": 14600000.0,
+     "fx_rate": 78.3223,
+     "fx_date": "2023-02-10",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-02-10",
@@ -152807,8 +153257,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -167525,11 +167975,16 @@
      "card_hash": "32768040e6b9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 131362500000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "d1b3f3d98600"
+     "card_hash": "d1b3f3d98600",
+     "currency": "EUR",
+     "amount": 1500000000.0,
+     "fx_rate": 87.575,
+     "fx_date": "2023-05-04",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-04",
@@ -167567,8 +168022,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -167670,11 +168125,16 @@
      "card_hash": "ddd52d64908f"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 8637904800,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "499007be778f"
+     "card_hash": "499007be778f",
+     "currency": "EUR",
+     "amount": 137000000.0,
+     "fx_rate": 63.0504,
+     "fx_date": "2022-12-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-01",
@@ -167712,9 +168172,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -168539,11 +168999,16 @@
      "card_hash": "2e3995a4bbf0"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 29308311000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "234e1cef41d3"
+     "card_hash": "234e1cef41d3",
+     "currency": "USD",
+     "amount": 530000000.0,
+     "fx_rate": 55.2987,
+     "fx_date": "2022-10-01",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-10-01",
@@ -168581,8 +169046,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -171758,11 +172223,16 @@
      "card_hash": "5fe5e1b490a1"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 48822326000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "adc61085ac6e"
+     "card_hash": "adc61085ac6e",
+     "currency": "USD",
+     "amount": 610000000.0,
+     "fx_rate": 80.0366,
+     "fx_date": "2023-05-19",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-05-19",
@@ -171800,8 +172270,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -172104,11 +172574,16 @@
      "card_hash": "b07f011e7f8a"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1337641800,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "9ed1f7f3dc01"
+     "card_hash": "9ed1f7f3dc01",
+     "currency": "EUR",
+     "amount": 22000000.0,
+     "fx_rate": 60.8019,
+     "fx_date": "2022-10-11",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-10-11",
@@ -173162,11 +173637,16 @@
      "card_hash": "cd6c715f7101"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 35752436000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "2c45664d9593"
+     "card_hash": "2c45664d9593",
+     "currency": "EUR",
+     "amount": 430000000.0,
+     "fx_rate": 83.1452,
+     "fx_date": "2023-03-24",
+     "fx_method": "day"
     },
     "date": {
      "value": "2023-03-24",
@@ -173204,9 +173684,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    }
   },
@@ -175586,11 +176066,16 @@
      "card_hash": "404fab016850"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 6254866500,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "ad4f3c299d2c"
+     "card_hash": "ad4f3c299d2c",
+     "currency": "EUR",
+     "amount": 95000000.0,
+     "fx_rate": 65.8407,
+     "fx_date": "2022-12-10",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-12-12",
@@ -175628,8 +176113,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_unconfirmed"
     }
    },
@@ -177378,11 +177863,16 @@
      "card_hash": "5af99932f4c9"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 2349543000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "61a87735853d"
+     "card_hash": "61a87735853d",
+     "currency": "USD",
+     "amount": 30000000.0,
+     "fx_rate": 78.3181,
+     "fx_date": "2026-07-17",
+     "fx_method": "day"
     },
     "date": {
      "value": "2026-07-17",
@@ -177420,8 +177910,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -183594,11 +184084,16 @@
      "card_hash": "0fff07bf5007"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 59,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "0568d253a271"
+     "card_hash": "0568d253a271",
+     "currency": "EUR",
+     "amount": 1.0,
+     "fx_rate": 59.4068,
+     "fx_date": "2022-07-27",
+     "fx_method": "day"
     },
     "date": {
      "value": "2022-07-27",
@@ -183636,8 +184131,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -185152,11 +185647,16 @@
      "card_hash": "8a567b4216a8"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 5552341200,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "38278698bf7d"
+     "card_hash": "38278698bf7d",
+     "currency": "USD",
+     "amount": 63000000.0,
+     "fx_rate": 88.1324,
+     "fx_date": "2024-01-13",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-01-13",
@@ -187173,11 +187673,16 @@
      "card_hash": "0e2d56c31f50"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 1257463900,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "e98a9a8d455e"
+     "card_hash": "e98a9a8d455e",
+     "currency": "EUR",
+     "amount": 11000000.0,
+     "fx_rate": 114.3149,
+     "fx_date": "2024-11-30",
+     "fx_method": "day"
     },
     "date": {
      "value": "2024-12-01",
@@ -187215,8 +187720,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
    },
@@ -210946,11 +211451,16 @@
      "card_hash": "4e50389fca9a"
     },
     "price": {
-     "value_rub": null,
+     "value_rub": 10426046800,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "1bc14029f7c8"
+     "card_hash": "1bc14029f7c8",
+     "currency": "USD",
+     "amount": 122000000.0,
+     "fx_rate": 85.4594,
+     "fx_date": "2026-09-10",
+     "fx_method": "day"
     },
     "date": {
      "value": "2026-09-10",
@@ -210988,8 +211498,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "target_lot"
     }
    },

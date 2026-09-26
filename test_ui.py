@@ -436,6 +436,42 @@ def test_assistant_retrieval_finds_deal_regardless_of_word_case(page, base_url):
         f"«Магнит» вытеснен из топ-5 нерелевантными совпадениями: {top5_titles}"
 
 
+def test_multiples_table_shows_all_rows_on_request_and_names_the_fx_rate(browser, base_url):
+    """Таблица мультипликаторов молча обрезалась до 15 строк (владелец
+    25 сентября 2026: «видим только 12»); теперь — кнопка «Показать все».
+    Цена в валюте, пересчитанная по курсу ЦБ, подписана исходной суммой и
+    курсом (26 сентября 2026)."""
+    rows = [{"id": "citibank", "title": "Сделка %d" % i, "year": 2024, "target_id": "citibank",
+             "target_name": "ООО Тест", "sum_rub": 1e9, "revenue_rub": 5e8, "revenue_year": 2023,
+             "multiple": 2.0, "confidence": "computed"} for i in range(20)]
+    rows[0].update(title="Валютная сделка", price_fx={"currency": "USD", "amount": 484e6, "fx_rate": 96.6,
+                                                       "fx_date": "2023-09-16", "fx_method": "day"})
+    for width in (360, 390, 1280):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        try:
+            ctx.route("**/api/analytics/multiples", lambda route: route.fulfill(
+                status=200, content_type="application/json", body=json.dumps({
+                    "candidates_total": 20, "clean_total": 0, "computed_total": 20, "median": None,
+                    "industries": [], "deals": rows, "methodology": "Тестовая методика."})))
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+            pg.wait_for_timeout(800)
+            assert pg.locator("#multiplesCard .mult-table tbody tr").count() == 15
+            body = pg.inner_text("#multiplesCard")
+            assert "Показать все 20 сделок" in body
+            assert "цена $484 млн пересчитана в рубли: курс ЦБ на 16.09.2023 — 96,6 ₽" in body
+            pg.click("[data-multall]")
+            assert pg.locator("#multiplesCard .mult-table tbody tr").count() == 20
+            assert not errors
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
+            pg.close()
+        finally:
+            ctx.close()
+
+
 def test_analytics_page_shows_market_multiples_block(browser, base_url):
     """Этап 16, П1: блок «Мультипликаторы рынка» на Аналитике — проверяем оба
     честных состояния (пусто и заполнено) подменой сетевого ответа, а не

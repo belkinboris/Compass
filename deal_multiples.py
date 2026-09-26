@@ -219,6 +219,52 @@ def sum_basis(deal: dict[str, Any]) -> str:
     return 'disclosed'
 
 
+# ЦЕНА В ВАЛЮТЕ (26 сентября 2026). Одна сумма в долларах или евро — «$484 млн»,
+# «531 млн €», «€285 млн», «$550 000». Пересчёт в рубли по курсу ЦБ делает
+# facts.py (через fx.py); здесь только разбор: какая валюта, сколько и ЧТО это
+# за число — тем же правилом, что у рублёвой суммы («до $150 млн» — оценка,
+# «$25–50 млн» — диапазон, «более $1 млрд» — нижняя граница). Две суммы в одной
+# строке («€1 + долг €100 млн», «$12 млн (в т.ч. $10 млн от…)»), другие валюты
+# (кроны, франки) и рубли рядом — не разбираются вовсе: какое число считать
+# ценой, из строки не видно.
+_FX_NUM = r'\d[\d\s\xa0]*(?:[.,]\d+)?'
+_FX_AMOUNT = re.compile(
+    r'(?P<sym1>[$€])\s*(?P<n1>' + _FX_NUM + r')(?:\s*[–—-]\s*(?P<n2>' + _FX_NUM + r'))?'
+    r'(?:\s*(?P<unit1>тыс|млн|млрд|трлн)\.?)?'
+    r'|(?P<n3>' + _FX_NUM + r')(?:\s*[–—-]\s*(?P<n4>' + _FX_NUM + r'))?\s*(?P<unit2>тыс|млн|млрд|трлн)\.?'
+    r'\s*(?P<sym2>[$€]|долл[а-яё]*|USD|евро|EUR)',
+    re.I)
+_FX_OTHER = re.compile(r'крон|франк|юан|фунт|иен|£|¥|₽|руб', re.I)
+_FX_NOT_PRICE = re.compile(r'разглаш|раскры|возможн', re.I)
+
+
+def foreign_price(text: str | None) -> dict[str, Any] | None:
+    """{'currency': 'USD'|'EUR', 'amount': число в валюте, 'meaning': смысл по
+    тем же правилам, что у рублёвой суммы} или None, если в строке не ровно
+    одна сумма в долларах или евро."""
+    text = str(text or '')
+    if not text or _FX_OTHER.search(text) or _FX_NOT_PRICE.search(text):
+        return None
+    found = list(_FX_AMOUNT.finditer(text))
+    if len(found) != 1:
+        return None
+    m = found[0]
+    n1, n2 = (m.group('n1'), m.group('n2')) if m.group('sym1') else (m.group('n3'), m.group('n4'))
+    unit = (m.group('unit1') or m.group('unit2') or '').lower()
+    sym = (m.group('sym1') or m.group('sym2') or '').lower()
+    currency = 'EUR' if sym in ('€', 'eur') or sym.startswith('евро') else 'USD'
+
+    def num(x: str) -> float:
+        return float(x.replace(' ', '').replace('\xa0', '').replace(',', '.'))
+    mult = UNIT_MULT.get(unit, 1)
+    lo = num(n1) * mult
+    hi = num(n2) * mult if n2 else lo
+    # Смысл — по ТОЙ ЖЕ строке, где сумма заменена рублёвой: «≈», «до»,
+    # «по оценке», «этап», диапазон решаются одним правилом для всех валют.
+    as_rub = text[:m.start()] + ('1–2 млн ₽' if n2 else '1 млн ₽') + text[m.end():]
+    return {'currency': currency, 'amount': (lo + hi) / 2, 'meaning': sum_basis({'sum': as_rub})}
+
+
 def parse_rub_sum(text: str | None) -> float | None:
     """Число в рублях из строки суммы, или None, если это не ₽-сумма.
 
@@ -789,6 +835,14 @@ def overall_median(rows: list[DealMultiple]) -> float | None:
     return round(s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2, 2)
 
 
+def price_fx(price: dict[str, Any]) -> dict[str, Any] | None:
+    """Откуда рубли, если цена была в валюте (facts._price_from_foreign):
+    исходная сумма, курс ЦБ и дата курса — на экран, рядом с мультипликатором."""
+    if not price.get('currency'):
+        return None
+    return {k: price.get(k) for k in ('currency', 'amount', 'fx_rate', 'fx_date', 'fx_method')}
+
+
 def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                               registry: dict[str, dict], get_company_profile,
                               lot_ids: set[str] | None = None) -> dict[str, Any]:
@@ -846,6 +900,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                 'verified_by': price.get('verified_by'), 'price_quote': price.get('quote'),
                 'price_source': price.get('source'), 'checks': facts_layer.number_checks(d),
                 'perimeter_report': (f.get('target') or {}).get('perimeter_report'),
+                'price_fx': price_fx(price),
             }
         elif reason not in ('not_control_change', 'before_site_year', 'no_facts'):
             facts_reasons[reason] = facts_reasons.get(reason, 0) + 1
@@ -878,6 +933,7 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
                                 + (f", пакет {_pct(stake.get('value'))} пересчитан на 100%" if price_basis == 'scaled' else '')
                                 + ' ÷ показатель купленной компании за последний полный год до сделки'),
                     'reason_not_verified': reason,
+                    'price_fx': price_fx(price),
                     'reason_label': facts_layer.REASON_LABELS.get(reason, reason),
                     'checks': facts_layer.number_checks(d),
                 }
@@ -1013,7 +1069,8 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             'полный год до сделки (или за позапрошлый, если прошлогодний отчёт ещё не сдан). '
             'Цена — за 100% компании: если куплен пакет, цену пакета делим на его долю '
             '(так сравнивают сделки между собой), и у такой строки прямо написано, с '
-            'какого пакета сделан пересчёт. Пересчёт не учитывает премию за контроль и '
+            'какого пакета сделан пересчёт. Цена в долларах или евро пересчитана в рубли '
+            'по официальному курсу ЦБ на дату сделки — у строки указаны исходная сумма и курс. Пересчёт не учитывает премию за контроль и '
             'скидку за миноритарный пакет, поэтому доли меньше четверти в расчёт не идут '
             'вовсе. Долг компании в цену не входит, если у сделки не сказано «с учётом '
             'долга». У каждой строки один из двух сигналов: «проверено» — доля, цена и '
