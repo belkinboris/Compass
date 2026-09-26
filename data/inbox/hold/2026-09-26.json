@@ -1261,63 +1261,7 @@
    ]
   },
   {
-   "draft_id": "d13535338",
-   "title": "В ДНР ожидают 20-процентный рост инвестиций в основной капитал к концу года",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28153747"
-    ]
-   ],
-   "sum": "56,14 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70361094",
-   "title": "Инвестиции в месторождение газа Ima в Нигерии составят $800 миллионов",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260925/investitsii-873701482.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64388186",
+   "draft_id": "d24810637",
    "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
    "date": "2026-09-25",
    "src": [
@@ -1343,74 +1287,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24425029",
-   "title": "Дмитриев прилетел на следующий раунд переговоров",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/26/dmitriev-priletel-na-sleduyuschiy-raund-peregovorov/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d79165504",
-   "title": "«Зенит» распродал все билеты на матч с «Уралмашем»",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/25/zenit-rasprodal-vse-bilety-na-match-s-uralmashem/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-25",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/25/zenit-rasprodal-vse-bilety-na-match-s-uralmashem/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
