@@ -1290,19 +1290,30 @@
    ]
   },
   {
-   "draft_id": "d78269993",
-   "title": "В России могут изменить правила возврата товаров при онлайн-покупках",
+   "draft_id": "d10433885",
+   "title": "FT узнала о переговорах Armani о продаже доли после смерти основателя",
    "date": "2026-09-27",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2174271/v-rossii-mogut-izmenit-pravila-vozvrata-tovarov-pri-onlain-pokupkakh-izi"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/27/09/2026/6ab8b28ca7f93c29809f298f"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-27",
+     "title": "Переговоры",
+     "note": "В ближайшие недели представители компании намерены встретиться с тремя группами, указанными в завещании Джорджо Армани — LVMH, L'Orеal и EssilorLuxottica. Один из вариантов — разделить пакет акций модного дома в 15%, сообщила FT",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/27/09/2026/6ab8b28ca7f93c29809f298f"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1314,35 +1325,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74492397",
-   "title": "«Хотелось дать сыну что-то свое». Как семейная пара открыла издательство необычных детских книг — их продают по всему миру",
-   "date": "2026-09-27",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/job/2026/09/27/76662960/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Медиа",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
