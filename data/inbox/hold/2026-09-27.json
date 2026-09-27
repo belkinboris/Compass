@@ -1290,70 +1290,13 @@
    ]
   },
   {
-   "draft_id": "d71124257",
-   "title": "Лондонский дом из фильма «Ноттинг Хилл» выставили на продажу за £7,95 млн",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ab82abb9a79472c105a0cf6"
-    ]
-   ],
-   "sum": "$10,5 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69091145",
-   "title": "Росконгресс сообщил об интересе зарубежных стран к покупке российских онковакцин",
+   "draft_id": "d78269993",
+   "title": "В России могут изменить правила возврата товаров при онлайн-покупках",
    "date": "2026-09-27",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28155607"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gd49877c9 (общие редкие слова: россий, стран) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d33840766",
-   "title": "Предложение на рынке первичной продажи офисов в Петербурге растёт быстрее спроса",
-   "date": "2026-09-27",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/26/predlozhenie-narinke-pervichnoj"
+     "web:iz.ru",
+     "https://iz.ru/2174271/v-rossii-mogut-izmenit-pravila-vozvrata-tovarov-pri-onlain-pokupkakh-izi"
     ]
    ],
    "sum": null,
@@ -1375,42 +1318,13 @@
    ]
   },
   {
-   "draft_id": "d36177644",
-   "title": "💼 Портфель акций под пассивный доход на 26 сентября. 3,129 млн рублей. Новые покупки",
-   "date": "2026-09-26",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1356006.php"
-    ]
-   ],
-   "sum": "3,129 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рублей, сентяб) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d59112722",
-   "title": "Тех, кто покупает заграничные туры на Новый год, ждут опасные сюрпризы: к чему приготовиться",
-   "date": "2026-09-26",
+   "draft_id": "d74492397",
+   "title": "«Хотелось дать сыну что-то свое». Как семейная пара открыла издательство необычных детских книг — их продают по всему миру",
+   "date": "2026-09-27",
    "src": [
     [
      "web:74.ru",
-     "https://74.ru/text/world/2026/09/27/76664804/"
+     "https://74.ru/text/job/2026/09/27/76662960/"
     ]
    ],
    "sum": null,
@@ -1418,17 +1332,17 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "заграничные туры на Новый год, ждут опасные сюрпризы: к чему приготовиться",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "заграничные туры на Новый год, ждут опасные сюрпризы: к чему приготовиться",
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Медиа",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
