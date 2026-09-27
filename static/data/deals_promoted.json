@@ -147445,7 +147445,7 @@
      "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
      "source": "https://www.kommersant.ru/doc/6001381",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value": 30.0,
@@ -147468,15 +147468,15 @@
      ]
     },
     "price": {
-     "value_rub": 689500000.0,
+     "value_rub": null,
      "meaning": "foreign_currency",
-     "scope": "unknown",
+     "scope": "package",
      "basis": "verified",
-     "card_hash": "5e5dbdffaa39",
-     "quote": "689,5 млн руб. по курсу ЦБ на 25 мая",
+     "card_hash": "d1cd227cda9e",
+     "quote": "Стоимость пакета господина Шикулова — €8 млн (689,5 млн руб. по курсу ЦБ на 25 мая).",
      "source": "https://www.kommersant.ru/doc/6001381",
      "verified_by": "model×2",
-     "verified_at": "2026-09-19",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value_rub": 689500000,
@@ -147485,7 +147485,7 @@
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "689,5 млн руб. по курсу ЦБ на 25 мая",
+       "quote": "Стоимость пакета господина Шикулова — €8 млн (689,5 млн руб. по курсу ЦБ на 25 мая).",
        "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
        "source": "https://www.kommersant.ru/doc/6001381",
        "quote_checked": true,
@@ -147504,7 +147504,24 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "meaning_variants": [
+      "foreign_currency"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Информация о сделке с Вячеславом Шикуловым раскрыта в отчете Guess за 2022 год.",
+     "scope_basis": "verified"
     },
     "date": {
      "value": "2023-05-22",
@@ -147517,7 +147534,7 @@
      "quote": "Изменения в ЕГРЮЛ внесены 22 мая.",
      "source": "https://www.kommersant.ru/doc/6001381",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value": "2023-05-22",
@@ -147551,7 +147568,7 @@
      "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
      "source": "https://www.kommersant.ru/doc/6001381",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "control_change": false,
@@ -147580,7 +147597,7 @@
      "basis": "registry",
      "perimeter": "verified",
      "card_hash": "d8c558ceeea6",
-     "perimeter_entity": "ООО «Гесс? Сиайэс»",
+     "perimeter_entity": "Guess",
      "perimeter_report": {
       "inn": "7729482411",
       "year": 2022,
@@ -147588,23 +147605,23 @@
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
      },
      "perimeter_other_entities": [],
-     "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+     "quote": "В 2022 году выручка российской Guess выросла на 24%, до 4 млрд руб., чистая прибыль — в 3,5 раза, до 283,1 млн руб.",
      "source": "https://www.kommersant.ru/doc/6001381",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "ok": true,
        "covers_business": true,
        "other_entities": [],
-       "entity": "ООО «Гесс? Сиайэс»",
+       "entity": "Guess",
        "report": {
         "inn": "7729482411",
         "year": 2022,
         "revenue_rub": 4020431000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
        },
-       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "quote": "В 2022 году выручка российской Guess выросла на 24%, до 4 млрд руб., чистая прибыль — в 3,5 раза, до 283,1 млн руб.",
        "source": "https://www.kommersant.ru/doc/6001381",
        "quote_checked": true,
        "reader": "A"
@@ -147613,14 +147630,14 @@
        "ok": true,
        "covers_business": true,
        "other_entities": [],
-       "entity": "ООО «Гесс? Сиайэс»",
+       "entity": "Guess",
        "report": {
         "inn": "7729482411",
         "year": 2022,
         "revenue_rub": 4020431000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГЕСС? СИАЙЭС\""
        },
-       "quote": "Структуры американского производителя и продавца одежды Guess? Inc. консолидировали 100% ООО «Гесс? Сиайэс», выкупив 30% в компании у предпринимателя Вячеслава Шикулова.",
+       "quote": "В 2022 году выручка российской Guess выросла на 24%, до 4 млрд руб., чистая прибыль — в 3,5 раза, до 283,1 млн руб.",
        "source": "https://www.kommersant.ru/doc/6001381",
        "quote_checked": true,
        "reader": "B"
@@ -147642,7 +147659,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "registry"
+   "date_basis": "registry",
+   "sum_basis": "foreign_currency"
   },
   {
    "id": "gf87a65f7",
@@ -156578,8 +156596,8 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "stale",
-     "card_hash": "cf37c989c1af",
+     "basis": "verified",
+     "card_hash": "bec5795df0e9",
      "object": "АО «Кучуксульфат»",
      "event": "registry",
      "event_variants": [
@@ -156588,7 +156606,7 @@
      "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край). Соответствующая информация опубликована в ЕГРЮЛ.",
      "source": "https://www.interfax.ru/business/938400",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value": 100.0,
@@ -156620,10 +156638,9 @@
      "meaning_variants": [
       "disclosed"
      ],
-     "attribution": "disputed",
+     "attribution": "registry",
      "attribution_variants": [
-      "registry",
-      "unknown"
+      "registry"
      ],
      "event": "closing",
      "event_variants": [
@@ -156642,16 +156659,17 @@
      "quote": "Его ценовое предложение составило 10,36 млрд рублей, что эквивалентно начальной цене лота.",
      "source": "https://www.interfax.ru/business/938400",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value_rub": 10360000000,
        "meaning": "disclosed",
-       "attribution": "unknown",
+       "attribution": "registry",
        "event": "closing",
-       "scope": "equity",
+       "scope": "unknown",
        "terms": "fixed",
        "quote": "Его ценовое предложение составило 10,36 млрд рублей, что эквивалентно начальной цене лота.",
+       "attribution_quote": "Соответствующая информация опубликована в ЕГРЮЛ.",
        "source": "https://www.interfax.ru/business/938400",
        "quote_checked": true,
        "reader": "A"
@@ -156661,7 +156679,7 @@
        "meaning": "disclosed",
        "attribution": "registry",
        "event": "closing",
-       "scope": "unknown",
+       "scope": "equity",
        "terms": "fixed",
        "quote": "Его ценовое предложение составило 10,36 млрд рублей, что эквивалентно начальной цене лота.",
        "attribution_quote": "Соответствующая информация опубликована в ЕГРЮЛ.",
@@ -156682,7 +156700,7 @@
      "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край). Соответствующая информация опубликована в ЕГРЮЛ.",
      "source": "https://www.interfax.ru/business/938400",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "value": "2023-12-25",
@@ -156695,7 +156713,7 @@
       {
        "value": "2023-12-25",
        "meaning": "registry",
-       "quote": "Москва. 28 декабря. INTERFAX.RU - Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
+       "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край). Соответствующая информация опубликована в ЕГРЮЛ.",
        "source": "https://www.interfax.ru/business/938400",
        "quote_checked": true,
        "reader": "B"
@@ -156712,16 +156730,16 @@
      "basis": "rule",
      "card_hash": "8e88f083fbe0",
      "intragroup": false,
-     "control_change_basis": "stale",
-     "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край). Соответствующая информация опубликована в ЕГРЮЛ.",
+     "control_change_basis": "verified",
+     "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
      "source": "https://www.interfax.ru/business/938400",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край). Соответствующая информация опубликована в ЕГРЮЛ.",
+       "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
        "source": "https://www.interfax.ru/business/938400",
        "quote_checked": true,
        "reader": "A"
@@ -156729,7 +156747,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Москва. 28 декабря. INTERFAX.RU - Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
+       "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
        "source": "https://www.interfax.ru/business/938400",
        "quote_checked": true,
        "reader": "B"
@@ -156753,10 +156771,10 @@
       "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КУЧУКСУЛЬФАТ\""
      },
      "perimeter_other_entities": [],
-     "quote": "«Кучуксульфат» производит сульфат натрия (используется в том числе для производства моющих средств) из мирабилита, добываемого из месторождения минеральных солей озера Кучукское в Алтайском крае.",
-     "source": "https://www.kommersant.ru/doc/6043082",
+     "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
+     "source": "https://www.interfax.ru/business/938400",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-27",
      "readings": [
       {
        "ok": true,
@@ -156769,8 +156787,8 @@
         "revenue_rub": 5721728000.0,
         "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КУЧУКСУЛЬФАТ\""
        },
-       "quote": "«Кучуксульфат» производит сульфат натрия (используется в том числе для производства моющих средств) из мирабилита, добываемого из месторождения минеральных солей озера Кучукское в Алтайском крае.",
-       "source": "https://www.kommersant.ru/doc/6043082",
+       "quote": "Московское АО \"Росхим\" (ранее - АО \"Русский водород\") 25 декабря получило 100% контроль над АО \"Кучуксульфат\" (Алтайский край).",
+       "source": "https://www.interfax.ru/business/938400",
        "quote_checked": true,
        "reader": "A"
       },
@@ -156780,14 +156798,13 @@
        "other_entities": [],
        "entity": "АО «Кучуксульфат»",
        "report": {
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КУЧУКСУЛЬФАТ\"",
         "inn": "2235001430",
         "year": 2021,
         "revenue_rub": 5721728000.0,
-        "operating_profit_rub": 1848220000.0
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КУЧУКСУЛЬФАТ\""
        },
-       "quote": "АО \"Кучуксульфат\" (бывший Кучукский сульфатный завод) выпускает сульфат натрия с содержанием основного вещества 99,8%, который используется в качестве сырья в целлюлозно-бумажной, стекольной и химической промышленности, а также при производстве стиральных порошков, чистящих средств.",
-       "source": "https://www.interfax.ru/business/938400",
+       "quote": "Правительство РФ приняло предложение Минфина об отчуждении 100% акций (132 480 шт.) алтайского завода «Кучуксульфат», находящихся в федеральной собственности.",
+       "source": "https://www.kommersant.ru/doc/6043082",
        "quote_checked": true,
        "reader": "B"
       }
@@ -156796,16 +156813,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_author_unknown",
-     "top_purchases": "price_author_unknown",
-     "multiple_text": "stale"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "price_scope_unknown"
     }
    },
    "stake_acquired": 100.0,
@@ -206407,7 +206424,8 @@
    },
    "target": "g96801875",
    "buyer": "g59f4de1d",
-   "seller_id": "gd49c1a51"
+   "seller_id": "gd49c1a51",
+   "followup_researched": "2026-09-27"
   },
   {
    "id": "ge957fc7b",
@@ -206432,6 +206450,10 @@
     [
      "ТАСС",
      "https://tass.ru/nedvizhimost/28151879"
+    ],
+    [
+     "MSK1.RU",
+     "https://msk1.ru/text/gorod/2026/09/25/76663030/"
     ]
    ],
    "from_ingest": true,
@@ -206579,7 +206601,8 @@
      "milestone_drafted_at": "2026-09-25T12:15:21+00:00"
     }
    ],
-   "buyer_name": "ООО «Оптика Мира»"
+   "buyer_name": "ООО «Оптика Мира»",
+   "followup_researched": "2026-09-27"
   },
   {
    "id": "gabdbe320",
@@ -206732,7 +206755,8 @@
    },
    "target": "gec2d70f3",
    "buyer": null,
-   "buyer_name": "Станислав Бартош"
+   "buyer_name": "Станислав Бартош",
+   "followup_researched": "2026-09-27"
   },
   {
    "id": "g60f99ba6",
