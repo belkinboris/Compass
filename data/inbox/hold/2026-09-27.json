@@ -1290,7 +1290,7 @@
    ]
   },
   {
-   "draft_id": "d45207902",
+   "draft_id": "d84536818",
    "title": "FT узнала о переговорах Armani о продаже доли после смерти основателя",
    "date": "2026-09-27",
    "src": [
@@ -1330,36 +1330,7 @@
    ]
   },
   {
-   "draft_id": "d78824915",
-   "title": "FT: старые танкеры впервые в истории стали продавать дороже новых",
-   "date": "2026-09-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8988065"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d16606139",
+   "draft_id": "d35233147",
    "title": "FT: Armani готов продать свои акции LVMH, L’Oreal и EssilorLuxottica",
    "date": "2026-09-27",
    "src": [
@@ -1390,13 +1361,44 @@
    ]
   },
   {
-   "draft_id": "d41129940",
-   "title": "FT назвала барьеры для инвестиций в ИИ в Европе",
+   "draft_id": "d20065294",
+   "title": "FT: Armani начнет переговоры о продаже акций с LVMH и L’Oreal",
    "date": "2026-09-27",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/27/09/2026/6ab90499561554cf7a38203f"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28156389"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «FT узнала о переговорах Armani о продаже доли после смерти о» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d20759309",
+   "title": "Axios: очередной раунд непрямых переговоров между США и Ираном пройдет 28 сентября",
+   "date": "2026-09-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28156385"
     ]
    ],
    "sum": null,
@@ -1411,11 +1413,38 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25108023",
+   "title": "Эдвардс нокаутировал Беллато в третьем раунде",
+   "date": "2026-09-27",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/27/edvards-nokautiroval-bellato-v-tretiem-raunde/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
