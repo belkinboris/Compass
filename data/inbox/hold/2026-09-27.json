@@ -1290,7 +1290,7 @@
    ]
   },
   {
-   "draft_id": "d33967436",
+   "draft_id": "d60256751",
    "title": "FT узнала о переговорах Armani о продаже доли после смерти основателя",
    "date": "2026-09-27",
    "src": [
@@ -1330,17 +1330,17 @@
    ]
   },
   {
-   "draft_id": "d11032161",
-   "title": "Юрист предупредил о новой схеме обмана с вопросами к «объявлению» о продаже",
+   "draft_id": "d58938794",
+   "title": "Аукционы Минфина — доходность ОФЗ продолжает свой рост, как и ставки по банковским вкладам, похоже, уже никто не ждёт снижения ключа!",
    "date": "2026-09-27",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260927/shema-2120519379.html"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1356071.php"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1351,35 +1351,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53309514",
-   "title": "Дачники в ХМАО распродают участки за бесценок",
-   "date": "2026-09-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053131138"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "Финтех",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
