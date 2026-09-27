@@ -1290,7 +1290,7 @@
    ]
   },
   {
-   "draft_id": "d21015933",
+   "draft_id": "d45207902",
    "title": "FT узнала о переговорах Armani о продаже доли после смерти основателя",
    "date": "2026-09-27",
    "src": [
@@ -1330,17 +1330,17 @@
    ]
   },
   {
-   "draft_id": "d57804185",
-   "title": "Инвестиции в облигационные фонды выросли за неделю до $17,3 млрд",
+   "draft_id": "d78824915",
+   "title": "FT: старые танкеры впервые в истории стали продавать дороже новых",
    "date": "2026-09-27",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8988059"
+     "https://www.kommersant.ru/doc/8988065"
     ]
    ],
-   "sum": "$17,3 млрд",
-   "type": "Инвестиция",
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1352,6 +1352,66 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d16606139",
+   "title": "FT: Armani готов продать свои акции LVMH, L’Oreal и EssilorLuxottica",
+   "date": "2026-09-27",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8988053"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «FT узнала о переговорах Armani о продаже доли после смерти о» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d41129940",
+   "title": "FT назвала барьеры для инвестиций в ИИ в Европе",
+   "date": "2026-09-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/27/09/2026/6ab90499561554cf7a38203f"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
