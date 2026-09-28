@@ -1392,7 +1392,7 @@
    ]
   },
   {
-   "draft_id": "d29376023",
+   "draft_id": "d42176460",
    "title": "ОМК может купить доли в китайских полупроводниковых фабриках",
    "date": "2026-09-28",
    "src": [
@@ -1431,46 +1431,7 @@
    ]
   },
   {
-   "draft_id": "d73941457",
-   "title": "Администрация Трампа отвергла планы по продаже оружия Китаю",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8988213"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-28",
-     "title": "Переговоры",
-     "note": "Представитель администрации президента США сообщил газете The Wall Street Journal, что у американских властей нет планов продавать оружие Китаю. Другой американский чиновник в разговоре с WSJ отметил, что продажа оружия Китаю уже запрещена законом, и добавил…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/8988213"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86524389",
+   "draft_id": "d79662109",
    "title": "Information узнало, что Китай может разрешить Alibaba купить чипы Nvidia",
    "date": "2026-09-28",
    "src": [
@@ -1499,102 +1460,7 @@
    ]
   },
   {
-   "draft_id": "d42174866",
-   "title": "WSJ узнала, что у США отрицают планы по продаже вооружений Китаю",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/politics/28/09/2026/6ab9c9c79a7947509c6e1bde"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-28",
-     "title": "Переговоры",
-     "note": "Соединенные Штаты не планируют продавать Китаю оружие, пишет газета The Wall Street Journal (WSJ) со ссылкой на источники.",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/politics/28/09/2026/6ab9c9c79a7947509c6e1bde"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43614010",
-   "title": "В «Авито» рассказали, что 29% представителей молодежи занимаются продажами",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28157045"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67049696",
-   "title": "В МВД рассказали, как правильно делать покупки на интернет-площадках",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28156965"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51692738",
+   "draft_id": "d40457671",
    "title": "WSJ сообщила об опровержении в США планов по продаже оружия Китаю",
    "date": "2026-09-28",
    "src": [
@@ -1628,110 +1494,12 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «WSJ узнала, что у США отрицают планы по продаже вооружений К» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d86316976",
-   "title": "Как продать квартиру за 30 дней, когда рынок стоит",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260928/kvartira-873610291.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d12769116",
-   "title": "Россиянка описала зимовку в Турции словами «даже хлеба купить не смогли»",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/28/rossiyanka-opisala-zimovku-v-turtsii-slovami-dazhe-hleba-kupit-ne-smogli/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d35156969",
-   "title": "Мужчина продал трехлетнюю дочь 60-летнему жениху",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/28/muzhchina-prodal-trehletnyuyu-doch-60-letnemu-zhenihu/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-28",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/09/28/muzhchina-prodal-trehletnyuyu-doch-60-letnemu-zhenihu/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "трёхлетняя дочь 60-летнему жениху",
-   "seller": "Мужчина",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "трёхлетняя дочь 60-летнему жениху",
-    "seller": "Мужчина"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d26374513",
+   "draft_id": "d77209701",
    "title": "В пермской Барде продают придорожный ресторан на 300 гостей",
    "date": "2026-09-28",
    "src": [
@@ -1759,7 +1527,7 @@
    ]
   },
   {
-   "draft_id": "d14148822",
+   "draft_id": "d58786839",
    "title": "Рекордная явка, Кольцов и Петерман в думе, продажа ТЦ за 1,5 млрд: 9 главных событий ХМАО",
    "date": "2026-09-28",
    "src": [
@@ -1770,6 +1538,102 @@
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85190876",
+   "title": "«1С» задерживает продажи и отгрузки: Metrika42 помогает торговым сетям сократить время поиска причин",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-28_1s_zaderzhivaet_prodazhi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g685f1e39 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d40354168",
+   "title": "День 1677: Объединённая микроэлектронная компания рассматривает возможность покупки долей в китайских полупроводниковых фабриках",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/money/3162680-obedinennaya-mikroelektronnaya-kompaniya-investitsii-v-kitayskie-fabriki?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-28",
+     "title": "Переговоры",
+     "note": "Собираем новости, события и мнения о рынках, банках и реакциях компаний.",
+     "source": [
+      "web:vc.ru",
+      "https://vc.ru/money/3162680-obedinennaya-mikroelektronnaya-kompaniya-investitsii-v-kitayskie-fabriki?from=rss"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88139148",
+   "title": "Мосбиржа проводит дискретный аукцион по акциям «Евротранса»",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28157409"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
