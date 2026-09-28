@@ -217633,6 +217633,152 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g18e39dbf",
+   "date": "2026-09-28",
+   "title": "Клячин продал офисный комплекс «Химки One» группе «Риотэкс»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7424"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/business/22/11/2019/5dd692649a79478e8ac328e7"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2025/09/29/1142603-sber-i-vladelets-azimut-hotels-ischut-investora"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "около 2 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Сообщается только одним источником — больше никто сделку не подтвердил, ни другая пресса, ни сам покупатель; независимого подтверждения найти не удалось. Комплекс «Химки One» (41–44 тыс. кв. м, бывший Mebe One Khimki Plaza) структуры Клячина купили в 2019 году у обанкротившегося турецкого застройщика за 1,5 млрд ₽. В сентябре 2025 тот же комплекс уже выставляли на продажу за 2,5 млрд ₽ через портал Сбербанка «ДА», покупателя тогда не назвали. Разница между той ценой и заявленными в этом посте ~2 млрд ₽ нигде не объяснена.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "около 2 млрд ₽",
+   "seller": "Александр Клячин (владелец Azimut Hotels)",
+   "buyer_name": "ГК «Риотэкс»",
+   "asset": "офисный комплекс «Химки One» (42 000 кв. м)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-28",
+     "title": "Сделка завершена",
+     "note": "⚡️ Владелец Azimut Hotels Александр Клячин продал еще один свой актив. ГК «Риотэкс», управляющая бизнес-центрами под брендом РТС, выкупила у него офисный комплекс «Химки One» на 42 000 кв. м. Сумма сделки составила около 2 млрд руб.",
+     "source": [
+      "Телеграм-канал: Сделки M&A",
+      "https://t.me/dealsma/7424"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ГК «Риотэкс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7424"
+     }
+    ],
+    "target": [
+     {
+      "value": "офисный комплекс «Химки One» (42 000 кв. м)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7424"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Александр Клячин (владелец Azimut Hotels)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7424"
+     }
+    ]
+   },
+   "reviewed": "2026-09-28",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "56d00b2a8d17"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "a677a302d720"
+    },
+    "date": {
+     "value": "2026-09-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "8859c0db58be"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ff4efcf06a29"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "accepted": "2026-09-28",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "ГК «Риотэкс» названа только текстом источника, юрлицо не раскрыто — профиля заводить не на что.",
+     "seller": "Александр Клячин — физическое лицо, не компания, профиль не заводится.",
+     "target": "«Химки One» — объект недвижимости (бизнес-центр), а не юрлицо с профилем."
+    }
+   },
+   "added": "2026-09-28"
   }
  ],
  "companies": {
