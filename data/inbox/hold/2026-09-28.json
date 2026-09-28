@@ -1392,7 +1392,7 @@
    ]
   },
   {
-   "draft_id": "d56550282",
+   "draft_id": "d63264809",
    "title": "ОМК может купить доли в китайских полупроводниковых фабриках",
    "date": "2026-09-28",
    "src": [
@@ -1431,7 +1431,7 @@
    ]
   },
   {
-   "draft_id": "d84016103",
+   "draft_id": "d40876968",
    "title": "Information узнало, что Китай может разрешить Alibaba купить чипы Nvidia",
    "date": "2026-09-28",
    "src": [
@@ -1460,7 +1460,7 @@
    ]
   },
   {
-   "draft_id": "d53872853",
+   "draft_id": "d74818831",
    "title": "В пермской Барде продают придорожный ресторан на 300 гостей",
    "date": "2026-09-28",
    "src": [
@@ -1488,7 +1488,7 @@
    ]
   },
   {
-   "draft_id": "d40784594",
+   "draft_id": "d48864604",
    "title": "Рекордная явка, Кольцов и Петерман в думе, продажа ТЦ за 1,5 млрд: 9 главных событий ХМАО",
    "date": "2026-09-28",
    "src": [
@@ -1516,7 +1516,7 @@
    ]
   },
   {
-   "draft_id": "d60886457",
+   "draft_id": "d79701025",
    "title": "Nvidia увеличила программу обратного выкупа акций на $150 миллиардов",
    "date": "2026-09-28",
    "src": [
@@ -1547,7 +1547,7 @@
    ]
   },
   {
-   "draft_id": "d20594484",
+   "draft_id": "d84379002",
    "title": "Nvidia объявила крупнейший в истории США обратный выкуп акций",
    "date": "2026-09-28",
    "src": [
@@ -1578,130 +1578,7 @@
    ]
   },
   {
-   "draft_id": "d69621707",
-   "title": "«ВСМПО-Ависма» в I полугодии снизила продажи титана на 13%",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260928/vsmpo-avism-873726922.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35755324",
-   "title": "В Эстонии ограничат приобретение недвижимости россиянами и белорусами",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260928/estonija-873725490.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48469972",
-   "title": "Объединение российских микроэлектронных компаний может купить доли в китайских заводах — для разработки технологий",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/obedinenie-rossijskih-mikroelektronnyh-kompanij-mozhet-kupit-doli-v-kitajskih-zavodah-dlya-razrabotki-tehnologij/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-28",
-     "title": "Переговоры",
-     "note": "Объединенная микроэлектронная компания (ОМК) рассматривает покупку долей в китайских полупроводниковых фабриках, пишет «Коммерсант». Сделка должна обеспечить российским заказчикам более стабильный доступ к производственным мощностям и упростить получение квот…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/obedinenie-rossijskih-mikroelektronnyh-kompanij-mozhet-kupit-doli-v-kitajskih-zavodah-dlya-razrabotki-tehnologij/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82573632",
-   "title": "Россиянам хотят ограничить покупку недвижимости в Эстонии",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260928/estonija-2120728354.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71516363",
+   "draft_id": "d56831575",
    "title": "В Челябинске продается резиденция с авторской мебелью за 95 млн. Фото",
    "date": "2026-09-28",
    "src": [
@@ -1723,6 +1600,448 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32767603",
+   "title": "Nvidia увеличила выкуп акций до $235 млрд",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8988839"
+    ]
+   ],
+   "sum": "$235 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d65074329",
+   "title": "Путин разрешил «Софтэксу» купить бывшую дочку Western Union",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/09/28/1232463-putin-razreshil-softeksu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26277599",
+   "title": "«Софтэксу» разрешили купить 100% в «дочке» Western Union",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/finances/28/09/2026/6aba6c57cfbb218e4a07fe46"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Путин разрешил «Софтэксу» купить бывшую дочку Western Union» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d80550670",
+   "title": "Adobe прогнозирует в ноябре-декабре в США рекордные онлайн-продажи",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1118955"
+    ]
+   ],
+   "sum": "$275,1 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d58638728",
+   "title": "Путин одобрил сделку по продаже российской «дочки» Western Union",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1118946"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Согласование получено",
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-09-28",
+     "title": "Согласование получено",
+     "note": "ООО \"Софтэкс\" получило разрешение на покупку российской \"дочки\" платежной системы Western Union.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1118946"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Путин разрешил «Софтэксу» купить бывшую дочку Western Union» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d50075770",
+   "title": "Американская исследовательская группа Nielsen/GfK продала российский бизнес. Кто его купил",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/373924"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-28",
+     "title": "Сделка завершена",
+     "note": "Nielsen Holdings — глобальная компания-измеритель, предоставляющая данные и маркетинговую информацию в индустрии товаров повседневного спроса, медиаизмерения и исследования потребителей. Офисы Nielsen находятся более чем в 100 странах мира, штат сотрудников…",
+     "source": [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/373924"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc65bacdf (общие редкие слова: nielse, продал) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d89056176",
+   "title": "CNBC: Nvidia создала платформу для защиты от взлома ИИ-агентами",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28159311"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d83573039",
+   "title": "Эстония может запретить россиянам покупку недвижимости в стране",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28159219"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50986417",
+   "title": "Путин разрешил «Софтэкс» выкупить российскую «дочку» Western Union",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28159229"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Путин разрешил «Софтэксу» купить бывшую дочку Western Union» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d81666969",
+   "title": "Insuretech Outmarket raises $34.5M just months after prior round",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/28/insuretech-outmarket-raises-34-5m-just-months-after-prior-round/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d38532852",
+   "title": "Viral AI agent Instinct raises $1B Series C at a $10B valuation",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/28/viral-ai-agent-instinct-raises-1b-series-c-at-a-10b-valuation/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d20559121",
+   "title": "M&A в 2026 году: как согласовать интересы сторон",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/story/265998/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d63849942",
+   "title": "В Курганской области продают гостиницу с саунами по цене однушки. Фото",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053131436"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57066134",
+   "title": "Долги на распродаже: зачем МФО передают коллекторам проблемные займы",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/9/28/dolgi-na-rasprodazhe-zachem-mfo-peredayut-kollektoram-problemnye-zajmy"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-28",
+     "title": "Сделка завершена",
+     "note": "Во II квартале текущего года микрофинансовые организации продали коллекторам проблемные займы на рекордные 43 млрд рублей. Рост просрочки, неоднородная динамика доходов населения и высокая стоимость кредитов вынуждают МФО активнее избавляться от «плохих»…",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/9/28/dolgi-na-rasprodazhe-zachem-mfo-peredayut-kollektoram-problemnye-zajmy"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финансовые услуги",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
