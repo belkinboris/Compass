@@ -217981,6 +217981,16 @@
      ]
     },
     {
+     "kind": "negotiations",
+     "date": "2026-09-28",
+     "title": "Переговоры",
+     "note": "Сеть частных многопрофильных клиник «СМ-Клиника» сообщила о планах по развитию приобретенного в августе 2026 года центра превентивной медицины «Медфрендс-Клиник». Компания отказалась сохранять прежнюю специализацию оператора и решила придерживаться…",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2026/09/28/sm-klinika-pereprofilirovala-priobretennuyu-medfrends-klinik/"
+     ]
+    },
+    {
      "kind": "other",
      "date": "2026-09-28",
      "title": "Новый владелец меняет профиль клиники",
@@ -218037,7 +218047,7 @@
      "value": "2026-08-18",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "360f15da04e2"
+     "card_hash": "f049e9a35679"
     },
     "nature": {
      "control_change": true,
@@ -218102,6 +218112,18 @@
     [
      "Деловой Петербург",
      "https://www.dp.ru/a/2026/09/28/softjeks-poluchil-razreshenie"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/politics/28/09/2026/6aba69a44495c0b6d8c69108"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/russia/1118943"
+    ],
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28159199"
     ]
    ],
    "from_ingest": true,
@@ -218123,6 +218145,16 @@
    },
    "asset": "российские активы сети Metro Cash & Carry",
    "events": [
+    {
+     "kind": "approval",
+     "date": "2026-09-28",
+     "title": "Согласование получено",
+     "note": "",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/09/28/softjeks-poluchil-razreshenie"
+     ]
+    },
     {
      "kind": "closed",
      "date": "2026-09-28",
@@ -218147,6 +218179,14 @@
       "method": "explicit_news_title",
       "url": "https://ria.ru/20260928/metro--2120739862.html"
      }
+    ],
+    "buyer": [
+     {
+      "value": "«Софтэкс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/09/28/softjeks-poluchil-razreshenie"
+     }
     ]
    },
    "kind": "custody",
@@ -218169,7 +218209,7 @@
      "value": "2026-09-28",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "8859c0db58be"
+     "card_hash": "2bdad6e33f0e"
     },
     "nature": {
      "control_change": true,
@@ -218211,7 +218251,8 @@
     "no_profile": {
      "target": "«российские активы сети Metro Cash & Carry» — источники не называют конкретное юрлицо, профиль заводить не на что."
     }
-   }
+   },
+   "buyer_name": "«Софтэкс»"
   }
  ],
  "companies": {

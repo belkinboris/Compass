@@ -29,6 +29,15 @@
    ]
   },
   {
+   "news": "https://retailer.ru/nestle-namerena-zashhishhat-svoi-prava-posle-peredachi-rossijskogo-biznesa-vo-vremennoe-upravlenie/",
+   "title": "Nestle намерена защищать свои права после передачи российского бизнеса во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
    "news": "https://www.tadviser.ru/a/255530",
    "title": "«Лента» купила торговую сеть «Мария-Ра», оцененную в 60 млрд рублей",
    "verdict": "enrich:gb7ea4703",
@@ -36,6 +45,105 @@
    "reasons": [
     "этот статус уже снимали как преждевременный — переводить только после чтения источника",
     "этап «closed» уже снимали как преждевременный"
+   ]
+  },
+  {
+   "news": "https://www.kommersant.ru/doc/8988813",
+   "title": "Путин передал российские активы Metro во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://www.kommersant.ru/doc/8988793",
+   "title": "Путин передал активы Metro Cash&Carry во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/business/news/2026/09/28/1232475-reshenie-o-peredachi",
+   "title": "В Metro объяснили решение о передаче активов под временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/business/news/2026/09/28/1232458-aktivi-metro",
+   "title": "Путин передал активы Меtro в РФ под временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://www.dp.ru/a/2026/09/28/softjeks-poluchil-razreshenie",
+   "title": "\"Софтэкс\" получил разрешение на покупку российской \"дочки\" Western Union",
+   "verdict": "enrich:ga142d8e0",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «российские активы сети Metro Cash & Carry»"
+   ]
+  },
+  {
+   "news": "https://www.dp.ru/a/2026/09/28/putin-peredal-aktivi-metro",
+   "title": "Путин передал активы Metro Cash & Carry во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 7",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 7"
+   ]
+  },
+  {
+   "news": "https://iz.ru/2174857/reteiler-metro-ukazom-prezidenta-rf-peredan-vo-vremennoe-upravlenie-izi",
+   "title": "Путин передал активы ретейлера METRO во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://1prime.ru/20260928/metro-873727863.html",
+   "title": "Активы Metro в России передали во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://lenta.ru/news/2026/09/28/aktivy-metro-cash-carry-peredali-vo-vremennoe-upravlenie/",
+   "title": "Активы Metro Cash & Carry передали во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 7",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 7"
+   ]
+  },
+  {
+   "news": "https://tass.ru/ekonomika/28159443",
+   "title": "Передача российских активов Metro во временное управление. Главное о решении",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://pravo.ru/news/266013/",
+   "title": "Путин передал российские активы Metro во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
    ]
   }
  ]
