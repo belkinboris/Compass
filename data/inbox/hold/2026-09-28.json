@@ -1392,7 +1392,7 @@
    ]
   },
   {
-   "draft_id": "d65606115",
+   "draft_id": "d46383868",
    "title": "ОМК может купить доли в китайских полупроводниковых фабриках",
    "date": "2026-09-28",
    "src": [
@@ -1431,7 +1431,7 @@
    ]
   },
   {
-   "draft_id": "d26622138",
+   "draft_id": "d41514481",
    "title": "Information узнало, что Китай может разрешить Alibaba купить чипы Nvidia",
    "date": "2026-09-28",
    "src": [
@@ -1460,7 +1460,7 @@
    ]
   },
   {
-   "draft_id": "d60168589",
+   "draft_id": "d29873290",
    "title": "В пермской Барде продают придорожный ресторан на 300 гостей",
    "date": "2026-09-28",
    "src": [
@@ -1488,7 +1488,7 @@
    ]
   },
   {
-   "draft_id": "d72570268",
+   "draft_id": "d39377489",
    "title": "Рекордная явка, Кольцов и Петерман в думе, продажа ТЦ за 1,5 млрд: 9 главных событий ХМАО",
    "date": "2026-09-28",
    "src": [
@@ -1516,16 +1516,100 @@
    ]
   },
   {
-   "draft_id": "d60944251",
-   "title": "⚡️ Владелец Azimut Hotels Александр Клячин продал еще один свой актив. ГК «Риотэкс», управляющая бизнес-центрами под брендом РТС, выкупила у него офисный комплекс «Химки One» на 42 000 кв. м. Сумма сд",
+   "draft_id": "d86156640",
+   "title": "НДФЛ до 22% при продаже бизнеса и 15% для ПИФов. Минфин РФ вводит новые налоги",
    "date": "2026-09-28",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7424"
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/375228"
     ]
    ],
-   "sum": "2 млрд ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27031004",
+   "title": "Новосибирск стал первым в Сибири по инвестициям в резервное копирование",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-28_novosibirsk_stal_pervym"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68030371",
+   "title": "Продажи машин в России резко пошли на спад",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/28/prodazhi-mashin-v-rossii-rezko-poshli-na-spad/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64495724",
+   "title": "Калининградская область приобрела оборудование для диагностики заболеваний крови",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/kaliningrad/2026/9/28/kaliningradskaya-oblast-priobrela-oborudovanie-dlya-diagnostiki-zabolevanij-krovi"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -1533,22 +1617,50 @@
      "kind": "closed",
      "date": "2026-09-28",
      "title": "Сделка завершена",
-     "note": "⚡️ Владелец Azimut Hotels Александр Клячин продал еще один свой актив. ГК «Риотэкс», управляющая бизнес-центрами под брендом РТС, выкупила у него офисный комплекс «Химки One» на 42 000 кв. м. Сумма сделки составила около 2 млрд руб.",
+     "note": "",
      "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7424"
+      "web:abnews.ru",
+      "https://abnews.ru/szfo/news/kaliningrad/2026/9/28/kaliningradskaya-oblast-priobrela-oborudovanie-dlya-diagnostiki-zabolevanij-krovi"
      ]
     }
    ],
+   "buyer_name": "Калининградская область",
+   "asset": "оборудование для диагностики заболеваний крови",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Калининградская область",
+    "asset": "оборудование для диагностики заболеваний крови",
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d12343722",
+   "title": "Иностранцам нужны наши онковакцины. По словам первого замдиректора по развитию Росконгресса Анастасии Столковой , представители зарубежных делегаций активно интересуются не только покупкой разрабатыва",
+   "date": "2026-09-28",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/8057"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
-   "seller": "него офисный комплекс «Химки One» на 42 000 кв",
+   "seller": null,
    "parsed_parties": {
     "buyer": null,
     "asset": null,
-    "seller": "него офисный комплекс «Химки One» на 42 000 кв"
+    "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
