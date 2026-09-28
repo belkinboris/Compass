@@ -1,0 +1,12 @@
+[
+ {"id": "g18e39dbf",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+    "buyer": "ГК «Риотэкс» названа только текстом источника, юрлицо не раскрыто — профиля заводить не на что.",
+    "seller": "Александр Клячин — физическое лицо, не компания, профиль не заводится.",
+    "target": "«Химки One» — объект недвижимости (бизнес-центр), а не юрлицо с профилем."
+  }
+ }
+]

@@ -1122,6 +1122,22 @@ def test_enrich_never_overwrites_a_filled_field(base):
     assert deal["sum"] != "999 млрд ₽"
 
 
+def test_enrich_fills_the_sum_in_both_lenses(base):
+    """Сумма — одно и то же число в «Обзоре» (`sum`) и «Экономисте»
+    (`eco.sum`), но это два разных ключа словаря. 28 сентября 2026
+    `apply_props` дописал сумму карточке «Лента»/«Мария-Ра» только в
+    `sum`, оставив `eco.sum` пустым («—») — «Обзор» показывал 60 млрд ₽,
+    «Экономист» молчал (test_audit_queue.py:
+    test_the_sum_on_the_overview_is_the_sum_in_the_economist)."""
+    import enrich
+    deal = {"id": "sum-test", "title": "Тестовая сделка", "date": "2026-07-01",
+            "status": "Обсуждается", "src": [], "eco": {"sum": "—"}}
+    props = [("sum", "60 млрд ₽", "добавить", "в карточке поле пусто")]
+    enrich.apply_props(deal, props)
+    assert deal["sum"] == "60 млрд ₽"
+    assert deal["eco"]["sum"] == "60 млрд ₽"
+
+
 def test_enrich_only_moves_status_forward(base):
     """«Обсуждается» -> «Закрыта» можно, обратно — нет.
 

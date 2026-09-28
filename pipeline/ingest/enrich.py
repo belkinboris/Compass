@@ -370,6 +370,15 @@ def apply_props(deal, props):
             deal[field] = value
             if field == 'seller':
                 deal['seller_src'] = 'text'
+            if field == 'sum':
+                # «Обзор» (deal['sum']) и «Экономист» (eco.sum) — одна и та
+                # же цена в двух лензах (CLAUDE.md), но заполняются разными
+                # полями словаря. Без этой строки `apply_props` дописывал
+                # только «Обзор»: карточка «Лента»/«Мария-Ра» получила
+                # `sum` = «60 млрд ₽», а `eco.sum` осталась «—»
+                # (test_audit_queue.py: test_the_sum_on_the_overview_is_the_sum_in_the_economist,
+                # 28 сентября 2026).
+                deal.setdefault('eco', {})['sum'] = value
     return deal
 
 
