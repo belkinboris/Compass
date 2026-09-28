@@ -544,35 +544,6 @@
    ]
   },
   {
-   "draft_id": "d39785947",
-   "title": "Власти США вошли в консорциум по покупке зарубежных активов ЛУКОЙЛа",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/306099"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d88683814",
    "title": "В пермской Губахе продают хостел для VIP-персон. Фото",
    "date": "2026-09-23",
@@ -1159,35 +1130,6 @@
    ]
   },
   {
-   "draft_id": "d69750595",
-   "title": "Anthropic’s founders seek voting control ahead of IPO",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/25/anthropics-founders-seek-voting-control-ahead-of-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d54723686",
    "title": "Химический гигант BASF предложил купить концерн Evonik Industries",
    "date": "2026-09-25",
@@ -1261,75 +1203,6 @@
    ]
   },
   {
-   "draft_id": "d23883374",
-   "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/25/ahead-of-u-s-ipo-british-ai-neocloud-nscale-secures-3-36b-in-convertible-finacing/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d31920203",
-   "title": "FT узнала о переговорах Armani о продаже доли после смерти основателя",
-   "date": "2026-09-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/27/09/2026/6ab8b28ca7f93c29809f298f"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-27",
-     "title": "Переговоры",
-     "note": "В ближайшие недели представители компании намерены встретиться с тремя группами, указанными в завещании Джорджо Армани — LVMH, L'Orеal и EssilorLuxottica. Один из вариантов — разделить пакет акций модного дома в 15%, сообщила FT",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/27/09/2026/6ab8b28ca7f93c29809f298f"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d85934044",
    "title": "FT: Armani готов продать свои акции LVMH, L’Oreal и EssilorLuxottica",
    "date": "2026-09-27",
@@ -1353,11 +1226,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «FT узнала о переговорах Armani о продаже доли после смерти о» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -1388,11 +1259,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «FT узнала о переговорах Armani о продаже доли после смерти о» — второе издание, в группу не шлём"
+    "та же новость, что «FT: Armani готов продать свои акции LVMH, L’Oreal и EssilorL» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d12905874",
+   "draft_id": "d60337889",
    "title": "ОМК может купить доли в китайских полупроводниковых фабриках",
    "date": "2026-09-28",
    "src": [
@@ -1431,36 +1302,7 @@
    ]
   },
   {
-   "draft_id": "d91345688",
-   "title": "Information узнало, что Китай может разрешить Alibaba купить чипы Nvidia",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/28/09/2026/6ab9d4629a79472a5a342f7f"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d49494916",
+   "draft_id": "d89856469",
    "title": "В пермской Барде продают придорожный ресторан на 300 гостей",
    "date": "2026-09-28",
    "src": [
@@ -1488,7 +1330,7 @@
    ]
   },
   {
-   "draft_id": "d68285184",
+   "draft_id": "d78826779",
    "title": "Рекордная явка, Кольцов и Петерман в думе, продажа ТЦ за 1,5 млрд: 9 главных событий ХМАО",
    "date": "2026-09-28",
    "src": [
@@ -1516,7 +1358,7 @@
    ]
   },
   {
-   "draft_id": "d86073272",
+   "draft_id": "d96305055",
    "title": "Nvidia увеличила программу обратного выкупа акций на $150 миллиардов",
    "date": "2026-09-28",
    "src": [
@@ -1539,15 +1381,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d50978669",
+   "draft_id": "d78143684",
    "title": "Nvidia объявила крупнейший в истории США обратный выкуп акций",
    "date": "2026-09-28",
    "src": [
@@ -1574,11 +1414,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+    "та же новость, что «Nvidia увеличила программу обратного выкупа акций на $150 ми» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d55859356",
+   "draft_id": "d38750009",
    "title": "В Челябинске продается резиденция с авторской мебелью за 95 млн. Фото",
    "date": "2026-09-28",
    "src": [
@@ -1606,7 +1446,7 @@
    ]
   },
   {
-   "draft_id": "d50676015",
+   "draft_id": "d34550407",
    "title": "Nvidia увеличила выкуп акций до $235 млрд",
    "date": "2026-09-28",
    "src": [
@@ -1633,11 +1473,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+    "та же новость, что «Nvidia увеличила программу обратного выкупа акций на $150 ми» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d87846912",
+   "draft_id": "d59780885",
    "title": "CNBC: Nvidia создала платформу для защиты от взлома ИИ-агентами",
    "date": "2026-09-28",
    "src": [
@@ -1664,69 +1504,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Information узнало, что Китай может разрешить Alibaba купить» — второе издание, в группу не шлём"
+    "та же новость, что «Nvidia увеличила программу обратного выкупа акций на $150 ми» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d38759575",
-   "title": "Insuretech Outmarket raises $34.5M just months after prior round",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/28/insuretech-outmarket-raises-34-5m-just-months-after-prior-round/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d88359462",
-   "title": "Viral AI agent Instinct raises $1B Series C at a $10B valuation",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/28/viral-ai-agent-instinct-raises-1b-series-c-at-a-10b-valuation/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d83241466",
+   "draft_id": "d54296967",
    "title": "В Курганской области продают гостиницу с саунами по цене однушки. Фото",
    "date": "2026-09-28",
    "src": [
@@ -1754,73 +1536,17 @@
    ]
   },
   {
-   "draft_id": "d61790693",
-   "title": "Почти половина муниципалитетов Ставрополья нарастили объем инвестиций в 2026 году",
+   "draft_id": "d72069728",
+   "title": "В бывшей советской республике взлетели продажи одного типа машин",
    "date": "2026-09-28",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28159603"
-    ]
-   ],
-   "sum": "123 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89027604",
-   "title": "Минфин готов рассмотреть смягчение требований к инвестициям в ИСЖ 2.0",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260928/minfin-873732397.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/28/v-byvshey-sovetskoy-respublike-vzleteli-prodazhi-odnogo-tipa-mashin/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36961674",
-   "title": "«Дом.РФ» выставил на торги прусский форт XIX века под Калининградом",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260928/fort-2120775506.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1835,63 +1561,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g1f1d470a (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d93272309",
-   "title": "В США столкнулись с трудностями при продаже вывезенного из Венесуэлы золота",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/28/v-ssha-stolknulis-s-trudnostyami-pri-prodazhe-vyvezennogo-iz-venesuely-zolota/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16836935",
-   "title": "Россиян предупредили о сложностях с продажей одного вида жилья в будущем",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/28/rossiyan-predupredili-o-slozhnostyah-s-prodazhey-odnogo-vida-zhilya-v-buduschem/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
