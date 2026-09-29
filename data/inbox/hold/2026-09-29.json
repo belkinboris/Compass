@@ -1443,17 +1443,17 @@
    ]
   },
   {
-   "draft_id": "d75411126",
-   "title": "Anthropic в проспекте IPO предупредила об угрозе ее технологий «существованию человечества»",
+   "draft_id": "d24798945",
+   "title": "Песков: указы Путина о внешнем управлении в западных компаниях не направлены на смену собственника // Песков: внешнее управление в компаниях обратимо и не означает смены собственника",
    "date": "2026-09-29",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/digital/1119116"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8989405"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1467,62 +1467,52 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d53034676",
-   "title": "В октябре Сбербанк выкупит зеленоградского производителя чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
+   "draft_id": "d39332085",
+   "title": "Покупки «в один клик» на Ozon и Wildberries обернулись для россиян массовым ростом долгов",
    "date": "2026-09-29",
    "src": [
     [
      "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
+     "https://www.cnews.ru/news/top/2026-09-29_banki_marketplejsov_v_2026"
     ]
    ],
-   "sum": "19 млрд ₽",
+   "sum": "220 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "зеленоградский производитель чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "зеленоградский производитель чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "E-commerce",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d62692514",
-   "title": "Подачу заявок на торги по продаже Рижского вокзала завершили",
+   "draft_id": "d92017208",
+   "title": "Продажи Toyota снижаются второй месяц подряд из-за падения спроса в КНР и США",
    "date": "2026-09-29",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28161739"
+     "https://tass.ru/ekonomika/28162041"
     ]
    ],
-   "sum": "4 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-29",
-     "title": "Сделка завершена",
-     "note": "Стартовая цена составляет 4 млрд рублей",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28161739"
-     ]
-    }
-   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1538,13 +1528,13 @@
    ]
   },
   {
-   "draft_id": "d83917061",
-   "title": "Ленобласть вошла в топ регионов для покупки жилья по новой ипотеке",
+   "draft_id": "d56417147",
+   "title": "Обанкротившийся спа-отель на берегу Саймы в Финляндии продают с молотка",
    "date": "2026-09-29",
    "src": [
     [
      "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/29/lenoblast-voshla-v-top-regionov"
+     "https://www.dp.ru/a/2026/09/29/obankrotivshijsja-spa-otel"
     ]
    ],
    "sum": null,
@@ -1559,67 +1549,26 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d71589900",
-   "title": "Курс юаня к рублю перешел к небольшому росту после открытия утренней сессии",
+   "draft_id": "d32623375",
+   "title": "Больше половины россиян совершают спонтанные покупки онлайн — 20% решаются на заказы после постов и видео",
    "date": "2026-09-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/mosbirzha-873754924.html"
+     "web:rb.ru",
+     "https://rb.ru/news/bolshe-poloviny-rossiyan-sovershayut-spontannye-pokupki-onlajn-20-reshayutsya-na-zakazy-posle-postov-i-video/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d50422180",
-   "title": "«ВИ.ру» одобрила выкуп акций на сумму до 500 млн рублей для мотивации сотрудников",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/vi-ru-odobrila-vykup-akcij-na-summu-do-500-mln-rublej-dlja-motivacii-sotrudnikov/"
-    ]
-   ],
-   "sum": "500 млн ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-29",
-     "title": "Переговоры",
-     "note": "Компания рассматривает акции как инструмент, который позволяет связать вознаграждение сотрудников с долгосрочным ростом стоимости бизнеса и сблизить интересы команды и акционеров. Сообщение «ВИ.ру» одобрила выкуп акций на сумму до 500 млн рублей для мотивации…",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/vi-ru-odobrila-vykup-akcij-na-summu-do-500-mln-rublej-dlja-motivacii-sotrudnikov/"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1635,46 +1584,17 @@
    ]
   },
   {
-   "draft_id": "d71507456",
-   "title": "Китай обрушил продажи машин крупнейшего мирового производителя",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/09/29/kitay-obrushil-prodazhi-mashin-krupneyshego-mirovogo-proizvoditelya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d20875317",
-   "title": "Москва выставила на торги пять помещений у метро «Некрасовка»",
+   "draft_id": "d90513198",
+   "title": "Золото и восемь спален: самый дорогой дом России продают за 5,5 млрд рублей",
    "date": "2026-09-29",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/29/moskva-vystavila-na-torgi-pyat-pomeshhenij-u-metro-nekrasovka"
+     "https://abnews.ru/news/2026/9/29/zoloto-i-vosem-spalen-samyj-dorogoj-dom-rossii-prodayut-za-55-mlrd-rublej"
     ]
    ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "sum": "5,5 млрд ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,

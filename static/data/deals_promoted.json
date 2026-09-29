@@ -217717,6 +217717,16 @@
       "Телеграм-канал: Сделки M&A",
       "https://t.me/dealsma/7424"
      ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-29",
+     "title": "Сделка завершена",
+     "note": "РИА Недвижимость независимо подтвердила закрытие сделки.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260929/rioteks-2120897998.html"
+     ]
     }
    ],
    "seller_src": "text",
@@ -217764,7 +217774,7 @@
      "value": "2026-09-28",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "8859c0db58be"
+     "card_hash": "ee610e31de33"
     },
     "nature": {
      "control_change": true,

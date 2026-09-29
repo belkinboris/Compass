@@ -38,6 +38,15 @@
    ]
   },
   {
+   "news": "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo",
+   "title": "В октябре Сбербанк выкупит зеленоградского производителя чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
+   "verdict": "enrich:gafde5488",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке ««НМ-Тех» (зеленоградский производитель микроэлектроники)»"
+   ]
+  },
+  {
    "news": "https://retailer.ru/rossijskie-aktivy-metro-peredali-vo-vremennoe-upravlenie-kompanii-sozdannoj-glavoj-seti/",
    "title": "Российские активы Metro передали во временное управление компании, созданной главой сети",
    "verdict": "enrich:ga142d8e0",
