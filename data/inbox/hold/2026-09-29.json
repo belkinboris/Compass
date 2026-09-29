@@ -1443,17 +1443,56 @@
    ]
   },
   {
-   "draft_id": "d71627075",
-   "title": "Сербия могла бы выкупить долю «Газпром нефти» в «Нефтяной индустрии Сербии»",
+   "draft_id": "d76614875",
+   "title": "Пьянов подтвердил планы ВТБ по допэмиссии акций на прежних условиях",
    "date": "2026-09-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/serbija-873741835.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/29/09/2026/6aba7f589a7947595a275060"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-29",
+     "title": "Переговоры",
+     "note": "В октябре ВТБ рассчитывает провести допэмиссию по цене ₽87 за акцию. Это более чем в полтора раза превышает текущую стоимость бумаг на Мосбирже",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/quote/29/09/2026/6aba7f589a7947595a275060"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21547726",
+   "title": "ВТБ рассчитывает закрыть сделку по покупке 5% доли в «WB банке» к концу октября",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28161209"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1464,21 +1503,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3504df38 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d50062272",
-   "title": "Риелторы назвали самые дорогие загородные дома в продаже в России",
+   "draft_id": "d66737234",
+   "title": "Более половины опрошенных россиян признались в спонтанных покупках в интернете",
    "date": "2026-09-29",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260929/dom-2120278635.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28161121"
     ]
    ],
    "sum": null,
@@ -1500,42 +1538,13 @@
    ]
   },
   {
-   "draft_id": "d73409097",
-   "title": "Peak XV ups Surge seed investment ceiling to $5M, unveils 18-startup cohort",
+   "draft_id": "d19523795",
+   "title": "В ВТБ не ожидают изменений в параметрах допэмиссии",
    "date": "2026-09-29",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/28/peak-xv-goes-bigger-at-seed-with-new-surge-cohort-as-series-a-bar-rises/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24114461",
-   "title": "Source: Inference provider Modal Labs closing in on $750M round at $15.75B valuation",
-   "date": "2026-09-28",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/28/source-inference-provider-modal-labs-closing-in-on-750m-round-at-15-75b-valuation/"
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/vtb-873748692.html"
     ]
    ],
    "sum": null,
@@ -1553,18 +1562,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d70030763",
-   "title": "На популярном пермском курорте продают кафе с эксклюзивным стрит-фудом",
+   "draft_id": "d39089050",
+   "title": "ВТБ рассчитывает закрыть сделку по покупке доли в RWB к концу октября",
    "date": "2026-09-29",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053131551"
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/vtb-873748602.html"
     ]
    ],
    "sum": null,
@@ -1579,7 +1587,93 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Гостиницы и туризм",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62060190",
+   "title": "AMD купит лабораторию в области искусственного интеллекта World Lab",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/amd-873748348.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "AMD",
+   "asset": "лаборатория в области искусственного интеллекта World Lab",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "AMD",
+    "asset": "лаборатория в области искусственного интеллекта World Lab",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d73759056",
+   "title": "Anthropic предупредит инвесторов IPO об экзистенциальных угрозах ИИ",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/anthropic--873746732.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, угроза) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d74547624",
+   "title": "Покупка автомобиля через мессенджер обернулась для астраханца потерей 2,7 млн",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/9/29/pokupka-avtomobilya-cherez-messendzher-obernulas-dlya-astrahancza-poterej-27-mln"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
