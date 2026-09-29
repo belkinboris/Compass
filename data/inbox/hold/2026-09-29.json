@@ -1443,17 +1443,17 @@
    ]
   },
   {
-   "draft_id": "d50302571",
-   "title": "«Яндекс» изменит подход к размещению акций для программы мотивации",
+   "draft_id": "d29462343",
+   "title": "Минфин проведет аукцион по размещению ОФЗ одного выпуска",
    "date": "2026-09-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/jandeks-873760270.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8989724"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1467,18 +1467,45 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d14714913",
-   "title": "Объем инвестиций нерезидентов в ОФЗ в августе вырос на 37 млрд рублей",
+   "draft_id": "d69017588",
+   "title": "Минфин 30 сентября проведет аукцион по размещению ОФЗ-ПД выпуска 26228",
    "date": "2026-09-29",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119184"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/29/1232849-auktsion-po-razmescheniyu"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68823698",
+   "title": "Объем инвестиций нерезидентов в ОФЗ вырос на 37 млрд рублей",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/economics/news/2026/09/29/1232807-obem-investitsii"
     ]
    ],
    "sum": "37 млрд ₽",
@@ -1500,126 +1527,13 @@
    ]
   },
   {
-   "draft_id": "d44343234",
-   "title": "Минфин РФ 30 сентября проведет аукцион по размещению ОФЗ 26228",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119182"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d63441622",
-   "title": "Минфин 30 сентября проведет аукцион по размещению ОФЗ одного выпуска",
+   "draft_id": "d37700717",
+   "title": "ФРГ намерена заблокировать покупку компании Zippel китайской Cosco",
    "date": "2026-09-29",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28162799"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56077801",
-   "title": "Доля иностранных инвестиций в российские ОФЗ в августе выросла до 3,2%",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28162781"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72103356",
-   "title": "Сбербанк создал систему венчурного капитала для инвестиций в стартапы",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/sberbank-873770037.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90282097",
-   "title": "Что покупают лидеры мнений?",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1356922.php"
+     "https://tass.ru/ekonomika/28163183"
     ]
    ],
    "sum": null,
@@ -1630,35 +1544,121 @@
      "kind": "negotiations",
      "date": "2026-09-29",
      "title": "Переговоры",
-     "note": "Можно бесконечно читать инвестиционные идеи. Но гораздо интереснее посмотреть, куда сами несут деньги те, кто эти идеи придумывает . Что они покупают сейчас, от чего бегут как от огня, и какие бумаги считают настолько сомнительными, что оставляют их только…",
+     "note": "В Берлине полагают, что поглощение логистического оператора создаст стратегическую зависимость от КНР",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1356922.php"
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28163183"
      ]
     }
    ],
-   "buyer_name": "Что",
-   "asset": "лидеры мнений?",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Что",
-    "asset": "лидеры мнений?",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d76860216",
-   "title": "Производитель умных колец Oura отложил проведение IPO",
+   "draft_id": "d42009547",
+   "title": "Дорогие кредиты затормозили инвестиции бизнеса в российских регионах",
    "date": "2026-09-29",
    "src": [
     [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/307251"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/dorogie-kredity-zatormozili-investitsii-biznesa-v-rossijskih-regionah/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55976038",
+   "title": "Shopify разрешила ИИ-агентам самостоятельно оформлять покупки",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/shopify-razreshila-ii-agentam-samostoyatelno-oformlyat-pokupki/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку ge816c5b4 (общие редкие слова: покупк, разреш) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d48672163",
+   "title": "Инвестиции в хлебопекарную промышленность Подмосковья превысят 7 млрд руб",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260929/investitsii-2121040049.html"
+    ]
+   ],
+   "sum": "7 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82160516",
+   "title": "Конец света выходит на IPO",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1356967.php"
     ]
    ],
    "sum": null,
@@ -1681,17 +1681,17 @@
    ]
   },
   {
-   "draft_id": "d60072306",
-   "title": "В Прикамье проблемный агрохолдинг повторно выставили на торги",
+   "draft_id": "d24853302",
+   "title": "Oura shelves its $2.2B IPO citing ‘uncertainty’ in the market",
    "date": "2026-09-29",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053131915"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/09/29/oura-shelves-its-2-2b-ipo-citing-uncertainty-in-the-market/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1702,10 +1702,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Агро",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
