@@ -1,0 +1,11 @@
+[
+ {"id": "gcf07a1ef",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "seller": "ООО «Великоленское» в конкурсном производстве — банкрот, профиль ради одной несостоявшейся продажи не заводим.",
+   "target": "тот же имущественный комплекс — не отдельное юрлицо, а лот торгов."
+  }
+ }
+]
