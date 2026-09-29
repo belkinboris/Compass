@@ -1,0 +1,11 @@
+[
+ {"id": "g812a7b3b",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "buyer": "Arzamas Capital — источник не называет ИНН/ОГРН, публичный поиск по имени не даёт однозначного совпадения; компания на рынке с марта 2025 года.",
+   "target": "NGR Softlab — доля (26%), а не 100%, отдельный профиль не заводили ради одной сделки."
+  }
+ }
+]
