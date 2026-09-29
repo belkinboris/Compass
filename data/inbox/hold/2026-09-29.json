@@ -1443,13 +1443,95 @@
    ]
   },
   {
-   "draft_id": "d24798945",
-   "title": "Песков: указы Путина о внешнем управлении в западных компаниях не направлены на смену собственника // Песков: внешнее управление в компаниях обратимо и не означает смены собственника",
+   "draft_id": "d16539534",
+   "title": "«Яндекс» запланировал провести допэмиссию 11 млн акций // «Яндекс» проведет в ноябре допэмиссию 11 млн акций для программы мотивации",
    "date": "2026-09-29",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8989405"
+     "https://www.kommersant.ru/doc/8989585"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-29",
+     "title": "Переговоры",
+     "note": "МКПАО «Яндекс» решила провести в ноябре допэмиссию 11 млн обыкновенных акций для формирования программы мотивации на 2027 год. Размер запланированной допэмиссии соответствует 2,8% уставного капитала компании.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/8989585"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d62560095",
+   "title": "«Яндекс» планирует допэмиссию 11 млн акций для формирования пула акций под программу мотивации",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1119142"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-29",
+     "title": "Переговоры",
+     "note": "МКПАО \"Яндекс\" в ноябре планирует провести допэмиссию 11 млн обыкновенных акций, что соответствует около 2,8% ее уставного капитала.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1119142"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Яндекс» запланировал провести допэмиссию 11 млн акций // «Я» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d61686287",
+   "title": "Акционеры ТГК-1 рассмотрят допэмиссию акций по закрытой подписке",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/tgk-1-873760365.html"
     ]
    ],
    "sum": null,
@@ -1465,149 +1547,108 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91030843",
+   "title": "«Яндекс» изменит подход к размещению акций для программы мотивации",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/jandeks-873760270.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Яндекс» запланировал провести допэмиссию 11 млн акций // «Я» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d87904352",
+   "title": "Тюменский алкозавод-банкрот выставили на продажу с огромными долгами",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053131836"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d62111506",
+   "title": "ALUMNI Partners сопровождала ВИМ Сбережения в сделке по покупке БЦ FRAME у ПИК 💼 Команда  ALUMNI Partners  выступила юридическим консультантом ЗПИФ «ВИМ Недвижимость» под управлением УК «ВИМ Сбережени",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "tg:LawFirms",
+     "https://t.me/LawFirms/11469"
+    ]
+   ],
+   "sum": "45 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-29",
+     "title": "Переговоры",
+     "note": "ALUMNI Partners сопровождала ВИМ Сбережения в сделке по покупке БЦ FRAME у ПИК 💼 Команда ALUMNI Partners выступила юридическим консультантом ЗПИФ «ВИМ Недвижимость» под управлением УК «ВИМ Сбережения» в сделке по приобретению у девелопера Forma, входящего в…",
+     "source": [
+      "tg:LawFirms",
+      "https://t.me/LawFirms/11469"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39332085",
-   "title": "Покупки «в один клик» на Ozon и Wildberries обернулись для россиян массовым ростом долгов",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-09-29_banki_marketplejsov_v_2026"
-    ]
-   ],
-   "sum": "220 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92017208",
-   "title": "Продажи Toyota снижаются второй месяц подряд из-за падения спроса в КНР и США",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28162041"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56417147",
-   "title": "Обанкротившийся спа-отель на берегу Саймы в Финляндии продают с молотка",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/29/obankrotivshijsja-spa-otel"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32623375",
-   "title": "Больше половины россиян совершают спонтанные покупки онлайн — 20% решаются на заказы после постов и видео",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/bolshe-poloviny-rossiyan-sovershayut-spontannye-pokupki-onlajn-20-reshayutsya-na-zakazy-posle-postov-i-video/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90513198",
-   "title": "Золото и восемь спален: самый дорогой дом России продают за 5,5 млрд рублей",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/9/29/zoloto-i-vosem-spalen-samyj-dorogoj-dom-rossii-prodayut-za-55-mlrd-rublej"
-    ]
-   ],
-   "sum": "5,5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
