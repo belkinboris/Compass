@@ -1443,80 +1443,13 @@
    ]
   },
   {
-   "draft_id": "d76614875",
-   "title": "Пьянов подтвердил планы ВТБ по допэмиссии акций на прежних условиях",
+   "draft_id": "d91387319",
+   "title": "Mail: 54% россиян признались в спонтанных покупках в интернете",
    "date": "2026-09-29",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/29/09/2026/6aba7f589a7947595a275060"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-29",
-     "title": "Переговоры",
-     "note": "В октябре ВТБ рассчитывает провести допэмиссию по цене ₽87 за акцию. Это более чем в полтора раза превышает текущую стоимость бумаг на Мосбирже",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/quote/29/09/2026/6aba7f589a7947595a275060"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21547726",
-   "title": "ВТБ рассчитывает закрыть сделку по покупке 5% доли в «WB банке» к концу октября",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28161209"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66737234",
-   "title": "Более половины опрошенных россиян признались в спонтанных покупках в интернете",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28161121"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-29_mail_54_rossiyan_priznalis"
     ]
    ],
    "sum": null,
@@ -1538,13 +1471,13 @@
    ]
   },
   {
-   "draft_id": "d19523795",
-   "title": "В ВТБ не ожидают изменений в параметрах допэмиссии",
+   "draft_id": "d22220858",
+   "title": "Выпускники Sber500 смогут привлекать инвестиции «по клику» в приложении «СберИнвестиции»",
    "date": "2026-09-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/vtb-873748692.html"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-29_vypuskniki_sber500_smogut_privlekat"
     ]
    ],
    "sum": null,
@@ -1552,132 +1485,45 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Выпускники Sber500 смогут",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Выпускники Sber500 смогут",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d49594612",
+   "title": "Аукцион по продаже изъятого агробизнеса Алексея Боброва провалился",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266020/"
+    ]
+   ],
+   "sum": "571,2 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39089050",
-   "title": "ВТБ рассчитывает закрыть сделку по покупке доли в RWB к концу октября",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/vtb-873748602.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62060190",
-   "title": "AMD купит лабораторию в области искусственного интеллекта World Lab",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/amd-873748348.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "AMD",
-   "asset": "лаборатория в области искусственного интеллекта World Lab",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "AMD",
-    "asset": "лаборатория в области искусственного интеллекта World Lab",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d73759056",
-   "title": "Anthropic предупредит инвесторов IPO об экзистенциальных угрозах ИИ",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260929/anthropic--873746732.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, угроза) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d74547624",
-   "title": "Покупка автомобиля через мессенджер обернулась для астраханца потерей 2,7 млн",
-   "date": "2026-09-29",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/9/29/pokupka-avtomobilya-cherez-messendzher-obernulas-dlya-astrahancza-poterej-27-mln"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
