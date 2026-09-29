@@ -1443,17 +1443,17 @@
    ]
   },
   {
-   "draft_id": "d91387319",
-   "title": "Mail: 54% россиян признались в спонтанных покупках в интернете",
+   "draft_id": "d75411126",
+   "title": "Anthropic в проспекте IPO предупредила об угрозе ее технологий «существованию человечества»",
    "date": "2026-09-29",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-29_mail_54_rossiyan_priznalis"
+     "web:interfax.ru",
+     "https://www.interfax.ru/digital/1119116"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1471,25 +1471,25 @@
    ]
   },
   {
-   "draft_id": "d22220858",
-   "title": "Выпускники Sber500 смогут привлекать инвестиции «по клику» в приложении «СберИнвестиции»",
+   "draft_id": "d53034676",
+   "title": "В октябре Сбербанк выкупит зеленоградского производителя чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
    "date": "2026-09-29",
    "src": [
     [
      "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-09-29_vypuskniki_sber500_smogut_privlekat"
+     "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
     ]
    ],
-   "sum": null,
+   "sum": "19 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Выпускники Sber500 смогут",
+   "asset": "зеленоградский производитель чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Выпускники Sber500 смогут",
+    "asset": "зеленоградский производитель чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
     "seller": null
    },
    "ind": null,
@@ -1499,16 +1499,181 @@
    ]
   },
   {
-   "draft_id": "d49594612",
-   "title": "Аукцион по продаже изъятого агробизнеса Алексея Боброва провалился",
+   "draft_id": "d62692514",
+   "title": "Подачу заявок на торги по продаже Рижского вокзала завершили",
    "date": "2026-09-29",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266020/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28161739"
     ]
    ],
-   "sum": "571,2 млн ₽",
+   "sum": "4 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-29",
+     "title": "Сделка завершена",
+     "note": "Стартовая цена составляет 4 млрд рублей",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28161739"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83917061",
+   "title": "Ленобласть вошла в топ регионов для покупки жилья по новой ипотеке",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/29/lenoblast-voshla-v-top-regionov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d71589900",
+   "title": "Курс юаня к рублю перешел к небольшому росту после открытия утренней сессии",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260929/mosbirzha-873754924.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d50422180",
+   "title": "«ВИ.ру» одобрила выкуп акций на сумму до 500 млн рублей для мотивации сотрудников",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/vi-ru-odobrila-vykup-akcij-na-summu-do-500-mln-rublej-dlja-motivacii-sotrudnikov/"
+    ]
+   ],
+   "sum": "500 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-29",
+     "title": "Переговоры",
+     "note": "Компания рассматривает акции как инструмент, который позволяет связать вознаграждение сотрудников с долгосрочным ростом стоимости бизнеса и сблизить интересы команды и акционеров. Сообщение «ВИ.ру» одобрила выкуп акций на сумму до 500 млн рублей для мотивации…",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/vi-ru-odobrila-vykup-akcij-na-summu-do-500-mln-rublej-dlja-motivacii-sotrudnikov/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71507456",
+   "title": "Китай обрушил продажи машин крупнейшего мирового производителя",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/09/29/kitay-obrushil-prodazhi-mashin-krupneyshego-mirovogo-proizvoditelya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d20875317",
+   "title": "Москва выставила на торги пять помещений у метро «Некрасовка»",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/9/29/moskva-vystavila-na-torgi-pyat-pomeshhenij-u-metro-nekrasovka"
+    ]
+   ],
+   "sum": null,
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -1520,7 +1685,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Агро",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

@@ -27,6 +27,24 @@
    "reasons": [
     "слабое совпадение: общие слова заголовка: 3"
    ]
+  },
+  {
+   "news": "https://realty.ria.ru/20260929/rioteks-2120897998.html",
+   "title": "Компания \"Риотэкс\" приобрела бизнес-центр \"Химки One\"",
+   "verdict": "enrich:g18e39dbf",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «офисный комплекс «Химки One» (42 000 кв. м)»"
+   ]
+  },
+  {
+   "news": "https://retailer.ru/rossijskie-aktivy-metro-peredali-vo-vremennoe-upravlenie-kompanii-sozdannoj-glavoj-seti/",
+   "title": "Российские активы Metro передали во временное управление компании, созданной главой сети",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
   }
  ]
 }
