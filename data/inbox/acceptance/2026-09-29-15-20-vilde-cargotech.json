@@ -1,0 +1,11 @@
+[
+ {"id": "gd4728207",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "buyer": "Святослав Вильде — физическое лицо, а не юрлицо.",
+   "target": "CargoTech (часть ГК «Маршал») — источник не называет ИНН/ОГРН, профиль не заводится ради одной сделки без официальных реквизитов."
+  }
+ }
+]

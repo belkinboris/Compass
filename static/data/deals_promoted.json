@@ -216025,7 +216025,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum": null
   },
   {
    "id": "g1f1d470a",
@@ -218315,6 +218316,10 @@
     [
      "66.ru",
      "https://66.ru/news/6515440-nacionalizirovannyy-agrobiznes-bobrova-i-bikova-ostalsya-bez-pokupateley/"
+    ],
+    [
+     "URA.RU",
+     "https://ura.news/news/1053131871"
     ]
    ],
    "from_ingest": true,
@@ -218685,6 +218690,138 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "gd4728207",
+   "date": "2026-09-29",
+   "title": "Основатель ATI.SU Святослав Вильде купил 10% цифровой платформы CargoTech",
+   "ind": "Транспорт и логистика",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/969541"
+    ],
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-09-29_osnovatel_atisu_svyatoslav"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Сделка объединяет в одном проекте предпринимателей с разным опытом: Якова Глущенко — основателя CargoTech, отвечающего за развитие платформы, Михаила Белоусова — учредителя ГК «Маршал», и Святослава Вильде — эксперта в создании и развитии цифровой инфраструктуры для рынка грузоперевозок. Вхождение Вильде в проект предполагает дальнейшее развитие и масштабирование CargoTech как самостоятельной платформы.",
+    "context": "CargoTech развивает цифровую площадку, где напрямую встречаются грузовладельцы и перевозчики: первые размещают заявки, вторые получают инструменты для поиска грузов и работы с ними. В планах компании — объединить в одном приложении весь цикл для перевозчика: от подбора груза до финансовых сервисов и ИИ-решений. Выведенная Вильде на рынок в 1999 году ATI.SU превратилась в одну из ключевых цифровых площадок для автомобильных грузоперевозок в России и странах СНГ. Независимо подтвердило CNews (со ссылкой на тот же источник — представителей ГК «Маршал»). Вильде активен на рынке в 2026 году: в августе он (вместе с Олегом Кругловым) приобрёл 25% в ООО «Цифровизация транспорта» (разработчик Cargo.Run) и увеличил долю в ГК «Трак Радар» на 5,5% до 9,5%.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "не раскрыта",
+   "buyer_name": "Святослав Вильде (основатель ATI.SU)",
+   "asset": "10% в капитале CargoTech",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-29",
+     "title": "Сделка объявлена",
+     "note": "Основатель ATI.SU Святослав Вильде стал совладельцем цифровой платформы CargoTech для автомобильных грузоперевозок, получив 10% в капитале компании. О сделке 29 сентября 2026 года сообщили в ГК «Маршал», в которую входит CargoTech.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/969541"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Святослав Вильде (основатель ATI.SU)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/969541"
+     }
+    ],
+    "target": [
+     {
+      "value": "10% в капитале CargoTech",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.tadviser.ru/a/969541"
+     }
+    ]
+   },
+   "added": "2026-09-29",
+   "accepted": "2026-09-29",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Святослав Вильде — физическое лицо, а не юрлицо.",
+     "target": "CargoTech (часть ГК «Маршал») — источник не называет ИНН/ОГРН, профиль не заводится ради одной сделки без официальных реквизитов."
+    }
+   },
+   "reviewed": "2026-09-29",
+   "facts": {
+    "stake": {
+     "value": 10.0,
+     "basis": "rule",
+     "card_hash": "8af6adb67415"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "393755ddade5"
+    },
+    "date": {
+     "value": "2026-09-29",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "02493244f47c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d684f240a05a"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "deep_researched": "2026-09-29"
   }
  ],
  "companies": {
