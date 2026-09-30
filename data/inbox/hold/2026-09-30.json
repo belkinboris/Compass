@@ -1443,6 +1443,45 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d10977657",
+   "title": "В России продали 178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/v-rossii-prodali-1782-tys-avtomobile-po-lgotnym-programmam-vydelennyj-byudzhet-osvoili-dosrochno/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "С начала 2026 года по программам льготного автокредитования и льготного лизинга в России продали 178,2 тыс. автомобилей, сообщили «Известия». Более 123 тыс. машин реализовали по программе льготного автокредитования, ещё 54,8 тыс. единиц — по льготному…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/v-rossii-prodali-1782-tys-avtomobile-po-lgotnym-programmam-vydelennyj-byudzhet-osvoili-dosrochno/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
   }
  ]
 }
