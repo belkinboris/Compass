@@ -1444,98 +1444,13 @@
    ]
   },
   {
-   "draft_id": "d23001211",
-   "title": "Аналитики оценили, сколько венчурных инвестиций нужно ИИ-рынку в России",
+   "draft_id": "d73383081",
+   "title": "Купить хлеб и открыть ворота: какие необычные просьбы россияне оставляют курьерам",
    "date": "2026-09-30",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6abbfdb49a794784c308fd71"
-    ]
-   ],
-   "sum": "84 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72471748",
-   "title": "Маркетплейсы, ипотека и продажа вейпов: что изменится в России в октябре",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/politics/30/09/2026/6abbbe4a9a794765ab4d0731"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10780262",
-   "title": "Anthropic указала на неясную отдачу от инвестиций в безопасность ИИ",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/30/09/2026/6abc5d50126834ba016d6cc2"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d68694939",
-   "title": "В Республике Алтай с 1 марта 2027 года ограничат продажи вейпов",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28164491"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-09-30_kupit_hleb_i_otkryt_vorota"
     ]
    ],
    "sum": null,
@@ -1557,52 +1472,13 @@
    ]
   },
   {
-   "draft_id": "d73519444",
-   "title": "Владелец ТРЦ «Гранд Каньон» купил здание в центре Петербурга",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/30/vladelec-trc-grand-kanon"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-30",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/09/30/vladelec-trc-grand-kanon"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "здание в центре Петербурга",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "здание в центре Петербурга",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d16036552",
-   "title": "Продать квартиру за месяц можно, если прибегнуть к хитростям",
+   "draft_id": "d55073618",
+   "title": "Продажи легкого коммерческого авто с начала года растут",
    "date": "2026-09-30",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260930/kavakhodzha-873525531.html"
+     "https://1prime.ru/20260930/prodazhi-873790274.html"
     ]
    ],
    "sum": null,
@@ -1625,19 +1501,30 @@
    ]
   },
   {
-   "draft_id": "d62663967",
-   "title": "OpenAI reportedly in talks to raise $30B round at $1.4T valuation",
-   "date": "2026-09-29",
+   "draft_id": "d76960955",
+   "title": "#газеты Компания «Интегральные системы» [«дочка» Сбербанка, акционер ГК «Элемент»] до конца этого года может приобрести долю в ООО «НМ-Тех» [структура ВЭБ.РФ ]. Об этом «Ъ» сообщили три источника, кот",
+   "date": "2026-09-30",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/09/29/openai-reportedly-in-talks-to-raise-30b-round-at-1-4t-valuation/"
+     "tg:rusven",
+     "https://t.me/rusven/7760"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Переговоры",
+     "note": "#газеты Компания “Интегральные системы” [“дочка” Сбербанка, акционер ГК “Элемент”] до конца этого года может приобрести долю в ООО “НМ-Тех” [структура ВЭБ.РФ ]. Об этом “Ъ” сообщили три источника, которые знакомы с ходом переговоров. По словам двух из них…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7760"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1646,124 +1533,12 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Финансовые услуги",
    "needs_review": true,
    "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d44241503",
-   "title": "Росимущество не смогло продать «роковую квартиру» экс-главы челябинского управления СКР",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132030"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Профессиональные услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79342481",
-   "title": "Как Ленин национализировал крупный завод, созданный купцом в Курганской области",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132025"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65369954",
-   "title": "В центре Челябинска продают итальянские апартаменты за 55 млн рублей",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053131766"
-    ]
-   ],
-   "sum": "55 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30984916",
-   "title": "В Кургане продают торговый центр за 130 миллионов рублей",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053131981"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g762669fd (общие редкие слова: миллио, рублей) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку gafde5488 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
