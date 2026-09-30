@@ -220103,6 +220103,10 @@
     [
      "Телеграм-канал: Русский Венчур",
      "https://t.me/rusven/7762"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Razrabotchik-jekspress-testov-Rapid-Bio-privlek-600-mln-rublej-investicij-ot-Kama-Flow-87577"
     ]
    ],
    "from_ingest": true,
@@ -220347,6 +220351,142 @@
     }
    },
    "reviewed": "2026-09-30",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Усадьба — не компания, профиля не бывает."
+    }
+   }
+  },
+  {
+   "id": "g555daf47",
+   "date": "2026-09-30",
+   "title": "«Дом.РФ» выставил на конкурс усадьбу Бестужевых-Рюминых в Подмосковье",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260930/usadba-2121240206.html"
+    ],
+    [
+     "Azbyka.ru",
+     "https://azbyka.ru/palomnik/Храм_Воскресения_Христова_(Молоди)"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2,72 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Усадебный ансамбль восходит к 1699 году, когда Пётр I пожаловал земли Фёдору Головину — при нём заложена основа усадьбы и построена каменная Воскресенская церковь; позже усадьбой владели Домашневы, Салтыковы, Кротковы, Бестужевы и промышленник Бородин — эта цепочка владельцев подтверждается независимо. В пресс-релизе «Дом.РФ» сказано, что летом 1913 года здесь жила семья Бориса Пастернака; по более точным данным, к тому времени усадьбой уже владел Бородин, а дачу у него в 1913–1916 годах снимала семья художника Леонида Пастернака, отца Бориса. Лот предлагается использовать в коммерческих целях, например под загородный отель; победитель конкурса обязан провести реставрацию и сохранение здания.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2,72 млн ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "усадьба Бестужевых-Рюминых в селе Молоди (Чеховский район, Московская область): главный дом 755 м² и флигель 333,6 м²",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Конкурс объявлен",
+     "note": "Заявки на конкурс принимаются до 9 ноября, сам конкурс — 13 ноября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260930/usadba-2121240206.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "усадьба Бестужевых-Рюминых в селе Молоди (Чеховский район, Московская область): главный дом 755 м² и флигель 333,6 м²",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/usadba-2121240206.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/usadba-2121240206.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "added": "2026-09-30",
+   "deep_researched": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c2a9938bc1da"
+    },
+    "price": {
+     "value_rub": 2720000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "0b53511b0d00"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "89e489ea460f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f2edb8bbc2bf"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
    "accepted": "2026-09-30",
    "accepted_notes": {
     "no_profile": {
