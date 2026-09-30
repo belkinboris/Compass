@@ -2310,6 +2310,71 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Казахстанский фонд Fonte Capital сократил долю в «Самолете» с 15% до менее 5%</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Fonte Inceptia Alpha Fund OEIC Limited (структура Fonte Capital)\n<b>Предмет:</b> пакет акций ГК «Самолет» (доля сокращена с 15% до менее 5%)\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet\">Движение.ру</a>\n\n#недвижимость #MA"
+  },
+  {
+   "id": "ga60ab2fc",
+   "date": "2026-09-30",
+   "title": "Туристка купила в ОАЭ люксовые вещи и лишилась их в российском аэропорту",
+   "ind": "Порты и инфраструктура",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/09/30/turistka-kupila-v-oae-lyuksovye-veschi-i-lishilas-ih-v-rossiyskom-aeroportu/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Туристка",
+   "asset": "в ОАЭ люксовые вещи и лишилась их в российском аэропорту",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/09/30/turistka-kupila-v-oae-lyuksovye-veschi-i-lishilas-ih-v-rossiyskom-aeroportu/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Туристка",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/09/30/turistka-kupila-v-oae-lyuksovye-veschi-i-lishilas-ih-v-rossiyskom-aeroportu/"
+     }
+    ],
+    "target": [
+     {
+      "value": "в ОАЭ люксовые вещи и лишилась их в российском аэропорту",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/09/30/turistka-kupila-v-oae-lyuksovye-veschi-i-lishilas-ih-v-rossiyskom-aeroportu/"
+     }
+    ]
+   },
+   "pending_since": "2026-09-30T14:35:27+00:00",
+   "hold_reason": "Личная покупка туристкой люксовых вещей и их изъятие на таможне — не сделка M&A, частное лицо и потребительский товар."
   }
  ]
 }

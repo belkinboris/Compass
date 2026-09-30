@@ -1445,223 +1445,31 @@
    ]
   },
   {
-   "draft_id": "d31252427",
-   "title": "Путин призвал дать импульс новому инвестиционному циклу в России",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/09/30/putin-prizval-dat-impuls"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Автопром",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20772306",
-   "title": "Владелец «Бордо» Жерар Лопес продал клуб компании Park Bench за €1",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2176103/vladeletc-bordo-zherar-lopes-prodal-klub-kompanii-park-bench-za-eu1"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-30",
-     "title": "Сделка завершена",
-     "note": "Владелец французского футбольного клуба (ФК) «Бордо» Жерар Лопес продал команду английской компании Park Bench за €1. Об этом 30 сентября сообщается на сайте клуба. «Данная сделка заключена за символическую сумму в €1 с принятием на себя долгов. В рамках…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2176103/vladeletc-bordo-zherar-lopes-prodal-klub-kompanii-park-bench-za-eu1"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "клуб компании Park Bench",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "клуб компании Park Bench",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gefd6da40 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d94935657",
-   "title": "Минцифры предложило третий пакет мер по борьбе с мошенниками: изменения коснутся продажи SIM-карт и хранения данных",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/mincifry-predlozhilo-tretij-paket-mer-po-borbe-s-moshennikami-izmeneniya-kosnutsya-prodazhi-sim-kart-i-hraneniya-dannyh/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30782918",
-   "title": "Чемпион мира по хоккею Рясенский распродал свои награды из-за долгов",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20260930/ryasenskiy-2121240470.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-30",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20260930/ryasenskiy-2121240470.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79619818",
-   "title": "В Перми продают торговый центр, занятый сетевыми гигантами",
+   "draft_id": "d28843272",
+   "title": "Европа просится за стол переговоров по Украине: когда пройдет следующий раунд",
    "date": "2026-09-30",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053132267"
+     "https://ura.news/articles/1053132259"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22672229",
-   "title": "В челябинском лесу продается уютный коттедж с малахитовой крышей за 69 миллионов. Фото",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132209"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91926711",
-   "title": "Стартап Naran от выходцев из Yango, базирующийся в ОАЭ, привлек $10 млн. В раунде участвовала инвесткомпания Landel под управлением Айдара Мусина. Средства будут направлены на развитие бизнеса в Колум",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7763"
-    ]
-   ],
-   "sum": "$10 млн",
    "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Стартап Naran от выходцев из Yango, базирующийся в ОАЭ",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Стартап Naran от выходцев из Yango, базирующийся в ОАЭ",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

@@ -220139,6 +220139,16 @@
       "Телеграм-канал: Русский Венчур",
       "https://t.me/rusven/7762"
      ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Подтверждено ещё одним источником",
+     "note": "Тот же дайджест переслан вторым постом того же дня с той же информацией.",
+     "source": [
+      "Телеграм-канал: Русский Венчур",
+      "https://t.me/rusven/7762"
+     ]
     }
    ],
    "party_evidence": {
@@ -220181,7 +220191,7 @@
      "value": "2026-09-30",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "eb0a276d7ffd"
+     "card_hash": "5f1ca221fef2"
     },
     "nature": {
      "control_change": true,
