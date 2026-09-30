@@ -1444,46 +1444,17 @@
    ]
   },
   {
-   "draft_id": "d68823401",
-   "title": "Инвестиции в геологоразведку графита в России превысят 300 миллионов рублей",
+   "draft_id": "d27627568",
+   "title": "ИП больше не смогут продавать сим-карты от имени операторов",
    "date": "2026-09-30",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260930/investitsii-873796600.html"
+     "web:ria.ru",
+     "https://ria.ru/20260930/sim-karta-2121191960.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g762669fd (общие редкие слова: миллио, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d70795855",
-   "title": "«Дом.РФ» выставил на торги старинный оружейный завод в Ижевске",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260930/izhevsk-2121177636.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1501,46 +1472,17 @@
    ]
   },
   {
-   "draft_id": "d67943468",
-   "title": "«Домклик»: энергоэффективные квартиры чаще всего покупают в Москве",
+   "draft_id": "d61152957",
+   "title": "Лера Кудрявцева считает себя дурой за покупку билетов на концерт Канье Уэста",
    "date": "2026-09-30",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260930/domklik-2121169289.html"
+     "web:ura.news",
+     "https://ura.news/news/1053132189"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "в Москве",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "в Москве",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g3629ebb7 (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d37638788",
-   "title": "В Ярославле не смогли продать обрушившийся памятник архитектуры",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/yaroslavl/2026/9/30/v-yaroslavle-ne-smogli-prodat-obrushivshijsya-pamyatnik-arhitektury"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
