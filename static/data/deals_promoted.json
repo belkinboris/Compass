@@ -217719,6 +217719,10 @@
     [
      "РИА Недвижимость",
      "https://realty.ria.ru/20260929/rioteks-2120897998.html"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/969908"
     ]
    ],
    "from_ingest": true,
@@ -217761,6 +217765,16 @@
      "source": [
       "РИА Недвижимость",
       "https://realty.ria.ru/20260929/rioteks-2120897998.html"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "TAdviser независимо подтвердил закрытие сделки и сумму (2 млрд ₽); уточнил, что продавцом выступила одна из структур KR Properties, здание — класса «А», построено в 2014 году, 20 этажей.",
+     "source": [
+      "TAdviser",
+      "https://www.tadviser.ru/a/969908"
      ]
     }
    ],
@@ -217809,7 +217823,7 @@
      "value": "2026-09-28",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "ee610e31de33"
+     "card_hash": "13df3c01d7f3"
     },
     "nature": {
      "control_change": true,
