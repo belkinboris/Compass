@@ -219959,6 +219959,137 @@
     }
    },
    "proofread": "2026-09-30"
+  },
+  {
+   "id": "g35c2f65e",
+   "date": "2026-09-30",
+   "title": "Роснедра выставили на торги участок марганцевых руд в Челябинской области",
+   "ind": "ГМК и добыча",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20260930/rosnedra-873803090.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "172,578 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Прогнозные ресурсы окисленных марганцевых руд по категории Р1 (при бортовом содержании марганца 10%) оценены в 11,2 млн тонн со средним содержанием марганца 15,67% — так сказано в приложении к приказу Уралнедра. Развитие марганцевых месторождений — часть более широкой задачи: Счётная палата ещё в 2021 году отмечала зависимость экономики России от импорта марганца, хрома, титана и лития, а после 2022 года Евросоюз запретил поставки марганцевой руды в Россию. Кипчакский участок много меньше крупнейшего в стране Больше-Токмакского месторождения (запасы свыше 1,7 млрд тонн, в его операторе весной 2026 года АО «Флагман» купило долю почти в 17% — отдельная сделка, не эта).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "172,578 млн ₽",
+   "seller": "Роснедра",
+   "asset": "лицензия на участок Кипчакский — месторождение марганцевых руд в Кизильском районе Челябинской области (25 лет, площадь 4,23 км²)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Торги объявлены",
+     "note": "Заявки принимаются до 30 октября, торги назначены на 17 ноября 2026 года.",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20260930/rosnedra-873803090.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "лицензия на участок Кипчакский — месторождение марганцевых руд в Кизильском районе Челябинской области (25 лет, площадь 4,23 км²)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20260930/rosnedra-873803090.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Роснедра",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20260930/rosnedra-873803090.html"
+     }
+    ]
+   },
+   "added": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "bfc4e923bf87"
+    },
+    "price": {
+     "value_rub": 172578000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "f314bbc8f2fa"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "89e489ea460f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "be923a5975a0"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "reviewed": "2026-09-30",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Лицензия на участок недр — не компания, профиля не бывает.",
+     "seller": "Роснедра — государственное ведомство, а не компания-участник рынка сделок; профиль не заводили."
+    }
+   }
   }
  ],
  "companies": {

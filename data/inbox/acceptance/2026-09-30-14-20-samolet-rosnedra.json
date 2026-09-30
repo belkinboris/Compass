@@ -1,0 +1,19 @@
+[
+ {"id": "g1e37f107",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "seller": "Иностранный инвестфонд, зарегистрирован в Международном финансовом центре «Астана» — профиль не заводили ради одной сделки."
+  }
+ },
+ {"id": "g35c2f65e",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Лицензия на участок недр — не компания, профиля не бывает.",
+   "seller": "Роснедра — государственное ведомство, а не компания-участник рынка сделок; профиль не заводили."
+  }
+ }
+]

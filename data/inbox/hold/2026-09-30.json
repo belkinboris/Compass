@@ -1444,13 +1444,109 @@
    ]
   },
   {
-   "draft_id": "d27627568",
-   "title": "ИП больше не смогут продавать сим-карты от имени операторов",
+   "draft_id": "d13815113",
+   "title": "Шестикратного чемпиона Франции по футболу продали за €1",
    "date": "2026-09-30",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20260930/sim-karta-2121191960.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/30/09/2026/6abcdf1c9a7947a4fd675e06"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "Новые владельцы приняли на себя все долги «Бордо». При предыдущем владельце команда опустилась с Лиги 1 до шестого дивизиона футбольных лиг Франции",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/sport/30/09/2026/6abcdf1c9a7947a4fd675e06"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "за €1",
+   "seller": "Шестикратного чемпиона Франции по футболу",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "за €1",
+    "seller": "Шестикратного чемпиона Франции по футболу"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d90419484",
+   "title": "Аукцион по размещению ОФЗ 26228 признан несостоявшимся",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1119375"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31313913",
+   "title": "Сотовым операторам могут запретить продавать сим-карты со стартовым балансом",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1119364"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Телеком",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d76026853",
+   "title": "Путин рассчитывает, что в новом созыве ГД решения будут приниматься консолидировано",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28166213"
     ]
    ],
    "sum": null,
@@ -1472,13 +1568,181 @@
    ]
   },
   {
-   "draft_id": "d61152957",
-   "title": "Лера Кудрявцева считает себя дурой за покупку билетов на концерт Канье Уэста",
+   "draft_id": "d33954175",
+   "title": "Минфин признал аукцион по размещению ОФЗ-ПД выпуска 26228 несостоявшимся",
    "date": "2026-09-30",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053132189"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28166209"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89948506",
+   "title": "Путин заявил, что нужно дать новый импульс инвестиционному циклу в России",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28166159"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Автопром",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46875684",
+   "title": "Минфин признал несостоявшимся аукцион по размещению ОФЗ",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260930/minfin-873804123.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64472734",
+   "title": "В России запретят продавать уже оформленные на других абонентов сим-карты",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260930/rossija-873803448.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72635203",
+   "title": "Роснедра выставили на торги участок марганцевых руд в Челябинской области",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20260930/rosnedra-873803090.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55238200",
+   "title": "Вторая киевская квартира Артемия Лебедева повторно продается с аукциона",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20260930/lebedev-2121206102.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78503123",
+   "title": "Предприниматели могут приобрести два помещения в столичном районе Арбат",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260930/arbat-2121202011.html"
     ]
    ],
    "sum": null,
