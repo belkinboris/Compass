@@ -668,7 +668,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, челяби) — проверьте, не дубль ли"
    ]
   },
   {
@@ -1444,52 +1445,13 @@
    ]
   },
   {
-   "draft_id": "d13815113",
-   "title": "Шестикратного чемпиона Франции по футболу продали за €1",
+   "draft_id": "d16751708",
+   "title": "Минфин признал несостоявшимся аукцион по размещению ОФЗ 26228",
    "date": "2026-09-30",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/30/09/2026/6abcdf1c9a7947a4fd675e06"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-30",
-     "title": "Сделка завершена",
-     "note": "Новые владельцы приняли на себя все долги «Бордо». При предыдущем владельце команда опустилась с Лиги 1 до шестого дивизиона футбольных лиг Франции",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/sport/30/09/2026/6abcdf1c9a7947a4fd675e06"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "за €1",
-   "seller": "Шестикратного чемпиона Франции по футболу",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "за €1",
-    "seller": "Шестикратного чемпиона Франции по футболу"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d90419484",
-   "title": "Аукцион по размещению ОФЗ 26228 признан несостоявшимся",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119375"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8990464"
     ]
    ],
    "sum": null,
@@ -1511,70 +1473,13 @@
    ]
   },
   {
-   "draft_id": "d31313913",
-   "title": "Сотовым операторам могут запретить продавать сим-карты со стартовым балансом",
+   "draft_id": "d21813899",
+   "title": "Минфин признал аукцион по размещению ОФЗ несостоявшимся",
    "date": "2026-09-30",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119364"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Телеком",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76026853",
-   "title": "Путин рассчитывает, что в новом созыве ГД решения будут приниматься консолидировано",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28166213"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33954175",
-   "title": "Минфин признал аукцион по размещению ОФЗ-ПД выпуска 26228 несостоявшимся",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28166209"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/09/30/1233099-minfin-priznal"
     ]
    ],
    "sum": null,
@@ -1596,13 +1501,13 @@
    ]
   },
   {
-   "draft_id": "d89948506",
-   "title": "Путин заявил, что нужно дать новый импульс инвестиционному циклу в России",
+   "draft_id": "d52531800",
+   "title": "Путин: нужно дать новый импульс инвестиционному циклу в России",
    "date": "2026-09-30",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28166159"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/09/30/1233096-putin-nuzhno-dat-novii"
     ]
    ],
    "sum": null,
@@ -1624,41 +1529,13 @@
    ]
   },
   {
-   "draft_id": "d46875684",
-   "title": "Минфин признал несостоявшимся аукцион по размещению ОФЗ",
+   "draft_id": "d91140162",
+   "title": "Льготные автокредиты и лизинг с начала года помогли продать 178,2 тыс. автомобилей в РФ",
    "date": "2026-09-30",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20260930/minfin-873804123.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64472734",
-   "title": "В России запретят продавать уже оформленные на других абонентов сим-карты",
-   "date": "2026-09-30",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20260930/rossija-873803448.html"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1119377"
     ]
    ],
    "sum": null,
@@ -1673,20 +1550,88 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Финансовые услуги",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d72635203",
-   "title": "Роснедра выставили на торги участок марганцевых руд в Челябинской области",
+   "draft_id": "d80756810",
+   "title": "«Лента» подсчитала продажи в «О’Кеях» после ребрендинга магазинов",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/30/lenta-raskrila--na-chto-zhalujutsja"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb7ea4703 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d23421906",
+   "title": "В России с начала года продали 178 тыс. автомобилей по льготным госпрограммам",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2176045/2026-09-30/v-rossii-s-nachala-goda-prodali-178-tys-avtomobilei-po-lgotnym-gosprogrammam"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "С начала 2026 года по программам льготного автокредитования и льготного лизинга было продано 178,2 тыс. автомобилей. Об этом 30 сентября сообщает пресс-служба Минпромторга.",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2176045/2026-09-30/v-rossii-s-nachala-goda-prodali-178-tys-avtomobilei-po-lgotnym-gosprogrammam"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "178 тыс. автомобилей по льготным госпрограммам",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "178 тыс. автомобилей по льготным госпрограммам",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d30344074",
+   "title": "Вторую киевскую квартиру блогера Лебедева снова выставят на торги",
    "date": "2026-09-30",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20260930/rosnedra-873803090.html"
+     "https://1prime.ru/20260930/fgiu-873809320.html"
     ]
    ],
    "sum": null,
@@ -1708,13 +1653,13 @@
    ]
   },
   {
-   "draft_id": "d55238200",
-   "title": "Вторая киевская квартира Артемия Лебедева повторно продается с аукциона",
+   "draft_id": "d22391003",
+   "title": "«Дом.РФ» выставил на торги усадьбу, в которой родился нарком Чичерин",
    "date": "2026-09-30",
    "src": [
     [
      "web:realty.ria.ru",
-     "https://realty.ria.ru/20260930/lebedev-2121206102.html"
+     "https://realty.ria.ru/20260930/usadba-2121231327.html"
     ]
    ],
    "sum": null,
@@ -1729,20 +1674,60 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gea799efc (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d79874058",
+   "title": "«Не хочу, чтобы мы изо всех сил стремились к IPO»: Сэм Альтман отложил выход OpenAI на биржу — из-за сомнений в ИИ",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/ne-hochu-chtoby-my-izo-vseh-sil-stremilis-k-ipo-sem-altman-otlozhil-vyhod-na-birzhu-openai-iz-za-somnenij-v-ii/"
+    ]
+   ],
+   "sum": "$30 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Переговоры",
+     "note": "Глава OpenAI Сэм Альтман заявил, что компания не планирует выходить на биржу, пока не сможет увереннее гарантировать безопасность новых ИИ-моделей, пишет The Verge. По словам руководителя ИИ-разработчика, IPO во время перехода к более мощным системам способно…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/ne-hochu-chtoby-my-izo-vseh-sil-stremilis-k-ipo-sem-altman-otlozhil-vyhod-na-birzhu-openai-iz-za-somnenij-v-ii/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d78503123",
-   "title": "Предприниматели могут приобрести два помещения в столичном районе Арбат",
+   "draft_id": "d33435247",
+   "title": "Сенатор Никонорова рассказала об инвестициях бизнеса в экономику ДНР",
    "date": "2026-09-30",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20260930/arbat-2121202011.html"
+     "https://ria.ru/20260930/biznes-2121224275.html"
     ]
    ],
    "sum": null,
@@ -1761,6 +1746,140 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47058473",
+   "title": "В России придумали новый индикатор спроса на покупку спецтехники",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053132064"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50232851",
+   "title": "Бывший подрядчик тобольского «Сибура» выставил на продажу главный актив",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053132230"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73210801",
+   "title": "«Купили кусок торта за 10 миллионов»: первые кадры с роскошной свадьбы Эксайла и Мини Каролины",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/relations/2026/09/30/76670481/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "Показываем, как прошло шумное торжество",
+     "source": [
+      "web:74.ru",
+      "https://74.ru/text/relations/2026/09/30/76670481/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "кусок торта",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "кусок торта",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d15448761",
+   "title": "Российский разработчик экспресс-тестов «Рапид Био» привлек 600 млн рублей от инвестиционной компании Kama Flow. Средства планируется направить на развитие сегментов непрерывного мониторинга глюкозы и ",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7762"
+    ]
+   ],
+   "sum": "600 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Переговоры",
+     "note": "Российский разработчик экспресс-тестов “Рапид Био” привлек 600 млн рублей от инвестиционной компании Kama Flow. Средства планируется направить на развитие сегментов непрерывного мониторинга глюкозы и диагностики нейродегенеративных заболеваний. “Рапид Био”…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7762"
+     ]
+    }
+   ],
+   "buyer_name": "инвестиционной компании Kama Flow",
+   "asset": "Российский разработчик экспресс-тестов «Рапид Био»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "инвестиционной компании Kama Flow",
+    "asset": "Российский разработчик экспресс-тестов «Рапид Био»",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок"
    ]
   }
  ]

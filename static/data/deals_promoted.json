@@ -220091,6 +220091,268 @@
     }
    },
    "proofread": "2026-09-30"
+  },
+  {
+   "id": "gf66151c1",
+   "date": "2026-09-30",
+   "title": "«Рапид Био» привлекла 600 млн ₽ от Kama Flow",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал: Русский Венчур",
+     "https://t.me/rusven/7762"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "600 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "В 2025 году выручка ООО «Рапид Био» выросла на 13%, до 612 млн ₽, при этом компания зафиксировала чистый убыток 113 млн ₽ против прибыли годом ранее.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Рапид Био» основали в 2020 году Анжей Жимбиев и Семён Покацкий; компания выросла из научного проекта в области point-of-care диагностики повреждений головного мозга, в 2019 году зарегистрировала тест-систему для определения риска инсульта по анализу крови, а в 2020 году начала выпускать экспресс-тесты на COVID-19. Сейчас разработки охватывают гемоконтактные и респираторные инфекции, репродуктивное здоровье, диабет, кардиологию и онкологию; у компании 5 R&D-лабораторий в Москве и Санкт-Петербурге, более 30 готовых продуктов и ещё около 90 в разработке, мощности позволяют выпускать до 180 млн тестов в год. Большая часть продукции реализуется в сегменте B2B и на госзакупках. По данным Rusprofile, ООО «Рапид Био» принадлежит ООО «Рапид Глобал» (по 45% у Жимбиева и Покацкого, 10% — у ООО «Есоп Био»). Kama Flow создана в 2013 году в Москве, в равных долях принадлежит Кириллу Тишину и Евгению Борисову, управляет фондами на более 15 млрд ₽ с портфелем более 30 проектов — среди них, например, медтех-платформа для хирургических операций МВС (инвестиция 325 млн ₽) и Zdorovie.ru, сделка по которому входила в топ-5 венчурных сделок 2023 года в России.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "600 млн ₽",
+   "buyer_name": null,
+   "asset": "доля в ООО «Рапид Био» (размер не раскрыт)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "Средства планируется направить на развитие сегментов непрерывного мониторинга глюкозы и диагностики нейродегенеративных заболеваний.",
+     "source": [
+      "Телеграм-канал: Русский Венчур",
+      "https://t.me/rusven/7762"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Kama Flow",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7762"
+     }
+    ],
+    "target": [
+     {
+      "value": "доля в ООО «Рапид Био» (размер не раскрыт)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7762"
+     }
+    ]
+   },
+   "themes": [
+    "Здравоохранение"
+   ],
+   "added": "2026-09-30",
+   "deep_researched": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "b0a8010ca2aa"
+    },
+    "price": {
+     "value_rub": 600000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "a3cef40abbbf"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "eb0a276d7ffd"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d66beffff285"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   },
+   "buyer": "g330b6e10",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Доля в компании, а не сама компания — профиль уже был бы у «Рапид Био», если бы завели; отдельно под долю профиля не бывает."
+    }
+   }
+  },
+  {
+   "id": "g5aabf462",
+   "date": "2026-09-30",
+   "title": "«Дом.РФ» выставил на конкурс усадьбу, где родился нарком Чичерин",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260930/usadba-2121231327.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2,48 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Усадьба в английском стиле построена в 1840-х годах, в 1996 году была утрачена при пожаре, но затем восстановлена в тех же объёмах — федеральный объект культурного наследия. В 1872 году в Карауле родился Георгий Чичерин, будущий нарком иностранных дел РСФСР и СССР, один из создателей советской дипломатии; с усадьбой связаны его детские и юношеские годы. После революции здесь размещались музей дворянского быта, школа и детский дом. Имущество рекомендуется использовать в коммерческих целях, например под загородный отель. Победитель конкурса обязан провести реставрацию и сохранение здания.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2,48 млн ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "усадьба в селе Караул (Тамбовская область): главный дом, гостевой дом и хозпостройка, 1,8 тыс. м²",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Конкурс объявлен",
+     "note": "Заявки на конкурс принимаются до 26 октября, сам конкурс — 30 октября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260930/usadba-2121231327.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "усадьба в селе Караул (Тамбовская область): главный дом, гостевой дом и хозпостройка, 1,8 тыс. м²",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/usadba-2121231327.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/usadba-2121231327.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "added": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "33e68185bfb9"
+    },
+    "price": {
+     "value_rub": 2480000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "2b6f66b4982f"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "89e489ea460f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "6309b0748df7"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "reviewed": "2026-09-30",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Усадьба — не компания, профиля не бывает."
+    }
+   }
   }
  ],
  "companies": {
