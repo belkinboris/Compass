@@ -1,0 +1,19 @@
+[
+ {"id": "gea799efc",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Здание — не компания, профиля не бывает."
+  }
+ },
+ {"id": "g4c7906c5",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Здание — не компания, профиля не бывает.",
+   "seller": "Частное лицо, отдельный профиль не заводили ради одного конфискованного лота."
+  }
+ }
+]

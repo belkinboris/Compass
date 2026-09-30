@@ -219700,6 +219700,263 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "gea799efc",
+   "date": "2026-09-30",
+   "title": "«Дом.РФ» выставил на конкурс здание Ижевского оружейного завода",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260930/izhevsk-2121177636.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "50,79 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Здание — визитная карточка Ижевска, вокруг него формировался город; расположено на берегу Ижевского пруда. Победитель конкурса обязан за семь лет провести реставрацию и сохранение здания; для этого доступно льготное финансирование — 9% годовых, или 6%, если объект приспособят под гостиницу. Это часть более широкой программы «Дом.РФ»: по поручению Владимира Путина до 2030 года в России должна быть восстановлена тысяча объектов культурного наследия, весной 2025 года институт готовил к аукциону 44 памятника истории и культуры в 29 регионах страны. Само здание передали в управление «Дом.РФ» ещё в ноябре 2025 года — по словам главы правительства Удмуртии Романа Ефимова, инвестор обязан полностью сохранить исторический облик, а строить рядом новые капитальные здания запретит закон.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Здание не используется с 1990-х годов, статус объекта культурного наследия федерального значения присвоен в 1995 году. Концепция редевелопмента для будущего инвестора уже подготовлена — её разработал победитель всероссийского конкурса, прошедшего в 2024 году.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "50,79 млн ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "главный корпус бывшего Ижевского оружейного завода (объект культурного наследия федерального значения, 21,1 тыс. м², участок 0,94 га)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Конкурс объявлен",
+     "note": "Заявки на конкурс принимаются до 26 октября, сам конкурс — 30 октября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260930/izhevsk-2121177636.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "главный корпус бывшего Ижевского оружейного завода (объект культурного наследия федерального значения, 21,1 тыс. м², участок 0,94 га)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/izhevsk-2121177636.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/izhevsk-2121177636.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "added": "2026-09-30",
+   "reviewed": "2026-09-30",
+   "deep_researched": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "583787bf735d"
+    },
+    "price": {
+     "value_rub": 50790000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "f30c136f40b4"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "89e489ea460f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "deb558368301"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — не компания, профиля не бывает."
+    }
+   }
+  },
+  {
+   "id": "g4c7906c5",
+   "date": "2026-09-30",
+   "title": "Аукцион по продаже конфискованных у бизнесмена помещений в Ярославле не состоялся",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Не состоялась",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/9/30/v-yaroslavle-ne-smogli-prodat-obrushivshijsya-pamyatnik-arhitektury"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "51,8 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Здание имеет статус объекта культурного наследия. На торги выставлялись подвальные помещения и площади на первом и втором этажах. Помещения конфискованы после трагедии 2022 года: незаконное заглубление подвала привело к обрушению лестничных пролётов, перекрытий и фасадной стены, погиб рабочий. В документации к аукциону отдельно указана стоимость восстановления: на реставрацию и ремонт потенциальному покупателю потребовалось бы дополнительно вложить 4,4 млн ₽.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "51,8 млн ₽",
+   "asset": "помещения (556 м²) в здании «Новообщественный ряд толкучего рынка» на ул. Андропова в Ярославле",
+   "events": [
+    {
+     "kind": "cancelled",
+     "date": "2026-09-30",
+     "title": "Торги признаны несостоявшимися",
+     "note": "На участие в аукционе не поступило ни одной заявки.",
+     "source": [
+      "Abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/9/30/v-yaroslavle-ne-smogli-prodat-obrushivshijsya-pamyatnik-arhitektury"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "помещения (556 м²) в здании «Новообщественный ряд толкучего рынка» на ул. Андропова в Ярославле",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/center/news/yaroslavl/2026/9/30/v-yaroslavle-ne-smogli-prodat-obrushivshijsya-pamyatnik-arhitektury"
+     }
+    ]
+   },
+   "added": "2026-09-30",
+   "reviewed": "2026-09-30",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "7fe526826d4c"
+    },
+    "price": {
+     "value_rub": 51800000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "b57dee7feccf"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b570b03094f3"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5dbe42769047"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "failed",
+     "top_purchases": "failed",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "seller": "Максим Катков (имущество конфисковано)",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — не компания, профиля не бывает.",
+     "seller": "Частное лицо, отдельный профиль не заводили ради одного конфискованного лота."
+    }
+   }
   }
  ],
  "companies": {
