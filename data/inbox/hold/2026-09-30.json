@@ -1445,42 +1445,70 @@
    ]
   },
   {
-   "draft_id": "d10977657",
-   "title": "В России продали 178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+   "draft_id": "d49699300",
+   "title": "Samsung занял первое место по продажам смартфонов в России — Apple уступила лидерство",
    "date": "2026-09-30",
    "src": [
     [
      "web:rb.ru",
-     "https://rb.ru/news/v-rossii-prodali-1782-tys-avtomobile-po-lgotnym-programmam-vydelennyj-byudzhet-osvoili-dosrochno/"
+     "https://rb.ru/news/samsung-zanyal-pervoe-mesto-po-prodazham-smartfonov-v-rossii-apple-ustupila-liderstvo/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-09-30",
-     "title": "Сделка завершена",
-     "note": "С начала 2026 года по программам льготного автокредитования и льготного лизинга в России продали 178,2 тыс. автомобилей, сообщили «Известия». Более 123 тыс. машин реализовали по программе льготного автокредитования, ещё 54,8 тыс. единиц — по льготному…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/v-rossii-prodali-1782-tys-avtomobile-po-lgotnym-programmam-vydelennyj-byudzhet-osvoili-dosrochno/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "178,2 тыс. автомобиле по льготным программам — выделенный бюджет освоили досрочно",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18818805",
+   "title": "Каждый третий житель регионов рассматривает покупку жилья в Москве",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20260930/zhile-2121319848.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20260930/zhile-2121319848.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
