@@ -1,0 +1,11 @@
+[
+ {"id": "g9f2d671d",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "buyer": "Девелопер «Зиккурат» — ИНН/ОГРН в открытых реестрах не нашли, отдельный профиль не заводили ради одной сделки с землёй.",
+   "target": "Земельный участок — не компания, профиля не бывает."
+  }
+ }
+]

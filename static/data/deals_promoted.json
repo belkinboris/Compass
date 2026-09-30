@@ -219565,6 +219565,141 @@
      "target": "Здание — не компания, профиля не бывает."
     }
    }
+  },
+  {
+   "id": "g9f2d671d",
+   "date": "2026-09-30",
+   "title": "Группа «Эталон» продала участок под офисный центр на севере Москвы девелоперу «Зиккурат»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260930/etalon-2121127154.html"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/09/30/ofisnij-proekt-jetalona-na"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "На участке согласовано строительство офисного комплекса наземной площадью 12 тыс. м² и подземной — 4,8 тыс. м², высотой десять этажей. В «Эталоне» объяснили продажу управлением земельным портфелем: вырученные деньги пойдут на погашение корпоративного долга и на более приоритетные жилые проекты. Это не первая подобная сделка для девелопера: в январе 2026 года он продал по схеме sale & leaseback бизнес-центр в Приморском районе Петербурга (за 1,4–1,6 млрд ₽ по оценке рынка), а в июне 2025 года — бизнес-центр на Богатырском проспекте (оценка рынка — около 1 млрд ₽). «Зиккурат» создан в конце 2020 года Владимиром Ковалёвым, ранее основавшим геодезическую и проектную компанию «Олимпроект».",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Группа «Эталон»",
+   "asset": "земельный участок (0,3 га) на Ярославской улице на севере Москвы под строительство офисного центра",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "Переход права собственности на участок состоялся за несколько дней до публикации; сумма сделки не раскрыта.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260930/etalon-2121127154.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "земельный участок (0,3 га) на Ярославской улице на севере Москвы под строительство офисного центра",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/etalon-2121127154.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Группа «Эталон»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260930/etalon-2121127154.html"
+     }
+    ]
+   },
+   "buyer_name": "Девелопер «Зиккурат»",
+   "themes": [
+    "Недвижимость"
+   ],
+   "seller_id": "ga37e3cf6",
+   "added": "2026-09-30",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Девелопер «Зиккурат» — ИНН/ОГРН в открытых реестрах не нашли, отдельный профиль не заводили ради одной сделки с землёй.",
+     "target": "Земельный участок — не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "101d3906870c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "eb0a276d7ffd"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2309b4f01eb6"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {

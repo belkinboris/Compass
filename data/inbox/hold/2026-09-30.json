@@ -1444,17 +1444,74 @@
    ]
   },
   {
-   "draft_id": "d11603523",
-   "title": "В районе Арбат выставили на торги два помещения",
+   "draft_id": "d20904692",
+   "title": "Al Arabiya: США и Иран перешли к обсуждению гарантий в урегулировании конфликта",
    "date": "2026-09-30",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/30/v-rajone-arbat-realizuyut-na-gorodskih-torgah"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28165047"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49261229",
+   "title": "Офисный проект «Эталона» на севере Москвы сменил владельца",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/30/ofisnij-proekt-jetalona-na"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g076af76a (общие редкие слова: владел, сменил) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d43342339",
+   "title": "Трамп резко раскритиковал инвестиции Google в Финляндию",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/09/30/tramp-rezko-raskritikoval"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
