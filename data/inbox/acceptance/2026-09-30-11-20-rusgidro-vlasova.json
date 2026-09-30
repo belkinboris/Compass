@@ -1,0 +1,10 @@
+[
+ {"id": "gfbcdc000",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Здание — не компания, профиля не бывает."
+  }
+ }
+]

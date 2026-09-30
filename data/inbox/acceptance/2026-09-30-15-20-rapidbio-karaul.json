@@ -1,0 +1,18 @@
+[
+ {"id": "gf66151c1",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Доля в компании, а не сама компания — профиль уже был бы у «Рапид Био», если бы завели; отдельно под долю профиля не бывает."
+  }
+ },
+ {"id": "g5aabf462",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "target": "Усадьба — не компания, профиля не бывает."
+  }
+ }
+]

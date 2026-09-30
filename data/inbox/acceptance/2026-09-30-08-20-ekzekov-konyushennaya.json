@@ -1,0 +1,11 @@
+[
+ {"id": "g2bd95d6e",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "no_profile": {
+   "buyer": "ООО «Гранд Конюшенная» и ООО «Коннэкт» — отдельные профили компаний не заводили ради одной сделки с недвижимостью, связь с Экзековым описана текстом.",
+   "target": "Здание — не компания, профиля не бывает."
+  }
+ }
+]
