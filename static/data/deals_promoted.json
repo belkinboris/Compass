@@ -82293,7 +82293,7 @@
   },
   {
    "id": "gc4367cdf",
-   "date": "2025-06-01",
+   "date": "2025-06-27",
    "title": "«Займер» приобрёл 100% акций банка «Евроальянс»",
    "buyer": "gd51874a0",
    "target": "g03800837",
@@ -82362,21 +82362,127 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "9f09561f0c2e"
+     "basis": "verified",
+     "card_hash": "9f09561f0c2e",
+     "object": "банк «Евроальянс»",
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+     "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-30",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "банк «Евроальянс»",
+       "event": "closing",
+       "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "банк «Евроальянс»",
+       "event": "announcement",
+       "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 490000000.0,
+     "value_rub": 490000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "861b1b04f3f7"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "861b1b04f3f7",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Размер собственных средств «Евроальянса» на 1 июня 2025 г. составляет 449 млн руб., говорится в сообщении «Займера».",
+     "scope_basis": "verified",
+     "quote": "Сумма сделки составила 490 млн руб.",
+     "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-30",
+     "readings": [
+      {
+       "value_rub": 490000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 490 млн руб.",
+       "attribution_quote": "Размер собственных средств «Евроальянса» на 1 июня 2025 г. составляет 449 млн руб., говорится в сообщении «Займера».",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 490000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 490 млн руб.",
+       "attribution_quote": "Размер собственных средств «Евроальянса» на 1 июня 2025 г. составляет 449 млн руб., говорится в сообщении «Займера».",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2025-06-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "bbfb3bdb4291"
+     "value": "2025-06-27",
+     "meaning": "publication",
+     "basis": "stale",
+     "card_hash": "bbfb3bdb4291",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "МФК «Займер» приобрела 100% акций коммерческого инвестиционного банка «Евроальянс» за 490 млн рублей; об этом стало известно 27 июня 2025 года.",
+     "source": "https://bosfera.ru/press-release/mfk-zaymer-priobrela-investicionnyy-bank-evroalyans",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-30",
+     "readings": [
+      {
+       "value": "2025-06-27",
+       "meaning": "publication",
+       "quote": "МФК «Займер» приобрела 100% акций коммерческого инвестиционного банка «Евроальянс» за 490 млн рублей; об этом стало известно 27 июня 2025 года.",
+       "source": "https://bosfera.ru/press-release/mfk-zaymer-priobrela-investicionnyy-bank-evroalyans",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2025-06-27",
+       "meaning": "publication",
+       "quote": "МФК «Займер» приобрела 100% акций коммерческого инвестиционного банка «Евроальянс» за 490 млн рублей; об этом стало известно 27 июня 2025 года.",
+       "source": "https://bosfera.ru/press-release/mfk-zaymer-priobrela-investicionnyy-bank-evroalyans",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "stale_from": "verified"
     },
     "nature": {
      "control_change": true,
@@ -82386,7 +82492,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f373e2c3ffb6"
+     "card_hash": "f373e2c3ffb6",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+     "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+     "verified_by": "model×2",
+     "verified_at": "2026-09-30",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g03800837",
@@ -82395,22 +82525,51 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "cd96a34a84f0"
+     "perimeter": "read",
+     "card_hash": "cd96a34a84f0",
+     "perimeter_entity": "банк «Евроальянс»",
+     "perimeter_report": {
+      "inn": "3702030072",
+      "year": null,
+      "revenue_rub": null,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО КОММЕРЧЕСКИЙ ИНВЕСТИЦИОННЫЙ БАНК \"ЕВРОАЛЬЯНС\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+     "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+     "verified_by": "model×1",
+     "verified_at": "2026-09-30",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "банк «Евроальянс»",
+       "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО КОММЕРЧЕСКИЙ ИНВЕСТИЦИОННЫЙ БАНК \"ЕВРОАЛЬЯНС\"",
+        "inn": "3702030072",
+        "note": "подходящего отчёта нет"
+       },
+       "quote": "Микрофинансовая компания (МФК) «Займер» приобретает 100% акций банка «Евроальянс» из Иванова.",
+       "source": "https://www.vedomosti.ru/finance/articles/2025/06/26/1120440-zaimer-pokupaet-nebolshoi-kommercheskii-bank",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
    }
   },
@@ -104781,7 +104940,7 @@
      "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-30",
      "readings": [
       {
        "value": 99.99,
@@ -104820,17 +104979,16 @@
      "event_variants": [
       "signing"
      ],
-     "terms": "disputed",
+     "terms": "fixed",
      "terms_variants": [
-      "fixed",
-      "unknown"
+      "fixed"
      ],
-     "attribution_quote": "По его словам, АО «Тетра», бенефициаром которого является Туголуков, зашло в акционерный капитал группы с минимальной долей участия (ей принадлежит 1% в ООО «812 капитал», говорится в сообщении Don Agro).",
+     "attribution_quote": "Чистая прибыль всех активов ГК «Евроонко» в 2023 г. составила 497,6 млн руб., говорится в сообщении Don Agro (на основе неаудированной отчетности по РСБУ).",
      "scope_basis": "verified",
      "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-30",
      "readings": [
       {
        "value_rub": 3040000000,
@@ -104840,7 +104998,7 @@
        "scope": "package",
        "terms": "fixed",
        "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
-       "attribution_quote": "По его словам, АО «Тетра», бенефициаром которого является Туголуков, зашло в акционерный капитал группы с минимальной долей участия (ей принадлежит 1% в ООО «812 капитал», говорится в сообщении Don Agro).",
+       "attribution_quote": "Чистая прибыль всех активов ГК «Евроонко» в 2023 г. составила 497,6 млн руб., говорится в сообщении Don Agro (на основе неаудированной отчетности по РСБУ).",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "A"
@@ -104851,8 +105009,8 @@
        "attribution": "filing",
        "event": "signing",
        "scope": "package",
-       "terms": "unknown",
-       "quote": "Это следует из сообщения головной компании «Тетры» Don Agro International Limited (торгуется на Сингапурской бирже), которое обнаружили «Ведомости». Общая сумма сделки составит 3,04 млрд руб., указано там же.",
+       "terms": "fixed",
+       "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
        "attribution_quote": "Чистая прибыль всех активов ГК «Евроонко» в 2023 г. составила 497,6 млн руб., говорится в сообщении Don Agro (на основе неаудированной отчетности по РСБУ).",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
@@ -104864,14 +105022,14 @@
      "value": "2024-09-06",
      "meaning": "signing",
      "basis": "verified",
-     "card_hash": "e3380d907bd4",
+     "card_hash": "2fee5b26dab7",
      "meaning_variants": [
       "signing"
      ],
      "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-30",
      "readings": [
       {
        "value": "2024-09-06",
@@ -104902,15 +105060,15 @@
      "card_hash": "7e5ad303c0fe",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
+     "quote": "Но после получения регуляторных одобрений и проведения необходимых корпоративных процедур АО «Тетра» станет прямым полным собственником ГК «Евроонко», добавил собеседник.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-09-30",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
+       "quote": "Но после получения регуляторных одобрений и проведения необходимых корпоративных процедур АО «Тетра» станет прямым полным собственником ГК «Евроонко», добавил собеседник.",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "A"
@@ -104918,7 +105076,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Но после получения регуляторных одобрений и проведения необходимых корпоративных процедур АО «Тетра» станет прямым полным собственником ГК «Евроонко», добавил собеседник.",
+       "quote": "Акционер частного медицинского холдинга «Медскан» Евгений Туголуков (владеет 50%) покупает группу компаний «Евроонко» через принадлежащее ему АО «Тетра».",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "B"
@@ -104945,10 +105103,10 @@
       "ООО «812 капитал»",
       "ООО «Медиком»"
      ],
-     "quote": "В ЦИМТ у Акубардия 10% долей, у Свиридова – 1,5%, у ООО «812 капитал» – 28,44%, у ООО «Медиком» – 60,05%.",
+     "quote": "11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде)",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-09-30",
      "readings": [
       {
        "ok": false,
@@ -104964,7 +105122,7 @@
         "revenue_rub": 1788016000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\""
        },
-       "quote": "В ЦИМТ у Акубардия 10% долей, у Свиридова – 1,5%, у ООО «812 капитал» – 28,44%, у ООО «Медиком» – 60,05%.",
+       "quote": "11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде)",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "A"
@@ -104976,16 +105134,16 @@
         "ООО «812 капитал»",
         "ООО «Медиком»"
        ],
-       "entity": "ООО «Центр инновационных медицинских технологий»",
+       "entity": "ООО «Центр инновационных медицинских технологий» (ЦИМТ)",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\"",
         "inn": "7701362604",
         "year": 2023,
-        "revenue_rub": 1788016000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\""
+        "revenue_rub": 1788016000.0
        },
-       "quote": "В ЦИМТ у Акубардия 10% долей, у Свиридова – 1,5%, у ООО «812 капитал» – 28,44%, у ООО «Медиком» – 60,05%.",
-       "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
-       "quote_checked": true,
+       "quote": "Сделка была структурирована через покупку 99,99% головной компании группы — ООО «812 капитал», а также долей в операционных юрлицах сети (а именно, долю 11,5% в ООО «Центр инновационных медицинских технологий»).",
+       "source": "https://www.ng.ru/economics/2026-07-02/100_020726_1455.html",
+       "quote_checked": null,
        "reader": "B"
       }
      ]
@@ -105006,7 +105164,8 @@
     }
    },
    "stake_acquired": 99.99,
-   "buyer_name": "«Тетра»"
+   "buyer_name": "«Тетра»",
+   "date_basis": "signing"
   },
   {
    "id": "g2bef2143",
@@ -207042,7 +207201,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "buyer": "gf89319d9"
+   "buyer": "gf89319d9",
+   "followup_researched": "2026-09-30"
   },
   {
    "id": "g2c27516d",
@@ -216050,7 +216210,8 @@
     "sum": [
      "45 млрд ₽"
     ]
-   }
+   },
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "g1f1d470a",
@@ -216191,7 +216352,8 @@
      "multiple_text": "no_target"
     }
    },
-   "deep_researched": "2026-09-23"
+   "deep_researched": "2026-09-23",
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "g685f1e39",
@@ -216302,8 +216464,8 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "компания АО «Зевс холдинг», на 100% принадлежащая инвестору Константину Клюке, прежде известному по свиноводческим проектам, стала владельцем 45,2% в ООО «Здоровье города»",
-    "val": "Аналитик \"Финам\" Леонид Делицын оценил стоимость компании в 150 млн руб., а доли — в 68 млн.",
+    "share": "На третьем этапе компания Константина Клюки нарастила своё участие до 45,24%, а доля «КФ Венчурс» снизилась до 17,62%. Также совладельцами остались основатель Эрик Бровко, у него 21,22%, ООО «Аюр-Капитал» с долей 8,62%, АО «Здоровье.ру», у которого 4,26%, и Виктор Шкипин, который владеет 3,03%.",
+    "val": "Аналитик «Финам» Леонид Делицын оценил компанию в 150 млн ₽, а долю — в 68 млн ₽, исходя из показателей 2025 года. В 2026 году, по его уточнённым расчётам, стоимость актива выросла до 650–700 млн ₽, а сумма сделки — до 280–315 млн ₽. С учётом свежих показателей и текущих рыночных мультипликаторов диапазон оценки всей компании составляет от 450 до 670 млн ₽, по данным инвестиционной компании Kama Flow.",
     "target_fin": "\"Здоровье города\" закончило 2025 г. с убытком на 80 млн руб. и снижением выручки до 56 млн руб.",
     "fin": "—",
     "rationale": "Средства направят на масштабирование новой B2C-модели и выкуп долей ранних миноритариев.",
@@ -216374,7 +216536,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "592e55c867a3"
+     "card_hash": "f67723970cd0"
     },
     "price": {
      "value_rub": null,
@@ -216423,7 +216585,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "weekly_researched": "2026-09-30",
+   "proofread_absorbed": {
+    "eco.share": [
+     "fee8d4e826c6"
+    ],
+    "eco.val": [
+     "e18ab04144e7"
+    ]
+   },
+   "proofread": "2026-09-30"
   },
   {
    "id": "g4b00b18e",
@@ -216570,7 +216742,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "gb7ea4703",
@@ -216740,7 +216913,8 @@
      "Закрыта"
     ]
    },
-   "sum": "60 млрд ₽"
+   "sum": "60 млрд ₽",
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "g69c83a3f",
@@ -216891,7 +217065,8 @@
      "multiple_text": "no_target"
     }
    },
-   "separate_transaction_reviewed": true
+   "separate_transaction_reviewed": true,
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "gd8faa2c4",
@@ -216975,6 +217150,16 @@
       "ПРАЙМ",
       "https://1prime.ru/20260923/sud-873593047.html"
      ]
+    },
+    {
+     "kind": "court",
+     "date": "2026-09-30",
+     "title": "Суд отклонил второй иск Хугаевой",
+     "note": "Арбитражный суд Московской области отклонил второй иск Ирины Хугаевой к Оксане Хейфиц, поданный в марте 2025 года: Хугаева требовала признать притворной сделкой договор от 28 декабря 2024 года о продаже Хейфиц 50%-ной доли в «Инфамеде», считая, что он маскировал агентский договор. Суд счёл это недоказанным: покупатель полностью уплатил продавцу указанную в договоре сумму — чуть более 7,5 млн ₽, а стороны при нотариальном заключении договора заверили друг друга, что сделка не является ни мнимой, ни притворной. Решение пока не вступило в силу.",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20260930/sud-873808561.html"
+     ]
     }
    ],
    "extra": "В ЕГРЮЛ собственником 99,9% ООО \"Инфамед\" указан Николаев. Доля в 0,01% у Хугаевой, она же является сейчас гендиректором. Версия стороны Хугаевой/Николаева (по словам представлявшего их интересы адвоката Рубена Маркарьяна): чета Хейфиц убедила Хугаеву заключить фиктивный договор о продаже её 50%-ной доли за 7,525 млн руб. — менее 1% от реальной стоимости половины бизнеса, оценённой более чем в 1 млрд руб.; параллельно от имени Павла Хейфица был заключён предварительный договор о продаже уже 100% доли за 2 млрд руб. (цена, близкая к рыночной) — как утверждается, для переговоров с реальным инвестором. В правоохранительные органы с обеих сторон подавались заявления о мошенничестве. Дело рассматривается в закрытом режиме, судебные акты не публикуются — независимо подтвердить ни одну из версий сторонним источником не удалось.",
@@ -217009,7 +217194,7 @@
      "value": "2026-09-23",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "5d92b95534d4"
+     "card_hash": "1ac80ee12d6a"
     },
     "nature": {
      "control_change": true,
@@ -217045,7 +217230,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "weekly_researched": "2026-09-30",
+   "proofread": "2026-09-30"
   },
   {
    "id": "g4d017d5c",
@@ -217184,7 +217371,8 @@
      "multiple_text": "no_target"
     }
    },
-   "deep_researched": "2026-09-24"
+   "deep_researched": "2026-09-24",
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "ga7020b5e",
@@ -218637,6 +218825,10 @@
     [
      "ПРАЙМ",
      "https://1prime.ru/20260929/tgk-1-873760365.html"
+    ],
+    [
+     "Smart-Lab",
+     "https://smart-lab.ru/blog/news/1351807.php"
     ]
    ],
    "from_ingest": true,
@@ -218646,7 +218838,7 @@
     "val": "—",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "—",
+    "rationale": "Возможно, целью допэмиссии является размытие доли финской Fortum в ТГК-1, которая сейчас владеет 29,99% акционерного капитала компании.",
     "context": "Пока единственный источник — ПРАЙМ. Уставный капитал ТГК-1 сейчас составляет 38,5 млрд ₽ (3,9 трлн обыкновенных акций номиналом 0,01 ₽); допэмиссия — ещё 3,55 трлн акций той же номинальной стоимости, то есть капитал вырастет почти вдвое. Решение выносится на заочное голосование акционеров 20 октября 2026 года — сделка ещё не закрыта. Проверка по открытым источникам не нашла независимого подтверждения кроме самого ПРАЙМ (и агрегаторов, пересказывающих тот же источник) — «Петербургэнерго» как отдельная компания в открытых реестрах не опознана, оставляю название текстом без привязки к профилю.",
     "finadv": "—"
    },
@@ -218734,7 +218926,9 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-09-30",
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "gd4728207",
@@ -219154,7 +219348,9 @@
      "b155d873b978"
     ]
    },
-   "proofread": "2026-09-29"
+   "proofread": "2026-09-29",
+   "deep_researched": "2026-09-30",
+   "weekly_researched": "2026-09-30"
   },
   {
    "id": "ge816c5b4",
