@@ -221632,6 +221632,142 @@
     }
    },
    "proofread": "2026-10-01"
+  },
+  {
+   "id": "gf145d639",
+   "date": "2026-09-30",
+   "title": "«Атомфлот» выставил на аукцион корпус атомного ледокола «Арктика»",
+   "ind": "Транспорт и логистика",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Первый технический",
+     "https://www1.ru/news/2026/09/30/439301-atomflot-vystavil-na-aukcion-korpus-atomnogo-ledokola-arktika-proekta-10520-za-1116-mln-rublei.html"
+    ],
+    [
+     "NewsRoom24",
+     "https://newsroom24.ru/murmansk/news/details/2026/news_354904"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "111,6 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Лот — корпус списанного атомного ледокола «Арктика» проекта 10520 с надстройкой, судовым оборудованием и устройствами; имущество предназначено для утилизации с получением вторичных материалов, судно предстоит разделать на металлолом на территории России. Ледокол построен на Балтийском заводе в Ленинграде, флаг подняли 25 апреля 1975 года; 17 августа 1977 года он первым в мире в активном надводном плавании достиг Северного полюса. Эксплуатацию прекратили в 2008 году после окончания срока действия документов Морского регистра и остановки атомной энергетической установки, в 2011 году экипаж сняли и перевели судно в холодный отстой. Сейчас корпус находится на плаву на якорной стоянке в бухте Кут Кольского залива, на территории судоремонтного завода «Нерпа» в Снежногорске (Мурманская область).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "111,6 млн ₽",
+   "seller": "ФГУП «Атомфлот»",
+   "asset": "корпус атомного ледокола «Арктика» проекта 10520 (построен в 1974–1975 годах)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 12 октября, торги назначены на 15 октября 2026 года; шаг аукциона — 5% (5,6 млн ₽), задаток — 10% (11,2 млн ₽).",
+     "source": [
+      "Первый технический",
+      "https://www1.ru/news/2026/09/30/439301-atomflot-vystavil-na-aukcion-korpus-atomnogo-ledokola-arktika-proekta-10520-za-1116-mln-rublei.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "корпус атомного ледокола «Арктика» проекта 10520 (построен в 1974–1975 годах)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www1.ru/news/2026/09/30/439301-atomflot-vystavil-na-aukcion-korpus-atomnogo-ledokola-arktika-proekta-10520-za-1116-mln-rublei.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ФГУП «Атомфлот»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www1.ru/news/2026/09/30/439301-atomflot-vystavil-na-aukcion-korpus-atomnogo-ledokola-arktika-proekta-10520-za-1116-mln-rublei.html"
+     }
+    ]
+   },
+   "added": "2026-10-01",
+   "reviewed": "2026-10-01",
+   "accepted": "2026-10-01",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "ФГУП «Атомфлот» — названо одним юрлицом, но ИНН в источниках не назван; профиль отложен.",
+     "target": "Корпус судна, предназначенный на слом, — не компания, профиля не бывает."
+    }
+   },
+   "deep_researched": "2026-10-01",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "a26b4e5e5c7a"
+    },
+    "price": {
+     "value_rub": 111600000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "264e57ca1c2e"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "89e489ea460f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "67e5a004aebd"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {

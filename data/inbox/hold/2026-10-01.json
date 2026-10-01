@@ -1297,17 +1297,17 @@
    ]
   },
   {
-   "draft_id": "d47232402",
-   "title": "Здания Рязанского кремля перешли в собственность епархии",
+   "draft_id": "d20836615",
+   "title": "ИИ выходит на биржу: как алгоритмы начинают торговать вместо инвесторов",
    "date": "2026-10-01",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1119723"
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/01/10/2026/6abe76a09a7947774904ba5b"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1318,20 +1318,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d79703481",
-   "title": "Evolute i-SPACE впервые вошёл в топ-10 кроссоверов в России — за неделю бренд продал 354 машины",
+   "draft_id": "d78812049",
+   "title": "Gazeta Wyborcza: Навроцкому и его семье купили коней за счет госбюджета",
    "date": "2026-10-01",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/evolute-i-space-vpervye-voshyol-v-top-10-krossoverov-v-rossii-za-nedelyu-brend-prodal-354-mashiny/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28172203"
     ]
    ],
    "sum": null,
@@ -1342,19 +1343,19 @@
      "kind": "closed",
      "date": "2026-10-01",
      "title": "Сделка завершена",
-     "note": "Российский автомобиль Evolute i-SPACE впервые вошёл в десятку самых популярных новых кроссоверов в России, сообщает агентство «Автостат». На неделе с 21 по 27 сентября было реализовано 354 машины. Этого хватило для десятого места в рейтинге.",
+     "note": "Животные появились в резиденции президента Польши в городе Промник в 100 км к востоку от Варшавы, пишет газета",
      "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/evolute-i-space-vpervye-voshyol-v-top-10-krossoverov-v-rossii-za-nedelyu-brend-prodal-354-mashiny/"
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28172203"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "354 машины",
+   "asset": "кони за счет госбюджета",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "354 машины",
+    "asset": "кони за счет госбюджета",
     "seller": null
    },
    "ind": null,
@@ -1364,19 +1365,30 @@
    ]
   },
   {
-   "draft_id": "d85566315",
-   "title": "#smartlabonline с представителями ВТБ Мои Инвестиции — сегодня в 17:00!",
+   "draft_id": "d75251672",
+   "title": "Глава Xbox Аша Шарма опровергла слухи о возможной продаже компании — она останется частью Microsoft",
    "date": "2026-10-01",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1357993.php"
+     "web:rb.ru",
+     "https://rb.ru/news/glava-xbox-asha-sharma-oprovergla-sluhi-o-vozmozhnoj-prodazhe-kompanii-ona-ostanetsya-chastyu-microsoft/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-01",
+     "title": "Переговоры",
+     "note": "Microsoft не намерена продавать Xbox, заявила глава подразделения Аша Шарма в беседе с The New York Times. По её словам, компания сделает всё необходимое для успешного развития подразделения. Xbox также продолжит работать с Microsoft и придерживаться…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/glava-xbox-asha-sharma-oprovergla-sluhi-o-vozmozhnoj-prodazhe-kompanii-ona-ostanetsya-chastyu-microsoft/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1389,35 +1401,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22767138",
-   "title": "Девелоперы стали продавать офисы в рассрочку",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/307099"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
