@@ -5763,7 +5763,8 @@ def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, t
     for deal in data["deals"]:
         for event in deal.get("events") or []:
             event.pop("milestone_drafted_at", None)
-    y, m = monthly_digest.previous_month(datetime.date.today())
+    real_today = datetime.date.today()
+    y, m = monthly_digest.previous_month(real_today)
     key = monthly_digest.month_key(y, m)
     if not monthly_digest.enough(monthly_digest.stats(data, y, m)):
         pytest.skip("за прошлый месяц в базе слишком мало сделок для сводки")
@@ -5771,6 +5772,23 @@ def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, t
     data["telegram_digests"] = {key: {"drafted_at": "2000-01-01T00:00:00+00:00"}}
     tmp_data = tmp_path / "deals_promoted.json"
     tmp_data.write_text(json.dumps(data), encoding="utf-8")
+    # `send_telegram.plan_digest` отказывает в сводке в первый день месяца
+    # (`DIGEST_FROM_DAY = 2`, см. его докстроку) — честное правило, не баг,
+    # но этот тест гонит путь целиком через `main()`, который берёт
+    # «сегодня» из реального времени: 1 числа каждого месяца он падал бы
+    # по календарю, а не по содержанию. Сдвигаем день (не месяц и не год —
+    # иначе «предыдущий месяц» разойдётся с уже посчитанным `y, m` выше) на
+    # безопасный, если реальный день ещё не наступил.
+    safe_day = max(real_today.day, send_telegram.DIGEST_FROM_DAY)
+    frozen_now = datetime.datetime(real_today.year, real_today.month, safe_day, 12, 0,
+                                    tzinfo=datetime.timezone.utc)
+
+    class _FrozenDatetime(datetime.datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return frozen_now.astimezone(tz) if tz else frozen_now
+
+    monkeypatch.setattr(send_telegram, "datetime", _FrozenDatetime)
     monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
     monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
     monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
