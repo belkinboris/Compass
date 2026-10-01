@@ -1295,62 +1295,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d70655953",
-   "title": "Путин: выдвинутая РФ идея большого евразийского партнерства приобретает особое значение",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28172593"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "особое значение",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "особое значение",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d43385371",
-   "title": "Продажи машин российского автоконцерна установили рекорд",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/prodazhi-mashin-rossiyskogo-avtokontserna-ustanovili-rekord/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
