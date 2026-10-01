@@ -1445,271 +1445,43 @@
    ]
   },
   {
-   "draft_id": "d13904229",
-   "title": "Sotheby's выставит на торги коллекцию с редкими работами ван Гога и Сезанна",
+   "draft_id": "d71431783",
+   "title": "Владелец Azimut Hotels Клячин продал еще один актив",
    "date": "2026-10-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8990926"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583"
     ]
    ],
-   "sum": null,
+   "sum": "1,49 млрд ₽",
    "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43205094",
-   "title": "С 1 октября изменились правила определения зоны продажи табака и вейпов",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6abbd8163098f03ae1875eb4"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d66579174",
-   "title": "Трамп сообщил о южнокорейских инвестициях в энергетику США на $200 млрд",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6abd9f608b42f669160bfa78"
-    ]
-   ],
-   "sum": "$200 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d53404632",
-   "title": "Разработчик заявил об интересе некоторых стран в покупке БПЛА Supercam S180",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/armiya-i-opk/28168747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87581785",
-   "title": "Как продать квартиру быстрее рынка: цена, фото и другие секреты",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261001/altukhova-873552727.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d71408954",
-   "title": "Итоги инвестирования за сентябрь 2026: покупки, состав активов, планы",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1357655.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-10-01",
      "title": "Сделка завершена",
-     "note": "Вот и закончился сентябрь, пора подвести его итоги, вспомнить что покупал и продавал, проанализировать текущую ситуацию. Прошло уже 3 года и 9 месяцев с начала инвестирования. Поехали! Покупки активов В сентябре покупал: — акции ДОМ РФ, Россети Центр и…",
+     "note": "ГК «Риотэкс» выкупила у структуры владельца гостиничной сети Azimut Hotels Александра Клячина расположенный на Ленинградском шоссе в Химках бизнес-центр Khimki One на 42 000 кв. м. Транзакция, по словам источника, была закрыта в сентябре. Khimki One был…",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1357655.php"
+      "web:mergers.ru",
+      "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "еще один актив",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "еще один актив",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d14020120",
-   "title": "В Курганской области продают гостиничный комплекс на трассе за 38 млн рублей. Фото",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132202"
-    ]
-   ],
-   "sum": "38 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33168827",
-   "title": "Суд пригрозил сургутянке продажей квартиры из-за 60 кошек",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132356"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76063556",
-   "title": "«Дешевого Китая больше нет». Как для всех нас готовят скрытый налог на зарубежные онлайн-покупки",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/economics/2026/10/01/76670659/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g18e39dbf (общие редкие слова: клячин, продал) — проверьте, не дубль ли"
    ]
   }
  ]
