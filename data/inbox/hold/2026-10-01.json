@@ -1445,42 +1445,13 @@
    ]
   },
   {
-   "draft_id": "d18998117",
-   "title": "Суд в США разрешил Paramount завершить слияние с Warner Bros. на $110 млрд",
+   "draft_id": "d69771665",
+   "title": "Заблудившаяся акула привлекла в южнокорейский Пусан 600 тыс. туристов",
    "date": "2026-10-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8991101"
-    ]
-   ],
-   "sum": "$110 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d91851526",
-   "title": "Деловая активность обрабатывающих отраслей РФ в сентябре почти перешла к росту",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/01/1233323-delovaya-aktivnost"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6abe2202965e3c8db81121df"
     ]
    ],
    "sum": null,
@@ -1488,68 +1459,11 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Заблудившаяся акула",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83992327",
-   "title": "Умным кольцом Сбербанка теперь можно оплачивать покупки с помощью «Вжух»",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-01_umnym_koltsom_sberbanka"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71708205",
-   "title": "Эксперт Сидоренко: каждый третий россиянин покупает квартиру в другом регионе",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28169623"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "квартира в другом регионе",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "квартира в другом регионе",
+    "asset": "Заблудившаяся акула",
     "seller": null
    },
    "ind": null,
@@ -1559,13 +1473,99 @@
    ]
   },
   {
-   "draft_id": "d22291288",
-   "title": "Заботкин: экономика России перешла к режиму высоких зарплат",
+   "draft_id": "d87567121",
+   "title": "OFAC продлило лицензию MOL на переговоры о покупке NIS у «Газпром нефти»",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1119615"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3504df38 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d71305912",
+   "title": "В Сеуле поправили заявления США об инвестициях Южной Кореи в проект на Аляске",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1119606"
+    ]
+   ],
+   "sum": "$50 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50581847",
+   "title": "Патрушев: международное сотрудничество приобретает особое значение",
    "date": "2026-10-01",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261001/ekonomika-873839037.html"
+     "https://1prime.ru/20261001/sotrudnichestvo-873845002.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "особое значение",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "особое значение",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d85572967",
+   "title": "Инвестиционный цикл в России не остановился, заявил Заботкин",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261001/zabotkin-873844923.html"
     ]
    ],
    "sum": null,
@@ -1587,17 +1587,17 @@
    ]
   },
   {
-   "draft_id": "d71201744",
-   "title": "«Т-Технологии» оценили покупку банка «Точка» в 84,8 миллиарда рублей",
+   "draft_id": "d66387270",
+   "title": "«Дом.РФ» выставит на торги особняк барона Штиглица в Петербурге",
    "date": "2026-10-01",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261001/t-tehnologija-873838697.html"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261001/osobnyak-2121399003.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1608,21 +1608,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: оценил, рублей) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку gea799efc (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d21758453",
-   "title": "Российская экономика перешла к высоким зарплатам, сообщил зампред ЦБ",
+   "draft_id": "d55023669",
+   "title": "ФНС предлагают дать право останавливать продажи на маркетплейсах",
    "date": "2026-10-01",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261001/zarplaty-2121390925.html"
+     "web:retailer.ru",
+     "https://retailer.ru/fns-predlagajut-dat-pravo-ostanavlivat-prodazhi-na-marketplejsah/"
     ]
    ],
    "sum": null,
@@ -1641,35 +1641,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30026310",
-   "title": "В историческом центре Тобольска выставили на продажу гигантский долгострой",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132451"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g2bd95d6e (общие редкие слова: истори, центре) — проверьте, не дубль ли"
    ]
   }
  ]

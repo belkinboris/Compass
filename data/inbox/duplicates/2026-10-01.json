@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-01",
+ "items": [
+  {
+   "key": "https://ria.ru/20261001/dzhersi-2121408770.html::gbe536659",
+   "candidate_id": "gbe536659",
+   "reason": "общие редкие слова: миллио, продал",
+   "draft": {
+    "draft_id": "d63480552",
+    "title": "Джерси Джордана с финала НБА продали на аукционе за $12,26 миллиона",
+    "date": "2026-10-01",
+    "src": [
+     [
+      "web:ria.ru",
+      "https://ria.ru/20261001/dzhersi-2121408770.html"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-01",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:ria.ru",
+       "https://ria.ru/20261001/dzhersi-2121408770.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Джерси Джордана с финала НБА",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Джерси Джордана с финала НБА"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-01"
+  }
+ ]
+}
