@@ -1297,13 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d85827112",
-   "title": "Номер Роналду в сборной Португалии перешел к Леау // Номер Роналду в сборной Португалии отдали одноклубнику Батракова",
+   "draft_id": "d47232402",
+   "title": "Здания Рязанского кремля перешли в собственность епархии",
    "date": "2026-10-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8991482"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1119723"
     ]
    ],
    "sum": null,
@@ -1325,13 +1325,80 @@
    ]
   },
   {
-   "draft_id": "d41868957",
-   "title": "В Москве зарегистрировали первую покупку недвижимости с помощью биометрии",
+   "draft_id": "d79703481",
+   "title": "Evolute i-SPACE впервые вошёл в топ-10 кроссоверов в России — за неделю бренд продал 354 машины",
    "date": "2026-10-01",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/8991380"
+     "web:rb.ru",
+     "https://rb.ru/news/evolute-i-space-vpervye-voshyol-v-top-10-krossoverov-v-rossii-za-nedelyu-brend-prodal-354-mashiny/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-01",
+     "title": "Сделка завершена",
+     "note": "Российский автомобиль Evolute i-SPACE впервые вошёл в десятку самых популярных новых кроссоверов в России, сообщает агентство «Автостат». На неделе с 21 по 27 сентября было реализовано 354 машины. Этого хватило для десятого места в рейтинге.",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/evolute-i-space-vpervye-voshyol-v-top-10-krossoverov-v-rossii-za-nedelyu-brend-prodal-354-mashiny/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "354 машины",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "354 машины",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d85566315",
+   "title": "#smartlabonline с представителями ВТБ Мои Инвестиции — сегодня в 17:00!",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1357993.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22767138",
+   "title": "Девелоперы стали продавать офисы в рассрочку",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/307099"
     ]
    ],
    "sum": null,
@@ -1349,119 +1416,8 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36411506",
-   "title": "На Кубани вводят госконтроль за продажей вейпов",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28171643"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69123000",
-   "title": "Google выдал старые ветряки Финляндии за новые инвестиции в энергетику",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/01/google-vidal-starie-vetrjaki"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35755685",
-   "title": "Продажи вне маркетплейсов могут показать самый быстрый рост за три года",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/prodazhi-vne-marketplejsov-mogut-pokazat-samyj-bystryj-rost-za-tri-goda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10420546",
-   "title": "Под Курганом выставили на продажу комплекс мясокомбината за 35 млн рублей",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053130461"
-    ]
-   ],
-   "sum": "35 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
