@@ -1297,41 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d52343146",
-   "title": "Картины Ван Гога, Гогена и Ренуара выставили на аукцион Sotheby’s",
+   "draft_id": "d85827112",
+   "title": "Номер Роналду в сборной Португалии перешел к Леау // Номер Роналду в сборной Португалии отдали одноклубнику Батракова",
    "date": "2026-10-01",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2176661/video/kartiny-van-goga-gogena-i-renuara-vystavili-na-auktcion-sothebys"
-    ]
-   ],
-   "sum": "$450 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87022845",
-   "title": "Прокуратура Москвы начала проверку продажи билетов на концерт Канье Уэста",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2176660/prokuratura-moskvy-nachala-proverku-prodazhi-biletov-na-kontcert-kane-uesta-izi"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8991482"
     ]
    ],
    "sum": null,
@@ -1353,17 +1325,17 @@
    ]
   },
   {
-   "draft_id": "d42821157",
-   "title": "Инвестиции в коммерческую недвижимость в России сократились на 1%",
+   "draft_id": "d41868957",
+   "title": "В Москве зарегистрировали первую покупку недвижимости с помощью биометрии",
    "date": "2026-10-01",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261001/investitsii-873858934.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/8991380"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1381,41 +1353,13 @@
    ]
   },
   {
-   "draft_id": "d63858076",
-   "title": "Инвестиции в коммерческую недвижимость России сократились на 1%",
+   "draft_id": "d36411506",
+   "title": "На Кубани вводят госконтроль за продажей вейпов",
    "date": "2026-10-01",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261001/investitsii-2121465849.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37784719",
-   "title": "Стоимость покупки жилья в Евросоюзе растет быстрее аренды",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261001/evrostat-2121459813.html"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28171643"
     ]
    ],
    "sum": null,
@@ -1437,13 +1381,13 @@
    ]
   },
   {
-   "draft_id": "d49373404",
-   "title": "Рыженков: Минск готов принять у себя раунд переговоров России и Украины",
+   "draft_id": "d69123000",
+   "title": "Google выдал старые ветряки Финляндии за новые инвестиции в энергетику",
    "date": "2026-10-01",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261001/minsk-2121469369.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/01/google-vidal-starie-vetrjaki"
     ]
    ],
    "sum": null,
@@ -1465,13 +1409,13 @@
    ]
   },
   {
-   "draft_id": "d40093514",
-   "title": "Кроссовер Evolute i-Space впервые вошел в топ-10 по продажам",
+   "draft_id": "d35755685",
+   "title": "Продажи вне маркетплейсов могут показать самый быстрый рост за три года",
    "date": "2026-10-01",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/krossover-evolute-i-space-vpervye-voshel-v-top-10-po-prodazham/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/prodazhi-vne-marketplejsov-mogut-pokazat-samyj-bystryj-rost-za-tri-goda/"
     ]
    ],
    "sum": null,
@@ -1486,81 +1430,23 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19429701",
-   "title": "Zara обвинили в продаже праздничного костюма в стиле формы узников Освенцима",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/zara-obvinili-v-prodazhe-prazdnichnogo-kostyuma-v-stile-formy-uznikov-osventsima/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "Агро",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d56313921",
-   "title": "Залужный сравнил войну с продажами",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/zaluzhnyy-sravnil-voynu-s-prodazhami/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d23578121",
-   "title": "Сотрудник крупного предприятия в Надыме потерял 3,5 млн рублей при покупке Lexus RX 300",
+   "draft_id": "d10420546",
+   "title": "Под Курганом выставили на продажу комплекс мясокомбината за 35 млн рублей",
    "date": "2026-10-01",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053132565"
+     "https://ura.news/news/1053130461"
     ]
    ],
-   "sum": "3,5 млн ₽",
+   "sum": "35 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
