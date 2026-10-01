@@ -128,35 +128,6 @@
    ]
   },
   {
-   "draft_id": "d23440410",
-   "title": "В Москве выставили на торги старинный купеческий особняк",
-   "date": "2026-09-18",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260918/moskva-2118571651.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3629ebb7 (общие редкие слова: москве, старин) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d35782040",
    "title": "США продлили разрешение на операции, связанные с продажей активов «Лукойла»",
    "date": "2026-09-18",
@@ -841,66 +812,6 @@
    ]
   },
   {
-   "draft_id": "d83280987",
-   "title": "«Дом.РФ» выставил на торги бывшую губернскую мужскую гимназию в Красноярске",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260924/krasnojarsk-2119988871.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g88dfc8c8 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d42071502",
-   "title": "«Дом.РФ» выставил на торги Мариинский приют в Саратове",
-   "date": "2026-09-24",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260924/saratov-2120033195.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g88dfc8c8 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что ««Дом.РФ» выставил на торги бывшую губернскую мужскую гимнази» — второе издание, в группу не шлём"
-   ]
-  },
-  {
    "draft_id": "d36537657",
    "title": "«Яндекс» сделал огромную инвестицию в ИТ-решение для борьбы с опасными проявлениями ИИ",
    "date": "2026-09-24",
@@ -1041,37 +952,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82475022",
-   "title": "«Дом.РФ» выставил на торги бывший корпус Астраханского госуниверситета",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20260925/korpus-2120231320.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5ffcce01 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что ««Дом.РФ» выставил на торги бывшую губернскую мужскую гимнази» — второе издание, в группу не шлём"
    ]
   },
   {
@@ -1445,73 +1325,16 @@
    ]
   },
   {
-   "draft_id": "d69771665",
-   "title": "Заблудившаяся акула привлекла в южнокорейский Пусан 600 тыс. туристов",
+   "draft_id": "d56221820",
+   "title": "Захарова пробилась во второй раунд турнира в Пекине",
    "date": "2026-10-01",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6abe2202965e3c8db81121df"
+     "web:ria.ru",
+     "https://ria.ru/20261001/zakharova-2121421016.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Заблудившаяся акула",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Заблудившаяся акула",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d87567121",
-   "title": "OFAC продлило лицензию MOL на переговоры о покупке NIS у «Газпром нефти»",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1119615"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3504df38 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d71305912",
-   "title": "В Сеуле поправили заявления США об инвестициях Южной Кореи в проект на Аляске",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1119606"
-    ]
-   ],
-   "sum": "$50 млрд",
    "type": "Инвестиция",
    "status": null,
    "events": [],
@@ -1530,13 +1353,13 @@
    ]
   },
   {
-   "draft_id": "d50581847",
-   "title": "Патрушев: международное сотрудничество приобретает особое значение",
+   "draft_id": "d63734914",
+   "title": "Он создал первый инвестиционный фонд в мире. История Абрахама ван Кетвича",
    "date": "2026-10-01",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261001/sotrudnichestvo-873845002.html"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1357850.php"
     ]
    ],
    "sum": null,
@@ -1544,28 +1367,27 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "особое значение",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "особое значение",
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d85572967",
-   "title": "Инвестиционный цикл в России не остановился, заявил Заботкин",
+   "draft_id": "d79239336",
+   "title": "ЦБ считает, что экономика России перешла к высоким зарплатам",
    "date": "2026-10-01",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261001/zabotkin-873844923.html"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/307801"
     ]
    ],
    "sum": null,
@@ -1587,17 +1409,17 @@
    ]
   },
   {
-   "draft_id": "d66387270",
-   "title": "«Дом.РФ» выставит на торги особняк барона Штиглица в Петербурге",
+   "draft_id": "d20521562",
+   "title": "Прокуратура отреагировала на ситуацию с продажей билетов на концерт Канье Уэста в России",
    "date": "2026-10-01",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261001/osobnyak-2121399003.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/01/prokuratura-otreagirovala-na-situatsiyu-s-prodazhey-biletov-na-kontsert-kanie-uesta-v-rossii/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1608,21 +1430,48 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gea799efc (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d55023669",
-   "title": "ФНС предлагают дать право останавливать продажи на маркетплейсах",
+   "draft_id": "d58649487",
+   "title": "Покупкой российского Supercam S180 заинтересовались за рубежом",
    "date": "2026-10-01",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/fns-predlagajut-dat-pravo-ostanavlivat-prodazhi-na-marketplejsah/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/01/pokupkoy-rossiyskogo-supercam-s180-zainteresovalis-za-rubezhom/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38359222",
+   "title": "В ЦБ объявили, что российская экономика перешла к режиму высоких зарплат",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053132517"
     ]
    ],
    "sum": null,
