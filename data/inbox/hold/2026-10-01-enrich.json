@@ -12,12 +12,12 @@
    ]
   },
   {
-   "news": "https://mergers.ru/news/Rossijskie-aktivy-Metro-peredany-vo-vremennoe-upravlenie-87581",
-   "title": "Российские активы Metro переданы во временное управление",
-   "verdict": "enrich:ga142d8e0",
-   "why": "общие слова заголовка: 5",
+   "news": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+   "title": "Российский разработчик диагностических тест-систем привлек 600 млн рублей к проекту по расширению портфеля",
+   "verdict": "enrich:gf66151c1",
+   "why": "тот же адрес источника",
    "reasons": [
-    "слабое совпадение: общие слова заголовка: 5"
+    "в карточке «доля в ООО «Рапид Био» (размер не раскрыт)»"
    ]
   }
  ]
