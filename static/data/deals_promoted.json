@@ -221499,6 +221499,137 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g1e37f107",
+   "date": "2026-09-30",
+   "title": "Казахстанский фонд Fonte Capital сократил долю в «Самолете» с 15% до менее 5%",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Движение.ру",
+     "https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "По данным СПАРК, казахстанский фонд Fonte Inceptia Alpha Fund OEIC Limited в сентябре 2026 года уменьшил долю в капитале ГК «Самолет» — крупнейшего российского застройщика по объёму текущего строительства (4,3 млн м² жилья в портфеле на сентябрь 2026 года, данные ЕИСЖС) — с чуть более 15% до менее 5%. Причины сокращения не раскрываются, сумма сделки неизвестна. В пресс-службе «Самолета» сказали, что компания не комментирует действия отдельных акционеров. Фонд вошёл в капитал 30 июля 2026 года, купив 18% акций у наследников сооснователя «Самолета» Михаила Кенина — то есть сократил участие менее чем через два месяца после покупки пакета.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Fonte Inceptia Alpha Fund OEIC Limited — инвестиционный фонд в форме частной компании; управляет им Fonte Capital Ltd, работающая в юрисдикции Международного финансового центра «Астана» и специализирующаяся на коллективных инвестициях. Продавцом пакета 30 июля был фонд «Горизонт», принадлежащий наследникам Михаила Кенина.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта",
+   "seller": "Fonte Inceptia Alpha Fund OEIC Limited (структура Fonte Capital)",
+   "asset": "пакет акций ГК «Самолет» (доля сокращена с 15% до менее 5%)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-30",
+     "title": "Сделка завершена",
+     "note": "Доля Fonte Inceptia Alpha Fund OEIC Limited в капитале «Самолета» сократилась с чуть более 15% до менее 5%.",
+     "source": [
+      "Движение.ру",
+      "https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "пакет акций ГК «Самолет» (доля сокращена с 15% до менее 5%)",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Fonte Inceptia Alpha Fund OEIC Limited (структура Fonte Capital)",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet"
+     }
+    ]
+   },
+   "asset_id": "g12111389",
+   "deep_researched": "2026-09-30",
+   "reviewed": "2026-09-30",
+   "accepted": "2026-09-30",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Иностранный инвестфонд, зарегистрирован в Международном финансовом центре «Астана» — профиль не заводили ради одной сделки."
+    }
+   },
+   "post_preview": "<b>Казахстанский фонд Fonte Capital сократил долю в «Самолете» с 15% до менее 5%</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Fonte Inceptia Alpha Fund OEIC Limited (структура Fonte Capital)\n<b>Предмет:</b> пакет акций ГК «Самолет» (доля сокращена с 15% до менее 5%)\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://dvizhenie.ru/media/8735/kazahstanskij-fond-vtroe-sokratil-svoyu-dolyu-v-gk-samolet\">Движение.ру</a>\n\n#недвижимость #MA",
+   "added": "2026-10-01",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "72ca40b3ca21"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2026-09-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "eb0a276d7ffd"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "6cfc4b39be37"
+    },
+    "target": {
+     "company_id": "g12111389",
+     "inn": "9731004688",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "c874b551d96a"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   },
+   "proofread": "2026-10-01"
   }
  ],
  "companies": {
@@ -253076,7 +253207,8 @@
   "g812a7b3b": 159,
   "gc65bacdf": 160,
   "gfbcdc000": 161,
-  "g49431b3c": 162
+  "g49431b3c": 162,
+  "g29877b3a": 163
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
