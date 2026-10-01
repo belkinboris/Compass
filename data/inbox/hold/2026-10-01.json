@@ -1325,17 +1325,17 @@
    ]
   },
   {
-   "draft_id": "d56221820",
-   "title": "Захарова пробилась во второй раунд турнира в Пекине",
+   "draft_id": "d50229224",
+   "title": "Заботкин: российская экономика перешла к высоким зарплатам",
    "date": "2026-10-01",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261001/zakharova-2121421016.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/economics/news/2026/10/01/1233398-k-visokim-zarplatam"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1353,13 +1353,267 @@
    ]
   },
   {
-   "draft_id": "d63734914",
-   "title": "Он создал первый инвестиционный фонд в мире. История Абрахама ван Кетвича",
+   "draft_id": "d15023113",
+   "title": "ЕК ответила США, что начнет продавать дизель из запасов лишь по рекомендации МЭА",
    "date": "2026-10-01",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1357850.php"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28170869"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34182004",
+   "title": "Эксперт Знаменщикова: в РФ большинство квартир покупают по базовой ипотеке",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28170825"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "по базовой ипотеке",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "по базовой ипотеке",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d68885873",
+   "title": "Номер Роналду в сборной Португалии по футболу перешел к Леау",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28170827"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29743681",
+   "title": "Курс юаня после утреннего снижения перешел к росту",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261001/kurs-873852582.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d12858592",
+   "title": "Риелтор: интерес к покупке ИЖС в России вырос на четверть",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261001/rieltor-2121438389.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67326817",
+   "title": "МСП-производители поддержали НДС 22% при онлайн-покупке иностранных товаров",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261001/nds-2121449523.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g315908f7 (общие редкие слова: поддер, произв) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d81933749",
+   "title": "Пермский край привлекает сотни тысяч туристов со всей России. Чем регион на берегах Камы поражает гостей?",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/articles/2026/10/01/perm/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Пермский край",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Пермский край",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d86869433",
+   "title": "Православные молитвы на торговлю. Каким святым молиться о хороших продажах?",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/articles/2024/05/07/pravoslavnye-molitvy-na-torgovlyu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42777306",
+   "title": "В центре Челябинска продают гаражи по цене квартиры",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053132532"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21778227",
+   "title": "Элитную недвижимость в ХМАО распродают с большими скидками",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053131688"
     ]
    ],
    "sum": null,
@@ -1375,118 +1629,6 @@
     "seller": null
    },
    "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79239336",
-   "title": "ЦБ считает, что экономика России перешла к высоким зарплатам",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/307801"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20521562",
-   "title": "Прокуратура отреагировала на ситуацию с продажей билетов на концерт Канье Уэста в России",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/prokuratura-otreagirovala-na-situatsiyu-s-prodazhey-biletov-na-kontsert-kanie-uesta-v-rossii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58649487",
-   "title": "Покупкой российского Supercam S180 заинтересовались за рубежом",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/01/pokupkoy-rossiyskogo-supercam-s180-zainteresovalis-za-rubezhom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38359222",
-   "title": "В ЦБ объявили, что российская экономика перешла к режиму высоких зарплат",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132517"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

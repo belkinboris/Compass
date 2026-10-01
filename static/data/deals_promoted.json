@@ -221221,6 +221221,138 @@
     }
    },
    "proofread": "2026-10-01"
+  },
+  {
+   "id": "g29877b3a",
+   "date": "2026-09-25",
+   "title": "«Дом.РФ» выставил на торги бывший корпус Астраханского госуниверситета",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20260925/korpus-2120231320.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "68,6 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Лот — участок 2,33 га и здание 6,2 тыс. кв. м (три трёхэтажных корпуса, соединённых двухэтажными переходами) на улице Коновалова, 2, в Трусовском районе Астрахани. С 1965 года здесь работал дом культуры экспериментального Астраханского целлюлозно-картонного комбината, позже после реконструкции здание заняли под корпус Астраханского государственного университета. Масштаб объекта и вид разрешённого использования участка предполагают развитие образовательных, культурных, спортивных или общественных проектов.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "68,6 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "бывший корпус Астраханского государственного университета в Трусовском районе Астрахани (6,2 тыс. кв. м, участок 2,33 га)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-25",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 26 октября, аукцион назначен на 30 октября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20260925/korpus-2120231320.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "бывший корпус Астраханского государственного университета в Трусовском районе Астрахани (6,2 тыс. кв. м, участок 2,33 га)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260925/korpus-2120231320.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20260925/korpus-2120231320.html"
+     }
+    ]
+   },
+   "added": "2026-10-01",
+   "reviewed": "2026-10-01",
+   "accepted": "2026-10-01",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "8a10d3414c7a"
+    },
+    "price": {
+     "value_rub": 68600000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "a31248520d2a"
+    },
+    "date": {
+     "value": "2026-09-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3f82afc275f7"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c104ae80ba29"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
