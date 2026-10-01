@@ -1445,43 +1445,239 @@
    ]
   },
   {
-   "draft_id": "d71431783",
-   "title": "Владелец Azimut Hotels Клячин продал еще один актив",
+   "draft_id": "d79105976",
+   "title": "ФНС сможет блокировать продажи нарушителей на маркетплейсах",
    "date": "2026-10-01",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/economics/news/2026/10/01/1233297-fns-smozhet-blokirovat"
     ]
    ],
-   "sum": "1,49 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-01",
-     "title": "Сделка завершена",
-     "note": "ГК «Риотэкс» выкупила у структуры владельца гостиничной сети Azimut Hotels Александра Клячина расположенный на Ленинградском шоссе в Химках бизнес-центр Khimki One на 42 000 кв. м. Транзакция, по словам источника, была закрыта в сентябре. Khimki One был…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583"
-     ]
-    }
-   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "еще один актив",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "еще один актив",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g18e39dbf (общие редкие слова: клячин, продал) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92193556",
+   "title": "Как не купить акции на пике ажиотажа: чему инвестора учит фильм «Золото»",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/01/10/2026/6abe05269a7947a5a74d5f55"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27672314",
+   "title": "Российский разработчик диагностических тест-систем привлек 600 млн рублей к проекту по расширению портфеля",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/"
+    ]
+   ],
+   "sum": "600 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-01",
+     "title": "Переговоры",
+     "note": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ. Средства, в частности, планируется направить на разработку и вывод на рынок новых…",
+     "source": [
+      "web:vademec.ru",
+      "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Российский разработчик диагностических тест-систем",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский разработчик диагностических тест-систем",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d45112567",
+   "title": "ТЦ «Июнь» в подмосковном Красногорске сменил собственника",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261001/iyun-2121382418.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45732294",
+   "title": "«Надо »продать« себя»: честный Кацалапов — о Жулине, Трусовой и возвращении",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261001/katsalapov-2121300433.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66002715",
+   "title": "«Т-технологии» определили цену допэмиссии для сделки с банком «Точка»",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/307685"
+    ]
+   ],
+   "sum": "84,8 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36140071",
+   "title": "В Восточном Измайлове выставили на торги три коммерческих объекта",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/10/1/v-vostochnom-izmajlove-vystavili-na-torgi-tri-kommercheskih-obekta"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47054959",
+   "title": "Mento VC под управлением Александра Журавлева инвестировал в американский стартап Ceramic.ai . Об этом управляющий партнер фонда написал в сообщении в своем Telegram-канале. Ceramic․ai был создан Анно",
+   "date": "2026-10-01",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7764"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": "Mento VC под управлением Александра Журавлева",
+   "asset": "американский стартап Ceramic.ai . Об этом управляющий партнер фонда написал в сообщении в своем Tele",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Mento VC под управлением Александра Журавлева",
+    "asset": "американский стартап Ceramic.ai . Об этом управляющий партнер фонда написал в сообщении в своем Tele",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
    ]
   }
  ]

@@ -2,6 +2,16 @@
  "made": "2026-10-01",
  "items": [
   {
+   "news": "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583",
+   "title": "Владелец Azimut Hotels Клячин продал еще один актив",
+   "verdict": "enrich:g18e39dbf",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «около 2 млрд ₽»",
+    "в карточке «офисный комплекс «Химки One» (42 000 кв. м)»"
+   ]
+  },
+  {
    "news": "https://mergers.ru/news/Rossijskie-aktivy-Metro-peredany-vo-vremennoe-upravlenie-87581",
    "title": "Российские активы Metro переданы во временное управление",
    "verdict": "enrich:ga142d8e0",
