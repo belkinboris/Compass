@@ -1,0 +1,33 @@
+{
+ "made": "2026-10-01",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Vladelec-Azimut-Hotels-Klyachin-prodal-esche-odin-aktiv-87583",
+   "title": "Владелец Azimut Hotels Клячин продал еще один актив",
+   "verdict": "enrich:g18e39dbf",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «около 2 млрд ₽»",
+    "в карточке «офисный комплекс «Химки One» (42 000 кв. м)»"
+   ]
+  },
+  {
+   "news": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+   "title": "Российский разработчик диагностических тест-систем привлек 600 млн рублей к проекту по расширению портфеля",
+   "verdict": "enrich:gf66151c1",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «доля в ООО «Рапид Био» (размер не раскрыт)»"
+   ]
+  },
+  {
+   "news": "https://iz.ru/2176847/2026-10-01/v-murmanskoi-oblasti-vystavili-na-torgi-korpus-atomnogo-ledokola",
+   "title": "В Мурманской области выставили на торги атомный ледокол",
+   "verdict": "enrich:g35c2f65e",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  }
+ ]
+}
