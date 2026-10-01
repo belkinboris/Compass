@@ -1297,65 +1297,25 @@
    ]
   },
   {
-   "draft_id": "d20836615",
-   "title": "ИИ выходит на биржу: как алгоритмы начинают торговать вместо инвесторов",
-   "date": "2026-10-01",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/radio/01/10/2026/6abe76a09a7947774904ba5b"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d78812049",
-   "title": "Gazeta Wyborcza: Навроцкому и его семье купили коней за счет госбюджета",
+   "draft_id": "d70655953",
+   "title": "Путин: выдвинутая РФ идея большого евразийского партнерства приобретает особое значение",
    "date": "2026-10-01",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28172203"
+     "https://tass.ru/politika/28172593"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-01",
-     "title": "Сделка завершена",
-     "note": "Животные появились в резиденции президента Польши в городе Промник в 100 км к востоку от Варшавы, пишет газета",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28172203"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "кони за счет госбюджета",
+   "asset": "особое значение",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "кони за счет госбюджета",
+    "asset": "особое значение",
     "seller": null
    },
    "ind": null,
@@ -1365,30 +1325,19 @@
    ]
   },
   {
-   "draft_id": "d75251672",
-   "title": "Глава Xbox Аша Шарма опровергла слухи о возможной продаже компании — она останется частью Microsoft",
+   "draft_id": "d43385371",
+   "title": "Продажи машин российского автоконцерна установили рекорд",
    "date": "2026-10-01",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/glava-xbox-asha-sharma-oprovergla-sluhi-o-vozmozhnoj-prodazhe-kompanii-ona-ostanetsya-chastyu-microsoft/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/01/prodazhi-mashin-rossiyskogo-avtokontserna-ustanovili-rekord/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-01",
-     "title": "Переговоры",
-     "note": "Microsoft не намерена продавать Xbox, заявила глава подразделения Аша Шарма в беседе с The New York Times. По её словам, компания сделает всё необходимое для успешного развития подразделения. Xbox также продолжит работать с Microsoft и придерживаться…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/glava-xbox-asha-sharma-oprovergla-sluhi-o-vozmozhnoj-prodazhe-kompanii-ona-ostanetsya-chastyu-microsoft/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
