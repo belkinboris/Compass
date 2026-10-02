@@ -222589,7 +222589,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "proofread": "2026-10-02"
   }
  ],
  "companies": {
@@ -254200,7 +254201,8 @@
   "gb3ae9e94": 167,
   "g45b335fe": 169,
   "g6600b6a4": 171,
-  "g2a4e8a51": 172
+  "g2a4e8a51": 172,
+  "gbcf07c78": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -254654,5 +254656,8 @@
   "https://mergers.ru/news/Gruppa-Jetalon-priobretaet-rossijskij-biznes-finskogo-developera-YIT-za-46-mlrd-rub-78489",
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
- ]
+ ],
+ "telegram_posts_realty": {
+  "gbcf07c78": 2
+ }
 }
