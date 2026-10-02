@@ -222456,7 +222456,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "proofread": "2026-10-02"
   },
   {
    "id": "g96d69d52",
@@ -222589,139 +222590,6 @@
      "multiple_text": "not_control_change"
     }
    }
-  },
-  {
-   "id": "gbcf07c78",
-   "date": "2026-10-02",
-   "title": "«Билайн» выставил на торги часть бизнес-центра на Садовом кольце в Москве",
-   "ind": "Недвижимость",
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "РИА Недвижимость",
-     "https://realty.ria.ru/20261002/bilajn-2121696879.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "1 млрд ₽ (начальная цена, торги на понижение)",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "Лот — часть офисного здания класса B на пересечении 1-й Тверской-Ямской улицы и Садового кольца в Москве (бывший доходный дом братьев Хомяковых, построен в 1880 году, объект культурного наследия регионального значения). На продажу выставлены помещения на мансардном и первом–четвёртом этажах общей площадью 2,9 тыс. кв. м — 29% площади всего здания. Торги проходят по голландской схеме, на понижение.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "1 млрд ₽ (начальная цена, торги на понижение)",
-   "seller": "«ВымпелКом» (бренд «Билайн»)",
-   "seller_id": "gd685b926",
-   "asset": "часть офисного здания на 1-й Тверской-Ямской ул. в Москве: 2,9 тыс. кв. м (29% площади здания)",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-02",
-     "title": "Торги объявлены",
-     "note": "Торги по голландской схеме (на понижение) назначены на 21 октября 2026 года; начальная цена лота — немногим более 1 млрд ₽, минимальная — 735 млн ₽.",
-     "source": [
-      "РИА Недвижимость",
-      "https://realty.ria.ru/20261002/bilajn-2121696879.html"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "Продажа с торгов",
-    "Недвижимость"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "часть офисного здания на 1-й Тверской-Ямской ул. в Москве: 2,9 тыс. кв. м (29% площади здания)",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://realty.ria.ru/20261002/bilajn-2121696879.html"
-     }
-    ],
-    "seller": [
-     {
-      "value": "«ВымпелКом» (бренд «Билайн»)",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://realty.ria.ru/20261002/bilajn-2121696879.html"
-     }
-    ]
-   },
-   "added": "2026-10-02",
-   "reviewed": "2026-10-02",
-   "accepted": "2026-10-02",
-   "accepted_notes": {
-    "no_profile": {
-     "target": "Часть здания — объект недвижимости, не компания, профиля не бывает."
-    }
-   },
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "8c7ecfd69969"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "auction_start",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "8d191b20b2af"
-    },
-    "date": {
-     "value": "2026-10-02",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "f0ec44927ad0"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": true,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "40db59f80383"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "auction_open",
-     "top_purchases": "auction_open",
-     "multiple_text": "not_control_change"
-    }
-   },
-   "proofread": "2026-10-02"
   }
  ],
  "companies": {
