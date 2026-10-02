@@ -222853,6 +222853,142 @@
     }
    },
    "proofread": "2026-10-02"
+  },
+  {
+   "id": "g2918b022",
+   "date": "2026-10-02",
+   "title": "Германия начала приватизацию SEFE — бывшей «дочки» «Газпрома»",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya"
+    ],
+    [
+     "Börsen-Zeitung",
+     "https://www.boersen-zeitung.de/unternehmen-branchen/bund-startet-privatisierung-der-frueheren-gazprom-tochter-sefe"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "≈6 млрд € (по оценке)",
+    "share": "—",
+    "val": "≈6 млрд € — оценка SEFE, по данным Börsen-Zeitung.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "SEFE (ранее Gazprom Germania, включала «Газпром Германия» и SEFE Marketing & Trading, бывший Gazprom Marketing & Trading) была национализирована Германией в 2022 году: компания перешла под управление Федерального сетевого агентства и была переименована. По условиям господдержки Германия обязана сократить свою долю в компании как минимум на 75% до конца 2028 года. Министерство экономики ФРГ начало отбор юридических консультантов для сделки, инвестиционные банки подают заявки на участие в приватизации. 8 июня Арбитражный суд Санкт-Петербурга и Ленинградской области запретил SEFE продолжать зарубежный арбитраж с «Газпром экспортом». 30 сентября власти ФРГ поручили SEFE ускорить закупку и закачку газа в подземные хранилища — решение министра экономики Катерины Райхе было согласовано с канцлером Фридрихом Мерцем. Та же история (отбор консультантов, оценка в 6 млрд €, условие о сокращении доли на 75% к концу 2028 года) впервые описана Börsen-Zeitung ещё 20 апреля 2026 года — не исключено, что «Ведомости» и ТАСС пересказали более раннюю публикацию, а не сообщили о новом решении; независимого подтверждения именно октябрьской даты не нашлось.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "В 2022 году Еврокомиссия одобрила переход 100% SEFE под контроль немецкого государства.",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "≈6 млрд € (по оценке)",
+   "seller": "Правительство Германии (через Федеральное сетевое агентство)",
+   "asset": "SEFE (бывшая Gazprom Germania)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Приватизация начата",
+     "note": "Министерство экономики ФРГ начало отбор юридических консультантов для сделки, инвестиционные банки подают заявки на участие в приватизации; компанию оценивают примерно в 6 млрд евро.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "SEFE (бывшая Gazprom Germania)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Правительство Германии (через Федеральное сетевое агентство)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "SEFE — немецкая компания (бывшая «дочка» «Газпрома»), профиль в базе российских компаний не заводится; ИНН в источниках нет.",
+     "buyer": "Покупатель пока не определён — объявлен только запуск процесса приватизации."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c3e7769e1777"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "3a0a38b41e98"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "e59fc1776ecc"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "deep_researched": "2026-10-02"
   }
  ],
  "companies": {
