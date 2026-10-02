@@ -221916,7 +221916,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "proofread": "2026-10-02"
   },
   {
    "id": "g45b335fe",
@@ -222048,7 +222049,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "proofread": "2026-10-02"
   }
  ],
  "companies": {
@@ -253636,7 +253638,8 @@
   "g29877b3a": 163,
   "ga24ad083": 164,
   "g1e37f107": 165,
-  "gf145d639": 166
+  "gf145d639": 166,
+  "gb3ae9e94": 167
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -253653,6 +253656,9 @@
    "drafted_at": "2026-09-02T12:19:13+00:00",
    "message_id": 76,
    "at": "2026-09-02T13:16:43+00:00"
+  },
+  "2026-09": {
+   "drafted_at": "2026-10-02T07:18:34+00:00"
   }
  },
  "consumed_urls": [
