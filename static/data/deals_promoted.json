@@ -222591,6 +222591,138 @@
     }
    },
    "proofread": "2026-10-02"
+  },
+  {
+   "id": "ga8d7e0ee",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» продаёт купеческий особняк начала XX века в Сыктывкаре",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261002/syktyvkar-2121760598.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "7,15 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Деревянный двухэтажный дом купца Василия Петровича Комлина в центральной части Сыктывкара (Республика Коми), объект культурного наследия регионального значения; построен в 1907–1908 годах, в архитектуре соединились традиции северного деревянного строительства и приёмы городской эклектики начала XX века. Площадь здания 665,3 кв. м, с лотом идёт аренда участка 0,12 га. После революции дом национализировали; в 1921 году в нём разместился областной народный суд, позднее — областной суд Коми автономной области и Коми АССР.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "7,15 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "дом купца В. П. Комлина в Сыктывкаре (Республика Коми): 665,3 кв. м, аренда участка 0,12 га",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 26 октября, конкурс назначен на 30 октября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261002/syktyvkar-2121760598.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "дом купца В. П. Комлина в Сыктывкаре (Республика Коми): 665,3 кв. м, аренда участка 0,12 га",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/syktyvkar-2121760598.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/syktyvkar-2121760598.html"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "05c0f2cf7b33"
+    },
+    "price": {
+     "value_rub": 7150000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "a7f2eee397c0"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "da650c2f7e02"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
@@ -245861,6 +245993,12 @@
    "name": "Дарбшир",
    "ind": "ГМК и добыча",
    "desc": "Непубличная холдинговая компания, в периметр которой входят геологоразведочные компании с лицензиями на недра, включая золотоносные участки на Дальнем Востоке и в Красноярском крае. Юрлицо — АО «Дарбшир».",
+   "kpi": []
+  },
+  "g67e8f15e": {
+   "name": "МГТС",
+   "ind": "Телеком",
+   "desc": "Оператор фиксированной связи и интернет-провайдер в Москве, дочерняя компания МТС. Юрлицо — ПАО «Московская городская телефонная сеть».",
    "kpi": []
   }
  },
