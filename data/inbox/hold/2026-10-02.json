@@ -1297,103 +1297,17 @@
    ]
   },
   {
-   "draft_id": "d19186608",
-   "title": "Paramount и Warner Bros. после слияния образуют компанию Skydance",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261002/slijanie-873919019.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64076146",
-   "title": "Квартальные продажи Tesla оказались лучше прогнозов",
+   "draft_id": "d21444186",
+   "title": "Paramount и Warner Bros. после слияния переименуют в Skydance",
    "date": "2026-10-02",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9005101"
+     "https://www.kommersant.ru/doc/9005149"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d31914387",
-   "title": "ПСБ в третий раз не смог продать национализированный «Вектор Рейл»",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/02/10/2026/6abfc67555009ddb88a0ebfd"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31164062",
-   "title": "Курбатов почти до последнего раунда претендовал на избрание в совет IIHF",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/sport/28176927"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
