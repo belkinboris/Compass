@@ -1295,35 +1295,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d21444186",
-   "title": "Paramount и Warner Bros. после слияния переименуют в Skydance",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9005149"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
   }
  ]
 }
