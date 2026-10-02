@@ -222051,6 +222051,138 @@
     }
    },
    "proofread": "2026-10-02"
+  },
+  {
+   "id": "g6600b6a4",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» выставил на торги казармы лейб-гвардии Сводно-Казачьего полка в Павловске",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "170,67 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Комплекс казарм лейб-гвардии Сводно-Казачьего полка постройки 1907–1913 годов в Павловске (Санкт-Петербург) — объекты культурного наследия регионального значения. В составе лота 13 зданий общей площадью 9,66 тыс. кв. м и аренда участка площадью 4,52 га; здания выполнены в едином архитектурном стиле, включают казармы, конюшни, кухни, офицерские флигели и служебные постройки, офицерское собрание построено в 1913 году по проекту архитектора Всеволода Яковлева. В советское время ансамбль сохранял военное назначение и использовался как военный городок. Победитель конкурса обязан провести реставрацию и сохранение зданий; после реставрации имущество можно использовать под крупный гостиничный комплекс или в иных коммерческих целях.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "170,67 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "комплекс казарм лейб-гвардии Сводно-Казачьего полка в Павловске: 13 зданий, 9,66 тыс. кв. м, аренда участка 4,52 га",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 16 ноября, конкурс назначен на 20 ноября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "комплекс казарм лейб-гвардии Сводно-Казачьего полка в Павловске: 13 зданий, 9,66 тыс. кв. м, аренда участка 4,52 га",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Комплекс зданий — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "66acb8c7fa2b"
+    },
+    "price": {
+     "value_rub": 170670000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "bd42eb88c146"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "367dfcdc9582"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
