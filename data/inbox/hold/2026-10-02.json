@@ -1297,13 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d31323218",
-   "title": "Брокер «Финам» попросил некоторых своих клиентов продать бумаги США",
+   "draft_id": "d17681784",
+   "title": "Брокер «Финам» попросил часть клиентов продать бумаги США",
    "date": "2026-10-02",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/02/10/2026/6abf7ff69a79470f756a515b"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/02/1233829-finam-poprosil-prodat"
     ]
    ],
    "sum": null,
@@ -1325,16 +1325,16 @@
    ]
   },
   {
-   "draft_id": "d30068897",
-   "title": "Сбор за покупку россиянами смартфонов и ноутбуков принесет государству за год 11,7 миллиардов",
+   "draft_id": "d49620167",
+   "title": "Новак: на 80% АЗС в России нефтепродукты продают по сдерживаемым ценам",
    "date": "2026-10-02",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-02_vlasti_nazvali_summy_tehsbora"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/02/1233818-novak-na-80"
     ]
    ],
-   "sum": "11,7 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1346,77 +1346,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d58098903",
-   "title": "Мишустин: члены ЕАЭС покупают газ впятеро дешевле, чем в Европе",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28176039"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "газ впятеро дешевле, чем в Европе",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "газ впятеро дешевле, чем в Европе",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d54998220",
-   "title": "Эксперты рассказали, можно ли купить номер в старом отеле",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261002/nomer-2121774314.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d89020828",
-   "title": "Лукашенко призвал Армению подумать, сможет ли она продавать коньяк в ЕС",
+   "draft_id": "d62284149",
+   "title": "Топливо примерно на 80% АЗС продают по сдерживаемым ценам, заявил Новак",
    "date": "2026-10-02",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261002/lukashenko-2121748200.html"
+     "https://ria.ru/20261002/novak-2121788194.html"
     ]
    ],
    "sum": null,
@@ -1431,67 +1374,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Пищепром и напитки",
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88147922",
-   "title": "В России обрушились продажи одного типа машин",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/02/v-rossii-obrushilis-prodazhi-odnogo-tipa-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42323335",
-   "title": "Офис вместо вклада: как купить коммерческий объект и заставить его работать на вас",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053132858"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
