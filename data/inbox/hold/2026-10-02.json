@@ -1297,96 +1297,7 @@
    ]
   },
   {
-   "draft_id": "d23265491",
-   "title": "Власти Германии решили продать бывшую «дочку» «Газпрома»",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/02/10/2026/6abfb9808d2dba0016d49ab8"
-    ]
-   ],
-   "sum": "€6 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3504df38 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d58493377",
-   "title": "Paramount Skydance сменит название на Skydance после слияния с WBD",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119997"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d63116286",
-   "title": "В Германии начали приватизацию национализированного подразделения «Газпрома»",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1119994"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3504df38 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Власти Германии решили продать бывшую «дочку» «Газпрома»» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d52301344",
+   "draft_id": "d19186608",
    "title": "Paramount и Warner Bros. после слияния образуют компанию Skydance",
    "date": "2026-10-02",
    "src": [
@@ -1409,11 +1320,95 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount Skydance сменит название на Skydance после слияния» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d64076146",
+   "title": "Квартальные продажи Tesla оказались лучше прогнозов",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9005101"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d31914387",
+   "title": "ПСБ в третий раз не смог продать национализированный «Вектор Рейл»",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/02/10/2026/6abfc67555009ddb88a0ebfd"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31164062",
+   "title": "Курбатов почти до последнего раунда претендовал на избрание в совет IIHF",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28176927"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
