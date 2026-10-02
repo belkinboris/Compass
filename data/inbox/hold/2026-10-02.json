@@ -1297,75 +1297,69 @@
    ]
   },
   {
-   "draft_id": "d55547474",
-   "title": "Лукашенко призвал Армению подумать о продажах коньяка при вступлении в ЕС // Лукашенко призвал Армению не торопиться с выходом из ЕАЭС и вступлением в ЕС",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9004988"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d55243416",
-   "title": "Начались активные продажи организованных туров по России на Новый год",
+   "draft_id": "d49342694",
+   "title": "Глава совета директоров SK Group продаст акции на $695 млн для расчетов по делу о разводе",
    "date": "2026-10-02",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/russia/1119978"
+     "https://www.interfax.ru/world/1119985"
     ]
    ],
-   "sum": null,
+   "sum": "$695 млн",
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Переговоры",
+     "note": "Председатель совета директоров SK Group Чхве Тхэ Вон планирует продать часть доли в холдинговой компании этого южнокорейского конгломерата SK Inc. для расчетов по бракоразводному соглашению с бывшей женой Ро Со Ён.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1119985"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "акции на $695 млн для расчетов по делу о разводе",
+   "seller": "Глава совета директоров SK Group",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "акции на $695 млн для расчетов по делу о разводе",
+    "seller": "Глава совета директоров SK Group"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d87402793",
-   "title": "Politico: Германия против продажи части запасов дизеля в ЕС",
+   "draft_id": "d39978668",
+   "title": "Объединенная микроэлектронная компания может купить доли в китайских заводах",
    "date": "2026-10-02",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28176555"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Obedinennaya-mikrojelektronnaya-kompaniya-mozhet-kupit-doli-v-kitajskih-zavodah-87597"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Переговоры",
+     "note": "В рамках стратегии Объединенной микроэлектронной компании (ОМК) рассматривается возможность выкупа акций китайских фаундри — полупроводниковых производств. Мера необходима для упрощения доступа к производству через нахождение компании в капитале фабрики.…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Obedinennaya-mikrojelektronnaya-kompaniya-mozhet-kupit-doli-v-kitajskih-zavodah-87597"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1374,10 +1368,51 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Машиностроение",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d82100898",
+   "title": "Торговый центр «Июнь» в Красногорске сменил владельца и станет научно-производственным центром",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Torgovyj-centr-Iyun-v-Krasnogorske-smenil-vladelca-i-stanet-nauchno-proizvodstvennym-centrom-87595"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Переговоры",
+     "note": "Новым собственником торгового центра «Июнь» в подмосковном Красногорске стало ООО «Литекс». Компания намерена перепрофилировать объект в научно-производственный центр. «Литекс» зарегистрирован в мае 2025 года и занимается производством промышленного…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Torgovyj-centr-Iyun-v-Krasnogorske-smenil-vladelca-i-stanet-nauchno-proizvodstvennym-centrom-87595"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g076af76a (общие редкие слова: владел, сменил) — проверьте, не дубль ли"
    ]
   }
  ]
