@@ -1297,86 +1297,30 @@
    ]
   },
   {
-   "draft_id": "d65134028",
-   "title": "Приложение ВТБ Мои Инвестиции снова доступно в App Store",
+   "draft_id": "d12054718",
+   "title": "При продаже квартир и участков россияне не смогут уплатить НДФЛ по низкой ставке",
    "date": "2026-10-02",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261002/vtb-873897721.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9002823"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31096682",
-   "title": "Henkel закрыла сделку по покупке Stahl за 2,1 миллиарда евро",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261002/henkel--873897198.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-10-02",
-     "title": "Сделка завершена",
-     "note": "",
+     "title": "Переговоры",
+     "note": "С 1 января 2027 года в России доходы от продажи недвижимости планируют облагать налогом наравне с зарплатой и другими регулярными доходами. Это значит, что налог будет рассчитываться по общей прогрессивной шкале — от 13% до 22% в зависимости от суммарного…",
      "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261002/henkel--873897198.html"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9002823"
      ]
     }
    ],
-   "buyer_name": "Henkel",
-   "asset": "Stahl",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Henkel",
-    "asset": "Stahl",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d65720153",
-   "title": "Экономика России перешла к более умеренной динамике, заявил Новак",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261002/novak-2121722047.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1392,13 +1336,41 @@
    ]
   },
   {
-   "draft_id": "d48657951",
-   "title": "Россияне назвали главные причины покупки китайских товаров",
+   "draft_id": "d60917723",
+   "title": "Лукашенко призвал Армению подумать, сможет ли она в ЕС продавать свой коньяк",
    "date": "2026-10-02",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/02/rossiyane-nazvali-glavnye-prichiny-pokupki-kitayskih-tovarov/"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28175775"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d95009038",
+   "title": "В Тюменской области продают любимое кафе силовиков и дальнобойщиков",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053132838"
     ]
    ],
    "sum": null,
