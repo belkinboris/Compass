@@ -222453,6 +222453,138 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g96d69d52",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» выставил на торги палаты XVII века в центре Пскова",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261002/pskov-2121718869.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "6,95 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Здание солодежни постройки XVII века в историческом центре Пскова (улица Гоголя, 42) — объект культурного наследия федерального значения, двухэтажное, площадью 500,2 кв. м, с лотом идёт аренда участка 0,34 га. Изначально палаты со старинным псковским крыльцом использовались для проживания зажиточной семьи; памятник хорошо сохранился. После реставрации объект можно использовать под гостиницу или ресторан.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "6,95 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "здание солодежни XVII века в Пскове: 500,2 кв. м, аренда участка 0,34 га",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 26 октября, конкурс назначен на 30 октября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261002/pskov-2121718869.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "здание солодежни XVII века в Пскове: 500,2 кв. м, аренда участка 0,34 га",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pskov-2121718869.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pskov-2121718869.html"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "399f5a93f8b7"
+    },
+    "price": {
+     "value_rub": 6950000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "88716e227641"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2766711eda28"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
