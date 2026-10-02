@@ -175,11 +175,17 @@ def channel_ids() -> set:
                 r = httpx.get('%s/api/moderation/channel' % site,
                               params={'token': token}, timeout=20)
                 if r.status_code == 200:
-                    _channel_cache = str(r.json().get('chat_id') or '')
+                    # Оба канала — основной и «Компас - Недвижимость» (2 октября 2026):
+                    # отчёт консоли не должен уйти ни в один из них.
+                    body = r.json()
+                    _channel_cache = ' '.join(str(body.get(k) or '') for k in
+                                              ('chat_id', 'realty_chat_id')).strip()
             except Exception:                               # noqa: BLE001
                 pass
-    if _channel_cache:
-        ids.add(_channel_cache)
+    ids.update(_channel_cache.split())
+    realty_env = (os.environ.get('TELEGRAM_REALTY_CHANNEL_ID') or '').strip()
+    if realty_env:
+        ids.add(realty_env)
     return ids
 
 

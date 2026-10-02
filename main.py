@@ -1182,9 +1182,10 @@ def _channel_chat_ids(db=None) -> set[str]:
     if env:
         ids.add(env)
     if db is not None:
-        row = db.get(AppSetting, CHANNEL_SETTING)
-        if row and row.value:
-            ids.add(str(row.value))
+        for key in (CHANNEL_SETTING, REALTY_CHANNEL_SETTING):
+            row = db.get(AppSetting, key)
+            if row and row.value:
+                ids.add(str(row.value))
     return ids
 
 
@@ -3007,6 +3008,51 @@ _CHANNEL_IDS_TOLD: set[str] = set()
 
 REVIEW_GROUP_SETTING = "telegram_review_group_id"
 CHANNEL_SETTING = "telegram_channel_id"
+# Второй канал — «Компас - Недвижимость» (2 октября 2026). Пока канал был один,
+# любой канал, кроме записанного в окружении, считался ОСНОВНЫМ: владелец
+# добавил бота в новый канал, и сайт записал его адрес в ячейку основного.
+# Публикацию спасла только переменная окружения рутин. Теперь канал узнаётся
+# по названию: «недвижимость» в нём — своя ячейка.
+REALTY_CHANNEL_SETTING = "telegram_channel_id:realty"
+
+
+def _is_realty_channel_title(title) -> bool:
+    return "недвиж" in str(title or "").lower()
+
+
+_CHAT_TITLES: dict[str, str] = {}
+
+
+def _chat_title(chat_id) -> str:
+    """Название чата у самого Telegram (один запрос на адрес за жизнь
+    процесса); сеть молчит — пустая строка."""
+    chat_id = str(chat_id or "").strip()
+    if not chat_id or not os.environ.get("TELEGRAM_BOT_TOKEN", "").strip():
+        return ""
+    if chat_id not in _CHAT_TITLES:
+        answer = notification_service.tg_api("getChat", chat_id=chat_id) or {}
+        if not answer.get("ok"):
+            return ""
+        _CHAT_TITLES[chat_id] = str((answer.get("result") or {}).get("title") or "")
+    return _CHAT_TITLES[chat_id]
+
+
+def _sort_channel_slots(db) -> None:
+    """Канал недвижимости, попавший в ячейку основного, — в свою ячейку.
+    Так 2 октября 2026 и вышло (см. REALTY_CHANNEL_SETTING): ячейка основного
+    держала адрес канала недвижимости, пока не исправили."""
+    main_row = db.get(AppSetting, CHANNEL_SETTING)
+    if not (main_row and main_row.value):
+        return
+    realty_row = db.get(AppSetting, REALTY_CHANNEL_SETTING)
+    if realty_row and realty_row.value and realty_row.value != main_row.value:
+        return
+    if (realty_row and realty_row.value == main_row.value) \
+            or _is_realty_channel_title(_chat_title(main_row.value)):
+        value = main_row.value
+        db.delete(main_row)
+        db.commit()
+        _remember_setting(db, REALTY_CHANNEL_SETTING, value)
 
 
 def _remember_setting(db, key: str, value: str) -> None:
@@ -3280,20 +3326,28 @@ def _announce_channel_id(payload, db=None) -> bool:
     chat_id = str(chat.get("id") or "")
     if not chat_id or chat_id == os.environ.get("TELEGRAM_CHANNEL_ID", "").strip():
         return channel_update
+    realty = _is_realty_channel_title(chat.get("title"))
     if db is not None:
-        _remember_setting(db, CHANNEL_SETTING, chat_id)
+        if realty:
+            _remember_setting(db, REALTY_CHANNEL_SETTING, chat_id)
+            _sort_channel_slots(db)
+        else:
+            _remember_setting(db, CHANNEL_SETTING, chat_id)
     if chat_id not in _CHANNEL_IDS_TOLD:
         _CHANNEL_IDS_TOLD.add(chat_id)
         title = chat.get("title") or "без названия"
+        role = ("Посты о недвижимости пойдут туда; о крупных сделках "
+                "(от 1 млрд ₽) — и туда, и в основной канал, со ссылкой "
+                "друг на друга.\n\n" if realty else "")
         thread = _console_thread_id(db, "info") if db is not None else None
         for target in _review_chat_ids(db):
             notification_service.tg_api(
                 "sendMessage", chat_id=target, disable_web_page_preview=True,
-                text=("\U0001F4E1 Канал «%s» отозвался — адрес запомнили.\n\n"
+                text=("\U0001F4E1 Канал «%s» отозвался — адрес запомнили.\n\n%s"
                       "У закрытого канала нет короткого имени, и постить в него "
                       "можно только по внутреннему номеру. Телеграм назвал его "
                       "сам, сайт его сохранил, публикация подхватит в ближайший "
-                      "прогон — делать ничего не нужно." ) % title,
+                      "прогон — делать ничего не нужно." ) % (title, role),
                 **({"message_thread_id": thread} if thread else {}))
     return channel_update
 
@@ -3379,7 +3433,8 @@ def _ops_numbers() -> dict:
     thin_2026 = [d for d in deals
                  if str(d.get("date") or "").startswith("2026") and lens_len(d) < 400]
     posts = base.get("telegram_posts") or {}
-    published = sum(1 for v in posts.values() if v)
+    realty_posts = base.get("telegram_posts_realty") or {}
+    published = len({k for k, v in posts.items() if v} | {k for k, v in realty_posts.items() if v})
 
     return {
         "deals": len(deals),
@@ -3542,9 +3597,12 @@ def moderation_channel(token: str = "", db=Depends(get_db)):
     """
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
+    _sort_channel_slots(db)
     row = db.get(AppSetting, CHANNEL_SETTING)
+    realty = db.get(AppSetting, REALTY_CHANNEL_SETTING)
     return {"chat_id": row.value if row else None,
-            "updated_at": row.updated_at.isoformat() if row else None}
+            "updated_at": row.updated_at.isoformat() if row else None,
+            "realty_chat_id": realty.value if realty else None}
 
 
 @app.get("/api/moderation/group")

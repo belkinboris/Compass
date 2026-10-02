@@ -53,6 +53,7 @@ sys.path.insert(0, ROOT)                                  # telegram_endpoint в
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import channels                                          # noqa: E402
 import console_topics                                     # noqa: E402
 import format_post                                       # noqa: E402
 import promote                                           # noqa: E402
@@ -167,12 +168,13 @@ def post_message_text(card, companies, rendered=None):
     buttons = format_post.buttons_preview(card)
     text = rendered if rendered is not None else format_post.render(card, companies)
     # Сообщение уходит с разметкой (`send_one(..., html=True)`): пост уже
-    # HTML, а шапку и строку кнопок экранируем сами.
-    return ('📣 [пост %s] — В КАНАЛ, на проверку\n'
+    # HTML, а шапку и строку кнопок экранируем сами. Куда уйдёт пост —
+    # основной канал, канал недвижимости или оба, — решает `channels.py`.
+    return ('📣 [пост %s] — %s, на проверку\n'
             'Ниже — текст поста как он уйдёт подписчикам. Ответ на это '
             'сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n'
             '━━━━━━━━━━━━\n%s%s'
-            % (format_post.esc(card['id']), text,
+            % (format_post.esc(card['id']), channels.destination(card), text,
                '\n\n' + format_post.esc(buttons) if buttons else ''))
 
 

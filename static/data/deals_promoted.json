@@ -221785,6 +221785,674 @@
     }
    },
    "proofread": "2026-10-01"
+  },
+  {
+   "id": "gb3ae9e94",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» выставил на торги здание ночлежного дома в Астрахани",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "АБН 24",
+     "https://abnews.ru/ug/news/astrakhan/2026/10/1/zdanie-astrahanskoj-nochlezhki-xix-veka-prodayut-vmeste-s-zemelnym-uchastkom"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "48,7 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Двухэтажное кирпичное здание бывшего городского ночлежного дома (памятник архитектуры регионального значения) на улице Максаковой, 3, в Астрахани; площадь около 2,7 тыс. кв. м, участок 0,27 га. Дом открыли 28 октября 1891 года в честь 25-летия бракосочетания императора Александра III и императрицы Марии Фёдоровны; заведение предназначалось для мужчин и находилось под наблюдением попечителей и смотрителя. В январе 1919 года домовладение на улицах Старо-Кузнечной и Тевяшевской было муниципализировано. Здание можно приспособить под жилой дом, коммунальные и бытовые службы, амбулаторно-поликлиническое учреждение, культурный или деловой центр либо торговую площадку.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "48,7 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "здание бывшего городского ночлежного дома в Астрахани: около 2,7 тыс. кв. м, участок 0,27 га",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 12 октября, задаток для участия — 4,8 млн ₽.",
+     "source": [
+      "АБН 24",
+      "https://abnews.ru/ug/news/astrakhan/2026/10/1/zdanie-astrahanskoj-nochlezhki-xix-veka-prodayut-vmeste-s-zemelnym-uchastkom"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "здание бывшего городского ночлежного дома в Астрахани: около 2,7 тыс. кв. м, участок 0,27 га",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/ug/news/astrakhan/2026/10/1/zdanie-astrahanskoj-nochlezhki-xix-veka-prodayut-vmeste-s-zemelnym-uchastkom"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/ug/news/astrakhan/2026/10/1/zdanie-astrahanskoj-nochlezhki-xix-veka-prodayut-vmeste-s-zemelnym-uchastkom"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Здание — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "1d2b9cafadbc"
+    },
+    "price": {
+     "value_rub": 48700000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "e90a0852099d"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "0b0881cc90d1"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-02"
+  },
+  {
+   "id": "g45b335fe",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» выставил на торги особняк Треуховых в Шадринске",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053132310"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2,94 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Двухэтажный каменный особняк с обширными подвалами в историческом центре Шадринска (Курганская область), на улице Октябрьской; главный фасад выполнен с элементами неоренессанса — треугольный фронтон с парапетными столбиками, балкон с ажурной кованой решёткой над входом. Дом связан с купеческой семьёй Треуховых: Яким Прохорович Треухов в 1884–1888 годах возглавлял общественный банк Пономарева, владел мукомольной мельницей и торговал хлебом, мукой и бакалеей; Агафья Александровна Треухова была попечительницей детского убежища. После революции имущество семьи муниципализировали в 1920 году; 24–26 ноября 1919 года в здании проходил первый уездный съезд комсомола и размещался уездный комитет РКСМ — об этом напоминает мемориальная доска на фасаде. Продаётся вместе с земельным участком, объект можно использовать в коммерческих целях.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2,94 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "особняк купеческой семьи Треуховых в Шадринске (Курганская область)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Торги назначены на 9 октября 2026 года.",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053132310"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "особняк купеческой семьи Треуховых в Шадринске (Курганская область)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053132310"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053132310"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Особняк — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c9a9af090cd0"
+    },
+    "price": {
+     "value_rub": 2940000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "9cf567b8aaf5"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "8f765e08802f"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-02"
+  },
+  {
+   "id": "g6600b6a4",
+   "date": "2026-10-02",
+   "title": "«Дом.РФ» выставил на торги казармы лейб-гвардии Сводно-Казачьего полка в Павловске",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "170,67 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Комплекс казарм лейб-гвардии Сводно-Казачьего полка постройки 1907–1913 годов в Павловске (Санкт-Петербург) — объекты культурного наследия регионального значения. В составе лота 13 зданий общей площадью 9,66 тыс. кв. м и аренда участка площадью 4,52 га; здания выполнены в едином архитектурном стиле, включают казармы, конюшни, кухни, офицерские флигели и служебные постройки, офицерское собрание построено в 1913 году по проекту архитектора Всеволода Яковлева. В советское время ансамбль сохранял военное назначение и использовался как военный городок. Победитель конкурса обязан провести реставрацию и сохранение зданий; после реставрации имущество можно использовать под крупный гостиничный комплекс или в иных коммерческих целях.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "170,67 млн ₽",
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "комплекс казарм лейб-гвардии Сводно-Казачьего полка в Павловске: 13 зданий, 9,66 тыс. кв. м, аренда участка 4,52 га",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Заявки на участие принимаются до 16 ноября, конкурс назначен на 20 ноября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "комплекс казарм лейб-гвардии Сводно-Казачьего полка в Павловске: 13 зданий, 9,66 тыс. кв. м, аренда участка 4,52 га",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Комплекс зданий — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "66acb8c7fa2b"
+    },
+    "price": {
+     "value_rub": 170670000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "bd42eb88c146"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "367dfcdc9582"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-02"
+  },
+  {
+   "id": "g2a4e8a51",
+   "date": "2026-10-01",
+   "title": "Дмитрий Фомин вошёл в капитал ветеринарной сети «Розовая коза» (экс-«ЗооПорт»)",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2026/10/01/1233258-osnovatel-kliniki-fomina"
+    ],
+    [
+     "Telegram, @dealsma",
+     "https://t.me/dealsma/7427"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Дмитрию Фомину принадлежит 30% долей в ООО «Розовая коза» (зарегистрировано в июне 2026 года), Антону Куликову — 70%, по данным «СПАРК» и подтверждению обеих сторон.",
+    "val": "—",
+    "target_fin": "Выручка сети «ЗооПорт» по итогам 2025 года составила 170 млн ₽ (неточная оценка, по собственным данным); на 2027 год «Розовая коза» планирует выручку 1 млрд ₽.",
+    "fin": "—",
+    "rationale": "Фомин и Куликов планируют консолидировать семь московских ветклиник «ЗооПорт» под брендом «Розовая коза» и довести сеть до 100 точек в течение 3–4 лет (80 формата «у дома», 20 крупных центров со стационаром); ребрендинг завершат до марта 2027 года.",
+    "context": "«ЗооПорт» пять лет назад основал Антон Куликов; сеть из семи ветклиник в Москве оказывает диагностические, хирургические и лабораторные услуги, есть инфекционный стационар и отделение реанимации. Общий объём инвестиций Куликова и Фомина в проект — около 1,5 млрд ₽ (это не цена доли, а планируемые вложения в развитие). Российский рынок ветеринарных услуг в 2025 году оценивался в 65 млрд ₽ (+19% год к году) и остаётся сильно фрагментированным — ни один игрок не занимает даже 2–3% рынка.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Доли в ООО «Розовая коза» распределены так: Дмитрию Фомину принадлежит 30%, Антону Куликову — 70%, по данным «СПАРК».",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта",
+   "buyer_name": "Дмитрий Фомин",
+   "seller": "Антон Куликов",
+   "asset": "30% долей в ООО «Розовая коза» (бывший «ЗооПорт», сеть из семи ветклиник в Москве)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-01",
+     "title": "Сделка завершена",
+     "note": "Сделку подтвердили «Ведомостям» Дмитрий Фомин и Антон Куликов; ветклиники сети сменят название на «Розовую козу», ребрендинг завершат до марта 2027 года.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2026/10/01/1233258-osnovatel-kliniki-fomina"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Здравоохранение"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Дмитрий Фомин",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/articles/2026/10/01/1233258-osnovatel-kliniki-fomina"
+     }
+    ],
+    "target": [
+     {
+      "value": "30% долей в ООО «Розовая коза» (бывший «ЗооПорт», сеть из семи ветклиник в Москве)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/articles/2026/10/01/1233258-osnovatel-kliniki-fomina"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Дмитрий Фомин — физическое лицо, профиля не бывает; его компания «Клиника Фомина» (g253e46f5) стороной этой сделки не является.",
+     "target": "ООО «Розовая коза» зарегистрировано в июне 2026 года, ИНН в источниках не назван — профиль отложен.",
+     "seller": "Антон Куликов — физическое лицо, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": 30.0,
+     "basis": "rule",
+     "card_hash": "77f593932215"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2026-10-01",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "be92467f34ba"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "fa6468a262ec"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "gbcf07c78",
+   "date": "2026-10-02",
+   "title": "«Билайн» выставил на торги часть бизнес-центра на Садовом кольце в Москве",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261002/bilajn-2121696879.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1 млрд ₽ (начальная цена, торги на понижение)",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Лот — часть офисного здания класса B на пересечении 1-й Тверской-Ямской улицы и Садового кольца в Москве (бывший доходный дом братьев Хомяковых, построен в 1880 году, объект культурного наследия регионального значения). На продажу выставлены помещения на мансардном и первом–четвёртом этажах общей площадью 2,9 тыс. кв. м — 29% площади всего здания. Торги проходят по голландской схеме, на понижение.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1 млрд ₽ (начальная цена, торги на понижение)",
+   "seller": "«ВымпелКом» (бренд «Билайн»)",
+   "seller_id": "gd685b926",
+   "asset": "часть офисного здания на 1-й Тверской-Ямской ул. в Москве: 2,9 тыс. кв. м (29% площади здания)",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-02",
+     "title": "Торги объявлены",
+     "note": "Торги по голландской схеме (на понижение) назначены на 21 октября 2026 года; начальная цена лота — немногим более 1 млрд ₽, минимальная — 735 млн ₽.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261002/bilajn-2121696879.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "часть офисного здания на 1-й Тверской-Ямской ул. в Москве: 2,9 тыс. кв. м (29% площади здания)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/bilajn-2121696879.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«ВымпелКом» (бренд «Билайн»)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261002/bilajn-2121696879.html"
+     }
+    ]
+   },
+   "added": "2026-10-02",
+   "reviewed": "2026-10-02",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Часть здания — объект недвижимости, не компания, профиля не бывает."
+    }
+   },
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "8c7ecfd69969"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "8d191b20b2af"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f0ec44927ad0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "40db59f80383"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
@@ -245037,6 +245705,25 @@
    "ind": "ГМК и добыча",
    "desc": "Производитель электросварных стальных труб, пустотелых профилей и водогазопроводных труб, металлообработка. Зарегистрирован в 2018 году; площадка в Дмитрове (Московская область) построена в 2019–2020 годах на 50 га.",
    "kpi": []
+  },
+  "g0c04e87f": {
+   "name": "Русская медная компания (РМК)",
+   "ind": "ГМК и добыча",
+   "desc": "Вертикально интегрированный горно-металлургический холдинг: добыча, обогащение медной руды и производство меди. Основан Игорем Алтушкиным. Юрлицо — ООО «Современные управленческие решения».",
+   "kpi": [],
+   "group": true
+  },
+  "g51c9c9a4": {
+   "name": "Красная руда",
+   "ind": "ГМК и добыча",
+   "desc": "Геологоразведочная компания с лицензиями на поиск золота, меди и твёрдых полезных ископаемых на Алтае и в Красноярском крае. Юрлицо — ООО «Красная руда».",
+   "kpi": []
+  },
+  "gb38c3c8d": {
+   "name": "Дарбшир",
+   "ind": "ГМК и добыча",
+   "desc": "Непубличная холдинговая компания, в периметр которой входят геологоразведочные компании с лицензиями на недра, включая золотоносные участки на Дальнем Востоке и в Красноярском крае. Юрлицо — АО «Дарбшир».",
+   "kpi": []
   }
  },
  "match_keys": {
@@ -253372,7 +254059,10 @@
   "g29877b3a": 163,
   "ga24ad083": 164,
   "g1e37f107": 165,
-  "gf145d639": 166
+  "gf145d639": 166,
+  "gb3ae9e94": 167,
+  "g45b335fe": 169,
+  "g6600b6a4": 171
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -253382,6 +254072,10 @@
   "ge957fc7b-closed": {
    "message_id": 141,
    "at": "2026-09-25T12:25:05+00:00"
+  },
+  "gde4f9941-closed": {
+   "message_id": 170,
+   "at": "2026-10-02T08:09:35+00:00"
   }
  },
  "telegram_digests": {
@@ -253389,6 +254083,11 @@
    "drafted_at": "2026-09-02T12:19:13+00:00",
    "message_id": 76,
    "at": "2026-09-02T13:16:43+00:00"
+  },
+  "2026-09": {
+   "drafted_at": "2026-10-02T07:18:34+00:00",
+   "message_id": 168,
+   "at": "2026-10-02T08:08:00+00:00"
   }
  },
  "consumed_urls": [
