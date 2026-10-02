@@ -1297,13 +1297,71 @@
    ]
   },
   {
-   "draft_id": "d85867950",
-   "title": "Созданы поглощающие метан и водород «молекулярные губки»",
+   "draft_id": "d42189871",
+   "title": "Роспотребнадзор предотвратил 65 млн попыток продажи воды с нарушениями",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/society/news/2026/10/02/1233696-rospotrebnadzor-predotvratil"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d59574445",
+   "title": "Ticketland отменяет сервисный сбор при покупке билетов на культурные события",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-02_ticketland_otmenyaet_servisnyj"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d10403431",
+   "title": "В РФ с начала года предотвратили более 65 млн попыток продажи воды с нарушениями",
    "date": "2026-10-02",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/nauka/28174631"
+     "https://tass.ru/obschestvo/28174871"
     ]
    ],
    "sum": null,
@@ -1325,42 +1383,13 @@
    ]
   },
   {
-   "draft_id": "d79251562",
-   "title": "Роспотребнадзор рассказал о предотвращении продажи воды с нарушениями",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261002/rospotrebnadzor-873891647.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d96116178",
-   "title": "Казармы лейб-гвардии Сводно-Казачьего полка в Павловске выставили на торги",
+   "draft_id": "d47532345",
+   "title": "«Билайн» выставил на торги часть бизнес-центра на Садовом кольце в Москве",
    "date": "2026-10-02",
    "src": [
     [
      "web:realty.ria.ru",
-     "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+     "https://realty.ria.ru/20261002/bilajn-2121696879.html"
     ]
    ],
    "sum": null,
@@ -1375,53 +1404,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d95760884",
-   "title": "Роспотребнадзор рассказал о предотвращении продажи воды с нарушениями",
+   "draft_id": "d51477940",
+   "title": "Контроль за продажей табачной продукции и вейпов установили на Кубани",
    "date": "2026-10-02",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261002/rospotrebnadzor-2121690687.html"
+     "https://ria.ru/20261002/kontrol-2121703427.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d65323406",
-   "title": "В Беговом районе выставили на торги крупное помещение для бизнеса",
-   "date": "2026-10-02",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/10/2/v-moskve-vystavili-na-torgi-krupnoe-pomeshhenie-dlya-biznesa-v-begovom-rajone"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
