@@ -1297,13 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d17681784",
-   "title": "Брокер «Финам» попросил часть клиентов продать бумаги США",
+   "draft_id": "d55547474",
+   "title": "Лукашенко призвал Армению подумать о продажах коньяка при вступлении в ЕС // Лукашенко призвал Армению не торопиться с выходом из ЕАЭС и вступлением в ЕС",
    "date": "2026-10-02",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/02/1233829-finam-poprosil-prodat"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9004988"
     ]
    ],
    "sum": null,
@@ -1318,20 +1318,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финансовые услуги",
+   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d49620167",
-   "title": "Новак: на 80% АЗС в России нефтепродукты продают по сдерживаемым ценам",
+   "draft_id": "d55243416",
+   "title": "Начались активные продажи организованных туров по России на Новый год",
    "date": "2026-10-02",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/02/1233818-novak-na-80"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1119978"
     ]
    ],
    "sum": null,
@@ -1346,20 +1346,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d62284149",
-   "title": "Топливо примерно на 80% АЗС продают по сдерживаемым ценам, заявил Новак",
+   "draft_id": "d87402793",
+   "title": "Politico: Германия против продажи части запасов дизеля в ЕС",
    "date": "2026-10-02",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261002/novak-2121788194.html"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28176555"
     ]
    ],
    "sum": null,
@@ -1374,7 +1374,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
