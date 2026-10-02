@@ -41,9 +41,10 @@ sys.path.insert(0, ROOT)                                  # telegram_endpoint в
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import channels                                           # noqa: E402
 import console_topics                                      # noqa: E402
 import format_post                                        # noqa: E402
-import send_drafts                                        # noqa: E402  (send_targets/send_one/PAUSE)
+import send_drafts                                       # noqa: E402  (send_targets/send_one/PAUSE)
 import send_telegram                                       # noqa: E402  (milestone_candidates)
 import telegram_endpoint                                   # noqa: E402
 
@@ -62,9 +63,10 @@ def milestone_message(deal, event):
     """Черновик вехи в консоль — с разметкой, как пост в канале
     (`send_one(..., html=True)`): шапку и строку кнопок экранируем, текст
     вехи уже HTML. До 25 сентября 2026 владелец видел в консоли сырые теги."""
-    header = ('📌 [веха %s~%s] — В КАНАЛ, на проверку\n'
+    header = ('📌 [веха %s~%s] — %s, на проверку\n'
               'Ниже — пост о новом этапе сделки, как он уйдёт подписчикам.\n'
-              '━━━━━━━━━━━━\n' % (format_post.esc(deal['id']), format_post.esc(event['kind'])))
+              '━━━━━━━━━━━━\n' % (format_post.esc(deal['id']), format_post.esc(event['kind']),
+                                  channels.destination(deal)))
     buttons = format_post.buttons_preview(deal)
     return (header + format_post.render_milestone(deal, event)
             + ('\n\n' + format_post.esc(buttons) if buttons else ''))

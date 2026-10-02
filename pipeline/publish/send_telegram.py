@@ -99,6 +99,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
 import approve  # noqa: E402  (fetch_decisions/consume — тот же мост, что у карточек)
+import channels  # noqa: E402  (куда идёт пост: основной канал, недвижимость или оба)
 import console_topics  # noqa: E402
 import check_post  # noqa: E402
 import format_post
@@ -236,7 +237,70 @@ def edit_message(client, token, chat_id, message_id, text, buttons=None):
         raise TelegramError('editMessageText: %s' % (body.get('description') or r.text[:200]))
 
 
-def channel_address():
+def crosslinked(text, channel, where, addr):
+    """Текст поста для канала `channel` — со ссылкой на его пару в другом
+    канале, если пара есть (`where` — {канал: номер поста})."""
+    other = channels.REALTY if channel == channels.MAIN else channels.MAIN
+    if where.get(other) and addr.get(other):
+        return channels.with_crosslink(text, other, addr[other], where[other])
+    return text
+
+
+def post_to_channels(client, token, addr, route, text, buttons):
+    """Первый пост в каналы `route` по порядку. Возвращает ({канал: номер
+    поста}, ошибка или None) — не бросает: пост, уже вышедший в первом
+    канале, обязан быть записан, даже если второй канал отказал.
+
+    Перекрёстные ссылки: второй пост сразу ссылается на первый (его номер уже
+    известен), а первый правится, чтобы сослаться на второй."""
+    mids = {}
+    for ch in route:
+        try:
+            mids[ch] = post_message(client, token, addr[ch],
+                                    crosslinked(text, ch, mids, addr), buttons)
+        except TelegramError as e:
+            return mids, '%s: %s' % ('канал недвижимости' if ch == channels.REALTY
+                                     else 'основной канал', e)
+    if len(mids) > 1:
+        first = route[0]
+        try:
+            edit_message(client, token, addr[first], mids[first],
+                         crosslinked(text, first, mids, addr), buttons)
+        except TelegramError as e:
+            return mids, 'ссылка на пару в посте %s не добавлена: %s' % (mids[first], e)
+    return mids, None
+
+
+def site_channels():
+    """Адреса каналов, которые сайт услышал от самого Telegram:
+    {'chat_id': основной, 'realty_chat_id': недвижимость} — или {}, если
+    спросить нечем или сайт не ответил."""
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return {}
+    try:
+        import httpx
+        r = httpx.get('%s/api/moderation/channel' % site, params={'token': token}, timeout=20)
+        if r.status_code == 200:
+            return r.json() or {}
+    except Exception as e:                                    # noqa: BLE001
+        print('Адрес канала у сайта не спросить (%s).' % e)
+    return {}
+
+
+def realty_channel_address(site, main_chat):
+    """Канал «Компас - Недвижимость»: переменная `TELEGRAM_REALTY_CHANNEL_ID`
+    -> память сайта -> пусто (тогда посты о недвижимости идут в основной
+    канал, как до 2 октября 2026). Совпал с основным — значит, адреса
+    перепутаны, и такой адрес не годится: два поста подряд в одном канале
+    хуже, чем один."""
+    chat = (os.environ.get('TELEGRAM_REALTY_CHANNEL_ID', '').strip()
+            or str((site or {}).get('realty_chat_id') or '').strip())
+    return '' if chat and chat == str(main_chat or '').strip() else chat
+
+
+def channel_address(site=None):
     """Куда постить. Порядок: переменная окружения -> адрес, который сайт
     услышал от самого Telegram -> пусто.
 
@@ -248,21 +312,18 @@ def channel_address():
     забирает по токену тем же мостом, что и решения модерации. Так адрес не
     надо ни вписывать руками в окружение (оно не доезжает до уже работающих
     сессий рутин), ни держать в публичном репозитории.
+
+    Адрес канала недвижимости основным не считается никогда: 2 октября 2026
+    сайт, услышав новый канал, записал его в ячейку основного — и рутина без
+    переменной окружения отправила бы туда весь поток.
     """
     from_env = os.environ.get('TELEGRAM_CHANNEL_ID', '').strip()
     if from_env and not from_env.startswith('@'):
         return from_env
-    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
-    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
-    if token:
-        try:
-            import httpx
-            r = httpx.get('%s/api/moderation/channel' % site,
-                          params={'token': token}, timeout=20)
-            if r.status_code == 200 and (r.json().get('chat_id') or '').strip():
-                return r.json()['chat_id'].strip()
-        except Exception as e:                                # noqa: BLE001
-            print('Адрес канала у сайта не спросить (%s).' % e)
+    site = site_channels() if site is None else site
+    chat = str(site.get('chat_id') or '').strip()
+    if chat and chat != str(site.get('realty_chat_id') or '').strip():
+        return chat
     if from_env:
         print('ВНИМАНИЕ: адрес канала задан именем (%s), а канал закрытый — '
               'по имени он боту не виден. Сайт адреса пока не знает: напишите '
@@ -714,9 +775,23 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # реальный, воспроизводимый сетевой вызов там, где по докстрингу и
     # тесту (`test_main_without_token_never_touches_network_or_writes`)
     # его быть не должно.
-    chat_id = channel_address() if token else ''
+    site = site_channels() if token else {}
+    chat_id = channel_address(site) if token else ''
+    # КАНАЛ НЕДВИЖИМОСТИ (2 октября 2026, см. `channels.py`). Его посты
+    # записываются в `telegram_posts_realty` — отдельный словарь, а не
+    # вложенность в `telegram_posts`: там значение — голое число или null, и
+    # это читают `main.py`, `accept_card.py` и тесты. Пост, вышедший только в
+    # канале недвижимости, оставляет в `telegram_posts` null — «в основном
+    # канале не публиковался», и всё, что считает очередь первых постов,
+    # видит его обработанным.
+    realty_chat = realty_channel_address(site, chat_id) if token else ''
+    if token and not realty_chat:
+        print('Адрес канала «Компас - Недвижимость» неизвестен — посты о '
+              'недвижимости идут в основной канал, как раньше.')
+    addr = {channels.MAIN: chat_id, channels.REALTY: realty_chat}
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
+    realty_posts = data.get('telegram_posts_realty') or {}
     milestones = data.setdefault('telegram_milestones', {})
     comps = data['companies']
     updates_by_id = load_today_updates()
@@ -766,6 +841,15 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     to_send, to_edit, to_seed, needs_review, needs_acceptance = [], [], [], [], []
     for deal in data['deals']:
         did = deal['id']
+        # Уже вышедший пост (в любом из каналов) только правится — там, где
+        # он вышел. `where` — {канал: номер поста}.
+        where = {ch: mid for ch, mid in ((channels.MAIN, posts.get(did)),
+                                         (channels.REALTY, realty_posts.get(did))) if mid}
+        if where:
+            changes = updates_by_id.get(did)
+            if changes:
+                to_edit.append((did, where, format_post.render(deal, comps, updates=changes)))
+            continue
         if did in posts:
             if not posts[did]:
                 # `null` — сделка засеяна как бэклог (см. seed_telegram_posts_backlog.py):
@@ -797,11 +881,6 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                     else:
                         text = initial_post_text(deal, comps)
                         to_send.append((did, text))
-                continue
-            changes = updates_by_id.get(did)
-            if changes:
-                text = format_post.render(deal, comps, updates=changes)
-                to_edit.append((did, posts[did], text))
         elif deal.get('no_post'):
             # Решение модерации «карточка без поста»: сайт получает карточку,
             # канал молчит. Засеваем состояние как бэклог (None) — если позже
@@ -935,12 +1014,16 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     show_full_texts = not write or not token or not chat_id
     if show_full_texts and (to_send or to_edit or to_send_m):
         print('\nТЕКСТЫ ДЛЯ ПРОВЕРКИ ПЕРЕД ОТПРАВКОЙ:')
+        deals_by_id_ = {d['id']: d for d in data['deals']}
+
+        def where_to(deal):
+            return channels.destination(deal) if realty_chat or not token else 'В КАНАЛ'
         for did, text in to_send:
-            print('\n--- новый пост: %s ---\n%s' % (did, text))
+            print('\n--- новый пост: %s · %s ---\n%s' % (did, where_to(deals_by_id_[did]), text))
         for did, _mid, text in to_edit:
             print('\n--- правка поста: %s ---\n%s' % (did, text))
         for deal, event, text in to_send_m:
-            print('\n--- веха: %s ---\n%s' % (event['id'], text))
+            print('\n--- веха: %s · %s ---\n%s' % (event['id'], where_to(deal), text))
         print('\nПрочитайте тексты выше. Пост со смысловой чушью (сторона не похожа на '
              'сторону, предложение обрывается на полуслове, число явно не к месту, факт из '
              'чужого абзаца) не отправляйте: перечислите такие id в `--skip <id> [<id>…]` и '
@@ -1048,33 +1131,54 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             time.sleep(SPREAD_S if (kind in ('send', 'milestone') and prev_kind in ('send', 'milestone'))
                       else SEND_DELAY_S)
         prev_kind = kind
-        try:
-            buttons = format_post.render_buttons(deals_by_id.get(did) or {'id': did})
+        deal = deals_by_id.get(did) or {'id': did}
+        buttons = format_post.render_buttons(deal)
+        if kind in ('send', 'milestone'):
+            text = payload if kind == 'send' else payload[1]
+            route = channels.channels_for(deal, realty_known=bool(realty_chat))
+            mids, error = post_to_channels(client, token, addr, route, text, buttons)
+            if error:
+                failed.append((did, error))
+            if not mids:
+                continue
+            # Записываем то, что УЖЕ вышло, даже если второй канал упал:
+            # иначе следующий прогон повторил бы пост в первом.
             if kind == 'send':
-                posts[did] = post_message(client, token, chat_id, payload, buttons)
+                posts[did] = mids.get(channels.MAIN)
+                if channels.REALTY in mids:
+                    realty_posts[did] = mids[channels.REALTY]
                 sent += 1
-            elif kind == 'milestone':
-                event, text = payload
-                mid = post_message(client, token, chat_id, text, buttons)
-                milestones[event['id']] = {'message_id': mid,
-                                           'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+            else:
+                record = {'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+                if channels.MAIN in mids:
+                    record['message_id'] = mids[channels.MAIN]
+                if channels.REALTY in mids:
+                    record['realty_message_id'] = mids[channels.REALTY]
+                milestones[payload[0]['id']] = record
                 milestoned += 1
-            else:
-                mid, text = payload
-                edit_message(client, token, chat_id, mid, text, buttons)
-                edited += 1
-        except TelegramError as e:
-            # П4-10: удалённый из канала пост (человек убрал его руками — ни
-            # один наш скрипт message_id не трогает) — не такая же ошибка, как
-            # сбой сети или неверный токен. Раньше ЛЮБАЯ TelegramError на
-            # правке просто копилась в общий список и терялась в потоке
-            # отчёта; отдельный список и явная формулировка нужны, чтобы
-            # рутина не пропустила вопрос, требующий решения человека
-            # (перепостить или пометить «без поста»), среди обычных ошибок.
-            if kind == 'edit' and is_message_gone(str(e)):
-                deleted.append((did, payload[0]))
-            else:
-                failed.append((did, str(e)))
+            continue
+        where, text = payload
+        done = False
+        for ch, mid in where.items():
+            if not addr.get(ch):
+                failed.append((did, 'адрес канала «%s» неизвестен — правка поста %s не сделана' % (ch, mid)))
+                continue
+            try:
+                edit_message(client, token, addr[ch], mid,
+                             crosslinked(text, ch, where, addr), buttons)
+                done = True
+            except TelegramError as e:
+                # П4-10: удалённый из канала пост (человек убрал его руками —
+                # ни один наш скрипт message_id не трогает) — не такая же
+                # ошибка, как сбой сети или неверный токен. Отдельный список и
+                # явная формулировка нужны, чтобы рутина не пропустила вопрос,
+                # требующий решения человека (перепостить или пометить «без
+                # поста»), среди обычных ошибок.
+                if is_message_gone(str(e)):
+                    deleted.append((did, mid, ch))
+                else:
+                    failed.append((did, str(e)))
+        edited += done
 
     if digest_failed:
         failed.append(('сводка %s' % digest_key_, digest_failed))
@@ -1084,6 +1188,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     for event_id in m_rejected:
         milestones[event_id] = {'no_post': True,
                                 'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+    if realty_posts:
+        data['telegram_posts_realty'] = realty_posts
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
     # Решения по вехам консуммируются ПОСЛЕ того, как их эффект (сообщение
@@ -1098,11 +1204,13 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         print('  %s: %s' % (did, err))
     if deleted:
         print('УДАЛЁННЫЕ ПОСТЫ (%d) — нужно решение человека, не сбой:' % len(deleted))
-        for did, mid in deleted:
+        for did, mid, ch in deleted:
             title = (deals_by_id.get(did) or {}).get('title', did)
-            print('  пост сделки «%s» (%s, message_id %s) удалён из канала — '
-                 'перепостить (снять message_id из telegram_posts и запустить снова) '
-                 'или пометить «без поста»' % (title, did, mid))
+            store = 'telegram_posts_realty' if ch == channels.REALTY else 'telegram_posts'
+            print('  пост сделки «%s» (%s, message_id %s) удалён из канала%s — '
+                 'перепостить (снять message_id из %s и запустить снова) '
+                 'или пометить «без поста»' % (title, did, mid,
+                                               ' недвижимости' if ch == channels.REALTY else '', store))
 
 
 def parse_skip_ids(argv):

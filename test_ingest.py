@@ -6981,3 +6981,151 @@ def test_a_named_legal_entity_cannot_be_postponed_as_missing_a_profile():
     assert any('Розница К-1' in b for b in bad), bad
     # у физлица причина по-прежнему принимается
     assert not any('seller' in b and 'заведите профиль' in b for b in bad), bad
+
+
+# ---------- Канал «Компас - Недвижимость» (решение владельца 2 октября 2026) ----------
+import channels  # noqa: E402
+
+MAIN_CH, REALTY_CH = "-1001111111111", "-1002222222222"
+
+
+def _realty_deal(did, sum_, status="Закрыта", ind="Недвижимость", type_="M&A"):
+    return {"id": did, "title": "«Ромашка» купила бизнес-центр «Лютик»", "ind": ind,
+            "type": type_, "status": status, "sum": sum_, "date": FRESH_DATE,
+            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+
+
+def _channels_world(monkeypatch, tmp_path, deals, posts=None, realty_posts=None,
+                    updates=None, realty=REALTY_CH):
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = deals
+    real_data["companies"] = {}
+    real_data["telegram_posts"] = posts or {}
+    real_data["telegram_milestones"] = {}
+    real_data.pop("telegram_posts_realty", None)
+    if realty_posts is not None:
+        real_data["telegram_posts_realty"] = realty_posts
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: updates or {})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setattr(send_telegram.time, "sleep", lambda s: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", MAIN_CH)
+    if realty:
+        monkeypatch.setenv("TELEGRAM_REALTY_CHANNEL_ID", realty)
+    else:
+        monkeypatch.delenv("TELEGRAM_REALTY_CHANNEL_ID", raising=False)
+    return tmp_data
+
+
+def _ok(mid=None):
+    return {"ok": True, "result": {"message_id": mid} if mid else {}}
+
+
+def test_small_realty_news_goes_only_to_the_realty_channel(monkeypatch, tmp_path):
+    """Торги «Дом.РФ» на особняк — новость о недвижимости, но не крупная
+    сделка: подписчику основного канала это шум. Пост уходит только в канал
+    недвижимости, а в `telegram_posts` остаётся null — «в основном канале не
+    выходил», и очередь первых постов видит карточку обработанной."""
+    deal = _realty_deal("gR1", "48,7 млн ₽", status="Обсуждается", type_="Продажа с торгов")
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal])
+    fake = _FakeClient([_ok(501)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    assert [(u.rsplit("/", 1)[-1], j["chat_id"]) for u, j in fake.calls] == [("sendMessage", REALTY_CH)]
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gR1"] is None
+    assert written["telegram_posts_realty"] == {"gR1": 501}
+
+
+def test_big_realty_deal_goes_to_both_channels_and_each_post_links_the_other(monkeypatch, tmp_path):
+    """Состоявшаяся сделка с недвижимостью от 1 млрд ₽ — в оба канала. Второй
+    пост сразу ссылается на первый, первый правится, чтобы сослаться на второй."""
+    deal = _realty_deal("gR2", "2 млрд ₽")
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal])
+    fake = _FakeClient([_ok(601), _ok(701), _ok()])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    methods = [(u.rsplit("/", 1)[-1], j["chat_id"]) for u, j in fake.calls]
+    assert methods == [("sendMessage", MAIN_CH), ("sendMessage", REALTY_CH),
+                       ("editMessageText", MAIN_CH)], methods
+    assert "t.me/c/" not in fake.calls[0][1]["text"]
+    assert "https://t.me/c/1111111111/601" in fake.calls[1][1]["text"]
+    assert fake.calls[2][1]["message_id"] == 601
+    assert "https://t.me/c/2222222222/701" in fake.calls[2][1]["text"]
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gR2"] == 601
+    assert written["telegram_posts_realty"]["gR2"] == 701
+
+
+def test_realty_post_goes_to_main_channel_while_realty_address_is_unknown(monkeypatch, tmp_path):
+    """Адреса канала недвижимости нет — пост уходит в основной, как до
+    2 октября 2026: потерять пост хуже, чем выпустить его не в тот канал."""
+    deal = _realty_deal("gR3", "48,7 млн ₽", status="Обсуждается")
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal], realty="")
+    fake = _FakeClient([_ok(801)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    assert [j["chat_id"] for _u, j in fake.calls] == [MAIN_CH]
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"]["gR3"] == 801
+    assert "telegram_posts_realty" not in written
+
+
+def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path):
+    """Новый факт правит пост там, где он вышел, — в обоих каналах, и ссылка
+    на пару при правке не теряется."""
+    deal = _realty_deal("gR4", "2 млрд ₽")
+    _channels_world(monkeypatch, tmp_path, [deal], posts={"gR4": 601},
+                    realty_posts={"gR4": 701}, updates={"gR4": ["появилась сумма"]})
+    fake = _FakeClient([_ok(), _ok()])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    edits = {j["chat_id"]: j for u, j in fake.calls if u.endswith("editMessageText")}
+    assert set(edits) == {MAIN_CH, REALTY_CH}, fake.calls
+    assert edits[MAIN_CH]["message_id"] == 601 and "t.me/c/2222222222/701" in edits[MAIN_CH]["text"]
+    assert edits[REALTY_CH]["message_id"] == 701 and "t.me/c/1111111111/601" in edits[REALTY_CH]["text"]
+
+
+def test_channel_rule_counts_a_deal_sum_but_not_an_auction_start_or_a_rumour():
+    """«Прям сделка и сумма больше миллиарда»: состоялась или подписана, и
+    число в карточке — цена сделки. Стартовая цена торгов — не цена;
+    «Обсуждается» — не сделка; не недвижимость — основной канал."""
+    route = channels.channels_for
+    assert route(_realty_deal("a", "2 млрд ₽")) == ("main", "realty")
+    assert route(_realty_deal("b", "около 1,5 млрд ₽")) == ("main", "realty")
+    assert route(_realty_deal("c", "900 млн ₽")) == ("realty",)
+    assert route(_realty_deal("d", "2 млрд ₽", status="Обсуждается")) == ("realty",)
+    assert route(_realty_deal("e", "стартовая цена 3 млрд ₽", type_="Продажа с торгов")) == ("realty",)
+    assert route(_realty_deal("f", "Не раскрыта")) == ("realty",)
+    assert route(_realty_deal("g", "5 млрд ₽", ind="ИТ и интернет")) == ("main",)
+    assert route(_realty_deal("h", "48 млн ₽"), realty_known=False) == ("main",)
+    converted = dict(_realty_deal("i", "$20 млн"),
+                     facts={"price": {"meaning": "foreign_currency", "value_rub": 1.9e9}})
+    assert route(converted) == ("main", "realty")
+
+
+def test_console_draft_says_which_channel_the_post_goes_to():
+    """Владелец одобряет пост в консоли — и должен видеть, куда он уйдёт."""
+    import send_drafts
+    small = _realty_deal("gR5", "48 млн ₽", status="Обсуждается")
+    big = _realty_deal("gR6", "2 млрд ₽")
+    assert "В КАНАЛ «Компас - Недвижимость»" in send_drafts.post_message_text(small, {}, rendered="текст")
+    assert "В ОБА КАНАЛА" in send_drafts.post_message_text(big, {}, rendered="текст")
+    other = dict(big, ind="ИТ и интернет")
+    assert send_drafts.post_message_text(other, {}, rendered="текст").startswith("📣 [пост gR6] — В КАНАЛ, на проверку")
+
+
+def test_realty_channel_from_the_site_is_never_taken_for_the_main_one(monkeypatch):
+    """2 октября 2026 сайт записал канал недвижимости в ячейку основного.
+    Рутина без переменной окружения не должна принять его за основной."""
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@projectcompassru")
+    monkeypatch.delenv("TELEGRAM_REALTY_CHANNEL_ID", raising=False)
+    site = {"chat_id": REALTY_CH, "realty_chat_id": REALTY_CH}
+    assert send_telegram.channel_address(site) != REALTY_CH
+    site = {"chat_id": MAIN_CH, "realty_chat_id": REALTY_CH}
+    assert send_telegram.channel_address(site) == MAIN_CH
+    assert send_telegram.realty_channel_address(site, MAIN_CH) == REALTY_CH
+    assert send_telegram.realty_channel_address({"realty_chat_id": MAIN_CH}, MAIN_CH) == ""

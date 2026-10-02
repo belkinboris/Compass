@@ -4381,3 +4381,79 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: None)
     again = mod.topic_note("user_notes", today="2026-10-01")
     assert again and "/topic" in again, again
+
+
+def _clear_channel_settings(main_module):
+    from db.session import get_session
+    db = get_session()
+    try:
+        for key in (main_module.CHANNEL_SETTING, main_module.REALTY_CHANNEL_SETTING):
+            row = db.get(main_module.AppSetting, key)
+            if row is not None:
+                db.delete(row)
+        db.commit()
+    finally:
+        db.close()
+
+
+def test_realty_channel_gets_its_own_slot_and_never_replaces_the_main_one(client, monkeypatch):
+    """2 октября 2026 владелец добавил бота во второй канал, «Компас -
+    Недвижимость», и сайт записал его адрес в ячейку ОСНОВНОГО канала: пока
+    канал был один, любой новый считался основным. Публикацию спасла только
+    переменная окружения рутин. Канал с «недвижимостью» в названии — своя
+    ячейка; основной остаётся основным; консоль не пишет ни в один из них."""
+    _mod_env(monkeypatch)
+    import main as main_module
+    _clear_channel_settings(main_module)
+    main_module._CHANNEL_IDS_TOLD.clear()
+    sent = []
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)))
+    try:
+        for mid, chat in ((1, {"id": -1004448538000, "type": "channel", "title": "Проект Компас"}),
+                          (2, {"id": -1003727637000, "type": "channel",
+                               "title": "Компас - Недвижимость"})):
+            r = client.post("/api/telegram/webhook/тайна", json={
+                "channel_post": {"message_id": mid, "chat": chat, "text": "тест"}})
+            assert r.status_code == 200
+        body = client.get("/api/moderation/channel", params={"token": "тайна"}).json()
+        assert body["chat_id"] == "-1004448538000", body
+        assert body["realty_chat_id"] == "-1003727637000", body
+        told = [kw["text"] for m, kw in sent if m == "sendMessage" and "Недвижимость" in kw["text"]]
+        assert told and "о недвижимости" in told[0], told
+        from db.session import get_session
+        db = get_session()
+        try:
+            assert {"-1004448538000", "-1003727637000"} <= main_module._channel_chat_ids(db)
+        finally:
+            db.close()
+    finally:
+        _clear_channel_settings(main_module)
+
+
+def test_realty_channel_stuck_in_the_main_slot_is_moved_to_its_own(client, monkeypatch):
+    """Так база сайта выглядела 2 октября 2026: в ячейке основного канала —
+    адрес канала недвижимости. Сайт спрашивает у Telegram название и
+    перекладывает адрес в свою ячейку, не дожидаясь, пока кто-то напишет в канал."""
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    import main as main_module
+    _clear_channel_settings(main_module)
+    main_module._CHAT_TITLES.clear()
+    monkeypatch.setattr(main_module.notification_service, "tg_api",
+                        lambda method, **kw: {"ok": True, "result": {
+                            "type": "channel", "title": "Компас - Недвижимость"}}
+                        if method == "getChat" else None)
+    from db.session import get_session
+    db = get_session()
+    try:
+        main_module._remember_setting(db, main_module.CHANNEL_SETTING, "-1003727637000")
+    finally:
+        db.close()
+    try:
+        body = client.get("/api/moderation/channel", params={"token": "тайна"}).json()
+        assert body["chat_id"] is None, body
+        assert body["realty_chat_id"] == "-1003727637000", body
+    finally:
+        _clear_channel_settings(main_module)
+        main_module._CHAT_TITLES.clear()
