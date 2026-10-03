@@ -2748,6 +2748,71 @@
    },
    "pending_since": "2026-10-02T14:24:26+00:00",
    "hold_reason": "Лионель Месси купил испанский футбольный клуб «Эльденсе» — иностранная сделка без российского элемента, не рынок M&A."
+  },
+  {
+   "id": "g8928704a",
+   "date": "2026-10-03",
+   "title": "Мужчина в Дагестане получил машины в рассрочку и перепродал их",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/skfo/news/dagestan/2026/10/3/muzhchina-v-dagestane-poluchil-mashiny-v-rassrochku-i-pereprodal-ih"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Мужчина в Дагестане",
+   "asset": "машины в рассрочку и перепродал их",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-03",
+     "title": "Сделка завершена",
+     "note": "Казбековский районный суд вынес приговор местному жителю, которого признали виновным в мошенничестве с двумя автомобилями. Об этом сообщает объединенная пресс-служба судов Дагестана.",
+     "source": [
+      "Abnews.ru",
+      "https://abnews.ru/skfo/news/dagestan/2026/10/3/muzhchina-v-dagestane-poluchil-mashiny-v-rassrochku-i-pereprodal-ih"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Мужчина в Дагестане",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/skfo/news/dagestan/2026/10/3/muzhchina-v-dagestane-poluchil-mashiny-v-rassrochku-i-pereprodal-ih"
+     }
+    ],
+    "target": [
+     {
+      "value": "машины в рассрочку и перепродал их",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/skfo/news/dagestan/2026/10/3/muzhchina-v-dagestane-poluchil-mashiny-v-rassrochku-i-pereprodal-ih"
+     }
+    ]
+   },
+   "pending_since": "2026-10-03T09:22:54+00:00",
+   "hold_reason": "Приговор суда по делу о мошенничестве с двумя автомобилями в Дагестане — уголовное дело частного лица, не сделка M&A."
   }
  ]
 }
