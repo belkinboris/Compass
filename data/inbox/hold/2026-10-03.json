@@ -1295,45 +1295,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d45288099",
-   "title": "В России представили официально отечественную компьютерную мышь — продажи начнутся до конца 2026 года",
-   "date": "2026-10-03",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/v-rossii-predstavili-oficialno-otechestvennuyu-kompyuternuyu-mysh-prodazhi-nachnutsya-do-konca-2026-goda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-03",
-     "title": "Переговоры",
-     "note": "Компьютерную мышь российской компании ICL включили в реестр промышленной продукции Минпромторга. Как сообщил производитель, это подтверждает отечественное происхождение устройства и его соответствие требованиям локализации. Продажи модели планируется начать в…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/v-rossii-predstavili-oficialno-otechestvennuyu-kompyuternuyu-mysh-prodazhi-nachnutsya-do-konca-2026-goda/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
