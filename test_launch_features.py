@@ -4466,3 +4466,11 @@ def test_robots_txt_keeps_robots_out_of_data_and_api(client):
     r = client.get("/robots.txt")
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/plain")
     assert "Disallow: /static/data/" in r.text and "Disallow: /api/" in r.text
+
+
+def test_access_gate_is_off_by_default_since_launch():
+    """3 октября 2026 — запуск для всех: дверь «Войти / Запросить доступ» снята,
+    умолчание ACCESS_GATE — «0» (docs/access_gate.md). Включается обратно только
+    переменной окружения."""
+    src = open(os.path.join(os.path.dirname(__file__), "main.py"), encoding="utf-8").read()
+    assert 'os.environ.get("ACCESS_GATE", "0") == "1"' in src

@@ -3988,3 +3988,19 @@ def test_feed_marks_a_card_with_a_fresh_stage_as_updated(page, base_url):
     assert got["fresh"] is True and got["stale"] is False
     assert "Обновлено" in got["row"] and "Новое" not in got["row"]
     assert got["rows"] == 1
+
+
+def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
+    """Владелец 28 сентября 2026: «такая штука висит минуту и ничего не
+    происходит» — нули с подписью «догружаем базу…». Пока база не пришла,
+    первый экран сам советует отключить VPN."""
+    visit(page, base_url, "#/")
+    page.wait_for_selector(".hero-note")
+    got = page.evaluate("""() => {
+      const was = bulkLoaded; bulkLoaded = false; renderDeals();
+      const loading = document.querySelector('.hero-note').innerText;
+      bulkLoaded = was; renderDeals();
+      return {loading, loaded: document.querySelector('.hero-note').innerText};
+    }""")
+    assert "VPN" in got["loading"] and "догружаем" not in got["loading"], got["loading"]
+    assert "VPN" not in got["loaded"] and "сделок" in got["loaded"], got["loaded"]

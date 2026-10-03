@@ -7148,3 +7148,37 @@ def test_aggregator_moves_to_discovery_when_an_original_source_appears():
     assert card["src"] == [["РБК", "https://www.rbc.ru/business/1"]]
     assert card["discovery_src"] == [["@dealsma (Telegram)", "https://t.me/dealsma/7426"]]
     assert sn.settle_sources(card) is False, "повторный вызов ничего не меняет"
+
+
+# ---------- 3 октября 2026: правила владельца по постам 28–29 сентября ----------
+
+def test_approval_stage_names_the_body():
+    """Этап согласования называет, чьё это согласование — из текста новости."""
+    import draft
+    ev = lambda t: (draft.guess_event({"title": t, "summary": "", "date": "2026-01-01"}) or {}).get("title")
+    assert ev("ФАС одобрила покупку сети «Пеко»") == "ФАС одобрила сделку"
+    assert ev("Президент разрешил «НордЛайн» купить долю в «Арктик СПГ 2»") == "Президент разрешил сделку"
+    assert ev("Правкомиссия одобрила продажу завода") == "Правкомиссия одобрила сделку"
+    assert ev("Компания получила одобрение регулятора на сделку") == "Согласование получено"
+
+
+def test_post_subject_has_no_registry_ids_or_party_narrative():
+    """«Предмет» — что покупают, не «кто что получил»; ИНН/ОГРН в канал не
+    выносятся (владелец, 28–29 сентября 2026)."""
+    deal = {"id": "x", "title": "Тест", "date": "2026-09-01", "status": "Закрыта", "ind": "Ритейл",
+            "type": "M&A", "buyer_name": "ООО «Альфа»", "seller": "Иван Иванов",
+            "asset": "100% ООО «Бета» (магазин) — ИНН 1234567890, ОГРН 1234567890123",
+            "sum": "Не раскрыта",
+            "eco": {"share": "ООО «Альфа» получила 100% в уставном капитале компании, управляющей магазином. "
+                             "Магазин работает с 2010 года."},
+            "src": [["Ъ", "https://www.kommersant.ru/doc/1"]]}
+    text = format_post.render(deal, {})
+    plain = [re.sub(r"<[^>]+>", "", l) for l in text.splitlines()]
+    subject = next(l for l in plain if l.startswith("Предмет"))
+    import check_post
+    assert "ИНН" not in text and "ОГРН" not in text, text
+    assert "получила 100%" not in subject and "100% ООО «Бета»" in subject, subject
+    assert "Магазин работает с 2010 года" in subject, subject
+    assert check_post.check(text) == []
+    bad = check_post.check("Предмет: «УК» получила 100% в капитале — ИНН 1234567890.\nСтатус: Закрыта")
+    assert any("действие стороны" in p for p in bad) and any("ИНН" in p for p in bad), bad
