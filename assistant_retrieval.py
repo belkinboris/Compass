@@ -69,6 +69,15 @@ STOP = set((
     # «почему» → «Почта»). Со страницы компании «Почему так много покупает?»
     # без них становится вопросом о самой компании (2 сентября 2026).
     "почему зачем отчего как так тоже уже еще ещё очень столько такой такая такие "
+    # «Какие сделки вели / совершили / провели?» — глагол вопроса ничего не
+    # ищет, а по общему началу цепляет чужие имена: «вели» → «Великим» в
+    # карточке «Русского молока» (3 октября 2026, вопрос со страницы Ситибанка).
+    "вели вел вёл вела вело провели провел провёл провела совершили совершил совершила "
+    "заключили заключил заключила участвовали участвовал участвовала делали делал делала "
+    # Слова роли и просьбы уточнить — тоже не имена: «покупателя» цеплялось за
+    # «Покупатель …» в сторонах чужой карточки, «детали» — за чужой заголовок.
+    "покупатель покупателя покупателю покупателем покупатели продавец продавца продавцу продавцом продавцы "
+    "уточни уточните уточнить детали деталь подробности подробнее расскажите объясни объясните "
     "последние последних последний последняя последнюю новые новых новая новый свежие недавние "
     # Глаголы сделки стоят в сотнях заголовков — как признак они ничего не
     # различают, а как шум подмешивают к точному попаданию чужие карточки
@@ -1333,6 +1342,54 @@ def _answer_entity(context_type: str | None, context_id: str | None, intent: Int
     return None
 
 
+# «Какие (ещё) сделки вели?» — про сделки сторон, а «что известно о сделке?» —
+# про саму сделку: слово «сделки» в STOP и до терминов не доходит, поэтому
+# читается сам текст вопроса, и только во множественном смысле.
+PARTIES_DEALS_WORDS = re.compile(
+    r"какие\s+(?:ещё\s+|еще\s+|другие\s+)?сделки|(?:ещё|еще|другие|прочие)\s+сделки|"
+    r"сделки\s+(?:вел|совершал|провод|заключал|были|делал)", re.I)
+
+
+def _answer_deal_parties(deal_id: str | None, year: int | None, idx: Index) -> Retrieval | None:
+    """Сделки сторон той сделки, со страницы которой задан вопрос.
+
+    «Какие сделки вели в 2026 году?» на карточке Ситибанка (владелец,
+    3 октября 2026) никого не называет: поиск по словам «сделки» и «вели»
+    попадал в случайную карточку, и модель честно отвечала «нет». Человек же
+    спрашивает о покупателе, продавце и предмете сделки, которую читает, —
+    отвечаем их сделками, за названный год или за всё время."""
+    doc = idx.by_id.get(deal_id or "")
+    if not doc:
+        return None
+    raw = doc.raw or {}
+    seen: set[str] = set()
+    lines: list[str] = []
+    docs: list[Doc] = []
+    period = f" за {year} год" if year else ""
+    for key, role in (("buyer", "покупатель"), ("seller_id", "продавец"),
+                      ("target", "предмет сделки"), ("asset_id", "предмет сделки")):
+        cid = raw.get(key)
+        if not cid or cid in seen or cid not in idx.companies:
+            continue
+        seen.add(cid)
+        name = _company_name(idx.companies, cid)
+        own = sorted(_filter(idx.company_deals.get(cid) or [], year, None), key=lambda d: d.date, reverse=True)
+        if not own:
+            lines.append(f"У компании [{name}](#/companies/{cid}) ({role}) сделок{period} в «Компасе» нет.")
+            continue
+        n = len(own)
+        lines.append(f"[{name}](#/companies/{cid}) ({role}) — {n} {_plural(n, 'сделка', 'сделки', 'сделок')}{period}:")
+        lines += [_line(d) for d in own[:MAX_LISTED]]
+        if n > MAX_LISTED:
+            lines.append(f"…и ещё {n - MAX_LISTED} — на [странице компании](#/companies/{cid}).")
+        docs += [d for d in own if d not in docs]
+    if not seen:
+        return None
+    head = f"Сделки сторон этой сделки{period} по базе «Компаса»:"
+    ordered = [doc] + [d for d in docs if d.id != doc.id]
+    return Retrieval("deal", "\n".join([head] + lines), ordered[:MAX_DEALS_FOR_MODEL], doc.title)
+
+
 def _search_is_specific(intent: Intent, docs: list[Doc], idx: Index) -> bool:
     """Поиск по словам попал во что-то конкретное: хотя бы одно отличительное
     (редкое) слово вопроса стоит в заголовке или сторонах первой найденной
@@ -1390,7 +1447,14 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         "term": _answer_term, "search": _answer_search,
         "recent": _answer_recent, "compare": _answer_compare,
     }
+    # Со страницы сделки «какие сделки …?» или вопрос с годом — про стороны
+    # этой сделки, а не про неё саму (см. _answer_deal_parties).
+    about_parties = context_type == "deal" and (bool(intent.year) or bool(PARTIES_DEALS_WORDS.search(question)))
     if intent.kind == "empty":
+        if about_parties:
+            own = _answer_deal_parties(context_id, intent.year, idx)
+            if own:
+                return own
         own = _answer_entity(context_type, context_id, intent, idx)
         if own:
             return own
@@ -1403,6 +1467,10 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
     # («Кто купил Ситибанк?» со страницы «Яндекса») остаётся ответом на
     # заданный вопрос — сделки страницы лишь добавляются к нему.
     if intent.kind == "search":
+        if about_parties and not _search_is_specific(intent, result.docs, idx):
+            own = _answer_deal_parties(context_id, intent.year, idx)
+            if own:
+                return own
         own = _answer_entity(context_type, context_id, intent, idx)
         if own and own.answer and result.intent == "search" and not _search_is_specific(intent, result.docs, idx):
             merged = own.docs + [d for d in result.docs if d not in own.docs]
