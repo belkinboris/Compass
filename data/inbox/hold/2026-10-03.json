@@ -1295,6 +1295,45 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d65856236",
+   "title": "«Русские все предусмотрели»: в Китае удивились реакции России на планы Турции продать С-400",
+   "date": "2026-10-03",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/3/russkie-vse-predusmotreli-v-kitae-udivilis-reakczii-rossii-na-plany-turczii-prodat-s-400"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-03",
+     "title": "Переговоры",
+     "note": "Россия необычным образом отреагировала на желание Турции продать систему С-400. Такими данными поделились китайские военные аналитики.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/10/3/russkie-vse-predusmotreli-v-kitae-udivilis-reakczii-rossii-na-plany-turczii-prodat-s-400"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
