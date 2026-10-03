@@ -3969,3 +3969,22 @@ def test_prep_buttons_show_a_short_label_in_the_chat(page, base_url):
     page.click("#prepMeeting")
     page.wait_for_selector(".msg.user")
     assert page.locator(".msg.user").first.inner_text().strip() == "Подготовка к встрече: «Яндекс»"
+
+
+def test_feed_marks_a_card_with_a_fresh_stage_as_updated(page, base_url):
+    """Владелец 26 сентября 2026 не нашёл в ленте карточку штаб-квартиры
+    «Швабе»: сделка августа закрылась 25 сентября, а в ленте стояла на своём
+    месте без отметки. Этап моложе недели даёт строке отметку «Обновлено»;
+    второй строки у этапа по-прежнему нет."""
+    visit(page, base_url, "#/")
+    page.wait_for_selector(".deal-row")
+    got = page.evaluate("""() => {
+      const today = new Date().toISOString().slice(0, 10);
+      const fresh = {id:'x1', title:'Т', date:'2026-01-10', added:'2026-01-12', type:'M&A', events:[{date:today, kind:'closed'}]};
+      const stale = {id:'x2', title:'Т', date:'2026-01-10', added:'2026-01-12', type:'M&A', events:[{date:'2026-02-01', kind:'closed'}]};
+      return {fresh: isUpdated(fresh), stale: isUpdated(stale),
+              row: rowHtml.full(fresh), rows: unifiedFeedItems().filter(it => it.rec.id === 'ge957fc7b').length};
+    }""")
+    assert got["fresh"] is True and got["stale"] is False
+    assert "Обновлено" in got["row"] and "Новое" not in got["row"]
+    assert got["rows"] == 1
