@@ -199,3 +199,59 @@ def edition_label(url):
         if username:
             return telegram_channel_label(username)
     return display_name(host)
+
+
+# АГРЕГАТОР — МЕСТО, ГДЕ О СДЕЛКЕ УЗНАЛИ, А НЕ ГДЕ ФАКТ ПОДТВЕРЖДЁН. Правило
+# владельца 3 октября 2026: агрегатор годится, чтобы обнаружить сделку, но
+# не должен показываться читателю как источник факта, если факт подтверждён
+# независимым первоисточником. Отсюда два поля карточки: `src` — источники
+# факта (их видит читатель), `discovery_src` — где узнали (внутреннее, на
+# экран не выводится). Агрегатор остаётся в `src`, только пока он
+# единственный источник: пустой список источников хуже агрегатора.
+#
+# Агрегаторы здесь — mergers.ru и телеграм-каналы, которые пересказывают
+# чужие новости (@dealsma, @LawFirms). Канал самой компании или юрфирмы —
+# первоисточник, и его этот список не касается.
+AGGREGATOR_HOSTS = ('mergers.ru',)
+AGGREGATOR_CHANNELS = ('dealsma', 'lawfirms', 's')
+
+
+def is_aggregator(url):
+    host = host_of(url)
+    if host in AGGREGATOR_HOSTS:
+        return True
+    if host in ('t.me', 'telegram.me'):
+        username = urlparse(str(url)).path.strip('/').split('/')[0].lower()
+        # t.me/s/<канал> — веб-превью канала, тот же канал.
+        if username == 's':
+            parts = urlparse(str(url)).path.strip('/').split('/')
+            username = parts[1].lower() if len(parts) > 1 else ''
+        return username in AGGREGATOR_CHANNELS
+    return False
+
+
+def has_source(card, url):
+    """Ссылка уже у карточки — на виду или в `discovery_src`."""
+    return any(isinstance(s, list) and len(s) > 1 and s[1] == url
+               for s in (card.get('src') or []) + (card.get('discovery_src') or []))
+
+
+def _http_sources(items):
+    return [s for s in (items or []) if isinstance(s, list) and len(s) > 1 and str(s[1]).startswith('http')]
+
+
+def settle_sources(card):
+    """Агрегаторы из `src` — в `discovery_src`, если в `src` есть настоящий
+    источник. Возвращает True, если карточка изменилась. Идемпотентно."""
+    src = card.get('src') or []
+    if not any(not is_aggregator(s[1]) for s in _http_sources(src)):
+        return False
+    moved = [s for s in _http_sources(src) if is_aggregator(s[1])]
+    if not moved:
+        return False
+    card['src'] = [s for s in src if s not in moved]
+    bucket = card.setdefault('discovery_src', [])
+    for s in moved:
+        if s not in bucket:
+            bucket.append(s)
+    return True

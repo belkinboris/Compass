@@ -2652,12 +2652,12 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     у Nextons неизвестных 10 → 3 (у тех трёх источник действительно молчит)."""
     visit(page, base_url, "#/advisors/nextons")
     page.wait_for_selector(".an-card")
-    card = next(c for c in page.locator(".an-card").all() if "За кого выступала" in c.text_content())
+    card = next(c for c in page.locator(".an-card").all() if "Чей консультант" in c.text_content())
     text = card.text_content()
     rows = {r.locator(".an-key").text_content(): int(r.locator(".an-val").text_content())
             for r in card.locator(".an-row").all()}
     assert rows.get("Покупатель", 0) >= 5 and rows.get("Продавец", 0) >= 5, rows
-    assert any(k.startswith("Сама компания") for k in rows), rows
+    assert any(k.startswith("Таргет") for k in rows), rows
     m = re.search(r"Ещё у (\d+) сдел", text)
     assert m and int(m.group(1)) <= 3, text
     assert "сторона не названа" not in text and "известно только" not in text, text
@@ -3692,13 +3692,64 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
 
     page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
     page.wait_for_selector("#prepInterview", timeout=15000)
+    # С 3 октября 2026 кнопка раскрывает панель с полем для резюме (по
+    # желанию) — к ассистенту ведёт «Подготовить».
+    assert page.locator("#interviewPrep").is_hidden()
     page.click("#prepInterview")
+    assert page.locator("#interviewPrep").is_visible()
+    page.click("#interviewGo")
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
     page.wait_for_timeout(1200)
     interview = page.inner_text("body")
     assert "Готовлюсь к собеседованию" in interview
     # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
     assert "работодателя" in interview and "работодателя" not in meeting
+    assert "Моё резюме" not in interview, "пустое резюме не должно попадать в вопрос"
+
+
+def test_firm_page_prepares_for_an_interview_with_a_resume(page, base_url):
+    """Владелец 3 октября 2026: «туда тоже будут собеседоваться (может быть,
+    даже в основном туда)». Кнопка на карточке консультанта, резюме уходит
+    ассистенту вместе с вопросом, и вопрос называет фирму."""
+    visit(page, base_url, "#/advisors/nextons")
+    page.wait_for_selector("#prepInterviewFirm")
+    page.click("#prepInterviewFirm")
+    assert page.locator("#interviewPrep").is_visible()
+    page.fill("#resumeText", "Юрист, 3 года в корпоративной практике, сопровождал покупку доли в ИТ-компании.")
+    page.click("#interviewGo")
+    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
+    page.wait_for_timeout(1200)
+    body = page.inner_text("body")
+    assert "Готовлюсь к собеседованию" in body and "Nextons" in body, body[:600]
+    assert "Моё резюме" in body and "корпоративной практике" in body
+
+
+def test_firm_deals_list_shows_three_and_unfolds_the_rest(page, base_url):
+    """Владелец 3 октября 2026: в списке сделок консультанта — три последние,
+    остальные по кнопке «Все сделки»; в строке только название, цена и
+    отрасль; месяц в дате — словом целиком; цена, которой нет, подписана
+    «Цена не раскрыта», а не просто «Не раскрыта»."""
+    visit(page, base_url, "#/advisors/nextons")
+    page.wait_for_selector("#firmDealsList")
+    rows = page.locator("#firmDealsList .deal-row")
+    total = rows.count()
+    assert total > 3
+    assert sum(1 for i in range(total) if rows.nth(i).is_visible()) == 3
+    dates = [rows.nth(i).locator(".label").first.inner_text() for i in range(3)]
+    assert dates and all(not re.search(r"\b(янв|фев|мар|апр|июн|июл|авг|сен|окт|ноя|дек)\.", d) for d in dates), dates
+    # первые три — самые свежие
+    page.click("#firmDealsToggle")
+    assert sum(1 for i in range(total) if rows.nth(i).is_visible()) == total
+    assert page.locator("#firmDealsToggle").inner_text() == "Свернуть"
+    text = page.inner_text("#firmDealsList")
+    assert "Нет данных" not in text and not re.search(r"(?<!Цена )\bНе раскрыта\b", text), text[:400]
+    # пересказа роли в строке нет — только название, цена, отрасль
+    assert page.locator("#firmDealsList .deal-row:not(.mini) .deal-sub").count() == 0
+    # дисклеймер переехал под список, подсказка «По каждой есть разбор» снята
+    app = page.inner_text("#app")
+    assert "По каждой есть разбор" not in app
+    assert app.index("Учитываются сделки, где фирма названа консультантом") > app.index("Свернуть")
+    assert "чей консультант" in app.lower() and "в каких отраслях" not in app.lower()
 
 
 def test_form_fields_are_16px_on_touch_devices(browser, base_url):

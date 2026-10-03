@@ -1,0 +1,1094 @@
+{
+ "checked": "2026-10-03",
+ "hosts": {
+  "1prime.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "47news.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "74.ru": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, ChatGPT-User",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "abireg.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "abn.agency": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "abnews.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "adindex.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://adindex.ru/conditions.phtml",
+     "text": "Если мы это сделаем, вы должны в однодневный срок снять материал с вашего сайта. - Автоматизированное извлечение информации сайта запрещено."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "agroinvestor.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "akm.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "alrud.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "althausgroup.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "alumnipartners.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "amondsmith.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "amp.rbc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ».",
+     "inherited_from": "rbc.ru"
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "asari.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "asn-news.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "b1.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "banki.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "bcs-express.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "betterchance.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "bfm.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "birchlegal.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "bloomberg.com": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, CCBot, ClaudeBot, Claude-Web, anthropic-ai, Google-Extended, Bytespider, PerplexityBot, Applebot-Extended, Diffbot, cohere-ai, Amazonbot, meta-externalagent, DuckAssistBot",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "business-class.su": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "business-gazeta.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "business-vector.info": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "businesswire.com": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ceelegalmatters.com": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "cls.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "cnews.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "comnews.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "company.rt.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "delcredere.org": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "denuo.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "dgpartners.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "dp.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "elwi.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "epam.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ewdn.com": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "expert.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "fbk-pravo.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "finam.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "finance.mail.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "finance.rambler.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "finversia.ru": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Amazonbot, meta-externalagent",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "fontanka.ru": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, ChatGPT-User",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "forbes.kz": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "forbes.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "frankmedia.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "frankrg.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "gazeta.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "globenewswire.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "gorodn.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "habr.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "if24.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "iidf.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "incrussia.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ingvarr.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "interfax-russia.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "interfax.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "interfax.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "interros.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "investfunds.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "investfuture.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://investfuture.ru/policies/terms-and-conditions",
+     "text": "Запрещается автоматизированный сбор информации/извлечение данных с сайта https://investfuture.ru/ , в т.ч. с использованием инструментов web scraping (парсинг)."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "irishtimes.com": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, ChatGPT-User",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ivanyan.partners": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "iz.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "kkmp.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ko.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "kommersant.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "kuban.rbc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ».",
+     "inherited_from": "rbc.ru"
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "leave-russia.org": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "lenta.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://lenta.ru/legal/",
+     "text": "Запрещается использовать автоматизированные скрипты (программы, боты, краулеры) для сбора информации на Ресурсе и/или взаимодействия с Ресурсом без специального на то разрешения Компании."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "level-legal.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "lgs.law": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "logirus.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "m.business-gazeta.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "mail.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "marketpower.pro": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "marketscreener.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "max.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "medvestnik.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "mergers.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "metalinfo.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "mining.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "moscowtimes.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "mtsbank.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "mv.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "nasdaq.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "neftegaz.ru": {
+   "robots": "блокирует запрос",
+   "robots_note": "",
+   "homepage": "код 468",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "new-retail.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "news.rambler.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "nextons.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "nikolaew.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "nikolskaya.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "nsp.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "o2consult.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "oborot.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "orion-law.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "pharmvestnik.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "pitchbook.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "pravo.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "preqveca.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "price.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "prnewswire.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "pro.rbc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ».",
+     "inherited_from": "rbc.ru"
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "probankrotstvo.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "profashion.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "quote.rbc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ».",
+     "inherited_from": "rbc.ru"
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "rb.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "rbc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ»."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "realty.interfax.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "realty.ria.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "retail.ru": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "Bytespider",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "retailer.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "reuters.com": {
+   "robots": "запрещает всё",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ria.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "rtvi.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://rtvi.com/user-agreement/",
+     "text": "Пользователю при использовании Сайта запрещается: 4.3.1. незаконно загружать, хранить, публиковать, распространять и предоставлять доступ или иным образом использовать интеллектуальную собственность третьих лиц; 4.3.2. использовать без специального на то разрешения Администрации Сайта автоматизированные скрипты (программы) для сбора информации на Сайте и/или взаимодействия с Сайтом и/или сервисами Сайта. 4.3.3. осуществлять незаконные сбор и обработку персональных данных других лиц; 4.3.4. использовать материалы Сайта способами, нарушающими исключительное авторское право Администрации Сайта или третьих лиц на указанные материалы. 4.4."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "ru.themoscowtimes.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ru.wikipedia.org": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "rusprofile.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "rusventure.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "rvc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "sec.gov": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "secretmag.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "shoppers.media": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "sistema.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "smart-lab.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "softline.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "sostav.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "stonebridgelegal.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "tadviser.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.tadviser.ru/a/705962",
+     "text": "Пользователю запрещается: Использовать любые устройства, программы, процедуры, алгоритмы и методы, автоматические устройства или эквивалентные ручные процессы для доступа, приобретения, копирования или отслеживания содержания Сайта."
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "tass.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "techcrunch.com": {
+   "robots": "запрещает ИИ-ботам поимённо",
+   "robots_note": "GPTBot, ChatGPT-User, CCBot, ClaudeBot, Claude-Web, anthropic-ai, Google-Extended, Bytespider, Applebot-Extended, Diffbot, cohere-ai",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "thebell.io": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "нет ответа",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "tmk-group.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "ufa.rbc.ru": {
+   "robots": "не проверить",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [
+    {
+     "url": "https://www.rbc.ru/privacy/",
+     "text": "Запрещается автоматизированное извлечение информации сайта любыми сервисами без официального разрешения АО «РОСБИЗНЕСКОНСАЛТИНГ».",
+     "inherited_from": "rbc.ru"
+    }
+   ],
+   "checked": "2026-10-03"
+  },
+  "ura.news": {
+   "robots": "запрещает всё",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "vademec.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "vc.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "vedomosti.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "vegaslex.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "verba.legal": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "whitesquarepartners.com": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "x5.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "yandex.ru": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  },
+  "zdrav.expert": {
+   "robots": "разрешено",
+   "robots_note": "",
+   "homepage": "ok",
+   "tos": [],
+   "checked": "2026-10-03"
+  }
+ }
+}

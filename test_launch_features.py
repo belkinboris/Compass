@@ -4457,3 +4457,12 @@ def test_realty_channel_stuck_in_the_main_slot_is_moved_to_its_own(client, monke
     finally:
         _clear_channel_settings(main_module)
         main_module._CHAT_TITLES.clear()
+
+
+def test_robots_txt_keeps_robots_out_of_data_and_api(client):
+    """База отдаётся сайтом одним файлом; robots.txt — первое, что видит
+    добросовестный сборщик (см. docs/sources_legal.md, «Права на базу
+    данных»)."""
+    r = client.get("/robots.txt")
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/plain")
+    assert "Disallow: /static/data/" in r.text and "Disallow: /api/" in r.text

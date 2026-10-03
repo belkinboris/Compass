@@ -161,7 +161,6 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hs-in p{color:#A9BDB2;margin-top:18px;max-width:560px;font-size:16px;line-height:1.6}
 /* Приписка про источники: нужна, чтобы цифры выше не читались как «вся статистика
    рынка», но спорить с заголовком по весу она не должна. */
-.hs-in p.hero-fine{margin-top:12px;max-width:640px;font-size:13px;line-height:1.55;color:#8FA79B}
 .hs-cta{display:inline-block;margin-top:32px;padding:15px 34px;background:var(--ivory);color:var(--accent-deep);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;width:fit-content;transition:background .2s,transform .3s var(--ease)}
 .hs-cta:hover{background:#fff;transform:translateY(-2px)}
 .hs-cta.ghost{background:transparent;color:var(--ivory);border:1px solid rgba(243,241,233,.4)}
@@ -204,14 +203,19 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
          height:calc(100% - 76px);overflow:hidden}
   .hs-in h1{font-size:30px}
 }
-/* Обрезанная на полуслове приписка хуже отсутствующей: на низком экране
-   (браузер телеграма — около 640px) от неё оставалось «…у каждой сделки».
-   Числа над ней остаются, а пояснение про источники читатель увидит в
-   подвале и на самих карточках. */
+/* На низком экране (браузер телеграма — около 640px) текст героя должен
+   поместиться целиком вместе с кнопкой: с 3 октября 2026 пояснение про
+   источники — часть основного абзаца (решение владельца: одним текстом,
+   без мелкого шрифта), прятать его нельзя, поэтому на таком экране всё
+   просто становится компактнее. */
 @media(max-width:720px) and (max-height:700px){
-  .hs-in p.hero-fine{display:none}
   .hs-cue{display:none}
   .hs-dots{bottom:calc(env(safe-area-inset-bottom,0px) + 34px)}
+  .hs-in{padding-top:84px}
+  .hs-in .kicker{margin-bottom:14px}
+  .hs-in h1{font-size:26px}
+  .hs-in p{font-size:14px;line-height:1.5;margin-top:12px}
+  .hs-cta{margin-top:18px;padding:12px 26px}
 }
 .top-in{max-width:1120px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:40px}
 /* Имя бренда в шапке — чёрное (--ink). Зелёное пробовали 6 августа и владелец
@@ -1227,6 +1231,12 @@ a.dp-asset-name:hover{color:var(--accent)}
 /* Сравнение компаний: выбор хранится в браузере, поэтому работает и до входа.
    Финансовые показатели подтягиваются из уже синхронизированной локальной БД. */
 .company-tools{margin-top:-12px;margin-bottom:28px}
+.interview-prep{margin:-14px 0 28px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.interview-prep p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:8px 0 12px;max-width:72ch}
+.interview-prep textarea{width:100%;min-height:150px;padding:12px 14px;font-size:16px;line-height:1.5;font-family:var(--f-sans);color:inherit;background:transparent;border:1px solid var(--line);border-radius:10px;resize:vertical}
+.interview-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.interview-actions span{font-size:12.5px;color:var(--muted);line-height:1.5;max-width:60ch}
+.interview-actions .chip{cursor:pointer}
 /* ---------- анализатор регуляторики ---------- */
 .reg{margin-top:26px;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:var(--paper)}
 .reg .label{display:block;margin-bottom:12px;color:var(--bronze)}
@@ -4470,15 +4480,14 @@ function renderDeals(){
   <div class="heroslider">
     <div class="hs-slide on">${HERO_SVG}
       <div class="hs-in">
-        <div class="kicker">Сделки на российском рынке</div>
-        <h1>Сделки российского рынка – <em>со ссылками на первоисточники</em></h1>
-        <p>Каждую сделку разбираем с двух сторон — экономической и юридической. Пишем только то, что раскрыто публично, и не заполняем пустоту догадками: не назвали сумму или консультантов — значит, этого поля не будет.</p>
+        <div class="kicker">Сделки</div>
+        <h1>Сделки – <em>со ссылками на первоисточники</em></h1>
+        <p>Информация агрегируется из публичных источников — сообщений сторон, публикаций консультантов и деловых СМИ. База содержит только публично раскрытую информацию; у каждой сделки есть ссылка на источник. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
           : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
         }</div>
-        <p class="hero-fine">Источники — сообщения сторон, публикации консультантов и деловые СМИ; у каждой сделки есть ссылка. Это не вся статистика рынка: здесь только то, что раскрывалось публично. Названия сторон мы приводим так, как их раскрыли источники, — это не юридически выверенные реквизиты. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CITY}
@@ -5036,7 +5045,7 @@ function timelineHtml(d){
   const rows=dealEvents(d);
   if(rows.length<2) return "";
   const latest=rows[rows.length-1], previous=rows.slice(0,-1).reverse();
-  return `<div class="deal-progress reveal"><span class="label">Ход сделки</span>
+  return `<div class="deal-progress reveal"><span class="label">Этапы сделки</span>
     <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
     ${previous.length?`<button class="progress-toggle" id="historyToggle" type="button" aria-expanded="false" aria-controls="historyList"><svg class="chev" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Показать предыдущие этапы (${previous.length})</span></button>
       <div class="progress-history" id="historyList" hidden>${previous.map(e=>progressRowHtml(d,e,false)).join("")}</div>`:""}
@@ -5212,7 +5221,7 @@ function relatedList(d){
 }
 function relatedHtml(d){
   const all = relatedList(d);
-  const rel = all.slice(0,5);
+  const rel = all.slice(0,3);
   // Отрасль «Не определена» — не отрасль, а признание, что мы её не знаем:
   // уводить читателя в «Все сделки отрасли «Не определена»» бессмысленно.
   const indLink = (d.ind && d.ind!=="Не определена") ? `#/ind/${encodeURIComponent(d.ind)}` : "";
@@ -5236,7 +5245,7 @@ function relatedHtml(d){
         undisclosed(o.x.sum)?fmtDate(o.x.date):sumHtml(o.x.sum), share(o.x)
       ].filter(Boolean).join(" · ")} · <span style="color:var(--muted);font-weight:400">${why(o)}</span></span>
     </a>`).join("")}
-    <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только сделки с общей стороной или общей темой${all.length>5?`; показаны 5 из ${all.length}`:""}. Порядок — по числу совпадений, затем по свежести.${indLink?` <a class="inline-link" href="${indLink}">Вся отрасль «${d.ind}» списком</a>.`:""}</p>
+    ${indLink?`<div style="margin-top:14px"><a class="chip" href="${indLink}">Отрасль: ${d.ind}</a></div>`:""}
   </div>`;
 }
 
@@ -5669,9 +5678,6 @@ function renderDeal(id, qs, previewCard){
     <button class="chip" id="fixdeal">Уточнить или дополнить</button>
     <div class="tool-note" id="dealtoolnote"></div>
   </div>
-  <!-- Строка про правки стоит именно здесь, у источников: человек, который знает
-       сделку изнутри, дочитывает до первоисточников и там же видит, куда писать. -->
-  <p class="src-fix reveal">Мы собираем сделки из публичных источников и можем ошибаться. Если вы вели эту сделку или были её стороной — напишите, поправим и укажем источник.</p>
   ${COMMENTS_ENABLED?`<div class="comments reveal" id="comments-mount"></div>`:""}
   ${miniAIHtml("Уточните детали этой сделки…")}`;
   /* B3: до переключения линза не сообщала о себе ничего, кроме одного слова на
@@ -5679,10 +5685,10 @@ function renderDeal(id, qs, previewCard){
      телефоне его не существует. Строка под линзами говорит, что показывает
      текущая, и что значит приглушённая кнопка. */
   const LENS_HINT = {
-    overview: "Обзор: стороны, предмет сделки, сумма и команда — главное на одном экране.",
+    overview: "Обзор: основная информация о сделке.",
     // без «мультипликаторов»: они есть у 14 карточек из 1352 (1%), обещать их
     // в подписи к линзе — обещать то, чего почти нигде нет
-    eco: "Экономист: сумма и доля, оценка, показатели актива, цель сделки.",
+    eco: "Экономист: сумма, контекст, показатели актива, цель сделки.",
     law: "Юрист: согласования, условия сделки (заверения, гарантии, возмещение потерь) и юридические консультанты.",
   };
   // Раньше пустая вкладка оставалась видна, приглушённой, и подпись объясняла
@@ -6017,7 +6023,7 @@ function renderDeal(id, qs, previewCard){
       ${sumState(d.sum)==="undisclosed"
         ? `<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`
         : sumState(d.sum)==="unknown"
-          ? `<p class="fact-note">Суммы в наших источниках нет. Могли ли стороны назвать её где-то ещё, мы не проверяли — поэтому и не пишем, что она не раскрыта.</p>`
+          ? `<p class="fact-note">В публичных источниках отсутствует информация о цене сделки.</p>`
           : ""}
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
@@ -7257,6 +7263,7 @@ function renderCompany(id){
     })()}
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip primary" id="prepMeeting">Подготовка к встрече</button><button class="chip" id="prepInterview">Подготовка к собеседованию</button><button class="chip" id="followCompany">${isFollowed(id)?"Не следить за компанией":"Следить за сделками компании"}</button><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
+  ${interviewPanelHtml()}
   <div class="company-profile-meta reveal">
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
@@ -7301,13 +7308,12 @@ function renderCompany(id){
     + `покупатель, продавец или предмет сделки, с какими консультантами работала и `
     + `что видно по её отчётности. В конце назови три-четыре вопроса, которые стоит `
     + `задать на встрече.`);
-  const prepInterview = document.getElementById("prepInterview");
-  if(prepInterview) prepInterview.onclick = () => askAssistant(
+  bindInterviewPrep("prepInterview", resume => interviewQuestion(
     `Готовлюсь к собеседованию в компанию «${c.name}». Расскажи коротко: чем она `
     + `занимается и какого масштаба, кому принадлежит, что происходило с ней в `
     + `последние годы — покупки, продажи, смена собственников, — и что видно по её `
     + `отчётности. В конце назови, на что обратить внимание и что стоит уточнить у `
-    + `работодателя.`);
+    + `работодателя.`, resume, "компанией"));
   const followButton=document.getElementById("followCompany");
   if(followButton) followButton.onclick=async()=>{
     followButton.disabled=true;
@@ -7397,16 +7403,12 @@ function renderAdvisors(){
         <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
       </g>
     </svg>
-    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты, названные в публичных источниках по сделкам. Перечень идёт по алфавиту; переключатель справа показывает, у кого в базе больше сделок.</p></div>
+    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Перечень юридических и инвестиционных консультантов по публичным данным. Консультанты раскрывают не все проекты, и ноль сделок в базе не означает, что консультант не сопровождал какие-либо сделки.</p></div>
   </div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
     <button data-t="other" class="${advType==="other"?"on":""}">Иные</button>
-  </div>
-  <div class="notice reveal">
-    <div style="font-weight:600;color:var(--bronze)">ⓘ</div>
-    <div>Здесь показано, в скольких карточках базы фирма названа консультантом со ссылкой на публичный источник. Это не рейтинг: фирмы раскрывают не все проекты, и ноль сделок в базе не означает, что их не было.</div>
   </div>
   ${body}
   <!-- Обращение к самим фирмам. Стоит ПОСЛЕ списка, а не перед ним: сначала
@@ -7489,8 +7491,8 @@ function firmSummaryHtml(id, full, mini, bulk){
      одно и то же, обязаны читать один предикат. Третий ответ — «сама
      компания»: у IPO, обмена акций, выкупа своих бумаг покупателя и продавца
      нет, фирма ведёт эмитента. */
-  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Сама компания", bank:"Организаторы и кредиторы"};
-  const SIDE_HINT = {target:"«Сама компания» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
+  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы"};
+  const SIDE_HINT = {target:"«Таргет» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
                      bank:"«Организаторы и кредиторы» — банки-организаторы размещения, андеррайтеры, банки-кредиторы."};
   const roles = {};
   let noSide = 0;
@@ -7511,18 +7513,15 @@ function firmSummaryHtml(id, full, mini, bulk){
   return `
   <div class="an-grid" style="margin-top:0;margin-bottom:30px">
     <div class="an-card reveal">
-      <span class="label">В каких отраслях</span>
+      <span class="label">Отрасли</span>
       ${bar(topInds.slice(0,7), topInds[0][1])}
-      ${note(topInds.length===1
-        ? `Все сделки фирмы в базе — в одной отрасли.`
-        : `${topInds.length} ${plural(topInds.length,"отрасль","отрасли","отраслей")} по сделкам, которые попали в базу. Это не весь профиль практики: фирмы раскрывают не все проекты.`)}
     </div>
     ${topRoles.length?`
     <div class="an-card reveal">
-      <span class="label">За кого выступала</span>
+      <span class="label">Чей консультант</span>
       ${bar(topRoles, topRoles[0][1])}
       ${note([roles[SIDE_LABEL.target]?SIDE_HINT.target:"", roles[SIDE_LABEL.bank]?SIDE_HINT.bank:"",
-              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} источник не уточняет, чью сторону вела фирма.`
+              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} источник не уточняет, чьим консультантом выступала фирма.`
                      : `Сторона известна по каждой сделке фирмы.`].filter(Boolean).join(" "))}
     </div>`:""}
     ${repeat.length?`
@@ -7547,55 +7546,119 @@ function renderFirm(id){
       ${f.site?`<a href="${f.site}" target="_blank" rel="noopener"><b>Сайт фирмы ↗</b></a>`:""}
     </div>
   </div>
+  <div class="deal-tools company-tools reveal"><button class="chip primary" id="prepInterviewFirm" type="button">Подготовка к собеседованию</button></div>
+  ${interviewPanelHtml()}
   <div class="facts reveal" style="margin-bottom:30px">
-    <div class="fact"><span class="label">Сделок в базе «Компаса»</span><div class="val big num">${full.length+mini.length+bulk.length}</div>
-      ${/* Часть сделок в списке ниже — без разбора, только заголовок и ссылка.
-           Говорим это словами, которые пользователь сверит со списком, а не
-           через наше внутреннее деление на «подробные» и «краткие». */""}
-      <span class="note">${(full.length+mini.length+bulk.length)
-        ? ((mini.length+bulk.length)
-            ? `У ${mini.length+bulk.length} из них известны только заголовок и источник.`
-            : "По каждой есть разбор: стороны, сумма, консультанты.")
-        : "Пока ни одной."}</span></div>
-    <div class="fact wide" style="display:flex;align-items:center"><span style="color:var(--muted);font-size:13px">Учитываются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты, поэтому список может неполно отражать реальное количество сделок.</span></div>
+    <div class="fact"><span class="label">Сделок в базе «Компаса»</span><div class="val big num">${full.length+mini.length+bulk.length}</div></div>
   </div>
   ${firmSummaryHtml(id, full, mini, bulk)}
   ${listFilterHtml("firmDealsFilter", [...full.map(d=>({date:d.date, inds:dealIndustries(d)})), ...mini, ...bulk])}
-  ${full.map(d=>{
-    const rx = firmRx(id);
-    const finadv = (d.eco&&d.eco.finadv)||"";
-    const role = (d.law&&d.law.adv||[]).find(a=>rx.test(a[1])) || (rx.test(finadv)?["Финансовый консультант","",finadv]:null);
-    return `
-  <a class="deal-row reveal" href="#/deal/${d.id}" ${lfAttrs("firmDealsFilter", {date:d.date, inds:dealIndustries(d)})}>
-    <div><span class="label num">${fmtDate(d.date)}</span></div>
-    <div>
-      <div class="deal-title" style="font-size:17px">${d.title}</div>
-      <div class="deal-sub">${role?role[0]:""}${role&&advCleanNote(role[2])?` — ${advCleanNote(role[2])}`:""}</div>
-    </div>
-    ${dealMetaHtml(d)}
-  </a>`;}).join("")}
-  ${mini.map(m=>`
-  <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener">
-    <div><span class="label num">${fmtDate(m.date)}</span><br><span class="status">Кратко</span></div>
-    <div>
-      <div class="deal-title" style="font-size:16.5px">${m.title}</div>
-      <div class="deal-sub">${m.role} · источник: ${m.src[0]} ↗</div>
-    </div>
-    <div class="deal-meta"><span class="tag steel">${m.ind}</span></div>
-  </a>`).join("")}
-  ${bulk.map(b=>`
-  <a class="deal-row mini reveal" href="${(b.src&&b.src[1])||'#'}" target="_blank" rel="noopener">
-    <div><span class="label num">${fmtDate(b.date)}</span><br><span class="status">Кратко</span></div>
-    <div>
-      <div class="deal-title" style="font-size:16.5px">${b.title}</div>
-      <div class="deal-sub">${b.role||""}${b.src?` · источник: ${b.src[0]} ↗`:""}</div>
-    </div>
-    <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
-  </a>`).join("")}
-  ${(full.length+mini.length+bulk.length)?"":firmEmptyHtml(f,isLegal)}
+  ${firmDealsListHtml(full, mini, bulk)}
+  ${(full.length+mini.length+bulk.length)
+    ? `<p class="reveal" style="font-size:13px;color:var(--muted);line-height:1.6;max-width:72ch;margin:22px 0 0">Учитываются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты, поэтому список может неполно отражать реальное количество сделок.</p>`
+    : firmEmptyHtml(f,isLegal)}
   ${miniAIHtml("Спросите о сделках этого консультанта…")}`;
   bindListFilter("firmDealsFilter");
+  bindFirmDealsMore();
+  bindInterviewPrep("prepInterviewFirm", resume => interviewQuestion(
+    `Готовлюсь к собеседованию в ${isLegal?"юридическую фирму":"инвестиционную компанию"} «${f.n}». `
+    + `Расскажи коротко по базе «Компаса»: какие сделки она сопровождала и в какой роли — `
+    + `за покупателя, продавца или эмитента, в каких отраслях работает чаще всего, какие `
+    + `компании встречаются в её сделках не по одному разу. В конце назови, на что обратить `
+    + `внимание и что стоит уточнить у работодателя.`, resume, "фирмой"));
   mountMiniAI(f.n,"advisor",id);
+}
+/* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
+   на собеседование идут не только в компании, но и к консультантам («может
+   быть, даже в основном туда»), и ассистенту полезно знать, с каким опытом
+   человек идёт. Панель раскрывается под кнопкой, на самой странице (не
+   модальное окно — см. правило про диалоги вне #app), резюме — по желанию.
+   Текст уходит ассистенту вместе с вопросом и у вошедшего остаётся в его
+   истории диалогов, как любой вопрос, — об этом сказано рядом с полем. */
+const RESUME_MAX = 3000;
+const interviewPanelHtml = () => `
+  <div class="interview-prep reveal" id="interviewPrep" hidden>
+    <span class="label">Подготовка к собеседованию</span>
+    <p>Вставьте текст резюме — ассистент сопоставит ваш опыт с тем, что известно о сделках и роли на рынке. Поле можно оставить пустым.</p>
+    <textarea id="resumeText" maxlength="${RESUME_MAX}" placeholder="Опыт, образование, проекты — своими словами или текстом из резюме"></textarea>
+    <div class="interview-actions"><button class="chip primary" id="interviewGo" type="button">Подготовить</button>
+      <span>Текст уйдёт ассистенту вместе с вопросом и, если вы вошли, останется в вашей истории диалогов. Не указывайте паспортные данные и контакты.</span></div>
+  </div>`;
+const interviewQuestion = (base, resume, withWhom) => resume
+  ? `${base}\n\nМоё резюме:\n${resume}\n\nСопоставь мой опыт с ${withWhom}: какие пункты резюме стоит подчеркнуть на собеседовании и чего мне не хватает знать о ней.`
+  : base;
+function bindInterviewPrep(buttonId, buildQuestion){
+  const btn = document.getElementById(buttonId), panel = document.getElementById("interviewPrep");
+  if(!btn || !panel) return;
+  const area = panel.querySelector("textarea");
+  btn.onclick = () => {
+    panel.hidden = !panel.hidden;
+    if(!panel.hidden){ panel.classList.add("in"); area.focus(); }
+  };
+  document.getElementById("interviewGo").onclick = () => {
+    sessionStorage.setItem("pendingQ", buildQuestion(area.value.trim().slice(0, RESUME_MAX)));
+    location.hash = "#/assistant";
+  };
+}
+/* СПИСОК СДЕЛОК ФИРМЫ: ТРИ ПОСЛЕДНИЕ, ОСТАЛЬНЫЕ — ПО КНОПКЕ. Решение
+   владельца 3 октября 2026: в строке только название, цена и отрасль, без
+   пересказа роли — подробности в карточке. Дата — месяцем целиком. Цена,
+   которой нет, подписывается «Цена не раскрыта», а не «Не раскрыта»: иначе
+   непонятно, что именно не раскрыто. Короткие записи (только заголовок и
+   ссылка на источник) идут в том же списке по дате: у них нет цены, и строка
+   честно показывает лишь отрасль и источник. */
+const FIRM_DEALS_PREVIEW = 3;
+const fmtDateLong = d => d==="unknown" ? "Дата уточняется"
+  : /^\d{4}$/.test(String(d)) ? String(d)+" год"
+  : /^\d{4}-\d{2}$/.test(String(d)) ? fmtMonthYear(d)
+  : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"}).replace(" г.","");
+function firmDealsListHtml(full, mini, bulk){
+  const sortKey = x => x.date==="unknown" ? "" : String(x.date||"");
+  const rows = [
+    ...full.map(d=>({date:d.date, html:`
+  <a class="deal-row reveal" href="#/deal/${d.id}" ${lfAttrs("firmDealsFilter", {date:d.date, inds:dealIndustries(d)})}>
+    <div><span class="label num">${fmtDateLong(d.date)}</span></div>
+    <div><div class="deal-title" style="font-size:17px">${d.title}</div></div>
+    <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${undisclosed(d.sum)?"Цена не раскрыта":dealSumHtml(d)}</div><div class="deal-tags">${industryTagsHtml(d)}</div></div>
+  </a>`})),
+    ...mini.map(m=>({date:m.date, html:`
+  <a class="deal-row mini reveal" href="${m.src[1]}" target="_blank" rel="noopener" ${lfAttrs("firmDealsFilter", m)}>
+    <div><span class="label num">${fmtDateLong(m.date)}</span><br><span class="status">Кратко</span></div>
+    <div>
+      <div class="deal-title" style="font-size:16.5px">${m.title}</div>
+      <div class="deal-sub">источник: ${m.src[0]} ↗</div>
+    </div>
+    <div class="deal-meta"><span class="tag steel">${m.ind}</span></div>
+  </a>`})),
+    ...bulk.map(b=>({date:b.date, html:`
+  <a class="deal-row mini reveal" href="${(b.src&&b.src[1])||'#'}" target="_blank" rel="noopener" ${lfAttrs("firmDealsFilter", b)}>
+    <div><span class="label num">${fmtDateLong(b.date)}</span><br><span class="status">Кратко</span></div>
+    <div>
+      <div class="deal-title" style="font-size:16.5px">${b.title}</div>
+      ${b.src?`<div class="deal-sub">источник: ${b.src[0]} ↗</div>`:""}
+    </div>
+    <div class="deal-meta"><span class="tag bronze">${b.ind}</span></div>
+  </a>`})),
+  ].sort((a,b)=>sortKey(b).localeCompare(sortKey(a)));
+  if(!rows.length) return "";
+  const head = rows.slice(0, FIRM_DEALS_PREVIEW), rest = rows.slice(FIRM_DEALS_PREVIEW);
+  return `<div id="firmDealsList">${head.map(r=>r.html).join("")}
+    ${rest.length?`<div id="firmDealsMore" hidden>${rest.map(r=>r.html.replace('class="deal-row','class="deal-row in')).join("")}</div>
+    <div style="margin:16px 0 0"><button class="chip" id="firmDealsToggle" type="button" aria-expanded="false" aria-controls="firmDealsMore" data-label="Все сделки (${rows.length})">Все сделки (${rows.length})</button></div>`:""}
+  </div>`;
+}
+function bindFirmDealsMore(){
+  const btn = document.getElementById("firmDealsToggle"), more = document.getElementById("firmDealsMore");
+  if(!btn || !more) return;
+  const open = () => { more.hidden = false; btn.textContent = "Свернуть"; btn.setAttribute("aria-expanded","true"); };
+  btn.onclick = () => {
+    if(more.hidden) open();
+    else { more.hidden = true; btn.textContent = btn.dataset.label; btn.setAttribute("aria-expanded","false"); }
+  };
+  // Фильтр по году и отрасли работает над всем списком: тронули фильтр —
+  // список раскрывается, иначе отфильтрованные строки остались бы спрятаны.
+  const lf = document.getElementById("firmDealsFilter");
+  if(lf) lf.addEventListener("click", open, {once:true});
 }
 
 /* ================= ОТРАСЛЬ ================= */
@@ -8302,10 +8365,12 @@ const LEGAL_DOCS = {
       ["Статус документа", `Черновик, готовится к утверждению. Документ определяет условия использования платформы «Компас» (далее — «Сервис»). Начиная пользоваться Сервисом, пользователь подтверждает согласие с этими условиями.`],
       ["Оператор Сервиса", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес]</span>.`],
       ["Что такое Сервис", `«Компас» — информационная платформа о сделках слияний и поглощений (M&A) российского рынка: карточки сделок, профили компаний и консультантов, отраслевая аналитика и ИИ-ассистент по базе данных. Сервис работает в режиме демонстрационной версии (MVP) и продолжает наполняться.`],
-      ["Характер публикуемых данных", `Сведения собираются из открытых источников и сопровождаются ссылками на них. Данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
+      ["Характер публикуемых данных", `Информация агрегируется из публичных источников — сообщений сторон сделок, публикаций консультантов, деловых СМИ и официальных реестров — и сопровождается ссылками на них. База содержит только публично раскрытую информацию; данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
+      ["Материалы третьих лиц и цитирование", `Сведения о фактах сделок излагаются своими словами. Фрагменты публикаций приводятся в кавычках с указанием источника в объёме, оправданном информационной целью (статья 1274 Гражданского кодекса РФ); права на публикации принадлежат их правообладателям. Правообладатель, считающий, что его материал использован с нарушением, может направить обращение через форму «Написать нам» — фрагмент будет изменён или удалён.`],
+      ["Права на базу данных", `База данных Сервиса (карточки сделок, профили компаний и консультантов, их связи и производные показатели) создана с существенными затратами, и Оператор является её изготовителем (статьи 1333–1334 Гражданского кодекса РФ). Запрещается извлечение и повторное использование существенной части материалов базы, а также неоднократное извлечение её частей, в том числе автоматизированное извлечение информации сайта любыми программами и сервисами, без письменного разрешения Оператора. Допускается использование материалов в личных и информационных целях со ссылкой на Сервис.`],
       ["ИИ-ассистент", `Ответы ассистента формируются автоматически, в том числе с привлечением сторонних моделей и поиска по сети Интернет (см. «Обработка персональных данных»), и могут содержать ошибки. Ассистент не заменяет консультацию профильного специалиста.`],
       ["Учётная запись", `Регистрация выполняется по адресу электронной почты и паролю. Пользователь несёт ответственность за сохранность пароля и за действия, совершённые под его учётной записью, и обязуется не передавать доступ третьим лицам.`],
-      ["Правила использования", `Не допускается автоматизированный сбор данных Сервиса (парсинг, скрейпинг) сверх обычного личного использования через интерфейс, а также использование Сервиса в противоправных целях или в целях, нарушающих права третьих лиц.`],
+      ["Правила использования", `Не допускается автоматизированный сбор данных Сервиса (парсинг, скрейпинг, обращение к файлам данных и API программами) сверх обычного личного использования через интерфейс, перепродажа и передача данных третьим лицам в виде базы или выгрузок, а также использование Сервиса в противоправных целях или в целях, нарушающих права третьих лиц.`],
       ["Обращения и правки", `Если пользователь — сторона сделки, консультант или иное заинтересованное лицо и обнаружил неточность, форма «Написать нам» в подвале сайта передаёт обращение редакции; правки вносятся с сохранением ссылки на источник.`],
       ["Платные тарифы", `На момент составления документа порядок оплаты платных тарифов отдельно не описан и будет опубликован при вводе оплаты в эксплуатацию.`],
       ["Ограничение ответственности", `Сервис предоставляется «как есть». Оператор не гарантирует бесперебойную работу, полноту и абсолютную точность данных и не несёт ответственности за решения, принятые на основании материалов Сервиса.`],

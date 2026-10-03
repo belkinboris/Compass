@@ -951,8 +951,37 @@ def test_artem_feedback_ui_invariants():
     assert 'Сделок с теми же сторонами или с той же темой в базе нет' not in html
     assert 'Показатели таргета' not in html
     assert 'mailto:' not in html
-    assert 'Ход сделки' in html and 'openCorrectionDialog' in html
+    assert 'Этапы сделки' in html and 'openCorrectionDialog' in html
     assert 'По этой сделке раскрыто немного деталей' in html
+
+
+def test_owner_text_rules_of_october_3_2026(base):
+    """Правки владельца по фото экранов 3 октября 2026: первый экран без
+    мелкого шрифта и без «российского рынка» в заголовке, одна общая оговорка
+    об агрегации из публичных источников; на карточке — «Этапы сделки»,
+    «Обзор: основная информация о сделке», короткая подпись к отсутствующей
+    цене; у консультантов — «Отрасли», «Чей консультант», «Таргет»."""
+    html = open(ROOT / "static" / "index.html", encoding="utf-8").read()
+    assert "hero-fine" not in html
+    assert "<h1>Сделки – <em>со ссылками на первоисточники</em></h1>" in html
+    assert "Информация агрегируется из публичных источников" in html
+    assert "База содержит только публично раскрытую информацию" in html
+    for gone in ("разбираем с двух сторон", "не заполняем пустоту догадками",
+                 "Это не вся статистика рынка", "юридически выверенные реквизиты",
+                 "Суммы в наших источниках нет", "главное на одном экране",
+                 "сумма и доля, оценка", "Только сделки с общей стороной",
+                 "можем ошибаться. Если вы вели эту сделку", "Это не рейтинг",
+                 "По каждой есть разбор", "В каких отраслях</span>", "не весь профиль практики",
+                 "За кого выступала</span>", '"Сама компания"', "чью сторону вела фирма",
+                 '">Ход сделки<'):
+        assert gone not in html, gone
+    assert "В публичных источниках отсутствует информация о цене сделки" in html
+    assert "Обзор: основная информация о сделке" in html
+    assert "Экономист: сумма, контекст, показатели актива, цель сделки" in html
+    assert "Перечень юридических и инвестиционных консультантов по публичным данным" in html
+    assert 'target:"Таргет"' in html and "Чей консультант" in html
+    assert "чьим консультантом выступала фирма" in html
+    assert "Цена не раскрыта" in html and "Все сделки (${rows.length})" in html
 
 
 def test_citibank_lifecycle_is_canonical(base, deals):
@@ -1676,3 +1705,20 @@ def test_a_company_description_never_says_where_we_read_it(companies):
             if m:
                 bad.append('%s (%s): «%s» — наш диалект' % (cid, c.get('name'), m.group(0)))
     assert not bad, 'пометки о происхождении в описаниях компаний:\n' + '\n'.join(bad[:20])
+
+
+def test_aggregator_is_not_a_fact_source_when_an_original_exists(deals):
+    """Правило владельца 3 октября 2026: агрегатор (mergers.ru, @dealsma,
+    @LawFirms) годится, чтобы сделку обнаружить, но читателю как источник
+    факта не показывается, если факт подтверждён первоисточником. Такой
+    источник переезжает в `discovery_src` (`source_names.settle_sources`);
+    приток и чтение делают это сами, а хвост чинит
+    `python3 pipeline/split_discovery_sources.py --write`."""
+    from pipeline.source_names import is_aggregator
+    bad = []
+    for d in deals:
+        http = [s for s in (d.get("src") or []) if isinstance(s, list) and len(s) > 1
+                and str(s[1]).startswith("http")]
+        if any(not is_aggregator(s[1]) for s in http) and any(is_aggregator(s[1]) for s in http):
+            bad.append(d["id"])
+    assert not bad, "агрегатор показан рядом с первоисточником: %s" % bad[:8]

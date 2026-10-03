@@ -7129,3 +7129,22 @@ def test_realty_channel_from_the_site_is_never_taken_for_the_main_one(monkeypatc
     assert send_telegram.channel_address(site) == MAIN_CH
     assert send_telegram.realty_channel_address(site, MAIN_CH) == REALTY_CH
     assert send_telegram.realty_channel_address({"realty_chat_id": MAIN_CH}, MAIN_CH) == ""
+
+
+def test_aggregator_moves_to_discovery_when_an_original_source_appears():
+    """Правило владельца 3 октября 2026: агрегатор — место, где о сделке
+    узнали, а не где факт подтверждён. Пока он единственный источник —
+    остаётся на виду; появился первоисточник — уходит в `discovery_src`."""
+    from pipeline import source_names as sn
+    assert sn.is_aggregator("https://mergers.ru/news/x-123")
+    assert sn.is_aggregator("https://t.me/dealsma/7426")
+    assert sn.is_aggregator("https://t.me/s/LawFirms/55")
+    assert not sn.is_aggregator("https://t.me/LevelLegalServices/12")   # канал самой фирмы
+    assert not sn.is_aggregator("https://www.rbc.ru/business/1")
+    card = {"id": "x", "src": [["@dealsma (Telegram)", "https://t.me/dealsma/7426"]]}
+    assert sn.settle_sources(card) is False and len(card["src"]) == 1
+    card["src"].append(["РБК", "https://www.rbc.ru/business/1"])
+    assert sn.settle_sources(card) is True
+    assert card["src"] == [["РБК", "https://www.rbc.ru/business/1"]]
+    assert card["discovery_src"] == [["@dealsma (Telegram)", "https://t.me/dealsma/7426"]]
+    assert sn.settle_sources(card) is False, "повторный вызов ничего не меняет"

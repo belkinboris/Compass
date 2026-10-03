@@ -54,6 +54,7 @@ sys.path.insert(0, ROOT)
 
 import casing                                             # noqa: E402
 import draft as drafter                                   # noqa: E402
+from source_names import has_source, settle_sources  # noqa: E402
 from link_parties import company_key as _linker_key        # noqa: E402
 from deal_multiples import SUM_BASES, DATE_BASES         # noqa: E402
 import tag_themes                                         # noqa: E402
@@ -493,9 +494,9 @@ def party_name_key(name):
 
 
 def already_applied(fix, card, companies=None):
-    """Правка уже в базе — прогон должен быть идемпотентным, а не падать."""
+    """Правка уже в базе: прогон идемпотентен."""
     if fix['field'] == 'src':
-        return any(len(s) > 1 and s[1] == fix['new'][1] for s in card.get('src') or [])
+        return has_source(card, fix['new'][1])
     current = get_field(card, fix['field'])
     if current == fix['new']:
         return True
@@ -538,7 +539,7 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         # изданий, и факт нередко есть только у одного: материал упаковки
         # «Полекса» назван у mergers.ru и не назван у «Коммерсанта». Приложить
         # можно только адрес, который приток РЕАЛЬНО забирал, — иначе ссылка
-        # берётся из головы, а это ровно то, чего мы избегаем.
+        # берётся из головы.
         if not (isinstance(new, list) and len(new) == 2 and str(new[1]).startswith('http')):
             bad.append('источник должен быть парой [имя, http-адрес]')
         elif urls and new[1] not in urls:
@@ -1061,6 +1062,7 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         card = cards[fix['id']]
         if fix['field'] == 'src':
             card.setdefault('src', []).append(list(fix['new']))
+            settle_sources(card)
             continue
         assert get_field(card, fix['field']) == fix['old'], 'состояние поля изменилось'
         set_field(card, fix['field'], fix['new'])
