@@ -434,3 +434,27 @@ def test_a_tight_advisor_pattern_keeps_the_deal_count_honest(idx):
     assert not vtb.rx.search("бывший зам. CEO ВТБ"), "регулярка снова хватает биографию"
     assert vtb.rx.search("ВТБ Капитал Трейдинг — организатор/букраннер IPO")
     assert ar._firm_deal_count(vtb, idx) > 0
+
+
+# ---------- со страницы сделки: вопрос о сторонах ----------
+
+def test_a_year_question_from_a_deal_page_lists_the_parties_deals(idx):
+    """«Какие сделки вели в 2026 году?» на карточке Ситибанка (владелец,
+    3 октября 2026) никого не называет; поиск по словам попадал в случайную
+    карточку («вели» → «Великим»), и модель отвечала «нет». Теперь — сделки
+    сторон этой сделки за названный год, со ссылками."""
+    r = _ask("Какие сделки вели в 2026 году?", idx, context_type="deal", context_id="citibank")
+    assert r.intent == "deal" and r.answer
+    assert "за 2026 год" in r.answer and "#/companies/rencap" in r.answer
+    assert "Русское молоко" not in r.answer
+    # без года — те же стороны за всё время
+    r2 = _ask("Какие сделки вели?", idx, context_type="deal", context_id="citibank")
+    assert r2.answer and "Сделки сторон этой сделки" in r2.answer
+    # конкретный вопрос со страницы остаётся ответом на него
+    r3 = _ask("Кто купил Ситибанк?", idx, context_type="deal", context_id="citibank")
+    assert "Ситибанк" in r3.answer and "Сделки сторон" not in r3.answer
+
+
+def test_question_verbs_do_not_match_names():
+    assert "вели" in ar.STOP and "совершил" in ar.STOP
+    assert ar.query_words("Какие сделки вели в 2026 году?") == ["2026"]

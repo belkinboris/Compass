@@ -1094,31 +1094,23 @@ def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
     page.wait_for_timeout(300)
     row = page.locator(f'a.deal-row[href="#/deal/{did}"]')
     assert row.count() == 1
-    # 19 сентября 2026 требование изменилось, и замер объясняет почему.
-    # Раньше у карточки без суммы блок не рисовался вовсе — ради того, чтобы
-    # метка отрасли встала на одну вертикаль с заголовком. Но у ВСЕХ
-    # остальных карточек она и так смещена на 96–105px, так что «ровно»
-    # получалось только у этих 177 — и именно это Ксюша увидела как
-    # непоследовательность: «где-то подпись есть, где-то нет». Теперь блок
-    # есть всегда и честно говорит «Нет данных» (писать «Не раскрыта» нельзя:
-    # у этих карточек мы не проверяли, называли ли стороны сумму).
-    assert row.locator(".deal-sum").count() == 1
-    assert row.locator(".deal-sum").inner_text().strip() == "Нет данных"
-    title_x = row.locator(".deal-title").bounding_box()["x"]
-    tags_x = row.locator(".deal-tags").bounding_box()["x"]
-    with_sum = page.evaluate("""() => {
-        const rows = [...document.querySelectorAll('a.deal-row')].filter(r => {
-          const s = r.querySelector('.deal-sum');
-          return s && s.textContent.trim() !== 'Нет данных';
-        }).slice(0, 5);
-        return rows.map(r => Math.round(r.querySelector('.deal-tags').getBoundingClientRect().x
-                                      - r.querySelector('.deal-title').getBoundingClientRect().x));
-    }""")
-    assert with_sum, "в ленте не нашлось карточек с суммой для сравнения"
-    shift = round(tags_x - title_x)
-    assert min(with_sum) - 12 <= shift <= max(with_sum) + 12, (
-        "карточка без суммы выбивается из общего строя: %s против %s" % (shift, with_sum))
+    # 19 сентября 2026 блок суммы стал рисоваться всегда — со словами «Нет
+    # данных», чтобы подпись не исчезала у части строк (Ксюша: «где-то
+    # подпись есть, где-то нет»). 3 октября 2026 владелец решил иначе: «„Нет
+    # данных“ писать не надо, пусть просто не будет цены» — слово читалось как
+    # упрёк. Блока нет; на телефоне метка отрасли встаёт в начало строки, без
+    # переполнения; на компьютере колонка меток у всех строк одна.
+    assert row.locator(".deal-sum").count() == 0
+    assert "Нет данных" not in row.inner_text()
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
     page.set_viewport_size({"width": 1280, "height": 1000})
+    page.wait_for_timeout(300)
+    col_x = round(row.locator(".deal-meta").bounding_box()["x"])
+    with_sum = page.evaluate("""() => [...document.querySelectorAll('a.deal-row')]
+        .filter(r => r.querySelector('.deal-sum')).slice(0, 5)
+        .map(r => Math.round(r.querySelector('.deal-meta').getBoundingClientRect().x))""")
+    assert with_sum, "в ленте не нашлось карточек с суммой для сравнения"
+    assert all(abs(x - col_x) <= 1 for x in with_sum), (col_x, with_sum)
 
 
 def test_citibank_seller_is_rendered(page, base_url):
@@ -2395,49 +2387,28 @@ def test_slow_load_hint_mentions_vpn(page, base_url):
     assert "Росси" in html
 
 
-def test_feed_is_ordered_by_publication_date_not_deal_date(page, base_url):
-    """В ленте — дата публикации, в карточке — дата сделки (просьба владельца).
-
-    До правки лента и сортировалась, и подписывалась датой САМОЙ СДЕЛКИ: карточка,
-    одобренная 6 августа, но описывающая сделку мая, вставала сотой строкой. Владелец
-    искал новое, видел наверху 5 августа и решал, что приток встал.
+def test_feed_is_ordered_by_deal_date_and_shows_no_added_label(page, base_url):
+    """В ленте — дата первой новости о сделке, по ней же и порядок (владелец,
+    3 октября 2026: «не дату добавления карты, а дату первой новости; не надо
+    писать „добавлено“»). Это отменило решение 7 августа (дата публикации):
+    с ним карточки архива, приехавшие одним днём, читались как новости этого
+    дня. Что появилось недавно, видно по бейджу «Новое».
     """
     visit(page, base_url, "#/")
     page.wait_for_timeout(2500)
-    rows = page.evaluate("""() => {
-      const items = DEALS.map(d => ({added: d.added || '', date: d.date || ''}));
-      return {
-        добавлено: items.map(x => x.added).sort().reverse()[0],
-        первая_в_ленте: (() => {
-          const html = unifiedFeed()[0] || '';
-          const m = html.match(/class="label num">([^<]+)</);
-          return m ? m[1] : '';
-        })(),
-      };
+    got = page.evaluate("""() => {
+      const items = unifiedFeedItems();
+      const html = unifiedFeed()[0] || '';
+      const m = html.match(/class="label num">([^<]+)</);
+      return {dates: items.slice(0, 60).map(it => it.date), first: m ? m[1] : '',
+              expected: fmtDate(items[0].date)};
     }""")
-    # Верх ленты подписан датой САМОГО СВЕЖЕГО ПОПОЛНЕНИЯ, а не самой свежей сделки.
-    assert rows["первая_в_ленте"], "в ленте нет даты"
-    newest_added = page.evaluate(
-        "() => DEALS.map(d=>d.added||'').filter(Boolean).sort().reverse()[0]")
-    expected = page.evaluate("d => fmtDate(d)", newest_added)
-    assert rows["первая_в_ленте"] == expected, (
-        "лента начинается не с последнего пополнения: %r вместо %r"
-        % (rows["первая_в_ленте"], expected))
-
-    # А в самой карточке стоит дата сделки — её подменять датой публикации нельзя.
-    probe = page.evaluate("""() => {
-      const d = DEALS.find(x => x.added && x.date && x.added.slice(0,7) !== x.date.slice(0,7));
-      return d ? {id: d.id, date: d.date, added: d.added} : null;
-    }""")
-    assert probe, "не нашлось карточки, у которой месяц сделки и месяц публикации различаются"
-    visit(page, base_url, "#/deal/" + probe["id"])
-    page.wait_for_timeout(700)
-    # Шапка карточки набрана капителью (text-transform), поэтому сравниваем без регистра.
-    head = page.inner_text(".d-head").lower()
-    assert page.evaluate("d => fmtDate(d)", probe["date"]).lower() in head, (
-        "в карточке нет даты сделки: %r" % head[:200])
-    assert page.evaluate("d => fmtDate(d)", probe["added"]).lower() not in head, (
-        "в карточке стоит дата публикации вместо даты сделки")
+    assert got["first"], "в ленте нет даты"
+    assert got["first"] == got["expected"], (got["first"], got["expected"])
+    known = [d for d in got["dates"] if d != "unknown"]
+    assert known == sorted(known, reverse=True), known[:12]
+    feed = page.inner_text("#feedlist")
+    assert "добавлено" not in feed.lower() and "дата сделки —" not in feed
 
 
 def test_company_cards_align_their_divider(page, base_url):
@@ -2629,7 +2600,8 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
     assert "АЛРУД" in seller_text and "Aspring Capital" in seller_text, seller_text
     assert "юридический" in seller_text.lower() and "финансовый" in seller_text.lower()
     # плашка темы объясняет, что это за кнопка
-    assert "Ещё сделки с той же особенностью" in page.locator(".theme-chips").text_content()
+    chips = page.locator(".theme-chips").text_content()
+    assert "Ещё сделки этого же типа" in chips and "→" not in chips
     # вкладка «Юрист»: расчёты по облигациям ушли к экономисту, условия — наш текст без «как предполагал „Ъ“»
     page.click(".lens [data-l='law']")
     page.wait_for_timeout(400)
@@ -2656,7 +2628,10 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     text = card.text_content()
     rows = {r.locator(".an-key").text_content(): int(r.locator(".an-val").text_content())
             for r in card.locator(".an-row").all()}
-    assert rows.get("Покупатель", 0) >= 5 and rows.get("Продавец", 0) >= 5, rows
+    # С 3 октября 2026 консультант акционера покупателя (Ситибанк) — «Иное»,
+    # а не «Покупатель»: у Nextons покупателей стало четыре, «Иное» — один.
+    assert rows.get("Покупатель", 0) >= 4 and rows.get("Продавец", 0) >= 5, rows
+    assert rows.get("Иное", 0) >= 1, rows
     assert any(k.startswith("Таргет") for k in rows), rows
     m = re.search(r"Ещё у (\d+) сдел", text)
     assert m and int(m.group(1)) <= 3, text
@@ -3682,13 +3657,16 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     page.wait_for_selector("#prepMeeting", timeout=15000)
     assert page.locator("#prepInterview").count() == 1
 
-    page.click("#prepMeeting")
+    # С 3 октября 2026 в чате — короткая подпись, полный вопрос уходит в /api/ask.
+    with page.expect_request(lambda r: "/api/ask" in r.url and r.method == "POST") as req:
+        page.click("#prepMeeting")
+    meeting = req.value.post_data or ""
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
-    page.wait_for_timeout(1200)
-    meeting = page.inner_text("body")
+    page.wait_for_timeout(600)
     assert "Готовлюсь к встрече" in meeting
     # Вопрос назвал компанию — иначе ассистент не поймёт, о ком речь.
     assert "Норильский никель" in meeting
+    assert "Подготовка к встрече: «Норильский никель»" in page.inner_text("body")
 
     page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
     page.wait_for_selector("#prepInterview", timeout=15000)
@@ -3697,14 +3675,16 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     assert page.locator("#interviewPrep").is_hidden()
     page.click("#prepInterview")
     assert page.locator("#interviewPrep").is_visible()
-    page.click("#interviewGo")
+    with page.expect_request(lambda r: "/api/ask" in r.url and r.method == "POST") as req:
+        page.click("#interviewGo")
+    interview = req.value.post_data or ""
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
-    page.wait_for_timeout(1200)
-    interview = page.inner_text("body")
+    page.wait_for_timeout(600)
     assert "Готовлюсь к собеседованию" in interview
     # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
-    assert "работодателя" in interview and "работодателя" not in meeting
+    assert "работодателю" in interview and "работодателю" not in meeting
     assert "Моё резюме" not in interview, "пустое резюме не должно попадать в вопрос"
+    assert "Подготовка к собеседованию: «Норильский никель»" in page.inner_text("body")
 
 
 def test_firm_page_prepares_for_an_interview_with_a_resume(page, base_url):
@@ -3716,12 +3696,17 @@ def test_firm_page_prepares_for_an_interview_with_a_resume(page, base_url):
     page.click("#prepInterviewFirm")
     assert page.locator("#interviewPrep").is_visible()
     page.fill("#resumeText", "Юрист, 3 года в корпоративной практике, сопровождал покупку доли в ИТ-компании.")
-    page.click("#interviewGo")
+    with page.expect_request(lambda r: "/api/ask" in r.url and r.method == "POST") as req:
+        page.click("#interviewGo")
+    sent = req.value.post_data or ""
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
-    page.wait_for_timeout(1200)
+    page.wait_for_timeout(600)
+    assert "Готовлюсь к собеседованию" in sent and "Nextons" in sent, sent[:600]
+    assert "Моё резюме" in sent and "корпоративной практике" in sent
+    # В чате — подпись, а не стена служебного текста и не само резюме.
     body = page.inner_text("body")
-    assert "Готовлюсь к собеседованию" in body and "Nextons" in body, body[:600]
-    assert "Моё резюме" in body and "корпоративной практике" in body
+    assert "Подготовка к собеседованию: «Nextons» (с резюме)" in body
+    assert "корпоративной практике" not in body
 
 
 def test_firm_deals_list_shows_three_and_unfolds_the_rest(page, base_url):
@@ -3882,3 +3867,105 @@ def test_every_investment_adviser_in_the_catalog_has_at_least_one_deal(page, bas
     page.wait_for_timeout(2500)
     empty = page.evaluate("INV_FIRMS.map(f=>[f.n, firmCount(f.id)]).filter(x=>x[1]===0)")
     assert not empty, f"инвестиционный консультант без единой сделки: {empty}"
+
+
+# ---------- 3 октября 2026: вторая партия правок по фото владельца ----------
+
+def test_deal_team_has_other_column_without_data_source_notes(page, base_url):
+    """Команда сделки на карточке Ситибанка (владелец, 3 октября 2026): без
+    «(по данным сайта фирмы)», без плашки «Полный список сторон мог не
+    раскрываться», вид консультанта — строкой под именем, а консультант
+    акционера покупателя — в колонке «Иное», не у покупателя."""
+    visit(page, base_url, "#/deal/citibank")
+    page.wait_for_selector(".team")
+    team = page.locator(".team").inner_text()
+    assert "по данным" not in team.lower() and "Полный список сторон" not in team
+    assert page.locator(".team-note").count() == 0 and page.locator(".t-kind").count() == 0
+    cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
+    assert "Nextons" in cols.get("Иное", ""), cols
+    assert "Orion" in cols.get("Со стороны покупателя", "") and "Nextons" not in cols.get("Со стороны покупателя", "")
+    # подпись под именем — вид консультанта и клиент, а не пересказ работы
+    orion = page.locator(".team-item", has_text="Orion").first.locator(".t-side").inner_text()
+    assert orion.startswith("юридический") and "Правовая проверка" not in orion, orion
+
+
+def test_economist_lens_shows_extra_context_without_a_blank_gap(page, base_url):
+    """Блок «Дополнительный контекст» вставляется после отрисовки страницы с
+    классом reveal и оставался с opacity:0 — на карточке «Ленты»/«Марии-Ра»
+    это читалось как огромный пустой провал (владелец, 3 октября 2026)."""
+    visit(page, base_url, "#/deal/gb7ea4703")
+    page.wait_for_selector("#facts")
+    page.click(".lens [data-l='eco']")
+    page.wait_for_timeout(700)
+    assert page.locator(".extra-info").count() == 1
+    assert page.evaluate("() => getComputedStyle(document.querySelector('.extra-info')).opacity") == "1"
+    gaps = page.evaluate("""() => { const k=[...document.getElementById('facts').children]; const out=[];
+        for(let i=0;i<k.length-1;i++){ out.push(Math.round(k[i+1].getBoundingClientRect().top - k[i].getBoundingClientRect().bottom)); }
+        return out; }""")
+    assert all(g <= 40 for g in gaps), gaps
+    # «Цель сделки» стоит в том же списке, что и показатели: зазоры ровные
+    assert page.locator("#facts .spec-list .spec-row", has_text="Цель сделки").count() == 1
+
+
+def test_related_deals_fall_back_to_the_same_industry(page, base_url):
+    """«Альфа Строй» (g4d017d5c): ни общей стороны, ни общей темы — блока
+    «Похожие сделки» не было. Владелец 3 октября 2026: добирать по отрасли."""
+    visit(page, base_url, "#/deal/g4d017d5c")
+    page.wait_for_selector(".related")
+    rel = page.locator(".related")
+    assert rel.locator(".an-deal").count() == 3
+    assert "та же отрасль" in rel.inner_text() and "Отрасль:" in rel.inner_text()
+
+
+def test_deal_tools_are_two_groups_without_copy_link(page, base_url):
+    """Кнопки карточки — двумя группами: карточка (подписка, уточнение) и
+    «унести с собой» (PDF, текст, поделиться); «Скопировать ссылку» ушла в
+    «Поделиться». На телефоне главная кнопка — во всю ширину, без переполнения."""
+    visit(page, base_url, "#/deal/citibank")
+    page.wait_for_selector(".deal-tools")
+    assert page.locator(".deal-tools .tool-group").count() == 2
+    assert page.locator("#copylink").count() == 0
+    assert page.locator(".tool-group-share #sharedeal").count() == 1
+    assert page.locator(".tool-group #watchdeal").count() == 1 and page.locator(".tool-group #fixdeal").count() == 1
+    page.set_viewport_size({"width": 390, "height": 900})
+    page.wait_for_timeout(300)
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+    primary = page.locator("#watchdeal").bounding_box()
+    fix = page.locator("#fixdeal").bounding_box()
+    assert primary["width"] > fix["width"] * 1.6, (primary, fix)
+    page.set_viewport_size({"width": 1280, "height": 1000})
+
+
+def test_correction_dialog_text_is_trimmed(page, base_url):
+    visit(page, base_url, "#/deal/citibank")
+    page.wait_for_selector("#fixdeal")
+    page.click("#fixdeal")
+    page.wait_for_selector(".dialog")
+    assert "прочитает редакция" not in page.locator(".dialog").inner_text()
+    assert "не холдинговая компания, а дочернее общество" in page.get_attribute("#correctionBody", "placeholder")
+    page.click(".dialog-close")
+
+
+def test_company_card_lists_the_advisors_it_worked_with(page, base_url):
+    """Просьба владельца 3 октября 2026: на карточке компании — с какими
+    консультантами она работает и сколько сделок у каждого."""
+    visit(page, base_url, "#/companies/rencap")
+    page.wait_for_selector(".co-advisors")
+    block = page.locator(".co-advisors").inner_text()
+    assert "консультанты в сделках компании" in block.lower() and "Orion" in block and "1 сделка" in block
+    # консультант другой стороны (Skadden — у продавца) покупателю не приписан
+    assert "Skadden" not in block
+    visit(page, base_url, "#/companies/yandex")
+    page.wait_for_selector(".co-advisors")
+    assert page.locator(".co-advisors .co-adv").count() >= 3
+
+
+def test_prep_buttons_show_a_short_label_in_the_chat(page, base_url):
+    """Вопрос ассистенту от кнопок «Подготовка к встрече / собеседованию» в
+    чате показывается короткой подписью, а не стеной служебного текста
+    (владелец, 3 октября 2026)."""
+    visit(page, base_url, "#/companies/yandex")
+    page.wait_for_selector("#prepMeeting")
+    page.click("#prepMeeting")
+    page.wait_for_selector(".msg.user")
+    assert page.locator(".msg.user").first.inner_text().strip() == "Подготовка к встрече: «Яндекс»"

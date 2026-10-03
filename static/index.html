@@ -439,7 +439,6 @@ nav a.on::after,nav a:hover::after{width:100%}
 .deal-title{font-family:var(--f-display);font-weight:500;font-size:19.5px;line-height:1.34;transition:color .2s}
 .deal-row:hover .deal-title{color:var(--accent)}
 .deal-row.mini:hover .deal-title{color:var(--steel)}
-.date-kind{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:2px}
 .deal-sub{color:var(--muted);font-size:13.5px;margin-top:6px}
 .deal-meta{text-align:right}
 .deal-sum{font-family:var(--f-display);font-weight:600;font-size:17.5px}
@@ -985,7 +984,6 @@ a.dp-asset-name:hover{color:var(--accent)}
 .team-item .t-firm{font-weight:600;font-size:14px;color:var(--ink)}
 .team-item .t-firm a:hover{color:var(--accent)}
 .team-item .t-side{font-size:12px;color:var(--muted);margin-top:1px}
-.team-item .t-kind{font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px}
 .mult-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 .mult-toggle .chip{text-align:center;padding:9px 12px;white-space:normal;line-height:1.3}
 .mult-ind{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line-soft);font-size:13.5px}
@@ -1029,7 +1027,14 @@ a.dp-asset-name:hover{color:var(--accent)}
   .mult-table td[data-l]:not(.mult-name):before{content:attr(data-l) ": ";color:var(--muted);font-size:12.5px}
   .mult-table td.mult-x-cell{font-size:15px}
 }
-.team-note{font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line-soft)}
+/* ---------- консультанты в сделках компании ---------- */
+.co-advisors{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:26px}
+.co-advisors>.label{display:block;margin-bottom:12px}
+.co-advisors-list{display:flex;flex-wrap:wrap;gap:8px 10px}
+.co-adv{display:inline-flex;align-items:baseline;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:99px;background:var(--paper);font-size:13.5px;font-weight:600;color:var(--ink)}
+.co-adv a:hover{color:var(--accent)}
+.co-adv-n{font-weight:400;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.co-advisors-more{font-size:12.5px;color:var(--muted);margin:10px 0 0}
 
 /* ---------- цепочка владения ---------- */
 .adv-card .label{margin-bottom:6px}
@@ -1047,7 +1052,12 @@ a.dp-asset-name:hover{color:var(--accent)}
 .miniai .label{display:block;margin-bottom:12px;color:var(--accent)}
 .miniai-log{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .miniai-log:empty{display:none}
-.msg{max-width:88%;padding:11px 15px;border-radius:var(--radius);font-size:14px;line-height:1.6;animation:fadeUp .3s var(--ease)}
+/* min-width:0 и перенос по любому месту — иначе длинная ссылка или слово без
+   пробелов в ответе из интернета растягивало пузырь за край окна (владелец,
+   3 октября 2026: «текст вылезает за блок»). */
+.msg{max-width:88%;min-width:0;padding:11px 15px;border-radius:var(--radius);font-size:14px;line-height:1.6;animation:fadeUp .3s var(--ease);overflow-wrap:anywhere;word-break:break-word}
+.msg.ai pre,.msg.ai code{white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.ai table{display:block;max-width:100%;overflow-x:auto}
 .msg.user{align-self:flex-end;background:var(--accent-deep);color:var(--ivory)}
 .msg.ai{align-self:flex-start;background:var(--paper);border:1px solid var(--line-soft)}
 .msg.ai a{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
@@ -1558,9 +1568,25 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .advisor-card-count .count-btn.empty{white-space:normal}
 .advisor-filters{align-items:center}
 
-.deal-tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
+.deal-tools{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
 .deal-tools .chip.primary{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
 .deal-tools .chip[disabled]{opacity:.5;cursor:wait}
+/* КНОПКИ КАРТОЧКИ — ДВУМЯ ГРУППАМИ. Владелец 3 октября 2026: «подумать, как
+   эти кнопки красиво и удобно расположить». Было шесть одинаковых кнопок в
+   ряд, на телефоне — три ряда по две без видимого порядка. Теперь слева то,
+   что касается самой карточки (подписка, уточнение), справа, за чертой, —
+   «унести с собой» (PDF, текст, поделиться). «Скопировать ссылку» ушла в
+   «Поделиться»: без системного меню та же кнопка копирует ссылку. На
+   телефоне каждая группа — сетка в две колонки, главная кнопка во всю ширину. */
+.tool-group{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.tool-group-share{padding-left:18px;border-left:1px solid var(--line)}
+.deal-tools .tool-note{flex-basis:100%}
+@media(max-width:560px){
+  .tool-group{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .tool-group .chip{text-align:center;justify-content:center}
+  .tool-group .chip.primary{grid-column:1/-1}
+  .tool-group-share{padding:10px 0 0;border-left:none;border-top:1px solid var(--line-soft)}
+}
 .tool-note{width:100%;font-size:12.5px;color:var(--muted);min-height:1.2em}
 
 .fns-shell{margin:30px 0 38px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
@@ -1700,7 +1726,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 }
 @media(max-width:430px){
   .fns-metrics{grid-template-columns:1fr}.fns-metric{border-right:none!important;border-bottom:1px solid var(--line)}.fns-metric:last-child{border-bottom:none}
-  .deal-tools .chip{flex:1 1 calc(50% - 6px);text-align:center;justify-content:center}
+  .deal-tools>.chip{flex:1 1 calc(50% - 6px);text-align:center;justify-content:center}
 }
 
 </style>
@@ -2182,6 +2208,10 @@ const advSide = (role, d, note) => {
   // размещения (не кредитор)» — организатор, а не кредитор).
   const rawNote = String(note||"").toLowerCase();
   if(/сторон[а-яё]*[^.;]{0,60}не\s+(?:уточня|указ|назван|раскры)|не\s+(?:уточня|указ)[а-яё]*[^.;]{0,60}сторон/.test(rawNote)) return "none";
+  // Консультант акционера покупателя или одного из участников — не сторона
+  // сделки, а кто-то рядом с ней. Владелец 3 октября 2026 на карточке
+  // Ситибанка: такое — в «Иное», а не в колонку покупателя.
+  if(/акционер[а-яё]*\s+(?:покупател|продавц|компани|эмитент|инвестор)|одного\s+из\s+акционеров|(?:владельц|участник)[а-яё]*\s+(?:покупател|продавц)/.test(String(role||"").toLowerCase())) return "other";
   const unneg = t => t.replace(/(?:^|[^а-яё])не\s+[a-zа-яё\-]+/g, " ");
   const r = unneg(String(role||"").toLowerCase()), n = unneg(rawNote);
   const wordSides = t => SIDES.filter(s=>SIDE_WORDS[s].test(t));
@@ -2264,11 +2294,20 @@ const advSide = (role, d, note) => {
 /* Что показать под именем фирмы: уточнение в скобках («топ-менеджмент
    ВымпелКома»), а не повтор роли, которую уже сказал заголовок колонки. */
 const advDetail = text => {
-  const t = String(text||"").replace(/Источник:.*$/i,"").trim();
+  // «(по данным сайта фирмы)», «(по данным пресс-релиза …)» — это откуда мы
+  // знаем, а не кого консультировали; владелец 3 октября 2026: «не надо
+  // писать, по каким данным». Ссылка на источник живёт в линзе «Юрист».
+  const t = String(text||"").replace(/Источник:.*$/i,"")
+    .replace(/\((?:по\s+данным|по\s+сообщени|источник|сообщ)[^()]*\)/gi,"").trim();
   const m = t.match(/\(([^()]{2,80})\)/);
   if(m) return m[1].trim();
   const bare = t.replace(/юридическ\w*|финансов\w*|консультант\w*|советник\w*|покупател\w*|продавц\w*|продавец|сторон\w*|не уточнен\w*|эмитент\w*|инвестор\w*|[,;:.]/gi,"").trim();
-  return bare.length >= 6 ? t : "";
+  if(bare.length < 6) return "";
+  // «Покупатель — «Ренессанс Капитал»»: сторону уже назвал заголовок колонки,
+  // остаётся имя клиента. Длинный пересказ роли обрезается — подробности и
+  // ссылка на источник живут в линзе «Юрист».
+  const short = t.replace(/^(?:покупател[а-яё]*|продав[а-яё]*|эмитент[а-яё]*|инвестор[а-яё]*|заказчик[а-яё]*)\s*[—–-]\s*/i,"").trim();
+  return short.length > 90 ? short.slice(0, 90).replace(/\s+\S*$/,"") + "…" : short;
 };
 /* ОДИН список консультантов на карточку — из него берут и «Команда сделки»
    на «Обзоре», и вкладки «Юрист» (юридические) и «Экономист» (финансовые).
@@ -4032,9 +4071,14 @@ function downloadText(text, filename, mime){
   a.href = url; a.download = filename; document.body.appendChild(a); a.click();
   a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+/* В ЛЕНТЕ У СДЕЛКИ БЕЗ ЦЕНЫ ЦЕНЫ ПРОСТО НЕТ. Владелец 3 октября 2026: «„Нет
+   данных“ писать не надо. Пусть просто не будет цены». Подпись остаётся на
+   самой карточке (SUM_UNKNOWN_LABEL на «Обзоре»), где под ней стоит
+   пояснение; в строке ленты пояснения нет, и слово читалось как упрёк. Метка
+   отрасли при этом стоит на той же вертикали, что и у остальных строк:
+   правая колонка от этого не меняется. */
 function dealMetaHtml(d){
-  const sum = `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${
-    d.sum ? dealSumHtml(d) : SUM_UNKNOWN_LABEL}</div>`;
+  const sum = d.sum ? `<div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${dealSumHtml(d)}</div>` : "";
   return `<div class="deal-meta">${sum}<div class="deal-tags">${industryTagsHtml(d)}</div></div>`;
 }
 /* русское склонение: 1 карточка / 2 карточки / 5 карточек */
@@ -4071,32 +4115,21 @@ const KIND_BADGE_META = {
   ipo:         {label:"IPO", cls:"badge-ipo"},
   reorg:       {label:"Реорганизация", cls:"badge-reorg"},
 };
-/* Подпись «дата сделки — май 2026» под заголовком. Не показывается, когда обе
-   даты в одном месяце (тогда она повторяла бы то, что уже стоит слева) и когда
-   даты сделки нет вовсе. Была «сделка — май 2026» — партнёр 2 сентября 2026:
-   «непонятно и некрасиво»; слева в строке стоит дата публикации, и без слова
-   «дата» читатель не понимал, что это за второй месяц. */
-function dealDateNote(d){
-  const deal = String(d.date||"");
-  if(!deal || deal==="unknown") return "";
-  const pub = String(d.added||"");
-  if(!pub || pub.slice(0,7)===deal.slice(0,7)) return "";
-  const m = fmtMonthYear(deal);
-  return m ? ` · дата сделки — ${m}` : "";
-}
 /* Разметка строки ленты — снаружи функции отбора: ею пользуется
    unifiedFeed(), а сама функция отбора теперь возвращает записи. */
 const rowHtml = {
-  /* В ЛЕНТЕ — ДАТА ПУБЛИКАЦИИ, В КАРТОЧКЕ — ДАТА СДЕЛКИ (просьба владельца
-     7 августа). До этого лента показывала и сортировала по дате сделки, и
-     свежие карточки уходили вглубь: одобренная 6 августа сделка мая вставала
-     сотой строкой, а владелец, ища новое, видел наверху 5 августа и решал,
-     что приток встал. Дата сделки не потеряна — она стоит рядом мелким, если
-     отличается по месяцу от даты публикации. */
+  /* В ЛЕНТЕ — ДАТА ПЕРВОЙ НОВОСТИ О СДЕЛКЕ, А НЕ ДАТА ПОЯВЛЕНИЯ В БАЗЕ.
+     Владелец 3 октября 2026: «сверху надо писать не дату добавления карты, а
+     дату первой новости о сделке / событии; не надо писать „добавлено“». Это
+     отменяет решение 7 августа (в ленте — дата публикации): с ним карточки
+     архива, приехавшие одним днём, читались как новости этого дня — «3
+     августа» у сделки 2023 года с подписью «добавлено» и второй датой мелким
+     шрифтом под заголовком. Теперь дата одна, и лента упорядочена по ней же
+     (unifiedFeedItems); что появилось недавно, видно по бейджу «Новое». */
   full: d => `
   <a class="deal-row reveal" href="#/deal/${d.id}">
-    <div><span class="label num">${fmtDate(d.added||d.date)}</span>${dealDateNote(d)?`<span class="date-kind">добавлено</span>`:""}${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
-    <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}${dealDateNote(d)}</div></div>
+    <div><span class="label num">${fmtDate(d.date)}</span>${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
+    <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
     ${dealMetaHtml(d)}
   </a>`,
   mini: m => `
@@ -4119,9 +4152,9 @@ const rowHtml = {
   </a>`,
 };
 function unifiedFeedItems(){
-  /* `pub` — дата, по которой лента упорядочена: когда запись появилась в
-     «Компасе». У краткого сырья поля `added` нет, для него это дата сделки —
-     иначе такие строки провалились бы в самый низ независимо от свежести. */
+  /* `pub` — когда запись появилась в «Компасе»: второй ключ порядка (внутри
+     одного дня по дате сделки) и основа бейджа «Новое». У краткого сырья
+     поля `added` нет, для него это дата сделки. */
   /* ВЕХИ В ЛЕНТЕ НЕТ — И ЭТО РЕШЕНИЕ, А НЕ ПРОПУСК. Этап сделки (получено
      согласование, сделка закрыта, сделка сорвалась) раньше давал ВТОРУЮ
      строку ленты рядом с самой сделкой. Ксюша прочитала это как повтор, и
@@ -4254,14 +4287,17 @@ function unifiedFeedItems(){
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
   const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
-  /* Сначала по дате публикации, внутри одного дня — по дате сделки. Второй
-     ключ не украшение: 902 карточки приехали одним переносом архива 23 июля, и
-     без него весь этот блок лёг бы в случайном порядке вместо хронологии. */
+  /* ПОРЯДОК — ПО ДАТЕ СДЕЛКИ (первой новости о ней), внутри одного дня — по
+     дате появления в базе. Решение владельца 3 октября 2026 (см. rowHtml):
+     дата в строке и порядок строк — одна и та же дата, иначе колонка дат
+     читалась бы вразнобой. Карточка, датированная только годом («2024»),
+     встаёт в конец своего года: дня у неё нет, и ставить её выше датированных
+     значило бы выдумать ему место. */
   filtered.sort((a,b)=>{
     if(a.date==="unknown") return 1;
     if(b.date==="unknown") return -1;
-    const p = String(b.pub||"").localeCompare(String(a.pub||""));
-    return p || b.date.localeCompare(a.date);
+    const dd = String(b.date||"").localeCompare(String(a.date||""));
+    return dd || String(b.pub||"").localeCompare(String(a.pub||""));
   });
   return filtered;
 }
@@ -4862,7 +4898,7 @@ function extraHtml(d){
   const parts=raw.split(/(?<=[.!?])\s+(?=[А-ЯЁ«"“])/).map(x=>x.trim()).filter(x=>x.length>20);
   const novel=parts.filter(part=>!refs.some(ref=>repeats(part,ref)));
   if(!novel.length) return "";
-  return `<div class="extra-info reveal"><span class="label">Дополнительный контекст</span><p>${novel.join(" ")}</p></div>`;
+  return `<div class="extra-info"><span class="label">Дополнительный контекст</span><p>${novel.join(" ")}</p></div>`;
 }
 
 /* Этапы сделки — одна карточка на весь жизненный цикл. На основной карточке
@@ -5166,9 +5202,9 @@ function openCorrectionDialog(d=null){
   const wrap=document.createElement("div"); wrap.className="dialog-backdrop";
   wrap.innerHTML=`<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="correctionTitle">
     <div class="dialog-head"><div><span class="label">Сообщение редакции</span><h2 id="correctionTitle">${cardMode?"Уточнить или дополнить карточку":"Написать редакции"}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
-    <p>${cardMode?"Напишите, какой факт нужно поправить или добавить.":"Напишите, что не так или чего не хватает."} Если знаете источник — приложите ссылку, так мы проверим быстрее. Сообщение прочитает редакция, на сайте оно не появится.</p>
+    <p>${cardMode?"Напишите, какой факт нужно поправить или добавить.":"Напишите, что не так или чего не хватает."} Если знаете источник — приложите ссылку, так мы проверим быстрее.</p>
     <label for="correctionBody">${cardMode?"Что нужно изменить":"Сообщение"}</label>
-    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем была не сама группа, а её дочерняя компания. Источник: …":"Например: в карточке сделки не указан продавец, хотя он назван в источнике. Или: не открывается страница компании."}"></textarea>
+    <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем была не холдинговая компания, а дочернее общество. Источник: …":"Например: в карточке сделки не указан продавец, хотя он назван в источнике. Или: не открывается страница компании."}"></textarea>
     <label for="correctionContact">Куда ответить, если появятся вопросы (необязательно)</label>
     <input id="correctionContact" maxlength="300" placeholder="Почта или Telegram">
     <div class="dialog-actions"><span class="dialog-msg" id="correctionMsg"></span><button class="chip" id="correctionSend">Отправить</button></div>
@@ -5222,6 +5258,19 @@ function relatedList(d){
 function relatedHtml(d){
   const all = relatedList(d);
   const rel = all.slice(0,3);
+  /* МАЛО ПОХОЖИХ — ДОБИРАЕМ ПО ОТРАСЛИ. Владелец 3 октября 2026 на карточке
+     «Альфа Строй» (g4d017d5c): блока не было вовсе, потому что ни общей
+     стороны, ни общей темы не нашлось. Теперь до трёх строк добираются сделки
+     той же отрасли — ближайшие по типу и году (relatedScore), с честной
+     подписью «та же отрасль». Решение 18 августа (не рисовать пустой блок)
+     остаётся для карточек без отрасли. */
+  if(rel.length < 3 && d.ind && d.ind !== "Не определена"){
+    const have = new Set([d.id, ...rel.map(o=>o.x.id)]);
+    DEALS.filter(x=>!have.has(x.id) && dealIndustries(x).includes(d.ind))
+      .map(x=>({x, party:null, themes:[], s:relatedScore(d,x)}))
+      .sort((a,b)=>b.s-a.s || (b.x.date||"").localeCompare(a.x.date||""))
+      .slice(0, 3-rel.length).forEach(o=>rel.push(o));
+  }
   // Отрасль «Не определена» — не отрасль, а признание, что мы её не знаем:
   // уводить читателя в «Все сделки отрасли «Не определена»» бессмысленно.
   const indLink = (d.ind && d.ind!=="Не определена") ? `#/ind/${encodeURIComponent(d.ind)}` : "";
@@ -5233,7 +5282,7 @@ function relatedHtml(d){
   if(!rel.length) return "";
   const why = o => o.party
     ? `та же сторона: ${co(o.party)?co(o.party).name:"общая"}`
-    : o.themes[0].toLowerCase();
+    : o.themes.length ? o.themes[0].toLowerCase() : "та же отрасль";
   // Доля показывается рядом с суммой: юрист сравнивает не только цену, но и то,
   // какой пакет за неё отдали. Только короткие значения — длинные это не «100%»,
   // а пересказ структуры, ему место в карточке.
@@ -5542,8 +5591,6 @@ async function mountDealTools(d){
   const show=t=>{if(note) note.textContent=t||"";};
   const copyText=document.getElementById("copydeal");
   if(copyText) copyText.onclick=()=>copyToClipboard(dealAsText(d),copyText,"Скопировано","Скопировать текст");
-  const copyLink=document.getElementById("copylink");
-  if(copyLink) copyLink.onclick=()=>copyToClipboard(url,copyLink,"Ссылка скопирована","Скопировать ссылку");
   const share=document.getElementById("sharedeal");
   if(share) share.onclick=async()=>{
     if(navigator.share){try{await navigator.share({title:d.title,text:`${d.title} — КОМПАС`,url});show("Карточка передана в меню «Поделиться».");return;}catch(e){if(e.name==="AbortError")return;}}
@@ -5656,7 +5703,7 @@ function renderDeal(id, qs, previewCard){
     </div>
     <h1>${d.title}</h1>
     <div class="d-parties"><span>Тип: <b>${capType(d.type)}</b></span></div>
-    ${(d.themes||[]).length?`<div class="theme-chips"><span class="theme-lbl">Ещё сделки с той же особенностью:</span>${d.themes.map(t=>`<a class="theme-chip" href="#/theme/${encodeURIComponent(t)}" title="Показать все сделки с этой особенностью">${t} →</a>`).join("")}</div>`:""}
+    ${(d.themes||[]).length?`<div class="theme-chips"><span class="theme-lbl">Ещё сделки этого же типа:</span>${d.themes.map(t=>`<a class="theme-chip" href="#/theme/${encodeURIComponent(t)}" title="Показать все сделки этого типа">${t}</a>`).join("")}</div>`:""}
   </div>
   ${timelineHtml(d)}
   ${sparseNoticeHtml(d)}
@@ -5670,12 +5717,15 @@ function renderDeal(id, qs, previewCard){
   ${relatedHtml(d)}
   <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Карточку сверяли с источниками: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
   <div class="deal-tools reveal">
-    <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
-    <button class="chip" id="downloaddeal">Скачать PDF</button>
-    <button class="chip" id="copylink">Скопировать ссылку</button>
-    <button class="chip" id="sharedeal">Поделиться</button>
-    <button class="chip" id="copydeal">Скопировать текст</button>
-    <button class="chip" id="fixdeal">Уточнить или дополнить</button>
+    <div class="tool-group">
+      <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
+      <button class="chip" id="fixdeal">Уточнить или дополнить</button>
+    </div>
+    <div class="tool-group tool-group-share">
+      <button class="chip" id="downloaddeal">Скачать PDF</button>
+      <button class="chip" id="copydeal">Скопировать текст</button>
+      <button class="chip" id="sharedeal">Поделиться</button>
+    </div>
     <div class="tool-note" id="dealtoolnote"></div>
   </div>
   ${COMMENTS_ENABLED?`<div class="comments reveal" id="comments-mount"></div>`:""}
@@ -5942,9 +5992,14 @@ function renderDeal(id, qs, previewCard){
     const dealTeam = ()=>{
       const uniq = dealAdvisorItems(d);
       if(!uniq.length) return "";
-      const groups={buyer:[],seller:[],target:[],bank:[],none:[]};
-      uniq.forEach(it=>groups[it.side].push(it));
-      const onlyUnknown = !groups.buyer.length && !groups.seller.length && !groups.target.length && !groups.bank.length;
+      /* «Иное» — консультант акционера покупателя, участника консорциума и
+         те, чью сторону источник не уточнил, — когда остальные колонки есть.
+         Если сторона неизвестна ни у кого, колонка одна и называется просто
+         «Консультанты сделки». Владелец 3 октября 2026. */
+      const known = uniq.some(it=>["buyer","seller","target","bank"].includes(it.side));
+      const groups={buyer:[],seller:[],target:[],bank:[],other:[],none:[]};
+      uniq.forEach(it=>groups[it.side==="none" && known ? "other" : it.side].push(it));
+      const onlyUnknown = !known;
       /* Подпись колонки — по типу сделки, как и плашка сторон над ней: у
          финансирования нет «покупателя», у IPO — «компания» это эмитент. */
       const SIDE_BY_KIND = {
@@ -5957,15 +6012,20 @@ function renderDeal(id, qs, previewCard){
         reorg:       {buyer:"правопреемника", target:"присоединяемого общества"},
       };
       const sideWords = SIDE_BY_KIND[dealKindOf(d.type)] || SIDE_BY_KIND.acquisition;
-      const title={buyer:"Со стороны "+sideWords.buyer,seller:"Со стороны продавца",target:"Со стороны "+sideWords.target,bank:"Со стороны организаторов и кредиторов",none:onlyUnknown?"Консультанты сделки":"Сторона не уточнена"};
+      const title={buyer:"Со стороны "+sideWords.buyer,seller:"Со стороны продавца",target:"Со стороны "+sideWords.target,bank:"Со стороны организаторов и кредиторов",other:"Иное",none:onlyUnknown?"Консультанты сделки":"Иное"};
       const item = it => {
-        const detail = advDetail(it.role+" "+it.note);
-        return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)} <span class="t-kind">${it.kind}</span></div>${detail?`<div class="t-side">${esc(detail)}</div>`:""}</div>`;
+        // Сначала роль (в ней — кого вели), и только если она пуста — заметка:
+        // заметка целиком это абзац о проделанной работе, ему место в «Юристе».
+        const detail = advDetail(it.role) || advDetail(it.note);
+        /* Вид консультанта — отдельной строкой под именем, вместе с уточнением:
+           приписка справа от имени у длинных названий («Skadden, Arps, Slate,
+           Meagher & Flom LLP») уезжала на новую строку и ни с чем не
+           выравнивалась (владелец, 3 октября 2026). */
+        return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)}</div><div class="t-side">${it.kind}${detail?` · ${esc(detail)}`:""}</div></div>`;
       };
-      const cols = ["buyer","seller","target","bank","none"].filter(k=>groups[k].length)
+      const cols = ["buyer","seller","target","bank","other","none"].filter(k=>groups[k].length)
         .map(k=>`<div class="team-col"><span class="team-kind">${title[k]}</span>${groups[k].map(item).join("")}</div>`).join("");
-      return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${cols}</div>
-        <div class="team-note">По публичным данным: пресс-релизы фирм, раскрытия, деловые СМИ. Полный список сторон мог не раскрываться.</div></div>`;
+      return `<div class="team"><span class="label">Команда сделки</span><div class="team-grid">${cols}</div></div>`;
     };
 
     /* Блок «Цепочка владения» удалён в прогоне 19 (A10). Он был написан
@@ -5994,9 +6054,13 @@ function renderDeal(id, qs, previewCard){
         specRow("Форма расчётов", d.eco.fin),
         specRow(financialAdvisors(d).length>1?"Финансовые консультанты":"Финансовый консультант",
                 financialAdvisors(d).length ? financialAdvisors(d).map(it=>esc(it.name)+(it.note?" — "+esc(it.note):"")).join("; ") : d.eco.finadv),
+        /* Абзацы — в том же списке, что и показатели: отдельно стоящая строка
+           после списка получала и его нижний отступ (26px), и свой верхний —
+           зазор перед «Целью сделки» выходил вдвое больше, чем между другими
+           строками (владелец, 3 октября 2026). */
+        para("Цель сделки", d.eco.rationale),
+        para("Контекст", d.eco.context),
       ])}
-      ${para("Цель сделки", d.eco.rationale)}
-      ${para("Контекст", d.eco.context)}
       ${extraBlock}
       <div id="deal-fns"></div>`
       : ecoEmptyHtml(d);
@@ -6009,8 +6073,7 @@ function renderDeal(id, qs, previewCard){
        (условия) → что пришлось получить (согласования) → кто вёл. */
     else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
       ${lawPartialNote(d)}
-      ${specBlock([specRow("Согласования", d.law.appr)])}
-      ${para("Условия сделки", d.law.terms)}
+      ${specBlock([specRow("Согласования", d.law.appr), para("Условия сделки", d.law.terms)])}
       ${legalAdvisors(d).map(it=>`
         <div class="adv-card">
           <span class="label">${esc(it.role)}</span>
@@ -6028,8 +6091,8 @@ function renderDeal(id, qs, previewCard){
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
-      ${para("Как устроена сделка", d.law && d.law.struct)}
       ${specBlock([
+        para("Как устроена сделка", d.law && d.law.struct),
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
            Иначе одно и то же читается дважды: сначала плашка «Продавец →
            Предмет сделки → Покупатель», через строку — тот же предмет абзацем.
@@ -6057,6 +6120,12 @@ function renderDeal(id, qs, previewCard){
          живёт там, где его ищут, и подсказка под линзами прямо говорит, что
          согласования — в «Юристе». Кнопка «Юрист» у таких карточек не
          приглушена, так что путь виден. */
+    /* Блоки линзы вставляются после отрисовки страницы, и общий проход по
+       `.reveal` (route) их уже не видит: «Дополнительный контекст» оставался с
+       opacity:0 — на экране это читалось как огромный пустой провал между
+       «Контекстом» и «Похожими сделками» (владелец, 3 октября 2026, карточки
+       «Ленты»/«Марии-Ра» и Ситибанка). Показываем их здесь же. */
+    f.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
     if(lens==="eco") mountDealFns(d);
   };
   paint();
@@ -6365,6 +6434,32 @@ function companyDealRows(id, structured, mentions){
     mentioned.push({kind:"mention",date:m.date,title:m.title,href:m.url,source:m.source||"Источник"});
   }
   return {confirmed,mentioned};
+}
+/* С КАКИМИ КОНСУЛЬТАНТАМИ РАБОТАЕТ КОМПАНИЯ. Просьба владельца 3 октября 2026.
+   Берутся консультанты из сделок, где компания — сторона (тот же список, что
+   «Команда сделки» на карточке: dealAdvisorItems). Консультант другой стороны
+   (покупателя, когда компания — продавец) её консультантом не считается; тот,
+   чью сторону источник не уточнил, остаётся — вычеркнуть его значило бы
+   потерять настоящего. Счёт — по сделкам, а не по упоминаниям. */
+function companyAdvisorsHtml(id, deals){
+  const ROLE_SIDE = {"Покупатель":"buyer","Продавец":"seller","Предмет сделки":"target"};
+  const rows = {};
+  deals.forEach(d=>{
+    const mine = ROLE_SIDE[companyRole(d,id)];
+    dealAdvisorItems(d).forEach(it=>{
+      if(mine && it.side!=="none" && it.side!==mine) return;
+      const key = firmIdOf(it.name) || it.name.toLowerCase().replace(/\s+/g," ");
+      const row = rows[key] || (rows[key] = {name:it.name, deals:new Set()});
+      row.deals.add(d.id);
+    });
+  });
+  const list = Object.values(rows).sort((a,b)=>b.deals.size-a.deals.size || a.name.localeCompare(b.name,"ru"));
+  if(!list.length) return "";
+  const shown = list.slice(0, 8);
+  return `<div class="co-advisors reveal"><span class="label">Консультанты в сделках компании</span>
+    <div class="co-advisors-list">${shown.map(r=>`<span class="co-adv">${advFirmLink(r.name)} <span class="co-adv-n num">${r.deals.size} ${plural(r.deals.size,"сделка","сделки","сделок")}</span></span>`).join("")}</div>
+    ${list.length>shown.length?`<p class="co-advisors-more">И ещё ${list.length-shown.length} — в карточках сделок.</p>`:""}
+  </div>`;
 }
 function companyDealsCompactHtml(id, structured, mentions){
   const c=co(id), rows=companyDealRows(id,structured,mentions), preview=rows.confirmed.slice(0,2);
@@ -7268,6 +7363,7 @@ function renderCompany(id){
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
+  ${companyAdvisorsHtml(id, structured)}
   <!-- СДЕЛКИ ВЫШЕ ОТЧЁТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
        справка о стороне сделки, а не главное на странице. Блок с пятью
        вкладками стоял выше и занимал целый экран, так что до списка сделок
@@ -7300,20 +7396,26 @@ function renderCompany(id){
      работала, о чём спросить), на собеседование — как к работодателю
      (чем занимается, какого масштаба, что с ней происходило, что уточнить
      о работе). */
-  const askAssistant = q => { sessionStorage.setItem("pendingQ", q); location.hash = "#/assistant"; };
+  /* В чате вопрос показывается короткой подписью («Подготовка к встрече:
+     „Лента“»), а модели уходит полный текст: длинный служебный запрос в
+     пузыре читался как стена текста (владелец, 3 октября 2026). */
+  const askAssistant = (q, label) => { sessionStorage.setItem("pendingQ", q); sessionStorage.setItem("pendingLabel", label||""); location.hash = "#/assistant"; };
   const prepMeeting = document.getElementById("prepMeeting");
+  /* Короче и списком: владелец 3 октября 2026 — «подготовка к собеседованию
+     слишком длинная», нужен короткий кликабельный список сделок и фокус на
+     самом собеседовании, а не пересказ всей карточки. */
   if(prepMeeting) prepMeeting.onclick = () => askAssistant(
-    `Готовлюсь к встрече с компанией «${c.name}». Расскажи коротко: чем занимается, `
-    + `кому принадлежит, какие сделки совершала за последние годы и в какой роли — `
-    + `покупатель, продавец или предмет сделки, с какими консультантами работала и `
-    + `что видно по её отчётности. В конце назови три-четыре вопроса, которые стоит `
-    + `задать на встрече.`);
+    `Готовлюсь к встрече с компанией «${c.name}». Коротко, по пунктам: чем занимается `
+    + `и кому принадлежит; её сделки за последние годы — списком со ссылками на карточки `
+    + `«Компаса» (до пяти, с ролью: покупатель, продавец или предмет сделки); с какими `
+    + `консультантами работала. В конце — три вопроса, которые стоит задать на встрече.`,
+    `Подготовка к встрече: «${c.name}»`);
   bindInterviewPrep("prepInterview", resume => interviewQuestion(
-    `Готовлюсь к собеседованию в компанию «${c.name}». Расскажи коротко: чем она `
-    + `занимается и какого масштаба, кому принадлежит, что происходило с ней в `
-    + `последние годы — покупки, продажи, смена собственников, — и что видно по её `
-    + `отчётности. В конце назови, на что обратить внимание и что стоит уточнить у `
-    + `работодателя.`, resume, "компанией"));
+    `Готовлюсь к собеседованию в компанию «${c.name}». Коротко, по пунктам: чем `
+    + `занимается и какого масштаба, кому принадлежит; что с ней происходило в последние `
+    + `годы — списком со ссылками на карточки «Компаса» (до пяти). В конце — три вопроса, `
+    + `которые стоит задать работодателю.`, resume, "компанией"),
+    `Подготовка к собеседованию: «${c.name}»`);
   const followButton=document.getElementById("followCompany");
   if(followButton) followButton.onclick=async()=>{
     followButton.disabled=true;
@@ -7491,7 +7593,7 @@ function firmSummaryHtml(id, full, mini, bulk){
      одно и то же, обязаны читать один предикат. Третий ответ — «сама
      компания»: у IPO, обмена акций, выкупа своих бумаг покупателя и продавца
      нет, фирма ведёт эмитента. */
-  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы"};
+  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы", other:"Иное"};
   const SIDE_HINT = {target:"«Таргет» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
                      bank:"«Организаторы и кредиторы» — банки-организаторы размещения, андеррайтеры, банки-кредиторы."};
   const roles = {};
@@ -7562,10 +7664,10 @@ function renderFirm(id){
   bindFirmDealsMore();
   bindInterviewPrep("prepInterviewFirm", resume => interviewQuestion(
     `Готовлюсь к собеседованию в ${isLegal?"юридическую фирму":"инвестиционную компанию"} «${f.n}». `
-    + `Расскажи коротко по базе «Компаса»: какие сделки она сопровождала и в какой роли — `
-    + `за покупателя, продавца или эмитента, в каких отраслях работает чаще всего, какие `
-    + `компании встречаются в её сделках не по одному разу. В конце назови, на что обратить `
-    + `внимание и что стоит уточнить у работодателя.`, resume, "фирмой"));
+    + `Коротко, по пунктам: её последние сделки — списком со ссылками на карточки «Компаса» `
+    + `(до пяти, с ролью: за покупателя, продавца или эмитента); в каких отраслях работает `
+    + `чаще всего. В конце — три вопроса, которые стоит задать работодателю.`, resume, "фирмой"),
+    `Подготовка к собеседованию: «${f.n}»`);
   mountMiniAI(f.n,"advisor",id);
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
@@ -7585,9 +7687,9 @@ const interviewPanelHtml = () => `
       <span>Текст уйдёт ассистенту вместе с вопросом и, если вы вошли, останется в вашей истории диалогов. Не указывайте паспортные данные и контакты.</span></div>
   </div>`;
 const interviewQuestion = (base, resume, withWhom) => resume
-  ? `${base}\n\nМоё резюме:\n${resume}\n\nСопоставь мой опыт с ${withWhom}: какие пункты резюме стоит подчеркнуть на собеседовании и чего мне не хватает знать о ней.`
+  ? `${base}\n\nМоё резюме:\n${resume}\n\nСопоставь мой опыт с ${withWhom} — коротко, списком: что подчеркнуть на собеседовании и чего мне не хватает.`
   : base;
-function bindInterviewPrep(buttonId, buildQuestion){
+function bindInterviewPrep(buttonId, buildQuestion, label){
   const btn = document.getElementById(buttonId), panel = document.getElementById("interviewPrep");
   if(!btn || !panel) return;
   const area = panel.querySelector("textarea");
@@ -7596,7 +7698,9 @@ function bindInterviewPrep(buttonId, buildQuestion){
     if(!panel.hidden){ panel.classList.add("in"); area.focus(); }
   };
   document.getElementById("interviewGo").onclick = () => {
-    sessionStorage.setItem("pendingQ", buildQuestion(area.value.trim().slice(0, RESUME_MAX)));
+    const resume = area.value.trim().slice(0, RESUME_MAX);
+    sessionStorage.setItem("pendingQ", buildQuestion(resume));
+    sessionStorage.setItem("pendingLabel", label ? label + (resume ? " (с резюме)" : "") : "");
     location.hash = "#/assistant";
   };
 }
@@ -8590,8 +8694,8 @@ async function renderAssistant(){
     box.scrollTop=box.scrollHeight;
     renderThreadList();
   };
-  const answer=async q=>{
-    push("user",esc(q));
+  const answer=async (q, shown)=>{
+    push("user",esc(shown||q));
     turns++; lastQ=q; paintState();
     const w=push("ai wait","");
     const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general",history:history.slice()},w);
@@ -8667,7 +8771,8 @@ async function renderAssistant(){
   // Смена режима переспрашивает тот же вопрос — см. bindModeToggles.
   bindModeToggles(app, ()=>{ if(lastQ) answer(lastQ); });
   renderThreadList();
-  const pending=sessionStorage.getItem("pendingQ");if(pending){sessionStorage.removeItem("pendingQ");answer(pending);}
+  const pending=sessionStorage.getItem("pendingQ"), pendingLabel=sessionStorage.getItem("pendingLabel")||"";
+  if(pending){sessionStorage.removeItem("pendingQ");sessionStorage.removeItem("pendingLabel");answer(pending, pendingLabel||undefined);}
 }
 /* Даже общее обращение не отправляем во внешний почтовый клиент: тот же
    короткий диалог кладёт сообщение в редакционную очередь внутри продукта. */

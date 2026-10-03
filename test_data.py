@@ -1722,3 +1722,25 @@ def test_aggregator_is_not_a_fact_source_when_an_original_exists(deals):
         if any(not is_aggregator(s[1]) for s in http) and any(is_aggregator(s[1]) for s in http):
             bad.append(d["id"])
     assert not bad, "агрегатор показан рядом с первоисточником: %s" % bad[:8]
+
+
+def test_sum_and_share_fields_stay_short(deals):
+    """Владелец 3 октября 2026 на карточке «Т-Технологий»/«Точки»: в поле
+    суммы лежал абзац на 381 знак, в поле доли — абзац про допэмиссию. Сумма
+    и доля — короткие значения; пересказ механики живёт в «Форме расчётов»,
+    «Контексте» или «Как устроена сделка». Потолок — текущий хвост (26 и 519
+    карточек на 3 октября 2026), чтобы новые карточки его не растили."""
+    long_sum = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("sum"), str) and len(d["eco"]["sum"]) > 80]
+    long_share = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("share"), str) and len(d["eco"]["share"]) > 160]
+    assert len(long_sum) <= 26, "сумма прозой у новых карточек: %s" % [i for i in long_sum][:10]
+    assert len(long_share) <= 519, "доля прозой у новых карточек: %d" % len(long_share)
+    assert "ga7020b5e" not in long_sum and "ga7020b5e" not in long_share
+
+
+def test_industry_is_defined_except_the_cards_waiting_for_the_owner(deals):
+    """«Не определена» — не отрасль: такая карточка не попадает ни в сводку,
+    ни в фильтр. Очевидные случаи проставляются по заголовку при приёмке;
+    спорные уходят вопросом в консоль (send_open_questions.py), и пока
+    владелец не ответил, их может быть не больше двух (3 октября 2026)."""
+    undefined = [d["id"] for d in deals if d.get("ind") == "Не определена"]
+    assert len(undefined) <= 2, "отрасль не определена: %s" % undefined
