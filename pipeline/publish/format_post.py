@@ -547,6 +547,33 @@ def fin_summary(bo_rows, today=None):
     return latest['year'], ' · '.join(parts)
 
 
+# «ПРЕДМЕТ» — ЧТО ПОКУПАЮТ, А НЕ КТО ЧТО СДЕЛАЛ. Владелец 28–29 сентября 2026
+# по постам о Metro («„УК Торг РУС“ получила 100% в уставном капитале…») и
+# ТГК-1 («выпущенные акции предлагается разместить среди …»): первое —
+# действие стороны, второе — получатели бумаг; ни то ни другое не предмет.
+# Такие предложения в строку «Предмет» не берутся, их место — заголовок,
+# контекст и «Форма расчётов».
+PARTY_NARRATIVE = re.compile(
+    r'\b(?:получил[аио]?|приобр[её]л[аио]?|купил[аио]?|выкупил[аио]?|продал[аио]?|передал[аио]?'
+    r'|консолидировал[аио]?|стал[аио]?\s+(?:владельц|собственник|акционер))\b'
+    r'|разместить|размеща[юе]тся|размещены|в\s+пользу\s|среди\s+[«"]', re.I)
+
+# ИНН и ОГРН в канал не выносятся (владелец, 28 сентября 2026): реквизиты —
+# дело профиля юрлица, а в посте они читаются как канцелярия.
+REGISTRY_ID = re.compile(r'[,;]?\s*[—–-]?\s*(?:ИНН|ОГРН|ОГРНИП|КПП)\s*\d{9,15}', re.I)
+
+
+def _is_party_narrative(sentence):
+    return bool(PARTY_NARRATIVE.search(sentence or ''))
+
+
+def _strip_registry_ids(text):
+    out = REGISTRY_ID.sub('', str(text or ''))
+    out = re.sub(r'\(\s*\)', '', out)
+    out = re.sub(r'\s+([,.;)])', r'\1', out)
+    return re.sub(r'\s{2,}', ' ', out).strip(' ,;—–-')
+
+
 def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     """Дословные предложения о ПРЕДМЕТЕ сделки — точное юрлицо/доля и род
     занятий — с новизной к `reference` (заголовок + уже показанное имя).
@@ -564,13 +591,13 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     eco = deal.get('eco') or {}
     sources = []
     if has(eco.get('share')):
-        sources.append((eco['share'], None))
+        sources.append((eco['share'], _is_party_narrative))
     elif has(deal.get('extra')):
-        sources.append((deal['extra'], None))
+        sources.append((deal['extra'], _is_party_narrative))
     if has(eco.get('target_fin')):
         # Из «Финансов предмета» берём только то, что называет предмет, а не
         # его показатели (см. _is_financial_report выше).
-        sources.append((eco['target_fin'], _is_financial_report))
+        sources.append((eco['target_fin'], lambda x: _is_financial_report(x) or _is_party_narrative(x)))
     target_id = deal.get('target')
     if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
         sources.append((companies[target_id]['desc'], None))
@@ -583,6 +610,7 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
         if budget <= 0:
             break
         new = _pick_novel_sentences(src, ref, limit=limit - len(picked), max_chars=budget, drop=drop)
+        new = [x for x in (_strip_registry_ids(n) for n in new) if x]
         if new:
             picked += new
             ref = ref + ' ' + ' '.join(new)
@@ -986,6 +1014,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
     elif 'seller' in required:
         add('%s не раскрыт' % _lab(seller_label))
 
+    asset = _strip_registry_ids(asset) if asset else asset
     detail = _join_subject_sentences(
         _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
     if asset and detail and not has_novelty(asset, detail):

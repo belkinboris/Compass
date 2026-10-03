@@ -1744,3 +1744,29 @@ def test_industry_is_defined_except_the_cards_waiting_for_the_owner(deals):
     владелец не ответил, их может быть не больше двух (3 октября 2026)."""
     undefined = [d["id"] for d in deals if d.get("ind") == "Не определена"]
     assert len(undefined) <= 2, "отрасль не определена: %s" % undefined
+
+
+def test_sums_start_with_a_capital_letter_and_do_not_hedge(deals):
+    """Владелец 28 сентября 2026 по посту о «Медфрендс-Клиник»: «Не раскрыта
+    должно быть с заглавной буквы», «вряд ли» не писать; ИНН и ОГРН в
+    витрину не выносятся (правила — docs/card_acceptance.md)."""
+    low = [d["id"] for d in deals for v in (d.get("sum"), (d.get("eco") or {}).get("sum"))
+           if isinstance(v, str) and re.match(r"^\s*[а-яё]", v)]
+    assert not low, "сумма со строчной буквы: %s" % low[:10]
+    hedged = [d["id"] for d in deals for v in (d.get("sum"), (d.get("eco") or {}).get("sum"))
+              if isinstance(v, str) and re.search(r"вряд ли", v, re.I)]
+    assert not hedged, "«вряд ли» в сумме: %s" % hedged
+    ids = [d["id"] for d in deals for v in (d.get("asset"), (d.get("eco") or {}).get("share"))
+           if isinstance(v, str) and re.search(r"\b(?:ИНН|ОГРН)\s*\d{9,15}", v)]
+    assert not ids, "ИНН/ОГРН в предмете: %s" % ids
+
+
+def test_approval_stages_name_the_authority(deals):
+    """«Какое согласование получено?» (владелец, 28 сентября 2026): этап вида
+    approval называет орган — ФАС, Президент, правкомиссия, Банк России,
+    акционеры, суд (`draft.approval_title`); безымянный этап с пустой
+    заметкой не заводится."""
+    generic = [(d["id"], e.get("date")) for d in deals for e in d.get("events") or []
+               if e.get("kind") == "approval" and (e.get("title") or "").strip() == "Согласование получено"
+               and not (e.get("note") or "").strip()]
+    assert not generic, "безымянный этап согласования без заметки: %s" % generic

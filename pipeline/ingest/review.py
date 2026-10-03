@@ -459,8 +459,7 @@ def typo_flat(s):
     прямые кавычки на ёлочки, дефис в диапазоне на тире и точку в числе на
     запятую — и 503 записи таблицы `FIXES` перестали совпадать с базой
     посимвольно, хотя ФАКТ в базе стоит ровно тот, который правка внесла.
-    Сравнение по буквам объявило бы их неприменёнными и уронило бы
-    `test_review_table_is_applied_and_not_pending`.
+    Сравнение по буквам уронило бы `test_review_table_is_applied_and_not_pending`.
 
     Складываются ТОЛЬКО знаки, а не слова: `«`/`»`/`"` в один символ, все
     виды тире в один, десятичная запятая и точка в одну. Ни одна буква,
@@ -516,7 +515,7 @@ def already_applied(fix, card, companies=None):
         return True
     if current is None or fix['new'] is None:
         return False
-    if typo_flat(current) == typo_flat(fix['new']):
+    if typo_flat(current).lower() == typo_flat(fix['new']).lower():   # регистр
         return True
     # ВЫЧИТКА (2 сентября 2026). Поле переписано редактором, и совпадать с
     # `new` оно больше не будет никогда — но факт, который правка внесла,

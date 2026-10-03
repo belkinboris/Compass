@@ -390,6 +390,11 @@ nav a.on::after,nav a:hover::after{width:100%}
 .mode.light button.on{background:var(--accent-deep);color:var(--ivory);border-color:var(--accent-deep)}
 .hero-rule{height:1px;background:rgba(243,241,233,.22);margin:40px 0 0;max-width:680px;transform-origin:left;animation:wipe 1.2s var(--ease) .3s both}
 .hero-note{margin-top:14px;font-size:12.5px;color:#7E948A}
+/* Владелец 28 сентября 2026: «такая штука висит минуту и ничего не
+   происходит» — цифры стояли нулями с подписью «догружаем базу…», а с VPN
+   база могла не загрузиться вовсе. Совет про VPN теперь стоит прямо здесь,
+   а не только в заглушке ленты ниже. */
+.hero-slow{display:block;margin-top:8px;font-size:12.5px;color:var(--ivory);opacity:.85;max-width:52ch;font-family:var(--f-body);letter-spacing:0}
 
 /* ---------- тёмная hero-полоса раздела ---------- */
 /* Чередование тёмных и светлых страниц (просьба владельца): Сделки тёмные,
@@ -4536,7 +4541,7 @@ function renderDeals(){
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
-          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":" · догружаем базу…"}`
+          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":` · загружаем базу… <span class="hero-slow">Если это длится больше нескольких секунд, отключите VPN: сервер «Компаса» в России, и через иностранный адрес база может не загрузиться.</span>`}`
         }</div>
       </div>
     </div>
