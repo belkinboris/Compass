@@ -122428,15 +122428,44 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": 27.4,
-     "basis": "rule",
-     "card_hash": "968bb878e8f5"
+     "value": 27.64,
+     "basis": "read",
+     "card_hash": "968bb878e8f5",
+     "object": "Ozon",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+     "source": "https://frankmedia.ru/199224",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-03",
+     "readings": [
+      {
+       "value": 27.64,
+       "object": "Ozon",
+       "event": "closing",
+       "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
+       "reader": "A"
+      },
+      {
+       "value": 27.64,
+       "object": "Ozon",
+       "event": "closing",
+       "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 38300000000.0,
+     "value_rub": 38300000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "disputed",
+     "scope": "package",
+     "basis": "read",
      "card_hash": "f2155728c8e6",
      "disputed": [
       {
@@ -122466,22 +122495,22 @@
        "reader": "B"
       }
      ],
-     "quote": "Источник РБК на инвестиционном рынке подтвердил, что речь идет о доле в Ozon. По его данным, сумма сделки составила 38,2 млрд руб. – с дисконтом к рыночной стоимости.",
-     "source": "https://www.vedomosti.ru/business/articles/2025/07/28/1127313-kak-aleksandr-chachava-stal-vladeltsem-ozon",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "quote": "Сумма сделки составила 38,3 млрд рублей.",
+     "source": "https://frankmedia.ru/199224",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-03",
      "readings": [
       {
-       "value_rub": 38200000000,
-       "meaning": "reported",
-       "attribution": "media_sources",
+       "value_rub": 38300000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
        "event": "closing",
        "scope": "package",
-       "terms": "unknown",
-       "quote": "Источник РБК на инвестиционном рынке подтвердил, что речь идет о доле в Ozon. По его данным, сумма сделки составила 38,2 млрд руб. – с дисконтом к рыночной стоимости.",
-       "attribution_quote": null,
-       "source": "https://www.vedomosti.ru/business/articles/2025/07/28/1127313-kak-aleksandr-chachava-stal-vladeltsem-ozon",
-       "quote_checked": true,
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 38,3 млрд рублей.",
+       "attribution_quote": "Об этом сообщает РБК со ссылкой на аудиторское заключение к годовому отчету компании «Кенигсберг Инвестментс».",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
        "reader": "A"
       },
       {
@@ -122492,40 +122521,57 @@
        "scope": "package",
        "terms": "fixed",
        "quote": "Сумма сделки составила 38,3 млрд рублей.",
-       "source": "https://frankmedia.ru/199224",
        "attribution_quote": "Об этом сообщает РБК со ссылкой на аудиторское заключение к годовому отчету компании «Кенигсберг Инвестментс».",
+       "source": "https://frankmedia.ru/199224",
        "quote_checked": null,
        "reader": "B"
       }
-     ]
+     ],
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Об этом сообщает РБК со ссылкой на аудиторское заключение к годовому отчету компании «Кенигсберг Инвестментс».",
+     "scope_basis": "verified"
     },
     "date": {
      "value": "2024",
      "meaning": "closing",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "206a67efb8bb",
      "meaning_variants": [
       "closing"
      ],
-     "quote": "Весной прошлого года РБК сообщило, что \"Восток Инвестиции\" в конце 2024 года продала 27,7% акций Ozon - сумма сделки составила 38,2 млрд рублей.",
-     "source": "https://www.interfax.ru/business/1083246",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+     "source": "https://frankmedia.ru/199224",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "value": "2024",
        "meaning": "closing",
-       "quote": "Весной прошлого года РБК сообщило, что \"Восток Инвестиции\" в конце 2024 года продала 27,7% акций Ozon - сумма сделки составила 38,2 млрд рублей.",
-       "source": "https://www.interfax.ru/business/1083246",
-       "quote_checked": true,
+       "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
        "reader": "A"
       },
       {
        "value": "2024",
        "meaning": "closing",
-       "quote": "Весной прошлого года РБК сообщило, что \"Восток Инвестиции\" в конце 2024 года продала 27,7% акций Ozon - сумма сделки составила 38,2 млрд рублей.",
-       "source": "https://www.interfax.ru/business/1083246",
-       "quote_checked": true,
+       "quote": "Сделка по продаже 27,64% акций одного из крупнейших российских маркетплейсов — Ozon — была завершена в 2024 году.",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
        "reader": "B"
       }
      ]
@@ -122539,15 +122585,15 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "ec1e4d113547",
-     "quote": "Из документов следовало, что МКООО «приобрело акции публичной компании, которые впоследствии были вложены в уставный капитал дочерней компании», а затем «полностью реализовало» эту дочернюю компанию третьему лицу в течение отчетного периода.",
+     "quote": "Таким образом, под контроль Чачавы перешла доля в 27,71% уставного капитала маркетплейса, сообщили в Ozon.",
      "source": "https://www.vedomosti.ru/business/articles/2025/07/28/1127313-kak-aleksandr-chachava-stal-vladeltsem-ozon",
-     "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "Из документов следовало, что МКООО «приобрело акции публичной компании, которые впоследствии были вложены в уставный капитал дочерней компании», а затем «полностью реализовало» эту дочернюю компанию третьему лицу в течение отчетного периода.",
+       "quote": "Таким образом, под контроль Чачавы перешла доля в 27,71% уставного капитала маркетплейса, сообщили в Ozon.",
        "source": "https://www.vedomosti.ru/business/articles/2025/07/28/1127313-kak-aleksandr-chachava-stal-vladeltsem-ozon",
        "quote_checked": true,
        "reader": "A"
@@ -122555,13 +122601,13 @@
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "Пакет акций был передан в АО «О23», которое и стало владельцем 27,71% капитала Ozon.",
-       "source": "https://www.vedomosti.ru/business/articles/2025/07/28/1127313-kak-aleksandr-chachava-stal-vladeltsem-ozon",
-       "quote_checked": true,
+       "quote": "Холдингу «Восток Инвестиции» пришлось перепродать свою долю в Ozon российской структуре, не попадающей под санкции — такое условие, как уточняет источник РБК, было необходимым для завершения расчётов по сделке.",
+       "source": "https://frankmedia.ru/199224",
+       "quote_checked": null,
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "read",
      "intragroup": false
     },
     "target": {
@@ -122571,21 +122617,53 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "b59df8ff7723"
+     "perimeter": "refuted",
+     "card_hash": "b59df8ff7723",
+     "perimeter_entity": "МКПАО «Озон»",
+     "perimeter_report": {
+      "inn": "7743181857",
+      "year": null,
+      "revenue_rub": null,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ОЗОН ХОЛДИНГ\""
+     },
+     "perimeter_other_entities": [
+      "МКПАО «Озон»"
+     ],
+     "quote": "Компания АО \"О23\" довела долю в капитале Ozon до 34,95%, следует из отчета МКПАО \"Озон\" по МСФО.",
+     "source": "https://www.interfax.ru/business/1083246",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-03",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "МКПАО «Озон»"
+       ],
+       "entity": "МКПАО «Озон»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ОЗОН ХОЛДИНГ\"",
+        "inn": "7743181857"
+       },
+       "quote": "Компания АО \"О23\" довела долю в капитале Ozon до 34,95%, следует из отчета МКПАО \"Озон\" по МСФО.",
+       "source": "https://www.interfax.ru/business/1083246",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_disputed",
-     "top_purchases": "price_disputed",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
    },
@@ -144360,30 +144438,30 @@
      "value": 50.1,
      "basis": "verified",
      "card_hash": "ac880fbe51d9",
-     "object": "ГК «Борлас» («Борлас АФС»)",
+     "object": "ГК «Борлас»",
      "event": "closing",
      "event_variants": [
       "closing"
      ],
-     "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+     "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
      "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "value": 50.1,
-       "object": "ГК «Борлас» («Борлас АФС»)",
+       "object": "ГК «Борлас»",
        "event": "closing",
-       "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+       "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
        "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": 50.1,
-       "object": "ГК «Борлас» (ООО «Борлас АФС»)",
+       "object": "ГК «Борлас»",
        "event": "closing",
-       "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+       "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
        "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
        "quote_checked": true,
        "reader": "B"
@@ -144417,7 +144495,7 @@
      "quote": "Сделка была совершена летом 2023 г. Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
      "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "value_rub": 1620000000,
@@ -144439,7 +144517,7 @@
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "«Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
+       "quote": "Сделка была совершена летом 2023 г. Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
        "attribution_quote": "Группа компаний « Софтлайн » раскрыла подробности сделки по приобретению контрольной доли в группе « Борлас », занимающейся ИТ-консалтингом .",
        "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
@@ -144459,7 +144537,7 @@
      "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
      "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "value": "2023-07-13",
@@ -144490,16 +144568,16 @@
      "card_hash": "2d3edf58d7e5",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-     "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
+     "quote": "Компания «Софтлайн» потратила 1,62 млрд руб на покупку контрольной доли группы «Борлас», занимающейся внедрением решений на базе «1С».",
+     "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-       "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
+       "quote": "Компания «Софтлайн» потратила 1,62 млрд руб на покупку контрольной доли группы «Борлас», занимающейся внедрением решений на базе «1С».",
+       "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
        "reader": "A"
       },
@@ -144522,7 +144600,7 @@
      "basis": "registry",
      "perimeter": "refuted",
      "card_hash": "bf0b5644a7cd",
-     "perimeter_entity": "«Борлас АФС»",
+     "perimeter_entity": "ООО «Группа Борлас»",
      "perimeter_report": {
       "inn": "7713619935",
       "year": 2022,
@@ -144530,6 +144608,7 @@
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\""
      },
      "perimeter_other_entities": [
+      "ООО «Борлас АФС»",
       "ООО «Борлас»",
       "ООО «Борлас Секьюрити Системз»",
       "ООО «Борлас Инженерно технический центр»"
@@ -144537,22 +144616,23 @@
      "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
      "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-03",
      "readings": [
       {
        "ok": false,
        "covers_business": false,
        "other_entities": [
+        "ООО «Борлас АФС»",
         "ООО «Борлас»",
         "ООО «Борлас Секьюрити Системз»",
         "ООО «Борлас Инженерно технический центр»"
        ],
-       "entity": "«Борлас АФС»",
+       "entity": "ООО «Группа Борлас»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\"",
         "inn": "7713619935",
         "year": 2022,
-        "revenue_rub": 1326985000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\""
+        "revenue_rub": 1326985000.0
        },
        "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
        "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
@@ -144563,7 +144643,7 @@
        "ok": false,
        "covers_business": false,
        "other_entities": [
-        "«Борлас АФС»",
+        "ООО «Борлас АФС»",
         "ООО «Борлас»",
         "ООО «Борлас Секьюрити Системз»",
         "ООО «Борлас Инженерно технический центр»"
@@ -177015,8 +177095,8 @@
    "status": "Обсуждается",
    "src": [
     [
-     "mergers.ru",
-     "https://mergers.ru/news/Nachalos-obedinenie-nefteservisnyh-holdingov-Geotek-i-Bashneftegeofizika-87277"
+     "Интерфакс",
+     "https://www.interfax.ru/business/1106008"
     ]
    ],
    "from_ingest": true,
@@ -177114,7 +177194,13 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "discovery_src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Nachalos-obedinenie-nefteservisnyh-holdingov-Geotek-i-Bashneftegeofizika-87277"
+    ]
+   ]
   },
   {
    "id": "gmru-prodo-star-nafta-broiler",
@@ -177125,12 +177211,8 @@
    "status": "Закрыта",
    "src": [
     [
-     "mergers.ru",
-     "https://mergers.ru/news/Gruppa-Prodo-vykupila-biznes-Bashkirskogo-brojlera-u-gruppy-Star-Nafta-87275"
-    ],
-    [
-     "Сделки M&A (@dealsma)",
-     "https://t.me/dealsma/7259"
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8846029"
     ]
    ],
    "from_ingest": true,
@@ -177248,7 +177330,17 @@
    "followup_researched": "2026-09-06",
    "target": "g5eb2d756",
    "buyer": "g6798454b",
-   "seller_id": "gf43cebd7"
+   "seller_id": "gf43cebd7",
+   "discovery_src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Gruppa-Prodo-vykupila-biznes-Bashkirskogo-brojlera-u-gruppy-Star-Nafta-87275"
+    ],
+    [
+     "Сделки M&A (@dealsma)",
+     "https://t.me/dealsma/7259"
+    ]
+   ]
   },
   {
    "id": "gmru-prime-pervy-poliplastik",
@@ -177515,12 +177607,8 @@
    "status": "Закрыта",
    "src": [
     [
-     "mergers.ru",
-     "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267"
-    ],
-    [
-     "mergers.ru",
-     "https://mergers.ru/news/GK-Kolomenskoe-vykupit-hlebokombinat-Peko-87197"
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8814402"
     ]
    ],
    "from_ingest": true,
@@ -177655,7 +177743,17 @@
    "seller": "Исак Гилядов, Галина Фрольцова и Марина Цебоева",
    "followup_researched": "2026-09-06",
    "target": "gbd6de100",
-   "buyer": "gce291e54"
+   "buyer": "gce291e54",
+   "discovery_src": [
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/Holding-Kolomenskij-priobrel-kombinat-Peko-87267"
+    ],
+    [
+     "mergers.ru",
+     "https://mergers.ru/news/GK-Kolomenskoe-vykupit-hlebokombinat-Peko-87197"
+    ]
+   ]
   },
   {
    "id": "gmru-arnest-reckitt",
@@ -209177,7 +209275,8 @@
      "mergers.ru",
      "https://mergers.ru/news/Nacionalnaya-Media-Gruppa-priobrel-kontrolnuyu-dolyu-v-ID-Komsomolskaya-pravda-87469"
     ]
-   ]
+   ],
+   "followup_researched": "2026-10-03"
   },
   {
    "id": "gd9ccfdd2",
@@ -209240,6 +209339,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8925020"
+     ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-09-15",
+     "title": "Мазепин — на финишной прямой",
+     "note": "По данным Forbes, сделка о продаже «Лесты» Никите Мазепину находится на финишной прямой — документы уже подготовлены, осталось согласовать цену. Источник Forbes оценил справедливую стоимость компании в 30–35 млрд ₽ — ниже первоначальной оценки в 50 млрд ₽.",
+     "source": [
+      "Forbes (через 3DNews)",
+      "https://3dnews.ru/1148534/vot-eto-povorot-na-pokupku-izdatelya-mira-tankov-i-mira-korabley-natselilsya-bivshiy-rossiyskiy-gonshchik-formuli1"
      ]
     },
     {
@@ -209312,7 +209421,7 @@
      "value": "2026-09-03",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "fd27df5abd81"
+     "card_hash": "daa68f83fe3e"
     },
     "nature": {
      "control_change": true,
@@ -209351,7 +209460,8 @@
    },
    "weekly_researched": "2026-09-11",
    "target": "g483cfb4f",
-   "sum": "Не раскрыта"
+   "sum": "Не раскрыта",
+   "followup_researched": "2026-10-03"
   },
   {
    "id": "g7ea48d66",
@@ -209491,7 +209601,8 @@
     }
    },
    "weekly_researched": "2026-09-11",
-   "seller_id": "gb2b066c3"
+   "seller_id": "gb2b066c3",
+   "followup_researched": "2026-10-03"
   },
   {
    "id": "gddb34475",
@@ -220884,7 +220995,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Здание имеет статус объекта культурного наследия. На торги выставлялись подвальные помещения и площади на первом и втором этажах. Помещения конфискованы после трагедии 2022 года: незаконное заглубление подвала привело к обрушению лестничных пролётов, перекрытий и фасадной стены, погиб рабочий. В документации к аукциону отдельно указана стоимость восстановления: на реставрацию и ремонт потенциальному покупателю потребовалось бы дополнительно вложить 4,4 млн ₽.",
+    "context": "Здание имеет статус объекта культурного наследия. На торги выставлялись подвальные помещения и площади на первом и втором этажах. Помещения конфискованы после трагедии 2022 года: незаконное заглубление подвала привело к обрушению лестничных пролётов, перекрытий и фасадной стены, погиб рабочий. В документации к аукциону отдельно указана стоимость восстановления: по этим данным, новому владельцу пришлось бы дополнительно потратить на ремонт и реставрацию ещё 4,4 млн ₽.",
     "finadv": "—"
    },
    "law": {
@@ -221985,7 +222096,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Лот — участок 2,33 га и здание 6,2 тыс. кв. м (три трёхэтажных корпуса, соединённых двухэтажными переходами) на улице Коновалова, 2, в Трусовском районе Астрахани. С 1965 года здесь работал дом культуры экспериментального Астраханского целлюлозно-картонного комбината, позже после реконструкции здание заняли под корпус Астраханского государственного университета. Масштаб объекта и вид разрешённого использования участка предполагают развитие образовательных, культурных, спортивных или общественных проектов.",
+    "context": "Лот — участок 2,33 га и здание 6,2 тыс. кв. м (три трёхэтажных корпуса, соединённых двухэтажными переходами) на улице Коновалова, 2, в Трусовском районе Астрахани. С 1965 года здесь работал дом культуры экспериментального Астраханского целлюлозно-картонного комбината, позже, после реконструкции, в здании расположился корпус Астраханского государственного университета. Судя по размеру объекта и виду разрешённого использования участка, здесь возможно развитие образовательных, культурных, спортивных или общественных проектов.",
     "finadv": "—"
    },
    "law": {
@@ -222097,7 +222208,8 @@
    },
    "deep_researched": "2026-10-02",
    "weekly_researched": "2026-10-02",
-   "followup_researched": "2026-10-02"
+   "followup_researched": "2026-10-02",
+   "proofread": "2026-10-03"
   },
   {
    "id": "ga24ad083",
@@ -222634,7 +222746,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "g45b335fe",
@@ -222657,7 +222770,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Двухэтажный каменный особняк с обширными подвалами в историческом центре Шадринска (Курганская область), на улице Октябрьской; главный фасад выполнен с элементами неоренессанса — треугольный фронтон с парапетными столбиками, балкон с ажурной кованой решёткой над входом. Дом связан с купеческой семьёй Треуховых: Яким Прохорович Треухов в 1884–1888 годах возглавлял общественный банк Пономарева, владел мукомольной мельницей и торговал хлебом, мукой и бакалеей; Агафья Александровна Треухова была попечительницей детского убежища. После революции имущество семьи муниципализировали в 1920 году; 24–26 ноября 1919 года в здании проходил первый уездный съезд комсомола и размещался уездный комитет РКСМ — об этом напоминает мемориальная доска на фасаде. Продаётся вместе с земельным участком, объект можно использовать в коммерческих целях.",
+    "context": "Двухэтажный каменный особняк с обширными подвалами в историческом центре Шадринска (Курганская область), на улице Октябрьской; главный фасад выполнен с элементами неоренессанса — треугольный фронтон с парапетными столбиками, балкон с ажурной кованой решёткой над входом. Дом связан с купеческой семьёй Треуховых: в 1884–1888 годах Яким Прохорович Треухов стоял во главе общественного банка Пономарева, владел мукомольной мельницей и вёл торговлю хлебом, мукой и бакалеей; Агафья Александровна Треухова была попечительницей детского убежища. После революции имущество семьи муниципализировали в 1920 году; 24–26 ноября 1919 года в здании проходил первый уездный съезд комсомола и размещался уездный комитет РКСМ — об этом напоминает мемориальная доска на фасаде. Продаётся вместе с земельным участком, объект можно использовать в коммерческих целях.",
     "finadv": "—"
    },
    "law": {
@@ -222767,7 +222880,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "g6600b6a4",
@@ -222780,6 +222894,10 @@
     [
      "РИА Недвижимость",
      "https://realty.ria.ru/20261002/pavlovsk-2121689315.html"
+    ],
+    [
+     "Sobaka.ru",
+     "https://www.sobaka.ru/city/realty/221768"
     ]
    ],
    "from_ingest": true,
@@ -222797,7 +222915,7 @@
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "Новый собственник построек, признанных региональными памятниками архитектуры, обязан отреставрировать их за 7 лет. Для восстановления объектов культурного наследия инвестор может получить льготный кредит по ставке 9% годовых или 6%, если здания приспособят под гостиницу. Его предоставляет Банк «ДОМ.PФ»."
    },
    "sum": "170,67 млн ₽",
    "seller": "«Дом.РФ»",
@@ -222900,7 +223018,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "g2a4e8a51",
@@ -223039,7 +223158,8 @@
      "Telegram, @dealsma",
      "https://t.me/dealsma/7427"
     ]
-   ]
+   ],
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "gbcf07c78",
@@ -223172,7 +223292,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "g96d69d52",
@@ -223305,7 +223426,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "ga8d7e0ee",
@@ -223328,7 +223450,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Деревянный двухэтажный дом купца Василия Петровича Комлина в центральной части Сыктывкара (Республика Коми), объект культурного наследия регионального значения; построен в 1907–1908 годах, в архитектуре соединились традиции северного деревянного строительства и приёмы городской эклектики начала XX века. Площадь здания 665,3 кв. м, с лотом идёт аренда участка 0,12 га. После революции дом национализировали; в 1921 году в нём разместился областной народный суд, позднее — областной суд Коми автономной области и Коми АССР.",
+    "context": "Деревянный двухэтажный дом купца Василия Петровича Комлина в центральной части Сыктывкара (Республика Коми), объект культурного наследия регионального значения; построен в 1907–1908 годах, здание сочетает приёмы северного деревянного зодчества и городскую эклектику начала XX века. Площадь здания 665,3 кв. м, с лотом идёт аренда участка 0,12 га. После революции дом национализировали; в 1921 году в нём разместился областной народный суд, позднее — областной суд Коми автономной области и Коми АССР.",
     "finadv": "—"
    },
    "law": {
@@ -223438,7 +223560,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-02"
+   "proofread": "2026-10-02",
+   "deep_researched": "2026-10-03"
   },
   {
    "id": "g0b187624",
