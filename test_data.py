@@ -1770,3 +1770,11 @@ def test_approval_stages_name_the_authority(deals):
                if e.get("kind") == "approval" and (e.get("title") or "").strip() == "Согласование получено"
                and not (e.get("note") or "").strip()]
     assert not generic, "безымянный этап согласования без заметки: %s" % generic
+
+
+def test_listings_are_not_admitted_to_counts(deals):
+    """Лот на торгах без покупателя — не сделка (владелец, 3 октября 2026):
+    `facts.admitted.count/industry` у него False с причиной auction_open."""
+    bad = [d["id"] for d in deals if d.get("type") == "Продажа с торгов" and d.get("status") != "Закрыта"
+           and ((d.get("facts") or {}).get("admitted") or {}).get("count")]
+    assert not bad, "лот без покупки допущен к счёту: %s" % bad[:8]

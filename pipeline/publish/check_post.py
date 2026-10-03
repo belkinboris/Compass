@@ -86,7 +86,7 @@ def check(text):
 
     for line in text.splitlines():
         line = re.sub(r'<[^>]+>', '', line).strip()
-        m = re.match(r'^(Предмет|Продавец|Покупатель|Сумма|Статус|Отрасль):\s*(.+)$', line)
+        m = re.match(r'^(Предмет|Продавец|Покупатель|Сумма|Начальная цена лота|Статус|Отрасль):\s*(.+)$', line)
         if not m:
             continue
         field, value = m.group(1), m.group(2).strip()

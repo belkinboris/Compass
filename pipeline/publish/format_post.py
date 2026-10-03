@@ -1040,7 +1040,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
         add('%s %s' % (_lab('Финансы покупателя, %s год' % buyer_fin[0]), esc(buyer_fin[1])))
 
     if has(deal.get('sum')):
-        card.append('%s %s' % (_lab('Сумма'), esc(deal['sum'])))
+        card.append('%s %s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'), esc(deal['sum'])))
     elif PLACEHOLDER.match(str(deal.get('sum') or '')):
         # Карточка ПРЯМО утверждает, что сумма не раскрыта, — честный факт,
         # не пустота (партнёры сами хвалили именно такую строку у конкурента).
@@ -1151,17 +1151,21 @@ def owner_text_as_html(text):
     return text if _OWNER_TAG.search(text) else esc(text)
 
 
+def is_listing(deal):
+    """Лот на торгах без покупателя — ещё не сделка (владелец, 3 октября 2026):
+    в посте его цена подписывается «Начальная цена лота», а не «Сумма»."""
+    return str(deal.get('type') or '') == 'Продажа с торгов' and deal.get('status') != 'Закрыта'
+
+
 def render_buttons(deal):
-    """Клавиатура под постом: карточка сделки — широкой кнопкой первым рядом,
-    линзы — вторым. Формат готов для `reply_markup` Telegram."""
+    """Клавиатура под постом: одна широкая кнопка «Открыть карточку сделки».
+    Кнопки линз («Экономист», «Юрист») сняты решением владельца 3 октября
+    2026: «просто кнопки „Открыть карточку сделки“ достаточно». Формат готов
+    для `reply_markup` Telegram."""
     did = deal.get('id')
     if not did:
         return None
     rows = [[{'text': 'Открыть карточку сделки', 'url': '%s/#/deal/%s' % (SITE, did)}]]
-    lenses = [{'text': label, 'url': '%s/#/deal/%s?lens=%s' % (SITE, did, lens)}
-              for label, lens in lens_links(deal)]
-    if lenses:
-        rows.append(lenses)
     return {'inline_keyboard': rows}
 
 

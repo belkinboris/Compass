@@ -357,6 +357,10 @@ def admitted(deal: dict[str, Any], metric: str) -> tuple[bool, str]:
     f = deal.get('facts') or {}
     stake, price, date, nature, target = (f.get(k) or {} for k in FACT_KEYS)
     year = dm.year_of(deal)
+    # Лот на торгах без покупателя — ещё не сделка (владелец, 3 октября 2026):
+    # в ленте есть, в счёте и отраслевых показателях — только после покупки.
+    if metric in ('count', 'industry') and nature.get('auction') and deal.get('status') != 'Закрыта':
+        return False, 'auction_open'
     if metric == 'count':
         if not year:
             return False, 'no_year'

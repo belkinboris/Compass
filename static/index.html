@@ -1586,6 +1586,10 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
    телефоне каждая группа — сетка в две колонки, главная кнопка во всю ширину. */
 .tool-group{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
 .tool-group-share{padding-left:18px;border-left:1px solid var(--line)}
+/* «Скачать PDF» — ненавязчиво сверху карточки (владелец, 3 октября 2026):
+   маленькая кнопка в строке даты и статуса, прижата вправо. */
+.pdf-top{margin-left:auto;font-size:11.5px;padding:5px 11px;color:var(--muted);border-color:var(--line);background:transparent;white-space:nowrap}
+.pdf-top:hover{color:var(--accent);border-color:var(--accent)}
 .deal-tools .tool-note{flex-basis:100%}
 @media(max-width:560px){
   .tool-group{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -2305,6 +2309,15 @@ const advDetail = text => {
   // писать, по каким данным». Ссылка на источник живёт в линзе «Юрист».
   const t = String(text||"").replace(/Источник:.*$/i,"")
     .replace(/\((?:по\s+данным|по\s+сообщени|источник|сообщ)[^()]*\)/gi,"").trim();
+  // Консультант акционера стороны — так и пишем. Владелец 3 октября 2026 о
+  // Nextons на карточке Ситибанка: фирма вела не «Ренессанс Капитал», а его
+  // акционера; имя в скобках без этого слова читалось как имя клиента.
+  const sh = t.match(/акционер[а-яё]*\s+(покупател|продавц|компани|эмитент)/i);
+  if(sh){
+    const who = {покупател:"покупателя", продавц:"продавца", компани:"компании", эмитент:"эмитента"}[sh[1].toLowerCase()];
+    const nm = t.match(/\(([^()]{2,80})\)/);
+    return `акционер ${who}${nm?` (${nm[1].trim()})`:""}`;
+  }
   const m = t.match(/\(([^()]{2,80})\)/);
   if(m) return m[1].trim();
   const bare = t.replace(/юридическ\w*|финансов\w*|консультант\w*|советник\w*|покупател\w*|продавц\w*|продавец|сторон\w*|не уточнен\w*|эмитент\w*|инвестор\w*|[,;:.]/gi,"").trim();
@@ -2619,7 +2632,7 @@ function companyDeals(id){
 }
 /* Основной счётчик включает только сделки, где компания указана стороной.
    Простые текстовые совпадения хранятся отдельно и доступны в полном списке. */
-const companyTotal = id => companyStructured(id).length;
+const companyTotal = id => companyStructured(id).filter(d=>!isListing(d)).length;
 const companyMentions = id => companyMentionList(id).length;
 
 /* Регулярка имени фирмы — одна на все экраны. `FIRM_MATCH` заполнен не для
@@ -2631,11 +2644,14 @@ const firmRx = id => {
   const fobj = FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
   return (fobj ? firmRxOf(fobj) : null) || FIRM_MATCH[id] || null;
 };
-function firmDeals(id){
+/* `withListings` — вместе с лотами на торгах, которые ещё не куплены: для
+   счёта и рейтингов они не сделки (isListing), но знать, что фирма названа
+   организатором такого лота, иногда нужно (тест каталога инвестконсультантов). */
+function firmDeals(id, withListings){
   const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
   return {
-    full: DEALS.filter(d=>(d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||"")),
+    full: DEALS.filter(d=>(withListings||!isListing(d))&&((d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||""))),
     mini: MINI_DEALS.filter(m=>m.firm===id),
     bulk: BULK_DEALS.filter(b=>b.firm===id)
   };
@@ -3185,6 +3201,13 @@ function isFresh(d){
   if(!smallAddDays().has(a)) return false;
   return Date.now() - Date.parse(a + "T00:00:00") < FRESH_DAYS*24*3600*1000;
 }
+/* ЛОТ НА ТОРГАХ — ЕЩЁ НЕ СДЕЛКА. Владелец 3 октября 2026: «юридически когда
+   кто-то что-то на торги выставляет — это не сделка. Пусть будет в ленте, но
+   для рейтингов использовать не нужно, пока сделки нет». В ленте и на
+   карточке лот остаётся; из аналитики, активности компаний и счёта
+   консультантов уходит, пока статус не «Закрыта» (купили на торгах). Та же
+   граница в `facts.py` (admitted count/industry: auction_open). */
+const isListing = d => !!d && d.type==="Продажа с торгов" && d.status!=="Закрыта";
 /* «ОБНОВЛЕНО» — У КАРТОЧКИ СВЕЖИЙ ЭТАП. Владелец 26 сентября 2026 не нашёл в
    ленте карточку штаб-квартиры «Швабе» (ge957fc7b): сделка августа закрылась
    25 сентября, сообщение об этом ушло в канал, а в ленте карточка стояла на
@@ -4039,6 +4062,10 @@ const SUM_MEANING_SHORT = {
    лишняя. У остальных трёх в тексте одно число, и подпись «диапазон» спорила
    бы с тем, что читатель видит; это вопрос к данным, а не к оформлению. */
 const sumNoteFor = d => {
+  // Лот на торгах: его цена — начальная, и так и подписывается, если в
+  // самом тексте суммы этого ещё нет (владелец, 3 октября 2026: «если это
+  // начальная цена лота, то так и надо писать»).
+  if(isListing(d) && sumState(d.sum)==="known" && !/начальн/i.test(String(d.sum||""))) return "начальная цена";
   const meaning = (priceFact(d) || {}).meaning;
   return SUM_MEANING_SHORT[meaning] || "";
 };
@@ -5713,6 +5740,7 @@ function renderDeal(id, qs, previewCard){
       ${d.status?`<span class="status ${statusClass(d.status)}">${d.status}</span>`:""}
       ${stalledDiscussionHint(d)?`<span class="stalled-hint" title="${esc(stalledDiscussionHint(d))}">ⓘ</span>`:""}
       ${industryLinksHtml(d)}
+      <button class="chip pdf-top" id="downloaddeal" type="button" title="Скачать карточку в PDF">Скачать PDF</button>
     </div>
     <div class="deal-parties-strong reveal">
       ${buyerName?`<a href="#/companies/${d.buyer}">${buyerName}</a>`
@@ -5741,7 +5769,6 @@ function renderDeal(id, qs, previewCard){
       <button class="chip" id="fixdeal">Уточнить или дополнить</button>
     </div>
     <div class="tool-group tool-group-share">
-      <button class="chip" id="downloaddeal">Скачать PDF</button>
       <button class="chip" id="copydeal">Скопировать текст</button>
       <button class="chip" id="sharedeal">Поделиться</button>
     </div>
@@ -5781,7 +5808,7 @@ function renderDeal(id, qs, previewCard){
        величины показываются как есть. */
     const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
       ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${
-          label==="Сумма" && val===d.sum ? dealSumHtml(d) : sumHtml(val)}</div></div>` : "";
+          (label==="Сумма"||label==="Начальная цена лота") && val===d.sum ? dealSumHtml(d) : sumHtml(val)}</div></div>` : "";
     // Ярлык той же строки, что и в остальных блоках карточки (жирный, капс,
     // приглушённый — класс .label, тот же, что у «Цель сделки»/«Контекст»
     // рядом): раньше spec-row нёс собственный класс .spec-k (обычным
@@ -6031,7 +6058,7 @@ function renderDeal(id, qs, previewCard){
         reorg:       {buyer:"правопреемника", target:"присоединяемого общества"},
       };
       const sideWords = SIDE_BY_KIND[dealKindOf(d.type)] || SIDE_BY_KIND.acquisition;
-      const title={buyer:"Со стороны "+sideWords.buyer,seller:"Со стороны продавца",target:"Со стороны "+sideWords.target,bank:"Со стороны организаторов и кредиторов",other:"Иное",none:onlyUnknown?"Консультанты сделки":"Иное"};
+      const title={buyer:"Со стороны "+sideWords.buyer,seller:"Со стороны продавца",target:"Со стороны "+sideWords.target,bank:"Со стороны организаторов и кредиторов",other:"Иные стороны сделки",none:onlyUnknown?"Консультанты сделки":"Иные стороны сделки"};
       const item = it => {
         // Сначала роль (в ней — кого вели), и только если она пуста — заметка:
         // заметка целиком это абзац о проделанной работе, ему место в «Юристе».
@@ -6065,7 +6092,7 @@ function renderDeal(id, qs, previewCard){
       // поэтому считаем один раз и решаем по результату.
       const extraBlock = extraHtml(d);
       f.innerHTML = (ecoHasContent(d) || extraBlock) ? `
-      ${hero("Сумма сделки", d.eco.sum)}
+      ${hero(isListing(d)?"Начальная цена лота":"Сумма сделки", d.eco.sum)}
       ${specBlock([
         specRow("Предмет / доля", d.eco.share),
         specRow("Оценка и дисконт", d.eco.val),
@@ -6101,7 +6128,7 @@ function renderDeal(id, qs, previewCard){
         </div>`).join("")}`
       : lawEmptyHtml(d);
     else f.innerHTML = `
-      ${hero("Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
+      ${hero(isListing(d)?"Начальная цена лота":"Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
       ${sumState(d.sum)==="undisclosed"
         ? `<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`
         : sumState(d.sum)==="unknown"
@@ -6262,7 +6289,7 @@ function companyRows(){
    2 сделки, 5 сделок (тот же plural, что и во всех остальных счётчиках). */
 function coFact(id,c){
   const yearAgo = new Date(Date.now() - 365*24*3600*1000).toISOString().slice(0,10);
-  const recent = companyStructured(id).filter(d=>String(d.date||"")>=yearAgo).length;
+  const recent = companyStructured(id).filter(d=>!isListing(d)&&String(d.date||"")>=yearAgo).length;
   return ["M&A активность", recent + " " + plural(recent,"сделка","сделки","сделок") + " за год"];
 }
 /* Заглушка «Описание компании пока не добавлено» стояла у 1754 профилей из
@@ -7464,6 +7491,10 @@ function renderCompany(id){
 /* ================= КОНСУЛЬТАНТЫ ================= */
 let advType = "legal"; // legal | invest | other
 let firmSort = "alpha";  // каталог открывается алфавитным списком, а не рейтингом
+/* ПО ОТРАСЛЯМ. Владелец 3 октября 2026: выбрал отрасль — консультанты
+   ранжируются по числу сопровождённых сделок в ней, и у каждого видно,
+   сколько таких сделок. Счёт тот же, что на странице фирмы (firmDeals). */
+let advInd = "Все";
 /* КАТЕГОРИИ ПРАКТИКИ СНЯТЫ С ЭКРАНА (решение владельца 4 августа). «С-hi»,
    «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме: она нигде не
    подтверждена источником, читателю ничего не объясняет и делит каталог по
@@ -7479,36 +7510,50 @@ const firmAlpha = (a,b)=>{
   const rank = s => /^[A-Za-z]/.test(String(s).trim()) ? 0 : 1;
   return rank(a)-rank(b) || a.localeCompare(b,"ru",{sensitivity:"base"});
 };
+const firmIndCount = (id, ind) => {
+  const x = firmDeals(id);
+  return x.full.filter(d=>dealIndustries(d).includes(ind)).length
+       + x.mini.filter(m=>m.ind===ind).length + x.bulk.filter(b=>b.ind===ind).length;
+};
+const advCount = id => advInd==="Все" ? firmCount(id) : firmIndCount(id, advInd);
+const advSortKey = (a,b) => advInd!=="Все" ? (b.n-a.n)||firmAlpha(a.f.n,b.f.n)
+  : (firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
+const advIndSelectHtml = () => `<select id="advind" aria-label="Отрасль"><option ${advInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===advInd?"selected":""}>${i}</option>`).join("")}</select>`;
+const advCountHtml = r => r.n
+  ? `<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")}${advInd==="Все"?"":` в отрасли «${advInd}»`} →</a>`
+  : `<span class="count-btn empty">${advInd==="Все"?"В базе пока нет подтверждённых сделок":`В отрасли «${advInd}» сделок в базе нет`}</span>`;
 function renderAdvisors(){
   let body = "";
   if(advType==="legal"){
     const rows = FIRMS
-      .map(f=>({f,n:firmCount(f.id)}))
-      .sort((a,b)=>firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
+      .map(f=>({f,n:advCount(f.id)}))
+      .sort(advSortKey);
     body = `
     <div class="filters advisor-filters reveal">
+      ${advIndSelectHtml()}
       <span style="flex:1"></span>
-      <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
-      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
+      ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
     <div class="advisor-list reveal">
       ${rows.map(r=>`<article class="advisor-card">
         <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
-        <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">В базе пока нет подтверждённых сделок</span>`}</div>
+        <div class="advisor-card-count">${advCountHtml(r)}</div>
       </article>`).join("")}
     </div>`;
   } else if(advType==="invest"){
-    const rows = INV_FIRMS.map(f=>({f,n:firmCount(f.id)}))
-      .sort((a,b)=>firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
+    const rows = INV_FIRMS.map(f=>({f,n:advCount(f.id)}))
+      .sort(advSortKey);
     body = `<div class="filters advisor-filters reveal">
+      ${advIndSelectHtml()}
       <span style="flex:1"></span>
-      <button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
-      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>
+      ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
+      <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
     <div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
       <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
       <div class="advisor-card-groups"><span class="label">Профиль</span><br>${r.f.desc||r.f.g.join(" · ")}</div>
-      <div class="advisor-card-count">${r.n?`<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")} →</a>`:`<span class="count-btn empty">В базе пока нет подтверждённых сделок</span>`}</div>
+      <div class="advisor-card-count">${advCountHtml(r)}</div>
     </article>`).join("")}</div>`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
@@ -7547,6 +7592,8 @@ function renderAdvisors(){
   </div>`;
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
   app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
+  const advSel=document.getElementById("advind");
+  if(advSel) advSel.onchange=()=>{advInd=advSel.value;renderAdvisors();rerun();};
   // Тот же диалог, что «Написать нам» в подвале: отдельной формы для фирм
   // заводить незачем, а почтовая ссылка на телефоне открывает пустой клиент.
   const firmCta=document.getElementById("firmCta");
@@ -7612,7 +7659,7 @@ function firmSummaryHtml(id, full, mini, bulk){
      одно и то же, обязаны читать один предикат. Третий ответ — «сама
      компания»: у IPO, обмена акций, выкупа своих бумаг покупателя и продавца
      нет, фирма ведёт эмитента. */
-  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы", other:"Иное"};
+  const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы", other:"Иные стороны сделки"};
   const SIDE_HINT = {target:"«Таргет» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
                      bank:"«Организаторы и кредиторы» — банки-организаторы размещения, андеррайтеры, банки-кредиторы."};
   const roles = {};
@@ -7954,7 +8001,7 @@ function renderAnalytics(){
      сужают ВСЕ карточки разом. Раньше здесь была одна длинная простыня цифр по
      всей базе — посмотреть «что было в ИТ в 2025-м» было нечем. */
   const raw = [
-    ...DEALS.map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),type:d.type,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
+    ...DEALS.filter(d=>!isListing(d)).map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),type:d.type,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
     ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,industries:[m.ind],type:m.type,title:m.title,kind:"mini"})),
     ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,industries:[c.ind],type:c.type,title:c.title,kind:"chan"})),
     ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,industries:[b.ind],type:b.type,title:b.title,kind:"bulk"})),
@@ -7963,6 +8010,7 @@ function renderAnalytics(){
      `DEALS.includes(d)`, но `d` здесь — уже КОПИЯ, созданная map: проверка
      всегда была ложной, и сделка с двумя отраслями считалась только по
      первой. */
+  const listingsOut = DEALS.filter(isListing).length;
   const yearOf = x => String(x.date||"").slice(0,4);
   const yearsAvail = [...new Set(raw.map(yearOf).filter(y=>/^20\d\d$/.test(y)))].sort().reverse();
   if(anYear!=="Все" && !yearsAvail.includes(anYear)) anYear="Все";
@@ -7977,7 +8025,7 @@ function renderAnalytics(){
   if(anType!=="Все" && !typeCount[anType]) anType="Все";
   const okType = x => anType==="Все" || x.type===anType;
   const all = raw.filter(x=>okYear(x)&&okInd(x)&&okType(x));
-  const deals = DEALS.filter(d=>(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)
+  const deals = DEALS.filter(d=>!isListing(d)&&(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)
     &&hasIndustry(d,anInd)&&(anType==="Все"||d.type===anType));
   const dealIds = new Set(deals.map(d=>d.id));
   const filtersOff = anYear==="Все" && anInd==="Все" && anType==="Все";
@@ -8197,7 +8245,7 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>В «Компасе» ${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года. Всё собрано из открытых источников: это то, что стало известно рынку, а не полная статистика.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>В «Компасе» ${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года${listingsOut?` (ещё ${listingsOut} ${plural(listingsOut,"лот","лота","лотов")} выставлено на торги, но не куплено — в показатели они не входят)`:""}. Всё собрано из открытых источников: это то, что стало известно рынку, а не полная статистика.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">

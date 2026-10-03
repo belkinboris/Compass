@@ -869,10 +869,10 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
 
     buttons = format_post.render_buttons(deal)
     rows = buttons["inline_keyboard"]
-    assert len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows[0]
+    # С 3 октября 2026 клавиатура — одна кнопка: владелец, «просто кнопки
+    # „Открыть карточку сделки“ достаточно»; кнопки линз сняты.
+    assert len(rows) == 1 and len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows
     assert "карточку" in rows[0][0]["text"].lower()
-    lenses = [b for row in rows[1:] for b in row]
-    assert all("lens=" in b["url"] for b in lenses), lenses
     # Черновик в консоли обязан показывать и кнопки: их не видно в тексте.
     preview = format_post.buttons_preview(deal)
     for row in rows:
@@ -880,21 +880,29 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
             assert b["url"] in preview and b["text"] in preview
 
 
-def test_post_offers_a_lens_button_only_when_that_lens_has_something(base):
-    """Кнопка «Юрист» на карточке без единого юридического факта вела бы на
-    пустую вкладку — то же условие, что стояло у текстовых ссылок."""
-    empty = {"id": "x1", "title": "Т", "sum": "1 млрд ₽"}
-    labels = [b["text"] for row in format_post.render_buttons(empty)["inline_keyboard"] for b in row]
-    assert "Юрист" not in labels, labels
-    # «Юрист» открывается согласованиями, условиями и консультантами — не
-    # структурой: она с 8 сентября 2026 живёт на «Обзоре» (Артем: «пусть в
-    # юристе будут только регуляторные согласования, заверения и консультанты»).
-    struct_only = dict(empty, law={"struct": "Сделка оформлена через допэмиссию."})
-    labels = [b["text"] for row in format_post.render_buttons(struct_only)["inline_keyboard"] for b in row]
-    assert "Юрист" not in labels, labels
-    lawful = dict(empty, law={"appr": "ФАС одобрила сделку в июне."})
+def test_post_keyboard_has_only_the_card_button():
+    """Кнопки «Экономист» и «Юрист» под постом сняты (владелец, 3 октября
+    2026); у любой карточки под постом ровно одна кнопка — открыть карточку."""
+    lawful = {"id": "x1", "title": "Т", "sum": "1 млрд ₽", "law": {"appr": "ФАС одобрила сделку в июне."},
+              "eco": {"share": "100% акций"}}
     labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
-    assert "Юрист" in labels
+    assert labels == ["Открыть карточку сделки"], labels
+
+
+def test_post_labels_a_listing_price_as_a_starting_price():
+    """Лот на торгах без покупателя — не сделка: его цена в посте — «Начальная
+    цена лота», а не «Сумма» (владелец, 3 октября 2026, посты о недвижимости
+    «Дом.РФ» с ценами 3–7 млн ₽ за особняки)."""
+    deal = {"id": "x2", "title": "«Дом.РФ» продаёт особняк", "date": "2026-10-02", "status": "Обсуждается",
+            "ind": "Недвижимость", "type": "Продажа с торгов", "seller": "«Дом.РФ»",
+            "asset": "купеческий особняк в Сыктывкаре", "sum": "7,15 млн ₽",
+            "src": [["РИА Недвижимость", "https://realty.ria.ru/1"]]}
+    text = re.sub(r"<[^>]+>", "", format_post.render(deal, {}))
+    assert "Начальная цена лота: 7,15 млн ₽" in text, text
+    assert "Сумма:" not in text
+    assert format_post.is_listing(deal) and not format_post.is_listing(dict(deal, status="Закрыта"))
+    import check_post
+    assert check_post.check(format_post.render(deal, {})) == []
 
 
 def test_post_does_not_repeat_the_same_advisory_firm(base):

@@ -1460,7 +1460,9 @@ def test_analytics_names_the_set_it_counts(page, base_url):
     арифметически верной и всё равно врала.
     """
     visit(page, base_url, "#/analytics")
-    shown = page.evaluate("() => DEALS.length")
+    # Лоты на торгах без покупателя в показатели не входят (3 октября 2026) —
+    # шапка называет именно то число, которое считает.
+    shown = page.evaluate("() => DEALS.filter(d => !isListing(d)).length")
     # Шапка «Аналитики» с 6 августа — тёмная hero-полоса (.page-hero),
     # а не .sec-head: чередование тёмных и светлых страниц.
     head = page.inner_text(".page-hero")
@@ -2628,10 +2630,10 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     text = card.text_content()
     rows = {r.locator(".an-key").text_content(): int(r.locator(".an-val").text_content())
             for r in card.locator(".an-row").all()}
-    # С 3 октября 2026 консультант акционера покупателя (Ситибанк) — «Иное»,
-    # а не «Покупатель»: у Nextons покупателей стало четыре, «Иное» — один.
+    # С 3 октября 2026 консультант акционера покупателя (Ситибанк) — «Иные
+    # стороны сделки», а не «Покупатель»: у Nextons покупателей четыре.
     assert rows.get("Покупатель", 0) >= 4 and rows.get("Продавец", 0) >= 5, rows
-    assert rows.get("Иное", 0) >= 1, rows
+    assert rows.get("Иные стороны сделки", 0) >= 1, rows
     assert any(k.startswith("Таргет") for k in rows), rows
     m = re.search(r"Ещё у (\d+) сдел", text)
     assert m and int(m.group(1)) <= 3, text
@@ -3865,7 +3867,10 @@ def test_every_investment_adviser_in_the_catalog_has_at_least_one_deal(page, bas
     """
     page.goto(f"{base_url}/#/advisors")
     page.wait_for_timeout(2500)
-    empty = page.evaluate("INV_FIRMS.map(f=>[f.n, firmCount(f.id)]).filter(x=>x[1]===0)")
+    # С 3 октября 2026 лот на торгах без покупателя в счёт не входит
+    # (isListing) — но фирма, названная организатором такого лота, в каталоге
+    # законно: считаем вместе с лотами.
+    empty = page.evaluate("INV_FIRMS.map(f=>{const x=firmDeals(f.id,true);return [f.n, x.full.length+x.mini.length+x.bulk.length];}).filter(x=>x[1]===0)")
     assert not empty, f"инвестиционный консультант без единой сделки: {empty}"
 
 
@@ -3875,14 +3880,17 @@ def test_deal_team_has_other_column_without_data_source_notes(page, base_url):
     """Команда сделки на карточке Ситибанка (владелец, 3 октября 2026): без
     «(по данным сайта фирмы)», без плашки «Полный список сторон мог не
     раскрываться», вид консультанта — строкой под именем, а консультант
-    акционера покупателя — в колонке «Иное», не у покупателя."""
+    акционера покупателя — в колонке «Иные стороны сделки», не у покупателя."""
     visit(page, base_url, "#/deal/citibank")
     page.wait_for_selector(".team")
     team = page.locator(".team").inner_text()
     assert "по данным" not in team.lower() and "Полный список сторон" not in team
     assert page.locator(".team-note").count() == 0 and page.locator(".t-kind").count() == 0
     cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
-    assert "Nextons" in cols.get("Иное", ""), cols
+    assert "Nextons" in cols.get("Иные стороны сделки", ""), cols
+    # Nextons вела не «Ренессанс Капитал», а его акционера — так и написано
+    nextons = page.locator(".team-item", has_text="Nextons").first.locator(".t-side").inner_text()
+    assert "акционер покупателя" in nextons, nextons
     assert "Orion" in cols.get("Со стороны покупателя", "") and "Nextons" not in cols.get("Со стороны покупателя", "")
     # подпись под именем — вид консультанта и клиент, а не пересказ работы
     orion = page.locator(".team-item", has_text="Orion").first.locator(".t-side").inner_text()
@@ -4004,3 +4012,57 @@ def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
     }""")
     assert "VPN" in got["loading"] and "догружаем" not in got["loading"], got["loading"]
     assert "VPN" not in got["loaded"] and "сделок" in got["loaded"], got["loaded"]
+
+
+# ---------- 3 октября 2026: партия после запуска ----------
+
+def test_pdf_button_sits_in_the_card_header(page, base_url):
+    """«Скачать PDF» — ненавязчиво сверху карточки (владелец, 3 октября 2026)."""
+    visit(page, base_url, "#/deal/citibank")
+    page.wait_for_selector("#downloaddeal")
+    assert page.locator(".d-head #downloaddeal").count() == 1
+    assert page.locator(".deal-tools #downloaddeal").count() == 0
+    head = page.locator(".d-head").bounding_box(); btn = page.locator("#downloaddeal").bounding_box()
+    assert btn["y"] < head["y"] + head["height"] / 2, (head, btn)
+
+
+def test_advisors_rank_by_industry_when_an_industry_is_chosen(page, base_url):
+    """Владелец 3 октября 2026: выбрал отрасль — консультанты ранжируются по
+    числу сделок в ней, и у каждого видно, сколько таких сделок."""
+    visit(page, base_url, "#/advisors")
+    page.wait_for_selector("#advind")
+    page.select_option("#advind", "ИТ и интернет")
+    page.wait_for_timeout(600)
+    counts = page.evaluate("""() => [...document.querySelectorAll('.advisor-card .count-btn')]
+        .map(e => parseInt(e.innerText) || 0)""")
+    assert counts and counts == sorted(counts, reverse=True), counts[:10]
+    first = page.locator(".advisor-card .count-btn").first.inner_text()
+    assert "в отрасли «ИТ и интернет»" in first, first
+    page.select_option("#advind", "Все")
+    page.wait_for_timeout(400)
+    assert "в отрасли" not in page.locator(".advisor-card .count-btn").first.inner_text()
+
+
+def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
+    """Лот на торгах без покупателя — не сделка: в ленте и на карточке есть,
+    из аналитики, активности компаний и счёта консультантов уходит; цена
+    подписана как начальная (владелец, 3 октября 2026)."""
+    visit(page, base_url, "#/")
+    page.wait_for_selector(".deal-row")
+    got = page.evaluate("""() => {
+      feedQuery = ""; filterInd = "Все"; feedYear = "Все"; filterTheme = "Все"; filterFirm = "Все";
+      filterAdvisorGroup = "Все"; onlyFull = false; filterStatus = "Все"; filterType = "Все";
+      filterPriced = "Все"; feedFrom = ""; feedTo = "";
+      const d = DEALS.find(x => isListing(x) && x.seller_id && sumState(x.sum)==="known");
+      if(!d) return null;
+      const row = rowHtml.full(d);
+      return {id: d.id, listing: isListing(d), inFeed: unifiedFeedItems().some(it => it.rec.id === d.id),
+              total: companyTotal(d.seller_id), structured: companyStructured(d.seller_id).length,
+              row: row.includes('начальная цена') || /начальн/i.test(d.sum)};
+    }""")
+    assert got, "в базе нет лота на торгах с продавцом и ценой — пример для теста нужно обновить"
+    assert got["inFeed"] and got["row"], got
+    assert got["total"] < got["structured"], got
+    visit(page, base_url, "#/deal/" + got["id"])
+    page.wait_for_selector("#facts")
+    assert "начальная цена лота" in page.inner_text("#facts").lower()
