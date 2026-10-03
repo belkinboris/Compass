@@ -7379,15 +7379,15 @@
      "card_hash": "b615de409dc0"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -8551,15 +8551,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -9624,15 +9624,15 @@
      "card_hash": "c73eaec87eda"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -16851,15 +16851,15 @@
      "card_hash": "82aaa572c9b8"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -20807,15 +20807,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -21963,15 +21963,15 @@
      "card_hash": "2ae236f0689d"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -25087,15 +25087,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -52716,15 +52716,15 @@
      "card_hash": "e56b80e03d1a"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -191879,15 +191879,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -202758,15 +202758,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -209587,15 +209587,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -210291,15 +210291,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -216709,15 +216709,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -219559,15 +219559,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -220091,15 +220091,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -220934,15 +220934,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -221057,15 +221057,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "failed",
      "top_purchases": "failed",
      "multiple_text": "not_control_change"
@@ -221190,15 +221190,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -221490,15 +221490,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -221633,15 +221633,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -221895,15 +221895,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222041,15 +222041,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222174,15 +222174,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222310,15 +222310,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222581,15 +222581,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222714,15 +222714,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222848,15 +222848,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -222986,15 +222986,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -223260,15 +223260,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -223394,15 +223394,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
@@ -223528,15 +223528,15 @@
      "card_hash": "493dbc68fa9b"
     },
     "admitted": {
-     "count": true,
-     "industry": true,
+     "count": false,
+     "industry": false,
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
-     "count": "ok",
-     "industry": "ok",
+     "count": "auction_open",
+     "industry": "auction_open",
      "purchase_sums": "auction_open",
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
