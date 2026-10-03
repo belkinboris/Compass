@@ -1295,6 +1295,91 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d55277464",
+   "title": "NYT: тему продажи зарубежных активов «Лукойла» включили в переговоры РФ и США по Украине",
+   "date": "2026-10-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28178581"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gbe536659 (общие редкие слова: nyt, сша) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d26052549",
+   "title": "Продать Смартлаб?",
+   "date": "2026-10-03",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1358619.php"
+    ]
+   ],
+   "sum": "500 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33136334",
+   "title": "Бизнес Кубани привлек 60,4 млрд рублей под «зонтичные» поручительства",
+   "date": "2026-10-03",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/krasnodar/2026/10/3/biznes-kubani-privlek-604-mlrd-rublej-pod-zontichnye-poruchitelstva"
+    ]
+   ],
+   "sum": "60,4 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Бизнес Кубани",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Бизнес Кубани",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
   }
  ]
 }
