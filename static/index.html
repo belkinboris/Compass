@@ -276,6 +276,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .fresh-dot{display:inline-block;margin-right:9px;color:var(--bronze);font-size:10px;font-weight:700;
   letter-spacing:.09em;text-transform:uppercase;vertical-align:1px}
 .fresh-dot::after{content:"·";margin-left:9px;color:var(--line);font-weight:400}
+.fresh-dot.upd{color:var(--steel)}
 .brand-mark{display:inline-flex;flex-shrink:0}
 .brand-mark svg{display:block}
 .wordmark .bm-accent{fill:var(--bronze)}
@@ -3179,6 +3180,19 @@ function isFresh(d){
   if(!smallAddDays().has(a)) return false;
   return Date.now() - Date.parse(a + "T00:00:00") < FRESH_DAYS*24*3600*1000;
 }
+/* «ОБНОВЛЕНО» — У КАРТОЧКИ СВЕЖИЙ ЭТАП. Владелец 26 сентября 2026 не нашёл в
+   ленте карточку штаб-квартиры «Швабе» (ge957fc7b): сделка августа закрылась
+   25 сентября, сообщение об этом ушло в канал, а в ленте карточка стояла на
+   своём августовском месте без единой отметки. Второй строки у этапа нет и
+   не будет (решение 19 сентября), но отметка у строки — есть, пока этап
+   моложе FRESH_DAYS. */
+function isUpdated(d){
+  if(!d || isFresh(d)) return false;
+  const latest = (d.events || []).map(e=>String(e && e.date || ""))
+    .filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)).sort().pop();
+  if(!latest) return false;
+  return Date.now() - Date.parse(latest + "T00:00:00") < FRESH_DAYS*24*3600*1000;
+}
 
 /* Подтверждение действия одной строкой. Аргумент `html` — уже готовая
    разметка (нужна ссылка «Войти»), поэтому вызывать только со своим текстом,
@@ -4129,7 +4143,7 @@ const rowHtml = {
   full: d => `
   <a class="deal-row reveal" href="#/deal/${d.id}">
     <div><span class="label num">${fmtDate(d.date)}</span>${d.status?`<br><span class="status ${statusClass(d.status)}">${d.status}</span>`:""}</div>
-    <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
+    <div><div class="deal-title">${isFresh(d)?`<span class="fresh-dot" title="Добавлена ${fmtDate(d.added)}">Новое</span>`:isUpdated(d)?`<span class="fresh-dot upd" title="У сделки новый этап">Обновлено</span>`:""}${d.title}</div><div class="deal-sub">${capType(d.type)}</div></div>
     ${dealMetaHtml(d)}
   </a>`,
   mini: m => `
