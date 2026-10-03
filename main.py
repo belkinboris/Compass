@@ -80,6 +80,20 @@ app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
+
+@app.get("/robots.txt", include_in_schema=False)
+def robots_txt():
+    """Данные и API — не для роботов. База отдаётся сайтом одним файлом
+    (`/static/data/deals_promoted.json`); файл robots.txt — первое, что
+    посмотрит добросовестный сборщик, и единственное, что увидит
+    индексатор. Юридическая опора — раздел «Права на базу данных»
+    пользовательского соглашения (см. LEGAL_DOCS в static/index.html)."""
+    body = ("User-agent: *\n"
+            "Disallow: /static/data/\n"
+            "Disallow: /api/\n"
+            "Allow: /\n")
+    return Response(body, media_type="text/plain; charset=utf-8")
+
 # Таблицы аккаунтов (db/models.py) — заготовка лежала не подключённой с 22
 # июля, main.py по-прежнему читает static/data/*.json напрямую для сделок и
 # компаний. create_all создаёт только НЕДОСТАЮЩИЕ таблицы и никогда не трогает

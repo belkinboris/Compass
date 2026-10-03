@@ -1705,3 +1705,20 @@ def test_a_company_description_never_says_where_we_read_it(companies):
             if m:
                 bad.append('%s (%s): «%s» — наш диалект' % (cid, c.get('name'), m.group(0)))
     assert not bad, 'пометки о происхождении в описаниях компаний:\n' + '\n'.join(bad[:20])
+
+
+def test_aggregator_is_not_a_fact_source_when_an_original_exists(deals):
+    """Правило владельца 3 октября 2026: агрегатор (mergers.ru, @dealsma,
+    @LawFirms) годится, чтобы сделку обнаружить, но читателю как источник
+    факта не показывается, если факт подтверждён первоисточником. Такой
+    источник переезжает в `discovery_src` (`source_names.settle_sources`);
+    приток и чтение делают это сами, а хвост чинит
+    `python3 pipeline/split_discovery_sources.py --write`."""
+    from pipeline.source_names import is_aggregator
+    bad = []
+    for d in deals:
+        http = [s for s in (d.get("src") or []) if isinstance(s, list) and len(s) > 1
+                and str(s[1]).startswith("http")]
+        if any(not is_aggregator(s[1]) for s in http) and any(is_aggregator(s[1]) for s in http):
+            bad.append(d["id"])
+    assert not bad, "агрегатор показан рядом с первоисточником: %s" % bad[:8]

@@ -100,13 +100,24 @@ def hosts_from_sources():
     return out
 
 
+BROWSER_UA = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+              '(KHTML, like Gecko) Chrome/124.0 Safari/537.36')
+
+
 def fetch(url):
+    """Сначала представляемся честно; сайт, который отказал боту (403/нет
+    ответа), читаем как браузер — это чтение условий, а не сбор материалов,
+    и без него проверка молчала бы ровно о тех, кто строже всех."""
     import httpx
-    try:
-        r = httpx.get(url, headers={'User-Agent': UA}, timeout=TIMEOUT, follow_redirects=True)
-        return r.status_code, r.text
-    except Exception:                                       # noqa: BLE001
-        return 0, ''
+    for ua in (UA, BROWSER_UA):
+        try:
+            r = httpx.get(url, headers={'User-Agent': ua}, timeout=TIMEOUT, follow_redirects=True)
+            if r.status_code in (401, 403, 429) or r.status_code >= 500:
+                continue
+            return r.status_code, r.text
+        except Exception:                                   # noqa: BLE001
+            continue
+    return 0, ''
 
 
 def clean_text(html):
@@ -242,6 +253,13 @@ def run(hosts, workers=12):
     with ThreadPoolExecutor(max_workers=workers) as ex:
         for host, res in zip(hosts, ex.map(check_host, hosts)):
             results[host] = res
+    # Соглашение издания действует на все его поддомены: у quote.rbc.ru своей
+    # страницы с правилами нет, но правила РБК — те же. Наследуем находку
+    # родительского домена, если у поддомена своей нет.
+    for host, res in results.items():
+        parent = '.'.join(host.split('.')[-2:])
+        if parent != host and parent in results and not res['tos'] and results[parent]['tos']:
+            res['tos'] = [dict(f, inherited_from=parent) for f in results[parent]['tos']]
     return results
 
 

@@ -357,6 +357,7 @@ def apply_props(deal, props):
             continue
         if field == 'src':
             deal.setdefault('src', []).append(value)
+            editions.settle_sources(deal)
         elif field == 'event':
             deal.setdefault('events', []).append(value)
             deal['events'].sort(key=lambda e: (str(e.get('date') or ''), str(e.get('kind') or '')))

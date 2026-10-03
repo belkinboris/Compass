@@ -986,6 +986,8 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         label = s[0] if has(s[0]) and not re.match(r'^(tg|web):', str(s[0])) else source_names.edition_label(s[1])
         card.setdefault('src', []).append([label, s[1]])
         lines.append('src + %s' % s[1])
+    if source_names.settle_sources(card):
+        lines.append('агрегатор ушёл из видимых источников (discovery_src)')
     waived = ans.get('no_profile') or {}
     left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
                     waived_sources=ans.get('no_source') or {}, registry=registry,

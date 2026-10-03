@@ -3721,3 +3721,8 @@ agro_auction_failed_card.py`, 29 сентября 2026).
   Тесты: `test_realty_channel_gets_its_own_slot_and_never_replaces_the_main_one`,
   `test_realty_channel_stuck_in_the_main_slot_is_moved_to_its_own`,
   `test_realty_channel_from_the_site_is_never_taken_for_the_main_one`.
+
+## httpx молча не отправляет запрос, если в заголовке есть кириллица
+- Симптом: `pipeline/source_terms_check.py --host rbc.ru` отвечал «нет ответа» по всем сайтам подряд, хотя `curl` и прямой `httpx.get` с тем же адресом работали.
+- Причина: в `User-Agent` стояла русская фраза («проверка условий использования»); заголовки HTTP — latin-1, httpx бросает исключение ещё до запроса, а обёртка `fetch()` ловила любое исключение как «сайт не ответил».
+- Исправлено: заголовок только латиницей (`UA` в `pipeline/source_terms_check.py`); правило для любых заголовков — только ASCII.
