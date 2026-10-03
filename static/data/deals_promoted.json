@@ -223212,6 +223212,149 @@
     }
    },
    "proofread": "2026-10-03"
+  },
+  {
+   "id": "gae005e6f",
+   "date": "2026-10-01",
+   "title": "МГТС выкупила у миноритариев 1,13 млн привилегированных акций",
+   "ind": "Телеком",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/245313/2026-05-18/2026-w21/1008/1501-rubl-za-akciyu-mgts-predlagaet-premiyu"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "≈1,7 млрд ₽ (1,13 млн акций по 1501 ₽ за акцию)",
+    "share": "1,13 млн привилегированных акций — 1,19% уставного капитала МГТС.",
+    "val": "—",
+    "target_fin": "Чистая прибыль МГТС по МСФО в первом полугодии 2026 года составила 14,69 млн рублей (за аналогичный период 2025 года — 14,13 млн рублей), выручка — 26,59 млн рублей (23,31 млн рублей годом ранее).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Сбор заявок на выкуп проходил с 10 июня по 13 сентября 2026 года; предельный размер выкупа составлял 9,52 млн штук, или 10% акций в обращении. По итогам оферты выкуплено 1,13 млн привилегированных акций (1,19% уставного капитала) по цене 1501 рубль за акцию. ПАО «МТС» (материнская компания) не принимало участия в оферте для владельцев привилегированных акций МГТС.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "МГТС выкупила привилегированные акции у миноритарных акционеров по открытой оферте (не у материнской компании МТС).",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "1,13 млн привилегированных акций (1,19% уставного капитала)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-01",
+     "title": "Сделка завершена",
+     "note": "МГТС совершила покупку 1 октября 2026 года; 21 сентября совет директоров утвердил отчёт об итогах предъявления миноритариями заявлений о продаже привилегированных акций.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "МГТС",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil"
+     }
+    ],
+    "target": [
+     {
+      "value": "1,13 млн привилегированных акций (1,19% уставного капитала)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil"
+     }
+    ],
+    "seller": [
+     {
+      "value": "миноритарные акционеры МГТС",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil"
+     }
+    ]
+   },
+   "sum": "≈1,7 млрд ₽ (1,13 млн акций по 1501 ₽ за акцию)",
+   "seller": "миноритарные акционеры МГТС",
+   "buyer": "g67e8f15e",
+   "accepted": "2026-10-02",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Предмет — собственные привилегированные акции компании-покупателя, а не отдельная компания, профиля не бывает.",
+     "seller": "Миноритарные акционеры — неназванная группа держателей акций, профиля не бывает."
+    }
+   },
+   "reviewed": "2026-10-02",
+   "deep_researched": "2026-10-02",
+   "post_preview": "<b>МГТС выкупила у миноритариев 1,13 млн привилегированных акций</b>\n\n<b>Покупатель:</b> МГТС — Юрлицо — ПАО «Московская городская телефонная сеть».\n<b>Продавец:</b> миноритарные акционеры МГТС\n<b>Предмет:</b> 1,13 млн привилегированных акций (1,19% уставного капитала)\n<b>Сумма:</b> ≈1,7 млрд ₽ (1,13 млн акций по 1501 ₽ за акцию)\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Телеком\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/investments/news/2026/10/02/1233786-mgts-vikupil\">Ведомости</a>\nЕщё 1 источник — в карточке сделки\n\n#технологии #телеком #MA",
+   "added": "2026-10-03",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "86c378ab3aad"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "779d28dc89ab"
+    },
+    "date": {
+     "value": "2026-10-01",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "be92467f34ba"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5173c0175012"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "proofread": "2026-10-03"
   }
  ],
  "companies": {
