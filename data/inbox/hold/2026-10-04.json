@@ -1295,34 +1295,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d33903382",
-   "title": "Россия проведет 5 октября новый раунд консультаций по Афганистану",
-   "date": "2026-10-04",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9005945"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
