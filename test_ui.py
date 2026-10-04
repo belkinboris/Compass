@@ -581,7 +581,7 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         pg2.goto(base_url + "/#/analytics", wait_until="networkidle")
         pg2.wait_for_timeout(800)
         body2 = pg2.inner_text("#multiplesCard")
-        assert "не прошла все проверки" in body2.lower()
+        assert "нет полного набора для расчёта" in body2.lower()
         pg2.close()
     finally:
         ctx.close()
@@ -672,7 +672,7 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
             # .label рисуется капителью (text-transform) — inner_text отдаёт ВЕРХНИЙ регистр.
             body = pg.inner_text("#nationalizedCard").lower()
             assert "изъятые и национализированные активы" in body
-            assert "иску генпрокуратуры" in body and "все сделки темы" in body
+            assert "изъятие в доход государства" in body and "все сделки темы" in body
             stats = pg.evaluate("""() => {
               const c = document.getElementById('nationalizedCard');
               const rows = [...c.querySelectorAll('.nat-grid .an-row')];
@@ -3735,7 +3735,7 @@ def test_firm_deals_list_shows_three_and_unfolds_the_rest(page, base_url):
     # дисклеймер переехал под список, подсказка «По каждой есть разбор» снята
     app = page.inner_text("#app")
     assert "По каждой есть разбор" not in app
-    assert app.index("Учитываются сделки, где фирма названа консультантом") > app.index("Свернуть")
+    assert app.index("Только сделки, где фирма публично названа консультантом") > app.index("Свернуть")
     assert "чей консультант" in app.lower() and "в каких отраслях" not in app.lower()
 
 
