@@ -503,6 +503,42 @@
     "net_profit_rub": 124666707000,
     "regnum": 354
   },
+  "gf306fa1b": {
+    "as_of_balance": "2026-04-01",
+    "as_of_profit": "2026-09-01",
+    "assets_rub": 794137573000,
+    "assets_rub_prior_year": 758490123000,
+    "derived": {
+      "metrics": [
+        {
+          "group": "Капитал",
+          "how": "собственные средства ÷ активы, обе величины из одного баланса",
+          "key": "equity_to_assets",
+          "kind": "percent",
+          "label": "Собственные средства к активам",
+          "primary": true,
+          "value": 12.1
+        },
+        {
+          "group": "Капитал",
+          "how": "прибыль с начала года ÷ собственные средства",
+          "key": "return_on_equity",
+          "kind": "percent",
+          "label": "Рентабельность капитала за 8 мес. 2026",
+          "primary": true,
+          "value": 32.1
+        }
+      ],
+      "notes": [
+        "Прибыль накоплена с начала года и на год не пересчитана: за 8 мес. 2026 года она такая, какая есть."
+      ]
+    },
+    "equity_rub": 95710553000,
+    "equity_rub_prior_year": 84438189000,
+    "legal_name": "Акционерное общество «ОТП Банк»",
+    "net_profit_rub": 30753911000,
+    "regnum": 2766
+  },
   "gf881a88f": {
     "as_of_balance": "2026-04-01",
     "as_of_profit": "2026-09-01",
