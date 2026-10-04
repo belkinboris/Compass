@@ -4634,3 +4634,64 @@ def test_weekly_digest_goes_once_a_week_on_monday_morning(client, monkeypatch):
         assert sent == [date(2026, 10, 12)]
     finally:
         db.close()
+
+
+def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, monkeypatch):
+    """4 октября 2026: партнёр ответил на проект поста OTP Bank «Что такое
+    luminor?», бот принял вопрос за новый текст поста и одобрил его —
+    ближайшая публикация ушла бы в канал тремя словами, а отменить было
+    нечем. Вопрос — заметка, пост не тронут; настоящая замена текста
+    отменяется ответом «отмена»."""
+    from db.models import ModerationDecision
+    _mod_env(monkeypatch)
+    sent = _bot_sent(monkeypatch)
+    deal = "gq%s" % uuid.uuid4().hex[:6]
+    draft = {"message_id": 501, "text": "[пост %s] — В КАНАЛ, на одобрение\n\n%s" % (deal, "Длинный текст поста. " * 20)}
+    group = {"id": -1001234567890, "type": "supergroup"}
+
+    def reply(text, to):
+        client.post("/api/telegram/webhook/тайна", json={"message": {
+            "chat": group, "from": {"id": 111}, "text": text, "reply_to_message": to}})
+
+    def decisions():
+        db = get_session()
+        try:
+            return [(d.verdict, d.edited_text, d.consumed) for d in
+                    db.query(ModerationDecision).filter_by(deal_id=deal).order_by(ModerationDecision.id)]
+        finally:
+            db.close()
+
+    # Владелец: «если спрашивают и вопросительный знак в конце — не отправляй
+    # карту в канал, а отвечай на вопрос». Вопрос придерживает карточку и
+    # получает ответ следом.
+    monkeypatch.setattr(main, "_in_background", lambda fn: fn())
+    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
+    reply("Что такое luminor?", draft)
+    assert decisions() == [("hold", None, False), ("note", "Что такое luminor?", False)]
+    texts = [kw["text"] for m, kw in sent if m == "sendMessage"]
+    assert any("в канал ничего не уходит" in x for x in texts), texts
+    assert texts[-1] == "Ответ: Luminor — банк в странах Балтии."
+    assert not any(m == "editMessageText" for m, _ in sent), "проект поста с кнопками правиться не должен"
+    # Модель не ответила — честно говорим, кто ответит.
+    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: None)
+    sent.clear()
+    reply("А кто покупатель?", {"message_id": 503, "text": "[карточка %s] OTP" % deal})
+    assert decisions()[-2:] == [("hold", None, False), ("note", "А кто покупатель?", False)]
+    assert "рутина притока" in sent[-1][1]["text"]
+    # Короткая реплика без вопросительного знака — не текст поста и не вопрос.
+    sent.clear()
+    reply("Убери строку про дивиденды", draft)
+    assert decisions()[-1][0] == "note" and decisions()[-2][0] == "note"
+    assert "пост не тронут" in sent[-1][1]["text"]
+    # Полный новый текст — замена, и её можно отменить.
+    sent.clear()
+    reply("Новый текст поста целиком. " * 12, draft)
+    assert decisions()[-1][:2] == ("approve", ("Новый текст поста целиком. " * 12).strip())
+    confirm = sent[-1][1]["text"]
+    assert "Принято: пост уйдёт с вашим текстом" in confirm and "(правка поста %s)" % deal in confirm
+    sent.clear()
+    reply("отмена", {"message_id": 502, "text": confirm})
+    assert decisions()[-1] == ("approve", ("Новый текст поста целиком. " * 12).strip(), True)
+    assert "Отменено" in sent[-1][1]["text"]
+    # «отмена» не стала новой правкой.
+    assert [d for d in decisions() if d[1] == "отмена"] == []

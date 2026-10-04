@@ -2538,9 +2538,46 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     reply = message.get("reply_to_message") or {}
     marker = re.search(r"\[(пост|черновик|карточка|сырьё|инн-омоним|инн) ([\w-]{1,40})\]",
                        str(reply.get("text") or ""))
+    # ОТМЕНА ПРАВКИ ПОСТА. «Принято: пост уйдёт с вашим текстом» теперь несёт
+    # метку «(правка поста <id>)», и ответ «отмена» на это сообщение снимает
+    # ещё не применённое решение. 4 октября 2026 партнёр ответил на проект
+    # поста вопросом, бот принял вопрос за новый текст поста, а отменить
+    # было нечем — владелец спросил «можно его отменить как-то?».
+    undo = re.search(r"\(правка поста ([\w-]{1,40})\)", str(reply.get("text") or ""))
+    if undo and _is_reviewer(sender_id) and UNDO_WORDS.match(text.strip()):
+        rows = list(db.scalars(select(ModerationDecision).where(
+            ModerationDecision.deal_id == undo.group(1), ModerationDecision.verdict == "approve",
+            ModerationDecision.edited_text.is_not(None), ModerationDecision.consumed.is_(False))).all())
+        for row in rows:
+            row.consumed = True
+        db.commit()
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text=("Отменено: текст поста не изменится, карточка ждёт решения как раньше."
+                  if rows else "Отменять нечего: правку уже применили. Напишите, что сделать, — поправим."),
+            disable_web_page_preview=True, **_thread_kwargs(reply))
+        return {"ok": True}
     if marker and text.strip() and _is_reviewer(sender_id):
         kind, raw_id = marker.group(1), marker.group(2)
         verdict = "approve" if kind in ("пост", "черновик") else "note"
+        # ВОПРОС — НЕ НОВЫЙ ТЕКСТ ПОСТА (4 октября 2026). Партнёр ответил на
+        # проект поста OTP Bank «Что такое luminor?», и бот одобрил пост с
+        # этим текстом: ближайшая публикация ушла бы в канал тремя словами.
+        # Вопрос или короткая реплика ложится заметкой к карточке, пост не
+        # трогается; заменить текст можно только полным текстом поста.
+        asked = verdict == "approve" and _not_a_post_text(text, reply.get("text"))
+        # ВОПРОС — ЭТО НЕ РЕШЕНИЕ, А ПОВОД ОТВЕТИТЬ (владелец, 4 октября 2026:
+        # «если спрашивают и вопросительный знак в конце — не отправляй карту
+        # в канал, а отвечай на вопрос»). Вопрос к проекту поста или к
+        # карточке придерживает карточку — по молчанию она не выйдет, пока
+        # кто-то не нажмёт «Опубликовать», — и бот сразу отвечает на него.
+        question = (kind in ("пост", "черновик", "карточка", "сырьё")
+                    and _is_question(text))
+        if asked or question:
+            verdict = "note"
+        if question and kind != "сырьё":
+            db.add(ModerationDecision(deal_id=raw_id, verdict="hold", edited_text=None,
+                                      decided_by=str(sender_id)))
         deal_id = (kind + "~" + raw_id) if kind in ("инн", "инн-омоним") else raw_id
         # chat_id/reply_message_id — только у заметок: только их читает и на
         # них отвечает рутина (read_notes.py), решению approve отвечать
@@ -2553,7 +2590,28 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         db.commit()
         if verdict == "approve":
             notification_service.tg_api(
-                "sendMessage", chat_id=str(chat_id), text="Принято: пост уйдёт с вашим текстом.",
+                "sendMessage", chat_id=str(chat_id),
+                text=("Принято: пост уйдёт с вашим текстом. Передумали — ответьте на это "
+                      "сообщение словом «отмена». (правка поста %s)" % raw_id),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+        elif question:
+            # Исходное сообщение не правим: editMessageText снял бы с него
+            # кнопки и форматирование. Отвечаем отдельными сообщениями.
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Это вопрос — в канал ничего не уходит. Карточка придержана: по "
+                      "молчанию она не выйдет, опубликовать — кнопкой «Опубликовать». "
+                      "Ответ пришлю следующим сообщением."
+                      if kind != "сырьё" else "Это вопрос — ответ пришлю следующим сообщением."),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+            thread = _thread_kwargs(reply)
+            _in_background(lambda: _answer_console_question(raw_id, text.strip(), chat_id, thread))
+        elif asked:
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Это не похоже на новый текст поста — пост не тронут. Замечание "
+                      "записано к карточке. Чтобы заменить текст поста, пришлите ответом "
+                      "полный новый текст."),
                 disable_web_page_preview=True, **_thread_kwargs(reply))
         else:
             # МГНОВЕННОЕ ПОДТВЕРЖДЕНИЕ — раздел C MILESTONES_BRIEF.md. Раньше
@@ -2792,7 +2850,9 @@ BOT_HELP = (
     "Ответьте на нужное сообщение своим текстом:\n"
     "• ответ на 📣 <b>проект поста</b> — ваш текст станет текстом поста в канале;\n"
     "• ответ на 🗂 <b>карточку</b> — станет замечанием, платформа проверит его "
-    "по источнику и внесёт в карточку сама.\n\n"
+    "по источнику и внесёт в карточку сама;\n"
+    "• <b>вопрос</b> (со знаком «?» в конце) — бот ответит следующим сообщением, а "
+    "карточка придержится и по молчанию не выйдет.\n\n"
     "<b>Как вернуться к отложенному</b>\n"
     "Нажмите кнопку ниже — карточки придут заново, каждая со своими кнопками. "
     "Решать можно прямо там, искать ничего не нужно.\n\n"
@@ -3393,6 +3453,85 @@ def _console_thread_id(db, kind: str) -> int | None:
     spare = CONSOLE_TOPIC_FALLBACK.get(kind)
     return _console_thread_id(db, spare) if spare else None
 
+
+
+UNDO_WORDS = re.compile(r"^(?:отмена|отменить|отмени|отменяю|отбой|стоп|cancel)[.!]*$", re.I)
+QUESTION_START = re.compile(
+    r"^(?:что|как|почему|зачем|кто|где|когда|сколько|какой|какая|какое|какие|каков\w*|чем|откуда"
+    r"|куда|разве|неужели|а\s|можно|нужно\s+ли|это\s|ты\s|вы\s)", re.I)
+
+
+
+def _is_question(text: str) -> bool:
+    t = re.sub(r"\s+", " ", str(text or "")).strip()
+    return bool(t) and (t.endswith("?") or bool(QUESTION_START.match(t) and len(t) < 200 and "?" in t))
+
+
+def _in_background(fn) -> None:
+    """Долгая работа (ответ модели) — не в потоке опроса Telegram: пока он
+    ждёт модель, бот не слышит ни одной кнопки. Тесты подменяют на вызов."""
+    threading.Thread(target=fn, daemon=True).start()
+
+
+CONSOLE_QA_SYSTEM = (
+    "Ты помогаешь владельцу «Компаса» проверить карточку сделки перед публикацией в "
+    "Telegram-канале. Отвечай по-русски, коротко — два-пять предложений, как коллега в "
+    "переписке. Опирайся на карточку и на выдачу поиска ниже; факт из поиска — с "
+    "названием источника в скобках. Если ответа нет ни в карточке, ни в выдаче, так и "
+    "скажи. Числа и имена не выдумывай. Без разметки markdown.")
+
+
+def _console_card(deal_id: str) -> dict:
+    """Карточка из очереди консоли или из базы — то, о чём спросили."""
+    for card in (_read_json("static/data/pending.json", {}).get("cards") or []):
+        if card.get("id") == deal_id:
+            return card
+    return get_deal(deal_id) or {}
+
+
+def _console_answer(deal_id: str, question: str) -> str | None:
+    """Ответ на вопрос из консоли по карточке и свежей выдаче поиска."""
+    if not _yandex_ready():
+        return None
+    card = _console_card(deal_id)
+    keep = {k: card.get(k) for k in ("title", "date", "status", "type", "buyer_name", "seller",
+                                      "asset", "sum", "eco", "law", "src") if card.get(k)}
+    block = ""
+    try:
+        query = ("%s %s" % (question, str(card.get("title") or "")[:90])).strip()
+        block = build_search_block(yandex_search(query, config=SearchConfig.from_env(), client=_http))
+    except Exception as exc:                                  # noqa: BLE001
+        logger.info("консоль: поиск для ответа не удался (%s)", exc)
+    user_msg = "Вопрос: %s\n\nКарточка:\n%s\n\n%s" % (
+        question, json.dumps(keep, ensure_ascii=False)[:6000], block)
+    try:
+        text = call_llm(CONSOLE_QA_SYSTEM, user_msg, max_tokens=700, deadline=time.monotonic() + 45)
+    except Exception as exc:                                  # noqa: BLE001
+        logger.warning("консоль: модель не ответила (%s)", exc)
+        return None
+    text = re.sub(r"\*\*|__|^#+\s*", "", str(text or ""), flags=re.M).strip()
+    return text[:3500] or None
+
+
+def _answer_console_question(deal_id: str, question: str, chat_id, thread: dict) -> None:
+    answer = _console_answer(deal_id, question)
+    notification_service.tg_api(
+        "sendMessage", chat_id=str(chat_id),
+        text=(("Ответ: " + answer) if answer else
+              "Сразу ответить не получилось — ответ подготовит рутина притока в ближайший прогон."),
+        disable_web_page_preview=True, **thread)
+
+def _not_a_post_text(text: str, original) -> bool:
+    """Ответ на проект поста — вопрос или реплика, а не новый текст поста.
+    Вопросительный знак в конце, вопросительное слово в начале короткой
+    фразы или ответ в разы короче самого проекта поста."""
+    t = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not t:
+        return True
+    if t.endswith("?") or (QUESTION_START.match(t) and len(t) < 200):
+        return True
+    orig = re.sub(r"\s+", " ", str(original or "")).strip()
+    return len(t) < 80 and len(orig) > 3 * len(t)
 
 def _thread_kwargs(source: dict | None) -> dict:
     """kwargs с message_thread_id, если сообщение стоит внутри темы форума —
