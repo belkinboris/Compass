@@ -1701,7 +1701,9 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
    19 сентября 2026). Отступ задан здесь, а не у .acct-note, — тот же
    класс носят подписи в аккаунте и на двери входа, где зазор не нужен. */
 .mp-note{margin:22px 0 26px}
-.mp-item{background:var(--card);border:1px solid var(--line);padding:20px;min-width:0}
+.mp-item{background:var(--card);border:1px solid var(--line);padding:20px;min-width:0;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%;border-radius:var(--radius);transition:border-color .2s var(--ease)}
+.mp-item:hover{border-color:var(--accent)}
+.mp-go{display:block;margin-top:12px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
 .mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
 .mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
@@ -1769,7 +1771,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
     <div class="foot-grid">
       <div>
         <div class="foot-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="27" height="27" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="1.8"/><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g><circle cx="24" cy="24" r="2.6" fill="var(--accent-deep)" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="brand-name">КО<em>М</em>П<em>А</em>С</span></div>
-        <div class="foot-desc">Сделки на российском рынке: стороны, условия, консультанты, финансовые показатели и ссылки на первоисточники. Демо-версия.</div>
+        <div class="foot-desc">Сделки на российском рынке: стороны, условия, консультанты, показатели и ссылки на источники.</div>
       </div>
       <div class="foot-col">
         <div class="foot-h">Платформа</div>
@@ -1781,7 +1783,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
       </div>
       <div class="foot-col">
         <div class="foot-h">Нашли ошибку?</div>
-        <div class="foot-desc" style="margin:0 0 8px">Напишите — проверим по источникам и поправим. Если знаете, откуда факт, приложите ссылку: так быстрее.</div>
+        <div class="foot-desc" style="margin:0 0 8px">Напишите, проверим по источникам и поправим.</div>
         <a id="footmail" href="#">Написать нам</a>
       </div>
       <div class="foot-col">
@@ -1791,13 +1793,12 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
         <a href="https://www.rbc.ru/" target="_blank" rel="noopener">РБК</a>
         <a href="https://www.vedomosti.ru/" target="_blank" rel="noopener">Ведомости</a>
         <a href="https://www.forbes.ru/" target="_blank" rel="noopener">Forbes</a>
-        <span class="foot-more">и другие деловые и отраслевые издания, сообщения самих компаний и юридических фирм — источник каждой сделки указан в её карточке</span>
+        <span class="foot-more">и другие издания; источник каждой сделки указан в её карточке</span>
       </div>
     </div>
     <div class="foot-bottom">
-      <div>Данные собраны из публичных источников и могут быть неполными. Не является рейтингом или рекомендацией. На сайте показаны сделки с 2022 года, база продолжает пополняться.</div>
+      <div>Данные из публичных источников, могут быть неполными. Не рейтинг и не рекомендация. Сделки с 2022 года.</div>
       <div class="foot-legal-links"><a href="#/legal/terms">Пользовательское соглашение</a><a href="#/legal/privacy">Обработка персональных данных</a></div>
-      <div class="num">MVP 0.5</div>
     </div>
   </div>
 </footer>
@@ -1938,7 +1939,7 @@ async function compareFnsData(id){
 }
 async function renderCompare(){
   const ids=compareIds();
-  app.innerHTML=`<a class="back reveal" href="#/companies">← Все компании</a><div class="sec-head reveal"><span class="label">Рабочий инструмент</span><h1>Сравнение компаний</h1><p>Сделки, роли, финансовые показатели и текущие участники — рядом. Можно выбрать до трёх компаний.</p></div>${ids.length?`<div class="deal-tools reveal"><button class="chip" id="exportCompare">Скачать сравнение в PDF</button><span class="tool-note" id="exportCompareNote" aria-live="polite"></span></div><div id="compareGrid" class="compare-grid reveal" style="--compare-cols:${ids.length}"></div>`:`<div class="compare-empty reveal">Компании пока не выбраны. Откройте профиль компании и нажмите «Добавить к сравнению».</div>`}`;
+  app.innerHTML=`<a class="back reveal" href="#/companies">← Все компании</a><div class="sec-head reveal"><span class="label">Рабочий инструмент</span><h1>Сравнение компаний</h1><p>До трёх компаний рядом: сделки, роли, показатели.</p></div>${ids.length?`<div class="deal-tools reveal"><button class="chip" id="exportCompare">Скачать сравнение в PDF</button><span class="tool-note" id="exportCompareNote" aria-live="polite"></span></div><div id="compareGrid" class="compare-grid reveal" style="--compare-cols:${ids.length}"></div>`:`<div class="compare-empty reveal">Компании пока не выбраны. Откройте профиль компании и нажмите «Добавить к сравнению».</div>`}`;
   if(!ids.length){rerun();renderCompareTray();return;}
   const [fns, bankFin]=await Promise.all([Promise.all(ids.map(compareFnsData)), loadBankFinance()]);
   const grid=document.getElementById("compareGrid"); if(!grid)return;
@@ -2569,9 +2570,7 @@ function companyRole(d, id){
 function companyEmptyHtml(c){
   return `<div class="lens-empty reveal">
     <div class="le-head">Сделок, где эта сторона указана явно, в базе пока нет</div>
-    <p>Название «${c.name}» встречается в карточках, но в источниках компания пока
-       не названа покупателем, продавцом или предметом сделки. Поэтому эти упоминания
-       не включены в список сделок автоматически.</p>
+    <p>Название «${c.name}» встречается в карточках, но стороной сделки компания в источниках не названа.</p>
     <div class="fe-actions">
       <a class="chip" href="#/search/${encodeURIComponent(c.name)}">Поискать по названию в ленте</a>
       <a class="chip" href="#/assistant">Спросить ассистента</a>
@@ -2839,8 +2838,7 @@ function loadingHtml(what){
     <p id="slowhint" style="max-width:44ch;margin:10px auto 0;
        font-size:13px;color:#6B5432;background:var(--bronze-soft);
        border:1px solid rgba(163,129,78,.5);border-radius:8px;padding:10px 14px">
-      Сервер «Компаса» находится в России: если у вас включён VPN, попробуйте
-      отключить его — обычно это ускоряет загрузку в несколько раз.</p>
+      Сервер в России: с включённым VPN база грузится медленно или не грузится. Отключите VPN.</p>
   </div>`;
 }
 /* Подборка живёт в адресе. Раньше три выставленных фильтра («Банки», 2024,
@@ -4564,11 +4562,11 @@ function renderDeals(){
       <div class="hs-in">
         <div class="kicker">Сделки</div>
         <h1>Сделки – <em>со ссылками на первоисточники</em></h1>
-        <p>Информация агрегируется из публичных источников — сообщений сторон, публикаций консультантов и деловых СМИ. База содержит только публично раскрытую информацию; у каждой сделки есть ссылка на источник. Разборы «Экономист» и «Юрист» собраны из этих же источников автоматически, их не пишут наши авторы. Сейчас на сайте — сделки с 2022 года, база продолжает пополняться.</p>
+        <p>Только публичная информация: сообщения сторон, публикации консультантов и деловых СМИ. У каждой сделки есть ссылка на источник. Разборы «Экономист» и «Юрист» собраны автоматически из тех же источников. В базе сделки с 2022 года.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
-          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":` · загружаем базу… <span class="hero-slow">Если это длится больше нескольких секунд, отключите VPN: сервер «Компаса» в России, и через иностранный адрес база может не загрузиться.</span>`}`
+          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":` · загружаем базу… <span class="hero-slow">Долго грузится? Отключите VPN: сервер в России.</span>`}`
         }</div>
       </div>
     </div>
@@ -4666,7 +4664,7 @@ function renderDeals(){
   <div class="cta reveal">
     <div>
       <h3>Не нашли сделку в базе?</h3>
-      <p>Спросите ассистента — он ищет по базе «Компаса» или по всему интернету: сайты юрфирм, консультантов, деловые СМИ.</p>
+      <p>Спросите ассистента: он ищет по базе «Компаса» и по открытым источникам.</p>
     </div>
     <a href="#/assistant">Спросить ИИ</a>
   </div>`;
@@ -5131,7 +5129,7 @@ function timelineHtml(d){
     <div class="progress-current">${progressRowHtml(d,latest,true)}</div>
     ${previous.length?`<button class="progress-toggle" id="historyToggle" type="button" aria-expanded="false" aria-controls="historyList"><svg class="chev" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Показать предыдущие этапы (${previous.length})</span></button>
       <div class="progress-history" id="historyList" hidden>${previous.map(e=>progressRowHtml(d,e,false)).join("")}</div>`:""}
-    <p class="progress-foot">Показываем этапы сделки, подтверждённые публичными источниками.</p>
+    <p class="progress-foot">Этапы по публичным источникам.</p>
   </div>`;
 }
 function bindTimeline(){
@@ -5233,7 +5231,7 @@ function sparseNoticeHtml(d){
     ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
     : missingSentence ? missingSentence.charAt(0).toUpperCase()+missingSentence.slice(1) : "";
   return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
-    <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Неизвестные сведения не восстанавливаем по косвенным признакам. Карточка обновится, когда появятся новые источники.</p>
+    <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Карточка обновится, когда появятся новые источники.</p>
   </div>`;
 }
 const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
@@ -5241,14 +5239,18 @@ const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
   : ["credit","structured","financing"].includes(kind) ? "Показатели получателя"
   : "Показатели актива";
 
-function openCorrectionDialog(d=null){
+function openCorrectionDialog(d=null, preset=""){
   const old=document.querySelector(".dialog-backdrop");
   if(old) (old.querySelector(".dialog-close")||old).click();
   const cardMode=!!(d&&d.id);
+  const title = cardMode ? "Уточнить или дополнить карточку" : preset ? "Оставить заявку" : "Написать редакции";
+  const intro = cardMode ? "Напишите, какой факт нужно поправить или добавить. Если знаете источник — приложите ссылку, так мы проверим быстрее."
+    : preset ? "Допишите детали — ответим на почту или в Telegram."
+    : "Напишите, что не так или чего не хватает. Если знаете источник — приложите ссылку, так мы проверим быстрее.";
   const wrap=document.createElement("div"); wrap.className="dialog-backdrop";
   wrap.innerHTML=`<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="correctionTitle">
-    <div class="dialog-head"><div><span class="label">Сообщение редакции</span><h2 id="correctionTitle">${cardMode?"Уточнить или дополнить карточку":"Написать редакции"}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
-    <p>${cardMode?"Напишите, какой факт нужно поправить или добавить.":"Напишите, что не так или чего не хватает."} Если знаете источник — приложите ссылку, так мы проверим быстрее.</p>
+    <div class="dialog-head"><div><span class="label">Сообщение редакции</span><h2 id="correctionTitle">${title}</h2></div><button class="dialog-close" aria-label="Закрыть">×</button></div>
+    <p>${intro}</p>
     <label for="correctionBody">${cardMode?"Что нужно изменить":"Сообщение"}</label>
     <textarea id="correctionBody" maxlength="4000" placeholder="${cardMode?"Например: покупателем была не холдинговая компания, а дочернее общество. Источник: …":"Например: в карточке сделки не указан продавец, хотя он назван в источнике. Или: не открывается страница компании."}"></textarea>
     <label for="correctionContact">Куда ответить, если появятся вопросы (необязательно)</label>
@@ -5263,7 +5265,8 @@ function openCorrectionDialog(d=null){
   document.addEventListener("keydown",key);
   const body=wrap.querySelector("#correctionBody"), contact=wrap.querySelector("#correctionContact"),
         send=wrap.querySelector("#correctionSend"), msg=wrap.querySelector("#correctionMsg");
-  setTimeout(()=>body.focus(),0);
+  if(preset){ body.value = preset; }
+  setTimeout(()=>{ body.focus(); if(preset) body.setSelectionRange(body.value.length, body.value.length); },0);
   send.onclick=async()=>{
     const text=body.value.trim(); msg.className="dialog-msg";
     if(!text){msg.textContent="Сначала напишите сообщение.";msg.classList.add("err");return;}
@@ -5601,7 +5604,7 @@ function regPanelHtml(d){
 function lawEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Юридические детали по этой сделке публично не раскрывались</div>
-    <p>В открытых источниках не названы согласования, условия сделки и юридические консультанты. Поэтому в этом разделе показываем только известные стороны, сумму и ссылки на источники.</p>
+    <p>Согласования, условия и юридические консультанты публично не названы. Ниже — стороны, сумма и источники.</p>
     ${knownRowsHtml(d, true)}
     ${srcFootHtml(d)}
   </div>`;
@@ -5624,7 +5627,7 @@ function lawPartialNote(d){
 function ecoEmptyHtml(d){
   return `<div class="lens-empty">
     <div class="le-head">Экономика сделки публично не раскрывалась</div>
-    <p>В открытых источниках не названы сумма, доля, оценка, показатели актива и финансовый консультант. Ниже оставлены известные сведения и ссылки для проверки.</p>
+    <p>Сумма, доля, оценка и финансовый консультант публично не названы. Ниже — что известно, и ссылки на источники.</p>
     ${knownRowsHtml(d, false)}
     ${srcFootHtml(d)}
   </div>`;
@@ -5785,7 +5788,7 @@ function renderDeal(id, qs, previewCard){
     // без «мультипликаторов»: они есть у 14 карточек из 1352 (1%), обещать их
     // в подписи к линзе — обещать то, чего почти нигде нет
     eco: "Экономист: сумма, контекст, показатели актива, цель сделки.",
-    law: "Юрист: согласования, условия сделки (заверения, гарантии, возмещение потерь) и юридические консультанты.",
+    law: "Юрист: согласования, условия сделки, юридические консультанты.",
   };
   // Раньше пустая вкладка оставалась видна, приглушённой, и подпись объясняла
   // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
@@ -6130,7 +6133,7 @@ function renderDeal(id, qs, previewCard){
     else f.innerHTML = `
       ${hero(isListing(d)?"Начальная цена лота":"Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
       ${sumState(d.sum)==="undisclosed"
-        ? `<p class="fact-note">Стороны не назвали сумму публично. Если источники приводят оценку, она всегда помечена как оценка, а не как раскрытая цена.</p>`
+        ? `<p class="fact-note">Стороны не назвали сумму публично. Оценки, если они есть, помечены как оценки.</p>`
         : sumState(d.sum)==="unknown"
           ? `<p class="fact-note">В публичных источниках отсутствует информация о цене сделки.</p>`
           : ""}
@@ -6402,7 +6405,7 @@ function bindCompanyGridActions(el){
 }
 function renderCompanies(){
   app.innerHTML = `
-  <div class="page-hero light"><div class="ph-in reveal"><span class="label">Каталог</span><h1>Компании</h1><p>Участники сделок: профиль, ключевые лица и показатели, история сделок из публичных источников.</p></div></div>
+  <div class="page-hero light"><div class="ph-in reveal"><span class="label">Каталог</span><h1>Компании</h1><p>Стороны сделок: профиль, показатели, история сделок.</p></div></div>
   <div class="feed-search reveal"><input id="coq" placeholder="Найти компанию по названию…" value="${esc(coQuery)}" aria-label="Поиск по компаниям"><div class="ac" id="coac" hidden></div></div>
   <div class="filters reveal">
     <select id="coind"><option ${coInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===coInd?"selected":""}>${i}</option>`).join("")}</select>
@@ -7569,7 +7572,7 @@ function renderAdvisors(){
         <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
       </g>
     </svg>
-    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Перечень юридических и инвестиционных консультантов по публичным данным. Консультанты раскрывают не все проекты, и ноль сделок в базе не означает, что консультант не сопровождал какие-либо сделки.</p></div>
+    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты по публичным данным. Фирмы раскрывают не все проекты, поэтому ноль сделок в базе не значит, что их нет.</p></div>
   </div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
@@ -7609,12 +7612,7 @@ function firmEmptyHtml(f, isLegal){
   if(!isLegal && f.desc) known.push(["Профиль", f.desc]);
   return `<div class="lens-empty reveal">
     <div class="le-head">Публично подтверждённых сделок этой фирмы в базе пока нет</div>
-    <p>Фирма в каталоге потому, что ${isLegal
-      ? "включена в каталог по открытым отраслевым данным о корпоративной практике и M&amp;A"
-      : "работает инвестиционным консультантом на российском рынке"}. Сделок за ней мы
-       не числим: в публичных источниках — прежде всего в сообщениях самой фирмы — их
-       не нашлось. Это говорит о том, что фирма не раскрывает проекты, а не о том,
-       что она их не ведёт.</p>
+    <p>Фирма ${isLegal ? "ведёт практику M&amp;A" : "работает инвестиционным консультантом"}, но публично о её сделках не сообщалось. Фирмы раскрывают не все проекты.</p>
     ${known.length?`<div class="le-known"><span class="label">Что известно о фирме</span>
       ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
     </div>`:""}
@@ -7660,8 +7658,8 @@ function firmSummaryHtml(id, full, mini, bulk){
      компания»: у IPO, обмена акций, выкупа своих бумаг покупателя и продавца
      нет, фирма ведёт эмитента. */
   const SIDE_LABEL = {buyer:"Покупатель", seller:"Продавец", target:"Таргет", bank:"Организаторы и кредиторы", other:"Иные стороны сделки"};
-  const SIDE_HINT = {target:"«Таргет» — эмитент при IPO, компания при выкупе своих бумаг или привлечении средств.",
-                     bank:"«Организаторы и кредиторы» — банки-организаторы размещения, андеррайтеры, банки-кредиторы."};
+  const SIDE_HINT = {target:"«Таргет» — эмитент или компания, которая привлекает средства.",
+                     bank:"«Организаторы и кредиторы» — банки, которые организуют размещение или дают кредит."};
   const roles = {};
   let noSide = 0;
   full.forEach(d=>{
@@ -7689,14 +7687,14 @@ function firmSummaryHtml(id, full, mini, bulk){
       <span class="label">Чей консультант</span>
       ${bar(topRoles, topRoles[0][1])}
       ${note([roles[SIDE_LABEL.target]?SIDE_HINT.target:"", roles[SIDE_LABEL.bank]?SIDE_HINT.bank:"",
-              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} источник не уточняет, чьим консультантом выступала фирма.`
+              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} сторона не уточнена.`
                      : `Сторона известна по каждой сделке фирмы.`].filter(Boolean).join(" "))}
     </div>`:""}
     ${repeat.length?`
     <div class="an-card reveal">
       <span class="label">Компании в нескольких сделках фирмы</span>
       ${repeat.map(([cid,n])=>`<a class="an-deal" href="#/companies/${cid}"><div class="an-deal-head"><span class="an-deal-t">${co(cid).name}</span></div><span class="an-deal-s num">${n} ${plural(n,"сделка","сделки","сделок")} с участием компании</span></a>`).join("")}
-      ${note(`Компании, которые встречаются в сделках фирмы не по одному разу — как покупатель, продавец или предмет сделки. Это не обязательно клиенты фирмы: чью сторону она вела, сказано в каждой сделке.`)}
+      ${note(`Компании, которые встречаются в сделках фирмы не один раз. Чью сторону вела фирма, сказано в каждой сделке.`)}
     </div>`:""}
   </div>`;
 }
@@ -7723,7 +7721,7 @@ function renderFirm(id){
   ${listFilterHtml("firmDealsFilter", [...full.map(d=>({date:d.date, inds:dealIndustries(d)})), ...mini, ...bulk])}
   ${firmDealsListHtml(full, mini, bulk)}
   ${(full.length+mini.length+bulk.length)
-    ? `<p class="reveal" style="font-size:13px;color:var(--muted);line-height:1.6;max-width:72ch;margin:22px 0 0">Учитываются сделки, где фирма названа консультантом в публичных источниках — прежде всего в публикациях самой фирмы. Фирмы раскрывают не все проекты, поэтому список может неполно отражать реальное количество сделок.</p>`
+    ? `<p class="reveal" style="font-size:13px;color:var(--muted);line-height:1.6;max-width:72ch;margin:22px 0 0">Только сделки, где фирма публично названа консультантом. Фирмы раскрывают не все проекты.</p>`
     : firmEmptyHtml(f,isLegal)}
   ${miniAIHtml("Спросите о сделках этого консультанта…")}`;
   bindListFilter("firmDealsFilter");
@@ -7747,10 +7745,10 @@ const RESUME_MAX = 3000;
 const interviewPanelHtml = () => `
   <div class="interview-prep reveal" id="interviewPrep" hidden>
     <span class="label">Подготовка к собеседованию</span>
-    <p>Вставьте текст резюме — ассистент сопоставит ваш опыт с тем, что известно о сделках и роли на рынке. Поле можно оставить пустым.</p>
+    <p>Вставьте резюме — ассистент сопоставит ваш опыт со сделками. Можно оставить пустым.</p>
     <textarea id="resumeText" maxlength="${RESUME_MAX}" placeholder="Опыт, образование, проекты — своими словами или текстом из резюме"></textarea>
     <div class="interview-actions"><button class="chip primary" id="interviewGo" type="button">Подготовить</button>
-      <span>Текст уйдёт ассистенту вместе с вопросом и, если вы вошли, останется в вашей истории диалогов. Не указывайте паспортные данные и контакты.</span></div>
+      <span>Текст увидит только ассистент. Если вы вошли, он сохранится в истории диалогов. Без паспортных данных и контактов.</span></div>
   </div>`;
 const interviewQuestion = (base, resume, withWhom) => resume
   ? `${base}\n\nМоё резюме:\n${resume}\n\nСопоставь мой опыт с ${withWhom} — коротко, списком: что подчеркнуть на собеседовании и чего мне не хватает.`
@@ -7877,7 +7875,7 @@ function renderIndustry(ind){
     <p>${all.length===1
       ? (disclosed.length ? "Одна сделка в отрасли, сумма известна." : "Одна сделка в отрасли, сумму стороны не назвали.")
       : `${all.length} ${plural(all.length,"сделка","сделки","сделок")} в отрасли, ${disclosed.length ? `сумма известна у ${disclosed.length}` : "ни по одной сумма не раскрыта"}.`
-    } Здесь только то, что стороны и их консультанты раскрыли публично, — не вся статистика сектора.</p>
+    } Только публично раскрытое, не вся статистика отрасли.</p>
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
@@ -7899,7 +7897,7 @@ function renderIndustry(ind){
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${rub.length
         ? rub.slice(0,8).map((o,i)=>`<a class="an-deal" href="#/deal/${o.d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${o.d.title}</span></div><span class="an-deal-s num">${sumHtml(o.d.sum)}</span></a>`).join("")
-          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где цену назвали стороны и она указана в рублях. Не в счёт: валютные суммы, оценки и неофициальные цифры, незакрытые торги, сорвавшиеся сделки и IPO. Вместе — ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽.`)
+          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где стороны назвали цену в рублях — вместе ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽. Без оценок, валютных сумм, незакрытых торгов, сорвавшихся сделок и IPO.`)
         : emptyNote("Ни по одной сделке отрасли стороны не назвали цену в рублях — сравнивать нечего.")}
     </div>
     <div class="an-card reveal">
@@ -7915,20 +7913,20 @@ function renderIndustry(ind){
       <span class="label">Кто ведёт сделки в отрасли</span>
       ${topFirms.length
         ? topFirms.map(([n,c])=>`<div class="an-row"><span class="an-key">${n}</span><div class="an-bar"><div style="width:${Math.round(c/topFirms[0][1]*100)}%"></div></div><span class="an-val num">${c}</span></div>`).join("")
-          + note(`Консультанты, названные публично. Известны у ${cards.filter(d=>realAdv(d).length).length} ${plural(cards.filter(d=>realAdv(d).length).length,"сделки","сделок","сделок")} отрасли — по остальным стороны не сказали, кто их вёл.`)
+          + note(`Консультанты известны у ${cards.filter(d=>realAdv(d).length).length} ${plural(cards.filter(d=>realAdv(d).length).length,"сделки","сделок","сделок")} отрасли.`)
         : emptyNote(`Ни по одной сделке отрасли стороны не назвали консультантов.`)}
     </div>
     ${byType.length>1?`
     <div class="an-card reveal">
       <span class="label">Что это за сделки</span>
       ${byType.map(([t,n])=>`<div class="an-row"><span class="an-key">${t}</span><div class="an-bar"><div style="width:${Math.round(n/byType[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      ${note(`Тип известен у ${cards.length} ${plural(cards.length,"сделки","сделок","сделок")} отрасли.${notMA?` Из них ${notMA} — не M&amp;A: инвестиционные раунды, IPO и продажи с торгов тоже в базе, потому что это тот же рынок.`:""}`)}
+      ${note(`Тип известен у ${cards.length} ${plural(cards.length,"сделки","сделок","сделок")} отрасли.${notMA?` Из них ${notMA} — не M&amp;A: раунды, IPO, торги.`:""}`)}
     </div>`:""}
     ${topThemes.length?`
     <div class="an-card reveal">
       <span class="label">Темы отрасли</span>
       ${topThemes.map(([t,n])=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/topThemes[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      ${note(`Тема определяется по содержанию карточки. У одной сделки может быть несколько тем; тема не заменяет тип сделки.`)}
+      ${note(`У сделки может быть несколько тем; тема не заменяет тип.`)}
     </div>`:""}
   </div>
   ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
@@ -8245,7 +8243,7 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>В «Компасе» ${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года${listingsOut?` (ещё ${listingsOut} ${plural(listingsOut,"лот","лота","лотов")} выставлено на торги, но не куплено — в показатели они не входят)`:""}. Всё собрано из открытых источников: это то, что стало известно рынку, а не полная статистика.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года по открытым источникам${listingsOut?`; ещё ${listingsOut} ${plural(listingsOut,"лот выставлен","лота выставлены","лотов выставлено")} на торги, но не ${plural(listingsOut,"куплен","куплены","куплено")} — в показатели они не входят`:""}. Это то, что стало известно рынку, а не полная статистика.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">
@@ -8259,27 +8257,27 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}: цены, названные сторонами в рублях и сверенные с источником. Сделка с двумя отраслями учтена в обеих. Без инвестиций, IPO, оценок и валютных сумм.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. У сделки бывает две отрасли, и тогда она попадает в обе — поэтому сумма по отраслям больше общего числа сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. Сделка с двумя отраслями учтена в обеих.</p>
     </div>
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
-      ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут подтверждены чтением источников — пока ни одна не прошла проверку и ждёт проверки.</p>`}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Цена каждой сделки в списке прочитана в источнике и подтверждена цитатой${topAwaiting?`; ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена есть в тексте карточки, но мы пока не сверили её с источником`:""}. Здесь только покупки бизнеса — включая покупку с торгов, — у которых цену назвали сами стороны в рублях и мы сверили её с источником. Таких ${rubDisclosed}. Не вошли: привлечение инвестиций и раунды финансирования, IPO (там сумма — это либо объём размещения, либо оценка всей компании), оценки аналитиков и цифры без официального подтверждения, суммы в валюте, стартовые цены незавершённых торгов и цены сорвавшихся сделок.</p>
+      ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут сверены с источниками.</p>`}
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Только покупки бизнеса с ценой в рублях, названной сторонами и сверенной с источником: таких ${rubDisclosed}.${topAwaiting?` Ещё у ${topAwaiting} ${plural(topAwaiting,"покупки","покупок","покупок")} цена в карточке есть, но не сверена.`:""} Без инвестиций, IPO, оценок и валютных сумм.</p>
     </div>
     <div class="an-card an-c-firms reveal">
       <span class="label">Консультанты</span>
       ${firmRank.map((f,i)=>`<a class="an-deal" href="#/advisors/${f.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${f.n}</span></div><span class="an-deal-s num">${f.c} сдел${f.c===1?"ка":f.c<5?"ки":"ок"}</span></a>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Консультант известен у ${advisorDisclosed} ${plural(advisorDisclosed,"сделки","сделок","сделок")} из ${deals.length}. Фирмы раскрывают не все свои проекты, поэтому это не рейтинг.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Консультант известен у ${advisorDisclosed} ${plural(advisorDisclosed,"сделки","сделок","сделок")} из ${deals.length}. Фирмы раскрывают не все проекты, это не рейтинг.</p>
     </div>
     <div class="an-card an-c-status reveal">
       <span class="label">Статус сделок</span>
       ${Object.entries(statuses).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/withStatus*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")}${ofTotal(withStatus,deals.length)}. Это последнее, что писали источники: если переговоры закончились без огласки, здесь они так и остались переговорами${statuses[STALE_TALKS]?`, поэтому сделки без новостей больше года показаны отдельно`:""}.${rareTotal?` Ещё ${rareTotal} ${plural(rareTotal,"сделка","сделки","сделок")} с редкими статусами (${rare.map(([k])=>k.toLowerCase()).join("; ")}) на график не попали.`:""}</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")}${ofTotal(withStatus,deals.length)}.${statuses[STALE_TALKS]?` Сделки без новостей больше года показаны отдельно.`:""}${rareTotal?` Ещё ${rareTotal} с редкими статусами (${rare.map(([k])=>k.toLowerCase()).join("; ")}) на график не попали.`:""}</p>
     </div>
     ${topBuyers.length?`
     <div class="an-card an-c-buyers reveal">
@@ -8291,12 +8289,12 @@ function renderAnalytics(){
     <div class="an-card an-c-themes reveal">
       <span class="label">Темы сделок</span>
       ${themeRank.map(([t,n],ri)=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/maxT*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Это особые признаки сделок, а не их виды: обычная покупка компании отдельной темой не считается. У одной сделки может быть несколько тем. Нажмите на тему, чтобы открыть список сделок.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Темы — особенности сделок, у одной сделки их может быть несколько. Нажмите на тему, чтобы открыть список.</p>
     </div>`:""}
     ${natDeals.length?`
     <div class="an-card an-c-nat reveal" id="nationalizedCard" style="grid-column:1/-1">
       <span class="label">Изъятые и национализированные активы</span>
-      <p style="margin:0 0 14px;color:var(--muted);font-size:13.5px">${where}${natDeals.length} ${plural(natDeals.length,"сделка","сделки","сделок")}: изъятие в доход государства по иску Генпрокуратуры или решению суда, передача во временное управление по указу президента, дальнейшая продажа или передача изъятого актива.${natRub.length?` Цена названа у ${natRub.length} ${plural(natRub.length,"сделки","сделок","сделок")} — вместе ${fmtB(natRubSum)} ₽.`:""}</p>
+      <p style="margin:0 0 14px;color:var(--muted);font-size:13.5px">${where}${natDeals.length} ${plural(natDeals.length,"сделка","сделки","сделок")}: изъятие в доход государства, передача во временное управление, продажа или передача изъятого.${natRub.length?` Цена названа у ${natRub.length} ${plural(natRub.length,"сделки","сделок","сделок")} — вместе ${fmtB(natRubSum)} ₽.`:""}</p>
       <div class="nat-grid">
         <div>
           <span class="nat-sub">По годам</span>
@@ -8310,13 +8308,13 @@ function renderAnalytics(){
       <div class="nat-list">
         ${natDeals.slice(0,NAT_SHOWN).map(d=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="an-deal-t">${d.title}</span></div><span class="an-deal-s">${fmtDate(d.date)}${d.ind?` · ${d.ind}`:""}${d.status?` · ${stageLabel(d.status)}`:""}</span></a>`).join("")}
       </div>
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Собрано из открытых источников: это сделки, о которых писали, а не полный перечень изъятий. ${natDeals.length>NAT_SHOWN?`Показаны ${NAT_SHOWN} последних по дате, `:""}<a href="#/theme/${encodeURIComponent(NAT_THEME)}">все сделки темы</a>.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Это сделки, о которых писали, а не полный перечень изъятий.${natDeals.length>NAT_SHOWN?` Показаны ${NAT_SHOWN} последних.`:""} <a href="#/theme/${encodeURIComponent(NAT_THEME)}">Все сделки темы →</a></p>
     </div>`:""}
     ${topIndMoney.length?`
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)} — тех, где цену назвали сами стороны в рублях и мы сверили её с источником. У сделки бывает две отрасли: тогда её сумма попадает в обе, и складывать столбцы между собой нельзя. Не вошли: привлечение инвестиций и раунды финансирования, IPO, оценки аналитиков, суммы без официального подтверждения и суммы в валюте.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}: цены, названные сторонами в рублях и сверенные с источником. Сделка с двумя отраслями учтена в обеих. Без инвестиций, IPO, оценок и валютных сумм.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
@@ -8356,7 +8354,7 @@ async function mountMarketMultiples(){
   // null у ЧУЖОЙ, новой страницы, а не у этого узла).
   if(!body.isConnected) return;
   if(!data || (!data.clean_total && !data.computed_total)){
-    body.textContent="Пока ни одна сделка не прошла все проверки сопоставимости (цена в рублях, известная доля, отчётность купленной компании за подходящий год). База отчётности растёт каждый день — возвращайтесь позже.";
+    body.textContent="Пока ни у одной сделки нет полного набора для расчёта: цена в рублях, доля и отчётность купленной компании за нужный год.";
     return;
   }
   // Второй мультипликатор — по операционной прибыли (ближе к привычному
@@ -8411,7 +8409,7 @@ async function mountMarketMultiples(){
     const notShown = (s && s.not_shown) || [];
     const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ${fmtMult(n.value)})`:""}`).join("; ")}.</p>` : "";
     if(!s || (!s.clean_total && !s.computed_total)){
-      return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора — база отчётности растёт каждый день, возвращайтесь позже.</p>${notShownHtml}`;
+      return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора.</p>${notShownHtml}`;
     }
     // Медианы (общая и отраслевые) показываются только при data.show_medians:
     // сделки прошли правила допуска, но их сопоставимость между собой (периметр,
@@ -8535,7 +8533,7 @@ const LEGAL_DOCS = {
     sections: [
       ["Статус документа", `Черновик, готовится к утверждению. Документ определяет условия использования платформы «Компас» (далее — «Сервис»). Начиная пользоваться Сервисом, пользователь подтверждает согласие с этими условиями.`],
       ["Оператор Сервиса", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес]</span>.`],
-      ["Что такое Сервис", `«Компас» — информационная платформа о сделках слияний и поглощений (M&A) российского рынка: карточки сделок, профили компаний и консультантов, отраслевая аналитика и ИИ-ассистент по базе данных. Сервис работает в режиме демонстрационной версии (MVP) и продолжает наполняться.`],
+      ["Что такое Сервис", `«Компас» — информационная платформа о сделках слияний и поглощений (M&A) российского рынка: карточки сделок, профили компаний и консультантов, отраслевая аналитика и ИИ-ассистент по базе данных. База продолжает наполняться.`],
       ["Характер публикуемых данных", `Информация агрегируется из публичных источников — сообщений сторон сделок, публикаций консультантов, деловых СМИ и официальных реестров — и сопровождается ссылками на них. База содержит только публично раскрытую информацию; данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
       ["Материалы третьих лиц и цитирование", `Сведения о фактах сделок излагаются своими словами. Фрагменты публикаций приводятся в кавычках с указанием источника в объёме, оправданном информационной целью (статья 1274 Гражданского кодекса РФ); права на публикации принадлежат их правообладателям. Правообладатель, считающий, что его материал использован с нарушением, может направить обращение через форму «Написать нам» — фрагмент будет изменён или удалён.`],
       ["Права на базу данных", `База данных Сервиса (карточки сделок, профили компаний и консультантов, их связи и производные показатели) создана с существенными затратами, и Оператор является её изготовителем (статьи 1333–1334 Гражданского кодекса РФ). Запрещается извлечение и повторное использование существенной части материалов базы, а также неоднократное извлечение её частей, в том числе автоматизированное извлечение информации сайта любыми программами и сервисами, без письменного разрешения Оператора. Допускается использование материалов в личных и информационных целях со ссылкой на Сервис.`],
@@ -8581,22 +8579,30 @@ function renderLegal(kind){
 }
 
 async function renderMaterials(){
-  app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Экспертный контур</span><h1>Материалы</h1><p>Колонки, разборы и вебинары от юристов, экономистов и консультантов рынка — под именем автора, рядом со сделками, которые он вёл.</p></div></div>
+  app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Авторам</span><h1>Материалы</h1><p>Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
   <div class="materials-pitch reveal">
-    <div class="mp-item"><h2>Ведите колонку</h2><p>Разбор сделки, комментарий к регулированию, отраслевой обзор — материал публикуется под именем автора и его фирмы и виден тем же читателям, что открывают карточки сделок.</p></div>
-    <div class="mp-item"><h2>Анонсируйте вебинары</h2><p>Дата, тема и ссылка на подключение — событие появляется здесь, а читатель добавляет его в свой календарь одним нажатием, чтобы не забыть о встрече.</p></div>
-    <div class="mp-item"><h2>Профиль автора</h2><p>Колонки и эфиры собираются на странице фирмы или консультанта в каталоге — рядом с реальными сделками, которые она вела.</p></div>
+    <button class="mp-item" type="button" data-pitch="column"><h2>Вести колонку</h2><p>Разбор сделки, комментарий к закону, обзор отрасли. Выходит с вашим именем и фирмой.</p><span class="mp-go">Оставить заявку →</span></button>
+    <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем канале.</p><span class="mp-go">Оставить заявку →</span></button>
+    <button class="mp-item" type="button" data-pitch="profile"><h2>Профиль автора</h2><p>Ваши материалы собираются на странице фирмы рядом с её сделками.</p><span class="mp-go">Оставить заявку →</span></button>
   </div>
-  <p class="acct-note mp-note reveal">Раздел только начинается. Ниже — эфиры, о которых уже объявлено; календарь и авторские колонки добавим следом. Хотите вести колонку или провести вебинар — <a href="#" id="materialsPitchLink">напишите редакции</a>, обсудим формат.</p>
+  <p class="acct-note mp-note reveal">Раздел открылся недавно: ниже анонсы вебинаров, колонки появятся позже. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
   <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
   const pitchLink=document.getElementById("materialsPitchLink");
   if(pitchLink) pitchLink.onclick=e=>{e.preventDefault();openCorrectionDialog();};
+  /* Карточки — кнопки заявки (владелец, 4 октября 2026): открывают тот же
+     диалог редакции с заготовкой текста, человеку остаётся дописать детали. */
+  const PITCH = {
+    column: "Хочу вести колонку в «Компасе».\nТема: \nАвтор и фирма: ",
+    webinar: "Хочу анонсировать вебинар.\nДата: \nТема: \nСсылка: ",
+    profile: "Хочу завести профиль автора.\nФирма: \nМатериалы: ",
+  };
+  app.querySelectorAll("[data-pitch]").forEach(b=>b.onclick=()=>openCorrectionDialog(null, PITCH[b.dataset.pitch]));
   const mount=document.getElementById("webinarList");
   try{
     const r=await fetch("/api/webinars"); const rows=r.ok?await r.json():[];
     if(!rows.length){
-      mount.innerHTML=`<div class="feed-empty reveal"><div class="fe-title">Первый вебинар готовится.</div><p>Здесь появятся анонсы, регистрация и записи прошедших встреч.</p></div>`;
+      mount.innerHTML=`<div class="feed-empty reveal"><div class="fe-title">Первый вебинар готовится.</div><p>Анонсы и записи появятся здесь.</p></div>`;
     }else{
       mount.innerHTML=`<div class="webinar-grid">${rows.map(w=>`<article class="webinar-card reveal"><span class="tag ${w.status==="recording"?"steel":""}">${w.status==="recording"?"Запись":"Предстоящий"}</span><h2>${esc(w.title)}</h2>${w.summary?`<p>${esc(w.summary)}</p>`:""}<div class="webinar-meta">${w.starts_at?new Date(w.starts_at).toLocaleString("ru-RU",{dateStyle:"long",timeStyle:"short"}):""}${w.speaker?` · ${esc(w.speaker)}`:""}</div>${w.registration_url?`<a class="chip on" href="${w.registration_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Зарегистрироваться</a>`:""}${w.recording_url?`<a class="chip" href="${w.recording_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Смотреть запись</a>`:""}</article>`).join("")}</div>`;
     }
@@ -8626,7 +8632,7 @@ const ASSISTANT_TASKS = [
 ];
 const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome">
   <h2>О чём спросить?</h2>
-  <p>Ассистент ищет по базе «Компаса»: сделки, компании, консультанты, суммы и сроки — и в каждом ответе даёт ссылку на первоисточник. В режиме «По всему интернету» он добавляет к этому открытые источники.</p>
+  <p>Ассистент ищет по базе «Компаса» и в каждом ответе даёт ссылку на источник. Режим «По всему интернету» добавляет открытые источники.</p>
 </div>`;
 // Поправка высоты под клавиатуру телефона живёт одна на все открытия раздела:
 // иначе каждый заход вешал бы на visualViewport ещё один обработчик.
@@ -8666,7 +8672,7 @@ async function renderAssistant(){
       </div>
       ${ME
         ? `<div class="chat-threads" id="threadList"><p class="chat-side-note">Загружаем историю…</p></div>`
-        : `<div class="chat-threads"><p class="chat-side-note" id="chatSignin"><a href="#/account">Войдите</a>, чтобы диалоги сохранялись — они будут под рукой в этом списке.</p></div>`}
+        : `<div class="chat-threads"><p class="chat-side-note" id="chatSignin"><a href="#/account">Войдите</a>, чтобы диалоги сохранялись.</p></div>`}
     </aside>
     <section class="chat-main">
       <header class="chat-top">
@@ -9018,7 +9024,7 @@ async function renderAccount(qs){
     const paint=()=>{
       app.innerHTML = mode==="login" ? `
       <div class="sec-head reveal"><span class="label">Аккаунт</span><h1>Войти</h1>
-        <p>Почта и пароль. В аккаунте сохраняются уведомления, подписки и обсуждения с ассистентом.</p></div>
+        <p>Почта и пароль. В аккаунте — подписки, уведомления и диалоги с ассистентом.</p></div>
       <form class="acct-form reveal" id="loginForm" style="flex-direction:column">
         <input type="email" id="loginEmail" placeholder="you@firma.ru" required autocomplete="email">
         <input type="password" id="loginPassword" placeholder="Пароль" required autocomplete="current-password" minlength="8">
@@ -9090,14 +9096,14 @@ async function renderAccount(qs){
     body.innerHTML=`<div class="acct-card reveal"><div style="display:flex;justify-content:space-between;gap:16px;align-items:center"><span class="label">Каналы доставки</span><button class="chip" id="readAll">Отметить всё прочитанным</button></div><div class="pref-grid" id="prefGrid"><p class="acct-note">Загружаем настройки…</p></div></div><div class="sec-head reveal" style="margin-top:30px"><h1 style="font-size:24px">Последние уведомления</h1></div><div class="notif-list" id="notifList"><p class="acct-note">Загружаем…</p></div>`;
     const loadPrefs=async()=>{const r=await fetch("/api/notification-preferences"),p=r.ok?await r.json():null;if(!p)return;
       const row=(label,desc,key,checked,disabled=false)=>`<div class="pref-row"><div><b>${label}</b><div class="acct-note">${desc}</div></div><label class="switch"><input type="checkbox" data-pref="${key}" ${checked?"checked":""} ${disabled?"disabled":""}><span></span></label></div>`;
-      const tgDesc = !p.telegram_available ? "Скоро будет доступно — бот ещё не настроен."
-        : p.telegram_connected ? "Подключён — сюда же придёт и еженедельная сводка, если она включена."
-        : "Нажмите «Подключить» ниже: откроется чат с ботом в Telegram, останется один раз нажать Start — вводить ничего не нужно.";
-      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Храним обновления в этой вкладке.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Отправляем важные обновления и недельную сводку.":"Скоро будет доступно — почтовая рассылка ещё не подключена.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Что нового появилось в базе за последние семь дней.":"Скоро будет доступно — работает вместе с почтовой рассылкой.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
+      const tgDesc = !p.telegram_available ? "Скоро."
+        : p.telegram_connected ? "Подключён."
+        : "Нажмите «Подключить», затем Start в Telegram.";
+      document.getElementById("prefGrid").innerHTML=row("Внутри платформы","Уведомления на этой странице.","in_app_enabled",p.in_app_enabled)+row("По электронной почте",p.email_available?"Важные обновления и недельная сводка.":"Скоро.","email_enabled",p.email_enabled&&p.email_available,!p.email_available)+row("Еженедельная сводка",p.email_available?"Новое в базе за неделю.":"Скоро.","weekly_digest",p.weekly_digest&&p.email_available,!p.email_available)+row("В Telegram",tgDesc,"telegram_enabled",p.telegram_enabled,!p.telegram_connected)+(p.telegram_available&&!p.telegram_connected?`<div class="pref-row"><div><b>Подключить Telegram</b><div class="acct-note">Откроется чат с ботом — останется нажать Start.</div></div><button class="chip" id="connectTg">Подключить</button></div>`:"");
       document.querySelectorAll("[data-pref]").forEach(el=>el.onchange=async()=>{const payload={};payload[el.dataset.pref]=el.checked;const rr=await fetch("/api/notification-preferences",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!rr.ok){el.checked=!el.checked;const x=await rr.json().catch(()=>({}));alert(x.error||"Не удалось сохранить настройку");}});
       const tg=document.getElementById("connectTg");if(tg)tg.onclick=async()=>{const rr=await fetch("/api/notification-preferences/telegram-link",{method:"POST"}),x=await rr.json();if(rr.ok)location.href=x.url;else alert(x.error||"Не удалось подключить Telegram");};
     };
-    const loadNotifications=async()=>{const r=await fetch("/api/notifications"),rows=r.ok?await r.json():[];const mount=document.getElementById("notifList");mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join(""):`<div class="fns-empty">Уведомлений пока нет. Подпишитесь на конкретную сделку или создайте отраслевую подписку.</div>`;};
+    const loadNotifications=async()=>{const r=await fetch("/api/notifications"),rows=r.ok?await r.json():[];const mount=document.getElementById("notifList");mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join(""):`<div class="fns-empty">Уведомлений пока нет. Подпишитесь на сделку, компанию или отрасль.</div>`;};
     document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
     loadPrefs();loadNotifications();
   }else if(tab==="subscriptions"){

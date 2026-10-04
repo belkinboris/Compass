@@ -850,7 +850,7 @@ def test_launch_ui_contains_requested_changes():
     assert "Российский рынок сделок" not in html
     assert "Инвестиции и рынок ЦБ" not in html
     assert "Искусственный интеллект" in html
-    assert "Показываем этапы сделки, подтверждённые публичными источниками." in html
+    assert "Этапы по публичным источникам." in html
     assert '<span class="chev">⌄</span>' not in html and '<svg class="chev"' in html
     assert "https://300.pravo.ru/" not in html
     assert "Право-300" not in html
