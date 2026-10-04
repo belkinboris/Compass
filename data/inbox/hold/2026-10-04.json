@@ -1295,6 +1295,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d20717782",
+   "title": "Сироты в Башкирии смогут выбирать между жильем и сертификатом на покупку квартиры",
+   "date": "2026-10-04",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/volga/news/bashkortostan/2026/10/4/siroty-v-bashkirii-smogut-vybirat-mezhdu-zhilem-i-sertifikatom-na-pokupku-kvartiry-municzipalitetam-bashkirii-dali-novye-polnomochiya-po-obespecheniyu-zhilem-sirot"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
