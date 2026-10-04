@@ -727,13 +727,16 @@ def test_email_notifications_unavailable_without_smtp(client, monkeypatch):
     письмо никогда не уйдёт, и никто об этом не узнает (см. CLAUDE.md про
     честную деградацию вместо тихой имитации успеха)."""
     monkeypatch.delenv("SMTP_HOST", raising=False)
-    _login(client, "no-smtp-launch@firm.ru")
+    _login(client, "no-smtp-launch-%s@firm.ru" % uuid.uuid4().hex[:8])
     prefs = client.get("/api/notification-preferences").json()
     assert prefs["email_available"] is False
     r = client.patch("/api/notification-preferences", json={"email_enabled": True})
     assert r.status_code == 400
-    r = client.patch("/api/notification-preferences", json={"weekly_digest": True})
-    assert r.status_code == 400
+    # Сводка за неделю с 4 октября 2026 приходит на сайт и в Telegram — почта
+    # ей не обязательна, и переключатель больше не заперт.
+    r = client.patch("/api/notification-preferences", json={"weekly_digest": False})
+    assert r.status_code == 200
+    assert client.get("/api/notification-preferences").json()["weekly_digest"] is False
 
 
 def test_saved_assistant_thread(client, monkeypatch):
@@ -2683,8 +2686,10 @@ def test_bot_answers_bare_start_and_help(client, monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    # Консоль живёт в группе: там «/start» участника — справка модерации.
     client.post("/api/telegram/webhook/тайна", json={
-        "message": {"chat": {"id": 111}, "from": {"id": 111}, "text": "/start"}})
+        "message": {"chat": {"id": -1001234567890, "type": "supergroup"}, "from": {"id": 111},
+                    "text": "/start"}})
     assert sent, "«/start» остался без ответа"
     method, body = sent[0]
     assert method == "sendMessage"
@@ -2692,6 +2697,11 @@ def test_bot_answers_bare_start_and_help(client, monkeypatch):
     assert "опубликовать" in body["text"].lower()
     # И показывает это кнопками: текстом непонятно, что вообще можно нажать.
     assert body.get("reply_markup", {}).get("inline_keyboard")
+    # В личке тот же участник консоли получает /help — справку модерации.
+    sent.clear()
+    client.post("/api/telegram/webhook/тайна", json={
+        "message": {"chat": {"id": 111, "type": "private"}, "from": {"id": 111}, "text": "/help"}})
+    assert sent and "опубликовать" in sent[0][1]["text"].lower()
 
 
 def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
@@ -4474,3 +4484,153 @@ def test_access_gate_is_off_by_default_since_launch():
     переменной окружения."""
     src = open(os.path.join(os.path.dirname(__file__), "main.py"), encoding="utf-8").read()
     assert 'os.environ.get("ACCESS_GATE", "0") == "1"' in src
+
+
+# ---------------------------------------------------------------------------
+# Бот для читателя (4 октября 2026). Владелец нажал в кабинете «Подключить
+# Telegram», потом «Старт» — и получил инструкцию модерации. Её получал бы
+# любой читатель: /start отвечал всем справкой консоли, привязка шла молча.
+
+CONSOLE_WORDS = ("опубликовать", "придержать", "выкинуть", "черновик", "проект поста")
+
+
+def _bot_sent(monkeypatch):
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    return sent
+
+
+def _say(client, chat_id, text, sender=None):
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "chat": {"id": chat_id, "type": "private"}, "from": {"id": sender or chat_id}, "text": text}})
+
+
+def test_reader_start_gets_a_reader_welcome_not_the_console(client, monkeypatch):
+    _mod_env(monkeypatch)
+    sent = _bot_sent(monkeypatch)
+    _say(client, 555001, "/start")
+    assert sent, "читатель нажал «Старт» и не получил ответа"
+    text = sent[0][1]["text"].lower()
+    assert "уведомления" in text and "личном кабинете" in text
+    assert not any(w in text for w in CONSOLE_WORDS), text
+    url = sent[0][1]["reply_markup"]["inline_keyboard"][0][0]["url"]
+    assert url.endswith("/#/account?tab=notifications")
+    # Просто текст — не тишина и не консоль.
+    sent.clear()
+    _say(client, 555001, "здравствуйте, как подписаться?")
+    assert sent and "только присылает уведомления" in sent[0][1]["text"]
+    # Участник консоли в личке видит то же приветствие и подсказку про /help.
+    sent.clear()
+    _say(client, 111, "/start")
+    assert "уведомления" in sent[0][1]["text"] and "/help" in sent[0][1]["text"]
+    assert "опубликовать" not in sent[0][1]["text"].lower()
+
+
+def test_telegram_link_confirms_binding_and_explains_a_stale_link(client, monkeypatch):
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_BOT_USERNAME", "compass_test_bot")
+    _login(client, "tg-link-%s@firm.ru" % uuid.uuid4().hex[:8])
+    first = client.post("/api/notification-preferences/telegram-link").json()
+    again = client.post("/api/notification-preferences/telegram-link").json()
+    # Повторное нажатие не обесценивает уже открытую ссылку.
+    assert first["url"] == again["url"] and first["code"].startswith("kompas_")
+    assert first["url"].endswith("?start=" + first["code"])
+    sent = _bot_sent(monkeypatch)
+    _say(client, 555002, "/start " + first["code"])
+    assert sent and "Telegram подключён" in sent[0][1]["text"]
+    assert not any(w in sent[0][1]["text"].lower() for w in CONSOLE_WORDS)
+    prefs = client.get("/api/notification-preferences").json()
+    assert prefs["telegram_connected"] is True and prefs["telegram_enabled"] is True
+    # Та же ссылка второй раз — «уже подключён», а не «ошибка».
+    sent.clear()
+    _say(client, 555002, "/start " + first["code"])
+    assert "подключён" in sent[0][1]["text"]
+    # Чужой или устаревший ключ — понятный ответ, что делать.
+    sent.clear()
+    _say(client, 555003, "/start kompas_" + "x" * 32)
+    assert "устарела" in sent[0][1]["text"]
+    # Ключ можно просто отправить текстом — на случай, когда Telegram открыл
+    # чат без кнопки «Старт».
+    client.delete("/api/notification-preferences/telegram-link")
+    code = client.post("/api/notification-preferences/telegram-link").json()["code"]
+    sent.clear()
+    _say(client, 555004, code)
+    assert "Telegram подключён" in sent[0][1]["text"]
+    # /stop выключает уведомления, привязка остаётся.
+    sent.clear()
+    _say(client, 555004, "/stop")
+    assert "выключены" in sent[0][1]["text"]
+    prefs = client.get("/api/notification-preferences").json()
+    assert prefs["telegram_connected"] is True and prefs["telegram_enabled"] is False
+    # «Отвязать» в кабинете забывает чат.
+    assert client.delete("/api/notification-preferences/telegram-link").json() == {"ok": True}
+    assert client.get("/api/notification-preferences").json()["telegram_connected"] is False
+
+
+def test_notification_reaches_telegram_with_bold_title_and_a_button(client, monkeypatch):
+    import notification_service as ns
+    user = _login(client, "tg-notify-%s@firm.ru" % uuid.uuid4().hex[:8])
+    db = get_session()
+    try:
+        prefs = ns.get_preferences(db, user.id)
+        prefs.telegram_chat_id, prefs.telegram_enabled = "555005", True
+        db.commit()
+        calls = []
+
+        class _Resp:
+            def raise_for_status(self):
+                return None
+        monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+        monkeypatch.setattr(ns.httpx, "post", lambda url, json, timeout: calls.append(json) or _Resp())
+        create_notification(db, db.get(User, user.id), title="Новая сделка по вашей подписке: А & Б",
+                            body="Совпало: отрасль «Банки».", link="https://projectcompass.ru/#/deal/x1")
+    finally:
+        db.close()
+    assert calls, "уведомление не ушло в Telegram"
+    body = calls[0]
+    assert body["parse_mode"] == "HTML" and body["text"].startswith("<b>Новая сделка")
+    assert "&amp;" in body["text"] and "https://" not in body["text"]
+    assert body["reply_markup"]["inline_keyboard"][0][0] == {
+        "text": "Открыть на сайте", "url": "https://projectcompass.ru/#/deal/x1"}
+
+
+def test_weekly_digest_text_counts_deals_and_lots_apart():
+    sys.path.insert(0, str(Path("pipeline")))
+    import send_weekly_digest as wd
+    today = date(2026, 10, 5)
+    deals = [{"id": "a", "title": "А купила Б", "status": "Закрыта", "added": "2026-10-03"},
+             {"id": "b", "title": "В купила Г", "status": "Обсуждается", "added": "2026-10-01"},
+             {"id": "c", "title": "Лот", "type": "Продажа с торгов", "status": "Обсуждается",
+              "added": "2026-10-02"},
+             {"id": "d", "title": "Старое", "status": "Закрыта", "added": "2026-09-01"}]
+    text = wd.digest_body(deals, today)
+    assert text.startswith("За неделю в «Компасе» 2 новые сделки:")
+    assert "• А купила Б — закрыта" in text and "Старое" not in text
+    assert "1 лот выставлен на торги." in text
+    assert wd.digest_body(deals[3:], today) is None
+
+
+def test_weekly_digest_goes_once_a_week_on_monday_morning(client, monkeypatch):
+    from datetime import timezone
+    from db.models import AppSetting
+    sent = []
+    import pipeline.send_weekly_digest as wd
+    monkeypatch.setattr(wd, "send_digest", lambda db, deals, today, base: sent.append(today) or 3)
+    sunday = datetime(2026, 10, 11, 9, 0, tzinfo=timezone.utc)
+    early = datetime(2026, 10, 12, 6, 0, tzinfo=timezone.utc)      # 09:00 МСК
+    monday = datetime(2026, 10, 12, 7, 5, tzinfo=timezone.utc)     # 10:05 МСК
+    db = get_session()
+    try:
+        key = main._weekly_digest_key(monday)
+        row = db.get(AppSetting, key)
+        if row:
+            db.delete(row)
+            db.commit()
+        assert main._weekly_digest_once(db, sunday) is None
+        assert main._weekly_digest_once(db, early) is None
+        assert main._weekly_digest_once(db, monday) == 3
+        assert main._weekly_digest_once(db, monday) is None, "вторая рассылка за ту же неделю"
+        assert sent == [date(2026, 10, 12)]
+    finally:
+        db.close()

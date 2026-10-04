@@ -211,6 +211,63 @@ def _match_subscriptions_against_new_deals():
     subscription_feed.scan_on_startup()
 
 
+# СВОДКА ЗА НЕДЕЛЮ (4 октября 2026). Переключатель в кабинете был, скрипт
+# pipeline/send_weekly_digest.py был, а запускать его было некому: рутины не
+# видят базу пользователей, а cron на хостинге не заведён. Сайт видит и базу,
+# и Telegram — значит, рассылает он: по понедельникам с 10:00 МСК, один раз
+# за неделю. Ключ недели пишется в app_settings ДО рассылки: перезапуск
+# посреди понедельника не повторит её. `WEEKLY_DIGEST=0` — выключить.
+WEEKLY_DIGEST = os.environ.get("WEEKLY_DIGEST", "1") != "0"
+WEEKLY_DIGEST_HOUR_MSK = 10
+
+
+def _weekly_digest_key(now_utc: datetime) -> str | None:
+    msk = now_utc.astimezone(timezone.utc).replace(tzinfo=None) + timedelta(hours=3)
+    if msk.weekday() != 0 or msk.hour < WEEKLY_DIGEST_HOUR_MSK:
+        return None
+    year, week, _ = msk.isocalendar()
+    return "weekly_digest:%d-W%02d" % (year, week)
+
+
+def _weekly_digest_once(db, now_utc: datetime | None = None) -> int | None:
+    """Разослать сводку, если пора и на этой неделе её ещё не было.
+    None — не пора или уже разослана; число — сколько адресатов."""
+    now_utc = now_utc or datetime.now(timezone.utc)
+    key = _weekly_digest_key(now_utc)
+    if not key or db.get(AppSetting, key):
+        return None
+    db.add(AppSetting(key=key, value=now_utc.isoformat(timespec="seconds")))
+    try:
+        db.commit()
+    except Exception:                                        # noqa: BLE001
+        db.rollback()          # другой процесс успел первым
+        return None
+    from pipeline.send_weekly_digest import send_digest
+    msk_today = (now_utc.astimezone(timezone.utc) + timedelta(hours=3)).date()
+    return send_digest(db, list(deal_catalog.load_deals().values()), msk_today, SITE_URL)
+
+
+@app.on_event("startup")
+def _start_weekly_digest():
+    if not WEEKLY_DIGEST or os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+
+    def _run():
+        while True:
+            time.sleep(600)
+            db = get_session()
+            try:
+                sent = _weekly_digest_once(db)
+                if sent is not None:
+                    logger.info("сводка за неделю разослана: %d адресатов", sent)
+            except Exception as exc:                             # noqa: BLE001
+                logger.error("сводка за неделю не разослана: %s", exc)
+            finally:
+                db.close()
+
+    threading.Thread(target=_run, daemon=True).start()
+
+
 # Свежая база без пересборки: рутины коммитят данные 4–5 раз в час, и каждый
 # такой пуш до 3 сентября 2026 перезапускал сайт (три пуша за минуту дали 502
 # на девять минут). Почему так и что качается — docstring data_refresh.py.
@@ -2167,6 +2224,7 @@ def get_notification_preferences(user: User | None = Depends(_current_user), db=
         "weekly_digest": row.weekly_digest,
         "telegram_connected": bool(row.telegram_chat_id),
         "telegram_available": bool(os.environ.get("TELEGRAM_BOT_USERNAME")),
+        "telegram_bot": os.environ.get("TELEGRAM_BOT_USERNAME", "").strip().lstrip("@") or None,
         "email_available": notification_service.email_configured(),
     }
 
@@ -2182,7 +2240,10 @@ def update_notification_preferences(payload: NotificationPreferencesIn,
         if value is not None:
             if field == "telegram_enabled" and value and not row.telegram_chat_id:
                 return JSONResponse({"error": "сначала подключите Telegram"}, status_code=400)
-            if field in ("email_enabled", "weekly_digest") and value and not notification_service.email_configured():
+            # Сводка за неделю приходит на сайт и в Telegram — почта ей не
+            # обязательна (до 4 октября 2026 переключатель был заперт до
+            # подключения почты и висел с подписью «Скоро»).
+            if field == "email_enabled" and value and not notification_service.email_configured():
                 return JSONResponse({"error": "почтовая рассылка ещё не подключена"}, status_code=400)
             setattr(row, field, value)
     row.updated_at = datetime.utcnow()
@@ -2197,7 +2258,15 @@ def notification_telegram_link(user: User | None = Depends(_current_user), db=De
     url = notification_service.telegram_connect_url(db, user.id)
     if not url:
         return JSONResponse({"error": "Telegram-бот ещё не настроен"}, status_code=503)
-    return {"url": url}
+    return {"url": url, "code": notification_service.telegram_connect_code(db, user.id)}
+
+
+@app.delete("/api/notification-preferences/telegram-link")
+def notification_telegram_unlink(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    notification_service.unlink_telegram(db, user.id)
+    return {"ok": True}
 
 
 @app.post("/api/telegram/webhook/{secret}")
@@ -2502,9 +2571,26 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                     "editMessageText", chat_id=chat_id, message_id=reply["message_id"],
                     text=stamped, disable_web_page_preview=True)
         return {"ok": True}
-    match = re.match(r"^/start\s+kompas_([A-Za-z0-9_-]+)$", text.strip())
-    if match and chat_id is not None:
-        notification_service.bind_telegram(db, match.group(1), str(chat_id))
+    # ЛИЧНЫЙ ЧАТ С БОТОМ — ЭТО ЧИТАТЕЛЬ, А НЕ КОНСОЛЬ (4 октября 2026).
+    # Владелец нажал в кабинете «Подключить Telegram», потом «Старт» — и
+    # получил инструкцию модерации («какие сделки попадут на сайт и в
+    # канал», «Опубликовать / Придержать / Выкинуть»). Её получал бы любой
+    # читатель: /start отвечал всем одной справкой консоли, а привязка по
+    # ссылке проходила молча, без единого слова. Консоль живёт в группе;
+    # в личке бот говорит с подписчиком.
+    chat = message.get("chat") or {}
+    private = chat.get("type") == "private" or (
+        chat_id is not None and sender_id is not None and str(chat_id) == str(sender_id))
+    link = re.match(r"^(?:/start\s+)?kompas_([A-Za-z0-9_-]{16,})$", text.strip())
+    if link and chat_id is not None and (private or text.strip().startswith("/start")):
+        ok = notification_service.bind_telegram(db, link.group(1), str(chat_id))
+        if not ok and notification_service.linked_preferences(db, chat_id):
+            reply_text = READER_ALREADY_LINKED
+        else:
+            reply_text = READER_LINKED if ok else READER_LINK_EXPIRED
+        notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=reply_text,
+                                    parse_mode="HTML", disable_web_page_preview=True,
+                                    reply_markup=_reader_menu())
         return {"ok": True}
     # /topic — закрепить за темой форума вид сообщений бота. Именно КОМАНДА и
     # КНОПКИ, а не напечатанное название: у бота включён режим приватности, и
@@ -2518,6 +2604,16 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     # писал боту и получал тишину, неотличимую от поломки. В группе команда
     # приходит с суффиксом («/queue@compass_bot»), его надо отрезать.
     command = re.match(r"^/([a-z_]+)(?:@\S+)?\s*$", text.strip(), re.I)
+    if private and chat_id is not None and (
+            (command and command.group(1).lower() in ("start", "stop"))
+            or (command and command.group(1).lower() == "help" and not _is_reviewer(sender_id))
+            or (not command and text.strip() and not _is_reviewer(sender_id))):
+        name = command.group(1).lower() if command else ""
+        notification_service.tg_api("sendMessage", chat_id=str(chat_id),
+                                    text=_reader_reply(db, name, chat_id, sender_id),
+                                    parse_mode="HTML", disable_web_page_preview=True,
+                                    reply_markup=_reader_menu())
+        return {"ok": True}
     if command and chat_id is not None:
         name = command.group(1).lower()
         reply = _bot_command(name, sender_id)
@@ -2706,6 +2802,57 @@ BOT_HELP = (
 
 
 SITE_URL = os.environ.get("APP_BASE_URL", "https://projectcompass.ru").rstrip("/")
+
+
+# Тексты для читателя в личке с ботом. Правило «Язык для людей» (CLAUDE.md):
+# ни слова о модерации, черновиках и очередях — это консоль, её видят двое.
+READER_WELCOME = (
+    "👋 <b>Это бот «Компаса»</b> — базы сделок на российском рынке.\n\n"
+    "Сюда приходят уведомления о сделках, компаниях и отраслях, на которые "
+    "вы подписались на сайте, и сводка за неделю.\n\n"
+    "Чтобы подключить: войдите на сайт, откройте «Уведомления» в личном "
+    "кабинете и нажмите «Подключить»."
+)
+READER_LINKED = (
+    "✅ <b>Готово: Telegram подключён к вашему аккаунту «Компаса».</b>\n\n"
+    "Сюда будут приходить уведомления о сделках, компаниях и отраслях, на "
+    "которые вы подписаны, и сводка за неделю.\n\n"
+    "Выключить — командой /stop или в личном кабинете."
+)
+READER_ALREADY_LINKED = (
+    "Telegram подключён к вашему аккаунту «Компаса» — уведомления приходят "
+    "сюда.\n\nВыключить — командой /stop или в личном кабинете."
+)
+READER_LINK_EXPIRED = (
+    "Ссылка для подключения устарела. Откройте «Уведомления» в личном "
+    "кабинете и нажмите «Подключить» ещё раз."
+)
+READER_STOPPED = (
+    "Уведомления в Telegram выключены. Включить снова — в личном кабинете, "
+    "раздел «Уведомления»."
+)
+READER_NOT_LINKED_STOP = "Этот Telegram не подключён к аккаунту «Компаса» — выключать нечего."
+READER_ONLY_NOTIFIES = (
+    "Бот только присылает уведомления и на сообщения не отвечает. Вопрос или "
+    "поправка — через «Написать нам» на сайте."
+)
+READER_CONSOLE_HINT = "\n\nВы участник консоли «Компаса»: инструкция модерации — /help."
+
+
+def _reader_menu() -> dict:
+    return {"inline_keyboard": [[{"text": "Открыть личный кабинет",
+                                  "url": SITE_URL + "/#/account?tab=notifications"}]]}
+
+
+def _reader_reply(db, name: str, chat_id, sender_id) -> str:
+    """Ответ читателю в личке: /start, /stop, /help или просто текст."""
+    linked = notification_service.linked_preferences(db, chat_id)
+    if name == "stop":
+        return READER_STOPPED if notification_service.stop_telegram(db, chat_id) else READER_NOT_LINKED_STOP
+    if name in ("start", "help"):
+        text = READER_ALREADY_LINKED if linked else READER_WELCOME
+        return text + (READER_CONSOLE_HINT if _is_reviewer(sender_id) else "")
+    return READER_ONLY_NOTIFIES
 BATCH_LIMIT = 6          # Telegram пускает ~20 сообщений в минуту — не частим.
 
 
@@ -2997,7 +3144,9 @@ def _queue_report() -> str:
 
 def _bot_command(name: str, sender_id) -> str | None:
     if name in ("start", "help"):
-        return BOT_HELP
+        # Справка консоли — только своим; посторонний, добавивший бота в
+        # свою группу, получает читательское приветствие.
+        return BOT_HELP if _is_reviewer(sender_id) else READER_WELCOME
     if name in ("queue", "ochered"):
         # Состав очереди — внутренняя кухня платформы, отвечаем только своим.
         if not _is_reviewer(sender_id):
@@ -3894,6 +4043,15 @@ def create_subscription(sub: SubscriptionIn, user: User | None = Depends(_curren
         same = db.query(SavedFilter).filter_by(user_id=user.id, active=True,
                                                company_id=company_id).first()
         if same and not sub.industry and not sub.keyword and sub.min_amount_mln_rub is None:
+            return {"id": same.id, "existing": True}
+    # Та же подписка второй раз — не вторая строка, а ответ «уже есть»: на
+    # форму, которая не отвечала (4 октября 2026), жали по нескольку раз.
+    for same in db.query(SavedFilter).filter_by(user_id=user.id, active=True,
+                                                industry=sub.industry or None,
+                                                keyword=sub.keyword or None,
+                                                company_id=company_id).all():
+        was = float(same.min_amount_mln_rub) if same.min_amount_mln_rub is not None else None
+        if was == sub.min_amount_mln_rub:
             return {"id": same.id, "existing": True}
     row = SavedFilter(user_id=user.id, industry=sub.industry or None, keyword=sub.keyword or None,
                        company_id=company_id, min_amount_mln_rub=sub.min_amount_mln_rub)
