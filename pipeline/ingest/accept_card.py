@@ -1038,7 +1038,8 @@ def _self_check():
             'type': 'M&A', 'date': '2026-09-09', 'status': 'Обсуждается', 'buyer_name': '«Совко капитал партнерс»',
             'src': [['Ведомости', 'https://www.vedomosti.ru/x']],
             'eco': {'rationale': 'По оценке компании, объем рынка может достичь 8 млрд рублей.'},
-            'law': {'struct': 'Книгу заявок закрыли семь инвесторов, пишут «Ведомости».'}}
+            'law': {'struct': 'Книгу заявок закрыли семь инвесторов, пишут «Ведомости».'},
+            'reviewed': '2026-09-09'}
     codes = {c for c, _t in findings(card, base)}
     assert 'party_unlinked:buyer' in codes and 'asset_missing' in codes and 'why' in codes, codes
     assert any(c.startswith('press:') for c in codes), codes
