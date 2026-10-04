@@ -1297,17 +1297,17 @@
    ]
   },
   {
-   "draft_id": "d13052169",
-   "title": "Россиянам дали совет, как не попасться мошенникам при покупке тура",
+   "draft_id": "d27236247",
+   "title": "Россиянин Пуляев потерпел поражение нокаутом в первом раунде на турнире UFC",
    "date": "2026-10-04",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261004/turizm-2122083783.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/04/rossiyanin-pulyaev-poterpel-porazhenie-nokautom-v-pervom-raunde-na-turnire-ufc/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1325,42 +1325,33 @@
    ]
   },
   {
-   "draft_id": "d84493084",
-   "title": "Снова продала квартиру и купила облигации!",
+   "draft_id": "d71874254",
+   "title": "Россиянин Копылов нокаутировал соперника в первом раунде на турнире UFC",
    "date": "2026-10-04",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1358696.php"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/04/rossiyanin-kopylov-nokautiroval-sopernika-v-pervom-raunde-na-turnire-ufc/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-04",
-     "title": "Сделка завершена",
-     "note": "Я люблю недвижимость всей душой, но с точки зрения инвестиций я предпочитаю использовать для данного актива кредитное плечо, это оправдано при ипотечной ставке ниже 10%. А вот владеть объектом без кредитного плеча совсем не интересно получается, выгоднее…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1358696.php"
-     ]
-    }
-   ],
-   "buyer_name": "Снова продала квартиру и",
-   "asset": "облигации!",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Снова продала квартиру и",
-    "asset": "облигации!",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Россиянин Пуляев потерпел поражение нокаутом в первом раунде» — второе издание, в группу не шлём"
    ]
   }
  ]
