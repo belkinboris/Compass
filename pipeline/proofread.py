@@ -249,7 +249,7 @@ def all_words(text):
 OUTLET = (r"(?:Коммерсант[ъа-яё]*|Kommersant|Ведомост[а-яё]*|Vedomosti|РБК|RBC|Интерфакс[а-яё]*|Interfax"
           r"|ТАСС|TASS|Forbes|Reuters|Bloomberg|Financial\s+Times|РИА\s+Новости|РИА|TAdviser|CNews|ComNews"
           r"|mergers\.ru|Frank\s*(?:Media|RG|Медиа)|The\s+Bell|Извести[яйюе][а-яё]*|Газета\.ru|Фонтанк[а-яё]*"
-          r"|Деловой\s+Петербург|DP\.ru|Vademecum|AdIndex|Retail\.ru|vc\.ru|Lenta\.ru|Лента\.ру"
+          r"|Делов(?:ой|ого|ому|ым|ом)\s+Петербург[а-яё]*|DP\.ru|Vademecum|AdIndex|Retail\.ru|vc\.ru|Lenta\.ru|Лента\.ру"
           r"|Бизнес\s+Online|БИЗНЕС\s+Online|Абирег[а-яё]*|Право\.ru|Pravo\.ru|BFM|Banki\.ru|Банки\.ру|Sostav|Rusbase"
           # Издания, на которых спотыкались прогоны вычитки 1-9 (3 сентября
           # 2026): их не было в списке, и снять «по данным X» без потери
