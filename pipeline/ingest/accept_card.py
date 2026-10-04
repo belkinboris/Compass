@@ -992,6 +992,16 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
     left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
                     waived_sources=ans.get('no_source') or {}, registry=registry,
                     waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {})
+    # ПРИЁМКА БЕЗ ПРОЧТЕНИЯ — ТУПИК (4 октября 2026, OTP Bank `gd937c845`).
+    # Порядок притока — сначала чтение (шаг 9, `reviewed`), потом приёмка (шаг
+    # 10). Карточку приняли, а отметку прочтения не поставили: консоль её не
+    # показывает (send_drafts), по молчанию она не выходит никогда — и весь
+    # день карточка лежала невидимой, пока владелец не нашёл сделку у
+    # конкурента. Штамп ставится только прочитанной карточке.
+    if ans.get('verdict') == 'accept' and not left and not card.get('reviewed'):
+        lines.append('штамп НЕ поставлен — карточку ещё не прочитали: сначала шаг 9 '
+                     '(review.py правкой или --mark-read), потом приёмка')
+        return lines, False
     if ans.get('verdict') == 'accept' and not left:
         card[STAMP] = day or date.today().isoformat()
         notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),

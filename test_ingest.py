@@ -854,7 +854,7 @@ def test_bank_fin_summary_gives_central_bank_figures_with_a_dated_label():
     assert text.endswith("по данным Банка России") and "Прибыль" not in text
     assert format_post.bank_fin_summary(dict(BANK_ENTRY, as_of_balance="2023-10-01"), today=date(2026, 10, 4)) is None
     assert format_post.bank_fin_summary(dict(BANK_ENTRY, net_profit_rub=12000000), today=date(2026, 10, 4))[1] \
-        .count("Прибыль с начала года 12,0 млн ₽") == 1
+        .count("Прибыль за 6 месяцев 2026 года 12,0 млн ₽") == 1
     deal = {"id": "x1", "title": "А купил Б", "asset": "Б", "target": "b"}
     html = format_post.render(deal, {"b": {"name": "Б", "desc": ""}}, fin={"target": (period, text)})
     assert "<b>Финансы покупаемой компании на 1 апреля 2026 года:</b> Активы 1,5 млрд ₽" in html
@@ -4211,6 +4211,7 @@ def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
             "deals": [], "telegram_posts": {}}
     card = {"id": "gt1", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
             "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "«Совко капитал партнерс»",
+            "reviewed": FRESH_DATE,
             "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {"struct": "Так пишут «Ведомости»."}}
     ans = {"verdict": "accept", "checklist": {k: True for k in accept_card.CHECKLIST},
            "profiles": [{"role": "target", "id": "gsb", "inn": "4401116480"},
@@ -4243,6 +4244,14 @@ def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
     assert open(reg_path, encoding="utf-8").read().count("REGISTRY += [") == 2
     assert "Юрлицо — МКАО «Совко Капитал Партнерс»." in base["companies"][card["buyer"]]["desc"]
     assert card["target"] == "gsb" and card["buyer"] in base["companies"] and "buyer_name" not in card
+    # Непрочитанная карточка штампа не получает, даже с чистым ответом:
+    # принятая без прочтения не уходит ни в консоль, ни в канал (OTP Bank,
+    # 4 октября 2026, пролежала так весь день).
+    unread = json.loads(json.dumps(card))
+    unread.pop("reviewed"); unread.pop("accepted")
+    lines, stamped = accept_card.apply_answer(json.loads(json.dumps(again)), unread, json.loads(json.dumps(base)),
+                                              day="2026-09-11", registry=[], registry_path=reg_path, fns=None)
+    assert not stamped and "accepted" not in unread and any("не прочитали" in x for x in lines)
     assert base["companies"][card["buyer"]]["group"] is True
     assert card["src"][-1][1] == "https://sovcombank.ru/press" and card["status"] == "Закрыта"
     assert not accept_card.findings(card, base, registry=registry)
@@ -7273,3 +7282,24 @@ def test_post_subject_has_no_registry_ids_or_party_narrative():
     assert check_post.check(text) == []
     bad = check_post.check("Предмет: «УК» получила 100% в капитале — ИНН 1234567890.\nСтатус: Закрыта")
     assert any("действие стороны" in p for p in bad) and any("ИНН" in p for p in bad), bad
+
+
+def test_exit_from_russia_headlines_are_deals_with_seller_and_subject():
+    """28 сентября 2026 «Ведомости», «Известия» и Sostav написали об уходе
+    OTP Bank из России — фильтр не знал этих слов и молча отбросил все три;
+    сделку мы узнали через шесть дней из поста конкурента. Теперь заголовок
+    проходит фильтр и разбирается сторонами: продавец — компания, предмет —
+    её российский бизнес. Отрицание — не сделка."""
+    import classify
+    import draft
+    for title in ("Венгерский OTP Bank рассматривает возможность полного ухода из России",
+                  "Венгерский OTP Bank хочет уйти из России",
+                  "Bloomberg стало известно о рассмотрении «ОТП Банком» выхода с российского рынка",
+                  "Венгерский OTP Bank задумался об уходе из России"):
+        assert classify.looks_like_deal(title), title
+    assert draft.guess_parties("Венгерский OTP Bank рассматривает возможность полного ухода из России") \
+        == (None, "российский бизнес OTP Bank", "OTP Bank", None)
+    assert draft.guess_parties("Немецкая компания Henkel объявила об уходе из России")[2] == "Henkel"
+    assert draft.guess_parties("Henkel не планирует уходить из России") == (None, None, None, None)
+    assert not classify.looks_like_deal("Футболист Иванов объявил об уходе из «Зенита»")
+

@@ -9189,9 +9189,9 @@ async function renderAccount(qs){
         if(r.status===401){say(`Вход истёк. <a href="#/account">Войдите снова</a> — и повторите.`,true);return;}
         if(!r.ok){say(esc(x.error||"Не получилось сохранить подписку. Попробуйте ещё раз.")+"",true);return;}
         const label=subTitle({industry,keyword,min_amount_mln_rub:min});
-        say(x.existing?`Такая подписка уже есть: ${label}.`:`Готово: ${label}. О новых сделках сообщим в разделе «Уведомления».`);
         document.getElementById("subForm").reset();
-        await drawSubs(x.id);
+        await drawSubs(x.id);   // сначала список, потом «Готово»: сообщение не должно опережать строку
+        say(x.existing?`Такая подписка уже есть: ${label}.`:`Готово: ${label}. О новых сделках сообщим в разделе «Уведомления».`);
       }catch(err){say("Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.",true);}
       finally{btn.disabled=false;btn.textContent="Подписаться";}
     };

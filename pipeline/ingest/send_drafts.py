@@ -404,7 +404,16 @@ def build_plan():
             # просочиться в pending.json). Кортеж записи НЕ меняем (3
             # элемента, `kind='card'`) — тесты на `build_plan()` уже
             # распаковывают его фиксированной формой.
-            rendered = format_post.render(card, comps)
+            # Финансы банка или НКО по данным Банка России — уже в проекте
+            # поста: одобряется снимок, и без строки здесь её не было бы и в
+            # канале (4 октября 2026, OTP Bank). Без сети и без ключа ФНС.
+            fin = {}
+            try:
+                import send_telegram
+                fin = send_telegram.build_fin(card, {}, None)
+            except Exception:                                    # noqa: BLE001
+                fin = {}
+            rendered = format_post.render(card, comps, fin=fin or None)
             card['_pending_post_preview'] = rendered
             plan.append((post_message_text(card, comps, rendered=rendered), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))
@@ -447,6 +456,16 @@ def main(write=False):
     if unread:
         print('Не показано непрочитанных карточек: %d — сначала review.py '
               '(правкой или --mark-read), потом консоль.' % unread)
+        # Принятая, но не прочитанная карточка — тупик, а не очередь: в
+        # консоль не уйдёт, по молчанию не выйдет (OTP Bank, 4 октября 2026,
+        # пролежала так весь день под общей строкой со счётчиком). Называем
+        # каждую по имени — счётчик рутина пропускала.
+        for card in pending['cards']:
+            if card.get('accepted') and not card.get('reviewed') \
+                    and not (card.get('draft_sent') or card.get('post_draft_sent')):
+                print('  ТУПИК: %s «%s» — принята, но не прочитана; в консоль и в канал '
+                      'не уйдёт, пока не будет review.py %s (правкой или --mark-read) --write'
+                      % (card['id'], str(card.get('title') or '')[:70], card['id']))
     if foreign:
         print('Скрыто как иностранный контур без российского элемента: %d '
               '(решение владельца — не публикуем; лежат в hold-файле).' % foreign)

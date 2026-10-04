@@ -576,9 +576,17 @@ def bank_fin_summary(entry, today=None):
     if entry.get('equity_rub') is not None:
         parts.append('Собственные средства %s%s' % (_fmt_rub(entry['equity_rub']),
                                                     _yoy(entry.get('equity_rub'), entry.get('equity_rub_prior_year'))))
+    # Прибыль (форма 102) сдаётся помесячно, баланс (форма 806) — раз в
+    # квартал: даты у них разные, и «на 1 апреля» над прибылью на 1 сентября
+    # было бы неправдой. Период прибыли называется сам: «за 8 месяцев».
     profit, as_of_profit = entry.get('net_profit_rub'), str(entry.get('as_of_profit') or '')
-    if profit is not None and profit != 0 and as_of_profit[:4] == str(as_of.year):
-        parts.append('Прибыль с начала года %s' % _fmt_rub(profit))
+    try:
+        months = _dt.date.fromisoformat(as_of_profit[:10]).month - 1
+    except ValueError:
+        months = 0
+    if profit is not None and profit != 0 and months >= 1 and as_of_profit[:4] >= str(as_of.year):
+        word = 'месяц' if months == 1 else ('месяца' if months in (2, 3, 4) else 'месяцев')
+        parts.append('Прибыль за %d %s %s года %s' % (months, word, as_of_profit[:4], _fmt_rub(profit)))
     if not parts:
         return None
     return 'на %s года' % fmt_day(as_of.isoformat()), ' · '.join(parts) + ' · по данным Банка России'
