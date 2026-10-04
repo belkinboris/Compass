@@ -4066,3 +4066,85 @@ def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
     visit(page, base_url, "#/deal/" + got["id"])
     page.wait_for_selector("#facts")
     assert "начальная цена лота" in page.inner_text("#facts").lower()
+
+
+def test_account_notifications_tab_has_no_dead_rows_and_fits_a_phone(browser, base_url):
+    """Владелец 4 октября 2026 («надо налаживать личный кабинет»): на вкладке
+    «Уведомления» висели две строки «Скоро» с запертыми переключателями,
+    «Отметить всё прочитанным» стояло над настройками, а не над списком, и
+    вкладка «Профиль» обрезалась справа на телефоне."""
+    for width in (360, 390):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        errors = []
+        try:
+            pg = ctx.new_page()
+            pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+            pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+            email = "uved%d@example.com" % int(time.time() * 1000)
+            reg = pg.evaluate("""async (email) => {
+                const r = await fetch("/api/auth/register", {method:"POST", headers:{"Content-Type":"application/json"},
+                    body: JSON.stringify({email, password:"testpass123", full_name:"Тест Тестов",
+                        company:null, position:null, role:"individual"})});
+                return r.status;
+            }""", email)
+            assert reg == 200
+            pg.evaluate("location.hash = '#/account?tab=notifications'")
+            pg.wait_for_selector("#prefGrid [data-pref=weekly_digest]", state="attached", timeout=10000)
+            grid = pg.inner_text("#prefGrid")
+            assert "Скоро" not in grid and "Сводка за неделю" in grid
+            assert not pg.is_disabled("#prefGrid [data-pref=weekly_digest]"), "сводка заперта"
+            assert "Каналы доставки" not in pg.inner_text("#app")
+            # Кнопка «прочитано» — у списка, и только когда есть непрочитанное.
+            assert pg.evaluate("document.getElementById('readAll').closest('.notif-head') !== null")
+            pg.wait_for_function("document.getElementById('notifList').innerText.indexOf('Загружаем') < 0")
+            assert pg.evaluate("document.getElementById('readAll').hidden") is True
+            gap = pg.evaluate("""(() => {const t = document.querySelector('.account-tabs');
+                const a = [...t.querySelectorAll('a')];
+                return t.getBoundingClientRect().right - a[a.length-1].getBoundingClientRect().right;})()""")
+            assert gap >= -1, "последняя вкладка обрезана на %d px при ширине %d" % (-gap, width)
+            assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+            assert not errors, errors[:3]
+        finally:
+            ctx.close()
+
+
+def test_subscription_form_answers_in_every_outcome(browser, base_url):
+    """4 октября 2026: человек выбрал «Уголь», вписал 1000, нажал — «вообще
+    ничего не произошло». Форма молчала: ни подтверждения, ни ошибки, поле
+    суммы на телефоне обрезалось до «От суммы, м». Теперь у неё есть ответ
+    на каждый исход: пустая форма, успех, повтор, истёкший вход."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 900})
+    errors = []
+    try:
+        pg = ctx.new_page()
+        pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+        pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+        email = "ugol%d@example.com" % int(time.time() * 1000)
+        assert pg.evaluate("""async (email) => (await fetch("/api/auth/register", {method:"POST",
+            headers:{"Content-Type":"application/json"}, body: JSON.stringify({email,
+            password:"testpass123", full_name:"Тест Тестов", role:"individual"})})).status""", email) == 200
+        pg.evaluate("location.hash = '#/account?tab=subscriptions'")
+        pg.wait_for_selector("#subForm", timeout=10000)
+        pg.click("#subAdd")
+        assert "Выберите отрасль" in pg.inner_text("#subMsg")
+        pg.select_option("#subInd", "Уголь")
+        pg.fill("#subMin", "1 000")
+        pg.click("#subAdd")
+        pg.wait_for_function("document.getElementById('subMsg').innerText.startsWith('Готово')", timeout=10000)
+        assert "отрасль «Уголь» · сумма от 1 млрд ₽" in pg.inner_text("#subMsg")
+        assert "отрасль «Уголь» · сумма от 1 млрд ₽" in pg.inner_text("#subList")
+        assert pg.input_value("#subInd") == "", "форма не сбросилась — непонятно, ушла ли подписка"
+        pg.select_option("#subInd", "Уголь")
+        pg.fill("#subMin", "1000")
+        pg.click("#subAdd")
+        pg.wait_for_function("document.getElementById('subMsg').innerText.includes('уже есть')", timeout=10000)
+        assert pg.locator("#subList .acct-row").count() == 1, "повторное нажатие завело вторую подписку"
+        ctx.clear_cookies()
+        pg.select_option("#subInd", "Агро")
+        pg.click("#subAdd")
+        pg.wait_for_function("document.getElementById('subMsg').innerText.includes('Вход истёк')", timeout=10000)
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+        assert not errors, errors[:3]
+    finally:
+        ctx.close()
+
