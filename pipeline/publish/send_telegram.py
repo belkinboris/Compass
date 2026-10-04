@@ -335,6 +335,53 @@ def channel_address(site=None):
     return ''
 
 
+
+def post_snapshot(deal):
+    """Поля карточки, из которых собран пост (SIGNIFICANT + консультанты,
+    этапы и финансы предмета) — то, что `telegram_post_state` запоминает за
+    каждым вышедшим постом."""
+    eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
+    snap = {k: deal.get(k) for k in format_post.SIGNIFICANT
+            if k not in ('advisers', 'events') and deal.get(k) is not None}
+    snap['law'] = {'adv': law.get('adv') or []}
+    snap['eco'] = {'target_fin': eco.get('target_fin'), 'finadv': eco.get('finadv')}
+    snap['events'] = [{'kind': e.get('kind')} for e in (deal.get('events') or []) if isinstance(e, dict)]
+    return snap
+
+
+def card_changes_since_post(deals, posts, realty_posts, post_state):
+    """{deal_id: [что изменилось]} для уже вышедших постов, чья карточка
+    разошлась с запомненным состоянием. Пост без состояния только
+    запоминается (seed) — иначе первый прогон переправил бы весь канал.
+
+    ЗАЧЕМ (4 октября 2026). Задание на правку поста приходило только из
+    `data/inbox/updates/`, которые пишет `enrich.py` в контейнере притока и
+    которые в git не живут. Факт, дописанный таблицей правок, приёмкой или
+    руками, до канала не доходил: пост о «дочке» Western Union вышел
+    29 сентября без финансов, 3 октября карточка получила баланс НКО, а
+    пост так и стоял пустым, пока владелец не увидел у конкурента богатый
+    текст о той же сделке. Теперь источник факта неважен: разошлось с
+    состоянием — пост правится, и читателю называется, что именно нового."""
+    out = {}
+    for deal in deals:
+        did = deal['id']
+        if not (posts.get(did) or realty_posts.get(did)):
+            continue
+        before = post_state.get(did)
+        if before is None:
+            post_state[did] = post_snapshot(deal)
+            continue
+        found = format_post.changes(before, deal)
+        was_fin = (before.get('eco') or {}).get('target_fin')
+        now_fin = (deal.get('eco') or {}).get('target_fin')
+        if format_post.has(now_fin) and not format_post.has(was_fin):
+            found.append('добавлены финансы покупаемой компании')
+        elif format_post.has(now_fin) and now_fin != was_fin:
+            found.append('уточнены финансы покупаемой компании')
+        if found:
+            out[did] = found
+    return out
+
 def load_today_updates():
     """{deal_id: [изменения]} из самого свежего файла data/inbox/updates/."""
     if not os.path.isdir(UPDATES_DIR):
@@ -345,6 +392,19 @@ def load_today_updates():
     doc = json.load(open(os.path.join(UPDATES_DIR, names[-1]), encoding='utf-8'))
     rows = doc.get('updates', [])
     return {row['deal_id']: row.get('changes', []) for row in rows if row.get('changes')}
+
+
+BANK_FINANCE_PATH = os.path.join(ROOT, 'static', 'data', 'bank_finance.json')
+
+
+def load_bank_finance():
+    """{company_id: запись формы 806/102} из static/data/bank_finance.json —
+    пусто, если файла нет (тесты на временной базе)."""
+    try:
+        with open(BANK_FINANCE_PATH, encoding='utf-8') as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return {}
 
 
 def fns_client_or_none():
@@ -358,7 +418,7 @@ def fns_client_or_none():
         return None
 
 
-def build_fin(deal, confirmed_inns, client):
+def build_fin(deal, confirmed_inns, client, bank_finance=None):
     """{'target': fin_summary()|None, 'buyer': ...} — по confirmed ИНН сторон
     сделки, живым `bo()` (Этап 9, П7-9). `confirmed_inns` — только
     `decision == "confirmed"` (см. `fns_registry.confirmed_inns()`), поэтому
@@ -369,15 +429,25 @@ def build_fin(deal, confirmed_inns, client):
     того же поста. Повторный запрос уже известной организации бесплатен
     (`bo` — лимит «по организациям», см. CLAUDE.md) — считать сторон сделок,
     которые мы и так синхронизируем, можно на каждый прогон."""
-    if client is None:
-        return {}
-    from fns_client import normalize_bo
     fin = {}
+    bank_finance = load_bank_finance() if bank_finance is None else bank_finance
     for role in ('target', 'buyer'):
         company_id = deal.get(role)
-        inn = confirmed_inns.get(company_id) if company_id else None
-        if not inn:
+        if not company_id:
             continue
+        # Банк или НКО: ФНС отчётности не даст, зато форма 806/102 Банка
+        # России уже лежит в bank_finance.json (ежедневная рутина «банки») —
+        # без сети и без ключа ФНС. До 4 октября 2026 такие посты выходили
+        # без финансов (пост о «дочке» Western Union 29 сентября).
+        if company_id in bank_finance:
+            summary = format_post.bank_fin_summary(bank_finance[company_id])
+            if summary:
+                fin[role] = summary
+            continue
+        inn = confirmed_inns.get(company_id)
+        if not inn or client is None:
+            continue
+        from fns_client import normalize_bo
         try:
             rows = normalize_bo(client.bo(inn), inn)
         except Exception:                                                 # noqa: BLE001
@@ -795,6 +865,12 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     milestones = data.setdefault('telegram_milestones', {})
     comps = data['companies']
     updates_by_id = load_today_updates()
+    # Карточка дополнена мимо притока — пост всё равно правится (см.
+    # `card_changes_since_post`). Задание из data/inbox/updates/ главнее:
+    # там изменения названы точнее.
+    post_state = data.setdefault('telegram_post_state', {})
+    for did, found in card_changes_since_post(data['deals'], posts, realty_posts, post_state).items():
+        updates_by_id.setdefault(did, found)
 
     # ВЕХИ (раздел A). Решения приходят с сайта тем же мостом, что и у
     # карточек (approve.fetch_decisions) — консуммируются здесь же, сразу:
@@ -1098,24 +1174,27 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # УЖЕ ОТОБРАННЫЙ батч. `fns_client_or_none()` тихо отдаёт `None` без
     # сети/без ключа — тогда `build_fin()` для каждой сделки честно
     # возвращает {}, посты уходят без финстроки, а не падают.
+    # Без ключа ФНС финстрока всё равно собирается для банков и НКО — их
+    # отчётность статична (bank_finance.json), сеть ей не нужна.
     fns_client = fns_client_or_none()
+    from pipeline import fns_registry
+    confirmed_inns = fns_registry.confirmed_inns()
+    bank_finance = load_bank_finance()
+    by_id = {d['id']: d for d in data['deals']}
+    augmented = []
+    for kind, did, payload in batch:
+        deal = by_id.get(did)
+        if kind in ('send', 'edit') and deal and not deal.get('post_override'):
+            fin = build_fin(deal, confirmed_inns, fns_client, bank_finance)
+            if fin:
+                if kind == 'send':
+                    payload = format_post.render(deal, comps, fin=fin)
+                else:
+                    mid, _old_text = payload
+                    payload = (mid, format_post.render(deal, comps, updates=updates_by_id.get(did), fin=fin))
+        augmented.append((kind, did, payload))
+    batch = augmented
     if fns_client is not None:
-        from pipeline import fns_registry
-        confirmed_inns = fns_registry.confirmed_inns()
-        by_id = {d['id']: d for d in data['deals']}
-        augmented = []
-        for kind, did, payload in batch:
-            deal = by_id.get(did)
-            if kind in ('send', 'edit') and deal and not deal.get('post_override'):
-                fin = build_fin(deal, confirmed_inns, fns_client)
-                if fin:
-                    if kind == 'send':
-                        payload = format_post.render(deal, comps, fin=fin)
-                    else:
-                        mid, _old_text = payload
-                        payload = (mid, format_post.render(deal, comps, updates=updates_by_id.get(did), fin=fin))
-            augmented.append((kind, did, payload))
-        batch = augmented
         fns_client.close()
 
     deals_by_id = {d['id']: d for d in data['deals']}
@@ -1147,6 +1226,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 posts[did] = mids.get(channels.MAIN)
                 if channels.REALTY in mids:
                     realty_posts[did] = mids[channels.REALTY]
+                post_state[did] = post_snapshot(deal)
                 sent += 1
             else:
                 record = {'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
@@ -1179,6 +1259,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 else:
                     failed.append((did, str(e)))
         edited += done
+        if done:
+            post_state[did] = post_snapshot(deal)
 
     if digest_failed:
         failed.append(('сводка %s' % digest_key_, digest_failed))

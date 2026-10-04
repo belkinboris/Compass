@@ -547,6 +547,48 @@ def fin_summary(bo_rows, today=None):
     return latest['year'], ' · '.join(parts)
 
 
+
+def bank_fin_summary(entry, today=None):
+    """(«на 1 апреля 2026 года», «Активы 1,5 млрд ₽ (−5,5% г/г) · Собственные
+    средства 1,3 млрд ₽ · по данным Банка России») для банка или НКО из
+    `static/data/bank_finance.json` (форма 806 — активы и собственные
+    средства, форма 102 — прибыль с начала года). ФНС для кредитных
+    организаций коммерческой отчётности не даёт, и до 4 октября 2026 пост о
+    сделке с банком выходил вовсе без финансов — пост о «дочке» Western
+    Union 29 сентября против поста конкурента с балансом НКО. Порог
+    свежести тот же, что у `fin_summary`: баланс старше двух лет не
+    показывается. Период — строка, а не год: render() подписывает такую
+    строку «Финансы … на 1 апреля 2026 года», без слова «год»."""
+    import datetime as _dt
+    if not entry:
+        return None
+    try:
+        as_of = _dt.date.fromisoformat(str(entry.get('as_of_balance')))
+    except (TypeError, ValueError):
+        return None
+    year_now = (today or _dt.date.today()).year
+    if as_of.year < year_now - MAX_REPORT_AGE_YEARS:
+        return None
+    parts = []
+    if entry.get('assets_rub') is not None:
+        parts.append('Активы %s%s' % (_fmt_rub(entry['assets_rub']),
+                                      _yoy(entry.get('assets_rub'), entry.get('assets_rub_prior_year'))))
+    if entry.get('equity_rub') is not None:
+        parts.append('Собственные средства %s%s' % (_fmt_rub(entry['equity_rub']),
+                                                    _yoy(entry.get('equity_rub'), entry.get('equity_rub_prior_year'))))
+    profit, as_of_profit = entry.get('net_profit_rub'), str(entry.get('as_of_profit') or '')
+    if profit is not None and profit != 0 and as_of_profit[:4] == str(as_of.year):
+        parts.append('Прибыль с начала года %s' % _fmt_rub(profit))
+    if not parts:
+        return None
+    return 'на %s года' % fmt_day(as_of.isoformat()), ' · '.join(parts) + ' · по данным Банка России'
+
+
+def _fin_label(who, period):
+    """Подпись финстроки: год отчёта ФНС (число) — «…, 2025 год»; дата формы
+    Банка России (строка из `bank_fin_summary`) — «… на 1 апреля 2026 года»."""
+    return '%s, %s год' % (who, period) if isinstance(period, int) else '%s %s' % (who, period)
+
 # «ПРЕДМЕТ» — ЧТО ПОКУПАЮТ, А НЕ КТО ЧТО СДЕЛАЛ. Владелец 28–29 сентября 2026
 # по постам о Metro («„УК Торг РУС“ получила 100% в уставном капитале…») и
 # ТГК-1 («выпущенные акции предлагается разместить среди …»): первое —
@@ -1034,10 +1076,10 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # 31 августа 2026); по-русски — чья это отчётность.
     target_fin, buyer_fin = fin.get('target'), fin.get('buyer')
     if target_fin:
-        add('%s %s' % (_lab('Финансы покупаемой компании, %s год' % target_fin[0]),
+        add('%s %s' % (_lab(_fin_label('Финансы покупаемой компании', target_fin[0])),
                        esc(target_fin[1])))
     if buyer_fin:
-        add('%s %s' % (_lab('Финансы покупателя, %s год' % buyer_fin[0]), esc(buyer_fin[1])))
+        add('%s %s' % (_lab(_fin_label('Финансы покупателя', buyer_fin[0])), esc(buyer_fin[1])))
 
     if has(deal.get('sum')):
         card.append('%s %s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'), esc(deal['sum'])))

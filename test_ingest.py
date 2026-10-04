@@ -837,6 +837,39 @@ def test_main_holds_back_an_empty_unreviewed_card_instead_of_posting_it(monkeypa
     assert deal["id"] not in written["telegram_posts"], "карточка не помечена отправленной — она не отправлена"
 
 
+BANK_ENTRY = {"as_of_balance": "2026-04-01", "as_of_profit": "2026-07-01", "regnum": 2726,
+              "assets_rub": 1474898000, "assets_rub_prior_year": 1561395000,
+              "equity_rub": 1340212000, "equity_rub_prior_year": 1407307000, "net_profit_rub": 0}
+
+
+def test_bank_fin_summary_gives_central_bank_figures_with_a_dated_label():
+    """Пост о сделке с банком или НКО выходил без финансов (ФНС их не даёт):
+    29 сентября 2026 — «дочка» Western Union, а конкурент 3 октября дал баланс
+    НКО. Теперь строка собирается из bank_finance.json (форма 806), подпись —
+    дата формы, а не «год»; старый баланс не показывается."""
+    from datetime import date
+    period, text = format_post.bank_fin_summary(BANK_ENTRY, today=date(2026, 10, 4))
+    assert period == "на 1 апреля 2026 года"
+    assert text.startswith("Активы 1,5 млрд ₽ (−5,5% г/г) · Собственные средства 1,3 млрд ₽")
+    assert text.endswith("по данным Банка России") and "Прибыль" not in text
+    assert format_post.bank_fin_summary(dict(BANK_ENTRY, as_of_balance="2023-10-01"), today=date(2026, 10, 4)) is None
+    assert format_post.bank_fin_summary(dict(BANK_ENTRY, net_profit_rub=12000000), today=date(2026, 10, 4))[1] \
+        .count("Прибыль с начала года 12,0 млн ₽") == 1
+    deal = {"id": "x1", "title": "А купил Б", "asset": "Б", "target": "b"}
+    html = format_post.render(deal, {"b": {"name": "Б", "desc": ""}}, fin={"target": (period, text)})
+    assert "<b>Финансы покупаемой компании на 1 апреля 2026 года:</b> Активы 1,5 млрд ₽" in html
+    assert "2026 года год" not in html
+
+
+def test_build_fin_takes_bank_figures_without_fns_client():
+    """Банк среди сторон — финстрока без сети и без ключа ФНС, из
+    bank_finance.json; небанковская сторона без ключа — по-прежнему пусто."""
+    deal = {"id": "x1", "target": "gbank", "buyer": "gother"}
+    fin = send_telegram.build_fin(deal, {"gother": "7736207543"}, None, bank_finance={"gbank": BANK_ENTRY})
+    assert set(fin) == {"target"} and fin["target"][0] == "на 1 апреля 2026 года"
+    assert send_telegram.build_fin(deal, {}, None, bank_finance={}) == {}
+
+
 def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
     """render() остаётся чистой функцией — финстрока появляется, только
     если её явно передали (`fin=…`), а не потому что render() сходил в
@@ -2131,6 +2164,56 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     assert written["telegram_posts"]["gX2"] == 1001, "второй элемент батча обязан дойти, несмотря на ошибку первого"
     assert written["telegram_posts"]["gX1"] == 32, "message_id удалённого поста не трогаем молча"
 
+
+
+def test_card_changes_since_post_seeds_first_and_then_names_what_was_added():
+    """Пост о «дочке» Western Union вышел 29 сентября 2026 без финансов; 3
+    октября карточка получила баланс НКО таблицей правок (не enrich.py) — и
+    пост не обновился: задание на правку жило только в data/inbox/updates/.
+    Теперь состояние поста запоминается, а расхождение называется словами."""
+    deal = {"id": "gX1", "title": "А купил Б", "sum": "—", "status": "Обсуждается",
+            "eco": {"target_fin": "—"}, "law": {"adv": []}}
+    posts, state = {"gX1": 150}, {}
+    assert send_telegram.card_changes_since_post([deal], posts, {}, state) == {}
+    assert state["gX1"]["status"] == "Обсуждается" and state["gX1"]["eco"]["target_fin"] == "—"
+    deal["sum"], deal["eco"]["target_fin"] = "1 млрд ₽", "Активы 1,5 млрд ₽ на 1 апреля 2026 года."
+    found = send_telegram.card_changes_since_post([deal], posts, {}, state)
+    assert found == {"gX1": ["добавлен(а) сумма", "добавлены финансы покупаемой компании"]}
+    # без поста (null — бэклог, или вовсе нет записи) карточка не трогается
+    assert send_telegram.card_changes_since_post([deal], {"gX1": None}, {}, {}) == {}
+
+
+def test_main_edits_a_posted_card_enriched_outside_intake(monkeypatch, tmp_path):
+    """Карточка дополнена не притоком (таблица правок, приёмка, руками) —
+    правка поста уходит без файла data/inbox/updates/, с пометкой, что нового,
+    и состояние поста обновляется только после удачной правки."""
+    deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
+            "sum": "1 млрд ₽", "status": "Закрыта", "date": FRESH_DATE,
+            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["deals"] = [deal]
+    real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
+    real_data["telegram_posts"] = {"gX1": 32}
+    real_data["telegram_post_state"] = {"gX1": {"sum": "—", "status": "Закрыта", "buyer": "b1",
+                                                "law": {"adv": []}, "eco": {"target_fin": None}, "events": []}}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 32}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+
+    send_telegram.main(write=True, ignore_pace=True)
+
+    assert len(fake.calls) == 1 and fake.calls[0][0].endswith("/editMessageText")
+    text = fake.calls[0][1]["text"]
+    assert "⟳ Обновлено: добавлен(а) сумма" in text and "1 млрд ₽" in text
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_post_state"]["gX1"]["sum"] == "1 млрд ₽"
+    assert written["telegram_posts"]["gX1"] == 32
 
 class _FakeFnsClient:
     """Подставной ФНС-клиент (Этап 9, П7-9): проверяет, что `main()`
