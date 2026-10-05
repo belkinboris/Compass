@@ -1297,17 +1297,17 @@
    ]
   },
   {
-   "draft_id": "d12977041",
-   "title": "Песков не прокомментировал сообщение NYT о продаже зарубежных активов «Лукойла»",
+   "draft_id": "d16257041",
+   "title": "Скелет нанотираннуса «Джоди» продадут на аукционе Sotheby's",
    "date": "2026-10-05",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/politika/28182401"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ac37f020e49882626de4368"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1325,16 +1325,45 @@
    ]
   },
   {
-   "draft_id": "d56731658",
-   "title": "В ЦУМе выставили на продажу шубу за 44 миллиона рублей",
+   "draft_id": "d71545974",
+   "title": "Рынок WorkTech и HRTech в сентябре: раунды, сделки, M&A",
    "date": "2026-10-05",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/05/v-tsume-vystavili-na-prodazhu-shubu-za-44-milliona-rubley/"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/headhunter/blog/1359043.php"
     ]
    ],
-   "sum": null,
+   "sum": "$166 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d21141643",
+   "title": "Национализированное «Ямалкоммунэнерго» закупает сувениры на миллионы рублей",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053133552"
+    ]
+   ],
+   "sum": "2 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
