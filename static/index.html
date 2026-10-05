@@ -1084,7 +1084,7 @@ a.dp-asset-name:hover{color:var(--accent)}
 .ai-thinking-t{background:linear-gradient(90deg,var(--muted) 0%,var(--muted) 40%,var(--ink) 50%,var(--muted) 60%,var(--muted) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aiShine 2.2s linear infinite}
 @keyframes aiShine{from{background-position:120% 0}to{background-position:-120% 0}}
 @media (prefers-reduced-motion:reduce){.ai-dots i,.ai-thinking-t,.msg.ai.wait{animation:none}.ai-thinking-t{color:var(--muted);background:none}}
-.msg.ai ul{margin:8px 0 8px 18px;padding:0}.msg.ai li{margin:4px 0}
+.msg.ai ul,.msg.ai ol{margin:8px 0 8px 20px;padding:0}.msg.ai li{margin:4px 0}
 .ai-more,.ai-note{font-size:12px;color:var(--muted);font-style:italic;margin:8px 0 0}
 .ai-fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:12px;color:var(--muted)}
 .ai-fb button{padding:4px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:12px;color:var(--muted);transition:all .2s var(--ease)}
@@ -7536,23 +7536,27 @@ function renderCompany(id){
   /* В чате вопрос показывается короткой подписью («Подготовка к встрече:
      „Лента“»), а модели уходит полный текст: длинный служебный запрос в
      пузыре читался как стена текста (владелец, 3 октября 2026). */
-  const askAssistant = (q, label) => { sessionStorage.setItem("pendingQ", q); sessionStorage.setItem("pendingLabel", label||""); location.hash = "#/assistant"; };
+  /* ВСТРЕЧА НАЧИНАЕТСЯ С ВОПРОСА К ЧЕЛОВЕКУ. Партнёр 5 октября 2026, по
+     скриншоту подготовки к встрече со Сбербанком: «надо, чтобы он задал
+     вопрос, кто ты, и от этого отталкивался; не надо делать вопросы для
+     клиента — спросить, какого рода будет встреча и чего мы от них хотим, и
+     уже после этого давать совет, как подготовиться». Поэтому кнопка не
+     шлёт готовый вопрос, а открывает ассистента, который сначала спрашивает
+     (см. startMeetingPrep в renderAssistant). */
   const prepMeeting = document.getElementById("prepMeeting");
+  if(prepMeeting) prepMeeting.onclick = () => {
+    sessionStorage.setItem("pendingPrep", JSON.stringify({name:c.name, id}));
+    location.hash = "#/assistant";
+  };
   /* Короче и списком: владелец 3 октября 2026 — «подготовка к собеседованию
      слишком длинная», нужен короткий кликабельный список сделок и фокус на
      самом собеседовании, а не пересказ всей карточки. */
-  if(prepMeeting) prepMeeting.onclick = () => askAssistant(
-    `Готовлюсь к встрече с компанией «${c.name}». Коротко, по пунктам: чем занимается `
-    + `и кому принадлежит; её сделки за последние годы — списком со ссылками на карточки `
-    + `«Компаса» (до пяти, с ролью: покупатель, продавец или предмет сделки); с какими `
-    + `консультантами работала. В конце — три вопроса, которые стоит задать на встрече.`,
-    `Подготовка к встрече: «${c.name}»`);
   bindInterviewPrep("prepInterview", resume => interviewQuestion(
     `Готовлюсь к собеседованию в компанию «${c.name}». Коротко, по пунктам: чем `
     + `занимается и какого масштаба, кому принадлежит; что с ней происходило в последние `
     + `годы — списком со ссылками на карточки «Компаса» (до пяти). В конце — три вопроса, `
     + `которые стоит задать работодателю.`, resume, "компанией"),
-    `Подготовка к собеседованию: «${c.name}»`);
+    `Подготовка к собеседованию: «${c.name}»`, {type:"company", id});
   const followButton=document.getElementById("followCompany");
   if(followButton) followButton.onclick=async()=>{
     followButton.disabled=true;
@@ -7819,7 +7823,7 @@ function renderFirm(id){
     + `Коротко, по пунктам: её последние сделки — списком со ссылками на карточки «Компаса» `
     + `(до пяти, с ролью: за покупателя, продавца или эмитента); в каких отраслях работает `
     + `чаще всего. В конце — три вопроса, которые стоит задать работодателю.`, resume, "фирмой"),
-    `Подготовка к собеседованию: «${f.n}»`);
+    `Подготовка к собеседованию: «${f.n}»`, {type:"advisor", id});
   mountMiniAI(f.n,"advisor",id);
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
@@ -7841,7 +7845,9 @@ const interviewPanelHtml = () => `
 const interviewQuestion = (base, resume, withWhom) => resume
   ? `${base}\n\nМоё резюме:\n${resume}\n\nСопоставь мой опыт с ${withWhom} — коротко, списком: что подчеркнуть на собеседовании и чего мне не хватает.`
   : base;
-function bindInterviewPrep(buttonId, buildQuestion, label){
+/* `ctx` — чья это страница: поиск по базе опирается на неё, а не на слова
+   вопроса (в резюме и заготовке легко встретить «юрист» или «консультант»). */
+function bindInterviewPrep(buttonId, buildQuestion, label, ctx){
   const btn = document.getElementById(buttonId), panel = document.getElementById("interviewPrep");
   if(!btn || !panel) return;
   const area = panel.querySelector("textarea");
@@ -7853,6 +7859,7 @@ function bindInterviewPrep(buttonId, buildQuestion, label){
     const resume = area.value.trim().slice(0, RESUME_MAX);
     sessionStorage.setItem("pendingQ", buildQuestion(resume));
     sessionStorage.setItem("pendingLabel", label ? label + (resume ? " (с резюме)" : "") : "");
+    if(ctx) sessionStorage.setItem("pendingCtx", JSON.stringify(ctx));
     location.hash = "#/assistant";
   };
 }
@@ -8726,6 +8733,32 @@ const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome">
 // иначе каждый заход вешал бы на visualViewport ещё один обработчик.
 let chatViewportFit = null;
 
+/* ПОДГОТОВКА К ВСТРЕЧЕ. Сначала ассистент спрашивает человека о нём самом:
+   один и тот же «Сбербанк» для юриста, который хочет мандат, и для
+   продавца бизнеса, который ищет покупателя, — две разные встречи. Совет
+   строится от ответа; вопросов «для клиента» не составляем (партнёр,
+   5 октября 2026). */
+function meetingPrepIntroHtml(name){
+  return `<p>Помогу подготовиться к встрече с компанией «${esc(name)}». Чтобы советы были по делу, расскажите в одном сообщении:</p>
+<ol><li>Кто вы — например, юрист, инвестбанкир, представитель покупателя или продавца.</li>
+<li>Что это за встреча — знакомство, предложение услуг, переговоры по сделке.</li>
+<li>Чего вы хотите добиться — например, получить заказ на сопровождение сделки или договориться о следующем шаге.</li></ol>
+<p class="ai-note">Например: «Я юрист, первая встреча с юристами компании, хочу, чтобы нас позвали на следующую сделку».</p>
+<div class="ai-next"><button class="chip" type="button" data-prep-skip>Без подробностей — общая подготовка</button></div>`;
+}
+function meetingPrepQuestion(name, about){
+  const facts = `Что важно знать о компании для этой встречи: чем занимается, кому принадлежит, масштаб. `
+    + `Её сделки за последние годы — списком со ссылками на карточки «Компаса» (до пяти, с ролью: `
+    + `покупатель, продавец или предмет сделки), а если для моей цели важно, с кем из юристов и банков она работала, — назови и их.`;
+  if(!about) return `Готовлюсь к встрече с компанией «${name}». Коротко, по пунктам. ${facts} `
+    + `Потом — что подготовить заранее и на что опереться в разговоре. Советы мне, участнику встречи; `
+    + `список вопросов к компании не составляй.`;
+  return `Готовлюсь к встрече с компанией «${name}». Обо мне и о встрече: «${about.slice(0, 1200)}». `
+    + `Помоги подготовиться именно к этой встрече, исходя из того, кто я и чего хочу. Коротко, по пунктам. ${facts} `
+    + `Потом — как подготовиться и построить разговор, чтобы добиться моей цели: на что опереться, `
+    + `что принести или показать, о чём лучше не говорить. Советы мне, участнику встречи, а не компании; `
+    + `список вопросов к компании не составляй.`;
+}
 async function renderAssistant(){
   await refreshMe();
   activeThreadId=null;
@@ -8848,18 +8881,32 @@ async function renderAssistant(){
   const loadThread=async id=>{
     const r=await fetch(`/api/assistant/threads/${id}`); if(!r.ok)return;
     const t=await r.json(); if(!box.isConnected) return;
-    activeThreadId=t.id;box.innerHTML="";history.length=0;
+    activeThreadId=t.id;box.innerHTML="";history.length=0;pageCtx=null;prepFor=null;prepDone();
     t.messages.forEach(m=>push(m.role==="user"?"user":"ai",m.role==="assistant"?mdToHtml(m.body):esc(m.body)));
     turns=t.messages.filter(m=>m.role==="user").length; paintState();
     const lastUser=[...t.messages].reverse().find(m=>m.role==="user"); lastQ=lastUser?lastUser.body:"";
     box.scrollTop=box.scrollHeight;
     renderThreadList();
   };
+  /* Чья страница привела в ассистента (подготовка к встрече или
+     собеседованию): поиск по базе держится за эту компанию или фирму, пока
+     не начат новый диалог. */
+  let pageCtx=null, prepFor=null;
+  const qField=()=>document.getElementById("q");
+  const QPLACE=(qField()||{}).placeholder||"";
+  /* Вопросы перед подготовкой отвечены (или пропущены): подсказка в поле
+     ввода — снова обычная, кнопка «Без подробностей» больше не нужна. */
+  const prepDone=()=>{ const f=qField(); if(f) f.placeholder=QPLACE;
+    box.querySelectorAll("[data-prep-skip]").forEach(b=>b.disabled=true); };
   const answer=async (q, shown)=>{
+    /* Ответ на вопросы перед подготовкой к встрече: человек пишет о себе как
+       умеет, а модели уходит его рассказ вместе с тем, что нужно сделать. */
+    if(prepFor && !shown){ const p=prepFor; prepFor=null; prepDone(); return answer(meetingPrepQuestion(p.name, q), q); }
     push("user",esc(shown||q));
     turns++; lastQ=q; paintState();
     const w=push("ai wait","");
-    const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,contextType:"general",history:history.slice()},w);
+    const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,
+      contextType:pageCtx?pageCtx.type:"general",contextId:pageCtx?pageCtx.id:null,history:history.slice()},w);
     history.push({role:"user",body:q}); if(a&&a.raw) history.push({role:"assistant",body:a.raw});
     box.scrollTop=box.scrollHeight;renderThreadList();
   };
@@ -8890,7 +8937,7 @@ async function renderAssistant(){
     // «остался в истории» — только если сервер этот диалог действительно
     // сохранил (тогда у него есть id); без модели /api/ask диалоги не пишет.
     const saved = ME && activeThreadId!==null;
-    activeThreadId=null;history.length=0;turns=0;lastQ="";
+    activeThreadId=null;history.length=0;turns=0;lastQ="";pageCtx=null;prepFor=null;prepDone();
     box.innerHTML=CHAT_WELCOME+`<div class="msg ai">Начат новый диалог — прошлые вопросы больше не учитываются${saved?", прошлый разговор остался в истории":""}. Спрашивайте.</div>`;
     closeSide();paintState();renderThreadList();
     /* Курсор — только на компьютере. На телефоне любой focus() внутри клика
@@ -8932,8 +8979,23 @@ async function renderAssistant(){
   // Смена режима переспрашивает тот же вопрос — см. bindModeToggles.
   bindModeToggles(app, ()=>{ if(lastQ) answer(lastQ); });
   renderThreadList();
+  const readCtx=key=>{ try{ const v=JSON.parse(sessionStorage.getItem(key)||"null"); sessionStorage.removeItem(key); return v; }catch(e){ sessionStorage.removeItem(key); return null; } };
+  const startMeetingPrep=p=>{
+    pageCtx={type:"company", id:p.id}; prepFor=p;
+    const m=push("ai",meetingPrepIntroHtml(p.name));
+    const skip=m.querySelector("[data-prep-skip]");
+    if(skip) skip.onclick=()=>{ if(!prepFor) return; prepFor=null; prepDone();
+      answer(meetingPrepQuestion(p.name, ""), "Без подробностей — общая подготовка"); };
+    const f=qField();
+    if(f) f.placeholder="Расскажите о себе и о встрече";
+  };
+  const prep=readCtx("pendingPrep");
+  if(prep && prep.name) startMeetingPrep(prep);
   const pending=sessionStorage.getItem("pendingQ"), pendingLabel=sessionStorage.getItem("pendingLabel")||"";
-  if(pending){sessionStorage.removeItem("pendingQ");sessionStorage.removeItem("pendingLabel");answer(pending, pendingLabel||undefined);}
+  const ctx=readCtx("pendingCtx");
+  if(pending){sessionStorage.removeItem("pendingQ");sessionStorage.removeItem("pendingLabel");
+    if(ctx && ctx.type && ctx.id) pageCtx=ctx;
+    answer(pending, pendingLabel||undefined);}
 }
 /* Даже общее обращение не отправляем во внешний почтовый клиент: тот же
    короткий диалог кладёт сообщение в редакционную очередь внутри продукта. */

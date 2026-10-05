@@ -414,6 +414,26 @@ def test_a_bank_that_also_advises_is_still_asked_about_as_a_company(idx):
     assert _ask("сделки VERBA LEGAL", idx).intent == "advisor"
 
 
+def test_meeting_prep_from_a_company_page_is_about_that_company(idx):
+    """5 октября 2026: подготовка к встрече со Сбербанком ушла в маршрут
+    «консультант» — в заготовке было слово «консультантами», и модель
+    получила сделки, где банк советовал, а не покупал и продавал. Вопрос
+    со страницы компании о встрече или собеседовании — всегда про неё,
+    какими бы словами человек ни рассказал о себе («я юрист»)."""
+    old = ("Готовлюсь к встрече с компанией «Сбербанк». Коротко, по пунктам: чем занимается "
+           "и кому принадлежит; её сделки — списком; с какими консультантами работала.")
+    assert _ask(old, idx).intent == "advisor"  # так было без страницы — и так ломалось
+    for q in (old, "Готовлюсь к встрече с компанией «Сбербанк». Обо мне и о встрече: «Я юрист, "
+                   "консультирую сделки, хочу получить заказ на сопровождение»."):
+        got = _ask(q, idx, context_type="company", context_id="g28ff15bb")
+        assert got.intent == "company" and got.subject == "Сбербанк", (q, got.intent, got.subject)
+        assert got.docs, q
+    # Собеседование со страницы фирмы — про фирму.
+    got = _ask("Готовлюсь к собеседованию в юридическую фирму «VERBA LEGAL».", idx,
+               context_type="advisor", context_id=next(f.id for f in idx.firms if f.name == "VERBA LEGAL"))
+    assert got.intent == "advisor"
+
+
 def test_a_tight_advisor_pattern_keeps_the_deal_count_honest(idx):
     """Регулярка каталога служит счёту сделок, а не разбору вопроса.
 

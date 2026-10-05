@@ -472,6 +472,7 @@ class Intent:
     days: int | None = None                            # «за последнюю неделю» — сколько дней назад
 
 
+PREP_WORDS = re.compile(r"готовлюсь\s+к\s+(?:встрече|собеседованию)", re.I)
 ADVISOR_WORDS = re.compile(r"консультир|консультант|сопровожда|юрфирм|юридическ|инвестбанк|advis|law firm", re.I)
 LARGEST_WORDS = re.compile(r"крупн|больш|дорог|максимальн|самая\s+больш|топ[- ]?\d*", re.I)
 COUNT_WORDS = re.compile(r"сколько|как\s+много|число\s+сделок|количеств", re.I)
@@ -1428,6 +1429,16 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
     отвечал «в Компасе нет сделки Яндекс — Boxberry», сославшись на неё
     репликой раньше, — поиск шёл только по текущей фразе."""
     idx = idx or get_index()
+    # ПОДГОТОВКА К ВСТРЕЧЕ ИЛИ СОБЕСЕДОВАНИЮ — всегда про сущность страницы.
+    # 5 октября 2026 подготовка к встрече со Сбербанком ушла в маршрут
+    # «консультант»: в заготовке было слово «консультантами», Сбербанк есть и
+    # в каталоге консультантов, и модель получила сделки, где банк был
+    # советником, а не стороной. Слова, которыми человек рассказывает о себе
+    # («я юрист», «я инвестбанкир»), тем более не должны уводить маршрут.
+    if context_type in ("company", "advisor") and context_id and PREP_WORDS.search(question):
+        own = _answer_entity(context_type, context_id, Intent("empty", wants_advisors=True), idx)
+        if own:
+            return own
     intent = route(question, idx)
     if previous and intent.kind in ("empty", "search"):
         # Слабый вопрос: никого не называет, а поиск по его словам не попал ни
