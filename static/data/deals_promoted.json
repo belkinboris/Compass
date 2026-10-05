@@ -256900,7 +256900,8 @@
   "g01993028": null,
   "g6d711306": null,
   "gf485e935": null,
-  "gd937c845": 180
+  "gd937c845": 180,
+  "g53da1f4d": 181
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -260302,6 +260303,23 @@
    "events": [
     {
      "kind": "negotiations"
+    }
+   ]
+  },
+  "g53da1f4d": {
+   "buyer_name": "«Корус Консалтинг»",
+   "asset": "ИИ-разработчик Nextera",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
     }
    ]
   }

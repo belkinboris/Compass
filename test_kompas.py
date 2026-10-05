@@ -367,6 +367,21 @@ def test_polish_removes_bare_ids_and_links_to_unknown_deals():
     assert out.count(f"(#/deal/{did})") == 2  # ссылка осталась, голый адрес стал ссылкой с названием
 
 
+
+def test_polish_joins_links_with_a_space_and_drops_orphan_addresses():
+    """Владелец 5 октября 2026: «надо убрать референсы в скобках». Модель
+    писала «[покупка ТРЦ] (#/deal/…)» — с пробелом между скобками, и
+    читатель видел квадратные скобки и адрес вместо ссылки."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    did = "citibank"
+    text = (f"• Недвижимость — [покупка ТРЦ «Триумф Молл»] (#/deal/{did})\n"
+            f"• Фармацевтика — продажа сети «Апрель» (#/deal/{did})")
+    out = main._polish_answer(text, idx)
+    assert f"[покупка ТРЦ «Триумф Молл»](#/deal/{did})" in out
+    assert "«Апрель» (#/deal/" not in out and "продажа сети «Апрель»" in out
+    assert "] (" not in out
+
 def test_lookup_returns_facts_without_the_model(client):
     body = client.post("/api/assistant/lookup", json={"question": ORION_Q}).json()
     assert body["intent"] == "advisor" and body["deals"] and "#/advisors/orion" in body["answer"]

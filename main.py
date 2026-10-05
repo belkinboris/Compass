@@ -907,6 +907,10 @@ def _polish_answer(text: str, idx) -> str:
     скобках («(ga4082daa)» видел партнёр 31 августа), ссылки на сделки,
     которых в базе нет, и голые адреса #/deal/… без названия."""
     by_id = idx.by_id if idx is not None else {}
+    # «[название] (#/deal/…)» — модель ставит пробел или перенос между
+    # скобками, и ссылка не собиралась: читатель видел квадратные скобки и
+    # адрес (владелец, 5 октября 2026: «надо убрать референсы в скобках»).
+    text = re.sub(r"\]\s+\((#/|https?://)", r"](\1", str(text or ""))
 
     def drop_id(m):
         return "" if m.group(1) in by_id or re.fullmatch(r"[gc][0-9a-f]{8,9}", m.group(1)) else m.group(0)
@@ -921,6 +925,9 @@ def _polish_answer(text: str, idx) -> str:
         doc = by_id.get(m.group(1))
         return f"[{doc.title}](#/deal/{doc.id})" if doc else m.group(0)
     text = _BARE_DEAL_PATH_RE.sub(name_path, text)
+    # Адрес в скобках без названия перед ним («сеть «Апрель» (#/deal/…)») —
+    # ссылкой его не сделать, а читателю он ничего не говорит: убираем.
+    text = re.sub(r"(?<!\])\s*\(#/deal/[A-Za-z0-9_-]+\)", "", text)
     return text.strip()
 
 

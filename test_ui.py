@@ -4256,3 +4256,15 @@ def test_page_source_does_not_name_the_team():
     found = sorted(set(m.group(0) for m in _re.finditer(
         r"Ксюш\w*|Арт[её]м\w*|Асоян|Белкин|belkin|CLAUDE\.md|Claude|Anthropic|gmail", html, _re.I)))
     assert not found, found
+
+
+def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
+    """Тот же случай на странице: и уже сохранённые ответы с «] (#/deal/…)»
+    показываются ссылкой, а адрес в скобках без названия не виден."""
+    page.goto(base_url + "/#/", wait_until="domcontentloaded")
+    page.wait_for_function("typeof mdToHtml === 'function'", timeout=15000)
+    html = page.evaluate("""mdToHtml('• [покупка ТРЦ «Триумф Молл»] (#/deal/g5ddac2b5)\\n'
+        + '• продажа сети «Апрель» (#/deal/g34b9af03)')""")
+    assert '<a href="#/deal/g5ddac2b5">покупка ТРЦ «Триумф Молл»</a>' in html
+    assert "(#/deal/" not in html and "[" not in html and "]" not in html
+
