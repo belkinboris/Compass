@@ -3399,7 +3399,8 @@ function mdToHtml(text){
     .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
   const out=[]; let list=null;
   String(text||"").split("\n").forEach(line=>{
-    const m=line.match(/^\s*[-•*]\s+(.+)$/);
+    // «- - пункт» (двойной маркер модели) — один пункт, без лишней чёрточки.
+    const m=line.match(/^\s*(?:[-•*][ \t]+)+(.+)$/);
     if(m){ (list=list||[]).push("<li>"+inline(m[1])+"</li>"); return; }
     if(list){ out.push("<ul>"+list.join("")+"</ul>"); list=null; }
     out.push(inline(line));
