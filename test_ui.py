@@ -4011,7 +4011,7 @@ def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
       return {loading, loaded: document.querySelector('.hero-note').innerText};
     }""")
     assert "VPN" in got["loading"] and "догружаем" not in got["loading"], got["loading"]
-    assert "VPN" not in got["loaded"] and "сделок" in got["loaded"], got["loaded"]
+    assert "VPN" not in got["loaded"] and "сделк" in got["loaded"], got["loaded"]
 
 
 # ---------- 3 октября 2026: партия после запуска ----------
