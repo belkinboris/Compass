@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Новые функции запуска: ФНС, алерты, экспорт, вебинары и mobile UI."""
+import json
 import os
 import sys
 import tempfile
@@ -12,9 +13,9 @@ from fastapi.testclient import TestClient
 
 import main
 from db.models import (
-    Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
+    AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
-    UserTier, Webinar,
+    UserTier, Webinar, ModerationDecision,
 )
 from db.session import get_session
 from notification_service import create_notification
@@ -2458,6 +2459,98 @@ def test_milestone_button_decision_carries_the_tilde_separated_id(client, monkey
     assert rows and rows[0]["verdict"] == "post_yes"
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
+
+
+def _wait_for(cond, seconds=5.0):
+    import time as _time
+    end = _time.time() + seconds
+    while _time.time() < end:
+        if cond():
+            return True
+        _time.sleep(0.05)
+    return cond()
+
+
+def test_milestone_goes_to_the_channel_on_the_button_without_waiting_for_the_routine(client, monkeypatch):
+    """UniCredit, 5 октября 2026: конкурент написал о разрешении президента в
+    19:30, мы — в 20:07. Кнопка «пост в канал» только записывала решение, а
+    публиковала рутина раз в час. Теперь приток кладёт готовый пост на сайт,
+    и по кнопке сайт публикует его в основной канал сразу — один раз, даже
+    если нажмут двое, — и пишет номер поста в решение для рутины."""
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-100777")
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
+                        or {"ok": True, "result": {"message_id": 9001}})
+    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    combo = "g%s~approval" % uuid.uuid4().hex[:8]
+    draft = {"token": "тайна", "combo": combo, "event_id": combo.replace("~", "-"),
+             "text": "📌 <b>Президент разрешил сделку</b>",
+             "buttons": {"inline_keyboard": [[{"text": "Открыть карточку сделки", "url": "https://x"}]]},
+             "route": ["main"]}
+    assert client.post("/api/ops/milestone-draft", json=dict(draft, token="нет")).status_code == 404
+    assert client.post("/api/ops/milestone-draft", json=dict(draft, combo="без тильды")).status_code == 400
+    assert client.post("/api/ops/milestone-draft", json=draft).status_code == 200
+
+    def channel_posts():
+        return [p for m, p in sent if m == "sendMessage" and p.get("chat_id") == "-100777"]
+
+    for who in (111, 222):
+        client.post("/api/telegram/webhook/тайна", json={
+            "callback_query": {"data": "mod:%s:post_ok" % combo, "from": {"id": who}}})
+    assert _wait_for(lambda: len(channel_posts()) == 1)
+    post = channel_posts()[0]
+    assert post["text"] == draft["text"] and post["parse_mode"] == "HTML"
+    assert post["reply_markup"] == draft["buttons"]
+
+    def marks():
+        rows = client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+        return [d for d in rows if d["deal_id"] == combo]
+    assert _wait_for(lambda: any("9001" in (d["edited_text"] or "") for d in marks()))
+    import time as _time
+    _time.sleep(0.3)
+    assert len(channel_posts()) == 1, "второе нажатие не должно выпустить пост ещё раз"
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [d["id"] for d in marks()]})
+
+
+def test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine(monkeypatch):
+    """Сайт публикует сам только в основной канал и только то, чего там ещё
+    нет. Пост в канал недвижимости (с перекрёстной ссылкой), этап, уже
+    вышедший по суткам молчания, и сбой Telegram остаются рутине."""
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-100777")
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111")
+    replies = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: replies.append(p) or {"ok": False, "description": "Too Many Requests"})
+    db = get_session()
+    try:
+        def store(combo, route):
+            db.add(AppSetting(key=main.MILESTONE_DRAFT_PREFIX + combo, value=json.dumps(
+                {"event_id": combo.replace("~", "-"), "text": "этап", "buttons": None, "route": route})))
+            decision = ModerationDecision(deal_id=combo, verdict="post_yes", decided_by="111")
+            db.add(decision)
+            db.commit()
+            return decision.id
+        tag = uuid.uuid4().hex[:8]
+        realty = "r%s~closed" % tag
+        assert main._instant_milestone_post(realty, store(realty, ["main", "realty"]), db) is None
+        assert replies == []
+        out = "o%s~closed" % tag
+        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: True)
+        assert main._instant_milestone_post(out, store(out, ["main"]), db) is None
+        assert replies == []
+        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+        failed = "f%s~closed" % tag
+        failed_id = store(failed, ["main"])
+        assert main._instant_milestone_post(failed, failed_id, db) is None
+        assert len(replies) == 1
+        # Сбой не оставляет ни замка, ни отметки «публикую»: рутина выпустит этап.
+        db.expire_all()
+        assert db.get(AppSetting, main.MILESTONE_POSTED_PREFIX + failed) is None
+        assert db.get(ModerationDecision, failed_id).edited_text is None
+    finally:
+        db.close()
 
 
 def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkeypatch):

@@ -557,6 +557,56 @@ def milestone_decisions(decisions):
     return out
 
 
+# Сколько минут считать, что сайт ещё публикует этап (отметка
+# `posting_since` в решении). Дольше — значит, сайт упал посреди отправки, и
+# этап выпускает рутина, как раньше.
+SITE_POSTING_GRACE_MIN = 10
+
+
+def _milestone_event_id(decision):
+    """`<id сделки>-<вид>` для решения по этапу, иначе ''."""
+    did = str(decision.get('deal_id') or '')
+    if did.startswith('digest~') or '~' not in did:
+        return ''
+    deal_id, _, kind = did.partition('~')
+    return '%s-%s' % (deal_id, kind)
+
+
+def site_posted_milestones(decisions, now):
+    """Этапы, которые сайт опубликовал сам по кнопке «пост в канал»
+    (5 октября 2026, `main._instant_milestone_post`): ({event_id: запись для
+    `telegram_milestones`}, {event_id, которые сайт публикует прямо сейчас}).
+
+    Номер поста сайт пишет в само решение (`edited_text`), потому что больше
+    ему писать некуда: база сделок живёт в git, а не на сайте. Рутина
+    записывает этап вышедшим и второй раз его не шлёт; решение после этого
+    гасится как обычное устаревшее (`plan_milestones`)."""
+    posted, posting = {}, set()
+    for d in decisions:
+        eid = _milestone_event_id(d)
+        if not eid or d.get('verdict') != 'post_yes':
+            continue
+        try:
+            mark = json.loads(d.get('edited_text') or '')
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(mark, dict):
+            continue
+        if mark.get('posted_message_id'):
+            posted[eid] = {'at': mark.get('posted_at') or d.get('created_at'),
+                           'message_id': mark['posted_message_id'], 'by': 'site'}
+        elif mark.get('posting_since'):
+            try:
+                since = datetime.fromisoformat(str(mark['posting_since']))
+            except ValueError:
+                continue
+            if since.tzinfo is None:
+                since = since.replace(tzinfo=timezone.utc)
+            if (now - since).total_seconds() < SITE_POSTING_GRACE_MIN * 60:
+                posting.add(eid)
+    return posted, posting - set(posted)
+
+
 def milestone_age_hours(event, now):
     raw = str(event.get('milestone_drafted_at') or '')
     try:
@@ -880,8 +930,22 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # не нужен: повторная выборка того же решения безопасна в любом порядке.
     m_decisions, m_handle = approve.fetch_decisions()
     now_utc = datetime.now(timezone.utc)
+    # Этап, который сайт уже выпустил по кнопке, записываем вышедшим — тогда
+    # план его не шлёт, а решение гасит как устаревшее. Этап, который сайт
+    # публикует в эти секунды, не трогаем вовсе: ни поста, ни гашения.
+    site_posted, site_posting = site_posted_milestones(m_decisions, now_utc)
+    for event_id, record in site_posted.items():
+        milestones.setdefault(event_id, record)
+    if site_posting:
+        print('Сайт публикует прямо сейчас: %s — в этом прогоне не трогаем.'
+              % ', '.join(sorted(site_posting)))
+        m_decisions = [d for d in m_decisions if _milestone_event_id(d) not in site_posting]
     m_send, m_hold, m_discard_ids, m_sent_decision_ids = plan_milestones(
         data['deals'], milestones, m_decisions, now_utc)
+    if site_posting:
+        m_hold += [(deal, event, 'сайт публикует его прямо сейчас')
+                   for deal, event in m_send if event['id'] in site_posting]
+        m_send = [(deal, event) for deal, event in m_send if event['id'] not in site_posting]
     # «Без поста» у вехи ЗАПОМИНАЕТСЯ в `telegram_milestones`, как и
     # отправленная веха. До 25 сентября 2026 решение только гасилось на сайте,
     # а сама веха оставалась кандидатом — и в следующем прогоне, уже без

@@ -24,6 +24,15 @@
 принцип, что у карточек предпросмотра, отсчёт ведёт `send_telegram.py`'s
 `plan_milestones()` от `milestone_drafted_at`, который здесь и проставляется.
 
+ГОТОВЫЙ ПОСТ — СРАЗУ НА САЙТ (5 октября 2026). Перед черновиком в консоль
+тот же текст поста и его кнопки уходят на сайт (`store_on_site`,
+`POST /api/ops/milestone-draft`): по кнопке «пост в канал» сайт публикует
+этап в основной канал сразу, а не ждёт рутину публикации (UniCredit:
+конкурент — 19:30, мы — 20:07). Пост с текстом, который не прошёл
+`check_post.check`, и пост в канал недвижимости на сайт не кладутся — их,
+как раньше, выпускает рутина публикации. Сайт недоступен — черновик всё
+равно уходит в консоль: потерять скорость лучше, чем потерять этап.
+
 Запуск:
     python3 pipeline/ingest/send_milestone_drafts.py            # план без отправки
     python3 pipeline/ingest/send_milestone_drafts.py --write    # отправить
@@ -42,6 +51,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
 import channels                                           # noqa: E402
+import check_post                                         # noqa: E402
 import console_topics                                      # noqa: E402
 import format_post                                        # noqa: E402
 import send_drafts                                       # noqa: E402  (send_targets/send_one/PAUSE)
@@ -70,6 +80,39 @@ def milestone_message(deal, event):
     buttons = format_post.buttons_preview(deal)
     return (header + format_post.render_milestone(deal, event)
             + ('\n\n' + format_post.esc(buttons) if buttons else ''))
+
+
+def site_draft(deal, event):
+    """Что сайт опубликует по кнопке: текст поста, кнопки и маршрут.
+    None — пост сайту не доверяем (не прошёл механическую вычитку)."""
+    text = format_post.render_milestone(deal, event)
+    if check_post.check(text):
+        return None
+    return {'combo': '%s~%s' % (deal['id'], event['kind']), 'event_id': event['id'],
+            'text': text, 'buttons': format_post.render_buttons(deal),
+            'route': list(channels.channels_for(deal))}
+
+
+def store_on_site(deal, event, client=None):
+    """Положить готовый пост этапа на сайт. True — положили."""
+    draft = site_draft(deal, event)
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if draft is None or not token:
+        return False
+    import httpx
+    own = client is None
+    client = client or httpx.Client(timeout=20)
+    try:
+        r = client.post('%s/api/ops/milestone-draft' % site, json={'token': token, **draft})
+        return r.status_code == 200
+    except Exception as e:                                    # noqa: BLE001
+        print('Сайт не принял пост этапа %s (%s) — его выпустит рутина публикации.'
+              % (draft['combo'], e))
+        return False
+    finally:
+        if own:
+            client.close()
 
 
 def build_plan():
@@ -107,6 +150,8 @@ def main(write=False):
         for i, (text, keyboard, deal, event) in enumerate(plan):
             if i:
                 time.sleep(send_drafts.PAUSE)
+            if not store_on_site(deal, event, client):
+                print('Этап %s: сайт сам не опубликует — выпустит рутина публикации.' % event['id'])
             ok_all = True
             for chat in chats:
                 if not send_drafts.send_one(client, token, chat, text, keyboard, thread, html=True):

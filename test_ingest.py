@@ -2695,6 +2695,107 @@ def test_send_milestone_drafts_uses_a_tilde_separated_callback():
     assert buttons[1]["callback_data"] == "mod:gmru-nspk-privatization~approval:post_no"
 
 
+def _site_milestone_deal(deal_id):
+    return {"id": deal_id, "title": "Сделка Ю", "type": "M&A", "ind": "Не определена",
+            "events": [{"kind": "approval", "newsworthy": True, "headline": "Президент разрешил сделку Ю",
+                        "id": "%s-approval" % deal_id,
+                        "snapshot": {"title": "Сделка Ю", "status": "Согласование получено",
+                                     "buyer": "ООО «Покупатель Ю»"},
+                        "milestone_drafted_at": "2020-01-01T00:00:00+00:00"}]}
+
+
+def _run_publication_with(monkeypatch, tmp_path, deal, decisions, replies=()):
+    data = {"deals": [deal], "companies": {}, "telegram_posts": {}, "telegram_milestones": {}}
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    consumed = []
+    monkeypatch.setattr(send_telegram.approve, "fetch_decisions",
+                        lambda: (decisions, ("https://site", "тайна")))
+    monkeypatch.setattr(send_telegram.approve, "consume", lambda handle, ids: consumed.extend(ids))
+    fake = _FakeClient(list(replies))
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    send_telegram.main(write=True, ignore_pace=True)
+    return fake.calls, json.loads(tmp_data.read_text(encoding="utf-8")), consumed
+
+
+def test_publication_records_a_milestone_the_site_already_posted_and_never_repeats_it(monkeypatch, tmp_path):
+    """UniCredit, 5 октября 2026: этап по кнопке «пост в канал» публикует
+    сам сайт, сразу. Рутина публикации, придя в :05, второй раз его не шлёт:
+    записывает вышедшим с номером поста от сайта и гасит решение."""
+    deal = _site_milestone_deal("dsite1")
+    calls, written, consumed = _run_publication_with(monkeypatch, tmp_path, deal, [
+        {"id": 7, "deal_id": "dsite1~approval", "verdict": "post_yes",
+         "edited_text": json.dumps({"posted_message_id": 555, "posted_at": "2026-10-05T16:31:00+00:00"}),
+         "created_at": "2026-10-05T16:30:58"}])
+    assert calls == []
+    assert written["telegram_milestones"]["dsite1-approval"] == {
+        "at": "2026-10-05T16:31:00+00:00", "message_id": 555, "by": "site"}
+    assert consumed == [7]
+
+
+def test_publication_leaves_alone_a_milestone_the_site_is_posting_right_now(monkeypatch, tmp_path):
+    """Сайт отметил «публикую» и ещё не получил номер поста — рутина в эти
+    секунды не шлёт и не гасит. Отметка старше десяти минут значит, что сайт
+    упал посреди отправки, — тогда этап выпускает рутина, как раньше."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    deal = _site_milestone_deal("dsite2")
+    fresh = {"id": 8, "deal_id": "dsite2~approval", "verdict": "post_yes",
+             "edited_text": json.dumps({"posting_since": now.isoformat(timespec="seconds")}),
+             "created_at": now.isoformat()}
+    calls, written, consumed = _run_publication_with(monkeypatch, tmp_path, deal, [fresh])
+    assert calls == [] and consumed == []
+    assert "dsite2-approval" not in written["telegram_milestones"]
+
+    stuck = dict(fresh, edited_text=json.dumps(
+        {"posting_since": (now - timedelta(minutes=30)).isoformat(timespec="seconds")}))
+    calls, written, consumed = _run_publication_with(
+        monkeypatch, tmp_path, deal, [stuck], replies=[{"ok": True, "result": {"message_id": 4343}}])
+    assert len(calls) == 1 and "Президент разрешил сделку Ю" in calls[0][1]["text"]
+    assert written["telegram_milestones"]["dsite2-approval"]["message_id"] == 4343
+    assert consumed == [8]
+
+
+def test_milestone_draft_puts_the_ready_post_on_the_site_first(monkeypatch):
+    """Черновик этапа кладёт на сайт тот самый текст поста и кнопки, которые
+    иначе отправила бы рутина публикации, — и маршрут, по которому сайт
+    решает, может ли он опубликовать сам (только основной канал)."""
+    import send_milestone_drafts
+
+    class _Resp:
+        status_code = 200
+
+    class _Client:
+        def __init__(self):
+            self.calls = []
+
+        def post(self, url, json):
+            self.calls.append((url, json))
+            return _Resp()
+
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    monkeypatch.setenv("APP_BASE_URL", "https://site.test")
+    deal = _site_milestone_deal("dsite3")
+    event = deal["events"][0]
+    client = _Client()
+    assert send_milestone_drafts.store_on_site(deal, event, client)
+    url, body = client.calls[0]
+    assert url == "https://site.test/api/ops/milestone-draft"
+    assert body["token"] == "тайна" and body["combo"] == "dsite3~approval"
+    assert body["event_id"] == "dsite3-approval" and body["route"] == ["main"]
+    assert body["text"] == format_post.render_milestone(deal, event)
+    assert body["buttons"] == format_post.render_buttons(deal)
+    # Текст, который не прошёл механическую вычитку, сайту не доверяем.
+    monkeypatch.setattr(send_milestone_drafts.check_post, "check", lambda text: ["обрыв фразы"])
+    assert not send_milestone_drafts.store_on_site(deal, event, client)
+    assert len(client.calls) == 1
+
+
 def test_seed_backlog_marks_every_existing_deal_and_nothing_else(tmp_path, monkeypatch):
     """Каждая существующая на момент запуска сделка получает telegram_posts[id]
     = null; уже присутствовавшие записи (например, реально опубликованные)
@@ -5174,37 +5275,33 @@ def test_ops_status_main_requires_text():
     assert ops_status.main([]) == 1
 
 
-def test_ops_status_main_skips_the_network_on_a_quiet_intake_hour(monkeypatch, capsys):
-    """13 сентября 2026: тихий час притока не должен даже пытаться
-    отправить сообщение (заголовок «утренний обзор» лишал это чётко видно
-    в отчёте, что рутина жива) — только напечатать честную причину и выйти
-    кодом 0 (это не сбой)."""
-    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 14)
-
-    def _boom(*a, **k):
-        raise AssertionError("main() не должен был дойти до сети в тихий час")
-    monkeypatch.setattr(ops_status, "post_status", _boom)
-    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]) == 0
-    out = capsys.readouterr().out
-    assert "Тихий час" in out and "21:00" in out
-
-    # На последнем часе окна (или когда карточки есть) сеть вызывается.
+def test_ops_status_intake_report_goes_to_the_site_and_only_a_failure_to_the_console(monkeypatch, capsys):
+    """5 октября 2026, владелец: сводку притока — «1 раз в день в 18:00».
+    Обычный отчёт прогона уходит сайту (там копится до вечерней сводки) и в
+    консоль не пишется; сбой уходит в консоль сразу; сайт не принял цифры —
+    отчёт идёт в консоль по-старому, чтобы молчание рутины не выглядело
+    тихим днём."""
     calls = []
     monkeypatch.setattr(ops_status, "post_status",
-                         lambda *a, **k: (calls.append(1) or (True, None)))
+                        lambda *a, **k: (calls.append(1) or (True, None)))
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
     monkeypatch.setattr(ops_status.console_topics, "console_chats", lambda: ["-1001"])
     monkeypatch.setattr(ops_status.console_topics, "channel_leak_note", lambda: None)
-    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]
-                            + []) == 0  # ещё 14:00 — не отправлено, calls пуст
-    assert calls == []
-    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 21)
-    assert ops_status.main(["приток", "--looked", "50", "--cards", "0"]) == 0
-    assert calls == [1]
+    handed = []
+    monkeypatch.setattr(ops_status, "send_intake_run",
+                        lambda *a, **k: (handed.append(a) or (True, "прогонов в копилке дня: 4")))
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "3", "--screened", "2"]) == 0
+    assert handed == [(50, 0, 3, 2)] and calls == []
+    assert "18:00" in capsys.readouterr().out
+
+    assert ops_status.main(["приток", "--broken", "лента ТАСС не отвечает"]) == 0
+    assert calls == [1] and len(handed) == 1
+
     calls.clear()
-    monkeypatch.setattr(ops_status, "_hour_msk", lambda: 9)
-    assert ops_status.main(["приток", "--looked", "50", "--cards", "3"]) == 0
+    monkeypatch.setattr(ops_status, "send_intake_run", lambda *a, **k: (False, "сайт ответил 502"))
+    assert ops_status.main(["приток", "--looked", "50", "--cards", "0", "--screened", "0"]) == 0
     assert calls == [1]
+    assert "сайт ответил 502" in capsys.readouterr().out
 
 
 def test_ops_status_refuses_internal_jargon_reaching_the_console():

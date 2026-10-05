@@ -633,3 +633,125 @@ def test_lookup_follow_up_keeps_the_deal_from_the_previous_question():
     alone = client.post("/api/assistant/lookup", json={"question": "Перепроверь, пожалуйста", "context": "",
                                                         "context_type": "general", "context_id": None}).json()
     assert not alone["deals"]
+
+
+# ---------- сводка дня в консоль: раз в день в 18:00 с Метрикой (5 октября 2026) ----------
+
+def _fresh_runs(db):
+    from db.models import AppSetting
+    for key in (main.INTAKE_RUNS_SETTING, main.INTAKE_SUMMARY_LAST):
+        row = db.get(AppSetting, key)
+        if row:
+            db.delete(row)
+    for row in db.query(AppSetting).filter(AppSetting.key.like("intake_summary:%")).all():
+        db.delete(row)
+    db.commit()
+
+
+def test_intake_runs_are_collected_and_the_day_summary_goes_once_after_18(monkeypatch):
+    """Владелец 5 октября 2026: сводку притока — «1 раз в день в 18:00» и со
+    статистикой Яндекс Метрики. Прогоны копятся на сайте, сводка уходит одна."""
+    from datetime import datetime, timezone
+    from db.session import get_session
+    import metrika
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "s3cret")
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: sent.append((method, p)) or {"ok": True})
+    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(metrika, "day_stats", lambda day="today", token=None, client=None: {
+        "users": 812, "visits": 1034, "pageviews": 3210, "avg_seconds": 135, "new_pct": 64.2,
+        "sources": [("Переходы из поисковых систем", 38), ("Прямые заходы", 20)],
+        "yesterday": {"users": 790, "visits": 1001}})
+    db = get_session()
+    try:
+        _fresh_runs(db)
+        with TestClient(main.app) as c:
+            assert c.post("/api/ops/intake-run", json={"token": "нет", "looked": 1}).status_code == 404
+            for looked, found, cards, screened in ((2816, 29, 6, 22), (2790, 3, 0, 4)):
+                r = c.post("/api/ops/intake-run", json={"token": "s3cret", "looked": looked, "found": found,
+                                                        "cards": cards, "screened": screened})
+                assert r.json()["ok"] is True
+        before = datetime(2026, 10, 6, 14, 30, tzinfo=timezone.utc)      # 17:30 МСК
+        assert main._intake_summary_once(db, now_utc=before) is False and not sent
+        at18 = datetime(2026, 10, 6, 15, 5, tzinfo=timezone.utc)          # 18:05 МСК
+        assert main._intake_summary_once(db, now_utc=at18) is True
+        assert len(sent) == 1
+        text = sent[0][1]["text"]
+        assert "6 октября" in text and "2 раза" in text and "Похожих на сделки — 32" in text
+        assert "мусор ещё до консоли — 26" in text and "6 карточек" in text
+        assert "Посетителей — 812" in text and "переходы из поисковых систем — 38%" in text
+        assert "2 мин 15 с" in text and "Вчера: посетителей — 790" in text
+        # Второй раз за день — нет, даже после перезапуска сайта.
+        assert main._intake_summary_once(db, now_utc=at18) is False and len(sent) == 1
+    finally:
+        _fresh_runs(db)
+        db.close()
+
+
+def test_day_summary_says_so_when_intake_was_silent(monkeypatch):
+    """Молчание рутины не должно выглядеть тихим днём (урок 9 августа)."""
+    from datetime import datetime, timezone
+    from db.session import get_session
+    import metrika
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: sent.append((method, p)) or {"ok": True})
+    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
+    db = get_session()
+    try:
+        _fresh_runs(db)
+        assert main._intake_summary_once(db, now_utc=datetime(2026, 10, 7, 15, 1, tzinfo=timezone.utc)) is True
+        text = sent[0][1]["text"]
+        assert "ни разу не отчитался" in text
+        assert "подключим доступ к Метрике" in text
+    finally:
+        _fresh_runs(db)
+        db.close()
+
+
+def test_metrika_reads_totals_and_sources_without_inventing_numbers():
+    import httpx
+    import metrika
+    assert metrika.day_stats(token="") is None
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        assert request.headers["Authorization"] == "OAuth T"
+        q = dict(request.url.params)
+        if q.get("dimensions"):
+            return httpx.Response(200, json={"totals": [100], "data": [
+                {"dimensions": [{"name": "Переходы из социальных сетей"}], "metrics": [55]},
+                {"dimensions": [{"name": "Прямые заходы"}], "metrics": [45]}]})
+        if q.get("date1") == "yesterday":
+            return httpx.Response(200, json={"totals": [70, 90]})
+        return httpx.Response(200, json={"totals": [80, 100, 300, 61, 50.0]})
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as c:
+        st = metrika.day_stats(token="T", client=c)
+    assert len(calls) == 3 and all(dict(r.url.params)["ids"] == metrika.COUNTER for r in calls)
+    assert st["users"] == 80 and st["visits"] == 100 and st["pageviews"] == 300
+    assert st["sources"] == [("Переходы из социальных сетей", 55), ("Прямые заходы", 45)]
+    lines = metrika.render(st)
+    assert "Посетителей — 80" in lines[1] and "1 мин 1 с" in lines[2]
+
+
+def test_intake_routine_hands_its_numbers_to_the_site(monkeypatch):
+    import httpx
+    import sys as _sys
+    _sys.path.insert(0, "pipeline")
+    import ops_status
+    monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "s3cret")
+    seen = []
+
+    def handler(request):
+        seen.append(request)
+        return httpx.Response(200, json={"ok": True, "runs_today": 3})
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as c:
+        ok, why = ops_status.send_intake_run(2816, 29, 6, 22, client=c)
+    assert ok and "3" in why
+    body = json.loads(seen[0].content)
+    assert seen[0].url.path == "/api/ops/intake-run" and body["cards"] == 6 and body["token"] == "s3cret"

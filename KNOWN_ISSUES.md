@@ -23,6 +23,24 @@
 
 ---
 
+## Этап известной сделки выходит через 40–60 минут после новости
+- Симптом: конкурент пишет о согласовании или закрытии уже известной сделки
+  через минуты, мы — через час (UniCredit, 5 октября 2026: 19:30 против
+  20:07), хотя владелец нажал «пост в канал» почти сразу.
+- Причина: две очереди подряд. Приток доходил до этапа в конце прогона
+  (шаг 16 — после обогащения, сырья и заметок), а кнопка только записывала
+  решение: пост выпускала рутина публикации раз в час, в :05.
+- Исправлено: шаг 3а в `routines/intake.md` — этап известной сделки сразу
+  после разбора новостей; `send_milestone_drafts.store_on_site` кладёт
+  готовый пост на сайт, `main._instant_milestone_post` публикует его по
+  кнопке в основной канал (замок от двойного нажатия, номер поста — в
+  решение), `send_telegram.site_posted_milestones` записывает этап вышедшим
+  и не шлёт второй раз. Канал недвижимости, непрошедший вычитку текст и сбой
+  Telegram остаются рутине. Тесты: `test_milestone_goes_to_the_channel_on_the_button_*`,
+  `test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine`,
+  `test_publication_records_a_milestone_the_site_already_posted_*`,
+  `test_publication_leaves_alone_a_milestone_the_site_is_posting_right_now`.
+
 ## Приёмка на локальном сервере падает так, будто с витрины исчез блок
 - Симптом: `acceptance_check.py --base http://127.0.0.1:…` ждёт 60 секунд и
   печатает «ошибка браузера: Timeout, waiting for `.an-c-topsum .an-deal`».
