@@ -2491,9 +2491,15 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                 ModerationDecision.decided_by == str(from_id),
                 ModerationDecision.created_at >= since))
             if not twin:
-                db.add(ModerationDecision(deal_id=match.group(1), verdict=verdict,
-                                          decided_by=str(from_id)))
+                decision_row = ModerationDecision(deal_id=match.group(1), verdict=verdict,
+                                                  decided_by=str(from_id))
+                db.add(decision_row)
                 db.commit()
+                # Этап сделки — в канал сразу, не дожидаясь рутины публикации.
+                if (verdict == "post_yes" and "~" in match.group(1)
+                        and not match.group(1).startswith("digest~")):
+                    threading.Thread(target=_instant_milestone_post,
+                                     args=(match.group(1), decision_row.id), daemon=True).start()
             # Правка самого сообщения («— ✅ Одобрено (Борис)») — ещё один
             # вызов Bot API, и он не должен задерживать ответ вебхуку:
             # решение уже в базе, а Telegram ждёт ответа секунды, не десятки
@@ -4002,6 +4008,290 @@ def moderation_consume(req: ModerationConsumeIn, db=Depends(get_db)):
         n += 1
     db.commit()
     return {"consumed": n}
+
+
+# СВОДКА ДНЯ В КОНСОЛЬ (5 октября 2026). Владелец: «давай сделаем 1 раз в день
+# в 18:00 и отправляй статистику из Яндекс Метрики». Раньше приток писал в
+# консоль после каждого прогона, где были карточки, — до шести сообщений в
+# день. Рутина идёт в новом контейнере каждый час и помнить день не может,
+# поэтому она отдаёт цифры прогона сюда (`POST /api/ops/intake-run`), а в
+# 18:00 МСК сайт складывает их в одно сообщение и добавляет посещаемость из
+# Метрики (`metrika.py`, ключ `METRIKA_TOKEN`). Сбой рутины по-прежнему
+# приходит сразу (`ops_status.py --broken`), а не ждёт вечера. Если до 18:00
+# от притока не пришло ни одного прогона, сводка так и говорит — молчание
+# рутины не должно выглядеть как тихий день. `INTAKE_SUMMARY=0` — выключить.
+INTAKE_SUMMARY = os.environ.get("INTAKE_SUMMARY", "1") != "0"
+INTAKE_SUMMARY_HOUR_MSK = 18
+INTAKE_RUNS_SETTING = "intake_runs"
+INTAKE_SUMMARY_LAST = "intake_summary_last_at"
+_MONTHS_GEN = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
+               "сентября", "октября", "ноября", "декабря"]
+
+
+class IntakeRunIn(BaseModel):
+    token: str = ""
+    looked: int = 0
+    found: int = 0
+    cards: int = 0
+    screened: int = 0
+
+
+def _load_intake_runs(db) -> list[dict]:
+    row = db.get(AppSetting, INTAKE_RUNS_SETTING)
+    try:
+        return json.loads(row.value) if row and row.value else []
+    except ValueError:
+        return []
+
+
+@app.post("/api/ops/intake-run")
+def ops_intake_run(req: IntakeRunIn, db=Depends(get_db)):
+    """Цифры одного прогона притока — копятся до вечерней сводки."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    runs = _load_intake_runs(db)
+    runs.append({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                 "looked": max(0, req.looked), "found": max(0, req.found),
+                 "cards": max(0, req.cards), "screened": max(0, req.screened)})
+    runs = runs[-400:]
+    row = db.get(AppSetting, INTAKE_RUNS_SETTING)
+    if row:
+        row.value = json.dumps(runs, ensure_ascii=False)
+    else:
+        db.add(AppSetting(key=INTAKE_RUNS_SETTING, value=json.dumps(runs, ensure_ascii=False)))
+    db.commit()
+    return {"ok": True, "runs_today": len(runs)}
+
+
+def _plural_ru(n: int, one: str, few: str, many: str) -> str:
+    n = abs(int(n))
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
+def _intake_summary_text(runs: list[dict], msk_day, metrika_lines: list[str]) -> str:
+    """Текст сводки дня — словами, без устройства рутин."""
+    lines = ["🌅 <b>Компас · день, %d %s</b>" % (msk_day.day, _MONTHS_GEN[msk_day.month - 1]), ""]
+    if not runs:
+        lines.append("⚠️ Приток сегодня ни разу не отчитался — возможно, рутина не работает. Проверим.")
+    else:
+        looked = sorted(r.get("looked", 0) for r in runs)
+        typical = looked[len(looked) // 2]
+        found = sum(r.get("found", 0) for r in runs)
+        cards = sum(r.get("cards", 0) for r in runs)
+        screened = sum(r.get("screened", 0) for r in runs)
+        lines.append("Приток проверил ленты источников %d %s%s." % (
+            len(runs), _plural_ru(len(runs), "раз", "раза", "раз"),
+            (" — каждый раз около %s %s" % (f"{typical:,}".replace(",", " "),
+                                             _plural_ru(typical, "новости", "новостей", "новостей"))) if typical else ""))
+        lines.append("Отсеяли как явный мусор ещё до консоли — %d. Похожих на сделки — %d." % (screened, found))
+        if cards:
+            lines.append("📋 <b>На вашу проверку ушло %d %s</b> — они в этой группе, с кнопками."
+                         % (cards, _plural_ru(cards, "карточка", "карточки", "карточек")))
+        else:
+            lines.append("Новых сделок за день нет — бывают тихие дни.")
+    lines.append("")
+    lines.extend(metrika_lines)
+    return "\n".join(lines)
+
+
+def _intake_summary_once(db, now_utc: datetime | None = None, force: bool = False) -> bool:
+    """Отправить сводку дня, если пора и сегодня её ещё не было (или `force`).
+    Ключ дня пишется ДО отправки: перезапуск сайта в 18:05 не повторит её."""
+    now_utc = now_utc or datetime.now(timezone.utc)
+    msk = now_utc.astimezone(timezone.utc).replace(tzinfo=None) + timedelta(hours=3)
+    if not force and msk.hour < INTAKE_SUMMARY_HOUR_MSK:
+        return False
+    key = "intake_summary:%s" % msk.date().isoformat()
+    if not force:
+        if db.get(AppSetting, key):
+            return False
+        db.add(AppSetting(key=key, value=now_utc.isoformat(timespec="seconds")))
+        try:
+            db.commit()
+        except Exception:                                    # noqa: BLE001
+            db.rollback()
+            return False
+    last_row = db.get(AppSetting, INTAKE_SUMMARY_LAST)
+    since = last_row.value if last_row and last_row.value else (now_utc - timedelta(hours=24)).isoformat(timespec="seconds")
+    runs = [r for r in _load_intake_runs(db) if str(r.get("at", "")) > since]
+    try:
+        import metrika
+        stats = metrika.day_stats("today")
+        metrika_lines = metrika.render(stats)
+    except Exception as exc:                                 # noqa: BLE001
+        logger.error("Яндекс Метрика не ответила: %s", exc)
+        metrika_lines = ["📈 Яндекс Метрика сегодня не ответила — посещаемость пришлём в следующей сводке."]
+    text = _intake_summary_text(runs, msk.date(), metrika_lines)
+    chats = _review_chat_ids(db)
+    thread = _console_thread_id(db, "update")
+    sent = 0
+    for chat in chats:
+        res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, parse_mode="HTML",
+                                          disable_web_page_preview=True,
+                                          **({"message_thread_id": thread} if thread else {}))
+        if res and res.get("ok"):
+            sent += 1
+    if sent:
+        if last_row:
+            last_row.value = now_utc.isoformat(timespec="seconds")
+        else:
+            db.add(AppSetting(key=INTAKE_SUMMARY_LAST, value=now_utc.isoformat(timespec="seconds")))
+        db.commit()
+    return bool(sent)
+
+
+@app.post("/api/ops/intake-summary")
+def ops_intake_summary(token: str = "", db=Depends(get_db)):
+    """Отправить сводку дня прямо сейчас (по просьбе владельца, не дожидаясь 18:00)."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return {"sent": _intake_summary_once(db, force=True)}
+
+
+@app.on_event("startup")
+def _start_intake_summary():
+    if not INTAKE_SUMMARY or os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+    if not os.environ.get("TELEGRAM_BOT_TOKEN"):
+        return
+
+    def _run():
+        while True:
+            time.sleep(300)
+            db = get_session()
+            try:
+                if _intake_summary_once(db):
+                    logger.info("сводка дня отправлена в консоль")
+            except Exception as exc:                             # noqa: BLE001
+                logger.error("сводка дня не отправлена: %s", exc)
+            finally:
+                db.close()
+
+    threading.Thread(target=_run, daemon=True).start()
+
+
+# ЭТАП СДЕЛКИ — В КАНАЛ СРАЗУ ПО КНОПКЕ (5 октября 2026). UniCredit: конкурент
+# написал о разрешении президента в 19:30, мы — в 20:07. Владелец нажал «пост в
+# канал» раньше, но кнопка только записывала решение, а публиковала рутина
+# публикации — раз в час, в :05. Теперь приток, отправляя черновик этапа в
+# консоль, кладёт сюда же готовый текст поста и кнопки
+# (`send_milestone_drafts.store_on_site`), и по «пост в канал» сайт публикует
+# его в основной канал сразу. Номер поста пишется в само решение
+# (`edited_text` = {"posted_message_id": …}): рутина публикации, увидев его,
+# только отмечает этап вышедшим (`send_telegram.site_posted_milestones`) и
+# второй раз не шлёт. Пост в канал недвижимости и любой сбой — по-старому,
+# рутиной: потерять скорость лучше, чем выпустить пост не туда или дважды.
+MILESTONE_DRAFT_PREFIX = "milestone_draft:"
+MILESTONE_POSTED_PREFIX = "milestone_posted:"
+
+
+class MilestoneDraftIn(BaseModel):
+    token: str = ""
+    combo: str
+    event_id: str
+    text: str
+    buttons: dict | None = None
+    route: list[str] = []
+
+
+@app.post("/api/ops/milestone-draft")
+def ops_milestone_draft(req: MilestoneDraftIn, db=Depends(get_db)):
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    if not re.fullmatch(r"[\w-]{1,50}~[\w-]{1,30}", req.combo or ""):
+        return JSONResponse({"error": "bad combo"}, status_code=400)
+    value = json.dumps({"event_id": req.event_id, "text": req.text, "buttons": req.buttons,
+                        "route": list(req.route or []),
+                        "stored_at": datetime.now(timezone.utc).isoformat(timespec="seconds")},
+                       ensure_ascii=False)
+    row = db.get(AppSetting, MILESTONE_DRAFT_PREFIX + req.combo)
+    if row:
+        row.value = value
+    else:
+        db.add(AppSetting(key=MILESTONE_DRAFT_PREFIX + req.combo, value=value))
+    db.commit()
+    return {"ok": True}
+
+
+def _main_channel_id(db) -> str:
+    """Адрес основного канала — тем же порядком, что у рутины публикации
+    (`send_telegram.channel_address`): числовой адрес из окружения, иначе тот,
+    что сайт услышал от Telegram, но никогда не адрес канала недвижимости."""
+    from_env = (os.environ.get("TELEGRAM_CHANNEL_ID") or "").strip()
+    if from_env and not from_env.startswith("@"):
+        return from_env
+    _sort_channel_slots(db)
+    row = db.get(AppSetting, CHANNEL_SETTING)
+    realty = db.get(AppSetting, REALTY_CHANNEL_SETTING)
+    chat = str(row.value or "").strip() if row else ""
+    if chat and chat != (str(realty.value or "").strip() if realty else ""):
+        return chat
+    return ""
+
+
+def _milestone_already_out(event_id: str) -> bool:
+    """Этап уже вышел (рутиной — например, по суткам молчания)."""
+    base = _read_json("static/data/deals_promoted.json", {})
+    return event_id in (base.get("telegram_milestones") or {})
+
+
+def _instant_milestone_post(combo: str, decision_id: int, db=None) -> int | None:
+    """Опубликовать этап сразу. Номер поста или None (тогда опубликует рутина)."""
+    own = db is None
+    db = db or get_session()
+    try:
+        row = db.get(AppSetting, MILESTONE_DRAFT_PREFIX + combo)
+        if not row or not row.value:
+            return None
+        draft = json.loads(row.value)
+        if list(draft.get("route") or []) != ["main"] or not draft.get("text"):
+            return None
+        if _milestone_already_out(str(draft.get("event_id") or "")):
+            return None
+        channel = _main_channel_id(db)
+        if not channel or channel in _review_chat_ids(db):
+            return None
+        # Ключ «уже публикуем» пишется ДО отправки: второе нажатие (партнёр
+        # в ту же минуту) не выпустит пост дважды. Та же отметка — в самом
+        # решении: рутина публикации, прочитав его в эти секунды, этап не
+        # шлёт (`send_telegram.site_posted_milestones`).
+        started = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        db.add(AppSetting(key=MILESTONE_POSTED_PREFIX + combo, value=started))
+        decision = db.get(ModerationDecision, decision_id)
+        if decision is not None:
+            decision.edited_text = json.dumps({"posting_since": started})
+        try:
+            db.commit()
+        except Exception:                                    # noqa: BLE001
+            db.rollback()
+            return None
+        payload = {"chat_id": channel, "text": draft["text"], "parse_mode": "HTML",
+                   "disable_web_page_preview": True}
+        if draft.get("buttons"):
+            payload["reply_markup"] = draft["buttons"]
+        res = notification_service.tg_api("sendMessage", **payload) or {}
+        if not res.get("ok"):
+            logger.error("этап %s не опубликован сайтом: %s", combo, res.get("description"))
+            guard = db.get(AppSetting, MILESTONE_POSTED_PREFIX + combo)
+            if guard:
+                db.delete(guard)
+            if decision is not None:
+                decision.edited_text = None
+            db.commit()
+            return None
+        mid = (res.get("result") or {}).get("message_id")
+        if decision is not None:
+            decision.edited_text = json.dumps({"posted_message_id": mid,
+                                               "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+        db.commit()
+        return mid
+    finally:
+        if own:
+            db.close()
 
 
 # ==================== История диалогов ассистента ====================
