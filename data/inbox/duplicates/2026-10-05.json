@@ -62,6 +62,37 @@
     "needs_review": true
    },
    "queued": "2026-10-05"
+  },
+  {
+   "key": "https://1prime.ru/20261005/zoloto-873941990.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d90145310",
+    "title": "Минфин купит валюту и золото почти на 280 миллиардов рублей",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261005/zoloto-873941990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюта и золото почти на 280 миллиардов рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюта и золото почти на 280 миллиардов рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-05"
   }
  ]
 }
