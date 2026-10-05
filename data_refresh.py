@@ -246,6 +246,15 @@ def _download(url: str, etag=None, modified=None) -> tuple[int, bytes, str | Non
     условный запрос экономит 7 МБ трафика на каждой проверке, а проверок
     288 в сутки."""
     headers = {"User-Agent": "kompas-data-refresh"}
+    # ЗАКРЫТЫЙ РЕПОЗИТОРИЙ (5 октября 2026). Публичный репозиторий называет
+    # владельца — логин в адресе, имена в документации; владелец попросил,
+    # чтобы на старте ничто не указывало, кто сделал «Компас». Закрытый
+    # репозиторий raw.githubusercontent.com отдаёт только с ключом: задан
+    # DATA_GITHUB_TOKEN (ключ только на чтение этого репозитория) — шлём его,
+    # не задан — всё как раньше, без ключа.
+    token = (os.environ.get("DATA_GITHUB_TOKEN") or "").strip()
+    if token:
+        headers["Authorization"] = "token " + token
     if etag:
         headers["If-None-Match"] = etag
     if modified:

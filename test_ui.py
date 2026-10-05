@@ -4229,3 +4229,30 @@ def test_assistant_follow_up_skips_the_quick_answer_and_shows_it_is_thinking(bro
         for route in held:
             route.abort()
         ctx.close()
+
+
+def test_deal_without_a_sum_says_not_disclosed_not_no_data(page, base_url):
+    """Владелец 1 октября 2026: «„Нет данных“ надо меньше делать». На «Обзоре»
+    карточки без поля суммы крупно стояло «Нет данных» (200 карточек) — из
+    ленты подпись убрали раньше, с карточки нет. Теперь «Не раскрыта», как в
+    постах канала, а пояснение говорит, что в источниках цены нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if not str(d.get("sum") or "").strip()
+                and d.get("type") != "Продажа с торгов")
+    page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".fact-note", timeout=15000)
+    text = page.inner_text("#app")
+    assert "Нет данных" not in text
+    assert "Не раскрыта" in text and "отсутствует информация о цене сделки" in text
+
+
+def test_page_source_does_not_name_the_team():
+    """Владелец 5 октября 2026: «чтобы нигде не было индикаторов, кто создал
+    „Компас“». Исходник страницы видит любой посетитель, а в комментариях
+    стояли имена партнёров и ссылки на внутренний файл правил."""
+    import re as _re
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    found = sorted(set(m.group(0) for m in _re.finditer(
+        r"Ксюш\w*|Арт[её]м\w*|Асоян|Белкин|belkin|CLAUDE\.md|Claude|Anthropic|gmail", html, _re.I)))
+    assert not found, found
