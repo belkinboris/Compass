@@ -2326,6 +2326,13 @@ const advSide = (role, d, note) => {
 };
 /* Что показать под именем фирмы: уточнение в скобках («топ-менеджмент
    ВымпелКома»), а не повтор роли, которую уже сказал заголовок колонки. */
+/* «(цели)», «цели» в роли консультанта — наше слово для покупаемой компании. */
+const humanRole = t => String(t||"").replace(/\(цели\)/gi,"(покупаемой компании)").replace(/^цели$/i,"покупаемой компании");
+/* Дата состава владельцев: «2007-2023» — это период, а не день; fmtMonthYear
+   превращал его в «Invalid Date». */
+const asOfText = v => { const m=String(v||"").match(/^(\d{4})\s*[-–]\s*(\d{4})$/);
+  if(m) return `в ${m[1]}–${m[2]} годах`;
+  const t=fmtMonthYear(v); return /Invalid|NaN/.test(String(t)) ? String(v||"") : `на ${t}`; };
 const advDetail = text => {
   // «(по данным сайта фирмы)», «(по данным пресс-релиза …)» — это откуда мы
   // знаем, а не кого консультировали; владелец 3 октября 2026: «не надо
@@ -2591,10 +2598,10 @@ function companyRole(d, id){
    честное состояние: сущность в базе есть, связей у неё пока нет. */
 function companyEmptyHtml(c){
   return `<div class="lens-empty reveal">
-    <div class="le-head">Сделок, где эта сторона указана явно, в базе пока нет</div>
-    <p>Название «${c.name}» встречается в карточках, но стороной сделки компания в источниках не названа.</p>
+    <div class="le-head">Сделок с участием компании в базе пока нет</div>
+    <p>Компания упоминается в описаниях сделок, но ни в одной не названа стороной.</p>
     <div class="fe-actions">
-      <a class="chip" href="#/search/${encodeURIComponent(c.name)}">Поискать по названию в ленте</a>
+      <a class="chip" href="#/search/${encodeURIComponent(c.name)}">Найти по названию среди сделок</a>
       <a class="chip" href="#/assistant">Спросить ассистента</a>
     </div>
   </div>`;
@@ -4059,7 +4066,7 @@ let filterTheme = "Все";
 let filterMinRevenue = "Все";
 let financeScreening = null;
 const REVENUE_BUCKETS = [
-  ["Все", null], ["known", "Выручка цели известна"],
+  ["Все", null], ["known", "Известна"],
   ["1e9", "От 1 млрд ₽"], ["1e10", "От 10 млрд ₽"], ["5e10", "От 50 млрд ₽"],
 ];
 async function ensureFinanceScreening(){
@@ -5090,7 +5097,7 @@ const stalledDiscussionHint = d => {
   if(isNaN(parsed)) return null;
   const days = Math.round((new Date() - parsed) / 86400000);
   if(days < STALLED_DISCUSSION_DAYS) return null;
-  return "Статус «Обсуждается» держится больше двух лет без подтверждения — возможно, сделка не состоялась.";
+  return "Сделка обсуждается больше двух лет без подтверждения — возможно, она не состоялась.";
 };
 /* Раздел A (MILESTONES_BRIEF.md, 22 августа): не каждая веха достойна
    отдельной строки в общей ленте — только эти три вида, тот же закрытый
@@ -5321,7 +5328,7 @@ function sparseNoticeHtml(d){
     ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
     : missingSentence ? missingSentence.charAt(0).toUpperCase()+missingSentence.slice(1) : "";
   return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
-    <p>${known.length?`Публично подтверждены ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Карточка обновится, когда появятся новые источники.</p>
+    <p>${known.length?`Известны: ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Дополним, когда появятся новые данные.</p>
   </div>`;
 }
 const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
@@ -5419,9 +5426,12 @@ function relatedHtml(d){
   // случайных карточек той же отрасли, выглядевших как подбор) — теперь блок
   // просто не рендерится, если подбирать нечего.
   if(!rel.length) return "";
+  // Строчная только первая буква: «создание СП», «иск Генпрокуратуры», а не
+  // «создание сп» — toLowerCase() целиком портил аббревиатуры и имена.
+  const lc1 = t => /^[А-ЯЁA-Z][а-яёa-z]/.test(t) ? t[0].toLowerCase()+t.slice(1) : t;
   const why = o => o.party
-    ? `та же сторона: ${co(o.party)?co(o.party).name:"общая"}`
-    : o.themes.length ? o.themes[0].toLowerCase() : "та же отрасль";
+    ? `тоже с участием ${co(o.party)?co(o.party).name:"той же компании"}`
+    : o.themes.length ? lc1(o.themes[0]) : "та же отрасль";
   // Доля показывается рядом с суммой: юрист сравнивает не только цену, но и то,
   // какой пакет за неё отдали. Только короткие значения — длинные это не «100%»,
   // а пересказ структуры, ему место в карточке.
@@ -5711,8 +5721,7 @@ function lawPartialNote(d){
     !hasFact(d.law && d.law.appr) && "согласования",
   ].filter(Boolean);
   if(missing.length !== 2 || !legalAdvisors(d).length) return "";
-  return `<p class="lens-part">Из юридических деталей раскрыты только консультанты:
-    ${missing.join(", ")} сделки в источниках не называли.</p>`;
+  return `<p class="lens-part">Известны только консультанты; ${missing.join(" и ")} не раскрывались.</p>`;
 }
 function ecoEmptyHtml(d){
   return `<div class="lens-empty">
@@ -5829,7 +5838,7 @@ function renderDeal(id, qs, previewCard){
   <a class="back reveal" href="#/">← Все сделки</a>
   <div class="d-head reveal">
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-      <span class="label num">${fmtDate(d.date)}${d.date_basis==="publication"?` <span title="Точный день закрытия стороны не называли; карточка датирована днём, когда о закрытии сообщили">— дата сообщения о закрытии</span>`:""}</span>
+      <span class="label num">${fmtDate(d.date)}${d.date_basis==="publication"?` <span title="Стороны не назвали день закрытия; указана дата сообщения о нём">— дата сообщения о закрытии</span>`:""}</span>
       ${d.status?`<span class="status ${statusClass(d.status)}">${d.status}</span>`:""}
       ${stalledDiscussionHint(d)?`<span class="stalled-hint" title="${esc(stalledDiscussionHint(d))}">ⓘ</span>`:""}
       ${industryLinksHtml(d)}
@@ -5847,7 +5856,7 @@ function renderDeal(id, qs, previewCard){
   </div>
   ${timelineHtml(d)}
   ${sparseNoticeHtml(d)}
-  <div class="lens reveal" role="tablist" aria-label="Линза просмотра">
+  <div class="lens reveal" role="tablist" aria-label="Разделы карточки">
     <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
     ${showEcoTab?`<button data-l="eco" class="${lens==="eco"?"on":""}">Экономист</button>`:""}
     ${lawHasContent(d)?`<button data-l="law" class="${lens==="law"?"on":""}">Юрист</button>`:""}
@@ -5855,7 +5864,7 @@ function renderDeal(id, qs, previewCard){
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
   ${relatedHtml(d)}
-  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Карточку сверяли с источниками: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
+  <div class="src reveal"><span class="label">Источники</span><br>${labelSources(d.src).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("")}${lastVerifiedDate(d)?`<div class="acct-note" style="margin-top:6px">Проверено по источникам: ${fmtDate(lastVerifiedDate(d))}</div>`:""}</div>
   <div class="deal-tools reveal">
     <div class="tool-group">
       <button class="chip primary" id="watchdeal">Подписаться на обновления</button>
@@ -6160,7 +6169,12 @@ function renderDeal(id, qs, previewCard){
            приписка справа от имени у длинных названий («Skadden, Arps, Slate,
            Meagher & Flom LLP») уезжала на новую строку и ни с чем не
            выравнивалась (владелец, 3 октября 2026). */
-        return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)}</div><div class="t-side">${it.kind}${detail?` · ${esc(detail)}`:""}</div></div>`;
+        // «юридический · Юридический консультант X» — вид уже назван в
+        // уточнении, второй раз его не пишем; «цели» — наше слово.
+        const det = humanRole(detail);
+        const own = /^(юридическ|финансов)[а-яё]*\s+консультант/i.test(det);
+        const side = own ? esc(det.charAt(0).toUpperCase()+det.slice(1)) : `${it.kind}${det?` · ${esc(det)}`:""}`;
+        return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)}</div><div class="t-side">${side}</div></div>`;
       };
       const cols = ["buyer","seller","target","bank","other","none"].filter(k=>groups[k].length)
         .map(k=>`<div class="team-col"><span class="team-kind">${title[k]}</span>${groups[k].map(item).join("")}</div>`).join("");
@@ -6215,7 +6229,7 @@ function renderDeal(id, qs, previewCard){
       ${specBlock([specRow("Согласования", d.law.appr), para("Условия сделки", d.law.terms)])}
       ${legalAdvisors(d).map(it=>`
         <div class="adv-card">
-          <span class="label">${esc(it.role)}</span>
+          <span class="label">${esc(humanRole(it.role))}</span>
           <div class="adv-name">${advFirmLink(it.name)}</div>
           ${advNoteHtml(it.raw?it.raw[2]:it.note)}
         </div>`).join("")}`
@@ -6223,7 +6237,7 @@ function renderDeal(id, qs, previewCard){
     else f.innerHTML = `
       ${hero(isListing(d)?"Начальная цена лота":"Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
       ${sumState(d.sum)==="undisclosed"
-        ? `<p class="fact-note">Стороны не назвали сумму публично. Оценки, если они есть, помечены как оценки.</p>`
+        ? `<p class="fact-note">Стороны не раскрыли сумму. Оценки помечены «по оценке».</p>`
         : sumState(d.sum)==="unknown"
           ? `<p class="fact-note">В публичных источниках отсутствует информация о цене сделки.</p>`
           : ""}
@@ -6383,7 +6397,7 @@ function companyRows(){
 function coFact(id,c){
   const yearAgo = new Date(Date.now() - 365*24*3600*1000).toISOString().slice(0,10);
   const recent = companyStructured(id).filter(d=>!isListing(d)&&String(d.date||"")>=yearAgo).length;
-  return ["M&A активность", recent + " " + plural(recent,"сделка","сделки","сделок") + " за год"];
+  return ["Сделки M&A", recent + " " + plural(recent,"сделка","сделки","сделок") + " за год"];
 }
 /* Заглушка «Описание компании пока не добавлено» стояла у 1754 профилей из
    1872 — владелец справедливо назвал это ужасным: на экране извинение вместо
@@ -6605,10 +6619,10 @@ function companyDealsCompactHtml(id, structured, mentions){
   const confirmed=rows.confirmed.length, mentioned=rows.mentioned.length;
   if(!confirmed&&!mentioned) return "";
   return `<section class="company-deals-compact reveal">
-    <div class="company-deals-head"><div><span class="label">Сделки</span><h2>Другие сделки с участием ${esc(c?c.name:"компании")}</h2></div><button class="chip" id="openCompanyDeals" aria-expanded="false" aria-controls="companyDealsAll" data-label-closed="${confirmed?`Все сделки (${confirmed})`:`Упоминания (${mentioned})`}">${confirmed?`Все сделки (${confirmed})`:`Упоминания (${mentioned})`}</button></div>
+    <div class="company-deals-head"><div><span class="label">Сделки</span><h2>Другие сделки${c?`: ${esc(c.name)}`:""}</h2></div><button class="chip" id="openCompanyDeals" aria-expanded="false" aria-controls="companyDealsAll" data-label-closed="${confirmed?`Все сделки (${confirmed})`:`Упоминается в сделках (${mentioned})`}">${confirmed?`Все сделки (${confirmed})`:`Упоминается в сделках (${mentioned})`}</button></div>
     ${preview.length?`<div class="company-deals-preview">${preview.map(x=>`<a class="company-deal-preview" href="${x.href}">
       <span class="date">${fmtDate(x.date)}</span><span><span class="title">${esc(x.title)}</span><span class="meta">${[x.role,x.type].filter(Boolean).join(" · ")}</span></span><span class="sum">${sumHtml(x.sum)}</span>
-    </a>`).join("")}</div>`:`<div class="company-deals-empty">В карточках сделок роль компании пока не указана. Найдено ${mentioned} ${plural(mentioned,"упоминание","упоминания","упоминаний")} в источниках.</div>`}
+    </a>`).join("")}</div>`:`<div class="company-deals-empty">Компания упоминается в ${mentioned} ${plural(mentioned,"сделке","сделках","сделках")}, но её роль пока не указана.</div>`}
     <div id="companyDealsAll" data-open="0"></div>
   </section>`;
 }
@@ -7070,8 +7084,8 @@ const countsAsPrice = d => factAdmitted(d, "purchase_sums");
 // проверена, а не выведена.
 const countsAsTopPurchase = d => factAdmitted(d, "top_purchases");
 const isSoftPriceDeal = d => !countsAsPrice(d);
-const FACT_BASIS_LABELS = {unknown:"нет в карточке", rule:"по тексту карточки", stale:"карточка изменилась после проверки",
-  read:"прочитано в источнике", verified:"дважды проверено по источникам", disputed:"при проверке источники разошлись"};
+const FACT_BASIS_LABELS = {unknown:"нет данных", rule:"не сверено с источником", stale:"сделка изменилась после сверки",
+  read:"найдено в источнике", verified:"сверено с источниками", disputed:"источники расходятся"};
 const factVerified = f => f && f.basis === "verified";
 // Строки «подтверждено по источнику» для карточки сделки: цитата и издание,
 // по которым факт проверен. Показываются только для verified — то, что
@@ -7079,7 +7093,14 @@ const factVerified = f => f && f.basis === "verified";
 function factsVerifiedHtml(d){
   const rows = [];
   const p = priceFact(d), st = stakeFact(d), dt = dateFact(d);
-  const src = f => f.source ? ` <a href="${esc(f.source)}" target="_blank" rel="noopener">${esc(editionLabelJs(f.source))}</a>` : "";
+  // Издание — по имени из источников самой сделки («Интерфакс»), а не доменом
+  // («interfax.ru»); цитата — без шапки страницы, которую иногда захватывает
+  // выгрузка: «INTERFAX.RU - », время, «Поделиться», рубрики и автор.
+  const srcName = url => { try{ const h=new URL(url).hostname.replace(/^www\./,"");
+    const hit=(d.src||[]).find(x=>{ try{ return new URL(x[1]).hostname.replace(/^www\./,"")===h; }catch(e){ return false; } });
+    return hit ? hit[0] : editionLabelJs(url); }catch(e){ return "источник"; } };
+  const src = f => (f.source ? ` — <a href="${esc(f.source)}" target="_blank" rel="noopener">${esc(srcName(f.source))}</a>` : "")
+    + (f.quote ? `: «${esc(cleanQuote(f.quote))}»` : "");
   if(factVerified(p) && p.meaning){
     // Читатель видит не только число, но и КТО его назвал: цена, которую
     // подал консультант стороны в таблицу издания или назвали анонимные
@@ -7088,23 +7109,30 @@ function factsVerifiedHtml(d){
     const terms = PRICE_TERMS_NOTE[p.terms] ? `, ${PRICE_TERMS_NOTE[p.terms]}` : "";
     const what = p.meaning === "disclosed"
       ? `цена${p.scope==="ev"?" (с учётом долга)":p.scope==="package"?" за пакет":""}${terms}${who?`, ${who}`:""}`
-      : `${PRICE_MEANING_LABELS[p.meaning] || "сумма"}${who && p.meaning!=="undisclosed"?` (${who})`:""}`;
-    rows.push(what+src(p)+(p.quote?` — «${esc(p.quote)}»`:""));
+      : `${PRICE_MEANING_LABELS[p.meaning] || "сумма"}${who && !["undisclosed","not_a_price"].includes(p.meaning)?` (${p.attribution==="parties"?"со слов стороны":who})`:""}`;
+    rows.push(what+src(p));
   }
-  if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st)+(st.quote?` — «${esc(st.quote)}»`:""));
-  if(factVerified(dt) && dt.value) rows.push(`дата (${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"})`+src(dt)+(dt.quote?` — «${esc(dt.quote)}»`:""));
+  if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st));
+  if(factVerified(dt) && dt.value) rows.push(`${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"}: ${fmtDate(dt.value)}`+src(dt));
   if(!rows.length) return "";
   return `<div class="fact-verified"><span class="label">Подтверждено цитатой из источника</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`
-    + `<p class="fact-note">Так помечены числа, которые двое читателей независимо нашли в источнике дословно. У остальных сделок такой пометки нет — это значит, что до них ещё не дошли, а не что с ними что-то не так.</p>`;
+    + `<p class="fact-note">Эти числа дословно сверены с источником. Если у сделки такой пометки нет, её ещё не сверяли — ошибки это не означает.</p>`;
 }
-const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подписание", announcement:"объявление", publication:"дата сообщения о закрытии", registry:"запись в ЕГРЮЛ"};
-const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",
-  adviser:"число подал консультант стороны, сами стороны его не называли", media_sources:"по данным источников издания, стороны не подтверждали",
-  analyst:"оценка аналитика", disputed:"при проверке не сошлось, кто назвал число"};
+const DATE_BASIS_LABELS_JS = {closing:"дата закрытия", signing:"дата подписания", announcement:"дата объявления", publication:"дата сообщения о закрытии", registry:"дата записи в ЕГРЮЛ"};
+const cleanQuote = q => {
+  let t = String(q||"").replace(/^[A-ZА-ЯЁ0-9.-]+\.(?:RU|COM|РФ)\s*[-–—]\s*/i, "");
+  const share = t.search(/Поделиться:?\s/);
+  if(share >= 0 && share < 90) t = t.slice(share).replace(/^Поделиться:?\s*/, "");
+  t = t.replace(/^(?:[А-ЯЁA-Z][а-яёa-z]+\s+){0,4}Автор:\s*[А-ЯЁ][а-яё]+\s+[А-ЯЁ][а-яё]+\s+/, "");
+  return t.trim();
+};
+const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документам сделки", registry:"по итогам торгов",
+  adviser:"назвал консультант стороны", media_sources:"стороны не подтверждали",
+  analyst:"оценка аналитика", disputed:"неясно, кто назвал число"};
 const PRICE_TERMS_NOTE = {includes_contingent:"включая условную или отложенную часть, оценённую на дату покупки", paid:"фактически выплачено",
-  disputed:"состав суммы при проверке не подтвердился"};
-const PRICE_MEANING_LABELS = {reported:"сумма по данным источников, сторонами не раскрыта", estimate:"оценка, не цена сделки", range:"диапазон",
-  lower_bound:"нижняя граница суммы", auction_start:"стартовая цена торгов", foreign_currency:"сумма в валюте", not_a_price:"число в источнике — не цена сделки",
+  disputed:"неясно, что входит в сумму"};
+const PRICE_MEANING_LABELS = {reported:"сумма по неофициальным данным", estimate:"оценка, не цена сделки", range:"диапазон",
+  lower_bound:"нижняя граница суммы", auction_start:"стартовая цена торгов", foreign_currency:"сумма в валюте", not_a_price:"это не цена сделки",
   valuation:"оценка компании при размещении", raise:"объём привлечения", undisclosed:"источники цену не называют"};
 // Год сделки для мультипликатора — как deal_multiples.multiple_year(): подтверждённая
 // двумя чтениями дата закрытия (или записи в реестре) сильнее даты карточки
@@ -7258,7 +7286,7 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена дважды проверены по источникам)</span></p>`:""}
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; цена и юрлицо сверены с источниками)</span></p>`:""}
         ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ${fmtMult(multOp.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
@@ -7402,13 +7430,11 @@ function sanctionsHtml(c){
   const when = dated.length
     ? ` ${person ? "Внесён" : "Внесена"} ${dated.join("; ")}.` : "";
   const lead = person
-    ? "Человек назван в официальных санкционных списках"
-    : "Компания названа в официальных санкционных списках";
-  const tail = person
-    ? "одной совпавшей фамилии для такой отметки мало"
-    : "одного похожего названия для такой отметки мало";
+    ? "Человек есть в официальных санкционных списках"
+    : "Компания есть в официальных санкционных списках";
+  const tail = person ? "не только по фамилии" : "не только по названию";
   return `<div class="sanc-row">${chips}</div>
-    <div class="sanc-note">${lead} — ссылка ведёт на сам список.${when} Запись сверена с профилем вручную: ${tail}.</div>`;
+    <div class="sanc-note">${lead} (ссылки ведут на сами списки).${when} Совпадение проверено вручную, ${tail}.</div>`;
 }
 function renderCompany(id){
   const c = co(id);
@@ -7443,7 +7469,7 @@ function renderCompany(id){
           ссылка с карточки сделки сюда ведёт и обязана открываться. Сказать
           об этом прямо честнее, чем молча показывать объект страницей
           компании: читатель иначе ждёт здесь выручку и владельцев. */""}
-    ${c.asset?`<span class="tag steel" style="margin-left:6px" title="Это предмет сделки, а не компания: в каталоге «Компании» его нет">Объект сделки</span>`:""}
+    ${c.asset?`<span class="tag steel" style="margin-left:6px" title="Актив, а не отдельная компания">Объект сделки</span>`:""}
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
     ${sanctionsHtml(c)}
@@ -7470,7 +7496,7 @@ function renderCompany(id){
       if(c.ownership&&c.ownership.length) rows.push(`<div>${links?`<b>Собственники:</b>`:""}<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
         ${c.ownership.map(o=>`<div style="font-size:13px;color:var(--muted)">
           ${o.id&&co(o.id)?`<a href="#/companies/${o.id}">${esc(o.name)}</a>`:esc(o.name)}${o.share?` — ${esc(o.share)}`:""}
-          <span style="font-size:12px">(на ${esc(fmtMonthYear(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
+          <span style="font-size:12px">(${esc(asOfText(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
         </div>`).join("")}
       </div></div>`);
       if(links && portfolio.length) rows.push(`<div><b>Портфель (${portfolio.length}):</b><div id="portfolio-members" style="width:100%;margin-top:4px"></div></div>`);
@@ -7478,7 +7504,7 @@ function renderCompany(id){
       const notes = [];
       if(got||over.length) notes.push("контроль показан по закрытым сделкам в базе — более поздние изменения могут быть ещё не учтены");
       if((links && (groupMembers.length||portfolio.length))||(c.ownership&&c.ownership.length)){
-        let n = "доли и состав показаны на дату источника, не текущее состояние";
+        let n = "собственники и доли — на дату источника, сейчас могут быть другими";
         if(links && groupMembers.length) n += "; консолидированная отчётность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно";
         if(links && portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
         notes.push(n);
@@ -7499,7 +7525,7 @@ function renderCompany(id){
   <div class="deal-tools company-tools reveal"><button class="chip primary" id="prepMeeting">Подготовка к встрече</button><button class="chip" id="prepInterview">Подготовка к собеседованию</button><button class="chip" id="followCompany">${isFollowed(id)?"Не следить за компанией":"Следить за сделками компании"}</button><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   ${interviewPanelHtml()}
   <div class="company-profile-meta reveal">
-    <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с подтверждённой ролью</span>
+    <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
   ${companyAdvisorsHtml(id, structured)}
@@ -7618,7 +7644,7 @@ const advSortKey = (a,b) => advInd!=="Все" ? (b.n-a.n)||firmAlpha(a.f.n,b.f.n
 const advIndSelectHtml = () => `<select id="advind" aria-label="Отрасль"><option ${advInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===advInd?"selected":""}>${i}</option>`).join("")}</select>`;
 const advCountHtml = r => r.n
   ? `<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")}${advInd==="Все"?"":` в отрасли «${advInd}»`} →</a>`
-  : `<span class="count-btn empty">${advInd==="Все"?"В базе пока нет подтверждённых сделок":`В отрасли «${advInd}» сделок в базе нет`}</span>`;
+  : `<span class="count-btn empty">${advInd==="Все"?"В базе пока нет сделок фирмы":`В отрасли «${advInd}» сделок в базе нет`}</span>`;
 function renderAdvisors(){
   let body = "";
   if(advType==="legal"){
@@ -7666,7 +7692,7 @@ function renderAdvisors(){
         <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
       </g>
     </svg>
-    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты по публичным данным. Фирмы раскрывают не все проекты, поэтому ноль сделок в базе не значит, что их нет.</p></div>
+    <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
@@ -7705,13 +7731,13 @@ function firmEmptyHtml(f, isLegal){
   const known = [];
   if(!isLegal && f.desc) known.push(["Профиль", f.desc]);
   return `<div class="lens-empty reveal">
-    <div class="le-head">Публично подтверждённых сделок этой фирмы в базе пока нет</div>
+    <div class="le-head">Публично известных сделок фирмы в базе пока нет</div>
     <p>Фирма ${isLegal ? "ведёт практику M&amp;A" : "работает инвестиционным консультантом"}, но публично о её сделках не сообщалось. Фирмы раскрывают не все проекты.</p>
     ${known.length?`<div class="le-known"><span class="label">Что известно о фирме</span>
       ${known.map(([k,v])=>`<div class="le-row"><span class="le-k">${k}</span><span class="le-v">${v}</span></div>`).join("")}
     </div>`:""}
     <div class="fe-actions">
-      <a class="chip" href="#/search/${encodeURIComponent(f.n)}">Поискать по названию в ленте</a>
+      <a class="chip" href="#/search/${encodeURIComponent(f.n)}">Найти по названию среди сделок</a>
       ${f.site?`<a class="chip" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a>`:""}
       <a class="chip" href="#/assistant">Спросить ассистента</a>
     </div>
@@ -7781,8 +7807,7 @@ function firmSummaryHtml(id, full, mini, bulk){
       <span class="label">Чей консультант</span>
       ${bar(topRoles, topRoles[0][1])}
       ${note([roles[SIDE_LABEL.target]?SIDE_HINT.target:"", roles[SIDE_LABEL.bank]?SIDE_HINT.bank:"",
-              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} сторона не уточнена.`
-                     : `Сторона известна по каждой сделке фирмы.`].filter(Boolean).join(" "))}
+              noSide ? `Ещё у ${noSide} ${plural(noSide,"сделки","сделок","сделок")} сторона не уточнена.` : ""].filter(Boolean).join(" "))}
     </div>`:""}
     ${repeat.length?`
     <div class="an-card reveal">
@@ -7971,8 +7996,8 @@ function renderIndustry(ind){
   <div class="sec-head reveal"><span class="label">Отрасль</span><h1>${ind}</h1>
     <p>${all.length===1
       ? (disclosed.length ? "Одна сделка в отрасли, сумма известна." : "Одна сделка в отрасли, сумму стороны не назвали.")
-      : `${all.length} ${plural(all.length,"сделка","сделки","сделок")} в отрасли, ${disclosed.length ? `сумма известна у ${disclosed.length}` : "ни по одной сумма не раскрыта"}.`
-    } Только публично раскрытое, не вся статистика отрасли.</p>
+      : `${all.length} ${plural(all.length,"сделка","сделки","сделок")}, ${disclosed.length ? `сумма раскрыта у ${disclosed.length}` : "ни по одной сумма не раскрыта"}.`
+    } Только публичные сделки, не весь рынок отрасли.</p>
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
@@ -7994,8 +8019,8 @@ function renderIndustry(ind){
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${rub.length
         ? rub.slice(0,8).map((o,i)=>`<a class="an-deal" href="#/deal/${o.d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${o.d.title}</span></div><span class="an-deal-s num">${sumHtml(o.d.sum)}</span></a>`).join("")
-          + note(`${rub.length===1?"Единственная сделка отрасли":`Из ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")} отрасли`}, где стороны назвали цену в рублях — вместе ${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽. Без оценок, валютных сумм, незакрытых торгов, сорвавшихся сделок и IPO.`)
-        : emptyNote("Ни по одной сделке отрасли стороны не назвали цену в рублях — сравнивать нечего.")}
+          + note(`${rub.length===1?`${fmtB(rub[0].b)} ₽ — единственная сделка отрасли, где стороны назвали цену в рублях.`:`${fmtB(rub.reduce((s,o)=>s+o.b,0))} ₽ — сумма ${rub.length} ${plural(rub.length,"сделки","сделок","сделок")}, где стороны назвали цену в рублях.`} Без оценок, сумм в валюте, незавершённых торгов, сорвавшихся сделок и IPO.`)
+        : emptyNote("Ни в одной сделке отрасли стороны не назвали цену в рублях.")}
     </div>
     <div class="an-card reveal">
       <span class="label">Кто покупает в отрасли</span>
@@ -8015,7 +8040,7 @@ function renderIndustry(ind){
     </div>
     ${byType.length>1?`
     <div class="an-card reveal">
-      <span class="label">Что это за сделки</span>
+      <span class="label">Типы сделок</span>
       ${byType.map(([t,n])=>`<div class="an-row"><span class="an-key">${t}</span><div class="an-bar"><div style="width:${Math.round(n/byType[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       ${note(`Тип известен у ${cards.length} ${plural(cards.length,"сделки","сделок","сделок")} отрасли.${notMA?` Из них ${notMA} — не M&amp;A: раунды, IPO, торги.`:""}`)}
     </div>`:""}
@@ -8023,7 +8048,7 @@ function renderIndustry(ind){
     <div class="an-card reveal">
       <span class="label">Темы отрасли</span>
       ${topThemes.map(([t,n])=>`<div class="an-row"><a class="an-key" href="#/theme/${encodeURIComponent(t)}" style="color:inherit;text-decoration:none">${t}</a><div class="an-bar"><div style="width:${Math.round(n/topThemes[0][1]*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      ${note(`У сделки может быть несколько тем; тема не заменяет тип.`)}
+      ${note(`Одна сделка может относиться к нескольким темам.`)}
     </div>`:""}
   </div>
   ${miniAIHtml(`Спросите об отрасли «${ind}»…`)}`;
@@ -8504,7 +8529,7 @@ async function mountMarketMultiples(){
     // значило бы сказать читателю «остальные убыточны или без данных»
     // (четвёртый разбор рецензента: «Убик» ×902 по прибыли исчезал без слов).
     const notShown = (s && s.not_shown) || [];
-    const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"проверенная сделка не показана","проверенные сделки не показаны","проверенных сделок не показаны")}: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title.length>48?n.title.slice(0,47)+"…":n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ${fmtMult(n.value)})`:""}`).join("; ")}.</p>` : "";
+    const notShownHtml = notShown.length ? `<p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Ещё ${notShown.length} ${plural(notShown.length,"сделка не вошла","сделки не вошли","сделок не вошли")} в таблицу: ${notShown.map(n=>`<a href="#/deal/${n.id}">${esc(n.title)}</a> — ${esc(n.label)}${n.value!=null?` (получается ${fmtMult(n.value)})`:""}`).join("; ")}.</p>` : "";
     if(!s || (!s.clean_total && !s.computed_total)){
       return `<p style="color:var(--muted);font-size:13.5px;margin:0">Пока ни одна сделка не прошла проверки для этого мультипликатора.</p>${notShownHtml}`;
     }
@@ -8539,11 +8564,11 @@ async function mountMarketMultiples(){
     // предварительный год. Остальное — на карточке сделки.
     const notes = d => [
       d.price_basis==="scaled" ? `цена пакета ${fmtPct(d.stake)} (${fnsMoney(d.sum_rub)}) пересчитана на 100%` : "",
-      isComputed(d) && d.scope_assumed ? "за что заплачена цена, в карточке не сказано — считаем, что за пакет" : "",
+      isComputed(d) && d.scope_assumed && d.reason_not_verified!=="price_scope_unknown" ? "за что именно заплачено, не уточняется — считаем, что за пакет" : "",
       isComputed(d) && d.reason_label ? d.reason_label : "",
       d.price_scope==="ev" ? "цена с учётом долга" : "",
       PRICE_TERMS_NOTE[d.price_terms] || "",
-      d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} предварительный` : "",
+      d.year_basis&&d.year_basis.indexOf("предварительн")>=0 ? `год сделки ${d.year} — дата закрытия не подтверждена` : "",
       d.price_fx ? fxNote(d.price_fx) : "",
     ].filter(Boolean).join(" · ");
     /* Подсветка выбросов в самой таблице (G5, приём из comps-таблиц
@@ -8568,7 +8593,7 @@ async function mountMarketMultiples(){
     // сколько строк уйдёт, — иначе чип выглядит как настройка без эффекта.
     const scaleFilterHtml = (scaledTotal || computedTotal) ? `<div class="mult-scale-filter">
         ${computedTotal?`<button class="chip ${onlyVerified?"":"on"}" data-multconf="all">Все сделки (${s.deals.length})</button>
-        <button class="chip ${onlyVerified?"on":""}" data-multconf="verified">Только проверенные (${s.deals.length-computedTotal})</button>`:""}
+        <button class="chip ${onlyVerified?"on":""}" data-multconf="verified">Только сверенные (${s.deals.length-computedTotal})</button>`:""}
         ${scaledTotal?`<button class="chip ${onlyFull?"on":""}" data-multscale="${onlyFull?"all":"full"}">${onlyFull?"Показать и пересчитанные":"Только цена за 100%"} (${onlyFull?pool.length:pool.length-scaledTotal})</button>`:""}
       </div>` : "";
     const dealsHtml = `${scaleFilterHtml}${shown.length?`<table class="mult-table"><thead><tr>
@@ -8579,7 +8604,7 @@ async function mountMarketMultiples(){
         <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
           targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
         <td class="num" data-l="Год сделки">${d.year}</td>
-        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без повторной проверки по источникам; не проверено, покрывает ли отчётность всю сделку">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо дважды проверены по источникам">проверено</span>`}</td>
+        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Цена за пакет, пересчитанная на 100% пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цену и долю ещё не сверяли с источниками; отчётность может не совпадать с купленным бизнесом">не сверено</span>`:` <span class="mult-flag mult-flag-verified" title="Цена, доля и юрлицо сверены с источниками">сверено</span>`}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
         <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span>${medianNote(d)}</td>
       </tr>`).join("")}</tbody></table>${shown.length > MULT_FIRST_ROWS ? `<button class="chip" data-multall="1" style="margin-top:10px">${showAllMult ? "Свернуть до " + MULT_FIRST_ROWS : "Показать все " + shown.length + " " + plural(shown.length,"сделку","сделки","сделок")}</button>` : ""}`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
@@ -8589,12 +8614,12 @@ async function mountMarketMultiples(){
     // чтение уже не пропустило; поимённый разбор — в раскрывашке ниже, он
     // нужен проверяющему, а не читателю витрины.
     const awaitingHtml = (awaiting || rejected.length) ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">${
-      awaiting ? `Ещё ${awaiting} ${plural(awaiting,"сделка ждёт","сделки ждут","сделок ждут")} проверки по источникам. ` : ""}${
-      rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} проверка по источникам не пропустила — почему, видно ниже.` : ""}</p>` : "";
-    const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не прошли проверку: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
+      awaiting ? `Ещё ${awaiting} ${plural(awaiting,"сделка","сделки","сделок")} на проверке. ` : ""}${
+      rejected.length ? `${rejected.length} ${plural(rejected.length,"сделка не вошла","сделки не вошли","сделок не вошли")} в расчёт — причины ниже.` : ""}</p>` : "";
+    const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не вошли в расчёт: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
       ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${shown.length} ${plural(shown.length,"сделка","сделки","сделок")}</b>: цена ÷ показатель купленной компании за последний полный год до сделки. ${
-        computedTotal && !onlyVerified ? `У ${s.deals.length-computedTotal} из них цену, долю и юрлицо мы проверили по источникам дважды, у ${computedTotal} — взяли из текста карточки (помечены).` : `Цену, долю и юрлицо каждой мы проверили по источникам дважды.`}${
+        computedTotal && !onlyVerified ? `У ${s.deals.length-computedTotal} из них цена, доля и юрлицо сверены с источниками, у ${computedTotal} — ещё нет (помечены «не сверено»).` : `У каждой цена, доля и юрлицо сверены с источниками.`}${
         onlyFull?" Показаны только те, где цену заплатили сразу за всю компанию.":""}${
         shown.length>1?` Наблюдаемые значения — от ${fmtMult(Math.min(...shown.map(d=>d.multiple)))} до ${fmtMult(Math.max(...shown.map(d=>d.multiple)))}.`:""} Это сделки, которые можно взять как ориентиры, а не медиана рынка: насколько они сопоставимы между собой, решает оценщик.</p>`}
       ${v.explain?`<p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">${v.explain}</p>`:""}
@@ -8631,14 +8656,14 @@ const LEGAL_DOCS = {
       ["Статус документа", `Черновик, готовится к утверждению. Документ определяет условия использования платформы «Компас» (далее — «Сервис»). Начиная пользоваться Сервисом, пользователь подтверждает согласие с этими условиями.`],
       ["Оператор Сервиса", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес]</span>.`],
       ["Что такое Сервис", `«Компас» — информационная платформа о сделках слияний и поглощений (M&A) российского рынка: карточки сделок, профили компаний и консультантов, отраслевая аналитика и ИИ-ассистент по базе данных. База продолжает наполняться.`],
-      ["Характер публикуемых данных", `Информация агрегируется из публичных источников — сообщений сторон сделок, публикаций консультантов, деловых СМИ и официальных реестров — и сопровождается ссылками на них. База содержит только публично раскрытую информацию; данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
+      ["Характер публикуемых данных", `Информация собирается из открытых источников — сообщений сторон сделок, публикаций консультантов, деловых СМИ и официальных реестров — и сопровождается ссылками на них. База содержит только публично раскрытую информацию; данные могут быть неполными, устаревшими или содержать неточности — Сервис не восполняет отсутствующие факты предположениями. Материалы Сервиса не являются индивидуальной инвестиционной рекомендацией, юридической консультацией, офертой или заменой должной проверки (due diligence) и не должны использоваться как единственное основание для принятия решений.`],
       ["Материалы третьих лиц и цитирование", `Сведения о фактах сделок излагаются своими словами. Фрагменты публикаций приводятся в кавычках с указанием источника в объёме, оправданном информационной целью (статья 1274 Гражданского кодекса РФ); права на публикации принадлежат их правообладателям. Правообладатель, считающий, что его материал использован с нарушением, может направить обращение через форму «Написать нам» — фрагмент будет изменён или удалён.`],
       ["Права на базу данных", `База данных Сервиса (карточки сделок, профили компаний и консультантов, их связи и производные показатели) создана с существенными затратами, и Оператор является её изготовителем (статьи 1333–1334 Гражданского кодекса РФ). Запрещается извлечение и повторное использование существенной части материалов базы, а также неоднократное извлечение её частей, в том числе автоматизированное извлечение информации сайта любыми программами и сервисами, без письменного разрешения Оператора. Допускается использование материалов в личных и информационных целях со ссылкой на Сервис.`],
       ["ИИ-ассистент", `Ответы ассистента формируются автоматически, в том числе с привлечением сторонних моделей и поиска по сети Интернет (см. «Обработка персональных данных»), и могут содержать ошибки. Ассистент не заменяет консультацию профильного специалиста.`],
       ["Учётная запись", `Регистрация выполняется по адресу электронной почты и паролю. Пользователь несёт ответственность за сохранность пароля и за действия, совершённые под его учётной записью, и обязуется не передавать доступ третьим лицам.`],
       ["Правила использования", `Не допускается автоматизированный сбор данных Сервиса (парсинг, скрейпинг, обращение к файлам данных и API программами) сверх обычного личного использования через интерфейс, перепродажа и передача данных третьим лицам в виде базы или выгрузок, а также использование Сервиса в противоправных целях или в целях, нарушающих права третьих лиц.`],
       ["Обращения и правки", `Если пользователь — сторона сделки, консультант или иное заинтересованное лицо и обнаружил неточность, форма «Написать нам» в подвале сайта передаёт обращение редакции; правки вносятся с сохранением ссылки на источник.`],
-      ["Платные тарифы", `На момент составления документа порядок оплаты платных тарифов отдельно не описан и будет опубликован при вводе оплаты в эксплуатацию.`],
+      ["Платные тарифы", `На момент составления документа порядок оплаты платных тарифов отдельно не описан и будет опубликован, когда появится оплата.`],
       ["Ограничение ответственности", `Сервис предоставляется «как есть». Оператор не гарантирует бесперебойную работу, полноту и абсолютную точность данных и не несёт ответственности за решения, принятые на основании материалов Сервиса.`],
       ["Изменение условий", `Оператор вправе изменять текст соглашения; действующая редакция всегда доступна по этому адресу. Существенные изменения анонсируются на сайте.`],
       ["Применимое право", `Отношения сторон регулируются законодательством Российской Федерации.`],
@@ -8651,7 +8676,7 @@ const LEGAL_DOCS = {
       ["Статус документа", `Черновик, готовится к утверждению. Документ описывает, какие персональные данные собирает платформа «Компас» (далее — «Сервис») и как их использует, в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».`],
       ["Оператор персональных данных", `<span class="ph">[заполнит владелец: наименование организации или ИП, ОГРН/ОГРНИП, ИНН, юридический адрес, ответственный за обработку персональных данных]</span>.`],
       ["Какие данные обрабатываются", `Адрес электронной почты и пароль (хранится не в открытом виде, а в виде необратимого хеша с индивидуальной солью — см. ниже); настройки уведомлений; список сделок и подборок, на которые оформлена подписка; сохранённые диалоги с ИИ-ассистентом; текст обращений через форму «Написать нам» и указанный в них контакт (по желанию пользователя); идентификатор чата Telegram — только если пользователь сам подключил бота; стандартные технические данные веб-сервера (IP-адрес, user-agent) в логах.`],
-      ["Цели обработки", `Регистрация и вход в личный кабинет; работа функций личного кабинета (подписки, отслеживаемые сделки, история диалогов с ассистентом); доставка уведомлений — внутри платформы всегда, по электронной почте и в Telegram только если пользователь включил соответствующий канал и он технически подключён; обработка обращений редакцией; техническая работа и безопасность Сервиса.`],
+      ["Цели обработки", `Регистрация и вход в личный кабинет; работа функций личного кабинета (подписки, отслеживаемые сделки, история диалогов с ассистентом); доставка уведомлений — внутри платформы всегда, по электронной почте и в Telegram — только если пользователь их включил; обработка обращений редакцией; техническая работа и безопасность Сервиса.`],
       ["Основание обработки", `Согласие пользователя, выражаемое действием — регистрацией учётной записи или отправкой формы обращения.`],
       ["Передача третьим лицам", `Текст вопроса, заданного ИИ-ассистенту, может направляться внешнему поставщику модели и поиска (Yandex Cloud) для формирования ответа — без прочих персональных данных учётной записи. Данные не продаются и не передаются третьим лицам в рекламных целях. Иным лицам данные передаются только по законному основанию (например, по запросу уполномоченного государственного органа).`],
       ["Хранение", `Данные учётной записи хранятся в базе данных Сервиса до тех пор, пока пользователь не запросит их удаление через форму «Написать нам», либо в течение срока, установленного применимым законодательством.`],
@@ -8669,7 +8694,7 @@ function renderLegal(kind){
   const doc = LEGAL_DOCS[kind] || LEGAL_DOCS.terms;
   app.innerHTML = `<div class="sec-head reveal"><span class="label">Правовая информация</span><h1>${doc.title}</h1></div>
   <div class="legal-page reveal">
-    <div class="legal-draft">Черновик документа, подготовлен для утверждения владельцем платформы — не является финальной юридически проверенной редакцией.</div>
+    <div class="legal-draft">Черновик: документ ещё не утверждён.</div>
     ${doc.sections.map(([h,body])=>`<h2>${esc(h)}</h2><p>${body}</p>`).join("")}
   </div>`;
   rerun();

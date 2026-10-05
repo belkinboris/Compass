@@ -1564,7 +1564,13 @@ def suggestions(idx: Index | None = None) -> list[str]:
         name = _company_name(idx.companies, top_company[0])
         if name:
             # Имя не склоняем — «у компании «Яндекс»» верно при любом названии.
-            out.append(f"Какие сделки были у компании «{name}»?")
+            # Форму собственности и внешние кавычки снимаем: «у компании
+            # «АО «ДОМ.РФ»»» читалось как канцелярит с двойными кавычками.
+            short = re.sub(r"^(?:ПАО|АО|ООО|ЗАО|ОАО|НАО|ГК|МКПАО)\s+", "", name).strip()
+            if short.startswith("«") and short.endswith("»") and short.count("«") == 1:
+                short = short[1:-1]
+            quoted = short if ("«" in short or "»" in short) else f"«{short}»"
+            out.append(f"Какие сделки были у компании {quoted}?")
     if any("Уход иностранного владельца" in d.themes for d in idx.docs):
         out.append("Кто из иностранных владельцев уходил из России?")
     return out[:4]
