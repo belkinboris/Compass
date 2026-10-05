@@ -4307,6 +4307,19 @@ def test_page_source_does_not_name_the_team():
     assert not found, found
 
 
+def test_footer_sources_do_not_name_rbc_or_forbes(page, base_url):
+    """Владелец 5 октября 2026: «РБК и Forbes нужно из источников данных
+    удалить, внизу страницы». В подвале остаются Интерфакс, Коммерсантъ и
+    Ведомости; у каждой сделки источник по-прежнему в её карточке."""
+    page.goto(base_url + "/#/", wait_until="domcontentloaded")
+    page.wait_for_selector("footer .foot-h", state="attached", timeout=15000)
+    col = page.evaluate("""[...document.querySelectorAll('footer .foot-col')]
+        .find(c => c.querySelector('.foot-h').textContent.includes('Источники данных')).innerText""")
+    assert "РБК" not in col and "Forbes" not in col, col
+    assert "Интерфакс" in col and "Коммерсантъ" in col and "Ведомости" in col
+    assert page.locator('footer a[href*="rbc.ru"], footer a[href*="forbes.ru"]').count() == 0
+
+
 def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
     """Тот же случай на странице: и уже сохранённые ответы с «] (#/deal/…)»
     показываются ссылкой, а адрес в скобках без названия не виден."""
