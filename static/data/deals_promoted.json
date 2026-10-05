@@ -224813,6 +224813,405 @@
     }
    },
    "proofread": "2026-10-05"
+  },
+  {
+   "id": "gf485e935",
+   "date": "2026-10-05",
+   "title": "«Дом.РФ» продаёт на торгах здание бывшего отделения ВГТРК в Магадане",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261005/vgtrk-2122241235.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "В лот входят участок площадью 0,36 гектара и здание площадью 1,5 тысячи квадратных метров по адресу улица Коммуны, 8/12 в Магадане.",
+    "val": "Начальная цена лота — 56,1 миллиона рублей.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Дом.РФ» повторно выставил имущественный комплекс на аукцион. Ранее здесь размещалось магаданское отделение ВГТРК.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Аукцион состоится 30 октября.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "здание бывшего отделения ВГТРК в Магадане",
+   "seller_src": "text",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20261005/vgtrk-2122241235.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "здание бывшего отделения ВГТРК в Магадане",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20261005/vgtrk-2122241235.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-10-05",
+   "accepted": "2026-10-05",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "здание на торгах, не компания — профиль не нужен"
+    },
+    "notes": "Продавец уже связан с профилем АО «ДОМ.РФ» (gb2b066c3). Три механических кандидата на профиль цели — здание телеграфа, медцентр, структуры СУЭК — совпадение по отдельным словам, не по смыслу."
+   },
+   "post_preview": "<b>«Дом.РФ» продаёт на торгах здание бывшего отделения ВГТРК в Магадане</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Предмет:</b> здание бывшего отделения ВГТРК в Магадане — В лот входят участок площадью 0,36 гектара и здание площадью 1,5 тысячи квадратных метров по адресу улица Коммуны, 8/12 в Магадане.\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261005/vgtrk-2122241235.html\">РИА Недвижимость</a>\n\n#недвижимость #торги",
+   "added": "2026-10-05",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "9d003386ec9a"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "e7dae0f3dc17"
+    },
+    "date": {
+     "value": "2026-10-05",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "abbc7a6c527c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3c5c0ec94685"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-05"
+  },
+  {
+   "id": "gd937c845",
+   "date": "2026-09-28",
+   "title": "OTP Group рассматривает продажу российской «дочки» на фоне покупки Luminor",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Bloomberg",
+     "https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/finance/news/2026/09/28/1232433-vengerskii-otp-bank"
+    ],
+    [
+     "Известия",
+     "https://iz.ru/2174842/2026-09-28/bloomberg-stalo-izvestno-o-rassmotrenii-otp-bankom-vykhoda-s-rossiiskogo-rynka"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "Продажа бизнеса в России регулируется постановлением правительства №295: дисконт от рыночной стоимости — не менее 60%, добровольное отчисление в бюджет РФ — не менее 35% от рыночной стоимости. Расходы покупателя и выручка продавца зависят от размера дисконта.",
+    "target_fin": "По форме 806 Банка России на 1 апреля 2026 года активы АО «ОТП Банк» — 794,1 млрд ₽ (годом ранее 758,5 млрд ₽), собственные средства — 95,7 млрд ₽ (84,4 млрд ₽).",
+    "fin": "—",
+    "rationale": "OTP пересматривает стратегию в России с учётом интереса к странам Балтии — группа покупает балтийский банк Luminor — и ограниченного прогресса с выводом дополнительных дивидендов из России, сообщает Bloomberg (пересказ «Известий»). Решение ожидается до конца 2026 года.",
+    "context": "Доля банка на российском рынке — около 0,4% по активам, сообщают «Ведомости». С 2022 года банк не выдаёт новых корпоративных кредитов и отказался от внутригруппового финансирования; в России он занимается только розничным потребительским кредитованием («Известия»). По данным «Ведомостей», с 2022 года группа вывела из России около $880 млн дивидендов.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Покупатель российского бизнеса не определён. Продажа иностранцами бизнеса в России регулируется постановлением правительства №295 и решениями подкомиссии правительственной комиссии по контролю за осуществлением иностранных инвестиций.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "OTP Bank Nyrt.",
+   "asset": "ОТП Банк",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-28",
+     "title": "Выход из России рассматривается",
+     "note": "OTP Bank рассматривает выход из РФ на фоне покупки Luminor. Покупатель российского бизнеса не определён.",
+     "source": [
+      "Bloomberg",
+      "https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "OTP Bank Nyrt.",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7437"
+     }
+    ],
+    "target": [
+     {
+      "value": "ОТП Банк",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/dealsma/7437"
+     }
+    ]
+   },
+   "target": "gf306fa1b",
+   "discovery_src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7437"
+    ]
+   ],
+   "accepted": "2026-10-04",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "OTP Bank Nyrt. — иностранное юрлицо (Венгрия), профиль с ИНН не заводится."
+    },
+    "notes": "Покупатель не раскрыт — покупатель российского бизнеса не определён."
+   },
+   "themes": [
+    "Правкомиссия / указ президента"
+   ],
+   "reviewed": "2026-10-04",
+   "post_preview": "<b>OTP Group рассматривает продажу российской «дочки» на фоне покупки Luminor</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> OTP Bank Nyrt.\n<b>Предмет:</b> Российская «дочка» венгерской банковской группы OTP Group, работает в России 20 лет. Юрлицо — АО «ОТП Банк».\n<b>Финансы покупаемой компании на 1 апреля 2026 года:</b> Активы 794,1 млрд ₽ (+4,7% г/г) · Собственные средства 95,7 млрд ₽ (+13,3% г/г) · Прибыль за 8 месяцев 2026 года 30,8 млрд ₽ · по данным Банка России\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Банки\n\n<b>Источник:</b> <a href=\"https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia\">Bloomberg</a>\nЕщё 2 источника — в карточке сделки\n\n#финансы #банки #MA",
+   "added": "2026-10-05",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "b3b89114cd43"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-09-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "971f8e7150ac"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "293be39631ad"
+    },
+    "target": {
+     "company_id": "gf306fa1b",
+     "inn": null,
+     "confirmed": false,
+     "bank": true,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "4879788a945f"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_bank"
+    }
+   },
+   "proofread": "2026-10-05"
+  },
+  {
+   "id": "g53da1f4d",
+   "date": "2026-10-05",
+   "title": "«Корус Консалтинг» купил 33% ИИ-разработчика Nextera",
+   "ind": "Искусственный интеллект",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-10-05_korus_konsalting_kupil"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "В результате сделки «Корус Консалтинг» получил 33,3% Nextera. Основатель платформы, Павел Малько, владеет оставшимися 66,7% компании.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Nextera – одна из немногих платформ, которая позволяет строить автономные мультиагентные процессы, где человек действительно стоит над циклом ИТ-разработки и проверяет результаты, а всю работу делают ИИ-агенты. Платформа органично дополнит существующий портфель ИИ-продуктов “Корус Консалтинг” и позволит нам предлагать клиентам решения разного уровня — от ИИ-сервисов и ассистентов для отдельных задач до мультиагентных систем, которые помогают компаниям сформировать собственную корпоративную ИИ-среду",
+    "context": "Сумма сделки не разглашается.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Корус Консалтинг»",
+   "asset": "ИИ-разработчик Nextera",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-05",
+     "title": "Сделка завершена",
+     "note": "ГК «Корус Консалтинг» приобрела долю в компании Nextera — разработчике платформы для создания и управления командами ИИ-агентов.",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/line/2026-10-05_korus_konsalting_kupil"
+     ]
+    }
+   ],
+   "themes": [
+    "Искусственный интеллект"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Корус Консалтинг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-10-05_korus_konsalting_kupil"
+     }
+    ],
+    "target": [
+     {
+      "value": "ИИ-разработчик Nextera",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-10-05_korus_konsalting_kupil"
+     }
+    ]
+   },
+   "reviewed": "2026-10-05",
+   "accepted": "2026-10-05",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "«Корус Консалтинг» — группа компаний, не единое юрлицо, уникальный ИНН не найден",
+     "target": "Nextera — частный стартап, профиля и ИНН в открытых реестрах не нашлось"
+    },
+    "notes": "Единственный источник — CNews, прямая цитата компании. Саб-агент искал перепечатки и пресс-релиз — не нашёл; сумма сделки официально не разглашается."
+   },
+   "post_preview": "<b>«Корус Консалтинг» купил 33% ИИ-разработчика Nextera</b>\n\n<b>Покупатель:</b> «Корус Консалтинг»\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> ИИ-разработчик Nextera — Основатель платформы, Павел Малько, владеет оставшимися 66,7% компании.\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Искусственный интеллект\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-10-05_korus_konsalting_kupil\">CNews</a>\n\n#технологии #ИИ #MA",
+   "added": "2026-10-05",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "2a26cb76cb69"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-10-05",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "683c34a8cd76"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "42e4be1effba"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "proofread": "2026-10-05"
   }
  ],
  "companies": {
@@ -256493,7 +256892,8 @@
   "gee625a0f": 175,
   "gae005e6f": 176,
   "gd4728207": 177,
-  "g33051f70": 179
+  "g33051f70": 179,
+  "g01993028": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
