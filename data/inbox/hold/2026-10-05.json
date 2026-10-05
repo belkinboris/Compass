@@ -1297,41 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d83039307",
-   "title": "Schneider Electric приобретает американскую PTC Inc. за $22,6 млрд",
+   "draft_id": "d43110345",
+   "title": "В результате покупки дорогой машины россиянка осталась без автомобиля и денег",
    "date": "2026-10-05",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261005/ptc-873939272.html"
-    ]
-   ],
-   "sum": "$22,6 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Schneider Electric",
-   "asset": "американскую PTC Inc.",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Schneider Electric",
-    "asset": "американскую PTC Inc.",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d33660688",
-   "title": "🏦 Залог развития рынка инвестиционного золота: равная легкость покупки и продажи слитка",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/mgkl/blog/1358924.php"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/05/v-rezultate-pokupki-dorogoy-mashiny-rossiyanka-ostalas-bez-avtomobilya-i-deneg/"
     ]
    ],
    "sum": null,
@@ -1350,62 +1322,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63084071",
-   "title": "Депутатов Тюменской облдумы пристыдили за покупку новогодних подарков сиротам",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053133430"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35868254",
-   "title": "«Вдруг скажут: «Кривой пришел«». Как парень с ДЦП, научившийся ходить только в 6 лет, стал блогером и продает свой мерч за границу",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/world/2026/10/05/76674317/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "свой мерч за границу",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "свой мерч за границу",
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]

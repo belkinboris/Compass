@@ -31,6 +31,37 @@
     "needs_review": true
    },
    "queued": "2026-10-05"
+  },
+  {
+   "key": "https://frankmedia.ru/308420::g49657635",
+   "candidate_id": "g49657635",
+   "reason": "общие редкие слова: купит, рублей",
+   "draft": {
+    "draft_id": "d67510973",
+    "title": "Минфин купит валюты и золота на 279,4 млрд рублей в октябре",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/308420"
+     ]
+    ],
+    "sum": "279,4 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-05"
   }
  ]
 }
