@@ -472,6 +472,36 @@ def test_multiples_table_shows_all_rows_on_request_and_names_the_fx_rate(browser
             ctx.close()
 
 
+def test_multiples_price_flags_stay_inside_the_card_on_a_phone(browser, base_url):
+    """Владелец 5 октября 2026, скриншот с телефона: метки «пересчёт» и «по
+    тексту карточки» у цены уезжали за край карточки — ячейка цены не
+    разрешала перенос строки. Страница при этом не прокручивалась вбок,
+    поэтому проверка горизонтального переполнения этого не ловила."""
+    row = {"id": "citibank", "title": "Aggreko продала евразийский бизнес по аренде энергооборудования",
+           "year": 2025, "target_id": "citibank", "target_name": "Aggreko Eurasia", "sum_rub": 2.3e9,
+           "price_full_rub": 2.4e9, "price_basis": "scaled", "stake": 99, "revenue_rub": 3.1e9,
+           "revenue_year": 2024, "multiple": 0.76, "confidence": "computed", "scope_assumed": True}
+    for width in (360, 390):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        try:
+            ctx.route("**/api/analytics/multiples", lambda route: route.fulfill(
+                status=200, content_type="application/json", body=json.dumps({
+                    "candidates_total": 3, "clean_total": 0, "computed_total": 3, "median": None,
+                    "industries": [], "deals": [row, dict(row, id="yandex"), dict(row, id="ozon")],
+                    "methodology": "Тестовая методика."})))
+            pg = ctx.new_page()
+            pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+            pg.wait_for_selector("#multiplesCard .mult-flag-computed", state="attached", timeout=15000)
+            beyond = pg.evaluate("""(() => {
+                const card = document.getElementById('multiplesCard').getBoundingClientRect();
+                return [...document.querySelectorAll('#multiplesCard .mult-flag')]
+                  .map(e => Math.round(e.getBoundingClientRect().right - card.right)).filter(x => x > 0);
+            })()""")
+            assert not beyond, (width, beyond)
+        finally:
+            ctx.close()
+
+
 def test_analytics_page_shows_market_multiples_block(browser, base_url):
     """Этап 16, П1: блок «Мультипликаторы рынка» на Аналитике — проверяем оба
     честных состояния (пусто и заполнено) подменой сетевого ответа, а не

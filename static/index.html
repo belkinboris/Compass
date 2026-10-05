@@ -1035,7 +1035,10 @@ a.dp-asset-name:hover{color:var(--accent)}
   .mult-table tr{padding:10px 0;border-bottom:1px solid var(--line-soft)}
   .mult-table td{border:none;padding:2px 0}
   .mult-table td+td{padding-left:0}
-  .mult-table td.num{text-align:left}
+  /* Метки «пересчёт» и «по тексту карточки» переносятся на новую строку, а
+     не уезжают за край карточки (владелец, 5 октября 2026, 390 px). */
+  .mult-table td.num{text-align:left;white-space:normal}
+  .mult-table .mult-flag{margin:3px 6px 0 0}
   .mult-table td[data-l]:not(.mult-name):before{content:attr(data-l) ": ";color:var(--muted);font-size:12.5px}
   .mult-table td.mult-x-cell{font-size:15px}
 }
@@ -7067,8 +7070,8 @@ const countsAsPrice = d => factAdmitted(d, "purchase_sums");
 // проверена, а не выведена.
 const countsAsTopPurchase = d => factAdmitted(d, "top_purchases");
 const isSoftPriceDeal = d => !countsAsPrice(d);
-const FACT_BASIS_LABELS = {unknown:"нет в карточке", rule:"по тексту карточки", stale:"карточка изменилась после чтения",
-  read:"прочитано в источнике", verified:"подтверждено двумя независимыми чтениями", disputed:"два чтения разошлись"};
+const FACT_BASIS_LABELS = {unknown:"нет в карточке", rule:"по тексту карточки", stale:"карточка изменилась после проверки",
+  read:"прочитано в источнике", verified:"дважды проверено по источникам", disputed:"при проверке источники разошлись"};
 const factVerified = f => f && f.basis === "verified";
 // Строки «подтверждено по источнику» для карточки сделки: цитата и издание,
 // по которым факт проверен. Показываются только для verified — то, что
@@ -7097,9 +7100,9 @@ function factsVerifiedHtml(d){
 const DATE_BASIS_LABELS_JS = {closing:"закрытие", signing:"подписание", announcement:"объявление", publication:"дата сообщения о закрытии", registry:"запись в ЕГРЮЛ"};
 const PRICE_ATTRIBUTION_LABELS = {parties:"названа сторонами", filing:"по отчётности или документу сделки", registry:"по реестру торгов",
   adviser:"число подал консультант стороны, сами стороны его не называли", media_sources:"по данным источников издания, стороны не подтверждали",
-  analyst:"оценка аналитика", disputed:"об авторе числа чтения разошлись"};
+  analyst:"оценка аналитика", disputed:"при проверке не сошлось, кто назвал число"};
 const PRICE_TERMS_NOTE = {includes_contingent:"включая условную или отложенную часть, оценённую на дату покупки", paid:"фактически выплачено",
-  disputed:"состав суммы чтения не подтвердили"};
+  disputed:"состав суммы при проверке не подтвердился"};
 const PRICE_MEANING_LABELS = {reported:"сумма по данным источников, сторонами не раскрыта", estimate:"оценка, не цена сделки", range:"диапазон",
   lower_bound:"нижняя граница суммы", auction_start:"стартовая цена торгов", foreign_currency:"сумма в валюте", not_a_price:"число в источнике — не цена сделки",
   valuation:"оценка компании при размещении", raise:"объём привлечения", undisclosed:"источники цену не называют"};
@@ -7255,7 +7258,7 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена подтверждены двумя чтениями источников)</span></p>`:""}
+        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; периметр и цена дважды проверены по источникам)</span></p>`:""}
         ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ${fmtMult(multOp.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
@@ -8576,7 +8579,7 @@ async function mountMarketMultiples(){
         <td class="mult-name" data-l="Сделка"><a href="#/deal/${d.id}">${esc(d.title)}</a>${
           targetName(d)||notes(d)?`<span class="mult-sub">${esc(targetName(d))}${targetName(d)&&notes(d)?" · ":""}${esc(notes(d))}</span>`:""}</td>
         <td class="num" data-l="Год сделки">${d.year}</td>
-        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без двойного чтения источников; не проверено, покрывает ли отчётность весь периметр сделки">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо подтверждены двумя независимыми чтениями источников">проверено</span>`}</td>
+        <td class="num" data-l="Цена за 100%">${fnsMoney(d.price_basis==="scaled"?d.price_full_rub:d.sum_rub)}${d.price_basis==="scaled"?` <span class="mult-flag" title="Заплачено за пакет; на всю компанию цена пересчитана пропорционально доле">пересчёт</span>`:""}${isComputed(d)?` <span class="mult-flag mult-flag-computed" title="Цена и доля взяты из текста карточки без повторной проверки по источникам; не проверено, покрывает ли отчётность всю сделку">по тексту карточки</span>`:` <span class="mult-flag mult-flag-verified" title="Доля, цена и юрлицо дважды проверены по источникам">проверено</span>`}</td>
         <td class="num" data-l="${esc(v.metricShort[0].toUpperCase()+v.metricShort.slice(1))}">${fnsMoney(d[v.rubKey])}<span class="mult-sub">за ${d[v.yearKey]}</span></td>
         <td class="num mult-x-cell" data-l="Мультипликатор"><span class="mult-x">${fmtMult(d.multiple)}</span>${medianNote(d)}</td>
       </tr>`).join("")}</tbody></table>${shown.length > MULT_FIRST_ROWS ? `<button class="chip" data-multall="1" style="margin-top:10px">${showAllMult ? "Свернуть до " + MULT_FIRST_ROWS : "Показать все " + shown.length + " " + plural(shown.length,"сделку","сделки","сделок")}</button>` : ""}`:`<p style="color:var(--muted);font-size:13.5px;margin:0">Под этот фильтр сделок пока нет.</p>`}`;
@@ -8586,9 +8589,9 @@ async function mountMarketMultiples(){
     // чтение уже не пропустило; поимённый разбор — в раскрывашке ниже, он
     // нужен проверяющему, а не читателю витрины.
     const awaitingHtml = (awaiting || rejected.length) ? `<p style="font-size:12.5px;color:var(--muted);margin:0 0 12px">${
-      awaiting ? `Ещё ${awaiting} ${plural(awaiting,"сделка ждёт","сделки ждут","сделок ждут")} чтения источников. ` : ""}${
-      rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} чтение проверило и не пропустило — почему, видно ниже.` : ""}</p>` : "";
-    const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не пропущено чтением: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
+      awaiting ? `Ещё ${awaiting} ${plural(awaiting,"сделка ждёт","сделки ждут","сделок ждут")} проверки по источникам. ` : ""}${
+      rejected.length ? `${rejected.length} ${plural(rejected.length,"сделку","сделки","сделок")} проверка по источникам не пропустила — почему, видно ниже.` : ""}</p>` : "";
+    const rejectedHtml = rejected.length ? `<p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Не прошли проверку: ${rejected.map(r=>`<a href="#/deal/${r.id}">${esc((r.title||"").slice(0,44))}${(r.title||"").length>44?"…":""}</a> — ${esc(r.label||"")}`).join("; ")}.</p>` : "";
     return `
       ${showMedians?`<p style="margin:0 0 6px"><span class="num" style="font-size:26px;font-weight:600">${fmtMult(s.median)}</span> <span style="color:var(--muted)">медиана по ${s.clean_total} ${plural(s.clean_total,"сделке","сделкам","сделкам")}${data.candidates_total>s.clean_total?`; ещё у ${data.candidates_total-s.clean_total} ${plural(data.candidates_total-s.clean_total,"покупки","покупок","покупок")} с ценой в рублях не нашлось подходящей отчётности купленной компании`:""}.</span></p>`:`<p style="margin:0 0 6px;color:var(--muted)"><b>${shown.length} ${plural(shown.length,"сделка","сделки","сделок")}</b>: цена ÷ показатель купленной компании за последний полный год до сделки. ${
         computedTotal && !onlyVerified ? `У ${s.deals.length-computedTotal} из них цену, долю и юрлицо мы проверили по источникам дважды, у ${computedTotal} — взяли из текста карточки (помечены).` : `Цену, долю и юрлицо каждой мы проверили по источникам дважды.`}${
@@ -8600,7 +8603,7 @@ async function mountMarketMultiples(){
       ${notShownHtml}
       ${awaitingHtml}
       <details style="margin:16px 0 0"><summary style="font-size:12.5px;color:var(--muted);cursor:pointer">Как считаем и почему так</summary>
-      <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">${esc(s.methodology)} Отраслевой ориентир показываем только там, где в одной отрасли набралось восемь сделок с одинаково полученным числителем: медиана по двум-трём сделкам выглядит точнее, чем есть, а сделки разной природы складывать нельзя.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">${esc(s.methodology)} Отраслевой ориентир показываем только там, где в одной отрасли набралось восемь сделок с одинаково полученной ценой: медиана по двум-трём сделкам выглядит точнее, чем есть, а сделки разной природы складывать нельзя.</p>
       ${rejectedHtml}</details>`;
   };
   const draw = () => {
