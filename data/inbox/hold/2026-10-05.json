@@ -1297,13 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d77379678",
-   "title": "Курсу рубля покупки Минфина нипочем",
+   "draft_id": "d12030141",
+   "title": "Во Вьетнаме задержали подозреваемых в краже 2,7 тыс. кошек для продажи на мясо",
    "date": "2026-10-05",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261005/rubl-873955126.html"
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28183085"
     ]
    ],
    "sum": null,
@@ -1321,56 +1321,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-5 (общие редкие слова: вьетна, кошек) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d76136544",
-   "title": "В России продали рекордное число легковушек",
+   "draft_id": "d77366072",
+   "title": "Во Вьетнаме задержали 12 человек за кражу кошек для перепродажи на мясо",
    "date": "2026-10-05",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/05/v-rossii-prodali-rekordnoe-chisle-legkovushek/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-05",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/05/v-rossii-prodali-rekordnoe-chisle-legkovushek/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "рекордное число легковушек",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "рекордное число легковушек",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d13958284",
-   "title": "В Пермском крае продают палаточный лагерь с полосой препятствий",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053133572"
+     "web:iz.ru",
+     "https://iz.ru/2178945/vo-vetname-zaderzhany-vorovavshie-koshek-na-miaso-12-chelovek-izi"
     ]
    ],
    "sum": null,
@@ -1388,7 +1350,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-5 (общие редкие слова: вьетна, кошек) — проверьте, не дубль ли"
    ]
   }
  ]
