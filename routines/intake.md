@@ -210,6 +210,10 @@
     `python3 pipeline/ingest/review.py --milestone <id> <вид> "<заголовок новости>" --write`
     (порядок аргументов важен), затем
     `python3 pipeline/ingest/send_milestone_drafts.py --write`.
+    Вписываете событие руками карточке, у которой ещё нет `events`, —
+    сначала запишите её прежний этап (`enrich.prior_stage_event(card,
+    событие)` даёт готовую запись), и только потом меняйте статус: иначе
+    прежний этап пропадёт из «Хода сделки» (UniCredit, 5 октября 2026).
 17. Правили прозу известных карточек на шагах 13–16 — вычитка того, что
     тронули: `python3 pipeline/proofread.py --queue`, правила редактора из
     `pipeline/PROOFREADING_ROUTINE.md`, `--check`, `--write`.

@@ -4788,6 +4788,41 @@ def test_enrich_does_not_duplicate_an_event_from_the_same_source_url_on_a_differ
         "тот же адрес источника породил вторую запись события в другую дату"
 
 
+def test_enrich_keeps_the_card_stage_when_the_first_new_stage_arrives():
+    """UniCredit, 5 октября 2026: карточка «Обсуждается» от 7 мая (подписан
+    необязывающий term sheet) получила первое событие — разрешение
+    президента, — и «Ход сделки» показал одно согласование: прежний этап,
+    который сайт выводил из статуса и даты, пропал. Первое событие теперь
+    приходит вместе с прежним этапом карточки — тем же видом, датой,
+    заголовком новости и источником, ничего не сформулировано заново."""
+    import enrich
+    src = ["UniCredit Group", "https://www.unicreditgroup.eu/press"]
+    deal = {"id": "dstage1", "title": "UniCredit продаст часть российских активов банка инвестору из ОАЭ",
+            "type": "M&A", "status": "Обсуждается", "date": "2026-05-07", "src": [src]}
+    item = {"title": "Путин разрешил продажу российских активов «ЮниКредит банка»",
+            "url": "https://lenta.ru/news/2026/10/05/unicredit/", "date": "2026-10-05",
+            "source_id": "web:lenta.ru"}
+    props = enrich.proposals(deal, item, {}, {})
+    events = sorted((p[1] for p in props if p[0] == "event"), key=lambda e: e["date"])
+    assert [(e["kind"], e["date"]) for e in events] == [("negotiations", "2026-05-07"), ("approval", "2026-10-05")]
+    assert events[1]["title"] == "Президент разрешил сделку"
+    prior = events[0]
+    assert prior["title"] == "Переговоры" and prior["historicalTitle"] == deal["title"]
+    assert prior["sources"] == [src]
+    after = enrich.apply_props(json.loads(json.dumps(deal)), props)
+    assert [e["kind"] for e in after["events"]] == ["negotiations", "approval"]
+    assert after["status"] == "Согласование получено"
+    # Карточка уже с этапами — прежний этап записан, второй раз не добавляется.
+    deal_with_events = dict(deal, events=[prior])
+    again = [p[1] for p in enrich.proposals(deal_with_events, item, {}, {}) if p[0] == "event"]
+    assert [(e["kind"], e["date"]) for e in again] == [("approval", "2026-10-05")]
+    # Тот же этап (закрытая сделка получила ещё одну новость о закрытии) — не дублируется.
+    closed = dict(deal, status="Закрыта", events=None)
+    item_closed = dict(item, title="UniCredit: сделка закрыта", url="https://x.example/closed")
+    kinds = [p[1]["kind"] for p in enrich.proposals(closed, item_closed, {}, {}) if p[0] == "event"]
+    assert kinds == ["closed"]
+
+
 def test_enrich_names_a_new_source_by_domain_not_by_feed_id():
     """3 сентября 2026: приток дописал источник карточке Минфин/«Леста» по
     ссылке на rb.ru, но подписал его «@dealsma» — внутренним id

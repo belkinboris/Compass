@@ -1459,7 +1459,7 @@
      "value": "2026-05-07",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "2ca7832242ea"
+     "card_hash": "e1373385a251"
     },
     "nature": {
      "control_change": true,
@@ -1497,6 +1497,24 @@
     }
    },
    "events": [
+    {
+     "id": "negotiations-2026-05-07",
+     "kind": "negotiations",
+     "date": "2026-05-07",
+     "title": "Подписано необязывающее предварительное соглашение",
+     "historicalTitle": "UniCredit продаст часть российских активов банка инвестору из ОАЭ",
+     "note": "UniCredit подписал необязывающее предварительное соглашение (term sheet) о продаже части АО «ЮниКредит Банк» частному инвестору из ОАЭ. Это не окончательный договор купли-продажи: для закрытия нужно разрешение Президента РФ и другие согласования.",
+     "sources": [
+      [
+       "UniCredit Group (официальный пресс-релиз)",
+       "https://www.unicreditgroup.eu/en/press-media/press-releases-price-sensitive/2026/may/unicredit-signs-non-binding-agreement-to-divest-part-of-its-acti.html"
+      ],
+      [
+       "Коммерсантъ",
+       "https://www.kommersant.ru/doc/8651628"
+      ]
+     ]
+    },
     {
      "kind": "approval",
      "date": "2026-10-05",
@@ -20017,7 +20035,7 @@
      "value": "2023-02-14",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "c00a5957bf13"
+     "card_hash": "393f07613006"
     },
     "nature": {
      "control_change": true,
@@ -20056,6 +20074,20 @@
    },
    "buyer_name": "ООО «Литекс»",
    "events": [
+    {
+     "id": "negotiations-2023-02-14",
+     "kind": "negotiations",
+     "date": "2023-02-14",
+     "title": "Выставлен на торги",
+     "historicalTitle": "Продажа ТРЦ «Июнь» в Красногорске (Подмосковье) через аукцион РАД",
+     "note": "",
+     "sources": [
+      [
+       "РИА Недвижимость",
+       "https://realty.ria.ru/20230214/iyun-1851987297.html"
+      ]
+     ]
+    },
     {
      "kind": "closed",
      "date": "2026-10-01",
@@ -100896,7 +100928,7 @@
      "value": "2024-10-24",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "ddf1ca0da496"
+     "card_hash": "69e8a623cd0a"
     },
     "nature": {
      "control_change": true,
@@ -100934,6 +100966,20 @@
     }
    },
    "events": [
+    {
+     "id": "negotiations-2024-10-24",
+     "kind": "negotiations",
+     "date": "2024-10-24",
+     "title": "Переговоры",
+     "historicalTitle": "Auchan продаёт российский бизнес неизвестному покупателю",
+     "note": "",
+     "sources": [
+      [
+       "РБК",
+       "https://www.rbc.ru/business/24/10/2024/671a28aa9a79470c980f8145"
+      ]
+     ]
+    },
     {
      "kind": "cancelled",
      "date": "2026-09-24",
@@ -207650,7 +207696,7 @@
      "value": "2026-08-26",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "4ee858e4f16a"
+     "card_hash": "97634a591617"
     },
     "nature": {
      "control_change": true,
@@ -207690,6 +207736,20 @@
    "seller_id": "g7802e51e",
    "sum_basis": "auction_start",
    "events": [
+    {
+     "id": "negotiations-2026-08-26",
+     "kind": "negotiations",
+     "date": "2026-08-26",
+     "title": "Переговоры",
+     "historicalTitle": "«Ростех» продает штаб-квартиру «Швабе» рядом с гостиницей «Космос» в Москве",
+     "note": "",
+     "sources": [
+      [
+       "РИА Недвижимость",
+       "https://realty.ria.ru/20260826/shvabe-2113215916.html"
+      ]
+     ]
+    },
     {
      "kind": "closed",
      "date": "2026-09-25",
@@ -225263,6 +225323,157 @@
     }
    },
    "proofread": "2026-10-05"
+  },
+  {
+   "id": "g91828b2b",
+   "date": "2026-10-02",
+   "title": "VK продала 40% в билетном сервисе Intickets.ru",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mail.ru",
+     "https://news.mail.ru/society/72599652/"
+    ],
+    [
+     "Runet.news",
+     "https://runet.news/news/82452"
+    ],
+    [
+     "Moika78",
+     "https://moika78.ru/news/2026-10-04/1363109-vk-prodala-svoyu-dolyu-v-intikets-na-fone-iskov-k-say-agency"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/business/04/10/2026/6ac27c3bcf3fbe38b9d91b77"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "В пресс-службе VK сообщили, что компания продолжит развитие сервиса VK Билеты и поддержку программы «Пушкинская карта» на базе собственных технических решений и инфраструктуры.",
+    "context": "VK купила 40% «Интикетс» в мае 2024 года — предполагалось, что сделка позволит компании как доверенной информационной системе развивать программу «Пушкинская карта», повысить эффективность программы и обеспечить безопасность пользователей карты, организаций культуры и билетных операторов. «Интикетс» — крупный государственный подрядчик: системой пользуются московские театры и музеи для продажи билетов, сумма госконтрактов превышает 300 млн ₽. Продажа состоялась на фоне судебных исков к ООО «Сэй Эдженси» — организатору не состоявшихся концертов Канье Уэста в Санкт-Петербурге; «Интикетс» привлечён вторым ответчиком и третьим лицом по нескольким искам как компания, фактически получившая деньги от продажи билетов.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Покупатель, ООО «ТКИ», зарегистрирован в августе 2026 года и на 100% принадлежит Татьяне Кондратенко, которой до сделки напрямую принадлежало ещё 60% «Интикетс» — таким образом доля Кондратенко в компании консолидируется.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "40% доли в ООО «Интикетс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-02",
+     "title": "Сделка завершена",
+     "note": "По данным СПАРК, 40% доля в «Интикетс», ранее принадлежавшая ООО «Компания ВК», перешла ООО «ТКИ». В пресс-службе VK сообщили, что компания продала 40% доли в «Интикетс» и продолжит развитие сервиса VK Билеты и поддержку проекта «Пушкинская карта» на базе собственных технических решений и инфраструктуры.",
+     "source": [
+      "Mail.ru",
+      "https://news.mail.ru/society/72599652/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "VK",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://news.mail.ru/society/72599652/"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "ООО «ТКИ»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://runet.news/news/82452"
+     }
+    ],
+    "target": [
+     {
+      "value": "40% доли в ООО «Интикетс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://news.mail.ru/society/72599652/"
+     }
+    ]
+   },
+   "seller": "VK",
+   "seller_id": "g4e694234",
+   "target": "gabdc9810",
+   "buyer": "ga7c4bf47",
+   "deep_researched": "2026-10-04",
+   "reviewed": "2026-10-04",
+   "accepted": "2026-10-04",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "ООО «ТКИ» — в ЕГРЮЛ несколько одноимённых юрлиц, точный ИНН не установлен."
+    },
+    "notes": "Сумма сделки не раскрывается ни в одном найденном источнике."
+   },
+   "post_preview": "<b>VK продала 40% в билетном сервисе Intickets.ru</b>\n\n<b>Покупатель:</b> ООО «ТКИ» — Холдинговая компания Татьяны Кондратенко, зарегистрирована в августе 2026 года.\n<b>Продавец:</b> VK\n<b>Предмет:</b> ООО «Интикетс» — Билетная платформа Intickets.ru, работает с программой «Пушкинская карта».\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://news.mail.ru/society/72599652/\">Mail.ru</a>\nЕщё 2 источника — в карточке сделки\n\n#технологии #ИТ #MA",
+   "added": "2026-10-05",
+   "facts": {
+    "stake": {
+     "value": 40.0,
+     "basis": "rule",
+     "card_hash": "51173a2f8149"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-10-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3af756b48aad"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c3d53647a320"
+    },
+    "target": {
+     "company_id": "gabdc9810",
+     "inn": "7720312951",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "11cd10d28a52"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
