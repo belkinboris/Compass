@@ -6,6 +6,7 @@
 изменение карточки делает прочитанный факт stale, два несогласных чтения
 дают disputed, а не «победил первый»; арифметика — отдельный уровень.
 """
+import re
 import facts
 from pipeline import facts_confirm as fc
 
@@ -400,3 +401,13 @@ def test_who_named_the_price_has_to_be_visible_in_a_quote_not_in_the_readers_con
     _, made_up = fc.check_reading(
         reading(attribution_quote='Об этом заявил генеральный директор.'), card, texts)
     assert any('дословно' in p for p in made_up), made_up
+
+
+def test_reason_labels_speak_plain_russian():
+    """Подписи причин видит читатель витрины аналитики. 5 октября 2026 там
+    стояли «цена не подтверждена двумя чтениями» и «в деньги не идёт» —
+    слова нашей кухни (правило «язык для людей» в CLAUDE.md)."""
+    import facts
+    jargon = re.compile(r"чтени|чтением|знаменател|числител|в деньги|сканер|честн", re.I)
+    bad = {k: v for k, v in facts.REASON_LABELS.items() if jargon.search(v)}
+    assert not bad, bad
