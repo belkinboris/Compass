@@ -1297,71 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d12498216",
-   "title": "Сначала бесплатный шаг, потом продажа: как бизнес меняет воронки в мессенджерах",
+   "draft_id": "d77379678",
+   "title": "Курсу рубля покупки Минфина нипочем",
    "date": "2026-10-05",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/snachala-besplatnyj-shag-potom-prodazha-kak-biznes-menyaet-voronki-v-messendzherah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d72698460",
-   "title": "Тимофей решил продать билеты умным",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1359101.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d21149903",
-   "title": "Оценены последствия продажи зарубежных активов «Лукойла»",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/05/otseneny-posledstviya-prodazhi-zarubezhnyh-aktivov-lukoyla/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261005/rubl-873955126.html"
     ]
    ],
    "sum": null,
@@ -1383,13 +1325,52 @@
    ]
   },
   {
-   "draft_id": "d45264727",
-   "title": "Дофаминовые покупки: почему россияне все чаще тратят деньги ради мгновенной радости",
+   "draft_id": "d76136544",
+   "title": "В России продали рекордное число легковушек",
    "date": "2026-10-05",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/5/dofaminovye-pokupki-pochemu-rossiyane-vse-chashhe-tratyat-dengi-radi-mgnovennoj-radosti"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/05/v-rossii-prodali-rekordnoe-chisle-legkovushek/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-05",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/05/v-rossii-prodali-rekordnoe-chisle-legkovushek/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "рекордное число легковушек",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "рекордное число легковушек",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d13958284",
+   "title": "В Пермском крае продают палаточный лагерь с полосой препятствий",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053133572"
     ]
    ],
    "sum": null,
