@@ -194,6 +194,41 @@ def current_value(deal, field, comps):
     return deal.get(field) if has(deal.get(field)) else None
 
 
+STAGE_KIND = {'Обсуждается': 'negotiations', 'Подписана': 'signed',
+              'Согласование получено': 'approval', 'Закрыта': 'closed',
+              'Не состоялась': 'cancelled'}
+STAGE_TITLE = {'negotiations': 'Переговоры', 'signed': 'Документы подписаны',
+               'approval': 'Согласование получено', 'closed': 'Сделка завершена',
+               'cancelled': 'Сделка не состоялась'}
+ISO_DAY = re.compile(r'\d{4}-\d{2}-\d{2}')
+
+
+def prior_stage_event(deal, event):
+    """Этап, на котором карточка стоит СЕЙЧАС, — записью в `events`, пока
+    первое событие о новом этапе его не вытеснило.
+
+    Карточка без `events` показывает в «Ходе сделки» один этап, выведенный из
+    статуса и даты. Первое дописанное событие этот вывод отменяет, и прежний
+    этап пропадал: у UniCredit после разрешения президента (5 октября 2026)
+    исчезло подписание необязывающего term sheet 7 мая. Ничего не
+    формулируется: вид — из статуса, заголовок этапа — тот же, что сайт
+    показывал до сих пор, заголовок новости и источник — самой карточки.
+    None — записывать нечего (этап тот же или даты не сравнить)."""
+    kind = STAGE_KIND.get(deal.get('status'))
+    day = str(deal.get('date') or '')
+    if not kind or kind == event.get('kind') or not ISO_DAY.fullmatch(day):
+        return None
+    new_day = str(event.get('date') or '')
+    if ISO_DAY.fullmatch(new_day) and new_day <= day:
+        return None
+    out = {'id': '%s-%s' % (kind, day), 'kind': kind, 'date': day, 'title': STAGE_TITLE[kind],
+           'historicalTitle': str(deal.get('title') or ''), 'note': ''}
+    src = [list(s[:2]) for s in deal.get('src') or [] if len(s) > 1 and str(s[1]).startswith('http')]
+    if src:
+        out['sources'] = src[:1]
+    return out
+
+
 def proposals(deal, item, names, comps, match_keys=None):
     """Что новость может дать карточке: список (поле, значение, вид, пояснение).
 
@@ -347,6 +382,10 @@ def proposals(deal, item, names, comps, match_keys=None):
                             'этап «%s» уже снимали как преждевременный' % event.get('kind')))
             else:
                 out.append(('event', event, 'добавить', 'новый подтверждённый этап сделки'))
+                prior = None if existing_events else prior_stage_event(deal, event)
+                if prior:
+                    out.append(('event', prior, 'добавить',
+                                'прежний этап карточки — чтобы не пропал из хода сделки'))
     return out
 
 
