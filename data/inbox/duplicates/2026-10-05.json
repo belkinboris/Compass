@@ -1,0 +1,36 @@
+{
+ "made": "2026-10-05",
+ "items": [
+  {
+   "key": "https://www.cnews.ru/news/top/2026-10-05_bilajn_prodaet_svoj_ofis::gb9a22f5f",
+   "candidate_id": "gb9a22f5f",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d25316088",
+    "title": "«Билайн» продает свой офис",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-05_bilajn_prodaet_svoj_ofis"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "Продажа с торгов",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "свой офис",
+    "seller": "«Билайн»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "свой офис",
+     "seller": "«Билайн»"
+    },
+    "ind": "Финтех",
+    "needs_review": true
+   },
+   "queued": "2026-10-05"
+  }
+ ]
+}
