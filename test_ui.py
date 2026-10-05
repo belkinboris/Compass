@@ -4184,6 +4184,35 @@ def test_feed_period_filter_fits_a_phone_without_dead_icons(browser, base_url):
             ctx.close()
 
 
+def test_feed_filters_deals_that_needed_a_presidential_permit(page, base_url):
+    """Идея партнёра 5 октября 2026: отобрать сделки, которым понадобилось
+    разрешение президента по указу № 520. Признак читается из «Согласований»
+    карточки и её событий-согласований; оговорки («может потребоваться») и
+    указы о временном управлении разрешением не считаются."""
+    from urllib.parse import quote
+    page.goto(base_url + "/#/deals?appr=" + quote("Разрешение президента"), wait_until="domcontentloaded")
+    page.wait_for_selector("#selappr", state="attached", timeout=15000)
+    label = page.inner_text("#selappr .ms-txt")
+    assert label.startswith("Разрешение президента ("), label
+    got = page.evaluate("""(() => {
+        const pres = DEALS.filter(d => dealApprovals(d).includes("Разрешение президента")).map(d => d.id);
+        const kom = DEALS.filter(d => dealApprovals(d).includes("Правкомиссия по иностранным инвестициям")).map(d => d.id);
+        const rows = [...document.querySelectorAll('#feedlist a[href^="#/deal/"]')].map(a => a.getAttribute("href").slice(7));
+        return {pres, kom, rows};
+    })()""")
+    pres = set(got["pres"])
+    assert len(pres) >= 30, len(pres)
+    assert len(got["kom"]) >= 40, len(got["kom"])
+    # Распоряжение президента — в «Согласованиях»; у «Софтэкса» — только в событии.
+    for did in ("g2ab512d7", "g0f9ca0a0", "g96b1cdaf", "ge816c5b4"):
+        assert did in pres, did
+    # «Может потребоваться» и временное управление — не разрешение.
+    for did in ("gef939ff4", "g7fc9f764", "g8a67edea"):
+        assert did not in pres, did
+    assert got["rows"] and set(got["rows"]) <= pres, set(got["rows"]) - pres
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+
+
 def test_assistant_follow_up_skips_the_quick_answer_and_shows_it_is_thinking(browser, base_url):
     """Владелец 5 октября 2026: в продолжении диалога не нужно снова
     показывать быстрый ответ по базе (на «Какие из этих сделок самые
