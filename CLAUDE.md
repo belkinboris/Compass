@@ -25,7 +25,7 @@ test_launch_features.py       31 тест: ФНС, подписки, уведо�
 test_accounts.py              29 тестов: аккаунты, комментарии, правки
 test_auth.py                  29 тестов: регистрация, вход, сессии, пароль
 test_assistant_retrieval.py   31 тест: маршруты вопросов ассистента на живой базе
-.github/workflows/tests.yml   CI: данные и API отдельно, интерфейс отдельно
+.github/workflows/tests.yml   CI: данные и API на каждый push, интерфейс раз в сутки
 .claude/hooks/session-start.sh    ставит зависимости: контейнер рутины пуст (нет httpx и pytest)
 static/index.html             ВЕСЬ интерфейс: стили и рендер (данных в нём НЕТ)
 static/data/deals_promoted.json   ЕДИНСТВЕННЫЙ источник данных: ~1560 сделок,
