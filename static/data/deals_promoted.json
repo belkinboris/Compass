@@ -256893,7 +256893,8 @@
   "gae005e6f": 176,
   "gd4728207": 177,
   "g33051f70": 179,
-  "g01993028": null
+  "g01993028": null,
+  "g6d711306": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -257351,7 +257352,8 @@
  "telegram_posts_realty": {
   "gbcf07c78": 2,
   "g96d69d52": 3,
-  "ga8d7e0ee": 4
+  "ga8d7e0ee": 4,
+  "g6d711306": 8
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -260244,6 +260246,24 @@
    "events": [
     {
      "kind": "closed"
+    }
+   ]
+  },
+  "g6d711306": {
+   "sum": "1,05 млрд ₽ (стартовая цена)",
+   "seller": "«Билайн»",
+   "asset": "офисное здание на 1-й Тверской-Ямской улице (2,9 тыс. м²)",
+   "status": "Обсуждается",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations"
     }
    ]
   }
