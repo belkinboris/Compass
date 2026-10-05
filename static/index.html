@@ -2918,10 +2918,10 @@ function dealAsText(d){
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
                      ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],
                      ["rev","filterMinRevenue"],["status","filterStatus"],["dtype","filterType"],
-                     ["priced","filterPriced"],["from","feedFrom"],["to","feedTo"]];
+                     ["appr","filterAppr"],["priced","filterPriced"],["from","feedFrom"],["to","feedTo"]];
 function feedStateGet(){
   return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull,
-          filterMinRevenue, filterStatus, filterType, filterPriced, feedFrom, feedTo};
+          filterMinRevenue, filterStatus, filterType, filterAppr, filterPriced, feedFrom, feedTo};
 }
 function feedHash(){
   const st = feedStateGet();
@@ -2958,6 +2958,7 @@ function applyFeedParams(qs){
   filterMinRevenue = p.get("rev") || "Все";
   filterStatus = p.get("status") || "Все";
   filterType = p.get("dtype") || "Все";
+  filterAppr = p.get("appr") || "Все";
   filterPriced = p.get("priced") || "Все";
   if(filterMinRevenue!=="Все") ensureFinanceScreening(); // пришли по ссылке с уже выбранным фильтром — данные нужны сразу
   feedQuery = p.get("q") || "";
@@ -3990,8 +3991,47 @@ function feedValuesBy(key){
   DEALS.forEach(d => { const v = String(d[key]||"").trim(); if(v) seen.set(v, (seen.get(v)||0)+1); });
   return [...seen.entries()].sort((a,b)=>b[1]-a[1]).map(([v])=>v);
 }
+/* СОГЛАСОВАНИЕ. Идея партнёра 5 октября 2026: отобрать все сделки, которым
+   понадобилось разрешение президента по указу № 520 (и его соседям для банков
+   и стратегических обществ), и рядом — одобрение правкомиссии по иностранным
+   инвестициям. Отдельного поля под это в базе нет, признак читается из текста
+   «Согласования» карточки и её событий-согласований. Оговорки («может
+   потребоваться», «не требовалось») признаком не считаются: фильтр отвечает
+   на «понадобилось ли», а не на «могло ли понадобиться». Сделка, которой в
+   разрешении отказали, в выборку входит — согласование ей потребовалось.
+   \w и \b в JS не знают кириллицы, поэтому окончания — явным [а-яё]*. */
+const APPR_HEDGE = /может\s+потребова|почти\s+наверняка|формальн[а-яё]*\s+(?:«|решени)|не\s+(?:требовал|потребовал|понадобил|называют|нужн)/i;
+const APPR_RULES = [
+  ["Разрешение президента", new RegExp([
+    "(?:разрешени|согласи|одобрени|согласовани|распоряжени)[а-яё]*\\s+(?:президента|главы\\s+государства)",
+    "(?:одобрени|разрешени|согласи|согласовани)[а-яё]*[^.;]{0,40}?\\s+президента\\s+(?:рф|россии)",
+    "президент[а-яё]*(?:\\s+(?:рф|россии|российской\\s+федерации))?(?:\\s+владимир)?(?:\\s+путин[а-яё]*)?(?:\\s+[^\\s.;]+){0,3}?\\s+(?:разрешил|одобрил|согласовал|подписал\\s+распоряжени)",
+    "путин[а-яё]*\\s+(?:разрешил|одобрил|подписал\\s+распоряжени)",
+    "одобрил[а-яё]*\\s+президент",
+    "сделк[а-яё]*\\s+(?:согласован|одобрен)[а-яё]*\\s+президент",
+    "указ[а-яё]*\\s+(?:президента\\s+)?(?:рф\\s+)?(?:№\\s*)?520(?![0-9])",
+    "п\\.\\s*5\\s+указа", "пятым\\s+пунктом\\s+указа",
+    "распоряжением\\s+президента", "специальн[а-яё]*\\s+разрешени",
+  ].join("|"), "i")],
+  ["Правкомиссия по иностранным инвестициям", new RegExp([
+    "правкомисси",
+    "правительственн[а-яё]*\\s+(?:под)?комисси[а-яё]*\\s+по\\s+контролю",
+    "(?:под)?комисси[а-яё]*\\s+по\\s+(?:контролю\\s+за\\s+)?(?:осуществлением\\s+)?иностранн[а-яё]*\\s+инвестиц",
+  ].join("|"), "i")],
+];
+const _apprCache = new WeakMap();
+function dealApprovals(d){
+  if(_apprCache.has(d)) return _apprCache.get(d);
+  const texts = [String((d.law||{}).appr||"")]
+    .concat((d.events||[]).filter(e=>e && e.kind==="approval").map(e=>`${e.title||""}. ${e.note||""}`))
+    .filter(t=>t.trim() && !APPR_HEDGE.test(t));
+  const out = APPR_RULES.filter(([,re])=>texts.some(t=>re.test(t))).map(([n])=>n);
+  _apprCache.set(d, out);
+  return out;
+}
 let filterStatus = "Все";
 let filterType = "Все";
+let filterAppr = "Все";
 let filterPriced = "Все";
 let filterInd = "Все";
 let feedPage = 1;
@@ -4359,6 +4399,11 @@ function unifiedFeedItems(){
     if(!want.length) return true;
     return it.kind==="full" && want.includes(String(it.rec.type||""));
   };
+  const matchAppr = it => {
+    const want = msValues(filterAppr);
+    if(!want.length) return true;
+    return it.kind==="full" && dealApprovals(it.rec).some(a=>want.includes(a));
+  };
   /* «Цена раскрыта» — это слой фактов, а не наличие текста в поле суммы:
      оценка, диапазон и стартовая цена торгов ценой не являются. */
   const matchPriced = it => {
@@ -4368,7 +4413,7 @@ function unifiedFeedItems(){
     const yes = firmPrice(((it.rec.facts||{}).price||{}));
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
-  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchPriced(it));
+  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchAppr(it) && matchPriced(it));
   /* ПОРЯДОК — ПО ДАТЕ СДЕЛКИ (первой новости о ней), внутри одного дня — по
      дате появления в базе. Решение владельца 3 октября 2026 (см. rowHtml):
      дата в строке и порядок строк — одна и та же дата, иначе колонка дат
@@ -4442,6 +4487,7 @@ function emptyFeedHtml(){
          id=>{const f=ALL_FIRM(id); return f?f.n:id;});
   msList(filterStatus, {k:"status", t:n=>`статус «${n}»`}, ns=>`статус: ${ns.join(", ")}`);
   msList(filterType, {k:"dtype", t:n=>`тип «${n}»`}, ns=>`тип сделки: ${ns.join(", ")}`);
+  msList(filterAppr, {k:"appr", t:n=>`согласование «${n}»`}, ns=>`согласования: ${ns.join(", ")}`);
   msList(filterPriced, {k:"priced", t:n=>n.toLowerCase()}, ns=>ns.join(", ").toLowerCase());
   if(feedFrom || feedTo){
     const human = iso => iso ? fmtDate(iso) : "";
@@ -4498,9 +4544,9 @@ function bindFeedListEvents(){
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     feedFrom=""; feedTo="";
     onlyFull=false; filterMinRevenue="Все"; feedPage=1;
-    filterStatus="Все"; filterType="Все"; filterPriced="Все";
+    filterStatus="Все"; filterType="Все"; filterAppr="Все"; filterPriced="Все";
     const q=document.getElementById("feedq"); if(q) q.value="";
-    ["selind","selyear","seltheme","selfirm","selstatus","seldtype","selpriced"].forEach(msReset);
+    ["selind","selyear","seltheme","selfirm","selstatus","seldtype","selappr","selpriced"].forEach(msReset);
     [["selagroup","Все"],["selfmt","Все сделки"],["selrev","Все"]]
       .forEach(([id,v])=>{const el=document.getElementById(id); if(el) el.value=v;});
     renderFeedList();
@@ -4690,6 +4736,9 @@ function renderDeals(){
     <label>Тип сделки
       ${msControl("seldtype", feedValuesBy("type").map(v=>[v,v]), filterType)}
     </label>
+    <label>Согласование
+      ${msControl("selappr", APPR_RULES.map(([n])=>{const k=DEALS.filter(d=>dealApprovals(d).includes(n)).length;return k?[n,`${n} (${k})`]:null;}).filter(Boolean), filterAppr)}
+    </label>
     <label>Цена
       ${msControl("selpriced", [["Цена раскрыта","Цена раскрыта"],["Цена не раскрыта","Цена не раскрыта"]], filterPriced)}
     </label>
@@ -4733,6 +4782,7 @@ function renderDeals(){
   bindMS("seltheme", v=>filterTheme=v);
   bindMS("selstatus", v=>filterStatus=v);
   bindMS("seldtype", v=>filterType=v);
+  bindMS("selappr", v=>filterAppr=v);
   bindMS("selpriced", v=>filterPriced=v);
   const selrev = document.getElementById("selrev");
   if(selrev) selrev.onchange = ()=>{
