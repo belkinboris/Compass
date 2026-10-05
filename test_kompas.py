@@ -711,6 +711,48 @@ def test_day_summary_says_so_when_intake_was_silent(monkeypatch):
         db.close()
 
 
+def test_summary_asked_for_after_18_counts_as_the_days_summary(monkeypatch):
+    """Сводка, отправленная по просьбе после 18:00, — это и есть сводка дня:
+    вечерняя вторым сообщением не приходит. Отправленная днём — не мешает
+    вечерней (в 18:00 приходит обычная)."""
+    from datetime import datetime, timezone
+    from db.models import AppSetting
+    from db.session import get_session
+    import metrika
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: sent.append((method, p)) or {"ok": True})
+    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
+    db = get_session()
+    try:
+        _fresh_runs(db)
+        noon = datetime(2026, 10, 8, 9, 0, tzinfo=timezone.utc)            # 12:00 МСК
+        assert main._intake_summary_once(db, now_utc=noon, force=True) is True
+        assert db.get(AppSetting, "intake_summary:2026-10-08") is None
+        evening = datetime(2026, 10, 8, 17, 30, tzinfo=timezone.utc)       # 20:30 МСК
+        assert main._intake_summary_once(db, now_utc=evening) is True and len(sent) == 2
+        _fresh_runs(db)
+        sent.clear()
+        late = datetime(2026, 10, 9, 17, 30, tzinfo=timezone.utc)
+        assert main._intake_summary_once(db, now_utc=late, force=True) is True
+        assert main._intake_summary_once(db, now_utc=late) is False and len(sent) == 1
+    finally:
+        _fresh_runs(db)
+        db.close()
+
+
+def test_site_settings_hold_texts_longer_than_255(monkeypatch):
+    """Прогоны притока за день и готовый текст поста об этапе сделки лежат в
+    `app_settings.value`. На Postgres колонка была VARCHAR(255) и такую запись
+    отвергла бы, а SQLite в тестах длину не проверяет вовсе, — поэтому здесь
+    проверяется сам тип колонки и то, что старт сайта расширяет старую."""
+    import inspect as _inspect
+    from db.models import AppSetting
+    assert getattr(AppSetting.__table__.c.value.type, "length", None) is None
+    assert "ALTER TABLE app_settings ALTER COLUMN value TYPE TEXT" in _inspect.getsource(main._create_account_tables)
+
+
 def test_metrika_reads_totals_and_sources_without_inventing_numbers():
     import httpx
     import metrika
