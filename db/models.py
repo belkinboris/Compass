@@ -652,7 +652,9 @@ class AppSetting(Base):
     __tablename__ = "app_settings"
 
     key: Mapped[str] = mapped_column(String(64), primary_key=True)
-    value: Mapped[str] = mapped_column(String(255))
+    # Text, а не String(255): с 5 октября 2026 здесь лежат и прогоны притока за
+    # день, и готовый текст поста об этапе сделки (main.py) — оба длиннее.
+    value: Mapped[str] = mapped_column(Text)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=_now, onupdate=_now)
 
 

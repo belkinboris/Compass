@@ -195,6 +195,21 @@ def _create_account_tables():
                         "ALTER TABLE registry_events ALTER COLUMN event_type TYPE VARCHAR(400)"))
         except Exception as e:
             logger.error("не удалось расширить event_type в registry_events: %s", e)
+        # app_settings.value — с 255 знаков до TEXT, 5 октября 2026. Тот же
+        # класс, что deal_id и event_type выше: туда теперь пишутся прогоны
+        # притока за день (сводка в 18:00) и готовый текст поста об этапе
+        # сделки (публикация по кнопке), оба длиннее 255 знаков. Postgres
+        # отверг бы запись, SQLite в тестах длину не проверяет. Тип меняем,
+        # только пока у колонки есть предел длины, — без лишней блокировки
+        # таблицы на каждом старте.
+        try:
+            with engine.begin() as conn:
+                if conn.dialect.name == "postgresql":
+                    cols = {c["name"]: c for c in inspect(conn).get_columns("app_settings")}
+                    if getattr(cols.get("value", {}).get("type"), "length", None):
+                        conn.execute(text("ALTER TABLE app_settings ALTER COLUMN value TYPE TEXT"))
+        except Exception as e:
+            logger.error("не удалось расширить value в app_settings: %s", e)
     except Exception as e:  # БД недоступна — сайт и без аккаунтов должен жить
         logger.error("не удалось создать таблицы аккаунтов: %s", e)
 
@@ -4115,6 +4130,11 @@ def _intake_summary_once(db, now_utc: datetime | None = None, force: bool = Fals
         except Exception:                                    # noqa: BLE001
             db.rollback()
             return False
+    elif msk.hour >= INTAKE_SUMMARY_HOUR_MSK and not db.get(AppSetting, key):
+        # Сводка по просьбе после 18:00 и есть сводка этого дня: вечерняя
+        # вторым сообщением в тот же день не повторяется.
+        db.add(AppSetting(key=key, value=now_utc.isoformat(timespec="seconds")))
+        db.commit()
     last_row = db.get(AppSetting, INTAKE_SUMMARY_LAST)
     since = last_row.value if last_row and last_row.value else (now_utc - timedelta(hours=24)).isoformat(timespec="seconds")
     runs = [r for r in _load_intake_runs(db) if str(r.get("at", "")) > since]
