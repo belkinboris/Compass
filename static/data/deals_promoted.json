@@ -1371,7 +1371,7 @@
    "ind": "Банки",
    "type": "M&A",
    "kind": "acquisition",
-   "status": "Обсуждается",
+   "status": "Согласование получено",
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
@@ -1419,6 +1419,10 @@
     [
      "Деловой Петербург",
      "https://www.dp.ru/a/2026/05/07/chast-aktivov-italjanskogo"
+    ],
+    [
+     "Lenta.ru",
+     "https://lenta.ru/news/2026/10/05/putin-razreshil-prodat-aktivy-inostrannogo-banka/"
     ]
    ],
    "extra": "7 мая 2026 года UniCredit объявил о подписании необязывающего предварительного соглашения (term-sheet) о продаже части АО «ЮниКредит Банк» неназванному частному инвестору из ОАЭ; имя покупателя не раскрывается, однако ранее в качестве претендентов упоминались Asas Capital, Mada Capital и Inweasta. Часть бизнеса выделяется в новое юрлицо («Новый банк», 100% остаётся у UniCredit), а «Остаточный банк» продаётся покупателю; UniCredit сохранит операции международных платежей в евро и долларах для корпоративных клиентов, не находящихся под санкциями. Брокером сделки выступил Риккардо Орчел, бывший заместитель CEO ВТБ и брат главы UniCredit Андреа Орчела. Закрытие сделки запланировано на первую половину 2027 года и требует разрешения Президента РФ (указ № 520 от 05.08.2022) и иных регуляторных согласований; сделка не затронет дивидендную политику и цели по чистой прибыли на 2028–2030 годы.",
@@ -1449,13 +1453,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "card_hash": "54783e5323e1"
     },
     "date": {
      "value": "2026-05-07",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "686d3c7242ae"
+     "card_hash": "2ca7832242ea"
     },
     "nature": {
      "control_change": true,
@@ -1465,7 +1469,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "2ffe89cf015e"
+     "card_hash": "44c51efa923f"
     },
     "target": {
      "company_id": "ga51369c2",
@@ -1491,7 +1495,33 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-10-05",
+     "title": "Путин разрешил продажу и реорганизацию «Юникредит банка»",
+     "note": "Владимир Путин подписал распоряжение, разрешающее сделку по приобретению 100% акций «Юникредит банка» и его реорганизацию.",
+     "source": [
+      "Lenta.ru",
+      "https://lenta.ru/news/2026/10/05/putin-razreshil-prodat-aktivy-inostrannogo-banka/"
+     ],
+     "id": "g1edb1b9d-approval",
+     "newsworthy": true,
+     "snapshot": {
+      "title": "UniCredit продаст часть российских активов банка инвестору из ОАЭ",
+      "type": "M&A",
+      "status": "Согласование получено",
+      "sum": "Не раскрыта",
+      "buyer": null,
+      "seller": "UniCredit",
+      "asset": "часть российских активов АО «ЮниКредит Банк»",
+      "ind": "Банки"
+     },
+     "headline": "Путин разрешил продажу российских активов «ЮниКредит банка»",
+     "milestone_drafted_at": "2026-10-05T16:28:16+00:00"
+    }
+   ]
   },
   {
    "id": "g113002a7",
