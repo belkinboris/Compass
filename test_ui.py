@@ -4148,3 +4148,81 @@ def test_subscription_form_answers_in_every_outcome(browser, base_url):
     finally:
         ctx.close()
 
+
+
+def test_feed_period_filter_fits_a_phone_without_dead_icons(browser, base_url):
+    """Владелец 5 октября 2026: кнопка «с начала года» переносилась на вторую
+    строку и ломала ряд; поля дат и «Сбросить» вылезали за карточку
+    фильтров; значки ⓘ у «Цены» и «Выручки» на телефоне не нажимались."""
+    for width in (360, 390):
+        ctx = browser.new_context(viewport={"width": width, "height": 900}, is_mobile=True, has_touch=True)
+        try:
+            pg = ctx.new_page()
+            pg.goto(base_url + "/#/deals", wait_until="domcontentloaded")
+            pg.wait_for_selector("#advtoggle", timeout=15000)
+            pg.click("#advtoggle")
+            pg.wait_for_selector("#dfrom", state="attached", timeout=10000)
+            quick = [t.strip() for t in pg.locator(".dr-q").all_inner_texts()]
+            assert "с начала года" not in quick and quick == ["30 дней", "3 месяца", "полгода", "год"], quick
+            tops = pg.evaluate("[...document.querySelectorAll('.dr-q')].map(b => Math.round(b.getBoundingClientRect().top))")
+            assert len(set(tops)) == 1, "кнопки периода разъехались на две строки: %s" % tops
+            pg.locator(".dr-q").first.click()
+            over = pg.evaluate("""(() => {
+                const card = document.querySelector('.dr').closest('label').parentElement.getBoundingClientRect();
+                return [...document.querySelectorAll('#dfrom, #dto, .dr-clear')]
+                  .filter(e => e.offsetParent !== null)
+                  .map(e => Math.round(e.getBoundingClientRect().right - card.right));
+            })()""")
+            assert all(x <= 0 for x in over), "поле периода вылезает за карточку: %s" % over
+            panel = pg.evaluate("document.getElementById('dfrom').closest('label').parentElement.innerText")
+            assert "ⓘ" not in panel
+            assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+        finally:
+            ctx.close()
+
+
+def test_assistant_follow_up_skips_the_quick_answer_and_shows_it_is_thinking(browser, base_url):
+    """Владелец 5 октября 2026: в продолжении диалога не нужно снова
+    показывать быстрый ответ по базе (на «Какие из этих сделок самые
+    крупные?» он выдавал крупнейшие сделки всей базы), а пока ассистент
+    думает, это должно быть заметно."""
+    ctx, pg, errors = _assistant_page(browser, base_url, 390)
+    lookups, held = [], []
+    answer = '{"answer": "Полный ответ модели", "intent": "general", "deals": [], "model": true}'
+    try:
+        pg.route("**/api/assistant/lookup", lambda route: (lookups.append(1), route.fulfill(
+            status=200, content_type="application/json",
+            body='{"answer": "Быстрый ответ по базе", "intent": "top", "deals": []}'))[1])
+        # Ответ модели держим, пока тест сам его не отпустит: так видно, что
+        # показывает экран, пока ассистент думает.
+        pg.route("**/api/ask", lambda route: held.append(route))
+
+        def release():
+            pg.wait_for_function("1", timeout=1000)
+            while not held:
+                pg.wait_for_timeout(100)
+            held.pop(0).fulfill(status=200, content_type="application/json", body=answer)
+
+        pg.fill("#q", "Какие сделки вела фирма Nextons?")
+        pg.click("#send")
+        pg.wait_for_selector(".msg.ai .ai-thinking .ai-dots i", timeout=5000)
+        release()
+        pg.wait_for_function("document.body.innerText.includes('Полный ответ модели')", timeout=10000)
+        assert len(lookups) == 1, "первый вопрос диалога — с быстрым ответом"
+
+        pg.fill("#q", "Какие из этих сделок самые крупные?")
+        pg.click("#send")
+        pg.wait_for_selector(".msg.ai.wait .ai-dots i", timeout=5000)
+        assert pg.locator(".msg.ai.wait .ai-dots i").first.evaluate(
+            "e => getComputedStyle(e).animationName") == "aiDot"
+        pg.wait_for_timeout(600)
+        assert "Быстрый ответ по базе" not in pg.locator(".msg.ai.wait").inner_text()
+        release()
+        pg.wait_for_function("[...document.querySelectorAll('.msg.ai')].pop().innerText.includes('Полный ответ модели')",
+                             timeout=10000)
+        assert len(lookups) == 1, "в продолжении диалога быстрый ответ по базе показываться не должен"
+        assert not [e for e in errors if "pageerror" in e], errors
+    finally:
+        for route in held:
+            route.abort()
+        ctx.close()
