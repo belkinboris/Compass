@@ -3659,16 +3659,31 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     page.wait_for_selector("#prepMeeting", timeout=15000)
     assert page.locator("#prepInterview").count() == 1
 
-    # С 3 октября 2026 в чате — короткая подпись, полный вопрос уходит в /api/ask.
+    # С 5 октября 2026 ассистент сначала спрашивает, кто вы, что за встреча и
+    # чего вы хотите (партнёр: «надо, чтобы он задал вопрос, кто ты, и от
+    # этого отталкивался»), и только ответ уходит модели.
+    asks = []
+    page.on("request", lambda r: asks.append(r) if "/api/ask" in r.url and r.method == "POST" else None)
+    page.click("#prepMeeting")
+    page.wait_for_selector("[data-prep-skip]", timeout=10000)
+    page.wait_for_timeout(400)
+    intro = page.inner_text("#chatbox")
+    assert "Кто вы" in intro and "Что это за встреча" in intro and "Чего вы хотите" in intro, intro
+    assert not asks, "до ответа человека модель не спрашиваем"
+    about = "Я юрист, первая встреча с юристами компании, хочу получить заказ на сделку"
+    page.fill("#q", about)
     with page.expect_request(lambda r: "/api/ask" in r.url and r.method == "POST") as req:
-        page.click("#prepMeeting")
-    meeting = req.value.post_data or ""
-    page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
-    page.wait_for_timeout(600)
+        page.click("#send")
+    sent = json.loads(req.value.post_data or "{}")
+    meeting = sent["question"]
     assert "Готовлюсь к встрече" in meeting
     # Вопрос назвал компанию — иначе ассистент не поймёт, о ком речь.
-    assert "Норильский никель" in meeting
-    assert "Подготовка к встрече: «Норильский никель»" in page.inner_text("body")
+    assert "Норильский никель" in meeting and about in meeting
+    # Поиск держится за компанию страницы, а не за слова рассказа («юрист»).
+    assert (sent["context_type"], sent["context_id"]) == ("company", "g2f93d858")
+    # Вопросов «для клиента» больше не составляем.
+    assert "три вопроса" not in meeting.lower() and "вопросов к компании не составляй" in meeting
+    assert page.locator(".msg.user").last.inner_text().strip() == about
 
     page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
     page.wait_for_selector("#prepInterview", timeout=15000)
@@ -3680,6 +3695,7 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     with page.expect_request(lambda r: "/api/ask" in r.url and r.method == "POST") as req:
         page.click("#interviewGo")
     interview = req.value.post_data or ""
+    assert (json.loads(interview)["context_type"], json.loads(interview)["context_id"]) == ("company", "g2f93d858")
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
     page.wait_for_timeout(600)
     assert "Готовлюсь к собеседованию" in interview
@@ -3975,8 +3991,12 @@ def test_prep_buttons_show_a_short_label_in_the_chat(page, base_url):
     visit(page, base_url, "#/companies/yandex")
     page.wait_for_selector("#prepMeeting")
     page.click("#prepMeeting")
+    # С 5 октября 2026 встреча начинается с вопросов к человеку; кто не хочет
+    # рассказывать, жмёт «Без подробностей» — и видит в чате эту же подпись.
+    page.wait_for_selector("[data-prep-skip]")
+    page.click("[data-prep-skip]")
     page.wait_for_selector(".msg.user")
-    assert page.locator(".msg.user").first.inner_text().strip() == "Подготовка к встрече: «Яндекс»"
+    assert page.locator(".msg.user").first.inner_text().strip() == "Без подробностей — общая подготовка"
 
 
 def test_feed_marks_a_card_with_a_fresh_stage_as_updated(page, base_url):
