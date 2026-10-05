@@ -844,7 +844,7 @@ def test_launch_ui_contains_requested_changes():
     assert '["ownership","Участники"]' in html and "ownershipHtml" in html
     assert 'data-fnstab="${k}"' in html
     assert "Связи по сделкам" not in html and "companyRelationshipHtml" not in html
-    assert "Другие сделки с участием" in html and "openCompanyDealsDialog" in html
+    assert "<h2>Другие сделки" in html and "openCompanyDealsDialog" in html
     assert "Подробные карточки" not in html and "Также упомина" not in html
     assert "Сравнение компаний" in html and "Добавить к сравнению" in html
     assert "#/compare" in html and "compare-grid" in html and "data-co-compare" in html
@@ -2229,7 +2229,7 @@ def test_company_page_uses_one_compact_deal_section():
     html = Path("static/index.html").read_text(encoding="utf-8")
     assert "companyDealsCompactHtml" in html
     assert "openCompanyDealsDialog" in html
-    assert "Другие сделки с участием ${esc(c?c.name" in html
+    assert "<h2>Другие сделки${c?`: ${esc(c.name)}`:\"\"}</h2>" in html
     assert "Упоминания в источниках" in html
     assert "Связи по сделкам" not in html
     assert "Подробные карточки" not in html

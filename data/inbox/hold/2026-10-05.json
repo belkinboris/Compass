@@ -1297,13 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d12030141",
-   "title": "Во Вьетнаме задержали подозреваемых в краже 2,7 тыс. кошек для продажи на мясо",
+   "draft_id": "d41656629",
+   "title": "Путин разрешил реорганизацию «Юникредит банка» и покупку его у итальянской UniCredit",
    "date": "2026-10-05",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/proisshestviya/28183085"
+     "web:vc.ru",
+     "https://vc.ru/legal/3177122-putin-razreshil-reorganizaciyu-yunikredit-banka-i-pokupku-ego-u-italyanskoi-unicredit?from=rss"
     ]
    ],
    "sum": null,
@@ -1318,21 +1318,120 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку pending-5 (общие редкие слова: вьетна, кошек) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку ge816c5b4 (общие редкие слова: покупк, разреш) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d77366072",
-   "title": "Во Вьетнаме задержали 12 человек за кражу кошек для перепродажи на мясо",
+   "draft_id": "d87520903",
+   "title": "Путин разрешил продать 100% акций «Юникредит»",
    "date": "2026-10-05",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2178945/vo-vetname-zaderzhany-vorovavshie-koshek-na-miaso-12-chelovek-izi"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/308502"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Путин разрешил реорганизацию «Юникредит банка» и покупку его» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d73087426",
+   "title": "На матч России с Нигерией продали более 38 тысяч билетов",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/05/na-match-rossii-s-nigeriey-prodali-bolee-38-tysyach-biletov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-05",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/05/na-match-rossii-s-nigeriey-prodali-bolee-38-tysyach-biletov/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "более 38 тысяч билетов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "более 38 тысяч билетов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g596d1415 (общие редкие слова: билето, более) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d22454978",
+   "title": "Путин разрешил продать активы иностранного банка",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/05/putin-razreshil-prodat-aktivy-inostrannogo-banka/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d78414645",
+   "title": "Россиянам рассказали, почему томаты продают по цене мяса",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/5/rossiyanam-rasskazali-pochemu-tomaty-prodayut-po-czene-myasa"
     ]
    ],
    "sum": null,
@@ -1350,8 +1449,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку pending-5 (общие редкие слова: вьетна, кошек) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

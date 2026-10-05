@@ -257,7 +257,7 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
     # стоит второй ярлык про проверку («Подтверждено цитатой из источника»),
     # и два почти одинаковых названия значили разное — про всю карточку и про
     # отдельные числа. Теперь их видно, что это не одно и то же.
-    assert "Карточку сверяли с источниками" in note.inner_text()
+    assert "Проверено по источникам" in note.inner_text()
     assert "16 авг" in note.inner_text()
 
     # У карточки без единой отметки о сверке строка честно не рисуется —
@@ -3668,7 +3668,7 @@ def test_sanctions_badge_names_the_list_and_links_to_the_document(page, base_url
                              "https://www.gov.uk", "https://eur-lex.europa.eu",
                              "https://www.sanctionsmap.eu")) for h in hrefs), hrefs
     note = page.inner_text(".sanc-note")
-    assert "сам список" in note and "сверена" in note, note
+    assert "ссылки ведут на сами списки" in note and "проверено вручную" in note, note
     # Слов нашего внутреннего диалекта в тексте для читателя быть не должно.
     for word in ("перечень", "штамп", "инвариант", "знаменатель"):
         assert word not in note.lower(), note
@@ -4348,6 +4348,30 @@ def test_footer_sources_do_not_name_rbc_or_forbes(page, base_url):
     assert "РБК" not in col and "Forbes" not in col, col
     assert "Интерфакс" in col and "Коммерсантъ" in col and "Ведомости" in col
     assert page.locator('footer a[href*="rbc.ru"], footer a[href*="forbes.ru"]').count() == 0
+
+
+def test_reader_pages_have_no_internal_jargon(page, base_url):
+    """Владелец 5 октября 2026: «куча иишного вординга вроде „цена не
+    подтверждена двумя чтениями“ — чтобы такого нигде не было». Обход
+    экранов, где такие слова жили: аналитика, карточки сделок с цитатами,
+    профиль под санкциями, консультанты, отрасль."""
+    import json as _json
+    base = _json.loads(Path("static/data/deals_promoted.json").read_text(encoding="utf-8"))
+    verified = [d["id"] for d in base["deals"]
+                if any(((d.get("facts") or {}).get(k) or {}).get("basis") == "verified" for k in ("price", "stake", "date"))][:4]
+    jargon = re.compile(r"(?<![а-яё])(?:чтени[а-яё]*|прочитан[а-яё]*|знаменател[а-яё]*|числител[а-яё]*|честн[а-яё]* пуст[а-яё]*)"
+                        r"|в деньги не идёт|по тексту карточки|двумя чтениями|линз[аыу]|в карточке не сказано", re.I)
+    pages = ["#/", "#/analytics", "#/advisors", "#/advisors/nextons", "#/companies/gf79d11d3",
+             "#/industry/" + "Ритейл"] + ["#/deal/" + i for i in verified]
+    found = {}
+    for h in pages:
+        page.goto(base_url + "/" + h, wait_until="domcontentloaded")
+        page.wait_for_timeout(900)
+        text = page.inner_text("#app")
+        hits = sorted({m.group(0) for m in jargon.finditer(text)})
+        if hits:
+            found[h] = hits
+    assert not found, found
 
 
 def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
