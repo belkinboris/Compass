@@ -4316,4 +4316,7 @@ def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
         + '• продажа сети «Апрель» (#/deal/g34b9af03)')""")
     assert '<a href="#/deal/g5ddac2b5">покупка ТРЦ «Триумф Молл»</a>' in html
     assert "(#/deal/" not in html and "[" not in html and "]" not in html
+    # «- - пункт» — один пункт без лишней чёрточки (5 октября 2026).
+    li = page.evaluate("mdToHtml('- - **Сделка** — покупатель\\n- **Важно**: одна черта')")
+    assert li == "<ul><li><b>Сделка</b> — покупатель</li><li><b>Важно</b>: одна черта</li></ul>", li
 

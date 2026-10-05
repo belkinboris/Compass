@@ -382,6 +382,17 @@ def test_polish_joins_links_with_a_space_and_drops_orphan_addresses():
     assert "«Апрель» (#/deal/" not in out and "продажа сети «Апрель»" in out
     assert "] (" not in out
 
+
+def test_polish_collapses_a_doubled_list_marker():
+    """Ответ на подготовку к встрече (5 октября 2026) пришёл пунктами
+    «- - **[сделка]**»: на экране перед каждой сделкой стояла лишняя
+    чёрточка. Жирный текст в начале пункта маркером не считается."""
+    text = "- - **[Покупка «Элемента»](#/deal/citibank)** — покупатель\n  * - вложенный\n- **Важно**: одна черта"
+    import assistant_retrieval
+    out = main._polish_answer(text, assistant_retrieval.get_index())
+    assert out.splitlines() == ["- **[Покупка «Элемента»](#/deal/citibank)** — покупатель",
+                                "  - вложенный", "- **Важно**: одна черта"]
+
 def test_lookup_returns_facts_without_the_model(client):
     body = client.post("/api/assistant/lookup", json={"question": ORION_Q}).json()
     assert body["intent"] == "advisor" and body["deals"] and "#/advisors/orion" in body["answer"]
