@@ -404,3 +404,35 @@ def test_refresh_drops_the_parsed_base_so_the_old_copy_is_not_kept(tmp_path, mon
     data_refresh.drop_in_process_caches()
     assert not base_data._DATA, \
         "старая копия базы осталась в памяти после подмены файла"
+
+
+def test_download_sends_the_github_token_only_when_it_is_set(monkeypatch):
+    """Закрытый репозиторий: сайт обязан качать базу с ключом, если он задан,
+    и без него — как раньше, если не задан."""
+    seen = []
+
+    class _Resp:
+        status_code, content, headers = 200, b"{}", {}
+
+    class _Client:
+        def __init__(self, *a, **kw):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def get(self, url, headers):
+            seen.append(dict(headers))
+            return _Resp()
+
+    monkeypatch.setattr(data_refresh.httpx, "Client", _Client)
+    monkeypatch.delenv("DATA_GITHUB_TOKEN", raising=False)
+    data_refresh._download("https://raw.githubusercontent.com/x/y/main/f.json")
+    monkeypatch.setenv("DATA_GITHUB_TOKEN", " ghp_test ")
+    data_refresh._download("https://raw.githubusercontent.com/x/y/main/f.json")
+    assert "Authorization" not in seen[0]
+    assert seen[1]["Authorization"] == "token ghp_test"
+

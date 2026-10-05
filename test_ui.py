@@ -4004,6 +4004,7 @@ def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
     первый экран сам советует отключить VPN."""
     visit(page, base_url, "#/")
     page.wait_for_selector(".hero-note")
+    page.wait_for_function("typeof bulkLoaded !== 'undefined' && bulkLoaded", timeout=30000)
     got = page.evaluate("""() => {
       const was = bulkLoaded; bulkLoaded = false; renderDeals();
       const loading = document.querySelector('.hero-note').innerText;
@@ -4011,7 +4012,9 @@ def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
       return {loading, loaded: document.querySelector('.hero-note').innerText};
     }""")
     assert "VPN" in got["loading"] and "догружаем" not in got["loading"], got["loading"]
-    assert "VPN" not in got["loaded"] and "сделк" in got["loaded"], got["loaded"]
+    # "сделка/сделки" делят основу "сделк", а "сделОк" вставляет беглую
+    # гласную перед "к" — общая часть всех трёх форм короче: "дел".
+    assert "VPN" not in got["loaded"] and "дел" in got["loaded"], got["loaded"]
 
 
 # ---------- 3 октября 2026: партия после запуска ----------
@@ -4226,3 +4229,30 @@ def test_assistant_follow_up_skips_the_quick_answer_and_shows_it_is_thinking(bro
         for route in held:
             route.abort()
         ctx.close()
+
+
+def test_deal_without_a_sum_says_not_disclosed_not_no_data(page, base_url):
+    """Владелец 1 октября 2026: «„Нет данных“ надо меньше делать». На «Обзоре»
+    карточки без поля суммы крупно стояло «Нет данных» (200 карточек) — из
+    ленты подпись убрали раньше, с карточки нет. Теперь «Не раскрыта», как в
+    постах канала, а пояснение говорит, что в источниках цены нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if not str(d.get("sum") or "").strip()
+                and d.get("type") != "Продажа с торгов")
+    page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".fact-note", timeout=15000)
+    text = page.inner_text("#app")
+    assert "Нет данных" not in text
+    assert "Не раскрыта" in text and "отсутствует информация о цене сделки" in text
+
+
+def test_page_source_does_not_name_the_team():
+    """Владелец 5 октября 2026: «чтобы нигде не было индикаторов, кто создал
+    „Компас“». Исходник страницы видит любой посетитель, а в комментариях
+    стояли имена партнёров и ссылки на внутренний файл правил."""
+    import re as _re
+    html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
+    found = sorted(set(m.group(0) for m in _re.finditer(
+        r"Ксюш\w*|Арт[её]м\w*|Асоян|Белкин|belkin|CLAUDE\.md|Claude|Anthropic|gmail", html, _re.I)))
+    assert not found, found
