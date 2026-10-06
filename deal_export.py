@@ -37,6 +37,57 @@ def _font_path(*names: str) -> str | None:
     return None
 
 
+# Надпись «КОМПАС» в шапке PDF — тем же шрифтом и цветом, что логотип на
+# сайте (`.wordmark`: PT Serif, тёмные буквы, бронзовые М и А — скрытое
+# «M&A»). Владелец 7 октября 2026 по скриншоту выгрузки: «почему-то в слове
+# Компас нет коричневых букв, как в нашем логотипе». Шрифт едет в поставке
+# (static/fonts/PTSerif-Bold.ttf, OFL) по той же причине, что DejaVu: на
+# боевом хосте системных шрифтов нет. Нет файла — рубленый полужирный, но
+# цвета букв те же.
+INK = colors.HexColor("#15191D")
+BRONZE = colors.HexColor("#A3814E")
+# Буквы — подряд, без пробелов и без отдельных ячеек: в одном абзаце
+# reportlab ставит их вплотную, как в слове, и межбуквенный интервал не
+# раздувается (тот же дефект на сайте чинили 5 октября 2026 — буквы в
+# flex-контейнере с gap разъезжались).
+WORDMARK = 'КО<font color="#A3814E">М</font>П<font color="#A3814E">А</font>С'
+
+
+# У рамки SimpleDocTemplate свои поля по 6 pt слева и справа: абзацы стоят
+# внутри них, и таблица шириной doc.width вылезает за правый край текста.
+FRAME_PAD = 6
+
+
+def _inner_width(doc: SimpleDocTemplate) -> float:
+    return doc.width - 2 * FRAME_PAD
+
+
+def _register_wordmark_font(fallback: str) -> str:
+    path = _font_path("PTSerif-Bold.ttf")
+    if not path:
+        return fallback
+    pdfmetrics.registerFont(TTFont("CompassSerifBold", path))
+    return "CompassSerifBold"
+
+
+def _brand_head(mark_size: float, font_size: float, width: float, fallback_font: str) -> "Table":
+    """Знак и надпись «КОМПАС» одной строкой. Таблица шириной во всё поле
+    и прижата влево: у reportlab таблица уже поля стоит ПО ЦЕНТРУ, и знак
+    съезжал на 7 мм правее заголовка (владелец, 7 октября 2026: «подвинуть,
+    чтобы выравнивание ровное было»)."""
+    style = ParagraphStyle("Wordmark", fontName=_register_wordmark_font(fallback_font),
+                           fontSize=font_size, leading=font_size * 1.15, textColor=INK)
+    gap = mark_size + 3*mm
+    head = Table([[CompassMark(mark_size, INK, BRONZE, colors.white), Paragraph(WORDMARK, style)]],
+                 colWidths=[gap, width - gap], hAlign="LEFT")
+    head.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
+    ]))
+    return head
+
+
 def _register_fonts() -> tuple[str, str]:
     regular = _font_path("DejaVuSans.ttf", "LiberationSans-Regular.ttf")
     bold = _font_path("DejaVuSans-Bold.ttf", "LiberationSans-Bold.ttf")
@@ -174,17 +225,7 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
     story: list[Any] = []
     # Знак и название — одной строкой, таблицей: у Flowable нет обтекания
     # текстом, и положить их рядом иначе нечем.
-    brand_style = ParagraphStyle("Brand", parent=body, fontName=bold, fontSize=16,
-                                 leading=18, textColor=brand)
-    head = Table([[CompassMark(7.5*mm, brand, bronze, colors.white),
-                   Paragraph("КОМПАС", brand_style)]],
-                 colWidths=[10.5*mm, 149.5*mm])
-    head.setStyle(TableStyle([
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-        ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
-    ]))
-    story.append(head)
+    story.append(_brand_head(7.5*mm, 18, _inner_width(doc), bold))
     story.append(Paragraph(escape(_text(deal.get("title"))), title))
     meta = " · ".join(x for x in (_text(deal.get("date")), _text(deal.get("status")),
                                   _text(deal.get("type")), _text(deal.get("ind"))) if x and x != "Не раскрыто")
@@ -196,7 +237,10 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         ["Объект сделки", _text(deal.get("asset") or deal.get("target_name"))],
         ["Сумма", _text(deal.get("sum"))],
     ]
-    tbl = Table([[Paragraph(f"<b>{escape(k)}</b>", small), Paragraph(escape(v), body)] for k,v in facts], colWidths=[42*mm, 118*mm])
+    # Во всю ширину поля и влево — иначе таблица стоит по центру и съезжает
+    # правее заголовка и абзацев (тот же дефект, что у шапки).
+    tbl = Table([[Paragraph(f"<b>{escape(k)}</b>", small), Paragraph(escape(v), body)] for k,v in facts],
+                colWidths=[42*mm, _inner_width(doc) - 42*mm], hAlign="LEFT")
     tbl.setStyle(TableStyle([
         ("VALIGN",(0,0),(-1,-1),"TOP"),("LINEBELOW",(0,0),(-1,-1),0.35,colors.HexColor("#E2E5DF")),
         ("LEFTPADDING",(0,0),(-1,-1),0),("RIGHTPADDING",(0,0),(-1,-1),4),
@@ -264,7 +308,8 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
                 Paragraph(_money(row.get("assets_rub")), small),
                 Paragraph(_money(row.get("equity_rub")), small),
             ])
-        fin_tbl = Table(table_rows, colWidths=[52*mm, 27*mm, 27*mm, 27*mm, 27*mm])
+        num_w = (_inner_width(doc) - 52*mm) / 4
+        fin_tbl = Table(table_rows, colWidths=[52*mm] + [num_w]*4, hAlign="LEFT")
         fin_tbl.setStyle(TableStyle([
             ("VALIGN", (0, 0), (-1, -1), "TOP"),
             ("ALIGN", (1, 0), (-1, -1), "RIGHT"),
@@ -295,11 +340,14 @@ def render_deal_pdf(deal: dict[str, Any]) -> bytes:
         "источников и могут быть неполными.", small))
 
     def footer(canvas, _doc):
+        # Подвал по тому же краю, что текст.
+        left = _doc.leftMargin + FRAME_PAD
+        right = _doc.pagesize[0] - _doc.rightMargin - FRAME_PAD
         canvas.saveState(); canvas.setStrokeColor(bronze); canvas.setLineWidth(0.7)
-        canvas.line(18*mm, 12*mm, 192*mm, 12*mm)
+        canvas.line(left, 12*mm, right, 12*mm)
         canvas.setFont(regular, 7); canvas.setFillColor(muted)
-        canvas.drawString(18*mm, 7.5*mm, "projectcompass.ru")
-        canvas.drawRightString(192*mm, 7.5*mm, f"стр. {_doc.page}")
+        canvas.drawString(left, 7.5*mm, "projectcompass.ru")
+        canvas.drawRightString(right, 7.5*mm, f"стр. {_doc.page}")
         canvas.restoreState()
 
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
@@ -337,16 +385,7 @@ def render_companies_pdf(companies: list[dict[str, Any]]) -> bytes:
                                leading=14, textColor=brand)
 
     story: list[Any] = []
-    brand_style = ParagraphStyle("CmpBrand", parent=body, fontName=bold, fontSize=15,
-                                 leading=17, textColor=brand)
-    head = Table([[CompassMark(7*mm, brand, bronze, colors.white), Paragraph("КОМПАС", brand_style)]],
-                 colWidths=[10*mm, 235*mm])
-    head.setStyle(TableStyle([
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-        ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
-    ]))
-    story.append(head)
+    story.append(_brand_head(7*mm, 17, _inner_width(doc), bold))
     story.append(Paragraph("Сравнение компаний", title))
     story.append(Spacer(1, 3*mm))
     story.append(Paragraph(escape("Отчёт сформирован %s" % _report_date()), small))
@@ -360,7 +399,7 @@ def render_companies_pdf(companies: list[dict[str, Any]]) -> bytes:
         ("Чистая прибыль", "net_profit"), ("Собственники", "owners"),
     ]
     n = max(1, len(companies))
-    col = (245*mm - 32*mm) / n
+    col = (_inner_width(doc) - 32*mm) / n
     table: list[list[Any]] = [
         [Paragraph("", small)] + [Paragraph(escape(_text(c.get("name"))), head_cell) for c in companies]
     ]
@@ -371,12 +410,14 @@ def render_companies_pdf(companies: list[dict[str, Any]]) -> bytes:
             cells.append(Paragraph(escape(value) if value else "—", body))
         table.append(cells)
 
-    grid = Table(table, colWidths=[32*mm] + [col]*n, repeatRows=1)
+    grid = Table(table, colWidths=[32*mm] + [col]*n, repeatRows=1, hAlign="LEFT")
     grid.setStyle(TableStyle([
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LINEBELOW", (0, 0), (-1, -1), 0.35, line),
         ("LINEAFTER", (0, 0), (-2, -1), 0.35, line),
         ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        # Первая колонка — на общем краю, остальные отступают от черты слева.
+        ("LEFTPADDING", (1, 0), (-1, -1), 8),
         ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
     ]))
     story.append(grid)
