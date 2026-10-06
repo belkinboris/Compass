@@ -2617,6 +2617,36 @@ def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
         ctx.close()
 
 
+def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_url):
+    """Подсказка в поле ассистента на первом экране — один вопрос, и он
+    виден целиком.
+
+    Скриншот владельца 7 октября 2026: на телефоне в поле стояло «Спросите:
+    кто сопровождал сделки? ка» — вторая половина подсказки обрезалась на
+    полуслове. «Концовку „ка“ не должно быть видно. Пусть будет один вопрос
+    „кто сопровождал сделку…“». Ширину текста меряем шрифтом самого поля:
+    на 320 px остаётся 226 px, «Кто сопровождал сделку…» занимает около 215.
+    """
+    for width in (320, 360, 390, 1280):
+        ctx = browser.new_context(viewport={"width": width, "height": 800})
+        try:
+            pg = ctx.new_page()
+            pg.goto(base_url + "/#/", wait_until="networkidle")
+            pg.wait_for_selector("#heroq", state="attached")
+            fit = pg.evaluate("""() => {
+              const i = document.getElementById('heroq'), cs = getComputedStyle(i);
+              const c = document.createElement('canvas').getContext('2d');
+              c.font = cs.font;
+              return {text: i.placeholder,
+                      need: c.measureText(i.placeholder).width,
+                      room: i.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)};
+            }""")
+            assert fit["text"].count("?") == 0 and fit["text"].endswith("…"), fit
+            assert fit["need"] <= fit["room"], (width, fit)
+        finally:
+            ctx.close()
+
+
 def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
     """«Все сделки» на странице компании раскрываются списком, а не окном.
 
