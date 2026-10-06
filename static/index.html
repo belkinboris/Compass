@@ -1593,6 +1593,23 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .advisor-card-count{justify-self:end;white-space:nowrap}
 .advisor-card-count .count-btn.empty{white-space:normal}
 .advisor-filters{align-items:center}
+/* Фирменная карточка каталога — правило у BRAND_TOKENS: рамка наша, внутри
+   бренд. Цвета, шрифт и пропорции логотипа приходят переменными --b-* и
+   больше нигде на странице не используются. */
+@font-face{font-family:'Commissioner';src:url(/static/fonts/commissioner-cyrillic.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Commissioner';src:url(/static/fonts/commissioner-latin.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.advisor-card.brand{position:relative;overflow:hidden;background:linear-gradient(90deg,color-mix(in srgb,var(--b-a1) 9%,var(--card)) 0%,var(--card) 36%);transition:box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.advisor-card.brand::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--b-a1),var(--b-a2),var(--b-a3))}
+.advisor-card.brand:hover{border-color:color-mix(in srgb,var(--b-a1) 60%,var(--line));box-shadow:0 18px 38px -26px color-mix(in srgb,var(--b-a2) 75%,transparent)}
+.advisor-card.brand .advisor-card-name a::after{content:"";position:absolute;inset:0;z-index:0}
+.advisor-card.brand .advisor-card-count{position:relative;z-index:1}
+.brand-name a{display:block;line-height:0}
+.brand-name a:hover{text-decoration:none}
+.brand-logo{display:block;height:26px;width:auto;max-width:100%;transition:transform .3s var(--ease)}
+.advisor-card.brand:hover .brand-logo{transform:translateX(3px)}
+.brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
+.advisor-card.brand .brand-text{font-family:var(--b-font,var(--f-body));font-size:14.5px;color:color-mix(in srgb,var(--b-ink) 78%,transparent)}
 
 .deal-tools{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
 .deal-tools .chip.primary{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
@@ -1749,6 +1766,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-card:has(.advisor-card-groups){grid-template-columns:1fr;gap:12px;padding:19px 18px}
   .advisor-card-name{font-size:21px}.advisor-card-count{justify-self:start;white-space:normal}
   .advisor-card-groups{font-size:14px}
+  .advisor-card.brand{padding-left:22px}.brand-logo{height:23px}
   .relationship-head{padding:19px 18px}.relationship-body{padding:18px}
   .relationship-map{grid-template-columns:1fr}.relationship-center{min-height:0;padding:18px}
   .relationship-center:after{display:none}.relationship-grid{grid-template-columns:1fr}
@@ -2162,7 +2180,60 @@ const INV_FIRMS = [
  {id:"corexp",n:"CORE.XP",g:["Консультант по недвижимости"],desc:"Консультант сделок с коммерческой недвижимостью, чаще на стороне продавца."},
  {id:"rad",n:"Российский аукционный дом",g:["Организатор торгов"],desc:"Организатор торгов по поручению собственника и торговая площадка."},
  {id:"veb",n:"ВЭБ.РФ",g:["Институт развития"],desc:"Организатор сделок с инфраструктурными и транспортными активами."},
+ /* ДОБАВЛЕНА 6 ОКТЯБРЯ 2026. Владелец: «Strategy Partners у нас вообще не
+    было в списке, несмотря на то, что они одну сделку сопровождали по нашей
+    базе» — сделка по «Форштадту» (eco.finadv). Описание — профиль фирмы с её
+    сайта, как у соседей, без пересказа сделок. `brand` — фирменная карточка
+    в списке, правило у BRAND_TOKENS. */
+ {id:"strategy",n:"Strategy Partners",g:["Консалтинг"],site:"https://strategy.ru/",
+  desc:"Стратегический консалтинг, операционная эффективность, цифровая трансформация, корпоративные финансы и сопровождение сделок.",
+  brand:{logo:"/static/brands/strategy-partners.svg",ratio:7.88,font:"Commissioner",ink:"#171523",
+         accent:["#2EEAEF","#2EA7ED","#2F8AED"],slogan:"Решения, которые работают"}},
 ];
+/* ФИРМЕННАЯ КАРТОЧКА В СПИСКЕ. Владелец 6 октября 2026: карточка фирмы в
+   списке инвестиционных консультантов — в её стиле, «чтобы все хотели на
+   неё кликать», но «чтобы стиль списка Компаса сохранялся и, когда брендов
+   станет много, страница не превратилась в клоуна». Страница самой фирмы
+   при этом НЕ стилизуется (её вид — отдельная работа).
+   Правило одно на все фирмы: РАМКА НАША, ВНУТРИ — БРЕНД. Размер и сетка
+   карточки, подпись «Профиль», кнопка со счётом сделок и место в списке
+   (по алфавиту или по числу сделок) — общие: фирменная карточка наверх не
+   поднимается. Бренд даёт: свой логотип вместо набранного названия, свой
+   шрифт для текста карточки, свои цвета — кромку слева, лёгкий отсвет от
+   неё и подсветку при наведении — и свой девиз под логотипом.
+   Значения проверяются здесь же: логотип — svg из static/brands (никаких
+   чужих адресов), шрифт — только из тех, что лежат у нас в static/fonts
+   (сайт работает из России без внешних загрузок), тёмный цвет обязан быть
+   тёмным, оттенков кромки не больше трёх, девиз короткий. Не прошла проверку
+   — карточка рисуется обычной, а не «как вышло». */
+const BRAND_TOKENS = {
+  hex: /^#[0-9A-Fa-f]{6}$/,
+  logo: /^\/static\/brands\/[a-z0-9-]+\.svg$/,
+  fonts: ["Commissioner"],
+  maxAccent: 3, maxSlogan: 40,
+  // относительная яркость по WCAG: ниже 0,05 — тёмный цвет, которым можно
+  // набирать текст по белому
+  maxInkLuminance: 0.05,
+};
+const hexLuminance = hex => {
+  const ch = i => { const v = parseInt(hex.slice(i, i+2), 16)/255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); };
+  return 0.2126*ch(1) + 0.7152*ch(3) + 0.0722*ch(5);
+};
+const firmBrand = f => {
+  const b = f && f.brand, T = BRAND_TOKENS;
+  if(!b || !T.logo.test(b.logo||"") || !(b.ratio > 0)) return null;
+  if(!T.hex.test(b.ink||"") || hexLuminance(b.ink) > T.maxInkLuminance) return null;
+  const accent = Array.isArray(b.accent) ? b.accent : [];
+  if(!accent.length || accent.length > T.maxAccent || !accent.every(c=>T.hex.test(c))) return null;
+  if(b.font && !T.fonts.includes(b.font)) return null;
+  if(String(b.slogan||"").length > T.maxSlogan) return null;
+  return b;
+};
+const brandStyle = b => {
+  const a = b.accent, pick = i => a[Math.min(i, a.length-1)];
+  return `--b-ink:${b.ink};--b-a1:${pick(0)};--b-a2:${pick(1)};--b-a3:${pick(2)};--b-ratio:${b.ratio}`
+    + (b.font ? `;--b-font:'${b.font}'` : "");
+};
 const GROUP_LABEL = {"С-hi":"Сопровождение сделок — крупный бизнес","К-hi":"Корпоративное консультирование — крупный бизнес","mid":"Средний бизнес"};
 const FIRM_MATCH = {orion:/orion|орион/i, level:/level legal|\blevel\b/i, aspring:/aspring/i, tomashevskaya:/tomashevskaya|томашевск/i,
   verba:/verba|верба/i, birch:/birch|бёрч|берч/i, mvp:/меллинг|voitishkin|мвп\b/i, nikolskaya:/никольская/i,
@@ -2192,7 +2263,8 @@ const FIRM_MATCH = {orion:/orion|орион/i, level:/level legal|\blevel\b/i, a
   bcs:/БКС(?![А-Яа-яЁё])/, unicorn:/\bUnicorn\b/, bgp:/BGP Capital/, astoria:/Astoria Capital/,
   novus:/Novus Capital/, atomiccap:/Atomic Capital/, ibcre:/IBC Real Estate/,
   nikoliers:/Nikoliers/, nfgroup:/NF Group|Knight Frank/, corexp:/CORE\.XP/,
-  rad:/Российский аукционный дом/, veb:/ВЭБ\.РФ/};
+  rad:/Российский аукционный дом/, veb:/ВЭБ\.РФ/,
+  strategy:/Strategy Partners|Стратеджи Партн[её]рс/};
 
 /* фолбэк: если для фирмы нет явной регулярки — строим её из названия
    (полное имя, без регистра). Так сделки считаются у ВСЕХ фирм каталога,
@@ -7679,6 +7751,25 @@ function advNoMatchHtml(){
   return `<div class="advisor-nomatch reveal"><p>По запросу «${esc(advQuery.trim())}» в этой вкладке ничего не нашлось.</p>
     ${n?`<button class="chip" type="button" data-t="${otherType}">Есть среди ${otherName}: ${n}</button>`:""}</div>`;
 }
+/* Карточка каталога — одна на обе вкладки; фирменная (firmBrand) — по
+   правилу у BRAND_TOKENS. Логотип стоит картинкой, поэтому название фирмы
+   лежит рядом скрытым текстом: его читают экранный диктор, поиск по
+   странице и тесты. Фирменная карточка нажимается целиком: ссылка на
+   логотипе растянута на всю карточку, кнопка счёта лежит поверх неё. */
+function advisorCardHtml(r, withProfile){
+  const b = firmBrand(r.f);
+  const name = b
+    ? `<div class="advisor-card-name brand-name"><a href="#/advisors/${r.f.id}"><img class="brand-logo" src="${b.logo}" alt="" width="${Math.round(26*b.ratio)}" height="26"><span class="vh">${r.f.n}</span></a>${b.slogan?`<span class="brand-slogan">${esc(b.slogan)}</span>`:""}</div>`
+    : `<div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>`;
+  const profile = withProfile
+    ? `<div class="advisor-card-groups"><span class="label">Профиль</span><br><span class="brand-text">${r.f.desc||r.f.g.join(" · ")}</span></div>`
+    : "";
+  return `<article class="advisor-card${b?" brand":""}"${b?` style="${brandStyle(b)}"`:""}>
+      ${name}
+      ${profile}
+      <div class="advisor-card-count">${advCountHtml(r)}</div>
+    </article>`;
+}
 function advisorsBodyHtml(){
   let body = "";
   if(advType==="legal"){
@@ -7694,10 +7785,7 @@ function advisorsBodyHtml(){
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
     ${rows.length?`<div class="advisor-list reveal">
-      ${rows.map(r=>`<article class="advisor-card">
-        <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
-        <div class="advisor-card-count">${advCountHtml(r)}</div>
-      </article>`).join("")}
+      ${rows.map(r=>advisorCardHtml(r, false)).join("")}
     </div>`:advNoMatchHtml()}`;
   } else if(advType==="invest"){
     const rows = INV_FIRMS.filter(f=>advMatch(f, advQuery)).map(f=>({f,n:advCount(f.id)}))
@@ -7708,11 +7796,7 @@ function advisorsBodyHtml(){
       ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
-    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
-      <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
-      <div class="advisor-card-groups"><span class="label">Профиль</span><br>${r.f.desc||r.f.g.join(" · ")}</div>
-      <div class="advisor-card-count">${advCountHtml(r)}</div>
-    </article>`).join("")}</div>`:advNoMatchHtml()}`;
+    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>advisorCardHtml(r, true)).join("")}</div>`:advNoMatchHtml()}`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
