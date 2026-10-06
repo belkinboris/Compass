@@ -2647,6 +2647,26 @@ def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_u
             ctx.close()
 
 
+def test_agreement_and_privacy_pages_are_off_until_the_owner_reads_them(page, base_url):
+    """Владелец 7 октября 2026: «уберите пока политику конфиденциальности и
+    пользовательское соглашение, мы завтра нормально вычитаем и новое
+    запустим». Черновики остаются в коде (`LEGAL_DOCS`), выключены
+    переключателем `legalPagesOn()`: ссылок в подвале не видно, а старый
+    адрес #/legal/terms открывает обычную ленту, а не черновик."""
+    visit(page, base_url, "#/")
+    links = page.evaluate("""() => [...document.querySelectorAll('footer a')]
+      .filter(a => a.offsetParent !== null).map(a => a.textContent.trim())""")
+    assert not any("соглашение" in t or "персональных" in t for t in links), links
+    for kind in ("terms", "privacy"):
+        visit(page, base_url, f"#/legal/{kind}")
+        state = page.evaluate("""() => ({
+          legal: !!document.querySelector('.legal-page'),
+          title: (document.querySelector('#app h1') || {}).textContent || '',
+        })""")
+        assert not state["legal"], (kind, state)
+        assert "Политика" not in state["title"] and "соглашение" not in state["title"], state
+
+
 def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
     """«Все сделки» на странице компании раскрываются списком, а не окном.
 
