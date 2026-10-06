@@ -1552,6 +1552,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .foot-col a:hover{color:var(--ivory);transform:translateX(4px)}
 .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;padding:22px 0 26px;font-size:12px;color:#7E948A}
 .foot-legal-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-legal-links[hidden]{display:none}
 .foot-legal-links a{color:#7E948A;text-decoration:underline;text-underline-offset:2px}
 .foot-legal-links a:hover{color:var(--ivory)}
 @media(max-width:820px){.foot-grid{grid-template-columns:1fr;gap:30px}}
@@ -1860,7 +1861,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
     </div>
     <div class="foot-bottom">
       <div>Данные из публичных источников, могут быть неполными. Не рейтинг и не рекомендация. Сделки с 2022 года.</div>
-      <div class="foot-legal-links"><a href="#/legal/terms">Пользовательское соглашение</a><a href="#/legal/privacy">Обработка персональных данных</a></div>
+      <div class="foot-legal-links" id="footLegal" hidden><a href="#/legal/terms">Пользовательское соглашение</a><a href="#/legal/privacy">Обработка персональных данных</a></div>
     </div>
   </div>
 </footer>
@@ -2924,7 +2925,7 @@ async function loadBulkDeals(attempt=0){
   // на медленной мобильной, где домен грузится дольше всего, шанс попасть в
   // это окно выше всего.
   const currentPage = (location.hash.replace("#","")||"/").split("?")[0].split("/")[1];
-  if(!["materials","webinars","legal","assistant","account"].includes(currentPage)) route();
+  if(!["materials","webinars","assistant","account"].concat(legalPagesOn()?["legal"]:[]).includes(currentPage)) route();
 }
 loadBulkDeals();
 // Кнопка «Повторить» появляется в разных местах разметки (лента, карточка,
@@ -3233,7 +3234,7 @@ function route(){
     mark("analytics");
   }
   else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
-  else if(page==="legal"){renderLegal(arg);}
+  else if(page==="legal"&&legalPagesOn()){renderLegal(arg);}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
@@ -8811,6 +8812,12 @@ async function mountMarketMultiples(){
   draw();
 }
 
+
+/* Соглашение и политика сняты с сайта 7 октября 2026 до вычитки владельцем
+   («уберите пока, завтра вычитаем и запустим новое»): ссылок в подвале нет,
+   адрес #/legal/… открывает ленту. Вернуть — true здесь. */
+function legalPagesOn(){ return false; }
+if(legalPagesOn()){ const f=document.getElementById("footLegal"); if(f) f.hidden=false; }
 
 /* Черновики правовых документов — ждут утверждения владельцем и заполнения
    реквизитов оператора (юрлицо/ИП, ОГРН/ИНН, адрес), поэтому в тексте
