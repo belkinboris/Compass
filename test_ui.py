@@ -2091,13 +2091,13 @@ def test_advisors_page_has_a_search(page, base_url):
     assert page.locator(".advisor-card-name").all_inner_texts() == ["Aspring Capital"]
 
 
-def test_strategy_partners_is_found_and_drawn_as_a_brand_card(page, base_url):
+def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     """Владелец 6 октября 2026: Strategy Partners не было в списке, хотя
-    фирма сопровождала сделку по нашей базе («Форштадт»). Её карточка в
-    списке инвестиционных консультантов — в её стиле: настоящий логотип,
-    её шрифт и цвета; но рамка, подпись «Профиль», кнопка и место в списке
-    общие (BRAND_TOKENS), чтобы при многих брендах список оставался списком.
-    Описание — только профиль фирмы, без пересказа сделок."""
+    фирма сопровождала сделку по нашей базе («Форштадт»). Карточка — обычная,
+    как у всех: фирменная (логотип, цвета, шрифт, место наверху) выключена тем
+    же днём — «мы ещё с ними не договорились». Готовое оформление лежит в
+    brandDraft и проверяется правилом BRAND_TOKENS, чтобы его можно было
+    включить одной правкой."""
     # страница одна на сессию, и переход по хешу её не перезагружает:
     # вкладку и запрос прошлого теста сбрасываем сами
     visit(page, base_url, "#/advisors")
@@ -2109,64 +2109,27 @@ def test_strategy_partners_is_found_and_drawn_as_a_brand_card(page, base_url):
     page.click(".advisor-nomatch .chip")
     page.wait_for_timeout(500)
     card = page.locator(".advisor-card")
-    assert card.count() == 1 and "brand" in card.get_attribute("class")
+    assert card.count() == 1
+    assert card.get_attribute("class") == "advisor-card", "фирменная карточка снова включилась"
+    assert page.locator(".brand-logo").count() == 0
     text = card.inner_text().replace("\xa0", " ")
-    assert "Strategy Partners" in text and "Решения, которые работают" in text
-    assert "Форштадт" not in text, "в описании пересказ сделки, а не профиль"
+    assert "Strategy Partners" in text and "Форштадт" not in text
     assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
-    logo = page.locator(".advisor-card.brand .brand-logo")
-    assert logo.get_attribute("src") == "/static/brands/strategy-partners.svg"
-    assert page.evaluate("document.querySelector('.brand-logo').naturalWidth") > 0, "логотип не загрузился"
-    font = page.evaluate("getComputedStyle(document.querySelector('.advisor-card.brand .brand-text')).fontFamily")
-    assert "Commissioner" in font, font
-    assert page.evaluate("document.fonts.check('16px Commissioner')"), "шрифт фирмы не загрузился"
-    # каждый объявленный бренд проходит проверку — иначе карточка молча
-    # рисуется обычной, и ошибку никто не заметит
-    bad = page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>f.brand&&!firmBrand(f)).map(f=>f.n)")
-    assert not bad, f"бренд не прошёл проверку: {bad}"
-    for wrong in ("{logo:'https://example.com/x.svg',ratio:2,ink:'#111111',accent:['#000000']}",
-                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#FFFFFF',accent:['#000000']}",
-                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#111111',accent:['#000000'],font:'Arial Black'}"):
-        assert page.evaluate(f"firmBrand({{brand:{wrong}}})") is None, wrong
-    # фирменная — в самом верху, остальные по алфавиту; левый край, подпись
-    # «Профиль» и кнопка — как у соседей
+    # ни одна фирма сейчас не фирменная, и порядок — чистый алфавит
+    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).length") == 0
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
     names = page.locator(".advisor-card-name a").all_inner_texts()
-    assert names[0] == "Strategy Partners", names[:3]
-    rest = names[1:]
-    assert rest == sorted(rest, key=__import__("functools").cmp_to_key(
-        lambda a, b: page.evaluate("([a,b])=>firmAlpha(a,b)", [a, b]))), "остальные сбились с алфавита"
-    lefts = page.evaluate("""[...document.querySelectorAll('.advisor-card')].slice(0,3).map(c=>{
-        const l=c.querySelector('.brand-logo'); if(l) return Math.round(l.getBoundingClientRect().left);
-        const r=document.createRange(); r.selectNodeContents(c.querySelector('.advisor-card-name a'));
-        return Math.round(r.getBoundingClientRect().left)})""")
-    assert len(set(lefts)) == 1, f"логотип не на общем левом крае: {lefts}"
-    assert page.locator(".advisor-card.brand .count-btn").count() == 1
-    # при выборе отрасли список — счёт сделок в ней, и наверх никто не поднимается
-    page.evaluate("advInd='Ритейл';renderAdvisorsBody()")
-    page.wait_for_timeout(300)
-    assert page.locator(".advisor-card").first.get_attribute("class") == "advisor-card"
-    page.evaluate("advInd='Все';renderAdvisorsBody()")
-    # страница самой фирмы обычная
-    visit(page, base_url, "#/advisors/strategy")
-    page.wait_for_selector(".d-head h1")
-    assert page.locator(".d-head .brand-logo").count() == 0
-    visit(page, base_url, "#/advisors")
-    page.evaluate("advType='invest';renderAdvisors()")
-    page.set_viewport_size({"width": 360, "height": 800})
-    try:
-        page.wait_for_timeout(300)
-        over = page.evaluate("""(()=>{const h=document.documentElement,b=document.body;
-            const keep=[h.style.overflowX,b.style.overflowX];
-            h.style.overflowX='visible'; b.style.overflowX='visible';
-            const w=h.scrollWidth-h.clientWidth;
-            h.style.overflowX=keep[0]; b.style.overflowX=keep[1]; return w})()""")
-    finally:
-        page.set_viewport_size({"width": 1280, "height": 1000})
-        page.evaluate("advType='legal';renderAdvisors()")
-    assert over <= 0, f"страница шире экрана на {over}px"
+    assert names == sorted(names, key=__import__("functools").cmp_to_key(
+        lambda a, b: page.evaluate("([a,b])=>firmAlpha(a,b)", [a, b]))), "порядок не по алфавиту"
+    # отложенное оформление проходит правило, а негодное — нет
+    assert page.evaluate("!!firmBrand({brand:INV_FIRMS.find(f=>f.id==='strategy').brandDraft})")
+    for wrong in ("{logo:'https://example.com/x.svg',ratio:2,ink:'#111111',accent:['#000000']}",
+                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#FFFFFF',accent:['#000000']}",
+                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#111111',accent:['#000000'],font:'Arial Black'}"):
+        assert page.evaluate(f"firmBrand({{brand:{wrong}}})") is None, wrong
+    page.evaluate("advType='legal';renderAdvisors()")
 
 
 def test_wordmark_returns_to_the_top(page, base_url):
