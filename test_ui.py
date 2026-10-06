@@ -4389,6 +4389,22 @@ def test_deal_without_a_sum_says_not_disclosed_not_no_data(page, base_url):
     text = page.inner_text("#app")
     assert "Нет данных" not in text
     assert "Не раскрыта" in text and "отсутствует информация о цене сделки" in text
+    # 6 октября 2026: «когда не видно ценника — сделать меньше». Подпись без
+    # цены мельче настоящей суммы и приглушена.
+    size = page.evaluate("parseFloat(getComputedStyle(document.querySelector('.stat-hero .stat-num')).fontSize)")
+    assert page.locator(".stat-hero .stat-num.na").count() == 1 and size <= 24, size
+
+
+def test_materials_page_has_no_empty_webinar_card(page, base_url):
+    """Владелец 6 октября 2026: карточку «Первый вебинар готовится. Анонсы и
+    записи появятся здесь» убрать — пока вебинаров нет, под карточками заявки
+    ничего не стоит, и строка над ними не обещает «ниже анонсы»."""
+    visit(page, base_url, "#/materials")
+    page.wait_for_selector(".materials-pitch")
+    page.wait_for_timeout(800)
+    text = page.inner_text("#app")
+    assert "Первый вебинар" not in text and "появятся здесь" not in text, text[-300:]
+    assert "ниже анонсы" not in text
 
 
 def test_page_source_does_not_name_the_team():

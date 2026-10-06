@@ -885,6 +885,10 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .stat-hero{animation:fadeUp .4s var(--ease);margin-bottom:28px}
 .stat-hero .label{margin-bottom:10px}
 .stat-hero .stat-num{font-family:var(--f-display);font-size:clamp(30px,4.4vw,44px);line-height:1.1;color:var(--ink)}
+/* Цены нет — подпись, а не число: крупным шрифтом «Не раскрыта» читалась
+   как главный факт карточки (владелец, 6 октября 2026: «когда не видно
+   ценника, сделать меньше»). */
+.stat-hero .stat-num.na{font-size:22px;color:var(--muted)}
 .spec-list{border-top:1px solid var(--line);margin-bottom:26px;animation:fadeUp .45s var(--ease)}
 /* Показатели — сетка с общей вертикалью, а не выключка вправо.
    Выключка вправо оправдана для колонки однородных чисел (так сделана
@@ -5997,7 +6001,8 @@ function renderDeal(id, qs, previewCard){
        берётся из слоя фактов — как и в ленте, см. dealSumHtml. Остальные
        величины показываются как есть. */
     const hero = (label,val,allowStub) => (allowStub ? has(val) : hasFact(val))
-      ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num">${
+      ? `<div class="stat-hero"><span class="label">${label}</span><div class="stat-num num${
+          (label==="Сумма"||label==="Начальная цена лота") && sumState(d.sum)!=="known" ? " na" : ""}">${
           (label==="Сумма"||label==="Начальная цена лота") && val===d.sum ? dealSumHtml(d) : sumHtml(val)}</div></div>` : "";
     // Ярлык той же строки, что и в остальных блоках карточки (жирный, капс,
     // приглушённый — класс .label, тот же, что у «Цель сделки»/«Контекст»
@@ -8859,7 +8864,7 @@ async function renderMaterials(){
     <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем канале.</p><span class="mp-go">Оставить заявку →</span></button>
     <button class="mp-item" type="button" data-pitch="profile"><h2>Профиль автора</h2><p>Ваши материалы собираются на странице фирмы рядом с её сделками.</p><span class="mp-go">Оставить заявку →</span></button>
   </div>
-  <p class="acct-note mp-note reveal">Раздел открылся недавно: ниже анонсы вебинаров, колонки появятся позже. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
+  <p class="acct-note mp-note reveal">Раздел открылся недавно. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
   <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
   const pitchLink=document.getElementById("materialsPitchLink");
@@ -8875,8 +8880,12 @@ async function renderMaterials(){
   const mount=document.getElementById("webinarList");
   try{
     const r=await fetch("/api/webinars"); const rows=r.ok?await r.json():[];
+    /* Пока вебинаров нет, под карточками заявки ничего не рисуется: пустая
+       карточка «Первый вебинар готовится. Анонсы и записи появятся здесь»
+       обещала то, чего нет (владелец, 6 октября 2026: «тоже просил
+       удалить»). Появится первый вебинар — список встанет сюда сам. */
     if(!rows.length){
-      mount.innerHTML=`<div class="feed-empty reveal"><div class="fe-title">Первый вебинар готовится.</div><p>Анонсы и записи появятся здесь.</p></div>`;
+      mount.innerHTML="";
     }else{
       mount.innerHTML=`<div class="webinar-grid">${rows.map(w=>`<article class="webinar-card reveal"><span class="tag ${w.status==="recording"?"steel":""}">${w.status==="recording"?"Запись":"Предстоящий"}</span><h2>${esc(w.title)}</h2>${w.summary?`<p>${esc(w.summary)}</p>`:""}<div class="webinar-meta">${w.starts_at?new Date(w.starts_at).toLocaleString("ru-RU",{dateStyle:"long",timeStyle:"short"}):""}${w.speaker?` · ${esc(w.speaker)}`:""}</div>${w.registration_url?`<a class="chip on" href="${w.registration_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Зарегистрироваться</a>`:""}${w.recording_url?`<a class="chip" href="${w.recording_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px">Смотреть запись</a>`:""}</article>`).join("")}</div>`;
     }
