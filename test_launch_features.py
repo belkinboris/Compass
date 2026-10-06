@@ -4027,6 +4027,77 @@ def test_deal_pdf_carries_the_compass_mark_next_to_the_name():
     assert deal_export.render_deal_pdf(deal).startswith(b"%PDF")
 
 
+def test_deal_pdf_lines_everything_up_on_one_edge_and_writes_the_name_like_the_logo():
+    """Замечание владельца 6 октября 2026 по выгрузке сделки: «нужно подвинуть
+    текст, чтобы выравнивание ровное было. И почему-то в слове компас нет
+    коричневых букв, как в нашем логотипе? Главное убедиться, что буквы не
+    становятся шире друг от друга».
+
+    Причина была в том, что Table по умолчанию стоит ПО ЦЕНТРУ рамки: шапка
+    шириной в знак и слово и таблица сторон шириной 160 мм в поле 174 мм
+    уезжали вправо от заголовка. Теперь всё, что видно, начинается с одного
+    края, а таблицы идут во всю ширину. Слово — шрифтом логотипа (PT Serif
+    Bold, едет в static/fonts), «М» и «А» бронзовые, и всё слово — ОДИН
+    абзац: если раскладывать буквы по отдельным ячейкам или добавлять
+    межбуквенный отступ, между ними появляются щели."""
+    import re
+    import deal_export
+    from reportlab.platypus import Spacer
+    from reportlab.platypus.frames import Frame
+
+    plain = re.sub(r"<[^>]+>", "", deal_export.WORDMARK)
+    assert plain == "КОМПАС", plain
+    bronze = re.findall(r'<font color="#A3814E">(.)</font>', deal_export.WORDMARK)
+    assert bronze == ["М", "А"], bronze
+    assert "charSpace" not in deal_export.WORDMARK and " " not in plain
+
+    font = deal_export._font_path("PTSerif-Bold.ttf")
+    assert font and font.startswith(str(deal_export.FONT_DIR)), font
+
+    drawn = []
+    original = Frame.add
+
+    def add(self, flowable, canv, trySplit=0):
+        draw_on = flowable.drawOn
+
+        def record(canvas, x, y, _sW=0):
+            if not isinstance(flowable, Spacer):
+                drawn.append((type(flowable).__name__, flowable._hAlignAdjust(x, _sW),
+                              _sW, self._x, self._width))
+            return draw_on(canvas, x, y, _sW)
+
+        flowable.drawOn = record
+        try:
+            return original(self, flowable, canv, trySplit)
+        finally:
+            del flowable.drawOn
+
+    Frame.add = add
+    try:
+        deal = {"id": "pdf-edge", "title": "Тестовая сделка: покупка ООО «Ромашка»",
+                "date": "2026-10-06", "status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽",
+                "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": [],
+                "finance": [{"name": "ООО «Ромашка»", "role": "покупаемая компания", "year": 2025,
+                             "revenue_rub": 1e9, "net_profit_rub": 1e8,
+                             "assets_rub": 2e9, "equity_rub": 5e8}]}
+        pdf = deal_export.render_deal_pdf(deal)
+        deal_lines = list(drawn)
+        drawn.clear()
+        compare = deal_export.render_companies_pdf([{"name": "Ромашка"}, {"name": "Василёк"}])
+    finally:
+        Frame.add = original
+
+    assert b"PTSerif-Bold" in pdf and b"PTSerif-Bold" in compare, "слово не шрифтом логотипа"
+    for lines in (deal_lines, drawn):
+        tables = [line for line in lines if line[0] == "Table"]
+        assert len(tables) >= 2, lines  # шапка со словом и таблица
+        for kind, x, slack, frame_x, frame_w in lines:
+            assert abs(x - frame_x) < 0.5, (kind, x, frame_x)
+        for kind, x, slack, frame_x, frame_w in tables:
+            assert abs(slack) < 0.5, ("таблица уже поля", slack, frame_w)
+    assert sum(1 for line in deal_lines if line[0] == "Table") == 3, deal_lines
+
+
 def test_deal_pdf_says_the_report_date_on_the_page():
     """Раньше внизу стояло «Дата формирования отчёта указывается в свойствах
     файла» — отговорка: отчёт пересылают и открывают через месяцы, и «на
