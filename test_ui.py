@@ -2067,6 +2067,30 @@ def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     assert page.locator("#selagroup").count() == 0, "фильтр категорий остался в ленте"
 
 
+def test_advisors_page_has_a_search(page, base_url):
+    """Владелец 6 октября 2026: «строки поиска в консультантах почему-то нет,
+    есть только в компаниях и в сделках». Поиск по названию фирмы в обоих
+    списках: кириллица находит латинское и наоборот, подсказка ведёт на
+    профиль, а если фирма в другой вкладке — кнопка переводит туда."""
+    visit(page, base_url, "#/advisors")
+    assert page.locator("#advq").count() == 1, "на странице консультантов нет поиска"
+    page.click("#advq")
+    page.keyboard.type("алруд", delay=30)
+    page.wait_for_timeout(600)
+    assert page.evaluate("document.activeElement && document.activeElement.id") == "advq", \
+        "при наборе поле теряет фокус"
+    names = page.locator(".advisor-card-name").all_inner_texts()
+    assert names == ["АЛРУД"], names
+    assert "АЛРУД" in page.inner_text("#advac")
+    page.fill("#advq", "")
+    page.keyboard.type("aspring", delay=30)
+    page.wait_for_timeout(600)
+    assert page.locator(".advisor-card").count() == 0
+    page.click(".advisor-nomatch .chip")
+    page.wait_for_timeout(500)
+    assert page.locator(".advisor-card-name").all_inner_texts() == ["Aspring Capital"]
+
+
 def test_wordmark_returns_to_the_top(page, base_url):
     """На главной адрес от клика по логотипу не меняется — `hashchange` не
     срабатывает, `route()` не вызывается, и без отдельного обработчика кнопка
