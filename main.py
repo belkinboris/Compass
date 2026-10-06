@@ -15,6 +15,7 @@ import functools
 import hashlib
 import json
 import logging
+import mimetypes
 import os
 import pathlib
 import re
@@ -78,6 +79,10 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 # minimum_size: мелочь сжимать дороже, чем отдать как есть.
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 
+# Шрифт фирменной карточки каталога (static/fonts/*.woff2): на хостинге
+# Python не знал этого расширения и отдавал шрифт как text/plain (6 октября
+# 2026) — браузеры терпят, но тип должен быть честным.
+mimetypes.add_type("font/woff2", ".woff2")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
