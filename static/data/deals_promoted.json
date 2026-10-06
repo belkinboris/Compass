@@ -219380,6 +219380,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/969908"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2026/09/29/1232556-vladelets-azimut-hotels-prodal-aktiv"
     ]
    ],
    "from_ingest": true,
@@ -222406,6 +222410,10 @@
     [
      "РИА Недвижимость",
      "https://realty.ria.ru/20260930/rusgidro-2121149379.html"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2026/09/30/1232906-rusgidro-vistavila-na-prodazhu-ofis"
     ]
    ],
    "from_ingest": true,
@@ -249536,6 +249544,13 @@
    "ind": "Строительство",
    "desc": "Один из крупнейших российских девелоперов жилья и коммерческой недвижимости, работает с 2005 года. Владелец компании — Владимир Воронин. Юрлицо — ООО «Группа ФСК».",
    "kpi": []
+  },
+  "gd98f5ba9": {
+   "name": "OTP Group",
+   "ind": "Банки",
+   "desc": "Венгерская банковская группа, владеет российским «ОТП банком».",
+   "kpi": [],
+   "group": true
   }
  },
  "match_keys": {

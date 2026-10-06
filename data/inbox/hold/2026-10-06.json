@@ -899,34 +899,6 @@
    ]
   },
   {
-   "draft_id": "d90479177",
-   "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/25/vosem-kommercheskih-pomeshhenij-v-yasnom-proezde-vystavleno-na-torgi"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d15644705",
    "title": "BASF направил предложение о слиянии своему конкуренту Evonik, пишут СМИ",
    "date": "2026-09-25",
@@ -1297,13 +1269,280 @@
    ]
   },
   {
-   "draft_id": "d20318543",
-   "title": "Москва выставила на торги коммерческое помещение на Рязанском проспекте",
+   "draft_id": "d37197659",
+   "title": "Талибы берут Москву // Россия проведет новый раунд консультаций по Афганистану",
+   "date": "2026-10-04",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9005832"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73496010",
+   "title": "Пациенты самостоятельно приобретают каждую седьмую упаковку препаратов от рака",
    "date": "2026-10-06",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/10/6/moskva-vystavila-na-torgi-kommercheskoe-pomeshhenie-na-ryazanskom-prospekte"
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/society/articles/2026/10/06/1234505-patsienti-samostoyatelno-priobretayut-kazhduyu-sedmuyu-upakovku-preparatov-ot-raka"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Пациенты самостоятельно",
+   "asset": "каждая седьмая упаковка препаратов от рака",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Пациенты самостоятельно",
+    "asset": "каждая седьмая упаковка препаратов от рака",
+    "seller": null
+   },
+   "ind": "Производство тары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d82453821",
+   "title": "В ряде аптек продают не зарегистрированную в России вакцину от ВПЧ",
+   "date": "2026-10-05",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/society/articles/2026/10/05/1234128-v-ryade-aptek-prodayut-ne-zaregistrirovannuyu-vaktsinu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15903009",
+   "title": "Таможенные сборы за покупки зарубежных товаров могут достичь 25 млрд рублей",
+   "date": "2026-10-02",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/economics/articles/2026/10/02/1233620-tamozhennie-sbori"
+    ]
+   ],
+   "sum": "25 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46567424",
+   "title": "«Русгидро» выставила на продажу еще один офис в Москве",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/realty/articles/2026/09/30/1232906-rusgidro-vistavila-na-prodazhu-ofis"
+    ]
+   ],
+   "sum": "1,35 млрд ₽",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-30",
+     "title": "Переговоры",
+     "note": "Входящая в группу «Русгидро» компания «Сервиснедвижимость Русгидро» начала искать инвестора на три нежилых помещения общей площадью 7300 кв. м на ул. Архитектора Власова на юго-западе Москвы. Соответствующее объявление опубликовано на сайте Российского…",
+     "source": [
+      "web:vedomosti.ru/articles",
+      "https://www.vedomosti.ru/realty/articles/2026/09/30/1232906-rusgidro-vistavila-na-prodazhu-ofis"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gfbcdc000 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d82265331",
+   "title": "«Яндекс» проведет одну крупную допэмиссию вместо нескольких квартальных",
+   "date": "2026-09-30",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/investments/articles/2026/09/30/1232896-yandeks-provedet-dopemissiyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d58931992",
+   "title": "Инвестиции в добычу нерудного сырья в России в 2026 году могут снизиться на 20%",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/09/29/1232545-investitsii-v-dobichu-nerudnogo-sirya-mogut-snizitsya"
+    ]
+   ],
+   "sum": "26,3 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43359431",
+   "title": "Почему инвестиции в регионах показали худшую динамику за 10 лет",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/economics/articles/2026/09/29/1232541-investitsii-v-regionah-pokazali-hudshuyu-dinamiku"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d55177289",
+   "title": "Купить новый принтер или перейти на Linux. Microsoft ломает механизмы поддержки принтеров в Windows – старые перестанут работать",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-06_kupit_novyj_printer_ili"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d62812791",
+   "title": "Кредиторы «Гугла» проголосовали за продление конкурсного производства",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261006/kreditory-873978127.html"
     ]
    ],
    "sum": null,
@@ -1325,42 +1564,13 @@
    ]
   },
   {
-   "draft_id": "d66449278",
-   "title": "Венчурные инвестиции в российские ИИ-компании за год выросли до 4,2 млрд рублей",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/146523"
-    ]
-   ],
-   "sum": "4,2 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d84268782",
-   "title": "Как сохранить красивый номер при продаже автомобиля",
+   "draft_id": "d54044087",
+   "title": "Иллюзия новизны: на что смотреть при покупке вторички, чтобы не потерять деньги",
    "date": "2026-10-06",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/articles/1053133763"
+     "https://ura.news/news/1053133820"
     ]
    ],
    "sum": null,

@@ -9,6 +9,15 @@
    "reasons": [
     "в карточке «ИИ-разработчик Nextera»"
    ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/business/articles/2026/09/29/1232560-metro-peredani-vo-vremennoe-upravlenie",
+   "title": "Российские активы Metro переданы во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
   }
  ]
 }
