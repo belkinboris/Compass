@@ -104,6 +104,48 @@
     "needs_review": true
    },
    "queued": "2026-10-06"
+  },
+  {
+   "key": "https://www.tadviser.ru/a/49430::pending-4",
+   "candidate_id": "pending-4",
+   "reason": "общие редкие слова: electr, schnei",
+   "draft": {
+    "draft_id": "d22325291",
+    "title": "Schneider Electric купила разработчика САПР PTC за $22,6 млрд",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/49430"
+     ]
+    ],
+    "sum": "$22,6 млрд",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-06",
+      "title": "Сделка завершена",
+      "note": "атегия компании PTC Inc. (прежнее название Parametric Technology Corporation) в области Интернета вещей строится на ее IoT-платформе ThingWorx для разработчиков прикладного Программное обеспечение. Она обеспечивает быструю разработку благодаря использованию…",
+      "source": [
+       "web:tadviser.ru",
+       "https://www.tadviser.ru/a/49430"
+      ]
+     }
+    ],
+    "buyer_name": "Schneider Electric",
+    "asset": "разработчик САПР PTC",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Schneider Electric",
+     "asset": "разработчик САПР PTC",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-10-06"
   }
  ]
 }

@@ -1269,35 +1269,7 @@
    ]
   },
   {
-   "draft_id": "d80772488",
-   "title": "«Магнит ADS» предсказывает, кто совершит покупку во время кампании",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-06_magnit_ads_predskazyvaet"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34465915",
+   "draft_id": "d65646603",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
@@ -1321,6 +1293,288 @@
      ]
     }
    ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90616971",
+   "title": "Акции Совкомбанка резко выросли после новости об увеличении выкупа ценных бумаг",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/06/1234676-aktsii-sovkombanka"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65732492",
+   "title": "Совкомбанк увеличит объем выкупа своих акций до 3 млрд рублей",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/06/1234659-sovkombank-uvelichit"
+    ]
+   ],
+   "sum": "3 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42018526",
+   "title": "В поисках инженера: зачем бизнес вложил в вузы ₽51 млрд",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/education/06/10/2026/6aba6ade9a7947552a615bcf"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "вузы ₽51 млрд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "вузы ₽51 млрд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d89689492",
+   "title": "60,7 млрд рублей инвестиций в ИТ, NB-IoT и Big Data. Как проходит цифровизация АФК «Система»",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/49397"
+    ]
+   ],
+   "sum": "60,7 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33494569",
+   "title": "«Авито Реклама» и Soloway: почти половина жителей России изучает информацию в интернете перед покупкой товаров повседневного спроса",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-06_avito_reklama_i_soloway_pochti"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77006495",
+   "title": "Мишустин призвал стимулировать инвестиции провайдеров в инфраструктуру",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28186827"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d50346556",
+   "title": "Онлайн-продажи в РФ по итогам превысили пятую часть розничного товарооборота",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28186705"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20137189",
+   "title": "Мишустин призвал стимулировать инвестиции в развитие скоростного интернета",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261006/mishustin-2122596995.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d44383046",
+   "title": "В России засекретят часть данных о продаже бензина",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/06/top-secret/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12306433",
+   "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053133865"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
