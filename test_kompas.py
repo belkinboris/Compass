@@ -122,6 +122,14 @@ def test_health_ai_flag(monkeypatch):
     assert body["model"] == main.current_model()
 
 
+def test_brand_font_is_served_as_a_font():
+    """Шрифт фирменной карточки каталога (static/fonts/*.woff2) хостинг
+    отдавал как text/plain: Python там не знал расширения .woff2 (6 октября
+    2026). Тип прописан в main.py явно и не зависит от машины."""
+    r = TestClient(main.app).get("/static/fonts/commissioner-latin.woff2")
+    assert r.status_code == 200 and r.headers["content-type"] == "font/woff2"
+
+
 @pytest.mark.parametrize("path", ["/", "/health", "/#/analytics"])
 def test_head_request_is_answered_not_rejected(path):
     """Проверка живости у хостинга ходит методом HEAD, и 405 в ответ означает
