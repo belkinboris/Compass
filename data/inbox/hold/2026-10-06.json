@@ -1269,7 +1269,7 @@
    ]
   },
   {
-   "draft_id": "d44413701",
+   "draft_id": "d40091113",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
@@ -1308,7 +1308,7 @@
    ]
   },
   {
-   "draft_id": "d32862827",
+   "draft_id": "d40525489",
    "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
    "date": "2026-10-06",
    "src": [
@@ -1336,69 +1336,13 @@
    ]
   },
   {
-   "draft_id": "d20854704",
-   "title": "Мишустин: продажи российского ПО приблизились к 3 трлн рублей",
+   "draft_id": "d72949623",
+   "title": "Минфин 7 октября проведет аукцион по размещению ОФЗ-ПД серии 26252",
    "date": "2026-10-06",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/technology/news/2026/10/06/1234696-prodazhi-po"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36641750",
-   "title": "Объём инвестиций бизнеса в ИТ-образование превысил 10 млрд рублей",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1120648"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89420628",
-   "title": "Костюм Джеймса Бонда с Дэниелом Крейгом выставят на аукцион",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2179474/kostium-dzheimsa-bonda-s-denielom-kreigom-vystaviat-na-auktcion-izi"
+     "https://www.vedomosti.ru/investments/news/2026/10/06/1234747-minfin-provedet-auktsion"
     ]
    ],
    "sum": null,
@@ -1420,13 +1364,69 @@
    ]
   },
   {
-   "draft_id": "d19771238",
-   "title": "Россияне купили тур за 360 тысяч рублей и оказались в грязном номере с рваным бельем",
+   "draft_id": "d32285282",
+   "title": "Минфин 7 октября проведет аукцион по размещению ОФЗ 26252",
    "date": "2026-10-06",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/06/rossiyane-kupili-tur-za-360-tysyach-rubley-i-okazalis-v-gryaznom-nomere-s-rvanym-beliem/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1120671"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42012271",
+   "title": "На аукцион по продаже Рижского вокзала не подали ни одной заявки",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261006/rizhskiy-873996446.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38455590",
+   "title": "Paramount окончательно приобрел Warner Bros. Discovery",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261006/paramount-873996203.html"
     ]
    ],
    "sum": null,
@@ -1439,34 +1439,33 @@
      "title": "Сделка завершена",
      "note": "",
      "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/06/rossiyane-kupili-tur-za-360-tysyach-rubley-i-okazalis-v-gryaznom-nomere-s-rvanym-beliem/"
+      "web:1prime.ru",
+      "https://1prime.ru/20261006/paramount-873996203.html"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "тур",
+   "buyer_name": "Paramount окончательно",
+   "asset": "Warner Bros. Discovery",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": "тур",
+    "buyer": "Paramount окончательно",
+    "asset": "Warner Bros. Discovery",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d22991148",
-   "title": "🔔 ККМП , АЛРУД , Orion , Stonebridge Legal и Никольская Консалтинг сообщают: 12 ноября состоится 4-й ежегодный M&A Форум «Слияния и поглощения в России» . M&A Форум «Слияния и поглощения в России» ста",
+   "draft_id": "d46775877",
+   "title": "ФПК продлила продажи билетов в купе по невозвратным тарифам на 2027 год",
    "date": "2026-10-06",
    "src": [
     [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/4060"
+     "web:1prime.ru",
+     "https://1prime.ru/20261006/fpk-873996095.html"
     ]
    ],
    "sum": null,
@@ -1481,10 +1480,37 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Профессиональные услуги",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29392826",
+   "title": "Минфин на аукционе по размещению ОФЗ предложит бумаги одного выпуска",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261006/minfin-873995734.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

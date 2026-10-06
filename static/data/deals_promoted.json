@@ -8485,7 +8485,7 @@
    "ind": "Недвижимость",
    "type": "Продажа с торгов",
    "kind": "acquisition",
-   "status": "Обсуждается",
+   "status": "Не состоялась",
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
@@ -8537,6 +8537,10 @@
     [
      "ТАСС",
      "https://tass.ru/ekonomika/22404475"
+    ],
+    [
+     "РИА Новости",
+     "https://ria.ru/20261006/rzhd-2122677382.html"
     ]
    ],
    "extra": "В феврале 2026 года премьер-министр Михаил Мишустин подписал распоряжение о продаже комплекса зданий Рижского вокзала на открытом аукционе. Начальная цена установлена по отчёту независимого оценщика и составила около 4,009 млрд ₽. Первые два аукциона (апрель и июнь 2026 года) не состоялись из-за отсутствия заявок; третий назначен на 7 августа 2026 года с шагом 200,5 млн ₽ и задатком 400,9 млн ₽. РЖД предлагает объект как актив для редевелопмента под общественное пространство, ссылаясь на близость метро, Красной площади и аэропортов Внуково и Шереметьево.",
@@ -8571,13 +8575,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "d79a59d6774a"
+     "card_hash": "582e674e8fa5"
     },
     "date": {
      "value": "2026-02-13",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "237d3ca3014c"
+     "card_hash": "66e4dcc5b8e9"
     },
     "nature": {
      "control_change": true,
@@ -8587,7 +8591,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1b8e09fc6b9e"
+     "card_hash": "e7c2ee31a220"
     },
     "target": {
      "company_id": null,
@@ -8609,11 +8613,51 @@
     "reasons": {
      "count": "auction_open",
      "industry": "auction_open",
-     "purchase_sums": "auction_open",
-     "top_purchases": "auction_open",
+     "purchase_sums": "failed",
+     "top_purchases": "failed",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "events": [
+    {
+     "id": "negotiations-2026-02-13",
+     "kind": "negotiations",
+     "date": "2026-02-13",
+     "title": "Переговоры",
+     "historicalTitle": "Продажа РЖД здания Рижского вокзала",
+     "note": "",
+     "sources": [
+      [
+       "Forbes.ru",
+       "https://www.forbes.ru/biznes/556488-rzd-vystavili-na-prodazu-rizskij-vokzal-za-4-mlrd-rublej"
+      ]
+     ]
+    },
+    {
+     "kind": "cancelled",
+     "date": "2026-10-06",
+     "title": "Четвёртый аукцион признан несостоявшимся",
+     "note": "Четвертый аукцион по продаже Рижского вокзала в Москве, принадлежащего РЖД, не состоялся из-за отсутствия заявок.",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261006/rzhd-2122677382.html"
+     ],
+     "id": "gcc677615-cancelled",
+     "newsworthy": true,
+     "snapshot": {
+      "title": "Продажа РЖД здания Рижского вокзала",
+      "type": "Продажа с торгов",
+      "status": "Не состоялась",
+      "sum": "Не раскрыта",
+      "buyer": null,
+      "seller": "РЖД",
+      "asset": "здание Рижского вокзала",
+      "ind": "Недвижимость"
+     },
+     "headline": "Четвёртый аукцион по продаже Рижского вокзала не состоялся",
+     "milestone_drafted_at": "2026-10-06T13:44:41+00:00"
+    }
+   ]
   },
   {
    "id": "gc3ab0c7d",
