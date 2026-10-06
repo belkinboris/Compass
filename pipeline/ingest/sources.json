@@ -10,8 +10,22 @@
    "tier": 2,
    "deals_seen": 490,
    "enabled": true,
-   "last_check": "2026-07-31",
+   "last_check": "2026-10-06",
    "last_error": null
+  },
+  {
+   "id": "web:kommersant.ru/daily",
+   "name": "Коммерсантъ",
+   "kind": "rss",
+   "url": "https://kommersant.ru/",
+   "feed": "https://www.kommersant.ru/RSS/corp.xml",
+   "feed_checked": true,
+   "tier": 2,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-10-06",
+   "last_error": null,
+   "note": "Материалы газеты: 106 из 107 в ленте новостей /RSS/news.xml не появляются (замер 6 октября 2026)."
   },
   {
    "id": "web:vedomosti.ru",
@@ -25,6 +39,20 @@
    "enabled": true,
    "last_check": "2026-07-31",
    "last_error": null
+  },
+  {
+   "id": "web:vedomosti.ru/articles",
+   "name": "Ведомости",
+   "kind": "rss",
+   "url": "https://vedomosti.ru/",
+   "feed": "https://www.vedomosti.ru/rss/articles",
+   "feed_checked": true,
+   "tier": 2,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-10-06",
+   "last_error": null,
+   "note": "Статьи и эксклюзивы: в /rss/news их нет. 6 октября 2026 «Печерский вошёл в „Каро“» вышел здесь 5 октября в 21:28, а мы узнали его утром из пересказа Mergers.ru."
   },
   {
    "id": "web:rbc.ru",

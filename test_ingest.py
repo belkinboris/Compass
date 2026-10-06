@@ -4067,6 +4067,32 @@ def test_raw_console_remembers_the_news_not_the_draft_id(monkeypatch):
         "новость, выкинутая по заголовку, показана снова под новым draft_id"
 
 
+def test_raw_console_skips_news_a_card_was_already_built_from(monkeypatch):
+    """6 октября 2026: «Печерский вошёл в капитал „Каро“» (Mergers.ru) ушёл
+    владельцу «сомнительной» новостью через минуту после готовой карточки
+    g0710e7a1, собранной по той же новости, — и он второй раз нажал «Это
+    сделка». Адрес, который уже стоит в источниках карточки или там, где о
+    сделке узнали (`discovery_src`), сырьём в консоль не идёт."""
+    import send_drafts
+    url = "https://mergers.ru/news/Soosnovatel-ADG-Group-Grigorij-Pecherskij-voshel-v-kapital-kinoseti-Karo-87611"
+    drafts = [
+        {"draft_id": "d61744613", "title": "Сооснователь ADG Group Григорий Печерский вошел в капитал киносети «Каро»",
+         "src": [["web:mergers.ru", url]], "hold_reasons": ["не установлен предмет сделки"]},
+        {"draft_id": "d-other", "title": "Совершенно другая новость про завод",
+         "src": [["web:x", "https://x.example/1"]], "hold_reasons": ["не установлен предмет сделки"]},
+    ]
+    card = {"id": "g0710e7a1", "title": "Печерский вошёл в капитал киносети «Каро»", "date": "2026-10-06",
+            "src": [["Ведомости", "https://www.vedomosti.ru/media/articles/2026/10/05/1234489"]],
+            "discovery_src": [["Mergers.ru", url]], "draft_sent": True, "post_draft_sent": True}
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": [card]})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {"decided_raw": {}, "sent_raw": []})
+    plan, *_rest = send_drafts.build_plan()
+    raw_ids = [item.get("draft_id") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
+    assert raw_ids == ["d-other"]
+
+
 def test_raw_console_hides_foreign_only_deals(monkeypatch):
     """Иностранный контур без российского элемента в консоль не носим.
 

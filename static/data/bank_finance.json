@@ -1,8 +1,8 @@
 {
   "g09ccbaca": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 359296194000,
+    "assets_rub": 350835667000,
     "assets_rub_prior_year": 391557619000,
     "derived": {
       "metrics": [
@@ -13,7 +13,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 11.0
+          "value": 5.8
         },
         {
           "group": "Капитал",
@@ -22,23 +22,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 31.3
+          "value": 61.2
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 39694619000,
+    "equity_rub": 20283068000,
     "equity_rub_prior_year": 32682333000,
     "legal_name": "Общество с ограниченной ответственностью «Банк Точка»",
     "net_profit_rub": 12414884000,
     "regnum": 3545
   },
   "g1d2dd6fb": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 5543242551000,
+    "assets_rub": 5483600669000,
     "assets_rub_prior_year": 5836097242000,
     "derived": {
       "metrics": [
@@ -49,7 +49,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 7.5
+          "value": 7.8
         },
         {
           "group": "Капитал",
@@ -58,23 +58,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 17.3
+          "value": 17.0
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 418466830000,
+    "equity_rub": 425455926000,
     "equity_rub_prior_year": 393549334000,
     "legal_name": "Акционерное общество «Российский Сельскохозяйственный банк»",
     "net_profit_rub": 72507950000,
     "regnum": 3349
   },
   "g28ff15bb": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 65137327668000,
+    "assets_rub": 65118630214000,
     "assets_rub_prior_year": 65210686723000,
     "derived": {
       "metrics": [
@@ -85,7 +85,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 13.2
+          "value": 14.0
         },
         {
           "group": "Капитал",
@@ -94,23 +94,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 15.4
+          "value": 14.6
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 8627750211000,
+    "equity_rub": 9113463732000,
     "equity_rub_prior_year": 8115080880000,
     "legal_name": "Публичное акционерное общество «Сбербанк России»",
     "net_profit_rub": 1332707281000,
     "regnum": 1481
   },
   "g37d577dc": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 763459969000,
+    "assets_rub": 689748707000,
     "assets_rub_prior_year": 755640439000,
     "derived": {
       "metrics": [
@@ -121,7 +121,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 16.8
+          "value": 18.7
         },
         {
           "group": "Капитал",
@@ -137,7 +137,7 @@
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 127978889000,
+    "equity_rub": 128954845000,
     "equity_rub_prior_year": 125477995000,
     "legal_name": "Публичное акционерное общество «МТС-Банк»",
     "net_profit_rub": 10131807000,
@@ -153,9 +153,9 @@
     "regnum": 2272
   },
   "g78c4654b": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 219129722000,
+    "assets_rub": 232145848000,
     "assets_rub_prior_year": 242933744000,
     "derived": {
       "metrics": [
@@ -166,7 +166,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 15.5
+          "value": 13.4
         },
         {
           "group": "Капитал",
@@ -175,14 +175,14 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 27.3
+          "value": 29.9
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 34031580000,
+    "equity_rub": 31098515000,
     "equity_rub_prior_year": 30920607000,
     "legal_name": "Акционерное общество «Кредит Европа Банк (Россия)»",
     "net_profit_rub": 9303883000,
@@ -198,9 +198,9 @@
     "regnum": 2209
   },
   "g8bafde28": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 8683057611000,
+    "assets_rub": 9999931871000,
     "assets_rub_prior_year": 9463440695000,
     "derived": {
       "metrics": [
@@ -211,7 +211,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 8.9
+          "value": 8.4
         },
         {
           "group": "Капитал",
@@ -220,23 +220,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 2.8
+          "value": 2.6
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 768684593000,
+    "equity_rub": 837246328000,
     "equity_rub_prior_year": 800930537000,
     "legal_name": "Публичное акционерное общество «Банк ПСБ»",
     "net_profit_rub": 21649395000,
     "regnum": 3251
   },
   "g9e8a08b8": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 5353678160000,
+    "assets_rub": 5633253914000,
     "assets_rub_prior_year": 5461882733000,
     "derived": {
       "metrics": [
@@ -256,23 +256,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 19.6
+          "value": 18.6
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 672000166000,
+    "equity_rub": 707843656000,
     "equity_rub_prior_year": 624654558000,
     "legal_name": "Акционерное общество «ТБанк»",
     "net_profit_rub": 131766090000,
     "regnum": 2673
   },
   "ga2cfae5b": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 13352505039000,
+    "assets_rub": 14222274419000,
     "assets_rub_prior_year": 13045288453000,
     "derived": {
       "metrics": [
@@ -283,7 +283,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 9.3
+          "value": 9.0
         },
         {
           "group": "Капитал",
@@ -292,14 +292,14 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 18.1
+          "value": 17.6
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 1247251127000,
+    "equity_rub": 1282939619000,
     "equity_rub_prior_year": 1151012391000,
     "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО «АЛЬФА-БАНК»",
     "net_profit_rub": 226260148000,
@@ -342,9 +342,9 @@
     "regnum": 650
   },
   "ga8981f42": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-07-01",
-    "assets_rub": 1474898000,
+    "assets_rub": 1403183000,
     "assets_rub_prior_year": 1561395000,
     "derived": {
       "metrics": [
@@ -355,7 +355,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 90.9
+          "value": 91.5
         },
         {
           "group": "Капитал",
@@ -371,16 +371,16 @@
         "Прибыль за 6 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 1340212000,
+    "equity_rub": 1283420000,
     "equity_rub_prior_year": 1407307000,
     "legal_name": "Общество с ограниченной ответственностью «Небанковская кредитная организация „Вестерн Юнион ДП Восток“",
     "net_profit_rub": 0,
     "regnum": 2726
   },
   "gb7e1e33a": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 3963628462000,
+    "assets_rub": 4262793019000,
     "assets_rub_prior_year": 4393277758000,
     "derived": {
       "metrics": [
@@ -391,7 +391,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 12.0
+          "value": 12.3
         },
         {
           "group": "Капитал",
@@ -400,23 +400,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 18.1
+          "value": 16.5
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 474972317000,
+    "equity_rub": 522233999000,
     "equity_rub_prior_year": 459106799000,
     "legal_name": "Публичное акционерное общество «Совкомбанк»",
     "net_profit_rub": 86119740000,
     "regnum": 963
   },
   "gcafc31dc": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 34874186404000,
+    "assets_rub": 35631386401000,
     "assets_rub_prior_year": 33501601747000,
     "derived": {
       "metrics": [
@@ -427,7 +427,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 7.2
+          "value": 7.4
         },
         {
           "group": "Капитал",
@@ -436,14 +436,14 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 15.1
+          "value": 14.3
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 2508638112000,
+    "equity_rub": 2651381474000,
     "equity_rub_prior_year": 2371880458000,
     "legal_name": "Банк ВТБ (публичное акционерное общество)",
     "net_profit_rub": 378178323000,
@@ -468,9 +468,9 @@
     "regnum": 3279
   },
   "gf1f56e08": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 17170322460000,
+    "assets_rub": 17377004682000,
     "assets_rub_prior_year": 17536235585000,
     "derived": {
       "metrics": [
@@ -481,7 +481,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 8.1
+          "value": 8.2
         },
         {
           "group": "Капитал",
@@ -490,23 +490,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 9.0
+          "value": 8.8
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 1389460506000,
+    "equity_rub": 1417719981000,
     "equity_rub_prior_year": 1332319149000,
     "legal_name": "«Газпромбанк» (Акционерное общество)",
     "net_profit_rub": 124666707000,
     "regnum": 354
   },
   "gf306fa1b": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 794137573000,
+    "assets_rub": 858129737000,
     "assets_rub_prior_year": 758490123000,
     "derived": {
       "metrics": [
@@ -517,7 +517,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 12.1
+          "value": 12.7
         },
         {
           "group": "Капитал",
@@ -526,23 +526,23 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 32.1
+          "value": 28.3
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 95710553000,
+    "equity_rub": 108568873000,
     "equity_rub_prior_year": 84438189000,
     "legal_name": "Акционерное общество «ОТП Банк»",
     "net_profit_rub": 30753911000,
     "regnum": 2766
   },
   "gf881a88f": {
-    "as_of_balance": "2026-04-01",
+    "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-09-01",
-    "assets_rub": 1387307469000,
+    "assets_rub": 1349108293000,
     "assets_rub_prior_year": 1301499259000,
     "derived": {
       "metrics": [
@@ -553,7 +553,7 @@
           "kind": "percent",
           "label": "Собственные средства к активам",
           "primary": true,
-          "value": 16.1
+          "value": 16.0
         },
         {
           "group": "Капитал",
@@ -562,14 +562,14 @@
           "kind": "percent",
           "label": "Рентабельность капитала за 8 мес. 2026",
           "primary": true,
-          "value": 9.4
+          "value": 9.8
         }
       ],
       "notes": [
         "Прибыль за 8 мес. 2026 года, без пересчёта на год."
       ]
     },
-    "equity_rub": 223932580000,
+    "equity_rub": 215520643000,
     "equity_rub_prior_year": 214668848000,
     "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БАНК „САНКТ-ПЕТЕРБУРГ“",
     "net_profit_rub": 21120964000,

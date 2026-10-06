@@ -225545,6 +225545,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/970595"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/247705/2026-10-06/2026-w41/1008/korus-konsalting-kupil-ii-startap"
     ]
    ],
    "from_ingest": true,
@@ -225562,7 +225566,7 @@
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "Структура Nextera не изменится: компания продолжит работать под известным брендом, сохранит команду и руководство."
    },
    "buyer_name": "«Корус Консалтинг»",
    "asset": "ИИ-разработчик Nextera",
@@ -225808,6 +225812,130 @@
      "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "11cd10d28a52"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g0710e7a1",
+   "date": "2026-10-06",
+   "title": "Сооснователь ADG Group Григорий Печерский вошёл в капитал киносети «Каро»",
+   "ind": "Развлечения",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/media/articles/2026/10/05/1234489-grigorii-pecherskii-voshel-v-karo"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "По итогам 2025 года выручка ООО «Каро фильм менеджмент» составила 4,7 млрд рублей, чистая прибыль — 380 млн рублей, по данным «СПАРК-Интерфакс».",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Киносеть «Каро» — одна из крупнейших в стране, в её управлении сейчас 26 кинотеатров в Москве, Екатеринбурге, Краснодаре, Калининграде и других городах. Ранее собственником «Каро фильм менеджмент» был консорциум инвесторов, в который входили бизнесмен Пол Хет, фонд UFG Private Equity и Российский фонд прямых инвестиций.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Основатель, совладелец и управляющий партнёр девелопера ADG Group Григорий Печерский через цепочку компаний стал единственным владельцем головной компании киносети «Каро» — ООО «Каро фильм менеджмент», по данным ЕГРЮЛ.",
+    "appr": "—",
+    "adv": [],
+    "terms": "Также 100% этого юрлица находится в залоге у ООО «СПР финанс», которая полностью принадлежит Печерскому."
+   },
+   "buyer_name": "Григорий Печерский",
+   "asset": "ООО «Каро фильм менеджмент» (киносеть «Каро»)",
+   "target_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Григорий Печерский",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Soosnovatel-ADG-Group-Grigorij-Pecherskij-voshel-v-kapital-kinoseti-Karo-87611"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «Каро фильм менеджмент» (киносеть «Каро»)",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Soosnovatel-ADG-Group-Grigorij-Pecherskij-voshel-v-kapital-kinoseti-Karo-87611"
+     }
+    ]
+   },
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Soosnovatel-ADG-Group-Grigorij-Pecherskij-voshel-v-kapital-kinoseti-Karo-87611"
+    ]
+   ],
+   "reviewed": "2026-10-06",
+   "deep_researched": "2026-10-06",
+   "target": "ga4903cc9",
+   "accepted": "2026-10-06",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Григорий Печерский — физическое лицо, профиль не нужен"
+    },
+    "notes": "Единственный найденный первоисточник — «Ведомости» (пересказанный Mergers.ru). Сумма сделки, дата и комментарии сторон не раскрыты — обе стороны отказались комментировать."
+   },
+   "post_preview": "<b>Сооснователь ADG Group Григорий Печерский вошёл в капитал киносети «Каро»</b>\n\n<b>Покупатель:</b> Григорий Печерский\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> Головная компания сети кинотеатров «Каро» — одной из крупнейших в России. Юрлицо — ООО «Каро фильм менеджмент».\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Развлечения\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/media/articles/2026/10/05/1234489-grigorii-pecherskii-voshel-v-karo\">Ведомости</a>\n\n#услуги #развлечения #MA",
+   "added": "2026-10-06",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "2fcc51c3a141"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-10-06",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "28006cce818c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3476d2c6006b"
+    },
+    "target": {
+     "company_id": "ga4903cc9",
+     "inn": "7702552238",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "3f8959f17fe0"
     },
     "admitted": {
      "count": true,
@@ -249121,7 +249249,8 @@
    "name": "ООО «ТКИ»",
    "ind": "Холдинги",
    "desc": "Холдинговая компания Татьяны Кондратенко, зарегистрирована в августе 2026 года.",
-   "kpi": []
+   "kpi": [],
+   "fns_asked": "2026-10-06"
   },
   "gd3556cc0-target": {
    "name": "ООО «УК Межегейуголь»",
@@ -249137,7 +249266,8 @@
    "name": "800 Degrees",
    "ind": "Потребительские товары",
    "desc": "Производитель оборудования, аксессуаров и расходных материалов для барбекю, туризма и отдыха на природе.",
-   "kpi": []
+   "kpi": [],
+   "fns_asked": "2026-10-06"
   },
   "g7ff940c6": {
    "name": "«Макрон-СТ»",
@@ -249155,6 +249285,12 @@
    "name": "«Морской инжиниринг и производство» (МИИП)",
    "ind": "Машиностроение",
    "desc": "Владеет АО «Гесер» — производителем судового комплектующего оборудования из Отрадного. Юрлицо — АО «Морской инжиниринг и производство».",
+   "kpi": []
+  },
+  "ga4903cc9": {
+   "name": "ООО «Каро фильм менеджмент»",
+   "ind": "Развлечения",
+   "desc": "Головная компания сети кинотеатров «Каро» — одной из крупнейших в России. Юрлицо — ООО «Каро фильм менеджмент».",
    "kpi": []
   }
  },
@@ -255634,6 +255770,10 @@
   "ge8be4d3d": [],
   "g57a606d0": [
    "expobank a d belgrade"
+  ],
+  "ga4903cc9": [
+   "каро фильм менеджмент",
+   "каро"
   ]
  },
  "merged": {
@@ -257509,7 +257649,8 @@
   "g6d711306": null,
   "gf485e935": null,
   "gd937c845": 180,
-  "g53da1f4d": 181
+  "g53da1f4d": 181,
+  "g91828b2b": 183
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -259085,6 +259226,9 @@
     "finadv": "—"
    },
    "events": [
+    {
+     "kind": "negotiations"
+    },
     {
      "kind": "closed"
     }
@@ -260921,6 +261065,25 @@
   "g53da1f4d": {
    "buyer_name": "«Корус Консалтинг»",
    "asset": "ИИ-разработчик Nextera",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
+  },
+  "g91828b2b": {
+   "buyer": "ga7c4bf47",
+   "seller": "VK",
+   "target": "gabdc9810",
+   "asset": "40% доли в ООО «Интикетс»",
    "status": "Закрыта",
    "law": {
     "adv": []
