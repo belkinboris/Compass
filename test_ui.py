@@ -2128,14 +2128,27 @@ def test_strategy_partners_is_found_and_drawn_as_a_brand_card(page, base_url):
                   "{logo:'/static/brands/x.svg',ratio:2,ink:'#FFFFFF',accent:['#000000']}",
                   "{logo:'/static/brands/x.svg',ratio:2,ink:'#111111',accent:['#000000'],font:'Arial Black'}"):
         assert page.evaluate(f"firmBrand({{brand:{wrong}}})") is None, wrong
-    # место в алфавите — обычное, подпись «Профиль» и кнопка — как у соседей
+    # фирменная — в самом верху, остальные по алфавиту; левый край, подпись
+    # «Профиль» и кнопка — как у соседей
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
     names = page.locator(".advisor-card-name a").all_inner_texts()
-    assert names == sorted(names, key=__import__("functools").cmp_to_key(
-        lambda a, b: page.evaluate("([a,b])=>firmAlpha(a,b)", [a, b]))), "фирменная карточка сдвинула порядок"
+    assert names[0] == "Strategy Partners", names[:3]
+    rest = names[1:]
+    assert rest == sorted(rest, key=__import__("functools").cmp_to_key(
+        lambda a, b: page.evaluate("([a,b])=>firmAlpha(a,b)", [a, b]))), "остальные сбились с алфавита"
+    lefts = page.evaluate("""[...document.querySelectorAll('.advisor-card')].slice(0,3).map(c=>{
+        const l=c.querySelector('.brand-logo'); if(l) return Math.round(l.getBoundingClientRect().left);
+        const r=document.createRange(); r.selectNodeContents(c.querySelector('.advisor-card-name a'));
+        return Math.round(r.getBoundingClientRect().left)})""")
+    assert len(set(lefts)) == 1, f"логотип не на общем левом крае: {lefts}"
     assert page.locator(".advisor-card.brand .count-btn").count() == 1
+    # при выборе отрасли список — счёт сделок в ней, и наверх никто не поднимается
+    page.evaluate("advInd='Ритейл';renderAdvisorsBody()")
+    page.wait_for_timeout(300)
+    assert page.locator(".advisor-card").first.get_attribute("class") == "advisor-card"
+    page.evaluate("advInd='Все';renderAdvisorsBody()")
     # страница самой фирмы обычная
     visit(page, base_url, "#/advisors/strategy")
     page.wait_for_selector(".d-head h1")

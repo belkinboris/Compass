@@ -146,6 +146,37 @@
     "needs_review": true
    },
    "queued": "2026-10-06"
+  },
+  {
+   "key": "https://1prime.ru/20261006/biznes-873990493.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d88345022",
+    "title": "Бизнес вложил десять миллиардов рублей в подготовку кадров для IT-отрасли",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261006/biznes-873990493.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Бизнес",
+    "asset": "подготовка кадров для IT-отрасли",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Бизнес",
+     "asset": "подготовка кадров для IT-отрасли",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-06"
   }
  ]
 }

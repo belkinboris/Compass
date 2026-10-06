@@ -83,5 +83,15 @@
   "verdict": "enrich",
   "candidate_id": "g53da1f4d",
   "day": "2026-10-06"
+ },
+ "https://1prime.ru/20261006/biznes-873990493.html::gc2abcc97": {
+  "verdict": "separate",
+  "candidate_id": "gc2abcc97",
+  "day": "2026-10-06"
+ },
+ "https://www.tadviser.ru/a/49430::pending-4": {
+  "verdict": "separate",
+  "candidate_id": "pending-4",
+  "day": "2026-10-06"
  }
 }

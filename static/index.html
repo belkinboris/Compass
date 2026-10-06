@@ -1606,9 +1606,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .advisor-card.brand .advisor-card-count{position:relative;z-index:1}
 .brand-name a{display:block;line-height:0}
 .brand-name a:hover{text-decoration:none}
-.brand-logo{display:block;height:26px;width:auto;max-width:100%;transition:transform .3s var(--ease)}
-.advisor-card.brand:hover .brand-logo{transform:translateX(3px)}
+.brand-logo{display:block;height:26px;width:auto;max-width:100%}
 .brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
+.advisor-card.brand .advisor-card-groups{line-height:1.45}
 .advisor-card.brand .brand-text{font-family:var(--b-font,var(--f-body));font-size:14.5px;color:color-mix(in srgb,var(--b-ink) 78%,transparent)}
 
 .deal-tools{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
@@ -1766,7 +1766,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-card:has(.advisor-card-groups){grid-template-columns:1fr;gap:12px;padding:19px 18px}
   .advisor-card-name{font-size:21px}.advisor-card-count{justify-self:start;white-space:normal}
   .advisor-card-groups{font-size:14px}
-  .advisor-card.brand{padding-left:22px}.brand-logo{height:23px}
+  .brand-logo{height:23px}
   .relationship-head{padding:19px 18px}.relationship-body{padding:18px}
   .relationship-map{grid-template-columns:1fr}.relationship-center{min-height:0;padding:18px}
   .relationship-center:after{display:none}.relationship-grid{grid-template-columns:1fr}
@@ -2186,7 +2186,7 @@ const INV_FIRMS = [
     сайта, как у соседей, без пересказа сделок. `brand` — фирменная карточка
     в списке, правило у BRAND_TOKENS. */
  {id:"strategy",n:"Strategy Partners",g:["Консалтинг"],site:"https://strategy.ru/",
-  desc:"Стратегический консалтинг, операционная эффективность, цифровая трансформация, корпоративные финансы и сопровождение сделок.",
+  desc:"Стратегический консалтинг, корпоративные финансы и сопровождение сделок.",
   brand:{logo:"/static/brands/strategy-partners.svg",ratio:7.88,font:"Commissioner",ink:"#171523",
          accent:["#2EEAEF","#2EA7ED","#2F8AED"],slogan:"Решения, которые работают"}},
 ];
@@ -2195,10 +2195,10 @@ const INV_FIRMS = [
    неё кликать», но «чтобы стиль списка Компаса сохранялся и, когда брендов
    станет много, страница не превратилась в клоуна». Страница самой фирмы
    при этом НЕ стилизуется (её вид — отдельная работа).
-   Правило одно на все фирмы: РАМКА НАША, ВНУТРИ — БРЕНД. Размер и сетка
-   карточки, подпись «Профиль», кнопка со счётом сделок и место в списке
-   (по алфавиту или по числу сделок) — общие: фирменная карточка наверх не
-   поднимается. Бренд даёт: свой логотип вместо набранного названия, свой
+   Правило одно на все фирмы: РАМКА НАША, ВНУТРИ — БРЕНД. Размер, сетка и
+   поля карточки (левый край текста — тот же, что у соседей), подпись
+   «Профиль» и кнопка со счётом сделок — общие. Фирменные карточки стоят в
+   самом верху списка (advPinned), между собой — общим порядком. Бренд даёт: свой логотип вместо набранного названия, свой
    шрифт для текста карточки, свои цвета — кромку слева, лёгкий отсвет от
    неё и подсветку при наведении — и свой девиз под логотипом.
    Значения проверяются здесь же: логотип — svg из static/brands (никаких
@@ -7736,8 +7736,13 @@ const firmIndCount = (id, ind) => {
        + x.mini.filter(m=>m.ind===ind).length + x.bulk.filter(b=>b.ind===ind).length;
 };
 const advCount = id => advInd==="Все" ? firmCount(id) : firmIndCount(id, advInd);
-const advSortKey = (a,b) => advInd!=="Все" ? (b.n-a.n)||firmAlpha(a.f.n,b.f.n)
-  : (firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n));
+/* Фирменные карточки — в самом верху списка (владелец, 6 октября 2026:
+   «перемести их на самый верх»), между собой — тем же порядком, что и
+   остальные. Кроме выбора отрасли: там список — счёт сделок в отрасли, и
+   фирма с нулём сверху выглядела бы первой по отрасли, чего нет. */
+const advPinned = r => advInd==="Все" && firmBrand(r.f) ? 0 : 1;
+const advSortKey = (a,b) => advPinned(a)-advPinned(b) || (advInd!=="Все" ? (b.n-a.n)||firmAlpha(a.f.n,b.f.n)
+  : (firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n)));
 const advIndSelectHtml = () => `<select id="advind" aria-label="Отрасль"><option ${advInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===advInd?"selected":""}>${i}</option>`).join("")}</select>`;
 const advCountHtml = r => r.n
   ? `<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")}${advInd==="Все"?"":` в отрасли «${advInd}»`} →</a>`

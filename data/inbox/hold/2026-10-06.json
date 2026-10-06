@@ -1269,7 +1269,7 @@
    ]
   },
   {
-   "draft_id": "d65646603",
+   "draft_id": "d44413701",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
@@ -1308,261 +1308,7 @@
    ]
   },
   {
-   "draft_id": "d90616971",
-   "title": "Акции Совкомбанка резко выросли после новости об увеличении выкупа ценных бумаг",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/06/1234676-aktsii-sovkombanka"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65732492",
-   "title": "Совкомбанк увеличит объем выкупа своих акций до 3 млрд рублей",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/06/1234659-sovkombank-uvelichit"
-    ]
-   ],
-   "sum": "3 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42018526",
-   "title": "В поисках инженера: зачем бизнес вложил в вузы ₽51 млрд",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/education/06/10/2026/6aba6ade9a7947552a615bcf"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "вузы ₽51 млрд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "вузы ₽51 млрд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d89689492",
-   "title": "60,7 млрд рублей инвестиций в ИТ, NB-IoT и Big Data. Как проходит цифровизация АФК «Система»",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/49397"
-    ]
-   ],
-   "sum": "60,7 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33494569",
-   "title": "«Авито Реклама» и Soloway: почти половина жителей России изучает информацию в интернете перед покупкой товаров повседневного спроса",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-06_avito_reklama_i_soloway_pochti"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77006495",
-   "title": "Мишустин призвал стимулировать инвестиции провайдеров в инфраструктуру",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28186827"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d50346556",
-   "title": "Онлайн-продажи в РФ по итогам превысили пятую часть розничного товарооборота",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28186705"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20137189",
-   "title": "Мишустин призвал стимулировать инвестиции в развитие скоростного интернета",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261006/mishustin-2122596995.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d44383046",
-   "title": "В России засекретят часть данных о продаже бензина",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/06/top-secret/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12306433",
+   "draft_id": "d32862827",
    "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
    "date": "2026-10-06",
    "src": [
@@ -1586,6 +1332,159 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20854704",
+   "title": "Мишустин: продажи российского ПО приблизились к 3 трлн рублей",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/10/06/1234696-prodazhi-po"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36641750",
+   "title": "Объём инвестиций бизнеса в ИТ-образование превысил 10 млрд рублей",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1120648"
+    ]
+   ],
+   "sum": "10 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89420628",
+   "title": "Костюм Джеймса Бонда с Дэниелом Крейгом выставят на аукцион",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2179474/kostium-dzheimsa-bonda-s-denielom-kreigom-vystaviat-na-auktcion-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19771238",
+   "title": "Россияне купили тур за 360 тысяч рублей и оказались в грязном номере с рваным бельем",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/06/rossiyane-kupili-tur-za-360-tysyach-rubley-i-okazalis-v-gryaznom-nomere-s-rvanym-beliem/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-06",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/06/rossiyane-kupili-tur-za-360-tysyach-rubley-i-okazalis-v-gryaznom-nomere-s-rvanym-beliem/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "тур",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "тур",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d22991148",
+   "title": "🔔 ККМП , АЛРУД , Orion , Stonebridge Legal и Никольская Консалтинг сообщают: 12 ноября состоится 4-й ежегодный M&A Форум «Слияния и поглощения в России» . M&A Форум «Слияния и поглощения в России» ста",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/4060"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
