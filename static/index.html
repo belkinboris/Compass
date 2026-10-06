@@ -1608,7 +1608,10 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .brand-name a:hover{text-decoration:none}
 .brand-logo{display:block;height:26px;width:auto;max-width:100%}
 .brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
-.advisor-card.brand .advisor-card-groups{line-height:1.45}
+/* Описание короче соседних, и при обычном переносе на вторую строку уходило
+   одно слово («сделок.») — абзац выглядел оборванным. `pretty` переносит
+   так, чтобы последняя строка не была сиротой; межстрочный — общий. */
+.advisor-card.brand .advisor-card-groups{text-wrap:pretty}
 .advisor-card.brand .brand-text{font-family:var(--b-font,var(--f-body));font-size:14.5px;color:color-mix(in srgb,var(--b-ink) 78%,transparent)}
 
 .deal-tools{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
