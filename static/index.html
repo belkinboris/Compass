@@ -155,9 +155,14 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .heroslider:after{content:"";position:absolute;left:0;right:0;bottom:0;height:220px;pointer-events:none;z-index:1;background:linear-gradient(180deg,rgba(10,18,16,0) 0%,rgba(10,18,16,.55) 55%,#0A1210 100%)}
 .heroslider .hs-in{z-index:6}
 .hs-in{position:relative;max-width:1120px;margin:0 auto;padding:0 60px;height:100%;display:flex;flex-direction:column;justify-content:center}
-.hs-in .kicker{font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C9AE7C;margin-bottom:22px}
 .hs-in h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.12;max-width:800px}
 .hs-in h1 em{font-style:italic;color:#BFD6C9}
+/* ЗАГОЛОВОК СЛАЙДА — ОДНО СЛОВО, ЗОЛОТОМ. Владелец 6 октября 2026: убрать
+   золотые надписи над заголовками («Сделки», «Профили участников»,
+   «Каталог консультантов»…) и вместо «Сделки – со ссылками на
+   первоисточники» писать просто «Сделки», словом золотого цвета. Пояснение
+   под заголовком осталось — оно и говорит, что в разделе. */
+.hs-in h1.hs-word{color:var(--bronze-light);font-size:clamp(44px,6.2vw,80px);line-height:1.04;letter-spacing:-.01em}
 .hs-in p{color:#A9BDB2;margin-top:18px;max-width:560px;font-size:16px;line-height:1.6}
 /* Приписка про источники: нужна, чтобы цифры выше не читались как «вся статистика
    рынка», но спорить с заголовком по весу она не должна. */
@@ -212,7 +217,6 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-cue{display:none}
   .hs-dots{bottom:calc(env(safe-area-inset-bottom,0px) + 34px)}
   .hs-in{padding-top:84px}
-  .hs-in .kicker{margin-bottom:14px}
   .hs-in h1{font-size:26px}
   .hs-in p{font-size:14px;line-height:1.5;margin-top:12px}
   .hs-cta{margin-top:18px;padding:12px 26px}
@@ -4741,8 +4745,7 @@ function renderDeals(){
   <div class="heroslider">
     <div class="hs-slide on">${HERO_SVG}
       <div class="hs-in">
-        <div class="kicker">Сделки</div>
-        <h1>Сделки – <em>со ссылками на первоисточники</em></h1>
+        <h1 class="hs-word">Сделки</h1>
         <p>Только публичная информация: сообщения сторон, публикации консультантов и деловых СМИ. У каждой сделки есть ссылка на источник. В базе сделки с 2022 года.</p>
         <a class="hs-cta" href="#feed" data-scroll>Смотреть сделки</a>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
@@ -4753,32 +4756,28 @@ function renderDeals(){
     </div>
     <div class="hs-slide">${SCENE_CITY}
       <div class="hs-in">
-        <div class="kicker">Профили участников</div>
-        <h1>Компании – <em>кто, кого и у кого</em> покупает</h1>
+        <h1 class="hs-word">Компании</h1>
         <p>Профили сторон сделок: ключевые показатели, история сделок компании, упоминания по всей базе.</p>
         <a class="hs-cta" href="#/companies">Открыть компании</a>
       </div>
     </div>
     <div class="hs-slide">${SCENE_COLUMNS}
       <div class="hs-in">
-        <div class="kicker">Каталог консультантов</div>
-        <h1>Консультанты – <em>кто ведёт сделки</em> на рынке</h1>
+        <h1 class="hs-word">Консультанты</h1>
         <p>Юридические и инвестиционные консультанты, названные в публичных сообщениях о сделках.</p>
         <a class="hs-cta" href="#/advisors">Открыть консультантов</a>
       </div>
     </div>
     <div class="hs-slide">${SCENE_CHART}
       <div class="hs-in">
-        <div class="kicker">Обзор рынка</div>
-        <h1>Аналитика – <em>структура рынка</em> в цифрах</h1>
+        <h1 class="hs-word">Аналитика</h1>
         <p>Динамика по годам и отраслям, крупнейшие раскрытые суммы и активность консультантов в базе.</p>
         <a class="hs-cta" href="#/analytics">Открыть аналитику</a>
       </div>
     </div>
     <div class="hs-slide">${SCENE_AI}
       <div class="hs-in">
-        <div class="kicker">Задайте вопрос</div>
-        <h1>Ассистент – <em>спрашивайте обычными словами</em></h1>
+        <h1 class="hs-word">Ассистент</h1>
         <p>Кто сопровождал сделку? Какая сделка была крупнейшей в отрасли? Ассистент ищет по базе «Компаса» и открытым источникам.</p>
         <div class="aisearch">
           <input id="heroq" placeholder="Спросите: кто сопровождал сделки? какая самая крупная?" aria-label="Вопрос ассистенту">
