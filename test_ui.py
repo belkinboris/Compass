@@ -2091,6 +2091,71 @@ def test_advisors_page_has_a_search(page, base_url):
     assert page.locator(".advisor-card-name").all_inner_texts() == ["Aspring Capital"]
 
 
+def test_strategy_partners_is_found_and_drawn_as_a_brand_card(page, base_url):
+    """Владелец 6 октября 2026: Strategy Partners не было в списке, хотя
+    фирма сопровождала сделку по нашей базе («Форштадт»). Её карточка в
+    списке инвестиционных консультантов — в её стиле: настоящий логотип,
+    её шрифт и цвета; но рамка, подпись «Профиль», кнопка и место в списке
+    общие (BRAND_TOKENS), чтобы при многих брендах список оставался списком.
+    Описание — только профиль фирмы, без пересказа сделок."""
+    # страница одна на сессию, и переход по хешу её не перезагружает:
+    # вкладку и запрос прошлого теста сбрасываем сами
+    visit(page, base_url, "#/advisors")
+    page.evaluate("advType='legal';advQuery='';advInd='Все';firmSort='alpha';renderAdvisors()")
+    page.fill("#advq", "")
+    page.click("#advq")
+    page.keyboard.type("strategy", delay=30)
+    page.wait_for_timeout(600)
+    page.click(".advisor-nomatch .chip")
+    page.wait_for_timeout(500)
+    card = page.locator(".advisor-card")
+    assert card.count() == 1 and "brand" in card.get_attribute("class")
+    text = card.inner_text().replace("\xa0", " ")
+    assert "Strategy Partners" in text and "Решения, которые работают" in text
+    assert "Форштадт" not in text, "в описании пересказ сделки, а не профиль"
+    assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
+    logo = page.locator(".advisor-card.brand .brand-logo")
+    assert logo.get_attribute("src") == "/static/brands/strategy-partners.svg"
+    assert page.evaluate("document.querySelector('.brand-logo').naturalWidth") > 0, "логотип не загрузился"
+    font = page.evaluate("getComputedStyle(document.querySelector('.advisor-card.brand .brand-text')).fontFamily")
+    assert "Commissioner" in font, font
+    assert page.evaluate("document.fonts.check('16px Commissioner')"), "шрифт фирмы не загрузился"
+    # каждый объявленный бренд проходит проверку — иначе карточка молча
+    # рисуется обычной, и ошибку никто не заметит
+    bad = page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>f.brand&&!firmBrand(f)).map(f=>f.n)")
+    assert not bad, f"бренд не прошёл проверку: {bad}"
+    for wrong in ("{logo:'https://example.com/x.svg',ratio:2,ink:'#111111',accent:['#000000']}",
+                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#FFFFFF',accent:['#000000']}",
+                  "{logo:'/static/brands/x.svg',ratio:2,ink:'#111111',accent:['#000000'],font:'Arial Black'}"):
+        assert page.evaluate(f"firmBrand({{brand:{wrong}}})") is None, wrong
+    # место в алфавите — обычное, подпись «Профиль» и кнопка — как у соседей
+    page.fill("#advq", "")
+    page.evaluate("advQuery='';renderAdvisorsBody()")
+    page.wait_for_timeout(400)
+    names = page.locator(".advisor-card-name a").all_inner_texts()
+    assert names == sorted(names, key=__import__("functools").cmp_to_key(
+        lambda a, b: page.evaluate("([a,b])=>firmAlpha(a,b)", [a, b]))), "фирменная карточка сдвинула порядок"
+    assert page.locator(".advisor-card.brand .count-btn").count() == 1
+    # страница самой фирмы обычная
+    visit(page, base_url, "#/advisors/strategy")
+    page.wait_for_selector(".d-head h1")
+    assert page.locator(".d-head .brand-logo").count() == 0
+    visit(page, base_url, "#/advisors")
+    page.evaluate("advType='invest';renderAdvisors()")
+    page.set_viewport_size({"width": 360, "height": 800})
+    try:
+        page.wait_for_timeout(300)
+        over = page.evaluate("""(()=>{const h=document.documentElement,b=document.body;
+            const keep=[h.style.overflowX,b.style.overflowX];
+            h.style.overflowX='visible'; b.style.overflowX='visible';
+            const w=h.scrollWidth-h.clientWidth;
+            h.style.overflowX=keep[0]; b.style.overflowX=keep[1]; return w})()""")
+    finally:
+        page.set_viewport_size({"width": 1280, "height": 1000})
+        page.evaluate("advType='legal';renderAdvisors()")
+    assert over <= 0, f"страница шире экрана на {over}px"
+
+
 def test_wordmark_returns_to_the_top(page, base_url):
     """На главной адрес от клика по логотипу не меняется — `hashchange` не
     срабатывает, `route()` не вызывается, и без отдельного обработчика кнопка
