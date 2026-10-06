@@ -342,7 +342,8 @@ def build_plan():
     """
     plan = []
     pending = promote.load_pending() if os.path.exists(PENDING) else {'cards': []}
-    comps = json.load(open(DATA, encoding='utf-8'))['companies']
+    base = json.load(open(DATA, encoding='utf-8'))
+    comps = base['companies']
     live = site_pending_ids()
     postponed, unread, unaccepted = 0, 0, 0
     for card in pending['cards']:
@@ -423,10 +424,23 @@ def build_plan():
     # следующий день приходит новым id, и Рижский вокзал партнёр выкидывал
     # трижды. Показанное или решённое однажды больше не показывается.
     seen_titles = set(state.get('raw_titles', {}))
+    # Новость, по которой карточка уже собрана, сырьём в консоль не идёт: её
+    # адрес стоит в источниках карточки (`src`) или там, где узнали о сделке
+    # (`discovery_src`, если источник факта — первоисточник). 6 октября 2026
+    # «Печерский вошёл в „Каро“» пришёл владельцу «сомнительной» новостью
+    # вместе с готовой карточкой g0710e7a1, и он второй раз нажал «Это сделка».
+    carded = set()
+    for c in list(pending.get('cards') or []) + list(base.get('deals') or []):
+        for key in ('src', 'discovery_src'):
+            for ref in c.get(key) or []:
+                if isinstance(ref, (list, tuple)) and len(ref) > 1 and ref[1]:
+                    carded.add(str(ref[1]))
     fresh_raw, foreign = [], 0
     for d in latest_hold_drafts():
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
            or d.get('dup_in_batch'):
+            continue
+        if any(len(ref) > 1 and str(ref[1]) in carded for ref in d.get('src') or []):
             continue
         # Иностранный контур без российского элемента не публикуем (решение
         # владельца 5–6 августа) — и в консоль не носим: сырьё по молчанию не
