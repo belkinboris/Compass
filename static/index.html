@@ -640,6 +640,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .feed-search input{flex:1;min-width:0;padding:13px 18px;font-size:15px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:border-color .2s;text-overflow:ellipsis}
 .feed-search input:focus{border-color:var(--accent)}
 .feed-search .chip{white-space:nowrap}
+.advisor-nomatch{margin:8px 0 28px;color:var(--muted);display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 /* `position:relative;z-index:5` — не украшение. У панели есть класс
    `reveal`, а он запускает анимацию появления: работающая анимация
    opacity/transform создаёт СОБСТВЕННЫЙ контекст наложения, и z-index
@@ -4593,6 +4594,14 @@ function suggestRows(q, kind){
     for(const x of list){ const r=hit(get(x)); if(r){ out.push([r,x]); } }
     return out.sort((a,b)=>(b[0]-a[0]) || (tie?tie(a[1],b[1]):0)).slice(0,limit).map(x=>x[1]);
   };
+  if(kind==="advisors"){
+    // Оба списка сразу: подсказка ведёт на профиль, даже если фирма в другой вкладке.
+    const all=[...FIRMS.map(f=>({f,t:"юридический консультант"})), ...INV_FIRMS.map(f=>({f,t:"инвестиционный консультант"}))];
+    return pick(all, x=>x.f.n, 6, (a,b)=>firmCount(b.f.id)-firmCount(a.f.id)).map(x=>{
+      const n=firmCount(x.f.id);
+      return {href:`#/advisors/${x.f.id}`, text:x.f.n, note:n?`${x.t} · ${n} ${plural(n,"сделка","сделки","сделок")}`:x.t};
+    });
+  }
   if(kind==="companies"){
     // COMPANIES — словарь id → профиль, и id лежит в ключе, а не в самом профиле.
     const cos=pick(Object.entries(COMPANIES).filter(([,c])=>c&&c.name&&isCatalogCompany(c)).map(([id,c])=>({id, name:c.name})), c=>c.name, 12)
@@ -7618,6 +7627,22 @@ let firmSort = "alpha";  // каталог открывается алфавит
    ранжируются по числу сопровождённых сделок в ней, и у каждого видно,
    сколько таких сделок. Счёт тот же, что на странице фирмы (firmDeals). */
 let advInd = "Все";
+/* ПОИСК ПО КОНСУЛЬТАНТАМ. Владелец 6 октября 2026: «строки поиска в
+   консультантах почему-то нет, есть только в компаниях и в сделках».
+   Совпадение — по названию фирмы (часть слова, без регистра и «ё»), по той
+   же транслитерации, что в поиске сделок («алруд» находит ALRUD), и по
+   правилу, которым фирма узнаётся в сделках (firmRxOf: «Егоров Пугинский»
+   находит ЕПАМ). */
+let advQuery = "";
+const advMatch = (f, q) => {
+  const qq = acNorm(q).trim();
+  if(!qq) return true;
+  const n = acNorm(f.n);
+  if(n.includes(qq)) return true;
+  const qtr = translitKey(qq);
+  if(qtr.length>=2 && translitKey(n).includes(qtr)) return true;
+  return firmRxOf(f).test(q);
+};
 /* КАТЕГОРИИ ПРАКТИКИ СНЯТЫ С ЭКРАНА (решение владельца 4 августа). «С-hi»,
    «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме: она нигде не
    подтверждена источником, читателю ничего не объясняет и делит каталог по
@@ -7645,10 +7670,20 @@ const advIndSelectHtml = () => `<select id="advind" aria-label="Отрасль">
 const advCountHtml = r => r.n
   ? `<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")}${advInd==="Все"?"":` в отрасли «${advInd}»`} →</a>`
   : `<span class="count-btn empty">${advInd==="Все"?"В базе пока нет сделок фирмы":`В отрасли «${advInd}» сделок в базе нет`}</span>`;
-function renderAdvisors(){
+/* Ничего не нашлось во вкладке — подсказать, если фирма есть в другой. */
+function advNoMatchHtml(){
+  const other = advType==="legal" ? INV_FIRMS : FIRMS;
+  const otherType = advType==="legal" ? "invest" : "legal";
+  const otherName = advType==="legal" ? "инвестиционных" : "юридических";
+  const n = other.filter(f=>advMatch(f, advQuery)).length;
+  return `<div class="advisor-nomatch reveal"><p>По запросу «${esc(advQuery.trim())}» в этой вкладке ничего не нашлось.</p>
+    ${n?`<button class="chip" type="button" data-t="${otherType}">Есть среди ${otherName}: ${n}</button>`:""}</div>`;
+}
+function advisorsBodyHtml(){
   let body = "";
   if(advType==="legal"){
     const rows = FIRMS
+      .filter(f=>advMatch(f, advQuery))
       .map(f=>({f,n:advCount(f.id)}))
       .sort(advSortKey);
     body = `
@@ -7658,14 +7693,14 @@ function renderAdvisors(){
       ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
-    <div class="advisor-list reveal">
+    ${rows.length?`<div class="advisor-list reveal">
       ${rows.map(r=>`<article class="advisor-card">
         <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
         <div class="advisor-card-count">${advCountHtml(r)}</div>
       </article>`).join("")}
-    </div>`;
+    </div>`:advNoMatchHtml()}`;
   } else if(advType==="invest"){
-    const rows = INV_FIRMS.map(f=>({f,n:advCount(f.id)}))
+    const rows = INV_FIRMS.filter(f=>advMatch(f, advQuery)).map(f=>({f,n:advCount(f.id)}))
       .sort(advSortKey);
     body = `<div class="filters advisor-filters reveal">
       ${advIndSelectHtml()}
@@ -7673,14 +7708,31 @@ function renderAdvisors(){
       ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
-    <div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
+    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>`<article class="advisor-card">
       <div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>
       <div class="advisor-card-groups"><span class="label">Профиль</span><br>${r.f.desc||r.f.g.join(" · ")}</div>
       <div class="advisor-card-count">${advCountHtml(r)}</div>
-    </article>`).join("")}</div>`;
+    </article>`).join("")}</div>`:advNoMatchHtml()}`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
+  return body;
+}
+function bindAdvisorsBody(root){
+  root.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
+  root.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
+  const advSel=root.querySelector("#advind");
+  if(advSel) advSel.onchange=()=>{advInd=advSel.value;renderAdvisors();rerun();};
+}
+function renderAdvisorsBody(){
+  const el=document.getElementById("advBody");
+  if(!el) return;
+  el.innerHTML=advisorsBodyHtml();
+  bindAdvisorsBody(el);
+  requestAnimationFrame(()=>el.querySelectorAll(".reveal").forEach(r=>r.classList.add("in")));
+}
+function renderAdvisors(){
+  const body = advisorsBodyHtml();
   app.innerHTML = `
   <div class="page-hero">
     <svg class="ph-bg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -7694,12 +7746,13 @@ function renderAdvisors(){
     </svg>
     <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
+  <div class="feed-search reveal"><input id="advq" placeholder="Найти консультанта по названию…" value="${esc(advQuery)}" aria-label="Поиск по консультантам" autocomplete="off"><div class="ac" id="advac" hidden></div></div>
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
     <button data-t="other" class="${advType==="other"?"on":""}">Иные</button>
   </div>
-  ${body}
+  <div id="advBody">${body}</div>
   <!-- Обращение к самим фирмам. Стоит ПОСЛЕ списка, а не перед ним: сначала
        человек видит, что каталог настоящий и его фирма в нём есть (или её
        в нём нет — что мотивирует сильнее любого призыва), и только потом
@@ -7713,10 +7766,13 @@ function renderAdvisors(){
     </div>
     <button class="hs-cta" id="firmCta" type="button">Написать нам</button>
   </div>`;
-  app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{advType=b.dataset.t;renderAdvisors();rerun();});
-  app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
-  const advSel=document.getElementById("advind");
-  if(advSel) advSel.onchange=()=>{advInd=advSel.value;renderAdvisors();rerun();};
+  bindAdvisorsBody(app);
+  const aq=document.getElementById("advq");
+  if(aq){
+    let t=null;
+    aq.addEventListener("input", ()=>{clearTimeout(t); renderSuggest(aq,"advac","advisors"); t=setTimeout(()=>{advQuery=aq.value;renderAdvisorsBody();},200);});
+    bindSuggestKeys(aq,"advac",()=>{clearTimeout(t);advQuery=aq.value;renderAdvisorsBody();});
+  }
   // Тот же диалог, что «Написать нам» в подвале: отдельной формы для фирм
   // заводить незачем, а почтовая ссылка на телефоне открывает пустой клиент.
   const firmCta=document.getElementById("firmCta");

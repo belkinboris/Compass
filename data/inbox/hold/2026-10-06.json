@@ -899,34 +899,6 @@
    ]
   },
   {
-   "draft_id": "d90479177",
-   "title": "В Ясном проезде выставили на торги восемь коммерческих помещений",
-   "date": "2026-09-25",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/9/25/vosem-kommercheskih-pomeshhenij-v-yasnom-proezde-vystavleno-na-torgi"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d15644705",
    "title": "BASF направил предложение о слиянии своему конкуренту Evonik, пишут СМИ",
    "date": "2026-09-25",
@@ -1297,108 +1269,13 @@
    ]
   },
   {
-   "draft_id": "d38448115",
-   "title": "Китай продаёт Европе втрое больше, чем покупает. Но проблема ЕС совсем не в торговом дефиците",
+   "draft_id": "d65646603",
+   "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1359365.php"
-    ]
-   ],
-   "sum": "€1,18 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Китай продаёт Европе втрое больше, чем",
-   "asset": ". Но проблема ЕС совсем не в торговом дефиците",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Китай продаёт Европе втрое больше, чем",
-    "asset": ". Но проблема ЕС совсем не в торговом дефиците",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d82500917",
-   "title": "Утренний обзор за 6 октября: продажа «Юникредита» и полномочия жилищной инспекции",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266146/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Согласование получено",
-   "events": [
-    {
-     "kind": "approval",
-     "date": "2026-10-06",
-     "title": "Президент разрешил сделку",
-     "note": "Путин разрешил итальянской UniCredit провести реорганизацию «Юникредит банка» и в дальнейшем продать его акции. В правительстве готовят поправки, какие позволят банкам привлекать IT-компании к обработке в том числе банковской тайны, чтобы сократить расходы.…",
-     "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/266146/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65902755",
-   "title": "Москва выставила на торги коммерческое помещение на Рязанском проспекте",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/10/6/moskva-vystavila-na-torgi-kommercheskoe-pomeshhenie-na-ryazanskom-prospekte"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23209651",
-   "title": "«Планирую купить «Мерседес« за миллион». Сколько зарабатывают и как живут в России мигранты — откровенный рассказ таджика",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/world/2026/10/06/76679143/"
+     "web:ura.news",
+     "https://ura.news/news/1053133842"
     ]
    ],
    "sum": null,
@@ -1409,13 +1286,295 @@
      "kind": "negotiations",
      "date": "2026-10-06",
      "title": "Переговоры",
-     "note": "Он работает поваром в закусочной и скучает по родине, но возвращаться насовсем туда не собирается",
+     "note": "В Тюмени выставили на продажу незаконченное общежитие на Пермякова.",
      "source": [
-      "web:74.ru",
-      "https://74.ru/text/world/2026/10/06/76679143/"
+      "web:ura.news",
+      "https://ura.news/news/1053133842"
      ]
     }
    ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90616971",
+   "title": "Акции Совкомбанка резко выросли после новости об увеличении выкупа ценных бумаг",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/06/1234676-aktsii-sovkombanka"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65732492",
+   "title": "Совкомбанк увеличит объем выкупа своих акций до 3 млрд рублей",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/06/1234659-sovkombank-uvelichit"
+    ]
+   ],
+   "sum": "3 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42018526",
+   "title": "В поисках инженера: зачем бизнес вложил в вузы ₽51 млрд",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/education/06/10/2026/6aba6ade9a7947552a615bcf"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "вузы ₽51 млрд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "вузы ₽51 млрд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d89689492",
+   "title": "60,7 млрд рублей инвестиций в ИТ, NB-IoT и Big Data. Как проходит цифровизация АФК «Система»",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/49397"
+    ]
+   ],
+   "sum": "60,7 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33494569",
+   "title": "«Авито Реклама» и Soloway: почти половина жителей России изучает информацию в интернете перед покупкой товаров повседневного спроса",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-06_avito_reklama_i_soloway_pochti"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77006495",
+   "title": "Мишустин призвал стимулировать инвестиции провайдеров в инфраструктуру",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28186827"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d50346556",
+   "title": "Онлайн-продажи в РФ по итогам превысили пятую часть розничного товарооборота",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28186705"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20137189",
+   "title": "Мишустин призвал стимулировать инвестиции в развитие скоростного интернета",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261006/mishustin-2122596995.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d44383046",
+   "title": "В России засекретят часть данных о продаже бензина",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/06/top-secret/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12306433",
+   "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053133865"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
