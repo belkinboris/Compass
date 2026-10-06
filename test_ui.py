@@ -4405,6 +4405,8 @@ def test_materials_page_has_no_empty_webinar_card(page, base_url):
     text = page.inner_text("#app")
     assert "Первый вебинар" not in text and "появятся здесь" not in text, text[-300:]
     assert "ниже анонсы" not in text
+    # формулировка владельца 7 октября 2026: без «ниже», «и» вместо запятой
+    assert "Раздел открылся недавно: анонсы вебинаров и колонки появятся позже." in text
 
 
 def test_page_source_does_not_name_the_team():
