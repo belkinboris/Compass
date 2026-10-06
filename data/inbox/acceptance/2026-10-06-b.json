@@ -1,0 +1,27 @@
+[
+ {
+  "id": "g1833e545",
+  "verdict": "accept",
+  "profiles": [],
+  "no_profile": {
+   "seller": "город Москва — орган власти, профиль не нужен",
+   "target": "помещение, не компания — профиль не нужен"
+  },
+  "no_inn": {},
+  "no_source": {},
+  "name_ok": {},
+  "stale_ok": {},
+  "checklist": {
+   "sources": true,
+   "parties": true,
+   "asset": true,
+   "title": true,
+   "why": true,
+   "fields": true,
+   "wording": true,
+   "post": true,
+   "status": true
+  },
+  "notes": "Владелец подтвердил по заметке 806, что это сделка, и указал канал «Компас - Недвижимость». Цена лота в источнике не названа."
+ }
+]
