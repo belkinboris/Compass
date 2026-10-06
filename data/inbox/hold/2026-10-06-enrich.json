@@ -11,6 +11,24 @@
    ]
   },
   {
+   "news": "https://www.vedomosti.ru/realty/articles/2026/09/29/1232556-vladelets-azimut-hotels-prodal-aktiv",
+   "title": "Владелец Azimut Hotels Клячин продал еще один актив",
+   "verdict": "enrich:g18e39dbf",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «офисный комплекс «Химки One» (42 000 кв. м)»"
+   ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/finance/articles/2026/09/29/1232557-otp-bank-zadumalsya-o-polnom-uhode-iz-rossii",
+   "title": "Венгерский OTP Bank задумался о полном уходе из России",
+   "verdict": "enrich:gd937c845",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «ОТП Банк»"
+   ]
+  },
+  {
    "news": "https://www.vedomosti.ru/business/articles/2026/09/29/1232560-metro-peredani-vo-vremennoe-upravlenie",
    "title": "Российские активы Metro переданы во временное управление",
    "verdict": "enrich:ga142d8e0",
