@@ -1269,7 +1269,7 @@
    ]
   },
   {
-   "draft_id": "d82142858",
+   "draft_id": "d86215565",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
@@ -1308,7 +1308,7 @@
    ]
   },
   {
-   "draft_id": "d58043836",
+   "draft_id": "d78331760",
    "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
    "date": "2026-10-06",
    "src": [
@@ -1336,47 +1336,7 @@
    ]
   },
   {
-   "draft_id": "d58584453",
-   "title": "Paramount Skydance закрыла сделку по слиянию с Warner Bros. Discovery за $110 млрд",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/media/3179074-sliyanie-paramount-skydance-i-warner-bros-discovery?from=rss"
-    ]
-   ],
-   "sum": "$110 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Её одобрили регуляторы ЕС и США.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/media/3179074-sliyanie-paramount-skydance-i-warner-bros-discovery?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d71079205",
+   "draft_id": "d58555682",
    "title": "NYT: Paramount завершила сделку по покупке Warner Bros.",
    "date": "2026-10-06",
    "src": [
@@ -1410,15 +1370,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount Skydance закрыла сделку по слиянию с Warner Bros. » — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d78303124",
+   "draft_id": "d20428800",
    "title": "Paramount завершила сделку по приобретению Warner Bros",
    "date": "2026-10-06",
    "src": [
@@ -1455,11 +1413,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount Skydance закрыла сделку по слиянию с Warner Bros. » — второе издание, в группу не шлём"
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d49209334",
+   "draft_id": "d33953729",
    "title": "Paramount завершила поглощение Warner Bros. за $110 млрд",
    "date": "2026-10-06",
    "src": [
@@ -1497,11 +1455,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount Skydance закрыла сделку по слиянию с Warner Bros. » — второе издание, в группу не шлём"
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d23681933",
+   "draft_id": "d71664083",
    "title": "Paramount купила Warner Bros. за $111 млрд — объединённая компания получила название Skydance",
    "date": "2026-10-06",
    "src": [
@@ -1538,20 +1496,48 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount Skydance закрыла сделку по слиянию с Warner Bros. » — второе издание, в группу не шлём"
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d64394984",
-   "title": "Байбек Совкомбанка: есть ли идея в акциях после увеличения выкупа",
+   "draft_id": "d24926767",
+   "title": "Топор Джека Николсона из фильма «Сияние» выставлен на аукцион",
    "date": "2026-10-06",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/radio/06/10/2026/6ac523749a79474dae070b37"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9007677"
     ]
    ],
-   "sum": "3 млрд ₽",
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89377693",
+   "title": "Россиянка захотела купить на Бали самый вонючий фрукт в мире и была избита",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/06/rossiyanka-zahotela-kupit-na-bali-samyy-vonyuchiy-frukt-v-mire-i-byla-izbita/"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1570,61 +1556,31 @@
    ]
   },
   {
-   "draft_id": "d53360619",
-   "title": "BMW увеличила инвестиции в производство автомобилей в Германии: концерн вложил €2 млрд в местные заводы",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/bmw-uvelichila-investicii-v-proizvodstvo-avtomobilej-v-germanii-koncern-vlozhil-2-mlrd-v-mestnye-zavody/"
-    ]
-   ],
-   "sum": "€2 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "местные заводы",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "местные заводы",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d83208293",
-   "title": "Инвестпроекты в сельском хозяйстве Астраханской области привлекут более 50 млрд рублей",
+   "draft_id": "d48152037",
+   "title": "Продажа «заряженных» на беременность апельсинов может грозить сроком",
    "date": "2026-10-06",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/10/6/investproekty-v-selskom-hozyajstve-astrahanskoj-oblasti-privlekut-bolee-50-mlrd-rublej"
+     "https://abnews.ru/news/2026/10/6/prodazha-zaryazhennyh-na-beremennost-apelsinov-mozhet-grozit-srokom"
     ]
    ],
-   "sum": "50 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Инвестпроекты в сельском хозяйстве Астраханской области",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Инвестпроекты в сельском хозяйстве Астраханской области",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g9d9e7ab6 (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
