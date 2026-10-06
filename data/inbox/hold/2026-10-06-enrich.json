@@ -63,6 +63,24 @@
    "reasons": [
     "слабое совпадение: общие слова заголовка: 3"
    ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261006/astrahan-2122692433.html",
+   "title": "\"Дом.РФ\" продает историческую ночлежку в Астрахани",
+   "verdict": "enrich:gb3ae9e94",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «здание бывшего городского ночлежного дома в Астрахани: около»"
+   ]
+  },
+  {
+   "news": "https://rb.ru/news/rzhd-v-chetvyortyj-raz-vystavila-na-torgi-rizhskij-vokzal-zhelayushih-kupit-zdanie-za-4-mlrd-ne-nashlos/",
+   "title": "РЖД в четвёртый раз выставила на торги Рижский вокзал — желающих купить здание за 4 млрд ₽ не нашлось",
+   "verdict": "enrich:gb3ae9e94",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
   }
  ]
 }

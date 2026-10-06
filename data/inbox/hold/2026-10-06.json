@@ -1269,7 +1269,7 @@
    ]
   },
   {
-   "draft_id": "d54776984",
+   "draft_id": "d86215565",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
    "src": [
@@ -1308,7 +1308,7 @@
    ]
   },
   {
-   "draft_id": "d58183694",
+   "draft_id": "d78331760",
    "title": "В центре Перми продают сэндвич-шоп известного ресторатора",
    "date": "2026-10-06",
    "src": [
@@ -1336,199 +1336,7 @@
    ]
   },
   {
-   "draft_id": "d41830418",
-   "title": "Paramount Skydance завершила приобретение Warner Bros. Discovery за $110 млрд",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/media/news/2026/10/06/1234749-priobretenie-warner-bros-discovery"
-    ]
-   ],
-   "sum": "$110 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/media/news/2026/10/06/1234749-priobretenie-warner-bros-discovery"
-     ]
-    }
-   ],
-   "buyer_name": "Paramount Skydance",
-   "asset": "Warner Bros. Discovery",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Paramount Skydance",
-    "asset": "Warner Bros. Discovery",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d53044560",
-   "title": "Paramount завершила сделку по покупке Warner Bros. на $110 млрд",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/06/10/2026/6ac4f73a193fc129299d0305"
-    ]
-   ],
-   "sum": "$110 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Объединенная компания получит название Skydance. Ей будут принадлежать две киностудии, телеканалы CBS News, CNN и HBO, а также стриминговые сервисы Paramount+ и HBO Max. Компания планирует выпускать по 30 фильмов в прокат ежегодно",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/06/10/2026/6ac4f73a193fc129299d0305"
-     ]
-    }
-   ],
-   "buyer_name": "Paramount",
-   "asset": "Warner Bros. на $110 млрд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Paramount",
-    "asset": "Warner Bros. на $110 млрд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount Skydance завершила приобретение Warner Bros. Disco» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d83038030",
-   "title": "Paramount Skydance закрыла сделку по покупке WBD",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1120686"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Paramount Skydance Corp. закрыла сделку по покупке Warner Bros. Discovery (WBD), объединенная компания меняет название на Skydance.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1120686"
-     ]
-    }
-   ],
-   "buyer_name": "Paramount Skydance",
-   "asset": "WBD",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Paramount Skydance",
-    "asset": "WBD",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount Skydance завершила приобретение Warner Bros. Disco» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d65836165",
-   "title": "Paramount Skydance закрыла сделку по слиянию с Warner Bros. Discovery за $110 млрд",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/media/3179074-sliyanie-paramount-skydance-i-warner-bros-discovery?from=rss"
-    ]
-   ],
-   "sum": "$110 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Её одобрили регуляторы ЕС и США.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/media/3179074-sliyanie-paramount-skydance-i-warner-bros-discovery?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount Skydance завершила приобретение Warner Bros. Disco» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d86917267",
-   "title": "Bloomberg: NASA может объявить о выкупе ракетных пусков для лунной программы",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28187523"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d76254241",
+   "draft_id": "d58555682",
    "title": "NYT: Paramount завершила сделку по покупке Warner Bros.",
    "date": "2026-10-06",
    "src": [
@@ -1562,54 +1370,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount Skydance завершила приобретение Warner Bros. Disco» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d65166806",
-   "title": "Работы советских художников-нонконформистов продали на аукционе Bonhams за €1 млн",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28187337"
-    ]
-   ],
-   "sum": "€1 млн",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Самым дорогим лотом стала картина Logie Гриши Брускина, которая была продана за €254,4 тыс.",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28187337"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "на аукционе Bonhams",
-   "seller": "Работы советских художников-нонконформистов",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на аукционе Bonhams",
-    "seller": "Работы советских художников-нонконформистов"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d15966585",
+   "draft_id": "d20428800",
    "title": "Paramount завершила сделку по приобретению Warner Bros",
    "date": "2026-10-06",
    "src": [
@@ -1646,20 +1413,20 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount Skydance завершила приобретение Warner Bros. Disco» — второе издание, в группу не шлём"
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d61170684",
-   "title": "Продажи на российском авторынке снижаются второй месяц подряд — в сентябре спрос на машины упал на 6,2%",
+   "draft_id": "d33953729",
+   "title": "Paramount завершила поглощение Warner Bros. за $110 млрд",
    "date": "2026-10-06",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-na-rossijskom-avtorynke-snizhayutsya-vtoroj-mesyac-podryad-v-sentyabre-spros-na-mashiny-upal-na-62/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9007512"
     ]
    ],
-   "sum": null,
+   "sum": "$110 млрд",
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -1667,13 +1434,85 @@
      "kind": "closed",
      "date": "2026-10-06",
      "title": "Сделка завершена",
-     "note": "В сентябре 2026 года в России продали чуть более 115 тыс. новых легковых автомобилей — на 6,2% меньше, чем годом ранее, сообщает «Автостат». Снижение продаж в годовом выражении фиксируется второй месяц подряд.",
+     "note": "Компания Paramount Skydance завершила сделку по поглощению медиакорпорации Warner Bros. Discovery за $110 млрд.",
      "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/prodazhi-na-rossijskom-avtorynke-snizhayutsya-vtoroj-mesyac-podryad-v-sentyabre-spros-na-mashiny-upal-na-62/"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9007512"
      ]
     }
    ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d71664083",
+   "title": "Paramount купила Warner Bros. за $111 млрд — объединённая компания получила название Skydance",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/paramount-kupila-warner-bros-za-111-mlrd-obedinyonnaya-kompaniya-poluchila-nazvanie-skydance/"
+    ]
+   ],
+   "sum": "$111 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-06",
+     "title": "Сделка завершена",
+     "note": "Paramount завершила приобретение Warner Bros. Discovery за $111 млрд и объявила о создании нового крупного игрока мирового медиарынка — Skydance. Сделка объединила киностудии Paramount и Warner Bros., стриминговые сервисы и крупные телевизионные сети.…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/paramount-kupila-warner-bros-za-111-mlrd-obedinyonnaya-kompaniya-poluchila-nazvanie-skydance/"
+     ]
+    }
+   ],
+   "buyer_name": "Paramount",
+   "asset": "Warner Bros.",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Paramount",
+    "asset": "Warner Bros.",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "та же новость, что «NYT: Paramount завершила сделку по покупке Warner Bros.» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d24926767",
+   "title": "Топор Джека Николсона из фильма «Сияние» выставлен на аукцион",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9007677"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1689,13 +1528,13 @@
    ]
   },
   {
-   "draft_id": "d11825920",
-   "title": "Желающих купить Рижский вокзал в Москве не нашлось в четвертый раз",
+   "draft_id": "d89377693",
+   "title": "Россиянка захотела купить на Бали самый вонючий фрукт в мире и была избита",
    "date": "2026-10-06",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/06/ne-vishlo/"
+     "https://lenta.ru/news/2026/10/06/rossiyanka-zahotela-kupit-na-bali-samyy-vonyuchiy-frukt-v-mire-i-byla-izbita/"
     ]
    ],
    "sum": null,
@@ -1713,8 +1552,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: вокзал, москве) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48152037",
+   "title": "Продажа «заряженных» на беременность апельсинов может грозить сроком",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/6/prodazha-zaryazhennyh-na-beremennost-apelsinov-mozhet-grozit-srokom"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
