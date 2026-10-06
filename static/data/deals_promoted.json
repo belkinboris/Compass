@@ -225411,6 +225411,10 @@
     [
      "Известия",
      "https://iz.ru/2174842/2026-09-28/bloomberg-stalo-izvestno-o-rassmotrenii-otp-bankom-vykhoda-s-rossiiskogo-rynka"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/finance/articles/2026/09/29/1232557-otp-bank-zadumalsya-o-polnom-uhode-iz-rossii"
     ]
    ],
    "from_ingest": true,
@@ -249544,13 +249548,6 @@
    "ind": "Строительство",
    "desc": "Один из крупнейших российских девелоперов жилья и коммерческой недвижимости, работает с 2005 года. Владелец компании — Владимир Воронин. Юрлицо — ООО «Группа ФСК».",
    "kpi": []
-  },
-  "gd98f5ba9": {
-   "name": "OTP Group",
-   "ind": "Банки",
-   "desc": "Венгерская банковская группа, владеет российским «ОТП банком».",
-   "kpi": [],
-   "group": true
   }
  },
  "match_keys": {
