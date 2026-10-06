@@ -1297,42 +1297,13 @@
    ]
   },
   {
-   "draft_id": "d11375960",
-   "title": "Инвестиции в историю: как работа с историей задаёт новый ритм развитию бизнеса",
+   "draft_id": "d61744613",
+   "title": "Сооснователь ADG Group Григорий Печерский вошел в капитал киносети «Каро»",
    "date": "2026-10-06",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/06/investicii-v-istoriju-kak"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d40668113",
-   "title": "Психолог объяснила привычку скрывать покупки от партнера",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2178681/2026-10-06/psikholog-obiasnila-privychku-skryvat-pokupki-ot-partnera"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Soosnovatel-ADG-Group-Grigorij-Pecherskij-voshel-v-kapital-kinoseti-Karo-87611"
     ]
    ],
    "sum": null,
@@ -1351,7 +1322,64 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g1536c7fc (общие редкие слова: вошел, капита) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d86708986",
+   "title": "FT: BMW вложила €2 млрд в производство в Германии на фоне спада в отрасли",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28185221"
+    ]
+   ],
+   "sum": "€2 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "производство в Германии на фоне спада в отрасли",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "производство в Германии на фоне спада в отрасли",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d28909225",
+   "title": "Цифровой туроператор: в Екатеринбурге покажут, как технологии увеличивают продажи",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053133725"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
