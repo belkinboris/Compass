@@ -1786,3 +1786,22 @@ def test_listings_are_not_admitted_to_counts(deals):
     bad = [d["id"] for d in deals if d.get("type") == "Продажа с торгов" and d.get("status") != "Закрыта"
            and ((d.get("facts") or {}).get("admitted") or {}).get("count")]
     assert not bad, "лот без покупки допущен к счёту: %s" % bad[:8]
+
+
+def test_titles_name_the_office_not_the_surname(deals):
+    """Владелец 6 октября 2026, по этапу сделки UniCredit «Путин разрешил
+    продажу…»: «Президент, а не Путин». В заголовках карточек и этапов пишется
+    должность. Автоматический приток заголовок этапа берёт из шаблона
+    («Согласование получено»), а фамилия приходит, когда этап или карточку
+    пишут вручную по заголовку новости, — эта проверка ловит именно это.
+    Проза карточки (пояснения к согласованию и т. п.) сюда не входит."""
+    rx = re.compile(r"(?<![А-Яа-яЁё])Путин")
+    bad = []
+    for d in deals:
+        if rx.search(d.get("title") or ""):
+            bad.append((d["id"], d["title"]))
+        for e in d.get("events") or []:
+            for key in ("title", "historicalTitle"):
+                if rx.search(e.get(key) or ""):
+                    bad.append((d["id"], e[key]))
+    assert not bad, f"в заголовке фамилия вместо «Президент»: {bad[:5]}"
