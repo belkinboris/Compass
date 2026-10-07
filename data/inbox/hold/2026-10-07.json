@@ -1458,17 +1458,17 @@
    ]
   },
   {
-   "draft_id": "d17414508",
-   "title": "Indie GO объявила о создании венчурного фонда на 5 млрд руб. для подготовки российских игровых студий к IPO",
+   "draft_id": "d79998316",
+   "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-07_indie_go_obyavila_o_sozdanii"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1120810"
     ]
    ],
-   "sum": "5 млрд ₽",
-   "type": "IPO",
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1479,23 +1479,23 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d61652484",
-   "title": "В Грузии задержали пытавшегося продать иностранцу уран за $700 тыс.",
+   "draft_id": "d87457336",
+   "title": "В Грузии пресечена попытка продажи урана иностранцу",
    "date": "2026-10-07",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/proisshestviya/28189255"
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1120803"
     ]
    ],
-   "sum": "$700 тыс",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1514,17 +1514,57 @@
    ]
   },
   {
-   "draft_id": "d53161315",
-   "title": "В РФ создали венчурный фонд для подготовки игровых студий к IPO",
+   "draft_id": "d18725666",
+   "title": "NYT: американец признался в незаконной продаже плутония",
    "date": "2026-10-07",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28189177"
+     "https://tass.ru/proisshestviya/28189471"
     ]
    ],
-   "sum": "200 млн ₽",
-   "type": "IPO",
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-07",
+     "title": "Сделка завершена",
+     "note": "По данным прокуратуры, Джейкоб Миллер также продал высокотоксичный металл таллий 71 клиенту, пишет газета",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/proisshestviya/28189471"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d71651470",
+   "title": "Прямые иностранные инвестиции в Киргизию за полгода выросли на 26,2%",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261007/investitsii-874020052.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1535,7 +1575,35 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17904960",
+   "title": "В Грузии задержали мужчину за попытку продать иностранцу уран",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261007/gruzija-2122845430.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
