@@ -45,6 +45,33 @@
    "reasons": [
     "в карточке «Группа компаний «Дело»»"
    ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/business/articles/2026/10/07/1235090-rosatom-vikupil",
+   "title": "«Росатом» выкупил у Шишкарева 51% группы «Дело»",
+   "verdict": "enrich:g5eb6ff22",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Сергей Шишкарев»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Chetvertyj-aukcion-po-prodazhe-Rizhskogo-vokzala-RZhD-ne-sostoyalsya-iz-za-otsutstviya-zayavok-87623",
+   "title": "Четвертый аукцион по продаже Рижского вокзала РЖД не состоялся из-за отсутствия заявок",
+   "verdict": "enrich:g5b4e85aa",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://tass.ru/ekonomika/28191327",
+   "title": "Участок земли с Рижским рынком Москвы выставят на торги минимум за 155 млн рублей",
+   "verdict": "enrich:g35c2f65e",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
   }
  ]
 }
