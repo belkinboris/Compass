@@ -258268,7 +258268,8 @@
   "gafde5488": 184,
   "g0710e7a1": 185,
   "g37e971b1": null,
-  "g1833e545": null
+  "g1833e545": null,
+  "g4ae30fd2": 187
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -261778,6 +261779,19 @@
    },
    "eco": {
     "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
+  },
+  "g4ae30fd2": {
+   "sum": "5 млрд ₽",
+   "asset": "венчурный фонд Indie GO Fund II",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "В портфель Indie GO Fund II войдут 20–25 компаний на разных этапах — от Pre-Seed до Series B со средним чеком 200 млн руб.",
     "finadv": "—"
    },
    "events": []
