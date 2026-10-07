@@ -1445,35 +1445,6 @@
    ]
   },
   {
-   "draft_id": "d13464308",
-   "title": "Шишкарев направит часть средств с продажи доли в ГК «Дело» на нацбезопасность",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/07/1235136-shishkarev-napravit-chast"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d47764719",
    "title": "Эксперты оценили сделку по выкупу «Росатомом» доли Шишкарева в ГК «Дело»",
    "date": "2026-10-07",
@@ -1508,106 +1479,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Шишкарев направит часть средств с продажи доли в ГК «Дело» н» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d77692043",
-   "title": "Рижский цветочный рынок выставят на торги: начальная стоимость лота — 155 млн рублей",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/rizhskij-cvetochnyj-rynok-vystavyat-na-torgi-nachalnaya-stoimost-lota-155-mln-rublej/"
-    ]
-   ],
-   "sum": "155 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12022307",
-   "title": "Серия Honor 600 стала хитом в Китае — за четыре месяца продали более 1 млн смартфонов",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/seriya-honor-600-stala-hitom-v-kitae-za-chetyre-mesyaca-prodali-bolee-1-mln-smartfonov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-07",
-     "title": "Сделка завершена",
-     "note": "Серия смартфонов Honor 600 преодолела отметку в 1 млн проданных устройств в Китае спустя четыре месяца после релиза, сообщает Huawei Central. Линейка дебютировала в КНР в мае, тогда как глобальный запуск состоялся в апреле.",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/seriya-honor-600-stala-hitom-v-kitae-za-chetyre-mesyaca-prodali-bolee-1-mln-smartfonov/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "более 1 млн смартфонов",
-   "seller": "Серия Honor 600 стала хитом в Китае — за четыре месяца",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "более 1 млн смартфонов",
-    "seller": "Серия Honor 600 стала хитом в Китае — за четыре месяца"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d86433078",
-   "title": "Плюсы и минусы покупки полиса ОСАГО в рассрочку",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053134247"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
