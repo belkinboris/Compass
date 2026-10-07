@@ -1,0 +1,140 @@
+{
+ "made": "2026-10-07",
+ "items": [
+  {
+   "key": "https://frankmedia.ru/308420::g49657635",
+   "candidate_id": "g49657635",
+   "reason": "общие редкие слова: купит, рублей",
+   "draft": {
+    "draft_id": "d20905711",
+    "title": "Минфин купит валюты и золота на 279,4 млрд рублей в октябре",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/308420"
+     ]
+    ],
+    "sum": "279,4 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://1prime.ru/20261005/zoloto-873941990.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d39942279",
+    "title": "Минфин купит валюту и золото почти на 280 миллиардов рублей",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261005/zoloto-873941990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюта и золото почти на 280 миллиардов рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюта и золото почти на 280 миллиардов рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://www.tadviser.ru/a/49430::pending-4",
+   "candidate_id": "pending-4",
+   "reason": "общие редкие слова: electr, schnei",
+   "draft": {
+    "draft_id": "d49005507",
+    "title": "Schneider Electric купила разработчика САПР PTC за $22,6 млрд",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/49430"
+     ]
+    ],
+    "sum": "$22,6 млрд",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-06",
+      "title": "Сделка завершена",
+      "note": "атегия компании PTC Inc. (прежнее название Parametric Technology Corporation) в области Интернета вещей строится на ее IoT-платформе ThingWorx для разработчиков прикладного Программное обеспечение. Она обеспечивает быструю разработку благодаря использованию…",
+      "source": [
+       "web:tadviser.ru",
+       "https://www.tadviser.ru/a/49430"
+      ]
+     }
+    ],
+    "buyer_name": "Schneider Electric",
+    "asset": "разработчик САПР PTC",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Schneider Electric",
+     "asset": "разработчик САПР PTC",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://1prime.ru/20261006/biznes-873990493.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d90174826",
+    "title": "Бизнес вложил десять миллиардов рублей в подготовку кадров для IT-отрасли",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261006/biznes-873990493.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Бизнес",
+    "asset": "подготовка кадров для IT-отрасли",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Бизнес",
+     "asset": "подготовка кадров для IT-отрасли",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  }
+ ]
+}
