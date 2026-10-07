@@ -1285,22 +1285,24 @@ def render_milestone(deal, event):
         lines.append('')
         lines.extend(card)
 
-    # ВСЕ ИСТОЧНИКИ ЭТАПА, а не первый (владелец, 7 октября 2026, пост о
+    # ИСТОЧНИКИ ЭТАПА, а не карточки (владелец, 7 октября 2026, пост о
     # закрытии Росатом/«Дело»: в консоли написали, что цену подтвердил
     # «Коммерсантъ», а в посте стоял один ПРАЙМ). Список — тем же правилом,
-    # что у сайта (`eventSources` в static/index.html); в посте — до трёх.
-    srcs = milestone_sources(event)[:MILESTONE_POST_SOURCES]
+    # что у сайта (`eventSources` в static/index.html). В посте — первый и
+    # строка «Ещё N — в карточке сделки», как у обычного поста (владелец, в
+    # тот же день, о посте с тремя изданиями через запятую: «в дальнейшем
+    # давай оставим один источник и подпись, что ещё х источников в
+    # карточке сделки»).
+    srcs = milestone_sources(event)
     if srcs:
+        label, url = srcs[0]
         lines.append('')
-        lines.append('%s %s' % (_lab('Источник' if len(srcs) == 1 else 'Источники'),
-                                ', '.join('<a href="%s">%s</a>' % (esc(url), esc(label))
-                                          for label, url in srcs)))
+        lines.append('%s <a href="%s">%s</a>' % (_lab('Источник'), esc(url), esc(label)))
+        more = len(srcs) - 1
+        if more:
+            lines.append('Ещё %d %s — в карточке сделки'
+                         % (more, _plural(more, 'источник', 'источника', 'источников')))
     return '\n'.join(lines)
-
-
-# Сколько источников этапа показывать в посте: строка остаётся одной строкой
-# на телефоне, а полный список — на странице этапа на сайте.
-MILESTONE_POST_SOURCES = 3
 
 
 def milestone_sources(event):
