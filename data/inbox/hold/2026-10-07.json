@@ -1456,6 +1456,90 @@
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
     "та же новость, что «Paramount завершила сделку по приобретению Warner Bros» — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d17414508",
+   "title": "Indie GO объявила о создании венчурного фонда на 5 млрд руб. для подготовки российских игровых студий к IPO",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-07_indie_go_obyavila_o_sozdanii"
+    ]
+   ],
+   "sum": "5 млрд ₽",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61652484",
+   "title": "В Грузии задержали пытавшегося продать иностранцу уран за $700 тыс.",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28189255"
+    ]
+   ],
+   "sum": "$700 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53161315",
+   "title": "В РФ создали венчурный фонд для подготовки игровых студий к IPO",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28189177"
+    ]
+   ],
+   "sum": "200 млн ₽",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
