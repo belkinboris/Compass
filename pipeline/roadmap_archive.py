@@ -46,6 +46,11 @@ VERDICT = re.compile(r"(ЗАКРЫТ[А-ЯЁ]*|СДЕЛАН[А-ЯЁ]*|ПРОВЕ
                      r"(\s*\([^)]{0,60}\))?")
 
 
+# Последняя строка записи журнала: куда легло её знание. Разбирает и
+# проверяет её test_docs.py (файл и раздел обязаны существовать).
+KNOWLEDGE = re.compile(r"^Знание:\s*(\S.*)$", re.M)
+
+
 def missing_lines(before: str, after: str, archived: str) -> list:
     """Строки, которые исчезли бы вовсе, — ни в файле, ни в архиве.
 
@@ -165,10 +170,25 @@ def main(argv=None) -> int:
         days = sorted({d for _s, d in entries}, reverse=True)
         keep = set(days[:a.keep_days])
         bounds = [s for s, _d in entries] + [len(journal)]
-        stay, move_j = [journal[:entries[0][0]]], []
+        stay, move_j, waiting = [journal[:entries[0][0]]], [], []
         for i, (s, d) in enumerate(entries):
             chunk = journal[s:bounds[i + 1]]
-            (stay if d in keep else move_j).append(chunk)
+            if d in keep:
+                stay.append(chunk)
+            elif not KNOWLEDGE.search(chunk):
+                # Ворота (владелец, 7 октября 2026): запись не уезжает в
+                # архив, пока не сказано, куда легло её знание. Архив только
+                # ищут, и правило, оставшееся в нём одном, до агента не дойдёт.
+                stay.append(chunk)
+                waiting.append(chunk.splitlines()[0][:110])
+            else:
+                move_j.append(chunk)
+        if waiting:
+            print("Не уезжают — нет строки «Знание: …» (%d):" % len(waiting))
+            for line in waiting:
+                print("   %s" % line)
+            print("   Допишите в конец записи «Знание: docs/<тема>.md#<раздел>» (куда перенесено"
+                  " правило) или «Знание: нет — <почему>», и запустите снова.\n")
         if not move_j:
             print("Журнал и так короткий: дней %d, оставляем %d." % (len(days), a.keep_days))
             return 0

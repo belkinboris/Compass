@@ -163,8 +163,49 @@ def test_the_journal_in_the_main_file_is_short():
                    re.finditer(r"^### (\d{4}-\d{2}-\d{2})", JOURNAL, re.M)})
     assert len(days) <= 3, (
         "в основном файле журнал за %d дней (%s…%s) — сдвиньте старые записи: "
-        "python3 pipeline/roadmap_archive.py --journal --write"
+        "python3 pipeline/roadmap_archive.py --journal --write; запись без строки "
+        "«Знание: …» не уедет — сначала разнесите её правило по документам"
         % (len(days), days[0], days[-1]))
+
+
+_KNOW = re.compile(r"^Знание:\s*(\S.*)$", re.M)
+_KNOW_TARGET = re.compile(r"((?:docs|routines|pipeline)/[\w./-]+\.(?:md|py)|[A-Z_]+\.md|test_\w+\.py)"
+                          r"(?:#([^;]+?)|::(\w+))?\s*(?:;|$)")
+
+
+def test_a_journal_entry_says_where_its_knowledge_went():
+    """Владелец 7 октября 2026: «важно, чтобы релевантная информация не
+    просто так тупо отправлялась в архив и терялась там». Журнал уезжает в
+    архив по дате, а архив только ищут — правило, оставшееся в одной записи
+    журнала, до агента, который делает похожую работу, не доходит. Поэтому
+    запись кончается строкой «Знание: <документ>#<раздел>» (куда перенесено
+    правило; можно несколько через «;») или «Знание: нет — <почему>», и
+    `roadmap_archive.py --journal` без неё запись не сдвигает. Здесь
+    проверяется, что адрес настоящий: файл есть, раздел в нём есть, тест
+    с таким именем есть."""
+    bad = []
+    for m in _KNOW.finditer(JOURNAL):
+        value = m.group(1).strip()
+        if value.lower().startswith("нет"):
+            continue
+        targets = list(_KNOW_TARGET.finditer(value))
+        if not targets:
+            bad.append("не понял адрес: %s" % value[:90])
+            continue
+        for t in targets:
+            path, section, test = t.group(1), t.group(2), t.group(3)
+            full = os.path.join(ROOT, path)
+            if not os.path.exists(full):
+                bad.append("нет файла %s" % path)
+                continue
+            text = io.open(full, encoding="utf-8").read()
+            if section:
+                heads = [_norm(h) for h in re.findall(r"(?m)^#{1,6}\s+(.+)$", text)]
+                if not any(_norm(section) in h for h in heads):
+                    bad.append("в %s нет раздела «%s»" % (path, section.strip()))
+            if test and not re.search(r"def %s\(" % re.escape(test), text):
+                bad.append("в %s нет теста %s" % (path, test))
+    assert not bad, "строка «Знание:» ведёт в никуда:\n  " + "\n  ".join(bad)
 
 
 def test_the_release_step_is_written_down_where_it_is_read():
