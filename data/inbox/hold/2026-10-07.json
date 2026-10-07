@@ -1269,113 +1269,6 @@
    ]
   },
   {
-   "draft_id": "d54689182",
-   "title": "Банда похитила и продала на мясо более двух тысяч кошек",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/05/banda-pohitila-i-prodala-na-myaso-bolee-dvuh-tysyach-koshek/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-05",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/05/banda-pohitila-i-prodala-na-myaso-bolee-dvuh-tysyach-koshek/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "на мясо более двух тысяч кошек",
-   "seller": "Банда похитила и",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на мясо более двух тысяч кошек",
-    "seller": "Банда похитила и"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
-    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: продал, тысяч) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d30866432",
-   "title": "Образец янтаря с цветком внутри продали вчетверо дороже стартовой цены",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261005/obrazets-873957382.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-05",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261005/obrazets-873957382.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "вчетверо дороже стартовой цены",
-   "seller": "Образец янтаря с цветком внутри",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "вчетверо дороже стартовой цены",
-    "seller": "Образец янтаря с цветком внутри"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d51198972",
-   "title": "Во Вьетнаме арестовали банду, укравшую 2700 кошек для продажи на мясо",
-   "date": "2026-10-05",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261005/vetnam-873960805.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d86215565",
    "title": "В Тюмени продают долгострой, который планировали сдать 18 лет назад",
    "date": "2026-10-06",
@@ -1524,7 +1417,7 @@
    ]
   },
   {
-   "draft_id": "d25469159",
+   "draft_id": "d63900709",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1552,36 +1445,7 @@
    ]
   },
   {
-   "draft_id": "d28057144",
-   "title": "Шишкарев направит на нацбезопасность часть суммы от продажи доли ГК «Дело»",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261007/shishkarev-874022766.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d12193592",
+   "draft_id": "d87073983",
    "title": "Шишкарев после продажи доли в ГК «Дело» связывает будущее с Россией",
    "date": "2026-10-07",
    "src": [
@@ -1604,15 +1468,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Шишкарев направит на нацбезопасность часть суммы от продажи » — второе издание, в группу не шлём"
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d25198438",
+   "draft_id": "d67959357",
    "title": "«Росатом» закрыл прецедентную сделку по выкупу 51% ГК «Дело»",
    "date": "2026-10-07",
    "src": [
@@ -1639,156 +1501,21 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Шишкарев направит на нацбезопасность часть суммы от продажи » — второе издание, в группу не шлём"
+    "та же новость, что «Шишкарев после продажи доли в ГК «Дело» связывает будущее с » — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d37551083",
-   "title": "Сергей Шишкарев хочет выкупить у «Росатома» SASCO",
+   "draft_id": "d19358622",
+   "title": "Плей-офф WNBA установил рекорд по просмотрам первого раунда",
    "date": "2026-10-07",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9008164"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/plej-off-wnba-ustanovil-rekord-po-prosmotram-pervogo-raunda/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-07",
-     "title": "Переговоры",
-     "note": "Основатель ГК «Дело» Сергей Шишкарев, завершивший 7 октября сделку по продаже контрольного пакета группы «Росатому», планирует выкупить у госкорпорации 58,67% Сахалинского морского пароходства (SASCO). Об этом он сообщил в интервью “Ъ”.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9008164"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d16443543",
-   "title": "В АТОР оценили влияние нового сбора в Таиланде на продажи туров",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ac61a79d2243cc7788eed26"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52976088",
-   "title": "Под угрозой крупнейшая инвестиция Google в Европе. Финские власти остановили стройку двух ЦОДов",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-07_krupnejshaya_edinichnaya_investitsiya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44814031",
-   "title": "Гражданин Грузии хотел продать радиоактивный уран за $700 тыс.",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180068/grazhdanin-gruzii-planiroval-sbyvat-za-rubezh-radioaktivnyi-uran-za-700-tys-izi"
-    ]
-   ],
-   "sum": "$700 тыс",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-07",
-     "title": "Переговоры",
-     "note": "Служба государственной безопасности Грузии пресекла попытку незаконной продажи гражданином этой страны радиоактивного урана на $700 тыс. Об этом 7 октября сообщили в ведомстве. «Задержанный планировал продать находящийся у него ядерный материал «Уран-238»…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2180068/grazhdanin-gruzii-planiroval-sbyvat-za-rubezh-radioaktivnyi-uran-za-700-tys-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36758807",
-   "title": "Lada Azimut появится у дилеров уже в октябре — но продажи кроссовера начнутся лишь в конце осени",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/lada-azimut-poyavitsya-u-dilerov-uzhe-v-oktyabre-no-prodazhi-krossovera-nachnutsya-lish-v-konce-oseni/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1807,41 +1534,13 @@
    ]
   },
   {
-   "draft_id": "d42668440",
-   "title": "Квартиру Блиновской в центре Москвы продадут за долги",
+   "draft_id": "d86419325",
+   "title": "В Грузии мужчина попытался продать иностранцу ядерный «Уран-238»",
    "date": "2026-10-07",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/07/kvartiru-blinovskoy-v-tsentre-moskvy-prodadut-za-dolgi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71560472",
-   "title": "Продажи машин ушедшего из России производителя удивили",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/07/prodazhi-mashin-ushedshego-iz-rossii-proizvoditelya-udivili/"
+     "https://lenta.ru/news/2026/10/07/v-gruzii-muzhchina-popytalsya-prodat-inostrantsu-yadernyy-uran-238/"
     ]
    ],
    "sum": null,
