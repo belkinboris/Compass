@@ -1417,7 +1417,7 @@
    ]
   },
   {
-   "draft_id": "d39612426",
+   "draft_id": "d59354652",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1445,64 +1445,7 @@
    ]
   },
   {
-   "draft_id": "d30721293",
-   "title": "«Росатом» закрыл прецедентную сделку по выкупу 51% ГК «Дело»",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/07/rosatom-zakril-precedentnuju"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d11649737",
-   "title": "Bentley лишенного титулов брата Короля III выставили на продажу",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9008285"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68555112",
+   "draft_id": "d27842090",
    "title": "«Росатом» выкупил у Шишкарева 51% группы «Дело»",
    "date": "2026-10-07",
    "src": [
@@ -1536,24 +1479,81 @@
    },
    "ind": "Энергетика",
    "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d15586534",
+   "title": "Шишкарев направит часть средств с продажи доли в ГК «Дело» на нацбезопасность",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/07/1235136-shishkarev-napravit-chast"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что ««Росатом» закрыл прецедентную сделку по выкупу 51% ГК «Дело»» — второе издание, в группу не шлём"
+    "та же новость, что ««Росатом» выкупил у Шишкарева 51% группы «Дело»» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d51116177",
-   "title": "В Грузии предотвратили попытку продать иностранцу уран на $700 тыс.",
+   "draft_id": "d79401603",
+   "title": "Эксперт предупредил о нюансах покупки летних шин осенью",
    "date": "2026-10-07",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/07/10/2026/6ac6009218d012f7b38e216d"
+     "web:iz.ru",
+     "https://iz.ru/2180251/2026-10-07/ekspert-predupredil-o-niuansakh-pokupki-letnikh-shin-oseniu"
     ]
    ],
-   "sum": "$700 тыс",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35570001",
+   "title": "В Тюмени продают производственную базу за 160 миллионов рублей",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053134259"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1568,7 +1568,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g762669fd (общие редкие слова: миллио, рублей) — проверьте, не дубль ли"
    ]
   }
  ]
