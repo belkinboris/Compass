@@ -4778,10 +4778,11 @@ def test_a_second_publication_of_a_known_stage_becomes_a_source_of_that_stage():
         "та же ссылка второй раз дописалась к этапу"
 
 
-def test_a_stage_post_lists_the_sources_of_the_stage():
-    """Пост этапа показывает источники этапа тем же правилом, что сайт
-    (`sources`, иначе `source`), до трёх, без повторов адреса; один источник
-    — «Источник:», несколько — «Источники:»."""
+def test_a_stage_post_shows_one_source_and_counts_the_rest():
+    """Пост этапа берёт источники этапа тем же правилом, что сайт
+    (`sources`, иначе `source`), без повторов адреса, и показывает первый —
+    остальные одной строкой «Ещё N — в карточке сделки», как обычный пост
+    (владелец, 7 октября 2026)."""
     import check_post
     deal = {"id": "g5eb6ff22", "type": "M&A"}
     event = {"kind": "closed", "date": "2026-10-07", "headline": "«Росатом» завершил выкуп",
@@ -4791,15 +4792,14 @@ def test_a_stage_post_lists_the_sources_of_the_stage():
                          ["Абирег", "https://abireg.ru/c"]],
              "snapshot": {"title": "x", "type": "M&A", "buyer": "Росатом", "seller": "Сергей Шишкарев",
                           "asset": "Группа компаний «Дело»", "sum": "77 млрд ₽", "status": "Закрыта"}}
-    text = format_post.render_milestone(deal, event)
-    assert ('<b>Источники:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>, '
-            '<a href="https://www.kommersant.ru/doc/9008037">Коммерсантъ</a>, '
-            '<a href="https://www.rbc.ru/b">РБК</a>') in text.split("\n")
-    assert "Абирег" not in text
-    assert check_post.check(text) == []
+    lines = format_post.render_milestone(deal, event).split("\n")
+    assert lines[-2:] == ['<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>',
+                          'Ещё 3 источника — в карточке сделки']
+    assert "Коммерсантъ" not in "\n".join(lines) and "Источники:" not in "\n".join(lines)
+    assert check_post.check("\n".join(lines)) == []
     del event["sources"]
-    assert '<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>' in \
-        format_post.render_milestone(deal, event).split("\n")
+    lines = format_post.render_milestone(deal, event).split("\n")
+    assert lines[-1] == '<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>'
 
 
 def test_postworthy_milestone_kinds_is_the_closed_v1_list():
