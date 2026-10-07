@@ -1011,6 +1011,12 @@ def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
     return AskPrep(system, _build_user_message(question, ret, search_block, history), results, search_block)
 
 
+def _about_reply() -> dict:
+    """Ответ на вопрос о самом сервисе — одинаковый в /api/ask и в быстром
+    поиске: интерфейс показывает его сразу и не ждёт модель."""
+    return {"answer": assistant_retrieval.about_answer(), "deals": [], "intent": "about", "model": False}
+
+
 @app.post("/api/ask")
 def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     started = time.monotonic()
@@ -1025,6 +1031,10 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
         logger.info("ассистент: отказ по политике (%s)", verdict.kind)
         return {"answer": verdict.answer, "deals": [], "intent": "refused",
                 "refused": verdict.kind, "model": False}
+    # «Чем вы полезны?», «что умеешь?» — готовый короткий рассказ о сервисе,
+    # без поиска и без модели (см. assistant_retrieval.about_service).
+    if assistant_retrieval.about_service(question):
+        return _about_reply()
     # История — ДО поиска по базе: уточняющий вопрос ищется вместе с
     # предыдущим (см. assistant_retrieval.retrieve, `previous`).
     user = auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
@@ -1141,6 +1151,8 @@ def assistant_lookup(req: AskRequest):
     if verdict.refused:
         return {"answer": verdict.answer, "deals": [], "intent": "refused",
                 "refused": verdict.kind}
+    if assistant_retrieval.about_service(question):
+        return _about_reply()
     history_rows = [(str(h.get("role") or "user"), str(h.get("body") or ""))
                     for h in (req.history or []) if isinstance(h, dict) and h.get("body")]
     try:
@@ -1188,6 +1200,9 @@ def assistant_bench(req: BenchRequest):
     verdict = assistant_policy.classify(question)
     if verdict.refused:
         return {"question": question, "refused": verdict.kind, "answer": verdict.answer,
+                "rows": [], "summary": []}
+    if assistant_retrieval.about_service(question):
+        return {"question": question, "intent": "about", "answer": _about_reply()["answer"],
                 "rows": [], "summary": []}
     if not _yandex_ready():
         return JSONResponse({"error": "на сервере не заданы YANDEX_API_KEY и YANDEX_FOLDER_ID — "

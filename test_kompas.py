@@ -164,6 +164,43 @@ def test_ask_base_mode(client, monkeypatch):
     assert captured["max_tokens"] == 700
 
 
+def test_question_about_the_service_gets_a_ready_answer_without_the_model(client, monkeypatch):
+    """Вопрос посетителя 7 октября 2026 (опечатки — его): модель ответила
+    отказом «могу помочь только информацией о сделках…», посетитель пояснил
+    «Пытаюсь понять пользу от сервиса». Теперь на такой вопрос — готовый
+    короткий рассказ о сервисе, сразу и без модели, в обоих режимах и в
+    быстром поиске."""
+    def no_llm(*a, **k):
+        raise AssertionError("модель не должна вызываться на вопрос о сервисе")
+    monkeypatch.setattr(main, "call_llm", no_llm)
+    monkeypatch.setattr(main, "yandex_search", no_llm)
+    q = "Чем мы можете ьыть полезны для меня"
+    for mode in ("base", "web"):
+        body = client.post("/api/ask", json={"question": q, "context": "{}", "mode": mode}).json()
+        assert body["intent"] == "about" and body["model"] is False and not body.get("refused")
+        assert "сделок с 2022 года" in body["answer"] and "(#/analytics)" in body["answer"]
+    quick = client.post("/api/assistant/lookup", json={"question": q, "context": ""}).json()
+    assert quick["intent"] == "about" and quick["answer"] == body["answer"]
+
+
+def test_about_service_does_not_catch_questions_about_deals():
+    """Готовый рассказ о сервисе не должен перехватывать вопрос о рынке:
+    признак требует, чтобы речь шла о «вас / сервисе / Компасе». Замер — по
+    тем же 500+ вопросам из живой базы, что и у гейта политики."""
+    import assistant_retrieval as ar
+    import test_assistant_policy
+    for q in ("Чем полезен Компас?", "Чем может быть полезен Компас?", "Чем вы можете быть полезны?", "Что ты умеешь?", "Что это за сервис?",
+              "Пытаюсь понять пользу от сервиса", "Как пользоваться?", "Привет"):
+        assert ar.about_service(q), q
+    for q in ("Чем полезна сделка для Сбербанка?", "Что вы можете сказать о сделке Магнита?",
+              "Привет, кто купил Boxberry?", "Какая польза от сделки для акционеров?",
+              "Чем полезен проект Восток Ойл?", "Чем может быть полезна покупка Boxberry для Яндекса?",
+              "Что может помешать сделке?"):
+        assert not ar.about_service(q), q
+    caught = [q for q in test_assistant_policy._live_questions() if ar.about_service(q)]
+    assert not caught, caught[:5]
+
+
 def test_ask_web_mode_with_results(client, monkeypatch):
     # Модель не дала ссылку сама -> ask() обязан подставить источники
     # (см. main._sources_footer): это гарантия цитирования, а не опция.
