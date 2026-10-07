@@ -4752,6 +4752,56 @@ def test_review_cli_milestone_backfills_headline_without_retaking_snapshot(tmp_p
     assert event["snapshot"]["sum"] == "старая сумма", "снимок задним числом переснят — потеряна честность момента"
 
 
+def test_a_second_publication_of_a_known_stage_becomes_a_source_of_that_stage():
+    """Владелец 7 октября 2026, пост о закрытии Росатом/«Дело»: «в консоли
+    написал, что Коммерсантъ подтвердил цену, а в посте указал только
+    ПРАЙМ». Вторая публикация о том же этапе (тот же вид и день) не заводит
+    второй этап — и раньше её ссылка ложилась только в `src` карточки, а
+    пост этапа берёт источники ЭТАПА. Теперь она дописывается к этапу, а
+    повтор той же ссылки ничего не добавляет."""
+    import enrich
+    prime = ["ПРАЙМ", "https://1prime.ru/20261007/likhachev-874021694.html"]
+    deal = {"id": "g5eb6ff22", "title": "«Росатом» завершил выкуп доли в «Деле»", "type": "M&A",
+            "events": [{"id": "g5eb6ff22-closed", "kind": "closed", "date": "2026-10-07",
+                        "source": prime}]}
+    item = {"title": "«Росатом» завершил сделку по выкупу доли Шишкарева в «Деле»",
+            "summary": "Сделка закрыта, сумма составила 77 млрд руб.",
+            "url": "https://www.kommersant.ru/doc/9008037", "date": "2026-10-07",
+            "source_id": "web:kommersant.ru"}
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), "та же стадия завела второй этап"
+    stage_src = [p for p in props if p[0] == "event_source"]
+    assert stage_src and stage_src[0][1]["source"] == ["Коммерсантъ", item["url"]], props
+    enrich.apply_props(deal, props)
+    assert deal["events"][0]["sources"] == [prime, ["Коммерсантъ", item["url"]]]
+    assert not any(p[0] == "event_source" for p in enrich.proposals(deal, item, {}, {})), \
+        "та же ссылка второй раз дописалась к этапу"
+
+
+def test_a_stage_post_lists_the_sources_of_the_stage():
+    """Пост этапа показывает источники этапа тем же правилом, что сайт
+    (`sources`, иначе `source`), до трёх, без повторов адреса; один источник
+    — «Источник:», несколько — «Источники:»."""
+    import check_post
+    deal = {"id": "g5eb6ff22", "type": "M&A"}
+    event = {"kind": "closed", "date": "2026-10-07", "headline": "«Росатом» завершил выкуп",
+             "source": ["ПРАЙМ", "https://1prime.ru/a"],
+             "sources": [["ПРАЙМ", "https://1prime.ru/a"], ["Коммерсантъ", "https://www.kommersant.ru/doc/9008037"],
+                         ["ПРАЙМ", "https://1prime.ru/a"], ["РБК", "https://www.rbc.ru/b"],
+                         ["Абирег", "https://abireg.ru/c"]],
+             "snapshot": {"title": "x", "type": "M&A", "buyer": "Росатом", "seller": "Сергей Шишкарев",
+                          "asset": "Группа компаний «Дело»", "sum": "77 млрд ₽", "status": "Закрыта"}}
+    text = format_post.render_milestone(deal, event)
+    assert ('<b>Источники:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>, '
+            '<a href="https://www.kommersant.ru/doc/9008037">Коммерсантъ</a>, '
+            '<a href="https://www.rbc.ru/b">РБК</a>') in text.split("\n")
+    assert "Абирег" not in text
+    assert check_post.check(text) == []
+    del event["sources"]
+    assert '<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>' in \
+        format_post.render_milestone(deal, event).split("\n")
+
+
 def test_postworthy_milestone_kinds_is_the_closed_v1_list():
     """Раздел A: список видов, достойных отдельной строки в ленте и поста в
     канал, закрытый и узкий — `signed` сознательно не в v1, `negotiations`

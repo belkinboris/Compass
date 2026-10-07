@@ -386,6 +386,18 @@ def proposals(deal, item, names, comps, match_keys=None):
                 if prior:
                     out.append(('event', prior, 'добавить',
                                 'прежний этап карточки — чтобы не пропал из хода сделки'))
+        elif event_url and event_key in known_events:
+            # ТА ЖЕ СТАДИЯ — ВТОРАЯ ПУБЛИКАЦИЯ (7 октября 2026, Росатом/«Дело»):
+            # закрытие первым дал ПРАЙМ, цену подтвердил «Коммерсантъ», а
+            # ссылка легла только в `src` карточки — у этапа остался один
+            # ПРАЙМ, и пост этапа вышел с ним одним. Источник подтверждения
+            # дописывается и к самому этапу (`sources`, как читает сайт).
+            stage = next(e for e in existing_events
+                         if (str(e.get('kind') or ''), str(e.get('date') or '')) == event_key)
+            if event_url not in {u for _l, u in format_post.milestone_sources(stage)}:
+                out.append(('event_source', {'kind': event_key[0], 'date': event_key[1],
+                                             'source': list(event['source'][:2])},
+                            'добавить', 'ещё один источник этапа'))
     return out
 
 
@@ -397,6 +409,14 @@ def apply_props(deal, props):
         if field == 'src':
             deal.setdefault('src', []).append(value)
             editions.settle_sources(deal)
+        elif field == 'event_source':
+            for e in deal.get('events') or []:
+                if isinstance(e, dict) and (str(e.get('kind') or ''), str(e.get('date') or '')) \
+                        == (value['kind'], value['date']):
+                    have = [list(x) for x in format_post.milestone_sources(e)]
+                    if value['source'][1] not in {u for _l, u in have}:
+                        e['sources'] = have + [value['source']]
+                    break
         elif field == 'event':
             deal.setdefault('events', []).append(value)
             deal['events'].sort(key=lambda e: (str(e.get('date') or ''), str(e.get('kind') or '')))
