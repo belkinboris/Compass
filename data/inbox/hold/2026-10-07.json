@@ -1417,7 +1417,7 @@
    ]
   },
   {
-   "draft_id": "d24714453",
+   "draft_id": "d79378185",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1445,27 +1445,27 @@
    ]
   },
   {
-   "draft_id": "d47764719",
-   "title": "Эксперты оценили сделку по выкупу «Росатомом» доли Шишкарева в ГК «Дело»",
+   "draft_id": "d16984518",
+   "title": "Клубы Евролиги единогласно отклонили предложение НБА о слиянии",
    "date": "2026-10-07",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/07/10/2026/6ac6512ff5ec9b1d769f0873"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9008365"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-10-07",
-     "title": "Сделка завершена",
-     "note": "&laquo;Росатом&raquo; выкупил долю Сергея Шишкарева в группе компаний «Дело» и довел свой пакет в ней до 100%.",
+     "title": "Переговоры",
+     "note": "По планам Национальной баскетбольной ассоциации (НБА) уже в ближайшее время учредить новую европейскую лигу был нанесен удар. Клубы главного континентального соревнования — Евролиги — единогласно высказались против слияния.",
      "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/07/10/2026/6ac6512ff5ec9b1d769f0873"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9008365"
      ]
     }
    ],
@@ -1480,8 +1480,132 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72430014",
+   "title": "Какие активы получила Skydance после слияния Paramount и Warner Bros.",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/07/10/2026/6ac659fe9a794739bebf9080"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-07",
+     "title": "Сделка завершена",
+     "note": "Paramount Skydance завершила покупку Warner Bros. Discovery. В результате была создана Skydance — одна из крупнейших медиакомпаний мира. Подробнее о сделке — в инфографике РБК",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/07/10/2026/6ac659fe9a794739bebf9080"
+     ]
+    }
+   ],
+   "buyer_name": "Какие активы",
+   "asset": "Skydance после слияния Paramount и Warner Bros.",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Какие активы",
+    "asset": "Skydance после слияния Paramount и Warner Bros.",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "та же новость, что «Paramount завершила поглощение Warner Bros. за $110 млрд» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d14003687",
+   "title": "ФПК продлила на октябрь - ноябрь акцию «Распродажа в плацкарте»",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28191407"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15298193",
+   "title": "Bentley экс-принца Эндрю выставили на продажу за 165 тысяч долларов",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261007/bentley-874044559.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72574575",
+   "title": "Эксперт назвал топ-10 популярных у россиян стран для покупки недвижимости",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180352/ekspert-nazval-top-10-populiarnykh-u-rossiian-stran-dlia-pokupki-nedvizhimosti-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
