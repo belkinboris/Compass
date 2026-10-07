@@ -1,0 +1,182 @@
+{
+ "made": "2026-10-07",
+ "items": [
+  {
+   "key": "https://frankmedia.ru/308420::g49657635",
+   "candidate_id": "g49657635",
+   "reason": "общие редкие слова: купит, рублей",
+   "draft": {
+    "draft_id": "d20905711",
+    "title": "Минфин купит валюты и золота на 279,4 млрд рублей в октябре",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/308420"
+     ]
+    ],
+    "sum": "279,4 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюты и золота на 279,4 млрд рублей в октябре",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://1prime.ru/20261005/zoloto-873941990.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d39942279",
+    "title": "Минфин купит валюту и золото почти на 280 миллиардов рублей",
+    "date": "2026-10-05",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261005/zoloto-873941990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Минфин",
+    "asset": "валюта и золото почти на 280 миллиардов рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Минфин",
+     "asset": "валюта и золото почти на 280 миллиардов рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://www.tadviser.ru/a/49430::pending-4",
+   "candidate_id": "pending-4",
+   "reason": "общие редкие слова: electr, schnei",
+   "draft": {
+    "draft_id": "d49005507",
+    "title": "Schneider Electric купила разработчика САПР PTC за $22,6 млрд",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:tadviser.ru",
+      "https://www.tadviser.ru/a/49430"
+     ]
+    ],
+    "sum": "$22,6 млрд",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-06",
+      "title": "Сделка завершена",
+      "note": "атегия компании PTC Inc. (прежнее название Parametric Technology Corporation) в области Интернета вещей строится на ее IoT-платформе ThingWorx для разработчиков прикладного Программное обеспечение. Она обеспечивает быструю разработку благодаря использованию…",
+      "source": [
+       "web:tadviser.ru",
+       "https://www.tadviser.ru/a/49430"
+      ]
+     }
+    ],
+    "buyer_name": "Schneider Electric",
+    "asset": "разработчик САПР PTC",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Schneider Electric",
+     "asset": "разработчик САПР PTC",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://1prime.ru/20261006/biznes-873990493.html::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d90174826",
+    "title": "Бизнес вложил десять миллиардов рублей в подготовку кадров для IT-отрасли",
+    "date": "2026-10-06",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261006/biznes-873990493.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Бизнес",
+    "asset": "подготовка кадров для IT-отрасли",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Бизнес",
+     "asset": "подготовка кадров для IT-отрасли",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9008037::geb31b556",
+   "candidate_id": "geb31b556",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d35229928",
+    "title": "«Росатом» завершил «Дело» // Госкорпорация выкупила 51% группы за 77 млрд руб.",
+    "date": "2026-10-07",
+    "src": [
+     [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9008037"
+     ]
+    ],
+    "sum": "77 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-07",
+      "title": "Сделка завершена",
+      "note": "Совладельцы ГК «Дело» &mdash; ее основатель Сергей Шишкарев и «Росатом» &mdash; закрыли сделку, в результате которой госкорпорация консолидировала все 100% компании. Сумма сделки составила 77 млрд руб. «Росатом» анонсировал консолидацию своих активов с…",
+      "source": [
+       "web:kommersant.ru/daily",
+       "https://www.kommersant.ru/doc/9008037"
+      ]
+     }
+    ],
+    "buyer_name": "«Росатом» завершил «Дело» // Госкорпорация",
+    "asset": "за 77 млрд руб.",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Росатом» завершил «Дело» // Госкорпорация",
+     "asset": "за 77 млрд руб.",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  }
+ ]
+}

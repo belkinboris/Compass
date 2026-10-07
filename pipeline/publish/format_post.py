@@ -1285,11 +1285,40 @@ def render_milestone(deal, event):
         lines.append('')
         lines.extend(card)
 
-    src = event.get('source') or []
-    if len(src) > 1 and str(src[1]).startswith('http'):
+    # ВСЕ ИСТОЧНИКИ ЭТАПА, а не первый (владелец, 7 октября 2026, пост о
+    # закрытии Росатом/«Дело»: в консоли написали, что цену подтвердил
+    # «Коммерсантъ», а в посте стоял один ПРАЙМ). Список — тем же правилом,
+    # что у сайта (`eventSources` в static/index.html); в посте — до трёх.
+    srcs = milestone_sources(event)[:MILESTONE_POST_SOURCES]
+    if srcs:
         lines.append('')
-        lines.append('%s <a href="%s">%s</a>' % (_lab('Источник'), esc(src[1]), esc(src[0])))
+        lines.append('%s %s' % (_lab('Источник' if len(srcs) == 1 else 'Источники'),
+                                ', '.join('<a href="%s">%s</a>' % (esc(url), esc(label))
+                                          for label, url in srcs)))
     return '\n'.join(lines)
+
+
+# Сколько источников этапа показывать в посте: строка остаётся одной строкой
+# на телефоне, а полный список — на странице этапа на сайте.
+MILESTONE_POST_SOURCES = 3
+
+
+def milestone_sources(event):
+    """[(издание, адрес)] этапа: список `sources`, иначе один `source` — то
+    же правило, что `eventSources` на сайте; повтор адреса не считается."""
+    if isinstance(event.get('sources'), list):
+        raw = event['sources']
+    elif isinstance(event.get('source'), list):
+        raw = [event['source']]
+    else:
+        raw = []
+    out, seen = [], set()
+    for s in raw:
+        if isinstance(s, (list, tuple)) and len(s) > 1 and str(s[1]).startswith('http') \
+                and s[1] not in seen:
+            seen.add(s[1])
+            out.append((str(s[0]), str(s[1])))
+    return out
 
 
 def changes(old, new):
