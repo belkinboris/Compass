@@ -2619,13 +2619,16 @@ def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
 
 def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_url):
     """Подсказка в поле ассистента на первом экране — один вопрос, и он
-    виден целиком.
+    виден целиком; пустое поле с кнопкой «Спросить ИИ» задаёт именно его.
 
     Скриншот владельца 7 октября 2026: на телефоне в поле стояло «Спросите:
     кто сопровождал сделки? ка» — вторая половина подсказки обрезалась на
-    полуслове. «Концовку „ка“ не должно быть видно. Пусть будет один вопрос
-    „кто сопровождал сделку…“». Ширину текста меряем шрифтом самого поля:
-    на 320 px остаётся 226 px, «Кто сопровождал сделку…» занимает около 215.
+    полуслове. «Концовку „ка“ не должно быть видно». В тот же день вопрос
+    сменился на «Чем полезен Компас?» (около 172 px при 226 px места на
+    320 px): человек, который ничего не пишет и нажимает «Спросить ИИ»,
+    получает рассказ о сервисе. «Чем может быть полезен Компас?» (272 px) не
+    влез, а шрифт подсказки владелец уменьшать не велел. Ширину меряем
+    шрифтом самого поля.
     """
     for width in (320, 360, 390, 1280):
         ctx = browser.new_context(viewport={"width": width, "height": 800})
@@ -2641,8 +2644,12 @@ def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_u
                       need: c.measureText(i.placeholder).width,
                       room: i.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)};
             }""")
-            assert fit["text"].count("?") == 0 and fit["text"].endswith("…"), fit
+            assert fit["text"] == "Чем полезен Компас?", fit
             assert fit["need"] <= fit["room"], (width, fit)
+            if width == 390:
+                pg.evaluate("document.getElementById('herogo').click()")
+                pg.wait_for_function("location.hash === '#/assistant' && "
+                                     "document.body.innerText.includes('инвестконсультанты')", timeout=15000)
         finally:
             ctx.close()
 

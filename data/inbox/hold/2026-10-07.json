@@ -1336,45 +1336,6 @@
    ]
   },
   {
-   "draft_id": "d20428800",
-   "title": "Paramount завершила сделку по приобретению Warner Bros",
-   "date": "2026-10-06",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2179616/paramount-zavershila-sdelku-po-priobreteniiu-warner-bros-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-06",
-     "title": "Сделка завершена",
-     "note": "Кинокомпания Paramount Skydance завершила сделку по приобретению Warner Bros. Discovery, в результате чего генеральный директор Дэвид Эллисон получил контроль над крупной медиаимперией с рядом ценных активов Голливуда. Об этом 6 октября сообщили в…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2179616/paramount-zavershila-sdelku-po-priobreteniiu-warner-bros-izi"
-     ]
-    }
-   ],
-   "buyer_name": "Paramount",
-   "asset": "Warner Bros",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Paramount",
-    "asset": "Warner Bros",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
    "draft_id": "d33953729",
    "title": "Paramount завершила поглощение Warner Bros. за $110 млрд",
    "date": "2026-10-06",
@@ -1409,11 +1370,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Paramount завершила сделку по приобретению Warner Bros» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -1454,11 +1413,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «Paramount завершила сделку по приобретению Warner Bros» — второе издание, в группу не шлём"
+    "та же новость, что «Paramount завершила поглощение Warner Bros. за $110 млрд» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d47385818",
+   "draft_id": "d63900709",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1486,106 +1445,7 @@
    ]
   },
   {
-   "draft_id": "d97459156",
-   "title": "Основатель ГК «Дело» рассказал, на чем сосредоточится после продажи доли в компании",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28189809"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11412639",
-   "title": "Росатом выкупил у Шишкарева его долю в группе компаний «Дело»",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28189683"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-07",
-     "title": "Сделка завершена",
-     "note": "Разрешилась главная интрига года в логистической индустрии страны, отметил генеральный директор госкорпорации Алексей Лихачев",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28189683"
-     ]
-    }
-   ],
-   "buyer_name": "Росатом",
-   "asset": null,
-   "seller": "Шишкарева его долю в группе компаний «Дело»",
-   "parsed_parties": {
-    "buyer": "Росатом",
-    "asset": null,
-    "seller": "Шишкарева его долю в группе компаний «Дело»"
-   },
-   "ind": "Энергетика",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Основатель ГК «Дело» рассказал, на чем сосредоточится после » — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d11983932",
-   "title": "Шишкарев направит на нацбезопасность часть суммы от продажи доли ГК «Дело»",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261007/shishkarev-874022766.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Основатель ГК «Дело» рассказал, на чем сосредоточится после » — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d12432127",
+   "draft_id": "d87073983",
    "title": "Шишкарев после продажи доли в ГК «Дело» связывает будущее с Россией",
    "date": "2026-10-07",
    "src": [
@@ -1608,93 +1468,23 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Основатель ГК «Дело» рассказал, на чем сосредоточится после » — второе издание, в группу не шлём"
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d52978525",
-   "title": "Выкуп «Росатомом» доли Шишкарева в ГК «Дело» завершен",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1120826"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-07",
-     "title": "Сделка завершена",
-     "note": "\"Росатом\", владевший 49% группы компаний \"Дело\", закрыл сделку в рамках механизма \"русской рулетки\" по выкупу доли (51%) партнера по группе Сергея Шишкарева.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1120826"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Основатель ГК «Дело» рассказал, на чем сосредоточится после » — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d37715672",
-   "title": "Финляндия заблокировала покупку недвижимости гражданам РФ, Израиля и Черногории",
+   "draft_id": "d67959357",
+   "title": "«Росатом» закрыл прецедентную сделку по выкупу 51% ГК «Дело»",
    "date": "2026-10-07",
    "src": [
     [
      "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/07/finljandija-zablokirovala-pokupku"
+     "https://www.dp.ru/a/2026/10/07/rosatom-zakril-precedentnuju"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61375364",
-   "title": "Квартиру Блиновской на Цветном бульваре продадут с торгов за долги",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180072/2026-10-07/kvartiru-blinovskoi-na-tcvetnom-bulvare-prodadut-s-torgov-za-dolgi"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1707,61 +1497,25 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Шишкарев после продажи доли в ГК «Дело» связывает будущее с » — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d84858747",
-   "title": "Huawei впервые обошёл Apple по продажам планшетов в России — среди лидеров также оказались Xiaomi и Samsung",
+   "draft_id": "d19358622",
+   "title": "Плей-офф WNBA установил рекорд по просмотрам первого раунда",
    "date": "2026-10-07",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/huawei-vpervye-oboshyol-apple-po-prodazham-planshetov-v-rossii-sredi-liderov-takzhe-okazalis-xiaomi-i-samsung/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/plej-off-wnba-ustanovil-rekord-po-prosmotram-pervogo-raunda/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-07",
-     "title": "Переговоры",
-     "note": "Huawei впервые занял первое место в России по объёму продаж планшетов в денежном выражении. Китайский бренд опередил Apple на 0,25% доли на рынке, сообщает ТАСС со ссылкой на источник на рынке техники и электроники. Третью и четвёртую позиции заняли Xiaomi и…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/huawei-vpervye-oboshyol-apple-po-prodazham-planshetov-v-rossii-sredi-liderov-takzhe-okazalis-xiaomi-i-samsung/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61403755",
-   "title": "Коллекторы заняли денег, чтобы купить чужие долги",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1359963.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1772,53 +1526,25 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финансовые услуги",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d53322029",
-   "title": "Китайский седельный тягач обошел по продажам в России все модели «КАМАЗа»",
+   "draft_id": "d86419325",
+   "title": "В Грузии мужчина попытался продать иностранцу ядерный «Уран-238»",
    "date": "2026-10-07",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/07/kitayskiy-sedelnyy-tyagach-oboshel-po-prodazham-v-rossii-vse-modeli-kamaza/"
+     "https://lenta.ru/news/2026/10/07/v-gruzii-muzhchina-popytalsya-prodat-inostrantsu-yadernyy-uran-238/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63686992",
-   "title": "В Астраханской области инвестиции в сельское хозяйство составят более 50 млрд рублей",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/10/7/v-astrahanskoj-oblasti-investiczii-v-selskoe-hozyajstvo-sostavyat-bolee-50-mlrd-rublej"
-    ]
-   ],
-   "sum": "50 млрд ₽",
-   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,

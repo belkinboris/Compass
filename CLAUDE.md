@@ -15,7 +15,8 @@ yandex_search.py              обёртка над Яндекс XML-поиск�
 assistant_retrieval.py        поиск по базе для ассистента: индекс, маршрут вопроса,
                               точные ответы со ссылками, компактные карточки для модели
 pipeline/assistant_bench.py   таблица «модель × время × успех» через боевой сервер (ключи там)
-test_kompas.py                34 теста: yandex_search, /api/ask, call_llm, стенд, оценки, подсказки
+test_kompas.py                47 тестов: yandex_search, /api/ask, call_llm, стенд, оценки, подсказки,
+                              ответ «что умеет сервис»
 test_data.py                  42 теста: инварианты базы (без браузера)
 test_ui.py                    98 тестов: дымовые проверки экранов (Playwright)
 test_ingest.py                89 тестов: приток (фильтр, сопоставление, пост, черновик, ворота,
@@ -143,7 +144,7 @@ finance/                      финмодель (книга Excel, двойни
 
 ```bash
 uvicorn main:app --reload            # http://127.0.0.1:8000
-python3 -m pytest -q                 # 1396 passed, 33 skipped, 15 xfailed (≈10 мин: интерфейс — самое долгое)
+python3 -m pytest -q                 # 1398 passed, 33 skipped, 15 xfailed (≈10 мин: интерфейс — самое долгое)
 python3 -m pytest test_data.py -q    # только инварианты базы, без браузера (0,1 с)
 ```
 
@@ -181,7 +182,7 @@ br = await p.chromium.launch(executable_path="/opt/pw-browsers/chromium")
 
 ## Обязательная проверка перед коммитом
 
-1. `python3 -m pytest -q` — 1396 passed, 33 skipped, 15 xfailed (7 октября 2026). Инварианты базы и дымовые тесты интерфейса
+1. `python3 -m pytest -q` — 1398 passed, 33 skipped, 15 xfailed (7 октября 2026). Инварианты базы и дымовые тесты интерфейса
    теперь живут в `test_data.py` и `test_ui.py`, а не в одноразовых скриптах.
 2. **Семантический diff JSON**, а не глазами по строкам: сравнить с `HEAD` и
    убедиться, что изменились только те поля, которые собирались менять, а состав

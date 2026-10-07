@@ -3628,6 +3628,9 @@ async function runAsk(q, mode, meta, w){
          базы, сейчас допишу». Ни таймера «дописываю ответ…», ни второго
          запроса: модель к такому вопросу не подключается вовсе. */
       if(d.refused){ done=true; w.innerHTML=mdToHtml(d.answer); return; }
+      /* «Что вы умеете?» — готовый рассказ о сервисе, модель не нужна:
+         показываем его сразу, без «дописываю ответ…». */
+      if(d.intent==="about"){ w.innerHTML=mdToHtml(d.answer); return; }
       w.innerHTML=mdToHtml(d.answer)+`<div class="ai-more">${THINKING_HTML}</div>`;
       stopMore=tickTimer(w.querySelector(".ai-more .ai-thinking-t"), s=> s<3
         ? "Это данные из базы «Компаса». Дописываю ответ…"
@@ -3654,7 +3657,7 @@ async function runAsk(q, mode, meta, w){
    партнёра. Подсказываем не всем подряд, а ровно тогда, когда видно, что
    ответ ни на одну сделку не опёрся: постоянная подсказка под каждым ответом
    быстро перестаёт читаться. */
-const askHintHtml = a => (a.refused || (a.deals && a.deals.length)) ? ""
+const askHintHtml = a => (a.refused || a.intent==="about" || (a.deals && a.deals.length)) ? ""
   : `<p class="ai-note">Ответ получился общим? Спросите конкретнее — назовите компанию, отрасль или год: «сделки «Магнита» в 2025 году» вместо «сделки в ритейле».</p>`;
 
 /* «Ответ помог?» под каждым ответом — начало петли улучшений: плохой ответ
@@ -3680,6 +3683,7 @@ const FOLLOW_UPS = {
   term:     ["Кто сопровождал эти сделки?"],
   theme:    ["Какие из них самые крупные?"],
   count:    ["Какие из них самые крупные?"],
+  about:    [`Крупнейшие сделки ${new Date().getFullYear()} года`, "Что нового на рынке за последнюю неделю?"],
 };
 function followUpsHtml(a){
   if(!a || a.refused) return "";
@@ -4795,7 +4799,7 @@ function renderDeals(){
         <h1 class="hs-word">Ассистент</h1>
         <p>Кто сопровождал сделку? Какая сделка была крупнейшей в отрасли? Ассистент ищет по базе «Компаса» и открытым источникам.</p>
         <div class="aisearch">
-          <input id="heroq" placeholder="Кто сопровождал сделку…" aria-label="Вопрос ассистенту">
+          <input id="heroq" placeholder="${HERO_ASK}" aria-label="Вопрос ассистенту">
           <button id="herogo">Спросить ИИ</button>
         </div>
         ${modeToggleHtml(false)}
@@ -4943,7 +4947,10 @@ function renderDeals(){
     }catch(e){if(note)note.textContent=e.message||"Не удалось сохранить подборку";}
     finally{savef.disabled=false;setTimeout(()=>{savef.textContent="Сохранить подборку";},1800);}
   };
-  const go=()=>{const v=document.getElementById("heroq").value.trim();if(v){sessionStorage.setItem("pendingQ",v);location.hash="#/assistant";}};
+  /* Пустая строка + «Спросить ИИ» — это вопрос из подсказки (владелец,
+     7 октября 2026): человек, который ещё не знает, что спросить, получает
+     рассказ о сервисе, а не тишину. */
+  const go=()=>{const v=document.getElementById("heroq").value.trim()||HERO_ASK;sessionStorage.setItem("pendingQ",v);location.hash="#/assistant";};
   document.getElementById("herogo").onclick=go;
   document.getElementById("heroq").addEventListener("keydown",e=>{if(e.key==="Enter")go();});
   // слайдер hero
@@ -8242,6 +8249,9 @@ function renderIndustry(ind){
    данных, у каждого гарантированно есть ответ. Список ниже — на случай, если
    сервер не ответил. Прежний «Кто сопровождал сделки в базе?» снят по просьбе
    владельца (31 августа 2026): звучало нелепо. */
+/* Вопрос-подсказка в строке ассистента на главной; пустая строка спрашивает
+   именно его — ответ готовый (assistant_retrieval.about_service). */
+const HERO_ASK = "Чем полезен Компас?";
 const SUGGESTS_FALLBACK = ["Какая самая крупная сделка 2025 года?","Кто из иностранных владельцев уходил из России?","Какие сделки с опционом обратного выкупа?"];
 let SUGGESTS = SUGGESTS_FALLBACK.slice();
 async function loadSuggests(){
@@ -8532,7 +8542,7 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года по открытым источникам${listingsOut?`; ещё ${listingsOut} ${plural(listingsOut,"лот выставлен","лота выставлены","лотов выставлено")} на торги, но не ${plural(listingsOut,"куплен","куплены","куплено")} — в показатели они не входят`:""}. Это то, что стало известно рынку, а не полная статистика.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года по открытым источникам${listingsOut?`; ещё ${listingsOut} ${plural(listingsOut,"лот выставлен","лота выставлены","лотов выставлено")} на торги, но не ${plural(listingsOut,"куплен","куплены","куплено")} — в показатели они не входят`:""}.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">

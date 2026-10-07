@@ -177,6 +177,90 @@
     "needs_review": true
    },
    "queued": "2026-10-07"
+  },
+  {
+   "key": "https://www.interfax.ru/russia/1120839::g5eb6ff22",
+   "candidate_id": "g5eb6ff22",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d83247205",
+    "title": "«Росатом» выкупил долю Шишкарева в ГК «Дело» на заемные средства",
+    "date": "2026-10-07",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/russia/1120839"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-07",
+      "title": "Сделка завершена",
+      "note": "Цена выкупа доли Сергея Шишкарева (51%) в группе компаний \"Дело\" в ходе реализации процедуры \"русской рулетки\" не поменялась, \"Росатом\" использовал заемные средства, сообщили \"Интерфаксу\" в пресс-службе госкорпорации.\"Финансовые условия сделки мы не обсуждаем.",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/russia/1120839"
+      ]
+     }
+    ],
+    "buyer_name": "«Росатом»",
+    "asset": "Шишкарева в ГК «Дело» на заемные средства",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Росатом»",
+     "asset": "Шишкарева в ГК «Дело» на заемные средства",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
+  },
+  {
+   "key": "https://pravo.ru/news/266172/::g5eb6ff22",
+   "candidate_id": "g5eb6ff22",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d82433267",
+    "title": "«Росатом» выкупил долю Шишкарева в ГК «Дело»",
+    "date": "2026-10-07",
+    "src": [
+     [
+      "web:pravo.ru",
+      "https://pravo.ru/news/266172/"
+     ]
+    ],
+    "sum": "77 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-07",
+      "title": "Сделка завершена",
+      "note": "Сумма сделки составила 77 млрд руб. Значительную ее часть бизнесмен планирует направить на нужды национальной безопастности.",
+      "source": [
+       "web:pravo.ru",
+       "https://pravo.ru/news/266172/"
+      ]
+     }
+    ],
+    "buyer_name": "«Росатом»",
+    "asset": "Шишкарева в ГК «Дело»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Росатом»",
+     "asset": "Шишкарева в ГК «Дело»",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-07"
   }
  ]
 }

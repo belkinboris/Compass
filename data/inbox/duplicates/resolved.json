@@ -98,5 +98,15 @@
   "verdict": "separate",
   "candidate_id": "geb31b556",
   "day": "2026-10-07"
+ },
+ "https://www.interfax.ru/russia/1120839::g5eb6ff22": {
+  "verdict": "same_fact",
+  "candidate_id": "g5eb6ff22",
+  "day": "2026-10-07"
+ },
+ "https://pravo.ru/news/266172/::g5eb6ff22": {
+  "verdict": "same_fact",
+  "candidate_id": "g5eb6ff22",
+  "day": "2026-10-07"
  }
 }
