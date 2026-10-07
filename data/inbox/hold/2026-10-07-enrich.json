@@ -74,6 +74,15 @@
    ]
   },
   {
+   "news": "https://rb.ru/news/rizhskij-cvetochnyj-rynok-vystavyat-na-torgi-nachalnaya-stoimost-lota-155-mln-rublej/",
+   "title": "Рижский цветочный рынок выставят на торги: начальная стоимость лота — 155 млн рублей",
+   "verdict": "enrich:ge1b2eba1",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «155,4 млн ₽ (стартовая цена)»"
+   ]
+  },
+  {
    "news": "https://www.rbc.ru/business/07/10/2026/6ac65cbc44c3eea9a30162aa",
    "title": "Участок с Рижским рынком и «Крестовским» выставят на торги за ₽155 млн",
    "verdict": "enrich:g35c2f65e",

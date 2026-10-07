@@ -1417,7 +1417,7 @@
    ]
   },
   {
-   "draft_id": "d79378185",
+   "draft_id": "d23242146",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1445,46 +1445,7 @@
    ]
   },
   {
-   "draft_id": "d16984518",
-   "title": "Клубы Евролиги единогласно отклонили предложение НБА о слиянии",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9008365"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-07",
-     "title": "Переговоры",
-     "note": "По планам Национальной баскетбольной ассоциации (НБА) уже в ближайшее время учредить новую европейскую лигу был нанесен удар. Клубы главного континентального соревнования — Евролиги — единогласно высказались против слияния.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9008365"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72430014",
+   "draft_id": "d59772503",
    "title": "Какие активы получила Skydance после слияния Paramount и Warner Bros.",
    "date": "2026-10-07",
    "src": [
@@ -1525,17 +1486,17 @@
    ]
   },
   {
-   "draft_id": "d14003687",
-   "title": "ФПК продлила на октябрь - ноябрь акцию «Распродажа в плацкарте»",
+   "draft_id": "d78948067",
+   "title": "Совбез ООН провел пятый раунд опроса по кандидатам на пост генсека организации",
    "date": "2026-10-07",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28191407"
+     "https://tass.ru/mezhdunarodnaya-panorama/28191551"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1547,62 +1508,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15298193",
-   "title": "Bentley экс-принца Эндрю выставили на продажу за 165 тысяч долларов",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261007/bentley-874044559.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72574575",
-   "title": "Эксперт назвал топ-10 популярных у россиян стран для покупки недвижимости",
-   "date": "2026-10-07",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180352/ekspert-nazval-top-10-populiarnykh-u-rossiian-stran-dlia-pokupki-nedvizhimosti-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
