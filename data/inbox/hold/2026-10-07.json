@@ -1458,7 +1458,7 @@
    ]
   },
   {
-   "draft_id": "d79998316",
+   "draft_id": "d39268087",
    "title": "Условия аукциона на Южно-Вишерский участок позволяют участвовать только «Уралкалию» с иностранным партнером",
    "date": "2026-10-07",
    "src": [
@@ -1486,13 +1486,108 @@
    ]
   },
   {
-   "draft_id": "d87457336",
-   "title": "В Грузии пресечена попытка продажи урана иностранцу",
+   "draft_id": "d18555034",
+   "title": "В Грузии задержали гражданина за попытку продать уран",
    "date": "2026-10-07",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1120803"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9008005"
+    ]
+   ],
+   "sum": "$700 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33140283",
+   "title": "Лихачев: «Росатом» выкупил долю Шишкарева в ГК «Дело»",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/07/1234989-rosatom-vikupil-dolyu-shishkareva"
+    ]
+   ],
+   "sum": "100 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-07",
+     "title": "Сделка завершена",
+     "note": "Консолидация позволит сэкономить до 100 млрд рублей за десять лет",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/business/news/2026/10/07/1234989-rosatom-vikupil-dolyu-shishkareva"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Шишкарева в ГК «Дело»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Шишкарева в ГК «Дело»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d90545466",
+   "title": "Камчатский край привлек 4 млрд рублей на северный завоз по льготной ставке",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28189581"
+    ]
+   ],
+   "sum": "4 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Камчатский край",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Камчатский край",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d36909131",
+   "title": "Загрязнение атмосферы озоном ухудшило способность лесов Амазонии поглощать СО2",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nauka/28189769"
     ]
    ],
    "sum": null,
@@ -1514,27 +1609,149 @@
    ]
   },
   {
-   "draft_id": "d18725666",
-   "title": "NYT: американец признался в незаконной продаже плутония",
+   "draft_id": "d25606274",
+   "title": "Основатель ГК «Дело» рассказал, на чем сосредоточится после продажи доли в компании",
    "date": "2026-10-07",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/proisshestviya/28189471"
+     "https://tass.ru/ekonomika/28189809"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-10 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Лихачев: «Росатом» выкупил долю Шишкарева в ГК «Дело»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d85228371",
+   "title": "Гражданин США признался в незаконной продаже плутония",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180011/grazhdanin-ssha-priznalsia-v-nezakonnoi-prodazhe-plutoniia-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d18287450",
+   "title": "Шишкарев направит на нацбезопасность часть суммы от продажи доли ГК «Дело»",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261007/shishkarev-874022766.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-10 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Лихачев: «Росатом» выкупил долю Шишкарева в ГК «Дело»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d68105221",
+   "title": "Шишкарев после продажи доли в ГК «Дело» связывает будущее с Россией",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261007/shishkarev-874022293.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-10 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что «Лихачев: «Росатом» выкупил долю Шишкарева в ГК «Дело»» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d63298260",
+   "title": "FT: SpaceX планирует привлечь 40 млрд долларов для покупки чипов Nvidia",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261007/smi-874021353.html"
+    ]
+   ],
+   "sum": "$40 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-10-07",
-     "title": "Сделка завершена",
-     "note": "По данным прокуратуры, Джейкоб Миллер также продал высокотоксичный металл таллий 71 клиенту, пишет газета",
+     "title": "Переговоры",
+     "note": "",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/proisshestviya/28189471"
+      "web:1prime.ru",
+      "https://1prime.ru/20261007/smi-874021353.html"
      ]
     }
    ],
@@ -1554,17 +1771,17 @@
    ]
   },
   {
-   "draft_id": "d71651470",
-   "title": "Прямые иностранные инвестиции в Киргизию за полгода выросли на 26,2%",
+   "draft_id": "d66083965",
+   "title": "В России появился фонд для подготовки отечественных игровых студий к IPO",
    "date": "2026-10-07",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261007/investitsii-874020052.html"
+     "web:ria.ru",
+     "https://ria.ru/20261007/fond-2122849503.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1575,20 +1792,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d17904960",
-   "title": "В Грузии задержали мужчину за попытку продать иностранцу уран",
+   "draft_id": "d73310715",
+   "title": "Новый кроссовер Toyota начали продавать в России",
    "date": "2026-10-07",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261007/gruzija-2122845430.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/07/novyy-krossover-toyota-nachali-prodavat-v-rossii/"
     ]
    ],
    "sum": null,
@@ -1607,6 +1824,45 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49094083",
+   "title": "Мужчина купил 50 лотерейных билетов и выиграл 50 раз подряд",
+   "date": "2026-10-07",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/07/muzhchina-kupil-50-lotereynyh-biletov-i-vyigral-50-raz-podryad/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-07",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/07/muzhchina-kupil-50-lotereynyh-biletov-i-vyigral-50-raz-podryad/"
+     ]
+    }
+   ],
+   "buyer_name": "Мужчина",
+   "asset": "50 лотерейных билетов и выиграл 50 раз подряд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Мужчина",
+    "asset": "50 лотерейных билетов и выиграл 50 раз подряд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
