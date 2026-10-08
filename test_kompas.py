@@ -201,6 +201,23 @@ def test_about_service_does_not_catch_questions_about_deals():
     assert not caught, caught[:5]
 
 
+def test_owner_reply_keeps_bold_and_links_from_telegram_entities():
+    """8 октября 2026 владелец поправил пост ответом в консоли, и пост ушёл
+    без жирных подписей, а «ПРАЙМ» перестал быть ссылкой: Telegram присылает
+    разметку отдельно от текста (`entities`, смещения в UTF-16), а бот брал
+    только текст. Эмодзи в начале (две единицы UTF-16) не сбивает смещения."""
+    text = "📌 Сделка закрыта\n\nПокупатель: «А & Б»\nИсточник: ПРАЙМ"
+    def ent(sub, kind, **kw):
+        off = len(text[:text.index(sub)].encode("utf-16-le")) // 2
+        return dict(type=kind, offset=off, length=len(sub.encode("utf-16-le")) // 2, **kw)
+    out = main._telegram_text_as_html(text, [ent("Сделка закрыта", "bold"), ent("Покупатель:", "bold"),
+                                             ent("Источник:", "bold"),
+                                             ent("ПРАЙМ", "text_link", url="https://1prime.ru/a?b=1&c=2")])
+    assert out == ('📌 <b>Сделка закрыта</b>\n\n<b>Покупатель:</b> «А &amp; Б»\n'
+                   '<b>Источник:</b> <a href="https://1prime.ru/a?b=1&amp;c=2">ПРАЙМ</a>')
+    assert main._telegram_text_as_html("без разметки <", None) == "без разметки <"
+
+
 def test_ask_web_mode_with_results(client, monkeypatch):
     # Модель не дала ссылку сама -> ask() обязан подставить источники
     # (см. main._sources_footer): это гарантия цитирования, а не опция.
