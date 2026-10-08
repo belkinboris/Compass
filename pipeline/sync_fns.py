@@ -177,7 +177,13 @@ def _upsert_candidate(db, company_id: str, row: dict[str, Any], score: float, re
     candidate.raw_json = json.dumps(row.get("raw") or {}, ensure_ascii=False, default=str)
 
 
-def _confirm_entity(db, company_id: str, candidate: dict[str, Any], score: float, *, manual: bool = False) -> LegalEntity:
+def _confirm_entity(db, company_id: str, candidate: dict[str, Any], score: float, *, manual: bool = False,
+                    primary: bool | None = None) -> LegalEntity:
+    """`primary=True` — это юрлицо реестра (pipeline/fns_registry.py): оно
+    становится основным, прежнее основное остаётся вторым подтверждённым
+    юрлицом профиля. До 8 октября 2026 смена ИНН в реестре (Яндекс: ООО →
+    МКПАО) добавляла юрлицо, но основным оставалось старое, и сайт показывал
+    его первым; `None` — старое поведение (основное — первое найденное)."""
     inn = str(candidate.get("inn") or "")
     entity = db.scalar(select(LegalEntity).where(LegalEntity.inn == inn)) if inn else None
     if not entity:
@@ -193,6 +199,14 @@ def _confirm_entity(db, company_id: str, candidate: dict[str, Any], score: float
     entity.match_status = LegalEntityMatchStatus.confirmed
     entity.match_confidence = score
     entity.manually_verified = manual
+    if primary:
+        db.flush()
+        for other in db.scalars(select(LegalEntity).where(
+                LegalEntity.company_id == company_id, LegalEntity.is_primary.is_(True),
+                LegalEntity.id != entity.id)).all():
+            other.is_primary = False
+        entity.is_primary = True
+        return entity
     entity.is_primary = not bool(db.scalar(select(LegalEntity.id).where(
         LegalEntity.company_id == company_id,
         LegalEntity.is_primary.is_(True),
@@ -267,7 +281,8 @@ def match_companies(db, client: ApiFnsClient, *, auto_confirm: bool, limit: int 
     return matched, candidates, errors
 
 
-def confirm_by_inn(db, client: ApiFnsClient, company_id: str, inn: str, *, dry_run: bool = False) -> None:
+def confirm_by_inn(db, client: ApiFnsClient, company_id: str, inn: str, *, dry_run: bool = False,
+                   primary: bool | None = None) -> None:
     """Подтверждает юрлицо по уже проверенному ИНН — без единого `search`.
 
     Для `--inn`/ручного посева заранее известных компаний `search` не нужен
@@ -281,7 +296,7 @@ def confirm_by_inn(db, client: ApiFnsClient, company_id: str, inn: str, *, dry_r
     if not egr:
         raise ApiFnsError(f"юрлицо {inn} не найдено")
     if not dry_run:
-        _confirm_entity(db, company_id, egr, 1.0, manual=True)
+        _confirm_entity(db, company_id, egr, 1.0, manual=True, primary=primary)
         db.commit()
 
 
@@ -476,6 +491,16 @@ def revoke_stale_confirmations(db) -> int:
     return removed
 
 
+def _registry_entity(db, company_id: str, inn: str) -> LegalEntity | None:
+    """Юрлицо профиля, с которым сверяется строка реестра: с тем же ИНН, а
+    если такого нет — основное. У профиля может быть два подтверждённых
+    юрлица (после смены ИНН в реестре старое остаётся вторым), и первое
+    попавшееся давало бы `needs_confirm` на каждом прогоне."""
+    rows = db.scalars(select(LegalEntity).where(LegalEntity.company_id == company_id)
+                      .order_by(LegalEntity.is_primary.desc(), LegalEntity.id)).all()
+    return next((e for e in rows if e.inn == inn), rows[0] if rows else None)
+
+
 def registry_backlog(db) -> int:
     """Сколько confirmed-строк реестра всё ещё нуждаются в живом запросе к
     api-fns.ru — не подтверждены в БД или подтверждённые данные устарели
@@ -497,7 +522,7 @@ def registry_backlog(db) -> int:
     cutoff = _now() - timedelta(days=REGISTRY_SYNC_STALE_DAYS)
     backlog = 0
     for row in confirmed:
-        entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == row["company_id"]))
+        entity = _registry_entity(db, row["company_id"], row["inn"])
         needs_confirm = (not entity or entity.inn != row["inn"]
                           or entity.match_status != LegalEntityMatchStatus.confirmed)
         needs_sync = not entity or not entity.fetched_at or entity.fetched_at < cutoff
@@ -570,7 +595,7 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
                   file=sys.stderr)
             stats["errors"] += 1
             continue
-        entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
+        entity = _registry_entity(db, company_id, inn)
         needs_confirm = not entity or entity.inn != inn or entity.match_status != LegalEntityMatchStatus.confirmed
         needs_sync = force or not entity or not entity.fetched_at or entity.fetched_at < cutoff
         if not needs_confirm and not needs_sync:
@@ -580,8 +605,9 @@ def sync_from_registry(db, client: ApiFnsClient, *, limit: int | None = None,
         try:
             if needs_confirm:
                 if not dry_run:
-                    confirm_by_inn(db, client, company_id, inn, dry_run=False)
-                    entity = db.scalar(select(LegalEntity).where(LegalEntity.company_id == company_id))
+                    confirm_by_inn(db, client, company_id, inn, dry_run=False, primary=True)
+                    entity = _registry_entity(db, company_id, inn)
+                    needs_sync = True            # у только что подтверждённого юрлица данных ещё нет
                 stats["confirmed_now"] += 1
                 stats["requests"] += 1
             if needs_sync and entity is not None:

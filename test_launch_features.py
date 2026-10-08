@@ -1010,6 +1010,49 @@ def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
     assert calls == {"search": 0, "egr": 1}
 
 
+def test_fns_registry_inn_change_makes_the_new_entity_primary(monkeypatch):
+    """Смена ИНН в реестре (Яндекс: ООО → МКПАО, 8 октября 2026): новое юрлицо
+    становится основным, старое остаётся вторым подтверждённым, а следующий
+    прогон не подтверждает его заново (ищет юрлицо по ИНН реестра)."""
+    from pipeline import sync_fns
+
+    cid = "registry-inn-change-test"
+    registry = [{"company_id": cid, "decision": "confirmed", "inn": "7700000066",
+                 "reason": "тест", "date": "2026-08-22"}]
+    monkeypatch.setattr(sync_fns, "FNS_REGISTRY", registry)
+
+    class FakeClient:
+        def egr(self, inn):
+            return {"items": [{"ЮЛ": {"ИНН": inn, "ОГРН": "10277" + inn[-5:] + "00",
+                                      "НаимСокрЮЛ": 'ЮЛ %s' % inn, "Статус": "Действующая"}}]}
+
+        def bo(self, inn):
+            return {inn: {"2025": {"2110": "1000000"}}}
+
+        def changes(self, inn):
+            return {"items": []}
+
+    db = get_session()
+    try:
+        if not db.get(Company, cid):
+            db.add(Company(id=cid, name="Смена ИНН")); db.commit()
+        for row in db.query(LegalEntity).filter_by(company_id=cid).all():
+            db.delete(row)
+        db.commit()
+        sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+        registry[0]["inn"] = "7700000077"
+        sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+        rows = {e.inn: e for e in db.query(LegalEntity).filter_by(company_id=cid).all()}
+        assert set(rows) == {"7700000066", "7700000077"}, rows
+        assert rows["7700000077"].is_primary and not rows["7700000066"].is_primary
+        assert rows["7700000066"].match_status == LegalEntityMatchStatus.confirmed
+        stats = sync_fns.sync_from_registry(db, FakeClient(), dry_run=False)
+        assert stats.get("confirmed_now", 0) == 0 and stats.get("skipped_fresh") == 1, stats
+        assert sync_fns.registry_backlog(db) == 0
+    finally:
+        db.close()
+
+
 def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch):
     """pipeline/COMPANY_FINANCE_BRIEF.md, П2: --from-registry применяет
     суждение из pipeline/fns_registry.py (кто есть кто) без единого search —

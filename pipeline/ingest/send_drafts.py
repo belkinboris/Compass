@@ -57,6 +57,7 @@ import channels                                          # noqa: E402
 import console_topics                                     # noqa: E402
 import format_post                                       # noqa: E402
 import promote                                           # noqa: E402
+from second_reading import needs_second_reading           # noqa: E402
 import telegram_endpoint                                 # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -348,7 +349,7 @@ def build_plan():
     base = json.load(open(DATA, encoding='utf-8'))
     comps = base['companies']
     live = site_pending_ids()
-    postponed, unread, unaccepted = 0, 0, 0
+    postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
     for card in pending['cards']:
         if live is not None and card['id'] not in live \
                 and not (card.get('draft_sent') and card.get('post_draft_sent')):
@@ -376,6 +377,12 @@ def build_plan():
         # просит человека быть корректором.
         if not card.get('accepted') and not (card.get('draft_sent') or card.get('post_draft_sent')):
             unaccepted += 1
+            continue
+        # ВТОРОЕ ЧТЕНИЕ (8 октября 2026, Яндекс/VK): карточку, принятую с
+        # 9 октября, перед консолью читает другая сессия с вопросом к
+        # каждому полю (second_reading.py). Без штампа — не уходит.
+        if needs_second_reading(card) and not (card.get('draft_sent') or card.get('post_draft_sent')):
+            unread2 += 1
             continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
@@ -459,11 +466,14 @@ def build_plan():
         fresh_raw.append(d)
     for draft in fresh_raw[:RAW_PER_RUN]:
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
-    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted
+    return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted, unread2
 
 
 def main(write=False):
-    plan, pending, state, deferred, postponed, foreign, unread, unaccepted = build_plan()
+    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan()
+    if unread2:
+        print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
+              'саб-агент по SECOND_READING_BRIEF.md → second_reading.py --apply <ответ> --write.' % unread2)
     if unaccepted:
         print('Не показано карточек без приёмки: %d — сначала accept_card.py '
               '(--queue, ответ читателя, --apply --write), потом консоль.' % unaccepted)
