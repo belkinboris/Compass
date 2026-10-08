@@ -366,6 +366,27 @@ def test_post_always_has_buyer_seller_and_subject_in_that_order():
     assert not format_post_check(text), format_post_check(text)
 
 
+def test_joint_venture_post_names_participants_not_a_buyer():
+    """У СП нет покупателя и предмета-компании: обе стороны — участники,
+    предмет — само партнёрство (Яндекс/VK, 8 октября 2026: пост назвал
+    «Яндекс» покупателем, а VK Tech — предметом). Так же и в консоли."""
+    comps = {"y": {"name": "Яндекс"}, "v": {"name": "VK"}}
+    deal = {"id": "gjv1", "title": "«Яндекс» и VK объединяют ИТ-направления",
+            "type": "Создание СП", "buyer": "y", "target": "v", "status": "Обсуждается",
+            "asset": "объединение Yandex B2B Tech и VK Tech",
+            "eco": {"share": "Один из вариантов – равные доли (по 50%)."}}
+    text = format_post.render(deal, comps)
+    assert "<b>Участники СП:</b> Яндекс и VK" in text, text
+    assert "<b>Предмет:</b> объединение Yandex B2B Tech и VK Tech\n" in text, text
+    assert "<b>Доли:</b> Один из вариантов" in text, text
+    assert "Покупатель" not in text and "Продавец" not in text
+    # Тип «M&A» с пометкой kind=jv — тоже СП, как на сайте (`kindKey`).
+    assert "Участники СП" in format_post.render(dict(deal, type="M&A", kind="jv"), comps)
+    import send_drafts
+    msg = send_drafts.card_message(deal, comps)
+    assert "Участники СП: Яндекс и VK" in msg and "Покупатель" not in msg, msg
+
+
 def test_post_party_block_is_the_same_across_the_base(base):
     """Тот же вопрос на живой базе: у покупок три строки сторон стоят всегда
     и в одном порядке; у раунда нет продавца, если его не назвали, — деньги
