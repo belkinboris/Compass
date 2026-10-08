@@ -227440,9 +227440,9 @@
    "date": "2026-09-23",
    "title": "«Яндекс» и VK объединяют корпоративные ИТ-направления Yandex B2B Tech и VK Tech",
    "buyer": "yandex",
-   "target": "g592a5a2b",
+   "target": "g4e694234",
    "ind": "ИТ и интернет",
-   "type": "M&A",
+   "type": "Создание СП",
    "kind": "jv",
    "status": "Обсуждается",
    "sum": "Не раскрыта",
@@ -227485,7 +227485,7 @@
     ],
     "target": [
      {
-      "value": "VK Tech",
+      "value": "VK",
       "field": "target",
       "method": "human_review",
       "url": "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
@@ -227520,7 +227520,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "card_hash": "4eea41c9616e"
     },
     "date": {
      "value": "2026-09-23",
@@ -227529,24 +227529,24 @@
      "card_hash": "5ed13ba06b92"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a30dbcecf6ff"
+     "card_hash": "bc27c4af07ea"
     },
     "target": {
-     "company_id": "g592a5a2b",
-     "inn": "7714415613",
+     "company_id": "g4e694234",
+     "inn": "3900015862",
      "confirmed": true,
      "bank": false,
      "lot": false,
      "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "9fa60a8fbbf0"
+     "card_hash": "1515757e3e1d"
     },
     "admitted": {
      "count": true,
@@ -227558,11 +227558,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "no_post": true
   },
   {
    "id": "g9fed3cb1",
