@@ -291,7 +291,31 @@ def test_general_editorial_message_is_stored_without_a_deal(client):
     finally:
         s.close()
 
-def test_empty_correction_is_rejected(client):
+def test_consultant_message_goes_to_the_console_at_once(client, monkeypatch):
+    """Кнопка «Вы консультант?» (8 октября 2026): письмо фирмы уходит в
+    Telegram-консоль сразу и помечается «sent», чтобы рутина заметок его не
+    повторила; обычное сообщение редакции по-прежнему ждёт рутину."""
+    import main
+    sent = []
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "-100500")
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **p: (sent.append((method, p)) or {"ok": True}))
+    r = client.post("/api/corrections", json={"body": "Мы — Execburo, добавьте наш профиль.",
+                                              "contact": "@sofia", "kind": "consultant"})
+    assert r.status_code == 200
+    assert sent and sent[0][0] == "sendMessage" and "Консультант хочет связаться" in sent[0][1]["text"]
+    assert "@sofia" in sent[0][1]["text"]
+    s = get_session()
+    try:
+        assert s.get(CorrectionRequest, r.json()["id"]).status == "sent"
+    finally:
+        s.close()
+    sent.clear()
+    r2 = client.post("/api/corrections", json={"body": "Обычное письмо."})
+    assert r2.status_code == 200 and not sent
+
+
+
     r = client.post("/api/deals/gtest0001/corrections", json={"body": "   "})
     assert r.status_code == 400
 

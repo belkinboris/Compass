@@ -1512,6 +1512,7 @@ class CommentIn(BaseModel):
 class CorrectionIn(BaseModel):
     body: str
     contact: str | None = None
+    kind: str | None = None          # "consultant" — кнопка «Вы консультант?» в каталоге
 
 
 class NotificationPreferencesIn(BaseModel):
@@ -4659,7 +4660,30 @@ def _save_correction(deal_id: str | None, correction: CorrectionIn, user: User |
                             contact=contact, body=body, status="new")
     db.add(row)
     db.commit()
+    if correction.kind == "consultant":
+        # Письмо от фирмы-консультанта уходит основателям в Telegram сразу
+        # (владелец, 8 октября 2026), а не через рутину заметок раз в три часа.
+        # Дошло — строка помечается «sent», и рутина её не повторит; не дошло
+        # — остаётся «new», и рутина донесёт.
+        if _forward_consultant_to_console(db, row):
+            row.status = "sent"
+            db.commit()
     return {"ok": True, "id": row.id}
+
+
+def _forward_consultant_to_console(db, row: CorrectionRequest) -> bool:
+    chats = _review_chat_ids(db)
+    if not chats:
+        return False
+    thread = _console_thread_id(db, "user_notes")
+    text = ("🤝 Консультант хочет связаться\n%s\nКонтакт: %s"
+            % (row.body, row.contact or "не указан"))
+    ok = False
+    for chat in chats:
+        res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, disable_web_page_preview=True,
+                                          **({"message_thread_id": thread} if thread else {}))
+        ok = ok or bool(res and res.get("ok"))
+    return ok
 
 
 @app.post("/api/deals/{deal_id}/corrections")
