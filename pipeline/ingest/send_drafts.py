@@ -139,10 +139,15 @@ def card_message(card, companies=None):
     заполненное в данных и не показанное на экране."""
     src = next((s[1] for s in card.get('src') or [] if len(s) > 1), '')
     seller, asset, buyer = format_post.party_names(card, companies or {})
+    sides = field('Покупатель', buyer) + field('Продавец', seller) + field('Предмет', asset)
+    if format_post.deal_kind(card) == 'jv':
+        # У СП нет покупателя: участники равноправны (Яндекс/VK, 8 октября 2026).
+        names, subject = format_post.jv_participants(card, companies or {})
+        sides = field('Участники СП', ' и '.join(names)) + field('Предмет', subject)
     channel = '' if goes_to_channel(card) else _channel_gate_line(card)
     return ('🗂 [карточка %s] — НА САЙТ, на проверку\n'
             '%s\n\n'
-            '%s%s%s%s%s%s%s'
+            '%s%s%s%s%s'
             'Предпросмотр: %s/#/preview/%s\n%s\n'
             '✅/✋ — кнопками. Ответ на это сообщение — заметка для рутины '
             '(«дата не та, в источнике 4 мая»): применит через проверки, не дословно.\n'
@@ -150,9 +155,7 @@ def card_message(card, companies=None):
             % (card['id'], str(card.get('title') or ''),
                field('Дата', card.get('date')), field('Отрасль', card.get('ind')),
                field('Тип', card.get('type')), field('Статус', card.get('status')),
-               field('Покупатель', buyer),
-               field('Продавец', seller),
-               field('Предмет', asset) + field('Сумма', card.get('sum'))
+               sides + field('Сумма', card.get('sum'))
                + field('Источник', src),
                SITE, card['id'], channel))
 

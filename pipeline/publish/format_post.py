@@ -943,6 +943,27 @@ def _kind_from_type(type_str):
     return 'acquisition'
 
 
+def deal_kind(deal):
+    """Вид сделки так же, как его берёт карточка сайта (`kindKey`): по типу,
+    а если тип — обычная покупка, по полю `kind` (СП, временное управление)."""
+    kind = _kind_from_type(deal.get('type'))
+    if kind == 'acquisition':
+        kind = deal.get('kind') or 'acquisition'
+    return kind
+
+
+def jv_participants(deal, companies):
+    """Участники СП — равноправные стороны (на сайте оба «Участник СП»):
+    профиль в `buyer` и профиль в `target`. Предмет СП — `asset` (описание
+    самого партнёрства), а не имя второго участника. Яндекс/VK, 8 октября
+    2026: пост назвал «Яндекс» покупателем, а VK Tech — предметом."""
+    seller, asset, buyer = party_names(deal, companies)
+    second = asset if deal.get('target') else None
+    names = [n for n in (buyer, second) if n]
+    subject = deal.get('asset') if has(deal.get('asset')) else None
+    return names, subject
+
+
 def post_roles(deal):
     """Подписи трёх строк сторон и какие из них печатаются ВСЕГДА.
 
@@ -958,15 +979,16 @@ def post_roles(deal):
         другая раскладка ролей, поэтому печатается только то, что названо.
     Возвращает (подпись покупателя, подпись продавца, подпись предмета,
     множество обязательных строк из {'buyer', 'seller', 'subject'})."""
-    kind = _kind_from_type(deal.get('type'))
-    if kind == 'acquisition':
-        kind = deal.get('kind') or 'acquisition'
+    kind = deal_kind(deal)
     if kind == 'custody':
         return 'Временный управляющий', 'Прежний владелец', 'Предмет', {'buyer', 'seller', 'subject'}
     if deal.get('type') == 'Инвестиция' or kind == 'financing':
         return 'Инвестор', 'Продавец', 'Предмет', {'buyer', 'subject'}
     if kind == 'acquisition':
         return 'Покупатель', 'Продавец', 'Предмет', {'buyer', 'seller', 'subject'}
+    if kind == 'jv':
+        # Покупателя у СП нет; `render` печатает одну строку «Участники СП».
+        return 'Участник СП', 'Продавец', 'Предмет', set()
     return _buyer_label(deal), 'Продавец', 'Предмет', {'subject'}
 
 
@@ -1043,6 +1065,15 @@ def render(deal, companies, updates=(), today=None, fin=None):
         card.append(line)
         reference = reference + ' ' + re.sub(r'<[^>]+>', '', line)
 
+    jv = deal_kind(deal) == 'jv'
+    if jv:
+        # СП: покупателя и продавца нет — одна строка участников, предмет —
+        # само партнёрство. Деталь к предмету — как у обычного поста.
+        names, asset = jv_participants(deal, companies)
+        buyer = seller = None
+        if names:
+            add('%s %s' % (_lab('Участники СП'), esc(' и '.join(names))))
+
     buyer_detail = _party_detail(deal, companies, 'buyer', 'context',
                                   reference + ' ' + buyer) if buyer else None
     if buyer and buyer_detail and names_party_upfront(buyer, buyer_detail):
@@ -1065,7 +1096,9 @@ def render(deal, companies, updates=(), today=None, fin=None):
         add('%s не раскрыт' % _lab(seller_label))
 
     asset = _strip_registry_ids(asset) if asset else asset
-    detail = _join_subject_sentences(
+    # У СП главное после предмета — как поделят доли; это отдельная строка,
+    # а не продолжение предмета через тире.
+    detail = '' if jv else _join_subject_sentences(
         _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
     if asset and detail and not has_novelty(asset, detail):
         # Деталь сама называет предмет — имя перед тире не повторяем (пост о
@@ -1075,19 +1108,29 @@ def render(deal, companies, updates=(), today=None, fin=None):
         add('%s %s%s' % (_lab(subject_label), esc(asset), (' — %s' % esc(detail)) if detail else ''))
     elif detail:
         add('%s %s' % (_lab(subject_label), esc(detail)))
-    elif 'subject' in required:
+    elif 'subject' in required and not jv:
         add('%s не раскрыт' % _lab(subject_label))
+    share = str((deal.get('eco') or {}).get('share') or '')
+    if jv and has(share) and len(share) <= 200:
+        # Длинный текст в `eco.share` — обычно рассказ о структуре, а не доли
+        # (сайт по той же причине показывает на плашке до 120 знаков).
+        add('%s %s' % (_lab('Доли'), esc(share)))
 
     # ФИНАНСЫ — только свежие (`fin_summary` отбрасывает отчёт старше двух
     # лет), и только сразу после сторон, чтобы блок читался одинаково.
     # «Финансы цели» звучало как внутренний термин («финансы чего?» — партнёр
     # 31 августа 2026); по-русски — чья это отчётность.
     target_fin, buyer_fin = fin.get('target'), fin.get('buyer')
+    target_word, buyer_word = 'Финансы покупаемой компании', 'Финансы покупателя'
+    if jv:
+        jv_names, _ = jv_participants(deal, companies)
+        buyer_word = 'Финансы %s' % jv_names[0] if jv_names else 'Финансы участника'
+        target_word = 'Финансы %s' % jv_names[-1] if len(jv_names) > 1 else 'Финансы участника'
     if target_fin:
-        add('%s %s' % (_lab(_fin_label('Финансы покупаемой компании', target_fin[0])),
+        add('%s %s' % (_lab(_fin_label(target_word, target_fin[0])),
                        esc(target_fin[1])))
     if buyer_fin:
-        add('%s %s' % (_lab(_fin_label('Финансы покупателя', buyer_fin[0])), esc(buyer_fin[1])))
+        add('%s %s' % (_lab(_fin_label(buyer_word, buyer_fin[0])), esc(buyer_fin[1])))
 
     if has(deal.get('sum')):
         card.append('%s %s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'), esc(deal['sum'])))
