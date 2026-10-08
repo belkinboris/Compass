@@ -135,6 +135,14 @@ TRAILING_CUTOFF_RE = re.compile(r'(?:…|\.\.\.)\s*$')
 # дословно («в I квартале 2027 г.. то есть», Яндекс/VK, 8 октября 2026);
 # многоточие (три точки) — не она.
 DOUBLE_PERIOD_RE = re.compile(r'[^.\s]\.\.(?!\.)')
+# «Такой симбиоз в итоге приведёт…» (Яндекс/VK, 8 октября 2026): фраза
+# опирается на предыдущий абзац источника, которого у читателя нет.
+WHY_DANGLING_RE = re.compile(r'^(так(ой|ая|ое|ие)|эт(о|от|а|и)|он[аи]?|подобн[а-яё]+)\b', re.I)
+# ДОСЛОВНОСТЬ (правило 1 docs/sources_legal.md, с 3 октября 2026): цепочка
+# от 12 слов подряд с текстом источника на диске — пересказать. До 8 октября
+# 2026 проверка жила только в очереди рутины качества (verbatim_check.py), и
+# карточка Яндекс/VK прошла приёмку с 79 словами CNews подряд.
+VERBATIM_MIN_WORDS = 12
 # «Форма расчётов» с рассказом о бизнесе (чем занимается, продукты, клиенты,
 # выручка) и без единого слова об оплате — поле перепутано: у Яндекс/VK там
 # лежало описание VK Tech. Родня `FIN_IS_REPORTING`, но ловит не только
@@ -497,6 +505,41 @@ FIN_IS_REPORTING = re.compile(
     r'Совокупная выручка|В \d{4} году выручка|Оборот)', re.I)
 
 
+_SOURCE_WORDS = None
+
+
+def _source_words():
+    """Тексты источников с диска (`review.source_texts`: забранные статьи и
+    сырьё притока) словами — один раз на процесс."""
+    global _SOURCE_WORDS
+    if _SOURCE_WORDS is None:
+        from pipeline import verbatim_check
+        _SOURCE_WORDS = [w for w in (verbatim_check.words(t) for t in review.source_texts())
+                         if len(w) >= VERBATIM_MIN_WORDS]
+    return _SOURCE_WORDS
+
+
+def verbatim_runs(card, texts=None):
+    """[(поле, длина, кусок)] — прозаические поля, дословно совпадающие с
+    текстом источника на диске цепочкой от VERBATIM_MIN_WORDS слов. Цитата в
+    «ёлочках» с указанием источника — не находка (правило 1)."""
+    from pipeline import verbatim_check
+    sources = texts if texts is not None else _source_words()
+    out = []
+    for f, v in _scannable_texts(card):
+        if '«' in v and re.search(r'»\s*,?\s*[—–-]\s*(сообщ|пишет|передаёт|передает)', v):
+            continue
+        w = verbatim_check.words(v)
+        best = (0, '')
+        for sw in sources:
+            run, snippet = verbatim_check.longest_common_run(w, sw, VERBATIM_MIN_WORDS)
+            if run > best[0]:
+                best = (run, snippet)
+        if best[0] >= VERBATIM_MIN_WORDS:
+            out.append((f, best[0], best[1]))
+    return out
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -550,9 +593,9 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         first = (format_post._sentences(rationale) or [''])[0]
         if format_post.NOT_A_MOTIVE.search(first):
             out.append(('why', '«Цель сделки» начинается с оценки рынка, а не с мотива'))
-        if rationale[:1].islower():
-            out.append(('why_fragment', '«Цель сделки» начинается со строчной буквы: %r — обрывок '
-                        'предложения, нужна фраза целиком' % rationale[:50]))
+        if rationale[:1].islower() or WHY_DANGLING_RE.match(rationale):
+            out.append(('why_fragment', '«Цель сделки» начинается с обрывка или отсылки к тексту, '
+                        'которого в карточке нет: %r — нужна самостоятельная фраза' % rationale[:50]))
     for fa, fb in DUPLICATE_PAIRS:
         va, vb = _text(card, fa), _text(card, fb)
         if has(va) and has(vb) and review.flat(str(va)) == review.flat(str(vb)):
@@ -567,6 +610,10 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if DOUBLE_PERIOD_RE.search(v):
             out.append(('double_period:' + f, 'две точки подряд в %s: %r — опечатка источника, '
                         'переносится без неё' % (f, DOUBLE_PERIOD_RE.search(v).group())))
+    for f, run, snippet in verbatim_runs(card):
+        out.append(('verbatim:' + f, '%d слов подряд как в источнике в %s: «%s…» — пересказать '
+                    'своими словами или взять в «ёлочки» с указанием, кто сообщает'
+                    % (run, f, snippet[:80])))
     if not any(str(s[1]).startswith('http') for s in card.get('src') or [] if len(s) > 1):
         out.append(('source', 'ни одной http-ссылки в источниках'))
     for c in coverage(card):

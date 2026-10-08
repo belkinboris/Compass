@@ -366,6 +366,24 @@ def test_post_always_has_buyer_seller_and_subject_in_that_order():
     assert not format_post_check(text), format_post_check(text)
 
 
+def test_acceptance_catches_verbatim_source_text_and_dangling_motive():
+    """Приёмка: цепочка от 12 слов подряд с текстом источника — находка
+    (правило 1 docs/sources_legal.md); «Цель сделки», начинающаяся с «такой…»,
+    — обрывок (Яндекс/VK, 8 октября 2026)."""
+    import accept_card
+    source = ('Условия сделки не раскрываются. Известно лишь, что все они могут быть '
+              'выполнены в первом квартале 2027 года, то есть в период с 1 января по 31 марта.')
+    from pipeline import verbatim_check
+    card = {"id": "gv1", "title": "Т", "type": "M&A", "buyer": "y", "target": "v",
+            "law": {"struct": source}, "eco": {"rationale": "Такой симбиоз даст лидера рынка."}}
+    runs = accept_card.verbatim_runs(card, texts=[verbatim_check.words(source)])
+    assert runs and runs[0][0] == "law.struct" and runs[0][1] >= 12, runs
+    quoted = dict(card, law={"struct": "«%s» — сообщает CNews." % source})
+    assert not accept_card.verbatim_runs(quoted, texts=[verbatim_check.words(source)])
+    codes = [c for c, _ in accept_card.findings(card, {"companies": {"y": {"name": "Я"}, "v": {"name": "В"}}})]
+    assert "why_fragment" in codes, codes
+
+
 def test_joint_venture_post_names_participants_not_a_buyer():
     """У СП нет покупателя и предмета-компании: обе стороны — участники,
     предмет — само партнёрство (Яндекс/VK, 8 октября 2026: пост назвал
