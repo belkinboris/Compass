@@ -2,7 +2,7 @@
  "made": "2026-10-08",
  "drafts": [
   {
-   "draft_id": "d19307572",
+   "draft_id": "d92306065",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -42,429 +42,7 @@
    ]
   },
   {
-   "draft_id": "d80510741",
-   "title": "СМИ: сын Кашпировского продал дом в США из-за опасных арендаторов",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261008/dom-2123096347.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-08",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261008/dom-2123096347.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "дом в США из-за опасных арендаторов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "дом в США из-за опасных арендаторов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gbe536659 (общие редкие слова: продал, сша) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d86596499",
-   "title": "Flowwow начал продавать цветы через вендинговые аппараты",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/flowwow-nachal-prodavat-cvety-cherez-vendingovye-apparaty/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d15291633",
-   "title": "Верховный суд подтвердил законность продажи 50% прав на «Мирамистин»",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261008/sud-2123106759.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71936061",
-   "title": "Греф рассказал о своих инвестициях в биткоин",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/08/1235316-gref-o-svoih-investitsiyah"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d60784996",
-   "title": "Гендиректор «МегаФона»: снижение мобильного трафика не остановит рост инвестиций в связь",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-08_gendirektor_megafona"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45855652",
-   "title": "Греф призвал не принимать инвестиционные решения в понедельник утром",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28193255"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d22830426",
-   "title": "Таксопарки заявили о зависимости от заемных средств для покупки авто",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180642/2026-10-08/taksoparki-zaiavili-o-zavisimosti-ot-zaemnykh-sredstv-dlia-pokupki-avto"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d46510037",
-   "title": "Показываю свой ИИС-3: последнее пополнение в этом году. Что купил?",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1360351.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-08",
-     "title": "Сделка завершена",
-     "note": "Новый обзор эксперимента «Выжимаем максимум из ИИС-3», в котором использую все плюсы этой программы В прошлом году я начал долгосрочный эксперимент, связанный с новой программой ИИС-3. Ранее я уже пользовался ИИС 10 лет и вернул налоговых вычетов на сумму…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1360351.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "?",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "?",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d26173645",
-   "title": "Греф рассказал, как компаниям с госучастием выйти на успешное IPO",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28193415"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d27716908",
-   "title": "Драгоценный пузырь сдулся: как купить золото на просадке и не прогадать",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/08/dragocennij-puzir-sdulsja"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d68892638",
-   "title": "Финны скупают армейское имущество на аукционе Сил обороны Финляндии",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/08/tank-za-200-tis--evro-armija"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42917870",
-   "title": "Тест «Купить или не купить?»: проверьте себя на знание тонкостей корпоративных сделок",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/test/266033/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23658828",
-   "title": "Греф дал советы компаниям перед IPO",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/08/1235383-gref-dal-soveti"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d65972488",
-   "title": "РЖД продают онлайн 82% билетов на поезда дальнего следования",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/rzhd-874065153.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67368236",
+   "draft_id": "d15652436",
    "title": "Гендиректор «Мегафона» заявил о дальнейшем росте инвестиций в связь",
    "date": "2026-10-08",
    "src": [
@@ -487,42 +65,12 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Гендиректор «МегаФона»: снижение мобильного трафика не остан» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d50241128",
-   "title": "Соглашение «Лукойла» с Carlyle о продаже активов утратило силу",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/08/10/2026/6ac772d2006b4290ab4ce3bd"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d62241677",
+   "draft_id": "d52434410",
    "title": "Соглашение о продаже зарубежных активов «ЛУКОЙЛа» инвесткомпании Carlyle истекло в июле",
    "date": "2026-10-08",
    "src": [
@@ -545,20 +93,103 @@
    },
    "ind": "Нефть и газ",
    "needs_review": true,
-   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48811004",
+   "title": "Права требования к застройщику жилья в Лисьем Носу продают за 1,3 млрд рублей",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/08/prava-trebovanija-k-zastrojshhiku"
+    ]
+   ],
+   "sum": "1,3 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13948938",
+   "title": "ВТО: инвестиции в ИИ останутся главным драйвером роста мировой торговли",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/vto-874076974.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52703776",
+   "title": "China’s Manus raises over $500M in first funding round since split with Meta",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/08/chinas-manus-raises-over-500m-in-first-funding-round-since-split-with-meta/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Соглашение «Лукойла» с Carlyle о продаже активов утратило си» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d26168219",
-   "title": "В Подмосковье недоступна онлайн-продажа билетов на автобусы",
+   "draft_id": "d24876875",
+   "title": "«ВинЛаб» увеличил продажи на 24% за девять месяцев",
    "date": "2026-10-08",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/moscow/1121099"
+     "web:retailer.ru",
+     "https://retailer.ru/vinlab-uvelichil-prodazhi-na-24-za-devjat-mesjacev/"
     ]
    ],
    "sum": null,
@@ -580,97 +211,13 @@
    ]
   },
   {
-   "draft_id": "d73009673",
-   "title": "Онлайн-покупка билетов на автобусы «Мострансавто» в Подмосковье недоступна",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/podmoskove-874069970.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d55581004",
-   "title": "РЖД прорабатывают подтверждение льготы через «Макс» при покупке билетов",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/rzhd-874067861.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64499014",
-   "title": "ММК нарастил продажи на своем маркетплейсе в 1,5 раза",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/mmk-874067747.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56396846",
-   "title": "Россиянам назвали серьезные риски покупки квартиры у родственников",
+   "draft_id": "d73879865",
+   "title": "Стало известно об истечении срока соглашения о продаже зарубежных активов «Лукойла»",
    "date": "2026-10-08",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/08/rossiyanam-nazvali-serieznye-riski-pokupki-kvartiry-u-rodstvennikov/"
+     "https://lenta.ru/news/2026/10/08/stalo-izvestno-ob-istechenii-sroka-soglasheniya-o-prodazhe-zarubezhnyh-aktivov-lukoyla/"
     ]
    ],
    "sum": null,
@@ -687,290 +234,10 @@
    },
    "ind": null,
    "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62348921",
-   "title": "В Подмосковье недоступна онлайн-продажа билетов на автобусы",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9009128"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78362719",
-   "title": "ГК «Черкизово» создала ИИ-платформу для обучения и адаптации сотрудников из Индии, Шри‑Ланки, Нигерии и Египта",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/971353"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33312160",
-   "title": "На Кубани вынесли приговор за мошенничество при приобретении протезов для инвалидов",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/proisshestviya/28194329"
-    ]
-   ],
-   "sum": "3,5 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58088597",
-   "title": "В Петербурге продажа жилья через агента ускоряет сделку на 42 дня",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/08/v-peterburge-prodazha-zhilja"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84178656",
-   "title": "В Петербурге аномально выросли продажи гибридов",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/08/v-peterburge-anomalno-virosli"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gd40fc98f (общие редкие слова: гибрид, продаж) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d59866698",
-   "title": "В Эстонии продадут с торгов золотые монеты, изъятые при попытке вывоза в Россию",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/08/v-jestonii-prodadut-s-torgov"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63587527",
-   "title": "В Подмосковье временно пропала онлайн-покупка билетов на автобусы",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180819/v-podmoskove-vremenno-propala-onlain-pokupka-biletov-na-avtobusy-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86721336",
-   "title": "СМИ: распродажа облигаций Франции может привести к проблемам для Евросоюза",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/smi-874071811.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36691206",
-   "title": "Куртку Майкла Джексона выставят на аукцион",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/kurtka-874071075.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27650891",
-   "title": "В Челябинске выставили на аукцион часть бывшего ЦНТИ, в котором торговали мебелью, коврами и семенами",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/business/2026/10/08/76686756/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, челяби) — проверьте, не дубль ли"
+    "та же новость, что «Соглашение о продаже зарубежных активов «ЛУКОЙЛа» инвесткомп» — второе издание, в группу не шлём"
    ]
   }
  ]
