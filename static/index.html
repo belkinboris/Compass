@@ -271,6 +271,9 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 /* Обращение к фирмам внизу каталога консультантов. Тёмная плашка — чтобы
    отделялась от белых строк списка и читалась как отдельный разговор, а не
    как ещё одна фирма в перечне. */
+.adv-cta-top{position:absolute;right:max(24px,calc(50vw - 600px));top:94px;z-index:2;background:none;border:1px solid rgba(243,241,233,.45);color:var(--ivory);border-radius:999px;padding:9px 16px;font:600 11.5px/1 var(--f-sans);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s}
+.adv-cta-top:hover{background:rgba(243,241,233,.12);border-color:rgba(243,241,233,.8)}
+@media (max-width:760px){.adv-cta-top{position:static;display:inline-block;margin:0 0 14px;letter-spacing:.06em;padding:8px 14px}}
 .firm-cta{margin:34px 0 0;padding:30px 34px;border-radius:6px;
   background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:var(--ivory);
   display:flex;align-items:center;gap:28px;flex-wrap:wrap}
@@ -5433,12 +5436,16 @@ const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
   : ["credit","structured","financing"].includes(kind) ? "Показатели получателя"
   : "Показатели актива";
 
-function openCorrectionDialog(d=null, preset=""){
+function openCorrectionDialog(d=null, preset="", kind=null){
   const old=document.querySelector(".dialog-backdrop");
   if(old) (old.querySelector(".dialog-close")||old).click();
   const cardMode=!!(d&&d.id);
-  const title = cardMode ? "Уточнить или дополнить карточку" : preset ? "Оставить заявку" : "Написать редакции";
+  // kind="consultant" — кнопка «Вы консультант?» в каталоге: письмо уходит
+  // основателям в Telegram сразу, а не ждёт рутины заметок (владелец, 8 октября 2026).
+  const consultant = kind==="consultant";
+  const title = cardMode ? "Уточнить или дополнить карточку" : consultant ? "Вы консультант?" : preset ? "Оставить заявку" : "Написать редакции";
   const intro = cardMode ? "Напишите, какой факт нужно поправить или добавить. Если знаете источник — приложите ссылку, так мы проверим быстрее."
+    : consultant ? "Напишите, какую фирму представляете и чем помочь: добавить сделки, поправить профиль, рассказать о практике. Ответим на почту или в Telegram."
     : preset ? "Допишите детали — ответим на почту или в Telegram."
     : "Напишите, что не так или чего не хватает. Если знаете источник — приложите ссылку, так мы проверим быстрее.";
   const wrap=document.createElement("div"); wrap.className="dialog-backdrop";
@@ -5467,7 +5474,7 @@ function openCorrectionDialog(d=null, preset=""){
     send.disabled=true;msg.textContent="Отправляем…";
     try{
       const endpoint=cardMode?`/api/deals/${d.id}/corrections`:"/api/corrections";
-      const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({body:text,contact:contact.value.trim()||null})});
+      const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({body:text,contact:contact.value.trim()||null,kind:consultant?"consultant":null})});
       const j=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(j.error||"Не отправилось — попробуйте ещё раз.");
       msg.textContent="Спасибо, передали редакции.";msg.classList.add("ok");
@@ -7850,6 +7857,10 @@ function renderAdvisors(){
         <polygon points="1010,258 1030,150 990,150" fill="rgba(243,241,233,.06)"/>
       </g>
     </svg>
+    <!-- Компактная кнопка для самих фирм — наверху, рядом с заголовком, а не
+         только большим блоком после списка (владелец, 8 октября 2026: «лаконичнее,
+         чтобы не мешало смотреть контент ниже»). Письмо уходит в консоль сразу. -->
+    <button class="adv-cta-top reveal" id="firmCtaTop" type="button">Вы консультант? Свяжитесь с нами</button>
     <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p>Юридические и инвестиционные консультанты по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
   <div class="feed-search reveal"><input id="advq" placeholder="Найти консультанта по названию…" value="${esc(advQuery)}" aria-label="Поиск по консультантам" autocomplete="off"><div class="ac" id="advac" hidden></div></div>
@@ -7882,7 +7893,9 @@ function renderAdvisors(){
   // Тот же диалог, что «Написать нам» в подвале: отдельной формы для фирм
   // заводить незачем, а почтовая ссылка на телефоне открывает пустой клиент.
   const firmCta=document.getElementById("firmCta");
-  if(firmCta) firmCta.onclick=()=>openCorrectionDialog();
+  if(firmCta) firmCta.onclick=()=>openCorrectionDialog(null,"","consultant");
+  const firmCtaTop=document.getElementById("firmCtaTop");
+  if(firmCtaTop) firmCtaTop.onclick=()=>openCorrectionDialog(null,"","consultant");
 }
 /* Консультант без сделок — 27 фирм из 64. Раньше страница отвечала одной серой
    строкой, причём та же мысль стояла уже двумя абзацами выше («Записей пока
