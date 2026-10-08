@@ -1809,3 +1809,31 @@ def test_titles_name_the_office_not_the_surname(deals):
                 if rx.search(e.get(key) or ""):
                     bad.append((d["id"], e[key]))
     assert not bad, f"в заголовке фамилия вместо «Президент»: {bad[:5]}"
+
+
+def test_prose_has_no_double_periods(base):
+    """Две точки подряд — опечатка источника, перенесённая дословно
+    («2027 г.. то есть», Яндекс/VK, 8 октября 2026). Приёмка ловит её
+    (`accept_card.DOUBLE_PERIOD_RE`); здесь — что в базе таких нет."""
+    import re
+    rx = re.compile(r'[^.\s]\.\.(?!\.)')
+    bad = []
+    for d in base["deals"]:
+        for f in ("extra",) + tuple("eco." + k for k in ("sum", "share", "val", "target_fin", "fin",
+                                                        "rationale", "context", "finadv")) \
+                + tuple("law." + k for k in ("struct", "appr", "terms")):
+            a, _, b = f.partition(".")
+            v = d.get(a) if not b else (d.get(a) or {}).get(b)
+            if isinstance(v, str) and rx.search(v):
+                bad.append((d["id"], f))
+    assert not bad, bad
+
+
+def test_joint_ventures_have_the_jv_type(base):
+    """СП — тип «Создание СП» (решение владельца 11 сентября 2026); с полем
+    `kind: jv` или типом «СП» при типе «M&A» лента и фильтр считают его
+    покупкой, а пост называет покупателя (Яндекс/VK, 8 октября 2026)."""
+    bad = [(d["id"], d.get("type")) for d in base["deals"]
+           if (d.get("kind") == "jv" or (d.get("type") or "").strip() == "СП")
+           and d.get("type") != "Создание СП"]
+    assert not bad, bad

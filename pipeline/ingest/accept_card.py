@@ -131,6 +131,15 @@ TADVISER_MARKUP_RE = re.compile(r'(?:^|\n)\s*(?:Компания|Персона)
 # оканчивается на «…»/«...») — обрыв в НАЧАЛЕ поля этим не ловится, это
 # отдельный, более редкий класс (см. TRUNCATED в отчёте).
 TRAILING_CUTOFF_RE = re.compile(r'(?:…|\.\.\.)\s*$')
+# Две точки подряд посреди текста — опечатка источника, перенесённая
+# дословно («в I квартале 2027 г.. то есть», Яндекс/VK, 8 октября 2026);
+# многоточие (три точки) — не она.
+DOUBLE_PERIOD_RE = re.compile(r'[^.\s]\.\.(?!\.)')
+# «Форма расчётов» с рассказом о бизнесе (чем занимается, продукты, клиенты,
+# выручка) и без единого слова об оплате — поле перепутано: у Яндекс/VK там
+# лежало описание VK Tech. Родня `FIN_IS_REPORTING`, но ловит не только
+# отчётность, начинающуюся с «Выручка».
+FIN_IS_BUSINESS = re.compile(r'(занимается|разработк|выручк|клиент|конкурент|продукт|сервис)', re.I)
 # Одна и та же фраза дословно в двух прозаических полях — расширение уже
 # существовавшей проверки `why_dup` (только rationale/extra) на соседние
 # пары, которые аудит нашёл дублирующими друг друга (`c59e65efb`,
@@ -541,6 +550,9 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         first = (format_post._sentences(rationale) or [''])[0]
         if format_post.NOT_A_MOTIVE.search(first):
             out.append(('why', '«Цель сделки» начинается с оценки рынка, а не с мотива'))
+        if rationale[:1].islower():
+            out.append(('why_fragment', '«Цель сделки» начинается со строчной буквы: %r — обрывок '
+                        'предложения, нужна фраза целиком' % rationale[:50]))
     for fa, fb in DUPLICATE_PAIRS:
         va, vb = _text(card, fa), _text(card, fb)
         if has(va) and has(vb) and review.flat(str(va)) == review.flat(str(vb)):
@@ -552,6 +564,9 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                         'служебная вики-разметка источника (TAdviser) просочилась в %s: %r' % (f, v[:80])))
         if TRAILING_CUTOFF_RE.search(v.rstrip()):
             out.append(('truncated:' + f, 'текст обрывается многоточием на середине в %s: %r' % (f, v[-60:])))
+        if DOUBLE_PERIOD_RE.search(v):
+            out.append(('double_period:' + f, 'две точки подряд в %s: %r — опечатка источника, '
+                        'переносится без неё' % (f, DOUBLE_PERIOD_RE.search(v).group())))
     if not any(str(s[1]).startswith('http') for s in card.get('src') or [] if len(s) > 1):
         out.append(('source', 'ни одной http-ссылки в источниках'))
     for c in coverage(card):
@@ -587,6 +602,21 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # ответа на вопрос «чем и как платили». Замер по базе: поле заполнено у
     # 122 карточек, отчётность без единого слова об оплате стояла у 16.
     fin_text = ((card.get('eco') or {}).get('fin') or '').strip()
+    if fin_text and not PLACEHOLDER.match(fin_text) and not FIN_IS_PAYMENT.search(fin_text) \
+            and FIN_IS_BUSINESS.search(fin_text) and not FIN_IS_REPORTING.match(fin_text):
+        out.append(('fin_is_business',
+                    '«Форма расчётов» рассказывает о бизнесе, а не о том, чем платили: %r. '
+                    'Описание компании — в профиль или «Контекст», показатели — в '
+                    '«Показатели»' % fin_text[:70]))
+    # СП: тип «Создание СП» и оба участника профилями (docs/card_status_dates.md,
+    # docs/card_parties.md) — иначе сайт и пост показывают покупку (Яндекс/VK).
+    is_jv = card.get('kind') == 'jv' or format_post._kind_from_type(card.get('type')) == 'jv'
+    if is_jv and card.get('type') != 'Создание СП':
+        out.append(('jv_type', 'совместное предприятие с типом %r — нужен тип «Создание СП»' % card.get('type')))
+    if is_jv and not (card.get('buyer') and card.get('target')):
+        out.append(('jv_participants', 'у СП оба участника — профилями в buyer и target '
+                    '(учредители, а не вносимые бизнесы); сейчас: %r, %r'
+                    % (card.get('buyer'), card.get('target'))))
     if fin_text and FIN_IS_REPORTING.match(fin_text) and not FIN_IS_PAYMENT.search(fin_text):
         out.append(('fin_is_reporting',
                     '«Форма расчётов» отвечает не на свой вопрос: %r — это отчётность, '
