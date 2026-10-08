@@ -952,7 +952,7 @@ def test_artem_feedback_ui_invariants():
     assert 'Показатели таргета' not in html
     assert 'mailto:' not in html
     assert 'Этапы сделки' in html and 'openCorrectionDialog' in html
-    assert 'По этой сделке раскрыто немного деталей' in html
+    assert 'По сделке раскрыто немного деталей' in html
 
 
 def test_owner_text_rules_of_october_3_2026(base):

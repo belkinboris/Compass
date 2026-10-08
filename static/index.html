@@ -559,11 +559,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .stage-snapshot{margin-top:18px}
 .stage-snapshot>.label{display:block;margin-bottom:6px}
 .stage-nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
-.coverage-note{margin:0 0 26px;padding:17px 19px;border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:8px;background:var(--bronze-soft)}
-.coverage-note strong{display:block;font-family:var(--f-display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:5px}
-.coverage-note p{font-size:13.5px;line-height:1.58;color:var(--muted);max-width:74ch;margin:0}
+.coverage-note{margin:0 0 26px;padding:18px 20px;background:var(--bronze-soft)}
+.coverage-note strong{display:block;font-family:'PT Serif Web','PT Serif',Georgia,serif;font-size:min(16px,4.1vw);font-weight:400;color:var(--ink);margin-bottom:4px}
+.coverage-note p{font-family:'PT Serif Web','PT Serif',Georgia,serif;font-size:14px;line-height:1.5;color:var(--muted);max-width:74ch;margin:0}
 .coverage-note a{display:inline-block;margin-top:10px;color:var(--accent);font-size:13px;font-weight:600;border-bottom:1px solid rgba(29,90,68,.28)}
-@media(max-width:650px){.deal-progress{padding:18px 14px}.progress-row{grid-template-columns:18px minmax(0,1fr);padding:9px 4px}.progress-open{grid-column:2}.stage-facts{grid-template-columns:1fr}.coverage-note{padding:15px 16px}}
+@media(max-width:650px){.deal-progress{padding:18px 14px}.progress-row{grid-template-columns:18px minmax(0,1fr);padding:9px 4px}.progress-open{grid-column:2}.stage-facts{grid-template-columns:1fr}.coverage-note{padding:16px 18px}}
 .extra-info{margin:28px 0;padding:20px 22px;background:var(--paper2,#F0EFEA);border-radius:10px;border:1px solid var(--line)}
 .extra-info .label{display:block;margin-bottom:10px}
 .extra-info p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
@@ -1615,6 +1615,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 /* Фирменная карточка каталога — правило у BRAND_TOKENS: рамка наша, внутри
    бренд. Цвета, шрифт и пропорции логотипа приходят переменными --b-* и
    больше нигде на странице не используются. */
+/* PT Serif (ПараТайп, OFL) — «Деловая классика»; пока только в блоке «раскрыто немного деталей» (владелец, 8 октября 2026). */
+@font-face{font-family:'PT Serif Web';src:url(/static/fonts/ptserif-400-cyrillic.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'PT Serif Web';src:url(/static/fonts/ptserif-400-latin.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Commissioner';src:url(/static/fonts/commissioner-cyrillic.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'Commissioner';src:url(/static/fonts/commissioner-latin.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
@@ -5412,32 +5415,12 @@ function detailScore(d){
 function sparseNoticeHtml(d){
   const facts=detailScore(d), src=(d.src||[]).length;
   if(facts>9 || src>1) return "";
-  const known=[];
-  if(d.seller||d.seller_id) known.push("продавец");
-  if(buyerOf(d)) known.push(isRound(d)?"инвестор":"покупатель");
-  if(d.target||d.asset||hasFact(d.eco&&d.eco.share)) known.push("предмет сделки");
-  if(realAdv(d).length||hasFact(d.eco&&d.eco.finadv)) known.push("консультанты");
-  const missing=[];
-  if(!buyerOf(d)) missing.push("покупатель");
-  if(undisclosed(d.sum)) missing.push("цена");
-  if(!hasFact(d.law&&d.law.terms)) missing.push("условия");
-  // Ссылка «Посмотреть более подробную карточку» убрана: подбор шёл по
-  // отрасли и общей насыщенности, и предложенная сделка обычно не имела
-  // никакого отношения к этой — выглядело как случайная, ничем не
-  // объяснённая рекомендация. Честное пустое состояние не нуждается в
-  // переходе куда-то ещё, только в объяснении, чего не хватает и почему.
-  // При двух и более пропусках список слов из missing склеивается в предложение
-  // после уже законченной фразы («…предмет сделки. ») — первое слово нужно
-  // капитализировать вручную, иначе оно строчное сразу после точки: «…предмет
-  // сделки. цена и условия не раскрыты.» (нашлось у 6 из 10 карточек при
-  // выборочной проверке — однопунктовая ветка выше написана верно, страдает
-  // только эта).
-  const missingSentence=missing.length ? `${missing.slice(0,-1).join(", ")}${missing.length>1?" и ":""}${missing.at(-1)} не раскрыты.` : "";
-  const missingText=missing.length===1
-    ? ({"покупатель":"Покупатель не раскрыт.","цена":"Цена не раскрыта.","условия":"Условия не раскрыты."}[missing[0]]||"")
-    : missingSentence ? missingSentence.charAt(0).toUpperCase()+missingSentence.slice(1) : "";
-  return `<div class="coverage-note reveal"><strong>По этой сделке раскрыто немного деталей</strong>
-    <p>${known.length?`Известны: ${known.join(", ")}. `:""}${missingText?`${missingText} `:""}Дополним, когда появятся новые данные.</p>
+  // Владелец, 8 октября 2026: перечень «известны: …, не раскрыты: …» снят —
+  // это и так видно по карточке; остаются заголовок в одну строку и обещание
+  // дополнить. Ссылки на «более подробную карточку» здесь не бывает
+  // (см. test_sparse_notice_has_no_unrelated_deal_link).
+  return `<div class="coverage-note reveal"><strong>По сделке раскрыто немного деталей</strong>
+    <p>Дополним, когда появятся новые данные.</p>
   </div>`;
 }
 const targetMetricLabel = kind => kind==="jv" ? "Показатели СП"
