@@ -2686,11 +2686,16 @@ function matchesCompany(text, id){
    предметом сделки, на её странице не показывались вовсе: у Сбербанка так
    пропадало 5 сделок, у АФК «Система» и ВТБ — по 4, всего 139 связей. */
 function companyRole(d, id){
-  const reorg = dealKindOf(d.type) === "reorg";
+  const kind = dealKindOf(d.type);
+  const reorg = kind === "reorg";
+  // СП: обе стороны — участники, а не покупатель и предмет (владелец о
+  // блоке «Финансовый контекст» карточки Яндекс/VK, 8 октября 2026). Тот же
+  // ключ, что у плашки карточки (`kindKey`): тип, а при обычной покупке — `kind`.
+  const jv = kind === "jv" || (kind === "acquisition" && d.kind === "jv");
   const roles = reorg ? reorgRoles(d) : null;
-  if(d.buyer===id) return reorg ? roles.a : "Покупатель";
+  if(d.buyer===id) return reorg ? roles.a : jv ? "Участник СП" : "Покупатель";
   if(d.seller_id===id) return "Продавец";
-  if(d.target===id || d.asset_id===id) return reorg ? roles.b : "Предмет сделки";
+  if(d.target===id || d.asset_id===id) return reorg ? roles.b : jv ? "Участник СП" : "Предмет сделки";
   return "";
 }
 /* Профиль без единой сделки. Такие профили появились из разбора сторон: в тексте

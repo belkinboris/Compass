@@ -2,7 +2,7 @@
  "made": "2026-10-08",
  "drafts": [
   {
-   "draft_id": "d25180407",
+   "draft_id": "d48405016",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -38,17 +38,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d62576061",
-   "title": "Стало известно об истечении срока соглашения о продаже зарубежных активов «Лукойла»",
+   "draft_id": "d85083948",
+   "title": "На фоне разросшихся долгов «Софтлайн» притормозил M&A",
    "date": "2026-10-08",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/08/stalo-izvestno-ob-istechenii-sroka-soglasheniya-o-prodazhe-zarubezhnyh-aktivov-lukoyla/"
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/943395"
     ]
    ],
    "sum": null,
@@ -70,27 +70,169 @@
    ]
   },
   {
-   "draft_id": "d32549288",
-   "title": "Audi распродала все спорткары RS5 на 2026 год — спрос в Европе почти вдвое превысил ожидания компании",
+   "draft_id": "d72609005",
+   "title": "Данные 80% французов выставили на продажу в даркнете после хакерских атак",
    "date": "2026-10-08",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/audi-rasprodala-vse-sportkary-rs5-na-2026-god-spros-v-evrope-pochti-vdvoe-prevysil-ozhidaniya-kompanii/"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28195575"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d60685804",
+   "title": "Сбер рассказал, сколько инвесторы вложили в страхование жизни с расчетной доходностью",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28195467"
+    ]
+   ],
+   "sum": "16 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "страхование жизни с расчетной доходностью",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "страхование жизни с расчетной доходностью",
+    "seller": null
+   },
+   "ind": "Страхование",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d26356579",
+   "title": "Эксперт отметила рост интереса к инвестициям в премиальные офисы",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180629/2026-10-08/ekspert-otmetila-rost-interesa-k-investitciiam-v-premialnye-ofisy"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67826442",
+   "title": "На аукцион выставят первые издания Коперника, Галилея и Ньютона",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180974/video/na-auktcion-vystaviat-pervye-izdaniia-kopernika-galileia-i-niutona"
+    ]
+   ],
+   "sum": "$700 тыс",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23072119",
+   "title": "Инвесторы вложили более 16 миллиардов рублей в ИСЖ 2.0 от «Сбера»",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/sber-874040168.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "ИСЖ 2.0 от «Сбера»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ИСЖ 2.0 от «Сбера»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g2b62ae77 (общие редкие слова: 16, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d58443497",
+   "title": "Starbucks рассматривает поглощение сети ресторанов Chipotle, пишет FT",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/starbucks-874082562.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-10-08",
-     "title": "Сделка завершена",
-     "note": "Спортивный автомобиль Audi RS5 стал хитом в Европе, сообщила компания. По данным автопроизводителя, число заказов на модель оказалось почти вдвое выше прогнозов компании. Весь производственный лимит RS5 на 2026 год уже распродан.",
+     "title": "Переговоры",
+     "note": "",
      "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/audi-rasprodala-vse-sportkary-rs5-na-2026-god-spros-v-evrope-pochti-vdvoe-prevysil-ozhidaniya-kompanii/"
+      "web:1prime.ru",
+      "https://1prime.ru/20261008/starbucks-874082562.html"
      ]
     }
    ],
@@ -110,13 +252,42 @@
    ]
   },
   {
-   "draft_id": "d69607599",
-   "title": "НБА предложила 500 миллионов евро за приобретение Евролиги, пишут СМИ",
+   "draft_id": "d78631462",
+   "title": "Как будут оплачиваться инвестиции в датацентры на $5+ трлн",
    "date": "2026-10-08",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261008/nba-2123268432.html"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1360608.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d13312070",
+   "title": "Перед покупкой сахара всегда читай его состав: одно слово меняет вкус всего продукта",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053134617"
     ]
    ],
    "sum": null,
@@ -132,35 +303,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g0aed0536 (общие редкие слова: пишут, сми) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d65600208",
-   "title": "На торги по национализированным уральским агрохолдингам заявились два претендента",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053134588"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",

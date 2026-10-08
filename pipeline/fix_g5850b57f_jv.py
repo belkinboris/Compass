@@ -25,9 +25,13 @@ VK, VK_TECH = 'g4e694234', 'g592a5a2b'
 
 
 def fix(card, in_pending):
-    assert card.get('type') == 'M&A', card.get('type')
-    assert card.get('target') == VK_TECH, card.get('target')
+    # Повторный запуск 8 октября 2026 (16:40 UTC): рутина публикации перенесла
+    # карточку в базу из старого снимка pending.json, и первая правка
+    # потерялась при слиянии — поэтому assert на старое значение мягкий:
+    # уже исправленное не трогаем.
     assert card.get('buyer') == 'yandex', card.get('buyer')
+    assert card.get('type') in ('M&A', 'Создание СП'), card.get('type')
+    assert card.get('target') in (VK_TECH, VK), card.get('target')
     card['type'] = 'Создание СП'
     card['target'] = VK
     for ev in (card.get('party_evidence') or {}).get('target') or []:
@@ -36,6 +40,11 @@ def fix(card, in_pending):
     if in_pending:
         card['post_draft_sent'] = False
         card.pop('post_preview', None)
+    else:
+        # Владелец: «пост пока нажму не отправлять». Карточка уже в базе, а
+        # нажатие под проектом поста до базы не доходит — ставим решение
+        # прямо: канал молчит, карточка засевается бэклогом.
+        card['no_post'] = True
 
 
 def main(write):
