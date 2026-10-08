@@ -1,0 +1,197 @@
+{
+ "made": "2026-10-08",
+ "items": [
+  {
+   "news": "https://www.kommersant.ru/doc/9008598",
+   "title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
+   "verdict": "enrich:g6d711306",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/business/articles/2026/10/07/1235090-rosatom-vikupil",
+   "title": "«Росатом» выкупил у Шишкарева 51% группы «Дело»",
+   "verdict": "enrich:g5eb6ff22",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Сергей Шишкарев»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Chetvertyj-aukcion-po-prodazhe-Rizhskogo-vokzala-RZhD-ne-sostoyalsya-iz-za-otsutstviya-zayavok-87623",
+   "title": "Четвертый аукцион по продаже Рижского вокзала РЖД не состоялся из-за отсутствия заявок",
+   "verdict": "enrich:g5b4e85aa",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/V-Germanii-nachali-privatizaciyu-nacionalizirovannogo-podrazdeleniya-Gazproma-87609",
+   "title": "В Германии начали приватизацию национализированного подразделения \"Газпрома\"",
+   "verdict": "enrich:g2918b022",
+   "why": "общее название в кавычках и общие слова: 2",
+   "reasons": [
+    "в карточке «≈6 млрд € (по оценке)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/VK-prodala-40-v-servise-Intickets-87605",
+   "title": "VK продала 40% в сервисе Intickets",
+   "verdict": "enrich:g91828b2b",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Osnovatel-i-akcioner-Kliniki-Fomina-Dmitrij-Fomin-investiroval-v-set-veterinarnyh-klinik-87601",
+   "title": "Основатель и акционер «Клиники Фомина» Дмитрий Фомин инвестировал в сеть ветеринарных клиник",
+   "verdict": "enrich:g2a4e8a51",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Rossijskie-aktivy-Metro-peredany-vo-vremennoe-upravlenie-87581",
+   "title": "Российские активы Metro переданы во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 5",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 5"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Razrabotchik-jekspress-testov-Rapid-Bio-privlek-600-mln-rublej-investicij-ot-Kama-Flow-87577",
+   "title": "Разработчик экспресс-тестов «Рапид Био» привлек 600 млн рублей инвестиций от Kama Flow",
+   "verdict": "enrich:gf66151c1",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «доля в ООО «Рапид Био» (размер не раскрыт)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Mezhdunarodnaya-gruppa-Nielsen-prodala-aktivy-v-Rossii-87569",
+   "title": "Международная группа Nielsen продала активы в России",
+   "verdict": "enrich:gc65bacdf",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Lenta-kupila-krupnejshuyu-sibirskuyu-torgovuyu-set-Mariya-Ra-87563",
+   "title": "«Лента» купила крупнейшую сибирскую торговую сеть «Мария-Ра»",
+   "verdict": "enrich:gb7ea4703",
+   "why": "совпал набор названий в кавычках на разных этапах",
+   "reasons": [
+    "этот статус уже снимали как преждевременный — переводить только после чтения источника",
+    "этап «closed» уже снимали как преждевременный"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/top/2026-10-06_vk_prodal_dolyu_v_biletnom",
+   "title": "VK продал долю в билетном операторе после скандальной отмены концерта американского рэпера",
+   "verdict": "enrich:g91828b2b",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/top/2026-10-05_bilajn_prodaet_svoj_ofis",
+   "title": "«Билайн» продает свой офис",
+   "verdict": "enrich:g6d711306",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «1,05 млрд ₽ (стартовая цена)»",
+    "в карточке «офисное здание на 1-й Тверской-Ямской улице (2,9 тыс. м²)»",
+    "в карточке «ВымпелКом»"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo",
+   "title": "В октябре Сбербанк выкупит зеленоградского производителя чипов «НМ-Тех». Компанию оценили в 19 миллиардов",
+   "verdict": "enrich:gafde5488",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке ««НМ-Тех» (зеленоградский производитель микроэлектроники)»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261007/rynok-2123018310.html",
+   "title": "Участок с Рижским рынком и универмагом \"Крестовский\" выставят на торги",
+   "verdict": "enrich:g35c2f65e",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261006/astrahan-2122692433.html",
+   "title": "\"Дом.РФ\" продает историческую ночлежку в Астрахани",
+   "verdict": "enrich:gb3ae9e94",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «здание бывшего городского ночлежного дома в Астрахани: около»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261005/dom-2122383222.html",
+   "title": "\"Дом.РФ\" продает усадьбу Голицыных-Муромцевых в Смоленской области",
+   "verdict": "enrich:g7c536b72",
+   "why": "общее название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке «промышленно-усадебный комплекс»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261005/vgtrk-2122241235.html",
+   "title": "\"Дом.РФ\" продает здание, где размещалось магаданское отделение ВГТРК",
+   "verdict": "enrich:gf485e935",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «здание бывшего отделения ВГТРК в Магадане»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261002/syktyvkar-2121760598.html",
+   "title": "\"Дом.РФ\" продает купеческий особняк начала XX века в Сыктывкаре",
+   "verdict": "enrich:ga8d7e0ee",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «дом купца В. П. Комлина в Сыктывкаре (Республика Коми): 665,»"
+   ]
+  },
+  {
+   "news": "https://rb.ru/news/rizhskij-cvetochnyj-rynok-vystavyat-na-torgi-nachalnaya-stoimost-lota-155-mln-rublej/",
+   "title": "Рижский цветочный рынок выставят на торги: начальная стоимость лота — 155 млн рублей",
+   "verdict": "enrich:ge1b2eba1",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «155,4 млн ₽ (стартовая цена)»"
+   ]
+  },
+  {
+   "news": "https://t.me/rusven/7762",
+   "title": "Российский разработчик экспресс-тестов “Рапид Био” привлек 600 млн рублей от инвестиционной компании Kama Flow. Средства планируется направить на развитие сегментов непрерывного мониторинга глюкозы и ",
+   "verdict": "enrich:gf66151c1",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «доля в ООО «Рапид Био» (размер не раскрыт)»"
+   ]
+  },
+  {
+   "news": "https://t.me/rusven/7775",
+   "title": "#газеты VK продала долю в 40% в платформе Intickets․ru. “Интикетс” фигурирует в исках к Say Agency о концертах Уэста в России как получатель средств от продажи билетов. Intickets․ru - система автомати",
+   "verdict": "enrich:g91828b2b",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  }
+ ]
+}
