@@ -2,7 +2,7 @@
  "made": "2026-10-08",
  "drafts": [
   {
-   "draft_id": "d25180407",
+   "draft_id": "d82990160",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -38,17 +38,86 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9a867776 (общее название в кавычках) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d62576061",
-   "title": "Стало известно об истечении срока соглашения о продаже зарубежных активов «Лукойла»",
+   "draft_id": "d42434947",
+   "title": "Португалия изучает вариант покупки американских F-35",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28195329"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d11761250",
+   "title": "Трамп приобрел акции Meta* на сумму до 25 миллионов долларов",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/tramp-874079970.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-08",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261008/tramp-874079970.html"
+     ]
+    }
+   ],
+   "buyer_name": "Трамп",
+   "asset": "Meta* на сумму до 25 миллионов долларов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Трамп",
+    "asset": "Meta* на сумму до 25 миллионов долларов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, миллио) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d38189392",
+   "title": "Geely решил запустить в России официальные продажи самой популярной машины в Китае",
    "date": "2026-10-08",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/08/stalo-izvestno-ob-istechenii-sroka-soglasheniya-o-prodazhe-zarubezhnyh-aktivov-lukoyla/"
+     "https://lenta.ru/news/2026/10/08/geely-gotovit-ofitsialnuyu-rossiyskuyu-premieru-samoy-populyarnoy-mashiny-v-kitae/"
     ]
    ],
    "sum": null,
@@ -70,13 +139,42 @@
    ]
   },
   {
-   "draft_id": "d32549288",
-   "title": "Audi распродала все спорткары RS5 на 2026 год — спрос в Европе почти вдвое превысил ожидания компании",
+   "draft_id": "d15970055",
+   "title": "Братья-финансисты устали работать, уволились и начали продавать лапшу",
    "date": "2026-10-08",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/audi-rasprodala-vse-sportkary-rs5-na-2026-god-spros-v-evrope-pochti-vdvoe-prevysil-ozhidaniya-kompanii/"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/8/bratya-finansisty-ustali-rabotat-uvolilis-i-nachali-prodavat-lapshu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d49273615",
+   "title": "«Она хотела собаку — я купил». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/animals/2026/10/08/76685396/"
     ]
    ],
    "sum": null,
@@ -87,84 +185,25 @@
      "kind": "closed",
      "date": "2026-10-08",
      "title": "Сделка завершена",
-     "note": "Спортивный автомобиль Audi RS5 стал хитом в Европе, сообщила компания. По данным автопроизводителя, число заказов на модель оказалось почти вдвое выше прогнозов компании. Весь производственный лимит RS5 на 2026 год уже распродан.",
+     "note": "На Мэгги было больно смотреть",
      "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/audi-rasprodala-vse-sportkary-rs5-na-2026-god-spros-v-evrope-pochti-vdvoe-prevysil-ozhidaniya-kompanii/"
+      "web:74.ru",
+      "https://74.ru/text/animals/2026/10/08/76685396/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d69607599",
-   "title": "НБА предложила 500 миллионов евро за приобретение Евролиги, пишут СМИ",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261008/nba-2123268432.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g0aed0536 (общие редкие слова: пишут, сми) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d65600208",
-   "title": "На торги по национализированным уральским агрохолдингам заявились два претендента",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053134588"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
