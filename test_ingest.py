@@ -384,6 +384,31 @@ def test_acceptance_catches_verbatim_source_text_and_dangling_motive():
     assert "why_fragment" in codes, codes
 
 
+def test_second_reading_gates_cards_accepted_since_october_9():
+    """Второе чтение (8 октября 2026, Яндекс/VK): карточка, принятая с 9 октября,
+    без штампа `second_read` в консоль не идёт; ответ читателя обязан покрыть
+    каждое заполненное поле, `ok` ставит штамп, замечание — возвращает на правку."""
+    import second_reading
+    card = {"id": "gsr1", "title": "Т", "type": "M&A", "accepted": "2026-10-09",
+            "eco": {"rationale": "Мотив.", "fin": "—"}, "law": {"appr": "ФАС."}}
+    assert second_reading.needs_second_reading(card)
+    assert not second_reading.needs_second_reading(dict(card, accepted="2026-10-08"))
+    assert not second_reading.needs_second_reading(dict(card, accepted=True))
+    assert second_reading.filled_fields(card) == ["title", "eco.rationale", "law.appr"]
+    ok = {"id": "gsr1", "fields": {"title": "ok", "eco.rationale": "ok", "law.appr": "ok"},
+          "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS}, "verdict": "ok"}
+    short = dict(ok, fields={"title": "ok"})
+    assert second_reading.apply(short, dict(card))[0] == "refused"
+    fix = dict(ok, fields=dict(ok["fields"], **{"eco.rationale": "обрывок: начинается с «такой»"}), verdict="fix")
+    state, notes = second_reading.apply(fix, dict(card))
+    assert state == "fix" and notes == ["eco.rationale: обрывок: начинается с «такой»"]
+    stamped = dict(card)
+    assert second_reading.apply(ok, stamped, day="2026-10-09")[0] == "stamped"
+    assert stamped["second_read"] == "2026-10-09" and not second_reading.needs_second_reading(stamped)
+    text = second_reading.questionnaire(card, {"companies": {}})
+    assert "[eco.rationale]" in text and "[verbatim]" in text and "Пост" in text
+
+
 def test_joint_venture_post_names_participants_not_a_buyer():
     """У СП нет покупателя и предмета-компании: обе стороны — участники,
     предмет — само партнёрство (Яндекс/VK, 8 октября 2026: пост назвал
@@ -4099,7 +4124,7 @@ def test_raw_console_remembers_the_news_not_the_draft_id(monkeypatch):
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
-    plan, _p, _s, _deferred, _postponed, _foreign, _unread, _unaccepted = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, _foreign, _unread, _unaccepted, _unread2 = send_drafts.build_plan()
     raw_titles = [item.get("title") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
     assert drafts[1]["title"] in raw_titles
     assert drafts[0]["title"] not in raw_titles, \
@@ -4152,7 +4177,7 @@ def test_raw_console_hides_foreign_only_deals(monkeypatch):
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted, _unread2 = send_drafts.build_plan()
     assert foreign == 1
     assert not [1 for _t, _kb, (kind, _i, _m) in plan if kind == "raw"], \
         "иностранный черновик всё равно попал в план рассылки"
@@ -4438,7 +4463,7 @@ def test_console_withholds_cards_that_passed_reading_but_not_acceptance(monkeypa
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {})
-    plan, *_rest, unaccepted = send_drafts.build_plan()
+    plan, *_rest, unaccepted, _unread2 = send_drafts.build_plan()
     ids = {item[1]["id"] for _t, _k, item in plan}
     assert ids == {"g-accepted"}, ids
     assert unaccepted == 1
@@ -4488,7 +4513,7 @@ def test_console_withholds_unreviewed_cards(monkeypatch):
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, _foreign, unread, _unaccepted = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, _foreign, unread, _unaccepted, _unread2 = send_drafts.build_plan()
     ids_in_plan = {item["id"] for _t, _kb, (kind, item, _m) in plan if kind == "card"}
     assert "g-unread" not in ids_in_plan, "непрочитанная карточка попала в план консоли"
     assert "g-read" in ids_in_plan
@@ -6768,7 +6793,7 @@ def test_gate_shows_a_complete_latin_named_draft_instead_of_hiding_it(monkeypatc
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [complete, incomplete])
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {"decided_raw": {}, "sent_raw": []})
-    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted = send_drafts.build_plan()
+    plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted, _unread2 = send_drafts.build_plan()
     raw_ids = [item[1]["draft_id"] for _t, _kb, item in plan if item[0] == "raw"]
     assert raw_ids == ["d-lat-1"], raw_ids
     assert foreign == 1
