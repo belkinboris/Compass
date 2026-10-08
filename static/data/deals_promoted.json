@@ -259015,7 +259015,8 @@
   "g4ae30fd2": 187,
   "g6264541d": 188,
   "ge1b2eba1": null,
-  "g955d2c6b": null
+  "g955d2c6b": null,
+  "g51fa80ce": 189
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -262594,6 +262595,25 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g51fa80ce": {
+   "sum": "213,5 млн ₽",
+   "buyer_name": "«Голдрупп»",
+   "seller": "Роснедра",
+   "asset": "право геологического изучения и добычи на участке россыпного золота река Чапа — ручей Цой",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  }
 }
