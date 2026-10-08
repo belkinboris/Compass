@@ -2,7 +2,7 @@
  "made": "2026-10-08",
  "drafts": [
   {
-   "draft_id": "d48405016",
+   "draft_id": "d20653127",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -42,129 +42,16 @@
    ]
   },
   {
-   "draft_id": "d85083948",
-   "title": "На фоне разросшихся долгов «Софтлайн» притормозил M&A",
+   "draft_id": "d22840494",
+   "title": "Куртку и лоферы Майкла Джексона из клипа Thriller выставят на аукцион",
    "date": "2026-10-08",
    "src": [
     [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/943395"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ac7c2eec29486e79c26f3fb"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72609005",
-   "title": "Данные 80% французов выставили на продажу в даркнете после хакерских атак",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28195575"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d60685804",
-   "title": "Сбер рассказал, сколько инвесторы вложили в страхование жизни с расчетной доходностью",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28195467"
-    ]
-   ],
-   "sum": "16 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "страхование жизни с расчетной доходностью",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "страхование жизни с расчетной доходностью",
-    "seller": null
-   },
-   "ind": "Страхование",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d26356579",
-   "title": "Эксперт отметила рост интереса к инвестициям в премиальные офисы",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180629/2026-10-08/ekspert-otmetila-rost-interesa-k-investitciiam-v-premialnye-ofisy"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67826442",
-   "title": "На аукцион выставят первые издания Коперника, Галилея и Ньютона",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180974/video/na-auktcion-vystaviat-pervye-izdaniia-kopernika-galileia-i-niutona"
-    ]
-   ],
-   "sum": "$700 тыс",
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -183,59 +70,19 @@
    ]
   },
   {
-   "draft_id": "d23072119",
-   "title": "Инвесторы вложили более 16 миллиардов рублей в ИСЖ 2.0 от «Сбера»",
+   "draft_id": "d13518630",
+   "title": "В Эстонии продадут на аукционе изъятые на погранпункте золотые монеты",
    "date": "2026-10-08",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/sber-874040168.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ac7b5d52c1dfbc054723155"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": "ИСЖ 2.0 от «Сбера»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "ИСЖ 2.0 от «Сбера»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g2b62ae77 (общие редкие слова: 16, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d58443497",
-   "title": "Starbucks рассматривает поглощение сети ресторанов Chipotle, пишет FT",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/starbucks-874082562.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-08",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261008/starbucks-874082562.html"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -248,17 +95,46 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d78631462",
-   "title": "Как будут оплачиваться инвестиции в датацентры на $5+ трлн",
+   "draft_id": "d56609242",
+   "title": "«Физики» в сентябре сократили нетто-покупки российских акций более чем в четыре раза",
    "date": "2026-10-08",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1360608.php"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1121229"
+    ]
+   ],
+   "sum": "6,9 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd49877c9 (общие редкие слова: более, россий) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d54611243",
+   "title": "ТАСС: россиян среди заявителей на создание доменных зон в новом мировом раунде нет",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28195801"
     ]
    ],
    "sum": null,
@@ -276,18 +152,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13312070",
-   "title": "Перед покупкой сахара всегда читай его состав: одно слово меняет вкус всего продукта",
+   "draft_id": "d14090387",
+   "title": "Физлица в сентябре сократили чистые покупки акций на 76% к августу",
    "date": "2026-10-08",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053134617"
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/tsentrobank-874086452.html"
     ]
    ],
    "sum": null,
@@ -307,6 +182,46 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d86391219",
+   "title": "ЦБ: СЗКО в сентябре выкупили 73,6% ОФЗ на аукционах Минфина",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/tsb-874085955.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-08",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261008/tsb-874085955.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "ОФЗ на аукционах Минфина",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ОФЗ на аукционах Минфина",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: сентяб, цб) — проверьте, не дубль ли"
    ]
   }
  ]
