@@ -2274,7 +2274,8 @@ def test_main_edits_a_posted_card_enriched_outside_intake(monkeypatch, tmp_path)
 
     assert len(fake.calls) == 1 and fake.calls[0][0].endswith("/editMessageText")
     text = fake.calls[0][1]["text"]
-    assert "⟳ Обновлено: добавлен(а) сумма" in text and "1 млрд ₽" in text
+    # Владелец, 8 октября 2026: правленый пост не сообщает, что его правили.
+    assert "Обновлено" not in text and "1 млрд ₽" in text
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_post_state"]["gX1"]["sum"] == "1 млрд ₽"
     assert written["telegram_posts"]["gX1"] == 32
