@@ -2606,6 +2606,41 @@ def test_button_press_is_answered_before_the_message_is_edited(client, monkeypat
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
 
+def test_button_press_keeps_bold_and_links_in_the_stamped_message(client, monkeypatch):
+    """Строка «— решение (кто)» дописывается к сообщению без потери разметки.
+
+    Telegram отдаёт жирный и ссылки отдельно от текста (`entities`); правка
+    одним текстом их стирала, и проект поста после нажатия становился
+    серым (8 октября 2026, «Дом.РФ»/ЦНТИ)."""
+    _mod_env(monkeypatch)
+    edits = []
+
+    def fake(method, **payload):
+        if method == "editMessageText":
+            edits.append(payload)
+        return {"ok": True}
+
+    monkeypatch.setattr(main.notification_service, "tg_api", fake)
+    entities = [{"type": "bold", "offset": 18, "length": 9},
+                {"type": "text_link", "offset": 28, "length": 5, "url": "https://74.ru/x"}]
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "cb-3", "from": {"id": 222, "first_name": "Борис"},
+                            "data": "mod:gbold:post_ok",
+                            "message": {"message_id": 9, "chat": {"id": 222},
+                                         "text": "[пост gbold] проект Заголовок 74.ru",
+                                         "entities": entities}}})
+    for _ in range(50):
+        if edits:
+            break
+        time.sleep(0.05)
+    assert edits and edits[0]["entities"] == entities, edits
+    assert edits[0]["text"].startswith("[пост gbold] проект Заголовок 74.ru\n\n— ")
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "gbold"]
+    client.post("/api/moderation/decisions/consume",
+                json={"token": "тайна", "ids": [r["id"] for r in rows]})
+
+
 def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
     """Ответ на сообщение-черновик с текстом = «опубликовать вот с этим текстом».
 

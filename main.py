@@ -2314,6 +2314,50 @@ def notification_telegram_unlink(user: User | None = Depends(_current_user), db=
     return {"ok": True}
 
 
+# РАЗМЕТКА ОТВЕТА ВЛАДЕЛЬЦА (8 октября 2026). Telegram присылает текст
+# сообщения отдельно от разметки: жирный, ссылки и т. п. лежат в `entities`
+# со смещениями в единицах UTF-16. Бот брал только `text`, и поправленный
+# владельцем пост ушёл в канал без жирных подписей, а «Источник» перестал
+# быть ссылкой. Собираем HTML канала из текста и разметки.
+_ENTITY_TAGS = {"bold": "b", "italic": "i", "underline": "u", "strikethrough": "s",
+                "code": "code", "pre": "pre", "spoiler": "tg-spoiler"}
+
+
+def _telegram_text_as_html(text: str, entities) -> str:
+    import html as _html
+    if not entities:
+        return text
+    units = text.encode("utf-16-le")
+    n = len(units) // 2
+    opens: dict[int, list[str]] = {}
+    closes: dict[int, list[str]] = {}
+    for e in sorted(entities, key=lambda e: (e.get("offset", 0), -e.get("length", 0))):
+        kind, start = e.get("type"), int(e.get("offset", 0))
+        end = start + int(e.get("length", 0))
+        if not (0 <= start < end <= n):
+            continue
+        if kind == "text_link" and str(e.get("url") or "").startswith(("http://", "https://")):
+            tag_open, tag_close = '<a href="%s">' % _html.escape(e["url"], quote=True), "</a>"
+        elif kind in _ENTITY_TAGS:
+            tag = _ENTITY_TAGS[kind]
+            tag_open, tag_close = "<%s>" % tag, "</%s>" % tag
+        else:
+            continue
+        opens.setdefault(start, []).append(tag_open)
+        closes.setdefault(end, []).insert(0, tag_close)
+    out, i = [], 0
+    while i <= n:
+        out.extend(closes.get(i, []))
+        out.extend(opens.get(i, []))
+        if i == n:
+            break
+        cu = int.from_bytes(units[2 * i:2 * i + 2], "little")
+        step = 2 if 0xD800 <= cu <= 0xDBFF and i + 1 < n else 1
+        out.append(_html.escape(units[2 * i:2 * (i + step)].decode("utf-16-le"), quote=False))
+        i += step
+    return "".join(out)
+
+
 @app.post("/api/telegram/webhook/{secret}")
 def telegram_webhook(secret: str, payload: TelegramWebhookIn, db=Depends(get_db)):
     """Вход для вебхука. Остаётся рабочим, но с 7 сентября 2026 по умолчанию
@@ -2633,8 +2677,11 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         # chat_id/reply_message_id — только у заметок: только их читает и на
         # них отвечает рутина (read_notes.py), решению approve отвечать
         # реплаем не нужно, оно и так подтверждается штампом в сообщении.
+        body = text.strip()
+        if verdict == "approve" and message.get("entities"):
+            body = _telegram_text_as_html(text, message.get("entities")).strip()
         db.add(ModerationDecision(
-            deal_id=deal_id, verdict=verdict, edited_text=text.strip(),
+            deal_id=deal_id, verdict=verdict, edited_text=body,
             decided_by=str(sender_id),
             chat_id=str(chat_id) if verdict == "note" and chat_id is not None else None,
             reply_message_id=reply.get("message_id") if verdict == "note" else None))
@@ -3730,10 +3777,15 @@ def _mark_decided(callback: dict, verdict: str, answered: bool = False) -> None:
     # здесь не должна доходить до вебхука. Иначе Telegram получит 500, сочтёт
     # доставку неудачной и пришлёт то же нажатие заново — одно нажатие
     # превратится в несколько решений в очереди.
+    # Разметку возвращаем той же, что пришла: Telegram отдаёт жирный и ссылки
+    # отдельно от текста (`entities`), и правка одним текстом их стирала —
+    # 8 октября 2026 владелец нажал кнопку под проектом поста «Дом.РФ»/ЦНТИ
+    # и увидел его без жирного. Решение дописано в конце, отступы прежние.
+    extra = {"entities": message["entities"]} if message.get("entities") else {}
     try:
         notification_service.tg_api("editMessageText", chat_id=chat,
                                     message_id=message["message_id"], text=stamped,
-                                    disable_web_page_preview=True)
+                                    disable_web_page_preview=True, **extra)
     except Exception as exc:  # noqa: BLE001
         logger.warning("не удалось дописать решение в сообщение: %s", exc)
 
