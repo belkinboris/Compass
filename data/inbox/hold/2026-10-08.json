@@ -2,7 +2,7 @@
  "made": "2026-10-08",
  "drafts": [
   {
-   "draft_id": "d82990160",
+   "draft_id": "d48405016",
    "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
    "date": "2026-09-23",
    "src": [
@@ -42,82 +42,13 @@
    ]
   },
   {
-   "draft_id": "d42434947",
-   "title": "Португалия изучает вариант покупки американских F-35",
+   "draft_id": "d85083948",
+   "title": "На фоне разросшихся долгов «Софтлайн» притормозил M&A",
    "date": "2026-10-08",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28195329"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d11761250",
-   "title": "Трамп приобрел акции Meta* на сумму до 25 миллионов долларов",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261008/tramp-874079970.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-08",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261008/tramp-874079970.html"
-     ]
-    }
-   ],
-   "buyer_name": "Трамп",
-   "asset": "Meta* на сумму до 25 миллионов долларов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Трамп",
-    "asset": "Meta* на сумму до 25 миллионов долларов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, миллио) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d38189392",
-   "title": "Geely решил запустить в России официальные продажи самой популярной машины в Китае",
-   "date": "2026-10-08",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/08/geely-gotovit-ofitsialnuyu-rossiyskuyu-premieru-samoy-populyarnoy-mashiny-v-kitae/"
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/943395"
     ]
    ],
    "sum": null,
@@ -139,13 +70,13 @@
    ]
   },
   {
-   "draft_id": "d15970055",
-   "title": "Братья-финансисты устали работать, уволились и начали продавать лапшу",
+   "draft_id": "d72609005",
+   "title": "Данные 80% французов выставили на продажу в даркнете после хакерских атак",
    "date": "2026-10-08",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/8/bratya-finansisty-ustali-rabotat-uvolilis-i-nachali-prodavat-lapshu"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28195575"
     ]
    ],
    "sum": null,
@@ -168,42 +99,214 @@
    ]
   },
   {
-   "draft_id": "d49273615",
-   "title": "«Она хотела собаку — я купил». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
+   "draft_id": "d60685804",
+   "title": "Сбер рассказал, сколько инвесторы вложили в страхование жизни с расчетной доходностью",
    "date": "2026-10-08",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/animals/2026/10/08/76685396/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28195467"
     ]
    ],
-   "sum": null,
+   "sum": "16 млрд ₽",
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-08",
-     "title": "Сделка завершена",
-     "note": "На Мэгги было больно смотреть",
-     "source": [
-      "web:74.ru",
-      "https://74.ru/text/animals/2026/10/08/76685396/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
+   "asset": "страхование жизни с расчетной доходностью",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "». Бывший муж объяснил, как его экс-супруга и молодая мать заморила до смерти американского булли",
+    "asset": "страхование жизни с расчетной доходностью",
+    "seller": null
+   },
+   "ind": "Страхование",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d26356579",
+   "title": "Эксперт отметила рост интереса к инвестициям в премиальные офисы",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180629/2026-10-08/ekspert-otmetila-rost-interesa-k-investitciiam-v-premialnye-ofisy"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67826442",
+   "title": "На аукцион выставят первые издания Коперника, Галилея и Ньютона",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180974/video/na-auktcion-vystaviat-pervye-izdaniia-kopernika-galileia-i-niutona"
+    ]
+   ],
+   "sum": "$700 тыс",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23072119",
+   "title": "Инвесторы вложили более 16 миллиардов рублей в ИСЖ 2.0 от «Сбера»",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/sber-874040168.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "ИСЖ 2.0 от «Сбера»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ИСЖ 2.0 от «Сбера»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g2b62ae77 (общие редкие слова: 16, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d58443497",
+   "title": "Starbucks рассматривает поглощение сети ресторанов Chipotle, пишет FT",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261008/starbucks-874082562.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-08",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261008/starbucks-874082562.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d78631462",
+   "title": "Как будут оплачиваться инвестиции в датацентры на $5+ трлн",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1360608.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d13312070",
+   "title": "Перед покупкой сахара всегда читай его состав: одно слово меняет вкус всего продукта",
+   "date": "2026-10-08",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053134617"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
