@@ -42,63 +42,7 @@
    ]
   },
   {
-   "draft_id": "d59198729",
-   "title": "ФАС возбудила дело против «Ростагрокомплекса» из-за его требования прекратить продавать сырки, похожие названием на «Б.Ю. Александров», — у компании нет прав на бренд",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/food/3185552-fas-vozbudila-delo-protiv-rostagrokompleksa?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32051677",
-   "title": "Минпромторг обновил данные о продажах авто в России",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2181566/2026-10-09/minpromtorg-obnovil-dannye-o-prodazhakh-avto-v-rossii"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65916952",
+   "draft_id": "d41473989",
    "title": "РЖД убрали Рижский вокзал с сайта о планируемом к продаже имуществу",
    "date": "2026-10-09",
    "src": [
@@ -137,13 +81,13 @@
    ]
   },
   {
-   "draft_id": "d90012707",
-   "title": "Вулканическую бомбу выставили на продажу в России",
+   "draft_id": "d35195392",
+   "title": "РЖД удалили информацию о продаже Рижского вокзала в Москве",
    "date": "2026-10-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/vulkanicheskuyu-bombu-vystavili-na-prodazhu-v-rossii/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9023284"
     ]
    ],
    "sum": null,
@@ -161,17 +105,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: вокзал, москве) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d91470174",
-   "title": "Клуб Английской премьер-лиги выставили на продажу",
+   "draft_id": "d73337571",
+   "title": "Продажи спортивных товаров на Lamoda в первом полугодии 2026 г. выросли на 10%",
    "date": "2026-10-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/klub-angliyskoy-premier-ligi-vystavili-na-prodazhu/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28199531"
     ]
    ],
    "sum": null,
@@ -186,74 +131,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66574067",
-   "title": "Все 80 тыс. билетов на бой Фьюри и Джошуа распродали за один час",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/09/10/2026/6ac90c679a79473ecaca336e"
-    ]
-   ],
-   "sum": "$17 тыс",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-09",
-     "title": "Сделка завершена",
-     "note": "Поединок пройдет 11 декабря в Кардиффе. Стоимость самых дорогих билетов превышала $17 тыс., самые дешевые стоили $117",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/sport/09/10/2026/6ac90c679a79473ecaca336e"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87666251",
-   "title": "Аналитики назвали Anthropic самым нелепым IPO года",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2181633/video/analitiki-nazvali-anthropic-samym-nelepym-ipo-goda"
-    ]
-   ],
-   "sum": "$150 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "E-commerce",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
