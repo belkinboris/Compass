@@ -7,6 +7,7 @@
 
 Запуск: python3 -m pytest test_ingest.py -q
 """
+import argparse
 import json
 import re
 import sys
@@ -419,6 +420,25 @@ def test_acceptance_flags_a_bare_surname_in_the_title():
     assert "bare_surname" not in codes("«Бизнес-Эксперт» выиграла торги по агробизнесу Алексея Боброва и Артёма Бикова")
     assert "bare_surname" not in codes("«ВИМ сбережения» выкупили бизнес-центр у Белорусского вокзала")
     assert "bare_surname" not in codes("«Деметра-Холдинг» купил элеваторы в Ульяновской и Волгоградской областях")
+
+
+def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_path):
+    """9 октября 2026: отчёт публикации написал «5 карточек вы придержали», а
+    кнопка «Что придержано» — «Вы придержали: 0». Числа теперь считаются из
+    pending.json теми же условиями, что у кнопок, а не берутся с ключей."""
+    import ops_status
+    pend = tmp_path / "pending.json"
+    pend.write_text(json.dumps({"cards": [
+        {"id": "a", "held": True},
+        {"id": "b", "reviewed": "d", "accepted": "d"},
+        {"id": "c"},
+        {"id": "d", "hold_reason": "не сделка"},
+    ]}), encoding="utf-8")
+    assert ops_status.queue_counts(str(pend)) == (1, 1, 1)
+    args = argparse.Namespace(routine="публикация", broken="", posted=0, edited=0, applied=0,
+                              soon=0, held=5, unread=0, nothing=True, pending=str(pend))
+    text, kb = ops_status.build(args)
+    assert "1 карточку вы придержали" in text and "5 карточек" not in text, text
 
 
 def test_joint_venture_post_names_participants_not_a_buyer():
