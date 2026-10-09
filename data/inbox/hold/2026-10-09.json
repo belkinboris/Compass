@@ -42,13 +42,13 @@
    ]
   },
   {
-   "draft_id": "d92489515",
-   "title": "Куртку Майкла Джексона из клипа Thriller выставят на аукцион в Абу-Даби",
+   "draft_id": "d46146295",
+   "title": "В Москве выставят на аукцион прежде неизвестные иконы живописца Боровиковского",
    "date": "2026-10-09",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28196627"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/lifestyle/news/2026/10/09/1235548-neizvestnie-ikoni"
     ]
    ],
    "sum": null,
@@ -70,73 +70,158 @@
    ]
   },
   {
-   "draft_id": "d28011772",
-   "title": "Оригинальный автомобиль из культового фильма Тима Бертона выставили на аукцион",
+   "draft_id": "d94335523",
+   "title": "SpaceX выходит на рынок мобильной связи США после покупки частот",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/technology/news/2026/10/09/1235648-spacex-vihodit-mobilnoi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d84022368",
+   "title": "«Яндекс» обсудит участие в аукционе по наружной рекламе в Москве",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/09/10/2026/6ac7a498b5e08bfc01540ff6"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51185167",
+   "title": "Цифровая аптечка: как меняются привычки россиян при выборе и покупке лекарств",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-09_tsifrovaya_aptechka_kak_menyayutsya"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23093987",
+   "title": "«СберСтрахование жизни» запустит ИИ-аватара инвестиционного советника в рамках инвестиционных инструментов",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-09_sberstrahovanie_zhizni"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90895649",
+   "title": "На аукционе в Москве впервые выставят неизвестные иконы артели Боровиковского",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2180786/na-auktcione-v-moskve-vpervye-vystaviat-neizvestnye-ikony-arteli-borovikovskogo"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70255276",
+   "title": "Хатаев нокаутировал Макрори в первом раунде",
    "date": "2026-10-09",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/originalnyy-avtomobil-iz-kultovogo-filma-tima-bertona-vystavili-na-auktsion/"
+     "https://lenta.ru/news/2026/10/09/hataev-nokautiroval-makrori-v-pervom-raunde/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38225871",
-   "title": "В Перми готовую пиццерию продают дешевле, чем комнату в общежитии",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053134645"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39971904",
-   "title": "В Нижневартовске выставили на продажу сеть известных кафе",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053134479"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
