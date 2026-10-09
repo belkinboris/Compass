@@ -190,7 +190,7 @@ def send_intake_run(looked=0, found=0, cards=0, screened=0, client=None):
             client.close()
 
 
-def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False):
+def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0):
     """Публикация: что вышло в канал и что ещё ждёт.
 
     `soon` и `unread` — РАЗНЫЕ причины ждать, и путать их нельзя: `soon` —
@@ -215,7 +215,7 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
         if applied:
             done.append('применили %d %s' % (applied, _plural(applied, 'ваше решение', 'ваших решения', 'ваших решений')))
         lines.append('Готово: %s.' % ', '.join(done))
-    if soon or held or unread:
+    if soon or held or unread or doubted:
         lines.append('')
         if soon:
             # Согласуется и существительное, и ГЛАГОЛ: «1 карточка выйдет»,
@@ -231,6 +231,14 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
             lines.append('✋ %d %s вы придержали — %s вашего слова'
                          % (held, _plural(held, 'карточку', 'карточки', 'карточек'),
                             _plural(held, 'ждёт', 'ждут', 'ждут')))
+        if doubted:
+            # Владелец 9 октября 2026: «если карточки какие-то ждут решения, то
+            # пиши нам об этом, с количеством и кнопкой». Сомнительные — те, что
+            # проверку не прошли: без вашего слова не выйдут никогда.
+            lines.append('⚠️ %d %s %s вашего решения — проверку не прошли, без вас не выйдут'
+                         % (doubted, _plural(doubted, 'сомнительная карточка', 'сомнительные карточки',
+                                             'сомнительных карточек'),
+                            _plural(doubted, 'ждёт', 'ждут', 'ждут')))
     return '\n'.join(lines)
 
 
@@ -483,7 +491,7 @@ def render_broken(routine, why):
             % (routine, why))
 
 
-def queue_keyboard(soon=0, held=0, unread=0):
+def queue_keyboard(soon=0, held=0, unread=0, doubted=0):
     """Кнопки «показать, что там» — чтобы не идти искать руками."""
     row = []
     if soon:
@@ -492,7 +500,10 @@ def queue_keyboard(soon=0, held=0, unread=0):
         row.append({'text': '📖 Что ждёт прочтения или приёмки', 'callback_data': 'show:unread'})
     if held:
         row.append({'text': '✋ Что придержано', 'callback_data': 'show:held'})
-    return {'inline_keyboard': [row]} if row else None
+    rows = [row] if row else []
+    if doubted:
+        rows.append([{'text': '⚠️ Сомнительные — ждут решения', 'callback_data': 'show:raw'}])
+    return {'inline_keyboard': rows} if rows else None
 
 
 def post_status(client, token, chat, text, keyboard=None):
@@ -550,6 +561,30 @@ def queue_counts(path=PENDING):
     return len(soon), len(held), len(unread)
 
 
+def doubted_count(path=PENDING, inbox=None):
+    """Сомнительные — так же, как кнопка «Сомнительные» (`main._queue_reply`,
+    kind=raw): карточки с вердиктом приёмки «не пропущена» (`hold_reason`, не
+    придержанные) плюс нерешённое сырьё последнего файла `data/inbox/hold`.
+    Сырья в контейнере может не быть — тогда считаются только карточки."""
+    try:
+        cards = json.load(open(path, encoding='utf-8')).get('cards') or []
+    except (OSError, ValueError):
+        cards = []
+    n = sum(1 for c in cards if c.get('hold_reason') and not c.get('held'))
+    inbox = inbox or os.path.join(ROOT, 'data', 'inbox')
+    hold_dir = os.path.join(inbox, 'hold')
+    try:
+        names = sorted(x for x in os.listdir(hold_dir) if x.endswith('.json'))
+        state = json.load(open(os.path.join(inbox, 'moderation_state.json'), encoding='utf-8')) \
+            if os.path.exists(os.path.join(inbox, 'moderation_state.json')) else {}
+        decided = set(state.get('decided_raw') or {})
+        drafts = json.load(open(os.path.join(hold_dir, names[-1]), encoding='utf-8')).get('drafts') or [] if names else []
+        n += sum(1 for d in drafts if str(d.get('draft_id')) not in decided)
+    except (OSError, ValueError):
+        pass
+    return n
+
+
 def build(args):
     """(текст, клавиатура) по разобранным аргументам."""
     if args.broken:
@@ -557,12 +592,14 @@ def build(args):
     if args.routine == 'приток':
         return render_intake(args.looked, args.found, args.cards, args.screened), None
     if args.routine == 'публикация':
-        counts = queue_counts(getattr(args, 'pending', None) or PENDING)
+        path = getattr(args, 'pending', None) or PENDING
+        counts = queue_counts(path)
         if counts is not None:
             args.soon, args.held, args.unread = counts
+        doubted = doubted_count(path, getattr(args, 'inbox', None))
         text = render_publish(args.posted, args.edited, args.applied,
-                              args.soon, args.held, args.unread, args.nothing)
-        return text, queue_keyboard(args.soon, args.held, args.unread)
+                              args.soon, args.held, args.unread, args.nothing, doubted)
+        return text, queue_keyboard(args.soon, args.held, args.unread, doubted)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
     if args.routine == 'вычитка':
         return render_proofread(args.proofread, args.refused, args.left, ids), None

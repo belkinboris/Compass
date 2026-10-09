@@ -437,8 +437,12 @@ def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_p
     assert ops_status.queue_counts(str(pend)) == (1, 1, 1)
     args = argparse.Namespace(routine="публикация", broken="", posted=0, edited=0, applied=0,
                               soon=0, held=5, unread=0, nothing=True, pending=str(pend))
+    args.inbox = str(tmp_path / "no-inbox")
     text, kb = ops_status.build(args)
     assert "1 карточку вы придержали" in text and "5 карточек" not in text, text
+    # Сомнительные (проверку не прошли) — строкой с числом и кнопкой (9 октября 2026).
+    assert "⚠️ 1 сомнительная карточка ждёт вашего решения" in text, text
+    assert kb["inline_keyboard"][-1][0]["callback_data"] == "show:raw"
 
 
 def test_joint_venture_post_names_participants_not_a_buyer():
