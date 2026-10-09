@@ -7625,3 +7625,40 @@ def test_silence_clock_runs_without_pending_since():
     cards = [{"id": "n1", "draft_sent": True, "reviewed": old_day, "accepted": old_day}]
     publish, _hold, _wait, _discard = approve.plan_actions(cards, [], now)
     assert [c["id"] for c, _o, _w in publish] == ["n1"]
+
+
+def test_approve_keeps_a_preset_added_date(tmp_path, monkeypatch):
+    """Старая новость, выпущенная с опозданием, встаёт в ленту по своей дате.
+
+    Лента сайта сортирует по `added`; approve.py ставил его сегодняшним днём,
+    и три сентябрьские карточки (Мадрид, Nestlé, «Ашан») встали бы наверх.
+    Владелец 9 октября 2026: «вставь нормально по дате»."""
+    import approve
+    from datetime import datetime, timedelta, timezone
+    stale = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat(timespec="seconds")
+    card = {"id": "gold1", "title": "старая", "date": "2026-09-16", "added": "2026-09-16",
+            "draft_sent": True, "pending_since": stale, "reviewed": "2026-09-18",
+            "accepted": "2026-09-18", "no_post": True}
+    fresh_card = dict(card, id="gnew1", title="свежая")
+    fresh_card.pop("added")
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": [card, fresh_card]}, ensure_ascii=False),
+                       encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps({"deals": [], "companies": {}}, ensure_ascii=False),
+                    encoding="utf-8")
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}}), encoding="utf-8")
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(tmp_path / "consume.json"))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], None))
+    import promote
+    monkeypatch.setattr(promote, "STATE", str(state))
+    monkeypatch.setattr(promote, "notify", lambda *a, **k: None)
+    approve.main(write=True)
+    added = {d["id"]: d["added"] for d in json.loads(data.read_text(encoding="utf-8"))["deals"]}
+    assert added["gold1"] == "2026-09-16"
+    assert added["gnew1"] == datetime.now(timezone.utc).date().isoformat()
