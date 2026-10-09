@@ -409,6 +409,18 @@ def test_second_reading_gates_cards_accepted_since_october_9():
     assert "[eco.rationale]" in text and "[verbatim]" in text and "Пост" in text
 
 
+def test_acceptance_flags_a_bare_surname_in_the_title():
+    """Владелец, 9 октября 2026: «агробизнес Боброва и Бикова» без имён читается
+    газетно — человек в заголовке называется по имени и фамилии."""
+    import accept_card
+    codes = lambda t: [c for c, _ in accept_card.findings(
+        {"id": "gs1", "title": t, "src": [["x", "http://x"]]}, {"companies": {}})]
+    assert "bare_surname" in codes("«Бизнес-Эксперт» выиграла торги по агробизнесу Боброва и Бикова")
+    assert "bare_surname" not in codes("«Бизнес-Эксперт» выиграла торги по агробизнесу Алексея Боброва и Артёма Бикова")
+    assert "bare_surname" not in codes("«ВИМ сбережения» выкупили бизнес-центр у Белорусского вокзала")
+    assert "bare_surname" not in codes("«Деметра-Холдинг» купил элеваторы в Ульяновской и Волгоградской областях")
+
+
 def test_joint_venture_post_names_participants_not_a_buyer():
     """У СП нет покупателя и предмета-компании: обе стороны — участники,
     предмет — само партнёрство (Яндекс/VK, 8 октября 2026: пост назвал

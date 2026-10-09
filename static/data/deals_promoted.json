@@ -47101,7 +47101,7 @@
   {
    "id": "g5eb6ff22",
    "date": "2026-10-07",
-   "title": "«Росатом» завершил выкуп у Шишкарева 51% в группе компаний «Дело»",
+   "title": "«Росатом» завершил выкуп у Сергея Шишкарева 51% в группе компаний «Дело»",
    "buyer": "rosatom",
    "target": "delo",
    "ind": "Транспорт и логистика",
@@ -47256,7 +47256,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "71050ffa354f"
+     "card_hash": "bc46c0dd560a"
     },
     "price": {
      "value_rub": 77000000000.0,
@@ -47279,7 +47279,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1267c34d8254"
+     "card_hash": "d90955063074"
     },
     "target": {
      "company_id": "delo",
@@ -125546,7 +125546,7 @@
   {
    "id": "g7e0c2ffb",
    "date": "2024-10-17",
-   "title": "Сбер приобрел Нетологию и Фоксфорд у Мордашова",
+   "title": "Сбер приобрел Нетологию и Фоксфорд у Алексея Мордашова",
    "buyer": "g28ff15bb",
    "target": "ga09e7dfc",
    "ind": "ИТ и интернет",
@@ -125620,7 +125620,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "12b20f054389"
+     "card_hash": "6fe6e2e7069e"
     },
     "price": {
      "value_rub": null,
@@ -125643,7 +125643,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9bfac01b307b"
+     "card_hash": "590dcae7eee5"
     },
     "target": {
      "company_id": "ga09e7dfc",
@@ -172521,7 +172521,7 @@
   {
    "id": "gdffd613c",
    "date": "2022",
-   "title": "Братья Бабаевы и топ-менеджеры приобрели контрольный пакет АО «Вектор Рейл» (владельца «СГ-Транса») у Тайчера и Смыслова",
+   "title": "Братья Бабаевы и топ-менеджеры приобрели контрольный пакет АО «Вектор Рейл» (владельца «СГ-Транса») у Алексея Тайчера и Сергея Смыслова",
    "buyer": "g65a92369",
    "target": "g554a8f0f",
    "ind": "Транспорт и логистика",
@@ -172603,7 +172603,7 @@
     "stake": {
      "value": 63.0,
      "basis": "rule",
-     "card_hash": "aa310bd398dc"
+     "card_hash": "aeae598c7396"
     },
     "price": {
      "value_rub": null,
@@ -172626,7 +172626,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1c0a50b05e8d"
+     "card_hash": "953dbd3e1532"
     },
     "target": {
      "company_id": "g554a8f0f",
@@ -197274,7 +197274,7 @@
   {
    "id": "cd51336b7",
    "date": "2022",
-   "title": "Смена бенефициарного владельца УГМК: вместо Махмудова и Бокарева в отчёте указан Данияр Камилов",
+   "title": "Смена бенефициарного владельца УГМК: вместо Искандара Махмудова и Андрея Бокарева в отчёте указан Данияр Камилов",
    "ind": "ГМК и добыча",
    "type": "M&A",
    "src": [
@@ -197313,7 +197313,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "bf57d07678cf"
+     "card_hash": "fe0bdbc4bdf5"
     },
     "price": {
      "value_rub": null,
@@ -197336,7 +197336,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "36caca8ad01c"
+     "card_hash": "833901310bd5"
     },
     "target": {
      "company_id": null,
