@@ -50,9 +50,45 @@
    "news": "https://www.tadviser.ru/a/556298",
    "title": "«Росатом» выкупил 51% логистической группы «Дело» за 77 млрд рублей и стал ее единственным владельцем",
    "verdict": "enrich:g5eb6ff22",
-   "why": "совпали название в кавычках и сумма",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «Группа компаний «Дело»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Struktury-seti-fitnes-klubov-DDX-priobreli-zdanie-v-centre-Moskvy-87633",
+   "title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
+   "verdict": "enrich:g6d711306",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://vademec.ru/news/2026/10/09/aktsii-natsionalizirovannogo-v-2023-godu-uralbiofarma-byli-vystavleny-na-torgi-za-1-mlrd-rubley/",
+   "title": "Акции национализированного в 2023 году «Уралбиофарма» выставлены на торги за 1 млрд рублей",
+   "verdict": "enrich:g53389708",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «977,1 млн ₽»"
+   ]
+  },
+  {
+   "news": "https://iz.ru/2181576/2026-10-09/natcionalizirovannyi-uralbiofarm-vystavili-na-torgi",
+   "title": "Национализированный «Уралбиофарм» выставили на торги",
+   "verdict": "enrich:g53389708",
+   "why": "общее название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке «977,1 млн ₽»"
+   ]
+  },
+  {
+   "news": "https://1prime.ru/20261009/rosnedra-874121041.html",
+   "title": "Роснедра вновь выставили на торги оловорудное месторождение на Чукотке",
+   "verdict": "enrich:g35c2f65e",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
    ]
   }
  ]
