@@ -42,97 +42,13 @@
    ]
   },
   {
-   "draft_id": "d19470708",
-   "title": "Россию завалило крайне опасными смартфонами со встроенными вирусами. Они официально продаются в Ozon, Wildberries и «Яндекс Маркете»",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-09_rossiyu_zavalilo_krajne_opasnymi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74928118",
-   "title": "Минцифры: рост тарифов на связь надо обосновывать инвестициями в развитие",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28198889"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46657838",
-   "title": "Equinor передала Shell долю в 30% на нефтяном проекте в Канаде",
+   "draft_id": "d71674731",
+   "title": "Власти Коми выставили на торги 100% акций авиакомпании «Комиавиатранс»",
    "date": "2026-10-09",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261009/equinor-874116574.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41941547",
-   "title": "Роснедра вновь выставили на аукцион месторождение Тенкергин на Чукотке",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261009/rosnedra-874114704.html"
+     "https://1prime.ru/20261009/vlasti-874128098.html"
     ]
    ],
    "sum": null,
@@ -147,50 +63,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ГМК и добыча",
+   "ind": "Транспорт и логистика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d44045231",
-   "title": "В России захотели продать национализированный завод за миллиард рублей",
+   "draft_id": "d36270299",
+   "title": "РЖД передумали продавать Рижский вокзал после четырех неудачных попыток",
    "date": "2026-10-09",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/kupite/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d49222988",
-   "title": "В России признали сложности с покупкой электромобиля «Атом»",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/atom/"
+     "https://lenta.ru/news/2026/10/09/rzhd-peredumali-prodavat-rizhskiy-vokzal-posle-chetyreh-neudachnyh-popytok/"
     ]
    ],
    "sum": null,
