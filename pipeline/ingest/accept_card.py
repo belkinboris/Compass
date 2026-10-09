@@ -135,6 +135,13 @@ TRAILING_CUTOFF_RE = re.compile(r'(?:…|\.\.\.)\s*$')
 # дословно («в I квартале 2027 г.. то есть», Яндекс/VK, 8 октября 2026);
 # многоточие (три точки) — не она.
 DOUBLE_PERIOD_RE = re.compile(r'[^.\s]\.\.(?!\.)')
+# Голая фамилия человека в заголовке («у Боброва и Бикова») — газетный тон;
+# владелец 9 октября 2026: человек называется по имени и фамилии. Ловим
+# предлог/союз + слово с окончанием фамилии в косвенном падеже без имени перед ним.
+BARE_SURNAME_RE = re.compile(
+    r'(?:^|[\s(])(?:у|от|для|по|с|со|и|вместо|к|о|об)\s+'
+    r'(?![А-ЯЁ][а-яё]+\s+[А-ЯЁ])([А-ЯЁ][а-яё]+(?:ова|ева|ёва|ина|ына))(?=[\s,.»)]|$)')
+FIRST_NAME_ENDINGS = re.compile(r'(?:ея|ия|ья|ра|ла|ана|ина|ая|ма|ка|ла|ёма|ема)$')
 # «Такой симбиоз в итоге приведёт…» (Яндекс/VK, 8 октября 2026): фраза
 # опирается на предыдущий абзац источника, которого у читателя нет.
 WHY_DANGLING_RE = re.compile(r'^(так(ой|ая|ое|ие)|эт(о|от|а|и)|он[аи]?|подобн[а-яё]+)\b', re.I)
@@ -576,6 +583,12 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))
         if has(text) and not linked and role not in waived:
             out.append(('party_unlinked:' + role, '%s «%s» — текстом, без профиля' % (role, text)))
+    for m in BARE_SURNAME_RE.finditer(str(card.get('title') or '')):
+        before = str(card.get('title'))[:m.start(1)].split()
+        prev = before[-1] if before else ''
+        if not (prev[:1].isupper() and FIRST_NAME_ENDINGS.search(prev)):
+            out.append(('bare_surname', 'в заголовке фамилия без имени: «%s» — назовите человека по '
+                        'имени и фамилии (имя — из источника)' % m.group(1)))
     for f in ('title', 'asset', 'buyer_name', 'seller'):
         if '"' in str(card.get(f) or ''):
             out.append(('straight_quotes:' + f, 'прямые кавычки в %s' % f))
