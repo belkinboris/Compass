@@ -42,7 +42,7 @@
    ]
   },
   {
-   "draft_id": "d49001179",
+   "draft_id": "d11158330",
    "title": "В России предложили ввести пожизненный запрет на покупку вейпов рожденным с 2009 года",
    "date": "2026-10-09",
    "src": [
@@ -70,36 +70,7 @@
    ]
   },
   {
-   "draft_id": "d61025053",
-   "title": "Ученые сообщили о скрытой рентгеновской фазе слияния компактных звезд",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2181355/uchenye-soobshchili-o-skrytoi-rentgenovskoi-faze-sliianiia-kompaktnykh-zvezd-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d65905547",
+   "draft_id": "d50250723",
    "title": "Volga продала уже более 2,2 тыс. автомобилей: самая популярная модель — кроссовер K50",
    "date": "2026-10-09",
    "src": [
@@ -138,36 +109,7 @@
    ]
   },
   {
-   "draft_id": "d25995552",
-   "title": "Что будет со ставкой, рублём и инвестициями в 2027 году?",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1360838.php"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d35322700",
+   "draft_id": "d14485356",
    "title": "Банки увеличили продажи ОФЗ Почему «тела» ОФЗ падают",
    "date": "2026-10-09",
    "src": [
@@ -195,36 +137,7 @@
    ]
   },
   {
-   "draft_id": "d87281003",
-   "title": "Дымят и не греют: три ошибки при покупке дров",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053134794"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d11299978",
+   "draft_id": "d27314040",
    "title": "В Заводоуковске продают гостиницу с рестораном и баром",
    "date": "2026-10-09",
    "src": [
@@ -246,6 +159,178 @@
     "seller": null
    },
    "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78965357",
+   "title": "Carlyle подтвердила выход из процесса покупки зарубежных активов «Лукойла»",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/09/1235787-carlyle-podtverdila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37669031",
+   "title": "Бывший вратарь «Челси» Чех уверен, что Абрамовича заставили продать клуб",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28198277"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39569981",
+   "title": "Carlyle подтвердила выход из процесса покупки зарубежных активов «Лукойла»",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261009/carlyle-874108946.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Carlyle подтвердила выход из процесса покупки зарубежных акт» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d71632119",
+   "title": "ОК: 8 из 10 россиян старше 35 лет смотрят видео о товаре перед покупкой",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261009/ok-2123462628.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35888220",
+   "title": "Американский фонд подтвердил прекращение попыток купить зарубежные активы «Лукойла»",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/09/amerikanskiy-fond-podtverdil-prekraschenie-popytok-kupit-zarubezhnye-aktivy-lukoyla/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Carlyle подтвердила выход из процесса покупки зарубежных акт» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d71515695",
+   "title": "В Екатеринбурге риелторы продают вторичное жилье быстрее частных продавцов",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053134703"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
