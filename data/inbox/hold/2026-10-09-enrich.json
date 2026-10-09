@@ -68,7 +68,7 @@
    "news": "https://vademec.ru/news/2026/10/09/aktsii-natsionalizirovannogo-v-2023-godu-uralbiofarma-byli-vystavleny-na-torgi-za-1-mlrd-rubley/",
    "title": "Акции национализированного в 2023 году «Уралбиофарма» выставлены на торги за 1 млрд рублей",
    "verdict": "enrich:g53389708",
-   "why": "совпали название в кавычках и сумма",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «977,1 млн ₽»"
    ]
@@ -77,7 +77,7 @@
    "news": "https://iz.ru/2181576/2026-10-09/natcionalizirovannyi-uralbiofarm-vystavili-na-torgi",
    "title": "Национализированный «Уралбиофарм» выставили на торги",
    "verdict": "enrich:g53389708",
-   "why": "общее название в кавычках и общие слова: 3",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «977,1 млн ₽»"
    ]

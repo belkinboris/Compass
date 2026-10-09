@@ -42,13 +42,69 @@
    ]
   },
   {
-   "draft_id": "d41225831",
-   "title": "Reuters узнал, что Carlyle прекратила попытки приобрести активы ЛУКОЙЛа",
+   "draft_id": "d59198729",
+   "title": "ФАС возбудила дело против «Ростагрокомплекса» из-за его требования прекратить продавать сырки, похожие названием на «Б.Ю. Александров», — у компании нет прав на бренд",
    "date": "2026-10-09",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/09/10/2026/6ac8d8142d4e619b595e9e5b"
+     "web:vc.ru",
+     "https://vc.ru/food/3185552-fas-vozbudila-delo-protiv-rostagrokompleksa?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32051677",
+   "title": "Минпромторг обновил данные о продажах авто в России",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2181566/2026-10-09/minpromtorg-obnovil-dannye-o-prodazhakh-avto-v-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65916952",
+   "title": "РЖД убрали Рижский вокзал с сайта о планируемом к продаже имуществу",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261009/rzhd-874123042.html"
     ]
    ],
    "sum": null,
@@ -59,10 +115,10 @@
      "kind": "negotiations",
      "date": "2026-10-09",
      "title": "Переговоры",
-     "note": "Carlyle отказалась от планов приобрести зарубежный бизнес ЛУКОЙЛа, сообщил представитель фонда. Соглашение о продаже было заключено в январе, но сделка утратила силу, поскольку не получила одобрения США",
+     "note": "",
      "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/09/10/2026/6ac8d8142d4e619b595e9e5b"
+      "web:1prime.ru",
+      "https://1prime.ru/20261009/rzhd-874123042.html"
      ]
     }
    ],
@@ -74,41 +130,134 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d38011218",
-   "title": "Фонд НТИ получил 3% в космической «дочке» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновременно c 75,04% до 72,04% сократилась доля ООО «ГК «Спутникс», которое принадл",
+   "draft_id": "d90012707",
+   "title": "Вулканическую бомбу выставили на продажу в России",
    "date": "2026-10-09",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7781"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/09/vulkanicheskuyu-bombu-vystavili-na-prodazhu-v-rossii/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "НТИ",
-   "asset": "космическая «дочка» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновр",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "НТИ",
-    "asset": "космическая «дочка» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновр",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
-    "похоже на уже описанную сделку g2918b022 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91470174",
+   "title": "Клуб Английской премьер-лиги выставили на продажу",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/09/klub-angliyskoy-premier-ligi-vystavili-na-prodazhu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66574067",
+   "title": "Все 80 тыс. билетов на бой Фьюри и Джошуа распродали за один час",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/09/10/2026/6ac90c679a79473ecaca336e"
+    ]
+   ],
+   "sum": "$17 тыс",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-09",
+     "title": "Сделка завершена",
+     "note": "Поединок пройдет 11 декабря в Кардиффе. Стоимость самых дорогих билетов превышала $17 тыс., самые дешевые стоили $117",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/sport/09/10/2026/6ac90c679a79473ecaca336e"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87666251",
+   "title": "Аналитики назвали Anthropic самым нелепым IPO года",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2181633/video/analitiki-nazvali-anthropic-samym-nelepym-ipo-goda"
+    ]
+   ],
+   "sum": "$150 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
