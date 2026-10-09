@@ -118,8 +118,14 @@ def consume_pending():
 
 
 def hours_pending(card, now):
+    # Без `pending_since` часы раньше стояли на нуле НАВСЕГДА: три карточки,
+    # заведённые 18 сентября разовым скриптом мимо promote.py (Мадрид, Nestlé,
+    # «Ашан»), три недели висели в «выйдут сами в ближайшие сутки» с «0 ч из
+    # 24». Теперь отсчёт идёт от приёмки (или чтения) — раньше карточка в
+    # консоль не уходит; а test_data держит, что отметка есть у каждой.
+    stamp = card.get('pending_since') or card.get('accepted') or card.get('reviewed')
     try:
-        since = datetime.fromisoformat(str(card.get('pending_since')))
+        since = datetime.fromisoformat(str(stamp))
     except ValueError:
         return 0.0
     if since.tzinfo is None:
