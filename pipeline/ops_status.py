@@ -529,6 +529,27 @@ def post_status(client, token, chat, text, keyboard=None):
     return False, data.get('description') or str(data)
 
 
+PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
+
+
+def queue_counts(path=PENDING):
+    """(soon, held, unread) из pending.json — те же три группы и те же условия,
+    что у кнопок «Что скоро выйдет / Что придержано / Что ждёт прочтения»
+    (`main._queue_reply`). До 9 октября 2026 числа считала рутина и
+    передавала ключами, и отчёт сказал «5 карточек вы придержали», а кнопка
+    ответила «Вы придержали: 0» — в pending.json ни одной `held` не было.
+    Файл не прочитался — None, и тогда берутся числа из ключей."""
+    try:
+        cards = json.load(open(path, encoding='utf-8')).get('cards') or []
+    except (OSError, ValueError):
+        return None
+    held = [c for c in cards if c.get('held')]
+    rest = [c for c in cards if not c.get('held')]
+    soon = [c for c in rest if c.get('reviewed') and c.get('accepted')]
+    unread = [c for c in rest if not (c.get('reviewed') and c.get('accepted')) and not c.get('hold_reason')]
+    return len(soon), len(held), len(unread)
+
+
 def build(args):
     """(текст, клавиатура) по разобранным аргументам."""
     if args.broken:
@@ -536,6 +557,9 @@ def build(args):
     if args.routine == 'приток':
         return render_intake(args.looked, args.found, args.cards, args.screened), None
     if args.routine == 'публикация':
+        counts = queue_counts(getattr(args, 'pending', None) or PENDING)
+        if counts is not None:
+            args.soon, args.held, args.unread = counts
         text = render_publish(args.posted, args.edited, args.applied,
                               args.soon, args.held, args.unread, args.nothing)
         return text, queue_keyboard(args.soon, args.held, args.unread)
@@ -564,6 +588,9 @@ def main(argv):
     p.add_argument('--held', type=int, default=0)
     p.add_argument('--unread', type=int, default=0,
                    help='ждут прочтения против источника — не выйдут по молчанию')
+    p.add_argument('--pending', default='',
+                   help='публикация: путь к pending.json (по умолчанию static/data/pending.json); '
+                        'числа --soon/--held/--unread считаются из него, ключи — запасной вариант')
     p.add_argument('--nothing', action='store_true')
     p.add_argument('--did', default='')
     p.add_argument('--left', type=int, default=0)
