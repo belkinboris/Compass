@@ -227983,6 +227983,288 @@
     ]
    },
    "sum": "204,9 млн ₽"
+  },
+  {
+   "id": "g8e027018",
+   "date": "2022-02-21",
+   "title": "«Биннофарм Групп» покупает у Dr. Reddy's права на антибиотики Ципролет и Леволет",
+   "ind": "Фармацевтика",
+   "type": "M&A",
+   "status": "Подписана",
+   "sum": "Не раскрыта",
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Права на два антибактериальных бренда — Ципролет и Леволет — для России, Беларуси и Узбекистана.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Покупка укрепляет позиции «Биннофарм Групп» на рынке антибиотиков — одном из ключевых для холдинга, — и даёт выход с Ципролетом в Беларусь и Узбекистан.",
+    "context": "Портфель включает таблетки, растворы для инфузий и глазные капли. Производство после сделки планируют перенести на площадки «Биннофарм Групп»; на переходный период препараты продолжит выпускать Dr. Reddy's.",
+    "finadv": "Novus Capital — финансовый консультант продавца (Dr. Reddy's)"
+   },
+   "law": {
+    "struct": "Права на бренды покупает дочерняя компания холдинга — АО «Алиум». Стороны подписали соглашение 21 февраля 2022 года.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2022/02/21/910278-binnofarm-grupp-vikupaet-prava-na-antibakterialnie-preparati-u-indiiskoi-drreddys"
+    ],
+    [
+     "ФармМедПром",
+     "https://pharmmedprom.ru/news/binnofarm-grupp-priobrela-u-dr-reddys-prava-na-dva-antibiotika/"
+    ],
+    [
+     "Novus Capital",
+     "https://novuscapital.ru/"
+    ]
+   ],
+   "added": "2026-10-09",
+   "from_ingest": true,
+   "duplicate_reviewed": true,
+   "buyer": "gcbee0642",
+   "seller_id": "gf80101aa",
+   "asset": "права на препараты Ципролет и Леволет в России, Беларуси и Узбекистане",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "90a8a20f3506"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "f98fc919393c"
+    },
+    "date": {
+     "value": "2022-02-21",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "abf7b75ee794"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "4d747268e2a7"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "ge9d4edaa",
+   "date": "2022-07-08",
+   "title": "ГК «Мелком» купила льноперерабатывающий комплекс «Русский лён» в Смоленской области",
+   "ind": "Агро",
+   "type": "M&A",
+   "status": "Закрыта",
+   "sum": "Не раскрыта",
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Смоленский льноперерабатывающий комплекс «Русский лён» целиком.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Покупатель рассчитывает на развитие льняной отрасли в России и на синергию: выращивание и переработку льна в Смоленской области теперь объединяет одна группа.",
+    "context": "В комплекс входят цех первичной переработки льноволокна, цех котонизации волокна и около 8 тыс. га сельскохозяйственной земли. «Мелком» входит в инвестиционную группу «Русские фонды».",
+    "finadv": "Novus Capital — финансовый консультант продавца"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "src": [
+    [
+     "Агроинвестор",
+     "https://www.agroinvestor.ru/investments/news/38451-gk-melkom-kupila-kompleks-russkiy-len/"
+    ],
+    [
+     "Novus Capital",
+     "https://novuscapital.ru/"
+    ]
+   ],
+   "added": "2026-10-09",
+   "from_ingest": true,
+   "duplicate_reviewed": true,
+   "buyer": "gd1edad89",
+   "target": "g7b4970e8",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "0dbecad83d76"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-08",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f9a898fd9291"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3baf3cfa9e2d"
+    },
+    "target": {
+     "company_id": "g7b4970e8",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "7ade86edcadd"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "gcb1ce023",
+   "date": "2024",
+   "title": "Акционер продал производителя чая «Универсальные пищевые технологии» частному инвестору",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "sum": "Не раскрыта",
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Бизнес производителя чая «Универсальные пищевые технологии».",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Компания — один из крупных контрактных производителей чая в России. Имя покупателя и условия сделки не раскрывались; о сделке известно из списка проектов её консультанта.",
+    "finadv": "Novus Capital — финансовый консультант продавца"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "src": [
+    [
+     "Novus Capital",
+     "https://novuscapital.ru/"
+    ]
+   ],
+   "added": "2026-10-09",
+   "from_ingest": true,
+   "duplicate_reviewed": true,
+   "target": "g10dbc5e4",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "0eafd267710b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2024",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d49368a4a2e0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d31bbcd9b5fc"
+    },
+    "target": {
+     "company_id": "g10dbc5e4",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "197b4a6feaf3"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
   }
  ],
  "companies": {
@@ -251342,6 +251624,42 @@
    "ind": "Фармацевтика",
    "desc": "Екатеринбургский производитель лекарственных препаратов и биологически активных добавок, основан в 1993 году. Юрлицо — АО «Уралбиофарм».",
    "kpi": []
+  },
+  "gcbee0642": {
+   "name": "Биннофарм Групп",
+   "ind": "Фармацевтика",
+   "desc": "Фармацевтический холдинг АФК «Система»: пять производственных площадок в четырёх регионах России.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gd1edad89": {
+   "name": "ГК «Мелком»",
+   "ind": "Пищепром и напитки",
+   "desc": "Агропромышленная группа из инвестиционной группы «Русские фонды»: макароны «Мелькомбинат» и «Гальяни», корма для рыбы, аквакультура.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7b4970e8": {
+   "name": "«Русский лён»",
+   "ind": "Агро",
+   "desc": "Льноперерабатывающий комплекс в Смоленской области: переработка льноволокна, котонизация, собственные посевные земли.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g10dbc5e4": {
+   "name": "«Универсальные пищевые технологии»",
+   "ind": "Пищепром и напитки",
+   "desc": "Производитель чая из Серпухова: марки «Золотая чаша» и KIOKO, контрактное производство чая для других брендов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
   }
  },
  "match_keys": {
@@ -257828,6 +258146,19 @@
   "g9da3df10": [
    "фск",
    "группа фск"
+  ],
+  "gcbee0642": [
+   "биннофарм"
+  ],
+  "gd1edad89": [
+   "мелком"
+  ],
+  "g7b4970e8": [
+   "русский лён",
+   "русский лен"
+  ],
+  "g10dbc5e4": [
+   "универсальные пищевые технологии"
   ]
  },
  "merged": {
@@ -259717,7 +260048,10 @@
   "g85e07f6d": null,
   "g5850b57f": 190,
   "g9fed3cb1": null,
-  "g69fe736c": null
+  "g69fe736c": null,
+  "g8e027018": null,
+  "ge9d4edaa": null,
+  "gcb1ce023": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
