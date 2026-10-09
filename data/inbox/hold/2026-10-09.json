@@ -42,75 +42,30 @@
    ]
   },
   {
-   "draft_id": "d19470708",
-   "title": "Россию завалило крайне опасными смартфонами со встроенными вирусами. Они официально продаются в Ozon, Wildberries и «Яндекс Маркете»",
+   "draft_id": "d41225831",
+   "title": "Reuters узнал, что Carlyle прекратила попытки приобрести активы ЛУКОЙЛа",
    "date": "2026-10-09",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-09_rossiyu_zavalilo_krajne_opasnymi"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/09/10/2026/6ac8d8142d4e619b595e9e5b"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d74928118",
-   "title": "Минцифры: рост тарифов на связь надо обосновывать инвестициями в развитие",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28198889"
-    ]
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-09",
+     "title": "Переговоры",
+     "note": "Carlyle отказалась от планов приобрести зарубежный бизнес ЛУКОЙЛа, сообщил представитель фонда. Соглашение о продаже было заключено в январе, но сделка утратила силу, поскольку не получила одобрения США",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/09/10/2026/6ac8d8142d4e619b595e9e5b"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46657838",
-   "title": "Equinor передала Shell долю в 30% на нефтяном проекте в Канаде",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261009/equinor-874116574.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -122,93 +77,38 @@
    "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41941547",
-   "title": "Роснедра вновь выставили на аукцион месторождение Тенкергин на Чукотке",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261009/rosnedra-874114704.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d44045231",
-   "title": "В России захотели продать национализированный завод за миллиард рублей",
+   "draft_id": "d38011218",
+   "title": "Фонд НТИ получил 3% в космической «дочке» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновременно c 75,04% до 72,04% сократилась доля ООО «ГК «Спутникс», которое принадл",
    "date": "2026-10-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/kupite/"
+     "tg:rusven",
+     "https://t.me/rusven/7781"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "НТИ",
+   "asset": "космическая «дочка» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновр",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "НТИ",
+    "asset": "космическая «дочка» АФК «Система» - ООО «Спутникс». Изменения в ЕГРЮЛ были внесены 7 октября. Одновр",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d49222988",
-   "title": "В России признали сложности с покупкой электромобиля «Атом»",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/atom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
+    "похоже на уже описанную сделку g2918b022 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   }
  ]
