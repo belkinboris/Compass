@@ -42,19 +42,86 @@
    ]
   },
   {
-   "draft_id": "d90706467",
-   "title": "Российский боксер нокаутировал в первом раунде ирландца в чемпионском бою",
+   "draft_id": "d19712740",
+   "title": "8 из 10 россиян старше 35 лет смотрят видео о товарах и услугах перед покупкой",
    "date": "2026-10-09",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/09/10/2026/6ac89b4c9a79477cae9b3243"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-09_8_iz_10_rossiyan_starshe_35_let"
     ]
    ],
    "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59080728",
+   "title": "МТС открыла продажи iPhone 18 в розничной сети",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-09_mts_otkryla_prodazhi_iphone_18"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28545023",
+   "title": "Selectel планирует увеличить инвестиции в экосистему продуктов для ИИ-проектов до 25 млрд руб. до 2031 года",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-09_selectel_planiruet_uvelichit"
+    ]
+   ],
+   "sum": "25 млрд ₽",
    "type": "Инвестиция",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-09",
+     "title": "Переговоры",
+     "note": "Олег Любимов, генеральный директор Selectel, рассказал об обновлении планов компании по наращиванию инвестиций в...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-10-09_selectel_planiruet_uvelichit"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -63,80 +130,102 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d67717087",
-   "title": "В Сибири экс-главу района осудили за хищение при покупке жилья детям-сиротам",
+   "draft_id": "d91679262",
+   "title": "SpaceX купила частоты в диапазоне 800 МГц для запуска мобильной связи в США",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/services/3184676-spacex-priobrela-chastoty-800-mgts-dlya-mobilnoy-svyazi-v-ssha?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-09",
+     "title": "Сделка завершена",
+     "note": "Глава компании Илон Маск назвал сделку «последней критически важной частью головоломки».",
+     "source": [
+      "web:vc.ru",
+      "https://vc.ru/services/3184676-spacex-priobrela-chastoty-800-mgts-dlya-mobilnoy-svyazi-v-ssha?from=rss"
+     ]
+    }
+   ],
+   "buyer_name": "SpaceX",
+   "asset": "частоты в диапазоне 800 МГц для запуска мобильной связи в США",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "SpaceX",
+    "asset": "частоты в диапазоне 800 МГц для запуска мобильной связи в США",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d55600569",
+   "title": "Porsche продала на 16% меньше автомобилей, чем в 2025 году",
    "date": "2026-10-09",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/proisshestviya/28197363"
+     "https://tass.ru/ekonomika/28197767"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-09",
+     "title": "Сделка завершена",
+     "note": "За первые девять месяцев 2026 года было продано по всему миру 178 532 машины",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28197767"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "на 16% меньше автомобилей, чем в 2025 году",
+   "seller": "Porsche",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "на 16% меньше автомобилей, чем в 2025 году",
+    "seller": "Porsche"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d26965089",
-   "title": "Футбольный клуб «Эвертон» выставили на продажу",
+   "draft_id": "d50050318",
+   "title": "Две иконы мастерской Боровиковского выставят на аукцион за 1,5 млн рублей",
    "date": "2026-10-09",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/sport/28197265"
+     "https://tass.ru/obschestvo/28197627"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Развлечения",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80391218",
-   "title": "На Урале женщина отсудила компенсацию за безуспешные попытки купить вино",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261009/vino-2123401452.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "1,5 млн ₽",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -154,42 +243,13 @@
    ]
   },
   {
-   "draft_id": "d78882784",
-   "title": "Как продать долю в квартире: одна ошибка может лишить сделку силы",
+   "draft_id": "d56655490",
+   "title": "Куртку Майкла Джексона из клипа Thriller выставят на аукцион",
    "date": "2026-10-09",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/articles/1053134754"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d33618439",
-   "title": "В ХМАО провалился аукцион с бывшими автосалонами совладельца корпорации СТС",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053134766"
+     "web:iz.ru",
+     "https://iz.ru/2181324/kurtku-maikla-dzheksona-iz-klipa-thriller-vystaviat-na-auktcion-izi"
     ]
    ],
    "sum": null,
@@ -204,10 +264,69 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Автопром",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78223307",
+   "title": "Складской сегмент стал лидером инвестиций в недвижимость",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/skladskoj-segment-stal-liderom-investicij-v-nedvizhimost/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d53801776",
+   "title": "«Уралбиофарм» уйдёт с молотка. Завод, принадлежавший бизнесмену Малику Гайсину и приватизированный государством, выставлен на торги. Аукцион по продаже 200 млн акций екатеринбургского предприятия (99,",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/8100"
+    ]
+   ],
+   "sum": "977,1 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd8faa2c4 (общие редкие слова: 99, продаж) — проверьте, не дубль ли"
    ]
   }
  ]
