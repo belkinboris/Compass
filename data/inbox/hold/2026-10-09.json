@@ -42,13 +42,13 @@
    ]
   },
   {
-   "draft_id": "d46289161",
-   "title": "Американский фонд подтвердил прекращение попыток купить зарубежные активы «Лукойла»",
+   "draft_id": "d19470708",
+   "title": "Россию завалило крайне опасными смартфонами со встроенными вирусами. Они официально продаются в Ozon, Wildberries и «Яндекс Маркете»",
    "date": "2026-10-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/amerikanskiy-fond-podtverdil-prekraschenie-popytok-kupit-zarubezhnye-aktivy-lukoyla/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-09_rossiyu_zavalilo_krajne_opasnymi"
     ]
    ],
    "sum": null,
@@ -70,16 +70,44 @@
    ]
   },
   {
-   "draft_id": "d90683230",
-   "title": "Экс-хоккеист сборной СССР решил продать медали, потому что ему негде жить",
+   "draft_id": "d74928118",
+   "title": "Минцифры: рост тарифов на связь надо обосновывать инвестициями в развитие",
    "date": "2026-10-09",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/09/10/2026/6ac8d2009a794749b81c64ba"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28198889"
     ]
    ],
-   "sum": "25 млн ₽",
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46657838",
+   "title": "Equinor передала Shell долю в 30% на нефтяном проекте в Канаде",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261009/equinor-874116574.html"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -91,20 +119,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d31229525",
-   "title": "Московский аукционный дом",
+   "draft_id": "d41941547",
+   "title": "Роснедра вновь выставили на аукцион месторождение Тенкергин на Чукотке",
    "date": "2026-10-09",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/photoslider/6ac8cf8b9a794795b7ebba86"
+     "web:1prime.ru",
+     "https://1prime.ru/20261009/rosnedra-874114704.html"
     ]
    ],
    "sum": null,
@@ -119,78 +147,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ГМК и добыча",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d40502772",
-   "title": "Силуанов призвал проверить льготные программы при покупке автомобиля «Атом»",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261009/siluanovyj-874112528.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66503342",
-   "title": "АвтоВАЗ модернизирует Lada Vesta и Lada Iskra — продажи машин с новыми моторами начнутся в конце 2026 года",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/avtovaz-moderniziruet-lada-vesta-i-lada-iskra-prodazhi-mashin-s-novymi-motorami-nachnutsya-v-konce-2026-goda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Автопром",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb439f755 (общие редкие слова: конце, машин) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d71930104",
-   "title": "Куртку Майкла Джексона из клипа Thriller продадут за 848 миллионов рублей",
+   "draft_id": "d44045231",
+   "title": "В России захотели продать национализированный завод за миллиард рублей",
    "date": "2026-10-09",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/kurtku-maykla-dzheksona-iz-klipa-thriller-prodadut-za-848-millionov-rubley/"
+     "https://lenta.ru/news/2026/10/09/kupite/"
     ]
    ],
    "sum": null,
@@ -209,17 +180,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g762669fd (общие редкие слова: миллио, рублей) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d70314948",
-   "title": "🎉 Команда юристов ККМП консультировала финтех-группу Свой в связи с приобретением 100% долей в уставном капитале ООО «Страховая компания «Кредит Европа Лайф».   Отмечается, что данная сделка по приобр",
+   "draft_id": "d49222988",
+   "title": "В России признали сложности с покупкой электромобиля «Атом»",
    "date": "2026-10-09",
    "src": [
     [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/4069"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/09/atom/"
     ]
    ],
    "sum": null,
@@ -234,10 +205,9 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Страхование",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
