@@ -42,17 +42,85 @@
    ]
   },
   {
-   "draft_id": "d46146295",
-   "title": "В Москве выставят на аукцион прежде неизвестные иконы живописца Боровиковского",
+   "draft_id": "d18722025",
+   "title": "SoftBank планирует привлечь от ближневосточных партнеров до $100 млрд на инвестиции в ИИ",
    "date": "2026-10-09",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/lifestyle/news/2026/10/09/1235548-neizvestnie-ikoni"
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1121314"
+    ]
+   ],
+   "sum": "$100 млрд",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-09",
+     "title": "Переговоры",
+     "note": "Японская SoftBank Group намерена привлечь до $100 млрд от инвесторов из стран Персидского залива для финансирования новой волны инвестиций в технологии искусственного интеллекта, пишет Financial Times со ссылкой на источники, знакомые с ситуацией.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1121314"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d89636518",
+   "title": "Эксперт Михайлов указал, на что обратить внимание перед покупкой страховых полисов",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28197117"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59270864",
+   "title": "Tenet впервые обошёл Lada по продажам в Петербурге за месяц",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/09/tenet-vpervie-oboshjol-lada"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -70,19 +138,58 @@
    ]
   },
   {
-   "draft_id": "d94335523",
-   "title": "SpaceX выходит на рынок мобильной связи США после покупки частот",
+   "draft_id": "d79189800",
+   "title": "Продажи электромобилей «Атом» в России в сентябре составили 14 единиц",
    "date": "2026-10-09",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/technology/news/2026/10/09/1235648-spacex-vihodit-mobilnoi"
+     "web:1prime.ru",
+     "https://1prime.ru/20261009/rossija-874095593.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78426631",
+   "title": "ТЦ «Сказка» в новой Москве сменил владельца",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/tc-skazka-v-novoj-moskve-smenil-vladelca/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-09",
+     "title": "Сделка завершена",
+     "note": "ЗПИФК «Инвестпроф» выкупил у девелопера «Центр-инвест» ТЦ «Сказка» площадью 40 988 кв. м на улице Корнея Чуковского в Рассказовке. Сообщение ТЦ «Сказка» в новой Москве сменил владельца появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/tc-skazka-v-novoj-moskve-smenil-vladelca/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -95,17 +202,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку g076af76a (общие редкие слова: владел, сменил) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d84022368",
-   "title": "«Яндекс» обсудит участие в аукционе по наружной рекламе в Москве",
+   "draft_id": "d76935926",
+   "title": "Свердловская компания выиграла торги по национализированному агробизнесу Бикова и Боброва",
    "date": "2026-10-09",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/09/10/2026/6ac7a498b5e08bfc01540ff6"
+     "web:ura.news",
+     "https://ura.news/news/1053134719"
     ]
    ],
    "sum": null,
@@ -120,122 +227,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": "Агро",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51185167",
-   "title": "Цифровая аптечка: как меняются привычки россиян при выборе и покупке лекарств",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-09_tsifrovaya_aptechka_kak_menyayutsya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23093987",
-   "title": "«СберСтрахование жизни» запустит ИИ-аватара инвестиционного советника в рамках инвестиционных инструментов",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-09_sberstrahovanie_zhizni"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90895649",
-   "title": "На аукционе в Москве впервые выставят неизвестные иконы артели Боровиковского",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2180786/na-auktcione-v-moskve-vpervye-vystaviat-neizvestnye-ikony-arteli-borovikovskogo"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70255276",
-   "title": "Хатаев нокаутировал Макрори в первом раунде",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/09/hataev-nokautiroval-makrori-v-pervom-raunde/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5b4e85aa (общие редкие слова: агроби, бобров) — проверьте, не дубль ли"
    ]
   }
  ]
