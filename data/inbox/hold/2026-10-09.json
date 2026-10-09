@@ -42,30 +42,47 @@
    ]
   },
   {
-   "draft_id": "d41473989",
-   "title": "РЖД убрали Рижский вокзал с сайта о планируемом к продаже имуществу",
+   "draft_id": "d71674731",
+   "title": "Власти Коми выставили на торги 100% акций авиакомпании «Комиавиатранс»",
    "date": "2026-10-09",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261009/rzhd-874123042.html"
+     "https://1prime.ru/20261009/vlasti-874128098.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36270299",
+   "title": "РЖД передумали продавать Рижский вокзал после четырех неудачных попыток",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/09/rzhd-peredumali-prodavat-rizhskiy-vokzal-posle-chetyreh-neudachnyh-popytok/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-09",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261009/rzhd-874123042.html"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -78,64 +95,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35195392",
-   "title": "РЖД удалили информацию о продаже Рижского вокзала в Москве",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9023284"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gffe3c2d0 (общие редкие слова: вокзал, москве) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d73337571",
-   "title": "Продажи спортивных товаров на Lamoda в первом полугодии 2026 г. выросли на 10%",
-   "date": "2026-10-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28199531"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
