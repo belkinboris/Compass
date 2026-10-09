@@ -7612,3 +7612,16 @@ def test_exit_from_russia_headlines_are_deals_with_seller_and_subject():
     assert draft.guess_parties("Henkel не планирует уходить из России") == (None, None, None, None)
     assert not classify.looks_like_deal("Футболист Иванов объявил об уходе из «Зенита»")
 
+
+
+def test_silence_clock_runs_without_pending_since():
+    """Карточка без `pending_since` не должна ждать вечно: 18 сентября три
+    карточки (Мадрид, Nestlé, «Ашан») завели мимо promote.py, и три недели
+    отчёт обещал «выйдут сами в ближайшие сутки» при «0 ч из 24»."""
+    import approve
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    old_day = (now - timedelta(days=3)).date().isoformat()
+    cards = [{"id": "n1", "draft_sent": True, "reviewed": old_day, "accepted": old_day}]
+    publish, _hold, _wait, _discard = approve.plan_actions(cards, [], now)
+    assert [c["id"] for c, _o, _w in publish] == ["n1"]

@@ -1839,3 +1839,12 @@ def test_joint_ventures_have_the_jv_type(base):
            if (d.get("kind") == "jv" or (d.get("type") or "").strip() == "СП")
            and d.get("type") != "Создание СП"]
     assert not bad, bad
+
+
+def test_every_pending_card_has_pending_since():
+    """У каждой карточки очереди есть `pending_since` — от него approve.py
+    считает сутки молчания. Без отметки Мадрид, Nestlé и «Ашан» три недели
+    стояли на «0 ч из 24» (карточки завели разовым скриптом мимо promote.py)."""
+    cards = json.load(open(ROOT / "static" / "data" / "pending.json", encoding="utf-8"))["cards"]
+    missing = [c["id"] for c in cards if not c.get("pending_since")]
+    assert not missing, missing
