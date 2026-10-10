@@ -40,63 +40,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
-  },
-  {
-   "draft_id": "d68442744",
-   "title": "Сделку по продаже зарубежных активов «Лукойла» могут закрыть к ноябрю",
-   "date": "2026-10-10",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/10/sdelku-po-prodazhe-zarubezhnih"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13776236",
-   "title": "Подмосковье привлечет более 12 миллиардов рублей инвестиций в сельское хозяйство",
-   "date": "2026-10-10",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/10/10/podmoskove-privlechet-bolee-12-milliardov-rublej-investiczij-v-selskoe-hozyajstvo"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
-   ]
   }
  ]
 }
