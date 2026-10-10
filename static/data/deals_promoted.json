@@ -228232,11 +228232,11 @@
     },
     "target": {
      "company_id": "g7b4970e8",
-     "inn": null,
-     "confirmed": false,
+     "inn": "4001009613",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "7ade86edcadd"
     },
@@ -228252,7 +228252,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -228321,11 +228321,11 @@
     },
     "target": {
      "company_id": "g10dbc5e4",
-     "inn": null,
-     "confirmed": false,
+     "inn": "5043019372",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "197b4a6feaf3"
     },
@@ -228341,7 +228341,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
