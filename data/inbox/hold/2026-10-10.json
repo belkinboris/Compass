@@ -42,30 +42,19 @@
    ]
   },
   {
-   "draft_id": "d31327369",
-   "title": "Президент «Норникеля» Владимир Потанин о российской экономике, налоге на сверхдоход, инвестициях и международном сотрудничестве в интервью РБК",
+   "draft_id": "d11201940",
+   "title": "Инвестиции в АПК Калининградской области могут достичь 200 млрд рублей",
    "date": "2026-10-10",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/nornickel/blog/1361186.php"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28201253"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-10",
-     "title": "Переговоры",
-     "note": "Макроэкономика Правительству приходится прилагать титанические усилия, чтобы обеспечить сбалансированность бюджета, что могло бы создать условия для смягчения денежно-кредитной политики. Предпосылки для того, чтобы в следующем году можно было перейти к…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/company/nornickel/blog/1361186.php"
-     ]
-    }
-   ],
+   "sum": "200 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -81,17 +70,56 @@
    ]
   },
   {
-   "draft_id": "d77149971",
-   "title": "Легендарный меч Дарта Вейдера выставят на аукцион за миллион долларов",
+   "draft_id": "d16456551",
+   "title": "Зачем Paramount купила Warner Bros. за $110 млрд и что будет с Голливудом",
    "date": "2026-10-10",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/10/darth-vader/"
+     "web:rb.ru",
+     "https://rb.ru/reviews/paramount-warner-bros-sdelka/"
+    ]
+   ],
+   "sum": "$110 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-10",
+     "title": "Сделка завершена",
+     "note": "Paramount закрыла покупку Warner Bros. Discovery (WBD) 6 октября 2026 года. План на 110 миллиардов долларов звучит бодро: выпускать больше фильмов, удерживать зрителя у экрана и при этом экономить. Осталось разобраться, кто оплатит этот размах и хватит ли…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/reviews/paramount-warner-bros-sdelka/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Warner Bros.",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Warner Bros.",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d39834847",
+   "title": "Напоминает оптимизм перед Анкориджем Мысли когда продавать Как распознать опасность",
+   "date": "2026-10-10",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1361200.php"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -105,8 +133,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, миллио) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
