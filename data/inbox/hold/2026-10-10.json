@@ -40,63 +40,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
-  },
-  {
-   "draft_id": "d84305197",
-   "title": "Продажи электрокара UMO 5 приблизились к 1,5 тыс. — только в сентябре было зарегистрировано почти 150 машин",
-   "date": "2026-10-10",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-elektrokara-umo-5-priblizilis-k-15-tys-tolko-v-sentyabre-bylo-zaregistrirovano-pochti-150-mashin-/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d37676099",
-   "title": "В России начали останавливать продажи грузинской воды и алкоголя",
-   "date": "2026-10-10",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/10/gruz/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
