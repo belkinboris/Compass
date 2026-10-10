@@ -251,35 +251,51 @@ def stake_supported(value, quote) -> bool:
     return value == 100 and dm.stake_established({'title': quote, 'eco': {}}) == 100.0
 
 
+def _rub_amounts_in(quote) -> list[float]:
+    """Все суммы в рублях, найденные в цитате, по порядку появления — не
+    только первая. Цитата сделки часто называет две суммы в одном
+    предложении («деконсолидация 80 млрд руб. долга... привлечь 21,7 млрд
+    руб.») — одно `re.search` вслепую берёт первую, даже если это сумма
+    совсем другого факта (МТС/БИК, 10 октября 2026: 80 млрд долга против
+    искомых 21,7 млрд цены)."""
+    out = []
+    if not quote:
+        return out
+    for m in re.finditer(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)', quote, re.I):
+        out.append(float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()])
+    for m in re.finditer(r'(\d[\d\s\xa0]{6,}(?:[.,]\d+)?)\s*(?:руб|₽)', quote, re.I):
+        out.append(float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')))
+    return out
+
+
 def price_supported(value_rub, quote) -> bool:
     if value_rub is None or not quote:
         return False
     parsed = dm.parse_rub_sum(quote)
     if parsed and abs(parsed - value_rub) <= max(1.0, 0.01 * value_rub):
         return True
-    # «8,7 млрд руб.» без значка — parse_rub_sum требует ₽; проверяем число и единицу
-    m = re.search(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)', quote, re.I)
-    if m:
-        n = float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()]
-        return abs(n - value_rub) <= max(1.0, 0.01 * value_rub)
-    return False
+    # «8,7 млрд руб.» без значка — parse_rub_sum требует ₽; проверяем все
+    # суммы цитаты, не только первую (см. `_rub_amounts_in`).
+    return any(abs(n - value_rub) <= max(1.0, 0.01 * value_rub) for n in _rub_amounts_in(quote))
 
 
-def quote_number_rub(quote) -> float | None:
+def quote_number_rub(quote, value_rub=None) -> float | None:
     """Число из цитаты в рублях — ровно с той точностью, с какой оно там
-    записано (50,8 млрд → 50 800 000 000; 66 132 908 002,5 руб. → как есть)."""
+    записано (50,8 млрд → 50 800 000 000; 66 132 908 002,5 руб. → как есть).
+
+    Если в цитате несколько сумм и дан `value_rub` (число, которое уже
+    прошло `price_supported`) — возвращается ближайшая К НЕМУ сумма, а не
+    первая по тексту: иначе проверка точности сравнивала бы значение с
+    суммой совсем другого факта той же цитаты."""
     if not quote:
         return None
     parsed = dm.parse_rub_sum(quote)
-    if parsed:
-        return float(parsed)
-    m = re.search(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)', quote, re.I)
-    if m:
-        return float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()]
-    m = re.search(r'(\d[\d\s\xa0]{6,}(?:[.,]\d+)?)\s*(?:руб|₽)', quote, re.I)
-    if m:
-        return float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.'))
-    return None
+    amounts = ([float(parsed)] if parsed else []) + _rub_amounts_in(quote)
+    if not amounts:
+        return None
+    if value_rub is None:
+        return amounts[0]
+    return min(amounts, key=lambda n: abs(n - value_rub))
 
 
 def price_precise_enough(value_rub, quote) -> bool:
@@ -287,7 +303,7 @@ def price_precise_enough(value_rub, quote) -> bool:
     — согласие двух чтений подтвердило точность, которой в цитате нет
     (четвёртый разбор рецензента); точная цифра требует цитаты с точной
     цифрой. Допуск — половина последнего разряда цитаты, не 1%."""
-    q = quote_number_rub(quote)
+    q = quote_number_rub(quote, value_rub)
     if q is None or value_rub is None:
         return False
     return abs(q - float(value_rub)) <= max(1.0, 1e-6 * q)
@@ -405,7 +421,7 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
                 elif not price_supported(float(v), q):
                     problems.append(f'price: {v} не выводится из цитаты')
                 elif not price_precise_enough(float(v), q):
-                    problems.append(f'price: {v} точнее своей цитаты ({quote_number_rub(q):.0f}) — нужна цитата с точной цифрой или значение в точности цитаты')
+                    problems.append(f'price: {v} точнее своей цитаты ({quote_number_rub(q, float(v)):.0f}) — нужна цитата с точной цифрой или значение в точности цитаты')
                 else:
                     card_v = dm.parse_rub_sum(card.get('sum'))
                     if card_v and abs(card_v - float(v)) > 0.01 * card_v:
