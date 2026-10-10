@@ -40,6 +40,63 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
+  },
+  {
+   "draft_id": "d16037929",
+   "title": "В Турции хотят ввести проверку документов при продаже сигарет",
+   "date": "2026-10-10",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261010/turtsiya-2123668903.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d73159332",
+   "title": "В РФС раскрыли, почему футбольным клубам приходится продавать игроков",
+   "date": "2026-10-10",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135065"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Развлечения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
