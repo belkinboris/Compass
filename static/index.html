@@ -666,6 +666,13 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    рисовались ПОВЕРХ списка и перехватывали клики: кнопка «Сбросить»
    нажималась не на список, а на карточку сделки под ним. */
 .adv-panel{position:relative;z-index:5;display:flex;gap:16px;flex-wrap:wrap;margin:0 0 26px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:10px}
+/* Та же шапка `.top` (position:fixed, 64px), тот же приём, что у #feed выше:
+   без scroll-margin-top клик по кнопке периода на телефоне (`.dr-q` ниже
+   верхней границы экрана) прокручивает её ровно под шапку — видна часть
+   кнопки, но hit-test попадает в шапку, клик не срабатывает. Правило — на
+   все элементы панели, а не только `.dr-q`: то же относится к полям дат и
+   «Сбросить». */
+.adv-panel,.adv-panel *{scroll-margin-top:80px}
 .adv-panel label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .adv-panel select{padding:9px 12px;font-size:14px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);min-width:180px}
 /* ПЕРИОД ПО КАЛЕНДАРЮ. Быстрые кнопки сверху, два поля с датами снизу:
