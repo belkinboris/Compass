@@ -40,34 +40,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
-  },
-  {
-   "draft_id": "d16588817",
-   "title": "Banque du Caire продаст 30% акций в рамках IPO на египетской бирже",
-   "date": "2026-10-11",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/11/1236097-banque-du-caire"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "30% акций в рамках IPO на египетской бирже",
-   "seller": "Banque du Caire",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "30% акций в рамках IPO на египетской бирже",
-    "seller": "Banque du Caire"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
   }
  ]
 }
