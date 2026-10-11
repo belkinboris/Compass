@@ -93348,7 +93348,7 @@
      ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
@@ -93378,8 +93378,9 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
-     "intragroup": false
+     "intragroup": true,
+     "override_note": "Оба сегодняшних независимых чтения (11 октября 2026) дали intragroup=false механически, по прямой цитате о покупке 100% — но предыдущий, более глубокий разбор (см. pipeline/gold/analytics_gold.json, запись g321bdead) уже установил: продавец АФК «Система» — крупнейший акционер покупателя «Эталон» (48,8%) и выкупила основную часть SPO именно под эту покупку, то есть конечный контроль над активом не сменился. Оставлено по прежнему, более тщательному разбору; факт не переписан.",
+     "control_change_basis": "read"
     },
     "target": {
      "company_id": "g2a9bffc0",
@@ -93440,16 +93441,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
-     "multiple_text": true
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "ok"
+     "purchase_sums": "intragroup",
+     "top_purchases": "intragroup",
+     "multiple_text": "not_control_change"
     }
    },
    "date_basis": "signing",
