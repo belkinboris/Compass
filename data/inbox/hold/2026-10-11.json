@@ -42,19 +42,30 @@
    ]
   },
   {
-   "draft_id": "d19823256",
-   "title": "Как продать любовь к BTS: бизнес-модель K-pop-агентства HYBE",
+   "draft_id": "d44223853",
+   "title": "Nvidia обсуждает покупку стартапа Reflection — американского конкурента DeepSeek",
    "date": "2026-10-11",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/reviews/bts-hybe-biznes/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/nvidia-obsuzhdaet-pokupku-startapa-reflection-amerikanskogo-konkurenta-deepseek/"
     ]
    ],
-   "sum": null,
+   "sum": "$25 млрд",
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-11",
+     "title": "Переговоры",
+     "note": "Nvidia обсуждает покупку или увеличение доли в Reflection AI, разработчике открытых ИИ-моделей. Что известно о сделке, оценке стартапа в $25 млрд и роли Nvidia.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/nvidia-obsuzhdaet-pokupku-startapa-reflection-amerikanskogo-konkurenta-deepseek/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
