@@ -42,69 +42,13 @@
    ]
   },
   {
-   "draft_id": "d70163401",
-   "title": "Мошенники используют осенние распродажи для обмана россиян",
+   "draft_id": "d19823256",
+   "title": "Как продать любовь к BTS: бизнес-модель K-pop-агентства HYBE",
    "date": "2026-10-11",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2182344/video/moshenniki-ispolzuiut-osennie-rasprodazhi-dlia-obmana-rossiian"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23652193",
-   "title": "Аукционы Минфина — Министерству приходится занимать под высокие проценты, дефицит бюджета сократился, но он всё равно огромен.",
-   "date": "2026-10-11",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1361391.php"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20698738",
-   "title": "Россиянин потерял миллионы при попытке купить авто",
-   "date": "2026-10-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/11/rossiyanin-poteryal-milliony-pri-popytke-kupit-avto/"
+     "web:rb.ru",
+     "https://rb.ru/reviews/bts-hybe-biznes/"
     ]
    ],
    "sum": null,
@@ -123,7 +67,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbe536659 (общие редкие слова: миллио, россия) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
