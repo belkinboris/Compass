@@ -40,6 +40,34 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
    ]
+  },
+  {
+   "draft_id": "d42141468",
+   "title": "В российском городе похищенного мужчину заставили подписать документы о купле-продаже авто",
+   "date": "2026-10-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/11/v-rossiyskom-gorode-pohischennogo-muzhchinu-zastavili-podpisat-dokumenty-o-kuple-prodazhe-avto/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
