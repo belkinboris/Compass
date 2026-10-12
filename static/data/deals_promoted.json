@@ -262306,7 +262306,8 @@
   "g63ec5a2b": 194,
   "g5117a241": null,
   "gb99354e2": null,
-  "gcd8fe39c": null
+  "gcd8fe39c": null,
+  "gbd59b112": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -262793,7 +262794,8 @@
   "g9fed3cb1": 15,
   "g69fe736c": 16,
   "gcd8d2664": 17,
-  "gcd8fe39c": 18
+  "gcd8fe39c": 18,
+  "gbd59b112": 19
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -266047,6 +266049,24 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "gbd59b112": {
+   "sum": "41,23 млн ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "биржевой корпус 1850-х годов в центре Томска (площадь Ленина, 2) — 956,7 кв. м с арендой участка 0,41 га",
+   "status": "Обсуждается",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations"
+    }
+   ]
   }
  }
 }
