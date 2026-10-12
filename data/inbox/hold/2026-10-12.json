@@ -42,7 +42,7 @@
    ]
   },
   {
-   "draft_id": "d31875635",
+   "draft_id": "d55671616",
    "title": "Группа из топ-5 рекламных компаний России объявила о подготовке к IPO",
    "date": "2026-10-12",
    "src": [
@@ -81,270 +81,7 @@
    ]
   },
   {
-   "draft_id": "d88078293",
-   "title": "SPLAT Global планирует IPO в 2029 году",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9024385"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "Российский производитель средств ухода за полостью рта и косметики SPLAT Global рассматривает сценарий проведения IPO в 2029 году. Об этом рассказал Forbes гендиректор и совладелец компании Евгений Демин.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9024385"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d73332127",
-   "title": "Известный бренд начал продавать джинсы с вырезом на промежности за 60 тысяч рублей",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/12/izvestnyy-brend-nachal-prodavat-dzhinsy-s-vyrezom-na-promezhnosti-za-60-tysyach-rubley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d57077330",
-   "title": "Amazon ведет переговоры о покупке ИИ-стартапа Decart за $7 млрд",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/12/1236228-amazon-vedet-peregovori"
-    ]
-   ],
-   "sum": "$7 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/10/12/1236228-amazon-vedet-peregovori"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d88281477",
-   "title": "Дефицит консолидированного бюджета РФ в январе-августе снизился до 4,8 трлн руб.",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1121802"
-    ]
-   ],
-   "sum": "834,0 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91387850",
-   "title": "Российский бизнес пока не готов доверить продажи ИИ: решения о деньгах компании оставляют за человеком",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-12_rossijskij_biznes_poka_ne"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69516177",
-   "title": "В России начали продавать компактный кроссовер Toyota Raize — по цене от 1,28 млн ₽",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/v-rossii-nachali-prodavat-kompaktnyj-krossover-toyota-raize-po-cene-ot-128-mln/"
-    ]
-   ],
-   "sum": "1,28 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42182225",
-   "title": "СМИ: Шарий продал виллу в Испании родственнику главы наркокартеля «Химпром»",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261012/kiev-2123893198.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-12",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261012/kiev-2123893198.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "вилла в Испании родственнику главы наркокартеля «Химпром»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "вилла в Испании родственнику главы наркокартеля «Химпром»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g69ecdf7a (общие редкие слова: виллу, продал) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d77096430",
-   "title": "🔥 Еженедельные инвестиции. Покупки под пассивный доход. Выпуск №265",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1361634.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb92c1e6c (общие редкие слова: выпуск, пассив) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d72979577",
+   "draft_id": "d68508598",
    "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
    "src": [
@@ -370,6 +107,63 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d20488835",
+   "title": "Серия Honor Magic9 стала хитом в Китае — смартфоны возглавили продажи среди Android-флагманов",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/seriya-honor-magic9-stala-hitom-v-kitae-smartfony-vozglavili-prodazhi-sredi-android-flagmanov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d54212336",
+   "title": "В России стало больше желающих продавать готовую еду",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/12/food/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
