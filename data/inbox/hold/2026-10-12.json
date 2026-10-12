@@ -1,0 +1,389 @@
+{
+ "made": "2026-10-12",
+ "drafts": [
+  {
+   "draft_id": "d73112484",
+   "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
+   "date": "2026-09-23",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-09-23",
+     "title": "Переговоры",
+     "note": "«Яндекс» и VK обсуждают создание совместного предприятия на базе компаний Yandex B2B Tech и VK Tech, рассказали РБК два источника на рынке информационных технологий. Источники, близкие к сторонам возможной сделки, подтвердили проработку вариантов создания СП.…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d84136408",
+   "title": "Aspace интересуется покупкой сети гибких офисов Multispace",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9024274"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "О том, что оператор сервисных офисов Aspace заинтересовался покупкой сети гибких офисов Multispace, сообщили три источника “Ъ”. В Aspace сообщили “Ъ”, что сейчас компания не является ни прямым, ни косвенным владельцем Multispace, однако рассматривает разные…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9024274"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d34250376",
+   "title": "Песков: Россия без проблем продаст дизель на мировые рынки",
+   "date": "2026-10-11",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/10/11/1236164-rossiya-prodast-dizel"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "дизель на мировые рынки",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "дизель на мировые рынки",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d89465453",
+   "title": "«Красцветмет» предложил упростить покупку мелких слитков для физлиц",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/10/12/1236142-uprostit-pokupku-melkih-slitkov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79355909",
+   "title": "Группа из топ-5 рекламных компаний России объявила о подготовке к IPO",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/12/10/2026/6acc668e5053246da65516fe"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "&laquo;Игроник&raquo; может стать первой публичной российской компанией на рекламном рынке&nbsp;&mdash; холдинг запланировал провести IPO, сообщил РБК основатель компании Никита Пипко.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/technology_and_media/12/10/2026/6acc668e5053246da65516fe"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31513552",
+   "title": "WSJ узнала о переговорах Amazon о покупке ИИ-стартапа Decart за $7 млрд",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/12/10/2026/6acc261cef402648397549c5"
+    ]
+   ],
+   "sum": "$7 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d40793870",
+   "title": "МЧС России готово содействовать Пхеньяну в приобретении спасательной техники",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1121770"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "МЧС России готово оказать содействие Корейской Народно-Демократической Республике в приобретении пожарной и спасательной техники для реагирующих подразделений, сообщил глава ведомства Александр Куренков на встрече с министром по делам стихийных бедствий КНДР…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1121770"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52024178",
+   "title": "МЧС готово оказать содействие КНДР в приобретении спасательной техники",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28204315"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36634876",
+   "title": "Московский аукционный дом заявил на торги пейзаж Кандинского за 90 млн рублей",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28204271"
+    ]
+   ],
+   "sum": "90 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42576622",
+   "title": "Опрос показал, сколько россиян готовы потратить на спонтанные покупки",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261012/opros-874135689.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38001407",
+   "title": "Опрос показал, сколько россияне готовы потратить на спонтанную покупку",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261012/pokupka-2123862106.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67926803",
+   "title": "Без очередей и лишних трат: какие продукты к Новому году стоит купить уже сейчас",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/food/2026/10/12/76694259/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
