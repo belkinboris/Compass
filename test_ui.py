@@ -4527,3 +4527,40 @@ def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
     li = page.evaluate("mdToHtml('- - **Сделка** — покупатель\\n- **Важно**: одна черта')")
     assert li == "<ul><li><b>Сделка</b> — покупатель</li><li><b>Важно</b>: одна черта</li></ul>", li
 
+
+
+def test_hero_button_stays_in_one_place_across_slides(browser, base_url):
+    """Кнопка героя одна на все пять слайдов и стоит в одной точке.
+
+    Владелец 12 октября 2026: «чтобы кнопки были в одном месте, чтобы плавно
+    при переходе одна кнопка и текст перетекали в другую». Коробка кнопки —
+    общий слой `.hs-bar` поверх слайдов, абзац у всех слайдов одной высоты;
+    на каждом слайде место под кнопку (`.hs-gap`) должно совпадать с ней,
+    иначе кнопка ляжет на текст или повиснет в пустоте.
+    """
+    for w, h in ((390, 844), (375, 667), (1440, 900)):
+        ctx = browser.new_context(viewport={"width": w, "height": h})
+        try:
+            pg = ctx.new_page()
+            pg.goto(base_url + "/#/", wait_until="networkidle")
+            pg.wait_for_timeout(1500)
+            seen = []
+            for i in range(5):
+                pg.evaluate(f"document.querySelectorAll('.hs-dots button')[{i}].click()")
+                pg.wait_for_timeout(900)
+                seen.append(pg.evaluate("""() => {
+                  const bar = document.querySelector('.hs-bar').getBoundingClientRect();
+                  const s = document.querySelector('.hs-slide.on');
+                  const gap = s.querySelector('.hs-gap').getBoundingClientRect();
+                  const p = s.querySelector('.hs-in p');
+                  return {top: Math.round(bar.top), gapBottom: Math.round(gap.bottom), barBottom: Math.round(bar.bottom),
+                          label: document.querySelector('.hs-bar a.on').textContent,
+                          clipped: p.scrollHeight > p.clientHeight + 1};
+                }"""))
+            assert len({x["top"] for x in seen}) == 1, (w, seen)
+            assert all(x["gapBottom"] == x["barBottom"] for x in seen), (w, seen)
+            assert not any(x["clipped"] for x in seen), (w, seen)
+            assert [x["label"] for x in seen] == ["Смотреть сделки", "Открыть компании", "Открыть консультантов",
+                                                  "Открыть аналитику", "Открыть ассистента"], seen
+        finally:
+            ctx.close()
