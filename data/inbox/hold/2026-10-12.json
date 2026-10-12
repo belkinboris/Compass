@@ -42,7 +42,7 @@
    ]
   },
   {
-   "draft_id": "d23128935",
+   "draft_id": "d57185444",
    "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
    "src": [
@@ -71,47 +71,7 @@
    ]
   },
   {
-   "draft_id": "d48968202",
-   "title": "Starbucks опровергла информацию о планах купить Chipotle Mexican Grill",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1121897"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "Американская Starbucks Corp., владеющая крупнейшей в мире сетью кофеен, не намерена покупать оператора ресторанов Chipotle Mexican Grill, сообщают NBC News со ссылкой на комментарий корпорации.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1121897"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d39985655",
+   "draft_id": "d59590669",
    "title": "В Starbucks опровергли планы по покупке Chipotle",
    "date": "2026-10-12",
    "src": [
@@ -145,21 +105,103 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Starbucks опровергла информацию о планах купить Chipotle Mex» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d71696929",
-   "title": "Кредитный рейтинг национализированной в России компании упал",
+   "draft_id": "d92134173",
+   "title": "The Times: Bentley королевы Елизаветы выставили на торги",
    "date": "2026-10-12",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/12/ugk/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9024850"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55259883",
+   "title": "В Финляндии за 4,8 млн евро продают остров, где Кекконен принимал Брежнева",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/12/v-finljandii-za-4-8-mln-evro"
+    ]
+   ],
+   "sum": "€4,8 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18426967",
+   "title": "В России 40% новостроек продается со скидкой",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2182987/video/v-rossii-40-novostroek-prodaetsia-so-skidkoi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57549761",
+   "title": "Президент «АвтоВАЗа» рассказал о продажах Lada Iskra",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261012/avtovaz-2124031470.html"
     ]
    ],
    "sum": null,
