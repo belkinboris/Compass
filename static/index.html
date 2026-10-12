@@ -334,7 +334,11 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    увеличение: 1440 / ширина видимой части). Та же раскладка — у планшета
    вертикально: на компьютерной картинка обрезается до одной яхты. */
 @media(max-width:720px),(max-width:1100px) and (orientation:portrait){
-  .heroslider{height:calc(338px + 100vw);min-height:0}
+  /* Не выше видимой части окна: во встроенном браузере телеграма снизу своя
+     панель, и точки слайдера уходили под неё (12 октября 2026). Если окно
+     ниже, сцена теряет немного неба сверху (svg прижат к низу), точки на виду. */
+  .heroslider{--hs-h:min(calc(338px + 100vw), max(520px, 100svh));height:var(--hs-h);min-height:0}
+  @supports (height:100dvh){.heroslider{--hs-h:min(calc(338px + 100vw), max(520px, 100dvh))}}
   .hs-in{height:auto;overflow:visible;padding-top:92px}
   .hs-in > p{margin-bottom:0}
   .hs-in h1.hs-word{font-size:40px}
@@ -342,7 +346,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-gap{height:68px}
   .hs-bar{margin-top:18px;width:auto}
   .hs-slide svg.hx-scene{inset:auto;top:auto;bottom:40px;left:calc(50vw - var(--fx) / 1440 * var(--k) * 100vw);
-    width:calc(var(--k) * 100vw);height:calc(var(--k) * 100vw * 780 / 1440);
+    width:calc(var(--k) * 100vw);height:min(calc(var(--k) * 100vw * 780 / 1440), calc(var(--hs-h) - 340px));
     -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%)}
   .hx-tick{font-size:30px}
   .hx-shore{transform:translateX(215px)}
@@ -362,7 +366,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-in h1.hs-word{font-size:52px}
   .hs-in p{font-size:16px;height:calc(1.6em * 3)}
   .hs-bar{width:320px}
-  .heroslider{height:calc(320px + 100vw)}
+  .heroslider{--hs-h:min(calc(320px + 100vw), max(600px, 100dvh));height:var(--hs-h)}
   .hx-tick{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){.heroslider *{animation:none!important;transition:none!important}}

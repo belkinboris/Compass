@@ -4564,3 +4564,23 @@ def test_hero_button_stays_in_one_place_across_slides(browser, base_url):
                                                   "Открыть аналитику", "Открыть ассистента"], seen
         finally:
             ctx.close()
+
+
+def test_hero_dots_visible_in_short_in_app_browser(browser, base_url):
+    """Точки слайдера видны в невысоком окне встроенного браузера телеграма.
+
+    12 октября 2026: у партнёра владельца в телеграме не было видно кружков
+    перелистывания — герой на телефоне был выше видимой части окна (снизу у
+    телеграма своя панель), и точки уходили под неё. Теперь высота героя не
+    больше высоты окна.
+    """
+    for w, h in ((390, 620), (375, 560), (430, 700)):
+        ctx = browser.new_context(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
+        try:
+            pg = ctx.new_page()
+            pg.goto(base_url + "/#/", wait_until="networkidle")
+            pg.wait_for_timeout(1200)
+            bottom = pg.evaluate("document.querySelector('.hs-dots').getBoundingClientRect().bottom")
+            assert bottom <= h, f"{w}×{h}: точки ниже края окна ({bottom}px)"
+        finally:
+            ctx.close()
