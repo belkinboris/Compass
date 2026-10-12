@@ -42,7 +42,7 @@
    ]
   },
   {
-   "draft_id": "d89023877",
+   "draft_id": "d31875635",
    "title": "Группа из топ-5 рекламных компаний России объявила о подготовке к IPO",
    "date": "2026-10-12",
    "src": [
@@ -81,19 +81,30 @@
    ]
   },
   {
-   "draft_id": "d42535331",
-   "title": "В Москве на аукцион выставят пейзаж Левитана",
+   "draft_id": "d88078293",
+   "title": "SPLAT Global планирует IPO в 2029 году",
    "date": "2026-10-12",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/culture/1121785"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9024385"
     ]
    ],
-   "sum": "1,5 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "Российский производитель средств ухода за полостью рта и косметики SPLAT Global рассматривает сценарий проведения IPO в 2029 году. Об этом рассказал Forbes гендиректор и совладелец компании Евгений Демин.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9024385"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -105,45 +116,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d51551744",
-   "title": "Глава МВФ считает, что инвестиции в ИИ поддерживают рост мирового ВВП на уровне 3%",
+   "draft_id": "d73332127",
+   "title": "Известный бренд начал продавать джинсы с вырезом на промежности за 60 тысяч рублей",
    "date": "2026-10-12",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1121782"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23700224",
-   "title": "FT рассказала об обсуждении в Starbucks покупки сети ресторанов мексиканской кухни Chipotle: что компании могли бы получить от возможной сделки, кроме ошибок",
-   "date": "2026-10-11",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/food/3188796-starbucks-rassmatrivaet-pokupku-chipotle?from=rss"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/12/izvestnyy-brend-nachal-prodavat-dzhinsy-s-vyrezom-na-promezhnosti-za-60-tysyach-rubley/"
     ]
    ],
    "sum": null,
@@ -162,20 +146,20 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d48768187",
-   "title": "Россия без проблем сможет продать свое дизельное топливо на мировые рынки",
+   "draft_id": "d57077330",
+   "title": "Amazon ведет переговоры о покупке ИИ-стартапа Decart за $7 млрд",
    "date": "2026-10-12",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261012/peskov-874136967.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/12/1236228-amazon-vedet-peregovori"
     ]
    ],
-   "sum": null,
+   "sum": "$7 млрд",
    "type": "M&A",
    "status": "Обсуждается",
    "events": [
@@ -185,8 +169,8 @@
      "title": "Переговоры",
      "note": "",
      "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261012/peskov-874136967.html"
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/business/news/2026/10/12/1236228-amazon-vedet-peregovori"
      ]
     }
    ],
@@ -198,23 +182,25 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d10967157",
-   "title": "Россиянка чуть не отдала аферистам 4 млн рублей в схеме с покупкой квартиры",
+   "draft_id": "d88281477",
+   "title": "Дефицит консолидированного бюджета РФ в январе-августе снизился до 4,8 трлн руб.",
    "date": "2026-10-12",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261012/klientka-2123873600.html"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1121802"
     ]
    ],
-   "sum": "4 млн ₽",
+   "sum": "834,0 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -233,13 +219,109 @@
    ]
   },
   {
-   "draft_id": "d23340519",
-   "title": "Заместитель Набиуллиной рассказала о покупке одежды за цифровые рубли",
+   "draft_id": "d91387850",
+   "title": "Российский бизнес пока не готов доверить продажи ИИ: решения о деньгах компании оставляют за человеком",
    "date": "2026-10-12",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/12/zamestitel-nabiullinoy-rasskazala-o-pokupke-odezhdy-za-tsifrovye-rubli/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-12_rossijskij_biznes_poka_ne"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69516177",
+   "title": "В России начали продавать компактный кроссовер Toyota Raize — по цене от 1,28 млн ₽",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/v-rossii-nachali-prodavat-kompaktnyj-krossover-toyota-raize-po-cene-ot-128-mln/"
+    ]
+   ],
+   "sum": "1,28 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42182225",
+   "title": "СМИ: Шарий продал виллу в Испании родственнику главы наркокартеля «Химпром»",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261012/kiev-2123893198.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-12",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20261012/kiev-2123893198.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "вилла в Испании родственнику главы наркокартеля «Химпром»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "вилла в Испании родственнику главы наркокартеля «Химпром»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g69ecdf7a (общие редкие слова: виллу, продал) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d77096430",
+   "title": "🔥 Еженедельные инвестиции. Покупки под пассивный доход. Выпуск №265",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1361634.php"
     ]
    ],
    "sum": null,
@@ -257,17 +339,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb92c1e6c (общие редкие слова: выпуск, пассив) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d41207323",
-   "title": "Квартира с «сюрпризом»: у кого остается право жить в ней даже после продажи",
+   "draft_id": "d72979577",
+   "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/articles/1053135318"
+     "https://ura.news/news/1053135370"
     ]
    ],
    "sum": null,
@@ -282,10 +365,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
