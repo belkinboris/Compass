@@ -42,103 +42,7 @@
    ]
   },
   {
-   "draft_id": "d84136408",
-   "title": "Aspace интересуется покупкой сети гибких офисов Multispace",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9024274"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "О том, что оператор сервисных офисов Aspace заинтересовался покупкой сети гибких офисов Multispace, сообщили три источника “Ъ”. В Aspace сообщили “Ъ”, что сейчас компания не является ни прямым, ни косвенным владельцем Multispace, однако рассматривает разные…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9024274"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d34250376",
-   "title": "Песков: Россия без проблем продаст дизель на мировые рынки",
-   "date": "2026-10-11",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/10/11/1236164-rossiya-prodast-dizel"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "дизель на мировые рынки",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "дизель на мировые рынки",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d89465453",
-   "title": "«Красцветмет» предложил упростить покупку мелких слитков для физлиц",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/10/12/1236142-uprostit-pokupku-melkih-slitkov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79355909",
+   "draft_id": "d89023877",
    "title": "Группа из топ-5 рекламных компаний России объявила о подготовке к IPO",
    "date": "2026-10-12",
    "src": [
@@ -177,113 +81,16 @@
    ]
   },
   {
-   "draft_id": "d31513552",
-   "title": "WSJ узнала о переговорах Amazon о покупке ИИ-стартапа Decart за $7 млрд",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/12/10/2026/6acc261cef402648397549c5"
-    ]
-   ],
-   "sum": "$7 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d40793870",
-   "title": "МЧС России готово содействовать Пхеньяну в приобретении спасательной техники",
+   "draft_id": "d42535331",
+   "title": "В Москве на аукцион выставят пейзаж Левитана",
    "date": "2026-10-12",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/world/1121770"
+     "https://www.interfax.ru/culture/1121785"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "МЧС России готово оказать содействие Корейской Народно-Демократической Республике в приобретении пожарной и спасательной техники для реагирующих подразделений, сообщил глава ведомства Александр Куренков на встрече с министром по делам стихийных бедствий КНДР…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/world/1121770"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52024178",
-   "title": "МЧС готово оказать содействие КНДР в приобретении спасательной техники",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28204315"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36634876",
-   "title": "Московский аукционный дом заявил на торги пейзаж Кандинского за 90 млн рублей",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28204271"
-    ]
-   ],
-   "sum": "90 млн ₽",
+   "sum": "1,5 млрд ₽",
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -302,13 +109,137 @@
    ]
   },
   {
-   "draft_id": "d42576622",
-   "title": "Опрос показал, сколько россиян готовы потратить на спонтанные покупки",
+   "draft_id": "d51551744",
+   "title": "Глава МВФ считает, что инвестиции в ИИ поддерживают рост мирового ВВП на уровне 3%",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1121782"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23700224",
+   "title": "FT рассказала об обсуждении в Starbucks покупки сети ресторанов мексиканской кухни Chipotle: что компании могли бы получить от возможной сделки, кроме ошибок",
+   "date": "2026-10-11",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/food/3188796-starbucks-rassmatrivaet-pokupku-chipotle?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d48768187",
+   "title": "Россия без проблем сможет продать свое дизельное топливо на мировые рынки",
    "date": "2026-10-12",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261012/opros-874135689.html"
+     "https://1prime.ru/20261012/peskov-874136967.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261012/peskov-874136967.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10967157",
+   "title": "Россиянка чуть не отдала аферистам 4 млн рублей в схеме с покупкой квартиры",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261012/klientka-2123873600.html"
+    ]
+   ],
+   "sum": "4 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23340519",
+   "title": "Заместитель Набиуллиной рассказала о покупке одежды за цифровые рубли",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/12/zamestitel-nabiullinoy-rasskazala-o-pokupke-odezhdy-za-tsifrovye-rubli/"
     ]
    ],
    "sum": null,
@@ -330,41 +261,13 @@
    ]
   },
   {
-   "draft_id": "d38001407",
-   "title": "Опрос показал, сколько россияне готовы потратить на спонтанную покупку",
+   "draft_id": "d41207323",
+   "title": "Квартира с «сюрпризом»: у кого остается право жить в ней даже после продажи",
    "date": "2026-10-12",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261012/pokupka-2123862106.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67926803",
-   "title": "Без очередей и лишних трат: какие продукты к Новому году стоит купить уже сейчас",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/food/2026/10/12/76694259/"
+     "web:ura.news",
+     "https://ura.news/articles/1053135318"
     ]
    ],
    "sum": null,
