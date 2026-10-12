@@ -1,4 +1,4 @@
-// Соглашение о размещении: модельный текст и версия для CarPrice.
+// Соглашение о размещении: модельный текст и версии для CarPrice и Execburo.
 //   node finance/партнёры/соглашение/build.js
 // Библиотека docx берётся из scratchpad (npm install docx@9.5.1 там) или из NODE_PATH.
 const fs = require("fs");
@@ -45,6 +45,21 @@ const CARPRICE = {
   date: PH("дата"),
 };
 
+const EXECBURO = {
+  file: "Соглашение_о_размещении_Execburo.docx",
+  partnerName: "Индивидуальный предприниматель Беляндинова Софья Сергеевна (Execburo)",
+  partnerReg: "ОГРНИП 324690000027142, ИНН 695008892877",
+  partnerAddr: PH("адрес регистрации"),
+  partnerBank: "р/с 40802810400006283264 в АО «ТБанк», БИК 044525974, к/с 30101810145250000896",
+  partnerActs: "действующая от своего имени",       // ИП: без «в лице»
+  partnerSign: "С. С. Беляндинова",
+  partnerEmail: "sofiab@execburo.ru",
+  section: "«Консультанты»",
+  extraItems: "открытые позиции, которые ведёт Партнёр; ",
+  seats: "10",
+  date: PH("дата"),
+};
+
 // --- текст -----------------------------------------------------------------
 
 const runs = (parts, opts = {}) => parts.map(p =>
@@ -76,13 +91,13 @@ function body(d) {
       alignment: AlignmentType.CENTER, spacing: { after: 240 } }),
     P(["г. Москва", "                                        ", "«___» ______________ 2026 г."], { align: AlignmentType.LEFT }),
     P([OPERATOR.name, " (далее — «Исполнитель»), в лице ", OPERATOR.signer, ", с одной стороны, и ",
-       d.partnerName, " (далее — «Партнёр»), в лице ", d.partnerSigner,
+       d.partnerName, " (далее — «Партнёр»), ", ...(d.partnerActs ? [d.partnerActs] : ["в лице ", d.partnerSigner]),
        ", с другой стороны, вместе — «Стороны», заключили настоящее соглашение (далее — «Соглашение») о нижеследующем."]),
 
     H("1. Предмет"),
     CL("1.1", ["Исполнитель размещает на сайте projectcompass.ru (далее — «Сайт») страницу Партнёра в разделе ",
        d.section, " (далее — «Страница») и предоставляет сотрудникам Партнёра доступ к базе Сайта на условиях Соглашения."]),
-    CL("1.2", "Страница включает: наименование и логотип Партнёра, описание, ссылку на сайт Партнёра, контакт для связи, по желанию Партнёра — сведения о команде; перечень сделок с участием Партнёра; материалы, опубликованные Партнёром (колонки, комментарии, записи выступлений)."),
+    CL("1.2", ["Страница включает: наименование и логотип Партнёра, описание, ссылку на сайт Партнёра, контакт для связи, по желанию Партнёра — сведения о команде; перечень сделок с участием Партнёра; ", d.extraItems || "", "материалы, опубликованные Партнёром (колонки, комментарии, записи выступлений)."]),
     CL("1.3", "К Соглашению применяются правила главы 39 Гражданского кодекса РФ о возмездном оказании услуг."),
 
     H("2. Обязанности Исполнителя"),
@@ -154,8 +169,9 @@ function sigTable(d) {
     rows: [new TableRow({ children: [
       cell(["Исполнитель", [OPERATOR.name], [OPERATOR.reg], [OPERATOR.addr], [OPERATOR.bank], [OPERATOR.email], "",
             "", "_______________ / ", [OPERATOR.signerShort]], w),
-      cell(["Партнёр", [d.partnerName], [d.partnerReg], [d.partnerAddr], [d.partnerEmail], "", "",
-            "", "_______________ / ", [d.partnerSigner]], w),
+      cell(["Партнёр", [d.partnerName], [d.partnerReg], [d.partnerAddr], ...(d.partnerBank ? [[d.partnerBank]] : []),
+            [d.partnerEmail], "", ...(d.partnerBank ? [] : [""]),
+            "", "_______________ / ", [d.partnerSign || d.partnerSigner]], w),
     ] })],
   });
 }
@@ -176,4 +192,4 @@ async function build(d) {
   console.log(out, Math.round(buf.length / 1024), "KB");
 }
 
-(async () => { await build(MODEL); await build(CARPRICE); })();
+(async () => { await build(MODEL); await build(CARPRICE); await build(EXECBURO); })();
