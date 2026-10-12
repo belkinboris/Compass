@@ -1960,6 +1960,63 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .deal-tools>.chip{flex:1 1 calc(50% - 6px);text-align:center;justify-content:center}
 }
 
+/* ===== ТОНКИЕ ПОДЧЁРКИВАНИЯ ВМЕСТО «ТАБЛЕТОК» (12 октября 2026) =====
+   Владелец, по макету «без таблеток»: «Красава, переделывай на сайте» —
+   понравилась строка действий «Следить за сделкой · Скачать PDF · Поделиться
+   · Уточнить или дополнить» в виде слов с тонкой линией. Все нажимаемые
+   «таблетки» (кнопки-чипы, вкладки, переключатели, сортировка), статусы и
+   отрасли — слова обычного регистра с линией 1px. Слой стоит последним в
+   стилях и перекрывает старые правила (!important), а не переписывает их:
+   так правка обратима одной вырезкой блока. Большие кнопки действия
+   («Спросить», «Смотреть сделки») — не таблетки, их не трогаем. */
+/* Тонкие подчёркивания вместо «таблеток». Один язык для всех нажимаемых
+   слов: текст обычного регистра, под ним линия в 1px. Выбранное — тёмно-
+   зелёным с зелёной линией, остальное — серым со светлой линией. */
+.chip,.lens button,.type-tabs button,.deal-list-tabs button,.ms .ms-foot button,.ai-fb button,
+.count-btn,.theme-chip,.co-adv,.pdf-top,.chat-side-close{
+  background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+  padding:2px 0 4px!important;min-height:0!important;height:auto!important;
+  border-bottom:1px solid var(--line)!important;color:var(--muted)!important;
+  font-family:var(--f-body)!important;font-size:14px!important;font-weight:400!important;
+  letter-spacing:0!important;text-transform:none!important;line-height:1.35!important;
+  transition:color .2s,border-color .2s!important}
+.chip:hover,.lens button:hover,.type-tabs button:hover,.deal-list-tabs button:hover,.count-btn:hover,.co-adv:hover,.pdf-top:hover,.theme-chip:hover{
+  color:var(--ink)!important;border-bottom-color:var(--ink)!important;background:none!important}
+.chip.on,.chip.primary,.lens button.on,.type-tabs button.on,.deal-list-tabs button.on,.count-btn{
+  color:var(--accent)!important;border-bottom-color:var(--accent)!important;background:none!important}
+/* группы: без общей рамки, слова через воздух */
+.lens,.type-tabs,.deal-list-tabs{border:0!important;background:none!important;border-radius:0!important;gap:10px 26px!important;display:flex!important;flex-wrap:wrap!important;overflow:visible!important}
+.lens button,.type-tabs button{border-right:0!important}
+.deal-tools,.tool-group,.fe-actions{gap:12px 26px!important}
+.deal-tools .chip,.tool-group .chip{flex:0 0 auto!important;width:auto!important}
+/* переключатель «по базе / по интернету» на тёмном фоне и на светлом */
+.mode{gap:22px!important}
+.mode button{background:none!important;border:0!important;border-radius:0!important;padding:2px 0 4px!important;
+  border-bottom:1px solid rgba(243,241,233,.28)!important;color:#A9BDB2!important;font-size:13.5px!important}
+.mode button.on{color:var(--ivory)!important;border-bottom-color:var(--ivory)!important;background:none!important}
+.mode.light button,.ask-box .mode button,.deal-ask .mode button{border-bottom-color:var(--line)!important;color:var(--muted)!important}
+.mode.light button.on,.ask-box .mode button.on,.deal-ask .mode button.on{color:var(--accent)!important;border-bottom-color:var(--accent)!important}
+/* статус и отрасль — просто слова, без рамки и капслока */
+.status{border:0!important;padding:0!important;background:none!important;border-radius:0!important;
+  font-size:12.5px!important;letter-spacing:0!important;text-transform:none!important;font-weight:500!important}
+.tag{border:0!important;padding:0 0 1px!important;background:none!important;border-radius:0!important;
+  border-bottom:1px solid var(--line)!important;font-size:12.5px!important;letter-spacing:0!important;
+  text-transform:none!important;font-weight:400!important;color:var(--muted)!important}
+.tag:hover{color:var(--ink)!important;border-bottom-color:var(--ink)!important}
+.co-tag{background:none!important}
+/* воздух между соседними словами-ссылками */
+:has(> .chip),:has(> .tag),:has(> .theme-chip),:has(> .co-adv){column-gap:22px!important;row-gap:10px!important}
+#feedgo{margin-left:22px!important}
+.adv-cta-top{background:none!important;border:0!important;border-radius:0!important;padding:2px 0 4px!important;
+  border-bottom:1px solid rgba(243,241,233,.45)!important;letter-spacing:0!important;text-transform:none!important;font-size:14px!important;font-weight:400!important}
+/* поиск над лентой стоит на тёмном фоне */
+.feed-search .chip{color:#A9BDB2!important;border-bottom-color:rgba(243,241,233,.3)!important}
+.feed-search .chip.on,.feed-search .chip:hover{color:var(--ivory)!important;border-bottom-color:var(--ivory)!important}
+.feed-search .chip{align-self:center}
+/* на телефоне слова под полем — в строку, по ширине текста, а не растянутые */
+@media(max-width:720px){.feed-search{column-gap:22px!important;row-gap:12px!important}
+  .feed-search .chip{flex:0 0 auto!important;text-align:left!important}
+  #feedgo{margin-left:0!important}}
 </style>
 </head>
 <body>
@@ -3182,11 +3239,11 @@ function dealAsText(d){
   return L.join("\n");
 }
 const FEED_PARAMS = [["ind","filterInd"],["year","feedYear"],["theme","filterTheme"],
-                     ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],
+                     ["firm","filterFirm"],["agroup","filterAdvisorGroup"],["q","feedQuery"],["full","onlyFull"],["norealty","noRealty"],
                      ["rev","filterMinRevenue"],["status","filterStatus"],["dtype","filterType"],
                      ["appr","filterAppr"],["priced","filterPriced"],["from","feedFrom"],["to","feedTo"]];
 function feedStateGet(){
-  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull,
+  return {filterInd, feedYear, filterTheme, filterFirm, filterAdvisorGroup, feedQuery, onlyFull, noRealty,
           filterMinRevenue, filterStatus, filterType, filterAppr, filterPriced, feedFrom, feedTo};
 }
 function feedHash(){
@@ -3195,6 +3252,7 @@ function feedHash(){
     .map(([key,name])=>{
       const v = st[name];
       if(name==="onlyFull") return v ? "full=1" : "";
+      if(name==="noRealty") return v ? "norealty=1" : "";
       return (v && v!=="Все") ? `${key}=${encodeURIComponent(v)}` : "";
     })
     .filter(Boolean);
@@ -3234,6 +3292,7 @@ function applyFeedParams(qs){
      «Только с разбором» против «Все сделки» показывал бы один и тот же список
      и был мёртвым выбором. Разбор параметра оставлен для старых ссылок. */
   onlyFull = p.get("full") === "1";
+  noRealty = p.get("norealty") === "1";
   feedPage = 1;
   // Панель открывается сама, если фильтр не виден в свёрнутом виде: иначе
   // пришедший по ссылке видит отфильтрованную ленту и не понимает почему.
@@ -3981,6 +4040,9 @@ const HERO_SVG = `<svg class="hx-scene" viewBox="0 0 1440 780" preserveAspectRat
   </g>
   <g class="hx-boat-x">
     <g class="hx-boat-bob">
+      <!-- 12 октября 2026, владелец: «лодочка на уровне с островом, раньше была
+           чуть ниже» — вся лодка с отражением и следом опущена в воду. -->
+      <g transform="translate(0 34)">
       <g class="hx-wake" stroke="#E9DCBE" stroke-opacity=".5" fill="none" stroke-width="1.2">
         <path d="M150 512 L60 504"/><path d="M150 516 L70 526"/>
       </g>
@@ -3993,6 +4055,7 @@ const HERO_SVG = `<svg class="hx-scene" viewBox="0 0 1440 780" preserveAspectRat
       <g opacity=".2" transform="translate(0 1046) scale(1 -1)">
         <path d="M258 470 L258 380 Q 330 430 350 470 Z" fill="#0A1210"/>
         <path d="M150 486 L392 486 Q 372 512 320 512 L200 512 Z" fill="#0A1210"/>
+      </g>
       </g>
     </g>
   </g>
@@ -4415,6 +4478,10 @@ let filterInd = "Все";
 let feedPage = 1;
 let feedQuery = "";
 let onlyFull = false;
+/* «Убрать недвижимость» (владелец, 12 октября 2026): сделок с недвижимостью
+   в базе больше всех, и новичок принимает «Компас» за портал недвижимости.
+   Одна кнопка рядом с «Фильтры» убирает их из ленты; в адресе — norealty=1. */
+let noRealty = false;
 let feedYear = "Все";
 /* ПЕРИОД ПО КАЛЕНДАРЮ. Галочки по годам отвечают на «что было в 2025-м», но
    не на «что было с 3 марта по 12 апреля» — а именно так спрашивают, когда
@@ -4791,7 +4858,8 @@ function unifiedFeedItems(){
     const yes = firmPrice(((it.rec.facts||{}).price||{}));
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
-  const filtered = items.filter(it=>matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchAppr(it) && matchPriced(it));
+  const matchRealty = it => !noRealty || !(it.kind==="full" ? hasIndustry(it.rec,"Недвижимость") : it.ind==="Недвижимость");
+  const filtered = items.filter(it=>matchRealty(it) && matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchAppr(it) && matchPriced(it));
   /* ПОРЯДОК — ПО ДАТЕ СДЕЛКИ (первой новости о ней), внутри одного дня — по
      дате появления в базе. Решение владельца 3 октября 2026 (см. rowHtml):
      дата в строке и порядок строк — одна и та же дата, иначе колонка дат
@@ -4874,6 +4942,7 @@ function emptyFeedHtml(){
   }
   if(filterAdvisorGroup!=="Все") active.push({k:"agroup", t:`категория консультанта «${GROUP_LABEL[filterAdvisorGroup]||filterAdvisorGroup}»`});
   if(onlyFull) active.push({k:"fmt", t:"только сделки с разбором"});
+  if(noRealty) active.push({k:"norealty", t:"без недвижимости"});
   if(filterMinRevenue!=="Все"){
     const label = REVENUE_BUCKETS.find(([v])=>v===filterMinRevenue);
     active.push({k:"rev", t:`выручка покупаемой компании: ${label?label[1]:filterMinRevenue}`});
@@ -4921,7 +4990,7 @@ function bindFeedListEvents(){
   if(fr) fr.onclick = ()=>{
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     feedFrom=""; feedTo="";
-    onlyFull=false; filterMinRevenue="Все"; feedPage=1;
+    onlyFull=false; noRealty=false; filterMinRevenue="Все"; feedPage=1;
     filterStatus="Все"; filterType="Все"; filterAppr="Все"; filterPriced="Все";
     const q=document.getElementById("feedq"); if(q) q.value="";
     ["selind","selyear","seltheme","selfirm","selstatus","seldtype","selappr","selpriced"].forEach(msReset);
@@ -5082,6 +5151,7 @@ function renderDeals(){
     <input id="feedq" placeholder="Найти сделку: стороны, предмет, консультант…" value="${esc(feedQuery)}" aria-label="Поиск по сделкам">
     <button id="feedgo" class="chip on">Найти</button>
     <button id="advtoggle" class="chip ${advOpen?"on":""}">Фильтры</button>
+    <button id="norealty" class="chip ${noRealty?"on":""}" aria-pressed="${noRealty}">${noRealty?"Вернуть недвижимость":"Убрать недвижимость"}</button>
     <div class="ac" id="feedac" hidden></div>
   </div>
   <div id="advpanel" class="adv-panel reveal" style="${advOpen?"":"display:none"}">
@@ -5148,6 +5218,13 @@ function renderDeals(){
   }
   const fg = document.getElementById("feedgo");
   if(fg) fg.onclick = ()=>{const el=document.getElementById("feedq");feedQuery=el?el.value:"";feedPage=1;renderFeedList();syncFeedHash();};
+  const nr = document.getElementById("norealty");
+  if(nr) nr.onclick = ()=>{
+    noRealty=!noRealty; feedPage=1;
+    nr.classList.toggle("on", noRealty); nr.setAttribute("aria-pressed", noRealty);
+    nr.textContent = noRealty ? "Вернуть недвижимость" : "Убрать недвижимость";
+    renderFeedList(); syncFeedHash();
+  };
   const at = document.getElementById("advtoggle");
   if(at) at.onclick = ()=>{
     advOpen=!advOpen;
@@ -8073,7 +8150,12 @@ function renderCompany(id){
 }
 
 /* ================= КОНСУЛЬТАНТЫ ================= */
-let advType = "legal"; // legal | invest | other
+let advType = "legal"; // legal | invest | exec | other
+/* Выбрана отрасль — в списке только фирмы со сделками в ней (владелец,
+   12 октября 2026: «остальные отображаться не должны»). Раньше фирмы с нулём
+   шли следом по алфавиту, и выбор отрасли почти не сокращал список. */
+const advIndRows = rows => advInd==="Все" ? rows : rows.filter(r=>r.n>0);
+const advIndEmptyHtml = () => `<p class="reveal" style="color:var(--muted);max-width:640px">В отрасли «${esc(advInd)}» у консультантов этой вкладки сделок в базе пока нет.</p>`;
 let firmSort = "alpha";  // каталог открывается алфавитным списком, а не рейтингом
 /* ПО ОТРАСЛЯМ. Владелец 3 октября 2026: выбрал отрасль — консультанты
    ранжируются по числу сопровождённых сделок в ней, и у каждого видно,
@@ -8158,9 +8240,9 @@ function advisorCardHtml(r, withProfile){
 function advisorsBodyHtml(){
   let body = "";
   if(advType==="legal"){
-    const rows = FIRMS
+    const rows = advIndRows(FIRMS
       .filter(f=>advMatch(f, advQuery))
-      .map(f=>({f,n:advCount(f.id)}))
+      .map(f=>({f,n:advCount(f.id)})))
       .sort(advSortKey);
     body = `
     <div class="filters advisor-filters reveal">
@@ -8171,9 +8253,9 @@ function advisorsBodyHtml(){
     </div>
     ${rows.length?`<div class="advisor-list reveal">
       ${rows.map(r=>advisorCardHtml(r, false)).join("")}
-    </div>`:advNoMatchHtml()}`;
+    </div>`:(advInd!=="Все"&&!advQuery.trim()?advIndEmptyHtml():advNoMatchHtml())}`;
   } else if(advType==="invest"){
-    const rows = INV_FIRMS.filter(f=>advMatch(f, advQuery)).map(f=>({f,n:advCount(f.id)}))
+    const rows = advIndRows(INV_FIRMS.filter(f=>advMatch(f, advQuery)).map(f=>({f,n:advCount(f.id)})))
       .sort(advSortKey);
     body = `<div class="filters advisor-filters reveal">
       ${advIndSelectHtml()}
@@ -8181,7 +8263,11 @@ function advisorsBodyHtml(){
       ${advInd==="Все"?`<button class="chip ${firmSort==="alpha"?"on":""}" data-sort="alpha">По алфавиту</button>
       <button class="chip ${firmSort==="active"?"on":""}" data-sort="active">По активности</button>`:""}
     </div>
-    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>advisorCardHtml(r, true)).join("")}</div>`:advNoMatchHtml()}`;
+    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>advisorCardHtml(r, true)).join("")}</div>`:(advInd!=="Все"&&!advQuery.trim()?advIndEmptyHtml():advNoMatchHtml())}`;
+  } else if(advType==="exec"){
+    /* Executive Search — вкладка заведена 12 октября 2026 по просьбе владельца;
+       фирм пока не добавляем («пока не надо»). */
+    body = `<p class="reveal" style="color:var(--muted);max-width:640px">Здесь будут фирмы, которые подбирают руководителей для компаний (executive search). Пока в каталоге их нет.</p>`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
@@ -8223,6 +8309,7 @@ function renderAdvisors(){
   <div class="type-tabs reveal">
     <button data-t="legal" class="${advType==="legal"?"on":""}">Юридические</button>
     <button data-t="invest" class="${advType==="invest"?"on":""}">Инвестиционные</button>
+    <button data-t="exec" class="${advType==="exec"?"on":""}">Executive Search</button>
     <button data-t="other" class="${advType==="other"?"on":""}">Иные</button>
   </div>
   <div id="advBody">${body}</div>

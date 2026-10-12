@@ -2962,7 +2962,10 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
-   }
+   },
+   "seller": "МТС",
+   "seller_src": "text",
+   "seller_id": "g69c88bc7"
   },
   {
    "id": "gf5c8e14e",
@@ -3912,7 +3915,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller": "Вадим Анисимов",
+   "seller_src": "text"
   },
   {
    "id": "g56989e44",
@@ -8210,7 +8215,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller": "Дмитрий Калетынец",
+   "seller_src": "text"
   },
   {
    "id": "g8bc7aacf",
@@ -9202,7 +9209,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет."
   },
   {
    "id": "g696afc30",
@@ -13476,7 +13484,8 @@
     }
    },
    "sum_basis": "not_a_price",
-   "date_basis": "announcement"
+   "date_basis": "announcement",
+   "no_parties": "Выкуп компанией собственных акций у акционеров через дочернее общество — пары покупатель/продавец нет."
   },
   {
    "id": "gcd2b0954",
@@ -29160,7 +29169,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Akcionery-ukrainskogo-Alfa-Banka-gotovy-dokapitalizirovat-ego-na-1-mlrd-ili-bezvozmezdno-peredat-gosudarstvu-79880"
     ]
-   ]
+   ],
+   "no_parties": "Не состоявшееся предложение акционеров (докапитализация или безвозмездная передача государству), сделки купли-продажи не было."
   },
   {
    "id": "g47844a63",
@@ -30817,7 +30827,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Philip-Morris-ocenil-svoi-23-v-rossijskom-distribyutore-Megapolis-v-351-mln-82211"
     ]
-   ]
+   ],
+   "no_parties": "Переоценка доли в отчётности PMI, продажи нет. Возможно, это вообще не сделка (тип «оценка»)."
   },
   {
    "id": "g432502a3",
@@ -31971,7 +31982,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Kompaniya-osnovnogo-vladelca-Qiwi-Sergeya-Solonina-predlozhila-vykupit-akcii-u-minoritariev-na-summu-do-25-mln-79209"
     ]
-   ]
+   ],
+   "buyer_name": "Сергей Солонин"
   },
   {
    "id": "g53ebfe72",
@@ -34203,7 +34215,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Set-kofeen-samoobsluzhivaniya-Tochka-Chernogo-priobretaet-Prosto-Barista-za-25-mln-86301"
     ]
-   ]
+   ],
+   "buyer_name": "«Точка Черного»"
   },
   {
    "id": "ga311fd12",
@@ -47096,7 +47109,8 @@
      "multiple_text": "no_target"
     }
    },
-   "sum_basis": "raise"
+   "sum_basis": "raise",
+   "no_parties": "Не покупка бизнеса: запуск фонда, а не сделка: ни покупки, ни продажи компании нет. Это новость о создании ЗПИФ (если оставлять в базе — не M&A)."
   },
   {
    "id": "g5eb6ff22",
@@ -49427,7 +49441,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "price_not_verified"
     }
-   }
+   },
+   "no_parties": "Не покупка бизнеса: раунд привлечения инвестиций → тип «Инвестиция». Инвесторы: Антон Долгов, Роман Калинкин, Александр Семенов, Александр Моносов; продавца нет."
   },
   {
    "id": "g92c6a8ce",
@@ -53691,7 +53706,7 @@
    "id": "g1e8cec22",
    "date": "2022-02-24",
    "title": "Приобретение группой ВТБ 99% процессинговой компании «Инновационные платежные технологии» (бренд Paymo)",
-   "buyer": null,
+   "buyer": "gcafc31dc",
    "target": "g618a6589",
    "ind": "Банки",
    "type": "M&A",
@@ -91034,7 +91049,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "no_parties": "Продавец официально не раскрыт, покупатель не определён (X5 лишь направляла необязывающее предложение)."
   },
   {
    "id": "gb6b371c3",
@@ -99771,7 +99787,7 @@
   },
   {
    "id": "g995f83cf",
-   "date": "2024-11-22",
+   "date": "2024-11-13",
    "title": "Приобретение российских компаний группы «Ренессанс Капитал» у «Группы Онэксим»",
    "buyer": null,
    "target": "rencap",
@@ -99860,10 +99876,10 @@
      "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2024-11-22",
+     "value": "2024-11-13",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "708c211745ce"
+     "card_hash": "4fb87022c165"
     },
     "nature": {
      "control_change": true,
@@ -99899,7 +99915,10 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "buyer_name": "Максим Орловский, Владимир Куров и Игорь Даниленко (топ-менеджеры)",
+   "seller": "ООО «Группа Онэксим»",
+   "seller_src": "text"
   },
   {
    "id": "g81a22b7c",
@@ -120166,7 +120185,7 @@
    "id": "gf0ce42ac",
    "date": "2024-08-12",
    "title": "Выход Михаила Федяева из капитала ГК «Азот»",
-   "buyer": null,
+   "buyer": "gfaa85d4b",
    "target": "gf06a3acd",
    "ind": "Химия и удобрения",
    "type": "M&A",
@@ -120297,7 +120316,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller": "Светлана Рыбальченко",
+   "seller_src": "text"
   },
   {
    "id": "gfcfba8c9",
@@ -122275,7 +122296,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "no_parties": "Покупатели описаны без имён, продавец не указан, рабочего источника нет — назвать стороны нечем (не «нет сторон», а «стороны неизвестны»)."
   },
   {
    "id": "ga1935680",
@@ -148784,7 +148806,9 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
-   }
+   },
+   "seller": "Yandex N.V.",
+   "seller_src": "text"
   },
   {
    "id": "g221e4969",
@@ -186050,7 +186074,10 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/5067"
     ]
-   ]
+   ],
+   "buyer": "gddadfff8",
+   "seller": "Вячеслав Заяц и Дмитрий Саенко",
+   "seller_src": "text"
   },
   {
    "id": "c0f002400",
@@ -186255,7 +186282,10 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g9d7ead5b",
+   "seller": "СОГАЗ",
+   "seller_src": "text"
   },
   {
    "id": "c43f195a5",
@@ -186992,7 +187022,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "no_parties": "Новость о заморозке двух разных сделок указом №520, одной пары покупатель/продавец нет (каждая сделка — отдельная карточка)."
   },
   {
    "id": "cc846f75c",
@@ -187179,7 +187210,11 @@
     }
    },
    "sum": "До $500 млн",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer_name": "Atlas Holdings",
+   "seller": "Evraz",
+   "seller_src": "text",
+   "seller_id": "g1986021e"
   },
   {
    "id": "cccedc36b",
@@ -187294,7 +187329,8 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/6091"
     ]
-   ]
+   ],
+   "buyer": "g179a1f41"
   },
   {
    "id": "c59e65efb",
@@ -187491,7 +187527,11 @@
      "multiple_text": "failed"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer_name": "Барак Абрамов",
+   "seller": "Яндекс",
+   "seller_src": "text",
+   "seller_id": "yandex"
   },
   {
    "id": "cfdb3878d",
@@ -187680,7 +187720,8 @@
     }
    },
    "followup_researched": "2026-09-07",
-   "status": "Закрыта"
+   "status": "Закрыта",
+   "buyer": "g4912c119"
   },
   {
    "id": "c7403d4db",
@@ -187779,7 +187820,10 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "ВТБ",
+   "seller_src": "text",
+   "seller_id": "gcafc31dc"
   },
   {
    "id": "c85ba6042",
@@ -188000,7 +188044,11 @@
      "multiple_text": "failed"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "gcb2a725b",
+   "seller": "ЛУКОЙЛ",
+   "seller_src": "text",
+   "seller_id": "g5c8c6494"
   },
   {
    "id": "c7240231e",
@@ -188598,7 +188646,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g41f567f1"
   },
   {
    "id": "cdcc6f67f",
@@ -188790,7 +188839,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g549ab474"
   },
   {
    "id": "c4e275305",
@@ -188902,7 +188952,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Передача изъятых у государства компаний в управление «Феско», собственность не продавалась"
   },
   {
    "id": "c43cb8f80",
@@ -189322,7 +189373,8 @@
      "multiple_text": "failed"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Намерение передать группу государству без названного получателя; не состоялось (группу позже купил ЕАС Групп — отдельная сделка)"
   },
   {
    "id": "c31a23b22",
@@ -189437,7 +189489,11 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/5713"
     ]
-   ]
+   ],
+   "buyer": "gce068d4f",
+   "seller": "SRV Group",
+   "seller_src": "text",
+   "seller_id": "ge21c201f"
   },
   {
    "id": "cea87de0a",
@@ -189916,7 +189972,8 @@
     }
    },
    "followup_researched": "2026-09-08",
-   "status": "Не состоялась"
+   "status": "Не состоялась",
+   "no_parties": "Судебный спор о сорванной продаже, а не сделка (сама продажа SRV → Central Properties — в карточке c31a23b22)"
   },
   {
    "id": "cc63cf578",
@@ -190013,7 +190070,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g7ffb3b7a"
   },
   {
    "id": "c3bdd7fd4",
@@ -190517,7 +190575,8 @@
     }
    },
    "status": "Обсуждается",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Не покупка бизнеса: оценка бизнеса Russ, не сделка; не M&A (оценка/новость о компании)"
   },
   {
    "id": "cc16fce80",
@@ -190930,7 +190989,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g8c7cfb14"
   },
   {
    "id": "c2c719a9a",
@@ -191026,7 +191086,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Временное управление по указу президента, собственность не переходила"
   },
   {
    "id": "c975894bf",
@@ -191130,7 +191191,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Временное управление (Газпром бытовые системы), не покупка"
   },
   {
    "id": "c6a6cb6ee",
@@ -191311,7 +191373,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "gbd9b5fa5"
   },
   {
    "id": "c1d2ba2c0",
@@ -191406,7 +191469,10 @@
     }
    },
    "status": "Обсуждается",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "g9fd82fee",
+   "seller": "Юрий Антипов",
+   "seller_src": "text"
   },
   {
    "id": "cbb730efc",
@@ -191502,7 +191568,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Временное управление Росимущества по указу, собственность не переходила"
   },
   {
    "id": "cdbb80afb",
@@ -191700,7 +191767,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Возможное участие в ещё не созданном СП, переговоры опровергнуты; продажи доли нет"
   },
   {
    "id": "c51d0bb64",
@@ -191842,7 +191910,11 @@
      "Mergers.ru",
      "https://mergers.ru/news/Pokupku-VTB-5-d-WB-banke-perenesli-na-sentyabr-87451"
     ]
-   ]
+   ],
+   "buyer": "gcafc31dc",
+   "seller": "Wildberries & Russ",
+   "seller_src": "text",
+   "seller_id": "g549ab474"
   },
   {
    "id": "ce4180b68",
@@ -192172,7 +192244,8 @@
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-08",
-   "sum_basis": "not_a_price"
+   "sum_basis": "not_a_price",
+   "no_parties": "Возврат изъятого имущества прежнему владельцу по суду и соглашению с ФТ «Сириус», не покупка"
   },
   {
    "id": "ce56cdefd",
@@ -192271,7 +192344,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "g9fd82fee"
   },
   {
    "id": "cacdb5edc",
@@ -192374,7 +192448,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Смена управления и партнёрство, доли не продавались"
   },
   {
    "id": "c4534c6d1",
@@ -192506,7 +192581,8 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/6799"
     ]
-   ]
+   ],
+   "no_parties": "Предложение «Самолёта» государству без конкретного покупателя; правительство отказало"
   },
   {
    "id": "c56a6cc5f",
@@ -192865,7 +192941,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Заявление об отказе от акций в пользу государства, не реализовано; реальная продажа — отдельная сделка"
   },
   {
    "id": "c2d0c1dcd",
@@ -193078,7 +193155,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "g7ffb3b7a"
   },
   {
    "id": "c45ad6ae9",
@@ -193173,7 +193251,11 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/6102"
     ]
-   ]
+   ],
+   "buyer": "g68a09920",
+   "seller": "ВТБ",
+   "seller_src": "text",
+   "seller_id": "gcafc31dc"
   },
   {
    "id": "c382b7c7d",
@@ -193275,7 +193357,10 @@
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-08",
-   "sum_basis": "not_a_price"
+   "sum_basis": "not_a_price",
+   "buyer_name": "Российская Федерация",
+   "seller": "Марк Шабада, Григорий Штульберг и Леонид Невзлин",
+   "seller_src": "text"
   },
   {
    "id": "c07bedf76",
@@ -193375,7 +193460,11 @@
     }
    },
    "status": "Обсуждается",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "buyer": "g3e551f6e",
+   "seller": "Газпром",
+   "seller_src": "text",
+   "seller_id": "gc0f11fd7"
   },
   {
    "id": "c76599765",
@@ -193476,7 +193565,9 @@
     }
    },
    "followup_researched": "2026-09-07",
-   "sum_basis": "auction_start"
+   "sum_basis": "auction_start",
+   "seller": "Фонд имени Аркадия Райкина",
+   "seller_src": "text"
   },
   {
    "id": "c36556448",
@@ -193586,7 +193677,9 @@
      "multiple_text": "failed"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "seller": "Юлия Туголукова и Борис Есенькин",
+   "seller_src": "text"
   },
   {
    "id": "c33a55069",
@@ -193683,7 +193776,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Судебный иск миноритариев, не сделка (иск отклонён)"
   },
   {
    "id": "cad103bca",
@@ -193777,7 +193871,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "no_parties": "Взаимный раздел совместных проектов: Invest AG и «РКС Девелопмент» обмениваются долями, каждая сторона одновременно и покупатель, и продавец"
   },
   {
    "id": "c870f1e2a",
@@ -193880,7 +193975,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Передача заводов Silgan во временное управление Росимущества указом, собственник не менялся"
   },
   {
    "id": "c09e39da9",
@@ -194178,7 +194274,9 @@
     }
    },
    "followup_researched": "2026-09-07",
-   "status": "Обсуждается"
+   "status": "Обсуждается",
+   "seller": "Альберт Авдолян",
+   "seller_src": "text"
   },
   {
    "id": "c6b59f911",
@@ -194281,7 +194379,11 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "rosatom",
+   "seller": "Росимущество",
+   "seller_src": "text",
+   "seller_id": "g9fd82fee"
   },
   {
    "id": "cf6de2938",
@@ -194607,7 +194709,8 @@
     }
    },
    "followup_researched": "2026-09-11",
-   "sum_basis": "not_a_price"
+   "sum_basis": "not_a_price",
+   "no_parties": "Создание совместного предприятия под новое производство, продажи доли нет"
   },
   {
    "id": "ca71a7545",
@@ -194809,7 +194912,8 @@
    "law": {
     "struct": "В июне 2023 года совет директоров «Полюса» решил не поддерживать программы депозитарных расписок вовсе (делистинг с Лондонской фондовой биржи). Размещение на Astana International Exchange, судя по всему, не состоялось: в обзорах эмитентов биржи за 2023–2025 годы «Полюса» среди торгующихся компаний нет."
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Не покупка бизнеса: не M&A: листинг/размещение депозитарных расписок (ECM), к тому же не состоялось"
   },
   {
    "id": "c9a31a355",
@@ -195026,7 +195130,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Передача права голоса иностранных участников по указу, собственность не перешла; продажа доли Fraport компании Orbit Aviation в 2024 году — отдельная сделка"
   },
   {
    "id": "c672707b3",
@@ -195231,7 +195336,8 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Назначение управляющей компании для национализированных обществ; выкуп «Росхимом» у Росимущества в 2024 году — отдельная сделка"
   },
   {
    "id": "c59db5494",
@@ -195429,7 +195535,8 @@
     }
    },
    "status": "Не состоялась",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Несостоявшееся объединение активов двух групп в одну компанию — нет пары покупатель/продавец; выкуп «Русагро» 77,5% «Агро-Белогорья» в 2024 году — отдельная сделка"
   },
   {
    "id": "c2adff6d3",
@@ -195633,7 +195740,8 @@
     "eco.context": [
      "38293968082d"
     ]
-   }
+   },
+   "no_parties": "Кадровое назначение при временном управлении государства; продажа бизнеса «Вамин Р» в мае 2024 года — отдельная сделка"
   },
   {
    "id": "c374fc2ca",
@@ -195732,7 +195840,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Временное управление по указу, собственник не менялся"
   },
   {
    "id": "cef2d9366",
@@ -195949,7 +196058,10 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "seller": "Raiffeisen Bank International",
+   "seller_src": "text",
+   "seller_id": "g05efe03b"
   },
   {
    "id": "c4341479b",
@@ -196052,7 +196164,10 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer_name": "Александр Новак (владелец «Арники»)",
+   "seller": "Дмитрий Минц",
+   "seller_src": "text"
   },
   {
    "id": "c1062263e",
@@ -196159,7 +196274,10 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer": "g9fd82fee",
+   "seller": "«Метахолдинг»",
+   "seller_src": "text"
   },
   {
    "id": "c011c4ee1",
@@ -196260,7 +196378,10 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "GeoPost",
+   "seller_src": "text",
+   "seller_id": "g45c0ab3b"
   },
   {
    "id": "c3e0b0e8f",
@@ -196590,7 +196711,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Обратный выкуп собственных акций (buyback)"
   },
   {
    "id": "c151696b4",
@@ -196700,7 +196822,10 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "g9fd82fee",
+   "seller": "Игорь Пестриков, Сергей Кирпичев",
+   "seller_src": "text"
   },
   {
    "id": "c6eb3063c",
@@ -196927,7 +197052,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Передача долей Amedia во временное управление Росимущества по указу, собственник не менялся"
   },
   {
    "id": "cd175a614",
@@ -197017,7 +197143,10 @@
      "multiple_text": "failed"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "buyer_name": "Руслан Прудников",
+   "seller": "«Бауэр технология»",
+   "seller_src": "text"
   },
   {
    "id": "c7fd83d05",
@@ -197138,7 +197267,8 @@
      "source": "Коммерсантъ"
     }
    ],
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Временное управление по указу; продажа «Вамин Р» — отдельная сделка"
   },
   {
    "id": "c1aa8b20d",
@@ -197241,7 +197371,8 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "no_parties": "Передача управления конфискованными активами, собственник (РФ) не менялся"
   },
   {
    "id": "ce6b8c447",
@@ -197532,7 +197663,10 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "buyer": "gcf979752",
+   "seller": "GV Gold",
+   "seller_src": "text"
   },
   {
    "id": "c2455b014",
@@ -197740,7 +197874,9 @@
      "multiple_text": "no_target"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "Mars",
+   "seller_src": "text"
   },
   {
    "id": "gbcc32684",
@@ -218429,7 +218565,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "no_parties": "Создание совместного предприятия, продажи доли нет"
   },
   {
    "id": "g076af76a",
@@ -228587,7 +228724,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "no_parties": "Продавец («акционер») и покупатель («частный инвестор») не названы"
   },
   {
    "id": "gcd8d2664",
