@@ -2586,23 +2586,23 @@ def test_scroll_to_feed_lands_below_fixed_header(page, base_url):
 def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
     """Точки слайдера не ложатся на текст на невысоком экране.
 
-    Точки стоят `position:absolute; bottom:34px` и в поток не входят. В
-    браузере телеграма высота окна около 640px — текст доходил до них, и
-    подпись «сделки с 2022 года, база продолжает пополняться» читалась
-    сквозь кружки (скриншот владельца 9 августа). Проверять надо именно
-    низкий экран: на 844px перекрытия нет, и обычный прогон дефект не видит.
+    В браузере телеграма высота окна около 640px — текст доходил до точек,
+    и подпись читалась сквозь кружки (скриншот владельца 9 августа). С 12
+    октября 2026 на телефоне точки стоят в потоке между абзацем и кнопкой —
+    проверяем, что они не наезжают ни на абзац, ни на кнопку.
     """
     ctx = browser.new_context(viewport={"width": 393, "height": 640})
     try:
         pg = ctx.new_page()
         pg.goto(base_url + "/#/", wait_until="networkidle")
         pg.wait_for_timeout(2200)
-        gap = pg.evaluate("""() => {
-          const inr = document.querySelector('.hs-slide.on .hs-in').getBoundingClientRect();
+        gaps = pg.evaluate("""() => {
+          const p = document.querySelector('.hs-slide.on .hs-in p').getBoundingClientRect();
           const d = document.querySelector('.hs-dots').getBoundingClientRect();
-          return Math.round(d.top - inr.bottom);
+          const b = document.querySelector('.hs-bar').getBoundingClientRect();
+          return [Math.round(d.top - p.bottom), Math.round(b.top - d.bottom)];
         }""")
-        assert gap >= 0, f"содержимое героя заходит на точки слайдера ({gap}px)"
+        assert min(gaps) >= 0, f"точки слайдера наезжают на абзац или кнопку ({gaps})"
         # И ничего не обрезано на полуслове: приписка на низком экране скрыта целиком.
         clipped = pg.evaluate("""() => {
           const s = document.querySelector('.hs-slide.on');
@@ -4572,15 +4572,17 @@ def test_hero_dots_visible_in_short_in_app_browser(browser, base_url):
     12 октября 2026: у партнёра владельца в телеграме не было видно кружков
     перелистывания — герой на телефоне был выше видимой части окна (снизу у
     телеграма своя панель), и точки уходили под неё. Теперь высота героя не
-    больше высоты окна.
+    больше высоты окна. В тот же день — у друга владельца в Safari на айфоне:
+    панель адреса там плавает поверх нижних ~90px страницы. Поэтому на
+    телефоне точки стоят под абзацем, далеко от нижнего края окна.
     """
-    for w, h in ((390, 620), (375, 560), (430, 700)):
+    for w, h in ((390, 620), (375, 560), (430, 700), (390, 844), (430, 932)):
         ctx = browser.new_context(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
         try:
             pg = ctx.new_page()
             pg.goto(base_url + "/#/", wait_until="networkidle")
             pg.wait_for_timeout(1200)
             bottom = pg.evaluate("document.querySelector('.hs-dots').getBoundingClientRect().bottom")
-            assert bottom <= h, f"{w}×{h}: точки ниже края окна ({bottom}px)"
+            assert bottom <= h - 150, f"{w}×{h}: точки у нижнего края окна ({bottom}px) — их закроет панель браузера"
         finally:
             ctx.close()

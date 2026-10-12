@@ -171,7 +171,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hs-cta:hover{background:#fff;transform:translateY(-2px)}
 .hs-cta.ghost{background:transparent;color:var(--ivory);border:1px solid rgba(243,241,233,.4)}
 .hs-cta.ghost:hover{border-color:var(--ivory);background:rgba(243,241,233,.08)}
-.hs-dots{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 46px);left:50%;transform:translateX(-50%);display:flex;gap:14px;z-index:6}
+.hs-dots{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 46px);left:50%;transform:translateX(-50%);display:flex;gap:14px;z-index:6;pointer-events:auto}
 .hs-dots button{width:10px;height:10px;border-radius:50%;background:transparent;border:1.5px solid rgba(243,241,233,.55);transition:all .3s;padding:0}
 .hs-dots button.on{background:#C9AE7C;border-color:#C9AE7C;transform:scale(1.25)}
 .hs-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid rgba(243,241,233,.28);color:rgba(243,241,233,.75);font-size:20px;display:flex;align-items:center;justify-content:center;background:rgba(10,18,16,.25);backdrop-filter:blur(3px);transition:all .25s}
@@ -337,21 +337,24 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   /* Не выше видимой части окна: во встроенном браузере телеграма снизу своя
      панель, и точки слайдера уходили под неё (12 октября 2026). Если окно
      ниже, сцена теряет немного неба сверху (svg прижат к низу), точки на виду. */
-  .heroslider{--hs-h:min(calc(338px + 100vw), max(520px, 100svh));height:var(--hs-h);min-height:0}
-  @supports (height:100dvh){.heroslider{--hs-h:min(calc(338px + 100vw), max(520px, 100dvh))}}
+  .heroslider{--hs-h:min(calc(366px + 100vw), max(548px, 100svh));height:var(--hs-h);min-height:0}
+  @supports (height:100dvh){.heroslider{--hs-h:min(calc(366px + 100vw), max(548px, 100dvh))}}
   .hs-in{height:auto;overflow:visible;padding-top:92px}
   .hs-in > p{margin-bottom:0}
   .hs-in h1.hs-word{font-size:40px}
   .hs-in p{font-size:14.5px;margin-top:14px;height:calc(1.6em * 5)}
-  .hs-gap{height:68px}
+  .hs-gap{height:96px}
   .hs-bar{margin-top:18px;width:auto}
   .hs-slide svg.hx-scene{inset:auto;top:auto;bottom:40px;left:calc(50vw - var(--fx) / 1440 * var(--k) * 100vw);
-    width:calc(var(--k) * 100vw);height:min(calc(var(--k) * 100vw * 780 / 1440), calc(var(--hs-h) - 340px));
+    width:calc(var(--k) * 100vw);height:min(calc(var(--k) * 100vw * 780 / 1440), calc(var(--hs-h) - 368px));
     -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%)}
   .hx-tick{font-size:30px}
   .hx-shore{transform:translateX(215px)}
   .heroslider:after{height:40px}
-  .hs-dots{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
+  /* Точки — между абзацем и кнопкой, а не у нижнего края: в Safari на
+     айфоне (iOS 26) панель адреса плавает поверх страницы, и всё, что
+     прижато к низу героя, оказывается под ней (12 октября 2026). */
+  .hs-dots{position:static;transform:none;margin-top:18px;height:10px;align-items:center;padding-left:2px}
   .hs-cue{display:none}
   .hs-arrow{display:none}
 }
@@ -359,14 +362,13 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-in{padding-top:92px}
   .hs-in h1.hs-word{font-size:40px}
   .hs-in p{font-size:14.5px;line-height:1.6;margin-top:14px}
-  .hs-dots{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
 }
 @media(min-width:721px) and (max-width:1100px) and (orientation:portrait){
   .hs-in{padding-left:48px;padding-right:48px}
   .hs-in h1.hs-word{font-size:52px}
   .hs-in p{font-size:16px;height:calc(1.6em * 3)}
   .hs-bar{width:320px}
-  .heroslider{--hs-h:min(calc(320px + 100vw), max(600px, 100dvh));height:var(--hs-h)}
+  .heroslider{--hs-h:min(calc(348px + 100vw), max(628px, 100dvh));height:var(--hs-h)}
   .hx-tick{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){.heroslider *{animation:none!important;transition:none!important}}
@@ -5070,10 +5072,9 @@ function renderDeals(){
         ${modeToggleHtml(false)}
       </div>
     </div>
-    <div class="hs-in hs-shared"><h1 class="hs-word">&nbsp;</h1><p></p><div class="hs-bar"><a class="on" href="#feed" data-scroll>Смотреть сделки</a><a href="#/companies">Открыть компании</a><a href="#/advisors">Открыть консультантов</a><a href="#/analytics">Открыть аналитику</a><a href="#/assistant">Открыть ассистента</a></div></div>
+    <div class="hs-in hs-shared"><h1 class="hs-word">&nbsp;</h1><p></p><div class="hs-dots">${[0,1,2,3,4].map(i=>`<button data-dot="${i}" class="${i===0?"on":""}" aria-label="Слайд ${i+1}"></button>`).join("")}</div><div class="hs-bar"><a class="on" href="#feed" data-scroll>Смотреть сделки</a><a href="#/companies">Открыть компании</a><a href="#/advisors">Открыть консультантов</a><a href="#/analytics">Открыть аналитику</a><a href="#/assistant">Открыть ассистента</a></div></div>
     <button class="hs-arrow prev" aria-label="Предыдущий слайд">←</button>
     <button class="hs-arrow next" aria-label="Следующий слайд">→</button>
-    <div class="hs-dots">${[0,1,2,3,4].map(i=>`<button data-dot="${i}" class="${i===0?"on":""}" aria-label="Слайд ${i+1}"></button>`).join("")}</div>
     <div class="hs-cue">↓</div>
   </div>
   <div id="feed"></div>
