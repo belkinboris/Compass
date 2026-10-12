@@ -4586,3 +4586,41 @@ def test_hero_dots_visible_in_short_in_app_browser(browser, base_url):
             assert bottom <= h - 150, f"{w}×{h}: точки у нижнего края окна ({bottom}px) — их закроет панель браузера"
         finally:
             ctx.close()
+
+
+def test_feed_hides_real_estate_with_one_button(browser, base_url):
+    """«Убрать недвижимость» рядом с «Фильтры» скрывает все сделки отрасли
+    «Недвижимость» и возвращает их вторым нажатием (владелец, 12 октября 2026:
+    новичок принимает «Компас» за портал недвижимости)."""
+    pg = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        pg.goto(base_url + "/#/", wait_until="networkidle")
+        pg.wait_for_selector("#norealty")
+        rows = lambda: pg.evaluate("[...document.querySelectorAll('#feedlist .deal-row')].filter(r=>/Недвижимость/i.test(r.innerText)).length")
+        assert rows() > 0, "в первой странице ленты нет недвижимости — тест ничего не проверит"
+        pg.click("#norealty"); pg.wait_for_timeout(300)
+        assert rows() == 0
+        assert "norealty=1" in pg.evaluate("location.hash")
+        assert pg.inner_text("#norealty") == "Вернуть недвижимость"
+        pg.click("#norealty"); pg.wait_for_timeout(300)
+        assert rows() > 0
+    finally:
+        pg.close()
+
+
+def test_advisors_industry_lists_only_firms_with_deals(browser, base_url):
+    """Выбрана отрасль — в каталоге консультантов только фирмы со сделками в
+    ней, без хвоста «в отрасли сделок нет» (владелец, 12 октября 2026). Есть
+    вкладка Executive Search."""
+    pg = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        pg.goto(base_url + "/#/advisors", wait_until="networkidle")
+        pg.wait_for_selector("#advind")
+        total = pg.evaluate("document.querySelectorAll('.advisor-card').length")
+        pg.select_option("#advind", "Банки"); pg.wait_for_timeout(300)
+        n = pg.evaluate("document.querySelectorAll('.advisor-card').length")
+        empty = pg.evaluate("document.querySelectorAll('.advisor-card .count-btn.empty').length")
+        assert 0 < n < total and empty == 0, (total, n, empty)
+        assert pg.locator("[data-t=exec]").inner_text() == "Executive Search"
+    finally:
+        pg.close()

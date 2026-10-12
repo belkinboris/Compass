@@ -578,6 +578,16 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     if not (card.get('target') or card.get('asset_id') or has(asset)) \
             and card.get('type') in ('M&A', 'Продажа с торгов', 'Инвестиция') and 'target' not in waived:
         out.append(('asset_missing', 'предмет сделки не назван (ни профиль, ни текст)'))
+    # Стороны сделки — то, ради чего карточку открывают. 12 октября 2026 владелец
+    # нашёл «Ренессанс Капитал» / «Онэксим» без покупателя и продавца при прямых
+    # именах в источниках; таких M&A было 84, все прошли приёмку и аудиты.
+    # Пустые стороны допустимы только с причиной в `no_parties` (временное
+    # управление, обратный выкуп, суд…) — ту же границу держит
+    # test_data.py::test_ma_deal_names_a_party.
+    if card.get('type') == 'M&A' and not any(has(card.get(f)) for f in ('buyer', 'buyer_name', 'seller', 'seller_id')) \
+            and not has(card.get('no_parties')):
+        out.append(('parties_missing', 'не названы ни покупатель, ни продавец — впишите стороны по источнику '
+                    'или причину в no_parties (временное управление, обратный выкуп, суд)'))
     for role, (text_field, id_field) in ROLES.items():
         text = card.get(text_field)
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))

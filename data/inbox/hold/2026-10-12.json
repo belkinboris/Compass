@@ -42,7 +42,7 @@
    ]
   },
   {
-   "draft_id": "d23128935",
+   "draft_id": "d65939515",
    "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
    "src": [
@@ -68,116 +68,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d48968202",
-   "title": "Starbucks опровергла информацию о планах купить Chipotle Mexican Grill",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1121897"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "Американская Starbucks Corp., владеющая крупнейшей в мире сетью кофеен, не намерена покупать оператора ресторанов Chipotle Mexican Grill, сообщают NBC News со ссылкой на комментарий корпорации.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1121897"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d39985655",
-   "title": "В Starbucks опровергли планы по покупке Chipotle",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261012/starbucks-874156001.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261012/starbucks-874156001.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Starbucks опровергла информацию о планах купить Chipotle Mex» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d71696929",
-   "title": "Кредитный рейтинг национализированной в России компании упал",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/12/ugk/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

@@ -110,6 +110,35 @@ def test_one_company_holds_one_role_in_a_deal(deals):
     assert not bad, f"одна компания в двух ролях: {bad[:5]}"
 
 
+# Карточки M&A без единой названной стороны, которые пока не удалось
+# заполнить уверенно (источник неоднозначен) — разобрать и вычеркнуть.
+# Список только сокращается: новая карточка без сторон сюда не дописывается,
+# её чинят. См. pipeline/fill_missing_parties_2026_10_12.py.
+MA_PARTIES_BACKLOG = {"g8e9d37ba", "g36386bcf", "cdcc6f67f", "cd51336b7", "g6e1bb001"}
+
+
+def test_ma_deal_names_a_party(deals):
+    """У сделки M&A названа хотя бы одна сторона — или записано, почему сторон нет.
+
+    12 октября 2026 владелец открыл карточку «Ренессанс Капитал» / «Онэксим»:
+    ни покупателя, ни продавца, хотя в источниках оба названы прямо, — «лютый
+    проеб». Аудиты её проходили много раз, но проверяли правильность того, что
+    записано, а не то, что поле вообще пустое. Таких карточек было 84. Теперь:
+    либо `buyer`/`buyer_name`/`seller`/`seller_id`, либо `no_parties` с
+    причиной (временное управление, обратный выкуп, суд, СП без продажи).
+    """
+    bad = [d["id"] for d in deals
+           if d.get("type") == "M&A" and str(d.get("date", "")) >= "2022"
+           and not (d.get("buyer") or d.get("buyer_name") or d.get("seller") or d.get("seller_id"))
+           and not str(d.get("no_parties") or "").strip()
+           and d["id"] not in MA_PARTIES_BACKLOG]
+    assert not bad, f"сделки M&A без покупателя и продавца (впишите стороны по источнику или no_parties с причиной): {bad}"
+    fixed = [i for i in MA_PARTIES_BACKLOG
+             if any(d["id"] == i and (d.get("buyer") or d.get("buyer_name") or d.get("seller") or d.get("seller_id")
+                                      or d.get("no_parties")) for d in deals)]
+    assert not fixed, f"уже разобраны — вычеркните из MA_PARTIES_BACKLOG: {fixed}"
+
+
 def test_seller_is_not_a_placeholder(deals):
     """«Продавец: не раскрыт» — это пустое поле, а не имя стороны."""
     bad = [(d["id"], d["seller"]) for d in deals
