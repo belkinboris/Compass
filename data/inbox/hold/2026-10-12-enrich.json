@@ -11,8 +11,17 @@
    ]
   },
   {
-   "news": "https://realty.ria.ru/20261012/vlasti-2123882446.html",
-   "title": "В Москве выставили на торги проект КРТ в Западном Бирюлеве",
+   "news": "https://abnews.ru/center/news/yaroslavl/2026/10/12/v-yaroslavle-otmenili-aukczion-po-prodazhe-torgovogo-doma-vahrameeva",
+   "title": "В Ярославле отменили аукцион по продаже «Торгового дома Вахрамеева»",
+   "verdict": "enrich:g4c7906c5",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://iz.ru/2182654/v-moskve-vystaviat-na-torgi-letnii-den-polden-kandinskogo-za-90-mln-rublei-izi",
+   "title": "В Москве выставят на торги «Летний день. Полдень» Кандинского за 90 млн рублей",
    "verdict": "enrich:gbcf07c78",
    "why": "общие слова заголовка: 3",
    "reasons": [
@@ -20,9 +29,9 @@
    ]
   },
   {
-   "news": "https://abnews.ru/center/news/yaroslavl/2026/10/12/v-yaroslavle-otmenili-aukczion-po-prodazhe-torgovogo-doma-vahrameeva",
-   "title": "В Ярославле отменили аукцион по продаже «Торгового дома Вахрамеева»",
-   "verdict": "enrich:g4c7906c5",
+   "news": "https://realty.ria.ru/20261012/vlasti-2123897203.html",
+   "title": "Власти Москвы выставили на торги проект КРТ на месте Рижского рынка",
+   "verdict": "enrich:g6d711306",
    "why": "общие слова заголовка: 3",
    "reasons": [
     "слабое совпадение: общие слова заголовка: 3"

@@ -42,46 +42,7 @@
    ]
   },
   {
-   "draft_id": "d27152764",
-   "title": "Группа из топ-5 рекламных компаний России объявила о подготовке к IPO",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/12/10/2026/6acc668e5053246da65516fe"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "&laquo;Игроник&raquo; может стать первой публичной российской компанией на рекламном рынке&nbsp;&mdash; холдинг запланировал провести IPO, сообщил РБК основатель компании Никита Пипко.",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/technology_and_media/12/10/2026/6acc668e5053246da65516fe"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75039129",
+   "draft_id": "d37393010",
    "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
    "src": [
@@ -110,13 +71,138 @@
    ]
   },
   {
-   "draft_id": "d62117995",
-   "title": "Росстандарт запретил продажи некоторых грузовиков DONGFENG, FOTON, XCMG и JAC",
+   "draft_id": "d89670879",
+   "title": "В АСИ подсчитали, сколько лет россиянам нужно копить на покупку квартиры",
    "date": "2026-10-12",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28205665"
+     "https://tass.ru/nedvizhimost/28206113"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83690461",
+   "title": "Amazon ведет переговоры о покупке ИИ-стартапа Decart за $7 млрд — ранее компанию оценивали почти вдвое дешевле",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/amazon-vedet-peregovory-o-pokupke-ii-startapa-decart-za-7-mlrd-ranee-kompaniyu-ocenivali-pochti-vdvoe-deshevle/"
+    ]
+   ],
+   "sum": "$7 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-12",
+     "title": "Переговоры",
+     "note": "Amazon ведет переговоры о покупке ИИ-стартапа Decart за $7 млрд, сообщает The Wall Street Journal со ссылкой на источники. Компания разрабатывает модели искусственного интеллекта для обработки видео в реальном времени и симуляции виртуальных сред. В мае…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/amazon-vedet-peregovory-o-pokupke-ii-startapa-decart-za-7-mlrd-ranee-kompaniyu-ocenivali-pochti-vdvoe-deshevle/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g5e7d168d (общие редкие слова: вдвое, дешевл) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d71752030",
+   "title": "СМИ: покупки россиянами виниловых пластинок выросли на 10% за год",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261012/vinil-2123984350.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37327712",
+   "title": "В России резко упали продажи новых машин",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/12/v-rossii-rezko-upali-prodazhi-novyh-mashin/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66847126",
+   "title": "Французский бренд начал продавать джинсы с дыркой между ног",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135491"
     ]
    ],
    "sum": null,
@@ -135,46 +221,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24463891",
-   "title": "Медиахолдинг «Игроник» рассматривает выход на IPO",
-   "date": "2026-10-12",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/12/1236318-igronik-na-ipo"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-12",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/investments/news/2026/10/12/1236318-igronik-na-ipo"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Медиа",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
