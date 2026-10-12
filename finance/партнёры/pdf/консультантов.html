@@ -1,0 +1,48 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Страница фирмы в «Компасе»</title><style>
+@font-face{font-family:'Commissioner';src:url(fonts/commissioner-cyrillic.woff2) format('woff2');font-weight:100 900;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Commissioner';src:url(fonts/commissioner-latin.woff2) format('woff2');font-weight:100 900}
+@font-face{font-family:'PT Serif Compass';src:url(fonts/PTSerif-Bold.ttf) format('truetype');font-weight:700}
+
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+:root{--paper:#F5F5F1;--card:#fff;--ink:#15191D;--muted:#66707A;--line:#E2E5DF;--accent:#1D5A44;--accent-deep:#0F2B21;--accent-soft:#E9F0EC;--ivory:#F3F1E9;--bronze:#A3814E;--bronze-light:#C9AE7C}
+html,body{margin:0}
+body{font-family:'Commissioner',system-ui,sans-serif;color:var(--ink);font-size:11pt;line-height:1.5;background:#fff}
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:14px 18mm;display:flex;align-items:center;gap:30px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:'PT Serif Compass',Georgia,serif;font-weight:700;font-size:20px;letter-spacing:.02em}
+.logo b{color:var(--bronze)}
+.nav{display:flex;gap:22px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nav .on{color:var(--ink);border-bottom:2px solid var(--accent);padding-bottom:3px}
+.body{padding:16mm 18mm 0;flex:1}
+.kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:'PT Serif Compass',Georgia,serif;font-weight:700;font-size:30pt;line-height:1.12;margin:10px 0 12px;max-width:150mm}
+.lead{font-size:12.5pt;line-height:1.5;color:#3C434A;margin:0;max-width:150mm}
+.cols{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px;margin-top:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 18px 14px;position:relative;overflow:hidden}
+.card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.label{display:block;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+ul{margin:0;padding:0;list-style:none}
+li{padding:6px 0;border-top:1px solid var(--line);font-size:10.5pt;line-height:1.42}
+li:first-child{border-top:0;padding-top:0}
+.terms{margin:22px 0 0;background:linear-gradient(160deg,#0A1210 0%,#0F2B21 100%);color:var(--ivory);border-radius:4px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:18px}
+.terms .label{color:var(--bronze-light);margin-bottom:6px}
+.terms b{font-family:'PT Serif Compass',Georgia,serif;font-size:16pt;line-height:1.2;display:block}
+.terms span{font-size:10.5pt;color:#C9C4B4;line-height:1.4;display:block}
+.foot{padding:12px 18mm 14mm;display:flex;justify-content:space-between;font-size:10pt;color:var(--muted);border-top:1px solid var(--line)}
+</style></head><body>
+<section class="page">
+  <header class="top"><span class="logo"><svg viewBox="0 0 48 48" width="22" height="22" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="21" stroke="#15191D" stroke-width="2.6"/><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#A3814E"/><polygon points="24,43 28.5,24 19.5,24" fill="#15191D"/></g><circle cx="24" cy="24" r="3.2" fill="#fff" stroke="#15191D" stroke-width="1.6"/></svg><span>КО<b>М</b>П<b>А</b>С</span></span><nav class="nav"><span class="">Сделки</span><span class="">Компании</span><span class="on">Консультанты</span><span class="">Материалы</span><span class="">Аналитика</span><span class="">Ассистент</span></nav></header>
+  <div class="body">
+    <span class="kicker">Для партнёров · 1 650 сделок · 2 050 компаний</span>
+    <h1>Страница фирмы в «Компасе»</h1>
+    <p class="lead">Сделки, где фирма названа консультантом, уже описаны. Партнёр получает оформленную страницу, доступ к базе для команды и место в канале.</p>
+    <div class="cols"><div class="card"><span class="label">Что получает фирма</span><ul><li>Страница: логотип, описание, контакты, команда. Подсветка в каталоге.</li><li>Все сделки фирмы на одной странице — и те, что она раскроет сама.</li><li>Материалы под именем фирмы: колонки, комментарии, вебинары.</li><li>Доступ к базе для команды: фильтры, выгрузки, подписки, ассистент.</li><li>Пост о фирме в канале. Статистика раз в месяц.</li></ul></div><div class="card"><span class="label">Что нужно от фирмы</span><ul><li>Логотип, описание в 3–5 предложений, сайт и контакт.</li><li>Согласовать макет страницы — присылаем PDF.</li><li>Подписать соглашение о размещении, две страницы.</li></ul></div><div class="card"><span class="label">Чего не нужно</span><ul><li>Сообщать о сделках. База собирается из открытых источников; фирма раскрывает сверх этого только то, что хочет.</li><li>Проверять упоминания: по просьбе фирмы поправим или уберём в тот же день.</li></ul></div></div>
+    <div class="terms">
+      <div><span class="label">Срок</span><b>До 31 декабря 2026 — бесплатно</b></div>
+      <div><span class="label">Дальше</span><b>2027 год — 50 000 ₽ за всё</b></div>
+      <div><span class="label">Условие</span><span style="padding-top:4px">Цена зафиксирована для подключившихся в 2026 году. Отказаться можно в любой момент до начала платного периода.</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span>projectcompass.ru · t.me/projectcompassru</span><span>Проект «Компас» · 2026</span></footer>
+</section></body></html>
