@@ -1223,9 +1223,11 @@ def test_execburo_in_executive_search_tab_and_its_profile(page, base_url):
     assert card.count() == 1 and "Execburo" in card.inner_text()
     visit(page, base_url, "#/advisors/execburo")
     body = page.locator("#app").inner_text()
-    for part in ("EXECUTIVE SEARCH", "Услуги".upper(), "Executive Search", "Софья Беляндинова", "Сайт фирмы"):
+    for part in ("Мы помогаем найти тех", "Услуги", "Как устроен поиск", "Софья Беляндинова", "Сайт фирмы", "Нужен руководитель"):
         assert part.lower() in body.lower(), part
-    assert page.locator(".xf-logo").count() == 1
+    # Страница — по макету «Execburo в Компасе»: своя палитра внутри .xb.
+    assert page.locator(".xb .xb-hero h1").count() == 1
+    assert page.locator(".xb-mark").count() >= 1
     # Вкладка запоминается на странице — вернуть юридическую для соседних тестов.
     visit(page, base_url, "#/advisors")
     page.click('[data-t="legal"]')
