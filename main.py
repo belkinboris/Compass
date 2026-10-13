@@ -2546,6 +2546,12 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             verdict = {"ok": "approve", "hold": "hold", "discard": "discard",
                        "post_ok": "post_yes",
                        "post_no": "post_no", "take": "take", "drop": "drop"}[match.group(2)]
+            if verdict in ("approve", "hold", "discard", "post_yes", "post_no") \
+                    and _already_on_site(match.group(1)):
+                if callback.get("id"):
+                    notification_service.tg_api("answerCallbackQuery", callback_query_id=callback["id"],
+                                                show_alert=True, text=ALREADY_ON_SITE_TEXT)
+                return {"ok": True}
             # Отвечаем Telegram ПЕРВЫМ делом. Пока бот не ответил на нажатие,
             # у человека на кнопке крутится индикатор — и это ровно то, что
             # он описывает словами «кнопка не нажимается». Раньше ответ шёл
@@ -2655,6 +2661,12 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         return {"ok": True}
     if marker and text.strip() and _is_reviewer(sender_id):
         kind, raw_id = marker.group(1), marker.group(2)
+        # Ответ своим текстом на проект поста карточки, которая уже вышла, —
+        # не новый пост (см. _already_on_site): говорим об этом, не записывая.
+        if kind in ("пост", "черновик") and _already_on_site(raw_id):
+            notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=ALREADY_ON_SITE_TEXT,
+                                        disable_web_page_preview=True, **_thread_kwargs(reply))
+            return {"ok": True}
         verdict = "approve" if kind in ("пост", "черновик") else "note"
         # ВОПРОС — НЕ НОВЫЙ ТЕКСТ ПОСТА (4 октября 2026). Партнёр ответил на
         # проект поста OTP Bank «Что такое luminor?», и бот одобрил пост с
@@ -3753,6 +3765,28 @@ def _announce_channel_id(payload, db=None) -> bool:
                       "прогон — делать ничего не нужно." ) % (title, role),
                 **({"message_thread_id": thread} if thread else {}))
     return channel_update
+
+
+def _already_on_site(deal_id: str) -> bool:
+    """Карточка уже вышла на сайт и ушла из очереди — решения по её старому
+    черновику ничего не меняют. 13 октября 2026 «Медси» (g4d7b2e19) была
+    опубликована, а в консоли выше висели два её черновика с живыми кнопками
+    («Он нам эту хуйню второй раз не опубликует?»). Повторно она не выйдет —
+    `approve.py` смотрит только на очередь, а `send_telegram.py` не шлёт
+    второй первый пост, — но нажатие отвечало «Принято» и ставило «✅
+    Одобрено», будто что-то решило. Теперь бот говорит, как есть."""
+    did = str(deal_id or "")
+    if not did or "~" in did:
+        return False
+    pending = {str(c.get("id")) for c in (_read_json("static/data/pending.json", {}).get("cards") or [])}
+    if did in pending:
+        return False
+    return any(str(d.get("id")) == did for d in (base_data.promoted() or {}).get("deals") or [])
+
+
+ALREADY_ON_SITE_TEXT = ("Эта карточка уже на сайте, пост — в канале. Кнопки и ответы на этот "
+                        "черновик больше ничего не меняют. Поправить вышедшее — напишите, что "
+                        "изменить, ответом на карточку.")
 
 
 def _mark_decided(callback: dict, verdict: str, answered: bool = False) -> None:
