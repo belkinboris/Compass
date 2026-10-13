@@ -2619,6 +2619,29 @@ def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkey
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
 
+def test_old_draft_of_a_published_card_does_not_record_a_decision(client, monkeypatch):
+    """13 октября 2026, «Медси»: карточка уже на сайте и в канале, а над ней в
+    консоли висят старые черновики с кнопками. Нажатие и ответ текстом на
+    проект поста не записывают решение и прямо говорят, что карточка вышла."""
+    _mod_env(monkeypatch)
+    calls = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: calls.append((method, payload)) or {"ok": True})
+    monkeypatch.setattr(main, "_already_on_site", lambda did: did == "gpublished")
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "cb-pub", "from": {"id": 222}, "data": "mod:gpublished:ok",
+                            "message": {"message_id": 9, "chat": {"id": 222}, "text": "[карточка gpublished]"}}})
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": "Новый текст поста целиком, длинный, чтобы не сойти за вопрос или реплику.\n\nПокупатель: А",
+        "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 10, "text": "📣 [пост gpublished] — В КАНАЛ, на проверку"}}})
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "gpublished"]
+    assert rows == [], rows
+    said = " ".join(str(p.get("text")) for _m, p in calls)
+    assert "уже на сайте" in said, calls
+
+
 def test_button_press_is_answered_before_the_message_is_edited(client, monkeypatch):
     """Ответ на нажатие идёт ПЕРВЫМ, до правки сообщения.
 
