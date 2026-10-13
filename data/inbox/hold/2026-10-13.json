@@ -31,98 +31,13 @@
    ]
   },
   {
-   "draft_id": "d13527369",
-   "title": "«ВТО оказалась неспособна инициировать новые раунды торговой либерализации»",
-   "date": "2026-05-30",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/8624399"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54201304",
-   "title": "Строительство, покупку и аренду жилья предложили связать платформами",
+   "draft_id": "d62765718",
+   "title": "Россиян предупредили о дополнительных тратах при покупке новостроек",
    "date": "2026-10-13",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/13/10/2026/6acd35979a7947143ec15019"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d15486420",
-   "title": "Песков: РФ продает свои энергоресурсы на мировых рынках и продолжит это делать",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28209101"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "свои энергоресурсы на мировых рынках и продолжит это делать",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "свои энергоресурсы на мировых рынках и продолжит это делать",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d12613567",
-   "title": "ЕРЗ: продажи новостроек в 2026 году рухнут до рекордного минимума",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261013/prodazhi-874182929.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/13/rossiyan-predupredili-o-dopolnitelnyh-tratah-pri-pokupke-novostroek/"
     ]
    ],
    "sum": null,
@@ -138,6 +53,92 @@
     "seller": null
    },
    "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86108321",
+   "title": "Такие ошибки совершают почти все при покупке пуховика",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053135777"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d62016663",
+   "title": "Без сноса домов: в Заозерном Кургана выставили на продажу десятки гектаров под КРТ. Карта",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135767"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g955d2c6b (общие редкие слова: выстав, курган) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d35921899",
+   "title": "В Подмосковье 250 человек приняли участие в 90 земельно-имущественных аукционах",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/10/13/v-podmoskove-250-chelovek-prinyali-uchastie-v-90-zemelno-imushhestvennyh-aukczionah"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
