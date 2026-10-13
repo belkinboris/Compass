@@ -706,13 +706,35 @@ _GENERIC_NAME_WORDS = {'ооо', 'ао', 'пао', 'зао', 'оао', 'нао',
 def _mentions_party(sentence, party_name):
     """Предложение претендует на роль пояснения стороны, только если называет
     её: хотя бы одно значащее слово имени лежит в предложении (с точностью до
-    окончаний — тот же пословный компаратор, что и везде)."""
+    окончаний — тот же пословный компаратор, что и везде, но с более строгим
+    порогом общего начала).
+
+    НАЙДЕНО 13 октября 2026 (г. Петербург, «Дом Капеллы», `g2bd95d6e`):
+    `_same_word` принимает общее начало от 3 знаков, и короткое русское
+    «конца» (из «...века») наугад совпало с «Конюшенная» и «Коннэкт» —
+    общее начало «кон» у случайных слов с разным корнем. Пост вышел со
+    строкой «Покупатель: ООО «Гранд Конюшенная»... — Здание — памятник...»:
+    предложение было вообще не о покупателе. Общий `_same_word` трогать
+    нельзя — он держит сверку имён по всему притоку (`review.py`), здесь
+    порог поднят локально до 4 знаков общего начала: короче не считаем
+    совпадением вовсе, длиннее (падежные формы, «Займер»/«займы») — как и
+    раньше."""
     name_words = [w for w in re.findall(r'[А-Яа-яЁёA-Za-z0-9]+', party_name or '')
                   if len(w) >= 3 and w.lower().replace('ё', 'е') not in _GENERIC_NAME_WORDS]
     if not name_words:
         return True
     sent_words = re.findall(r'[А-Яа-яЁёA-Za-z0-9]+', sentence)
-    return any(any(_same_word(nw, sw) for sw in sent_words) for nw in name_words)
+
+    def matches(nw, sw):
+        a, b = nw.lower(), sw.lower()
+        if a == b:
+            return True
+        n = 0
+        while n < min(len(a), len(b)) and a[n] == b[n]:
+            n += 1
+        return n >= 4 and _same_word(nw, sw)
+
+    return any(any(matches(nw, sw) for sw in sent_words) for nw in name_words)
 
 
 def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, max_chars=200):
@@ -1212,6 +1234,7 @@ def lens_links(deal):
     return out
 
 
+_BUTTONS_CAPTION_LINE = re.compile(r'^\s*Кнопки под постом:')
 _OWN_LINK_LINE = re.compile(
     r'^\s*(?:→\s*)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
 
@@ -1225,7 +1248,12 @@ def strip_platform_links(text):
     override показал бы их дважды. Трогаем только строки, состоящие ровно
     из нашей ссылки: ссылка на источник и любая ссылка внутри предложения
     остаются на месте."""
-    lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
+    # Строка «Кнопки под постом: …» — подпись предпросмотра в консоли, а не
+    # текст поста. 13 октября 2026 владелец поправил пост «Чемодан Про»,
+    # скопировав предпросмотр целиком, и она ушла подписчикам вместе с адресом
+    # карточки (Артём: «написал ересь для тг канала по сделке Samsonite»).
+    lines = [l for l in str(text or '').split('\n')
+             if not _OWN_LINK_LINE.match(l) and not _BUTTONS_CAPTION_LINE.match(l)]
     out = '\n'.join(lines)
     return re.sub(r'\n{3,}', '\n\n', out).strip()
 

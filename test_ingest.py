@@ -712,6 +712,29 @@ def test_post_buyer_detail_requires_a_sentence_about_the_buyer_itself():
     assert "Тырышкин — Иван Тырышкин" not in text_ok, "имя напечатано дважды"
 
 
+def test_post_buyer_detail_ignores_a_short_random_prefix_match():
+    """Найдено 13 октября 2026 на живом посте о «Доме Капеллы» (`g2bd95d6e`):
+    `_same_word` принимает общее начало от 3 знаков, и короткое слово
+    «конца» (из «...конца XIX века») наугад совпало с «Конюшенная» и
+    «Коннэкт» — общее начало «кон» у слов с разным корнем. Пост выходил
+    со строкой «Покупатель: ООО «Гранд Конюшенная»... — Здание — памятник
+    федерального значения...» — предложение вообще не о покупателе.
+    `_mentions_party` держит более строгий порог (4 знака), не трогая
+    общий `review._same_word`."""
+    deal = {
+        "id": "g2bd95d6e", "title": "Бизнесмен Мусса Экзеков купил историческое здание",
+        "buyer_name": "ООО «Гранд Конюшенная» и ООО «Коннэкт» (структуры Муссы Экзекова)",
+        "status": "Закрыта", "date": "2026-09-30",
+        "eco": {"context": "Здание — памятник федерального значения «Дом Капеллы» "
+                            "конца XIX века, часть квартала «Дворы Капеллы» рядом с "
+                            "Певческой капеллой на набережной Мойки."},
+    }
+    text = format_post.render(deal, {})
+    assert "<b>Покупатель:</b> ООО «Гранд Конюшенная» и ООО «Коннэкт» (структуры Муссы Экзекова)\n" in text, text
+    assert "памятник федерального значения" not in text, \
+        "чужое предложение о здании приклеилось к имени покупателя по случайному совпадению начал слов"
+
+
 def test_reporting_meta_needs_both_a_verb_and_a_channel():
     """Защита от перефильтровки: «сообщила, что покупка усилит позиции» —
     содержание, а не мета (глагол есть, канала раскрытия нет). Фильтр требует
@@ -6070,6 +6093,18 @@ def test_old_override_does_not_show_the_same_links_twice(base):
     assert "/#/deal/" not in cleaned
     assert "kommersant.ru/doc/1" in cleaned and "Статус: Обсуждается" in cleaned
     assert "\n\n\n" not in cleaned
+
+
+def test_owner_text_loses_the_buttons_caption_from_the_preview():
+    """13 октября 2026: владелец поправил пост «Чемодан Про», скопировав
+    предпросмотр из консоли целиком, и подпись «Кнопки под постом: Открыть
+    карточку сделки — https://…» ушла подписчикам текстом. Подпись — часть
+    предпросмотра, а не поста; кнопка и так стоит под постом."""
+    override = ('<b>Заголовок</b>\n\n<b>Источник:</b> <a href="https://kommersant.ru/doc/1">Коммерсантъ</a>\n\n'
+                '#ритейл\n\nКнопки под постом: Открыть карточку сделки — %s/#/deal/g1' % format_post.SITE)
+    cleaned = format_post.strip_platform_links(override)
+    assert "Кнопки под постом" not in cleaned and "/#/deal/" not in cleaned
+    assert cleaned.endswith("#ритейл")
 
 
 def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):

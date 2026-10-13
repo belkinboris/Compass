@@ -1166,7 +1166,7 @@ PARTY_CASE_EXCEPTIONS = {
     "g8cb1eb00", "gff6e08fe",                                         # личные имена вне словаря
     "gmru-svoj-kredit-evropa-strah", "gmru-roshim-vnt",               # бренды
     "c3c15a888",                                                      # «Финам»: бренд на -м, pymorphy3 считает дательным
-    "c2d0c1dcd",                                                      # «Ростех», третья карточка — та же причина, что
+    "c2d0c1dcd", "g6c1f9d4e",                                         # «Ростех», та же причина, что
                                                                        # у gadb5b474 и ge957fc7b выше
     "g3b9c077a",                                                      # «Тетра»: pymorphy3 не знает слова вовсе и даёт
                                                                        # единственный разбор — родительный гипотетического
@@ -1787,11 +1787,13 @@ def test_sum_and_share_fields_stay_short(deals):
     (`g22d3599c`) и диапазон доли для будущих акционеров «КИТ1217»
     (`g9354e001`), docs/card_acceptance.md: «в eco.share стоит сам
     предмет» — для лота или доли предмет и есть его состав), чтобы новые
-    карточки его не растили сверх этого."""
+    карточки его не растили сверх этого. 13 октября — состав сделки по
+    «Чемодан Про» (`g83ad1f72`: кто довёл долю до какой и у кого выкупил
+    пакет), 529 → 530."""
     long_sum = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("sum"), str) and len(d["eco"]["sum"]) > 80]
     long_share = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("share"), str) and len(d["eco"]["share"]) > 160]
     assert len(long_sum) <= 26, "сумма прозой у новых карточек: %s" % [i for i in long_sum][:10]
-    assert len(long_share) <= 529, "доля прозой у новых карточек: %d" % len(long_share)
+    assert len(long_share) <= 530, "доля прозой у новых карточек: %d" % len(long_share)
     assert "ga7020b5e" not in long_sum and "ga7020b5e" not in long_share
 
 

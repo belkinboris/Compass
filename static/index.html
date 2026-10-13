@@ -1996,16 +1996,12 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .mode button.on{color:var(--ivory)!important;border-bottom-color:var(--ivory)!important;background:none!important}
 .mode.light button,.ask-box .mode button,.deal-ask .mode button{border-bottom-color:var(--line)!important;color:var(--muted)!important}
 .mode.light button.on,.ask-box .mode button.on,.deal-ask .mode button.on{color:var(--accent)!important;border-bottom-color:var(--accent)!important}
-/* статус и отрасль — просто слова, без рамки и капслока */
-.status{border:0!important;padding:0!important;background:none!important;border-radius:0!important;
-  font-size:12.5px!important;letter-spacing:0!important;text-transform:none!important;font-weight:500!important}
-.tag{border:0!important;padding:0 0 1px!important;background:none!important;border-radius:0!important;
-  border-bottom:1px solid var(--line)!important;font-size:12.5px!important;letter-spacing:0!important;
-  text-transform:none!important;font-weight:400!important;color:var(--muted)!important}
-.tag:hover{color:var(--ink)!important;border-bottom-color:var(--ink)!important}
-.co-tag{background:none!important}
+/* Статус и отрасль — прежние ярлыки в рамке (партнёр владельца, 13 октября 2026, по
+   карточкам компаний: «попроси тут вернуть наш старый дизайн»). Ярлык — не
+   кнопка: с подчёркиванием он читался как ссылка. Тонкие линии остались у
+   нажимаемых слов — кнопок, вкладок, переключателей. */
 /* воздух между соседними словами-ссылками */
-:has(> .chip),:has(> .tag),:has(> .theme-chip),:has(> .co-adv){column-gap:22px!important;row-gap:10px!important}
+:has(> .chip),:has(> .theme-chip),:has(> .co-adv){column-gap:22px!important;row-gap:10px!important}
 #feedgo{margin-left:22px!important}
 .adv-cta-top{background:none!important;border:0!important;border-radius:0!important;padding:2px 0 4px!important;
   border-bottom:1px solid rgba(243,241,233,.45)!important;letter-spacing:0!important;text-transform:none!important;font-size:14px!important;font-weight:400!important}

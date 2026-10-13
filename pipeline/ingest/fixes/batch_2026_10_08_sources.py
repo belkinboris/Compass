@@ -60,9 +60,4 @@ FIXES = [
          quote=QUOTE_EFKO_BUNGE,
          why='первоисточник вместо агрегатора 08.10.2026: разрешение ФАС '
              'на сделку — Интерфакс'),
-    dict(id='c45ad6ae9', field='src', old=None,
-         new=['АК&М', 'https://www.akm.ru/news/vtb_prodal_swissotel_resort_sochi_kameliya/'],
-         quote=QUOTE_VTB_KAMELIA,
-         why='первоисточник вместо агрегатора 08.10.2026: информагентство '
-             'первого ряда, не агрегатор-пересказчик'),
 ]

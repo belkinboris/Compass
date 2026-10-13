@@ -1,0 +1,62 @@
+{
+ "made": "2026-10-13",
+ "drafts": [
+  {
+   "draft_id": "d65939515",
+   "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
+   "date": "2026-10-12",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135370"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d21033762",
+   "title": "В Челябинске срочно продают древнеримский замок за треть цены. Фото",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135729"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
