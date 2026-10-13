@@ -6622,7 +6622,12 @@ function renderDeal(id, qs, previewCard){
         // про правило новизны выше). Проверка новизны осталась у запасной
         // строки «Предмет» на «Обзоре» — это разные работы.
         const assetName = targetName || (assetWillShow ? assetTextRaw : "");
-        const assetMeta = [targetName&&share?share:(d.asset_share||""), sum].filter(Boolean).join(" · ");
+        /* Доля из слоя фактов, если короткой записи доли нет: «Медси»
+           (13 октября 2026) — в схеме стояло «Медси» без 4,85%, хотя доля
+           названа в предмете и разобрана фактом; так было у 323 покупок. */
+        const stakeV = (stakeFact(d).basis!=="disputed") ? stakeFact(d).value : null;
+        const stakeTxt = targetName && stakeV!=null && stakeV>0 && stakeV<=100 ? fmtPct(stakeV) : "";
+        const assetMeta = [targetName&&share?share:(d.asset_share||stakeTxt), sum].filter(Boolean).join(" · ");
         const asset = assetName ? `
           <div class="dp-asset">
             <span class="dp-asset-role">Предмет сделки</span>

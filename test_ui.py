@@ -1204,6 +1204,15 @@ def test_deal_plate_names_the_asset_even_when_it_repeats_the_headline(page, base
     assert "Директ Стар" in plate.locator(".dp-asset").inner_text()
 
 
+def test_deal_plate_shows_the_stake_next_to_the_target(page, base_url):
+    """13 октября 2026, «Медси» (g4d7b2e19): схема показывала «Медси» без
+    4,85%, хотя доля названа в предмете — короткой записи доли не было, а
+    факт доли схема не читала. Партнёр владельца просил процент в предмете."""
+    visit(page, base_url, "#/deal/g4d7b2e19")
+    asset = page.locator(".deal-plate .dp-asset").inner_text()
+    assert "Медси" in asset and "4,85%" in asset, asset
+
+
 def test_account_form_is_visible_after_async_auth_check(page, base_url):
     visit(page, base_url, "#/account")
     assert page.locator("#loginForm").is_visible()
