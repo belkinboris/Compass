@@ -1211,7 +1211,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
     if tags:
         lines.append('')
         lines.append(' '.join(tags))
-    return '\n'.join(lines)
+    return with_card_link('\n'.join(lines), deal)
 
 
 def lens_links(deal):
@@ -1237,6 +1237,29 @@ def lens_links(deal):
 _BUTTONS_CAPTION_LINE = re.compile(r'^\s*Кнопки под постом:')
 _OWN_LINK_LINE = re.compile(
     r'^\s*(?:→\s*)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
+
+
+# ССЫЛКА НА КАРТОЧКУ — И КНОПКОЙ, И ПОСЛЕДНЕЙ СТРОКОЙ ТЕКСТА (владелец,
+# 13 октября 2026: «вместо „Открыть карточку сделки“ напишем „Подробнее в
+# карточке сделки“. И ещё внизу текста пусть будет кликабельная надпись на
+# карточку сделки такая же»). Строку добавляет `with_card_link` — в `render`,
+# `render_milestone` и в тексты владельца при отправке; она же совпадает с
+# `_OWN_LINK_LINE`, поэтому `strip_platform_links` её снимает, и повторное
+# добавление не даёт двух строк.
+CARD_LINK_TEXT = 'Подробнее в карточке сделки'
+
+
+def card_link_line(deal):
+    did = (deal or {}).get('id')
+    return ('<a href="%s/#/deal/%s">%s</a>' % (SITE, did, CARD_LINK_TEXT)) if did else ''
+
+
+def with_card_link(text, deal):
+    """Текст поста с одной строкой-ссылкой на карточку в самом конце."""
+    line = card_link_line(deal)
+    lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
+    body = re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()
+    return (body + '\n\n' + line) if line else body
 
 
 def strip_platform_links(text):
@@ -1279,14 +1302,15 @@ def is_listing(deal):
 
 
 def render_buttons(deal):
-    """Клавиатура под постом: одна широкая кнопка «Открыть карточку сделки».
+    """Клавиатура под постом: одна широкая кнопка «Подробнее в карточке сделки»
+    (до 13 октября 2026 — «Открыть карточку сделки»).
     Кнопки линз («Экономист», «Юрист») сняты решением владельца 3 октября
     2026: «просто кнопки „Открыть карточку сделки“ достаточно». Формат готов
     для `reply_markup` Telegram."""
     did = deal.get('id')
     if not did:
         return None
-    rows = [[{'text': 'Открыть карточку сделки', 'url': '%s/#/deal/%s' % (SITE, did)}]]
+    rows = [[{'text': CARD_LINK_TEXT, 'url': '%s/#/deal/%s' % (SITE, did)}]]
     return {'inline_keyboard': rows}
 
 
@@ -1373,7 +1397,7 @@ def render_milestone(deal, event):
         if more:
             lines.append('Ещё %d %s — в карточке сделки'
                          % (more, _plural(more, 'источник', 'источника', 'источников')))
-    return '\n'.join(lines)
+    return with_card_link('\n'.join(lines), deal)
 
 
 def milestone_sources(event):

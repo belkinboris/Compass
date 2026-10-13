@@ -31,41 +31,13 @@
    ]
   },
   {
-   "draft_id": "d78625192",
-   "title": "Рябков допустил новый раунд консультаций России и США до конца года",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/10/13/1236757-raund-konsultatsii"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16254209",
-   "title": "Костромской «Спартак» вышел в финальный раунд «пути регионов» Кубка России",
+   "draft_id": "d44912948",
+   "title": "Замглавы МО РФ Осьмаков провел очередной раунд переговоров с Вьетнамом",
    "date": "2026-10-13",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/sport/28210469"
+     "https://tass.ru/armiya-i-opk/28210723"
     ]
    ],
    "sum": null,
@@ -87,41 +59,13 @@
    ]
   },
   {
-   "draft_id": "d14726651",
-   "title": "Эксперты назвали топ регионов для покупки квартиры вместо Петербурга",
+   "draft_id": "d27759162",
+   "title": "В ЦБ сообщили о сохранении инвестиций в РФ вблизи исторических максимумов",
    "date": "2026-10-13",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/13/jeksperti-nazvali-top-regionov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91087837",
-   "title": "Инвестиции в России значительно выросли в период с 2021 по 2024 годы",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261013/investitsii-874197545.html"
+     "web:iz.ru",
+     "https://iz.ru/2183560/v-tcb-soobshchili-o-sokhranenii-investitcii-v-rf-vblizi-istoricheskikh-maksimumov-izi"
     ]
    ],
    "sum": null,
@@ -139,35 +83,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81170604",
-   "title": "Центробанк заявил о значительном росте инвестиций в России",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261013/investitsii-2124282051.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, цб) — проверьте, не дубль ли"
    ]
   }
  ]

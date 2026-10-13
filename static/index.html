@@ -1787,6 +1787,30 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .advisor-card.brand .advisor-card-groups{text-wrap:pretty}
 .advisor-card.brand .brand-text{font-family:var(--b-font,var(--f-body));font-size:14.5px;color:color-mix(in srgb,var(--b-ink) 78%,transparent)}
 
+/* Страница фирмы Executive Search (renderExecFirm). */
+.xf-head{position:relative;padding-left:20px}
+.xf-head::before{content:"";position:absolute;left:0;top:0;bottom:28px;width:3px;background:linear-gradient(180deg,var(--b-a1,var(--accent)),var(--b-a2,var(--accent)))}
+.xf-h1{margin:16px 0 14px!important;line-height:0!important}
+.xf-logo{display:block;height:40px;width:auto;max-width:100%}
+.xf-lead{font-size:16px;line-height:1.55;max-width:62ch;color:var(--ink);margin:0 0 12px}
+.xf-sec{margin:0 0 30px}
+.xf-text{font-size:15px;line-height:1.6;max-width:68ch;margin-top:8px}
+.xf-note{font-size:13.5px;color:var(--muted);line-height:1.55}
+.xf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+.xf-item{padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);display:flex;flex-direction:column;gap:4px}
+.xf-item b{font-weight:600;font-size:15px}
+.xf-item span{font-size:13.5px;color:var(--muted);line-height:1.5}
+.xf-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.xf-roles{font-size:16px;letter-spacing:.02em;margin-top:8px;line-height:1.6}
+.xf-roles span{white-space:nowrap}
+.xf-roles span:not(:last-child)::after{content:" ·";color:var(--muted)}
+.xf-list{margin:8px 0 0;padding-left:18px;font-size:14.5px;line-height:1.65}
+.xf-steps{margin:10px 0 0;padding:0;list-style:none;counter-reset:xs;display:grid;gap:10px}
+.xf-steps li{counter-increment:xs;display:grid;grid-template-columns:34px 1fr;column-gap:10px;font-size:14.5px;line-height:1.5}
+.xf-steps li::before{content:counter(xs,decimal-leading-zero);grid-row:span 2;font-variant-numeric:tabular-nums;color:var(--b-a1,var(--bronze));font-weight:600}
+.xf-steps li span{color:var(--muted);font-size:13.5px}
+.xf-founder{margin-top:8px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+@media (max-width:720px){.xf-cols{grid-template-columns:1fr;gap:20px}.xf-grid{grid-template-columns:1fr 1fr;gap:10px}.xf-item{padding:12px 13px}.xf-item b{font-size:14px}.xf-item span{font-size:12.5px}.xf-head{padding-left:14px}.xf-logo{height:30px}}
 .deal-tools{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin:22px 0 6px}
 .deal-tools .chip.primary{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
 .deal-tools .chip[disabled]{opacity:.5;cursor:wait}
@@ -2423,6 +2447,43 @@ const INV_FIRMS = [
   brandDraft:{logo:"/static/brands/strategy-partners.svg",ratio:7.88,font:"Commissioner",ink:"#171523",
          accent:["#2EEAEF","#2EA7ED","#2F8AED"],slogan:"Решения, которые работают"}},
 ];
+/* EXECUTIVE SEARCH. Execburo — первая фирма вкладки: соглашение о размещении
+   подписано, владелец 13 октября 2026: «публикуй execburo на сайте, они
+   подписались». Сделок у таких фирм нет — страница держится на том, что фирма
+   сообщает о себе (её сайт execburo.ru, пересказано коротко), и на блоке из
+   нашей базы: свежие закрытые сделки в отраслях, где фирма ищет руководителей
+   (`inds` — наши названия отраслей). Открытые позиции фирма пришлёт сама —
+   до тех пор блока нет, заглушек не ставим. Логотип — со своего сайта фирмы,
+   цвета — её бордо. */
+const EXEC_FIRMS = [
+ {id:"execburo",n:"Execburo",g:["Executive Search"],site:"https://execburo.ru/",email:"sofiab@execburo.ru",
+  desc:"Бутиковое агентство по поиску топ-менеджеров и руководителей направлений: от CEO до HRD, в России и за рубежом.",
+  brand:{logo:"/static/brands/execburo.svg",ratio:6.343,ink:"#64181C",accent:["#82363A","#64181C"]},
+  about:"Подбирает первых лиц и руководителей функций под стадию бизнеса, культуру и цели собственника. Сопровождает лидера и после оффера — до первых результатов на новом месте.",
+  services:[
+    ["Executive Search","поиск топ-менеджеров и руководителей"],
+    ["Поиск менторов","опытные наставники и коучи для топ-менеджеров"],
+    ["Карта рынка кандидатов","кто есть на рынке, их уровень, вознаграждение и карьерные пути"],
+    ["Исследование зарплат","обзоры вознаграждения по отрасли и позиции"],
+    ["Management Selection","руководители среднего звена"],
+    ["Внешний кадровый резерв","пул кандидатов, готовых выйти, когда понадобится"],
+    ["AI Executive Search","руководители и специалисты в сфере искусственного интеллекта"]],
+  roles:["CEO","COO","CFO","CTO","CMO","CPO","CCO","CLO","HRD"],
+  geo:["Россия","СНГ","ОАЭ","Турция","Кипр","Китай","Латинская Америка"],
+  sectors:["Нефть и газ, тяжёлая промышленность","Недвижимость","Финансы и финтех","FMCG и производство","Образование и EdTech","Ритейл","Fashion & Beauty","Телеком","IT и технологии"],
+  inds:["Нефть и газ","ГМК и добыча","Машиностроение","Недвижимость","Банки","Финтех","Страхование","Финансовые услуги","Потребительские товары","Пищепром и напитки","Образование","Ритейл","E-commerce","Телеком","ИТ и интернет","Искусственный интеллект"],
+  steps:[
+    ["Диагностика и цель","разбираем задачи бизнеса, риски и критерии успеха роли"],
+    ["Дизайн решения","роль, KPI, ценностное предложение и вознаграждение под цели и рынок"],
+    ["Разведка рынка","список целевых компаний, анализ конкурентов, длинный список кандидатов"],
+    ["Интервью по результатам","управленческий стиль, кейсы, потенциал и риски"],
+    ["Короткий список","финалисты со сравнением и оценкой влияния на результаты бизнеса"],
+    ["Проверка 360°","рекомендации бывших руководителей, коллег и подчинённых"],
+    ["Оффер и адаптация","переговоры, оффер, сопровождение первых месяцев"]],
+  founder:{name:"Софья Беляндинова",role:"Основатель Execburo",
+    bio:"Больше 10 лет в executive search.",
+    exp:["Директор по рекрутменту Wildberries AdTech","Руководитель Executive Search & Recruitment, СберМаркет","Senior Executive Search Associate, Ward Howell","Преподаёт в «Сколтехе», Высшей школе бизнеса МГУ и ВШЭ; колонки в Forbes и РБК"]}},
+];
 /* ФИРМЕННАЯ КАРТОЧКА В СПИСКЕ. Владелец 6 октября 2026: карточка фирмы в
    списке инвестиционных консультантов — в её стиле, «чтобы все хотели на
    неё кликать», но «чтобы стиль списка Компаса сохранялся и, когда брендов
@@ -2843,7 +2904,7 @@ function animateCounts(root){
     requestAnimationFrame(tick);
   });
 }
-const ALL_FIRM = id => FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id);
+const ALL_FIRM = id => FIRMS.find(f=>f.id===id)||INV_FIRMS.find(f=>f.id===id)||EXEC_FIRMS.find(f=>f.id===id);
 
 /* ================= КЛЮЧИ ПОИСКА КОМПАНИЙ ПО ВСЕЙ БАЗЕ (не только по buyer/target) ================= */
 /* Слитые карточки: id удалённого дубля -> id оставшейся сделки. Ссылка на
@@ -5029,7 +5090,7 @@ function suggestRows(q, kind){
   };
   if(kind==="advisors"){
     // Оба списка сразу: подсказка ведёт на профиль, даже если фирма в другой вкладке.
-    const all=[...FIRMS.map(f=>({f,t:"юридический консультант"})), ...INV_FIRMS.map(f=>({f,t:"инвестиционный консультант"}))];
+    const all=[...FIRMS.map(f=>({f,t:"юридический консультант"})), ...INV_FIRMS.map(f=>({f,t:"инвестиционный консультант"})), ...EXEC_FIRMS.map(f=>({f,t:"executive search"}))];
     return pick(all, x=>x.f.n, 6, (a,b)=>firmCount(b.f.id)-firmCount(a.f.id)).map(x=>{
       const n=firmCount(x.f.id);
       return {href:`#/advisors/${x.f.id}`, text:x.f.n, note:n?`${x.t} · ${n} ${plural(n,"сделка","сделки","сделок")}`:x.t};
@@ -8224,7 +8285,7 @@ function advNoMatchHtml(){
    лежит рядом скрытым текстом: его читают экранный диктор, поиск по
    странице и тесты. Фирменная карточка нажимается целиком: ссылка на
    логотипе растянута на всю карточку, кнопка счёта лежит поверх неё. */
-function advisorCardHtml(r, withProfile){
+function advisorCardHtml(r, withProfile, exec){
   const b = firmBrand(r.f);
   const name = b
     ? `<div class="advisor-card-name brand-name"><a href="#/advisors/${r.f.id}"><img class="brand-logo" src="${b.logo}" alt="" width="${Math.round(26*b.ratio)}" height="26"><span class="vh">${r.f.n}</span></a>${b.slogan?`<span class="brand-slogan">${esc(b.slogan)}</span>`:""}</div>`
@@ -8235,7 +8296,7 @@ function advisorCardHtml(r, withProfile){
   return `<article class="advisor-card${b?" brand":""}"${b?` style="${brandStyle(b)}"`:""}>
       ${name}
       ${profile}
-      <div class="advisor-card-count">${advCountHtml(r)}</div>
+      <div class="advisor-card-count">${exec?`<a class="count-btn" href="#/advisors/${r.f.id}">Профиль фирмы →</a>`:advCountHtml(r)}</div>
     </article>`;
 }
 function advisorsBodyHtml(){
@@ -8266,9 +8327,14 @@ function advisorsBodyHtml(){
     </div>
     ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>advisorCardHtml(r, true)).join("")}</div>`:(advInd!=="Все"&&!advQuery.trim()?advIndEmptyHtml():advNoMatchHtml())}`;
   } else if(advType==="exec"){
-    /* Executive Search — вкладка заведена 12 октября 2026 по просьбе владельца;
-       фирм пока не добавляем («пока не надо»). */
-    body = `<p class="reveal" style="color:var(--muted);max-width:640px">Здесь будут фирмы, которые подбирают руководителей для компаний (executive search). Пока в каталоге их нет.</p>`;
+    /* Executive Search — вкладка заведена 12 октября 2026; первая фирма —
+       Execburo, 13 октября 2026. Сделок у таких фирм нет, поэтому под
+       карточкой не счёт сделок, а ссылка на профиль. Фильтр отрасли здесь
+       не нужен: он считает сделки. */
+    const rows = EXEC_FIRMS.filter(f=>advMatch(f, advQuery)).map(f=>({f,n:0}));
+    body = `<p class="reveal" style="color:var(--muted);max-width:640px;margin-bottom:18px">Фирмы, которые подбирают первых лиц и руководителей для компаний.</p>
+    ${rows.length?`<div class="advisor-list reveal">${rows.map(r=>advisorCardHtml(r, true, true)).join("")}</div>`
+      :`<div class="advisor-nomatch reveal"><p>По запросу «${esc(advQuery.trim())}» в этой вкладке ничего не нашлось.</p></div>`}`;
   } else {
     body = `<p class="reveal" style="color:var(--muted);max-width:640px">Сюда попадут налоговые, технические и иные консультанты, когда они появятся в публичных данных по сделкам базы. Пока подтверждённых записей нет.</p>`;
   }
@@ -8438,6 +8504,7 @@ function firmSummaryHtml(id, full, mini, bulk){
 }
 function renderFirm(id){
   const f = ALL_FIRM(id); if(!f){renderAdvisors();return;}
+  if(EXEC_FIRMS.includes(f)){ renderExecFirm(f); return; }
   const isLegal = !!FIRMS.find(x=>x.id===id);
   const {full,mini,bulk} = firmDeals(id);
   app.innerHTML = `
@@ -8471,6 +8538,53 @@ function renderFirm(id){
     + `чаще всего. В конце — три вопроса, которые стоит задать работодателю.`, resume, "фирмой"),
     `Подготовка к собеседованию: «${f.n}»`, {type:"advisor", id});
   mountMiniAI(f.n,"advisor",id);
+}
+/* СТРАНИЦА ФИРМЫ EXECUTIVE SEARCH (13 октября 2026, Execburo). Сделок у
+   фирмы нет, страница — то, что фирма сообщает о себе, плюс один блок из
+   базы: закрытые сделки в её отраслях за 90 дней — после смены владельца
+   компании чаще всего и ищут руководителей. Вид — наш, бренд — только
+   логотип и бордовая кромка у шапки (правило «рамка наша, внутри бренд»). */
+const EXEC_DEALS_DAYS = 90, EXEC_DEALS_MAX = 6;
+function execFreshDeals(f){
+  const since = new Date(Date.now() - EXEC_DEALS_DAYS*864e5).toISOString().slice(0,10);
+  return DEALS.filter(d => d.status==="Закрыта" && /^\d{4}-\d{2}-\d{2}$/.test(String(d.date||""))
+      && d.date >= since && dealIndustries(d).some(i => f.inds.includes(i)))
+    .sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0, EXEC_DEALS_MAX);
+}
+function renderExecFirm(f){
+  const b = firmBrand(f);
+  const fresh = execFreshDeals(f);
+  const list = (items, cls) => `<ul class="${cls}">${items.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  app.innerHTML = `
+  <a class="back reveal" href="#/advisors">← Все консультанты</a>
+  <div class="d-head xf-head reveal"${b?` style="${brandStyle(b)}"`:""}>
+    <span class="tag steel">Executive Search</span>
+    <h1 class="xf-h1">${b?`<img class="xf-logo" src="${b.logo}" alt="${esc(f.n)}" width="${Math.round(40*b.ratio)}" height="40">`:esc(f.n)}</h1>
+    <p class="xf-lead">${esc(f.desc)}</p>
+    <div class="d-parties">
+      ${f.site?`<a href="${f.site}" target="_blank" rel="noopener"><b>Сайт фирмы ↗</b></a>`:""}
+      ${f.email?`<span class="xf-mail">Почта: <b>${esc(f.email)}</b></span>`:""}
+    </div>
+  </div>
+  <section class="xf-sec reveal"><span class="label">О фирме</span><p class="xf-text">${esc(f.about)}</p></section>
+  <section class="xf-sec reveal"><span class="label">Услуги</span>
+    <div class="xf-grid">${f.services.map(([t,d])=>`<div class="xf-item"><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div></section>
+  <section class="xf-sec xf-cols reveal">
+    <div><span class="label">Кого ищут</span><p class="xf-roles">${f.roles.map(r=>`<span>${esc(r)}</span>`).join(" ")}</p><p class="xf-note">и руководителей под ними</p></div>
+    <div><span class="label">Где</span><p class="xf-text">${f.geo.join(", ")}</p></div>
+    <div><span class="label">Отрасли</span>${list(f.sectors.map(esc), "xf-list")}</div>
+  </section>
+  <section class="xf-sec reveal"><span class="label">Как идёт поиск</span>
+    <ol class="xf-steps">${f.steps.map(([t,d])=>`<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("")}</ol></section>
+  ${f.founder?`<section class="xf-sec reveal"><span class="label">Основатель</span>
+    <div class="xf-founder"><b>${esc(f.founder.name)}</b><span class="xf-note">${esc(f.founder.role)}. ${esc(f.founder.bio)}</span>${list(f.founder.exp.map(esc), "xf-list")}</div></section>`:""}
+  ${fresh.length?`<section class="xf-sec reveal"><span class="label">Сделки, после которых ищут руководителей</span>
+    <p class="xf-note" style="margin:6px 0 10px">Закрытые сделки за последние ${EXEC_DEALS_DAYS} дней в отраслях, где работает фирма. После смены владельца компании часто меняется и команда.</p>
+    ${fresh.map(d=>`<a class="deal-row reveal" href="#/deal/${d.id}">
+      <div><span class="label num">${fmtDateLong(d.date)}</span></div>
+      <div><div class="deal-title" style="font-size:17px">${d.title}</div></div>
+      <div class="deal-meta"><div class="deal-sum num ${undisclosed(d.sum)?"na":""}">${undisclosed(d.sum)?"Цена не раскрыта":dealSumHtml(d)}</div><div class="deal-tags">${industryTagsHtml(d)}</div></div>
+    </a>`).join("")}</section>`:""}`;
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
    на собеседование идут не только в компании, но и к консультантам («может
