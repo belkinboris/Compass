@@ -31,13 +31,13 @@
    ]
   },
   {
-   "draft_id": "d37575449",
-   "title": "Заботкин заявил, что сегодня инвестиции в России достигли исторического максимума",
+   "draft_id": "d44912948",
+   "title": "Замглавы МО РФ Осьмаков провел очередной раунд переговоров с Вьетнамом",
    "date": "2026-10-13",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2183581/video/zabotkin-zaiavil-chto-segodnia-investitcii-v-rossii-dostigli-istoricheskogo-maksimuma"
+     "web:tass.ru",
+     "https://tass.ru/armiya-i-opk/28210723"
     ]
    ],
    "sum": null,
@@ -59,30 +59,19 @@
    ]
   },
   {
-   "draft_id": "d48217955",
-   "title": "Прием заявок на покупку активов «Конти» снова продлили",
+   "draft_id": "d27759162",
+   "title": "В ЦБ сообщили о сохранении инвестиций в РФ вблизи исторических максимумов",
    "date": "2026-10-13",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266283/"
+     "web:iz.ru",
+     "https://iz.ru/2183560/v-tcb-soobshchili-o-sokhranenii-investitcii-v-rf-vblizi-istoricheskikh-maksimumov-izi"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-13",
-     "title": "Переговоры",
-     "note": "Заявки на участие в аукционе можно подать до 26 октября, подведение итогов запланировали на 28 октября.",
-     "source": [
-      "web:pravo.ru",
-      "https://pravo.ru/news/266283/"
-     ]
-    }
-   ],
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -94,7 +83,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, цб) — проверьте, не дубль ли"
    ]
   }
  ]
