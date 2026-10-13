@@ -71,13 +71,13 @@
    ]
   },
   {
-   "draft_id": "d42125241",
-   "title": "«Сбер» компенсирует покупки на борту самолёта бонусами «Спасибо»",
+   "draft_id": "d29428726",
+   "title": "Акции «Яндекса» перешли к росту после падения в течение нескольких дней",
    "date": "2026-10-13",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-13_sber_kompensiruet_pokupki"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/13/10/2026/6acddaeb9a7947143ec15083"
     ]
    ],
    "sum": null,
@@ -99,17 +99,17 @@
    ]
   },
   {
-   "draft_id": "d78202773",
-   "title": "«Ростех» выставил на торги здания института РАН на Варшавском шоссе",
+   "draft_id": "d10218373",
+   "title": "Talouselämä: в Финляндии продают остров, на котором принимали Брежнева",
    "date": "2026-10-13",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261013/rt-kapital-2124124441.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28208547"
     ]
    ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "sum": "€4,8 млн",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -123,18 +123,85 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g85e07f6d (общие редкие слова: выстав, здания) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d86112657",
-   "title": "Бывший бизнес Samsonite сменил владельца в России",
+   "draft_id": "d19137390",
+   "title": "Российский автобренд «Амберавто» не продал ни одной машины в сентябре",
    "date": "2026-10-13",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/byvshij-biznes-samsonite-smenil-vladelca-v-rossii/"
+     "web:iz.ru",
+     "https://iz.ru/2183290/2026-10-13/rossiiskii-avtobrend-amberavto-ne-prodal-ni-odnoi-mashiny-v-sentiabre"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-13",
+     "title": "Сделка завершена",
+     "note": "В сентябре в России не зарегистрировали ни одного нового электроседана «Амберавто А5» . Об этом 13 октября сообщил Telegram-канал портала «Китайские автомобили» со ссылкой на данные «Автостат Инфо». В июле на учет поставили три машины, в августе — одну.",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2183290/2026-10-13/rossiiskii-avtobrend-amberavto-ne-prodal-ni-odnoi-mashiny-v-sentiabre"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb439f755 (общие редкие слова: автобр, продал) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d82253633",
+   "title": "Российский бизнес-седан Tenet A8 появился в продаже у дилеров: цена — от 3 млн ₽",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/rossijskij-biznes-sedan-tenet-a8-poyavilsya-v-prodazhe-u-dilerov-cena-ot-3-mln/"
+    ]
+   ],
+   "sum": "3 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14963346",
+   "title": "Нацбанк Казахстана начал продавать золото из-за роста доходности облигаций США",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/309716"
     ]
    ],
    "sum": null,
@@ -150,35 +217,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g076af76a (общие редкие слова: владел, сменил) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d34104353",
-   "title": "Фитнес-клубы захотели исключить влияние анонимных отзывов на продажи",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/13/fitnes-kluby-zahoteli-isklyuchit-vliyanie-anonimnyh-otzyvov-na-prodazhi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Развлечения",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
@@ -186,13 +224,13 @@
    ]
   },
   {
-   "draft_id": "d77606768",
-   "title": "Эти ошибки совершают все при покупке авиабилетов с пересадками",
+   "draft_id": "d86911680",
+   "title": "Tesla Романа Старовойта уже год не могут продать после его смерти",
    "date": "2026-10-13",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/articles/1053135629"
+     "https://ura.news/news/1053135717"
     ]
    ],
    "sum": null,
@@ -210,21 +248,20 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d80817636",
-   "title": "В России впервые за четыре года просели продажи мочегонных. 🟢 По данным RNC Pharma, в январе-августе 2026 года в розницу (включая сегмент e-com с доставкой до потребителя) было продано 61,4 млн упаков",
+   "draft_id": "d13960338",
+   "title": "Продажи электрокара «Амберавто А5» в России фактически остановились",
    "date": "2026-10-13",
    "src": [
     [
-     "tg:bezrec",
-     "https://t.me/bezrec/8114"
+     "web:ura.news",
+     "https://ura.news/news/1053135715"
     ]
    ],
-   "sum": "13,3 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -238,9 +275,10 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Российский автобренд «Амберавто» не продал ни одной машины в» — второе издание, в группу не шлём"
    ]
   }
  ]
