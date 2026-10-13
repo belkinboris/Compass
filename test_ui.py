@@ -1213,6 +1213,24 @@ def test_deal_plate_shows_the_stake_next_to_the_target(page, base_url):
     assert "Медси" in asset and "4,85%" in asset, asset
 
 
+def test_execburo_in_executive_search_tab_and_its_profile(page, base_url):
+    """13 октября 2026: Execburo подписали соглашение — фирменная карточка во
+    вкладке Executive Search ведёт на профиль с услугами, этапами и свежими
+    сделками в отраслях фирмы."""
+    visit(page, base_url, "#/advisors")
+    page.click('[data-t="exec"]')
+    card = page.locator(".advisor-card.brand")
+    assert card.count() == 1 and "Execburo" in card.inner_text()
+    visit(page, base_url, "#/advisors/execburo")
+    body = page.locator("#app").inner_text()
+    for part in ("EXECUTIVE SEARCH", "Услуги".upper(), "Executive Search", "Софья Беляндинова", "Сайт фирмы"):
+        assert part.lower() in body.lower(), part
+    assert page.locator(".xf-logo").count() == 1
+    # Вкладка запоминается на странице — вернуть юридическую для соседних тестов.
+    visit(page, base_url, "#/advisors")
+    page.click('[data-t="legal"]')
+
+
 def test_account_form_is_visible_after_async_auth_check(page, base_url):
     visit(page, base_url, "#/account")
     assert page.locator("#loginForm").is_visible()

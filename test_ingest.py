@@ -1020,7 +1020,10 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
                 if d.get("src") and len(d["src"][0]) > 1 and str(d["src"][0][1]).startswith("http"))
     text = format_post.render(deal, comps)
     assert deal["src"][0][1] in text
-    assert f"/#/deal/{deal['id']}" not in text, "ссылка на карточку осталась в тексте"
+    # С 13 октября 2026 ссылка на карточку — ещё и последней строкой текста,
+    # той же подписью, что кнопка (владелец), ровно одна.
+    assert text.count(f"/#/deal/{deal['id']}") == 1
+    assert text.rstrip().endswith('">Подробнее в карточке сделки</a>'), text[-200:]
     assert "→ Экономист" not in text and "→ Юрист" not in text
 
     buttons = format_post.render_buttons(deal)
@@ -1028,7 +1031,7 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
     # С 3 октября 2026 клавиатура — одна кнопка: владелец, «просто кнопки
     # „Открыть карточку сделки“ достаточно»; кнопки линз сняты.
     assert len(rows) == 1 and len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows
-    assert "карточку" in rows[0][0]["text"].lower()
+    assert rows[0][0]["text"] == "Подробнее в карточке сделки"
     # Черновик в консоли обязан показывать и кнопки: их не видно в тексте.
     preview = format_post.buttons_preview(deal)
     for row in rows:
@@ -1042,7 +1045,7 @@ def test_post_keyboard_has_only_the_card_button():
     lawful = {"id": "x1", "title": "Т", "sum": "1 млрд ₽", "law": {"appr": "ФАС одобрила сделку в июне."},
               "eco": {"share": "100% акций"}}
     labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
-    assert labels == ["Открыть карточку сделки"], labels
+    assert labels == ["Подробнее в карточке сделки"], labels
 
 
 def test_post_labels_a_listing_price_as_a_starting_price():
@@ -2449,8 +2452,9 @@ def test_render_milestone_uses_the_snapshot_not_live_fields():
     assert "100 млн ₽ (на момент)" in text
     assert "СЕГОДНЯШНИЙ" not in text and "999 млрд" not in text
     assert "ООО «Покупатель»" in text
-    # Ссылка на карточку у вехи — тоже кнопкой под постом, а не в тексте.
-    assert "/#/deal/d1" not in text
+    # Ссылка на карточку у вехи — кнопкой под постом и, с 13 октября 2026,
+    # одной последней строкой текста «Подробнее в карточке сделки».
+    assert text.count("/#/deal/d1") == 1 and text.endswith("Подробнее в карточке сделки</a>")
     assert format_post.render_buttons(deal)["inline_keyboard"][0][0]["url"].endswith("/#/deal/d1")
 
 
@@ -4693,12 +4697,13 @@ def test_send_telegram_uses_the_approved_snapshot_not_a_fresh_render(monkeypatch
     # Дообогащение ПОСЛЕ одобрения — ровно то, что случилось с g6743f902.
     deal["eco"] = {"target_fin": "Выручка выросла на 20% — новый факт, добавленный позже."}
     text = send_telegram.initial_post_text(deal, {})
-    assert text == frozen, "должен уйти снимок, а не пересборка с новым фактом"
+    assert text == format_post.with_card_link(frozen, deal), \
+        "должен уйти снимок (плюс строка-ссылка на карточку), а не пересборка с новым фактом"
     assert "Выручка" not in text
     # `post_override` (текст, продиктованный владельцем) остаётся сильнее снимка.
     deal["post_override"] = "Текст, который владелец написал сам поверх снимка."
     text2 = send_telegram.initial_post_text(deal, {})
-    assert text2 == deal["post_override"]
+    assert text2 == format_post.with_card_link(deal["post_override"], deal)
     # Без снимка (карточки до 11 сентября 2026) — обычная свежая сборка.
     del deal["post_preview"]
     del deal["post_override"]
@@ -4942,13 +4947,14 @@ def test_a_stage_post_shows_one_source_and_counts_the_rest():
              "snapshot": {"title": "x", "type": "M&A", "buyer": "Росатом", "seller": "Сергей Шишкарев",
                           "asset": "Группа компаний «Дело»", "sum": "77 млрд ₽", "status": "Закрыта"}}
     lines = format_post.render_milestone(deal, event).split("\n")
-    assert lines[-2:] == ['<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>',
-                          'Ещё 3 источника — в карточке сделки']
+    assert lines[-4:-2] == ['<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>',
+                            'Ещё 3 источника — в карточке сделки']
+    assert lines[-1].endswith('>Подробнее в карточке сделки</a>')
     assert "Коммерсантъ" not in "\n".join(lines) and "Источники:" not in "\n".join(lines)
     assert check_post.check("\n".join(lines)) == []
     del event["sources"]
     lines = format_post.render_milestone(deal, event).split("\n")
-    assert lines[-1] == '<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>'
+    assert lines[-3] == '<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>'
 
 
 def test_postworthy_milestone_kinds_is_the_closed_v1_list():

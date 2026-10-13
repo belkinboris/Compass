@@ -482,10 +482,13 @@ def initial_post_text(deal, comps):
     публикации. `post_preview` не используется для ПРАВОК уже вышедшего
     поста (`to_edit`, «⟳ Обновлено») — те как раз ОБЯЗАНЫ собираться заново,
     в них и смысл сообщить о том, что стало известно НОВОГО."""
+    # Строка «Подробнее в карточке сделки» — в конце любого первого поста,
+    # и продиктованного владельцем, и одобренного снимка, снятого до
+    # 13 октября 2026 (`with_card_link` не даёт ей задвоиться).
     if deal.get('post_override'):
-        return format_post.strip_platform_links(deal['post_override'])
+        return format_post.with_card_link(format_post.strip_platform_links(deal['post_override']), deal)
     if deal.get('post_preview'):
-        return deal['post_preview']
+        return format_post.with_card_link(deal['post_preview'], deal)
     return format_post.render(deal, comps)
 
 
