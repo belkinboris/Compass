@@ -31,13 +31,13 @@
    ]
   },
   {
-   "draft_id": "d41103020",
-   "title": "В ЦБ заявили о росте инвестиций в России",
+   "draft_id": "d78625192",
+   "title": "Рябков допустил новый раунд консультаций России и США до конца года",
    "date": "2026-10-13",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/economics/news/2026/10/13/1236741-o-roste-investitsii"
+     "https://www.vedomosti.ru/politics/news/2026/10/13/1236757-raund-konsultatsii"
     ]
    ],
    "sum": null,
@@ -59,98 +59,13 @@
    ]
   },
   {
-   "draft_id": "d29972163",
-   "title": "Reuters: в США произошел исторический бум инвестиций в ИИ",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/technology/news/2026/10/13/1236724-bum-investitsii-v-ii"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d90608385",
-   "title": "Минфин проведет аукционы по размещению ОФЗ-ПД выпусков 26251 и 26245",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/13/1236711-minfin-ofz-pd"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84817357",
-   "title": "Минфин 14 октября проведет аукционы по размещению ОФЗ 26251 и 26245",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1122135"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14774577",
-   "title": "Рябков: до конца года может пройти следующий раунд консультаций РФ и США",
+   "draft_id": "d16254209",
+   "title": "Костромской «Спартак» вышел в финальный раунд «пути регионов» Кубка России",
    "date": "2026-10-13",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/politika/28210261"
+     "https://tass.ru/sport/28210469"
     ]
    ],
    "sum": null,
@@ -172,72 +87,16 @@
    ]
   },
   {
-   "draft_id": "d43368891",
-   "title": "В ЦБ заявили о росте инвестиций в России",
+   "draft_id": "d14726651",
+   "title": "Эксперты назвали топ регионов для покупки квартиры вместо Петербурга",
    "date": "2026-10-13",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28210115"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/13/jeksperti-nazvali-top-regionov"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20101780",
-   "title": "Издание «Взорваль» Крученых с иллюстрациями Малевича выставили на торги",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28210053"
-    ]
-   ],
-   "sum": "1,2 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31977989",
-   "title": "В Финляндии выставили на продажу принимавший Брежнева остров",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2183518/2026-10-13/v-finliandii-vystavili-na-prodazhu-prinimavshii-brezhneva-ostrov"
-    ]
-   ],
-   "sum": "€4,8 млн",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -256,17 +115,45 @@
    ]
   },
   {
-   "draft_id": "d11390388",
-   "title": "СМИ: в Финляндии продают остров, на котором принимали Брежнева в 1961 году",
+   "draft_id": "d91087837",
+   "title": "Инвестиции в России значительно выросли в период с 2021 по 2024 годы",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261013/investitsii-874197545.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81170604",
+   "title": "Центробанк заявил о значительном росте инвестиций в России",
    "date": "2026-10-13",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261013/ostrov-2124258673.html"
+     "https://ria.ru/20261013/investitsii-2124282051.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -281,35 +168,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75296044",
-   "title": "Упали продажи на самом крупном автомобильном рынке мира",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/13/upali-prodazhi-na-samom-krupnom-avtomobilnom-rynke-mira/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
