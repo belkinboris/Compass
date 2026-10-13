@@ -265,6 +265,31 @@ def latest_hold_drafts():
 # они через сутки уходят на сайт — не показать их значит опубликовать молча.
 RAW_PER_RUN = 10
 
+
+def answered_cards():
+    """{id карточки: [вердикты]} — ответы владельца из консоли, которые сайт
+    хранит, а рутина публикации ещё не применила.
+
+    ПОВТОРНЫЙ ПОКАЗ ПОВЕРХ ОТВЕТА (13 октября 2026, «Медси», g4d7b2e19).
+    Партнёр владельца ответил на проект: заметкой поправил заголовок, ответом
+    на пост прислал свой текст. Через четыре минуты сессия сняла с карточки
+    отметки отправки (поправила сумму) и показала проект ЗАНОВО — в старом
+    виде, без его правок. Со стороны это выглядело так, будто его ответ
+    проигнорирован. Пока по карточке лежит необработанный ответ, второй раз
+    её в консоль не шлём: сначала ответ применяют (approve.py — решения,
+    рутина притока — заметки), потом, если нужно, показывают новую версию."""
+    try:
+        import approve
+        decisions, _handle = approve.fetch_decisions()
+    except Exception:                                        # noqa: BLE001
+        return {}
+    answered = {}
+    for d in decisions or []:
+        if d.get('verdict') in approve.RAW_VERDICTS:
+            continue
+        answered.setdefault(str(d.get('deal_id')), []).append(d.get('verdict'))
+    return answered
+
 # ТЕМП ОТПРАВКИ. Telegram пускает в группу около 20 сообщений в минуту, а
 # 21-е возвращает 429 с полем `retry_after`. Прогон 6 августа отправил ровно
 # 20 сообщений из 32 и упёрся: одиннадцатая карточка и всё сырьё остались
@@ -349,8 +374,16 @@ def build_plan():
     base = json.load(open(DATA, encoding='utf-8'))
     comps = base['companies']
     live = site_pending_ids()
+    answered = answered_cards() if pending['cards'] else {}
     postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
     for card in pending['cards']:
+        # Ответ владельца на карточку ещё не применён — не показываем её
+        # заново (см. answered_cards). Отметки отправки при этом не трогаем.
+        if card['id'] in answered and not (card.get('draft_sent') and card.get('post_draft_sent')):
+            print('НЕ ПОКАЗЫВАЮ ЗАНОВО %s: в консоли уже есть ответ (%s), он не применён — '
+                  'сначала approve.py / заметка, потом новая версия.'
+                  % (card['id'], ', '.join(answered[card['id']])))
+            continue
         if live is not None and card['id'] not in live \
                 and not (card.get('draft_sent') and card.get('post_draft_sent')):
             postponed += 1

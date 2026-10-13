@@ -4652,6 +4652,31 @@ def test_post_preview_snapshot_is_captured_when_building_the_console_message(mon
     assert expected in post_entry, "превью в консоли должно нести ровно тот же текст, что снимок"
 
 
+def test_console_does_not_resend_a_card_with_an_unapplied_answer(monkeypatch):
+    """13 октября 2026, «Медси» (g4d7b2e19): партнёр владельца ответил на
+    проект заметкой и своим текстом поста, а сессия через четыре минуты сняла
+    отметки отправки и показала проект заново — старым, без его правок.
+    Пока ответ по карточке не применён, повторно в консоль она не идёт."""
+    import send_drafts
+    base = {"date": FRESH_DATE, "status": "Закрыта", "reviewed": "2026-10-13",
+            "accepted": "2026-10-13", "second_reading": {"verdict": "ok"},
+            "src": [["Т", "https://t.example/m"]]}
+    cards = [dict(base, id="g-answered", title="«Ромашка» купила «Лютик»"),
+             dict(base, id="g-quiet", title="«Мак» купил «Василёк»")]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "needs_second_reading", lambda c: False)
+    monkeypatch.setattr(send_drafts.promote, "load_state",
+                        lambda: {"decided_raw": {}, "sent_raw": []})
+    monkeypatch.setattr(send_drafts, "answered_cards",
+                        lambda: {"g-answered": ["note", "approve"]})
+    plan, *_rest = send_drafts.build_plan()
+    ids = {item["id"] for _t, _kb, (kind, item, _m) in plan if kind == "card"}
+    assert "g-answered" not in ids, "проект ушёл заново поверх ответа партнёра"
+    assert "g-quiet" in ids
+
+
 def test_send_telegram_uses_the_approved_snapshot_not_a_fresh_render(monkeypatch):
     """Вторая половина той же починки: `send_telegram.initial_post_text()`
     обязана вернуть ЗАМОРОЖЕННЫЙ текст (`post_preview`), даже если карточка

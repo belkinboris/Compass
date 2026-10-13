@@ -31,17 +31,129 @@
    ]
   },
   {
-   "draft_id": "d21033762",
-   "title": "В Челябинске срочно продают древнеримский замок за треть цены. Фото",
+   "draft_id": "d78625192",
+   "title": "Рябков допустил новый раунд консультаций России и США до конца года",
    "date": "2026-10-13",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053135729"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/10/13/1236757-raund-konsultatsii"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16254209",
+   "title": "Костромской «Спартак» вышел в финальный раунд «пути регионов» Кубка России",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28210469"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14726651",
+   "title": "Эксперты назвали топ регионов для покупки квартиры вместо Петербурга",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/13/jeksperti-nazvali-top-regionov"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91087837",
+   "title": "Инвестиции в России значительно выросли в период с 2021 по 2024 годы",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261013/investitsii-874197545.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81170604",
+   "title": "Центробанк заявил о значительном росте инвестиций в России",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261013/investitsii-2124282051.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
