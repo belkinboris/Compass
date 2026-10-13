@@ -31,13 +31,99 @@
    ]
   },
   {
-   "draft_id": "d21033762",
-   "title": "В Челябинске срочно продают древнеримский замок за треть цены. Фото",
+   "draft_id": "d36749075",
+   "title": "Reuters сообщил об историческом буме инвестиций в ИИ в США",
    "date": "2026-10-13",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053135729"
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/13/10/2026/6acde076299cf7dc3d73cc56"
+    ]
+   ],
+   "sum": "$500 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d63518041",
+   "title": "Космические инвестиции в 2026 году впервые превысят $100 млрд",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1122128"
+    ]
+   ],
+   "sum": "$100 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d12790145",
+   "title": "Минфин 14 октября проведет аукционы по размещению ОФЗ двух выпусков",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28209929"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66592010",
+   "title": "Эксперты советуют не ждать больших скидок при покупке дачи осенью",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261013/rgru-2124225179.html"
     ]
    ],
    "sum": null,
@@ -55,7 +141,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
