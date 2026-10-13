@@ -1234,6 +1234,7 @@ def lens_links(deal):
     return out
 
 
+_BUTTONS_CAPTION_LINE = re.compile(r'^\s*Кнопки под постом:')
 _OWN_LINK_LINE = re.compile(
     r'^\s*(?:→\s*)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
 
@@ -1247,7 +1248,12 @@ def strip_platform_links(text):
     override показал бы их дважды. Трогаем только строки, состоящие ровно
     из нашей ссылки: ссылка на источник и любая ссылка внутри предложения
     остаются на месте."""
-    lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
+    # Строка «Кнопки под постом: …» — подпись предпросмотра в консоли, а не
+    # текст поста. 13 октября 2026 владелец поправил пост «Чемодан Про»,
+    # скопировав предпросмотр целиком, и она ушла подписчикам вместе с адресом
+    # карточки (Артём: «написал ересь для тг канала по сделке Samsonite»).
+    lines = [l for l in str(text or '').split('\n')
+             if not _OWN_LINK_LINE.match(l) and not _BUTTONS_CAPTION_LINE.match(l)]
     out = '\n'.join(lines)
     return re.sub(r'\n{3,}', '\n\n', out).strip()
 

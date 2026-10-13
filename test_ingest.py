@@ -6095,6 +6095,18 @@ def test_old_override_does_not_show_the_same_links_twice(base):
     assert "\n\n\n" not in cleaned
 
 
+def test_owner_text_loses_the_buttons_caption_from_the_preview():
+    """13 октября 2026: владелец поправил пост «Чемодан Про», скопировав
+    предпросмотр из консоли целиком, и подпись «Кнопки под постом: Открыть
+    карточку сделки — https://…» ушла подписчикам текстом. Подпись — часть
+    предпросмотра, а не поста; кнопка и так стоит под постом."""
+    override = ('<b>Заголовок</b>\n\n<b>Источник:</b> <a href="https://kommersant.ru/doc/1">Коммерсантъ</a>\n\n'
+                '#ритейл\n\nКнопки под постом: Открыть карточку сделки — %s/#/deal/g1' % format_post.SITE)
+    cleaned = format_post.strip_platform_links(override)
+    assert "Кнопки под постом" not in cleaned and "/#/deal/" not in cleaned
+    assert cleaned.endswith("#ритейл")
+
+
 def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
     y, m = _digest_month(base)
     st = monthly_digest.stats(base, y, m)
