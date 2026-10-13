@@ -2,46 +2,6 @@
  "made": "2026-10-13",
  "drafts": [
   {
-   "draft_id": "d73112484",
-   "title": "«Яндекс» и VK обсудят создание совместного бизнеса с облаками и ИИ",
-   "date": "2026-09-23",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-09-23",
-     "title": "Переговоры",
-     "note": "«Яндекс» и VK обсуждают создание совместного предприятия на базе компаний Yandex B2B Tech и VK Tech, рассказали РБК два источника на рынке информационных технологий. Источники, близкие к сторонам возможной сделки, подтвердили проработку вариантов создания СП.…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Yandeks-i-VK-obsudyat-sozdanie-sovmestnogo-biznesa-s-oblakami-i-II-87561"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5850b57f (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d65939515",
    "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
    "date": "2026-10-12",
@@ -71,17 +31,17 @@
    ]
   },
   {
-   "draft_id": "d78839697",
-   "title": "Продажи электрокара «Амберавто А5» в России фактически остановились",
-   "date": "2026-10-13",
+   "draft_id": "d13527369",
+   "title": "«ВТО оказалась неспособна инициировать новые раунды торговой либерализации»",
+   "date": "2026-05-30",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053135715"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/8624399"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -99,16 +59,16 @@
    ]
   },
   {
-   "draft_id": "d54936220",
-   "title": "В Финляндии снизили цену продажи архипелага Юуслуото, где принимали Брежнева",
+   "draft_id": "d54201304",
+   "title": "Строительство, покупку и аренду жилья предложили связать платформами",
    "date": "2026-10-13",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9025337"
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/13/10/2026/6acd35979a7947143ec15019"
     ]
    ],
-   "sum": "€4,8 млн",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -120,20 +80,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d64941530",
-   "title": "Песков: страны Европы активно покупают российскую нефть",
+   "draft_id": "d15486420",
+   "title": "Песков: РФ продает свои энергоресурсы на мировых рынках и продолжит это делать",
    "date": "2026-10-13",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/10/13/1236632-peskov-strani-evropi-aktivno"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28209101"
     ]
    ],
    "sum": null,
@@ -141,11 +102,11 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "российскую нефть",
+   "asset": "свои энергоресурсы на мировых рынках и продолжит это делать",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "российскую нефть",
+    "asset": "свои энергоресурсы на мировых рынках и продолжит это делать",
     "seller": null
    },
    "ind": null,
@@ -155,152 +116,16 @@
    ]
   },
   {
-   "draft_id": "d82866850",
-   "title": "«Альфа-банк» стал акционером одной из крупнейших в России сети медицинских клиник «Медси» — он приобрёл чуть меньше 5% в ней",
+   "draft_id": "d12613567",
+   "title": "ЕРЗ: продажи новостроек в 2026 году рухнут до рекордного минимума",
    "date": "2026-10-13",
    "src": [
     [
-     "web:vc.ru",
-     "https://vc.ru/money/3191949-alfabank-aktsioner-seti-klinik-medsii?from=rss"
+     "web:1prime.ru",
+     "https://1prime.ru/20261013/prodazhi-874182929.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-13",
-     "title": "Сделка завершена",
-     "note": "Сумму сделки стороны не раскрыли.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/money/3191949-alfabank-aktsioner-seti-klinik-medsii?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "чуть меньше 5% в ней",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "чуть меньше 5% в ней",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d22587444",
-   "title": "Character AI подала заявление на банкротство в США — часть её активов может купить студия Disney",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/services/3191960-character-ai-podala-na-bankrotstvo-v-ssha-disney-interesuetsya-aktivami?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-13",
-     "title": "Переговоры",
-     "note": "Решение приняли на фоне юридических и регуляторных проблем, связанных с авторскими правами и несовершеннолетними пользователями.",
-     "source": [
-      "web:vc.ru",
-      "https://vc.ru/services/3191960-character-ai-podala-na-bankrotstvo-v-ssha-disney-interesuetsya-aktivami?from=rss"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d26852140",
-   "title": "Автобренд Tenet с петербургской сборкой вошёл в топ-3 по продажам сентября",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/13/avtobrend-tenet-s-peterburgskoj"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d92004237",
-   "title": "Торговая сеть Prisma в Финляндии начала продавать чехлы для бронежилетов",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/13/torgovaja-set-prisma-v-finljandii"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73789770",
-   "title": "Аналитический центр ДОМ.РФ: продажи новостроек за 9 мес. выросли на 12% по площади и на 11% по объёму поступлений",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/domrf/blog/1362019.php"
-    ]
-   ],
-   "sum": "495 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -313,63 +138,6 @@
     "seller": null
    },
    "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64769374",
-   "title": "Один из крупнейших покупателей золота начнет его продавать",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/13/odin-iz-krupneyshih-pokupateley-zolota-nachnet-ego-prodavat/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d28166763",
-   "title": "В России одну модель Jetour начнут продавать под новым брендом",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/13/v-rossii-odnu-model-jetour-nachnut-prodavat-pod-novym-brendom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
