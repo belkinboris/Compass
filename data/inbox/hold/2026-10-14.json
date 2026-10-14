@@ -2,7 +2,7 @@
  "made": "2026-10-14",
  "drafts": [
   {
-   "draft_id": "d15285932",
+   "draft_id": "d57838597",
    "title": "Государство национализировало еще один банк",
    "date": "2026-10-14",
    "src": [
@@ -31,19 +31,59 @@
    ]
   },
   {
-   "draft_id": "d69085397",
-   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 41,771 млрд рублей",
+   "draft_id": "d27074515",
+   "title": "Blackrock за III квартал привлекла $205 млрд клиентских средств",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/14/1237003-blackrock-privlekla"
+    ]
+   ],
+   "sum": "$205 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Blackrock за III квартал",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Blackrock за III квартал",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d96021856",
+   "title": "Скелет нанотираннуса планируют продать на аукционе за 9 миллионов долларов",
    "date": "2026-10-14",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261014/minfin-874230895.html"
+     "https://1prime.ru/20261014/skelet-874236004.html"
     ]
    ],
-   "sum": "41,771 млрд ₽",
+   "sum": null,
    "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-14",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261014/skelet-874236004.html"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -55,21 +95,23 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
+    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, миллио) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d63614267",
-   "title": "Apple раскрыла стоимость ремонта HomeView — за эти деньги можно купить новый домашний хаб",
+   "draft_id": "d65780308",
+   "title": "Hyundai Motor принял решение об увеличении инвестиций в производство в Индии",
    "date": "2026-10-14",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/apple-raskryla-stoimost-remonta-homeview-za-eti-dengi-mozhno-kupit-novyj-domashnij-hab/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/14/hyundai-motor-prinyal-reshenie-ob-uvelichenii-investitsiy-v-proizvodstvo-v-indii/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -85,34 +127,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d87711913",
-   "title": "Кроссовер Honda Vezel начали продавать в России",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/krossover-honda-vezel-vernulsya-na-rossiyskiy-rynok/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
