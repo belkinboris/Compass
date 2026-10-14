@@ -31,13 +31,13 @@
    ]
   },
   {
-   "draft_id": "d11895062",
-   "title": "«Русгидро» может завершить пик инвестиционного финансирования в 2026 году",
+   "draft_id": "d50856760",
+   "title": "Собянин: увеличение инвестиционной активности в 2027-м в Москве составит порядка 0,5%",
    "date": "2026-10-14",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28212561"
+     "https://tass.ru/ekonomika/28212771"
     ]
    ],
    "sum": null,
@@ -59,13 +59,13 @@
    ]
   },
   {
-   "draft_id": "d31016211",
-   "title": "В продаже в «Ленте» заметили «рыбу-зомби»",
+   "draft_id": "d15503712",
+   "title": "Вакансия: M&A менеджер в Северсталь (Севергрупп) https://hh.ru/vacancy/138424276",
    "date": "2026-10-14",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/v-prodazhe-v-lente-zametili-rybu-zombi/"
+     "tg:dealsma",
+     "https://t.me/dealsma/7470"
     ]
    ],
    "sum": null,
@@ -80,63 +80,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47000692",
-   "title": "В Тюмени снова изымут и попытаются продать незаконченный «замок»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136016"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86122331",
-   "title": "Норвежский суд осадил Украину, захотевшую продать «Профессора Молчанова»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136019"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "ГМК и добыча",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
