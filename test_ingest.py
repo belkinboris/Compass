@@ -5993,7 +5993,19 @@ def test_no_duplicate_fix_for_one_field():
     import review
     seen = collections.Counter((f["id"], f["field"]) for f in review.FIXES
                                if f["field"] != "src")
-    dups = [k for k, n in seen.items() if n > 1]
+    # Пересказ по фактам (write_card.py, 14.10.2026) — законная вторая запись:
+    # прежние записи поля учтены отпечатком в `proofread_absorbed`, и
+    # `already_applied` признаёт их до сверки состояния поля.
+    base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    cards = {d["id"]: d for d in base["deals"]}
+
+    def absorbed_chain(key):
+        recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
+        card = cards.get(key[0]) or {}
+        marks = (card.get("proofread_absorbed") or {}).get(key[1]) or []
+        return all(review.fix_fingerprint(f["new"]) in marks for f in recs[:-1])
+
+    dups = [k for k, n in seen.items() if n > 1 and not absorbed_chain(k)]
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
 
 

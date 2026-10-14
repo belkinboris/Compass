@@ -59,6 +59,10 @@ def facts_text(evidence):
     lines = []
     for i, e in enumerate(evidence, 1):
         hint = (' [поле: %s]' % e['field']) if e.get('field') else ''
+        if e.get('speech'):
+            # Прямая речь — единственное, что пишущий получает дословно: её
+            # нельзя пересказывать, только привести в «» с тем, кто сказал.
+            hint += ' [ПРЯМАЯ РЕЧЬ — только дословно, в «» и с автором: «%s»]' % e['speech'].strip()
         lines.append('%d. %s%s' % (i, e['fact'].strip(), hint))
     return '\n'.join(lines)
 
@@ -116,10 +120,12 @@ def find_card(deal_id):
 
 
 def check_fixes(fixes, card, data):
-    texts, inds, urls = review.source_texts(), review.industries(), review.source_urls()
+    texts = review.source_texts()
+    inds, urls = review.industries(), review.source_urls()
     found = {}
     for fix in fixes:
-        bad = review.check(fix, card, texts, data['companies'], inds, urls)
+        known = review.prose_gate.known_texts(fix, card, review.FIXES, review.get_field)
+        bad = review.check(fix, card, texts + known, data['companies'], inds, urls)
         if bad:
             found[fix['field']] = bad
     return found, bool(texts)

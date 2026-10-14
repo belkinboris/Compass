@@ -946,7 +946,8 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         if already_applied(fix, card, data['companies']):
             done += 1
             continue
-        bad = check(fix, card, texts, data['companies'], inds, urls)
+        bad = check(fix, card, texts + prose_gate.known_texts(fix, card, FIXES, get_field),
+                    data['companies'], inds, urls)
         (refused if bad else ok).append((fix, bad))
 
     if done:
@@ -1078,6 +1079,7 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
             continue
         assert get_field(card, fix['field']) == fix['old'], 'состояние поля изменилось'
         set_field(card, fix['field'], fix['new'])
+        prose_gate.absorb_earlier(fix, card, FIXES, fix_fingerprint)
         # Свидетельство о стороне обязано указывать на то, что теперь в поле,
         # иначе на карточке останется ссылка на снятое значение.
         role = {'buyer_name': 'buyer', 'asset': 'target', 'seller': 'seller'}.get(fix['field'])

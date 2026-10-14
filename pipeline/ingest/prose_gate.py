@@ -37,6 +37,8 @@ _NUM_RX = re.compile(r'\d[\d\s\u00a0]*(?:[.,]\d+)?')
 def _numbers(text):
     out = set()
     for m in _NUM_RX.finditer(str(text or '')):
+        if re.match(r'\s*[A-Za-z]', str(text)[m.end():]):
+            continue                     # «800 Degrees» — название, не число
         n = re.sub(r'[\s\u00a0]', '', m.group(0)).replace(',', '.').rstrip('.')
         if n:
             out.add(n)
@@ -72,6 +74,26 @@ def plain_words(text):
     return ' '.join(out)
 
 
+SPEECH_MIN_WORDS = 5
+SPEAKER_RE = re.compile(r'(?i)\b(?:сказал|сказала|заявил|заявила|отметил|отметила|пояснил|пояснила|'
+                        r'считает|говорит|по\s+словам|рассказал|рассказала|добавил|добавила|'
+                        r'подчеркнул|подчеркнула|написал|написала|уточнил|уточнила)\b')
+
+
+def _flat(s):
+    return re.sub(r'[^0-9a-zа-я]+', ' ', str(s or '').lower().replace('ё', 'е')).strip()
+
+
+def speech_fragments(text):
+    """Куски в «ёлочках» от SPEECH_MIN_WORDS слов — чужие слова, не названия."""
+    out = []
+    for m in re.finditer(r'«((?:[^«»]|«[^«»]*»)*)»', str(text or '')):
+        frag = m.group(1)
+        if len(_flat(frag).split()) >= SPEECH_MIN_WORDS:
+            out.append(frag)
+    return out
+
+
 def prose_problems(new, quote):
     """Причины не принимать текст поля, написанный по цитате (см. выше)."""
     from pipeline import verbatim_check as vc
@@ -94,9 +116,50 @@ def prose_problems(new, quote):
         bad.append('в тексте числа, которых нет в цитатах: %s' % ', '.join(extra))
     for rule, frag in proofread.source_note(orig_new):
         bad.append('пометка об источнике в тексте («%s») — %s' % (frag, rule))
+    # ПРЯМУЮ РЕЧЬ НЕ ПЕРЕСКАЗЫВАЮТ И НЕ ПРАВЯТ (владелец, 14 октября 2026):
+    # чужие слова в кавычках — только дословно и с тем, кто их сказал.
+    # Названия в кавычках короткие, поэтому проверяются кавычки от 5 слов.
+    for frag in speech_fragments(orig_new):
+        if _flat(frag) not in _flat(orig_quote):
+            bad.append('в кавычках не дословные слова источника («%s…») — цитату нельзя менять: '
+                       'дословно или пересказом без кавычек' % frag[:60])
+        elif not SPEAKER_RE.search(orig_new):
+            bad.append('у цитаты («%s…») не назван тот, кто это сказал' % frag[:60])
     if re.search(r'на\s+момент\s+(?:записи|написания|подготовки)|\bэто\s+и\s+привело\b', orig_new, re.I):
         bad.append('казённый оборот — скажите, как сказал бы человек')
     return bad
+
+
+def known_texts(fix, card, fixes, get_field):
+    """Чем ещё подтверждается цитата ПЕРЕПИСАННОГО текста: прежними цитатами
+    той же карточки и её нынешним текстом. Статьи старых карточек с диска уже
+    убраны, а владелец 14.10.2026 велел переписывать «то, что у нас
+    написано», не ходя к первоисточникам. Только для текстовых полей:
+    имя, сумма и дата по-прежнему сверяются со статьёй."""
+    if fix.get('field') not in PROSE_WRITTEN or not card:
+        return []
+    out = [f['quote'] for f in fixes
+           if f.get('id') == fix.get('id') and f is not fix and isinstance(f.get('quote'), str)]
+    out += [v for fld in PROSE_WRITTEN for v in [get_field(card, fld)]
+            if isinstance(v, str) and v not in ('', '—')]
+    return out
+
+
+def absorb_earlier(fix, card, fixes, fingerprint):
+    """Пересказ заменил текст, который внесли прежние правки того же поля:
+    их факты в нём остались, слова — нет. Отпечатки прежних правок уходят в
+    `proofread_absorbed` (как у вычитки, docs/card_editing.md), иначе
+    `test_review_table_is_applied_and_not_pending` сочтёт их неприменёнными."""
+    if fix.get('field') not in PROSE_WRITTEN:
+        return
+    seen = card.setdefault('proofread_absorbed', {}).setdefault(fix['field'], [])
+    for f in fixes:
+        if f is fix or f.get('id') != fix.get('id') or f.get('field') != fix.get('field') \
+                or f.get('new') in (None, fix.get('new')):
+            continue
+        fp = fingerprint(f['new'])
+        if fp not in seen:
+            seen.append(fp)
 
 
 def self_check(quote_is_real):
@@ -114,3 +177,10 @@ def self_check(quote_is_real):
     # Несколько цитат через « … » — настоящей обязана быть каждая.
     assert quote_is_real('альфа бета … гамма дельта', ['альфа бета и гамма дельта'])
     assert not quote_is_real('альфа бета … эпсилон', ['альфа бета и гамма дельта'])
+    # Прямая речь: дословно и с автором — можно; изменённая — нельзя.
+    q_sp = 'Мы рассчитываем удвоить выпуск сыров в течение двух лет, сказал гендиректор Иванов.'
+    assert not prose_problems('«Мы рассчитываем удвоить выпуск сыров в течение двух лет», '
+                              '— сказал гендиректор Иванов.', q_sp)
+    assert prose_problems('«Мы надеемся удвоить выпуск сыров в течение двух лет», '
+                          '— сказал гендиректор Иванов.', q_sp)
+    assert prose_problems('Компания: «мы рассчитываем удвоить выпуск сыров в течение двух лет».', q_sp)
