@@ -4319,6 +4319,10 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
     no_note = dict(clean); no_note.pop("accepted_notes")
     assert "seller_search" in {c for c, _t in accept_card.findings(no_note, base, registry=known)}
+    no_buyer = dict(clean); no_buyer.pop("buyer")
+    assert "buyer_search" in {c for c, _t in accept_card.findings(no_buyer, base, registry=known)}
+    lot = dict(no_buyer, type="Продажа с торгов", status="Обсуждается", seller="Росимущество")
+    assert "buyer_search" not in {c for c, _t in accept_card.findings(lot, base, registry=known)}
     # А без строки в реестре ИНН — юрлицо не установлено, и это находка (11 сентября
     # 2026: у «CyberOK» не было ни ИНН, ни отчётности, пока конкурент показал и то и другое).
     assert {"inn_missing:target", "inn_missing:buyer"} <= {c for c, _t in accept_card.findings(clean, base, registry=[])}
