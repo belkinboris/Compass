@@ -84,7 +84,6 @@ message_id в `telegram_posts` (не `null`) И которая попала в
         # отправленными: следующий прогон покажет их снова.
 """
 import json
-import math
 import os
 import sys
 import time
