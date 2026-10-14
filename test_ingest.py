@@ -3065,26 +3065,20 @@ def test_publisher_holds_everything_at_night():
         assert allowed >= 1, f"в {hour}:00 внутри окна не отправили ничего"
 
 
-def test_publisher_spreads_the_queue_over_the_window():
-    """Очередь делится на оставшиеся прогоны, а не уходит пачкой.
-
-    Пять постов в 10:00 при часовом прогоне — это по одному за раз, а не пять
-    уведомлений за десять секунд. Расчёт без состояния: доля считается от
-    того, что осталось в очереди СЕЙЧАС, поэтому пропущенный прогон не копит
-    долг, а просто делится на меньшее число слотов.
-    """
+def test_publisher_sends_approved_posts_at_once_within_the_window():
+    """С 14 октября 2026 очередь не размазывается по дню (владелец: «остальные
+    посты должны выкладываться как можно быстрее»): в окне пускается всё,
+    а несколько новых постов разводит пауза GAP_S (20 минут) в цикле отправки —
+    её держит `test_several_approved_posts_go_out_twenty_minutes_apart`."""
     from datetime import datetime
     import importlib, sys as _sys
     _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
     sender = importlib.import_module("send_telegram")
     at10, _ = sender.pace_allowance(5, datetime(2026, 8, 4, 10, 0, tzinfo=sender.MSK))
-    assert at10 == 1, f"в начале окна взяли {at10} из 5 — это не равномерно"
-    # Ближе к концу окна остаток уходит целиком: иначе он завис бы до завтра.
-    at2030, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 20, 30, tzinfo=sender.MSK))
-    assert at2030 == 3, "остаток очереди не ушёл в последнем слоте"
-    # Но не в одну минуту: между новыми постами внутри прогона есть пауза.
-    assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
-    # Пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert at10 == 5
+    assert sender.GAP_S == 20 * 60 and sender.RUN_WAIT_S < 60 * 60
+    # Ночью — ничего, пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert sender.pace_allowance(5, datetime(2026, 8, 4, 23, 0, tzinfo=sender.MSK))[0] == 0
     assert sender.pace_allowance(0, datetime(2026, 8, 4, 12, 0, tzinfo=sender.MSK))[0] == 0
 
 
@@ -7844,3 +7838,44 @@ def test_card_prose_is_written_from_facts_not_copied_from_the_quote():
     assert [f["field"] for f in fixes] == ["eco.val"]
     assert fixes[0]["quote"] == q1 + " … " + q2 and fixes[0]["old"] == "—"
     assert any("eco.context" in n for n in notes)              # без фактов — не пишется
+
+
+def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_path):
+    """Владелец, 14 октября 2026: «если я одобряю одновременно несколько —
+    по 20 минут; остальные посты — как можно быстрее». Дневной размазки нет;
+    новый пост ждёт 20 минут от предыдущего (и от последнего поста прошлого
+    прогона), прогон ждёт не дольше RUN_WAIT_S, остальное — следующим
+    прогоном; каждый пост пишется на диск сразу после отправки."""
+    from datetime import datetime, timezone
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["telegram_posts"] = {}
+    real_data["telegram_last_post_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
+    monkeypatch.setattr(send_telegram, "PUBLISH_WINDOW", "0-24")
+    monkeypatch.setattr(send_telegram, "in_window_after", lambda *a, **k: True)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    sleeps, saved_after_first = [], []
+
+    def fake_sleep(s):
+        sleeps.append(s)
+        if len(sleeps) == 2:      # перед вторым постом первый уже на диске
+            saved_after_first.append(json.loads(tmp_data.read_text(encoding="utf-8"))["telegram_posts"])
+    monkeypatch.setattr(send_telegram.time, "sleep", fake_sleep)
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 2000 + i}} for i in range(3)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setattr(send_telegram, "plan_digest", lambda *a, **k: (None, None, "выключена в тесте", []))
+
+    send_telegram.main(write=True)
+
+    assert len(fake.calls) == 2, "третий пост не помещается в 45 минут ожидания — уходит следующим прогоном"
+    assert len(sleeps) == 2 and all(1150 < s <= 1200 for s in sleeps), sleeps
+    assert any(v for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_last_post_at"] and len([v for v in written["telegram_posts"].values() if v]) == 2
+    # Один пост и давно не было постов — уходит сразу, без паузы.
+    assert send_telegram.gap_wait_s("2026-01-01T00:00:00+00:00") == 0
