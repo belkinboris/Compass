@@ -3435,6 +3435,35 @@ function applyFeedParams(qs){
   // пришедший по ссылке видит отфильтрованную ленту и не понимает почему.
   advOpen = FEED_PARAMS.some(([key])=>key!=="q" && p.get(key));
 }
+/* СВОЙ СЧЁТЧИК ПОСЕЩЕНИЙ (14 октября 2026, Метрика перестала отвечать).
+   На каждый открытый экран — одна отметка в /api/t: адрес экрана внутри
+   сайта, случайный номер браузера (придумывает сам браузер, хранит у себя),
+   номер визита (новый после 30 минут тишины), ширина экрана, вошёл ли
+   человек и — только на первом экране визита — с какого сайта пришёл.
+   Ни имени, ни почты, ни адреса. Повтор того же экрана за 3 секунды не
+   считается: route() вызывается вторым проходом после загрузки базы. */
+const trackRand = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b=>b.toString(16).padStart(2,"0")).join("");
+let trackLast = {path:"", at:0};
+function trackView(path){
+  try{
+    if(navigator.webdriver) return;
+    const now = Date.now();
+    if(path === trackLast.path && now - trackLast.at < 3000) return;
+    trackLast = {path, at:now};
+    let v = null, s = null, first = false;
+    try{ v = localStorage.getItem("kx_v"); if(!v){ v = trackRand(); localStorage.setItem("kx_v", v); } }catch(e){ v = v || trackRand(); }
+    try{
+      s = sessionStorage.getItem("kx_s"); const seen = +sessionStorage.getItem("kx_s_at") || 0;
+      if(!s || now - seen > 30*60*1000){ s = trackRand(); first = true; sessionStorage.setItem("kx_s", s); }
+      sessionStorage.setItem("kx_s_at", String(now));
+    }catch(e){ s = s || trackRand(); first = true; }
+    const body = JSON.stringify({path, v, s, ref: first ? (document.referrer || "") : "",
+                                 w: window.innerWidth || 0, auth: !!(typeof ME !== "undefined" && ME)});
+    const blob = new Blob([body], {type:"application/json"});
+    if(!(navigator.sendBeacon && navigator.sendBeacon("/api/t", blob)))
+      fetch("/api/t", {method:"POST", headers:{"Content-Type":"application/json"}, body, keepalive:true}).catch(()=>{});
+  }catch(e){}
+}
 function route(){
   // Диалог лежит в body, а не в #app, и перерисовка экрана его не убирала:
   // полупрозрачная подложка оставалась поверх новой страницы и перехватывала
@@ -3452,6 +3481,7 @@ function route(){
   // Пока гейт закрыт, любой адрес рисует экран входа, но адрес не теряется:
   // после входа тот же route() откроет то, куда человек шёл.
   if(GATE === null){ app.innerHTML = ""; return; }
+  trackView(h);
   /* Ассистент — единственная страница во весь экран: у неё нет полей .wrap и
      нет футера (он мешал бы ленте, а его ссылки есть в шапке). Класс живёт на
      body, поэтому снимать его надо на КАЖДОМ уходе с раздела — иначе футер

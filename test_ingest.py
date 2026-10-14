@@ -385,6 +385,28 @@ def test_acceptance_catches_verbatim_source_text_and_dangling_motive():
     assert "why_fragment" in codes, codes
 
 
+def test_acceptance_catches_a_source_sentence_with_swapped_words():
+    """14 октября 2026, отель «Азимут» в Ярославле (g39e9e9c2): фраза Abnews
+    «пересказана» заменой трёх слов — общая цепочка 6 слов, проверка «12 подряд»
+    молчала. Скелет чужого предложения ловится отдельно; честный пересказ
+    тех же фактов — нет. Казённое «на момент записи» — тоже находка."""
+    import accept_card
+    from pipeline import verbatim_check
+    source = ("В состав лота включено само здание. Покупателю придется учесть обременение: с 2021 года "
+              "объект арендует управляющая компания «Azimut Hotels», договор рассчитан на 25 лет. "
+              "Четырехзвездочный отель возвели к 1000-летию города.")
+    copied = {"id": "gn1", "title": "Т", "law": {"terms": "Покупателю придётся считаться с обременением: с 2021 года "
+              "гостиницу арендует управляющая компания «Azimut Hotels», договор заключён на 25 лет."}}
+    own = {"id": "gn2", "title": "Т", "law": {"terms": "Гостиница продана вместе с арендой: с 2021 года ею управляет "
+           "Azimut Hotels по договору на 25 лет, а покупатель — компания той же группы."}}
+    texts = [verbatim_check.words(source)]
+    assert accept_card.verbatim_runs(copied, texts=texts) == []          # старая проверка молчит
+    near = accept_card.near_copy_sentences(copied, texts=texts)
+    assert near and near[0][0] == "law.terms" and near[0][1] >= 0.7, near
+    assert accept_card.near_copy_sentences(own, texts=texts) == []
+    assert accept_card.STIFF_RE.search("чем он закончился, на момент записи неизвестно")
+
+
 def test_second_reading_gates_cards_accepted_since_october_9():
     """Второе чтение (8 октября 2026, Яндекс/VK): карточка, принятая с 9 октября,
     без штампа `second_read` в консоль не идёт; ответ читателя обязан покрыть

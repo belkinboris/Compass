@@ -18,6 +18,7 @@ import logging
 import mimetypes
 import os
 import pathlib
+import random
 import re
 import threading
 import time
@@ -52,7 +53,7 @@ from db.models import (
     AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
     DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     ModerationDecision, Notification,
-    NotificationPreference, OwnershipSnapshot, OwnershipStake, RegistryEvent,
+    NotificationPreference, OwnershipSnapshot, OwnershipStake, PageView, RegistryEvent,
     SavedFilter, User, UserRole, UserTier, Webinar,
 )
 from db.session import engine, get_session
@@ -3999,6 +4000,196 @@ def ops_summary(token: str = ""):
     return _ops_numbers()
 
 
+def _activity_numbers(db) -> dict:
+    """Посещаемость без Яндекса — из нашей же базы (14 октября 2026: Метрика
+    перестала отвечать, владелец: «можешь посмотреть метрики сайта без
+    Яндекса?»). Просмотров страниц сайт не пишет — их видит только Метрика;
+    здесь то, что делают люди с аккаунтом: регистрации, входы, вопросы
+    ассистенту, подписки, правки. Анонимного читателя эти цифры не видят."""
+    now = datetime.now(timezone.utc).replace(tzinfo=None)   # колонки — наивное UTC
+
+    def since(days):
+        return now - timedelta(days=days)
+
+    def count(col, days=None, where=()):
+        q = select(func.count()).select_from(col.class_)
+        for w in where:
+            q = q.where(w)
+        if days is not None:
+            q = q.where(col >= since(days))
+        return int(db.scalar(q) or 0)
+
+    def distinct(col_user, col_time, days, where=()):
+        q = select(func.count(func.distinct(col_user))).where(col_time >= since(days))
+        for w in where:
+            q = q.where(w)
+        return int(db.scalar(q) or 0)
+
+    asked = (AssistantMessage.role == "user",)
+    out = {"users": count(User.created_at)}
+    for d in (1, 7, 30):
+        out["new_users_%dd" % d] = count(User.created_at, d)
+        out["logins_%dd" % d] = count(AuthSession.created_at, d)
+        out["active_users_%dd" % d] = distinct(AuthSession.user_id, AuthSession.created_at, d)
+        out["questions_%dd" % d] = count(AssistantMessage.created_at, d, asked)
+        out["askers_%dd" % d] = int(db.scalar(
+            select(func.count(func.distinct(AssistantThread.user_id)))
+            .select_from(AssistantMessage).join(AssistantThread, AssistantMessage.thread_id == AssistantThread.id)
+            .where(AssistantMessage.role == "user", AssistantMessage.created_at >= since(d))) or 0)
+    out["watches"] = count(DealWatch.created_at, where=(DealWatch.active.is_(True),))
+    out["saved_filters"] = count(SavedFilter.created_at, where=(SavedFilter.active.is_(True),))
+    out["telegram_linked"] = int(db.scalar(select(func.count()).select_from(NotificationPreference)
+                                           .where(NotificationPreference.telegram_chat_id.is_not(None))) or 0)
+    out["corrections_7d"] = count(CorrectionRequest.created_at, 7)
+    out["feedback_7d"] = count(AssistantFeedback.created_at, 7)
+    # По дням за две недели: новые аккаунты, входы, вопросы ассистенту.
+    days = []
+    for back in range(13, -1, -1):
+        start = (now - timedelta(days=back)).replace(hour=0, minute=0, second=0, microsecond=0)
+        end = start + timedelta(days=1)
+
+        def between(col, where=()):
+            q = select(func.count()).select_from(col.class_).where(col >= start, col < end)
+            for w in where:
+                q = q.where(w)
+            return int(db.scalar(q) or 0)
+        days.append({"day": start.date().isoformat(), "new_users": between(User.created_at),
+                     "logins": between(AuthSession.created_at),
+                     "questions": between(AssistantMessage.created_at, asked)})
+    out["by_day"] = days
+    return out
+
+
+@app.get("/api/ops/activity")
+def ops_activity(token: str = "", db=Depends(get_db)):
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return _activity_numbers(db)
+
+
+@app.get("/ops/activity")
+def ops_activity_page(token: str = "", db=Depends(get_db)):
+    """Та же активность страницей — для владельца, когда Метрика молчит."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    a = _activity_numbers(db)
+    cards = [("Аккаунтов всего", a["users"]), ("Новых за сутки", a["new_users_1d"]),
+             ("Новых за 7 дней", a["new_users_7d"]), ("Новых за 30 дней", a["new_users_30d"]),
+             ("Заходили за сутки", a["active_users_1d"]), ("Заходили за 7 дней", a["active_users_7d"]),
+             ("Заходили за 30 дней", a["active_users_30d"]),
+             ("Вопросов ассистенту за сутки", a["questions_1d"]), ("Вопросов за 7 дней", a["questions_7d"]),
+             ("Спрашивали за 7 дней, человек", a["askers_7d"]),
+             ("Следят за сделками", a["watches"]), ("Подписок на компании и отрасли", a["saved_filters"]),
+             ("Привязали Telegram", a["telegram_linked"]), ("Правок от читателей за 7 дней", a["corrections_7d"])]
+    grid = "".join('<div class="c"><div class="n">%d</div><div class="l">%s</div></div>' % (v, html_escape(k)) for k, v in cards)
+    rows = "".join("<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>"
+                   % (html_escape(d["day"]), d["new_users"], d["logins"], d["questions"]) for d in reversed(a["by_day"]))
+    page = ('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<title>Компас — активность</title><style>body{margin:0;background:#f7f3e9;color:#201c14;font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;padding:24px 16px 64px}'
+            '.w{max-width:900px;margin:0 auto}h1{font:600 24px/1.2 Georgia,serif;margin:0 0 4px}.sub{color:#6b6353;font-size:14px;margin:0 0 20px;max-width:640px}'
+            '.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}'
+            '.c{background:#fff;border:1px solid rgba(32,28,20,.14);border-radius:10px;padding:14px 16px}.n{font:700 26px/1.1 Georgia,serif}.l{font-size:12.5px;color:#6b6353;margin-top:4px}'
+            'table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}td,th{border-bottom:1px solid rgba(32,28,20,.1);padding:7px 10px;text-align:right}td:first-child,th:first-child{text-align:left}</style></head>'
+            '<body><div class="w"><h1>Активность на сайте</h1>'
+            '<p class="sub">Из нашей базы, без Яндекс Метрики. Видны только люди с аккаунтом: регистрации, входы, вопросы ассистенту, подписки. '
+            'Читателей без входа и просмотры страниц считает только Метрика.</p>'
+            '<div class="grid">' + grid + '</div><h2 style="font:600 17px Georgia,serif">По дням (время UTC)</h2>'
+            '<table><tr><th>День</th><th>Новые аккаунты</th><th>Входы</th><th>Вопросы ассистенту</th></tr>' + rows + '</table></div></body></html>')
+    return HTMLResponse(page)
+
+
+# ---------------------------------------------------------- посещаемость ----
+# Свой счётчик (traffic.py): страница шлёт «открыли экран», здесь приём и вид.
+class TrackIn(BaseModel):
+    path: str = "/"
+    v: str = ""          # случайный номер браузера
+    s: str = ""          # номер визита
+    ref: str = ""        # откуда пришли — только на первом экране визита
+    w: int = 0           # ширина экрана — телефон или компьютер
+    auth: bool = False   # вошёл ли человек
+
+
+_TRACK_ID = re.compile(r"^[A-Za-z0-9]{8,32}$")
+
+
+@app.post("/api/t")
+def track_view(payload: TrackIn, request: Request, db=Depends(get_db)):
+    import traffic
+    if traffic.is_bot(request.headers.get("user-agent", "")):
+        return Response(status_code=204)
+    ip = (request.headers.get("x-forwarded-for") or (request.client.host if request.client else "")).split(",")[0].strip()
+    if traffic.too_fast(ip or "?"):
+        return Response(status_code=204)
+    if not (_TRACK_ID.match(payload.v or "") and _TRACK_ID.match(payload.s or "")):
+        return Response(status_code=204)
+    norm = traffic.normalize(payload.path)
+    if not norm:
+        return Response(status_code=204)
+    own = (request.headers.get("host") or "").split(":")[0].lower()
+    own = own[4:] if own.startswith("www.") else own
+    db.add(PageView(visitor=payload.v, session=payload.s, path=norm[0], section=norm[1],
+                    ref_host=traffic.ref_host(payload.ref, own), device=traffic.device_of(payload.w),
+                    logged_in=bool(payload.auth)))
+    if random.random() < 0.002:
+        db.query(PageView).filter(PageView.created_at < traffic._now() - timedelta(days=traffic.KEEP_DAYS)) \
+            .delete(synchronize_session=False)
+    db.commit()
+    return Response(status_code=204)
+
+
+def _traffic_stats(db, days: int = 7) -> dict:
+    import traffic
+    return traffic.stats(db, PageView, days=max(1, min(int(days or 7), 90)), base=base_data.promoted() or {})
+
+
+def _metrika_lines() -> list[str]:
+    try:
+        import metrika
+        return metrika.render(metrika.day_stats("today"))
+    except Exception as exc:                                 # noqa: BLE001
+        logger.error("Яндекс Метрика не ответила: %s", exc)
+        return ["📈 Яндекс Метрика сейчас не ответила."]
+
+
+@app.get("/api/ops/traffic")
+def ops_traffic(token: str = "", days: int = 7, db=Depends(get_db)):
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return _traffic_stats(db, days)
+
+
+@app.get("/ops/traffic")
+def ops_traffic_page(token: str = "", days: int = 7, metrika: int = 1, db=Depends(get_db)):
+    """Посещаемость для владельца: наш счётчик и, если отвечает, Метрика."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    import traffic
+    lines = _metrika_lines() if metrika else None
+    lines = [re.sub(r"</?b>", "", x) for x in lines] if lines else lines
+    return HTMLResponse(traffic.page_html(_traffic_stats(db, days), token, lines))
+
+
+@app.post("/api/ops/traffic-report")
+def ops_traffic_report(token: str = "", db=Depends(get_db)):
+    """Отчёт о посещаемости в консоль сейчас: Метрика (если отвечает) и наш
+    счётчик за сутки, со ссылкой на страницу посещаемости."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    import traffic
+    lines = _metrika_lines() + [""] + traffic.console_lines(_traffic_stats(db, 1))
+    text = "\n".join(lines)
+    chats = _review_chat_ids(db)
+    thread = _console_thread_id(db, "update")
+    sent = 0
+    for chat in chats:
+        res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, parse_mode="HTML",
+                                          disable_web_page_preview=True,
+                                          **({"message_thread_id": thread} if thread else {}))
+        if res and res.get("ok"):
+            sent += 1
+    return {"sent": sent, "text": text}
+
+
 @app.get("/api/data/status")
 def data_status(token: str = ""):
     """Как идёт подтягивание свежих данных с GitHub (data_refresh.py).
@@ -4252,6 +4443,11 @@ def _intake_summary_once(db, now_utc: datetime | None = None, force: bool = Fals
     except Exception as exc:                                 # noqa: BLE001
         logger.error("Яндекс Метрика не ответила: %s", exc)
         metrika_lines = ["📈 Яндекс Метрика сегодня не ответила — посещаемость пришлём в следующей сводке."]
+    try:
+        import traffic
+        metrika_lines = metrika_lines + [""] + traffic.console_lines(_traffic_stats(db, 1))
+    except Exception as exc:                                 # noqa: BLE001
+        logger.error("свой счётчик посещений не посчитался: %s", exc)
     text = _intake_summary_text(runs, msk.date(), metrika_lines)
     chats = _review_chat_ids(db)
     thread = _console_thread_id(db, "update")

@@ -686,3 +686,29 @@ class ModerationDecision(Base):
     # решения уже подтверждаются прямо в сообщении с кнопками (_mark_decided).
     chat_id: Mapped[str | None] = mapped_column(String(40), nullable=True)
     reply_message_id: Mapped[int | None] = mapped_column(nullable=True)
+
+
+# ------------------------------------------------------------ посещаемость ---
+
+class PageView(Base):
+    """Просмотр страницы сайта — своя статистика без внешних сервисов.
+
+    14 октября 2026 Яндекс Метрика перестала отвечать, и владелец попросил
+    «полезный сервис, чтобы мы смогли мониторить статистику посещений, может
+    ещё видеть, куда люди заходят и смотрят». Личных данных здесь нет: ни IP,
+    ни браузера, ни почты. `visitor` — случайный номер, который браузер сам
+    придумал и хранит у себя (localStorage), `session` — номер визита
+    (sessionStorage, новый после 30 минут тишины). Страница — адрес внутри
+    сайта (`/deal/<id>`, `/companies/<id>`), откуда пришли — только имя сайта.
+    Читает это `/ops/traffic` (закрыто токеном)."""
+    __tablename__ = "page_views"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now, index=True)
+    visitor: Mapped[str] = mapped_column(String(32), index=True)
+    session: Mapped[str] = mapped_column(String(32), index=True)
+    path: Mapped[str] = mapped_column(String(200))
+    section: Mapped[str] = mapped_column(String(20), index=True)
+    ref_host: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    device: Mapped[str] = mapped_column(String(10), default="desktop")
+    logged_in: Mapped[bool] = mapped_column(Boolean, default=False)
