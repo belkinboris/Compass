@@ -2,7 +2,7 @@
  "made": "2026-10-14",
  "drafts": [
   {
-   "draft_id": "d22361794",
+   "draft_id": "d83377852",
    "title": "Государство национализировало еще один банк",
    "date": "2026-10-14",
    "src": [
@@ -31,251 +31,13 @@
    ]
   },
   {
-   "draft_id": "d72390633",
-   "title": "ЦИАН: материнского капитала хватит на покупку 2 квадратных метров жилья в Москве",
+   "draft_id": "d23479031",
+   "title": "Netflix сократит примерно 6% штата — раунд увольнений станет крупнейшим с 2022 года",
    "date": "2026-10-14",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9026520"
-    ]
-   ],
-   "sum": "1,03 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33486946",
-   "title": "Матвиенко призвала принять меры против «магазинов по продаже дипломов» // Матвиенко предложила правительству приостановить лицензии частных вузов",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9026423"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11142007",
-   "title": "Основатель Dell купил долю в главном конкуренте Samsung. Это личная помощь его главе, который увяз в бракоразводном процессе",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-14_osnovatel_dell_kupil_dolyu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-14",
-     "title": "Сделка завершена",
-     "note": "Инвестфонд, связанный с основателем Dell, купил долю в холдинге SK Inc – в него входит, в том числе, SK Hynix, мировой производитель памяти и главный конкурент Samsung на этом рынке. Свои акции продал председатель правления SK Group – ему срочно понадобились…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-14_osnovatel_dell_kupil_dolyu"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "главный конкурент Samsung. Это личная помощь его главе, который увяз в бракоразводном процессе",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "главный конкурент Samsung. Это личная помощь его главе, который увяз в бракоразводном процессе",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d60075939",
-   "title": "CBS: скелет динозавра по прозвищу Джоди выставят на торгах Sotheby’s",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28214357"
-    ]
-   ],
-   "sum": "$9 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89394852",
-   "title": "Эксперт Карасев: ЕС хочет купить часть поставленного по сделке РФ и США дизеля",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28214253"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48677879",
-   "title": "Продажи гибридного внедорожника Esteo V27 превысили 1 тыс. машин — на это ушло два месяца",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-gibridnogo-vnedorozhnika-esteo-v27-prevysili-1-tys-mashin-na-eto-ushlo-dva-mesyaca/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку gd40fc98f (общие редкие слова: гибрид, продаж) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d41206833",
-   "title": "Володин рассказал, куда направить средства от продажи «красивых» номеров",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261014/volodin-2124492487.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16948266",
-   "title": "Родителям напомнили об ответственности за покупку питбайков детям",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261014/pitbayk-2124491849.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d64987082",
-   "title": "«Енисей» обыграл «Калугу» и вышел в шестой раунд пути регионов Кубка России",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261014/enisej-2124487511.html"
+     "web:vc.ru",
+     "https://vc.ru/media/3194964-netflix-sokratit-primerno-6-shtata-raund-uvolnenii-stanet-krupneishim-s-2022-goda?from=rss"
     ]
    ],
    "sum": null,
@@ -291,6 +53,63 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d31442596",
+   "title": "В Госдуме предложили продавать по частям непроданную недвижимость",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261014/gosduma-874244278.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53343217",
+   "title": "Эксперт объяснил, почему при покупке шин важно смотреть дату производства",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261014/shiny-2124511427.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
