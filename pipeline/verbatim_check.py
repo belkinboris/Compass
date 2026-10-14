@@ -76,6 +76,66 @@ def longest_common_run(a, b, minw=MIN_WORDS):
     return best, best_text
 
 
+# СКЕЛЕТ ЧУЖОГО ПРЕДЛОЖЕНИЯ (14 октября 2026, отель «Азимут» в Ярославле).
+# Цепочка «12 слов подряд» не видит пересказ заменой отдельных слов: «Покупателю
+# придется учесть обременение: с 2021 года объект арендует управляющая компания
+# «Azimut Hotels», договор рассчитан на 25 лет» (Abnews) стало «Покупателю
+# придётся считаться с обременением: с 2021 года гостиницу арендует управляющая
+# компания «Azimut Hotels», договор заключён на 25 лет» — три слова заменены,
+# самая длинная общая цепочка 6 слов, проверка молчала, а владелец и партнёр
+# увидели «не переписывает, тупо забирает куски». Здесь сравниваются основы
+# слов (первые 5 букв) предложения карточки с окном статьи того же размера:
+# если в том же порядке совпало ≥ NEAR_SHARE значимых основ и их ≥ NEAR_MIN,
+# предложение — скелет источника, его надо пересказать своими словами.
+NEAR_MIN = 8
+NEAR_SHARE = 0.7
+_STOP = set('и в во на с со к ко по о об от до из за для при у не но а же что как это его ее их она он они было были '
+            'был была также который которая которые которое этот эта эти том той тот года году лет млн млрд руб'.split())
+
+
+def _stems(text):
+    return [w[:5] for w in words(text) if len(w) >= 3 and w not in _STOP]
+
+
+def _lcs(a, b):
+    prev = [0] * (len(b) + 1)
+    for x in a:
+        cur = [0]
+        for j, y in enumerate(b):
+            cur.append(prev[j] + 1 if x == y else max(prev[j + 1], cur[j]))
+        prev = cur
+    return prev[-1]
+
+
+def sentences(text):
+    # Граница — знак конца и заглавная буква следом: «12 тыс. кв. метров» —
+    # одно предложение, а не три.
+    return [x.strip() for x in re.split(r'(?<=[.!?;])\s+(?=[А-ЯЁA-Z«"(])', str(text or '')) if x.strip()]
+
+
+def near_copies(text, article_stems, min_stems=NEAR_MIN, share=NEAR_SHARE):
+    """[(доля, предложение)] — предложения `text`, повторяющие скелет статьи."""
+    out = []
+    for sent in sentences(text):
+        st = _stems(sent)
+        if len(st) < min_stems:
+            continue
+        n, best = len(st), 0
+        span = 2 * n
+        step = max(1, n // 2)
+        first = set(st)
+        for i in range(0, max(1, len(article_stems) - n + 1), step):
+            win = article_stems[i:i + span]
+            if len(first & set(win)) < share * len(first):
+                continue
+            best = max(best, _lcs(st, win))
+            if best == n:
+                break
+        if best >= share * n:
+            out.append((round(best / n, 2), sent))
+    return out
+
+
 def card_prose(deal):
     out = {}
     for k in PROSE_FIELDS:
@@ -110,6 +170,12 @@ def check_card(deal, max_sources=3):
             continue
         res['fetched'] += 1
         article = words(html)
+        astems = [w[:5] for w in article if len(w) >= 3 and w not in _STOP]
+        for field, text in card_prose(deal).items():
+            for share_, sent in near_copies(text, astems):
+                cur = res.setdefault('near', {}).get(field)
+                if not cur or share_ > cur['share']:
+                    res['near'][field] = {'share': share_, 'sentence': sent[:240], 'src': name}
         for field, w in prose.items():
             run, snippet = longest_common_run(w, article)
             if run >= MIN_WORDS and run > res['fields'].get(field, {}).get('run', 0):
@@ -119,12 +185,15 @@ def check_card(deal, max_sources=3):
 
 def report(rows):
     for r in rows:
-        if not r['fields']:
+        if not (r['fields'] or r.get('near')):
             continue
-        worst = max(r['fields'].items(), key=lambda kv: kv[1]['run'])
+        worst = max(r['fields'].items(), key=lambda kv: kv[1]['run']) if r['fields'] else None
         print('%s %s' % (r['id'], r['title'][:60]))
         for field, v in sorted(r['fields'].items(), key=lambda kv: -kv[1]['run']):
             print('   %-14s %3d слов подряд как у «%s»: %s…' % (field, v['run'], v['src'], v['snippet'][:110]))
+        for field, v in sorted((r.get('near') or {}).items()):
+            print('   %-14s скелет предложения «%s» (%d%% основ в том же порядке): %s…'
+                  % (field, v['src'], round(100 * v['share']), v['sentence'][:110]))
         _ = worst
 
 
@@ -150,13 +219,15 @@ def main(argv):
     with ThreadPoolExecutor(max_workers=8) as ex:
         rows = list(ex.map(check_card, chosen))
     fetched = [r for r in rows if r['fetched']]
-    hit = [r for r in fetched if r['fields']]
-    print('Проверено карточек: %d, источник открылся у %d, дословные куски (от %d слов) у %d.'
-          % (len(rows), len(fetched), MIN_WORDS, len(hit)))
+    hit = [r for r in fetched if r['fields'] or r.get('near')]
+    print('Проверено карточек: %d, источник открылся у %d, дословные куски (от %d слов) у %d, '
+          'скелет чужого предложения у %d.'
+          % (len(rows), len(fetched), MIN_WORDS, sum(1 for r in fetched if r['fields']),
+             sum(1 for r in fetched if r.get('near'))))
     for th in (20, 30):
-        print('  от %d слов: %d' % (th, sum(1 for r in hit if max(v['run'] for v in r['fields'].values()) >= th)))
+        print('  от %d слов: %d' % (th, sum(1 for r in hit if r['fields'] and max(v['run'] for v in r['fields'].values()) >= th)))
     print()
-    report(sorted(hit, key=lambda r: -max(v['run'] for v in r['fields'].values())))
+    report(sorted(hit, key=lambda r: -max([v['run'] for v in r['fields'].values()] or [0])))
     return 0
 
 

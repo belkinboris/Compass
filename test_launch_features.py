@@ -4960,3 +4960,51 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     assert "Отменено" in sent[-1][1]["text"]
     # «отмена» не стала новой правкой.
     assert [d for d in decisions() if d[1] == "отмена"] == []
+
+
+def test_ops_activity_counts_people_without_metrika(client, monkeypatch):
+    """14 октября 2026: Метрика не отвечает — активность видна из нашей базы.
+    Закрыто тем же токеном, что и панель основателей; без него — 404."""
+    _mod_env(monkeypatch)
+    assert client.get("/api/ops/activity").status_code == 404
+    before = client.get("/api/ops/activity", params={"token": "тайна"}).json()
+    r = client.post("/api/auth/register", json={"email": "activity-probe@example.com", "password": "Пароль-надёжный-1", "full_name": "Проба Активности"})
+    assert r.status_code in (200, 201), r.text
+    after = client.get("/api/ops/activity", params={"token": "тайна"}).json()
+    assert after["users"] == before["users"] + 1
+    assert after["new_users_1d"] == before["new_users_1d"] + 1
+    assert len(after["by_day"]) == 14 and after["by_day"][-1]["new_users"] >= 1
+    page = client.get("/ops/activity", params={"token": "тайна"})
+    assert page.status_code == 200 and "Активность на сайте" in page.text
+
+
+def test_own_traffic_counter_records_views_and_shows_them(client, monkeypatch):
+    """14 октября 2026: свой счётчик посещений вместо молчащей Метрики.
+    Отметка экрана пишется без личных данных, роботы и наши проверки
+    (безголовый браузер) не считаются, черновики карточек — тоже; страница
+    /ops/traffic закрыта токеном и показывает, что смотрели и откуда пришли."""
+    import traffic
+    _mod_env(monkeypatch)
+    human = {"user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Safari/604.1"}
+    v, s = "a1b2c3d4e5f60718293a4b5c", "0f1e2d3c4b5a69788796a5b4"
+    deal = next(d for d in main.base_data.promoted()["deals"] if d.get("title"))
+    before = client.get("/api/ops/traffic", params={"token": "тайна", "days": 1}).json()
+    client.post("/api/t", headers=human, json={"path": "/", "v": v, "s": s, "ref": "https://t.me/compass", "w": 390})
+    client.post("/api/t", headers=human, json={"path": "/deal/%s" % deal["id"], "v": v, "s": s, "w": 390})
+    client.post("/api/t", headers=human, json={"path": "/search/%D0%A1%D0%B1%D0%B5%D1%80", "v": v, "s": s, "w": 390})
+    client.post("/api/t", headers={"user-agent": "Mozilla/5.0 HeadlessChrome/140"}, json={"path": "/", "v": v, "s": s})
+    client.post("/api/t", headers={"user-agent": "YandexBot/3.0"}, json={"path": "/", "v": v, "s": s})
+    client.post("/api/t", headers=human, json={"path": "/preview/gxyz", "v": v, "s": s})
+    client.post("/api/t", headers=human, json={"path": "/", "v": "bad id!", "s": s})
+    st = client.get("/api/ops/traffic", params={"token": "тайна", "days": 1}).json()
+    assert st["views"] == before["views"] + 3, (before["views"], st["views"])
+    assert any(p == "/deal/%s" % deal["id"] for p, *_ in st["top_deals"])
+    assert any(p == "/search/Сбер" for p, *_ in st["top_searches"])
+    assert dict(st["sources"]).get("Telegram", 0) >= 1
+    assert st["labels"]["/deal/%s" % deal["id"]] == deal["title"]
+    assert client.get("/ops/traffic", params={"metrika": 0}).status_code == 404
+    page = client.get("/ops/traffic", params={"token": "тайна", "days": 1, "metrika": 0})
+    assert page.status_code == 200 and "Посещаемость сайта" in page.text and "Что ищут" in page.text
+    lines = traffic.console_lines(st)
+    assert "Посетителей" in lines[1]
+    assert traffic.normalize("/preview/x") is None and traffic.normalize("/deal/../../etc") is None

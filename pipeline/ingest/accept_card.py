@@ -547,6 +547,33 @@ def verbatim_runs(card, texts=None):
     return out
 
 
+def near_copy_sentences(card, texts=None):
+    """[(поле, доля, предложение)] — предложения прозы, повторяющие скелет
+    предложения источника с заменой отдельных слов (14 октября 2026, отель
+    «Азимут»: «придется учесть» → «придётся считаться», «объект» → «гостиницу»,
+    цепочка 12 слов такого не видит). Порог и способ — `verbatim_check.near_copies`."""
+    from pipeline import verbatim_check
+    sources = texts if texts is not None else _source_words()
+    stems = [[w[:5] for w in sw if len(w) >= 3 and w not in verbatim_check._STOP] for sw in sources]
+    out = []
+    for f, v in _scannable_texts(card):
+        if f == 'title':
+            continue
+        best = None
+        for st in stems:
+            for share, sent in verbatim_check.near_copies(v, st):
+                if not best or share > best[1]:
+                    best = (f, share, sent)
+        if best:
+            out.append(best)
+    return out
+
+
+# Обороты, которыми пересказ выдаёт, что его писала программа, а не человек
+# (владелец 14 октября 2026 об «Азимуте»: «это пиздец какой-то»).
+STIFF_RE = re.compile(r'на\s+момент\s+(?:записи|написания|подготовки)|\bэто\s+и\s+привело\b', re.I)
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -637,6 +664,14 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         out.append(('verbatim:' + f, '%d слов подряд как в источнике в %s: «%s…» — пересказать '
                     'своими словами или взять в «ёлочки» с указанием, кто сообщает'
                     % (run, f, snippet[:80])))
+    for f, share, sent in near_copy_sentences(card):
+        out.append(('near_copy:' + f, 'в %s предложение повторяет предложение источника с заменой '
+                    'отдельных слов (%d%% основ в том же порядке): «%s» — пересказать по-своему: '
+                    'другой порядок, своя мысль, без чужого скелета' % (f, round(100 * share), sent[:90])))
+    for f, v in _scannable_texts(card):
+        m = STIFF_RE.search(v)
+        if m:
+            out.append(('stiff:' + f, 'в %s казённый оборот «%s» — сказать, как сказал бы человек' % (f, m.group(0))))
     if not any(str(s[1]).startswith('http') for s in card.get('src') or [] if len(s) > 1):
         out.append(('source', 'ни одной http-ссылки в источниках'))
     for c in coverage(card):
