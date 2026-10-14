@@ -31,42 +31,13 @@
    ]
   },
   {
-   "draft_id": "d11558124",
-   "title": "Nikkei: инвестиции в военные стартапы за половину года достигли в мире $41 млрд",
+   "draft_id": "d11895062",
+   "title": "«Русгидро» может завершить пик инвестиционного финансирования в 2026 году",
    "date": "2026-10-14",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28211713"
-    ]
-   ],
-   "sum": "$41 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d53718083",
-   "title": "В Госдуме назвали риски покупки вторичной квартиры",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2183823/2026-10-14/v-gosdume-nazvali-riski-pokupki-vtorichnoi-kvartiry"
+     "https://tass.ru/ekonomika/28212561"
     ]
    ],
    "sum": null,
@@ -88,69 +59,69 @@
    ]
   },
   {
-   "draft_id": "d83712355",
-   "title": "Бух предлагает сдаться: как американский адвокат «продает» ФБР русских хакеров",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2183534/sviatoslav-petrov/kak-amerikanskii-advokat-buh-prodaet-fbr-russkikh-khakerov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "» ФБР русских хакеров",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "» ФБР русских хакеров",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d56782585",
-   "title": "Портфель лучших акций под пассивный доход на 13 октября. 3,311 млн рублей. Новые покупки",
-   "date": "2026-10-13",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1362316.php"
-    ]
-   ],
-   "sum": "3,311 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87066452",
-   "title": "Украинские компании попытались принудительно продать арестованное в Норвегии судно России",
+   "draft_id": "d31016211",
+   "title": "В продаже в «Ленте» заметили «рыбу-зомби»",
    "date": "2026-10-14",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/ukrainskie-kompanii-popytalis-prinuditelno-prodat-arestovannoe-v-norvegii-sudno-rossii/"
+     "https://lenta.ru/news/2026/10/14/v-prodazhe-v-lente-zametili-rybu-zombi/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47000692",
+   "title": "В Тюмени снова изымут и попытаются продать незаконченный «замок»",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136016"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86122331",
+   "title": "Норвежский суд осадил Украину, захотевшую продать «Профессора Молчанова»",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136019"
     ]
    ],
    "sum": null,
@@ -169,45 +140,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65066245",
-   "title": "Azimut Hotels выкупила гостиницу в Ярославле за 362 млн рублей Статус 🟢 Итоги торгов подведены 9 октября 2026 года. Об объекте сделки Четырехзвездочная гостиница «Azimut Отель Ярославль» на Московском",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7467"
-    ]
-   ],
-   "sum": "362 млн ₽",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-14",
-     "title": "Сделка завершена",
-     "note": "Azimut Hotels выкупила гостиницу в Ярославле за 362 млн рублей Статус 🟢 Итоги торгов подведены 9 октября 2026 года. Об объекте сделки Четырехзвездочная гостиница «Azimut Отель Ярославль» на Московском проспекте в Ярославле. Комплекс включает здание площадью…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7467"
-     ]
-    }
-   ],
-   "buyer_name": "Azimut Hotels",
-   "asset": "гостиница в Ярославле",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Azimut Hotels",
-    "asset": "гостиница в Ярославле",
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок"
    ]
   }
  ]

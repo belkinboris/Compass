@@ -242,8 +242,11 @@ def source_texts():
 
 def quote_is_real(quote, texts):
     """Цитата обязана дословно лежать в тексте источника — пока он есть на диске."""
-    needle = flat(quote)
-    return any(needle in flat(t) for t in texts)
+    # Несколько цитат через « … » (текстовое поле собирается из разных мест
+    # статьи) — настоящей обязана быть каждая.
+    parts = [p for p in QUOTE_SEP.split(str(quote or '')) if p.strip()] or [quote]
+    flat_texts = [flat(t) for t in texts]
+    return all(any(flat(p) in t for t in flat_texts) for p in parts)
 
 
 def date_is_supported(old, new, quote):
@@ -529,6 +532,13 @@ def already_applied(fix, card, companies=None):
     return fix_fingerprint(fix['new']) in absorbed
 
 
+# Текст карточки пишется, а не переносится (14 октября 2026): проверка —
+# в `prose_gate.py`, порядок — в `WRITING_BRIEF.md`.
+import prose_gate  # noqa: E402
+from prose_gate import (PROSE_WRITTEN, PROSE_MAX_RUN, QUOTE_SEP,  # noqa: E402,F401
+                        plain_words, prose_problems)
+
+
 def check(fix, card, texts, companies, inds, urls=frozenset()):
     """Список причин, по которым правку принимать НЕЛЬЗЯ."""
     bad = []
@@ -615,6 +625,8 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         problem = sum_is_supported(new, quote)
         if problem:
             bad.append(problem)
+    elif field in PROSE_WRITTEN and isinstance(new, str) and new.strip() not in ('', '—'):
+        bad.extend(prose_problems(new, quote))
     elif new is not None:
         # Имя, предмет, сумма — только перенос, дословно.
         if flat(new) not in flat(quote):
@@ -686,6 +698,7 @@ def _self_check():
                       quote='ООО "Антресоль" стало владельцем актива.'),
                 {}, [], {}, set())
     assert any('прямые кавычки' in b for b in bad)
+    prose_gate.self_check(quote_is_real)
 
 
 def stamp_reviewed(card, day=None):

@@ -197,9 +197,57 @@ def report(rows):
         _ = worst
 
 
+def copied_from_fixes(deals):
+    """{id: [поля]} — проза, повторяющая цитату, по которой её записали.
+
+    Без сети: цитаты правок review.py (`fixes/`) — это и есть текст
+    источника, из которого поле переносили. Мера та же, что у записи
+    нового текста (`review.prose_problems`): 8 обычных слов подряд или
+    скелет предложения с заменой слов; имена и числа не считаются. Замер
+    14 октября 2026: 1095 из 1481 карточки на сайте.
+    """
+    sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+    import review
+    quotes = {}
+    for f in review.FIXES:
+        q = f.get('quote')
+        if isinstance(q, str) and len(q) > 40:
+            quotes.setdefault(f['id'], []).append(q)
+    out = {}
+    for d in deals:
+        if d['id'] not in quotes:
+            continue
+        qp = review.plain_words(' '.join(quotes[d['id']]))
+        qw = words(qp)
+        qst = [w[:5] for w in qw if len(w) >= 3 and w not in _STOP]
+        found = []
+        for fld in sorted(review.PROSE_WRITTEN):
+            v = review.get_field(d, fld)
+            if not isinstance(v, str) or len(v) < 40:
+                continue
+            p = review.plain_words(v)
+            if longest_common_run(words(p), qw, 8)[0] >= 8 or near_copies(p, qst):
+                found.append(fld)
+        if found:
+            out[d['id']] = found
+    return out
+
+
 def main(argv):
     data = json.load(open(DATA, encoding='utf-8'))
     deals = data['deals']
+    if '--from-fixes' in argv:
+        i = argv.index('--from-fixes')
+        n = int(argv[i + 1]) if len(argv) > i + 1 and argv[i + 1].isdigit() else 10
+        found = copied_from_fixes(deals)
+        print('Проза повторяет цитату источника у %d карточек из %d (полей: %d).'
+              % (len(found), len(deals), sum(map(len, found.values()))))
+        fresh = sorted((d for d in deals if d['id'] in found),
+                       key=lambda d: str(d.get('date') or ''), reverse=True)
+        for d in fresh[:n]:
+            print('%s  %s  %s — %s' % (d['id'], str(d.get('date') or '')[:10],
+                                       d.get('title', '')[:70], ', '.join(found[d['id']])))
+        return 0
     if '--card' in argv:
         deal = next(d for d in deals if d['id'] == argv[argv.index('--card') + 1])
         r = check_card(deal)

@@ -547,6 +547,11 @@ def verbatim_runs(card, texts=None):
     return out
 
 
+def review_plain(text):
+    import review
+    return review.plain_words(text)
+
+
 def near_copy_sentences(card, texts=None):
     """[(поле, доля, предложение)] — предложения прозы, повторяющие скелет
     предложения источника с заменой отдельных слов (14 октября 2026, отель
@@ -560,6 +565,9 @@ def near_copy_sentences(card, texts=None):
         if f == 'title':
             continue
         best = None
+        # Имена и числа — факты, совпадение по ним не списывание
+        # (`review.plain_words`, та же мера, что у записи текста).
+        v = review_plain(v)
         for st in stems:
             for share, sent in verbatim_check.near_copies(v, st):
                 if not best or share > best[1]:
