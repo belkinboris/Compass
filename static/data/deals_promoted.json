@@ -271668,7 +271668,11 @@
     "target_fin": "—",
     "finadv": "—"
    },
-   "events": []
+   "events": [
+    {
+     "kind": "negotiations"
+    }
+   ]
   },
   "g420352ff": {
    "seller": "«Дом.РФ»",
