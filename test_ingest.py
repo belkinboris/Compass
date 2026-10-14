@@ -1069,7 +1069,10 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
     # С 13 октября 2026 ссылка на карточку — ещё и последней строкой текста,
     # той же подписью, что кнопка (владелец), ровно одна.
     assert text.count(f"/#/deal/{deal['id']}") == 1
-    assert text.rstrip().endswith('">Подробнее в карточке сделки</a>'), text[-200:]
+    # С 14 октября 2026 ссылкой — только «карточке сделки» (владелец: иначе
+    # «контраста нет и вообще не видно»).
+    assert text.rstrip().endswith('Подробнее в <a href="%s/#/deal/%s">карточке сделки</a>'
+                                  % (format_post.SITE, deal["id"])), text[-200:]
     assert "→ Экономист" not in text and "→ Юрист" not in text
 
     buttons = format_post.render_buttons(deal)
@@ -1077,7 +1080,7 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
     # С 3 октября 2026 клавиатура — одна кнопка: владелец, «просто кнопки
     # „Открыть карточку сделки“ достаточно»; кнопки линз сняты.
     assert len(rows) == 1 and len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows
-    assert rows[0][0]["text"] == "Подробнее в карточке сделки"
+    assert rows[0][0]["text"] == "Открыть карточку сделки"
     # Черновик в консоли обязан показывать и кнопки: их не видно в тексте.
     preview = format_post.buttons_preview(deal)
     for row in rows:
@@ -1091,7 +1094,7 @@ def test_post_keyboard_has_only_the_card_button():
     lawful = {"id": "x1", "title": "Т", "sum": "1 млрд ₽", "law": {"appr": "ФАС одобрила сделку в июне."},
               "eco": {"share": "100% акций"}}
     labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
-    assert labels == ["Подробнее в карточке сделки"], labels
+    assert labels == ["Открыть карточку сделки"], labels
 
 
 def test_post_labels_a_listing_price_as_a_starting_price():
@@ -2500,7 +2503,8 @@ def test_render_milestone_uses_the_snapshot_not_live_fields():
     assert "ООО «Покупатель»" in text
     # Ссылка на карточку у вехи — кнопкой под постом и, с 13 октября 2026,
     # одной последней строкой текста «Подробнее в карточке сделки».
-    assert text.count("/#/deal/d1") == 1 and text.endswith("Подробнее в карточке сделки</a>")
+    assert text.count("/#/deal/d1") == 1 and text.endswith(">карточке сделки</a>") \
+        and "Подробнее в <a href" in text
     assert format_post.render_buttons(deal)["inline_keyboard"][0][0]["url"].endswith("/#/deal/d1")
 
 
@@ -4995,7 +4999,7 @@ def test_a_stage_post_shows_one_source_and_counts_the_rest():
     lines = format_post.render_milestone(deal, event).split("\n")
     assert lines[-4:-2] == ['<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>',
                             'Ещё 3 источника — в карточке сделки']
-    assert lines[-1].endswith('>Подробнее в карточке сделки</a>')
+    assert lines[-1].startswith('Подробнее в <a href') and lines[-1].endswith('>карточке сделки</a>')
     assert "Коммерсантъ" not in "\n".join(lines) and "Источники:" not in "\n".join(lines)
     assert check_post.check("\n".join(lines)) == []
     del event["sources"]

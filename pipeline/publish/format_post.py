@@ -1236,7 +1236,7 @@ def lens_links(deal):
 
 _BUTTONS_CAPTION_LINE = re.compile(r'^\s*Кнопки под постом:')
 _OWN_LINK_LINE = re.compile(
-    r'^\s*(?:→\s*)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
+    r'^\s*(?:→\s*)?(?:Подробнее в\s+)?<a href="%s/#/deal/[^"]*">[^<]*</a>\s*$' % re.escape(SITE))
 
 
 # ССЫЛКА НА КАРТОЧКУ — И КНОПКОЙ, И ПОСЛЕДНЕЙ СТРОКОЙ ТЕКСТА (владелец,
@@ -1246,12 +1246,16 @@ _OWN_LINK_LINE = re.compile(
 # `render_milestone` и в тексты владельца при отправке; она же совпадает с
 # `_OWN_LINK_LINE`, поэтому `strip_platform_links` её снимает, и повторное
 # добавление не даёт двух строк.
+# 14 октября 2026 (владелец): «Кнопка пусть останется как была — „Открыть
+# карточку сделки“. В тексте „Подробнее в карточке сделки“ — кликабельным
+# должно быть только „карточке сделки“, иначе контраста нет и вообще не видно».
+CARD_BUTTON_TEXT = 'Открыть карточку сделки'
 CARD_LINK_TEXT = 'Подробнее в карточке сделки'
 
 
 def card_link_line(deal):
     did = (deal or {}).get('id')
-    return ('<a href="%s/#/deal/%s">%s</a>' % (SITE, did, CARD_LINK_TEXT)) if did else ''
+    return ('Подробнее в <a href="%s/#/deal/%s">карточке сделки</a>' % (SITE, did)) if did else ''
 
 
 def with_card_link(text, deal):
@@ -1302,15 +1306,15 @@ def is_listing(deal):
 
 
 def render_buttons(deal):
-    """Клавиатура под постом: одна широкая кнопка «Подробнее в карточке сделки»
-    (до 13 октября 2026 — «Открыть карточку сделки»).
+    """Клавиатура под постом: одна широкая кнопка «Открыть карточку сделки»
+    (13–14 октября 2026 была «Подробнее в карточке сделки» — вернули).
     Кнопки линз («Экономист», «Юрист») сняты решением владельца 3 октября
     2026: «просто кнопки „Открыть карточку сделки“ достаточно». Формат готов
     для `reply_markup` Telegram."""
     did = deal.get('id')
     if not did:
         return None
-    rows = [[{'text': CARD_LINK_TEXT, 'url': '%s/#/deal/%s' % (SITE, did)}]]
+    rows = [[{'text': CARD_BUTTON_TEXT, 'url': '%s/#/deal/%s' % (SITE, did)}]]
     return {'inline_keyboard': rows}
 
 
