@@ -31,6 +31,48 @@
     "needs_review": true
    },
    "queued": "2026-10-14"
+  },
+  {
+   "key": "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/::g62577a1d",
+   "candidate_id": "g62577a1d",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d66951333",
+    "title": "«Карат» купил производителя молочной продукции «Эго»",
+    "date": "2026-10-14",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-14",
+      "title": "Сделка завершена",
+      "note": "Сумма сделки не раскрывается, эксперты оценивают стоимость предприятия в 1,5–2 млрд рублей. Сообщение «Карат» купил производителя молочной продукции «Эго» появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/"
+      ]
+     }
+    ],
+    "buyer_name": "«Карат»",
+    "asset": "производитель молочной продукции «Эго»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Карат»",
+     "asset": "производитель молочной продукции «Эго»",
+     "seller": null
+    },
+    "ind": "Пищепром и напитки",
+    "needs_review": true
+   },
+   "queued": "2026-10-14"
   }
  ]
 }
