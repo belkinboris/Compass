@@ -4310,10 +4310,15 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert any(c.startswith("press:") for c in codes), codes
     clean = {"id": "gt2", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
-             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {}}
+             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {},
+             # С 14 октября 2026 пустой продавец новой покупки — находка, пока
+             # читатель не записал, где искал владельца («Соликамскбумпром»).
+             "accepted_notes": {"no_profile": {"seller": "искали в ЕГРЮЛ и статьях о CyberOK — не назван"}}}
     base["companies"]["gsb2"] = {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}
     known = [{"company_id": "gsb"}, {"company_id": "gsb2"}]
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
+    no_note = dict(clean); no_note.pop("accepted_notes")
+    assert "seller_search" in {c for c, _t in accept_card.findings(no_note, base, registry=known)}
     # А без строки в реестре ИНН — юрлицо не установлено, и это находка (11 сентября
     # 2026: у «CyberOK» не было ни ИНН, ни отчётности, пока конкурент показал и то и другое).
     assert {"inn_missing:target", "inn_missing:buyer"} <= {c for c, _t in accept_card.findings(clean, base, registry=[])}
