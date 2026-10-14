@@ -2,254 +2,7 @@
  "made": "2026-10-14",
  "drafts": [
   {
-   "draft_id": "d25487489",
-   "title": "Житель Техаса случайно купил на распродаже гранаты времен Второй мировой войны",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9026171"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-14",
-     "title": "Сделка завершена",
-     "note": "Житель Техаса обнаружил в коробке, купленной на распродаже имущества, гранаты времен Второй мировой войны, пишет New York Post (NYP). На место вызвали саперов, после чего устройства изъяли и обезвредили.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9026171"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "на распродаже гранаты времен Второй мировой войны",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на распродаже гранаты времен Второй мировой войны",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d30695445",
-   "title": "Суд в Норвегии не позволил Украине продать российское судно «Профессор Молчанов»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9026175"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82252210",
-   "title": "Гарбузов: инвестиционный климат обсудят на панельной сессии в Москве",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261014/investitsii-2124420935.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26655395",
-   "title": "Володин призвал оценить выгоду для бюджета от продажи «красивых» номеров",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28213699"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37920237",
-   "title": "Поддержка инвестиций и пересмотр льгот: что может измениться в налоговой системе России",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/podderzhka-investitsij-i-peresmotr-lgot-chto-mozhet-izmenitsya-v-nalogovoj-sisteme-rossii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69326069",
-   "title": "На Бали начали продавать бензин в бутылках на фоне топливного кризиса",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2184034/na-bali-nachali-prodavat-benzin-v-butylkakh-na-fone-toplivnogo-krizisa-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-14",
-     "title": "Сделка завершена",
-     "note": "На индонезийском острове Бали местные продавцы начали торговать бензином в бутылках по завышенным ценам из-за дефицита топлива и многочасовых очередей на автозаправочных станциях. Об этом 14 октября рассказала «Известиям» находящаяся на острове россиянка…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2184034/na-bali-nachali-prodavat-benzin-v-butylkakh-na-fone-toplivnogo-krizisa-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16248733",
-   "title": "Видео. На Бали начали продавать бензин в бутылках местным и туристам",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2184022/video/video-na-bali-nachali-prodavat-benzin-v-butylkakh-mestnym-i-turistam"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15776010",
-   "title": "Инвестиции в железные дороги Армении за время концессии составили $400 млн",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261014/investitsii-874227555.html"
-    ]
-   ],
-   "sum": "$400 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gfd4d443b (общие редкие слова: дороги, железн) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d67727823",
+   "draft_id": "d15285932",
    "title": "Государство национализировало еще один банк",
    "date": "2026-10-14",
    "src": [
@@ -278,17 +31,17 @@
    ]
   },
   {
-   "draft_id": "d54080478",
-   "title": "В России рухнули продажи популярной машины",
+   "draft_id": "d69085397",
+   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 41,771 млрд рублей",
    "date": "2026-10-14",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/v-rossii-ruhnuli-prodazhi-populyarnoy-mashiny/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261014/minfin-874230895.html"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "41,771 млрд ₽",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -306,13 +59,13 @@
    ]
   },
   {
-   "draft_id": "d58248846",
-   "title": "Сургутяне переключились на покупку самых популярных квартир",
+   "draft_id": "d63614267",
+   "title": "Apple раскрыла стоимость ремонта HomeView — за эти деньги можно купить новый домашний хаб",
    "date": "2026-10-14",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053135978"
+     "web:rb.ru",
+     "https://rb.ru/news/apple-raskryla-stoimost-remonta-homeview-za-eti-dengi-mozhno-kupit-novyj-domashnij-hab/"
     ]
    ],
    "sum": null,
@@ -331,7 +84,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d87711913",
+   "title": "Кроссовер Honda Vezel начали продавать в России",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/14/krossover-honda-vezel-vernulsya-na-rossiyskiy-rynok/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

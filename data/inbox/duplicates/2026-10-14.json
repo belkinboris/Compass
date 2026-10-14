@@ -1,0 +1,36 @@
+{
+ "made": "2026-10-14",
+ "items": [
+  {
+   "key": "https://1prime.ru/20261014/investory-874232381.html::ga0dd6563",
+   "candidate_id": "ga0dd6563",
+   "reason": "общие редкие слова: рублей, сентяб",
+   "draft": {
+    "draft_id": "d63272274",
+    "title": "Частные инвесторы в сентябре вложили в облигации 210,6 миллиарда рублей",
+    "date": "2026-10-14",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261014/investory-874232381.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Частные инвесторы в сентябре",
+    "asset": "облигации 210,6 миллиарда рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Частные инвесторы в сентябре",
+     "asset": "облигации 210,6 миллиарда рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-14"
+  }
+ ]
+}
