@@ -2,7 +2,7 @@
  "made": "2026-10-14",
  "drafts": [
   {
-   "draft_id": "d90258900",
+   "draft_id": "d46942572",
    "title": "Государство национализировало еще один банк",
    "date": "2026-10-14",
    "src": [
@@ -31,225 +31,13 @@
    ]
   },
   {
-   "draft_id": "d39909925",
-   "title": "Предприятия ждут роста инвестиций в IV квартале почти во всех отраслях",
+   "draft_id": "d77463236",
+   "title": "В Ростовской области с марта запретят продавать бензин подросткам",
    "date": "2026-10-14",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/business/1122451"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d29891488",
-   "title": "В Британии на аукционе выставят стол из посаженного Шекспиром дерева",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28214607"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50444835",
-   "title": "Минфин доразместил после аукциона ОФЗ серии 26245 на 21,37 миллиарда рублей",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261014/minfin-874246912.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d34968105",
-   "title": "Замбия планирует продавать медь в Китай в юанях с 2027 года",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261014/zambija-874246579.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-14",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261014/zambija-874246579.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d33656210",
-   "title": "Криптобиржа Kraken покупает литовский банк",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/310187"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Криптобиржа Kraken",
-   "asset": "литовский банк",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Криптобиржа Kraken",
-    "asset": "литовский банк",
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d48480015",
-   "title": "Navai признался в приобретении наркотиков",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/navai-priznalsya-v-priobretenii-narkotikov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d65920954",
-   "title": "Европейский банк решила купить криптобиржа",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/evropeyskiy-bank-reshila-kupit-kriptobirzha/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76722076",
-   "title": "Квартиру в бывшем доме всех участников The Beatles в Лондоне решили продать",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/kvartiru-v-byvshem-dome-vseh-uchastnikov-the-beatles-v-londone-reshili-prodat/"
+     "https://www.interfax.ru/russia/1122472"
     ]
    ],
    "sum": null,
@@ -268,6 +56,63 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28797932",
+   "title": "ЦБ: оценки изменения инвестиционной активности в III квартале снизились",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261014/otsenka-874248614.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75166504",
+   "title": "Чистые покупки физлиц в сентябре упали с 30 млрд рублей в августе до 7 млрд по данным ЦБ🔍",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1362701.php"
+    ]
+   ],
+   "sum": "30 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рублей, сентяб) — проверьте, не дубль ли"
    ]
   }
  ]
