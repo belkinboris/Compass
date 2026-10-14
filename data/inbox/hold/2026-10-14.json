@@ -31,13 +31,13 @@
    ]
   },
   {
-   "draft_id": "d16964150",
-   "title": "Chron: житель Техаса обнаружил боевые гранаты в купленной на распродаже коробке",
+   "draft_id": "d11895062",
+   "title": "«Русгидро» может завершить пик инвестиционного финансирования в 2026 году",
    "date": "2026-10-14",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/proisshestviya/28212105"
+     "https://tass.ru/ekonomika/28212561"
     ]
    ],
    "sum": null,
@@ -59,13 +59,13 @@
    ]
   },
   {
-   "draft_id": "d56125475",
-   "title": "«Новатэк» за 9 месяцев сократил продажи газа, включая СПГ, на 1,1%",
+   "draft_id": "d31016211",
+   "title": "В продаже в «Ленте» заметили «рыбу-зомби»",
    "date": "2026-10-14",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261014/novatek-874214708.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/14/v-prodazhe-v-lente-zametili-rybu-zombi/"
     ]
    ],
    "sum": null,
@@ -80,48 +80,48 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d61065247",
-   "title": "Суд в Норвегии не дал «Нафтогазу» продать «Профессора Молчанова»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261014/molchanov-2124385762.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34301526",
-   "title": "В Тюменской области отменили лимиты на покупку бензина",
+   "draft_id": "d47000692",
+   "title": "В Тюмени снова изымут и попытаются продать незаконченный «замок»",
    "date": "2026-10-14",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053136005"
+     "https://ura.news/news/1053136016"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86122331",
+   "title": "Норвежский суд осадил Украину, захотевшую продать «Профессора Молчанова»",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136019"
     ]
    ],
    "sum": null,
@@ -140,46 +140,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25485773",
-   "title": "Пермский промышленный гигант ради погашения огромных долгов хочет продать свои акции китайцам",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053135987"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-14",
-     "title": "Переговоры",
-     "note": "Представители пермского АО «Соликамскбумпром» на судебном заседании по делу о банкротстве предприятия сообщили о планах заключить сделку с китайской компанией «Юнь Чоу». По их словам, зарубежный инвестор приобретет 83,3% акций комбината, погасит его огромные…",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053135987"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
