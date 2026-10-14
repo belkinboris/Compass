@@ -6012,7 +6012,9 @@ def test_fix_batches_live_in_separate_files():
     assert batches, "в папке нет ни одной партии"
     src = (ROOT / "pipeline" / "ingest" / "review.py").read_text(encoding="utf-8")
     assert "FIXES = load_fixes()" in src, "review.py снова держит таблицу в себе"
-    assert len(src) < 60000, (
+    # 62 000 с 14 октября 2026: ветка текстовых полей (сама проверка — в
+    # prose_gate.py) добавила 700 знаков к файлу, стоявшему на 59 985.
+    assert len(src) < 62000, (
         f"review.py разбух до {len(src)} знаков — правки снова пишут в него, "
         "а не в отдельный файл партии")
 
@@ -7750,3 +7752,55 @@ def test_approve_keeps_a_preset_added_date(tmp_path, monkeypatch):
     added = {d["id"]: d["added"] for d in json.loads(data.read_text(encoding="utf-8"))["deals"]}
     assert added["gold1"] == "2026-09-16"
     assert added["gnew1"] == datetime.now(timezone.utc).date().isoformat()
+
+
+def test_card_prose_is_written_from_facts_not_copied_from_the_quote():
+    """Текст карточки пишется по фактам, цитата — доказательство (14.10.2026).
+
+    Владелец об «Азимуте» в Ярославле: «он не переписывает, тупо забирает
+    куски». review.py требовал дословности и от прозы — и 4097 из 5862
+    текстовых правок были цитатами слово в слово. Теперь текстовое поле
+    обязано НЕ повторять цитату: ни подряд, ни скелетом с заменой слов, ни
+    числом, которого в цитатах нет. Структурные поля — по-прежнему перенос.
+    """
+    import review
+    import write_card
+    card = {"id": "x", "eco": {"val": "—"}, "law": {"terms": "—"}}
+    q1 = ("Продажа состоялась по минимальной цене, поскольку других претендентов "
+          "на актив не нашлось, сообщили в министерстве.")
+    q2 = "Итоговая цена составила 361,9 млн рублей."
+    quote = q1 + " … " + q2
+
+    def refused(new, field="eco.val", quote=quote):
+        return review.check(dict(id="x", field=field, old="—", new=new, quote=quote),
+                            card, [q1 + " Затем было ещё. " + q2], {}, set())
+
+    assert refused(q1)                                         # копия
+    assert refused("Продажа состоялась по самой минимальной цене, так как других "
+                   "претендентов на этот актив не нашлось.")  # скелет с заменой слов
+    assert refused("Других покупателей не было, и объект ушёл за 400 млн ₽.")  # чужое число
+    assert refused("Как пишет «Коммерсантъ», других покупателей не было.")     # пометка издания
+    assert not refused("Других покупателей не было, поэтому объект ушёл по нижнему "
+                       "порогу — за 361,9 млн ₽.")
+    # Каждая из нескольких цитат обязана быть настоящей.
+    assert any("цитаты нет" in b for b in
+               refused("Других покупателей не было.", quote=q1 + " … выдуманная фраза"))
+    # Структурное поле — как раньше, дословный перенос.
+    assert review.check(dict(id="x", field="asset", old=None, new="Отель «Альфа»",
+                             quote="продан отель «Бета»"), card, [], {}, set())
+
+    # write_card: пишущий видит факты без цитат; правка несёт цитаты своих фактов.
+    evidence = [{"field": "eco.val", "fact": "Других участников не было", "quote": q1,
+                 "source": "Ъ", "url": "https://x"},
+                {"field": "eco.val", "fact": "Цена 361,9 млн ₽", "quote": q2,
+                 "source": "Ъ", "url": "https://x"}]
+    shown = write_card.facts_text(evidence)
+    assert "Других участников" in shown and q1 not in shown and "Ъ" not in shown
+    written = {"eco.val": {"text": "Других покупателей не было, поэтому объект ушёл по "
+                                   "нижнему порогу — за 361,9 млн ₽.", "facts": [1, 2]},
+               "law.terms": {"text": "—", "facts": []},
+               "eco.context": {"text": "Что-то без опоры.", "facts": []}}
+    fixes, notes = write_card.build_fixes("x", card, evidence, written)
+    assert [f["field"] for f in fixes] == ["eco.val"]
+    assert fixes[0]["quote"] == q1 + " … " + q2 and fixes[0]["old"] == "—"
+    assert any("eco.context" in n for n in notes)              # без фактов — не пишется
