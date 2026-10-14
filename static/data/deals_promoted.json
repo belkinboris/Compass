@@ -3721,6 +3721,10 @@
     [
      "Frank Media / Investing.com",
      "https://ru.investing.com/news/general-news/article-3298481"
+    ],
+    [
+     "ЕГРЮЛ: история участников SuperJob",
+     "https://datanewton.ru/contragents/1027700404797/history/timeline"
     ]
    ],
    "extra": "Сделка прошла в два этапа: в феврале 2026 года 20% ООО «Суперджоб» перешли лично Андрею Зокину, 2 марта пакет был переоформлен на АО «Энергоинвест», а в конце мая 2026 года доля увеличена до 80%. Оставшиеся 20% сохранила гендиректор сервиса Анастасия Чучалова, которая остаётся на своей должности — операционная модель и команда не меняются. Ранее SuperJob принадлежал основателям Алексею Захарову и Сергею Габестро; к маю 2025 года полный контроль перешёл к менеджменту в лице Чучаловой, после чего она занималась поиском стратегического партнёра. Хотя в конце 2024 года акции «Энергоинвеста» перешли Александру Зокину, в SuperJob подчеркнули, что участником этой сделки является именно Андрей Зокин. Привлечённые инвестиции планируется направить на развитие технологической платформы и продуктовых решений.",
@@ -3792,6 +3796,16 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
+   },
+   "seller": "Анастасия Чучалова",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Анастасия Чучалова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1027700404797/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -6121,6 +6135,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:MPStats_(%D0%9C%D0%9F%D0%A1%D1%82%D0%B0%D1%82%D1%81)"
+    ],
+    [
+     "ЕГРЮЛ: история акционеров АО «МПСТАТС ТЕХ»",
+     "https://datanewton.ru/contragents/1247800129631/history/timeline"
     ]
    ],
    "extra": "Сделка объявлена 9 февраля 2026 года: АО «Точка» приобрело 100% ООО «МПСТАТС» — лидера рынка сервисов аналитики для продавцов на маркетплейсах, занимающего, по оценке самого банка, более трети этого рынка с общей ёмкостью свыше 5,5 млрд ₽ в год. Оценочный мультипликатор сделки составляет около 1,1–1,2x к выручке 2025 года. По условиям сделки Mpstats сохраняет бренд, команду и основателя Дмитрия Черобаева в должности гендиректора; сервис останется доступным и для клиентов других банков. Сделка стала третьей для «Точки» в сегменте e-commerce — после покупки EcomCom (2023) и 24AI (2024). На момент объявления изменения в ЕГРЮЛ ещё не были зафиксированы, процедура закрытия продолжалась.",
@@ -6200,7 +6218,17 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/6812"
     ]
-   ]
+   ],
+   "seller": "Дмитрий Черобаев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Дмитрий Черобаев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1247800129631/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g91281c36",
@@ -6838,6 +6866,16 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "ООО «Смарт сервис ЛТД»",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «Смарт сервис ЛТД»",
+      "method": "manual_source_review",
+      "url": "https://www.kommersant.ru/doc/8636902"
+     }
+    ]
    }
   },
   {
@@ -208783,6 +208821,10 @@
     [
      "ComNews",
      "https://www.comnews.ru/content/246823/2026-08-10/2026-w33/1010/ibs-poglotila-rubbles"
+    ],
+    [
+     "ЕГРЮЛ: история участников Rubbles",
+     "https://datanewton.ru/contragents/1137746959900/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -208840,6 +208882,13 @@
       "field": "asset",
       "method": "human_review",
       "url": "https://www.cnews.ru/news/line/2026-08-10_ibs_priobrela_razrabotchika"
+     }
+    ],
+    "seller": [
+     {
+      "value": "SBDA Group",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1137746959900/history/timeline"
      }
     ]
    },
@@ -208930,7 +208979,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/IBS-priobrela-razrabotchika-IT-reshenij-na-baze-iskusstvennogo-intellekta-Rubbles-87419"
     ]
-   ]
+   ],
+   "seller": "SBDA Group"
   },
   {
    "id": "g8e30b9a8",
@@ -218445,6 +218495,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/965928"
+    ],
+    [
+     "ЕГРЮЛ: история участников «ЦОД СПб»",
+     "https://datanewton.ru/contragents/1257800029398/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -218492,6 +218546,13 @@
       "field": "asset",
       "method": "explicit_news_title",
       "url": "https://www.tadviser.ru/a/965928"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ООО «Управление»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1257800029398/history/timeline"
      }
     ]
    },
@@ -218566,7 +218627,8 @@
      "https://mergers.ru/news/Sberbank-kupil-dolyu-v-COD-SPb-87531"
     ]
    ],
-   "followup_researched": "2026-10-11"
+   "followup_researched": "2026-10-11",
+   "seller": "ООО «Управление»"
   },
   {
    "id": "gbeb0dfe8",
@@ -219859,6 +219921,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/966930"
+    ],
+    [
+     "ЕГРЮЛ: история участников «Фотомеханики»",
+     "https://datanewton.ru/contragents/1117847115198/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -219916,6 +219982,13 @@
       "field": "asset",
       "method": "human_review",
       "url": "https://www.kommersant.ru/doc/8956273"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Александр и Сергей Ле-Захаровы",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1117847115198/history/timeline"
      }
     ]
    },
@@ -220004,7 +220077,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Korporaciya-Robototehniki-kupila-kontrolnuyu-dolyu-v-gruppe-kompanij-Fotomehanika-87533"
     ]
-   ]
+   ],
+   "seller": "Александр и Сергей Ле-Захаровы"
   },
   {
    "id": "gb1efa21d",
@@ -228740,6 +228814,10 @@
     [
      "The Moscow Times",
      "https://ru.themoscowtimes.com/2026/10/01/severstal-kupila-dmitrovskiy-metallotsentr-v-moskovskoy-obl-a207561"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «ДМЦ»",
+     "https://datanewton.ru/contragents/1185050008274/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -228788,10 +228866,17 @@
       "method": "explicit_news_title",
       "url": "https://tass.ru/ekonomika/28171589"
      }
+    ],
+    "seller": [
+     {
+      "value": "ООО «Металлстандарт»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1185050008274/history/timeline"
+     }
     ]
    },
    "buyer": "g4e2d0a88",
-   "seller": null,
+   "seller": "ООО «Металлстандарт»",
    "target": "ga2f6aa48",
    "accepted": "2026-10-01",
    "reviewed": "2026-10-01",
