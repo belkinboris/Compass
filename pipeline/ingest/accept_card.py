@@ -713,6 +713,18 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # Владелец в тот же день: «если в карте нет продавца и покупателя или
     # непонятен таргет — их нужно искать обязательно». Покупатель — у покупки,
     # инвестиции и завершённых торгов (у объявленных торгов его ещё нет).
+    # Пояснение «реестры закрыты» не снимает находку, если предмет — ООО/АО, а
+    # история участников ЕГРЮЛ (datanewton, без ключа) не проверена: 15 октября
+    # 2026 Nomi/«Гельтек» ушёл к владельцу с «продавец не раскрыт» после
+    # попыток rusprofile/list-org/checko — они отсюда закрыты, datanewton нет.
+    seller_note = str((waived or {}).get('seller') or '')
+    asset_is_company = re.search(r'\b(?:ООО|АО|ПАО|ЗАО|НАО)\b', ' '.join(
+        str(card.get(k) or '') for k in ('asset', 'title')) + ' ' + str(_text(card, 'eco.share') or ''))
+    if seller_note and asset_is_company and not re.search(r'datanewton|истори[яи] участник', seller_note, re.I):
+        out.append(('seller_registry_unchecked',
+                    'предмет — юрлицо, а история участников ЕГРЮЛ не проверена: '
+                    'https://datanewton.ru/api/v2/history?ogrn=<ОГРН>&startDate=2000-01-01&attributes=OWNERS '
+                    '(rusprofile/list-org/checko отсюда закрыты — это не повод остановиться)'))
     if card.get('type') == 'M&A' and not (card.get('seller') or card.get('seller_id')) \
             and 'seller' not in waived:
         out.append(('seller_search', 'продавец не назван: найдите, кто владел предметом до сделки '

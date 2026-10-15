@@ -4319,6 +4319,12 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
     no_note = dict(clean); no_note.pop("accepted_notes")
     assert "seller_search" in {c for c, _t in accept_card.findings(no_note, base, registry=known)}
+    # «Реестры закрыты» без проверки истории участников ЕГРЮЛ — не довод (Nomi, 15.10.2026).
+    lazy = dict(clean, asset="100% ООО «КиберОК»",
+                accepted_notes={"no_profile": {"seller": "rusprofile и checko закрыты (403)"}})
+    assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(lazy, base, registry=known)}
+    done = dict(lazy, accepted_notes={"no_profile": {"seller": "datanewton: история участников пуста до 2024"}})
+    assert "seller_registry_unchecked" not in {c for c, _t in accept_card.findings(done, base, registry=known)}
     no_buyer = dict(clean); no_buyer.pop("buyer")
     assert "buyer_search" in {c for c, _t in accept_card.findings(no_buyer, base, registry=known)}
     lot = dict(no_buyer, type="Продажа с торгов", status="Обсуждается", seller="Росимущество")
