@@ -2,53 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d38006149",
-   "title": "Про инвестирование. То есть про купил, упало-выросло - лось в карман",
+   "draft_id": "d54004146",
+   "title": "Инфантино извинился за скандальный проект ФИФА о продаже прав на ЧМ",
    "date": "2026-10-15",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1363081.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-15",
-     "title": "Сделка завершена",
-     "note": "А вы не думали о том, что инвестирование, как форма обогащения с целью перепродажи через 5 лет, кануло в лету?... Вот смотрите, с перекупами хат за кредитные бапки уже поборолись норм. Вы можете купить новый голый бетон по цене 500 тысяч рублей за 1 кв метр…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1363081.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "упало-выросло - лось в карман",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "упало-выросло - лось в карман",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d50321685",
-   "title": "Продажи билетов на шоу Navai в Москве приостановили",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/15/prodazhi-biletov-na-shou-navai-v-moskve-priostanovili/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/15/10/2026/6ad101de9a79475abe654280"
     ]
    ],
    "sum": null,
@@ -67,6 +27,85 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33817183",
+   "title": "СМИ: Тайвань намерен купить у США ракеты увеличенной дальности для NASAMS",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261015/tayvan-874305618.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261015/tayvan-874305618.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g0aed0536 (общие редкие слова: сми, сша) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d56745158",
+   "title": "Квартиру насильника продали ради компенсации его жертве",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/15/kvartiru-nasilnika-prodali-radi-kompensatsii-ego-zhertve/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-15",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/15/kvartiru-nasilnika-prodali-radi-kompensatsii-ego-zhertve/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "ради компенсации его жертве",
+   "seller": "Квартиру насильника",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "ради компенсации его жертве",
+    "seller": "Квартиру насильника"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
