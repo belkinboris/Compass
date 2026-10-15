@@ -2,81 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d38647437",
-   "title": "Новак сообщил о планах продавать бензин низкого класса только через биржу",
+   "draft_id": "d76766057",
+   "title": "Check Point прокомментировала информацию о возможном уходе из России",
    "date": "2026-10-15",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/economics/15/10/2026/6ad0b4f6c251c29afe72101a"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-15",
-     "title": "Переговоры",
-     "note": "Биржевая торговля топливом пониженного экологического класса должна повысить прозрачность сделок и обеспечить маркировку продукции, чтобы потребители могли отслеживать ее поставки, пояснил вице-премьер Новак",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/economics/15/10/2026/6ad0b4f6c251c29afe72101a"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d37508147",
-   "title": "IBC Real Estate: инвестиции в недвижимость Московского региона упали на 29%",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261015/investitsii-2124675909.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73170574",
-   "title": "В Уфе продолжается продажа билетов на концерт рэпера Navai",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261015/navai-2124692420.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28218115"
     ]
    ],
    "sum": null,
