@@ -771,6 +771,30 @@ def test_reporting_meta_needs_both_a_verb_and_a_channel():
         "Выручка завода в 2025 году составила 4 млрд рублей.")
 
 
+def test_post_buyer_detail_skips_the_sentence_about_the_data_source():
+    """Найдено 14 октября 2026 на посте о Максиме Плаксине/«800 Degrees»
+    (`g33051f70`): первое предложение `eco.context` — «Сделка зафиксирована
+    в базе СПАРК: Максим Плаксин приобрёл...» — называет покупателя, но
+    начинается с мета-фразы про источник записи, а не про него самого.
+    Имя Плаксина попадало в первые 60 знаков детали, и `names_party_upfront`
+    (окно, а не дословное начало) решал, что имя «впереди», печатая деталь
+    целиком без отдельной строки с именем. `_is_reporting_meta` этот класс
+    не ловил — глагол «зафиксирована» и канал «база СПАРК»/«реестр» в
+    фильтре не было. Тот же дефект — у «Это зафиксировано в реестре
+    сведений о банкротстве» (`gbfe2ee65`, нашёл замер по всей базе)."""
+    deal = {
+        "id": "g33051f70", "title": "Максим Плаксин купил 25% доли в компании «800 Degrees»",
+        "buyer_name": "Максим Плаксин", "status": "Закрыта", "date": "2026-10-14",
+        "eco": {"context": "Сделка зафиксирована в базе СПАРК: Максим Плаксин приобрёл "
+                            "четверть компании «800 Degrees». Сам Плаксин — основатель "
+                            "платформы giper.fm."},
+    }
+    text = format_post.render(deal, {})
+    assert "<b>Покупатель:</b> Максим Плаксин —" in text, text
+    assert "Покупатель:</b> Сделка зафиксирована" not in text, \
+        "мета-фраза про источник записи заняла место имени покупателя"
+
+
 def test_post_subject_line_names_the_subject_not_its_revenue():
     """Найдено владельцем 7 сентября 2026 на черновике поста «Базис»/Proto:
     «Предмет: По данным Saby Profile, доходы ООО «ПротоСервисез» … составили
@@ -1045,7 +1069,10 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
     # С 13 октября 2026 ссылка на карточку — ещё и последней строкой текста,
     # той же подписью, что кнопка (владелец), ровно одна.
     assert text.count(f"/#/deal/{deal['id']}") == 1
-    assert text.rstrip().endswith('">Подробнее в карточке сделки</a>'), text[-200:]
+    # С 14 октября 2026 ссылкой — только «карточке сделки» (владелец: иначе
+    # «контраста нет и вообще не видно»).
+    assert text.rstrip().endswith('Подробнее в <a href="%s/#/deal/%s">карточке сделки</a>'
+                                  % (format_post.SITE, deal["id"])), text[-200:]
     assert "→ Экономист" not in text and "→ Юрист" not in text
 
     buttons = format_post.render_buttons(deal)
@@ -1053,7 +1080,7 @@ def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
     # С 3 октября 2026 клавиатура — одна кнопка: владелец, «просто кнопки
     # „Открыть карточку сделки“ достаточно»; кнопки линз сняты.
     assert len(rows) == 1 and len(rows[0]) == 1 and rows[0][0]["url"].endswith("/#/deal/%s" % deal["id"]), rows
-    assert rows[0][0]["text"] == "Подробнее в карточке сделки"
+    assert rows[0][0]["text"] == "Открыть карточку сделки"
     # Черновик в консоли обязан показывать и кнопки: их не видно в тексте.
     preview = format_post.buttons_preview(deal)
     for row in rows:
@@ -1067,7 +1094,7 @@ def test_post_keyboard_has_only_the_card_button():
     lawful = {"id": "x1", "title": "Т", "sum": "1 млрд ₽", "law": {"appr": "ФАС одобрила сделку в июне."},
               "eco": {"share": "100% акций"}}
     labels = [b["text"] for row in format_post.render_buttons(lawful)["inline_keyboard"] for b in row]
-    assert labels == ["Подробнее в карточке сделки"], labels
+    assert labels == ["Открыть карточку сделки"], labels
 
 
 def test_post_labels_a_listing_price_as_a_starting_price():
@@ -2476,7 +2503,8 @@ def test_render_milestone_uses_the_snapshot_not_live_fields():
     assert "ООО «Покупатель»" in text
     # Ссылка на карточку у вехи — кнопкой под постом и, с 13 октября 2026,
     # одной последней строкой текста «Подробнее в карточке сделки».
-    assert text.count("/#/deal/d1") == 1 and text.endswith("Подробнее в карточке сделки</a>")
+    assert text.count("/#/deal/d1") == 1 and text.endswith(">карточке сделки</a>") \
+        and "Подробнее в <a href" in text
     assert format_post.render_buttons(deal)["inline_keyboard"][0][0]["url"].endswith("/#/deal/d1")
 
 
@@ -3037,26 +3065,20 @@ def test_publisher_holds_everything_at_night():
         assert allowed >= 1, f"в {hour}:00 внутри окна не отправили ничего"
 
 
-def test_publisher_spreads_the_queue_over_the_window():
-    """Очередь делится на оставшиеся прогоны, а не уходит пачкой.
-
-    Пять постов в 10:00 при часовом прогоне — это по одному за раз, а не пять
-    уведомлений за десять секунд. Расчёт без состояния: доля считается от
-    того, что осталось в очереди СЕЙЧАС, поэтому пропущенный прогон не копит
-    долг, а просто делится на меньшее число слотов.
-    """
+def test_publisher_sends_approved_posts_at_once_within_the_window():
+    """С 14 октября 2026 очередь не размазывается по дню (владелец: «остальные
+    посты должны выкладываться как можно быстрее»): в окне пускается всё,
+    а несколько новых постов разводит пауза GAP_S (20 минут) в цикле отправки —
+    её держит `test_several_approved_posts_go_out_twenty_minutes_apart`."""
     from datetime import datetime
     import importlib, sys as _sys
     _sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
     sender = importlib.import_module("send_telegram")
     at10, _ = sender.pace_allowance(5, datetime(2026, 8, 4, 10, 0, tzinfo=sender.MSK))
-    assert at10 == 1, f"в начале окна взяли {at10} из 5 — это не равномерно"
-    # Ближе к концу окна остаток уходит целиком: иначе он завис бы до завтра.
-    at2030, _ = sender.pace_allowance(3, datetime(2026, 8, 4, 20, 30, tzinfo=sender.MSK))
-    assert at2030 == 3, "остаток очереди не ушёл в последнем слоте"
-    # Но не в одну минуту: между новыми постами внутри прогона есть пауза.
-    assert sender.SPREAD_S >= 60, "новые посты внутри прогона не разведены по времени"
-    # Пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert at10 == 5
+    assert sender.GAP_S == 20 * 60 and sender.RUN_WAIT_S < 60 * 60
+    # Ночью — ничего, пустая очередь не заставляет отправлять «хоть что-нибудь».
+    assert sender.pace_allowance(5, datetime(2026, 8, 4, 23, 0, tzinfo=sender.MSK))[0] == 0
     assert sender.pace_allowance(0, datetime(2026, 8, 4, 12, 0, tzinfo=sender.MSK))[0] == 0
 
 
@@ -4288,10 +4310,25 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert any(c.startswith("press:") for c in codes), codes
     clean = {"id": "gt2", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
-             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {}}
+             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {},
+             # С 14 октября 2026 пустой продавец новой покупки — находка, пока
+             # читатель не записал, где искал владельца («Соликамскбумпром»).
+             "accepted_notes": {"no_profile": {"seller": "искали в ЕГРЮЛ и статьях о CyberOK — не назван"}}}
     base["companies"]["gsb2"] = {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}
     known = [{"company_id": "gsb"}, {"company_id": "gsb2"}]
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
+    no_note = dict(clean); no_note.pop("accepted_notes")
+    assert "seller_search" in {c for c, _t in accept_card.findings(no_note, base, registry=known)}
+    # «Реестры закрыты» без проверки истории участников ЕГРЮЛ — не довод (Nomi, 15.10.2026).
+    lazy = dict(clean, asset="100% ООО «КиберОК»",
+                accepted_notes={"no_profile": {"seller": "rusprofile и checko закрыты (403)"}})
+    assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(lazy, base, registry=known)}
+    done = dict(lazy, accepted_notes={"no_profile": {"seller": "datanewton: история участников пуста до 2024"}})
+    assert "seller_registry_unchecked" not in {c for c, _t in accept_card.findings(done, base, registry=known)}
+    no_buyer = dict(clean); no_buyer.pop("buyer")
+    assert "buyer_search" in {c for c, _t in accept_card.findings(no_buyer, base, registry=known)}
+    lot = dict(no_buyer, type="Продажа с торгов", status="Обсуждается", seller="Росимущество")
+    assert "buyer_search" not in {c for c, _t in accept_card.findings(lot, base, registry=known)}
     # А без строки в реестре ИНН — юрлицо не установлено, и это находка (11 сентября
     # 2026: у «CyberOK» не было ни ИНН, ни отчётности, пока конкурент показал и то и другое).
     assert {"inn_missing:target", "inn_missing:buyer"} <= {c for c, _t in accept_card.findings(clean, base, registry=[])}
@@ -4971,7 +5008,7 @@ def test_a_stage_post_shows_one_source_and_counts_the_rest():
     lines = format_post.render_milestone(deal, event).split("\n")
     assert lines[-4:-2] == ['<b>Источник:</b> <a href="https://1prime.ru/a">ПРАЙМ</a>',
                             'Ещё 3 источника — в карточке сделки']
-    assert lines[-1].endswith('>Подробнее в карточке сделки</a>')
+    assert lines[-1].startswith('Подробнее в <a href') and lines[-1].endswith('>карточке сделки</a>')
     assert "Коммерсантъ" not in "\n".join(lines) and "Источники:" not in "\n".join(lines)
     assert check_post.check("\n".join(lines)) == []
     del event["sources"]
@@ -5993,7 +6030,19 @@ def test_no_duplicate_fix_for_one_field():
     import review
     seen = collections.Counter((f["id"], f["field"]) for f in review.FIXES
                                if f["field"] != "src")
-    dups = [k for k, n in seen.items() if n > 1]
+    # Пересказ по фактам (write_card.py, 14.10.2026) — законная вторая запись:
+    # прежние записи поля учтены отпечатком в `proofread_absorbed`, и
+    # `already_applied` признаёт их до сверки состояния поля.
+    base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    cards = {d["id"]: d for d in base["deals"]}
+
+    def absorbed_chain(key):
+        recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
+        card = cards.get(key[0]) or {}
+        marks = (card.get("proofread_absorbed") or {}).get(key[1]) or []
+        return all(review.fix_fingerprint(f["new"]) in marks for f in recs[:-1])
+
+    dups = [k for k, n in seen.items() if n > 1 and not absorbed_chain(k)]
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
 
 
@@ -7804,3 +7853,44 @@ def test_card_prose_is_written_from_facts_not_copied_from_the_quote():
     assert [f["field"] for f in fixes] == ["eco.val"]
     assert fixes[0]["quote"] == q1 + " … " + q2 and fixes[0]["old"] == "—"
     assert any("eco.context" in n for n in notes)              # без фактов — не пишется
+
+
+def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_path):
+    """Владелец, 14 октября 2026: «если я одобряю одновременно несколько —
+    по 20 минут; остальные посты — как можно быстрее». Дневной размазки нет;
+    новый пост ждёт 20 минут от предыдущего (и от последнего поста прошлого
+    прогона), прогон ждёт не дольше RUN_WAIT_S, остальное — следующим
+    прогоном; каждый пост пишется на диск сразу после отправки."""
+    from datetime import datetime, timezone
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data["telegram_posts"] = {}
+    real_data["telegram_last_post_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
+    monkeypatch.setattr(send_telegram, "PUBLISH_WINDOW", "0-24")
+    monkeypatch.setattr(send_telegram, "in_window_after", lambda *a, **k: True)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    sleeps, saved_after_first = [], []
+
+    def fake_sleep(s):
+        sleeps.append(s)
+        if len(sleeps) == 2:      # перед вторым постом первый уже на диске
+            saved_after_first.append(json.loads(tmp_data.read_text(encoding="utf-8"))["telegram_posts"])
+    monkeypatch.setattr(send_telegram.time, "sleep", fake_sleep)
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 2000 + i}} for i in range(3)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setattr(send_telegram, "plan_digest", lambda *a, **k: (None, None, "выключена в тесте", []))
+
+    send_telegram.main(write=True)
+
+    assert len(fake.calls) == 2, "третий пост не помещается в 45 минут ожидания — уходит следующим прогоном"
+    assert len(sleeps) == 2 and all(1150 < s <= 1200 for s in sleeps), sleeps
+    assert any(v for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_last_post_at"] and len([v for v in written["telegram_posts"].values() if v]) == 2
+    # Один пост и давно не было постов — уходит сразу, без паузы.
+    assert send_telegram.gap_wait_s("2026-01-01T00:00:00+00:00") == 0

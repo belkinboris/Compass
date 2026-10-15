@@ -50,7 +50,8 @@ from deal_export import render_companies_pdf, render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
     AppSetting,
-    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CorrectionRequest,
+    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CompanyClaim,
+    CorrectionRequest,
     DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     ModerationDecision, Notification,
     NotificationPreference, OwnershipSnapshot, OwnershipStake, PageView, RegistryEvent,
@@ -1686,6 +1687,7 @@ def delete_account(payload: AccountDeleteIn, request: Request, response: Respons
     db.query(SavedFilter).filter(SavedFilter.user_id == user.id).delete(synchronize_session=False)
     db.query(Comment).filter(Comment.user_id == user.id).delete(synchronize_session=False)
     db.query(CorrectionRequest).filter(CorrectionRequest.user_id == user.id).delete(synchronize_session=False)
+    db.query(CompanyClaim).filter(CompanyClaim.user_id == user.id).delete(synchronize_session=False)
     db.query(AuthSession).filter(AuthSession.user_id == user.id).delete(synchronize_session=False)
     db.delete(user)
     db.commit()
@@ -2525,6 +2527,27 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             _mark_decided(callback, "acc_ok" if applicant.approved else "acc_no")
             return {"ok": True}
 
+        # «Это моя компания» (кабинет компании, 14 октября 2026): кнопки
+        # «Подтвердить»/«Отклонить» под сообщением из _notify_company_claim.
+        # Как у `acc:` — решение применяется здесь же, в базе сайта; право —
+        # по from.id.
+        claim = re.match(r"^claim:(ok|no):(\d{1,12})$", str(callback.get("data") or ""))
+        if claim:
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Решать могут только владелец и партнёр.")
+                return {"ok": True}
+            row = db.get(CompanyClaim, int(claim.group(2)))
+            if not row:
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Этой заявки уже нет — аккаунт удалён.")
+                return {"ok": True}
+            _decide_claim(db, row, claim.group(1) == "ok")
+            _mark_decided(callback, "claim_ok" if row.status == "approved" else "claim_no")
+            return {"ok": True}
+
         # [\w~-]: `~` — разделитель id сделки и вида этапа у вехи
         # («<id>~<kind>», раздел A, 22 августа) — id сделок сами бывают с
         # дефисами, поэтому обычный `-` для разделителя не годится, а `:`
@@ -3334,6 +3357,8 @@ _VERDICT_LABEL = {
     "take": "✅ Признана сделкой — уйдёт в работу", "drop": "🗑 Отброшена как не-сделка",
     "acc_ok": "✅ Доступ открыт — человек может войти",
     "acc_no": "🗑 Отклонено — доступ не открыт",
+    "claim_ok": "✅ Подтверждено — карточка подключена к кабинету",
+    "claim_no": "🗑 Отклонено — карточка не подключена",
 }
 
 
@@ -4965,6 +4990,261 @@ def corrections_consume(req: CorrectionsConsumeIn, db=Depends(get_db)):
         n += 1
     db.commit()
     return {"deleted": n}
+
+
+# ==================== Кабинет компании: «Это моя компания» ====================
+# Владелец, 14 октября 2026: представитель компании (первой — партнёр
+# Execburo) просит в личном кабинете подключить его к карточке, мы в консоли
+# подтверждаем, и дальше он видит «свою» карточку и шлёт нам заявки на
+# правки. Править карточку сам он не может: содержимое остаётся за редакцией,
+# правка приходит обычной заметкой в консоль. Устройство — docs/company_cabinet.md.
+
+CLAIM_KINDS = ("company", "firm")
+CLAIM_STATUSES = ("pending", "approved", "rejected")
+CLAIMS_PER_USER = 10            # больше карточек одному человеку не нужно — это уже спам
+CLAIM_VIEWS_DAYS = 30
+# Что представитель может попросить поменять. Ключ — для формы, подпись —
+# и в форме, и в тексте заметки для консоли.
+CLAIM_CHANGE_KINDS = {
+    "about": "Описание компании",
+    "contacts": "Сайт и контакты",
+    "deals": "Сделки компании",
+    "look": "Логотип и оформление",
+    "other": "Другое",
+}
+_FIRM_ID_RE = re.compile(r'\{id:"([a-z0-9_-]{1,40})",n:"([^"]{1,200})"')
+_firm_cache: dict = {"mtime": None, "firms": {}}
+
+
+def _firm_catalog() -> dict[str, str]:
+    """id → название фирм-консультантов. Справочник фирм живёт в коде
+    страницы (FIRMS, INV_FIRMS, EXEC_FIRMS в static/index.html), а не в базе:
+    читаем его оттуда же, чтобы заявка не могла сослаться на фирму, которой
+    на сайте нет, и название в консоли было нашим, а не присланным."""
+    path = os.path.join(STATIC_DIR, "index.html")
+    try:
+        mtime = os.path.getmtime(path)
+    except OSError:
+        return {}
+    if _firm_cache["mtime"] != mtime:
+        with open(path, encoding="utf-8") as fh:
+            _firm_cache["firms"] = dict(_FIRM_ID_RE.findall(fh.read()))
+        _firm_cache["mtime"] = mtime
+    return _firm_cache["firms"]
+
+
+def _claim_target_name(kind: str, target_id: str) -> str | None:
+    if kind == "company":
+        profile = ((base_data.promoted() or {}).get("companies") or {}).get(target_id)
+        return (profile or {}).get("name") or None
+    if kind == "firm":
+        return _firm_catalog().get(target_id)
+    return None
+
+
+def _claim_page_path(row: CompanyClaim) -> str:
+    """Адрес карточки внутри сайта — тот же, что пишет счётчик посещений
+    (`trackView` → traffic.normalize: /companies/<id>, /advisors/<id>)."""
+    return ("/companies/%s" if row.kind == "company" else "/advisors/%s") % row.target_id
+
+
+def _claim_views(db, row: CompanyClaim) -> int:
+    since = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(days=CLAIM_VIEWS_DAYS)
+    return int(db.scalar(select(func.count(PageView.id)).where(
+        PageView.path == _claim_page_path(row), PageView.created_at >= since)) or 0)
+
+
+def _claim_json(db, row: CompanyClaim) -> dict:
+    out = {"id": row.id, "kind": row.kind, "target_id": row.target_id,
+           "target_name": row.target_name, "status": row.status,
+           "position": row.position, "note": row.note,
+           "link": "#" + _claim_page_path(row),
+           "created_at": row.created_at.isoformat() if row.created_at else None,
+           "decided_at": row.decided_at.isoformat() if row.decided_at else None}
+    if row.status == "approved":
+        out["views_30d"] = _claim_views(db, row)
+    return out
+
+
+def _notify_company_claim(db, row: CompanyClaim, user: User) -> bool:
+    """Заявка — в консоль, тема «Заметки от пользователей», с кнопками
+    «Подтвердить»/«Отклонить» (`claim:ok|no:<id>`, разбор — в
+    _handle_telegram_update рядом с `acc:`). Сбой отправки заявку не роняет:
+    она в базе, и её видно по `GET /api/ops/claims?token=…`."""
+    try:
+        chats = _review_chat_ids(db)
+        if not chats:
+            logger.warning("заявка на карточку #%s: консоль не настроена", row.id)
+            return False
+        when = datetime.now(timezone(timedelta(hours=3))).strftime("%d.%m.%Y %H:%M МСК")
+        what = "компания" if row.kind == "company" else "консультант"
+        lines = [
+            "🏢 Просят подключить карточку к личному кабинету",
+            "Карточка: %s (%s)" % (row.target_name, what),
+            "%s/#%s" % (SITE_URL, _claim_page_path(row)),
+            "",
+            "Кто: %s, %s" % (user.full_name or "имя не указано",
+                             row.position or user.position or "должность не указана"),
+            "Почта: %s" % user.email,
+        ]
+        if user.company:
+            lines.append("Компания в профиле: %s" % user.company)
+        if row.note:
+            lines.append("Комментарий: %s" % row.note)
+        lines += ["Отправлена: %s" % when, "",
+                  "Подтвердите, только если уверены, что человек работает в этой компании."]
+        keys = [[{"text": "✅ Подтвердить", "callback_data": "claim:ok:%d" % row.id},
+                 {"text": "🗑 Отклонить", "callback_data": "claim:no:%d" % row.id}]]
+        thread = _console_thread_id(db, "user_notes")
+        ok = False
+        for chat in chats:
+            res = notification_service.tg_api("sendMessage", chat_id=chat, text="\n".join(lines),
+                                              reply_markup={"inline_keyboard": keys},
+                                              disable_web_page_preview=True,
+                                              **({"message_thread_id": thread} if thread else {}))
+            ok = ok or bool(res and res.get("ok"))
+        return ok
+    except Exception as exc:  # noqa: BLE001 — заявка важнее уведомления
+        logger.error("заявка на карточку #%s: не ушла в Telegram: %s", row.id, exc)
+        return False
+
+
+def _decide_claim(db, row: CompanyClaim, approve: bool) -> None:
+    """Одно решение для кнопки в консоли и для запроса по токену. О
+    подтверждении человеку приходит уведомление (в кабинет, а если он
+    подключил Telegram — и туда); об отказе — нет: экран кабинета сам
+    показывает статус, а письма «вам отказано» никто не просил."""
+    status = "approved" if approve else "rejected"
+    changed = row.status != status
+    row.status = status
+    row.decided_at = datetime.now(timezone.utc).replace(tzinfo=None)
+    db.commit()
+    if approve and changed and row.user:
+        try:
+            notification_service.create_notification(
+                db, row.user, kind="company_claim",
+                title="Карточка «%s» подключена к вашему кабинету" % row.target_name,
+                body="Теперь в разделе «Моя компания» видно, сколько раз её открывали, "
+                     "и можно предложить нам правку.",
+                link="%s/#/account?tab=company" % SITE_URL)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("заявка на карточку #%s: уведомление не создано: %s", row.id, exc)
+
+
+class CompanyClaimIn(BaseModel):
+    kind: str
+    target_id: str
+    position: str | None = None
+    note: str | None = None
+
+
+class ClaimChangeIn(BaseModel):
+    kind: str = "other"
+    body: str
+
+
+class ClaimDecideIn(BaseModel):
+    token: str = ""
+    approve: bool = True
+
+
+@app.post("/api/claims")
+def create_company_claim(payload: CompanyClaimIn, user: User | None = Depends(_current_user),
+                         db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "войдите, чтобы подключить компанию"}, status_code=401)
+    kind = (payload.kind or "").strip()
+    target_id = (payload.target_id or "").strip()
+    name = _claim_target_name(kind, target_id) if kind in CLAIM_KINDS else None
+    if not name:
+        return JSONResponse({"error": "такой карточки на сайте нет"}, status_code=400)
+    position = (payload.position or "").strip()[:200] or None
+    note = (payload.note or "").strip()
+    if len(note) > 2000:
+        return JSONResponse({"error": "комментарий слишком длинный"}, status_code=400)
+    row = db.scalar(select(CompanyClaim).where(CompanyClaim.user_id == user.id,
+                                               CompanyClaim.kind == kind,
+                                               CompanyClaim.target_id == target_id))
+    if row:
+        # Повтор той же пары записи не плодит и консоль не дёргает: заявка
+        # уже ждёт решения или решена.
+        return {"ok": True, "existing": True, "claim": _claim_json(db, row)}
+    if db.scalar(select(func.count(CompanyClaim.id)).where(CompanyClaim.user_id == user.id)) >= CLAIMS_PER_USER:
+        return JSONResponse({"error": "заявок слишком много — напишите нам, разберёмся"}, status_code=400)
+    row = CompanyClaim(user_id=user.id, kind=kind, target_id=target_id, target_name=name,
+                       position=position, note=note or None, status="pending")
+    db.add(row)
+    db.commit()
+    _notify_company_claim(db, row, user)
+    return {"ok": True, "existing": False, "claim": _claim_json(db, row)}
+
+
+@app.get("/api/me/claims")
+def my_company_claims(user: User | None = Depends(_current_user), db=Depends(get_db)):
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    rows = db.scalars(select(CompanyClaim).where(CompanyClaim.user_id == user.id)
+                      .order_by(CompanyClaim.created_at.desc())).all()
+    return {"claims": [_claim_json(db, r) for r in rows],
+            "change_kinds": [[k, v] for k, v in CLAIM_CHANGE_KINDS.items()]}
+
+
+@app.post("/api/claims/{claim_id}/change")
+def propose_claim_change(claim_id: int, payload: ClaimChangeIn,
+                         user: User | None = Depends(_current_user), db=Depends(get_db)):
+    """Заявка на правку карточки от подтверждённого представителя. Пишется
+    обычной заметкой (CorrectionRequest) — её донесёт до консоли та же
+    рутина, что и остальные заметки посетителей (docs/user_notes.md)."""
+    if not user:
+        return JSONResponse({"error": "не авторизован"}, status_code=401)
+    row = db.get(CompanyClaim, claim_id)
+    if not row or row.user_id != user.id:
+        return JSONResponse({"error": "заявка не найдена"}, status_code=404)
+    if row.status != "approved":
+        return JSONResponse({"error": "правки можно предлагать после того, как мы подтвердим связь с компанией"},
+                            status_code=403)
+    text_ = (payload.body or "").strip()
+    if not text_:
+        return JSONResponse({"error": "напишите, что поменять"}, status_code=400)
+    if len(text_) > 4000:
+        return JSONResponse({"error": "сообщение слишком длинное"}, status_code=400)
+    label = CLAIM_CHANGE_KINDS.get(payload.kind, CLAIM_CHANGE_KINDS["other"])
+    body = ("Представитель «%s» (подтверждён), %s: %s\n\n%s\n\nКарточка: %s/#%s"
+            % (row.target_name, user.email, label, text_, SITE_URL, _claim_page_path(row)))
+    note = CorrectionRequest(deal_id=None, user_id=user.id, contact=user.email, body=body, status="new")
+    db.add(note)
+    db.commit()
+    return {"ok": True, "id": note.id}
+
+
+@app.get("/api/ops/claims")
+def ops_claims(token: str = "", status: str = "pending", db=Depends(get_db)):
+    """Запасной путь без кнопок консоли: список заявок по токену модерации."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    q = select(CompanyClaim).order_by(CompanyClaim.created_at)
+    if status in CLAIM_STATUSES:
+        q = q.where(CompanyClaim.status == status)
+    out = []
+    for row in db.scalars(q).all():
+        item = _claim_json(db, row)
+        item["email"] = row.user.email if row.user else None
+        item["full_name"] = row.user.full_name if row.user else None
+        out.append(item)
+    return {"claims": out}
+
+
+@app.post("/api/ops/claims/{claim_id}")
+def ops_decide_claim(claim_id: int, payload: ClaimDecideIn, token: str = "", db=Depends(get_db)):
+    """То же решение, что кнопки «Подтвердить»/«Отклонить» в консоли, — по
+    токену модерации (в теле или в адресе)."""
+    if not _moderation_token_ok(payload.token or token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    row = db.get(CompanyClaim, claim_id)
+    if not row:
+        return JSONResponse({"error": "заявки с таким id нет"}, status_code=404)
+    _decide_claim(db, row, bool(payload.approve))
+    return {"ok": True, "claim": _claim_json(db, row)}
 
 
 # Иконки по корневым адресам, которые браузеры запрашивают САМИ, не читая

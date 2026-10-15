@@ -2,13 +2,13 @@
  "made": "2026-10-14",
  "drafts": [
   {
-   "draft_id": "d65939515",
-   "title": "В пермском скандальном бизнес-центре выставили на продажу целый этаж",
-   "date": "2026-10-12",
+   "draft_id": "d58441683",
+   "title": "Государство национализировало еще один банк",
+   "date": "2026-10-14",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053135370"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/310026"
     ]
    ],
    "sum": null,
@@ -23,7 +23,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
@@ -31,19 +31,30 @@
    ]
   },
   {
-   "draft_id": "d11895062",
-   "title": "«Русгидро» может завершить пик инвестиционного финансирования в 2026 году",
+   "draft_id": "d77465723",
+   "title": "«Росатом» оформил 100% владение УК «Дело» после выкупа доли Шишкарева",
    "date": "2026-10-14",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28212561"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1122487"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-14",
+     "title": "Сделка завершена",
+     "note": "АО \"Атомэнергопром\" (входит в госкорпорацию \"Росатом\") стало владельцем 100% ООО \"Управляющая компания \"Дело\" (головная компания группы \"Дело\"), соответствующие данные зарегистрированы в ЕГРЮЛ 14 октября.\"Росатом\", владевший 49% в группе компаний \"Дело\"…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/russia/1122487"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -55,73 +66,58 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5eb6ff22 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d31016211",
-   "title": "В продаже в «Ленте» заметили «рыбу-зомби»",
+   "draft_id": "d84333127",
+   "title": "Reuters: власти Германии намерены выкупить все 50% оборонного концерна KNDS",
+   "date": "2026-10-14",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261014/germaniya-874250271.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-14",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261014/germaniya-874250271.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d15281168",
+   "title": "«Мисс Россия» призналась в покупке подделки",
    "date": "2026-10-14",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/14/v-prodazhe-v-lente-zametili-rybu-zombi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47000692",
-   "title": "В Тюмени снова изымут и попытаются продать незаконченный «замок»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136016"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86122331",
-   "title": "Норвежский суд осадил Украину, захотевшую продать «Профессора Молчанова»",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136019"
+     "https://lenta.ru/news/2026/10/14/miss-rossiya-priznalas-v-pokupke-poddelki/"
     ]
    ],
    "sum": null,

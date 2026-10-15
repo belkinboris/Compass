@@ -1,0 +1,34 @@
+{
+ "made": "2026-10-15",
+ "drafts": [
+  {
+   "draft_id": "d34933898",
+   "title": "Вологодчина закрыла 316 точек продажи вейпов",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/vologda/2026/10/15/vologodchina-zakryla-316-tochek-prodazhi-vejpov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  }
+ ]
+}

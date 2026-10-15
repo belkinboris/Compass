@@ -712,3 +712,38 @@ class PageView(Base):
     ref_host: Mapped[str | None] = mapped_column(String(120), nullable=True)
     device: Mapped[str] = mapped_column(String(10), default="desktop")
     logged_in: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+# ------------------------------------------------------- кабинет компании ---
+
+class CompanyClaim(Base):
+    """Заявка «Это моя компания» — связь аккаунта с карточкой на сайте.
+
+    Владелец, 14 октября 2026: «личный кабинет для коммерсов… чтобы она могла
+    запросить привязаться к карточке компании, а мы потом одобрили», первым —
+    партнёр Execburo. Карточка — профиль компании из базы (`kind="company"`,
+    id из `companies{}` в deals_promoted.json) или фирма-консультант
+    (`kind="firm"`, id из FIRMS/INV_FIRMS/EXEC_FIRMS в static/index.html).
+    Внешнего ключа на target_id нет по той же причине, что у Comment: эти
+    карточки живут в JSON и в коде страницы, а не в SQL.
+
+    Решение принимается в Telegram-консоли кнопками `claim:ok|no:<id>` или по
+    токену (`POST /api/ops/claims/{id}`) и пишется сюда же, без рутины.
+    Подтверждённый представитель предлагает правки — они идут обычной
+    заметкой (`CorrectionRequest`) с пометкой «Представитель … (подтверждён)».
+    Сам он карточку не правит: её содержимое остаётся за редакцией."""
+    __tablename__ = "company_claims"
+    __table_args__ = (UniqueConstraint("user_id", "kind", "target_id", name="uq_user_claim_target"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(10))          # company | firm
+    target_id: Mapped[str] = mapped_column(String(40))
+    target_name: Mapped[str] = mapped_column(String(300))
+    position: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    note: Mapped[str | None] = mapped_column(Text, nullable=True)
+    status: Mapped[str] = mapped_column(String(12), default="pending")  # pending | approved | rejected
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    decided_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    user: Mapped[User] = relationship()

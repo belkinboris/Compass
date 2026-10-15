@@ -609,10 +609,12 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if changed:
             out.append(('asset_case', 'предмет в косвенном падеже: %r → %r' % (asset, fixed)))
         if review.ASSET_IS_A_DESCRIPTION.search(asset):
-            out.append(('asset_description', 'предмет — описание, а не имя компании: %r' % asset))
+            out.append(('asset_description', 'предмет — описание, а не имя компании: %r — найдите юрлицо '
+                                          '(реестр, сайт компании, другие издания)' % asset))
     if not (card.get('target') or card.get('asset_id') or has(asset)) \
             and card.get('type') in ('M&A', 'Продажа с торгов', 'Инвестиция') and 'target' not in waived:
-        out.append(('asset_missing', 'предмет сделки не назван (ни профиль, ни текст)'))
+        out.append(('asset_missing', 'предмет сделки не назван (ни профиль, ни текст) — найдите, что именно '
+                                      'покупают: юрлицо, долю, объект'))
     # Стороны сделки — то, ради чего карточку открывают. 12 октября 2026 владелец
     # нашёл «Ренессанс Капитал» / «Онэксим» без покупателя и продавца при прямых
     # именах в источниках; таких M&A было 84, все прошли приёмку и аудиты.
@@ -700,6 +702,40 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     if card.get('type') == 'Продажа с торгов' and not (card.get('seller') or card.get('seller_id')) \
             and 'seller' not in waived:
         out.append(('auction_seller', 'у продажи с торгов продавец назван всегда — здесь его нет'))
+    # ПРОДАВЕЦ НЕ НАЗВАН — ЗНАЧИТ, ИСКАТЬ ВЛАДЕЛЬЦА (владелец, 14 октября 2026,
+    # «Соликамскбумпром»: «почему этого сразу не было сделано? мы же обогащаем
+    # карту перед черновиком»). Поиск притока ищет статьи О СДЕЛКЕ, а кто
+    # владеет предметом, пишут в других статьях — о банкротстве, о наследстве,
+    # в реестре. Пусто в продавце у новой покупки — находка, пока читатель не
+    # нашёл владельца (ООО — история участников ЕГРЮЛ, АО — акционеры по
+    # прессе и раскрытию; `docs/card_parties.md`) или не записал в
+    # `no_profile.seller`, где искал и почему продавца нет.
+    # Владелец в тот же день: «если в карте нет продавца и покупателя или
+    # непонятен таргет — их нужно искать обязательно». Покупатель — у покупки,
+    # инвестиции и завершённых торгов (у объявленных торгов его ещё нет).
+    # Пояснение «реестры закрыты» не снимает находку, если предмет — ООО/АО, а
+    # история участников ЕГРЮЛ (datanewton, без ключа) не проверена: 15 октября
+    # 2026 Nomi/«Гельтек» ушёл к владельцу с «продавец не раскрыт» после
+    # попыток rusprofile/list-org/checko — они отсюда закрыты, datanewton нет.
+    seller_note = str((waived or {}).get('seller') or '')
+    asset_is_company = re.search(r'\b(?:ООО|АО|ПАО|ЗАО|НАО)\b', ' '.join(
+        str(card.get(k) or '') for k in ('asset', 'title')) + ' ' + str(_text(card, 'eco.share') or ''))
+    if seller_note and asset_is_company and not re.search(r'datanewton|истори[яи] участник', seller_note, re.I):
+        out.append(('seller_registry_unchecked',
+                    'предмет — юрлицо, а история участников ЕГРЮЛ не проверена: '
+                    'https://datanewton.ru/api/v2/history?ogrn=<ОГРН>&startDate=2000-01-01&attributes=OWNERS '
+                    '(rusprofile/list-org/checko отсюда закрыты — это не повод остановиться)'))
+    if card.get('type') == 'M&A' and not (card.get('seller') or card.get('seller_id')) \
+            and 'seller' not in waived:
+        out.append(('seller_search', 'продавец не назван: найдите, кто владел предметом до сделки '
+                                     '(реестр, раскрытие, статьи о компании, а не только о сделке), '
+                                     'или запишите, где искали и почему продавца нет'))
+    buyer_expected = card.get('type') in ('M&A', 'Инвестиция') or (
+        card.get('type') == 'Продажа с торгов' and card.get('status') == 'Закрыта')
+    if buyer_expected and not (card.get('buyer') or card.get('buyer_name')) and 'buyer' not in waived:
+        out.append(('buyer_search', 'покупатель не назван: найдите его (итоги торгов, реестр — у кого '
+                                    'теперь доля, раскрытие покупателя, другие издания) или запишите, '
+                                    'где искали и почему его нет'))
     # Аудит 12 сентября 2026 — четыре класса, найденные владельцем на живых
     # карточках (БКС/«Форштадт», S8/«Аквариус», Мать и дитя/«Инвитро»,
     # Dogma/ПИК), теперь проверяются механически у КАЖДОЙ новой карточки, а

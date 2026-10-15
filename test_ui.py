@@ -4653,3 +4653,44 @@ def test_advisors_industry_lists_only_firms_with_deals(browser, base_url):
         assert pg.locator("[data-t=exec]").inner_text() == "Executive Search"
     finally:
         pg.close()
+
+
+@pytest.mark.parametrize("width", [360, 1280])
+def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_url, width):
+    """Кабинет компании (14 октября 2026): вкладка «Моя компания» открывается,
+    поиск находит фирму, заявка уходит и видна «На проверке»; на странице
+    фирмы — строка о заявке. Без ошибок и без прокрутки вбок."""
+    ctx = browser.new_context(viewport={"width": width, "height": 900})
+    errors = []
+    try:
+        pg = ctx.new_page()
+        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+        pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+        pg.goto(base_url + "/#/advisors/execburo", wait_until="domcontentloaded")
+        pg.wait_for_selector("#claimOpen", timeout=15000)
+        pg.click("#claimOpen")
+        assert "Войдите" in pg.inner_text("#claimLine")
+        email = "kabinet%d_%d@example.com" % (width, int(time.time() * 1000))
+        assert pg.evaluate("""async (email) => (await fetch("/api/auth/register", {method:"POST",
+            headers:{"Content-Type":"application/json"}, body: JSON.stringify({email, password:"testpass123",
+            full_name:"Тест Тестов", company:null, position:null, role:"individual"})})).status""", email) == 200
+        pg.evaluate("location.hash = '#/account?tab=company'")
+        pg.wait_for_selector("#claimQ", timeout=10000)
+        assert "как это работает" in pg.inner_text("#claimBody").lower()
+        assert pg.inner_text(".account-tabs a.on").strip().lower() == "моя компания"
+        pg.fill("#claimQ", "execburo")
+        pg.wait_for_selector("#claimHits [data-pick]", timeout=5000)
+        pg.click("#claimHits [data-pick]")
+        pg.fill(".claim-hit-form [name=position]", "Основатель")
+        pg.click(".claim-hit-form button[type=submit]")
+        pg.wait_for_function("document.getElementById('claimBody').innerText.includes('На проверке')", timeout=10000)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+        pg.evaluate("location.hash = '#/advisors/execburo'")
+        pg.wait_for_function("(document.getElementById('claimLine')||{}).innerText?.includes('проверяем')",
+                             timeout=10000)
+        over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+        assert over == 0, "переполнение на странице фирмы %spx на %spx" % (over, width)
+        assert not errors, "ошибки в консоли: %s" % errors[:3]
+    finally:
+        ctx.close()

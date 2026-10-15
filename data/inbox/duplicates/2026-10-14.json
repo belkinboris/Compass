@@ -1,0 +1,78 @@
+{
+ "made": "2026-10-14",
+ "items": [
+  {
+   "key": "https://1prime.ru/20261014/investory-874232381.html::ga0dd6563",
+   "candidate_id": "ga0dd6563",
+   "reason": "общие редкие слова: рублей, сентяб",
+   "draft": {
+    "draft_id": "d63272274",
+    "title": "Частные инвесторы в сентябре вложили в облигации 210,6 миллиарда рублей",
+    "date": "2026-10-14",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261014/investory-874232381.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Частные инвесторы в сентябре",
+    "asset": "облигации 210,6 миллиарда рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Частные инвесторы в сентябре",
+     "asset": "облигации 210,6 миллиарда рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-14"
+  },
+  {
+   "key": "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/::g62577a1d",
+   "candidate_id": "g62577a1d",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d66951333",
+    "title": "«Карат» купил производителя молочной продукции «Эго»",
+    "date": "2026-10-14",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-14",
+      "title": "Сделка завершена",
+      "note": "Сумма сделки не раскрывается, эксперты оценивают стоимость предприятия в 1,5–2 млрд рублей. Сообщение «Карат» купил производителя молочной продукции «Эго» появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/karat-kupil-proizvoditelja-molochnoj-produkcii-jego/"
+      ]
+     }
+    ],
+    "buyer_name": "«Карат»",
+    "asset": "производитель молочной продукции «Эго»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Карат»",
+     "asset": "производитель молочной продукции «Эго»",
+     "seller": null
+    },
+    "ind": "Пищепром и напитки",
+    "needs_review": true
+   },
+   "queued": "2026-10-14"
+  }
+ ]
+}

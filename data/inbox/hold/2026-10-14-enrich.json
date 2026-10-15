@@ -1,0 +1,23 @@
+{
+ "made": "2026-10-14",
+ "items": [
+  {
+   "news": "https://abnews.ru/center/news/msk/2026/10/14/v-ramenkah-vystavili-na-torgi-dva-kommercheskih-pomeshheniya",
+   "title": "В Раменках выставили на торги два коммерческих помещения",
+   "verdict": "enrich:g1833e545",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
+  },
+  {
+   "news": "https://www.rbc.ru/business/14/10/2026/6ace399d9a79476d4244c153",
+   "title": "Завод плавленых сыров «Карат» купил производителя йогуртов и кефира «Эго»",
+   "verdict": "enrich:g62577a1d",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Павловский молочный завод»"
+   ]
+  }
+ ]
+}

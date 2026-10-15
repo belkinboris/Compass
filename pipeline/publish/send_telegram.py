@@ -84,7 +84,6 @@ message_id в `telegram_posts` (не `null`) И которая попала в
         # отправленными: следующий прогон покажет их снова.
 """
 import json
-import math
 import os
 import sys
 import time
@@ -133,6 +132,18 @@ SITE_POLL_S = 60          # как часто спрашивать сайт пр
 # получил бы три уведомления подряд в одну минуту — ровно то, чего мы избегаем
 # равномерной выдачей. Правок это не касается: `editMessageText` не уведомляет.
 SPREAD_S = float(os.environ.get('TELEGRAM_SPREAD_S', '90'))
+# ПАУЗА 20 МИНУТ МЕЖДУ НОВЫМИ ПОСТАМИ (владелец, 14 октября 2026): «если
+# я одобряю одновременно несколько — по 20 минут; но остальные посты должны
+# выкладываться как можно быстрее». Поэтому дневной размазки больше нет:
+# одобренный пост уходит первым же прогоном, а если их несколько, скрипт
+# сам ждёт GAP_S между ними (и от последнего поста прошлого прогона —
+# `telegram_last_post_at` в базе). Ждать в одном прогоне — не дольше
+# RUN_WAIT_S, чтобы прогон кончился до следующего (рутина — раз в час);
+# что не успело, уходит следующим прогоном с той же паузой. Каждый новый
+# пост записывается на диск сразу после отправки: оборвись прогон посреди
+# ожидания, повтора не будет. Правки вышедших постов паузы не ждут.
+GAP_S = float(os.environ.get('TELEGRAM_GAP_S', str(20 * 60)))
+RUN_WAIT_S = float(os.environ.get('TELEGRAM_RUN_WAIT_S', str(45 * 60)))
 
 # ---------- РАВНОМЕРНАЯ ВЫДАЧА ----------
 # Пять постов подряд в одну минуту — это не лента, а спам: читатель получает
@@ -167,6 +178,27 @@ def window_bounds():
     return start, end
 
 
+def gap_wait_s(last_post_at, now=None):
+    """Сколько секунд ждать до следующего нового поста (0 — можно сейчас)."""
+    if not last_post_at:
+        return 0.0
+    try:
+        last = datetime.fromisoformat(str(last_post_at))
+    except ValueError:
+        return 0.0
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+    now = now or datetime.now(timezone.utc)
+    return max(0.0, GAP_S - (now - last).total_seconds())
+
+
+def in_window_after(wait_s, now=None):
+    """Пост, отложенный на wait_s, всё ещё попадает в дневное окно."""
+    start, end = window_bounds()
+    at = (now or datetime.now(MSK)) + timedelta(seconds=wait_s)
+    return start <= at.hour + at.minute / 60.0 < end
+
+
 def pace_allowance(pending, now=None):
     """Сколько новых постов можно отправить прямо сейчас.
 
@@ -182,10 +214,10 @@ def pace_allowance(pending, now=None):
             start, end, now.hour, now.minute)
     if not pending:
         return 0, 'очередь пуста'
-    slots = int((end - hour) / RUN_EVERY_H) + 1
-    per = max(1, int(math.ceil(pending / float(slots))))
-    return per, 'окно %02d:00–%02d:00 МСК, впереди прогонов: %d, берём %d из %d' % (
-        start, end, slots, min(per, pending), pending)
+    # С 14 октября 2026 очередь не размазывается по дню: одобренное уходит
+    # сразу, несколько — с паузой GAP_S (см. выше), её держит цикл отправки.
+    return pending, 'окно %02d:00–%02d:00 МСК: отправляем сразу, между новыми постами — %d мин' % (
+        start, end, int(GAP_S // 60))
 
 
 class TelegramError(Exception):
@@ -1268,14 +1300,34 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     client = _client()
     sent, edited, milestoned, failed, deleted = 0, 0, 0, [], []
     prev_kind = None
+    paced = write and not (ignore_pace or '--now' in sys.argv)
+    if paced:
+        # Правки — первыми: они не ждут паузы между новыми постами.
+        batch = [b for b in batch if b[0] == 'edit'] + [b for b in batch if b[0] != 'edit']
+    waited, gap_held = 0.0, 0
+
+    def save_progress():
+        if realty_posts:
+            data['telegram_posts_realty'] = realty_posts
+        with open(DATA, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=1, ensure_ascii=False)
+
     for i, (kind, did, payload) in enumerate(batch):
-        if i:
-            # Два новых поста подряд разводим по времени, всё остальное —
-            # обычной технической паузой. Веха — тоже НОВОЕ сообщение
-            # (sendMessage, не editMessageText), поэтому та же логика, что у
-            # 'send': подряд с любым другим новым постом — разводим по времени.
-            time.sleep(SPREAD_S if (kind in ('send', 'milestone') and prev_kind in ('send', 'milestone'))
-                      else SEND_DELAY_S)
+        new_post = kind in ('send', 'milestone')
+        if new_post and paced:
+            wait = gap_wait_s(data.get('telegram_last_post_at'))
+            if wait and (waited + wait > RUN_WAIT_S or not in_window_after(wait)):
+                gap_held += 1
+                continue
+            if wait:
+                print('Пауза %d мин перед следующим постом (между новыми постами — %d мин).'
+                      % (round(wait / 60), int(GAP_S // 60)), flush=True)
+                time.sleep(wait)
+                waited += wait
+        elif i:
+            # Без паузы-20 (--now, сухие тесты): два новых поста подряд всё
+            # равно разводим на SPREAD_S, остальное — технической паузой.
+            time.sleep(SPREAD_S if (new_post and prev_kind in ('send', 'milestone')) else SEND_DELAY_S)
         prev_kind = kind
         deal = deals_by_id.get(did) or {'id': did}
         buttons = format_post.render_buttons(deal)
@@ -1303,6 +1355,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                     record['realty_message_id'] = mids[channels.REALTY]
                 milestones[payload[0]['id']] = record
                 milestoned += 1
+            data['telegram_last_post_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
+            if paced:
+                save_progress()
             continue
         where, text = payload
         done = False
@@ -1349,6 +1404,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     approve.consume(m_handle, m_discard_ids + m_sent_decision_ids + digest_decision_ids)
     print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, вех отправлено: %d, ошибок: %d'
           % (sent, edited, len(to_seed), milestoned, len(failed)))
+    if gap_held:
+        print('Придержано паузой между постами: %d — уйдут следующим прогоном.' % gap_held)
     for did, err in failed:
         print('  %s: %s' % (did, err))
     if deleted:

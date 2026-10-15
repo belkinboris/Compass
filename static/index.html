@@ -754,6 +754,29 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .acct-newsub select,.acct-newsub input{width:100%;box-sizing:border-box;padding:10px 12px;font-size:16px;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink)}
 .acct-newsub button{justify-self:start;min-width:160px}
 .sub-msg{margin:0;min-height:1em;color:var(--accent)}.sub-msg.err{color:#a3392b}
+/* Кабинет компании — «Это моя компания» (14 октября 2026, см. renderClaimsTab). */
+.acct-newsub textarea{width:100%;box-sizing:border-box;min-height:104px;padding:10px 12px;font-size:16px;line-height:1.5;font-family:var(--f-sans);border:1px solid var(--line);border-radius:8px;background:var(--paper,#F5F5F1);color:var(--ink);resize:vertical}
+.claim-line{margin:-8px 0 26px;font-size:13px;line-height:1.6;color:var(--muted);max-width:72ch;min-width:0;overflow-wrap:break-word}
+.claim-line:empty{display:none}
+.claim-line a{color:var(--accent);font-weight:600}
+.claim-line .link-btn{margin:0;font-size:13px}
+.claim-line.mine{color:var(--accent)}
+.claim-line .claim-form{max-width:440px}
+.xb .claim-line{margin:28px 0 0;color:var(--xb-mut)}
+.xb .claim-line a,.xb .claim-line .link-btn{color:var(--xb-wine)}
+.claim-card{max-width:520px;padding:20px 22px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:#fff;margin:20px 0;min-width:0}
+.claim-card h2{font-family:var(--f-display);font-weight:400;font-size:clamp(22px,5vw,28px);line-height:1.2;margin:8px 0 0;overflow-wrap:anywhere}
+.claim-logo{display:block;height:34px;width:auto;max-width:100%;margin-top:14px}
+.claim-views{margin:10px 0 14px;font-size:14px;color:var(--muted);line-height:1.6}
+.claim-views b{color:var(--ink);font-size:18px}
+.claim-change{margin-top:6px}
+.claim-change[hidden]{display:none}
+.claim-status{flex:none;font-size:12.5px;color:var(--accent);white-space:nowrap}
+.claim-status.no{color:var(--muted)}
+.claim-hit-name{min-width:0;overflow-wrap:anywhere}
+.claim-hit-name small{display:block;font-size:12px;color:var(--muted)}
+.claim-hit .chip{flex:none}
+.claim-hit-form .claim-form{margin:4px 0 12px}
 .acct-row.fresh{background:rgba(31,92,72,.08);border-radius:6px;transition:background 2s}
 .comments{margin:30px 0;padding-top:22px;border-top:1px solid var(--line)}
 .comment-item{padding:12px 0;border-bottom:1px dashed var(--line-soft)}
@@ -1992,6 +2015,15 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .link-btn{background:none;border:0;padding:0;margin-top:6px;font:inherit;font-size:12.5px;color:var(--accent);cursor:pointer;text-decoration:underline}
 .tg-wait{margin:-2px 0 6px;padding:12px 14px;background:var(--bg-soft,#f4f4ef);border-radius:8px}.tg-wait code{display:block;margin:8px 0 2px;font-size:12px;word-break:break-all;color:var(--ink,#1b1b1b)}
 @media(max-width:420px){.account-tabs a{padding:13px 12px;letter-spacing:.06em}}
+/* Четыре вкладки кабинета (с «Моей компанией», 14 октября 2026) в строку на
+   телефоне не помещаются, а обрезанная последняя вкладка уже была жалобой
+   (4 октября) — на узком экране сетка 2×2. */
+@media(max-width:640px){
+  .account-tabs{display:grid;grid-template-columns:1fr 1fr;overflow:visible}
+  .account-tabs a{padding:12px 8px;letter-spacing:.06em;white-space:normal;border-bottom:1px solid var(--line)}
+  .account-tabs a:nth-child(2n){border-right:0}
+  .account-tabs a:nth-last-child(-n+2){border-bottom:0}
+}
 .notif-list{display:grid;gap:8px}
 .notif-item{display:block;background:var(--card);border:1px solid var(--line);padding:17px 19px}
 .notif-item.unread{border-left:3px solid var(--accent)}
@@ -8234,6 +8266,7 @@ function renderCompany(id){
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip primary" id="prepMeeting">Подготовка к встрече</button><button class="chip" id="prepInterview">Подготовка к собеседованию</button><button class="chip" id="followCompany">${isFollowed(id)?"Не следить за компанией":"Следить за сделками компании"}</button><button class="chip" id="compareCompany">${isCompared(id)?"Убрать из сравнения":"Добавить к сравнению"}</button>${compareIds().length>=2?`<a class="chip" href="#/compare">Сравнить выбранные (${compareIds().length})</a>`:""}<span class="tool-note" id="compareCompanyNote"></span></div>
   ${interviewPanelHtml()}
+  ${claimLineHtml()}
   <div class="company-profile-meta reveal">
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
@@ -8310,6 +8343,7 @@ function renderCompany(id){
   const openCompanyDeals=document.getElementById("openCompanyDeals");
   if(openCompanyDeals) openCompanyDeals.onclick=()=>openCompanyDealsDialog(id);
   mountMiniAI(c.name,"company",id);
+  mountClaimLine("company", id);
   mountCompanyFns(id);
   if(SHOW_COMPANY_LINKS && groupMembers.length) mountGroupMembers(groupMembers, "group-members");
   // Портфель показывает долю в той же строке, что и имя (просьба владельца
@@ -8629,6 +8663,7 @@ function renderFirm(id){
   </div>
   <div class="deal-tools company-tools reveal"><button class="chip primary" id="prepInterviewFirm" type="button">Подготовка к собеседованию</button></div>
   ${interviewPanelHtml()}
+  ${claimLineHtml()}
   <div class="facts reveal" style="margin-bottom:30px">
     <div class="fact"><span class="label">Сделок в базе «Компаса»</span><div class="val big num">${full.length+mini.length+bulk.length}</div></div>
   </div>
@@ -8648,6 +8683,7 @@ function renderFirm(id){
     + `чаще всего. В конце — три вопроса, которые стоит задать работодателю.`, resume, "фирмой"),
     `Подготовка к собеседованию: «${f.n}»`, {type:"advisor", id});
   mountMiniAI(f.n,"advisor",id);
+  mountClaimLine("firm", id);
 }
 /* СТРАНИЦА ФИРМЫ EXECUTIVE SEARCH — по макету «Execburo в Компасе»
    (см. EXEC_FIRMS). Своя палитра и шрифт Manrope — только внутри `.xb`;
@@ -8666,6 +8702,7 @@ function renderExecFirm(f){
     <p class="xb-lead">${esc(f.lead)}</p>
     <div class="xb-btns"><a class="xb-btn fill" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a><a class="xb-btn line" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
     <div class="xb-facts">${f.facts.map(([a,c])=>`<span><b>${esc(a)}</b> ${esc(c)}</span>`).join("")}<span>Основатель — <b>${esc(f.founderName)}</b></span></div>
+    ${claimLineHtml()}
   </div></section>
 
   <section class="xb-sec"><div class="xb-in"><div class="xb-hd"><h2>Услуги</h2><span class="n">с сайта фирмы</span></div>
@@ -8696,6 +8733,7 @@ function renderExecFirm(f){
     <div class="ct"><b>${esc(f.email)}</b><b><a href="tel:${f.tel}">${esc(f.phone)}</a></b><span>${f.links.map(([t,u])=>link(t,u)).join(" · ")}</span></div>
     <a class="xb-btn" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a></div></section>
   </div>`;
+  mountClaimLine("firm", f.id);
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
    на собеседование идут не только в компании, но и к консультантам («может
@@ -9911,6 +9949,7 @@ async function refreshMe(){
     const data = r.ok ? await r.json() : {logged_in:false};
     ME = data.logged_in ? data : null;
     GATE = !!data.gate;
+    MY_CLAIMS = null;   // кабинет компании: заявки спросим заново под этим входом
   }catch(e){ ME = null; if(GATE === null) GATE = false; }
   // Подписки — вместе с профилем: сердечко в каталоге и кнопки на профиле
   // компании и на странице отрасли рисуются по ним, и спрашивать сервер на
@@ -10050,6 +10089,189 @@ function renderGate(){
   paint();
 }
 
+/* КАБИНЕТ КОМПАНИИ — «Это моя компания» (владелец, 14 октября 2026: «чтобы
+   она могла запросить в личном кабинете привязаться к карточке компании, а
+   мы потом одобрили… и несложный функционал отправлять нам заявки на
+   изменения», первой — партнёр Execburo). Человек просит подключить
+   карточку компании или фирмы-консультанта, владелец и партнёр решают
+   кнопкой в Telegram-консоли (POST /api/claims → claim:ok|no). Подтверждённый
+   видит в кабинете свою карточку, сколько раз её открывали за 30 дней (наш
+   счётчик /api/t) и шлёт правки — они приходят нам обычной заметкой; саму
+   карточку он не правит. Не перегружать: без своих графиков, без
+   редактора карточки. Устройство — docs/company_cabinet.md. */
+let MY_CLAIMS = null;            // null — ещё не спрашивали; сбрасывает refreshMe()
+let CLAIM_CHANGE_KINDS = [["about","Описание компании"],["contacts","Сайт и контакты"],
+  ["deals","Сделки компании"],["look","Логотип и оформление"],["other","Другое"]];
+async function loadMyClaims(force){
+  if(!ME){ MY_CLAIMS = []; return MY_CLAIMS; }
+  if(MY_CLAIMS && !force) return MY_CLAIMS;
+  try{
+    const r = await fetch("/api/me/claims"), x = r.ok ? await r.json() : {};
+    MY_CLAIMS = x.claims || [];
+    if(x.change_kinds && x.change_kinds.length) CLAIM_CHANGE_KINDS = x.change_kinds;
+  }catch(e){ MY_CLAIMS = MY_CLAIMS || []; }
+  return MY_CLAIMS;
+}
+const claimOf = (kind, id) => (MY_CLAIMS||[]).find(c => c.kind===kind && c.target_id===id);
+/* Логотип — только у фирмы с согласованным оформлением (`brand`, не `brandDraft`). */
+const claimLogo = c => { if(c.kind!=="firm") return ""; const f = ALL_FIRM(c.target_id); return (f && f.brand && f.brand.logo) || ""; };
+const claimFormHtml = () => `
+  <form class="acct-newsub claim-form" novalidate>
+    <label>Ваша должность<input type="text" name="position" maxlength="200" value="${esc(String((ME&&ME.position)||"")).replace(/"/g,"&quot;")}" placeholder="Например, партнёр"></label>
+    <label><span>Комментарий <i>— необязательно</i></span><textarea name="note" maxlength="2000" placeholder="Как с вами связаться, если понадобится уточнить"></textarea></label>
+    <button class="chip on" type="submit">Отправить заявку</button>
+    <p class="acct-note sub-msg" role="status" aria-live="polite"></p>
+  </form>`;
+/* Отправка заявки: общая для профиля компании, страницы фирмы и кабинета. */
+function bindClaimForm(form, kind, id, onDone){
+  if(!form) return;
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const btn = form.querySelector("button"), msg = form.querySelector(".sub-msg");
+    const say = (t, err) => { msg.innerHTML = t; msg.classList.toggle("err", !!err); };
+    btn.disabled = true; btn.textContent = "Отправляем…";
+    try{
+      const r = await fetch("/api/claims", {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({kind, target_id:id, position: form.elements.position.value.trim()||null, note: form.elements.note.value.trim()||null})});
+      const x = await r.json().catch(()=>({}));
+      if(r.status===401){ say(`Вход истёк. <a href="#/account">Войдите снова</a> — и повторите.`, true); return; }
+      if(!r.ok){ say(esc(x.error||"Не получилось отправить. Попробуйте ещё раз."), true); return; }
+      await loadMyClaims(true);
+      onDone(x);
+    }catch(err){ say("Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.", true); }
+    finally{ if(btn.isConnected){ btn.disabled = false; btn.textContent = "Отправить заявку"; } }
+  };
+}
+const CLAIM_SENT_TEXT = `Заявка отправлена. Мы проверим, что вы работаете в компании, и подключим карточку — статус виден в <a href="#/account?tab=company">личном кабинете</a>.`;
+/* Строка на профиле компании и на странице фирмы. Скромная: одна строка
+   мелким шрифтом, форма раскрывается только по нажатию. */
+const claimLineHtml = () => `<div class="claim-line" id="claimLine"></div>`;
+async function mountClaimLine(kind, id){
+  const el = document.getElementById("claimLine");
+  if(!el) return;
+  const ask = kind==="firm" ? "Вы работаете в этой фирме?" : "Это ваша компания?";
+  const paintOffer = () => {
+    el.classList.remove("mine");
+    el.innerHTML = `${ask} <button class="link-btn" type="button" id="claimOpen">Подключить к кабинету</button>`;
+    document.getElementById("claimOpen").onclick = () => {
+      if(!ME){
+        el.innerHTML = `${ask} <a href="#/account">Войдите или зарегистрируйтесь</a> — потом вернитесь на эту страницу и отправьте заявку. Подключённая карточка видна в личном кабинете: сколько раз её открывали и куда прислать правку.`;
+        return;
+      }
+      el.innerHTML = `<b>Подключить карточку к личному кабинету.</b> Мы проверим, что вы работаете в компании, и подключим карточку: в кабинете будет видно, сколько раз её открывали, и можно будет прислать нам правку.${claimFormHtml()}`;
+      bindClaimForm(el.querySelector("form"), kind, id, () => { el.innerHTML = CLAIM_SENT_TEXT; });
+    };
+  };
+  if(!ME){ paintOffer(); return; }
+  await loadMyClaims();
+  if(!el.isConnected) return;
+  const c = claimOf(kind, id);
+  if(!c) paintOffer();
+  else if(c.status==="approved"){
+    el.classList.add("mine");
+    el.innerHTML = `<b>Это ваша карточка</b> · <a href="#/account?tab=company">Предложить правку</a>`;
+  }
+  else if(c.status==="pending") el.innerHTML = `Заявка на подключение к кабинету отправлена — проверяем. <a href="#/account?tab=company">Личный кабинет</a>`;
+  else el.innerHTML = "";
+}
+/* Поиск карточки в кабинете — по уже загруженным COMPANIES и фирмам.
+   Кириллица находит латиницу (translitKey), как во всём поиске сайта. */
+function claimSearch(q){
+  const key = translitKey(q);
+  if(key.length < 2) return [];
+  const pool = [
+    ...[...FIRMS, ...INV_FIRMS, ...EXEC_FIRMS].map(f => ({kind:"firm", id:f.id, name:f.n})),
+    ...Object.entries(COMPANIES).filter(([,c]) => c && c.name && !c.asset).map(([id,c]) => ({kind:"company", id, name:c.name})),
+  ];
+  const hits = [];
+  for(const x of pool){
+    const k = translitKey(x.name), at = k.indexOf(key);
+    if(at >= 0) hits.push([at===0 ? 0 : 1, k.length, x]);
+  }
+  hits.sort((a,b) => a[0]-b[0] || a[1]-b[1]);
+  return hits.slice(0, 8).map(h => h[2]);
+}
+function renderClaimsTab(body){
+  body.innerHTML = `<div id="claimBody"><p class="acct-note">Загружаем…</p></div>`;
+  const viewsText = n => n
+    ? `Карточку открыли <b class="num">${n}</b> ${plural(n,"раз","раза","раз")} за последние 30 дней.`
+    : "За последние 30 дней карточку ещё не открывали.";
+  const approvedHtml = c => {
+    const logo = claimLogo(c);
+    return `<div class="claim-card" data-claim="${c.id}">
+      <span class="label">Ваша карточка в «Компасе»</span>
+      ${logo ? `<img class="claim-logo" src="${logo}" alt="${esc(c.target_name).replace(/"/g,"&quot;")}">` : `<h2>${esc(c.target_name)}</h2>`}
+      <p class="claim-views">${viewsText(c.views_30d||0)}</p>
+      <div class="deal-tools"><a class="chip" href="${c.link}">Открыть карточку</a><button class="chip primary" type="button" data-change-open>Предложить правку</button></div>
+      <form class="acct-newsub claim-change" hidden novalidate>
+        <label>Что поменять<select name="kind">${CLAIM_CHANGE_KINDS.map(([v,l]) => `<option value="${v}">${esc(l)}</option>`).join("")}</select></label>
+        <label>Как должно быть<textarea name="body" maxlength="4000" placeholder="Например: новый адрес сайта, правильное описание, сделка, которой нет на карточке, — со ссылкой на источник, если она есть"></textarea></label>
+        <button class="chip on" type="submit">Отправить</button>
+        <p class="acct-note sub-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>`;
+  };
+  const otherHtml = c => c.status==="pending"
+    ? `<div class="acct-row"><span><a href="${c.link}">${esc(c.target_name)}</a></span><span class="claim-status">На проверке</span></div>`
+    : `<div class="acct-row"><span><a href="${c.link}">${esc(c.target_name)}</a></span><span class="claim-status no">Не подтверждена</span></div>`;
+  const draw = async force => {
+    const claims = await loadMyClaims(force);
+    const mount = document.getElementById("claimBody");
+    if(!mount) return;
+    const approved = claims.filter(c => c.status==="approved"), rest = claims.filter(c => c.status!=="approved");
+    const intro = claims.length ? "" : `<div class="acct-card"><span class="label">Как это работает</span>
+      <p class="acct-note" style="margin-top:8px">Найдите свою компанию или фирму-консультанта по названию и нажмите «Это моя компания». Мы проверим, что вы в ней работаете, и подключим карточку. Тогда здесь будет видно, сколько раз её открывали, и можно будет присылать нам правки.</p></div>`;
+    mount.innerHTML = approved.map(approvedHtml).join("")
+      + (rest.length ? `<div class="acct-card"><span class="label">Заявки</span>${rest.map(otherHtml).join("")}
+          ${rest.some(c => c.status==="pending") ? `<p class="acct-note" style="margin-top:10px">Мы проверим, что вы работаете в компании, и подключим карточку — статус обновится здесь.</p>` : ""}
+          ${rest.some(c => c.status==="rejected") ? `<p class="acct-note" style="margin-top:10px">Если отказ — ошибка, напишите нам через «Написать нам» внизу страницы.</p>` : ""}</div>` : "")
+      + intro
+      + `<div class="acct-card"><span class="label">${claims.length ? "Подключить другую компанию" : "Найти компанию"}</span>
+          <div class="acct-newsub"><label>Название компании или фирмы<input type="search" id="claimQ" placeholder="Например, «Сбер» или Execburo" autocomplete="off"></label></div>
+          <div id="claimHits"></div></div>`;
+    mount.querySelectorAll(".claim-card").forEach(card => {
+      const form = card.querySelector(".claim-change"), open = card.querySelector("[data-change-open]");
+      open.onclick = () => { form.hidden = !form.hidden; if(!form.hidden && !matchMedia("(pointer:coarse)").matches) form.elements.body.focus({preventScroll:true}); };
+      form.onsubmit = async e => {
+        e.preventDefault();
+        const btn = form.querySelector("button"), msg = form.querySelector(".sub-msg");
+        const say = (t, err) => { msg.innerHTML = t; msg.classList.toggle("err", !!err); };
+        const text = form.elements.body.value.trim();
+        if(!text){ say("Напишите, что поменять.", true); return; }
+        btn.disabled = true; btn.textContent = "Отправляем…";
+        try{
+          const r = await fetch(`/api/claims/${card.dataset.claim}/change`, {method:"POST", headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({kind: form.elements.kind.value, body: text})});
+          const x = await r.json().catch(()=>({}));
+          if(!r.ok){ say(esc(x.error||"Не получилось отправить. Попробуйте ещё раз."), true); return; }
+          form.elements.body.value = "";
+          say(`Отправлено. Правку посмотрит редакция; если понадобится что-то уточнить, напишем на ${esc(ME.email)}.`);
+        }catch(err){ say("Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.", true); }
+        finally{ btn.disabled = false; btn.textContent = "Отправить"; }
+      };
+    });
+    const input = document.getElementById("claimQ"), hits = document.getElementById("claimHits");
+    input.oninput = () => {
+      const q = input.value.trim();
+      const found = claimSearch(q);
+      hits.innerHTML = !q || q.length < 2 ? ""
+        : found.length ? found.map((x,i) => {
+            const c = claimOf(x.kind, x.id);
+            const state = !c ? `<button class="chip" type="button" data-pick="${i}">Это моя компания</button>`
+              : `<span class="claim-status${c.status==="rejected"?" no":""}">${c.status==="approved"?"Подключена":c.status==="pending"?"На проверке":"Не подтверждена"}</span>`;
+            return `<div class="claim-hit"><div class="acct-row"><span class="claim-hit-name"><a href="#/${x.kind==="firm"?"advisors":"companies"}/${encodeURIComponent(x.id)}">${esc(x.name)}</a><small>${x.kind==="firm"?"Консультант":"Компания"}</small></span>${state}</div><div class="claim-hit-form"></div></div>`;
+          }).join("")
+        : `<p class="acct-note" style="margin-top:10px">${Object.keys(COMPANIES).length ? "Такой карточки не нашли. Если компании нет на сайте, напишите нам через «Написать нам» внизу страницы." : "База компаний ещё загружается — попробуйте через несколько секунд."}</p>`;
+      hits.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => {
+        const x = found[+b.dataset.pick], slot = b.closest(".claim-hit").querySelector(".claim-hit-form");
+        hits.querySelectorAll(".claim-hit-form").forEach(s => { if(s !== slot) s.innerHTML = ""; });
+        slot.innerHTML = claimFormHtml();
+        bindClaimForm(slot.querySelector("form"), x.kind, x.id, () => draw(false));
+      });
+    };
+  };
+  draw(true);
+}
 async function renderAccount(qs){
   await refreshMe();
   const params = new URLSearchParams(qs||"");
@@ -10122,7 +10344,7 @@ async function renderAccount(qs){
   const tab=params.get("tab")||"notifications";
   app.innerHTML=`
   <div class="sec-head reveal"><span class="label">Личный кабинет</span><h1>${esc(ME.full_name||ME.email)}</h1><p>${ME.tier==="paid"?"Платная подписка":"Бесплатный тариф"} · ${esc(roleLabel(ME.role))}${ME.company?` · ${esc(ME.company)}`:""}</p></div>
-  <nav class="account-tabs reveal"><a href="#/account?tab=notifications" class="${tab==="notifications"?"on":""}">Уведомления</a><a href="#/account?tab=subscriptions" class="${tab==="subscriptions"?"on":""}">Подписки</a><a href="#/account?tab=profile" class="${tab==="profile"?"on":""}">Профиль</a></nav>
+  <nav class="account-tabs reveal"><a href="#/account?tab=notifications" class="${tab==="notifications"?"on":""}">Уведомления</a><a href="#/account?tab=subscriptions" class="${tab==="subscriptions"?"on":""}">Подписки</a><a href="#/account?tab=company" class="${tab==="company"?"on":""}">Моя компания</a><a href="#/account?tab=profile" class="${tab==="profile"?"on":""}">Профиль</a></nav>
   <div id="accountBody"></div>`;
   rerun();
   const body=document.getElementById("accountBody");
@@ -10222,6 +10444,8 @@ async function renderAccount(qs){
       finally{btn.disabled=false;btn.textContent="Подписаться";}
     };
     drawWatches();drawSubs();
+  }else if(tab==="company"){
+    renderClaimsTab(body);
   }else{
     let editing=false;
     const paintProfile=()=>{
