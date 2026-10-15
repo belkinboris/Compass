@@ -2,13 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d39954171",
-   "title": "В Кремле не назвали желающих купить дизель РФ страны",
+   "draft_id": "d41465030",
+   "title": "Готовы купить, но все еще неловко: как мужчины из регионов России относятся к покупке товаров для женской гигиены",
    "date": "2026-10-15",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2184605/2026-10-15/v-kremle-ne-nazvali-zhelaiushchikh-kupit-dizel-rf-strany"
+     "web:retailer.ru",
+     "https://retailer.ru/gotovy-kupit-no-vse-eshhe-nelovko-kak-muzhchiny-iz-regionov-rossii-otnosjatsja-k-pokupke-tovarov-dlja-zhenskoj-gigieny/"
     ]
    ],
    "sum": null,
@@ -26,6 +26,63 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90706214",
+   "title": "В Кремле решили умолчать о желающих купить российское дизтопливо странах",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/15/pomolchim/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65934185",
+   "title": "#live | Леонид Эрвиц о ключевых вызовах в управлении совместными предприятиями Прямо сейчас проходит конференция Право.ru «Корпоративное право – 2026: защита активов, решений и бизнеса». ⬜️ Леонид Эрв",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "tg:LevelLegalServices",
+     "https://t.me/LevelLegalServices/1312"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
