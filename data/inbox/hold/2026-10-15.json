@@ -2,69 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d65155520",
-   "title": "«М.Видео»: по итогам девяти месяцев 2026 г. Samsung нарастил продажи смарт-часов почти на 8% в денежном выражении",
+   "draft_id": "d34933898",
+   "title": "Вологодчина закрыла 316 точек продажи вейпов",
    "date": "2026-10-15",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-15_mvideo_po_itogam_devyati"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59783757",
-   "title": "Бренд детской косметики Nomi перешёл под контроль «Гельтека»",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/brend-detskoj-kosmetiki-nomi-pereshjol-pod-kontrol-gelteka/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Потребительские товары",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20237811",
-   "title": "В России восстанавливается спрос на покупку металла после затишья на рынке",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136274"
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/vologda/2026/10/15/vologodchina-zakryla-316-tochek-prodazhi-vejpov"
     ]
    ],
    "sum": null,
@@ -82,7 +26,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
