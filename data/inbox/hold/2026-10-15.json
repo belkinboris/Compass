@@ -2,153 +2,17 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d58441683",
-   "title": "Государство национализировало еще один банк",
-   "date": "2026-10-14",
+   "draft_id": "d56626678",
+   "title": "Итоги аукциона Минфина РФ по размещению ОФЗ 14.10.2026",
+   "date": "2026-10-15",
    "src": [
     [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/310026"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1362791.php"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d13294197",
-   "title": "МГКЛ нашла инвестора для финансирования покупки банка",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/finance/articles/2026/10/15/1237169-mgkl-nashla-investora"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-15",
-     "title": "Переговоры",
-     "note": "Крупная инвестиционная компания обсуждает с топ-менеджментом группы МГКЛ («Мосгорломбард») вхождение в капитал и финансирование покупки банка и других проектов. Объем прямых инвестиций составит около 7–10 млрд руб. Об этом «Ведомостям» рассказал собеседник…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/finance/articles/2026/10/15/1237169-mgkl-nashla-investora"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46162458",
-   "title": "Дональд Трамп пытается продать СПГ Аляски",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/politics/articles/2026/10/15/1237162-tramp-pitaetsya-prodat-spg-alyaski"
-    ]
-   ],
-   "sum": "$4,4 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-15",
-     "title": "Переговоры",
-     "note": "Власти Китайской Республики на Тайване 14 октября подтвердили, что планируют инвестировать до $4,4 млрд в проект по строительству газопровода и терминала для сжиженного природного газа (СПГ) на Аляске, а затем закупать оттуда около 6 млн т в год. Первым о…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/politics/articles/2026/10/15/1237162-tramp-pitaetsya-prodat-spg-alyaski"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47566409",
-   "title": "Почти каждый пятый опрошенный перед покупкой лекарств консультируется с ИИ",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28215989"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d45645125",
-   "title": "На Камчатке задержали мужчину, пытавшегося продать карабин и патроны",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261015/muzhchina-2124599727.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -166,137 +30,13 @@
    ]
   },
   {
-   "draft_id": "d26499210",
-   "title": "Крупный инвестор обсуждает вход в капитал МГКЛ для покупки банка",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/310222"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-15",
-     "title": "Переговоры",
-     "note": "Сделку могут закрыть в четвертом квартале 2026 года или в начале 2027 года Сообщение Крупный инвестор обсуждает вход в капитал МГКЛ для покупки банка появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/310222"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d57502464",
-   "title": "Ambani’s Jio seeks to raise $3.2B in what could be India’s biggest IPO",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/14/ambanis-jio-seeks-to-raise-3-2b-in-what-could-be-indias-biggest-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d10642745",
-   "title": "Тимошенко обвинила действующие власти в продаже Украины глобальной олигархии",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/15/timoshenko-obvinila-deystvuyuschie-vlasti-v-prodazhe-ukrainy-globalnoy-oligarhii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60920487",
-   "title": "Сенатор назвал экономическую выгоду для России от ограничения продажи вейпов",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/15/senator-nazval-ekonomicheskuyu-vygodu-dlya-rossii-ot-ogranicheniya-prodazhi-veypov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20655689",
-   "title": "В 2027 году изменятся правила продажи и покупки криптовалюты",
+   "draft_id": "d30425925",
+   "title": "В Челябинске вновь пытаются продать столетний дом около вокзала. Фото",
    "date": "2026-10-15",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053136225"
+     "https://ura.news/news/1053136263"
     ]
    ],
    "sum": null,
@@ -314,18 +54,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d88343342",
-   "title": "В пермской деревне за скромную цену предлагают купить действующий бизнес по готовке роллов и пиццы",
+   "draft_id": "d84076862",
+   "title": "Многодетная мать обвинила известную общину в сектантстве: после визитов туда ее муж потребовал продать семейную квартиру",
    "date": "2026-10-15",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053136190"
+     "web:74.ru",
+     "https://74.ru/text/criminal/2026/10/15/76701124/"
     ]
    ],
    "sum": null,
@@ -344,7 +83,8 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
+    "похоже на уже описанную сделку g762669fd (общие редкие слова: кварти, обвини) — проверьте, не дубль ли"
    ]
   }
  ]
