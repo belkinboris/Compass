@@ -2,13 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d73024942",
-   "title": "«Росвексель» начал выкупать золотые слитки у частных лиц",
+   "draft_id": "d78308407",
+   "title": "Сельхозорганизации РФ в сентябре снизили продажи птицы на 4,7%, яиц - на 1,4%",
    "date": "2026-10-15",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/15/1237252-zolotie-slitki"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1122684"
     ]
    ],
    "sum": null,
@@ -23,166 +23,25 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Агро",
    "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47900633",
-   "title": "Продажи билетов концерт рэпера Navai в Москве приостановили",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28217515"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77029072",
-   "title": "В Британии не будут продавать книги Салли Руни из-за поддержки Палестины",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28217315"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84863914",
-   "title": "В Финляндии отреставрированную за 0,5 млн евро усадьбу продают в 10 раз дешевле",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/15/v-finljandii-otrestavrirovannuju"
-    ]
-   ],
-   "sum": "€0,5 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34615727",
-   "title": "Песков: вряд ли стоит говорить о странах, желающих купить российский дизель",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261015/peskov-2124660373.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52237428",
-   "title": "Продажи билетов на концерт Navai в Москве приостановили",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261015/navai--2124655988.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Продажи билетов концерт рэпера Navai в Москве приостановили» — второе издание, в группу не шлём"
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d85987457",
-   "title": "Продуктовые сети наращивают продажи БАДов на фоне роста спроса",
+   "draft_id": "d10113555",
+   "title": "В Волгоградской области продадут исторический комплекс зданий XIX века",
    "date": "2026-10-15",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/produktovye-seti-narashhivajut-prodazhi-badov-na-fone-rosta-sprosa/"
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/volgograd/2026/10/15/v-volgogradskoj-oblasti-prodadut-istoricheskij-kompleks-zdanij-xix-veka"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -197,21 +56,21 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g6c1f9d4e (общие редкие слова: зданий, компле) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d24044614",
-   "title": "В Кургане власти определят зоны, где нельзя продавать вейпы и сигареты",
+   "draft_id": "d39365669",
+   "title": "Mento VC под управлением Александра Журавлева вложился в американский стартап VideoGen . В посевном раунде на $3,3 млн участвовали Y Combinator, Rebel Fund, Lobster Capital, Stretford End Capital, Pio",
    "date": "2026-10-15",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053136355"
+     "tg:rusven",
+     "https://t.me/rusven/7789"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "$3,3 млн",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -225,34 +84,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23615171",
-   "title": "В Тюмени продают любимую гостиницу северян",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136318"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
