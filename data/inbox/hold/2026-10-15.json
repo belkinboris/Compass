@@ -2,19 +2,69 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d41403571",
-   "title": "HeadHunter предложил создать экосистему фондов для подготовки компаний к IPO",
+   "draft_id": "d28418763",
+   "title": "Салли Руни прекратит продавать книги в Британии из-за поддержки Palestine Action",
    "date": "2026-10-15",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/15/1237444-ekosistemu-fondov"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9027537"
     ]
    ],
    "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Переговоры",
+     "note": "Ирландская писательница Салли Руни договорилась с издательством Faber, что ее книги больше не будут поставляться в розничные магазины Великобритании. Это связано с риском уголовного преследования из-за поддержки писательницей организации Palestine Action…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9027537"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39435341",
+   "title": "Об уходе из России объявила ИТ-компания, удаленно проверяющая россиян на Wildberries, «Авито» и Belkacar",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-15_kompaniyazanimavshayasya_udalennymi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Переговоры",
+     "note": "В России прекращает работу ИТ-компания IDnGo, которая занималась удаленной проверкой граждан и компаний. С ее юрлицом — «Кабутек» — сотрудничали в разное время VK, Wildberries, «Авито», Belkacar. Среди партнеров компания указала «Лигу ставок», «Модульбанк»…",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-15_kompaniyazanimavshayasya_udalennymi"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -26,18 +76,17 @@
    "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13272989",
-   "title": "Путин заявил о задаче запустить новый инвестиционный цикл в России",
+   "draft_id": "d93820295",
+   "title": "Продажи билетов на сольные концерты Ларисы Долиной приостановлены",
    "date": "2026-10-15",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/economics/15/10/2026/6ad0e10d02be5980809f46b0"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28218953"
     ]
    ],
    "sum": null,
@@ -59,82 +108,52 @@
    ]
   },
   {
-   "draft_id": "d62212790",
-   "title": "Росстат отметил сокращение продажи картофеля сельхозорганизациями в сентябре",
+   "draft_id": "d51909440",
+   "title": "Квартиру насильника продали для оплаты компенсации его жертве",
    "date": "2026-10-15",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1122707"
+     "web:ria.ru",
+     "https://ria.ru/20261015/kvartira-2124762645.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d35663090",
-   "title": "Anthropic намерена привлечь $2 трлн на крупнейшем IPO в истории. Что нужно знать",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2184811/2026-10-15/anthropic-namerena-privlech-2-trln-na-krupneishem-ipo-v-istorii-chto-nuzhno-znat"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-10-15",
-     "title": "Переговоры",
-     "note": "Компания Anthropic, создавшая модель искусственного интеллекта Claude, намерена уже через месяц провести IPO. По текущим оценкам она привлечет $2 трлн и побьет рекорд SpaceX. Выход на биржу будет поворотным моментом, так как Anthropic станет первой публичной…",
+     "title": "Сделка завершена",
+     "note": "",
      "source": [
-      "web:iz.ru",
-      "https://iz.ru/2184811/2026-10-15/anthropic-namerena-privlech-2-trln-na-krupneishem-ipo-v-istorii-chto-nuzhno-znat"
+      "web:ria.ru",
+      "https://ria.ru/20261015/kvartira-2124762645.html"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "для оплаты компенсации его жертве",
+   "seller": "Квартиру насильника",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "для оплаты компенсации его жертве",
+    "seller": "Квартиру насильника"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d86770262",
-   "title": "Суд прекратил дело изъятии активов Тимура Турлова Тверской районный суд Москвы прекратил производство по иску Генпрокуратуры об обращении в доход государства имущества президента FIDE, основателя Free",
+   "draft_id": "d47030507",
+   "title": "В Москве выставили на продажу уникальный и очень дорогой BMW",
    "date": "2026-10-15",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7474"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/15/v-moskve-vystavili-na-prodazhu-unikalnyy-i-ochen-dorogoy-bmw/"
     ]
    ],
    "sum": null,
@@ -152,7 +171,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
