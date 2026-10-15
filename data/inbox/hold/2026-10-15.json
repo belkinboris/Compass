@@ -2,17 +2,57 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d41465030",
-   "title": "Готовы купить, но все еще неловко: как мужчины из регионов России относятся к покупке товаров для женской гигиены",
+   "draft_id": "d38647437",
+   "title": "Новак сообщил о планах продавать бензин низкого класса только через биржу",
    "date": "2026-10-15",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/gotovy-kupit-no-vse-eshhe-nelovko-kak-muzhchiny-iz-regionov-rossii-otnosjatsja-k-pokupke-tovarov-dlja-zhenskoj-gigieny/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/15/10/2026/6ad0b4f6c251c29afe72101a"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Переговоры",
+     "note": "Биржевая торговля топливом пониженного экологического класса должна повысить прозрачность сделок и обеспечить маркировку продукции, чтобы потребители могли отслеживать ее поставки, пояснил вице-премьер Новак",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/economics/15/10/2026/6ad0b4f6c251c29afe72101a"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d37508147",
+   "title": "IBC Real Estate: инвестиции в недвижимость Московского региона упали на 29%",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261015/investitsii-2124675909.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -23,20 +63,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d90706214",
-   "title": "В Кремле решили умолчать о желающих купить российское дизтопливо странах",
+   "draft_id": "d73170574",
+   "title": "В Уфе продолжается продажа билетов на концерт рэпера Navai",
    "date": "2026-10-15",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/15/pomolchim/"
+     "web:ria.ru",
+     "https://ria.ru/20261015/navai-2124692420.html"
     ]
    ],
    "sum": null,
@@ -54,35 +94,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65934185",
-   "title": "#live | Леонид Эрвиц о ключевых вызовах в управлении совместными предприятиями Прямо сейчас проходит конференция Право.ru «Корпоративное право – 2026: защита активов, решений и бизнеса». ⬜️ Леонид Эрв",
-   "date": "2026-10-15",
-   "src": [
-    [
-     "tg:LevelLegalServices",
-     "https://t.me/LevelLegalServices/1312"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
