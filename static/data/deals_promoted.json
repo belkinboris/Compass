@@ -237528,6 +237528,143 @@
     }
    },
    "proofread": "2026-10-15"
+  },
+  {
+   "id": "g253252c4",
+   "date": "2026-10-15",
+   "title": "Москва выставила на торги право на КРТ в Южном Тушине",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261015/vlasti-2124628420.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "46,7 млн ₽",
+    "share": "Из 29,3 тыс. кв. м застройки на жильё придётся почти 16 тыс. кв. м; оставшуюся площадь займут технопарк и здание газового хозяйства.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "46,7 млн ₽",
+   "seller": "Правительство Москвы",
+   "asset": "право заключения договора о комплексном развитии территории (КРТ) площадью 4,4 га в Южном Тушине, между улицей Фабрициуса, Походным и Цветочным проездами",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Торги объявлены",
+     "note": "Аукцион на право заключения договора о КРТ пройдёт 19 ноября 2026 года.",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261015/vlasti-2124628420.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "право заключения договора о комплексном развитии территории (КРТ) площадью 4,4 га в Южном Тушине, между улицей Фабрициуса, Походным и Цветочным проездами",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261015/vlasti-2124628420.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Правительство Москвы",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261015/vlasti-2124628420.html"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.share": []
+   },
+   "reviewed": "2026-10-15",
+   "accepted": "2026-10-15",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "орган власти, не компания; профиля не бывает (как g22d3599c)",
+     "target": "предмет сделки — право на КРТ, не компания; профиля не бывает"
+    },
+    "notes": "Покупатель не раскрыт — аукцион на право КРТ объявлен, победитель станет известен 19 ноября 2026 года; продавец (Правительство Москвы) и предмет (право на КРТ) — текстом, без профиля, как в g22d3599c."
+   },
+   "second_read": "2026-10-15",
+   "added": "2026-10-15",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "ce074f2f1d27"
+    },
+    "price": {
+     "value_rub": 46700000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "484718a44f1e"
+    },
+    "date": {
+     "value": "2026-10-15",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7ea62e7339fc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3cdcfb128368"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-15"
   }
  ],
  "companies": {
