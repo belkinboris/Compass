@@ -2,13 +2,13 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d76766057",
-   "title": "Check Point прокомментировала информацию о возможном уходе из России",
+   "draft_id": "d78308407",
+   "title": "Сельхозорганизации РФ в сентябре снизили продажи птицы на 4,7%, яиц - на 1,4%",
    "date": "2026-10-15",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28218115"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1122684"
     ]
    ],
    "sum": null,
@@ -23,9 +23,68 @@
     "asset": null,
     "seller": null
    },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d10113555",
+   "title": "В Волгоградской области продадут исторический комплекс зданий XIX века",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/volgograd/2026/10/15/v-volgogradskoj-oblasti-prodadut-istoricheskij-kompleks-zdanij-xix-veka"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g6c1f9d4e (общие редкие слова: зданий, компле) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d39365669",
+   "title": "Mento VC под управлением Александра Журавлева вложился в американский стартап VideoGen . В посевном раунде на $3,3 млн участвовали Y Combinator, Rebel Fund, Lobster Capital, Stretford End Capital, Pio",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7789"
+    ]
+   ],
+   "sum": "$3,3 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

@@ -236709,11 +236709,15 @@
     [
      "ЕГРЮЛ (Датаньютон): АО «Павловский молочный завод»",
      "https://datanewton.ru/contragents/1025202120240"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/967457"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "2 млрд ₽",
     "share": "Купил ли «Карат» юрлицо целиком или только производственный комплекс завода, стороны не уточняют — пресс-служба лишь подтвердила сам факт сделки и не раскрыла её структуру.",
     "val": "Сумму сделки «Карат» не раскрывает. Неназванный участник рынка складской и индустриальной недвижимости оценивает производственный комплекс в 1,5–2 млрд ₽. Гендиректор «INFOLine-Аналитики» Михаил Бурмистров даёт отдельную оценку самого бизнеса — не больше 400 млн ₽, а вместе с чистым долгом завода — порядка 1,5 млрд ₽.",
     "target_fin": "Выручка Павловского молочного завода за 2025 год — 3,66 млрд ₽, чистая прибыль — 29,3 млн ₽ (рентабельность около 0,8%, по оценке Бурмистрова).",
@@ -236776,11 +236780,11 @@
      "card_hash": "b4c197ce1344"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 2000000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "9673888359a6"
     },
     "date": {
      "value": "2026-10-14",
@@ -236818,12 +236822,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    },
-   "proofread": "2026-10-14"
+   "proofread": "2026-10-14",
+   "sum": "2 млрд ₽"
   },
   {
    "id": "g002710cf",
