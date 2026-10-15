@@ -2,13 +2,183 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d34933898",
-   "title": "Вологодчина закрыла 316 точек продажи вейпов",
+   "draft_id": "d73024942",
+   "title": "«Росвексель» начал выкупать золотые слитки у частных лиц",
    "date": "2026-10-15",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/vologda/2026/10/15/vologodchina-zakryla-316-tochek-prodazhi-vejpov"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/15/1237252-zolotie-slitki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47900633",
+   "title": "Продажи билетов концерт рэпера Navai в Москве приостановили",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28217515"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77029072",
+   "title": "В Британии не будут продавать книги Салли Руни из-за поддержки Палестины",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28217315"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d84863914",
+   "title": "В Финляндии отреставрированную за 0,5 млн евро усадьбу продают в 10 раз дешевле",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/15/v-finljandii-otrestavrirovannuju"
+    ]
+   ],
+   "sum": "€0,5 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34615727",
+   "title": "Песков: вряд ли стоит говорить о странах, желающих купить российский дизель",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261015/peskov-2124660373.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52237428",
+   "title": "Продажи билетов на концерт Navai в Москве приостановили",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261015/navai--2124655988.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Продажи билетов концерт рэпера Navai в Москве приостановили» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d85987457",
+   "title": "Продуктовые сети наращивают продажи БАДов на фоне роста спроса",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/produktovye-seti-narashhivajut-prodazhi-badov-na-fone-rosta-sprosa/"
     ]
    ],
    "sum": null,
@@ -28,6 +198,62 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d24044614",
+   "title": "В Кургане власти определят зоны, где нельзя продавать вейпы и сигареты",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136355"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23615171",
+   "title": "В Тюмени продают любимую гостиницу северян",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136318"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
