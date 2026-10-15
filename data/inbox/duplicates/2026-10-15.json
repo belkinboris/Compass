@@ -42,6 +42,48 @@
     "needs_review": true
    },
    "queued": "2026-10-15"
+  },
+  {
+   "key": "https://lenta.ru/news/2026/10/15/ukradennuyu-natsistami-kartinu-kandinskogo-prodali-s-auktsiona-za-tri-milliarda-rubley/::gc2abcc97",
+   "candidate_id": "gc2abcc97",
+   "reason": "общие редкие слова: миллиа, рублей",
+   "draft": {
+    "draft_id": "d55922933",
+    "title": "Украденную нацистами картину Кандинского продали с аукциона за три миллиарда рублей",
+    "date": "2026-10-15",
+    "src": [
+     [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/15/ukradennuyu-natsistami-kartinu-kandinskogo-prodali-s-auktsiona-za-tri-milliarda-rubley/"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-15",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:lenta.ru",
+       "https://lenta.ru/news/2026/10/15/ukradennuyu-natsistami-kartinu-kandinskogo-prodali-s-auktsiona-za-tri-milliarda-rubley/"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "с аукциона за три миллиарда рублей",
+    "seller": "Украденную нацистами картину Кандинского",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "с аукциона за три миллиарда рублей",
+     "seller": "Украденную нацистами картину Кандинского"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-15"
   }
  ]
 }

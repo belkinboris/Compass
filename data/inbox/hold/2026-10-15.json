@@ -2,13 +2,70 @@
  "made": "2026-10-15",
  "drafts": [
   {
-   "draft_id": "d78308407",
-   "title": "Сельхозорганизации РФ в сентябре снизили продажи птицы на 4,7%, яиц - на 1,4%",
+   "draft_id": "d41403571",
+   "title": "HeadHunter предложил создать экосистему фондов для подготовки компаний к IPO",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/15/1237444-ekosistemu-fondov"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d13272989",
+   "title": "Путин заявил о задаче запустить новый инвестиционный цикл в России",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/15/10/2026/6ad0e10d02be5980809f46b0"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62212790",
+   "title": "Росстат отметил сокращение продажи картофеля сельхозорганизациями в сентябре",
    "date": "2026-10-15",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/russia/1122684"
+     "https://www.interfax.ru/russia/1122707"
     ]
    ],
    "sum": null,
@@ -27,23 +84,34 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: рф, сентяб) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d10113555",
-   "title": "В Волгоградской области продадут исторический комплекс зданий XIX века",
+   "draft_id": "d35663090",
+   "title": "Anthropic намерена привлечь $2 трлн на крупнейшем IPO в истории. Что нужно знать",
    "date": "2026-10-15",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/volgograd/2026/10/15/v-volgogradskoj-oblasti-prodadut-istoricheskij-kompleks-zdanij-xix-veka"
+     "web:iz.ru",
+     "https://iz.ru/2184811/2026-10-15/anthropic-namerena-privlech-2-trln-na-krupneishem-ipo-v-istorii-chto-nuzhno-znat"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-15",
+     "title": "Переговоры",
+     "note": "Компания Anthropic, создавшая модель искусственного интеллекта Claude, намерена уже через месяц провести IPO. По текущим оценкам она привлечет $2 трлн и побьет рекорд SpaceX. Выход на биржу будет поворотным моментом, так как Anthropic станет первой публичной…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2184811/2026-10-15/anthropic-namerena-privlech-2-trln-na-krupneishem-ipo-v-istorii-chto-nuzhno-znat"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -56,21 +124,21 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g6c1f9d4e (общие редкие слова: зданий, компле) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d39365669",
-   "title": "Mento VC под управлением Александра Журавлева вложился в американский стартап VideoGen . В посевном раунде на $3,3 млн участвовали Y Combinator, Rebel Fund, Lobster Capital, Stretford End Capital, Pio",
+   "draft_id": "d86770262",
+   "title": "Суд прекратил дело изъятии активов Тимура Турлова Тверской районный суд Москвы прекратил производство по иску Генпрокуратуры об обращении в доход государства имущества президента FIDE, основателя Free",
    "date": "2026-10-15",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7789"
+     "tg:dealsma",
+     "https://t.me/dealsma/7474"
     ]
    ],
-   "sum": "$3,3 млн",
-   "type": "Инвестиция",
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
