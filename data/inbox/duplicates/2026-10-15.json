@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-15",
+ "items": [
+  {
+   "key": "https://mergers.ru/news/Gosudarstvo-prodalo-67-pererabotchika-cinka-i-svinca-Dalpolimetall-87647::gbe13372d",
+   "candidate_id": "gbe13372d",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d70411500",
+    "title": "Государство продало 67% переработчика цинка и свинца «Дальполиметалл»",
+    "date": "2026-10-15",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Gosudarstvo-prodalo-67-pererabotchika-cinka-i-svinca-Dalpolimetall-87647"
+     ]
+    ],
+    "sum": "553,74 млн ₽",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-15",
+      "title": "Сделка завершена",
+      "note": "АО «Русская промышленная компания» (РПК) признано победителем торгов по продаже 67% акций ГМК «Дальполиметалл», производителя цинкового и свинцового концентратов с содержанием серебра в Приморском крае. РПК стала единственным участником торгов, предложив…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Gosudarstvo-prodalo-67-pererabotchika-cinka-i-svinca-Dalpolimetall-87647"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "67% переработчика цинка и свинца «Дальполиметалл»",
+    "seller": "Государство",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "67% переработчика цинка и свинца «Дальполиметалл»",
+     "seller": "Государство"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-15"
+  }
+ ]
+}
