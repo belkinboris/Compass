@@ -84,6 +84,48 @@
     "needs_review": true
    },
    "queued": "2026-10-15"
+  },
+  {
+   "key": "https://1prime.ru/20261015/independent-874307711.html::gd76643b6",
+   "candidate_id": "gd76643b6",
+   "reason": "общие редкие слова: 400, продал",
+   "draft": {
+    "draft_id": "d67412733",
+    "title": "Книгу о Гарри Поттере с ошибками продали на аукционе за 400 тысяч долларов",
+    "date": "2026-10-15",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261015/independent-874307711.html"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-15",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261015/independent-874307711.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Книгу о Гарри Поттере с ошибками",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Книгу о Гарри Поттере с ошибками"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-15"
   }
  ]
 }
