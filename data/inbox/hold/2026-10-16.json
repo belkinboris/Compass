@@ -2,17 +2,17 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d25823532",
-   "title": "📌 МГКЛ после IPO: розничная сеть выросла почти вдвое — до 215 отделений",
+   "draft_id": "d79876018",
+   "title": "Долгострой в Шлиссельбурге выставили на торги за 161 млн рублей",
    "date": "2026-10-16",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/mgkl/blog/1363333.php"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/16/dolgostroj-v-shlisselburge"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -23,7 +23,35 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27364423",
+   "title": "«Это однозначный вред здоровью»: большинство пермяков выступили за запрет продажи вейпов молодежи",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053136650"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
