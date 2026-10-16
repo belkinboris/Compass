@@ -25,7 +25,9 @@ Guess, цена здания делилась на прибыль продавц
 from __future__ import annotations
 
 import argparse
+import http.cookiejar
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -71,17 +73,40 @@ def get_json(base: str, path: str, data: dict | None = None, timeout: int = 90):
         return json.loads(r.read().decode('utf-8'))
 
 
+def _served_base(base: str) -> tuple[dict, str]:
+    """База, которую отдаёт сайт. С 16 октября 2026 — через api/data/... со
+    служебным ключом (scrape_guard.py); старый публичный адрес — запасной,
+    пока на сервере код до этой правки."""
+    key = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    # Без ключа — как браузер: сначала страница (она ставит cookie с
+    # токеном), потом база с этим cookie.
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+    try:
+        opener.open(urllib.request.Request(base + '/', headers=UA), timeout=60).read()
+    except Exception:  # noqa: BLE001
+        pass
+    last = None
+    for path in ('/api/data/deals_promoted.json', '/static/data/deals_promoted.json'):
+        req = urllib.request.Request(base + path, headers=dict(UA, **({'X-Data-Key': key} if key else {})))
+        try:
+            with opener.open(req, timeout=180) as r:
+                return json.loads(r.read().decode('utf-8')), path
+        except Exception as e:  # noqa: BLE001
+            last = e
+    raise last
+
+
 def check_data_is_current(base: str, p: Protocol) -> None:
     """Сайт показывает ту же базу, что лежит в репозитории: иначе остальные
     сценарии проверяют вчерашние данные (база подтягивается из main раз в
     несколько минут, а после деплоя откатывается к версии ветки сборки)."""
     try:
-        served = get_json(base, '/static/data/deals_promoted.json', timeout=180)
+        served, path = _served_base(base)
     except Exception as e:  # noqa: BLE001
-        p.add('База на сайте совпадает с репозиторием', False, base + '/static/data/deals_promoted.json', f'ошибка: {e}')
+        p.add('База на сайте совпадает с репозиторием', False, base + '/api/data/deals_promoted.json', f'ошибка: {e}')
         return
     same = len(served['deals']) == len(DEALS) and set(served.get('merged', {})) >= set(BASE_DATA.get('merged', {}))
-    p.add('База на сайте совпадает с репозиторием', same, base + '/static/data/deals_promoted.json',
+    p.add('База на сайте совпадает с репозиторием', same, base + path,
           f"на сайте {len(served['deals'])} сделок, в репозитории {len(DEALS)}")
 
 

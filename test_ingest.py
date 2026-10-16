@@ -7894,3 +7894,15 @@ def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_pat
     assert written["telegram_last_post_at"] and len([v for v in written["telegram_posts"].values() if v]) == 2
     # Один пост и давно не было постов — уходит сразу, без паузы.
     assert send_telegram.gap_wait_s("2026-01-01T00:00:00+00:00") == 0
+
+
+def test_reworded_target_finances_are_not_news_for_the_channel():
+    """Пересказ карточки (16 октября 2026) переставил числа в финансах
+    покупаемой компании — публикация собиралась править 19 постов шапкой
+    «Новое о сделке · уточнены финансы», хотя нового ничего. Те же числа в
+    другом порядке — не новость; новое число — новость."""
+    import send_telegram
+    assert send_telegram._same_numbers('выручка 711,7 млн, прибыль 94,3 млн (2025)',
+                                       'За 2025 год прибыль 94,3 млн при выручке 711,7 млн')
+    assert not send_telegram._same_numbers('выручка 711,7 млн', 'выручка 711,7 млн, 200 сотрудников')
+    assert not send_telegram._same_numbers('', 'выручка 5 млн')

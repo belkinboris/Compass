@@ -84,6 +84,7 @@ message_id в `telegram_posts` (не `null`) И которая попала в
         # отправленными: следующий прогон покажет их снова.
 """
 import json
+import re
 import os
 import sys
 import time
@@ -408,11 +409,24 @@ def card_changes_since_post(deals, posts, realty_posts, post_state):
         now_fin = (deal.get('eco') or {}).get('target_fin')
         if format_post.has(now_fin) and not format_post.has(was_fin):
             found.append('добавлены финансы покупаемой компании')
-        elif format_post.has(now_fin) and now_fin != was_fin:
+        elif format_post.has(now_fin) and now_fin != was_fin and not _same_numbers(was_fin, now_fin):
             found.append('уточнены финансы покупаемой компании')
         if found:
             out[did] = found
+        elif before != post_snapshot(deal):
+            # Текст переписан теми же фактами (пересказ карточки, 16 октября
+            # 2026): новостью это не считается — пост не трогаем, иначе у
+            # старой сделки появляется шапка «Новое о сделке · уточнены
+            # финансы», хотя нового ничего. Запоминаем новое состояние.
+            post_state[did] = post_snapshot(deal)
     return out
+
+
+def _same_numbers(was, now):
+    """Те же числа (порядок не важен — пересказ меняет порядок мысли) —
+    значит, изменилась только формулировка, а не факты."""
+    nums = lambda t: sorted(re.findall(r'\d+(?:[.,]\d+)?', str(t or '')))
+    return bool(nums(now)) and nums(was) == nums(now)
 
 def load_today_updates():
     """{deal_id: [изменения]} из самого свежего файла data/inbox/updates/."""
@@ -893,11 +907,24 @@ def deals_missing_on_site(deal_ids):
     site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
     try:
         import httpx
-        r = httpx.get('%s/static/data/deals_promoted.json' % site,
-                      params={'nocache': os.getpid()}, timeout=30)
-        if r.status_code != 200:
+        # С 16 октября 2026 база отдаётся сайтом через api/data/... и только
+        # своим (scrape_guard.py): рутина предъявляет служебный ключ — тот же
+        # MODERATION_TOKEN, что у моста решений. Старый адрес — запасной, на
+        # время, пока на сервере код до этой правки.
+        key = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+        hdrs = {'X-Data-Key': key} if key else {}
+        # Старый сервер на новый адрес отвечает страницей сайта (200, HTML) —
+        # поэтому годится только ответ, который разбирается как база.
+        base = None
+        for path in ('/api/data/deals_promoted.json', '/static/data/deals_promoted.json'):
+            r = httpx.get(site + path, params={'nocache': os.getpid()},
+                          headers=hdrs, timeout=30)
+            if r.status_code == 200 and 'json' in r.headers.get('content-type', ''):
+                base = r.json()
+                break
+        if base is None:
             return set()
-        live = {d.get('id') for d in r.json().get('deals', [])}
+        live = {d.get('id') for d in base.get('deals', [])}
     except Exception as e:                                    # noqa: BLE001
         print('Не удалось спросить сайт, какие карточки он уже отдаёт (%s) — '
               'шлём как есть.' % e)

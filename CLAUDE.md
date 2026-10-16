@@ -121,6 +121,7 @@ finance/                      финмодель (книга Excel, двойни
 | `docs/user_notes.md` | приём правок от посетителей сайта |
 | `docs/disclosure_sources.md` | e-disclosure, ленты раскрытия, реестр ЦБ |
 | `docs/sources_legal.md` | право на чужие материалы и защита нашей базы: дословность, агрегаторы, запреты источников, судебная практика |
+| `docs/scraping_protection.md` | защита базы от копирования: отдача базы по токену (`scrape_guard.py`), лимиты частоты, водяные знаки, мониторинг |
 | `docs/documents.md` | правите сами документы: где что лежит, потолки, как чистить |
 
 **Ищутся, а не читаются:** `KNOWN_ISSUES.md` (баги: симптом, причина, чем
@@ -148,7 +149,7 @@ finance/                      финмодель (книга Excel, двойни
 
 ```bash
 uvicorn main:app --reload            # http://127.0.0.1:8000
-python3 -m pytest -q                 # 1430 passed, 35 skipped, 15 xfailed (≈10 мин: интерфейс — самое долгое)
+python3 -m pytest -q                 # 1431 passed, 35 skipped, 15 xfailed (≈10 мин: интерфейс — самое долгое)
 python3 -m pytest test_data.py -q    # только инварианты базы, без браузера (0,1 с)
 ```
 
@@ -186,7 +187,7 @@ br = await p.chromium.launch(executable_path="/opt/pw-browsers/chromium")
 
 ## Обязательная проверка перед коммитом
 
-1. `python3 -m pytest -q` — 1430 passed, 35 skipped, 15 xfailed (14 октября 2026). Инварианты базы и дымовые тесты интерфейса
+1. `python3 -m pytest -q` — 1431 passed, 35 skipped, 15 xfailed (15 октября 2026). Инварианты базы и дымовые тесты интерфейса
    теперь живут в `test_data.py` и `test_ui.py`, а не в одноразовых скриптах.
 2. **Семантический diff JSON**, а не глазами по строкам: сравнить с `HEAD` и
    убедиться, что изменились только те поля, которые собирались менять, а состав
