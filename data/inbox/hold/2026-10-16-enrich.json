@@ -136,6 +136,15 @@
    "reasons": [
     "слабое совпадение: общие слова заголовка: 3"
    ]
+  },
+  {
+   "news": "https://rb.ru/news/vladimir-putin-peredal-pod-vremennoe-upravlenie-aktivy-pyati-zarubezhnyh-kompanij-sredi-nih-tarkett-i-ontex/",
+   "title": "Владимир Путин передал под временное управление активы пяти зарубежных компаний: среди них — Tarkett и Ontex",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
   }
  ]
 }
