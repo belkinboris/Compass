@@ -145,6 +145,11 @@ def card_message(card, companies=None):
         # У СП нет покупателя: участники равноправны (Яндекс/VK, 8 октября 2026).
         names, subject = format_post.jv_participants(card, companies or {})
         sides = field('Участники СП', ' и '.join(names)) + field('Предмет', subject)
+    elif format_post.is_custody(card):
+        # Временное управление (владелец, 16 октября 2026): не покупатель и
+        # продавец, а управляющий и собственник — и только если названы.
+        sides = (field('Временный управляющий', buyer) + field('Собственник', seller)
+                 + field('Предмет', asset))
     channel = '' if goes_to_channel(card) else _channel_gate_line(card)
     return ('🗂 [карточка %s] — НА САЙТ, на проверку\n'
             '%s\n\n'
@@ -170,16 +175,35 @@ def post_message_text(card, companies, rendered=None):
     чтобы его не пересчитывать дважды (вызывающий сохраняет тот же текст в
     `post_preview`, см. `build_plan()`)."""
     buttons = format_post.buttons_preview(card)
-    text = rendered if rendered is not None else format_post.render(card, companies)
+    text = rendered if rendered is not None else draft_post_text(card, companies)
+    joint = ''
+    if format_post.is_joint_post(card):
+        # Общий пост на несколько карточек (решение владельца 16 октября
+        # 2026, указ № 738): одобряя его, владелец должен видеть, что
+        # отдельных постов по этим карточкам не будет.
+        joint = ('Это ОБЩИЙ пост на %d карточек; отдельных постов по ним не будет — '
+                 'прежние проекты постов по этим карточкам больше не действуют. '
+                 'Карточки выходят на сайт как обычно.\n' % len(card['post_covers']))
     # Сообщение уходит с разметкой (`send_one(..., html=True)`): пост уже
     # HTML, а шапку и строку кнопок экранируем сами. Куда уйдёт пост —
     # основной канал, канал недвижимости или оба, — решает `channels.py`.
     return ('📣 [пост %s] — %s, на проверку\n'
-            'Ниже — текст поста как он уйдёт подписчикам. Ответ на это '
+            '%sНиже — текст поста как он уйдёт подписчикам. Ответ на это '
             'сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n'
             '━━━━━━━━━━━━\n%s%s'
-            % (format_post.esc(card['id']), channels.destination(card), text,
+            % (format_post.esc(card['id']), channels.destination(card), format_post.esc(joint), text,
                '\n\n' + format_post.esc(buttons) if buttons else ''))
+
+
+def draft_post_text(card, companies, fin=None):
+    """Текст проекта поста — тот, что уйдёт в канал. Если у карточки уже есть
+    текст поста, заданный заранее (`post_override`: общий пост на несколько
+    карточек, 16 октября 2026), показывается он — ровно так, как его соберёт
+    `send_telegram.initial_post_text`; иначе — автоформат."""
+    if card.get('post_override'):
+        return format_post.with_card_link(
+            format_post.strip_platform_links(card['post_override']), card)
+    return format_post.render(card, companies, fin=fin)
 
 
 def raw_message(draft):
@@ -457,7 +481,7 @@ def build_plan():
                 fin = send_telegram.build_fin(card, {}, None)
             except Exception:                                    # noqa: BLE001
                 fin = {}
-            rendered = format_post.render(card, comps, fin=fin or None)
+            rendered = draft_post_text(card, comps, fin=fin or None)
             card['_pending_post_preview'] = rendered
             plan.append((post_message_text(card, comps, rendered=rendered), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))

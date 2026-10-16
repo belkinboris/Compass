@@ -1899,3 +1899,46 @@ def test_every_pending_card_has_pending_since():
     cards = json.load(open(ROOT / "static" / "data" / "pending.json", encoding="utf-8"))["cards"]
     missing = [c["id"] for c in cards if not c.get("pending_since")]
     assert not missing, missing
+
+
+# Закрытый список типов сделки. Новый тип добавляется сюда вместе с сайтом
+# (`dealKindOf` в static/index.html), постом (`format_post._kind_from_type`,
+# `TYPE_TAGS`) и притоком (`draft.TYPE_RULES`, `review.TYPE_WORDS`) — иначе
+# фильтр «Тип сделки» покажет ярлык, которому никто не назначил роли сторон.
+DEAL_TYPES = {"M&A", "Инвестиция", "Продажа с торгов", "IPO", "Создание СП", "Реорганизация",
+              "Финансирование · структурная сделка", "Продажа недвижимости",
+              "Временное управление"}
+
+
+def _all_cards(base):
+    pending = json.load(open(ROOT / "static" / "data" / "pending.json", encoding="utf-8"))["cards"]
+    return list(base["deals"]) + list(pending)
+
+
+def test_deal_type_is_from_the_known_list(base):
+    """Тип сделки — из закрытого списка (база и очередь модерации)."""
+    bad = [(d["id"], d.get("type")) for d in _all_cards(base) if d.get("type") not in DEAL_TYPES]
+    assert not bad, bad
+
+
+def test_temporary_management_has_no_buyer_or_seller(base):
+    """Временное управление по указу — тип «Временное управление» (решение
+    владельца 16 октября 2026): собственник не меняется, покупателя и
+    продавца нет — поля сторон пусты, причина в `no_parties`, управляющий и
+    собственник — в прозе карточки."""
+    bad = []
+    for d in _all_cards(base):
+        if d.get("type") != "Временное управление":
+            continue
+        named = [f for f in ("buyer", "buyer_name", "seller", "seller_id") if d.get(f)]
+        if named or not str(d.get("no_parties") or "").strip():
+            bad.append((d["id"], named or "нет no_parties"))
+    assert not bad, bad
+
+
+def test_temporary_management_is_not_typed_as_ma(base):
+    """Заголовок «переданы во временное управление» при типе «M&A» — тот
+    самый случай, который владелец 16 октября 2026 вывел из M&A."""
+    rx = re.compile(r"(?:во?|под)\s+временн\w+\s+управлени", re.I)
+    bad = [d["id"] for d in _all_cards(base) if d.get("type") == "M&A" and rx.search(d.get("title") or "")]
+    assert not bad, bad

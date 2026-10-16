@@ -3121,10 +3121,10 @@ function companyRole(d, id){
   // блоке «Финансовый контекст» карточки Яндекс/VK, 8 октября 2026). Тот же
   // ключ, что у плашки карточки (`kindKey`): тип, а при обычной покупке — `kind`.
   const jv = kind === "jv" || (kind === "acquisition" && d.kind === "jv");
-  const roles = reorg ? reorgRoles(d) : null;
-  if(d.buyer===id) return reorg ? roles.a : jv ? "Участник СП" : "Покупатель";
+  const roles = reorg ? reorgRoles(d) : isCustody(d) ? CUSTODY_ROLES : null;
+  if(d.buyer===id) return roles ? roles.a : jv ? "Участник СП" : "Покупатель";
   if(d.seller_id===id) return "Продавец";
-  if(d.target===id || d.asset_id===id) return reorg ? roles.b : jv ? "Участник СП" : "Предмет сделки";
+  if(d.target===id || d.asset_id===id) return roles ? roles.b : jv ? "Участник СП" : "Предмет сделки";
   return "";
 }
 /* Профиль без единой сделки. Такие профили появились из разбора сторон: в тексте
@@ -4941,6 +4941,7 @@ const KIND_BADGE_META = {
   jv:          {label:"СП", cls:"badge-jv"},
   ipo:         {label:"IPO", cls:"badge-ipo"},
   reorg:       {label:"Реорганизация", cls:"badge-reorg"},
+  custody:     {label:"Временное управление", cls:"badge-reorg"},
 };
 /* Разметка строки ленты — снаружи функции отбора: ею пользуется
    unifiedFeed(), а сама функция отбора теперь возвращает записи. */
@@ -5751,7 +5752,11 @@ const KIND_LABELS = {
      только может быть предмет и бывший владелец и новый владелец». d.kind
      выставляется вручную (см. buyerRole/targetRole/dealPlate ниже) — из строки
      type это не вывести, «M&A» здесь формально верно, но ролей не называет. */
-  custody:     {a:"Временный управляющий",b:"Актив под управлением",empty:"Управляющий не раскрыт",arrow:true},
+  /* С 16 октября 2026 (решение владельца) у временного управления свой тип
+     сделки — «Временное управление»: собственник не меняется, сторон у
+     карточки нет (buyer/seller пусты, причина — в no_parties), управляющий
+     и собственник названы в прозе. Пустая шапка — не «не раскрыт». */
+  custody:     {a:"Временный управляющий",b:"Актив под управлением",empty:"",arrow:true},
 };
 function dealKindOf(typeStr){
   const t = (typeStr||"").toLowerCase();
@@ -5771,6 +5776,10 @@ function dealKindOf(typeStr){
   // общество, прекращающее существование в его пользу. Проверяем ДО
   // «acquisition», иначе карточка получила бы ярлыки «Покупатель»/«Продавец».
   if(/реорганизац/.test(t)) return "reorg";
+  // ВРЕМЕННОЕ УПРАВЛЕНИЕ по указу (тип «Временное управление», решение
+  // владельца 16 октября 2026) — не покупка: собственник не меняется,
+  // государство передаёт только управление.
+  if(/временн[а-яё]* управлен/.test(t)) return "custody";
   if(/финансирован|венчурн|раунд|\bseed\b|допэмисси/.test(t)) return "financing";
   return "acquisition";
 }
@@ -6343,7 +6352,7 @@ const reorgRoles = d => REORG_ROLES[d.reorg_form] || {a:"Правопреемн�
 /* Национализация/временное управление — тоже своя пара ролей, и тоже не
    выводится из типа сделки (type остаётся «M&A», как и для обычной покупки):
    различает только явно проставленный d.kind (см. KIND_LABELS.custody). */
-const isCustody = d => d.kind === "custody" && dealKindOf(d.type) === "acquisition";
+const isCustody = d => dealKindOf(d.type) === "custody" || (d.kind === "custody" && dealKindOf(d.type) === "acquisition");
 const CUSTODY_ROLES = {a:"Временный управляющий", b:"Актив под управлением"};
 const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : isCustody(d) ? CUSTODY_ROLES.a : "Покупатель";
 const targetRole = d => isReorg(d) ? reorgRoles(d).b : isCustody(d) ? CUSTODY_ROLES.b : "Предмет сделки";
@@ -6830,22 +6839,27 @@ function renderDeal(id, qs, previewCard){
          описан для допэмиссии cash-in в правилах проекта). */
       if(kindKey==="custody"){
         if(!buyerName && !d.buyer_name && !targetName && !d.asset) return "";
+        /* Тип «Временное управление» (16 октября 2026): управляющий — не
+           сторона карточки, он назван в тексте. Пустой бокс «Не раскрыт»
+           выдал бы его за забытое поле — рисуем только то, что названо. */
         const managerBox = buyerName
           ? party(buyerRole(d), d.buyer, buyerName)
           : d.buyer_name
             ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">${d.buyer_name}</span></div>`
-            : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
+            : "";
         const custodyAssetName = targetName || d.asset || "";
         const assetBox = custodyAssetName
           ? (targetName
               ? party(targetRole(d), d.target, targetName)
               : `<div class="dp-party"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">${custodyAssetName}</span></div>`)
-          : `<div class="dp-party is-empty"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
+          : "";
+        if(!managerBox) return assetBox ? `<div class="deal-plate"><span class="label">Под временным управлением</span>
+          <div class="dp-row">${assetBox}</div></div>` : "";
         return `<div class="deal-plate"><span class="label">Структура сделки</span>
           <div class="dp-row">
             ${managerBox}
             <div class="dp-link"><span class="dp-arrow"></span></div>
-            ${assetBox}
+            ${assetBox || `<div class="dp-party is-empty"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`}
           </div></div>`;
       }
       if(!kind.arrow) return "";
@@ -7038,6 +7052,18 @@ function renderDeal(id, qs, previewCard){
           ${advNoteHtml(it.raw?it.raw[2]:it.note)}
         </div>`).join("")}`
       : lawEmptyHtml(d);
+    /* У временного управления по указу цены нет по природе — это не продажа
+       (решение владельца 16 октября 2026); «Сумма: не раскрыта» выдала бы
+       отсутствующую величину за скрытую. */
+    else if(isCustody(d) && !has(d.sum)) f.innerHTML = `
+      ${dealPlate()}
+      ${factsVerifiedHtml(d)}
+      ${dealTeam()}
+      ${specBlock([
+        para("Как устроена сделка", d.law && d.law.struct),
+        specRow("Предмет", assetNamed ? "" : (d.eco && d.eco.share)),
+        specRow("Статус", d.status),
+      ])}`;
     else f.innerHTML = `
       ${hero(isListing(d)?"Начальная цена лота":"Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
       ${sumState(d.sum)==="undisclosed"
