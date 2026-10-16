@@ -2,56 +2,17 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d21400742",
-   "title": "Visiology завершил инвестиционный раунд объемом 200 млн рублей",
+   "draft_id": "d88215515",
+   "title": "Американские университеты рекордно заработали на инвестициях в фондовый рынок",
    "date": "2026-10-16",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
-    ]
-   ],
-   "sum": "200 млн ₽",
-   "type": "Инвестиция",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-16",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24421356",
-   "title": "АТОР опровергла сообщения о распродаже туров в Анталью из-за ливней",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ad1e69ce62d20cde8f51e6d"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9040340"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -62,20 +23,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Образование",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d89280847",
-   "title": "Aurus начинает продажи рестайлингового флагманского седана Senat",
+   "draft_id": "d95418765",
+   "title": "Orion soft: бизнес выбирает оптимизацию вместо покупки оборудования",
    "date": "2026-10-16",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1122955"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-16_orion_soft_biznes_vybiraet_optimizatsiyu"
     ]
    ],
    "sum": null,
@@ -98,41 +60,13 @@
    ]
   },
   {
-   "draft_id": "d21487296",
-   "title": "Сенатор Гибатдинов: Киев продает будущее страны, защищая движение ЛГБТ",
+   "draft_id": "d31408734",
+   "title": "Россияне лидировали по приобретению жилья в Турции в сентябре",
    "date": "2026-10-16",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/politika/28221661"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "будущее страны, защищая движение ЛГБТ",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "будущее страны, защищая движение ЛГБТ",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d13500041",
-   "title": "Венгрия вернулась на второе место по покупкам природного газа у России",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261016/vengrija-874332981.html"
+     "https://tass.ru/nedvizhimost/28222361"
     ]
    ],
    "sum": null,
@@ -154,13 +88,109 @@
    ]
   },
   {
-   "draft_id": "d26150052",
-   "title": "На Украине полицейские похитили человека и требовали выкуп у его семьи",
+   "draft_id": "d77777455",
+   "title": "НДС при покупке зарубежных нейросетей: правило простое, а схема приобретения нет",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/learn/shtraf-za-zakupku-neirosetey/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17552640",
+   "title": "Китайские миллиардеры начали распродавать акции из-за налоговых проверок",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/kitajskie-milliardery-nachali-rasprodavat-aktsii-iz-za-nalogovyh-proverok/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-16",
+     "title": "Переговоры",
+     "note": "Китайские миллионеры и миллиардеры пересматривают способы хранения своих состояний на фоне усиления налогового контроля. Одни продают пакеты акций, другие закрывают офшорные трасты, а некоторые меняют статус проживания. Причина — новые требования Пекина к…",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/kitajskie-milliardery-nachali-rasprodavat-aktsii-iz-za-nalogovyh-proverok/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d85217707",
+   "title": "СМИ: инвестиции в площадки под жилье в России выросли в 2026 г почти на 40%",
    "date": "2026-10-16",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261016/ukraina-2124912740.html"
+     "https://ria.ru/20261016/developery-2124925358.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31022919",
+   "title": "Американская блокада не помешала Ирану продавать энергоносители",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/16/amerikanskaya-blokada-ne-pomeshala-iranu-prodavat-energonositeli/"
     ]
    ],
    "sum": null,
@@ -182,13 +212,13 @@
    ]
   },
   {
-   "draft_id": "d33881483",
-   "title": "В России зафиксировали рекордные продажи суббренда Changan",
+   "draft_id": "d33767062",
+   "title": "В России впервые упали продажи одного автомобильного сегмента",
    "date": "2026-10-16",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/16/v-rossii-zafiksirovali-rekordnye-prodazhi-subbrenda-changan/"
+     "https://lenta.ru/news/2026/10/16/v-rossii-vpervye-upali-prodazhi-odnogo-avtomobilnogo-segmenta/"
     ]
    ],
    "sum": null,
@@ -210,13 +240,13 @@
    ]
   },
   {
-   "draft_id": "d74916667",
-   "title": "Уходящему из России банку разрешили купить второй по величине банк Германии",
+   "draft_id": "d32753242",
+   "title": "Щекур, язь, щука: как недорого купить свежую рыбу по объявлениям в ЯНАО",
    "date": "2026-10-16",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/16/uhodyaschemu-iz-rossii-banku-razreshili-kupit-vtoroy-po-velichine-bank-germanii/"
+     "web:ura.news",
+     "https://ura.news/articles/1053136732"
     ]
    ],
    "sum": null,
@@ -231,7 +261,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
