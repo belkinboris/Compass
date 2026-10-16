@@ -2683,24 +2683,71 @@ def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_u
             ctx.close()
 
 
-def test_agreement_and_privacy_pages_are_off_until_the_owner_reads_them(page, base_url):
-    """Владелец 7 октября 2026: «уберите пока политику конфиденциальности и
-    пользовательское соглашение, мы завтра нормально вычитаем и новое
-    запустим». Черновики остаются в коде (`LEGAL_DOCS`), выключены
-    переключателем `legalPagesOn()`: ссылок в подвале не видно, а старый
-    адрес #/legal/terms открывает обычную ленту, а не черновик."""
+def test_agreement_privacy_and_consent_are_published(page, base_url):
+    """Владелец 16 октября 2026: «обнови наши соглашения и политики, сделай
+    их не черновым вариантом, а нормальным, и опубликуй» (сняты были
+    7 октября до вычитки). Ссылки снова в подвале, три страницы открываются,
+    в них реквизиты оператора из выписки ЕГРЮЛ и нет следов черновика."""
     visit(page, base_url, "#/")
     links = page.evaluate("""() => [...document.querySelectorAll('footer a')]
       .filter(a => a.offsetParent !== null).map(a => a.textContent.trim())""")
-    assert not any("соглашение" in t or "персональных" in t for t in links), links
-    for kind in ("terms", "privacy"):
+    assert "Пользовательское соглашение" in links, links
+    assert "Политика обработки персональных данных" in links, links
+    for kind, title in (("terms", "Пользовательское соглашение"),
+                        ("privacy", "Политика обработки персональных данных"),
+                        ("consent", "Согласие на обработку персональных данных")):
         visit(page, base_url, f"#/legal/{kind}")
-        state = page.evaluate("""() => ({
-          legal: !!document.querySelector('.legal-page'),
-          title: (document.querySelector('#app h1') || {}).textContent || '',
+        page.wait_for_selector(".legal-page", timeout=10000)
+        assert page.inner_text("#app h1").strip() == title
+        text = page.inner_text(".legal-page")
+        assert "1267700327520" in text and "9707061685" in text, kind
+        assert "projectzarya@yandex.ru" in text, kind
+        assert not re.search(r"черновик|заполнит владелец|\[", text, re.I), kind
+    visit(page, base_url, "#/legal/terms")
+    terms = page.inner_text(".legal-page")
+    assert "1334" in terms and "автоматически собирать" in terms
+
+
+def test_registration_asks_for_a_separate_consent(page, base_url):
+    """Согласие на обработку данных — отдельной галочкой (152-ФЗ с 1 сентября
+    2025: согласие не смешивается с другими документами); без неё форма не
+    отправляется. Соглашение — строкой со ссылкой под кнопкой."""
+    visit(page, base_url, "#/account")
+    page.click("#toRegister")
+    box = page.locator("#regConsent")
+    assert box.count() == 1 and not box.is_checked()
+    assert box.get_attribute("required") is not None
+    form = page.inner_text("#registerForm")
+    assert "согласие на обработку персональных данных" in form
+    assert "Пользовательское соглашение" in form
+    assert page.locator('#registerForm a[href="#/legal/consent"]').count() == 1
+    assert page.locator('#registerForm a[href="#/legal/terms"]').count() == 1
+
+
+def test_deal_tab_sections_sit_in_their_own_boxes(page, base_url):
+    """Владелец 16 октября 2026: «верни прямоугольники во вкладках Обзор,
+    Экономист, Юрист как раньше были» — каждый раздел вкладки в своей рамке
+    (как .fact в первой версии карточки), абзацы — во всю ширину."""
+    import json as _json
+    base = _json.loads(Path("static/data/deals_promoted.json").read_text(encoding="utf-8"))
+    ids = {d["id"] for d in base["deals"]}
+    # Petropavlovsk/УГМК: все три вкладки заполнены (сумма, оценка, контекст,
+    # согласования, юристы).
+    deal_id = "g3cc2009d" if "g3cc2009d" in ids else base["deals"][0]["id"]
+    visit(page, base_url, "#/deal/" + deal_id)
+    page.wait_for_selector("#facts", timeout=15000)
+    for lens in ("eco", "law"):
+        if not page.locator(f'[data-l="{lens}"]').count():
+            continue
+        page.click(f'[data-l="{lens}"]')
+        page.wait_for_timeout(500)
+        rows = page.evaluate("""() => [...document.querySelectorAll('#facts .spec-row')].map(r => {
+            const s = getComputedStyle(r);
+            return {border: s.borderTopWidth, bg: s.backgroundColor, label: r.querySelector('.label').textContent};
         })""")
-        assert not state["legal"], (kind, state)
-        assert "Политика" not in state["title"] and "соглашение" not in state["title"], state
+        assert rows, lens
+        for r in rows:
+            assert r["border"] == "1px" and r["bg"] == "rgb(255, 255, 255)", (lens, r)
 
 
 def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
@@ -3272,6 +3319,7 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
         pg.fill("#gateRegEmail", email)
         pg.fill("#gateRegPassword", "password-123")
         pg.fill("#gateRegPasswordConfirm", "password-123")
+        pg.check("#gateRegConsent")  # согласие на обработку данных — отдельной галочкой
         pg.click("#gateRegisterForm button[type=submit]")
         pg.wait_for_selector("#gateDone", timeout=10000)
         assert "Заявка отправлена" in pg.inner_text("#gateCard")
