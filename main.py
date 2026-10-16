@@ -42,6 +42,7 @@ import data_refresh
 import deal_catalog
 import deal_multiples
 import notification_service
+import scrape_guard
 import telegram_endpoint
 import subscription_feed
 from company_catalog import get_company_profile, load_company_catalog
@@ -98,8 +99,87 @@ def robots_txt():
     body = ("User-agent: *\n"
             "Disallow: /static/data/\n"
             "Disallow: /api/\n"
+            "Disallow: /api/data/\n"
             "Allow: /\n")
     return Response(body, media_type="text/plain; charset=utf-8")
+
+
+# --------------------------------------------------------------------------
+# Защита базы от лёгкого скачивания (16 октября 2026, scrape_guard.py,
+# docs/scraping_protection.md). Выключатель — SCRAPE_GUARD=0.
+# --------------------------------------------------------------------------
+@app.middleware("http")
+async def scrape_guard_middleware(request: Request, call_next):
+    if not scrape_guard.enabled():
+        return await call_next(request)
+    path = request.url.path
+    # Старый публичный адрес базы закрыт снаружи. Сервер, тесты и скрипты
+    # pipeline читают файл С ДИСКА — их это не касается. Служебный ключ
+    # пускает и сюда: рутины со старым кодом не должны ослепнуть.
+    if path == scrape_guard.STATIC_DATA_PATH and not scrape_guard.service_key_ok(
+            request.headers, request.query_params.get("token", "")):
+        scrape_guard.bump("static_path_closed")
+        return JSONResponse({"error": "not found"}, status_code=404)
+    group = scrape_guard.group_of(path, request.method)
+    if group and not scrape_guard.service_key_ok(request.headers, request.query_params.get("token", "")):
+        ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+        if ip:
+            wait = scrape_guard.too_many(group[0], group[1], ip)
+            if wait:
+                scrape_guard.bump("rate_" + group[0])
+                logger.warning("частые запросы: группа %s, адрес %s", group[0], ip)
+                return JSONResponse({"error": "Слишком много запросов подряд. Попробуйте через несколько минут."},
+                                    status_code=429, headers={"Retry-After": str(int(wait))})
+    return await call_next(request)
+
+
+def _data_access_denied(request: Request) -> JSONResponse | None:
+    """Общие проверки для базы и для выдачи токена: робот, чужой сайт."""
+    if scrape_guard.is_robot(request.headers.get("user-agent", "")):
+        scrape_guard.bump("robot")
+        return JSONResponse({"error": "forbidden"}, status_code=403)
+    if scrape_guard.foreign_origin(request.headers, request.headers.get("host", "")):
+        scrape_guard.bump("foreign_origin")
+        return JSONResponse({"error": "forbidden"}, status_code=403)
+    return None
+
+
+@app.api_route("/api/data/session", methods=["GET", "POST"], include_in_schema=False)
+def data_session(request: Request):
+    """Новый токен для базы — страница зовёт это, если её токен истёк
+    (вкладка открыта дольше срока, index.html пришёл из кэша браузера)."""
+    resp = Response(status_code=204)
+    if scrape_guard.enabled():
+        denied = _data_access_denied(request)
+        if denied:
+            return denied
+        scrape_guard.issue_cookie(resp, request)
+    return resp
+
+
+@app.get(scrape_guard.DATA_PATH, include_in_schema=False)
+def data_base_file(request: Request, token: str = ""):
+    """База сделок для страницы. Раньше — публичный /static/data/deals_promoted.json."""
+    path = os.path.join(STATIC_DIR, "data", "deals_promoted.json")
+    if scrape_guard.enabled() and not scrape_guard.service_key_ok(request.headers, token):
+        denied = _data_access_denied(request)
+        if denied:
+            return denied
+        ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+        if not scrape_guard.check_token(request.cookies.get(scrape_guard.COOKIE_NAME, ""),
+                                        request.headers.get("user-agent", ""), ip):
+            scrape_guard.bump("no_token")
+            return JSONResponse({"error": "token required"}, status_code=401)
+    try:
+        st = os.stat(path)
+    except OSError:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    etag = '"%x-%x"' % (st.st_mtime_ns, st.st_size)
+    headers = {"Cache-Control": "private, no-cache", "ETag": etag, "X-Robots-Tag": "noindex"}
+    if etag in (request.headers.get("if-none-match") or ""):
+        return Response(status_code=304, headers=headers)
+    scrape_guard.bump("served")
+    return FileResponse(path, media_type="application/json", headers=headers)
 
 # Таблицы аккаунтов (db/models.py) — заготовка лежала не подключённой с 22
 # июля, main.py по-прежнему читает static/data/*.json напрямую для сделок и
@@ -4226,7 +4306,10 @@ def data_status(token: str = ""):
     и мост решений: состав очереди и внутренняя механика не для публики."""
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
-    return data_refresh.status()
+    out = data_refresh.status()
+    if isinstance(out, dict):
+        out = dict(out, scrape_guard=scrape_guard.stats())
+    return out
 
 
 @app.get("/api/moderation/decisions")
@@ -5279,5 +5362,12 @@ def root_icon(icon_name: str, request: Request):
 # приложения — именно сюда приходит проверка живости хостинга.
 # FileResponse на HEAD сам не отправляет тело, только заголовки.
 @app.api_route("/{full_path:path}", methods=["GET", "HEAD"])
-def index(full_path: str):
-    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+def index(full_path: str, request: Request):
+    resp = FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    # Токен для базы (scrape_guard): страница получает его вместе с собой.
+    # no-cache — браузер переспрашивает страницу (304 дёшев) и заодно
+    # получает свежий токен, а не берёт из кэша страницу с истёкшим.
+    if scrape_guard.enabled():
+        resp.headers["Cache-Control"] = "no-cache"
+        scrape_guard.issue_cookie(resp, request)
+    return resp

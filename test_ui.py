@@ -1257,7 +1257,7 @@ def test_account_form_survives_late_base_load(browser, base_url):
         def delay(route):
             time.sleep(2)
             route.continue_()
-        ctx.route("**/static/data/deals_promoted.json*", delay)
+        ctx.route("**/deals_promoted.json*", delay)
         pg = ctx.new_page()
         pg.goto(base_url + "/#/", wait_until="domcontentloaded")
         email = f"race{int(time.time()*1000)}@example.com"

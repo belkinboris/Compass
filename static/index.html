@@ -3264,7 +3264,16 @@ async function loadBulkDeals(attempt=0){
   // приток не видел часть базы и заводил дубли.
   let promotedOk = false;
   try{
-    const r2 = await fetch("static/data/deals_promoted.json?v=20260728o");
+    // База идёт через api/data/... с токеном в cookie (scrape_guard.py,
+    // docs/scraping_protection.md). Токен приходит вместе со страницей; если
+    // он истёк (вкладка открыта давно, страница из кэша) — берём новый и
+    // повторяем один раз.
+    const BASE_URL = "api/data/deals_promoted.json?v=20260728o";
+    let r2 = await fetch(BASE_URL, {credentials:"same-origin"});
+    if(r2.status===401 || r2.status===403){
+      await fetch("api/data/session", {method:"POST", credentials:"same-origin"}).catch(()=>{});
+      r2 = await fetch(BASE_URL, {credentials:"same-origin"});
+    }
     if(r2.ok){
       const j = await r2.json();
       Object.assign(MERGED, j.merged||{});

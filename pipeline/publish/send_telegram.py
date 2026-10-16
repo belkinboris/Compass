@@ -907,11 +907,24 @@ def deals_missing_on_site(deal_ids):
     site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
     try:
         import httpx
-        r = httpx.get('%s/static/data/deals_promoted.json' % site,
-                      params={'nocache': os.getpid()}, timeout=30)
-        if r.status_code != 200:
+        # С 16 октября 2026 база отдаётся сайтом через api/data/... и только
+        # своим (scrape_guard.py): рутина предъявляет служебный ключ — тот же
+        # MODERATION_TOKEN, что у моста решений. Старый адрес — запасной, на
+        # время, пока на сервере код до этой правки.
+        key = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+        hdrs = {'X-Data-Key': key} if key else {}
+        # Старый сервер на новый адрес отвечает страницей сайта (200, HTML) —
+        # поэтому годится только ответ, который разбирается как база.
+        base = None
+        for path in ('/api/data/deals_promoted.json', '/static/data/deals_promoted.json'):
+            r = httpx.get(site + path, params={'nocache': os.getpid()},
+                          headers=hdrs, timeout=30)
+            if r.status_code == 200 and 'json' in r.headers.get('content-type', ''):
+                base = r.json()
+                break
+        if base is None:
             return set()
-        live = {d.get('id') for d in r.json().get('deals', [])}
+        live = {d.get('id') for d in base.get('deals', [])}
     except Exception as e:                                    # noqa: BLE001
         print('Не удалось спросить сайт, какие карточки он уже отдаёт (%s) — '
               'шлём как есть.' % e)
