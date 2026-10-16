@@ -9,7 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from db.models import Base, CorrectionRequest, User
+from db.models import AssistantFeedback, AssistantThread, Base, CorrectionRequest, User
 from db.session import engine, get_session
 
 TEST_PASSWORD = "надёжный-тестовый-пароль"
@@ -167,6 +167,42 @@ def test_delete_account_round_trip(client):
     assert again.status_code == 200
 
 
+def test_delete_account_removes_assistant_ratings(client):
+    """Оценки ответов ассистента («полезно / не помогло» с вопросом, ответом
+    и комментарием) уходят вместе с аккаунтом (16 октября 2026). Вместе с
+    ними — и оценка по диалогу этого человека, оставленная без входа: на
+    удалённый диалог ей ссылаться не на что. Чужие оценки не трогаются."""
+    email = "удаление-оценки@firm.ru"
+    login(client, email)
+    s = get_session()
+    try:
+        uid = s.query(User).filter_by(email=email).one().id
+        thread = AssistantThread(user_id=uid, title="мой диалог")
+        s.add(thread); s.commit()
+        tid = thread.id
+    finally:
+        s.close()
+    mine = client.post("/api/assistant/feedback", json={
+        "verdict": "down", "question": "мой вопрос", "answer": "ответ", "note": "не то", "thread_id": tid})
+    assert mine.status_code == 200
+    anon = TestClient(main.app)
+    by_thread = anon.post("/api/assistant/feedback", json={
+        "verdict": "up", "question": "вопрос без входа", "answer": "ответ", "thread_id": tid})
+    other = anon.post("/api/assistant/feedback", json={
+        "verdict": "up", "question": "чужой вопрос", "answer": "ответ"})
+    ids = [mine.json()["id"], by_thread.json()["id"], other.json()["id"]]
+
+    r = client.request("DELETE", "/api/account", json={"password": TEST_PASSWORD})
+    assert r.status_code == 200
+    s = get_session()
+    try:
+        left = {f.id for f in s.query(AssistantFeedback).filter(AssistantFeedback.id.in_(ids))}
+        assert left == {ids[2]}
+        assert s.get(AssistantThread, tid) is None
+    finally:
+        s.close()
+
+
 def test_subscriptions_require_login(client):
     assert client.get("/api/subscriptions").status_code == 401
     assert client.post("/api/subscriptions", json={"industry": "Банки"}).status_code == 401
@@ -208,7 +244,8 @@ def test_comments_require_login_to_post(client):
 
 def test_comment_round_trip(client):
     login(client, "коммент@firm.ru")
-    r = client.post("/api/deals/gtest0001/comments", json={"body": "Кто консультировал продавца?"})
+    r = client.post("/api/deals/gtest0001/comments",
+                    json={"body": "Кто консультировал продавца?", "name_consent": True})
     assert r.status_code == 200
     # Регистрация просит «Имя и фамилию» — под комментарием показываем их, а
     # не часть e-mail до @ (прежнее поведение молча раскрывало кусок чужого
@@ -242,10 +279,36 @@ def test_comment_too_long_rejected(client):
 
 def test_comments_are_scoped_to_their_own_deal(client):
     login(client, "скоуп@firm.ru")
-    client.post("/api/deals/gtestAAAA/comments", json={"body": "про сделку A"})
+    client.post("/api/deals/gtestAAAA/comments", json={"body": "про сделку A", "name_consent": True})
     client.post("/api/deals/gtestBBBB/comments", json={"body": "про сделку B"})
     only_a = client.get("/api/deals/gtestAAAA/comments").json()
     assert all(c["body"] == "про сделку A" for c in only_a)
+
+
+def test_first_comment_needs_a_separate_consent_to_show_the_name(client):
+    """Имя автора видно всем посетителям — это распространение данных, и
+    согласие на него отдельное (ст. 10.1 152-ФЗ, 16 октября 2026). Без
+    галочки первый комментарий не принимается; согласие запоминается у
+    аккаунта, и дальше его не спрашивают."""
+    email = "согласие-имя@firm.ru"
+    login(client, email)
+    assert client.get("/api/me").json()["comment_name_consent"] is False
+    r = client.post("/api/deals/gtestCONS/comments", json={"body": "без галочки"})
+    assert r.status_code == 400 and r.json()["need_name_consent"] is True
+    assert client.get("/api/deals/gtestCONS/comments").json() == []
+
+    r = client.post("/api/deals/gtestCONS/comments", json={"body": "с галочкой", "name_consent": True})
+    assert r.status_code == 200
+    assert client.get("/api/me").json()["comment_name_consent"] is True
+    s = get_session()
+    try:
+        assert s.query(User).filter_by(email=email).one().comment_name_consent_at is not None
+    finally:
+        s.close()
+    r = client.post("/api/deals/gtestCONS/comments", json={"body": "второй, без галочки"})
+    assert r.status_code == 200
+    assert [c["body"] for c in client.get("/api/deals/gtestCONS/comments").json()] == \
+        ["с галочкой", "второй, без галочки"]
 
 
 def test_anonymous_correction_goes_to_editorial_queue(client):
@@ -548,7 +611,8 @@ def test_users_table_created_before_the_gate_gets_approved_column_set_to_true(tm
     main._ensure_user_columns(engine)
     main._ensure_user_columns(engine)
     cols = {c["name"] for c in inspect(engine).get_columns("users")}
-    assert {"password_hash", "full_name", "company", "position", "approved"} <= cols
+    assert {"password_hash", "full_name", "company", "position", "approved",
+            "comment_name_consent_at"} <= cols
     with engine.connect() as conn:
         assert conn.execute(text("SELECT approved FROM users")).scalar() == 1
 

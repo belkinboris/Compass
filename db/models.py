@@ -338,6 +338,13 @@ class User(Base):
     # раньше; для уже существующей таблицы то же делает миграция в main.py.
     approved: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+    # Отдельное согласие на показ имени и фамилии рядом с комментариями
+    # (16 октября 2026; ст. 10.1 152-ФЗ — согласие на распространение даётся
+    # отдельно от согласия на обработку). Когда человек отметил галочку под
+    # первым комментарием; пусто — ещё не давал, и комментарий без галочки
+    # сервер не примет. Для существующей таблицы колонку добавляет
+    # _ensure_user_columns в main.py.
+    comment_name_consent_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     saved_filters: Mapped[list["SavedFilter"]] = relationship(back_populates="user", cascade="all, delete-orphan")
 

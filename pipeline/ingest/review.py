@@ -513,7 +513,9 @@ def already_applied(fix, card, companies=None):
     # «Снять неверную ссылку» достигнуто, если этой ссылки больше нет. У
     # Qiwi/RealWeb запись снимала профиль, бывший названием самой сделки, и
     # оставляла текст — верного профиля тогда не было. Теперь он есть.
-    if fix['new'] is None and fix['field'] in ('target', 'asset_id', 'buyer', 'seller_id') \
+    # То же для имени продавца (16 октября 2026): таблица сняла выдуманного
+    # продавца, позже реестр назвал настоящего — снятие достигнуто.
+    if fix['new'] is None and fix['field'] in ('target', 'asset_id', 'buyer', 'seller_id', 'seller') \
             and current != fix['old']:
         return True
     if current is None or fix['new'] is None:
