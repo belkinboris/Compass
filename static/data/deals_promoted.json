@@ -5661,14 +5661,98 @@
      "value_rub": 587000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "897b51a4750b"
+     "basis": "disputed",
+     "card_hash": "897b51a4750b",
+     "disputed": [
+      {
+       "value_rub": 587000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса. Сумма сделки составила 587 млн рублей.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 587000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 587 млн рублей. Эта информация приводится в совместном заявлении сторон.",
+       "attribution_quote": "Как говорится в сообщении, на основе «Бэст», банка «Евроальянс» и кошелька Qplus (его компания также развивает вместе с «Киви») планируется постепенно собирать линейку продуктов для этой категории клиентов.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса. Сумма сделки составила 587 млн рублей.",
+     "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 587000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса. Сумма сделки составила 587 млн рублей.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 587000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 587 млн рублей. Эта информация приводится в совместном заявлении сторон.",
+       "attribution_quote": "Как говорится в сообщении, на основе «Бэст», банка «Евроальянс» и кошелька Qplus (его компания также развивает вместе с «Киви») планируется постепенно собирать линейку продуктов для этой категории клиентов.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-06-11",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "a701776ca8b6"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "5426060c3639",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "11 июня 2026 Финансы Mail «Займер» купил половину платежной системы у акционера «Киви»",
+     "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-06-11",
+       "meaning": "closing",
+       "quote": "11 июня 2026 Финансы Mail «Займер» купил половину платежной системы у акционера «Киви»",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-06-11",
+       "meaning": "publication",
+       "quote": "11 июня 2026 Финансы Mail «Займер» купил половину платежной системы у акционера «Киви»",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -5678,7 +5762,48 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "df1db54c617e"
+     "card_hash": "df1db54c617e",
+     "disputed": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "В пресс-релизе уточняется, что «Займер» и FFF продолжат совместно развивать платежную систему на равных условиях.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "control_change_basis": "disputed",
+     "quote": "В пресс-релизе уточняется, что «Займер» и FFF продолжат совместно развивать платежную систему на равных условиях.",
+     "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "В пресс-релизе уточняется, что «Займер» и FFF продолжат совместно развивать платежную систему на равных условиях.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса.",
+       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -5700,11 +5825,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "date_basis": "publication"
   },
   {
    "id": "gd774ce6b",
@@ -10376,7 +10502,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "963,9 млн ₽",
+   "sum": "14 млрд ₽",
    "eco": {
     "sum": "14 000 000 013,13 ₽",
     "share": "Pioneer Capital Invest на 67,45% принадлежит «Назарбаев Фонду»; по данным СМИ (январь 2022 г.), конечным бенефициаром называли первого президента Казахстана Нурсултана Назарбаева.",
@@ -10441,17 +10567,94 @@
      "card_hash": "57e928854fdc"
     },
     "price": {
-     "value_rub": 963900000.0,
+     "value_rub": 14000000013.13,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "e61298efcd3c"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "49d7360acc33",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "paid"
+     ],
+     "attribution_quote": "ТОО «Pioneer Capital Invest» стал владельцем Азиатско-Тихоокеанского Банка (АО) 5 октября 2021 года Пресс-релиз",
+     "scope_basis": "verified",
+     "quote": "Банком России и ТОО «Pioneer Capital Invest», победителем состоявшихся 17.09.2021 торгов, подписан договор купли-продажи 100% акций «Азиатско-Тихоокеанского Банка» (АО) (рег. № 1810) (далее — Банк). В оплату акций Банком России получены средства в размере 14 000 000 013,13 рублей.",
+     "source": "http://www.cbr.ru/s/25f6",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 14000000013.13,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "paid",
+       "quote": "Банком России и ТОО «Pioneer Capital Invest», победителем состоявшихся 17.09.2021 торгов, подписан договор купли-продажи 100% акций «Азиатско-Тихоокеанского Банка» (АО) (рег. № 1810) (далее — Банк). В оплату акций Банком России получены средства в размере 14 000 000 013,13 рублей.",
+       "attribution_quote": "ТОО «Pioneer Capital Invest» стал владельцем Азиатско-Тихоокеанского Банка (АО) 5 октября 2021 года Пресс-релиз",
+       "source": "http://www.cbr.ru/s/25f6",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 14000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Победитель - Pioneer Capital Invest - предложил за АТБ максимальные 14 млрд рублей.",
+       "attribution_quote": "Новым собственником Азиатско-Тихоокеанского банка (АТБ) станет инвестор из Казахстана - ТОО \"Pioneer Capital Invest\", сообщил Банк России, подводя итоги торгов по продаже 100% акций АТБ.",
+       "source": "https://www.interfax.ru/business/791886",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2021-09-17",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "479be830b8a3"
+     "meaning": "signing",
+     "basis": "verified",
+     "card_hash": "c9bd7784277c",
+     "meaning_variants": [
+      "closing",
+      "signing"
+     ],
+     "quote": "Победителем торгов по реализации акций «Азиатско-Тихоокеанского Банка» (АО) стал ТОО «Pioneer Capital Invest» 17 сентября 2021 года Пресс-релиз",
+     "source": "https://cbr.ru/press/pr/?file=17092021_111000BANK_SECTOR17092021_110834.htm",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2021-09-17",
+       "meaning": "closing",
+       "quote": "Победителем торгов по реализации акций «Азиатско-Тихоокеанского Банка» (АО) стал ТОО «Pioneer Capital Invest» 17 сентября 2021 года Пресс-релиз",
+       "source": "https://cbr.ru/press/pr/?file=17092021_111000BANK_SECTOR17092021_110834.htm",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2021-09-17",
+       "meaning": "signing",
+       "quote": "Торги состоялись в пятницу, 17 сентября, в форме закрытого аукциона первой цены.",
+       "source": "https://www.kommersant.ru/doc/4988384",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -10461,7 +10664,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5a5ca420d4e4"
+     "card_hash": "5a5ca420d4e4",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Банком России и ТОО «Pioneer Capital Invest», победителем состоявшихся 17.09.2021 торгов, подписан договор купли-продажи 100% акций «Азиатско-Тихоокеанского Банка» (АО) (рег. № 1810) (далее — Банк).",
+     "source": "http://www.cbr.ru/s/25f6",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Банком России и ТОО «Pioneer Capital Invest», победителем состоявшихся 17.09.2021 торгов, подписан договор купли-продажи 100% акций «Азиатско-Тихоокеанского Банка» (АО) (рег. № 1810) (далее — Банк).",
+       "source": "http://www.cbr.ru/s/25f6",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Новым собственником Азиатско-Тихоокеанского банка (АТБ) станет инвестор из Казахстана - ТОО \"Pioneer Capital Invest\", сообщил Банк России, подводя итоги торгов по продаже 100% акций АТБ.",
+       "source": "https://www.interfax.ru/business/791886",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gca80a12c",
@@ -10476,18 +10703,20 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "before_site_year"
     }
-   }
+   },
+   "reviewed": "2026-10-16",
+   "date_basis": "signing"
   },
   {
    "id": "gc5079179",
@@ -11290,17 +11519,95 @@
      "card_hash": "36a33c3e464e"
     },
     "price": {
-     "value_rub": 1300000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "ae395aa5a7cd"
+     "basis": "verified",
+     "card_hash": "8e61c5d8c2e9",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "signing",
+     "event_variants": [
+      "announcement",
+      "signing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "ПАО «М.видео», российская компания в сфере электронной коммерции и розничной торговли электроникой и бытовой техникой , сообщает об одобрении Советом директоров проекта по развитию финтех-направления в рамках Группы и приобретения с этой целью 100% участия в кредитной платформе « Директ кредит ».",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Совет директоров « М.Видео — Эльдорадо» одобрил приобретение кредитной платформы «Директ Кредит», сообщила пресс-служба ритейлера. Сделку планируют закрыть до конца этого года, ее сумма может составить до 1,3 млрд руб.",
+     "source": "https://www.vedomosti.ru/business/news/2021/09/23/887945-mvideo-eldorado-kupit-kreditnuyu-platformu-direkt-kredit",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1300000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Совет директоров « М.Видео — Эльдорадо» одобрил приобретение кредитной платформы «Директ Кредит», сообщила пресс-служба ритейлера. Сделку планируют закрыть до конца этого года, ее сумма может составить до 1,3 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/news/2021/09/23/887945-mvideo-eldorado-kupit-kreditnuyu-platformu-direkt-kredit",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1300000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Сумма сделки может составить порядка 1,3 миллиарда рублей.",
+       "attribution_quote": "ПАО «М.видео», российская компания в сфере электронной коммерции и розничной торговли электроникой и бытовой техникой , сообщает об одобрении Советом директоров проекта по развитию финтех-направления в рамках Группы и приобретения с этой целью 100% участия в кредитной платформе « Директ кредит ».",
+       "source": "https://www.cnews.ru/news/line/2021-09-23_mvideoeldorado_investiruet",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2021-10-13",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "be2e8b74f052"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "9aabea61094d",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Сделка прошла 13 октября.",
+     "source": "https://www.interfax.ru/business/797364",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2021-10-13",
+       "meaning": "closing",
+       "quote": "Сделка прошла 13 октября.",
+       "source": "https://www.interfax.ru/business/797364",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2021-10-13",
+       "meaning": "closing",
+       "quote": "Москва. 14 октября. INTERFAX.RU - Инвестиционный холдинг SFI (прежнее название \"Сафмар финансовые инвестиции\") продал \"М.Видео (группа \"М.Видео-Эльдорадо\" ) свою кредитную платформу \"Директ Кредит\", следует из материалов холдинга. Сделка прошла 13 октября.",
+       "source": "https://www.interfax.ru/business/797364",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -11310,7 +11617,48 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6999a2bb9d6b"
+     "card_hash": "6999a2bb9d6b",
+     "disputed": [
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "У \"М.Видео-Эльдорадо\" и SFI общий бенефициар - Саид Гуцериев.",
+       "source": "https://www.interfax.ru/business/797364",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "«сделка осуществлена между компаниями с одним бенефициаром, нельзя сказать, что это сделка внутри одной группы»,— отмечает она",
+       "source": "https://www.kommersant.ru/doc/4889357",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "control_change_basis": "disputed",
+     "quote": "У \"М.Видео-Эльдорадо\" и SFI общий бенефициар - Саид Гуцериев.",
+     "source": "https://www.interfax.ru/business/797364",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "У \"М.Видео-Эльдорадо\" и SFI общий бенефициар - Саид Гуцериев.",
+       "source": "https://www.interfax.ru/business/797364",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "«сделка осуществлена между компаниями с одним бенефициаром, нельзя сказать, что это сделка внутри одной группы»,— отмечает она",
+       "source": "https://www.kommersant.ru/doc/4889357",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g069c7294",
@@ -11332,11 +11680,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "before_site_year"
     }
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "closing"
   },
   {
    "id": "g5e187743",
@@ -18505,17 +18855,85 @@
      "card_hash": "af95b9657a9b"
     },
     "price": {
-     "value_rub": 1100000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "cbbff5d50035"
+     "basis": "verified",
+     "card_hash": "51946d0c894a",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "package",
+      "unknown"
+     ],
+     "quote": "Единственным участником аукциона стал «Ситилинк», следует из протокола, размещённого в открытом доступе. Стартовая цена лота была определена в 1,097 млрд рублей.",
+     "source": "https://nsp.ru/26486-sitilink-podezzaet-k-pulkovo",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1097000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Единственным участником аукциона стал «Ситилинк», следует из протокола, размещённого в открытом доступе. Стартовая цена лота была определена в 1,097 млрд рублей.",
+       "source": "https://nsp.ru/26486-sitilink-podezzaet-k-pulkovo",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1097000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Единственным участником аукциона стал «Ситилинк», следует из протокола, размещённого в открытом доступе. Стартовая цена лота была определена в 1,097 млрд рублей.",
+       "source": "https://nsp.ru/26486-sitilink-podezzaet-k-pulkovo",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2020-01-27",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "e76b7d4b3743"
+     "meaning": "announcement",
+     "basis": "read",
+     "card_hash": "e76b7d4b3743",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Банк «Санкт-Петербург» продает магазин ретейлера на Пулковском шоссе за 750 млн рублей - 27 января 2020 ",
+     "source": "https://www.fontanka.ru/2020/01/27/137/",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2020-01-27",
+       "meaning": "announcement",
+       "quote": "Банк «Санкт-Петербург» продает магазин ретейлера на Пулковском шоссе за 750 млн рублей - 27 января 2020 ",
+       "source": "https://www.fontanka.ru/2020/01/27/137/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -18525,7 +18943,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "02027a357720"
+     "card_hash": "02027a357720",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Крупный торгово-логистический комплекс у кредитора компании банка «Санкт-Петербург» за 1,1 млрд руб. приобретает конкурент онлайн-площадки — «Ситилинк».",
+     "source": "https://www.kommersant.ru/doc/4539098",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Крупный торгово-логистический комплекс у кредитора компании банка «Санкт-Петербург» за 1,1 млрд руб. приобретает конкурент онлайн-площадки — «Ситилинк».",
+       "source": "https://www.kommersant.ru/doc/4539098",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Крупный торгово-логистический комплекс у кредитора компании банка «Санкт-Петербург» за 1,1 млрд руб. приобретает конкурент онлайн-площадки — «Ситилинк».",
+       "source": "https://www.kommersant.ru/doc/4539098",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g18fbb5a7",
@@ -18547,13 +18989,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
    "seller": "Банк «Санкт-Петербург»",
-   "seller_id": "gf881a88f"
+   "seller_id": "gf881a88f",
+   "sum_basis": "auction_start"
   },
   {
    "id": "g5c524dac",
@@ -22308,27 +22751,131 @@
      "card_hash": "4674624d06ae"
     },
     "price": {
-     "value_rub": 401000000.0,
+     "value_rub": 401000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "57db1cf4aede"
+     "basis": "verified",
+     "card_hash": "57db1cf4aede",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "\"МТС продает АФК \"Система\" активы \"Энвижн Груп\", связанные с бизнесом системной интеграции, за исключением тех, которые участвуют в формировании продуктового портфеля МТС\", - говорится в сообщении оператора.",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "unknown"
+     ],
+     "quote": "ПАО \"МТС\" объявило о продаже 100% системного интегратора АО \"Энвижн Груп\" за 401 млн рублей. Покупателем выступает ПАО АФК \"Система\" , которое является основным акционером МТС.",
+     "source": "https://www.interfax.ru/russia/735333",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 401000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "ПАО \"МТС\" объявило о продаже 100% системного интегратора АО \"Энвижн Груп\" за 401 млн рублей. Покупателем выступает ПАО АФК \"Система\" , которое является основным акционером МТС.",
+       "attribution_quote": "\"МТС продает АФК \"Система\" активы \"Энвижн Груп\", связанные с бизнесом системной интеграции, за исключением тех, которые участвуют в формировании продуктового портфеля МТС\", - говорится в сообщении оператора.",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 401000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "unknown",
+       "quote": "ПАО \"МТС\" объявило о продаже 100% системного интегратора АО \"Энвижн Груп\" за 401 млн рублей.",
+       "attribution_quote": "\"МТС продает АФК \"Система\" активы \"Энвижн Груп\", связанные с бизнесом системной интеграции, за исключением тех, которые участвуют в формировании продуктового портфеля МТС\", - говорится в сообщении оператора.",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2020-11-02",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "b8ab259c9e1e"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "ae8d3df45938",
+     "meaning_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Москва. 2 ноября. INTERFAX.RU - ПАО \"МТС\" объявило о продаже 100% системного интегратора АО \"Энвижн Груп\" за 401 млн рублей.",
+     "source": "https://www.interfax.ru/russia/735333",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2020-11-02",
+       "meaning": "closing",
+       "quote": "Москва. 2 ноября. INTERFAX.RU - ПАО \"МТС\" объявило о продаже 100% системного интегратора АО \"Энвижн Груп\" за 401 млн рублей.",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2020-11-02",
+       "meaning": "announcement",
+       "quote": "20:26, 2 ноября 2020 МТС продаст АФК \"Система\" системного интегратора NVision Group",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6a8c65b175c7"
+     "card_hash": "6a8c65b175c7",
+     "intragroup": true,
+     "control_change_basis": "verified",
+     "quote": "Покупателем выступает ПАО АФК \"Система\" , которое является основным акционером МТС.",
+     "source": "https://www.interfax.ru/russia/735333",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "Покупателем выступает ПАО АФК \"Система\" , которое является основным акционером МТС.",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "Покупателем выступает ПАО АФК \"Система\" , которое является основным акционером МТС.",
+       "source": "https://www.interfax.ru/russia/735333",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g4426909a",
@@ -22350,11 +22897,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "before_site_year"
+     "purchase_sums": "intragroup",
+     "top_purchases": "intragroup",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "announcement"
   },
   {
    "id": "ga7a0b957",
@@ -24330,17 +24878,90 @@
      "card_hash": "dde6823f8ff7"
     },
     "price": {
-     "value_rub": 425000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "aabaf9875a71"
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "4251aea30a9d",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "registry",
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "выставлено на аукционной площадке за 425 млн рублей. Торги по продаже центра пройдут уже 24 мая, заявки на открытый аукцион начали принимать 23 апреля.",
+     "source": "https://dela.ru/news/223842/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 425000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "выставлено на аукционной площадке за 425 млн рублей. Торги по продаже центра пройдут уже 24 мая, заявки на открытый аукцион начали принимать 23 апреля.",
+       "source": "https://dela.ru/news/223842/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 425000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Здание бизнес-центра на Взлетке, расположенное рядом с Lexus-центром, с земельным участком и всей необходимой инфраструктурой, собствен­ником которого является ООО «Крепость-Сириус», выставлено на аукционной площадке за 425 млн рублей.",
+       "source": "https://dela.ru/news/223842/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2018-05-24",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "c86d943c8774"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "8c1e349cf7ef",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "24 мая 2018 г. — с аукциона продан бизнес-центр «Сириус», принадлежащий бывшему официальному дилеру автомобилей Lexus и Toyota в Красноярске — группе компаний «Крепость».",
+     "source": "https://newslab.ru/info/dossier/ooo-pkf-krepost",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2018-05-24",
+       "meaning": "closing",
+       "quote": "24 мая 2018 г. — с аукциона продан бизнес-центр «Сириус», принадлежащий бывшему официальному дилеру автомобилей Lexus и Toyota в Красноярске — группе компаний «Крепость».",
+       "source": "https://newslab.ru/info/dossier/ooo-pkf-krepost",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2018-05-24",
+       "meaning": "closing",
+       "quote": "24 мая 2018 г. — с аукциона продан бизнес-центр «Сириус», принадлежащий бывшему официальному дилеру автомобилей Lexus и Toyota в Красноярске — группе компаний «Крепость».",
+       "source": "https://newslab.ru/info/dossier/ooo-pkf-krepost",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -24350,7 +24971,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "49821516adca"
+     "card_hash": "49821516adca",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "24 мая 2018 г. — с аукциона продан бизнес-центр «Сириус», принадлежащий бывшему официальному дилеру автомобилей Lexus и Toyota в Красноярске — группе компаний «Крепость».",
+     "source": "https://newslab.ru/info/dossier/ooo-pkf-krepost",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "24 мая 2018 г. — с аукциона продан бизнес-центр «Сириус», принадлежащий бывшему официальному дилеру автомобилей Lexus и Toyota в Красноярске — группе компаний «Крепость».",
+       "source": "https://newslab.ru/info/dossier/ooo-pkf-krepost",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g79091b1d",
@@ -24372,8 +25009,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
@@ -24383,7 +25020,9 @@
      "Mergers.ru",
      "https://mergers.ru/news/Biznes-centr-Sirius-v-Krasnoyarske-prodan-za-425-mln-rublej-67371"
     ]
-   ]
+   ],
+   "sum_basis": "auction_start",
+   "date_basis": "closing"
   },
   {
    "id": "ga0427eac",
@@ -25504,11 +26143,58 @@
      "card_hash": "29a7d01dfcf6"
     },
     "price": {
-     "value_rub": 1200000000.0,
+     "value_rub": 1200000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "32e73259194c"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "32e73259194c",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "paid"
+     ],
+     "scope_basis": "verified",
+     "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации.",
+     "source": "https://www.kommersant.ru/doc/4276823",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1200000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "paid",
+       "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации.",
+       "source": "https://www.kommersant.ru/doc/4276823",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1200000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации.",
+       "source": "https://www.kommersant.ru/doc/4276823",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2019-12-24",
@@ -25524,7 +26210,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a7be40a86d9b"
+     "card_hash": "a7be40a86d9b",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации. Эту долю банк выкупил у автоконцерна «Соллерс» Вадима Швецова",
+     "source": "https://www.kommersant.ru/doc/4276823",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации. Эту долю банк выкупил у автоконцерна «Соллерс» Вадима Швецова",
+       "source": "https://www.kommersant.ru/doc/4276823",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Совкомбанк заплатил за 50% акций лизинговой компании «Соллерс-Финанс» 1,2 млрд руб., следует из отчетности кредитной организации. Эту долю банк выкупил у автоконцерна «Соллерс» Вадима Швецова ( см. “Ъ” от 26 декабря 2019 года ).",
+       "source": "https://www.kommersant.ru/doc/4276823",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -25539,15 +26249,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "before_site_year"
     }
    }
@@ -30700,17 +31410,88 @@
      "card_hash": "99a36c8a3888"
     },
     "price": {
-     "value_rub": 600000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "edcd2cef1e7d"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "79d6af4035ac",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "В Петербурге выставили на продажу бизнес-центр \"Набережная\" на Свердловской набережной. Владельцы недвижимости оценили объект в 600 млн рублей.",
+     "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 600000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В Петербурге выставили на продажу бизнес-центр \"Набережная\" на Свердловской набережной. Владельцы недвижимости оценили объект в 600 млн рублей.",
+       "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 600000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В Петербурге выставили на продажу бизнес-центр \"Набережная\" на Свердловской набережной. Владельцы недвижимости оценили объект в 600 млн рублей.",
+       "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2019-07-25",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "3d71fcbbf98d"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "eae7b89677b4",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "17:02 25 июля 2019 Алексей Кумачев Все материалы автора В Петербурге выставили на продажу бизнес-центр \"Набережная\" на Свердловской набережной.",
+     "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2019-07-25",
+       "meaning": "announcement",
+       "quote": "17:02 25 июля 2019 Алексей Кумачев Все материалы автора В Петербурге выставили на продажу бизнес-центр \"Набережная\" на Свердловской набережной.",
+       "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2019-07-25",
+       "meaning": "announcement",
+       "quote": "17:02 25 июля 2019",
+       "source": "https://www.dp.ru/a/2019/07/25/Naprotiv_Smolnogo__V_Pet",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -30742,11 +31523,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "before_site_year"
     }
-   }
+   },
+   "sum_basis": "reported",
+   "date_basis": "announcement"
   },
   {
    "id": "ga0db1bef",
@@ -38247,27 +39030,114 @@
      "card_hash": "0affec9cfc0c"
     },
     "price": {
-     "value_rub": 1000000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "0720f0dcda57"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "179091535482",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "Как сообщал vc.ru со ссылкой на источники, семья Гросса-Днепрова продала самой компании доли за 1 млрд руб.",
+     "source": "https://www.vedomosti.ru/business/news/2021/10/14/891120-rbk-i-proxima-capital-group-priobreli-domennogo-registratora-regru",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1000000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Как сообщал vc.ru со ссылкой на источники, семья Гросса-Днепрова продала самой компании доли за 1 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/news/2021/10/14/891120-rbk-i-proxima-capital-group-priobreli-domennogo-registratora-regru",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1000000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Источник подтвердил vc.ru, что долю продали — семья Гросс получила 1 млрд рублей.",
+       "source": "https://vc.ru/services/271639-semya-gross-prodala-dolyu-v-40-3-v-domennom-registratore-reg-ru-za-1-mlrd-rubley-istochniki",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2021-07-20",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "efd21b37c134"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "efd21b37c134",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Семья Гросс продала долю в доменном регистраторе REG.ru 20.07.2021, 13:05 Семья одного из основателей крупнейшего в России хостинг-провайдера и регистратора доменов REG.ru Филиппа Гросс-Днепрова продала долю в 40,3% за 1 млрд руб.",
+     "source": "https://www.kommersant.ru/doc/4909194",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2021-07-20",
+       "meaning": "publication",
+       "quote": "Семья Гросс продала долю в доменном регистраторе REG.ru 20.07.2021, 13:05 Семья одного из основателей крупнейшего в России хостинг-провайдера и регистратора доменов REG.ru Филиппа Гросс-Днепрова продала долю в 40,3% за 1 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/4909194",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0a434c5c4f06"
+     "card_hash": "0a434c5c4f06",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "В июне их доли были переведены на саму компанию. Как сообщал vc.ru со ссылкой на источники, семья Гросса-Днепрова продала самой компании доли за 1 млрд руб. В Reg.ru подтвердили изданию, что доли семьи Филиппа Гросса были проданы компании, при этом детали сделки не разглашались.",
+     "source": "https://www.vedomosti.ru/business/news/2021/10/14/891120-rbk-i-proxima-capital-group-priobreli-domennogo-registratora-regru",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "В июне их доли были переведены на саму компанию. Как сообщал vc.ru со ссылкой на источники, семья Гросса-Днепрова продала самой компании доли за 1 млрд руб. В Reg.ru подтвердили изданию, что доли семьи Филиппа Гросса были проданы компании, при этом детали сделки не разглашались.",
+       "source": "https://www.vedomosti.ru/business/news/2021/10/14/891120-rbk-i-proxima-capital-group-priobreli-domennogo-registratora-regru",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "В Reg.ru рассказали vc.ru, что доли семьи Филиппа Гросса были приобретены компанией. Детали сделки не разглашаются.",
+       "source": "https://vc.ru/services/271639-semya-gross-prodala-dolyu-v-40-3-v-domennom-registratore-reg-ru-za-1-mlrd-rubley-istochniki",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g4f9e4c87",
@@ -38289,11 +39159,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "before_site_year"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "reported"
   },
   {
    "id": "g03eb22ba",
@@ -41638,11 +42509,63 @@
      "card_hash": "97c4dcc6c878"
     },
     "price": {
-     "value_rub": 615000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "c39d210db8ad"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "2db63fbd3313",
+     "meaning_variants": [
+      "foreign_currency",
+      "reported"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "media_sources",
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "paid",
+      "unknown"
+     ],
+     "attribution_quote": "Ozon Holdings PLC подписал соглашение о покупке 100% ООО \"Оней Банк\" у Совкомбанка , сообщила во вторник компания.",
+     "scope_basis": "verified",
+     "quote": "А итоге банк продали не за ~$10 млн, а дешевле - за 615 млн руб (~$8,2 млн), что примерно равно 1,5 капитала банка.",
+     "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:Ozon_%D0%91%D0%B0%D0%BD%D0%BA_(%D1%80%D0%B0%D0%BD%D0%B5%D0%B5_%D0%9E%D0%BD%D0%B5%D0%B9_%D0%B1%D0%B0%D0%BD%D0%BA)",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 615000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "paid",
+       "quote": "А итоге банк продали не за ~$10 млн, а дешевле - за 615 млн руб (~$8,2 млн), что примерно равно 1,5 капитала банка.",
+       "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:Ozon_%D0%91%D0%B0%D0%BD%D0%BA_(%D1%80%D0%B0%D0%BD%D0%B5%D0%B5_%D0%9E%D0%BD%D0%B5%D0%B9_%D0%B1%D0%B0%D0%BD%D0%BA)",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": null,
+       "meaning": "foreign_currency",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "unknown",
+       "quote": "Ожидается, что ее стоимость не превысит $10 млн, окончательная цена будет зависеть от стоимости активов приобретаемого банка на дату закрытия сделки.",
+       "attribution_quote": "Ozon Holdings PLC подписал соглашение о покупке 100% ООО \"Оней Банк\" у Совкомбанка , сообщила во вторник компания.",
+       "source": "https://www.interfax.ru/business/760870",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2021-05-26",
@@ -41658,7 +42581,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "2468aba452b9"
+     "card_hash": "2468aba452b9",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Ozon Holdings PLC подписал соглашение о покупке 100% ООО \"Оней Банк\" у Совкомбанка , сообщила во вторник компания.",
+     "source": "https://www.interfax.ru/business/760870",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Ozon Holdings PLC подписал соглашение о покупке 100% ООО \"Оней Банк\" у Совкомбанка , сообщила во вторник компания.",
+       "source": "https://www.interfax.ru/business/760870",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Ozon Holdings PLC подписал соглашение о покупке 100% ООО \"Оней Банк\" у Совкомбанка , сообщила во вторник компания.",
+       "source": "https://www.interfax.ru/business/760870",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -41680,11 +42627,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "before_site_year"
     }
-   }
+   },
+   "sum_basis": "reported"
   },
   {
    "id": "g62e5dc3e",
@@ -43649,11 +44597,61 @@
      "card_hash": "40a9b4fb0a2e"
     },
     "price": {
-     "value_rub": 500000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "3d89e4768531"
+     "basis": "verified",
+     "card_hash": "334496f988df",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "media_sources",
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Стоимость активов Starbucks составила около 500 млн рублей, пишет ТАСС со ссылкой на совладельца сети кофеен Stars Coffee Антона Пинского.",
+     "source": "https://www.retail.ru/news/rossiyskie-aktivy-starbucks-byli-prodany-za-500-mln-rubley-13-iyunya-2023-229599/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 500000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость активов Starbucks составила около 500 млн рублей, пишет ТАСС со ссылкой на совладельца сети кофеен Stars Coffee Антона Пинского.",
+       "source": "https://www.retail.ru/news/rossiyskie-aktivy-starbucks-byli-prodany-za-500-mln-rubley-13-iyunya-2023-229599/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 500000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость активов Starbucks составила около 500 млн рублей, пишет ТАСС со ссылкой на совладельца сети кофеен Stars Coffee Антона Пинского.",
+       "source": "https://www.retail.ru/news/rossiyskie-aktivy-starbucks-byli-prodany-za-500-mln-rubley-13-iyunya-2023-229599/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2022-07-31",
@@ -43669,7 +44667,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "82b916e8fc8f"
+     "card_hash": "82b916e8fc8f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Pinskiy and Russian rap artist Timati became co-owners of 130 former Starbucks stores in July 2022",
+     "source": "https://www.worldcoffeeportal.com/news/anton-pinskiy-claims-he-acquired-starbucks-assets-in-russia-for-5-9m/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Pinskiy and Russian rap artist Timati became co-owners of 130 former Starbucks stores in July 2022",
+       "source": "https://www.worldcoffeeportal.com/news/anton-pinskiy-claims-he-acquired-starbucks-assets-in-russia-for-5-9m/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Стоимость активов Starbucks составила около 500 млн рублей, пишет ТАСС со ссылкой на совладельца сети кофеен Stars Coffee Антона Пинского.",
+       "source": "https://www.retail.ru/news/rossiyskie-aktivy-starbucks-byli-prodany-za-500-mln-rubley-13-iyunya-2023-229599/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -43691,8 +44713,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -43701,7 +44723,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Summa-sdelki-po-prodazhe-aktivov-Starbucks-v-Rossii-sostavila-okolo-500-mln-rublej-81367"
     ]
-   ]
+   ],
+   "sum_basis": "estimate"
   },
   {
    "id": "g22b470f6",
@@ -47954,22 +48977,30 @@
     "date": {
      "value": "2020-12-23",
      "meaning": "announcement",
-     "basis": "read",
-     "card_hash": "e11326b9cd5b",
+     "basis": "verified",
+     "card_hash": "214fd3bfe7ba",
      "meaning_variants": [
       "announcement"
      ],
      "quote": "23 декабря в Российском аукционном доме (РАД) пройдут торги в рамках банкротства компании ООО «РОСТ КАПИТАЛ».",
      "source": "https://www.cre.ru/news/82008",
-     "verified_by": "model×1, цитата не сверена с текстом",
-     "verified_at": "2026-10-15",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
      "readings": [
       {
        "value": "2020-12-23",
        "meaning": "announcement",
        "quote": "23 декабря в Российском аукционном доме (РАД) пройдут торги в рамках банкротства компании ООО «РОСТ КАПИТАЛ».",
        "source": "https://www.cre.ru/news/82008",
-       "quote_checked": null,
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2020-12-23",
+       "meaning": "announcement",
+       "quote": "23 декабря в Российском аукционном доме (РАД) пройдут торги в рамках банкротства компании ООО «РОСТ КАПИТАЛ».",
+       "source": "https://www.cre.ru/news/82008",
+       "quote_checked": true,
        "reader": "B"
       }
      ]
@@ -47982,7 +49013,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "17ccab34ecc5"
+     "card_hash": "17ccab34ecc5",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "На продажу выставлен 100% пакет акций АО «БИЗНЕС, ФИНАНСЫ, НЕДВИЖИМОСТЬ». Актив компании – действующий четырехэтажный бизнес-центр класса «В+» площадью 22,7 тыс. кв.",
+     "source": "https://www.cre.ru/news/82008",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "На продажу выставлен 100% пакет акций АО «БИЗНЕС, ФИНАНСЫ, НЕДВИЖИМОСТЬ». Актив компании – действующий четырехэтажный бизнес-центр класса «В+» площадью 22,7 тыс. кв.",
+       "source": "https://www.cre.ru/news/82008",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "ge2674422",
@@ -48009,7 +49056,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "seller": "ООО «Рост Капитал»"
+   "seller": "ООО «Рост Капитал»",
+   "date_basis": "announcement"
   },
   {
    "id": "g5ff3f9ee",
@@ -49696,27 +50744,115 @@
      "card_hash": "f2967644dde9"
     },
     "price": {
-     "value_rub": 900000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f9fac654d77d"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "4b815eade1ab",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "Компания Becar Asset Management выставит на продажу торговый центр «Смайл» в Петербурге. Объект площадью 14,7 тыс. кв. м с земельным участком 11 тыс. кв. м, арендованным у города, и паркингом на 66 автомобилей будет предложен инвесторам за 900 млн рублей.",
+     "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 900000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Компания Becar Asset Management выставит на продажу торговый центр «Смайл» в Петербурге. Объект площадью 14,7 тыс. кв. м с земельным участком 11 тыс. кв. м, арендованным у города, и паркингом на 66 автомобилей будет предложен инвесторам за 900 млн рублей.",
+       "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 900000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Объект площадью 14,7 тыс. кв. м с земельным участком 11 тыс. кв. м, арендованным у города, и паркингом на 66 автомобилей будет предложен инвесторам за 900 млн рублей.",
+       "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2019-02-06",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "fc12ee1d8170"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "a3f76607b011",
+     "meaning_variants": [
+      "announcement",
+      "publication"
+     ],
+     "quote": "06.02.2019 — 12:58 Компания Becar Asset Management выставит на продажу торговый центр «Смайл» в Петербурге.",
+     "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2019-02-06",
+       "meaning": "announcement",
+       "quote": "06.02.2019 — 12:58 Компания Becar Asset Management выставит на продажу торговый центр «Смайл» в Петербурге.",
+       "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2019-02-06",
+       "meaning": "publication",
+       "quote": "06.02.2019 — 12:58 Компания Becar Asset Management выставит на продажу торговый центр «Смайл» в Петербурге.",
+       "source": "https://asninfo.ru/news/84891-becar-asset-management-vystavit-na-prodazhu-torgovyy-tsentr-smayl",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "32c2ebb9b377"
+     "card_hash": "32c2ebb9b377",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "Новизна в том, что истинным хозяином такого объекта является управляющая компания, которая поддерживает концепцию и не дает собственникам самовольно вмешиваться в отношения с арендаторами.",
+     "source": "https://marketmedia.ru/media-content/torgovyy-tsentr-melko-narezhut/",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Новизна в том, что истинным хозяином такого объекта является управляющая компания, которая поддерживает концепцию и не дает собственникам самовольно вмешиваться в отношения с арендаторами.",
+       "source": "https://marketmedia.ru/media-content/torgovyy-tsentr-melko-narezhut/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g1fe5d83a",
@@ -49738,11 +50874,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "before_site_year"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "reported",
+   "date_basis": "publication"
   },
   {
    "id": "g01294e32",
@@ -55911,17 +57049,107 @@
      "card_hash": "5446f9328430"
     },
     "price": {
-     "value_rub": 650000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "e63ba701ba44"
+     "basis": "verified",
+     "card_hash": "06b1fdce4635",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "package",
+      "unknown"
+     ],
+     "quote": "Новым владельцем казанского отеля Marriott стала «Гостиничная компания» группы ВТБ, которая последние два года руководила активом после разборок управленцев. Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами — казанским рантье, владельцем «Савиново» и XL Алмазом Сулеймановым и московским предпринимателем в сфере мебели Алексеем Васиным.",
+     "source": "https://www.business-gazeta.ru/article/396973",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 650000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Новым владельцем казанского отеля Marriott стала «Гостиничная компания» группы ВТБ, которая последние два года руководила активом после разборок управленцев. Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами — казанским рантье, владельцем «Савиново» и XL Алмазом Сулеймановым и московским предпринимателем в сфере мебели Алексеем Васиным.",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 650000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2018-09-28",
      "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "7dabc3a6124a"
+     "basis": "disputed",
+     "card_hash": "7dabc3a6124a",
+     "disputed": [
+      {
+       "value": "2018-09-28",
+       "meaning": "closing",
+       "quote": "Второе пришествие Marriott: ВТБ купил отель под Казанским кремлем 28 Сентября 2018",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2018-09-27",
+       "meaning": "closing",
+       "quote": "Торги состоялись вчера, 27 сентября, после обеда.",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Второе пришествие Marriott: ВТБ купил отель под Казанским кремлем 28 Сентября 2018",
+     "source": "https://www.business-gazeta.ru/article/396973",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2018-09-28",
+       "meaning": "closing",
+       "quote": "Второе пришествие Marriott: ВТБ купил отель под Казанским кремлем 28 Сентября 2018",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2018-09-27",
+       "meaning": "closing",
+       "quote": "Торги состоялись вчера, 27 сентября, после обеда.",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -55931,7 +57159,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5c1c81d138fe"
+     "card_hash": "5c1c81d138fe",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Новым владельцем казанского отеля Marriott стала «Гостиничная компания» группы ВТБ, которая последние два года руководила активом после разборок управленцев. Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами — казанским рантье, владельцем «Савиново» и XL Алмазом Сулеймановым и московским предпринимателем в сфере мебели Алексеем Васиным.",
+     "source": "https://www.business-gazeta.ru/article/396973",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Новым владельцем казанского отеля Marriott стала «Гостиничная компания» группы ВТБ, которая последние два года руководила активом после разборок управленцев. Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами — казанским рантье, владельцем «Савиново» и XL Алмазом Сулеймановым и московским предпринимателем в сфере мебели Алексеем Васиным.",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Новым владельцем казанского отеля Marriott стала «Гостиничная компания» группы ВТБ, которая последние два года руководила активом после разборок управленцев. Компания выкупила отель на банкротных торгах за 650 млн рублей, поборовшись с еще двумя претендентами",
+       "source": "https://www.business-gazeta.ru/article/396973",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g8bc95ac53",
@@ -55953,8 +57205,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
@@ -55964,7 +57216,8 @@
      "mergers.ru",
      "https://mergers.ru/news/Gruppa-VTB-priobrela-otel-Marriott-v-Kazani-za-650-mln-rublej-69313"
     ]
-   ]
+   ],
+   "sum_basis": "reported"
   },
   {
    "id": "g4ebb84f2",
@@ -58775,14 +60028,97 @@
      "value_rub": 1300000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f53e4ba3fe2b"
+     "basis": "disputed",
+     "card_hash": "f53e4ba3fe2b",
+     "disputed": [
+      {
+       "value_rub": 1300000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "attribution_quote": "следует из материалов торгов банкротного имущества",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1300000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+     "source": "https://www.kommersant.ru/doc/5368488",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1300000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "attribution_quote": "следует из материалов торгов банкротного имущества",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1300000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2022-05-16",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "7214a84011ab"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "b4cd655fd795",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+     "source": "https://www.kommersant.ru/doc/5368488",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2022-05-16",
+       "meaning": "closing",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2022-05-16",
+       "meaning": "closing",
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества.",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -58792,7 +60128,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "3584e08a0180"
+     "card_hash": "3584e08a0180",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Покупателем стало ООО СК С.Т.С., которое пользуется товарным знаком застройщика «Садовое кольцо».",
+     "source": "https://www.kommersant.ru/doc/5368488",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Покупателем стало ООО СК С.Т.С., которое пользуется товарным знаком застройщика «Садовое кольцо».",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Принадлежавший ранее СУ-155 Серпуховский лифтостроительный завод (СЛЗ) в Подмосковье 16 мая был продан за 1,3 млрд руб., следует из материалов торгов банкротного имущества. Покупателем стало ООО СК С.Т.С., которое пользуется товарным знаком застройщика «Садовое кольцо».",
+       "source": "https://www.kommersant.ru/doc/5368488",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -58814,8 +60174,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "not_control_change"
     }
    },
@@ -58826,7 +60186,8 @@
      "mergers.ru",
      "http://mergers.ru/news/Developer-Sadovoe-kolco-vykupil-Serpuhovskij-liftostroitelnyj-zavod-za-13-mlrd-rublej-78921"
     ]
-   ]
+   ],
+   "date_basis": "closing"
   },
   {
    "id": "g15bee2cf",
@@ -59812,9 +61173,34 @@
     },
     "date": {
      "value": "2021-06-29",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "8cfa07375ae2"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "f403668d5d87",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Сегодня, 29 июня 2021 года, на торгах проданы федеральный 100% пакет акций АО «Международный аэропорт Магнитогорск» (Челябинская область) с рекордным превышением от начальной цены.",
+     "source": "https://uralpress.ru/news/obshchestvo/aeroport-magnitogorska-prodan-s-rekordnym-prevysheniem-nachalnoy-ceny",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2021-06-29",
+       "meaning": "closing",
+       "quote": "Сегодня, 29 июня 2021 года, на торгах проданы федеральный 100% пакет акций АО «Международный аэропорт Магнитогорск» (Челябинская область) с рекордным превышением от начальной цены.",
+       "source": "https://uralpress.ru/news/obshchestvo/aeroport-magnitogorska-prodan-s-rekordnym-prevysheniem-nachalnoy-ceny",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2021-06-29",
+       "meaning": "closing",
+       "quote": "Сегодня, 29 июня 2021 года, на торгах проданы федеральный 100% пакет акций АО «Международный аэропорт Магнитогорск» (Челябинская область) с рекордным превышением от начальной цены.",
+       "source": "https://uralpress.ru/news/obshchestvo/aeroport-magnitogorska-prodan-s-rekordnym-prevysheniem-nachalnoy-ceny",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -59824,7 +61210,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "cd1bd07d694b"
+     "card_hash": "cd1bd07d694b",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Победителем признана компания АО «Ретранс». Новый хозяин предложил за авиапредприятие почти в 9 раз больше начальной цены, выложив за актив 999,89 миллиона рублей.",
+     "source": "https://74.ru/text/transport/2021/06/29/69996872/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Победителем признана компания АО «Ретранс». Новый хозяин предложил за авиапредприятие почти в 9 раз больше начальной цены, выложив за актив 999,89 миллиона рублей.",
+       "source": "https://74.ru/text/transport/2021/06/29/69996872/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Сегодня, 29 июня 2021 года, на торгах проданы федеральный 100% пакет акций АО «Международный аэропорт Магнитогорск» (Челябинская область) с рекордным превышением от начальной цены.",
+       "source": "https://uralpress.ru/news/obshchestvo/aeroport-magnitogorska-prodan-s-rekordnym-prevysheniem-nachalnoy-ceny",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g7ce45d3b",
@@ -59852,7 +61262,8 @@
     }
    },
    "seller": "Росимущество",
-   "seller_id": "g9fd82fee"
+   "seller_id": "g9fd82fee",
+   "date_basis": "closing"
   },
   {
    "id": "g941b547e",
@@ -68988,7 +70399,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-10-16",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Покупатель «Первый» принадлежит семье Ракшина (владельца «Мария-Ра»), продавец — структура «Ростелекома» и Сбербанка; группы не связаны.",
+       "Покупатель «Первый» принадлежит семье Александра Ракшина, не связан с «Ростелекомом»/Сбербанком — независимая сделка."
+      ]
+     }
     },
     "nature": {
      "control_change": true,
@@ -69001,15 +70424,15 @@
      "card_hash": "58e0a0c22cb3",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "\"Телеком-5\" – структура \"Ростелекома\" и Сбербанка - продала бизнес-центр на 6,3 тысячи квадратных метров на Арбате в Москве, написали \"Ведомости\" со ссылкой на выписку из Росреестра.",
+     "quote": "Из лотовой документации следовало, что на участие в аукционе была подана одна заявка и то, что офисный комплекс на Арбате достался \"Первому\" по стартовой цене. Компания \"Первый\" принадлежит семье Александра Ракшина – основателя сибирского ритейлера \"Мария-Ра\".",
      "source": "https://realty.ria.ru/20230926/arbat-1898637678.html",
      "verified_by": "model×2",
-     "verified_at": "2026-10-15",
+     "verified_at": "2026-10-16",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "\"Телеком-5\" – структура \"Ростелекома\" и Сбербанка - продала бизнес-центр на 6,3 тысячи квадратных метров на Арбате в Москве, написали \"Ведомости\" со ссылкой на выписку из Росреестра.",
+       "quote": "Из лотовой документации следовало, что на участие в аукционе была подана одна заявка и то, что офисный комплекс на Арбате достался \"Первому\" по стартовой цене. Компания \"Первый\" принадлежит семье Александра Ракшина – основателя сибирского ритейлера \"Мария-Ра\".",
        "source": "https://realty.ria.ru/20230926/arbat-1898637678.html",
        "quote_checked": true,
        "reader": "A"
@@ -69017,8 +70440,8 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Компания «Первый» стала владельцем бизнес-центра общей площадью 6282 кв. м, расположенного на Арбате рядом со ст. м. «Смоленская» в центре Москвы. Это следует из выписки Росреестра, с которой ознакомились «Ведомости». Там же сказано, что сделка была закрыта 20 сентября. Сама фирма, по данным «СПАРК-Интерфакса», принадлежит семье Александра Ракшина – основателя сибирского ритейлера «Мария-Ра».",
-       "source": "https://www.vedomosti.ru/realty/articles/2023/09/26/997089-struktura-rostelekoma-i-sberbanka-prodala-ofisnii-kompleks",
+       "quote": "\"Телеком-5\" – структура \"Ростелекома\" и Сбербанка - продала бизнес-центр на 6,3 тысячи квадратных метров на Арбате в Москве, написали \"Ведомости\" со ссылкой на выписку из Росреестра. Из нее же также следует, что сделка была закрыта 20 сентября.",
+       "source": "https://realty.ria.ru/20230926/arbat-1898637678.html",
        "quote_checked": true,
        "reader": "B"
       }
@@ -75012,27 +76435,123 @@
      "card_hash": "2f5772dc2f35"
     },
     "price": {
-     "value_rub": 606000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "c6764a4fe061"
+     "value_rub": null,
+     "meaning": "lower_bound",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "08d591507b6f",
+     "meaning_variants": [
+      "lower_bound"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "media_sources",
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "«Ростелеком» получил 100% в разработчике мобильной операционной системы (ОС) «Аврора», реализовав опцион на выкуп 25% у структур Григория Березкина. По условиям соглашения оператор мог выкупить долю в период с марта 2021 года до марта 2028 года по выбору продавца не менее чем за 606 млн руб.",
+     "source": "https://www.kommersant.ru/doc/6223650",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 606000000,
+       "meaning": "lower_bound",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "«Ростелеком» получил 100% в разработчике мобильной операционной системы (ОС) «Аврора», реализовав опцион на выкуп 25% у структур Григория Березкина. По условиям соглашения оператор мог выкупить долю в период с марта 2021 года до марта 2028 года по выбору продавца не менее чем за 606 млн руб.",
+       "source": "https://www.kommersant.ru/doc/6223650",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 606000000,
+       "meaning": "lower_bound",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "По условиям соглашения оператор мог выкупить долю в период с марта 2021 года до марта 2028 года по выбору продавца не менее чем за 606 млн руб.",
+       "source": "https://www.kommersant.ru/doc/6223650",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2024",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "value": "2023-10-03",
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "d49368a4a2e0",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "С 3 октября 2023 года компания «Ростелеком» официально в базе данных ЕГРЮЛ консолидировала 99,9% в разработчике ОС «Аврора» компании ООО «Открытая мобильная платформа» (ОМП), выкупив 25% доли у ООО «Открытая мобильная платформа-центр разработки».",
+     "source": "https://habr.com/ru/news/765514/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2023-10-03",
+       "meaning": "registry",
+       "quote": "С 3 октября 2023 года компания «Ростелеком» официально в базе данных ЕГРЮЛ консолидировала 99,9% в разработчике ОС «Аврора» компании ООО «Открытая мобильная платформа» (ОМП), выкупив 25% доли у ООО «Открытая мобильная платформа-центр разработки».",
+       "source": "https://habr.com/ru/news/765514/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-10-03",
+       "meaning": "registry",
+       "quote": "С 3 октября 2023 года компания «Ростелеком» официально в базе данных ЕГРЮЛ консолидировала 99,9% в разработчике ОС «Аврора» компании ООО «Открытая мобильная платформа» (ОМП), выкупив 25% доли у ООО «Открытая мобильная платформа-центр разработки».",
+       "source": "https://habr.com/ru/news/765514/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a32a3198bd54"
+     "card_hash": "a32a3198bd54",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "С 3 октября 2023 года компания «Ростелеком» официально в базе данных ЕГРЮЛ консолидировала 99,9% в разработчике ОС «Аврора» компании ООО «Открытая мобильная платформа» (ОМП), выкупив 25% доли у ООО «Открытая мобильная платформа-центр разработки». В «Ростелекоме» не раскрыли подробности сделки.",
+     "source": "https://habr.com/ru/news/765514/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "С 3 октября 2023 года компания «Ростелеком» официально в базе данных ЕГРЮЛ консолидировала 99,9% в разработчике ОС «Аврора» компании ООО «Открытая мобильная платформа» (ОМП), выкупив 25% доли у ООО «Открытая мобильная платформа-центр разработки». В «Ростелекоме» не раскрыли подробности сделки.",
+       "source": "https://habr.com/ru/news/765514/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "По данным «СПАРК-Интерфакс», ПАО «Ростелеком» все еще владеет 75% ООО «Открытая мобильная платформа», еще 25% числится за ООО «Открытая мобильная платформа—центр разработки», принадлежащим Ольге Березкиной, сестре совладельца издания РБК и группы ЕСН Григория Березкина.",
+       "source": "https://www.kommersant.ru/doc/6223650",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -75054,12 +76573,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
    },
-   "asset": "ООО «Открытая мобильная платформа»"
+   "asset": "ООО «Открытая мобильная платформа»",
+   "sum_basis": "lower_bound"
   },
   {
    "id": "g7c8f9112",
@@ -80088,11 +81608,58 @@
      "card_hash": "e12a8475a675"
     },
     "price": {
-     "value_rub": 498140000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f38e50a07234"
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "0725faf620cf",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "registry",
+     "event_variants": [
+      "registry"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "Рыночная стоимость 12,45% ООО «Клен», сообщала УК «Восхождение», в реестре юридически значимых сведений — 249,07 млн руб. Таким образом, 24,9% компании могли стоить 498,14 млн руб.",
+     "source": "https://www.kommersant.ru/doc/8251866",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 498140000,
+       "meaning": "estimate",
+       "attribution": "registry",
+       "event": "registry",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Рыночная стоимость 12,45% ООО «Клен», сообщала УК «Восхождение», в реестре юридически значимых сведений — 249,07 млн руб. Таким образом, 24,9% компании могли стоить 498,14 млн руб.",
+       "source": "https://www.kommersant.ru/doc/8251866",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 498140000,
+       "meaning": "estimate",
+       "attribution": "registry",
+       "event": "registry",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Рыночная стоимость 12,45% ООО «Клен», сообщала УК «Восхождение», в реестре юридически значимых сведений — 249,07 млн руб. Таким образом, 24,9% компании могли стоить 498,14 млн руб.",
+       "source": "https://www.kommersant.ru/doc/8251866",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025-11-27",
@@ -80101,14 +81668,38 @@
      "card_hash": "e52e529556e6"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f9eeb7299cbf"
+     "card_hash": "f9eeb7299cbf",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "МКАО «Ареал» (ранее «Хайлэнд Голд») продала 24,9% в ООО «Клен» с лицензиями на разведку и добычу золота и серебра на одноименном месторождении и участках Верхне-Кричальской площади на Чукотке. Это следует из данных ЕГРЮЛ. В конце ноября по 12,45% компании получили ЗПИФ «Согласие Плюс» и ЗПИФ «Цифрон» УК «Восхождение».",
+     "source": "https://www.kommersant.ru/doc/8251866",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "МКАО «Ареал» (ранее «Хайлэнд Голд») продала 24,9% в ООО «Клен» с лицензиями на разведку и добычу золота и серебра на одноименном месторождении и участках Верхне-Кричальской площади на Чукотке. Это следует из данных ЕГРЮЛ. В конце ноября по 12,45% компании получили ЗПИФ «Согласие Плюс» и ЗПИФ «Цифрон» УК «Восхождение».",
+       "source": "https://www.kommersant.ru/doc/8251866",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "МКАО «Ареал» (ранее «Хайлэнд Голд») продала 24,9% в ООО «Клен» с лицензиями на разведку и добычу золота и серебра на одноименном месторождении и участках Верхне-Кричальской площади на Чукотке. Это следует из данных ЕГРЮЛ.",
+       "source": "https://www.kommersant.ru/doc/8251866",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gb4502630",
@@ -80130,11 +81721,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum_basis": "estimate"
   },
   {
    "id": "g74fd5cdb",
@@ -104942,7 +106534,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-10-16",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Vedomosti (2) и new-retail (4) открылись, но не содержат суммы/сторон сделки (21,6 млрд в vedomosti — стартовая цена требования к должнику, не цена сделки).",
+       "Forbes-источник не открылся ни через кэш, ни через WebFetch (JS-заглушка); факты подтверждены по ria.ru и vedomosti.ru."
+      ]
+     }
     },
     "nature": {
      "control_change": true,
@@ -104958,7 +106562,7 @@
      "quote": "Компания \"Киевская площадь\" Зараха Илиева и Года Нисанова приобрела премиальный торговый центр \"Времена года\" на Кутузовском проспекте на западе Москвы, следует из протокола торгов на сайте Российского аукционного дома\".",
      "source": "https://realty.ria.ru/20250411/vremenagoda-2010813962.html",
      "verified_by": "model×2",
-     "verified_at": "2026-10-15",
+     "verified_at": "2026-10-16",
      "readings": [
       {
        "control_change": true,
@@ -104971,7 +106575,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Компания \"Киевская площадь\" Зараха Илиева и Года Нисанова приобрела премиальный торговый центр \"Времена года\" на Кутузовском проспекте на западе Москвы",
+       "quote": "Компания \"Киевская площадь\" Зараха Илиева и Года Нисанова приобрела премиальный торговый центр \"Времена года\" на Кутузовском проспекте на западе Москвы, следует из протокола торгов на сайте Российского аукционного дома\".",
        "source": "https://realty.ria.ru/20250411/vremenagoda-2010813962.html",
        "quote_checked": true,
        "reader": "B"
@@ -105575,11 +107179,62 @@
      "card_hash": "a58ce106c5f3"
     },
     "price": {
-     "value_rub": 807000000.0,
+     "value_rub": 807000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "39fd726478bb"
+     "basis": "verified",
+     "card_hash": "39fd726478bb",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "unknown"
+     ],
+     "quote": "Стоимость приобретения включает выплату денежными средствами в сумме 807 млн руб. и передачу доли в размере 4,9% в российской дочерней компании Группы — операторе средств индивидуальной мобильности — наряду с колл- и пут-опционными соглашениями на ее обратный выкуп в будущем» , — говорится в отчете.",
+     "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 807000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость приобретения включает выплату денежными средствами в сумме 807 млн руб. и передачу доли в размере 4,9% в российской дочерней компании Группы — операторе средств индивидуальной мобильности — наряду с колл- и пут-опционными соглашениями на ее обратный выкуп в будущем» , — говорится в отчете.",
+       "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 807000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Стоимость приобретения включает выплату денежными средствами в сумме 807 млн руб. и передачу доли в размере 4,9% в российской дочерней компании Группы — операторе средств индивидуальной мобильности — наряду с колл- и пут-опционными соглашениями на ее обратный выкуп в будущем» , — говорится в отчете.",
+       "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-12-01",
@@ -105595,7 +107250,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "89818a69fe6e"
+     "card_hash": "89818a69fe6e",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "В ноябре 2024 года Группа приобрела активы и 100% долю в компании-разработчике электросамокатов из Беларуси.",
+     "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В ноябре 2024 года Группа приобрела активы и 100% долю в компании-разработчике электросамокатов из Беларуси.",
+       "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В ноябре 2024 года Группа приобрела активы и 100% долю в компании-разработчике электросамокатов из Беларуси.",
+       "source": "https://reform.news/mts-vykupilo-belarusskuju-kompaniju-razrabotchika-jelektrosamokatov-eleven-za-807-mln-rossijskih-rublej",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gb4a1b960",
@@ -105610,15 +107289,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -123603,8 +125282,8 @@
      "value_rub": 1300000000,
      "meaning": "disclosed",
      "scope": "package",
-     "basis": "stale",
-     "card_hash": "ae395aa5a7cd",
+     "basis": "verified",
+     "card_hash": "f53e4ba3fe2b",
      "meaning_variants": [
       "disclosed"
      ],
@@ -123625,7 +125304,7 @@
      "quote": "Цена сделки составила 1,3 млрд руб., превысив начальную стоимость на 19 тыс. руб.",
      "source": "https://www.kommersant.ru/doc/6579487",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-16",
      "readings": [
       {
        "value_rub": 1300000000,
@@ -123685,7 +125364,18 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-10-16",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Подтверждение независимое, совпадает с ранее зафиксированным верифицированным чтением."
+      ]
+     }
     },
     "nature": {
      "control_change": true,
@@ -123697,11 +125387,11 @@
      "basis": "rule",
      "card_hash": "1631d3b6b8c4",
      "intragroup": false,
-     "control_change_basis": "stale",
+     "control_change_basis": "verified",
      "quote": "АО «Сибирская аграрная группа» («Сибагро») выкупило на торгах 51% акций Богдановичского комбикормового завода, которые принадлежали властям Свердловской области.",
      "source": "https://www.kommersant.ru/doc/6579487",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-16",
      "readings": [
       {
        "control_change": true,
@@ -123714,7 +125404,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "АО «Сибирская аграрная группа» («Сибагро») выкупило на торгах 51% акций Богдановичского комбикормового завода, которые принадлежали властям Свердловской области. Цена сделки составила 1,3 млрд руб., превысив начальную стоимость на 19 тыс. руб. Таким образом, «Сибагро» стала основным владельцем предприятия.",
+       "quote": "АО «Сибирская аграрная группа» («Сибагро») выкупило на торгах 51% акций Богдановичского комбикормового завода, которые принадлежали властям Свердловской области.",
        "source": "https://www.kommersant.ru/doc/6579487",
        "quote_checked": true,
        "reader": "B"
@@ -123780,15 +125470,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "stale",
-     "top_purchases": "stale",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
    }
@@ -139332,17 +141022,87 @@
      "card_hash": "b7fd8af080c5"
     },
     "price": {
-     "value_rub": 648000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "lower_bound",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d07cdd58aa9e"
+     "basis": "verified",
+     "card_hash": "2a7e37ffea4e",
+     "meaning_variants": [
+      "lower_bound"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Это следует из протокола торгов, опубликованного на сайте Российского аукционного дома.",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "package"
+     ],
+     "quote": "Впрочем, у Агафонова есть право заключить договор с банком «Траст», который выступал продавцом данного объекта, в течение 10 рабочих дней по цене не ниже минимальной, говорится в документе. Сейчас она составляет 648 млн руб.",
+     "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 648000000,
+       "meaning": "lower_bound",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Впрочем, у Агафонова есть право заключить договор с банком «Траст», который выступал продавцом данного объекта, в течение 10 рабочих дней по цене не ниже минимальной, говорится в документе. Сейчас она составляет 648 млн руб.",
+       "attribution_quote": "Это следует из протокола торгов, опубликованного на сайте Российского аукционного дома.",
+       "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 648000000,
+       "meaning": "lower_bound",
+       "attribution": "registry",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Впрочем, у Агафонова есть право заключить договор с банком «Траст», который выступал продавцом данного объекта, в течение 10 рабочих дней по цене не ниже минимальной, говорится в документе. Сейчас она составляет 648 млн руб.",
+       "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-08-29",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "e5e0a6be742c"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "e5e0a6be742c",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "29 августа 2023, 01:07 Принадлежавший Микаилу Шишханову торговый центр «Премьера» меняет владельца",
+     "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2023-08-29",
+       "meaning": "publication",
+       "quote": "29 августа 2023, 01:07 Принадлежавший Микаилу Шишханову торговый центр «Премьера» меняет владельца",
+       "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -139352,7 +141112,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "310950e6d430"
+     "card_hash": "310950e6d430",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Бизнесмен Антон Агафонов стал единственным участником аукциона по продаже 100% долей в компании «Ситиград», на балансе которой находится торговый центр «Премьера» (13 820 кв. м) на пр-те Вернадского рядом со ст. м. «Юго-Западная».",
+     "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Бизнесмен Антон Агафонов стал единственным участником аукциона по продаже 100% долей в компании «Ситиград», на балансе которой находится торговый центр «Премьера» (13 820 кв. м) на пр-те Вернадского рядом со ст. м. «Юго-Западная».",
+       "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Бизнесмен Антон Агафонов стал единственным участником аукциона по продаже 100% долей в компании «Ситиград», на балансе которой находится торговый центр «Премьера» (13 820 кв. м) на пр-те Вернадского рядом со ст. м. «Юго-Западная». Это следует из протокола торгов, опубликованного на сайте Российского аукционного дома.",
+       "source": "https://www.vedomosti.ru/realty/articles/2023/08/29/992305-premera-menyaet-vladeltsa",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g668f01f1",
@@ -139374,11 +141158,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "sum_basis": "lower_bound"
   },
   {
    "id": "gd133363d",
@@ -141157,8 +142942,64 @@
      "value_rub": 1200000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "622f732f4e85"
+     "basis": "disputed",
+     "card_hash": "622f732f4e85",
+     "disputed": [
+      {
+       "value_rub": 1200000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "registry",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Это следует из информации, опубликованной в системе «СПАРК- Интерфакс ». Там же сказано, что сделка была одобрена в начале декабря, ее сумма составила 1,2 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2022/12/13/954955-magazin-massimo-dutti-smenil-vladeltsa?shared_token=50ca7d77943944707615fc9ca1492d4080805a5f",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1200000000,
+       "meaning": "disclosed",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Henderson заменит Massimo Dutti на Кузнецком Структура ритейлера приобрела здание площадью 959 кв. м с участком под ним за 1,2 млрд рублей.",
+       "source": "https://cre.ru/news/91064",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Это следует из информации, опубликованной в системе «СПАРК- Интерфакс ». Там же сказано, что сделка была одобрена в начале декабря, ее сумма составила 1,2 млрд руб.",
+     "source": "https://www.vedomosti.ru/business/articles/2022/12/13/954955-magazin-massimo-dutti-smenil-vladeltsa?shared_token=50ca7d77943944707615fc9ca1492d4080805a5f",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1200000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "registry",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Это следует из информации, опубликованной в системе «СПАРК- Интерфакс ». Там же сказано, что сделка была одобрена в начале декабря, ее сумма составила 1,2 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2022/12/13/954955-magazin-massimo-dutti-smenil-vladeltsa?shared_token=50ca7d77943944707615fc9ca1492d4080805a5f",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1200000000,
+       "meaning": "disclosed",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Henderson заменит Massimo Dutti на Кузнецком Структура ритейлера приобрела здание площадью 959 кв. м с участком под ним за 1,2 млрд рублей.",
+       "source": "https://cre.ru/news/91064",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2022-12-13",
@@ -141174,7 +143015,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bb7cae82a931"
+     "card_hash": "bb7cae82a931",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Структура ритейлера Henderson – ООО «Тами и ко» – приобрела у кипрской Hartney Enterprises Limited здание на 959 кв. м и участок под ним на 0,06 га на Кузнецком Мосту в центре Москвы.",
+     "source": "https://www.vedomosti.ru/business/articles/2022/12/13/954955-magazin-massimo-dutti-smenil-vladeltsa?shared_token=50ca7d77943944707615fc9ca1492d4080805a5f",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Структура ритейлера Henderson – ООО «Тами и ко» – приобрела у кипрской Hartney Enterprises Limited здание на 959 кв. м и участок под ним на 0,06 га на Кузнецком Мосту в центре Москвы.",
+       "source": "https://www.vedomosti.ru/business/articles/2022/12/13/954955-magazin-massimo-dutti-smenil-vladeltsa?shared_token=50ca7d77943944707615fc9ca1492d4080805a5f",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Henderson заменит Massimo Dutti на Кузнецком Структура ритейлера приобрела здание площадью 959 кв. м с участком под ним за 1,2 млрд рублей.",
+       "source": "https://cre.ru/news/91064",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g84f65bbe",
@@ -141196,8 +143061,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "target_unconfirmed"
     }
    }
@@ -151151,17 +153016,91 @@
      "card_hash": "cf95eb493022"
     },
     "price": {
-     "value_rub": 480000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "6c2990078425"
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "27638eb13211",
+     "meaning_variants": [
+      "estimate",
+      "reported"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "parties",
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "Об этом «Ведомостям» рассказали владелец и гендиректор Prodamus Роман Мамуткин, а также совладелец и гендиректор AXL Дмитрий Юрченко. Сумма сделки, по их словам, составила около 480 млн руб., или семь годовых выручек AXL.",
+     "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 480000000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "Об этом «Ведомостям» рассказали владелец и гендиректор Prodamus Роман Мамуткин, а также совладелец и гендиректор AXL Дмитрий Юрченко. Сумма сделки, по их словам, составила около 480 млн руб., или семь годовых выручек AXL.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 480000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Об этом «Ведомостям» рассказали владелец и гендиректор Prodamus Роман Мамуткин, а также совладелец и гендиректор AXL Дмитрий Юрченко. Сумма сделки, по их словам, составила около 480 млн руб., или семь годовых выручек AXL.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-08-16",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "bd535c4bc482"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "e7329d52e732",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "16 августа 2023, 14:01 2 минуты Поделиться: Бизнес Автор: Наталья Гормалева Агрегатор платежных систем для онлайн-школ Prodamus купил платформу для создания онлайн-курсов AXL",
+     "source": "https://rb.ru/news/prodamus-axl-deal/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2023-08-16",
+       "meaning": "publication",
+       "quote": "16 августа 2023, 14:01 2 минуты Поделиться: Бизнес Автор: Наталья Гормалева Агрегатор платежных систем для онлайн-школ Prodamus купил платформу для создания онлайн-курсов AXL",
+       "source": "https://rb.ru/news/prodamus-axl-deal/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-08-16",
+       "meaning": "publication",
+       "quote": "16 августа 2023, 14:01",
+       "source": "https://rb.ru/news/prodamus-axl-deal/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -151171,7 +153110,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "fa78d6080397"
+     "card_hash": "fa78d6080397",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Агрегатор платежных систем для онлайн-школ Prodamus закрыл сделку по приобретению платформы для создания онлайн-курсов AXL.",
+     "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Агрегатор платежных систем для онлайн-школ Prodamus закрыл сделку по приобретению платформы для создания онлайн-курсов AXL.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Агрегатор платежных систем для онлайн-школ Prodamus закрыл сделку по приобретению платформы для создания онлайн-курсов AXL.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/08/16/990318-platezhnii-servis-prodamus-kupil-platformu-onlain-kursov-axl",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g4b4c8633",
@@ -151193,8 +153156,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
    },
@@ -151202,7 +153165,9 @@
     "eco.context": [
      "99f5c8536a98"
     ]
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g5e21a38a",
@@ -151411,17 +153376,97 @@
      "card_hash": "938354fa46b7"
     },
     "price": {
-     "value_rub": 407700000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "adec9c8134bd"
+     "basis": "verified",
+     "card_hash": "78c94c2bae96",
+     "meaning_variants": [
+      "estimate",
+      "foreign_currency"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Сумма сделки составила €4 млн (около 412,3 млн руб.).",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "package"
+     ],
+     "quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб». Как указано указано на сайте компании, покупателем стала кипрская инвестиционная компания Geomare Investments Limited, которая связана с уральским девелопером.",
+     "source": "https://www.kommersant.ru/doc/6137760",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 412300000,
+       "meaning": "estimate",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб». Как указано указано на сайте компании, покупателем стала кипрская инвестиционная компания Geomare Investments Limited, которая связана с уральским девелопером.",
+       "attribution_quote": "Сумма сделки составила €4 млн (около 412,3 млн руб.).",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 412300000,
+       "meaning": "foreign_currency",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила €4 млн (около 412,3 млн руб.).",
+       "attribution_quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб».",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-08-03",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "0e3f081b9733"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "50ae13f5e487",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "03.08.2023, 12:15 Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб».",
+     "source": "https://www.kommersant.ru/doc/6137760",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2023-08-03",
+       "meaning": "closing",
+       "quote": "03.08.2023, 12:15 Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб».",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-08-03",
+       "meaning": "publication",
+       "quote": "03.08.2023, 12:15",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -151431,7 +153476,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e5795b22d2a6"
+     "card_hash": "e5795b22d2a6",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб». Как указано указано на сайте компании, покупателем стала кипрская инвестиционная компания Geomare Investments Limited, которая связана с уральским девелопером.",
+     "source": "https://www.kommersant.ru/doc/6137760",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб». Как указано указано на сайте компании, покупателем стала кипрская инвестиционная компания Geomare Investments Limited, которая связана с уральским девелопером.",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Финская SRV Group продала структуре уральского застройщика «Проспект групп» акции своего российского подразделения, сообщает «Ъ-СПб». Как указано указано на сайте компании, покупателем стала кипрская инвестиционная компания Geomare Investments Limited, которая связана с уральским девелопером.",
+       "source": "https://www.kommersant.ru/doc/6137760",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -151453,8 +153522,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -151465,7 +153534,9 @@
     "eco.share": [
      "bd78a8704f66"
     ]
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g6f88ab01",
@@ -164519,8 +166590,66 @@
      "value_rub": 662000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "a9be84bb7726"
+     "basis": "disputed",
+     "card_hash": "a9be84bb7726",
+     "disputed": [
+      {
+       "value_rub": 662000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "paid",
+       "quote": "Группа компаний «Астра» потратила 662 млн руб. на покупку трех ИТ-компаний: «Экзософт» (разработчик платформы для управления ИТ-инфраструктурой ISPSystem), «Номари СиАйЭс» (разработчик платформы корпоративного обучения Knomary) и «Ресолют» (GitFlic, предназначенный для хранения исходного кода и работы с ним).",
+       "attribution_quote": "Группа компаний (ГК) «Астра» раскрыла подробности нескольких заключенных в 2023 г. сделок.",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 662000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "includes_contingent",
+       "quote": "Всего инвестиции ГК «Астра» в «Ресолют», «Номари АйСиЭс» и « Экзософт » составили 662 млн руб.",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Группа компаний «Астра» потратила 662 млн руб. на покупку трех ИТ-компаний: «Экзософт» (разработчик платформы для управления ИТ-инфраструктурой ISPSystem), «Номари СиАйЭс» (разработчик платформы корпоративного обучения Knomary) и «Ресолют» (GitFlic, предназначенный для хранения исходного кода и работы с ним).",
+     "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 662000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "paid",
+       "quote": "Группа компаний «Астра» потратила 662 млн руб. на покупку трех ИТ-компаний: «Экзософт» (разработчик платформы для управления ИТ-инфраструктурой ISPSystem), «Номари СиАйЭс» (разработчик платформы корпоративного обучения Knomary) и «Ресолют» (GitFlic, предназначенный для хранения исходного кода и работы с ним).",
+       "attribution_quote": "Группа компаний (ГК) «Астра» раскрыла подробности нескольких заключенных в 2023 г. сделок.",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 662000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "includes_contingent",
+       "quote": "Всего инвестиции ГК «Астра» в «Ресолют», «Номари АйСиЭс» и « Экзософт » составили 662 млн руб.",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023",
@@ -164536,7 +166665,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f8ba68619692"
+     "card_hash": "f8ba68619692",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Затем «Астра» докупила 7,5% акций в «Экзософт», нарастив свою долю до 55% - то есть до контрольной.",
+     "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Затем «Астра» докупила 7,5% акций в «Экзософт», нарастив свою долю до 55% - то есть до контрольной.",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Группа компаний «Астра» потратила 662 млн руб. на покупку трех ИТ-компаний: «Экзософт» (разработчик платформы для управления ИТ-инфраструктурой ISPSystem), «Номари СиАйЭс» (разработчик платформы корпоративного обучения Knomary) и «Ресолют» (GitFlic, предназначенный для хранения исходного кода и работы с ним).",
+       "source": "https://www.cnews.ru/news/top/2024-07-22_astra_linux_potratila_660_millionov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gec2fae6c",
@@ -164558,8 +166711,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "target_lot"
     }
    }
@@ -201064,11 +203217,45 @@
      "card_hash": "49500a97de66"
     },
     "price": {
-     "value_rub": 576100000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f450a0d4922a"
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "equity",
+     "basis": "read",
+     "card_hash": "f450a0d4922a",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "read",
+     "quote": "Начальная цена лота - 960,2 млн руб. Торги запланированы на середину сентября.",
+     "source": "https://t.me/dealsma/5205",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 960200000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Начальная цена лота - 960,2 млн руб. Торги запланированы на середину сентября.",
+       "source": "https://t.me/dealsma/5205",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-09-01",
@@ -201106,8 +203293,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
@@ -203892,17 +206079,89 @@
      "card_hash": "f50da6b0981c"
     },
     "price": {
-     "value_rub": 892000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d84e89e7c2f7"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "6eaa7f22330d",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "media_sources",
+      "unknown"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "Победитель ООО \"АНТРЕСОЛЬ\" Цена продажи 892 000 000 руб.",
+     "source": "https://rt-capital.ru/deals/19192/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 892000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Победитель ООО \"АНТРЕСОЛЬ\" Цена продажи 892 000 000 руб.",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 892000000,
+       "meaning": "reported",
+       "attribution": "unknown",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Цена продажи 892 000 000 руб.",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2024",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "d49368a4a2e0"
+     "value": "2025-10-30",
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "d49368a4a2e0",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Дата торгов 30.10.2025",
+     "source": "https://rt-capital.ru/deals/19192/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2025-10-30",
+       "meaning": "closing",
+       "quote": "Дата торгов 30.10.2025",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2025-10-30",
+       "meaning": "closing",
+       "quote": "Дата торгов 30.10.2025",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -203912,7 +206171,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "df589662edb7"
+     "card_hash": "df589662edb7",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Собственник АО НПК «Северная заря» Подача заявок с 29.09.2025 по 24.10.2025 Дата торгов 30.10.2025 Площадка торгов РАД Следить за торгами Количество участников 1 Победитель ООО \"АНТРЕСОЛЬ\"",
+     "source": "https://rt-capital.ru/deals/19192/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Собственник АО НПК «Северная заря» Подача заявок с 29.09.2025 по 24.10.2025 Дата торгов 30.10.2025 Площадка торгов РАД Следить за торгами Количество участников 1 Победитель ООО \"АНТРЕСОЛЬ\"",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Собственник АО НПК «Северная заря» Подача заявок с 29.09.2025 по 24.10.2025 Дата торгов 30.10.2025 Площадка торгов РАД Следить за торгами Количество участников 1 Победитель ООО \"АНТРЕСОЛЬ\" Цена продажи 892 000 000 руб.",
+       "source": "https://rt-capital.ru/deals/19192/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -203934,13 +206217,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
    "seller": "Ростех",
-   "seller_id": "g7802e51e"
+   "seller_id": "g7802e51e",
+   "sum_basis": "reported"
   },
   {
    "id": "cb44ed7f0",
@@ -205371,14 +207655,98 @@
      "value_rub": 610000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "4aeadd4b2a00"
+     "basis": "disputed",
+     "card_hash": "4aeadd4b2a00",
+     "disputed": [
+      {
+       "value_rub": 610000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей. Это следует из аукционной документации.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 610000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Согласно итоговому протоколу, ООО «Рудпром» предложило сумму в 600 млн рублей за 100% акций завода «Эльдако». Однако победителем торгов стало «Управление известково-цементными активами», предложившее 610 млн рублей.",
+       "attribution_quote": "Согласно итоговому протоколу",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей. Это следует из аукционной документации.",
+     "source": "https://abireg.ru/newsitem/98827/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 610000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей. Это следует из аукционной документации.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 610000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Согласно итоговому протоколу, ООО «Рудпром» предложило сумму в 600 млн рублей за 100% акций завода «Эльдако». Однако победителем торгов стало «Управление известково-цементными активами», предложившее 610 млн рублей.",
+       "attribution_quote": "Согласно итоговому протоколу",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-08-15",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "affff84a0d5a"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "e75c9a86178c",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "Воронеж. 15.08.2023. ABIREG.RU – ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+     "source": "https://abireg.ru/newsitem/98827/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2023-08-15",
+       "meaning": "closing",
+       "quote": "Воронеж. 15.08.2023. ABIREG.RU – ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-08-15",
+       "meaning": "publication",
+       "quote": "Воронеж. 15.08.2023. ABIREG.RU – ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -205388,7 +207756,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7a80cd21d8d1"
+     "card_hash": "7a80cd21d8d1",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+     "source": "https://abireg.ru/newsitem/98827/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "ООО «Управление известково-цементными активами» Алексея Филина выкупило на торгах меловой завод «Эльдако» в Лискинском районе Воронежской области за 610 млн рублей.",
+       "source": "https://abireg.ru/newsitem/98827/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -205410,13 +207802,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "not_control_change"
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-11"
+   "followup_researched": "2026-09-11",
+   "date_basis": "publication"
   },
   {
    "id": "c15d1a169",
@@ -214481,17 +216874,79 @@
      "card_hash": "af4f3ab41d95"
     },
     "price": {
-     "value_rub": 552600000.0,
+     "value_rub": 552000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "abb00381849c"
+     "scope": "package",
+     "basis": "read",
+     "card_hash": "abb00381849c",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Об этом говорится в документе, имеющемся в распоряжении Агентства городских новостей «Москва».",
+     "scope_basis": "read",
+     "quote": "«На основании журнала хода торгов победителем аукциона признан участник ООО «Рид Ойл» , предложивший наибольшую цену объекта недвижимого имущества в размере 552 млн 608 тыс. руб., без учета НДС», – указано в документе.",
+     "source": "https://www.mskagency.ru/materials/3559673",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 552000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "«На основании журнала хода торгов победителем аукциона признан участник ООО «Рид Ойл» , предложивший наибольшую цену объекта недвижимого имущества в размере 552 млн 608 тыс. руб., без учета НДС», – указано в документе.",
+       "attribution_quote": "Об этом говорится в документе, имеющемся в распоряжении Агентства городских новостей «Москва».",
+       "source": "https://www.mskagency.ru/materials/3559673",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-07-31",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "c6121d7f5c3c"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "22e1b8c714e8",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "Торги прошли 31 июля, на лот претендовало три участника.",
+     "source": "https://www.mskagency.ru/materials/3559673",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-07-31",
+       "meaning": "closing",
+       "quote": "Торги прошли 31 июля, на лот претендовало три участника.",
+       "source": "https://www.mskagency.ru/materials/3559673",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-07-31",
+       "meaning": "publication",
+       "quote": "17:52 31.07.2026 (обновлено: 19:02 31.07.2026) Бывший топ-менеджер \"Лукойла\" приобрел старинную усадьбу в Москве",
+       "source": "https://realty.ria.ru/20260731/usadba-2108266479.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -214501,7 +216956,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a5e1ef8b5ef8"
+     "card_hash": "a5e1ef8b5ef8",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "На основании журнала хода торгов победителем аукциона признан участник ООО «Рид Ойл» , предложивший наибольшую цену объекта недвижимого имущества в размере 552 млн 608 тыс. руб., без учета НДС»,",
+     "source": "https://www.mskagency.ru/materials/3559673",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "На основании журнала хода торгов победителем аукциона признан участник ООО «Рид Ойл» , предложивший наибольшую цену объекта недвижимого имущества в размере 552 млн 608 тыс. руб., без учета НДС»,",
+       "source": "https://www.mskagency.ru/materials/3559673",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Компания \"Рид Ойл\" бывшего топ-менеджера \"Лукойла\" Андрея Кузяева выиграла торги по продаже усадьбы XVIII-XIX веков в Лефортове в Москве, известной как дача Строгановых. Усадьба, представляющая собой объект культурного наследия федерального значения, выставлялась на торги компанией \" Дом.РФ \" за 198,7 миллиона рублей.",
+       "source": "https://realty.ria.ru/20260731/usadba-2108266479.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -214516,21 +216995,22 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-11",
    "seller_id": "gb2b066c3",
-   "buyer": "gf8c3a45a"
+   "buyer": "gf8c3a45a",
+   "date_basis": "publication"
   },
   {
    "id": "g677f3309",
@@ -215327,11 +217807,57 @@
      "card_hash": "f2fef0f8f470"
     },
     "price": {
-     "value_rub": 404000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d27f951ff001"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "481da35e2832",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "Стоимость объекта составляет 404 миллиона рублей",
+     "source": "https://ura.news/news/1053115470",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 404000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Стоимость объекта составляет 404 миллиона рублей",
+       "source": "https://ura.news/news/1053115470",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 404000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В Сургуте выставили на продажу производственную базу строительной компании «Еврострой». Стоимость объекта составляет 404 миллиона рублей, следует из объявления на сайте бесплатных объявлений.",
+       "source": "https://ura.news/news/1053115470",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-08-04",
@@ -215369,13 +217895,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
    "followup_researched": "2026-09-07",
-   "seller_id": "gf24e2a58"
+   "seller_id": "gf24e2a58",
+   "sum_basis": "reported"
   },
   {
    "id": "gab0f3dde",
@@ -226318,11 +228845,60 @@
      "card_hash": "f5d86f356671"
     },
     "price": {
-     "value_rub": 735000000.0,
+     "value_rub": 735000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "6ca6222138d7"
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "6ca6222138d7",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "свидетельствуют данные Федерального реестра сведений о банкротстве",
+     "scope_basis": "verified",
+     "quote": "Производственные мощности корпорации «Союз» в Калининграде на Правой набережной выкупили за 735 млн руб. Имущественный комплекс обанкротившегося ООО «Союз-М» выкупила другая ранее входившая в корпорацию компания «Союз-ТТМ»",
+     "source": "https://rugrad.online/news/1457950/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 735000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Производственные мощности корпорации «Союз» в Калининграде на Правой набережной выкупили за 735 млн руб. Имущественный комплекс обанкротившегося ООО «Союз-М» выкупила другая ранее входившая в корпорацию компания «Союз-ТТМ»",
+       "attribution_quote": "свидетельствуют данные Федерального реестра сведений о банкротстве",
+       "source": "https://rugrad.online/news/1457950/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 735000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Производственные мощности корпорации «Союз» в Калининграде на Правой набережной выкупили за 735 млн руб. Имущественный комплекс обанкротившегося ООО «Союз-М» выкупила другая ранее входившая в корпорацию компания «Союз-ТТМ» (управляет в Калининграде терминалом для перевалки растительных масел, мощностями по переработке), свидетельствуют данные Федерального реестра сведений о банкротстве.",
+       "attribution_quote": "свидетельствуют данные Федерального реестра сведений о банкротстве",
+       "source": "https://rugrad.online/news/1457950/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026",
@@ -226331,14 +228907,38 @@
      "card_hash": "7c8511cdb6ae"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": true,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "db7017d7acc0"
+     "card_hash": "db7017d7acc0",
+     "intragroup": true,
+     "control_change_basis": "verified",
+     "quote": "Имущественный комплекс обанкротившегося ООО «Союз-М» выкупила другая ранее входившая в корпорацию компания «Союз-ТТМ» (управляет в Калининграде терминалом для перевалки растительных масел, мощностями по переработке)",
+     "source": "https://rugrad.online/news/1457950/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "Имущественный комплекс обанкротившегося ООО «Союз-М» выкупила другая ранее входившая в корпорацию компания «Союз-ТТМ» (управляет в Калининграде терминалом для перевалки растительных масел, мощностями по переработке)",
+       "source": "https://rugrad.online/news/1457950/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": true,
+       "quote": "Согласно данным справочно-аналитической системы Seldon.Basis , с 2023 года Пинчук является единоличным учредителем ООО «Союз-М». «Союз-ТТМ» с конца 2022 года находится под контролем структур бывшего топ-менеджера «Лукойла» Александра Раппопорта, пишет «Коммерсант». По данным издания, Андрей Пинчук является его тестем.",
+       "source": "https://rugrad.online/news/1457950/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -226360,8 +228960,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "intragroup",
+     "top_purchases": "intragroup",
      "multiple_text": "not_control_change"
     }
    },
@@ -227690,17 +230290,97 @@
      "card_hash": "a61428317265"
     },
     "price": {
-     "value_rub": 1160000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d80f914640f7"
+     "basis": "verified",
+     "card_hash": "93e759969155",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ.",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "package",
+      "unknown"
+     ],
+     "quote": "Корпорация получит актив по начальной цене 1,16 миллиарда рублей.",
+     "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 1160000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Корпорация получит актив по начальной цене 1,16 миллиарда рублей.",
+       "attribution_quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ.",
+       "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1160000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Корпорация получит актив по начальной цене 1,16 миллиарда рублей.",
+       "attribution_quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ.",
+       "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-09-10",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "a4f5a8523db8"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "0e10c9ddc503",
+     "meaning_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "18:05 10.09.2026 НИИ рядом с Белорусским вокзалом перейдет авиационной корпорации \"Рубин\"",
+     "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-09-10",
+       "meaning": "closing",
+       "quote": "18:05 10.09.2026 НИИ рядом с Белорусским вокзалом перейдет авиационной корпорации \"Рубин\"",
+       "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-09-10",
+       "meaning": "announcement",
+       "quote": "Торги назначены на 10 сентября.",
+       "source": "https://www.kommersant.ru/doc/8878630",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -227710,7 +230390,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e014d945e7ad"
+     "card_hash": "e014d945e7ad",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ. Концерн \"Созвездие\" (входит в \" Ростех \") выставлял на торги земельный участок площадью 0,34 гектара",
+     "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ. Концерн \"Созвездие\" (входит в \" Ростех \") выставлял на торги земельный участок площадью 0,34 гектара",
+       "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Авиационная корпорация \"Рубин\" подала единственную заявку на участие в торгах по продаже имущественного комплекса рядом с Белорусским вокзалом в Москве, где ранее располагался ВНИИ \"Эталон\", сообщается на площадке ЭТПРФ.",
+       "source": "https://realty.ria.ru/20260910/rubin-2116889627.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -227732,8 +230436,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
@@ -227752,7 +230456,9 @@
    },
    "weekly_researched": "2026-09-21",
    "separate_transaction_reviewed": true,
-   "followup_researched": "2026-10-14"
+   "followup_researched": "2026-10-14",
+   "sum_basis": "auction_start",
+   "date_basis": "announcement"
   },
   {
    "id": "g7c536b72",
@@ -230133,9 +232839,35 @@
     },
     "date": {
      "value": "2026-09-22",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "3b6a18106d0a"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "b04e817b3986",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "17:30 22.09.2026 (обновлено: 17:42 22.09.2026) \"Дом.РФ\" продал бывший подмосковный филиал \"Роскапстроя\"",
+     "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-09-22",
+       "meaning": "closing",
+       "quote": "17:30 22.09.2026 (обновлено: 17:42 22.09.2026) \"Дом.РФ\" продал бывший подмосковный филиал \"Роскапстроя\"",
+       "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-09-22",
+       "meaning": "publication",
+       "quote": "17:30 22.09.2026 (обновлено: 17:42 22.09.2026) \"Дом.РФ\" продал бывший подмосковный филиал \"Роскапстроя\"",
+       "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -230145,7 +232877,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9cbed88ce6d1"
+     "card_hash": "9cbed88ce6d1",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Как указывается в протоколе торгов, победила в аукционе Ольга Маслова.",
+     "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Как указывается в протоколе торгов, победила в аукционе Ольга Маслова.",
+       "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "\"Дом.РФ\" продал на торгах имущественный комплекс в подмосковном поселке Красково, где ранее находился Московский областной филиал \"Роскапстроя\".",
+       "source": "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -230185,7 +232941,8 @@
      "5456c8e036f2"
     ]
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "date_basis": "publication"
   },
   {
    "id": "g685f1e39",
@@ -230544,17 +233301,88 @@
      "card_hash": "25a93df70717"
     },
     "price": {
-     "value_rub": 438900000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "0650dff881a3"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "41438c8096d1",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "При этом реальная цена выкупа была гораздо ниже: 438,9 млн руб., сказано в решении Арбитражного суда Москвы в споре о стоимости выкупа между ДГИ и «Парадизом».",
+     "source": "https://www.kommersant.ru/doc/8972695",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 438900000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "При этом реальная цена выкупа была гораздо ниже: 438,9 млн руб., сказано в решении Арбитражного суда Москвы в споре о стоимости выкупа между ДГИ и «Парадизом».",
+       "source": "https://www.kommersant.ru/doc/8972695",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 438900000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "При этом реальная цена выкупа была гораздо ниже: 438,9 млн руб., сказано в решении Арбитражного суда Москвы в споре о стоимости выкупа между ДГИ и «Парадизом».",
+       "source": "https://www.kommersant.ru/doc/8972528",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2026-09-23",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "5d92b95534d4"
+     "value": "2026-09-14",
+     "meaning": "registry",
+     "basis": "verified",
+     "card_hash": "5d92b95534d4",
+     "meaning_variants": [
+      "registry"
+     ],
+     "quote": "Московские власти 14 сентября 2026 года продали помещение площадью 3,06 тыс. кв. м в здании кинотеатра «Пять звезд» на улице Бахрушина в центре столицы, обнаружил “Ъ” в базе сервиса Asseto. В выписке из ЕГРН на объект сказано, что новым владельцем имущества стала структура кинокомпании «Парадиз» — ООО «Кинокомпания \"Парадиз продакшнз\"», а залогодателем стала мэрия Москвы.",
+     "source": "https://www.kommersant.ru/doc/8972695",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-09-14",
+       "meaning": "registry",
+       "quote": "Московские власти 14 сентября 2026 года продали помещение площадью 3,06 тыс. кв. м в здании кинотеатра «Пять звезд» на улице Бахрушина в центре столицы, обнаружил “Ъ” в базе сервиса Asseto. В выписке из ЕГРН на объект сказано, что новым владельцем имущества стала структура кинокомпании «Парадиз» — ООО «Кинокомпания \"Парадиз продакшнз\"», а залогодателем стала мэрия Москвы.",
+       "source": "https://www.kommersant.ru/doc/8972695",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-09-14",
+       "meaning": "registry",
+       "quote": "Московские власти 14 сентября 2026 года продали помещение площадью 3,06 тыс. кв. м в здании кинотеатра «Пять звезд» на улице Бахрушина в центре столицы, обнаружил “Ъ” в базе сервиса Asseto.",
+       "source": "https://www.kommersant.ru/doc/8972528",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -230564,7 +233392,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c384dfc2c8c2"
+     "card_hash": "c384dfc2c8c2",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "В выписке из ЕГРН на объект сказано, что новым владельцем имущества стала структура кинокомпании «Парадиз» — ООО «Кинокомпания \"Парадиз продакшнз\"», а залогодателем стала мэрия Москвы.",
+     "source": "https://www.kommersant.ru/doc/8972695",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В выписке из ЕГРН на объект сказано, что новым владельцем имущества стала структура кинокомпании «Парадиз» — ООО «Кинокомпания \"Парадиз продакшнз\"», а залогодателем стала мэрия Москвы.",
+       "source": "https://www.kommersant.ru/doc/8972695",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Московская мэрия реализовала площади в кинотеатре «Пять звезд» на улице Бахрушина в центре столицы за 438,9 млн руб. Покупателем стала структура оператора кинопоказов — группа «Парадиз», которая уже являлась совладельцем объекта.",
+       "source": "https://www.kommersant.ru/doc/8972528",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -230586,8 +233438,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -230609,7 +233461,8 @@
      "2446d7165499"
     ]
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "sum_basis": "reported"
   },
   {
    "id": "gb7ea4703",
@@ -234849,27 +237702,118 @@
      "card_hash": "b0a8010ca2aa"
     },
     "price": {
-     "value_rub": 600000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "raise",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "a3cef40abbbf"
+     "basis": "verified",
+     "card_hash": "c8e62637f969",
+     "meaning_variants": [
+      "raise"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "parties",
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ.",
+     "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 600000000,
+       "meaning": "raise",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ.",
+       "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 600000000,
+       "meaning": "raise",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ.",
+       "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2026-09-30",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "2d8b4b8bb986"
+     "value": "2026-10-01",
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "2d8b4b8bb986",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Мединдустрия Инвестиции 1 октября 2026, 9:24",
+     "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-10-01",
+       "meaning": "publication",
+       "quote": "Мединдустрия Инвестиции 1 октября 2026, 9:24",
+       "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d66beffff285"
+     "card_hash": "d66beffff285",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ.",
+     "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Компания KAMA FLOW инвестирует 600 млн рублей в проект российского разработчика и производителя диагностических тест-систем «Рапид Био» по развитию новых профильных платформ.",
+       "source": "https://vademec.ru/news/2026/10/01/rossiyskiy-razrabotchik-diagnosticheskikh-test-sistem-privlek-600-mln-rubley-k-proektu-po-rasshireni/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Российский разработчик экспресс-тестов “Рапид Био” привлек 600 млн рублей от инвестиционной компании Kama Flow.",
+       "source": "https://t.me/rusven/7762",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -234891,9 +237835,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
     }
    },
    "buyer": "g330b6e10",
@@ -234918,7 +237862,8 @@
      "https://t.me/LawFirms/11506"
     ]
    ],
-   "weekly_researched": "2026-10-07"
+   "weekly_researched": "2026-10-07",
+   "sum_basis": "raise"
   },
   {
    "id": "g5aabf462",
@@ -244762,17 +247707,92 @@
      "card_hash": "76dc5f9b18b4"
     },
     "price": {
-     "value_rub": 553740000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "01e6ed1a1590"
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "41fb5e69cdf7",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Итоги аукциона опубликованы 14 октября.",
+     "scope_basis": "verified",
+     "quote": "РПК стала единственным участником торгов, предложив 553,74 млн руб., что соответствует начальной цене.",
+     "source": "https://www.kommersant.ru/doc/9026346",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value_rub": 553740000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "РПК стала единственным участником торгов, предложив 553,74 млн руб., что соответствует начальной цене.",
+       "attribution_quote": "Итоги аукциона опубликованы 14 октября.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 553740000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "РПК стала единственным участником торгов, предложив 553,74 млн руб., что соответствует начальной цене.",
+       "attribution_quote": "В пояснениях к отчетности «Дальполиметалла» за 2025 год говорится, что РФ владеет 67% акций компании, перерегистрация еще 33% была не завершена.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
-     "value": "2026-10-15",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "8cd0fe01b72f"
+     "value": "2026-10-14",
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "8cd0fe01b72f",
+     "meaning_variants": [
+      "closing",
+      "publication"
+     ],
+     "quote": "Итоги аукциона опубликованы 14 октября.",
+     "source": "https://www.kommersant.ru/doc/9026346",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "value": "2026-10-14",
+       "meaning": "publication",
+       "quote": "Итоги аукциона опубликованы 14 октября.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-14",
+       "meaning": "closing",
+       "quote": "Итоги аукциона опубликованы 14 октября.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -244782,7 +247802,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7c953f5a3606"
+     "card_hash": "7c953f5a3606",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "АО «Русская промышленная компания» (РПК) признано победителем торгов по продаже 67% акций ГМК «Дальполиметалл», производителя цинкового и свинцового концентратов с содержанием серебра в Приморском крае.",
+     "source": "https://www.kommersant.ru/doc/9026346",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-16",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "АО «Русская промышленная компания» (РПК) признано победителем торгов по продаже 67% акций ГМК «Дальполиметалл», производителя цинкового и свинцового концентратов с содержанием серебра в Приморском крае.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "АО «Русская промышленная компания» (РПК) признано победителем торгов по продаже 67% акций ГМК «Дальполиметалл», производителя цинкового и свинцового концентратов с содержанием серебра в Приморском крае.",
+       "source": "https://www.kommersant.ru/doc/9026346",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gbe404ae4",
@@ -244804,13 +247848,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change"
     }
    },
    "proofread": "2026-10-15",
-   "deep_researched": "2026-10-16"
+   "deep_researched": "2026-10-16",
+   "sum_basis": "auction_start"
   },
   {
    "id": "gd09e0945",
