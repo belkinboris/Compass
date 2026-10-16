@@ -2,52 +2,13 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d78444729",
-   "title": "У национализированного создателя «Мира танков» новый владелец",
+   "draft_id": "d13835285",
+   "title": "Более половины Николаевки в пригороде Славянска перешли под контроль ВС РФ",
    "date": "2026-10-16",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-16_u_natsionalizirovannogo_sozdatelya"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-16",
-     "title": "Переговоры",
-     "note": "У компании «Леста Игры», разрабатывающей «Мир танков» и «Мир кораблей», появился новый инвестор. Вместо государства им стала АО «Промышленные сооружения», за который стоит консорциум частных инвесторов. Компания намерена создать венчурный фонд и вложить в…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-16_u_natsionalizirovannogo_sozdatelya"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80569447",
-   "title": "Цивилев заявил о запуске нового инвестиционного цикла в энергетике",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261016/investitsii-2125003412.html"
+     "web:iz.ru",
+     "https://iz.ru/2185529/bolee-poloviny-nikolaevki-v-prigorode-slavianska-nakhoditsia-pod-kontrolem-vs-rf-izi"
     ]
    ],
    "sum": null,
@@ -65,8 +26,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79067111",
+   "title": "В России выросли продажи книг о гонках",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261016/prodazhi-2125018911.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
