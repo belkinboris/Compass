@@ -2961,6 +2961,32 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
     assert approve.last_by_deal(decisions, approve.POST_VERDICTS)["p1"]["verdict"] == "post_no"
 
 
+def test_approved_joint_post_publishes_all_its_cards():
+    """«📣 Пост одобрен» под общим постом одобряет и все его карточки.
+
+    16 октября 2026 (указ № 738): партнёр одобрил общий пост утром, а
+    карточки ждали суток молчания, пост ждал карточек — к ночи не вышло
+    ничего. Своё «придержать» у отдельной карточки сильнее.
+    """
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    fresh = now.isoformat(timespec="seconds")
+    base = {"draft_sent": True, "pending_since": fresh,
+            "reviewed": "2026-10-16", "accepted": "2026-10-16"}
+    cards = [dict(base, id="j1", post_covers=["j1", "j2", "j3"]),
+             dict(base, id="j2", no_post=True), dict(base, id="j3", no_post=True),
+             dict(base, id="other")]
+    decisions = [{"deal_id": "j1", "verdict": "post_yes", "created_at": "a"},
+                 {"deal_id": "j3", "verdict": "hold", "created_at": "b"}]
+    publish, hold, wait, _discard = approve.plan_actions(cards, decisions, now)
+    assert {c["id"] for c, _o, _w in publish} == {"j1", "j2"}
+    assert {c["id"] for c, _w in hold} == {"j3"}
+    assert {c["id"] for c, _w in wait} == {"other"}
+
+
 def test_raw_drafts_need_a_button_and_never_publish_on_silence():
     """Сырьё решается только кнопкой: молчание не делает его сделкой.
 
