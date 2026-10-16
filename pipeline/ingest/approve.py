@@ -159,11 +159,25 @@ def plan_actions(cards, decisions, now):
     Ответ с текстом на сообщение [пост <id>] приходит вердиктом 'approve' с
     edited_text — правя пост, человек одновременно одобряет карточку."""
     by_deal = last_by_deal(decisions, CARD_VERDICTS)
+    # ОДОБРЕННЫЙ ОБЩИЙ ПОСТ ВЫПУСКАЕТ ВСЕ СВОИ КАРТОЧКИ. У общего поста
+    # (`post_covers`, указ № 738) кнопка одна — «📣 Пост одобрен», и
+    # нажавший её одобрил и сделки, о которых пост. Раньше это был только
+    # модификатор канала: 16 октября 2026 партнёр одобрил пост утром,
+    # карточки ждали суток молчания, пост ждал карточек — к ночи не вышло
+    # ничего. Своё карточное решение («придержать», «выкинуть») сильнее.
+    post_mod = last_by_deal(decisions, POST_VERDICTS)
+    joint_ok = {}
+    for card in cards:
+        if card.get('post_covers') and (post_mod.get(card['id']) or {}).get('verdict') == 'post_yes':
+            for cid in card['post_covers']:
+                joint_ok[cid] = card['id']
     publish, hold, wait, discard = [], [], [], []
     for card in cards:
         decision = by_deal.get(card['id'])
         if decision and decision['verdict'] == 'approve':
             publish.append((card, decision.get('edited_text'), 'решение: опубликовать'))
+        elif not decision and card['id'] in joint_ok:
+            publish.append((card, None, 'решение: одобрен общий пост (%s)' % joint_ok[card['id']]))
         elif decision and decision['verdict'] == 'discard':
             # «Выкинуть» сильнее «придержать»: карточка не выйдет никуда и
             # исчезает из очереди насовсем. Просьба владельца 6 августа: у
