@@ -219,6 +219,12 @@ def _ensure_user_columns(db_engine) -> None:
         if "approved" not in cols:
             conn.execute(text("ALTER TABLE users ADD COLUMN approved BOOLEAN"))
             conn.execute(text("UPDATE users SET approved = :yes WHERE approved IS NULL"), {"yes": True})
+        # comment_name_consent_at — 16 октября 2026, отдельное согласие на
+        # показ имени у комментариев. TIMESTAMP понимают и SQLite, и Postgres;
+        # у существующих аккаунтов остаётся пустым: согласие спросим при
+        # первом комментарии.
+        if "comment_name_consent_at" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN comment_name_consent_at TIMESTAMP"))
 
 
 @app.on_event("startup")
@@ -1589,6 +1595,9 @@ class SubscriptionIn(BaseModel):
 
 class CommentIn(BaseModel):
     body: str
+    # Галочка «Согласен, чтобы рядом с моим комментарием показывались мои имя
+    # и фамилия» — нужна только под первым комментарием (см. post_comment).
+    name_consent: bool = False
 
 
 class CorrectionIn(BaseModel):
@@ -1694,7 +1703,8 @@ def me(user: User | None = Depends(_current_user)):
     return {"logged_in": True, "email": user.email, "role": user.role.value,
             "tier": user.tier.value, "is_verified": user.is_verified,
             "full_name": user.full_name, "company": user.company, "position": user.position,
-            "gate": ACCESS_GATE, "approved": bool(user.approved)}
+            "gate": ACCESS_GATE, "approved": bool(user.approved),
+            "comment_name_consent": user.comment_name_consent_at is not None}
 
 
 @app.patch("/api/me")
@@ -1758,6 +1768,16 @@ def delete_account(payload: AccountDeleteIn, request: Request, response: Respons
     thread_ids = [t.id for t in db.query(AssistantThread).filter(AssistantThread.user_id == user.id).all()]
     if thread_ids:
         db.query(AssistantMessage).filter(AssistantMessage.thread_id.in_(thread_ids)) \
+            .delete(synchronize_session=False)
+    # Оценки ответов ассистента уходят вместе с аккаунтом (16 октября 2026):
+    # в них вопрос, ответ и комментарий человека. Удаляются до диалогов — на
+    # диалог оценка ссылается (thread_id), и Postgres не дал бы удалить диалог
+    # раньше неё. Оценки по диалогам этого человека — тоже, даже если оставлены
+    # без входа: диалог его, и после удаления ссылаться им не на что.
+    feedback = db.query(AssistantFeedback).filter(AssistantFeedback.user_id == user.id)
+    feedback.delete(synchronize_session=False)
+    if thread_ids:
+        db.query(AssistantFeedback).filter(AssistantFeedback.thread_id.in_(thread_ids)) \
             .delete(synchronize_session=False)
     db.query(AssistantThread).filter(AssistantThread.user_id == user.id).delete(synchronize_session=False)
     db.query(Notification).filter(Notification.user_id == user.id).delete(synchronize_session=False)
@@ -4763,6 +4783,12 @@ def delete_assistant_thread(thread_id: int, user: User | None = Depends(_current
     ))
     if not thread:
         return JSONResponse({"error": "диалог не найден"}, status_code=404)
+    # Оценка ответа ссылается на диалог (thread_id): без отвязки Postgres не
+    # дал бы удалить диалог, SQLite молча оставил бы висячую ссылку. Сама
+    # оценка остаётся — её срок описан в политике (до трёх лет или до
+    # удаления аккаунта).
+    db.query(AssistantFeedback).filter(AssistantFeedback.thread_id == thread.id) \
+        .update({AssistantFeedback.thread_id: None}, synchronize_session=False)
     db.delete(thread); db.commit()
     return {"ok": True}
 
@@ -4975,6 +5001,14 @@ def post_comment(deal_id: str, comment: CommentIn, user: User | None = Depends(_
         return JSONResponse({"error": "пустой комментарий"}, status_code=400)
     if len(body) > 4000:
         return JSONResponse({"error": "слишком длинный комментарий"}, status_code=400)
+    # Имя автора публикуется рядом с комментарием — это распространение
+    # персональных данных, и согласие на него отдельное (ст. 10.1 152-ФЗ,
+    # 16 октября 2026). Спрашиваем один раз, момент согласия храним у аккаунта.
+    if user.comment_name_consent_at is None:
+        if not comment.name_consent:
+            return JSONResponse({"error": "отметьте согласие на показ имени рядом с комментарием",
+                                 "need_name_consent": True}, status_code=400)
+        user.comment_name_consent_at = datetime.now(timezone.utc).replace(tzinfo=None)
     row = Comment(deal_id=deal_id, user_id=user.id, body=body, status="approved")
     db.add(row)
     db.commit()

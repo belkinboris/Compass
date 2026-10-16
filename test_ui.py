@@ -84,6 +84,13 @@ def gated_url():
     proc.wait(timeout=10)
 
 
+# Плашка о cookie (16 октября 2026) висит внизу экрана, пока её не закрыли, —
+# и перехватывала бы клики по кнопкам внизу в чужих тестах. Поэтому каждый
+# контекст браузера в этом наборе начинает с «плашку уже закрыли»; тесты самой
+# плашки берут чистый контекст через browser.fresh_context.
+COOKIE_NOTE_SEEN = "try{localStorage.setItem('kx_cookie_ok','1')}catch(e){}"
+
+
 @pytest.fixture(scope="session")
 def browser():
     """Один браузер на сессию: запуск Chromium дороже всех тестов вместе."""
@@ -92,6 +99,19 @@ def browser():
             br = p.chromium.launch(**LAUNCH)
         except Exception as exc:
             pytest.skip(f"Chromium для Playwright недоступен: {exc}")
+        raw_context, raw_page = br.new_context, br.new_page
+
+        def new_context(**kw):
+            ctx = raw_context(**kw)
+            ctx.add_init_script(COOKIE_NOTE_SEEN)
+            return ctx
+
+        def new_page(**kw):
+            pg = raw_page(**kw)
+            pg.context.add_init_script(COOKIE_NOTE_SEEN)
+            return pg
+
+        br.new_context, br.new_page, br.fresh_context = new_context, new_page, raw_context
         yield br
         br.close()
 
@@ -2722,6 +2742,112 @@ def test_registration_asks_for_a_separate_consent(page, base_url):
     assert "Пользовательское соглашение" in form
     assert page.locator('#registerForm a[href="#/legal/consent"]').count() == 1
     assert page.locator('#registerForm a[href="#/legal/terms"]').count() == 1
+
+
+def test_cookie_note_shows_once_and_does_not_break_a_phone(browser, base_url):
+    """Плашка о cookie (16 октября 2026): при первом визите — внизу экрана, со
+    ссылкой на политику и кнопкой «Понятно»; после нажатия не появляется
+    снова (localStorage). На 360/390 не шире экрана, не наезжает на шапку и
+    занимает не больше четверти высоты; в печать не идёт; на экране
+    ассистента (внизу поле ввода) скрыта."""
+    for width in (360, 390, 1280):
+        ctx = browser.fresh_context(viewport={"width": width, "height": 740 if width < 700 else 900},
+                                    is_mobile=width < 700, has_touch=width < 700)
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+            pg.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+            pg.goto(base_url + "/#/", wait_until="networkidle")
+            note = pg.locator("#cookieNote")
+            note.wait_for(state="visible", timeout=10000)
+            text = note.inner_text()
+            assert "cookie" in text and "Яндекс Метрику" in text, text
+            assert note.locator('a[href="#/legal/privacy"]').count() == 1
+            box = note.bounding_box()
+            assert box["x"] >= 0 and box["x"] + box["width"] <= width, (width, box)
+            assert box["y"] > 70, (width, box)                     # ниже шапки
+            assert box["height"] <= 0.25 * pg.viewport_size["height"], (width, box)
+            assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+            pg.emulate_media(media="print")
+            assert not note.is_visible(), "плашка попала бы в печать"
+            pg.emulate_media(media="screen")
+            if width == 390:
+                pg.goto(base_url + "/#/assistant", wait_until="networkidle")
+                pg.wait_for_timeout(500)
+                assert not note.is_visible(), "на экране ассистента плашка закрыла бы поле ввода"
+                pg.goto(base_url + "/#/", wait_until="networkidle")
+            pg.click("#cookieOk")
+            assert pg.locator("#cookieNote").count() == 0
+            pg.reload(wait_until="networkidle")
+            pg.wait_for_timeout(500)
+            assert pg.locator("#cookieNote").count() == 0, "плашка вернулась после «Понятно»"
+            assert not errors, errors[:3]
+        finally:
+            ctx.close()
+
+
+def test_cookie_note_survives_blocked_storage(browser, base_url):
+    """Хранилище недоступно (приватный режим, запрет сайта) — сайт не падает,
+    плашка видна и закрывается до конца визита."""
+    ctx = browser.fresh_context()
+    try:
+        ctx.add_init_script("""Object.defineProperty(window, 'localStorage',
+            {get(){ throw new Error('blocked'); }});""")
+        pg = ctx.new_page()
+        crashes = []
+        pg.on("pageerror", lambda e: crashes.append(str(e)))
+        pg.goto(base_url + "/#/", wait_until="networkidle")
+        pg.locator("#cookieNote").wait_for(state="visible", timeout=10000)
+        assert not [c for c in crashes if "cookie" in c.lower() or "kx_cookie" in c], crashes
+        pg.click("#cookieOk")
+        assert pg.locator("#cookieNote").count() == 0
+    finally:
+        ctx.close()
+
+
+def test_first_comment_asks_a_separate_consent_to_show_the_name(browser, base_url):
+    """Имя автора комментария видно всем — согласие на это отдельное (ст. 10.1
+    152-ФЗ, 16 октября 2026). Под первым комментарием галочка со ссылкой на
+    текст согласия; без неё комментарий не уходит; после первого согласия
+    галочки больше нет. Обсуждение под сделкой сейчас выключено
+    (COMMENTS_ENABLED), поэтому блок монтируется вручную."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 900}, is_mobile=True, has_touch=True)
+    try:
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+        email = f"comment-{uuid.uuid4().hex[:10]}@ui.test"
+        r = pg.request.post(base_url + "/api/auth/register",
+                            data={"email": email, "password": "secret123", "full_name": "Анна Тестова"})
+        assert r.status == 200, r.text()
+        pg.goto(base_url + "/#/legal/comments", wait_until="networkidle")
+        pg.wait_for_selector(".legal-page")
+        assert pg.inner_text("#app h1").strip() == "Согласие на показ имени в комментариях"
+        assert "10.1" in pg.inner_text(".legal-page")
+        deal = f"gtest-ui-{uuid.uuid4().hex[:6]}"
+        mount = """async (deal) => { document.getElementById('app').insertAdjacentHTML('beforeend',
+                   '<div class="comments" id="comments-mount"></div>'); await mountComments(deal); }"""
+        pg.evaluate(mount, deal)
+        box = pg.locator("#commentNameConsent")
+        assert box.count() == 1 and not box.is_checked()
+        label = pg.inner_text(".comment-consent")
+        assert "Согласен, чтобы рядом с моим комментарием показывались мои имя и фамилия" in label
+        assert pg.locator('.comment-consent a[href="#/legal/comments"]').count() == 1
+        pg.fill("#commentBody", "Кто консультировал покупателя?")
+        pg.click("#commentSend")
+        pg.wait_for_timeout(400)
+        assert pg.locator("#commentErr").is_visible()
+        assert pg.evaluate(f"fetch('/api/deals/{deal}/comments').then(r=>r.json())") == []
+        box.check()
+        pg.click("#commentSend")
+        pg.wait_for_function(f"document.querySelectorAll('.comment-item').length === 1", timeout=10000)
+        assert "Анна Тестова" in pg.inner_text(".comment-item")
+        assert pg.locator("#commentNameConsent").count() == 0, "галочку спросили второй раз"
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+        assert not errors, errors[:3]
+    finally:
+        ctx.close()
 
 
 def test_deal_tab_sections_sit_in_their_own_boxes(page, base_url):
