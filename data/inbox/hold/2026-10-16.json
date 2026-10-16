@@ -2,17 +2,17 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d10286404",
-   "title": "«РусГазДобыча» передала 49% в поставщике нефтегазового оборудования ГМС",
+   "draft_id": "d25823532",
+   "title": "📌 МГКЛ после IPO: розничная сеть выросла почти вдвое — до 215 отделений",
    "date": "2026-10-16",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9027728"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/mgkl/blog/1363333.php"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -23,178 +23,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Нефть и газ",
+   "ind": "Ритейл",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71895099",
-   "title": "Трамп обвинил Киев в перепродаже американских ракет",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/10/16/1237550-pereprodazhe-raket"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17444702",
-   "title": "Инвестиции в площадки под жилье в России выросли почти на 40%",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/10/16/1237514-investitsii-v-ploschadki-pod-zhile-virosli"
-    ]
-   ],
-   "sum": "211 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18276741",
-   "title": "Трамп обвинил Киев в продаже полученных при Байдене ракет",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2185116/2026-10-16/tramp-obvinil-kiev-v-prodazhe-poluchennykh-pri-baidene-raket"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10736022",
-   "title": "США приостановили продажи оружия союзникам, заявил Трамп",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261016/tramp-2124838491.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58087361",
-   "title": "Россиянам назвали важную деталь в продаже участка с домом",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/16/rossiyanam-nazvali-vazhnuyu-detal-v-prodazhe-uchastka-s-domom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21336551",
-   "title": "В пермской деревне частник за 390 млн рублей продает участок земли под жилую застройку",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053136506"
-    ]
-   ],
-   "sum": "390 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "участок земли под жилую застройку",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "участок земли под жилую застройку",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
