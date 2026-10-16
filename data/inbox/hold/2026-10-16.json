@@ -2,97 +2,53 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d29543396",
-   "title": "В Севастополе отменили покупку топлива по QR-кодам",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9040417"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12459671",
-   "title": "Альтернатива матрасу: что скрывается под ростом популярности частных инвестиций в России",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28222365"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26000798",
-   "title": "Ульяновский Минздрав не смог оспорить факт предварительного соглашения перед аукционом на разработку стратегии развития здравоохранения",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/10/16/ulyanovskiy-minzdrav-ne-smog-osporit-fakt-predvaritelnogo-soglasheniya-pered-auktsionom-na-razrabotk/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11249195",
-   "title": "Инвестиции «Нефтисы» в геологоразведку составят 5-8%",
+   "draft_id": "d34305533",
+   "title": "Shell рассматривает продажу своих автозаправочных станций во Франции",
    "date": "2026-10-16",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261016/investitsii-874342122.html"
+     "https://1prime.ru/20261016/frantsija-874343584.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-16",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261016/frantsija-874343584.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d51686499",
+   "title": "Hongqi HS5 за 40 тысяч рублей в месяц. Почему я отказался от покупки?",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1363539.php"
     ]
    ],
    "sum": null,
@@ -110,35 +66,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46460554",
-   "title": "Бочаров: 360 млрд руб инвестиций ожидает Волгоградская область в 2026 году",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261016/bocharov-2124966945.html"
-    ]
-   ],
-   "sum": "360 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
    ]
   }
  ]
