@@ -13154,6 +13154,13 @@ REGISTRY += [
      "date": '2026-10-16'},
 ]
 
+# Продавцы по истории участников ЕГРЮЛ — 2026-10-16 (pipeline/fix_sellers_from_registry_2026_10_16.py).
+REGISTRY += [
+    {"company_id": 'gde2ba37e', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g4ce32808 (2026-10-16): Intermark Leasing — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
