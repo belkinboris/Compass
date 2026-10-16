@@ -625,6 +625,23 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             and not has(card.get('no_parties')):
         out.append(('parties_missing', 'не названы ни покупатель, ни продавец — впишите стороны по источнику '
                     'или причину в no_parties (временное управление, обратный выкуп, суд)'))
+    # ВРЕМЕННОЕ УПРАВЛЕНИЕ ПО УКАЗУ (решение владельца 16 октября 2026):
+    # не M&A — тип «Временное управление», покупателя и продавца нет
+    # (`no_parties`), управляющий и собственник — в прозе карточки.
+    custody_words = re.search(r'(?:во?|под)\s+временн\w+\s+управлени',
+                              str(card.get('title') or ''), re.I)
+    if custody_words and card.get('type') == 'M&A':
+        out.append(('custody_type', 'передача во временное управление с типом «M&A» — нужен тип '
+                    '«Временное управление» (собственник не меняется)'))
+    if card.get('type') == 'Временное управление':
+        named = [f for f in ('buyer', 'buyer_name', 'seller', 'seller_id') if has(card.get(f))]
+        if named:
+            out.append(('custody_parties', 'у временного управления нет покупателя и продавца: '
+                        'очистите %s, управляющего и собственника — в прозу '
+                        '(law.struct/eco.context)' % ', '.join(named)))
+        if not has(card.get('no_parties')):
+            out.append(('custody_no_parties', 'временное управление без no_parties — впишите «Временное '
+                        'управление по указу, собственность не переходила — покупателя и продавца нет.»'))
     for role, (text_field, id_field) in ROLES.items():
         text = card.get(text_field)
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))

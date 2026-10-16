@@ -53,6 +53,10 @@ from review import _same_word  # noqa: E402
 # же, что уже используется для ссылок из писем), а вписанное значение — лишь
 # запасное на случай, если переменная не задана.
 SITE = (os.environ.get('APP_BASE_URL') or 'https://projectcompass.ru').rstrip('/')
+# Тип сделки «Временное управление» (решение владельца 16 октября 2026):
+# передача активов во временное управление по указу — не M&A и не
+# национализация, собственник не меняется. Одно имя на весь конвейер.
+CUSTODY_TYPE = 'Временное управление'
 
 SIGNIFICANT = ('sum', 'buyer', 'buyer_name', 'seller', 'target', 'asset', 'status', 'advisers', 'events')
 
@@ -903,6 +907,11 @@ TYPE_TAGS = {
     'СП': 'СП',
     'Создание СП': 'СП',
     'Продажа недвижимости': 'недвижимость',
+    # Временное управление по указу (решение владельца 16 октября 2026):
+    # не M&A, тег #MA ему не годится. Подчёркивание держит два слова
+    # раздельными на глаз и одним тегом для поиска (K+ 7 сентября 2026:
+    # «я бы не сливала слова в хэштэгах»).
+    CUSTODY_TYPE: 'временное_управление',
 }
 
 
@@ -930,6 +939,12 @@ def _lab(name):
     return '<b>%s:</b>' % name
 
 
+def is_custody(deal):
+    """Временное управление по указу: новый тип «Временное управление»
+    (решение владельца 16 октября 2026) или старая пометка `kind: custody`."""
+    return deal_kind(deal) == 'custody'
+
+
 def _buyer_label(deal):
     """«Покупатель» верно для обычной M&A, но не для временного управления по
     указу президента (Nestlé/«Ашан»/FM Logistic/«Лемана ПРО», 17 сентября
@@ -942,7 +957,8 @@ def _buyer_label(deal):
     сюда не переносим — он нужен только для остальных, уже названных
     кириллицей типов (СП, кредит, IPO…), а «custody» проставляется вручную
     и читается напрямую."""
-    return 'Временный управляющий' if deal.get('kind') == 'custody' else 'Покупатель'
+    return 'Временный управляющий' if deal.get('kind') == 'custody' \
+        or _kind_from_type(deal.get('type')) == 'custody' else 'Покупатель'
 
 
 def _kind_from_type(type_str):
@@ -960,6 +976,10 @@ def _kind_from_type(type_str):
         return 'structured'
     if 'реорганизац' in t:
         return 'reorg'
+    # Временное управление по указу — не покупка: собственник не меняется,
+    # государство передаёт только управление (владелец, 16 октября 2026).
+    if re.search(r'временн[а-яё]* управлен', t):
+        return 'custody'
     if re.search(r'финансирован|венчурн|раунд|\bseed\b|допэмисси', t):
         return 'financing'
     return 'acquisition'
@@ -1003,7 +1023,12 @@ def post_roles(deal):
     множество обязательных строк из {'buyer', 'seller', 'subject'})."""
     kind = deal_kind(deal)
     if kind == 'custody':
-        return 'Временный управляющий', 'Прежний владелец', 'Предмет', {'buyer', 'seller', 'subject'}
+        # Решение владельца 16 октября 2026: у временного управления нет
+        # покупателя и продавца — есть собственник (он не меняется) и
+        # временный управляющий. В карточке нового типа оба живут в прозе,
+        # поля сторон пусты, поэтому строки печатаются только если названы
+        # (черновик притока до чтения), без «не раскрыт».
+        return 'Временный управляющий', 'Собственник', 'Предмет', {'subject'}
     if deal.get('type') == 'Инвестиция' or kind == 'financing':
         return 'Инвестор', 'Продавец', 'Предмет', {'buyer', 'subject'}
     if kind == 'acquisition':
@@ -1258,9 +1283,18 @@ def card_link_line(deal):
     return ('Подробнее в <a href="%s/#/deal/%s">карточке сделки</a>' % (SITE, did)) if did else ''
 
 
+def is_joint_post(deal):
+    """Общий пост на несколько карточек (`post_covers` — их id). Решение
+    владельца 16 октября 2026: пять компаний указа № 738 — пять карточек на
+    сайте и ОДИН пост в канале. Текст поста (`post_override`) сам ссылается
+    на каждую карточку, поэтому строка «Подробнее в карточке сделки» и
+    кнопка, ведущие на одну из пяти, ему не нужны."""
+    return bool((deal or {}).get('post_covers'))
+
+
 def with_card_link(text, deal):
     """Текст поста с одной строкой-ссылкой на карточку в самом конце."""
-    line = card_link_line(deal)
+    line = '' if is_joint_post(deal) else card_link_line(deal)
     lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
     body = re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()
     return (body + '\n\n' + line) if line else body
@@ -1312,7 +1346,7 @@ def render_buttons(deal):
     2026: «просто кнопки „Открыть карточку сделки“ достаточно». Формат готов
     для `reply_markup` Telegram."""
     did = deal.get('id')
-    if not did:
+    if not did or is_joint_post(deal):
         return None
     rows = [[{'text': CARD_BUTTON_TEXT, 'url': '%s/#/deal/%s' % (SITE, did)}]]
     return {'inline_keyboard': rows}

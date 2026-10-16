@@ -532,7 +532,11 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
                   or draft.get('seller') or draft.get('seller_id'))
     if not (draft.get('target') or draft.get('asset_id') or draft.get('asset')):
         hold.append('не установлен предмет сделки — из заголовка не видно, что продают')
-    elif not named_side:
+    elif not named_side and draft.get('type') != 'Временное управление':
+        # У временного управления по указу сторон нет вовсе (решение
+        # владельца 16 октября 2026): собственник не меняется, управляющий —
+        # не покупатель. Требовать от такого черновика покупателя или
+        # продавца — держать настоящую новость за то, чего у неё не бывает.
         hold.append('не названа ни одна сторона — ни покупатель, ни продавец')
     parsed = draft.get('parsed_parties') or {}
     if parsed.get('seller') and not (draft.get('seller') or draft.get('seller_id')):

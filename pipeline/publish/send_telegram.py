@@ -1049,7 +1049,10 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                                          (channels.REALTY, realty_posts.get(did))) if mid}
         if where:
             changes = updates_by_id.get(did)
-            if changes:
+            # Общий пост на несколько карточек (`post_covers`, 16 октября
+            # 2026) — текст, одобренный владельцем целиком; правка из полей
+            # ОДНОЙ карточки заменила бы его постом про одну компанию.
+            if changes and not format_post.is_joint_post(deal):
                 to_edit.append((did, where, format_post.render(deal, comps, updates=changes)))
             continue
         if did in posts:
@@ -1126,6 +1129,23 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 text = initial_post_text(deal, comps)
                 to_send.append((did, text))
 
+    # ОБЩИЙ ПОСТ ЖДЁТ ВСЕ СВОИ КАРТОЧКИ (16 октября 2026, указ № 738: пять
+    # карточек — один пост). Он ссылается на каждую из них; пока хоть одна
+    # ещё в очереди модерации, её ссылка вела бы в никуда.
+    deal_ids = {d['id'] for d in data['deals']}
+    deals_by_id_all = {d['id']: d for d in data['deals']}
+    joint_waiting = []
+    for did, _text in list(to_send):
+        covers = (deals_by_id_all.get(did) or {}).get('post_covers') or []
+        missing = [c for c in covers if c not in deal_ids]
+        if missing:
+            joint_waiting.append((did, missing))
+            to_send = [(d, t) for d, t in to_send if d != did]
+    if joint_waiting:
+        for did, missing in joint_waiting:
+            print('Общий пост %s ждёт, пока на сайт выйдут его карточки: %s'
+                  % (did, ', '.join(missing)))
+
     # ВЫЧИТКА ПЕРЕД ОТПРАВКОЙ — ДО отчёта и до выхода из сухого прогона: план
     # читает человек, и задержанные посты он должен видеть именно в плане.
     # Пост наследует дефекты карточки и показывает их публично: 9 августа
@@ -1156,6 +1176,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # цене ошибки — в консоли пустую ссылку видят двое, в канале
     # подписчики.
     wanted = [d for d, _t in to_send] + [d['id'] for d, _e, _t in to_send_m]
+    # У общего поста на сайте должны быть все его карточки, а не только та,
+    # под чьим id он записан.
+    wanted += [c for d, _t in to_send for c in (deals_by_id_all.get(d) or {}).get('post_covers') or []]
     not_on_site = deals_missing_on_site(wanted)
     # ПОДОЖДАТЬ САЙТ В ЭТОМ ЖЕ ПРОГОНЕ (25 сентября 2026). Без ожидания пост
     # только что одобренной карточки уходил лишь в СЛЕДУЮЩИЙ прогон публикации
@@ -1170,7 +1193,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         time.sleep(SITE_POLL_S)
         not_on_site = deals_missing_on_site(wanted)
     if not_on_site:
-        to_send = [(d, t) for d, t in to_send if d not in not_on_site]
+        covers_of = lambda d: set((deals_by_id_all.get(d) or {}).get('post_covers') or [])
+        to_send = [(d, t) for d, t in to_send if d not in not_on_site and not (covers_of(d) & not_on_site)]
         to_send_m = [(deal, e, t) for deal, e, t in to_send_m
                      if deal['id'] not in not_on_site]
         print('Отложено до следующего прогона: %d — сайт ещё не отдаёт эти '

@@ -496,7 +496,7 @@ def test_post_party_block_is_the_same_across_the_base(base):
     for deal in base["deals"][-300:]:
         labels = re.findall(r"<b>([^<:]+):</b>", format_post.render(deal, comps))
         roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Временный управляющий",
-                                            "Продавец", "Прежний владелец", "Предмет")]
+                                            "Продавец", "Собственник", "Предмет")]
         buyer_label, seller_label, subject_label, required = format_post.post_roles(deal)
         want = [l for key, l in (("buyer", buyer_label), ("seller", seller_label),
                                  ("subject", subject_label)) if key in required]
@@ -510,11 +510,12 @@ def test_post_kind_matches_the_site_classifier():
     html = (Path(__file__).parent / "static" / "index.html").read_text(encoding="utf-8")
     js = html[html.index("function dealKindOf(typeStr){"):]
     js = js[:js.index("\n}\n") + 3]
-    for word in ("ipo", "совместн", "синдицированн", "под залог", "реорганизац", "допэмисси"):
+    for word in ("ipo", "совместн", "синдицированн", "под залог", "реорганизац", "допэмисси", "временн"):
         assert word in js, "в dealKindOf нет «%s» — сверьте копию в format_post" % word
     cases = {"IPO": "ipo", "Создание СП": "jv", "Реорганизация": "reorg",
              "Финансирование · структурная сделка": "structured", "M&A": "acquisition",
-             "Инвестиция": "acquisition", "Продажа с торгов": "acquisition"}
+             "Инвестиция": "acquisition", "Продажа с торгов": "acquisition",
+             "Временное управление": "custody"}
     for type_str, kind in cases.items():
         assert format_post._kind_from_type(type_str) == kind, type_str
 
@@ -7906,3 +7907,113 @@ def test_reworded_target_finances_are_not_news_for_the_channel():
                                        'За 2025 год прибыль 94,3 млн при выручке 711,7 млн')
     assert not send_telegram._same_numbers('выручка 711,7 млн', 'выручка 711,7 млн, 200 сотрудников')
     assert not send_telegram._same_numbers('', 'выручка 5 млн')
+
+
+
+# ---------- временное управление по указу (решение владельца 16 октября 2026) ----------
+
+def test_temporary_management_gets_its_own_type_on_intake(base):
+    """Новость о передаче во временное управление по указу получает тип
+    «Временное управление», а не «M&A»; ворота не требуют от неё покупателя
+    или продавца — их у временного управления нет; приёмка ловит такую
+    карточку с типом «M&A» и с заполненными сторонами."""
+    import draft as draft_mod
+    import promote
+    import accept_card
+    title = "Путин передал во временное управление «Центр Капиталу» активы Tarkett"
+    assert draft_mod.guess_type(title) == "Временное управление"
+    assert draft_mod.guess_type("«Ромашка» купила 100% «Лютика»") == "M&A"
+    # «Внешнее управление» — ещё и процедура банкротства: типа не меняет.
+    assert draft_mod.guess_type("Суд ввёл внешнее управление на заводе") != "Временное управление"
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": title, "date": FRESH_DATE, "ind": sorted(inds)[0], "type": "Временное управление",
+             "src": [["источник", "https://example.invalid/custody-738"]],
+             "asset": "российские активы Tarkett"}
+    _bad, hold = promote.check(draft, base, idx, inds)
+    assert not any("не названа ни одна сторона" in r for r in hold), hold
+    as_ma = dict(draft, type="M&A")
+    _bad, hold = promote.check(as_ma, base, idx, inds)
+    assert any("не названа ни одна сторона" in r for r in hold), hold
+    card = {"id": "gtm1", "title": "Активы Tarkett переданы во временное управление «Центр Капиталу»",
+            "type": "M&A", "buyer_name": "«Центр Капитал»", "seller": "Tarkett",
+            "asset": "российские активы Tarkett", "eco": {}, "law": {}}
+    codes = [c for c, _ in accept_card.findings(card, {"companies": {}})]
+    assert "custody_type" in codes, codes
+    codes = [c for c, _ in accept_card.findings(dict(card, type="Временное управление"), {"companies": {}})]
+    assert "custody_parties" in codes and "custody_no_parties" in codes, codes
+    clean = dict(card, type="Временное управление", no_parties="Временное управление по указу")
+    for f in ("buyer_name", "seller"):
+        clean.pop(f)
+    codes = [c for c, _ in accept_card.findings(clean, {"companies": {}})]
+    assert not {"custody_type", "custody_parties", "custody_no_parties"} & set(codes), codes
+
+
+def test_temporary_management_post_names_no_buyer_or_seller():
+    """Пост о временном управлении не называет покупателя и продавца:
+    только временного управляющего и собственника — и только если названы."""
+    deal = {"id": "gtm2", "title": "Активы «Тест» переданы во временное управление",
+            "type": "Временное управление", "status": "Закрыта", "date": FRESH_DATE,
+            "asset": "российские активы «Тест»", "ind": "Производство тары"}
+    text = format_post.render(deal, {})
+    assert "Покупатель" not in text and "Продавец" not in text, text
+    assert "не раскрыт" not in text, text
+    assert "#MA" not in text and "#временное_управление" in text, text
+    named = format_post.render(dict(deal, buyer_name="«Центр Капитал»", seller="Tarkett"), {})
+    assert "<b>Временный управляющий:</b> «Центр Капитал»" in named, named
+    assert "<b>Собственник:</b> Tarkett" in named, named
+    import send_drafts
+    msg = send_drafts.card_message(dict(deal, buyer_name="«Центр Капитал»"), {})
+    assert "Временный управляющий: «Центр Капитал»" in msg and "Покупатель" not in msg, msg
+
+
+def test_joint_post_goes_out_once_for_all_its_cards(monkeypatch, tmp_path):
+    """Пять карточек указа № 738 — на сайт по отдельности, в канал один общий
+    пост (владелец, 16 октября 2026). Общий пост (`post_override` +
+    `post_covers` у одной карточки) показывается в консоли своим текстом,
+    уходит без кнопки и строки на одну карточку, ждёт, пока на сайте будут
+    ВСЕ его карточки, и не переписывается правкой одной из них; остальные
+    карточки (`no_post`) поста не получают."""
+    joint = ("<b>Пять компаний переданы во временное управление</b>\n\n"
+             "<b>Временный управляющий:</b> «Центр Капитал»\n<b>Статус:</b> указ подписан")
+    lead = {"id": "gJ1", "title": "Активы «А» переданы во временное управление", "type": "Временное управление",
+            "status": "Закрыта", "date": FRESH_DATE, "asset": "активы «А»", "accepted": "2026-10-16",
+            "reviewed": "2026-10-16", "post_override": joint, "post_covers": ["gJ1", "gJ2"]}
+    other = {"id": "gJ2", "title": "Активы «Б» переданы во временное управление", "type": "Временное управление",
+             "status": "Закрыта", "date": FRESH_DATE, "asset": "активы «Б»", "accepted": "2026-10-16",
+             "reviewed": "2026-10-16", "no_post": True}
+    import send_drafts
+    preview = send_drafts.post_message_text(lead, {})
+    assert "ОБЩИЙ пост на 2 карточек" in preview and "Пять компаний переданы" in preview, preview
+    assert "Кнопки под постом" not in preview, preview
+    assert send_drafts.draft_post_text(lead, {}) == joint
+    assert format_post.render_buttons(lead) is None
+
+    real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
+    real_data.update(deals=[lead], companies={}, telegram_posts={}, telegram_post_state={})
+    tmp_data = tmp_path / "deals_promoted.json"
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
+    monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-100123")
+    fake = _FakeClient([{"ok": True, "result": {"message_id": 501}}])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    # Вторая карточка ещё в очереди — общий пост ждёт.
+    send_telegram.main(write=True, ignore_pace=True)
+    assert not fake.calls, "общий пост ушёл раньше, чем на сайт вышли все его карточки"
+
+    real_data.update(deals=[lead, other])
+    tmp_data.write_text(json.dumps(real_data), encoding="utf-8")
+    send_telegram.main(write=True, ignore_pace=True)
+    assert len(fake.calls) == 1, fake.calls
+    url, payload = fake.calls[0]
+    assert "sendMessage" in url and payload["text"] == joint, payload["text"]
+    assert "reply_markup" not in payload
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert written["telegram_posts"] == {"gJ1": 501, "gJ2": None}, written["telegram_posts"]
+
+    # Новый факт о главной карточке не переписывает общий пост постом про одну компанию.
+    monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {"gJ1": ["появилась сумма"]})
+    send_telegram.main(write=True, ignore_pace=True)
+    assert len(fake.calls) == 1, "общий пост правится из полей одной карточки"

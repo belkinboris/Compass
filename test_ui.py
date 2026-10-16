@@ -2464,6 +2464,46 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
             pending_path.write_text(backup, encoding="utf-8")
 
 
+def test_temporary_management_type_card_shows_no_party_placeholders(page, base_url):
+    """Тип «Временное управление» (решение владельца 16 октября 2026): сторон
+    у карточки нет — управляющий и собственник названы в тексте. Плашка
+    показывает только актив под управлением, без «Покупатель/Продавец» и без
+    «Не раскрыт»; тип подписан на карточке."""
+    import json as _json
+    pending_path = Path("static/data/pending.json")
+    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
+    card = {"id": "gtest-tempmgmt", "date": "2026-10-16",
+            "title": "Активы «Тест-Тара» переданы во временное управление",
+            "ind": "Производство тары", "type": "Временное управление", "status": "Закрыта",
+            "kind": "custody", "asset": "российские активы «Тест-Тара»",
+            "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+            "src": [["источник", "https://example.invalid/tempmgmt"]],
+            "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
+                    "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "Временным управляющим назначено ООО «Тест-Управление».",
+                    "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-10-16T00:00:00+00:00"}
+    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    errors = []
+    try:
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        visit(page, base_url, "#/preview/gtest-tempmgmt")
+        page.wait_for_timeout(900)
+        roles = page.eval_on_selector_all(
+            ".deal-plate .dp-party", "els => els.map(el => el.innerText.toUpperCase())")
+        assert any("АКТИВ ПОД УПРАВЛЕНИЕМ" in r for r in roles), roles
+        assert not any(w in r for r in roles for w in ("ПРОДАВЕЦ", "ПОКУПАТЕЛЬ", "НЕ РАСКРЫТ")), roles
+        head = page.inner_text(".d-head")
+        assert "Временное управление" in head, head
+        assert "не раскрыт" not in head.lower(), head
+        assert not errors, errors
+    finally:
+        if backup is None:
+            pending_path.unlink(missing_ok=True)
+        else:
+            pending_path.write_text(backup, encoding="utf-8")
+
+
 def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
     """18 сентября 2026: владелец увидел черновик карточки «Ашана»
     (национализация/временное управление по указу президента) и написал
