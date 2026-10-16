@@ -10,6 +10,14 @@
 """
 import os
 
+if "DATABASE_URL" not in os.environ:
+    # Тестовая база общая на все наборы и раньше переживала прогоны: запись,
+    # выученная одним тестом (номер группы-консоли из вебхука), ломала
+    # одиночный прогон другого (test_kompas, 16 октября 2026). Каждый
+    # запуск pytest начинает с чистой базы.
+    for _f in ("test_accounts.db", "test_accounts.db-journal"):
+        if os.path.exists(_f):
+            os.remove(_f)
 os.environ.setdefault("DATABASE_URL", "sqlite:///./test_accounts.db")
 os.environ.setdefault("COOKIE_SECURE", "false")  # TestClient ходит по http
 # Вход по заявке (ACCESS_GATE, main.py) по умолчанию ВКЛЮЧЁН — для тестов
