@@ -84,6 +84,7 @@ message_id в `telegram_posts` (не `null`) И которая попала в
         # отправленными: следующий прогон покажет их снова.
 """
 import json
+import re
 import os
 import sys
 import time
@@ -408,11 +409,24 @@ def card_changes_since_post(deals, posts, realty_posts, post_state):
         now_fin = (deal.get('eco') or {}).get('target_fin')
         if format_post.has(now_fin) and not format_post.has(was_fin):
             found.append('добавлены финансы покупаемой компании')
-        elif format_post.has(now_fin) and now_fin != was_fin:
+        elif format_post.has(now_fin) and now_fin != was_fin and not _same_numbers(was_fin, now_fin):
             found.append('уточнены финансы покупаемой компании')
         if found:
             out[did] = found
+        elif before != post_snapshot(deal):
+            # Текст переписан теми же фактами (пересказ карточки, 16 октября
+            # 2026): новостью это не считается — пост не трогаем, иначе у
+            # старой сделки появляется шапка «Новое о сделке · уточнены
+            # финансы», хотя нового ничего. Запоминаем новое состояние.
+            post_state[did] = post_snapshot(deal)
     return out
+
+
+def _same_numbers(was, now):
+    """Те же числа (порядок не важен — пересказ меняет порядок мысли) —
+    значит, изменилась только формулировка, а не факты."""
+    nums = lambda t: sorted(re.findall(r'\d+(?:[.,]\d+)?', str(t or '')))
+    return bool(nums(now)) and nums(was) == nums(now)
 
 def load_today_updates():
     """{deal_id: [изменения]} из самого свежего файла data/inbox/updates/."""
