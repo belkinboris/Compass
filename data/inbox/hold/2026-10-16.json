@@ -2,17 +2,56 @@
  "made": "2026-10-16",
  "drafts": [
   {
-   "draft_id": "d79876018",
-   "title": "Долгострой в Шлиссельбурге выставили на торги за 161 млн рублей",
+   "draft_id": "d21400742",
+   "title": "Visiology завершил инвестиционный раунд объемом 200 млн рублей",
    "date": "2026-10-16",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/16/dolgostroj-v-shlisselburge"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
+    ]
+   ],
+   "sum": "200 млн ₽",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24421356",
+   "title": "АТОР опровергла сообщения о распродаже туров в Анталью из-за ливней",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ad1e69ce62d20cde8f51e6d"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -30,13 +69,13 @@
    ]
   },
   {
-   "draft_id": "d27364423",
-   "title": "«Это однозначный вред здоровью»: большинство пермяков выступили за запрет продажи вейпов молодежи",
+   "draft_id": "d89280847",
+   "title": "Aurus начинает продажи рестайлингового флагманского седана Senat",
    "date": "2026-10-16",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053136650"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1122955"
     ]
    ],
    "sum": null,
@@ -52,6 +91,147 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d21487296",
+   "title": "Сенатор Гибатдинов: Киев продает будущее страны, защищая движение ЛГБТ",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28221661"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "будущее страны, защищая движение ЛГБТ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "будущее страны, защищая движение ЛГБТ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d13500041",
+   "title": "Венгрия вернулась на второе место по покупкам природного газа у России",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261016/vengrija-874332981.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26150052",
+   "title": "На Украине полицейские похитили человека и требовали выкуп у его семьи",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261016/ukraina-2124912740.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33881483",
+   "title": "В России зафиксировали рекордные продажи суббренда Changan",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/16/v-rossii-zafiksirovali-rekordnye-prodazhi-subbrenda-changan/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74916667",
+   "title": "Уходящему из России банку разрешили купить второй по величине банк Германии",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/16/uhodyaschemu-iz-rossii-banku-razreshili-kupit-vtoroy-po-velichine-bank-germanii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
