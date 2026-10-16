@@ -13108,6 +13108,52 @@ REGISTRY += [
      "date": '2026-10-15'},
 ]
 
+# Продавцы по истории участников ЕГРЮЛ — 2026-10-16 (pipeline/fix_sellers_from_registry_2026_10_16.py).
+REGISTRY += [
+    {"company_id": 'gce8ad86c', "decision": 'confirmed', "inn": '1327153600',
+     "reason": 'Продавец карточки g7ca174fd (2026-10-16): ООО «Центр 2000», ИНН 1327153600 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gfa4926c9', "decision": 'confirmed', "inn": '7720940000',
+     "reason": 'Продавец карточки g74fd5cdb (2026-10-16): ООО «РБФ», ИНН 7720940000 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g833addcf', "decision": 'confirmed', "inn": '9701126061',
+     "reason": 'Продавец карточки gf985bad7 (2026-10-16): ООО «Мелон», ИНН 9701126061 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g0c67d777', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g150f6855 (2026-10-16): Lagella Limited — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gda864c92', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g9445a221 (2026-10-16): EPAM Systems — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gaf99e1f7', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g585f0c61 (2026-10-16): John Deere — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g2324d212', "decision": 'confirmed', "inn": '9731003959',
+     "reason": 'Продавец карточки gc79e6178 (2026-10-16): ООО «ЮэСэМ Телеком», ИНН 9731003959 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gc8bb659c', "decision": 'confirmed', "inn": '7820320025',
+     "reason": 'Продавец карточки g53656f7a (2026-10-16): ООО «Корпорация «Союз»», ИНН 7820320025 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g85c0ec02', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки gf962d8a9 (2026-10-16): Teknos — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gb4768d81', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки hugoboss (2026-10-16): Hugo Boss — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gae67672d', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g1e8cec22 (2026-10-16): Paymo Investments — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g0d7c5c8c', "decision": 'confirmed', "inn": '0277028422',
+     "reason": 'Продавец карточки g99780470 (2026-10-16): АО «Форвард», ИНН 0277028422 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'gbc011965', "decision": 'confirmed', "inn": '9723121797',
+     "reason": 'Продавец карточки gdf91b653 (2026-10-16): ООО «Центавр», ИНН 9723121797 — по ОГРН из истории участников ЕГРЮЛ (datanewton), единственное действующее юрлицо (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+    {"company_id": 'g167d65a4', "decision": 'foreign', "inn": None,
+     "reason": 'Продавец карточки g1e2b16c3 (2026-10-16): Bridgestone — иностранная компания, в ЕГРЮЛ значится только участником российского общества (pipeline/fix_sellers_from_registry_2026_10_16.py).',
+     "date": '2026-10-16'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 

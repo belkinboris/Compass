@@ -4745,6 +4745,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:Rnet_(%D0%A4%D0%B8%D1%88%D0%BD%D0%B5%D1%82_%D0%9A%D0%BE%D0%BC%D0%BC%D1%8E%D0%BD%D0%B8%D0%BA%D0%B5%D0%B9%D1%88%D0%BD%D0%B7)"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Фишнет Коммюникейшнз»",
+     "https://datanewton.ru/contragents/1047818005553/history/timeline"
     ]
    ],
    "extra": "Сделку подтвердил совладелец SkyNet Андрей Шпедер: компания выполняет инвестиционную программу стоимостью несколько миллиардов рублей и расширяет присутствие в петербургской агломерации, скупая местных провайдеров. Rnet работала с 2004 года и давала доступ к интернету и цифровому телевидению в Невском, Колпинском и Кировском районах, а также в посёлках Металлострой, Усть-Ижора и Колпино. Для SkyNet это вторая такая покупка за два месяца.",
@@ -4809,6 +4813,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Алексей Ивинский, Дмитрий Ерашов и Дмитрий Мезенцев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Алексей Ивинский, Дмитрий Ерашов и Дмитрий Мезенцев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1047818005553/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 03.06.2026"
     }
    }
   },
@@ -8731,6 +8750,10 @@
     [
      "Агентство Бизнес Новостей",
      "https://abn.agency/2026/03/03/byvshij-zavod-bosch-v-engelse-pereshyol-pod-kontrol-holdinga-e1-grupp/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Энгельс Электроинструменты»",
+     "https://datanewton.ru/contragents/1076449002695/history/timeline"
     ]
    ],
    "extra": "АО «Е1 Групп» зарегистрировано в Москве 23 декабря 2025 года и, по данным РБК и Forbes, аффилировано с бывшими менеджерами российского подразделения Bosch; генеральный директор — Александр Брюзгин, являющийся также соучредителем ООО «Софтлайн Коннект» (доля 49%). До сделки с «Е1 Групп» завод прошёл цепочку собственников: Bosch → S8 Capital (апрель 2023) → «Севергрупп» Мордашова (осень 2024) → Softline Venture Partners / ООО «Интернет Проекты» (июнь 2025); «Севергрупп» объясняла продажу несоответствием актива долгосрочной стратегии холдинга. Завод является единственным в России производителем электроинструментов полного цикла (от пресс-форм до сборки), на нём работают 210 сотрудников, 96% из которых — бывшие сотрудники Bosch; с августа 2025 года выпускается профессиональный инструмент под брендом «Энгельс». Стратегия «Е1 Групп» предусматривает расширение ассортимента (перфораторы, аккумуляторный инструмент), партнёрство с китайским дистрибьютором DongCheng (Distribution for Construction), логистическую поддержку NOYTECH Supply Chain Solutions, ИТ-сопровождение ГК Softline, а также поддержку Минпромторга РФ.",
@@ -8742,6 +8765,13 @@
       "value": "ООО «Энгельс Электроинструменты»",
       "method": "manual_source_review",
       "url": "https://www.comnews.ru/content/244038/2026-03-02/2026-w10/1010/engels-elektroinstrumenty-voshel-sostav-aktivov-kholdinga-e1-grupp"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Softline Venture Partners",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1076449002695/history/timeline"
      }
     ]
    },
@@ -8809,7 +8839,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "seller": "Softline Venture Partners",
+   "seller_id": "gdfb4c0d4"
   },
   {
    "id": "g55ac5f34",
@@ -8852,6 +8884,14 @@
     [
      "Коммерсантъ (повторное упоминание в контексте новой сделки RBE Group)",
      "https://www.kommersant.ru/doc/8655867"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Евростройконсалт»",
+     "https://datanewton.ru/contragents/1067746548660/history/timeline"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «ЕСК Системс»",
+     "https://datanewton.ru/contragents/1197746622370/history/timeline"
     ]
    ],
    "extra": "Головная компания RBE Group — ООО РБЕ — получила доли по 51% в обеих структурах; доли сооснователей Павла Бурдакова и Николая Лошатынского снизились с 50% до 24,5% у каждого. ГК «Евростройконсалт» строит промышленные и торговые объекты и владеет заводом по производству металлоконструкций в Петушках Владимирской области; в 2024 году суммарная выручка двух приобретённых юрлиц составила 822,9 млн руб., чистая прибыль — 12,2 млн руб. Стратегическая цель сделки — ускорение строительства собственной сети фабрик-кухонь RBE Group; сделка также связана с оптимизацией капитальных затрат холдинга, однако аналитики указывают на риск недозагрузки мощностей строительной группы при недостаточном объёме инвестиций. RBE Group основана в 2004 году в Самаре Андреем Шокиным, обеспечивает питанием «Трансмашхолдинг», УГМК, «Мостотрест», поезда «Сапсан» и структуры Минобороны РФ (с 2023 года).",
@@ -8863,6 +8903,18 @@
       "value": "ГК «Евростройконсалт»",
       "method": "manual_source_review",
       "url": "https://www.kommersant.ru/doc/8480191"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Павел Бударков и Николай Лошатынский",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1067746548660/history/timeline"
+     },
+     {
+      "value": "Павел Бударков и Николай Лошатынский",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1197746622370/history/timeline"
      }
     ]
    },
@@ -8936,7 +8988,13 @@
      "Mergers.ru",
      "https://mergers.ru/news/RBE-Group-priobrel-mazhoritarnuyu-dolyu-v-stroitelnoj-kompanii-i-proizvoditele-metallokonstrukcij-86635"
     ]
-   ]
+   ],
+   "seller": "Павел Бударков и Николай Лошатынский",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 12.02.2026, 18.02.2026"
+    }
+   }
   },
   {
    "id": "gcc677615",
@@ -12392,6 +12450,10 @@
     [
      "Фонтанка",
      "https://www.fontanka.ru/2023/02/20/72074342/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Учи.ру»",
+     "https://datanewton.ru/contragents/1127747152940/history/timeline"
     ]
    ],
    "extra": "Сделка сделала VK единственным владельцем платформы. Исходя из её цены, оценка «Учи.ру» составила около 11,6 млрд ₽ — ниже, чем в 2020 году, когда компанию оценивали примерно в 15 млрд ₽. Сделку называют крупнейшей публичной M&A-транзакцией за всю историю российского edtech-рынка. В её периметр не вошли международные проекты «Учи.ру» — HappyNumbers.com, Bricsmath.com и Dragonlearn.org. Продавец публично не раскрывался.",
@@ -12700,7 +12762,22 @@
      "multiple_text": "perimeter_not_verified"
     }
    },
-   "date_basis": "announcement"
+   "date_basis": "announcement",
+   "seller": "Алексей Сонк, Иван Коломоец, Владимир Зубрилин, Евгений Милютин, Андрей Суздальцев и ещё 11 совладельцев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Алексей Сонк, Иван Коломоец, Владимир Зубрилин, Евгений Милютин, Андрей Суздальцев и ещё 11 совладельцев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127747152940/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "несколько продавцов, один профиль не ставится; найдены по истории участников ЕГРЮЛ (datanewton), запись 01.03.2023"
+    }
+   }
   },
   {
    "id": "g9d134cf4",
@@ -15613,6 +15690,10 @@
     [
      "Известия",
      "https://iz.ru/807155/2018-10-31/sogaz-kupil-100-sk-vtb-strakhovanie"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «СК «ВТБ Страхование»»",
+     "https://datanewton.ru/contragents/1027700462514/history/timeline"
     ]
    ],
    "extra": "Соглашение о продаже 100% СК «ВТБ Страхование» группе СОГАЗ было подписано 25 мая 2018 года на ПМЭФ главой ВТБ Андреем Костиным и председателем правления СОГАЗа Антоном Устиновым; в периметр сделки вошли все компании группы «ВТБ Страхование», включая «ВТБ Страхование жизни» и «ВТБ Медицинское страхование». В качестве встречного предоставления ВТБ получил 10% обыкновенных акций объединённой компании (предварительная стоимость — 55,8 млрд руб.) и денежную компенсацию в размере 14,6 млрд руб.; итоговая прибыль ВТБ от сделки составила 54,1 млрд руб. Объединённая компания работает под брендом СОГАЗ и, по оценкам, заняла около 20% российского страхового рынка; суммарные начисленные премии превысили 330 млрд руб., суммарные активы — 670 млрд руб. (прогноз МСФО 2018). Агентство AM Best отметило, что сделка повысила рыночные позиции и диверсификацию продуктов СОГАЗа, однако привела к снижению достаточности капитала с учётом риска; S&P помещало рейтинги обеих компаний в список CreditWatch Developing на период оценки последствий интеграции.",
@@ -15671,6 +15752,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "before_site_year"
     }
+   },
+   "seller": "ВТБ",
+   "seller_id": "gcafc31dc",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ВТБ",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1027700462514/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -27846,7 +27938,12 @@
      "mergers.ru",
      "https://mergers.ru/news/Pochemu-my-investirovali-30-mln-rublej-v-tjomnuyu-kuhnyu-Mnogo-lososya-Rasskazyvayut-investor-Vladimir-Hristenko-i-ploschadka-United-Investors-72449"
     ]
-   ]
+   ],
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавца нет: первый инвестиционный раунд, деньги получила сама компания («Средства направлены на открытие новых точек, IT-продукты и мобильное приложение»); история участников ЕГРЮЛ (datanewton) за 2019–2020 годы закрыта"
+    }
+   }
   },
   {
    "id": "g52730430",
@@ -39425,6 +39522,10 @@
     [
      "Интерфакс (смена гендиректора НГУК)",
      "https://www.interfax.ru/business/829668"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Группа Сибуглемет»",
+     "https://datanewton.ru/contragents/1177746596268/history/timeline"
     ]
    ],
    "extra": "В состав лота входили 100% долей в ООО «Группа Сибуглемет», права требования ВЭБ.РФ по кредитным соглашениям к группе на сумму свыше $2 млрд, а также 1% акций АО «ПВВ» (производство взрывчатки). Прогнозные показатели на 2021 г.: добыча угля — 11,8 млн т, выручка — 75 млрд руб., рентабельность по EBITDA — 29%; промышленные запасы угля составляли 94 млн т (менее чем на 10 лет добычи). Сделка с основными акционерами Evraz (Абрамович, Абрамов, Фролов), которые управляли активом с 2015 по 2020 г., не состоялась — в 2020 г. покупатель отказался от завершения сделки на фоне падения угольных цен. В марте 2022 г., после введения блокирующих санкций США против ВЭБ.РФ и «Группы Сибуглемет» (SDN-лист), ВЭБ фактически вышел из актива через MBO: 70,59% управляющей компании («Новая горная управляющая компания», бывший «Холдинг Сибуглемет») перешли к четырём менеджерам холдинга — Андрею Кобякову, Игорю Горину, Андрею Тараско и Дмитрию Кровнову (каждому по 17,647%), однако сумма этой финальной транзакции публично не раскрывалась, а сама сделка проводилась на рыночных условиях. Совокупный долг группы по данным СПАРК на конец 2020 г. составлял 176 млрд руб.",
@@ -39483,6 +39584,17 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
+   },
+   "seller": "ВЭБ.РФ",
+   "seller_id": "ga3f64b72",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ВЭБ.РФ",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1177746596268/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -53467,7 +53579,12 @@
      "multiple_text": "price_not_verified"
     }
    },
-   "no_parties": "Не покупка бизнеса: раунд привлечения инвестиций → тип «Инвестиция». Инвесторы: Антон Долгов, Роман Калинкин, Александр Семенов, Александр Моносов; продавца нет."
+   "no_parties": "Не покупка бизнеса: раунд привлечения инвестиций → тип «Инвестиция». Инвесторы: Антон Долгов, Роман Калинкин, Александр Семенов, Александр Моносов; продавца нет.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавца нет: это раунд, деньги получила сама компания («Деньги пойдут на рост продаж, маркетинг, разработку мобильного приложения»); история участников ЕГРЮЛ (datanewton) за 2022 год закрыта"
+    }
+   }
   },
   {
    "id": "g92c6a8ce",
@@ -57432,6 +57549,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/5130960"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Новый Импульс-50»",
+     "https://datanewton.ru/contragents/1047796379080/history/timeline"
     ]
    ],
    "extra": "Оплата произведена допэмиссией 18 399 265 акций «Ленты» по цене 1 087 ₽ за бумагу, размещённых по закрытой подписке в пользу «Севергрупп»; расчёт зачётом требований на 20 млрд ₽ завершён 21 июня 2022 года. Due diligence проводила одна из компаний «большой четвёрки». По итогам сделки «Лента» и «Утконос» объединены в онлайн-подразделение Lenta-U, которое возглавил гендиректор «Утконоса» Дэнни Перекальски; ООО «Новый Импульс-50» прекратило деятельность после присоединения к МКПАО «Лента» 19 декабря 2022 года.",
@@ -57629,7 +57750,18 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "seller": "ООО «Севергрупп»",
+   "seller_id": "g7ffb3b7a",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «Севергрупп»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1047796379080/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g552abe79",
@@ -57989,6 +58121,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:Paymo_(%D0%98%D0%BD%D0%BD%D0%BE%D0%B2%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5_%D0%BF%D0%BB%D0%B0%D1%82%D0%B5%D0%B6%D0%BD%D1%8B%D0%B5_%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8)"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Инновационные платежные технологии»",
+     "https://datanewton.ru/contragents/1147746809924/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта в конце февраля 2022 года, ещё до начала военных действий и введения антироссийских санкций: ВТБ получил 99% компании «Инновационные платежные технологии» (ИПТ), работающей под брендом Paymo, через закрытый паевой инвестиционный комбинированный фонд «Цифровые инвестиции». Итоговая цена — 1,8 млрд ₽. По неофициальным данным, Paymo должна занять нишу обслуживания мелких мерчантов, которую не закрывает аффилированная с банком «Мультикарта», ориентированная на нужды самой группы ВТБ.",
@@ -58185,7 +58321,18 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "sum_basis": "reported"
+   "sum_basis": "reported",
+   "seller": "Paymo Investments",
+   "seller_id": "gae67672d",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Paymo Investments",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1147746809924/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g2543c41a",
@@ -63194,6 +63341,10 @@
     [
      "Crispy News",
      "https://crispy.news/2022/01/25/busines/vodku-arhangelskaja-i-altajskaja-vershina-proverjat-na-shozhest/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Алтайская вершина»",
+     "https://datanewton.ru/contragents/1202200032836/history/timeline"
     ]
    ],
    "extra": "",
@@ -63265,6 +63416,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Виталий Федоров",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Виталий Федоров",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1202200032836/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 10.12.2024"
     }
    }
   },
@@ -63964,6 +64130,10 @@
     [
      "UFA1.RU",
      "https://ufa1.ru/text/business/2024/11/22/74357561/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Форвард-Маркет»",
+     "https://datanewton.ru/contragents/1090280017024/history/timeline"
     ]
    ],
    "extra": "Юридическим консультантом X5 Group при покупке бизнеса дистрибьютора выступила ALUMNI Partners. Команду вели партнёр Екатерина Дедова, советник Николай Хольшев и старший юрист Айта Адучиева.",
@@ -64051,7 +64221,18 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/4724"
     ]
-   ]
+   ],
+   "seller": "АО «Форвард»",
+   "seller_id": "g0d7c5c8c",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "АО «Форвард»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1090280017024/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "gfa0fe27a",
@@ -65308,6 +65489,10 @@
     [
      "Деловой Петербург",
      "https://www.dp.ru/a/2026/04/10/svjazannaja-s-peterburgskoj"
+    ],
+    [
+     "ЕГРЮЛ: история участников АО «Ямалдорстрой»",
+     "https://datanewton.ru/contragents/1076670031547/history/timeline"
     ]
    ],
    "extra": "",
@@ -65391,6 +65576,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Марс Гайнутдинов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Марс Гайнутдинов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1076670031547/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 11.02.2026"
     }
    }
   },
@@ -65690,6 +65890,10 @@
     [
      "vc.ru",
      "https://vc.ru/id4994551/2814483-alfa-bank-kupil-platformu-marketguru"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Маркетгуру»",
+     "https://datanewton.ru/contragents/1216100023897/history/timeline"
     ]
    ],
    "extra": "Альфа-Банк приобрёл 80% долей ООО «МАРКЕТГУРУ» — компании, которая развивает сервис аналитики MarketGuru для продавцов маркетплейсов Ozone и Wildberries. Сделка закрыта 12 сентября 2025 года.",
@@ -65768,6 +65972,21 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Нина Гральник и Дмитрий Сизон",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Нина Гральник и Дмитрий Сизон",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1216100023897/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 12.09.2025"
+    }
    }
   },
   {
@@ -65814,6 +66033,10 @@
     [
      "runews24.ru",
      "https://runews24.ru/saransk/28/07/2025/lvz-saranskij-kupil-spirtzavod-v-mordovii"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Спиртзавод «Ромодановский»»",
+     "https://datanewton.ru/contragents/1091310001090/history/timeline"
     ]
    ],
    "extra": "ЛВЗ «Саранский» купил 99% долей ООО «Спиртзавод „Ромодановский“» в Мордовии. Завод не работал с 2016 года, а с весны 2022 года находился в банкротстве; дело о банкротстве прекратили в марте 2025 года. Доли перешли к покупателю 22 июня 2025 года. Покупатель расширяет вертикально интегрированное производство алкоголя и получает полный цикл выпуска и собственные спиртовые мощности.",
@@ -65901,6 +66124,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "ООО «Центр 2000»",
+   "seller_id": "gce8ad86c",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «Центр 2000»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1091310001090/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -74134,6 +74368,10 @@
     [
      "Anti-Malware.ru",
      "https://www.anti-malware.ru/news/2025-06-10-121598/46314"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Ред Софт»",
+     "https://datanewton.ru/contragents/5147746028216/history/timeline"
     ]
    ],
    "extra": "Согласно ЕГРЮЛ, АО «Цифровой вектор» (зарегистрировано 19 ноября 2024 года, генеральный директор Артур Деев) получило 30% в компании «Ред софт». Доли остальных владельцев сократились.",
@@ -74205,6 +74443,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Сергей Зотов, Анатолий Митрошин, Вячеслав Комлев, Кирилл Веселкин, Алексей Коптев и Рустам Рустамов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Зотов, Анатолий Митрошин, Вячеслав Комлев, Кирилл Веселкин, Алексей Коптев и Рустам Рустамов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/5147746028216/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 24.12.2024"
     }
    }
   },
@@ -79528,6 +79781,10 @@
     [
      "BFM Кубань (10.08.2026)",
      "https://kuban.bfm.ru/news/60032"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «РБФ ритейл»",
+     "https://datanewton.ru/contragents/1247700760009/history/timeline"
     ]
    ],
    "extra": "ООО «Земун», связанное с «Лентой», получило 99% контроля над компанией «РБФ ритейл», которая управляет сетью гипермаркетов «О'кей». ФАС одобрила сделку в середине октября 2025 года. В периметр вошли магазины «О'кей», онлайн-платформа, товарные знаки и логистическая инфраструктура. Покупка 75 гипермаркетов была безденежной: «Лента» приняла на себя долговые обязательства. Сеть дискаунтеров «Да!» в соглашение не вошла и осталась у прежнего владельца сети «О'кей». В тот же день, 25 ноября 2025 года, стало известно ещё об одной сделке вокруг того же актива: O'Key Group S.A. продала бизнес гипермаркетов «О'Кей» российскому менеджменту (этому посвящена отдельная карточка).",
@@ -79612,7 +79869,18 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/11001"
     ]
-   ]
+   ],
+   "seller": "ООО «РБФ»",
+   "seller_id": "gfa4926c9",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «РБФ»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1247700760009/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g75920ee3",
@@ -80038,6 +80306,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8212273"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Ясно.Лайв»",
+     "https://datanewton.ru/contragents/1217700387442/history/timeline"
     ]
    ],
    "extra": "АО «Новый интеллект» купило 100% долей онлайн-платформы психологической помощи «Ясно» через специализированное финансовое общество «Аргентум», которое принадлежит фонду «Стелла» (учредитель — Ольга Исаева). Финансовым консультантом продавцов выступил Novus Capital.",
@@ -80115,6 +80387,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Николай Мельничук, Андрей Зайцев-Зотов, Марина Чадеева и Дмитрий Степанов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Николай Мельничук, Андрей Зайцев-Зотов, Марина Чадеева и Дмитрий Степанов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1217700387442/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 14.11.2025"
     }
    }
   },
@@ -82978,6 +83265,10 @@
     [
      "360.ru (2026)",
      "https://360.ru/news/mosobl/tehnonikol-zavershil-integratsiju-aktivov-byvshego-td-ltm/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «ТД ЛТМ»",
+     "https://datanewton.ru/contragents/1117746239115/history/timeline"
     ]
    ],
    "extra": "Стоимость сделки оценила Елена Варламова из консалтинговой компании Neo; это оценка, данная СМИ, а не работа консультанта по сделке.",
@@ -83052,6 +83343,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Сергей Зубков и Алексей Лабутин",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Зубков и Алексей Лабутин",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1117746239115/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 17.09.2025"
     }
    }
   },
@@ -84056,6 +84362,18 @@
     [
      "pravo.ru",
      "https://pravo.ru/company_news/260650/"
+    ],
+    [
+     "ЕГРЮЛ: история участников АО «Меридиан»",
+     "https://datanewton.ru/contragents/1037739007624/history/timeline"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «ТД «Меридиан»»",
+     "https://datanewton.ru/contragents/1037739875942/history/timeline"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Меридиан-Трейдинг»",
+     "https://datanewton.ru/contragents/1107746051148/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта в сентябре 2025 года. «Юнифрост», крупнейший игрок на рынке импорта и дистрибуции рыбной продукции, приобрёл 100% в компаниях АО «Меридиан», ООО «Торговый дом „Меридиан“» и ООО «Меридиан-Трейдинг». По оценке BGP Capital (руководитель М&А Иван Пешков), EV составляет 5–7 млрд ₽ (EV/EBITDA'24 = 4x-5x). После закрытия сделки доля «Юнифроста» на рынке крабовых палочек составит 60%, пресервов — 35–40%.",
@@ -84133,6 +84451,31 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "ИК «Союзпром», Владимир Малахов, Алексей Комлев, Светлана Федосеева и Татьяна Ногтикова",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ИК «Союзпром», Владимир Малахов, Алексей Комлев, Светлана Федосеева и Татьяна Ногтикова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1037739007624/history/timeline"
+     },
+     {
+      "value": "ИК «Союзпром», Владимир Малахов, Алексей Комлев, Светлана Федосеева и Татьяна Ногтикова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1037739875942/history/timeline"
+     },
+     {
+      "value": "ИК «Союзпром», Владимир Малахов, Алексей Комлев, Светлана Федосеева и Татьяна Ногтикова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1107746051148/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "несколько продавцов, один профиль не ставится; найдены по истории участников ЕГРЮЛ (datanewton), запись 06.10.2025, 08.10.2025"
     }
    }
   },
@@ -86046,6 +86389,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8735936"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Фартел»",
+     "https://datanewton.ru/contragents/1147847196298/history/timeline"
     ]
    ],
    "extra": "SkyNet приобрёл 100% долей ООО «ФАРТЕЛ» — интернет-провайдера, работающего в Ленобласти и Красносельском районе Петербурга. Абонентская база — 10 тыс. человек, покрытие — 97 тыс. домохозяйств. Выручка компании в 2024 году — 75 млн ₽, EBITDA — 17–20 млн ₽.",
@@ -86126,6 +86473,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Павел Соколов, Глеб Драгунов и Егор Даниленко",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Павел Соколов, Глеб Драгунов и Егор Даниленко",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1147847196298/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 28.07.2025"
     }
    }
   },
@@ -86430,6 +86792,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7870582"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Александровский спиртзавод №14»",
+     "https://datanewton.ru/contragents/1105827000025/history/timeline"
     ]
    ],
    "extra": "—",
@@ -86511,7 +86877,18 @@
      "Mergers.ru",
      "https://mergers.ru/news/Proizvoditel-spirta-Renessans-vykupila-Aleksandrovskij-spirtzavod-85495"
     ]
-   ]
+   ],
+   "seller": "ООО «Мелон»",
+   "seller_id": "g833addcf",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «Мелон»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1105827000025/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g28be3ae4",
@@ -87585,6 +87962,10 @@
     [
      "РБК (via habr.com)",
      "https://habr.com/ru/news/917756/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Селлематикс»",
+     "https://datanewton.ru/contragents/1227700252878/history/timeline"
     ]
    ],
    "extra": "1С приобрела контрольную долю в 51% в ООО «Селлематикс» — разработчике платформ Sellmonitor и Sellematics для аналитики и управления продажами на маркетплейсах. Прежние владельцы — Сергей Молчанов, Константин Карпухов, Дарья Ткаченко, Антон Злотников и Алексей Рыжов — сократили свои доли.",
@@ -87665,6 +88046,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Сергей Молчанов, Константин Карпухов, Дарья Ткаченко, Антон Злотников, Алексей Рыжов и Станислав Ветловский",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Молчанов, Константин Карпухов, Дарья Ткаченко, Антон Злотников, Алексей Рыжов и Станислав Ветловский",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1227700252878/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 06.06.2025"
     }
    }
   },
@@ -92121,6 +92517,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавца нет: вложение в капитал. История участников ЕГРЮЛ (datanewton), запись 16.03.2026: уставный капитал вырос со 100 до 200 тыс. ₽, номинал доли Петра Кабина не изменился, Хотимский получил новую долю 50%; в источнике — «привлечение партнёра необходимостью существенно расширить бизнес»"
+    }
    }
   },
   {
@@ -94172,6 +94573,10 @@
     [
      "Право.ru",
      "https://pravo.ru/news/256974/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Домиленд» («Клиентский сервис»)",
+     "https://datanewton.ru/contragents/1177746429410/history/timeline"
     ]
    ],
    "extra": "Девелопер «Самолет» приобрёл 76% акций IT-компании «Клиентский сервис» (ООО «Домиленд»), которая раньше принадлежала структурам ВТБ. Цель покупки — цифровизация деятельности компании.",
@@ -94244,6 +94649,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Lagella Limited",
+   "seller_id": "g0c67d777",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Lagella Limited",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1177746429410/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -95540,6 +95956,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "People & People",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "People & People",
+      "method": "manual_source_review",
+      "url": "https://www.interfax.ru/business/1081561"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "профиля нет; назван в источнике карточки"
     }
    }
   },
@@ -100861,6 +101292,10 @@
     [
      "ria.ru",
      "https://ria.ru/20260105/rossija-2066482196.html"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Вельта-Пенза»",
+     "https://datanewton.ru/contragents/1115834002910/history/timeline"
     ]
    ],
    "extra": "«Вельта-Пенза» занимается производством безалкогольных ароматизированных напитков с кусочками растений и фруктов. По данным СПАРК, компания владеет брендами «Лимонберри», Marmell, Jelly Basilly, MoonBerry, Bоdrini и Yom-Yom.",
@@ -100932,6 +101367,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Юрий Колотов и Владимир Каменев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Юрий Колотов и Владимир Каменев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1115834002910/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 25.12.2024"
     }
    }
   },
@@ -101645,6 +102095,10 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/business/articles/2026/02/26/1179096-shishkarev-vikupil-1-uk-delo-u-transmashholdinga"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «УК «Дело»»",
+     "https://datanewton.ru/contragents/1167746230673/history/timeline"
     ]
    ],
    "extra": "«Росатом» (49% в УК «Дело»), ТМХ (выкупил 1% у Шишкарева) и бизнесмен Сергей Шишкарев (основатель и крупнейший бенефициар «Дела») договорились о консолидации логистических активов. Планы не реализовались: «Росатом» и ТМХ не договорились о цене доли «Росатома», сделка была расторгнута в ноябре 2025 года, а 1% УК «Дело» по условиям обратного выкупа вернулся Шишкареву 25 февраля 2026 года.",
@@ -101720,6 +102174,21 @@
      "top_purchases": "failed",
      "multiple_text": "failed"
     }
+   },
+   "seller": "Сергей Шишкарев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Шишкарев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1167746230673/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 25.12.2024"
+    }
    }
   },
   {
@@ -101775,6 +102244,10 @@
     [
      "AKM.RU",
      "https://www.akm.ru/analyt/chistye_aktivy_agrokholdinga_tavros_snizilis_na_10_po_itogam_2025_goda_/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «МПК «Тосненский»»",
+     "https://datanewton.ru/contragents/1044701893389/history/timeline"
     ]
    ],
    "extra": "Инвестбанкир Илья Шумов провел оценку активов в ~300 млн руб.",
@@ -101849,6 +102322,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Виктор Крылов, Олег Селихов и Екатерина Яснова",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Виктор Крылов, Олег Селихов и Екатерина Яснова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1044701893389/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 24.12.2024"
     }
    }
   },
@@ -102795,6 +103283,10 @@
     [
      "РБК Компании",
      "https://companies.rbc.ru/id/1137847109861-585zolotoj/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Регент Голд»",
+     "https://datanewton.ru/contragents/1137847109861/history/timeline"
     ]
    ],
    "extra": "Инвестиционная сделка по приобретению 9,3% долей в ООО «Регент Голд», владеющем брендом «585 Золотой». В результате доля основного владельца Антона Петрова сократилась с 70% до 61,63%, доля Елены Бережной — с 10% до 9,07%.",
@@ -102873,7 +103365,22 @@
      "Mergers.ru",
      "https://mergers.ru/news/Iskandar-Mahmudov-i-Andrej-Bokarev-investirovali-v-yuvelirnuyu-set-585Zolotoj-84603"
     ]
-   ]
+   ],
+   "seller": "Антон Петров и Елена Бережная",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Антон Петров и Елена Бережная",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1137847109861/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 25.12.2024"
+    }
+   }
   },
   {
    "id": "gcdf7065a",
@@ -103385,6 +103892,10 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/finance/articles/2024/11/29/1077999-bank-tochka-kupil-servis-oblachnoi-kassi"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Цифровые инструменты для бизнеса»",
+     "https://datanewton.ru/contragents/1201600042335/history/timeline"
     ]
    ],
    "extra": "Банк купил 100% долей компании «Цифровые инструменты для бизнеса», которая предоставляет облачный сервис кассы под брендом Digitalkassa. Сделку заключили, чтобы расширить набор сервисов для юридических лиц и ответить на спрос профильных клиентов.",
@@ -103665,7 +104176,22 @@
      "Mergers.ru",
      "https://mergers.ru/news/Bank-Tochka-kupil-servis-oblachnyh-kass-Digitalkassa-84395"
     ]
-   ]
+   ],
+   "seller": "Андрей Кузнецов и Эвелина Халиуллина",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Андрей Кузнецов и Эвелина Халиуллина",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1201600042335/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 02.12.2024"
+    }
+   }
   },
   {
    "id": "g4b275e25",
@@ -104495,6 +105021,10 @@
     [
      "Клик (сайт продукта)",
      "https://www.kleek.ru/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Ресто Пэй»",
+     "https://datanewton.ru/contragents/1215100006175/history/timeline"
     ]
    ],
    "extra": "Банк «Точка» приобрёл 70% долей ООО «Ресто Пэй» — юридического лица сервиса Kleek. Продавцами выступили физические лица, сделка закрыта в декабре 2024 года.",
@@ -104564,6 +105094,21 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Ирина Швиндерман, Ирина Петренко и Эмиль Азизов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Ирина Швиндерман, Ирина Петренко и Эмиль Азизов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1215100006175/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 10.12.2024"
+    }
    }
   },
   {
@@ -104607,6 +105152,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7345355"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Пруффми»",
+     "https://datanewton.ru/contragents/1157847085285/history/timeline"
     ]
    ],
    "extra": "Яндекс завершил сделку по покупке технологической платформы Pruffme. В неё входят сервисы для создания онлайн-досок, вебинаров и видеоконференций — они работают и в облаке, и на собственных серверах заказчиков. Решения Pruffme использовались при создании сервиса «Яндекс Концепт», запущенного в сентябре 2024 года. Клиенты Pruffme сохранят полный доступ к привычным инструментам и продолжат пользоваться сервисами платформы на прежних условиях.",
@@ -104678,6 +105227,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Сергей Подузов, Артем Максимов, ООО «Империус Групп» и ещё три совладельца",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Подузов, Артем Максимов, ООО «Империус Групп» и ещё три совладельца",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1157847085285/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "несколько продавцов, один профиль не ставится; найдены по истории участников ЕГРЮЛ (datanewton), запись 05.12.2024"
     }
    }
   },
@@ -106977,6 +107541,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7907166"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Кофе Лайк»",
+     "https://datanewton.ru/contragents/1131832006778/history/timeline"
     ]
    ],
    "extra": "Сделка прошла в два этапа: 3,95% куплены в начале сентября 2024 года, ещё 96,05% — 17 октября 2024 года.",
@@ -107045,6 +107613,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Павел Гришков, Иван Ермилов, Артур Восканян, Антон Макаров и Александр Богуславский",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Павел Гришков, Иван Ермилов, Артур Восканян, Антон Макаров и Александр Богуславский",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1131832006778/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 17.10.2024"
     }
    }
   },
@@ -107212,6 +107795,14 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7230546"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Диджитал Комплаенс»",
+     "https://datanewton.ru/contragents/1157847182217/history/timeline"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Кибер Сервис»",
+     "https://datanewton.ru/contragents/1187746748507/history/timeline"
     ]
    ],
    "extra": "ГК «Солар», дочерняя компания «Ростелекома», купила 100% долей компаний Digital Security, которые занимаются аудитом в сфере кибербезопасности. Сделка закрыта 11 октября 2024 года.",
@@ -107287,6 +107878,26 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_lot"
     }
+   },
+   "seller": "Елена Медведовская",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Елена Медведовская",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1157847182217/history/timeline"
+     },
+     {
+      "value": "Елена Медведовская",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1187746748507/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 11.10.2024"
+    }
    }
   },
   {
@@ -107339,6 +107950,10 @@
     [
      "Райффайзенбанк",
      "https://www.raiffeisen.ru/about/press/news/202618/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «СК «Райффайзен Лайф»»",
+     "https://datanewton.ru/contragents/1097746021955/history/timeline"
     ]
    ],
    "extra": "Куплено 100% долей ООО «СК «Райффайзен Лайф»»: договор подписан в августе 2024 года, сделка закрыта 3 октября 2024 года. Инвестиционный портфель компании оценивался в 20 млрд ₽.",
@@ -107417,7 +108032,22 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/7988"
     ]
-   ]
+   ],
+   "seller": "UNIQA и Райффайзенбанк",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "UNIQA и Райффайзенбанк",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1097746021955/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "несколько продавцов, один профиль не ставится; найдены по истории участников ЕГРЮЛ (datanewton), запись 03.10.2024"
+    }
+   }
   },
   {
    "id": "ga857f692",
@@ -112044,6 +112674,10 @@
     [
      "КП Кострома",
      "https://www.kostroma.kp.ru/online/news/5963420/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Азимут Кострома»",
+     "https://datanewton.ru/contragents/1174401008539/history/timeline"
     ]
    ],
    "extra": "Александр Клячин вместе с Еленой Соколовой продал Елисею Батину 24% в ООО «Азимут Кострома» — владельце отеля «Azimut Парк Отель Кострома» на 90 номеров. Партнёры отказываются от трёхзвёздочных отелей в пользу более дорогих и пятизвёздочных гостиниц.",
@@ -112126,7 +112760,18 @@
      "@dealsma (Telegram)",
      "https://t.me/dealsma/5223"
     ]
-   ]
+   ],
+   "seller": "Azimut Hotels",
+   "seller_id": "g05c33d81",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Azimut Hotels",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1174401008539/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g2075a46d",
@@ -122937,6 +123582,10 @@
     [
      "РБК Компании",
      "https://companies.rbc.ru/id/1145958022572-umnaya-logistika/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Умная логистика»",
+     "https://datanewton.ru/contragents/1145958022572/history/timeline"
     ]
    ],
    "extra": "Транспортно-логистическая группа «Монополия» приобрела 72% долей в пермской IT-компании «Умная логистика», которая разрабатывает сервисы для грузоперевозок. Основатель Ольга Попова снизила долю с 96% до 26,88%, генеральный директор Сергей Мельницын — с 4% до 1,12%.",
@@ -123178,7 +123827,22 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "sum_basis": "undisclosed"
+   "sum_basis": "undisclosed",
+   "seller": "Ольга Попова и Сергей Мельницын",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Ольга Попова и Сергей Мельницын",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1145958022572/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 22.02.2024"
+    }
+   }
   },
   {
    "id": "gcf0f7334",
@@ -124198,6 +124862,10 @@
     [
      "saby.ru",
      "https://saby.ru/contragents/9701028836/772201001"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Шмит Компани» (Schaub Lorenz)",
+     "https://datanewton.ru/contragents/1167746066509/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта 31 января 2024 года. Гусейн Иманов, владелец бренда Jackie's, выкупил 30% доли в производителе бытовой техники Schaub Lorenz (ООО «Шмит Компани») у Радмира Соколова.",
@@ -124269,6 +124937,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Радмир Соколов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Радмир Соколов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1167746066509/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 31.01.2024"
     }
    }
   },
@@ -131896,6 +132579,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8443530"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Здоровая планета»",
+     "https://datanewton.ru/contragents/5157746174504/history/timeline"
     ]
    ],
    "extra": "Supplement Group выкупила 80% долей ООО «Здоровая планета» — производителя фитнес-десертов под брендом Jump: протеиновых батончиков, печенья и других продуктов. Покупатель продолжил консолидацию: к 2026 году в его контур входят ООО «Сапплемент Групп», ООО «Эвейк Групп» и ООО «Здоровая планета», зарегистрированные в Курске, а выручка группы за 2025 год составила 1,4 млрд ₽. Бизнес контролируется Павлом Мамаевым и Виктором Липиным. В феврале 2026 года АО «Сапплемент Капитал» договорилось о покупке курского производителя этикеток «Лейблпак» — уже вне сегмента БАД и спортивного питания.",
@@ -132156,7 +132843,22 @@
    },
    "stake_acquired": 80.0,
    "sum_basis": "reported",
-   "date_basis": "publication"
+   "date_basis": "publication",
+   "seller": "Ирина Почитаева, Анастасия Ковалева, Максим Спиридонов, Григорий Дробот и Александр Щербина",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Ирина Почитаева, Анастасия Ковалева, Максим Спиридонов, Григорий Дробот и Александр Щербина",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/5157746174504/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 11.10.2024"
+    }
+   }
   },
   {
    "id": "ga655a061",
@@ -133485,6 +134187,10 @@
     [
      "audit-it.ru",
      "https://www.audit-it.ru/contragent/1027705002588_ooo-golder-elektroniks"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Голдер-Электроникс»",
+     "https://datanewton.ru/contragents/1027705002588/history/timeline"
     ]
    ],
    "extra": "ГК Merlion закрыла сделку по покупке ООО «Голдер-Электроникс» у Андрея Деревянченко. Изначально Merlion интересовал бренд Rondell, но в итоге компания купила всё юрлицо, владеющее четырьмя брендами бытовой техники.",
@@ -133554,6 +134260,21 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Андрей Деревянченко",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Андрей Деревянченко",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1027705002588/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 15.07.2024"
+    }
    }
   },
   {
@@ -133608,6 +134329,10 @@
     [
      "AK&M",
      "https://www.akm.ru/news/tekhnonikol_kupila_scandic_construction/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Скандик Констракшн»",
+     "https://datanewton.ru/contragents/1037843047571/history/timeline"
     ]
    ],
    "auto": true,
@@ -133678,6 +134403,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Ольга Хромова",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Ольга Хромова",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1037843047571/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 04.07.2024"
     }
    }
   },
@@ -139352,6 +140092,10 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/realty/articles/2025/09/03/1136115-u-upravlyayuschego-torgovimi-tsentrami-planeta-i-leto-menyaetsya-vladelets"
+    ],
+    [
+     "ЕГРЮЛ: история участников МК ООО «Вудвелл Инвестментс Лимитед»",
+     "https://datanewton.ru/contragents/1223900007363/history/timeline"
     ]
    ],
    "extra": "Сбербанк Инвестиции приобрела почти 25% компании, владеющей складским комплексом «Крекшино». Скорее всего, Malltech передал долю в ходе реструктуризации долгов: Сбербанк — кредитор логопарка. Девелопер может позже выкупить долю или передать банку весь комплекс, но к 2026 году ни один из сценариев публично не подтвердился. У самого холдинга Malltech, которому принадлежат также ТРЦ «Планета», «Лето» и «Аура», дела идут устойчиво: выручка 2024 года — 13,4 млрд ₽ (+15%). В августе 2025 года сменился лишь миноритарный акционер: 16,96% выкупил фонд Balchug Capital, но с долей Сбербанка в SPV, владеющей комплексом, это прямо не связано.",
@@ -139427,6 +140171,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "ООО «Центавр»",
+   "seller_id": "gbc011965",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «Центавр»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1223900007363/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -140438,6 +141193,10 @@
     [
      "CNews",
      "https://www.cnews.ru/news/top/2024-02-12_razrabotchik_askon_i_ego"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Про Технолоджиз»",
+     "https://datanewton.ru/contragents/1057747408025/history/timeline"
     ]
    ],
    "extra": "«Аскон» приобрёл 50,99% акций ООО «Про технолоджиз» — интегратора, который внедряет ПО для проектирования и управления жизненным циклом продукции. Покупка расширяет внедренческие силы «Аскона»: из разработчика группа превращается ещё и в интегратора.",
@@ -140521,6 +141280,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Андрей Волков, Владимир Ковалевский и Павел Стрелков",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Андрей Волков, Владимир Ковалевский и Павел Стрелков",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1057747408025/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 28.12.2023"
     }
    }
   },
@@ -141013,6 +141787,10 @@
     [
      "Ростелеком",
      "https://www.company.rt.ru/press/news/d472111/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Кортеос»",
+     "https://datanewton.ru/contragents/1127746326366/history/timeline"
     ]
    ],
    "extra": "Ростелеком приобрёл 60% акций ООО «Кортеос» — разработчика платформы Corteos Platform для автоматизации делового туризма и управления корпоративными поездками. Основатели компании сохранили свои доли. Через платформу проходит более 7,5 тыс. деловых поездок в день. В декабре 2024 года Continent Express стала первым лицензированным партнёром-интегратором «Кортеос»: сторонние разработчики получили доступ к платформе и могут делать на ней решения под конкретных корпоративных клиентов. Структура владения с момента сделки не менялась: доли основателей и Ростелекома прежние.",
@@ -141087,6 +141865,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Валентина Коптева",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Валентина Коптева",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127746326366/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 19.12.2023"
     }
    }
   },
@@ -142446,6 +143239,10 @@
     [
      "Интерфакс",
      "https://www.interfax.ru/business/938388"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Бриджстоун Тайер Мануфэкчуринг СНГ»",
+     "https://datanewton.ru/contragents/1137325002870/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта в декабре 2023 года. S8 Capital (холдинг Армена Саркисяна) приобрела завод Bridgestone в Ульяновске. Торговые марки и бренд Bridgestone новому собственнику не передаются. Это третье приобретение шинного дивизиона S8 Capital после сделок с Continental (май 2023, завод в Калуге) и «Кордиант» (май 2023, три предприятия в Омске и Ярославле). Завод возобновил работу в ноябре 2024 года под брендом Gislaved. Весь шинный холдинг S8 Capital — Continental, «Кордиант» и бывший завод Bridgestone под маркой Gislaved — целиком перешёл «Севергрупп» Алексея Мордашова, которая получила право собственности 1 октября 2024 года. Аналитик Advance Capital Павел Терентьев оценивал сделку в 7,5–9,8 млрд ₽ (3,25–3,75x EV/EBITDA 2021). Завод стоит в индустриальном парке «Заволжье», его мощность — 2,4 млн автопокрышек в год.",
@@ -142530,6 +143327,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Bridgestone",
+   "seller_id": "g167d65a4",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Bridgestone",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1137325002870/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -142711,6 +143519,10 @@
     [
      "Fontanka.ru",
      "https://www.fontanka.ru/2024/09/30/74154179/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Кашин луг»",
+     "https://datanewton.ru/contragents/1106910000482/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта 27 ноября 2023 года. Покупатель — «РумелкоАгро», группа компаний Владимира Лисина, которая специализируется на молочном животноводстве и растениеводстве. Продавцы — физические лица. Приобретены 80% долей ООО «Кашин луг» в Тверской области. В 2022 году выручка хозяйства составила 73,2 млн ₽, чистая прибыль — 15 млн ₽. Тот же холдинг продолжил консолидацию: с 12 января 2024 года ему принадлежит 100% ООО «Никольское» — ещё одного молочно-животноводческого хозяйства, тоже выкупленного у частных лиц. Отдельно структуры того же бенефициара, Владимира Лисина, купили в 2024 году крупного производителя детского питания АО «Прогресс» (бренды «Фрутоняня», «Малышам»); источники расходятся в том, тот ли это холдинг «Румелко», — по одной из версий, «Румелко» не связан с этой покупкой.",
@@ -142965,6 +143777,21 @@
      "top_purchases": "ok",
      "multiple_text": "ok"
     }
+   },
+   "seller": "Николай Гагарин, Константин Гагарин и Сергей Прокопов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Николай Гагарин, Константин Гагарин и Сергей Прокопов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1106910000482/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 27.11.2023"
+    }
    }
   },
   {
@@ -143007,6 +143834,10 @@
     [
      "ComNews",
      "https://www.comnews.ru/content/230343/2023-11-23/2023-w47/1010/bilayn-poluchil-kontrol-nad-callibri"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Колибри»",
+     "https://datanewton.ru/contragents/1146658002974/history/timeline"
     ]
    ],
    "extra": "Вымпелком купил 51% ООО «Колибри». Компания развивает платформу лид-менеджмента: она собирает обращения клиентов, ведёт маркетинговую аналитику и автоматизирует работу с ними. Покупка должна расширить набор услуг для корпоративных клиентов.",
@@ -143075,6 +143906,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Иван Шкиря",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Иван Шкиря",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1146658002974/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 22.11.2023"
     }
    }
   },
@@ -150419,6 +151265,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/5318257"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «RNT Group» (ЭПАМ Систэмз)",
+     "https://datanewton.ru/contragents/1037739707147/history/timeline"
     ]
    ],
    "extra": "«Рексофт» приобрёл 100% компании RNT Group — правообладателя российской дочерней компании EPAM Systems Inc. (ООО «ЭПАМ Систэмз»). Сделка юридически завершена в августе 2023 года; основные шаги по объединению должны занять около года.",
@@ -150507,6 +151357,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "EPAM Systems",
+   "seller_id": "gda864c92",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "EPAM Systems",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1037739707147/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -151854,6 +152715,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/6070243"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Советская агрофирма»",
+     "https://datanewton.ru/contragents/1024301113803/history/timeline"
     ]
    ],
    "extra": "Продавец — Алексей Барамзин, прежний владелец «Советской агрофирмы». Средства, привлечённые от продажи Альфа-банку 19,01% агрохолдинга, «Таврос» планировал направить на инновационные и логистические проекты; в банке подчёркивали, что эта сделка не связана с кредитованием и отвечает интересам обеих сторон.",
@@ -151928,6 +152793,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Алексей Барамзин",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Алексей Барамзин",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1024301113803/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 10.07.2023"
     }
    }
   },
@@ -157680,6 +158560,10 @@
     [
      "InvestFuture",
      "https://investfuture.ru/articles/moskovskaya-birzha-zavershaet-pokupku-prokomplaens-dlya-usileniya-regtekha-1171753143"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «ПроКомплаенс»",
+     "https://datanewton.ru/contragents/1217700388663/history/timeline"
     ]
    ],
    "extra": "Мосбиржа приобрела 50,1% акций ООО «ПроКомплаенс» — разработчика ПО для автоматизации комплаенс-услуг на финансовом рынке. Компания — резидент IT-кластера фонда «Сколково», её система мониторинга Check4Trick анализирует торги и выявляет нарушения на финансовых рынках.",
@@ -157761,6 +158645,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Александр Черепнин, Андрей Суздальцев, Юлия Симонова, Даниил Каширин и Юрий Чехович",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Александр Черепнин, Андрей Суздальцев, Юлия Симонова, Даниил Каширин и Юрий Чехович",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1217700388663/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 04.04.2023"
     }
    }
   },
@@ -158715,6 +159614,10 @@
     [
      "РБК-Компании",
      "https://companies.rbc.ru/id/1025007115253-ooo-firma-svetets/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Светец»",
+     "https://datanewton.ru/contragents/1025007115253/history/timeline"
     ]
    ],
    "extra": "«Ростелеком» приобрёл 100% долей ООО «Светец»; в группу «Светец» входят также «Новион» и «Светец Интегро». Сделка совершена 14 марта 2023 года, переход долей зафиксирован в ЕГРЮЛ.",
@@ -158786,6 +159689,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Сергей Крестьянинов, Галина Шелест и Евгений Полканов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Сергей Крестьянинов, Галина Шелест и Евгений Полканов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1025007115253/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 14.03.2023"
     }
    }
   },
@@ -158970,6 +159888,10 @@
     [
      "agroinvestor.ru",
      "https://www.agroinvestor.ru/business-pages/41113-fleet-finance-staryy-novyy-brend-na-lizingovom-rynke/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Джон Дир Файнэншл»",
+     "https://datanewton.ru/contragents/1117746366792/history/timeline"
     ]
    ],
    "extra": "Инвестиционная группа «Инсайт» Авета Миракяна купила ООО «ДЖОН ДИР ФАЙНЭНШЛ». Сделка закрыта 7 марта 2023 года. По оценкам экспертов, сумма могла составить 11 млрд ₽. Среди источников финансирования — размещение облигаций на 11 млрд ₽.",
@@ -159197,7 +160119,18 @@
     }
    },
    "sum_basis": "not_a_price",
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "seller": "John Deere",
+   "seller_id": "gaf99e1f7",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "John Deere",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1117746366792/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "g36386bcf",
@@ -160734,7 +161667,22 @@
      "multiple_text": "control_change_not_verified"
     }
    },
-   "buyer_name": "ООО «Стрим»"
+   "buyer_name": "ООО «Стрим»",
+   "seller": "Наталия Солодухова",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Наталия Солодухова",
+      "method": "manual_source_review",
+      "url": "https://www.interfax.ru/business/887334"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; назван в источнике карточки"
+    }
+   }
   },
   {
    "id": "g88d5e740",
@@ -161039,6 +161987,10 @@
     [
      "Rusbase",
      "https://rb.ru/news/avito-roomberry/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Румбери»",
+     "https://datanewton.ru/contragents/1157154022849/history/timeline"
     ]
    ],
    "extra": "Avito купила 100% долей ООО «Румбери» у Михаила Хайкина и Валентины Бочковой. Сервис ищет новостройки в Москве, МО, Санкт-Петербурге и Ленобласти и несколько лет был технологическим партнёром «Авито Недвижимость».",
@@ -161116,6 +162068,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Михаил Хайкин и Валентин Бочков",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Михаил Хайкин и Валентин Бочков",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1157154022849/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 10.02.2023"
     }
    }
   },
@@ -161993,6 +162960,10 @@
     [
      "Интерфакс",
      "https://www.interfax.ru/business/880713"
+    ],
+    [
+     "ЕГРЮЛ: история участников АО «Нэксайн» (Nexign)",
+     "https://datanewton.ru/contragents/1027809251744/history/timeline"
     ]
    ],
    "extra": "",
@@ -162065,6 +163036,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "ООО «ЮэСэМ Телеком»",
+   "seller_id": "g2324d212",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ООО «ЮэСэМ Телеком»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1027809251744/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -162104,6 +163086,10 @@
     [
      "Абирег",
      "https://abireg.ru/newsitem/100926/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Никольское»",
+     "https://datanewton.ru/contragents/1146910000544/history/timeline"
     ]
    ],
    "extra": "РумелкоАгро, входящая в группу НЛМК Владимира Лисина, купила 100% агрохозяйства ООО «Никольское» в Кесовогорском районе Тверской области. Фактически контроль был установлен ещё в 2019 году, а сделку официально закрыли 12 января 2023 года.",
@@ -162181,6 +163167,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Николай Гагарин, Константин Гагарин и Александр Климов",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Николай Гагарин, Константин Гагарин и Александр Климов",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1146910000544/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 12.01.2024"
     }
    }
   },
@@ -172061,6 +173062,10 @@
     [
      "Эксперт РА",
      "https://raexpert.ru/database/companies/chartis/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «АИГ Си Ай Эс Инвестментс» (владелец СК «Гардия»)",
+     "https://datanewton.ru/contragents/1127746009764/history/timeline"
     ]
    ],
    "extra": "ЛУКОЙЛ купил 49% через ООО «К.Н.Холдинг», а закрытый паевой инвестиционный фонд «Газпромбанк — Фрезия» — 51% через ООО «Инвест». Вместе партнёры получили контроль над АО «СК Гардия», которое раньше называлось «АИГ страховая компания». До этого ЛУКОЙЛ и ГПБ-Фрезия участвовали в получении контроля над дочерней компанией Engel — ЭЛ5-Энерго.",
@@ -172138,6 +173143,21 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   },
+   "seller": "Дмитрий Пискулов, Роман Тихоненко и ещё пять совладельцев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Дмитрий Пискулов, Роман Тихоненко и ещё пять совладельцев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127746009764/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 17.04.2023"
     }
    }
   },
@@ -173607,6 +174627,10 @@
     [
      "РУГРАД.ЕУ",
      "https://rugrad.online/news/1469127/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Союз-ТТМ»",
+     "https://datanewton.ru/contragents/1023900987637/history/timeline"
     ]
    ],
    "extra": "ООО «Союз-22», связанное с бизнесменом Александром Раппопортом, договорилось о покупке ООО «Союз-ТТМ» — дочерней структуры корпорации «Союз». В сделку входят терминал перевалки растительных масел в Калининграде, мощности по переработке масел, производство жиров и кофейное предприятие. Мощность комплекса — 250 тыс. тонн продукции в год.",
@@ -173891,7 +174915,18 @@
      "multiple_text": "ok"
     }
    },
-   "stake_acquired": 100.0
+   "stake_acquired": 100.0,
+   "seller": "Корпорация «Союз»",
+   "seller_id": "gc8bb659c",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Корпорация «Союз»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1023900987637/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "gbbad8e7c",
@@ -173934,6 +174969,10 @@
     [
      "Audit-it",
      "https://www.audit-it.ru/contragent/1197746227755_ooo-zonsmart"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Зонсмарт»",
+     "https://datanewton.ru/contragents/1197746227755/history/timeline"
     ]
    ],
    "extra": "Покупатель получил 95% долей сервиса ZoneSmart (ООО «Зонсмарт») — платформы для многоканальной онлайн-торговли в режиме одного окна.",
@@ -174230,7 +175269,22 @@
    },
    "stake_acquired": 95.0,
    "date_basis": "publication",
-   "sum_basis": "range"
+   "sum_basis": "range",
+   "seller": "Максим Моисеев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Максим Моисеев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1197746227755/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 10.01.2023"
+    }
+   }
   },
   {
    "id": "g5eea9928",
@@ -178590,6 +179644,10 @@
     [
      "audit-it.ru",
      "https://www.audit-it.ru/contragent/1057749663311_ooo-talatu"
+    ],
+    [
+     "ЕГРЮЛ: история участников петербургский завод Teknos",
+     "https://datanewton.ru/contragents/1057749663311/history/timeline"
     ]
    ],
    "extra": "Сделка закрыта в июле 2022 года. Проданные доли находятся в залоге у ВТБ.",
@@ -178665,6 +179723,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Teknos",
+   "seller_id": "g85c0ec02",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Teknos",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1057749663311/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -182476,6 +183545,10 @@
     [
      "О3",
      "https://o3.com/information/kompaniya-o3-priobretaet-100-doley-kiiltoklin/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «КиилтоКлин»",
+     "https://datanewton.ru/contragents/1057811902180/history/timeline"
     ]
    ],
    "extra": "ГК «О3», российский производитель лакокрасочных материалов, приобрела финского производителя профессиональной гигиены «КиилтоКлин». Все технологии и интеллектуальная собственность переходят к новому собственнику.",
@@ -182548,6 +183621,17 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
+   },
+   "seller": "Kiilto",
+   "seller_id": "gb7459d53",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Kiilto",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1057811902180/history/timeline"
+     }
+    ]
    }
   },
   {
@@ -184234,6 +185318,10 @@
     [
      "Vademecum",
      "https://vademec.ru/article/dmitriy_fomin-_-nash_plan_-_vyrastit_kompaniyu_s_kapitalizatsiey_v_-1_mlrd-_osnovatel_-kliniki_fomin/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Здоровье женщины и мужчины»",
+     "https://datanewton.ru/contragents/1090280009786/history/timeline"
     ]
    ],
    "extra": "Дмитрий Фомин, основатель и владелец сети, купил 51% в уфимской клинике, которая 13–15 лет работала в сфере женского здоровья и репродукции. После сделки в клинику вложили новые деньги, построили ещё одну и довели число клиник сети в регионе до четырёх.",
@@ -184298,7 +185386,22 @@
      "multiple_text": "before_site_year"
     }
    },
-   "followup_researched": "2026-09-06"
+   "followup_researched": "2026-09-06",
+   "seller": "Эльза Фазлыева",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Эльза Фазлыева",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1090280009786/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 01.04.2021"
+    }
+   }
   },
   {
    "id": "g2a27e6b5",
@@ -189309,6 +190412,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7361144"
+    ],
+    [
+     "ЕГРЮЛ: история участников АО «Пивоваренная компания «Балтика»»",
+     "https://datanewton.ru/contragents/1147847032838/history/timeline"
     ]
    ],
    "origin": "curated",
@@ -189525,7 +190632,18 @@
     }
    },
    "sum_basis": "reported",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "Carlsberg Group",
+   "seller_id": "carlsberg",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Carlsberg Group",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1147847032838/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "rosatom-mali",
@@ -189975,6 +191093,10 @@
     [
      "Orion — о сделке",
      "https://orion-law.com/news"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Хьюго Босс Рус»",
+     "https://datanewton.ru/contragents/1127747005451/history/timeline"
     ]
    ],
    "origin": "curated",
@@ -190041,7 +191163,18 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "seller": "Hugo Boss",
+   "seller_id": "gb4768d81",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Hugo Boss",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127747005451/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "ksk",
@@ -191425,6 +192558,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/6312433"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Башенная инфраструктурная компания»",
+     "https://datanewton.ru/contragents/1227700875181/history/timeline"
     ]
    ],
    "origin": "curated",
@@ -191727,7 +192864,18 @@
      "Mergers.ru",
      "https://mergers.ru/news/MTS-prodala-499-v-svoej-bashennoj-kompanii-87113"
     ]
-   ]
+   ],
+   "seller": "МТС",
+   "seller_id": "g69c88bc7",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "МТС",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1227700875181/history/timeline"
+     }
+    ]
+   }
   },
   {
    "id": "absolut-strah",
@@ -194661,7 +195809,12 @@
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавца нет: деньги получила сама компания — «Деньги от сделки ГК «Дело» планирует направить на инвестиционные проекты и снижение долговой нагрузки»; история участников ЕГРЮЛ (datanewton) за 2022 год закрыта"
+    }
+   }
   },
   {
    "id": "cd47c5acc",
@@ -208502,6 +209655,10 @@
     [
      "АСН-инфо",
      "https://asninfo.ru/news/125049-developer-koldi-priobrel-uchastki-dlya-elitnogo-zhilya-v-moskve"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Интерсервисинвест»",
+     "https://datanewton.ru/contragents/1027739031121/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -208573,7 +209730,22 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/10706"
     ]
-   ]
+   ],
+   "seller": "Эдуард Аракчеев",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Эдуард Аракчеев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1027739031121/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 26.03.2026"
+    }
+   }
   },
   {
    "id": "g925a9d17",
@@ -225397,6 +226569,10 @@
     [
      "ComNews",
      "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Стек Групп» (M1Cloud)",
+     "https://datanewton.ru/contragents/1137746371487/history/timeline"
     ]
    ],
    "from_ingest": true,
@@ -225446,6 +226622,13 @@
       "method": "explicit_news_title",
       "url": "https://mergers.ru/news/Selectel-kupil-oblachnogo-provajdera-M1Cloud-87539"
      }
+    ],
+    "seller": [
+     {
+      "value": "Ноха Медов, Алексей Данильянц, Вадим Мохов и ещё пять совладельцев",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1137746371487/history/timeline"
+     }
     ]
    },
    "buyer": "gd4a7c612",
@@ -225454,7 +226637,10 @@
    "target": "g574b005b",
    "accepted": "2026-09-18",
    "accepted_notes": {
-    "notes": "обрыв events[0].note дописан отдельным скриптом (review.py не адресует events[] по точечному пути)"
+    "notes": "обрыв events[0].note дописан отдельным скриптом (review.py не адресует events[] по точечному пути)",
+    "no_profile": {
+     "seller": "физлица, профилей нет; найдены по истории участников ЕГРЮЛ (datanewton), запись 23.09.2026"
+    }
    },
    "proofread": "2026-09-18",
    "post_preview": "<b>Selectel купил облачного провайдера М1Cloud</b>\n\n<b>Предмет:</b> M1Cloud — облачный провайдер приватных решений на базе партнёрских дата-центров в Москве; работает под товарным знаком M1Клауд. Юрлицо — ООО «Стек Групп».\n<b>Покупатель:</b> ООО «Селектел» — Провайдер облачной инфраструктуры и аренды выделенных серверов, сеть ЦОДов.\n<b>Сумма:</b> 2,6 млрд ₽\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://mergers.ru/news/Selectel-kupil-oblachnogo-provajdera-M1Cloud-87539\">Mergers.ru</a>\nЕщё 1 источник — в карточке сделки\n\n#технологии #ИТ #MA",
@@ -225634,7 +226820,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Selectel-kupil-oblachnogo-provajdera-M1Cloud-87539"
     ]
-   ]
+   ],
+   "seller": "Ноха Медов, Алексей Данильянц, Вадим Мохов и ещё пять совладельцев"
   },
   {
    "id": "g7c2329a4",
@@ -237821,6 +239008,10 @@
     [
      "Novus Capital",
      "https://novuscapital.ru/"
+    ],
+    [
+     "ЕГРЮЛ: история участников ООО «Русский лён»",
+     "https://datanewton.ru/contragents/1174027001807/history/timeline"
     ]
    ],
    "added": "2026-10-09",
@@ -237882,7 +239073,22 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "seller": "Константин Клюка и ООО «Континуум»",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Константин Клюка и ООО «Континуум»",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1174027001807/history/timeline"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "несколько продавцов, один профиль не ставится; найдены по истории участников ЕГРЮЛ (datanewton), запись 08.07.2022"
+    }
+   }
   },
   {
    "id": "gcb1ce023",
@@ -265535,6 +266741,90 @@
    "name": "ГМК «Дальполиметалл»",
    "ind": "ГМК и добыча",
    "desc": "Производитель цинкового и свинцового концентрата с содержанием серебра в Приморском крае; разрабатывает Николаевское и Партизанское месторождения, обогатительная фабрика перерабатывает около 1,2 млн тонн руды в год. Юрлицо — АО «ГМК «Дальполиметалл»».",
+   "kpi": []
+  },
+  "gce8ad86c": {
+   "name": "ООО «Центр 2000»",
+   "ind": "Не определена",
+   "desc": "Компания из Мордовии; до июля 2025 года ей принадлежало 100% долей ООО «Спиртзавод «Ромодановский»», которые купил ЛВЗ «Саранский».",
+   "kpi": []
+  },
+  "gfa4926c9": {
+   "name": "ООО «РБФ»",
+   "ind": "Не определена",
+   "desc": "Московская компания; до декабря 2025 года ей принадлежало 99% «РБФ ритейл» — владельца гипермаркетов «О’кей», которые перешли к ООО «Земун», связанному с «Лентой».",
+   "kpi": []
+  },
+  "g833addcf": {
+   "name": "ООО «Мелон»",
+   "ind": "Не определена",
+   "desc": "Московская компания, через которую Михаилу Шаповалову принадлежал Александровский спиртзавод №14; в июле 2025 года продала завод группе «Ренессанс».",
+   "kpi": []
+  },
+  "g0c67d777": {
+   "name": "Lagella Limited",
+   "ind": "Не определена",
+   "desc": "Кипрская компания, которой владеют Ineth Limited и Андрей Пожитков. В 2022 году купила у ВТБ 75,7% ООО «Домиленд», в декабре 2024 года продала эту долю «Самолету».",
+   "kpi": []
+  },
+  "gda864c92": {
+   "name": "EPAM Systems",
+   "ind": "ИТ и интернет",
+   "desc": "EPAM Systems Inc. — прежний владелец российской дочерней компании ООО «ЭПАМ Систэмз» (RNT Group); в августе 2023 года продала её «Рексофту».",
+   "kpi": []
+  },
+  "gaf99e1f7": {
+   "name": "John Deere",
+   "ind": "Машиностроение",
+   "desc": "Производитель сельхозтехники; до марта 2023 года владел кэптивной лизинговой компанией ООО «Джон Дир Файнэншл», которую купила группа «Инсайт».",
+   "kpi": []
+  },
+  "g2324d212": {
+   "name": "ООО «ЮэСэМ Телеком»",
+   "ind": "Холдинги",
+   "desc": "Компания холдинга USM; до января 2023 года владела разработчиком биллинга Nexign, который выкупил «МегаФон».",
+   "kpi": []
+  },
+  "gc8bb659c": {
+   "name": "Корпорация «Союз»",
+   "ind": "Пищепром и напитки",
+   "desc": "Петербургская группа, основанная в 2000 году; с 2003 года строила в Калининграде терминал и производства растительных масел. В 2022 году продала ООО «Союз-ТТМ» компании «Союз-22».",
+   "kpi": []
+  },
+  "g85c0ec02": {
+   "name": "Teknos",
+   "ind": "Химия и удобрения",
+   "desc": "Финская компания Teknos Group Oy; в июле 2022 года продала «Инваста Капитал» петербургский завод красок и покрытий (марки «Командор», «Охтек», Massco).",
+   "kpi": []
+  },
+  "gb4768d81": {
+   "name": "Hugo Boss",
+   "ind": "Потребительские товары",
+   "desc": "Владелец брендов одежды Boss и Hugo (Hugo Boss AG); в августе 2024 года продал российское ООО «Хьюго Босс Рус» «Стокманну».",
+   "kpi": []
+  },
+  "gae67672d": {
+   "name": "Paymo Investments",
+   "ind": "Финтех",
+   "desc": "Paymo Investments S.A. — до февраля 2022 года владела 99% ООО «Инновационные платежные технологии» (бренд Paymo), которые получил фонд группы ВТБ.",
+   "kpi": []
+  },
+  "g0d7c5c8c": {
+   "name": "АО «Форвард»",
+   "ind": "Ритейл",
+   "desc": "Уфимская группа: управляла сетью универсамов «Полушка» и была крупным дистрибьютором товаров повседневного спроса. В 2024 году продала X5 дистрибьютора «Форвард-Маркет».",
+   "kpi": []
+  },
+  "gbc011965": {
+   "name": "ООО «Центавр»",
+   "ind": "Не определена",
+   "desc": "Московская компания; в январе 2023 года передала «Сбербанк Инвестициям» 24,99% компании, которой принадлежит складской комплекс «Крекшино».",
+   "kpi": []
+  },
+  "g167d65a4": {
+   "name": "Bridgestone",
+   "ind": "Автопром",
+   "desc": "Производитель шин; в декабре 2023 года через Bridgestone Europe продал S8 Capital завод в Ульяновске.",
    "kpi": []
   }
  },
