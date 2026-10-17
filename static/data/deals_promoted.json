@@ -249057,6 +249057,151 @@
     }
    },
    "proofread": "2026-10-17"
+  },
+  {
+   "id": "g7bff6e5c",
+   "date": "2026",
+   "title": "Visiology привлекла 200 млн рублей в инвестиционном раунде",
+   "ind": "ИТ и интернет",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/240377/2025-07-25/2025-w30/1010/visiology-uskorit-razrabotku-platformy-opirayas-sredstva-vneshnikh-investorov"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "200 млн ₽",
+    "share": "12,5% капитала компании предлагались инвесторам при объявлении раунда.",
+    "val": "Тогда же компанию оценили в 1,6 млрд руб.; минимальный взнос составлял 25 200 руб. — 180 акций по 140 руб.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "При объявлении раунда гендиректор Алексей Никитин объяснял привлечение средств нехваткой темпа: компании нужно было одновременно развивать продукт и ИИ-функции, усиливать маркетинг внутри страны и выходить за рубеж.",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "При объявлении раунд планировали провести на инвестиционной платформе «Поток»; самой организацией финансирования тогда занималась компания BITL.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "200 млн ₽",
+   "buyer_name": "частные инвесторы",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026",
+     "title": "Раунд закрыт",
+     "note": "Раунд объявлен в июле 2025 года на инвестиционной платформе «Поток» (организатор — компания BITL); о закрытии стало известно 16 октября 2026 года, точный день закрытия источник не называет.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/investments/news/2026/10/16/1237666-investitsionnii-raund"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "частные инвесторы",
+      "field": "buyer_name",
+      "method": "research",
+      "url": "https://www.comnews.ru/content/240377/2025-07-25/2025-w30/1010/visiology-uskorit-razrabotku-platformy-opirayas-sredstva-vneshnikh-investorov"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.share": [
+     "455e48597c29",
+     "eb5d1a6f3de7"
+    ],
+    "eco.val": [
+     "07e20bbc7c22"
+    ],
+    "eco.rationale": [
+     "8be5661cb24e"
+    ],
+    "law.struct": [
+     "3feaab3e98dc",
+     "29fddc9614bb"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "asset": "акции АО «Визиолоджи»",
+   "target": "gc63ffb06",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "342 частных инвестора через краудинвестинговую платформу «Поток» — физлица, не одна именованная сторона"
+    },
+    "no_inn": {
+     "target": "ИНН АО «Визиолоджи» не нашли в открытых источниках за время этого цикла"
+    },
+    "notes": "Краудинвестинговый раунд на платформе «Поток» (организатор BITL); объявлен в июле 2025 (ComNews, дословные цитаты), закрыт 16 октября 2026 (Ведомости — статья не открылась напрямую через скрейпер, заголовок и сумма взяты из него, детали закрытия (342 инвестора) не вошли в карточку, так как не нашли дословного текста для цитаты."
+   },
+   "second_read": "2026-10-16",
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": 12.5,
+     "basis": "rule",
+     "card_hash": "8206fd3e0259"
+    },
+    "price": {
+     "value_rub": 200000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "5c76f6b43a9a"
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d20c7bb0ee12"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5089e289dfa8"
+    },
+    "target": {
+     "company_id": "gc63ffb06",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "99340bd08f1d"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17"
   }
  ],
  "companies": {
@@ -281243,7 +281388,8 @@
   "gfc3e1ae2": null,
   "gf803c055": null,
   "g8a599c40": 208,
-  "g38bdff94": 209
+  "g38bdff94": 209,
+  "g7bff6e5c": 210
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -285404,7 +285550,26 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g7bff6e5c": {
+   "sum": "200 млн ₽",
+   "buyer_name": "частные инвесторы",
+   "target": "gc63ffb06",
+   "asset": "акции АО «Визиолоджи»",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-10-17T08:31:14+00:00"
+ "telegram_last_post_at": "2026-10-17T11:42:06+00:00"
 }
