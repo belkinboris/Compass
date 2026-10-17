@@ -248040,6 +248040,1023 @@
     }
    },
    "proofread": "2026-10-16"
+  },
+  {
+   "id": "g8a599c40",
+   "date": "2026-10-16",
+   "title": "Активы Tarkett в России переданы во временное управление «Центр Капиталу»",
+   "ind": "Строительство",
+   "type": "Временное управление",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2026/10/16/1237536-aktivi-tarkett"
+    ],
+    [
+     "Vz.ru",
+     "https://vz.ru/news/2026/10/16/1463559.html"
+    ],
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/10/16/tarkett/"
+    ],
+    [
+     "Вести.ru",
+     "https://www.vesti.ru/ns/putin-peredal-vo-vremennoe-upravlenie-aktivy-kompanij-s-vyruchkoj-bolee-rub50-mlrd"
+    ],
+    [
+     "URA.RU",
+     "https://ura.news/news/1053136498"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "По итогам 2025 года чистая прибыль АО «Таркетт» составила 1,63 млрд руб. при выручке в 19,3 млрд руб.",
+    "fin": "—",
+    "rationale": "Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что сами компании — родом из стран, которые Москва причисляет к недружественным.",
+    "context": "Tarkett — французская компания; её контролируют семья Деконинк и фонд Wendel.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "В управление ушли две равные доли АО «Таркетт» (по 187,5 тыс. обычных и 500 тыс. привилегированных акций) — одну раньше держала сербская структура из Бачка-Паланки, другую сама французская Tarkett; к ним добавились 100 акций АО «Таркетт Рус» и вся доля в ООО «Таркетт Соммер». Временным управляющим назначено ООО «УК „Центр Капитал“»; право собственности к нему не переходит.",
+    "appr": "—",
+    "adv": [],
+    "terms": "При временном управлении все полномочия собственника переходят управляющей компании."
+   },
+   "asset": "российские активы производителя напольных покрытий Tarkett (АО «Таркетт», АО «Таркетт Рус», ООО «Таркетт Соммер»)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Указ подписан",
+     "note": "Президент передал активы во временное управление ООО «УК \"Центр Капитал\"».",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/news/2026/10/16/1237536-aktivi-tarkett"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российские активы производителя напольных покрытий Tarkett (АО «Таркетт», АО «Таркетт Рус», ООО «Таркетт Соммер»)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/news/2026/10/16/1237536-aktivi-tarkett"
+     }
+    ]
+   },
+   "kind": "custody",
+   "proofread_absorbed": {
+    "law.struct": [
+     "99d58e305c46",
+     "beaca83745b1"
+    ],
+    "eco.target_fin": [
+     "762385a0519a"
+    ],
+    "eco.context": [
+     "26da56a58ce0"
+    ],
+    "law.terms": [],
+    "eco.rationale": [
+     "a7ea8ee91269",
+     "e326ce57b308",
+     "5c8411ba98f0"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "множество юрлиц одной группы (АО «Таркетт», АО «Таркетт Рус», ООО «Таркетт Соммер»), как у прецедента Metro (ga142d8e0); профиля не бывает",
+     "buyer": "управляющая компания без собственного бизнеса, профиль заводить не на что (как «УК Торг РУС» у Metro)",
+     "seller": "продавец назван прямо в указе и во всех источниках (сербское юрлицо Tarkett из Бачка-Паланки и сама французская Tarkett SA) — история участников ЕГРЮЛ тут не нужна, это не случай нераскрытого владельца, а публикация решения о временном управлении с именем владельца"
+    },
+    "notes": "Временное управление по указу №738 от 15.10.2026 — тот же класс, что Nestlé/Ашан/Metro. Три юрлица Tarkett, продавец и предмет текстом, как у Metro."
+   },
+   "second_read": "2026-10-16",
+   "retracted": {
+    "buyer_name": [
+     "«Центр Капитал»"
+    ],
+    "seller": [
+     "Tarkett"
+    ]
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "post_override": "<b>Пять иностранных компаний переданы во временное управление «Центр Капиталу»</b>\n\nУказом президента № 738 от 15 октября 2026 года российские активы пяти иностранных компаний переданы во временное управление ООО «УК „Центр Капитал“». Собственники не меняются: управляющая компания на время получает полномочия владельца, но не саму собственность. Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что компании — из стран, которые Москва считает недружественными.\n\n<b>Временный управляющий:</b> ООО «УК „Центр Капитал“»\n<b>Компании и их собственники:</b>\n• <a href=\"https://projectcompass.ru/#/deal/g8a599c40\">Tarkett</a> — напольные покрытия (АО «Таркетт», АО «Таркетт Рус», ООО «Таркетт Соммер»); собственник — французская Tarkett\n• <a href=\"https://projectcompass.ru/#/deal/g19410fc2\">«Каппа Рус»</a> — упаковка; собственник — шведская Sverige International Holdings AB\n• <a href=\"https://projectcompass.ru/#/deal/gb3837d4d\">«Менсен Пакаджинг СНГ»</a> — пластиковая упаковка; собственник — немецкая Menshen Beteiligungs-GmbH\n• <a href=\"https://projectcompass.ru/#/deal/gfc3e1ae2\">«Онтэкс РУ»</a> — подгузники и бренд Helen Harper; собственник — бельгийская Ontex\n• <a href=\"https://projectcompass.ru/#/deal/gf803c055\">«Эвиосис Пэкэджинг Кубань»</a> — металлическая тара; собственник — группа Eviosys американской Sonoco\n<b>Статус:</b> указ подписан 15 октября 2026 года\n\n<b>Источники:</b> <a href=\"https://www.vedomosti.ru/business/news/2026/10/16/1237536-aktivi-tarkett\">Ведомости</a>, <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nПодробности о каждой компании — в карточках по ссылкам выше\n\n#промышленность #упаковка #потребрынок #временное_управление",
+   "post_covers": [
+    "g8a599c40",
+    "g19410fc2",
+    "gb3837d4d",
+    "gfc3e1ae2",
+    "gf803c055"
+   ],
+   "post_preview": "<b>Пять иностранных компаний переданы во временное управление «Центр Капиталу»</b>\n\nУказом президента № 738 от 15 октября 2026 года российские активы пяти иностранных компаний переданы во временное управление ООО «УК „Центр Капитал“». Собственники не меняются: управляющая компания на время получает полномочия владельца, но не саму собственность. Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что компании — из стран, которые Москва считает недружественными.\n\n<b>Временный управляющий:</b> ООО «УК „Центр Капитал“»\n<b>Компании и их собственники:</b>\n• <a href=\"https://projectcompass.ru/#/deal/g8a599c40\">Tarkett</a> — напольные покрытия (АО «Таркетт», АО «Таркетт Рус», ООО «Таркетт Соммер»); собственник — французская Tarkett\n• <a href=\"https://projectcompass.ru/#/deal/g19410fc2\">«Каппа Рус»</a> — упаковка; собственник — шведская Sverige International Holdings AB\n• <a href=\"https://projectcompass.ru/#/deal/gb3837d4d\">«Менсен Пакаджинг СНГ»</a> — пластиковая упаковка; собственник — немецкая Menshen Beteiligungs-GmbH\n• <a href=\"https://projectcompass.ru/#/deal/gfc3e1ae2\">«Онтэкс РУ»</a> — подгузники и бренд Helen Harper; собственник — бельгийская Ontex\n• <a href=\"https://projectcompass.ru/#/deal/gf803c055\">«Эвиосис Пэкэджинг Кубань»</a> — металлическая тара; собственник — группа Eviosys американской Sonoco\n<b>Статус:</b> указ подписан 15 октября 2026 года\n\n<b>Источники:</b> <a href=\"https://www.vedomosti.ru/business/news/2026/10/16/1237536-aktivi-tarkett\">Ведомости</a>, <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nПодробности о каждой компании — в карточках по ссылкам выше\n\n#промышленность #упаковка #потребрынок #временное_управление",
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "08e29ac4bf0d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "0dbec85cac55"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "93ce1633fc64"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "bf063fcae145"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17",
+   "discovery_src": [
+    [
+     "Телеграм-канал Dealsma",
+     "https://t.me/dealsma/7475"
+    ]
+   ]
+  },
+  {
+   "id": "g19410fc2",
+   "date": "2026-10-16",
+   "title": "Активы «Каппа Рус» переданы во временное управление «Центр Капиталу»",
+   "ind": "Производство тары",
+   "type": "Временное управление",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053136498"
+    ],
+    [
+     "Runews24.ru",
+     "https://runews24.ru/politics/16/10/2026/putin-podpisal-ukaz-4-upakovochnyie-kompanii-ushli-pod-upravlenie-czentr-kapital"
+    ],
+    [
+     "Вести.ru",
+     "https://www.vesti.ru/ns/putin-peredal-vo-vremennoe-upravlenie-aktivy-kompanij-s-vyruchkoj-bolee-rub50-mlrd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "У компании выручка 16,6 млрд руб. и чистая прибыль около 1,2 млрд руб.",
+    "fin": "—",
+    "rationale": "Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что сами компании — родом из стран, которые Москва причисляет к недружественным.",
+    "context": "Прежний владелец бизнеса — ирландская Smurfit Kappa, расставшаяся с ним в 2023 году в пользу собственного менеджмента. Формальным покупателем выступила шведская Sverige International Holdings AB, а её бенефициаром называют шведа Патрика Строма.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "«Каппа Рус» вошла в число пяти компаний указа президента №738 от 15 октября 2026 года — управляющей компании досталось 12 565 обычных акций. Временным управляющим назначено ООО «УК „Центр Капитал“»; собственником остаётся шведская Sverige International Holdings AB, право собственности к управляющему не переходит.",
+    "appr": "—",
+    "adv": [],
+    "terms": "На срок управления полномочия собственника переходят к управляющей компании."
+   },
+   "asset": "российские активы производителя упаковки «Каппа Рус»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Указ подписан",
+     "note": "Президент передал активы во временное управление ООО «УК \"Центр Капитал\"».",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053136498"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российские активы производителя упаковки «Каппа Рус»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053136498"
+     }
+    ]
+   },
+   "kind": "custody",
+   "proofread_absorbed": {
+    "law.struct": [
+     "a62e3a8e40e5",
+     "48e597d9e9ce"
+    ],
+    "eco.target_fin": [
+     "5c5914c01ed0"
+    ],
+    "eco.context": [
+     "0ab2f7a6efe6",
+     "eee9442a3de2"
+    ],
+    "law.terms": [
+     "c772854acfd0"
+    ],
+    "eco.rationale": [
+     "d2070d58d780",
+     "e326ce57b308",
+     "5c8411ba98f0"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет описан текстом (российские активы «Каппа Рус»), профиль продукции не заводим без отдельного обоснования",
+     "buyer": "управляющая компания без собственного бизнеса, профиль заводить не на что (как «УК Торг РУС» у Metro)",
+     "seller": "иностранная холдинговая структура (Sverige International Holdings AB), профиль не заводим — не фигурирует больше нигде в базе"
+    },
+    "notes": "Тот же указ №738, что и у Tarkett — один из пяти активов, переданных «Центр Капиталу»."
+   },
+   "second_read": "2026-10-16",
+   "post_preview": "<b>Активы «Каппа Рус» переданы во временное управление «Центр Капиталу»</b>\n\n<b>Временный управляющий:</b> «Центр Капитал»\n<b>Прежний владелец:</b> Sverige International Holdings AB\n<b>Предмет:</b> российские активы производителя упаковки «Каппа Рус»\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Производство тары\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nЕщё 3 источника — в карточке сделки\n\n#промышленность #упаковка #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g19410fc2\">карточке сделки</a>",
+   "retracted": {
+    "buyer_name": [
+     "«Центр Капитал»"
+    ],
+    "seller": [
+     "Sverige International Holdings AB"
+    ]
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "no_post": true,
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "cb80cae45e22"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "0dbec85cac55"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "93ce1633fc64"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "edb1ee44fee9"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17",
+   "discovery_src": [
+    [
+     "Телеграм-канал Dealsma",
+     "https://t.me/dealsma/7475"
+    ]
+   ]
+  },
+  {
+   "id": "gb3837d4d",
+   "date": "2026-10-16",
+   "title": "Активы «Менсен Пакаджинг СНГ» переданы во временное управление «Центр Капиталу»",
+   "ind": "Производство тары",
+   "type": "Временное управление",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053136498"
+    ],
+    [
+     "Runews24.ru",
+     "https://runews24.ru/politics/16/10/2026/putin-podpisal-ukaz-4-upakovochnyie-kompanii-ushli-pod-upravlenie-czentr-kapital"
+    ],
+    [
+     "Вести.ru",
+     "https://www.vesti.ru/ns/putin-peredal-vo-vremennoe-upravlenie-aktivy-kompanij-s-vyruchkoj-bolee-rub50-mlrd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "Выручка компании — около 1,4 млрд руб., чистая прибыль — 46,7 млн руб.",
+    "fin": "—",
+    "rationale": "Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что сами компании — родом из стран, которые Москва причисляет к недружественным.",
+    "context": "Компания выпускает пластиковую упаковку и детали к ней. Её владелец — немецкая Menshen Beteiligungs-GmbH из группы LUKAD Holding.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "«Менсен Пакаджинг СНГ» вошла в число пяти компаний указа президента №738 от 15 октября 2026 года — управляющей компании досталось 99,71% её уставного капитала. Временным управляющим назначено ООО «УК „Центр Капитал“»; собственником остаётся немецкая Menshen Beteiligungs-GmbH, право собственности к управляющему не переходит.",
+    "appr": "—",
+    "adv": [],
+    "terms": "На срок управления полномочия собственника переходят к управляющей компании."
+   },
+   "asset": "российские активы производителя упаковки «Менсен Пакаджинг СНГ»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Указ подписан",
+     "note": "Президент передал активы во временное управление ООО «УК \"Центр Капитал\"».",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053136498"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российские активы производителя упаковки «Менсен Пакаджинг СНГ»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053136498"
+     }
+    ]
+   },
+   "kind": "custody",
+   "proofread_absorbed": {
+    "law.struct": [
+     "5bdaa21e0989",
+     "c8b853579d9a"
+    ],
+    "eco.target_fin": [
+     "d41484085d92",
+     "71a010eb8e0e"
+    ],
+    "eco.context": [
+     "52cca0baa35e"
+    ],
+    "law.terms": [
+     "238fe24c1bb8"
+    ],
+    "eco.rationale": [
+     "f2fcb1a367ee",
+     "e326ce57b308",
+     "5c8411ba98f0"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет описан текстом, профиль продукции не заводим без отдельного обоснования",
+     "buyer": "управляющая компания без собственного бизнеса, профиль заводить не на что",
+     "seller": "иностранная холдинговая структура (Menshen Beteiligungs-GmbH), профиль не заводим — не фигурирует больше нигде в базе"
+    },
+    "notes": "Тот же указ №738 — один из пяти активов."
+   },
+   "second_read": "2026-10-16",
+   "post_preview": "<b>Активы «Менсен Пакаджинг СНГ» переданы во временное управление «Центр Капиталу»</b>\n\n<b>Временный управляющий:</b> «Центр Капитал»\n<b>Прежний владелец:</b> Menshen Beteiligungs-GmbH\n<b>Предмет:</b> российские активы производителя упаковки «Менсен Пакаджинг СНГ»\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Производство тары\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nЕщё 3 источника — в карточке сделки\n\n#промышленность #упаковка #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gb3837d4d\">карточке сделки</a>",
+   "retracted": {
+    "buyer_name": [
+     "«Центр Капитал»"
+    ],
+    "seller": [
+     "Menshen Beteiligungs-GmbH"
+    ]
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "no_post": true,
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "eed2b09d358c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "0dbec85cac55"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "93ce1633fc64"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "b14b91d06658"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17",
+   "discovery_src": [
+    [
+     "Телеграм-канал Dealsma",
+     "https://t.me/dealsma/7475"
+    ]
+   ]
+  },
+  {
+   "id": "gfc3e1ae2",
+   "date": "2026-10-16",
+   "title": "Активы «Онтэкс РУ» (бренд Helen Harper) переданы во временное управление «Центр Капиталу»",
+   "ind": "Потребительские товары",
+   "type": "Временное управление",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053136498"
+    ],
+    [
+     "News.mail.ru",
+     "https://news.mail.ru/economics/72740261/"
+    ],
+    [
+     "Runews24.ru",
+     "https://runews24.ru/politics/16/10/2026/putin-podpisal-ukaz-4-upakovochnyie-kompanii-ushli-pod-upravlenie-czentr-kapital"
+    ],
+    [
+     "Вести.ru",
+     "https://www.vesti.ru/ns/putin-peredal-vo-vremennoe-upravlenie-aktivy-kompanij-s-vyruchkoj-bolee-rub50-mlrd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "Выручка компании — около 10,3 млрд руб.",
+    "fin": "—",
+    "rationale": "Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что сами компании — родом из стран, которые Москва причисляет к недружественным.",
+    "context": "Компания выпускает детские подгузники и женскую гигиеническую продукцию. Её владелец — бельгийский производитель гигиенических товаров Ontex, работающий на разных рынках мира.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "«Онтэкс РУ» вошла в число пяти компаний указа президента №738 от 15 октября 2026 года — управляющей компании досталось 100% её уставного капитала. Временным управляющим назначено ООО «УК „Центр Капитал“»; собственником остаётся бельгийская Ontex, право собственности к управляющему не переходит.",
+    "appr": "—",
+    "adv": [],
+    "terms": "На срок управления полномочия собственника переходят к управляющей компании."
+   },
+   "asset": "российские активы «Онтэкс РУ» — владельца бренда Helen Harper",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Указ подписан",
+     "note": "Президент передал активы во временное управление ООО «УК \"Центр Капитал\"».",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053136498"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российские активы «Онтэкс РУ» — владельца бренда Helen Harper",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053136498"
+     }
+    ]
+   },
+   "kind": "custody",
+   "proofread_absorbed": {
+    "law.struct": [
+     "3dea9483a949",
+     "2c18eeebfdfc"
+    ],
+    "eco.target_fin": [
+     "4561367b205a"
+    ],
+    "eco.context": [
+     "cd97667aee70"
+    ],
+    "law.terms": [
+     "7c01bd7abefc"
+    ],
+    "eco.rationale": [
+     "500a74fd4f4a",
+     "8572c73daac1",
+     "e326ce57b308",
+     "5c8411ba98f0"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет описан текстом (бренд Helen Harper упомянут в заголовке), профиль не заводим без отдельного обоснования",
+     "buyer": "управляющая компания без собственного бизнеса, профиль заводить не на что",
+     "seller": "иностранная группа (Ontex), профиль не заводим — не фигурирует больше нигде в базе"
+    },
+    "notes": "Тот же указ №738 — один из пяти активов."
+   },
+   "second_read": "2026-10-16",
+   "post_preview": "<b>Активы «Онтэкс РУ» (бренд Helen Harper) переданы во временное управление «Центр Капиталу»</b>\n\n<b>Временный управляющий:</b> «Центр Капитал»\n<b>Прежний владелец:</b> Ontex\n<b>Предмет:</b> российские активы «Онтэкс РУ» — владельца бренда Helen Harper\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Потребительские товары\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nЕщё 4 источника — в карточке сделки\n\n#потребрынок #FMCG #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gfc3e1ae2\">карточке сделки</a>",
+   "retracted": {
+    "buyer_name": [
+     "«Центр Капитал»"
+    ],
+    "seller": [
+     "Ontex"
+    ]
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "no_post": true,
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "3be933276429"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "0dbec85cac55"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "93ce1633fc64"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a589c9fb90ec"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17",
+   "discovery_src": [
+    [
+     "Телеграм-канал Dealsma",
+     "https://t.me/dealsma/7475"
+    ]
+   ]
+  },
+  {
+   "id": "gf803c055",
+   "date": "2026-10-16",
+   "title": "Активы «Эвиосис Пэкэджинг Кубань» переданы во временное управление «Центр Капиталу»",
+   "ind": "Производство тары",
+   "type": "Временное управление",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053136498"
+    ],
+    [
+     "Runews24.ru",
+     "https://runews24.ru/politics/16/10/2026/putin-podpisal-ukaz-4-upakovochnyie-kompanii-ushli-pod-upravlenie-czentr-kapital"
+    ],
+    [
+     "Вести.ru",
+     "https://www.vesti.ru/ns/putin-peredal-vo-vremennoe-upravlenie-aktivy-kompanij-s-vyruchkoj-bolee-rub50-mlrd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "У компании выручка около 6,1 млрд руб. и чистая прибыль 234 млн руб.",
+    "fin": "—",
+    "rationale": "Пресс-секретарь президента Дмитрий Песков связал решение не со сменой собственника, а с тем, что сами компании — родом из стран, которые Москва причисляет к недружественным.",
+    "context": "Завод специализируется на металлической таре для пищевых продуктов и раньше принадлежал международной группе Eviosys. В 2024 году её купила американская Sonoco Products Company.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "«Эвиосис Пэкэджинг Кубань» вошла в число пяти компаний указа президента №738 от 15 октября 2026 года — управляющей компании досталось 100% её уставного капитала. Временным управляющим назначено ООО «УК „Центр Капитал“»; собственником остаётся группа Eviosys, с 2024 года принадлежащая американской Sonoco Products Company, право собственности к управляющему не переходит.",
+    "appr": "—",
+    "adv": [],
+    "terms": "На срок управления полномочия собственника переходят к управляющей компании."
+   },
+   "asset": "российские активы производителя упаковки «Эвиосис Пэкэджинг Кубань»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Указ подписан",
+     "note": "Президент передал активы во временное управление ООО «УК \"Центр Капитал\"».",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053136498"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российские активы производителя упаковки «Эвиосис Пэкэджинг Кубань»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053136498"
+     }
+    ]
+   },
+   "kind": "custody",
+   "proofread_absorbed": {
+    "law.struct": [
+     "1f532cbf25f2",
+     "23a990cd926c"
+    ],
+    "eco.target_fin": [],
+    "eco.context": [
+     "e3a0fd4718fe",
+     "f8feecad6cbb"
+    ],
+    "law.terms": [
+     "44331a5a8405"
+    ],
+    "eco.rationale": [
+     "7addbb73d26c",
+     "e326ce57b308",
+     "5c8411ba98f0"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет описан текстом, профиль продукции не заводим без отдельного обоснования",
+     "buyer": "управляющая компания без собственного бизнеса, профиль заводить не на что",
+     "seller": "иностранная компания (Sonoco Products Company), профиль не заводим — не фигурирует больше нигде в базе"
+    },
+    "notes": "Тот же указ №738 — один из пяти активов."
+   },
+   "second_read": "2026-10-16",
+   "post_preview": "<b>Активы «Эвиосис Пэкэджинг Кубань» переданы во временное управление «Центр Капиталу»</b>\n\n<b>Временный управляющий:</b> «Центр Капитал»\n<b>Прежний владелец:</b> Sonoco Products Company\n<b>Предмет:</b> российские активы производителя упаковки «Эвиосис Пэкэджинг Кубань»\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Производство тары\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053136498\">URA.RU</a>\nЕщё 3 источника — в карточке сделки\n\n#промышленность #упаковка #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gf803c055\">карточке сделки</a>",
+   "retracted": {
+    "buyer_name": [
+     "«Центр Капитал»"
+    ],
+    "seller": [
+     "Sonoco Products Company"
+    ]
+   },
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "no_post": true,
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "f391105e9dd4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "0dbec85cac55"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "93ce1633fc64"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5fa59715cd2b"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   },
+   "proofread": "2026-10-17",
+   "discovery_src": [
+    [
+     "Телеграм-канал Dealsma",
+     "https://t.me/dealsma/7475"
+    ]
+   ]
+  },
+  {
+   "id": "g38bdff94",
+   "date": "2026-10-16",
+   "title": "«РусГазДобыча» передала 49% ООО «Гидроиндустрия» (группа ГМС) компании Артёма Молчанова",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9027728"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Молчанов занимает пост гендиректора ГМС, а в прессе его называют одним из основателей группы; эксперты допускают, что именно эта роль могла определить сделку.",
+    "context": "О самом переходе 49% «Гидроиндустрии» к «Гидромаш МСК» узнали из данных ЕГРЮЛ. «РусГазДобыча» получила право купить активы ГМС, включая «Гидромашсервис», спустя год после того, как эти компании перешли под временное управление по указу президента (конец 2024 года).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Ни цену, ни форму сделки (продажа, вклад в капитал или что-то ещё) стороны не объяснили — на вопросы Коммерсанта никто не ответил.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«РусГазДобыча»",
+   "buyer_name": "«Гидромаш МСК» (Артём Молчанов)",
+   "asset": "49% ООО «Гидроиндустрия»",
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Гидромаш МСК» (Артём Молчанов)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9027728"
+     }
+    ],
+    "target": [
+     {
+      "value": "49% ООО «Гидроиндустрия»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9027728"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«РусГазДобыча»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9027728"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "law.struct": [
+     "93bf58ba2235"
+    ],
+    "eco.context": [
+     "46328f135524",
+     "88a4ba14ada0",
+     "42cdbb3d72e5",
+     "f554366993e2"
+    ],
+    "eco.rationale": [
+     "be2ac28e60aa"
+    ]
+   },
+   "reviewed": "2026-10-16",
+   "accepted": "2026-10-16",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет — доля (49%) в юрлице, а не сама компания как бизнес; профиль предмета не заводим без отдельного обоснования интереса к самой «Гидроиндустрии»",
+     "buyer": "SPV, учреждённая топ-менеджером специально под эту сделку в апреле 2026 года — собственного бизнеса нет, профиль заводить не на что",
+     "seller": "продавец назван прямо в источнике («РусГазДобыча»); история участников ЕГРЮЛ не нужна — источник сам объясняет, что 100% принадлежало РусГазДобыче до сделки"
+    },
+    "notes": "Единственный источник — Коммерсантъ, нашедший сделку по ЕГРЮЛ; сами стороны на вопросы издания не ответили, механизм (продажа, вклад в капитал) не раскрыт — честная неполнота, не выдумана."
+   },
+   "second_read": "2026-10-16",
+   "post_preview": "<b>«РусГазДобыча» передала 49% ООО «Гидроиндустрия» (группа ГМС) компании Артёма Молчанова</b>\n\n<b>Покупатель:</b> «Гидромаш МСК» (Артём Молчанов) — «РусГазДобыча» получила право купить активы ГМС, включая «Гидромашсервис», спустя год после того, как эти компании перешли под временное управление по указу президента (конец 2024 года).\n<b>Продавец:</b> «РусГазДобыча»\n<b>Предмет:</b> 49% ООО «Гидроиндустрия»\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Машиностроение\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9027728\">Коммерсантъ</a>\n\n#промышленность #машиностроение #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g38bdff94\">карточке сделки</a>",
+   "added": "2026-10-17",
+   "facts": {
+    "stake": {
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "567519d87743"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-10-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "51a886f3aacd"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f829b33f63ef"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "proofread": "2026-10-17"
   }
  ],
  "companies": {
@@ -280220,7 +281237,11 @@
   "g253252c4": null,
   "gbe13372d": 206,
   "gd09e0945": 207,
-  "gba764f10": null
+  "gba764f10": null,
+  "g19410fc2": null,
+  "gb3837d4d": null,
+  "gfc3e1ae2": null,
+  "gf803c055": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -284316,10 +285337,19 @@
     "adv": []
    },
    "eco": {
-    "target_fin": "Основная выручка и прибыль группы — у «Леста Геймс Эдженси»: 29 млрд руб. и 10,1 млрд руб. за 2025 год. У самой «Лесты» выручка 5,7 млрд руб. при прибыли всего 14,7 млн руб., у московского юрлица — 227,3 млн руб. выручки и 8,9 млн руб. прибыли.",
+    "target_fin": "Основная выручка и прибыль группы — у «Леста Геймс Эдженси»: 29 млрд руб. и 10,1 млрд руб. за 2025 год. У самой «Лесты» выручка 5,7 млрд руб. при прибыли всего 14,7 млн руб., у московского юрлица — 227,3 млн руб. выручки и 8,9 млн руб. прибыли. Отдельно, по данным ФССП, у «Леста Геймс Эдженси» в исполнительном производстве от 5 марта 2026 года висел долг 11,4 млрд ₽ в пользу бюджета РФ, у «Лесты» — ещё 239,7 млн ₽.",
     "finadv": "—"
    },
    "events": [
+    {
+     "kind": "negotiations"
+    },
+    {
+     "kind": "negotiations"
+    },
+    {
+     "kind": "negotiations"
+    },
     {
      "kind": "closed"
     }
