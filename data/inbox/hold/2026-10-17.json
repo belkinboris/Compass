@@ -2,17 +2,17 @@
  "made": "2026-10-17",
  "drafts": [
   {
-   "draft_id": "d68543456",
-   "title": "Аукционы Минфина — Министерство продолжает занимать под высокий процент. Аукционы РЕПО удивляют.",
+   "draft_id": "d27476716",
+   "title": "Мадьяр призвал США продлить исключение Венгрии из санкций на покупку нефти из РФ",
    "date": "2026-10-17",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1363779.php"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/10/17/1237918-madyar-prizval-prodlit-isklyuchenie"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -27,6 +27,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59311458",
+   "title": "FT раскрыла, как сверхбогатые зарабатывают на перепродаже частных джетов",
+   "date": "2026-10-17",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/17/10/2026/6ad37bf9783cf67ed2f9dcb6"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
