@@ -281388,7 +281388,8 @@
   "gfc3e1ae2": null,
   "gf803c055": null,
   "g8a599c40": 208,
-  "g38bdff94": 209
+  "g38bdff94": 209,
+  "g7bff6e5c": 210
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -285549,7 +285550,26 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g7bff6e5c": {
+   "sum": "200 млн ₽",
+   "buyer_name": "частные инвесторы",
+   "target": "gc63ffb06",
+   "asset": "акции АО «Визиолоджи»",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-10-17T08:31:14+00:00"
+ "telegram_last_post_at": "2026-10-17T11:42:06+00:00"
 }
