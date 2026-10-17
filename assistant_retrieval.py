@@ -1431,7 +1431,15 @@ def route(question: str, idx: Index | None = None) -> Intent:
     if industry:
         return Intent("industry", wants_advisors=wants_adv, **cond)
     if status or region:
-        return Intent("filter", wants_advisors=wants_adv, **cond)
+        # «Когда закрылась сделка по Boxberry?» — про одну сделку, а не список
+        # закрытых: слово статуса здесь вопрос о дате. Список — только когда
+        # слова вопроса ни во что конкретное не попадают.
+        rest = [t for t in terms if not (STATUS_FAILED.search(t) or STATUS_OPEN.search(t) or STATUS_CLOSED.search(t)
+                                          or re.match(r"состо|закр|заверш|обсужд|сорв|отмен", t)
+                                          or (region and re.search(REGION_HINTS[region], t)))]
+        probe = Intent("search", terms=rest)
+        if not (rest and _search_is_specific(probe, search(rest, idx), idx)):
+            return Intent("filter", wants_advisors=wants_adv, **cond)
     if not terms:
         # Признаки вопроса нужны и пустому маршруту: со страницы компании «кто
         # консультировал сделки?» — это вопрос о консультантах этой компании.
