@@ -51,7 +51,8 @@ from deal_export import render_companies_pdf, render_deal_pdf
 from db.models import Base as DBBase
 from db.models import (
     AppSetting,
-    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, Comment, CompanyClaim,
+    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, ClaudeMessage, Comment,
+    CompanyClaim,
     CorrectionRequest,
     DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     ModerationDecision, Notification,
@@ -2544,6 +2545,22 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                                         callback_query_id=callback.get("id"))
             return {"ok": True}
 
+        # «Назначить эту тему» из меню /start — то же, что команда /topic, в
+        # той теме, где стоит меню (сообщение бота несёт message_thread_id).
+        if str(callback.get("data") or "") == "menu:topic":
+            msg = callback.get("message") or {}
+            if not _is_reviewer(from_id):
+                notification_service.tg_api(
+                    "answerCallbackQuery", callback_query_id=callback.get("id"),
+                    text="Настраивать темы могут только владелец и партнёр.")
+                return {"ok": True}
+            notification_service.tg_api("answerCallbackQuery",
+                                        callback_query_id=callback.get("id"))
+            chat = (msg.get("chat") or {}).get("id")
+            if chat is not None:
+                _offer_topic_binding(msg, chat, from_id)
+            return {"ok": True}
+
         # Кнопки меню под /start: очередь и сводка о платформе.
         menu = re.match(r"^menu:(queue|stats)$", str(callback.get("data") or ""))
         if menu:
@@ -2738,6 +2755,10 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     # для всех участников, а не того, кто именно ответил. Проверка по chat_id
     # авторизовала бы либо всех членов группы разом, либо никого.
     sender_id = (message.get("from") or {}).get("id")
+    # Тема «Клод» — раньше маркерных ответов ниже: там любой текст владельца
+    # (в том числе ответ на сообщение бота) — это сообщение агенту.
+    if _claude_topic_message(message, db):
+        return {"ok": True}
     # Ответ на сообщение бота. Что означает ответ — решает маркер в первой
     # строке того сообщения, НА КОТОРОЕ ответили:
     #   [пост <id>] / [черновик <id>] — ваш текст заменяет текст поста и
@@ -3365,6 +3386,9 @@ def _bot_menu() -> dict:
         [{"text": "📖 Что ждёт прочтения", "callback_data": "show:unread"},
          {"text": "⚠️ Сомнительные новости", "callback_data": "show:raw"}],
         [{"text": "📊 Как дела у платформы", "callback_data": "menu:stats"}],
+        # То же, что /topic, но без команды наизусть: нажали в теме — бот
+        # предложит, какой вид сообщений в неё складывать (17 октября 2026).
+        [{"text": "📌 Назначить эту тему", "callback_data": "menu:topic"}],
     ]}
 
 
@@ -3557,6 +3581,10 @@ CONSOLE_TOPIC_NAMES = {
     # судьбу поста. Заведена 22 сентября 2026, чтобы в «Подтверждении постов»
     # остались только посты и карточки.
     "admin": "Админ",
+    # Сообщения владельца и партнёра агенту Claude: задачи, правки, вопросы.
+    # Ловит их _claude_topic_message, читает рутина «тема Клод»
+    # (routines/claude_topic.md), ответ приходит в ту же тему. 17 октября 2026.
+    "claude": "Клод",
 }
 
 # Запасная тема, пока номер не закреплён: пропасть очереди заявок на вход
@@ -3616,6 +3644,8 @@ CONSOLE_TOPIC_PURPOSE = {
     "info": "заметки, отзывы и служебные сообщения",
     "user_notes": "уточнения и поправки, которые посетители сайта оставляют с карточек сделок и из футера",
     "admin": "служебные очереди: заявки на вход, вопросы про ИНН и однофамильцев, пары возможных дублей",
+    "claude": ("ваши сообщения агенту Claude — задачи, правки, вопросы; ответы приходят "
+               "сюда же"),
 }
 
 
@@ -3690,6 +3720,85 @@ def _console_thread_id(db, kind: str) -> int | None:
     spare = CONSOLE_TOPIC_FALLBACK.get(kind)
     return _console_thread_id(db, spare) if spare else None
 
+
+
+# ТЕМА «КЛОД» (17 октября 2026). Владелец и партнёр пишут в эту тему
+# сообщения агенту Claude; сайт складывает их в таблицу claude_messages, рутина
+# «тема Клод» забирает их по токену (/api/claude/inbox), делает работу и
+# отвечает в ту же тему (pipeline/claude_topic.py). Бот без прав админа в
+# режиме приватности видит здесь только упоминания @бота и ответы на свои
+# сообщения; админом — всё. Код ничего сверх пришедшего не требует.
+CLAUDE_ACK_TEXT = "Принял. Отвечу здесь, обычно в течение 15 минут."
+CLAUDE_ACK_QUIET_SECONDS = 60
+_BOT_MENTION = re.compile(r"^\s*@\w+bot\b[\s,:]*", re.I)
+
+
+def _claude_topic_message(message: dict, db) -> bool:
+    """Сохранить сообщение из темы «Клод» и коротко подтвердить приём.
+
+    True — сообщение принято (дальше его разбирать не нужно). Берём только:
+    группу-консоль, тему, закреплённую как «claude», отправителя с правом
+    (_is_reviewer), не команду. Подтверждение — реплаем, и только первому из
+    серии: если за последнюю минуту в теме уже было принятое сообщение, молчим."""
+    if db is None or not message:
+        return False
+    chat = message.get("chat") or {}
+    if str(chat.get("type") or "") not in ("group", "supergroup"):
+        return False
+    thread = message.get("message_thread_id")
+    if not thread:
+        return False
+    bound = db.get(AppSetting, "telegram_topic:%s" % _topic_slug(CONSOLE_TOPIC_NAMES["claude"]))
+    if not (bound and str(bound.value) == str(thread)):
+        return False
+    group = db.get(AppSetting, REVIEW_GROUP_SETTING)
+    chat_id = chat.get("id")
+    if group and group.value and str(group.value) != str(chat_id):
+        return False
+    sender = message.get("from") or {}
+    if not _is_reviewer(sender.get("id")):
+        return False
+    raw = str(message.get("text") or message.get("caption") or "")
+    if raw.strip().startswith("/"):
+        return False
+    body = _BOT_MENTION.sub("", raw).strip()
+    photos = message.get("photo") or []
+    photo_id = None
+    if photos:
+        best = max(photos, key=lambda p: (p.get("file_size") or 0,
+                                          (p.get("width") or 0) * (p.get("height") or 0)))
+        photo_id = best.get("file_id")
+    document = message.get("document") or {}
+    if not (body or photo_id or document.get("file_id")):
+        return False
+    reply = message.get("reply_to_message") or {}
+    reply_text = str(reply.get("text") or reply.get("caption") or "").strip() or None
+    name = " ".join(x for x in (sender.get("first_name"), sender.get("last_name")) if x) \
+        or sender.get("username") or None
+    now = datetime.now(timezone.utc)
+    recent = db.scalars(select(ClaudeMessage).where(
+        ClaudeMessage.chat_id == str(chat_id), ClaudeMessage.thread_id == int(thread))
+        .order_by(ClaudeMessage.id.desc()).limit(1)).first()
+    quiet = False
+    if recent is not None and recent.created_at is not None:
+        last = recent.created_at
+        if last.tzinfo is None:
+            last = last.replace(tzinfo=timezone.utc)
+        quiet = (now - last).total_seconds() < CLAUDE_ACK_QUIET_SECONDS
+    db.add(ClaudeMessage(
+        chat_id=str(chat_id), thread_id=int(thread), message_id=int(message.get("message_id") or 0),
+        from_id=str(sender.get("id")), from_name=name, text=body or None,
+        photo_file_id=photo_id, document_file_id=document.get("file_id"),
+        document_name=document.get("file_name"), reply_to_text=reply_text,
+        consumed=False, created_at=now))
+    db.commit()
+    if not quiet:
+        kw = {"message_thread_id": thread}
+        if message.get("message_id"):
+            kw["reply_to_message_id"] = message["message_id"]
+        notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=CLAUDE_ACK_TEXT,
+                                    disable_web_page_preview=True, **kw)
+    return True
 
 
 UNDO_WORDS = re.compile(r"^(?:отмена|отменить|отмени|отменяю|отбой|стоп|cancel)[.!]*$", re.I)
@@ -4445,6 +4554,38 @@ def moderation_consume(req: ModerationConsumeIn, db=Depends(get_db)):
         return JSONResponse({"error": "not found"}, status_code=404)
     n = 0
     for row in db.scalars(select(ModerationDecision).where(ModerationDecision.id.in_(req.ids or []))).all():
+        row.consumed = True
+        n += 1
+    db.commit()
+    return {"consumed": n}
+
+
+def _claude_row(r: ClaudeMessage) -> dict:
+    return {"id": r.id, "chat_id": r.chat_id, "thread_id": r.thread_id,
+            "message_id": r.message_id, "from_id": r.from_id, "from_name": r.from_name,
+            "text": r.text, "photo_file_id": r.photo_file_id,
+            "document_file_id": r.document_file_id, "document_name": r.document_name,
+            "reply_to_text": r.reply_to_text,
+            "created_at": r.created_at.isoformat() if r.created_at else None}
+
+
+@app.get("/api/claude/inbox")
+def claude_inbox(token: str = "", db=Depends(get_db)):
+    """Непрочитанные сообщения из темы «Клод» для рутины «тема Клод» — тот же
+    мост по токену, что у /api/moderation/decisions."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    rows = list(db.scalars(select(ClaudeMessage).where(ClaudeMessage.consumed.is_(False))
+                           .order_by(ClaudeMessage.created_at, ClaudeMessage.id)).all())
+    return {"messages": [_claude_row(r) for r in rows]}
+
+
+@app.post("/api/claude/inbox/consume")
+def claude_inbox_consume(req: ModerationConsumeIn, db=Depends(get_db)):
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    n = 0
+    for row in db.scalars(select(ClaudeMessage).where(ClaudeMessage.id.in_(req.ids or []))).all():
         row.consumed = True
         n += 1
     db.commit()
