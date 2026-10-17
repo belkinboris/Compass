@@ -2,45 +2,17 @@
  "made": "2026-10-17",
  "drafts": [
   {
-   "draft_id": "d26373667",
-   "title": "Роналду вложил десять миллионов евро в новый бизнес",
+   "draft_id": "d87719640",
+   "title": "Уникальный сервиз дочери Николая I впервые выставят на торги в Париже",
    "date": "2026-10-17",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/17/ronaldu-vlozhil-desyat-millionov-evro-v-novyy-biznes/"
+     "web:ria.ru",
+     "https://ria.ru/20261017/torgi-2125096520.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Роналду",
-   "asset": "новый бизнес",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Роналду",
-    "asset": "новый бизнес",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d24663115",
-   "title": "Россия собралась продавать халяльное мясо стране в Юго-Восточной Азии",
-   "date": "2026-10-17",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/17/rossiya-sobralas-prodavat-halyalnoe-myaso-strane-v-yugo-vostochnoy-azii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
