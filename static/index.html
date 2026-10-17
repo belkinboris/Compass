@@ -2122,8 +2122,13 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .compare-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:-20px;margin-right:-20px;padding:0 20px 8px;gap:10px;scrollbar-width:none}
   .compare-grid::-webkit-scrollbar{display:none}.compare-card{flex:0 0 min(86vw,370px);scroll-snap-align:start}
   .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 12px);padding:10px 11px}.compare-tray-text{font-size:11.5px}.compare-tray .chip{padding:8px 10px;font-size:10px}
-  .advisor-filters{display:flex;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;margin-left:-20px;margin-right:-20px;padding:0 20px 8px}
-  .advisor-filters::-webkit-scrollbar{display:none}.advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
+  /* Отрасль — во всю строку, сортировка — под ней: в одну прокручиваемую
+     строку «По алфавиту» уезжало за правый край телефона (владелец,
+     17 октября 2026). */
+  .advisor-filters{display:flex;flex-wrap:wrap;gap:12px 22px}
+  .advisor-filters>select{flex:1 1 100%;width:100%;min-width:0}
+  .advisor-filters>span[style]{display:none}
+  .advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
   .fns-head{padding:20px}.fns-body{padding:20px}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .fns-registry{grid-template-columns:1fr}.fns-event{grid-template-columns:1fr;gap:2px}.owner-current{grid-template-columns:1fr}
   .webinar-grid{grid-template-columns:1fr}.fns-charts{grid-template-columns:1fr}
