@@ -2,55 +2,16 @@
  "made": "2026-10-17",
  "drafts": [
   {
-   "draft_id": "d52650334",
-   "title": "ТАСС: арестованный в Индии танкер Unity с экипажем из РФ намерены продать",
+   "draft_id": "d38607984",
+   "title": "Лавандовый бриллиант «Алросы» продадут по инвестпрограмме",
    "date": "2026-10-17",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28224529"
+     "https://tass.ru/ekonomika/28224763"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-17",
-     "title": "Переговоры",
-     "note": "Моряки не могут покинуть судно, пока их не заменят другим экипажем, сообщила родственница одного из них",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28224529"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90722847",
-   "title": "«Забудьте про объявления». По какой цене реально продать квартиру",
-   "date": "2026-10-17",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261017/vyalshina-874141915.html"
-    ]
-   ],
-   "sum": null,
+   "sum": "$1,5 млн",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -69,69 +30,19 @@
    ]
   },
   {
-   "draft_id": "d35601935",
-   "title": "Парадокс ИИ-рынка: Как Anthropic лепит из китайского кода «терминатора», чтобы спасти триллионный пузырь перед IPO",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1363691.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-16",
-     "title": "Переговоры",
-     "note": "Пока инвесторы на Smart-Lab высчитывают мультипликаторы и гадают, не поздно ли заходить в бигтехи, в Кремниевой долине в октябре 2026 года разворачивается классическая драма по удушению конкурентов руками регуляторов. И если вы держите акции технологического…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1363691.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63616195",
-   "title": "В Сургуте составили антирейтинг районов для покупки квартиры",
+   "draft_id": "d10567987",
+   "title": "Эксперт Бочарникова рассказала, сколько новостроек в РФ продаются со скидками",
    "date": "2026-10-17",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053136673"
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28224693"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-17",
-     "title": "Переговоры",
-     "note": "При выборе квартиры в Сургуте (ХМАО) стоит учитывать не только цену и планировку, но и расположение.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053136673"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -140,7 +51,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Здравоохранение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
