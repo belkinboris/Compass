@@ -161,7 +161,7 @@ def test_ask_base_mode(client, monkeypatch):
     assert r.json()["answer"] == "Ответ ассистента"
     assert captured["system"] == main.SYSTEM_BASE
     assert "СВЕЖАЯ ВЫДАЧА" not in captured["user"]
-    assert captured["max_tokens"] == 700
+    assert captured["max_tokens"] == 1000
 
 
 def test_question_about_the_service_gets_a_ready_answer_without_the_model(client, monkeypatch):
@@ -859,3 +859,148 @@ def test_intake_routine_hands_its_numbers_to_the_site(monkeypatch):
     assert ok and "3" in why
     body = json.loads(seen[0].content)
     assert seen[0].url.path == "/api/ops/intake-run" and body["cards"] == 6 and body["token"] == "s3cret"
+
+
+# ---------- проверка ассистента 14 октября 2026: ответ ----------
+
+def test_prompts_forbid_claiming_completeness_counting_and_foreign_currency_as_rubles():
+    """В 35 ответах из 100 были неверные факты, почти все — «других нет»,
+    «это все», «список полон» при неполной выборке. Правило — в обоих
+    режимах; «отвечай только о сделках» ослаблено до короткого объяснения
+    термина; список — до десяти строк, а не шести."""
+    for prompt in (main.SYSTEM_BASE, main.SYSTEM_WEB):
+        for phrase in ("«других нет»", "«это все»", "«список полон»", "среди найденных сделок",
+                       "Сам не считай", "обычно закрываются за год", "не переводи в рубли",
+                       "объяснить термин", "нужно ли согласие ФАС"):
+            assert phrase in prompt, phrase
+        # Прежний совет «скажи прямо: в Компасе такой сделки нет» убран.
+        assert "или «в Компасе такой сделки нет»" not in prompt
+    assert "Не больше десяти строк" in main.SYSTEM_BASE and "шести" not in main.SYSTEM_BASE
+    assert "«топ-N»" in main.SYSTEM_BASE
+
+
+PRODUCT_QUESTIONS = {
+    # Вопросы №84–87, 55, 62 проверки — дословно: все получали отказ
+    # «я помогаю только со сделками».
+    "Как подписаться на новые сделки в отрасли?": ("subscribe", "#/account"),
+    "Сколько стоит подписка на Компас?": ("price", "бесплатн"),
+    "Можно ли выгрузить список сделок в Excel?": ("export", "Выгрузить в таблицу"),
+    "Чем вы отличаетесь от Cbonds и Интерфакса?": ("rivals", "сделок с 2022 года"),
+    "Что такое M&A простыми словами?": ("what_is_ma", "#/deal/"),
+    "Чем сделка M&A отличается от инвестиции?": ("ma_vs_investment", "#/deal/"),
+    "Как следить за сделками Сбербанка?": ("subscribe", "Следить за сделками компании"),
+    "Это платно?": ("price", "бесплатн"),
+}
+
+
+@pytest.mark.parametrize("question", list(PRODUCT_QUESTIONS))
+def test_product_questions_get_a_ready_answer_without_the_model(client, monkeypatch, question):
+    kind, must = PRODUCT_QUESTIONS[question]
+    def no_llm(*a, **k):
+        raise AssertionError("модель не должна вызываться на вопрос о продукте")
+    monkeypatch.setattr(main, "call_llm", no_llm)
+    monkeypatch.setattr(main, "yandex_search", no_llm)
+    for mode in ("base", "web"):
+        body = client.post("/api/ask", json={"question": question, "mode": mode}).json()
+        assert body["intent"] == "about" and body["product"] == kind and body["model"] is False
+        assert must in body["answer"], (question, body["answer"])
+        assert not any(w in body["answer"].lower() for w in ("только со сделками", "не могу помочь"))
+    quick = client.post("/api/assistant/lookup", json={"question": question}).json()
+    assert quick["answer"] == body["answer"]
+
+
+def test_product_answers_name_no_price_and_link_only_to_existing_deals():
+    """Цены на сайте нет: пользовательское соглашение говорит «сейчас все
+    функции Сервиса предоставляются бесплатно». Ответ не выдумывает тарифов,
+    а примеры из базы — настоящие сделки."""
+    import re as _re
+    import assistant_product as ap
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    html = (main.pathlib.Path(main.__file__).parent / "static" / "index.html").read_text(encoding="utf-8")
+    assert "Сейчас все функции Сервиса предоставляются бесплатно" in html
+    for button in ("Выгрузить в таблицу", "Следить за сделками компании", "Следить за сделками отрасли",
+                   "Подписаться на обновления", "Новая подписка"):
+        assert button in html, button
+    for k in (ap.SUBSCRIBE, ap.EXPORT, ap.PRICE, ap.RIVALS, ap.WHAT_IS_MA, ap.MA_VS_INVESTMENT):
+        text = ap.answer(k, idx)
+        assert not _re.search(r"\d[\d\s]*(?:₽|руб)\w*\s*(?:в|/)\s*мес", text), k
+        for did in _re.findall(r"#/deal/([A-Za-z0-9_-]+)", text):
+            assert did in idx.by_id, (k, did)
+        assert ap.answer(k, None)  # без индекса — тоже ответ, просто без примеров
+
+
+def test_product_answers_do_not_catch_questions_about_deals():
+    """Готовый ответ о продукте не должен перехватывать вопрос о рынке: замер
+    по тем же 500+ вопросам из живой базы, что и у гейта политики."""
+    import assistant_product as ap
+    import test_assistant_policy
+    for q in ("Сколько стоила Азбука вкуса?", "Кто конкуренты Магнита?", "Когда было подписание сделки?",
+              "Какая стоимость сделки CyberOK?", "Цена раскрыта или это оценка?", "Что такое earn-out?",
+              "Чем отличается сделка Магнита от сделки Ленты?", "Интерфакс писал о сделке Сбербанка?",
+              "Сделки с инвестициями в ИИ", "Что такое правкомиссия?"):
+        assert ap.kind(q) is None, q
+    caught = [q for q in test_assistant_policy._live_questions() if ap.kind(q)]
+    assert not caught, caught[:5]
+
+
+def test_polish_fixes_links_codes_footnotes_and_latin_letters():
+    """Оформление из проверки 14 октября 2026: ссылки без «#» (№35), вложенные
+    ссылки (№37), служебные коды вместо названий (№80), сноски «【…】» (№34,
+    59), латинская «l» в «ленте» (№45, 46), «2 март 2026» (№35)."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    did, other = "citibank", next(d.id for d in idx.docs if d.id != "citibank")
+    title = idx.by_id[other].title
+    code = next(d.id for d in idx.docs if main.re.fullmatch(main._DEAL_CODE, d.id))
+    text = (f"Всё в [lенте сделок](#/deals).\n"
+            f"- [Ситибанк](/deal/{did}) — 2 март 2026\n"
+            f"- [Сделка]('[Полное название](#/deal/{did}))\n"
+            f"- ВТБ выкупил долю — [{code}](#/deal/{code})\n"
+            f"- Ещё [{other}](#/deal/{other}) и [ссылка](deal/{did})\n"
+            f"Оценки 【A‑Invest](https://a-invest.pro/x)», см. 【https://e.law.ru/1210219】 и 【4†L1-L3】.\n"
+            f"iPhone, K2‑9b и Tинькофф.")
+    out = main._polish_answer(text, idx)
+    assert "[ленте сделок](#/deals)" in out and "lенте" not in out
+    assert f"[Ситибанк](#/deal/{did}) — 2 марта 2026" in out
+    assert f"- [Сделка](#/deal/{did})" in out and "'[" not in out
+    assert f"- [ВТБ выкупил долю](#/deal/{code})" in out and f"[{code}]" not in out
+    assert f"[{title}](#/deal/{other})" in out
+    assert f"[ссылка](#/deal/{did})" in out and "](deal/" not in out and "](/deal/" not in out
+    assert "【" not in out and "】" not in out
+    assert "[A‑Invest](https://a-invest.pro/x)" in out and "[e.law.ru](https://e.law.ru/1210219)" in out
+    assert "iPhone" in out and "K2‑9b" in out and "Тинькофф" in out
+
+
+def test_a_cut_off_answer_is_replaced_by_the_summary(client, monkeypatch):
+    """№13 проверки: «Топ-10 крупнейших сделок 2025 года» → одна строка
+    «- **300 млрд ₽** –». Обрубок не показываем — показываем сводку."""
+    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None:
+                        "**Топ-6 крупнейших сделок 2025 года:**\n\n- **300 млрд ₽** –")
+    body = client.post("/api/ask", json={"question": ORION_Q}).json()
+    assert body["model"] is False and "#/advisors/orion" in body["answer"]
+    assert body["answer"].startswith("Подробный ответ не уместился") and "300 млрд" not in body["answer"]
+    for cut in ("Вот список:", "- **300 млрд ₽** –", "сделки: **Магнит"):
+        assert main._looks_cut(cut), cut
+    for whole in ("Сделок три.", "- [Сделка](#/deal/x) — 5 млрд ₽", "Подробнее — на [странице](#/deals)"):
+        assert not main._looks_cut(whole), whole
+
+
+def test_call_llm_treats_an_incomplete_answer_with_text_as_cut_off(monkeypatch):
+    """Модель начала ответ и упёрлась в потолок вывода (status=incomplete):
+    это обрубок, а не ответ, и повтор упрётся в тот же потолок."""
+    monkeypatch.setenv("YANDEX_API_KEY", "k")
+    monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
+    calls = {"n": 0}
+    partial = {"status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"},
+               "output": [{"type": "message", "content": [{"type": "output_text", "text": "- **300 млрд ₽** –"}]}],
+               "usage": {"output_tokens": 1500, "output_tokens_details": {"reasoning_tokens": 1450}}}
+
+    def handler(request):
+        calls["n"] += 1
+        return httpx.Response(200, json=partial)
+
+    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    with pytest.raises(main.LLMCutOff) as err:
+        main.call_llm("sys", "user", max_tokens=1000)
+    assert calls["n"] == 1 and err.value.partial == "- **300 млрд ₽** –"
