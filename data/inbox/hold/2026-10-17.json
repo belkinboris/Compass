@@ -2,17 +2,45 @@
  "made": "2026-10-17",
  "drafts": [
   {
-   "draft_id": "d87719640",
-   "title": "Уникальный сервиз дочери Николая I впервые выставят на торги в Париже",
+   "draft_id": "d57240676",
+   "title": "Эксперты назвали отмену США пошлин за покупку нефти из РФ облегчением для Индии",
    "date": "2026-10-17",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261017/torgi-2125096520.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28225475"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11599170",
+   "title": "«Панатинаикос» приблизился к приобретению защитника «Балтики» Гассама",
+   "date": "2026-10-17",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/17/panatinaikos-priblizilsya-k-priobreteniyu-zaschitnika-baltiki-gassama/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
