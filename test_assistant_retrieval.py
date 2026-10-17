@@ -478,3 +478,265 @@ def test_a_year_question_from_a_deal_page_lists_the_parties_deals(idx):
 def test_question_verbs_do_not_match_names():
     assert "вели" in ar.STOP and "совершил" in ar.STOP
     assert ar.query_words("Какие сделки вели в 2026 году?") == ["2026"]
+
+
+# ============ ПРОВЕРКА НА 100 ВОПРОСАХ (14 октября 2026) ============
+# Отчёт о прогоне: ассистент чаще ошибался не из-за модели, а из-за поиска
+# перед ней. Тесты ниже держат каждую доработку поиска из того отчёта;
+# номера — вопросы прогона.
+
+def _company_of(q, idx):
+    it = ar.route(q, idx)
+    return ar._company_name(idx.companies, it.company_id) if it.kind == "company" and it.company_id else None
+
+
+def test_ordinary_words_are_not_company_names(idx):
+    """«продажи» → «Продо», «ресторанов» → «Рестер», «пример» → БЦ «Примиум»,
+    «инвестбанк» → «Инвестиционная группа К1», «Интерфакса» → «Интеррос»,
+    «российским» → «Россиум», «Медси» → «Медскан» (№11, 12, 16, 34, 44, 49,
+    54, 60, 87)."""
+    wrong = {
+        "Какие условия были у продажи российского Ситибанка?": "Продо",
+        "Приведи примеры сделок с дисконтом 60% и добровольным взносом в бюджет": "Примиум",
+        "Какой инвестбанк чаще всего выступал финансовым консультантом?": "К1",
+        "Кто покупал сети кофеен и ресторанов?": "Рестер",
+        "Какие мультипликаторы были в сделках с ресторанами и кофейнями?": "Рестер",
+        "Что сейчас с продажей судоверфи «Звезда»?": "Продо",
+        "Что стало с российским бизнесом Samsonite?": "Россиум",
+        "Приведи пример сделки MBO — выкупа компании менеджментом": "Примиум",
+        "Чем вы отличаетесь от Cbonds и Интерфакса?": "Интеррос",
+        "Какие консультанты сопровождают продажу среднего бизнеса?": "BGP",
+        "Как вырастить свой бизнес через покупки?": "Свой",
+    }
+    for q, bad in wrong.items():
+        got = _company_of(q, idx) or ""
+        assert bad not in got, (q, got)
+        answer = ar.retrieve(q, idx=idx).answer or ""
+        assert f"[{bad}" not in answer, (q, answer[:200])
+    # Ситибанк, «Звезда», Samsonite находятся сделками, а не чужими компаниями.
+    assert ar.retrieve("Какие условия были у продажи российского Ситибанка?", idx=idx).docs[0].id == "citibank"
+    assert "Звезда" in ar.retrieve("Что сейчас с продажей судоверфи «Звезда»?", idx=idx).docs[0].title
+    assert "Samsonite" in ar.retrieve("Что стало с российским бизнесом Samsonite?", idx=idx).docs[0].title
+    # Падеж — не повод сливать разные имена.
+    assert not ar._name_word_match("интеррос", "интерфакс")
+    assert not ar._name_word_match("рестер", "ресторан")
+    assert not ar._name_word_match("медскан", "медс")
+    assert not ar._name_word_match("russia", "russ")
+    assert ar._name_word_match("wildberries", "wildberis")       # опечатка в длинном имени
+
+
+def test_a_plain_word_name_needs_a_mark_of_a_name(idx):
+    """Имя из одного обычного слова узнаётся по кавычкам или заглавной."""
+    assert _company_of("Какие сделки совершил венчурный фонд «Восход»?", idx) == "Венчурный фонд «Восход»"
+    r = ar.retrieve("Какие сделки совершил венчурный фонд «Восход»?", idx=idx)
+    assert len(r.docs) == len(idx.company_deals["g427bcb12"]), "слово «венчурный» из имени фонда не тема"
+    assert _company_of("как вырастить свой бизнес", idx) is None
+
+
+def test_known_companies_are_still_found_by_name(idx):
+    """Строже — не значит глуше: компании, названные по имени, узнаются по
+    сотням вопросов, собранных из живой базы (до правки — 91%, после — 97%;
+    порог с запасом)."""
+    def short(name):
+        s = re.sub(r"^(?:ПАО|АО|ООО|ЗАО|ОАО|НАО|ГК|МКПАО)\s+", "", name).strip()
+        return s.replace("«", "").replace("»", "")
+    top = sorted(idx.company_sigs, key=lambda c: -len(idx.company_deals.get(c) or []))[:300]
+    ok = total = 0
+    misses = []
+    for cid in top:
+        name = ar._company_name(idx.companies, cid)
+        for tpl in ("Какие сделки были у {}?", "{} сделки"):
+            total += 1
+            got = _company_of(tpl.format(short(name)), idx)
+            if got == name:
+                ok += 1
+            else:
+                misses.append((name, got))
+    assert ok / total >= 0.95, (ok, total, misses[:10])
+    for q, name in (("сделки Магнита", "Магнит"), ("яндекс", "Яндекс"), ("Что покупал ВТБ", "ВТБ"),
+                    ("Какие сделки у Медси?", "Медси"), ("Самолет сделки", "ГК «Самолет»"),
+                    ("сделки МТС Банк", "МТС Банк")):
+        got = _company_of(q, idx)
+        assert got and name.replace("ГК ", "").strip("«»") in got, (q, got)
+
+
+def test_wildberries_is_found_under_the_rvb_profile(idx):
+    """«Сравни Ozon и Wildberries» — «у Wildberries ни одной сделки», хотя у
+    профиля «ООО „РВБ“ (Wildberries & Russ)» их 14 (№32). Алиас в поиске, база
+    не правится."""
+    it = ar.route("Сравни Ozon и Wildberries по сделкам", idx)
+    assert it.kind == "compare" and "g549ab474" in it.company_ids
+    assert _company_of("Какие сделки у Wildberries?", idx).startswith("ООО «РВБ»")
+    # по-русски есть и отдельный профиль ООО «Вайлдберриз» — годится любой из двух
+    assert re.search(r"РВБ|Вайлдберриз", _company_of("сделки вайлдберриз", idx))
+
+
+def test_price_questions_are_not_deal_counts(idx):
+    """«за сколько», «во сколько», «сколько стоит» — о цене (№24, 47, 64)."""
+    r = ar.retrieve("Кто купил Ситибанк и за сколько?", idx=idx)
+    assert r.intent != "count" and r.docs[0].id == "citibank"
+    assert "Оценка:" in r.answer            # цена не раскрыта, но оценка в ответе
+    r = ar.retrieve("Во сколько Б1 оценила бизнес Russ?", idx=idx)
+    assert r.intent != "count" and r.docs[0].id == "cc0e7565f", [d.title for d in r.docs[:2]]
+    assert ar.route("Сколько может стоить пищевое производство с выручкой 500 млн рублей?", idx).kind == "avg"
+    # «сколько сделок» по-прежнему счёт, в том числе с вопросом о суммах (№15)
+    assert ar.route("Сколько сделок было в 2024 году?", idx).kind == "count"
+    it = ar.route("Сколько сделок было в фармацевтике с 2022 года и на какие суммы?", idx)
+    assert it.kind == "count" and it.wants_price
+
+
+def test_periods_are_ranges_of_years(idx):
+    """«с 2022 года», «2024–2025», «за 2022–2024» — диапазон (№15, 18, 36, 57, 61)."""
+    assert ar.period_in("с 2022 года") == (2022, None)
+    assert ar.period_in("в 2024–2025 годах") == (2024, 2025)
+    assert ar.period_in("за 2022-2024 годы") == (2022, 2024)
+    assert ar.period_in("с 2022 по 2024 год") == (2022, 2024)
+    assert ar.period_in("после 2023 года") == (2024, None)
+    assert ar.period_in("до 2024 года") == (None, 2023)
+    assert ar.period_in("в 2023 году и сколько в 2024") == (2023, 2024)
+    assert ar.period_in("в 2025 году") == (2025, 2025)
+    assert ar.period_in("в этом году", today_year=2026) == (2026, 2026)
+    yandex = idx.company_deals["yandex"]
+    r = ar.retrieve("Какие компании купил Яндекс с 2022 года?", idx=idx)
+    assert r.intent == "company" and f" {len(yandex)} " in r.answer and "с 2022 года" in r.answer
+    r = ar.retrieve("Для курсовой: сделки в телекоме за 2022–2024 годы", idx=idx)
+    assert {d.year for d in r.pool} == {2022, 2023, 2024}
+    assert all("Телеком" in d.industries for d in r.pool)
+    r = ar.retrieve("Какие IPO были на Мосбирже в 2024–2025 годах и при какой оценке?", idx=idx)
+    assert {2024, 2025} <= {d.year for d in r.pool} and all(2024 <= d.year <= 2025 for d in r.pool)
+    assert "g6206d0f7" in {d.id for d in r.pool}           # IPO GloraX, октябрь 2025
+    r = ar.retrieve("Какая самая крупная сделка на российском рынке с 2022 года?", idx=idx)
+    assert {d.year for d in r.docs} - {2022}, "крупнейшие — за весь период, а не за 2022 год"
+    r = ar.retrieve("Сколько сделок было в 2019 году?", idx=idx)
+    assert "база начинается с 2022 года" in r.answer
+
+
+def _site_listing(d):
+    return d.type == "Продажа с торгов" and d.status != "Закрыта"
+
+
+def test_rankings_are_counted_on_the_server_like_the_site(idx):
+    """Рейтинги по всей базе (№16, 17, 58, 74, 75, 81): счёт сервера, а не
+    модели, — тем же правилом, что «Консультанты» и «Аналитика»: лоты торгов
+    не сделки, юрфирмы — вкладка юрфирм каталога."""
+    from collections import Counter
+    r = ar.retrieve("Какие юрфирмы самые активные на рынке M&A?", idx=idx)
+    assert r.intent == "rank"
+    law = [f for f in idx.firms if f.kind == "law"]
+    expect = sorted(((sum(1 for d in idx.firm_deals.get(f.id) or [] if not _site_listing(d)), f.name) for f in law),
+                    key=lambda x: (-x[0], x[1].lower()))
+    n, name = expect[0]
+    assert f"1. [{name}]" in r.answer and f" — {n} " in r.answer.splitlines()[1], r.answer[:300]
+    r = ar.retrieve("Рейтинг юрфирм по числу сделок за 2025 год", idx=idx)
+    assert r.intent == "rank" and "за 2025 год" in r.answer and "за 2024 —" in r.answer
+    r = ar.retrieve("Какие юрфирмы растут по числу сделок в 2026 году?", idx=idx)
+    assert r.intent == "rank" and "за 2026 год" in r.answer and "за 2025 —" in r.answer
+    # банкиры без брокеров по недвижимости; отрасль «Финансовые услуги» не подмешана
+    it = ar.route("Какой инвестбанк чаще всего выступал финансовым консультантом?", idx)
+    assert it.kind == "rank" and it.rank == "invest" and it.industry is None
+    r = ar.retrieve("Какой инвестбанк чаще всего выступал финансовым консультантом?", idx=idx)
+    assert "(#/advisors/nikoliers)" not in r.answer and "(#/advisors/ibcre)" not in r.answer
+    # отрасли
+    r = ar.retrieve("Какие отрасли самые активные по числу сделок?", idx=idx)
+    cnt = Counter(i for d in idx.docs if not _site_listing(d) for i in dict.fromkeys(d.industries)
+                  if i and i != "Не определена")
+    top, k = cnt.most_common(1)[0]
+    assert r.intent == "rank" and f"1. [{top}](#/industry/{top}) — {k} " in r.answer
+    # покупатели
+    r = ar.retrieve("Какие компании активнее всего растут через покупки? Где может понадобиться директор по M&A?",
+                    idx=idx)
+    buyers = Counter(d.raw.get("buyer") for d in idx.docs if not _site_listing(d) and d.raw.get("buyer") in idx.companies)
+    cid, k = buyers.most_common(1)[0]
+    assert r.intent == "rank" and f"(#/companies/{cid}) — {k} " in r.answer
+    # юрфирмы в отрасли
+    it = ar.route("Какие юрфирмы чаще всего консультировали сделки с недвижимостью?", idx)
+    assert it.kind == "rank" and it.rank == "law" and it.industry == "Недвижимость"
+
+
+def test_average_deal_size_is_counted_on_the_server(idx):
+    """«Средний размер сделки в агро» — 16,5 млрд «на глаз» у модели (№20).
+    Считаем по ценам, допущенным к суммам «Аналитики» (purchase_sums)."""
+    import statistics
+    r = ar.retrieve("Какой средний размер сделки в агро?", idx=idx)
+    assert r.intent == "avg"
+    vals = [d.price_rub for d in idx.docs if "Агро" in d.industries and not _site_listing(d) and d.price_rub]
+    assert vals
+    assert ar._fmt_rub(statistics.mean(vals)) in r.answer and ar._fmt_rub(statistics.median(vals)) in r.answer
+    assert f"по {len(vals)} " in r.answer
+
+
+def test_consultants_are_labelled_by_kind(idx):
+    """IBC и Nikoliers — консультанты по недвижимости, не юрфирмы (№6, 16)."""
+    kinds = {f.id: f.kind for f in idx.firms}
+    assert kinds["nikoliers"] == kinds["ibcre"] == "Консультант по недвижимости"
+    assert kinds["alrud"] == "law"
+    stats = ar._advisor_stats([d for d in idx.docs if "Недвижимость" in d.industries], idx)
+    labelled = dict(stats)
+    assert all(re.search(r"\((юрфирма|банк|инвестбанк|консультант по недвижимости|[а-я ]+)\)$", k) for k in labelled)
+    assert not any("Nikoliers (юрфирма)" == k for k in labelled)
+
+
+def test_model_card_keeps_valuation_terms_and_multiples_whole(idx):
+    """Мультипликаторы и условия не отрезаются (№7, 14, 30, 34)."""
+    b2b = ar.compact(idx.by_id["g12a761e4"])
+    assert "EV/EBITDA" in b2b["valuation"] and "P/E" in b2b["valuation"]
+    wink = ar.compact(idx.by_id["g1125c0ec"])
+    assert "earn-out" in wink["terms"] and "500 млн" in wink["terms"]
+    coffee = ar.compact(idx.by_id["ge6e9c77a"])
+    assert "EBITDA" in coffee["valuation"]
+    assert all(len(ar.compact(d).get("facts", "")) <= 320 for d in idx.docs[:200])
+    r = ar.retrieve("При каких мультипликаторах прошло IPO B2B-РТС?", idx=idx)
+    assert r.docs[0].id == "g12a761e4" and "EV/EBITDA" in r.answer
+    r = ar.retrieve("Какие мультипликаторы были в сделках с ресторанами и кофейнями?", idx=idx)
+    assert "ge6e9c77a" in {d.id for d in r.docs}
+    r = ar.retrieve("Какие мультипликаторы EV/EBITDA встречались в сделках в ИТ?", idx=idx)
+    assert "g12a761e4" in {d.id for d in r.pool} and all("ИТ и интернет" in d.industries for d in r.pool)
+
+
+def test_every_condition_of_the_question_is_applied(idx):
+    """Несколько условий — все, а не первое (№3, 5, 12, 25, 28, 29, 31, 40)."""
+    r = ar.retrieve("Какие сделки по уходу иностранных компаний прошли через правкомиссию в 2023 году?", idx=idx)
+    assert r.pool and all(d.year == 2023 and "Уход иностранного владельца" in d.themes
+                          and "Правкомиссия / указ президента" in d.themes for d in r.pool)
+    r = ar.retrieve("Какие сделки в нефтегазе обсуждаются, но ещё не закрыты?", idx=idx)
+    want = [d for d in idx.docs if "Нефть и газ" in d.industries and d.status and d.status not in ("Закрыта", "Не состоялась")]
+    assert len(r.pool) == len(want) and f" {len(want)} " in r.answer
+    r = ar.retrieve("Какие сделки не состоялись в 2025 году и почему?", idx=idx)
+    want = [d for d in idx.docs if d.year == 2025 and d.status == "Не состоялась"]
+    assert len(r.pool) == len(want) > 1
+    r = ar.retrieve("Сколько сделок закрылось в 2023 году и сколько в 2024?", idx=idx)
+    for y in (2023, 2024):
+        n = sum(1 for d in idx.docs if d.year == y and d.status == "Закрыта")
+        assert f"{y} — {n}" in r.answer, (y, n, r.answer[:200])
+    it = ar.route("Сравни АЛРУД и ЕПАМ: какие сделки вела каждая фирма?", idx)
+    assert it.kind == "compare_firms" and {f.id for f in it.firms} == {"alrud", "epam"}
+    r = ar.retrieve("Сравни АЛРУД и ЕПАМ: какие сделки вела каждая фирма?", idx=idx)
+    assert f"{len(idx.firm_deals['alrud'])} сдел" in r.answer
+    r = ar.retrieve("Приведи примеры сделок с дисконтом 60% и добровольным взносом в бюджет", idx=idx)
+    assert len(r.pool) >= 3 and all(re.search("дисконт", d.facts, re.I) for d in r.pool)
+    r = ar.retrieve("Какие венчурные раунды были в искусственном интеллекте?", idx=idx)
+    assert r.pool and all("Венчур / раунд" in d.themes for d in r.pool)
+    assert all("Искусственный интеллект" in d.industries + d.themes for d in r.pool)
+    it = ar.route("Какие сделки были в логистике и складах в 2025 году?", idx)
+    assert it.industry == "Транспорт и логистика" and it.year == 2025
+    r = ar.retrieve("Какие сделки были в Татарстане?", idx=idx)
+    assert r.intent == "filter" and len(r.pool) > 5
+    r = ar.retrieve("Приведи пример сделки MBO — выкупа компании менеджментом", idx=idx)
+    assert r.intent == "term" and re.search(r"MBO|management buy|[Мм]енеджмент", r.docs[0].title)
+
+
+def test_follow_up_works_inside_the_previous_answer(idx):
+    """«А какие из них самые крупные?» после сделок Альфа-Банка 2026 года
+    отвечало «у Альфа-Банка нет сделок за 2026 год» (№23)."""
+    prev = "Какие сделки были у Альфа-Банка в 2026 году?"
+    first = ar.retrieve(prev, idx=idx)
+    r = ar.retrieve("А какие из них самые крупные?", idx=idx, previous=prev)
+    assert r.answer.startswith(f"Из {len(first.pool)} сдел") and "Альфа-Банк" in r.answer
+    assert {d.id for d in r.docs} <= {d.id for d in first.pool}
+    r = ar.retrieve("а за сколько?", idx=idx, previous="Кто купил Ситибанк?")
+    assert r.docs[0].id == "citibank"
+    r = ar.retrieve("сколько из них в 2025 году?", idx=idx, previous="Какие сделки совершал Магнит?")
+    mag = ar.retrieve("Какие сделки совершал Магнит?", idx=idx).pool
+    assert r.docs and all(d.year == 2025 for d in r.docs) and {d.id for d in r.docs} <= {d.id for d in mag}
+    # без «из них» вопрос — новый
+    assert ar.retrieve("Самые крупные сделки 2025 года", idx=idx, previous=prev).subject != "Альфа-Банк"

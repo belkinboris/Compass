@@ -646,5 +646,50 @@
   "note": "registry",
   "found": "2026-10-16",
   "resolved": null
+ },
+ {
+  "id": "g5f662edc",
+  "field": "sum",
+  "card": "999,89 млн ₽",
+  "read": "reported",
+  "note": "",
+  "found": "2026-10-17",
+  "resolved": null
+ },
+ {
+  "id": "ga0a49202",
+  "field": "date",
+  "card": "2025-07-01",
+  "read": "2025-08-01",
+  "note": "closing",
+  "found": "2026-10-17",
+  "resolved": null
+ },
+ {
+  "id": "g15386e04",
+  "field": "date",
+  "card": "2026-08-07",
+  "read": "2025-09-22",
+  "note": "signing",
+  "found": "2026-10-17",
+  "resolved": null
+ },
+ {
+  "id": "g5b4e85aa",
+  "field": "date",
+  "card": "2026-09-29",
+  "read": "2026-10-08",
+  "note": "closing",
+  "found": "2026-10-17",
+  "resolved": null
+ },
+ {
+  "id": "g8cb1eb00",
+  "field": "date",
+  "card": "2019-07-11",
+  "read": "2019-07-12",
+  "note": "signing",
+  "found": "2026-10-17",
+  "resolved": null
  }
 ]
