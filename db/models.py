@@ -695,6 +695,35 @@ class ModerationDecision(Base):
     reply_message_id: Mapped[int | None] = mapped_column(nullable=True)
 
 
+class ClaudeMessage(Base):
+    """Сообщение владельца или партнёра агенту Claude из темы «Клод» консоли.
+
+    Тот же мост, что у ModerationDecision: сообщение ловит вебхук САЙТА, а
+    читает и отвечает на него рутина «тема Клод» в одноразовом контейнере,
+    у которого нет доступа к базе сайта. Рутина забирает непрочитанное по
+    `/api/claude/inbox` и помечает прочитанным через `/api/claude/inbox/consume`
+    (заведено 17 октября 2026, порядок работы — routines/claude_topic.md).
+    """
+    __tablename__ = "claude_messages"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    chat_id: Mapped[str] = mapped_column(String(40))
+    thread_id: Mapped[int | None] = mapped_column(nullable=True)
+    message_id: Mapped[int] = mapped_column()
+    from_id: Mapped[str] = mapped_column(String(40))
+    from_name: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # Текст сообщения или подпись к фото/файлу.
+    text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Самое большое фото из присланных размеров; файл скачивает рутина (getFile).
+    photo_file_id: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    document_file_id: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    document_name: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    # Текст сообщения, на которое ответили (если ответили), — контекст для агента.
+    reply_to_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    consumed: Mapped[bool] = mapped_column(default=False, index=True)
+    created_at: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc))
+
+
 # ------------------------------------------------------------ посещаемость ---
 
 class PageView(Base):
