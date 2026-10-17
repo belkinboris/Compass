@@ -2,41 +2,41 @@
  "made": "2026-10-17",
  "drafts": [
   {
-   "draft_id": "d38607984",
-   "title": "Лавандовый бриллиант «Алросы» продадут по инвестпрограмме",
+   "draft_id": "d26373667",
+   "title": "Роналду вложил десять миллионов евро в новый бизнес",
    "date": "2026-10-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28224763"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/17/ronaldu-vlozhil-desyat-millionov-evro-v-novyy-biznes/"
     ]
    ],
-   "sum": "$1,5 млн",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "Роналду",
+   "asset": "новый бизнес",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "Роналду",
+    "asset": "новый бизнес",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d10567987",
-   "title": "Эксперт Бочарникова рассказала, сколько новостроек в РФ продаются со скидками",
+   "draft_id": "d24663115",
+   "title": "Россия собралась продавать халяльное мясо стране в Юго-Восточной Азии",
    "date": "2026-10-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28224693"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/17/rossiya-sobralas-prodavat-halyalnoe-myaso-strane-v-yugo-vostochnoy-azii/"
     ]
    ],
    "sum": null,
@@ -51,7 +51,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Здравоохранение",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
