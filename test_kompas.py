@@ -979,7 +979,10 @@ def test_a_cut_off_answer_is_replaced_by_the_summary(client, monkeypatch):
                         "**Топ-6 крупнейших сделок 2025 года:**\n\n- **300 млрд ₽** –")
     body = client.post("/api/ask", json={"question": ORION_Q}).json()
     assert body["model"] is False and "#/advisors/orion" in body["answer"]
-    assert body["answer"].startswith("Подробный ответ не уместился") and "300 млрд" not in body["answer"]
+    # Служебной фразы «Подробный ответ не уместился» посетитель не видит
+    # (№66 проверки 18 октября 2026) — только короткую сводку.
+    assert body["answer"].startswith("Коротко, по данным «Компаса»:") and "300 млрд" not in body["answer"]
+    assert "не уместился" not in body["answer"]
     for cut in ("Вот список:", "- **300 млрд ₽** –", "сделки: **Магнит"):
         assert main._looks_cut(cut), cut
     for whole in ("Сделок три.", "- [Сделка](#/deal/x) — 5 млрд ₽", "Подробнее — на [странице](#/deals)"):
@@ -1004,3 +1007,172 @@ def test_call_llm_treats_an_incomplete_answer_with_text_as_cut_off(monkeypatch):
     with pytest.raises(main.LLMCutOff) as err:
         main.call_llm("sys", "user", max_tokens=1000)
     assert calls["n"] == 1 and err.value.partial == "- **300 млрд ₽** –"
+
+
+# ── Проверка 18 октября 2026: страховка после модели и подготовка к встрече ──
+
+def _doc(did, title, added="", **kw):
+    from types import SimpleNamespace
+    return SimpleNamespace(id=did, title=title, buyer=kw.get("buyer", ""), seller=kw.get("seller", ""),
+                           target=kw.get("target", ""), asset="", raw={"added": added})
+
+
+def _ret(intent="company", answer="", docs=(), pool=()):
+    from types import SimpleNamespace
+    return SimpleNamespace(intent=intent, answer=answer, docs=list(docs), pool=list(pool))
+
+
+def _idx(docs):
+    from types import SimpleNamespace
+    return SimpleNamespace(by_id={d.id: d for d in docs})
+
+
+# Ответ «Подготовка к встрече» по ВТБ со скриншотов партнёра (18 октября 2026).
+VTB_PREP_ANSWER = """**Что важно знать о ВТБ**
+- Второй по величине банк России, контролируется государством.
+
+**Ключевые сделки (до 5 штук)**
+- [ВТБ продал отель](#/deal/g1) — 2026, продавец
+
+**Как подготовиться**
+- Подготовьте документацию для правкомиссии ФАС по прошлым сделкам.
+- Изучите сделки 、、、 компании.
+
+**Что лучше не говорить**
+- Не упоминайте имена юридических фирм, кроме VERBA LEGAL.
+- Не делайте предположения о конкретных контрагентах, которых в данных нет (например, банки-партнёры в сделке с RVB).
+
+Данные собраны из открытых источников и могут быть неполными."""
+
+
+def test_meeting_prep_prompt_carries_no_service_notes_and_no_dont_say_section():
+    """«Ключевые сделки (до 5 штук)»: пометка о количестве из задания модель
+    переносила в заголовок. В задании со страницы её больше нет — сколько
+    сделок, решают правила сервера, и о «чём лучше не говорить» не просим."""
+    html = open(main.os.path.join(main.STATIC_DIR, "index.html"), encoding="utf-8").read()
+    start = html.index("function meetingPrepQuestion(")
+    body = html[start:html.index("\n}\n", start)]
+    for bad in ("до 5", "до пяти", "штук", "лучше не говорить"):
+        assert bad not in body, bad
+    for prompt in (html[html.index("Готовлюсь к собеседованию в компанию"):][:400],
+                   html[html.index("Готовлюсь к собеседованию в ${isLegal"):][:400]):
+        assert "(до пяти" not in prompt
+    rules = main.MEETING_PREP_RULES
+    assert "до 5 штук" in rules and "без пометок в скобках" in rules  # называется как запрет
+    assert "ФАС — разные органы" in rules and "выдуманных примеров" in rules
+    assert "основную" in rules  # не выделять одного консультанта
+
+
+def test_meeting_prep_question_gets_its_own_rules():
+    import assistant_retrieval
+    ret = assistant_retrieval.Retrieval("company", "Сводка.", [], "ВТБ")
+    prep = main._prepare_ask("Готовлюсь к встрече с компанией «ВТБ». Коротко, по пунктам.", ret, "base", "")
+    assert prep.meeting and main.MEETING_PREP_RULES in prep.system and prep.max_tokens >= 1400
+    plain = main._prepare_ask("Какие сделки были у ВТБ?", ret, "base", "")
+    assert not plain.meeting and main.MEETING_PREP_RULES not in plain.system
+
+
+def test_polish_cleans_the_meeting_prep_answer_from_the_screenshot():
+    source = "СВОДКА: ВТБ продал отель. Wildberries — ООО «РВБ». Согласование правкомиссии."
+    out = main._polish_answer(VTB_PREP_ANSWER, _idx([_doc("g1", "ВТБ продал отель")]), source=source, meeting=True)
+    assert "(до 5 штук)" not in out and "**Ключевые сделки**" in out
+    assert "лучше не говорить" not in out and "VERBA LEGAL" not in out and "RVB" not in out
+    assert "Не упоминайте" not in out and "Не делайте предположения" not in out
+    assert "правкомиссии ФАС" not in out and "для правкомиссии по прошлым" in out
+    assert "、" not in out and "Изучите сделки компании." in out
+    assert out.endswith("Данные собраны из открытых источников и могут быть неполными.")
+    assert "[ВТБ продал отель](#/deal/g1)" in out
+
+
+def test_glued_approval_bodies_are_split_as_in_the_deals():
+    fix = main._unglue_approval_bodies
+    assert fix("Нужно согласие правкомиссии ФАС.", "одобрила ФАС") == "Нужно согласие ФАС."
+    assert fix("Нужно согласие правкомиссии ФАС.", "одобрила правкомиссия") == "Нужно согласие правкомиссии."
+    assert fix("Правкомиссия ФАС одобрила.", "") == "Правкомиссия и ФАС одобрила."
+    assert fix("Для Правительственной комиссии при ФАС России", "") == "Для Правительственной комиссии и ФАС"
+    for ok in ("Сделку одобрили ФАС и правкомиссия.", "решение комиссии ФАС", "согласие ФАС; правкомиссия — нет"):
+        assert fix(ok, "") == ok
+
+
+def test_service_notes_and_junk_are_removed_but_numbers_stay():
+    out = main._polish_answer("**Сделки (до 5 штук)**\n**Итоги (не больше пяти)**\n**Кратко (по пунктам)**\n"
+                              "Скидка (до 30%) и сделки (до 2025 года).\nА、、、Б，В。​Г", None)
+    assert "(до 5 штук)" not in out and "(не больше пяти)" not in out and "(по пунктам)" not in out
+    assert "**Сделки**" in out and "(до 30%)" in out and "(до 2025 года)" in out
+    assert "、" not in out and "，" not in out and "。" not in out and "​" not in out
+
+
+def test_completeness_claims_are_dropped_only_when_search_found_more():
+    docs = [_doc(f"g{i}", f"Сделка номер {i}") for i in range(3)]
+    text = ("У компании три сделки. Это все сделки в «Компасе». Других сделок нет.\n"
+            "- [Сделка номер 0](#/deal/g0)\n\nИтого: 3 сделки. Сумму не раскрывали, данных о цене ещё нет.")
+    part = _ret(answer="Всего 20 сделок, [список](#/companies/x).", docs=docs, pool=docs * 7)
+    out = main._polish_answer(text, _idx(docs), ret=part)
+    assert "Это все" not in out and "Других сделок нет" not in out and "Итого" not in out
+    assert "У компании три сделки." in out and "данных о цене ещё нет" in out
+    assert out.endswith("Здесь показана часть найденных сделок, полный список — [список](#/companies/x).")
+    whole = _ret(answer="Всего 3 сделки.", docs=docs, pool=docs)
+    assert main._polish_answer(text, _idx(docs), ret=whole) == text
+    # «Ещё N — в ленте» в сводке — тоже часть списка.
+    assert main._shows_part(_ret(answer="- a\nЕщё 12 — в [ленте](#/deals).", docs=docs))
+
+
+def test_a_multiple_absent_from_the_deals_is_dropped():
+    """№70: модель «оценила» сделку в мультипликатор, которого нет в карточках."""
+    text = "Сумма — 10 млрд ₽. Это примерно 7x EBITDA. Покупатель — «Альфа»."
+    assert main._polish_answer(text, None, source="цена 10 млрд ₽") == "Сумма — 10 млрд ₽. Покупатель — «Альфа»."
+    kept = "Сделка прошла по 6,5x EBITDA."
+    assert main._polish_answer(kept, None, source="мультипликатор 6.5x EBITDA") == kept
+
+
+def test_generalizations_from_the_model_are_dropped():
+    text = ("Нашлось три сделки. Как правило, такие сделки закрываются за год. "
+            "Это говорит о том, что рынок растёт.\n- [А](#/deal/a)")
+    assert main._polish_answer(text, _idx([_doc("a", "А")])) == "Нашлось три сделки.\n- [А](#/deal/a)"
+
+
+def test_list_items_without_links_get_the_deal_link():
+    """№5, 37, 39, 73, 79: список сделок без единой ссылки на карточку."""
+    docs = [_doc("g1", "«Карат» купил Павловский молочный завод", buyer="Карат", target="Павловский молочный завод"),
+            _doc("g2", "Альфа-Банк купил долю в «Медси»", buyer="Альфа-Банк", target="Медси"),
+            _doc("g3", "Visiology привлекла 200 млн рублей", target="Visiology")]
+    text = ("Среди найденных:\n- **Павловский молочный завод** — купил «Карат», 2026\n"
+            "- Альфа-Банк купил долю в «Медси» — 2026\n- Visiology — 200 млн ₽\n- Покупка доли — 2026\n"
+            "- Возьмите с собой список сделок\n- [Уже ссылка](#/deal/g9) — 2025")
+    out = main._polish_answer(text, _idx(docs + [_doc("g9", "Уже ссылка")]), ret=_ret(docs=docs))
+    assert "- **[Павловский молочный завод](#/deal/g1)** — купил «Карат», 2026" in out
+    assert "- [Альфа-Банк купил долю в «Медси»](#/deal/g2) — 2026" in out
+    assert "- [Visiology](#/deal/g3) — 200 млн ₽" in out
+    assert "- Покупка доли — 2026" in out  # общих слов мало — ссылку не ставим
+    assert "- Возьмите с собой список сделок" in out and "[Уже ссылка](#/deal/g9)" in out
+
+
+def test_same_day_events_of_one_kind_collapse_into_one_line():
+    """№45, 46: пять строк «Активы X переданы во временное управление»."""
+    names = ["Tarkett в России", "«Каппа Рус»", "«Менсен Пакаджинг СНГ»"]
+    docs = [_doc(f"g{i}", f"Активы {n} переданы во временное управление «Центр Капиталу»", "2026-10-17")
+            for i, n in enumerate(names)]
+    docs.append(_doc("g9", "Visiology привлекла 200 млн рублей", "2026-10-17"))
+    lines = [f"- [{d.title}](#/deal/{d.id}) — 17 октября 2026" for d in docs]
+    out = main._polish_answer("За неделю:\n" + "\n".join(lines), _idx(docs), ret=_ret(intent="recent", docs=docs))
+    assert out.splitlines() == [
+        "За неделю:",
+        "- Активы переданы во временное управление «Центр Капиталу»: [Tarkett в России](#/deal/g0), "
+        "[«Каппа Рус»](#/deal/g1), [«Менсен Пакаджинг СНГ»](#/deal/g2) — 17 октября 2026",
+        "- [Visiology привлекла 200 млн рублей](#/deal/g9) — 17 октября 2026"]
+    # Разные дни не сворачиваются.
+    docs[1].raw["added"], docs[2].raw["added"] = "2026-10-16", "2026-10-15"
+    out = main._polish_answer("\n".join(lines), _idx(docs), ret=_ret(intent="recent", docs=docs))
+    assert len(out.splitlines()) == 4
+
+
+def test_polish_leaves_an_ordinary_answer_alone():
+    """Страховка не должна портить нормальный ответ."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    d = idx.docs[0]
+    text = (f"Среди найденных сделок самая крупная — [{d.title}](#/deal/{d.id}).\n\n"
+            f"- [{d.title}](#/deal/{d.id}) — 2025, 10 млрд ₽\n\n"
+            "Сумму раскрывают не всегда: в наших данных об этом не сказано. Согласие ФАС получено.")
+    ret = _ret(answer="Всего 1 сделка.", docs=[d], pool=[d])
+    assert main._polish_answer(text, idx, ret=ret, source="сводка ФАС 10 млрд", meeting=True) == text
