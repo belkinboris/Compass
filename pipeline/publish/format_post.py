@@ -833,7 +833,11 @@ def is_fresh(deal, today=None):
     age = deal_age_days(deal, today)
     raw = str(deal.get('date') or '')
     if deal.get('from_ingest'):
-        added = str(deal.get('added') or '')
+        # Карточка ещё ждёт решения в pending.json — поля `added` у неё нет
+        # (его ставит approve.py при выпуске), и ручная сборка с датой-годом
+        # теряла пост («Атолл Капитал»/Aspace, 18 октября 2026). День, когда
+        # карточка легла в очередь, — тот же день притока.
+        added = str(deal.get('added') or str(deal.get('pending_since') or '')[:10])
         added_age = None
         if re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
             try:
