@@ -121,8 +121,8 @@ def test_largest_puts_named_prices_first_and_marks_estimates(idx):
     r = _ask("Самая крупная сделка 2025 года", idx)
     assert r.intent == "largest"
     assert r.docs and all(d.year == 2025 for d in r.docs)
-    assert r.docs[0].sum_rub is not None
-    assert "по цене, которую назвали сами стороны" in r.answer
+    assert r.docs[0].top_price is not None
+    assert "по цене, которую назвали стороны" in r.answer
 
 
 def test_unknown_advisor_is_reported_honestly(idx):
@@ -715,7 +715,7 @@ def test_every_condition_of_the_question_is_applied(idx):
     r = ar.retrieve("Приведи примеры сделок с дисконтом 60% и добровольным взносом в бюджет", idx=idx)
     assert len(r.pool) >= 3 and all(re.search("дисконт", d.facts, re.I) for d in r.pool)
     r = ar.retrieve("Какие венчурные раунды были в искусственном интеллекте?", idx=idx)
-    assert r.pool and all("Венчур / раунд" in d.themes for d in r.pool)
+    assert r.pool and all("Венчур / раунд" in d.themes or d.type == "Инвестиция" for d in r.pool)
     assert all("Искусственный интеллект" in d.industries + d.themes for d in r.pool)
     it = ar.route("Какие сделки были в логистике и складах в 2025 году?", idx)
     assert it.industry == "Транспорт и логистика" and it.year == 2025
@@ -740,3 +740,154 @@ def test_follow_up_works_inside_the_previous_answer(idx):
     assert r.docs and all(d.year == 2025 for d in r.docs) and {d.id for d in r.docs} <= {d.id for d in mag}
     # без «из них» вопрос — новый
     assert ar.retrieve("Самые крупные сделки 2025 года", idx=idx, previous=prev).subject != "Альфа-Банк"
+
+
+# ---------- вторая проверка на 100 вопросах (октябрь 2026): поиск ----------
+
+def _top_purchases(docs):
+    """Список «Крупнейшие покупки» страницы «Аналитика»: facts.admitted.top_purchases,
+    не лот на торгах, по цене в рублях (countsAsTopPurchase в index.html)."""
+    rows = [d for d in docs if (d.raw.get("facts") or {}).get("admitted", {}).get("top_purchases") and not d.listing]
+    return sorted(rows, key=lambda d: -d.raw["facts"]["price"]["value_rub"])
+
+
+def test_largest_deal_is_the_one_on_the_analytics_page(idx):
+    """№33: «самая крупная сделка с 2022 года» — первая строка «Крупнейших
+    покупок» на «Аналитике», а не выкуп «Полюсом» своих акций; №13: топ-10
+    года — те же сделки в том же порядке; №57: в теме — без обсуждаемых."""
+    r = ar.retrieve("Какая самая крупная сделка с 2022 года?", idx=idx)
+    assert r.intent == "largest"
+    assert r.docs[0].id == _top_purchases(idx.docs)[0].id
+    assert "g06b7ba6e" not in {d.id for d in r.docs}        # buyback «Полюса»
+    assert "#/analytics" in r.answer
+    r = ar.retrieve("Топ-10 крупнейших сделок 2025 года", idx=idx)
+    want = [d.id for d in _top_purchases([d for d in idx.docs if d.year == 2025])][:10]
+    assert [d.id for d in r.docs[:len(want)]] == want
+    r = ar.retrieve("Самые крупные сделки по уходу иностранных компаний", idx=idx)
+    assert r.docs and all(d.purchase_like for d in r.docs)
+    assert all("Уход иностранного владельца" in d.themes for d in r.docs)
+    # никакая строка ответа не держит обсуждаемую сделку, лот или допэмиссию
+    for q in ("Какая самая крупная сделка с 2022 года?", "Топ-10 крупнейших сделок 2025 года",
+              "Самые крупные сделки по уходу иностранных компаний"):
+        for d in ar.retrieve(q, idx=idx).docs:
+            assert d.status != "Обсуждается" and not d.listing, (q, d.id)
+            nature = (d.raw.get("facts") or {}).get("nature") or {}
+            assert not any(nature.get(k) for k in ar.NOT_PURCHASE_FLAGS), (q, d.id)
+
+
+def test_company_purchases_and_sales_are_told_apart(idx):
+    """№27: «Что покупала S8 Capital?» — покупки, продажи отдельно и подписаны."""
+    cid = "gffdff138"
+    r = ar.retrieve("Что покупала S8 Capital?", idx=idx)
+    assert r.intent == "company"
+    head, _, tail = r.answer.partition("Отдельно — продажи")
+    assert tail, r.answer[:300]
+    for d in idx.company_deals[cid]:
+        role = ar._role(d, cid)
+        if role == "покупатель":
+            assert d.id in head
+        elif role == "продавец":
+            assert d.id not in head and d.id in tail
+    assert "(компания — продавец)" not in head
+    # «Кто купил …» — роль у «кто», названная компания — предмет: фильтра нет
+    assert ar.route("Кто купил Ситибанк?", idx).role is None
+
+
+def test_compare_names_each_companys_largest_deal_with_its_role(idx):
+    """№21: ВТБ и Сбербанк — у каждой крупнейшая сделка по названной цене и
+    роль в ней; роли считаются по ссылкам карточек, а не по имени."""
+    r = ar.retrieve("Сравни ВТБ и Сбербанк по сделкам: у кого больше и какая крупнейшая?", idx=idx)
+    assert r.intent == "compare"
+    blocks = r.answer.split("**[")
+    for cid in ("gcafc31dc", "g28ff15bb"):
+        block = next(b for b in blocks if f"(#/companies/{cid})" in b)
+        own = idx.company_deals[cid]
+        big = max((d for d in own if d.purchase_like and d.named_rub), key=lambda d: d.named_rub)
+        line = next(x for x in block.splitlines() if x.startswith("Крупнейшая"))
+        assert big.id in line and f"(компания — {ar._role(big, cid)})" in line, line
+        n_buy = sum(1 for d in own if ar._role(d, cid) == "покупатель")
+        assert f"покупатель — {n_buy}" in block
+    assert "gc3d735fc" in r.answer          # «Открытие» за 340 млрд ₽ — ВТБ покупатель
+
+
+def test_venture_rounds_in_ai_are_all_investments_into_ai(idx):
+    """№25: «венчурные раунды в ИИ» — все инвестиции в ИИ-компании (тема
+    «Венчур / раунд» стоит у двух из них), ИИ — по теме или отрасли."""
+    ai = "Искусственный интеллект"
+    want = {d.id for d in idx.docs if (ai in d.themes or ai in d.industries)
+            and ("Венчур / раунд" in d.themes or d.type == "Инвестиция")}
+    r = ar.retrieve("Какие венчурные раунды были в сфере ИИ?", idx=idx)
+    assert len(want) >= 8 and {d.id for d in r.pool} == want
+    assert f" {len(want)} " in r.answer
+
+
+def test_bank_buyers_are_banks_buying_in_any_industry(idx):
+    """№80: «банки-покупатели» — покупатель банк, отрасль сделки любая; не
+    «сделки в отрасли Банки» (там банк чаще предмет)."""
+    for q in ("Какие банки выступали покупателями в сделках?", "Банки-покупатели: какие сделки?",
+              "Сделки, где покупатель — банк"):
+        it = ar.route(q, idx)
+        assert it.buyer_kind == "bank" and it.industry is None, q
+    r = ar.retrieve("Какие банки выступали покупателями в сделках?", idx=idx)
+    want = {d.id for d in idx.docs if ar._buyer_is(d, "bank")}
+    assert {d.id for d in r.pool} == want and f" {len(want)} " in r.answer
+    assert any("Банки" not in d.industries for d in r.pool)
+    assert "Сбербанк" in r.answer and "Структуры Игоря Кима" not in r.answer
+    # «какие компании купили банки» — банк предмет, это отрасль «Банки»
+    assert ar.route("Какие компании купили банки в 2024 году?", idx).buyer_kind is None
+
+
+def test_colloquial_company_names(idx):
+    """№92: «Сбер» — Сбербанк; Вайлдберриз / WB / RWB / РВБ — ООО «РВБ»; в
+    ответе — сколько сделок всего, а не только показанные строки."""
+    r = ar.retrieve("Какие сделки были у Сбера?", idx=idx)
+    assert r.intent == "company" and r.subject == "Сбербанк"
+    n = len(idx.company_deals["g28ff15bb"])
+    assert f" {n} " in r.answer and f"…и ещё {n - ar.MAX_LISTED}" in r.answer
+    for q in ("Сделки Вайлдберриз", "Что купил WB?", "Сделки RWB в 2025 году", "Какие сделки у РВБ?",
+              "Сравни Ozon и Wildberries"):
+        it = ar.route(q, idx)
+        assert "g549ab474" in ([it.company_id] + it.company_ids), q
+    for q, cid in (("Сделки ВТБ", "gcafc31dc"), ("Что покупал Яндекс?", "yandex"), ("сделки Норникеля", "g2f93d858")):
+        assert ar.route(q, idx).company_id == cid, q
+    # «IPO на Мосбирже» — биржа площадка, а не сторона
+    assert ar.route("Какие IPO были на Мосбирже в 2024 году?", idx).kind == "theme"
+
+
+def test_reverse_buyback_option_finds_the_foreign_exits(idx):
+    """№4: «опцион на обратный выкуп» — Mercedes-Benz, Hyundai, Michelin,
+    Faurecia среди сделок для модели; «обратного выкупа нет» не засчитывается."""
+    r = ar.retrieve("Какие сделки предусматривали опцион на обратный выкуп?", idx=idx)
+    assert r.intent == "term"
+    model = {d.id for d in r.docs}
+    assert {"mercedes", "g7bffe474", "g688aa290"} <= model, model
+    assert model & {"g282be68a", "g8de46135"}
+    assert "citibank" not in {d.id for d in r.pool}        # «Обратный выкуп банка не предусмотрен»
+    assert f"— {len(r.pool)}." in r.answer
+
+
+def test_advisors_for_a_kind_of_sale_are_counted_not_one_random_deal(idx):
+    """№65: «консультанты по продаже среднего бизнеса» — счёт консультантов
+    продавца, а не одна сделка BGP Capital по слову «среднего»."""
+    r = ar.retrieve("Какие консультанты сопровождают продажу среднего бизнеса?", idx=idx)
+    assert r.intent == "rank" and "BGP" not in r.answer
+    assert "стороне продавца" in r.answer and "не размечен" in r.answer
+    assert len(r.docs) > 3
+
+
+def test_ipo_sums_are_offering_sizes_not_prices_of_other_deals(idx):
+    """№18: суммы IPO — объём размещения у самих размещений; покупка ЦОДа
+    Ростелекомом (g11d6e0bc) темы IPO больше не несёт."""
+    r = ar.retrieve("Какие IPO прошли в 2024–2025 годах и на какие суммы?", idx=idx)
+    assert r.intent == "theme" and "объём размещения" in r.answer
+    assert "g11d6e0bc" not in r.answer and "g11d6e0bc" not in {d.id for d in r.pool}
+    assert ar._is_offering(r.docs[0])
+    for did in ("g11d6e0bc", "gdf93c62d", "g676504a3", "gdde6bef5"):
+        assert "IPO / SPO" not in idx.by_id[did].themes, did
+
+
+def test_search_answer_says_how_many_were_found(idx):
+    """Сводка называет, сколько найдено всего, — чтобы модель не писала «это
+    все» под частью списка."""
+    r = ar.retrieve("Расскажи про сделки с кофейнями", idx=idx)
+    assert r.intent == "search" and f"— {len(r.pool)}" in r.answer
