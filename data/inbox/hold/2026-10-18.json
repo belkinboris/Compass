@@ -2,17 +2,17 @@
  "made": "2026-10-18",
  "drafts": [
   {
-   "draft_id": "d49874640",
-   "title": "Аукционный дом рассказал о спросе на предметы искусства из России",
+   "draft_id": "d46376537",
+   "title": "В Российском регионе продают квартиры за копейки из-за страха радиации",
    "date": "2026-10-18",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261018/iskusstvo-2125218659.html"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/18/v-rossijskom-regione-prodayut-kvartiry-za-kopejki-iz-za-straha-radiaczii"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -27,35 +27,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28524501",
-   "title": "Квадратные метры в избытке: кто купит все новостройки",
-   "date": "2026-10-18",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/18/kvadratnye-metry-v-izbytke-kto-kupit-vse-novostrojki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "все новостройки",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "все новостройки",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
