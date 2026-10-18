@@ -782,7 +782,9 @@ class Intent:
     rank: str | None = None                            # law | invest | advisors | industries | buyers
     wants_price: bool = False                          # «за сколько», «во сколько», «по какой цене»
     buyer_kind: str | None = None                      # "bank" — «банки-покупатели» (№80)
-    role: str | None = None                            # "buyer" | "seller" — «что покупала S8 Capital» (№27)
+    role: str | None = None                            # "buyer" | "seller" — «что покупала S8 Capital» (№27);
+                                                       # "object" — компанию продают («продажу Яндекса», №43)
+    finance: bool = False                              # «какая выручка у ВкусВилла» — отчётность (№77)
 
     def __post_init__(self):
         if self.span is None and self.year:
@@ -801,7 +803,8 @@ PREP_WORDS = re.compile(r"готовлюсь\s+к\s+(?:встрече|собес
 PRICE_WORDS = re.compile(
     r"за\s+сколько|во\s+сколько|сколько\s+(?:(?:может|могут|будет|бы)\s+)?(?:сто[ия]\w*|заплатил\w*|отдал\w*|выручил\w*)"
     r"|по\s+как(?:ой|ую)\s+цен|за\s+какую\s+(?:сумму|цену)|на\s+как(?:ую|ие)\s+сумм|как(?:ая|ой|ую)\s+(?:была\s+)?(?:цена|сумм|оценк)"
-    r"|\bоцени\w*|\bоценк\w*|стоимост\w*|\bцен[аыеу]\b|мультипликатор", re.I)
+    r"|\bоцени\w*|\bоценк\w*|стоимост\w*|\bцен[аыеу]\b|мультипликатор"
+    r"|сумм\w*\s+(?:известн|назван|раскрыт)|(?:известн|назван|раскрыт)\w*\s+сумм", re.I)
 COUNT_STRICT = re.compile(r"сколько\s+(?:\w+\s+){0,2}сделок|сколько\s+(?:\w+\s+)?(?:было|прошло|закрыл\w*|состоял\w*)|число\s+сделок|количеств", re.I)
 STATUS_FAILED = re.compile(r"не\s+состоял\w*|не\s+состоит\w*|сорвал\w*|сорва\w*|отмен\w*|не\s+закрыл\w*\s+и\s+не|провал\w*|расторг\w*|не\s+удал\w*", re.I)
 STATUS_OPEN = re.compile(r"обсужда\w*|переговор\w*|не\s+закрыт\w*|ещ[её]\s+не\s+закрыт\w*|незакрыт\w*|в\s+процессе|не\s+завершен\w*|готовящ\w*", re.I)
@@ -813,7 +816,11 @@ STATUS_LABELS = {"closed": "закрытые", "open": "ещё не закрыт
 # или в подсчёт по 12 случайным сделкам (№17, 58, 74, 75, 81).
 RANK_WORDS = re.compile(
     r"сам\w*\s+активн|наиболее\s+активн|активне\w*|чаще\s+(?:всего|других|остальных)|больше\s+всего\s+сделок"
-    r"|рейтинг|лидер\w*|\bтоп\b|топ[- ]?\d+|\bраст[уё]т|кто\s+(?:больше|чаще)\s+всех|самы\w*\s+(?:частые|популярн\w*)|по\s+числу\s+сделок", re.I)
+    r"|рейтинг|лидер\w*|\bтоп\b|топ[- ]?\d+|\bраст[уё]т|кто\s+(?:больше|чаще)\s+всех|самы\w*\s+(?:частые|популярн\w*)|по\s+числу\s+сделок"
+    # «Как вырастить свой бизнес через покупки?» — модель отказывала как не
+    # вопросу о сделках (№90); отвечаем теми, кто растёт покупками.
+    r"|\bвыра(?:стить|щивать)\b.{0,40}\bчерез\s+(?:покупк|приобретени|поглощени|m&a|сделк)"
+    r"|\bрост\w*\s+через\s+(?:покупк|приобретени|поглощени|m&a)", re.I)
 RANK_SUBJECTS = (
     ("law", re.compile(r"юрфирм|юридическ\w*\s+(?:фирм|компани|консультант|бюро)|юрист|адвокат|law\s*firm", re.I)),
     ("invest", re.compile(r"инвестбанк|инвестиционн\w*\s+(?:банк|консультант)|финансов\w*\s+(?:консультант|советник)|банк\w*[- ]консультант|организатор", re.I)),
@@ -893,8 +900,14 @@ COUNT_WORDS = re.compile(r"сколько|как\s+много|число\s+сд�
 # «Что нового на рынке за последнюю неделю» уходило в компанию «Новосталь-М»:
 # слово «нового» совпало с её именем по корню «новог». Маршрута «что свежего»
 # не было вовсе, поэтому вопрос ловился первым, кто похож по буквам.
-RECENT_WORDS = re.compile(r"что\s+нового|новые\s+сделки|свеж\w*\s+сделк|что\s+появилось"
-                          r"|последн\w*\s+(недел|дн|месяц)|за\s+(недел|месяц)", re.I)
+RECENT_WORDS = re.compile(r"что\s+нового|новые\s+сделки|свеж\w*\s+(?:сделк|новост)|что\s+появилось"
+                          r"|последн\w*\s+(недел|дн|месяц)|за\s+(недел|месяц)"
+                          r"|(?:на|за)\s+(?:эт\w+|текущ\w+|прошл\w+|минувш\w+)\s+(?:недел|месяц)", re.I)
+# «Какие новости о сделках M&A вышли на этой неделе?» уходило в поиск по
+# слову «вышли» (сделки «вышли из капитала» 2024–2025 годов), и модель в
+# режиме «по интернету» писала, что новых сделок нет с апреля 2024 (№19
+# третьей проверки). «Новости» без имени компании — то же «что нового».
+NEWS_WORDS = re.compile(r"\bновост\w*|\bновенько\w*|\bсвежак\w*", re.I)
 RECENT_MONTH = re.compile(r"месяц", re.I)
 # «Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону теряло молча.
 COMPARE_WORDS = re.compile(r"сравн|в\s+сравнении|против|или\s+лучше|кто\s+из\s+них|обе\s+компан", re.I)
@@ -906,12 +919,39 @@ BANK_BUYER = re.compile(
     rf"{_BANK}[- ]покупател\w*|{_BANK}\s+(?:\w+\s+){{0,3}}?(?:покупа\w*|купил\w*|купят|приобрета\w*|приобр[её]л\w*"
     rf"|скупа\w*|выступа\w*\s+(?:в\s+рол\w+\s+)?покупател\w*)|покупател\w*\s*(?:[-—–:]\s*|(?:был\w*|явля\w*|выступа\w*)\s+)?{_BANK}",
     re.I)
+# Отчётность компании (выручка, прибыль) — не сделки: ассистент её не видит,
+# она на странице компании по данным ФНС. «Какая выручка у ВкусВилла за 2025
+# год?» отвечало «нет сделок за 2025 год», и модель — «нет информации», не
+# подсказав, где она есть (№77 третьей проверки).
+FINANCE_WORDS = re.compile(r"выручк\w*|прибыл\w*|убыт(?:ок|к)\w*|\bebitda\b|отч[её]тност\w*|финансов\w*\s+(?:показател|результат|отч)", re.I)
 # Роль компании в вопросе: «Что покупала S8 Capital?» — её покупки, а
 # продажи отдельно и подписаны (№27). «Кто купил Ситибанк?» — роль у
 # спрошенного «кто», а названная компания — предмет: роль не ставится.
 ROLE_BUY = re.compile(r"\b(?:покупал\w*|купил\w*|покупает|покупают|покупк\w+|приобрета\w*|приобр[её]л\w*|скупа\w*)", re.I)
 ROLE_SELL = re.compile(r"\b(?:продавал\w*|продал\w*|прода[её]т|продают|продаж\w*|избавил\w*|избавля\w*)", re.I)
 ROLE_WHO = re.compile(r"\bкто\b|\bу\s+кого\b|\bкому\b|\bкого\b", re.I)
+
+
+# «Кто консультировал продажу Яндекса консорциуму?», «кто купил Ситибанк»:
+# названная компания — то, что продают, а не покупатель. Сделка, где Яндекс —
+# предмет, стояла в списке компании пятнадцатой, за его покупками, и до модели
+# не доходила; модель отвечала «ничего не нашёл» (№43 третьей проверки).
+OBJECT_OF_DEAL = re.compile(
+    r"(?:\bпродаж\w*|\bпокупк\w*|\bприобретени\w*|\bвыкуп\w*|\bпоглощени\w*|\bкто\s+(?:\w+\s+)?(?:купил\w*|"
+    r"приобр[её]л\w*|покупа\w*|продал\w*|выкупил\w*))\s+(?:(?:доли|долей|акций|пакета|бизнеса|компании|актив\w*)\s+)?"
+    r"«?([a-zа-я0-9][a-zа-я0-9.-]*)", re.I)
+
+
+def _object_of_deal(question: str, matched: list[str]) -> bool:
+    """Названная компания стоит сразу за «продажу / покупку / кто купил» и не в
+    творительном падеже («покупку Яндексом» — Яндекс покупатель)."""
+    for m in OBJECT_OF_DEAL.finditer(norm(question)):
+        word = m.group(1)
+        if re.search(r"(?:ом|ем|ём|ами|ями)$", word) and len(word) > 5:
+            continue
+        if any(word.startswith(t) or stem(word) == t or t.startswith(stem(word)) for t in matched if len(t) >= 2):
+            return True
+    return False
 
 
 def _detect_role(question: str) -> str | None:
@@ -925,6 +965,22 @@ def _detect_role(question: str) -> str | None:
     return None
 
 
+# Слова, которые начинаются с отраслевой подсказки, но отрасль не называют:
+# «медианная сумма» читалась как отрасль «Медиа» и отвечала «в Медиа нет
+# сделок с ценой» (№50 третьей проверки), «участвовал» — как «участок»
+# (недвижимость), «тариф» — как «тара», «портфель» — как «порт».
+HINT_FALSE_PREFIXES = ("медиан", "участв", "участник", "участи", "тариф", "тарел", "портфел",
+                       "портрет", "портал", "газет")
+
+
+def _hint_hit(token: str, hint: str) -> bool:
+    """Слово вопроса — отраслевая подсказка: короткая (до трёх знаков) — целым
+    словом, длинная — началом слова, кроме слов из HINT_FALSE_PREFIXES."""
+    if len(hint) <= 3:
+        return token == hint
+    return token.startswith(hint) and not any(token.startswith(x) for x in HINT_FALSE_PREFIXES)
+
+
 def _detect_industry(question: str, idx: Index) -> str | None:
     q_tokens = tokens(question)
     q_norm = " ".join(q_tokens)
@@ -936,10 +992,8 @@ def _detect_industry(question: str, idx: Index) -> str | None:
             hn = norm(h)
             if " " in hn:
                 hit = hn in q_norm
-            elif len(hn) <= 3:
-                hit = hn in q_tokens
             else:
-                hit = any(t.startswith(hn) for t in q_tokens)
+                hit = any(_hint_hit(t, hn) for t in q_tokens)
             if hit:
                 return ind
     return None
@@ -1008,13 +1062,18 @@ def _detect_themes(question: str) -> list[str]:
 
 def _detect_status(question: str) -> str | None:
     q = norm(question)
+    found = []
     if STATUS_FAILED.search(q):
-        return "failed"
+        found.append("failed")
     if STATUS_OPEN.search(q):
-        return "open"
-    if STATUS_CLOSED.search(q):
-        return "closed"
-    return None
+        found.append("open")
+    if any(not q[max(0, m.start() - 3):m.start()].endswith("не ") for m in STATUS_CLOSED.finditer(q)):
+        found.append("closed")
+    # «Какие закрыты, а какие ещё обсуждаются?» — человек просит разбивку по
+    # этапам, а не один этап (№95 третьей проверки): фильтра нет.
+    if len(found) > 1:
+        return None
+    return found[0] if found else None
 
 
 def _status_ok(doc: Doc, status: str | None) -> bool:
@@ -1362,7 +1421,7 @@ def _industry_covers(token: str) -> bool:
             hn = norm(h)
             if " " in hn:
                 continue
-            if (tn == hn) if len(hn) <= 3 else tn.startswith(hn):
+            if _hint_hit(tn, hn):
                 return True
     return False
 
@@ -1399,6 +1458,9 @@ ABOUT_WORDS = [re.compile(rx) for rx in (
     r"\bпольз(?:а|у|ы)\s+(?:от|для)\s+(?:вас|тебя|сервиса|компаса|сайта|ассистента|меня)\b",
     r"^(?:а\s+)?(?:в\s+чем|какая)\s+(?:тут\s+|здесь\s+)?польза\s*[?!.]*$",
     r"\bкак\s+(?:тобой|вами|сервисом|компасом|сайтом|ассистентом)\s+пользоваться",
+    # «Как пользоваться Компасом?» — отказ модели вместо рассказа о сервисе (№88).
+    r"\bкак\s+(?:мне\s+)?(?:пользоваться|работать)\s+(?:с\s+)?(?:«?компас\w*»?|сервис\w*|сайт\w*|ассистент\w*"
+    r"|платформ\w*|тобой|вами|этим\s+(?:сервисом|сайтом))",
     r"^(?:а\s+)?как\s+(?:этим\s+|здесь\s+|тут\s+)?пользоваться\s*[?!.]*$",
     r"\bрасскажи(?:те)?\s+(?:о|про)\s+(?:себе|сервисе|компасе|сайте|проекте|ваших\s+возможностях|свои\s+возможности)\b",
     r"\bвозможност\w*\s+(?:сервиса|компаса|ассистента|сайта|платформы)\b",
@@ -1481,7 +1543,8 @@ def route(question: str, idx: Index | None = None) -> Intent:
     region = _detect_region(question)
     wants_adv = bool(ADVISOR_WORDS.search(question))
     wants_price = bool(PRICE_WORDS.search(question))
-    cond = dict(span=span, year=year, industry=industry, themes=themes, theme=theme, term_rxs=term_rxs,
+    finance = bool(FINANCE_WORDS.search(question))
+    cond = dict(finance=finance, span=span, year=year, industry=industry, themes=themes, theme=theme, term_rxs=term_rxs,
                 status=status, region=region, terms=terms, wants_price=wants_price, buyer_kind=buyer_kind,
                 role=_detect_role(question))
     # Две фирмы в одном вопросе — обе («Сравни АЛРУД и ЕПАМ», №5).
@@ -1508,10 +1571,22 @@ def route(question: str, idx: Index | None = None) -> Intent:
         return Intent("advisor", firm=firm, wants_advisors=True, **cond)
     # «Что нового» — раньше всего: иначе слово «нового» узнаётся компанией
     # «Новосталь-М» по корню, и человек получает ответ не о том.
-    if RECENT_WORDS.search(question) and not span:
-        return Intent("recent", days=30 if RECENT_MONTH.search(question) else 7,
-                      industry=industry, terms=terms)
     company, matched = (found if found else (None, []))
+    if company and matched and all(NEWS_WORDS.match(t) for t in matched):
+        company = None                      # «Новости M&A» — не «Новосталь-М»
+    news = False
+    if NEWS_WORDS.search(question) and not company:
+        # «Новости M&A» — что нового; «новости о Карпове» — поиск по имени.
+        rest = [t for t in terms if not NEWS_WORDS.match(t)
+                and not re.match(r"сделк|рынк|рынок|m&a|ma$|слияни|поглощени|вышл|появил|недел|месяц|свеж|последн", t)]
+        news = not (rest and _search_is_specific(Intent("search", terms=rest), search(rest, idx), idx))
+    if (RECENT_WORDS.search(question) or news) and not span:
+        # Названная компания сужает свежие сделки до её сделок: «что нового у
+        # Яндекса за неделю» — не лента всего рынка.
+        recent_company = company if company and (len(set(matched)) >= 2 or any(
+            t in evident or stem(t) in evident for t in matched)) else None
+        return Intent("recent", days=30 if RECENT_MONTH.search(question) else 7,
+                      industry=industry, terms=terms, company_id=recent_company)
     # Компанию узнали по слову, которое одновременно называет отрасль, тему
     # или регион («фарм», «банк», «агро»), и признака имени у него нет — это
     # вопрос про отрасль, а не про компанию. Имя из нескольких слов,
@@ -1536,6 +1611,8 @@ def route(question: str, idx: Index | None = None) -> Intent:
     if is_count and not company:
         return Intent("count", **cond)
     if company:
+        if not cond["role"] and _object_of_deal(question, matched):
+            cond["role"] = "object"
         return Intent("company", company_id=company, wants_advisors=wants_adv, matched=matched, **cond)
     if term_rxs:
         return Intent("term", term_rx=term_rxs[0], **cond)
@@ -1919,9 +1996,11 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
         scope = _scope_text(Intent("filter", span=intent.span, status=intent.status,
                                    themes=themes if narrowed else [],
                                    term_rxs=intent.term_rxs if narrowed else []), industry=False)
+    fin = ("Выручку и прибыль ассистент не видит: отчётность по данным ФНС — на "
+           f"[странице компании](#/companies/{cid}), если она там есть." if intent.finance else "")
     if not docs:
-        return Retrieval("company", f"У компании [{name}](#/companies/{cid}) в «Компасе» нет сделок"
-                         + scope + ".", [], name)
+        text = f"У компании [{name}](#/companies/{cid}) в «Компасе» нет сделок" + scope + "."
+        return Retrieval("company", (fin + "\n" + text) if fin else text, [], name)
     n = len(docs)
     # «Сделка Яндекса с Uber» — вопрос про одну сделку компании, а не про
     # весь список: слова вопроса сверх имени компании отбирают подходящие.
@@ -1938,7 +2017,13 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
                 if total == 1 else f"Всего у компании [{name}](#/companies/{cid}) в «Компасе» {total} "
                 f"{_plural(total, 'сделка', 'сделки', 'сделок')}{period_text(intent.span)}.")
         return Retrieval("company", single.answer + "\n" + tail, docs, name, pool=docs)
-    if intent.role and not (picked and len(picked) < n):
+    if intent.role == "object":
+        words = [t for t in intent.terms if t not in intent.matched and not t.isdigit()
+                 and not any(same_word(t, s) for s in name_stems)]
+        own = _object_answer(intent, idx, cid, name, docs, words, scope)
+        if own:
+            return own
+    elif intent.role and not (picked and len(picked) < n):
         own = _role_answer(intent, idx, cid, name, docs, scope)
         if own:
             return own
@@ -1983,6 +2068,8 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
         priced = [d for d in docs if has_fact(d.sum_text)]
         if priced:
             lines.append("Суммы: " + "; ".join(f"{d.title} — {d.sum_text}" for d in priced[:MAX_LISTED]) + ".")
+    if fin:
+        lines.insert(0, fin)
     return Retrieval("company", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], name, pool=docs)
 
 
@@ -1995,6 +2082,57 @@ def _roles_text(docs: list[Doc], cid: str) -> str:
     order = ("покупатель", "продавец", "предмет сделки", "участник")
     bits = [f"{r} — {cnt[r]}" for r in order if cnt.get(r)]
     return f" ({', '.join(bits)})" if bits and bits != [f"участник — {len(docs)}"] else ""
+
+
+def _object_answer(intent: Intent, idx: Index, cid: str, name: str, docs: list[Doc], extra: list[str],
+                   scope: str) -> Retrieval | None:
+    """«Кто консультировал продажу Яндекса консорциуму?» — сделки, где
+    компания продавец или предмет, первыми; среди них — где есть другие
+    слова вопроса («консорциум»), даже обычные. Одна такая — сводка по ней."""
+    sold = [d for d in docs if _role(d, cid) in ("предмет сделки", "продавец")]
+    if not sold:
+        return None
+
+    def hits(d: Doc) -> int:
+        text = norm(d.title + " " + " ".join([d.buyer, d.seller, d.target, d.asset]))
+        words = set(tokens(text))
+        return sum(1 for t in extra if len(t) >= 4 and any(w.startswith(t[:max(5, len(t) - 2)]) for w in words))
+
+    best = max(hits(d) for d in sold)
+    top = [d for d in sold if best and hits(d) == best]
+    # предмет — раньше продавца: «продажа Яндекса» — это продажа самого Яндекса
+    sold.sort(key=lambda d: (-hits(d), _role(d, cid) != "предмет сделки"))
+    rest = [d for d in docs if d not in sold]
+    n = len(docs)
+    total = (f"Всего у компании [{name}](#/companies/{cid}) в «Компасе» {n} "
+             f"{_plural(n, 'сделка', 'сделки', 'сделок')}{scope}.")
+    if len(top) == 1:
+        single = _answer_deal(top[0])
+        others = [d for d in sold if d is not top[0]]
+        tail = [total]
+        if others:
+            tail.insert(0, "Другие сделки, где компанию продавали или она продавала свой бизнес: "
+                        + "; ".join(_link(d) for d in others[:4]) + ("…" if len(others) > 4 else "") + ".")
+        ordered = [top[0]] + others + rest
+        return Retrieval("company", single.answer + "\n" + "\n".join(tail), ordered[:MAX_DEALS_FOR_MODEL], name,
+                         pool=ordered)
+    k = len(sold)
+    shown = top if top and len(top) < k else sold
+    if shown is top:
+        lines = [f"По вопросу подходят {len(top)} из {k} сделок, где [{name}](#/companies/{cid}) — "
+                 f"предмет сделки или продавец{scope}:"]
+    else:
+        lines = [f"Сделки, где [{name}](#/companies/{cid}) — предмет сделки или продавец{scope}: {k}:"]
+    lines += [_role_line(d, cid) for d in shown[:MAX_LISTED]]
+    if len(shown) > MAX_LISTED:
+        lines.append(f"…и ещё {len(shown) - MAX_LISTED}.")
+    if intent.wants_advisors:
+        stats = _advisor_stats(sold, idx)
+        lines.append("Консультанты, названные в этих сделках: " + ", ".join(f"{f} ({c})" for f, c in stats) + "."
+                     if stats else "Консультанты в этих сделках публично не назывались.")
+    lines.append(total)
+    ordered = sold + rest
+    return Retrieval("company", "\n".join(lines), ordered[:MAX_DEALS_FOR_MODEL], name, pool=ordered)
 
 
 def _role_answer(intent: Intent, idx: Index, cid: str, name: str, docs: list[Doc], scope: str) -> Retrieval | None:
@@ -2065,6 +2203,15 @@ def _list_answer(kind: str, intent: Intent, idx: Index, pool: list[Doc], head: s
                          + (" и другие." if len({d.buyer for d in pool}) > 8 else "."))
     if intent.wants_price:
         lines += _price_lines(pool, intent)
+    # Лоты, выставленные на торги и ещё не купленные, на сайте не сделки. В
+    # недвижимости их больше половины свежих карточек, и «сделки в девелопменте
+    # в 2026 году» показывали шесть лотов подряд (№79 третьей проверки):
+    # первыми — сделки, лоты — следом и с пометкой.
+    lots = [d for d in pool if d.listing]
+    if lots and len(lots) < n and "Продажа с торгов" not in intent.themes:
+        lines.append(f"Из них {len(lots)} — объекты, выставленные на торги и ещё не проданные; "
+                     "они идут после сделок.")
+        pool = [d for d in pool if not d.listing] + lots
     lines.append("Последние сделки:" if n > MAX_LISTED else "Сделки:")
     lines += [_line(d) for d in pool[:MAX_LISTED]]
     if n > MAX_LISTED:
@@ -2226,13 +2373,18 @@ def _answer_recent(intent: Intent, idx: Index) -> Retrieval:
     pool = [d for d in idx.docs if str((d.raw or {}).get("added") or "") >= edge]
     if intent.industry:
         pool = [d for d in pool if intent.industry in d.industries]
-    pool.sort(key=lambda d: str((d.raw or {}).get("added") or ""), reverse=True)
     scope = f" в отрасли «{intent.industry}»" if intent.industry else ""
-    period = "неделю" if days <= 7 else "месяц"
+    if intent.company_id:
+        own = set(id(d) for d in idx.company_deals.get(intent.company_id) or [])
+        pool = [d for d in pool if id(d) in own]
+        cid = intent.company_id
+        scope = f" у компании [{_company_name(idx.companies, cid)}](#/companies/{cid})"
+    pool.sort(key=lambda d: str((d.raw or {}).get("added") or ""), reverse=True)
+    period = "последнюю неделю" if days <= 7 else "последний месяц"
     if not pool:
-        return Retrieval("recent", f"За последнюю {period}{scope} в «Компасе» новых сделок не появилось.", [], None)
+        return Retrieval("recent", f"За {period}{scope} в «Компасе» новых сделок не появилось.", [], None)
     n = len(pool)
-    lines = [f"За последнюю {period}{scope} в «Компасе» появилось {n} "
+    lines = [f"За {period}{scope} в «Компасе» появилось {n} "
              f"{_plural(n, 'сделка', 'сделки', 'сделок')}:"]
     lines += [_line(d) for d in pool[:MAX_LISTED]]
     if n > MAX_LISTED:
@@ -2260,6 +2412,9 @@ def _answer_compare(intent: Intent, idx: Index) -> Retrieval:
         head = (f"**[{name}](#/companies/{cid})** — {n} "
                 f"{_plural(n, 'сделка', 'сделки', 'сделок')}{period}" + _roles_text(own, cid) + ".")
         block = [head, "Последняя: " + _role_line(own[0], cid).lstrip("- ")]
+        if 1 < n <= 3:
+            # Немного сделок — все: из двух сделок Ozon модель называла одну (№32).
+            block.append(("Другая: " if n == 2 else "Другие: ") + "; ".join(_link(d) for d in own[1:]) + ".")
         # Крупнейшая — по цене, которую назвали стороны, среди состоявшихся
         # покупок и продаж (без обсуждаемых, выкупа своих акций,
         # финансирования); роль компании — рядом. До второй проверки ответ
@@ -2278,6 +2433,15 @@ def _answer_compare(intent: Intent, idx: Index) -> Retrieval:
         return Retrieval("compare", None, [], None)
     names = " и ".join(_company_name(idx.companies, c) for c in intent.company_ids)
     lines = [f"{names} — рядом по тому, что есть в «Компасе»:"] + blocks
+    # Во сколько раз больше — готовой цифрой: модель писала «в 10 раз» при
+    # 14 сделках против 2 (№32 третьей проверки).
+    counts = [(c, len(_filter(idx.company_deals.get(c) or [], intent.span, None))) for c in intent.company_ids]
+    if len(counts) == 2 and all(k for _, k in counts) and counts[0][1] != counts[1][1]:
+        (a, ka), (b, kb) = sorted(counts, key=lambda x: -x[1])
+        ratio = ka / kb
+        times = (f"{round(ratio)}" if abs(ratio - round(ratio)) < 0.05 else f"{ratio:.1f}".replace(".", ","))
+        word = "раза" if times in ("2", "3", "4") or "," in times else "раз"
+        lines.append(f"Сделок у {_company_name(idx.companies, a)} больше: {ka} против {kb} — в {times} {word}.")
     lines.append("Сравнение строится по сделкам, которые мы нашли в открытых источниках; "
                  "оно не полно и не является оценкой компаний. "
                  "Показатели отчётности — на [экране сравнения](#/compare).")
@@ -2740,7 +2904,9 @@ def _answer_entity(context_type: str | None, context_id: str | None, intent: Int
         return None
     if context_type == "company" and context_id in idx.companies:
         return _answer_company(Intent("company", company_id=context_id, span=intent.span, status=intent.status,
-                                      wants_advisors=intent.wants_advisors, terms=intent.terms), idx)
+                                      wants_advisors=intent.wants_advisors, terms=intent.terms,
+                                      themes=intent.themes, term_rxs=intent.term_rxs, region=intent.region,
+                                      wants_price=intent.wants_price, role=intent.role), idx)
     if context_type == "advisor":
         firm = next((f for f in idx.firms if f.id == context_id), None)
         if firm:
@@ -2753,6 +2919,68 @@ def _answer_entity(context_type: str | None, context_id: str | None, intent: Int
         doc = idx.by_id.get(context_id)
         if doc:
             return _answer_deal(doc)
+    return None
+
+
+# Вопрос называет страницу, с которой задан, а не другое имя: «какие сделки
+# КОМПАНИИ закрыты» на странице «Яндекса» уходил в поиск по словам «закрыты»
+# и «сумма» и перечислял сделки Qiwi, «Открытия», KFC (№95 третьей проверки);
+# «какие сделки Сбербанка вела ЭТА ФИРМА» на странице Orion давал все сделки
+# Сбербанка вместо двух, где консультировал Orion (№73).
+PAGE_REF = re.compile(
+    r"\b(?:эт(?:а|ой|у|ою|им|их|ими)|данн\w+)\s+(?:компани\w*|фирм\w*|организаци\w*|отрасл\w*|консультант\w*)"
+    r"|\bкомпани(?:я|и|ю|ей)\b|\bфирм(?:а|ы|у|ой)\b|\bу\s+не[её]\b|\bу\s+него\b|\bе[её]\s+сделк\w*|\bего\s+сделк\w*"
+    r"|\bв\s+этой\s+отрасли\b", re.I)
+FIRM_PAGE_REF = re.compile(r"\bфирм\w*|\bконсультант\w*|\bвел[аио]?\b|\bсопровожда\w*|\bконсультир\w*", re.I)
+PAGE_KINDS = ("search", "filter", "count", "theme", "term")
+
+
+def _answer_firm_company(firm: Firm, cid: str, intent: Intent, idx: Index) -> Retrieval | None:
+    """Сделки компании, где консультантом была фирма страницы: «Какие сделки
+    Сбербанка вела эта фирма и сколько они длились?» на странице Orion."""
+    own = idx.company_deals.get(cid) or []
+    both = [d for d in _apply(intent, idx.firm_deals.get(firm.id) or [], industry=False) if d in own]
+    if not both:
+        return None
+    both.sort(key=lambda d: d.date, reverse=True)
+    name = _company_name(idx.companies, cid)
+    k = len(both)
+    lines = [f"Сделки компании [{name}](#/companies/{cid}), где консультантом была "
+             f"[{firm.name}](#/advisors/{firm.id}) ({firm.kind_label}){_scope_text(intent, industry=False)}: {k}."]
+    for d in both[:MAX_LISTED]:
+        lines.append(_role_line(d, cid))
+        events = _events(d)
+        if events:
+            lines.append("  Этапы: " + "; ".join(events) + ".")
+        roles = [r for r, n in d.advisor_roles if firm.rx.search(n)]
+        if roles and roles[0]:
+            lines.append(f"  Роль фирмы: {roles[0].lower()}.")
+    n = len(own)
+    lines.append(f"Всего у компании в «Компасе» {n} {_plural(n, 'сделка', 'сделки', 'сделок')} — "
+                 f"на [странице компании](#/companies/{cid}).")
+    rest = sorted([d for d in own if d not in both], key=lambda d: d.date, reverse=True)
+    return Retrieval("company", "\n".join(lines), (both + rest)[:MAX_DEALS_FOR_MODEL], name, pool=both)
+
+
+def _page_answer(question: str, context_type: str | None, context_id: str | None, intent: Intent,
+                 idx: Index) -> Retrieval | None:
+    """Вопрос, который ссылается на страницу («компании», «эта фирма»), а
+    другого имени не называет, — ответ о сущности страницы с условиями
+    вопроса (статус, год, тема, цена)."""
+    if not context_type or not context_id:
+        return None
+    if context_type == "advisor" and intent.kind == "company" and intent.company_id \
+            and FIRM_PAGE_REF.search(question):
+        firm = next((f for f in idx.firms if f.id == context_id), None)
+        if firm:
+            return _answer_firm_company(firm, intent.company_id, intent, idx)
+    if intent.kind in PAGE_KINDS and not intent.company_id and not intent.firm and PAGE_REF.search(question) \
+            and context_type in ("company", "advisor", "industry"):
+        terms = [t for t in intent.terms if not re.match(r"состо|закр|заверш|обсужд|сорв|отмен|сделк|компан|фирм", t)]
+        own_intent = Intent("empty", span=intent.span, status=intent.status, wants_advisors=intent.wants_advisors,
+                            terms=terms, themes=intent.themes, term_rxs=intent.term_rxs, region=intent.region,
+                            wants_price=intent.wants_price, role=intent.role)
+        return _answer_entity(context_type, context_id, own_intent, idx)
     return None
 
 
@@ -2909,6 +3137,12 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
     отвечал «в Компасе нет сделки Яндекс — Boxberry», сославшись на неё
     репликой раньше, — поиск шёл только по текущей фразе."""
     idx = idx or get_index()
+    # Сайт шлёт context_type="general", когда вопрос задан не со страницы
+    # сущности (главная, экран ассистента). Это то же, что «контекста нет»:
+    # условие `not context_type` его не узнавало, и одно слово «сделки»
+    # отвечало «ничего не нашёл» (№91 третьей проверки).
+    if context_type in (None, "", "general") or not context_id:
+        context_type, context_id = None, None
     # ПОДГОТОВКА К ВСТРЕЧЕ ИЛИ СОБЕСЕДОВАНИЮ — всегда про сущность страницы.
     # 5 октября 2026 подготовка к встрече со Сбербанком ушла в маршрут
     # «консультант»: в заготовке было слово «консультантами», Сбербанк есть и
@@ -2959,6 +3193,9 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         # Одно слово «сделки» — показываем, что появилось за месяц, а не
         # «ничего не найдено» (№91).
         return _answer_recent(Intent("recent", days=30), idx)
+    page = _page_answer(question, context_type, context_id, intent, idx)
+    if page:
+        return page
     if intent.kind == "empty":
         if about_parties:
             own = _answer_deal_parties(context_id, intent.span, idx)

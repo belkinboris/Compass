@@ -891,3 +891,128 @@ def test_search_answer_says_how_many_were_found(idx):
     все» под частью списка."""
     r = ar.retrieve("Расскажи про сделки с кофейнями", idx=idx)
     assert r.intent == "search" and f"— {len(r.pool)}" in r.answer
+
+
+# ---------- третья проверка на 100 вопросах (18 октября 2026) ----------
+
+def test_median_is_not_the_media_industry(idx):
+    """№50: «медианная сумма» — медиана по всем сделкам, а не отрасль «Медиа»;
+    «участвовал» — не «участок» (недвижимость)."""
+    it = ar.route("Какая медианная сумма сделки в 2025 году?", idx)
+    assert it.kind == "avg" and it.industry is None
+    r = ar.retrieve("Какая медианная сумма сделки в 2025 году?", "general", None, idx)
+    assert "медиана" in r.answer and "Медиа»" not in r.answer
+    assert ar._detect_industry("В каких сделках участвовал Сбербанк?", idx) is None
+    assert ar._detect_industry("Какие сделки были в медиа?", idx) == "Медиа"
+    assert ar._detect_industry("Продажи медиахолдингов", idx) == "Медиа"
+    assert ar._detect_industry("Кто купил земельный участок?", idx) == "Недвижимость"
+
+
+def test_general_page_is_the_same_as_no_page(idx):
+    """№91: сайт всегда шлёт context_type="general"; одно слово «сделки» —
+    свежие сделки за месяц, а не «ничего не нашёл»."""
+    for ct in (None, "", "general"):
+        r = ar.retrieve("сделки", ct, None, idx)
+        assert r.intent == "recent" and r.docs, ct
+        assert r.answer.startswith("За последний месяц")
+
+
+def test_recent_news_go_to_whats_new_in_both_modes(idx):
+    """№19: «новости о сделках на этой неделе» — свежие сделки за неделю, а
+    не поиск по слову «вышли» (сделки 2024 года)."""
+    from datetime import date, timedelta
+    edge = (date.today() - timedelta(days=7)).isoformat()
+    week = [d for d in idx.docs if str(d.raw.get("added") or "") >= edge]
+    for q in ("Какие новости о сделках M&A вышли на этой неделе?", "Новости M&A", "Что было за прошлую неделю?"):
+        r = ar.retrieve(q, "general", None, idx)
+        assert r.intent == "recent", q
+        assert len(r.pool) == len(week), q
+    # Названная компания сужает свежие сделки до её сделок.
+    it = ar.route("Что нового у «Яндекса» за последний месяц?", idx)
+    assert it.kind == "recent" and it.company_id == "yandex"
+    # «Новости» с именем компании остаются вопросом о компании.
+    assert ar.route("Какие новости о сделках Сбербанка?", idx).kind == "company"
+
+
+def test_page_company_answers_a_question_that_points_at_it(idx):
+    """№95: со страницы «Яндекса» «какие сделки компании закрыты, а какие
+    обсуждаются, где известна сумма» — сделки Яндекса с разбивкой по этапам и
+    суммами, а не Qiwi, «Открытие» и KFC."""
+    q = "Какие сделки компании закрыты, а какие ещё обсуждаются? Где известна сумма?"
+    r = ar.retrieve(q, "company", "yandex", idx)
+    own = {d.id for d in idx.company_deals["yandex"]}
+    assert r.intent == "company" and r.docs and all(d.id in own for d in r.docs)
+    assert "По этапам:" in r.answer and "Суммы:" in r.answer
+    assert ar._detect_status(q) is None                      # оба этапа — без фильтра
+    assert ar._detect_status("Какие сделки ещё не закрыты?") == "open"
+    assert ar._detect_status("Какие сделки закрылись в 2024 году?") == "closed"
+    # Конкретное имя со страницы другой компании — по-прежнему ответ на вопрос.
+    r2 = ar.retrieve("Кто купил Ситибанк?", "company", "yandex", idx)
+    assert r2.docs[0].id == "citibank"
+
+
+def test_firm_page_question_about_a_company_is_their_common_deals(idx):
+    """№73: со страницы Orion «какие сделки Сбербанка вела эта фирма» —
+    только сделки Сбербанка, где консультировал Orion, с этапами."""
+    r = ar.retrieve("Какие сделки Сбербанка вела эта фирма и сколько они длились?", "advisor", "orion", idx)
+    common = {d.id for d in idx.firm_deals["orion"]} & {d.id for d in idx.company_deals["g28ff15bb"]}
+    assert common and {d.id for d in r.pool} == common
+    assert {d.id for d in r.docs[:len(common)]} == common
+    assert "Orion" in r.answer and "Сбербанк" in r.answer
+
+
+def test_sale_of_a_company_puts_the_deals_where_it_is_sold_first(idx):
+    """№43: «кто консультировал продажу Яндекса консорциуму» — сделка, где
+    Яндекс предмет (475 млрд ₽, консорциум), в ответе и первой для модели."""
+    q = "Кто консультировал продажу Яндекса консорциуму покупателей?"
+    assert ar.route(q, idx).role == "object"
+    r = ar.retrieve(q, "general", None, idx)
+    assert r.docs[0].id == "gd73fd825"
+    assert "Меллинг" in r.answer and "АЛРУД" in r.answer
+    # Яндекс — покупатель: роль «предмет» не ставится.
+    assert ar.route("Кто консультировал покупку Boxberry Яндексом?", idx).role != "object"
+    assert ar.route("Какие компании купил Яндекс?", idx).role == "buyer"
+    r2 = ar.retrieve("кто купил азбуку вкуса", "general", None, idx)
+    assert all(ar._role(d, "g52fa4c83") in ("предмет сделки", "продавец") for d in r2.pool[:2])
+
+
+def test_service_and_growth_questions(idx):
+    """№88: «Как пользоваться Компасом?» — рассказ о сервисе; №90: «как
+    вырастить бизнес через покупки» — самые активные покупатели."""
+    assert ar.about_service("Как пользоваться Компасом?")
+    assert ar.about_service("Как пользоваться «Компасом»?")
+    assert not ar.about_service("Как пользоваться опционом в сделке?")
+    r = ar.retrieve("Как вырастить свой бизнес через покупки?", "general", None, idx)
+    assert r.intent == "rank" and "покупател" in r.answer
+
+
+def test_lots_go_after_deals_in_lists(idx):
+    """№79: «сделки в девелопменте в 2026 году» — сначала сделки, лоты торгов
+    следом и с пометкой; по теме «торги» лоты не отодвигаются."""
+    r = ar.retrieve("Какие сделки были в девелопменте в 2026 году?", "general", None, idx)
+    assert r.intent == "industry" and "выставленные на торги" in r.answer
+    first = r.pool[:6]
+    assert not any(d.listing for d in first)
+    lots = [i for i, d in enumerate(r.pool) if d.listing]
+    deals = [i for i, d in enumerate(r.pool) if not d.listing]
+    assert lots and max(deals) < min(lots)
+
+
+def test_compare_gives_the_ratio_and_all_of_few_deals(idx):
+    """№32: «во сколько раз больше» — готовой цифрой; у Ozon две сделки —
+    обе в ответе."""
+    r = ar.retrieve("Сравни Ozon и Wildberries по сделкам", "general", None, idx)
+    oz = len(idx.company_deals["ga3bc7294"])
+    wb = len(idx.company_deals["g549ab474"])
+    assert f"{wb} против {oz}" in r.answer
+    for d in idx.company_deals["ga3bc7294"]:
+        assert f"#/deal/{d.id}" in r.answer
+
+
+def test_revenue_question_points_to_the_company_page(idx):
+    """№77: «какая выручка у ВкусВилла» — ассистент отчётность не видит и
+    говорит, где она, а не только «нет сделок за 2025 год»."""
+    r = ar.retrieve("Какая выручка у «ВкусВилла» за 2025 год?", "general", None, idx)
+    assert r.intent == "company" and "Выручку и прибыль" in r.answer
+    assert "#/companies/gb9570ff1" in r.answer.split("\n")[0]
+    assert "Выручку" not in ar.retrieve("Какие сделки были у Магнита?", "general", None, idx).answer
