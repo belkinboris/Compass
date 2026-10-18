@@ -734,7 +734,8 @@ COMPLETENESS_RULES = """Ты видишь не всю базу «Компаса�
 - Своих чисел не добавляй: мультипликатора, доли, суммы, срока, которых нет в сводке и сделках, не бывает — не вычисляй их и не оценивай «примерно». Выводов о рынке, тенденциях и «типичных» сделках по найденному списку не делай.
 - Названия компаний пиши так, как они даны в сводке и сделках: не переводи на латиницу, не сокращай по-своему.
 - Не приводи выдуманных примеров: пример — только сделка из найденных, ссылкой.
-- Органы согласования не склеивай и не путай: Правительственная комиссия по контролю за иностранными инвестициями (правкомиссия) и ФАС — разные органы. Называй тот, что указан в сделке."""
+- Органы согласования не склеивай и не путай: Правительственная комиссия по контролю за иностранными инвестициями (правкомиссия) и ФАС — разные органы. Называй тот, что указан в сделке.
+- Согласование или одобрение комиссии упоминай, только если оно прямо названо в сделке. Передача активов во временное управление по указу президента — не решение правкомиссии: не пиши, что указ согласован с комиссией или «свидетельствует об одобрении», если этого нет в сделке."""
 
 SYSTEM_BASE = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
@@ -765,6 +766,10 @@ SYSTEM_WEB = """Ты — ассистент «Компаса», справочн
 1. Посмотри, что по вопросу уже знает «Компас» — сводка, карточки и источники, которые к этим сделкам уже привязаны. Если ответ там есть, он и есть ответ.
 2. Выдачу поиска бери, чтобы дополнить и проверить: свежие подробности, чего в «Компасе» ещё нет, расхождения в цифрах. Расхождение — само по себе важный факт, назови его.
 3. Если среди найденных в «Компасе» сделок ответа нет, а в сети что-то есть — так и скажи: «среди сделок «Компаса» я этого не нашёл, в открытых источниках пишут…». Не выдавай найденное в сети за данные «Компаса».
+
+«КОМПАС» ГЛАВНЕЕ, СЕТЬ ДОПОЛНЯЕТ, А НЕ ОПРОВЕРГАЕТ:
+- Статус, дата и сумма сделки из сводки и карточек верны. Если новость из выдачи о тех же участниках и том же активе говорит о планах («планирует купить», «готовит»), а в «Компасе» сделка уже закрыта, — сделка закрыта: не называй её готовящейся или новой и не выдавай старую новость за отдельную инициативу. Свежее этой карточки в выдаче — только то, что датировано позже её даты.
+- То, чего «Компас» не отслеживает (смена руководителя, судьба компании после сделки, детали из интервью), бери из выдачи, если источник годится, и называй его. Не пиши «в открытых источниках подтверждения нет», если в выдаче есть статья именно об этом.
 
 ГЛАВНОЕ: от тебя ждут вывод, а не пересказ выдачи со ссылками. Читатель и сам видит ссылки — ценность в том, что ты их сопоставил.
 Как построить ответ:
@@ -814,6 +819,8 @@ MEETING_PREP_RULES = """Это подготовка посетителя к вс
 - Роль консультанта — ровно как в сделке: юрфирма покупателя, финансовый консультант продавца. Не меняй тип фирмы (юрфирму не называй финансовым консультантом) и сторону.
 - Названия фирм и компаний — той же азбукой, что в сводке и сделках: кириллицу не переводи в латиницу и наоборот («Андрей Городисский и партнеры», а не «Andrey Gorodissky & Partners»).
 - Число сделок компании — только из сводки и за тот период, который назван в сводке; за другие годы сам не пересчитывай.
+- Отчётность ФНС в профиле — цифры ОДНОГО юрлица, а не масштаб компании или группы. Не пиши «выручка компании N», «масштаб — N»: либо пропусти эти цифры, либо назови юрлицо и ИНН, как в профиле («у ПАО «Магнит», ИНН …, по отчётности ФНС за 2025 год выручка …»).
+- Согласование правкомиссии, ФАС или другого органа упоминай, только если оно прямо названо в сделке.
 - Пиши простыми словами: «продаёт непрофильные активы», а не «десегрегация активов»."""
 
 
@@ -1124,6 +1131,9 @@ def _fix_mixed_script(word: str) -> str:
     return word
 
 
+_EMPTY_LINK = re.compile(r"\[([^\[\]\n]+)\]\(\s*\[?\s*([A-Za-z0-9_-]*)\s*\]?\s*\)")
+
+
 def _host(url: str) -> str:
     m = re.match(r"https?://(?:www\.)?([^/\s]+)", url)
     return m.group(1) if m else url
@@ -1168,6 +1178,10 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
     # Ссылка в двойных скобках «[[название](#/deal/…)]», «[[https://…](https://…)]» (№59).
     text = re.sub(r"\[\[([^\[\]\n]+)\]\(([^)\s]+)\)\]", r"[\1](\2)", text)
     text = re.sub(r"\[(https?://[^\]\s]+)\]\(\1\)", lambda m: f"[{_host(m.group(1))}]({m.group(1)})", text)
+    # Пустая ссылка «[сумма известна]()» и код в скобках «[…]([berizaryad])» (№95
+    # четвёртой проверки): код сделки — ссылка на неё, иначе остаётся текст.
+    text = _EMPTY_LINK.sub(lambda m: (f"[{m.group(1)}](#/deal/{m.group(2)})" if m.group(2) in by_id
+                                      else m.group(1)), text)
     # Служебный код вместо названия: «- ВТБ выкупил долю — [g06a6081f](#/deal/g06a6081f)»
     # → «- [ВТБ выкупил долю](#/deal/g06a6081f)»; одиночный «[g06a6081f](…)» —
     # название сделки из базы.
@@ -1192,6 +1206,14 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
         doc = by_id.get(m.group(1))
         return f"[{doc.title}](#/deal/{doc.id})" if doc else m.group(0)
     text = _BARE_DEAL_PATH_RE.sub(name_path, text)
+    # «[link](#/deal/…)» (№59) и пункт списка из одной «[Подробнее](#/deal/…)»
+    # (№66 четвёртой проверки) — читатель не видит, о какой сделке речь:
+    # подпись — название сделки.
+    text = re.sub(r"\[\s*(?:link|source)\s*\]\((#/deal/[^)\s]+)\)", r"[подробнее](\1)", text, flags=re.I)
+    text = re.sub(r"(?m)^([ \t]*[-•*][ \t]+)\[\s*(?:подробнее|ссылка|link|здесь)\s*\]\(#/deal/([^)\s]+)\)[ \t.;]*$",
+                  lambda m: m.group(1) + (f"[{by_id[m.group(2)].title}](#/deal/{m.group(2)})" if m.group(2) in by_id
+                                          else ""), text, flags=re.I)
+    text = re.sub(r"(?m)^[ \t]*[-•*][ \t]*$\n?", "", text)
     # Адрес в скобках без названия перед ним («сеть «Апрель» (#/deal/…)») —
     # ссылкой его не сделать, а читателю он ничего не говорит: убираем.
     text = re.sub(r"(?<!\])\s*\(#/deal/[A-Za-z0-9_-]+\)", "", text)
@@ -1215,7 +1237,9 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
             text = _drop_firm_advice(text, idx, getattr(ret, "subject", None) or "")
     if source:
         text = _restore_names(text, source)
+        text = _restore_latin_names(text, source, idx)
         text = _drop_unsupported_multiples(text, source)
+        text = _drop_unsupported_approvals(text, source)
         text = _drop_own_counts(text, source)
     text = _drop_generalizations(text)
     if ret is not None:
@@ -1226,9 +1250,10 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
             text = _drop_completeness_claims(text, ret, tail=not more)
         text = _link_list_items(text, _candidate_docs(ret), meeting=meeting)
         if more:
-            text = _add_more_line(text, more)
+            text = _add_more_line(text, more, meeting=meeting)
         if ret.intent == "recent" and idx is not None:
             text = _collapse_same_day(text, idx)
+    text = _drop_dangling_intros(text)
     text = _fix_bold_balance(text)
     text = _fix_section_links(text, idx)
     # Следы убранных сносок: двойные пробелы и пробел перед точкой.
@@ -1236,6 +1261,24 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
     text = re.sub(r"(?<=\S)[ \t\u00a0\u202f]+([.,;:!?])(?=\s|$)", r"\1", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
+
+
+def _drop_dangling_intros(text: str) -> str:
+    """«Примеры:» без списка под ним — все пункты сняла чистка (№59
+    четвёртой проверки): последняя фраза абзаца с двоеточием уходит."""
+    lines = text.split("\n")
+    out = []
+    for i, line in enumerate(lines):
+        nxt = next((x for x in lines[i + 1:] if x.strip()), "")
+        if line.strip() and not _is_list_line(line) and not line.strip().startswith(("**", "#")) \
+                and line.rstrip().rstrip("*").rstrip().endswith(":") \
+                and not (_is_list_line(nxt) or nxt[:1] in " \t" or nxt.lstrip().startswith(("[", "http", "«", "\""))):
+            parts = _sentences(line.strip())
+            if len(parts) > 1:
+                out.append(" ".join(parts[:-1]))
+            continue
+        out.append(line)
+    return "\n".join(out)
 
 
 # ── Страховка после модели (проверка 18 октября 2026) ───────────────────────
@@ -1366,6 +1409,130 @@ def _restore_names(text: str, source: str) -> str:
                    for i, part in enumerate(parts))
 
 
+# Название из базы, написанное моделью латиницей: «Netology‑группу» вместо
+# «Нетологии», «Andrey Gorodissky и партнёры» вместо «Андрей Городисский и
+# партнеры» (четвёртая проверка, подготовка к встрече). Сверяем «скелет»
+# имени — согласные латиницей, без удвоений — с именами компаний и фирм из
+# базы, которые есть в том, что видела модель, и со словами самой сводки.
+# Имя, которое и в базе латиницей (Melling, Voitishkin & Partners — так в
+# каталоге фирм), не трогаем: оно есть в том, что видела модель.
+_CYR_TO_LAT = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e", "ж": "zh", "з": "z",
+               "и": "i", "й": "y", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r",
+               "с": "s", "т": "t", "у": "u", "ф": "f", "х": "h", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "sch",
+               "ъ": "", "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya"}
+_GENERIC_NAME_WORDS = {"и", "and", "партнеры", "партнёры", "партнеров", "partners", "partner", "group", "групп",
+                       "группа", "ооо", "ао", "пао", "llc", "ltd", "ко", "co", "&"}
+_LATIN_RUN = re.compile(r"(?<![\w&/.#-])[A-Z][A-Za-z'’\-]+(?:(?:,?[ \t]+|[ \t]*&[ \t]*)(?:[A-Z][A-Za-z'’\-]+|and))*")
+
+
+def _skeleton(text: str) -> str:
+    t = "".join(_CYR_TO_LAT.get(ch, ch) for ch in text.lower())
+    for a, b in (("kh", "h"), ("ck", "k"), ("ph", "f"), ("w", "v"), ("x", "ks"), ("q", "k"), ("c", "k"),
+                 ("j", "y")):
+        t = t.replace(a, b)
+    t = re.sub(r"[^a-z]", "", t)
+    t = re.sub(r"[aeiouy]", "", t)
+    return re.sub(r"(.)\1+", r"\1", t)
+
+
+def _name_core(name: str) -> list[str]:
+    words = re.findall(r"[A-Za-zА-Яа-яЁё'’]+", name)
+    return [w for w in words if w.lower() not in _GENERIC_NAME_WORDS]
+
+
+def _cyrillic_names(source: str, idx) -> dict[str, str]:
+    """Скелет → имя кириллицей: компании и фирмы базы, названные в том, что
+    видела модель. Слова самой сводки не берём: «Compass» стал бы «Компаса»."""
+    out: dict[str, str] = {}
+    names = [str(c.get("name") or "") for c in (getattr(idx, "companies", None) or {}).values()]
+    names += [f.name for f in getattr(idx, "firms", None) or []]
+    for name in names:
+        core = _name_core(name)
+        if not core or not re.search(r"[А-Яа-яЁё]", name) or re.search(r"[A-Za-z]", " ".join(core)):
+            continue
+        # Имя названо в том, что видела модель, хотя бы в другом падеже.
+        if all(w[:max(4, len(w) - 2)].lower() in source.lower() for w in core):
+            out[_skeleton(" ".join(core))] = name if len(core) > 1 else core[0]
+    return {k: v for k, v in out.items() if len(k) >= 4}
+
+
+def _restore_latin_names(text: str, source: str, idx) -> str:
+    if not source or not re.search(r"[A-Z][a-z]", text):
+        return text
+    names = None
+
+    def fix(m):
+        nonlocal names
+        run = m.group(0)
+        if run in source or _skeleton(run) == "":
+            return run
+        core = _name_core(run)
+        if not core or any(w in source for w in core):
+            return run
+        if names is None:
+            names = _cyrillic_names(source, idx)
+        found = names.get(_skeleton(" ".join(core)))
+        if not found:
+            return run
+        if len(core) == len(re.findall(r"[A-Za-z'’]+", run)):
+            # «Andrey Gorodissky» без «& Partners» — только имя, без хвоста
+            # («Netology‑группу» → «Нетология‑группу», а не «Нетология-групп‑группу»).
+            return " ".join(_name_core(found))
+        return found
+    parts = re.split(r"(\]\([^)\s]*\)|https?://\S+)", text)
+    return "".join(part if i % 2 else _LATIN_RUN.sub(fix, part) for i, part in enumerate(parts))
+
+
+# Временное управление по указу — не решение правкомиссии (№59 четвёртой
+# проверки: «указ подписан после согласования с комиссией», «в сделке
+# указано, что решение согласовано с Правкомиссией» — в карточках этого нет).
+# Фраза, где указ или временное управление стоят рядом с согласованием
+# комиссии, остаётся, только если такое согласование есть в карточке сделки,
+# на которую она ссылается (без ссылки — в любой из карточек).
+_DECREE = re.compile(r"\bуказ\w*|временн\w+\s+управлени\w*", re.I)
+_APPROVED_BY_COMMISSION = re.compile(
+    r"(?:согласова|одобр|разреш|санкциониров)\w*[^.!?\n]{0,60}?комисси|комисси\w*[^.!?\n]{0,60}?(?:согласова|одобр|разреш)",
+    re.I)
+
+
+def _cards_by_id(source: str) -> dict[str, str]:
+    i = source.find(_CARDS_MARK)
+    if i < 0:
+        return {}
+    line = source[i + len(_CARDS_MARK):].strip().split("\n", 1)[0]
+    try:
+        cards = json.loads(line)
+    except ValueError:
+        return {}
+    return {str(c.get("id")): json.dumps(c, ensure_ascii=False) for c in cards if isinstance(c, dict)}
+
+
+def _drop_unsupported_approvals(text: str, source: str) -> str:
+    if not _DECREE.search(text) or not re.search(r"комисси", text, re.I):
+        return text
+    cards = _cards_by_id(source)
+
+    def unsupported(sentence: str) -> bool:
+        plain = _LINK_SPAN.sub(" ", sentence)
+        if not (_DECREE.search(plain) and _APPROVED_BY_COMMISSION.search(plain)):
+            return False
+        ids = re.findall(r"\(#/deal/([^)\s]+)\)", sentence)
+        if ids:
+            return not any(_card_says_approved(cards[x]) for x in ids if x in cards)
+        return not any(_card_says_approved(t) and _DECREE.search(t) for t in cards.values())
+    return _filter_sentences(text, unsupported, lists_too=True)
+
+
+def _card_says_approved(card: str) -> bool:
+    """В карточке сказано, что комиссия одобрила (а не «лежали в правкомиссии
+    без одобрения», как у «Ашана»)."""
+    for m in _APPROVED_BY_COMMISSION.finditer(card):
+        around = card[max(0, m.start() - 20):m.end() + 20]
+        if not re.search(r"\bбез\s+(?:одобр|соглас|разреш)|\bне\s+(?:одобр|соглас|разреш|получ)|отказ", around, re.I):
+            return True
+    return False
+
+
 # Мультипликатор, которого нет в сделках (№70: «оценка — около 6 EBITDA»).
 _NUM = r"(\d+(?:[.,]\d+)?)"
 _MULTIPLE_NUM = re.compile(
@@ -1375,8 +1542,56 @@ _MULTIPLE_NUM = re.compile(
     re.I)
 
 
+_SENT_BREAK = re.compile(r"(?<=[.!?])\s+(?=[«\"(\[*А-ЯЁA-Z0-9])")
+# Знак внутри названия — не конец фразы: «Yum! Brands», «Бери заряд! Яндекс»
+# (четвёртая проверка, 18 октября 2026: от №3 остался обрывок «Brands‑KFC,
+# FM Logistic…», когда фразу сняли по «Yum!»). Названия с «!» и «.» внутри —
+# из базы (заголовки сделок, компании, фирмы), плюс правило «латинское слово!
+# латинское Слово».
+_NAME_MARKS: set[str] = set()
+_NAME_MARKS_READY = False
+
+
+def _name_marks() -> set[str]:
+    global _NAME_MARKS_READY
+    if not _NAME_MARKS_READY:
+        _NAME_MARKS_READY = True
+        try:
+            idx = assistant_retrieval.get_index()
+            names = [d.title for d in idx.docs] + [str(c.get("name") or "") for c in (idx.companies or {}).values()]
+            names += [f.name for f in getattr(idx, "firms", None) or []]
+            for name in names:
+                for m in re.finditer(r"[\w\-]+[!.]\s+[«\"]?[\w\-]+", name):
+                    word = m.group(0)
+                    # Сокращения «г. Москва», «им. Ленина» — это не названия, но
+                    # и не конец фразы; инициалы «А. Иванов» — тоже.
+                    _NAME_MARKS.add(word)
+        except Exception as e:  # noqa: BLE001 — без названий режем по старому правилу
+            logger.warning("assistant: names with marks are not loaded: %s", e)
+    return _NAME_MARKS
+
+
 def _sentences(line: str) -> list[str]:
-    return re.split(r"(?<=[.!?])\s+(?=[«\"(\[*А-ЯЁA-Z0-9])", line)
+    """Фразы строки. Не режем внутри «кавычек», (скобок), [ссылок] и
+    **жирного** и после «!» или «.» внутри названия из базы."""
+    marks = _name_marks()
+    parts, start = [], 0
+    for m in _SENT_BREAK.finditer(line):
+        head = line[start:m.start()]
+        if head.count("«") > head.count("»") or head.count("(") > head.count(")") \
+                or head.count("[") > head.count("]") or head.count("**") % 2:
+            continue
+        before = re.search(r"[\w\-]+[!.]$", line[:m.start()])
+        after = re.match(r"[«\"]?[\w\-]+", line[m.end():])
+        if before and after:
+            joined = before.group(0) + " " + after.group(0)
+            if joined in marks or (before.group(0)[-1] == "!" and re.fullmatch(r"[A-Za-z\-]+!", before.group(0))
+                                   and re.fullmatch(r"[A-Z][A-Za-z\-]*", after.group(0))):
+                continue
+        parts.append(head)
+        start = m.end()
+    parts.append(line[start:])
+    return parts
 
 
 def _is_list_line(line: str) -> bool:
@@ -1397,10 +1612,25 @@ def _drop_unsupported_multiples(text: str, source: str) -> str:
     return _filter_sentences(text, unsupported)
 
 
-def _filter_sentences(text: str, drop, lists_too: bool = False) -> str:
+# Что остаётся от строки, если убрать ссылки, разметку и знаки: «[Подробнее](…)»
+# без текста вокруг — пустой пункт (№66 четвёртой проверки).
+def _only_links_left(text: str) -> bool:
+    """Ссылка с названием сделки — сама по себе пункт; «[Подробнее](…)» — нет."""
+    rest = re.sub(r"\[([^\]]*)\]\([^)]*\)", r" \1 ", text)
+    rest = re.sub(r"(?<!\w)(?:подробнее|ссылка|ссылке|источник|link|source|здесь|тут|см\.?|карточка)(?!\w)", " ", rest,
+                  flags=re.I)
+    return not re.search(r"[A-Za-zА-Яа-яЁё0-9]{2,}", rest)
+
+
+def _filter_sentences(text: str, drop, lists_too: bool = False, keep_deal_items: bool = False) -> str:
+    """Снимает фразы, для которых `drop` истинно. Пункт списка, от которого
+    осталась одна ссылка («[Подробнее]»), снимается целиком; с
+    `keep_deal_items` пункт со ссылкой на сделку не трогается вовсе — пункт и
+    есть сама сделка."""
     out = []
     for line in text.split("\n"):
-        if not line.strip() or (_is_list_line(line) and not lists_too):
+        if not line.strip() or (_is_list_line(line) and not lists_too) \
+                or (keep_deal_items and _is_list_line(line) and "](#/deal/" in line):
             out.append(line)
             continue
         # Маркер пункта («- », «1. ») остаётся при пункте, даже если снята
@@ -1411,7 +1641,7 @@ def _filter_sentences(text: str, drop, lists_too: bool = False) -> str:
         kept = [x for x in parts if not drop(x)]
         if len(kept) == len(parts):
             out.append(line)
-        elif kept:
+        elif kept and not _only_links_left(" ".join(kept)):
             out.append(marker + " ".join(kept))
     return "\n".join(out)
 
@@ -1605,7 +1835,19 @@ _COUNT_AFTER = re.compile(r"\s+(?:(?!млн|млрд|трлн|тыс)[а-яёa-z
 _COUNT_BEFORE = re.compile(r"(?:\bещ[её]|\bостальн\w*|\bоставш\w*|\bвсего|\bиз|\bвсе)\s+$", re.I)
 _RATIO = re.compile(r"\bв\s+(\d+(?:[.,]\d+)?)[\s\u2011\-]*раз(?:а)?\b", re.I)
 _SHARE_WORDS = re.compile(r"\b(?:половин|трет[иья]|четверт)\w*\s+(?:\w+\s+){0,2}?(?:сделок|покупок|продаж|всех)"
-                          r"|\d+(?:[.,]\d+)?\s*%\s+(?:всех\s+)?(?:сделок|покупок|продаж)", re.I)
+                          r"|\d+(?:[.,]\d+)?\s*%\s+(?:всех\s+)?(?:сделок|покупок|продаж)"
+                          # №58 четвёртой проверки: «пять отраслей формируют большую часть
+                          # активности» при 669 из 1450.
+                          r"|\b(?:больш(?:ую|ая)|основн(?:ую|ая))\s+част\w*|\bбольшинств\w*", re.I)
+# Число после слова: «закрытых покупок — 7 штук», «сделок: 12» (№36).
+_COUNT_NOUN_BEFORE = re.compile(r"(?:сделк|сделок|покупк|покупок|продаж|приобретени|поглощени|транзакци|раунд)\w*"
+                                r"\s*(?:[—–:\-]\s*|(?:всего|ровно|лишь|только)\s+)$", re.I)
+# Счёт словами: «две сделки», «семь покупок» (№3, 36).
+_WORD_NUMS = {"два": 2, "две": 2, "двух": 2, "три": 3, "трёх": 3, "трех": 3, "четыре": 4, "четырёх": 4,
+              "четырех": 4, "пять": 5, "пяти": 5, "шесть": 6, "шести": 6, "семь": 7, "семи": 7, "восемь": 8,
+              "восьми": 8, "девять": 9, "девяти": 9, "десять": 10, "десяти": 10}
+_BASE_SCOPE = re.compile(r"«?компас\w*»?|\bв\s+базе\b|по\s+нашим\s+данным|зафиксирован\w*|\bвсего\b|\bнайден\w*", re.I)
+_WORD_COUNT = re.compile(r"\b(" + "|".join(_WORD_NUMS) + r")\s+(?:[а-яё]+\s+)?" + _COUNT_NOUN, re.I)
 # «Ещё 2 сделки», «остальные 113», «оставшиеся 2», «дополнительные сделки — 13
 # штук»; но не «объекты, ещё не проданные» и не «инвестировал ещё 100 млн».
 _MORE_COUNT = re.compile(
@@ -1654,16 +1896,23 @@ def _source_counts(source: str) -> set[int]:
 def _count_claims(sentence: str) -> tuple[list[int], bool]:
     """Числа-счёт в фразе и есть ли в ней «в N раз» / «половина сделок».
     Текст ссылок (названия сделок) не смотрим: он из базы."""
-    plain = _LINK_SPAN.sub(" ", sentence)
+    # Жирное «ещё **40 сделок**» (№1) — та же фраза, что без звёздочек.
+    plain = _LINK_SPAN.sub(" ", sentence).replace("**", "")
     nums, claim = [], False
     for m in _BARE_INT.finditer(plain):
         n = m.group(1)
         if len(n) == 4 and 1900 <= int(n) <= 2100 or _NOT_COUNT_AFTER.match(plain, m.end()):
             continue
-        if _COUNT_AFTER.match(plain, m.end()) or _COUNT_BEFORE.search(plain[:m.start()]):
+        if _COUNT_AFTER.match(plain, m.end()) or _COUNT_BEFORE.search(plain[:m.start()]) \
+                or _COUNT_NOUN_BEFORE.search(plain[:m.start()]):
             claim = True
     if claim:
         nums = _bare_ints(plain)
+    # Словами — только когда фраза говорит о базе («в «Компасе» две сделки»,
+    # «по нашим данным семь покупок»): «Росатом готовит три сделки» под
+    # списком из трёх пунктов — пересказ своего же списка.
+    if _BASE_SCOPE.search(plain):
+        nums += [_WORD_NUMS[m.group(1).lower()] for m in _WORD_COUNT.finditer(plain)]
     special = bool(_RATIO.search(plain) or _SHARE_WORDS.search(plain))
     return nums, special
 
@@ -1693,11 +1942,14 @@ def _drop_own_counts(text: str, source: str) -> str:
         if not bad:
             return False
         # «Вот 5 крупнейших сделок:» — счёт своего же списка, он верен.
-        if re.search(r"\b(?:вот|ниже|перечисл\w*|привед\w*|показ\w*|перв\w+)\b", sentence, re.I) \
-                and all(n == shown for n in bad):
+        # «В «Компасе» есть две сделки, где…:» над списком из двух — тоже.
+        # «Среди них 7 закрытых…:» из 119 — уже не счёт своего списка (№35).
+        if (re.search(r"\b(?:вот|ниже|перечисл\w*|привед\w*|показ\w*|перв\w+|следующ\w*)\b", sentence, re.I)
+                or sentence.replace("*", "").rstrip().endswith(":")) and all(n == shown for n in bad) \
+                and not re.search(r"\b(?:среди|из)\s+них\b", sentence, re.I):
             return False
         return True
-    return _filter_sentences(text, unsupported, lists_too=True)
+    return _filter_sentences(text, unsupported, lists_too=True, keep_deal_items=True)
 
 
 # «…и ещё 28 — на [странице отрасли](#/industry/…).» / «Ещё 113 — в [ленте сделок](#/deals).»
@@ -1708,13 +1960,19 @@ _MORE_TAIL_OK = re.compile(r"^\s*(?:[—–-]\s*[^\[\]]{0,20}\[[^\]]+\]\(#/[^)]+
 def _summary_more(ret):
     """Сколько всего сделок в выборке сводки и куда ведёт «ещё»: (всего,
     хвост ссылки, id сделок сводки). None — если сводка не говорит этого
-    однозначно (два «ещё» в разных блоках, «ещё 16 с названным объёмом»)."""
+    однозначно (два «ещё» в разных блоках, «ещё 16 с названным объёмом»)
+    или в ней несколько списков разных компаний и фирм (сравнение, №5
+    четвёртой проверки: «Ещё 7» АЛРУД вставало под список ЕПАМ)."""
     summary = (ret.answer or "") if ret is not None else ""
     found = list(_SUMMARY_MORE.finditer(summary))
     if len(found) != 1 or not _MORE_TAIL_OK.match(found[0].group(2)):
         return None
     m = found[0]
-    body = summary[:m.start()] + summary[m.end():]
+    if re.search(r"\(#/deal/", summary[m.end():]):
+        return None
+    if len(set(re.findall(r"\(#/(?:companies|advisors)/([^)\s]+)\)", summary))) > 1:
+        return None
+    body = summary[:m.start()]
     ids = set(re.findall(r"\(#/deal/([^)\s]+)\)", body))
     tail = m.group(2).strip().rstrip(".").strip()
     known = ids | {d.id for d in (getattr(ret, "docs", None) or [])} | {d.id for d in (getattr(ret, "pool", None) or [])}
@@ -1725,31 +1983,69 @@ def _drop_more_claims(text: str) -> str:
     """«Ещё 2 сделки на странице компании», «остальные 113 — в ленте» от
     модели снимаем: эту строку пишет код (_add_more_line)."""
     def more(sentence: str) -> bool:
-        plain = _LINK_SPAN.sub(" ", sentence)
+        plain = _LINK_SPAN.sub(" ", sentence).replace("**", "")
         return bool(_MORE_COUNT.search(plain) or _MORE_NUM_WORD.search(plain)) and "](#/deal/" not in sentence
     return _filter_sentences(text, more, lists_too=True)
 
 
-def _add_more_line(text: str, more) -> str:
-    """Под последней строкой со сделкой — «Ещё N — на странице…», где N —
-    сколько из найденного не названо в ответе."""
-    total, tail, known = more
-    links = re.findall(r"\(#/deal/([^)\s]+)\)", text)
-    shown = {x for x in links if x in known}
-    left = total - len(shown)
-    if not shown or left <= 0:
-        return text
-    line = f"Ещё {left}" + (f" {tail}." if tail else ".")
-    lines = text.split("\n")
-    last = max(i for i, x in enumerate(lines) if any(f"(#/deal/{d})" in x for d in shown))
-    # После всего списка, в котором стоит последняя сделка, а не посреди него.
-    while _is_list_line(lines[last]):
-        k = last + 1
-        while k < len(lines) and not lines[k].strip():
+# Раздел о консультантах (подготовка к встрече P1: «Ещё 14» вставало под
+# «Юридические и финансовые консультанты»): строка «Ещё N» туда не идёт.
+_NOT_DEALS_HEADING = re.compile(r"консультант|юрист|юрфирм|советник|с\s+кем\s+работал|партн[её]р|подготов|важно\s+знать",
+                                re.I)
+
+
+def _list_end(lines: list[str], i: int) -> int:
+    """Последняя строка списка, в котором стоит строка i: пункты, их
+    продолжения с отступом и пустые строки между пунктами (№72: «Ещё 9»
+    вставало между «1.» и «2.»)."""
+    last = i
+    k = i + 1
+    while k < len(lines):
+        line = lines[k]
+        if not line.strip():
             k += 1
-        if k >= len(lines) or not _is_list_line(lines[k]):
-            break
-        last = k
+            continue
+        if _is_list_line(line) or (line[:1] in " \t" and lines[last].strip()):
+            last = k
+            k += 1
+            continue
+        break
+    return last
+
+
+def _add_more_line(text: str, more, meeting: bool = False) -> str:
+    """После последнего списка со сделками этой сводки — «Ещё N — на
+    странице…», где N — сколько из найденного не названо в ответе. Не в
+    разделе о консультантах и советах; без ссылки в сводке — с подсказкой,
+    где искать."""
+    total, tail, known = more
+    lines = text.split("\n")
+    in_deals, rows = True, []
+    for i, line in enumerate(lines):
+        if line.strip() and not _is_list_line(line) and line[:1] not in " \t" and _looks_like_heading(line):
+            in_deals = bool(_DEALS_HEADING.search(line)) or (not meeting and not _NOT_DEALS_HEADING.search(line))
+            continue
+        if in_deals and any(f"(#/deal/{d})" in line for d in known):
+            rows.append(i)
+    shown = {x for x in re.findall(r"\(#/deal/([^)\s]+)\)", text) if x in known}
+    left = total - len(shown)
+    if not rows or left <= 0:
+        return text
+    if tail:
+        line = f"Ещё {left} {tail}."
+    else:
+        line = (f"Ещё {left} — уточните вопрос (год, отрасль, компания), и я покажу их; "
+                f"общий список — в [ленте сделок](#/deals).")
+    i = rows[-1]
+    if not _is_list_line(lines[i]) and lines[i][:1] in " \t":
+        # Продолжение пункта с отступом («   – Источник: […](#/deal/…)») —
+        # строка встаёт после всего списка, а не после этого продолжения.
+        k = i
+        while k > 0 and not _is_list_line(lines[k]) and (not lines[k].strip() or lines[k][:1] in " \t"):
+            k -= 1
+        if _is_list_line(lines[k]):
+            i = k
+    last = _list_end(lines, i) if _is_list_line(lines[i]) else i
     lines[last + 1:last + 1] = ["", line, ""]
     return "\n".join(lines)
 
@@ -1760,7 +2056,9 @@ def _shows_part(ret) -> bool:
     if len(ret.pool or []) > shown:
         return True
     summary = ret.answer or ""
-    if assistant_retrieval.NOTE_PARTIAL in summary or re.search(r"(?m)^\s*(?:и\s+)?[Ее]щё\s+\d+", summary):
+    # «…и ещё 6 — все по теме»: многоточие в начале строки сводки (№3, 14
+    # четвёртой проверки — без него «прошла только одна» оставалось).
+    if assistant_retrieval.NOTE_PARTIAL in summary or _SUMMARY_MORE.search(summary):
         return True
     return ret.intent == "search" and shown >= assistant_retrieval.MAX_DEALS_FOR_MODEL
 
@@ -1774,7 +2072,12 @@ _COMPLETE_CLAIM = re.compile(
     r"|(?:других|иных)\s+(?:[\w«»]+\s+){0,4}нет\b"
     r"|больше\s+(?:[\w«»]+\s+){0,2}(?:сделок|покупок|продаж|примеров)\s+(?:[\w«»]+\s+){0,3}нет\b"
     r"|список\s+(?:полон|полный|исчерпывающ\w*)|исчерпывающ\w+\s+список|полный\s+список\s+(?:сделок\s+)?(?:выглядит|таков)"
-    r"|единственн\w+\s+(?:известн\w+\s+|найденн\w+\s+)?(?:сделк\w*|покупк\w*|продаж\w*))", re.I)
+    r"|единственн\w+\s+(?:известн\w+\s+|найденн\w+\s+)?(?:сделк\w*|покупк\w*|продаж\w*)"
+    # «прошла только одна» (№3), «во всех остальных сделках мультипликаторы не
+    # раскрывались» (№14) — вывод о том, чего модель не видела.
+    r"|(?:только|лишь)\s+(?:одн[аоуи]\w*|один)\b"
+    r"|\bостальн\w+\b[^.!?\n]{0,60}?\bне\s+(?:раскрыва|раскрыт|указ|назван|называ|упомина|встреча|было|был)\w*"
+    r"(?![^.!?\n]*\b(?:ниже|меньше|мельче)\b))", re.I)
 
 
 def _drop_completeness_claims(text: str, ret, tail: bool = True) -> str:
@@ -1790,7 +2093,9 @@ def _drop_completeness_claims(text: str, ret, tail: bool = True) -> str:
     lines = [x for x in text.split("\n")
              if not (_is_list_line(x) and re.match(r"^\s*[-•*]\s*(?:\*\*)?\s*итого\b", x, re.I))]
     text = "\n".join(lines)
-    if dropped["n"] and tail:
+    # Ответ без единой сделки (прогноз рынка, №100) — пометка о «части
+    # найденных сделок» к нему не относится.
+    if dropped["n"] and tail and "](#/deal/" in text:
         link = re.search(r"\[[^\]]+\]\(#/(?:deals|companies|advisors|industry|theme)[^)]*\)", ret.answer or "")
         tail = "Здесь показана часть найденных сделок"
         text = text.rstrip() + "\n\n" + (f"{tail}, полный список — {link.group(0)}." if link else tail + ".")
@@ -2175,8 +2480,13 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
                     fin.append(f"выручка {_rub_text(report.revenue_rub)}")
                 if report.net_profit_rub is not None:
                     fin.append(f"чистая прибыль {_rub_text(report.net_profit_rub)}")
-                lines.append(f"Отчётность ФНС юрлица {entity.legal_name} за {report.year} год (одно юрлицо, "
-                             f"не вся группа): " + ", ".join(fin))
+                # «Магнит» — 412 млн ₽, «Самолёт» — 15 млрд ₽ (четвёртая проверка):
+                # выручка головного юрлица холдинга подавалась как масштаб сети.
+                inn = f", ИНН {entity.inn}" if entity.inn else ""
+                lines.append(f"Отчётность ФНС ОДНОГО юрлица — {entity.legal_name}{inn} — за {report.year} год: "
+                             + ", ".join(fin) + ". Это не выручка и не масштаб всей компании или группы: "
+                             "у холдинга основная выручка в других юрлицах. Если упоминаешь эти цифры, "
+                             f"пиши «у юрлица {entity.legal_name}{inn} по отчётности ФНС», а не «выручка компании».")
         except Exception as e:  # noqa: BLE001 — профиль без финансов лучше, чем сбой ответа
             logger.warning("assistant profile finance failed for %s: %s", cid, e)
     return "\n".join(lines)
