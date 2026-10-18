@@ -2573,6 +2573,41 @@ def _answer_term(intent: Intent, idx: Index) -> Retrieval:
     return Retrieval("term", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], None, pool=docs)
 
 
+FEED_STATUSES = {"closed": ["Закрыта"], "failed": ["Не состоялась"],
+                 "open": ["Обсуждается", "Подписана", "Согласование получено"]}
+
+
+def feed_link(intent: Intent, idx: Index | None = None) -> str | None:
+    """Лента сделок с тем же отбором (#/deals?status=…&year=…), если весь
+    отбор вопроса лента умеет: статус, годы, отрасль, тема. Условия сделки,
+    регион, банк-покупатель — не умеет: тогда ссылки нет, и обещать ленту
+    нельзя (№69 пятой проверки: «…и ещё 28 — в ленте сделок» вело на все
+    сделки сайта, без Татарстана)."""
+    if intent.term_rxs or intent.region or intent.buyer_kind or len(intent.themes) > 1:
+        return None
+    parts = []
+    if intent.status:
+        parts.append(("status", ",".join(FEED_STATUSES[intent.status])))
+    if intent.span:
+        lo, hi = intent.span
+        lo = lo or SITE_MIN_YEAR
+        hi = hi or __import__("datetime").date.today().year
+        if hi - lo > 6:
+            return None
+        parts.append(("year", ",".join(str(y) for y in range(lo, hi + 1))))
+    if intent.industry:
+        parts.append(("ind", intent.industry))
+    if intent.themes:
+        parts.append(("theme", intent.themes[0]))
+    if not parts:
+        return "#/deals"
+    def enc(v: str) -> str:
+        # Как читает сайт (URLSearchParams): кириллица и пробелы — как есть,
+        # служебные знаки адреса и скобки ссылки — кодом.
+        return v.replace("%", "%25").replace("&", "%26").replace("#", "%23").replace("(", "%28").replace(")", "%29")
+    return "#/deals?" + "&".join(f"{k}={enc(v)}" for k, v in parts)
+
+
 def _answer_filter(intent: Intent, idx: Index) -> Retrieval:
     """Статус, регион, период — без отрасли и темы («Какие сделки не
     состоялись в 2025 году?», №31; «сделки в Татарстане», №69)."""
@@ -2582,7 +2617,8 @@ def _answer_filter(intent: Intent, idx: Index) -> Retrieval:
         return Retrieval("filter", f"Сделок{scope} в «Компасе» пока нет.", [], None)
     n = len(docs)
     head = f"В базе «Компаса» {n} {_plural(n, 'сделка', 'сделки', 'сделок')}{scope}."
-    return _list_answer("filter", intent, idx, docs, head, "в [ленте сделок](#/deals)", None)
+    link = feed_link(intent)
+    return _list_answer("filter", intent, idx, docs, head, f"в [ленте сделок]({link})" if link else None, None)
 
 
 def _fmt_rub(value: float) -> str:

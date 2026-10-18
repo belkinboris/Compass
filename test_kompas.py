@@ -1198,7 +1198,9 @@ def test_own_count_of_deals_is_dropped_and_the_more_line_is_written_by_code():
     source = f"СВОДКА из «Компаса» по вопросу (проверена, опирайся на неё):\n{summary}\n\nВопрос посетителя: выкуп"
     out = main._polish_answer(text, _idx(docs), ret=ret, source=source)
     assert "12 сделок" not in out and "ещё 2" not in out
-    assert "Ещё 22 — уточните вопрос" in out and out.index("Ещё 22") > out.index("#/deal/g11")
+    # Ленты с отбором по условию сделки нет: «Показаны 12 из 34», без ленты.
+    assert "Показаны 12 из 34." in out and out.index("Показаны 12") > out.index("#/deal/g11")
+    assert "](#/deals)" not in out
     assert out.count("](#/deal/") == 12 and out.endswith("Данные могут быть неполными.")
 
 
@@ -1554,7 +1556,9 @@ def test_more_line_goes_after_the_right_list_and_always_with_a_link():
     ret = _ret(intent="term", answer=summary, docs=docs, pool=docs)
     out = main._polish_answer("\n".join(f"- [{d.title}](#/deal/{d.id})" for d in docs[:2]), _idx(docs), ret=ret,
                               source=_summary_source(summary))
-    assert "Ещё 32 — уточните вопрос" in out and "](#/deals)" in out
+    # Названы две из 34: ещё пять найденных ссылками и «Показаны 7 из 34».
+    assert "Ещё из найденных:" in out and out.count("](#/deal/") == 7
+    assert "Показаны 7 из 34. Остальные покажу, если уточните вопрос" in out and "](#/deals)" not in out
     # Ответ без сделок (прогноз рынка) — без пометки о части найденных сделок.
     out = main._polish_answer("Прогноз — рост. Это все данные, что есть.", _idx(docs), ret=ret,
                               source=_summary_source(summary))
@@ -1571,12 +1575,13 @@ def test_meeting_profile_names_the_one_legal_entity_and_rules_forbid_it_as_scale
     if cid is None or cid in main._bank_finance():
         pytest.skip("Магнита нет в базе")
     entity = SimpleNamespace(id=1, legal_name="ПАО «Магнит»", inn="2309085638")
-    report = SimpleNamespace(revenue_rub=412e6, net_profit_rub=5.4e9, year=2025)
+    # Операционное юрлицо (прибыль меньше выручки) — цифры с подписью.
+    report = SimpleNamespace(revenue_rub=15.1e9, net_profit_rub=1.6e9, year=2025)
     answers = iter([entity, report])
     db = SimpleNamespace(scalar=lambda *_: next(answers))
     text = main._company_profile_text(cid, idx, db)
-    assert "ОДНОГО юрлица — ПАО «Магнит», ИНН 2309085638 — за 2025 год: выручка 412 млн ₽" in text
-    assert "не масштаб всей компании" in text
+    assert "ОДНОГО юрлица — ПАО «Магнит», ИНН 2309085638 — за 2025 год: выручка 15,1 млрд ₽" in text
+    assert "чистая прибыль 1,6 млрд ₽" in text and "не масштаб всей компании" in text
     assert "цифры ОДНОГО юрлица, а не масштаб компании" in main.MEETING_PREP_RULES
 
 
@@ -1662,6 +1667,8 @@ def test_polish_on_all_answers_of_the_fourth_check():
                     problems.append((r["n"], "обрывок: " + line[:80]))
                     break
         mores = _re.findall(r"(?m)^Ещё \d+.*$", out)
+        if any(x.startswith("Показаны") for x in out.split("\n")):
+            mores.append("Показаны …](#/")      # строка «Показаны N из M» — вместо «Ещё N»
         if len(mores) > 1 or any("](#/" not in m for m in mores):
             problems.append((r["n"], mores))
         if r["n"] in (1, 61):
@@ -1682,3 +1689,237 @@ def test_fifth_check_leftovers_link_only_item_and_other_deals_claim():
     assert main._COMPLETE_CLAIM.search("Другие сделки в списке либо не раскрывали EV/EBITDA, либо приводили их к выручке")
     # Пункт, который и был одной ссылкой с названием сделки, — не трогаем.
     assert main._filter_sentences("- [Сделка](#/deal/x)", lambda x: False, lists_too=True) == "- [Сделка](#/deal/x)"
+
+
+# ── Пятая проверка на 100 вопросах (18 октября 2026): пятая волна ───────────
+
+def _closed_doc(did, title, date, status="Закрыта", **kw):
+    d = _doc(did, title, **kw)
+    d.status, d.date = status, date
+    return d
+
+
+def test_web_mode_status_of_a_closed_deal_beats_an_old_news_item():
+    """№72: закрытая 7 октября покупка «Дела» подана как «переговоры
+    продолжаются» по новости от 3 сентября. Статус и дата «Компаса» идут
+    модели отдельным блоком; фраза о закрытой сделке как о готовящейся —
+    заменяется статусом, датированная старая новость получает пометку, фраза
+    о нескольких сделках — пометку по закрытой."""
+    delo = _closed_doc("g5eb6ff22", "«Росатом» завершил выкуп у Сергея Шишкарева 51% в группе компаний «Дело»",
+                       "2026-10-07", target="Группа компаний «Дело»")
+    old = _closed_doc("cdfe91cd0", "«Росатом» увеличивает долю в ГК «Дело» до 49%, реализовав опцион", "2022-08-09",
+                      target="Группа компаний «Дело»")
+    akk = _closed_doc("g2f22b1dc", "Росатом рассматривает продажу до 49% в проекте АЭС «Аккую» внешним инвесторам",
+                      "2026-08-07", status="Обсуждается")
+    toys = _closed_doc("gbdd4f990", "Hobby World приобрел контроль в производителе игрушек «Звезда»", "2024-10-23",
+                       target="Звезда")
+    ret = _ret(intent="company", docs=[delo, old, akk, toys])
+    block = main._kompas_status_block(ret)
+    assert "«Росатом» завершил выкуп у Сергея Шишкарева 51% в группе компаний «Дело» — закрыта, 7 октября 2026" in block
+    text = ("Росатом в данный момент готовит:\n\n"
+            "* переговоры о выкупе 51 % в группе компаний «Дело» продолжаются (в свежих новостях 3 сентября 2026 г. "
+            "сообщается о несостоявшемся завершении).\n"
+            "- Интерфакс сообщает, что 3 сентября 2026 г. «Росатом» не смог завершить выкуп доли Шишкарева в «Дело» – "
+            "[источник](https://www.interfax.ru/russia/1112881).\n\n"
+            "Таким образом, Росатом готовит продажу части проекта «Аккую» и продолжает переговоры о выкупе доли "
+            "в группе «Дело».\n\n"
+            "Продажа судоверфи «Звезда» отменена – сделка не состоялась.")
+    out = main._web_guard(text, "Какие сделки сейчас готовит Росатом?", ret, [])
+    assert "переговоры о выкупе 51 % в группе компаний «Дело» продолжаются" not in out
+    assert ("* По данным «Компаса», сделка закрыта 7 октября 2026: [«Росатом» завершил выкуп у Сергея Шишкарева 51% "
+            "в группе компаний «Дело»](#/deal/g5eb6ff22).") in out
+    assert "(позже, 7 октября 2026, по данным «Компаса», сделка закрыта)" in out
+    assert "«Аккую» и продолжает переговоры о выкупе доли в группе «Дело» (по данным «Компаса», сделка по «Дело» " \
+           "закрыта 7 октября 2026)." in out
+    # Судоверфь «Звезда» — не игрушки «Звезда»: одно имя ещё не та сделка.
+    assert out.endswith("Продажа судоверфи «Звезда» отменена – сделка не состоялась.")
+    assert main._web_guard(out, "Какие сделки сейчас готовит Росатом?", ret, []) == out
+    # Новость новее карточки — не трогаем.
+    newer = "- 12 октября 2026 года стороны сообщили, что переговоры о выкупе доли в «Дело» продолжаются."
+    assert main._web_guard(newer, "Росатом", ret, []) == newer
+
+
+def test_web_mode_does_not_deny_a_found_article():
+    """№78: «в найденных открытых источниках я не нашёл примеров», а в выдаче
+    — Forbes «В «Лемана ПРО» сменился гендиректор после…». Фраза об
+    отсутствии в сети снимается, на её место — найденные статьи; фраза о
+    «Компасе» остаётся."""
+    from yandex_search import SearchResult
+    results = [SearchResult("В «Лемана ПРО» сменился гендиректор после передачи активов | Forbes.ru",
+                            "https://www.forbes.ru/biznes/569062", ""),
+               SearchResult("Смена директора в ООО в 2026: пошаговая инструкция", "https://kurs.alfabank.ru/a", "")]
+    text = ("Среди сделок «Компаса» данных о смене генерального директора нет.\n\n"
+            "По результатам свежего поиска обнаружены лишь общие материалы о порядке смены директора в ООО.\n\n"
+            "Таким образом, в найденных открытых источниках я не нашёл примеров компаний, где после сделки "
+            "сменился гендиректор. Уточните запрос.")
+    q = "В каких компаниях после сделки сменился гендиректор?"
+    out = main._web_guard(text, q, _ret(), results)
+    assert "лишь общие материалы" not in out and "я не нашёл" not in out
+    assert "В открытых источниках по вопросу нашлось:\n- [В «Лемана ПРО» сменился гендиректор" in out
+    assert "alfabank" not in out
+    assert out.startswith("Среди сделок «Компаса» данных о смене генерального директора нет.")
+    assert out.endswith("Уточните запрос.")
+    # Выдача не о том — отказ модели остаётся как есть.
+    assert main._web_guard(text, q, _ret(), results[1:]) == text
+
+
+def test_own_valuation_from_an_invented_margin_is_dropped():
+    """№64: «при типичной марже EBITDA ≈ 10 % … стоимость ≈ 4‑5 × 50 млн ₽ =
+    200‑250 млн ₽». Маржа, которой нет в данных, формула и цена, которой нет
+    в данных, снимаются; мультипликатор из сделок и сумма сделки остаются."""
+    src = _summary_source("Юнифрост купил Меридиан: EV/EBITDA 4–5x. Росспиртпром продан за 8,3 млрд ₽. "
+                          "Сделка оценивается в 1,2–1,5 млрд ₽.",
+                          "Сколько может стоить пищевое производство с выручкой 500 млн рублей?")
+    text = ("В наших данных такие сделки шли по EV/EBITDA ≈ 4‑5 ×. При типичной марже EBITDA ≈ 10 % от выручки "
+            "EBITDA будет около 50 млн ₽, а стоимость компании ≈ 4‑5 × 50 млн ₽ = 200‑250 млн ₽.\n\n"
+            "Бизнес оценивается примерно в 300 млн ₽. Другая сделка оценивается в 1,2‑1,5 млрд ₽.\n\n"
+            "- [Росспиртпром продан](#/deal/g1) — 8,3 млрд ₽.\n\n"
+            "Точная оценка требует анализа отчётности.")
+    out = main._polish_answer(text, _idx([_doc("g1", "Росспиртпром продан")]), source=src)
+    assert "марж" not in out and "200‑250" not in out and "300 млн" not in out
+    assert "EV/EBITDA ≈ 4‑5 ×" in out and "оценивается в 1,2‑1,5 млрд ₽" in out and "8,3 млрд ₽" in out
+    assert out.endswith("Точная оценка требует анализа отчётности.")
+    # Маржа из самой сделки — остаётся; «сценарий» — не «цена».
+    src2 = _summary_source("Маржа EBITDA компании — 18%. Объём рынка $22–26 млрд.")
+    keep = "Маржа EBITDA компании — 18 %. Базовый сценарий: объём рынка $22‑26 млрд."
+    assert main._polish_answer(keep, None, source=src2) == keep
+
+
+def test_compare_more_line_is_per_side_and_under_its_list():
+    """№32: модель написала у Wildberries «(ещё 9 сделок, в том числе …)» при
+    14 сделках и четырёх названных. «Ещё N» — у каждой стороны своё, по
+    сводке, под её списком; число модели в пункте со ссылкой снимается."""
+    from types import SimpleNamespace
+    oz = [_doc("o1", "Сбер может получить долю в Ozon"), _doc("o2", "Восток продала акции Ozon")]
+    wb = [_doc(f"w{i}", f"Wildberries купила актив номер {i}") for i in range(14)]
+    summary = ("Ozon и ООО «РВБ» — рядом:\n**[Ozon](#/companies/oz)** — 2 сделки (предмет сделки — 2).\n"
+               "**[ООО «РВБ» (Wildberries & Russ)](#/companies/wb)** — 14 сделок (покупатель — 13).\n"
+               "Сделок у ООО «РВБ» больше: 14 против 2 — в 7 раз.")
+    ret = _ret(intent="compare", answer=summary, docs=oz + wb[:4], pool=[])
+    idx = SimpleNamespace(by_id={d.id: d for d in oz + wb}, company_deals={"oz": oz, "wb": wb}, firm_deals={})
+    text = ("**Ozon**\n" + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in oz) + "\n\n**Wildberries**\n"
+            + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in wb[:3])
+            + f"\n- (ещё 9 сделок, в том числе обсуждение покупки Росгосстраха) — [{wb[3].title}](#/deal/w3).\n\n"
+            "Таким образом, у Wildberries сделок больше.")
+    out = main._polish_answer(text, idx, ret=ret, source=_summary_source(summary))
+    assert "ещё 9" not in out and "- (обсуждение покупки Росгосстраха)" in out
+    line = "ООО «РВБ» (Wildberries & Russ): ещё 10 сделок — на [странице компании](#/companies/wb)."
+    assert out.count(line) == 1 and out.index("#/deal/w3") < out.index(line) < out.index("Таким образом")
+    assert "Ozon: ещё" not in out                      # названы обе сделки Ozon
+    assert main._polish_answer(out, idx, ret=ret, source=_summary_source(summary)) == out
+    # Сделки обеих сторон в одном списке — одна строка после списка.
+    mixed = f"- [{oz[0].title}](#/deal/o1)\n- [{wb[0].title}](#/deal/w0)\n\nВывод."
+    out = main._polish_answer(mixed, idx, ret=ret, source=_summary_source(summary))
+    assert ("Ozon: ещё 1 сделка — на [странице компании](#/companies/oz); ООО «РВБ» (Wildberries & Russ): ещё 13 "
+            "сделок — на [странице компании](#/companies/wb).") in out
+    assert out.index("#/deal/w0") < out.index("Ozon: ещё 1") < out.index("Вывод.")
+
+
+def test_meeting_profile_gives_no_single_entity_figures_for_groups_and_holdings():
+    """P4 (Яндекс: выручка 88 млрд ₽ при прибыли 826 млрд ₽ под словом
+    «Масштаб») и №96 («Магнит»: прибыль «5,4 млн ₽» вместо 5,4 млрд): у
+    группы и у головного юрлица, чья прибыль больше выручки, цифр одного
+    юрлица модель не получает; «Масштаб — у юрлица …» переподписывается."""
+    from types import SimpleNamespace
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    assert main._rub_text(5354640000.0) == "5,4 млрд ₽" and main._rub_text(412062000.0) == "412 млн ₽"
+    entity = SimpleNamespace(id=1, legal_name="ПАО «Магнит»", inn="2309085638")
+    magnit = next((k for k, c in idx.companies.items() if c.get("name") == "Магнит"), None)
+    if magnit and magnit not in main._bank_finance():
+        answers = iter([entity, SimpleNamespace(revenue_rub=412062000.0, net_profit_rub=5354640000.0, year=2025)])
+        text = main._company_profile_text(magnit, idx, SimpleNamespace(scalar=lambda *_: next(answers)))
+        assert "412 млн" not in text and "5,4 млрд" not in text
+        assert "Цифр выручки и прибыли не называй" in text
+    group = next((k for k, c in idx.companies.items() if c.get("group") and k not in main._bank_finance()), None)
+    if group:
+        def boom(*_):
+            raise AssertionError("у группы отчётность одного юрлица не запрашивается")
+        text = main._company_profile_text(group, idx, SimpleNamespace(scalar=boom))
+        assert "Масштаб (выручка и прибыль всей компании или группы): в наших данных не указан" in text
+    line = ("- **Масштаб** — у юрлица МКПАО «Яндекс», ИНН 3900019850 (по отчётности ФНС за 2025 г.) — "
+            "выручка 88 млрд ₽.")
+    out = main._relabel_entity_scale(line)
+    assert out.startswith("- Отчётность одного юрлица (не всей компании): у юрлица МКПАО «Яндекс»")
+    assert main._relabel_entity_scale("- **Масштаб**: крупнейший банк страны.") == "- **Масштаб**: крупнейший банк страны."
+
+
+def test_condition_and_region_lists_do_not_promise_a_feed_without_that_filter():
+    """№4, 14, 60, 69: «общий список — в ленте сделок», а в ленте нет отбора
+    по условию сделки и региону. Ссылка на ленту — только с тем же отбором
+    (статус, годы, отрасль, тема); иначе — ещё несколько найденных сделок
+    ссылками и «Показаны N из M»."""
+    import assistant_retrieval as ar
+    idx = ar.get_index()
+    region = ar.retrieve("Какие сделки были в Татарстане?", None, None, idx)
+    assert region.intent == "filter" and "#/deals" not in (region.answer or "")
+    failed = ar.retrieve("Какие сделки не состоялись в 2025 году?", None, None, idx)
+    if "…и ещё" in (failed.answer or ""):
+        assert "[ленте сделок](#/deals?status=Не состоялась&year=2025)" in failed.answer
+    intent = ar.Intent("filter", span=(2024, None), status="closed")
+    link = ar.feed_link(intent)
+    assert link.startswith("#/deals?status=Закрыта&year=2024,2025") and ar.feed_link(
+        ar.Intent("filter", region="Татарстан")) is None
+    # Модельная «полный список — в ленте сделок» при отборе, которого лента не умеет, снимается…
+    docs = [_doc(f"t{i}", f"Сделка в Татарстане номер {i}") for i in range(12)]
+    summary = ("В базе «Компаса» 34 сделки с упоминанием региона «Татарстан».\n"
+               + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in docs[:6]) + "\n…и ещё 28.")
+    ret = _ret(intent="filter", answer=summary, docs=docs, pool=docs)
+    text = ("- [Сделка в Татарстане номер 0](#/deal/t0)\n\nПолный список доступен в [ленте сделок](#/deals). "
+            "Данные могут быть неполными.")
+    out = main._polish_answer(text, _idx(docs), ret=ret, source=_summary_source(summary))
+    assert "](#/deals)" not in out and "Данные могут быть неполными." in out
+    assert "Показаны 6 из 34." in out and out.count("](#/deal/") == 6
+    assert main._polish_answer(out, _idx(docs), ret=ret, source=_summary_source(summary)) == out
+    # …а при отборе, который лента умеет, голая лента становится лентой с отбором.
+    summary2 = summary.replace("…и ещё 28.", "…и ещё 28 — в [ленте сделок](#/deals?status=Закрыта&year=2025).")
+    ret2 = _ret(intent="filter", answer=summary2, docs=docs, pool=docs)
+    out = main._polish_answer(text, _idx(docs), ret=ret2, source=_summary_source(summary2))
+    assert "Полный список доступен в [ленте сделок](#/deals?status=Закрыта&year=2025)." in out
+
+
+def test_sentence_is_not_cut_after_the_year_abbreviation():
+    """№72: «7 апреля 2026 г. ФАС согласовала сделку…» резалось после «г.»."""
+    assert main._sentences("7 апреля 2026 г. ФАС согласовала сделку. Сумма не раскрыта.") == [
+        "7 апреля 2026 г. ФАС согласовала сделку.", "Сумма не раскрыта."]
+
+
+def test_polish_on_all_saved_answers_of_all_checks():
+    """Все сохранённые ответы проверок (data/inbox/assistant_eval/*.jsonl):
+    чистка идемпотентна, не оставляет голых ссылок и второй строки «Ещё N»
+    (сравнение — по одной на сторону), не обещает голую ленту там, где
+    сводка её не давала, и не меняет ответы, которых пятая волна не касается."""
+    import json as _json
+    import re as _re
+    import assistant_retrieval
+    folder = main.pathlib.Path(main.__file__).parent / "data" / "inbox" / "assistant_eval"
+    files = sorted(folder.glob("answers_*.jsonl")) if folder.exists() else []
+    if not files:
+        pytest.skip("ответов проверок нет (data/inbox не в git)")
+    idx = assistant_retrieval.get_index()
+    problems, checked = [], 0
+    for path in files:
+        for r in [_json.loads(x) for x in path.read_text(encoding="utf-8").splitlines()][1:]:
+            answer = r.get("answer") or ""
+            if not answer or r.get("model") is False:
+                continue
+            q = main._CONTEXT_PREFIX_RE.sub("", r["question"]).strip()
+            ret = assistant_retrieval.retrieve(q, r.get("context_type"), r.get("context_id"), idx)
+            prep = main._prepare_ask(q, ret, "base", "", r.get("context_type"), r.get("context_id"), idx)
+            out = main._polish_answer(answer, idx, ret=ret, source=prep.user_msg, meeting=prep.meeting)
+            checked += 1
+            if main._polish_answer(out, idx, ret=ret, source=prep.user_msg, meeting=prep.meeting) != out:
+                problems.append((path.name, r["n"], "повторная чистка меняет ответ"))
+            mores = _re.findall(r"(?m)^(?:Ещё \d+|Показаны \d+ из \d+).*$", out)
+            if len(mores) > 1:
+                problems.append((path.name, r["n"], mores))
+            if _shows_part_without_feed(ret) and _re.search(r"(?:полн\w+ список|остальн\w*)[^\n]*\]\(#/deals\)", out):
+                problems.append((path.name, r["n"], "обещана голая лента"))
+            if r["n"] == 64 and _re.search(r"марж\w*[^.\n]*\d+\s*%", out):
+                problems.append((path.name, r["n"], "маржа модели"))
+    assert checked > 200 and not problems, problems[:5]
+
+
+def _shows_part_without_feed(ret):
+    import re as _re
+    return main._shows_part(ret) and not _re.search(r"\]\(#/deals[)?]", ret.answer or "")
