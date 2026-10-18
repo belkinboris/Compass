@@ -1641,7 +1641,10 @@ def _filter_sentences(text: str, drop, lists_too: bool = False, keep_deal_items:
         kept = [x for x in parts if not drop(x)]
         if len(kept) == len(parts):
             out.append(line)
-        elif kept and not _only_links_left(" ".join(kept)):
+        elif kept and not _only_links_left(" ".join(kept)) \
+                and not (marker and not _LINK_SPAN.sub("", " ".join(kept)).strip(" .,;:—–-*")):
+            # От пункта осталась одна ссылка «[Активы Tarkett…](…)» (№59 пятой
+            # проверки) — пункт уходит целиком.
             out.append(marker + " ".join(kept))
     return "\n".join(out)
 
@@ -2076,7 +2079,7 @@ _COMPLETE_CLAIM = re.compile(
     # «прошла только одна» (№3), «во всех остальных сделках мультипликаторы не
     # раскрывались» (№14) — вывод о том, чего модель не видела.
     r"|(?:только|лишь)\s+(?:одн[аоуи]\w*|один)\b"
-    r"|\bостальн\w+\b[^.!?\n]{0,60}?\bне\s+(?:раскрыва|раскрыт|указ|назван|называ|упомина|встреча|было|был)\w*"
+    r"|(?:\bостальн\w+|\bдруги[ех]\s+(?:найденн\w+\s+)?сделк\w*)\b[^.!?\n]{0,60}?\bне\s+(?:раскрыва|раскрыт|указ|назван|называ|упомина|встреча|было|был)\w*"
     r"(?![^.!?\n]*\b(?:ниже|меньше|мельче)\b))", re.I)
 
 

@@ -1671,3 +1671,14 @@ def test_polish_on_all_answers_of_the_fourth_check():
         if r["n"] == 95:
             assert "]()" not in answer or out.count("](#/deal/") >= 8
     assert checked > 80 and not problems, problems[:5]
+
+
+def test_fifth_check_leftovers_link_only_item_and_other_deals_claim():
+    """Пятая проверка (18 октября 2026): №59 — от пункта осталась одна ссылка
+    «[Активы Tarkett…]»; №14 — «другие сделки либо не раскрывали EV/EBITDA»."""
+    out = main._filter_sentences("- [Активы Tarkett…](#/deal/x). Указ согласован с комиссией.\n- Сумма раскрыта.",
+                                 lambda x: "Указ" in x, lists_too=True)
+    assert out == "- Сумма раскрыта."
+    assert main._COMPLETE_CLAIM.search("Другие сделки в списке либо не раскрывали EV/EBITDA, либо приводили их к выручке")
+    # Пункт, который и был одной ссылкой с названием сделки, — не трогаем.
+    assert main._filter_sentences("- [Сделка](#/deal/x)", lambda x: False, lists_too=True) == "- [Сделка](#/deal/x)"
