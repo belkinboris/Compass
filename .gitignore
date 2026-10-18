@@ -45,3 +45,6 @@ data/inbox/sanctions/
 # возвращаются, а не сырьё.
 data/inbox/competitors/screens/
 data/inbox/claude/
+# Ответы ассистента при проверке на 100 вопросах (pipeline/assistant_eval/run.py)
+# — рабочий материал одного прогона; набор вопросов и скрипт лежат в git.
+data/inbox/assistant_eval/
