@@ -1233,24 +1233,30 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
         text = _fix_firm_links(text, idx)
     if meeting:
         text = _drop_dont_say_sections(text)
+        text = _relabel_entity_scale(text)
         if idx is not None and getattr(ret, "intent", None) != "advisor":
             text = _drop_firm_advice(text, idx, getattr(ret, "subject", None) or "")
     if source:
         text = _restore_names(text, source)
         text = _restore_latin_names(text, source, idx)
         text = _drop_unsupported_multiples(text, source)
+        text = _drop_unsupported_estimates(text, source)
         text = _drop_unsupported_approvals(text, source)
         text = _drop_own_counts(text, source)
     text = _drop_generalizations(text)
     if ret is not None:
         more = _summary_more(ret)
-        if more:
-            text = _drop_more_claims(text)
+        sides = _compare_more(ret, idx)
+        if more or sides:
+            text = _drop_more_claims(_drop_more_in_items(text))
+        text = _fix_feed_promises(text, ret)
         if _shows_part(ret):
             text = _drop_completeness_claims(text, ret, tail=not more)
         text = _link_list_items(text, _candidate_docs(ret), meeting=meeting)
         if more:
-            text = _add_more_line(text, more, meeting=meeting)
+            text = _add_more_line(text, more, meeting=meeting, order=_candidate_docs(ret))
+        elif sides:
+            text = _add_compare_more_lines(text, sides)
         if ret.intent == "recent" and idx is not None:
             text = _collapse_same_day(text, idx)
     text = _drop_dangling_intros(text)
@@ -1261,6 +1267,22 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
     text = re.sub(r"(?<=\S)[ \t\u00a0\u202f]+([.,;:!?])(?=\s|$)", r"\1", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
+
+
+# «- Масштаб — у юрлица МКПАО «Яндекс», ИНН … — выручка 88 млрд ₽» (P4 пятой
+# проверки): цифры одного юрлица под словом «Масштаб» читаются как размер
+# всей компании. Подпись меняется на то, что это есть.
+_SCALE_LABEL = re.compile(r"^(\s*(?:[-•*]|\d+[.)])\s+)(\*\*)?\s*Масштаб\w*\s*(?:\*\*)?\s*[:—–-]?\s*(?:\*\*)?\s*", re.I)
+
+
+def _relabel_entity_scale(text: str) -> str:
+    out = []
+    for line in text.split("\n"):
+        m = _SCALE_LABEL.match(line)
+        if m and re.search(r"ФНС|юрлиц|ИНН", line):
+            line = m.group(1) + "Отчётность одного юрлица (не всей компании): " + line[m.end():]
+        out.append(line)
+    return "\n".join(out)
 
 
 def _drop_dangling_intros(text: str) -> str:
@@ -1581,6 +1603,9 @@ def _sentences(line: str) -> list[str]:
         if head.count("«") > head.count("»") or head.count("(") > head.count(")") \
                 or head.count("[") > head.count("]") or head.count("**") % 2:
             continue
+        # «7 апреля 2026 г. ФАС согласовала…» (№72): «г.», «им.», «ул.» — не конец фразы.
+        if re.search(r"(?<![\w])(?:г|гг|им|ул|пр|д|т\.\s?е|т\.\s?к)\.$", line[:m.start()]):
+            continue
         before = re.search(r"[\w\-]+[!.]$", line[:m.start()])
         after = re.match(r"[«\"]?[\w\-]+", line[m.end():])
         if before and after:
@@ -1659,6 +1684,347 @@ _GENERALIZATION = re.compile(
 
 def _drop_generalizations(text: str) -> str:
     return _filter_sentences(text, lambda x: bool(_GENERALIZATION.match(x)))
+
+
+# ── Пятая проверка на 100 вопросах (18 октября 2026) ────────────────────────
+
+# Своя оценка бизнеса (№64): «при типичной марже EBITDA ≈ 10 % … стоимость
+# компании ≈ 4‑5 × 50 млн ₽ = 200‑250 млн ₽». Маржи в данных нет, цена —
+# арифметика модели. Как с мультипликатором: маржа, которой нет в том, что
+# видела модель, снимается вместе с фразой; формула «× … =» — всегда; «оценивается
+# в / стоимость ≈ N млн», где такой суммы нет в данных, — тоже (фраза со
+# ссылкой на сделку не трогается: там сумма сделки).
+_NUM_RU = r"\d+(?:[.,]\d+)?"
+_MARGIN = re.compile(r"марж\w*[^.\n]{0,50}?(" + _NUM_RU + r")\s*%|(" + _NUM_RU + r")\s*%[^.\n]{0,30}?марж", re.I)
+_FORMULA = re.compile(r"\d\s*[×xх*]\s*(?:≈\s*)?\d[^=\n]{0,40}=\s*≈?\s*\d", re.I)
+_VALUE_CLAIM = re.compile(
+    r"(?<![а-яёa-z])(?:оценива\w*|оценк\w*|стоимост\w*|стоить|стоит|цен[аоуы]?\b|EBITDA|прибыл\w*)[^.\n]{0,60}?"
+    r"(?<![\d.,])(" + _NUM_RU + r")(?:\s*[‑–—-]\s*(" + _NUM_RU + r"))?\s*(млн|млрд|трлн)", re.I)
+
+
+def _in_source(num: str, unit: str, src: str) -> bool:
+    num = num.replace(",", ".")
+    return bool(re.search(r"(?<![\d.])" + re.escape(num) + r"(?:\s*[‑–—-]\s*" + _NUM_RU + r")?\s*" + unit, src, re.I)
+                or re.search(_NUM_RU + r"\s*[‑–—-]\s*" + re.escape(num) + r"\s*" + unit, src, re.I))
+
+
+def _drop_unsupported_estimates(text: str, source: str) -> str:
+    src = source.replace(",", ".")
+
+    def unsupported(sentence: str) -> bool:
+        plain = _LINK_SPAN.sub(" ", sentence).replace("**", "")
+        for m in _MARGIN.finditer(plain):
+            num = (m.group(1) or m.group(2)).replace(",", ".")
+            if not re.search(r"(?<![\d.])" + re.escape(num) + r"\s*%", src):
+                return True
+        if _FORMULA.search(plain):
+            return True
+        if "](#/deal/" in sentence:
+            return False
+        for m in _VALUE_CLAIM.finditer(plain):
+            unit = m.group(3).lower()
+            if any(n and not _in_source(n, unit, src) for n in (m.group(1), m.group(2))):
+                return True
+        return False
+    return _filter_sentences(text, unsupported, lists_too=True)
+
+
+# Сравнение двух компаний или фирм (№32): «Ещё N» — у каждой своё, по
+# сводке, и под её списком. Модель писала «(ещё 9 сделок, в том числе …)»
+# при 11 оставшихся — прямо в пункте со ссылкой, где общий снимальщик счёта
+# не трогает ничего.
+_COMPARE_HEAD = re.compile(
+    r"^\*\*\[([^\]]+)\]\(#/(companies|advisors)/([^)\s]+)\)\*\*[^\n]*?—\s*(\d+)\s+сдел", re.M)
+_MORE_IN_ITEM = re.compile(
+    r"(\(?)[ \t]*ещ[её][ \t]+\d+[ \t]+(?:сделк\w*|сделок)(?:[ \t]*,[ \t]*|[ \t]+)"
+    r"(?:в[ \t]+том[ \t]+числе|включая|среди[ \t]+них|например)[ \t]*:?[ \t]*", re.I)
+
+
+def _compare_more(ret, idx):
+    """[(имя, раздел, id, всего, id сделок этой стороны)] из сводки сравнения."""
+    if ret is None or idx is None or len(_COMPARE_HEAD.findall(ret.answer or "")) < 2:
+        return None
+    out = []
+    for m in _COMPARE_HEAD.finditer(ret.answer or ""):
+        name, page, eid, total = m.group(1), m.group(2), m.group(3), int(m.group(4))
+        pool = (getattr(idx, "company_deals", None) or {}) if page == "companies" else \
+            (getattr(idx, "firm_deals", None) or {})
+        out.append((name, page, eid, total, {d.id for d in pool.get(eid) or []}))
+    return out
+
+
+def _drop_more_in_items(text: str) -> str:
+    return "\n".join(_MORE_IN_ITEM.sub(lambda m: m.group(1), x) if _is_list_line(x) else x
+                     for x in text.split("\n"))
+
+
+def _add_compare_more_lines(text: str, sides) -> str:
+    """Под списком каждой стороны — «Имя: ещё N сделок — на странице…».
+    Если сделки обеих сторон в одном списке, строка одна, после списка."""
+    lines = text.split("\n")
+    shown = set(re.findall(r"\(#/deal/([^)\s]+)\)", text))
+    ends: dict[int, list[str]] = {}
+    for name, page, eid, total, ids in sides:
+        others = set().union(*[s[4] for s in sides if s[2] != eid])
+        left = total - len(shown & ids)
+        if left <= 0 or not ids:
+            continue
+        rows = []
+        for i, x in enumerate(lines):
+            own = [d for d in re.findall(r"\(#/deal/([^)\s]+)\)", x) if d in ids]
+            if _is_list_line(x) and own and not all(d in others for d in own):
+                rows.append(i)
+        if not rows:
+            continue
+        where = "на [странице компании]" if page == "companies" else "на [странице фирмы]"
+        word = assistant_retrieval._plural(left, "сделка", "сделки", "сделок")
+        ends.setdefault(_list_end(lines, rows[-1]), []).append(f"{name}: ещё {left} {word} — {where}(#/{page}/{eid})")
+    for k in sorted(ends, reverse=True):
+        lines[k + 1:k + 1] = ["", "; ".join(ends[k]) + ".", ""]
+    return "\n".join(lines)
+
+
+# Режим «по интернету» спорит с базой (№72): закрытая 7 октября покупка
+# «Дела» подана как «переговоры продолжаются» по новости от 3 сентября.
+# Правило в SYSTEM_WEB модель читала, но не выполняла. Страховка: статус и
+# дата из «Компаса» идут модели отдельным блоком, а фраза, которая называет
+# закрытую сделку готовящейся или сорвавшейся без даты новее карточки,
+# заменяется статусом из «Компаса» (с датой старше — получает пометку).
+_PENDING_CLAIM = re.compile(
+    r"переговор\w*[^.\n]{0,60}?продолжа\w*|продолжа\w*\s+(?:\w+\s+){0,2}переговор\w*|\bготови[тш]\w*|\bготовят\w*"
+    r"|\bпланиру\w*|находит\w*\s+в\s+стади\w*|в\s+стадии\s+обсужден\w*|\bещ[её]\s+не\s+(?:закрыт|заверш)\w*"
+    r"|либо\s+заверша\w*,?\s+либо|\bведут?\s+переговор\w*|подготовительн\w*\s+этап\w*|находит\w*\s+в\s+процесс\w*"
+    r"|\bпланирует\w*|\bнамерен\w*|\bсобира\w+ся\s+(?:купить|приобрести|продать)", re.I)
+_FAILED_CLAIM = re.compile(
+    r"не\s+(?:смог\w*|удал\w*|сумел\w*)\s+(?:\w+\s+){0,2}?заверш\w*|сорвал\w*|не\s+состоял\w*|несостоявш\w*|отказал\w*\s+от\s+сделк",
+    re.I)
+_RU_MONTHS = {"январ": 1, "феврал": 2, "март": 3, "апрел": 4, "ма": 5, "июн": 6, "июл": 7, "август": 8,
+              "сентябр": 9, "октябр": 10, "ноябр": 11, "декабр": 12}
+_DATE_IN_TEXT = re.compile(
+    r"(?:(\d{1,2})\s+)?(январ|феврал|март|апрел|ма[яй]|июн|июл|август|сентябр|октябр|ноябр|декабр)\w*\s+(20\d\d)"
+    r"|(\d{1,2})\.(\d{1,2})\.(20\d\d)|(20\d\d)[‑-](\d\d)[‑-](\d\d)", re.I)
+
+
+def _dates_in(text: str) -> list[str]:
+    """Даты фразы как «ГГГГ-ММ-ДД»; год без месяца («в 2023 году») — как
+    конец года: новость того же года, что карточка, не считается старой."""
+    out = [f"{m.group(1)}-12-31" for m in re.finditer(r"\b(20\d\d)\s*(?:год|г\.)", text)
+           if not re.search(r"(?:январ|феврал|март|апрел|ма[яй]|июн|июл|август|сентябр|октябр|ноябр|декабр)\w*\s*$|\d\.$",
+                            text[:m.start()], re.I)]
+    for m in _DATE_IN_TEXT.finditer(text):
+        if m.group(3):
+            mon = m.group(2).lower()
+            month = next(v for k, v in _RU_MONTHS.items() if mon.startswith(k))
+            out.append(f"{m.group(3)}-{month:02d}-{int(m.group(1) or 0):02d}")
+        elif m.group(6):
+            out.append(f"{m.group(6)}-{int(m.group(5)):02d}-{int(m.group(4)):02d}")
+        else:
+            out.append(f"{m.group(7)}-{m.group(8)}-{m.group(9)}")
+    return out
+
+
+def _name_stem(name: str) -> str:
+    return name if len(name) <= 5 else name[:max(4, len(name) - 2)]
+
+
+def _deal_names(doc, docs) -> list[tuple[str, str]]:
+    """(основа, имя) — по чему фраза узнаёт сделку: названия в кавычках из
+    заголовка, предмет и продавец — кроме имени, которое есть у большинства
+    сделок выборки (сама компания вопроса, «Росатом»)."""
+    raw = re.findall(r"«([^«»]{3,40})»", doc.title or "")
+    for x in (getattr(doc, "target", ""), getattr(doc, "asset", ""), getattr(doc, "seller", "")):
+        if x:
+            inner = re.findall(r"«([^«»]{3,40})»", str(x))
+            raw += inner or [str(x)]
+    out: list[tuple[str, str]] = []
+    for name in raw:
+        core = re.sub(r"^(?:ООО|АО|ПАО|ГК|группа)\s+", "", str(name).strip(" «»\"")).strip(" «»\"")
+        if len(core) < 3 or len(core) > 40:
+            continue
+        stem = _name_stem(core).lower()
+        if any(stem == x for x, _ in out):
+            continue
+        rx = re.compile(r"(?<!\w)" + re.escape(stem))
+        shared = sum(1 for o in docs if rx.search((o.title or "").lower()))
+        if len(docs) >= 3 and shared > len(docs) / 2:
+            continue
+        out.append((stem, core))
+    return out
+
+
+def _word_stems(text: str) -> set[str]:
+    words = re.findall(r"[a-zа-яё0-9]+", (text or "").lower().replace("ё", "е"))
+    return {w[:5] for w in words if len(w) >= 4 or w.isdigit()} - {"росси", "компа", "сделк", "котор", "этого"}
+
+
+def _kompas_status_block(ret) -> str:
+    docs = list(getattr(ret, "docs", None) or [])[:assistant_retrieval.MAX_DEALS_FOR_MODEL]
+    rows = [f"- {d.title} — {d.status.lower()}, {assistant_retrieval._fmt_date(d.date)}"
+            for d in docs if getattr(d, "status", "") and getattr(d, "date", "")]
+    if not rows:
+        return ""
+    return ("СТАТУС СДЕЛОК ПО ДАННЫМ «КОМПАСА» (он главнее выдачи поиска: новость из выдачи с датой раньше этой "
+            "не меняет статус; закрытую сделку не называй готовящейся, обсуждаемой или сорвавшейся):\n"
+            + "\n".join(rows))
+
+
+def _fix_status_contradictions(text: str, ret) -> str:
+    all_docs = list(getattr(ret, "docs", None) or [])[:assistant_retrieval.MAX_DEALS_FOR_MODEL]
+    docs = [d for d in all_docs
+            if getattr(d, "status", "") == "Закрыта" and re.match(r"20\d\d-\d\d", getattr(d, "date", "") or "")]
+    if not docs:
+        return text
+    names = {d.id: _deal_names(d, all_docs) for d in all_docs}
+    words = {d.id: _word_stems(" ".join([d.title or "", getattr(d, "target", "") or "", getattr(d, "seller", "") or ""]))
+             for d in all_docs}
+    closed = {d.id for d in docs}
+    said: set[str] = set()
+
+    def named(d, plain: str):
+        return [disp for stem, disp in names.get(d.id) or [] if re.search(r"(?<!\w)" + re.escape(stem), plain)]
+
+    def deal_of(sentence: str):
+        """Закрытая сделка, о которой фраза: ссылкой — только если ссылка
+        одна; по имени — если с заголовком сделки совпадает ещё хотя бы одно
+        слово и никакая другая сделка выборки не подходит лучше (судоверфь
+        «Звезда» — не игрушки «Звезда», №49)."""
+        linked = set(re.findall(r"\(#/deal/([^)\s]+)\)", sentence))
+        if linked:
+            return next((d for d in docs if d.id in linked and len(linked) == 1), None), False
+        plain = _LINK_SPAN.sub(" ", sentence).lower()
+        stems = _word_stems(plain)
+        scored = []
+        for d in all_docs:
+            found = named(d, plain)
+            if not found:
+                continue
+            roots = [_name_stem(x).lower().replace("ё", "е")[:4] for x in found]
+            extra = {w for w in stems & words[d.id] if not any(w.startswith(r) for r in roots)}
+            if extra:
+                scored.append((len(extra), d.date, d))
+        if not scored:
+            return None, False
+        best = max(scored, key=lambda x: (x[0], x[1]))[2]
+        if best.id not in closed:
+            # Фраза о нескольких сделках («готовит Аккую, покупку «Дела» и СП»):
+            # закрытой из них — пометка, а не замена.
+            shut = [x for x in scored if x[2].id in closed]
+            return (max(shut, key=lambda x: x[1])[2], True) if shut else (None, False)
+        # Две закрытые сделки с одним именем («Дело» 2022 и 2026) — итог по
+        # последней.
+        best = max((x for x in scored if x[2].id in closed and set(named(x[2], plain)) & set(named(best, plain))),
+                   key=lambda x: x[1])[2]
+        own = {x.lower() for x in named(best, plain)}
+        return best, any({x.lower() for x in named(o, plain)} - own for o in all_docs if o.id != best.id)
+
+    out = []
+    for line in text.split("\n"):
+        if not line.strip():
+            out.append(line)
+            continue
+        m = re.match(r"^\s*(?:[-•*–—]|\d+[.)])\s+", line)
+        marker, body = (m.group(0), line[m.end():]) if m else ("", line)
+        parts = _sentences(body)
+        kept, current = [], None
+        for sent in parts:
+            d, multi = deal_of(sent)
+            plain = _LINK_SPAN.sub(" ", sent)
+            claim = _PENDING_CLAIM.search(plain) or _FAILED_CLAIM.search(plain)
+            if d is None and current is not None and claim:
+                continue           # продолжение той же фразы о сделке: «сроки не определены»
+            if d is None or not claim:
+                kept.append(sent)
+                current = None
+                continue
+            dates = _dates_in(plain)
+            card = d.date if len(d.date) == 10 else d.date + "-31"
+            when = assistant_retrieval._fmt_date(d.date)
+            if dates and max(dates) > card:
+                kept.append(sent)          # новость новее карточки — пусть говорит
+                continue
+            if "по данным «компаса», сделка" in plain.lower():
+                kept.append(sent)          # итог из «Компаса» уже дописан
+                continue
+            if multi or (dates and not _PENDING_CLAIM.search(plain)):
+                # Фраза о нескольких сделках или датированная старая новость —
+                # не заменяем, а дописываем итог из «Компаса».
+                label = next(iter(named(d, plain.lower())), "")
+                note = (f"по данным «Компаса», сделка по «{label}» закрыта {when}" if multi and label
+                        else f"позже, {when}, по данным «Компаса», сделка закрыта")
+                kept.append(sent.rstrip(" .") + f" ({note}).")
+                continue
+            current = d
+            if d.id in said:
+                continue
+            said.add(d.id)
+            kept.append(f"По данным «Компаса», сделка закрыта {when}: [{d.title}](#/deal/{d.id}).")
+        if kept == parts:
+            out.append(line)
+        elif kept:
+            out.append(marker + " ".join(kept))
+    return "\n".join(out)
+
+
+# №78: «в найденных открытых источниках я не нашёл примеров», а первая же
+# ссылка выдачи — «В «Лемана ПРО» сменился гендиректор после…» (Forbes).
+# Если заголовок источника совпадает с вопросом по смыслу (два значимых слова
+# вопроса), фраза «не нашёл / подтверждения нет / лишь общие материалы» о
+# сети снимается, а на её место встаёт перечень таких источников.
+_WEB_DENIAL = re.compile(
+    r"не\s+(?:наш[её]л\w*|нашлось|нашли|удалось\s+найти|обнаруж\w*|встретил\w*)|\bнет\s+(?:подтвержден\w*|данных|сведений|информаци\w*|примеров)"
+    r"|подтвержден\w*\s+(?:\w+\s+)?нет|лишь\s+общ\w+\s+материал\w*|не\s+привязан\w*|не\s+относ\w+\s+к\s+(?:вопрос|тем)", re.I)
+_WEB_SCOPE = re.compile(r"источник\w*|поиск\w*|в\s+сети|интернет\w*|выдач\w*|публикаци\w*|СМИ|прессе", re.I)
+_WEB_STOP_STEMS = {"компа", "сделк", "сдело", "какие", "каких", "котор", "росси", "году", "годах", "сейча", "сколь",
+                   "много", "after"}
+
+
+def _question_stems(question: str) -> set[str]:
+    return {w[:5] for w in assistant_retrieval.query_words(question) if len(w) >= 4} - _WEB_STOP_STEMS
+
+
+def _matching_results(question: str, results) -> list:
+    want = _question_stems(question)
+    if len(want) < 2:
+        return []
+    out = []
+    for r in results or []:
+        have = {w[:5] for w in re.findall(r"[a-zа-яё0-9]+", (r.title or "").lower().replace("ё", "е")) if len(w) >= 4}
+        want_e = {w.replace("ё", "е") for w in want}
+        if len(want_e & have) >= 2:
+            out.append(r)
+    return out
+
+
+def _web_guard(text: str, question: str, ret, results) -> str:
+    """Страховка режима «по интернету»: статус «Компаса» главнее старой
+    новости (№72), найденное в сети не отрицается (№78)."""
+    text = _fix_status_contradictions(text, ret)
+    text = _drop_web_denials(text, question, results)
+    return re.sub(r"\n{3,}", "\n\n", text).strip()
+
+
+def _drop_web_denials(text: str, question: str, results) -> str:
+    found = _matching_results(question, results)
+    if not found:
+        return text
+    dropped = {"n": 0}
+
+    def denial(sentence: str) -> bool:
+        plain = _LINK_SPAN.sub(" ", sentence)
+        if _WEB_DENIAL.search(plain) and _WEB_SCOPE.search(plain):
+            dropped["n"] += 1
+            return True
+        return False
+    lines, out, placed = text.split("\n"), [], False
+    for line in lines:
+        before = dropped["n"]
+        new = _filter_sentences(line, denial)
+        if new.strip():
+            out.append(new)
+        if dropped["n"] > before and not placed:
+            placed = True
+            out += ["", "В открытых источниках по вопросу нашлось:"] + [f"- [{r.title}]({r.url})" for r in found[:3]] + [""]
+    return "\n".join(out) if placed else text
 
 
 # ── Оформление (третья проверка, 18 октября 2026) ───────────────────────────
@@ -1929,7 +2295,7 @@ def _drop_own_counts(text: str, source: str) -> str:
     shown = len(set(re.findall(r"\(#/deal/([^)\s]+)\)", text)))
 
     def unsupported(sentence: str) -> bool:
-        if "](#/deal/" in sentence:
+        if "](#/deal/" in sentence or _SHOWN_LINE.match(sentence.strip()):
             return False
         nums, special = _count_claims(sentence)
         if special:
@@ -2016,12 +2382,22 @@ def _list_end(lines: list[str], i: int) -> int:
     return last
 
 
-def _add_more_line(text: str, more, meeting: bool = False) -> str:
+# Подборка по условию сделки или региону (№4, 14, 60, 69 пятой проверки):
+# ленты с таким фильтром на сайте нет, и обещание «общий список — в ленте
+# сделок» вело на все 1500 сделок. Теперь код сам добавляет ещё несколько
+# найденных сделок ссылками и честно пишет, сколько показано из скольких.
+EXTRA_DEALS_MAX = 5
+_SHOWN_LINE = re.compile(r"^Показаны \d+ из \d+\.")
+
+
+def _add_more_line(text: str, more, meeting: bool = False, order=None) -> str:
     """После последнего списка со сделками этой сводки — «Ещё N — на
     странице…», где N — сколько из найденного не названо в ответе. Не в
-    разделе о консультантах и советах; без ссылки в сводке — с подсказкой,
-    где искать."""
+    разделе о консультантах и советах; без ссылки в сводке — ещё несколько
+    найденных сделок ссылками и «Показаны N из M»."""
     total, tail, known = more
+    if not tail and any(_SHOWN_LINE.match(x.strip()) for x in text.split("\n")):
+        return text
     lines = text.split("\n")
     in_deals, rows = True, []
     for i, line in enumerate(lines):
@@ -2035,10 +2411,14 @@ def _add_more_line(text: str, more, meeting: bool = False) -> str:
     if not rows or left <= 0:
         return text
     if tail:
-        line = f"Ещё {left} {tail}."
+        block = [f"Ещё {left} {tail}."]
     else:
-        line = (f"Ещё {left} — уточните вопрос (год, отрасль, компания), и я покажу их; "
-                f"общий список — в [ленте сделок](#/deals).")
+        room = min(EXTRA_DEALS_MAX, max(0, assistant_retrieval.MAX_DEALS_FOR_MODEL - len(shown)))
+        extra = [d for d in (order or []) if d.id in known and d.id not in shown][:room]
+        block = (["Ещё из найденных:"] + [f"- [{d.title}](#/deal/{d.id})" for d in extra] + [""] if extra else [])
+        n = len(shown) + len(extra)
+        block.append(f"Показаны {n} из {total}." + (" Остальные покажу, если уточните вопрос: год, отрасль или компанию."
+                                                     if n < total else ""))
     i = rows[-1]
     if not _is_list_line(lines[i]) and lines[i][:1] in " \t":
         # Продолжение пункта с отступом («   – Источник: […](#/deal/…)») —
@@ -2049,8 +2429,33 @@ def _add_more_line(text: str, more, meeting: bool = False) -> str:
         if _is_list_line(lines[k]):
             i = k
     last = _list_end(lines, i) if _is_list_line(lines[i]) else i
-    lines[last + 1:last + 1] = ["", line, ""]
+    lines[last + 1:last + 1] = [""] + block + [""]
     return "\n".join(lines)
+
+
+# «Полный список — в [ленте сделок](#/deals)», когда сводка такой ссылки не
+# давала (подборка по условию или региону): лента без фильтра — все сделки.
+_FEED_PROMISE = re.compile(r"\]\(#/deals\)")
+_FEED_PROMISE_WORDS = re.compile(r"полн\w*\s+(?:\w+\s+)?(?:список|перечень)|вс[еёю]\w*\s+(?:\w+\s+)?(?:сделк|список)"
+                                 r"|остальн\w*|\bещ[её]\b|общий\s+список|доступ\w*", re.I)
+
+
+def _fix_feed_promises(text: str, ret) -> str:
+    """Сводка дала ленту с отбором (#/deals?status=…&year=…) — голая лента
+    в «полный список — в ленте» становится ею; отбора у ленты нет (условие
+    сделки, регион), а найдено больше показанного — фраза снимается."""
+    summary = ret.answer or ""
+    if re.search(r"\]\(#/deals\)", summary):
+        return text
+    m = re.search(r"\]\((#/deals\?[^)\s][^)]*)\)", summary)
+    if m:
+        target = m.group(1)
+        return "\n".join(_FEED_PROMISE.sub(f"]({target})", x) if _FEED_PROMISE_WORDS.search(x) else x
+                         for x in text.split("\n"))
+    if not _shows_part(ret):
+        return text
+    return _filter_sentences(text, lambda x: bool(_FEED_PROMISE.search(x) and _FEED_PROMISE_WORDS.search(x)),
+                             lists_too=True)
 
 
 def _shows_part(ret) -> bool:
@@ -2458,6 +2863,14 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
         lines.append("Дочерние компании: в профиле не указаны (партнёрство или сделка с компанией "
                      "не делает её дочерней).")
     bank = _bank_finance().get(cid)
+    # Группа (Яндекс: МКПАО «Яндекс» — выручка 88 млрд ₽ при прибыли 826 млрд ₽)
+    # и головное юрлицо холдинга, у которого прибыль больше выручки (ПАО
+    # «Магнит»: 412 млн ₽ выручки, 5,4 млрд ₽ прибыли — дивиденды дочерних),
+    # — цифры одного юрлица не говорят о компании ничего, а модель ставила их
+    # под «Масштаб» и путала «млн» с «млрд» (пятая проверка, №96, P4).
+    is_group = bool(c.get("group")) or bool(parent) or bool(children)
+    no_scale = ("Масштаб (выручка и прибыль всей компании или группы): в наших данных не указан — у компании "
+                "несколько юрлиц. Цифр выручки и прибыли не называй.")
     if isinstance(bank, dict) and bank.get("assets_rub"):
         fin = [f"активы {_rub_text(bank['assets_rub'])}"]
         if bank.get("equity_rub"):
@@ -2467,6 +2880,8 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
             line += (f"; чистая прибыль с начала года на {_date_text(bank.get('as_of_profit'))} — "
                      f"{_rub_text(bank['net_profit_rub'])}")
         lines.append(line)
+    elif is_group:
+        lines.append(no_scale)
     elif db is not None:
         try:
             entity = db.scalar(select(LegalEntity).where(
@@ -2477,7 +2892,11 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
                 FinancialReport.legal_entity_id == entity.id,
                 FinancialReport.year >= datetime.now(timezone.utc).year - FNS_REPORT_MAX_AGE_YEARS,
             ).order_by(FinancialReport.year.desc()))
-            if report and (report.revenue_rub or report.net_profit_rub):
+            holding_entity = bool(report and report.net_profit_rub is not None and report.revenue_rub is not None
+                                  and float(report.net_profit_rub) > float(report.revenue_rub))
+            if holding_entity:
+                lines.append(no_scale)
+            elif report and (report.revenue_rub or report.net_profit_rub):
                 fin = []
                 if report.revenue_rub:
                     fin.append(f"выручка {_rub_text(report.revenue_rub)}")
@@ -2505,6 +2924,9 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
             results = yandex_search(question, config=SearchConfig.from_env(), client=_http)
             if results:
                 search_block = build_search_block(results)
+                status = _kompas_status_block(ret)
+                if status:
+                    search_block = status + "\n\n" + search_block
                 system = SYSTEM_WEB
             else:
                 logger.info("web-режим: пустая выдача, деградация в base")
@@ -2619,6 +3041,8 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     try:
         text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens, deadline=deadline)
         text = _polish_answer(text, idx, ret=ret, source=prep.user_msg, meeting=prep.meeting)
+        if search_block:
+            text = _web_guard(text, question, ret, results)
         if _looks_cut(text):
             raise LLMCutOff(f"ответ похож на обрубок ({len(text)} знаков): {text[-60:]!r}", partial=text)
         # Ссылок в ответе нет по двум совершенно разным причинам, и до
