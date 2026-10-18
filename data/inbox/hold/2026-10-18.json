@@ -2,100 +2,16 @@
  "made": "2026-10-18",
  "drafts": [
   {
-   "draft_id": "d56361114",
-   "title": "Репик предложил ввести разовый сбор при покупке недвижимости от ₽300 млн",
+   "draft_id": "d25445881",
+   "title": "Про покупку «дешево» и продажу «дорого»",
    "date": "2026-10-18",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/finances/18/10/2026/6ad48d34c8791ef4fc849387"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1363956.php"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44257503",
-   "title": "От Chevrolet до Lamborghini: 5 машин супергероев, которые можно купить в России",
-   "date": "2026-10-18",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/ot-chevrolet-do-lamborghini-5-mashin-supergeroev-kotorye-mozhno-kupit-v-rossii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23414826",
-   "title": "На Украине создали комиссию по продаже акций «Сенс банка» и «Укргазбанка»",
-   "date": "2026-10-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261018/kabmin-2125246897.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82700468",
-   "title": "Кирпичное производство полного цикла продают рядом с трассой М-4 Дон",
-   "date": "2026-10-18",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/rostov/2026/10/18/kirpichnoe-proizvodstvo-polnogo-czikla-prodayut-ryadom-s-trassoi-m-4-don"
-    ]
-   ],
-   "sum": "44 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
