@@ -21,6 +21,7 @@ import pathlib
 import random
 import re
 import threading
+from collections import Counter
 import time
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -727,7 +728,12 @@ COMPLETENESS_RULES = """Ты видишь не всю базу «Компаса�
 - Числа — сколько всего сделок, сколько закрыто, средняя или медианная сумма, доли — только готовые из сводки. Сам не считай и не усредняй по сделкам из списка. Нет готового числа — так и скажи.
 - Не добавляй общих выводов, которых нет в сводке и сделках: «такие сделки обычно закрываются за год», «часто с реструктуризацией долгов», «компания активно растёт через покупки».
 - Если вопрос о том, чего «Компас» не отслеживает (смена руководителя после сделки, увольнения, судьба компании потом), так и скажи, а не выдавай найденное за полный ответ.
-- Суммы — в той валюте, в которой они даны: доллары, евро, рупии не переводи в рубли и не ставь к ним «₽»."""
+- Суммы — в той валюте, в которой они даны: доллары, евро, рупии не переводи в рубли и не ставь к ним «₽».
+- Сводка говорит, сколько найдено всего. Если в ней сказано «ещё N», «показана часть списка» или найдено больше, чем ты видишь сделок, — ты видишь часть: не пиши «итого», «это все», «других нет», не подводи итог своим счётом, а назови число из сводки и дай ссылку на полный список.
+- Своих чисел не добавляй: мультипликатора, доли, суммы, срока, которых нет в сводке и сделках, не бывает — не вычисляй их и не оценивай «примерно». Выводов о рынке, тенденциях и «типичных» сделках по найденному списку не делай.
+- Названия компаний пиши так, как они даны в сводке и сделках: не переводи на латиницу, не сокращай по-своему.
+- Не приводи выдуманных примеров: пример — только сделка из найденных, ссылкой.
+- Органы согласования не склеивай и не путай: Правительственная комиссия по контролю за иностранными инвестициями (правкомиссия) и ФАС — разные органы. Называй тот, что указан в сделке."""
 
 SYSTEM_BASE = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
@@ -743,6 +749,7 @@ SYSTEM_BASE = """Ты — ассистент «Компаса», справоч�
 - Числа, суммы, даты, имена консультантов — только из сводки и карточек. Чего там нет — того не знаешь: скажи прямо «сумму этой сделки не раскрывали» или «в наших данных этого нет». Не выдумывай ничего.
 - Каждую сделку, которую называешь, давай ссылкой вида [название сделки](#/deal/ID), где ID — из карточки. Никогда не показывай ID отдельно: ни в скобках, ни в тексте.
 - Если сделок несколько — перечисли их списком, каждая строка начинается с «- ». Не больше десяти строк; просят «топ-N» или «N сделок» — дай N строк, если столько сделок есть в сводке. Если сделок больше, скажи, сколько ещё, и дай ссылку на страницу из сводки.
+- Несколько однотипных событий одного дня (например, активы нескольких компаний переданы во временное управление) сворачивай в одну строку: что произошло и ссылки на каждую сделку через запятую.
 - Разрешено: ссылки [текст](адрес), списки со «- », выделение **жирным**. Нельзя: заголовки с #, таблицы, код в ```.
 - Не оценивай, какая фирма или компания лучше, — только факты.
 - Данные собраны из открытых источников и могут быть неполными; напомни об этом там, где это меняет вывод (например, консультанты раскрывают не все проекты).
@@ -779,6 +786,27 @@ SYSTEM_WEB = """Ты — ассистент «Компаса», справочн
 - Нет данных ни там, ни там — так и скажи, коротко.
 
 Язык: живой русский, без канцелярита и без слов из внутренней кухни («база данных», «JSON», «контекст», «карточка»). Разрешено: ссылки [текст](адрес), списки со «- », **жирный**. Нельзя: заголовки с #, таблицы, код в ```. Никаких вступлений вроде «Отличный вопрос»."""
+
+
+# ПОДГОТОВКА К ВСТРЕЧЕ (кнопка на странице компании; вопрос собирает
+# meetingPrepQuestion в static/index.html). Замечания партнёра к ответу по ВТБ
+# 18 октября 2026: заголовок «Ключевые сделки (до 5 штук)» — служебная пометка
+# из задания вылезла к человеку; «не упоминайте имена юрфирм, кроме VERBA
+# LEGAL» — выдуманный запрет и выделенный ни с того ни с сего консультант;
+# «документация для правкомиссии ФАС» — два разных органа склеены в один;
+# «банки-партнёры в сделке с RVB» — выдуманный пример с искажённым «РВБ».
+# Раздел «Что лучше не говорить» почти целиком был такими выдумками — его
+# больше нет. Правила добавляются к системному промпту, когда вопрос — о
+# подготовке к встрече (assistant_retrieval.PREP_WORDS); механическая
+# страховка — _polish_answer(meeting=True).
+MEETING_PREP_RULES = """Это подготовка посетителя к встрече или собеседованию. Как построить ответ:
+- Разделы — короткие подзаголовки **жирным**: что важно знать о компании, её сделки, как подготовиться к разговору (и вопросы, если посетитель их просил). Подзаголовок — обычные слова, без пометок в скобках о количестве или формате («до 5 штук», «кратко», «по пунктам»): посетитель видит его как есть.
+- Сделки компании — не больше пяти самых важных для цели посетителя, списком, каждая ссылкой и с ролью компании: покупатель, продавец или предмет сделки (у консультанта — за кого он работал).
+- Консультантов называй, только если они есть в найденных сделках, и всех, кто там есть по делу, а не одного: не выделяй фирму как «основную» или «постоянную» для компании, если сводка этого не говорит.
+- Советы опираются только на рассказ посетителя и на факты найденных сделок: какие сделки компании знать и на какие сослаться, что взять с собой. Не придумывай ограничений и запретов («не упоминайте…», «не называйте фирмы, кроме…») и не делай раздела о том, чего не говорить.
+- Никаких выдуманных примеров и догадок о контрагентах, которых нет в сделках. Названия компаний — ровно так, как в сводке и сделках.
+- Органы согласования не склеивай: правкомиссия (Правительственная комиссия по контролю за иностранными инвестициями) и ФАС — разные органы; называй тот, что указан в сделке.
+- Вопросов к компании не составляй, если посетитель сам их не попросил."""
 
 
 class AskRequest(BaseModel):
@@ -1090,13 +1118,22 @@ def _host(url: str) -> str:
     return m.group(1) if m else url
 
 
-def _polish_answer(text: str, idx) -> str:
+def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = False) -> str:
     """Убираем то, что модель делает вопреки инструкции: служебные id в
     скобках («(ga4082daa)» видел партнёр 31 августа), ссылки на сделки,
     которых в базе нет, и голые адреса #/deal/… без названия. С проверки
     14 октября 2026 — ещё ссылки без «#», вложенные ссылки, служебные коды
     вместо названий, сноски «【…】», латиница внутри русских слов и месяц
-    в именительном падеже после числа («2 март 2026»)."""
+    в именительном падеже после числа («2 март 2026»).
+
+    С проверки 18 октября 2026 — мусор «、、、», и, если известны `ret`
+    (что нашёл поиск) и `source` (что модель видела), ещё: «это все / итого /
+    других нет», когда найдено больше показанного; мультипликатор, которого
+    нет в сделках; обобщения «как правило…»; склейка «правкомиссии ФАС»;
+    название, перекрученное в латиницу («RVB» вместо «РВБ»); ссылки на
+    сделки в списке, где модель их не поставила; однотипные события одного
+    дня в «что нового». `meeting` — ответ о подготовке к встрече: служебные
+    пометки «(до 5 штук)» и раздел «Что лучше не говорить» снимаются."""
     by_id = idx.by_id if idx is not None else {}
     text = str(text or "")
     # Сноски «【…】» — след разметки цитат, которой у нас нет: «【A‑Invest](url)»
@@ -1106,6 +1143,7 @@ def _polish_answer(text: str, idx) -> str:
     text = re.sub(r"【\s*(https?://[^】\s]+)\s*】", lambda m: f" [{_host(m.group(1))}]({m.group(1)})", text)
     text = re.sub(r"【[^】\n]{0,200}】", "", text)
     text = text.replace("【", "").replace("】", "")
+    text = _strip_junk(text)
     # «[название] (#/deal/…)» — модель ставит пробел или перенос между
     # скобками, и ссылка не собиралась: читатель видел квадратные скобки и
     # адрес (владелец, 5 октября 2026: «надо убрать референсы в скобках»).
@@ -1152,10 +1190,386 @@ def _polish_answer(text: str, idx) -> str:
                    for i, part in enumerate(parts))
     text = re.sub(r"\b(\d{1,2})\s+(" + "|".join(_MONTH_NOM_TO_GEN) + r")\b",
                   lambda m: f"{m.group(1)} {_MONTH_NOM_TO_GEN[m.group(2)]}", text)
+    text = _strip_service_notes(text)
+    text = _unglue_approval_bodies(text, source)
+    if meeting:
+        text = _drop_dont_say_sections(text)
+    if source:
+        text = _restore_names(text, source)
+        text = _drop_unsupported_multiples(text, source)
+    text = _drop_generalizations(text)
+    if ret is not None:
+        if _shows_part(ret):
+            text = _drop_completeness_claims(text, ret)
+        text = _link_list_items(text, _candidate_docs(ret))
+        if ret.intent == "recent" and idx is not None:
+            text = _collapse_same_day(text, idx)
     # Следы убранных сносок: двойные пробелы и пробел перед точкой.
     text = re.sub(r"(?<=\S)[ \t]{2,}(?=\S)", " ", text)
     text = re.sub(r"(?<=\S)[ \t]+([.,;:!?])(?=\s|$)", r"\1", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
+
+
+# ── Страховка после модели (проверка 18 октября 2026) ───────────────────────
+
+# Китайская и японская пунктуация, иероглифы и невидимые знаки — мусор,
+# который модель изредка вставляет в русский текст («、、、», №39).
+_FULLWIDTH = str.maketrans({"，": ", ", "；": "; ", "：": ": ", "！": "!", "？": "?", "（": " (", "）": ")",
+                            "。": ". ", "、": ", "})
+_JUNK_CHARS = re.compile(r"[\u200b-\u200f\u2060\ufeff\u3000-\u303f\u3040-\u30ff\u4e00-\u9fff\uff00-\uffef]")
+
+
+def _strip_junk(text: str) -> str:
+    # Несколько «、» подряд — не перечисление, а мусор: убираем целиком.
+    text = re.sub(r"[ \t]*[、，。]{2,}[ \t]*", " ", text)
+    text = text.translate(_FULLWIDTH)
+    text = _JUNK_CHARS.sub("", text)
+    text = re.sub(r"[ \t]+([,.;:!?)])", r"\1", text)
+    text = re.sub(r"([,;:])[ \t]*(?=[,;:.])", "", text)
+    return text
+
+
+# Служебная пометка из задания в заголовке: «Ключевые сделки (до 5 штук)»,
+# «(не больше пяти)», «(кратко)», «(по пунктам)». Сумма «(до 30%)» и год
+# «(до 2025 года)» — не пометки: число без единицы счёта — только до двух
+# цифр, процент и «года» не трогаем.
+_COUNT_WORDS = r"(?:\d{1,2}|двух|трёх|трех|четырёх|четырех|пяти|шести|семи|восьми|девяти|десяти)"
+_SERVICE_NOTE = re.compile(
+    r"[ \t]*\((?:(?:до|не\s+более|не\s+больше|максимум|не\s+длиннее)\s+" + _COUNT_WORDS
+    + r"(?:\s*(?:штук|шт\.?|пунктов|пункта|сделок|сделки|строк|строки|позиций|предложений|абзацев))?"
+    r"|кратко|коротко|по\s+пунктам|списком|\d{1,2}\s*(?:штук|шт\.?|пунктов))\)", re.I)
+
+
+def _strip_service_notes(text: str) -> str:
+    return _SERVICE_NOTE.sub("", text)
+
+
+# «Правкомиссия ФАС» — такого органа нет: Правительственная комиссия по
+# контролю за иностранными инвестициями и ФАС — разные органы (замечание
+# партнёра, 18 октября 2026). Склейку разводим по тому, что было в сделках:
+# назван один орган — оставляем его, оба или ни одного — пишем оба.
+_GLUED_BODIES = re.compile(
+    r"\b((?:[Пп]равкомисси|[Пп]равительственн\w*\s+комисси)\w*)"
+    r"(?:\s+(?:по\s+контролю\s+за\s+иностранными\s+инвестициями))?"
+    r"\s+(?:при\s+|в\s+)?ФАС(?:\s+России)?\b")
+_GLUED_BODIES_REV = re.compile(r"\bФАС[\s-]+([Пп]равкомисси\w*)")
+
+
+def _unglue_approval_bodies(text: str, source: str = "") -> str:
+    src = (source or "").lower()
+    has_gov = "правкомисс" in src or "правительственн" in src and "комисс" in src
+    has_fas = "фас" in src
+
+    def fix(m):
+        word = m.group(1)
+        if source and has_gov and not has_fas:
+            return word
+        if source and has_fas and not has_gov:
+            return "ФАС"
+        return f"{word} и ФАС"
+    text = _GLUED_BODIES.sub(fix, text)
+    return _GLUED_BODIES_REV.sub(lambda m: f"ФАС и {m.group(1)}", text)
+
+
+# Раздел «Что лучше не говорить» в подготовке к встрече: партнёр назвал его
+# общими словами и выдумкой. Снимаем подзаголовок и пункты под ним — до
+# пустой строки после пунктов или до следующего подзаголовка.
+_DONT_SAY_HEAD = re.compile(
+    r"^\s*(?:#+\s*)?(?:\*\*)?\s*(?:\d+[.)]\s*)?(?:"
+    r"(?:что|о\s+ч[её]м|чего)\s+(?:лучше\s+|стоит\s+)?(?:не\s+стоит\s+|не\s+)(?:говорить|упоминать|обсуждать|касаться|делать)"
+    r"|(?:что|чего)\s+(?:лучше\s+|стоит\s+)?избегать"
+    r"|(?:лучше\s+)?не\s+(?:говорить|упоминать|обсуждать)"
+    r"|(?:чего|что)\s+не\s+говорить)\b", re.I)
+_DONT_ADVICE = re.compile(r"^\s*[-•*]\s*(?:\*\*)?\s*(?:не\s+(?:упоминайте|называйте|делайте\s+предположени|обещайте)"
+                          r"|избегайте)", re.I)
+
+
+def _looks_like_heading(line: str) -> bool:
+    t = line.strip()
+    return bool(t) and not _is_list_line(line) and len(t) < 100 and (
+        t.startswith("**") or t.startswith("#") or t.endswith(":"))
+
+
+def _drop_dont_say_sections(text: str) -> str:
+    """Снимает раздел «Что лучше не говорить» целиком (подзаголовок и всё до
+    следующего подзаголовка) и отдельные пункты-запреты «Не упоминайте…»."""
+    out: list[str] = []
+    skipping = after_blank = False
+    for line in text.split("\n"):
+        if _DONT_SAY_HEAD.match(line) and len(line.strip()) < 120:
+            skipping, after_blank = True, False
+            continue
+        if skipping:
+            # Раздел кончается подзаголовком или абзацем после пустой строки
+            # («Данные собраны из открытых источников…»).
+            if not line.strip():
+                after_blank = True
+                continue
+            if not (_looks_like_heading(line) or (after_blank and not _is_list_line(line))):
+                continue
+            skipping = False
+            if out and out[-1].strip():
+                out.append("")
+        if _DONT_ADVICE.match(line):
+            continue
+        out.append(line)
+    return "\n".join(out)
+
+
+# Название, перекрученное в латиницу: «RVB» вместо «РВБ» (Wildberries в базе —
+# «ООО „РВБ“»). Слово из заглавных латинских букв, которого нет в том, что
+# видела модель, а его русское прочтение там есть, — возвращаем как в базе.
+_LAT_CAPS_TO_CYR = {"A": "А", "B": "Б", "V": "В", "W": "В", "G": "Г", "D": "Д", "E": "Е", "Z": "З",
+                    "I": "И", "K": "К", "L": "Л", "M": "М", "N": "Н", "O": "О", "P": "П", "R": "Р",
+                    "S": "С", "T": "Т", "U": "У", "F": "Ф", "H": "Х", "C": "Ц", "Y": "Ы"}
+
+
+def _restore_names(text: str, source: str) -> str:
+    src_words = set(re.findall(r"[A-ZА-ЯЁ0-9]{2,8}", source))
+
+    def fix(m):
+        word = m.group(0)
+        if word in src_words:
+            return word
+        cyr = "".join(_LAT_CAPS_TO_CYR.get(ch, "?") for ch in word)
+        return cyr if "?" not in cyr and cyr in src_words else word
+    parts = re.split(r"(\]\([^)\s]*\)|https?://\S+)", text)
+    return "".join(part if i % 2 else re.sub(r"(?<![\w&])[A-Z]{3,6}(?![\w&])", fix, part)
+                   for i, part in enumerate(parts))
+
+
+# Мультипликатор, которого нет в сделках (№70: «оценка — около 6 EBITDA»).
+_NUM = r"(\d+(?:[.,]\d+)?)"
+_MULTIPLE_NUM = re.compile(
+    _NUM + r"\s*(?:[xх×]|раз[аы]?)\s*(?:годов\w*\s+)?(?:EBITDA|выручк|прибыл|P/E)"
+    r"|" + _NUM + r"\s*[xх×]?\s*EBITDA"
+    r"|(?:EV/\w+|P/E|мультипликатор\w*)[^.\n\d]{0,40}?" + _NUM + r"(?!\s*(?:млрд|млн|тыс|%|₽|руб|год|\d))",
+    re.I)
+
+
+def _sentences(line: str) -> list[str]:
+    return re.split(r"(?<=[.!?])\s+(?=[«\"(\[*А-ЯЁA-Z0-9])", line)
+
+
+def _is_list_line(line: str) -> bool:
+    return bool(re.match(r"^\s*(?:[-•*]|\d+[.)])\s", line))
+
+
+def _drop_unsupported_multiples(text: str, source: str) -> str:
+    src = source.replace(",", ".")
+
+    def unsupported(sentence: str) -> bool:
+        for m in _MULTIPLE_NUM.finditer(sentence):
+            num = next((g for g in m.groups() if g), "").replace(",", ".")
+            if re.fullmatch(r"(?:19|20)\d\d", num):
+                continue
+            if num and not re.search(r"(?<![\d.])" + re.escape(num) + r"(?![\d])", src):
+                return True
+        return False
+    return _filter_sentences(text, unsupported)
+
+
+def _filter_sentences(text: str, drop, lists_too: bool = False) -> str:
+    out = []
+    for line in text.split("\n"):
+        if not line.strip() or (_is_list_line(line) and not lists_too):
+            out.append(line)
+            continue
+        kept = [x for x in _sentences(line) if not drop(x)]
+        if kept:
+            out.append(" ".join(kept))
+    return "\n".join(out)
+
+
+# Обобщения от себя (№73, 79): «Как правило, такие сделки…», «Это говорит о
+# том, что рынок…». Фраза, которая начинается так, — не факт из сделок.
+_GENERALIZATION = re.compile(
+    r"^\s*(?:\*\*)?(?:как\s+правило|обычно\s+(?:такие|подобные|сделки|компании|покупатели)|как\s+показывает\s+практика"
+    r"|это\s+(?:говорит|свидетельствует)\s+о|это\s+показывает,\s+что|в\s+целом\s+рынок|рынок\s+в\s+целом"
+    r"|можно\s+сделать\s+вывод|тенденция\s+(?:такова|очевидна))\b", re.I)
+
+
+def _drop_generalizations(text: str) -> str:
+    return _filter_sentences(text, lambda x: bool(_GENERALIZATION.match(x)))
+
+
+def _shows_part(ret) -> bool:
+    """Поиск нашёл больше, чем видела модель (или чем показала сводка)."""
+    shown = len(ret.docs[:assistant_retrieval.MAX_DEALS_FOR_MODEL])
+    if len(ret.pool or []) > shown:
+        return True
+    summary = ret.answer or ""
+    if assistant_retrieval.NOTE_PARTIAL in summary or re.search(r"(?m)^\s*(?:и\s+)?[Ее]щё\s+\d+", summary):
+        return True
+    return ret.intent == "search" and shown >= assistant_retrieval.MAX_DEALS_FOR_MODEL
+
+
+# «Это все», «итого», «других нет», «список полон» — когда найдено больше,
+# чем видела модель, это неправда (№7, 8, 25, 36, 41, 46, 92).
+_COMPLETE_CLAIM = re.compile(
+    r"\b(?:это\s+(?:и\s+)?(?:вс[её]|полный\s+список|исчерпывающ\w*)"
+    r"|вот\s+и\s+вс[её]"
+    r"|итого\b|в\s+итоге\s+\d"
+    r"|(?:других|иных)\s+(?:[\w«»]+\s+){0,4}нет\b"
+    r"|больше\s+(?:[\w«»]+\s+){0,2}(?:сделок|покупок|продаж|примеров)\s+(?:[\w«»]+\s+){0,3}нет\b"
+    r"|список\s+(?:полон|полный|исчерпывающ\w*)|исчерпывающ\w+\s+список|полный\s+список\s+(?:сделок\s+)?(?:выглядит|таков)"
+    r"|единственн\w+\s+(?:известн\w+\s+|найденн\w+\s+)?(?:сделк\w*|покупк\w*|продаж\w*))", re.I)
+
+
+def _drop_completeness_claims(text: str, ret) -> str:
+    dropped = {"n": 0}
+
+    def claim(sentence: str) -> bool:
+        if _COMPLETE_CLAIM.search(sentence):
+            dropped["n"] += 1
+            return True
+        return False
+    text = _filter_sentences(text, claim)
+    # Пункт списка «- Итого: 5 сделок на 30 млрд» — тоже свой счёт.
+    lines = [x for x in text.split("\n")
+             if not (_is_list_line(x) and re.match(r"^\s*[-•*]\s*(?:\*\*)?\s*итого\b", x, re.I))]
+    text = "\n".join(lines)
+    if dropped["n"]:
+        link = re.search(r"\[[^\]]+\]\(#/(?:deals|companies|advisors|industry)[^)]*\)", ret.answer or "")
+        tail = "Здесь показана часть найденных сделок"
+        text = text.rstrip() + "\n\n" + (f"{tail}, полный список — {link.group(0)}." if link else tail + ".")
+    return text
+
+
+def _candidate_docs(ret) -> list:
+    seen, out = set(), []
+    for d in list(ret.docs or []) + list(ret.pool or [])[:40]:
+        if d.id not in seen:
+            seen.add(d.id)
+            out.append(d)
+    return out
+
+
+def _stems(text: str) -> set[str]:
+    words = re.findall(r"[A-Za-zА-Яа-яЁё0-9]+", text.lower().replace("ё", "е"))
+    return {w[:5] for w in words if len(w) >= 4 or (len(w) >= 2 and any(ch.isdigit() for ch in w))}
+
+
+_STEM_STOP = {"сделк", "компа", "покуп", "прода", "купил", "долю", "акций", "актив", "млрд", "рубле", "проце",
+              "закры", "оценк", "сумма", "группа", "групп", "холди"}
+
+
+def _link_list_items(text: str, docs: list) -> str:
+    """Пункт списка без единой ссылки (№5, 37, 39, 73, 79): ищем сделку по
+    названию — сначала дословно, потом по общим значимым словам заголовка
+    и сторон — и ставим ссылку на её карточку. Сомнение — оставляем как есть."""
+    if not docs:
+        return text
+    used = set(re.findall(r"\(#/deal/([^)\s]+)\)", text))
+    names_of = {d.id: _stems(" ".join([d.title, d.buyer or "", d.seller or "", d.target or "", d.asset or ""]))
+                for d in docs}
+    # Слово, которое есть у половины найденных сделок (имя компании в
+    # ответе о компании), сделку не различает.
+    freq = Counter(w for st in names_of.values() for w in st)
+    common_stems = {w for w, n in freq.items() if len(docs) > 1 and n * 2 > len(docs)}
+    lines = text.split("\n")
+    for i, line in enumerate(lines):
+        if not re.match(r"^\s*[-•*]\s+", line) or "](" in line:
+            continue
+        # Пункт о сделке: жирное начало, год, сумма или тире после названия.
+        if not re.search(r"^\s*[-•*]\s+\*\*|20\d\d|млрд|млн|₽|\$|€|\s[—–]\s", line):
+            continue
+        body = re.sub(r"^\s*[-•*]\s+", "", line)
+        doc, span = None, None
+        for d in docs:
+            if d.id in used or len(d.title) < 8:
+                continue
+            pos = body.lower().find(d.title.lower())
+            if pos >= 0:
+                doc, span = d, (pos, pos + len(d.title))
+                break
+        if doc is None:
+            words = _stems(body) - _STEM_STOP
+            scored = []
+            for d in docs:
+                if d.id in used:
+                    continue
+                common = words & (names_of[d.id] - _STEM_STOP - common_stems)
+                scored.append((len(common), d))
+            scored.sort(key=lambda x: -x[0])
+            if not scored or scored[0][0] < 2 or (len(scored) > 1 and scored[1][0] == scored[0][0]):
+                continue
+            doc = scored[0][1]
+        used.add(doc.id)
+        prefix = line[:len(line) - len(body)]
+        if span:
+            a, b = span
+            body = f"{body[:a]}[{body[a:b]}](#/deal/{doc.id}){body[b:]}"
+        else:
+            m = re.match(r"^\*\*(.+?)\*\*", body)
+            if m:
+                body = f"**[{m.group(1)}](#/deal/{doc.id})**{body[m.end():]}"
+            else:
+                m = re.match(r"^(.+?)(\s+[—–-]\s+|:\s+|,\s+\d)", body)
+                head = m.group(1) if m and len(m.group(1)) >= 6 else body.rstrip(".;")
+                body = f"[{head}](#/deal/{doc.id}){body[len(head):]}"
+        lines[i] = prefix + body
+    return "\n".join(lines)
+
+
+def _common_words(a: list[str], b: list[str]) -> tuple[int, int]:
+    """Сколько слов совпадает в начале и в конце двух заголовков."""
+    pre = 0
+    while pre < min(len(a), len(b)) and a[pre] == b[pre]:
+        pre += 1
+    suf = 0
+    while suf < min(len(a), len(b)) - pre and a[-1 - suf] == b[-1 - suf]:
+        suf += 1
+    return pre, suf
+
+
+def _collapse_same_day(text: str, idx) -> str:
+    """«Что нового»: пять строк «Активы X переданы во временное управление
+    «Центр Капиталу»» одного дня (№45, 46) — одна строка: что произошло и
+    ссылки на каждую сделку. Сворачиваются только строки, где кроме ссылки
+    на сделку ничего нет или хвост одинаковый, с общим началом и концом
+    заголовка не короче трёх слов."""
+    pat = re.compile(r"^\s*[-•*]\s+\[([^\]]+)\]\(#/deal/([^)\s]+)\)(.*)$")
+    lines = text.split("\n")
+    items = []
+    for i, line in enumerate(lines):
+        m = pat.match(line)
+        if m and m.group(2) in idx.by_id:
+            added = str((idx.by_id[m.group(2)].raw or {}).get("added") or "")[:10]
+            items.append((i, m.group(1), m.group(2), m.group(3), added))
+    drop, replace = set(), {}
+    for k, (i, title, did, rest, added) in enumerate(items):
+        if i in drop or not added:
+            continue
+        words = title.split()
+        group = [(i, title, did)]
+        pre_n = suf_n = None
+        for (j, t2, d2, r2, a2) in items[k + 1:]:
+            if j in drop or a2 != added:
+                continue
+            pre, suf = _common_words(words, t2.split())
+            if pre_n is not None:
+                pre, suf = min(pre, pre_n), min(suf, suf_n)
+            if pre + suf >= 3 and pre + suf < len(words) and pre + suf < len(t2.split()):
+                group.append((j, t2, d2))
+                pre_n, suf_n = pre, suf
+        if len(group) < 3 and not (len(group) == 2 and pre_n is not None and pre_n + suf_n >= 4):
+            continue
+        head = words[:pre_n]
+        tail = words[len(words) - suf_n:] if suf_n else []
+        links = []
+        for (_, t, d) in group:
+            tw = t.split()
+            middle = " ".join(tw[pre_n:len(tw) - suf_n] if suf_n else tw[pre_n:])
+            links.append(f"[{middle}](#/deal/{d})")
+        what = " ".join(head + tail)
+        day = re.search(r"\d{1,2}\s+[а-я]+\s+20\d\d", rest)
+        replace[group[0][0]] = f"- {what}: {', '.join(links)}" + (f" — {day.group(0)}" if day else "")
+        drop.update(j for (j, _, _) in group[1:])
+    if not replace:
+        return text
+    return "\n".join(replace.get(i, line) for i, line in enumerate(lines) if i not in drop)
 
 
 # Чем кончается оборванный ответ: тире, двоеточием, запятой, открытой
@@ -1171,6 +1585,15 @@ def _looks_cut(text: str) -> bool:
     if t.count("**") % 2:
         return True
     return bool(_CUT_TAIL.search(t))
+
+
+def _summary_text(ret, idx) -> str:
+    """Сводка поиска для показа без модели: в «что нового» однотипные
+    события одного дня свёрнуты в строку, как и в ответе модели."""
+    text = ret.answer or ""
+    if text and ret.intent == "recent" and idx is not None:
+        text = _collapse_same_day(text, idx)
+    return text
 
 
 def _deals_payload(ret) -> list[dict]:
@@ -1214,6 +1637,8 @@ class AskPrep:
         # «- **300 млрд ₽** –» случился именно на таком вопросе.
         self.max_tokens = 1400 if search_block else 1000
         self.deadline_seconds = LLM_DEADLINE_WEB if search_block else LLM_DEADLINE
+        # Подготовка к встрече: свои правила промпта и своя чистка ответа.
+        self.meeting = False
 
 
 def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
@@ -1230,7 +1655,19 @@ def _prepare_ask(question: str, ret, mode: str, history: str) -> AskPrep:
                 logger.info("web-режим: пустая выдача, деградация в base")
         except SearchError as e:
             logger.warning("web-режим: поиск упал (%s), деградация в base", e)
-    return AskPrep(system, _build_user_message(question, ret, search_block, history), results, search_block)
+    meeting = _is_meeting_prep(question)
+    if meeting:
+        system = system + "\n\n" + MEETING_PREP_RULES
+    prep = AskPrep(system, _build_user_message(question, ret, search_block, history), results, search_block)
+    if meeting:
+        prep.meeting = True
+        # Ответ из трёх разделов со списком сделок длиннее обычного.
+        prep.max_tokens = max(prep.max_tokens, 1400)
+    return prep
+
+
+def _is_meeting_prep(question: str) -> bool:
+    return bool(assistant_retrieval.PREP_WORDS.search(question or ""))
 
 
 def _about_reply() -> dict:
@@ -1297,7 +1734,8 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     if not _yandex_ready():
         # Без ключей к модели точный ответ по базе всё равно отдаём — это лучше заглушки.
         if ret.answer:
-            return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
+            return {"answer": _summary_text(ret, idx), "deals": _deals_payload(ret), "intent": ret.intent,
+                    "model": False}
         return JSONResponse({"fallback": True})
 
     prep = _prepare_ask(question, ret, req.mode, _history_lines(history_rows))
@@ -1307,7 +1745,7 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
 
     try:
         text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens, deadline=deadline)
-        text = _polish_answer(text, idx)
+        text = _polish_answer(text, idx, ret=ret, source=prep.user_msg, meeting=prep.meeting)
         if _looks_cut(text):
             raise LLMCutOff(f"ответ похож на обрубок ({len(text)} знаков): {text[-60:]!r}", partial=text)
         # Ссылок в ответе нет по двум совершенно разным причинам, и до
@@ -1353,7 +1791,11 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
     except RuntimeError as e:
         logger.error("ask() failed: %s", e)
         cut = isinstance(e, LLMCutOff)
-        lead = ("Подробный ответ не уместился" if cut else "Модель не ответила вовремя")
+        # «Подробный ответ не уместился» — служебная фраза про наш потолок
+        # вывода, посетителю она ничего не говорит (№66 проверки 18 октября
+        # 2026). Оборванный ответ просто заменяется короткой сводкой.
+        lead = ("" if cut else "Модель не ответила вовремя")
+        summary = _summary_text(ret, idx)
         # Поиск уже отработал, а модель не ответила — отдать найденное честнее,
         # чем общий отказ: ссылки на источники добыты и они по делу. Пустой
         # экран после минуты ожидания читается как «ассистент не работает».
@@ -1361,16 +1803,17 @@ def ask(req: AskRequest, request: Request, db=Depends(get_db)):
             # Точный ответ по базе, если он есть, — впереди ссылок: партнёр
             # 2 сентября 2026 в этом месте видел только «не удалось собрать
             # ответ» и список ссылок, хотя сводка по базе была готова.
-            lines = [lead + ", поэтому отвечаю коротко."]
-            if ret.answer:
-                lines.append("По данным «Компаса»:\n" + ret.answer)
+            lines = [lead + ", поэтому отвечаю коротко."] if lead else []
+            if summary:
+                lines.append("По данным «Компаса»:\n" + summary)
             lines.append("Что нашлось по вопросу в сети:" + _sources_footer(results))
             return {"answer": "\n\n".join(lines), "deals": _deals_payload(ret), "intent": ret.intent,
                     "model": False}
         # Точный ответ по базе у нас уже есть — модель нужна была только для
         # живого текста. Отдаём факты, а не заглушку.
-        if ret.answer:
-            return {"answer": lead + ", поэтому отвечаю коротко, по данным «Компаса»:\n" + ret.answer,
+        if summary:
+            head = (lead + ", поэтому отвечаю коротко, по данным «Компаса»:") if lead else "Коротко, по данным «Компаса»:"
+            return {"answer": head + "\n" + summary,
                     "deals": _deals_payload(ret), "intent": ret.intent, "model": False}
         # Сводки нет, а модель успела написать содержательный кусок — он
         # лучше заглушки; обрубок из пары слов — нет.
@@ -1412,7 +1855,8 @@ def assistant_lookup(req: AskRequest):
     except Exception as e:  # noqa: BLE001
         logger.error("assistant lookup failed: %s", e)
         return {"answer": None, "deals": [], "intent": "search"}
-    return {"answer": ret.answer, "deals": _deals_payload(ret), "intent": ret.intent, "subject": ret.subject}
+    answer = _summary_text(ret, assistant_retrieval.get_index()) if ret.answer else ret.answer
+    return {"answer": answer, "deals": _deals_payload(ret), "intent": ret.intent, "subject": ret.subject}
 
 
 class BenchRequest(BaseModel):
@@ -1477,7 +1921,7 @@ def assistant_bench(req: BenchRequest):
                 text = call_llm(prep.system, prep.user_msg, max_tokens=prep.max_tokens,
                                 deadline=t0 + prep.deadline_seconds, model=model,
                                 reasoning_effort=req.reasoning_effort, stats=stats)
-                text = _polish_answer(text, idx)
+                text = _polish_answer(text, idx, ret=ret, source=prep.user_msg, meeting=prep.meeting)
                 if _looks_cut(text):
                     raise LLMCutOff(f"ответ похож на обрубок ({len(text)} знаков): {text[-60:]!r}")
                 row.update({"ok": True, "chars": len(text), "answer_head": text[:240]})

@@ -39,11 +39,12 @@ import re
 import threading
 import time
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
 from deal_multiples import is_estimate, parse_rub_sum
+from facts import PURCHASE_TYPES
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "static" / "data" / "deals_promoted.json"
@@ -348,9 +349,18 @@ THEME_HINTS: dict[str, list[str]] = {
 _MULT = (r"мультипликатор|ev\s*/\s*(?:ebitda|выручк|sales|s\b)|p\s*/\s*e\b|\d\s*[xх×](?![a-zа-яё])"
          r"|\d\s*[xх×]\s*(?:ebitda|выручк|прибыл)|\d\s+ebitda")
 
+# Обратный выкуп — право продавца вернуть себе бизнес: «опцион на обратный
+# выкуп» (Mercedes-Benz, Hyundai), «договор допускает обратный выкуп»
+# (Michelin), «право выкупить активы обратно» (Faurecia), «вправе вернуть
+# себе российский бизнес» («Автодом»). До второй проверки (№4) сюда входил
+# любой опцион — 74 сделки, где четыре нужные тонули среди опционов на
+# докупку доли.
+_REVERSE = (r"обратн[а-яё]*\s+(?:выкуп|продаж|покупк)|выкуп[а-яё]*\s+(?:\S+\s+){0,3}обратно"
+            r"|вернуть\s+(?:себе\s+)?(?:\S+\s+){0,2}(?:бизнес|актив|завод|компани|дол)|buy-?back\s+option|право\s+на\s+возврат")
+
 TERM_HINTS: dict[str, str] = {
     "опцион": r"опцион",
-    "обратн": r"обратн[а-яё]*\s+выкуп|опцион",
+    "обратн": _REVERSE,
     "earn-out": r"earn-?out|отложенн[а-яё]*\s+платеж|условн[а-яё]*\s+вознагражд",
     "earnout": r"earn-?out|отложенн[а-яё]*\s+платеж|условн[а-яё]*\s+вознагражд",
     "отложенн": r"earn-?out|отложенн[а-яё]*\s+платеж|условн[а-яё]*\s+вознагражд|рассрочк",
@@ -461,6 +471,53 @@ class Doc:
         value = (facts.get("price") or {}).get("value_rub")
         return float(value) if value else None
 
+    @property
+    def top_price(self) -> float | None:
+        """Цена сделки из списка «Крупнейшие покупки» на странице «Аналитика»
+        (facts.admitted.top_purchases, countsAsTopPurchase в index.html): то
+        же, что `price_rub`, но без обсуждаемых сделок. Ассистент называл
+        крупнейшей сделкой с 2022 года выкуп «Полюсом» собственных акций, а
+        в топ-5 ставил выставленный на продажу небоскрёб и допэмиссию —
+        «Аналитика» таких сделок не показывает (вторая проверка, №13, 33, 57)."""
+        facts = self.raw.get("facts") or {}
+        if not (facts.get("admitted") or {}).get("top_purchases") or self.listing:
+            return None
+        value = (facts.get("price") or {}).get("value_rub")
+        return float(value) if value else None
+
+    @property
+    def named_rub(self) -> float | None:
+        """Цена, названная сторонами, в рублях (валюта — по курсу ЦБ на дату
+        сделки) — даже если её ещё не сверили с источником. Без оценок,
+        диапазонов, стартовых цен лотов и «не цен» (объём инвестиций в
+        проект): смысл суммы — из facts.price.meaning, как `firmPrice` сайта."""
+        price = (self.raw.get("facts") or {}).get("price") or {}
+        meaning = price.get("meaning")
+        if meaning == "disclosed" or (meaning == "foreign_currency" and price.get("fx_rate")):
+            value = price.get("value_rub")
+            return float(value) if value else None
+        if meaning is None and self.sum_rub and not self.estimate:
+            return self.sum_rub
+        return None
+
+    @property
+    def purchase_like(self) -> bool:
+        """Покупка по правилам допуска «Аналитики» (facts.admitted), кроме
+        требований к самой цене: тип M&A или купленный лот торгов; не выкуп
+        своих акций, не деньги в компанию (допэмиссия, раунд), не
+        финансирование, не реорганизация, не передача внутри группы; сделка
+        не сорвалась, не обсуждается и не лот, ещё выставленный на продажу."""
+        if self.listing or self.type not in PURCHASE_TYPES:
+            return False
+        if self.status in ("Не состоялась", "Обсуждается"):
+            return False
+        nature = (self.raw.get("facts") or {}).get("nature") or {}
+        return not any(nature.get(k) for k in NOT_PURCHASE_FLAGS)
+
+
+# Те же признаки, что в facts.admitted('top_purchases'): что не покупка.
+NOT_PURCHASE_FLAGS = ("cash_in", "financing", "reorganization", "own_shares", "intragroup")
+
 
 @dataclass
 class Index:
@@ -554,8 +611,29 @@ def _facts(deal: dict) -> str:
 # сделки» (вопрос №32): профиль называется «ООО „РВБ“ (Wildberries & Russ)», а
 # компания узнаётся только по ВСЕМ значимым словам имени. Это слова поиска, а
 # не правка базы: имя профиля остаётся тем, что записано в источниках.
+#
+# Разговорные имена (вторая проверка, №92: «Какие сделки были у Сбера?»
+# уходило в поиск по словам и отдавало одну продажу Fortenova). Каждый ключ —
+# профиль, у которого больше всего сделок под этим именем; дочки и структуры
+# с собственными профилями («СберИнвест», «Т-Банк» и «Тинькофф») не
+# склеиваются. Сокращения, совпадающие с обычными словами вопросов («ЦБ» в
+# «реестр ЦБ», «Открытие»), сюда не берутся — по ним компания узнавалась бы
+# в чужих вопросах; «Мосбиржа» — тоже: в «IPO на Мосбирже» биржа — площадка,
+# а не сторона сделки.
 COMPANY_ALIASES: dict[str, list[str]] = {
-    "g549ab474": ["Wildberries", "Вайлдберриз", "Вайлдбериз"],
+    "g549ab474": ["Wildberries", "Вайлдберриз", "Вайлдбериз", "Вайлдберис", "WB", "ВБ", "RWB", "РВБ"],
+    "g28ff15bb": ["Сбер", "Sber", "Sberbank"],
+    "gcafc31dc": ["VTB", "Банк ВТБ"],
+    "yandex": ["Yandex"],
+    "g4e694234": ["ВКонтакте"],
+    "g2f93d858": ["Норникель", "Nornickel"],
+    "gd685b926": ["Билайн", "Beeline"],
+    "g8ec7e7bf": ["Российские железные дороги"],
+    "ga3f64b72": ["ВЭБ", "Внешэкономбанк"],
+    "gf1f56e08": ["ГПБ"],
+    "ga2cfae5b": ["Альфабанк"],
+    "gc2792a44": ["АФК"],
+    "g889e2038": ["Центробанк", "ЦБ РФ"],
 }
 
 _CASED_WORD = re.compile(r"[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё0-9-]*")
@@ -703,6 +781,8 @@ class Intent:
     firms: list[Firm] = field(default_factory=list)    # «Сравни АЛРУД и ЕПАМ»
     rank: str | None = None                            # law | invest | advisors | industries | buyers
     wants_price: bool = False                          # «за сколько», «во сколько», «по какой цене»
+    buyer_kind: str | None = None                      # "bank" — «банки-покупатели» (№80)
+    role: str | None = None                            # "buyer" | "seller" — «что покупала S8 Capital» (№27)
 
     def __post_init__(self):
         if self.span is None and self.year:
@@ -818,6 +898,31 @@ RECENT_WORDS = re.compile(r"что\s+нового|новые\s+сделки|св
 RECENT_MONTH = re.compile(r"месяц", re.I)
 # «Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону теряло молча.
 COMPARE_WORDS = re.compile(r"сравн|в\s+сравнении|против|или\s+лучше|кто\s+из\s+них|обе\s+компан", re.I)
+# «Банки-покупатели», «какие банки покупали компании», «сделки, где
+# покупатель — банк» (№80): условие на ПОКУПАТЕЛЯ, а не отрасль сделки.
+# «Какие компании купили банки» сюда не попадает: там банк — предмет.
+_BANK = r"(?<![а-яёa-z])банк\w*"
+BANK_BUYER = re.compile(
+    rf"{_BANK}[- ]покупател\w*|{_BANK}\s+(?:\w+\s+){{0,3}}?(?:покупа\w*|купил\w*|купят|приобрета\w*|приобр[её]л\w*"
+    rf"|скупа\w*|выступа\w*\s+(?:в\s+рол\w+\s+)?покупател\w*)|покупател\w*\s*(?:[-—–:]\s*|(?:был\w*|явля\w*|выступа\w*)\s+)?{_BANK}",
+    re.I)
+# Роль компании в вопросе: «Что покупала S8 Capital?» — её покупки, а
+# продажи отдельно и подписаны (№27). «Кто купил Ситибанк?» — роль у
+# спрошенного «кто», а названная компания — предмет: роль не ставится.
+ROLE_BUY = re.compile(r"\b(?:покупал\w*|купил\w*|покупает|покупают|покупк\w+|приобрета\w*|приобр[её]л\w*|скупа\w*)", re.I)
+ROLE_SELL = re.compile(r"\b(?:продавал\w*|продал\w*|прода[её]т|продают|продаж\w*|избавил\w*|избавля\w*)", re.I)
+ROLE_WHO = re.compile(r"\bкто\b|\bу\s+кого\b|\bкому\b|\bкого\b", re.I)
+
+
+def _detect_role(question: str) -> str | None:
+    if ROLE_WHO.search(question):
+        return None
+    buy, sell = bool(ROLE_BUY.search(question)), bool(ROLE_SELL.search(question))
+    if buy and not sell:
+        return "buyer"
+    if sell and not buy:
+        return "seller"
+    return None
 
 
 def _detect_industry(question: str, idx: Index) -> str | None:
@@ -1198,7 +1303,7 @@ def _detect_company(question: str, idx: Index, terms: list[str],
         n_deals = len(idx.company_deals.get(cid) or [])
         if n_deals == 0:
             continue
-        for sig in variants:
+        for vi, sig in enumerate(variants):
             if not sig or len(sig) > 4:
                 continue
             pairs = [(s, t) for s in sig for t in terms if _name_word_match(s, t)]
@@ -1218,6 +1323,11 @@ def _detect_company(question: str, idx: Index, terms: list[str],
             name_tokens = [stem(w) for w in tokens(_company_name(idx.companies, cid)) if w not in LEGAL_FORMS]
             present = sum(1 for w in name_tokens if w in q_stems)
             missing = len(name_tokens) - present
+            if vi > 0 and cid in COMPANY_ALIASES:
+                # Названо другим именем профиля («Вайлдберриз» у ООО «РВБ»):
+                # оно названо целиком, и при равенстве решает число сделок —
+                # «сделки Вайлдберриз» про группу, а не про юрлицо с одной сделкой.
+                present, missing = len(sig), 0
             # Больше значимых слов совпало — точнее; потом точное совпадение
             # слова, а не падежное; потом сколько слов полного имени есть в
             # вопросе («МТС Банк» — не «МТС»); при равенстве — у кого сделок больше.
@@ -1359,6 +1469,10 @@ def route(question: str, idx: Index | None = None) -> Intent:
         for kind, rx in RANK_SUBJECTS:
             if kind in ("law", "invest", "advisors"):
                 plain_q = rx.sub(" ", plain_q)
+    buyer_kind = "bank" if BANK_BUYER.search(question) else None
+    if buyer_kind:
+        # «банки» здесь — кто покупает, а не отрасль сделки
+        plain_q = re.sub(_BANK, " ", plain_q, flags=re.I)
     industry = _detect_industry(_without_firm_name(plain_q, firm) if firm else plain_q, idx)
     themes = [t for t in _detect_themes(question) if t != industry]
     theme = themes[0] if themes else None
@@ -1368,7 +1482,8 @@ def route(question: str, idx: Index | None = None) -> Intent:
     wants_adv = bool(ADVISOR_WORDS.search(question))
     wants_price = bool(PRICE_WORDS.search(question))
     cond = dict(span=span, year=year, industry=industry, themes=themes, theme=theme, term_rxs=term_rxs,
-                status=status, region=region, terms=terms, wants_price=wants_price)
+                status=status, region=region, terms=terms, wants_price=wants_price, buyer_kind=buyer_kind,
+                role=_detect_role(question))
     # Две фирмы в одном вопросе — обе («Сравни АЛРУД и ЕПАМ», №5).
     several_firms = _detect_firms(question, idx)
     if len(several_firms) >= 2:
@@ -1405,6 +1520,8 @@ def route(question: str, idx: Index | None = None) -> Intent:
             and all(_hint_covers(t, region) for t in matched) \
             and not any(t in evident or stem(t) in evident for t in matched):
         company = None
+    if buyer_kind and company and matched and all(re.match(r"банк", t) for t in matched):
+        company = None
     if rank and not company:
         return Intent("rank", rank=rank, wants_advisors=rank in ("law", "invest", "advisors"), **cond)
     if COMPARE_WORDS.search(question):
@@ -1426,8 +1543,10 @@ def route(question: str, idx: Index | None = None) -> Intent:
         return Intent("theme", **cond)
     # «Сколько может стоить пищевое производство?» — вопрос об уровне цен в
     # отрасли: средний и медианный размер сделки плюс сделки с ценой (№64).
-    if wants_price and industry:
+    if wants_price and industry and not buyer_kind:
         return Intent("avg", **cond)
+    if buyer_kind:
+        return Intent("filter", wants_advisors=wants_adv, **cond)
     if industry:
         return Intent("industry", wants_advisors=wants_adv, **cond)
     if status or region:
@@ -1576,6 +1695,38 @@ def _filter(docs: list[Doc], year: Any = None, industry: str | None = None) -> l
     return out
 
 
+VENTURE = "Венчур / раунд"
+
+
+def _theme_ok(doc: Doc, theme: str) -> bool:
+    """Тема вопроса у сделки. Тема с именем отрасли («Искусственный
+    интеллект») засчитывается и по отрасли; «венчурные раунды» — это и тема
+    «Венчур / раунд», и любая сделка типа «Инвестиция» (деньги в компанию):
+    тема стоит у 19 сделок, а «венчурные раунды в ИИ» по базе — 8
+    инвестиций в ИИ-компании, из которых тему несут две (вторая проверка, №25)."""
+    if theme in doc.themes or theme in doc.industries:
+        return True
+    return theme == VENTURE and doc.type == "Инвестиция"
+
+
+# Покупатель-банк (№80, «банки-покупатели»): «банк» в имени покупателя
+# (Сбербанк Инвестиции, Газпромбанк-инвест — структуры банков) или банк без
+# этого слова в имени (ВТБ, ПСБ) — в любой отрасли САМОЙ сделки. Отрасль
+# «Банки» у сделки значит другое: что покупали банк. Отрасль профиля
+# покупателя одна не годится: «Банки» стоят и у владельцев банков (Игорь Ким,
+# Антон Пак, «АБ Холдинг»), а слово в скобках — у пояснения («структура
+# совладельца банка «Хоум Кредит»»).
+_BANK_NAME = re.compile(r"банк|bank", re.I)
+_BANK_SHORT = re.compile(r"^(?:(?:ПАО|АО|Банк|Группа)\s+)?«?(?:ВТБ|ПСБ|МКБ|РНКБ|Тинькофф|ОТП)»?$", re.I)
+
+
+def _buyer_is(doc: Doc, kind: str) -> bool:
+    if kind != "bank":
+        return True
+    name = re.sub(r"\s*\([^)]*\)", "", doc.buyer or "").strip()
+    return bool(name and (_BANK_NAME.search(name) or _BANK_SHORT.match(name)))
+
+
 def _apply(intent: Intent, docs: list[Doc], industry: bool = True) -> list[Doc]:
     """ВСЕ условия вопроса разом: период, отрасль, темы, условия сделки,
     статус, регион. До 14 октября 2026 работало первое попавшееся условие, и
@@ -1583,7 +1734,9 @@ def _apply(intent: Intent, docs: list[Doc], industry: bool = True) -> list[Doc]:
     заверением «список полон» (№29)."""
     out = _filter(docs, intent.span, intent.industry if industry else None)
     for th in intent.themes:
-        out = [d for d in out if th in d.themes]
+        out = [d for d in out if _theme_ok(d, th)]
+    if intent.buyer_kind:
+        out = [d for d in out if _buyer_is(d, intent.buyer_kind)]
     for rx in intent.term_rxs:
         r = re.compile(rx, re.I)
         out = [d for d in out if r.search(d.facts) or r.search(d.title)]
@@ -1616,6 +1769,8 @@ def _scope_text(intent: Intent, industry: bool = True, period: bool = True) -> s
         bits.append("с условием: " + ", ".join(labels))
     if intent.region:
         bits.append(f"с упоминанием региона «{intent.region}»")
+    if intent.buyer_kind == "bank":
+        bits.append("с покупателем-банком")
     return (" " + " ".join(bits)) if bits else ""
 
 
@@ -1783,6 +1938,10 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
                 if total == 1 else f"Всего у компании [{name}](#/companies/{cid}) в «Компасе» {total} "
                 f"{_plural(total, 'сделка', 'сделки', 'сделок')}{period_text(intent.span)}.")
         return Retrieval("company", single.answer + "\n" + tail, docs, name, pool=docs)
+    if intent.role and not (picked and len(picked) < n):
+        own = _role_answer(intent, idx, cid, name, docs, scope)
+        if own:
+            return own
     if picked and len(picked) < n:
         k = len(picked)
         if k == 1:
@@ -1797,7 +1956,7 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
                              pool=picked + rest)
         lines = [f"По вопросу {'подходит' if k == 1 else 'подходят'} {k} "
                  f"{_plural(k, 'сделка', 'сделки', 'сделок')} компании [{name}](#/companies/{cid}):"]
-        lines += [_line(d) for d in picked[:MAX_LISTED]]
+        lines += [_role_line(d, cid) for d in picked[:MAX_LISTED]]
         if k > MAX_LISTED:
             lines.append(f"…и ещё {k - MAX_LISTED}.")
         lines.append(f"Всего у компании в «Компасе» {n} {_plural(n, 'сделка', 'сделки', 'сделок')}"
@@ -1806,8 +1965,8 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
         docs = picked + rest
     else:
         lines = [f"Компания [{name}](#/companies/{cid}) в «Компасе»: {n} {_plural(n, 'сделка', 'сделки', 'сделок')}"
-                 + scope + ":"]
-        lines += [_line(d) for d in docs[:MAX_LISTED]]
+                 + scope + _roles_text(docs, cid) + ":"]
+        lines += [_role_line(d, cid) for d in docs[:MAX_LISTED]]
         if n > MAX_LISTED:
             lines.append(f"…и ещё {n - MAX_LISTED} — на [странице компании](#/companies/{cid}).")
     if n > 2:
@@ -1827,6 +1986,61 @@ def _answer_company(intent: Intent, idx: Index) -> Retrieval:
     return Retrieval("company", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], name, pool=docs)
 
 
+ROLE_WORDS = {"buyer": ("покупатель", "Покупки", "покупок"), "seller": ("продавец", "Продажи", "продаж")}
+
+
+def _roles_text(docs: list[Doc], cid: str) -> str:
+    """« (покупатель — 6, продавец — 2)» — по ссылкам карточек."""
+    cnt = Counter(_role(d, cid) or "участник" for d in docs)
+    order = ("покупатель", "продавец", "предмет сделки", "участник")
+    bits = [f"{r} — {cnt[r]}" for r in order if cnt.get(r)]
+    return f" ({', '.join(bits)})" if bits and bits != [f"участник — {len(docs)}"] else ""
+
+
+def _role_answer(intent: Intent, idx: Index, cid: str, name: str, docs: list[Doc], scope: str) -> Retrieval | None:
+    """«Что покупала S8 Capital?» — покупки компании, а её продажи отдельно и
+    подписаны как продажи. До второй проверки на 100 вопросах все восемь
+    сделок шли одним списком, и модель записала в покупки две продажи
+    «Кордианта» и завода Bosch «Севергрупп» (№27)."""
+    want = ROLE_WORDS[intent.role][0]
+    other_key = "seller" if intent.role == "buyer" else "buyer"
+    mine = [d for d in docs if _role(d, cid) == want]
+    other = [d for d in docs if _role(d, cid) == ROLE_WORDS[other_key][0]]
+    rest = [d for d in docs if d not in mine and d not in other]
+    link = f"[{name}](#/companies/{cid})"
+    n = len(docs)
+    total = f"Всего у компании в «Компасе» {n} {_plural(n, 'сделка', 'сделки', 'сделок')}{scope} — на [странице компании](#/companies/{cid})."
+    if not mine:
+        lines = [f"Сделок, где {link} — {want}{scope}, в «Компасе» нет. "
+                 f"Сделки компании в других ролях — {n}" + _roles_text(docs, cid) + ":"]
+        lines += [_role_line(d, cid) for d in docs[:MAX_LISTED]]
+        if n > MAX_LISTED:
+            lines.append(f"…и ещё {n - MAX_LISTED} — на [странице компании](#/companies/{cid}).")
+        return Retrieval("company", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], name, pool=docs)
+    k = len(mine)
+    lines = [f"{ROLE_WORDS[intent.role][1]} компании {link} в «Компасе»{scope}: {k} "
+             f"{_plural(k, 'сделка', 'сделки', 'сделок')}, где компания — {want}:"]
+    lines += [_role_line(d, cid) for d in mine[:MAX_LISTED]]
+    if k > MAX_LISTED:
+        lines.append(f"…и ещё {k - MAX_LISTED}.")
+    if other:
+        o_word = ROLE_WORDS[other_key]
+        lines.append(f"Отдельно — {o_word[1].lower()} (компания — {o_word[0]}), {len(other)}:")
+        lines += [_role_line(d, cid) for d in other[:3]]
+        if len(other) > 3:
+            lines.append(f"…и ещё {len(other) - 3}.")
+    if rest:
+        lines.append(f"Ещё {len(rest)} {_plural(len(rest), 'сделка', 'сделки', 'сделок')}, где компания — предмет сделки "
+                     "или участник: " + "; ".join(_link(d) for d in rest[:3]) + ("…" if len(rest) > 3 else "") + ".")
+    lines.append(total)
+    if intent.wants_price:
+        priced = [d for d in mine if has_fact(d.sum_text)]
+        if priced:
+            lines.append("Суммы: " + "; ".join(f"{d.title} — {d.sum_text}" for d in priced[:MAX_LISTED]) + ".")
+    ordered = mine + other + rest
+    return Retrieval("company", "\n".join(lines), ordered[:MAX_DEALS_FOR_MODEL], name, pool=ordered)
+
+
 def _list_answer(kind: str, intent: Intent, idx: Index, pool: list[Doc], head: str,
                  link: str | None, subject: str | None) -> Retrieval:
     n = len(pool)
@@ -1844,8 +2058,13 @@ def _list_answer(kind: str, intent: Intent, idx: Index, pool: list[Doc], head: s
         else:
             lines.append("Ни у одной из этих сделок консультанты публично не назывались.")
         lines.append(NOTE_ADVISORS)
+    if intent.buyer_kind == "bank":
+        buyers = Counter(d.buyer for d in pool if d.buyer).most_common(8)
+        if buyers:
+            lines.append("Банки-покупатели: " + ", ".join(f"{b} — {c}" for b, c in buyers)
+                         + (" и другие." if len({d.buyer for d in pool}) > 8 else "."))
     if intent.wants_price:
-        lines += _price_lines(pool)
+        lines += _price_lines(pool, intent)
     lines.append("Последние сделки:" if n > MAX_LISTED else "Сделки:")
     lines += [_line(d) for d in pool[:MAX_LISTED]]
     if n > MAX_LISTED:
@@ -1865,8 +2084,37 @@ def _answer_industry(intent: Intent, idx: Index) -> Retrieval:
     return _list_answer("industry", intent, idx, docs, head, f"на [странице отрасли](#/industry/{ind})", ind)
 
 
-def _price_lines(pool: list[Doc]) -> list[str]:
+def _is_offering(doc: Doc) -> bool:
+    """Само размещение акций (IPO, SPO, pre-IPO раунд), а не покупка, рядом
+    с которой упомянуто чьё-то IPO."""
+    return doc.type == "IPO" or bool(re.search(r"\bipo\b|\bspo\b|размещени", norm(doc.title)))
+
+
+def _offering_lines(pool: list[Doc]) -> list[str]:
+    """Суммы у IPO — объём размещения, а не цена сделки. «Какие IPO прошли
+    и на какие суммы?» отвечало ценой покупки ЦОДа Ростелекомом (26,3 млрд ₽)
+    как «самой крупной» (вторая проверка, №18): у IPO нет цены, названной
+    сторонами, и `_price_lines` видела только посторонние покупки."""
+    offers = [d for d in pool if _is_offering(d)]
+    others = len(pool) - len(offers)
+    if not offers:
+        return [f"Самих размещений акций среди этих {len(pool)} сделок нет."]
+    named = sorted([d for d in offers if has_fact(d.sum_text)], key=lambda d: -(d.sum_rub or 0))
+    out = [f"Размещений акций (IPO, SPO, pre-IPO) среди них — {len(offers)}; объём размещения назван у {len(named)}"
+           + (":" if named else ".")]
+    out += [f"- {_link(d)} — {d.sum_text}, {_fmt_date(d.date)}" for d in named[:MAX_LISTED]]
+    if len(named) > MAX_LISTED:
+        out.append(f"…и ещё {len(named) - MAX_LISTED} с названным объёмом.")
+    if others:
+        out.append(f"Остальные {others} {_plural(others, 'сделка', 'сделки', 'сделок')} темы — покупки и инвестиции, "
+                   "связанные с размещением; их суммы — не объём размещения.")
+    return out
+
+
+def _price_lines(pool: list[Doc], intent: Intent | None = None) -> list[str]:
     """Что известно о ценах выборки — посчитано здесь, а не моделью."""
+    if intent is not None and "IPO / SPO" in intent.themes:
+        return _offering_lines(pool)
     with_sum = [d for d in pool if d.sum_rub]
     est = [d for d in with_sum if d.estimate]
     priced = [d for d in pool if d.price_rub]
@@ -1882,29 +2130,87 @@ def _price_lines(pool: list[Doc]) -> list[str]:
     return out
 
 
+NOTE_LARGEST = ("Как в списке «Крупнейшие покупки» на странице [Аналитика](#/analytics), сюда не входят "
+                "обсуждаемые сделки и объекты, только выставленные на продажу, выкуп компанией собственных "
+                "акций, деньги в компанию (допэмиссии, раунды), финансирование и оценки экспертов.")
+
+
+def _role(doc: Doc, cid: str | None) -> str | None:
+    """Кем компания была в сделке — по ссылкам карточки, а не по имени."""
+    raw = doc.raw or {}
+    if not cid:
+        return None
+    if raw.get("buyer") == cid:
+        return "покупатель"
+    if raw.get("seller_id") == cid:
+        return "продавец"
+    if cid in (raw.get("target"), raw.get("asset_id")):
+        return "предмет сделки"
+    return None
+
+
+def _role_line(doc: Doc, cid: str | None) -> str:
+    """Строка списка с ролью компании: «… — 27 декабря 2022, 340 млрд ₽,
+    закрыта (компания — покупатель)»."""
+    line = _line(doc)
+    role = _role(doc, cid)
+    if role and cid:
+        line = line.replace(_source_link(doc), "") + f" (компания — {role}){_source_link(doc)}"
+    return line
+
+
 def _answer_largest(intent: Intent, idx: Index) -> Retrieval:
-    base = _company_pool(intent, idx) if intent.company_id else idx.docs
-    pool = _apply(intent, base, industry=not intent.company_id)
-    with_sum = [d for d in pool if d.sum_rub]
-    who = _company_name(idx.companies, intent.company_id) if intent.company_id else None
-    if not with_sum:
-        return Retrieval("largest", "В этой выборке нет сделок с суммой в рублях — сравнить не по чему.", [], who,
-                         pool=pool)
-    named = sorted([d for d in with_sum if not d.estimate], key=lambda d: -(d.sum_rub or 0))
-    est = sorted([d for d in with_sum if d.estimate], key=lambda d: -(d.sum_rub or 0))
-    scope = _scope_text(intent, industry=not intent.company_id).strip()
-    if who:
-        scope = (f"компании [{who}](#/companies/{intent.company_id}) " + scope).strip()
+    """Крупнейшие сделки — тем же отбором, что «Крупнейшие покупки» на
+    странице «Аналитика» (facts.admitted.top_purchases): покупка, цена
+    названа сторонами и сверена с источником, сделка не обсуждается и не лот
+    на торгах. До второй проверки на 100 вопросах (октябрь 2026) список
+    строился по любой сумме в рублях, и крупнейшей сделкой с 2022 года
+    выходил выкуп «Полюсом» собственных акций, а в топ-10 2025 года стояли
+    выставленный на продажу небоскрёб, допэмиссия и «объём инвестиций в
+    проект» (№13, 33, 57). Если сверенных цен в выборке мало — следом идут
+    такие же покупки с ценой, которую стороны назвали, но мы ещё не сверили,
+    отдельным блоком и с этой пометкой."""
+    cid = intent.company_id
+    base = _company_pool(intent, idx) if cid else idx.docs
+    pool = _apply(intent, base, industry=not cid)
+    who = _company_name(idx.companies, cid) if cid else None
     top_n = 10 if re.search(r"\b10\b|десят", " ".join(intent.terms)) else 5
-    lines = [f"Крупнейшие сделки {scope} по цене, которую назвали сами стороны:" if scope
-             else "Крупнейшие сделки в базе по цене, которую назвали сами стороны:"]
-    lines += [_line(d) for d in named[:top_n]]
-    if est:
-        lines.append("По оценкам экспертов (не подтверждённая цена):")
-        lines += [_line(d) for d in est[:3]]
-    lines.append(NOTE_SUMS + f" Здесь сравнивались {len(with_sum)} из {len(pool)}.")
-    return Retrieval("largest", "\n".join(lines), (named[:max(8, top_n)] + est[:4])[:MAX_DEALS_FOR_MODEL], who,
-                     pool=named + est)
+    top = sorted([d for d in pool if d.top_price], key=lambda d: -(d.top_price or 0))
+    rest = sorted([d for d in pool if not d.top_price and d.purchase_like and d.named_rub],
+                  key=lambda d: -(d.named_rub or 0))
+    scope = _scope_text(intent, industry=not cid).strip()
+    if who:
+        scope = (f"компании [{who}](#/companies/{cid}) " + scope).strip()
+    n_pool = len(pool)
+    total = (f"Всего в выборке {n_pool} {_plural(n_pool, 'сделка', 'сделки', 'сделок')}; "
+             f"цена, названная сторонами и сверенная с источником, — у {len(top)}"
+             + (f", названная, но ещё не сверенная, — у {len(rest)}" if rest else "") + ".")
+    if not top and not rest:
+        est = sorted([d for d in pool if d.purchase_like and d.sum_rub and d.estimate], key=lambda d: -(d.sum_rub or 0))
+        lines = [f"В выборке{(' ' + scope) if scope else ''} нет покупок с ценой, которую назвали стороны, — "
+                 "сравнить по размеру не по чему."]
+        if est:
+            lines.append("Есть только оценки экспертов (это не цена сделки):")
+            lines += [_role_line(d, cid) for d in est[:3]]
+        lines += [total, NOTE_LARGEST]
+        return Retrieval("largest", "\n".join(lines), est[:MAX_DEALS_FOR_MODEL], who, pool=est)
+    head = f"Крупнейшие покупки {scope}" if scope else "Крупнейшие покупки в базе «Компаса»"
+    lines = [head + " — по цене, которую назвали стороны и которую мы сверили с источником:" if top
+             else head + ": сверенных с источником цен в этой выборке нет; по цене, которую назвали стороны:"]
+    shown = top[:top_n]
+    lines += [_role_line(d, cid) for d in shown]
+    extra: list[Doc] = []
+    if top and len(top) < top_n and rest:
+        extra = rest[:top_n - len(top)]
+        lines.append("Ещё покупки с ценой, которую назвали стороны, но мы её пока не сверили с источником "
+                     "(в «Аналитику» они пока не входят):")
+    elif not top:
+        extra = rest[:top_n]
+    lines += [_role_line(d, cid) for d in extra]
+    lines.append(total)
+    lines.append(NOTE_LARGEST + " " + NOTE_SUMS)
+    ordered = shown + extra
+    return Retrieval("largest", "\n".join(lines), ordered[:MAX_DEALS_FOR_MODEL], who, pool=top + rest)
 
 
 def _answer_recent(intent: Intent, idx: Index) -> Retrieval:
@@ -1950,17 +2256,24 @@ def _answer_compare(intent: Intent, idx: Index) -> Retrieval:
         if not own:
             blocks.append(f"**[{name}](#/companies/{cid})** — сделок в «Компасе» нет{period}.")
             continue
-        roles = []
-        for label, attr in (("покупатель", "buyer"), ("продавец", "seller"), ("предмет сделки", "target")):
-            k = sum(1 for d in own if _company_name(idx.companies, cid) and getattr(d, attr, "") == name)
-            if k:
-                roles.append(f"{label} — {k}")
         n = len(own)
         head = (f"**[{name}](#/companies/{cid})** — {n} "
-                f"{_plural(n, 'сделка', 'сделки', 'сделок')}{period}"
-                + (f" ({', '.join(roles)})" if roles else "") + ".")
-        blocks.append(head + " Последняя: " + _line(own[0]).lstrip("- "))
-        docs += own[:4]
+                f"{_plural(n, 'сделка', 'сделки', 'сделок')}{period}" + _roles_text(own, cid) + ".")
+        block = [head, "Последняя: " + _role_line(own[0], cid).lstrip("- ")]
+        # Крупнейшая — по цене, которую назвали стороны, среди состоявшихся
+        # покупок и продаж (без обсуждаемых, выкупа своих акций,
+        # финансирования); роль компании — рядом. До второй проверки ответ
+        # давал только последнюю сделку, и модель сама выбирала «крупнейшую»
+        # из дюжины карточек — с ошибкой в сумме и в роли (№21, ВТБ и Сбербанк).
+        priced = sorted([d for d in own if d.purchase_like and d.named_rub], key=lambda d: -(d.named_rub or 0))
+        if priced:
+            big = priced[0]
+            block.append(f"Крупнейшая по цене, названной сторонами ({_fmt_rub(big.named_rub)}): "
+                         + _role_line(big, cid).lstrip("- "))
+        else:
+            block.append("Сделок с ценой, которую назвали стороны, у компании нет.")
+        blocks.append("\n".join(block))
+        docs += ([priced[0]] if priced else []) + [d for d in own[:4] if not priced or d is not priced[0]]
     if not blocks:
         return Retrieval("compare", None, [], None)
     names = " и ".join(_company_name(idx.companies, c) for c in intent.company_ids)
@@ -1984,7 +2297,7 @@ def _answer_count(intent: Intent, idx: Index) -> Retrieval:
         if not span_single(intent.span) and len(by_year) > 1:
             lines.append("По годам: " + ", ".join(f"{y} — {c}" for y, c in sorted(by_year.items())) + ".")
         if intent.wants_price:
-            lines += _price_lines(pool)
+            lines += _price_lines(pool, intent)
         lines.append("Последние:")
         lines += [_line(d) for d in pool[:MAX_LISTED]]
     if intent.span and intent.span[0] is not None and intent.span[0] < SITE_MIN_YEAR:
@@ -2004,6 +2317,11 @@ def _answer_theme(intent: Intent, idx: Index) -> Retrieval:
     n = len(docs)
     head = (f"По теме [{theme}](#/theme/{theme}) в базе «Компаса» {n} "
             f"{_plural(n, 'сделка', 'сделки', 'сделок')}{scope}.")
+    if VENTURE in intent.themes:
+        head += " Сюда входят и все инвестиции в компании (деньги в компанию за долю)."
+    if "IPO / SPO" in intent.themes:
+        # Сами размещения — первыми: про них и спрашивают.
+        docs = [d for d in docs if _is_offering(d)] + [d for d in docs if not _is_offering(d)]
     return _list_answer("theme", intent, idx, docs, head, f"[все по теме](#/theme/{theme})", theme)
 
 
@@ -2020,6 +2338,20 @@ def _excerpt(doc: Doc, rx: re.Pattern, width: int = 220) -> str:
         piece = text[start:min(end, start + width)].strip()
         return piece + ("…" if start + width < end else "")
     return ""
+
+
+_FOREIGN_EXIT = re.compile(r"российск\w*\s+(?:бизнес|актив|завод|подразделен|дочк)|в\s+росси", re.I)
+_NEGATED = re.compile(r"\bне\s+(?:предусм\w*|предполаг\w*|был\w*|име\w*|содерж\w*|включ\w*|оговар\w*)|\bнет\b|отсутств\w*|\bбез\s+(?:прав|опцион)", re.I)
+
+
+def _sentences(doc: Doc, rx: re.Pattern) -> list[str]:
+    """Фразы карточки, где названо условие."""
+    return [sent for sent in re.split(r"(?<=[.;!?])\s+", doc.facts or "") if rx.search(sent)]
+
+
+def _affirmed(doc: Doc, rx: re.Pattern) -> bool:
+    """Условие названо хотя бы в одной фразе без отрицания рядом."""
+    return any(not _NEGATED.search(sent) for sent in _sentences(doc, rx))
 
 
 def _topic_pick(intent: Intent, pool: list[Doc]) -> list[Doc]:
@@ -2042,15 +2374,31 @@ def _answer_term(intent: Intent, idx: Index) -> Retrieval:
     rx_title = re.compile(intent.term_rxs[-1], re.I) if intent.term_rxs else None
     docs = _topic_pick(intent, docs)
     # Условие прямо в заголовке («MBO ПАО ВымпелКом», «management buy-out») —
-    # первым: это сделка именно такого вида, а не упоминание в прозе.
+    # первым: это сделка именно такого вида, а не упоминание в прозе. Дальше —
+    # где во фразе с условием стоят и другие слова вопроса: «опцион на
+    # обратный выкуп» у Hyundai и Mercedes-Benz выше «права выкупа обратно»
+    # без слова «опцион» (№4).
     if rx_title:
-        docs = sorted(docs, key=lambda d: 0 if rx_title.search(d.title) else 1)
+        words = [t for t in intent.terms if len(t) >= 4 and not t.isdigit()]
+        # «Обратный выкуп банка не предусмотрен… опционов в сделке нет»
+        # (Ситибанк) — условие названо, чтобы сказать, что его НЕТ.
+        docs = [d for d in docs if rx_title.search(d.title) or _affirmed(d, rx_title)]
+
+        def closeness(d: Doc) -> int:
+            best = max((sum(1 for t in words if t in norm(sent)) for sent in _sentences(d, rx_title)
+                        if not _NEGATED.search(sent)), default=0)
+            # Состоявшаяся сделка и уход иностранного владельца — где такое
+            # условие и записано в договор (опцион продавца вернуть бизнес).
+            return best + (d.status == "Закрыта") + bool(_FOREIGN_EXIT.search(d.title)
+                                                          or "Уход иностранного владельца" in d.themes)
+        docs = sorted(docs, key=lambda d: (0 if rx_title.search(d.title) else 1, -closeness(d)))
     scope = _scope_text(intent)
     if not docs:
         return Retrieval("term", f"Сделок{scope} в «Компасе» пока не нашлось.", [], None)
     n = len(docs)
     rx = re.compile(intent.term_rxs[-1], re.I)
-    lines = [f"Сделок{scope} в «Компасе» — {n}. Последние:"]
+    lines = [f"Сделок{scope} в «Компасе» — {n}. "
+             + ("Сначала те, где условие названо ближе всего к словам вопроса:" if n > MAX_LISTED else "Все:")]
     for d in docs[:MAX_LISTED]:
         lines.append(_line(d))
         ex = _excerpt(d, rx)
@@ -2195,7 +2543,11 @@ def _answer_rank(intent: Intent, idx: Index) -> Retrieval:
         rows = [(cid, n) for cid, n in cnt.most_common() if n >= 2][:10]
         if not rows:
             return Retrieval("rank", f"Компаний с двумя и больше покупками{scope} в «Компасе» нет.", [], None)
-        lines.append(f"Самые активные покупатели{scope} в «Компасе» — по числу сделок, где компания покупатель:")
+        if intent.buyer_kind == "bank":
+            lines.append(f"Банки — самые активные покупатели{_scope_text(replace(intent, buyer_kind=None))} "
+                         "в «Компасе», по числу сделок, где банк — покупатель:")
+        else:
+            lines.append(f"Самые активные покупатели{scope} в «Компасе» — по числу сделок, где компания покупатель:")
         for i, (cid, n) in enumerate(rows, 1):
             name = _company_name(idx.companies, cid)
             own = [d for d in pool if d.raw.get("buyer") == cid]
@@ -2216,14 +2568,58 @@ def _short_advisor(raw: str) -> str:
     return (name[:57] + "…") if len(name) > 60 else name
 
 
+SIZE_WORDS = ("средн", "мал", "мелк", "небольш", "крупн")
+
+
+def _answer_advisors_overall(intent: Intent, idx: Index) -> Retrieval:
+    """«Кто сопровождает продажи…», «какие консультанты работают с…» без
+    имени фирмы и без отрасли — счёт консультантов по всем сделкам (с
+    условиями вопроса), а не одна случайная сделка по слову вопроса. Слово
+    «продажа» — консультанты стороны продавца, «покупка» — покупателя."""
+    pool = [d for d in _apply(intent, idx.docs) if not d.listing]
+    side = {"seller": "консультант продавца", "buyer": "консультант покупателя"}.get(intent.role or "")
+    rows = []
+    for f in idx.firms:
+        own = [d for d in idx.firm_deals.get(f.id) or [] if d in pool and (
+            side is None or any(f.rx.search(name) and _role_bucket(r) == side for r, name in d.advisor_roles))]
+        if own:
+            rows.append((f, own))
+    rows.sort(key=lambda x: (-len(x[1]), x[0].name.lower()))
+    scope = _scope_text(intent)
+    who = f" на стороне {'продавца' if intent.role == 'seller' else 'покупателя'}" if side else ""
+    lines = []
+    if any(t.startswith(SIZE_WORDS) for t in intent.terms):
+        lines.append("Размер бизнеса («средний», «малый») в карточках не размечен, поэтому считаем по всем сделкам.")
+    if not rows:
+        lines.append(f"Консультанты{who}{scope} ни в одной сделке «Компаса» не названы. {NOTE_ADVISORS}")
+        return Retrieval("rank", "\n".join(lines), [], None)
+    named = sum(1 for d in pool if d.advisors)
+    lines.append(f"Консультанты{who} по числу сделок{scope} в «Компасе» (всего сделок в выборке — {len(pool)}, "
+                 f"консультант назван у {named}; фирм — {len(rows)}):")
+    docs: list[Doc] = []
+    for i, (f, own) in enumerate(rows[:10], 1):
+        lines.append(f"{i}. [{f.name}](#/advisors/{f.id}) ({f.kind_label}) — {len(own)} "
+                     f"{_plural(len(own), 'сделка', 'сделки', 'сделок')}")
+        docs += [d for d in own[:2] if d not in docs]
+    lines.append(NOTE_ADVISORS + " Тот же счёт — на странице [Консультанты](#/advisors).")
+    return Retrieval("rank", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], "Консультанты", pool=docs)
+
+
 def _answer_search(intent: Intent, idx: Index) -> Retrieval:
     # Спросили про консультанта, которого нет в каталоге, — ищем его имя в
     # самих карточках: там названы и фирмы вне каталога. Родовые слова
     # («партнёры», legal, консалтинг) именем не считаются — иначе «Иванов и
     # партнёры» находил бы всех «…и партнёры» базы.
     if intent.wants_advisors and intent.terms:
+        # Обычные слова вопроса («среднего», «бизнеса», «продажу») — не имя
+        # фирмы: «Какие консультанты сопровождают продажу среднего бизнеса?»
+        # находило по «среднего» одну сделку с BGP Capital (вторая проверка, №65).
         name_terms = [t for t in (intent.words or intent.terms)
-                      if len(t) >= 4 and t not in ADVISOR_GENERIC and stem(t) not in ADVISOR_GENERIC]
+                      if len(t) >= 4 and t not in ADVISOR_GENERIC and stem(t) not in ADVISOR_GENERIC
+                      and not _plain_word(t, idx) and not _stop_match(t) and not _hint_covers(t, intent.region)
+                      and not ADVISOR_WORDS.search(t)]
+        if not name_terms:
+            return _answer_advisors_overall(intent, idx)
         hits = [d for d in idx.docs
                 if any(any(name_match(t, w) for w in tokens(a)) for t in name_terms for a in d.advisors)] if name_terms else []
         hits = _filter(hits, intent.span, intent.industry)
@@ -2246,7 +2642,7 @@ def _answer_search(intent: Intent, idx: Index) -> Retrieval:
             return Retrieval("advisor",
                              "В базе «Компаса» такой консультант не назван ни в одной сделке, и в каталоге "
                              "консультантов его нет." + tail + " " + NOTE_ADVISORS, [], None)
-    docs = search(intent.terms, idx)
+    docs = search(intent.terms, idx, limit=len(idx.docs))
     if intent.span:
         by_year = [d for d in docs if in_span(d.year, intent.span)]
         docs = by_year or docs
@@ -2256,9 +2652,15 @@ def _answer_search(intent: Intent, idx: Index) -> Retrieval:
     # отвечаем сводкой этой сделки с этапами и источником, остальное списком.
     if _search_is_specific(intent, docs, idx):
         return _answer_deal(docs[0], docs[1:])
-    lines = ["Похожие по словам вопроса сделки из базы:"]
+    n = len(docs)
+    # Сколько нашлось всего — словами: без этого модель писала «это все» под
+    # шестью строками из двадцати (вторая проверка).
+    lines = [f"Похожих по словам вопроса сделок в базе — {n}"
+             + (f"; первые {MAX_LISTED}:" if n > MAX_LISTED else ":")]
     lines += [_line(d) for d in docs[:MAX_LISTED]]
-    return Retrieval("search", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], None)
+    if n > MAX_LISTED:
+        lines.append(NOTE_PARTIAL)
+    return Retrieval("search", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], None, pool=docs)
 
 
 def _events(doc: Doc) -> list[str]:
@@ -2321,7 +2723,8 @@ def _answer_deal(doc: Doc, more: list[Doc] | None = None) -> Retrieval:
     if more:
         rest = [d for d in more if d.id != doc.id]
         if rest:
-            lines.append("Похожие по словам вопроса сделки:")
+            lines.append(f"Ещё похожих по словам вопроса сделок — {len(rest)}"
+                         + (f"; первые {MAX_LISTED}:" if len(rest) > MAX_LISTED else ":"))
             lines += [_line(d) for d in rest[:MAX_LISTED]]
             docs += rest[:MAX_DEALS_FOR_MODEL - 1]
     return Retrieval("deal", "\n".join(lines), docs, doc.title)
