@@ -890,6 +890,8 @@ PRODUCT_QUESTIONS = {
     "Чем сделка M&A отличается от инвестиции?": ("ma_vs_investment", "#/deal/"),
     "Как следить за сделками Сбербанка?": ("subscribe", "Следить за сделками компании"),
     "Это платно?": ("price", "бесплатн"),
+    # №90 третьей проверки (18 октября 2026): модель отказывала «я только о сделках».
+    "Как вырастить свой бизнес через покупки?": ("grow_by_ma", "#/companies/"),
 }
 
 
@@ -922,7 +924,7 @@ def test_product_answers_name_no_price_and_link_only_to_existing_deals():
     for button in ("Выгрузить в таблицу", "Следить за сделками компании", "Следить за сделками отрасли",
                    "Подписаться на обновления", "Новая подписка"):
         assert button in html, button
-    for k in (ap.SUBSCRIBE, ap.EXPORT, ap.PRICE, ap.RIVALS, ap.WHAT_IS_MA, ap.MA_VS_INVESTMENT):
+    for k in (ap.SUBSCRIBE, ap.EXPORT, ap.PRICE, ap.RIVALS, ap.WHAT_IS_MA, ap.MA_VS_INVESTMENT, ap.GROW_BY_MA):
         text = ap.answer(k, idx)
         assert not _re.search(r"\d[\d\s]*(?:₽|руб)\w*\s*(?:в|/)\s*мес", text), k
         for did in _re.findall(r"#/deal/([A-Za-z0-9_-]+)", text):
@@ -1176,3 +1178,269 @@ def test_polish_leaves_an_ordinary_answer_alone():
             "Сумму раскрывают не всегда: в наших данных об этом не сказано. Согласие ФАС получено.")
     ret = _ret(answer="Всего 1 сделка.", docs=[d], pool=[d])
     assert main._polish_answer(text, idx, ret=ret, source="сводка ФАС 10 млрд", meeting=True) == text
+
+
+
+# ── Третья проверка на 100 вопросах (18 октября 2026): ответ ─────────────────
+
+def test_own_count_of_deals_is_dropped_and_the_more_line_is_written_by_code():
+    """№4: «зафиксировано 12 сделок» при 34 найденных и «ещё 2» при 22
+    оставшихся. Своё число снимается вместе с фразой, «Ещё N» — по сводке."""
+    docs = [_doc(f"g{i}", f"Сделка про обратный выкуп номер {i}") for i in range(12)]
+    summary = ("Сделок с условием: обратный выкуп в «Компасе» — 34.\n"
+               + "\n".join(f"- [{d.title}](#/deal/{d.id}) — 2024" for d in docs[:6]) + "\n…и ещё 28.")
+    ret = _ret(intent="term", answer=summary, docs=docs, pool=docs)
+    text = ("В Компасе зафиксировано 12 сделок, в которых предусмотрён опцион на обратный выкуп.\n\n"
+            + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in docs[:10])
+            + "\n\nещё 2 сделки с аналогичным условием:\n"
+            + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in docs[10:])
+            + "\n\nДанные могут быть неполными.")
+    source = f"СВОДКА из «Компаса» по вопросу (проверена, опирайся на неё):\n{summary}\n\nВопрос посетителя: выкуп"
+    out = main._polish_answer(text, _idx(docs), ret=ret, source=source)
+    assert "12 сделок" not in out and "ещё 2" not in out
+    assert "Ещё 22." in out and out.index("Ещё 22.") > out.index("#/deal/g11")
+    assert out.count("](#/deal/") == 12 and out.endswith("Данные могут быть неполными.")
+
+
+def test_more_line_counts_what_the_answer_did_not_name():
+    """№66: «ещё 2 на странице» при восьми сделках и семи названных; №26: «ещё
+    1 сделка», когда названы все семь. Ссылка — та же, что в сводке."""
+    docs = [_doc(f"m{i}", f"Магнит купил компанию номер {i}") for i in range(8)]
+    summary = ("Компания [Магнит](#/companies/mg) в «Компасе»: 8 сделок:\n"
+               + "\n".join(f"- [{d.title}](#/deal/{d.id})" for d in docs[:6])
+               + "\n…и ещё 2 — на [странице компании](#/companies/mg).")
+    ret = _ret(answer=summary, docs=docs, pool=docs)
+    source = f"СВОДКА из «Компаса» по вопросу (проверена, опирайся на неё):\n{summary}\n\nВопрос посетителя: Магнит"
+    seven = "\n".join(f"- [{d.title}](#/deal/{d.id}) — 2025" for d in docs[:7])
+    out = main._polish_answer("«Магнит» — 8 сделок.\n\n" + seven + "\n\n*Ещё 2 сделки указаны на странице компании "
+                              "[Магнит](#/companies/mg).*", _idx(docs), ret=ret, source=source)
+    assert "Ещё 2" not in out and "Ещё 1 — на [странице компании](#/companies/mg)." in out
+    assert out.startswith("«Магнит» — 8 сделок.")
+    eight = "\n".join(f"- [{d.title}](#/deal/{d.id}) — 2025" for d in docs)
+    out = main._polish_answer(eight + "\n\nНа странице компании указана ещё 1 сделка. Данные могут быть неполными.",
+                              _idx(docs), ret=ret, source=source)
+    assert "ещё 1" not in out.lower() and out.endswith("Данные могут быть неполными.")
+
+
+def test_ratios_and_shares_counted_by_the_model_are_dropped():
+    """№32: «в 10 раз больше сделок» при 14 против 2; №58: «более половины»
+    при 46%. Числа из сводки, суммы, доли, даты и годы остаются."""
+    source = ("СВОДКА из «Компаса» по вопросу (проверена, опирайся на неё):\nOzon — 2 сделки. РВБ — 14 сделок. "
+              "Всего сделок — 1450.\n\nВопрос посетителя: сравни")
+    text = ("Ozon — 2 сделки, у РВБ — 14 сделок. У РВБ в 10‑раз больше сделок. "
+            "Пять отраслей охватывают более половины всех 1450 сделок. "
+            "Последняя закрыта 2 марта 2026: 51 % за 10 млрд ₽, в 2025 году — ещё одна.")
+    out = main._polish_answer(text, None, source=source)
+    assert out == ("Ozon — 2 сделки, у РВБ — 14 сделок. "
+                   "Последняя закрыта 2 марта 2026: 51 % за 10 млрд ₽, в 2025 году — ещё одна.")
+    # Своё число в фразе со счётом — тоже снимается (№61: «7 в 2023 году» без «7» в сводке).
+    out = main._polish_answer("Среди найденных — 2 закрытых в 2024 году и 7 в 2023 году. Сумма раскрыта.",
+                              None, source=source)
+    assert out == "Сумма раскрыта."
+    # «Вот 3 крупнейшие сделки» — счёт своего же списка, он верен.
+    listed = "Вот 3 крупнейшие сделки:\n- [А](#/deal/a)\n- [Б](#/deal/b)\n- [В](#/deal/c)"
+    assert main._polish_answer(listed, _idx([_doc(x, x.upper()) for x in "abc"]), source=source) == listed
+
+
+# Пункты из ответов третьей проверки, которые получили ссылку на чужую сделку
+# (описание компании, советы, места работы): ни один не должен её получить.
+FALSE_LINK_LINES = [
+    ("- ВТБ — один из крупнейших банков‑холдингов России, владеющий широким портфелем непрофильных активов "
+     "(гостиницы, недвижимость, агробизнес, страхование, транспорт).", "gc3d735fc", True),
+    ("- **Подчеркнуть юридический опыт**: отметьте, что в сделке с «Авророй Инвест» банк привлекал юрфирму; "
+     "предложите свои услуги.", "gb101d54d", True),
+    ("- Акционеры — публичные и институциональные инвесторы; контрольный пакет держит МКПАО «Яндекс».",
+     "gd73fd825", True),
+    ("- Финансовый советник в сделке «Бери заряд!» — Orion (не банк, но финансовый консультант).",
+     "berizaryad", True),
+    ("- За 2025‑2026 годы «Самолёт» активно монетизирует активы: продаёт готовые проекты и доли.",
+     "g1e37f107", True),
+    ("- Крупный российский ритейлер, владеет сетью продуктовых магазинов и онлайн‑платформой — маркетплейс "
+     "KazanExpress.", "g25448b74", True),
+    ("- Внутри стратегических подразделений указанных выше компаний (например, в «Яндексе», VK, Сбербанке, "
+     "Softline) – для формирования портфеля сделок.", "g15386e04", False),
+]
+
+
+def test_list_items_do_not_get_a_link_to_an_unrelated_deal():
+    """Регрессия второй волны (№74, 93, 96, пять подготовок к встрече из шести):
+    ссылка ставилась по двум общим словам. Теперь — только когда пункт
+    называет сделку, а в подготовке к встрече — только в разделе о сделках."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    for line, did, meeting in FALSE_LINK_LINES:
+        if did not in idx.by_id:
+            continue
+        docs = [idx.by_id[did]] + idx.docs[:20]
+        head = "**Что важно знать о компании**\n" if meeting else "**Где может понадобиться директор по M&A**\n"
+        out = main._link_list_items(head + line, docs, meeting=meeting)
+        assert "](#/deal/" not in out, out
+        # И без подготовки к встрече: пункт не называет сделку.
+        assert "](#/deal/" not in main._link_list_items(line, docs), line
+    # В разделе о сделках подготовки к встрече ссылка ставится как прежде.
+    d = idx.by_id.get("g35357328")
+    if d:
+        text = f"**Что важно знать**\n- {d.title} — продавец.\n\n**Главные сделки**\n- {d.title} — 2026, продавец."
+        out = main._link_list_items(text, [d], meeting=True)
+        assert out.count("](#/deal/") == 1 and out.splitlines()[-1].startswith(f"- [{d.title}](#/deal/")
+
+
+def test_list_links_on_all_answers_of_the_third_check():
+    """Все ответы проверки 18 октября 2026: из пунктов списка убираем ссылки и
+    ставим заново. Ссылка не должна вести на другую сделку, чем у модели, и в
+    подготовке к встрече не должна появляться вне раздела о сделках."""
+    import json as _json
+    import re as _re
+    import assistant_retrieval
+    path = main.pathlib.Path(main.__file__).parent / "data" / "inbox" / "assistant_eval" / "answers_2026-10-18_0650.jsonl"
+    if not path.exists():
+        pytest.skip("ответов проверки нет (data/inbox не в git)")
+    idx = assistant_retrieval.get_index()
+    rows = [_json.loads(x) for x in path.read_text(encoding="utf-8").splitlines()][1:]
+    wrong, outside, checked = [], [], 0
+    false_lines = [line[2:40] for line, _, _ in FALSE_LINK_LINES]
+    for r in rows:
+        answer = r.get("answer") or ""
+        if not answer or r.get("model") is False:
+            continue
+        q = main._CONTEXT_PREFIX_RE.sub("", r["question"]).strip()
+        ret = assistant_retrieval.retrieve(q, r.get("context_type"), r.get("context_id"), idx)
+        meeting = main._is_meeting_prep(q)
+        lines, orig = [], {}
+        for i, line in enumerate(answer.split("\n")):
+            if main._is_list_line(line):
+                orig[i] = _re.findall(r"\(#/deal/([^)\s]+)\)", line)
+                line = _re.sub(r"\[([^\]]+)\]\(#/deal/[^)\s]+\)", r"\1", line)
+            lines.append(line)
+        out = main._link_list_items("\n".join(lines), main._candidate_docs(ret), meeting=meeting).split("\n")
+        section_ok = not meeting
+        for i, line in enumerate(out):
+            if line.strip() and not main._is_list_line(line) and main._looks_like_heading(line):
+                section_ok = not meeting or bool(main._DEALS_HEADING.search(line))
+            ids = _re.findall(r"\(#/deal/([^)\s]+)\)", line) if i in orig else []
+            if not ids:
+                continue
+            checked += 1
+            if orig[i] and ids[0] not in orig[i]:
+                wrong.append((r["n"], line[:120]))
+            if not section_ok:
+                outside.append((r["n"], line[:120]))
+            if any(f in line for f in false_lines):
+                wrong.append((r["n"], line[:120]))
+    assert checked > 100 and not wrong and not outside, (wrong[:5], outside[:5])
+
+
+def test_meeting_prep_gets_the_company_profile_and_strict_rules():
+    """Подготовка к встрече выдумывала о компании («WB Банк — дочка ВТБ»,
+    владельцы Яндекса, «порог ФАС 10%»): модель получает профиль из базы, где
+    сказано и то, чего в нём нет, а правила запрещают общие знания."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    if "gcafc31dc" not in idx.companies:
+        pytest.skip("ВТБ нет в базе")
+    q = "Готовлюсь к встрече с компанией «ВТБ». Коротко, по пунктам."
+    ret = assistant_retrieval.retrieve(q, "company", "gcafc31dc", idx)
+    prep = main._prepare_ask(q, ret, "base", "", "company", "gcafc31dc", idx)
+    assert "ПРОФИЛЬ КОМПАНИИ" in prep.user_msg and "Название: ВТБ" in prep.user_msg
+    assert "Собственники:" in prep.user_msg and "Дочерние компании" in prep.user_msg or "Компании группы" in prep.user_msg
+    if "gcafc31dc" in main._bank_finance():
+        assert "Отчётность в Банке России" in prep.user_msg and "трлн ₽" in prep.user_msg
+    plain = main._prepare_ask("Какие сделки были у ВТБ?", ret, "base", "", "company", "gcafc31dc", idx)
+    assert "ПРОФИЛЬ КОМПАНИИ" not in plain.user_msg
+    rules = main.MEETING_PREP_RULES
+    for must in ("ПРОФИЛЬ КОМПАНИИ", "не делает её дочерней", "порог", "не называй консультантов",
+                 "юрфирму не называй финансовым консультантом", "кириллицу не переводи в латиницу"):
+        assert must in rules, must
+    assert "сервер допишет сам" in main.COMPLETENESS_RULES
+
+
+def test_meeting_advice_does_not_rest_on_one_consultant():
+    """Партнёр: совет «предложите себя как альтернативу VERBA LEGAL». Пункт
+    совета с именем консультанта снимается; в разделе о сделках и о том, с кем
+    работала компания, имена остаются; сама компания-банк — не консультант."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    text = ("**Что важно знать о Сбербанке**\n- Сбербанк — крупнейший банк. В сделках часто привлекал VERBA LEGAL.\n"
+            "- Сбербанк покупал и продавал активы.\n\n"
+            "**Главные сделки**\n- Продажа отеля — юрфирма VERBA LEGAL на стороне продавца.\n\n"
+            "**С кем работала компания**\n- VERBA LEGAL, Orion.\n\n"
+            "**Как подготовиться**\n- **Подчеркните опыт** — предложите себя как альтернативу VERBA LEGAL.\n"
+            "- Изучите сделки Сбербанка за 2025 год.\nОпирайтесь на участие Orion. Возьмите презентацию.")
+    out = main._polish_answer(text, idx, meeting=True)
+    assert "крупнейший банк" not in out and "часто привлекал" not in out  # пункт с фирмой — целиком
+    assert "юрфирма VERBA LEGAL на стороне продавца" in out and "- VERBA LEGAL, Orion." in out
+    assert "альтернативу" not in out and "Подчеркните опыт" not in out and "участие Orion" not in out
+    assert "- Изучите сделки Сбербанка за 2025 год." in out and "Возьмите презентацию." in out
+    assert "- Сбербанк покупал и продавал активы." in out  # банк-сторона — не консультант
+
+
+def test_how_to_use_kompas_is_answered_about_the_service(client, monkeypatch):
+    """№88: «Как пользоваться Компасом?» — отказ модели вместо рассказа о сервисе."""
+    def no_llm(*a, **k):
+        raise AssertionError("модель не должна вызываться")
+    monkeypatch.setattr(main, "call_llm", no_llm)
+    for q in ("Как пользоваться Компасом?", "как пользоваться сервисом", "Как работать с ассистентом?"):
+        body = client.post("/api/ask", json={"question": q, "mode": "base"}).json()
+        assert body["intent"] == "about" and "#/deals" in body["answer"], (q, body)
+    assert main._ready_reply("Как пользоваться правом обратного выкупа?") is None
+
+
+def test_grow_by_acquisitions_is_answered_with_buyers_from_the_base():
+    """№90: «Как вырастить свой бизнес через покупки?» — не отказ, а примеры
+    покупателей из базы со ссылками; вопрос о названной компании идёт к её сделкам."""
+    import re as _re
+    import assistant_policy
+    import assistant_product as ap
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    q = "Как вырастить свой бизнес через покупки?"
+    assert not assistant_policy.classify(q).refused and ap.kind(q) == ap.GROW_BY_MA
+    for other in ("Как Яндекс растёт через покупки?", "Какие компании активнее всего растут через покупки?",
+                  "Как рос рынок сделок в 2025 году?"):
+        assert ap.kind(other) is None, other
+    text = ap.answer(ap.GROW_BY_MA, idx)
+    companies = _re.findall(r"#/companies/([^)\s]+)", text)
+    assert len(companies) >= 3 and all(c in idx.companies for c in companies)
+    assert all(d in idx.by_id for d in _re.findall(r"#/deal/([^)\s]+)", text))
+    assert "только" not in text.split("\n")[0] or "сделк" not in text.split("\n")[0]
+
+
+def test_theme_links_are_built_the_way_the_site_builds_them():
+    """№25: модель собрала «#/theme/Венчур%20/раунд», а сайт режет адрес по «/»
+    (route() → h.split("/")) — тема открывалась пустой. Имя сверяется с темами
+    базы и кодируется, как encodeURIComponent; неизвестная тема — без ссылки."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    themes = {t for d in idx.docs for t in d.themes}
+    if "Венчур / раунд" not in themes:
+        pytest.skip("темы «Венчур / раунд» нет в базе")
+    out = main._fix_section_links("См. [все по теме](#/theme/Венчур%20/раунд) и [тему](#/theme/Венчур / раунд). "
+                                  "[Отрасль](#/industry/ИТ%20и%20интернет), [нет такой](#/theme/Космос).", idx)
+    assert out == ("См. [все по теме](#/theme/Венчур %2F раунд) и [тему](#/theme/Венчур %2F раунд). "
+                   "[Отрасль](#/industry/ИТ и интернет), нет такой.")
+    # Сводка без модели (быстрый ответ, запасной ответ) — тоже.
+    ret = assistant_retrieval.Retrieval("theme", "…и ещё 2 — [все по теме](#/theme/Венчур / раунд).", [], None)
+    assert "(#/theme/Венчур %2F раунд)" in main._summary_text(ret, idx)
+    html = (main.pathlib.Path(main.__file__).parent / "static" / "index.html").read_text(encoding="utf-8")
+    assert 'filterTheme = arg?decodeURIComponent(arg):"Все"' in html
+
+
+def test_raw_codes_firm_links_bold_and_double_brackets_are_fixed():
+    """№65: «в сделке «…» [gc44de028]» и «**[АЛРУД](#/deal/…)**»; №18:
+    «**IPO девелопера GloraX (ПАО «Глоракс**)»; №59: «[[название](#/deal/…)]»."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    d = next(x for x in idx.docs if x.id.startswith("g") and len(x.id) == 9 and "«" not in x.title)
+    firm = next(f for f in idx.firms if f.id == "alrud") if any(f.id == "alrud" for f in idx.firms) else None
+    text = f"- **[{firm.name if firm else 'АЛРУД'}](#/deal/{d.id})** – продавец в сделке «{d.title}» [{d.id}] и в сделке [ g0000000f]."
+    out = main._polish_answer(text, idx)
+    assert f"[{d.title}](#/deal/{d.id})" in out and f"[{d.id}]" not in out and "g0000000f" not in out
+    if firm:
+        assert f"**[{firm.name}](#/advisors/{firm.id})**" in out
+    out = main._polish_answer("- **IPO девелопера GloraX (ПАО «Глоракс**) – 31 октября 2025.\n"
+                              "- **IPO «ВсеИнструменты.ру** – 5 июля 2024.\n- **Обычный «жирный»** — ок.", None)
+    assert out.splitlines() == ["- **IPO девелопера GloraX (ПАО «Глоракс»)** – 31 октября 2025.",
+                                "- **IPO «ВсеИнструменты.ру»** – 5 июля 2024.", "- **Обычный «жирный»** — ок."]
+    out = main._polish_answer(f"Пример: [[{d.title}](#/deal/{d.id})], "
+                              "[[https://pravo.ru/opinion/1/](https://pravo.ru/opinion/1/)].", idx)
+    assert out == f"Пример: [{d.title}](#/deal/{d.id}), [pravo.ru](https://pravo.ru/opinion/1/)."

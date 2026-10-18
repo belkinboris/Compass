@@ -83,8 +83,19 @@ _RIVAL_GENERIC = re.compile(
     r"|\bчем\s+(?:вы|компас\w*|сервис\w*)\s+(?:\w+\s+)?(?:отлича\w*|лучше)"
 )
 
-SUBSCRIBE, EXPORT, PRICE, RIVALS, WHAT_IS_MA, MA_VS_INVESTMENT = (
-    "subscribe", "export", "price", "rivals", "what_is_ma", "ma_vs_investment")
+# Рост через покупки: «Как вырастить свой бизнес через покупки?» (№90 третьей
+# проверки, 18 октября 2026) — модель отказывала «я только о сделках», хотя
+# ответ на примерах из базы есть. Нужны «как», рост и покупки, и вопрос — о
+# своём бизнесе или вообще, а не о названной компании («Как Яндекс растёт
+# через покупки?» идёт обычным путём, к её сделкам).
+_GROW = re.compile(r"\b(?:вырасти\w*|выращива\w*|расти|растить|рост\w*|развива\w*|развити\w*|масштабир\w*|увелич\w*)\b")
+_BY_BUYING = re.compile(r"\b(?:через|за\s+сч[её]т|с\s+помощью|путем|покупкам\w*)\s+(?:\w+\s+)?"
+                        r"(?:покуп\w*|поглощени\w*|приобретени\w*|слияни\w*|m\s?a|м\s?а|сделк\w*)"
+                        r"|\bпокупая\s+(?:другие\s+|чужие\s+)?(?:компани\w*|бизнес\w*)")
+_OWN_OR_GENERIC = re.compile(r"\b(?:сво\w*|мо[йюяе]\w*|наш\w*|бизнес|компани\w*|фирм\w*)\b")
+
+SUBSCRIBE, EXPORT, PRICE, RIVALS, WHAT_IS_MA, MA_VS_INVESTMENT, GROW_BY_MA = (
+    "subscribe", "export", "price", "rivals", "what_is_ma", "ma_vs_investment", "grow_by_ma")
 
 
 def kind(question: str) -> str | None:
@@ -104,6 +115,9 @@ def kind(question: str) -> str | None:
         return EXPORT
     if _SUBSCRIBE.search(q) and _HOW.search(q):
         return SUBSCRIBE
+    if re.match(r"(?:а\s+)?(?:как|каким\s+образом|можно\s+ли)\b", q) and _GROW.search(q) \
+            and _BY_BUYING.search(q) and _OWN_OR_GENERIC.search(q) and len(q.split()) <= 14:
+        return GROW_BY_MA
     return None
 
 
@@ -130,6 +144,27 @@ def _investment_example(idx):
 def _deal_count(idx) -> int:
     # Как в рассказе о сервисе: лоты торгов, которые никто не купил, сделками не считаются.
     return sum(1 for d in idx.docs if not (d.type == "Продажа с торгов" and d.status != "Закрыта"))
+
+
+def _serial_buyers(idx, limit: int = 5) -> list[tuple[str, str, int, object]]:
+    """Самые частые покупатели базы — тот же счёт, что у рейтинга покупателей
+    ассистента и «Аналитики»: лоты торгов, которые никто не купил, не в счёт.
+    (id, имя, число покупок, последняя закрытая покупка)."""
+    from collections import Counter
+    own: dict[str, list] = {}
+    for d in idx.docs:
+        if d.type == "Продажа с торгов" and d.status != "Закрыта":
+            continue
+        cid = (d.raw or {}).get("buyer")
+        if cid in idx.companies:
+            own.setdefault(cid, []).append(d)
+    cnt = Counter({cid: len(v) for cid, v in own.items()})
+    out = []
+    for cid, n in cnt.most_common(limit):
+        closed = [d for d in own[cid] if d.status == "Закрыта"] or own[cid]
+        last = max(closed, key=lambda d: d.date or "")
+        out.append((cid, (idx.companies.get(cid) or {}).get("name") or cid, n, last))
+    return out
 
 
 def answer(kind_: str, idx=None) -> str:
@@ -211,5 +246,21 @@ def answer(kind_: str, idx=None) -> str:
             if inv:
                 lines.append(f"- **Инвестиция:** {_deal_link(inv)} — {inv.sum_text}.")
         lines += ["", f"Инвестиционные раунды собраны [отдельной подборкой](#/deals?dtype={quote('Инвестиция')})."]
+        return "\n".join(lines)
+    if kind_ == GROW_BY_MA:
+        lines = [
+            "Готового рецепта не дам — стратегию роста стоит обсуждать с советниками. Но в «Компасе» видно, "
+            "как растут покупками другие: что и у кого они покупают, за сколько и кто сопровождал сделки.",
+        ]
+        buyers = _serial_buyers(idx) if idx is not None else []
+        if buyers:
+            lines += ["", "Чаще всех покупают:"]
+            for cid, name, n, last in buyers:
+                word = "покупка" if n % 10 == 1 and n % 100 != 11 else (
+                    "покупки" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "покупок")
+                lines.append(f"- [{name}](#/companies/{cid}) — {n} {word}, последняя: {_deal_link(last)}")
+        lines += ["", "Откройте страницу компании — там все её покупки с суммами и консультантами. Или спросите "
+                      "меня о покупателях в своей отрасли, например: «Кто самые активные покупатели в ритейле?». "
+                      "Общий список серийных покупателей — на странице [Аналитика](#/analytics)."]
         return "\n".join(lines)
     raise ValueError(f"неизвестный готовый ответ: {kind_}")
