@@ -4315,7 +4315,7 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
              "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {},
              # С 14 октября 2026 пустой продавец новой покупки — находка, пока
              # читатель не записал, где искал владельца («Соликамскбумпром»).
-             "accepted_notes": {"no_profile": {"seller": "искали в ЕГРЮЛ и статьях о CyberOK — не назван"}}}
+             "accepted_notes": {"no_profile": {"seller": "искали в истории участников ЕГРЮЛ и статьях о CyberOK — не назван"}}}
     base["companies"]["gsb2"] = {"name": "CyberOK", "ind": "ИТ и интернет", "desc": "Разработчик."}
     known = [{"company_id": "gsb"}, {"company_id": "gsb2"}]
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
@@ -4327,6 +4327,20 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(lazy, base, registry=known)}
     done = dict(lazy, accepted_notes={"no_profile": {"seller": "datanewton: история участников пуста до 2024"}})
     assert "seller_registry_unchecked" not in {c for c, _t in accept_card.findings(done, base, registry=known)}
+    # 19.10.2026, «Стаксель»: юрлицо названо только в заметке этапа, предмет — описанием;
+    # и предмет со строкой в реестре ИНН — тоже юрлицо, даже без «ООО» в тексте.
+    hidden = dict(clean, asset="разработчик платформы", events=[{"note": "купила 25% ООО «КиберОК»"}],
+                  accepted_notes={"no_profile": {"seller": "в статьях не назван"}})
+    assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(hidden, base, registry=known)}
+    by_registry = dict(clean, accepted_notes={"no_profile": {"seller": "в статьях не назван"}})
+    assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(by_registry, base, registry=known)}
+    # VEON/Perfectum: иностранный предмет — нужен реестр его страны, а не только пресс-релиз покупателя.
+    abroad = dict(clean, accepted_notes={"no_profile": {"seller": "не назван в пресс-релизе покупателя"},
+                                         "no_inn": {"target": "иностранная компания (Узбекистан)"}})
+    assert "seller_registry_unchecked" in {c for c, _t in accept_card.findings(abroad, base, registry=known)}
+    abroad_done = dict(abroad, accepted_notes=dict(abroad["accepted_notes"],
+                       no_profile={"seller": "госреестр Узбекистана (ЕГРПО) через Spot.uz: участники не продают"}))
+    assert "seller_registry_unchecked" not in {c for c, _t in accept_card.findings(abroad_done, base, registry=known)}
     no_buyer = dict(clean); no_buyer.pop("buyer")
     assert "buyer_search" in {c for c, _t in accept_card.findings(no_buyer, base, registry=known)}
     lot = dict(no_buyer, type="Продажа с торгов", status="Обсуждается", seller="Росимущество")
